@@ -151,6 +151,69 @@ def no_frequency_feedback_zero_migration_window(
     return (max(base_phis) - min(base_phis)) / slope
 
 
+def common_eta_zero_migration_signed_width(
+    base_phis: Sequence[float], eta: float, slope: float
+) -> float:
+    """Return signed reciprocal width at m=0 for one common eta.
+
+    W(0)=[range(phi0)-2eta]/slope.
+    """
+
+    if not base_phis:
+        raise ValueError("base_phis cannot be empty")
+    if slope == 0.0:
+        raise ValueError("slope must be non-zero")
+    return (max(base_phis) - min(base_phis) - 2.0 * eta) / slope
+
+
+def common_eta_window_switch_rate(
+    base_phis: Sequence[float],
+    eta: float,
+    adjacency: Sequence[Sequence[float]],
+    tol: float = 1e-10,
+    max_iterations: int = 200,
+) -> float:
+    """Migration rate where a reciprocal environmental window collapses.
+
+    Requires a connected graph, common eta>0, and range(phi0)>2eta. Under these
+    conditions F(m)=Lambda_D(m)+Lambda_S(m) decreases strictly from
+    range(phi0)-2eta>0 to -2eta<0, so one positive crossing exists.
+    """
+
+    if eta <= 0.0:
+        raise ValueError("eta must be positive")
+    _validate_connected_adjacency(adjacency)
+    if len(base_phis) != len(adjacency) or not base_phis:
+        raise ValueError("one base phi is required per patch")
+    if max(base_phis) - min(base_phis) <= 2.0 * eta:
+        raise ValueError("requires range(base_phis) > 2 eta")
+    etas = [eta] * len(base_phis)
+
+    def signed_sum(migration: float) -> float:
+        lambda_d, lambda_s = baseline_spatial_exponents(
+            base_phis, etas, adjacency, migration
+        )
+        return lambda_d + lambda_s
+
+    lower = 0.0
+    upper = 1.0
+    while signed_sum(upper) > 0.0:
+        upper *= 2.0
+        if upper > 1e15:
+            raise RuntimeError("failed to bracket environmental window switch")
+
+    for _ in range(max_iterations):
+        mid = 0.5 * (lower + upper)
+        value = signed_sum(mid)
+        if abs(value) <= tol or upper - lower <= tol:
+            return mid
+        if value > 0.0:
+            lower = mid
+        else:
+            upper = mid
+    return 0.5 * (lower + upper)
+
+
 def two_patch_midpoint_exponent(
     phi_1: float, phi_2: float, eta: float, migration_rate: float
 ) -> float:
@@ -230,3 +293,25 @@ def spatial_environment_summary(
         "environment_s_neutral": e_s,
         "signed_reciprocal_width": e_s - e_d,
     }
+
+
+def _validate_connected_adjacency(adjacency: Sequence[Sequence[float]]) -> None:
+    n = len(adjacency)
+    if n == 0 or any(len(row) != n for row in adjacency):
+        raise ValueError("adjacency must be non-empty and square")
+    for i in range(n):
+        for j in range(n):
+            if adjacency[i][j] < 0.0:
+                raise ValueError("adjacency weights must be non-negative")
+            if abs(adjacency[i][j] - adjacency[j][i]) > 1e-12:
+                raise ValueError("adjacency must be symmetric")
+    seen = {0}
+    stack = [0]
+    while stack:
+        i = stack.pop()
+        for j, weight in enumerate(adjacency[i]):
+            if weight > 0.0 and j not in seen:
+                seen.add(j)
+                stack.append(j)
+    if len(seen) != n:
+        raise ValueError("adjacency must be connected")
