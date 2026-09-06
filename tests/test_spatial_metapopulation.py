@@ -1,13 +1,17 @@
 from math import isclose
 
 from src.spatial_metapopulation import (
+    aggregated_zero_growth_phi,
     classify_two_patch_polarization,
+    infer_eta_from_spatial_mean_change,
+    infer_phi_from_spatial_mean_change,
     mean_network_rhs,
     mean_selection_decomposition,
     network_rhs,
     selection_derivative,
     selection_rhs,
     spatial_moments,
+    spatial_selection_coefficients,
     synchronization_threshold,
     synchronous_mode_rates,
     two_patch_polarized_eigenvalues,
@@ -43,6 +47,51 @@ def test_exact_spatial_moment_decomposition():
         )
 
 
+def test_spatial_selection_coefficients_match_direct_and_moment_forms():
+    frequencies = [0.03, 0.18, 0.41, 0.77, 0.91]
+    coeffs = spatial_selection_coefficients(frequencies)
+    assert isclose(coeffs["A"], coeffs["A_from_moments"], rel_tol=1e-12, abs_tol=1e-12)
+    assert isclose(coeffs["B"], coeffs["B_from_moments"], rel_tol=1e-12, abs_tol=1e-12)
+    assert coeffs["A"] > 0.0
+
+
+def test_spatial_phi_eta_identification_from_mean_change():
+    frequencies = [0.07, 0.24, 0.51, 0.69, 0.94]
+    phi = 0.37
+    eta = -0.83
+    coeffs = spatial_selection_coefficients(frequencies)
+    mean_change = phi * coeffs["A"] + eta * coeffs["B"]
+    assert isclose(
+        infer_phi_from_spatial_mean_change(frequencies, mean_change, eta),
+        phi,
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+    assert isclose(
+        infer_eta_from_spatial_mean_change(frequencies, mean_change, phi),
+        eta,
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+
+
+def test_aggregated_zero_growth_phi_is_exact():
+    frequencies = [0.05, 0.33, 0.58, 0.86]
+    eta = 1.4
+    phi0 = aggregated_zero_growth_phi(frequencies, eta)
+    assert phi0 is not None
+    mean_change = sum(selection_rhs(p, phi0, eta) for p in frequencies) / len(frequencies)
+    assert isclose(mean_change, 0.0, abs_tol=1e-12)
+
+
+def test_no_unique_aggregated_phi_when_all_patches_are_pure():
+    frequencies = [0.0, 0.0, 1.0, 1.0]
+    coeffs = spatial_selection_coefficients(frequencies)
+    assert isclose(coeffs["A"], 0.0, abs_tol=1e-12)
+    assert isclose(coeffs["B"], 0.0, abs_tol=1e-12)
+    assert aggregated_zero_growth_phi(frequencies, eta=2.0) is None
+
+
 def test_midpoint_symmetric_distribution_has_minus_phi_variance_correction():
     frequencies = [0.0, 0.2, 0.8, 1.0]
     mu, variance, third = spatial_moments(frequencies)
@@ -53,6 +102,7 @@ def test_midpoint_symmetric_distribution_has_minus_phi_variance_correction():
         result = mean_selection_decomposition(frequencies, phi=phi, eta=3.2)
         assert isclose(result["spatial_correction"], -phi * variance, abs_tol=1e-12)
         assert isclose(result["mean_selection"], phi * (0.25 - variance), abs_tol=1e-12)
+        assert isclose(aggregated_zero_growth_phi(frequencies, eta=3.2), 0.0, abs_tol=1e-12)
 
 
 def test_network_rhs_two_patch_migration_is_antisymmetric_in_mean():
