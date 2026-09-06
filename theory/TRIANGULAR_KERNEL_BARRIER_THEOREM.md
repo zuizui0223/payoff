@@ -53,7 +53,7 @@ epsilon < alpha/kappa
 and
 
 ```text
-G > alpha/epsilon - kappa,
+G > G_on = alpha/epsilon - kappa,
 ```
 
 then
@@ -94,7 +94,39 @@ p(r*) > p(r_m).
 The distinction matters because feedback strength is not monotone in the final
 accessibility statement.
 
-For
+## The global-better barrier exists on one finite feedback window
+
+Once the interior local maximizer exists, the envelope theorem gives
+
+```text
+d p(r_m;G) / dG
+= r_m^2(1-r_m/epsilon)
+> 0.
+```
+
+So the optimized local-ridge payoff rises strictly with `G`. The outside
+intrinsic optimum `p(r*)` does not depend on `G`. At ridge onset the local ridge
+coincides with the kernel boundary and lies below `p(r*)` whenever
+`epsilon<r*`; for sufficiently large `G` the ridge payoff diverges upward.
+Therefore there is a unique upper feedback strength `G_hi` satisfying
+
+```text
+p(r_m(G_hi);G_hi)=p(r*).
+```
+
+The **global-better-across-barrier** phase is exactly
+
+```text
+G_on < G < G_hi.
+```
+
+In the original signed feedback coordinate this is
+
+```text
+-G_hi < gamma < -G_on.
+```
+
+For the registered parameters
 
 ```text
 alpha=0.5
@@ -102,7 +134,23 @@ kappa=1
 epsilon=0.3
 ```
 
-the registered cases are:
+the executable receipt gives
+
+```text
+G_on = 2/3
+G_hi = 2.93184698670244...
+```
+
+so
+
+```text
+-2.93184698670244... < gamma < -0.66666666666667...
+```
+
+is the finite feedback window in which a local ridge/dip exists **and** a better
+outside intrinsic architecture remains across the valley.
+
+Representative points are:
 
 ```text
 G=0.5
@@ -122,8 +170,8 @@ G=5
 -> there is no longer a globally better outside state to be reached.
 ```
 
-Thus stronger negative frequency feedback can first create an accessibility
-bottleneck and later remove the **global-better-across-barrier** condition by
+Thus stronger negative frequency feedback first creates an accessibility
+bottleneck and later removes the **global-better-across-barrier** condition by
 making the near-resident ridge itself globally superior.
 
 Implementation:
