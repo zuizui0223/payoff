@@ -9,9 +9,10 @@ functions.csv
 edges.csv
     source,target,coupling,release_cost
 
-The script writes a reference edge-pressure table, a local accessibility path,
-and (for sufficiently small edge sets) all binary retain/release vertex
-topologies. It is intended as the concrete SCH/BITA/BALANCE -> PAYOFF handoff.
+The script writes a reference edge-pressure table, an edge conflict-transfer
+matrix, a local accessibility path, and (for sufficiently small edge sets) all
+binary retain/release vertex topologies. It is intended as the concrete
+SCH/BITA/BALANCE -> PAYOFF handoff.
 """
 
 from __future__ import annotations
@@ -27,12 +28,14 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src.edge_pressure_transfer import edge_transfer_matrix, strongest_positive_cross_transfer
 from src.edgewise_modularity import (
     edge_pressures,
     enumerate_vertex_topologies,
     optimized_loss,
     optimized_phenotype,
 )
+from src.topology_decision_robustness import first_edge_decision_radius
 from src.topology_release_path import connected_components, greedy_positive_pressure_path
 from src.topology_robustness import topology_robustness_summary
 
@@ -131,6 +134,10 @@ def released_labels(released: Sequence[bool], labels: Sequence[Tuple[str, str]])
     return ";".join(chosen) if chosen else "none"
 
 
+def edge_label(label: Tuple[str, str]) -> str:
+    return f"{label[0]}-{label[1]}"
+
+
 def module_label(components, function_ids: Sequence[str]) -> str:
     return "|".join(
         "{" + ",".join(function_ids[index] for index in component) + "}"
@@ -180,6 +187,42 @@ def write_edge_pressures(
     return rows
 
 
+def write_edge_transfer(
+    output: Path,
+    optima: Sequence[float],
+    weights: Sequence[float],
+    edges: Sequence[Edge],
+    labels: Sequence[Tuple[str, str]],
+    couplings: Sequence[float],
+):
+    matrix = edge_transfer_matrix(optima, weights, edges, couplings)
+    rows = []
+    for target_index, target in enumerate(labels):
+        for released_index, released in enumerate(labels):
+            rows.append(
+                {
+                    "target_edge_index": target_index,
+                    "target_edge": edge_label(target),
+                    "released_edge_index": released_index,
+                    "released_edge": edge_label(released),
+                    "d_pressure_target_d_decoupling_released": matrix[target_index][released_index],
+                    "effect": (
+                        "increase"
+                        if matrix[target_index][released_index] > 1e-12
+                        else "decrease"
+                        if matrix[target_index][released_index] < -1e-12
+                        else "zero"
+                    ),
+                }
+            )
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    return matrix, rows
+
+
 def write_path(
     output: Path,
     ids: Sequence[str],
@@ -208,7 +251,7 @@ def write_path(
                 "next_edge": (
                     "stop"
                     if next_edge is None
-                    else f"{labels[next_edge][0]}-{labels[next_edge][1]}"
+                    else edge_label(labels[next_edge])
                 ),
             }
         )
@@ -279,6 +322,14 @@ def main() -> None:
         couplings,
         costs,
     )
+    transfer_matrix, _ = write_edge_transfer(
+        args.output_dir / "edge_pressure_transfer.csv",
+        optima,
+        weights,
+        edges,
+        labels,
+        couplings,
+    )
     path, path_rows = write_path(
         args.output_dir / "greedy_release_path.csv",
         ids,
@@ -304,6 +355,26 @@ def main() -> None:
         )
 
     highest_pressure = max(pressure_rows, key=lambda row: float(row["pressure"]))
+    first_favorable_index = path[0]["next_edge_index"]
+    if first_favorable_index is None:
+        first_favorable_edge = "stop"
+        first_edge_radius = None
+        predicted_next_edge = "none"
+        predicted_next_derivative = 0.0
+    else:
+        first_favorable_edge = edge_label(labels[first_favorable_index])
+        initial_margins = [float(row["margin"]) for row in pressure_rows]
+        first_edge_radius = first_edge_decision_radius(initial_margins)
+        cascade = strongest_positive_cross_transfer(
+            transfer_matrix, first_favorable_index
+        )
+        if cascade is None:
+            predicted_next_edge = "none"
+            predicted_next_derivative = 0.0
+        else:
+            cascade_index, predicted_next_derivative = cascade
+            predicted_next_edge = edge_label(labels[cascade_index])
+
     summary: Dict[str, object] = {
         "function_count": len(ids),
         "edge_count": len(edges),
@@ -313,6 +384,14 @@ def main() -> None:
         "highest_reference_pressure_edge": (
             highest_pressure["source"] + "-" + highest_pressure["target"]
         ),
+        "first_favorable_edge": first_favorable_edge,
+        "first_edge_uniform_margin_radius": (
+            None
+            if first_edge_radius is None
+            else first_edge_radius["uniform_margin_perturbation_radius"]
+        ),
+        "predicted_next_pressure_edge": predicted_next_edge,
+        "predicted_next_pressure_derivative": predicted_next_derivative,
         "greedy_final_modules": path_rows[-1]["modules"],
         "greedy_final_net_gain": path_rows[-1]["net_gain"],
         "greedy_steps": len(path) - 1,
