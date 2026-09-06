@@ -1,6 +1,6 @@
 # PAYOFF boundary atlas
 
-PAYOFF now contains several mathematically distinct transition surfaces. They answer different biological questions and must not be reported as interchangeable thresholds.
+PAYOFF contains several mathematically distinct transition surfaces. They answer different biological questions and must not be reported as interchangeable thresholds.
 
 The upstream architecture bridge is
 
@@ -296,9 +296,93 @@ At `eta=0`, this means a local BITA source patch can rescue differentiated archi
 
 ---
 
-## 9. The hierarchy of questions
+## 9. Common temporal forcing boundary
 
-The boundaries correspond to increasingly population-dependent estimands:
+Question:
+
+> Does a time-varying environment alter invasion if every patch receives the same additive shift?
+
+For
+
+```text
+A(t)=A0+q(t)I,
+```
+
+the temporal invasion exponent is exactly
+
+```text
+Lambda_temporal
+= lambda_max(A0)+mean(q).
+```
+
+Neutrality is therefore
+
+```text
+lambda_max(A0)+mean(q)=0.
+```
+
+Zero-mean common fluctuations do not create a new boundary: they leave the baseline spectral invasion condition unchanged.
+
+---
+
+## 10. Two-season Floquet invasion boundary
+
+Question:
+
+> Can periodic switching of relative patch quality change rare-architecture invasion relative to the time-averaged landscape?
+
+For exactly two seasons in the symmetric two-patch model, the exact periodic invasion boundary is
+
+```text
+Lambda_F=0,
+```
+
+where `Lambda_F` is given by the scalar closed form in
+
+```text
+theory/TWO_SEASON_TEMPORAL_PREMIUM.md.
+```
+
+Let
+
+```text
+Lambda_avg
+= lambda_max(A_bar)
+```
+
+for the time-averaged operator. In this registered model,
+
+```text
+Lambda_F>=Lambda_avg.
+```
+
+Thus a temporal-rescue region exists whenever
+
+```text
+Lambda_avg<0<Lambda_F.
+```
+
+The temporal-structure gate is the commutator condition
+
+```text
+m[(r_1,1-r_2,1)-(r_1,2-r_2,2)] != 0.
+```
+
+At the commuting gates the periodic and averaged boundaries coincide.
+
+Under rapid switching, the boundary displacement begins at order `T^2`, with temporal premium proportional to
+
+```text
+m^2 * (seasonal patch-contrast change)^2.
+```
+
+This is a two-season symmetric two-patch result, not a universal temporal boundary for arbitrary nonautonomous systems.
+
+---
+
+## 11. The hierarchy of questions
+
+The boundaries correspond to increasingly population- and context-dependent estimands:
 
 ```text
 phi=0
@@ -318,10 +402,14 @@ mutation-shifted phi_occ
         |
         v
 principal-eigenvalue boundary
-    heterogeneous spatial invasion.
+    heterogeneous spatial invasion
+        |
+        v
+Lambda_F=0
+    periodic spatiotemporal invasion.
 ```
 
-Graph and migration models add separate transformations around this chain.
+Graph, migration, mutation, and temporal models add separate transformations around this chain.
 
 The central rule is:
 
