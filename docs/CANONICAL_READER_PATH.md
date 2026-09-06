@@ -21,6 +21,14 @@ phi = R-K = sL-K
 
 Everything after `phi` asks a different population question.
 
+For the shortest cross-scale map, read
+
+```text
+theory/PAYOFF_TRANSPORT_PRINCIPLE.md
+```
+
+before or after this path.
+
 ---
 
 ## Part I — static ecology and architecture
@@ -246,8 +254,6 @@ and proves, for the declared symmetric two-patch operator,
 Lambda_F >= lambda_max(A_bar).
 ```
 
-Thus the time-averaged operator is a lower bound on the exact two-season invasion exponent in this model.
-
 The rapid-switching premium is
 
 ```text
@@ -258,7 +264,144 @@ T^2 w^2(1-w)^2 m^2(Delta patch contrast)^2
 +O(T^4).
 ```
 
-This is the cleanest place to read the migration × temporal-contrast interaction.
+### 14. `theory/ANTI_PHASE_SEASONAL_RESCUE.md`
+
+Specializes to seasonal source switching:
+
+```text
+season A: (r_bar+x,r_bar-x)
+season B: (r_bar-x,r_bar+x).
+```
+
+Exact result:
+
+```text
+Lambda_F
+= r_bar-m
++(1/tau)asinh[
+  m/sqrt(m^2+x^2)
+  *sinh(tau sqrt(m^2+x^2))
+].
+```
+
+The temporal premium is zero at both migration extremes and positive at finite intermediate migration, proving at least one intermediate migration optimum.
+
+### 15. `theory/WEAK_CONTRAST_UNIVERSAL_MIGRATION_OPTIMUM.md`
+
+Read this when
+
+```text
+|x|tau << 1.
+```
+
+Then
+
+```text
+tau P
+= (x tau)^2 H(m tau)+O((x tau)^4)
+```
+
+with
+
+```text
+H(u)=[u-tanh u]/(2u^2).
+```
+
+The universal leading-order optimum is
+
+```text
+m_opt tau
+=1.6061152988...
+```
+
+and
+
+```text
+P_max
+~=0.13248753945 x^2 tau.
+```
+
+### 16. `theory/TEMPORAL_COORDINATION_INVERSION.md`
+
+Reconnects temporal rescue to the original evolutionary game.
+
+Both reciprocal architecture edges receive the same anti-phase premium:
+
+```text
+Lambda_D=phi_bar-eta+P,
+Lambda_S=-phi_bar-eta+P.
+```
+
+Therefore
+
+```text
+eta_eff=eta-P.
+```
+
+At `phi_bar=0`:
+
+```text
+P<eta -> coordination,
+P=eta -> reciprocal boundaries collapse,
+P>eta -> reciprocal invasion.
+```
+
+Weak contrast yields the explicit threshold
+
+```text
+x^2 tau/eta
+>7.54787962834...
+```
+
+for temporal source switching to overcome positive-frequency coordination.
+
+### 17. `theory/TEMPORAL_PHASE_DIAGRAM.md`
+
+This is the final temporal synthesis.
+
+Use
+
+```text
+u=m tau,
+v=x tau,
+epsilon=eta tau,
+psi=phi_bar tau.
+```
+
+The exact dimensionless premium `F(u,v)` gives
+
+```text
+ell_D=psi-epsilon+F,
+ell_S=-psi-epsilon+F.
+```
+
+The four phases are
+
+```text
+reciprocal invasion,
+mutual non-invasion,
+D-only invasion,
+S-only invasion.
+```
+
+At weak contrast the temporal inversion surface becomes
+
+```text
+v^2 H(u)=epsilon.
+```
+
+### 18. `docs/TEMPORAL_HANDOFF.md`
+
+Use this before designing an experiment.
+
+It freezes the preferred empirical order:
+
+```text
+seasonal L,s,K,eta first
+-> construct seasonal architecture margins
+-> freeze migration/Floquet prediction
+-> test rare-architecture dynamics independently.
+```
 
 ---
 
