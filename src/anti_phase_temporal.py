@@ -14,7 +14,7 @@ The difference from rbar is the temporal rescue premium.
 
 from __future__ import annotations
 
-from math import asinh, sinh, sqrt
+from math import asinh, sinh, sqrt, tanh
 from typing import Dict
 
 
@@ -103,6 +103,83 @@ def strong_migration_premium_asymptotic(
     return x2 / (2.0 * m) - x2 / (2.0 * m * m * tau)
 
 
+def weak_contrast_shape(dimensionless_migration: float) -> float:
+    """Universal O((x tau)^2) premium shape for weak seasonal contrast.
+
+    With
+        u=m tau,
+        v=x tau,
+    the dimensionless premium obeys
+        tau*P = v^2 H(u) + O(v^4),
+    where
+        H(u)=(u-tanh u)/(2u^2).
+    The continuous u=0 limit is zero.
+    """
+
+    u = dimensionless_migration
+    if u < 0.0:
+        raise ValueError("dimensionless_migration must be non-negative")
+    if u == 0.0:
+        return 0.0
+    return (u - tanh(u)) / (2.0 * u * u)
+
+
+def weak_contrast_optimal_dimensionless_migration(tol: float = 1e-14) -> float:
+    """Return the unique positive maximizer u*=m*tau of the weak-contrast shape.
+
+    u* is the unique positive root of
+        u tanh(u)^2 - 2u + 2 tanh(u)=0,
+    numerically about 1.6061152988.
+    """
+
+    if tol <= 0.0:
+        raise ValueError("tol must be positive")
+
+    def score(u: float) -> float:
+        t = tanh(u)
+        return u * t * t - 2.0 * u + 2.0 * t
+
+    lower = 1.0
+    upper = 2.0
+    if not (score(lower) > 0.0 and score(upper) < 0.0):
+        raise RuntimeError("failed to bracket weak-contrast optimum")
+    while upper - lower > tol:
+        mid = 0.5 * (lower + upper)
+        if score(mid) > 0.0:
+            lower = mid
+        else:
+            upper = mid
+    return 0.5 * (lower + upper)
+
+
+def weak_contrast_optimal_migration(season_duration: float) -> float:
+    """Approximate optimal migration m*=u*/tau for |x|tau << 1."""
+
+    if season_duration <= 0.0:
+        raise ValueError("season_duration must be positive")
+    return weak_contrast_optimal_dimensionless_migration() / season_duration
+
+
+def weak_contrast_max_premium_approx(
+    contrast_half_amplitude: float, season_duration: float
+) -> float:
+    """Approximate maximum temporal premium for |x|tau << 1.
+
+    max P ~= H(u*) x^2 tau,
+    where H(u*) ~= 0.1324875394.
+    """
+
+    if season_duration <= 0.0:
+        raise ValueError("season_duration must be positive")
+    u_star = weak_contrast_optimal_dimensionless_migration()
+    return (
+        weak_contrast_shape(u_star)
+        * contrast_half_amplitude
+        * contrast_half_amplitude
+        * season_duration
+    )
+
+
 def rescue_condition(
     mean_margin: float,
     contrast_half_amplitude: float,
@@ -137,6 +214,7 @@ def anti_phase_summary(
         season_duration,
     )
     premium = floquet - mean_margin
+    u_star = weak_contrast_optimal_dimensionless_migration()
     return {
         "mean_margin": mean_margin,
         "contrast_half_amplitude": contrast_half_amplitude,
@@ -150,6 +228,12 @@ def anti_phase_summary(
         ),
         "fast_switching_premium": fast_switching_premium(
             contrast_half_amplitude, migration_rate, season_duration
+        ),
+        "weak_contrast_u_star": u_star,
+        "weak_contrast_shape_max": weak_contrast_shape(u_star),
+        "weak_contrast_optimal_migration": u_star / season_duration,
+        "weak_contrast_max_premium": weak_contrast_max_premium_approx(
+            contrast_half_amplitude, season_duration
         ),
         "rescued": float(mean_margin < 0.0 < floquet),
     }
