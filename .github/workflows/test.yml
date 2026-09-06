@@ -18,3 +18,4 @@ jobs:
       - run: python scripts/phase_sweep.py --phi-min -0.2 --phi-max 0.2 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_phase_grid.csv
       - run: python scripts/lke_phase_sweep.py --s 0.5 --l-min 0 --l-max 0.4 --k-min 0 --k-max 0.4 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_lke_phase_grid.csv
       - run: python scripts/finite_population_sweep.py --n 20 --beta 0.05 --phi-min -0.2 --phi-max 0.2 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_finite_population_grid.csv
+      - run: python scripts/release_curve.py --n 30 --phi 0.2 --eta 1.0 --beta 1.0 --output outputs/ci_release_curve.csv
