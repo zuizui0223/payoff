@@ -3,6 +3,11 @@ from math import isclose
 from src.anti_phase_temporal import (
     anti_phase_floquet_exponent,
     anti_phase_temporal_premium,
+    dimensionless_premium,
+    dimensionless_premium_derivative,
+    exact_max_premium,
+    exact_optimal_dimensionless_migration,
+    exact_optimal_migration,
     fast_switching_premium,
     rescue_condition,
     small_migration_slope,
@@ -42,6 +47,15 @@ def test_temporal_premium_strictly_positive_at_noncommuting_gate():
         assert anti_phase_temporal_premium(1.3, m, 0.7) > 0.0
 
 
+def test_dimensionless_formula_matches_dimensional_premium():
+    x = 1.3
+    m = 0.7
+    tau = 0.8
+    observed = dimensionless_premium(m * tau, x * tau) / tau
+    expected = anti_phase_temporal_premium(x, m, tau)
+    assert isclose(observed, expected, rel_tol=1e-12, abs_tol=1e-12)
+
+
 def test_small_migration_slope_matches_exact_limit():
     x = 1.3
     tau = 0.7
@@ -78,17 +92,37 @@ def test_intermediate_migration_can_rescue_negative_mean_margin():
     assert not rescue_condition(rbar, x, 100.0, tau)
 
 
-def test_temporal_premium_has_an_interior_peak_in_representative_case():
-    x = 1.5
-    tau = 1.0
-    low = anti_phase_temporal_premium(x, 1e-6, tau)
-    middle = max(
-        anti_phase_temporal_premium(x, m, tau)
-        for m in [0.05, 0.1, 0.2, 0.4, 0.8, 1.6, 3.2]
+def test_exact_optimum_is_unique_stationary_point_and_global_peak():
+    for v in [0.05, 0.2, 0.8, 1.5, 3.0]:
+        u_star = exact_optimal_dimensionless_migration(v)
+        assert u_star > 0.0
+        assert abs(dimensionless_premium_derivative(u_star, v)) < 1e-10
+        assert dimensionless_premium_derivative(0.5 * u_star, v) > 0.0
+        assert dimensionless_premium_derivative(2.0 * u_star, v) < 0.0
+        peak = dimensionless_premium(u_star, v)
+        for multiplier in [0.05, 0.2, 0.5, 1.5, 2.0, 5.0, 20.0]:
+            assert peak > dimensionless_premium(multiplier * u_star, v)
+
+
+def test_exact_optimal_migration_scales_dimensionlessly():
+    x_tau = 1.2
+    u_star = exact_optimal_dimensionless_migration(x_tau)
+    for tau in [0.4, 0.8, 1.5, 3.0]:
+        x = x_tau / tau
+        m_star = exact_optimal_migration(x, tau)
+        assert isclose(m_star * tau, u_star, rel_tol=1e-11, abs_tol=1e-11)
+
+
+def test_exact_max_premium_matches_premium_at_exact_optimum():
+    x = 1.4
+    tau = 0.9
+    m_star = exact_optimal_migration(x, tau)
+    assert isclose(
+        exact_max_premium(x, tau),
+        anti_phase_temporal_premium(x, m_star, tau),
+        rel_tol=1e-12,
+        abs_tol=1e-12,
     )
-    high = anti_phase_temporal_premium(x, 100.0, tau)
-    assert middle > low
-    assert middle > high
 
 
 def test_weak_contrast_universal_optimum_constant():
@@ -100,6 +134,13 @@ def test_weak_contrast_universal_optimum_constant():
         rel_tol=1e-12,
         abs_tol=1e-12,
     )
+
+
+def test_exact_optimum_converges_to_weak_contrast_constant():
+    weak_u = weak_contrast_optimal_dimensionless_migration()
+    for v in [0.05, 0.02, 0.01]:
+        exact_u = exact_optimal_dimensionless_migration(v)
+        assert isclose(exact_u, weak_u, rel_tol=2e-4, abs_tol=1e-8)
 
 
 def test_weak_contrast_shape_is_maximized_at_u_star():
