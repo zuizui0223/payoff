@@ -1,0 +1,3 @@
+pair_id,role,first_modules,second_modules,delta0,delta1,analysis_weight
+M_vs_F,fit,F1+F2|F3,F1|F2|F3,0.5,-1.5,1
+S_vs_M,holdout,F1+F2+F3,F1+F2|F3,5.166666666666667,1.166666666666667,1
