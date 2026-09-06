@@ -1,4 +1,4 @@
-from math import exp, isclose
+from math import ceil, exp, isclose
 
 from src.finite_population import (
     classify_weak_selection_mutant_advantage,
@@ -6,7 +6,10 @@ from src.finite_population import (
     deterministic_coordination_threshold,
     finite_payoff_gap,
     finite_payoffs,
+    finite_zero_gap_count,
+    minimum_initial_d_for_fixation_probability,
     moran_fixation_probability_d,
+    moran_fixation_probability_from_i,
     moran_fixation_probability_s,
     moran_log_fixation_ratio_d_over_s,
     weak_selection_advantage_flags,
@@ -42,10 +45,45 @@ def test_cumulative_gap_closed_form_matches_sum():
         )
 
 
-def test_neutral_fixation_probability_is_one_over_n():
+def test_neutral_fixation_probability_is_initial_frequency():
     for n in [2, 5, 25, 100]:
-        rho = moran_fixation_probability_d(n, phi=2.0, eta=-4.0, beta=0.0)
-        assert isclose(rho, 1.0 / n, rel_tol=1e-12, abs_tol=1e-12)
+        for initial_d in [0, 1, n // 2, n]:
+            rho = moran_fixation_probability_from_i(
+                initial_d, n, phi=2.0, eta=-4.0, beta=0.0
+            )
+            assert isclose(rho, initial_d / n, rel_tol=1e-12, abs_tol=1e-12)
+
+
+def test_single_mutant_wrapper_matches_general_formula():
+    rho_general = moran_fixation_probability_from_i(1, 31, 0.2, -0.7, 0.4)
+    rho_single = moran_fixation_probability_d(31, 0.2, -0.7, 0.4)
+    assert isclose(rho_general, rho_single, rel_tol=1e-12, abs_tol=1e-12)
+
+
+def test_fixation_probability_is_strictly_increasing_with_initial_count():
+    n = 40
+    values = [moran_fixation_probability_from_i(i, n, 0.15, 0.8, 0.7) for i in range(n + 1)]
+    assert all(left < right for left, right in zip(values, values[1:]))
+
+
+def test_neutral_minimum_count_is_ceiling_target_times_n():
+    n = 37
+    for target in [0.1, 0.25, 0.5, 0.9, 1.0]:
+        observed = minimum_initial_d_for_fixation_probability(
+            n, phi=9.0, eta=-4.0, beta=0.0, target=target
+        )
+        assert observed == ceil(target * n)
+
+
+def test_coordination_critical_mass_tracks_finite_zero_gap_threshold():
+    n = 100
+    phi = 0.2
+    eta = 1.0
+    zero_gap = finite_zero_gap_count(n, phi, eta)
+    critical_50 = minimum_initial_d_for_fixation_probability(
+        n, phi, eta, beta=5.0, target=0.5
+    )
+    assert abs(critical_50 - zero_gap) <= 1.0
 
 
 def test_exact_reciprocal_fixation_ratio():
