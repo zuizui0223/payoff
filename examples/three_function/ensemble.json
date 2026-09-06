@@ -1,5 +1,17 @@
 {
   "schema_version": "PAYOFF_TOPOLOGY_ENSEMBLE_V1",
+  "context": {
+    "context_id": "THREE_FUNCTION_SYNTHETIC_V1",
+    "system": "SYNTHETIC_THREE_FUNCTION",
+    "population_id": "SYNTHETIC_POP",
+    "season_id": "SYNTHETIC_SEASON",
+    "fitness_scale_id": "SYNTHETIC_COMMON_FITNESS"
+  },
+  "population": {
+    "gamma": -0.25,
+    "population_size": 20,
+    "beta": 0.4
+  },
   "draws": [
     {
       "draw_id": "d1",
