@@ -30,3 +30,4 @@ jobs:
       - run: python scripts/temporal_coordination_phase_sweep.py --eta 0.1 --phi-bar 0 --season-duration 1 --u-min 0 --u-max 3 --u-step 0.5 --ratio-min 0 --ratio-max 12 --ratio-step 2 --output outputs/ci_temporal_coordination_phase.csv
       - run: python scripts/continuous_architecture_sweep.py --max-recovery 2 --linear-cost-slope 0.4 --curvature 1 --gamma-min -1.0 --gamma-max 0.2 --step 0.25 --output outputs/ci_continuous_architecture.csv
       - run: python scripts/topology_landscape_sweep.py --gamma -0.5 --population-size 20 --beta 0.4 --mutation-rate 0.01 --output outputs/ci_topology_landscape.csv
+      - run: python scripts/three_function_topology_example.py --edge-cost 0.4 --topologies-output outputs/ci_three_function_topologies.csv --path-output outputs/ci_three_function_release_path.csv
