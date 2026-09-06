@@ -4,7 +4,7 @@ PAYOFF is intended to make the game-theoretic extension precise without overclai
 
 ## What the model does establish
 
-Under the declared quadratic loss, residual-coupling, and linear frequency-feedback assumptions:
+Under the declared quadratic loss, residual-coupling, linear frequency-feedback, and finite-population assumptions:
 
 1. the one-coordinate compromise is unique;
 2. the shared conflict load is exact;
@@ -13,14 +13,18 @@ Under the declared quadratic loss, residual-coupling, and linear frequency-feedb
 5. realized trait separation `s` exactly equals the fraction of shared conflict loss recovered, so `R=sL`;
 6. architecture payoff difference is exactly `phi=sL-K`;
 7. under the declared linear frequency-feedback game, replicator equilibria and their local stability are analytically classified;
-8. the static architecture crossing splits into the reciprocal invasion surfaces `K=R-eta` and `K=R+eta`;
+8. the static architecture crossing splits into reciprocal invasion surfaces `K=R-eta` and `K=R+eta`;
 9. the game-generated middle region has exact cost width `2|eta|`;
 10. reciprocal neutral-cost thresholds algebraically identify `R` and `eta` when both thresholds are experimentally accessible;
 11. along a linear environmental path `phi(e)=alpha(e-e0)`, the two game transitions have exact width `2|eta|/|alpha|`;
-12. the two-strategy symmetric game has mean-payoff Lyapunov function `V`, with `dV/dt=2p(1-p)Delta^2>=0`;
-13. inside the negative-feedback coexistence wedge, the sign of `phi` determines whether `D` is the minority or majority architecture;
-14. inside the positive-feedback coordination wedge, the sign of `phi` determines deterministic basin-size risk dominance;
-15. switching costs create the stated no-switch / hysteresis interval.
+12. the two-strategy symmetric game has a mean-payoff Lyapunov function with nonnegative derivative;
+13. inside negative-feedback coexistence, the sign of `phi` determines whether `D` is minority or majority;
+14. inside positive-feedback coordination, the sign of `phi` determines deterministic basin-size risk dominance;
+15. switching costs create the stated no-switch / hysteresis interval;
+16. under self-excluding pairwise interactions and exponential payoff-to-fitness mapping, the finite-population payoff gap `Delta_N(i)` and single-mutant Moran fixation probabilities are exact;
+17. under that finite Moran model, `rho_D/rho_S=exp[beta phi(N-2)]`, so the sign of `phi` exactly orders reciprocal fixation probabilities for `N>2`, `beta>0`;
+18. under weak selection, `rho_D>1/N` iff `3phi>eta` and `rho_S>1/N` iff `-3phi>eta` for the declared game;
+19. the corresponding weak-selection stochastic-core width on the cost scale is `2|eta|/3`.
 
 ## What the model does not establish
 
@@ -32,7 +36,7 @@ The literal evolutionary-game layer begins when alternative heritable architectu
 
 ### `eta` is not identified by SCH, BALANCE, or BITA
 
-`eta` is a new PAYOFF parameter. It requires evidence that the relative fitness of `D` versus `S` changes with architecture frequency.
+`eta` is a new PAYOFF parameter. It requires evidence that relative fitness of `D` versus `S` changes with architecture frequency.
 
 Without such evidence, the justified model is the frequency-independent baseline `eta=0`.
 
@@ -49,7 +53,7 @@ show what two neutral invasion thresholds would identify under the model. They d
 
 ### The quadratic identity is not universal
 
-`R=sL` is exact for the declared quadratic residual-coupling model. More general convex models preserve the nesting intuition that extra phenotype dimensions cannot reduce the pre-cost optimized fit when shared phenotypes remain accessible, but they need not preserve this exact scalar identity.
+`R=sL` is exact for the declared quadratic residual-coupling model. More general convex models need not preserve this exact scalar identity.
 
 ### Linear frequency feedback is a local/minimal model
 
@@ -59,15 +63,59 @@ Delta(p)=phi+eta(2p-1)
 
 is the minimal affine frequency-feedback model. Nonlinear, asymmetric, spatial, stage-structured, or density-dependent interactions can produce additional equilibria and re-entry not represented by the two-plane phase diagram.
 
+### The finite-population fixation formula is model-specific
+
+The exact finite-population formulas use:
+
+```text
+- a well-mixed population of fixed size N,
+- random pairwise interaction,
+- exclusion of self-interaction,
+- Moran birth-death updating,
+- exponential payoff-to-fitness mapping f=exp(beta*pi).
+```
+
+Changing update rule, population structure, interaction network, mutation regime, inheritance, or payoff-to-fitness mapping can change exact fixation probabilities and finite-selection thresholds.
+
+### The one-third law is not a PAYOFF discovery
+
+The one-third law is established prior theory in finite-population evolutionary games. PAYOFF only maps its criterion onto the ecological architecture quantities through
+
+```text
+phi=sL-K.
+```
+
+Appropriate novelty language concerns the cross-scale bridge, not the one-third rule itself.
+
+### Exact reciprocal-fixation ordering is conditional on exponential fitness
+
+The result
+
+```text
+rho_D/rho_S=exp[beta phi(N-2)]
+```
+
+is exact for the declared exponential Moran model. The cancellation of `eta` from this ratio should not be claimed as universal across arbitrary stochastic evolutionary processes.
+
+### Weak-selection statements are first-order statements
+
+The tests
+
+```text
+3phi>eta
+and
+-3phi>eta
+```
+
+compare fixation probability with `1/N` in the weak-selection limit. At stronger selection, the exact fixation expression should be evaluated rather than applying the weak-selection inequalities as universal thresholds.
+
 ### Risk dominance is model-specific terminology here
 
-Inside the strict `eta>0` coordination wedge, `risk dominant` refers to the pure architecture with the larger deterministic basin of attraction under the declared one-dimensional replicator dynamics. It is not a claim that every finite-population, stochastic, mutation-selection, or equilibrium-selection definition of risk dominance gives the same empirical outcome.
+Inside the strict `eta>0` coordination wedge, `risk dominant` refers to the pure architecture with the larger deterministic basin of attraction under the declared one-dimensional replicator dynamics. It is not a claim that every stochastic or equilibrium-selection definition gives the same empirical outcome.
 
 ### Differentiation is not historical splitting
 
-A present-day fitness advantage of a differentiated architecture does not prove that the modeled conflict caused its historical origin.
-
-Historical claims require phylogenetic, developmental, genetic, or other independent evidence.
+A present-day fitness advantage of a differentiated architecture does not prove that the modeled conflict caused its historical origin. Historical claims require independent evidence.
 
 ### Structural separation is not functional independence
 
@@ -75,7 +123,7 @@ Finite residual coupling `c` is explicitly allowed. Multiple trait axes can rema
 
 ### A mixed ESS is not automatically a stable species-level polymorphism
 
-The replicator result is a deterministic population model. Mutation, drift, demography, spatial structure, assortative interaction, linkage, inheritance architecture, and finite-population effects can alter realized dynamics.
+Mutation, drift, demography, spatial structure, assortative interaction, linkage, inheritance architecture, and finite-population effects can alter realized dynamics.
 
 ### Positive frequency dependence and switching hysteresis are distinct
 
@@ -85,7 +133,7 @@ The replicator result is a deterministic population model. Mutation, drift, demo
 
 Preferred:
 
-> We derive a minimal evolutionary game in which ecological conflict determines the baseline payoff difference between integrated and differentiated trait architectures, while frequency-dependent ecological feedback determines whether selection yields dominance, stable coexistence, or a coordination threshold.
+> We derive a minimal evolutionary game in which ecological conflict determines the baseline payoff difference between integrated and differentiated trait architectures, while frequency-dependent ecological feedback determines dominance, coexistence, or coordination.
 
 Avoid:
 
@@ -109,15 +157,23 @@ Avoid:
 
 Preferred:
 
-> Within the declared coordination game, the sign of the static payoff gap determines which pure architecture has the larger deterministic basin.
+> Under the declared exponential Moran process, the sign of `phi=sL-K` exactly orders reciprocal single-mutant fixation probabilities, while `eta` controls their absolute values.
 
 Avoid:
 
-> Positive static payoff proves that differentiation will evolve from rarity.
+> Frequency dependence never affects which architecture fixes more readily in finite populations.
 
 Preferred:
 
-> The framework predicts conditions under which differentiated and shared architectures can each be evolutionarily stable.
+> Under weak selection, the established one-third law maps onto the architecture criterion `3(sL-K)>eta`.
+
+Avoid:
+
+> PAYOFF discovers a new one-third law for trait architecture.
+
+Preferred:
+
+> The framework predicts conditions under which differentiated and shared architectures can each be evolutionarily stable or stochastically favored.
 
 Avoid:
 
@@ -140,6 +196,11 @@ TWO_STRATEGY_POTENTIAL_LYAPUNOV_PROVED
 COEXISTENCE_COMPOSITION_BOUNDARY_PROVED
 COORDINATION_RISK_DOMINANCE_BOUNDARY_PROVED
 SWITCHING_HYSTERESIS_BAND_PROVED
+FINITE_MORAN_FIXATION_FORMULA_PROVED_UNDER_DECLARED_PROCESS
+RECIPROCAL_FIXATION_RATIO_PROVED_UNDER_EXPONENTIAL_FITNESS
+WEAK_SELECTION_ARCHITECTURE_ONE_THIRD_MAPPING_PROVED
+FINITE_STOCHASTIC_CORE_WIDTH_PROVED_UNDER_WEAK_SELECTION
 EMPIRICAL_FREQUENCY_FEEDBACK_NOT_YET_IDENTIFIED
+FINITE_POPULATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
 HISTORICAL_CAUSATION_NOT_IDENTIFIED
 ```
