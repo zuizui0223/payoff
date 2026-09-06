@@ -26,12 +26,7 @@ def mutation_transition_probabilities(
     u_sd: float,
     u_ds: float,
 ) -> Tuple[float, float]:
-    """Return (T_plus,T_minus) for the recurrent-mutation Moran chain.
-
-    T_plus moves i -> i+1 and T_minus moves i -> i-1. At monomorphic
-    boundaries the transition probability is exactly the relevant offspring
-    mutation probability.
-    """
+    """Return (T_plus,T_minus) for the recurrent-mutation Moran chain."""
 
     _validate_population(n)
     _validate_state_including_boundaries(i, n)
@@ -45,7 +40,6 @@ def mutation_transition_probabilities(
 
     pi_s, pi_d = finite_payoffs(i, n, phi, eta)
 
-    # Stable parent-type sampling proportional to exp(beta*pi).
     log_w_d = log(i) + beta * pi_d
     log_w_s = log(n - i) + beta * pi_s
     m = max(log_w_d, log_w_s)
@@ -69,14 +63,7 @@ def stationary_distribution(
     u_sd: float,
     u_ds: float,
 ) -> List[float]:
-    """Return the exact stationary distribution over i=0,...,N.
-
-    For a finite irreducible birth-death chain,
-
-        pi_i/pi_{i-1} = T^+_{i-1}/T^-_i.
-
-    Log weights are used for numerical stability.
-    """
+    """Return the exact stationary distribution over i=0,...,N."""
 
     _validate_population(n)
     _validate_selection(beta)
@@ -94,10 +81,7 @@ def stationary_distribution(
             raise ValueError("irreducible stationary chain requires positive neighboring transitions")
         log_weights.append(log_weights[-1] + log(t_plus_prev) - log(t_minus_i))
 
-    m = max(log_weights)
-    weights = [exp(value - m) for value in log_weights]
-    total = sum(weights)
-    return [value / total for value in weights]
+    return _normalize_log_weights(log_weights)
 
 
 def stationary_summary(probabilities: Sequence[float]) -> Dict[str, float]:
@@ -166,15 +150,7 @@ def detailed_balance_residuals(
 def rare_mutation_log_boundary_odds(
     n: int, phi: float, beta: float, u_sd: float, u_ds: float
 ) -> float:
-    """Weak-mutation limit log(P_all_D/P_all_S).
-
-    As u_sd,u_ds -> 0 with their ratio held fixed,
-
-        log(pi_N/pi_0)
-        -> log(u_sd/u_ds) + beta*phi*(N-2).
-
-    Frequency feedback eta cancels from this limit.
-    """
+    """Weak-mutation limit log(P_all_D/P_all_S)."""
 
     _validate_population(n)
     _validate_selection(beta)
@@ -199,11 +175,7 @@ def rare_mutation_boundary_probability_d(
 def mutation_shifted_static_crossing(
     n: int, beta: float, u_sd: float, u_ds: float
 ) -> float:
-    """Return phi where rare-mutation all-D and all-S occupancies are equal.
-
-    phi_mut = -log(u_sd/u_ds)/[beta(N-2)].
-    Requires N>2 and beta>0.
-    """
+    """Return phi where rare-mutation all-D and all-S occupancies are equal."""
 
     if n <= 2:
         raise ValueError("mutation-shifted crossing requires n>2")
@@ -217,17 +189,91 @@ def mutation_shifted_static_crossing(
 def mutation_shifted_cost_crossing(
     n: int, recovery: float, beta: float, u_sd: float, u_ds: float
 ) -> float:
-    """Return K where rare-mutation all-D and all-S occupancies are equal.
-
-    Since phi=R-K,
-
-        K_mut = R + log(u_sd/u_ds)/[beta(N-2)].
-    """
+    """Return K where rare-mutation all-D and all-S occupancies are equal."""
 
     if recovery < 0.0:
         raise ValueError("recovery must be non-negative")
     phi_mut = mutation_shifted_static_crossing(n, beta, u_sd, u_ds)
     return recovery - phi_mut
+
+
+def neutral_beta_binomial_parameters(
+    n: int, u_sd: float, u_ds: float
+) -> Tuple[float, float]:
+    """Return exact neutral beta-binomial parameters (alpha,beta_param).
+
+    For neutral selection and u_sd+u_ds<1,
+
+        alpha = N*u_sd/(1-u_sd-u_ds)
+        beta  = N*u_ds/(1-u_sd-u_ds).
+    """
+
+    _validate_population(n)
+    _validate_mutation(u_sd, u_ds, require_irreducible=True)
+    q = 1.0 - u_sd - u_ds
+    if q <= 0.0:
+        raise ValueError("beta-binomial form requires u_sd+u_ds<1")
+    return n * u_sd / q, n * u_ds / q
+
+
+def neutral_beta_binomial_distribution(
+    n: int, u_sd: float, u_ds: float
+) -> List[float]:
+    """Return the exact neutral stationary distribution in beta-binomial form."""
+
+    alpha, beta_param = neutral_beta_binomial_parameters(n, u_sd, u_ds)
+    log_weights = [0.0]
+    for i in range(1, n + 1):
+        ratio = (
+            (n - i + 1) / i
+            * (alpha + i - 1)
+            / (beta_param + n - i)
+        )
+        log_weights.append(log_weights[-1] + log(ratio))
+    return _normalize_log_weights(log_weights)
+
+
+def neutral_expected_d_frequency(u_sd: float, u_ds: float) -> float:
+    """Return exact neutral stationary mean D frequency u_sd/(u_sd+u_ds)."""
+
+    if u_sd <= 0.0 or u_ds <= 0.0:
+        raise ValueError("neutral stationary mean requires positive mutation rates")
+    return u_sd / (u_sd + u_ds)
+
+
+def neutral_symmetric_mutation_critical_rate(n: int) -> float:
+    """Return mu_c=1/(N+2), the exact neutral symmetric shape threshold."""
+
+    _validate_population(n)
+    return 1.0 / (n + 2.0)
+
+
+def neutral_symmetric_stationary_shape(
+    n: int, mutation_rate: float, tol: float = 1e-12
+) -> str:
+    """Classify the exact neutral symmetric stationary shape for 0<mu<1/2.
+
+    mu < 1/(N+2): boundary-biased / U-shaped
+    mu = 1/(N+2): uniform over counts
+    mu > 1/(N+2): interior-biased / central mode(s)
+    """
+
+    _validate_population(n)
+    if not 0.0 < mutation_rate < 0.5:
+        raise ValueError("neutral symmetric shape classification requires 0<mutation_rate<1/2")
+    critical = neutral_symmetric_mutation_critical_rate(n)
+    if mutation_rate < critical - tol:
+        return "boundary_biased"
+    if mutation_rate > critical + tol:
+        return "interior_biased"
+    return "uniform"
+
+
+def _normalize_log_weights(log_weights: Sequence[float]) -> List[float]:
+    m = max(log_weights)
+    weights = [exp(value - m) for value in log_weights]
+    total = sum(weights)
+    return [value / total for value in weights]
 
 
 def _validate_population(n: int) -> None:
