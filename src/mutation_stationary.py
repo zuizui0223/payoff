@@ -197,16 +197,76 @@ def mutation_shifted_cost_crossing(
     return recovery - phi_mut
 
 
+def mutation_shifted_environment_crossing(
+    static_crossing: float,
+    phi_slope: float,
+    n: int,
+    beta: float,
+    u_sd: float,
+    u_ds: float,
+) -> float:
+    """Return equal-occupancy environment for phi(e)=slope*(e-e0)."""
+
+    if phi_slope == 0.0:
+        raise ValueError("phi_slope must be non-zero")
+    phi_mut = mutation_shifted_static_crossing(n, beta, u_sd, u_ds)
+    return static_crossing + phi_mut / phi_slope
+
+
+def stationary_log_odds_from_components(
+    n: int, beta: float, phi: float, mutation_log_bias: float
+) -> float:
+    """Rare-mutation stationary log odds m+beta(N-2)phi."""
+
+    _validate_population(n)
+    _validate_selection(beta)
+    return mutation_log_bias + beta * (n - 2) * phi
+
+
+def infer_phi_mutation_bias_from_population_sizes(
+    log_odds_1: float,
+    n_1: int,
+    log_odds_2: float,
+    n_2: int,
+    beta: float,
+) -> Tuple[float, float]:
+    """Infer (phi, mutation_log_bias) from two population sizes."""
+
+    _validate_population(n_1)
+    _validate_population(n_2)
+    if n_1 == n_2:
+        raise ValueError("population sizes must differ")
+    if beta <= 0.0:
+        raise ValueError("beta must be positive")
+    phi = (log_odds_2 - log_odds_1) / (beta * (n_2 - n_1))
+    mutation_log_bias = log_odds_1 - beta * (n_1 - 2) * phi
+    return phi, mutation_log_bias
+
+
+def infer_phi_mutation_bias_from_selection_intensities(
+    log_odds_1: float,
+    beta_1: float,
+    log_odds_2: float,
+    beta_2: float,
+    n: int,
+) -> Tuple[float, float]:
+    """Infer (phi, mutation_log_bias) from two selection intensities."""
+
+    if n <= 2:
+        raise ValueError("selection-intensity identification requires n>2")
+    _validate_selection(beta_1)
+    _validate_selection(beta_2)
+    if beta_1 == beta_2:
+        raise ValueError("selection intensities must differ")
+    phi = (log_odds_2 - log_odds_1) / ((beta_2 - beta_1) * (n - 2))
+    mutation_log_bias = log_odds_1 - beta_1 * (n - 2) * phi
+    return phi, mutation_log_bias
+
+
 def neutral_beta_binomial_parameters(
     n: int, u_sd: float, u_ds: float
 ) -> Tuple[float, float]:
-    """Return exact neutral beta-binomial parameters (alpha,beta_param).
-
-    For neutral selection and u_sd+u_ds<1,
-
-        alpha = N*u_sd/(1-u_sd-u_ds)
-        beta  = N*u_ds/(1-u_sd-u_ds).
-    """
+    """Return exact neutral beta-binomial parameters (alpha,beta_param)."""
 
     _validate_population(n)
     _validate_mutation(u_sd, u_ds, require_irreducible=True)
@@ -251,12 +311,7 @@ def neutral_symmetric_mutation_critical_rate(n: int) -> float:
 def neutral_symmetric_stationary_shape(
     n: int, mutation_rate: float, tol: float = 1e-12
 ) -> str:
-    """Classify the exact neutral symmetric stationary shape for 0<mu<1/2.
-
-    mu < 1/(N+2): boundary-biased / U-shaped
-    mu = 1/(N+2): uniform over counts
-    mu > 1/(N+2): interior-biased / central mode(s)
-    """
+    """Classify the exact neutral symmetric stationary shape for 0<mu<1/2."""
 
     _validate_population(n)
     if not 0.0 < mutation_rate < 0.5:
