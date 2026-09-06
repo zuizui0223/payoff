@@ -4,7 +4,7 @@ PAYOFF is intended to make the game-theoretic extension precise without overclai
 
 ## What the model does establish
 
-Under the declared quadratic loss, residual-coupling, linear frequency-feedback, and finite-population assumptions:
+Under the declared quadratic loss, residual-coupling, linear frequency-feedback, finite-population, and recurrent-mutation assumptions:
 
 1. the one-coordinate compromise is unique;
 2. the shared conflict load is exact;
@@ -24,7 +24,11 @@ Under the declared quadratic loss, residual-coupling, linear frequency-feedback,
 16. under self-excluding pairwise interactions and exponential payoff-to-fitness mapping, the finite-population payoff gap `Delta_N(i)` and single-mutant Moran fixation probabilities are exact;
 17. under that finite Moran model, `rho_D/rho_S=exp[beta phi(N-2)]`, so the sign of `phi` exactly orders reciprocal fixation probabilities for `N>2`, `beta>0`;
 18. under weak selection, `rho_D>1/N` iff `3phi>eta` and `rho_S>1/N` iff `-3phi>eta` for the declared game;
-19. the corresponding weak-selection stochastic-core width on the cost scale is `2|eta|/3`.
+19. the corresponding weak-selection stochastic-core width on the cost scale is `2|eta|/3`;
+20. with positive recurrent mutation in both directions, the two-type Moran chain is irreducible and its exact stationary distribution follows the birth-death detailed-balance product formula;
+21. in the rare-mutation limit, `log(Pi_N/Pi_0) -> log(u_SD/u_DS)+beta phi(N-2)`, so frequency feedback `eta` cancels from monomorphic occupancy odds under the declared process;
+22. under symmetric rare mutation, `phi=0` remains the equal all-S/all-D stationary occupancy boundary;
+23. under asymmetric rare mutation, equal monomorphic occupancy shifts to `phi=-log(u_SD/u_DS)/[beta(N-2)]`, equivalently `K=R+log(u_SD/u_DS)/[beta(N-2)]`.
 
 ## What the model does not establish
 
@@ -109,6 +113,25 @@ and
 
 compare fixation probability with `1/N` in the weak-selection limit. At stronger selection, the exact fixation expression should be evaluated rather than applying the weak-selection inequalities as universal thresholds.
 
+### Recurrent-mutation stationarity is process-specific
+
+The exact stationary product formula is generic to irreducible birth-death chains, but the particular PAYOFF transition probabilities assume mutation occurs in offspring after fitness-biased reproduction and before uniform death. Other mutation placements, Wright-Fisher updating, overlapping mutation/selection mechanisms, population structure, or more than two architecture states can change the stationary law.
+
+### Rare-mutation occupancy is an asymptotic reduction
+
+The result
+
+```text
+Pi_N/Pi_0
+~ (u_SD/u_DS) exp[beta phi(N-2)]
+```
+
+is a rare-mutation statement. At moderate mutation, interior states can carry substantial stationary mass and the exact full stationary distribution must be used. Mutation bias and frequency feedback can then shape the full stationary profile in ways not captured by the two-state approximation.
+
+### Mutation bias is not identified by architecture fitness data
+
+The rates `u_SD` and `u_DS` are a new mutation/inheritance layer. They require independent biological interpretation and estimation. A fitted stationary occupancy asymmetry should not be automatically attributed to mutation bias when asymmetric transition mechanisms, migration, developmental conversion, or environmental forcing are plausible.
+
 ### Risk dominance is model-specific terminology here
 
 Inside the strict `eta>0` coordination wedge, `risk dominant` refers to the pure architecture with the larger deterministic basin of attraction under the declared one-dimensional replicator dynamics. It is not a claim that every stochastic or equilibrium-selection definition gives the same empirical outcome.
@@ -173,7 +196,15 @@ Avoid:
 
 Preferred:
 
-> The framework predicts conditions under which differentiated and shared architectures can each be evolutionarily stable or stochastically favored.
+> With recurrent mutation, the exact stationary architecture-frequency distribution is obtained from the declared birth-death process; in the rare-mutation limit its monomorphic occupancy odds combine mutation bias and the architecture gap additively on a log scale.
+
+Avoid:
+
+> Mutation-selection balance universally obeys the PAYOFF stationary formula.
+
+Preferred:
+
+> The framework predicts conditions under which differentiated and shared architectures can each be evolutionarily stable, stochastically favored, or more abundant in the long-run stationary distribution.
 
 Avoid:
 
@@ -200,7 +231,11 @@ FINITE_MORAN_FIXATION_FORMULA_PROVED_UNDER_DECLARED_PROCESS
 RECIPROCAL_FIXATION_RATIO_PROVED_UNDER_EXPONENTIAL_FITNESS
 WEAK_SELECTION_ARCHITECTURE_ONE_THIRD_MAPPING_PROVED
 FINITE_STOCHASTIC_CORE_WIDTH_PROVED_UNDER_WEAK_SELECTION
+RECURRENT_MUTATION_STATIONARY_DISTRIBUTION_PROVED_UNDER_DECLARED_PROCESS
+RARE_MUTATION_BOUNDARY_ODDS_PROVED
+MUTATION_SHIFTED_OCCUPANCY_CROSSING_PROVED
 EMPIRICAL_FREQUENCY_FEEDBACK_NOT_YET_IDENTIFIED
 FINITE_POPULATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
+RECURRENT_MUTATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
 HISTORICAL_CAUSATION_NOT_IDENTIFIED
 ```
