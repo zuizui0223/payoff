@@ -1,6 +1,6 @@
 # Prior-art boundary for PAYOFF
 
-PAYOFF should not claim that specialization, modularity, frequency-dependent diversification, evolutionary branching, Moran fixation theory, or the one-third law are new ideas. The literature already contains deep theory on all of them.
+PAYOFF should not claim that specialization, modularity, frequency-dependent diversification, evolutionary branching, Moran fixation theory, the one-third law, recurrent-mutation stationary distributions, or mutation-selection balance are new ideas. The literature already contains deep theory on all of them.
 
 This note records the current boundary so the manuscript can focus on the actual bridge developed here.
 
@@ -44,22 +44,12 @@ PAYOFF therefore does **not** claim that reducing coupling among traits is a new
 
 Frequency-dependent Moran processes, fixation probability criteria, and finite-population evolutionary stability are established topics. The one-third law states, under weak selection for two-strategy games, that a mutant can be favored above neutral fixation when the relevant deterministic threshold lies below one third.
 
-Key anchor:
+Key anchors:
 
 - Ohtsuki, Bordalo & Nowak (2007), **The one-third law of evolutionary dynamics**, Journal of Theoretical Biology 249:289-295. PMID `17826798`.
+- Fudenberg, Nowak, Taylor & Imhof (2006), **Evolutionary game dynamics in finite populations with strong selection and weak mutation**, Theoretical Population Biology 70:352-363. DOI `10.1016/j.tpb.2006.07.006`.
 
-The paper explicitly treats finite-population stochastic evolutionary games and explains the one-third law derived from earlier Moran-process work.
-
-Fudenberg, Nowak, Taylor & Imhof (2006), **Evolutionary game dynamics in finite populations with strong selection and weak mutation**, Theoretical Population Biology 70:352-363, also gives a broad finite-population frequency-dependent game framework.
-
-PAYOFF therefore does **not** claim to invent:
-
-```text
-Moran fixation probability,
-finite-population evolutionary stability,
-risk-dominance/fixation comparisons,
-or the one-third law.
-```
+PAYOFF therefore does **not** claim to invent Moran fixation probability, finite-population evolutionary stability, risk-dominance/fixation comparisons, or the one-third law.
 
 PAYOFF's finite-population contribution is to substitute the ecology-derived architecture gap
 
@@ -69,7 +59,36 @@ phi=sL-K
 
 into that stochastic-game machinery and derive the resulting architecture-specific fixation receipts for the declared payoff matrix.
 
-## 7. Candidate contribution of PAYOFF
+## 7. Recurrent mutation and stationary strategy abundance are established theory
+
+Recurrent mutation removes the absorbing boundaries of the mutation-free Moran process and replaces fixation as the long-run object with a stationary distribution over population states.
+
+Key anchors include:
+
+- Fudenberg, Nowak, Taylor & Imhof (2006), DOI `10.1016/j.tpb.2006.07.006`, which analyzes finite-population frequency-dependent games with mutation and gives weak-mutation long-run results.
+- Antal, Nowak & Traulsen (2009), **Strategy abundance in 2x2 games for arbitrary mutation rates**, Journal of Theoretical Biology 257:340-344. DOI `10.1016/j.jtbi.2008.11.023`.
+- Antal, Traulsen, Ohtsuki, Tarnita & Nowak (2009), **Mutation-selection equilibrium in games with multiple strategies**, Journal of Theoretical Biology 258:614-622. DOI `10.1016/j.jtbi.2009.02.010`.
+- Hindersin, Wu, Traulsen et al. (2019), **Computation and Simulation of Evolutionary Game Dynamics in Finite Populations**, Scientific Reports 9:6946. DOI `10.1038/s41598-019-43102-z`, which explicitly presents stationary-distribution computation from birth-death detailed balance for Moran games with mutation.
+
+Accordingly, PAYOFF does **not** claim to invent:
+
+```text
+mutation-selection balance,
+stationary Moran distributions,
+detailed-balance product formulas,
+strategy abundance under recurrent mutation,
+or weak-mutation reduction to transitions among monomorphic states.
+```
+
+PAYOFF's recurrent-mutation contribution is the architecture-specific bridge
+
+```text
+L -> R=sL -> phi=R-K
+```
+
+and the resulting predictions for long-run shared-versus-differentiated architecture occupancy under the declared process.
+
+## 8. Candidate contribution of PAYOFF
 
 The defensible contribution is narrower and more specific:
 
@@ -98,12 +117,14 @@ deterministic population outcome
         v
 finite-population stochastic outcome
         |
-        | rho_D, rho_S under Moran updating
-        | weak-selection criterion 3phi>eta
+        | rho_i, reciprocal fixation, weak-selection threshold
         v
-empirical bridge
-          phi=[Delta(0)+Delta(1)]/2
-          eta=[Delta(1)-Delta(0)]/2.
+recurrent-mutation long-run outcome
+        |
+        | stationary Pi_i
+        | rare-mutation log odds
+          log(Pi_N/Pi_0)
+          ~ log(u_SD/u_DS)+beta(N-2)(sL-K).
 ```
 
 The key question is not simply
@@ -112,11 +133,11 @@ The key question is not simply
 
 It is
 
-> **Can an empirically reconstructed one-coordinate compromise be carried, on the same fitness scale, through a costed architecture transition, reciprocal invasion, and finally into finite-population fixation predictions for shared versus differentiated architectures?**
+> **Can an empirically reconstructed one-coordinate compromise be carried, on the same fitness scale, through a costed architecture transition, reciprocal invasion, finite-population fixation, and finally into long-run mutation-selection-drift predictions for shared versus differentiated architectures?**
 
 That is the SCH -> BALANCE -> BITA -> PAYOFF bridge.
 
-## 8. Strongest current theorem-level pieces
+## 9. Strongest current theorem-level pieces
 
 ### Exact quadratic receipt
 
@@ -173,9 +194,18 @@ and under weak selection
 rho_D>1/N iff 3phi>eta.
 ```
 
-After substituting `phi=sL-K`, this becomes an explicit prediction from measured ecological compromise and architecture quantities. The stochastic-game laws themselves remain prior art; the contribution is the cross-scale parameter bridge.
+### Recurrent-mutation receipt
 
-## 9. Claim ceiling
+Under the declared offspring-mutation Moran process, the exact stationary distribution is obtained from adjacent transition ratios. In the rare-mutation limit,
+
+```text
+log(Pi_N/Pi_0)
+-> log(u_SD/u_DS)+beta phi(N-2).
+```
+
+Thus the static architecture gap and mutation bias become additive on the long-run monomorphic log-odds scale. This formula is a model-derived specialization of established weak-mutation stochastic-game machinery, not a claim to invent that machinery.
+
+## 10. Claim ceiling
 
 Until a broader systematic prior-art search is complete, manuscript language should use:
 
@@ -184,7 +214,7 @@ we derive
 we connect
 we provide an explicit bridge
 we show that under the declared model
-we map an established finite-population criterion onto measured architecture quantities
+we map established finite-population and mutation-selection machinery onto measured architecture quantities
 ```
 
 rather than:
@@ -194,7 +224,8 @@ first theory of specialization
 first game theory of modularity
 first demonstration that frequency dependence changes architecture
 new one-third law
-first finite-population game of trait architecture.
+first finite-population game of trait architecture
+first stationary mutation-selection theory of architectures.
 ```
 
-The novelty claim should remain the **cross-scale estimand bridge and its testable invasion/fixation consequences**, not the existence of any component idea by itself.
+The novelty claim should remain the **cross-scale estimand bridge and its testable invasion/fixation/stationary-occupancy consequences**, not the existence of any component idea by itself.
