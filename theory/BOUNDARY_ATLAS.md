@@ -376,11 +376,151 @@ Under rapid switching, the boundary displacement begins at order `T^2`, with tem
 m^2 * (seasonal patch-contrast change)^2.
 ```
 
-This is a two-season symmetric two-patch result, not a universal temporal boundary for arbitrary nonautonomous systems.
+---
+
+## 11. Anti-phase temporal coordination boundaries
+
+Question:
+
+> Can seasonal source switching overcome a positive-frequency coordination barrier between shared and differentiated architectures?
+
+For the symmetric anti-phase special case, both reciprocal invasion problems receive the same temporal premium
+
+```text
+P=P(m,x,tau).
+```
+
+Their exact edge exponents are
+
+```text
+Lambda_D
+= phi_bar-eta+P,
+
+Lambda_S
+= -phi_bar-eta+P.
+```
+
+Therefore the two temporal reciprocal-neutral boundaries are
+
+```text
+phi_bar
+= +(eta-P)
+```
+
+and
+
+```text
+phi_bar
+= -(eta-P).
+```
+
+Equivalently define
+
+```text
+eta_eff=eta-P.
+```
+
+The central static point remains
+
+```text
+phi_bar=0,
+```
+
+but the biological type of the middle region depends on the sign of `eta_eff`.
+
+### Coordination side
+
+```text
+P<eta
+-> eta_eff>0
+-> central mutual non-invasion.
+```
+
+### Temporal inversion surface
+
+```text
+P=eta
+-> eta_eff=0
+-> reciprocal boundaries collapse at phi_bar=0.
+```
+
+### Reciprocal-invasion side
+
+```text
+P>eta
+-> eta_eff<0
+-> central reciprocal invasion.
+```
+
+For nonzero `phi_bar`, both architectures invade iff
+
+```text
+P>eta+|phi_bar|.
+```
+
+Neither invades iff
+
+```text
+P<eta-|phi_bar|.
+```
+
+Between those conditions, only the statically favored architecture invades.
 
 ---
 
-## 11. The hierarchy of questions
+## 12. Weak-contrast temporal inversion boundary
+
+Question:
+
+> At weak seasonal contrast, is temporal source switching strong enough to invert coordination for any migration rate?
+
+For
+
+```text
+|x|tau << 1,
+```
+
+the temporal premium is
+
+```text
+P
+~= x^2 tau H(m tau),
+```
+
+where
+
+```text
+H(u)=[u-tanh u]/(2u^2).
+```
+
+`H` has one maximum
+
+```text
+H*=0.132487539446827...
+```
+
+at
+
+```text
+u*=m tau
+=1.60611529880277....
+```
+
+At `phi_bar=0`, a temporal reciprocal-invasion island exists approximately iff
+
+```text
+x^2 tau/eta
+> 1/H*
+=7.547879628343014....
+```
+
+At equality the two migration boundaries merge at `u*`. Above threshold there are two positive migration crossings and the reciprocal-invasion state lies between them.
+
+This is an asymptotic anti-phase boundary, not a universal migration threshold.
+
+---
+
+## 13. The hierarchy of questions
 
 The boundaries correspond to increasingly population- and context-dependent estimands:
 
@@ -406,7 +546,11 @@ principal-eigenvalue boundary
         |
         v
 Lambda_F=0
-    periodic spatiotemporal invasion.
+    periodic spatiotemporal invasion
+        |
+        v
+P=eta (+/- phi_bar adjustment)
+    temporal inversion of reciprocal architecture coordination.
 ```
 
 Graph, migration, mutation, and temporal models add separate transformations around this chain.
