@@ -34,3 +34,4 @@ jobs:
       - run: python scripts/three_function_population_example.py --edge-cost 0.4 --gamma -0.25 --population-size 20 --beta 0.4 --output outputs/ci_three_function_population.csv
       - run: python scripts/predict_modular_topology.py --functions examples/three_function/functions.csv --edges examples/three_function/edges.csv --output-dir outputs/ci_generic_topology
       - run: python scripts/topology_uncertainty_ensemble.py --input examples/three_function/ensemble.json --output-dir outputs/ci_topology_ensemble
+      - run: python scripts/predict_hard_module_partition.py --functions examples/three_function/functions.csv --extra-module-cost 1.0 --output-dir outputs/ci_hard_modules
