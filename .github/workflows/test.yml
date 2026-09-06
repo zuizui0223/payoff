@@ -35,4 +35,5 @@ jobs:
       - run: python scripts/predict_modular_topology.py --functions examples/three_function/functions.csv --edges examples/three_function/edges.csv --output-dir outputs/ci_generic_topology
       - run: python scripts/topology_uncertainty_ensemble.py --input examples/three_function/ensemble.json --output-dir outputs/ci_topology_ensemble
       - run: python scripts/identify_hard_module_cost.py --input examples/three_function/hard_module_worldlines.csv --output-dir outputs/ci_hard_module_cost
+      - run: python scripts/validate_hard_module_cost_out_of_sample.py --input examples/three_function/hard_module_worldlines_validation.csv --output-dir outputs/ci_hard_module_validation
       - run: python scripts/predict_hard_module_partition.py --functions examples/three_function/functions.csv --extra-module-cost 1.0 --output-dir outputs/ci_hard_modules
