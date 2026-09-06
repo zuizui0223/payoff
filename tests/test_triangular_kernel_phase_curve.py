@@ -1,6 +1,7 @@
 from src.triangular_kernel_barrier import triangular_feedback_window
 from src.triangular_kernel_phase_curve import (
     dimensionless_triangular_window,
+    interaction_range_window_at_feedback,
     narrow_range_asymptotic_ratios,
     near_intrinsic_optimum_asymptotic_ratios,
 )
@@ -23,6 +24,27 @@ def test_barrier_window_is_strictly_positive_across_declared_interaction_ranges(
         row = dimensionless_triangular_window(E)
         assert row.g_hi > row.g_on > 0.0
         assert row.width > 0.0
+
+
+def test_fixed_feedback_has_intermediate_interaction_range_window():
+    window = interaction_range_window_at_feedback(2.0)
+    assert abs(window.E_lower - 1.0 / 3.0) < 1e-12
+    assert abs(window.E_upper - 0.6595648100573256) < 1e-12
+    assert window.E_lower < 0.6 < window.E_upper
+
+    inside = dimensionless_triangular_window(0.6)
+    too_narrow = dimensionless_triangular_window(0.3)
+    too_wide = dimensionless_triangular_window(0.7)
+    assert inside.g_on < 2.0 < inside.g_hi
+    assert 2.0 < too_narrow.g_on
+    assert 2.0 > too_wide.g_hi
+
+
+def test_fixed_feedback_half_case_uses_regular_linear_contact_root():
+    window = interaction_range_window_at_feedback(0.5)
+    assert abs(window.contact_x_upper - 0.75) < 1e-12
+    assert abs(window.E_lower - 2.0 / 3.0) < 1e-12
+    assert abs(window.E_upper - 0.84375) < 1e-12
 
 
 def test_near_intrinsic_optimum_window_collapses_linearly():
