@@ -1,7 +1,8 @@
 """Reference implementation for the PAYOFF evolutionary architecture game.
 
-The module mirrors the analytic statements in theory/THEOREMS.md using only
-Python's standard library so that the core identities remain easy to audit.
+The module mirrors the analytic statements in theory/THEOREMS.md and
+THEORY/ENVIRONMENTAL_PHASE_DIAGRAM.md using only Python's standard library so
+that the core identities remain easy to audit.
 """
 
 from __future__ import annotations
@@ -127,6 +128,104 @@ def n_function_conflict(
     return z, variance_load, pairwise_load
 
 
+def architecture_phi(
+    conflict_load: float, separation_fraction: float, architecture_cost: float
+) -> float:
+    """Return the frequency-independent architecture gap phi=sL-K."""
+
+    _validate_bridge(conflict_load, separation_fraction, architecture_cost)
+    return separation_fraction * conflict_load - architecture_cost
+
+
+def invasion_margins(
+    conflict_load: float,
+    separation_fraction: float,
+    architecture_cost: float,
+    eta: float,
+) -> Tuple[float, float]:
+    """Return reciprocal rare-architecture invasion margins (I_D, I_S).
+
+    I_D is the payoff advantage of rare D in an S resident population:
+        I_D = Delta(0) = phi-eta.
+
+    I_S is the payoff advantage of rare S in a D resident population:
+        I_S = -Delta(1) = -phi-eta.
+    """
+
+    phi = architecture_phi(conflict_load, separation_fraction, architecture_cost)
+    return phi - eta, -phi - eta
+
+
+def invasion_cost_surfaces(
+    conflict_load: float, separation_fraction: float, eta: float
+) -> Tuple[float, float]:
+    """Return neutral cost thresholds (K_D, K_S).
+
+    K_D=R-eta makes rare D neutral in an S population.
+    K_S=R+eta makes rare S neutral in a D population.
+    Their signed separation is K_S-K_D=2*eta.
+    """
+
+    _validate_bridge(conflict_load, separation_fraction, 0.0)
+    recovery = separation_fraction * conflict_load
+    return recovery - eta, recovery + eta
+
+
+def middle_cost_interval(
+    conflict_load: float, separation_fraction: float, eta: float
+) -> Tuple[float, float]:
+    """Return the ordered cost interval with |phi|<|eta|.
+
+    Its raw mathematical width is exactly 2|eta|. The biologically feasible
+    portion additionally intersects K>=0.
+    """
+
+    _validate_bridge(conflict_load, separation_fraction, 0.0)
+    recovery = separation_fraction * conflict_load
+    h = abs(eta)
+    return recovery - h, recovery + h
+
+
+def infer_recovery_feedback_from_cost_thresholds(
+    k_d_neutral: float, k_s_neutral: float
+) -> Tuple[float, float]:
+    """Invert reciprocal neutral-cost thresholds into (R, eta)."""
+
+    recovery = 0.5 * (k_d_neutral + k_s_neutral)
+    eta = 0.5 * (k_s_neutral - k_d_neutral)
+    return recovery, eta
+
+
+def classify_lke_phase(
+    conflict_load: float,
+    separation_fraction: float,
+    architecture_cost: float,
+    eta: float,
+    tol: float = 1e-12,
+) -> str:
+    """Classify the architecture game directly from (L,s,K,eta)."""
+
+    phi = architecture_phi(conflict_load, separation_fraction, architecture_cost)
+    return classify_phase(phi, eta, tol=tol)
+
+
+def linear_environment_thresholds(
+    static_crossing: float, phi_slope: float, eta: float
+) -> Tuple[float, float, float]:
+    """Return (e_low, e0, e_high) for phi(e)=slope*(e-e0).
+
+    The two game boundaries satisfy phi=+-|eta| and are separated by
+    2|eta|/|slope|. When eta=0, all three values equal e0.
+    """
+
+    if phi_slope == 0:
+        raise ValueError("phi_slope must be non-zero")
+    h = abs(eta)
+    e1 = static_crossing - h / phi_slope
+    e2 = static_crossing + h / phi_slope
+    return min(e1, e2), static_crossing, max(e1, e2)
+
+
 def game_matrix(phi: float, eta: float) -> Tuple[Tuple[float, float], Tuple[float, float]]:
     """Symmetric 2x2 payoff matrix generating the declared payoff gap.
 
@@ -229,7 +328,7 @@ def switching_action(
     c_ds: float,
     horizon: float,
 ) -> str:
-    """Return 'S', 'D', or current state under strict payoff-improvement switching."""
+    """Return 'S' or 'D' under strict payoff-improvement switching."""
 
     if current not in {"S", "D"}:
         raise ValueError("current must be 'S' or 'D'")
@@ -240,6 +339,17 @@ def switching_action(
     if current == "D" and delta < lower:
         return "S"
     return current
+
+
+def _validate_bridge(
+    conflict_load: float, separation_fraction: float, architecture_cost: float
+) -> None:
+    if conflict_load < 0:
+        raise ValueError("conflict_load must be non-negative")
+    if not 0.0 <= separation_fraction <= 1.0:
+        raise ValueError("separation_fraction must lie in [0,1]")
+    if architecture_cost < 0:
+        raise ValueError("architecture_cost must be non-negative")
 
 
 def _validate_frequency(p: float) -> None:
