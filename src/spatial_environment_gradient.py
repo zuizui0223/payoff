@@ -11,6 +11,7 @@ thresholds have exact closed forms.
 
 from __future__ import annotations
 
+from math import sqrt
 from typing import Dict, Sequence, Tuple
 
 from src.environment_mosaic import invasion_exponent, invasion_margins
@@ -148,6 +149,57 @@ def no_frequency_feedback_zero_migration_window(
     if slope == 0.0:
         raise ValueError("slope must be non-zero")
     return (max(base_phis) - min(base_phis)) / slope
+
+
+def two_patch_midpoint_exponent(
+    phi_1: float, phi_2: float, eta: float, migration_rate: float
+) -> float:
+    """Reciprocal D/S invasion exponent at the mean-static-gap environment.
+
+    After a common environmental shift makes the two patch gaps
+        +Delta_phi/2 and -Delta_phi/2,
+    both reciprocal architecture invasion exponents equal
+        -eta-m + sqrt[(Delta_phi/2)^2+m^2].
+    """
+
+    if eta <= 0.0:
+        raise ValueError("eta must be positive for the coordination-switch theorem")
+    if migration_rate < 0.0:
+        raise ValueError("migration_rate must be non-negative")
+    delta_phi = phi_1 - phi_2
+    return -eta - migration_rate + sqrt((0.5 * delta_phi) ** 2 + migration_rate**2)
+
+
+def two_patch_coordination_switch_rate(phi_1: float, phi_2: float, eta: float) -> float:
+    """Exact migration rate where reciprocal invasion becomes mutual non-invasion.
+
+    Requires eta>0 and |phi1-phi2|>2eta. Then
+        m_switch=[(phi1-phi2)^2-4eta^2]/(8eta).
+    """
+
+    if eta <= 0.0:
+        raise ValueError("eta must be positive")
+    delta_phi = phi_1 - phi_2
+    if abs(delta_phi) <= 2.0 * eta:
+        raise ValueError("requires |phi_1-phi_2| > 2 eta")
+    return (delta_phi**2 - 4.0 * eta**2) / (8.0 * eta)
+
+
+def classify_two_patch_midpoint(
+    phi_1: float,
+    phi_2: float,
+    eta: float,
+    migration_rate: float,
+    tol: float = 1e-12,
+) -> str:
+    """Classify reciprocal landscape invasibility at the mean-static-gap environment."""
+
+    value = two_patch_midpoint_exponent(phi_1, phi_2, eta, migration_rate)
+    if value > tol:
+        return "reciprocal_spatial_invasion"
+    if value < -tol:
+        return "mutual_spatial_noninvasion"
+    return "spatial_coordination_switch_boundary"
 
 
 def spatial_environment_summary(
