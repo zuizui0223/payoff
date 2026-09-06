@@ -37,4 +37,5 @@ jobs:
       - run: python scripts/identify_hard_module_cost.py --input examples/three_function/hard_module_worldlines.csv --output-dir outputs/ci_hard_module_cost
       - run: python scripts/validate_hard_module_cost_out_of_sample.py --input examples/three_function/hard_module_worldlines_validation.csv --output-dir outputs/ci_hard_module_validation
       - run: python scripts/hard_module_end_to_end.py --functions examples/three_function/functions.csv --worldlines examples/three_function/hard_module_end_to_end_worldlines.csv --output-dir outputs/ci_hard_module_end_to_end
+      - run: python scripts/validate_hard_partition_feedback.py --functions examples/three_function/functions.csv --pairs examples/three_function/hard_partition_feedback_validation.csv --kappa 1.0 --output-dir outputs/ci_hard_partition_feedback
       - run: python scripts/predict_hard_module_partition.py --functions examples/three_function/functions.csv --extra-module-cost 1.0 --output-dir outputs/ci_hard_modules
