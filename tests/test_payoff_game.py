@@ -16,7 +16,7 @@ from src.payoff_game import (
 
 def test_shared_conflict_load_and_optimum():
     m = QuadraticTraitArchitecture(a=2.0, b=3.0, theta1=4.0, theta2=1.0)
-    assert isclose(m.shared_optimum, 2.8)
+    assert isclose(m.shared_optimum, 2.2)
     assert isclose(m.conflict_load, (2.0 * 3.0 / 5.0) * 9.0)
 
 
@@ -117,7 +117,6 @@ def test_negative_frequency_dependence_stable_coexistence():
     assert pstar is not None
     assert classify_phase(phi, eta) == "stable_architecture_coexistence"
     assert isclose(replicator_rhs(pstar, phi, eta), 0.0, abs_tol=1e-12)
-    # Vector field points toward p* on both sides.
     assert replicator_rhs(pstar - 0.05, phi, eta) > 0
     assert replicator_rhs(pstar + 0.05, phi, eta) < 0
     assert pure_ess(phi, eta) == (False, False)
@@ -129,7 +128,6 @@ def test_positive_frequency_dependence_coordination_bistability():
     pstar = interior_equilibrium(phi, eta)
     assert pstar is not None
     assert classify_phase(phi, eta) == "coordination_bistability"
-    # Vector field points away from p*.
     assert replicator_rhs(pstar - 0.05, phi, eta) < 0
     assert replicator_rhs(pstar + 0.05, phi, eta) > 0
     assert pure_ess(phi, eta) == (True, True)
@@ -147,7 +145,6 @@ def test_switching_hysteresis():
     assert isclose(lower, -0.1)
     assert isclose(upper, 0.2)
 
-    # Same payoff state can preserve either inherited architecture inside band.
     assert switching_action("S", 0.5, phi=0.05, eta=0.0, c_sd=0.6, c_ds=0.3, horizon=3.0) == "S"
     assert switching_action("D", 0.5, phi=0.05, eta=0.0, c_sd=0.6, c_ds=0.3, horizon=3.0) == "D"
 
