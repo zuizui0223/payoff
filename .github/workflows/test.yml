@@ -32,3 +32,4 @@ jobs:
       - run: python scripts/topology_landscape_sweep.py --gamma -0.5 --population-size 20 --beta 0.4 --mutation-rate 0.01 --output outputs/ci_topology_landscape.csv
       - run: python scripts/three_function_topology_example.py --edge-cost 0.4 --topologies-output outputs/ci_three_function_topologies.csv --path-output outputs/ci_three_function_release_path.csv
       - run: python scripts/three_function_population_example.py --edge-cost 0.4 --gamma -0.25 --population-size 20 --beta 0.4 --output outputs/ci_three_function_population.csv
+      - run: python scripts/predict_modular_topology.py --functions examples/three_function/functions.csv --edges examples/three_function/edges.csv --output-dir outputs/ci_generic_topology
