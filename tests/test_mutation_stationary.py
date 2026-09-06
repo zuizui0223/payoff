@@ -1,10 +1,15 @@
-from math import exp, isclose, log
+from math import isclose, log
 
 from src.mutation_stationary import (
     detailed_balance_residuals,
     mutation_shifted_cost_crossing,
     mutation_shifted_static_crossing,
     mutation_transition_probabilities,
+    neutral_beta_binomial_distribution,
+    neutral_beta_binomial_parameters,
+    neutral_expected_d_frequency,
+    neutral_symmetric_mutation_critical_rate,
+    neutral_symmetric_stationary_shape,
     rare_mutation_boundary_probability_d,
     rare_mutation_log_boundary_odds,
     stationary_distribution,
@@ -65,6 +70,64 @@ def test_neutral_mutation_bias_shifts_stationary_mean():
     )
     assert stationary_summary(toward_d)["mean_d_frequency"] > 0.5
     assert stationary_summary(toward_s)["mean_d_frequency"] < 0.5
+
+
+def test_neutral_exact_beta_binomial_matches_general_stationary_distribution():
+    for n, u_sd, u_ds in [
+        (10, 0.03, 0.07),
+        (31, 0.01, 0.02),
+        (50, 0.08, 0.04),
+    ]:
+        closed = neutral_beta_binomial_distribution(n, u_sd, u_ds)
+        general = stationary_distribution(
+            n=n, phi=0.0, eta=0.0, beta=1.7, u_sd=u_sd, u_ds=u_ds
+        )
+        assert len(closed) == len(general)
+        for p, q in zip(closed, general):
+            assert isclose(p, q, rel_tol=1e-11, abs_tol=1e-13)
+
+
+def test_neutral_beta_binomial_mean_is_mutation_bias_ratio():
+    n = 37
+    u_sd = 0.03
+    u_ds = 0.09
+    probs = neutral_beta_binomial_distribution(n, u_sd, u_ds)
+    observed = stationary_summary(probs)["mean_d_frequency"]
+    expected = neutral_expected_d_frequency(u_sd, u_ds)
+    assert isclose(observed, expected, rel_tol=1e-12, abs_tol=1e-12)
+    assert isclose(expected, 0.25, abs_tol=1e-12)
+
+    alpha, beta_param = neutral_beta_binomial_parameters(n, u_sd, u_ds)
+    assert isclose(alpha / (alpha + beta_param), expected, abs_tol=1e-12)
+
+
+def test_neutral_symmetric_critical_mutation_rate_gives_uniform_counts():
+    n = 28
+    mu_c = neutral_symmetric_mutation_critical_rate(n)
+    assert isclose(mu_c, 1.0 / 30.0, abs_tol=1e-12)
+    assert neutral_symmetric_stationary_shape(n, mu_c) == "uniform"
+
+    probs = neutral_beta_binomial_distribution(n, mu_c, mu_c)
+    expected = 1.0 / (n + 1)
+    for p in probs:
+        assert isclose(p, expected, rel_tol=1e-11, abs_tol=1e-12)
+
+
+def test_neutral_symmetric_shape_changes_at_exact_mutation_threshold():
+    n = 40
+    mu_c = neutral_symmetric_mutation_critical_rate(n)
+    low = 0.5 * mu_c
+    high = 2.0 * mu_c
+    assert high < 0.5
+
+    assert neutral_symmetric_stationary_shape(n, low) == "boundary_biased"
+    assert neutral_symmetric_stationary_shape(n, high) == "interior_biased"
+
+    low_probs = neutral_beta_binomial_distribution(n, low, low)
+    high_probs = neutral_beta_binomial_distribution(n, high, high)
+    center = n // 2
+    assert low_probs[0] > low_probs[center]
+    assert high_probs[0] < high_probs[center]
 
 
 def test_rare_mutation_boundary_odds_match_exact_limit():
