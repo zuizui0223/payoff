@@ -1,414 +1,600 @@
-# PAYOFF — evolutionary game of compromise, persistence, and trait differentiation
+# PAYOFF — transporting ecological compromise into evolutionary population dynamics
 
-PAYOFF is a game-theoretic bridge across three sister repositories:
+PAYOFF is the population-theory bridge across three sister repositories:
 
-- [SCH](https://github.com/zuizui0223/sch): where a shared-coordinate compromise settles.
-- [BALANCE](https://github.com/zuizui0223/balance): why the shared architecture can persist despite real conflict.
-- [BITA](https://github.com/zuizui0223/bita): when extra trait dimensions become worth their cost.
+- [SCH](https://github.com/zuizui0223/sch): reconstructs conflict when multiple functions must share one phenotypic coordinate.
+- [BALANCE](https://github.com/zuizui0223/balance): identifies the domain where real conflict exists but shared architecture still pays better.
+- [BITA](https://github.com/zuizui0223/bita): measures how much extra phenotypic dimensionality recovers and when that recovery exceeds architecture cost.
 
-The central move is deliberately conservative:
+PAYOFF starts **after** those ecological quantities are defined and asks:
 
-> **SCH supplies the within-organism payoff geometry; the evolutionary game is played between alternative heritable trait architectures in a population.**
+> What evolutionary population dynamics follow when the same shared-versus-differentiated architecture payoffs are exposed to frequency dependence, finite population size, mutation, space, and time?
 
-Biological functions are payoff components, not literal strategic agents.
+Biological functions are payoff components, not literal strategic agents. The literal evolutionary game is played by alternative heritable architectures.
 
-## 1. Payoff generator: shared-trait conflict
+For the shortest conceptual map, read [`theory/PAYOFF_TRANSPORT_PRINCIPLE.md`](theory/PAYOFF_TRANSPORT_PRINCIPLE.md).
 
-For two functions with preferred trait values `theta1`, `theta2` and weights `a,b>0`,
+---
 
-```text
-loss_shared(z)=a(z-theta1)^2+b(z-theta2)^2.
-```
+## 1. Invariant upstream bridge
 
-The unique compromise and conflict load are
+Two functions prefer `theta1` and `theta2` but share trait `z`:
 
 ```text
-zS*=(a theta1+b theta2)/(a+b)
-L=[ab/(a+b)](theta1-theta2)^2.
+loss_S(z)
+= a(z-theta1)^2+b(z-theta2)^2.
 ```
 
-For `n` functions,
+The unique shared compromise is
 
 ```text
-L_n
-= sum_i a_i(theta_i-theta_bar)^2
-= [1/(sum_i a_i)] sum_{i<j} a_i a_j(theta_i-theta_j)^2.
+z_S*=(a theta1+b theta2)/(a+b)
 ```
 
-## 2. Exact dimensional-release bridge
+with conflict load
+
+```text
+L
+= [ab/(a+b)](theta1-theta2)^2.
+```
 
 For differentiated coordinates `x,y` with residual coupling `c>=0`,
 
 ```text
-loss_diff(x,y)
-= a(x-theta1)^2+b(y-theta2)^2+c(x-y)^2.
+loss_D(x,y)
+= a(x-theta1)^2
++ b(y-theta2)^2
++ c(x-y)^2.
 ```
 
 Optimization gives
 
 ```text
-s=|x*-y*|/|theta1-theta2|
- =ab/[ab+c(a+b)]
+s
+= |x*-y*|/|theta1-theta2|
+= ab/[ab+c(a+b)]
 ```
 
-and the exact recovered compromise loss
+and the exact quadratic identity
 
 ```text
-R=L-LD=sL.
+R=sL.
 ```
 
-With added architecture cost `K>=0`,
+With added architecture cost `K`,
 
 ```text
-phi=WD*-WS*=R-K=sL-K.
+phi
+= W_D*-W_S*
+= R-K
+= sL-K.
 ```
 
-Thus
+This is the central quantity transported through the rest of the repository.
 
 ```text
-L=0                 no shared-axis conflict
-L>0, phi<0          BALANCE: conflict exists, shared architecture still wins
-phi=0               architecture critical surface
+L=0                 no shared-coordinate conflict
+L>0, phi<0          BALANCE: conflict but shared architecture wins
+phi=0               static architecture crossing
 phi>0               BITA: differentiated architecture wins.
 ```
 
-For `0<K<L`,
+---
+
+## 2. Well-mixed evolutionary game
+
+Let `p` be differentiated-architecture frequency and add minimal linear frequency feedback:
 
 ```text
-c_crit=ab(L-K)/[K(a+b)].
-```
-
-## 3. Population evolutionary game
-
-Let `p` be the frequency of differentiated architecture `D`. Add minimal ecological frequency feedback:
-
-```text
-Delta(p)=payoff_D-payoff_S
-        =phi+eta(2p-1).
-```
-
-One symmetric payoff matrix is
-
-```text
-          S          D
-S         0       phi-eta
-D      phi-eta      2phi.
+Delta(p)
+= payoff_D-payoff_S
+= phi+eta(2p-1).
 ```
 
 Replicator dynamics are
 
 ```text
-dp/dt=p(1-p)Delta(p).
+dp/dt
+= p(1-p)Delta(p).
 ```
 
-The strict deterministic phases are
+Strict phases:
 
 ```text
-phi<-|eta|                  shared dominance
-phi>|eta|                   differentiated dominance
-|phi|<|eta|, eta<0          stable architecture coexistence
-|phi|<|eta|, eta>0          coordination bistability.
+phi<-|eta|               shared dominance
+phi>|eta|                differentiated dominance
+|phi|<|eta|, eta<0       stable reciprocal coexistence
+|phi|<|eta|, eta>0       coordination bistability.
 ```
 
-The interior equilibrium/threshold is
+Reciprocal rare-invasion boundaries are
 
 ```text
-p*=(1-phi/eta)/2.
+phi=+eta
+phi=-eta
 ```
 
-At `phi=0`, negative frequency dependence gives `p*=1/2`; positive frequency dependence gives equal deterministic basin widths.
-
-## 4. Environmental phase diagram: one crossing becomes two invasion surfaces
-
-Write `R=sL`. Rare-architecture invasion margins are
+or on the architecture-cost scale
 
 ```text
-I_D=Delta(0)=R-K-eta
-I_S=-Delta(1)=K-R-eta.
+K=R-eta
+K=R+eta.
 ```
 
-Neutral invasion surfaces are
+Thus static architecture advantage and invasion from rarity are different estimands.
 
-```text
-K_D=R-eta
-K_S=R+eta.
-```
+---
 
-For fixed `s` these are two planes in `(L,K,eta)` space:
+## 3. Finite populations and recurrent mutation
 
-```text
-K=sL-eta
-K=sL+eta.
-```
-
-The game-generated middle region has exact cost width
-
-```text
-W_K=2|eta|.
-```
-
-Reciprocal neutral-cost thresholds identify
-
-```text
-R=(K_D+K_S)/2
-eta=(K_S-K_D)/2.
-```
-
-Along a linear environmental gradient `phi(e)=alpha(e-e0)`, the two invasion transitions are separated by
-
-```text
-W_e=2|eta|/|alpha|.
-```
-
-See [`theory/ENVIRONMENTAL_PHASE_DIAGRAM.md`](theory/ENVIRONMENTAL_PHASE_DIAGRAM.md).
-
-## 5. Finite populations: stochastic fixation and critical mass
-
-For population size `N`, self-excluding interactions give
+Under the declared self-excluding exponential-fitness Moran process,
 
 ```text
 Delta_N(i)
-=[phi(N-2)+eta(2i-N)]/(N-1).
+= [phi(N-2)+eta(2i-N)]/(N-1).
 ```
 
-Using `f=exp(beta*pi)`, reciprocal single-mutant fixation obeys the exact ratio
+Exact reciprocal single-mutant fixation ordering is
 
 ```text
-rho_D/rho_S=exp[beta phi(N-2)].
+rho_D/rho_S
+= exp[beta phi(N-2)].
 ```
 
-Thus, for `N>2`, `beta>0`,
+Hence
 
 ```text
-rho_D>rho_S iff phi>0 iff sL>K.
+rho_D>rho_S
+iff
+phi>0.
 ```
 
 Under weak selection,
 
 ```text
 rho_D>1/N iff 3phi>eta
-rho_S>1/N iff -3phi>eta.
+rho_S>1/N iff -3phi>eta,
 ```
 
-Equivalently,
+mapping the established one-third-law machinery onto `phi=sL-K`.
+
+With recurrent mutation, the exact stationary birth-death distribution is computed by detailed balance. In the rare-mutation limit,
 
 ```text
-D single mutant favored: K<R-eta/3
-S single mutant favored: K>R+eta/3.
+log(Pi_N/Pi_0)
+-> log(u_SD/u_DS)
+   + beta(N-2)phi.
 ```
 
-The deterministic interaction band has width `2|eta|`; the weak-selection stochastic core has width `2|eta|/3`.
+So mutation bias and architecture selection add on the long-run monomorphic log-odds scale.
 
-For arbitrary starting count `i`, the exact D-fixation probability is
+Neutral recurrent mutation is an exact beta-binomial negative control. For symmetric mutation `mu`, the neutral stationary shape changes at
 
 ```text
-rho_i
-= [sum_{k=0}^{i-1} exp(-beta C_k)]
-  /[sum_{k=0}^{N-1} exp(-beta C_k)],
+mu_c=1/(N+2).
+```
+
+---
+
+## 4. Space: from local architecture gaps to spectral invasion
+
+Patch `j` has its own
+
+```text
+phi_j=s_jL_j-K_j.
+```
+
+Rare-D and rare-S local margins are
+
+```text
+r_j^D=phi_j-eta_j
+r_j^S=-phi_j-eta_j.
+```
+
+On an undirected patch graph with Laplacian `L_G` and migration `m`, the exact linear invasion operators are
+
+```text
+A_D=diag(r^D)-mL_G
+A_S=diag(r^S)-mL_G.
+```
+
+Metapopulation invasion is determined by the principal eigenvalues
+
+```text
+Lambda_D=lambda_max(A_D)
+Lambda_S=lambda_max(A_S).
+```
+
+For heterogeneous connected landscapes, increasing conservative migration reduces the principal growth rate from the best local source toward the landscape mean.
+
+If
+
+```text
+max_j r_j>0>mean_j r_j,
+```
+
+there is one critical migration rate separating low-migration source rescue from high-migration dilution.
+
+For two patches,
+
+```text
+Lambda(m)
+=
+[r1+r2-2m
+ +sqrt((r1-r2)^2+4m^2)]/2.
+```
+
+If one patch is a source, the other a sink, and the mean is negative,
+
+```text
+m_c
+= r1 r2/(r1+r2).
+```
+
+A local BITA source can therefore maintain D even in a landscape whose average static architecture gap lies on the BALANCE side.
+
+---
+
+## 5. Time: commuting null and noncommuting temporal premium
+
+If every patch receives the same additive temporal forcing,
+
+```text
+A(t)=A0+q(t)I,
+```
+
+then exactly
+
+```text
+Lambda_temporal
+= lambda_max(A0)+mean(q).
+```
+
+Zero-mean common fluctuations have no extra temporal effect. This is the registered temporal null.
+
+When relative patch quality changes through time, seasonal operators can fail to commute. In the two-patch model,
+
+```text
+[A_a,A_b]
+propto
+m[(r_1a-r_2a)-(r_1b-r_2b)].
+```
+
+So temporal structure beyond the mean requires both migration and seasonal change in relative patch quality.
+
+For exactly two seasons, PAYOFF has an exact scalar Floquet formula and, under the declared symmetric two-patch assumptions,
+
+```text
+Lambda_F
+>= lambda_max(A_bar).
+```
+
+The difference is the non-negative temporal premium.
+
+Under rapid switching,
+
+```text
+Lambda_F-lambda_max(A_bar)
+=
+T^2 w^2(1-w)^2
+m^2(Delta patch contrast)^2
+/[24 delta_bar]
++O(T^4).
+```
+
+---
+
+## 6. Anti-phase source switching: exact migration optimum
+
+The cleanest temporal specialization swaps which patch is favorable every equal-length season:
+
+```text
+season A: (r_bar+x, r_bar-x)
+season B: (r_bar-x, r_bar+x).
+```
+
+With season duration `tau`, the exact Floquet exponent is
+
+```text
+Lambda_F
+=
+r_bar-m
++(1/tau)
+asinh[
+  m/sqrt(m^2+x^2)
+  *sinh(tau sqrt(m^2+x^2))
+].
+```
+
+The time-average prediction is simply
+
+```text
+Lambda_avg=r_bar.
+```
+
+Define the temporal premium
+
+```text
+P=Lambda_F-r_bar.
+```
+
+For every nonzero seasonal contrast:
+
+```text
+P(0)=0,
+P(m)>0 for finite m>0,
+P(m)->0 as m->infinity.
+```
+
+PAYOFF now proves more strongly that **the exact premium has one unique migration maximum for every nonzero contrast**.
+
+Using
+
+```text
+u=m tau
+v=|x|tau,
+```
+
+the exact optimum is one function
+
+```text
+u_star(v).
+```
+
+Its limits are
+
+```text
+v->0:
+nu_star -> 1.60611529880277...
+
+v->infinity:
+nu_star = 1+1/v+O(v^-2).
+```
+
+Thus the optimal migration timescale stays comparable to the seasonal-switching timescale.
+
+---
+
+## 7. Temporal inversion of positive-frequency coordination
+
+Suppose the anti-phase variable is the static architecture gap itself:
+
+```text
+season A phi: (phi_bar+x, phi_bar-x)
+season B phi: (phi_bar-x, phi_bar+x)
+```
+
+with common `eta>0`.
+
+Both reciprocal architecture invasion edges receive the same exact premium `P`:
+
+```text
+Lambda_D
+= phi_bar-eta+P
+
+Lambda_S
+= -phi_bar-eta+P.
+```
+
+Therefore define the edge-level effective coordination coefficient
+
+```text
+eta_eff=eta-P.
+```
+
+At `phi_bar=0`:
+
+```text
+P<eta    coordination
+P=eta    reciprocal boundaries collapse
+P>eta    reciprocal invasion.
+```
+
+Because `P(m)` is exactly unimodal, if
+
+```text
+P_max>eta+|phi_bar|,
+```
+
+there are exactly two migration boundaries
+
+```text
+m_-<m_+
+```
+
+and one uniquely bounded intermediate-migration interval in which both architectures invade.
+
+---
+
+## 8. Universal weak-contrast constants and exact critical contrast
+
+For weak seasonal contrast
+
+```text
+v=|x|tau <<1,
+```
+
+```text
+tau P
+= v^2 H(u)+O(v^4),
+```
+
+where
+
+```text
+H(u)
+= [u-tanh u]/(2u^2).
+```
+
+`H` has one unique maximum at
+
+```text
+u*=1.60611529880277...
 ```
 
 with
 
 ```text
-C_k=k[phi(N-2)+eta(k+1-N)]/(N-1).
+H*=0.132487539446827....
 ```
 
-This defines a stochastic critical mass
+Hence
 
 ```text
-m_q=min{i: rho_i>=q},
+m_opt tau
+~=1.6061153
 ```
 
-such as `m_0.5`, the minimum starting number of differentiated individuals required for at least 50% fixation probability.
-
-See [`theory/FINITE_POPULATION_MORAN.md`](theory/FINITE_POPULATION_MORAN.md) and [`theory/STOCHASTIC_ARCHITECTURE_BARRIER.md`](theory/STOCHASTIC_ARCHITECTURE_BARRIER.md).
-
-## 6. Recurrent mutation: long-run stationary architecture occupancy
-
-With offspring mutation
+and
 
 ```text
-S -> D at rate u_SD
-D -> S at rate u_DS,
+P_max
+~=0.13248754 x^2 tau.
 ```
 
-both positive, the finite Moran chain is irreducible. Its exact stationary distribution satisfies detailed balance:
+At `phi_bar=0`, weak-contrast temporal inversion requires approximately
 
 ```text
-Pi_i/Pi_{i-1}
-= T_{i-1}^+/T_i^-,
+x^2 tau/eta
+>7.547879628343014....
 ```
 
-so
+Beyond the weak approximation, PAYOFF proves the exact maximum premium
 
 ```text
-Pi_i
-= Pi_0 prod_{j=1}^i T_{j-1}^+/T_j^-.
+M(v)=max_u F(u,v)
 ```
 
-This predicts the full long-run architecture-frequency profile, including mean `D` frequency, boundary mass, interior polymorphism mass, and stationary modes.
-
-In the rare-mutation limit,
+is strictly increasing in `v`. Therefore every positive barrier
 
 ```text
-log(Pi_N/Pi_0)
--> log(u_SD/u_DS)+beta*phi*(N-2)
+B=(eta+|phi_bar|)tau
 ```
 
-up to the fixed mutation-rate ratio used in the limit. Substituting `phi=sL-K`,
+has one unique critical seasonal contrast
 
 ```text
-log(Pi_N/Pi_0)
--> log(u_SD/u_DS)+beta(N-2)(sL-K).
+M(v_c)=B.
 ```
 
-Hence mutation bias and architecture quality combine additively on the long-run monomorphic log-odds scale.
-
-For symmetric rare mutation,
+So the exact temporal question has a three-step answer:
 
 ```text
-Pi_N=Pi_0 iff phi=0 iff K=sL.
+v<v_c
+    no migration treatment can create reciprocal invasion
+
+v=v_c
+    one tangent migration point
+
+v>v_c
+    exactly two migration boundaries
+    enclosing one reciprocal-invasion island.
 ```
 
-For asymmetric rare mutation the equal-occupancy crossing shifts to
+---
 
-```text
-phi_mut=-log(u_SD/u_DS)/[beta(N-2)]
-```
+## 9. Payoff transport is the organizing principle
 
-or
+The repository is not intended as a list of unrelated population models.
 
-```text
-K_mut=R+log(u_SD/u_DS)/[beta(N-2)].
-```
-
-Thus mutation bias toward `D` can sustain greater long-run differentiated occupancy at architecture costs that would lie on the static shared-favored side, while mutation bias toward `S` shifts the crossing in the opposite direction.
-
-See [`theory/RECURRENT_MUTATION_STATIONARY.md`](theory/RECURRENT_MUTATION_STATIONARY.md).
-
-## 7. Switching costs and hysteresis
-
-If switching `S -> D` costs `C_SD`, switching `D -> S` costs `C_DS`, amortized over horizon `T`, either inherited state can persist whenever
-
-```text
--C_DS/T <= Delta(p) <= C_SD/T.
-```
-
-The hysteresis width is
-
-```text
-(C_SD+C_DS)/T.
-```
-
-Frequency-dependent coordination and structural switching costs are separate mechanisms.
-
-## 8. Many functions: coupling networks and modularization
-
-For a network of functional trait coordinates,
-
-```text
-D_lambda(x)
-=(x-theta)^T A(x-theta)+lambda x^T L_G x.
-```
-
-For a connected coupling graph,
-
-```text
-x_lambda*=(A+lambda L_G)^(-1)A theta.
-```
-
-Increasing integration `lambda` increases optimized loss monotonically, strictly when function-specific optima differ, from `D_0*=0` toward the fully shared load `L_n`. If `0<K<L_n`, one critical integration strength separates profitable from unprofitable release.
-
-See [`theory/NETWORK_EXTENSION.md`](theory/NETWORK_EXTENSION.md).
-
-## 9. Multiple architectures form a potential game
-
-For candidate architectures with symmetric interaction matrix `A`, the multi-strategy replicator equation satisfies
-
-```text
-d/dt(p^T A p)
-=2 sum_i p_i(pi_i-pi_bar)^2
->=0.
-```
-
-The two-strategy game has explicit potential
-
-```text
-V(p)=2(phi-eta)p+2eta p^2
-```
-
-with
-
-```text
-dV/dt=2p(1-p)Delta(p)^2>=0.
-```
-
-See [`theory/MULTI_ARCHITECTURE_GAME.md`](theory/MULTI_ARCHITECTURE_GAME.md) and [`theory/POTENTIAL_AND_RISK_DOMINANCE.md`](theory/POTENTIAL_AND_RISK_DOMINANCE.md).
-
-## 10. Current theorem-level results
-
-Current analytic results include:
-
-1. unique shared compromise and exact conflict load;
-2. `n`-function conflict as weighted pairwise disagreement;
-3. exact partial release `R=sL` in the quadratic residual-coupling model;
-4. explicit critical residual coupling;
-5. static SCH/BALANCE/BITA partition by `phi=sL-K`;
-6. complete deterministic two-strategy phase classification;
-7. reciprocal invasion surfaces `K=R+-eta` and game-middle width `2|eta|`;
-8. reciprocal-threshold identification of `R` and `eta`;
-9. linear environmental transition width `2|eta|/|alpha|`;
-10. switching-cost hysteresis;
-11. potential/risk-dominance results;
-12. many-function network-coupling monotonicity;
-13. exact finite-population Moran fixation formula;
-14. exact reciprocal fixation ratio `rho_D/rho_S=exp[beta phi(N-2)]`;
-15. weak-selection architecture one-third criterion `3phi>eta`;
-16. stochastic-core width `2|eta|/3`;
-17. exact arbitrary-initial-count fixation curve `rho_i` and stochastic critical mass `m_q`;
-18. exact recurrent-mutation stationary distribution by detailed balance;
-19. rare-mutation monomorphic occupancy odds;
-20. mutation-bias-shifted long-run architecture crossing.
-
-## 11. Repository map
-
-```text
-theory/THEOREMS.md                    core deterministic proofs
-theory/ENVIRONMENTAL_PHASE_DIAGRAM.md L-K-eta invasion surfaces
-theory/FINITE_POPULATION_MORAN.md     stochastic finite-population fixation
-theory/STOCHASTIC_ARCHITECTURE_BARRIER.md arbitrary-count fixation / critical mass
-theory/RECURRENT_MUTATION_STATIONARY.md recurrent-mutation stationary theory
-theory/NETWORK_EXTENSION.md           n-function coupling graph theory
-theory/MULTI_ARCHITECTURE_GAME.md     many-architecture potential game
-theory/POTENTIAL_AND_RISK_DOMINANCE.md two-strategy potential and basin results
-docs/SCH_BALANCE_BITA_BRIDGE.md       cross-repository interface
-docs/FINITE_POPULATION_HANDOFF.md     empirical finite-population handoff
-docs/CLAIM_BOUNDARY.md                scientific claim ceiling
-docs/PRIOR_ART_BOUNDARY.md            novelty/prior-art boundary
-src/payoff_game.py                    deterministic reference implementation
-src/finite_population.py              Moran fixation implementation
-src/mutation_stationary.py            recurrent-mutation stationary implementation
-scripts/release_curve.py              fixation probability vs starting count
-scripts/stationary_profile.py         long-run stationary frequency profile
-tests/                                algebraic and stochastic regressions
-.github/workflows/test.yml            automated verification
-```
-
-## 12. Main interpretation
-
-The hierarchy is now
+The same upstream quantity is carried through each layer:
 
 ```text
 functional conflict
--> shared compromise load L
--> dimensional recovery R=sL
--> static architecture gap phi=R-K
--> reciprocal invasion under eta
--> deterministic ESS/coexistence/coordination
--> finite-population fixation under N and beta
--> recurrent-mutation stationary occupancy under u_SD,u_DS.
+    L
+    |
+    v
+dimensional recovery
+    R=sL
+    |
+    v
+costed architecture gap
+    phi=R-K
+    |
+    +--> frequency-dependent invasion
+    +--> finite fixation
+    +--> mutation-selection occupancy
+    +--> spatial spectral growth
+    +--> temporal Floquet growth.
 ```
 
-The general question is therefore:
+The population process changes the downstream estimand; it does not retroactively redefine the ecological compromise receipt.
 
-> **When does evolution tolerate a shared-trait compromise, when does dimensional release become worthwhile, when can the alternative architecture invade, when will a finite population cross the architecture barrier, and which architectures dominate long-run occupancy when mutation keeps reintroducing both states?**
+---
+
+## 10. Where to read next
+
+Use these entry points:
+
+```text
+theory/PAYOFF_TRANSPORT_PRINCIPLE.md
+    compact cross-scale logic
+
+docs/CANONICAL_READER_PATH.md
+    full reading order
+
+theory/BOUNDARY_ATLAS.md
+    keeps static/invasion/fixation/occupancy/spatial/temporal boundaries separate
+
+docs/SCH_BALANCE_BITA_BRIDGE.md
+    ownership of L,s,R,K across sister repositories
+
+docs/TEMPORAL_HANDOFF.md
+    prospective temporal experiment design
+
+docs/CLAIM_BOUNDARY.md
+    scientific claim ceiling
+
+docs/PRIOR_ART_BOUNDARY.md
+    broad prior-art boundary
+
+docs/SPATIAL_PRIOR_ART_BOUNDARY.md
+    spatial claim boundary
+
+docs/TEMPORAL_PRIOR_ART_BOUNDARY.md
+    Floquet/dispersal temporal claim boundary.
+```
+
+Key temporal theorem files:
+
+```text
+theory/TWO_SEASON_TEMPORAL_PREMIUM.md
+theory/ANTI_PHASE_SEASONAL_RESCUE.md
+theory/EXACT_ANTI_PHASE_OPTIMUM.md
+theory/WEAK_CONTRAST_UNIVERSAL_MIGRATION_OPTIMUM.md
+theory/TEMPORAL_COORDINATION_INVERSION.md
+theory/TEMPORAL_PHASE_DIAGRAM.md
+theory/CRITICAL_SEASONAL_CONTRAST.md.
+```
+
+---
+
+## 11. Claim boundary
+
+PAYOFF does **not** claim to invent:
+
+```text
+specialization,
+modularity,
+frequency-dependent selection,
+Moran processes,
+one-third law,
+mutation-selection balance,
+evolutionary graph theory,
+source-sink spectral theory,
+Floquet theory,
+Golden-Thompson,
+or dispersal-induced growth.
+```
+
+The candidate contribution is narrower:
+
+> **an explicit, testable transport from measurable shared-trait ecological compromise `L`, through recovered dimensional value `R=sL` and architecture gap `phi=sL-K`, into reciprocal invasion, fixation, long-run occupancy, spatial source-sink, and temporal architecture predictions.**
+
+Every exact formula remains conditional on its declared model assumptions.
+
+---
+
+## 12. Main question
+
+> **When does evolution tolerate a shared-trait compromise, when does extra phenotypic dimensionality pay for itself, and how do frequency dependence, drift, mutation, space, and time change whether shared versus differentiated architectures can invade, persist, fix, coexist, or switch dominance?**
