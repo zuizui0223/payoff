@@ -7,6 +7,10 @@ from src.anti_phase_temporal import (
     rescue_condition,
     small_migration_slope,
     strong_migration_premium_asymptotic,
+    weak_contrast_max_premium_approx,
+    weak_contrast_optimal_dimensionless_migration,
+    weak_contrast_optimal_migration,
+    weak_contrast_shape,
 )
 from src.two_patch_floquet import two_season_closed_form
 
@@ -66,7 +70,6 @@ def test_strong_migration_asymptotic():
 
 
 def test_intermediate_migration_can_rescue_negative_mean_margin():
-    # The average landscape is a sink, but anti-phase switching plus migration rescues it.
     rbar = -0.08
     x = 1.5
     tau = 1.0
@@ -79,7 +82,48 @@ def test_temporal_premium_has_an_interior_peak_in_representative_case():
     x = 1.5
     tau = 1.0
     low = anti_phase_temporal_premium(x, 1e-6, tau)
-    middle = max(anti_phase_temporal_premium(x, m, tau) for m in [0.05, 0.1, 0.2, 0.4, 0.8, 1.6, 3.2])
+    middle = max(
+        anti_phase_temporal_premium(x, m, tau)
+        for m in [0.05, 0.1, 0.2, 0.4, 0.8, 1.6, 3.2]
+    )
     high = anti_phase_temporal_premium(x, 100.0, tau)
     assert middle > low
     assert middle > high
+
+
+def test_weak_contrast_universal_optimum_constant():
+    u_star = weak_contrast_optimal_dimensionless_migration()
+    assert isclose(u_star, 1.60611529880277, rel_tol=1e-12, abs_tol=1e-12)
+    assert isclose(
+        weak_contrast_shape(u_star),
+        0.1324875394468274,
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+
+
+def test_weak_contrast_shape_is_maximized_at_u_star():
+    u_star = weak_contrast_optimal_dimensionless_migration()
+    peak = weak_contrast_shape(u_star)
+    for u in [0.05, 0.2, 0.5, 1.0, 2.0, 4.0, 10.0]:
+        assert peak > weak_contrast_shape(u)
+
+
+def test_weak_contrast_optimal_migration_scales_as_inverse_season_duration():
+    u_star = weak_contrast_optimal_dimensionless_migration()
+    for tau in [0.5, 1.0, 2.0, 4.0]:
+        assert isclose(
+            weak_contrast_optimal_migration(tau) * tau,
+            u_star,
+            rel_tol=1e-12,
+            abs_tol=1e-12,
+        )
+
+
+def test_weak_contrast_max_premium_approximation_matches_exact_small_contrast():
+    tau = 1.0
+    x = 0.05
+    m = weak_contrast_optimal_migration(tau)
+    exact = anti_phase_temporal_premium(x, m, tau)
+    approx = weak_contrast_max_premium_approx(x, tau)
+    assert isclose(exact, approx, rel_tol=1e-4, abs_tol=1e-10)
