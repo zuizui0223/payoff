@@ -20,3 +20,4 @@ jobs:
       - run: python scripts/finite_population_sweep.py --n 20 --beta 0.05 --phi-min -0.2 --phi-max 0.2 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_finite_population_grid.csv
       - run: python scripts/release_curve.py --n 30 --phi 0.2 --eta 1.0 --beta 1.0 --output outputs/ci_release_curve.csv
       - run: python scripts/stationary_profile.py --n 30 --phi 0.1 --eta -0.8 --beta 0.5 --u-sd 0.01 --u-ds 0.02 --output outputs/ci_stationary_profile.csv
+      - run: python scripts/spatial_two_patch_sweep.py --eta 1.0 --m-min 0 --m-max 0.3 --step 0.05 --output outputs/ci_spatial_two_patch.csv
