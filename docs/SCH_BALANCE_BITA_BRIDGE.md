@@ -25,7 +25,7 @@ Empirically, SCH should continue to distinguish state-specific optima from stric
 
 ### BALANCE
 
-BALANCE owns the middle world in which conflict exists but the shared architecture still has higher optimized payoff.
+BALANCE owns the middle world in which conflict exists but the shared architecture still has higher optimized frequency-independent payoff.
 
 ```text
 L > 0
@@ -38,26 +38,13 @@ PAYOFF preserves BALANCE's reserve
 rho = K-sL = -phi > 0
 ```
 
-in the frequency-independent case.
+on the static common fitness scale.
 
-When population feedback is added, BALANCE-like persistence can extend beyond the static sign of `phi` because the realized invasion payoff is
-
-```text
-Delta(p)=phi+eta(2p-1).
-```
-
-This extension must be labeled as PAYOFF game dynamics rather than silently back-projected into BALANCE.
+Frequency-dependent persistence or invasion beyond that static domain must be labeled as PAYOFF game dynamics rather than silently back-projected into BALANCE.
 
 ### BITA
 
 BITA owns the differentiated-coordinate world and mechanism identification after multiple axes exist.
-
-PAYOFF gives an exact quadratic realization of BITA's partial differentiation parameter:
-
-```text
-s = |x*-y*|/|theta1-theta2|
-  = ab/[ab+c(a+b)].
-```
 
 For the residual-coupling loss
 
@@ -65,7 +52,14 @@ For the residual-coupling loss
 LD(x,y)=a(x-theta1)^2+b(y-theta2)^2+c(x-y)^2,
 ```
 
-recovered conflict loss satisfies exactly
+PAYOFF gives the exact quadratic realization
+
+```text
+s = |x*-y*|/|theta1-theta2|
+  = ab/[ab+c(a+b)]
+```
+
+and
 
 ```text
 R=sL.
@@ -77,11 +71,13 @@ Therefore
 phi = WD*-WS* = R-K = sL-K.
 ```
 
-This is the exact algebraic bridge from the one-coordinate loss to the architecture comparison.
+This is the exact algebraic bridge from SCH's one-coordinate conflict loss to the BALANCE/BITA architecture comparison.
 
-## 2. PAYOFF adds a new level rather than replacing the three chapters
+---
 
-The sister repositories stop at optimized fitness geometry and persistence across environments/history. PAYOFF adds population-frequency dependence:
+## 2. PAYOFF adds a population level rather than replacing the three chapters
+
+The sister repositories stop at optimized fitness geometry, architecture comparison, persistence, and mechanism identification. PAYOFF adds population-frequency dependence:
 
 ```text
 p = frequency of differentiated architecture D
@@ -89,15 +85,7 @@ Delta(p)=pi_D(p)-pi_S(p)=phi+eta(2p-1)
 dp/dt=p(1-p)Delta(p).
 ```
 
-This creates three new evolutionary outcomes unavailable from `phi` alone:
-
-```text
-eta < 0, |phi|<|eta| -> stable architecture polymorphism
-eta > 0, |phi|<eta   -> coordination threshold / bistability
-|phi|>|eta|          -> architecture dominance
-```
-
-Thus the full hierarchy is
+The full hierarchy is
 
 ```text
 SCH
@@ -113,8 +101,10 @@ How much conflict loss can extra dimensionality recover, at what cost, and by wh
         |
         v
 PAYOFF
-Given those architecture payoffs, what population state is evolutionarily stable when payoffs depend on architecture frequency and switching history?
+Given those architecture payoffs, can an alternative invade, coexist, cross a coordination barrier, or remain history dependent when payoff depends on architecture frequency?
 ```
+
+---
 
 ## 3. Static three-world diagram
 
@@ -127,10 +117,10 @@ shared favored <--------- 0 ---------> differentiated favored
    BALANCE                                  BITA
 ```
 
-The architecture boundary is
+The static architecture boundary is
 
 ```text
-K=sL.
+K=sL=R.
 ```
 
 In the exact residual-coupling model,
@@ -139,60 +129,208 @@ In the exact residual-coupling model,
 s(c)=ab/[ab+c(a+b)].
 ```
 
-Hence the critical coupling is obtained from
-
-```text
-K = L ab/[ab+c_crit(a+b)].
-```
-
-When `0<K<L`, solving gives
+When `0<K<L`, the critical coupling is
 
 ```text
 c_crit = ab(L-K)/[K(a+b)].
 ```
 
-Interpretation:
+Thus
 
 ```text
 c > c_crit  -> too much residual integration; shared wins
-c = c_crit  -> architecture crossing
+c = c_crit  -> static architecture crossing
 c < c_crit  -> sufficient release; differentiated wins.
 ```
 
-If `K>=L`, even full decoupling (`s=1`) cannot pay. If `K=0` and `L>0`, any finite release with `s>0` favors differentiation.
+If `K>=L`, even full decoupling (`s=1`) cannot pay in the static model. If `K=0` and `L>0`, any finite positive release favors differentiation.
 
-## 4. Game-theoretic phase diagram
+---
 
-Define
+## 4. PAYOFF splits the static crossing into reciprocal invasion surfaces
+
+Rare `D` in an `S` resident population has margin
 
 ```text
-Delta(0)=phi-eta
-Delta(1)=phi+eta.
+I_D = Delta(0)=phi-eta=R-K-eta.
 ```
 
-### Negative feedback (`eta<0`)
+Rare `S` in a `D` resident population has margin
 
-When `|phi|<|eta|`, neither pure architecture can exclude the other and the population converges to
+```text
+I_S = -Delta(1)=-phi-eta=K-R-eta.
+```
+
+Therefore the neutral invasion surfaces are
+
+```text
+Sigma_D: K=R-eta
+Sigma_S: K=R+eta.
+```
+
+For fixed `s`, in `(L,K,eta)` coordinates:
+
+```text
+Sigma_D: K=sL-eta
+Sigma_S: K=sL+eta.
+```
+
+They collapse onto the sister-repository static crossing only at
+
+```text
+eta=0,
+K=sL.
+```
+
+The strict population-game partition is
+
+```text
+K > R+|eta|                -> shared dominance
+K < R-|eta|                -> differentiated dominance
+|K-R|<|eta| and eta<0      -> stable coexistence
+|K-R|<|eta| and eta>0      -> coordination bistability.
+```
+
+The width of the game-generated middle region on the architecture-cost axis is
+
+```text
+2|eta|.
+```
+
+This distinction is essential:
+
+```text
+BALANCE/BITA boundary = static optimized worldline comparison
+PAYOFF boundaries     = reciprocal population invasion conditions.
+```
+
+---
+
+## 5. What happens to `phi=0` after frequency dependence is added?
+
+The static gap remains meaningful but changes role.
+
+### `eta=0`
+
+```text
+phi=0
+```
+
+is the architecture selection boundary.
+
+### `eta<0`
+
+Within the coexistence wedge,
 
 ```text
 p*=(1-phi/eta)/2.
 ```
 
-This is a stable mixed architecture state.
-
-### Positive feedback (`eta>0`)
-
-When `|phi|<eta`, both pure architectures are locally stable and
+Hence
 
 ```text
-p*=(1-phi/eta)/2
+phi<0 -> D minority
+phi=0 -> p*=1/2
+phi>0 -> D majority.
 ```
 
-is an unstable invasion threshold. Initial architecture frequency determines the final state.
+So the static BALANCE/BITA crossing becomes a coexistence-composition boundary.
 
-This is a genuine coordination game layered on top of the SCH/BALANCE/BITA payoff generator.
+### `eta>0`
 
-## 5. Hysteresis is not the same as positive frequency dependence
+Within the coordination wedge, the same `p*` is the unstable basin threshold. The deterministic basin lengths are
+
+```text
+B_S=p*
+B_D=1-p*.
+```
+
+Therefore
+
+```text
+phi<0 -> S has the larger basin
+phi=0 -> equal basin sizes
+phi>0 -> D has the larger basin.
+```
+
+So the static crossing becomes a risk-dominance boundary, not an invasion boundary.
+
+This is why
+
+```text
+static architecture advantage != invasion success
+```
+
+without making the static gap irrelevant.
+
+---
+
+## 6. Reciprocal invasion is an empirical identification layer
+
+If `R` and `eta` are fixed while an architecture-cost axis can be varied, the neutral thresholds are
+
+```text
+K_D=R-eta
+K_S=R+eta.
+```
+
+Therefore
+
+```text
+R   = (K_D+K_S)/2
+eta = (K_S-K_D)/2.
+```
+
+Equivalently, if endpoint payoff differences are measured directly,
+
+```text
+Delta0=Delta(0)=phi-eta
+Delta1=Delta(1)=phi+eta,
+```
+
+then
+
+```text
+phi=(Delta0+Delta1)/2
+eta=(Delta1-Delta0)/2.
+```
+
+These are algebraic identification statements under the declared linear game. They require matched context and common fitness scale; they do not guarantee that all experimental thresholds are biologically reachable.
+
+---
+
+## 7. Environmental handoff
+
+Let environment `e` change the static architecture gap:
+
+```text
+phi(e)=s(e)L(e)-K(e).
+```
+
+For constant `eta`, a continuous monotone `phi(e)` crosses at most two population-game boundaries:
+
+```text
+phi=-|eta|
+phi=+|eta|.
+```
+
+If
+
+```text
+phi(e)=alpha(e-e0),
+```
+
+the static sister-repository crossing is at `e0`, while the two PAYOFF transitions are separated by
+
+```text
+2|eta|/|alpha|.
+```
+
+Thus PAYOFF predicts a measurable widening of the architecture transition zone relative to a one-threshold static account.
+
+---
+
+## 8. Hysteresis is not the same as positive frequency dependence
 
 Two mechanisms can independently generate history dependence.
 
@@ -214,9 +352,11 @@ allow either inherited architecture to persist because transitions themselves ar
 
 The two should be estimated and tested separately. Their joint presence enlarges path dependence but does not make them the same mechanism.
 
-## 6. Empirical handoff contract
+---
 
-A future empirical PAYOFF test should not estimate everything from one uncontrolled dataset. Preferred handoff:
+## 9. Empirical handoff contract
+
+A future empirical PAYOFF test should not estimate everything from one uncontrolled dataset.
 
 ```text
 SCH receipt
@@ -225,7 +365,7 @@ SCH receipt
 - z_P*, z_G*, z_C* or stricter component optima when justified
 - conflict budget L
 
-BITA/BALANCE receipt
+BALANCE/BITA receipt
 - matched optimized shared and differentiated-accessible worldlines
 - dimensional separation s or direct recovery R
 - architecture cost K when structurally identified
@@ -234,25 +374,38 @@ BITA/BALANCE receipt
 PAYOFF-specific receipt
 - architecture frequency p manipulated or naturally replicated
 - invasion/growth/reproductive payoff of S and D across p
+- reciprocal endpoint contrasts Delta(0), Delta(1)
 - estimate eta from frequency dependence
+- independent prediction of p* when an interior equilibrium/threshold exists
 - transition-history manipulation for C_SD, C_DS when possible.
 ```
 
-The key new empirical test is therefore not merely whether `D` has higher fitness than `S`, but whether
+A particularly strong test is
 
 ```text
-[pi_D(p)-pi_S(p)] - [pi_D(p')-pi_S(p')]
+SCH/BITA/BALANCE estimate phi
++
+reciprocal invasion estimate eta
+        |
+        v
+predict p*=(1-phi/eta)/2
 ```
 
-changes systematically with architecture frequency.
+and then test that population prediction out of sample.
 
-## 7. New predictions generated by the bridge
+---
+
+## 10. New predictions generated by the bridge
 
 1. **Conflict does not imply differentiation.** `L>0` can coexist with `phi<0`.
-2. **Full release has a hard ceiling.** Since `s<=1`, differentiation is impossible in the static model when `K>=L`.
-3. **Residual integration has a critical value.** For `0<K<L`, `c_crit=ab(L-K)/[K(a+b)]` separates shared and differentiated optima.
-4. **Architecture polymorphism is possible without environmental heterogeneity.** Negative frequency dependence can stabilize `0<p*<1` in a single environment.
-5. **The static BITA boundary need not predict population outcome.** Positive frequency feedback can let either architecture persist near the crossing.
-6. **Switching hysteresis and coordination bistability are experimentally distinguishable.** One depends on transition history/cost; the other on current population frequency.
+2. **Full release has a hard static ceiling.** Since `s<=1`, differentiation cannot win on the static bridge when `K>=L`.
+3. **Residual integration has a critical value.** For `0<K<L`, `c_crit=ab(L-K)/[K(a+b)]` separates shared and differentiated static optima.
+4. **One static crossing becomes two invasion surfaces.** Their signed separation is `2eta` and absolute width is `2|eta|`.
+5. **Static BALANCE can admit rare D invasion.** Negative frequency dependence can stabilize D at low frequency despite `phi<0`.
+6. **Static BITA advantage can face a coordination barrier.** Positive `phi` need not permit D invasion from rarity when `eta>0`.
+7. **The static crossing changes role rather than disappearing.** It becomes a 50:50 composition boundary under `eta<0` and a risk-dominance boundary under `eta>0`.
+8. **Architecture polymorphism is possible without environmental heterogeneity.** Negative frequency dependence can stabilize `0<p*<1` in one environment.
+9. **Environmental transition width is quantitative.** Under a linear path it is `2|eta|/|alpha|`.
+10. **Switching hysteresis and coordination bistability are experimentally distinguishable.** One depends on transition history/cost; the other on current population frequency.
 
 These predictions are PAYOFF's main added value over a purely static trait-optimization account.
