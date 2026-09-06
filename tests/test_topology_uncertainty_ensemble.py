@@ -34,6 +34,8 @@ def test_registered_three_function_ensemble_support(tmp_path: Path):
 
     assert summary["first_pressure_edge_support"] == {"F1-F3": 1.0}
     assert summary["first_favorable_edge_support"] == {"F1-F3": 1.0}
+    assert summary["predicted_next_pressure_edge_support"] == {"F2-F3": 1.0}
+    assert summary["minimum_first_edge_uniform_margin_radius"] > 0.0
     assert summary["best_topology_support"] == {"011": 0.8, "111": 0.2}
     assert summary["greedy_final_topology_support"] == {"011": 1.0}
     assert summary["consensus_best_topology"] == "011"
@@ -51,6 +53,8 @@ def test_registered_three_function_ensemble_support(tmp_path: Path):
 
     receipts = (output_dir / "draw_receipts.csv").read_text(encoding="utf-8")
     assert "first_pressure_edge" in receipts
+    assert "predicted_next_pressure_edge" in receipts
+    assert "first_edge_uniform_margin_radius" in receipts
     assert "global_reserve" in receipts
     assert "local_reserve" in receipts
     assert "top_pair_class" in receipts
