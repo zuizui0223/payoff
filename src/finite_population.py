@@ -34,6 +34,16 @@ def finite_payoff_gap(i: int, n: int, phi: float, eta: float) -> float:
     return (phi * (n - 2) + eta * (2 * i - n)) / (n - 1)
 
 
+def finite_zero_gap_count(n: int, phi: float, eta: float) -> float:
+    """Continuous D-count at which the finite-population payoff gap is zero."""
+
+    if n < 2:
+        raise ValueError("n must be at least 2")
+    if eta == 0:
+        raise ValueError("eta must be non-zero")
+    return 0.5 * (n - phi * (n - 2) / eta)
+
+
 def cumulative_gap(k: int, n: int, phi: float, eta: float) -> float:
     """Return sum_{j=1}^k Delta_N(j), including k=0."""
 
@@ -53,21 +63,35 @@ def moran_log_fixation_ratio_d_over_s(n: int, phi: float, beta: float) -> float:
     return beta * phi * (n - 2)
 
 
+def moran_fixation_probability_from_i(
+    initial_d: int,
+    n: int,
+    phi: float,
+    eta: float,
+    beta: float = 1.0,
+) -> float:
+    """Exact probability that D fixates from an arbitrary initial D count."""
+
+    _validate_population_and_selection(n, beta)
+    if not 0 <= initial_d <= n:
+        raise ValueError("initial_d must lie in [0,n]")
+    if initial_d == 0:
+        return 0.0
+    if initial_d == n:
+        return 1.0
+
+    logs = _fixation_log_weights(n, phi, eta, beta)
+    log_denom = _logsumexp(logs)
+    log_numer = _logsumexp(logs[:initial_d])
+    return exp(log_numer - log_denom)
+
+
 def moran_fixation_probability_d(
     n: int, phi: float, eta: float, beta: float = 1.0
 ) -> float:
-    """Exact fixation probability of one D mutant in N-1 S residents.
+    """Exact fixation probability of one D mutant in N-1 S residents."""
 
-    Uses a log-sum-exp evaluation of
-        rho_D = 1 / sum_{k=0}^{N-1} exp[-beta C_k]
-    where C_k is the cumulative finite-population payoff gap.
-    """
-
-    _validate_population_and_selection(n, beta)
-    logs = [-beta * cumulative_gap(k, n, phi, eta) for k in range(n)]
-    m = max(logs)
-    log_denom = m + log(sum(exp(value - m) for value in logs))
-    return exp(-log_denom)
+    return moran_fixation_probability_from_i(1, n, phi, eta, beta)
 
 
 def moran_fixation_probability_s(
@@ -89,6 +113,35 @@ def reciprocal_fixation_probabilities(
     )
 
 
+def minimum_initial_d_for_fixation_probability(
+    n: int,
+    phi: float,
+    eta: float,
+    beta: float = 1.0,
+    target: float = 0.5,
+) -> int:
+    """Smallest initial D count whose fixation probability reaches target.
+
+    This is an exact weighted-quantile diagnostic for the declared Moran model.
+    At neutrality it reduces to ceil(target*N).
+    """
+
+    _validate_population_and_selection(n, beta)
+    if not 0.0 < target <= 1.0:
+        raise ValueError("target must lie in (0,1]")
+
+    logs = _fixation_log_weights(n, phi, eta, beta)
+    m = max(logs)
+    weights = [exp(value - m) for value in logs]
+    total = sum(weights)
+    cumulative = 0.0
+    for initial_d in range(1, n + 1):
+        cumulative += weights[initial_d - 1]
+        if cumulative / total >= target:
+            return initial_d
+    return n
+
+
 def weak_selection_scores(phi: float, eta: float) -> Tuple[float, float]:
     """Return first-order mutant-advantage scores for (D, S).
 
@@ -108,11 +161,7 @@ def weak_selection_advantage_flags(phi: float, eta: float) -> Tuple[bool, bool]:
 
 
 def weak_selection_cost_thresholds(recovery: float, eta: float) -> Tuple[float, float]:
-    """Return neutral-fixation cost thresholds (K_D_fix, K_S_fix).
-
-    D is favored over neutral drift when K < R-eta/3.
-    S is favored over neutral drift when K > R+eta/3.
-    """
+    """Return neutral-fixation cost thresholds (K_D_fix, K_S_fix)."""
 
     if recovery < 0:
         raise ValueError("recovery must be non-negative")
@@ -140,6 +189,15 @@ def deterministic_coordination_threshold(phi: float, eta: float) -> float:
     if not abs(phi) < eta:
         raise ValueError("coordination threshold requires |phi|<eta")
     return 0.5 * (1.0 - phi / eta)
+
+
+def _fixation_log_weights(n: int, phi: float, eta: float, beta: float):
+    return [-beta * cumulative_gap(k, n, phi, eta) for k in range(n)]
+
+
+def _logsumexp(values) -> float:
+    m = max(values)
+    return m + log(sum(exp(value - m) for value in values))
 
 
 def _validate_state(i: int, n: int) -> None:
