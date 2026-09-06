@@ -75,7 +75,7 @@ H_IM
   /[(k+3)(k-2)].
 ```
 
-These formulas are established prior theory; see Ohtsuki & Nowak (2006), *The replicator equation on graphs*, Journal of Theoretical Biology 243:86-97.
+These formulas are established prior theory; see Ohtsuki & Nowak (2006), *The replicator equation on graphs*, Journal of Theoretical Biology 243:86-97, DOI `10.1016/j.jtbi.2006.06.004`.
 
 ---
 
@@ -385,7 +385,7 @@ The deterministic conservative-patch model in `SPATIAL_METAPOPULATION.md` is als
 
 ## 5. Prior-art and novelty boundary
 
-Ohtsuki & Nowak already showed that regular graph structure under weak selection can be represented by a transformed payoff matrix, with update-rule-specific corrections. That is prior art. citeturn806332search2
+Ohtsuki & Nowak already showed that regular graph structure under weak selection can be represented by a transformed payoff matrix, with update-rule-specific corrections. That is prior art (DOI `10.1016/j.jtbi.2006.06.004`).
 
 PAYOFF contributes only the substitution and simplification for its ecology-calibrated matrix:
 
