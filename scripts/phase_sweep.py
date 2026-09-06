@@ -5,14 +5,18 @@ from __future__ import annotations
 
 import argparse
 import csv
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from src.payoff_game import classify_phase, interior_equilibrium
 
 
 def frange(start: float, stop: float, step: float):
     x = start
-    # Small tolerance prevents floating-point omission of the endpoint.
     while x <= stop + abs(step) * 1e-9:
         yield x
         x += step
