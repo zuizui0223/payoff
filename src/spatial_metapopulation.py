@@ -48,6 +48,84 @@ def spatial_moments(frequencies: Sequence[float]) -> Tuple[float, float, float]:
     return mean, variance, third
 
 
+def spatial_selection_coefficients(frequencies: Sequence[float]) -> Dict[str, float]:
+    """Return exact coefficients A,B in mean selection = phi*A + eta*B.
+
+    A=E[p(1-p)] is non-negative and measures the amount of within-patch
+    polymorphism available for selection to act on. B=E[p(1-p)(2p-1)] is the
+    frequency-feedback coefficient after spatial aggregation.
+    """
+
+    mu, variance, third = spatial_moments(frequencies)
+    a_direct = sum(p * (1.0 - p) for p in frequencies) / len(frequencies)
+    b_direct = sum(
+        p * (1.0 - p) * (2.0 * p - 1.0) for p in frequencies
+    ) / len(frequencies)
+    a_moments = mu * (1.0 - mu) - variance
+    b_moments = (
+        mu * (1.0 - mu) * (2.0 * mu - 1.0)
+        + variance * (3.0 - 6.0 * mu)
+        - 2.0 * third
+    )
+    return {
+        "mean_frequency": mu,
+        "variance": variance,
+        "third_central_moment": third,
+        "A": a_direct,
+        "B": b_direct,
+        "A_from_moments": a_moments,
+        "B_from_moments": b_moments,
+    }
+
+
+def aggregated_zero_growth_phi(
+    frequencies: Sequence[float], eta: float, tol: float = 1e-15
+) -> Optional[float]:
+    """Return phi for zero instantaneous metapopulation mean change.
+
+    Since d(mean p)/dt = phi*A + eta*B under symmetric conservative
+    migration, the zero-growth value is phi=-eta*B/A whenever A>0.
+    If A=0, every patch is at p=0 or p=1 and local selection is instantaneously
+    zero for all phi,eta, so no unique zero-growth phi exists and None is
+    returned.
+    """
+
+    coeffs = spatial_selection_coefficients(frequencies)
+    a = coeffs["A"]
+    if abs(a) <= tol:
+        return None
+    return -eta * coeffs["B"] / a
+
+
+def infer_phi_from_spatial_mean_change(
+    frequencies: Sequence[float], mean_change: float, eta: float, tol: float = 1e-15
+) -> float:
+    """Infer phi from short-term mean change when eta and patch frequencies are known.
+
+    Uses mean_change=phi*A+eta*B. This is an algebraic identity for the
+    deterministic conservative-migration model, not a statistical estimator
+    with sampling error built in.
+    """
+
+    coeffs = spatial_selection_coefficients(frequencies)
+    a = coeffs["A"]
+    if abs(a) <= tol:
+        raise ValueError("phi is not identifiable when A=0")
+    return (mean_change - eta * coeffs["B"]) / a
+
+
+def infer_eta_from_spatial_mean_change(
+    frequencies: Sequence[float], mean_change: float, phi: float, tol: float = 1e-15
+) -> float:
+    """Infer eta from short-term mean change when phi and patch frequencies are known."""
+
+    coeffs = spatial_selection_coefficients(frequencies)
+    b = coeffs["B"]
+    if abs(b) <= tol:
+        raise ValueError("eta is not identifiable when B=0")
+    return (mean_change - phi * coeffs["A"]) / b
+
+
 def mean_selection_decomposition(
     frequencies: Sequence[float], phi: float, eta: float
 ) -> Dict[str, float]:
