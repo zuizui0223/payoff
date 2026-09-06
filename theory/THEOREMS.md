@@ -1,6 +1,6 @@
 # PAYOFF theorems
 
-This note gives the minimal analytic core connecting shared-trait compromise, persistence of an integrated architecture, and evolutionary differentiation of trait dimensions.
+This note gives the minimal analytic core connecting shared-trait compromise, persistence of an integrated architecture, evolutionary differentiation of trait dimensions, and population-level architecture games.
 
 ## Notation
 
@@ -105,7 +105,7 @@ The first identity follows from differentiating `LS`. For the second, expand
 sum_{i<j} a_i a_j(theta_i-theta_j)^2
 ```
 
-and collect the `theta_i^2` and cross terms. Equivalently use the standard weighted-variance identity
+and collect the `theta_i^2` and cross terms. Equivalently use the weighted-variance identity
 
 ```text
 A sum_i a_i(theta_i-theta_bar)^2
@@ -303,19 +303,19 @@ Delta(p) = pi_D(p)-pi_S(p)
 
 where `eta` is a frequency-feedback coefficient.
 
-One symmetric two-strategy game representation is
+One genuinely symmetric two-strategy game representation is
 
 ```text
           opponent S    opponent D
-S              0            -eta
-D          phi-eta            phi
+S              0           phi-eta
+D           phi-eta         2phi
 ```
 
 because
 
 ```text
-pi_S(p) = -eta p,
-pi_D(p) = (phi-eta)(1-p)+phi p,
+pi_S(p) = (phi-eta)p,
+pi_D(p) = (phi-eta)(1-p)+2phi p,
 pi_D-pi_S = phi+eta(2p-1).
 ```
 
@@ -519,6 +519,210 @@ If explicit switching costs are included, those costs must be transformed on the
 
 ---
 
+## Theorem 8 — the static architecture crossing splits into two invasion surfaces
+
+Let
+
+```text
+R=sL,
+phi=R-K.
+```
+
+The invasion advantage of rare `D` in an `S` resident population is
+
+```text
+I_D = Delta(0)=phi-eta=R-K-eta.
+```
+
+The invasion advantage of rare `S` in a `D` resident population is
+
+```text
+I_S = -Delta(1)=-phi-eta=K-R-eta.
+```
+
+Therefore the reciprocal neutral-invasion surfaces are
+
+```text
+Sigma_D: K=R-eta,
+Sigma_S: K=R+eta.
+```
+
+For fixed `s`, these are planes in `(L,K,eta)` space:
+
+```text
+Sigma_D: K=sL-eta,
+Sigma_S: K=sL+eta.
+```
+
+They intersect exactly along the frequency-independent architecture crossing
+
+```text
+eta=0,
+K=sL.
+```
+
+Away from equality surfaces, the complete phase partition is
+
+```text
+K > R+|eta|                -> shared dominance,
+K < R-|eta|                -> differentiated dominance,
+|K-R|<|eta| and eta<0      -> stable architecture coexistence,
+|K-R|<|eta| and eta>0      -> coordination bistability.
+```
+
+The middle game's width on the `K` axis is exactly
+
+```text
+W_K=2|eta|.
+```
+
+### Proof
+
+The neutral surfaces follow by setting `I_D=0` and `I_S=0`. By Corollary 5.1, shared dominance is equivalent to
+
+```text
+phi < -|eta|,
+```
+
+which becomes `K>R+|eta|`. Differentiated dominance is equivalent to `phi>|eta|`, which becomes `K<R-|eta|`. The remaining strict region is `|phi|<|eta|`, equivalent to `|K-R|<|eta|`; Corollary 5.1 assigns coexistence for `eta<0` and coordination bistability for `eta>0`. Its `K` interval is `(R-|eta|,R+|eta|)`, whose width is `2|eta|`.
+
+QED.
+
+### Consequence 8.1 — static BALANCE can admit invasion
+
+If `phi<0` but `eta<0` and `|phi|<|eta|`, then
+
+```text
+I_D=phi-eta>0.
+```
+
+Thus a rare differentiated architecture can invade from the static BALANCE side of the frequency-independent crossing. The deterministic outcome is coexistence, not differentiated dominance.
+
+### Consequence 8.2 — static BITA advantage can face a coordination barrier
+
+If `phi>0` but `eta>0` and `phi<eta`, then
+
+```text
+I_D=phi-eta<0.
+```
+
+Thus a differentiated architecture with positive frequency-independent advantage can nevertheless fail to invade when rare.
+
+Therefore
+
+```text
+static architecture advantage != invasion success.
+```
+
+---
+
+## Theorem 9 — reciprocal threshold inversion identifies recovery and frequency feedback
+
+Hold `R` and `eta` fixed while varying architecture cost. Let
+
+```text
+K_D=R-eta
+```
+
+be the cost at which rare `D` is neutral in an `S` population, and let
+
+```text
+K_S=R+eta
+```
+
+be the cost at which rare `S` is neutral in a `D` population. Then
+
+```text
+R   = (K_D+K_S)/2,
+eta = (K_S-K_D)/2.
+```
+
+The signed threshold split is
+
+```text
+K_S-K_D=2eta.
+```
+
+### Proof
+
+Add and subtract the defining equations for `K_D` and `K_S`.
+
+QED.
+
+### Interpretation
+
+Threshold ordering diagnoses feedback topology:
+
+```text
+K_S<K_D  -> eta<0 -> reciprocal-invasion / coexistence geometry,
+K_S>K_D  -> eta>0 -> reciprocal-exclusion / coordination geometry.
+```
+
+The mathematical thresholds may lie outside the biologically feasible range `K>=0`; empirical identification requires both relevant thresholds to be experimentally reachable.
+
+---
+
+## Theorem 10 — monotone environmental paths generically have two game transitions
+
+Let environment `e` change the frequency-independent architecture gap continuously and strictly monotonically while `eta` is constant:
+
+```text
+phi=phi(e).
+```
+
+If `phi(e)` is strictly increasing, each of the two game boundaries
+
+```text
+phi=-|eta|,
+phi=+|eta|
+```
+
+can be crossed at most once. If the environmental range spans both values, the ordered phase sequence is exactly
+
+```text
+shared dominance
+-> middle game region
+-> differentiated dominance,
+```
+
+where the middle region is stable coexistence for `eta<0` and coordination bistability for `eta>0`.
+
+### Proof
+
+A continuous strictly increasing function takes each value at most once. Corollary 5.1 fixes the phase on the three intervals separated by `-|eta|` and `+|eta|`.
+
+QED.
+
+### Corollary 10.1 — exact splitting along a linear environmental gradient
+
+If
+
+```text
+phi(e)=alpha(e-e0),
+alpha != 0,
+```
+
+then `e0` is the static `phi=0` crossing and the two game boundaries solve `phi=+-|eta|`. Their ordered separation is
+
+```text
+W_e=2|eta|/|alpha|.
+```
+
+Thus stronger frequency feedback broadens the environmental transition zone, whereas a steeper environmental change in static architecture payoff compresses it.
+
+### Corollary 10.2 — variable feedback requires margin-level topology
+
+If both `phi(e)` and `eta(e)` vary, define
+
+```text
+I_D(e)=phi(e)-eta(e),
+I_S(e)=-phi(e)-eta(e).
+```
+
+Every change in reciprocal-invasion status requires a zero crossing of at least one of these margins. Re-entry into a previously occupied invasion-status region therefore requires at least one margin to cross zero more than once or to lose monotonicity.
+
+---
+
 # Main synthesis
 
 The analytic chain is now
@@ -530,14 +734,17 @@ functional disagreement
     -> recovered loss R=sL
     -> architecture payoff gap phi=sL-K
     -> frequency-dependent game Delta(p)
+    -> two reciprocal invasion surfaces
     -> dominance / coexistence / coordination threshold
+    -> environmental threshold splitting
     -> optional switching-cost hysteresis.
 ```
 
-The model therefore distinguishes three questions that should not be collapsed:
+The model therefore distinguishes four questions that should not be collapsed:
 
 1. **Is there functional conflict?** `L>0`.
-2. **Would extra phenotype dimensions pay in a rare/frequency-independent comparison?** `phi=sL-K`.
-3. **What architecture is evolutionarily stable in a population?** determined by `Delta(p)`, frequency feedback, and transition costs.
+2. **Which optimized architecture has the higher frequency-independent payoff?** `phi=sL-K`.
+3. **Can a rare alternative architecture invade a resident population?** determined separately by `I_D=phi-eta` and `I_S=-phi-eta`.
+4. **What architecture state is evolutionarily stable in a population?** determined by the full `Delta(p)`, frequency feedback, and transition costs.
 
 That separation is the theoretical bridge from SCH to BALANCE to BITA and then beyond them into evolutionary game dynamics.
