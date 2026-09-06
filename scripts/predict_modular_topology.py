@@ -34,6 +34,7 @@ from src.edgewise_modularity import (
     optimized_phenotype,
 )
 from src.topology_release_path import connected_components, greedy_positive_pressure_path
+from src.topology_robustness import topology_robustness_summary
 
 Edge = Tuple[int, int]
 
@@ -302,29 +303,43 @@ def main() -> None:
             costs,
         )
 
+    highest_pressure = max(pressure_rows, key=lambda row: float(row["pressure"]))
     summary: Dict[str, object] = {
         "function_count": len(ids),
         "edge_count": len(edges),
         "function_ids": ids,
         "reference_phenotype": reference_phenotype,
         "reference_loss": reference_loss,
-        "highest_reference_pressure_edge": max(
-            pressure_rows, key=lambda row: float(row["pressure"])
-        )["source"]
-        + "-"
-        + max(pressure_rows, key=lambda row: float(row["pressure"]))["target"],
+        "highest_reference_pressure_edge": (
+            highest_pressure["source"] + "-" + highest_pressure["target"]
+        ),
         "greedy_final_modules": path_rows[-1]["modules"],
         "greedy_final_net_gain": path_rows[-1]["net_gain"],
         "greedy_steps": len(path) - 1,
         "vertex_enumerated": topology_rows is not None,
     }
     if topology_rows is not None:
+        robustness = topology_robustness_summary(
+            optima, weights, edges, couplings, costs
+        )
         summary.update(
             {
                 "vertex_count": len(topology_rows),
                 "best_vertex_bits": topology_rows[0]["released_bits"],
                 "best_vertex_modules": topology_rows[0]["modules"],
                 "best_vertex_net_gain": topology_rows[0]["net_gain"],
+                "runner_up_vertex_bits": topology_bits(
+                    robustness["second_released"]
+                ),
+                "runner_up_vertex_net_gain": robustness["second_net_gain"],
+                "best_vertex_global_reserve": robustness["global_reserve"],
+                "best_vertex_local_reserve": robustness["local_reserve"],
+                "best_vertex_edge_boundary_margins": list(
+                    robustness["edge_boundary_margins"]
+                ),
+                "best_vertex_strict_local_stability": robustness[
+                    "strict_local_vertex_stability"
+                ],
                 "greedy_matches_global_vertex": (
                     topology_rows[0]["released_bits"] == path_rows[-1]["released_bits"]
                 ),
