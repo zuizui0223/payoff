@@ -9,6 +9,9 @@ The hard-module architecture forces all functions inside one module to share one
 coordinate, while different modules have independent coordinates. With a fixed
 fitness cost per extra module, the globally optimal scalar partition is solved
 exactly by dynamic programming.
+
+The command also separates global optimality from split accessibility by
+reporting the maximin all-uphill split threshold and a greedy split endpoint.
 """
 
 from __future__ import annotations
@@ -25,6 +28,12 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src.hard_module_accessibility import (
+    greedy_hard_split_path,
+    split_tree_accessibility,
+    target_is_split_accessible,
+    tree_split_gains,
+)
 from src.hard_module_partition import (
     fixed_k_loss_curve,
     module_count_intervals,
@@ -124,6 +133,43 @@ def write_intervals(output: Path, ids, optima, weights):
     return rows
 
 
+def write_greedy_path(output: Path, ids, optima, weights, extra_module_cost):
+    path = greedy_hard_split_path(optima, weights, extra_module_cost)
+    rows = []
+    for row in path:
+        split = row["next_split"]
+        rows.append(
+            {
+                "step": row["step"],
+                "modules": module_label(row["modules"], ids),
+                "within_loss": row["within_loss"],
+                "recovery": row["recovery"],
+                "net_gain": row["net_gain"],
+                "next_split_gain": row["next_split_gain"],
+                "next_split_margin": row["next_split_margin"],
+                "next_split": "stop"
+                if split is None
+                else module_label(split, ids),
+            }
+        )
+    with output.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    return path, rows
+
+
+def _json_tree(tree):
+    children = tree.get("children")
+    result = {"module": list(tree["module"])}
+    if children is None:
+        result["children"] = None
+    else:
+        result["split_gain"] = tree["split_gain"]
+        result["children"] = [_json_tree(children[0]), _json_tree(children[1])]
+    return result
+
+
 def main() -> None:
     args = parse_args()
     if args.extra_module_cost < 0.0:
@@ -137,10 +183,23 @@ def main() -> None:
     interval_rows = write_intervals(
         args.output_dir / "module_count_intervals.csv", ids, optima, weights
     )
-    best = optimal_penalized_partition(
-        optima, weights, args.extra_module_cost
+    best = optimal_penalized_partition(optima, weights, args.extra_module_cost)
+    access = split_tree_accessibility(optima, weights, best["modules"])
+    greedy_path, greedy_rows = write_greedy_path(
+        args.output_dir / "greedy_split_path.csv",
+        ids,
+        optima,
+        weights,
+        args.extra_module_cost,
     )
 
+    with (args.output_dir / "optimal_split_tree.json").open(
+        "w", encoding="utf-8"
+    ) as handle:
+        json.dump(_json_tree(access["tree"]), handle, indent=2, ensure_ascii=False)
+
+    threshold = float(access["accessibility_threshold"])
+    split_gains = tree_split_gains(access["tree"])
     summary = {
         "function_count": len(ids),
         "function_ids": ids,
@@ -153,6 +212,19 @@ def main() -> None:
         "recovery": best["recovery"],
         "architecture_cost": best["architecture_cost"],
         "net_gain": best["net_gain"],
+        "optimal_split_accessibility_threshold": threshold,
+        "optimal_split_accessible": target_is_split_accessible(
+            optima, weights, best["modules"], args.extra_module_cost
+        ),
+        "optimal_split_tree_weakest_gain": (
+            None if not split_gains else min(split_gains)
+        ),
+        "greedy_final_modules": greedy_rows[-1]["modules"],
+        "greedy_final_net_gain": greedy_rows[-1]["net_gain"],
+        "greedy_steps": len(greedy_path) - 1,
+        "greedy_matches_global_partition": (
+            greedy_path[-1]["modules"] == best["modules"]
+        ),
         "fixed_k_rows": len(fixed_rows),
         "supported_module_counts": [row["module_count"] for row in interval_rows],
     }
