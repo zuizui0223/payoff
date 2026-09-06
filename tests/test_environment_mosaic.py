@@ -22,7 +22,8 @@ def test_patch_phi_bridge():
         separation_fractions=[0.5, 0.25, 1.0],
         architecture_costs=[0.7, 0.5, 1.2],
     )
-    assert phis == [0.3, 0.25, -0.2]
+    expected = [0.3, 0.25, -0.2]
+    assert all(isclose(a, b, abs_tol=1e-12) for a, b in zip(phis, expected))
 
 
 def test_heterogeneous_mean_selection_decomposition_exact():
@@ -40,8 +41,8 @@ def test_heterogeneous_mean_selection_decomposition_exact():
 
 def test_invasion_margins_are_reciprocal_endpoints():
     d, s = invasion_margins([0.4, -0.2], [0.1, -0.3])
-    assert d == [0.30000000000000004, 0.09999999999999998]
-    assert s == [-0.5, 0.5]
+    assert all(isclose(a, b, abs_tol=1e-12) for a, b in zip(d, [0.3, 0.1]))
+    assert all(isclose(a, b, abs_tol=1e-12) for a, b in zip(s, [-0.5, 0.5]))
 
 
 def test_laplacian_and_jacobi_eigen_solver():
