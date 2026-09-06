@@ -23,3 +23,4 @@ jobs:
       - run: python scripts/spatial_two_patch_sweep.py --eta 1.0 --m-min 0 --m-max 0.3 --step 0.05 --output outputs/ci_spatial_two_patch.csv
       - run: python scripts/regular_graph_degree_sweep.py --phi 0.2 --eta 1.0 --recovery 1.0 --k-min 3 --k-max 10 --output outputs/ci_regular_graph_degree.csv
       - run: python scripts/environment_mosaic_two_patch.py --r-source 0.5 --r-sink -1.5 --m-min 0 --m-max 1.5 --step 0.15 --output outputs/ci_environment_mosaic_two_patch.csv
+      - run: python scripts/spatial_environment_threshold_sweep.py --phi-source 0.6 --phi-sink -1.0 --alpha 1.0 --m-min 0 --m-max 2.0 --step 0.2 --output outputs/ci_spatial_environment_thresholds.csv
