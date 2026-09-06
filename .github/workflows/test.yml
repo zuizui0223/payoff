@@ -27,3 +27,4 @@ jobs:
       - run: python scripts/two_patch_floquet_sweep.py --m-min 0 --m-max 0.8 --step 0.1 --output outputs/ci_two_patch_floquet.csv
       - run: python scripts/two_season_temporal_premium_sweep.py --m-min 0 --m-max 0.6 --m-step 0.2 --period-min 0.1 --period-max 0.5 --period-step 0.2 --output outputs/ci_two_season_temporal_premium.csv
       - run: python scripts/anti_phase_temporal_sweep.py --mean-margin -0.08 --contrast-half-amplitude 1.5 --season-duration 1.0 --m-min 0 --m-max 1.0 --step 0.2 --output outputs/ci_anti_phase_temporal.csv
+      - run: python scripts/temporal_coordination_phase_sweep.py --eta 0.1 --phi-bar 0 --season-duration 1 --u-min 0 --u-max 3 --u-step 0.5 --ratio-min 0 --ratio-max 12 --ratio-step 2 --output outputs/ci_temporal_coordination_phase.csv
