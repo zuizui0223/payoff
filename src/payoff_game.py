@@ -7,8 +7,8 @@ Python's standard library so that the core identities remain easy to audit.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import inf, isfinite
-from typing import Iterable, Optional, Sequence, Tuple
+from math import inf
+from typing import Optional, Sequence, Tuple
 
 
 @dataclass(frozen=True)
@@ -128,23 +128,27 @@ def n_function_conflict(
 
 
 def game_matrix(phi: float, eta: float) -> Tuple[Tuple[float, float], Tuple[float, float]]:
-    """One 2x2 symmetric-game representation of the declared payoff gap.
+    """Symmetric 2x2 payoff matrix generating the declared payoff gap.
 
-    Rows and columns are ordered (S, D). The row player's payoff matrix is
+    Rows and columns are ordered (S, D):
 
-        [[0, -eta],
-         [phi-eta, phi]].
+        [[0,       phi-eta],
+         [phi-eta, 2*phi  ]]
+
+    With differentiated frequency p this gives
+    pi_D-pi_S = phi+eta(2p-1).
     """
 
-    return ((0.0, -eta), (phi - eta, phi))
+    return ((0.0, phi - eta), (phi - eta, 2.0 * phi))
 
 
 def architecture_payoffs(p: float, phi: float, eta: float) -> Tuple[float, float]:
     """Return (pi_S, pi_D) at differentiated frequency p."""
 
     _validate_frequency(p)
-    pi_s = -eta * p
-    pi_d = (phi - eta) * (1.0 - p) + phi * p
+    off_diag = phi - eta
+    pi_s = off_diag * p
+    pi_d = off_diag * (1.0 - p) + 2.0 * phi * p
     return pi_s, pi_d
 
 
