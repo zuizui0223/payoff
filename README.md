@@ -17,8 +17,7 @@ Biological functions are payoff components, not literal strategic agents.
 For two functions with preferred trait values `theta1`, `theta2` and weights `a,b>0`,
 
 ```text
-loss_shared(z)
-= a(z-theta1)^2+b(z-theta2)^2.
+loss_shared(z)=a(z-theta1)^2+b(z-theta2)^2.
 ```
 
 The unique compromise and conflict load are
@@ -33,10 +32,8 @@ For `n` functions,
 ```text
 L_n
 = sum_i a_i(theta_i-theta_bar)^2
-= [1/(sum_i a_i)] sum_{i<j} a_i a_j(theta_i-theta_j)^2,
+= [1/(sum_i a_i)] sum_{i<j} a_i a_j(theta_i-theta_j)^2.
 ```
-
-so one-coordinate conflict is weighted pairwise disagreement among function-specific optima.
 
 ## 2. Exact dimensional-release bridge
 
@@ -75,7 +72,7 @@ phi=0               architecture critical surface
 phi>0               BITA: differentiated architecture wins.
 ```
 
-For `0<K<L`, the critical residual coupling is
+For `0<K<L`,
 
 ```text
 c_crit=ab(L-K)/[K(a+b)].
@@ -119,7 +116,7 @@ The interior equilibrium/threshold is
 p*=(1-phi/eta)/2.
 ```
 
-The static crossing `phi=0` remains meaningful: under `eta<0` it is the point `p*=1/2`; under `eta>0` it is the risk-dominance switch where the two deterministic basins have equal width.
+At `phi=0`, negative frequency dependence gives `p*=1/2`; positive frequency dependence gives equal deterministic basin widths.
 
 ## 4. Environmental phase diagram: one crossing becomes two invasion surfaces
 
@@ -130,7 +127,7 @@ I_D=Delta(0)=R-K-eta
 I_S=-Delta(1)=K-R-eta.
 ```
 
-Neutral invasion surfaces are therefore
+Neutral invasion surfaces are
 
 ```text
 K_D=R-eta
@@ -150,13 +147,6 @@ The game-generated middle region has exact cost width
 W_K=2|eta|.
 ```
 
-Hence static architecture advantage and rare-type invasion are distinct:
-
-```text
-static BALANCE (phi<0) can admit rare D invasion when eta<0,
-static BITA advantage (phi>0) can fail to invade when eta>0.
-```
-
 Reciprocal neutral-cost thresholds identify
 
 ```text
@@ -172,41 +162,28 @@ W_e=2|eta|/|alpha|.
 
 See [`theory/ENVIRONMENTAL_PHASE_DIAGRAM.md`](theory/ENVIRONMENTAL_PHASE_DIAGRAM.md).
 
-## 5. Finite populations: stochastic fixation
+## 5. Finite populations: stochastic fixation and critical mass
 
-PAYOFF now also has an exact finite-population Moran layer. For population size `N`, self-excluding interactions give
+For population size `N`, self-excluding interactions give
 
 ```text
 Delta_N(i)
-=[phi(N-2)+eta(2i-N)]/(N-1),
+=[phi(N-2)+eta(2i-N)]/(N-1).
 ```
 
-where `i` is the number of `D` individuals.
-
-Using exponential payoff-to-fitness mapping `f=exp(beta*pi)`, the exact fixation probability of one `D` mutant is
+Using `f=exp(beta*pi)`, reciprocal single-mutant fixation obeys the exact ratio
 
 ```text
-rho_D
-= {sum_{k=0}^{N-1}
-   exp[-beta k{phi(N-2)+eta(k+1-N)}/(N-1)]}^(-1).
+rho_D/rho_S=exp[beta phi(N-2)].
 ```
 
-The reciprocal fixation ratio simplifies to
-
-```text
-rho_D/rho_S
-=exp[beta phi(N-2)].
-```
-
-Therefore, for `N>2` and `beta>0`,
+Thus, for `N>2`, `beta>0`,
 
 ```text
 rho_D>rho_S iff phi>0 iff sL>K.
 ```
 
-So frequency feedback changes the absolute fixation probabilities but cancels from their relative ordering under the declared exponential Moran model. The static architecture crossing survives as an exact reciprocal-fixation boundary.
-
-Under weak selection, comparison with the neutral fixation probability `1/N` gives
+Under weak selection,
 
 ```text
 rho_D>1/N iff 3phi>eta
@@ -220,37 +197,96 @@ D single mutant favored: K<R-eta/3
 S single mutant favored: K>R+eta/3.
 ```
 
-Thus the deterministic frequency-feedback band has width
+The deterministic interaction band has width `2|eta|`; the weak-selection stochastic core has width `2|eta|/3`.
+
+For arbitrary starting count `i`, the exact D-fixation probability is
 
 ```text
-2|eta|
+rho_i
+= [sum_{k=0}^{i-1} exp(-beta C_k)]
+  /[sum_{k=0}^{N-1} exp(-beta C_k)],
 ```
 
-while the weak-selection stochastic core has width
+with
 
 ```text
-2|eta|/3.
+C_k=k[phi(N-2)+eta(k+1-N)]/(N-1).
 ```
 
-For strong positive frequency dependence (`eta>3|phi|`), neither reciprocal single mutant is favored above neutral drift. For strong negative frequency dependence (`eta<-3|phi|`), both are.
-
-In the coordination regime `eta>0`,
+This defines a stochastic critical mass
 
 ```text
-rho_D>1/N iff p*<1/3,
+m_q=min{i: rho_i>=q},
 ```
 
-recovering the established one-third law in architecture variables:
+such as `m_0.5`, the minimum starting number of differentiated individuals required for at least 50% fixation probability.
+
+See [`theory/FINITE_POPULATION_MORAN.md`](theory/FINITE_POPULATION_MORAN.md) and [`theory/STOCHASTIC_ARCHITECTURE_BARRIER.md`](theory/STOCHASTIC_ARCHITECTURE_BARRIER.md).
+
+## 6. Recurrent mutation: long-run stationary architecture occupancy
+
+With offspring mutation
 
 ```text
-3(sL-K)>eta.
+S -> D at rate u_SD
+D -> S at rate u_DS,
 ```
 
-PAYOFF does not claim the one-third law as new; its contribution is the explicit ecological-to-architecture substitution chain `L -> sL -> phi -> fixation`.
+both positive, the finite Moran chain is irreducible. Its exact stationary distribution satisfies detailed balance:
 
-See [`theory/FINITE_POPULATION_MORAN.md`](theory/FINITE_POPULATION_MORAN.md).
+```text
+Pi_i/Pi_{i-1}
+= T_{i-1}^+/T_i^-,
+```
 
-## 6. Switching costs and hysteresis
+so
+
+```text
+Pi_i
+= Pi_0 prod_{j=1}^i T_{j-1}^+/T_j^-.
+```
+
+This predicts the full long-run architecture-frequency profile, including mean `D` frequency, boundary mass, interior polymorphism mass, and stationary modes.
+
+In the rare-mutation limit,
+
+```text
+log(Pi_N/Pi_0)
+-> log(u_SD/u_DS)+beta*phi*(N-2)
+```
+
+up to the fixed mutation-rate ratio used in the limit. Substituting `phi=sL-K`,
+
+```text
+log(Pi_N/Pi_0)
+-> log(u_SD/u_DS)+beta(N-2)(sL-K).
+```
+
+Hence mutation bias and architecture quality combine additively on the long-run monomorphic log-odds scale.
+
+For symmetric rare mutation,
+
+```text
+Pi_N=Pi_0 iff phi=0 iff K=sL.
+```
+
+For asymmetric rare mutation the equal-occupancy crossing shifts to
+
+```text
+phi_mut=-log(u_SD/u_DS)/[beta(N-2)]
+```
+
+or
+
+```text
+K_mut=R+log(u_SD/u_DS)/[beta(N-2)].
+```
+
+Thus mutation bias toward `D` can sustain greater long-run differentiated occupancy at architecture costs that would lie on the static shared-favored side, while mutation bias toward `S` shifts the crossing in the opposite direction.
+
+See [`theory/RECURRENT_MUTATION_STATIONARY.md`](theory/RECURRENT_MUTATION_STATIONARY.md).
+
+## 7. Switching costs and hysteresis
 
 If switching `S -> D` costs `C_SD`, switching `D -> S` costs `C_DS`, amortized over horizon `T`, either inherited state can persist whenever
 
@@ -266,7 +302,7 @@ The hysteresis width is
 
 Frequency-dependent coordination and structural switching costs are separate mechanisms.
 
-## 7. Many functions: coupling networks and modularization
+## 8. Many functions: coupling networks and modularization
 
 For a network of functional trait coordinates,
 
@@ -285,15 +321,9 @@ Increasing integration `lambda` increases optimized loss monotonically, strictly
 
 See [`theory/NETWORK_EXTENSION.md`](theory/NETWORK_EXTENSION.md).
 
-## 8. Multiple architectures form a potential game
+## 9. Multiple architectures form a potential game
 
-For candidate architectures with symmetric interaction matrix `A`, the multi-strategy replicator equation
-
-```text
-dp_i/dt=p_i[pi_i-pi_bar]
-```
-
-satisfies
+For candidate architectures with symmetric interaction matrix `A`, the multi-strategy replicator equation satisfies
 
 ```text
 d/dt(p^T A p)
@@ -301,7 +331,7 @@ d/dt(p^T A p)
 >=0.
 ```
 
-The two-strategy game also has explicit potential
+The two-strategy game has explicit potential
 
 ```text
 V(p)=2(phi-eta)p+2eta p^2
@@ -315,7 +345,7 @@ dV/dt=2p(1-p)Delta(p)^2>=0.
 
 See [`theory/MULTI_ARCHITECTURE_GAME.md`](theory/MULTI_ARCHITECTURE_GAME.md) and [`theory/POTENTIAL_AND_RISK_DOMINANCE.md`](theory/POTENTIAL_AND_RISK_DOMINANCE.md).
 
-## 9. Current theorem-level results
+## 10. Current theorem-level results
 
 Current analytic results include:
 
@@ -334,29 +364,37 @@ Current analytic results include:
 13. exact finite-population Moran fixation formula;
 14. exact reciprocal fixation ratio `rho_D/rho_S=exp[beta phi(N-2)]`;
 15. weak-selection architecture one-third criterion `3phi>eta`;
-16. stochastic-core width `2|eta|/3`.
+16. stochastic-core width `2|eta|/3`;
+17. exact arbitrary-initial-count fixation curve `rho_i` and stochastic critical mass `m_q`;
+18. exact recurrent-mutation stationary distribution by detailed balance;
+19. rare-mutation monomorphic occupancy odds;
+20. mutation-bias-shifted long-run architecture crossing.
 
-## 10. Repository map
+## 11. Repository map
 
 ```text
 theory/THEOREMS.md                    core deterministic proofs
 theory/ENVIRONMENTAL_PHASE_DIAGRAM.md L-K-eta invasion surfaces
 theory/FINITE_POPULATION_MORAN.md     stochastic finite-population fixation
+theory/STOCHASTIC_ARCHITECTURE_BARRIER.md arbitrary-count fixation / critical mass
+theory/RECURRENT_MUTATION_STATIONARY.md recurrent-mutation stationary theory
 theory/NETWORK_EXTENSION.md           n-function coupling graph theory
 theory/MULTI_ARCHITECTURE_GAME.md     many-architecture potential game
 theory/POTENTIAL_AND_RISK_DOMINANCE.md two-strategy potential and basin results
 docs/SCH_BALANCE_BITA_BRIDGE.md       cross-repository interface
+docs/FINITE_POPULATION_HANDOFF.md     empirical finite-population handoff
 docs/CLAIM_BOUNDARY.md                scientific claim ceiling
+docs/PRIOR_ART_BOUNDARY.md            novelty/prior-art boundary
 src/payoff_game.py                    deterministic reference implementation
 src/finite_population.py              Moran fixation implementation
-scripts/phase_sweep.py                phi-eta phase grid
-scripts/lke_phase_sweep.py            L-K-eta phase grid
-scripts/finite_population_sweep.py    fixation-probability grid
+src/mutation_stationary.py            recurrent-mutation stationary implementation
+scripts/release_curve.py              fixation probability vs starting count
+scripts/stationary_profile.py         long-run stationary frequency profile
 tests/                                algebraic and stochastic regressions
 .github/workflows/test.yml            automated verification
 ```
 
-## 11. Main interpretation
+## 12. Main interpretation
 
 The hierarchy is now
 
@@ -367,9 +405,10 @@ functional conflict
 -> static architecture gap phi=R-K
 -> reciprocal invasion under eta
 -> deterministic ESS/coexistence/coordination
--> finite-population fixation under N and beta.
+-> finite-population fixation under N and beta
+-> recurrent-mutation stationary occupancy under u_SD,u_DS.
 ```
 
 The general question is therefore:
 
-> **When does evolution tolerate a shared-trait compromise, when does dimensional release become worthwhile, when can the alternative architecture invade, and when will a finite population actually cross the architecture barrier despite drift and frequency dependence?**
+> **When does evolution tolerate a shared-trait compromise, when does dimensional release become worthwhile, when can the alternative architecture invade, when will a finite population cross the architecture barrier, and which architectures dominate long-run occupancy when mutation keeps reintroducing both states?**
