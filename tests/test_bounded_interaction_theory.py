@@ -19,8 +19,8 @@ def test_local_branching_threshold_is_unchanged_for_positive_epsilon_neighbourho
 
 
 def test_hard_cutoff_interface_jump_has_expected_sign():
-    assert hard_cutoff_interface_jump(gamma=-1.0, epsilon=0.1) == -0.01
-    assert hard_cutoff_interface_jump(gamma=2.0, epsilon=0.1) == 0.02
+    assert abs(hard_cutoff_interface_jump(gamma=-1.0, epsilon=0.1) + 0.01) < 1e-12
+    assert abs(hard_cutoff_interface_jump(gamma=2.0, epsilon=0.1) - 0.02) < 1e-12
 
 
 def test_negative_feedback_shared_resident_escape_has_exact_infimum():
