@@ -1,0 +1,70 @@
+{
+  "schema_version": "PAYOFF_TOPOLOGY_ENSEMBLE_V1",
+  "draws": [
+    {
+      "draw_id": "d1",
+      "functions": [
+        {"function_id": "F1", "optimum": 0.0, "weight": 1.0},
+        {"function_id": "F2", "optimum": 1.0, "weight": 1.0},
+        {"function_id": "F3", "optimum": 3.0, "weight": 1.0}
+      ],
+      "edges": [
+        {"source": "F1", "target": "F2", "coupling": 1.0, "release_cost": 0.4},
+        {"source": "F1", "target": "F3", "coupling": 1.0, "release_cost": 0.4},
+        {"source": "F2", "target": "F3", "coupling": 1.0, "release_cost": 0.4}
+      ]
+    },
+    {
+      "draw_id": "d2",
+      "functions": [
+        {"function_id": "F1", "optimum": 0.0, "weight": 1.0},
+        {"function_id": "F2", "optimum": 1.05, "weight": 1.0},
+        {"function_id": "F3", "optimum": 3.1, "weight": 1.0}
+      ],
+      "edges": [
+        {"source": "F1", "target": "F2", "coupling": 1.0, "release_cost": 0.42},
+        {"source": "F1", "target": "F3", "coupling": 1.0, "release_cost": 0.4},
+        {"source": "F2", "target": "F3", "coupling": 1.0, "release_cost": 0.39}
+      ]
+    },
+    {
+      "draw_id": "d3",
+      "functions": [
+        {"function_id": "F1", "optimum": -0.05, "weight": 1.0},
+        {"function_id": "F2", "optimum": 0.95, "weight": 0.9},
+        {"function_id": "F3", "optimum": 2.95, "weight": 1.1}
+      ],
+      "edges": [
+        {"source": "F1", "target": "F2", "coupling": 1.0, "release_cost": 0.4},
+        {"source": "F1", "target": "F3", "coupling": 0.95, "release_cost": 0.41},
+        {"source": "F2", "target": "F3", "coupling": 1.05, "release_cost": 0.38}
+      ]
+    },
+    {
+      "draw_id": "d4",
+      "functions": [
+        {"function_id": "F1", "optimum": 0.1, "weight": 0.9},
+        {"function_id": "F2", "optimum": 1.0, "weight": 1.1},
+        {"function_id": "F3", "optimum": 3.0, "weight": 1.0}
+      ],
+      "edges": [
+        {"source": "F1", "target": "F2", "coupling": 1.1, "release_cost": 0.39},
+        {"source": "F1", "target": "F3", "coupling": 1.0, "release_cost": 0.42},
+        {"source": "F2", "target": "F3", "coupling": 0.9, "release_cost": 0.4}
+      ]
+    },
+    {
+      "draw_id": "d5",
+      "functions": [
+        {"function_id": "F1", "optimum": 0.0, "weight": 1.05},
+        {"function_id": "F2", "optimum": 1.1, "weight": 0.95},
+        {"function_id": "F3", "optimum": 2.9, "weight": 1.0}
+      ],
+      "edges": [
+        {"source": "F1", "target": "F2", "coupling": 0.9, "release_cost": 0.41},
+        {"source": "F1", "target": "F3", "coupling": 1.1, "release_cost": 0.39},
+        {"source": "F2", "target": "F3", "coupling": 1.0, "release_cost": 0.42}
+      ]
+    }
+  ]
+}
