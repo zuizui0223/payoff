@@ -1,0 +1,3 @@
+architecture_id,module_count,recovery,direct_margin,role,analysis_weight
+two_module_011,2,4.166666666666667,3.166666666666667,fit,1
+three_module_111,3,4.666666666666667,2.666666666666667,holdout,1
