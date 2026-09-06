@@ -216,7 +216,7 @@ Zero-mean common fluctuations have no long-run invasion effect.
 
 ### 12. `theory/TWO_PATCH_TEMPORAL_FLOQUET.md`
 
-Use only when relative patch quality changes through time.
+Use when relative patch quality changes through time.
 
 The noncommutativity gate is
 
@@ -226,7 +226,39 @@ propto
 m[(r_1a-r_2a)-(r_1b-r_2b)].
 ```
 
-Then compute the exact principal Floquet exponent rather than replacing the environment by its time average.
+This file introduces exact Floquet computation and the average-environment comparison.
+
+### 13. `theory/TWO_SEASON_TEMPORAL_PREMIUM.md`
+
+For exactly two seasons, read this next.
+
+It closes the Floquet result analytically:
+
+```text
+Lambda_F
+= center-average
+  + acosh(C)/T,
+```
+
+and proves, for the declared symmetric two-patch operator,
+
+```text
+Lambda_F >= lambda_max(A_bar).
+```
+
+Thus the time-averaged operator is a lower bound on the exact two-season invasion exponent in this model.
+
+The rapid-switching premium is
+
+```text
+Lambda_F-lambda_max(A_bar)
+=
+T^2 w^2(1-w)^2 m^2(Delta patch contrast)^2
+/[24 delta_bar]
++O(T^4).
+```
+
+This is the cleanest place to read the migration × temporal-contrast interaction.
 
 ---
 
@@ -247,7 +279,8 @@ finite fixation boundary,
 stationary occupancy boundary,
 regular-graph boundary,
 spatial migration boundary,
-environment-mosaic spectral boundary.
+environment-mosaic spectral boundary,
+periodic Floquet invasion boundary.
 ```
 
 Do not call them all an "architecture threshold" without specifying the estimand.
