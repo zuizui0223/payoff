@@ -44,7 +44,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from src.edge_pressure_transfer import edge_transfer_matrix, strongest_positive_cross_transfer
 from src.edgewise_modularity import edge_pressures
+from src.topology_decision_robustness import first_edge_decision_radius
 from src.topology_game import (
     classify_pairwise_topology_game,
     pairwise_payoff_parameters,
@@ -237,6 +239,22 @@ def main() -> None:
         first_favorable_index = path[0]["next_edge_index"]
         final_state = path[-1]
 
+        initial_margins = [pressure - cost for pressure, cost in zip(pressures, costs)]
+        if first_favorable_index is None:
+            first_radius = None
+            cascade_label = "none"
+            cascade_derivative = 0.0
+        else:
+            first_radius = first_edge_decision_radius(initial_margins)
+            transfer = edge_transfer_matrix(optima, weights, edges, couplings)
+            cascade = strongest_positive_cross_transfer(transfer, first_favorable_index)
+            if cascade is None:
+                cascade_label = "none"
+                cascade_derivative = 0.0
+            else:
+                cascade_index, cascade_derivative = cascade
+                cascade_label = edge_label(labels[cascade_index])
+
         robustness = topology_robustness_summary(
             optima, weights, edges, couplings, costs
         )
@@ -259,6 +277,11 @@ def main() -> None:
                 if first_favorable_index is None
                 else edge_label(labels[first_favorable_index])
             ),
+            "first_edge_uniform_margin_radius": (
+                "" if first_radius is None else first_radius["uniform_margin_perturbation_radius"]
+            ),
+            "predicted_next_pressure_edge": cascade_label,
+            "predicted_next_pressure_derivative": cascade_derivative,
             "best_topology_bits": best_bits,
             "best_modules": module_label(best_components, ids),
             "best_net_gain": float(robustness["best_net_gain"]),
@@ -335,9 +358,15 @@ def main() -> None:
     best_counter = Counter(row["best_topology_bits"] for row in receipts)
     pressure_counter = Counter(row["first_pressure_edge"] for row in receipts)
     favorable_counter = Counter(row["first_favorable_edge"] for row in receipts)
+    cascade_counter = Counter(row["predicted_next_pressure_edge"] for row in receipts)
     greedy_counter = Counter(row["greedy_final_bits"] for row in receipts)
 
     consensus_bits, consensus_count = best_counter.most_common(1)[0]
+    first_radii = [
+        float(row["first_edge_uniform_margin_radius"])
+        for row in receipts
+        if row["first_edge_uniform_margin_radius"] != ""
+    ]
     summary: Dict[str, object] = {
         "draw_count": total,
         "context": context,
@@ -345,6 +374,7 @@ def main() -> None:
         "best_topology_support": support(best_counter, total),
         "first_pressure_edge_support": support(pressure_counter, total),
         "first_favorable_edge_support": support(favorable_counter, total),
+        "predicted_next_pressure_edge_support": support(cascade_counter, total),
         "greedy_final_topology_support": support(greedy_counter, total),
         "greedy_matches_global_fraction": sum(
             row["greedy_matches_global"] for row in receipts
@@ -355,6 +385,12 @@ def main() -> None:
         "mean_global_reserve": sum(float(row["global_reserve"]) for row in receipts) / total,
         "minimum_global_reserve": min(float(row["global_reserve"]) for row in receipts),
         "mean_local_reserve": sum(float(row["local_reserve"]) for row in receipts) / total,
+        "mean_first_edge_uniform_margin_radius": (
+            sum(first_radii) / len(first_radii) if first_radii else None
+        ),
+        "minimum_first_edge_uniform_margin_radius": (
+            min(first_radii) if first_radii else None
+        ),
     }
 
     if population is not None:
