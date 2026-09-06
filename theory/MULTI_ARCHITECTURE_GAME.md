@@ -251,10 +251,96 @@ from
 What architecture is stable once its ecological consequences depend on how common it is?
 ```
 
-## 5. New theoretical target
+---
 
-The next nontrivial problem is no longer just whether one extra dimension is worth its cost. It is:
+## 5. Continuous recovery path is now solved for the registered quadratic game
 
-> **Which coupling graph is evolutionarily stable when modular architectures have different conflict-recovery benefits, maintenance costs, and frequency-dependent ecological interactions?**
+For a fixed connected coupling topology whose release function
 
-That is the natural many-function game-theoretic continuation of SCH -> BALANCE -> BITA.
+```text
+R(lambda)
+```
+
+is continuous and strictly monotone, recovery itself can be used as the architecture coordinate
+
+```text
+r=R(lambda) in [0,L].
+```
+
+`CONTINUOUS_ARCHITECTURE_ESS.md` studies
+
+```text
+b(r)=alpha*r-(kappa/2)r^2
+```
+
+with symmetric architecture-distance feedback
+
+```text
+H(r,q)=-gamma(r-q)^2.
+```
+
+The exact threshold is
+
+```text
+gamma=-kappa/2.
+```
+
+For an intrinsic interior architecture:
+
+```text
+gamma>-kappa/2
+-> one monomorphic partial architecture;
+
+gamma=-kappa/2
+-> neutral variance manifold at the same mean recovery;
+
+gamma<-kappa/2
+-> branching-compatible singular strategy
+   and protected endpoint polymorphism.
+```
+
+The endpoint phase reduces exactly to the original two-strategy PAYOFF game with
+
+```text
+phi_endpoint=b(L)-b(0),
+eta_endpoint=gamma L^2.
+```
+
+The more general local result in `GENERAL_CONVEX_ARCHITECTURE_BRANCHING.md` replaces constant `kappa` by cost curvature at the singular architecture:
+
+```text
+gamma_branch=-C''(r*)/2,
+C'(r*)=1.
+```
+
+So the scalar continuous-coupling path is no longer an open target.
+
+---
+
+## 6. Remaining nontrivial target — topology cannot always be collapsed to recovery alone
+
+The next unsolved layer is not merely continuous `lambda`. It is competition among architectures with different coupling **topologies**.
+
+Two graphs can have the same recovered conflict value
+
+```text
+R_i=R_j
+```
+
+while differing in:
+
+```text
+which functions are coupled,
+architecture cost,
+developmental constraints,
+ecological interaction kernel H_ij,
+and responses to environment.
+```
+
+A one-dimensional recovery coordinate cannot preserve those distinctions.
+
+The remaining graph-level question is therefore:
+
+> **Which coupling topology or modular partition is evolutionarily stable when candidate graphs differ not only in recovered conflict loss but also in architecture-specific costs and ecological interactions?**
+
+The finite symmetric potential-game framework in this file already supplies the population dynamics once those graph-specific payoffs are constructed. The missing piece is a biologically defensible graph-mutation / graph-distance model, not the replicator algebra itself.
