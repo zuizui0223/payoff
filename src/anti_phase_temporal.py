@@ -14,7 +14,7 @@ The difference from rbar is the temporal rescue premium.
 
 from __future__ import annotations
 
-from math import asinh, sinh, sqrt, tanh
+from math import asinh, cosh, sinh, sqrt, tanh
 from typing import Dict
 
 
@@ -45,6 +45,97 @@ def anti_phase_temporal_premium(
 
     return anti_phase_floquet_exponent(
         0.0, contrast_half_amplitude, migration_rate, season_duration
+    )
+
+
+def dimensionless_premium(u: float, v: float) -> float:
+    """Return F(u,v)=tau*P with u=m*tau and v=|x|*tau."""
+
+    if u < 0.0 or v < 0.0:
+        raise ValueError("u and v must be non-negative")
+    if u == 0.0 or v == 0.0:
+        return 0.0
+    d = sqrt(u * u + v * v)
+    return -u + asinh((u / d) * sinh(d))
+
+
+def dimensionless_premium_derivative(u: float, v: float) -> float:
+    """Return partial F/partial u for u>0,v>0."""
+
+    if u <= 0.0 or v <= 0.0:
+        raise ValueError("derivative formula requires u>0 and v>0")
+    d = sqrt(u * u + v * v)
+    s = sinh(d)
+    c = cosh(d)
+    y_prime = v * v * s / (d**3) + u * u * c / (d**2)
+    root = sqrt(1.0 + (u * s / d) ** 2)
+    return -1.0 + y_prime / root
+
+
+def exact_optimal_dimensionless_migration(v: float, tol: float = 1e-13) -> float:
+    """Return the unique exact maximizer u*=m*tau for fixed v=|x|tau>0.
+
+    The proof of uniqueness is in theory/ANTI_PHASE_SEASONAL_RESCUE.md.
+    Numerical solution uses the monotone crossing
+        1-v^2/d^2 = R(d),
+    where d=sqrt(u^2+v^2) and
+        R(d)=(sinh(d)^2-d^2)/(d cosh(d)-sinh(d))^2.
+    """
+
+    if v <= 0.0:
+        raise ValueError("v must be positive")
+    if tol <= 0.0:
+        raise ValueError("tol must be positive")
+
+    def crossing(u: float) -> float:
+        d = sqrt(u * u + v * v)
+        left = u * u / (d * d)
+        denom = d * cosh(d) - sinh(d)
+        right = (sinh(d) ** 2 - d * d) / (denom * denom)
+        return left - right
+
+    lower = 0.0
+    upper = max(1.0, v)
+    while crossing(upper) < 0.0:
+        upper *= 2.0
+        if upper > 700.0:
+            raise RuntimeError("failed to bracket exact anti-phase optimum")
+    while upper - lower > tol * max(1.0, upper):
+        mid = 0.5 * (lower + upper)
+        if crossing(mid) < 0.0:
+            lower = mid
+        else:
+            upper = mid
+    return 0.5 * (lower + upper)
+
+
+def exact_optimal_migration(
+    contrast_half_amplitude: float,
+    season_duration: float,
+    tol: float = 1e-13,
+) -> float:
+    """Return the unique exact premium-maximizing migration rate."""
+
+    if season_duration <= 0.0:
+        raise ValueError("season_duration must be positive")
+    v = abs(contrast_half_amplitude) * season_duration
+    if v == 0.0:
+        raise ValueError("nonzero contrast is required for an interior optimum")
+    return exact_optimal_dimensionless_migration(v, tol) / season_duration
+
+
+def exact_max_premium(
+    contrast_half_amplitude: float,
+    season_duration: float,
+    tol: float = 1e-13,
+) -> float:
+    """Return the exact maximum temporal premium over migration."""
+
+    m_star = exact_optimal_migration(
+        contrast_half_amplitude, season_duration, tol
+    )
+    return anti_phase_temporal_premium(
+        contrast_half_amplitude, m_star, season_duration
     )
 
 
@@ -214,8 +305,8 @@ def anti_phase_summary(
         season_duration,
     )
     premium = floquet - mean_margin
-    u_star = weak_contrast_optimal_dimensionless_migration()
-    return {
+    u_star_weak = weak_contrast_optimal_dimensionless_migration()
+    summary: Dict[str, float] = {
         "mean_margin": mean_margin,
         "contrast_half_amplitude": contrast_half_amplitude,
         "migration_rate": migration_rate,
@@ -229,14 +320,24 @@ def anti_phase_summary(
         "fast_switching_premium": fast_switching_premium(
             contrast_half_amplitude, migration_rate, season_duration
         ),
-        "weak_contrast_u_star": u_star,
-        "weak_contrast_shape_max": weak_contrast_shape(u_star),
-        "weak_contrast_optimal_migration": u_star / season_duration,
+        "weak_contrast_u_star": u_star_weak,
+        "weak_contrast_shape_max": weak_contrast_shape(u_star_weak),
+        "weak_contrast_optimal_migration": u_star_weak / season_duration,
         "weak_contrast_max_premium": weak_contrast_max_premium_approx(
             contrast_half_amplitude, season_duration
         ),
         "rescued": float(mean_margin < 0.0 < floquet),
     }
+    if contrast_half_amplitude != 0.0:
+        exact_m = exact_optimal_migration(
+            contrast_half_amplitude, season_duration
+        )
+        summary["exact_optimal_migration"] = exact_m
+        summary["exact_optimal_dimensionless_migration"] = exact_m * season_duration
+        summary["exact_max_premium"] = anti_phase_temporal_premium(
+            contrast_half_amplitude, exact_m, season_duration
+        )
+    return summary
 
 
 def _validate(migration_rate: float, season_duration: float) -> None:
