@@ -1,6 +1,6 @@
 # Prior-art boundary for PAYOFF
 
-PAYOFF should not claim that specialization, modularity, frequency-dependent diversification, or evolutionary branching are new ideas. The literature already contains deep theory on all of them.
+PAYOFF should not claim that specialization, modularity, frequency-dependent diversification, evolutionary branching, Moran fixation theory, or the one-third law are new ideas. The literature already contains deep theory on all of them.
 
 This note records the current boundary so the manuscript can focus on the actual bridge developed here.
 
@@ -38,11 +38,38 @@ PAYOFF therefore does **not** claim to invent reciprocal invasion analysis, coex
 
 Phenotypic integration/modularity theory already treats integration as both potentially constraining and potentially facilitating evolution, and modularization as permitting subsets of traits to vary more independently.
 
-Recent synthesis continues to emphasize integration and modularity as central to diversification across biological scales.
-
 PAYOFF therefore does **not** claim that reducing coupling among traits is a new concept.
 
-## 6. Candidate contribution of PAYOFF
+## 6. Finite-population evolutionary games and the one-third law are established theory
+
+Frequency-dependent Moran processes, fixation probability criteria, and finite-population evolutionary stability are established topics. The one-third law states, under weak selection for two-strategy games, that a mutant can be favored above neutral fixation when the relevant deterministic threshold lies below one third.
+
+Key anchor:
+
+- Ohtsuki, Bordalo & Nowak (2007), **The one-third law of evolutionary dynamics**, Journal of Theoretical Biology 249:289-295. PMID `17826798`.
+
+The paper explicitly treats finite-population stochastic evolutionary games and explains the one-third law derived from earlier Moran-process work.
+
+Fudenberg, Nowak, Taylor & Imhof (2006), **Evolutionary game dynamics in finite populations with strong selection and weak mutation**, Theoretical Population Biology 70:352-363, also gives a broad finite-population frequency-dependent game framework.
+
+PAYOFF therefore does **not** claim to invent:
+
+```text
+Moran fixation probability,
+finite-population evolutionary stability,
+risk-dominance/fixation comparisons,
+or the one-third law.
+```
+
+PAYOFF's finite-population contribution is to substitute the ecology-derived architecture gap
+
+```text
+phi=sL-K
+```
+
+into that stochastic-game machinery and derive the resulting architecture-specific fixation receipts for the declared payoff matrix.
+
+## 7. Candidate contribution of PAYOFF
 
 The defensible contribution is narrower and more specific:
 
@@ -65,11 +92,16 @@ reciprocal architecture invasion
         | Delta(0)=phi-eta
         | Delta(1)=phi+eta
         v
-population outcome
+deterministic population outcome
         |
         | dominance / coexistence / coordination
         v
-empirical two-edge identification
+finite-population stochastic outcome
+        |
+        | rho_D, rho_S under Moran updating
+        | weak-selection criterion 3phi>eta
+        v
+empirical bridge
           phi=[Delta(0)+Delta(1)]/2
           eta=[Delta(1)-Delta(0)]/2.
 ```
@@ -80,11 +112,11 @@ The key question is not simply
 
 It is
 
-> **Can an empirically reconstructed one-coordinate compromise be carried, on the same fitness scale, through a costed architecture transition and into reciprocal invasion predictions for the population dynamics of shared versus differentiated architectures?**
+> **Can an empirically reconstructed one-coordinate compromise be carried, on the same fitness scale, through a costed architecture transition, reciprocal invasion, and finally into finite-population fixation predictions for shared versus differentiated architectures?**
 
 That is the SCH -> BALANCE -> BITA -> PAYOFF bridge.
 
-## 7. Strongest current theorem-level pieces
+## 8. Strongest current theorem-level pieces
 
 ### Exact quadratic receipt
 
@@ -116,7 +148,7 @@ and
 phi=-eta.
 ```
 
-Their intervening region is stable coexistence for `eta<0` and mutual non-invasion / coordination bistability for `eta>0`.
+Their intervening region is stable coexistence for `eta<0` and coordination bistability for `eta>0`.
 
 ### Minimal empirical identification
 
@@ -127,9 +159,23 @@ phi=(Delta0+Delta1)/2
 eta=(Delta1-Delta0)/2.
 ```
 
-This creates a direct empirical target that can receive quantities from the sister repositories rather than starting from an abstract strategy variable.
+### Finite-population receipt
 
-## 8. Claim ceiling
+Under the declared exponential-fitness Moran process,
+
+```text
+rho_D/rho_S=exp[beta phi(N-2)]
+```
+
+and under weak selection
+
+```text
+rho_D>1/N iff 3phi>eta.
+```
+
+After substituting `phi=sL-K`, this becomes an explicit prediction from measured ecological compromise and architecture quantities. The stochastic-game laws themselves remain prior art; the contribution is the cross-scale parameter bridge.
+
+## 9. Claim ceiling
 
 Until a broader systematic prior-art search is complete, manuscript language should use:
 
@@ -138,6 +184,7 @@ we derive
 we connect
 we provide an explicit bridge
 we show that under the declared model
+we map an established finite-population criterion onto measured architecture quantities
 ```
 
 rather than:
@@ -145,7 +192,9 @@ rather than:
 ```text
 first theory of specialization
 first game theory of modularity
-first demonstration that frequency dependence changes architecture.
+first demonstration that frequency dependence changes architecture
+new one-third law
+first finite-population game of trait architecture.
 ```
 
-The novelty claim should remain the **cross-scale estimand bridge and its testable reciprocal-invasion consequences**, not the existence of any component idea by itself.
+The novelty claim should remain the **cross-scale estimand bridge and its testable invasion/fixation consequences**, not the existence of any component idea by itself.
