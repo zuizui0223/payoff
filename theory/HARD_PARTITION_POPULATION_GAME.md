@@ -1,5 +1,13 @@
 # Hard-partition population game — module architectures as canonical PAYOFF strategies
 
+> **Candidate-set scope update:** HPG2 below is exact only for the restricted
+> three-state set `{S,M,F}`. Three functions admit five partitions. The omitted
+> `{0}|{1,2}` partition invades this restricted solution for `h>1`; the complete
+> five-partition game has boundaries `1/2, 1, 13/6` and a four-way coexistence
+> regime. See [the complete-candidate audit](FULL_PARTITION_EQUILIBRIUM_AUDIT.md)
+> for all-invader proofs, corrected full-game frequencies, degeneracy treatment
+> and the tested KKT solver. The restricted formulas remain below as provenance.
+
 The hard-module layer generates discrete architecture states without requiring a reference edgewise coupling graph. This note gives those partitions a natural architecture distance and transports them into the PAYOFF population game.
 
 ---
@@ -435,4 +443,4 @@ Squared-distance potential games and conditional negative definiteness of Euclid
 
 PAYOFF's candidate result is the architecture specialization:
 
-> hard module partitions can be encoded by pairwise co-membership features; under the declared distance feedback, every partition pair inherits canonical PAYOFF coordinates, and the registered three-function model exhibits exact transitions from one intermediate module architecture to two-state and then three-state architecture polymorphism as negative frequency feedback strengthens.
+> hard module partitions can be encoded by pairwise co-membership features; under the declared distance feedback, every partition pair inherits canonical PAYOFF coordinates, and the registered restricted three-state subgame exhibits exact transitions from one intermediate module architecture to two-state and then three-state architecture polymorphism as negative frequency feedback strengthens. The full five-partition result is in `FULL_PARTITION_EQUILIBRIUM_AUDIT.md`.
