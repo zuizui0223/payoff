@@ -49,7 +49,6 @@ def test_zero_error_reduces_exactly_to_previous_equal_spacing_law():
         assert r.recommended_frequencies_exact == tuple(
             str(F(i,m+1)) for i in range(1,m+1))
         assert r.minimax_undetectable_amplitude_exact == str(F(1,2*(m+1)))
-        assert r.irducible_detection_floor_exact if False else True
         assert r.irreducible_detection_floor_exact == "0"
         assert r.holdouts_improve_minimax_guarantee
         assert r.design_unique
