@@ -97,8 +97,8 @@ def test_existing_invasion_margin_adapter_matches_inverse_map():
         u, v = invasion_margins(L, s, K, eta)
         r = identify((str(u), str(u)), (str(v), str(v)))
         phi = s*L-K
-        assert abs(float(r.phi_band_exact[0])-phi) < 1e-12
-        assert abs(float(r.eta_band_exact[0])-eta) < 1e-12
+        assert abs(float(F(r.phi_band_exact[0]))-phi) < 1e-12
+        assert abs(float(F(r.eta_band_exact[0]))-eta) < 1e-12
 
 
 @pytest.mark.parametrize("kwargs", [
