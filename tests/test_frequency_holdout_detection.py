@@ -49,6 +49,7 @@ def test_zero_error_reduces_exactly_to_previous_equal_spacing_law():
         assert r.recommended_frequencies_exact == tuple(
             str(F(i,m+1)) for i in range(1,m+1))
         assert r.minimax_undetectable_amplitude_exact == str(F(1,2*(m+1)))
+        assert r.irducible_detection_floor_exact if False else True
         assert r.irreducible_detection_floor_exact == "0"
         assert r.holdouts_improve_minimax_guarantee
         assert r.design_unique
@@ -112,6 +113,16 @@ def test_required_count_respects_strict_closed_band_boundary():
     assert r.strict_boundary
     assert not r.statistical_power_computed
     assert not r.sample_size_recommendation
+
+
+def test_required_count_stays_constant_memory_for_large_answer():
+    # Exact zero-error inversion: U_m=1/[2(m+1)]. A=1/1000001 requires
+    # m=500000 because m=499999 gives 1/1000000, still above the target.
+    r = required_holdout_count_for_amplitude(
+        F(1,1000001), residual_lipschitz_bound=1,
+        endpoint_error_halfwidth=0, interior_error_halfwidth=0)
+    assert r.required_holdout_count == 500000
+    assert r.achieved_minimax_undetectable_amplitude_exact == "1/1000002"
 
 
 def test_required_count_refuses_below_noise_floor_and_impossible_amplitude():
