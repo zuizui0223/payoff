@@ -80,3 +80,14 @@ Conversely, improving precision can change both minimum costs and therefore the 
 ```bash
 python -m pytest -q tests/test_adaptivity_budget_profile.py
 ```
+
+## Exact precision and unequal-cost continuation
+
+The full-vocabulary error-scale ceiling is now available as an exact certificate,
+including an opposite-phase pair and common response vector at a finite boundary.
+For the registered witness the separate error thresholds are `9/80`, `1/225`,
+and `1/300` (all strict), and unequal positive acquisition costs give
+`C_adapt=c_B+max(c_20,c_10)` versus `C_fixed=c_B+c_20+c_10`.
+
+See [`PRECISION_LIMIT_HANDOFF.md`](PRECISION_LIMIT_HANDOFF.md) and the proof in
+[`../theory/FINITE_PANEL_PRECISION_LIMIT.md`](../theory/FINITE_PANEL_PRECISION_LIMIT.md).
