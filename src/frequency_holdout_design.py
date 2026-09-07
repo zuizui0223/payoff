@@ -8,13 +8,17 @@ Two alternative classes are deliberately separated:
 1. Lipschitz residual class. Let r(p)=observed_frequency_gap(p)-canonical_line(p),
    with r(0)=r(1)=0 and |r(x)-r(y)| <= L|x-y|. For m strict interior samples,
    the worst unsampled residual envelope is L times the covering radius of
-   {0, samples..., 1}. Equal spacing p_i=i/(m+1) uniquely minimizes that radius.
+   {0, samples..., 1}. Equal spacing p_i=i/(m+1) uniquely minimizes that radius
+   in the zero-measurement-error design problem.
 
 2. Uniform signed curvature class. If r'' >= kappa everywhere or r'' <= -kappa
    everywhere, r(0)=r(1)=0, then |r(p)| >= kappa*p*(1-p)/2. A single holdout at
    p=1/2 maximizes this guaranteed departure, giving kappa/8.
 
-Neither result is an optimality statement over arbitrary nonlinear alternatives.
+Measurement-error-aware placement is implemented separately in
+`frequency_holdout_detection.py`, because nonzero error changes the minimax
+placement itself. Neither result is an optimality statement over arbitrary
+nonlinear alternatives.
 """
 from __future__ import annotations
 
@@ -39,8 +43,14 @@ def _nonnegative(value: object, name: str) -> F:
 
 
 def covering_radius(points: Sequence[object]) -> F:
-    """Exact covering radius on [0,1], including the fixed endpoint anchors."""
+    """Exact covering radius on [0,1], including the fixed endpoint anchors.
+
+    This helper follows the design theorem's m>=1 contract; an empty sequence is
+    therefore rejected rather than interpreted as an endpoint-only design.
+    """
     ps = tuple(_q(p) for p in points)
+    if not ps:
+        raise ValueError("at least one strict interior design point is required")
     if any(not F(0) < p < F(1) for p in ps):
         raise ValueError("design points must be strictly interior")
     if tuple(sorted(ps)) != ps or len(set(ps)) != len(ps):
