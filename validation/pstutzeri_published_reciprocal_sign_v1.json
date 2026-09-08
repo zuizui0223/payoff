@@ -1,0 +1,88 @@
+{
+  "receipt_id": "PSTUTZERI_PUBLISHED_RECIPROCAL_SIGN_V1",
+  "source": {
+    "citation": "Dolinsek, Ramoneda & Johnson 2022, ISME Communications 2:77",
+    "doi": "10.1038/s43705-022-00160-1",
+    "public_archive_doi": "10.25678/0006RZ",
+    "evidence_source_class": "published_text_derived",
+    "raw_archive_inspected": false
+  },
+  "algebraic_label_mapping": {
+    "S": "complete_denitrification_generalist",
+    "D": "nitrite_only_specialist",
+    "payoff_architecture_semantics_declared": false
+  },
+  "short_window": {
+    "transfers": 3,
+    "generations_per_transfer_approx": 6.644,
+    "generations_approx": 19.932,
+    "authors_stated_goal": "minimize_probability_of_genetic_and_phenotypic_change_while_allowing_trend_test"
+  },
+  "contexts": {
+    "pH_6_5": {
+      "nitrite_toxicity": "strong",
+      "generalist_rare": {
+        "initial_log10_specialist_to_generalist": [3.23, 1.98],
+        "initial_specialist_frequency_approx": [0.9994115, 0.9896372],
+        "reported_trend_tau": -1.0,
+        "reported_p": 0.042,
+        "oriented_sign": "positive"
+      },
+      "specialist_rare": {
+        "initial_log10_specialist_to_generalist": [-3.19, -2.65],
+        "initial_specialist_frequency_approx": [0.00064524, 0.00223372],
+        "reported_trend_tau": 1.0,
+        "reported_p": 0.042,
+        "oriented_sign": "positive"
+      },
+      "generic_payoff_sign_phase": "stable_architecture_coexistence",
+      "strict_phase_certified_from_published_oriented_signs": true
+    },
+    "pH_7_5": {
+      "nitrite_toxicity": "weak",
+      "generalist_rare": {
+        "initial_log10_specialist_to_generalist": [2.98, 2.12],
+        "initial_specialist_frequency_approx": [0.9989540, 0.9924713],
+        "reported_trend_tau": -1.0,
+        "reported_p": 0.042,
+        "oriented_sign": "positive"
+      },
+      "specialist_rare": {
+        "initial_log10_specialist_to_generalist": [-3.33, -2.13],
+        "initial_specialist_frequency_approx": [0.00046752, 0.00735855],
+        "reported_trend_tau": 0.67,
+        "reported_p": 0.31,
+        "oriented_sign": "unresolved"
+      },
+      "compatible_strict_phases": [
+        "shared_dominance",
+        "stable_architecture_coexistence"
+      ],
+      "excluded_strict_phases": [
+        "coordination_bistability",
+        "differentiated_dominance"
+      ],
+      "boundary_compatible": true,
+      "strict_phase_certified": false
+    }
+  },
+  "long_window_pH_6_5": {
+    "transfers": 12,
+    "generations_approx": 80,
+    "example_initial_log10_specialist_to_generalist": -3.19,
+    "example_initial_specialist_frequency": 0.00064,
+    "example_specialist_frequency_after_3_transfers": 0.41,
+    "example_specialist_frequency_after_12_transfers": 0.08,
+    "interpretation": "fixed_type_fixed_payoff_extrapolation_not_supported_because_generalist_phenotypic_and_genetic_change_accumulates"
+  },
+  "claim_flags": {
+    "generic_lane_A_reciprocal_invasion_logic_recovered": true,
+    "numerical_phi_identified": false,
+    "numerical_eta_identified": false,
+    "affine_frequency_response_validated": false,
+    "finite_population_fixation_identified": false,
+    "recurrent_mutation_occupancy_identified": false,
+    "payoff_architecture_mapping_established": false,
+    "historical_causation_identified": false
+  }
+}
