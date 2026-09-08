@@ -2,7 +2,46 @@
 
 This ledger ranks systems by how close they come to direct empirical identification of PAYOFF frequency feedback between an integrated/shared architecture and a differentiated/released architecture.
 
-## 1. *Pseudomonas aeruginosa* siderophore specialization — closest empirical two-axis near miss
+## 1. *Streptomyces coelicolor* terminal genomic differentiation — closest architecture-level target
+
+Zhang et al. (2020), Science Advances, DOI `10.1126/sciadv.aay5781`; Zhang et al. (2022), Nature Communications, DOI `10.1038/s41467-022-29924-y`; Colizzi et al. (2023), Molecular Systems Biology, DOI `10.15252/msb.202211353`; Avitia Domínguez et al. (2025), DOI `10.1098/rstb.2023.0267`.
+
+The empirical series establishes:
+
+```text
+integrated progenitor colony:
+    replicates/sporulates and produces antibiotics;
+
+differentiated caste:
+    large chromosome deletions generate sterile antibiotic hyperproducers;
+
+trade-off:
+    more antibiotic production accompanies sharply reduced autonomous spore fitness;
+
+group benefit:
+    mixtures of parent + deletion mutants produce more antibiotics while colony-wide spore production remains unchanged;
+
+frequency assay:
+    mutant versus WT cells were competed from multiple starting frequencies;
+    differentiated mutants collapse from the reproductive pool even when initially common;
+
+context response:
+    competitor exposure can increase the internal deletion-mutant/caste ratio and spore production.
+```
+
+The 2023 genome-architecture model then shows why a heritable architecture capable of repeatedly generating this differentiated caste can beat matched generalist architectures.
+
+Why it still does not enter Lane P:
+
+The empirical frequency axis is **specialist cell versus WT cell**, not **DoL-capable colony architecture versus generalist-only colony architecture**. The latter direct architecture-frequency comparison remains model-based.
+
+Status:
+
+```text
+NEAR_P_ARCHITECTURE_EXCELLENT_EMPIRICAL_COMPONENTS_WRONG_FREQUENCY_UNIT
+```
+
+## 2. *Pseudomonas aeruginosa* siderophore specialization — closest empirical two-axis near miss
 
 Mridha et al. (2022), DOI `10.1111/jeb.14001`.
 
@@ -31,7 +70,7 @@ Status:
 NEAR_P_COMMON_SCALE_PLUS_WITHIN_D_FREQUENCY
 ```
 
-## 2. *Bacillus subtilis* EPS/TasA biofilm specialization — strongest architecture + within-D frequency result
+## 3. *Bacillus subtilis* EPS/TasA biofilm specialization — strongest internal differentiated-frequency result
 
 Dragoš et al. (2018), Current Biology, DOI `10.1016/j.cub.2018.05.046`.
 
@@ -51,7 +90,7 @@ Status:
 NEAR_P_ARCHITECTURE_STRONG_FREQUENCY_WITHIN_D_ONLY
 ```
 
-## 3. synthetic *E. coli* organic-acid consortia — strongest static S-versus-D context switch with public data
+## 4. synthetic *E. coli* organic-acid consortia — strongest static S-versus-D context switch with public data
 
 Beck et al. (2022), mSystems, DOI `10.1128/msystems.00051-22`.
 
@@ -83,7 +122,7 @@ NEAR_P_STATIC_S_D_PAYOFF_CONTEXT_SWITCH
 PUBLIC_SUPPLEMENTARY_WORKBOOK_IDENTIFIED_NOT_YET_NUMERICALLY_INSPECTED
 ```
 
-## 4. *Pseudomonas stutzeri* generalist-specialist cross-feeding — strongest direct frequency experiment with wrong architecture mapping
+## 5. *Pseudomonas stutzeri* generalist-specialist cross-feeding — strongest direct frequency experiment with wrong architecture mapping
 
 Schink et al., `Initial community composition determines the long-term dynamics of a microbial cross-feeding interaction by modulating niche availability`.
 
@@ -103,7 +142,7 @@ Status:
 NEAR_P_DIRECT_FREQUENCY_WRONG_ARCHITECTURE_CONTRAST
 ```
 
-## 5. *E. coli* maltose/lactose chemostat competition — direct generalist-specialist game analogue
+## 6. *E. coli* maltose/lactose chemostat competition — direct generalist-specialist game analogue
 
 Dykhuizen & Davies (1980), Ecology, DOI `10.2307/1936839`.
 
@@ -115,22 +154,6 @@ Status:
 
 ```text
 GENERIC_GENERALIST_SPECIALIST_GAME_ANALOGUE
-```
-
-## 6. *Streptomyces* mutation-driven division of labor — best heritable architecture concept, decisive comparison simulation-only
-
-Colizzi et al. (2023), Molecular Systems Biology, DOI `10.15252/msb.202211353`.
-
-A genome architecture with fragile sites generates sterile antibiotic-producing specialists from replicating progenitors, directly resolving a replication-versus-antibiotic trade-off. In the model, generalist architectures that cannot divide labor lose direct competitions against architectures that can.
-
-This is conceptually the closest current architecture analogue because the differentiated organization is encoded by a heritable genome architecture rather than assembled ad hoc from separately maintained strains.
-
-The blocker is empirical: the decisive S-versus-D frequency series is computational, not an experimental reciprocal-invasion dataset.
-
-Status:
-
-```text
-NEAR_P_ARCHITECTURE_EXCELLENT_SIMULATION_FREQUENCY_ONLY
 ```
 
 ## Overall conclusion
@@ -146,4 +169,4 @@ multiple S:D resident frequencies
 empirical relative fitness
 ```
 
-The closest systems fail in complementary ways. This makes the missing intersection itself a concrete experimental target rather than a vague literature gap.
+The closest systems fail in complementary ways. The new strongest architecture target is *Streptomyces*: almost all biological pieces are empirical, but the **frequency unit** is still wrong for PAYOFF architecture `eta`.
