@@ -2,7 +2,7 @@
 
 This ledger ranks systems by how close they come to direct empirical identification of PAYOFF frequency feedback between an integrated/shared architecture and a differentiated/released architecture.
 
-## 1. *Streptomyces coelicolor* terminal genomic differentiation — closest architecture-level target
+## 1. *Streptomyces coelicolor* terminal genomic differentiation — closest heritable architecture target
 
 Zhang et al. (2020), Science Advances, DOI `10.1126/sciadv.aay5781`; Zhang et al. (2022), Nature Communications, DOI `10.1038/s41467-022-29924-y`; Colizzi et al. (2023), Molecular Systems Biology, DOI `10.15252/msb.202211353`; Avitia Domínguez et al. (2025), DOI `10.1098/rstb.2023.0267`.
 
@@ -41,7 +41,52 @@ Status:
 NEAR_P_ARCHITECTURE_EXCELLENT_EMPIRICAL_COMPONENTS_WRONG_FREQUENCY_UNIT
 ```
 
-## 2. *Pseudomonas aeruginosa* siderophore specialization — closest empirical two-axis near miss
+## 2. experimentally evolved *E. coli* cross-feeding consortium — closest S-to-D origin plus direct S:D competition
+
+Yang et al. (2020), Applied and Environmental Microbiology, DOI `10.1128/AEM.00051-20`, reanalyzed the classic Helling/Rosenzweig glucose-limited chemostat lineage.
+
+```text
+S candidate:
+    the single common ancestral clone JA122;
+
+D candidate:
+    a genetically and phenotypically differentiated E3+E1+E6 cross-feeding consortium
+    descended from that same ancestor;
+
+origin:
+    one initially clonal population evolved persistent primary-resource and secondary-resource specialists;
+
+common scale:
+    evolved ecotypes and reconstructed consortia were directly competed against GFP-labeled ancestor;
+
+result:
+    every evolved strain was fitter than the ancestor;
+    two-member consortia were fitter than the ancestor;
+    the three-member consortium was fitter than the ancestor and every evolved monoculture;
+    fitness and productivity rankings agreed.
+```
+
+The consortium-versus-ancestor competition is especially close to PAYOFF's desired S-versus-D comparison because it closes an actual evolutionary route from one ancestral generalist into a differentiated cross-feeding organization and then compares the two on one fitness scale.
+
+However, the consortium was reconstituted at its internal steady-state ratio and then mixed with an **equal number** of ancestral cells. This supplies one direct S:D starting composition, not a multi-frequency S:D response curve. It also retains a strategic-unit caveat because D is a multi-genotype consortium rather than one genotype.
+
+Status:
+
+```text
+NEAR_P_EVOLVED_S_TO_D_DIRECT_COMPETITION_SINGLE_SD_RATIO
+O_FREQ_REMAINING_MULTIPLE_SD_FREQUENCIES_NOT_TESTED
+O_UNIT_CONSORTIUM_IS_MULTIGENOTYPE
+```
+
+This system is therefore the strongest current empirical target for a simple follow-up question:
+
+```text
+repeat ancestor-versus-reconstituted-consortium competition at multiple total S:D starting ratios,
+while freezing the internal D consortium ratio,
+and estimate Delta(p) prospectively.
+```
+
+## 3. *Pseudomonas aeruginosa* siderophore specialization — closest empirical two-axis near miss
 
 Mridha et al. (2022), DOI `10.1111/jeb.14001`.
 
@@ -70,7 +115,7 @@ Status:
 NEAR_P_COMMON_SCALE_PLUS_WITHIN_D_FREQUENCY
 ```
 
-## 3. *Bacillus subtilis* EPS/TasA biofilm specialization — strongest internal differentiated-frequency result
+## 4. *Bacillus subtilis* EPS/TasA biofilm specialization — strongest internal differentiated-frequency result
 
 Dragoš et al. (2018), Current Biology, DOI `10.1016/j.cub.2018.05.046`.
 
@@ -90,7 +135,7 @@ Status:
 NEAR_P_ARCHITECTURE_STRONG_FREQUENCY_WITHIN_D_ONLY
 ```
 
-## 4. synthetic *E. coli* organic-acid consortia — strongest static S-versus-D context switch with public data
+## 5. synthetic *E. coli* organic-acid consortia — strongest static S-versus-D context switch with public data
 
 Beck et al. (2022), mSystems, DOI `10.1128/msystems.00051-22`.
 
@@ -122,7 +167,7 @@ NEAR_P_STATIC_S_D_PAYOFF_CONTEXT_SWITCH
 PUBLIC_SUPPLEMENTARY_WORKBOOK_IDENTIFIED_NOT_YET_NUMERICALLY_INSPECTED
 ```
 
-## 5. *Pseudomonas stutzeri* generalist-specialist cross-feeding — strongest direct frequency experiment with wrong architecture mapping
+## 6. *Pseudomonas stutzeri* generalist-specialist cross-feeding — strongest direct frequency experiment with wrong architecture mapping
 
 Schink et al., `Initial community composition determines the long-term dynamics of a microbial cross-feeding interaction by modulating niche availability`.
 
@@ -142,7 +187,7 @@ Status:
 NEAR_P_DIRECT_FREQUENCY_WRONG_ARCHITECTURE_CONTRAST
 ```
 
-## 6. *E. coli* maltose/lactose chemostat competition — direct generalist-specialist game analogue
+## 7. *E. coli* maltose/lactose chemostat competition — direct generalist-specialist game analogue
 
 Dykhuizen & Davies (1980), Ecology, DOI `10.2307/1936839`.
 
@@ -169,4 +214,17 @@ multiple S:D resident frequencies
 empirical relative fitness
 ```
 
-The closest systems fail in complementary ways. The new strongest architecture target is *Streptomyces*: almost all biological pieces are empirical, but the **frequency unit** is still wrong for PAYOFF architecture `eta`.
+The near misses now split into two especially informative frontiers:
+
+```text
+Streptomyces:
+    best heritable architecture concept,
+    but the empirical frequency unit is specialist cell rather than colony architecture.
+
+Yang et al. E. coli:
+    actual single-ancestor -> differentiated consortium evolution
+    plus direct S:D common-scale competition,
+    but only one S:D starting ratio and a multi-genotype D unit.
+```
+
+So the remaining Lane P gap is no longer a generic demand for more evidence: it is a narrow strategic-unit/frequency-design intersection.
