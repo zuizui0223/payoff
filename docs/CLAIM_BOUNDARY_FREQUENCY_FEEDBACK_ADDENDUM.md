@@ -41,9 +41,9 @@ FIXED_COUNT_INTERIOR_PRECISION_FRONTIER_PROVED
 
 ## Empirical recovery labels
 
-Two non-equivalent Lane A analogue classes are now recovered.
+Three non-equivalent Lane A analogue roles are now recovered.
 
-### Mechanism-proximate mutualist-antagonist analogue
+### E0m — mechanism-proximate mutualist-antagonist analogue
 
 ```text
 PRIMULA_2006_EXPERIMENTAL_COMPOSITION_EFFECT_ANALOGUE_RECOVERED
@@ -55,7 +55,7 @@ These labels refer to the long/short floral-display polymorphism in *Primula far
 
 They are **not** PAYOFF S/D architecture identification labels.
 
-### Clean manipulated game-layer analogue
+### E0g — clean manipulated game-layer analogue
 
 ```text
 DACTYLORHIZA_MANIPULATED_FIVE_FREQUENCY_GAME_ANALOGUE_RECOVERED
@@ -66,6 +66,21 @@ DACTYLORHIZA_OBSERVED_RANGE_NO_REFIT_REANALYSIS_PREDECLARED
 These labels refer to *Dactylorhiza sambucina*, where yellow-morph frequency was manipulated at `0.1,0.3,0.5,0.7,0.9` at constant density and male/female reproductive-success advantages reversed with frequency.
 
 This system is strong for testing transportability of the minimal two-strategy frequency-response **game layer** over the observed range. It is not evidence for the upstream SCH/BALANCE/BITA architecture mechanism, and the outer observed frequencies are not true rare-invasion endpoints.
+
+### E0c — ecological context-switch analogue with public data
+
+```text
+ARABIDOPSIS_HALLERI_PRIMARY_FREQUENCY_FEEDBACK_EVIDENCE_RECOVERED
+ARABIDOPSIS_HALLERI_PUBLIC_DRYAD_WORKBOOK_IDENTIFIED
+ARABIDOPSIS_HALLERI_BEETLE_CONTEXT_CONTRAST_RECOVERED
+ARABIDOPSIS_HALLERI_GENERIC_GAME_REANALYSIS_PREDECLARED
+```
+
+These labels refer to the hairy/glabrous trichome dimorphism in *Arabidopsis halleri*. The published mesocosm result reports rare-morph advantage in defense and reproduction with the specialist leaf beetle *Phaedon brassicae* present, but no detected rare-morph advantage without beetles, when glabrous plants instead had higher reproduction regardless of frequency condition.
+
+The associated Dryad record identifies an original workbook with field, mesocosm and README sheets. Raw file bytes have not yet been acquired in the current authenticated tooling, so no numerical frequency-response estimate is claimed yet.
+
+This system is valuable for asking whether frequency feedback itself changes with ecological context. It is not an S/D architecture identification.
 
 ## PAYOFF-specific empirical ceiling
 
@@ -89,13 +104,15 @@ Use together with
 docs/EMPIRICAL_FREQUENCY_FEEDBACK_RECOVERY_PROTOCOL.md
 docs/EMPIRICAL_FREQUENCY_FEEDBACK_LEDGER_V1.md
 docs/FREQUENCY_FEEDBACK_VALIDATION_PATH.md
+docs/EMPIRICAL_REANALYSIS_PRIORITY_V1.md
 docs/PRIMULA_FREQUENCY_REANALYSIS_READINESS_V1.md
 docs/DACTYLORHIZA_GENERIC_GAME_REANALYSIS_READINESS_V1.md
+docs/ARABIDOPSIS_HALLERI_GENERIC_GAME_REANALYSIS_READINESS_V1.md
 ```
 
 Evidence that establishes frequency-dependent selection in an analogue system belongs to Lane A. Only a declared shared/integrated versus differentiated/released architecture pair with frequency-dependent relative fitness can enter Lane P and change the PAYOFF-specific empirical labels.
 
-Within Lane A, keep two questions separate:
+Within Lane A, keep three questions separate:
 
 ```text
 mechanism proximity:
@@ -103,9 +120,12 @@ mechanism proximity:
 
 game-layer test quality:
     how cleanly can multiple frequencies and relative fitness falsify the canonical frequency law?
+
+context-switch information:
+    can the same alternatives change frequency-feedback regime across an ecological state variable?
 ```
 
-Primula currently scores higher on the first dimension. Dactylorhiza scores higher on the second.
+Primula currently leads the first dimension, Dactylorhiza the second, and *Arabidopsis halleri* the third while also offering the clearest identified public-data path.
 
 ## Appropriate manuscript language now
 
@@ -119,11 +139,11 @@ Avoid:
 
 Preferred:
 
-> Existing floral evidence shows both a mechanism-proximate case in which mutualist-antagonist effects generate context-dependent frequency-dependent selection and a separate manipulated multi-frequency plant system suitable for testing the transportability of the minimal game layer.
+> Existing evidence supplies three complementary reality checks: a mechanism-proximate mutualist-antagonist floral system, a manipulated five-frequency plant polymorphism for game-layer falsification, and a public-data herbivore system in which frequency-dependent reproduction changes with ecological context.
 
 Avoid:
 
-> The Primula or Dactylorhiza evidence estimates PAYOFF's architecture eta.
+> The Primula, Dactylorhiza or Arabidopsis evidence estimates PAYOFF's architecture eta.
 
 Preferred:
 
@@ -135,12 +155,13 @@ Avoid:
 
 ## Manuscript consequence
 
-The strongest current PAYOFF narrative is therefore three-layered:
+The strongest current PAYOFF narrative is therefore four-layered:
 
 ```text
-Layer T  — proved architecture-payoff transport and measurement design
+Layer T   — proved architecture-payoff transport and measurement design
 Layer E0m — mechanism-proximate ecological plausibility of frequency feedback
 Layer E0g — generic game-layer multi-frequency falsification opportunity
+Layer E0c — empirical context-switch opportunity with an identified public dataset
 ```
 
 The missing promotion step is
