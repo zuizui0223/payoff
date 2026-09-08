@@ -41,15 +41,35 @@ FIXED_COUNT_INTERIOR_PRECISION_FRONTIER_PROVED
 
 ## Empirical recovery labels
 
-The sister-program audit currently licenses one frequency-feedback analogue statement:
+Two non-equivalent Lane A analogue classes are now recovered.
+
+### Mechanism-proximate mutualist-antagonist analogue
 
 ```text
-SCH_PRIMULA_CONTEXT_DEPENDENT_FREQUENCY_SELECTION_ANALOGUE_RECOVERED
+PRIMULA_2006_EXPERIMENTAL_COMPOSITION_EFFECT_ANALOGUE_RECOVERED
+SCH_PRIMULA_2008_CONTEXT_DEPENDENT_FREQUENCY_SELECTION_ANALOGUE_RECOVERED
+PRIMULA_2013_CAUSAL_FREQUENCY_TRAJECTORY_ANALOGUE_RECOVERED
 ```
 
-This label refers to audited direct frequency-dependent selection among floral display morphs under pollination and seed-predation effects. It is **not** a PAYOFF S/D architecture identification label.
+These labels refer to the long/short floral-display polymorphism in *Primula farinosa*: experimentally detected composition effects, direct context-dependent frequency-dependent selection under pollination/seed-predation effects, and causal selection/microevolution over longer time scales.
 
-The PAYOFF-specific empirical ceiling remains:
+They are **not** PAYOFF S/D architecture identification labels.
+
+### Clean manipulated game-layer analogue
+
+```text
+DACTYLORHIZA_MANIPULATED_FIVE_FREQUENCY_GAME_ANALOGUE_RECOVERED
+DACTYLORHIZA_RARE_MORPH_REVERSAL_ANALOGUE_RECOVERED
+DACTYLORHIZA_OBSERVED_RANGE_NO_REFIT_REANALYSIS_PREDECLARED
+```
+
+These labels refer to *Dactylorhiza sambucina*, where yellow-morph frequency was manipulated at `0.1,0.3,0.5,0.7,0.9` at constant density and male/female reproductive-success advantages reversed with frequency.
+
+This system is strong for testing transportability of the minimal two-strategy frequency-response **game layer** over the observed range. It is not evidence for the upstream SCH/BALANCE/BITA architecture mechanism, and the outer observed frequencies are not true rare-invasion endpoints.
+
+## PAYOFF-specific empirical ceiling
+
+The architecture-specific statuses remain:
 
 ```text
 PAYOFF_ARCHITECTURE_FREQUENCY_FEEDBACK_NOT_YET_IDENTIFIED
@@ -59,6 +79,8 @@ RECURRENT_MUTATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
 HISTORICAL_CAUSATION_NOT_IDENTIFIED
 ```
 
+A generic analogue passing an affine holdout test does not by itself change `PAYOFF_AFFINE_FREQUENCY_RESPONSE_NOT_YET_EMPIRICALLY_VALIDATED`, because that label is reserved for a declared PAYOFF architecture pair.
+
 ## Evidence-lane rule
 
 Use together with
@@ -67,9 +89,23 @@ Use together with
 docs/EMPIRICAL_FREQUENCY_FEEDBACK_RECOVERY_PROTOCOL.md
 docs/EMPIRICAL_FREQUENCY_FEEDBACK_LEDGER_V1.md
 docs/FREQUENCY_FEEDBACK_VALIDATION_PATH.md
+docs/PRIMULA_FREQUENCY_REANALYSIS_READINESS_V1.md
+docs/DACTYLORHIZA_GENERIC_GAME_REANALYSIS_READINESS_V1.md
 ```
 
 Evidence that establishes frequency-dependent selection in an analogue system belongs to Lane A. Only a declared shared/integrated versus differentiated/released architecture pair with frequency-dependent relative fitness can enter Lane P and change the PAYOFF-specific empirical labels.
+
+Within Lane A, keep two questions separate:
+
+```text
+mechanism proximity:
+    how similar is the ecology to the upstream SCH/BALANCE/BITA mechanism?
+
+game-layer test quality:
+    how cleanly can multiple frequencies and relative fitness falsify the canonical frequency law?
+```
+
+Primula currently scores higher on the first dimension. Dactylorhiza scores higher on the second.
 
 ## Appropriate manuscript language now
 
@@ -83,11 +119,11 @@ Avoid:
 
 Preferred:
 
-> Existing floral evidence shows that mutualist-antagonist systems can generate context-dependent frequency-dependent selection among alternative display morphs, providing ecological plausibility for a PAYOFF-like feedback layer.
+> Existing floral evidence shows both a mechanism-proximate case in which mutualist-antagonist effects generate context-dependent frequency-dependent selection and a separate manipulated multi-frequency plant system suitable for testing the transportability of the minimal game layer.
 
 Avoid:
 
-> The Primula evidence estimates PAYOFF's eta for trait modularization.
+> The Primula or Dactylorhiza evidence estimates PAYOFF's architecture eta.
 
 Preferred:
 
@@ -99,11 +135,12 @@ Avoid:
 
 ## Manuscript consequence
 
-The strongest current PAYOFF narrative is therefore two-layered:
+The strongest current PAYOFF narrative is therefore three-layered:
 
 ```text
-Layer T — proved architecture-payoff transport and measurement design
-Layer E0 — ecological plausibility of frequency feedback recovered in analogue floral systems
+Layer T  — proved architecture-payoff transport and measurement design
+Layer E0m — mechanism-proximate ecological plausibility of frequency feedback
+Layer E0g — generic game-layer multi-frequency falsification opportunity
 ```
 
 The missing promotion step is
