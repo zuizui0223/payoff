@@ -257,7 +257,106 @@ A strong negative result is still informative: it would support a simpler integr
 
 ---
 
-## 10. Position in the PAYOFF programme
+## 10. Individual-system anchor -> TTF spatial projection
+
+This system is now assigned a specific role in the broader PAYOFF -> TTF programme:
+
+```text
+Campanula microdonta
+individual-system anchor
+        |
+        | deep biological resolution
+        | direction / module identity / history
+        v
+PAYOFF local margin
+M(e,p)=phi(e)+eta(e)(2p-1)
+        |
+        v
+spatial projection
+m(x)=M(e(x),p(x))
+        |
+        v
+predicted transition exposure on within-species edges
+        |
+        v
+TTF
+cross-species spatial transfer to unseen species
+```
+
+The role of *C. microdonta* is therefore not to stand in for a multispecies TTF analysis. Its role is to anchor what a spatial turnover boundary could mean biologically.
+
+For the present pre-game stage, the weaker projection is
+
+```text
+m^0(x)=phi(e(x)).
+```
+
+The latent mechanism-side transition set is
+
+```text
+B^P={x : m(x)=0}.
+```
+
+This boundary must not be equated automatically with an observed trait-turnover boundary. Architecture may fail to respond because of history, genetic constraint, gene flow or incorrect mechanism specification.
+
+### What *Campanula* contributes before projection
+
+```text
+which floral module changed;
+which direction it changed;
+whether the change exceeds common allometry;
+whether similar phenotypes arose on distinct genetic backgrounds;
+which historical pollination/mating context is associated with the change.
+```
+
+These are precisely the biological semantics that an unsigned trait-agnostic TTF sharedness statistic does not supply by itself.
+
+### What TTF contributes after projection
+
+TTF can test whether a transition structure learned from other species, or a prospectively fixed PAYOFF-derived predictor, transfers to entirely unseen species.
+
+The intended TTF comparison is
+
+```text
+GE   = geography + environment baseline
+P    = PAYOFF-derived transition exposure
+GEP  = geography + environment + PAYOFF exposure
+
+Delta_P|GE = T_GEP - T_GE.
+```
+
+A positive held-out increment would mean the mechanism-derived projection adds predictive skill beyond the declared baseline. It would not prove identical mechanisms across species.
+
+### Critical unit distinction
+
+The eight Izu island populations remain **one anchor species**, not eight independent TTF species. TTF's canonical superpopulation claim requires additional species and species-disjoint training/evaluation.
+
+### Direction remains separate
+
+Canonical TTF detects where strong within-species turnover recurs, not whether all species move toward the same phenotype. Therefore the proposed syndrome programme is explicitly layered:
+
+```text
+Campanula / other individual anchors
+    establish biological direction and mechanism candidates
+                |
+                v
+TTF
+    establish transferable spatial turnover geometry
+                |
+                v
+signed cross-species endpoint layer
+    test common syndrome direction
+                |
+                v
+combined interpretation
+    recurrent syndrome assembly / disassembly
+```
+
+The full projection contract is in [`PAYOFF_TTF_SPATIAL_PROJECTION_BRIDGE.md`](PAYOFF_TTF_SPATIAL_PROJECTION_BRIDGE.md).
+
+---
+
+## 11. Position in the PAYOFF programme
 
 This file is intentionally a side branch rather than part of the canonical theorem spine.
 
@@ -266,13 +365,19 @@ core PAYOFF theory
     |
     +--> empirical handoff contracts
             |
-            +--> Campanula syndrome-disassembly side branch
+            +--> individual-system anchors
                     |
-                    +--> pollination syndrome
-                    +--> selfing syndrome
-                    +--> island syndrome
+                    +--> Campanula syndrome disassembly
+                    |       |
+                    |       +--> pollination syndrome
+                    |       +--> selfing syndrome
+                    |       +--> island syndrome
+                    |
+                    +--> spatial projection bridge
+                            |
+                            +--> TTF cross-species transfer
 ```
 
-Its role is to translate the existing architecture-payoff language into one concrete evolutionary-ecology system and to define what additional data would be required before a biological result can count as a PAYOFF test.
+Its role is to translate the existing architecture-payoff language into one concrete evolutionary-ecology system, then hand the resulting local mechanism into a separate spatial-transfer layer.
 
 It should remain outside the canonical reader path until an empirical receipt identifies at least one architecture payoff contrast on a common fitness scale.
