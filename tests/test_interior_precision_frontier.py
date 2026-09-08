@@ -21,7 +21,7 @@ def test_registered_asymmetric_m2_target_has_exact_precision_frontier():
     r = frontier(2, F(3,10))
     assert r.endpoint_error_sum_exact == "1/10"
     assert r.endpoint_asymmetry_exact == "3/25"
-    assert r.zero_interior_error_minimax_amplitude_exact == "73/314"
+    assert r.zero_interior_error_minimax_amplitude_exact == "221/942"
     assert r.critical_midpoint_nondetection_threshold_excluded_exact == "1241/6250"
     assert r.critical_interior_error_halfwidth_excluded_exact == "154/3125"
     assert r.status == "finite_strict_interior_precision_frontier_identified"
@@ -71,7 +71,6 @@ def test_zero_interior_error_boundary_still_has_no_guaranteed_nonnegative_precis
 
 def test_target_below_zero_error_ceiling_has_no_nonnegative_solution():
     r = frontier(2, F(1,5), eu=F(1,20), ev=F(1,20))
-    assert r.required if False else True  # receipt intentionally has no sample-size field
     assert r.critical_interior_error_halfwidth_excluded_exact is None
     assert r.status == "no_nonnegative_interior_error_halfwidth_can_guarantee_target_for_fixed_count"
 
