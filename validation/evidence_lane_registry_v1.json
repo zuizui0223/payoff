@@ -128,10 +128,10 @@
         "comparison_id": "WT_VS_PATHWAY_PARTITIONED_CONSORTIUM",
         "strategy_unit_id": "TOTAL_POPULATION_ASSEMBLAGE",
         "dataset_id": "BECK_22_0519_SUPPLEMENTARY_DATASETS",
-        "support_reference": "RAW_GENERIC_GAME_ANALYSIS_NOT_YET_REGISTERED",
+        "support_reference": "BECK_GENERIC_MULTIMETRIC_GATE_V1",
         "evidence_source_mode": "raw_archive",
         "frequency_support_declared": false,
-        "common_outcome_scale_declared": true,
+        "common_outcome_scale_declared": false,
         "generic_game_result_recovered": false,
         "architecture_semantics_used_declared": false
       },
