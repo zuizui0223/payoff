@@ -56,7 +56,7 @@ def test_pstutzeri_is_generic_game_positive_but_architecture_negative():
     assert not result.architecture_specific_claim_licensed
 
 
-def test_beck_raw_archive_status_cannot_be_misread_as_game_validation():
+def test_beck_r3_is_certified_raw_reconstruction_but_not_game_or_architecture():
     row = json.loads(REGISTRY.read_text())["systems"][-1]
     result = adjudicate_evidence_lanes(
         GenericGameReceipt(**row["game"]),
@@ -65,6 +65,11 @@ def test_beck_raw_archive_status_cannot_be_misread_as_game_validation():
         pair_alignment_declared=row["alignment"]["declared"],
         pair_alignment_reference=row["alignment"]["reference"],
     )
-    assert result.raw_reconstruction_certified is False
-    assert result.generic_game_validation_certified is False
-    assert "RAW_RECONSTRUCTION_NOT_CERTIFIED" in result.blockers
+    assert result.raw_reconstruction_certified
+    assert not result.raw_analysis_reproduction_certified
+    assert not result.generic_game_validation_certified
+    assert not result.architecture_mapping_certified
+    assert not result.architecture_specific_claim_licensed
+    assert "RAW_RECONSTRUCTION_NOT_CERTIFIED" not in result.blockers
+    assert "GENERIC_GAME_VALIDATION_NOT_CERTIFIED" in result.blockers
+    assert "ARCHITECTURE_MAPPING_NOT_CERTIFIED" in result.blockers
