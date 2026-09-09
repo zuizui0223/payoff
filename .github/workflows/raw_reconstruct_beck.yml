@@ -1,0 +1,32 @@
+name: raw-reconstruct-beck
+
+on:
+  push:
+    branches:
+      - empirical/beck-raw-reconstruct-20260909
+    paths:
+      - scripts/reconstruct_beck_public_workbook.py
+      - .github/workflows/raw_reconstruct_beck.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct public workbook bytes and schema
+        run: python scripts/reconstruct_beck_public_workbook.py
+      - name: Upload Lane R reconstruction outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: beck-raw-reconstruction-v1
+          path: |
+            outputs/beck_raw_reconstruction_v1.json
+            outputs/beck_keyword_rows_v1.tsv
+          if-no-files-found: error
