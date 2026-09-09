@@ -1,0 +1,56 @@
+{
+  "registry_id": "PAYOFF_ARCHITECTURE_MAPPING_STATUS_V1",
+  "lane": "A",
+  "systems": [
+    {
+      "system_id": "STREPTOMYCES_COELICOLOR",
+      "mapping_target": "GENERALIST_ONLY_COLONY_VS_DOL_CAPABLE_COLONY",
+      "integrated_shared_candidate": "partial",
+      "differentiated_released_candidate": "strong",
+      "matched_net_task": "strong",
+      "heritable_or_stable_strategic_pair": false,
+      "unit_consistency": false,
+      "mapping_independent_of_game_result": true,
+      "matched_generalist_only_comparator_recovered": false,
+      "mapping_certified": false,
+      "primary_blockers": [
+        "MATCHED_S_ARCHITECTURE_NOT_RECOVERED",
+        "STRATEGIC_UNIT_NOT_MATCHED"
+      ]
+    },
+    {
+      "system_id": "EVOLVED_ECOLI_CROSSFEEDING",
+      "mapping_target": "ANCESTRAL_GENERALIST_VS_DIFFERENTIATED_CONSORTIUM",
+      "integrated_shared_candidate": "strong",
+      "differentiated_released_candidate": "strong_ecological_consortium_level",
+      "matched_net_task": "strong",
+      "heritable_or_stable_strategic_pair": false,
+      "unit_consistency": false,
+      "mapping_independent_of_game_result": true,
+      "matched_generalist_only_comparator_recovered": true,
+      "mapping_certified": false,
+      "primary_blockers": [
+        "MULTIGENOTYPE_D_STRATEGIC_UNIT_NOT_CERTIFIED",
+        "SINGLE_CLONE_VS_ASSEMBLAGE_UNIT_MISMATCH_UNRESOLVED"
+      ]
+    },
+    {
+      "system_id": "PSTUTZERI_2022",
+      "mapping_target": "GENERALIST_VS_NITRITE_SPECIALIST",
+      "integrated_shared_candidate": "not_established",
+      "differentiated_released_candidate": "not_established",
+      "matched_net_task": "insufficient_for_PAYOFF_architecture_mapping",
+      "heritable_or_stable_strategic_pair": true,
+      "unit_consistency": true,
+      "mapping_independent_of_game_result": true,
+      "matched_generalist_only_comparator_recovered": null,
+      "mapping_certified": false,
+      "primary_blockers": [
+        "WRONG_ARCHITECTURE_CONTRAST",
+        "PARTIAL_PATHWAY_SPECIALIST_IS_NOT_RELEASED_ARCHITECTURE"
+      ]
+    }
+  ],
+  "frequency_game_evidence_used_to_certify_mapping": false,
+  "any_mapping_certified": false
+}

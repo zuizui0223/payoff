@@ -1,0 +1,65 @@
+{
+  "registry_id": "PAYOFF_RAW_ARCHIVE_RECONSTRUCTION_STATUS_V1",
+  "lane": "R",
+  "archives": [
+    {
+      "system_id": "PSTUTZERI_2022",
+      "dataset_id": "ERIC_0006RZ",
+      "source_reference": "https://doi.org/10.25678/0006RZ",
+      "source_identity_verified": true,
+      "source_identity_evidence": "primary_paper_plus_public_catalog_metadata",
+      "top_level_source_objects": [
+        {"name": "Dolinsek_et_al_2022.zip", "format": "ZIP", "reported_size": "3.3GB"},
+        {"name": "File-List.txt", "format": "TXT", "reported_size": "95.4KB"},
+        {"name": "README.txt", "format": "TXT", "reported_size": "16.2KB"}
+      ],
+      "repository_object_id": null,
+      "reported_byte_size": null,
+      "bytes_acquired": false,
+      "checksum_verified": false,
+      "manifest_reconstructed": false,
+      "schema_reconstructed": false,
+      "transformations_reconstructed": false,
+      "raw_analysis_reproduced": false,
+      "r_level": "R0"
+    },
+    {
+      "system_id": "BECK_SYNTHETIC_ECOLI",
+      "dataset_id": "BECK_22_0519_SUPPLEMENTARY_DATASETS",
+      "source_reference": "rosspcarlson/becketal-syntheticconsortia",
+      "source_filename": "22_0519_SupplementaryDataSets.xlsx",
+      "source_identity_verified": true,
+      "source_identity_evidence": "public_github_directory_metadata",
+      "repository_object_id": "0ed48b34713d08dbdb17d9ca626387d63c673dbf",
+      "repository_object_id_type": "git_blob_sha1",
+      "reported_byte_size": 1112530,
+      "bytes_acquired": false,
+      "checksum_verified": false,
+      "manifest_reconstructed": false,
+      "schema_reconstructed": false,
+      "transformations_reconstructed": false,
+      "raw_analysis_reproduced": false,
+      "r_level": "R0"
+    },
+    {
+      "system_id": "ARABIDOPSIS_HALLERI_2017",
+      "dataset_id": "DRYAD_53K2D",
+      "source_reference": "10.5061/dryad.53k2d",
+      "source_filename": "SatoKudoh_AmNatData.xls",
+      "source_identity_verified": true,
+      "source_identity_evidence": "dryad_metadata",
+      "repository_object_id": null,
+      "reported_byte_size": null,
+      "bytes_acquired": false,
+      "checksum_verified": false,
+      "manifest_reconstructed": false,
+      "schema_reconstructed": false,
+      "transformations_reconstructed": false,
+      "raw_analysis_reproduced": false,
+      "r_level": "R0"
+    }
+  ],
+  "semantic_claims_allowed": false,
+  "generic_game_claims_allowed_from_this_registry_alone": false,
+  "architecture_mapping_claims_allowed_from_this_registry_alone": false
+}
