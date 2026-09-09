@@ -1,0 +1,68 @@
+{
+  "receipt_id": "BECK_GENERIC_MULTIMETRIC_GATE_V1",
+  "lane": "G",
+  "system_id": "BECK_SYNTHETIC_ECOLI",
+  "comparison": "LAE_CONSORTIUM_VS_WT_GENERALIST",
+  "primary_source": {
+    "citation": "Beck et al. 2022, mSystems 7(4):e00051-22",
+    "doi": "10.1128/msystems.00051-22"
+  },
+  "raw_substrate": {
+    "dataset_id": "BECK_22_0519_SUPPLEMENTARY_DATASETS",
+    "r_level": "R3",
+    "raw_numeric_game_analysis_reproduced": false
+  },
+  "metric_orientations": {
+    "final_biomass_titer": "higher_is_better",
+    "total_glucose_catabolized": "higher_is_better",
+    "biomass_per_glucose": "higher_is_better",
+    "biomass_per_proton": "higher_is_better",
+    "low_byproduct_accumulation": "higher_or_lower_byproduct_is_better",
+    "specific_growth_rate": "higher_is_better"
+  },
+  "contexts": {
+    "weak_buffer": {
+      "candidate": "LAE_CONSORTIUM",
+      "comparator": "WT",
+      "metric_states": {
+        "final_biomass_titer": "positive",
+        "total_glucose_catabolized": "positive",
+        "biomass_per_glucose": "unresolved",
+        "biomass_per_proton": "positive",
+        "low_byproduct_accumulation": "positive",
+        "specific_growth_rate": "negative"
+      },
+      "pareto_relation": "tradeoff_non_dominance",
+      "weight_invariant_scalar_sign": null,
+      "scalarization_required": true
+    },
+    "strong_buffer": {
+      "candidate": "LAE_CONSORTIUM",
+      "comparator": "WT",
+      "metric_states": {
+        "final_biomass_titer": "negative",
+        "total_glucose_catabolized": "negative",
+        "biomass_per_glucose": "negative",
+        "biomass_per_proton": "negative",
+        "low_byproduct_accumulation": "positive",
+        "specific_growth_rate": "negative"
+      },
+      "pareto_relation": "tradeoff_non_dominance",
+      "weight_invariant_scalar_sign": null,
+      "scalarization_required": true
+    }
+  },
+  "frequency_support_declared": false,
+  "scalar_payoff_sign_identified": false,
+  "generic_frequency_game_identified": false,
+  "numerical_phi_identified": false,
+  "numerical_eta_identified": false,
+  "architecture_mapping_used": false,
+  "architecture_specific_claim_licensed": false,
+  "status_labels": [
+    "BECK_MULTIMETRIC_PERFORMANCE_VECTOR_RECOVERED_FROM_PRIMARY_SOURCE",
+    "BECK_WEIGHT_INVARIANT_SCALAR_PAYOFF_SIGN_NOT_IDENTIFIED",
+    "BECK_FREQUENCY_GAME_NOT_IDENTIFIED",
+    "BECK_ARCHITECTURE_MAPPING_NOT_PROMOTED_FROM_GAME_LAYER"
+  ]
+}
