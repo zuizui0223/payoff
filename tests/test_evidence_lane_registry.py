@@ -58,6 +58,11 @@ def test_pstutzeri_is_generic_game_positive_but_architecture_negative():
 
 def test_beck_r3_is_certified_raw_reconstruction_but_not_game_or_architecture():
     row = json.loads(REGISTRY.read_text())["systems"][-1]
+    assert row["game"]["support_reference"] == "BECK_GENERIC_MULTIMETRIC_GATE_V1"
+    assert not row["game"]["frequency_support_declared"]
+    assert not row["game"]["common_outcome_scale_declared"]
+    assert not row["game"]["generic_game_result_recovered"]
+
     result = adjudicate_evidence_lanes(
         GenericGameReceipt(**row["game"]),
         ArchitectureMappingReceipt(**row["architecture"]),
