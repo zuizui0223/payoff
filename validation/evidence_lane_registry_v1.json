@@ -115,12 +115,12 @@
       "raw": {
         "system_id": "BECK_SYNTHETIC_ECOLI",
         "dataset_id": "BECK_22_0519_SUPPLEMENTARY_DATASETS",
-        "support_reference": "GITHUB_ROSSPCARLSON_BECKETAL_SYNTHETICCONSORTIA",
-        "bytes_acquired": false,
-        "checksum_verified": false,
-        "manifest_reconstructed": false,
-        "schema_reconstructed": false,
-        "transformations_reconstructed": false,
+        "support_reference": "BECK_PUBLIC_RAW_RECONSTRUCTION_R3_RUN_34295583193",
+        "bytes_acquired": true,
+        "checksum_verified": true,
+        "manifest_reconstructed": true,
+        "schema_reconstructed": true,
+        "transformations_reconstructed": true,
         "raw_analysis_reproduced": false
       },
       "game": {
@@ -128,7 +128,7 @@
         "comparison_id": "WT_VS_PATHWAY_PARTITIONED_CONSORTIUM",
         "strategy_unit_id": "TOTAL_POPULATION_ASSEMBLAGE",
         "dataset_id": "BECK_22_0519_SUPPLEMENTARY_DATASETS",
-        "support_reference": "RAW_REANALYSIS_PENDING",
+        "support_reference": "RAW_GENERIC_GAME_ANALYSIS_NOT_YET_REGISTERED",
         "evidence_source_mode": "raw_archive",
         "frequency_support_declared": false,
         "common_outcome_scale_declared": true,
