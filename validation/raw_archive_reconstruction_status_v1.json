@@ -7,7 +7,12 @@
       "dataset_id": "ERIC_0006RZ",
       "source_reference": "https://doi.org/10.25678/0006RZ",
       "source_identity_verified": true,
-      "source_identity_evidence": "primary_paper_data_availability_statement",
+      "source_identity_evidence": "primary_paper_plus_public_catalog_metadata",
+      "top_level_source_objects": [
+        {"name": "Dolinsek_et_al_2022.zip", "format": "ZIP", "reported_size": "3.3GB"},
+        {"name": "File-List.txt", "format": "TXT", "reported_size": "95.4KB"},
+        {"name": "README.txt", "format": "TXT", "reported_size": "16.2KB"}
+      ],
       "repository_object_id": null,
       "reported_byte_size": null,
       "bytes_acquired": false,
