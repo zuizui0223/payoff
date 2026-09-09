@@ -2,6 +2,26 @@
 
 Lane: **A only**.  Frequency-game results are deliberately excluded from the mapping decision.
 
+Primary evidence spine:
+
+```text
+Zhang et al. 2020, Science Advances
+DOI 10.1126/sciadv.aay5781
+-> terminal genomic differentiation, production-fitness trade-off, parent+mutant group benefit
+
+Zhang et al. 2022, Nature Communications
+DOI 10.1038/s41467-022-29924-y
+-> terminal specialist fate and continued genomic deterioration
+
+Colizzi et al. 2023, Molecular Systems Biology
+DOI 10.15252/msb.202211353
+-> genome-architecture mechanism is computational; not used as empirical mapping proof
+
+Zhou et al. 2012, FEMS Microbiology Letters
+DOI 10.1111/j.1574-6968.2012.02609.x
+-> large subtelomeric genome-reduction derivatives and an artificially circularized M145 genome
+```
+
 ## 1. Candidate PAYOFF mapping
 
 Biological evidence supports the following architecture hypothesis:
@@ -17,7 +37,7 @@ D candidate
     antibiotic-hyperproducing cells through large chromosome-end deletions
 ```
 
-The key empirical papers show:
+The empirical evidence shows:
 
 - spontaneous chromosome amplifications/deletions create genetically differentiated cells;
 - deletion mutants strongly increase antibiotic production but suffer large autonomous fitness/spore costs;
@@ -25,6 +45,8 @@ The key empirical papers show:
 - later work supports terminal differentiation and continued genomic deterioration of the nonreproductive specialists.
 
 These facts strongly support a real **functional differentiation mechanism**.
+
+The 2023 model is mechanistically informative but is deliberately excluded from the empirical A-pass decision.
 
 ## 2. Independent A1--A6 adjudication
 
@@ -79,7 +101,7 @@ Those are different levels of organization.  Reusing the cell competition as the
 
 ## 4. Search for a matched generalist-only comparator
 
-A focused literature audit identified engineered *S. coelicolor* M145 derivatives with large subtelomeric deletions and an artificially circularized chromosome.  One reported circularized derivative removes approximately `840 kb` from the left and `761 kb` from the right chromosome arms; related genome-reduction studies report broadly preserved growth/sporulation for some derivatives.
+A focused literature audit identified engineered *S. coelicolor* M145 derivatives with large subtelomeric deletions and an artificially circularized chromosome.  Zhou et al. report a circularized derivative removing approximately `840 kb` from the left and `761 kb` from the right chromosome arms; related genome-reduction derivatives can retain broadly similar growth/sporulation.
 
 These strains are **not yet a valid matched S comparator** for PAYOFF because the recovered literature does not establish that they:
 
