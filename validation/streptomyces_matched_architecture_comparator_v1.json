@@ -1,0 +1,37 @@
+{
+  "receipt_id": "STREPTOMYCES_MATCHED_ARCHITECTURE_COMPARATOR_V1",
+  "lane": "A",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "shared_candidate_id": "GENERALIST_ONLY_COLONY_ARCHITECTURE_NOT_YET_RECOVERED",
+  "differentiated_candidate_id": "NATIVE_DOL_CAPABLE_COLONY_ARCHITECTURE",
+  "architecture_unit_id": "COLONY_ARCHITECTURE",
+  "support_reference": "STREPTOMYCES_ARCHITECTURE_MAPPING_AUDIT_V1",
+  "same_strategic_unit_level_declared": false,
+  "same_net_task_declared": true,
+  "matched_background_declared": false,
+  "focal_architecture_difference_isolated_declared": false,
+  "shared_generalist_only_state_verified_declared": false,
+  "differentiated_state_verified_declared": true,
+  "both_units_stable_over_assay_declared": false,
+  "common_task_assay_available_declared": false,
+  "comparator_selection_independent_of_game_result_declared": true,
+  "comparator_selection_independent_of_raw_availability_declared": true,
+  "candidate_engineered_strains_reviewed": {
+    "large_subtelomeric_deletion_or_circularized_M145_derivatives": {
+      "accepted_as_shared_comparator": false,
+      "reason": "large genome architecture changes alter many loci and biosynthetic capacities; the recovered evidence does not isolate terminal differentiation suppression while retaining an otherwise matched colony background"
+    }
+  },
+  "expected_matched_comparator_certified": false,
+  "expected_blockers": [
+    "STRATEGIC_UNIT_LEVEL_NOT_MATCHED",
+    "BACKGROUND_NOT_MATCHED",
+    "FOCAL_ARCHITECTURE_DIFFERENCE_NOT_ISOLATED",
+    "SHARED_GENERALIST_ONLY_STATE_NOT_VERIFIED",
+    "BOTH_UNITS_NOT_STABLE_OVER_ASSAY",
+    "COMMON_TASK_ASSAY_NOT_AVAILABLE"
+  ],
+  "generic_game_claim_promoted": false,
+  "architecture_frequency_feedback_promoted": false,
+  "architecture_mapping_certified": false
+}
