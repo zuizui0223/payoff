@@ -8,12 +8,22 @@ Primary paper: Dolinsek, Ramoneda & Johnson (2022), DOI `10.1038/s43705-022-0016
 
 The paper explicitly states that **all experimental data and code** are publicly available in the Eawag Research Data Institutional Collection (ERIC) under DOI `10.25678/0006RZ`.
 
+A public catalog harvesting the ERIC record exposes the top-level file objects as:
+
+```text
+Dolinsek_et_al_2022.zip   ZIP   ~3.3 GB
+File-List.txt             TXT   ~95.4 KB
+README.txt                TXT   ~16.2 KB
+```
+
+This strengthens source-object discovery but does not reconstruct the contents of `File-List.txt`, the ZIP manifest, or any data table.
+
 Current reconstruction state:
 
 ```text
-R0 source/archive identity: PASS
+R0 source/archive identity + top-level object metadata: PASS_STRONG
 R1 bytes acquired + checksum pinned: NOT YET
-R2 manifest/schema reconstructed: NOT YET
+R2 internal manifest/schema reconstructed: NOT YET
 R3 transformation pipeline reconstructed: NOT YET
 R4 registered/raw analysis reproduced: NOT YET
 ```
@@ -23,14 +33,14 @@ The published-text reciprocal-invasion receipt elsewhere in PAYOFF remains a Lan
 Current blocker:
 
 ```text
-the public DOI is verified,
-but the current retrieval path has not exposed authenticated file bytes / manifest
-for checksum-pinned reconstruction.
+the public DOI and top-level file listing are verified,
+but the current retrieval path has not exposed the file bytes or File-List/README
+contents needed for checksum-pinned and schema-level reconstruction.
 ```
 
 Therefore the allowed R claim is only:
 
-> The public archive identity and provenance are verified.
+> The public archive identity, provenance, and top-level file-object metadata are verified.
 
 It is not yet permissible to claim raw trajectory reconstruction or raw-analysis reproduction.
 
@@ -84,7 +94,8 @@ The raw queue is ranked by immediate downstream numerical value, not by architec
 
 ```text
 R1 P. stutzeri ERIC
-   -> recover first-three-transfer composition trajectories and reproduce published trend tests
+   -> acquire File-List.txt + README first, then isolate first-three-transfer
+      composition trajectories and reproduce published trend tests
 
 R2 Beck synthetic E. coli workbook
    -> reconstruct environment x WT/consortium performance tables
