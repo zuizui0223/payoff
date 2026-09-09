@@ -1,0 +1,63 @@
+{
+  "registry_id": "PAYOFF_CONSORTIUM_STRATEGIC_UNIT_STATUS_V1",
+  "lane": "A_subgate",
+  "systems": [
+    {
+      "name": "Beck synthetic E. coli LAE consortium",
+      "receipt": {
+        "system_id": "BECK_SYNTHETIC_ECOLI",
+        "candidate_unit_id": "LAE_CONSORTIUM_AS_D_UNIT",
+        "support_reference": "BECK_2022_ARCHITECTURE_UNIT_AUDIT",
+        "member_set_predeclared": true,
+        "unit_boundary_predeclared": false,
+        "assembly_or_regeneration_protocol_declared": true,
+        "composition_state_reproducible_declared": false,
+        "propagation_or_transmission_declared": false,
+        "identity_retained_over_assay_horizon_declared": true,
+        "internal_composition_q_separated_from_external_frequency_p_declared": false,
+        "external_frequency_can_vary_whole_units_declared": false,
+        "unit_level_fitness_or_output_defined_declared": true,
+        "certification_independent_of_game_result_declared": true,
+        "certification_independent_of_raw_availability_declared": true
+      },
+      "expected_strategic_unit_certified": false,
+      "primary_blockers": [
+        "UNIT_BOUNDARY_NOT_PREDECLARED",
+        "COMPOSITION_STATE_REPRODUCIBILITY_NOT_DECLARED",
+        "UNIT_PROPAGATION_OR_TRANSMISSION_NOT_DECLARED",
+        "INTERNAL_Q_NOT_SEPARATED_FROM_EXTERNAL_P",
+        "WHOLE_UNIT_EXTERNAL_FREQUENCY_NOT_DEFINED"
+      ]
+    },
+    {
+      "name": "Evolved E. coli cross-feeding consortium",
+      "receipt": {
+        "system_id": "EVOLVED_ECOLI_CROSSFEEDING",
+        "candidate_unit_id": "EVOLVED_CONSORTIUM_AS_D_UNIT",
+        "support_reference": "YANG_2020_CONSORTIUM_UNIT_AUDIT",
+        "member_set_predeclared": true,
+        "unit_boundary_predeclared": false,
+        "assembly_or_regeneration_protocol_declared": true,
+        "composition_state_reproducible_declared": true,
+        "propagation_or_transmission_declared": false,
+        "identity_retained_over_assay_horizon_declared": true,
+        "internal_composition_q_separated_from_external_frequency_p_declared": false,
+        "external_frequency_can_vary_whole_units_declared": false,
+        "unit_level_fitness_or_output_defined_declared": true,
+        "certification_independent_of_game_result_declared": true,
+        "certification_independent_of_raw_availability_declared": true
+      },
+      "expected_strategic_unit_certified": false,
+      "primary_blockers": [
+        "UNIT_BOUNDARY_NOT_PREDECLARED",
+        "UNIT_PROPAGATION_OR_TRANSMISSION_NOT_DECLARED",
+        "INTERNAL_Q_NOT_SEPARATED_FROM_EXTERNAL_P",
+        "WHOLE_UNIT_EXTERNAL_FREQUENCY_NOT_DEFINED"
+      ]
+    }
+  ],
+  "stable_internal_composition_is_sufficient": false,
+  "generic_game_evidence_used": false,
+  "raw_reconstruction_status_used": false,
+  "any_strategic_unit_certified": false
+}
