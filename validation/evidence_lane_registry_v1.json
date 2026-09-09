@@ -1,0 +1,157 @@
+{
+  "registry_id": "PAYOFF_EVIDENCE_LANE_REGISTRY_V1",
+  "systems": [
+    {
+      "name": "Pseudomonas stutzeri 2022",
+      "raw": {
+        "system_id": "PSTUTZERI_2022",
+        "dataset_id": "ERIC_0006RZ",
+        "support_reference": "ERIC_DOI_10.25678_0006RZ",
+        "bytes_acquired": false,
+        "checksum_verified": false,
+        "manifest_reconstructed": false,
+        "schema_reconstructed": false,
+        "transformations_reconstructed": false,
+        "raw_analysis_reproduced": false
+      },
+      "game": {
+        "system_id": "PSTUTZERI_2022",
+        "comparison_id": "GENERALIST_VS_NITRITE_SPECIALIST",
+        "strategy_unit_id": "CELL_TYPE",
+        "dataset_id": null,
+        "support_reference": "PSTUTZERI_PUBLISHED_RECIPROCAL_SIGN_V1",
+        "evidence_source_mode": "published_text",
+        "frequency_support_declared": true,
+        "common_outcome_scale_declared": true,
+        "generic_game_result_recovered": true,
+        "architecture_semantics_used_declared": false
+      },
+      "architecture": {
+        "system_id": "PSTUTZERI_2022",
+        "comparison_id": "GENERALIST_VS_NITRITE_SPECIALIST",
+        "architecture_unit_id": "CELL_TYPE",
+        "support_reference": "LANE_P_OBSTRUCTION_V1",
+        "integrated_shared_candidate_declared": false,
+        "differentiated_released_candidate_declared": false,
+        "matched_net_task_declared": false,
+        "heritable_or_stable_unit_declared": true,
+        "unit_consistency_declared": true,
+        "mapping_independent_of_game_result_declared": true
+      },
+      "alignment": {
+        "declared": false,
+        "reference": "PSTUTZERI_ARCH_MAPPING_NOT_ESTABLISHED"
+      },
+      "expected_architecture_specific_claim_licensed": false
+    },
+    {
+      "name": "Streptomyces coelicolor terminal differentiation",
+      "raw": null,
+      "game": {
+        "system_id": "STREPTOMYCES_COELICOLOR",
+        "comparison_id": "WT_CELL_VS_DELETION_SPECIALIST_CELL",
+        "strategy_unit_id": "CELL",
+        "dataset_id": null,
+        "support_reference": "STREPTOMYCES_FREQUENCY_SERIES",
+        "evidence_source_mode": "published_text",
+        "frequency_support_declared": true,
+        "common_outcome_scale_declared": true,
+        "generic_game_result_recovered": true,
+        "architecture_semantics_used_declared": false
+      },
+      "architecture": {
+        "system_id": "STREPTOMYCES_COELICOLOR",
+        "comparison_id": "DOL_CAPABLE_COLONY_VS_GENERALIST_ONLY_COLONY",
+        "architecture_unit_id": "COLONY_ARCHITECTURE",
+        "support_reference": "STREPTOMYCES_TERMINAL_DIFFERENTIATION_SERIES",
+        "integrated_shared_candidate_declared": true,
+        "differentiated_released_candidate_declared": true,
+        "matched_net_task_declared": true,
+        "heritable_or_stable_unit_declared": false,
+        "unit_consistency_declared": false,
+        "mapping_independent_of_game_result_declared": true
+      },
+      "alignment": {
+        "declared": false,
+        "reference": "CELL_VS_COLONY_UNIT_MISMATCH"
+      },
+      "expected_architecture_specific_claim_licensed": false
+    },
+    {
+      "name": "Evolved E. coli cross-feeding consortium",
+      "raw": null,
+      "game": {
+        "system_id": "EVOLVED_ECOLI_CROSSFEEDING",
+        "comparison_id": "ANCESTOR_VS_EVOLVED_CONSORTIUM",
+        "strategy_unit_id": "TOTAL_POPULATION_ASSEMBLAGE",
+        "dataset_id": null,
+        "support_reference": "YANG_2020_DIRECT_COMPETITION",
+        "evidence_source_mode": "published_text",
+        "frequency_support_declared": false,
+        "common_outcome_scale_declared": true,
+        "generic_game_result_recovered": true,
+        "architecture_semantics_used_declared": false
+      },
+      "architecture": {
+        "system_id": "EVOLVED_ECOLI_CROSSFEEDING",
+        "comparison_id": "ANCESTOR_VS_EVOLVED_CONSORTIUM",
+        "architecture_unit_id": "TOTAL_POPULATION_ASSEMBLAGE",
+        "support_reference": "YANG_2020_EVOLUTIONARY_ORIGIN",
+        "integrated_shared_candidate_declared": true,
+        "differentiated_released_candidate_declared": true,
+        "matched_net_task_declared": true,
+        "heritable_or_stable_unit_declared": false,
+        "unit_consistency_declared": false,
+        "mapping_independent_of_game_result_declared": true
+      },
+      "alignment": {
+        "declared": false,
+        "reference": "MULTIGENOTYPE_D_UNIT_NOT_YET_CERTIFIED"
+      },
+      "expected_architecture_specific_claim_licensed": false
+    },
+    {
+      "name": "Beck synthetic E. coli consortium",
+      "raw": {
+        "system_id": "BECK_SYNTHETIC_ECOLI",
+        "dataset_id": "BECK_22_0519_SUPPLEMENTARY_DATASETS",
+        "support_reference": "GITHUB_ROSSPCARLSON_BECKETAL_SYNTHETICCONSORTIA",
+        "bytes_acquired": false,
+        "checksum_verified": false,
+        "manifest_reconstructed": false,
+        "schema_reconstructed": false,
+        "transformations_reconstructed": false,
+        "raw_analysis_reproduced": false
+      },
+      "game": {
+        "system_id": "BECK_SYNTHETIC_ECOLI",
+        "comparison_id": "WT_VS_PATHWAY_PARTITIONED_CONSORTIUM",
+        "strategy_unit_id": "TOTAL_POPULATION_ASSEMBLAGE",
+        "dataset_id": "BECK_22_0519_SUPPLEMENTARY_DATASETS",
+        "support_reference": "RAW_REANALYSIS_PENDING",
+        "evidence_source_mode": "raw_archive",
+        "frequency_support_declared": false,
+        "common_outcome_scale_declared": true,
+        "generic_game_result_recovered": false,
+        "architecture_semantics_used_declared": false
+      },
+      "architecture": {
+        "system_id": "BECK_SYNTHETIC_ECOLI",
+        "comparison_id": "WT_VS_PATHWAY_PARTITIONED_CONSORTIUM",
+        "architecture_unit_id": "TOTAL_POPULATION_ASSEMBLAGE",
+        "support_reference": "BECK_ARCHITECTURE_MAPPING_PENDING",
+        "integrated_shared_candidate_declared": true,
+        "differentiated_released_candidate_declared": true,
+        "matched_net_task_declared": true,
+        "heritable_or_stable_unit_declared": false,
+        "unit_consistency_declared": false,
+        "mapping_independent_of_game_result_declared": true
+      },
+      "alignment": {
+        "declared": false,
+        "reference": "CONSORTIUM_UNIT_NOT_YET_CERTIFIED"
+      },
+      "expected_architecture_specific_claim_licensed": false
+    }
+  ]
+}
