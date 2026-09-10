@@ -31,7 +31,7 @@
       "system_id": "EVOLVED_ECOLI_CROSSFEEDING",
       "mapping_target": "ANCESTRAL_GENERALIST_VS_DIFFERENTIATED_CONSORTIUM",
       "integrated_shared_candidate": "strong",
-      "differentiated_released_candidate": "strong_ecological_consortIUM_level",
+      "differentiated_released_candidate": "strong_ecological_consortium_level",
       "matched_net_task": "strong",
       "heritable_or_stable_strategic_pair": false,
       "unit_consistency": false,
