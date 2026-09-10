@@ -1,0 +1,45 @@
+{
+  "registry_id": "STREPTOMYCES_RED_TRIANGULATION_PREREGISTRATION_V1",
+  "lane": "A_MECHANISM_PROBE_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "mediator_hypothesis": "RED_PRODIGININES_CONTRIBUTE_TO_TERMINAL_GENOMIC_SPECIALIST_GENERATION",
+  "primary_probe_ids": [
+    "M1141_VS_M1142_RED_CLUSTER_DIFFERENCE",
+    "M145_VS_redU_SINGLE_MUTANT"
+  ],
+  "current_outcomes": [
+    {
+      "probe_id": "M1141_VS_M1142_RED_CLUSTER_DIFFERENCE",
+      "support_reference": "DIRECT_MU_RESULT_NOT_YET_AVAILABLE",
+      "generation_result": "unresolved",
+      "direct_generation_measurement_declared": false,
+      "post_generation_realization_separated_declared": false,
+      "predeclared_primary_probe": true
+    },
+    {
+      "probe_id": "M145_VS_redU_SINGLE_MUTANT",
+      "support_reference": "DIRECT_MU_RESULT_NOT_YET_AVAILABLE",
+      "generation_result": "unresolved",
+      "direct_generation_measurement_declared": false,
+      "post_generation_realization_separated_declared": false,
+      "predeclared_primary_probe": true
+    }
+  ],
+  "expected_current_status": "INCOMPLETE_OR_UNRESOLVED_TRIANGULATION",
+  "decision_rule": {
+    "both_reduced": "TRIANGULATED_MEDIATOR_GENERATION_REDUCTION",
+    "both_material_reduction_excluded": "REGISTERED_MEDIATOR_ROUTE_NOT_SUPPORTED",
+    "one_reduced_one_material_reduction_excluded": "PROBE_DISCORDANCE_MECHANISM_UNRESOLVED",
+    "any_unresolved_or_unqualified": "INCOMPLETE_OR_UNRESOLVED_TRIANGULATION"
+  },
+  "secondary_probe_candidates_not_allowed_to_replace_primary_posthoc": [
+    {
+      "probe_id": "redJ_DELETION_COMPLEMENTATION_SERIES",
+      "support_reference": "JBC_2011_DOI_10.1074_jbc.M110.213512",
+      "reason": "RED_reduced_about_75_percent_and_genetic_complementation_restores_production_but_gross_growth_sporulation_match_not_recovered_for_current_probe_gate"
+    }
+  ],
+  "matched_s_promotion_allowed_from_triangulation_alone": false,
+  "generic_game_promotion_allowed_from_triangulation_alone": false,
+  "architecture_frequency_promotion_allowed_from_triangulation_alone": false
+}
