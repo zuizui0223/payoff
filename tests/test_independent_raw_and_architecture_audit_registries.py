@@ -85,16 +85,19 @@ def test_architecture_registry_is_independent_and_no_current_mapping_is_certifie
     assert not any(row["mapping_certified"] for row in data["systems"])
 
 
-def test_streptomyces_mapping_stops_at_missing_matched_s_and_unit_consistency():
+def test_streptomyces_mapping_stops_at_missing_matched_s_and_generation_suppression():
     data = json.loads(ARCH.read_text())
     row = next(x for x in data["systems"] if x["system_id"] == "STREPTOMYCES_COELICOLOR")
     assert row["differentiated_released_candidate"] == "strong"
     assert not row["matched_generalist_only_comparator_recovered"]
     assert row["matched_comparator_receipt"] == "STREPTOMYCES_MATCHED_ARCHITECTURE_COMPARATOR_V1"
     assert not row["matched_comparator_certified"]
+    assert row["matched_s_candidate_search_receipt"] == "STREPTOMYCES_MATCHED_S_CANDIDATE_SEARCH_V1"
+    assert not row["matched_s_generation_suppression_identified"]
     assert not row["unit_consistency"]
     assert not row["mapping_certified"]
     assert "MATCHED_S_ARCHITECTURE_NOT_RECOVERED" in row["primary_blockers"]
+    assert "DIFFERENTIATION_GENERATION_SUPPRESSION_NOT_IDENTIFIED" in row["primary_blockers"]
     assert "BACKGROUND_NOT_MATCHED" in row["primary_blockers"]
     assert "FOCAL_ARCHITECTURE_DIFFERENCE_NOT_ISOLATED" in row["primary_blockers"]
 
