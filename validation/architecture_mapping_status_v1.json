@@ -14,9 +14,12 @@
       "matched_generalist_only_comparator_recovered": false,
       "matched_comparator_receipt": "STREPTOMYCES_MATCHED_ARCHITECTURE_COMPARATOR_V1",
       "matched_comparator_certified": false,
+      "matched_s_candidate_search_receipt": "STREPTOMYCES_MATCHED_S_CANDIDATE_SEARCH_V1",
+      "matched_s_generation_suppression_identified": false,
       "mapping_certified": false,
       "primary_blockers": [
         "MATCHED_S_ARCHITECTURE_NOT_RECOVERED",
+        "DIFFERENTIATION_GENERATION_SUPPRESSION_NOT_IDENTIFIED",
         "STRATEGIC_UNIT_NOT_MATCHED",
         "BACKGROUND_NOT_MATCHED",
         "FOCAL_ARCHITECTURE_DIFFERENCE_NOT_ISOLATED"
