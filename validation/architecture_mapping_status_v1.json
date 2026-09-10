@@ -16,6 +16,8 @@
       "matched_comparator_certified": false,
       "matched_s_candidate_search_receipt": "STREPTOMYCES_MATCHED_S_CANDIDATE_SEARCH_V1",
       "matched_s_generation_suppression_identified": false,
+      "prospective_mechanism_probe_receipt": "STREPTOMYCES_RED_MECHANISM_PROBE_PRIORITY_V1",
+      "prospective_mechanism_probe_ready_count": 2,
       "mapping_certified": false,
       "primary_blockers": [
         "MATCHED_S_ARCHITECTURE_NOT_RECOVERED",
@@ -29,7 +31,7 @@
       "system_id": "EVOLVED_ECOLI_CROSSFEEDING",
       "mapping_target": "ANCESTRAL_GENERALIST_VS_DIFFERENTIATED_CONSORTIUM",
       "integrated_shared_candidate": "strong",
-      "differentiated_released_candidate": "strong_ecological_consortium_level",
+      "differentiated_released_candidate": "strong_ecological_consortIUM_level",
       "matched_net_task": "strong",
       "heritable_or_stable_strategic_pair": false,
       "unit_consistency": false,
