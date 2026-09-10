@@ -16,6 +16,8 @@
       "matched_comparator_certified": false,
       "matched_s_candidate_search_receipt": "STREPTOMYCES_MATCHED_S_CANDIDATE_SEARCH_V1",
       "matched_s_generation_suppression_identified": false,
+      "prospective_mechanism_probe_receipt": "STREPTOMYCES_RED_MECHANISM_PROBE_PRIORITY_V1",
+      "prospective_mechanism_probe_ready_count": 2,
       "mapping_certified": false,
       "primary_blockers": [
         "MATCHED_S_ARCHITECTURE_NOT_RECOVERED",
