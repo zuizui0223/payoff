@@ -37,4 +37,4 @@ def test_candidate_pool_does_not_promote_architecture_claims():
         assert value is False, key
     arch = load(ARCH)
     strep = next(x for x in arch["systems"] if x["system_id"] == "STREPTOMYCES_COELICOLOR")
-    assert not strep["architecture_mapping_certified"]
+    assert not strep["mapping_certified"]
