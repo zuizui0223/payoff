@@ -16,6 +16,7 @@
     "task_scale_frozen_preoutcome": true,
     "genotoxicity_scale_frozen_preoutcome": false,
     "direct_mu_scale_frozen_preoutcome": true,
+    "direct_mu_measurement_ready_preoutcome": false,
     "task_materiality_threshold_frozen_preoutcome": false,
     "genotoxicity_materiality_threshold_frozen_preoutcome": false,
     "direct_mu_materiality_threshold_frozen_preoutcome": false,
