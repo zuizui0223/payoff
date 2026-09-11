@@ -14,7 +14,7 @@ def test_registry_recomputes_frozen_design_but_not_ready_realization_channel():
     receipt = DirectMuRealizationDesignReceipt(
         start_hour=data["interval_hours"][0],
         end_hour=data["interval_hours"][1],
-        realization_unit=data["state_mass_unit"],
+        realization_unit=data["realization_unit"],
         pre_existing_D_verified_by_marker_panel=rule["pre_existing_D_verified_by_registered_marker_panel"],
         same_medium_and_context_as_state_channel=rule["same_medium_and_context_as_state_channel"],
         final_mixed_state_fraction_reused_to_estimate_d=rule["final_mixed_state_fraction_reused_to_estimate_d"],
@@ -27,6 +27,8 @@ def test_registry_recomputes_frozen_design_but_not_ready_realization_channel():
         reference_panel_materialized=status["reference_panel_materialized"],
         reference_panel_qualified=status["reference_panel_qualified"],
     )
+    assert data["absolute_state_mass_unit"] == "CALIBRATED_CORE_CHROMOSOME_EQUIVALENTS"
+    assert data["realization_unit"] == "CORE_CHROMOSOME_EQUIVALENT_FOLD_CHANGE"
     assert receipt.design_frozen_preoutcome is status["design_frozen_preoutcome"] is True
     assert receipt.realization_channel_ready is status["absolute_mass_route_ready"] is False
 
