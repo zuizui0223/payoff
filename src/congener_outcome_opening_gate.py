@@ -9,6 +9,7 @@ class CongenerOutcomeOpeningReceipt:
     task_scale_frozen_preoutcome: bool
     genotoxicity_scale_frozen_preoutcome: bool
     direct_mu_scale_frozen_preoutcome: bool
+    direct_mu_measurement_ready_preoutcome: bool
     task_materiality_threshold_frozen_preoutcome: bool
     genotoxicity_materiality_threshold_frozen_preoutcome: bool
     direct_mu_materiality_threshold_frozen_preoutcome: bool
@@ -44,6 +45,7 @@ class CongenerOutcomeOpeningReceipt:
     def outcome_opening_allowed(self) -> bool:
         return bool(
             self.all_measurement_semantics_frozen
+            and self.direct_mu_measurement_ready_preoutcome
             and self.all_materiality_thresholds_frozen
             and not self.outcome_data_already_opened
         )
@@ -56,6 +58,10 @@ def adjudicate_congener_outcome_opening(
         (receipt.task_scale_frozen_preoutcome, "TASK_SCALE_NOT_FROZEN"),
         (receipt.genotoxicity_scale_frozen_preoutcome, "GENOTOXICITY_SCALE_NOT_FROZEN"),
         (receipt.direct_mu_scale_frozen_preoutcome, "DIRECT_MU_SCALE_NOT_FROZEN"),
+        (
+            receipt.direct_mu_measurement_ready_preoutcome,
+            "DIRECT_MU_MEASUREMENT_NOT_READY",
+        ),
         (
             receipt.task_materiality_threshold_frozen_preoutcome,
             "TASK_MATERIALITY_THRESHOLD_NOT_FROZEN",

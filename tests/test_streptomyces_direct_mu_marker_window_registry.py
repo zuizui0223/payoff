@@ -46,7 +46,7 @@ def recompute(data):
         candidate_outcomes_used_to_select_panel=data["state_channel"]["candidate_outcomes_used_to_select_panel"],
         candidate_outcomes_used_to_select_window=window["candidate_outcomes_used_to_select_window"],
         realization_channel_independent_declared=realization["independent_from_final_state_fraction_required"],
-        realization_channel_frozen_preoutcome=realization["frozen_preoutcome"],
+        realization_channel_frozen_preoutcome=realization["channel_ready"],
     )
 
 
@@ -55,8 +55,21 @@ def test_registry_recomputes_frozen_state_channel_but_not_full_mu_readiness():
     receipt = recompute(data)
     state_ready, full_ready, blockers = adjudicate_direct_mu_marker_window(receipt)
     assert state_ready is data["adjudication"]["state_channel_frozen"] is True
+    assert data["adjudication"]["realization_design_frozen"] is True
+    assert not data["adjudication"]["realization_channel_ready"]
     assert full_ready is data["adjudication"]["direct_mu_fully_ready"] is False
     assert blockers == ("REALIZATION_CHANNEL_NOT_FROZEN",)
+
+
+def test_preferred_absolute_mass_route_is_frozen_but_reference_panel_is_not_ready():
+    realization = load_receipt()["realization_channel"]
+    assert realization["preferred_route"] == "ABSOLUTE_STATE_MASS_PLUS_INDEPENDENT_D_REALIZATION"
+    assert realization["design_frozen_preoutcome"]
+    assert not realization["reference_panel_materialized"]
+    assert not realization["reference_panel_qualified"]
+    assert not realization["d_band_available"]
+    assert not realization["channel_ready"]
+    assert realization["legacy_fraction_only_route_retained"]
 
 
 def test_registered_deletion_ladder_is_monotone_from_terminal_to_deep():
