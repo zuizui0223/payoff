@@ -36,8 +36,11 @@ def make_genotoxic(**overrides):
         assay_unit_frozen_declared=False,
         sampling_context_frozen_declared=False,
         distinct_from_direct_mu_outcome_declared=True,
+        direct_dna_lesion_or_break_readout_declared=True,
         not_pigment_amount_only_declared=True,
         not_ros_amount_only_declared=True,
+        not_sos_repair_reporter_only_declared=True,
+        mitomycin_c_or_equivalent_positive_control_declared=True,
     )
     data.update(overrides)
     return ResponseBlindGenotoxicityQualificationReceipt(**data)
@@ -74,7 +77,7 @@ def test_control_qualified_direct_damage_assay_can_define_scale_without_claim_pr
     assert not got.generic_game_promoted
 
 
-def test_pigment_or_ros_only_readouts_are_not_genotoxicity_scales():
+def test_proxy_only_readouts_are_not_genotoxicity_scales():
     pigment = adjudicate_genotoxicity_assay(
         make_genotoxic(not_pigment_amount_only_declared=False)
     )
@@ -86,6 +89,28 @@ def test_pigment_or_ros_only_readouts_are_not_genotoxicity_scales():
     )
     assert not ros.qualified
     assert "ROS_AMOUNT_ONLY_IS_NOT_GENOTOXICITY" in ros.blockers
+
+    sos = adjudicate_genotoxicity_assay(
+        make_genotoxic(not_sos_repair_reporter_only_declared=False)
+    )
+    assert not sos.qualified
+    assert "SOS_REPAIR_REPORTER_ONLY_IS_NOT_GENOTOXICITY" in sos.blockers
+
+
+def test_direct_lesion_or_break_readout_is_required():
+    got = adjudicate_genotoxicity_assay(
+        make_genotoxic(direct_dna_lesion_or_break_readout_declared=False)
+    )
+    assert not got.qualified
+    assert "PRIMARY_READOUT_NOT_DIRECT_DNA_LESION_OR_BREAK" in got.blockers
+
+
+def test_dna_damage_positive_control_class_must_be_frozen():
+    got = adjudicate_genotoxicity_assay(
+        make_genotoxic(mitomycin_c_or_equivalent_positive_control_declared=False)
+    )
+    assert not got.qualified
+    assert "DNA_DAMAGE_POSITIVE_CONTROL_CLASS_NOT_FROZEN" in got.blockers
 
 
 def test_postoutcome_assay_selection_is_rejected():
