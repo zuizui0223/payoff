@@ -3,6 +3,13 @@
   "lane": "A_MECHANISM_PROBE_SUBLANE",
   "system_id": "STREPTOMYCES_COELICOLOR",
   "mediator_hypothesis": "RED_PRODIGININES_CONTRIBUTE_TO_TERMINAL_GENOMIC_SPECIALIST_GENERATION",
+  "prospective": true,
+  "outcome_frozen_before_direct_mu_data": true,
+  "outcome_data_opened": false,
+  "direct_mu_measurement_contract": "STREPTOMYCES_DIRECT_MU_MEASUREMENT_CONTRACT_V1",
+  "matched_generalist_shared_architecture_recovered": false,
+  "matched_s_comparator_certified": false,
+  "architecture_mapping_certified": false,
   "primary_probe_ids": [
     "M1141_VS_M1142_RED_CLUSTER_DIFFERENCE",
     "M145_VS_redU_SINGLE_MUTANT"
@@ -41,5 +48,12 @@
   ],
   "matched_s_promotion_allowed_from_triangulation_alone": false,
   "generic_game_promotion_allowed_from_triangulation_alone": false,
-  "architecture_frequency_promotion_allowed_from_triangulation_alone": false
+  "architecture_mapping_promotion_allowed_from_triangulation_alone": false,
+  "architecture_frequency_promotion_allowed_from_triangulation_alone": false,
+  "current_status_labels": [
+    "STREPTOMYCES_MATCHED_GENERALIST_SHARED_ARCHITECTURE_NOT_RECOVERED",
+    "STREPTOMYCES_RED_TWO_PROBE_TRIANGULATION_FROZEN_PREOUTCOME",
+    "STREPTOMYCES_RED_TWO_PROBE_TRIANGULATION_PROSPECTIVE",
+    "STREPTOMYCES_DIRECT_MU_RESULT_NOT_YET_AVAILABLE"
+  ]
 }
