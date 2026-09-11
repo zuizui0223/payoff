@@ -39,6 +39,12 @@ def test_genotoxicity_scale_remains_unqualified_and_response_blind():
     assert gen["primary_scale_id"] is None
     assert not gen["scale_frozen_preoutcome"]
     assert gen["qualification_mode"] == "response_blind_controls_before_congener_outcomes"
+    assert (
+        gen["primary_assay_class_required"]
+        == "DIRECT_DNA_LESION_OR_BREAK_READOUT_IN_STREPTOMYCES_COELICOLOR"
+    )
+    assert "SOS_OR_recA_LexA_RESPONSE" in gen["secondary_only_assay_classes"]
+    assert "ROS_AMOUNT" in gen["secondary_only_assay_classes"]
     assert gen["candidate_outcomes_must_remain_blinded_during_qualification"]
     assert not gen["qualified"]
 
