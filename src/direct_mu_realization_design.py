@@ -32,7 +32,7 @@ class DirectMuRealizationDesignReceipt:
         return bool(
             self.start_hour == 72
             and self.end_hour == 120
-            and self.realization_unit == "CALIBRATED_CORE_CHROMOSOME_EQUIVALENTS"
+            and self.realization_unit == "CORE_CHROMOSOME_EQUIVALENT_FOLD_CHANGE"
             and self.pre_existing_D_verified_by_marker_panel
             and self.same_medium_and_context_as_state_channel
             and not self.final_mixed_state_fraction_reused_to_estimate_d
