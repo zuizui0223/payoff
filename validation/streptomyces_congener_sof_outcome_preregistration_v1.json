@@ -1,0 +1,93 @@
+{
+  "registry_id": "STREPTOMYCES_CONGENER_SOF_OUTCOME_PREREGISTRATION_V1",
+  "lane": "A_TASK_MECHANISM_SEPARATION_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "candidate_registry": "STREPTOMYCES_PRODIGININE_CONGENER_SOF_CANDIDATES_V1",
+  "primary_candidate_ids": [
+    "DELTA_redG_CONGENER_PARTITION",
+    "DELTA_redG_PLUS_mcpG_CYCLIC_CONGENER_SWAP"
+  ],
+  "rule_frozen_before_outcome": true,
+  "outcome_data_opened": false,
+  "numeric_thresholds_frozen": false,
+  "outcome_opening_allowed": false,
+  "opening_gate_inputs": {
+    "task_scale_frozen_preoutcome": false,
+    "genotoxicity_scale_frozen_preoutcome": false,
+    "direct_mu_scale_frozen_preoutcome": false,
+    "task_materiality_threshold_frozen_preoutcome": false,
+    "genotoxicity_materiality_threshold_frozen_preoutcome": false,
+    "direct_mu_materiality_threshold_frozen_preoutcome": false,
+    "uncertainty_construction_frozen_preoutcome": false,
+    "analysis_window_frozen_preoutcome": false,
+    "candidate_set_frozen_preoutcome": true,
+    "outcome_data_already_opened": false
+  },
+  "thresholds_required_before_outcome_opening": [
+    "TASK_MATERIAL_LOSS_TOLERANCE_ON_PREDECLARED_HIGHER_IS_BETTER_SCALE",
+    "GENOTOXICITY_MATERIAL_REDUCTION_THRESHOLD",
+    "DIRECT_MU_MATERIAL_REDUCTION_THRESHOLD"
+  ],
+  "threshold_policy": "assay_scales_must_be_fixed_then_numeric_thresholds_declared_before_outcome_opening_no_posthoc_threshold_selection",
+  "task_rule": {
+    "quantity": "probe_minus_control_on_predeclared_higher_is_better_task_scale",
+    "preserved": "closed_band_strictly_above_negative_material_loss_tolerance",
+    "material_task_loss": "closed_band_strictly_below_negative_material_loss_tolerance",
+    "boundary_contact_or_straddle": "unresolved",
+    "nonsignificance_alone_counts_as_preserved": false
+  },
+  "genotoxicity_rule": {
+    "quantity": "control_minus_probe_positive_means_reduction",
+    "reduced": "closed_band_strictly_above_predeclared_material_reduction",
+    "material_reduction_excluded": "closed_band_strictly_below_predeclared_material_reduction",
+    "boundary_contact_or_straddle": "unresolved"
+  },
+  "direct_mu_rule": {
+    "quantity": "control_mu_minus_probe_mu_positive_means_reduction",
+    "mu_source": "STREPTOMYCES_DIRECT_MU_MEASUREMENT_CONTRACT_V1",
+    "reduced": "closed_band_strictly_above_predeclared_material_reduction",
+    "material_reduction_excluded": "closed_band_strictly_below_predeclared_material_reduction",
+    "boundary_contact_or_straddle": "unresolved"
+  },
+  "joint_C2_rule": {
+    "both_genotoxicity_and_mu_reduced": "genotoxic_generation_reduced",
+    "both_material_reduction_excluded": "registered_route_not_supported",
+    "one_reduced_one_excluded": "genotoxic_mu_discordant",
+    "any_unresolved": "unresolved"
+  },
+  "C1_x_C2_outcome_matrix": {
+    "preserved__genotoxic_generation_reduced": "SEPARATION_OF_FUNCTION_SUPPORTED",
+    "preserved__registered_route_not_supported": "TASK_PRESERVED_REGISTERED_GENOTOXIC_GENERATION_ROUTE_NOT_SUPPORTED",
+    "material_task_loss__genotoxic_generation_reduced": "MECHANISM_SIGNAL_PRESENT_BUT_TASK_CONFOUNDED",
+    "material_task_loss__registered_route_not_supported": "CANDIDATE_FAILS_TASK_AND_REGISTERED_ROUTE_CRITERIA",
+    "any_genotoxic_mu_discordance": "GENOTOXIC_MU_DISCORDANCE_SOF_UNRESOLVED",
+    "any_unresolved": "INCOMPLETE_OR_UNRESOLVED_SOF"
+  },
+  "current_candidate_outcomes": [
+    {
+      "probe_id": "DELTA_redG_CONGENER_PARTITION",
+      "task_result": "unresolved",
+      "genotoxicity_result": "unresolved",
+      "direct_mu_result": "unresolved",
+      "joint_C2_result": "unresolved",
+      "outcome_class": "INCOMPLETE_OR_UNRESOLVED_SOF"
+    },
+    {
+      "probe_id": "DELTA_redG_PLUS_mcpG_CYCLIC_CONGENER_SWAP",
+      "task_result": "unresolved",
+      "genotoxicity_result": "unresolved",
+      "direct_mu_result": "unresolved",
+      "joint_C2_result": "unresolved",
+      "outcome_class": "INCOMPLETE_OR_UNRESOLVED_SOF"
+    }
+  ],
+  "claim_ceiling": {
+    "separation_of_function_supported_count": 0,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "generic_game_promoted": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
