@@ -1,0 +1,90 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_LITERATURE_CANDIDATE_POOL_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "support_references": [
+    "ZHANG_ET_AL_2020_SCI_ADV_DOI_10.1126_sciadv.aay5781",
+    "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
+    "WANG_ET_AL_2007_J_BACTERIOL_DOI_10.1128_JB.01660-06",
+    "WIDENBRANT_ET_AL_2007_J_BACTERIOL_PMCID_PMC2168616"
+  ],
+  "candidate_groups": [
+    {
+      "group_id": "ZHANG_2022_ARCHIVED_MUTANT_LINEAGES",
+      "candidate_ids": ["M1_T0", "M3_T0", "M4_T0", "M5_T0", "M6_T0", "W3_POST_DELETION"],
+      "named_or_traceable": true,
+      "archived_or_recoverable_material_declared": true,
+      "genome_or_marker_characterization_declared": true,
+      "fitness_or_realization_related_measurement_declared": true,
+      "exact_registered_marker_class_verified": false,
+      "same_72_120_context_realization_available": false,
+      "gross_secondary_rearrangement_resolved": false,
+      "independent_realization_band_available": false,
+      "evidence_note": "The study archived serial-transfer lineages, sequenced M1-M6 and W3, and measured CFU/competition. These are real named materials but not the registered 72-120 h realization references."
+    },
+    {
+      "group_id": "ZHANG_2020_THIRTY_MUTANT_PANEL",
+      "candidate_ids": ["ZHANG2020_MUTANT_PANEL_30"],
+      "named_or_traceable": false,
+      "archived_or_recoverable_material_declared": false,
+      "genome_or_marker_characterization_declared": true,
+      "fitness_or_realization_related_measurement_declared": true,
+      "exact_registered_marker_class_verified": false,
+      "same_72_120_context_realization_available": false,
+      "gross_secondary_rearrangement_resolved": false,
+      "independent_realization_band_available": false,
+      "evidence_note": "Thirty mutant isolates had PFGE/phenotype and spore/antibiotic measurements, but individual reusable IDs plus registered marker-class and realization bands were not recovered from the inspected primary text."
+    },
+    {
+      "group_id": "WANG_2007_FTSK_ABNORMAL_ISOLATES",
+      "candidate_ids": ["WL11_ABNORMAL_PANEL_93"],
+      "named_or_traceable": false,
+      "archived_or_recoverable_material_declared": false,
+      "genome_or_marker_characterization_declared": true,
+      "fitness_or_realization_related_measurement_declared": false,
+      "exact_registered_marker_class_verified": false,
+      "same_72_120_context_realization_available": false,
+      "gross_secondary_rearrangement_resolved": false,
+      "independent_realization_band_available": false,
+      "evidence_note": "The 93 abnormal colonies provide the strongest published marker-ladder frequencies at SCO7662/SCO7350/SCO7036 but not individually materialized realization references."
+    },
+    {
+      "group_id": "WIDENBRANT_2007_NAMED_GENOME_INSTABILITY_STRAINS",
+      "candidate_ids": ["S26", "87_45", "CO25"],
+      "named_or_traceable": true,
+      "archived_or_recoverable_material_declared": false,
+      "genome_or_marker_characterization_declared": true,
+      "fitness_or_realization_related_measurement_declared": false,
+      "exact_registered_marker_class_verified": false,
+      "same_72_120_context_realization_available": false,
+      "gross_secondary_rearrangement_resolved": true,
+      "independent_realization_band_available": false,
+      "evidence_note": "Named, deeply characterized chromosome-end-replacement strains are useful genomic controls but do not match the registered right-arm D realization design."
+    }
+  ],
+  "adjudication": {
+    "literature_candidate_pool_recovered": true,
+    "named_candidate_materials_recovered": true,
+    "qualified_reference_count": 0,
+    "entry_class_qualified_count": 0,
+    "intermediate_class_qualified_count": 0,
+    "deep_class_qualified_count": 0,
+    "reference_panel_ready": false
+  },
+  "current_blockers": [
+    "NO_EXISTING_CANDIDATE_HAS_REGISTERED_72_120_REALIZATION_BAND",
+    "NO_EXISTING_CANDIDATE_HAS_FULL_ENTRY_INTERMEDIATE_DEEP_QUALIFICATION_RECEIPT",
+    "NO_EXISTING_CANDIDATE_PANEL_REACHES_TWO_QUALIFIED_REFERENCES_PER_CLASS"
+  ],
+  "claim_ceiling": {
+    "direct_mu_outcome_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "generic_game_promoted": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
