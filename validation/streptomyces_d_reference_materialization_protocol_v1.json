@@ -1,0 +1,47 @@
+{
+  "receipt_id": "STREPTOMYCES_D_REFERENCE_MATERIALIZATION_PROTOCOL_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "congener_outcomes_opened": false,
+  "source_cohort": "ZHANG_2020_M145_DERIVED_30_MUTANT_PFGE_PHENOTYPE_COHORT",
+  "source_cohort_frozen_before_retyping": true,
+  "candidate_hunting_after_retyping_forbidden": true,
+  "retyping_panel": ["SCO7662_cmlR2", "SCO7350", "SCO7036_argG", "SCO3879_dnaA_core"],
+  "retyping_scope": "ALL_PHYSICALLY_AVAILABLE_SOURCE_COHORT_ISOLATES",
+  "candidate_outcomes_may_not_influence_retyping_or_inclusion": true,
+  "registered_classes": {
+    "entry": "SCO7662_absent__SCO7350_present__SCO7036_present",
+    "intermediate": "SCO7662_absent__SCO7350_absent__SCO7036_present",
+    "deep": "SCO7662_absent__SCO7350_absent__SCO7036_absent"
+  },
+  "minimum_independent_references_per_class": 2,
+  "qualification_rule": "ALL_THREE_CLASSES_MUST_HAVE_AT_LEAST_TWO_INDEPENDENT_PHYSICALLY_AVAILABLE_RETYPED_REFERENCES",
+  "entry_shortfall_contingency": "STOP_REFERENCE_PANEL_QUALIFICATION_DO_NOT_RELAX_MINIMUM_OR_POSTHOC_HUNT_NEW_COHORT",
+  "background_rule": "M145_DERIVED_ONLY_FOR_PRIMARY_PANEL",
+  "delta_ftsK_SC_may_substitute": false,
+  "realization_assay_after_materialization": {
+    "interval_h": [72, 120],
+    "unit": "CORE_CHROMOSOME_EQUIVALENT_FOLD_CHANGE",
+    "same_medium_and_context_as_state_channel_required": true,
+    "minimum_replicate_references_remain_independent": true,
+    "d_band_rule": "CONSERVATIVE_CLOSED_ENVELOPE_ACROSS_ALL_QUALIFIED_REFERENCE_BANDS"
+  },
+  "current_status": {
+    "protocol_frozen_preoutcome": true,
+    "physical_source_cohort_availability_verified": false,
+    "retyping_executed": false,
+    "entry_count_after_retyping_known": false,
+    "panel_materialized": false,
+    "panel_qualified": false,
+    "d_band_available": false
+  },
+  "claim_ceiling": {
+    "direct_mu_result_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
