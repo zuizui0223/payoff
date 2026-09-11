@@ -1,0 +1,51 @@
+{
+  "receipt_id": "STREPTOMYCES_RED_MEDIATOR_TASK_ENTANGLEMENT_V1",
+  "lane": "A_TASK_MATCH_SUBGATE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "mediator_id": "RED_PRODIGININE",
+  "perturbation_id": "FROZEN_RED_DEFICIENT_PRIMARY_PROBES",
+  "focal_task_id": "COLONY_LEVEL_GROWTH_REPRODUCTION_PLUS_ANTIBIOTIC_MEDIATED_FUNCTION",
+  "support_reference": "STREPTOMYCES_RED_MECHANISM_PROBE_HANDOFF_V1_PLUS_MATCHED_COMPARATOR_AUDIT",
+  "inputs": {
+    "perturbation_changes_mediator_declared": true,
+    "perturbation_changes_focal_task_output_declared": true,
+    "task_directly_preserved_declared": false,
+    "separation_of_function_intervention_declared": false,
+    "separation_of_function_preserves_task_declared": false,
+    "orthogonal_task_rescue_declared": false,
+    "orthogonal_task_rescue_verified_declared": false,
+    "rescue_independent_of_generation_path_declared": false,
+    "same_mediator_addback_only_declared": false,
+    "task_assay_same_context_declared": true,
+    "task_match_defined_before_game_outcome_declared": true,
+    "task_match_independent_of_frequency_game_declared": true
+  },
+  "expected": {
+    "mediator_task_entangled": true,
+    "direct_task_preservation_qualified": false,
+    "separation_of_function_qualified": false,
+    "orthogonal_rescue_qualified": false,
+    "task_match_qualified": false,
+    "matched_s_promoted": false,
+    "architecture_mapping_promoted": false,
+    "generic_game_promoted": false,
+    "eta_identified": false,
+    "e1_promoted": false
+  },
+  "current_blockers": [
+    "MEDIATOR_AND_TASK_OUTPUT_ENTANGLED",
+    "NO_QUALIFIED_TASK_MATCH_ROUTE"
+  ],
+  "admissible_future_routes": [
+    "DIRECT_TASK_PRESERVATION_UNDER_DIFFERENTIATION_SUPPRESSION",
+    "SEPARATION_OF_FUNCTION_PERTURBATION",
+    "ORTHOGONAL_TASK_RESCUE_INDEPENDENT_OF_GENERATION_PATH"
+  ],
+  "inadmissible_shortcut": "SAME_RED_PRODIGININE_ADDBACK_ALONE_DOES_NOT_PROVE_TASK_MATCH_IF_IT_CAN_RESTORE_THE_SAME_GENERATION_PATH",
+  "prospective": true,
+  "direct_mu_outcome_available": false,
+  "matched_generalist_shared_architecture_recovered": false,
+  "matched_s_promotion_licensed": false,
+  "architecture_mapping_certified": false,
+  "architecture_frequency_feedback_identified": false
+}
