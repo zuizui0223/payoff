@@ -1,0 +1,64 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_REALIZATION_DESIGN_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "preferred_identification_route": "ABSOLUTE_STATE_MASS_PLUS_INDEPENDENT_D_REALIZATION",
+  "registered_model": {
+    "G1": "(1-mu)*g*G0",
+    "D1": "d*D0 + mu*g*G0",
+    "new_D_mass": "N = D1 - d*D0",
+    "mu_identification": "mu = N/(G1+N)",
+    "g_identification": "g = (G1+N)/G0",
+    "advantage": "absolute_state_mass_route_does_not_require_separate_intact_realization_g_or_ratio_r_equals_d_over_g"
+  },
+  "state_mass_unit": "CALIBRATED_CORE_CHROMOSOME_EQUIVALENTS",
+  "interval_hours": [72, 120],
+  "reference_panel_rule": {
+    "pre_existing_D_verified_by_registered_marker_panel": true,
+    "same_medium_and_context_as_state_channel": true,
+    "final_mixed_state_fraction_reused_to_estimate_d": false,
+    "candidate_outcomes_used_to_select_reference_panel": false,
+    "minimum_independent_references_per_class": 2,
+    "classes": [
+      {
+        "class_id": "ENTRY_CLASS",
+        "marker_pattern": "SCO7662_absent__SCO7350_present__SCO7036_argG_present"
+      },
+      {
+        "class_id": "INTERMEDIATE_CLASS",
+        "marker_pattern": "SCO7662_absent__SCO7350_absent__SCO7036_argG_present"
+      },
+      {
+        "class_id": "DEEP_CLASS",
+        "marker_pattern": "SCO7662_absent__SCO7350_absent__SCO7036_argG_absent"
+      }
+    ],
+    "realization_per_reference": "d_i = core_chromosome_equivalents_120h/core_chromosome_equivalents_72h",
+    "registered_d_band": "closed_envelope_from_minimum_lower_to_maximum_upper_endpoint_across_all_qualified_reference_bands",
+    "reason_for_envelope": "published_terminal_deletion_mutants_show_large_fitness_heterogeneity_so_one_favorable_isolate_cannot_define_D_realization"
+  },
+  "status": {
+    "design_frozen_preoutcome": true,
+    "reference_panel_materialized": false,
+    "reference_panel_qualified": false,
+    "d_band_available": false,
+    "absolute_mass_route_ready": false,
+    "legacy_fraction_only_r_route_retained_as_optional": true
+  },
+  "current_blockers": [
+    "D_REFERENCE_PANEL_NOT_YET_MATERIALIZED",
+    "D_REFERENCE_PANEL_NOT_YET_QUALIFIED",
+    "D_REALIZATION_BAND_NOT_YET_AVAILABLE"
+  ],
+  "claim_ceiling": {
+    "direct_mu_outcome_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "generic_game_promoted": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
