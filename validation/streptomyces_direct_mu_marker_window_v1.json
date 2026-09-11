@@ -57,17 +57,28 @@
     "frozen_preoutcome": true
   },
   "realization_channel": {
-    "quantity": "r_equals_d_over_g_for_pre_existing_registered_D_vs_intact_material",
+    "preferred_route": "ABSOLUTE_STATE_MASS_PLUS_INDEPENDENT_D_REALIZATION",
+    "design_receipt": "STREPTOMYCES_DIRECT_MU_REALIZATION_DESIGN_V1",
+    "design_frozen_preoutcome": true,
+    "absolute_state_mass_unit": "CALIBRATED_CORE_CHROMOSOME_EQUIVALENTS",
+    "independent_D_realization_quantity": "d_equals_pre_existing_D_core_equivalent_mass_120h_over_72h",
     "independent_from_final_state_fraction_required": true,
     "same_72_to_120_hour_interval_required": true,
     "same_medium_and_ecological_context_required": true,
-    "frozen_preoutcome": false,
-    "current_blocker": "INDEPENDENT_REALIZATION_CHANNEL_NOT_YET_FROZEN"
+    "reference_panel_materialized": false,
+    "reference_panel_qualified": false,
+    "d_band_available": false,
+    "channel_ready": false,
+    "legacy_fraction_only_route_retained": true,
+    "legacy_quantity": "r_equals_d_over_g_for_pre_existing_registered_D_vs_intact_material",
+    "current_blocker": "D_REFERENCE_PANEL_AND_REALIZATION_BAND_NOT_YET_AVAILABLE"
   },
   "adjudication": {
     "marker_panel_frozen": true,
     "sampling_window_frozen": true,
     "state_channel_frozen": true,
+    "realization_design_frozen": true,
+    "realization_channel_ready": false,
     "direct_mu_fully_ready": false
   },
   "claim_ceiling": {
