@@ -2,6 +2,28 @@
 
 Lane: **A mechanism-probe sublane only**.
 
+## Status correction: frozen design, prospective evidence
+
+This preregistration is **prospective**. What is frozen is the probe set, estimand, and decision rule **before outcome data**. No direct terminal-specialist generation-rate outcome has yet been recovered for either primary probe.
+
+The PAYOFF Streptomyces matched-S comparator also remains unresolved:
+
+```text
+matched generalist/shared architecture recovered = FALSE
+matched S comparator certified = FALSE
+architecture mapping certified = FALSE
+```
+
+Therefore neither the existence of two qualified RED/prodiginine probes nor their preregistration is evidence that a PAYOFF shared/generalist architecture has already been isolated.
+
+In short:
+
+```text
+FROZEN != EMPIRICALLY CONFIRMED
+MECHANISM PROBE != MATCHED S ARCHITECTURE
+PROSPECTIVE TRIANGULATION != ARCHITECTURE-SPECIFIC PAYOFF VALIDATION
+```
+
 This preregistration prevents post-hoc selection between the two RED-deficient probe systems already qualified in PAYOFF.
 
 ## Primary probe set
@@ -34,6 +56,14 @@ post-generation survival/realization was separated from that measurement;
 the probe was one of the two predeclared primary comparisons.
 ```
 
+The prospective direct measurement contract is registered as:
+
+```text
+STREPTOMYCES_DIRECT_MU_MEASUREMENT_CONTRACT_V1
+```
+
+It uses a two-state transition estimand in which direct deletion-state measurements at adjacent times are combined with an independently measured deleted-lineage realization ratio. This is a measurement design, not a recovered biological result.
+
 A non-significant test is not automatically evidence that a material reduction is absent. It remains `unresolved` unless a separately predeclared criterion establishes `material_reduction_excluded`.
 
 ## Four-way decision rule
@@ -64,6 +94,8 @@ Therefore the current registered state is:
 P1 = unresolved
 P2 = unresolved
 status = INCOMPLETE_OR_UNRESOLVED_TRIANGULATION
+outcome data opened = FALSE
+prospective = TRUE
 ```
 
 This is a genuine new measurement target rather than a relabeling of an existing mutant-frequency result.
@@ -87,6 +119,7 @@ Even that would not by itself establish:
 
 ```text
 matched S architecture
+matched generalist/shared architecture
 full S:D architecture mapping
 frequency-dependent architecture fitness
 PAYOFF eta
@@ -99,8 +132,11 @@ Those require the existing downstream architecture and game gates.
 
 ```text
 PRIMARY_RED_PROBES_PREREGISTERED = TRUE
+RED_TWO_PROBE_TRIANGULATION_PROSPECTIVE = TRUE
+OUTCOME_DATA_OPENED = FALSE
 DIRECT_MU_DATA_RECOVERED_FROM_EXISTING_LITERATURE = FALSE
 TRIANGULATION_STATUS = INCOMPLETE_OR_UNRESOLVED_TRIANGULATION
+MATCHED_GENERALIST_SHARED_ARCHITECTURE_RECOVERED = FALSE
 MATCHED_S_CERTIFIED = FALSE
 ARCHITECTURE_MAPPING_CERTIFIED = FALSE
 PAYOFF_ARCHITECTURE_FREQUENCY_FEEDBACK_IDENTIFIED = FALSE
