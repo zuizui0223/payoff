@@ -49,19 +49,28 @@ def test_genotoxicity_scale_remains_unqualified_and_response_blind():
     assert not gen["qualified"]
 
 
-def test_direct_mu_semantic_scale_is_frozen_but_assay_details_are_not():
+def test_direct_mu_state_channel_is_frozen_but_realization_channel_is_not():
     data = json.loads(PATH.read_text())
     mu = data["direct_mu_scale"]
     assert mu["semantic_scale_frozen_preoutcome"]
-    assert not mu["exact_marker_panel_and_sampling_window_frozen"]
+    assert mu["exact_marker_panel_and_sampling_window_frozen"]
+    assert mu["state_channel_frozen_preoutcome"]
+    assert mu["primary_interval_hours"] == [72, 120]
+    assert mu["registered_entry_marker"].startswith("SCO7662")
+    assert mu["registered_severity_markers"] == ["SCO7350_loss", "SCO7036_argG_loss"]
+    assert not mu["independent_realization_channel_frozen_preoutcome"]
     assert not mu["qualified_for_outcome_opening"]
 
 
 def test_scale_registry_and_outcome_opening_registry_are_synchronized():
     scale = json.loads(PATH.read_text())["current_summary"]
-    out = json.loads(OUTCOME.read_text())["opening_gate_inputs"]
+    out_data = json.loads(OUTCOME.read_text())
+    out = out_data["opening_gate_inputs"]
     assert out["task_scale_frozen_preoutcome"] == scale["task_scale_frozen_preoutcome"]
     assert out["direct_mu_scale_frozen_preoutcome"] == scale["direct_mu_semantic_scale_frozen_preoutcome"]
     assert out["genotoxicity_scale_frozen_preoutcome"] == scale["genotoxicity_scale_frozen_preoutcome"]
+    assert out["analysis_window_frozen_preoutcome"]
+    assert out_data["direct_mu_rule"]["state_channel_frozen_preoutcome"]
+    assert not out_data["direct_mu_rule"]["independent_realization_channel_frozen_preoutcome"]
     assert not scale["all_three_scales_ready_for_primary_outcome"]
     assert not scale["outcome_opening_allowed"]
