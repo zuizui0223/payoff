@@ -11,6 +11,18 @@
   "outcome_data_opened": false,
   "numeric_thresholds_frozen": false,
   "outcome_opening_allowed": false,
+  "opening_gate_inputs": {
+    "task_scale_frozen_preoutcome": false,
+    "genotoxicity_scale_frozen_preoutcome": false,
+    "direct_mu_scale_frozen_preoutcome": false,
+    "task_materiality_threshold_frozen_preoutcome": false,
+    "genotoxicity_materiality_threshold_frozen_preoutcome": false,
+    "direct_mu_materiality_threshold_frozen_preoutcome": false,
+    "uncertainty_construction_frozen_preoutcome": false,
+    "analysis_window_frozen_preoutcome": false,
+    "candidate_set_frozen_preoutcome": true,
+    "outcome_data_already_opened": false
+  },
   "thresholds_required_before_outcome_opening": [
     "TASK_MATERIAL_LOSS_TOLERANCE_ON_PREDECLARED_HIGHER_IS_BETTER_SCALE",
     "GENOTOXICITY_MATERIAL_REDUCTION_THRESHOLD",
