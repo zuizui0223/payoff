@@ -59,4 +59,8 @@ def test_r_lane_does_not_promote_game_reference_or_architecture_claims():
     assert candidate_status["qualified_reference_count_DEEP_CLASS"] == 0
 
     arch = load(ARCH)
-    assert not arch["systems"]["STREPTOMYCES_GENOME_FRAGILITY"]["mapping_certified"]
+    streptomyces = next(
+        row for row in arch["systems"] if row["system_id"] == "STREPTOMYCES_COELICOLOR"
+    )
+    assert not streptomyces["mapping_certified"]
+    assert not arch["any_mapping_certified"]
