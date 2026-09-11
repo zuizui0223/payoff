@@ -10,7 +10,7 @@ from src.congener_outcome_opening_gate import (
 PATH = Path("validation/streptomyces_congener_sof_outcome_preregistration_v1.json")
 
 
-def test_current_registry_is_still_machine_blocked_after_window_freeze():
+def test_current_registry_is_still_machine_blocked_after_realization_design_freeze():
     data = json.loads(PATH.read_text())
     receipt = CongenerOutcomeOpeningReceipt(**data["opening_gate_inputs"])
     allowed, blockers = adjudicate_congener_outcome_opening(receipt)
@@ -22,7 +22,10 @@ def test_current_registry_is_still_machine_blocked_after_window_freeze():
     assert "ANALYSIS_WINDOW_NOT_FROZEN" not in blockers
     assert "CANDIDATE_SET_NOT_FROZEN" not in blockers
 
-    # Genotoxicity qualification, materiality thresholds, and uncertainty still block opening.
+    # A frozen realization DESIGN is not a ready measurement route.
+    assert "DIRECT_MU_MEASUREMENT_NOT_READY" in blockers
+
+    # Genotoxicity qualification, materiality thresholds, and uncertainty also still block opening.
     assert "GENOTOXICITY_SCALE_NOT_FROZEN" in blockers
     assert "TASK_MATERIALITY_THRESHOLD_NOT_FROZEN" in blockers
     assert "GENOTOXICITY_MATERIALITY_THRESHOLD_NOT_FROZEN" in blockers
@@ -30,7 +33,7 @@ def test_current_registry_is_still_machine_blocked_after_window_freeze():
     assert "UNCERTAINTY_CONSTRUCTION_NOT_FROZEN" in blockers
 
 
-def test_state_channel_freeze_still_does_not_equal_direct_mu_readiness_or_outcome_permission():
+def test_realization_design_freeze_still_does_not_equal_direct_mu_readiness_or_outcome_permission():
     data = json.loads(PATH.read_text())
     inputs = data["opening_gate_inputs"]
     mu = data["direct_mu_rule"]
@@ -39,7 +42,12 @@ def test_state_channel_freeze_still_does_not_equal_direct_mu_readiness_or_outcom
     assert inputs["direct_mu_scale_frozen_preoutcome"]
     assert inputs["analysis_window_frozen_preoutcome"]
     assert mu["state_channel_frozen_preoutcome"]
+    assert mu["realization_design_frozen_preoutcome"]
+    assert not inputs["direct_mu_measurement_ready_preoutcome"]
     assert not mu["independent_realization_channel_frozen_preoutcome"]
+    assert not mu["reference_panel_materialized"]
+    assert not mu["reference_panel_qualified"]
+    assert not mu["d_band_available"]
     assert not mu["direct_mu_fully_ready"]
     assert not inputs["genotoxicity_scale_frozen_preoutcome"]
     assert not data["numeric_thresholds_frozen"]
