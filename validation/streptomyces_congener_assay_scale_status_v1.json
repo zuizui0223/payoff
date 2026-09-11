@@ -30,10 +30,20 @@
   "direct_mu_scale": {
     "scale_id": "REGISTERED_TERMINAL_DELETION_STATE_INTERVAL_TRANSITION_FRACTION_MU",
     "support_reference": "STREPTOMYCES_DIRECT_MU_MEASUREMENT_CONTRACT_V1",
+    "marker_window_receipt": "STREPTOMYCES_DIRECT_MU_MARKER_WINDOW_V1",
     "unit": "fraction_per_registered_interval_under_declared_two_state_model",
     "direction": "larger_means_more_entry_into_registered_deletion_state",
     "semantic_scale_frozen_preoutcome": true,
-    "exact_marker_panel_and_sampling_window_frozen": false,
+    "exact_marker_panel_and_sampling_window_frozen": true,
+    "registered_entry_marker": "SCO7662_cmlR2_loss_relative_to_calibrated_core",
+    "registered_severity_markers": [
+      "SCO7350_loss",
+      "SCO7036_argG_loss"
+    ],
+    "core_reference": "SCO3879_dnaA_oriC_core",
+    "primary_interval_hours": [72, 120],
+    "state_channel_frozen_preoutcome": true,
+    "independent_realization_channel_frozen_preoutcome": false,
     "qualified_for_outcome_opening": false
   },
   "genotoxicity_scale": {
@@ -70,6 +80,9 @@
   "current_summary": {
     "task_scale_frozen_preoutcome": true,
     "direct_mu_semantic_scale_frozen_preoutcome": true,
+    "direct_mu_state_channel_frozen_preoutcome": true,
+    "direct_mu_realization_channel_frozen_preoutcome": false,
+    "direct_mu_fully_ready": false,
     "genotoxicity_scale_frozen_preoutcome": false,
     "all_three_scales_ready_for_primary_outcome": false,
     "numeric_materiality_thresholds_frozen": false,
