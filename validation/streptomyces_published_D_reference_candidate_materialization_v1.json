@@ -1,0 +1,100 @@
+{
+  "receipt_id": "STREPTOMYCES_PUBLISHED_D_REFERENCE_CANDIDATE_MATERIALIZATION_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "support_references": [
+    "ZHANG_ET_AL_2020_SCI_ADV_DOI_10.1126_sciadv.aay5781",
+    "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y"
+  ],
+  "materialized_named_candidates": [
+    {
+      "candidate_id": "ZHANG2020_2H1A",
+      "source": "ZHANG_ET_AL_2020_SCI_ADV",
+      "fully_sequenced_in_source": true,
+      "pairwise_WT_fitness_assayed": true,
+      "external_antibiotic_function_assayed": true,
+      "phenotypic_marker_class_reported_in_current_receipt": "NOT_RESOLVED",
+      "exact_registered_marker_class_verified": false,
+      "same_context_72_120h_d_band_available": false,
+      "qualified_D_reference": false
+    },
+    {
+      "candidate_id": "ZHANG2020_8H1B",
+      "source": "ZHANG_ET_AL_2020_SCI_ADV",
+      "fully_sequenced_in_source": true,
+      "pairwise_WT_fitness_assayed": true,
+      "external_antibiotic_function_assayed": true,
+      "phenotypic_marker_class_reported_in_current_receipt": "NOT_RESOLVED",
+      "exact_registered_marker_class_verified": false,
+      "same_context_72_120h_d_band_available": false,
+      "qualified_D_reference": false
+    },
+    {
+      "candidate_id": "ZHANG2020_9H1B",
+      "source": "ZHANG_ET_AL_2020_SCI_ADV",
+      "fully_sequenced_in_source": true,
+      "pairwise_WT_fitness_assayed": true,
+      "external_antibiotic_function_assayed": true,
+      "phenotypic_marker_class_reported_in_current_receipt": "CamS_ArgPlus",
+      "interpretation_limit": "terminal deletion reaches cmlR region but current receipt does not establish whether SCO7350 is retained, so ENTRY vs INTERMEDIATE is unresolved",
+      "exact_registered_marker_class_verified": false,
+      "same_context_72_120h_d_band_available": false,
+      "qualified_D_reference": false
+    },
+    {
+      "candidate_id": "ZHANG2020_9H1A",
+      "source": "ZHANG_ET_AL_2020_SCI_ADV",
+      "fully_sequenced_in_source": true,
+      "pairwise_WT_fitness_assayed": true,
+      "external_antibiotic_function_assayed": true,
+      "broad_initial_frequency_series_assayed": true,
+      "phenotypic_marker_class_reported_in_current_receipt": "CamS_ArgMinus",
+      "interpretation_limit": "deep-deletion candidate by phenotype, but exact registered SCO7662/SCO7350/SCO7036 marker pattern and same-context d band remain required",
+      "exact_registered_marker_class_verified": false,
+      "same_context_72_120h_d_band_available": false,
+      "qualified_D_reference": false
+    },
+    {
+      "candidate_id": "ZHANG2022_M1_TO_M6_T0",
+      "source": "ZHANG_ET_AL_2022_NAT_COMM",
+      "candidate_count": 6,
+      "serial_transfer_fitness_and_CFU_available": true,
+      "genome_deletion_evolution_followed": true,
+      "same_context_72_120h_d_band_available": false,
+      "context_matches_registered_state_channel": false,
+      "exact_registered_marker_class_verified_per_candidate": false,
+      "qualified_D_reference_count": 0
+    }
+  ],
+  "materialization_status": {
+    "named_candidate_sources_materialized": true,
+    "named_2020_isolate_count": 4,
+    "named_2022_lineage_group_count": 1,
+    "qualified_reference_count_ENTRY_CLASS": 0,
+    "qualified_reference_count_INTERMEDIATE_CLASS": 0,
+    "qualified_reference_count_DEEP_CLASS": 0,
+    "reference_panel_materialized_under_registered_gate": false,
+    "d_band_available": false
+  },
+  "next_required_fields_per_candidate_before_qualification": [
+    "registered_SCO7662_SCO7350_SCO7036_marker_pattern",
+    "SCO3879_dnaA_core_reference_present",
+    "pre_existing_D_state_verified_at_72h",
+    "same_medium_and_context_72_to_120h",
+    "closed_core_chromosome_equivalent_realization_band",
+    "gross_secondary_rearrangement_resolved",
+    "independent_reference_identity"
+  ],
+  "claim_ceiling": {
+    "candidate_materialization_is_not_reference_qualification": true,
+    "direct_mu_outcome_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "generic_game_promoted": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
