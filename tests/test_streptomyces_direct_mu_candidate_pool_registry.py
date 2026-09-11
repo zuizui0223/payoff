@@ -24,11 +24,15 @@ def test_candidate_pool_recovery_does_not_create_qualified_references():
 
 def test_current_reference_panel_status_stays_empty_and_unqualified():
     data = load(REFERENCE_STATUS)
-    assert data["current_panel"]["candidate_count"] == 0
-    assert data["current_panel"]["qualified_count"] == 0
-    assert not data["current_panel"]["panel_materialized"]
-    assert not data["current_panel"]["panel_qualified"]
-    assert not data["current_panel"]["d_band_available"]
+    assert data["candidate_references"] == []
+    assert data["qualified_reference_counts"] == {
+        "ENTRY_CLASS": 0,
+        "INTERMEDIATE_CLASS": 0,
+        "DEEP_CLASS": 0,
+    }
+    assert not data["panel_materialized"]
+    assert not data["panel_qualified"]
+    assert not data["d_band_available"]
 
 
 def test_candidate_pool_does_not_promote_architecture_claims():
