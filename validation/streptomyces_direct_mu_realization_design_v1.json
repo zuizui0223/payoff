@@ -13,7 +13,7 @@
     "g_identification": "g = (G1+N)/G0",
     "advantage": "absolute_state_mass_route_does_not_require_separate_intact_realization_g_or_ratio_r_equals_d_over_g"
   },
-  "state_mass_unit": "CALIBRATED_CORE_CHROMOSOME_EQUIVALENTS",
+  "state_mass_unit": "CORE_CHROMOSOME_EQUIVALENT_FOLD_CHANGE",
   "interval_hours": [72, 120],
   "reference_panel_rule": {
     "pre_existing_D_verified_by_registered_marker_panel": true,
