@@ -1,0 +1,82 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_MARKER_WINDOW_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "support_references": [
+    "WANG_ET_AL_2007_J_BACTERIOL_DOI_10.1128_JB.01660-06",
+    "ZHANG_ET_AL_2020_SCI_ADV_DOI_10.1126_sciadv.aay5781",
+    "AVITIA_DOMINGUEZ_ET_AL_2025_PHIL_TRANS_B_DOI_10.1098_rstb.2023.0267",
+    "CALCUTT_SCHMIDT_1992_J_BACTERIOL_DOI_10.1128_JB.174.10.3220-3226.1992"
+  ],
+  "state_channel": {
+    "registered_D_entry_definition": "loss_of_SCO7662_cmlR2_relative_to_calibrated_core_reference",
+    "entry_marker": {
+      "locus": "SCO7662",
+      "gene": "cmlR2",
+      "approx_distance_from_right_end_kb": 178,
+      "role": "primary_registered_entry_state_marker"
+    },
+    "severity_markers": [
+      {
+        "locus": "SCO7350",
+        "approx_distance_from_right_end_kb": 503,
+        "role": "intermediate_deletion_severity_marker"
+      },
+      {
+        "locus": "SCO7036",
+        "gene": "argG",
+        "approx_distance_from_right_end_kb": 841,
+        "role": "deep_deletion_severity_marker"
+      }
+    ],
+    "core_reference": {
+      "locus": "SCO3879",
+      "gene": "dnaA",
+      "region": "central_oriC_region",
+      "role": "terminal_to_core_copy_reference"
+    },
+    "whole_biomass_state_channel_declared": true,
+    "entry_and_severity_kept_distinct": true,
+    "candidate_outcomes_used_to_select_panel": false
+  },
+  "dosage_calibration": {
+    "required": true,
+    "baseline": "genotype_and_time_matched_intact_baseline_verified_present_at_all_registered_markers",
+    "reason": "oriC_to_terminal_copy_ratio_can_change_with_replication_state_even_without_terminal_deletion",
+    "universal_M145_only_baseline_sufficient": false,
+    "candidate_outcomes_used_to_select_calibration": false
+  },
+  "primary_interval": {
+    "start_hour": 72,
+    "end_hour": 120,
+    "duration_hours": 48,
+    "basis": "first_adjacent_interval_in_registered_2025_colony_time_course_and_end_point_matches_five_day_external_task_assay",
+    "candidate_outcomes_used_to_select_window": false,
+    "frozen_preoutcome": true
+  },
+  "realization_channel": {
+    "quantity": "r_equals_d_over_g_for_pre_existing_registered_D_vs_intact_material",
+    "independent_from_final_state_fraction_required": true,
+    "same_72_to_120_hour_interval_required": true,
+    "same_medium_and_ecological_context_required": true,
+    "frozen_preoutcome": false,
+    "current_blocker": "INDEPENDENT_REALIZATION_CHANNEL_NOT_YET_FROZEN"
+  },
+  "adjudication": {
+    "marker_panel_frozen": true,
+    "sampling_window_frozen": true,
+    "state_channel_frozen": true,
+    "direct_mu_fully_ready": false
+  },
+  "claim_ceiling": {
+    "direct_mu_outcome_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "generic_game_promoted": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
