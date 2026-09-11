@@ -3,6 +3,7 @@
   "lane": "A_TASK_MECHANISM_SEPARATION_SUBLANE",
   "system_id": "STREPTOMYCES_COELICOLOR",
   "candidate_registry": "STREPTOMYCES_PRODIGININE_CONGENER_SOF_CANDIDATES_V1",
+  "assay_scale_registry": "STREPTOMYCES_CONGENER_ASSAY_SCALE_STATUS_V1",
   "primary_candidate_ids": [
     "DELTA_redG_CONGENER_PARTITION",
     "DELTA_redG_PLUS_mcpG_CYCLIC_CONGENER_SWAP"
@@ -12,9 +13,9 @@
   "numeric_thresholds_frozen": false,
   "outcome_opening_allowed": false,
   "opening_gate_inputs": {
-    "task_scale_frozen_preoutcome": false,
+    "task_scale_frozen_preoutcome": true,
     "genotoxicity_scale_frozen_preoutcome": false,
-    "direct_mu_scale_frozen_preoutcome": false,
+    "direct_mu_scale_frozen_preoutcome": true,
     "task_materiality_threshold_frozen_preoutcome": false,
     "genotoxicity_materiality_threshold_frozen_preoutcome": false,
     "direct_mu_materiality_threshold_frozen_preoutcome": false,
@@ -31,6 +32,7 @@
   "threshold_policy": "assay_scales_must_be_fixed_then_numeric_thresholds_declared_before_outcome_opening_no_posthoc_threshold_selection",
   "task_rule": {
     "quantity": "probe_minus_control_on_predeclared_higher_is_better_task_scale",
+    "scale_id": "B_SUBTILIS_SOFT_AGAR_INHIBITION_ZONE_AREA_MM2",
     "preserved": "closed_band_strictly_above_negative_material_loss_tolerance",
     "material_task_loss": "closed_band_strictly_below_negative_material_loss_tolerance",
     "boundary_contact_or_straddle": "unresolved",
@@ -38,13 +40,17 @@
   },
   "genotoxicity_rule": {
     "quantity": "control_minus_probe_positive_means_reduction",
+    "scale_id": null,
+    "scale_status": "RESPONSE_BLIND_QUALIFICATION_REQUIRED",
     "reduced": "closed_band_strictly_above_predeclared_material_reduction",
     "material_reduction_excluded": "closed_band_strictly_below_predeclared_material_reduction",
     "boundary_contact_or_straddle": "unresolved"
   },
   "direct_mu_rule": {
     "quantity": "control_mu_minus_probe_mu_positive_means_reduction",
+    "scale_id": "REGISTERED_TERMINAL_DELETION_STATE_INTERVAL_TRANSITION_FRACTION_MU",
     "mu_source": "STREPTOMYCES_DIRECT_MU_MEASUREMENT_CONTRACT_V1",
+    "exact_marker_panel_and_sampling_window_status": "NOT_YET_FROZEN",
     "reduced": "closed_band_strictly_above_predeclared_material_reduction",
     "material_reduction_excluded": "closed_band_strictly_below_predeclared_material_reduction",
     "boundary_contact_or_straddle": "unresolved"
