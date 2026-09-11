@@ -9,6 +9,7 @@ def make(**overrides):
         task_scale_frozen_preoutcome=True,
         genotoxicity_scale_frozen_preoutcome=True,
         direct_mu_scale_frozen_preoutcome=True,
+        direct_mu_measurement_ready_preoutcome=True,
         task_materiality_threshold_frozen_preoutcome=True,
         genotoxicity_materiality_threshold_frozen_preoutcome=True,
         direct_mu_materiality_threshold_frozen_preoutcome=True,
@@ -21,10 +22,19 @@ def make(**overrides):
     return CongenerOutcomeOpeningReceipt(**data)
 
 
-def test_full_preoutcome_freeze_allows_opening():
+def test_full_preoutcome_freeze_and_ready_measurement_allow_opening():
     allowed, blockers = adjudicate_congener_outcome_opening(make())
     assert allowed
     assert blockers == ()
+
+
+def test_frozen_direct_mu_semantics_without_ready_measurement_still_blocks_opening():
+    allowed, blockers = adjudicate_congener_outcome_opening(
+        make(direct_mu_measurement_ready_preoutcome=False)
+    )
+    assert not allowed
+    assert "DIRECT_MU_MEASUREMENT_NOT_READY" in blockers
+    assert "DIRECT_MU_SCALE_NOT_FROZEN" not in blockers
 
 
 def test_missing_any_threshold_blocks_opening():
