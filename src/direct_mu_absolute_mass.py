@@ -85,7 +85,7 @@ def project_direct_mu_absolute_bands(
 
     raw_N_low = D1L - dH * D0H
     raw_N_high = D1H - dL * D0L
-    if raw_N_high < 0:
+    if raw_N_high < 0 or (raw_N_high == 0 and G1H == 0):
         return AbsoluteMassMuProjection(
             mu_low=Fraction(0),
             mu_high=Fraction(0),
@@ -100,15 +100,16 @@ def project_direct_mu_absolute_bands(
     def mu_of(N: Fraction, G: Fraction) -> Fraction:
         denom = G + N
         if denom == 0:
-            # Only possible at G=N=0, which carries no output and cannot identify mu.
             raise ValueError("zero total output leaves mu unidentified")
         return N / denom
 
-    mu_low = mu_of(N_low, G1H) if (N_low + G1H) > 0 else Fraction(0)
-    if N_high == 0 and G1L == 0:
-        mu_high = Fraction(0)
+    if G1H == 0:
+        # Physical feasibility then requires N>0, and every feasible point has mu=1.
+        mu_low = Fraction(1)
+        mu_high = Fraction(1)
     else:
-        mu_high = mu_of(N_high, G1L)
+        mu_low = mu_of(N_low, G1H)
+        mu_high = Fraction(1) if (G1L == 0 and N_high > 0) else mu_of(N_high, G1L)
 
     return AbsoluteMassMuProjection(
         mu_low=mu_low,
