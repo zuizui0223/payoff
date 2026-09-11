@@ -75,6 +75,9 @@ def project_direct_mu_absolute_bands(
 
     All state masses and d are constrained nonnegative. The physical model adds
     N = D1 - d*D0 >= 0. mu=N/(G1+N) is increasing in N and decreasing in G1.
+    Points with G1=N=0 are excluded because the interval produces no output and
+    therefore leaves mu undefined; neighboring feasible positive-output points
+    still determine the exact projection.
     """
     G1L, G1H = (_nonnegative(x, "G1 band") for x in G1_band)
     D0L, D0H = (_nonnegative(x, "D0 band") for x in D0_band)
@@ -103,13 +106,18 @@ def project_direct_mu_absolute_bands(
             raise ValueError("zero total output leaves mu unidentified")
         return N / denom
 
-    if G1H == 0:
+    if N_high == 0:
+        # Feasible points necessarily have G1>0 (otherwise all output is zero),
+        # and every such point has mu=0 even when the closed G1 band touches 0.
+        mu_low = Fraction(0)
+        mu_high = Fraction(0)
+    elif G1H == 0:
         # Physical feasibility then requires N>0, and every feasible point has mu=1.
         mu_low = Fraction(1)
         mu_high = Fraction(1)
     else:
         mu_low = mu_of(N_low, G1H)
-        mu_high = Fraction(1) if (G1L == 0 and N_high > 0) else mu_of(N_high, G1L)
+        mu_high = Fraction(1) if G1L == 0 else mu_of(N_high, G1L)
 
     return AbsoluteMassMuProjection(
         mu_low=mu_low,
