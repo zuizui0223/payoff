@@ -1,0 +1,51 @@
+{
+  "receipt_id": "STREPTOMYCES_2020_DRYAD_RAW_RECONSTRUCTION_V1",
+  "lane": "R_RAW_RECONSTRUCTION",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "source_paper": {
+    "citation_id": "ZHANG_ET_AL_2020_SCI_ADV_AAY5781",
+    "doi": "10.1126/sciadv.aay5781"
+  },
+  "archive": {
+    "provider": "Dryad",
+    "dataset_doi": "10.5061/dryad.bnzs7h462",
+    "file_count_known": 1,
+    "file_manifest": [
+      {
+        "filename": "Data_Dryad_DoL-Zheren_Zhang.xlsx",
+        "reported_size_kb": 81.04,
+        "format": "xlsx",
+        "description": "paper raw-data workbook with a tab per paper figure"
+      }
+    ]
+  },
+  "reconstruction_status": {
+    "source_identity_recovered": true,
+    "file_manifest_recovered": true,
+    "raw_bytes_acquired": false,
+    "checksum_verified": false,
+    "workbook_opened": false,
+    "sheet_manifest_reconstructed": false,
+    "lossless_cell_normalization_completed": false,
+    "numeric_analysis_reproduced": false,
+    "current_level": "R0_SOURCE_IDENTITY_AND_FILE_MANIFEST_RECOVERED"
+  },
+  "current_blocker": {
+    "class": "DOWNLOAD_AUTHORIZATION",
+    "detail": "current Dryad file-download API requires bearer authorization; file bytes were not acquired in this workflow",
+    "must_not_be_reinterpreted_as": [
+      "FILE_MISSING",
+      "DATASET_UNAVAILABLE",
+      "NUMERIC_NEGATIVE_RESULT"
+    ]
+  },
+  "semantic_firewall": {
+    "generic_game_result_recovered_from_this_receipt": false,
+    "D_reference_qualified_from_this_receipt": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
