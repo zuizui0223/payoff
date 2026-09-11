@@ -1,0 +1,70 @@
+{
+  "receipt_id": "STREPTOMYCES_PUBLISHED_D_REFERENCE_SOURCE_AUDIT_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "sources": [
+    {
+      "source_id": "ZHANG_ET_AL_2020_SCI_ADV_AAY5781",
+      "reported_material": "30 terminal-genome mutant isolates characterized by sequencing/PFGE with variable deletion size",
+      "useful_for": [
+        "candidate_reference_discovery",
+        "deletion_severity_heterogeneity",
+        "secondary_rearrangement_screening"
+      ],
+      "disqualifying_or_missing_for_current_d_panel": [
+        "NO_REGISTERED_72_TO_120H_CORE_EQUIVALENT_REALIZATION_BAND",
+        "PER_REFERENCE_CURRENT_MARKER_CLASS_AND_REALIZATION_NOT_YET_MATERIALIZED_IN_PAYOFF",
+        "SOME_ISOLATES_HAVE_LARGE_IS1649_AMPLIFICATION_REQUIRING_SECONDARY_REARRANGEMENT_RESOLUTION"
+      ],
+      "currently_qualified_reference_count": 0
+    },
+    {
+      "source_id": "SOTO_ET_AL_2022_NCOMMS_MUTATIONAL_MELTDOWN",
+      "reported_material": "six mutant lineages M1-M6 with serial-transfer CFU/fitness and continued genome-deletion evolution",
+      "useful_for": [
+        "realization_heterogeneity_motivation",
+        "candidate_lineage_discovery",
+        "evidence_that_deletion_state_can_continue_evolving"
+      ],
+      "disqualifying_or_missing_for_current_d_panel": [
+        "SERIAL_TRANSFER_SINGLE_SPORE_CONTEXT_DOES_NOT_MATCH_REGISTERED_72_TO_120H_STATE_CHANNEL",
+        "NO_PREDECLARED_SAME_CONTEXT_CLOSED_D_BAND_PER_REFERENCE",
+        "LINEAGES_ACCUMULATE_ADDITIONAL_DELETIONS_DURING_PASSAGE"
+      ],
+      "currently_qualified_reference_count": 0
+    },
+    {
+      "source_id": "WANG_ET_AL_2007_FTSKSC",
+      "reported_material": "terminal-deletion marker hierarchy at SCO7662, SCO7350, and SCO7036/argG",
+      "useful_for": [
+        "marker_panel_support",
+        "severity_class_definition"
+      ],
+      "disqualifying_or_missing_for_current_d_panel": [
+        "FTSKSC_NULL_BACKGROUND_NOT_REGISTERED_AS_D_REALIZATION_REFERENCE_CONTEXT",
+        "NO_REGISTERED_72_TO_120H_CLOSED_D_BAND"
+      ],
+      "currently_qualified_reference_count": 0
+    }
+  ],
+  "current_conclusion": {
+    "published_candidate_sources_exist": true,
+    "published_material_directly_satisfying_current_reference_panel_gate": false,
+    "qualified_reference_count_ENTRY_CLASS": 0,
+    "qualified_reference_count_INTERMEDIATE_CLASS": 0,
+    "qualified_reference_count_DEEP_CLASS": 0,
+    "reference_panel_materialized": false,
+    "reference_panel_qualified": false,
+    "d_band_available": false
+  },
+  "claim_ceiling": {
+    "direct_mu_outcome_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_REFERENCE_PANEL_QUALIFICATION_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "qualification_rules_frozen_preoutcome": true,
+  "minimum_qualified_references_per_class": 2,
+  "predeclared_classes": {
+    "ENTRY_CLASS": "SCO7662_absent__SCO7350_present__SCO7036_argG_present",
+    "INTERMEDIATE_CLASS": "SCO7662_absent__SCO7350_absent__SCO7036_argG_present",
+    "DEEP_CLASS": "SCO7662_absent__SCO7350_absent__SCO7036_argG_absent"
+  },
+  "per_reference_required": [
+    "registered_marker_pattern_verified",
+    "SCO3879_dnaA_core_reference_verified_present",
+    "reference_pre_existing_at_72h",
+    "same_medium_and_context_as_state_channel",
+    "independent_derivation",
+    "candidate_outcomes_not_used_for_selection",
+    "measurable_at_72h_and_120h",
+    "gross_secondary_rearrangement_resolved",
+    "closed_realization_band_available"
+  ],
+  "realization_band_rule": "d_i_equals_core_chromosome_equivalents_120h_over_72h_with_closed_uncertainty_band",
+  "panel_aggregation_rule": "conservative_closed_envelope_over_all_qualified_references_across_all_three_predeclared_classes",
+  "posthoc_shortcuts_forbidden": [
+    "lower_minimum_below_two_references_per_class",
+    "drop_slow_or_unfavorable_D_reference_after_viewing_d",
+    "select_only_one_deletion_severity_class",
+    "reuse_final_mixed_state_fraction_to_estimate_d",
+    "select_reference_panel_using_congener_candidate_outcomes"
+  ],
+  "current_status": {
+    "reference_candidates_materialized": false,
+    "qualified_reference_count_ENTRY_CLASS": 0,
+    "qualified_reference_count_INTERMEDIATE_CLASS": 0,
+    "qualified_reference_count_DEEP_CLASS": 0,
+    "reference_panel_qualified": false,
+    "d_band_available": false,
+    "realization_channel_ready": false
+  },
+  "current_blockers": [
+    "D_REFERENCE_PANEL_NOT_YET_MATERIALIZED",
+    "D_REFERENCE_PANEL_NOT_YET_QUALIFIED",
+    "D_REALIZATION_BAND_NOT_YET_AVAILABLE"
+  ],
+  "claim_ceiling": {
+    "direct_mu_outcome_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "generic_game_promoted": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}

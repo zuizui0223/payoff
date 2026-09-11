@@ -5,6 +5,7 @@
   "prospective": true,
   "candidate_outcomes_opened": false,
   "preferred_identification_route": "ABSOLUTE_STATE_MASS_PLUS_INDEPENDENT_D_REALIZATION",
+  "reference_panel_qualification_receipt": "STREPTOMYCES_DIRECT_MU_REFERENCE_PANEL_QUALIFICATION_V1",
   "registered_model": {
     "G1": "(1-mu)*g*G0",
     "D1": "d*D0 + mu*g*G0",
@@ -17,6 +18,7 @@
   "realization_unit": "CORE_CHROMOSOME_EQUIVALENT_FOLD_CHANGE",
   "interval_hours": [72, 120],
   "reference_panel_rule": {
+    "qualification_rules_frozen_preoutcome": true,
     "pre_existing_D_verified_by_registered_marker_panel": true,
     "same_medium_and_context_as_state_channel": true,
     "final_mixed_state_fraction_reused_to_estimate_d": false,
@@ -42,6 +44,7 @@
   },
   "status": {
     "design_frozen_preoutcome": true,
+    "reference_panel_qualification_rules_frozen_preoutcome": true,
     "reference_panel_materialized": false,
     "reference_panel_qualified": false,
     "d_band_available": false,
