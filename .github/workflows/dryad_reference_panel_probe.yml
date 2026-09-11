@@ -20,7 +20,7 @@ jobs:
         run: |
           python -m pip install --quiet openpyxl
           python - <<'PY'
-          import json, os, re, sys, urllib.request, urllib.error
+          import json, re, sys, urllib.request
           from pathlib import Path
 
           DOI = 'doi%3A10.5061%2Fdryad.bnzs7h462'
@@ -32,65 +32,47 @@ jobs:
               with urllib.request.urlopen(req, timeout=30) as r:
                   return json.load(r)
 
-          def walk_dicts(obj):
-              if isinstance(obj, dict):
-                  yield obj
-                  for v in obj.values():
-                      yield from walk_dicts(v)
-              elif isinstance(obj, list):
-                  for v in obj:
-                      yield from walk_dicts(v)
-
-          versions_url = f'{API}/datasets/{DOI}/versions?per_page=100'
-          print('VERSIONS_URL', versions_url)
-          versions = get_json(versions_url)
-          print('VERSIONS_TOP_KEYS', sorted(versions.keys()))
-          candidates = []
-          for d in walk_dicts(versions):
-              if isinstance(d.get('id'), int) and ('versionNumber' in d or 'versionStatus' in d):
-                  candidates.append(d)
-          if not candidates:
-              print('NO_VERSION_OBJECT_FOUND')
-              print(json.dumps(versions, indent=2)[:5000])
+          versions = get_json(f'{API}/datasets/{DOI}/versions?per_page=100')
+          rows = versions.get('_embedded', {}).get('stash:versions', [])
+          parsed = []
+          for d in rows:
+              href = d.get('_links', {}).get('self', {}).get('href', '')
+              m = re.search(r'/versions/(\d+)$', href)
+              if m:
+                  parsed.append((int(m.group(1)), d))
+          if not parsed:
+              print('NO_VERSION_ID_RECOVERED')
+              print(json.dumps(versions, indent=2)[:6000])
               sys.exit(0)
-          version = max(candidates, key=lambda d: (d.get('versionNumber', -1), d['id']))
-          vid = version['id']
-          print('SELECTED_VERSION_ID', vid, 'VERSION_NUMBER', version.get('versionNumber'))
+          vid, version = max(parsed, key=lambda x: x[0])
+          print('SELECTED_VERSION_ID', vid, 'TITLE', version.get('title'))
 
-          files_url = f'{API}/versions/{vid}/files?per_page=100'
-          files = get_json(files_url)
-          print('FILES_TOP_KEYS', sorted(files.keys()))
-          file_rows = []
-          for d in walk_dicts(files):
-              name = d.get('path') or d.get('filename') or d.get('name')
-              if isinstance(name, str) and name.lower().endswith(('.xlsx','.xls','.csv','.txt')):
-                  file_rows.append(d)
-          print('DISCOVERED_FILES', [(r.get('id'), r.get('path') or r.get('filename') or r.get('name'), r.get('size')) for r in file_rows])
-          row = next((r for r in file_rows if target_name in str(r.get('path') or r.get('filename') or r.get('name'))), None)
+          files = get_json(f'{API}/versions/{vid}/files?per_page=100')
+          rows = files.get('_embedded', {}).get('stash:files', [])
+          print('FILE_COUNT', len(rows))
+          for r in rows:
+              print('FILE_META', r.get('id'), r.get('path'), r.get('size'), r.get('mimeType'))
+          row = next((r for r in rows if r.get('path') == target_name), None)
           if row is None:
               print('TARGET_FILE_NOT_FOUND')
-              print(json.dumps(files, indent=2)[:10000])
               sys.exit(0)
 
-          hrefs = []
-          for d in walk_dicts(row):
-              href = d.get('href')
-              if isinstance(href, str) and ('download' in href.lower() or 'file_stream' in href.lower()):
-                  hrefs.append(href)
           fid = row.get('id')
-          if isinstance(fid, int):
+          hrefs = []
+          for rel in ('stash:download','self'):
+              href = row.get('_links', {}).get(rel, {}).get('href')
+              if href:
+                  hrefs.append(href if href.startswith('http') else 'https://datadryad.org'+href)
+          if fid:
               hrefs.extend([
                   f'{API}/files/{fid}/download',
                   f'https://datadryad.org/stash/downloads/file_stream/{fid}',
               ])
-          # dataset ZIP is a last resort; normally requires API auth
-          hrefs.append(f'{API}/datasets/{DOI}/download')
-          # preserve order and uniqueness
+          hrefs.append(f'https://datadryad.org/api/v2/versions/{vid}/download')
           hrefs = list(dict.fromkeys(hrefs))
           print('DOWNLOAD_CANDIDATES', hrefs)
 
           out = Path('/tmp/dryad_payload')
-          downloaded = False
           used = None
           for href in hrefs:
               try:
@@ -99,23 +81,20 @@ jobs:
                       data = r.read()
                       ctype = r.headers.get('Content-Type','')
                   print('DOWNLOAD_ATTEMPT', href, 'BYTES', len(data), 'CTYPE', ctype)
-                  if len(data) > 1000 and (data[:2] == b'PK' or 'spreadsheet' in ctype or 'zip' in ctype):
+                  if len(data) > 1000 and data[:2] == b'PK':
                       out.write_bytes(data)
-                      downloaded = True
                       used = href
                       break
               except Exception as e:
-                  print('DOWNLOAD_FAILED', href, type(e).__name__, str(e)[:300])
-          if not downloaded:
+                  print('DOWNLOAD_FAILED', href, type(e).__name__, str(e)[:250])
+          if used is None:
               print('PUBLIC_BYTES_NOT_RECOVERED')
               sys.exit(0)
-
           print('PUBLIC_BYTES_RECOVERED_FROM', used)
-          data = out.read_bytes()
-          import hashlib, zipfile
-          print('PAYLOAD_SHA256', hashlib.sha256(data).hexdigest())
 
-          # If full dataset ZIP, extract target workbook.
+          import hashlib, zipfile, openpyxl
+          data = out.read_bytes()
+          print('PAYLOAD_SHA256', hashlib.sha256(data).hexdigest())
           workbook = out
           if zipfile.is_zipfile(out):
               z = zipfile.ZipFile(out)
@@ -125,32 +104,32 @@ jobs:
               if match:
                   workbook = Path('/tmp') / target_name
                   workbook.write_bytes(z.read(match))
-              elif target_name not in names and len(names) == 1 and names[0].lower().endswith('.xlsx'):
+              elif len(names) == 1 and names[0].lower().endswith('.xlsx'):
                   workbook = Path('/tmp') / target_name
                   workbook.write_bytes(z.read(names[0]))
               else:
                   print('TARGET_WORKBOOK_NOT_IN_ZIP')
                   sys.exit(0)
-          else:
-              workbook = Path('/tmp') / target_name
-              workbook.write_bytes(data)
+          if workbook == out:
+              renamed = Path('/tmp') / target_name
+              renamed.write_bytes(out.read_bytes())
+              workbook = renamed
 
           print('WORKBOOK_BYTES', workbook.stat().st_size)
           print('WORKBOOK_SHA256', hashlib.sha256(workbook.read_bytes()).hexdigest())
-          import openpyxl
           wb = openpyxl.load_workbook(workbook, read_only=True, data_only=False)
           print('SHEETNAMES', wb.sheetnames)
           keywords = re.compile(r'(delet|mutant|cml|argg|cams|arg[+−-]|genome|chromosome|pfge)', re.I)
           for ws in wb.worksheets:
               print('SHEET', ws.title, 'MAX_ROW', ws.max_row, 'MAX_COL', ws.max_column)
-              hits = []
+              hits=[]
               for row_cells in ws.iter_rows():
-                  vals = [c.value for c in row_cells]
-                  text = ' | '.join('' if v is None else str(v) for v in vals)
+                  vals=[c.value for c in row_cells]
+                  text=' | '.join('' if v is None else str(v) for v in vals)
                   if keywords.search(text):
-                      hits.append((row_cells[0].row, text[:1000]))
+                      hits.append((row_cells[0].row, text[:1200]))
               if hits:
                   print('RELEVANT_HITS', ws.title, 'COUNT', len(hits))
-                  for r, text in hits[:80]:
+                  for r,text in hits[:120]:
                       print('HIT', ws.title, r, text)
           PY
