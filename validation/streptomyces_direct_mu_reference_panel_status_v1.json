@@ -1,0 +1,50 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_REFERENCE_PANEL_STATUS_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "qualification_module": "src/direct_mu_reference_panel_qualification.py",
+  "registered_classes": [
+    "ENTRY_CLASS",
+    "INTERMEDIATE_CLASS",
+    "DEEP_CLASS"
+  ],
+  "minimum_independent_references_per_class": 2,
+  "candidate_references": [],
+  "qualified_reference_counts": {
+    "ENTRY_CLASS": 0,
+    "INTERMEDIATE_CLASS": 0,
+    "DEEP_CLASS": 0
+  },
+  "panel_materialized": false,
+  "panel_qualified": false,
+  "d_band_available": false,
+  "current_blockers": [
+    "ENTRY_CLASS_QUALIFIED_REFERENCE_COUNT_BELOW_2",
+    "INTERMEDIATE_CLASS_QUALIFIED_REFERENCE_COUNT_BELOW_2",
+    "DEEP_CLASS_QUALIFIED_REFERENCE_COUNT_BELOW_2",
+    "D_REFERENCE_PANEL_NOT_YET_MATERIALIZED",
+    "D_REALIZATION_BAND_NOT_YET_AVAILABLE"
+  ],
+  "selection_guardrails": {
+    "candidate_outcomes_may_not_be_used_for_reference_selection": true,
+    "marker_pattern_must_be_verified": true,
+    "core_reference_must_be_present": true,
+    "reference_must_preexist_at_72h": true,
+    "same_medium_and_context_required": true,
+    "independent_derivation_required": true,
+    "measurable_at_72h_and_120h_required": true,
+    "gross_secondary_rearrangement_must_be_resolved": true,
+    "realization_band_required_before_qualification": true
+  },
+  "claim_ceiling": {
+    "direct_mu_outcome_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "generic_game_promoted": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
