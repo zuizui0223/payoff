@@ -1,0 +1,48 @@
+{
+  "receipt_id": "STREPTOMYCES_MECHANISM_TO_ARCHITECTURE_PROMOTION_V1",
+  "lane": "A_PROMOTION_GUARD",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "mechanism_id": "RED_PRODIGININE_TO_REGISTERED_TERMINAL_DELETION_GENERATION",
+  "candidate_shared_id": "MATCHED_GENERALIST_SHARED_COLONY_NOT_YET_RECOVERED",
+  "candidate_differentiated_id": "NATIVE_DOL_CAPABLE_COLONY",
+  "support_reference": "STREPTOMYCES_RED_TWO_PROBE_PREREGISTRATION_V1_PLUS_MATCHED_COMPARATOR_AUDIT",
+  "inputs": {
+    "triangulated_generation_reduction_declared": false,
+    "preoutcome_probe_rule_respected_declared": true,
+    "candidate_shared_unit_exists_declared": false,
+    "same_strategic_unit_level_declared": false,
+    "same_net_task_preserved_or_rescued_declared": false,
+    "task_match_independent_of_differentiation_mechanism_declared": false,
+    "matched_background_declared": false,
+    "focal_architecture_difference_isolated_declared": false,
+    "shared_generalist_only_state_verified_declared": false,
+    "differentiated_state_verified_declared": true,
+    "both_units_stable_over_assay_declared": false,
+    "promotion_independent_of_game_result_declared": true,
+    "promotion_independent_of_raw_availability_declared": true
+  },
+  "expected": {
+    "mechanism_support_certified": false,
+    "task_matched_architecture_counterfactual_certified": false,
+    "matched_s_promotion_licensed": false,
+    "generic_game_promoted": false,
+    "eta_identified": false,
+    "e1_promoted": false
+  },
+  "current_blockers": [
+    "TRIANGULATED_GENERATION_REDUCTION_NOT_ESTABLISHED",
+    "MATCHED_SHARED_UNIT_NOT_RECOVERED",
+    "STRATEGIC_UNIT_LEVEL_NOT_MATCHED",
+    "NET_TASK_NOT_PRESERVED_OR_RESCUED",
+    "TASK_MATCH_NOT_INDEPENDENT_OF_DIFFERENTIATION_MECHANISM",
+    "BACKGROUND_NOT_MATCHED",
+    "FOCAL_ARCHITECTURE_DIFFERENCE_NOT_ISOLATED",
+    "SHARED_GENERALIST_ONLY_STATE_NOT_VERIFIED",
+    "BOTH_UNITS_NOT_STABLE_OVER_ASSAY"
+  ],
+  "prospective_note": "Even if the frozen RED two-probe triangulation later supports generation reduction, the matched-S architecture remains uncertified until a separate task-matched same-unit counterfactual is recovered.",
+  "matched_generalist_shared_architecture_recovered": false,
+  "two_probe_triangulation_prospective": true,
+  "architecture_mapping_certified": false,
+  "architecture_frequency_feedback_identified": false
+}
