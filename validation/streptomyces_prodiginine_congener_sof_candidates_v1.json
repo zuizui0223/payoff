@@ -7,7 +7,7 @@
     {
       "probe_id": "DELTA_redG_CONGENER_PARTITION",
       "support_references": [
-        "PNAS_2011_PMID_21402905",
+        "NAT_CHEM_2011_PMID_21505498_DOI_10.1038_nchem.1024",
         "CHEM_BIOL_2008_DOI_10.1016_j.chembiol.2007.11.015"
       ],
       "biochemical_basis": "redG deletion retains undecylprodigiosin production while abolishing streptorubin_B production",
@@ -27,7 +27,7 @@
     {
       "probe_id": "DELTA_redG_PLUS_mcpG_CYCLIC_CONGENER_SWAP",
       "support_references": [
-        "PNAS_2011_PMID_21402905"
+        "NAT_CHEM_2011_PMID_21505498_DOI_10.1038_nchem.1024"
       ],
       "biochemical_basis": "mcpG expression in the redG mutant redirects oxidative carbocyclization toward metacycloprodigiosin rather than streptorubin_B while the upstream undecylprodigiosin pathway remains active",
       "same_background_declared": true,
