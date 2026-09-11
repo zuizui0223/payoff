@@ -1,0 +1,70 @@
+{
+  "registry_id": "STREPTOMYCES_DIRECT_MU_MEASUREMENT_CONTRACT_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "status": "PROSPECTIVE_PREOUTCOME_MEASUREMENT_CONTRACT",
+  "prospective": true,
+  "outcome_data_opened": false,
+  "direct_mu_result_available": false,
+  "matched_generalist_shared_architecture_recovered": false,
+  "matched_s_comparator_certified": false,
+  "architecture_mapping_certified": false,
+  "architecture_frequency_claim_licensed": false,
+  "estimand": {
+    "symbol": "mu",
+    "definition": "fraction_of_new_intact_lineage_output_entering_the_registered_terminal_deletion_specialist_state_over_one_measurement_interval",
+    "not_equivalent_to": [
+      "final_recovered_mutant_fraction",
+      "CFU_mutant_frequency_without_realization_separation",
+      "specialist_survival_or_maintenance"
+    ]
+  },
+  "registered_transition_model": {
+    "G_next": "(1-mu)*g*G_t",
+    "D_next": "d*D_t + mu*g*G_t",
+    "relative_deleted_realization_r": "d/g",
+    "identified_mu": "f_next - r*f_t*(1-f_next)/(1-f_t)"
+  },
+  "required_measurement_channels": {
+    "state_channel": {
+      "required": true,
+      "description": "two_or_more_time_matched_whole_colony_or_whole_biomass_measurements_of_registered_terminal_deletion_state_fraction",
+      "candidate_terminal_markers": ["cmlR_region", "argG_region"],
+      "core_reference_required": true,
+      "same_age_intact_baseline_dosage_calibration_required": true,
+      "reason": "chromosomal_replication_state_can_change_terminal_to_core_copy_ratio_even_without_deletion"
+    },
+    "realization_channel": {
+      "required": true,
+      "description": "independent_same_context_estimate_or_closed_band_for_relative_realization_r_of_already_deleted_vs_intact_lineages_over_the_same_interval",
+      "must_be_separate_from_final_mutant_fraction": true
+    }
+  },
+  "primary_probe_ids_frozen_before_outcome": [
+    "M1141_VS_M1142_RED_CLUSTER_DIFFERENCE",
+    "M145_VS_redU_SINGLE_MUTANT"
+  ],
+  "probe_result_rule": {
+    "material_reduction_threshold_must_be_declared_before_outcome": true,
+    "reduced": "guaranteed_control_minus_probe_mu_lower_bound_strictly_exceeds_material_threshold",
+    "material_reduction_excluded": "possible_control_minus_probe_mu_upper_bound_strictly_below_material_threshold",
+    "boundary_contact": "unresolved",
+    "nonsignificant_only": "unresolved"
+  },
+  "claim_separation": {
+    "positive_direct_mu_result_promotes_matched_s_automatically": false,
+    "positive_two_probe_triangulation_promotes_matched_s_automatically": false,
+    "positive_two_probe_triangulation_promotes_architecture_mapping_automatically": false,
+    "positive_two_probe_triangulation_promotes_lane_g_automatically": false,
+    "positive_two_probe_triangulation_identifies_eta_automatically": false,
+    "positive_two_probe_triangulation_promotes_e1_automatically": false
+  },
+  "current_status_labels": [
+    "STREPTOMYCES_MATCHED_GENERALIST_SHARED_ARCHITECTURE_NOT_RECOVERED",
+    "STREPTOMYCES_RED_TWO_PROBE_TRIANGULATION_FROZEN_PREOUTCOME",
+    "STREPTOMYCES_RED_TWO_PROBE_TRIANGULATION_PROSPECTIVE",
+    "STREPTOMYCES_DIRECT_MU_RESULT_NOT_YET_AVAILABLE",
+    "STREPTOMYCES_ARCHITECTURE_MAPPING_NOT_YET_CERTIFIED",
+    "PAYOFF_ARCHITECTURE_FREQUENCY_FEEDBACK_NOT_YET_IDENTIFIED"
+  ]
+}
