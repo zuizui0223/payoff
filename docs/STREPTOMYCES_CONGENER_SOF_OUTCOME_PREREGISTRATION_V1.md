@@ -17,8 +17,6 @@ The **logical outcome map** is frozen before task/genotoxic/direct-mu outcomes a
 
 The numerical materiality thresholds are **not yet frozen**, because the final assay scales have not yet been selected. They must be declared after the measurement scales are fixed but before any outcome values are opened.
 
-Therefore the current state is deliberately:
-
 ```text
 RULE_FROZEN_PREOUTCOME = TRUE
 NUMERIC_THRESHOLDS_FROZEN = FALSE
@@ -51,9 +49,7 @@ otherwise
     -> unresolved
 ```
 
-Boundary contact is unresolved. A non-significant difference is not automatically task preservation.
-
-The task itself must be fixed before outcome opening; pigment amount or prodiginine presence is not a substitute for the focal ecological performance measure.
+Boundary contact is unresolved. A non-significant difference is not automatically task preservation. Pigment amount or prodiginine presence is not a substitute for the predeclared ecological task measure.
 
 ## 3. C2: genotoxicity + direct-mu branch
 
@@ -64,7 +60,7 @@ R_genotoxic = control - probe
 R_mu        = control_mu - probe_mu
 ```
 
-Each is classified against its own predeclared material-reduction threshold using the same strict closed-band rule:
+Each is classified against its own predeclared material-reduction threshold:
 
 ```text
 entire band strictly above threshold -> reduced
@@ -74,7 +70,7 @@ contact / straddle                  -> unresolved
 
 The direct-mu estimate must come from `STREPTOMYCES_DIRECT_MU_MEASUREMENT_CONTRACT_V1`, not from final recoverable mutant frequency alone.
 
-Joint C2 status is then:
+Joint C2 status is:
 
 ```text
 genotoxicity reduced + mu reduced
@@ -90,7 +86,7 @@ any unresolved
     -> unresolved
 ```
 
-This prevents a change in DNA-damage proxy alone from being called a differentiation-generation result, and prevents a mu change without the registered genotoxic branch from being called the proposed congener mechanism.
+This prevents a DNA-damage proxy change alone from being called a differentiation-generation result, and prevents a mu change without the registered genotoxic branch from being called the proposed congener mechanism.
 
 ## 4. Frozen C1 x C2 outcome matrix
 
@@ -100,8 +96,8 @@ This prevents a change in DNA-damage proxy alone from being called a differentia
 | preserved | registered_route_not_supported | `TASK_PRESERVED_REGISTERED_GENOTOXIC_GENERATION_ROUTE_NOT_SUPPORTED` |
 | material task loss | genotoxic_generation_reduced | `MECHANISM_SIGNAL_PRESENT_BUT_TASK_CONFOUNDED` |
 | material task loss | registered_route_not_supported | `CANDIDATE_FAILS_TASK_AND_REGISTERED_ROUTE_CRITERIA` |
-| any | genotoxic_mu_discordant | `GENOTOXIC_MU_DISCORDANCE_SOF_UNRESOLVED` |
-| unresolved | any, or any | unresolved | `INCOMPLETE_OR_UNRESOLVED_SOF` |
+| any resolved task state | genotoxic_mu_discordant | `GENOTOXIC_MU_DISCORDANCE_SOF_UNRESOLVED` |
+| any unresolved component | any | `INCOMPLETE_OR_UNRESOLVED_SOF` |
 
 The key anti-cherry-picking distinction is the third row. A congener perturbation may reduce genotoxicity and direct mu yet still fail as a separation-of-function architecture route because the focal task was materially lost.
 
@@ -115,9 +111,9 @@ GENOTOXICITY_MATERIAL_REDUCTION_THRESHOLD
 DIRECT_MU_MATERIAL_REDUCTION_THRESHOLD
 ```
 
-and must identify the exact assay scale, normalization, direction, time window, and uncertainty construction for each.
+and identify the exact assay scale, normalization, direction, time window, and uncertainty construction for each.
 
-Until then the candidate outcomes remain:
+Until then:
 
 ```text
 delta redG       -> unresolved
@@ -134,9 +130,7 @@ while
 registered genotoxic/differentiation-generation branch is reduced.
 ```
 
-This would be a materially stronger result than a full RED knockout mechanism probe.
-
-It still would not automatically establish:
+This would be stronger than a full RED knockout mechanism probe, but it still would not automatically establish:
 
 ```text
 matched generalist/shared architecture
