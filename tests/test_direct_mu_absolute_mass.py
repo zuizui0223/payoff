@@ -2,6 +2,7 @@ from fractions import Fraction
 
 import pytest
 
+from src.deletion_generation_state_transition import generation_fraction_from_states
 from src.direct_mu_absolute_mass import (
     direct_mu_from_absolute_masses,
     project_direct_mu_absolute_bands,
@@ -14,6 +15,18 @@ def test_point_identification_recovers_registered_mu_and_g():
     mu, g = direct_mu_from_absolute_masses(10, 2, 24, 7, Fraction(1, 2))
     assert mu == Fraction(1, 5)
     assert g == Fraction(3)
+
+
+def test_absolute_mass_and_fraction_only_routes_are_algebraically_consistent():
+    G0, D0, G1, D1 = map(Fraction, (10, 2, 24, 7))
+    d = Fraction(1, 2)
+    mu_abs, g = direct_mu_from_absolute_masses(G0, D0, G1, D1, d)
+    f0 = D0 / (G0 + D0)
+    f1 = D1 / (G1 + D1)
+    r = d / g
+    mu_fraction = generation_fraction_from_states(f0, f1, r)
+    assert mu_abs == Fraction(1, 5)
+    assert mu_fraction == mu_abs
 
 
 def test_no_new_D_yields_mu_zero():
