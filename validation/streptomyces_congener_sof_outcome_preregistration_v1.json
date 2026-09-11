@@ -51,6 +51,7 @@
     "scale_id": "REGISTERED_TERMINAL_DELETION_STATE_INTERVAL_TRANSITION_FRACTION_MU",
     "mu_source": "STREPTOMYCES_DIRECT_MU_MEASUREMENT_CONTRACT_V1",
     "marker_window_receipt": "STREPTOMYCES_DIRECT_MU_MARKER_WINDOW_V1",
+    "realization_design_receipt": "STREPTOMYCES_DIRECT_MU_REALIZATION_DESIGN_V1",
     "exact_marker_panel_and_sampling_window_status": "FROZEN_PREOUTCOME",
     "registered_D_entry_marker": "SCO7662_cmlR2_loss_relative_to_calibrated_core",
     "severity_markers": [
@@ -60,8 +61,15 @@
     "core_reference": "SCO3879_dnaA_oriC_core",
     "primary_interval_hours": [72, 120],
     "state_channel_frozen_preoutcome": true,
+    "preferred_identification_route": "ABSOLUTE_STATE_MASS_PLUS_INDEPENDENT_D_REALIZATION",
+    "absolute_mass_formula": "mu=(D1-d*D0)/(G1+D1-d*D0)",
+    "realization_design_frozen_preoutcome": true,
     "independent_realization_channel_frozen_preoutcome": false,
+    "reference_panel_materialized": false,
+    "reference_panel_qualified": false,
+    "d_band_available": false,
     "direct_mu_fully_ready": false,
+    "legacy_fraction_only_r_route_retained": true,
     "reduced": "closed_band_strictly_above_predeclared_material_reduction",
     "material_reduction_excluded": "closed_band_strictly_below_predeclared_material_reduction",
     "boundary_contact_or_straddle": "unresolved"
