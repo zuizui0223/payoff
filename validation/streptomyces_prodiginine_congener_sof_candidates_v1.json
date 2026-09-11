@@ -1,0 +1,75 @@
+{
+  "registry_id": "STREPTOMYCES_PRODIGININE_CONGENER_SOF_CANDIDATES_V1",
+  "lane": "A_MECHANISM_PROBE_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "selection_frozen_before_direct_mu_outcome": true,
+  "candidates": [
+    {
+      "probe_id": "DELTA_redG_CONGENER_PARTITION",
+      "support_references": [
+        "NAT_CHEM_2011_PMID_21505498_DOI_10.1038_nchem.1024",
+        "CHEM_BIOL_2008_DOI_10.1016_j.chembiol.2007.11.015"
+      ],
+      "biochemical_basis": "redG deletion retains undecylprodigiosin production while abolishing streptorubin_B production",
+      "same_background_declared": true,
+      "congener_profile_changed_declared": true,
+      "prodiginine_output_not_fully_abolished_declared": true,
+      "candidate_selected_before_mu_outcome_declared": true,
+      "gross_development_matched_declared": false,
+      "focal_antibacterial_task_preserved_declared": false,
+      "dna_damage_or_genotoxicity_difference_measured_declared": false,
+      "direct_mu_difference_measured_declared": false,
+      "focal_task_assay_same_context_declared": false,
+      "mu_assay_same_context_declared": false,
+      "expected_biochemical_congener_probe_ready": true,
+      "expected_separation_of_function_certified": false
+    },
+    {
+      "probe_id": "DELTA_redG_PLUS_mcpG_CYCLIC_CONGENER_SWAP",
+      "support_references": [
+        "NAT_CHEM_2011_PMID_21505498_DOI_10.1038_nchem.1024"
+      ],
+      "biochemical_basis": "mcpG expression in the redG mutant redirects oxidative carbocyclization toward metacycloprodigiosin rather than streptorubin_B while the upstream undecylprodigiosin pathway remains active",
+      "same_background_declared": true,
+      "congener_profile_changed_declared": true,
+      "prodiginine_output_not_fully_abolished_declared": true,
+      "candidate_selected_before_mu_outcome_declared": true,
+      "gross_development_matched_declared": false,
+      "focal_antibacterial_task_preserved_declared": false,
+      "dna_damage_or_genotoxicity_difference_measured_declared": false,
+      "direct_mu_difference_measured_declared": false,
+      "focal_task_assay_same_context_declared": false,
+      "mu_assay_same_context_declared": false,
+      "expected_biochemical_congener_probe_ready": true,
+      "expected_separation_of_function_certified": false
+    },
+    {
+      "probe_id": "DELTA_redK_HYDROXYLATED_SHUNT_RESERVE",
+      "support_references": [
+        "CHEM_BIOL_2008_DOI_10.1016_j.chembiol.2007.11.015"
+      ],
+      "biochemical_basis": "redK disruption abolishes normal undecylprodigiosin_and_streptorubin_B output and accumulates an unstable hydroxylated shunt derivative",
+      "same_background_declared": true,
+      "congener_profile_changed_declared": true,
+      "prodiginine_output_not_fully_abolished_declared": false,
+      "candidate_selected_before_mu_outcome_declared": true,
+      "gross_development_matched_declared": false,
+      "focal_antibacterial_task_preserved_declared": false,
+      "dna_damage_or_genotoxicity_difference_measured_declared": false,
+      "direct_mu_difference_measured_declared": false,
+      "focal_task_assay_same_context_declared": false,
+      "mu_assay_same_context_declared": false,
+      "expected_biochemical_congener_probe_ready": false,
+      "expected_separation_of_function_certified": false
+    }
+  ],
+  "current_summary": {
+    "biochemical_congener_probe_ready_count": 2,
+    "separation_of_function_certified_count": 0,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "generic_game_promoted": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
