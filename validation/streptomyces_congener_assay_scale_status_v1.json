@@ -1,0 +1,70 @@
+{
+  "registry_id": "STREPTOMYCES_CONGENER_ASSAY_SCALE_STATUS_V1",
+  "lane": "A_TASK_MECHANISM_SEPARATION_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "congener_outcomes_opened": false,
+  "task_scale": {
+    "scale_id": "B_SUBTILIS_SOFT_AGAR_INHIBITION_ZONE_AREA_MM2",
+    "support_reference": "ZHANG_ET_AL_2020_SCI_ADV_DOI_10.1126_sciadv.aay5781",
+    "focal_task": "colony_level_external_competitor_inhibition",
+    "higher_is_better_declared": true,
+    "direct_external_function_readout_declared": true,
+    "assay_protocol_preoutcome_frozen": true,
+    "candidate_outcomes_used_to_select_scale": false,
+    "fitness_guardrail_kept_separate": true,
+    "protocol_basis": {
+      "indicator": "Bacillus_subtilis",
+      "producer_growth_temperature_C": 30,
+      "producer_growth_duration_days": 5,
+      "readout": "inhibition_zone_area_mm2_by_ImageJ",
+      "note": "The focal 2020 DoL study used B. subtilis soft-agar inhibition as an external antibiotic-function readout and used it during mutant-frequency assays. Exact plate/background details for the congener experiment must remain matched across its registered control and probe."
+    },
+    "qualified": true
+  },
+  "fitness_guardrail": {
+    "scale_id": "COLONY_SPORE_OUTPUT_CFU",
+    "role": "guardrail_not_task_scalar",
+    "support_reference": "ZHANG_ET_AL_2020_SCI_ADV_DOI_10.1126_sciadv.aay5781",
+    "prevents_task_only_interpretation_if_gross_reproductive_development_changes": true
+  },
+  "direct_mu_scale": {
+    "scale_id": "REGISTERED_TERMINAL_DELETION_STATE_INTERVAL_TRANSITION_FRACTION_MU",
+    "support_reference": "STREPTOMYCES_DIRECT_MU_MEASUREMENT_CONTRACT_V1",
+    "unit": "fraction_per_registered_interval_under_declared_two_state_model",
+    "direction": "larger_means_more_entry_into_registered_deletion_state",
+    "semantic_scale_frozen_preoutcome": true,
+    "exact_marker_panel_and_sampling_window_frozen": false,
+    "qualified_for_outcome_opening": false
+  },
+  "genotoxicity_scale": {
+    "primary_scale_id": null,
+    "scale_frozen_preoutcome": false,
+    "qualification_mode": "response_blind_controls_before_congener_outcomes",
+    "positive_control_class": "known_DNA_damaging_agent_in_Streptomyces",
+    "negative_control_required": true,
+    "requirements": [
+      "positive_control_response_certified",
+      "negative_control_specificity_certified",
+      "repeatability_certified",
+      "assay_direction_and_unit_frozen",
+      "sampling_context_frozen",
+      "distinct_from_direct_mu_outcome",
+      "not_pigment_amount_only",
+      "not_ROS_amount_only"
+    ],
+    "candidate_outcomes_must_remain_blinded_during_qualification": true,
+    "qualified": false
+  },
+  "current_summary": {
+    "task_scale_frozen_preoutcome": true,
+    "direct_mu_semantic_scale_frozen_preoutcome": true,
+    "genotoxicity_scale_frozen_preoutcome": false,
+    "all_three_scales_ready_for_primary_outcome": false,
+    "numeric_materiality_thresholds_frozen": false,
+    "outcome_opening_allowed": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
