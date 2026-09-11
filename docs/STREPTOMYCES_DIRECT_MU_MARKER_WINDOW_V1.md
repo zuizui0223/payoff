@@ -121,17 +121,35 @@ DNA-state mu != automatic total specialist generation rate.
 
 Any lineage/caste interpretation remains behind a separate unit bridge.
 
-## 6. The state channel is now frozen; the realization channel is not
+## 6. Preferred realization route is absolute-state-mass based
 
-The algebraic direct-`mu` estimand still requires
+The state channel is frozen, and the **design** of the remaining realization channel is now frozen separately.
+
+For compatible absolute state masses,
+
+```text
+G1 = (1-mu) g G0
+D1 = d D0 + mu g G0
+N  = D1 - d D0
+```
+
+so
+
+```text
+mu = N / (G1 + N).
+```
+
+This preferred route requires an independently measured realization `d` for material already in `D` at 72 h, but it does **not** require a separate measurement of intact realization `g`.
+
+The older fraction-only route using
 
 ```text
 r = d/g
 ```
 
-for pre-existing registered-`D` material versus intact material over the same 72->120 h interval and context.
+remains valid and is retained as an optional secondary route.
 
-That realization channel must be measured independently and must not be reverse-engineered from the final deletion-state fraction.
+The realization-panel design is frozen pre-outcome, but the biological reference panel itself has not yet been materialized or qualified.
 
 Current status:
 
@@ -139,19 +157,24 @@ Current status:
 MARKER_PANEL_FROZEN = TRUE
 PRIMARY_INTERVAL_FROZEN = TRUE
 STATE_CHANNEL_FROZEN = TRUE
-INDEPENDENT_REALIZATION_CHANNEL_FROZEN = FALSE
+REALIZATION_DESIGN_FROZEN = TRUE
+D_REFERENCE_PANEL_MATERIALIZED = FALSE
+D_REFERENCE_PANEL_QUALIFIED = FALSE
+D_BAND_AVAILABLE = FALSE
+REALIZATION_CHANNEL_READY = FALSE
 DIRECT_MU_FULLY_READY = FALSE
 ```
 
-Thus freezing the marker/window does not authorize opening direct-`mu` outcomes.
+Thus freezing the design does not authorize opening direct-`mu` outcomes.
 
 ## 7. Current opening blockers remain
 
 The congener outcome programme still lacks:
 
 ```text
+materialized and qualified D realization reference panel;
+closed d realization band;
 response-blind qualified primary genotoxicity scale;
-independent frozen realization channel r;
 predeclared uncertainty construction;
 task materiality threshold;
 genotoxicity materiality threshold;
@@ -168,7 +191,7 @@ remains unchanged.
 
 ## 8. Claim ceiling
 
-This marker/window freeze does not recover:
+Neither the marker/window freeze nor the frozen realization design recovers:
 
 ```text
 matched generalist/shared architecture;
