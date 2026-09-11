@@ -3,6 +3,10 @@
   "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
   "system_id": "STREPTOMYCES_COELICOLOR",
   "purpose": "screen_literature_candidates_for_future_pre_existing_D_realization_panel",
+  "support_references": [
+    "ZHANG_ET_AL_2020_SCI_ADV_DOI_10.1126_sciadv.aay5781",
+    "WANG_ET_AL_2007_J_BACTERIOL_DOI_10.1128_JB.01660-06"
+  ],
   "candidate_pool_is_not_materialized_panel": true,
   "candidate_pool_is_not_qualified_d_assay": true,
   "focal_background": "M145_DERIVED",
