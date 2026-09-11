@@ -1,0 +1,77 @@
+{
+  "receipt_id": "STREPTOMYCES_D_REFERENCE_CANDIDATE_POOL_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "purpose": "screen_literature_candidates_for_future_pre_existing_D_realization_panel",
+  "support_references": [
+    "ZHANG_ET_AL_2020_SCI_ADV_DOI_10.1126_sciadv.aay5781",
+    "WANG_ET_AL_2007_J_BACTERIOL_DOI_10.1128_JB.01660-06"
+  ],
+  "candidate_pool_is_not_materialized_panel": true,
+  "candidate_pool_is_not_qualified_d_assay": true,
+  "focal_background": "M145_DERIVED",
+  "class_cutoffs_kb_from_right_end": {
+    "entry_lower_exclusive": 178,
+    "entry_upper_exclusive": 503,
+    "intermediate_lower_inclusive": 503,
+    "intermediate_upper_exclusive": 841,
+    "deep_lower_inclusive": 841
+  },
+  "zhang_2020_wgs_right_arm_deletion_kb": [387, 522, 740, 744, 783, 791, 871, 878],
+  "zhang_2020_wgs_class_counts": {
+    "entry": 1,
+    "intermediate": 5,
+    "deep": 2
+  },
+  "minimum_independent_references_per_class": 2,
+  "wgs_pool_meets_count_requirement": {
+    "entry": false,
+    "intermediate": true,
+    "deep": true
+  },
+  "current_primary_bottleneck": "ENTRY_REFERENCE_SHORTFALL_IN_EXACTLY_CLASSIFIABLE_WGS_POOL",
+  "additional_candidate_sources": {
+    "zhang_2020_pfge_30_mutants": {
+      "available_as_candidate_source": true,
+      "phenotype_classes": ["WT_LIKE", "CamS_ArgPlus", "CamS_ArgMinus"],
+      "exact_entry_vs_intermediate_assignable_without_SCO7350_retyping": false,
+      "qualified_reference_panel": false
+    },
+    "wang_2007_delta_ftsK_SC": {
+      "available_as_biological_marker_class_support": true,
+      "reported_absence_counts": {
+        "SCO7662": "48_of_93_abnormal_colonies",
+        "SCO7350": "38_of_93_abnormal_colonies",
+        "SCO7036_argG": "5_of_93_abnormal_colonies"
+      },
+      "same_focal_background_for_realization_panel": false,
+      "qualified_reference_panel": false,
+      "exclusion_reason": "BACKGROUND_MISMATCH_DELTA_FTSK_SC"
+    }
+  },
+  "materialization_requirements": [
+    "physical_reference_material_available",
+    "registered_marker_panel_retyped_in_reference_material",
+    "same_M145_derived_background_or_predeclared_background_match",
+    "same_72_to_120_hour_context_as_state_channel",
+    "core_chromosome_equivalent_fold_change_measured",
+    "minimum_two_independent_references_per_registered_class"
+  ],
+  "status": {
+    "literature_candidate_pool_recovered": true,
+    "entry_class_candidate_count_sufficient_in_exact_wgs_pool": false,
+    "reference_panel_materialized": false,
+    "reference_panel_qualified": false,
+    "d_band_available": false,
+    "direct_mu_measurement_ready": false
+  },
+  "claim_ceiling": {
+    "direct_mu_result_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "generic_game_promoted": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
