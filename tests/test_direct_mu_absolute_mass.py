@@ -96,6 +96,20 @@ def test_zero_intact_output_with_positive_new_D_forces_mu_one():
     assert result.mu_high == 1
 
 
+def test_zero_new_D_with_G_band_touching_zero_still_identifies_mu_zero():
+    result = project_direct_mu_absolute_bands(
+        G1_band=(0, 5),
+        D0_band=(2, 2),
+        D1_band=(4, 4),
+        d_band=(2, 2),
+    )
+    assert result.physical_model_compatible
+    assert result.new_D_low == 0
+    assert result.new_D_high == 0
+    assert result.mu_low == 0
+    assert result.mu_high == 0
+
+
 def test_all_zero_output_is_incompatible():
     result = project_direct_mu_absolute_bands(
         G1_band=(0, 0),
