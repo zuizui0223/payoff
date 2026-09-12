@@ -1,0 +1,28 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_SEQUENCE_MATERIAL_SEPARATION_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "source": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
+  "public_sequence_lane": {
+    "bioproject": "PRJNA780771",
+    "T0_M1_to_M6_WGS_reported": true,
+    "may_support_registered_marker_class_reconstruction": true,
+    "may_support_gross_rearrangement_audit": true,
+    "sample_to_candidate_accession_mapping_recovered": false,
+    "marker_class_reconstructed": false,
+    "gross_rearrangement_audit_completed": false
+  },
+  "physical_material_lane": {
+    "archived_stocks_reported": true,
+    "public_culture_collection_accession_recovered": false,
+    "physical_stock_identity_reconfirmed": false,
+    "material_available_for_registered_72_120_assay": false
+  },
+  "separation_rule": "Public sequence reconstruction may satisfy genomic qualification fields but never substitutes for physical-stock identity, availability, or the registered 72-to-120-hour realization assay.",
+  "claim_ceiling": {
+    "candidate_qualified": false,
+    "d_band_available": false,
+    "direct_mu_outcome_available": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false
+  }
+}

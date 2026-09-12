@@ -1,0 +1,38 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_MATERIAL_ACCESS_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "source": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
+  "primary_source_facts": {
+    "lineages_archived_during_experiment": true,
+    "stocks_maintained_at_minus_20C": true,
+    "M1_to_M6_T0_whole_genome_sequence_data_reported": true,
+    "public_SRA_bioproject": "PRJNA780771",
+    "source_data_public": true
+  },
+  "material_access_adjudication": {
+    "public_culture_collection_accession_recovered_from_inspected_primary_source": false,
+    "public_strain_repository_deposit_recovered_from_inspected_primary_source": false,
+    "physical_stock_nonexistence_inferred": false,
+    "author_or_originating_lab_identity_confirmation_required": true,
+    "material_transfer_required_before_reference_assay": true
+  },
+  "priority_materials": [
+    {
+      "candidate_id": "M5_T0",
+      "public_accession_recovered": false,
+      "next_access_action": "CONFIRM_STOCK_IDENTITY_AND_AVAILABILITY_WITH_ORIGINATING_AUTHORS_OR_LAB"
+    },
+    {
+      "candidate_id": "M1_T0",
+      "public_accession_recovered": false,
+      "next_access_action": "CONFIRM_STOCK_IDENTITY_AND_AVAILABILITY_WITH_ORIGINATING_AUTHORS_OR_LAB"
+    }
+  ],
+  "claim_boundary": {
+    "material_acquired": false,
+    "candidate_qualified": false,
+    "d_band_available": false,
+    "direct_mu_outcome_available": false,
+    "architecture_mapping_certified": false
+  }
+}
