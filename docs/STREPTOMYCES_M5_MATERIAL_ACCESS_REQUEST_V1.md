@@ -6,83 +6,82 @@ Status: **READY TO SEND / NO REQUEST SENT BY THIS REPOSITORY**.
 
 The PAYOFF direct-mu programme needs to determine whether the exact `M5_T0` material from Zhang et al. (2022) can be used as the first pre-existing D realization reference.
 
-The request should be narrow. It is not a request for all mutant strains or for unpublished direct-mu outcomes.
+The request is now deliberately narrow. Public sequence identity and the frozen four-locus marker evidence have already been recovered independently, so they should not be requested again.
 
-## Requested items
+## Public evidence already recovered
 
-Priority 1 — material access:
-
-```text
-Is the archived M5_T0 spore stock from the 2022 mutation-accumulation experiment still available?
-If yes, who is the current custodian and what material-transfer / shipping procedure applies?
-```
-
-Priority 2 — exact sequence identity:
+Exact public sequence identity:
 
 ```text
-Which BioSample / SRA run(s) under PRJNA780771 correspond exactly to M5_T0?
-If the T0 PacBio-derived assembly / mapped deletion-boundary file is available separately,
-what is its accession or archive identifier?
+PacBio  SRR16954720 / SRX13146288 / M5_T0_PacBio
+BGI     SRR16954696 / SRX13146312 / M5_T0_BGI
+BioProject PRJNA780771
 ```
 
-Priority 3 — marker / genome metadata if already available:
+Independent public PacBio audit:
 
 ```text
-For M5_T0, are the following loci retained or deleted?
-SCO7662 / cmlR2
-SCO7350
-SCO7036 / argG
-SCO3879 / dnaA
-
-Are the left- and right-arm deletion boundaries for M5_T0 available as exact coordinates?
-Were any additional large rearrangements detected in the T0 genome beyond the terminal losses?
+SCO3879 / dnaA   present: 100% coverage, 124.526x mean depth
+SCO7036 / argG   absent:    0% coverage,   0x
+SCO7350          absent:    0% coverage,   0x
+SCO7662 / cmlR2  absent:    0% coverage,   0x
 ```
 
-## Why these exact items
+These observations strongly corroborate the source-level `DEEP_CLASS` candidate. PAYOFF still keeps BGI as the prospectively declared primary marker-depth channel and does not use this request to bypass that response-blind gate.
 
-PAYOFF has frozen a direct-mu realization assay over 72 h -> 120 h. M5_T0 is currently the first reference target because the published study reports that it was archived, sequenced at T0, began with the shortest mutant genome, and did not acquire another large deletion during serial transfer.
+## Remaining requested items
 
-The publication also supports M5_T0 as a likely `DEEP_CLASS` right-arm deletion candidate from its T0 arginine-auxotrophy phenotype, but the project will not promote that class until the exact registered marker pattern is verified.
-
-## Information that is not being requested
-
-No request is made for:
+Priority 1 — exact living material:
 
 ```text
-post-hoc selection of the best-growing deletion mutant;
-unpublished outcome data from the planned direct-mu experiment;
-new interpretation of PAYOFF architecture-specific eta;
-or a claim that M5 is already a qualified reference.
+Is the archived M5_T0 spore stock from the 2022 mutation-accumulation experiment still extant and recoverable?
+If yes, who is the current physical custodian?
+What material-transfer, biosafety and shipping procedure applies?
 ```
 
-## Minimal response sufficient to advance R0-R2
-
-The pre-lab packet can advance substantially with:
+Priority 2 — curated gross-structure metadata, only if already available:
 
 ```text
-1. yes/no on current M5_T0 stock availability;
-2. exact M5_T0 sequence accession / file identity;
-3. marker states or deletion coordinates for SCO7662, SCO7350, SCO7036 and SCO3879;
-4. any known additional gross rearrangement at T0.
+Is there an exact T0 assembly, chromosome-end boundary file, or curated large-SV call set for M5_T0?
+If yes, what are the exact left- and right-arm terminal boundaries and any other >=50 kb rearrangements?
 ```
 
-The 72 h -> 120 h realization measurement remains a new experiment even if all four items above are recovered.
+The 72 h -> 120 h realization measurement remains a new experiment and is not requested as an unpublished prior result.
+
+## Current public contact route
+
+The 2022 paper lists Zheren Zhang and Daniel E. Rozen as corresponding authors. Current public institutional information in 2026 lists:
+
+```text
+Dr Zheren Zhang
+Lecturer in Biotechnology
+Queen Mary University of London
+zheren.zhang@qmul.ac.uk
+```
+
+Secondary publication-era corresponding route:
+
+```text
+Daniel E. Rozen
+Leiden University
+d.e.rozen@biology.leidenuniv.nl
+```
 
 ## Suggested email subject
 
 ```text
-Request for M5_T0 Streptomyces coelicolor stock and sequence metadata (Zhang et al. 2022)
+Request for archived M5_T0 Streptomyces coelicolor stock (Zhang et al. 2022)
 ```
 
 ## Suggested concise message
 
-Dear Dr. Zhang / Prof. Rozen,
+Dear Dr. Zhang and Prof. Rozen,
 
-I am working on a prospective analysis of the terminal-deletion state in *Streptomyces coelicolor* and would like to use the exact M5_T0 lineage from Zhang et al. (2022, Nature Communications 13:2266) as a pre-existing deletion reference. Could you please let me know whether the archived M5_T0 spore stock is still available and, if so, who currently holds it and what material-transfer procedure would apply?
+I am working on a prospective analysis of terminal genomic differentiation in *Streptomyces coelicolor* and would like to use the exact M5_T0 lineage from Zhang et al. (2022, Nature Communications 13:2266) as a pre-existing deletion reference. Could you please let me know whether the archived M5_T0 spore stock is still extant and available for research use and, if so, who currently holds it and what material-transfer procedure would apply?
 
-I would also be grateful for the exact BioSample/SRA run or assembly identifier corresponding to M5_T0 under PRJNA780771. If readily available, the retained/deleted state or deletion coordinates for SCO7662/cmlR2, SCO7350, SCO7036/argG and SCO3879/dnaA, plus any other large T0 rearrangement, would let us verify the reference class before any new assay is run.
+We have already resolved the public M5_T0 PacBio/BGI accessions under PRJNA780771 and are independently auditing the registered deletion markers, so no additional sequence mapping is needed. If an exact T0 assembly or curated chromosome-end / large-SV file is already available, its identifier or breakpoint coordinates would also be very helpful for resolving the remaining gross-structure audit before any new realization assay.
 
-We are treating the published phenotype only as a candidate-class indication and will not infer a qualified reference without direct marker and realization measurements.
+The project treats material access, genomic classification and the new 72 h -> 120 h realization measurement as separate gates; we are not treating M5_T0 as a qualified reference until all of them are closed.
 
 Best regards,
 
@@ -90,4 +89,10 @@ Best regards,
 
 ## Claim boundary
 
-Preparing this request does not confirm stock access, sequence identity, marker state, realization, or qualification. The corresponding status fields remain false until an external response or direct public-record recovery supplies them.
+Preparing this request and recovering public contact information do not confirm stock access. Until the current custodian confirms the exact archived material:
+
+```text
+M5_T0 physical stock access = UNCONFIRMED
+qualified D reference count = 0
+architecture-specific inference = HARD CLOSED
+```
