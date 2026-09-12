@@ -1,0 +1,10 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_PACBIO_MARKER_CORROBORATION_MERGE_GUARD_V1",
+  "candidate_id": "M5_T0",
+  "pacbio_corroboration_available": true,
+  "primary_bgi_target_opened": false,
+  "response_blind_bgi_calibration_still_required": true,
+  "qualified_d_reference": false,
+  "qualified_d_reference_count_increment": 0,
+  "architecture_specific_inference_open": false
+}
