@@ -12,6 +12,18 @@ def load(path):
     return json.loads(path.read_text())
 
 
+def test_exact_public_m5_sequence_mapping_is_recovered():
+    data = load(CLASS_RECEIPT)
+    mapping = data["public_sequence_mapping"]
+    assert mapping["bioproject"] == "PRJNA780771"
+    assert mapping["experiment"] == "SRX13146312"
+    assert mapping["biosample"] == "SAMN23176398"
+    assert mapping["srs"] == "SRS11078736"
+    assert mapping["run"] == "SRR16954696"
+    assert mapping["library_name"] == "M5_T0_BGI"
+    assert mapping["exact_m5_t0_mapping_resolved"] is True
+
+
 def test_primary_source_supports_deep_candidate_but_not_registered_class():
     data = load(CLASS_RECEIPT)
     adjudication = data["registered_class_adjudication"]
@@ -32,7 +44,7 @@ def test_materialization_checklist_records_candidate_evidence_without_passing_an
     assert m5["current_status"] == "MATERIALIZATION_PRIORITY_NOT_QUALIFIED"
 
 
-def test_source_class_recovery_does_not_change_reference_count_or_architecture_ceiling():
+def test_sequence_mapping_and_source_class_recovery_do_not_change_reference_count_or_architecture_ceiling():
     panel = load(PANEL)
     assert sum(panel["qualified_reference_counts"].values()) == 0
     assert panel["panel_qualified"] is False
