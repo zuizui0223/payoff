@@ -1,0 +1,89 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_PUBLIC_MARKER_AUDIT_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "reference_id": "M5_T0",
+  "lane": "A_MECHANISM_MEASUREMENT_SEQUENCE_SUBLANE",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "public_sequence": {
+    "bioproject": "PRJNA780771",
+    "run": "SRR16954720",
+    "experiment": "SRX13146288",
+    "library_name": "M5_T0_PacBio",
+    "reference_genome": "NC_003888.3"
+  },
+  "audit_provenance": {
+    "isolated_workflow_branch": "ops/m5-t0-public-marker-audit-20260912",
+    "workflow_commit": "3b98cc63e0a3c754b857b51a84a3a783a451a21f",
+    "workflow_run_id": 34667360902,
+    "workflow_job_id": 103481885044,
+    "artifact_id": 10289234376,
+    "artifact_zip_sha256": "c32d1b877abc08ef4c50e347b4ef49b30bde53b0fc4a3029f3d7fa1e81a157f9",
+    "mapper": "minimap2 map-pb",
+    "coverage_tool": "samtools coverage"
+  },
+  "reference_annotation_mapping": {
+    "SCO3879": "SC_RS21540",
+    "SCO7036": "SC_RS37405",
+    "SCO7350": "SC_RS38955",
+    "SCO7662": "SC_RS40500"
+  },
+  "registered_marker_coverage": [
+    {
+      "legacy_locus": "SCO3879",
+      "role": "CORE_REFERENCE",
+      "coverage_percent": 100.0,
+      "mean_depth": 124.526,
+      "depth_over_core": 1.0,
+      "observed_state": "PRESENT"
+    },
+    {
+      "legacy_locus": "SCO7036",
+      "role": "DEEP_MARKER",
+      "coverage_percent": 0.0,
+      "mean_depth": 0.0,
+      "depth_over_core": 0.0,
+      "observed_state": "ABSENT"
+    },
+    {
+      "legacy_locus": "SCO7350",
+      "role": "INTERMEDIATE_MARKER",
+      "coverage_percent": 0.0,
+      "mean_depth": 0.0,
+      "depth_over_core": 0.0,
+      "observed_state": "ABSENT"
+    },
+    {
+      "legacy_locus": "SCO7662",
+      "role": "ENTRY_MARKER",
+      "coverage_percent": 0.0,
+      "mean_depth": 0.0,
+      "depth_over_core": 0.0,
+      "observed_state": "ABSENT"
+    }
+  ],
+  "adjudication": {
+    "registered_four_locus_pattern_directly_scored": true,
+    "core_reference_present": true,
+    "entry_marker_absent": true,
+    "intermediate_marker_absent": true,
+    "deep_marker_absent": true,
+    "registered_deletion_class": "DEEP_CLASS",
+    "registered_deletion_class_verified_from_public_sequence": true,
+    "gross_secondary_rearrangement_audit_completed": false,
+    "physical_stock_identity_established": false,
+    "registered_72_120_realization_available": false,
+    "qualified_d_reference": false
+  },
+  "interpretation_guardrail": "This receipt verifies the frozen four-locus deletion class from exact public M5_T0 PacBio reads. It does not resolve the full chromosome architecture, physical stock identity, viability in the registered assay, or the 72-to-120-hour realization band.",
+  "claim_ceiling": {
+    "deletion_class_verified": true,
+    "qualified_reference": false,
+    "d_band_available": false,
+    "direct_mu_outcome_available": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_architecture_specific": false,
+    "e1": false
+  }
+}
