@@ -4,10 +4,46 @@
   "source": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
   "public_sequence_lane": {
     "bioproject": "PRJNA780771",
+    "study_accession": "SRP346308",
     "T0_M1_to_M6_WGS_reported": true,
     "may_support_registered_marker_class_reconstruction": true,
     "may_support_gross_rearrangement_audit": true,
-    "sample_to_candidate_accession_mapping_recovered": false,
+    "sample_to_candidate_accession_mapping_recovered": true,
+    "mapping_sources": [
+      "NCBI_SRA_RUNINFO_PUBLIC_METADATA",
+      "ENA_READ_RUN_FILEREPORT_PUBLIC_METADATA"
+    ],
+    "priority_candidate_runs": {
+      "M5_T0": {
+        "pacbio": {
+          "run": "SRR16954720",
+          "experiment": "SRX13146288",
+          "biosample": "SAMN23176397",
+          "library_name": "M5_T0_PacBio"
+        },
+        "bgi": {
+          "run": "SRR16954696",
+          "experiment": "SRX13146312",
+          "biosample": "SAMN23176398",
+          "library_name": "M5_T0_BGI"
+        }
+      },
+      "M1_T0": {
+        "pacbio": {
+          "run": "SRR16954714",
+          "experiment": "SRX13146294",
+          "biosample": "SAMN23176397",
+          "library_name": "M1_T0_PacBio"
+        },
+        "bgi": {
+          "run": "SRR16954700",
+          "experiment": "SRX13146308",
+          "biosample": "SAMN23176398",
+          "library_name": "M1_T0_BGI"
+        }
+      }
+    },
+    "identity_guardrail": "BioSample identifiers are shared by platform-level submissions here; candidate identity is therefore keyed by exact experiment/run alias, not BioSample alone.",
     "marker_class_reconstructed": false,
     "gross_rearrangement_audit_completed": false
   },
