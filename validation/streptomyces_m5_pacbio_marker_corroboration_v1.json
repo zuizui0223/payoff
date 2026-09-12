@@ -1,0 +1,49 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_PACBIO_MARKER_CORROBORATION_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "candidate_id": "M5_T0",
+  "lane": "A_MECHANISM_MEASUREMENT_SEQUENCE_CORROBORATION",
+  "public_sequence": {
+    "bioproject": "PRJNA780771",
+    "run": "SRR16954720",
+    "experiment": "SRX13146288",
+    "library_name": "M5_T0_PacBio",
+    "reference_accession": "NC_003888.3"
+  },
+  "audit_provenance": {
+    "workflow_branch": "ops/m5-t0-public-marker-audit-20260912",
+    "workflow_commit": "3b98cc63e0a3c754b857b51a84a3a783a451a21f",
+    "workflow_run_id": 34667360902,
+    "workflow_job_id": 103481885044,
+    "artifact_id": 10289234376,
+    "artifact_digest": "sha256:c32d1b877abc08ef4c50e347b4ef49b30bde53b0fc4a3029f3d7fa1e81a157f9",
+    "mapper": "minimap2 map-pb",
+    "coverage_tool": "samtools coverage"
+  },
+  "registered_marker_coverage": {
+    "SCO3879": {"role": "CORE_REFERENCE", "coverage_percent": 100.0, "mean_depth": 124.526, "observed_state": "PRESENT"},
+    "SCO7036": {"role": "DEEP_MARKER", "coverage_percent": 0.0, "mean_depth": 0.0, "observed_state": "ABSENT"},
+    "SCO7350": {"role": "INTERMEDIATE_MARKER", "coverage_percent": 0.0, "mean_depth": 0.0, "observed_state": "ABSENT"},
+    "SCO7662": {"role": "ENTRY_MARKER", "coverage_percent": 0.0, "mean_depth": 0.0, "observed_state": "ABSENT"}
+  },
+  "adjudication": {
+    "four_locus_pattern_directly_scored": true,
+    "pattern_matches_registered_deep_class": true,
+    "evidence_role": "INDEPENDENT_PACBIO_CORROBORATION",
+    "primary_bgi_marker_gate_satisfied": false,
+    "gross_rearrangement_audit_completed": false,
+    "physical_stock_access_confirmed": false,
+    "realization_band_available": false,
+    "qualified_d_reference": false
+  },
+  "claim_ceiling": {
+    "deep_class_corroborated_by_public_pacbio": true,
+    "registered_deletion_class_qualified_by_primary_bgi_gate": false,
+    "qualified_d_reference_count_increment": 0,
+    "direct_mu_outcome_available": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_architecture_specific": false,
+    "e1": false
+  }
+}
