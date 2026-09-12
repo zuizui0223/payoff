@@ -4,7 +4,13 @@
   "prospective": true,
   "candidate_outcomes_opened": false,
   "public_bioproject": "PRJNA780771",
+  "study_accession": "SRP346308",
   "primary_source_reports_raw_sequence_data": true,
+  "mapping_sources": [
+    "NCBI_SRA_RUNINFO_PUBLIC_METADATA",
+    "ENA_READ_RUN_FILEREPORT_PUBLIC_METADATA"
+  ],
+  "identity_guardrail": "BioSample identifiers are shared by platform-level submissions in this project; candidate identity is keyed by exact experiment/run alias plus candidate-named library metadata, not BioSample alone.",
   "mapping_rule": {
     "candidate_to_biosample_required": true,
     "candidate_to_sra_run_required": true,
@@ -16,37 +22,59 @@
     {
       "candidate_id": "M5_T0",
       "public_sequence_project_available": true,
-      "biosample_accession_recovered": false,
-      "sra_run_accessions_recovered": false,
-      "source_metadata_names_candidate": false,
-      "mapping_independently_crosschecked": false,
-      "sequence_marker_reconstruction_allowed": false,
-      "current_blockers": [
-        "BIOSAMPLE_ACCESSION_NOT_MAPPED",
-        "SRA_RUN_ACCESSION_NOT_MAPPED",
-        "SOURCE_METADATA_DOES_NOT_UNAMBIGUOUSLY_NAME_CANDIDATE",
-        "CANDIDATE_TO_SEQUENCE_MAPPING_NOT_INDEPENDENTLY_CROSSCHECKED"
-      ]
+      "biosample_accessions": ["SAMN23176397", "SAMN23176398"],
+      "runs": {
+        "pacbio": {
+          "run": "SRR16954720",
+          "experiment": "SRX13146288",
+          "biosample": "SAMN23176397",
+          "library_name": "M5_T0_PacBio"
+        },
+        "bgi": {
+          "run": "SRR16954696",
+          "experiment": "SRX13146312",
+          "biosample": "SAMN23176398",
+          "library_name": "M5_T0_BGI"
+        }
+      },
+      "biosample_accession_recovered": true,
+      "sra_run_accessions_recovered": true,
+      "source_metadata_names_candidate": true,
+      "mapping_independently_crosschecked": true,
+      "sequence_marker_reconstruction_allowed": true,
+      "current_blockers": []
     },
     {
       "candidate_id": "M1_T0",
       "public_sequence_project_available": true,
-      "biosample_accession_recovered": false,
-      "sra_run_accessions_recovered": false,
-      "source_metadata_names_candidate": false,
-      "mapping_independently_crosschecked": false,
-      "sequence_marker_reconstruction_allowed": false,
-      "current_blockers": [
-        "BIOSAMPLE_ACCESSION_NOT_MAPPED",
-        "SRA_RUN_ACCESSION_NOT_MAPPED",
-        "SOURCE_METADATA_DOES_NOT_UNAMBIGUOUSLY_NAME_CANDIDATE",
-        "CANDIDATE_TO_SEQUENCE_MAPPING_NOT_INDEPENDENTLY_CROSSCHECKED"
-      ]
+      "biosample_accessions": ["SAMN23176397", "SAMN23176398"],
+      "runs": {
+        "pacbio": {
+          "run": "SRR16954714",
+          "experiment": "SRX13146294",
+          "biosample": "SAMN23176397",
+          "library_name": "M1_T0_PacBio"
+        },
+        "bgi": {
+          "run": "SRR16954700",
+          "experiment": "SRX13146308",
+          "biosample": "SAMN23176398",
+          "library_name": "M1_T0_BGI"
+        }
+      },
+      "biosample_accession_recovered": true,
+      "sra_run_accessions_recovered": true,
+      "source_metadata_names_candidate": true,
+      "mapping_independently_crosschecked": true,
+      "sequence_marker_reconstruction_allowed": true,
+      "current_blockers": []
     }
   ],
   "claim_boundary": {
-    "sequence_sample_map_qualified": false,
-    "sequence_marker_reconstruction_allowed": false,
+    "sequence_sample_map_qualified": true,
+    "sequence_marker_reconstruction_allowed": true,
+    "marker_class_reconstructed": false,
+    "gross_rearrangement_audit_completed": false,
     "physical_material_identity_established": false,
     "candidate_reference_qualified": false,
     "d_band_available": false,
