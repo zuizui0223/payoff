@@ -1,0 +1,45 @@
+{
+  "receipt_id": "ZHANG2020_DIRECT_MU_ORIGIN_CANDIDATE_REGISTRY_V1",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "support_reference": "ZHANG_ET_AL_2020_SCI_ADV_DOI_10.1126_sciadv.aay5781",
+  "recovery_basis": {
+    "mutant_ids_recovered_from_published_figures": true,
+    "table_s3_declared_by_primary_article": true,
+    "individual_founder_or_source_colony_provenance_recovered": false,
+    "strain_name_prefix_may_be_used_to_infer_origin": false
+  },
+  "candidate_ids": [
+    "14H1B", "2H1F", "14H1E", "17H1A", "17H1C2", "17H1D",
+    "21H1B", "21H1D2", "21H1C", "9H1C", "2H1E1", "5H1F",
+    "8H1F", "2H1D", "5H1C", "2H1A", "2H1B", "2H1H1",
+    "9H1B", "8H1B", "9H1E2", "2H1G", "14H1G", "2H1E2",
+    "2H1H3", "2H1C", "9H1A", "8H1H", "2H1I", "5H1E2"
+  ],
+  "high_information_candidates": {
+    "2H1A": ["fully_sequenced", "WT_pairwise_competition_reported"],
+    "8H1B": ["fully_sequenced", "WT_pairwise_competition_reported"],
+    "9H1B": ["fully_sequenced", "WT_pairwise_competition_reported"],
+    "9H1A": ["fully_sequenced", "WT_pairwise_competition_reported", "broad_frequency_competition_reported"]
+  },
+  "origin_provenance_status": {
+    "candidate_id_count": 30,
+    "explicit_origin_provenance_count": 0,
+    "independent_origin_certified_count": 0,
+    "origin_clusters_certified": 0,
+    "origin_independence_may_not_be_inferred_from_candidate_names": true
+  },
+  "next_recovery_targets": [
+    "SUPPLEMENTARY_TABLE_S3_SOURCE_OR_DERIVATION_FIELDS",
+    "DRYAD_WORKBOOK_ROW_LEVEL_STRAIN_METADATA",
+    "AUTHOR_OR_STRAIN_COLLECTION_ARCHIVE_IDENTIFIERS"
+  ],
+  "claim_ceiling": {
+    "qualified_reference_promoted": false,
+    "direct_mu_outcome_available": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
