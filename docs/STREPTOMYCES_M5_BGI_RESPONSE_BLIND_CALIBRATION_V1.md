@@ -112,7 +112,18 @@ A = all BGI ratios with PacBio label ABSENT_CONTROL
 P = all BGI ratios with PacBio label PRESENT_CONTROL.
 ```
 
-Require both sets to be non-empty. Then freeze
+Before extrema can be frozen, require redundancy in both state classes:
+
+```text
+|A| >= 3 marker-control pairs
+|P| >= 3 marker-control pairs
+>= 2 distinct candidate IDs represented in A
+>= 2 distinct candidate IDs represented in P.
+```
+
+This prevents one convenient lineage or one locus from setting a global cutoff.
+
+Then freeze
 
 ```text
 absence_max_ratio = max(A)
