@@ -28,12 +28,15 @@ def test_archive_existence_does_not_equal_current_stock_access():
     assert provenance["physical_stock_access_confirmed_for_current_project"] is False
 
 
-def test_public_bioproject_does_not_equal_exact_m5_sequence_mapping():
+def test_exact_public_mapping_advances_sequence_lane_but_not_marker_scoring():
     data = load(PRELAB)
     sequence = data["sequence_provenance"]
     assert sequence["public_bioproject_recovered"] == "PRJNA780771"
     assert sequence["m5_t0_whole_genome_sequenced_in_source_study"] is True
-    assert sequence["exact_m5_t0_run_or_sample_accession_resolved"] is False
+    assert sequence["exact_m5_t0_run_or_sample_accession_resolved"] is True
+    assert sequence["m5_t0_pacbio_run"] == "SRR16954720"
+    assert sequence["m5_t0_bgi_run"] == "SRR16954696"
+    assert sequence["candidate_identity_keyed_by_exact_run_experiment_alias_not_shared_biosample"] is True
     assert sequence["registered_marker_pattern_directly_scored_from_frozen_m5_t0_sequence"] is False
 
 

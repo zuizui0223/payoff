@@ -4,49 +4,44 @@
   "prospective": true,
   "candidate_outcomes_opened": false,
   "public_bioproject": "PRJNA780771",
+  "public_study": "SRP346308",
   "primary_source_reports_raw_sequence_data": true,
   "mapping_rule": {
     "candidate_to_biosample_required": true,
     "candidate_to_sra_run_required": true,
     "source_metadata_must_unambiguously_name_candidate": true,
     "independent_crosscheck_required": true,
-    "public_sequence_availability_alone_is_insufficient": true
+    "public_sequence_availability_alone_is_insufficient": true,
+    "shared_platform_biosample_does_not_define_candidate_identity": true
   },
   "priority_candidates": [
     {
       "candidate_id": "M5_T0",
       "public_sequence_project_available": true,
-      "biosample_accession_recovered": false,
-      "sra_run_accessions_recovered": false,
-      "source_metadata_names_candidate": false,
-      "mapping_independently_crosschecked": false,
-      "sequence_marker_reconstruction_allowed": false,
-      "current_blockers": [
-        "BIOSAMPLE_ACCESSION_NOT_MAPPED",
-        "SRA_RUN_ACCESSION_NOT_MAPPED",
-        "SOURCE_METADATA_DOES_NOT_UNAMBIGUOUSLY_NAME_CANDIDATE",
-        "CANDIDATE_TO_SEQUENCE_MAPPING_NOT_INDEPENDENTLY_CROSSCHECKED"
-      ]
+      "biosample_accessions": ["SAMN23176397", "SAMN23176398"],
+      "sra_run_accessions": ["SRR16954720", "SRR16954696"],
+      "experiment_accessions": ["SRX13146288", "SRX13146312"],
+      "source_metadata_names_candidate": true,
+      "mapping_independently_crosschecked": true,
+      "sequence_marker_reconstruction_allowed": true,
+      "current_blockers": []
     },
     {
       "candidate_id": "M1_T0",
       "public_sequence_project_available": true,
-      "biosample_accession_recovered": false,
-      "sra_run_accessions_recovered": false,
-      "source_metadata_names_candidate": false,
-      "mapping_independently_crosschecked": false,
-      "sequence_marker_reconstruction_allowed": false,
-      "current_blockers": [
-        "BIOSAMPLE_ACCESSION_NOT_MAPPED",
-        "SRA_RUN_ACCESSION_NOT_MAPPED",
-        "SOURCE_METADATA_DOES_NOT_UNAMBIGUOUSLY_NAME_CANDIDATE",
-        "CANDIDATE_TO_SEQUENCE_MAPPING_NOT_INDEPENDENTLY_CROSSCHECKED"
-      ]
+      "biosample_accessions": ["SAMN23176397", "SAMN23176398"],
+      "sra_run_accessions": ["SRR16954714", "SRR16954700"],
+      "experiment_accessions": ["SRX13146294", "SRX13146308"],
+      "source_metadata_names_candidate": true,
+      "mapping_independently_crosschecked": true,
+      "sequence_marker_reconstruction_allowed": true,
+      "current_blockers": []
     }
   ],
+  "identity_guardrail": "Candidate identity is keyed by exact run/experiment library aliases because the platform-level BioSample records are shared across M1-M6 submissions.",
   "claim_boundary": {
-    "sequence_sample_map_qualified": false,
-    "sequence_marker_reconstruction_allowed": false,
+    "sequence_sample_map_qualified": true,
+    "sequence_marker_reconstruction_allowed": true,
     "physical_material_identity_established": false,
     "candidate_reference_qualified": false,
     "d_band_available": false,
