@@ -1,0 +1,76 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_MARKER_RECONSTRUCTION_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "candidate_id": "M5_T0",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "sequence_sample_map_receipt": "STREPTOMYCES_DIRECT_MU_SEQUENCE_SAMPLE_MAP_V1",
+  "sequence_sample_map_qualified": true,
+  "reference_genome": {
+    "accession": "NC_003888.3",
+    "organism": "Streptomyces coelicolor A3(2) M145"
+  },
+  "frozen_public_runs": {
+    "primary_marker_depth": {
+      "platform": "BGISEQ-500",
+      "run": "SRR16954696",
+      "experiment": "SRX13146312",
+      "library_name": "M5_T0_BGI"
+    },
+    "structural_crosscheck": {
+      "platform": "PacBio",
+      "run": "SRR16954720",
+      "experiment": "SRX13146288",
+      "library_name": "M5_T0_PacBio"
+    }
+  },
+  "registered_markers": {
+    "SCO7662": "right_arm_entry_marker",
+    "SCO7350": "right_arm_intermediate_marker",
+    "SCO7036": "right_arm_deep_marker_argG",
+    "SCO3879": "central_core_marker_dnaA"
+  },
+  "marker_call_design": {
+    "normalization_quantity": "locus_depth_divided_by_predeclared_central_core_baseline",
+    "normalization_panel_id": "REQUIRED_BEFORE_USE",
+    "normalization_panel_frozen_preoutcome": false,
+    "absence_max_ratio": "REQUIRED_BEFORE_USE",
+    "presence_min_ratio": "REQUIRED_BEFORE_USE",
+    "thresholds_frozen_preoutcome": false,
+    "gray_zone_rule": "ratios strictly between absence_max_ratio and presence_min_ratio are UNRESOLVED and may not be forced into a class"
+  },
+  "normalized_marker_ratios": {
+    "SCO7662": "NOT_YET_COMPUTED",
+    "SCO7350": "NOT_YET_COMPUTED",
+    "SCO7036": "NOT_YET_COMPUTED",
+    "SCO3879": "NOT_YET_COMPUTED"
+  },
+  "current_result": {
+    "marker_states": null,
+    "registered_class": null,
+    "marker_pattern_verified": false,
+    "gross_rearrangement_audit_completed": false,
+    "physical_material_identity_established": false,
+    "realization_band_available": false,
+    "reference_qualified": false
+  },
+  "current_blockers": [
+    "NORMALIZATION_PANEL_NOT_FROZEN",
+    "PRESENCE_ABSENCE_THRESHOLDS_NOT_FROZEN",
+    "M5_BGI_MARKER_RATIOS_NOT_COMPUTED",
+    "M5_PACBIO_GROSS_REARRANGEMENT_AUDIT_NOT_COMPLETED",
+    "PHYSICAL_M5_T0_MATERIAL_NOT_YET_RECONFIRMED",
+    "72_120H_REALIZATION_NOT_MEASURED"
+  ],
+  "claim_ceiling": {
+    "sequence_marker_reconstruction_allowed": true,
+    "registered_deletion_class_qualified": false,
+    "qualified_reference_count_increment": 0,
+    "d_band_available": false,
+    "direct_mu_outcome_available": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_architecture_specific": false,
+    "e1_promoted": false
+  }
+}
