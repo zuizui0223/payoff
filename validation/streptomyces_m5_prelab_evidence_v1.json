@@ -5,7 +5,8 @@
   "prospective": true,
   "support_references": [
     "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
-    "NCBI_BIOPROJECT_PRJNA780771"
+    "NCBI_BIOPROJECT_PRJNA780771",
+    "NCBI_SRA_RUNINFO_AND_ENA_PUBLIC_METADATA"
   ],
   "material_provenance": {
     "transferred_lineages_archived_in_source_programme": true,
@@ -16,7 +17,12 @@
   "sequence_provenance": {
     "m5_t0_whole_genome_sequenced_in_source_study": true,
     "public_bioproject_recovered": "PRJNA780771",
-    "exact_m5_t0_run_or_sample_accession_resolved": false,
+    "exact_m5_t0_run_or_sample_accession_resolved": true,
+    "m5_t0_pacbio_run": "SRR16954720",
+    "m5_t0_pacbio_experiment": "SRX13146288",
+    "m5_t0_bgi_run": "SRR16954696",
+    "m5_t0_bgi_experiment": "SRX13146312",
+    "candidate_identity_keyed_by_exact_run_experiment_alias_not_shared_biosample": true,
     "registered_marker_pattern_directly_scored_from_frozen_m5_t0_sequence": false
   },
   "primary_source_class_evidence": {
@@ -28,7 +34,7 @@
     "candidate_registered_class": "DEEP_CLASS",
     "candidate_class_supported": true,
     "registered_marker_pattern_verified": false,
-    "reason_not_promoted": "SCO7350 and the full SCO7662/SCO7350/SCO7036 pattern must be directly verified from frozen M5_T0 material or sequence"
+    "reason_not_promoted": "The full frozen SCO7662/SCO7350/SCO7036 pattern plus core SCO3879 must still be directly verified from the exact M5_T0 sequence or material"
   },
   "integrity_status": {
     "core_reference_SCO3879_dnaA_verified": false,
@@ -46,8 +52,7 @@
   },
   "next_actions": [
     "CONFIRM_CURRENT_M5_T0_STOCK_ACCESS_OR_CUSTODIAN",
-    "RESOLVE_EXACT_M5_T0_PUBLIC_SEQUENCE_ACCESSION_OR_ARCHIVE_RECORD",
-    "DIRECTLY_SCORE_SCO7662_SCO7350_SCO7036_SCO3879",
+    "DIRECTLY_SCORE_SCO7662_SCO7350_SCO7036_SCO3879_FROM_RESOLVED_PUBLIC_M5_T0_SEQUENCE",
     "RESOLVE_T0_LEFT_AND_RIGHT_TERMINAL_STRUCTURE_AND_OTHER_GROSS_REARRANGEMENTS",
     "RUN_72_120H_D_REALIZATION_ASSAY_ONLY_IF_PRELAB_GATE_REMAINS_ADMISSIBLE"
   ],
