@@ -1,0 +1,175 @@
+name: m5-bgi-response-blind-calibration-parallel
+
+on:
+  push:
+    branches:
+      - m5-bgi-calibration-parallel-v1
+
+jobs:
+  map-control:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {candidate: WT_ancestor, pacrun: SRR16954715, bgirun: SRR16954701}
+          - {candidate: M1_T0, pacrun: SRR16954714, bgirun: SRR16954700}
+          - {candidate: M2_T0, pacrun: SRR16954703, bgirun: SRR16954699}
+          - {candidate: M3_T0, pacrun: SRR16954692, bgirun: SRR16954698}
+          - {candidate: M4_T0, pacrun: SRR16954723, bgirun: SRR16954697}
+          - {candidate: M6_T0, pacrun: SRR16954719, bgirun: SRR16954695}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mapping tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq minimap2 samtools
+          python -m pip install --quiet biopython
+      - name: Verify target exclusion
+        shell: bash
+        run: |
+          set -euo pipefail
+          test '${{ matrix.candidate }}' != 'M5_T0'
+          test '${{ matrix.pacrun }}' != 'SRR16954720'
+          test '${{ matrix.bgirun }}' != 'SRR16954696'
+      - name: Recover reference and frozen loci
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/control
+          mkdir -p "$root/bams" "$root/pac" "$root/bgi"
+          curl -L --fail --retry 3 \
+            'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_003888.3&rettype=gbwithparts&retmode=text' \
+            -o "$root/NC_003888.3.gb"
+          python - <<'PY'
+          import csv
+          from Bio import SeqIO
+          from pathlib import Path
+          root=Path('outputs/control')
+          rec=SeqIO.read(root/'NC_003888.3.gb','genbank')
+          SeqIO.write(rec, root/'NC_003888.3.fa','fasta')
+          targets={'SCO7662','SCO7350','SCO7036','SCO3879'}
+          core={'SCO3000','SCO3300','SCO3600','SCO3900','SCO4200','SCO4500','SCO4800','SCO5100','SCO5400'}
+          wanted=targets|core
+          found={}
+          for feat in rec.features:
+              if feat.type not in {'gene','CDS'}:
+                  continue
+              aliases=set(feat.qualifiers.get('locus_tag',[])) | set(feat.qualifiers.get('old_locus_tag',[]))
+              for legacy in wanted & aliases:
+                  row=(legacy,(feat.qualifiers.get('locus_tag') or [''])[0],int(feat.location.start)+1,int(feat.location.end),feat.type)
+                  if legacy not in found or (found[legacy][4] != 'gene' and feat.type == 'gene'):
+                      found[legacy]=row
+          missing=wanted-set(found)
+          if missing:
+              raise SystemExit(f'missing frozen loci: {sorted(missing)}')
+          with (root/'loci.tsv').open('w',newline='') as h:
+              w=csv.writer(h,delimiter='\t',lineterminator='\n')
+              w.writerow(['legacy_locus','current_locus','start','end'])
+              for legacy in sorted(found):
+                  w.writerow(found[legacy][:4])
+          PY
+          printf 'candidate_id\tpacbio_run\tbgi_run\n%s\t%s\t%s\n' \
+            '${{ matrix.candidate }}' '${{ matrix.pacrun }}' '${{ matrix.bgirun }}' > "$root/controls.tsv"
+      - name: Download exact public runs
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/control
+          for spec in 'pac ${{ matrix.pacrun }}' 'bgi ${{ matrix.bgirun }}'; do
+            set -- $spec
+            lane=$1
+            run=$2
+            meta_url="https://www.ebi.ac.uk/ena/portal/api/filereport?accession=${run}&result=read_run&fields=run_accession,fastq_ftp&format=tsv"
+            curl -L --fail --retry 3 "$meta_url" -o "$root/$lane/meta.tsv"
+            python - "$root/$lane/meta.tsv" "$root/$lane/urls.txt" <<'PY'
+          import csv, pathlib, sys
+          rows=list(csv.DictReader(open(sys.argv[1]),delimiter='\t'))
+          if len(rows)!=1:
+              raise SystemExit(f'unexpected ENA rows: {len(rows)}')
+          urls=[x.strip() for x in rows[0]['fastq_ftp'].split(';') if x.strip()]
+          if not urls: raise SystemExit('no FASTQ URLs')
+          pathlib.Path(sys.argv[2]).write_text('\n'.join(urls)+'\n')
+          PY
+            while read -r u; do
+              [ -z "$u" ] || curl -L --fail --retry 3 "https://$u" -o "$root/$lane/$(basename "$u")"
+            done < "$root/$lane/urls.txt"
+          done
+      - name: Map both channels and build one-control evidence
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/control
+          ref="$root/NC_003888.3.fa"
+          minimap2 -t 4 -ax map-pb "$ref" "$root"/pac/*.fastq.gz | samtools sort -@ 4 -o "$root/bams/${{ matrix.candidate }}.pacbio.bam"
+          samtools index "$root/bams/${{ matrix.candidate }}.pacbio.bam"
+          minimap2 -t 4 -ax sr "$ref" "$root"/bgi/*.fastq.gz | samtools sort -@ 4 -o "$root/bams/${{ matrix.candidate }}.bgi.bam"
+          samtools index "$root/bams/${{ matrix.candidate }}.bgi.bam"
+          python scripts/build_bgi_calibration_evidence.py \
+            --loci "$root/loci.tsv" \
+            --controls "$root/controls.tsv" \
+            --bam-dir "$root/bams" \
+            --output "$root/${{ matrix.candidate }}.tsv"
+          cat "$root/${{ matrix.candidate }}.tsv"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m5-cal-control-${{ matrix.candidate }}
+          path: outputs/control/${{ matrix.candidate }}.tsv
+
+  adjudicate:
+    needs: map-control
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: m5-cal-control-*
+          path: outputs/m5_bgi_parallel/parts
+          merge-multiple: true
+      - name: Combine frozen control evidence
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p outputs/m5_bgi_parallel
+          python - <<'PY'
+          import csv, pathlib
+          root=pathlib.Path('outputs/m5_bgi_parallel/parts')
+          files=sorted(root.glob('*.tsv'))
+          if len(files)!=6:
+              raise SystemExit(f'expected 6 control files, got {len(files)}: {files}')
+          rows=[]; fields=None; candidates=set()
+          for p in files:
+              with p.open(newline='') as h:
+                  r=csv.DictReader(h,delimiter='\t')
+                  if fields is None: fields=r.fieldnames
+                  elif r.fieldnames != fields: raise SystemExit('control evidence schema mismatch')
+                  part=list(r)
+              if len(part)!=4: raise SystemExit(f'{p}: expected 4 marker rows, got {len(part)}')
+              ids={x['candidate_id'] for x in part}
+              if len(ids)!=1: raise SystemExit(f'{p}: mixed candidate IDs')
+              cid=next(iter(ids))
+              if cid=='M5_T0': raise SystemExit('M5 target leaked into calibration evidence')
+              if cid in candidates: raise SystemExit(f'duplicate control candidate {cid}')
+              candidates.add(cid); rows.extend(part)
+          expected={'WT_ancestor','M1_T0','M2_T0','M3_T0','M4_T0','M6_T0'}
+          if candidates != expected: raise SystemExit(f'control set mismatch: {candidates}')
+          out=pathlib.Path('outputs/m5_bgi_parallel/control_evidence.tsv')
+          with out.open('w',newline='') as h:
+              w=csv.DictWriter(h,fieldnames=fields,delimiter='\t',lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+          PY
+          python scripts/adjudicate_bgi_marker_calibration.py \
+            outputs/m5_bgi_parallel/control_evidence.tsv \
+            --output outputs/m5_bgi_parallel/calibration_result.json
+          cat outputs/m5_bgi_parallel/control_evidence.tsv
+          cat outputs/m5_bgi_parallel/calibration_result.json
+          sha256sum outputs/m5_bgi_parallel/control_evidence.tsv outputs/m5_bgi_parallel/calibration_result.json \
+            > outputs/m5_bgi_parallel/checksums.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m5-bgi-response-blind-calibration-parallel
+          path: |
+            outputs/m5_bgi_parallel/control_evidence.tsv
+            outputs/m5_bgi_parallel/calibration_result.json
+            outputs/m5_bgi_parallel/checksums.sha256
