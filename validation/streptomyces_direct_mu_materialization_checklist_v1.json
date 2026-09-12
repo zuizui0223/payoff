@@ -9,12 +9,14 @@
       "candidate_id": "M5_T0",
       "priority_rank": 1,
       "source": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
+      "primary_source_class_receipt": "STREPTOMYCES_M5_PRIMARY_SOURCE_CLASS_V1",
       "why_prioritized": "Named archived lineage with WGS/competition context and comparatively limited additional terminal-deletion accumulation during the published serial-transfer experiment.",
       "known_positive": {
         "named_or_traceable": true,
         "archived_or_recoverable_material_declared": true,
         "genome_characterization_declared": true,
-        "fitness_or_competition_data_declared": true
+        "fitness_or_competition_data_declared": true,
+        "primary_source_deep_class_candidate_supported": true
       },
       "qualification_requirements": {
         "material_identity_reconfirmed_against_archive": false,
@@ -27,7 +29,7 @@
         "independent_realization_band_available": false,
         "independent_derivation_rule_satisfied": false
       },
-      "current_status": "MATERIALIZATION_PRIORITY_NOT_QUALIFIED"
+      "current_status": "PRIMARY_SOURCE_DEEP_CLASS_CANDIDATE_MATERIALIZATION_PRIORITY_NOT_QUALIFIED"
     },
     {
       "candidate_id": "M1_T0",
@@ -65,7 +67,7 @@
     "APPLY_INDEPENDENT_DERIVATION_RULE",
     "RUN_REFERENCE_PANEL_QUALIFICATION"
   ],
-  "promotion_rule": "Priority or material recovery alone never qualifies a reference. Every registered criterion must pass before the candidate enters a d-band.",
+  "promotion_rule": "Priority, primary-source class candidacy, or material recovery alone never qualifies a reference. Every registered criterion must pass before the candidate enters a d-band.",
   "claim_ceiling": {
     "qualified_reference_count": 0,
     "d_band_available": false,
