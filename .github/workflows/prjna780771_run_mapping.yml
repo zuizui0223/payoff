@@ -1,0 +1,38 @@
+name: prjna780771-run-mapping
+
+on:
+  push:
+    branches:
+      - ops/prjna780771-run-mapping-20260912
+
+jobs:
+  map-public-runs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch NCBI and ENA public metadata
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p outputs/prjna780771
+          curl -L --fail --retry 3 \
+            'https://trace.ncbi.nlm.nih.gov/Traces/sra-db-be/runinfo?acc=PRJNA780771' \
+            -o outputs/prjna780771/ncbi_runinfo.csv
+          curl -L --fail --retry 3 \
+            'https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA780771&result=read_run&fields=run_accession,sample_accession,experiment_accession,study_accession,sample_alias,experiment_alias,scientific_name&format=tsv&download=true' \
+            -o outputs/prjna780771/ena_read_run.tsv
+          python - <<'PY'
+          from pathlib import Path
+          for path in [Path('outputs/prjna780771/ncbi_runinfo.csv'), Path('outputs/prjna780771/ena_read_run.tsv')]:
+              print(f'=== {path} ===')
+              text = path.read_text(errors='replace')
+              lines = text.splitlines()
+              print(lines[0] if lines else '<EMPTY>')
+              hits = [line for line in lines[1:] if any(token in line.lower() for token in ('m1', 'm5', 't0'))]
+              print('\n'.join(hits[:200]) if hits else '<NO_M1_M5_T0_ALIAS_HITS>')
+              print(f'ROWS={max(0, len(lines)-1)} BYTES={path.stat().st_size}')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prjna780771-public-run-mapping
+          path: outputs/prjna780771/
