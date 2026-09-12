@@ -1,0 +1,79 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_MATERIALIZATION_CHECKLIST_V1",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "priority_candidates": [
+    {
+      "candidate_id": "M5_T0",
+      "priority_rank": 1,
+      "source": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
+      "why_prioritized": "Named archived lineage with WGS/competition context and comparatively limited additional terminal-deletion accumulation during the published serial-transfer experiment.",
+      "known_positive": {
+        "named_or_traceable": true,
+        "archived_or_recoverable_material_declared": true,
+        "genome_characterization_declared": true,
+        "fitness_or_competition_data_declared": true
+      },
+      "qualification_requirements": {
+        "material_identity_reconfirmed_against_archive": false,
+        "registered_marker_class_verified": false,
+        "entry_or_severity_class_assigned_preoutcome": false,
+        "core_reference_present": false,
+        "preexisting_D_state_at_72h_verified": false,
+        "same_SFM_context_72_120_assay_completed": false,
+        "gross_secondary_rearrangements_resolved": false,
+        "independent_realization_band_available": false,
+        "independent_derivation_rule_satisfied": false
+      },
+      "current_status": "MATERIALIZATION_PRIORITY_NOT_QUALIFIED"
+    },
+    {
+      "candidate_id": "M1_T0",
+      "priority_rank": 2,
+      "source": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
+      "why_prioritized": "Named archived lineage with direct competition evidence against WT and genome characterization, but serial-transfer evolution makes secondary-change resolution essential before reference use.",
+      "known_positive": {
+        "named_or_traceable": true,
+        "archived_or_recoverable_material_declared": true,
+        "genome_characterization_declared": true,
+        "fitness_or_competition_data_declared": true
+      },
+      "qualification_requirements": {
+        "material_identity_reconfirmed_against_archive": false,
+        "registered_marker_class_verified": false,
+        "entry_or_severity_class_assigned_preoutcome": false,
+        "core_reference_present": false,
+        "preexisting_D_state_at_72h_verified": false,
+        "same_SFM_context_72_120_assay_completed": false,
+        "gross_secondary_rearrangements_resolved": false,
+        "independent_realization_band_available": false,
+        "independent_derivation_rule_satisfied": false
+      },
+      "current_status": "MATERIALIZATION_PRIORITY_NOT_QUALIFIED"
+    }
+  ],
+  "materialization_sequence": [
+    "RECONFIRM_PHYSICAL_OR_ARCHIVAL_IDENTITY",
+    "GENOTYPE_REGISTERED_MARKERS_SCO7662_SCO7350_SCO7036_PLUS_CORE_SCO3879",
+    "ASSIGN_ENTRY_INTERMEDIATE_OR_DEEP_CLASS_WITHOUT_OUTCOME_USE",
+    "RESOLVE_GROSS_SECONDARY_REARRANGEMENTS",
+    "ESTABLISH_PREEXISTING_D_STATE_AT_72H_IN_REGISTERED_SFM_CONTEXT",
+    "MEASURE_72_TO_120H_CORE_EQUIVALENT_REALIZATION",
+    "CONSTRUCT_CLOSED_REALIZATION_BAND",
+    "APPLY_INDEPENDENT_DERIVATION_RULE",
+    "RUN_REFERENCE_PANEL_QUALIFICATION"
+  ],
+  "promotion_rule": "Priority or material recovery alone never qualifies a reference. Every registered criterion must pass before the candidate enters a d-band.",
+  "claim_ceiling": {
+    "qualified_reference_count": 0,
+    "d_band_available": false,
+    "direct_mu_outcome_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
