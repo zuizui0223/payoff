@@ -73,7 +73,16 @@
     "deep_class_qualified_count": 0,
     "reference_panel_ready": false
   },
+  "execution_focus": {
+    "active_milestone": "FIRST_QUALIFIED_MATCHED_D_REFERENCE",
+    "primary_target_id": "M5_T0",
+    "frozen_priority_queue": ["M5_T0", "W3_POST_DELETION", "M1_T0"],
+    "candidate_literature_expansion_paused": true,
+    "candidate_search_restart_rule": "ONLY_AFTER_M5_W3_M1_TERMINAL_FAILURE_OR_INACCESSIBILITY_AND_QUALIFIED_REFERENCE_COUNT_REMAINS_ZERO",
+    "architecture_specific_inference_hard_closed_while_zero_qualified_references": true
+  },
   "current_blockers": [
+    "ZERO_QUALIFIED_MATCHED_D_REFERENCES",
     "NO_EXISTING_CANDIDATE_HAS_REGISTERED_72_120_REALIZATION_BAND",
     "NO_EXISTING_CANDIDATE_HAS_FULL_ENTRY_INTERMEDIATE_DEEP_QUALIFICATION_RECEIPT",
     "NO_EXISTING_CANDIDATE_PANEL_REACHES_TWO_QUALIFIED_REFERENCES_PER_CLASS"
