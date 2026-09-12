@@ -4,7 +4,18 @@
   "reference_id": "M5_T0",
   "prospective": true,
   "support_reference": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
-  "public_sequence_project": "PRJNA780771",
+  "public_sequence_mapping": {
+    "bioproject": "PRJNA780771",
+    "study": "SRP346308",
+    "experiment": "SRX13146312",
+    "biosample": "SAMN23176398",
+    "srs": "SRS11078736",
+    "run": "SRR16954696",
+    "library_name": "M5_T0_BGI",
+    "platform": "BGISEQ-500",
+    "strategy": "WGS",
+    "exact_m5_t0_mapping_resolved": true
+  },
   "source_evidence": {
     "t0_whole_genome_sequenced": true,
     "t0_argG_loss_phenotype_supported": true,
@@ -27,12 +38,13 @@
     "t0_gross_secondary_rearrangement_resolved_for_reference_use": false
   },
   "next_actions": [
-    "RESOLVE_EXACT_M5_T0_PUBLIC_SEQUENCE_OR_ARCHIVE_RECORD",
-    "DIRECTLY_SCORE_SCO7662_SCO7350_SCO7036_SCO3879",
+    "DIRECTLY_SCORE_SCO7662_SCO7350_SCO7036_SCO3879_FROM_SRR16954696_OR_EQUIVALENT_FROZEN_M5_T0_SEQUENCE_RECORD",
     "RESOLVE_T0_GROSS_SECONDARY_REARRANGEMENTS",
+    "CONFIRM_CURRENT_PHYSICAL_M5_T0_STOCK_ACCESS_IN_PARALLEL",
     "ONLY_THEN_RUN_72_120H_REALIZATION_IF_REFERENCE_REMAINS_ADMISSIBLE"
   ],
   "claim_ceiling": {
+    "exact_public_sequence_mapping_recovered": true,
     "deep_class_candidate_supported": true,
     "registered_deletion_class_qualified": false,
     "qualified_reference": false,
