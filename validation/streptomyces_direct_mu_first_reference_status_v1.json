@@ -3,21 +3,21 @@
   "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
   "system_id": "STREPTOMYCES_COELICOLOR",
   "prospective": true,
-  "source_head": "be309eb90837494d90678a4f739d70b5a4df929d",
   "qualified_d_reference_count": 0,
   "first_qualified_reference_recovered": false,
   "primary_target_id": "M5_T0",
   "primary_execution_receipt": "STREPTOMYCES_M5_FIRST_REFERENCE_EXECUTION_V1",
   "primary_prelab_evidence_receipt": "STREPTOMYCES_M5_PRELAB_EVIDENCE_V1",
+  "primary_public_marker_audit_receipt": "STREPTOMYCES_M5_PUBLIC_MARKER_AUDIT_V1",
   "frozen_priority_queue": [
     "M5_T0",
     "W3_POST_DELETION",
     "M1_T0"
   ],
   "target_states": {
-    "M5_T0": "PRIMARY_SOURCE_DEEP_CLASS_CANDIDATE_STOCK_ACCESS_PENDING",
+    "M5_T0": "PUBLIC_SEQUENCE_DEEP_CLASS_VERIFIED_REFERENCE_QUALIFICATION_PENDING",
     "W3_POST_DELETION": "STOCK_ACCESS_PENDING",
-    "M1_T0": "STOCK_ACCESS_PENDING"
+    "M1_T0": "PUBLIC_SEQUENCE_MAPPING_RESOLVED_MARKER_AUDIT_PENDING"
   },
   "candidate_literature_expansion_paused": true,
   "candidate_search_restart_licensed": false,
@@ -26,12 +26,11 @@
   "matched_s_certified": false,
   "architecture_mapping_certified": false,
   "architecture_specific_inference_hard_closed": true,
-  "next_action": "CONFIRM_M5_STOCK_ACCESS_AND_RESOLVE_EXACT_M5_T0_SEQUENCE_ACCESSION_IN_PARALLEL",
+  "next_action": "CONFIRM_M5_STOCK_ACCESS_RESOLVE_GROSS_REARRANGEMENTS_AND_RUN_REGISTERED_72_120H_REALIZATION",
   "required_m5_steps": [
     "CONFIRM_PHYSICAL_STOCK_ACCESS",
-    "RESOLVE_EXACT_M5_T0_PUBLIC_SEQUENCE_ACCESSION",
-    "DIRECTLY_VERIFY_REGISTERED_DELETION_CLASS_MARKERS",
-    "VERIFY_CORE_REFERENCE_AND_RESOLVE_GROSS_SECONDARY_REARRANGEMENT",
+    "RESOLVE_GROSS_SECONDARY_REARRANGEMENT_AND_TERMINAL_STRUCTURE",
+    "VERIFY_PREEXISTING_D_AND_MATCHED_CONTEXT_AT_72H",
     "RUN_MATCHED_72_120_H_D_REALIZATION_ASSAY",
     "CONSTRUCT_CLOSED_D_REALIZATION_BAND",
     "RUN_PER_REFERENCE_QUALIFICATION"
@@ -40,9 +39,10 @@
     "archived_material_existence_documented": true,
     "t0_whole_genome_sequenced": true,
     "public_sequence_project": "PRJNA780771",
-    "primary_source_deletion_class_candidate": "DEEP_CLASS",
-    "primary_source_deletion_class_candidate_supported": true,
-    "registered_marker_pattern_verified": false,
+    "exact_m5_t0_pacbio_run": "SRR16954720",
+    "deletion_class": "DEEP_CLASS",
+    "registered_marker_pattern_verified": true,
+    "core_reference_verified": true,
     "physical_stock_access_confirmed": false
   },
   "preferred_direct_mu_route": {
@@ -60,7 +60,8 @@
     "candidate_pool_is_not_empirical_progress": true,
     "generic_game_analogues_may_retain_generic_claims": true,
     "deep_class_candidate_supported": true,
-    "deletion_class_qualified": false,
+    "deletion_class_qualified": true,
+    "first_qualified_d_reference_recovered": false,
     "matched_sd_architecture_inference": false,
     "architecture_specific_frequency_feedback": false,
     "eta_architecture_specific": false,
