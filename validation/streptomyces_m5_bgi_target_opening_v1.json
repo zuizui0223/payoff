@@ -1,0 +1,27 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_BGI_TARGET_OPENING_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "candidate_id": "M5_T0",
+  "target_bgi_run": "SRR16954696",
+  "status": "BLOCKED_PENDING_RESPONSE_BLIND_CALIBRATION",
+  "required_calibration_receipt": "STREPTOMYCES_M5_BGI_MARKER_CALIBRATION_RESULT_V1",
+  "required_core_panel": [
+    "SCO3000", "SCO3300", "SCO3600", "SCO3900", "SCO4200",
+    "SCO4500", "SCO4800", "SCO5100", "SCO5400"
+  ],
+  "required_redundancy": {
+    "minimum_absent_pairs": 3,
+    "minimum_present_pairs": 3,
+    "minimum_absent_candidate_ids": 2,
+    "minimum_present_candidate_ids": 2
+  },
+  "target_bgi_ratios_opened": false,
+  "target_opening_allowed": false,
+  "current_blocker": "RESPONSE_BLIND_CALIBRATION_RESULT_NOT_YET_REGISTERED",
+  "claim_ceiling": {
+    "m5_primary_bgi_class": null,
+    "registered_deletion_class_qualified": false,
+    "qualified_d_reference_count_increment": 0,
+    "architecture_specific_inference_open": false
+  }
+}
