@@ -26,7 +26,6 @@ jobs:
             -o outputs/m5_marker_audit/NC_003888.3.gb
           python - <<'PY'
           from Bio import SeqIO
-          from pathlib import Path
           rec = SeqIO.read('outputs/m5_marker_audit/NC_003888.3.gb', 'genbank')
           SeqIO.write(rec, 'outputs/m5_marker_audit/NC_003888.3.fa', 'fasta')
           targets = {'SCO7662','SCO7350','SCO7036','SCO3879'}
@@ -34,33 +33,45 @@ jobs:
           for feat in rec.features:
               if feat.type not in {'gene','CDS'}:
                   continue
-              locus=(feat.qualifiers.get('locus_tag') or [None])[0]
-              if locus in targets:
+              locus_tags=set(feat.qualifiers.get('locus_tag', []))
+              old_tags=set(feat.qualifiers.get('old_locus_tag', []))
+              aliases=locus_tags | old_tags
+              matched=targets & aliases
+              if matched:
+                  target=sorted(matched)[0]
+                  current=(feat.qualifiers.get('locus_tag') or [''])[0]
                   start=int(feat.location.start)+1
                   end=int(feat.location.end)
-                  rows.append((locus,start,end,end-start+1,feat.type))
-          # Prefer gene records; otherwise CDS. Deduplicate per locus.
+                  rows.append((target,current,start,end,end-start+1,feat.type))
           best={}
           for row in rows:
-              locus=row[0]
-              if locus not in best or (best[locus][4] != 'gene' and row[4]=='gene'):
-                  best[locus]=row
+              target=row[0]
+              if target not in best or (best[target][5] != 'gene' and row[5]=='gene'):
+                  best[target]=row
           missing=targets-set(best)
           if missing:
-              raise SystemExit(f'Missing loci in reference: {sorted(missing)}')
+              # Emit nearby annotation evidence to distinguish schema failure from true absence.
+              examples=[]
+              for feat in rec.features:
+                  olds=feat.qualifiers.get('old_locus_tag', [])
+                  if olds:
+                      examples.extend((feat.type, feat.qualifiers.get('locus_tag', [''])[0], old) for old in olds[:2])
+                  if len(examples) >= 20:
+                      break
+              print('OLD_LOCUS_EXAMPLES', examples[:20])
+              raise SystemExit(f'Missing loci in reference annotation: {sorted(missing)}')
           with open('outputs/m5_marker_audit/loci.tsv','w') as f:
-              f.write('locus\tstart\tend\tlength\n')
-              for locus in sorted(best):
-                  l,s,e,n,_=best[locus]
-                  f.write(f'{l}\t{s}\t{e}\t{n}\n')
+              f.write('legacy_locus\tcurrent_locus\tstart\tend\tlength\n')
+              for target in sorted(best):
+                  legacy,current,s,e,n,_=best[target]
+                  f.write(f'{legacy}\t{current}\t{s}\t{e}\t{n}\n')
           print(open('outputs/m5_marker_audit/loci.tsv').read())
           PY
-          # Resolve the exact ENA FASTQ URL for the already frozen M5_T0 PacBio run.
           curl -L --fail --retry 3 \
             'https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRR16954720&result=read_run&fields=run_accession,fastq_ftp,fastq_md5,fastq_bytes&format=tsv' \
             -o outputs/m5_marker_audit/m5_fastq_meta.tsv
           python - <<'PY'
-          import csv, pathlib, urllib.request
+          import csv, pathlib
           p=pathlib.Path('outputs/m5_marker_audit/m5_fastq_meta.tsv')
           rows=list(csv.DictReader(p.open(), delimiter='\t'))
           if len(rows)!=1 or rows[0]['run_accession']!='SRR16954720':
@@ -95,15 +106,15 @@ jobs:
               if len(rows)!=1:
                   raise SystemExit(f'Unexpected coverage output for {region}: {text}')
               cols=rows[0].split('\t')
-              # samtools coverage columns: rname,startpos,endpos,numreads,covbases,coverage,meandepth,...
               out.append({
-                  'locus':x['locus'], 'start':x['start'], 'end':x['end'], 'length':x['length'],
+                  'locus':x['legacy_locus'], 'current_locus':x['current_locus'],
+                  'start':x['start'], 'end':x['end'], 'length':x['length'],
                   'numreads':cols[3], 'covbases':cols[4], 'coverage_pct':cols[5], 'mean_depth':cols[6]
               })
           core=next(float(x['mean_depth']) for x in out if x['locus']=='SCO3879')
           for x in out:
               x['depth_over_core']=str(float(x['mean_depth'])/core if core else float('nan'))
-          fields=['locus','start','end','length','numreads','covbases','coverage_pct','mean_depth','depth_over_core']
+          fields=['locus','current_locus','start','end','length','numreads','covbases','coverage_pct','mean_depth','depth_over_core']
           with open('outputs/m5_marker_audit/marker_coverage.tsv','w') as f:
               w=csv.DictWriter(f, fieldnames=fields, delimiter='\t')
               w.writeheader(); w.writerows(out)
