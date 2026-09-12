@@ -29,7 +29,7 @@
         "independent_realization_band_available": false,
         "independent_derivation_rule_satisfied": false
       },
-      "current_status": "PRIMARY_SOURCE_DEEP_CLASS_CANDIDATE_MATERIALIZATION_PRIORITY_NOT_QUALIFIED"
+      "current_status": "MATERIALIZATION_PRIORITY_NOT_QUALIFIED"
     },
     {
       "candidate_id": "M1_T0",
