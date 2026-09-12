@@ -1,0 +1,112 @@
+name: m5-supplementary-breakpoint-recovery
+
+on:
+  push:
+    branches:
+      - m5-supplementary-breakpoint-recovery-v1
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install workbook reader
+        run: python -m pip install --quiet openpyxl
+      - name: Recover PMC AWS article version and XLSX files
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_supplementary_recovery
+          mkdir -p "$root/xlsx"
+          curl -L --fail --retry 3 \
+            'https://pmc-oa-opendata.s3.amazonaws.com/?list-type=2&prefix=PMC9046218.&delimiter=/' \
+            -o "$root/versions.xml"
+          python - "$root/versions.xml" "$root/prefixes.txt" <<'PY'
+          import pathlib, sys, xml.etree.ElementTree as ET
+          tree=ET.parse(sys.argv[1])
+          ns={'s3':'http://s3.amazonaws.com/doc/2006-03-01/'}
+          prefixes=[x.text for x in tree.findall('.//s3:CommonPrefixes/s3:Prefix',ns)]
+          if not prefixes:
+              raise SystemExit('no PMC9046218 article-version prefix found')
+          pathlib.Path(sys.argv[2]).write_text('\n'.join(prefixes)+'\n')
+          print(prefixes)
+          PY
+          while read -r prefix; do
+            safe=${prefix%/}; safe=${safe//./_}
+            curl -L --fail --retry 3 \
+              "https://pmc-oa-opendata.s3.amazonaws.com/?list-type=2&prefix=${prefix}" \
+              -o "$root/${safe}_objects.xml"
+            python - "$root/${safe}_objects.xml" "$root/${safe}_xlsx_keys.txt" <<'PY'
+          import pathlib, sys, xml.etree.ElementTree as ET
+          tree=ET.parse(sys.argv[1])
+          ns={'s3':'http://s3.amazonaws.com/doc/2006-03-01/'}
+          keys=[x.text for x in tree.findall('.//s3:Contents/s3:Key',ns) if x.text and x.text.lower().endswith('.xlsx')]
+          pathlib.Path(sys.argv[2]).write_text('\n'.join(keys)+'\n')
+          print(keys)
+          PY
+            while read -r key; do
+              [ -z "$key" ] && continue
+              name=$(basename "$key")
+              curl -L --fail --retry 3 \
+                "https://pmc-oa-opendata.s3.amazonaws.com/${key}" \
+                -o "$root/xlsx/${safe}__${name}"
+            done < "$root/${safe}_xlsx_keys.txt"
+          done < "$root/prefixes.txt"
+          ls -lh "$root/xlsx"
+      - name: Inspect workbooks for pre-existing M5 breakpoint metadata
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_supplementary_recovery
+          python - "$root/xlsx" "$root" <<'PY'
+          import csv, json, pathlib, re, sys
+          from openpyxl import load_workbook
+          xdir=pathlib.Path(sys.argv[1]); outdir=pathlib.Path(sys.argv[2])
+          files=sorted(xdir.glob('*.xlsx'))
+          if not files:
+              raise SystemExit('no XLSX files recovered from PMC AWS dataset')
+          inventory=[]; m5_rows=[]; keyword_rows=[]
+          terms=('m5','delet','left','right','breakpoint','genome','t0','transfer 0','sco7036','sco7350','sco7662','sco3879')
+          for fp in files:
+              wb=load_workbook(fp, read_only=True, data_only=True)
+              for ws in wb.worksheets:
+                  inventory.append({'file':fp.name,'sheet':ws.title,'max_row':ws.max_row,'max_column':ws.max_column})
+                  for rnum,row in enumerate(ws.iter_rows(values_only=True),start=1):
+                      vals=['' if v is None else str(v) for v in row]
+                      joined=' | '.join(vals)
+                      low=joined.lower()
+                      if re.search(r'(^|[^a-z0-9])m5([^a-z0-9]|$)', low):
+                          m5_rows.append([fp.name,ws.title,rnum,joined])
+                      if any(t in low for t in terms):
+                          keyword_rows.append([fp.name,ws.title,rnum,joined])
+          (outdir/'workbook_inventory.json').write_text(json.dumps(inventory,indent=2,ensure_ascii=False)+'\n')
+          for name,rows in [('m5_matching_rows.tsv',m5_rows),('keyword_rows.tsv',keyword_rows)]:
+              with (outdir/name).open('w',newline='',encoding='utf-8') as h:
+                  w=csv.writer(h,delimiter='\t',lineterminator='\n')
+                  w.writerow(['file','sheet','row','content'])
+                  w.writerows(rows)
+          summary={
+              'xlsx_file_count':len(files),
+              'sheet_count':len(inventory),
+              'm5_matching_row_count':len(m5_rows),
+              'keyword_row_count':len(keyword_rows),
+              'claim_boundary':'descriptive recovery only; no breakpoint promotion without explicit source row/column evidence'
+          }
+          (outdir/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
+          print(json.dumps(summary,indent=2))
+          print('\nM5 rows:')
+          for row in m5_rows[:100]: print('\t'.join(map(str,row)))
+          PY
+          sha256sum "$root"/xlsx/*.xlsx "$root"/workbook_inventory.json "$root"/m5_matching_rows.tsv "$root"/keyword_rows.tsv "$root"/summary.json > "$root/checksums.sha256"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m5-supplementary-breakpoint-recovery
+          path: |
+            outputs/m5_supplementary_recovery/prefixes.txt
+            outputs/m5_supplementary_recovery/xlsx/*.xlsx
+            outputs/m5_supplementary_recovery/workbook_inventory.json
+            outputs/m5_supplementary_recovery/m5_matching_rows.tsv
+            outputs/m5_supplementary_recovery/keyword_rows.tsv
+            outputs/m5_supplementary_recovery/summary.json
+            outputs/m5_supplementary_recovery/checksums.sha256
