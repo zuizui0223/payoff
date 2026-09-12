@@ -51,14 +51,14 @@ jobs:
           if missing:
               raise SystemExit(f'missing frozen loci in NC_003888.3 annotation: {sorted(missing)}')
           with (root/'loci.tsv').open('w',newline='') as h:
-              w=csv.writer(h,delimiter='\t'); w.writerow(['legacy_locus','current_locus','start','end'])
+              w=csv.writer(h,delimiter='\t',lineterminator='\n'); w.writerow(['legacy_locus','current_locus','start','end'])
               for legacy in sorted(found):
                   x=found[legacy]; w.writerow(x[:4])
 
           design=json.loads(Path('validation/streptomyces_m5_bgi_marker_calibration_design_v1.json').read_text())
           forbidden=set(design['forbidden_target_runs_in_calibration'])
           with (root/'controls.tsv').open('w',newline='') as h:
-              w=csv.writer(h,delimiter='\t'); w.writerow(['candidate_id','pacbio_run','bgi_run'])
+              w=csv.writer(h,delimiter='\t',lineterminator='\n'); w.writerow(['candidate_id','pacbio_run','bgi_run'])
               for row in design['calibration_candidates']:
                   runs={row['pacbio_run'],row['bgi_run']}
                   if runs & forbidden or row['candidate_id']=='M5_T0':
@@ -73,18 +73,20 @@ jobs:
           root=outputs/m5_bgi_calibration
           ref="$root/NC_003888.3.fa"
           while IFS=$'\t' read -r candidate pacrun bgirun; do
+            candidate="${candidate//$'\r'/}"
+            pacrun="${pacrun//$'\r'/}"
+            bgirun="${bgirun//$'\r'/}"
             [ "$candidate" = "candidate_id" ] && continue
             [ "$candidate" = "M5_T0" ] && { echo 'M5 target leaked into calibration' >&2; exit 1; }
             case "$pacrun $bgirun" in *SRR16954720*|*SRR16954696*) echo 'M5 target run leaked' >&2; exit 1;; esac
             work="$root/tmp/$candidate"; mkdir -p "$work/pac" "$work/bgi"
 
-            curl -L --fail --retry 3 \
-              "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=$pacrun&result=read_run&fields=run_accession,fastq_ftp&format=tsv" \
-              -o "$work/pac_meta.tsv"
+            pac_meta_url="https://www.ebi.ac.uk/ena/portal/api/filereport?accession=${pacrun}&result=read_run&fields=run_accession,fastq_ftp&format=tsv"
+            curl -L --fail --retry 3 "$pac_meta_url" -o "$work/pac_meta.tsv"
             python - "$work/pac_meta.tsv" "$work/pac/urls.txt" <<'PY'
           import csv, pathlib, sys
           rows=list(csv.DictReader(open(sys.argv[1]),delimiter='\t'))
-          urls=[x for x in rows[0]['fastq_ftp'].split(';') if x]
+          urls=[x.strip() for x in rows[0]['fastq_ftp'].split(';') if x.strip()]
           if not urls: raise SystemExit('no PacBio FASTQ URLs')
           pathlib.Path(sys.argv[2]).write_text('\n'.join(urls)+'\n')
           PY
@@ -93,13 +95,12 @@ jobs:
             samtools index "$root/bams/$candidate.pacbio.bam"
             rm -rf "$work/pac"
 
-            curl -L --fail --retry 3 \
-              "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=$bgirun&result=read_run&fields=run_accession,fastq_ftp&format=tsv" \
-              -o "$work/bgi_meta.tsv"
+            bgi_meta_url="https://www.ebi.ac.uk/ena/portal/api/filereport?accession=${bgirun}&result=read_run&fields=run_accession,fastq_ftp&format=tsv"
+            curl -L --fail --retry 3 "$bgi_meta_url" -o "$work/bgi_meta.tsv"
             python - "$work/bgi_meta.tsv" "$work/bgi/urls.txt" <<'PY'
           import csv, pathlib, sys
           rows=list(csv.DictReader(open(sys.argv[1]),delimiter='\t'))
-          urls=[x for x in rows[0]['fastq_ftp'].split(';') if x]
+          urls=[x.strip() for x in rows[0]['fastq_ftp'].split(';') if x.strip()]
           if not urls: raise SystemExit('no BGI FASTQ URLs')
           pathlib.Path(sys.argv[2]).write_text('\n'.join(urls)+'\n')
           PY
