@@ -3,10 +3,11 @@
   "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
   "system_id": "STREPTOMYCES_COELICOLOR",
   "prospective": true,
-  "source_head": "99c62ce63598bd8b794400afff71bd1b5454392b",
+  "source_head": "d40131e9e607f295617d76c842cce988808e6500",
   "qualified_d_reference_count": 0,
   "first_qualified_reference_recovered": false,
   "primary_target_id": "M5_T0",
+  "primary_execution_receipt": "STREPTOMYCES_M5_FIRST_REFERENCE_EXECUTION_V1",
   "frozen_priority_queue": [
     "M5_T0",
     "W3_POST_DELETION",
@@ -24,16 +25,21 @@
   "matched_s_certified": false,
   "architecture_mapping_certified": false,
   "architecture_specific_inference_hard_closed": true,
-  "next_action": "MATERIALIZE_AND_QUALIFY_M5_T0",
+  "next_action": "EXECUTE_STREPTOMYCES_M5_FIRST_REFERENCE_EXECUTION_V1",
   "required_m5_steps": [
     "CONFIRM_PHYSICAL_STOCK_ACCESS",
     "VERIFY_REGISTERED_DELETION_CLASS_MARKERS",
     "VERIFY_CORE_REFERENCE_AND_RESOLVE_GROSS_SECONDARY_REARRANGEMENT",
-    "RUN_MATCHED_72_120_H_REALIZATION_ASSAY",
-    "CONSTRUCT_CLOSED_D_AND_G_BANDS",
-    "DERIVE_INDEPENDENT_R_EQUALS_D_OVER_G",
+    "RUN_MATCHED_72_120_H_D_REALIZATION_ASSAY",
+    "CONSTRUCT_CLOSED_D_REALIZATION_BAND",
     "RUN_PER_REFERENCE_QUALIFICATION"
   ],
+  "preferred_direct_mu_route": {
+    "route": "ABSOLUTE_STATE_MASS",
+    "independent_reference_quantity": "d",
+    "independent_g_required_from_d_reference": false,
+    "independent_r_required_from_d_reference": false
+  },
   "full_panel_requirement_unchanged": {
     "registered_classes": ["ENTRY_CLASS", "INTERMEDIATE_CLASS", "DEEP_CLASS"],
     "minimum_independent_qualified_references_per_class": 2,

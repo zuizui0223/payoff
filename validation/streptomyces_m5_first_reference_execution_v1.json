@@ -1,0 +1,56 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_FIRST_REFERENCE_EXECUTION_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "prospective": true,
+  "reference_id": "M5_T0",
+  "origin_cluster_id": "ZHANG2022_SINGLE_MUTANT_PARENT",
+  "support_reference": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
+  "status": "PROSPECTIVE_NOT_EXECUTED",
+  "physical_stock_access_confirmed": false,
+  "deletion_class": "NOT_YET_VERIFIED",
+  "marker_pattern_verified": false,
+  "core_reference_present": false,
+  "pre_existing_at_72h": false,
+  "same_medium_and_context": false,
+  "independently_derived_from_direct_mu_candidate_outcome": true,
+  "candidate_outcomes_used_for_selection": false,
+  "viable_at_72h": false,
+  "measurable_at_120h": false,
+  "gross_secondary_rearrangement_unresolved": true,
+  "measurement_unit": "CALIBRATED_CORE_CHROMOSOME_EQUIVALENTS",
+  "interval_start_h": 72.0,
+  "interval_end_h": 120.0,
+  "context_id": "DIRECT_MU_72_120_SAME_CONTEXT_TO_BE_FROZEN",
+  "intact_comparator_id": "REQUIRED_BEFORE_USE",
+  "d_mass_72h": {
+    "lower": "REQUIRED_BEFORE_USE",
+    "upper": "REQUIRED_BEFORE_USE"
+  },
+  "d_mass_120h": {
+    "lower": "REQUIRED_BEFORE_USE",
+    "upper": "REQUIRED_BEFORE_USE"
+  },
+  "derived_d_realization_band": null,
+  "quantitative_receipt_valid": false,
+  "semantic_qualification_passed": false,
+  "qualified_reference": false,
+  "current_blockers": [
+    "PHYSICAL_STOCK_ACCESS_NOT_CONFIRMED",
+    "REGISTERED_DELETION_CLASS_NOT_VERIFIED",
+    "CORE_REFERENCE_NOT_VERIFIED",
+    "PRE_EXISTING_D_AT_72H_NOT_VERIFIED",
+    "MATCHED_CONTEXT_NOT_FROZEN",
+    "72_120H_REALIZATION_MASSES_NOT_MEASURED",
+    "GROSS_SECONDARY_REARRANGEMENT_NOT_RESOLVED"
+  ],
+  "claim_ceiling": {
+    "first_qualified_matched_d_reference_recovered": false,
+    "full_d_panel_qualified": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "architecture_specific_frequency_feedback": false,
+    "eta_architecture_specific": false,
+    "e1": false
+  }
+}
