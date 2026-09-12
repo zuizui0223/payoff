@@ -1,0 +1,39 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_GROSS_REARRANGEMENT_AUDIT_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "candidate_id": "M5_T0",
+  "prospective": true,
+  "status": "DESIGN_FROZEN_NOT_EXECUTED",
+  "public_sequence": {
+    "target_pacbio_run": "SRR16954720",
+    "wt_control_run": "SRR16954715",
+    "reference_accession": "NC_003888.3"
+  },
+  "resolution_contract": {
+    "coverage_bin_bp": 10000,
+    "gross_event_min_bp": 50000,
+    "central_interval_bp": [2500000, 6000000],
+    "minimum_central_depth": 10.0
+  },
+  "required_channels": {
+    "coverage_segmentation_completed": false,
+    "left_terminal_boundary_resolved": false,
+    "right_terminal_boundary_resolved": false,
+    "long_read_sv_calling_completed": false,
+    "wt_control_processed_same_pipeline": false,
+    "all_detected_gross_events_catalogued": false
+  },
+  "event_catalog": [],
+  "current_result": {
+    "gross_secondary_rearrangement_unresolved": true,
+    "audit_completed": false,
+    "qualified_d_reference": false
+  },
+  "claim_ceiling": {
+    "gross_structure_gate_closed": false,
+    "physical_stock_access_confirmed": false,
+    "realization_band_available": false,
+    "qualified_d_reference_count_increment": 0,
+    "architecture_specific_inference_open": false
+  }
+}
