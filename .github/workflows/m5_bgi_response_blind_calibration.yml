@@ -1,0 +1,145 @@
+name: m5-bgi-response-blind-calibration
+
+on:
+  push:
+    branches:
+      - m5-bgi-response-blind-calibration-v1
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mapping tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq minimap2 samtools
+          python -m pip install --quiet biopython
+      - name: Freeze reference loci and control manifest
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p outputs/m5_bgi_calibration/bams outputs/m5_bgi_calibration/tmp
+          curl -L --fail --retry 3 \
+            'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_003888.3&rettype=gbwithparts&retmode=text' \
+            -o outputs/m5_bgi_calibration/NC_003888.3.gb
+          python - <<'PY'
+          import csv, json
+          from Bio import SeqIO
+          from pathlib import Path
+
+          root=Path('outputs/m5_bgi_calibration')
+          rec=SeqIO.read(root/'NC_003888.3.gb','genbank')
+          SeqIO.write(rec, root/'NC_003888.3.fa','fasta')
+          targets={'SCO7662','SCO7350','SCO7036','SCO3879'}
+          core={'SCO3000','SCO3300','SCO3600','SCO3900','SCO4200','SCO4500','SCO4800','SCO5100','SCO5400'}
+          wanted=targets|core
+          found={}
+          for feat in rec.features:
+              if feat.type not in {'gene','CDS'}:
+                  continue
+              aliases=set(feat.qualifiers.get('locus_tag',[])) | set(feat.qualifiers.get('old_locus_tag',[]))
+              hit=wanted & aliases
+              if not hit:
+                  continue
+              for legacy in hit:
+                  row=(legacy,(feat.qualifiers.get('locus_tag') or [''])[0],int(feat.location.start)+1,int(feat.location.end),feat.type)
+                  if legacy not in found or (found[legacy][4] != 'gene' and feat.type == 'gene'):
+                      found[legacy]=row
+          missing=wanted-set(found)
+          if missing:
+              raise SystemExit(f'missing frozen loci in NC_003888.3 annotation: {sorted(missing)}')
+          with (root/'loci.tsv').open('w',newline='') as h:
+              w=csv.writer(h,delimiter='\t'); w.writerow(['legacy_locus','current_locus','start','end'])
+              for legacy in sorted(found):
+                  x=found[legacy]; w.writerow(x[:4])
+
+          design=json.loads(Path('validation/streptomyces_m5_bgi_marker_calibration_design_v1.json').read_text())
+          forbidden=set(design['forbidden_target_runs_in_calibration'])
+          with (root/'controls.tsv').open('w',newline='') as h:
+              w=csv.writer(h,delimiter='\t'); w.writerow(['candidate_id','pacbio_run','bgi_run'])
+              for row in design['calibration_candidates']:
+                  runs={row['pacbio_run'],row['bgi_run']}
+                  if runs & forbidden or row['candidate_id']=='M5_T0':
+                      raise SystemExit('target leakage into calibration manifest')
+                  w.writerow([row['candidate_id'],row['pacbio_run'],row['bgi_run']])
+          print((root/'controls.tsv').read_text())
+          PY
+      - name: Download and map all non-M5 control runs
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_bgi_calibration
+          ref="$root/NC_003888.3.fa"
+          while IFS=$'\t' read -r candidate pacrun bgirun; do
+            [ "$candidate" = "candidate_id" ] && continue
+            [ "$candidate" = "M5_T0" ] && { echo 'M5 target leaked into calibration' >&2; exit 1; }
+            case "$pacrun $bgirun" in *SRR16954720*|*SRR16954696*) echo 'M5 target run leaked' >&2; exit 1;; esac
+            work="$root/tmp/$candidate"; mkdir -p "$work/pac" "$work/bgi"
+
+            curl -L --fail --retry 3 \
+              "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=$pacrun&result=read_run&fields=run_accession,fastq_ftp&format=tsv" \
+              -o "$work/pac_meta.tsv"
+            python - "$work/pac_meta.tsv" "$work/pac/urls.txt" <<'PY'
+          import csv, pathlib, sys
+          rows=list(csv.DictReader(open(sys.argv[1]),delimiter='\t'))
+          urls=[x for x in rows[0]['fastq_ftp'].split(';') if x]
+          if not urls: raise SystemExit('no PacBio FASTQ URLs')
+          pathlib.Path(sys.argv[2]).write_text('\n'.join(urls)+'\n')
+          PY
+            while read -r u; do [ -z "$u" ] || curl -L --fail --retry 3 "https://$u" -o "$work/pac/$(basename "$u")"; done < "$work/pac/urls.txt"
+            minimap2 -t 4 -ax map-pb "$ref" "$work"/pac/*.fastq.gz | samtools sort -@ 4 -o "$root/bams/$candidate.pacbio.bam"
+            samtools index "$root/bams/$candidate.pacbio.bam"
+            rm -rf "$work/pac"
+
+            curl -L --fail --retry 3 \
+              "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=$bgirun&result=read_run&fields=run_accession,fastq_ftp&format=tsv" \
+              -o "$work/bgi_meta.tsv"
+            python - "$work/bgi_meta.tsv" "$work/bgi/urls.txt" <<'PY'
+          import csv, pathlib, sys
+          rows=list(csv.DictReader(open(sys.argv[1]),delimiter='\t'))
+          urls=[x for x in rows[0]['fastq_ftp'].split(';') if x]
+          if not urls: raise SystemExit('no BGI FASTQ URLs')
+          pathlib.Path(sys.argv[2]).write_text('\n'.join(urls)+'\n')
+          PY
+            while read -r u; do [ -z "$u" ] || curl -L --fail --retry 3 "https://$u" -o "$work/bgi/$(basename "$u")"; done < "$work/bgi/urls.txt"
+            minimap2 -t 4 -ax sr "$ref" "$work"/bgi/*.fastq.gz | samtools sort -@ 4 -o "$root/bams/$candidate.bgi.bam"
+            samtools index "$root/bams/$candidate.bgi.bam"
+            rm -rf "$work/bgi"
+          done < "$root/controls.tsv"
+      - name: Build independent control evidence and adjudicate calibration
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_bgi_calibration
+          python scripts/build_bgi_calibration_evidence.py \
+            --loci "$root/loci.tsv" \
+            --controls "$root/controls.tsv" \
+            --bam-dir "$root/bams" \
+            --output "$root/control_evidence.tsv"
+          python scripts/adjudicate_bgi_marker_calibration.py \
+            "$root/control_evidence.tsv" \
+            --output "$root/calibration_result.json"
+          cat "$root/control_evidence.tsv"
+          cat "$root/calibration_result.json"
+          python - <<'PY'
+          import json
+          p='outputs/m5_bgi_calibration/calibration_result.json'
+          x=json.load(open(p))
+          if not x['calibration_qualified']:
+              raise SystemExit(f"response-blind calibration did not qualify: {x['blockers']}")
+          if x['m5_bgi_marker_class_opened']:
+              raise SystemExit('target was opened during calibration')
+          PY
+          sha256sum "$root/control_evidence.tsv" "$root/calibration_result.json" > "$root/checksums.sha256"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m5-bgi-response-blind-calibration
+          path: |
+            outputs/m5_bgi_calibration/loci.tsv
+            outputs/m5_bgi_calibration/controls.tsv
+            outputs/m5_bgi_calibration/control_evidence.tsv
+            outputs/m5_bgi_calibration/calibration_result.json
+            outputs/m5_bgi_calibration/checksums.sha256
