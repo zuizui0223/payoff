@@ -1,0 +1,59 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_SEQUENCE_SAMPLE_MAP_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "public_bioproject": "PRJNA780771",
+  "primary_source_reports_raw_sequence_data": true,
+  "mapping_rule": {
+    "candidate_to_biosample_required": true,
+    "candidate_to_sra_run_required": true,
+    "source_metadata_must_unambiguously_name_candidate": true,
+    "independent_crosscheck_required": true,
+    "public_sequence_availability_alone_is_insufficient": true
+  },
+  "priority_candidates": [
+    {
+      "candidate_id": "M5_T0",
+      "public_sequence_project_available": true,
+      "biosample_accession_recovered": false,
+      "sra_run_accessions_recovered": false,
+      "source_metadata_names_candidate": false,
+      "mapping_independently_crosschecked": false,
+      "sequence_marker_reconstruction_allowed": false,
+      "current_blockers": [
+        "BIOSAMPLE_ACCESSION_NOT_MAPPED",
+        "SRA_RUN_ACCESSION_NOT_MAPPED",
+        "SOURCE_METADATA_DOES_NOT_UNAMBIGUOUSLY_NAME_CANDIDATE",
+        "CANDIDATE_TO_SEQUENCE_MAPPING_NOT_INDEPENDENTLY_CROSSCHECKED"
+      ]
+    },
+    {
+      "candidate_id": "M1_T0",
+      "public_sequence_project_available": true,
+      "biosample_accession_recovered": false,
+      "sra_run_accessions_recovered": false,
+      "source_metadata_names_candidate": false,
+      "mapping_independently_crosschecked": false,
+      "sequence_marker_reconstruction_allowed": false,
+      "current_blockers": [
+        "BIOSAMPLE_ACCESSION_NOT_MAPPED",
+        "SRA_RUN_ACCESSION_NOT_MAPPED",
+        "SOURCE_METADATA_DOES_NOT_UNAMBIGUOUSLY_NAME_CANDIDATE",
+        "CANDIDATE_TO_SEQUENCE_MAPPING_NOT_INDEPENDENTLY_CROSSCHECKED"
+      ]
+    }
+  ],
+  "claim_boundary": {
+    "sequence_sample_map_qualified": false,
+    "sequence_marker_reconstruction_allowed": false,
+    "physical_material_identity_established": false,
+    "candidate_reference_qualified": false,
+    "d_band_available": false,
+    "direct_mu_outcome_available": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
