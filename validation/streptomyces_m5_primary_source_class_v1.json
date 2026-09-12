@@ -1,0 +1,45 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_PRIMARY_SOURCE_CLASS_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "reference_id": "M5_T0",
+  "prospective": true,
+  "support_reference": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
+  "public_sequence_project": "PRJNA780771",
+  "source_evidence": {
+    "t0_whole_genome_sequenced": true,
+    "t0_argG_loss_phenotype_supported": true,
+    "t0_terminal_deletion_context_supported": true,
+    "m5_shortest_starting_genome_reported": true,
+    "no_further_large_deletion_during_serial_transfer_reported": true
+  },
+  "registered_class_adjudication": {
+    "candidate_class": "DEEP_CLASS",
+    "candidate_class_supported": true,
+    "SCO7662_directly_verified_in_registered_receipt": false,
+    "SCO7350_directly_verified_in_registered_receipt": false,
+    "SCO7036_directly_verified_in_registered_receipt": false,
+    "SCO3879_core_directly_verified_in_registered_receipt": false,
+    "exact_registered_marker_pattern_verified": false,
+    "registered_deletion_class_qualified": false
+  },
+  "integrity_adjudication": {
+    "source_reports_no_further_large_deletion_during_transfer": true,
+    "t0_gross_secondary_rearrangement_resolved_for_reference_use": false
+  },
+  "next_actions": [
+    "RESOLVE_EXACT_M5_T0_PUBLIC_SEQUENCE_OR_ARCHIVE_RECORD",
+    "DIRECTLY_SCORE_SCO7662_SCO7350_SCO7036_SCO3879",
+    "RESOLVE_T0_GROSS_SECONDARY_REARRANGEMENTS",
+    "ONLY_THEN_RUN_72_120H_REALIZATION_IF_REFERENCE_REMAINS_ADMISSIBLE"
+  ],
+  "claim_ceiling": {
+    "deep_class_candidate_supported": true,
+    "registered_deletion_class_qualified": false,
+    "qualified_reference": false,
+    "d_band_available": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_architecture_specific": false,
+    "e1_promoted": false
+  }
+}
