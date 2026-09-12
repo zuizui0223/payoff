@@ -17,7 +17,7 @@ def test_zero_reference_status_hard_closes_architecture_specific_inference():
     assert data["architecture_specific_inference_hard_closed"] is True
     assert data["primary_target_id"] == "M5_T0"
     assert data["primary_execution_receipt"] == "STREPTOMYCES_M5_FIRST_REFERENCE_EXECUTION_V1"
-    assert data["next_action"] == "CONFIRM_M5_STOCK_ACCESS_AND_RESOLVE_EXACT_M5_T0_SEQUENCE_ACCESSION_IN_PARALLEL"
+    assert data["next_action"] == "CONFIRM_M5_STOCK_ACCESS_RESOLVE_GROSS_REARRANGEMENTS_AND_RUN_REGISTERED_72_120H_REALIZATION"
 
 
 def test_preferred_absolute_mass_route_requires_independent_d_not_g_or_r_from_reference():
@@ -47,11 +47,16 @@ def test_candidate_pool_is_focused_on_first_reference_not_expansion():
     assert focus["architecture_specific_inference_hard_closed_while_zero_qualified_references"] is True
 
 
-def test_m5_current_receipt_is_prospective_and_unqualified():
+def test_m5_current_receipt_has_verified_genomic_class_but_is_unqualified_reference():
     m5 = json.loads(M5.read_text())
     assert m5["reference_id"] == "M5_T0"
-    assert m5["status"] == "PROSPECTIVE_PRELAB_EVIDENCE_RECOVERED_NOT_EXECUTED"
+    assert m5["status"] == "PROSPECTIVE_GENOMIC_CLASS_VERIFIED_NOT_EXECUTED"
+    assert m5["exact_m5_t0_sequence_accession_resolved"] is True
+    assert m5["deletion_class"] == "DEEP_CLASS"
+    assert m5["marker_pattern_verified"] is True
+    assert m5["core_reference_present"] is True
     assert m5["physical_stock_access_confirmed"] is False
     assert m5["derived_d_realization_band"] is None
     assert m5["qualified_reference"] is False
+    assert m5["claim_ceiling"]["deletion_class_qualified"] is True
     assert m5["claim_ceiling"]["architecture_mapping_certified"] is False
