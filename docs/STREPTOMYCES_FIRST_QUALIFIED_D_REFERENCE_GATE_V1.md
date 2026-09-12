@@ -44,9 +44,16 @@ independent derivation from the direct-mu candidate outcome
 viability / measurability at 72 h
 measurability at 120 h
 gross secondary rearrangement resolved
-closed same-context realization band for d
-and therefore an independently constrained r=d/g.
+closed same-context realization band for d.
 ```
+
+Under the preferred absolute-state-mass route, the D reference supplies the independent realization quantity
+
+```text
+d = D_120 / D_72.
+```
+
+It does **not** need to supply an independent `g` or `r=d/g` receipt. In that preferred route, compatible mixed-state absolute masses later identify `g` jointly with `mu` once `d` is independently constrained. The older fraction-only route may still require `r=d/g`, but that is a secondary direct-mu route and is not part of the per-D-reference qualification requirement.
 
 A named strain, sequenced mutant, published competition coefficient, or terminal-deletion phenotype is not a qualified direct-mu reference by itself.
 
@@ -124,12 +131,19 @@ A. confirm physical stock / archive access
 B. freeze exact registered deletion class from sequence / marker evidence
 C. verify core-reference retention and exclude gross secondary rearrangement relevant to the registered class
 D. run same-context 72 h -> 120 h realization assay against matched intact reference
-E. construct closed d and g uncertainty bands
-F. derive r=d/g without using the direct-mu outcome
-G. run direct_mu_reference_panel_qualification.qualify_d_reference
+E. construct the closed d uncertainty band from calibrated D core-equivalent masses
+F. run direct_mu_reference_panel_qualification.qualify_d_reference
 ```
 
-Only step G can create the first qualified-reference receipt.
+Only step F can create the first qualified-reference receipt.
+
+The quantitative packet is implemented in:
+
+```text
+src/direct_mu_single_reference_execution.py
+scripts/adjudicate_direct_mu_reference_execution.py
+docs/STREPTOMYCES_M5_FIRST_REFERENCE_EXECUTION_V1.md
+```
 
 ## Machine-readable guard
 
