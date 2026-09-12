@@ -35,6 +35,39 @@ no further large deletion detected during the serial-transfer experiment.
 
 These properties make M5 worth materializing first. They do not certify its registered deletion class or realization rate.
 
+## Pre-lab evidence already recovered
+
+The source-recovery audit in `STREPTOMYCES_M5_PRELAB_EVIDENCE_RECOVERY_V1.md` removes several uncertainties without promoting qualification.
+
+Recovered from the primary source:
+
+```text
+M5 lineage stocks were archived in the source programme
+M5_T0 was whole-genome sequenced
+public sequence BioProject PRJNA780771 exists
+M5 is arginine auxotrophic from T0 under the paper's right-arm deletion marker assay
+M5 has reduced chloramphenicol resistance relative to WT
+M5 is therefore a strong DEEP_CLASS candidate under the paper's terminal-deletion interpretation
+M5 acquired no further large deletion during the transfer experiment.
+```
+
+Still not recovered:
+
+```text
+current physical access to the archived M5_T0 stock
+exact M5_T0 run/sample accession inside the public sequence project
+direct SCO7662/SCO7350/SCO7036 marker-pattern verification
+SCO3879/dnaA core verification
+exact T0 secondary-rearrangement resolution.
+```
+
+The key firewall is:
+
+```text
+primary-source DEEP_CLASS candidate
+!= registered marker pattern verified.
+```
+
 ## Required execution chain
 
 ```text
@@ -57,6 +90,8 @@ R5  existing per-reference qualification gate
 ## R0 — material identity
 
 The assay must use the frozen `M5_T0` material identity. Stock access must be confirmed before a realization result can qualify.
+
+The primary publication documents that the transferred lineages were archived and stocks maintained at -20 C. That establishes archive existence in the source programme, not current access by this project.
 
 A reconstructed strain with the same phenotype is not silently relabelled M5_T0. A new reconstruction would need its own reference ID and provenance.
 
@@ -87,6 +122,8 @@ The central core reference remains:
 SCO3879 / dnaA.
 ```
 
+Published T0 arginine auxotrophy and chloramphenicol susceptibility provide strong primary-source support for `DEEP_CLASS` as the candidate class. The registered class assignment nevertheless remains unverified until the exact marker pattern, including `SCO7350`, is scored directly from frozen M5_T0 material or its exact sequence record.
+
 The class assignment must come from the frozen M5 material / sequence-marker evidence, not from its measured realization `d`.
 
 ## R2 — reference integrity
@@ -101,7 +138,7 @@ M5 selection independent of the future direct-mu candidate outcome
 gross secondary rearrangement relevant to interpretation resolved.
 ```
 
-The existing statement that M5 did not accumulate another large deletion during the serial-transfer experiment is useful provenance, but the qualification receipt still requires the registered integrity fields to be resolved explicitly.
+The existing statement that M5 did not accumulate another large deletion during the serial-transfer experiment is useful provenance, but the qualification receipt still requires the registered integrity fields to be resolved explicitly. In particular, Figure 4 indicates terminal losses on both chromosome arms among the ancestral mutant lineages, so genome stability after T0 is not equivalent to a clean single-deletion genotype.
 
 ## R3 — realization measurement
 
@@ -189,12 +226,14 @@ qualified_reference = TRUE.
 Use:
 
 ```text
+src/direct_mu_m5_prelab_evidence.py
 src/direct_mu_single_reference_execution.py
 scripts/adjudicate_direct_mu_reference_execution.py
+validation/streptomyces_m5_prelab_evidence_v1.json
 validation/streptomyces_m5_first_reference_execution_v1.json
 ```
 
-The current JSON is a prospective status/receipt template. It must remain unqualified until real material and realization measurements replace the unresolved fields.
+The current JSON remains unqualified until real material and realization measurements replace the unresolved fields.
 
 ## What a positive M5 receipt changes
 
@@ -228,19 +267,25 @@ If M5 fails for a terminal reason, preserve the failure receipt and move to:
 W3_POST_DELETION.
 ```
 
-If the blocker is reversible — stock confirmation pending, marker assay pending, realization assay not run — it is not a terminal failure and does not license new literature hunting.
+If the blocker is reversible — stock confirmation pending, exact sequence mapping pending, marker assay pending, realization assay not run — it is not a terminal failure and does not license new literature hunting.
 
 Only after M5, W3 and M1 are all terminally exhausted while the qualified-reference count remains zero may bounded candidate search resume.
 
 ## Current status
 
 ```text
-M5_T0 physical stock access        NOT YET CONFIRMED
-registered M5 deletion class       NOT YET VERIFIED
-72 h D mass band                    NOT YET MEASURED
-120 h D mass band                   NOT YET MEASURED
-closed d realization band           NOT AVAILABLE
-per-reference semantic qualification NOT PASSED
-qualified matched-D references      0
-architecture-specific inference     HARD CLOSED
+source-programme archive existence     RECOVERED
+M5_T0 whole-genome sequencing          RECOVERED
+public sequence project PRJNA780771    RECOVERED
+primary-source class candidate         DEEP_CLASS
+current physical stock access          NOT YET CONFIRMED
+exact M5_T0 sequence accession         NOT YET RESOLVED
+registered marker pattern              NOT YET DIRECTLY VERIFIED
+core / secondary rearrangement audit   NOT YET CLOSED
+72 h D mass band                       NOT YET MEASURED
+120 h D mass band                      NOT YET MEASURED
+closed d realization band              NOT AVAILABLE
+per-reference semantic qualification  NOT PASSED
+qualified matched-D references         0
+architecture-specific inference        HARD CLOSED
 ```
