@@ -11,6 +11,10 @@
       "heritable_or_stable_strategic_pair": false,
       "unit_consistency": false,
       "mapping_independent_of_game_result": true,
+      "qualified_direct_mu_matched_d_reference_count": 0,
+      "direct_mu_matched_d_reference_precondition_satisfied": false,
+      "direct_mu_first_reference_receipt": "STREPTOMYCES_DIRECT_MU_FIRST_REFERENCE_STATUS_V1",
+      "architecture_specific_inference_hard_closed": true,
       "matched_generalist_only_comparator_recovered": false,
       "matched_generalist_shared_architecture_recovered": false,
       "matched_comparator_receipt": "STREPTOMYCES_MATCHED_ARCHITECTURE_COMPARATOR_V1",
@@ -29,6 +33,7 @@
       "matched_s_promotion_licensed": false,
       "mapping_certified": false,
       "primary_blockers": [
+        "ZERO_QUALIFIED_DIRECT_MU_MATCHED_D_REFERENCE",
         "MATCHED_S_ARCHITECTURE_NOT_RECOVERED",
         "MATCHED_GENERALIST_SHARED_ARCHITECTURE_NOT_RECOVERED",
         "DIFFERENTIATION_GENERATION_SUPPRESSION_NOT_IDENTIFIED",
