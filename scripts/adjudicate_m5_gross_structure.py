@@ -4,6 +4,11 @@ import argparse
 import csv
 import json
 from pathlib import Path
+import sys
+
+# Allow direct execution as `python scripts/...py` from the repository root.
+# This is a transport/import repair only; it does not alter the frozen gate.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.direct_mu_gross_rearrangement_audit import (
     GrossAuditEvidence,
