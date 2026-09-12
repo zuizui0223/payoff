@@ -47,7 +47,7 @@
   "result": {
     "absence_max_ratio": 0.000818710126322,
     "presence_min_ratio": 0.40016549829,
-    "strict_gap_ratio_presence_min_over_absence_max": 488.749992947734,
+    "strict_gap_ratio_presence_min_over_absence_max": 488.7755573364122,
     "absent_pair_count": 10,
     "present_pair_count": 14,
     "absent_candidate_count": 5,
