@@ -23,6 +23,8 @@
   },
   "bgi_normalization_rule": "registered_locus_mean_depth / median(central_core_panel_mean_depth)",
   "threshold_rule": {
+    "minimum_pairs_per_state": 3,
+    "minimum_distinct_candidates_per_state": 2,
     "absence_max_ratio": "maximum BGI normalized ratio across PacBio-labeled ABSENT_CONTROL pairs",
     "presence_min_ratio": "minimum BGI normalized ratio across PacBio-labeled PRESENT_CONTROL pairs",
     "qualification_condition": "absence_max_ratio < presence_min_ratio",
