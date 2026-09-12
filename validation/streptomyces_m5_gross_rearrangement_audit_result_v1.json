@@ -1,0 +1,94 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_GROSS_REARRANGEMENT_AUDIT_RESULT_V1",
+  "candidate_id": "M5_T0",
+  "status": "AUDIT_NOT_COMPLETED_FAIL_CLOSED",
+  "source": {
+    "workflow_run_id": 34671479118,
+    "workflow_job_id": 103493515070,
+    "artifact_id": 10289864089,
+    "artifact_zip_sha256": "3bda2e118e951e83d04a5ebba6f09115d2ee866291d27d2561fb7b082e07abde",
+    "target_pacbio_run": "SRR16954720",
+    "wt_control_pacbio_run": "SRR16954715",
+    "reference_accession": "NC_003888.3"
+  },
+  "frozen_design": {
+    "coverage_bin_bp": 10000,
+    "gross_event_min_bp": 50000,
+    "retained_depth_floor": 10.0,
+    "terminal_confirmation_bins": 5,
+    "terminal_deleted_side_rule": "all preceding/following bins must have exactly zero M5 mean depth"
+  },
+  "depth_evidence": {
+    "m5_central_mean_depth": 92.1028,
+    "wt_central_mean_depth": 178.524,
+    "first_m5_bin_at_or_above_10x": [370000, 380000],
+    "last_m5_bin_at_or_above_10x": [7800000, 7810000],
+    "nonzero_trace_bins_before_first_retained_bin": [
+      {"start": 80000, "end": 90000, "m5_mean_depth": 0.3567}
+    ],
+    "nonzero_trace_bins_after_last_retained_bin": [
+      {"start": 7840000, "end": 7850000, "m5_mean_depth": 0.229},
+      {"start": 8600000, "end": 8610000, "m5_mean_depth": 0.2548},
+      {"start": 8610000, "end": 8620000, "m5_mean_depth": 0.053},
+      {"start": 8620000, "end": 8630000, "m5_mean_depth": 0.0052}
+    ]
+  },
+  "raw_sniffles_calls": {
+    "m5_total_calls_written_at_min_svlen_50000": 3,
+    "wt_total_calls_written_at_min_svlen_50000": 0,
+    "m5_calls": [
+      {
+        "id": "Sniffles2.BND.1AS0",
+        "type": "BND",
+        "pos": 372932,
+        "mate": "NC_003888.3:6139888",
+        "size_qualified_by_v1_parser": false
+      },
+      {
+        "id": "Sniffles2.DUP.7S0",
+        "type": "DUP",
+        "pos": 3825139,
+        "end": 3908148,
+        "svlen_bp": 83009,
+        "size_qualified_by_v1_parser": true
+      },
+      {
+        "id": "Sniffles2.BND.278S0",
+        "type": "BND",
+        "pos": 7802883,
+        "mate": "NC_003888.3:7802269",
+        "size_qualified_by_v1_parser": false
+      }
+    ]
+  },
+  "v1_adjudication": {
+    "left_terminal_boundary_resolved": false,
+    "right_terminal_boundary_resolved": false,
+    "m5_size_qualified_gross_sv_count": 1,
+    "wt_size_qualified_gross_sv_count": 0,
+    "size_qualified_event_catalog": [
+      {
+        "event_id": "Sniffles2.DUP.7S0",
+        "event_type": "DUP",
+        "size_bp": 83009,
+        "source_channel": "SNIFFLES_M5",
+        "breakpoint_or_interval_resolved": true
+      }
+    ],
+    "blockers": [
+      "LEFT_TERMINAL_BOUNDARY_UNRESOLVED",
+      "RIGHT_TERMINAL_BOUNDARY_UNRESOLVED"
+    ],
+    "audit_completed": false,
+    "gross_secondary_rearrangement_unresolved": true
+  },
+  "claim_boundary": {
+    "this_is_not_evidence_that_m5_is_structurally_clean": true,
+    "this_is_not_a_biological_negative_for_m5": true,
+    "v1_failed_closed_because_terminal_boundaries_remain_unresolved_under_the_frozen_exact_zero_rule": true,
+    "no_post_hoc_relaxation_of_terminal_depth_rule_allowed": true,
+    "qualified_d_reference": false,
+    "qualified_d_reference_count_increment": 0,
+    "architecture_specific_inference_open": false
+  }
+}
