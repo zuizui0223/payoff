@@ -11,6 +11,15 @@
     "DEEP_CLASS"
   ],
   "minimum_independent_references_per_class": 2,
+  "first_reference_milestone": {
+    "qualified_reference_count_total": 0,
+    "target_count": 1,
+    "recovered": false,
+    "primary_target_id": "M5_T0",
+    "candidate_literature_expansion_paused": true,
+    "receipt": "STREPTOMYCES_DIRECT_MU_FIRST_REFERENCE_STATUS_V1",
+    "does_not_relax_full_panel_requirement": true
+  },
   "candidate_references": [],
   "qualified_reference_counts": {
     "ENTRY_CLASS": 0,
@@ -21,6 +30,7 @@
   "panel_qualified": false,
   "d_band_available": false,
   "current_blockers": [
+    "ZERO_QUALIFIED_MATCHED_D_REFERENCES",
     "ENTRY_CLASS_QUALIFIED_REFERENCE_COUNT_BELOW_2",
     "INTERMEDIATE_CLASS_QUALIFIED_REFERENCE_COUNT_BELOW_2",
     "DEEP_CLASS_QUALIFIED_REFERENCE_COUNT_BELOW_2",
@@ -43,6 +53,7 @@
     "matched_generalist_shared_architecture_recovered": false,
     "matched_s_certified": false,
     "architecture_mapping_certified": false,
+    "architecture_specific_inference_hard_closed": true,
     "generic_game_promoted": false,
     "eta_promoted": false,
     "e1_promoted": false
