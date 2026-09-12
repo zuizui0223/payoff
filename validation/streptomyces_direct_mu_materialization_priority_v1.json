@@ -1,0 +1,91 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_MATERIALIZATION_PRIORITY_V1",
+  "prospective": true,
+  "candidate_outcomes_opened": false,
+  "support_reference": "ZHANG_ET_AL_2022_NAT_COMM_DOI_10.1038_s41467-022-29924-y",
+  "origin_clusters": {
+    "ZHANG2022_SINGLE_MUTANT_PARENT": {
+      "members": ["M1_T0", "M3_T0", "M4_T0", "M5_T0", "M6_T0"],
+      "independent_origin_count": 1,
+      "basis": "one mutant colony was replated and six descendant mutant lineages were chosen"
+    },
+    "ZHANG2022_W3_DE_NOVO": {
+      "members": ["W3_POST_DELETION"],
+      "independent_origin_count": 1,
+      "basis": "WT lineage W3 acquired terminal deletion during serial transfer"
+    }
+  },
+  "registered_materialization_order": [
+    {
+      "rank": 1,
+      "candidate_id": "M5_T0",
+      "origin_cluster_id": "ZHANG2022_SINGLE_MUTANT_PARENT",
+      "why_prioritized": [
+        "named archived T0 material",
+        "T0 genome sequenced",
+        "T0 competition assay exists",
+        "shortest starting genome among mutant lineages",
+        "no further large deletion detected through the serial-transfer experiment"
+      ],
+      "materialization_blockers": [
+        "PHYSICAL_STOCK_ACCESS_NOT_YET_CONFIRMED",
+        "REGISTERED_MARKER_CLASS_NOT_YET_EXTRACTED_FROM_T0_GENOME",
+        "72_120H_SFM_REALIZATION_ASSAY_NOT_YET_RUN",
+        "REALIZATION_BAND_NOT_YET_AVAILABLE"
+      ],
+      "qualified_reference": false
+    },
+    {
+      "rank": 2,
+      "candidate_id": "W3_POST_DELETION",
+      "origin_cluster_id": "ZHANG2022_W3_DE_NOVO",
+      "why_prioritized": [
+        "independent de-novo deletion origin relative to M1-M6 cluster",
+        "named lineage with additional sampling after deletion onset",
+        "genome sequenced around transition and at experiment end"
+      ],
+      "materialization_blockers": [
+        "PHYSICAL_STOCK_ACCESS_NOT_YET_CONFIRMED",
+        "EXACT_POST_DELETION_ARCHIVE_TIMEPOINT_TO_USE_NOT_YET_FROZEN",
+        "REGISTERED_MARKER_CLASS_NOT_YET_EXTRACTED",
+        "72_120H_SFM_REALIZATION_ASSAY_NOT_YET_RUN",
+        "REALIZATION_BAND_NOT_YET_AVAILABLE"
+      ],
+      "qualified_reference": false
+    },
+    {
+      "rank": 3,
+      "candidate_id": "M1_T0",
+      "origin_cluster_id": "ZHANG2022_SINGLE_MUTANT_PARENT",
+      "why_prioritized": [
+        "named archived T0 material",
+        "T0 genome sequenced",
+        "T0 competition assay exists"
+      ],
+      "materialization_blockers": [
+        "PHYSICAL_STOCK_ACCESS_NOT_YET_CONFIRMED",
+        "REGISTERED_MARKER_CLASS_NOT_YET_EXTRACTED_FROM_T0_GENOME",
+        "72_120H_SFM_REALIZATION_ASSAY_NOT_YET_RUN",
+        "REALIZATION_BAND_NOT_YET_AVAILABLE",
+        "DOES_NOT_ADD_A_SECOND_INDEPENDENT_ORIGIN_IF_M5_T0_IS_ALREADY_USED"
+      ],
+      "qualified_reference": false
+    }
+  ],
+  "panel_implication": {
+    "named_lineage_count_in_M_cluster": 5,
+    "independent_origin_count_in_M_cluster": 1,
+    "known_additional_independent_origin_count_from_W3": 1,
+    "two_named_M_lineages_must_not_be_counted_as_two_independent_references": true,
+    "current_materialized_qualified_reference_count": 0,
+    "current_origin_independence_pass_for_any_registered_class": false
+  },
+  "claim_ceiling": {
+    "direct_mu_outcome_available": false,
+    "matched_generalist_shared_architecture_recovered": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "eta_promoted": false,
+    "e1_promoted": false
+  }
+}
