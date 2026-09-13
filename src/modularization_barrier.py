@@ -2,7 +2,26 @@
 
 from __future__ import annotations
 
+from math import isfinite
+from sys import float_info
 from typing import Dict, Tuple
+
+
+_DEFAULT_REL_TOL = 64.0 * float_info.epsilon
+
+
+def _finite_nonnegative(value: float, name: str) -> float:
+    value = float(value)
+    if not isfinite(value) or value < 0.0:
+        raise ValueError(f"{name} must be finite and non-negative")
+    return value
+
+
+def _relative_close(left: float, right: float, rel_tol: float) -> bool:
+    scale = max(abs(left), abs(right))
+    if scale == 0.0:
+        return left == right
+    return abs(left - right) <= rel_tol * scale
 
 
 def generic_decoupling_thresholds(
@@ -16,15 +35,19 @@ def generic_decoupling_thresholds(
     Caller should use this when recovery is known to be convex.
     """
 
-    if initial_marginal_recovery < 0.0:
-        raise ValueError("initial_marginal_recovery must be non-negative")
-    if full_recovery < 0.0:
-        raise ValueError("full_recovery must be non-negative")
-    if max_decoupling <= 0.0:
-        raise ValueError("max_decoupling must be positive")
-    local = initial_marginal_recovery
+    local = _finite_nonnegative(
+        initial_marginal_recovery, "initial_marginal_recovery"
+    )
+    full_recovery = _finite_nonnegative(full_recovery, "full_recovery")
+    max_decoupling = float(max_decoupling)
+    if not isfinite(max_decoupling) or max_decoupling <= 0.0:
+        raise ValueError("max_decoupling must be finite and positive")
     global_threshold = full_recovery / max_decoupling
-    if global_threshold + 1e-12 < local:
+    if not isfinite(global_threshold):
+        raise ValueError("global threshold overflow; rescale inputs")
+    if global_threshold < local and not _relative_close(
+        global_threshold, local, _DEFAULT_REL_TOL
+    ):
         raise ValueError("thresholds violate convex-recovery ordering")
     return local, global_threshold
 
@@ -33,22 +56,34 @@ def classify_linear_decoupling_cost(
     unit_cost: float,
     local_threshold: float,
     global_threshold: float,
-    tol: float = 1e-12,
+    tol: float = _DEFAULT_REL_TOL,
 ) -> str:
-    """Classify accessible release / finite jump / retained coupling."""
+    """Classify accessible release / finite jump / retained coupling.
 
-    if unit_cost < 0.0:
-        raise ValueError("unit_cost must be non-negative")
-    if local_threshold < 0.0 or global_threshold < local_threshold - tol:
+    ``tol`` is a dimensionless relative numerical tolerance.  The scientific
+    thresholds and unit cost share the same marginal-cost units, so no fixed
+    physical-unit band enters the classification.
+    """
+
+    unit_cost = _finite_nonnegative(unit_cost, "unit_cost")
+    local_threshold = _finite_nonnegative(local_threshold, "local_threshold")
+    global_threshold = _finite_nonnegative(global_threshold, "global_threshold")
+    tol = float(tol)
+    if not isfinite(tol) or tol < 0.0:
+        raise ValueError("tol must be finite and non-negative")
+    if global_threshold < local_threshold and not _relative_close(
+        global_threshold, local_threshold, tol
+    ):
         raise ValueError("require 0<=local_threshold<=global_threshold")
-    if unit_cost < local_threshold - tol:
-        return "locally_accessible_release"
-    if abs(unit_cost - local_threshold) <= tol:
+
+    if _relative_close(unit_cost, local_threshold, tol):
         return "local_neutral_boundary"
-    if unit_cost < global_threshold - tol:
-        return "finite_jump_barrier"
-    if abs(unit_cost - global_threshold) <= tol:
+    if unit_cost < local_threshold:
+        return "locally_accessible_release"
+    if _relative_close(unit_cost, global_threshold, tol):
         return "global_endpoint_neutral_boundary"
+    if unit_cost < global_threshold:
+        return "finite_jump_barrier"
     return "retained_coupling"
 
 
