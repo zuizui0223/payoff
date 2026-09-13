@@ -1,4 +1,4 @@
-from math import isclose
+from math import isclose, isfinite
 
 from src.three_function_example import (
     EDGES,
@@ -25,6 +25,10 @@ def test_three_function_global_topology_reserve_is_one_fifteenth():
     assert tuple(int(value) for value in receipt["best_released"]) == TWO_MODULE
     assert tuple(int(value) for value in receipt["second_released"]) == (1, 1, 1)
     assert isclose(float(receipt["global_reserve"]), 1.0 / 15.0, abs_tol=1e-12)
+    assert isfinite(float(receipt["best_linear_system_condition_inf"]))
+    assert isfinite(float(receipt["second_linear_system_condition_inf"]))
+    assert float(receipt["best_linear_system_condition_inf"]) >= 1.0
+    assert float(receipt["second_linear_system_condition_inf"]) >= 1.0
 
 
 def test_three_function_local_boundary_margins_are_exact():
@@ -67,3 +71,5 @@ def test_global_and_local_reserves_are_distinct_estimands():
     assert isclose(float(summary["global_reserve"]), 1.0 / 15.0, abs_tol=1e-12)
     assert isclose(float(summary["local_reserve"]), 13.0 / 45.0, abs_tol=1e-12)
     assert float(summary["local_reserve"]) > float(summary["global_reserve"])
+    assert "best_linear_system_condition_inf" in summary
+    assert "second_linear_system_condition_inf" in summary
