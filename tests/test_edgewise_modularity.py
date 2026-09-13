@@ -1,11 +1,12 @@
 from itertools import product
-from math import isclose
+from math import isclose, isfinite
 
 from src.edgewise_modularity import (
     best_vertex_topology,
     edge_pressures,
     edge_release_receipt,
     enumerate_vertex_topologies,
+    linear_system_condition_inf,
     net_gain_linear_cost,
     optimized_loss,
     optimized_phenotype,
@@ -28,6 +29,53 @@ def test_optimized_phenotype_solves_a_sensible_compromise():
     assert len(x) == 3
     assert min(optima) <= min(x) <= max(x) <= max(optima)
     assert optimized_loss(optima, weights, edges, couplings) >= 0.0
+
+
+def test_solver_is_invariant_to_common_problem_scale():
+    optima, weights, edges, couplings = example_problem()
+    expected = optimized_phenotype(optima, weights, edges, couplings)
+
+    # The old absolute 1e-15 pivot threshold rejected the 1e-18 version even
+    # though it is exactly the same optimization problem up to common scale.
+    for scale in (1e-18, 1e18):
+        observed = optimized_phenotype(
+            optima,
+            [scale * value for value in weights],
+            edges,
+            [scale * value for value in couplings],
+        )
+        assert all(
+            isclose(value, target, rel_tol=2e-13, abs_tol=2e-13)
+            for value, target in zip(observed, expected)
+        )
+
+
+def test_condition_number_is_scale_invariant_and_finite():
+    optima, weights, edges, couplings = example_problem()
+    expected = linear_system_condition_inf(optima, weights, edges, couplings)
+    assert isfinite(expected)
+    assert expected >= 1.0
+
+    for scale in (1e-18, 1e18):
+        observed = linear_system_condition_inf(
+            optima,
+            [scale * value for value in weights],
+            edges,
+            [scale * value for value in couplings],
+        )
+        assert isclose(observed, expected, rel_tol=2e-12, abs_tol=2e-12)
+
+
+def test_best_vertex_receipt_records_condition_number():
+    optima = [0.0, 1.0, 2.5]
+    weights = [1.0, 1.0, 1.0]
+    edges = [(0, 1), (1, 2)]
+    reference = [1.0, 1.0]
+    costs = [0.12, 0.3]
+    best = best_vertex_topology(optima, weights, edges, reference, costs)
+    condition = float(best["linear_system_condition_inf"])
+    assert isfinite(condition)
+    assert condition >= 1.0
 
 
 def test_edge_pressure_matches_finite_difference_in_coupling():

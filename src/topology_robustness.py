@@ -18,6 +18,7 @@ from typing import Dict, Sequence, Tuple
 from src.edgewise_modularity import (
     edge_pressures,
     enumerate_vertex_topologies,
+    linear_system_condition_inf,
 )
 
 Edge = Tuple[int, int]
@@ -40,12 +41,20 @@ def global_vertex_reserve(
         raise ValueError("at least one edge is required to define a runner-up topology")
     best = ordered[0]
     second = ordered[1]
+    best_condition = linear_system_condition_inf(
+        optima, trait_weights, edges, best["couplings"]
+    )
+    second_condition = linear_system_condition_inf(
+        optima, trait_weights, edges, second["couplings"]
+    )
     return {
         "best_released": best["released"],
         "best_net_gain": float(best["net_gain"]),
         "second_released": second["released"],
         "second_net_gain": float(second["net_gain"]),
         "global_reserve": float(best["net_gain"]) - float(second["net_gain"]),
+        "best_linear_system_condition_inf": best_condition,
+        "second_linear_system_condition_inf": second_condition,
     }
 
 
@@ -121,7 +130,7 @@ def topology_robustness_summary(
     reference_couplings: Sequence[float],
     linear_costs: Sequence[float],
 ) -> Dict[str, object]:
-    """Return global and local reserves for the best vertex architecture."""
+    """Return global/local reserves plus conditioning for the leading topologies."""
 
     global_receipt = global_vertex_reserve(
         optima, trait_weights, edges, reference_couplings, linear_costs
