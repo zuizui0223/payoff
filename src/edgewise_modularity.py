@@ -258,10 +258,13 @@ def _current_couplings(
     if len(reference_couplings) != len(decouplings):
         raise ValueError("reference_couplings and decouplings must have same length")
     current = []
+    roundoff_factor = 64.0 * float_info.epsilon
     for reference, release in zip(reference_couplings, decouplings):
         if reference < 0.0:
             raise ValueError("reference couplings must be non-negative")
-        if release < 0.0 or release > reference + 1e-12:
+        scale = max(abs(reference), abs(release))
+        roundoff_slack = roundoff_factor * scale
+        if release < 0.0 or release - reference > roundoff_slack:
             raise ValueError("decoupling must lie in [0,reference coupling]")
         current.append(max(0.0, reference - release))
     return current
