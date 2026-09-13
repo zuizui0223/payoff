@@ -14,8 +14,29 @@ The difference from rbar is the temporal rescue premium.
 
 from __future__ import annotations
 
-from math import asinh, cosh, sinh, sqrt, tanh
+from math import asinh, cosh, exp, log, log1p, sinh, sqrt, tanh
 from typing import Dict
+
+
+def _asinh_ratio_sinh(numerator: float, denominator: float, argument: float) -> float:
+    """Return asinh((numerator/denominator)*sinh(argument)) stably.
+
+    All arguments used here are non-negative.  Evaluating ``sinh(argument)``
+    directly overflows near 710 even when the final asinh value is finite.
+    Work on the log scale and only exponentiate while the scaled sinh itself
+    remains representable.
+    """
+
+    if numerator == 0.0 or argument == 0.0:
+        return 0.0
+    if argument < 20.0:
+        log_sinh = log(sinh(argument))
+    else:
+        log_sinh = argument - log(2.0) + log1p(-exp(-2.0 * argument))
+    log_scaled_sinh = log(numerator) - log(denominator) + log_sinh
+    if log_scaled_sinh > 700.0:
+        return log_scaled_sinh + log(2.0)
+    return asinh(exp(log_scaled_sinh))
 
 
 def anti_phase_floquet_exponent(
@@ -33,7 +54,8 @@ def anti_phase_floquet_exponent(
     if m == 0.0:
         return mean_margin
     delta = sqrt(m * m + x * x)
-    return mean_margin - m + asinh((m / delta) * sinh(delta * tau)) / tau
+    growth_term = _asinh_ratio_sinh(m, delta, delta * tau)
+    return mean_margin - m + growth_term / tau
 
 
 def anti_phase_temporal_premium(
@@ -56,7 +78,7 @@ def dimensionless_premium(u: float, v: float) -> float:
     if u == 0.0 or v == 0.0:
         return 0.0
     d = sqrt(u * u + v * v)
-    return -u + asinh((u / d) * sinh(d))
+    return -u + _asinh_ratio_sinh(u, d, d)
 
 
 def dimensionless_premium_derivative(u: float, v: float) -> float:
