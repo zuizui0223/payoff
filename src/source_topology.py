@@ -2,16 +2,36 @@
 
 from __future__ import annotations
 
+from math import isclose, isfinite
+from sys import float_info
 from typing import Dict, Sequence
 
 
-def unique_best_source_index(margins: Sequence[float], tol: float = 1e-12) -> int:
-    """Return the unique index attaining the largest local invasion margin."""
+def unique_best_source_index(
+    margins: Sequence[float], tol: float = 64.0 * float_info.epsilon
+) -> int:
+    """Return the unique index attaining the largest local invasion margin.
+
+    ``tol`` is a dimensionless relative numerical tolerance.  No fixed
+    rate-unit band is used, so common positive rescaling of all local margins
+    preserves source uniqueness.
+    """
 
     if not margins:
         raise ValueError("margins cannot be empty")
-    maximum = max(margins)
-    winners = [i for i, value in enumerate(margins) if abs(value - maximum) <= tol]
+    numeric = [float(value) for value in margins]
+    if not all(isfinite(value) for value in numeric):
+        raise ValueError("margins must be finite")
+    tol = float(tol)
+    if not isfinite(tol) or tol < 0.0:
+        raise ValueError("tol must be finite and non-negative")
+
+    maximum = max(numeric)
+    winners = [
+        i
+        for i, value in enumerate(numeric)
+        if isclose(value, maximum, rel_tol=tol, abs_tol=0.0)
+    ]
     if len(winners) != 1:
         raise ValueError("the largest local margin must be unique")
     return winners[0]
