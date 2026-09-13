@@ -98,7 +98,7 @@ def seasonal_matrix_exponential(
     b = migration_rate
     center = 0.5 * (a + d)
     contrast = 0.5 * (a - d)
-    delta = sqrt(contrast * contrast + b * b)
+    delta = hypot(contrast, b)
     scale = exp(center * duration)
     if delta == 0.0:
         return ((scale, 0.0), (0.0, scale))
@@ -116,6 +116,44 @@ def seasonal_matrix_exponential(
             scale * (c - s_over_delta * contrast),
         ),
     )
+
+
+def _scaled_seasonal_propagator(
+    r1: float, r2: float, migration_rate: float, duration: float
+) -> Tuple[Matrix2, float]:
+    """Return a bounded seasonal propagator and its extracted log scale.
+
+    For one season,
+        exp(A tau) = exp[(center+delta)tau] * N,
+    where N has eigenvalues 1 and exp(-2 delta tau).  Constructing N directly
+    keeps all entries bounded even when the full matrix exponential is far
+    outside binary64 range.
+    """
+
+    a = r1 - migration_rate
+    d = r2 - migration_rate
+    b = migration_rate
+    center = 0.5 * (a + d)
+    contrast = 0.5 * (a - d)
+    delta = hypot(contrast, b)
+    if delta == 0.0:
+        return ((1.0, 0.0), (0.0, 1.0)), center * duration
+
+    u = delta * duration
+    decay = exp(-2.0 * u)
+    c_scaled = 0.5 * (1.0 + decay)
+    s_scaled_over_delta = 0.5 * (1.0 - decay) / delta
+    normalized = (
+        (
+            c_scaled + s_scaled_over_delta * contrast,
+            s_scaled_over_delta * b,
+        ),
+        (
+            s_scaled_over_delta * b,
+            c_scaled - s_scaled_over_delta * contrast,
+        ),
+    )
+    return normalized, (center + delta) * duration
 
 
 def commutator_scalar(
@@ -149,13 +187,38 @@ def period_matrix(seasons: Sequence[Season], migration_rate: float) -> Matrix2:
 
 
 def floquet_exponent(seasons: Sequence[Season], migration_rate: float) -> float:
-    """Return the exact principal Floquet exponent per unit time."""
+    """Return the exact principal Floquet exponent per unit time stably.
+
+    The explicit period matrix can overflow even when its logarithmic growth
+    rate is finite.  This routine therefore factors the dominant exponential
+    scale from every season and renormalizes the bounded matrix product after
+    each multiplication.  ``period_matrix`` remains available when callers
+    explicitly need the unscaled propagator in a representable regime.
+    """
 
     _validate_seasons(seasons)
-    propagator = period_matrix(seasons, migration_rate)
-    radius = _spectral_radius_positive_2x2(propagator)
+    if migration_rate < 0.0:
+        raise ValueError("migration_rate must be non-negative")
+
+    product: Matrix2 = ((1.0, 0.0), (0.0, 1.0))
+    log_scale = 0.0
+    for r1, r2, duration in seasons:
+        seasonal, seasonal_log_scale = _scaled_seasonal_propagator(
+            r1, r2, migration_rate, duration
+        )
+        product = _matmul(seasonal, product)
+        magnitude = _matrix_max_abs(product)
+        if magnitude <= 0.0:
+            raise ValueError("scaled period propagator collapsed to zero")
+        product = (
+            (product[0][0] / magnitude, product[0][1] / magnitude),
+            (product[1][0] / magnitude, product[1][1] / magnitude),
+        )
+        log_scale += seasonal_log_scale + log(magnitude)
+
+    radius = _spectral_radius_positive_2x2(product)
     total_time = sum(duration for _, _, duration in seasons)
-    return log(radius) / total_time
+    return (log_scale + log(radius)) / total_time
 
 
 def time_averaged_operator_exponent(
@@ -208,8 +271,6 @@ def two_season_closed_form(seasons: Sequence[Season], migration_rate: float) -> 
     center_rate = (a1 * tau1 + a2 * tau2) / total_time
 
     if d1 == 0.0 or d2 == 0.0:
-        # A zero traceless part contributes the identity in the hyperbolic
-        # factor. Since the corresponding u is zero, acosh(C)=u1+u2.
         return center_rate + (u1 + u2) / total_time
 
     alignment = (
@@ -275,7 +336,7 @@ def fast_switching_premium_coefficient(
     contrast_b = season_b[0] - season_b[1]
     delta_contrast = contrast_a - contrast_b
     x_bar = 0.5 * (w * contrast_a + (1.0 - w) * contrast_b)
-    delta_bar = sqrt(x_bar * x_bar + migration_rate * migration_rate)
+    delta_bar = hypot(x_bar, migration_rate)
     if delta_bar == 0.0:
         return 0.0
     return (
@@ -328,6 +389,10 @@ def _matmul(a: Matrix2, b: Matrix2) -> Matrix2:
             a[1][0] * b[0][1] + a[1][1] * b[1][1],
         ),
     )
+
+
+def _matrix_max_abs(matrix: Matrix2) -> float:
+    return max(abs(value) for row in matrix for value in row)
 
 
 def _spectral_radius_positive_2x2(matrix: Matrix2) -> float:
