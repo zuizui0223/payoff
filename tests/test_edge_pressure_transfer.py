@@ -28,6 +28,26 @@ def test_three_function_transfer_matrix_is_exact_and_symmetric():
             assert isclose(observed[i][j], observed[j][i], abs_tol=1e-12)
 
 
+def test_transfer_matrix_respects_common_problem_scale():
+    reference = edge_transfer_matrix(OPTIMA, WEIGHTS, EDGES, REFERENCE_COUPLINGS)
+    for scale in (1e-18, 1e18):
+        observed = edge_transfer_matrix(
+            OPTIMA,
+            tuple(scale * value for value in WEIGHTS),
+            EDGES,
+            tuple(scale * value for value in REFERENCE_COUPLINGS),
+        )
+        for i in range(3):
+            for j in range(3):
+                # M scales by s, so M^-1 and the transfer Hessian scale by 1/s.
+                assert isclose(
+                    observed[i][j] * scale,
+                    reference[i][j],
+                    rel_tol=2e-12,
+                    abs_tol=2e-12,
+                )
+
+
 def test_transfer_diagonal_equals_current_edge_pressure():
     transfer = edge_transfer_matrix(OPTIMA, WEIGHTS, EDGES, REFERENCE_COUPLINGS)
     pressures = edge_pressures(OPTIMA, WEIGHTS, EDGES, REFERENCE_COUPLINGS)
