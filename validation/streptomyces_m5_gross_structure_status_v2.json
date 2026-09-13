@@ -1,0 +1,60 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_GROSS_STRUCTURE_STATUS_V2",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "candidate_id": "M5_T0",
+  "status": "TERMINAL_LOSSES_SOURCE_RESOLVED_ADDITIONAL_GROSS_STRUCTURE_OPEN",
+  "preexisting_source_record": {
+    "source": "ZHANG_ET_AL_2022_FIG4_SOURCE_DATA",
+    "recovery_workflow_run_id": 34672630586,
+    "recovery_artifact_id": 10291072529,
+    "recovery_artifact_sha256": "bbb031b39967893a0c372109cfdbf4d3f54b3b6380cc74c770e8a7d18edfb478",
+    "m5_t0_left_terminal_deletion_bp": 372936,
+    "m5_t0_right_terminal_deletion_bp": 864624,
+    "m5_t0_total_terminal_deletion_bp": 1237560,
+    "m5_transfer25_additional_left_deletion_bp": 0,
+    "m5_transfer25_additional_right_deletion_bp": 0
+  },
+  "public_pacbio_audit": {
+    "run_id": 34671479118,
+    "artifact_id": 10289864089,
+    "artifact_sha256": "3bda2e118e951e83d04a5ebba6f09115d2ee866291d27d2561fb7b082e07abde",
+    "m5_pacbio_run": "SRR16954720",
+    "wt_pacbio_run": "SRR16954715",
+    "reference_accession": "NC_003888.3",
+    "m5_central_depth": 92.1028,
+    "wt_central_depth": 178.524,
+    "m5_raw_gross_sv_call_count": 3,
+    "wt_raw_gross_sv_call_count": 0,
+    "observed_events": [
+      {"event_type": "BND", "breakend_1": 372932, "breakend_2": 6139888, "status": "DETECTED_PRECISE_BUT_STRUCTURAL_INTERPRETATION_OPEN"},
+      {"event_type": "DUP", "start": 3825139, "end": 3908148, "size_bp": 83009, "status": "DETECTED_AND_CATALOGUED"},
+      {"event_type": "BND", "breakend_1": 7802883, "breakend_2": 7802269, "status": "DETECTED_PRECISE_BUT_STRUCTURAL_INTERPRETATION_OPEN"}
+    ]
+  },
+  "adjudication": {
+    "terminal_deletion_sizes_resolved_from_preexisting_source_data": true,
+    "terminal_deletion_persistence_supported_through_transfer25": true,
+    "additional_gross_events_detected": true,
+    "all_additional_gross_structure_interpreted_for_reference_qualification": false,
+    "gross_secondary_rearrangement_unresolved": true,
+    "r2_closed": false,
+    "blockers": [
+      "LEFT_ASSOCIATED_BND_STRUCTURAL_INTERPRETATION_OPEN",
+      "RIGHT_ASSOCIATED_BND_STRUCTURAL_INTERPRETATION_OPEN"
+    ]
+  },
+  "permitted_recovery_routes": [
+    "PREEXISTING_AUTHOR_OR_ARCHIVE_CURATED_BREAKPOINT_METADATA",
+    "TARGET_EXCLUDED_INDEPENDENTLY_CALIBRATED_STRUCTURAL_AUDIT_V2"
+  ],
+  "forbidden_recovery_route": "DO_NOT_TUNE_A_TERMINAL_MAPPING_DEPTH_THRESHOLD_TO_M5_TRACE_COVERAGE",
+  "claim_boundary": {
+    "terminal_deletion_record_is_empirical_progress": true,
+    "r2_gross_structure_resolved": false,
+    "physical_stock_access_confirmed": false,
+    "realization_d_band_available": false,
+    "qualified_d_reference": false,
+    "qualified_d_reference_count_increment": 0,
+    "architecture_specific_inference_open": false
+  }
+}
