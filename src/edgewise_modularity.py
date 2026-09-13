@@ -15,6 +15,7 @@ box vertex, so small graphs can be audited by enumerating released-edge sets.
 from __future__ import annotations
 
 from itertools import product
+from sys import float_info
 from typing import Dict, List, Sequence, Tuple
 
 Edge = Tuple[int, int]
@@ -29,19 +30,7 @@ def optimized_phenotype(
     """Return unique optimized phenotype x* for edgewise quadratic coupling."""
 
     _validate_problem(optima, trait_weights, edges, couplings)
-    n = len(optima)
-    matrix = [[0.0] * n for _ in range(n)]
-    rhs = [0.0] * n
-    for i, (theta, weight) in enumerate(zip(optima, trait_weights)):
-        matrix[i][i] = float(weight)
-        rhs[i] = weight * theta
-
-    for (i, j), coupling in zip(edges, couplings):
-        matrix[i][i] += coupling
-        matrix[j][j] += coupling
-        matrix[i][j] -= coupling
-        matrix[j][i] -= coupling
-
+    matrix, rhs = _build_linear_system(optima, trait_weights, edges, couplings)
     return _solve_linear_system(matrix, rhs)
 
 
@@ -63,6 +52,23 @@ def optimized_loss(
         for (i, j), coupling in zip(edges, couplings)
     )
     return base + coupling_loss
+
+
+def linear_system_condition_inf(
+    optima: Sequence[float],
+    trait_weights: Sequence[float],
+    edges: Sequence[Edge],
+    couplings: Sequence[float],
+) -> float:
+    """Return the infinity-norm condition number of the phenotype system.
+
+    The diagnostic is scale invariant: multiplying every trait weight and
+    coupling by the same positive constant leaves the reported value unchanged.
+    """
+
+    _validate_problem(optima, trait_weights, edges, couplings)
+    matrix, _ = _build_linear_system(optima, trait_weights, edges, couplings)
+    return _condition_number_inf(matrix)
 
 
 def edge_pressures(
@@ -193,12 +199,19 @@ def best_vertex_topology(
     reference_couplings: Sequence[float],
     linear_costs: Sequence[float],
 ) -> Dict[str, object]:
-    """Return one maximum-net-gain vertex architecture."""
+    """Return one maximum-net-gain vertex architecture with solver diagnostics."""
 
     rows = enumerate_vertex_topologies(
         optima, trait_weights, edges, reference_couplings, linear_costs
     )
-    return max(rows, key=lambda row: float(row["net_gain"]))
+    best = dict(max(rows, key=lambda row: float(row["net_gain"])))
+    best["linear_system_condition_inf"] = linear_system_condition_inf(
+        optima,
+        trait_weights,
+        edges,
+        best["couplings"],
+    )
+    return best
 
 
 def edge_release_receipt(
@@ -274,23 +287,92 @@ def _validate_problem(
             raise ValueError("edges must connect distinct valid node indices")
 
 
+def _build_linear_system(
+    optima: Sequence[float],
+    trait_weights: Sequence[float],
+    edges: Sequence[Edge],
+    couplings: Sequence[float],
+) -> Tuple[List[List[float]], List[float]]:
+    n = len(optima)
+    matrix = [[0.0] * n for _ in range(n)]
+    rhs = [0.0] * n
+    for i, (theta, weight) in enumerate(zip(optima, trait_weights)):
+        matrix[i][i] = float(weight)
+        rhs[i] = float(weight) * float(theta)
+
+    for (i, j), coupling in zip(edges, couplings):
+        c = float(coupling)
+        matrix[i][i] += c
+        matrix[j][j] += c
+        matrix[i][j] -= c
+        matrix[j][i] -= c
+    return matrix, rhs
+
+
+def _matrix_inf_norm(matrix: Sequence[Sequence[float]]) -> float:
+    if not matrix:
+        return 0.0
+    return max(sum(abs(float(value)) for value in row) for row in matrix)
+
+
+def _condition_number_inf(matrix: Sequence[Sequence[float]]) -> float:
+    """Return ||A||_inf ||A^-1||_inf using the same fail-closed solver."""
+
+    n = len(matrix)
+    if n == 0 or any(len(row) != n for row in matrix):
+        raise ValueError("matrix must be non-empty and square")
+    norm_a = _matrix_inf_norm(matrix)
+    if norm_a == 0.0:
+        raise ValueError("singular linear system")
+
+    inverse_columns: List[List[float]] = []
+    for col in range(n):
+        rhs = [0.0] * n
+        rhs[col] = 1.0
+        inverse_columns.append(_solve_linear_system(matrix, rhs))
+
+    norm_inverse = max(
+        sum(abs(inverse_columns[col][row]) for col in range(n))
+        for row in range(n)
+    )
+    return norm_a * norm_inverse
+
+
 def _solve_linear_system(matrix: Sequence[Sequence[float]], rhs: Sequence[float]) -> List[float]:
-    """Solve a dense positive-definite linear system with pivoted Gauss-Jordan."""
+    """Solve a dense system with scale-invariant partial pivoting.
+
+    Pivot admissibility is judged relative to the original scale of each row,
+    not against an absolute floating-point threshold. This preserves a common
+    rescaling of the biological weights/couplings while still failing closed on
+    cancellation-dominated, numerically singular pivots.
+    """
 
     n = len(rhs)
     if len(matrix) != n or any(len(row) != n for row in matrix):
         raise ValueError("matrix must be square and match rhs")
+    if n == 0:
+        return []
+
     augmented = [
         [float(value) for value in row] + [float(rhs_i)]
         for row, rhs_i in zip(matrix, rhs)
     ]
+    row_scales = [max(abs(float(value)) for value in row) for row in matrix]
+    if any(scale == 0.0 for scale in row_scales):
+        raise ValueError("singular linear system")
+
+    relative_tol = 64.0 * float_info.epsilon
 
     for col in range(n):
-        pivot = max(range(col, n), key=lambda row: abs(augmented[row][col]))
-        if abs(augmented[pivot][col]) < 1e-15:
-            raise ValueError("singular linear system")
+        pivot = max(
+            range(col, n),
+            key=lambda row: abs(augmented[row][col]) / row_scales[row],
+        )
+        if abs(augmented[pivot][col]) <= relative_tol * row_scales[pivot]:
+            raise ValueError("singular or numerically ill-conditioned linear system")
         if pivot != col:
             augmented[col], augmented[pivot] = augmented[pivot], augmented[col]
+            row_scales[col], row_scales[pivot] = row_scales[pivot], row_scales[col]
 
         pivot_value = augmented[col][col]
         for j in range(col, n + 1):
