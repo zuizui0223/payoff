@@ -19,6 +19,7 @@ although individual cross-edge entries can be positive or negative.
 from __future__ import annotations
 
 from math import sqrt
+from sys import float_info
 from typing import List, Sequence, Tuple
 
 from src.edgewise_modularity import optimized_phenotype
@@ -156,7 +157,7 @@ def _bilinear(left: Sequence[float], matrix, right: Sequence[float]) -> float:
 
 
 def _inverse_spd(matrix: Sequence[Sequence[float]]) -> List[List[float]]:
-    """Gauss-Jordan inverse for small dense SPD matrices used in diagnostics."""
+    """Gauss-Jordan inverse with scale-invariant partial pivoting."""
 
     n = len(matrix)
     if n == 0 or any(len(row) != n for row in matrix):
@@ -166,12 +167,21 @@ def _inverse_spd(matrix: Sequence[Sequence[float]]) -> List[List[float]]:
         + [1.0 if i == j else 0.0 for j in range(n)]
         for i, row in enumerate(matrix)
     ]
+    row_scales = [max(abs(float(value)) for value in row) for row in matrix]
+    if any(scale == 0.0 for scale in row_scales):
+        raise ValueError("matrix is singular")
+    relative_tol = 64.0 * float_info.epsilon
     width = 2 * n
     for col in range(n):
-        pivot = max(range(col, n), key=lambda row: abs(augmented[row][col]))
-        if abs(augmented[pivot][col]) < 1e-15:
-            raise ValueError("matrix is singular")
-        augmented[col], augmented[pivot] = augmented[pivot], augmented[col]
+        pivot = max(
+            range(col, n),
+            key=lambda row: abs(augmented[row][col]) / row_scales[row],
+        )
+        if abs(augmented[pivot][col]) <= relative_tol * row_scales[pivot]:
+            raise ValueError("matrix is singular or numerically ill-conditioned")
+        if pivot != col:
+            augmented[col], augmented[pivot] = augmented[pivot], augmented[col]
+            row_scales[col], row_scales[pivot] = row_scales[pivot], row_scales[col]
         scale = augmented[col][col]
         for j in range(width):
             augmented[col][j] /= scale
