@@ -1,0 +1,170 @@
+name: m5-bgi-target-readout
+
+on:
+  push:
+    branches:
+      - m5-bgi-target-open-v1
+
+jobs:
+  target-readout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mapping tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq minimap2 samtools
+          python -m pip install --quiet biopython
+
+      - name: Verify registered target-opening license before reading M5
+        shell: bash
+        run: |
+          set -euxo pipefail
+          PYTHONPATH=. python - <<'PY'
+          import json
+          from src.direct_mu_m5_bgi_target_gate import FrozenCalibration, adjudicate_m5_target_opening
+          cal=json.load(open('validation/streptomyces_m5_bgi_response_blind_calibration_result_v1.json'))
+          reg=json.load(open('validation/streptomyces_m5_bgi_target_opening_v1.json'))
+          frozen=FrozenCalibration(
+              receipt_id=cal['receipt_id'],
+              calibration_qualified=cal['result']['calibration_qualified'],
+              target_candidate_id=cal['target_candidate'],
+              target_bgi_ratios_opened_for_calibration=cal['target_bgi_run_opened'],
+              absence_max_ratio=cal['result']['absence_max_ratio'],
+              presence_min_ratio=cal['result']['presence_min_ratio'],
+              core_panel=tuple(cal['frozen_rules']['bgi_normalization_panel']),
+              absent_pair_count=cal['result']['absent_pair_count'],
+              present_pair_count=cal['result']['present_pair_count'],
+              absent_candidate_count=cal['result']['absent_candidate_count'],
+              present_candidate_count=cal['result']['present_candidate_count'],
+          )
+          dec=adjudicate_m5_target_opening(frozen)
+          if not dec.target_opening_allowed:
+              raise SystemExit(f'target opening blocked: {dec.blockers}')
+          if reg['status'] != 'OPENING_LICENSED_TARGET_UNOPENED':
+              raise SystemExit('registry not licensed-unopened')
+          if reg['target_bgi_ratios_opened'] or not reg['target_opening_allowed']:
+              raise SystemExit('registry opening flags invalid')
+          if reg['target_bgi_run'] != 'SRR16954696':
+              raise SystemExit('wrong target run')
+          print({'licensed': True, 'absence_max': dec.absence_max_ratio, 'presence_min': dec.presence_min_ratio})
+          PY
+
+      - name: Recover reference and frozen target/core loci
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_bgi_target
+          mkdir -p "$root/bgi"
+          curl -L --fail --retry 3 \
+            'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_003888.3&rettype=gbwithparts&retmode=text' \
+            -o "$root/NC_003888.3.gb"
+          python - <<'PY'
+          import csv
+          from Bio import SeqIO
+          from pathlib import Path
+          root=Path('outputs/m5_bgi_target')
+          rec=SeqIO.read(root/'NC_003888.3.gb','genbank')
+          SeqIO.write(rec, root/'NC_003888.3.fa','fasta')
+          targets={'SCO7662','SCO7350','SCO7036','SCO3879'}
+          core={'SCO3000','SCO3300','SCO3600','SCO3900','SCO4200','SCO4500','SCO4800','SCO5100','SCO5400'}
+          wanted=targets|core
+          found={}
+          for feat in rec.features:
+              if feat.type not in {'gene','CDS'}:
+                  continue
+              aliases=set(feat.qualifiers.get('locus_tag',[])) | set(feat.qualifiers.get('old_locus_tag',[]))
+              for legacy in wanted & aliases:
+                  row=(legacy,(feat.qualifiers.get('locus_tag') or [''])[0],int(feat.location.start)+1,int(feat.location.end),feat.type)
+                  if legacy not in found or (found[legacy][4] != 'gene' and feat.type == 'gene'):
+                      found[legacy]=row
+          missing=wanted-set(found)
+          if missing:
+              raise SystemExit(f'missing frozen loci: {sorted(missing)}')
+          with (root/'loci.tsv').open('w',newline='') as h:
+              w=csv.writer(h,delimiter='\t',lineterminator='\n')
+              w.writerow(['legacy_locus','current_locus','start','end'])
+              for legacy in sorted(found):
+                  w.writerow(found[legacy][:4])
+          with (root/'loci.bed').open('w') as h:
+              for legacy,current,start,end,_ in sorted(found.values()):
+                  h.write(f'NC_003888.3\t{start-1}\t{end}\t{legacy}\t{current}\n')
+          PY
+
+      - name: Open only the licensed M5 BGI target run
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_bgi_target
+          run=SRR16954696
+          meta_url="https://www.ebi.ac.uk/ena/portal/api/filereport?accession=${run}&result=read_run&fields=run_accession,fastq_ftp&format=tsv"
+          curl -L --fail --retry 3 "$meta_url" -o "$root/bgi/meta.tsv"
+          python - "$root/bgi/meta.tsv" "$root/bgi/urls.txt" <<'PY'
+          import csv, pathlib, sys
+          rows=list(csv.DictReader(open(sys.argv[1]), delimiter='\t'))
+          if len(rows)!=1 or rows[0]['run_accession']!='SRR16954696':
+              raise SystemExit('unexpected ENA target metadata')
+          urls=[x.strip() for x in rows[0]['fastq_ftp'].split(';') if x.strip()]
+          if not urls:
+              raise SystemExit('no target FASTQ URL')
+          pathlib.Path(sys.argv[2]).write_text('\n'.join(urls)+'\n')
+          PY
+          while read -r u; do
+            [ -z "$u" ] || curl -L --fail --retry 3 "https://$u" -o "$root/bgi/$(basename "$u")"
+          done < "$root/bgi/urls.txt"
+
+      - name: Map BGI target and measure frozen loci
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_bgi_target
+          minimap2 -t 4 -ax sr "$root/NC_003888.3.fa" "$root"/bgi/*.fastq.gz | samtools sort -@ 4 -o "$root/m5.bgi.bam"
+          samtools index "$root/m5.bgi.bam"
+          samtools bedcov "$root/loci.bed" "$root/m5.bgi.bam" > "$root/loci.bedcov.tsv"
+          python - "$root/loci.bedcov.tsv" "$root/target_locus_depths.tsv" <<'PY'
+          import csv, sys
+          rows=[]
+          for line in open(sys.argv[1]):
+              chrom,start0,end,legacy,current,total=line.rstrip().split('\t')[:6]
+              start0=int(start0); end=int(end); total=float(total)
+              rows.append({
+                  'legacy_locus':legacy,
+                  'current_locus':current,
+                  'start':start0+1,
+                  'end':end,
+                  'mean_depth':total/(end-start0),
+              })
+          with open(sys.argv[2],'w',newline='') as h:
+              w=csv.DictWriter(h,fieldnames=['legacy_locus','current_locus','start','end','mean_depth'],delimiter='\t',lineterminator='\n')
+              w.writeheader(); w.writerows(rows)
+          PY
+          samtools flagstat "$root/m5.bgi.bam" > "$root/m5.bgi.flagstat.txt"
+
+      - name: Adjudicate primary BGI marker class with frozen calibration
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_bgi_target
+          PYTHONPATH=. python scripts/adjudicate_m5_bgi_target.py \
+            --calibration validation/streptomyces_m5_bgi_response_blind_calibration_result_v1.json \
+            --opening-registry validation/streptomyces_m5_bgi_target_opening_v1.json \
+            --sequence-map validation/streptomyces_direct_mu_sequence_sample_map_v1.json \
+            --target-depths "$root/target_locus_depths.tsv" \
+            --output "$root/m5_bgi_target_result.json"
+          sha256sum \
+            "$root/target_locus_depths.tsv" \
+            "$root/m5_bgi_target_result.json" \
+            "$root/m5.bgi.flagstat.txt" \
+            > "$root/checksums.sha256"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m5-bgi-target-readout-v1
+          path: |
+            outputs/m5_bgi_target/target_locus_depths.tsv
+            outputs/m5_bgi_target/m5_bgi_target_result.json
+            outputs/m5_bgi_target/m5.bgi.flagstat.txt
+            outputs/m5_bgi_target/checksums.sha256
