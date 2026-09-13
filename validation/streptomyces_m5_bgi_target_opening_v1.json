@@ -3,8 +3,9 @@
   "system_id": "STREPTOMYCES_COELICOLOR",
   "candidate_id": "M5_T0",
   "target_bgi_run": "SRR16954696",
-  "status": "OPENING_LICENSED_TARGET_UNOPENED",
+  "status": "TARGET_OPENED_RESULT_FROZEN",
   "required_calibration_receipt": "STREPTOMYCES_M5_BGI_RESPONSE_BLIND_CALIBRATION_RESULT_V1",
+  "target_result_receipt": "STREPTOMYCES_M5_BGI_TARGET_RESULT_V1",
   "required_core_panel": [
     "SCO3000", "SCO3300", "SCO3600", "SCO3900", "SCO4200",
     "SCO4500", "SCO4800", "SCO5100", "SCO5400"
@@ -27,12 +28,17 @@
     "present_candidate_count": 6,
     "unresolved_pair_count": 0
   },
-  "target_bgi_ratios_opened": false,
-  "target_opening_allowed": true,
-  "current_blocker": null,
-  "next_action": "OPEN_ONLY_SRR16954696_AND_RECONSTRUCT_REGISTERED_MARKER_PATTERN_WITH_FROZEN_THRESHOLDS",
+  "target_bgi_ratios_opened": true,
+  "target_opening_allowed": false,
+  "opening_license_consumed": true,
+  "current_blocker": "PRIMARY_BGI_MARKER_PATTERN_UNRESOLVED",
+  "next_action": "DO_NOT_REFIT_THRESHOLDS_OR_USE_PACBIO_AS_POST_HOC_RESCUE; RESOLVE_M5_ONLY_VIA_PREDECLARED_ORTHOGONAL_MATERIAL_ASSAY_IF_STOCK_ACCESS_IS_CONFIRMED, OTHERWISE_ADVANCE_FROZEN_CANDIDATE_QUEUE",
   "claim_ceiling": {
     "m5_primary_bgi_class": null,
+    "sco7662_state": "ABSENT",
+    "sco7350_state": "ABSENT",
+    "sco7036_state": "UNRESOLVED",
+    "sco3879_state": "PRESENT",
     "registered_deletion_class_qualified": false,
     "r2_gross_structure_resolved": false,
     "physical_stock_access_confirmed": false,
