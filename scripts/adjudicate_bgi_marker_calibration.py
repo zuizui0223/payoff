@@ -3,9 +3,14 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 from pathlib import Path
 
-from src.direct_mu_bgi_response_blind_calibration import (
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src.direct_mu_bgi_response_blind_calibration import (  # noqa: E402
     CalibrationPair,
     calibrate_bgi_marker_thresholds,
 )
@@ -33,7 +38,7 @@ def main() -> None:
     payload = {
         "receipt_id": "STREPTOMYCES_M5_BGI_MARKER_CALIBRATION_RESULT_V1",
         "target_candidate_id": "M5_T0",
-        "target_data_used": false,
+        "target_data_used": False,
         "calibration_qualified": result.calibration_qualified,
         "absence_max_ratio": result.absence_max_ratio,
         "presence_min_ratio": result.presence_min_ratio,
@@ -43,12 +48,13 @@ def main() -> None:
         "present_candidate_count": result.present_candidate_count,
         "unresolved_pair_count": result.unresolved_pair_count,
         "blockers": list(result.blockers),
-        "m5_bgi_marker_class_opened": false,
+        "m5_bgi_marker_class_opened": False,
         "qualified_d_reference_count_increment": 0,
-        "architecture_specific_inference_open": false,
+        "architecture_specific_inference_open": False,
     }
     text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
     if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(text, encoding="utf-8")
     else:
         print(text, end="")
