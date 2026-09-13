@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Optional, Tuple
 
+from .numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
 from .payoff_game import interior_equilibrium, payoff_gap
 
 
@@ -34,11 +35,12 @@ def potential_rate(p: float, phi: float, eta: float) -> float:
 
 
 def coordination_basin_sizes(
-    phi: float, eta: float, tol: float = 1e-12
+    phi: float, eta: float, tol: float = DEFAULT_RELATIVE_TOL
 ) -> Optional[Tuple[float, float]]:
     """Return (S_basin, D_basin) inside the strict coordination wedge."""
 
-    if eta <= tol:
+    band = relative_band((phi, eta), tol)
+    if eta <= band:
         return None
     p_star = interior_equilibrium(phi, eta, tol=tol)
     if p_star is None:
@@ -47,13 +49,14 @@ def coordination_basin_sizes(
 
 
 def risk_dominant_architecture(
-    phi: float, eta: float, tol: float = 1e-12
+    phi: float, eta: float, tol: float = DEFAULT_RELATIVE_TOL
 ) -> Optional[str]:
     """Return S, D, or tie inside the strict coordination wedge.
 
     Returns None outside that wedge, where deterministic basin-size risk
     dominance between two locally stable pure states is not the relevant
-    classification.
+    classification.  ``tol`` is dimensionless and is also used for the basin
+    fraction tie check.
     """
 
     basins = coordination_basin_sizes(phi, eta, tol=tol)
@@ -68,11 +71,12 @@ def risk_dominant_architecture(
 
 
 def coexistence_frequency(
-    phi: float, eta: float, tol: float = 1e-12
+    phi: float, eta: float, tol: float = DEFAULT_RELATIVE_TOL
 ) -> Optional[float]:
     """Return stable D frequency inside the strict negative-feedback wedge."""
 
-    if eta >= -tol:
+    band = relative_band((phi, eta), tol)
+    if eta >= -band:
         return None
     return interior_equilibrium(phi, eta, tol=tol)
 
