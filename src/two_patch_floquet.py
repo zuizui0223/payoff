@@ -15,13 +15,61 @@ operators commute.
 
 from __future__ import annotations
 
-from math import acosh, cosh, exp, log, sqrt
+from math import cosh, exp, expm1, hypot, log, log1p, sqrt
 from typing import Dict, Sequence, Tuple
 
 from src.environment_mosaic import two_patch_invasion_exponent
 
 Season = Tuple[float, float, float]
 Matrix2 = Tuple[Tuple[float, float], Tuple[float, float]]
+
+_LOG_TWO = log(2.0)
+
+
+def _log_cosh(value: float) -> float:
+    """Return log(cosh(value)) without overflowing for large |value|."""
+
+    magnitude = abs(value)
+    return magnitude + log1p(exp(-2.0 * magnitude)) - _LOG_TWO
+
+
+def _acosh_from_log_value(log_value: float) -> float:
+    """Return acosh(exp(log_value)) without constructing exp(log_value)."""
+
+    if log_value < 0.0 and log_value > -1e-14:
+        log_value = 0.0
+    if log_value < 0.0:
+        raise ValueError("closed-form hyperbolic trace must be at least one")
+    if log_value == 0.0:
+        return 0.0
+    one_minus_inverse_square = -expm1(-2.0 * log_value)
+    return log_value + log1p(sqrt(max(0.0, one_minus_inverse_square)))
+
+
+def _two_season_hyperbolic_acosh(u1: float, u2: float, alignment: float) -> float:
+    """Return acosh(C) for the two-season scalar formula on the log scale.
+
+    Uses
+        C = 1/2[(1+a) cosh(u1+u2) + (1-a) cosh(u1-u2)],
+    where a is the normalized traceless-part alignment in [-1,1].
+    The two terms are non-negative, so a two-term log-sum-exp is stable even
+    when the individual hyperbolic functions would overflow.
+    """
+
+    alignment = max(-1.0, min(1.0, alignment))
+    weighted_logs = []
+    plus_weight = 0.5 * (1.0 + alignment)
+    minus_weight = 0.5 * (1.0 - alignment)
+    if plus_weight > 0.0:
+        weighted_logs.append(log(plus_weight) + _log_cosh(u1 + u2))
+    if minus_weight > 0.0:
+        weighted_logs.append(log(minus_weight) + _log_cosh(u1 - u2))
+    if not weighted_logs:
+        raise ValueError("invalid two-season hyperbolic weights")
+
+    maximum = max(weighted_logs)
+    log_c = maximum + log(sum(exp(value - maximum) for value in weighted_logs))
+    return _acosh_from_log_value(log_c)
 
 
 def seasonal_operator(r1: float, r2: float, migration_rate: float) -> Matrix2:
@@ -136,6 +184,10 @@ def two_season_closed_form(seasons: Sequence[Season], migration_rate: float) -> 
           +[(x1*x2+m^2)/(d1*d2)]sinh(u1)sinh(u2),
     then
         Lambda_F=(a1*tau1+a2*tau2)/T + acosh(C)/T.
+
+    ``acosh(C)`` is evaluated through an equivalent log-cosh representation
+    so the scalar closed form remains finite when direct hyperbolic products
+    overflow.
     """
 
     _validate_two_seasons(seasons)
@@ -147,31 +199,25 @@ def two_season_closed_form(seasons: Sequence[Season], migration_rate: float) -> 
     a2 = 0.5 * (r12 + r22) - migration_rate
     x1 = 0.5 * (r11 - r21)
     x2 = 0.5 * (r12 - r22)
-    d1 = sqrt(x1 * x1 + migration_rate * migration_rate)
-    d2 = sqrt(x2 * x2 + migration_rate * migration_rate)
+    d1 = hypot(x1, migration_rate)
+    d2 = hypot(x2, migration_rate)
     u1 = d1 * tau1
     u2 = d2 * tau2
 
-    c1 = cosh(u1)
-    c2 = cosh(u2)
-    s1 = 0.5 * (exp(u1) - exp(-u1))
-    s2 = 0.5 * (exp(u2) - exp(-u2))
-
-    if d1 == 0.0 or d2 == 0.0:
-        # A zero traceless part commutes with everything; direct exact routine
-        # is simpler and avoids a 0/0 in the normalized dot product.
-        return floquet_exponent(seasons, migration_rate)
-
-    alignment = (x1 * x2 + migration_rate * migration_rate) / (d1 * d2)
-    c_value = c1 * c2 + alignment * s1 * s2
-    if c_value < 1.0 and c_value > 1.0 - 1e-12:
-        c_value = 1.0
-    if c_value < 1.0:
-        raise ValueError("closed-form hyperbolic trace must be at least one")
-
     total_time = tau1 + tau2
     center_rate = (a1 * tau1 + a2 * tau2) / total_time
-    return center_rate + acosh(c_value) / total_time
+
+    if d1 == 0.0 or d2 == 0.0:
+        # A zero traceless part contributes the identity in the hyperbolic
+        # factor. Since the corresponding u is zero, acosh(C)=u1+u2.
+        return center_rate + (u1 + u2) / total_time
+
+    alignment = (
+        (x1 / d1) * (x2 / d2)
+        + (migration_rate / d1) * (migration_rate / d2)
+    )
+    hyperbolic_acosh = _two_season_hyperbolic_acosh(u1, u2, alignment)
+    return center_rate + hyperbolic_acosh / total_time
 
 
 def two_season_temporal_premium(
