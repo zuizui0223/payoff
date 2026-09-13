@@ -14,7 +14,7 @@ The difference from rbar is the temporal rescue premium.
 
 from __future__ import annotations
 
-from math import asinh, cosh, exp, log, log1p, sinh, sqrt, tanh
+from math import asinh, cosh, exp, hypot, isfinite, log, log1p, sinh, sqrt, tanh
 from typing import Dict
 
 
@@ -53,7 +53,7 @@ def anti_phase_floquet_exponent(
     tau = season_duration
     if m == 0.0:
         return mean_margin
-    delta = sqrt(m * m + x * x)
+    delta = hypot(m, x)
     growth_term = _asinh_ratio_sinh(m, delta, delta * tau)
     return mean_margin - m + growth_term / tau
 
@@ -77,21 +77,58 @@ def dimensionless_premium(u: float, v: float) -> float:
         raise ValueError("u and v must be non-negative")
     if u == 0.0 or v == 0.0:
         return 0.0
-    d = sqrt(u * u + v * v)
+    d = hypot(u, v)
     return -u + _asinh_ratio_sinh(u, d, d)
 
 
 def dimensionless_premium_derivative(u: float, v: float) -> float:
-    """Return partial F/partial u for u>0,v>0."""
+    """Return partial F/partial u for u>0,v>0 without hyperbolic overflow."""
 
     if u <= 0.0 or v <= 0.0:
         raise ValueError("derivative formula requires u>0 and v>0")
-    d = sqrt(u * u + v * v)
-    s = sinh(d)
-    c = cosh(d)
-    y_prime = v * v * s / (d**3) + u * u * c / (d**2)
-    root = sqrt(1.0 + (u * s / d) ** 2)
-    return -1.0 + y_prime / root
+    d = hypot(u, v)
+    if d < 20.0:
+        s = sinh(d)
+        c = cosh(d)
+        y_prime = v * v * s / (d**3) + u * u * c / (d**2)
+        root = sqrt(1.0 + (u * s / d) ** 2)
+        return -1.0 + y_prime / root
+
+    # Divide numerator and denominator by cosh(d).  This is algebraically
+    # identical but keeps every term bounded for large d:
+    #   y'/sqrt(1+y^2)
+    # = [v^2 tanh(d)/d^3 + u^2/d^2]
+    #   / sqrt(sech(d)^2 + (u tanh(d)/d)^2).
+    t = tanh(d)
+    sech2 = max(0.0, 1.0 - t * t)
+    ud = u / d
+    vd = v / d
+    numerator = vd * vd * t / d + ud * ud
+    denominator = hypot(sqrt(sech2), ud * t)
+    return -1.0 + numerator / denominator
+
+
+def _exact_optimum_crossing(u: float, v: float) -> float:
+    """Return the monotone exact-optimum crossing function stably."""
+
+    d = hypot(u, v)
+    ud = u / d
+    left = ud * ud
+    if d < 20.0:
+        s = sinh(d)
+        c = cosh(d)
+        denom = d * c - s
+        right = (s * s - d * d) / (denom * denom)
+    else:
+        # Divide numerator and denominator of R(d) by cosh(d)^2:
+        # R = [tanh(d)^2 - d^2 sech(d)^2] / [d - tanh(d)]^2.
+        # This avoids sinh(d)^2 overflowing around d~=355.
+        t = tanh(d)
+        sech2 = max(0.0, 1.0 - t * t)
+        numerator = t * t if sech2 == 0.0 else t * t - d * d * sech2
+        gap = d - t
+        right = numerator / gap / gap
+    return left - right
 
 
 def exact_optimal_dimensionless_migration(v: float, tol: float = 1e-13) -> float:
@@ -104,27 +141,20 @@ def exact_optimal_dimensionless_migration(v: float, tol: float = 1e-13) -> float
         R(d)=(sinh(d)^2-d^2)/(d cosh(d)-sinh(d))^2.
     """
 
-    if v <= 0.0:
-        raise ValueError("v must be positive")
-    if tol <= 0.0:
-        raise ValueError("tol must be positive")
-
-    def crossing(u: float) -> float:
-        d = sqrt(u * u + v * v)
-        left = u * u / (d * d)
-        denom = d * cosh(d) - sinh(d)
-        right = (sinh(d) ** 2 - d * d) / (denom * denom)
-        return left - right
+    if v <= 0.0 or not isfinite(v):
+        raise ValueError("v must be positive and finite")
+    if tol <= 0.0 or not isfinite(tol):
+        raise ValueError("tol must be positive and finite")
 
     lower = 0.0
-    upper = max(1.0, v)
-    while crossing(upper) < 0.0:
+    upper = 1.0
+    while _exact_optimum_crossing(upper, v) < 0.0:
         upper *= 2.0
-        if upper > 700.0:
+        if not isfinite(upper):
             raise RuntimeError("failed to bracket exact anti-phase optimum")
     while upper - lower > tol * max(1.0, upper):
         mid = 0.5 * (lower + upper)
-        if crossing(mid) < 0.0:
+        if _exact_optimum_crossing(mid, v) < 0.0:
             lower = mid
         else:
             upper = mid
