@@ -1,0 +1,83 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_BGI_TARGET_RESULT_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "candidate_id": "M5_T0",
+  "target_bgi_run": "SRR16954696",
+  "reference_accession": "NC_003888.3",
+  "normalization_panel_id": "FROZEN_CENTRAL_CORE_PANEL_V1",
+  "source_workflow": {
+    "run_id": 34729003778,
+    "job_id": 103648220267,
+    "head_sha": "6af8b558d291ced082b61b3d542c696e1a97d996",
+    "artifact_id": 10308457538,
+    "artifact_sha256": "455407ab17f779af50af5855d31260821858e3ee315672e97a19877b29447da3",
+    "target_depths_sha256": "d9a95a77b228f1daacadbe4d4b435dfb81ceec6d5860548923841e3e3987b387",
+    "result_sha256": "50d9f4dff70436927ef187afa039c06d80db8672ffdc4a604b7b54b027bb0f0b",
+    "flagstat_sha256": "ccd6e6b7e6d3e1677b763aa6fc1bbd2aba40ef6cc99ff682f31caef77191292e"
+  },
+  "opening_gate": {
+    "calibration_receipt_id": "STREPTOMYCES_M5_BGI_RESPONSE_BLIND_CALIBRATION_RESULT_V1",
+    "target_opening_allowed": true,
+    "absence_max_ratio": 0.000818710126322,
+    "presence_min_ratio": 0.40016549829,
+    "thresholds_frozen_before_target_opening": true
+  },
+  "target_measurement": {
+    "core_median_depth": 138.64988009592327,
+    "core_panel_mean_depths": {
+      "SCO3000": 122.83035714285714,
+      "SCO3300": 112.6848691695108,
+      "SCO3600": 159.3925925925926,
+      "SCO3900": 175.61061946902655,
+      "SCO4200": 184.02083333333334,
+      "SCO4500": 115.42465753424658,
+      "SCO4800": 138.64988009592327,
+      "SCO5100": 153.03187250996015,
+      "SCO5400": 118.80564263322884
+    },
+    "marker_mean_depths": {
+      "SCO3879": 150.2029426686961,
+      "SCO7036": 0.13831258644536654,
+      "SCO7350": 0.0,
+      "SCO7662": 0.08481764206955046
+    },
+    "normalized_marker_ratios": {
+      "SCO3879": 1.0833254422202168,
+      "SCO7036": 0.000997567299370736,
+      "SCO7350": 0.0,
+      "SCO7662": 0.0006117397433800187
+    },
+    "marker_states": {
+      "SCO3879": "PRESENT",
+      "SCO7036": "UNRESOLVED",
+      "SCO7350": "ABSENT",
+      "SCO7662": "ABSENT"
+    }
+  },
+  "result": {
+    "marker_pattern_verified": false,
+    "registered_class": null,
+    "blockers": [
+      "AT_LEAST_ONE_REGISTERED_MARKER_UNRESOLVED",
+      "RIGHT_ARM_PATTERN_NOT_A_REGISTERED_D_CLASS"
+    ],
+    "sco7036_ratio_over_absence_ceiling": 1.2184621483213356,
+    "presence_floor_over_sco7036_ratio": 401.14135511701693,
+    "primary_bgi_class_status": "UNRESOLVED"
+  },
+  "cross_channel_boundary": {
+    "pacbio_four_locus_pattern_corroborates_deep_class": true,
+    "pacbio_may_rescue_primary_bgi_unresolved_call": false,
+    "reason": "PRIMARY_BGI_RULE_WAS_FROZEN_PREOUTCOME_AND_NO_CROSS_CHANNEL_RESCUE_RULE_WAS_REGISTERED"
+  },
+  "claim_boundary": {
+    "primary_bgi_marker_class_known": false,
+    "registered_deletion_class_qualified": false,
+    "r2_gross_structure_resolved": false,
+    "physical_stock_access_confirmed": false,
+    "realization_d_band_available": false,
+    "qualified_d_reference": false,
+    "qualified_d_reference_count_increment": 0,
+    "architecture_specific_inference_open": false
+  }
+}
