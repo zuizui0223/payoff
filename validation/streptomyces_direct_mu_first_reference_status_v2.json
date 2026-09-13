@@ -1,0 +1,77 @@
+{
+  "receipt_id": "STREPTOMYCES_DIRECT_MU_FIRST_REFERENCE_STATUS_V2",
+  "lane": "A_MECHANISM_MEASUREMENT_SUBLANE",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "status": "M5_PUBLIC_PRIMARY_MARKER_UNRESOLVED__QUALIFIED_COUNT_ZERO",
+  "qualified_d_reference_count": 0,
+  "first_qualified_reference_recovered": false,
+  "minimum_d_reference_precondition_satisfied": false,
+  "architecture_specific_inference_hard_closed": true,
+  "frozen_priority_queue": [
+    "M5_T0",
+    "W3_POST_DELETION",
+    "M1_T0"
+  ],
+  "candidate_literature_expansion_paused": true,
+  "candidate_search_restart_licensed": false,
+  "primary_target": {
+    "candidate_id": "M5_T0",
+    "sequence_identity_resolved": true,
+    "pacbio_four_locus_deep_corroboration": true,
+    "response_blind_bgi_calibration_qualified": true,
+    "primary_bgi_target_opened": true,
+    "primary_bgi_marker_states": {
+      "SCO7662": "ABSENT",
+      "SCO7350": "ABSENT",
+      "SCO7036": "UNRESOLVED",
+      "SCO3879": "PRESENT"
+    },
+    "primary_bgi_registered_class": null,
+    "primary_bgi_class_status": "UNRESOLVED",
+    "cross_channel_post_hoc_rescue_allowed": false,
+    "terminal_deletion_source_record_recovered": true,
+    "r2_gross_structure_resolved": false,
+    "physical_stock_access_confirmed": false,
+    "realization_d_band_available": false,
+    "reference_qualified": false
+  },
+  "m5_public_data_conclusion": {
+    "public_data_are_sufficient_to_verify_a_registered_D_class": false,
+    "public_data_are_sufficient_to_increment_qualified_D_reference_count": false,
+    "reason": "SCO7036_PRIMARY_BGI_RATIO_FELL_IN_FROZEN_UNRESOLVED_INTERVAL",
+    "pacbio_corroboration_does_not_override_primary_bgi_rule": true
+  },
+  "next_action_policy": {
+    "primary_action": "CONFIRM_CURRENT_M5_T0_PHYSICAL_STOCK_ACCESS",
+    "if_stock_access_confirmed": [
+      "PREREGISTER_INDEPENDENT_ORTHOGONAL_MATERIAL_GENOTYPING_BEFORE_ASSAY_OUTCOME",
+      "RUN_MATCHED_72_120_H_D_REALIZATION_ASSAY",
+      "RESOLVE_R2_ADDITIONAL_GROSS_STRUCTURE_WITH_PREDECLARED_OR_EXTERNAL_METADATA_ROUTE",
+      "RUN_PER_REFERENCE_QUALIFICATION"
+    ],
+    "if_stock_access_unavailable_or_declined": "ADVANCE_TO_W3_POST_DELETION_WITHOUT_EXPANDING_CANDIDATE_LITERATURE_POOL",
+    "forbidden": [
+      "REFIT_BGI_THRESHOLDS_TO_M5",
+      "CLASSIFY_M5_AS_DEEP_BY_SUBSTITUTING_PACBIO_FOR_THE_FROZEN_PRIMARY_BGI_RULE",
+      "INCREMENT_QUALIFIED_D_REFERENCE_COUNT",
+      "OPEN_ARCHITECTURE_SPECIFIC_INFERENCE"
+    ]
+  },
+  "full_panel_requirement_unchanged": {
+    "registered_classes": ["ENTRY_CLASS", "INTERMEDIATE_CLASS", "DEEP_CLASS"],
+    "minimum_independent_qualified_references_per_class": 2,
+    "first_reference_milestone_does_not_relax_panel": true
+  },
+  "claim_ceiling": {
+    "candidate_pool_is_not_empirical_progress": true,
+    "m5_public_primary_marker_result_is_empirical_progress": true,
+    "m5_registered_deletion_class_qualified": false,
+    "direct_mu_outcome_available": false,
+    "matched_s_certified": false,
+    "architecture_mapping_certified": false,
+    "architecture_specific_frequency_feedback": false,
+    "eta_architecture_specific": false,
+    "finite_population_architecture_inference": false,
+    "e1": false
+  }
+}

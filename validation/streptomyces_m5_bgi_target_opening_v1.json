@@ -3,8 +3,9 @@
   "system_id": "STREPTOMYCES_COELICOLOR",
   "candidate_id": "M5_T0",
   "target_bgi_run": "SRR16954696",
-  "status": "BLOCKED_PENDING_RESPONSE_BLIND_CALIBRATION",
-  "required_calibration_receipt": "STREPTOMYCES_M5_BGI_MARKER_CALIBRATION_RESULT_V1",
+  "status": "TARGET_OPENED_RESULT_FROZEN",
+  "required_calibration_receipt": "STREPTOMYCES_M5_BGI_RESPONSE_BLIND_CALIBRATION_RESULT_V1",
+  "target_result_receipt": "STREPTOMYCES_M5_BGI_TARGET_RESULT_V1",
   "required_core_panel": [
     "SCO3000", "SCO3300", "SCO3600", "SCO3900", "SCO4200",
     "SCO4500", "SCO4800", "SCO5100", "SCO5400"
@@ -15,12 +16,33 @@
     "minimum_absent_candidate_ids": 2,
     "minimum_present_candidate_ids": 2
   },
-  "target_bgi_ratios_opened": false,
+  "frozen_calibration": {
+    "calibration_qualified": true,
+    "target_used_in_calibration": false,
+    "target_bgi_run_opened_during_calibration": false,
+    "absence_max_ratio": 0.000818710126322,
+    "presence_min_ratio": 0.40016549829,
+    "absent_pair_count": 10,
+    "present_pair_count": 14,
+    "absent_candidate_count": 5,
+    "present_candidate_count": 6,
+    "unresolved_pair_count": 0
+  },
+  "target_bgi_ratios_opened": true,
   "target_opening_allowed": false,
-  "current_blocker": "RESPONSE_BLIND_CALIBRATION_RESULT_NOT_YET_REGISTERED",
+  "opening_license_consumed": true,
+  "current_blocker": "PRIMARY_BGI_MARKER_PATTERN_UNRESOLVED",
+  "next_action": "DO_NOT_REFIT_THRESHOLDS_OR_USE_PACBIO_AS_POST_HOC_RESCUE; RESOLVE_M5_ONLY_VIA_PREDECLARED_ORTHOGONAL_MATERIAL_ASSAY_IF_STOCK_ACCESS_IS_CONFIRMED, OTHERWISE_ADVANCE_FROZEN_CANDIDATE_QUEUE",
   "claim_ceiling": {
     "m5_primary_bgi_class": null,
+    "sco7662_state": "ABSENT",
+    "sco7350_state": "ABSENT",
+    "sco7036_state": "UNRESOLVED",
+    "sco3879_state": "PRESENT",
     "registered_deletion_class_qualified": false,
+    "r2_gross_structure_resolved": false,
+    "physical_stock_access_confirmed": false,
+    "realization_d_band_available": false,
     "qualified_d_reference_count_increment": 0,
     "architecture_specific_inference_open": false
   }
