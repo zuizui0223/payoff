@@ -11,6 +11,8 @@ from dataclasses import dataclass
 from math import inf
 from typing import Optional, Sequence, Tuple
 
+from .numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
+
 
 @dataclass(frozen=True)
 class QuadraticTraitArchitecture:
@@ -201,9 +203,12 @@ def classify_lke_phase(
     separation_fraction: float,
     architecture_cost: float,
     eta: float,
-    tol: float = 1e-12,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> str:
-    """Classify the architecture game directly from (L,s,K,eta)."""
+    """Classify the architecture game directly from (L,s,K,eta).
+
+    ``tol`` is a dimensionless relative numerical tolerance.
+    """
 
     phi = architecture_phi(conflict_load, separation_fraction, architecture_cost)
     return classify_phase(phi, eta, tol=tol)
@@ -265,10 +270,18 @@ def replicator_rhs(p: float, phi: float, eta: float) -> float:
     return p * (1.0 - p) * payoff_gap(p, phi, eta)
 
 
-def interior_equilibrium(phi: float, eta: float, tol: float = 1e-12) -> Optional[float]:
-    """Return the strict interior equilibrium, otherwise None."""
+def interior_equilibrium(
+    phi: float, eta: float, tol: float = DEFAULT_RELATIVE_TOL
+) -> Optional[float]:
+    """Return the strict interior equilibrium, otherwise None.
 
-    if abs(eta) <= tol:
+    ``tol`` is dimensionless.  Whether ``eta`` is numerically zero is judged
+    relative to the payoff scale ``max(|phi|,|eta|)``; the final 0/1 check is
+    performed directly in the dimensionless frequency coordinate.
+    """
+
+    payoff_band = relative_band((phi, eta), tol)
+    if abs(eta) <= payoff_band:
         return None
     p_star = 0.5 * (1.0 - phi / eta)
     if tol < p_star < 1.0 - tol:
@@ -276,22 +289,30 @@ def interior_equilibrium(phi: float, eta: float, tol: float = 1e-12) -> Optional
     return None
 
 
-def classify_phase(phi: float, eta: float, tol: float = 1e-12) -> str:
-    """Classify the deterministic replicator phase."""
+def classify_phase(
+    phi: float, eta: float, tol: float = DEFAULT_RELATIVE_TOL
+) -> str:
+    """Classify the deterministic replicator phase scale-invariantly.
 
-    if abs(eta) <= tol:
-        if phi < -tol:
+    ``tol`` is a dimensionless relative numerical tolerance.  Multiplying
+    ``phi`` and ``eta`` by any common positive payoff-unit factor therefore
+    cannot change the returned phase.
+    """
+
+    band = relative_band((phi, eta), tol)
+    if abs(eta) <= band:
+        if phi < -band:
             return "shared_dominance"
-        if phi > tol:
+        if phi > band:
             return "differentiated_dominance"
         return "neutral_architecture_boundary"
 
     h = abs(eta)
-    if phi < -h - tol:
+    if phi < -h - band:
         return "shared_dominance"
-    if phi > h + tol:
+    if phi > h + band:
         return "differentiated_dominance"
-    if abs(phi + h) <= tol or abs(phi - h) <= tol:
+    if abs(phi + h) <= band or abs(phi - h) <= band:
         return "nonhyperbolic_phase_boundary"
 
     if eta < 0:
