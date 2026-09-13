@@ -9,6 +9,8 @@ C at the resident/singular recovery.
 
 from __future__ import annotations
 
+from .numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
+
 
 def selection_gradient_from_cost_slope(cost_slope: float) -> float:
     """Return g=1-C'(r)."""
@@ -47,13 +49,20 @@ def mutant_fitness_curvature(cost_curvature: float, gamma: float) -> float:
 
 
 def local_branching_regime(
-    cost_curvature: float, gamma: float, tol: float = 1e-12
+    cost_curvature: float,
+    gamma: float,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> str:
-    """Classify local singular strategy as ESS / neutral / branching-compatible."""
+    """Classify local singular strategy as ESS / neutral / branching-compatible.
+
+    ``tol`` is dimensionless. Numerical neutrality is judged relative to the
+    two curvature terms whose cancellation defines the exact branching line.
+    """
 
     curvature = mutant_fitness_curvature(cost_curvature, gamma)
-    if curvature < -tol:
+    band = relative_band((cost_curvature, 2.0 * gamma), tol)
+    if curvature < -band:
         return "local_ess"
-    if curvature > tol:
+    if curvature > band:
         return "branching_compatible"
     return "second_order_neutral"
