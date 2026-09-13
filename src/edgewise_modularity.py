@@ -230,13 +230,16 @@ def edge_release_receipt(
         optima, trait_weights, edges, reference_couplings, decouplings
     )
     rows: List[Dict[str, float | str]] = []
+    roundoff_factor = 64.0 * float_info.epsilon
     for index, (pressure, cost) in enumerate(zip(pressures, marginal_costs)):
         if cost < 0.0:
             raise ValueError("marginal costs must be non-negative")
         margin = pressure - cost
-        if margin > 1e-12:
+        scale = max(abs(pressure), abs(cost))
+        roundoff_tolerance = roundoff_factor * scale
+        if margin > roundoff_tolerance:
             direction = "favor_more_decoupling"
-        elif margin < -1e-12:
+        elif margin < -roundoff_tolerance:
             direction = "favor_more_coupling"
         else:
             direction = "marginal_balance"
