@@ -121,9 +121,11 @@ def test_decoupling_bound_rejects_material_overshoot_at_every_coupling_scale():
 
 def test_exact_and_roundoff_sized_endpoint_release_remain_valid():
     optima = [0.0, 1.0]
-    weights = [1.0, 1.0]
     edges = [(0, 1)]
     for scale in (1e-16, 1.0, 1e16):
+        # Keep the whole quadratic problem on one common scale. Scaling only the
+        # coupling would change conditioning and is not a unit conversion.
+        weights = [scale, scale]
         exact = recovery_from_decoupling(optima, weights, edges, [scale], [scale])
         rounded = recovery_from_decoupling(
             optima,
