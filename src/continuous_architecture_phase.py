@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Tuple
 
+from .numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
+
 
 def branching_feedback_threshold(curvature: float) -> float:
     """Return gamma_c=-kappa/2."""
@@ -55,36 +57,45 @@ def classify_global_phase(
     max_recovery: float,
     curvature: float,
     gamma: float,
-    tol: float = 1e-12,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> str:
-    """Classify the exact quadratic continuous architecture phase."""
+    """Classify the exact quadratic continuous architecture phase.
+
+    ``tol`` is a dimensionless relative numerical tolerance.  The feedback
+    threshold is compared on the common curvature scale, while alpha endpoint
+    comparisons use the corresponding alpha scale ``curvature*max_recovery``.
+    """
 
     if max_recovery <= 0.0:
         raise ValueError("max_recovery must be positive")
     if curvature <= 0.0:
         raise ValueError("curvature must be positive")
     threshold = -0.5 * curvature
+    feedback_band = relative_band((gamma, threshold, curvature), tol)
+    full_alpha = curvature * max_recovery
+    alpha_band = relative_band((alpha, full_alpha), tol)
 
-    if gamma > threshold + tol:
-        if alpha <= tol:
+    if gamma > threshold + feedback_band:
+        if alpha <= alpha_band:
             return "shared_monomorph"
-        if alpha >= curvature * max_recovery - tol:
+        if alpha >= full_alpha - alpha_band:
             return "full_monomorph"
         return "partial_monomorph"
 
-    if gamma >= threshold - tol:
-        if alpha <= tol:
+    if gamma >= threshold - feedback_band:
+        if alpha <= alpha_band:
             return "shared_endpoint"
-        if alpha >= curvature * max_recovery - tol:
+        if alpha >= full_alpha - alpha_band:
             return "full_endpoint"
         return "neutral_variance_manifold"
 
     lower, upper = strong_feedback_alpha_boundaries(
         max_recovery, curvature, gamma
     )
-    if alpha <= lower + tol:
+    strong_alpha_band = relative_band((alpha, lower, upper), tol)
+    if alpha <= lower + strong_alpha_band:
         return "shared_endpoint"
-    if alpha >= upper - tol:
+    if alpha >= upper - strong_alpha_band:
         return "full_endpoint"
     return "endpoint_polymorphism"
 
