@@ -1,5 +1,7 @@
 from itertools import product
-from math import isclose, isfinite
+from math import inf, isclose, isfinite, nextafter
+
+import pytest
 
 from src.edgewise_modularity import (
     best_vertex_topology,
@@ -106,6 +108,33 @@ def test_recovery_gradient_matches_finite_difference_in_decoupling():
             - baseline
         ) / eps
         assert isclose(observed, expected, rel_tol=2e-5, abs_tol=2e-6)
+
+
+def test_decoupling_bound_rejects_material_overshoot_at_every_coupling_scale():
+    optima = [0.0, 1.0]
+    weights = [1.0, 1.0]
+    edges = [(0, 1)]
+    for scale in (1e-16, 1e-13, 1.0, 1e16):
+        with pytest.raises(ValueError, match="decoupling must lie"):
+            recovery_from_decoupling(optima, weights, edges, [scale], [2.0 * scale])
+
+
+def test_exact_and_roundoff_sized_endpoint_release_remain_valid():
+    optima = [0.0, 1.0]
+    weights = [1.0, 1.0]
+    edges = [(0, 1)]
+    for scale in (1e-16, 1.0, 1e16):
+        exact = recovery_from_decoupling(optima, weights, edges, [scale], [scale])
+        rounded = recovery_from_decoupling(
+            optima,
+            weights,
+            edges,
+            [scale],
+            [nextafter(scale, inf)],
+        )
+        assert isfinite(exact)
+        assert isfinite(rounded)
+        assert isclose(rounded, exact, rel_tol=1e-12, abs_tol=1e-30)
 
 
 def test_same_edge_marginal_recovery_increases_with_release():
