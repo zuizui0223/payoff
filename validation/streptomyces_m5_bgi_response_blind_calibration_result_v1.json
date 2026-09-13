@@ -1,0 +1,70 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_BGI_RESPONSE_BLIND_CALIBRATION_RESULT_V1",
+  "target_candidate": "M5_T0",
+  "target_used_in_calibration": false,
+  "target_bgi_run_opened": false,
+  "calibration_candidates": [
+    "WT_ancestor",
+    "M1_T0",
+    "M2_T0",
+    "M3_T0",
+    "M4_T0",
+    "M6_T0"
+  ],
+  "source_workflow": {
+    "run_id": 34671825928,
+    "head_sha": "a657d3b74ccbb659fa8461513393441db230e6e7",
+    "control_artifacts": [
+      {"candidate_id": "WT_ancestor", "artifact_id": 10290734243, "artifact_sha256": "8e90bc1d427bae469e2a96d05bc94ea2797434be29ab2f633c48686004d1611c"},
+      {"candidate_id": "M1_T0", "artifact_id": 10291147142, "artifact_sha256": "27f31d0155f9cd16f76215ca617048439d6a7693587bc021fd9312b593f4c9ae"},
+      {"candidate_id": "M2_T0", "artifact_id": 10290958664, "artifact_sha256": "4909f4ab4cc60b4bfe3829e016c52924793c8b999ca26fe01d515064824d51c6"},
+      {"candidate_id": "M3_T0", "artifact_id": 10290489152, "artifact_sha256": "60ad664d45a738808d2ded22cd4cc53a982c4e74121ac9eb83cbae6af1488f81"},
+      {"candidate_id": "M4_T0", "artifact_id": 10291565991, "artifact_sha256": "6a314086f7486883fa6bf572e688eb57422feecd5006ae49e78215e4dbe9599c"},
+      {"candidate_id": "M6_T0", "artifact_id": 10290534227, "artifact_sha256": "d90b6ef9d2630047573662a98018643eb48daf7bdd943f9cb078a5f638ea59ed"}
+    ]
+  },
+  "frozen_control_evidence_path": "data/STREPTOMYCES_M5_BGI_CALIBRATION_CONTROL_EVIDENCE_V1.tsv",
+  "frozen_control_evidence_sha256": "c814a5bcc37e91eeb3ed764a7052559c9006d88bf864d585b78cfb746b0aa646",
+  "frozen_rules": {
+    "pacbio_core_coverage_required_pct": 100.0,
+    "absent_control_marker_coverage_pct": 0.0,
+    "present_control_marker_coverage_pct": 100.0,
+    "minimum_pairs_per_state": 3,
+    "minimum_candidates_per_state": 2,
+    "strict_separation_required": "absence_max_ratio < presence_min_ratio",
+    "bgi_normalization_panel": [
+      "SCO3000",
+      "SCO3300",
+      "SCO3600",
+      "SCO3900",
+      "SCO4200",
+      "SCO4500",
+      "SCO4800",
+      "SCO5100",
+      "SCO5400"
+    ]
+  },
+  "result": {
+    "absence_max_ratio": 0.000818710126322,
+    "presence_min_ratio": 0.40016549829,
+    "strict_gap_ratio_presence_min_over_absence_max": 488.7755573364122,
+    "absent_pair_count": 10,
+    "present_pair_count": 14,
+    "absent_candidate_count": 5,
+    "present_candidate_count": 6,
+    "unresolved_pair_count": 0,
+    "blockers": [],
+    "calibration_qualified": true
+  },
+  "claim_boundary": {
+    "this_qualifies_the_response_blind_bgi_calibration_only": true,
+    "m5_primary_bgi_class_known": false,
+    "m5_target_bgi_run_may_now_be_opened_only_through_registered_target_gate": true,
+    "r2_gross_structure_resolved": false,
+    "physical_stock_access_confirmed": false,
+    "realization_d_band_available": false,
+    "qualified_d_reference": false,
+    "qualified_d_reference_count_increment": 0,
+    "architecture_specific_inference_open": false
+  }
+}

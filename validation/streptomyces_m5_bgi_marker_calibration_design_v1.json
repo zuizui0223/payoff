@@ -1,0 +1,45 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_BGI_MARKER_CALIBRATION_DESIGN_V1",
+  "system_id": "STREPTOMYCES_COELICOLOR",
+  "target_candidate_id": "M5_T0",
+  "prospective_relative_to_target_bgi_ratios": true,
+  "target_bgi_ratios_opened_for_calibration": false,
+  "reference_accession": "NC_003888.3",
+  "registered_markers": ["SCO7662", "SCO7350", "SCO7036", "SCO3879"],
+  "central_core_panel": ["SCO3000", "SCO3300", "SCO3600", "SCO3900", "SCO4200", "SCO4500", "SCO4800", "SCO5100", "SCO5400"],
+  "calibration_candidates": [
+    {"candidate_id": "WT_ancestor", "pacbio_run": "SRR16954715", "bgi_run": "SRR16954701"},
+    {"candidate_id": "M1_T0", "pacbio_run": "SRR16954714", "bgi_run": "SRR16954700"},
+    {"candidate_id": "M2_T0", "pacbio_run": "SRR16954703", "bgi_run": "SRR16954699"},
+    {"candidate_id": "M3_T0", "pacbio_run": "SRR16954692", "bgi_run": "SRR16954698"},
+    {"candidate_id": "M4_T0", "pacbio_run": "SRR16954723", "bgi_run": "SRR16954697"},
+    {"candidate_id": "M6_T0", "pacbio_run": "SRR16954719", "bgi_run": "SRR16954695"}
+  ],
+  "forbidden_target_runs_in_calibration": ["SRR16954720", "SRR16954696"],
+  "pacbio_control_label_rule": {
+    "absent_control": "coverage_pct == 0",
+    "present_control": "coverage_pct == 100",
+    "otherwise": "CONTROL_STATE_UNRESOLVED"
+  },
+  "bgi_normalization_rule": "registered_locus_mean_depth / median(central_core_panel_mean_depth)",
+  "threshold_rule": {
+    "minimum_pairs_per_state": 3,
+    "minimum_distinct_candidates_per_state": 2,
+    "absence_max_ratio": "maximum BGI normalized ratio across PacBio-labeled ABSENT_CONTROL pairs",
+    "presence_min_ratio": "minimum BGI normalized ratio across PacBio-labeled PRESENT_CONTROL pairs",
+    "qualification_condition": "absence_max_ratio < presence_min_ratio",
+    "touch_or_overlap": "CALIBRATION_NOT_QUALIFIED"
+  },
+  "current_status": "DESIGN_FROZEN_CALIBRATION_NOT_YET_RUN",
+  "calibration_qualified": false,
+  "m5_bgi_marker_class_opened": false,
+  "claim_ceiling": {
+    "marker_thresholds_frozen_from_independent_controls": false,
+    "m5_marker_class_qualified": false,
+    "gross_rearrangement_audit_completed": false,
+    "qualified_d_reference_count_increment": 0,
+    "architecture_specific_inference_open": false,
+    "eta_architecture_specific": false,
+    "e1": false
+  }
+}
