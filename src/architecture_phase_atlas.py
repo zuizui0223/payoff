@@ -23,7 +23,7 @@ from src.mesoscopic_architecture import (
     mesoscopic_step,
     variance_architecture,
 )
-from src.numerical_tolerance import relative_band
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
 
 
 def regular_grid(length: float = 1.0, bins: int = 41) -> tuple[float, ...]:
@@ -252,14 +252,26 @@ def classify_distribution(
     )
 
 
+def _payoff_spread_band(payoff: Sequence[float], tolerance: float) -> float:
+    """Return a translation-invariant numerical band for payoff ordering."""
+
+    spread = max(payoff) - min(payoff)
+    return relative_band((spread,), tolerance)
+
+
 def uphill_reachable_indices(
     payoff: Sequence[float],
     start_index: int,
     *,
     jump_radius_bins: int,
-    tolerance: float = 1e-12,
+    tolerance: float = DEFAULT_RELATIVE_TOL,
 ) -> tuple[int, ...]:
-    """Return states reachable through strictly uphill jumps within the radius."""
+    """Return states reachable through strictly uphill jumps within the radius.
+
+    ``tolerance`` is dimensionless and is applied to the translation-invariant
+    payoff spread, so common payoff scaling or a common payoff baseline does
+    not alter the accessibility graph.
+    """
     p = tuple(float(v) for v in payoff)
     if not p or any(not isfinite(v) for v in p):
         raise ValueError("payoff must be non-empty and finite")
@@ -267,6 +279,7 @@ def uphill_reachable_indices(
         raise IndexError("start_index out of range")
     if jump_radius_bins < 0:
         raise ValueError("jump_radius_bins must be non-negative")
+    band = _payoff_spread_band(p, tolerance)
 
     seen = {start_index}
     stack = [start_index]
@@ -277,27 +290,30 @@ def uphill_reachable_indices(
         for j in range(lo, hi):
             if j == i or j in seen:
                 continue
-            if p[j] > p[i] + tolerance:
+            if p[j] - p[i] > band:
                 seen.add(j)
                 stack.append(j)
     return tuple(sorted(seen))
 
 
 def global_payoff_indices(
-    payoff: Sequence[float], *, tolerance: float = 1e-12
+    payoff: Sequence[float], *, tolerance: float = DEFAULT_RELATIVE_TOL
 ) -> tuple[int, ...]:
+    """Return numerically tied global maxima under the shared payoff-spread band."""
+
     p = tuple(float(v) for v in payoff)
     if not p or any(not isfinite(v) for v in p):
         raise ValueError("payoff must be non-empty and finite")
     best = max(p)
-    return tuple(i for i, value in enumerate(p) if value >= best - tolerance)
+    band = _payoff_spread_band(p, tolerance)
+    return tuple(i for i, value in enumerate(p) if best - value <= band)
 
 
 def minimum_uphill_jump_radius_to_global(
     payoff: Sequence[float],
     start_index: int,
     *,
-    tolerance: float = 1e-12,
+    tolerance: float = DEFAULT_RELATIVE_TOL,
 ) -> int:
     """Smallest jump radius admitting an all-uphill path to a global payoff peak."""
     p = tuple(float(v) for v in payoff)
