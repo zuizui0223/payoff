@@ -11,7 +11,7 @@ programming.
 
 from __future__ import annotations
 
-from math import inf
+from math import inf, isfinite
 from typing import Dict, Iterable, List, Sequence, Tuple
 
 from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
@@ -172,6 +172,8 @@ def optimal_contiguous_partition_fixed_k(
                 candidate = dp[k - 1][start] + _segment_loss(
                     prefix_w, prefix_wx, prefix_wx2, start, end
                 )
+                if not isfinite(candidate):
+                    continue
                 if best_start < 0:
                     best = candidate
                     best_start = start
@@ -241,6 +243,8 @@ def optimal_penalized_partition(
                 + _segment_loss(prefix_w, prefix_wx, prefix_wx2, start, end)
                 + extra_module_cost
             )
+            if not isfinite(candidate):
+                continue
             candidate_count = count[start] + 1
             if best_start < 0:
                 best = candidate
