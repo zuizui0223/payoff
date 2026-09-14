@@ -11,7 +11,7 @@ thresholds have exact closed forms.
 
 from __future__ import annotations
 
-from math import isfinite, sqrt
+from math import hypot, isfinite
 from typing import Dict, Sequence, Tuple
 
 from src.environment_mosaic import invasion_exponent, invasion_margins
@@ -250,7 +250,7 @@ def two_patch_midpoint_exponent(
     After a common environmental shift makes the two patch gaps
         +Delta_phi/2 and -Delta_phi/2,
     both reciprocal architecture invasion exponents equal
-        -eta-m + sqrt[(Delta_phi/2)^2+m^2].
+        -eta-m + hypot(Delta_phi/2,m).
     """
 
     if eta <= 0.0:
@@ -258,22 +258,27 @@ def two_patch_midpoint_exponent(
     if migration_rate < 0.0:
         raise ValueError("migration_rate must be non-negative")
     delta_phi = phi_1 - phi_2
-    return -eta - migration_rate + sqrt((0.5 * delta_phi) ** 2 + migration_rate**2)
+    return -eta - migration_rate + hypot(0.5 * delta_phi, migration_rate)
 
 
 def two_patch_coordination_switch_rate(phi_1: float, phi_2: float, eta: float) -> float:
     """Exact migration rate where reciprocal invasion becomes mutual non-invasion.
 
-    Requires eta>0 and |phi1-phi2|>2eta. Then
-        m_switch=[(phi1-phi2)^2-4eta^2]/(8eta).
+    Requires eta>0 and |phi1-phi2|>2eta.  The standard squared expression is
+    evaluated through the dimensionless ratio z=2eta/|Delta_phi|:
+        m_switch=|Delta_phi| (1-z)(1+z)/(4z).
     """
 
     if eta <= 0.0:
         raise ValueError("eta must be positive")
-    delta_phi = phi_1 - phi_2
-    if abs(delta_phi) <= 2.0 * eta:
+    delta = abs(phi_1 - phi_2)
+    twice_eta = 2.0 * eta
+    if delta <= twice_eta:
         raise ValueError("requires |phi_1-phi_2| > 2 eta")
-    return (delta_phi**2 - 4.0 * eta**2) / (8.0 * eta)
+    z = twice_eta / delta
+    if z == 0.0:
+        return float("inf")
+    return delta * ((1.0 - z) * (1.0 + z) / (4.0 * z))
 
 
 def classify_two_patch_midpoint(
