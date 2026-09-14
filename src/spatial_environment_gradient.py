@@ -15,7 +15,7 @@ from math import isfinite, sqrt
 from typing import Dict, Sequence, Tuple
 
 from src.environment_mosaic import invasion_exponent, invasion_margins
-from src.numerical_tolerance import relative_band
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
 
 
 def environmental_phis(
@@ -281,14 +281,26 @@ def classify_two_patch_midpoint(
     phi_2: float,
     eta: float,
     migration_rate: float,
-    tol: float = 1e-12,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> str:
-    """Classify reciprocal landscape invasibility at the mean-static-gap environment."""
+    """Classify reciprocal landscape invasibility at the mean-static-gap environment.
 
-    value = two_patch_midpoint_exponent(phi_1, phi_2, eta, migration_rate)
-    if value > tol:
+    ``tol`` is dimensionless.  The numerical boundary band is set relative to
+    the commensurate rate terms ``Delta_phi/2``, ``eta``, and migration, so a
+    common payoff baseline or a common rate-unit rescaling cannot change the
+    phase label.
+    """
+
+    delta_phi = float(phi_1) - float(phi_2)
+    numeric_eta = float(eta)
+    numeric_migration = float(migration_rate)
+    band = relative_band((0.5 * delta_phi, numeric_eta, numeric_migration), tol)
+    value = two_patch_midpoint_exponent(
+        float(phi_1), float(phi_2), numeric_eta, numeric_migration
+    )
+    if value > band:
         return "reciprocal_spatial_invasion"
-    if value < -tol:
+    if value < -band:
         return "mutual_spatial_noninvasion"
     return "spatial_coordination_switch_boundary"
 
