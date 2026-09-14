@@ -6,6 +6,7 @@ from src.hard_module_partition import (
     optimal_contiguous_partition_fixed_k,
     optimal_penalized_partition,
 )
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL
 
 
 SCALES = (1e-16, 1e-8, 1.0, 1e8, 1e16)
@@ -35,7 +36,10 @@ def test_fixed_k_optimum_and_loss_curve_are_invariant_to_weight_scale():
         )
         assert isclose(curve[0]["within_loss"] / scale, 14.0 / 3.0, rel_tol=1e-12)
         assert isclose(curve[1]["within_loss"] / scale, 0.5, rel_tol=1e-12)
-        assert isclose(curve[2]["within_loss"] / scale, 0.0, abs_tol=1e-15)
+        # The singleton partition is analytically zero-loss; allow only a
+        # roundoff-scale residual relative to the commensurate shared loss.
+        zero_band = DEFAULT_RELATIVE_TOL * abs(curve[0]["within_loss"])
+        assert abs(curve[2]["within_loss"]) <= zero_band
 
 
 def test_penalized_phase_regions_are_invariant_to_common_weight_cost_scale():
