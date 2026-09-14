@@ -23,6 +23,7 @@ from src.mesoscopic_architecture import (
     mesoscopic_step,
     variance_architecture,
 )
+from src.numerical_tolerance import relative_band
 
 
 def regular_grid(length: float = 1.0, bins: int = 41) -> tuple[float, ...]:
@@ -108,7 +109,7 @@ def iterate_dynamics(
     if steps < 1:
         raise ValueError("steps must be positive")
     f = _normalise(density)
-    epsilon_effective = None if epsilon is None else float(epsilon) + 1e-12
+    declared_epsilon = None if epsilon is None else float(epsilon)
     last_change = float("inf")
     for _ in range(steps):
         step = mesoscopic_step(
@@ -117,7 +118,7 @@ def iterate_dynamics(
             alpha=alpha,
             kappa=kappa,
             gamma=gamma,
-            epsilon=epsilon_effective,
+            epsilon=declared_epsilon,
             beta=beta,
             mutation_rate=mutation_rate,
             jump_radius_bins=jump_radius_bins,
@@ -215,10 +216,11 @@ def classify_distribution(
     locations = tuple(xs[i] for i in peaks)
     left_cut = xs[0] + endpoint_fraction * span
     right_cut = xs[-1] - endpoint_fraction * span
-    left_mass = sum(m for x, m in zip(xs, f) if x <= left_cut + 1e-12)
-    right_mass = sum(m for x, m in zip(xs, f) if x >= right_cut - 1e-12)
-    has_left_peak = any(x <= left_cut + 1e-12 for x in locations)
-    has_right_peak = any(x >= right_cut - 1e-12 for x in locations)
+    coordinate_band = relative_band((span,))
+    left_mass = sum(m for x, m in zip(xs, f) if x <= left_cut + coordinate_band)
+    right_mass = sum(m for x, m in zip(xs, f) if x >= right_cut - coordinate_band)
+    has_left_peak = any(x <= left_cut + coordinate_band for x in locations)
+    has_right_peak = any(x >= right_cut - coordinate_band for x in locations)
 
     if (
         len(peaks) >= 2
@@ -385,14 +387,14 @@ def phase_cell(
     # by strictly uphill jumps no larger than the same radius.
     start_index = min(range(len(xs)), key=lambda i: abs(xs[i] - accessibility_start))
     resident = tuple(1.0 if i == start_index else 0.0 for i in range(len(xs)))
-    epsilon_effective = None if epsilon is None else float(epsilon) + 1e-12
+    declared_epsilon = None if epsilon is None else float(epsilon)
     resident_payoff = architecture_payoff(
         xs,
         resident,
         alpha=alpha,
         kappa=kappa,
         gamma=gamma,
-        epsilon=epsilon_effective,
+        epsilon=declared_epsilon,
     )
     critical_radius = minimum_uphill_jump_radius_to_global(
         resident_payoff, start_index
