@@ -15,6 +15,8 @@ from src.finite_population import (
     moran_fixation_probability_d,
     moran_fixation_probability_s,
 )
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL
+from src.payoff_game import classify_phase
 
 Topology = Tuple[int, ...]
 
@@ -116,24 +118,28 @@ def classify_pairwise_topology_game(
     topology_t: Sequence[int],
     gamma: float,
     edge_weights: Sequence[float] | None = None,
-    tol: float = 1e-12,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> str:
-    """Classify pairwise topology dominance/coexistence/coordination."""
+    """Classify the canonical pairwise topology game.
 
-    t_margin, s_margin = reciprocal_invasion_margins(
+    T plays the canonical differentiated-strategy role and S the shared role.
+    Classification is delegated to the core PAYOFF phase classifier so topology
+    pairs use exactly the same scale-invariant numerical boundary contract.
+    """
+
+    phi, eta = pairwise_payoff_parameters(
         payoff_s, payoff_t, topology_s, topology_t, gamma, edge_weights
     )
-    t_invades = t_margin > tol
-    s_invades = s_margin > tol
-    if t_invades and s_invades:
-        return "stable_pairwise_coexistence"
-    if t_invades:
-        return "t_dominance"
-    if s_invades:
-        return "s_dominance"
-    if abs(t_margin) <= tol or abs(s_margin) <= tol:
-        return "boundary"
-    return "coordination_bistability"
+    phase = classify_phase(phi, eta, tol=tol)
+    labels = {
+        "stable_architecture_coexistence": "stable_pairwise_coexistence",
+        "differentiated_dominance": "t_dominance",
+        "shared_dominance": "s_dominance",
+        "coordination_bistability": "coordination_bistability",
+        "neutral_architecture_boundary": "boundary",
+        "nonhyperbolic_phase_boundary": "boundary",
+    }
+    return labels[phase]
 
 
 def normalized_intrinsic_slope(
