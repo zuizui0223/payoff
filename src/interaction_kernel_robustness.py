@@ -6,6 +6,7 @@ from math import cos, exp, isfinite, pi
 from typing import Iterable, Sequence
 
 from src.architecture_phase_atlas import minimum_uphill_jump_radius_to_global
+from src.numerical_tolerance import relative_band
 
 
 KERNELS = {"hard", "triangular", "cosine", "gaussian", "global"}
@@ -14,6 +15,7 @@ KERNELS = {"hard", "triangular", "cosine", "gaussian", "global"}
 def kernel_weight(distance: float, *, epsilon: float | None, kernel: str) -> float:
     """Return a non-negative interaction weight for one architecture distance."""
     d = abs(float(distance))
+    relative_band((d,))
     kind = str(kernel).lower()
     if kind not in KERNELS:
         raise ValueError(f"unknown kernel: {kernel!r}")
@@ -26,7 +28,8 @@ def kernel_weight(distance: float, *, epsilon: float | None, kernel: str) -> flo
         raise ValueError("epsilon must be finite and positive")
 
     if kind == "hard":
-        return 1.0 if d <= e + 1e-12 else 0.0
+        band = relative_band((d, e))
+        return 1.0 if d <= e + band else 0.0
     if kind == "triangular":
         return max(0.0, 1.0 - d / e)
     if kind == "cosine":
