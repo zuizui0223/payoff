@@ -14,6 +14,8 @@ from __future__ import annotations
 from math import inf
 from typing import Dict, Iterable, List, Sequence, Tuple
 
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
+
 Module = Tuple[int, ...]
 
 
@@ -143,9 +145,15 @@ def optimal_contiguous_partition_fixed_k(
     optima: Sequence[float],
     weights: Sequence[float],
     module_count: int,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> Dict[str, object]:
-    """Return one exact optimal scalar hard partition with exactly k modules."""
+    """Return one exact optimal scalar hard partition with exactly k modules.
 
+    ``tol`` is dimensionless and is used only for numerical comparison of
+    commensurate DP objective values.
+    """
+
+    relative_band((0.0,), tol)
     order, sorted_optima, sorted_weights = _sorted_problem(optima, weights)
     n = len(order)
     if not 1 <= module_count <= n:
@@ -164,7 +172,12 @@ def optimal_contiguous_partition_fixed_k(
                 candidate = dp[k - 1][start] + _segment_loss(
                     prefix_w, prefix_wx, prefix_wx2, start, end
                 )
-                if candidate < best - 1e-15:
+                if best_start < 0:
+                    best = candidate
+                    best_start = start
+                    continue
+                band = relative_band((candidate, best), tol)
+                if candidate < best - band:
                     best = candidate
                     best_start = start
             dp[k][end] = best
@@ -198,14 +211,18 @@ def optimal_penalized_partition(
     optima: Sequence[float],
     weights: Sequence[float],
     extra_module_cost: float,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> Dict[str, object]:
     """Return exact partition maximizing recovery - kappa*(modules-1).
 
     Uses an O(n^2) dynamic programme over contiguous blocks after sorting.
+    ``tol`` is dimensionless; numerically tied objectives retain the registered
+    preference for fewer modules.
     """
 
     if extra_module_cost < 0.0:
         raise ValueError("extra_module_cost must be non-negative")
+    relative_band((0.0,), tol)
     order, sorted_optima, sorted_weights = _sorted_problem(optima, weights)
     n = len(order)
     prefix_w, prefix_wx, prefix_wx2 = _prefixes(sorted_optima, sorted_weights)
@@ -225,8 +242,14 @@ def optimal_penalized_partition(
                 + extra_module_cost
             )
             candidate_count = count[start] + 1
-            if candidate < best - 1e-15 or (
-                abs(candidate - best) <= 1e-15 and candidate_count < best_count
+            if best_start < 0:
+                best = candidate
+                best_start = start
+                best_count = candidate_count
+                continue
+            band = relative_band((candidate, best), tol)
+            if candidate < best - band or (
+                abs(candidate - best) <= band and candidate_count < best_count
             ):
                 best = candidate
                 best_start = start
@@ -265,12 +288,14 @@ def optimal_penalized_partition(
 def fixed_k_loss_curve(
     optima: Sequence[float],
     weights: Sequence[float],
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> Tuple[Dict[str, object], ...]:
     """Return exact best partition result for every k=1,...,n."""
 
     _validate_values_weights(optima, weights)
+    relative_band((0.0,), tol)
     return tuple(
-        optimal_contiguous_partition_fixed_k(optima, weights, k)
+        optimal_contiguous_partition_fixed_k(optima, weights, k, tol=tol)
         for k in range(1, len(optima) + 1)
     )
 
@@ -278,10 +303,11 @@ def fixed_k_loss_curve(
 def module_count_intervals(
     optima: Sequence[float],
     weights: Sequence[float],
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> Tuple[Dict[str, object], ...]:
     """Return non-empty kappa intervals where each module count is optimal."""
 
-    curve = fixed_k_loss_curve(optima, weights)
+    curve = fixed_k_loss_curve(optima, weights, tol=tol)
     losses = {int(row["module_count"]): float(row["within_loss"]) for row in curve}
     n = len(curve)
     rows: List[Dict[str, object]] = []
@@ -292,7 +318,11 @@ def module_count_intervals(
         upper = inf
         for other in range(1, k):
             upper = min(upper, (losses[other] - losses[k]) / (k - other))
-        if lower <= upper + 1e-12:
+        nonempty = upper == inf
+        if not nonempty:
+            band = relative_band((lower, upper), tol)
+            nonempty = lower <= upper + band
+        if nonempty:
             result = curve[k - 1]
             rows.append(
                 {
