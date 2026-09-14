@@ -10,6 +10,8 @@ from dataclasses import dataclass
 from math import exp, isfinite
 from typing import Sequence
 
+from src.numerical_tolerance import relative_band
+
 
 def _normalise(values: Sequence[float]) -> tuple[float, ...]:
     vals = tuple(float(v) for v in values)
@@ -51,21 +53,36 @@ def bounded_interaction_payoff(
     """Return H_epsilon(r_i,f) on a finite architecture grid.
 
     H_epsilon(r,q) = -gamma (r-q)^2 1{|r-q| <= epsilon}.
-    ``epsilon=None`` gives the global-interaction kernel.
+    ``epsilon=None`` gives the global-interaction kernel.  For finite epsilon,
+    exact-boundary inclusion uses a scale-relative coordinate roundoff band so
+    architecture-unit conversions do not change kernel membership.
     """
     xs = _validate_grid(grid)
     f = _normalise(density)
     if len(xs) != len(f):
         raise ValueError("grid and density must have equal length")
-    if epsilon is not None and epsilon < 0.0:
-        raise ValueError("epsilon must be non-negative or None")
+
+    g = float(gamma)
+    if not isfinite(g):
+        raise ValueError("gamma must be finite")
+    if epsilon is None:
+        e = None
+    else:
+        e = float(epsilon)
+        if not isfinite(e) or e < 0.0:
+            raise ValueError("epsilon must be finite and non-negative or None")
 
     out = []
     for x in xs:
         value = 0.0
         for y, mass in zip(xs, f):
-            if epsilon is None or abs(x - y) <= epsilon:
-                value += -float(gamma) * (x - y) ** 2 * mass
+            delta = x - y
+            distance = abs(delta)
+            inside = e is None
+            if e is not None:
+                inside = distance <= e + relative_band((distance, e))
+            if inside:
+                value += -g * delta * delta * mass
         out.append(value)
     return tuple(out)
 
