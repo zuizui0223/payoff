@@ -4,6 +4,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from math import isfinite, sqrt
 
+from src.numerical_tolerance import relative_band
+
 
 def local_mutant_curvature(kappa: float, gamma: float) -> float:
     """Return d2 f/dy2 at a monomorphic interior singular architecture."""
@@ -82,6 +84,21 @@ def negative_feedback_interface_escape_infimum(
     is the infimum jump size needed to bypass the interface while preserving a
     strictly uphill path. Equality itself is neutral; strict accessibility in
     the continuum requires a jump strictly larger than the infimum.
+
+    The equal-payoff root is solved in the dimensionless coordinate
+    ``z=x/epsilon``.  With
+
+        A = alpha*epsilon,
+        Q = (kappa/2 + gamma)*epsilon^2,
+        O = p_out(epsilon),
+
+    the equation is ``Q z^2 - A z + O = 0``.  ``(A,Q,O)`` are normalized by
+    one common payoff scale before evaluating the discriminant, and the
+    origin-side root uses the conjugate form
+
+        z = 2 O / (A + sqrt(A^2 - 4 Q O)),
+
+    which remains stable and continuous through the linear limit ``Q=0``.
     """
     a = float(alpha)
     k = float(kappa)
@@ -104,18 +121,32 @@ def negative_feedback_interface_escape_infimum(
     if not outside < inside:
         raise RuntimeError("negative gamma should create a downward boundary jump")
 
-    quadratic = 0.5 * k + g
-    if abs(quadratic) < 1e-14:
-        x_equal = outside / a
-    else:
-        discriminant = a * a - 4.0 * quadratic * outside
-        if discriminant < 0.0 and abs(discriminant) < 1e-12:
-            discriminant = 0.0
-        if discriminant < 0.0:
-            raise RuntimeError("equal-payoff root is not real under declared assumptions")
-        x_equal = (a - sqrt(discriminant)) / (2.0 * quadratic)
+    linear_payoff = a * e
+    quadratic_payoff = (0.5 * k + g) * e * e
+    payoff_scale = max(abs(linear_payoff), abs(quadratic_payoff), abs(outside))
+    if not isfinite(payoff_scale) or payoff_scale <= 0.0:
+        raise RuntimeError("equal-payoff coefficients must define a finite positive scale")
 
-    if not 0.0 <= x_equal < e:
+    A = linear_payoff / payoff_scale
+    Q = quadratic_payoff / payoff_scale
+    O = outside / payoff_scale
+    square_term = A * A
+    cross_term = 4.0 * Q * O
+    discriminant = square_term - cross_term
+    discriminant_band = relative_band((square_term, cross_term))
+    if discriminant < 0.0:
+        if -discriminant <= discriminant_band:
+            discriminant = 0.0
+        else:
+            raise RuntimeError("equal-payoff root is not real under declared assumptions")
+
+    denominator = A + sqrt(discriminant)
+    if not isfinite(denominator) or denominator <= 0.0:
+        raise RuntimeError("equal-payoff root denominator is not positive and finite")
+    z_equal = 2.0 * O / denominator
+    x_equal = e * z_equal
+
+    if not 0.0 <= z_equal < 1.0:
         raise RuntimeError("equal-payoff root did not fall inside the interaction interval")
 
     return NegativeFeedbackEscape(
