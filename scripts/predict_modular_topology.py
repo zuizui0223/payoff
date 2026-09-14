@@ -35,6 +35,7 @@ from src.edgewise_modularity import (
     optimized_loss,
     optimized_phenotype,
 )
+from src.numerical_tolerance import relative_band
 from src.topology_decision_robustness import first_edge_decision_radius
 from src.topology_release_path import connected_components, greedy_positive_pressure_path
 from src.topology_robustness import topology_robustness_summary
@@ -145,6 +146,25 @@ def module_label(components, function_ids: Sequence[str]) -> str:
     )
 
 
+def _signed_receipt(
+    value: float,
+    scale_values: Sequence[float],
+    *,
+    positive: str,
+    negative: str,
+    zero: str,
+) -> str:
+    """Classify a signed diagnostic relative to commensurate numerical scale."""
+
+    numeric = float(value)
+    band = relative_band(tuple(float(item) for item in scale_values))
+    if numeric > band:
+        return positive
+    if numeric < -band:
+        return negative
+    return zero
+
+
 def write_edge_pressures(
     output: Path,
     ids: Sequence[str],
@@ -170,12 +190,12 @@ def write_edge_pressures(
                 "release_cost_per_unit": cost,
                 "pressure": pressure,
                 "margin": margin,
-                "direction": (
-                    "favor_more_decoupling"
-                    if margin > 1e-12
-                    else "favor_more_coupling"
-                    if margin < -1e-12
-                    else "marginal_balance"
+                "direction": _signed_receipt(
+                    margin,
+                    (pressure, cost),
+                    positive="favor_more_decoupling",
+                    negative="favor_more_coupling",
+                    zero="marginal_balance",
                 ),
             }
         )
@@ -196,22 +216,24 @@ def write_edge_transfer(
     couplings: Sequence[float],
 ):
     matrix = edge_transfer_matrix(optima, weights, edges, couplings)
+    transfer_scale = tuple(value for row in matrix for value in row)
     rows = []
     for target_index, target in enumerate(labels):
         for released_index, released in enumerate(labels):
+            value = matrix[target_index][released_index]
             rows.append(
                 {
                     "target_edge_index": target_index,
                     "target_edge": edge_label(target),
                     "released_edge_index": released_index,
                     "released_edge": edge_label(released),
-                    "d_pressure_target_d_decoupling_released": matrix[target_index][released_index],
-                    "effect": (
-                        "increase"
-                        if matrix[target_index][released_index] > 1e-12
-                        else "decrease"
-                        if matrix[target_index][released_index] < -1e-12
-                        else "zero"
+                    "d_pressure_target_d_decoupling_released": value,
+                    "effect": _signed_receipt(
+                        value,
+                        transfer_scale,
+                        positive="increase",
+                        negative="decrease",
+                        zero="zero",
                     ),
                 }
             )
