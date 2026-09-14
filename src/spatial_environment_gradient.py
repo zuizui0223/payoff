@@ -11,7 +11,7 @@ thresholds have exact closed forms.
 
 from __future__ import annotations
 
-from math import sqrt
+from math import isfinite, sqrt
 from typing import Dict, Sequence, Tuple
 
 from src.environment_mosaic import invasion_exponent, invasion_margins
@@ -179,40 +179,67 @@ def common_eta_window_switch_rate(
     Requires a connected graph, common eta>0, and range(phi0)>2eta. Under these
     conditions F(m)=Lambda_D(m)+Lambda_S(m) decreases strictly from
     range(phi0)-2eta>0 to -2eta<0, so one positive crossing exists.
+
+    The root is solved in dimensionless coordinates
+        phi'=phi/r_scale, eta'=eta/r_scale,
+        W'=W/w_scale, mu=m*w_scale/r_scale,
+    and converted back only after convergence.
     """
 
     if eta <= 0.0:
         raise ValueError("eta must be positive")
+    if max_iterations <= 0:
+        raise ValueError("max_iterations must be positive")
     _validate_connected_adjacency(adjacency)
     if len(base_phis) != len(adjacency) or not base_phis:
         raise ValueError("one base phi is required per patch")
-    if max(base_phis) - min(base_phis) <= 2.0 * eta:
-        raise ValueError("requires range(base_phis) > 2 eta")
-    etas = [eta] * len(base_phis)
 
-    def signed_sum(migration: float) -> float:
+    numeric_phis = [float(value) for value in base_phis]
+    numeric_eta = float(eta)
+    relative_band(tuple(numeric_phis) + (numeric_eta,), tol)
+    if max(numeric_phis) - min(numeric_phis) <= 2.0 * numeric_eta:
+        raise ValueError("requires range(base_phis) > 2 eta")
+
+    rate_scale = max(max(abs(value) for value in numeric_phis), abs(numeric_eta))
+    graph_scale = max(abs(float(value)) for row in adjacency for value in row)
+    if graph_scale == 0.0:
+        raise ValueError("window-switch theorem requires positive graph weights")
+
+    normalized_phis = tuple(value / rate_scale for value in numeric_phis)
+    normalized_eta = numeric_eta / rate_scale
+    normalized_adjacency = tuple(
+        tuple(float(value) / graph_scale for value in row) for row in adjacency
+    )
+    normalized_etas = (normalized_eta,) * len(normalized_phis)
+
+    def signed_sum(mu: float) -> float:
         lambda_d, lambda_s = baseline_spatial_exponents(
-            base_phis, etas, adjacency, migration
+            normalized_phis, normalized_etas, normalized_adjacency, mu
         )
         return lambda_d + lambda_s
 
     lower = 0.0
     upper = 1.0
-    while signed_sum(upper) > 0.0:
+    for _ in range(max_iterations):
+        if signed_sum(upper) <= 0.0:
+            break
         upper *= 2.0
-        if upper > 1e15:
-            raise RuntimeError("failed to bracket environmental window switch")
+        if not isfinite(upper):
+            raise RuntimeError("failed to bracket dimensionless environmental window switch")
+    else:
+        raise RuntimeError("failed to bracket dimensionless environmental window switch")
 
     for _ in range(max_iterations):
         mid = 0.5 * (lower + upper)
         value = signed_sum(mid)
-        if abs(value) <= tol or upper - lower <= tol:
-            return mid
+        width_band = relative_band((lower, upper), tol)
+        if abs(value) <= tol or upper - lower <= width_band:
+            return mid * rate_scale / graph_scale
         if value > 0.0:
             lower = mid
         else:
             upper = mid
-    return 0.5 * (lower + upper)
+    return 0.5 * (lower + upper) * rate_scale / graph_scale
 
 
 def two_patch_midpoint_exponent(
