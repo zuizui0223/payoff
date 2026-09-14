@@ -22,6 +22,8 @@ from __future__ import annotations
 from math import sqrt
 from typing import Dict, List, Sequence, Tuple
 
+from src.numerical_tolerance import relative_band
+
 
 def patch_phi(
     conflict_loads: Sequence[float],
@@ -335,11 +337,17 @@ def _validate_adjacency(adjacency: Sequence[Sequence[float]]) -> None:
     n = len(adjacency)
     if n == 0 or any(len(row) != n for row in adjacency):
         raise ValueError("adjacency must be non-empty and square")
-    for i in range(n):
-        for j in range(n):
-            if adjacency[i][j] < 0.0:
+    numeric = [[float(adjacency[i][j]) for j in range(n)] for i in range(n)]
+    for row in numeric:
+        for value in row:
+            relative_band((value,))
+            if value < 0.0:
                 raise ValueError("adjacency weights must be non-negative")
-            if abs(adjacency[i][j] - adjacency[j][i]) > 1e-12:
+    for i in range(n):
+        for j in range(i + 1, n):
+            left = numeric[i][j]
+            right = numeric[j][i]
+            if abs(left - right) > relative_band((left, right)):
                 raise ValueError("adjacency must be symmetric")
 
 
