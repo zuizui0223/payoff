@@ -20,6 +20,9 @@ from __future__ import annotations
 
 from typing import Dict, Optional, Tuple
 
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL
+from src.payoff_game import interior_equilibrium as core_interior_equilibrium
+
 
 _UPDATE_RULES = {"bd", "pc", "db", "im"}
 
@@ -89,17 +92,20 @@ def graph_payoff_gap(p: float, phi: float, eta: float, degree: int) -> float:
 
 
 def graph_interior_equilibrium(
-    phi: float, eta: float, degree: int, tol: float = 1e-12
+    phi: float,
+    eta: float,
+    degree: int,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> Optional[float]:
-    """Return the strict transformed interior equilibrium/threshold, if any."""
+    """Return the strict transformed interior equilibrium/threshold, if any.
+
+    The regular-graph transform changes only the PAYOFF parameters.  Delegating
+    the transformed pair to the canonical solver keeps payoff-scale zero tests
+    separate from the dimensionless frequency-boundary tolerance.
+    """
 
     phi_k, eta_k = transformed_parameters(phi, eta, degree)
-    if abs(eta_k) <= tol:
-        return None
-    p_star = 0.5 * (1.0 - phi_k / eta_k)
-    if tol < p_star < 1.0 - tol:
-        return p_star
-    return None
+    return core_interior_equilibrium(phi_k, eta_k, tol=tol)
 
 
 def graph_phi_boundaries(eta: float, degree: int) -> Tuple[float, float]:
