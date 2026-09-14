@@ -18,6 +18,8 @@ from __future__ import annotations
 from math import sqrt
 from typing import Dict, List, Optional, Sequence, Tuple
 
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
+
 
 def selection_rhs(p: float, phi: float, eta: float) -> float:
     """Local PAYOFF replicator vector field."""
@@ -265,8 +267,16 @@ def two_patch_polarized_eigenvalues(
     return 6.0 * migration_rate - eta, 4.0 * migration_rate - eta
 
 
-def classify_two_patch_polarization(eta: float, migration_rate: float, tol: float = 1e-12) -> str:
-    """Classify the exact two-patch polarized branch for phi=0, eta>0."""
+def classify_two_patch_polarization(
+    eta: float,
+    migration_rate: float,
+    tol: float = DEFAULT_RELATIVE_TOL,
+) -> str:
+    """Classify the exact two-patch polarized branch for phi=0, eta>0.
+
+    ``tol`` is dimensionless; numerical boundary bands are relative to the
+    commensurate rate values rather than to an absolute rate unit.
+    """
 
     if eta <= 0.0:
         raise ValueError("eta must be positive")
@@ -274,13 +284,15 @@ def classify_two_patch_polarization(eta: float, migration_rate: float, tol: floa
         raise ValueError("migration_rate must be non-negative")
     stable_cut = eta / 6.0
     existence_cut = eta / 4.0
-    if migration_rate < stable_cut - tol:
+    stable_band = relative_band((migration_rate, stable_cut), tol)
+    existence_band = relative_band((migration_rate, existence_cut), tol)
+    if migration_rate < stable_cut - stable_band:
         return "stable_polarized_patches"
-    if abs(migration_rate - stable_cut) <= tol:
+    if abs(migration_rate - stable_cut) <= stable_band:
         return "polarized_stability_boundary"
-    if migration_rate < existence_cut - tol:
+    if migration_rate < existence_cut - existence_band:
         return "polarized_saddle"
-    if abs(migration_rate - existence_cut) <= tol:
+    if abs(migration_rate - existence_cut) <= existence_band:
         return "polarization_pitchfork_boundary"
     return "no_polarized_equilibrium"
 
