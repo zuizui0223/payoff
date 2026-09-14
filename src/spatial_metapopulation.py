@@ -199,7 +199,9 @@ def synchronous_mode_rates(
 
         r_k = f'(p*) - m lambda_k.
 
-    The zero Laplacian eigenvalue is the spatially uniform mode.
+    The zero Laplacian eigenvalue is the spatially uniform mode. Tiny negative
+    eigenvalues are accepted only when they are roundoff-scale relative to the
+    supplied spectrum and are then clipped to zero.
     """
 
     _validate_frequency(p_star)
@@ -207,10 +209,12 @@ def synchronous_mode_rates(
         raise ValueError("migration_rate must be non-negative")
     if not laplacian_eigenvalues:
         raise ValueError("laplacian_eigenvalues cannot be empty")
-    if any(value < -1e-12 for value in laplacian_eigenvalues):
+    eigenvalues = tuple(float(value) for value in laplacian_eigenvalues)
+    eigen_band = relative_band(eigenvalues)
+    if any(value < -eigen_band for value in eigenvalues):
         raise ValueError("Laplacian eigenvalues must be non-negative")
     fp = selection_derivative(p_star, phi, eta)
-    return [fp - migration_rate * max(0.0, value) for value in laplacian_eigenvalues]
+    return [fp - migration_rate * max(0.0, value) for value in eigenvalues]
 
 
 def synchronization_threshold(
@@ -311,11 +315,21 @@ def _validate_network(
         raise ValueError("migration_rate must be non-negative")
     for p in frequencies:
         _validate_frequency(p)
-    for i in range(n):
-        for j in range(n):
-            if adjacency[i][j] < 0.0:
+
+    numeric_adjacency = [
+        [float(adjacency[i][j]) for j in range(n)] for i in range(n)
+    ]
+    for row in numeric_adjacency:
+        for value in row:
+            relative_band((value,))
+            if value < 0.0:
                 raise ValueError("adjacency weights must be non-negative")
-            if abs(adjacency[i][j] - adjacency[j][i]) > 1e-12:
+    for i in range(n):
+        for j in range(i + 1, n):
+            left = numeric_adjacency[i][j]
+            right = numeric_adjacency[j][i]
+            symmetry_band = relative_band((left, right))
+            if abs(left - right) > symmetry_band:
                 raise ValueError("adjacency must be symmetric for mean-conserving migration")
 
 
