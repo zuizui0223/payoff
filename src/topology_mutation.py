@@ -13,6 +13,7 @@ from src.topology_game import (
     validate_topology,
 )
 from src.finite_population import moran_fixation_probability_d
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
 
 
 def single_edge_neighbors(topology: Sequence[int]) -> Tuple[Topology, ...]:
@@ -153,16 +154,36 @@ def detailed_balance_max_residual(
 
 
 def is_single_edge_local_optimum(
-    topology: Sequence[int], intrinsic_payoffs: Mapping[Topology, float], tol: float = 1e-12
+    topology: Sequence[int],
+    intrinsic_payoffs: Mapping[Topology, float],
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> bool:
-    """Return whether no supplied one-edge neighbor has higher intrinsic payoff."""
+    """Return whether no supplied one-edge neighbor has higher intrinsic payoff.
+
+    ``tol`` is dimensionless. The numerical band is based on the centered payoff
+    span of the source and its supplied one-edge neighbors, so the classification
+    is invariant to both common positive payoff rescaling and common payoff
+    offsets.
+    """
 
     state = validate_topology(topology)
     if state not in intrinsic_payoffs:
         raise ValueError("topology missing from intrinsic_payoffs")
-    value = intrinsic_payoffs[state]
-    for neighbor in single_edge_neighbors(state):
-        if neighbor in intrinsic_payoffs and intrinsic_payoffs[neighbor] > value + tol:
+
+    value = float(intrinsic_payoffs[state])
+    neighbor_values = [
+        float(intrinsic_payoffs[neighbor])
+        for neighbor in single_edge_neighbors(state)
+        if neighbor in intrinsic_payoffs
+    ]
+    local_values = (value, *neighbor_values)
+    # Validate finite local payoffs before centering.
+    relative_band(local_values, 0.0)
+    base = min(local_values)
+    band = relative_band((item - base for item in local_values), tol)
+
+    for neighbor_value in neighbor_values:
+        if neighbor_value > value + band:
             return False
     return True
 
