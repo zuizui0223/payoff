@@ -24,6 +24,7 @@ from src.edgewise_modularity import (
     optimized_phenotype,
     recovery_from_decoupling,
 )
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
 
 Edge = Tuple[int, int]
 
@@ -32,19 +33,25 @@ def connected_components(
     node_count: int,
     edges: Sequence[Edge],
     couplings: Sequence[float],
-    tol: float = 1e-12,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> Tuple[Tuple[int, ...], ...]:
-    """Return connected modules induced by edges with positive coupling."""
+    """Return connected modules induced by numerically positive coupling.
+
+    ``tol`` is dimensionless. The zero band is derived only from the supplied
+    coupling strengths; it is not reused for payoff or pressure quantities.
+    """
 
     if node_count <= 0:
         raise ValueError("node_count must be positive")
     if len(edges) != len(couplings):
         raise ValueError("edges and couplings must have same length")
+    coupling_band = relative_band(couplings, tol)
     adjacency = [set() for _ in range(node_count)]
     for (i, j), coupling in zip(edges, couplings):
-        if coupling < -tol:
+        coupling = float(coupling)
+        if coupling < -coupling_band:
             raise ValueError("couplings must be non-negative")
-        if coupling > tol:
+        if coupling > coupling_band:
             adjacency[i].add(j)
             adjacency[j].add(i)
 
@@ -73,7 +80,7 @@ def greedy_positive_pressure_path(
     edges: Sequence[Edge],
     reference_couplings: Sequence[float],
     linear_costs: Sequence[float],
-    tol: float = 1e-12,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> List[Dict[str, object]]:
     """Release one currently profitable edge at a time.
 
@@ -82,13 +89,20 @@ def greedy_positive_pressure_path(
     The selected edge is fully released. Phenotype and all edge pressures are
     then recomputed before the next step.
 
-    Returns the initial state plus every post-release state.
+    ``tol`` is dimensionless. Release bookkeeping is exact because this routine
+    only stores 0 or the full reference release; profitability is judged on the
+    commensurate pressure/cost scale. Returns the initial state plus every
+    post-release state.
     """
 
     if not optima or len(optima) != len(trait_weights):
         raise ValueError("optima and trait_weights must have same non-zero length")
     if not (len(edges) == len(reference_couplings) == len(linear_costs)):
         raise ValueError("one coupling and one linear cost are required per edge")
+    # Validate finite numerical inputs and the dimensionless tolerance before
+    # applying biological sign constraints.
+    relative_band(reference_couplings, tol)
+    relative_band(linear_costs, tol)
     if any(c < 0.0 for c in reference_couplings):
         raise ValueError("reference couplings must be non-negative")
     if any(k < 0.0 for k in linear_costs):
@@ -110,18 +124,24 @@ def greedy_positive_pressure_path(
         )
         margins = [
             pressure - cost
-            if decouplings[index] < reference_couplings[index] - tol
+            if decouplings[index] < reference_couplings[index]
             else float("-inf")
             for index, (pressure, cost) in enumerate(zip(pressures, linear_costs))
         ]
         candidate = max(range(len(edges)), key=lambda index: margins[index]) if edges else None
-        chosen = candidate if candidate is not None and margins[candidate] > tol else None
+        chosen = None
+        if candidate is not None and margins[candidate] != float("-inf"):
+            payoff_band = relative_band(
+                (pressures[candidate], linear_costs[candidate]), tol
+            )
+            if margins[candidate] > payoff_band:
+                chosen = candidate
 
         path.append(
             {
                 "step": len(path),
                 "released": tuple(
-                    decouplings[index] >= reference_couplings[index] - tol
+                    decouplings[index] >= reference_couplings[index]
                     for index in range(len(edges))
                 ),
                 "decouplings": tuple(decouplings),
