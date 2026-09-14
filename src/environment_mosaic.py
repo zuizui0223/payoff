@@ -19,7 +19,7 @@ Their largest eigenvalues are the metapopulation invasion exponents.
 
 from __future__ import annotations
 
-from math import isfinite, sqrt
+from math import hypot, isfinite, sqrt
 from typing import Dict, List, Sequence, Tuple
 
 from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
@@ -261,13 +261,17 @@ def critical_migration_rate(
 
 
 def two_patch_invasion_exponent(r1: float, r2: float, migration_rate: float) -> float:
-    """Exact principal exponent for two unit-coupled patches."""
+    """Exact principal exponent for two unit-coupled patches.
+
+    The Euclidean norm is evaluated with ``hypot`` to avoid overflow and
+    underflow under a common rate-unit rescaling.
+    """
 
     if migration_rate < 0.0:
         raise ValueError("migration_rate must be non-negative")
     return 0.5 * (
         r1 + r2 - 2.0 * migration_rate
-        + sqrt((r1 - r2) ** 2 + 4.0 * migration_rate**2)
+        + hypot(r1 - r2, 2.0 * migration_rate)
     )
 
 
@@ -276,11 +280,20 @@ def two_patch_rescue_threshold(r1: float, r2: float) -> float:
 
     Requires one margin positive, the other negative, and r1+r2<0. Then
         m_c = r1*r2/(r1+r2) > 0.
+
+    The ratio is evaluated after normalizing both margins by a common finite
+    rate scale, avoiding dimensional products that can underflow or overflow.
     """
 
-    if not (r1 * r2 < 0.0 and r1 + r2 < 0.0):
+    a = float(r1)
+    b = float(r2)
+    relative_band((a, b))
+    if not ((a > 0.0 > b or b > 0.0 > a) and a + b < 0.0):
         raise ValueError("requires opposite-sign margins with negative mean")
-    return r1 * r2 / (r1 + r2)
+    scale = max(abs(a), abs(b))
+    an = a / scale
+    bn = b / scale
+    return scale * (an * bn / (an + bn))
 
 
 def largest_symmetric_eigenvalue(
