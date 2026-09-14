@@ -12,6 +12,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from math import isfinite, sqrt
 
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
+
 
 @dataclass(frozen=True)
 class TriangularBarrierReceipt:
@@ -70,9 +72,14 @@ def triangular_barrier_receipt(
     gamma: float,
     epsilon: float,
     length: float = 1.0,
-    tolerance: float = 1e-12,
+    tolerance: float = DEFAULT_RELATIVE_TOL,
 ) -> TriangularBarrierReceipt:
-    """Return exact local-ridge and across-valley global-better diagnostics."""
+    """Return exact local-ridge and across-valley global-better diagnostics.
+
+    ``tolerance`` is dimensionless.  Derivative, coordinate, and payoff
+    comparisons each derive their own numerical band from commensurate values;
+    no one physical-unit tolerance is reused across dimensions.
+    """
     a = float(alpha)
     k = float(kappa)
     g = float(gamma)
@@ -80,6 +87,7 @@ def triangular_barrier_receipt(
     L = float(length)
     if not all(isfinite(x) for x in (a, k, g, e, L)):
         raise ValueError("parameters must be finite")
+    relative_band((0.0,), tolerance)
     if a <= 0.0:
         raise ValueError("alpha must be positive for the registered shared-resident theorem")
     if k <= 0.0:
@@ -88,17 +96,18 @@ def triangular_barrier_receipt(
         raise ValueError("gamma must be negative")
     if e <= 0.0 or L <= 0.0 or e >= L:
         raise ValueError("require 0 < epsilon < length")
-    if tolerance < 0.0:
-        raise ValueError("tolerance must be non-negative")
 
     G = -g
     r_star = min(L, a / k)
     inside_boundary_derivative = a - (G + k) * e
     outside_boundary_derivative = a - k * e
+    derivative_band = relative_band(
+        (inside_boundary_derivative, outside_boundary_derivative), tolerance
+    )
 
     ridge_and_dip = (
-        outside_boundary_derivative > tolerance
-        and inside_boundary_derivative < -tolerance
+        outside_boundary_derivative > derivative_band
+        and inside_boundary_derivative < -derivative_band
     )
 
     r_max = None
@@ -116,10 +125,16 @@ def triangular_barrier_receipt(
         depth = p_max - p_boundary
 
     p_outside_best = _intrinsic_payoff(r_star, a, k)
+    coordinate_band = relative_band((r_star, e), tolerance)
+    payoff_band = (
+        0.0
+        if p_max is None
+        else relative_band((p_outside_best, p_max), tolerance)
+    )
     outside_better = (
-        r_star > e + tolerance
+        r_star - e > coordinate_band
         and p_max is not None
-        and p_outside_best > p_max + tolerance
+        and p_outside_best - p_max > payoff_band
     )
 
     return TriangularBarrierReceipt(
@@ -190,7 +205,8 @@ def triangular_feedback_window(
         raise ValueError("alpha, kappa, epsilon and length must be positive")
 
     r_star = a / k
-    if r_star > L + 1e-12:
+    coordinate_band = relative_band((r_star, L))
+    if r_star - L > coordinate_band:
         raise ValueError("closed-form feedback window requires alpha/kappa <= length")
     if not e < r_star:
         raise ValueError("feedback window requires epsilon < alpha/kappa")
@@ -206,9 +222,11 @@ def triangular_feedback_window(
     r_contact = r_star * x_hi
     outside = _intrinsic_payoff(r_star, a, k)
 
-    # Exact-form internal consistency checks guard the algebraic branch.
+    # Exact-form internal consistency check: keep the established 1e-9
+    # dimensionless verification tolerance but remove the old payoff-unit floor.
     _, ridge_payoff = _local_max_geometry(a, k, G_hi, e)
-    if abs(ridge_payoff - outside) > 1e-9 * max(1.0, abs(outside)):
+    consistency_band = relative_band((ridge_payoff, outside), 1e-9)
+    if abs(ridge_payoff - outside) > consistency_band:
         raise RuntimeError("closed-form upper boundary failed equal-payoff check")
 
     return TriangularFeedbackWindow(
