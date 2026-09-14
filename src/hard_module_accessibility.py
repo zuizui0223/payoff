@@ -18,6 +18,7 @@ from src.hard_module_partition import (
     split_gain,
     weighted_shared_loss,
 )
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
 
 Module = Tuple[int, ...]
 
@@ -26,14 +27,18 @@ def split_tree_accessibility(
     optima: Sequence[float],
     weights: Sequence[float],
     target_partition: Sequence[Iterable[int]],
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> Dict[str, object]:
     """Return maximin split threshold and one witness tree for target partition.
 
     The target must consist of contiguous blocks after sorting by scalar optimum.
     If the target has one module, threshold is +infinity because no split is
-    required.
+    required. ``tol`` is a dimensionless numerical tolerance used only to break
+    roundoff-scale ties among commensurate split gains.
     """
 
+    # Validate the dimensionless numerical tolerance even for one-module targets.
+    relative_band((0.0,), tol)
     modules = _ordered_contiguous_target(optima, target_partition)
     k = len(modules)
 
@@ -50,7 +55,12 @@ def split_tree_accessibility(
             left_threshold, _ = solve(start, cut)
             right_threshold, _ = solve(cut, end)
             threshold = min(gain, left_threshold, right_threshold)
-            if threshold > best_threshold + 1e-15:
+            if best_cut is None:
+                best_threshold = threshold
+                best_cut = cut
+                continue
+            tie_band = relative_band((threshold, best_threshold), tol)
+            if threshold > best_threshold + tie_band:
                 best_threshold = threshold
                 best_cut = cut
         return best_threshold, best_cut
@@ -88,33 +98,43 @@ def target_is_split_accessible(
     weights: Sequence[float],
     target_partition: Sequence[Iterable[int]],
     extra_module_cost: float,
-    tol: float = 1e-12,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> bool:
-    """Return whether some target-compatible split tree has all gains > cost."""
+    """Return whether some target-compatible split tree has all gains > cost.
+
+    ``tol`` is dimensionless; the comparison band is set relative to the split
+    threshold and module cost rather than to an absolute payoff unit.
+    """
 
     if extra_module_cost < 0.0:
         raise ValueError("extra_module_cost must be non-negative")
     threshold = float(
-        split_tree_accessibility(optima, weights, target_partition)[
+        split_tree_accessibility(optima, weights, target_partition, tol=tol)[
             "accessibility_threshold"
         ]
     )
-    return extra_module_cost < threshold - tol
+    if threshold == inf:
+        return True
+    band = relative_band((threshold, extra_module_cost), tol)
+    return extra_module_cost < threshold - band
 
 
 def greedy_hard_split_path(
     optima: Sequence[float],
     weights: Sequence[float],
     extra_module_cost: float,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> Tuple[Dict[str, object], ...]:
     """Greedily apply the currently largest positive split margin.
 
     This is an accessibility heuristic, not a global optimization algorithm.
-    Modules are contiguous in sorted-optimum order.
+    Modules are contiguous in sorted-optimum order. Numerical comparisons use a
+    dimensionless relative tolerance on commensurate split gains and costs.
     """
 
     if extra_module_cost < 0.0:
         raise ValueError("extra_module_cost must be non-negative")
+    relative_band((0.0,), tol)
     order = tuple(sorted(range(len(optima)), key=lambda i: (optima[i], i)))
     modules: List[Module] = [order]
     shared_loss = weighted_shared_loss(optima, weights)
@@ -137,7 +157,14 @@ def greedy_hard_split_path(
                 gain = split_gain(optima, weights, left, right)
                 margin = gain - extra_module_cost
                 candidate = (margin, gain, module_index, cut, left, right)
-                if best is None or candidate[0] > best[0] + 1e-15:
+                if best is None:
+                    best = candidate
+                    continue
+                # Cost is common across candidate splits, so comparing gains is
+                # algebraically identical to comparing margins but avoids
+                # cancellation when gain and cost are nearly equal.
+                tie_band = relative_band((candidate[1], best[1]), tol)
+                if candidate[1] > best[1] + tie_band:
                     best = candidate
 
         path.append(
@@ -155,7 +182,10 @@ def greedy_hard_split_path(
             }
         )
 
-        if best is None or best[0] <= 1e-12:
+        if best is None:
+            break
+        positive_band = relative_band((best[1], extra_module_cost), tol)
+        if best[0] <= positive_band:
             break
         _, _, module_index, _, left, right = best
         modules = modules[:module_index] + [left, right] + modules[module_index + 1 :]
