@@ -22,6 +22,7 @@ from math import sqrt
 from typing import List, Sequence, Tuple
 
 from src.edgewise_modularity import optimized_phenotype
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
 
 Edge = Tuple[int, int]
 
@@ -156,25 +157,45 @@ def _bilinear(left: Sequence[float], matrix, right: Sequence[float]) -> float:
 
 
 def _inverse_spd(matrix: Sequence[Sequence[float]]) -> List[List[float]]:
-    """Gauss-Jordan inverse for small dense SPD matrices used in diagnostics."""
+    """Gauss-Jordan inverse for small dense SPD matrices used in diagnostics.
+
+    The finite matrix is first divided by its maximum absolute entry, making
+    elimination and pivot checks invariant to a common positive matrix-unit
+    rescaling.  The inverse is rescaled by the reciprocal factor afterward.
+    """
 
     n = len(matrix)
     if n == 0 or any(len(row) != n for row in matrix):
         raise ValueError("matrix must be non-empty and square")
+    raw = [[float(value) for value in row] for row in matrix]
+    flat = tuple(value for row in raw for value in row)
+    relative_band(flat)
+    matrix_scale = max(abs(value) for value in flat)
+    if matrix_scale == 0.0:
+        raise ValueError("matrix is singular")
+
     augmented = [
-        [float(value) for value in row]
+        [value / matrix_scale for value in row]
         + [1.0 if i == j else 0.0 for j in range(n)]
-        for i, row in enumerate(matrix)
+        for i, row in enumerate(raw)
     ]
     width = 2 * n
     for col in range(n):
-        pivot = max(range(col, n), key=lambda row: abs(augmented[row][col]))
-        if abs(augmented[pivot][col]) < 1e-15:
+        def pivot_ratio(row: int) -> float:
+            row_scale = max(abs(augmented[row][j]) for j in range(col, n))
+            if row_scale == 0.0:
+                return -1.0
+            return abs(augmented[row][col]) / row_scale
+
+        pivot = max(range(col, n), key=pivot_ratio)
+        row_scale = max(abs(augmented[pivot][j]) for j in range(col, n))
+        pivot_value = abs(augmented[pivot][col])
+        if row_scale == 0.0 or pivot_value <= DEFAULT_RELATIVE_TOL * row_scale:
             raise ValueError("matrix is singular")
         augmented[col], augmented[pivot] = augmented[pivot], augmented[col]
-        scale = augmented[col][col]
+        pivot_value_signed = augmented[col][col]
         for j in range(width):
-            augmented[col][j] /= scale
+            augmented[col][j] /= pivot_value_signed
         for row in range(n):
             if row == col:
                 continue
@@ -183,4 +204,8 @@ def _inverse_spd(matrix: Sequence[Sequence[float]]) -> List[List[float]]:
                 continue
             for j in range(width):
                 augmented[row][j] -= factor * augmented[col][j]
-    return [row[n:] for row in augmented]
+
+    return [
+        [value / matrix_scale for value in row[n:]]
+        for row in augmented
+    ]
