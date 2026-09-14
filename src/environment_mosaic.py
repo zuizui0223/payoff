@@ -19,7 +19,7 @@ Their largest eigenvalues are the metapopulation invasion exponents.
 
 from __future__ import annotations
 
-from math import sqrt
+from math import isfinite, sqrt
 from typing import Dict, List, Sequence, Tuple
 
 from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
@@ -204,35 +204,60 @@ def critical_migration_rate(
     margins satisfying max(r_j)>0>mean(r_j). Under these conditions the largest
     eigenvalue of diag(r)-mL decreases strictly from max(r_j) to mean(r_j), so
     there is one finite positive crossing.
+
+    The root is solved in dimensionless coordinates
+        r'=r/r_scale, W'=W/w_scale, mu=m*w_scale/r_scale,
+    so ``tol`` is dimensionless and independent rescaling of rate or graph
+    weights changes only the final conversion back to migration units.
     """
 
     _validate_adjacency(adjacency)
     if len(margins) != len(adjacency):
         raise ValueError("one margin is required per patch")
+    if max_iterations <= 0:
+        raise ValueError("max_iterations must be positive")
+    numeric_margins = [float(value) for value in margins]
+    relative_band(numeric_margins, tol)
     if not _is_connected(adjacency):
         raise ValueError("critical migration theorem requires a connected graph")
-    if not (max(margins) > 0.0 and _mean(margins) < 0.0):
+    if not (max(numeric_margins) > 0.0 and _mean(numeric_margins) < 0.0):
         raise ValueError("requires max local margin > 0 > mean local margin")
-    if len(set(round(x, 15) for x in margins)) == 1:
-        raise ValueError("requires heterogeneous margins")
+
+    rate_scale = max(abs(value) for value in numeric_margins)
+    graph_scale = max(abs(float(value)) for row in adjacency for value in row)
+    if graph_scale == 0.0:
+        raise ValueError("critical migration theorem requires positive graph weights")
+
+    normalized_margins = tuple(value / rate_scale for value in numeric_margins)
+    normalized_adjacency = tuple(
+        tuple(float(value) / graph_scale for value in row) for row in adjacency
+    )
+
+    def normalized_exponent(mu: float) -> float:
+        return invasion_exponent(normalized_margins, normalized_adjacency, mu)
 
     lower = 0.0
     upper = 1.0
-    while invasion_exponent(margins, adjacency, upper) > 0.0:
+    for _ in range(max_iterations):
+        if normalized_exponent(upper) <= 0.0:
+            break
         upper *= 2.0
-        if upper > 1e15:
-            raise RuntimeError("failed to bracket migration threshold")
+        if not isfinite(upper):
+            raise RuntimeError("failed to bracket dimensionless migration threshold")
+    else:
+        raise RuntimeError("failed to bracket dimensionless migration threshold")
 
     for _ in range(max_iterations):
         mid = 0.5 * (lower + upper)
-        value = invasion_exponent(margins, adjacency, mid)
-        if abs(value) <= tol or upper - lower <= tol:
-            return mid
+        value = normalized_exponent(mid)
+        width_band = relative_band((lower, upper), tol)
+        if abs(value) <= tol or upper - lower <= width_band:
+            return mid * rate_scale / graph_scale
         if value > 0.0:
             lower = mid
         else:
             upper = mid
-    return 0.5 * (lower + upper)
+    return 0.5 * (lower + upper) * rate_scale / graph_scale
 
 
 def two_patch_invasion_exponent(r1: float, r2: float, migration_rate: float) -> float:
@@ -276,7 +301,6 @@ def largest_symmetric_eigenvalue(
     relative_band((0.0,), tol)
     raw = [[float(matrix[i][j]) for j in range(n)] for i in range(n)]
     flat = tuple(value for row in raw for value in row)
-    # Validate finiteness before any arithmetic or symmetry comparison.
     relative_band(flat, tol)
     for i in range(n):
         for j in range(i + 1, n):
