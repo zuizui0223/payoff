@@ -160,21 +160,29 @@ def is_single_edge_local_optimum(
 ) -> bool:
     """Return whether no supplied one-edge neighbor has higher intrinsic payoff.
 
-    ``tol`` is dimensionless; each source/neighbor comparison uses a numerical
-    band relative only to those commensurate intrinsic payoffs.
+    ``tol`` is dimensionless. The numerical band is based on the centered payoff
+    span of the source and its supplied one-edge neighbors, so the classification
+    is invariant to both common positive payoff rescaling and common payoff
+    offsets.
     """
 
     state = validate_topology(topology)
     if state not in intrinsic_payoffs:
         raise ValueError("topology missing from intrinsic_payoffs")
+
     value = float(intrinsic_payoffs[state])
-    # Validate the source even if no supplied neighbor is present.
-    relative_band((value,), tol)
-    for neighbor in single_edge_neighbors(state):
-        if neighbor not in intrinsic_payoffs:
-            continue
-        neighbor_value = float(intrinsic_payoffs[neighbor])
-        band = relative_band((value, neighbor_value), tol)
+    neighbor_values = [
+        float(intrinsic_payoffs[neighbor])
+        for neighbor in single_edge_neighbors(state)
+        if neighbor in intrinsic_payoffs
+    ]
+    local_values = (value, *neighbor_values)
+    # Validate finite local payoffs before centering.
+    relative_band(local_values, 0.0)
+    base = min(local_values)
+    band = relative_band((item - base for item in local_values), tol)
+
+    for neighbor_value in neighbor_values:
         if neighbor_value > value + band:
             return False
     return True
