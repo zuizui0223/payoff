@@ -22,7 +22,7 @@ from __future__ import annotations
 from math import sqrt
 from typing import Dict, List, Sequence, Tuple
 
-from src.numerical_tolerance import relative_band
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
 
 
 def patch_phi(
@@ -259,20 +259,40 @@ def two_patch_rescue_threshold(r1: float, r2: float) -> float:
 
 
 def largest_symmetric_eigenvalue(
-    matrix: Sequence[Sequence[float]], tol: float = 1e-13, max_rotations: int = 100000
+    matrix: Sequence[Sequence[float]],
+    tol: float = DEFAULT_RELATIVE_TOL,
+    max_rotations: int = 100000,
 ) -> float:
-    """Largest eigenvalue of a real symmetric matrix via Jacobi rotations."""
+    """Largest eigenvalue of a real symmetric matrix via Jacobi rotations.
+
+    ``tol`` is dimensionless.  The matrix is normalized by its finite maximum
+    absolute entry before rotation, so common positive rescaling leaves the
+    numerical problem unchanged; the returned eigenvalue is then rescaled.
+    """
 
     n = len(matrix)
     if n == 0 or any(len(row) != n for row in matrix):
         raise ValueError("matrix must be non-empty and square")
-    a = [[float(matrix[i][j]) for j in range(n)] for i in range(n)]
+    relative_band((0.0,), tol)
+    raw = [[float(matrix[i][j]) for j in range(n)] for i in range(n)]
+    flat = tuple(value for row in raw for value in row)
+    # Validate finiteness before any arithmetic or symmetry comparison.
+    relative_band(flat, tol)
     for i in range(n):
-        for j in range(n):
-            if abs(a[i][j] - a[j][i]) > 1e-10:
+        for j in range(i + 1, n):
+            left = raw[i][j]
+            right = raw[j][i]
+            if abs(left - right) > relative_band((left, right), tol):
                 raise ValueError("matrix must be symmetric")
+
+    scale = max(abs(value) for value in flat)
+    if scale == 0.0:
+        return 0.0
     if n == 1:
-        return a[0][0]
+        return raw[0][0]
+
+    a = [[raw[i][j] / scale for j in range(n)] for i in range(n)]
+    convergence_band = relative_band((1.0,), tol)
 
     for _ in range(max_rotations):
         p, q = 0, 1
@@ -283,8 +303,8 @@ def largest_symmetric_eigenvalue(
                 if value > maximum:
                     maximum = value
                     p, q = i, j
-        if maximum <= tol:
-            return max(a[i][i] for i in range(n))
+        if maximum <= convergence_band:
+            return max(a[i][i] for i in range(n)) * scale
 
         app = a[p][p]
         aqq = a[q][q]
