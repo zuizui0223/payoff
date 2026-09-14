@@ -14,12 +14,14 @@ an effective coordination coefficient eta_eff=eta-P.
 
 from __future__ import annotations
 
+from math import isfinite
 from typing import Dict, Optional, Tuple
 
 from src.anti_phase_temporal import (
     anti_phase_temporal_premium,
+    dimensionless_premium,
     exact_max_premium,
-    exact_optimal_migration,
+    exact_optimal_dimensionless_migration,
     weak_contrast_max_premium_approx,
     weak_contrast_optimal_dimensionless_migration,
     weak_contrast_shape,
@@ -150,50 +152,56 @@ def exact_reciprocal_switch_migrations(
 
     Reciprocal invasion requires
         P(m)>eta+|phi_bar|.
-    The exact anti-phase premium is strictly increasing to one unique maximum
-    and strictly decreasing afterward. Hence, when its maximum exceeds the
-    target, exactly two positive roots exist and define one bounded interval.
+    The roots are solved in the dimensionless migration coordinate ``u=m*tau``
+    against ``tau*P=F(u,|x|tau)``.  Thus ``tol`` is dimensionless and the
+    numerical root problem is invariant to a change of time units.
     """
 
     if eta < 0.0:
         raise ValueError("exact reciprocal switch solver requires eta>=0")
     if season_duration <= 0.0:
         raise ValueError("season_duration must be positive")
-    if tol <= 0.0:
-        raise ValueError("tol must be positive")
+    if tol <= 0.0 or not isfinite(tol):
+        raise ValueError("tol must be positive and finite")
     x = abs(contrast_half_amplitude)
     if x == 0.0:
         return None
 
-    target = eta + abs(mean_static_gap)
-    m_star = exact_optimal_migration(x, season_duration)
-    peak = anti_phase_temporal_premium(x, m_star, season_duration)
-    if target <= 0.0:
+    tau = season_duration
+    v = x * tau
+    target_u = (eta + abs(mean_static_gap)) * tau
+    u_star = exact_optimal_dimensionless_migration(v)
+    peak_u = dimensionless_premium(u_star, v)
+    if target_u <= 0.0:
         # At target zero, every finite positive migration has P>0, so there is
         # no finite two-boundary interval to return.
         return None
-    if peak <= target:
+    if peak_u <= target_u:
         return None
 
-    lower = _bisect_exact_premium_root(
-        0.0, m_star, x, season_duration, target, tol, rising=True
+    lower_u = _bisect_dimensionless_premium_root(
+        0.0, u_star, v, target_u, tol, rising=True
     )
 
-    upper_bound = max(2.0 * m_star, 1.0 / season_duration)
-    while anti_phase_temporal_premium(x, upper_bound, season_duration) > target:
+    upper_bound = max(2.0 * u_star, 1.0)
+    for _ in range(4096):
+        if dimensionless_premium(upper_bound, v) <= target_u:
+            break
         upper_bound *= 2.0
-        if upper_bound > 1e15:
+        if not isfinite(upper_bound):
             raise RuntimeError("failed to bracket upper exact temporal switch")
-    upper = _bisect_exact_premium_root(
-        m_star,
+    else:
+        raise RuntimeError("failed to bracket upper exact temporal switch")
+
+    upper_u = _bisect_dimensionless_premium_root(
+        u_star,
         upper_bound,
-        x,
-        season_duration,
-        target,
+        v,
+        target_u,
         tol,
         rising=False,
     )
-    return lower, upper
+    return lower_u / tau, upper_u / tau
 
 
 def exact_coordination_can_be_overcome(
@@ -341,18 +349,19 @@ def _bisect_shape_root(
     return 0.5 * (lower + upper)
 
 
-def _bisect_exact_premium_root(
+def _bisect_dimensionless_premium_root(
     lower: float,
     upper: float,
-    x: float,
-    tau: float,
+    v: float,
     target: float,
     tol: float,
     rising: bool,
 ) -> float:
+    """Bisect one exact premium root in dimensionless migration ``u``."""
+
     while upper - lower > tol * max(1.0, upper):
         mid = 0.5 * (lower + upper)
-        value = anti_phase_temporal_premium(x, mid, tau)
+        value = dimensionless_premium(mid, v)
         if rising:
             if value < target:
                 lower = mid
