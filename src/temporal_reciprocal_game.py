@@ -24,6 +24,8 @@ from src.anti_phase_temporal import (
     weak_contrast_optimal_dimensionless_migration,
     weak_contrast_shape,
 )
+from src.invasion import invasion_regime
+from src.numerical_tolerance import DEFAULT_RELATIVE_TOL
 
 
 def reciprocal_exponents(
@@ -69,28 +71,30 @@ def classify_reciprocal_temporal_state(
     contrast_half_amplitude: float,
     migration_rate: float,
     season_duration: float,
-    tol: float = 1e-12,
+    tol: float = DEFAULT_RELATIVE_TOL,
 ) -> str:
-    """Classify reciprocal rare-architecture invasibility."""
+    """Classify reciprocal rare-architecture invasibility.
 
-    lambda_d, lambda_s = reciprocal_exponents(
-        mean_static_gap,
+    The temporal model is exactly the canonical reciprocal game with
+    ``eta_eff=eta-P``. Delegating to the core invasion classifier keeps the
+    temporal route on the same scale-invariant numerical boundary contract.
+    """
+
+    eta_effective = effective_coordination_strength(
         eta,
         contrast_half_amplitude,
         migration_rate,
         season_duration,
     )
-    d = lambda_d > tol
-    s = lambda_s > tol
-    if d and s:
-        return "reciprocal_invasion"
-    if not d and not s:
-        if abs(lambda_d) <= tol or abs(lambda_s) <= tol:
-            return "boundary"
-        return "mutual_noninvasion"
-    if d:
-        return "d_only_invasion"
-    return "s_only_invasion"
+    regime = invasion_regime(mean_static_gap, eta_effective, tol=tol)
+    labels = {
+        "mutual_invasion": "reciprocal_invasion",
+        "mutual_noninvasion": "mutual_noninvasion",
+        "differentiated_invasion_only": "d_only_invasion",
+        "shared_invasion_only": "s_only_invasion",
+        "invasion_boundary": "boundary",
+    }
+    return labels[regime]
 
 
 def temporal_middle_half_width(
