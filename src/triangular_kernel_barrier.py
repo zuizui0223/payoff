@@ -60,8 +60,34 @@ def _inside_payoff(r: float, alpha: float, kappa: float, G: float, epsilon: floa
 
 
 def _local_max_geometry(alpha: float, kappa: float, G: float, epsilon: float) -> tuple[float, float]:
-    discriminant = (2.0 * G - kappa) ** 2 + 12.0 * G * alpha / epsilon
-    r_max = epsilon * ((2.0 * G - kappa) + sqrt(discriminant)) / (6.0 * G)
+    """Return the positive stationary point in dimensionless ``z=r/epsilon``.
+
+    The derivative equation is
+        alpha + B z - C z^2 = 0,
+    where B=(2G-kappa)epsilon and C=3G epsilon.  These three coefficients
+    share derivative units, so we normalize them before forming the
+    discriminant.  The positive root uses the algebraic branch that avoids
+    cancellation for the sign of B.
+    """
+
+    A = float(alpha)
+    B = (2.0 * G - kappa) * epsilon
+    C = 3.0 * G * epsilon
+    scale = max(abs(A), abs(B), abs(C))
+    if scale == 0.0 or not isfinite(scale):
+        raise RuntimeError("triangular stationary equation has invalid scale")
+    a = A / scale
+    b = B / scale
+    c = C / scale
+    discriminant = b * b + 4.0 * c * a
+    if discriminant < 0.0:
+        raise RuntimeError("triangular stationary discriminant became negative")
+    root = sqrt(discriminant)
+    if b >= 0.0:
+        z = (b + root) / (2.0 * c)
+    else:
+        z = 2.0 * a / (root - b)
+    r_max = epsilon * z
     return r_max, _inside_payoff(r_max, alpha, kappa, G, epsilon)
 
 
