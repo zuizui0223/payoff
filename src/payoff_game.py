@@ -8,7 +8,7 @@ that the core identities remain easy to audit.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import inf
+from math import inf, isfinite
 from typing import Optional, Sequence, Tuple
 
 from .numerical_tolerance import DEFAULT_RELATIVE_TOL, relative_band
@@ -137,23 +137,40 @@ def n_function_conflict(
     """Return (shared optimum, weighted-variance load, pairwise load).
 
     The last two values are analytically identical and are returned separately
-    so tests and empirical pipelines can audit the identity.
+    so tests and empirical pipelines can audit the identity.  Weights are
+    normalized before either form is evaluated, and dimensional squared trait
+    differences are accumulated with scale-cancelling multiplication order.
     """
 
     if len(weights) != len(optima) or not weights:
         raise ValueError("weights and optima must have the same non-zero length")
-    if any(w <= 0 for w in weights):
-        raise ValueError("all weights must be positive")
+    numeric_weights = tuple(float(w) for w in weights)
+    numeric_optima = tuple(float(t) for t in optima)
+    if any(not isfinite(w) or w <= 0.0 for w in numeric_weights):
+        raise ValueError("all weights must be finite and positive")
+    if any(not isfinite(t) for t in numeric_optima):
+        raise ValueError("all optima must be finite")
 
-    total = sum(weights)
-    z = sum(w * t for w, t in zip(weights, optima)) / total
-    variance_load = sum(w * (t - z) ** 2 for w, t in zip(weights, optima))
+    weight_scale = max(numeric_weights)
+    normalized_weights = tuple(w / weight_scale for w in numeric_weights)
+    normalized_total = sum(normalized_weights)
+    z = (
+        sum(w * t for w, t in zip(normalized_weights, numeric_optima))
+        / normalized_total
+    )
+
+    variance_load = 0.0
+    for w, t in zip(normalized_weights, numeric_optima):
+        delta = t - z
+        variance_load += delta * ((weight_scale * w) * delta)
 
     pairwise_sum = 0.0
-    for i in range(len(weights)):
-        for j in range(i + 1, len(weights)):
-            pairwise_sum += weights[i] * weights[j] * (optima[i] - optima[j]) ** 2
-    pairwise_load = pairwise_sum / total
+    for i in range(len(normalized_weights)):
+        for j in range(i + 1, len(normalized_weights)):
+            delta = numeric_optima[i] - numeric_optima[j]
+            coefficient = weight_scale * normalized_weights[i] * normalized_weights[j]
+            pairwise_sum += delta * (coefficient * delta)
+    pairwise_load = pairwise_sum / normalized_total
     return z, variance_load, pairwise_load
 
 
