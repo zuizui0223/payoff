@@ -61,7 +61,7 @@ def fig1() -> str:
 .tick{{font:18px sans-serif;fill:#111}} .axis{{stroke:#111;stroke-width:2}} .curve{{stroke:#111;stroke-width:4}}
 .dash{{stroke-dasharray:14 9}} .dot{{stroke-dasharray:4 8}} .peak{{fill:white;stroke:#111;stroke-width:3}}
 </style>
-<text x="60" y="56" class="title">Figure 1. Every nonzero contrast has one finite migration optimum</text>
+<text x="60" y="56" class="title">Figure 1. One finite optimum for every nonzero contrast</text>
 <text x="60" y="88" class="txt">Exact temporal premium F(u,v) for three dimensionless contrasts.</text>
 <line x1="{x0}" y1="{y0}" x2="{x0}" y2="{y0+ph}" class="axis"/>
 <line x1="{x0}" y1="{y0+ph}" x2="{x0+pw}" y2="{y0+ph}" class="axis"/>
@@ -78,7 +78,6 @@ def fig1() -> str:
 def fig2() -> str:
     width, height = 1200, 760
     x0, y0, pw, ph = 120, 120, 980, 500
-    import math
 
     log_min, log_max = -2.0, 1.5
     samples = 120
