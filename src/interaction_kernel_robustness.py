@@ -55,6 +55,9 @@ def kernel_interaction_payoff(
         raise ValueError("grid and density must be non-empty and equal length")
     if any(v < 0.0 or not isfinite(v) for v in f):
         raise ValueError("density must be finite and non-negative")
+    g = float(gamma)
+    if not isfinite(g):
+        raise ValueError("gamma must be finite")
     total = sum(f)
     if total <= 0.0:
         raise ValueError("density must have positive mass")
@@ -64,8 +67,9 @@ def kernel_interaction_payoff(
     for x in xs:
         value = 0.0
         for y, mass in zip(xs, f):
-            w = kernel_weight(abs(x - y), epsilon=epsilon, kernel=kernel)
-            value += -float(gamma) * (x - y) ** 2 * w * mass
+            delta = x - y
+            w = kernel_weight(abs(delta), epsilon=epsilon, kernel=kernel)
+            value += -(g * delta) * delta * w * mass
         out.append(value)
     return tuple(out)
 
@@ -80,8 +84,12 @@ def kernel_architecture_payoff(
     epsilon: float | None,
     kernel: str,
 ) -> tuple[float, ...]:
-    if float(kappa) < 0.0:
-        raise ValueError("kappa must be non-negative")
+    a = float(alpha)
+    k = float(kappa)
+    if not isfinite(a):
+        raise ValueError("alpha must be finite")
+    if not isfinite(k) or k < 0.0:
+        raise ValueError("kappa must be finite and non-negative")
     interaction = kernel_interaction_payoff(
         grid,
         density,
@@ -90,8 +98,8 @@ def kernel_architecture_payoff(
         kernel=kernel,
     )
     return tuple(
-        float(alpha) * float(x) - 0.5 * float(kappa) * float(x) ** 2 + h
-        for x, h in zip(grid, interaction)
+        x * (a - 0.5 * k * x) + h
+        for x, h in zip((float(value) for value in grid), interaction)
     )
 
 
