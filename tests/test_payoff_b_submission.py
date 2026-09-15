@@ -23,6 +23,6 @@ def test_publication_figures_are_bounded_and_use_correct_claims() -> None:
     two = fig2()
     assert 'viewBox="0 0 1200 760"' in one
     assert 'viewBox="0 0 1200 760"' in two
-    assert "Every nonzero contrast has one finite migration optimum" in one
+    assert "One finite optimum for every nonzero contrast" in one
     assert "weak-contrast limit 1.606115" in two
     assert "strong-contrast limit 1" in two
