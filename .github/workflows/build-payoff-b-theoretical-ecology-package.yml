@@ -5,10 +5,15 @@ on:
   push:
     paths:
       - 'manuscript/PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md'
+      - 'submission/PAYOFF_B_TITLE_PAGE_TEMPLATE.md'
+      - 'submission/PAYOFF_B_DECLARATIONS_TEMPLATE.md'
+      - 'submission/PAYOFF_B_COVER_LETTER_V1.md'
+      - 'submission/THEORETICAL_ECOLOGY_PORTAL_HANDOFF_V1.md'
       - 'theory/EXACT_ANTI_PHASE_OPTIMUM.md'
       - 'theory/WEAK_CONTRAST_UNIVERSAL_MIGRATION_OPTIMUM.md'
       - 'src/anti_phase_temporal.py'
       - 'src/two_patch_floquet.py'
+      - 'scripts/build_payoff_b_submission_source.py'
       - 'scripts/build_payoff_b_figures_svg.py'
       - 'scripts/verify_payoff_b_note.py'
       - 'scripts/check_payoff_b_submission.py'
@@ -18,10 +23,15 @@ on:
   pull_request:
     paths:
       - 'manuscript/PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md'
+      - 'submission/PAYOFF_B_TITLE_PAGE_TEMPLATE.md'
+      - 'submission/PAYOFF_B_DECLARATIONS_TEMPLATE.md'
+      - 'submission/PAYOFF_B_COVER_LETTER_V1.md'
+      - 'submission/THEORETICAL_ECOLOGY_PORTAL_HANDOFF_V1.md'
       - 'theory/EXACT_ANTI_PHASE_OPTIMUM.md'
       - 'theory/WEAK_CONTRAST_UNIVERSAL_MIGRATION_OPTIMUM.md'
       - 'src/anti_phase_temporal.py'
       - 'src/two_patch_floquet.py'
+      - 'scripts/build_payoff_b_submission_source.py'
       - 'scripts/build_payoff_b_figures_svg.py'
       - 'scripts/verify_payoff_b_note.py'
       - 'scripts/check_payoff_b_submission.py'
@@ -57,23 +67,24 @@ jobs:
           python -m pytest -q tests/test_anti_phase_temporal.py tests/test_payoff_b_submission.py
           python scripts/verify_payoff_b_note.py
 
-      - name: Generate publication figures and review source
+      - name: Generate publication figures and submission review source
         run: |
           GEN=submission/theoretical_ecology/generated
           python scripts/build_payoff_b_figures_svg.py
+          python scripts/build_payoff_b_submission_source.py "$GEN/MANUSCRIPT_SUBMISSION_SOURCE.md"
           mkdir -p "$GEN/figures_png" "$GEN/rendered/pages"
           rsvg-convert "$GEN/figures/FIG1_UNIQUE_OPTIMUM.svg" -o "$GEN/figures_png/FIG1_UNIQUE_OPTIMUM.png"
           rsvg-convert "$GEN/figures/FIG2_SCALING_CURVE.svg" -o "$GEN/figures_png/FIG2_SCALING_CURVE.png"
           python - <<'PY'
           from pathlib import Path
-          src = Path('manuscript/PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md').read_text(encoding='utf-8')
+          src_path = Path('submission/theoretical_ecology/generated/MANUSCRIPT_SUBMISSION_SOURCE.md')
+          src = src_path.read_text(encoding='utf-8')
           src = src.replace(
               'Hence at least one finite positive maximum exists. The issue is uniqueness.',
               'Hence at least one finite positive maximum exists (Fig. 1). The issue is uniqueness.'
           )
           src += '''\n\n## Figure legends\n\n![Figure 1](figures_png/FIG1_UNIQUE_OPTIMUM.png)\n\n**Figure 1. Every nonzero contrast has one finite migration optimum.** Exact dimensionless temporal premium for three environmental contrasts. Open circles mark the unique maximizers. The three curves differ in height and exact optimum but each rises once and falls once.\n\n![Figure 2](figures_png/FIG2_SCALING_CURVE.png)\n\n**Figure 2. One scaling curve links weak and strong contrast.** Exact optimal dimensionless migration `u*(v)=m*τ` as a function of `v=|x|τ`. The optimum tends to 1.606115… under weak contrast and to 1 under strong contrast; the dashed curve shows the first strong-contrast approximation `1+1/v`.\n'''
           out = Path('submission/theoretical_ecology/generated/MANUSCRIPT_REVIEW_SOURCE.md')
-          out.parent.mkdir(parents=True, exist_ok=True)
           out.write_text(src, encoding='utf-8')
           PY
 
@@ -119,17 +130,29 @@ jobs:
           grep -q 'The closed-form growth exponent is not claimed as new' "$TXT"
           grep -q 'Benaïm et al. (2023)' "$TXT"
           grep -q '1.6061152988' "$TXT"
+          grep -q 'Statements and Declarations' "$TXT"
+          grep -q 'Use of generative AI tools' "$TXT"
           grep -q 'Figure 1' "$TXT"
           grep -q 'Figure 2' "$TXT"
+          if grep -q '^Target:' "$TXT"; then
+            echo 'Internal target line leaked into rendered manuscript' >&2
+            exit 1
+          fi
           PAGES=$(pdfinfo "$PDF" | awk '/^Pages:/ {print $2}')
-          if [ "$PAGES" -gt 20 ]; then
+          if [ "$PAGES" -gt 22 ]; then
             echo "Review manuscript unexpectedly long: $PAGES pages" >&2
             exit 1
           fi
           MEDIA_COUNT=$(unzip -l "$GEN/PAYOFF_B_THEORETICAL_ECOLOGY_REVIEW.docx" | grep -c 'word/media/' || true)
+          ABSTRACT_WORDS=$(python scripts/check_payoff_b_submission.py | awk -F= '/^abstract_words=/ {print $2}')
+          KEYWORD_COUNT=$(python scripts/check_payoff_b_submission.py | awk -F= '/^keyword_count=/ {print $2}')
           {
-            echo 'target=Theoretical Ecology Brief Communication'
-            echo 'canonical_manuscript=manuscript/PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md'
+            echo 'target=Theoretical Ecology'
+            echo 'portal_article_type=Brief Communication if offered; otherwise Original Paper'
+            echo 'science_source=manuscript/PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md'
+            echo 'submission_overlay=scripts/build_payoff_b_submission_source.py'
+            echo "abstract_words=$ABSTRACT_WORDS"
+            echo "keyword_count=$KEYWORD_COUNT"
             echo "review_pages=$PAGES"
             echo "embedded_figures=$MEDIA_COUNT"
             echo 'claim=unique_global_migration_optimum_in_symmetric_anti_phase_model'
@@ -137,6 +160,9 @@ jobs:
             echo 'numerical_receipt_role=implementation_audit_not_proof'
             echo 'line_numbers=true'
             echo 'page_numbers=true'
+            echo 'author_metadata=EXTERNAL_BLOCKER'
+            echo 'funding_competing_interests_author_contributions=EXTERNAL_BLOCKER'
+            echo 'five_reviewer_suggestions=EXTERNAL_BLOCKER'
           } > "$GEN/PACKAGE_QA_RECEIPT.txt"
 
       - name: Render page PNGs for visual QA
@@ -157,6 +183,11 @@ jobs:
             submission/theoretical_ecology/generated/rendered/pages/*.png
             submission/theoretical_ecology/generated/figures/*.svg
             submission/theoretical_ecology/generated/figures_png/*.png
+            submission/theoretical_ecology/generated/MANUSCRIPT_SUBMISSION_SOURCE.md
             submission/theoretical_ecology/generated/PAYOFF_B_VERIFICATION_RECEIPT.json
             submission/theoretical_ecology/generated/PACKAGE_QA_RECEIPT.txt
+            submission/PAYOFF_B_TITLE_PAGE_TEMPLATE.md
+            submission/PAYOFF_B_DECLARATIONS_TEMPLATE.md
+            submission/PAYOFF_B_COVER_LETTER_V1.md
+            submission/THEORETICAL_ECOLOGY_PORTAL_HANDOFF_V1.md
           if-no-files-found: error
