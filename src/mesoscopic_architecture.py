@@ -37,10 +37,18 @@ def _validate_grid(grid: Sequence[float]) -> tuple[float, ...]:
 
 
 def intrinsic_payoff(r: float, alpha: float, kappa: float) -> float:
-    """Quadratic PAYOFF intrinsic architecture value b(r)."""
+    """Quadratic PAYOFF intrinsic architecture value b(r).
+
+    Multiplication is ordered to avoid materializing ``r**2`` when a pure
+    architecture-unit conversion makes ``r`` large and ``kappa`` small while
+    the final payoff remains finite.
+    """
     if kappa < 0.0:
         raise ValueError("kappa must be non-negative")
-    return float(alpha) * float(r) - 0.5 * float(kappa) * float(r) ** 2
+    x = float(r)
+    a = float(alpha)
+    k = float(kappa)
+    return x * (a - 0.5 * k * x)
 
 
 def bounded_interaction_payoff(
@@ -55,7 +63,9 @@ def bounded_interaction_payoff(
     H_epsilon(r,q) = -gamma (r-q)^2 1{|r-q| <= epsilon}.
     ``epsilon=None`` gives the global-interaction kernel.  For finite epsilon,
     exact-boundary inclusion uses a scale-relative coordinate roundoff band so
-    architecture-unit conversions do not change kernel membership.
+    architecture-unit conversions do not change kernel membership.  The
+    quadratic term is evaluated as ``-(gamma*delta)*delta`` so a finite result
+    is not lost to overflow in the intermediate square.
     """
     xs = _validate_grid(grid)
     f = _normalise(density)
@@ -82,7 +92,7 @@ def bounded_interaction_payoff(
             if e is not None:
                 inside = distance <= e + relative_band((distance, e))
             if inside:
-                value += -g * delta * delta * mass
+                value += -(g * delta) * delta * mass
         out.append(value)
     return tuple(out)
 
