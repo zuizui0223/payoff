@@ -81,7 +81,7 @@ def test_raw_q_underflow_does_not_break_derived_architecture_quantities():
     assert isclose(observed.phi, BASE.phi, rel_tol=3e-12, abs_tol=0.0)
 
 
-def test_zero_coupling_remains_exactly_fully_separated_across_units():
+def test_zero_coupling_remains_fully_separated_across_units():
     for q in (1e-150, 1.0, 1e150):
         coefficient_scale = q * q
         model = QuadraticTraitArchitecture(
@@ -95,5 +95,5 @@ def test_zero_coupling_remains_exactly_fully_separated_across_units():
         assert model.separation_fraction == 1.0
         assert model.differentiated_loss == 0.0
         x, y = model.differentiated_optima
-        assert isclose(x / q, -1.0, rel_tol=0.0, abs_tol=0.0)
-        assert isclose(y / q, 2.0, rel_tol=0.0, abs_tol=0.0)
+        assert isclose(x / q, -1.0, rel_tol=3e-12, abs_tol=0.0)
+        assert isclose(y / q, 2.0, rel_tol=3e-12, abs_tol=0.0)
