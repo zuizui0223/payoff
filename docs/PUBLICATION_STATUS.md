@@ -2,15 +2,32 @@
 
 PAYOFF is split into one active short paper and several citable technical modules.
 
-## Active paper: PAYOFF-B Brief Communication
+## Active paper: PAYOFF-B short theorem paper
 
 Target:
 
-**Theoretical Ecology — Brief Communication**
+**Theoretical Ecology**
 
-Canonical manuscript:
+Portal routing:
+
+```text
+PREFERRED = Brief Communication, if the live portal offers that article type
+FALLBACK = Original Paper, if Brief Communication is not offered
+```
+
+The current public submission guidance does not list Brief Communication as a separate article type, although the journal has historically published Brief Communications. The scientific paper should therefore not be blocked on that label: the same concise theorem manuscript is submitted as Original Paper if that is the live portal's available route.
+
+Canonical science manuscript:
 
 `manuscript/PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md`
+
+Journal-facing submission overlay:
+
+`scripts/build_payoff_b_submission_source.py`
+
+Portal handoff contract:
+
+`submission/THEORETICAL_ECOLOGY_PORTAL_HANDOFF_V1.md`
 
 Core claim:
 
@@ -48,13 +65,27 @@ The paper does **not** claim that arbitrary periodic, asymmetric, stochastic, or
 
 ### Submission state
 
-The journal-facing package contains:
+The journal-facing package now validates against the current portal-facing preparation constraints through a deterministic overlay while leaving the science source frozen. It contains:
 
-- a compact Brief Communication manuscript;
+- a compact theorem manuscript;
 - two publication figures;
+- title-page metadata placeholders;
+- Statements and Declarations placeholders;
+- a cover letter with five reviewer slots;
 - an analytic proof source in `theory/EXACT_ANTI_PHASE_OPTIMUM.md`;
 - executable numerical verification against the general two-season Floquet implementation;
 - reproducible DOCX/PDF/page-PNG review-package CI.
+
+The latest verified submission overlay has:
+
+```text
+ABSTRACT_WORDS = 154
+KEYWORDS = 6
+REVIEW_PAGES = 10
+EMBEDDED_FIGURES = 2
+INTERNAL_TARGET_LINE = REMOVED
+DECLARATIONS = PRESENT
+```
 
 The numerical receipt is an implementation audit, not a substitute for the analytic proof.
 
@@ -62,10 +93,10 @@ The numerical receipt is an implementation audit, not a substitute for the analy
 ACTIVE_PUBLICATION_QUEUE = true
 ROLE = ACTIVE_SHORT_PAPER
 INTERNAL_SCIENTIFIC_BLOCKER = none
-EXTERNAL_ACTIONS = author metadata + journal upload
+EXTERNAL_ACTIONS = author metadata + funding/COI/contributions + AI disclosure approval + five reviewers + journal upload
 ```
 
-The Brief should not carry the full PAYOFF hierarchy. In particular, do not make continuous architecture, general topology, generic spatial spectral theory, or rare-mutation occupancy co-equal storylines.
+The paper should not carry the full PAYOFF hierarchy. In particular, do not make continuous architecture, general topology, generic spatial spectral theory, or rare-mutation occupancy co-equal storylines.
 
 ## DOI modules / dormant branches
 
