@@ -33,41 +33,66 @@ class QuadraticTraitArchitecture:
         if self.architecture_cost < 0:
             raise ValueError("architecture_cost must be non-negative")
 
+    def _scaled_coefficients(self) -> Tuple[float, float, float, float, float]:
+        """Return common scale, normalized (a,b,c), and normalized denominator.
+
+        The dimensionless denominator is
+            ab + c(a+b)
+        after dividing all three quadratic coefficients by one common positive
+        scale.  Derived ratios therefore do not depend on dimensional products
+        that may underflow even when the final biological quantity is finite.
+        """
+
+        scale = max(float(self.a), float(self.b), float(self.coupling))
+        a = float(self.a) / scale
+        b = float(self.b) / scale
+        c = float(self.coupling) / scale
+        denominator = a * b + c * (a + b)
+        return scale, a, b, c, denominator
+
     @property
     def d(self) -> float:
         return self.theta1 - self.theta2
 
     @property
     def shared_optimum(self) -> float:
-        return (self.a * self.theta1 + self.b * self.theta2) / (self.a + self.b)
+        _, a, b, _, _ = self._scaled_coefficients()
+        return (a * self.theta1 + b * self.theta2) / (a + b)
 
     @property
     def conflict_load(self) -> float:
-        return (self.a * self.b / (self.a + self.b)) * self.d**2
+        scale, a, b, _, _ = self._scaled_coefficients()
+        coefficient = scale * (a * b / (a + b))
+        d = float(self.d)
+        return d * (coefficient * d)
 
     @property
     def q(self) -> float:
-        c = self.coupling
-        return self.a * self.b + c * (self.a + self.b)
+        scale, _, _, _, denominator = self._scaled_coefficients()
+        # q itself may lie outside the representable float range under extreme
+        # unit choices; derived model quantities never divide by this raw value.
+        return scale * (scale * denominator)
 
     @property
     def differentiated_optima(self) -> Tuple[float, float]:
-        a, b, c = self.a, self.b, self.coupling
-        q = self.q
-        x = (a * (b + c) * self.theta1 + b * c * self.theta2) / q
-        y = (a * c * self.theta1 + b * (a + c) * self.theta2) / q
+        _, a, b, c, denominator = self._scaled_coefficients()
+        x = (a * (b + c) * self.theta1 + b * c * self.theta2) / denominator
+        y = (a * c * self.theta1 + b * (a + c) * self.theta2) / denominator
         return x, y
 
     @property
     def separation_fraction(self) -> float:
         """Algebraic release fraction s=ab/[ab+c(a+b)]."""
 
-        return self.a * self.b / self.q
+        _, a, b, _, denominator = self._scaled_coefficients()
+        return a * b / denominator
 
     @property
     def differentiated_loss(self) -> float:
-        a, b, c = self.a, self.b, self.coupling
-        return (a * b * c / self.q) * self.d**2
+        scale, a, b, c, denominator = self._scaled_coefficients()
+        coefficient = scale * (a * b * c / denominator)
+        d = float(self.d)
+        return d * (coefficient * d)
 
     @property
     def recovered_loss(self) -> float:
@@ -101,7 +126,9 @@ class QuadraticTraitArchitecture:
             return inf
         if K > L:
             return None
-        return self.a * self.b * (L - K) / (K * (self.a + self.b))
+        scale, a, b, _, _ = self._scaled_coefficients()
+        coefficient = scale * (a * b / (a + b))
+        return coefficient * ((L - K) / K)
 
 
 def n_function_conflict(
