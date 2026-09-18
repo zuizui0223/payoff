@@ -1,5 +1,10 @@
 name: Movement-phenology barnacle goose multi-flyway direct audit
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
   push:
