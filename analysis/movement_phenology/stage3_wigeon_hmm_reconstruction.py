@@ -37,7 +37,9 @@ MEAN_AIRSPEED_MS = 18.5
 SD_AIRSPEED_MS = 2.28
 THRESHOLD_V_MS = MEAN_AIRSPEED_MS - 2.0 * SD_AIRSPEED_MS
 THRESHOLD_D_KM = THRESHOLD_V_MS * 3.6  # 50.184 km in one hour
-ORIGINAL_DATA_FREEZE = pd.Timestamp("2020-06-01 23:59:59", tz="UTC")
+ORIGINAL_DATA_FREEZE = pd.Timestamp("2019-12-31 23:59:59", tz="UTC")
+TARGET_TIME_SECONDS = 3600.0
+REGULARISE_WIGGLE_SECONDS = 0.05 * TARGET_TIME_SECONDS
 GEOD = Geod(ellps="WGS84")
 
 
@@ -45,12 +47,12 @@ def geodesic_km(lon1, lat1, lon2, lat2):
     return GEOD.inv(float(lon1), float(lat1), float(lon2), float(lat2))[2] / 1000.0
 
 
-def tpeqd_x(track: pd.DataFrame, subset: pd.DataFrame) -> np.ndarray:
-    """Match the Supplement's per-track two-point-equidistant x coordinate."""
-    minlat = float(track["lat"].min())
-    maxlat = float(track["lat"].max())
-    minlon = float(track["lon"].min())
-    maxlon = float(track["lon"].max())
+def tpeqd_x(subset: pd.DataFrame) -> np.ndarray:
+    """Match the Supplement's seasonal-subset two-point-equidistant x coordinate."""
+    minlat = float(subset["lat"].min())
+    maxlat = float(subset["lat"].max())
+    minlon = float(subset["lon"].min())
+    maxlon = float(subset["lon"].max())
     if minlat == maxlat and minlon == maxlon:
         return np.zeros(len(subset), dtype=float)
     crs = CRS.from_proj4(
@@ -75,6 +77,59 @@ def cumulative_track_distance_km(track: pd.DataFrame) -> float:
     return values
 
 
+def regularise_track_hourly(tmp: pd.DataFrame) -> pd.DataFrame:
+    """Port the Supplement's regularise.tracks(..., target.time=3600) logic.
+
+    The published movement threshold is explicitly a one-hour flight distance
+    (13.94 m/s * 3.6 = 50.184 km), and the fitted HMM discussion interprets
+    state step lengths against 20 m/s * 3600 s. The public normalized source is
+    hourly; this function still reapplies the exact nearest-target/wiggle rule
+    so gaps are handled consistently.
+    """
+    tmp = tmp.sort_values("time").drop_duplicates("time").copy()
+    if len(tmp) < 2:
+        return tmp.iloc[0:0].copy()
+
+    observed = tmp["time"].astype("int64").to_numpy(dtype=np.int64) / 1e9
+    start = float(observed[0])
+    end = float(observed[-1])
+    targets = np.arange(start, end + 0.5 * TARGET_TIME_SECONDS,
+                        TARGET_TIME_SECONDS)
+
+    chosen = []
+    diffs = []
+    for target in targets:
+        pos = int(np.searchsorted(observed, target))
+        candidates = []
+        if pos < len(observed):
+            candidates.append(pos)
+        if pos > 0:
+            candidates.append(pos - 1)
+        if not candidates:
+            continue
+        j = min(candidates, key=lambda q: abs(observed[q] - target))
+        chosen.append(j)
+        diffs.append(abs(observed[j] - target))
+
+    if not chosen:
+        return tmp.iloc[0:0].copy()
+
+    selected_times = observed[np.asarray(chosen, dtype=int)]
+    t_prev = np.r_[np.nan, np.diff(selected_times)]
+    diff_prev = np.abs(TARGET_TIME_SECONDS - t_prev)
+    check = (
+        np.asarray(diffs) <= REGULARISE_WIGGLE_SECONDS
+    ) | (
+        diff_prev <= REGULARISE_WIGGLE_SECONDS
+    )
+
+    selected = np.asarray(chosen, dtype=int)[check]
+    out = tmp.iloc[selected].copy()
+    # R merge can repeat an observed row selected for adjacent targets. The
+    # subsequent HMM requires one observation per timestamp, so keep one.
+    return out.drop_duplicates("time").sort_values("time").reset_index(drop=True)
+
+
 def prepare_track(x: pd.DataFrame):
     x = x.sort_values("time").drop_duplicates("time").copy()
     if len(x) < 3 or float(x["ground_speed"].max()) <= THRESHOLD_V_MS:
@@ -88,8 +143,8 @@ def prepare_track(x: pd.DataFrame):
         return None, "NO_MAY_JUL"
 
     try:
-        sx = tpeqd_x(x, spring_start)
-        ex = tpeqd_x(x, spring_end)
+        sx = tpeqd_x(spring_start)
+        ex = tpeqd_x(spring_end)
     except Exception:
         return None, "PROJECTION_FAIL"
 
@@ -127,10 +182,15 @@ def prepare_track(x: pd.DataFrame):
 
     x["d2start_km"] = dstart
     x["d2end_km"] = dend
-    mig = x[
+    x["migratory_window"] = (
         (x["time"].dt.date >= start_day)
         & (x["time"].dt.date <= end_day)
-    ].copy()
+    )
+
+    # The Supplement regularises the time series and then retains rows that
+    # both pass the regularisation check and fall inside the migration window.
+    reg = regularise_track_hourly(x)
+    mig = reg[reg["migratory_window"]].copy()
     if len(mig) < 3:
         return None, "TOO_FEW_MIGRATION_FIXES"
 
@@ -142,6 +202,10 @@ def prepare_track(x: pd.DataFrame):
         "start_lat": float(start_row.lat),
         "end_lon": float(end_row.lon),
         "end_lat": float(end_row.lat),
+        "n_migration_rows_before_regularise": int(x["migratory_window"].sum()),
+        "n_migration_rows_after_regularise": int(len(mig)),
+        "target_time_seconds": TARGET_TIME_SECONDS,
+        "regularise_wiggle_seconds": REGULARISE_WIGGLE_SECONDS,
     }
     return (mig, meta), "PASS"
 
