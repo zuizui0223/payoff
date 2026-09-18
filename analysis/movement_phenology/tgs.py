@@ -1,25 +1,19 @@
 """Thermal growing season onset used in van Toor et al. (2021).
 
-The published supplementary code defines TGS onset for a daily mean-temperature
-series x and day labels d as:
-
+Published supplementary code:
     cum.t = cumsum(x - 5)
     tgs = d[which.min(cum.t)]
 
-The onset is therefore the day after which cumulative thermal surplus relative
-to 5 °C begins to recover from its winter minimum. Negative daily values are
-NOT truncated for this TGS-onset calculation.
-
-This module reproduces that declared transformation. It is separate from the
-GDD-jerk method used for the Svalbard goose analysis.
+Negative daily values are not truncated. This module deliberately uses only
+the Python standard library so the exact transformation is testable in the
+repository's minimal CI environment.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 from typing import Iterable
-
-import numpy as np
 
 
 @dataclass(frozen=True)
@@ -37,30 +31,35 @@ def thermal_growing_season_onset(
     threshold_c: float = 5.0,
 ) -> ThermalGrowingSeasonOnset:
     """Return TGS onset using the exact cumulative-minimum rule."""
-    temp = np.asarray(list(mean_daily_temperature_c), dtype=float)
-    if temp.ndim != 1 or temp.size < 30:
-        raise ValueError("temperature series must be one-dimensional and >=30 days")
-    if not np.all(np.isfinite(temp)):
+    temp = [float(x) for x in mean_daily_temperature_c]
+    if len(temp) < 30:
+        raise ValueError("temperature series must contain at least 30 days")
+    if not all(math.isfinite(x) for x in temp):
         raise ValueError("temperature series must contain only finite values")
 
     if day_of_year is None:
-        doy = np.arange(1, temp.size + 1, dtype=int)
+        doy = list(range(1, len(temp) + 1))
     else:
-        doy = np.asarray(list(day_of_year), dtype=int)
-        if doy.shape != temp.shape:
+        doy = [int(x) for x in day_of_year]
+        if len(doy) != len(temp):
             raise ValueError("day_of_year must match temperature length")
-        if np.any(np.diff(doy) <= 0):
+        if any(b <= a for a, b in zip(doy, doy[1:])):
             raise ValueError("day_of_year must be strictly increasing")
 
     threshold = float(threshold_c)
-    if not np.isfinite(threshold):
+    if not math.isfinite(threshold):
         raise ValueError("threshold must be finite")
 
-    cumulative = np.cumsum(temp - threshold)
-    idx = int(np.argmin(cumulative))
+    cumulative = []
+    running = 0.0
+    for value in temp:
+        running += value - threshold
+        cumulative.append(running)
+
+    idx = min(range(len(cumulative)), key=cumulative.__getitem__)
     return ThermalGrowingSeasonOnset(
-        onset_day=int(doy[idx]),
+        onset_day=doy[idx],
         onset_index=idx,
         threshold_c=threshold,
-        cumulative_minimum=float(cumulative[idx]),
+        cumulative_minimum=cumulative[idx],
     )
