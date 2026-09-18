@@ -10,7 +10,7 @@ A useful cross-system question is therefore:
 
 > **How strongly, around which phase offset, and over what distance do migrants correct phenological error?**
 
-## Three canonical comparative quantities
+## Canonical comparative quantities
 
 For each population/system, fit a local feedback law
 
@@ -24,7 +24,31 @@ where
 - \(E=T_a-T_e\) is signed phenological phase error;
 - \(\kappa\) is the controller gain.
 
-### 1. Controller gain
+### 1. Net phase-transfer coefficient
+
+Across controller architectures, define
+
+\[
+\lambda
+=
+\frac{dE_{\rm after}}{dE_{\rm before}},
+\]
+
+where "after" means after one ecologically meaningful opportunity to correct phase error: a migration segment, stopover-to-stopover step, or full migration episode.
+
+Interpretation:
+
+~~~text
+lambda = 1   no correction
+0<lambda<1   partial correction
+lambda = 0   complete phase reset
+-1<lambda<0  stable overshoot
+|lambda|>1   local phase amplification
+~~~
+
+This is the primary cross-architecture quantity because it can be estimated even when the actuator is speed in one system and stopover duration in another.
+
+### 2. Actuator-specific gain
 
 \[
 \kappa=\frac{d\log u}{dE}.
@@ -40,7 +64,7 @@ kappa < 0  locally destabilizing feedback
 
 For small changes, \(100\kappa\) is approximately the percent change in relative movement speed per day of phase error.
 
-### 2. Stable phase offset
+### 3. Stable phase offset
 
 If \(\kappa>0\),
 
@@ -52,7 +76,7 @@ This is the phase at which \(u=1\): animal and environmental fronts move at the 
 
 Different taxa may have different \(E_*\). Capital breeders can rationally overtake a green wave, while other consumers may track near a food-quality peak. Therefore \(E_*=0\) is not a universal null.
 
-### 3. Phase-correction distance
+### 4. Phase-correction distance
 
 For environmental-wave speed \(c_e\),
 
@@ -151,6 +175,12 @@ published qualitative tracking classification only
 
 Only Tier A/B systems enter an initial quantitative controller meta-analysis.
 
+For continuous controllers, report \(\kappa\), \(E_*\), and \(\ell\) where identifiable.
+
+For discrete STEP/JUMP controllers, report actuator-specific gain and \(\lambda\).
+
+For every direct system, \(\lambda\) is preferred when a defensible before/after phase pair exists.
+
 ## Current systems
 
 ~~~text
@@ -182,9 +212,11 @@ Yellowstone bison:
 
 ## Quantitative meta-analysis gate
 
-Do not pool \(\kappa\), \(E_*\), or \(\ell\) until at least three independent Tier A/B systems have compatible definitions and uncertainty estimates.
+Do not pool controller parameters until at least three independent Tier A/B systems have compatible definitions and uncertainty estimates.
 
-The first pooled model, once licensed, should be hierarchical:
+The first cross-architecture pooled response should be a transformed phase-retention quantity based on \(\lambda\), with actuator-specific analyses retained separately.
+
+For continuous controllers, a secondary hierarchical model can use:
 
 \[
 \kappa_i
