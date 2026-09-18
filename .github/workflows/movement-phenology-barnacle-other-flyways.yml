@@ -72,6 +72,9 @@ jobs:
             --stopovers outputs/movement_phenology/stage3_barents_goose_stopovers.csv \
             --regions outputs/movement_phenology/stage3_barents_goose_regions.csv \
             --anomalies outputs/movement_phenology/stage3_barents_goose_power_gdd_anomalies.csv
+
+      - name: Screen predictability versus phase correction across transitions
+        run: python -m analysis.movement_phenology.stage3_barnacle_predictability_controller
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-barnacle-other-flyways
@@ -90,4 +93,6 @@ jobs:
             outputs/movement_phenology/stage3_barents_goose_anomaly_phase_transitions.csv
             outputs/movement_phenology/stage3_barents_goose_step_controller_by_transition.csv
             outputs/movement_phenology/stage3_barents_goose_step_controller_receipt.json
+            outputs/movement_phenology/stage3_barnacle_predictability_controller_pairs.csv
+            outputs/movement_phenology/stage3_barnacle_predictability_controller_receipt.json
           if-no-files-found: error
