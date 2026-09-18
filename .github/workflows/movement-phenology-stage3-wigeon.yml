@@ -1,20 +1,12 @@
 name: Movement-phenology Stage 3 wigeon
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 on:
   workflow_dispatch:
   push:
-    paths:
-      - 'analysis/movement_phenology/stage3_wigeon_*.py'
-      - 'analysis/movement_phenology/wigeon_hmm.py'
-      - 'analysis/movement_phenology/tgs.py'
-      - 'tests/test_movement_phenology_tgs.py'
-      - 'tests/test_movement_phenology_wigeon_hmm.py'
-      - '.github/workflows/movement-phenology-stage3-wigeon.yml'
-  pull_request:
     paths:
       - 'analysis/movement_phenology/stage3_wigeon_*.py'
       - 'analysis/movement_phenology/wigeon_hmm.py'
