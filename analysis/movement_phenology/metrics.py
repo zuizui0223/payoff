@@ -73,6 +73,32 @@ def quadratic_optimum(beta_linear: float, beta_quadratic: float) -> tuple[float,
     return q_star, math.exp(q_star)
 
 
+def timing_gradient_to_front_velocity(
+    dtime_dx_days_per_km: float,
+    dtime_dy_days_per_km: float,
+) -> tuple[float, float, float]:
+    """Convert a phenology timing-surface gradient to local front velocity.
+
+    If T(x, y) is the date on which a moving front reaches a location, the
+    normal front velocity is grad(T) / |grad(T)|^2 and its speed is
+    1 / |grad(T)|. Inputs are days/km and outputs are km/day.
+
+    This transformation is shared by bird-arrival and vegetation-phenology
+    timing surfaces in the global macro analysis.
+    """
+    gx = float(dtime_dx_days_per_km)
+    gy = float(dtime_dy_days_per_km)
+    if not math.isfinite(gx) or not math.isfinite(gy):
+        raise ValueError("timing gradients must be finite")
+    norm2 = gx * gx + gy * gy
+    if norm2 <= 0.0:
+        raise ValueError("timing gradient must be non-zero")
+    vx = gx / norm2
+    vy = gy / norm2
+    speed = 1.0 / math.sqrt(norm2)
+    return vx, vy, speed
+
+
 def payoff_b_reference_interval() -> tuple[float, float]:
     """Return theorem endpoint constants for descriptive reference only."""
     return STRONG_CONTRAST_U_LIMIT, WEAK_CONTRAST_U_LIMIT
