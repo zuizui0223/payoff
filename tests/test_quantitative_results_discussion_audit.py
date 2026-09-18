@@ -29,3 +29,21 @@ def test_audit_keeps_field_calibration_unestimated() -> None:
     assert "CROSS_SYSTEM_EFFECT_SIZE = NOT_ESTIMATED" in text
     assert "biological observations analyzed: none" in text.lower()
     assert "model prediction" in text.lower()
+
+
+def test_audit_registers_asymptotic_error_checkpoints_without_validity_cutoff() -> None:
+    ledger = LEDGER.read_text(encoding="utf-8")
+    audit = AUDIT.read_text(encoding="utf-8")
+    for token in (
+        "0.0226%",
+        "0.933%",
+        "0.00995%",
+        "0.0144%",
+        "0.736%",
+        "0.00530%",
+        "nine-point",
+        "no validity cutoff",
+        "MODEL-PREDICTION",
+    ):
+        assert token in ledger
+        assert token in audit

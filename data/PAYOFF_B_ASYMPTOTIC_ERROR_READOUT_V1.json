@@ -1,0 +1,32 @@
+{
+  "analysis": "payoff_b_asymptotic_error_table_v1",
+  "role": "MODEL_PREDICTION_DIAGNOSTIC_NOT_THEOREM_PROOF",
+  "registered_v": [
+    0.01,
+    0.03,
+    0.1,
+    0.3,
+    1.0,
+    3.0,
+    10.0,
+    30.0,
+    100.0
+  ],
+  "validity_cutoff_declared": false,
+  "weak_u_limit": 1.60611529880277,
+  "weak_max_F_coefficient": 0.1324875394468274,
+  "strong_u_approximation": "1+1/v",
+  "strong_max_F_approximation": "v-log(v)-1",
+  "rows": [
+    {"v": 0.01, "exact_u_star": 1.6061116676193592, "weak_u_approx": 1.60611529880277, "weak_u_absolute_error": 3.631183410846006e-06, "weak_u_relative_error_pct": 0.00022608536405368916, "strong_u_approx": 101.0, "strong_u_absolute_error": 99.39388833238064, "strong_u_relative_error_pct": 6188.479315370774, "exact_max_F": 1.324873483388167e-05, "weak_max_F_approx": 1.324875394468274e-05, "weak_max_F_relative_error_pct": 0.00014424623414422056, "strong_max_F_approx": 3.6151701859880907, "strong_max_F_relative_error_pct": 27286808.76009406},
+    {"v": 0.03, "exact_u_star": 1.6060826193979096, "weak_u_approx": 1.60611529880277, "weak_u_absolute_error": 3.267940486040288e-05, "weak_u_relative_error_pct": 0.002034727508143621, "strong_u_approx": 34.333333333333336, "strong_u_absolute_error": 32.727250713935426, "strong_u_relative_error_pct": 2037.7065487580123, "exact_max_F": 0.00011923723754470039, "weak_max_F_approx": 0.00011923878550214465, "weak_max_F_relative_error_pct": 0.0012982164600041767, "strong_max_F_approx": 2.5365578973199816, "strong_max_F_relative_error_pct": 2127220.2478957647},
+    {"v": 0.1, "exact_u_star": 1.6057523517706045, "weak_u_approx": 1.60611529880277, "weak_u_absolute_error": 0.00036294703216555035, "weak_u_relative_error_pct": 0.02260292701831275, "strong_u_approx": 11.0, "strong_u_absolute_error": 9.394247648229396, "strong_u_relative_error_pct": 585.0371408686216, "exact_max_F": 0.0013246843070380265, "weak_max_F_approx": 0.0013248753944682741, "weak_max_F_relative_error_pct": 0.01442512976354737, "strong_max_F_approx": 1.4025850929940455, "strong_max_F_relative_error_pct": 105780.70573057546},
+    {"v": 0.3, "exact_u_star": 1.602861200734253, "weak_u_approx": 1.60611529880277, "weak_u_absolute_error": 0.003254098068516953, "weak_u_relative_error_pct": 0.20301808210382075, "strong_u_approx": 4.333333333333334, "strong_u_absolute_error": 2.730472132599081, "strong_u_relative_error_pct": 170.3498800362927, "exact_max_F": 0.01190841366951867, "weak_max_F_approx": 0.011923878550214465, "weak_max_F_relative_error_pct": 0.12986516193487793, "strong_max_F_approx": 0.5039728043259362, "strong_max_F_relative_error_pct": 4132.073375280273},
+    {"v": 1.0, "exact_u_star": 1.571482171786272, "weak_u_approx": 1.60611529880277, "weak_u_absolute_error": 0.03463312701649812, "weak_u_relative_error_pct": 2.2038510928273114, "strong_u_approx": 2.0, "strong_u_absolute_error": 0.4285178282137281, "strong_u_relative_error_pct": 27.26838623480154, "exact_max_F": 0.13059778477273198, "weak_max_F_approx": 0.1324875394468274, "weak_max_F_relative_error_pct": 1.4470036206081047, "strong_max_F_approx": 0.0, "strong_max_F_relative_error_pct": 100.0},
+    {"v": 3.0, "exact_u_star": 1.3855887173490942, "weak_u_approx": 1.60611529880277, "weak_u_absolute_error": 0.22052658145367587, "weak_u_relative_error_pct": 15.915731608697488, "strong_u_approx": 1.3333333333333333, "strong_u_absolute_error": 0.05225538401576091, "strong_u_relative_error_pct": 3.7713488397722967, "exact_max_F": 1.0560179821579796, "weak_max_F_approx": 1.1923878550214466, "weak_max_F_relative_error_pct": 12.913593818241077, "strong_max_F_approx": 0.9013877113318902, "strong_max_F_relative_error_pct": 14.64276872540574},
+    {"v": 10.0, "exact_u_star": 1.1103571288577712, "weak_u_approx": 1.60611529880277, "weak_u_absolute_error": 0.4957581699449989, "weak_u_relative_error_pct": 44.64853307646949, "strong_u_approx": 1.1, "strong_u_absolute_error": 0.01035712885777107, "strong_u_relative_error_pct": 0.9327745631196595, "exact_max_F": 6.7470686605301955, "weak_max_F_approx": 13.24875394468274, "weak_max_F_relative_error_pct": 96.36311131954052, "strong_max_F_approx": 6.697414907005954, "strong_max_F_relative_error_pct": 0.7359307578224574},
+    {"v": 30.0, "exact_u_star": 1.0344615708381468, "weak_u_approx": 1.60611529880277, "weak_u_absolute_error": 0.5716537279646232, "weak_u_relative_error_pct": 55.2609921992032, "strong_u_approx": 1.0333333333333334, "strong_u_absolute_error": 0.0011282375048133897, "strong_u_relative_error_pct": 0.10906519261989242, "exact_max_F": 25.615457845247384, "weak_max_F_approx": 119.23878550214465, "weak_max_F_relative_error_pct": 365.4954294493231, "strong_max_F_approx": 25.598802618337846, "strong_max_F_relative_error_pct": 0.06502021947122259},
+    {"v": 100.0, "exact_u_star": 1.0101004896314691, "weak_u_approx": 1.60611529880277, "weak_u_absolute_error": 0.5960148091713009, "weak_u_relative_error_pct": 59.00549651141684, "strong_u_approx": 1.01, "strong_u_absolute_error": 0.00010048963146913614, "strong_u_relative_error_pct": 0.009948478641545789, "exact_max_F": 94.39982951729651, "weak_max_F_approx": 1324.875394468274, "weak_max_F_relative_error_pct": 1303.4722321458455, "strong_max_F_approx": 94.39482981401191, "strong_max_F_relative_error_pct": 0.005296305417247029}
+  ],
+  "claim_ceiling": "Approximation errors for the declared symmetric anti-phase model only; no empirical calibration and no theorem proof by numerical grid."
+}

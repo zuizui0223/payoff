@@ -27,3 +27,15 @@ DENSITY_DEPENDENT_SYSTEM_OPTIMUM = NOT_ESTIMATED
 ```
 
 Results may therefore report exact uniqueness, scaling, and asymptotics. Discussion may present these quantities as a canonical benchmark and generate comparative predictions, but must not present them as measured natural optima or calibrated management prescriptions without an explicit mapping from field observables to `m`, `tau`, and `x`.
+
+## Asymptotic approximation error audit
+
+A fixed **nine-point** `MODEL-PREDICTION` audit quantifies convergence of the endpoint asymptotes without changing the theorem or introducing a fitted regime boundary.
+
+| Checkpoint | Licensed quantitative statement | Ceiling / not licensed |
+|---|---|---|
+| weak contrast, `v=0.1` | relative error is `0.0226%` for `u_*` and `0.0144%` for maximum `F` | numerical approximation audit only; not empirical calibration |
+| strong contrast, `v=10` | relative error is `0.933%` for `u_*` and `0.736%` for maximum `F` | does not define a universal threshold for "large" contrast |
+| strong contrast, `v=100` | relative error is `0.00995%` for `u_*` and `0.00530%` for maximum `F` | remains conditional on the declared symmetric anti-phase model |
+
+The grid has **no validity cutoff**. The exact theorem covers every `v>0`; these checkpoints only make approximation error inspectable.

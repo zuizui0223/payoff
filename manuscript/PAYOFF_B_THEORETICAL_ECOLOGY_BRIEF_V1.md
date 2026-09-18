@@ -244,6 +244,8 @@ The corresponding maximum satisfies
 \tag{10}
 \]
 
+A fixed nine-point numerical audit, not used to prove uniqueness, quantifies how quickly these endpoint formulas approach the exact solution. At \(v=0.1\), the weak-contrast approximation to \(u_*\) has 0.0226% relative error and the weak approximation to the maximum premium has 0.0144% error. At \(v=10\), the strong approximation \(1+1/v\) has 0.933% error in \(u_*\) and \(v-\log v-1\) has 0.736% error in the maximum premium; by \(v=100\), these errors fall to 0.00995% and 0.00530%, respectively. No validity threshold is inferred from these checkpoints; they report approximation error for the exact model rather than defining new parameter regimes.
+
 Equations (6)–(9) give a bounded timescale prediction across the full contrast axis: the optimal dimensionless migration moves from about 1.606 under weak contrast toward 1 under strong contrast. Contrast changes the precise optimum, but not its order of magnitude.
 
 ## 5. Biological interpretation and limits

@@ -42,3 +42,13 @@ The statement that optimal movement lies on the seasonal timescale is therefore 
 ## Promotion rule
 
 A field comparison to `m_* tau` requires a defensible mapping from observed movement and environmental switching to the model parameters. Deviations from the single-optimum scaling curve are not treated as contradictions unless the declared assumptions are approximately satisfied; they instead identify candidate mechanisms absent from the benchmark, such as asymmetry, partial phase lags, stochastic switching, density dependence, or larger networks.
+
+## Asymptotic approximation error audit
+
+The fixed **nine-point** audit in `docs/PAYOFF_B_ASYMPTOTIC_ERROR_TABLE_V1.md` is registered as a `MODEL-PREDICTION` diagnostic, not as empirical evidence and not as proof of the theorem.
+
+- At `v=0.1`, the weak approximation has `0.0226%` relative error for `u_*` and `0.0144%` for the maximum `F`.
+- At `v=10`, the strong approximation has `0.933%` relative error for `u_*` and `0.736%` for the maximum `F`.
+- At `v=100`, the strong approximation has `0.00995%` relative error for `u_*` and `0.00530%` for the maximum `F`.
+
+These checkpoints report approximation error only. There is **no validity cutoff** inferred from the grid, no empirical calibration, and no change to the exact all-`v>0` uniqueness theorem.
