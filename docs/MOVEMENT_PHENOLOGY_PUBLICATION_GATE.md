@@ -16,9 +16,12 @@ with compatible estimates of:
 Current:
 
 ~~~text
-mule deer Ortega 2023: PASS
-other direct systems:    MISSING
+mule deer Ortega 2023:                PASS
+Svalbard barnacle goose STEP control: PASS
+third independent direct system:      MISSING
 ~~~
+
+The direct systems need not share the same actuator. A system can qualify with a defensible phase-transfer coefficient plus an identified behavioral actuator (speed, stopover, route, or departure timing).
 
 ## Gate B — explanatory moderator
 
