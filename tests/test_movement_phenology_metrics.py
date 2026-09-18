@@ -4,6 +4,7 @@ import pytest
 
 from analysis.movement_phenology.metrics import (
     directional_alignment,
+    directional_alignment_degrees,
     log_speed_ratio,
     normalized_vector_mismatch,
     payoff_b_reference_interval,
@@ -25,6 +26,8 @@ def test_perfect_vector_matching_is_zero():
 
 def test_opposite_directions_are_not_matching_even_at_equal_speed():
     assert directional_alignment(0.0, math.pi) == pytest.approx(-1.0)
+    assert directional_alignment_degrees(0.0, 180.0) == pytest.approx(-1.0)
+    assert directional_alignment_degrees(350.0, 10.0) == pytest.approx(math.cos(math.radians(340.0)))
     assert normalized_vector_mismatch(50.0, 50.0, 0.0, math.pi) == pytest.approx(2.0)
 
 
