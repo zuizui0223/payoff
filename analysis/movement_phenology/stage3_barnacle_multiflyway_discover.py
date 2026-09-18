@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
-"""Discover original Movebank Data Repository bitstreams for three barnacle-goose flyways."""
+"""Discover original Movebank Data Repository files for three barnacle-goose flyways.
+
+Prefer the legacy DOI -> handle -> METS route used by the historical move
+package, because these datasets were published in the pre-DSpace7 repository.
+Use the current DSpace API only as a fallback.
+"""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urljoin
+import xml.etree.ElementTree as ET
 
 import pandas as pd
 import requests
@@ -23,109 +29,162 @@ DATASETS = {
 }
 
 
-def get_json(url: str, timeout=120):
-    r = requests.get(url, headers=UA, timeout=timeout)
+def doi_landing(doi: str) -> str:
+    url = f"https://doi.org/{doi}"
+    try:
+        r = requests.head(url, headers=UA, timeout=30, allow_redirects=True)
+        if r.ok and "/handle/" in str(r.url):
+            return str(r.url)
+    except Exception:
+        pass
+    r = requests.get(url, headers=UA, timeout=30, allow_redirects=True)
     r.raise_for_status()
-    return r.json(), str(r.url)
+    return str(r.url)
 
 
-def discover_one(name: str, doi: str) -> dict:
-    rec = {"flyway": name, "doi": doi, "errors": []}
+def mets_discover(doi: str) -> dict:
+    rec: dict = {"doi": doi, "files": [], "errors": []}
+    try:
+        landing = doi_landing(doi)
+        rec["landing_url"] = landing
+        if "/handle/" not in landing:
+            rec["errors"].append("DOI did not resolve to legacy /handle/ URL")
+            return rec
+        candidates = []
+        for host in {
+            landing,
+            landing.replace("www.datarepository.movebank.org", "datarepository.movebank.org"),
+            landing.replace("datarepository.movebank.org", "www.datarepository.movebank.org"),
+        }:
+            candidates.append(
+                host.replace("/handle/", "/metadata/handle/").rstrip("/")
+                + "/mets.xml"
+            )
+        rec["mets_candidates"] = candidates
+        for mets_url in candidates:
+            try:
+                r = requests.get(mets_url, headers=UA, timeout=45, allow_redirects=True)
+                if r.status_code != 200 or not r.content:
+                    rec["errors"].append(f"{mets_url}:HTTP{r.status_code}")
+                    continue
+                root = ET.fromstring(r.content)
+                files = []
+                for file_el in root.findall(".//{http://www.loc.gov/METS/}file"):
+                    mime = file_el.attrib.get("MIMETYPE")
+                    floc = file_el.find(".//{http://www.loc.gov/METS/}FLocat")
+                    if floc is None:
+                        continue
+                    href = floc.attrib.get("{http://www.w3.org/1999/xlink}href")
+                    title = floc.attrib.get("{http://www.w3.org/1999/xlink}title")
+                    label = floc.attrib.get("{http://www.w3.org/1999/xlink}label")
+                    if not href:
+                        continue
+                    files.append(
+                        {
+                            "title": title,
+                            "label": label,
+                            "mime": mime,
+                            "url": urljoin(str(r.url), href),
+                        }
+                    )
+                if files:
+                    rec["working_mets_url"] = str(r.url)
+                    rec["files"] = files
+                    return rec
+            except Exception as exc:
+                rec["errors"].append(f"{mets_url}:{type(exc).__name__}:{exc}")
+    except Exception as exc:
+        rec["errors"].append(f"doi:{type(exc).__name__}:{exc}")
+    return rec
+
+
+def dspace_fallback(doi: str) -> dict:
+    rec = {"files": [], "errors": []}
     qurl = (
         f"{BASE}/server/api/discover/search/objects?"
-        f"query={quote('dc.identifier.doi:'+doi)}&size=20"
+        f"query={quote('dc.identifier.doi:'+doi)}&size=10"
     )
     try:
-        data, final = get_json(qurl)
+        r = requests.get(qurl, headers=UA, timeout=25)
+        r.raise_for_status()
+        data = r.json()
         objs = (
             data.get("_embedded", {})
             .get("searchResult", {})
             .get("_embedded", {})
             .get("objects", [])
         )
+        rec["objects"] = []
+        for obj in objs:
+            idx = obj.get("_embedded", {}).get("indexableObject", {})
+            uuid = idx.get("uuid") or idx.get("id")
+            rec["objects"].append(
+                {"uuid": uuid, "name": idx.get("name"), "handle": idx.get("handle")}
+            )
+            if not uuid:
+                continue
+            try:
+                b = requests.get(
+                    f"{BASE}/server/api/core/items/{uuid}/bundles?size=100",
+                    headers=UA,
+                    timeout=25,
+                )
+                b.raise_for_status()
+                bundles = b.json().get("_embedded", {}).get("bundles", [])
+                for bundle in bundles:
+                    buuid = bundle.get("uuid")
+                    if not buuid:
+                        continue
+                    bs = requests.get(
+                        f"{BASE}/server/api/core/bundles/{buuid}/bitstreams?size=100",
+                        headers=UA,
+                        timeout=25,
+                    )
+                    bs.raise_for_status()
+                    for bit in bs.json().get("_embedded", {}).get("bitstreams", []):
+                        bid = bit.get("uuid")
+                        if bid:
+                            rec["files"].append(
+                                {
+                                    "title": bit.get("name"),
+                                    "label": bundle.get("name"),
+                                    "mime": None,
+                                    "url": f"{BASE}/server/api/core/bitstreams/{bid}/content",
+                                }
+                            )
+            except Exception as exc:
+                rec["errors"].append(f"item:{uuid}:{type(exc).__name__}:{exc}")
     except Exception as exc:
         rec["errors"].append(f"discover:{type(exc).__name__}:{exc}")
-        return rec
-
-    candidates = []
-    for obj in objs:
-        idx = obj.get("_embedded", {}).get("indexableObject", {})
-        candidates.append(
-            {
-                "uuid": idx.get("uuid") or idx.get("id"),
-                "name": idx.get("name"),
-                "handle": idx.get("handle"),
-                "type": idx.get("type"),
-            }
-        )
-    rec["candidates"] = candidates
-
-    item = next((x for x in candidates if x.get("uuid")), None)
-    if item is None:
-        return rec
-
-    uuid = item["uuid"]
-    rec["item_uuid"] = uuid
-    bundles_url = f"{BASE}/server/api/core/items/{uuid}/bundles?size=100"
-    try:
-        bundles, _ = get_json(bundles_url)
-        barr = bundles.get("_embedded", {}).get("bundles", [])
-    except Exception as exc:
-        rec["errors"].append(f"bundles:{type(exc).__name__}:{exc}")
-        return rec
-
-    rec["bundles"] = []
-    for b in barr:
-        buuid = b.get("uuid")
-        bname = b.get("name")
-        br = {"uuid": buuid, "name": bname, "bitstreams": []}
-        if buuid:
-            url = f"{BASE}/server/api/core/bundles/{buuid}/bitstreams?size=100"
-            try:
-                bs, _ = get_json(url)
-                for bit in bs.get("_embedded", {}).get("bitstreams", []):
-                    bid = bit.get("uuid")
-                    br["bitstreams"].append(
-                        {
-                            "uuid": bid,
-                            "name": bit.get("name"),
-                            "sizeBytes": bit.get("sizeBytes"),
-                            "content_url": (
-                                f"{BASE}/server/api/core/bitstreams/{bid}/content"
-                                if bid else None
-                            ),
-                        }
-                    )
-            except Exception as exc:
-                br["error"] = f"{type(exc).__name__}:{exc}"
-        rec["bundles"].append(br)
-
     return rec
 
 
 def main():
-    records = [discover_one(name, doi) for name, doi in DATASETS.items()]
+    records = []
+    for flyway, doi in DATASETS.items():
+        rec = {"flyway": flyway, **mets_discover(doi)}
+        if not rec.get("files"):
+            fallback = dspace_fallback(doi)
+            rec["dspace_fallback"] = fallback
+            rec["files"] = fallback.get("files", [])
+        records.append(rec)
+
     (OUT / "stage3_barnacle_multiflyway_discovery.json").write_text(
         json.dumps(records, indent=2) + "\n", encoding="utf-8"
     )
-
     rows = []
     for rec in records:
-        for b in rec.get("bundles", []):
-            for bit in b.get("bitstreams", []):
-                rows.append(
-                    {
-                        "flyway": rec["flyway"],
-                        "doi": rec["doi"],
-                        "item_uuid": rec.get("item_uuid"),
-                        "bundle": b.get("name"),
-                        **bit,
-                    }
-                )
+        for file_rec in rec.get("files", []):
+            rows.append(
+                {
+                    "flyway": rec["flyway"],
+                    "doi": rec["doi"],
+                    **file_rec,
+                }
+            )
     pd.DataFrame(rows).to_csv(
         OUT / "stage3_barnacle_multiflyway_bitstreams.csv", index=False
     )
-
     print(json.dumps(records, indent=2))
 
 
