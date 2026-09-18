@@ -12,7 +12,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from urllib.parse import quote, urljoin
+from urllib.parse import quote
+import xml.etree.ElementTree as ET
 
 import requests
 
@@ -24,13 +25,13 @@ BASE = "https://datarepository.movebank.org"
 UA = {"User-Agent": "payoff-movement-phenology-reanalysis/1.0"}
 
 
-def get_json(url, *, timeout=60):
+def get_json(url, *, timeout=15):
     r = requests.get(url, headers=UA, timeout=timeout)
     r.raise_for_status()
     return r.json(), str(r.url)
 
 
-def get_text(url, *, timeout=60):
+def get_text(url, *, timeout=15):
     r = requests.get(url, headers=UA, timeout=timeout, allow_redirects=True)
     r.raise_for_status()
     return r.text, str(r.url), dict(r.headers)
@@ -47,11 +48,68 @@ def collect_links(obj, out):
             collect_links(v, out)
 
 
+
+def try_old_mets(resolved_url: str):
+    """Use the pre-DSpace7 Movebank DOI/handle METS route if still reachable."""
+    rec = {"resolved_url": resolved_url, "mets_candidates": [], "files": [], "errors": []}
+    if "/handle/" not in resolved_url:
+        return rec
+
+    variants = []
+    for host_url in {
+        resolved_url,
+        resolved_url.replace("www.datarepository.movebank.org", "datarepository.movebank.org"),
+        resolved_url.replace("datarepository.movebank.org", "www.datarepository.movebank.org"),
+    }:
+        variants.append(host_url.replace("/handle/", "/metadata/handle/").rstrip("/") + "/mets.xml")
+
+    for mets_url in variants:
+        rec["mets_candidates"].append(mets_url)
+        try:
+            r = requests.get(mets_url, headers=UA, timeout=20, allow_redirects=True)
+            if r.status_code != 200 or not r.content:
+                rec["errors"].append(f"{mets_url}:HTTP{r.status_code}")
+                continue
+            root = ET.fromstring(r.content)
+            ns = {
+                "mets": "http://www.loc.gov/METS/",
+                "xlink": "http://www.w3.org/1999/xlink",
+                "dim": "http://www.dspace.org/xmlns/dspace/dim",
+            }
+            files = []
+            for file_el in root.findall(".//mets:file"):
+                mime = file_el.attrib.get("MIMETYPE")
+                floc = file_el.find(".//mets:FLocat", ns)
+                if floc is None:
+                    continue
+                href = floc.attrib.get("{http://www.w3.org/1999/xlink}href")
+                title = floc.attrib.get("{http://www.w3.org/1999/xlink}title")
+                label = floc.attrib.get("{http://www.w3.org/1999/xlink}label")
+                if href:
+                    # Old METS href can be relative to the metadata endpoint.
+                    if href.startswith("/"):
+                        url = "https://datarepository.movebank.org" + href
+                    elif href.startswith("http"):
+                        url = href
+                    else:
+                        url = requests.compat.urljoin(str(r.url), href)
+                    files.append(
+                        {"title": title, "label": label, "mime": mime, "url": url}
+                    )
+            rec["working_mets_url"] = str(r.url)
+            rec["files"] = files
+            return rec
+        except Exception as exc:
+            rec["errors"].append(f"{mets_url}:{type(exc).__name__}:{exc}")
+    return rec
+
+
 def main():
     receipt = {
         "doi": DOI,
         "datacite": None,
         "doi_redirect": None,
+        "old_mets": None,
         "discover_queries": [],
         "candidate_item_urls": [],
         "candidate_bitstream_urls": [],
@@ -72,20 +130,32 @@ def main():
     except Exception as exc:
         receipt["errors"].append(f"datacite:{type(exc).__name__}:{exc}")
 
+    resolved = None
     try:
-        _, resolved, headers = get_text(f"https://doi.org/{DOI}")
+        rr = requests.head(
+            f"https://doi.org/{DOI}",
+            headers=UA,
+            timeout=20,
+            allow_redirects=True,
+        )
+        rr.raise_for_status()
+        resolved = str(rr.url)
         receipt["doi_redirect"] = {
             "resolved_url": resolved,
-            "content_type": headers.get("content-type"),
+            "content_type": rr.headers.get("content-type"),
         }
+        receipt["old_mets"] = try_old_mets(resolved)
     except Exception as exc:
         receipt["errors"].append(f"doi_redirect:{type(exc).__name__}:{exc}")
+
+    # Also try DataCite landing URL through the old METS route when it differs.
+    dc_url = (receipt.get("datacite") or {}).get("url")
+    if dc_url and (not receipt.get("old_mets") or not receipt["old_mets"].get("files")):
+        receipt["old_mets"] = try_old_mets(str(dc_url))
 
     queries = [
         DOI,
         "dv5mm289",
-        '"Eurasian wigeon"',
-        '"Mareca penelope"',
         '"Eurasian wigeon (Mareca penelope) Netherlands Lithuania 2018-2019"',
     ]
 
@@ -221,6 +291,11 @@ def main():
             receipt["errors"].append(
                 f"item:{item_url}:{type(exc).__name__}:{exc}"
             )
+
+    for file_rec in (receipt.get("old_mets") or {}).get("files", []):
+        url = file_rec.get("url")
+        if url:
+            bitstream_urls.add(url)
 
     receipt["candidate_item_urls"] = sorted(candidate_item_urls)
     receipt["items"] = item_receipts
