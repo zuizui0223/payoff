@@ -35,6 +35,10 @@ jobs:
       - name: Install analysis dependencies
         run: python -m pip install --disable-pip-version-check pytest pandas numpy scipy requests statsmodels scikit-learn beautifulsoup4 pyproj
 
+      - name: Try original Movebank ORIGINAL bundle
+        continue-on-error: true
+        run: python analysis/movement_phenology/stage3_wigeon_original_download.py
+
       - name: Download public Zenodo raw GPS release
         run: |
           mkdir -p external/wigeon
@@ -60,6 +64,7 @@ jobs:
         with:
           name: movement-phenology-stage3-wigeon
           path: |
+            outputs/movement_phenology/stage3_wigeon_original_movebank_receipt.json
             outputs/movement_phenology/stage3_wigeon_source_receipt.json
             outputs/movement_phenology/stage3_wigeon_individual_source_summary.csv
             outputs/movement_phenology/stage3_wigeon_raw_subset.csv
