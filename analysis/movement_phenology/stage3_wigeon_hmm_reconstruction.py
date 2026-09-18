@@ -139,9 +139,25 @@ def regularise_track_hourly(
     return out.drop_duplicates("time").sort_values("time").reset_index(drop=True)
 
 
+def trim_inactive_tail(x: pd.DataFrame) -> pd.DataFrame:
+    """Remove only the terminal run of inactive ground-speed-zero fixes.
+
+    van Toor et al. (2021) state that inactive locations (ground speed = 0)
+    were removed from the end of each track. Interior zero-speed fixes are
+    retained because they can represent real resting behavior.
+    """
+    x = x.sort_values("time").copy()
+    speed = pd.to_numeric(x["ground_speed"], errors="coerce").to_numpy()
+    active = np.where(np.isfinite(speed) & (speed != 0.0))[0]
+    if len(active) == 0:
+        return x.iloc[0:0].copy()
+    return x.iloc[: int(active[-1]) + 1].copy()
+
+
 def prepare_track(
     x: pd.DataFrame, individual_year: str | None = None
 ):
+    x = trim_inactive_tail(x)
     x = x.sort_values("time").drop_duplicates("time").copy()
     if len(x) < 3 or float(x["ground_speed"].max()) <= THRESHOLD_V_MS:
         return None, "NO_MIGRATORY_SPEED"
@@ -287,6 +303,11 @@ def segment_staging(classified: pd.DataFrame) -> pd.DataFrame:
     # Published arrival filter: staging site must be beyond threshold from the
     # starting location.
     out = out[out["d2start_km"] > THRESHOLD_D_KM].copy()
+
+    # Published arrival-event contract: no staging arrivals after June 30.
+    arrival_ts = pd.to_datetime(out["arrival"], utc=True)
+    out["arrival_before_july"] = arrival_ts.dt.month <= 6
+    out = out[out["arrival_before_july"]].copy()
 
     # Published code manually removes one within-winter movement that sat just
     # outside the threshold (~52 km) in February. Current public release lacks
