@@ -43,7 +43,7 @@ animal_speed       = vArrMag
 environment_speed  = vGrMag
 speed_ratio        = animal_speed / environment_speed
 log_speed_ratio    = log(speed_ratio)
-alignment          = cos(vArrAng - vGrAng)
+alignment          = cos((vArrAng - vGrAng) * pi / 180)
 vector_mismatch    = sqrt(1 + speed_ratio^2 - 2*speed_ratio*alignment)
 signed_lag         = arr_GAM_mean - gr_mn
 abs_mismatch_days  = abs(signed_lag)
@@ -52,7 +52,7 @@ species_cell       = interaction(species, cell)
 
 ## Source-quality notes
 
-The generating code and data dictionary disagree on the verbal sign of lag. Recompute signed lag from dates.
+The generating code and data dictionary disagree on the verbal sign of lag. Recompute signed lag from dates. The data dictionary also labels vArrAng/vGrAng as radians, but code/1_GetEstimates.R explicitly applies rad2deg() before storing them; Stage 1 therefore treats these fields as degrees.
 
 The velocity-generating code filters bird arrival estimates to VALID_GAM == TRUE, vegetation cells to gr_ncell > 10000, requires at least five neighbours for velocity estimation, and sets velocity values above 3000 km/day to missing. Preserve these source decisions and report any additional filter separately.
 
