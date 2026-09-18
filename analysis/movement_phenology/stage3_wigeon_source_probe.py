@@ -22,6 +22,10 @@ OUT = Path("outputs/movement_phenology")
 OUT.mkdir(parents=True, exist_ok=True)
 
 TARGET_STUDY = "Eurasian wigeon (Mareca penelope) Netherlands Lithuania 2018-2019"
+SUPPLEMENT_SOURCE_STUDY_TOKENS = (
+    "Eurasian wigeon",
+    "Dabbling duck migration Lithuania 2019",
+)
 
 
 def main():
@@ -47,11 +51,24 @@ def main():
         if "wigeon" in x.lower() or "penelope" in x.lower()
     )
 
-    w = df[df["study.name"].astype(str) == TARGET_STUDY].copy()
+    # The published supplementary code imports four tracking files, including
+    # "Dabbling duck migration Lithuania 2019.csv" in addition to the files
+    # labelled explicitly as Eurasian wigeon. Reconstruct that source union by
+    # taxon + registered study-name tokens rather than by one exact study name.
+    taxon = df["individual.taxon.canonical.name"].astype(str).str.lower()
+    study = df["study.name"].astype(str)
+    study_mask = False
+    for token in SUPPLEMENT_SOURCE_STUDY_TOKENS:
+        study_mask = study_mask | study.str.contains(
+            token, case=False, regex=False, na=False
+        )
+    w = df[
+        taxon.str.contains("penelope", regex=False, na=False)
+        & study_mask
+    ].copy()
     if w.empty:
-        # Fail closed but expose candidate names in the error.
         raise SystemExit(
-            f"Target study not found. Wigeon-like candidates: {study_names}"
+            f"Published-source wigeon union not found. Candidates: {study_names}"
         )
 
     w["timestamp"] = pd.to_datetime(w["timestamp"], errors="coerce", utc=True)
@@ -88,7 +105,11 @@ def main():
     receipt = {
         "zenodo_doi": "10.5281/zenodo.16940654",
         "movebank_doi": "10.5441/001/1.dv5mm289",
-        "study_name": TARGET_STUDY,
+        "primary_study_name": TARGET_STUDY,
+        "registered_source_study_tokens": list(SUPPLEMENT_SOURCE_STUDY_TOKENS),
+        "study_names_in_subset": sorted(
+            str(x) for x in w["study.name"].dropna().unique()
+        ),
         "study_ids": (
             sorted(str(x) for x in w["study.ID"].dropna().unique())
             if "study.ID" in w.columns
