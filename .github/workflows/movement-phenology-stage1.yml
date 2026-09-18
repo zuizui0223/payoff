@@ -48,7 +48,7 @@ jobs:
           cat outputs/movement_phenology/stage1_gam_minima.csv
           cat outputs/movement_phenology/stage1_checkpoints.csv
           cat outputs/movement_phenology/stage1_optimum_uncertainty.csv
-          cat outputs/movement_phenology/stage1_species_summary.csv
+          cat outputs/movement_phenology/stage1_species_summary.csv\n          cat outputs/movement_phenology/stage1_trait_moderator_summary.csv\n          cat outputs/movement_phenology/stage1_trait_moderator_associations.csv
 
       - uses: actions/upload-artifact@v4
         with:
@@ -63,7 +63,7 @@ jobs:
             outputs/movement_phenology/stage1_gam_receipts.csv
             outputs/movement_phenology/stage1_optimum_uncertainty.csv
             outputs/movement_phenology/stage1_species_vertices.csv
-            outputs/movement_phenology/stage1_species_summary.csv
+            outputs/movement_phenology/stage1_species_summary.csv\n            outputs/movement_phenology/stage1_trait_species.csv\n            outputs/movement_phenology/stage1_trait_moderator_summary.csv\n            outputs/movement_phenology/stage1_trait_moderator_associations.csv
             outputs/movement_phenology/stage1_gam_summary.txt
             outputs/movement_phenology/stage1_centered_gam_summary.txt
             outputs/movement_phenology/stage1_quadratic_summary.txt
