@@ -372,3 +372,60 @@ The project should not be promoted as a universal migration constant paper.
 The strongest working framing is now:
 
 > **Phenological migration is a phase-control problem whose gain, target phase and correction scale depend on environmental information, movement permeability and migration strategy.**
+
+
+## Update — second direct controller achieved
+
+The Svalbard barnacle-goose system has now advanced from Tier-C literature evidence to a direct Tier-A **discrete STEP-controller** reconstruction.
+
+Primary southern-Norway -> Svalbard result:
+
+~~~text
+N transitions = 16
+N individuals = 15
+
+flight-pace phase gain:
+  +0.0153 per day
+  p = 0.421
+
+stopover phase slope:
+  -0.589 day/day
+  cluster p = 1.77e-11
+
+stopover gain:
+  gS = 0.589
+
+direct arrival-to-arrival phase transfer:
+  lambda = -0.106
+  SE = 0.259
+
+no-correction null lambda = 1:
+  p = 2.01e-5
+~~~
+
+Thus the second direct system does **not** replicate the mule-deer actuator literally.
+
+Instead:
+
+~~~text
+mule deer:
+  speed + stopover compensation
+
+Svalbard geese:
+  strong stopover compensation
+  no detectable flight-pace response
+  phase reset across stopover-to-stopover movement
+  deliberate Arctic overtake near breeding grounds
+~~~
+
+This result changes the cross-system target from one common \(\kappa\) to a common **net phase-transfer coefficient** plus actuator-specific gains.
+
+The direct-system gate is now:
+
+~~~text
+mule deer direct controller:       PASS
+Svalbard goose direct controller:   PASS
+third independent direct system:    MISSING
+~~~
+
+The next priority is therefore a third direct system, with Eurasian wigeon the first candidate because public GPS and a strong migration-distance gradient already exist.
