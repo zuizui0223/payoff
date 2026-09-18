@@ -46,9 +46,6 @@ jobs:
       - name: Extract published HMM and staging code contract
         run: python analysis/movement_phenology/stage3_wigeon_supplement_probe.py
 
-      - name: Discover original Movebank repository bitstreams
-        run: python analysis/movement_phenology/stage3_wigeon_movebank_discover.py
-
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-stage3-wigeon
@@ -59,6 +56,4 @@ jobs:
             outputs/movement_phenology/stage3_wigeon_supplement_probe.json
             outputs/movement_phenology/stage3_wigeon_supplement_hmm_blocks.txt
             outputs/movement_phenology/stage3_wigeon_supplement_hmm_contexts.txt
-            outputs/movement_phenology/stage3_wigeon_movebank_discovery.json
-            outputs/movement_phenology/stage3_wigeon_movebank_bitstreams.csv
           if-no-files-found: error
