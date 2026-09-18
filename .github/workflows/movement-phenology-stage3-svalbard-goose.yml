@@ -24,7 +24,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install parser
-        run: python -m pip install --disable-pip-version-check pandas
+        run: python -m pip install --disable-pip-version-check pandas numpy scikit-learn
 
       - name: Download public Movebank Data Repository bitstreams
         run: |
@@ -43,10 +43,17 @@ jobs:
       - name: Inventory Svalbard goose source data
         run: python analysis/movement_phenology/stage3_barnacle_goose_source_probe.py
 
+      - name: Reconstruct spring stopovers and broad regions
+        run: python analysis/movement_phenology/stage3_svalbard_goose_stopovers.py
+
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-stage3-svalbard-goose-source
           path: |
             outputs/movement_phenology/stage3_barnacle_goose_svalbard_source_inventory.json
             outputs/movement_phenology/stage3_barnacle_goose_svalbard_source_inventory.csv
+            outputs/movement_phenology/stage3_svalbard_goose_stopovers.csv
+            outputs/movement_phenology/stage3_svalbard_goose_regions.csv
+            outputs/movement_phenology/stage3_svalbard_goose_track_stopover_summary.csv
+            outputs/movement_phenology/stage3_svalbard_goose_stopover_receipt.json
           if-no-files-found: error
