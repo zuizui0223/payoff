@@ -1,0 +1,55 @@
+name: Movement-phenology Greenland and Barents goose raw audit
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'analysis/movement_phenology/stage3_barnacle_other_flyways.py'
+      - '.github/workflows/movement-phenology-barnacle-other-flyways.yml'
+  pull_request:
+    paths:
+      - 'analysis/movement_phenology/stage3_barnacle_other_flyways.py'
+      - '.github/workflows/movement-phenology-barnacle-other-flyways.yml'
+
+jobs:
+  stopovers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check pandas numpy scikit-learn scipy
+      - name: Download Greenland and Barents original Movebank GPS
+        run: |
+          mkdir -p external/barnacle_goose_greenland external/barnacle_goose_barents
+          curl --fail --location --retry 3 \
+            'https://datarepository.movebank.org/server/api/core/bitstreams/721751f9-dda5-44a1-9f36-bad42dc191fb/content' \
+            --output external/barnacle_goose_greenland/gps.csv
+          curl --fail --location --retry 3 \
+            'https://datarepository.movebank.org/server/api/core/bitstreams/deda6bce-db1e-4f0d-af1f-058dbfcaf83b/content' \
+            --output external/barnacle_goose_barents/gps.csv
+          test -s external/barnacle_goose_greenland/gps.csv
+          test -s external/barnacle_goose_barents/gps.csv
+          sha256sum external/barnacle_goose_greenland/gps.csv external/barnacle_goose_barents/gps.csv
+      - name: Reconstruct Greenland stopovers
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
+            --flyway greenland \
+            --gps external/barnacle_goose_greenland/gps.csv
+      - name: Reconstruct Barents stopovers
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
+            --flyway barents \
+            --gps external/barnacle_goose_barents/gps.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: movement-phenology-barnacle-other-flyways
+          path: |
+            outputs/movement_phenology/stage3_greenland_goose_*.csv
+            outputs/movement_phenology/stage3_greenland_goose_*.json
+            outputs/movement_phenology/stage3_barents_goose_*.csv
+            outputs/movement_phenology/stage3_barents_goose_*.json
+          if-no-files-found: error
