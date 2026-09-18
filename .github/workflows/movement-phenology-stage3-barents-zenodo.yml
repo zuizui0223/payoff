@@ -24,8 +24,22 @@ jobs:
         run: python -m pip install --disable-pip-version-check requests pandas
       - name: Discover Zenodo processed tracking file
         run: python analysis/movement_phenology/stage3_barents_zenodo_discover.py
+
+      - name: Download processed hourly tracking release
+        run: |
+          mkdir -p external/barnacle_processed
+          curl --fail --location --retry 4             'https://zenodo.org/records/10214988/files/ProcessedTrackingData_MakingBeterUseOfTrackingData_2023.csv?download=1'             --output external/barnacle_processed/ProcessedTrackingData_MakingBeterUseOfTrackingData_2023.csv
+          test -s external/barnacle_processed/ProcessedTrackingData_MakingBeterUseOfTrackingData_2023.csv
+          ls -lh external/barnacle_processed/ProcessedTrackingData_MakingBeterUseOfTrackingData_2023.csv
+
+      - name: Inventory Barents and Svalbard subsets
+        run: python analysis/movement_phenology/stage3_barents_processed_source_probe.py
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-barents-zenodo-discovery
-          path: outputs/movement_phenology/stage3_barents_zenodo_discovery.json
+          path: |
+            outputs/movement_phenology/stage3_barents_zenodo_discovery.json
+            outputs/movement_phenology/stage3_barents_processed_source_receipt.json
+            outputs/movement_phenology/stage3_barents_processed_tracking_subset.csv
+            outputs/movement_phenology/stage3_svalbard_processed_tracking_subset.csv
           if-no-files-found: error
