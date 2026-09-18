@@ -8,8 +8,11 @@ phase yet; it freezes the raw schema needed for a direct-controller rebuild.
 
 from __future__ import annotations
 
+import gzip
+import io
 import json
 from pathlib import Path
+import zipfile
 
 import pandas as pd
 
@@ -21,15 +24,43 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 
 def read_any(path: Path) -> pd.DataFrame:
-    # Movebank exports can include commas or tabs; detect conservatively.
-    for sep in (",", "\t"):
-        try:
-            df = pd.read_csv(path, sep=sep, low_memory=False)
-            if df.shape[1] > 1:
-                return df
-        except Exception:
-            pass
-    raise RuntimeError(f"Could not parse {path}")
+    """Parse plain, compressed, or oddly encoded Movebank tabular bitstreams."""
+    raw = path.read_bytes()
+
+    payloads: list[tuple[str, bytes]] = []
+    if raw.startswith(b"PK"):
+        with zipfile.ZipFile(io.BytesIO(raw)) as zf:
+            for name in zf.namelist():
+                if not name.endswith("/"):
+                    payloads.append((name, zf.read(name)))
+    elif raw.startswith(b"\x1f\x8b"):
+        payloads.append((path.name, gzip.decompress(raw)))
+    else:
+        payloads.append((path.name, raw))
+
+    errors = []
+    for name, payload in payloads:
+        for encoding in ("utf-8-sig", "utf-16", "latin-1"):
+            try:
+                text = payload.decode(encoding)
+            except Exception as exc:
+                errors.append(f"{name}:{encoding}:decode:{exc}")
+                continue
+            for sep in (",", "\t", ";"):
+                try:
+                    df = pd.read_csv(
+                        io.StringIO(text), sep=sep, low_memory=False
+                    )
+                    if df.shape[1] > 1:
+                        return df
+                except Exception as exc:
+                    errors.append(f"{name}:{encoding}:{sep}:{exc}")
+
+    magic = raw[:32].hex()
+    raise RuntimeError(
+        f"Could not parse {path}; size={len(raw)} magic={magic}; "
+        + " | ".join(errors[-8:])
+    )
 
 
 def find_column(columns, candidates):
