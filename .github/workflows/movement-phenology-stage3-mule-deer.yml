@@ -51,6 +51,7 @@ jobs:
             outputs/movement_phenology/stage3_mule_deer_source_inventory.csv
             outputs/movement_phenology/stage3_mule_deer_phase_feedback.json
             outputs/movement_phenology/stage3_mule_deer_phase_feedback.csv
+            outputs/movement_phenology/stage3_mule_deer_feedback_by_year.csv
             outputs/movement_phenology/stage3_mule_deer_joined_source_data.csv
             outputs/movement_phenology/stage3_mule_deer_*_summary.txt
           if-no-files-found: error
