@@ -1,38 +1,91 @@
-name: Movement-phenology barnacle goose multiflyway discovery
+name: Movement-phenology barnacle goose multi-flyway direct audit
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'analysis/movement_phenology/stage3_barnacle_multiflyway_discover.py'
+      - 'analysis/movement_phenology/stage3_barnacle_*.py'
+      - 'analysis/movement_phenology/stage3_barents_*.py'
+      - 'analysis/movement_phenology/gdd_jerk.py'
       - '.github/workflows/movement-phenology-barnacle-multiflyway.yml'
   pull_request:
     paths:
-      - 'analysis/movement_phenology/stage3_barnacle_multiflyway_discover.py'
+      - 'analysis/movement_phenology/stage3_barnacle_*.py'
+      - 'analysis/movement_phenology/stage3_barents_*.py'
+      - 'analysis/movement_phenology/gdd_jerk.py'
       - '.github/workflows/movement-phenology-barnacle-multiflyway.yml'
 
 jobs:
-  discover:
+  direct-audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
-
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Install dependencies
-        run: python -m pip install --disable-pip-version-check pandas requests
-
-      - name: Discover three flyway bitstreams
-        run: python analysis/movement_phenology/stage3_barnacle_multiflyway_discover.py
-
+      - name: Install analysis dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            pandas numpy scipy requests statsmodels scikit-learn
+      - name: Download processed public barnacle-goose tracking release
+        run: python analysis/movement_phenology/stage3_barnacle_processed_download.py
+      - name: Inventory flyway subsets
+        run: python analysis/movement_phenology/stage3_barents_processed_source_probe.py
+      - name: Reconstruct Greenland spring stopovers
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
+            --flyway greenland \
+            --gps outputs/movement_phenology/stage3_greenland_processed_tracking_subset.csv \
+            --min-region-individuals 2
+      - name: Reconstruct Barents spring stopovers
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
+            --flyway barents \
+            --gps outputs/movement_phenology/stage3_barents_processed_tracking_subset.csv \
+            --min-region-individuals 3
+      - name: Reconstruct Greenland spring-onset anomalies
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_flyway_power_anomalies.py \
+            --flyway greenland \
+            --regions outputs/movement_phenology/stage3_greenland_goose_regions.csv \
+            --start-year 1982 --end-year 2013
+      - name: Reconstruct Barents spring-onset anomalies
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_flyway_power_anomalies.py \
+            --flyway barents \
+            --regions outputs/movement_phenology/stage3_barents_goose_regions.csv \
+            --start-year 1982 --end-year 2013
+      - name: Fit Greenland STEP controller
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_flyway_step_controller.py \
+            --flyway greenland \
+            --stopovers outputs/movement_phenology/stage3_greenland_goose_stopovers.csv \
+            --regions outputs/movement_phenology/stage3_greenland_goose_regions.csv \
+            --anomalies outputs/movement_phenology/stage3_greenland_goose_power_gdd_anomalies.csv \
+            --min-n 4 --min-individuals 2
+      - name: Fit Barents STEP controller
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_flyway_step_controller.py \
+            --flyway barents \
+            --stopovers outputs/movement_phenology/stage3_barents_goose_stopovers.csv \
+            --regions outputs/movement_phenology/stage3_barents_goose_regions.csv \
+            --anomalies outputs/movement_phenology/stage3_barents_goose_power_gdd_anomalies.csv \
+            --min-n 6 --min-individuals 4
+      - name: Compare predictability with correction
+        run: python analysis/movement_phenology/stage3_barnacle_predictability_controller.py
       - uses: actions/upload-artifact@v4
         with:
-          name: movement-phenology-barnacle-multiflyway-discovery
+          name: movement-phenology-barnacle-multiflyway
           path: |
-            outputs/movement_phenology/stage3_barnacle_multiflyway_discovery.json
-            outputs/movement_phenology/stage3_barnacle_multiflyway_bitstreams.csv
+            outputs/movement_phenology/stage3_barnacle_processed_download.json
+            outputs/movement_phenology/stage3_barents_processed_source_receipt.json
+            outputs/movement_phenology/stage3_greenland_processed_tracking_subset.csv
+            outputs/movement_phenology/stage3_barents_processed_tracking_subset.csv
+            outputs/movement_phenology/stage3_greenland_goose_*.csv
+            outputs/movement_phenology/stage3_greenland_goose_*.json
+            outputs/movement_phenology/stage3_barents_goose_*.csv
+            outputs/movement_phenology/stage3_barents_goose_*.json
+            outputs/movement_phenology/stage3_barnacle_predictability_controller_*.csv
+            outputs/movement_phenology/stage3_barnacle_predictability_controller_*.json
           if-no-files-found: error
