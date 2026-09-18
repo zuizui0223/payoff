@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Inventory the Eurasian-wigeon subset in the public Zenodo raw GPS release.
+"""Normalize the public Eurasian-wigeon source data for controller reconstruction.
 
-Zenodo DOI: 10.5281/zenodo.16940654
-Original Movebank study DOI: 10.5441/001/1.dv5mm289
+Preferred source:
+  original Movebank ORIGINAL bundle for DOI 10.5441/001/1.dv5mm289
 
-The Zenodo release is curated by the same research group and identifies the
-study by its Movebank study name/ID. This audit isolates that subset without
-changing or resampling fixes.
+Fallback source:
+  public Zenodo hourly union DOI 10.5281/zenodo.16940654
+
+Both lanes are normalized to the same columns consumed by the published-HMM
+reconstruction. The original source is always preferred when it is available
+and contains the required GPS schema.
 """
 
 from __future__ import annotations
@@ -17,7 +20,8 @@ from pathlib import Path
 import pandas as pd
 
 
-SOURCE = Path("external/wigeon/250823_LNU_dabbling_ducks_hourly.csv")
+ORIGINAL = Path("external/wigeon_original/wigeon_original_gps.csv")
+ZENODO = Path("external/wigeon/250823_LNU_dabbling_ducks_hourly.csv")
 OUT = Path("outputs/movement_phenology")
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -28,11 +32,97 @@ SUPPLEMENT_SOURCE_STUDY_TOKENS = (
 )
 
 
-def main():
-    if not SOURCE.exists():
-        raise SystemExit(f"Missing raw Zenodo source: {SOURCE}")
+def find_col(columns, candidates, *, required=True):
+    lower = {str(c).lower(): c for c in columns}
+    for name in candidates:
+        hit = lower.get(name.lower())
+        if hit is not None:
+            return hit
+    for c in columns:
+        lc = str(c).lower()
+        if any(name.lower() in lc for name in candidates):
+            return c
+    if required:
+        raise ValueError(
+            f"Missing column among candidates={candidates}; columns={list(columns)}"
+        )
+    return None
 
-    df = pd.read_csv(SOURCE, low_memory=False)
+
+def normalize_original(df: pd.DataFrame) -> pd.DataFrame:
+    """Map standard Movebank columns to the internal wigeon contract."""
+    t = find_col(df.columns, ["timestamp", "eventDate", "event-date"])
+    lon = find_col(
+        df.columns,
+        ["location-long", "location_long", "decimalLongitude", "longitude"],
+    )
+    lat = find_col(
+        df.columns,
+        ["location-lat", "location_lat", "decimalLatitude", "latitude"],
+    )
+    ind = find_col(
+        df.columns,
+        [
+            "individual-local-identifier",
+            "individual_local_identifier",
+            "organismID",
+            "individual.id",
+            "individual",
+        ],
+    )
+    speed = find_col(
+        df.columns,
+        ["ground-speed", "ground_speed", "ground.speed", "speed"],
+    )
+    taxon = find_col(
+        df.columns,
+        [
+            "individual-taxon-canonical-name",
+            "individual_taxon_canonical_name",
+            "individual.taxon.canonical.name",
+            "taxon-canonical-name",
+        ],
+        required=False,
+    )
+    study = find_col(
+        df.columns,
+        ["study-name", "study_name", "study.name"],
+        required=False,
+    )
+    study_id = find_col(
+        df.columns,
+        ["study-id", "study_id", "study.id"],
+        required=False,
+    )
+
+    out = pd.DataFrame(
+        {
+            "study.name": (
+                df[study].astype(str)
+                if study is not None
+                else TARGET_STUDY
+            ),
+            "study.id": (
+                df[study_id].astype(str)
+                if study_id is not None
+                else ""
+            ),
+            "individual.id": df[ind].astype(str),
+            "individual.taxon.canonical.name": (
+                df[taxon].astype(str)
+                if taxon is not None
+                else "Anas penelope"
+            ),
+            "timestamp": df[t],
+            "location.long": df[lon],
+            "location.lat": df[lat],
+            "ground.speed": df[speed],
+        }
+    )
+    return out
+
+
+def normalize_zenodo(df: pd.DataFrame) -> pd.DataFrame:
     required = [
         "study.name",
         "individual.id",
@@ -44,41 +134,74 @@ def main():
     ]
     missing = [c for c in required if c not in df.columns]
     if missing:
-        raise SystemExit(f"Missing expected columns: {missing}")
+        raise ValueError(f"Missing expected Zenodo columns: {missing}")
 
-    study_names = sorted(
-        x for x in df["study.name"].dropna().astype(str).unique()
-        if "wigeon" in x.lower() or "penelope" in x.lower()
-    )
-
-    # The published supplementary code imports four tracking files, including
-    # "Dabbling duck migration Lithuania 2019.csv" in addition to the files
-    # labelled explicitly as Eurasian wigeon. Reconstruct that source union by
-    # taxon + registered study-name tokens rather than by one exact study name.
     taxon = df["individual.taxon.canonical.name"].astype(str).str.lower()
     study = df["study.name"].astype(str)
-    study_mask = False
+    study_mask = pd.Series(False, index=df.index)
     for token in SUPPLEMENT_SOURCE_STUDY_TOKENS:
         study_mask = study_mask | study.str.contains(
             token, case=False, regex=False, na=False
         )
+
     w = df[
         taxon.str.contains("penelope", regex=False, na=False)
         & study_mask
     ].copy()
     if w.empty:
-        raise SystemExit(
-            f"Published-source wigeon union not found. Candidates: {study_names}"
+        raise ValueError(
+            "Published-source wigeon union not found in Zenodo release"
         )
 
-    w["timestamp"] = pd.to_datetime(w["timestamp"], errors="coerce", utc=True)
+    if "study.id" not in w.columns:
+        w["study.id"] = ""
+    return w[required + ["study.id"]].copy()
+
+
+def clean_normalized(w: pd.DataFrame) -> pd.DataFrame:
+    w = w.copy()
+    w["timestamp"] = pd.to_datetime(
+        w["timestamp"], errors="coerce", utc=True
+    )
     for c in ("location.long", "location.lat", "ground.speed"):
         w[c] = pd.to_numeric(w[c], errors="coerce")
+    w = w.dropna(
+        subset=[
+            "individual.id",
+            "timestamp",
+            "location.long",
+            "location.lat",
+            "ground.speed",
+        ]
+    ).copy()
     w["year"] = w["timestamp"].dt.year
     w["month"] = w["timestamp"].dt.month
+    return w
 
-    coord_ok = w["location.long"].notna() & w["location.lat"].notna()
-    time_ok = w["timestamp"].notna()
+
+def source_choice():
+    original_error = None
+    if ORIGINAL.exists() and ORIGINAL.stat().st_size > 0:
+        try:
+            raw = pd.read_csv(ORIGINAL, low_memory=False)
+            w = clean_normalized(normalize_original(raw))
+            if len(w) > 0:
+                return "ORIGINAL_MOVEBANK", ORIGINAL, w, original_error
+        except Exception as exc:
+            original_error = f"{type(exc).__name__}:{exc}"
+
+    if not ZENODO.exists():
+        raise SystemExit(
+            f"Neither usable original source nor fallback exists. "
+            f"Original error={original_error}; missing {ZENODO}"
+        )
+    raw = pd.read_csv(ZENODO, low_memory=False)
+    w = clean_normalized(normalize_zenodo(raw))
+    return "ZENODO_FALLBACK", ZENODO, w, original_error
+
+
+def main():
+    lane, source_path, w, original_error = source_choice()
 
     individual_summary = (
         w.groupby("individual.id")
@@ -98,25 +221,30 @@ def main():
         OUT / "stage3_wigeon_individual_source_summary.csv", index=False
     )
 
-    # Keep only the target-study source rows as a derived analysis input artifact.
-    # This is a subset of the public Zenodo data, not a modified trajectory.
+    # Canonical normalized analysis input. Downstream code never needs to know
+    # which acquisition lane succeeded.
     w.to_csv(OUT / "stage3_wigeon_raw_subset.csv", index=False)
 
     receipt = {
-        "zenodo_doi": "10.5281/zenodo.16940654",
         "movebank_doi": "10.5441/001/1.dv5mm289",
+        "zenodo_fallback_doi": "10.5281/zenodo.16940654",
+        "source_lane": lane,
+        "source_path": str(source_path),
+        "original_source_error_if_any": original_error,
         "primary_study_name": TARGET_STUDY,
-        "registered_source_study_tokens": list(SUPPLEMENT_SOURCE_STUDY_TOKENS),
+        "registered_source_study_tokens": list(
+            SUPPLEMENT_SOURCE_STUDY_TOKENS
+        ),
         "study_names_in_subset": sorted(
             str(x) for x in w["study.name"].dropna().unique()
         ),
-        "study_ids": (
-            sorted(str(x) for x in w["study.ID"].dropna().unique())
-            if "study.ID" in w.columns
-            else []
+        "study_ids": sorted(
+            str(x) for x in w["study.id"].dropna().unique()
+            if str(x) and str(x).lower() != "nan"
         ),
         "taxa": sorted(
-            str(x) for x in w["individual.taxon.canonical.name"].dropna().unique()
+            str(x)
+            for x in w["individual.taxon.canonical.name"].dropna().unique()
         ),
         "n_rows": int(len(w)),
         "n_individuals": int(w["individual.id"].nunique()),
@@ -124,9 +252,16 @@ def main():
         "years": sorted(int(x) for x in w["year"].dropna().unique()),
         "time_min": str(w["timestamp"].min()),
         "time_max": str(w["timestamp"].max()),
-        "coordinate_complete_rows": int(coord_ok.sum()),
-        "timestamp_complete_rows": int(time_ok.sum()),
-        "ground_speed_nonmissing_rows": int(w["ground.speed"].notna().sum()),
+        "coordinate_complete_rows": int(
+            (
+                w["location.long"].notna()
+                & w["location.lat"].notna()
+            ).sum()
+        ),
+        "timestamp_complete_rows": int(w["timestamp"].notna().sum()),
+        "ground_speed_nonmissing_rows": int(
+            w["ground.speed"].notna().sum()
+        ),
         "longitude_range": [
             float(w["location.long"].min()),
             float(w["location.long"].max()),
@@ -135,13 +270,11 @@ def main():
             float(w["location.lat"].min()),
             float(w["location.lat"].max()),
         ],
-        "source_columns": [str(x) for x in w.columns],
-        "study_id_column_present": bool("study.ID" in w.columns),
-        "candidate_wigeon_study_names": study_names,
+        "normalized_columns": [str(x) for x in w.columns],
         "claim_ceiling": (
-            "Raw-source inventory only. Analytical spring tracks and staging "
-            "events must reproduce the published filtering/HMM contract before "
-            "controller inference."
+            "Normalized raw-source inventory. Controller inference remains "
+            "gated on replication of the published track/HMM/staging summaries "
+            "and environmental TGS reconstruction."
         ),
     }
     (OUT / "stage3_wigeon_source_receipt.json").write_text(
