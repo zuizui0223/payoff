@@ -25,7 +25,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install workbook readers
-        run: python -m pip install --disable-pip-version-check pandas openpyxl
+        run: python -m pip install --disable-pip-version-check pandas openpyxl scipy statsmodels
 
       - name: Download official Nature Communications source data
         run: |
@@ -40,10 +40,17 @@ jobs:
       - name: Inventory published source-data workbook
         run: python analysis/movement_phenology/stage3_mule_deer_source_probe.py
 
+      - name: Test phase-error feedback in mule deer
+        run: python analysis/movement_phenology/stage3_mule_deer_phase_feedback.py
+
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-stage3-mule-deer-source-audit
           path: |
             outputs/movement_phenology/stage3_mule_deer_source_inventory.json
             outputs/movement_phenology/stage3_mule_deer_source_inventory.csv
+            outputs/movement_phenology/stage3_mule_deer_phase_feedback.json
+            outputs/movement_phenology/stage3_mule_deer_phase_feedback.csv
+            outputs/movement_phenology/stage3_mule_deer_joined_source_data.csv
+            outputs/movement_phenology/stage3_mule_deer_*_summary.txt
           if-no-files-found: error
