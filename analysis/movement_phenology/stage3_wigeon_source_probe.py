@@ -31,7 +31,6 @@ def main():
     df = pd.read_csv(SOURCE, low_memory=False)
     required = [
         "study.name",
-        "study.ID",
         "individual.id",
         "individual.taxon.canonical.name",
         "timestamp",
@@ -90,8 +89,10 @@ def main():
         "zenodo_doi": "10.5281/zenodo.16940654",
         "movebank_doi": "10.5441/001/1.dv5mm289",
         "study_name": TARGET_STUDY,
-        "study_ids": sorted(
-            str(x) for x in w["study.ID"].dropna().unique()
+        "study_ids": (
+            sorted(str(x) for x in w["study.ID"].dropna().unique())
+            if "study.ID" in w.columns
+            else []
         ),
         "taxa": sorted(
             str(x) for x in w["individual.taxon.canonical.name"].dropna().unique()
@@ -113,6 +114,8 @@ def main():
             float(w["location.lat"].min()),
             float(w["location.lat"].max()),
         ],
+        "source_columns": [str(x) for x in w.columns],
+        "study_id_column_present": bool("study.ID" in w.columns),
         "candidate_wigeon_study_names": study_names,
         "claim_ceiling": (
             "Raw-source inventory only. Analytical spring tracks and staging "
