@@ -17,7 +17,10 @@ if (!file.exists(vertices_path)) stop(paste("Missing species vertices:", vertice
 dat0 <- as.data.frame(readRDS(input_path))
 vertices <- read.csv(vertices_path, stringsAsFactors = FALSE)
 
-needed <- c("species", "HWI", "Body_mass_g", "winlat", "sensi_mean", "Time", "Diet")
+needed <- c(
+  "species", "cell", "year", "gr_mn", "arr_GAM_mean", "vArrAng", "vGrAng",
+  "HWI", "Body_mass_g", "winlat", "sensi_mean", "Time", "Diet"
+)
 missing <- setdiff(needed, names(dat0))
 if (length(missing) > 0L) {
   stop(paste("Missing trait columns:", paste(missing, collapse = ", ")))
@@ -30,10 +33,45 @@ first_non_missing <- function(x) {
 }
 
 species_levels <- unique(as.character(dat0$species))
+
+median_cell_sd <- function(values, cells) {
+  ok <- is.finite(values) & !is.na(cells)
+  values <- values[ok]
+  cells <- cells[ok]
+  if (length(values) == 0L) return(NA_real_)
+  spl <- split(values, cells)
+  sds <- vapply(
+    spl,
+    function(z) if (length(z) >= 4L) sd(z, na.rm = TRUE) else NA_real_,
+    numeric(1)
+  )
+  sds <- sds[is.finite(sds)]
+  if (length(sds) == 0L) NA_real_ else median(sds)
+}
+
+circular_concentration_deg <- function(angle_deg) {
+  a <- angle_deg[is.finite(angle_deg)] * pi / 180
+  if (length(a) == 0L) return(NA_real_)
+  sqrt(mean(cos(a))^2 + mean(sin(a))^2)
+}
+
+species_geometry <- function(d) {
+  alignment <- cos((d$vArrAng - d$vGrAng) * pi / 180)
+  list(
+    mean_alignment = if (any(is.finite(alignment))) mean(alignment[is.finite(alignment)]) else NA_real_,
+    median_alignment = if (any(is.finite(alignment))) median(alignment[is.finite(alignment)]) else NA_real_,
+    route_direction_concentration = circular_concentration_deg(d$vArrAng),
+    greenup_direction_concentration = circular_concentration_deg(d$vGrAng),
+    greenup_interannual_sd = median_cell_sd(d$gr_mn, d$cell),
+    arrival_interannual_sd = median_cell_sd(d$arr_GAM_mean, d$cell)
+  )
+}
+
 traits <- do.call(
   rbind,
   lapply(species_levels, function(sp) {
     d <- dat0[as.character(dat0$species) == sp, , drop = FALSE]
+    g <- species_geometry(d)
     data.frame(
       species = sp,
       HWI = suppressWarnings(as.numeric(first_non_missing(d$HWI))),
@@ -42,6 +80,12 @@ traits <- do.call(
       sensi_mean = suppressWarnings(as.numeric(first_non_missing(d$sensi_mean))),
       Time = as.character(first_non_missing(d$Time)),
       Diet = as.character(first_non_missing(d$Diet)),
+      mean_alignment = g$mean_alignment,
+      median_alignment = g$median_alignment,
+      route_direction_concentration = g$route_direction_concentration,
+      greenup_direction_concentration = g$greenup_direction_concentration,
+      greenup_interannual_sd = g$greenup_interannual_sd,
+      arrival_interannual_sd = g$arrival_interannual_sd,
       stringsAsFactors = FALSE
     )
   })
@@ -67,7 +111,17 @@ write.csv(
   row.names = FALSE
 )
 
-continuous <- c("HWI", "log_body_mass", "abs_winlat", "sensi_mean")
+continuous <- c(
+  "HWI",
+  "log_body_mass",
+  "abs_winlat",
+  "sensi_mean",
+  "mean_alignment",
+  "route_direction_concentration",
+  "greenup_direction_concentration",
+  "greenup_interannual_sd",
+  "arrival_interannual_sd"
+)
 
 fit_linear <- function(response, trait, data) {
   d <- data[
@@ -192,6 +246,9 @@ summary_row <- data.frame(
   n_body_mass = sum(is.finite(x$log_body_mass)),
   n_abs_winlat = sum(is.finite(x$abs_winlat)),
   n_sensi_mean = sum(is.finite(x$sensi_mean)),
+  n_mean_alignment = sum(is.finite(x$mean_alignment)),
+  n_route_direction_concentration = sum(is.finite(x$route_direction_concentration)),
+  n_greenup_interannual_sd = sum(is.finite(x$greenup_interannual_sd)),
   smallest_p = if (nrow(assoc)) min(assoc$p_value, na.rm = TRUE) else NA_real_,
   smallest_fdr_bh = if (nrow(assoc)) min(assoc$fdr_bh, na.rm = TRUE) else NA_real_
 )
