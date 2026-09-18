@@ -33,7 +33,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install analysis dependencies
-        run: python -m pip install --disable-pip-version-check pytest pandas numpy scipy requests statsmodels scikit-learn beautifulsoup4
+        run: python -m pip install --disable-pip-version-check pytest pandas numpy scipy requests statsmodels scikit-learn beautifulsoup4 pyproj
 
       - name: Download public Zenodo raw GPS release
         run: |
@@ -51,6 +51,11 @@ jobs:
       - name: Extract published HMM and staging code contract
         run: python analysis/movement_phenology/stage3_wigeon_supplement_probe.py
 
+      - name: Reconstruct published HMM states and staging sites
+        env:
+          PYTHONPATH: .
+        run: python analysis/movement_phenology/stage3_wigeon_hmm_reconstruction.py
+
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-stage3-wigeon
@@ -62,4 +67,9 @@ jobs:
             outputs/movement_phenology/stage3_wigeon_hmm_contract.json
             outputs/movement_phenology/stage3_wigeon_supplement_hmm_blocks.txt
             outputs/movement_phenology/stage3_wigeon_supplement_hmm_contexts.txt
+            outputs/movement_phenology/stage3_wigeon_hmm_reconstruction_receipt.json
+            outputs/movement_phenology/stage3_wigeon_staging_sites.csv
+            outputs/movement_phenology/stage3_wigeon_hmm_states.csv
+            outputs/movement_phenology/stage3_wigeon_track_summary.csv
+            outputs/movement_phenology/stage3_wigeon_track_filter_audit.csv
           if-no-files-found: error
