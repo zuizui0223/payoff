@@ -39,6 +39,15 @@ def directional_alignment(animal_angle_rad: float, environment_angle_rad: float)
     return math.cos(a - e)
 
 
+def directional_alignment_degrees(animal_angle_deg: float, environment_angle_deg: float) -> float:
+    """Cosine alignment when source angles are stored in degrees."""
+    a = float(animal_angle_deg)
+    e = float(environment_angle_deg)
+    if not math.isfinite(a) or not math.isfinite(e):
+        raise ValueError("angles must be finite")
+    return math.cos(math.radians(a - e))
+
+
 def normalized_vector_mismatch(
     animal_speed: float,
     environment_speed: float,
