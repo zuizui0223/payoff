@@ -25,13 +25,13 @@ BASE = "https://datarepository.movebank.org"
 UA = {"User-Agent": "payoff-movement-phenology-reanalysis/1.0"}
 
 
-def get_json(url, *, timeout=15):
+def get_json(url, *, timeout=60):
     r = requests.get(url, headers=UA, timeout=timeout)
     r.raise_for_status()
     return r.json(), str(r.url)
 
 
-def get_text(url, *, timeout=15):
+def get_text(url, *, timeout=60):
     r = requests.get(url, headers=UA, timeout=timeout, allow_redirects=True)
     r.raise_for_status()
     return r.text, str(r.url), dict(r.headers)
@@ -226,7 +226,7 @@ def main():
                 metadata_url = f"{BASE}/server/api/core/items/{uuid}/metadata"
                 item_rec["metadata_url"] = metadata_url
                 try:
-                    md, _ = get_json(metadata_url)
+                    md, _ = get_json(metadata_url, timeout=120)
                     md_values = [
                         str(x.get("value", ""))
                         for x in md
@@ -246,7 +246,7 @@ def main():
                 bundles_url = f"{BASE}/server/api/core/items/{uuid}/bundles?size=100"
                 item_rec["bundles_url"] = bundles_url
                 try:
-                    bundles, _ = get_json(bundles_url)
+                    bundles, _ = get_json(bundles_url, timeout=120)
                     barr = bundles.get("_embedded", {}).get("bundles", [])
                     for bundle in barr:
                         buuid = bundle.get("uuid")
@@ -258,7 +258,7 @@ def main():
                                 "/bitstreams?size=100"
                             )
                             try:
-                                bs, _ = get_json(bs_url)
+                                bs, _ = get_json(bs_url, timeout=120)
                                 for bit in bs.get("_embedded", {}).get("bitstreams", []):
                                     bid = bit.get("uuid")
                                     name = bit.get("name")
