@@ -5,10 +5,10 @@ Combines fixed-transition STEP-controller estimates for Greenland and Barents
 barnacle geese with independently reconstructed NASA-POWER annual spring-onset
 anomaly correlations for the same region pairs.
 
-Primary directional hypothesis:
-    higher environmental predictability r
-    -> smaller absolute phase-transfer |lambda|
-    -> larger correction strength 1-|lambda|
+The initial directional hypothesis was that higher environmental predictability
+would be associated with stronger correction. Direct results do not support
+that monotonic coupling. The revised analysis treats environmental forecast
+innovation and behavioral phase retention as separate control channels.
 
 This transition-level screen is exploratory because transition estimates share
 individuals and route segments. It is a Gate-B diagnostic, not a definitive
@@ -68,6 +68,16 @@ def main():
                     "n_individuals": int(c["n_individuals"]),
                     "predictability_r": float(p["phenology_correlation_r"]),
                     "predictability_slope": float(p["anomaly_slope_ols"]),
+                    "predictability_r2": float(
+                        p.get("phenology_predictability_r2",
+                              p["phenology_correlation_r"] ** 2)
+                    ),
+                    "environmental_innovation_sd_days": float(
+                        p.get("environmental_innovation_sd_days", np.nan)
+                    ),
+                    "destination_anomaly_sd_days": float(
+                        p.get("destination_anomaly_sd_days", np.nan)
+                    ),
                     "lambda": lam,
                     "lambda_se": float(c["phase_transfer_se_cluster"]),
                     "abs_lambda": abs(lam),
@@ -90,7 +100,11 @@ def main():
     receipt = {
         "n_transition_pairs": int(len(table)),
         "n_flyways": int(table["flyway"].nunique()) if len(table) else 0,
-        "hypothesis": "higher predictability -> smaller |lambda| / stronger correction",
+        "initial_hypothesis": "higher predictability -> smaller |lambda| / stronger correction",
+        "revised_model": (
+            "feed-forward environmental innovation and feedback phase retention "
+            "are separate channels; no monotonic coupling is assumed"
+        ),
     }
 
     if len(table) >= 4:
@@ -106,6 +120,17 @@ def main():
             table["predictability_r"],
             table["stopover_gain"],
         )
+        valid_innov = table.dropna(
+            subset=["environmental_innovation_sd_days", "correction_strength"]
+        )
+        if len(valid_innov) >= 4:
+            sp_innov = spearmanr(
+                valid_innov["environmental_innovation_sd_days"],
+                valid_innov["correction_strength"],
+            )
+        else:
+            sp_innov = None
+
         receipt.update(
             {
                 "spearman_predictability_vs_correction_rho": float(sp.statistic),
@@ -117,6 +142,15 @@ def main():
                 ),
                 "spearman_predictability_vs_stopover_gain_p": float(
                     sp_stop.pvalue
+                ),
+                "spearman_innovation_vs_correction_rho": (
+                    float(sp_innov.statistic) if sp_innov is not None else None
+                ),
+                "spearman_innovation_vs_correction_p": (
+                    float(sp_innov.pvalue) if sp_innov is not None else None
+                ),
+                "positive_predictability_feedback_coupling_supported": bool(
+                    sp.statistic > 0 and sp.pvalue < 0.1
                 ),
             }
         )
@@ -145,9 +179,10 @@ def main():
         )
 
     receipt["claim_ceiling"] = (
-        "Exploratory transition-level moderator screen. Region pairs share "
-        "individuals/routes and are not independent studies; do not interpret "
-        "the nominal p-values as a cross-study meta-analysis."
+        "Exploratory transition-level channel screen. Region pairs share "
+        "individuals/routes and are not independent studies. The direct data "
+        "do not support interpreting predictability as feedback gain; treat "
+        "environmental innovation and lambda as separate quantities."
     )
 
     (OUT / "stage3_barnacle_predictability_controller_receipt.json").write_text(
