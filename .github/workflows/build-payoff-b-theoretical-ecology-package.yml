@@ -12,6 +12,11 @@ on:
       - 'theory/EXACT_ANTI_PHASE_OPTIMUM.md'
       - 'theory/WEAK_CONTRAST_UNIVERSAL_MIGRATION_OPTIMUM.md'
       - 'src/anti_phase_temporal.py'
+      - 'scripts/build_payoff_b_asymptotic_error_table.py'
+      - 'data/PAYOFF_B_ASYMPTOTIC_ERROR_TABLE_V1.csv'
+      - 'data/PAYOFF_B_ASYMPTOTIC_ERROR_READOUT_V1.json'
+      - 'docs/PAYOFF_B_ASYMPTOTIC_ERROR_TABLE_V1.md'
+      - 'tests/test_payoff_b_asymptotic_error_table.py'
       - 'src/two_patch_floquet.py'
       - 'scripts/build_payoff_b_submission_source.py'
       - 'scripts/build_payoff_b_figures_svg.py'
@@ -30,6 +35,11 @@ on:
       - 'theory/EXACT_ANTI_PHASE_OPTIMUM.md'
       - 'theory/WEAK_CONTRAST_UNIVERSAL_MIGRATION_OPTIMUM.md'
       - 'src/anti_phase_temporal.py'
+      - 'scripts/build_payoff_b_asymptotic_error_table.py'
+      - 'data/PAYOFF_B_ASYMPTOTIC_ERROR_TABLE_V1.csv'
+      - 'data/PAYOFF_B_ASYMPTOTIC_ERROR_READOUT_V1.json'
+      - 'docs/PAYOFF_B_ASYMPTOTIC_ERROR_TABLE_V1.md'
+      - 'tests/test_payoff_b_asymptotic_error_table.py'
       - 'src/two_patch_floquet.py'
       - 'scripts/build_payoff_b_submission_source.py'
       - 'scripts/build_payoff_b_figures_svg.py'
@@ -64,7 +74,9 @@ jobs:
       - name: Validate manuscript and theorem implementation
         run: |
           python scripts/check_payoff_b_submission.py
-          python -m pytest -q tests/test_anti_phase_temporal.py tests/test_payoff_b_submission.py
+          python scripts/build_payoff_b_asymptotic_error_table.py
+          git diff --exit-code -- data/PAYOFF_B_ASYMPTOTIC_ERROR_TABLE_V1.csv data/PAYOFF_B_ASYMPTOTIC_ERROR_READOUT_V1.json docs/PAYOFF_B_ASYMPTOTIC_ERROR_TABLE_V1.md
+          python -m pytest -q tests/test_anti_phase_temporal.py tests/test_payoff_b_submission.py tests/test_payoff_b_asymptotic_error_table.py
           python scripts/verify_payoff_b_note.py
 
       - name: Generate publication figures and submission review source
@@ -158,6 +170,8 @@ jobs:
             echo 'claim=unique_global_migration_optimum_in_symmetric_anti_phase_model'
             echo 'closed_form_novelty_claim=false'
             echo 'numerical_receipt_role=implementation_audit_not_proof'
+            echo 'asymptotic_error_grid=9_registered_v_points'
+            echo 'asymptotic_error_role=model_prediction_diagnostic_not_proof'
             echo 'line_numbers=true'
             echo 'page_numbers=true'
             echo 'author_metadata=EXTERNAL_BLOCKER'
@@ -186,6 +200,9 @@ jobs:
             submission/theoretical_ecology/generated/MANUSCRIPT_SUBMISSION_SOURCE.md
             submission/theoretical_ecology/generated/PAYOFF_B_VERIFICATION_RECEIPT.json
             submission/theoretical_ecology/generated/PACKAGE_QA_RECEIPT.txt
+            data/PAYOFF_B_ASYMPTOTIC_ERROR_TABLE_V1.csv
+            data/PAYOFF_B_ASYMPTOTIC_ERROR_READOUT_V1.json
+            docs/PAYOFF_B_ASYMPTOTIC_ERROR_TABLE_V1.md
             submission/PAYOFF_B_TITLE_PAGE_TEMPLATE.md
             submission/PAYOFF_B_DECLARATIONS_TEMPLATE.md
             submission/PAYOFF_B_COVER_LETTER_V1.md
