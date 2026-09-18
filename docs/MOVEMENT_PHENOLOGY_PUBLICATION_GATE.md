@@ -7,10 +7,10 @@ Required:
 ~~~text
 at least 3 independent Tier A/B systems
 with compatible estimates of:
-  kappa
-  uncertainty in kappa
-  target phase E* where identifiable
-  environmental-wave scale
+  net phase-transfer lambda where identifiable
+  uncertainty in lambda
+  at least one identified actuator-specific gain
+  target phase E* / correction scale where the architecture permits them
 ~~~
 
 Current:
@@ -21,7 +21,7 @@ Svalbard barnacle goose STEP control: PASS
 third independent direct system:      MISSING
 ~~~
 
-The direct systems need not share the same actuator. A system can qualify with a defensible phase-transfer coefficient plus an identified behavioral actuator (speed, stopover, route, or departure timing).
+The direct systems need not share the same actuator. The common cross-system object is phase retention after one correction opportunity, summarized by lambda; speed, stopover, route and departure responses are actuator-specific mechanisms.
 
 ## Gate B — explanatory moderator
 
