@@ -13,12 +13,6 @@ on:
       - 'analysis/movement_phenology/tgs.py'
       - 'tests/test_movement_phenology_tgs.py'
       - '.github/workflows/movement-phenology-stage3-wigeon.yml'
-  pull_request:
-    paths:
-      - 'analysis/movement_phenology/stage3_wigeon_*.py'
-      - 'analysis/movement_phenology/tgs.py'
-      - 'tests/test_movement_phenology_tgs.py'
-      - '.github/workflows/movement-phenology-stage3-wigeon.yml'
 
 jobs:
   wigeon:
