@@ -25,6 +25,7 @@ OUT = Path("outputs/movement_phenology")
 STOPS = OUT / "stage3_svalbard_goose_stopovers.csv"
 REGIONS = OUT / "stage3_svalbard_goose_regions.csv"
 ONSETS = OUT / "stage3_svalbard_goose_power_gdd_onsets.csv"
+SCENARIOS = OUT / "stage3_svalbard_goose_anchor_sensitivity_onsets.csv"
 
 
 def haversine_km(lat1, lon1, lat2, lon2):
@@ -121,7 +122,8 @@ def main():
 
     onset = onsets[
         onsets["fit_status"] == "PASS"
-    ][["region_id", "year", "onset_doy"]].copy()
+    ][["region_id", "year", "onset_calibrated_doy"]].copy()
+    onset = onset.rename(columns={"onset_calibrated_doy": "onset_doy"})
 
     visits = build_visits(stops)
     visits = visits.merge(
@@ -233,12 +235,16 @@ def main():
         "n_individuals": int(tr["individual_id"].nunique()),
         "n_years": int(tr["year"].nunique()),
         "stage_counts": tr["stage"].value_counts().to_dict(),
-        "transition_counts": (
-            tr.groupby(["origin_region", "destination_region"])
-            .size()
-            .astype(int)
-            .to_dict()
-        ),
+        "transition_counts": [
+            {
+                "origin_region": str(a),
+                "destination_region": str(b),
+                "n": int(n),
+            }
+            for (a, b), n in (
+                tr.groupby(["origin_region", "destination_region"]).size().items()
+            )
+        ],
     }
 
     # Overall model with explicit stage interaction.
@@ -361,10 +367,187 @@ def main():
     )
     results["stage_descriptives"] = descriptive.to_dict(orient="records")
 
+    # Transition-specific behavioral feedback is less dependent on pooling
+    # different route segments. Estimate speed and stopover responses wherever
+    # repeated individual/year observations are adequate.
+    pair_rows = []
+    for (origin, dest), d in tr.groupby(["origin_region", "destination_region"]):
+        if len(d) < 6 or d["individual_id"].nunique() < 4:
+            continue
+        speed_m = cluster_fit(
+            "np.log(animal_pace_km_day) ~ origin_departure_phase_days", d
+        )
+        stop_m = cluster_fit(
+            "origin_stopover_days ~ origin_arrival_phase_days", d
+        )
+        u_m = cluster_fit(
+            "log_u ~ origin_departure_phase_days", d
+        )
+        pair_rows.append(
+            {
+                "origin_region": str(origin),
+                "destination_region": str(dest),
+                "n": int(len(d)),
+                "n_individuals": int(d["individual_id"].nunique()),
+                "behavioral_speed_gain": float(
+                    speed_m.params["origin_departure_phase_days"]
+                ),
+                "behavioral_speed_gain_se_cluster": float(
+                    speed_m.bse["origin_departure_phase_days"]
+                ),
+                "behavioral_speed_gain_p_cluster": float(
+                    speed_m.pvalues["origin_departure_phase_days"]
+                ),
+                "relative_speed_gain": float(
+                    u_m.params["origin_departure_phase_days"]
+                ),
+                "relative_speed_gain_se_cluster": float(
+                    u_m.bse["origin_departure_phase_days"]
+                ),
+                "relative_speed_gain_p_cluster": float(
+                    u_m.pvalues["origin_departure_phase_days"]
+                ),
+                "stopover_phase_beta": float(
+                    stop_m.params["origin_arrival_phase_days"]
+                ),
+                "stopover_phase_se_cluster": float(
+                    stop_m.bse["origin_arrival_phase_days"]
+                ),
+                "stopover_phase_p_cluster": float(
+                    stop_m.pvalues["origin_arrival_phase_days"]
+                ),
+            }
+        )
+    pair_df = pd.DataFrame(pair_rows)
+    pair_df.to_csv(
+        OUT / "stage3_svalbard_goose_controller_by_transition.csv",
+        index=False,
+    )
+    results["transition_specific_receipts"] = pair_rows
+
+    # Anchor-sensitivity audit. Annual POWER anomalies are preserved while
+    # uncertain Norwegian 30-y means vary by +/-5 days.
+    sensitivity_rows = []
+    if SCENARIOS.exists():
+        scenario_onsets = pd.read_csv(SCENARIOS)
+        base_stops = pd.read_csv(STOPS, parse_dates=["start", "end"])
+        base_visits = build_visits(base_stops)
+        for sid, onset_s in scenario_onsets.groupby("scenario_id"):
+            os = onset_s[["region_id", "year", "onset_calibrated_doy"]].rename(
+                columns={"onset_calibrated_doy": "onset_doy"}
+            )
+            vs = base_visits.merge(os, on=["region_id", "year"], how="left")
+            vs["arrival_phase_days"] = vs["arrival_doy"] - vs["onset_doy"]
+            vs["departure_phase_days"] = vs["departure_doy"] - vs["onset_doy"]
+
+            rows_s = []
+            for (ind, year), d in vs.groupby(["individual_id", "year"]):
+                d = d.sort_values("arrival").reset_index(drop=True)
+                for i in range(len(d) - 1):
+                    a = d.iloc[i]
+                    b = d.iloc[i + 1]
+                    if a["region_id"] == b["region_id"]:
+                        continue
+                    if not np.isfinite(a["onset_doy"]) or not np.isfinite(b["onset_doy"]):
+                        continue
+                    ma = region_meta.get(a["region_id"])
+                    mb = region_meta.get(b["region_id"])
+                    if ma is None or mb is None:
+                        continue
+                    distance = haversine_km(
+                        ma["lat"], ma["lon"], mb["lat"], mb["lon"]
+                    )
+                    transit_days = (
+                        b["arrival"] - a["departure"]
+                    ).total_seconds() / 86400.0
+                    env_delta_days = float(b["onset_doy"] - a["onset_doy"])
+                    if transit_days <= 0 or env_delta_days <= 0 or distance <= 0:
+                        continue
+                    animal_pace = distance / transit_days
+                    env_speed = distance / env_delta_days
+                    rows_s.append(
+                        {
+                            "individual_id": str(ind),
+                            "year": int(year),
+                            "origin_region": str(a["region_id"]),
+                            "destination_region": str(b["region_id"]),
+                            "origin_departure_phase_days": float(
+                                a["departure_phase_days"]
+                            ),
+                            "animal_pace_km_day": animal_pace,
+                            "log_u": math.log(animal_pace / env_speed),
+                        }
+                    )
+            ts = pd.DataFrame(rows_s)
+            if ts.empty:
+                continue
+            for (origin, dest), d in ts.groupby(
+                ["origin_region", "destination_region"]
+            ):
+                if len(d) < 6 or d["individual_id"].nunique() < 4:
+                    continue
+                speed_m = cluster_fit(
+                    "np.log(animal_pace_km_day) ~ origin_departure_phase_days", d
+                )
+                u_m = cluster_fit(
+                    "log_u ~ origin_departure_phase_days", d
+                )
+                sensitivity_rows.append(
+                    {
+                        "scenario_id": str(sid),
+                        "origin_region": str(origin),
+                        "destination_region": str(dest),
+                        "n": int(len(d)),
+                        "behavioral_speed_gain": float(
+                            speed_m.params["origin_departure_phase_days"]
+                        ),
+                        "behavioral_speed_gain_p_cluster": float(
+                            speed_m.pvalues["origin_departure_phase_days"]
+                        ),
+                        "relative_speed_gain": float(
+                            u_m.params["origin_departure_phase_days"]
+                        ),
+                        "relative_speed_gain_p_cluster": float(
+                            u_m.pvalues["origin_departure_phase_days"]
+                        ),
+                    }
+                )
+    sens_df = pd.DataFrame(sensitivity_rows)
+    sens_df.to_csv(
+        OUT / "stage3_svalbard_goose_anchor_sensitivity_controller.csv",
+        index=False,
+    )
+    results["anchor_sensitivity_n_models"] = int(len(sens_df))
+    if not sens_df.empty:
+        robust = (
+            sens_df.groupby(["origin_region", "destination_region"])
+            .agg(
+                n_scenarios=("scenario_id", "nunique"),
+                behavioral_gain_min=("behavioral_speed_gain", "min"),
+                behavioral_gain_max=("behavioral_speed_gain", "max"),
+                behavioral_positive_fraction=(
+                    "behavioral_speed_gain", lambda x: float((x > 0).mean())
+                ),
+                relative_gain_min=("relative_speed_gain", "min"),
+                relative_gain_max=("relative_speed_gain", "max"),
+                relative_positive_fraction=(
+                    "relative_speed_gain", lambda x: float((x > 0).mean())
+                ),
+            )
+            .reset_index()
+        )
+        robust.to_csv(
+            OUT / "stage3_svalbard_goose_anchor_sensitivity_summary.csv",
+            index=False,
+        )
+        results["anchor_sensitivity_summary"] = robust.to_dict(orient="records")
+
     results["claim_ceiling"] = (
-        "Independent controller reconstruction using public GPS plus NASA-POWER "
-        "GDD-jerk phenology; validate spring-onset anchors and stopover structure "
-        "before interpreting stage-specific controller estimates."
+        "Independent controller reconstruction using public GPS plus POWER "
+        "annual GDD-jerk anomalies calibrated to published/figure-derived "
+        "30-y mean onset anchors. Norwegian anchor uncertainty is propagated "
+        "through +/-5-day sensitivity; interpret controller estimates only "
+        "when signs are robust to that audit."
     )
 
     (OUT / "stage3_svalbard_goose_controller_receipt.json").write_text(
