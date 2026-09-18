@@ -10,6 +10,7 @@ from analysis.movement_phenology.metrics import (
     payoff_b_reference_interval,
     quadratic_optimum,
     speed_ratio,
+    timing_gradient_to_front_velocity,
 )
 
 
@@ -50,3 +51,20 @@ def test_payoff_b_reference_interval_is_order_one():
     assert lo == pytest.approx(1.0)
     assert hi == pytest.approx(1.60611529880277)
     assert lo < hi
+
+
+def test_timing_gradient_recovers_front_speed_and_direction():
+    vx, vy, speed = timing_gradient_to_front_velocity(0.02, 0.0)
+    assert vx == pytest.approx(50.0)
+    assert vy == pytest.approx(0.0)
+    assert speed == pytest.approx(50.0)
+
+    vx, vy, speed = timing_gradient_to_front_velocity(0.03, 0.04)
+    assert vx == pytest.approx(12.0)
+    assert vy == pytest.approx(16.0)
+    assert speed == pytest.approx(20.0)
+
+
+def test_zero_timing_gradient_has_no_defined_front_velocity():
+    with pytest.raises(ValueError):
+        timing_gradient_to_front_velocity(0.0, 0.0)
