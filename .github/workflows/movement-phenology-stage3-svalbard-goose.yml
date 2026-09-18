@@ -47,7 +47,7 @@ jobs:
         run: python analysis/movement_phenology/stage3_svalbard_goose_stopovers.py
 
       - name: Reconstruct 1982-2011 spring onset from public daily temperature
-        run: python analysis/movement_phenology/stage3_svalbard_goose_power_gdd.py
+        run: python -m analysis.movement_phenology.stage3_svalbard_goose_power_gdd
 
       - name: Fit direct Svalbard goose phase-controller models
         run: python analysis/movement_phenology/stage3_svalbard_goose_controller.py
