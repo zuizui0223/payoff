@@ -85,12 +85,53 @@ def main():
         encoding="utf-8",
     )
 
+    # Compact machine-readable windows around the exact HMM contract tokens.
+    contract_tokens = (
+        "fitHMM",
+        "Par0",
+        "stateNames",
+        "viterbi",
+        "prepData",
+        "dist=list",
+        "formula",
+        "50.184",
+    )
+    joined_lines = joined.splitlines()
+    contract_windows = []
+    seen_windows = set()
+    for i, line in enumerate(joined_lines):
+        if any(tok.lower() in line.lower() for tok in contract_tokens):
+            lo = max(0, i - 8)
+            hi = min(len(joined_lines), i + 24)
+            window = "\n".join(joined_lines[lo:hi]).strip()
+            if window and window not in seen_windows:
+                seen_windows.add(window)
+                contract_windows.append(
+                    {
+                        "trigger_line": line.strip()[:500],
+                        "start_line": lo + 1,
+                        "end_line": hi,
+                        "context": window,
+                    }
+                )
+
+    contract = {
+        "tokens": list(contract_tokens),
+        "n_windows": len(contract_windows),
+        "windows": contract_windows,
+    }
+    (OUT / "stage3_wigeon_hmm_contract.json").write_text(
+        json.dumps(contract, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
     receipt = {
         "url": URL,
         "http_status": r.status_code,
         "content_bytes": len(r.content),
         "n_keyword_blocks": len(unique),
         "n_contexts": len(contexts),
+        "n_contract_windows": len(contract_windows),
         "keywords": list(KEYWORDS),
         "claim_ceiling": (
             "Published supplementary-code extraction only; extracted snippets "
