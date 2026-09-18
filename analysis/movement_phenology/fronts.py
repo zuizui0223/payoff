@@ -79,3 +79,46 @@ def compare_timing_fronts(
         alignment=align,
         vector_mismatch=mismatch,
     )
+
+
+
+def normalized_phase_drift_from_timing_gradients(
+    animal_dt_dx: float,
+    animal_dt_dy: float,
+    environment_dt_dx: float,
+    environment_dt_dy: float,
+) -> float:
+    """Return dimensionless spatial drift of the animal-environment phase lag.
+
+    This is ||grad(T_animal)-grad(T_environment)|| / ||grad(T_environment)||.
+    It is zero when animal and environment timing surfaces differ only by a
+    constant phase offset.
+    """
+    ga_x = float(animal_dt_dx)
+    ga_y = float(animal_dt_dy)
+    ge_x = float(environment_dt_dx)
+    ge_y = float(environment_dt_dy)
+    vals = (ga_x, ga_y, ge_x, ge_y)
+    if not all(math.isfinite(z) for z in vals):
+        raise ValueError("timing gradients must be finite")
+    env_norm = math.hypot(ge_x, ge_y)
+    if env_norm <= 0.0:
+        raise ValueError("environment timing gradient must be nonzero")
+    return math.hypot(ga_x - ge_x, ga_y - ge_y) / env_norm
+
+
+def normalized_phase_drift_from_speed_ratio(
+    speed_ratio_value: float,
+    alignment_value: float,
+) -> float:
+    """Equivalent phase-drift diagnostic from speed ratio and alignment."""
+    u = float(speed_ratio_value)
+    a = float(alignment_value)
+    if not math.isfinite(u) or not math.isfinite(a):
+        raise ValueError("speed ratio and alignment must be finite")
+    if u <= 0.0:
+        raise ValueError("speed ratio must be positive")
+    if a < -1.0 or a > 1.0:
+        raise ValueError("alignment must lie in [-1, 1]")
+    value = 1.0 + 1.0 / (u * u) - 2.0 * a / u
+    return math.sqrt(max(0.0, value))
