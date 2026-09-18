@@ -33,6 +33,18 @@ POWER_ENDPOINT = "https://power.larc.nasa.gov/api/temporal/daily/point"
 START_YEAR = 1982
 END_YEAR = 2011
 
+# Published / figure-calibrated 30-year mean onset anchors (Julian day).
+# R1 Scotland and R4 Svalbard are explicit in Kölzsch et al. (2015):
+# 26 March and 16 June. R2/R3 are conservative visual readings from Fig. 3,
+# carried through +/-5-day sensitivity rather than treated as exact table data.
+CENTRAL_ANCHORS = {"R1": 85.0, "R2": 118.0, "R3": 130.0, "R4": 167.0}
+ANCHOR_SENSITIVITY = {
+    "R1": [85.0],
+    "R2": [113.0, 118.0, 123.0],
+    "R3": [125.0, 130.0, 135.0],
+    "R4": [167.0],
+}
+
 
 def power_daily_t2m(lat: float, lon: float, start_year: int, end_year: int):
     rows = []
@@ -168,7 +180,50 @@ def main():
         )
 
     onsets = pd.DataFrame(onset_rows)
+
+    pass_mask = onsets["fit_status"] == "PASS"
+    region_means = (
+        onsets.loc[pass_mask]
+        .groupby("region_id")["onset_doy"]
+        .mean()
+        .to_dict()
+    )
+    onsets["power_region_mean_doy"] = onsets["region_id"].map(region_means)
+    onsets["onset_anomaly_days"] = (
+        onsets["onset_doy"] - onsets["power_region_mean_doy"]
+    )
+    onsets["published_anchor_doy"] = onsets["region_id"].map(CENTRAL_ANCHORS)
+    onsets["onset_calibrated_doy"] = (
+        onsets["published_anchor_doy"] + onsets["onset_anomaly_days"]
+    )
     onsets.to_csv(OUT / "stage3_svalbard_goose_power_gdd_onsets.csv", index=False)
+
+    # Explicit anchor-sensitivity table for controller robustness.
+    scenario_rows = []
+    scenario_id = 0
+    for r2 in ANCHOR_SENSITIVITY["R2"]:
+        for r3 in ANCHOR_SENSITIVITY["R3"]:
+            scenario_id += 1
+            anchors = {"R1": 85.0, "R2": r2, "R3": r3, "R4": 167.0}
+            for _, row in onsets.loc[pass_mask].iterrows():
+                rid = str(row["region_id"])
+                scenario_rows.append(
+                    {
+                        "scenario_id": f"S{scenario_id:02d}",
+                        "region_id": rid,
+                        "year": int(row["year"]),
+                        "anchor_doy": anchors[rid],
+                        "onset_anomaly_days": float(row["onset_anomaly_days"]),
+                        "onset_calibrated_doy": float(
+                            anchors[rid] + row["onset_anomaly_days"]
+                        ),
+                    }
+                )
+    scenarios = pd.DataFrame(scenario_rows)
+    scenarios.to_csv(
+        OUT / "stage3_svalbard_goose_anchor_sensitivity_onsets.csv",
+        index=False,
+    )
 
     summary = (
         onsets[onsets["fit_status"] == "PASS"]
@@ -179,6 +234,7 @@ def main():
             sd_onset_doy=("onset_doy", "std"),
             median_onset_doy=("onset_doy", "median"),
             min_fit_r2=("gdd_fit_r2", "min"),
+            mean_calibrated_onset_doy=("onset_calibrated_doy", "mean"),
         )
         .reset_index()
         .merge(
@@ -267,6 +323,12 @@ def main():
         "consecutive_predictability": corr.to_dict(orient="records"),
         "anchor_validation": anchors.to_dict(orient="records"),
         "temperature_receipts": temperature_receipts,
+        "central_anchors_doy": CENTRAL_ANCHORS,
+        "anchor_sensitivity": ANCHOR_SENSITIVITY,
+        "anchor_note": (
+            "R1/R4 are explicit article means; R2/R3 are Fig.3 visual "
+            "calibration points propagated through +/-5 day sensitivity."
+        ),
         "claim_ceiling": (
             "Independent modern phenology reconstruction; not exact recovery "
             "of historical ECA/NOAA inputs used in the 2015 paper."
