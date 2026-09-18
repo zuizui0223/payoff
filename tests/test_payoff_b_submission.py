@@ -1,7 +1,13 @@
+from pathlib import Path
+
 from scripts.build_payoff_b_figures_svg import fig1, fig2
 from scripts.build_payoff_b_submission_source import build_submission_source
 from scripts.check_payoff_b_submission import check
 from scripts.verify_payoff_b_note import verify
+
+
+ROOT = Path(__file__).resolve().parents[1]
+MANUSCRIPT = ROOT / "manuscript" / "PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md"
 
 
 def test_submission_source_claim_boundary_and_current_journal_requirements() -> None:
@@ -41,3 +47,19 @@ def test_publication_figures_are_bounded_and_use_correct_claims() -> None:
     assert "One finite optimum for every nonzero contrast" in one
     assert "weak-contrast limit 1.606115" in two
     assert "strong-contrast limit 1" in two
+
+
+def test_active_brief_reports_registered_asymptotic_error_audit_without_overclaim() -> None:
+    text = MANUSCRIPT.read_text(encoding="utf-8")
+    for token in (
+        "0.0226%",
+        "0.933%",
+        "0.00995%",
+        "0.0144%",
+        "0.736%",
+        "0.00530%",
+        "nine-point numerical audit",
+        "not used to prove uniqueness",
+        "No validity threshold",
+    ):
+        assert token in text
