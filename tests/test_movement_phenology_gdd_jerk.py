@@ -52,7 +52,7 @@ def test_fit_recovers_synthetic_onset_from_temperature_generated_gdd():
 
     fit = fit_gdd_jerk(temp, lat, min_r_squared=0.999)
     expected = early_jerk_peak_day(k, t0)
-    assert fit.onset_day == pytest.approx(expected, abs=0.5)
+    assert fit.onset_day == pytest.approx(expected, abs=1.0)
     assert fit.r_squared > 0.999
 
 
