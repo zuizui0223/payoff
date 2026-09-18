@@ -59,7 +59,7 @@ dat0$signed_lag <- dat0$arr_GAM_mean - dat0$gr_mn
 dat0$abs_mismatch_days <- abs(dat0$signed_lag)
 dat0$speed_ratio <- dat0$vArrMag / dat0$vGrMag
 dat0$log_speed_ratio <- log(dat0$speed_ratio)
-dat0$alignment <- cos(dat0$vArrAng - dat0$vGrAng)
+dat0$alignment <- cos((dat0$vArrAng - dat0$vGrAng) * pi / 180)
 dat0$vector_mismatch <- sqrt(
   pmax(0, 1 + dat0$speed_ratio^2 - 2 * dat0$speed_ratio * dat0$alignment)
 )
