@@ -19,6 +19,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf
+from scipy.stats import norm
 
 
 OUT = Path("outputs/movement_phenology")
@@ -383,6 +384,13 @@ def main():
         u_m = cluster_fit(
             "log_u ~ origin_departure_phase_days", d
         )
+        phase_m = cluster_fit(
+            "destination_arrival_phase_days ~ origin_arrival_phase_days", d
+        )
+        lam = float(phase_m.params["origin_arrival_phase_days"])
+        lam_se = float(phase_m.bse["origin_arrival_phase_days"])
+        z_vs_one = (lam - 1.0) / lam_se
+        p_vs_one = float(2.0 * norm.sf(abs(z_vs_one)))
         pair_rows.append(
             {
                 "origin_region": str(origin),
@@ -415,6 +423,17 @@ def main():
                 ),
                 "stopover_phase_p_cluster": float(
                     stop_m.pvalues["origin_arrival_phase_days"]
+                ),
+                "phase_transfer_arrival_to_arrival": lam,
+                "phase_transfer_se_cluster": lam_se,
+                "phase_transfer_p_vs_zero": float(
+                    phase_m.pvalues["origin_arrival_phase_days"]
+                ),
+                "phase_transfer_z_vs_no_correction_one": float(z_vs_one),
+                "phase_transfer_p_vs_no_correction_one": p_vs_one,
+                "first_order_correction_fraction": float(1.0 - lam),
+                "stopover_only_predicted_transfer": float(
+                    1.0 + stop_m.params["origin_arrival_phase_days"]
                 ),
             }
         )
@@ -543,7 +562,7 @@ def main():
         results["anchor_sensitivity_summary"] = robust.to_dict(orient="records")
 
     results["claim_ceiling"] = (
-        "Independent controller reconstruction using public GPS plus POWER "
+        "Independent direct STEP-controller reconstruction using public GPS plus POWER "
         "annual GDD-jerk anomalies calibrated to published/figure-derived "
         "30-y mean onset anchors. Norwegian anchor uncertainty is propagated "
         "through +/-5-day sensitivity; interpret controller estimates only "
