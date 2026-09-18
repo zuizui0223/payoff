@@ -86,6 +86,57 @@ def gps_schema(df: pd.DataFrame) -> bool:
     return all(any(x in cols for x in group) for group in required_groups)
 
 
+def robust_dspace_files(objects):
+    """Retry the slow DSpace bundle endpoints with a larger read timeout."""
+    base = "https://datarepository.movebank.org"
+    files = []
+    errors = []
+    session = requests.Session()
+    adapter = requests.adapters.HTTPAdapter(max_retries=4)
+    session.mount("https://", adapter)
+
+    for obj in objects or []:
+        uuid = obj.get("uuid")
+        if not uuid:
+            continue
+        try:
+            b = session.get(
+                f"{base}/server/api/core/items/{uuid}/bundles?size=100",
+                headers=UA,
+                timeout=(20, 150),
+            )
+            b.raise_for_status()
+            bundles = b.json().get("_embedded", {}).get("bundles", [])
+            for bundle in bundles:
+                buuid = bundle.get("uuid")
+                if not buuid:
+                    continue
+                bs = session.get(
+                    f"{base}/server/api/core/bundles/{buuid}/bitstreams?size=100",
+                    headers=UA,
+                    timeout=(20, 150),
+                )
+                bs.raise_for_status()
+                for bit in bs.json().get("_embedded", {}).get("bitstreams", []):
+                    bid = bit.get("uuid")
+                    if not bid:
+                        continue
+                    files.append(
+                        {
+                            "title": bit.get("name"),
+                            "label": bundle.get("name"),
+                            "mime": None,
+                            "url": (
+                                f"{base}/server/api/core/bitstreams/"
+                                f"{bid}/content"
+                            ),
+                        }
+                    )
+        except Exception as exc:
+            errors.append(f"{uuid}:{type(exc).__name__}:{exc}")
+    return files, errors
+
+
 def main():
     args = parse_args()
     doi = DATASETS[args.flyway]
@@ -100,6 +151,11 @@ def main():
         files = fallback.get("files", [])
         rec["dspace_fallback"] = fallback
         source = "dspace_api"
+        if not files and fallback.get("objects"):
+            files, retry_errors = robust_dspace_files(fallback.get("objects"))
+            rec["dspace_long_retry_errors"] = retry_errors
+            if files:
+                source = "dspace_api_long_retry"
     if not files:
         raise SystemExit(f"No repository files discovered for {doi}: {rec}")
 
