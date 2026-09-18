@@ -42,8 +42,12 @@ Derived quantities are
 u_macro = |v_animal| / |v_environment|
 q = log(u_macro)
 alignment = cos(angle_animal - angle_environment)
-vector_mismatch = |v_animal - v_environment| / |v_environment|.
+vector_mismatch = |v_animal - v_environment| / |v_environment|
+phase_drift = ||gradient(T_animal)-gradient(T_environment)||
+              / ||gradient(T_environment)||.
 ~~~
+
+The last quantity is central after Stage 1. Equal front speeds and directions imply zero phase drift even when the animal has a nonzero constant lead or lag relative to green-up. Thus the relevant null is **constant phase offset**, not zero phenological lag. See docs/MOVEMENT_PHENOLOGY_PHASE_LOCKING.md.
 
 ## Bird timing surface from eBird Status and Trends
 
@@ -103,11 +107,21 @@ phase_residual
 
 The baseline is estimated without using the focal cell when possible.
 
-Primary response:
+Primary performance response:
 
 ~~~text
 abs_phase_residual = abs(phase_residual).
 ~~~
+
+Primary geometry diagnostic:
+
+~~~text
+phase_drift
+= ||gradient(T_animal)-gradient(T_environment)||
+  / ||gradient(T_environment)||.
+~~~
+
+Do not regress phase_drift on u_macro as if it were an independent biological response; the two are algebraically related through front geometry. Use phase_drift to describe tracking geometry and abs_phase_residual or demographic outcomes for inferential tests.
 
 ## Pilot hypotheses
 
