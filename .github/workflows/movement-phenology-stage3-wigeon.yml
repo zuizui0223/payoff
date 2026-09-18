@@ -54,6 +54,7 @@ jobs:
             outputs/movement_phenology/stage3_wigeon_individual_source_summary.csv
             outputs/movement_phenology/stage3_wigeon_raw_subset.csv
             outputs/movement_phenology/stage3_wigeon_supplement_probe.json
+            outputs/movement_phenology/stage3_wigeon_hmm_contract.json
             outputs/movement_phenology/stage3_wigeon_supplement_hmm_blocks.txt
             outputs/movement_phenology/stage3_wigeon_supplement_hmm_contexts.txt
           if-no-files-found: error
