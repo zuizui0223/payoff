@@ -1,0 +1,31 @@
+name: Movement-phenology Barents Zenodo source
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'analysis/movement_phenology/stage3_barents_zenodo_discover.py'
+      - '.github/workflows/movement-phenology-stage3-barents-zenodo.yml'
+  pull_request:
+    paths:
+      - 'analysis/movement_phenology/stage3_barents_zenodo_discover.py'
+      - '.github/workflows/movement-phenology-stage3-barents-zenodo.yml'
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests pandas
+      - name: Discover Zenodo processed tracking file
+        run: python analysis/movement_phenology/stage3_barents_zenodo_discover.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: movement-phenology-barents-zenodo-discovery
+          path: outputs/movement_phenology/stage3_barents_zenodo_discovery.json
+          if-no-files-found: error
