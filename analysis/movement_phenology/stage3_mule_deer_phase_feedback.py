@@ -158,6 +158,43 @@ def main() -> None:
         float(x) for x in feedback.conf_int().loc["DFP_Start"]
     ]
 
+    if kappa > 0 and target_u > 0:
+        equilibrium_phase_error = -math.log(target_u) / kappa
+    else:
+        equilibrium_phase_error = np.nan
+
+    median_environment_speed = float(
+        wave["greenwave_speed_km_day"].median()
+    )
+    relaxation_distance_km = (
+        median_environment_speed / kappa if kappa > 0 else np.nan
+    )
+    half_distance_km = (
+        math.log(2.0) * relaxation_distance_km
+        if np.isfinite(relaxation_distance_km)
+        else np.nan
+    )
+
+    year_feedback_rows = []
+    for year, d in core.groupby("year"):
+        if len(d) < 4:
+            continue
+        m = smf.ols("q ~ DFP_Start", data=d).fit()
+        year_feedback_rows.append(
+            {
+                "year": int(year),
+                "n": int(len(d)),
+                "kappa_log_u_per_day": float(m.params["DFP_Start"]),
+                "kappa_p": float(m.pvalues["DFP_Start"]),
+                "u0_at_zero_error": float(math.exp(m.params["Intercept"])),
+                "r2": float(m.rsquared),
+            }
+        )
+    year_feedback = pd.DataFrame(year_feedback_rows)
+    year_feedback.to_csv(
+        OUT / "stage3_mule_deer_feedback_by_year.csv", index=False
+    )
+
     endpoint_target_u, endpoint_target_lo, endpoint_target_hi = ci_exp(
         feedback_endpoint, "Intercept"
     )
@@ -179,6 +216,14 @@ def main() -> None:
         "feedback_yearFE_p": float(feedback_year.pvalues["DFP_Start"]),
         "zero_error_target_u_macro": target_u,
         "zero_error_target_u_ci95": [target_lo, target_hi],
+        "equilibrium_phase_error_days": float(equilibrium_phase_error),
+        "median_environment_speed_km_day": median_environment_speed,
+        "local_relaxation_distance_km": float(relaxation_distance_km),
+        "local_half_distance_km": float(half_distance_km),
+        "n_years_positive_feedback": int(
+            (year_feedback["kappa_log_u_per_day"] > 0).sum()
+        ),
+        "n_years_feedback_fitted": int(len(year_feedback)),
         "endpoint_speed_target_u_macro": endpoint_target_u,
         "endpoint_speed_target_u_ci95": [endpoint_target_lo, endpoint_target_hi],
         "endpoint_feedback_kappa": float(
