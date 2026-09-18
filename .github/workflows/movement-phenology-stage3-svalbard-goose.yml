@@ -69,10 +69,14 @@ jobs:
             outputs/movement_phenology/stage3_svalbard_goose_power_gdd_region_summary.csv
             outputs/movement_phenology/stage3_svalbard_goose_power_predictability.csv
             outputs/movement_phenology/stage3_svalbard_goose_power_anchor_validation.csv
+            outputs/movement_phenology/stage3_svalbard_goose_anchor_sensitivity_onsets.csv
             outputs/movement_phenology/stage3_svalbard_goose_power_gdd_receipt.json
             outputs/movement_phenology/stage3_svalbard_goose_region_visits.csv
             outputs/movement_phenology/stage3_svalbard_goose_transitions.csv
             outputs/movement_phenology/stage3_svalbard_goose_controller_by_stage.csv
+            outputs/movement_phenology/stage3_svalbard_goose_controller_by_transition.csv
+            outputs/movement_phenology/stage3_svalbard_goose_anchor_sensitivity_controller.csv
+            outputs/movement_phenology/stage3_svalbard_goose_anchor_sensitivity_summary.csv
             outputs/movement_phenology/stage3_svalbard_goose_stage_descriptives.csv
             outputs/movement_phenology/stage3_svalbard_goose_controller_receipt.json
             outputs/movement_phenology/stage3_svalbard_goose_controller_*_summary.txt
