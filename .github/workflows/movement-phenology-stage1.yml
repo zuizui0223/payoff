@@ -32,14 +32,19 @@ jobs:
       - name: Download pinned Amaral et al. analysis data
         run: |
           mkdir -p external/amaral_2025/data
-          curl --fail --location --retry 3             https://raw.githubusercontent.com/br-amaral/BirdMigrationSpeed/62c58d77c2028bd863dfe3697b0d9cf29ceaeab0/data/final.rds             --output external/amaral_2025/data/final.rds
+          curl --fail --location --retry 3 \
+            https://raw.githubusercontent.com/br-amaral/BirdMigrationSpeed/62c58d77c2028bd863dfe3697b0d9cf29ceaeab0/data/final.rds \
+            --output external/amaral_2025/data/final.rds
           test -s external/amaral_2025/data/final.rds
           sha256sum external/amaral_2025/data/final.rds
 
       - name: Run PAYOFF-B movement-phenology reanalysis
         run: Rscript analysis/movement_phenology/reanalyse_amaral_payoff_b.R
 
-      - name: Print Stage-1 receipt
+      - name: Run species-level trait moderator audit
+        run: Rscript analysis/movement_phenology/stage1_trait_moderators.R
+
+      - name: Print Stage-1 receipts
         run: |
           cat outputs/movement_phenology/stage1_summary.csv
           cat outputs/movement_phenology/stage1_quadratic_raw.csv
@@ -48,7 +53,9 @@ jobs:
           cat outputs/movement_phenology/stage1_gam_minima.csv
           cat outputs/movement_phenology/stage1_checkpoints.csv
           cat outputs/movement_phenology/stage1_optimum_uncertainty.csv
-          cat outputs/movement_phenology/stage1_species_summary.csv\n          cat outputs/movement_phenology/stage1_trait_moderator_summary.csv\n          cat outputs/movement_phenology/stage1_trait_moderator_associations.csv
+          cat outputs/movement_phenology/stage1_species_summary.csv
+          cat outputs/movement_phenology/stage1_trait_moderator_summary.csv
+          cat outputs/movement_phenology/stage1_trait_moderator_associations.csv
 
       - uses: actions/upload-artifact@v4
         with:
@@ -63,7 +70,10 @@ jobs:
             outputs/movement_phenology/stage1_gam_receipts.csv
             outputs/movement_phenology/stage1_optimum_uncertainty.csv
             outputs/movement_phenology/stage1_species_vertices.csv
-            outputs/movement_phenology/stage1_species_summary.csv\n            outputs/movement_phenology/stage1_trait_species.csv\n            outputs/movement_phenology/stage1_trait_moderator_summary.csv\n            outputs/movement_phenology/stage1_trait_moderator_associations.csv
+            outputs/movement_phenology/stage1_species_summary.csv
+            outputs/movement_phenology/stage1_trait_species.csv
+            outputs/movement_phenology/stage1_trait_moderator_summary.csv
+            outputs/movement_phenology/stage1_trait_moderator_associations.csv
             outputs/movement_phenology/stage1_gam_summary.txt
             outputs/movement_phenology/stage1_centered_gam_summary.txt
             outputs/movement_phenology/stage1_quadratic_summary.txt
