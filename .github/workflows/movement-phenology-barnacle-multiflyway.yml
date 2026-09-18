@@ -5,13 +5,11 @@ on:
   push:
     paths:
       - 'analysis/movement_phenology/stage3_barnacle_*.py'
-      - 'analysis/movement_phenology/stage3_barents_*.py'
       - 'analysis/movement_phenology/gdd_jerk.py'
       - '.github/workflows/movement-phenology-barnacle-multiflyway.yml'
   pull_request:
     paths:
       - 'analysis/movement_phenology/stage3_barnacle_*.py'
-      - 'analysis/movement_phenology/stage3_barents_*.py'
       - 'analysis/movement_phenology/gdd_jerk.py'
       - '.github/workflows/movement-phenology-barnacle-multiflyway.yml'
 
@@ -28,21 +26,25 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check \
             pandas numpy scipy requests statsmodels scikit-learn
-      - name: Download processed public barnacle-goose tracking release
-        run: python analysis/movement_phenology/stage3_barnacle_processed_download.py
-      - name: Inventory flyway subsets
-        run: python analysis/movement_phenology/stage3_barents_processed_source_probe.py
+      - name: Download original Greenland Movebank GPS
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_raw_download.py \
+            --flyway greenland
+      - name: Download original Barents Movebank GPS
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_raw_download.py \
+            --flyway barents
       - name: Reconstruct Greenland spring stopovers
         run: |
           python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
             --flyway greenland \
-            --gps outputs/movement_phenology/stage3_greenland_processed_tracking_subset.csv \
+            --gps external/barnacle_raw/greenland_gps.csv \
             --min-region-individuals 2
       - name: Reconstruct Barents spring stopovers
         run: |
           python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
             --flyway barents \
-            --gps outputs/movement_phenology/stage3_barents_processed_tracking_subset.csv \
+            --gps external/barnacle_raw/barents_gps.csv \
             --min-region-individuals 3
       - name: Reconstruct Greenland spring-onset anomalies
         run: |
@@ -78,10 +80,8 @@ jobs:
         with:
           name: movement-phenology-barnacle-multiflyway
           path: |
-            outputs/movement_phenology/stage3_barnacle_processed_download.json
-            outputs/movement_phenology/stage3_barents_processed_source_receipt.json
-            outputs/movement_phenology/stage3_greenland_processed_tracking_subset.csv
-            outputs/movement_phenology/stage3_barents_processed_tracking_subset.csv
+            outputs/movement_phenology/stage3_greenland_raw_download_receipt.json
+            outputs/movement_phenology/stage3_barents_raw_download_receipt.json
             outputs/movement_phenology/stage3_greenland_goose_*.csv
             outputs/movement_phenology/stage3_greenland_goose_*.json
             outputs/movement_phenology/stage3_barents_goose_*.csv
