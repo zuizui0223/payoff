@@ -32,7 +32,7 @@ def _relative_error_pct(approx: float, exact: float) -> float:
 
 
 def build_report() -> dict:
-    weak_u = weak_contrast_optimal_dimensionless_migration()
+    weak_u = float(f"{weak_contrast_optimal_dimensionless_migration():.15g}")
     weak_shape_max = weak_contrast_shape(weak_u)
     rows = []
     for v in REGISTERED_V:
