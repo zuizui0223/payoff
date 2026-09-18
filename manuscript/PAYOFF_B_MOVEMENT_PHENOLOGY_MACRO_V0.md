@@ -341,3 +341,97 @@ THIRD DIRECT CONTROLLER        MISSING
 CROSS-SYSTEM META-MODEL        GATED
 GLOBAL EBIRD TEST              ACCESS-KEY GATED
 ~~~
+
+
+## Revised synthesis — information and feedback are not the same axis
+
+The multi-flyway direct analysis changes the causal architecture of the paper.
+
+The paper should no longer state:
+
+> greater environmental predictability produces stronger behavioral feedback.
+
+Instead, distinguish two control channels:
+
+\[
+\text{environmental prediction}
+\quad\perp\quad
+\text{behavioral phase correction}.
+\]
+
+A compact STEP representation is
+
+\[
+E_{i+1}
+=
+a+\lambda E_i+\zeta_i+\eta_i,
+\]
+
+where:
+
+~~~text
+lambda
+= fraction/sign of incoming phase error retained after correction
+
+zeta
+= downstream environmental innovation not predicted from current conditions
+
+eta
+= remaining behavioral / measurement noise
+~~~
+
+For stable repeated steps,
+
+\[
+\operatorname{Var}(E)
+=
+\frac{\sigma_\zeta^2+\sigma_\eta^2}{1-\lambda^2}.
+\]
+
+This gives the paper a clearer ecological result:
+
+> **Migration timing can remain precise either because the future environment
+> is predictable, because animals strongly correct realized errors, or through
+> a combination of both.**
+
+The direct barnacle-goose transition screen does not show a positive monotonic
+relationship between environmental predictability and feedback correction.
+That negative result is informative because it separates the mechanisms rather
+than forcing both into one "tracking ability" variable.
+
+### Revised figure logic
+
+Figure 4 should become a two-channel comparison:
+
+~~~text
+x-axis:
+  environmental innovation / predictability
+
+y-axis:
+  phase retention |lambda|
+
+symbol / facet:
+  actuator architecture
+
+annotation:
+  SURF / STEP / JUMP / OVERTAKE / ENGINEER
+~~~
+
+Interpretive quadrants:
+
+~~~text
+low innovation + low |lambda|
+  predictable environment + strong correction
+
+low innovation + high |lambda|
+  feed-forward dominated
+
+high innovation + low |lambda|
+  feedback dominated
+
+high innovation + high |lambda|
+  high mismatch risk
+~~~
+
+This is stronger than a one-dimensional ranking of migration "tracking
+quality".
