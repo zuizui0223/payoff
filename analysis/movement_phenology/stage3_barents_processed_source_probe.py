@@ -12,6 +12,7 @@ OUT = Path("outputs/movement_phenology")
 OUT.mkdir(parents=True, exist_ok=True)
 
 TARGETS = {
+    "greenland": "10.5441/001/1.5d3f0664",
     "barents": "10.5441/001/1.ps244r11",
     "svalbard": "10.5441/001/1.5k6b1364",
 }
