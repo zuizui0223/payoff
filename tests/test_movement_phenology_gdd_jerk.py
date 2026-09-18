@@ -1,7 +1,9 @@
 import math
 
-import numpy as np
 import pytest
+
+np = pytest.importorskip("numpy")
+pytest.importorskip("scipy")
 
 from analysis.movement_phenology.gdd_jerk import (
     EARLY_JERK_FRACTION,
