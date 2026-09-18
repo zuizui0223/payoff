@@ -153,6 +153,38 @@ def main():
     if dc_url and (not receipt.get("old_mets") or not receipt["old_mets"].get("files")):
         receipt["old_mets"] = try_old_mets(str(dc_url))
 
+    # Legacy datasets often expose all original file URLs through METS.
+    # If that worked, avoid slow DSpace7 discovery entirely.
+    old_files = (receipt.get("old_mets") or {}).get("files", [])
+    if old_files:
+        receipt["candidate_bitstream_urls"] = sorted(
+            x["url"] for x in old_files if x.get("url")
+        )
+        receipt["candidate_item_urls"] = []
+        receipt["items"] = []
+        (OUT / "stage3_wigeon_movebank_discovery.json").write_text(
+            json.dumps(receipt, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        pd.DataFrame(
+            [
+                {
+                    "item_uuid": None,
+                    "item_name": None,
+                    "doi_metadata_match": True,
+                    "bundle": x.get("label"),
+                    "uuid": None,
+                    "name": x.get("title"),
+                    "sizeBytes": None,
+                    "format": x.get("mime"),
+                    "content_url": x.get("url"),
+                }
+                for x in old_files
+            ]
+        ).to_csv(OUT / "stage3_wigeon_movebank_bitstreams.csv", index=False)
+        print(json.dumps(receipt, indent=2, ensure_ascii=False))
+        return
+
     queries = [
         DOI,
         "dv5mm289",
