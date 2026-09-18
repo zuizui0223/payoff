@@ -59,6 +59,18 @@ def main():
             if p is None:
                 continue
             lam = float(c["phase_transfer_lambda"])
+            innovation_sd = float(
+                p.get("environmental_innovation_sd_days", np.nan)
+            )
+            stable = abs(lam) < 1.0
+            phase_noise_amplification = (
+                1.0 / np.sqrt(1.0 - lam * lam)
+                if stable else np.nan
+            )
+            phase_noise_floor = (
+                innovation_sd * phase_noise_amplification
+                if stable and np.isfinite(innovation_sd) else np.nan
+            )
             rows.append(
                 {
                     "flyway": flyway,
@@ -72,9 +84,7 @@ def main():
                         p.get("phenology_predictability_r2",
                               p["phenology_correlation_r"] ** 2)
                     ),
-                    "environmental_innovation_sd_days": float(
-                        p.get("environmental_innovation_sd_days", np.nan)
-                    ),
+                    "environmental_innovation_sd_days": innovation_sd,
                     "destination_anomaly_sd_days": float(
                         p.get("destination_anomaly_sd_days", np.nan)
                     ),
@@ -83,6 +93,10 @@ def main():
                     "abs_lambda": abs(lam),
                     "correction_strength": 1.0 - abs(lam),
                     "signed_correction_fraction": 1.0 - lam,
+                    "stable_phase_map": bool(stable),
+                    "retained_variance_multiplier": lam * lam,
+                    "phase_noise_amplification": phase_noise_amplification,
+                    "predicted_stationary_phase_sd_days": phase_noise_floor,
                     "stopover_gain": float(c["stopover_gain"]),
                     "stopover_p": float(c["stopover_slope_p_cluster"]),
                     "lambda_p_vs_one": float(
@@ -104,6 +118,22 @@ def main():
         "revised_model": (
             "feed-forward environmental innovation and feedback phase retention "
             "are separate channels; no monotonic coupling is assumed"
+        ),
+        "phase_uncertainty_model": (
+            "V_next = lambda^2 * V_current + sigma_innovation^2"
+        ),
+        "n_stable_phase_maps": int(
+            table["stable_phase_map"].sum()
+        ) if len(table) else 0,
+        "median_environmental_innovation_sd_days": (
+            float(table["environmental_innovation_sd_days"].median())
+            if len(table) and table["environmental_innovation_sd_days"].notna().any()
+            else None
+        ),
+        "median_predicted_stationary_phase_sd_days": (
+            float(table["predicted_stationary_phase_sd_days"].median())
+            if len(table) and table["predicted_stationary_phase_sd_days"].notna().any()
+            else None
         ),
     }
 
@@ -182,7 +212,9 @@ def main():
         "Exploratory transition-level channel screen. Region pairs share "
         "individuals/routes and are not independent studies. The direct data "
         "do not support interpreting predictability as feedback gain; treat "
-        "environmental innovation and lambda as separate quantities."
+        "environmental innovation and lambda as separate quantities. Predicted "
+        "stationary phase SD is a model-derived uncertainty budget, not an "
+        "independently observed outcome."
     )
 
     (OUT / "stage3_barnacle_predictability_controller_receipt.json").write_text(
