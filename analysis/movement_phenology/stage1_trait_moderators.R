@@ -58,8 +58,7 @@ x$internal_finite_optimum <- with(
   x,
   is.finite(u_star) &
     beta_q2 > 0 &
-    q_star >= q05 &
-    q_star <= q95
+    vertex_inside_5_95
 )
 
 write.csv(
