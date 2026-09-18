@@ -251,3 +251,124 @@ phase locking / feedback control
 Do not merge the macro extension into the frozen B1 manuscript.
 
 The macro paper becomes publication-ready when at least one additional independent migration system reproduces a stabilizing phase-feedback or phase-predictability signature under a compatible measurement design.
+
+
+## Update — controller boundary systems and second direct-system acquisition
+
+The programme now includes two explicit controller failure/boundary axes.
+
+### Actuation limitation
+
+Aikens et al. (2022) provide a long-term perturbation in which gas development caused mule deer to hold up and lose green-wave synchrony, reducing route-scale surfing by 38.65% over 14 years.
+
+This is registered as a **control-permeability** failure rather than a generic barrier effect.
+
+### Environmental endogeneity
+
+Geremia et al. (2019) show that Yellowstone bison modify vegetation phenology through grazing. The environment cannot be treated as an externally imposed wave in this system.
+
+Bison are therefore excluded from the ordinary exogenous-wave controller meta-analysis and retained as an explicit boundary test.
+
+### Three controller-feasibility axes
+
+The synthesis now distinguishes
+
+\[
+(P,G,\chi)
+\]
+
+for:
+
+~~~text
+P    environmental predictability / information
+G    control permeability / ability to express correction
+chi  environmental endogeneity
+~~~
+
+A weak phase-locking signal can have fundamentally different interpretations depending on which axis is limiting.
+
+## Svalbard barnacle-goose raw-data gate
+
+The public Movebank Data Repository source for DOI 10.5441/001/1.5k6b1364 is now acquired directly in CI.
+
+~~~text
+GPS locations = 24,488
+public individual identifiers = 22
+years = 6
+time span = 2006-04-05 through 2011-06-18
+complete-coordinate rows = 24,488
+reference metadata rows = 22
+~~~
+
+The raw GPS contains enough temporal and spatial resolution to reconstruct route progress, movement speed, stopovers and arrival dates.
+
+The remaining blocker for a direct goose controller estimate is environmental phase.
+
+The original paper calculated annual regional onset of spring from GDD-jerk peaks using European Climate Assessment gridded daily temperature plus NOAA station data.
+
+The preferred route is therefore to reproduce environmental onset independently from public meteorological inputs rather than manually digitizing or transcribing published plots.
+
+## Prior-art boundary
+
+A dedicated audit now prevents overclaiming.
+
+The programme does **not** claim as new:
+
+~~~text
+green-wave surfing
+surf versus jump migration
+migration-timing plasticity
+environmental predictability effects
+compensatory speed/stopover changes
+anthropogenic decoupling
+resource engineering
+generic negative-feedback stability
+~~~
+
+The candidate contribution is instead the cross-system parameterization in common controller coordinates:
+
+~~~text
+kappa  = controller gain
+E*     = target / stable phase
+ell    = phase-correction distance
+P      = information/predictability
+G      = control permeability
+chi    = environmental endogeneity
+~~~
+
+plus an explicit strategy layer:
+
+~~~text
+SURF
+STEP
+JUMP
+OVERTAKE
+ENGINEER
+~~~
+
+## Current publication gate
+
+~~~text
+direct Tier A/B controller systems:
+  mule deer = complete
+  second system = raw goose GPS acquired, environmental reconstruction pending
+  third system = missing
+
+independent predictability evidence:
+  barnacle geese = present
+
+perturbation / failure evidence:
+  industrial mule deer = present
+
+endogeneity boundary:
+  Yellowstone bison = present
+
+broad-scale falsification of universal constant:
+  55-species bird analysis = complete
+~~~
+
+The project should not be promoted as a universal migration constant paper.
+
+The strongest working framing is now:
+
+> **Phenological migration is a phase-control problem whose gain, target phase and correction scale depend on environmental information, movement permeability and migration strategy.**
