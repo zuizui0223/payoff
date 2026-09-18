@@ -24,7 +24,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install parser
-        run: python -m pip install --disable-pip-version-check pandas numpy scikit-learn scipy requests statsmodels
+        run: python -m pip install --disable-pip-version-check pytest pandas numpy scikit-learn scipy requests statsmodels
 
       - name: Download public Movebank Data Repository bitstreams
         run: |
