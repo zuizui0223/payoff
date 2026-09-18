@@ -37,9 +37,11 @@ MEAN_AIRSPEED_MS = 18.5
 SD_AIRSPEED_MS = 2.28
 THRESHOLD_V_MS = MEAN_AIRSPEED_MS - 2.0 * SD_AIRSPEED_MS
 THRESHOLD_D_KM = THRESHOLD_V_MS * 3.6  # 50.184 km in one hour
-ORIGINAL_DATA_FREEZE = pd.Timestamp("2019-12-31 23:59:59", tz="UTC")
+ORIGINAL_DATA_FREEZE = pd.Timestamp("2020-12-31 23:59:59", tz="UTC")
 TARGET_TIME_SECONDS = 3600.0
-REGULARISE_WIGGLE_SECONDS = 0.05 * TARGET_TIME_SECONDS
+SPECIAL_TARGET_TIME_SECONDS = 7200.0
+REGULARISE_WIGGLE_SECONDS = 600.0
+SPECIAL_TWO_HOUR_INDIVIDUAL_YEAR = "PP00456-2018"
 GEOD = Geod(ellps="WGS84")
 
 
@@ -77,8 +79,10 @@ def cumulative_track_distance_km(track: pd.DataFrame) -> float:
     return values
 
 
-def regularise_track_hourly(tmp: pd.DataFrame) -> pd.DataFrame:
-    """Port the Supplement's regularise.tracks(..., target.time=3600) logic.
+def regularise_track_hourly(
+    tmp: pd.DataFrame, individual_year: str | None = None
+) -> pd.DataFrame:
+    """Port the Supplement's explicit regularise.tracks calls.
 
     The published movement threshold is explicitly a one-hour flight distance
     (13.94 m/s * 3.6 = 50.184 km), and the fitted HMM discussion interprets
@@ -90,11 +94,16 @@ def regularise_track_hourly(tmp: pd.DataFrame) -> pd.DataFrame:
     if len(tmp) < 2:
         return tmp.iloc[0:0].copy()
 
+    target_time = (
+        SPECIAL_TARGET_TIME_SECONDS
+        if individual_year == SPECIAL_TWO_HOUR_INDIVIDUAL_YEAR
+        else TARGET_TIME_SECONDS
+    )
+
     observed = tmp["time"].astype("int64").to_numpy(dtype=np.int64) / 1e9
     start = float(observed[0])
     end = float(observed[-1])
-    targets = np.arange(start, end + 0.5 * TARGET_TIME_SECONDS,
-                        TARGET_TIME_SECONDS)
+    targets = np.arange(start, end + 0.5 * target_time, target_time)
 
     chosen = []
     diffs = []
@@ -116,7 +125,7 @@ def regularise_track_hourly(tmp: pd.DataFrame) -> pd.DataFrame:
 
     selected_times = observed[np.asarray(chosen, dtype=int)]
     t_prev = np.r_[np.nan, np.diff(selected_times)]
-    diff_prev = np.abs(TARGET_TIME_SECONDS - t_prev)
+    diff_prev = np.abs(target_time - t_prev)
     check = (
         np.asarray(diffs) <= REGULARISE_WIGGLE_SECONDS
     ) | (
@@ -130,7 +139,9 @@ def regularise_track_hourly(tmp: pd.DataFrame) -> pd.DataFrame:
     return out.drop_duplicates("time").sort_values("time").reset_index(drop=True)
 
 
-def prepare_track(x: pd.DataFrame):
+def prepare_track(
+    x: pd.DataFrame, individual_year: str | None = None
+):
     x = x.sort_values("time").drop_duplicates("time").copy()
     if len(x) < 3 or float(x["ground_speed"].max()) <= THRESHOLD_V_MS:
         return None, "NO_MIGRATORY_SPEED"
@@ -189,7 +200,9 @@ def prepare_track(x: pd.DataFrame):
 
     # The Supplement regularises the time series and then retains rows that
     # both pass the regularisation check and fall inside the migration window.
-    reg = regularise_track_hourly(x)
+    reg = regularise_track_hourly(
+        x, individual_year=individual_year
+    )
     mig = reg[reg["migratory_window"]].copy()
     if len(mig) < 3:
         return None, "TOO_FEW_MIGRATION_FIXES"
@@ -204,7 +217,11 @@ def prepare_track(x: pd.DataFrame):
         "end_lat": float(end_row.lat),
         "n_migration_rows_before_regularise": int(x["migratory_window"].sum()),
         "n_migration_rows_after_regularise": int(len(mig)),
-        "target_time_seconds": TARGET_TIME_SECONDS,
+        "target_time_seconds": (
+            SPECIAL_TARGET_TIME_SECONDS
+            if individual_year == SPECIAL_TWO_HOUR_INDIVIDUAL_YEAR
+            else TARGET_TIME_SECONDS
+        ),
         "regularise_wiggle_seconds": REGULARISE_WIGGLE_SECONDS,
     }
     return (mig, meta), "PASS"
@@ -318,7 +335,10 @@ def main():
     track_rows = []
 
     for (ind, year), x in raw.groupby(["individual_id", "year"]):
-        prepared, status = prepare_track(x)
+        individual_year = f"{ind}-{year}"
+        prepared, status = prepare_track(
+            x, individual_year=individual_year
+        )
         audit = {
             "individual_id": str(ind),
             "year": int(year),
