@@ -30,6 +30,20 @@ DATASETS = {
     "greenland": "10.5441/001/1.5d3f0664",
     "barents": "10.5441/001/1.ps244r11",
 }
+
+# Verified public DSpace7 bitstreams, already exercised successfully in the
+# independent raw-audit workflow. These are a failover for transient discovery
+# or legacy-METS failures, not guessed filenames.
+VERIFIED_BITSTREAMS = {
+    "greenland": (
+        "https://datarepository.movebank.org/server/api/core/bitstreams/"
+        "721751f9-dda5-44a1-9f36-bad42dc191fb/content"
+    ),
+    "barents": (
+        "https://datarepository.movebank.org/server/api/core/bitstreams/"
+        "deda6bce-db1e-4f0d-af1f-058dbfcaf83b/content"
+    ),
+}
 OUT = Path("outputs/movement_phenology")
 EXT = Path("external/barnacle_raw")
 UA = {"User-Agent": "payoff-movement-phenology/1.0"}
@@ -157,7 +171,20 @@ def main():
             if files:
                 source = "dspace_api_long_retry"
     if not files:
-        raise SystemExit(f"No repository files discovered for {doi}: {rec}")
+        verified = VERIFIED_BITSTREAMS.get(args.flyway)
+        if verified:
+            files = [
+                {
+                    "title": "verified_public_gps_bitstream",
+                    "label": "verified_fallback",
+                    "mime": "text/csv",
+                    "url": verified,
+                }
+            ]
+            source = "verified_public_bitstream_fallback"
+            rec["verified_fallback_url"] = verified
+        else:
+            raise SystemExit(f"No repository files discovered for {doi}: {rec}")
 
     attempts = []
     selected = None
