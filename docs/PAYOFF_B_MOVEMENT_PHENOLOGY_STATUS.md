@@ -429,3 +429,101 @@ third independent direct system:    MISSING
 ~~~
 
 The next priority is therefore a third direct system, with Eurasian wigeon the first candidate because public GPS and a strong migration-distance gradient already exist.
+
+
+## Update — feed-forward and feedback are separate channels
+
+The Greenland/Barents direct-transition analysis does not support the initial
+simple hypothesis that more predictable environmental progression necessarily
+produces stronger behavioral feedback.
+
+Across seven matched transition pairs:
+
+~~~text
+Spearman(
+  environmental predictability r,
+  correction strength 1-|lambda|
+)
+= -0.464
+
+p = 0.294
+~~~
+
+The sample is small and transitions are not independent, so this is not
+evidence for a negative general relationship.
+
+It does invalidate the stronger positive-coupling claim.
+
+The revised framework separates:
+
+~~~text
+feed-forward information:
+  predict downstream phenology before mismatch occurs
+  -> environmental innovation variance
+
+feedback correction:
+  transform already-realized phase error
+  -> phase retention lambda
+
+actuator architecture:
+  speed / stopover / route / departure
+~~~
+
+For a repeated STEP controller,
+
+\[
+E_{i+1}=a+\lambda E_i+\zeta_i+\eta_i,
+\]
+
+where \(\zeta_i\) is environmental forecast innovation.
+
+For \(|\lambda|<1\), the stationary variance benchmark is
+
+\[
+\operatorname{Var}(E)
+=
+\frac{\sigma_{\zeta}^2+\sigma_{\eta}^2}
+{1-\lambda^2}.
+\]
+
+Thus phase precision can improve through either:
+
+~~~text
+better information:
+  environmental innovation variance decreases
+
+stronger feedback:
+  |lambda| decreases
+~~~
+
+These channels can substitute for one another and need not be positively
+correlated.
+
+## Update — direct replication gate
+
+The direct-controller registry now contains highlighted stable routes from:
+
+~~~text
+mule deer:
+  lambda =  0.107
+
+Svalbard barnacle goose:
+  lambda = -0.106
+
+Greenland barnacle goose:
+  lambda =  0.131
+
+Barents barnacle goose:
+  lambda =  0.494
+~~~
+
+The population/route replication gate is therefore passed.
+
+However, these rows represent only two taxa.
+
+~~~text
+population/route replication: PASS
+cross-taxon generality:       OPEN
+~~~
+
+The Eurasian-wigeon reconstruction is now the critical third-taxon gate.
