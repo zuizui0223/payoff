@@ -5,10 +5,16 @@ on:
   push:
     paths:
       - 'analysis/movement_phenology/stage3_barnacle_goose_source_probe.py'
+      - 'analysis/movement_phenology/stage3_svalbard_goose_*.py'
+      - 'analysis/movement_phenology/gdd_jerk.py'
+      - 'tests/test_movement_phenology_gdd_jerk.py'
       - '.github/workflows/movement-phenology-stage3-svalbard-goose.yml'
   pull_request:
     paths:
       - 'analysis/movement_phenology/stage3_barnacle_goose_source_probe.py'
+      - 'analysis/movement_phenology/stage3_svalbard_goose_*.py'
+      - 'analysis/movement_phenology/gdd_jerk.py'
+      - 'tests/test_movement_phenology_gdd_jerk.py'
       - '.github/workflows/movement-phenology-stage3-svalbard-goose.yml'
 
 jobs:
