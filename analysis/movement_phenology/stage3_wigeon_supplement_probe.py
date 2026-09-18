@@ -37,6 +37,10 @@ KEYWORDS = (
     "dt",
     "50.184",
     "staging",
+    "regularise",
+    "target.time",
+    "sampling frequency",
+    "3600",
 )
 
 
@@ -95,6 +99,9 @@ def main():
         "dist=list",
         "formula",
         "50.184",
+        "regularise",
+        "target.time",
+        "3600",
     )
     joined_lines = joined.splitlines()
     contract_windows = []
