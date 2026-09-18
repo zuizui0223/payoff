@@ -370,4 +370,166 @@ capture.output(
   file = file.path(out_dir, "stage1_centered_quadratic_summary.txt")
 )
 
+
+# Conditional coefficient-uncertainty interval for the fitted GAM minimum.
+# Random-effect smooths are excluded, so this describes the population-level
+# response surface at the registered nuisance-variable references.
+optimum_uncertainty <- function(
+  model, source, response, alignment_ref, q,
+  n_draw = 1000, seed = 20260918
+) {
+  nd <- prediction_frame(source, q, alignment_ref)
+  excluded <- c("s(species)", "s(species_cell)", "s(year_f)")
+  X <- predict(
+    model, newdata = nd, type = "lpmatrix", exclude = excluded
+  )
+  active <- which(colSums(abs(X)) > 1e-12)
+  Xs <- X[, active, drop = FALSE]
+  mu <- coef(model)[active]
+  V <- model$Vp[active, active, drop = FALSE]
+  V <- (V + t(V)) / 2
+  eg <- eigen(V, symmetric = TRUE)
+  root <- eg$vectors %*% diag(sqrt(pmax(eg$values, 0)), nrow = length(eg$values))
+  set.seed(seed)
+  z <- matrix(rnorm(length(active) * n_draw), nrow = length(active), ncol = n_draw)
+  beta_draw <- sweep(root %*% z, 1, mu, "+")
+  pred_draw <- Xs %*% beta_draw
+  idx <- apply(pred_draw, 2, which.min)
+  u_draw <- exp(q[idx])
+  data.frame(
+    response = response,
+    alignment_ref = alignment_ref,
+    n_draw = n_draw,
+    u_median = unname(quantile(u_draw, 0.5)),
+    u_lo_95 = unname(quantile(u_draw, 0.025)),
+    u_hi_95 = unname(quantile(u_draw, 0.975)),
+    boundary_hit_fraction = mean(idx == 1 | idx == length(q)),
+    in_payoff_b_reference_fraction = mean(
+      u_draw >= 1.0 & u_draw <= 1.60611529880277
+    )
+  )
+}
+
+optimum_uncertainty_receipt <- rbind(
+  optimum_uncertainty(
+    m_centered_gam, dat_centered, "centered_abs_lag",
+    median(dat_centered$alignment, na.rm = TRUE), q_grid
+  ),
+  optimum_uncertainty(
+    m_centered_gam, dat_centered, "centered_abs_lag",
+    1.0, q_grid, seed = 20260919
+  ),
+  optimum_uncertainty(
+    m_gam, dat, "raw_abs_lag",
+    1.0, q_grid, seed = 20260920
+  )
+)
+write.csv(
+  optimum_uncertainty_receipt,
+  file.path(out_dir, "stage1_optimum_uncertainty.csv"),
+  row.names = FALSE
+)
+
+# Species-level heterogeneity check. The response has already been centered by
+# species x cell; cell and year fixed effects are added so each vertex is
+# principally informed by within-cell/interannual variation.
+species_vertex <- function(sp) {
+  d <- droplevels(dat_centered[dat_centered$species == sp, , drop = FALSE])
+  if (nrow(d) < 60 || length(unique(d$year)) < 8) return(NULL)
+  fit <- tryCatch(
+    lm(
+      abs_lag_deviation ~
+        log_speed_ratio + I(log_speed_ratio^2) +
+        log_speed_scale + alignment + greenup_date_anom +
+        factor(year) + factor(cell),
+      data = d
+    ),
+    error = function(e) NULL
+  )
+  if (is.null(fit)) return(NULL)
+  cf <- coef(summary(fit))
+  if (!all(c("log_speed_ratio", "I(log_speed_ratio^2)") %in% row.names(cf))) {
+    return(NULL)
+  }
+  b1 <- unname(cf["log_speed_ratio", "Estimate"])
+  b2 <- unname(cf["I(log_speed_ratio^2)", "Estimate"])
+  q_star <- if (is.finite(b2) && b2 > 0) -b1 / (2 * b2) else NA_real_
+  q05 <- unname(quantile(d$log_speed_ratio, 0.05, na.rm = TRUE))
+  q95 <- unname(quantile(d$log_speed_ratio, 0.95, na.rm = TRUE))
+  data.frame(
+    species = as.character(sp),
+    n = nrow(d),
+    n_cells = length(unique(d$cell)),
+    n_years = length(unique(d$year)),
+    beta_q = b1,
+    beta_q2 = b2,
+    beta_q2_p = unname(cf["I(log_speed_ratio^2)", "Pr(>|t|)"]),
+    q_star = q_star,
+    u_star = if (is.finite(q_star)) exp(q_star) else NA_real_,
+    vertex_inside_5_95 = is.finite(q_star) && q_star >= q05 && q_star <= q95
+  )
+}
+
+species_vertices <- do.call(
+  rbind,
+  Filter(
+    Negate(is.null),
+    lapply(levels(dat_centered$species), species_vertex)
+  )
+)
+if (is.null(species_vertices)) {
+  species_vertices <- data.frame()
+}
+write.csv(
+  species_vertices,
+  file.path(out_dir, "stage1_species_vertices.csv"),
+  row.names = FALSE
+)
+
+if (nrow(species_vertices) > 0) {
+  finite <- with(
+    species_vertices,
+    is.finite(u_star) & vertex_inside_5_95
+  )
+  species_summary <- data.frame(
+    n_species_fit = nrow(species_vertices),
+    n_positive_curvature = sum(species_vertices$beta_q2 > 0, na.rm = TRUE),
+    n_vertices_inside_5_95 = sum(finite, na.rm = TRUE),
+    n_curvature_p_lt_0_1 = sum(
+      species_vertices$beta_q2 > 0 &
+        species_vertices$beta_q2_p < 0.1,
+      na.rm = TRUE
+    ),
+    median_u_star_inside = if (any(finite)) {
+      median(species_vertices$u_star[finite], na.rm = TRUE)
+    } else {
+      NA_real_
+    },
+    fraction_inside_payoff_b_reference = if (any(finite)) {
+      mean(
+        species_vertices$u_star[finite] >= 1.0 &
+          species_vertices$u_star[finite] <= 1.60611529880277,
+        na.rm = TRUE
+      )
+    } else {
+      NA_real_
+    }
+  )
+} else {
+  species_summary <- data.frame(
+    n_species_fit = 0,
+    n_positive_curvature = 0,
+    n_vertices_inside_5_95 = 0,
+    n_curvature_p_lt_0_1 = 0,
+    median_u_star_inside = NA_real_,
+    fraction_inside_payoff_b_reference = NA_real_
+  )
+}
+write.csv(
+  species_summary,
+  file.path(out_dir, "stage1_species_summary.csv"),
+  row.names = FALSE
+)
+
+
 message("Wrote PAYOFF-B movement–phenology Stage-1 outputs to ", out_dir)
