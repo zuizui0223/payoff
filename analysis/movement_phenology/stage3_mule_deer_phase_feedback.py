@@ -106,6 +106,7 @@ def main() -> None:
     for col in numeric:
         dat[col] = pd.to_numeric(dat[col], errors="coerce")
 
+    dat["individual_id"] = dat["id_yr"].str.split("_").str[0]
     dat["u_macro"] = dat["rate_km_day"] / dat["greenwave_speed_km_day"]
     dat["u_macro_endpoint"] = (
         dat["rate_km_day"] / dat["greenwave_endpoint_speed_km_day"]
@@ -125,6 +126,14 @@ def main() -> None:
     # movement; ahead (<0 DFP) -> slower relative movement.
     feedback = smf.ols("q ~ DFP_Start", data=core).fit()
     feedback_year = smf.ols("q ~ DFP_Start + C(year)", data=core).fit()
+    feedback_cluster = smf.ols("q ~ DFP_Start", data=core).fit(
+        cov_type="cluster", cov_kwds={"groups": core["individual_id"]}
+    )
+    feedback_year_cluster = smf.ols(
+        "q ~ DFP_Start + C(year)", data=core
+    ).fit(
+        cov_type="cluster", cov_kwds={"groups": core["individual_id"]}
+    )
 
     # Endpoint environmental-speed sensitivity.
     endpoint_core = dat.dropna(subset=["DFP_Start", "q_endpoint"]).copy()
@@ -133,11 +142,34 @@ def main() -> None:
     # 2. Phase compression from migration start to end.
     compression = smf.ols("DFP_End ~ DFP_Start", data=core).fit()
     compression_year = smf.ols("DFP_End ~ DFP_Start + C(year)", data=core).fit()
+    compression_cluster = smf.ols("DFP_End ~ DFP_Start", data=core).fit(
+        cov_type="cluster", cov_kwds={"groups": core["individual_id"]}
+    )
+    compression_year_cluster = smf.ols(
+        "DFP_End ~ DFP_Start + C(year)", data=core
+    ).fit(
+        cov_type="cluster", cov_kwds={"groups": core["individual_id"]}
+    )
 
     # 3. Stopover feedback where available.
     stop = dat.dropna(subset=["DFP_Start", "stopover_day"]).copy()
     stop_model = smf.ols("stopover_day ~ DFP_Start", data=stop).fit()
     stop_year = smf.ols("stopover_day ~ DFP_Start + C(year)", data=stop).fit()
+    stop_cluster = smf.ols("stopover_day ~ DFP_Start", data=stop).fit(
+        cov_type="cluster", cov_kwds={"groups": stop["individual_id"]}
+    )
+    stop_year_cluster = smf.ols(
+        "stopover_day ~ DFP_Start + C(year)", data=stop
+    ).fit(
+        cov_type="cluster", cov_kwds={"groups": stop["individual_id"]}
+    )
+
+    core["phase_error_reduction_abs"] = core["abs_start"] - core["abs_end"]
+    reduction_cluster = smf.ols(
+        "phase_error_reduction_abs ~ 1", data=core
+    ).fit(
+        cov_type="cluster", cov_kwds={"groups": core["individual_id"]}
+    )
 
     # 4. Paired phase-error reduction.
     paired = core[["abs_start", "abs_end"]].dropna()
@@ -202,6 +234,7 @@ def main() -> None:
     result = {
         "analysis": "mule_deer_phase_feedback_v1",
         "n_animal_years": int(len(core)),
+        "n_individuals": int(core["individual_id"].nunique()),
         "n_years": int(core["year"].nunique()),
         "median_u_macro": float(core["u_macro"].median()),
         "median_abs_start_days": float(core["abs_start"].median()),
@@ -214,6 +247,14 @@ def main() -> None:
         "feedback_kappa_p": float(feedback.pvalues["DFP_Start"]),
         "feedback_yearFE_kappa": float(feedback_year.params["DFP_Start"]),
         "feedback_yearFE_p": float(feedback_year.pvalues["DFP_Start"]),
+        "feedback_cluster_se": float(feedback_cluster.bse["DFP_Start"]),
+        "feedback_cluster_p": float(feedback_cluster.pvalues["DFP_Start"]),
+        "feedback_yearFE_cluster_se": float(
+            feedback_year_cluster.bse["DFP_Start"]
+        ),
+        "feedback_yearFE_cluster_p": float(
+            feedback_year_cluster.pvalues["DFP_Start"]
+        ),
         "zero_error_target_u_macro": target_u,
         "zero_error_target_u_ci95": [target_lo, target_hi],
         "equilibrium_phase_error_days": float(equilibrium_phase_error),
@@ -245,18 +286,37 @@ def main() -> None:
         "compression_yearFE_p": float(
             compression_year.pvalues["DFP_Start"]
         ),
+        "compression_cluster_p": float(
+            compression_cluster.pvalues["DFP_Start"]
+        ),
+        "compression_yearFE_cluster_p": float(
+            compression_year_cluster.pvalues["DFP_Start"]
+        ),
         "mean_abs_start_days": float(paired["abs_start"].mean()),
         "mean_abs_end_days": float(paired["abs_end"].mean()),
         "paired_t_stat": float(paired_t.statistic),
         "paired_t_p": float(paired_t.pvalue),
         "wilcoxon_greater_stat": wilcoxon_stat,
         "wilcoxon_greater_p": wilcoxon_p,
+        "clustered_mean_phase_error_reduction_days": float(
+            reduction_cluster.params["Intercept"]
+        ),
+        "clustered_phase_error_reduction_se": float(
+            reduction_cluster.bse["Intercept"]
+        ),
+        "clustered_phase_error_reduction_p": float(
+            reduction_cluster.pvalues["Intercept"]
+        ),
         "stopover_beta_days_per_phase_day": float(
             stop_model.params["DFP_Start"]
         ),
         "stopover_p": float(stop_model.pvalues["DFP_Start"]),
         "stopover_yearFE_beta": float(stop_year.params["DFP_Start"]),
         "stopover_yearFE_p": float(stop_year.pvalues["DFP_Start"]),
+        "stopover_cluster_p": float(stop_cluster.pvalues["DFP_Start"]),
+        "stopover_yearFE_cluster_p": float(
+            stop_year_cluster.pvalues["DFP_Start"]
+        ),
         "claim_ceiling": (
             "Observational phase-feedback signature from published source data; "
             "not a causal, fitness, or evolutionary optimum estimate."
@@ -274,11 +334,18 @@ def main() -> None:
     for name, model in [
         ("feedback", feedback),
         ("feedback_yearFE", feedback_year),
+        ("feedback_cluster", feedback_cluster),
+        ("feedback_yearFE_cluster", feedback_year_cluster),
         ("feedback_endpoint", feedback_endpoint),
         ("compression", compression),
         ("compression_yearFE", compression_year),
+        ("compression_cluster", compression_cluster),
+        ("compression_yearFE_cluster", compression_year_cluster),
         ("stopover", stop_model),
         ("stopover_yearFE", stop_year),
+        ("stopover_cluster", stop_cluster),
+        ("stopover_yearFE_cluster", stop_year_cluster),
+        ("reduction_cluster", reduction_cluster),
     ]:
         (OUT / f"stage3_mule_deer_{name}_summary.txt").write_text(
             model.summary().as_text() + "\n", encoding="utf-8"
