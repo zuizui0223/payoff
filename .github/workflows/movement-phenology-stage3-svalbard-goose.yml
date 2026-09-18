@@ -24,7 +24,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install parser
-        run: python -m pip install --disable-pip-version-check pandas numpy scikit-learn scipy requests
+        run: python -m pip install --disable-pip-version-check pandas numpy scikit-learn scipy requests statsmodels
 
       - name: Download public Movebank Data Repository bitstreams
         run: |
@@ -49,6 +49,9 @@ jobs:
       - name: Reconstruct 1982-2011 spring onset from public daily temperature
         run: python analysis/movement_phenology/stage3_svalbard_goose_power_gdd.py
 
+      - name: Fit direct Svalbard goose phase-controller models
+        run: python analysis/movement_phenology/stage3_svalbard_goose_controller.py
+
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-stage3-svalbard-goose-source
@@ -64,4 +67,10 @@ jobs:
             outputs/movement_phenology/stage3_svalbard_goose_power_predictability.csv
             outputs/movement_phenology/stage3_svalbard_goose_power_anchor_validation.csv
             outputs/movement_phenology/stage3_svalbard_goose_power_gdd_receipt.json
+            outputs/movement_phenology/stage3_svalbard_goose_region_visits.csv
+            outputs/movement_phenology/stage3_svalbard_goose_transitions.csv
+            outputs/movement_phenology/stage3_svalbard_goose_controller_by_stage.csv
+            outputs/movement_phenology/stage3_svalbard_goose_stage_descriptives.csv
+            outputs/movement_phenology/stage3_svalbard_goose_controller_receipt.json
+            outputs/movement_phenology/stage3_svalbard_goose_controller_*_summary.txt
           if-no-files-found: error
