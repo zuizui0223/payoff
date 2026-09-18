@@ -42,14 +42,25 @@ jobs:
       - name: Print Stage-1 receipt
         run: |
           cat outputs/movement_phenology/stage1_summary.csv
-          head -n 12 outputs/movement_phenology/stage1_gam_curve.csv
+          cat outputs/movement_phenology/stage1_quadratic_raw.csv
+          cat outputs/movement_phenology/stage1_quadratic_centered.csv
+          cat outputs/movement_phenology/stage1_gam_receipts.csv
+          cat outputs/movement_phenology/stage1_gam_minima.csv
+          cat outputs/movement_phenology/stage1_checkpoints.csv
 
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-stage1
           path: |
             outputs/movement_phenology/stage1_summary.csv
-            outputs/movement_phenology/stage1_gam_curve.csv
+            outputs/movement_phenology/stage1_gam_curves.csv
+            outputs/movement_phenology/stage1_gam_minima.csv
+            outputs/movement_phenology/stage1_checkpoints.csv
+            outputs/movement_phenology/stage1_quadratic_raw.csv
+            outputs/movement_phenology/stage1_quadratic_centered.csv
+            outputs/movement_phenology/stage1_gam_receipts.csv
             outputs/movement_phenology/stage1_gam_summary.txt
+            outputs/movement_phenology/stage1_centered_gam_summary.txt
             outputs/movement_phenology/stage1_quadratic_summary.txt
+            outputs/movement_phenology/stage1_centered_quadratic_summary.txt
           if-no-files-found: error
