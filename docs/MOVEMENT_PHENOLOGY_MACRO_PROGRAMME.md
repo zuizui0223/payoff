@@ -175,20 +175,20 @@ These source rules should be inherited before adding PAYOFF-B-specific filters.
 
 ## Stage 2 — global bird macroecology
 
-Scale the same estimand globally using eBird Status and Trends weekly abundance surfaces and satellite land-surface phenology.
+Use eBird Status and Trends weekly abundance surfaces for a **cross-sectional global replication** of the timescale-matching pattern, not for interannual climate-anomaly inference. The current Status product represents a modelled full annual cycle for a version year rather than the 16-year annual panel used in Stage 1.
 
 Candidate stack:
 
 ~~~text
-animal front:
+animal timing/front:
   eBird Status and Trends weekly relative abundance / proportion-population
-  52 weeks, 3/9/27 km products
-  thousands of globally modelled bird species
+  52 weeks, native 3 km plus 9/27 km products
+  2,980 globally modelled species in the current Status release
 
-environment front:
+environment timing/front:
   MODIS MCD12Q2 v6.1
-  500 m annual green-up / midpoint / peak / senescence
-  2001–2024
+  500 m yearly phenology; build a multi-year climatological timing surface
+  Greenup / MidGreenup / Peak / Senescence
 
 traits:
   AVONET
@@ -196,7 +196,9 @@ traits:
   migration-distance / wintering-latitude sources where licensing permits
 ~~~
 
-Compute weekly animal front velocities and local phenology-front velocities on a common equal-area grid, then repeat H1–H3 across flyways, migratory strategies, and trophic guilds.
+For each migratory species, estimate a spring timing surface from the weekly abundance cube, derive the migration-front velocity as the inverse spatial gradient of that timing surface, derive the vegetation-front velocity from the climatological MCD12Q2 timing surface, and compute the same speed ratio and directional alignment on a common equal-area grid.
+
+Stage 2 tests **spatial and cross-species replication** of H1/H2 across flyways, migratory strategies, and trophic guilds. It does not test H3 year-to-year climate tracking. A historical-eBird reconstruction or repeated individual tracking is required for that longitudinal question.
 
 ## Stage 3 — individual-level cross-taxon validation
 
