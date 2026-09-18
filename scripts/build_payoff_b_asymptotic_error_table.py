@@ -94,7 +94,7 @@ def render_csv(report: dict) -> str:
         "strong_max_F_relative_error_pct",
     ]
     out = StringIO()
-    writer = csv.DictWriter(out, fieldnames=fieldnames, lineterminator="\\n")
+    writer = csv.DictWriter(out, fieldnames=fieldnames, lineterminator=chr(10))
     writer.writeheader()
     for row in report["rows"]:
         writer.writerow({k: f"{row[k]:.15g}" for k in fieldnames})
@@ -142,14 +142,14 @@ def render_markdown(report: dict) -> str:
         "There is **no empirical calibration** in this audit. The nine `v` values are registered numerical checkpoints, not biological observations and not evidence for the uniqueness theorem. The exact theorem covers every `v>0`; the grid only makes the endpoint approximations quantitatively inspectable.",
         "",
     ]
-    return "\\n".join(lines)
+    return chr(10).join(lines)
 
 
 def main() -> None:
     report = build_report()
     CSV_PATH.write_text(render_csv(report), encoding="utf-8")
     DOC_PATH.write_text(render_markdown(report), encoding="utf-8")
-    JSON_PATH.write_text(json.dumps(report, indent=2) + "\\n", encoding="utf-8")
+    JSON_PATH.write_text(json.dumps(report, indent=2) + chr(10), encoding="utf-8")
 
 
 if __name__ == "__main__":
