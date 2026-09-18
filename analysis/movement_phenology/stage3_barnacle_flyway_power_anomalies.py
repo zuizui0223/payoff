@@ -159,15 +159,27 @@ def main():
             if len(d) < 4:
                 continue
             r, p = pearsonr(d["a"], d["b"])
-            slope = float(np.polyfit(d["a"], d["b"], 1)[0])
+            slope, intercept = [
+                float(x) for x in np.polyfit(d["a"], d["b"], 1)
+            ]
+            pred = intercept + slope * d["a"].to_numpy()
+            innovation = d["b"].to_numpy() - pred
+            innovation_sd = float(
+                np.std(innovation, ddof=2)
+            ) if len(d) > 2 else np.nan
+            destination_sd = float(np.std(d["b"], ddof=1))
             pair_rows.append(
                 {
                     "region_a": str(a),
                     "region_b": str(b),
                     "n_years": int(len(d)),
                     "phenology_correlation_r": float(r),
+                    "phenology_predictability_r2": float(r * r),
                     "correlation_p": float(p),
                     "anomaly_slope_ols": slope,
+                    "anomaly_intercept_ols": intercept,
+                    "environmental_innovation_sd_days": innovation_sd,
+                    "destination_anomaly_sd_days": destination_sd,
                 }
             )
     pd.DataFrame(pair_rows).to_csv(
