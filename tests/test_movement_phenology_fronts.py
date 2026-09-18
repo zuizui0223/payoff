@@ -5,6 +5,8 @@ import pytest
 from analysis.movement_phenology.fronts import (
     compare_timing_fronts,
     front_velocity_from_timing_gradient,
+    normalized_phase_drift_from_speed_ratio,
+    normalized_phase_drift_from_timing_gradients,
 )
 
 
@@ -53,3 +55,23 @@ def test_opposite_front_directions_are_penalized():
 def test_zero_gradient_is_not_a_finite_front():
     with pytest.raises(ValueError):
         front_velocity_from_timing_gradient(0, 0)
+
+
+
+def test_constant_phase_offset_has_zero_spatial_phase_drift():
+    # A constant timing offset changes intercept, not the timing gradient.
+    d = normalized_phase_drift_from_timing_gradients(0.02, 0.01, 0.02, 0.01)
+    assert d == pytest.approx(0)
+
+
+def test_parallel_twofold_faster_animal_front_has_half_gradient_drift():
+    # c_animal/c_env = 2, so grad(T_animal)=0.5*grad(T_env).
+    d_grad = normalized_phase_drift_from_timing_gradients(0.01, 0, 0.02, 0)
+    d_ratio = normalized_phase_drift_from_speed_ratio(2.0, 1.0)
+    assert d_grad == pytest.approx(0.5)
+    assert d_ratio == pytest.approx(0.5)
+
+
+def test_phase_drift_penalizes_opposite_equal_speed_fronts():
+    d = normalized_phase_drift_from_speed_ratio(1.0, -1.0)
+    assert d == pytest.approx(2.0)
