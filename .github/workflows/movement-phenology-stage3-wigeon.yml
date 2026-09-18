@@ -43,6 +43,9 @@ jobs:
       - name: Inventory Zenodo wigeon study subset
         run: python analysis/movement_phenology/stage3_wigeon_source_probe.py
 
+      - name: Extract published HMM and staging code contract
+        run: python analysis/movement_phenology/stage3_wigeon_supplement_probe.py
+
       - name: Discover original Movebank repository bitstreams
         run: python analysis/movement_phenology/stage3_wigeon_movebank_discover.py
 
