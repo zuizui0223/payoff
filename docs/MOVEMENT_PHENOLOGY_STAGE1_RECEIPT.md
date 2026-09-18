@@ -177,3 +177,47 @@ The macro programme advances only if the order-one minimum becomes reproducible 
 2. **individual cross-taxon replication:** Movebank trajectories × remotely sensed phenology, testing movement/green-wave matching without relying on population-front timing surfaces.
 
 A global average alone is no longer the target. The target is an explanatory model for **when timescale matching emerges**.
+
+
+## Expanded moderator audit — route geometry and predictability
+
+The species-level audit was expanded beyond HWI, body mass, overwinter latitude, and mean green-up sensitivity to include:
+
+```text
+mean animal/environment directional alignment
+bird-route directional concentration
+green-up directional concentration
+median within-cell interannual SD of green-up date
+median within-cell interannual SD of bird arrival date
+```
+
+Across the 41 species with fitted quadratic diagnostics, none of these candidate moderators explains the presence, curvature, or location of a finite internal minimum after multiple-testing correction.
+
+```text
+smallest nominal p = 0.1112
+smallest BH-FDR = 0.9828
+```
+
+The smallest nominal association is between green-up directional concentration and fitted curvature:
+
+```text
+beta per 1 SD = -0.0402
+p = 0.111
+BH-FDR = 0.983
+```
+
+The corresponding logistic association with whether a species has an internal finite minimum is also unsupported:
+
+```text
+odds ratio per 1 SD = 0.617
+p = 0.171
+BH-FDR = 0.983
+```
+
+Thus Stage 1 does not identify a convincing species-level intrinsic trait, route-direction summary, or simple phenological-predictability variable that explains why an order-one minimum appears in some species and not others.
+
+### Consequence for the programme
+
+This negative result changes the next step. Further fishing among generic species traits inside the same 55-species dataset is low-value. The priority becomes **independent replication across movement systems with different resource coupling and route structure**, where the mechanism can be tested rather than inferred from a small number of heterogeneous species vertices.
+
+The Stage-2 global bird analysis remains useful for estimating the distribution of phase-locking geometry, but Stage 3 individual tracking becomes equally important for identifying mechanism.
