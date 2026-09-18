@@ -36,12 +36,12 @@ jobs:
           sha256sum external/barnacle_goose_greenland/gps.csv external/barnacle_goose_barents/gps.csv
       - name: Reconstruct Greenland stopovers
         run: |
-          python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
+          python -m analysis.movement_phenology.stage3_barnacle_other_flyways \
             --flyway greenland \
             --gps external/barnacle_goose_greenland/gps.csv
       - name: Reconstruct Barents stopovers
         run: |
-          python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
+          python -m analysis.movement_phenology.stage3_barnacle_other_flyways \
             --flyway barents \
             --gps external/barnacle_goose_barents/gps.csv
       - uses: actions/upload-artifact@v4
