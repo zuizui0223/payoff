@@ -54,16 +54,40 @@ def parse_args():
 def main():
     args = parse_args()
     gps = read_any(Path(args.gps))
-    required = {
-        "timestamp": "time",
-        "location-lat": "lat",
-        "location-long": "lon",
-        "individual-local-identifier": "individual_id",
+    candidates = {
+        "time": ["timestamp", "eventDate", "eventdate"],
+        "lat": ["location-lat", "decimalLatitude", "latitude"],
+        "lon": ["location-long", "decimalLongitude", "longitude"],
+        "individual_id": [
+            "individual-local-identifier",
+            "organismID",
+            "individual",
+            "individual_id",
+        ],
     }
-    missing = [c for c in required if c not in gps.columns]
-    if missing:
-        raise SystemExit(f"Missing GPS columns {missing}; columns={list(gps.columns)}")
-    gps = gps.rename(columns=required)
+
+    rename = {}
+    for target, choices in candidates.items():
+        hit = None
+        lowered = {str(c).lower(): c for c in gps.columns}
+        for choice in choices:
+            if choice.lower() in lowered:
+                hit = lowered[choice.lower()]
+                break
+        if hit is None:
+            for c in gps.columns:
+                lc = str(c).lower()
+                if any(choice.lower() in lc for choice in choices):
+                    hit = c
+                    break
+        if hit is None:
+            raise SystemExit(
+                f"Missing {target} column; candidates={choices}; "
+                f"columns={list(gps.columns)}"
+            )
+        rename[hit] = target
+
+    gps = gps.rename(columns=rename)
     gps["time"] = pd.to_datetime(gps["time"], errors="coerce", utc=True)
     gps["lat"] = pd.to_numeric(gps["lat"], errors="coerce")
     gps["lon"] = pd.to_numeric(gps["lon"], errors="coerce")
