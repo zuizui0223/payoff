@@ -169,6 +169,8 @@ at least 5 neighbouring cells to estimate a velocity
 velocity magnitudes > 3000 km/day set to missing
 ~~~
 
+The source metadata also call vArrAng/vGrAng radians, but the generating script stores rad2deg() output in those columns. Stage 1 therefore converts their degree difference to radians inside cos().
+
 These source rules should be inherited before adding PAYOFF-B-specific filters.
 
 ## Stage 2 — global bird macroecology
