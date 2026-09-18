@@ -25,21 +25,32 @@ jobs:
       - name: Discover Zenodo processed tracking file
         run: python analysis/movement_phenology/stage3_barents_zenodo_discover.py
 
-      - name: Download processed hourly tracking release
+      - name: Record processed-data access gate
         run: |
-          mkdir -p external/barnacle_processed
-          curl --fail --location --retry 4             'https://zenodo.org/records/10214988/files/ProcessedTrackingData_MakingBeterUseOfTrackingData_2023.csv?download=1'             --output external/barnacle_processed/ProcessedTrackingData_MakingBeterUseOfTrackingData_2023.csv
-          test -s external/barnacle_processed/ProcessedTrackingData_MakingBeterUseOfTrackingData_2023.csv
-          ls -lh external/barnacle_processed/ProcessedTrackingData_MakingBeterUseOfTrackingData_2023.csv
+          python - <<'PY'
+          import json, pathlib, requests
+          out = pathlib.Path("outputs/movement_phenology")
+          out.mkdir(parents=True, exist_ok=True)
+          url = "https://datadryad.org/api/v2/files/2963968"
+          r = requests.get(url, headers={"Accept":"application/json"}, timeout=30)
+          receipt = {
+              "dryad_doi": "10.5061/dryad.zw3r228fd",
+              "file_id": 2963968,
+              "filename": "ProcessedTrackingData_MakingBeterUseOfTrackingData_2023.csv",
+              "metadata_http_status": r.status_code,
+              "metadata": r.json() if r.ok else r.text[:1000],
+              "download_gate": "Dryad Files API download currently requires bearer authentication; use original Movebank/METS acquisition for automated direct-controller reconstruction.",
+          }
+          (out/"stage3_barents_processed_access_gate.json").write_text(
+              json.dumps(receipt, indent=2) + "\n"
+          )
+          print(json.dumps(receipt, indent=2))
+          PY
 
-      - name: Inventory Barents and Svalbard subsets
-        run: python analysis/movement_phenology/stage3_barents_processed_source_probe.py
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-barents-zenodo-discovery
           path: |
             outputs/movement_phenology/stage3_barents_zenodo_discovery.json
-            outputs/movement_phenology/stage3_barents_processed_source_receipt.json
-            outputs/movement_phenology/stage3_barents_processed_tracking_subset.csv
-            outputs/movement_phenology/stage3_svalbard_processed_tracking_subset.csv
+            outputs/movement_phenology/stage3_barents_processed_access_gate.json
           if-no-files-found: error
