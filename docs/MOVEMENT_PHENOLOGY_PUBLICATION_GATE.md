@@ -98,3 +98,32 @@ Until then, do not label the project "Ecology Letters ready."
 The macro programme is never a required revision for the active Theoretical Ecology PAYOFF-B1 short paper.
 
 PAYOFF-B1 can be submitted independently while the macro programme develops.
+
+
+## Gate F — population versus taxonomic replication
+
+The direct-controller population/route gate is now distinct from the
+cross-taxon generality gate.
+
+Current direct evidence:
+
+~~~text
+mule deer                    PASS
+Svalbard barnacle goose      PASS
+Greenland barnacle goose     PASS
+Barents barnacle goose       PASS
+~~~
+
+This is four direct populations/routes but only two taxa.
+
+Therefore:
+
+~~~text
+population/route replication: PASS
+cross-taxon replication:      OPEN
+~~~
+
+A third directly reconstructed taxon is required before claiming that the
+phase-control coordinates generalize beyond ungulates plus one goose species.
+
+Eurasian wigeon is the active third-taxon target.
