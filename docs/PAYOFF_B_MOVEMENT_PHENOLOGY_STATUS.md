@@ -527,3 +527,151 @@ cross-taxon generality:       OPEN
 ~~~
 
 The Eurasian-wigeon reconstruction is now the critical third-taxon gate.
+
+
+## Update — third taxon direct phase retention achieved
+
+The Eurasian-wigeon lane has passed its preregistered movement and environmental gates.
+
+### Movement reconstruction
+
+~~~text
+published:
+  35 spring trajectories
+  31 individuals
+  median endpoint distance 1899 km
+  median migration speed 48.2 km/day
+
+reconstructed:
+  33 trajectories
+  29 individuals
+  median endpoint distance 1911 km
+  published-summary speed analogue 56.37 km/day
+~~~
+
+All registered movement gates pass.
+
+### Environmental validation
+
+~~~text
+reconstructed staging events with TGS = 256 / 256
+
+arrival phase:
+  reconstructed median = 20.93 d
+  published median     = 22.5 d
+
+reconstructed Q1/Q3 = 8.95 / 33.45 d
+published Q1/Q3     = 13.0 / 35.3 d
+~~~
+
+Event count, median-phase and IQR-overlap gates all pass.
+
+### Preregistered phase-retention test
+
+~~~text
+N transitions = 224
+N individuals = 28
+
+lambda = 0.85994
+SE = 0.04509
+p versus no-correction lambda=1 = 0.00190
+
+|lambda| = 0.860
+correction strength = 0.140
+~~~
+
+Thus the primary preregistered prediction
+
+\[
+\lambda<1
+\]
+
+is supported.
+
+The stronger exploratory forecast
+
+\[
+|\lambda|<0.75
+\]
+
+is **not** supported.
+
+### Wigeon does not replicate the same actuator
+
+~~~text
+stopover slope:
+  -0.00014 day/day
+  p = 0.972
+
+travel-speed gain:
+  +0.00109 per phase day
+  p = 0.197
+~~~
+
+Therefore wigeon supplies direct **phase-retention** replication but not direct evidence for the stopover / speed feedback actuator found in mule deer and barnacle geese.
+
+### Direct gate status
+
+~~~text
+mule deer:
+  PASS
+
+Svalbard barnacle goose:
+  PASS
+
+Greenland barnacle goose:
+  PASS
+
+Barents barnacle goose:
+  PASS
+
+Eurasian wigeon:
+  PASS
+~~~
+
+This yields:
+
+~~~text
+population / route replication:
+  PASS
+
+three-taxon direct phase-retention coordinate:
+  PASS
+
+three-taxon common reactive actuator:
+  OPEN
+~~~
+
+The current three taxa are:
+
+~~~text
+Odocoileus hemionus
+Branta leucopsis
+Mareca penelope
+~~~
+
+### Updated biological conclusion
+
+The macro result is no longer:
+
+> all successful migrants strongly reset phase error using the same feedback rule.
+
+Instead:
+
+> **phenological migration can be compared through a common phase-retention coordinate, but systems differ strongly in how much error they retain and which behavioral or informational channel produces the observed phase dynamics.**
+
+The wigeon result is especially useful because it prospectively confirms weak phase contraction while falsifying the stronger near-reset forecast.
+
+## Current publication state
+
+The GEB development lane is now active.
+
+Remaining high-value work is no longer "find a third direct taxon." It is:
+
+1. quantify the information-versus-retention plane without pseudoreplication;
+2. add a harmonized disturbance / control-permeability test;
+3. freeze cross-system figures;
+4. update the manuscript Results and Discussion;
+5. complete the flagship prior-art novelty audit.
+
+PAYOFF-B1 remains independent and frozen for its Theoretical Ecology submission lane.
