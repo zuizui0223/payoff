@@ -407,6 +407,36 @@ Stages 2-6 already provide a reproducible route to very large run counts.
 Finite-N evolutionary drift and explicit landscapes are the next scientific
 upgrades rather than prerequisites for basic computational scaling.
 
+## Frozen synthetic evidence
+
+The first model results are frozen in
+[../docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md](../docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md).
+
+The retained findings are:
+
+1. coordination barriers occupy a substantial region of the declared synthetic
+   ecological grid;
+2. their demographic consequences are usually small away from persistence
+   transitions;
+3. an independent higher-replication demographic rerun supports a
+   **demographic visibility window**, not the large cell-level effects seen in
+   the initial pilot;
+4. finite-N drift can cross a deterministic coordination barrier;
+5. in the sampled drift regime, crossing does not improve long-run mean joint
+   growth because drift also broadens occupancy into lower-payoff states.
+
+The resulting hierarchy is therefore
+
+    coordinated value
+    != local accessibility
+    != demographic visibility
+    != finite-N barrier crossing
+    != long-run payoff improvement.
+
+That sequence is now the main theoretical reason to keep optimization,
+accessibility, persistence, and stochastic evolutionary occupancy as separate
+estimands.
+
 ## Claim ceiling
 
 The current implementation supports mechanism exploration and code-level
