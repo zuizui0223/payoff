@@ -2,6 +2,7 @@ from math import isclose
 
 from src.moving_climate_landscape_2d import (
     MovingLandscape2DScenario,
+    build_landscape_2d_geometry,
     gaussian_initial_distribution_2d,
     grid_dispersal_2d,
     optimize_matched_2d_strategy,
@@ -309,3 +310,28 @@ def test_offset_gap_places_passage_away_from_climate_axis():
     assert quality[
         scenario.index(barrier_x, offset_center)
     ] > 0.0
+
+
+def test_cached_2d_geometry_is_numerically_identical():
+    scenario = MovingLandscape2DScenario(
+        width=15,
+        height=9,
+        climate_velocity=0.02,
+        max_abs_phenology_shift=2.0,
+        steps=40,
+        burn_in=10,
+    )
+    strategy = TrackingStrategy(0.4, 0.2)
+    direct = simulate_moving_landscape_2d_pair(
+        strategy,
+        strategy,
+        scenario,
+    )
+    geometry = build_landscape_2d_geometry(scenario)
+    cached = simulate_moving_landscape_2d_pair(
+        strategy,
+        strategy,
+        scenario,
+        _geometry=geometry,
+    )
+    assert cached == direct
