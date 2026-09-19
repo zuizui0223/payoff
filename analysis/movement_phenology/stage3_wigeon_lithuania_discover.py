@@ -26,7 +26,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 UA = {"User-Agent": "payoff-wigeon-lithuania-discovery/1.0"}
 
 
-def get_json(url: str, timeout=45):
+def get_json(url: str, timeout=12):
     r = requests.get(url, headers=UA, timeout=timeout)
     r.raise_for_status()
     return r.json(), str(r.url)
@@ -67,16 +67,13 @@ def main():
 
     queries = [
         TITLE,
-        f'"{TITLE}"',
         "Dabbling duck migration Lithuania",
-        "European Wigeon Lithuania 2019",
     ]
     item_uuids = set()
 
     for query_text in queries:
         for field_query in (
             query_text,
-            f"dc.title:{query_text}",
             f'dc.title:"{query_text}"',
         ):
             try:
