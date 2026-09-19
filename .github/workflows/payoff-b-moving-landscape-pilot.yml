@@ -1,0 +1,42 @@
+name: payoff-b moving landscape pilot
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-migration-phenology-20260919
+    paths:
+      - .github/workflows/payoff-b-moving-landscape-pilot.yml
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run explicit moving-climate landscape pilot
+        run: >
+          python scripts/migration_phenology_moving_landscape.py
+          --climate-velocities 0.01,0.03,0.05,0.08
+          --phenology-limits 0,1,2,4
+          --patches 41
+          --patch-spacing 1
+          --spatial-gradient 0.20
+          --carrying-capacity 1000
+          --density-coefficient 0.30
+          --baseline-growth 0.30
+          --interaction-strength 0.25
+          --migration-cost 0.03
+          --phenology-cost 0.03
+          --steps 160
+          --burn-in 40
+          --max-migration-rate 1.0
+          --max-phenology-rate 1.0
+          --migration-points 9
+          --phenology-points 9
+          --output outputs/payoff_b_moving_landscape_pilot.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-moving-landscape-pilot
+          path: outputs/payoff_b_moving_landscape_pilot.csv
