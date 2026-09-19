@@ -116,6 +116,8 @@ class LandscapePairResult:
     strategy_b: TrackingStrategy
     mean_log_growth_a: float
     mean_log_growth_b: float
+    mean_realized_log_growth_a: float
+    mean_realized_log_growth_b: float
     final_abundance_a: float
     final_abundance_b: float
     minimum_abundance_a: float
@@ -343,7 +345,7 @@ def _one_species_generation(
     demand: float,
     interaction_sq: float,
     scenario: MovingLandscapeScenario,
-) -> tuple[tuple[float, ...], float]:
+) -> tuple[tuple[float, ...], float, float]:
     total = sum(abundance)
     density_penalty = (
         scenario.density_coefficient
@@ -353,9 +355,10 @@ def _one_species_generation(
     cost = architecture_cost(strategy, parameters)
 
     reproduced = []
-    weighted_growth_numerator = 0.0
+    weighted_low_density_numerator = 0.0
+    weighted_realized_numerator = 0.0
     if total <= 0.0:
-        return tuple(0.0 for _ in abundance), 0.0
+        return tuple(0.0 for _ in abundance), 0.0, 0.0
 
     for value, position in zip(abundance, scenario.positions):
         mismatch = (
@@ -363,7 +366,7 @@ def _one_species_generation(
             - scenario.spatial_gradient * position
             - scenario.phenology_scale * phenology_shift
         )
-        local_growth = (
+        low_density_growth = (
             parameters.baseline_growth
             - cost
             - 0.5
@@ -373,16 +376,23 @@ def _one_species_generation(
             - 0.5
             * parameters.interaction_strength
             * interaction_sq
-            - density_penalty
         )
-        weighted_growth_numerator += value * local_growth
-        reproduced.append(value * exp(local_growth))
+        realized_growth = low_density_growth - density_penalty
+        weighted_low_density_numerator += (
+            value * low_density_growth
+        )
+        weighted_realized_numerator += value * realized_growth
+        reproduced.append(value * exp(realized_growth))
 
     dispersed = reflect_nearest_neighbor_dispersal(
         reproduced,
         strategy.migration_rate,
     )
-    return dispersed, weighted_growth_numerator / total
+    return (
+        dispersed,
+        weighted_low_density_numerator / total,
+        weighted_realized_numerator / total,
+    )
 
 
 def simulate_moving_landscape_pair(
@@ -417,6 +427,8 @@ def simulate_moving_landscape_pair(
 
     sum_growth_a = 0.0
     sum_growth_b = 0.0
+    sum_realized_growth_a = 0.0
+    sum_realized_growth_b = 0.0
     sum_centroid_a = 0.0
     sum_centroid_b = 0.0
     sum_phenology_a = 0.0
@@ -465,7 +477,7 @@ def simulate_moving_landscape_pair(
             + phenology_gap * phenology_gap
         )
 
-        abundance_a, growth_a = _one_species_generation(
+        abundance_a, growth_a, realized_growth_a = _one_species_generation(
             abundance_a,
             strategy_a,
             scenario.species_a,
@@ -474,7 +486,7 @@ def simulate_moving_landscape_pair(
             interaction_sq,
             scenario,
         )
-        abundance_b, growth_b = _one_species_generation(
+        abundance_b, growth_b, realized_growth_b = _one_species_generation(
             abundance_b,
             strategy_b,
             scenario.species_b,
@@ -516,6 +528,8 @@ def simulate_moving_landscape_pair(
 
             sum_growth_a += growth_a
             sum_growth_b += growth_b
+            sum_realized_growth_a += realized_growth_a
+            sum_realized_growth_b += realized_growth_b
             sum_centroid_a += new_centroid_a
             sum_centroid_b += new_centroid_b
             sum_phenology_a += phenology_a
@@ -543,6 +557,12 @@ def simulate_moving_landscape_pair(
         strategy_b=strategy_b,
         mean_log_growth_a=sum_growth_a / observed,
         mean_log_growth_b=sum_growth_b / observed,
+        mean_realized_log_growth_a=(
+            sum_realized_growth_a / observed
+        ),
+        mean_realized_log_growth_b=(
+            sum_realized_growth_b / observed
+        ),
         final_abundance_a=final_a,
         final_abundance_b=final_b,
         minimum_abundance_a=minimum_a,
