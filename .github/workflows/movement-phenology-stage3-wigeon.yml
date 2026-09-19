@@ -35,11 +35,7 @@ jobs:
             pytest pandas numpy scipy requests statsmodels scikit-learn \
             beautifulsoup4 pyproj
 
-      - name: Try original Movebank ORIGINAL bundle
-        continue-on-error: true
-        run: python analysis/movement_phenology/stage3_wigeon_original_download.py
-
-      - name: Download public Zenodo raw GPS fallback
+      - name: Download public Zenodo hourly supplement-like union
         run: |
           mkdir -p external/wigeon
           curl --fail --location --retry 4 \
@@ -49,7 +45,7 @@ jobs:
           ls -lh external/wigeon/250823_LNU_dabbling_ducks_hourly.csv
           sha256sum external/wigeon/250823_LNU_dabbling_ducks_hourly.csv
 
-      - name: Normalize preferred wigeon source
+      - name: Normalize supplement-like wigeon source
         run: python analysis/movement_phenology/stage3_wigeon_source_probe.py
 
       - name: Extract published HMM and staging code contract
@@ -65,7 +61,6 @@ jobs:
         with:
           name: movement-phenology-stage3-wigeon
           path: |
-            outputs/movement_phenology/stage3_wigeon_original_movebank_receipt.json
             outputs/movement_phenology/stage3_wigeon_source_receipt.json
             outputs/movement_phenology/stage3_wigeon_individual_source_summary.csv
             outputs/movement_phenology/stage3_wigeon_raw_subset.csv
