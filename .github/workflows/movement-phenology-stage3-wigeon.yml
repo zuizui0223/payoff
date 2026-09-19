@@ -36,14 +36,7 @@ jobs:
             beautifulsoup4 pyproj
 
       - name: Download public Zenodo hourly supplement-like union
-        run: |
-          mkdir -p external/wigeon
-          curl --fail --location --retry 4 \
-            'https://zenodo.org/records/16940654/files/250823_LNU_dabbling_ducks_hourly.csv?download=1' \
-            --output external/wigeon/250823_LNU_dabbling_ducks_hourly.csv
-          test -s external/wigeon/250823_LNU_dabbling_ducks_hourly.csv
-          ls -lh external/wigeon/250823_LNU_dabbling_ducks_hourly.csv
-          sha256sum external/wigeon/250823_LNU_dabbling_ducks_hourly.csv
+        run: python analysis/movement_phenology/stage3_wigeon_zenodo_download.py
 
       - name: Normalize supplement-like wigeon source
         run: python analysis/movement_phenology/stage3_wigeon_source_probe.py
@@ -61,6 +54,7 @@ jobs:
         with:
           name: movement-phenology-stage3-wigeon
           path: |
+            outputs/movement_phenology/stage3_wigeon_zenodo_download.json
             outputs/movement_phenology/stage3_wigeon_source_receipt.json
             outputs/movement_phenology/stage3_wigeon_individual_source_summary.csv
             outputs/movement_phenology/stage3_wigeon_raw_subset.csv
