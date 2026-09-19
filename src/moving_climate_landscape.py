@@ -47,6 +47,7 @@ class MovingLandscapeScenario:
     carrying_capacity: float = 1000.0
     density_coefficient: float = 0.30
     extinction_threshold: float = 1.0
+    boundary_retention: float = 1.0
     steps: int = 160
     burn_in: int = 40
     species_a: SpeciesTrackingParameters = SpeciesTrackingParameters(
@@ -70,6 +71,7 @@ class MovingLandscapeScenario:
             "carrying_capacity",
             "density_coefficient",
             "extinction_threshold",
+            "boundary_retention",
         ):
             value = float(getattr(self, name))
             if not isfinite(value):
@@ -90,6 +92,8 @@ class MovingLandscapeScenario:
             raise ValueError("density_coefficient must be non-negative")
         if self.extinction_threshold < 0.0:
             raise ValueError("extinction_threshold must be non-negative")
+        if not 0.0 <= self.boundary_retention <= 1.0:
+            raise ValueError("boundary_retention must lie in [0,1]")
         if not isfinite(self.climate_velocity):
             raise ValueError("climate_velocity must be finite")
         if self.steps <= 0:
@@ -174,16 +178,30 @@ def dispersal_fraction(migration_rate: float) -> float:
     return -expm1(-migration_rate)
 
 
-def reflect_nearest_neighbor_dispersal(
+def nearest_neighbor_dispersal(
     abundance: tuple[float, ...] | list[float],
     migration_rate: float,
+    *,
+    boundary_retention: float = 1.0,
 ) -> tuple[float, ...]:
-    """Conservative nearest-neighbor dispersal with reflecting boundaries."""
+    """Nearest-neighbor dispersal with continuously tunable edge leakage.
+
+    boundary_retention=1 gives reflecting boundaries: all outward-moving edge
+    mass is returned to the boundary patch.
+
+    boundary_retention=0 gives absorbing/leaky boundaries: outward-moving edge
+    mass leaves the modeled landscape.
+
+    Intermediate values retain the declared fraction and lose the remainder.
+    Interior movement is always conservative.
+    """
 
     if len(abundance) < 2:
         raise ValueError("abundance must contain at least two patches")
     if any(value < 0.0 or not isfinite(value) for value in abundance):
         raise ValueError("abundance values must be finite and non-negative")
+    if not 0.0 <= boundary_retention <= 1.0:
+        raise ValueError("boundary_retention must lie in [0,1]")
 
     fraction = dispersal_fraction(migration_rate)
     if fraction == 0.0:
@@ -198,17 +216,29 @@ def reflect_nearest_neighbor_dispersal(
         left = 0.5 * moving
         right = 0.5 * moving
         if index == 0:
-            # Reflect the left-moving half back into the boundary patch.
-            out[index] += left
+            out[index] += boundary_retention * left
         else:
             out[index - 1] += left
 
         if index == len(abundance) - 1:
-            out[index] += right
+            out[index] += boundary_retention * right
         else:
             out[index + 1] += right
 
     return tuple(out)
+
+
+def reflect_nearest_neighbor_dispersal(
+    abundance: tuple[float, ...] | list[float],
+    migration_rate: float,
+) -> tuple[float, ...]:
+    """Backward-compatible reflecting-boundary dispersal wrapper."""
+
+    return nearest_neighbor_dispersal(
+        abundance,
+        migration_rate,
+        boundary_retention=1.0,
+    )
 
 
 def gaussian_initial_distribution(
@@ -384,9 +414,10 @@ def _one_species_generation(
         weighted_realized_numerator += value * realized_growth
         reproduced.append(value * exp(realized_growth))
 
-    dispersed = reflect_nearest_neighbor_dispersal(
+    dispersed = nearest_neighbor_dispersal(
         reproduced,
         strategy.migration_rate,
+        boundary_retention=scenario.boundary_retention,
     )
     return (
         dispersed,
@@ -668,6 +699,7 @@ def landscape_strategy_sweep(
                 carrying_capacity=scenario.carrying_capacity,
                 density_coefficient=scenario.density_coefficient,
                 extinction_threshold=scenario.extinction_threshold,
+                boundary_retention=scenario.boundary_retention,
                 steps=scenario.steps,
                 burn_in=scenario.burn_in,
                 species_a=scenario.species_a,
