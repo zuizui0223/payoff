@@ -407,6 +407,80 @@ Stages 2-6 already provide a reproducible route to very large run counts.
 Finite-N evolutionary drift and explicit landscapes are the next scientific
 upgrades rather than prerequisites for basic computational scaling.
 
+## Explicit moving-climate landscape
+
+The spatial extension now makes range tracking explicit rather than treating
+migration as a direct climate-equivalent displacement.
+
+Patches have fixed coordinates x_j. Environmental demand moves as
+
+    D_t = v t,
+
+and local mismatch for a lineage with phenology z is
+
+    e_j(t)
+    = D_t - g x_j - s z_t,
+
+where g converts spatial position into climate-equivalent units and s converts
+phenological shift into the same units.
+
+Spatial tracking emerges from two operations:
+
+1. local reproduction is higher in better matched patches;
+2. offspring disperse conservatively between neighboring patches.
+
+For migration parameter m, the per-generation nearest-neighbor dispersal
+fraction is
+
+    q_m = 1 - exp(-m).
+
+Reflecting boundaries conserve abundance under movement alone. Therefore a
+range centroid moves only through the combination of environmental selection
+and dispersal; the model does not push populations toward the moving climate
+optimum by construction.
+
+Phenology changes from the abundance-weighted residual mismatch with response
+
+    q_h = 1 - exp(-h),
+
+but is clipped to
+
+    |z| <= z_max.
+
+The phenological bound is biologically important. Without it, indefinite
+directional climate change could always be absorbed by indefinite calendar
+shift. With a finite seasonal window, phenological tracking can saturate and
+force additional tracking into spatial redistribution.
+
+For two interacting species the climate-equivalent interaction distance is
+
+    M^2
+    = [g(xbar_A-xbar_B)]^2
+      + [s(z_A-z_B)]^2.
+
+This preserves the previous nonspatial interaction geometry while allowing
+xbar to emerge from an explicit abundance distribution.
+
+The landscape layer therefore distinguishes four failure modes that were
+collapsed in the abstract model:
+
+    insufficient phenological response,
+    insufficient spatial redistribution,
+    interaction-axis mismatch,
+    and range-edge compression when the moving envelope approaches the
+    landscape boundary.
+
+The current implementation uses deterministic expected abundance with global
+density regulation. It is a spatial mechanism benchmark, not yet a
+fully stochastic patch birth-death metapopulation.
+
+The phase sweep is
+
+    python scripts/migration_phenology_moving_landscape.py
+
+and maps climate velocity x phenological shift limit to the best matched
+migration/phenology tracking architecture.
+
 ## Frozen synthetic evidence
 
 The first model results are frozen in
