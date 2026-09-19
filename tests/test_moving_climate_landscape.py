@@ -308,3 +308,40 @@ def test_landscape_persistence_frontier_reports_bracket_without_assuming_monoton
     assert second["max_persisted_velocity"] == 0.05
     assert second["first_failed_velocity_above"] is None
     assert second["monotone_persistence"] == 0
+
+
+def test_static_landscape_low_density_fitness_penalizes_costly_tracking():
+    parameters = SpeciesTrackingParameters(
+        interaction_strength=0.0,
+        migration_cost=0.05,
+        phenology_cost=0.05,
+        baseline_growth=0.30,
+    )
+    scenario = MovingLandscapeScenario(
+        patches=21,
+        climate_velocity=0.0,
+        max_abs_phenology_shift=2.0,
+        carrying_capacity=400.0,
+        density_coefficient=0.30,
+        steps=50,
+        burn_in=10,
+        species_a=parameters,
+        species_b=parameters,
+    )
+    zero = simulate_moving_landscape_pair(
+        TrackingStrategy(0.0, 0.0),
+        TrackingStrategy(0.0, 0.0),
+        scenario,
+    )
+    costly = simulate_moving_landscape_pair(
+        TrackingStrategy(0.0, 0.8),
+        TrackingStrategy(0.0, 0.8),
+        scenario,
+    )
+
+    assert zero.mean_log_growth_a > costly.mean_log_growth_a
+    assert zero.mean_log_growth_b > costly.mean_log_growth_b
+    assert (
+        costly.mean_realized_log_growth_a
+        != costly.mean_log_growth_a
+    )
