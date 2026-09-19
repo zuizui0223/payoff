@@ -31,6 +31,8 @@ import numpy as np
 import pandas as pd
 import shapefile
 from shapely.geometry import Point, shape as shapely_shape
+from shapely.ops import transform as shapely_transform
+from pyproj import CRS, Transformer
 import statsmodels.formula.api as smf
 
 
@@ -87,7 +89,17 @@ def extract_nested_shapefiles(tmp: Path):
     return paths
 
 
-def read_polygon(shp_path: Path):
+def read_crs(shp_path: Path) -> CRS:
+    prj_path = shp_path.with_suffix(".prj")
+    if not prj_path.exists():
+        raise ValueError(f"Missing PRJ for {shp_path}")
+    wkt = prj_path.read_text(encoding="utf-8", errors="ignore").strip()
+    if not wkt:
+        raise ValueError(f"Empty PRJ for {shp_path}")
+    return CRS.from_wkt(wkt)
+
+
+def read_polygon(shp_path: Path, target_crs: CRS):
     r = shapefile.Reader(str(shp_path))
     geoms = [shapely_shape(s.__geo_interface__) for s in r.shapes()]
     if not geoms:
@@ -95,6 +107,13 @@ def read_polygon(shp_path: Path):
     geom = geoms[0]
     for g in geoms[1:]:
         geom = geom.union(g)
+
+    source_crs = read_crs(shp_path)
+    if source_crs != target_crs:
+        transformer = Transformer.from_crs(
+            source_crs, target_crs, always_xy=True
+        )
+        geom = shapely_transform(transformer.transform, geom)
     return geom
 
 
@@ -336,9 +355,10 @@ def main():
     with tempfile.TemporaryDirectory() as td:
         paths = extract_nested_shapefiles(Path(td))
         gps = read_gps(paths["gps"])
+        gps_crs = read_crs(paths["gps"])
         footprints = {
-            "small": read_polygon(paths["small"]),
-            "large": read_polygon(paths["large"]),
+            "small": read_polygon(paths["small"], gps_crs),
+            "large": read_polygon(paths["large"], gps_crs),
         }
         steps = add_steps(gps, footprints)
 
@@ -429,6 +449,8 @@ def main():
     receipt = {
         "analysis": "industrial_mule_deer_control_permeability_v1",
         "source": "Aikens et al. 2022 Dryad version 198581",
+        "gps_crs": gps_crs.to_string(),
+        "gps_crs_wkt_name": gps_crs.name,
         "gps_points": int(len(gps)),
         "gps_individual_years": int(gps["AID_Year"].nunique()),
         "gps_animals": int(gps["animal_id"].nunique()),
