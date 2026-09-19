@@ -1,201 +1,284 @@
-# Monotone phase-error feedback generates phenological phase locking
+# Monotone phase-error feedback and phenological phase locking
 
-Status: PAYOFF-B empirical/theoretical extension. This result is **not** part of the frozen active theorem paper and is not yet claimed as literature-novel.
+Status: PAYOFF-B empirical/theoretical extension. This result is **not** part of the frozen active PAYOFF-B1 theorem paper. The stability algebra is elementary dynamical-systems/control theory and is not claimed as mathematically novel by itself.
 
 ## Setup
 
-Let route position be (s), and let the environmental phenology front move locally at positive speed (c_e).
+Let route position be \(s\), and let the environmental phenology front move locally at positive speed \(c_e\).
 
 Define phenological phase error
 
-[
+\[
 E(s)=T_a(s)-T_e(s),
-]
+\]
 
-where positive (E) means the animal is late relative to the environmental wave and negative (E) means it is early.
+where positive \(E\) means the animal is late relative to the environmental wave and negative \(E\) means it is early.
 
 Let
 
-[
-u(E)=rac{c_a(E)}{c_e}>0
-]
+\[
+u(E)=\frac{c_a(E)}{c_e}>0
+\]
 
-be the animal/environment speed ratio as a function of current phase error.
+be animal movement speed relative to environmental-wave speed as a function of current phase error.
 
 Because
 
-[
-rac{dT_a}{ds}=rac{1}{c_a},qquad
-rac{dT_e}{ds}=rac{1}{c_e},
-]
+\[
+\frac{dT_a}{ds}=\frac{1}{c_a},
+\qquad
+\frac{dT_e}{ds}=\frac{1}{c_e},
+\]
 
-phase error obeys
+phase error obeys the kinematic identity
 
-[
-rac{dE}{ds}
+\[
+\frac{dE}{ds}
 =
-rac{1}{c_a(E)}-rac{1}{c_e}
+\frac{1}{c_a(E)}-\frac{1}{c_e}
 =
-rac{1/u(E)-1}{c_e}.
-	ag{1}
-]
+\frac{1/u(E)-1}{c_e}.
+\tag{1}
+\]
 
-This is a kinematic identity.
-
-## Theorem PF1 — monotone feedback phase locking
+## PF1 — monotone feedback gives a stable phase
 
 Assume:
 
-1. (c_e>0);
-2. (u(E)>0) is continuous and strictly increasing;
-3. there exists a unique (E_*) such that (u(E_*)=1).
+1. \(c_e>0\);
+2. \(u(E)>0\) is continuous and strictly increasing;
+3. there is a unique \(E_*\) such that \(u(E_*)=1\).
 
-Then (E_*) is a globally asymptotically stable equilibrium of Eq. (1).
+Then \(E_*\) is globally asymptotically stable under Eq. (1).
 
 ### Proof
 
-If (E>E_*), strict monotonicity gives (u(E)>1). Hence
+If \(E>E_*\), monotonicity gives \(u(E)>1\), hence
 
-[
-1/u(E)-1<0,
-]
+\[
+\frac{1}{u(E)}-1<0
+\]
 
-so (dE/ds<0): phase error moves downward toward (E_*).
+and therefore \(dE/ds<0\).
 
-If (E<E_*), then (u(E)<1), so
+If \(E<E_*\), then \(u(E)<1\), so
 
-[
-1/u(E)-1>0,
-]
+\[
+\frac{1}{u(E)}-1>0
+\]
 
-and (dE/ds>0): phase error moves upward toward (E_*).
+and \(dE/ds>0\).
 
-At (E=E_*), (u=1), so (dE/ds=0).
+At \(E=E_*\), \(u(E_*)=1\) and \(dE/ds=0\).
 
-Thus the vector field points toward (E_*) everywhere, making the equilibrium globally asymptotically stable. (square)
+Thus the vector field points toward \(E_*\) from both sides. \(\square\)
 
-The stable phase does not have to be zero. The animal can preserve a characteristic lead or lag while still being perfectly phase-locked.
+The stable phase does **not** have to be zero. A migrant can preserve a characteristic lead or lag while remaining phase-locked.
 
 ## Exponential feedback
 
-The mule-deer source-data reanalysis motivates the empirical form
+The mule-deer reanalysis motivates
 
-[
-u(E)=u_0 e^{kappa E}.
-	ag{2}
-]
+\[
+u(E)=u_0e^{\kappa E}.
+\tag{2}
+\]
 
-For (kappa>0), Eq. (2) is strictly increasing, so PF1 applies. The equilibrium is
+For \(\kappa>0\), PF1 applies. The crossing \(u=1\) occurs at
 
-[
-E_*=-rac{log u_0}{kappa}.
-	ag{3}
-]
-
-Therefore a fitted (u_0<1) does not imply chronic failure to track. It means the controller crosses (u=1) at a positive phase offset.
+\[
+E_*=-\frac{\log u_0}{\kappa}.
+\tag{3}
+\]
 
 Substituting Eq. (2) into Eq. (1),
 
-[
-rac{dE}{ds}
+\[
+\frac{dE}{ds}
 =
-rac{e^{-kappa(E-E_*)}-1}{c_e}.
-	ag{4}
-]
+\frac{e^{-\kappa(E-E_*)}-1}{c_e}.
+\tag{4}
+\]
 
-Near (E_*), let (arepsilon=E-E_*). Then
+Near \(E_*\), write
 
-[
-rac{darepsilon}{ds}
+\[
+\varepsilon=E-E_*.
+\]
+
+Then
+
+\[
+\frac{d\varepsilon}{ds}
 =
--rac{kappa}{c_e}arepsilon
-+O(arepsilon^2).
-]
+-\frac{\kappa}{c_e}\varepsilon
++O(\varepsilon^2).
+\tag{5}
+\]
 
-The local e-folding correction distance is
+Define the local e-folding correction distance
 
-[
-ell=rac{c_e}{kappa},
-	ag{5}
-]
+\[
+\ell=\frac{c_e}{\kappa}
+\tag{6}
+\]
 
-and the phase-error half-distance is
+and half-error distance
 
-[
-ell_{1/2}=rac{c_elog 2}{kappa}.
-	ag{6}
-]
-
-This gives a second empirical quantity beyond the equilibrium phase: how much migration distance is required to correct phase error.
-
-## Mule-deer calibration from published source data
-
-Using the official source-data workbook for Ortega et al. (2023), the current observational fit gives approximately
-
-[
-log u
+\[
+\ell_{1/2}
 =
-log(0.857)
-+
-0.01830,E_{m start},
-]
+\ell\log 2
+=
+\frac{c_e\log 2}{\kappa}.
+\tag{7}
+\]
 
-with a strongly positive (kappa).
+These quantify how much migration distance is required to correct a small phase perturbation.
 
-The implied crossover is
+## Common phase-retention coordinate
 
-[
-E_*approx 8.46 {m d},
-]
+The discrete STEP controller uses
 
-meaning the fitted relative speed crosses (u=1) when animals are about eight days behind the remotely sensed green-wave peak.
+\[
+E_{i+1}=a+\lambda E_i+\epsilon,
+\]
 
-Using the median annual fitted green-wave speed of approximately (5.61) km d(^{-1}), the local linearization gives
+where \(\lambda\) is phase retention after one ecologically meaningful correction opportunity.
 
-[
-ellapprox 307 {m km},
-qquad
-ell_{1/2}approx 213 {m km}.
-]
+The continuous controller has the same local coordinate.
 
-These are observational controller-scale summaries, not evolutionary constants.
+From Eq. (5), over a route segment of length \(L\),
 
-## Relationship to the original PAYOFF-B theorem
+\[
+\varepsilon(s+L)
+=
+e^{-L/\ell}\varepsilon(s).
+\]
 
-The original PAYOFF-B paper asks:
+Therefore the equivalent continuous-to-discrete phase-retention coefficient is
 
-> For a fixed movement rate in a periodic anti-phase environment, is there a unique rate maximizing long-run growth?
+\[
+\boxed{
+\lambda(L)=e^{-L/\ell}
+=
+\exp\left(-\frac{\kappa L}{c_e}\right)
+}
+\tag{8}
+\]
 
-PF1 asks a different question:
-
-> If movement rate itself changes in response to phenological phase error, when does the coupled animal–environment system restore a stable phase relationship?
+for a locally linear continuous controller.
 
 Thus:
 
 ~~~text
-PAYOFF-B1:
-fixed movement rate
--> unique growth optimum under exact anti-phase switching
+continuous SURF controller:
+  kappa, ell
+  -> lambda(L) after a declared route length L
 
-phase-feedback extension:
-state-dependent movement rate
--> stable phase locking under monotone error feedback
+discrete STEP controller:
+  lambda directly from arrival-to-arrival phase transfer
 ~~~
 
-The two results are complementary but should not be conflated.
+This is the common cross-system coordinate used by the empirical registry.
+
+Importantly, the observation interval must be declared. A continuous controller does not have one intrinsic \(\lambda\) independent of route length.
+
+## Mule-deer calibration
+
+Using the official source-data workbook for Ortega et al. (2023), the observational fit is approximately
+
+\[
+\log u
+=
+\log(0.857)
++
+0.01830\,E_{\rm start}.
+\]
+
+Thus
+
+\[
+\kappa\approx0.01830\ {\rm d}^{-1}
+\]
+
+and
+
+\[
+E_*\approx8.46\ {\rm d}.
+\]
+
+With median environmental-wave speed
+
+\[
+c_e\approx5.61\ {\rm km\,d}^{-1},
+\]
+
+the local correction scale is
+
+\[
+\ell\approx307\ {\rm km},
+\qquad
+\ell_{1/2}\approx213\ {\rm km}.
+\]
+
+The empirical start-to-end phase-compression regression independently gives a phase-retention estimate near
+
+\[
+\lambda\approx0.107.
+\]
+
+That empirical \(\lambda\) is preferred for direct registry comparison; Eq. (8) is the theoretical bridge explaining how a continuous controller generates a route-scale retention coefficient.
+
+## Relationship to PAYOFF-B1
+
+PAYOFF-B1 asks:
+
+> For a fixed movement rate in an exactly anti-phase periodic environment, is there a unique rate maximizing long-run growth?
+
+The phase-control extension asks:
+
+> When movement changes in response to realized phenological phase error, how much of that error persists after the next correction opportunity?
+
+The architecture is therefore:
+
+~~~text
+PAYOFF-B1
+fixed movement rate
+-> unique long-run growth optimum in a canonical periodic model
+
+movement–phenology extension
+state-dependent movement / stopover decisions
+-> phase-error retention and correction
+-> information + feedback uncertainty budget
+~~~
+
+The second is motivated by PAYOFF-B's timescale logic but is not a corollary of the fixed-rate theorem.
 
 ## Empirical predictions
 
-PF1 yields direct comparative predictions:
+The framework predicts:
 
-1. species or populations with (kappa>0) should correct phase error along migration;
-2. larger (kappa) should produce shorter correction distances;
-3. barriers that reduce the realized slope (du/dE) should weaken phase locking;
-4. strongly predictable routes can maintain stable nonzero (E_*);
-5. systems where animals modify the resource wave violate the exogenous-(c_e) interpretation and require coupled dynamics.
+1. stabilizing continuous controllers have \(\kappa>0\);
+2. stronger local correction gives shorter \(\ell\);
+3. stable discrete correction has \(|\lambda|<1\);
+4. different actuator architectures can share similar \(|\lambda|\);
+5. environmental predictability changes innovation variance and need not change \(\lambda\);
+6. barriers can weaken realized correction by increasing \(|\lambda|\);
+7. systems that modify their own resource wave require coupled animal–resource dynamics.
 
 ## Claim boundary
 
-PF1 is a kinematic stability result under an assumed monotone feedback law. It does not prove that the feedback evolved by natural selection, that (E_*) maximizes fitness, or that the exponential response is universal.
+Licensed:
 
-Before publication as a theorem contribution, its novelty must be checked against migration-control, optimal-foraging, green-wave surfing, and pursuit/tracking theory.
+- Eq. (1) is a kinematic identity;
+- monotone \(u(E)\) with one unit crossing produces a stable phase under the stated model;
+- Eq. (8) maps a local linear continuous controller to phase retention over a declared distance;
+- \(\kappa\), \(\ell\), and \(\lambda\) describe related but scale-dependent aspects of phase correction.
+
+Not licensed:
+
+- a claim that PF1 or exponential relaxation is new control mathematics;
+- a claim that \(E_*\) maximizes lifetime fitness;
+- a universal exponential behavioral rule;
+- comparison of \(\lambda\) values measured over undeclared or biologically incomparable intervals.
