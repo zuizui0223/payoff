@@ -35,10 +35,14 @@ jobs:
             pytest pandas numpy scipy requests statsmodels scikit-learn \
             beautifulsoup4 pyproj
 
-      - name: Download public Zenodo hourly supplement-like union
+      - name: Download original Movebank raw burst export
+        continue-on-error: true
+        run: python analysis/movement_phenology/stage3_wigeon_original_download.py
+
+      - name: Download public Zenodo hourly fallback
         run: python analysis/movement_phenology/stage3_wigeon_zenodo_download.py
 
-      - name: Normalize supplement-like wigeon source
+      - name: Normalize preferred wigeon source
         run: python analysis/movement_phenology/stage3_wigeon_source_probe.py
 
       - name: Extract published HMM and staging code contract
@@ -54,6 +58,7 @@ jobs:
         with:
           name: movement-phenology-stage3-wigeon
           path: |
+            outputs/movement_phenology/stage3_wigeon_original_movebank_receipt.json
             outputs/movement_phenology/stage3_wigeon_zenodo_download.json
             outputs/movement_phenology/stage3_wigeon_source_receipt.json
             outputs/movement_phenology/stage3_wigeon_individual_source_summary.csv
