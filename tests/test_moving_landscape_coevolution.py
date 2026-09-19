@@ -2,6 +2,7 @@ from src.moving_climate_landscape import MovingLandscapeScenario
 from src.moving_landscape_coevolution import (
     coevolve_moving_landscape_pair,
     landscape_coordination_barrier_diagnostic,
+    landscape_local_coordination_gate,
 )
 from src.tracking_coevolution import SpeciesTrackingParameters
 
@@ -126,3 +127,69 @@ def test_landscape_barrier_diagnostic_returns_matched_global_benchmark():
         + 1e-12
         >= diagnostic.local.final.mean_joint_growth
     )
+
+
+def test_local_coordination_gate_is_absent_without_beneficial_joint_step():
+    parameters = SpeciesTrackingParameters(
+        interaction_strength=1.0,
+        migration_cost=0.05,
+        phenology_cost=0.05,
+        baseline_growth=0.30,
+    )
+    scenario = MovingLandscapeScenario(
+        patches=21,
+        climate_velocity=0.0,
+        max_abs_phenology_shift=2.0,
+        carrying_capacity=400.0,
+        density_coefficient=0.30,
+        steps=50,
+        burn_in=10,
+        species_a=parameters,
+        species_b=parameters,
+    )
+    gate = landscape_local_coordination_gate(
+        scenario,
+        TrackingStrategy(0.0, 0.0),
+        mutation_step=0.2,
+        max_migration_rate=0.8,
+        max_phenology_rate=0.8,
+    )
+    assert not gate.blocked
+    assert gate.coordinated_gain <= 1e-10
+
+
+def test_local_coordination_gate_blocks_jointly_beneficial_phenology_step():
+    parameters = SpeciesTrackingParameters(
+        interaction_strength=0.5,
+        migration_cost=0.10,
+        phenology_cost=0.02,
+        baseline_growth=0.30,
+    )
+    scenario = MovingLandscapeScenario(
+        patches=31,
+        spatial_gradient=0.20,
+        climate_velocity=0.05,
+        max_abs_phenology_shift=4.0,
+        carrying_capacity=800.0,
+        density_coefficient=0.30,
+        steps=120,
+        burn_in=30,
+        species_a=parameters,
+        species_b=parameters,
+    )
+    resident = TrackingStrategy(0.2, 0.0)
+    gate = landscape_local_coordination_gate(
+        scenario,
+        resident,
+        mutation_step=0.2,
+        max_migration_rate=1.0,
+        max_phenology_rate=1.0,
+    )
+
+    assert gate.blocked
+    assert gate.coordinated_neighbor == TrackingStrategy(0.2, 0.2)
+    assert gate.coordinated_gain > 0.5
+    assert gate.unilateral_gain_a <= 0.0
+    assert gate.unilateral_gain_b <= 0.0
+    assert gate.unilateral_mismatch_a > 0.0
+    assert gate.unilateral_mismatch_b > 0.0
