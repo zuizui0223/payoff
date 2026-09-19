@@ -33,6 +33,7 @@ def main() -> None:
     parser.add_argument("--spatial-gradient", type=float, default=0.20)
     parser.add_argument("--carrying-capacity", type=float, default=800.0)
     parser.add_argument("--density-coefficient", type=float, default=0.30)
+    parser.add_argument("--boundary-retention", type=float, default=1.0)
     parser.add_argument("--steps", type=int, default=120)
     parser.add_argument("--burn-in", type=int, default=30)
     parser.add_argument("--resident-migration", type=float, default=0.2)
@@ -56,6 +57,7 @@ def main() -> None:
         max_abs_phenology_shift=args.phenology_limit,
         carrying_capacity=args.carrying_capacity,
         density_coefficient=args.density_coefficient,
+        boundary_retention=args.boundary_retention,
         steps=args.steps,
         burn_in=args.burn_in,
         species_a=parameters,
