@@ -14,6 +14,7 @@ if str(ROOT) not in sys.path:
 
 from src.moving_climate_landscape_2d import (
     MovingLandscape2DScenario,
+    corridor_persistence_frontier,
     optimize_matched_2d_strategy,
     vertical_barrier_habitat,
 )
@@ -101,6 +102,13 @@ def main() -> None:
         type=Path,
         default=Path(
             "outputs/migration_phenology_2d_corridor.csv"
+        ),
+    )
+    parser.add_argument(
+        "--frontier-output",
+        type=Path,
+        default=Path(
+            "outputs/migration_phenology_2d_corridor_frontier.csv"
         ),
     )
     args = parser.parse_args()
@@ -249,7 +257,25 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(rows)
 
-    print(f"{args.output} cells={len(rows)}")
+    frontier = corridor_persistence_frontier(rows)
+    args.frontier_output.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+    with args.frontier_output.open(
+        "w", newline="", encoding="utf-8"
+    ) as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=list(frontier[0]) if frontier else [],
+        )
+        writer.writeheader()
+        writer.writerows(frontier)
+
+    print(
+        f"{args.output} cells={len(rows)} "
+        f"{args.frontier_output} frontier_rows={len(frontier)}"
+    )
     for gap_width in args.gap_widths:
         subset = [
             row for row in rows
@@ -296,3 +322,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
