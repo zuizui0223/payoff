@@ -5,6 +5,7 @@ from src.moving_climate_landscape import (
     gaussian_initial_distribution,
     geometric_tracking_capacity,
     landscape_persistence_frontier,
+    nearest_neighbor_dispersal,
     optimize_matched_landscape_strategy,
     reflect_nearest_neighbor_dispersal,
     simulate_moving_landscape_pair,
@@ -398,3 +399,68 @@ def test_terminal_growth_ceiling_exceeds_perfect_tracking_ceiling():
     )
     assert terminal is not None
     assert terminal > zero_mismatch_velocity_ceiling(scenario)
+
+
+def test_leaky_boundary_loses_only_outward_edge_mass():
+    abundance = (10.0, 0.0, 0.0)
+    migration_rate = 0.7
+    fraction = 1.0 - __import__("math").exp(-migration_rate)
+
+    absorbing = nearest_neighbor_dispersal(
+        abundance,
+        migration_rate,
+        boundary_retention=0.0,
+    )
+    half_retained = nearest_neighbor_dispersal(
+        abundance,
+        migration_rate,
+        boundary_retention=0.5,
+    )
+    reflecting = nearest_neighbor_dispersal(
+        abundance,
+        migration_rate,
+        boundary_retention=1.0,
+    )
+
+    assert isclose(
+        sum(absorbing),
+        10.0 * (1.0 - 0.5 * fraction),
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+    assert isclose(
+        sum(half_retained),
+        10.0 * (1.0 - 0.25 * fraction),
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+    assert isclose(sum(reflecting), 10.0, abs_tol=1e-12)
+
+
+def test_boundary_retention_validation():
+    import pytest
+
+    with pytest.raises(ValueError):
+        MovingLandscapeScenario(boundary_retention=-0.1)
+    with pytest.raises(ValueError):
+        MovingLandscapeScenario(boundary_retention=1.1)
+
+    with pytest.raises(ValueError):
+        nearest_neighbor_dispersal(
+            (1.0, 2.0, 3.0),
+            0.2,
+            boundary_retention=1.1,
+        )
+
+
+def test_reflect_wrapper_matches_general_boundary_retention_one():
+    abundance = (1.0, 3.0, 2.0, 4.0)
+    for migration_rate in (0.0, 0.2, 1.0):
+        assert reflect_nearest_neighbor_dispersal(
+            abundance,
+            migration_rate,
+        ) == nearest_neighbor_dispersal(
+            abundance,
+            migration_rate,
+            boundary_retention=1.0,
+        )
