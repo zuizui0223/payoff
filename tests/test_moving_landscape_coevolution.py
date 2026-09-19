@@ -4,6 +4,7 @@ from src.moving_landscape_coevolution import (
     landscape_coordination_barrier_diagnostic,
     landscape_local_coordination_gate,
 )
+from src.spatiotemporal_tracking import TrackingStrategy
 from src.tracking_coevolution import SpeciesTrackingParameters
 
 
