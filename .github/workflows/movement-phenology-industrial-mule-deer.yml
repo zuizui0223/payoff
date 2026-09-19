@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install source-audit dependencies
-        run: python -m pip install --disable-pip-version-check requests pandas pyshp shapely statsmodels numpy
+        run: python -m pip install --disable-pip-version-check requests pandas pyshp shapely statsmodels numpy pyproj
       - name: Audit public Dryad source and attempt documented download
         run: python analysis/movement_phenology/stage3_industrial_mule_deer_dryad_probe.py
 
