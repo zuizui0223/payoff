@@ -1,0 +1,27 @@
+name: Wigeon Lithuania Movebank discovery
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'analysis/movement_phenology/stage3_wigeon_lithuania_discover.py'
+      - '.github/workflows/wigeon-lithuania-discovery.yml'
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install requests
+        run: python -m pip install --disable-pip-version-check requests
+      - name: Discover Lithuania study archive
+        run: python analysis/movement_phenology/stage3_wigeon_lithuania_discover.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wigeon-lithuania-movebank-discovery
+          path: outputs/movement_phenology/stage3_wigeon_lithuania_discovery.json
+          if-no-files-found: error
