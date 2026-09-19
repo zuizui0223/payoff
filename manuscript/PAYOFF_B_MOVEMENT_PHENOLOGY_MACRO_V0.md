@@ -158,19 +158,83 @@ Interpretation:
 
 > Environmental information quality is a separate prerequisite for effective phase control.
 
-## Result 4 — target phase changes with migration strategy
+## Result 4 — a preregistered third taxon contracts phase weakly without the same actuator
 
-Eurasian wigeons migrating farther arrive progressively closer to local spring phenology.
+The Eurasian-wigeon lane prospectively tested whether the common phase-retention coordinate transports to a third taxon.
 
-This implies that target phase is not fixed globally even within one species.
+Movement reconstruction reproduces the published sample closely:
+
+~~~text
+33 reconstructed spring tracks versus 35 published
+29 individuals versus 31 published
+median endpoint distance 1911 km versus 1899 km
+~~~
+
+Independent TGS reconstruction also reproduces the published arrival-phase distribution:
+
+~~~text
+reconstructed median arrival phase = 20.93 d
+published median                   = 22.5 d
+~~~
+
+For 224 consecutive staging transitions from 28 individuals,
+
+\[
+\lambda=0.860\pm0.045
+\]
+
+and the no-correction null
+
+\[
+H_0:\lambda=1
+\]
+
+is rejected:
+
+~~~text
+p = 0.00190
+~~~
+
+Thus the preregistered primary prediction \(\lambda<1\) is supported.
+
+However, the preregistered exploratory forecast
+
+\[
+|\lambda|<0.75
+\]
+
+is falsified.
+
+The measured actuators are also unsupported:
+
+~~~text
+stopover slope:
+  approximately 0
+  p = 0.972
+
+travel-speed phase response:
+  p = 0.197
+~~~
+
+Interpretation:
+
+> Wigeon validates the cross-taxon **phase-retention coordinate**, but does not validate a universal reactive speed/stopover feedback mechanism.
+
+This is a useful prospective failure of the stronger hypothesis. Direct phase contraction ranges from near reset in some mule-deer / goose systems to weak contraction in wigeon.
+
+## Result 5 — target phase and strategy can change without stronger feedback
+
+The published wigeon study reports that longer-distance migrants arrive progressively closer to local spring phenology as migration proceeds.
+
+The present direct reconstruction does not detect a corresponding migration-distance effect on \(\lambda\), so migration distance is treated as a target-phase / strategy context rather than a promoted feedback moderator.
 
 Norwegian red deer show a different strategy entirely: rapid migration "jumps" the green wave, followed by smaller-scale phenological tracking.
 
 Interpretation:
 
-> Strategy determines whether a continuous controller, stepping-stone controller, or seasonal-state switch is the appropriate representation.
+> Strategy can alter the target phase or the architecture of correction without implying stronger local feedback gain.
 
-## Result 5 — tracking can fail for different reasons
+## Result 6 — tracking can fail for different reasons
 
 ### Actuation failure
 
@@ -264,13 +328,13 @@ target phase behavior
 
 Conceptual \(P,G,\chi\) cube or slices locating empirical systems and generating predictions.
 
-This figure should only remain in the final paper if at least one more Tier-A/B system is quantitatively reconstructed.
+This figure can now remain as the main synthesis figure, but its axes must separate environmental innovation from phase retention and avoid treating related goose transitions as independent studies.
 
 ## Main hypotheses for the next data phase
 
 ### H1 — information
 
-Controller gain or phase precision increases with environmental predictability.
+Higher environmental predictability reduces downstream phenological innovation. It need not increase behavioral feedback gain.
 
 ### H2 — actuation
 
@@ -292,9 +356,9 @@ Strong ecosystem engineering weakens the correspondence between remotely sensed 
 
 ### Current realistic route
 
-**Global Ecology and Biogeography** becomes a strong target once the analysis has broad geographic/taxonomic replication rather than primarily one direct controller case plus literature synthesis.
+**Global Ecology and Biogeography** is now the active realistic target.
 
-The journal explicitly welcomes macroecological, comparative, spatial and modelling studies that reach general ecological conclusions.
+The evidence base includes a 55-species broad-scale test, direct phase-retention estimates in three taxa, multi-flyway replication within barnacle geese, and explicit perturbation / endogeneity boundary systems. Remaining work is synthesis, robustness, figures and novelty positioning rather than acquisition of a third taxon.
 
 ### Higher-risk route
 
@@ -315,31 +379,35 @@ Without those, an Ecology Letters submission would be premature.
 
 The framework becomes weak if, across independent Tier-A systems:
 
-1. signed phase error does not predict any corrective movement response;
-2. controller gain does not relate to subsequent error reduction;
-3. phase precision does not improve with environmental predictability;
-4. route disturbance affects phase only through unrelated demographic selection;
-5. strategy categories do not help explain cross-system heterogeneity.
+1. directly reconstructed phase retention is indistinguishable from no retention structure across additional taxa;
+2. environmental innovation and phase retention fail to explain any variation in phase precision;
+3. actuator-specific results do not survive source / calibration robustness checks;
+4. route disturbance does not alter the relevant control or precision quantities in quantitative tests;
+5. the strategy / boundary categories add no explanatory value beyond descriptive relabeling.
 
 These are genuine empirical failure conditions, not post-hoc escape clauses.
 
 ## Current status
 
 ~~~text
-BROAD BIRD TEST                COMPLETE
-MULE-DEER DIRECT CONTROLLER    COMPLETE
-INDIVIDUAL-CLUSTERED AUDIT     COMPLETE
-BARNACLE-GOOSE TIER-C          REGISTERED
-WIGEON TIER-C                  REGISTERED
-RED-DEER STRATEGY BOUNDARY     REGISTERED
-INDUSTRIAL PERTURBATION        REGISTERED
-BISON ENDOGENEITY BOUNDARY     REGISTERED
-PRIOR-ART BOUNDARY             REGISTERED
+BROAD 55-SPECIES BIRD TEST           COMPLETE
+MULE-DEER DIRECT CONTROLLER          COMPLETE
+SVALBARD GOOSE DIRECT STEP           COMPLETE
+GREENLAND GOOSE DIRECT STEP          COMPLETE
+BARENTS GOOSE DIRECT STEP            COMPLETE
+WIGEON THIRD-TAXON PHASE RETENTION   COMPLETE
 
-SECOND DIRECT CONTROLLER       MISSING
-THIRD DIRECT CONTROLLER        MISSING
-CROSS-SYSTEM META-MODEL        GATED
-GLOBAL EBIRD TEST              ACCESS-KEY GATED
+THREE-TAXON PHASE-RETENTION GATE     PASS
+THREE-TAXON COMMON ACTUATOR GATE     OPEN
+
+RED-DEER STRATEGY BOUNDARY           REGISTERED
+INDUSTRIAL PERTURBATION              REGISTERED
+BISON ENDOGENEITY BOUNDARY           REGISTERED
+PRIOR-ART BOUNDARY                   REGISTERED
+
+INFORMATION × RETENTION SYNTHESIS     ACTIVE
+HARMONIZED PERTURBATION TEST          OPEN
+GLOBAL EBIRD TEST                     ACCESS-KEY GATED
 ~~~
 
 
