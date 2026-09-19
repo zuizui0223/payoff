@@ -162,6 +162,66 @@ class MovingLandscape2DScenario:
 
 
 @dataclass(frozen=True)
+@dataclass(frozen=True)
+class Landscape2DGeometry:
+    x_positions: tuple[float, ...]
+    y_positions: tuple[float, ...]
+    climate_coordinates: tuple[float, ...]
+    neighbor_targets: tuple[tuple[int, int, int, int], ...]
+
+
+def build_landscape_2d_geometry(
+    scenario: MovingLandscape2DScenario,
+) -> Landscape2DGeometry:
+    """Precompute static geometry once for repeated strategy evaluation."""
+
+    quality = scenario.quality
+    ux, uy = scenario.climate_unit
+    x_positions: list[float] = []
+    y_positions: list[float] = []
+    climate_coordinates: list[float] = []
+    neighbors: list[tuple[int, int, int, int]] = []
+    directions = ((-1, 0), (1, 0), (0, -1), (0, 1))
+
+    for index in range(scenario.width * scenario.height):
+        x_index, y_index = scenario.coordinate_indices(index)
+        x = (
+            x_index - scenario.width // 2
+        ) * scenario.patch_spacing
+        y = (
+            y_index - scenario.height // 2
+        ) * scenario.patch_spacing
+        x_positions.append(x)
+        y_positions.append(y)
+        climate_coordinates.append(ux * x + uy * y)
+
+        local_neighbors: list[int] = []
+        for dx, dy in directions:
+            target_x = x_index + dx
+            target_y = y_index + dy
+            if (
+                target_x < 0
+                or target_x >= scenario.width
+                or target_y < 0
+                or target_y >= scenario.height
+            ):
+                local_neighbors.append(-1)  # outer boundary
+                continue
+            target = target_y * scenario.width + target_x
+            if quality[target] <= 0.0:
+                local_neighbors.append(-2)  # habitat barrier
+            else:
+                local_neighbors.append(target)
+        neighbors.append(tuple(local_neighbors))
+
+    return Landscape2DGeometry(
+        x_positions=tuple(x_positions),
+        y_positions=tuple(y_positions),
+        climate_coordinates=tuple(climate_coordinates),
+        neighbor_targets=tuple(neighbors),
+    )
+
+
 class Landscape2DPairResult:
     strategy_a: TrackingStrategy
     strategy_b: TrackingStrategy
@@ -262,6 +322,7 @@ def grid_dispersal_2d(
     abundance: tuple[float, ...] | list[float],
     migration_rate: float,
     scenario: MovingLandscape2DScenario,
+    geometry: Landscape2DGeometry | None = None,
 ) -> tuple[float, ...]:
     """Four-neighbor dispersal respecting boundaries and blocked habitat."""
 
@@ -274,35 +335,24 @@ def grid_dispersal_2d(
     if fraction == 0.0:
         return tuple(float(value) for value in abundance)
 
-    quality = scenario.quality
+    if geometry is None:
+        geometry = build_landscape_2d_geometry(scenario)
     out = [0.0] * len(abundance)
-    directions = ((-1, 0), (1, 0), (0, -1), (0, 1))
 
     for index, value in enumerate(abundance):
         if value <= 0.0:
             continue
-        x_index, y_index = scenario.coordinate_indices(index)
         moving = fraction * value
         out[index] += value - moving
         directional_mass = moving / 4.0
 
-        for dx, dy in directions:
-            target_x = x_index + dx
-            target_y = y_index + dy
-            if (
-                target_x < 0
-                or target_x >= scenario.width
-                or target_y < 0
-                or target_y >= scenario.height
-            ):
+        for target in geometry.neighbor_targets[index]:
+            if target == -1:
                 out[index] += (
                     scenario.boundary_retention
                     * directional_mass
                 )
-                continue
-
-            target = scenario.index(target_x, target_y)
-            if quality[target] <= 0.0:
+            elif target == -2:
                 out[index] += (
                     scenario.barrier_retention
                     * directional_mass
@@ -315,12 +365,16 @@ def grid_dispersal_2d(
 
 def gaussian_initial_distribution_2d(
     scenario: MovingLandscape2DScenario,
+    geometry: Landscape2DGeometry | None = None,
 ) -> tuple[float, ...]:
     quality = scenario.quality
+    if geometry is None:
+        geometry = build_landscape_2d_geometry(scenario)
     weights = []
     variance = scenario.initial_distribution_sd ** 2
     for index in range(scenario.width * scenario.height):
-        x, y = scenario.position(index)
+        x = geometry.x_positions[index]
+        y = geometry.y_positions[index]
         weights.append(
             quality[index]
             * exp(-0.5 * (x * x + y * y) / variance)
@@ -339,24 +393,27 @@ def gaussian_initial_distribution_2d(
 def centroid_2d(
     abundance: tuple[float, ...] | list[float],
     scenario: MovingLandscape2DScenario,
+    geometry: Landscape2DGeometry | None = None,
 ) -> tuple[float, float]:
     total = sum(abundance)
     if total <= 0.0:
         return 0.0, 0.0
+    if geometry is None:
+        geometry = build_landscape_2d_geometry(scenario)
     x_sum = 0.0
     y_sum = 0.0
     for index, value in enumerate(abundance):
-        x, y = scenario.position(index)
-        x_sum += value * x
-        y_sum += value * y
+        x_sum += value * geometry.x_positions[index]
+        y_sum += value * geometry.y_positions[index]
     return x_sum / total, y_sum / total
 
 
 def climate_centroid_2d(
     abundance: tuple[float, ...] | list[float],
     scenario: MovingLandscape2DScenario,
+    geometry: Landscape2DGeometry | None = None,
 ) -> float:
-    x, y = centroid_2d(abundance, scenario)
+    x, y = centroid_2d(abundance, scenario, geometry)
     ux, uy = scenario.climate_unit
     return ux * x + uy * y
 
@@ -364,6 +421,7 @@ def climate_centroid_2d(
 def monitor_fraction_2d(
     abundance: tuple[float, ...] | list[float],
     scenario: MovingLandscape2DScenario,
+    geometry: Landscape2DGeometry | None = None,
 ) -> float:
     threshold = scenario.monitor_climate_coordinate
     if threshold is None:
@@ -371,10 +429,12 @@ def monitor_fraction_2d(
     total = sum(abundance)
     if total <= 0.0:
         return 0.0
+    if geometry is None:
+        geometry = build_landscape_2d_geometry(scenario)
     beyond = sum(
         value
         for index, value in enumerate(abundance)
-        if scenario.climate_coordinate(index) > threshold
+        if geometry.climate_coordinates[index] > threshold
     )
     return beyond / total
 
@@ -384,6 +444,7 @@ def _weighted_residual_2d(
     phenology_shift: float,
     demand: float,
     scenario: MovingLandscape2DScenario,
+    geometry: Landscape2DGeometry,
 ) -> float:
     total = sum(abundance)
     if total <= 0.0:
@@ -393,7 +454,7 @@ def _weighted_residual_2d(
         * (
             demand
             - scenario.spatial_gradient
-            * scenario.climate_coordinate(index)
+            * geometry.climate_coordinates[index]
             - scenario.phenology_scale * phenology_shift
         )
         for index, value in enumerate(abundance)
@@ -406,6 +467,7 @@ def _update_phenology_2d(
     current_shift: float,
     demand: float,
     scenario: MovingLandscape2DScenario,
+    geometry: Landscape2DGeometry,
 ) -> tuple[float, bool]:
     if strategy.phenology_rate <= 0.0:
         return current_shift, False
@@ -414,6 +476,7 @@ def _update_phenology_2d(
         current_shift,
         demand,
         scenario,
+        geometry,
     )
     correction_fraction = -expm1(-strategy.phenology_rate)
     proposed = (
@@ -452,6 +515,7 @@ def _one_species_generation_2d(
     demand: float,
     interaction_sq: float,
     scenario: MovingLandscape2DScenario,
+    geometry: Landscape2DGeometry,
 ) -> tuple[tuple[float, ...], float, float]:
     total = sum(abundance)
     if total <= 0.0:
@@ -476,7 +540,7 @@ def _one_species_generation_2d(
         mismatch = (
             demand
             - scenario.spatial_gradient
-            * scenario.climate_coordinate(index)
+            * geometry.climate_coordinates[index]
             - scenario.phenology_scale * phenology_shift
         )
         low_density_growth = (
@@ -510,6 +574,7 @@ def _one_species_generation_2d(
         reproduced,
         strategy.migration_rate,
         scenario,
+        geometry,
     )
     return (
         dispersed,
@@ -523,6 +588,7 @@ def _rms_abiotic_2d(
     phenology_shift: float,
     demand: float,
     scenario: MovingLandscape2DScenario,
+    geometry: Landscape2DGeometry,
 ) -> float:
     total = sum(abundance)
     if total <= 0.0:
@@ -532,7 +598,7 @@ def _rms_abiotic_2d(
         * (
             demand
             - scenario.spatial_gradient
-            * scenario.climate_coordinate(index)
+            * geometry.climate_coordinates[index]
             - scenario.phenology_scale * phenology_shift
         ) ** 2
         for index, abundance_value in enumerate(abundance)
@@ -547,13 +613,25 @@ def simulate_moving_landscape_2d_pair(
     *,
     initial_abundance_a: tuple[float, ...] | None = None,
     initial_abundance_b: tuple[float, ...] | None = None,
+    _geometry: Landscape2DGeometry | None = None,
 ) -> Landscape2DPairResult:
+    geometry = (
+        build_landscape_2d_geometry(scenario)
+        if _geometry is None
+        else _geometry
+    )
     if initial_abundance_a is None:
-        abundance_a = gaussian_initial_distribution_2d(scenario)
+        abundance_a = gaussian_initial_distribution_2d(
+            scenario,
+            geometry,
+        )
     else:
         abundance_a = tuple(initial_abundance_a)
     if initial_abundance_b is None:
-        abundance_b = gaussian_initial_distribution_2d(scenario)
+        abundance_b = gaussian_initial_distribution_2d(
+            scenario,
+            geometry,
+        )
     else:
         abundance_b = tuple(initial_abundance_b)
 
@@ -590,6 +668,7 @@ def simulate_moving_landscape_2d_pair(
             phenology_a,
             demand,
             scenario,
+            geometry,
         )
         phenology_b, at_limit_b = _update_phenology_2d(
             abundance_b,
@@ -597,15 +676,18 @@ def simulate_moving_landscape_2d_pair(
             phenology_b,
             demand,
             scenario,
+            geometry,
         )
 
         centroid_x_a, centroid_y_a = centroid_2d(
             abundance_a,
             scenario,
+            geometry,
         )
         centroid_x_b, centroid_y_b = centroid_2d(
             abundance_b,
             scenario,
+            geometry,
         )
         dx = scenario.spatial_gradient * (
             centroid_x_a - centroid_x_b
@@ -630,6 +712,7 @@ def simulate_moving_landscape_2d_pair(
             demand,
             interaction_sq,
             scenario,
+            geometry,
         )
         (
             abundance_b,
@@ -661,6 +744,7 @@ def simulate_moving_landscape_2d_pair(
                 phenology_a,
                 demand,
                 scenario,
+                geometry,
             )
             rms_b = _rms_abiotic_2d(
                 abundance_b,
@@ -674,10 +758,12 @@ def simulate_moving_landscape_2d_pair(
             monitor_a_sum += monitor_fraction_2d(
                 abundance_a,
                 scenario,
+                geometry,
             )
             monitor_b_sum += monitor_fraction_2d(
                 abundance_b,
                 scenario,
+                geometry,
             )
             limit_a_count += int(at_limit_a)
             limit_b_count += int(at_limit_b)
@@ -688,10 +774,12 @@ def simulate_moving_landscape_2d_pair(
     final_x_a, final_y_a = centroid_2d(
         abundance_a,
         scenario,
+        geometry,
     )
     final_x_b, final_y_b = centroid_2d(
         abundance_b,
         scenario,
+        geometry,
     )
     ux, uy = scenario.climate_unit
     final_climate_a = ux * final_x_a + uy * final_y_a
@@ -736,10 +824,12 @@ def simulate_moving_landscape_2d_pair(
         final_monitor_fraction_a=monitor_fraction_2d(
             abundance_a,
             scenario,
+            geometry,
         ),
         final_monitor_fraction_b=monitor_fraction_2d(
             abundance_b,
             scenario,
+            geometry,
         ),
         mean_monitor_fraction_a=monitor_a_sum / observed,
         mean_monitor_fraction_b=monitor_b_sum / observed,
@@ -770,6 +860,7 @@ def optimize_matched_2d_strategy(
         for index in range(phenology_points)
     ]
 
+    geometry = build_landscape_2d_geometry(scenario)
     best: Landscape2DPairResult | None = None
     for migration in migration_values:
         for phenology in phenology_values:
@@ -781,6 +872,7 @@ def optimize_matched_2d_strategy(
                 strategy,
                 strategy,
                 scenario,
+                _geometry=geometry,
             )
             if best is None:
                 best = candidate
