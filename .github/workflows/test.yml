@@ -39,3 +39,5 @@ jobs:
       - run: python scripts/hard_module_end_to_end.py --functions examples/three_function/functions.csv --worldlines examples/three_function/hard_module_end_to_end_worldlines.csv --output-dir outputs/ci_hard_module_end_to_end
       - run: python scripts/validate_hard_partition_feedback.py --functions examples/three_function/functions.csv --pairs examples/three_function/hard_partition_feedback_validation.csv --kappa 1.0 --output-dir outputs/ci_hard_partition_feedback
       - run: python scripts/predict_hard_module_partition.py --functions examples/three_function/functions.csv --extra-module-cost 1.0 --output-dir outputs/ci_hard_modules
+      - run: python scripts/migration_phenology_phase_sweep.py --climate-velocities 0.02,0.04 --partner-spatial-shares 0,0.5,1 --max-rate 0.8 --grid-points 5 --steps 60 --burn-in 10 --output outputs/ci_migration_phenology_phase.csv
+      - run: python scripts/migration_phenology_stochastic_sweep.py --samples 2 --replicates 2 --strategy-points 3 --max-rate 0.6 --steps 40 --burn-in 10 --output outputs/ci_migration_phenology_stochastic.csv
