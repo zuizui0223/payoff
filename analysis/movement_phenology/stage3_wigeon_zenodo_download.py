@@ -69,21 +69,28 @@ def stream_download(url: str, target: Path, attempts: int = 5):
 
 
 def main():
-    rec = get_json(RECORD_API)
+    metadata_error = None
+    try:
+        rec = get_json(RECORD_API)
+    except Exception as exc:
+        rec = {}
+        metadata_error = f"{type(exc).__name__}: {exc}"
+
     files = rec.get("files", [])
     matches = [f for f in files if f.get("key") == TARGET_KEY]
-    if len(matches) != 1:
-        raise SystemExit(
-            f"Expected one {TARGET_KEY}; got {[f.get('key') for f in files]}"
-        )
-    f = matches[0]
+    f = matches[0] if len(matches) == 1 else {}
     links = f.get("links") or {}
+
+    # The record API can intermittently return 504 from GitHub runners even
+    # while the file object itself remains available. Never make metadata a
+    # single point of failure for a public, frozen file.
     candidates = [
         links.get("content"),
         links.get("self"),
         f"https://zenodo.org/api/records/16940654/files/{TARGET_KEY}/content",
+        f"https://zenodo.org/records/16940654/files/{TARGET_KEY}?download=1",
     ]
-    candidates = [x for x in candidates if x]
+    candidates = list(dict.fromkeys(x for x in candidates if x))
 
     errors = []
     for url in candidates:
@@ -102,9 +109,11 @@ def main():
             sha.update(chunk)
 
     receipt = {
-        "record_id": rec.get("id"),
-        "record_doi": rec.get("doi"),
+        "record_id": rec.get("id", 16940654),
+        "record_doi": rec.get("doi", "10.5281/zenodo.16940654"),
         "file_key": TARGET_KEY,
+        "metadata_error_if_any": metadata_error,
+        "metadata_match_count": len(matches),
         "declared_size": f.get("size"),
         "declared_checksum": f.get("checksum"),
         "downloaded_bytes": OUT.stat().st_size,
