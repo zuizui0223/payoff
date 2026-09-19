@@ -1,129 +1,272 @@
 # Movement–phenology publication gate
 
-## Gate A — empirical controller replication
+## Gate A — direct phase-retention replication
 
 Required:
 
 ~~~text
-at least 3 independent Tier A/B systems
-with compatible estimates of:
-  net phase-transfer lambda where identifiable
+>= 3 taxa or genuinely independent systems
+with:
+  direct phase-transfer / retention estimate
   uncertainty in lambda
-  at least one identified actuator-specific gain
-  target phase E* / correction scale where the architecture permits them
+  declared ecological correction interval
+  validated environmental phase reconstruction
 ~~~
 
 Current:
 
 ~~~text
-mule deer Ortega 2023:                PASS
-Svalbard barnacle goose STEP control: PASS
-third independent direct system:      MISSING
+mule deer:
+  PASS
+
+barnacle goose:
+  PASS
+  three flyways / multiple route stages
+
+Eurasian wigeon:
+  PASS
+  preregistered third-taxon direct reconstruction
 ~~~
 
-The direct systems need not share the same actuator. The common cross-system object is phase retention after one correction opportunity, summarized by lambda; speed, stopover, route and departure responses are actuator-specific mechanisms.
-
-## Gate B — explanatory moderator
-
-At least one registered moderator must explain controller variation across independent systems or populations.
-
-Preferred candidates:
+Therefore:
 
 ~~~text
-environmental predictability
-control permeability / disturbance
-route continuity
-migration strategy
-cue-resource coupling
+three-taxon phase-retention gate:
+  PASS
 ~~~
 
-The Stage-1 55-species generic trait scan does not satisfy this gate.
+The systems do not need to share the same actuator. The common object is phase retention after one ecologically meaningful movement/correction opportunity:
 
-## Gate C — predicted failure mode
+\[
+R_\phi=|\lambda|.
+\]
 
-At least one system must behave as predicted when a controller prerequisite fails.
+## Gate B — actuator generality
 
-Candidate evidence:
+A stronger mechanistic claim requires direct behavioral actuator evidence in multiple taxa.
+
+Current:
 
 ~~~text
-industrial mule deer:
-  actuation / control-permeability failure
+mule deer:
+  speed + stopover actuator evidence
 
-Yellowstone bison:
-  exogenous-environment assumption fails
+barnacle goose:
+  stopover actuator evidence
+
+Eurasian wigeon:
+  no detected stopover actuator
+  no detected travel-speed actuator
 ~~~
 
-Current status: literature evidence PASS; quantitative harmonized test still desirable.
-
-## Gate D — novelty
-
-Before a flagship submission, verify that the exact package below has not already been published as a unified framework:
+Therefore:
 
 ~~~text
-dimensionless animal/environment front-speed ratio
-+ signed nonzero phase target
-+ controller gain kappa
-+ correction length ell
+cross-taxon phase-retention:
+  PASS
+
+three-taxon reactive-feedback mechanism:
+  OPEN
+~~~
+
+Do not describe wigeon as a replicated speed/stopover feedback mechanism.
+
+## Gate C — explanatory mechanism / moderator
+
+At least one registered ecological axis should explain variation in phase precision or retention without conflating environmental information and behavioral feedback.
+
+Current synthesis separates:
+
+~~~text
+environment channel:
+  environmental innovation / predictability
+
+feedback channel:
+  phase retention lambda
+
+actuation channel:
+  speed / stopover / route / departure
+
+boundary conditions:
+  control permeability
+  environmental endogeneity
+~~~
+
+The original simple prediction
+
+~~~text
+higher predictability -> stronger feedback
+~~~
+
+is not supported by the direct barnacle transition screen.
+
+That failure is now informative: predictability and feedback are treated as distinct channels.
+
+Current status:
+
+~~~text
+channel decomposition:
+  ESTABLISHED THEORETICALLY / DESCRIPTIVELY
+
+cross-system explanatory model:
+  OPEN
+~~~
+
+## Gate D — predicted failure / boundary mode
+
+At least one system must behave as expected when a controller prerequisite fails.
+
+Registered boundary evidence:
+
+~~~text
+industrial mule deer
+  development causes hold-up / green-wave decoupling
+  -> actuation / control-permeability failure
+
+Yellowstone bison
+  grazing modifies vegetation phenology
+  -> exogenous-environment assumption fails
+~~~
+
+Current:
+
+~~~text
+literature-supported boundary evidence:
+  PASS
+
+harmonized quantitative boundary test:
+  DESIRABLE, NOT YET REQUIRED FOR GEB
+~~~
+
+## Gate E — novelty
+
+Do not claim as new:
+
+~~~text
+green-wave surfing
+surf versus jump migration
+phenological migration plasticity
+predictability effects
+compensatory movement
+anthropogenic decoupling
+ecosystem engineering
+generic negative-feedback stability
+AR(1) variance algebra
+~~~
+
+Candidate contribution:
+
+~~~text
+common phase-retention coordinate lambda
++ continuous-to-discrete controller bridge
++ separation of environmental innovation from feedback retention
++ actuator-specific controller architecture
 + information / actuation / endogeneity boundaries
-+ cross-strategy comparison
++ prospective cross-taxon validation
 ~~~
 
-Current status: preliminary audit complete; no claim of mathematical novelty for generic negative-feedback stability.
-
-## Gate E — journal scale
-
-### Global Ecology and Biogeography
-
-Needs broad-scale or cross-system data sufficient for globally relevant conclusions. Local single-system confirmation is insufficient.
-
-Current status: plausible target after 2–3 direct controller systems are reconstructed.
-
-### Ecology Letters
-
-Needs substantially stronger novelty and generality than extension/confirmation.
-
-Internal promotion criterion:
+Current status:
 
 ~~~text
-3+ direct systems
-AND cross-system moderator supported
-AND perturbation prediction supported
-AND prior-art novelty cleared
+preliminary prior-art audit:
+  COMPLETE
+
+full flagship novelty audit:
+  STILL REQUIRED
 ~~~
-
-Until then, do not label the project "Ecology Letters ready."
-
-## Separation from PAYOFF-B1
-
-The macro programme is never a required revision for the active Theoretical Ecology PAYOFF-B1 short paper.
-
-PAYOFF-B1 can be submitted independently while the macro programme develops.
-
 
 ## Gate F — population versus taxonomic replication
 
-The direct-controller population/route gate is now distinct from the
-cross-taxon generality gate.
-
-Current direct evidence:
+Current registered primary direct rows:
 
 ~~~text
 mule deer                    PASS
 Svalbard barnacle goose      PASS
 Greenland barnacle goose     PASS
 Barents barnacle goose       PASS
+Eurasian wigeon              PASS
 ~~~
 
-This is four direct populations/routes but only two taxa.
+These represent:
+
+~~~text
+5 primary population/route rows
+3 taxa
+
+Odocoileus hemionus
+Branta leucopsis
+Mareca penelope
+~~~
 
 Therefore:
 
 ~~~text
-population/route replication: PASS
-cross-taxon replication:      OPEN
+population / route replication:
+  PASS
+
+three-taxon phase-retention coordinate:
+  PASS
+
+three-taxon common actuator:
+  OPEN
 ~~~
 
-A third directly reconstructed taxon is required before claiming that the
-phase-control coordinates generalize beyond ungulates plus one goose species.
+The wigeon result is especially important because it prospectively supports phase contraction while **failing** the stronger preregistered \(|\lambda|<0.75\) forecast and showing no detected stopover / speed actuator.
 
-Eurasian wigeon is the active third-taxon target.
+## Gate G — publication scale
+
+### Global Ecology and Biogeography
+
+The project now has:
+
+~~~text
+broad 55-species bird falsification of a universal speed constant
++ direct mule-deer phase controller
++ three-flyway barnacle-goose direct STEP controllers
++ preregistered third-taxon wigeon phase retention
++ information-versus-feedback decomposition
++ perturbation / endogeneity boundary systems
+~~~
+
+This is sufficient to treat GEB as a **realistic target**, not merely a future possibility.
+
+Remaining work before a GEB submission:
+
+~~~text
+freeze final cross-system figures
+quantify phase-information / retention comparison without pseudoreplication
+complete robustness / source-calibration receipts
+update manuscript Results and Discussion
+complete literature-novelty audit
+~~~
+
+### Ecology Letters
+
+A higher-risk Ecology Letters attempt requires more than three taxa.
+
+Internal promotion criterion:
+
+~~~text
+three-taxon direct phase retention          PASS
+prospective third-taxon test                PASS
+cross-system explanatory principle          OPEN
+quantitative perturbation prediction        OPEN / PARTIAL
+strong novelty audit                        OPEN
+broad conceptual gain beyond synthesis      OPEN
+~~~
+
+Therefore:
+
+~~~text
+Ecology Letters ready:
+  NO
+
+GEB development lane:
+  ACTIVE
+~~~
+
+## Separation from PAYOFF-B1
+
+The macro programme is never a required revision for the active Theoretical Ecology PAYOFF-B1 short paper.
+
+PAYOFF-B1 can be submitted independently while the movement–phenology macro programme develops.
