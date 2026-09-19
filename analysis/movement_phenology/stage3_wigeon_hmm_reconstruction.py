@@ -117,7 +117,13 @@ def regularise_track_hourly(
         else TARGET_TIME_SECONDS
     )
 
-    observed = tmp["time"].astype("int64").to_numpy(dtype=np.int64) / 1e9
+    # Pandas 3 can store timezone-aware datetimes at microsecond rather than
+    # nanosecond resolution, so astype("int64") / 1e9 is not unit-stable.
+    # Timestamp.timestamp() is explicitly seconds since the Unix epoch and
+    # reproduces R difftime(..., units="secs") across pandas versions.
+    observed = tmp["time"].map(
+        lambda z: pd.Timestamp(z).timestamp()
+    ).to_numpy(dtype=float)
     start = float(observed[0])
     end = float(observed[-1])
     targets = np.arange(start, end + 0.5 * target_time, target_time)
