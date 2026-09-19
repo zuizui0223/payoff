@@ -235,3 +235,126 @@ def landscape_coordination_barrier_diagnostic(
         accessibility_gap=gap,
         barrier=gap > gap_tolerance,
     )
+
+
+
+@dataclass(frozen=True)
+class LandscapeLocalCoordinationGate:
+    resident: TrackingStrategy
+    coordinated_neighbor: TrackingStrategy
+    coordinated_gain: float
+    unilateral_gain_a: float
+    unilateral_gain_b: float
+    unilateral_mismatch_a: float
+    unilateral_mismatch_b: float
+    blocked: bool
+
+
+def landscape_local_coordination_gate(
+    scenario: MovingLandscapeScenario,
+    resident: TrackingStrategy,
+    *,
+    mutation_step: float = 0.1,
+    max_migration_rate: float = 1.0,
+    max_phenology_rate: float = 1.0,
+    tolerance: float = 1e-10,
+) -> LandscapeLocalCoordinationGate:
+    """Audit whether a beneficial coordinated step is blocked unilaterally.
+
+    Starting from a matched resident pair (resident,resident), enumerate all
+    one-step neighboring tracking strategies. For each neighbor compare:
+
+    - the gain if both species move together to the neighbor;
+    - the gain to species A if only A moves;
+    - the gain to species B if only B moves.
+
+    A local coordination gate is blocked when the best coordinated one-step
+    move is beneficial but neither unilateral move is individually beneficial.
+    """
+
+    if tolerance < 0.0:
+        raise ValueError("tolerance must be non-negative")
+
+    baseline = simulate_moving_landscape_pair(
+        resident,
+        resident,
+        scenario,
+    )
+    neighbors = _neighbor_strategies(
+        resident,
+        mutation_step,
+        max_migration_rate,
+        max_phenology_rate,
+    )
+    if not neighbors:
+        return LandscapeLocalCoordinationGate(
+            resident=resident,
+            coordinated_neighbor=resident,
+            coordinated_gain=0.0,
+            unilateral_gain_a=0.0,
+            unilateral_gain_b=0.0,
+            unilateral_mismatch_a=0.0,
+            unilateral_mismatch_b=0.0,
+            blocked=False,
+        )
+
+    best_neighbor = neighbors[0]
+    best_coordinated = simulate_moving_landscape_pair(
+        best_neighbor,
+        best_neighbor,
+        scenario,
+    )
+    best_gain = (
+        best_coordinated.mean_joint_growth
+        - baseline.mean_joint_growth
+    )
+
+    for neighbor in neighbors[1:]:
+        coordinated = simulate_moving_landscape_pair(
+            neighbor,
+            neighbor,
+            scenario,
+        )
+        gain = (
+            coordinated.mean_joint_growth
+            - baseline.mean_joint_growth
+        )
+        if gain > best_gain:
+            best_gain = gain
+            best_neighbor = neighbor
+            best_coordinated = coordinated
+
+    unilateral_a = simulate_moving_landscape_pair(
+        best_neighbor,
+        resident,
+        scenario,
+    )
+    unilateral_b = simulate_moving_landscape_pair(
+        resident,
+        best_neighbor,
+        scenario,
+    )
+    gain_a = (
+        unilateral_a.mean_log_growth_a
+        - baseline.mean_log_growth_a
+    )
+    gain_b = (
+        unilateral_b.mean_log_growth_b
+        - baseline.mean_log_growth_b
+    )
+    blocked = (
+        best_gain > tolerance
+        and gain_a <= tolerance
+        and gain_b <= tolerance
+    )
+
+    return LandscapeLocalCoordinationGate(
+        resident=resident,
+        coordinated_neighbor=best_neighbor,
+        coordinated_gain=best_gain,
+        unilateral_gain_a=gain_a,
+        unilateral_gain_b=gain_b,
+        unilateral_mismatch_a=unilateral_a.rms_interaction_mismatch,
+        unilateral_mismatch_b=unilateral_b.rms_interaction_mismatch,
+        blocked=blocked,
+    )
