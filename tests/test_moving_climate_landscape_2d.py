@@ -282,3 +282,30 @@ def test_zero_phenology_limit_makes_phenology_rate_wasteful_in_2d():
         phenology_points=5,
     )
     assert best.strategy_a.phenology_rate == 0.0
+
+
+def test_offset_gap_places_passage_away_from_climate_axis():
+    width = 9
+    height = 9
+    barrier_x = 6
+    center = height // 2
+    offset_center = center + 2
+    quality = vertical_barrier_habitat(
+        width,
+        height,
+        barrier_x_index=barrier_x,
+        gap_width=1,
+        gap_center_y_index=offset_center,
+    )
+    scenario = MovingLandscape2DScenario(
+        width=width,
+        height=height,
+        climate_velocity=0.0,
+        habitat_quality=quality,
+        steps=20,
+        burn_in=5,
+    )
+    assert quality[scenario.index(barrier_x, center)] == 0.0
+    assert quality[
+        scenario.index(barrier_x, offset_center)
+    ] > 0.0
