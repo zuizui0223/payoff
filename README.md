@@ -570,18 +570,30 @@ mismatch. The interaction partner can track that demand through a different
 mixture of the two axes, so a lineage can be abiotically successful yet fail
 because partner overlap is lost.
 
-The baseline implementation provides:
+The current implementation provides:
 
 - a dependency-free deterministic tracking simulator;
 - a global migration x phenology strategy-grid optimizer;
 - a rare-mutation local adaptive walk;
+- mutation-selection stationary occupancy on the 2D strategy lattice;
+- two-species alternating rare-mutation coevolution;
+- seed-explicit stochastic climate and partner forcing;
 - phase classification into migration, phenology, mixed, stasis,
   interaction failure, and abiotic failure;
-- a climate-velocity x partner-axis phase-sweep CLI.
+- reproducible sharded large sweeps with resume and dry-run workload counting.
 
-Run the default sweep with:
+A notable accessibility result already appears in the coevolution tests:
+interaction matching can lock two species on a matched mixed strategy even when
+both have the same intrinsic cost bias toward one tracking axis, because a
+unilateral move first creates partner mismatch.
+
+Run the deterministic phase sweep with:
 
     python scripts/migration_phenology_phase_sweep.py
+
+Run or size the stochastic sweep with:
+
+    python scripts/migration_phenology_stochastic_sweep.py --dry-run
 
 The model and claim boundary are documented in
 [theory/MIGRATION_PHENOLOGY_TRACKING.md](theory/MIGRATION_PHENOLOGY_TRACKING.md).
