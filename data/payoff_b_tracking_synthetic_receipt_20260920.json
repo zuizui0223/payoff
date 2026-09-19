@@ -97,5 +97,27 @@
     },
     "retained_interpretation": "drift_assisted_barrier_crossing_not_drift_rescue"
   },
-  "claim_boundary": "synthetic design frequencies and effects are not natural prevalence estimates"
+  "claim_boundary": "synthetic design frequencies and effects are not natural prevalence estimates",
+  "provenance": {
+    "population_barrier_pilot": {
+      "workflow_run": 35469425990,
+      "artifact_id": 10592321946,
+      "sha256": "9c2aad324c5ba2cacb2b6e4dd2e878d009e0da15e18b6b980b2acd23b8057e91"
+    },
+    "population_stress_pilot": {
+      "workflow_run": 35469501599,
+      "artifact_id": 10591922657,
+      "sha256": "a5cd7c6bf95d9ca6df495c3c4493332d873868a768da6029eab3cce5053e2770"
+    },
+    "population_stress_replication": {
+      "workflow_run": 35469664405,
+      "artifact_id": 10592032813,
+      "sha256": "a41b4806a3b788e524688bcd0fe9bfd01a5890305110d991d2d9df12ec83a6b0"
+    },
+    "drift_escape_pilot": {
+      "workflow_run": 35469853874,
+      "artifact_id": 10592456956,
+      "sha256": "0c4b9c472134553b2d49dc3124db427282daa5f5ec609f3be86b7bb679d7c2be"
+    }
+  }
 }
