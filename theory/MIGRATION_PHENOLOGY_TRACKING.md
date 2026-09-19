@@ -10,9 +10,11 @@ shifting seasonal timing, when are those axes substitutes, when is a mixed
 response favored, and when can abiotic tracking succeed while an interaction
 partner is lost?**
 
-The v0.1 implementation is intentionally minimal. It defines a deterministic
-benchmark before adding stochastic demography, coevolution, and large
-parameter sweeps.
+The current implementation now has four nested layers: deterministic strategy
+payoffs, mutation-selection occupancy on the two-axis strategy lattice,
+two-species rare-mutation coevolution, and seed-explicit stochastic forcing
+with reproducible sharded sweeps. Explicit density regulation and finite-N
+demographic birth-death noise remain future extensions.
 
 ## Shared moving demand
 
@@ -119,6 +121,96 @@ finite population, or quantitative-genetic diffusion.
 The full grid optimizer is kept separately so local accessibility and global
 payoff optimum do not become the same estimand.
 
+## Population mutation-selection occupancy
+
+The deterministic payoff surface is promoted to a population distribution on a
+regular migration x phenology strategy lattice.
+
+Selection uses exponential payoff weighting,
+
+    w_i = exp(beta g_i),
+
+followed by symmetric mutation proposals in the four axial lattice directions.
+Each directional proposal has probability mu/4. At a boundary, an invalid
+proposal remains in the parental state.
+
+That boundary rule is deliberate: the mutation matrix is symmetric and doubly
+stochastic. Therefore beta=0 has an exact uniform stationary distribution over
+the strategy lattice rather than an artificial edge bias.
+
+The stationary occupancy reports:
+
+- mean migration and phenology rates;
+- mean migration share;
+- stationary mean growth;
+- entropy and effective number of occupied strategies;
+- highest-mass strategy;
+- stationary mass in interaction-failure and abiotic-failure states.
+
+This layer separates "which point maximizes payoff?" from "where does a
+mutation-selection population spend its time?"
+
+## Two-species coevolution and coordination barriers
+
+A second implementation lets both interacting lineages carry their own
+heritable migration and phenology tracking rates. Both see the same moving
+environment, and interaction loss depends on their spatial and phenological
+separation.
+
+Evolution proceeds as alternating rare substitutions:
+
+    mutate A while B is fixed
+    -> best improving A mutant fixes
+    -> mutate B while new A is fixed
+    -> best improving B mutant fixes.
+
+The first CI-tested result exposes an important accessibility effect. When
+interaction matching is sufficiently important, two lineages can remain on a
+matched mixed strategy even when both species have the same intrinsic cost
+bias toward one axis. A unilateral move toward the cheaper axis temporarily
+creates partner mismatch and can be selected against.
+
+Thus the model contains a direct analogue of PAYOFF's broader distinction
+between global value and local accessibility:
+
+    jointly better matched architecture
+    !=
+    architecture reachable by unilateral small mutations.
+
+This is a coevolutionary coordination barrier, not a claim that mixed tracking
+is generally stable in nature. Its phase boundary still needs systematic
+mapping.
+
+## Stochastic forcing and scalable sweeps
+
+The stochastic layer adds:
+
+    noisy climate increments,
+    time-varying partner spatial share,
+    partner-demand noise.
+
+Every realization is seed-explicit. Strategy comparisons use common random
+numbers: all strategies within one parameter point are evaluated against the
+same environmental realizations.
+
+Large sweeps are index-addressable and shardable:
+
+    sample_index % shard_count == shard_index.
+
+This makes results independent of worker count and execution order. The CLI
+also supports resume and dry-run workload accounting:
+
+    python scripts/migration_phenology_stochastic_sweep.py --dry-run
+
+The counted work unit is one ecological update of one strategy in one
+replicate. For S parameter points, G grid points per axis, R stochastic
+replicates and T ecological steps, planned work is
+
+    S * G^2 * R * T.
+
+This is the layer that can legitimately be scaled into a multi-day or
+month-scale computational experiment.
+
 ## Phase diagram
 
 The first sweep varies:
@@ -166,8 +258,7 @@ The boundary is:
     -> adaptive route under a moving environment
     -> possible partner-axis mismatch.
 
-Pollinator composition is not the focal stochastic variable in this v0.1
-model.
+Pollinator composition is not the focal stochastic variable in this model.
 
 ## Important finite-horizon boundary
 
@@ -175,26 +266,30 @@ Under directional environmental change, two interactors that allocate tracking
 to different axes can diverge cumulatively. Consequently the interaction
 penalty can grow with time.
 
-The simulation horizon is therefore part of the declared design. v0.1 is a
-finite-horizon tracking experiment, not a stationary-equilibrium theorem.
+The simulation horizon is therefore part of the declared design. The current
+tracking and coevolution layers are finite-horizon ecological experiments, not
+stationary-equilibrium theorems for directional climate change.
 
-A later version can add bounded seasonal forcing, moving climatic envelopes,
-or partner coevolution to ask when long-run stationary regimes exist.
+Bounded seasonal forcing, moving climatic envelopes, and explicit demographic
+regulation remain routes to genuinely stationary long-run ecological regimes.
 
 ## Scaling path
 
-The intended progression is:
+Current progression:
 
-1. deterministic two-axis benchmark;
-2. stochastic environmental velocity and partner lag;
-3. mutation-selection population occupancy over the strategy lattice;
-4. explicit density and extinction;
-5. partner coevolution;
-6. spatial landscape with local climatic velocity;
-7. large replicated parameter sweeps.
+1. deterministic two-axis benchmark — implemented;
+2. stochastic environmental forcing — implemented;
+3. mutation-selection population occupancy over the strategy lattice —
+   implemented;
+4. partner coevolution — implemented as alternating rare substitutions;
+5. reproducible sharded large replicated parameter sweeps — implemented;
+6. explicit density, demographic extinction and finite-N drift — pending;
+7. spatial landscape with local climatic velocity — pending;
+8. coevolutionary phase-boundary mapping at large scale — pending.
 
-Only stages 3-7 justify the very large run counts discussed for a future
-month-scale simulation programme.
+Stages 2-5 already provide a reproducible route to very large run counts.
+Stages 6-8 are the next scientific upgrades rather than prerequisites for
+basic computational scaling.
 
 ## Claim ceiling
 
