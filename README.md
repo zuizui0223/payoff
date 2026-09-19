@@ -562,6 +562,37 @@ The exact critical seasonal contrast and two migration boundaries are implemente
 
 ---
 
+### 11b. Migration–phenology tracking under a moving environment
+
+An exploratory PAYOFF-B extension now treats spatial movement and phenological
+change as alternative heritable axes for closing the same moving environmental
+mismatch. The interaction partner can track that demand through a different
+mixture of the two axes, so a lineage can be abiotically successful yet fail
+because partner overlap is lost.
+
+The baseline implementation provides:
+
+- a dependency-free deterministic tracking simulator;
+- a global migration x phenology strategy-grid optimizer;
+- a rare-mutation local adaptive walk;
+- phase classification into migration, phenology, mixed, stasis,
+  interaction failure, and abiotic failure;
+- a climate-velocity x partner-axis phase-sweep CLI.
+
+Run the default sweep with:
+
+    python scripts/migration_phenology_phase_sweep.py
+
+The model and claim boundary are documented in
+[theory/MIGRATION_PHENOLOGY_TRACKING.md](theory/MIGRATION_PHENOLOGY_TRACKING.md).
+
+This lane is not another pollinator-community realization model: its focal
+question is which adaptive axis tracks a moving environment, and when axis
+mismatch between interactors breaks otherwise successful environmental
+tracking.
+
+---
+
 ## 12. Main organizing principle
 
 PAYOFF is now best read as one transport hierarchy:
