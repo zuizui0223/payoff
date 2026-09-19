@@ -210,6 +210,7 @@ def vertical_barrier_habitat(
     *,
     barrier_x_index: int,
     gap_width: int,
+    gap_center_y_index: int | None = None,
     background_quality: float = 1.0,
 ) -> tuple[float, ...]:
     """Return habitat with a one-cell vertical wall and centered passable gap."""
@@ -227,12 +228,20 @@ def vertical_barrier_habitat(
     if gap_width >= height:
         return tuple(quality)
 
-    center = height // 2
+    center = (
+        height // 2
+        if gap_center_y_index is None
+        else gap_center_y_index
+    )
+    if not 0 <= center < height:
+        raise ValueError("gap_center_y_index out of bounds")
     if gap_width == 0:
         gap_rows: set[int] = set()
     else:
         lower = center - (gap_width - 1) // 2
         upper = lower + gap_width
+        if lower < 0 or upper > height:
+            raise ValueError("gap does not fit inside the landscape height")
         gap_rows = set(range(lower, upper))
 
     for y_index in range(height):
