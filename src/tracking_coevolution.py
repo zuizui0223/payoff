@@ -393,3 +393,116 @@ def coevolve_tracking_pair(
         converged=False,
         cycles=max_cycles,
     )
+
+
+
+@dataclass(frozen=True)
+class CoordinationBarrierDiagnostic:
+    local: CoevolutionResult
+    matched_optimum: PairSimulationResult
+    accessibility_gap: float
+    barrier: bool
+
+
+def optimize_matched_pair(
+    scenario: CoevolutionScenario,
+    *,
+    max_rate: float = 1.5,
+    points: int = 16,
+) -> PairSimulationResult:
+    """Optimize a constrained matched pair with strategy_a == strategy_b.
+
+    This is a coordinated benchmark, not an evolutionary path. Because both
+    lineages move together, the interaction mismatch is exactly zero at every
+    candidate strategy.
+    """
+
+    if max_rate <= 0.0:
+        raise ValueError("max_rate must be positive")
+    if points < 2:
+        raise ValueError("points must be at least 2")
+    values = [
+        max_rate * index / (points - 1)
+        for index in range(points)
+    ]
+    best: PairSimulationResult | None = None
+    for migration in values:
+        for phenology in values:
+            strategy = TrackingStrategy(
+                migration,
+                phenology,
+            )
+            candidate = simulate_coevolving_pair(
+                strategy,
+                strategy,
+                scenario,
+            )
+            candidate_score = 0.5 * (
+                candidate.mean_log_growth_a
+                + candidate.mean_log_growth_b
+            )
+            if best is None:
+                best = candidate
+                continue
+            best_score = 0.5 * (
+                best.mean_log_growth_a
+                + best.mean_log_growth_b
+            )
+            if candidate_score > best_score:
+                best = candidate
+            elif candidate_score == best_score:
+                if (
+                    strategy.total_rate
+                    < best.strategy_a.total_rate
+                ):
+                    best = candidate
+    assert best is not None
+    return best
+
+
+def coordination_barrier_diagnostic(
+    scenario: CoevolutionScenario,
+    *,
+    initial_a: TrackingStrategy = TrackingStrategy(0.0, 0.0),
+    initial_b: TrackingStrategy = TrackingStrategy(0.0, 0.0),
+    mutation_step: float = 0.1,
+    max_rate: float = 1.5,
+    max_cycles: int = 100,
+    matched_points: int | None = None,
+    gap_tolerance: float = 1e-10,
+) -> CoordinationBarrierDiagnostic:
+    """Compare local unilateral accessibility with a coordinated benchmark."""
+
+    if gap_tolerance < 0.0:
+        raise ValueError("gap_tolerance must be non-negative")
+    local = coevolve_tracking_pair(
+        scenario,
+        initial_a,
+        initial_b,
+        mutation_step=mutation_step,
+        max_rate=max_rate,
+        max_cycles=max_cycles,
+    )
+    if matched_points is None:
+        # Align the benchmark grid with the mutation lattice whenever possible.
+        matched_points = int(round(max_rate / mutation_step)) + 1
+    matched = optimize_matched_pair(
+        scenario,
+        max_rate=max_rate,
+        points=matched_points,
+    )
+    local_score = 0.5 * (
+        local.final.mean_log_growth_a
+        + local.final.mean_log_growth_b
+    )
+    matched_score = 0.5 * (
+        matched.mean_log_growth_a
+        + matched.mean_log_growth_b
+    )
+    gap = max(0.0, matched_score - local_score)
+    return CoordinationBarrierDiagnostic(
+        local=local,
+        matched_optimum=matched,
+        accessibility_gap=gap,
+        barrier=gap > gap_tolerance,
+    )
