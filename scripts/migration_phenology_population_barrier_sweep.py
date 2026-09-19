@@ -230,11 +230,38 @@ def main() -> None:
         == "barrier_with_persistence_cost"
         for row in rows
     )
-    print(
-        f"{args.output} cells={len(rows)} "
-        f"barriers={barriers} "
-        f"barriers_with_persistence_cost={costly}"
-    )
+    if rows:
+        max_gap_row = max(
+            rows,
+            key=lambda row: float(row["accessibility_gap"]),
+        )
+        max_persistence_row = max(
+            rows,
+            key=lambda row: float(row["persistence_gain"]),
+        )
+        print(
+            f"{args.output} cells={len(rows)} "
+            f"barriers={barriers} "
+            f"barriers_with_persistence_cost={costly}"
+        )
+        print(
+            "max_accessibility_gap="
+            f"{float(max_gap_row['accessibility_gap']):.12g} "
+            f"at_interaction={max_gap_row['interaction_strength']} "
+            f"cost_bias={max_gap_row['cost_bias']} "
+            f"climate_velocity={max_gap_row['climate_velocity']}"
+        )
+        print(
+            "max_persistence_gain="
+            f"{float(max_persistence_row['persistence_gain']):.12g} "
+            f"local={max_persistence_row['local_joint_persistence']} "
+            f"matched={max_persistence_row['matched_joint_persistence']} "
+            f"at_interaction={max_persistence_row['interaction_strength']} "
+            f"cost_bias={max_persistence_row['cost_bias']} "
+            f"climate_velocity={max_persistence_row['climate_velocity']}"
+        )
+    else:
+        print(f"{args.output} cells=0")
 
 
 if __name__ == "__main__":
