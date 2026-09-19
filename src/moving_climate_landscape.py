@@ -851,3 +851,64 @@ def landscape_persistence_frontier(
         )
 
     return out
+
+
+
+def geometric_tracking_capacity(
+    scenario: MovingLandscapeScenario,
+) -> float:
+    """Maximum climate-equivalent offset available from space plus phenology."""
+
+    edge_offset = (
+        scenario.spatial_gradient
+        * max(abs(position) for position in scenario.positions)
+    )
+    phenology_offset = (
+        scenario.phenology_scale
+        * scenario.max_abs_phenology_shift
+    )
+    return edge_offset + phenology_offset
+
+
+def zero_mismatch_velocity_ceiling(
+    scenario: MovingLandscapeScenario,
+) -> float:
+    """Velocity whose final demand exactly equals geometric tracking capacity.
+
+    Above this value, no patch/phenology combination can have zero mismatch at
+    the final simulated time. This is a geometric perfect-tracking ceiling, not
+    a persistence threshold.
+    """
+
+    return geometric_tracking_capacity(scenario) / scenario.steps
+
+
+def terminal_nonnegative_growth_velocity_ceiling(
+    scenario: MovingLandscapeScenario,
+    strategy: TrackingStrategy,
+    parameters: SpeciesTrackingParameters,
+) -> float | None:
+    """Best-case final velocity compatible with nonnegative low-density growth.
+
+    This assumes a matched interaction partner, placement at the favorable
+    landscape edge, and phenology at its allowed bound. Density regulation is
+    excluded because this is a low-density fitness ceiling.
+
+    The value is not a persistence threshold: finite populations can remain
+    present for a while even after terminal low-density growth becomes negative.
+    """
+
+    cost = architecture_cost(strategy, parameters)
+    intrinsic = parameters.baseline_growth - cost
+    if intrinsic < 0.0:
+        return None
+    if parameters.abiotic_strength == 0.0:
+        return float("inf")
+
+    mismatch_tolerance = sqrt(
+        2.0 * intrinsic / parameters.abiotic_strength
+    )
+    return (
+        geometric_tracking_capacity(scenario)
+        + mismatch_tolerance
+    ) / scenario.steps
