@@ -70,7 +70,7 @@ def main() -> None:
             "phenology_cost - migration_cost; positive means migration is cheaper"
         ),
     )
-    parser.add_argument("--base-cost", type=float, default=0.065)
+    parser.add_argument("--base-cost", type=float, default=0.08)
     parser.add_argument("--climate-velocity", type=float, default=0.04)
     parser.add_argument("--baseline-growth", type=float, default=0.35)
     parser.add_argument("--abiotic-strength", type=float, default=1.0)
