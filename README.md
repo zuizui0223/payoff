@@ -621,7 +621,29 @@ barrier crossing did **not** raise long-run mean joint growth because broader
 drift occupancy imposed a larger payoff load. The retained result is therefore
 drift-assisted barrier crossing, not drift rescue.
 
+The explicit spatial extension is frozen separately in
+[docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md](docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md).
+Here migration is actual conservative movement among patches and the climate
+envelope moves across a finite landscape. The canonical low-density-fitness
+runs give a monotone persistence frontier: increasing the allowed phenological
+shift from 0 to 5 raises the sampled maximum persistent climate velocity from
+0.030 to 0.065, with identical frontier brackets on 7 x 7 and 11 x 11 strategy
+grids. Every frontier strategy remains migration-dominant, so phenology extends
+the persistence envelope without replacing spatial range tracking near the
+boundary.
+
+Spatialization also makes the coordination problem demographically sharp. In
+the coarse explicit-landscape design, 52/108 cells contain a coordination
+barrier and 24/108 have local coevolutionary extinction but coordinated
+persistence. With a finer unilateral mutation step, 57/81 positive-interaction
+cells retain barriers and 21/81 retain persistence rescue. A direct one-step
+audit shows the mechanism: moving both partners from (migration, phenology)
+=(0.2,0.0) to (0.2,0.2) raises joint low-density payoff by about +1.115, while
+either partner moving alone has payoff change about -1.427 because interaction
+mismatch rises to about 3.189.
+
 ---
+
 
 
 ## 12. Main organizing principle
