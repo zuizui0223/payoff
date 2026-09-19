@@ -3,6 +3,7 @@ from math import isclose
 from src.moving_climate_landscape_2d import (
     MovingLandscape2DScenario,
     build_landscape_2d_geometry,
+    corridor_persistence_frontier,
     gaussian_initial_distribution_2d,
     grid_dispersal_2d,
     optimize_matched_2d_strategy,
@@ -335,3 +336,61 @@ def test_cached_2d_geometry_is_numerically_identical():
         _geometry=geometry,
     )
     assert cached == direct
+
+
+def test_corridor_frontier_reports_gap_specific_brackets():
+    rows = [
+        {
+            "gap_width": 1,
+            "phenology_limit": 0.0,
+            "climate_velocity": 0.02,
+            "joint_persisted": 1,
+            "migration_rate": 0.4,
+            "phenology_rate": 0.0,
+            "mean_fraction_beyond_barrier": 0.2,
+            "phenology_limit_fraction": 0.0,
+            "outcome": "migration",
+        },
+        {
+            "gap_width": 1,
+            "phenology_limit": 0.0,
+            "climate_velocity": 0.03,
+            "joint_persisted": 0,
+            "migration_rate": 0.6,
+            "phenology_rate": 0.0,
+            "mean_fraction_beyond_barrier": 0.3,
+            "phenology_limit_fraction": 0.0,
+            "outcome": "failure",
+        },
+        {
+            "gap_width": 5,
+            "phenology_limit": 2.0,
+            "climate_velocity": 0.02,
+            "joint_persisted": 1,
+            "migration_rate": 0.2,
+            "phenology_rate": 0.2,
+            "mean_fraction_beyond_barrier": 0.5,
+            "phenology_limit_fraction": 0.4,
+            "outcome": "mixed",
+        },
+        {
+            "gap_width": 5,
+            "phenology_limit": 2.0,
+            "climate_velocity": 0.04,
+            "joint_persisted": 1,
+            "migration_rate": 0.4,
+            "phenology_rate": 0.2,
+            "mean_fraction_beyond_barrier": 0.7,
+            "phenology_limit_fraction": 0.8,
+            "outcome": "migration",
+        },
+    ]
+    frontier = corridor_persistence_frontier(rows)
+    narrow = frontier[0]
+    wide = frontier[1]
+    assert narrow["max_persisted_velocity"] == 0.02
+    assert narrow["first_failed_velocity_above"] == 0.03
+    assert narrow["monotone_persistence"] == 1
+    assert wide["max_persisted_velocity"] == 0.04
+    assert wide["first_failed_velocity_above"] is None
+    assert wide["mean_crossing_at_frontier"] == 0.7
