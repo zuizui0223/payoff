@@ -454,21 +454,52 @@ def main():
             stages["speed_btw_km_day"] = speed
             staging_all.append(stages)
 
-        total_dist = cumulative_track_distance_km(classified)
+        # The published Supplement computes summary.speed *after* removing
+        # HMM state 4 (migratory flight) from wigeon.df. The remaining sequence
+        # connects successive staging/non-flight positions and divides their
+        # cumulative geodesic distance by the full elapsed migration time.
+        # Our earlier all-state path-length metric over-counted high-frequency
+        # flight tortuosity and is retained only as a sensitivity diagnostic.
+        total_path_dist = cumulative_track_distance_km(classified)
         duration_days = (
             classified.time.max() - classified.time.min()
         ).total_seconds() / 86400.0
+
+        non_migratory = classified[classified["state"] != 4].copy()
+        published_summary_dist = cumulative_track_distance_km(non_migratory)
+        published_summary_duration = (
+            (non_migratory.time.max() - non_migratory.time.min()).total_seconds()
+            / 86400.0
+            if len(non_migratory) >= 2
+            else np.nan
+        )
+        published_summary_speed = (
+            published_summary_dist / published_summary_duration
+            if (
+                np.isfinite(published_summary_dist)
+                and np.isfinite(published_summary_duration)
+                and published_summary_duration > 0
+            )
+            else np.nan
+        )
+
         track_rows.append(
             {
                 "individual_id": str(ind),
                 "year": int(year),
                 "endpoint_distance_km": meta["endpoint_distance_km"],
-                "cumulative_migration_distance_km": total_dist,
+                "cumulative_migration_distance_km": total_path_dist,
                 "migration_duration_days": duration_days,
-                "migration_speed_km_day": (
-                    total_dist / duration_days if duration_days > 0 else np.nan
+                "all_state_path_speed_km_day": (
+                    total_path_dist / duration_days
+                    if duration_days > 0
+                    else np.nan
                 ),
+                "published_summary_distance_km": published_summary_dist,
+                "published_summary_duration_days": published_summary_duration,
+                "migration_speed_km_day": published_summary_speed,
                 "n_migration_fixes": int(len(classified)),
+                "n_non_migratory_state_fixes": int(len(non_migratory)),
                 "fraction_state4_migratory": float(
                     np.mean(classified["state"] == 4)
                 ),
@@ -542,6 +573,11 @@ def main():
         "threshold_d_km": THRESHOLD_D_KM,
         "source_freeze": str(ORIGINAL_DATA_FREEZE),
         "hmm": "published fitted 4-state parameters from Additional file 2",
+        "migration_speed_definition": (
+            "Supplement summary.speed analogue: cumulative geodesic distance "
+            "after excluding HMM state 4, divided by elapsed time of that "
+            "non-state4 sequence; all-state path speed retained separately"
+        ),
         "observed": observed,
         "published_reference": published,
         "replication_gates": gates,
