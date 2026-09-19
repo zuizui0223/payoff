@@ -115,27 +115,55 @@ def inspect_tabular_bytes(name: str, raw: bytes):
     return out
 
 
-def inspect_archive(path: Path):
+def inspect_zip_bytes(raw: bytes, prefix: str = "", depth: int = 0):
     records = []
-    if not zipfile.is_zipfile(path):
+    if depth > 3:
         return records
-    with zipfile.ZipFile(path) as zf:
-        for info in zf.infolist():
-            if info.is_dir():
-                continue
-            rec = {
-                "member": info.filename,
-                "compressed_bytes": int(info.compress_size),
-                "uncompressed_bytes": int(info.file_size),
-            }
-            if info.file_size <= 25_000_000:
-                try:
-                    raw = zf.read(info.filename)
-                    rec["content"] = inspect_tabular_bytes(info.filename, raw)
-                except Exception as exc:
-                    rec["inspect_error"] = f"{type(exc).__name__}:{exc}"
-            records.append(rec)
+    try:
+        bio = io.BytesIO(raw)
+        if not zipfile.is_zipfile(bio):
+            return records
+        bio.seek(0)
+        with zipfile.ZipFile(bio) as zf:
+            for info in zf.infolist():
+                if info.is_dir():
+                    continue
+                full = f"{prefix}{info.filename}"
+                rec = {
+                    "member": full,
+                    "compressed_bytes": int(info.compress_size),
+                    "uncompressed_bytes": int(info.file_size),
+                    "archive_depth": int(depth),
+                }
+                if info.file_size <= 50_000_000:
+                    try:
+                        payload = zf.read(info.filename)
+                        rec["content"] = inspect_tabular_bytes(full, payload)
+                        if (
+                            info.filename.lower().endswith(".zip")
+                            or payload.startswith(b"PK")
+                        ):
+                            nested = inspect_zip_bytes(
+                                payload,
+                                prefix=full + "::",
+                                depth=depth + 1,
+                            )
+                            rec["nested_member_count"] = len(nested)
+                            records.extend(nested)
+                    except Exception as exc:
+                        rec["inspect_error"] = (
+                            f"{type(exc).__name__}:{exc}"
+                        )
+                records.append(rec)
+    except Exception:
+        return records
     return records
+
+
+def inspect_archive(path: Path):
+    if not path.exists() or not zipfile.is_zipfile(path):
+        return []
+    return inspect_zip_bytes(path.read_bytes(), prefix="", depth=0)
 
 
 def main():
@@ -366,6 +394,12 @@ def main():
                     "table_rows": content.get("table_rows"),
                     "table_cols": content.get("table_cols"),
                     "columns": " | ".join(content.get("columns") or []),
+                    "head_json": json.dumps(
+                        content.get("head") or [],
+                        ensure_ascii=False,
+                        default=str,
+                    ),
+                    "archive_depth": member.get("archive_depth"),
                 }
             )
     pd.DataFrame(rows).to_csv(
