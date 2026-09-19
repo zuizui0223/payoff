@@ -6,6 +6,7 @@ from src.moving_climate_landscape_2d import (
     corridor_persistence_frontier,
     gaussian_initial_distribution_2d,
     grid_dispersal_2d,
+    multiple_vertical_barriers_habitat,
     optimize_matched_2d_strategy,
     simulate_moving_landscape_2d_pair,
     vertical_barrier_habitat,
@@ -394,3 +395,73 @@ def test_corridor_frontier_reports_gap_specific_brackets():
     assert wide["max_persisted_velocity"] == 0.04
     assert wide["first_failed_velocity_above"] is None
     assert wide["mean_crossing_at_frontier"] == 0.7
+
+
+def test_zigzag_double_barrier_requires_transverse_route():
+    width = 15
+    height = 15
+    center_y = height // 2
+    straight = multiple_vertical_barriers_habitat(
+        width,
+        height,
+        barriers=(
+            (9, 1, center_y),
+            (12, 1, center_y),
+        ),
+    )
+    zigzag = multiple_vertical_barriers_habitat(
+        width,
+        height,
+        barriers=(
+            (9, 1, center_y + 5),
+            (12, 1, center_y - 5),
+        ),
+    )
+    straight_scenario = MovingLandscape2DScenario(
+        width=width,
+        height=height,
+        climate_velocity=0.0,
+        habitat_quality=straight,
+        steps=20,
+        burn_in=5,
+    )
+    zigzag_scenario = MovingLandscape2DScenario(
+        width=width,
+        height=height,
+        climate_velocity=0.0,
+        habitat_quality=zigzag,
+        steps=20,
+        burn_in=5,
+    )
+
+    initial = [0.0] * (width * height)
+    initial[straight_scenario.index(8, center_y)] = 100.0
+    straight_state = tuple(initial)
+    zigzag_state = tuple(initial)
+
+    for _ in range(80):
+        straight_state = grid_dispersal_2d(
+            straight_state,
+            1.0,
+            straight_scenario,
+        )
+        zigzag_state = grid_dispersal_2d(
+            zigzag_state,
+            1.0,
+            zigzag_scenario,
+        )
+
+    def beyond_second_wall(state, scenario):
+        return sum(
+            value
+            for index, value in enumerate(state)
+            if scenario.coordinate_indices(index)[0] > 12
+        )
+
+    assert beyond_second_wall(
+        straight_state,
+        straight_scenario,
+    ) > beyond_second_wall(
+        zigzag_state,
+        zigzag_scenario,
+    )
