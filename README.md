@@ -603,7 +603,26 @@ question is which adaptive axis tracks a moving environment, and when axis
 mismatch between interactors breaks otherwise successful environmental
 tracking.
 
+The first frozen synthetic receipt is
+[docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md](docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md).
+Within the declared 75-cell ecological design, 44 cells contain a positive
+coordination gap between the locally accessible coevolution endpoint and a
+coordinated matched-pair optimum. Crossing that design with demographic stress
+showed that the barrier is usually demographically cryptic: an independent
+128-replicate rerun retained no cell with a >=0.10 persistence gain. Instead,
+the replicated signal is a **demographic visibility window**: mean persistence
+gain is largest when local persistence is intermediate and approaches zero
+when both alternatives are almost certainly lost or almost certainly persist.
+
+Finite-N weak-mutation evolution adds a second distinction. Small populations
+can stochastically cross the deterministic coordination barrier, whereas large
+populations remain locked at the local endpoint. In the first drift pilot this
+barrier crossing did **not** raise long-run mean joint growth because broader
+drift occupancy imposed a larger payoff load. The retained result is therefore
+drift-assisted barrier crossing, not drift rescue.
+
 ---
+
 
 ## 12. Main organizing principle
 
