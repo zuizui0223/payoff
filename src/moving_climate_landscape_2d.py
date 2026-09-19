@@ -726,6 +726,7 @@ def simulate_moving_landscape_2d_pair(
             demand,
             interaction_sq,
             scenario,
+            geometry,
         )
 
         total_a = sum(abundance_a)
@@ -751,6 +752,7 @@ def simulate_moving_landscape_2d_pair(
                 phenology_b,
                 demand,
                 scenario,
+                geometry,
             )
             abiotic_sq_a_sum += rms_a * rms_a
             abiotic_sq_b_sum += rms_b * rms_b
