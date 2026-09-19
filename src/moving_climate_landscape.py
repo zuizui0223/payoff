@@ -48,6 +48,8 @@ class MovingLandscapeScenario:
     density_coefficient: float = 0.30
     extinction_threshold: float = 1.0
     boundary_retention: float = 1.0
+    long_distance_fraction: float = 0.0
+    long_distance_step: int = 2
     steps: int = 160
     burn_in: int = 40
     species_a: SpeciesTrackingParameters = SpeciesTrackingParameters(
@@ -72,6 +74,7 @@ class MovingLandscapeScenario:
             "density_coefficient",
             "extinction_threshold",
             "boundary_retention",
+            "long_distance_fraction",
         ):
             value = float(getattr(self, name))
             if not isfinite(value):
@@ -94,6 +97,10 @@ class MovingLandscapeScenario:
             raise ValueError("extinction_threshold must be non-negative")
         if not 0.0 <= self.boundary_retention <= 1.0:
             raise ValueError("boundary_retention must lie in [0,1]")
+        if not 0.0 <= self.long_distance_fraction <= 1.0:
+            raise ValueError("long_distance_fraction must lie in [0,1]")
+        if self.long_distance_step < 2:
+            raise ValueError("long_distance_step must be at least 2")
         if not isfinite(self.climate_velocity):
             raise ValueError("climate_velocity must be finite")
         if self.steps <= 0:
@@ -239,6 +246,72 @@ def reflect_nearest_neighbor_dispersal(
         migration_rate,
         boundary_retention=1.0,
     )
+
+
+def mixed_range_dispersal(
+    abundance: tuple[float, ...] | list[float],
+    migration_rate: float,
+    *,
+    boundary_retention: float = 1.0,
+    long_distance_fraction: float = 0.0,
+    long_distance_step: int = 2,
+) -> tuple[float, ...]:
+    """Disperse moving mass across nearest and longer-distance steps.
+
+    A fraction long_distance_fraction of the moving mass uses
+    long_distance_step patches per directional move; the remainder moves one
+    patch. Out-of-landscape mass is retained at the nearest boundary according
+    to boundary_retention and otherwise lost.
+    """
+
+    if len(abundance) < 2:
+        raise ValueError("abundance must contain at least two patches")
+    if any(value < 0.0 or not isfinite(value) for value in abundance):
+        raise ValueError("abundance values must be finite and non-negative")
+    if not 0.0 <= boundary_retention <= 1.0:
+        raise ValueError("boundary_retention must lie in [0,1]")
+    if not 0.0 <= long_distance_fraction <= 1.0:
+        raise ValueError("long_distance_fraction must lie in [0,1]")
+    if long_distance_step < 2:
+        raise ValueError("long_distance_step must be at least 2")
+
+    fraction = dispersal_fraction(migration_rate)
+    if fraction == 0.0:
+        return tuple(float(value) for value in abundance)
+
+    out = [0.0] * len(abundance)
+    last = len(abundance) - 1
+
+    def deposit(
+        source_index: int,
+        target_index: int,
+        mass: float,
+    ) -> None:
+        if 0 <= target_index <= last:
+            out[target_index] += mass
+            return
+        boundary = 0 if target_index < 0 else last
+        out[boundary] += boundary_retention * mass
+
+    for index, value in enumerate(abundance):
+        moving = fraction * value
+        out[index] += value - moving
+
+        nearest_mass = moving * (1.0 - long_distance_fraction)
+        long_mass = moving * long_distance_fraction
+        for direction in (-1, 1):
+            deposit(
+                index,
+                index + direction,
+                0.5 * nearest_mass,
+            )
+            deposit(
+                index,
+                index + direction * long_distance_step,
+                0.5 * long_mass,
+            )
+
+    return tuple(out)
 
 
 def gaussian_initial_distribution(
@@ -414,10 +487,12 @@ def _one_species_generation(
         weighted_realized_numerator += value * realized_growth
         reproduced.append(value * exp(realized_growth))
 
-    dispersed = nearest_neighbor_dispersal(
+    dispersed = mixed_range_dispersal(
         reproduced,
         strategy.migration_rate,
         boundary_retention=scenario.boundary_retention,
+        long_distance_fraction=scenario.long_distance_fraction,
+        long_distance_step=scenario.long_distance_step,
     )
     return (
         dispersed,
@@ -700,6 +775,8 @@ def landscape_strategy_sweep(
                 density_coefficient=scenario.density_coefficient,
                 extinction_threshold=scenario.extinction_threshold,
                 boundary_retention=scenario.boundary_retention,
+                long_distance_fraction=scenario.long_distance_fraction,
+                long_distance_step=scenario.long_distance_step,
                 steps=scenario.steps,
                 burn_in=scenario.burn_in,
                 species_a=scenario.species_a,
