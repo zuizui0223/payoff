@@ -3,6 +3,8 @@ from src.tracking_coevolution import (
     CoevolutionScenario,
     SpeciesTrackingParameters,
     coevolve_tracking_pair,
+    coordination_barrier_diagnostic,
+    optimize_matched_pair,
     simulate_coevolving_pair,
 )
 
@@ -210,3 +212,85 @@ def test_partner_matching_can_create_coordination_lock_in_against_axis_cost_bias
         free.final.strategy_a.migration_rate
         > free.final.strategy_a.phenology_rate
     )
+
+
+def test_matched_pair_optimizer_has_zero_interaction_mismatch():
+    parameters = SpeciesTrackingParameters(
+        interaction_strength=0.8,
+        migration_cost=0.02,
+        phenology_cost=0.08,
+        baseline_growth=0.35,
+    )
+    scenario = CoevolutionScenario(
+        climate_velocity=0.04,
+        steps=80,
+        burn_in=20,
+        species_a=parameters,
+        species_b=parameters,
+    )
+    optimum = optimize_matched_pair(
+        scenario,
+        max_rate=0.8,
+        points=9,
+    )
+    assert optimum.strategy_a == optimum.strategy_b
+    assert optimum.rms_interaction_mismatch == 0.0
+
+
+def test_coordination_barrier_detects_unilateral_accessibility_gap():
+    parameters = SpeciesTrackingParameters(
+        interaction_strength=0.3,
+        migration_cost=0.01,
+        phenology_cost=0.12,
+        baseline_growth=0.35,
+    )
+    scenario = CoevolutionScenario(
+        climate_velocity=0.04,
+        steps=100,
+        burn_in=20,
+        species_a=parameters,
+        species_b=parameters,
+    )
+    diagnostic = coordination_barrier_diagnostic(
+        scenario,
+        mutation_step=0.1,
+        max_rate=1.0,
+        max_cycles=40,
+    )
+
+    assert diagnostic.local.converged
+    assert diagnostic.barrier
+    assert diagnostic.accessibility_gap > 0.0
+    assert (
+        diagnostic.matched_optimum.strategy_a.migration_rate
+        > diagnostic.matched_optimum.strategy_a.phenology_rate
+    )
+    assert (
+        diagnostic.local.final.strategy_a.migration_rate
+        == diagnostic.local.final.strategy_a.phenology_rate
+    )
+
+
+def test_no_interaction_removes_coordination_barrier_in_cost_biased_case():
+    parameters = SpeciesTrackingParameters(
+        interaction_strength=0.0,
+        migration_cost=0.01,
+        phenology_cost=0.12,
+        baseline_growth=0.35,
+    )
+    scenario = CoevolutionScenario(
+        climate_velocity=0.04,
+        steps=100,
+        burn_in=20,
+        species_a=parameters,
+        species_b=parameters,
+    )
+    diagnostic = coordination_barrier_diagnostic(
+        scenario,
+        mutation_step=0.1,
+        max_rate=1.0,
+        max_cycles=40,
+    )
+
+    assert diagnostic.local.converged
+    assert diagnostic.accessibility_gap < 1e-9
