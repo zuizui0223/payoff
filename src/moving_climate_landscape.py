@@ -716,3 +716,118 @@ def landscape_strategy_sweep(
                 }
             )
     return rows
+
+
+
+def landscape_persistence_frontier(
+    rows: list[dict[str, float | str | int]],
+) -> list[dict[str, float | int | str | None]]:
+    """Summarize the finite-horizon persistence frontier by phenology limit.
+
+    The function does not assume monotonic persistence. It reports whether
+    persistence is monotone non-increasing with climate velocity and gives the
+    highest persisted velocity plus the first sampled failure above it.
+    """
+
+    if not rows:
+        return []
+
+    limits = sorted(
+        {
+            float(row["phenology_limit"])
+            for row in rows
+        }
+    )
+    out: list[dict[str, float | int | str | None]] = []
+
+    for limit in limits:
+        subset = sorted(
+            (
+                row
+                for row in rows
+                if float(row["phenology_limit"]) == limit
+            ),
+            key=lambda row: float(row["climate_velocity"]),
+        )
+        velocities = [
+            float(row["climate_velocity"])
+            for row in subset
+        ]
+        persisted = [
+            int(row["joint_persisted"]) == 1
+            for row in subset
+        ]
+
+        seen_failure = False
+        monotone = True
+        for value in persisted:
+            if not value:
+                seen_failure = True
+            elif seen_failure:
+                monotone = False
+
+        persisted_rows = [
+            row
+            for row in subset
+            if int(row["joint_persisted"]) == 1
+        ]
+        if persisted_rows:
+            max_row = max(
+                persisted_rows,
+                key=lambda row: float(row["climate_velocity"]),
+            )
+            max_velocity = float(max_row["climate_velocity"])
+            outcome_at_frontier = str(max_row["outcome"])
+            migration_at_frontier = float(max_row["migration_rate"])
+            phenology_at_frontier = float(max_row["phenology_rate"])
+            edge_mass_at_frontier = float(
+                max_row["right_edge_mass_fraction"]
+            )
+            limit_fraction_at_frontier = float(
+                max_row["phenology_limit_fraction"]
+            )
+        else:
+            max_velocity = None
+            outcome_at_frontier = "none"
+            migration_at_frontier = None
+            phenology_at_frontier = None
+            edge_mass_at_frontier = None
+            limit_fraction_at_frontier = None
+
+        failed_above = [
+            row
+            for row in subset
+            if int(row["joint_persisted"]) == 0
+            and (
+                max_velocity is None
+                or float(row["climate_velocity"]) > max_velocity
+            )
+        ]
+        first_failed_velocity = (
+            min(
+                float(row["climate_velocity"])
+                for row in failed_above
+            )
+            if failed_above
+            else None
+        )
+
+        out.append(
+            {
+                "phenology_limit": limit,
+                "sampled_velocity_min": min(velocities),
+                "sampled_velocity_max": max(velocities),
+                "max_persisted_velocity": max_velocity,
+                "first_failed_velocity_above": first_failed_velocity,
+                "monotone_persistence": int(monotone),
+                "outcome_at_frontier": outcome_at_frontier,
+                "migration_rate_at_frontier": migration_at_frontier,
+                "phenology_rate_at_frontier": phenology_at_frontier,
+                "right_edge_mass_at_frontier": edge_mass_at_frontier,
+                "phenology_limit_fraction_at_frontier": (
+                    limit_fraction_at_frontier
+                ),
+            }
+        )
+
+    return out
