@@ -1,0 +1,81 @@
+name: Movement-phenology Stage 1
+
+on:
+  push:
+    paths:
+      - 'analysis/movement_phenology/**'
+      - 'tests/test_movement_phenology_metrics.py'
+      - '.github/workflows/movement-phenology-stage1.yml'
+  pull_request:
+    paths:
+      - 'analysis/movement_phenology/**'
+      - 'docs/MOVEMENT_PHENOLOGY_**'
+      - 'tests/test_movement_phenology_metrics.py'
+      - '.github/workflows/movement-phenology-stage1.yml'
+  workflow_dispatch:
+
+jobs:
+  amaral-stage1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+
+      - name: Check R dependency
+        run: Rscript -e 'stopifnot(requireNamespace("mgcv", quietly=TRUE)); packageVersion("mgcv")'
+
+      - name: Download pinned Amaral et al. analysis data
+        run: |
+          mkdir -p external/amaral_2025/data
+          curl --fail --location --retry 3 \
+            https://raw.githubusercontent.com/br-amaral/BirdMigrationSpeed/62c58d77c2028bd863dfe3697b0d9cf29ceaeab0/data/final.rds \
+            --output external/amaral_2025/data/final.rds
+          test -s external/amaral_2025/data/final.rds
+          sha256sum external/amaral_2025/data/final.rds
+
+      - name: Run PAYOFF-B movement-phenology reanalysis
+        run: Rscript analysis/movement_phenology/reanalyse_amaral_payoff_b.R
+
+      - name: Run species-level trait moderator audit
+        run: Rscript analysis/movement_phenology/stage1_trait_moderators.R
+
+      - name: Print Stage-1 receipts
+        run: |
+          cat outputs/movement_phenology/stage1_summary.csv
+          cat outputs/movement_phenology/stage1_quadratic_raw.csv
+          cat outputs/movement_phenology/stage1_quadratic_centered.csv
+          cat outputs/movement_phenology/stage1_gam_receipts.csv
+          cat outputs/movement_phenology/stage1_gam_minima.csv
+          cat outputs/movement_phenology/stage1_checkpoints.csv
+          cat outputs/movement_phenology/stage1_optimum_uncertainty.csv
+          cat outputs/movement_phenology/stage1_species_summary.csv
+          cat outputs/movement_phenology/stage1_trait_moderator_summary.csv
+          cat outputs/movement_phenology/stage1_trait_moderator_associations.csv
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: movement-phenology-stage1
+          path: |
+            outputs/movement_phenology/stage1_summary.csv
+            outputs/movement_phenology/stage1_gam_curves.csv
+            outputs/movement_phenology/stage1_gam_minima.csv
+            outputs/movement_phenology/stage1_checkpoints.csv
+            outputs/movement_phenology/stage1_quadratic_raw.csv
+            outputs/movement_phenology/stage1_quadratic_centered.csv
+            outputs/movement_phenology/stage1_gam_receipts.csv
+            outputs/movement_phenology/stage1_optimum_uncertainty.csv
+            outputs/movement_phenology/stage1_species_vertices.csv
+            outputs/movement_phenology/stage1_species_summary.csv
+            outputs/movement_phenology/stage1_trait_species.csv
+            outputs/movement_phenology/stage1_trait_moderator_summary.csv
+            outputs/movement_phenology/stage1_trait_moderator_associations.csv
+            outputs/movement_phenology/stage1_gam_summary.txt
+            outputs/movement_phenology/stage1_centered_gam_summary.txt
+            outputs/movement_phenology/stage1_quadratic_summary.txt
+            outputs/movement_phenology/stage1_centered_quadratic_summary.txt
+          if-no-files-found: error

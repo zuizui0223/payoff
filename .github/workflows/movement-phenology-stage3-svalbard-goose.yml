@@ -1,0 +1,89 @@
+name: Movement-phenology Stage 3 Svalbard goose source audit
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'analysis/movement_phenology/stage3_barnacle_goose_source_probe.py'
+      - 'analysis/movement_phenology/stage3_svalbard_goose_*.py'
+      - 'analysis/movement_phenology/gdd_jerk.py'
+      - 'tests/test_movement_phenology_gdd_jerk.py'
+      - '.github/workflows/movement-phenology-stage3-svalbard-goose.yml'
+  pull_request:
+    paths:
+      - 'analysis/movement_phenology/stage3_barnacle_goose_source_probe.py'
+      - 'analysis/movement_phenology/stage3_svalbard_goose_*.py'
+      - 'analysis/movement_phenology/gdd_jerk.py'
+      - 'tests/test_movement_phenology_gdd_jerk.py'
+      - '.github/workflows/movement-phenology-stage3-svalbard-goose.yml'
+
+jobs:
+  source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install parser
+        run: python -m pip install --disable-pip-version-check pytest pandas numpy scikit-learn scipy requests statsmodels
+
+      - name: Download public Movebank Data Repository bitstreams
+        run: |
+          mkdir -p external/barnacle_goose_svalbard
+          curl --fail --location --retry 3 \
+            'https://datarepository.movebank.org/server/api/core/bitstreams/df28a80e-e0c4-49fb-aa87-76ceb2d2b76f/content' \
+            --output external/barnacle_goose_svalbard/gps.csv
+          curl --fail --location --retry 3 \
+            'https://datarepository.movebank.org/server/api/core/bitstreams/a6e123b0-7588-40da-8f06-73559bb3ff6b/content' \
+            --output external/barnacle_goose_svalbard/reference.csv
+          test -s external/barnacle_goose_svalbard/gps.csv
+          test -s external/barnacle_goose_svalbard/reference.csv
+          wc -c external/barnacle_goose_svalbard/*.csv
+          sha256sum external/barnacle_goose_svalbard/*.csv
+
+      - name: Inventory Svalbard goose source data
+        run: python analysis/movement_phenology/stage3_barnacle_goose_source_probe.py
+
+      - name: Reconstruct spring stopovers and broad regions
+        run: python analysis/movement_phenology/stage3_svalbard_goose_stopovers.py
+
+      - name: Validate GDD-jerk implementation with scientific dependencies
+        run: python -m pytest -q tests/test_movement_phenology_gdd_jerk.py
+
+      - name: Reconstruct 1982-2011 spring onset from public daily temperature
+        run: python -m analysis.movement_phenology.stage3_svalbard_goose_power_gdd
+
+      - name: Fit direct Svalbard goose phase-controller models
+        run: python analysis/movement_phenology/stage3_svalbard_goose_controller.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: movement-phenology-stage3-svalbard-goose-source
+          path: |
+            outputs/movement_phenology/stage3_barnacle_goose_svalbard_source_inventory.json
+            outputs/movement_phenology/stage3_barnacle_goose_svalbard_source_inventory.csv
+            outputs/movement_phenology/stage3_svalbard_goose_stopovers.csv
+            outputs/movement_phenology/stage3_svalbard_goose_regions.csv
+            outputs/movement_phenology/stage3_svalbard_goose_track_stopover_summary.csv
+            outputs/movement_phenology/stage3_svalbard_goose_stopover_receipt.json
+            outputs/movement_phenology/stage3_svalbard_goose_power_gdd_onsets.csv
+            outputs/movement_phenology/stage3_svalbard_goose_power_gdd_region_summary.csv
+            outputs/movement_phenology/stage3_svalbard_goose_power_predictability.csv
+            outputs/movement_phenology/stage3_svalbard_goose_power_anchor_validation.csv
+            outputs/movement_phenology/stage3_svalbard_goose_anchor_sensitivity_onsets.csv
+            outputs/movement_phenology/stage3_svalbard_goose_power_gdd_receipt.json
+            outputs/movement_phenology/stage3_svalbard_goose_region_visits.csv
+            outputs/movement_phenology/stage3_svalbard_goose_transitions.csv
+            outputs/movement_phenology/stage3_svalbard_goose_controller_by_stage.csv
+            outputs/movement_phenology/stage3_svalbard_goose_controller_by_transition.csv
+            outputs/movement_phenology/stage3_svalbard_goose_anchor_sensitivity_controller.csv
+            outputs/movement_phenology/stage3_svalbard_goose_anchor_sensitivity_summary.csv
+            outputs/movement_phenology/stage3_svalbard_goose_stage_descriptives.csv
+            outputs/movement_phenology/stage3_svalbard_goose_controller_receipt.json
+            outputs/movement_phenology/stage3_svalbard_goose_controller_*_summary.txt
+          if-no-files-found: error

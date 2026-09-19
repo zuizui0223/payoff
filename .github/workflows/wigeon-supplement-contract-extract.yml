@@ -1,0 +1,76 @@
+name: Wigeon supplement contract extract
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/wigeon-supplement-contract-extract.yml'
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install parser
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Extract exact regularization contract
+        run: |
+          python - <<'PY'
+          import json, re
+          from pathlib import Path
+          import requests
+          from bs4 import BeautifulSoup
+
+          url = (
+              "https://media.springernature.com/original/springer-static/esm/"
+              "art%3A10.1186%2Fs40462-021-00296-0/MediaObjects/"
+              "40462_2021_296_MOESM2_ESM.html"
+          )
+          r = requests.get(url, timeout=120)
+          r.raise_for_status()
+          soup = BeautifulSoup(r.text, "html.parser")
+          code = "\n".join(x.get_text("\n", strip=False) for x in soup.find_all(["pre","code"]))
+          lines = code.splitlines()
+          hits = []
+          patterns = [
+              "regularise.tracks",
+              "target.time",
+              "wiggle.time",
+              "202106_migratory_tracks_regular",
+          ]
+          for i,line in enumerate(lines):
+              if any(p.lower() in line.lower() for p in patterns):
+                  lo=max(0,i-12); hi=min(len(lines),i+24)
+                  hits.append({
+                      "line": i+1,
+                      "trigger": line.strip(),
+                      "context": "\n".join(lines[lo:hi]).strip(),
+                  })
+          # Search explicit calls separately from the function definition.
+          calls = []
+          for m in re.finditer(r"regularise\.tracks\s*\((.*?)\)", code, flags=re.S):
+              call = " ".join(m.group(0).split())
+              if "<- function" not in call:
+                  calls.append(call)
+          out = {
+              "url": url,
+              "http_status": r.status_code,
+              "calls": sorted(set(calls)),
+              "hits": hits,
+          }
+          Path("outputs/movement_phenology").mkdir(parents=True, exist_ok=True)
+          Path("outputs/movement_phenology/wigeon_regularise_contract.json").write_text(
+              json.dumps(out, indent=2, ensure_ascii=False)+"\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(out, indent=2, ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wigeon-supplement-contract-extract
+          path: outputs/movement_phenology/wigeon_regularise_contract.json
+          if-no-files-found: error

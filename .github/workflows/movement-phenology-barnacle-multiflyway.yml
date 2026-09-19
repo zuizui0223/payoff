@@ -1,0 +1,98 @@
+name: Movement-phenology barnacle goose multi-flyway direct audit
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'analysis/movement_phenology/stage3_barnacle_*.py'
+      - 'analysis/movement_phenology/gdd_jerk.py'
+      - '.github/workflows/movement-phenology-barnacle-multiflyway.yml'
+  pull_request:
+    paths:
+      - 'analysis/movement_phenology/stage3_barnacle_*.py'
+      - 'analysis/movement_phenology/gdd_jerk.py'
+      - '.github/workflows/movement-phenology-barnacle-multiflyway.yml'
+
+jobs:
+  direct-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      PYTHONPATH: .
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install analysis dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            pandas numpy scipy requests statsmodels scikit-learn
+      - name: Download original Greenland Movebank GPS
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_raw_download.py \
+            --flyway greenland
+      - name: Download original Barents Movebank GPS
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_raw_download.py \
+            --flyway barents
+      - name: Reconstruct Greenland spring stopovers
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
+            --flyway greenland \
+            --gps external/barnacle_raw/greenland_gps.csv \
+            --min-region-individuals 2
+      - name: Reconstruct Barents spring stopovers
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_other_flyways.py \
+            --flyway barents \
+            --gps external/barnacle_raw/barents_gps.csv \
+            --min-region-individuals 3
+      - name: Reconstruct Greenland spring-onset anomalies
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_flyway_power_anomalies.py \
+            --flyway greenland \
+            --regions outputs/movement_phenology/stage3_greenland_goose_regions.csv \
+            --start-year 1982 --end-year 2013
+      - name: Reconstruct Barents spring-onset anomalies
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_flyway_power_anomalies.py \
+            --flyway barents \
+            --regions outputs/movement_phenology/stage3_barents_goose_regions.csv \
+            --start-year 1982 --end-year 2013
+      - name: Fit Greenland STEP controller
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_flyway_step_controller.py \
+            --flyway greenland \
+            --stopovers outputs/movement_phenology/stage3_greenland_goose_stopovers.csv \
+            --regions outputs/movement_phenology/stage3_greenland_goose_regions.csv \
+            --anomalies outputs/movement_phenology/stage3_greenland_goose_power_gdd_anomalies.csv \
+            --min-n 4 --min-individuals 2
+      - name: Fit Barents STEP controller
+        run: |
+          python analysis/movement_phenology/stage3_barnacle_flyway_step_controller.py \
+            --flyway barents \
+            --stopovers outputs/movement_phenology/stage3_barents_goose_stopovers.csv \
+            --regions outputs/movement_phenology/stage3_barents_goose_regions.csv \
+            --anomalies outputs/movement_phenology/stage3_barents_goose_power_gdd_anomalies.csv \
+            --min-n 6 --min-individuals 4
+      - name: Compare predictability with correction
+        run: python analysis/movement_phenology/stage3_barnacle_predictability_controller.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: movement-phenology-barnacle-multiflyway
+          path: |
+            outputs/movement_phenology/stage3_greenland_raw_download_receipt.json
+            outputs/movement_phenology/stage3_barents_raw_download_receipt.json
+            outputs/movement_phenology/stage3_greenland_goose_*.csv
+            outputs/movement_phenology/stage3_greenland_goose_*.json
+            outputs/movement_phenology/stage3_barents_goose_*.csv
+            outputs/movement_phenology/stage3_barents_goose_*.json
+            outputs/movement_phenology/stage3_barnacle_predictability_controller_*.csv
+            outputs/movement_phenology/stage3_barnacle_predictability_controller_*.json
+          if-no-files-found: error
