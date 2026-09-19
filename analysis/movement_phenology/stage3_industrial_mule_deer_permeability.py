@@ -277,10 +277,13 @@ def cluster_fit(formula: str, data: pd.DataFrame):
 def named_term(model, name):
     names = list(model.model.exog_names)
     i = names.index(name)
+    params = np.asarray(model.params)
+    bse = np.asarray(model.bse)
+    pvalues = np.asarray(model.pvalues)
     return (
-        float(model.params[i]),
-        float(model.bse[i]),
-        float(model.pvalues[i]),
+        float(params[i]),
+        float(bse[i]),
+        float(pvalues[i]),
     )
 
 
