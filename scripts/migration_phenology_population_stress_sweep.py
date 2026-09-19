@@ -302,6 +302,32 @@ def main() -> None:
                     f"{mean(float(row['persistence_cost_ge_threshold']) for row in subset):.12g}"
                 )
 
+        for baseline_growth in args.baseline_growths:
+            for carrying_capacity in args.carrying_capacities:
+                subset = [
+                    row
+                    for row in barrier_rows
+                    if row["baseline_growth"] == baseline_growth
+                    and row["carrying_capacity"] == carrying_capacity
+                ]
+                if subset:
+                    print(
+                        "barrier_summary_by_growth_K "
+                        f"g0={baseline_growth} "
+                        f"K={carrying_capacity} "
+                        f"n={len(subset)} "
+                        f"mean_local_persistence="
+                        f"{mean(float(row['local_joint_persistence']) for row in subset):.12g} "
+                        f"mean_matched_persistence="
+                        f"{mean(float(row['matched_joint_persistence']) for row in subset):.12g} "
+                        f"mean_persistence_gain="
+                        f"{mean(float(row['persistence_gain']) for row in subset):.12g} "
+                        f"positive_gain_fraction="
+                        f"{mean(float(row['persistence_gain'] > 0.0) for row in subset):.12g} "
+                        f"costly_fraction="
+                        f"{mean(float(row['persistence_cost_ge_threshold']) for row in subset):.12g}"
+                    )
+
 
 if __name__ == "__main__":
     main()
