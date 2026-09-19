@@ -16,7 +16,7 @@ the connected strategy lattice is
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import exp, expm1, isfinite
+from math import exp, expm1, isfinite, log
 from random import Random
 from typing import Sequence
 
@@ -166,3 +166,70 @@ def simulate_finite_tracking_evolution(
         accepted_substitutions=accepted,
         mutation_proposals=mutation_events,
     )
+
+
+
+def finite_stationary_tracking_summary(
+    scenario: TrackingScenario,
+    lattice: StrategyLattice = StrategyLattice(),
+    *,
+    population_size: int = 100,
+    selection_strength: float = 10.0,
+) -> dict[str, float | str | int]:
+    """Summarize exact weak-mutation occupancy on the tracking lattice."""
+
+    landscape = tracking_growth_landscape(scenario, lattice)
+    growth = tuple(item.mean_log_growth for item in landscape)
+    probabilities = weak_mutation_stationary_distribution(
+        growth,
+        population_size,
+        selection_strength,
+    )
+
+    mean_migration = sum(
+        probability * item.strategy.migration_rate
+        for probability, item in zip(probabilities, landscape)
+    )
+    mean_phenology = sum(
+        probability * item.strategy.phenology_rate
+        for probability, item in zip(probabilities, landscape)
+    )
+    total_rate = mean_migration + mean_phenology
+    mean_share = (
+        mean_migration / total_rate if total_rate > 0.0 else 0.5
+    )
+
+    entropy = -sum(
+        probability * log(probability)
+        for probability in probabilities
+        if probability > 0.0
+    )
+    top_index = max(
+        range(len(probabilities)),
+        key=probabilities.__getitem__,
+    )
+    top = landscape[top_index]
+    outcome_mass: dict[str, float] = {}
+    for probability, item in zip(probabilities, landscape):
+        outcome_mass[item.outcome] = (
+            outcome_mass.get(item.outcome, 0.0)
+            + probability
+        )
+
+    return {
+        "population_size": population_size,
+        "selection_strength": selection_strength,
+        "mean_migration_rate": mean_migration,
+        "mean_phenology_rate": mean_phenology,
+        "mean_migration_share": mean_share,
+        "entropy": entropy,
+        "effective_strategy_count": exp(entropy),
+        "top_probability": probabilities[top_index],
+        "top_migration_rate": top.strategy.migration_rate,
+        "top_phenology_rate": top.strategy.phenology_rate,
+        "top_outcome": top.outcome,
+        "interaction_failure_mass": outcome_mass.get(
+            "interaction_failure", 0.0
+        ),
+        "failure_mass": outcome_mass.get("failure", 0.0),
+    }
