@@ -53,7 +53,7 @@ def test_axis_mismatch_can_reduce_both_species_growth():
 
 def test_shared_migration_cost_advantage_drives_both_species_toward_migration():
     cheap_migration = SpeciesTrackingParameters(
-        interaction_strength=0.3,
+        interaction_strength=0.0,
         migration_cost=0.01,
         phenology_cost=0.12,
         baseline_growth=0.35,
@@ -84,7 +84,7 @@ def test_shared_migration_cost_advantage_drives_both_species_toward_migration():
 
 def test_shared_phenology_cost_advantage_drives_both_species_toward_phenology():
     cheap_phenology = SpeciesTrackingParameters(
-        interaction_strength=0.3,
+        interaction_strength=0.0,
         migration_cost=0.12,
         phenology_cost=0.01,
         baseline_growth=0.35,
@@ -149,3 +149,64 @@ def test_each_substitution_improves_the_mutating_species():
             assert current.mean_log_growth_a > previous.mean_log_growth_a
         else:
             assert current.mean_log_growth_b > previous.mean_log_growth_b
+
+
+def test_partner_matching_can_create_coordination_lock_in_against_axis_cost_bias():
+    cheap_migration = SpeciesTrackingParameters(
+        interaction_strength=0.3,
+        migration_cost=0.01,
+        phenology_cost=0.12,
+        baseline_growth=0.35,
+    )
+    scenario = CoevolutionScenario(
+        climate_velocity=0.04,
+        steps=100,
+        burn_in=20,
+        species_a=cheap_migration,
+        species_b=cheap_migration,
+    )
+    result = coevolve_tracking_pair(
+        scenario,
+        mutation_step=0.1,
+        max_rate=1.0,
+        max_cycles=40,
+    )
+
+    assert result.converged
+    assert result.final.strategy_a == result.final.strategy_b
+    assert (
+        result.final.strategy_a.migration_rate
+        == result.final.strategy_a.phenology_rate
+    )
+    assert result.final.rms_interaction_mismatch == 0.0
+
+    # With interaction removed, the same cost asymmetry exposes the
+    # migration-biased adaptive direction. The contrast documents a
+    # coordination barrier rather than a failure of the cost term.
+    no_interaction = CoevolutionScenario(
+        climate_velocity=0.04,
+        steps=100,
+        burn_in=20,
+        species_a=SpeciesTrackingParameters(
+            interaction_strength=0.0,
+            migration_cost=0.01,
+            phenology_cost=0.12,
+            baseline_growth=0.35,
+        ),
+        species_b=SpeciesTrackingParameters(
+            interaction_strength=0.0,
+            migration_cost=0.01,
+            phenology_cost=0.12,
+            baseline_growth=0.35,
+        ),
+    )
+    free = coevolve_tracking_pair(
+        no_interaction,
+        mutation_step=0.1,
+        max_rate=1.0,
+        max_cycles=40,
+    )
+    assert (
+        free.final.strategy_a.migration_rate
+        > free.final.strategy_a.phenology_rate
+    )
