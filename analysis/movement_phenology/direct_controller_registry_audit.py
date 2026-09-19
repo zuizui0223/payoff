@@ -38,7 +38,13 @@ def main():
     for c in ("phase_transfer_lambda", "phase_retention_abs"):
         d[c] = pd.to_numeric(d[c], errors="coerce")
 
-    direct = d[d["status"].astype(str).str.contains("DIRECT_CONTROLLER")].copy()
+    # Include every explicitly direct empirical row, regardless of whether
+    # the identified object is an actuator-specific controller or net phase
+    # retention. This keeps the three-taxon wigeon validation in the common
+    # retention audit without mislabelling its unidentified actuator.
+    direct = d[
+        d["status"].astype(str).str.startswith("DIRECT_")
+    ].copy()
     direct = direct[np.isfinite(direct["phase_transfer_lambda"])].copy()
     if direct.empty:
         raise SystemExit("No direct controllers with finite lambda")
@@ -61,8 +67,9 @@ def main():
         "population_route_replication_gate": bool(len(direct) >= 3),
         "cross_taxon_gate_three_taxa": bool(direct["taxon"].nunique() >= 3),
         "claim_ceiling": (
-            "Descriptive registry audit. Rows can share species, paper, and "
-            "individuals; do not treat them as independent effect sizes."
+            "Descriptive direct phase-retention audit. Rows can share species, "
+            "paper, and individuals; do not treat them as independent effect "
+            "sizes or as evidence for one universal actuator."
         ),
     }
 
