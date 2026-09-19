@@ -891,3 +891,121 @@ def optimize_matched_2d_strategy(
 
     assert best is not None
     return best
+
+
+
+def corridor_persistence_frontier(
+    rows: list[dict[str, float | int | str]],
+) -> list[dict[str, float | int | str | None]]:
+    """Summarize sampled climate-velocity persistence by gap and phenology limit."""
+
+    if not rows:
+        return []
+
+    groups = sorted(
+        {
+            (
+                int(row["gap_width"]),
+                float(row["phenology_limit"]),
+            )
+            for row in rows
+        }
+    )
+    out: list[dict[str, float | int | str | None]] = []
+
+    for gap_width, phenology_limit in groups:
+        subset = sorted(
+            (
+                row
+                for row in rows
+                if int(row["gap_width"]) == gap_width
+                and float(row["phenology_limit"])
+                == phenology_limit
+            ),
+            key=lambda row: float(row["climate_velocity"]),
+        )
+        if not subset:
+            continue
+
+        persisted = [
+            int(row["joint_persisted"]) == 1
+            for row in subset
+        ]
+        seen_failure = False
+        monotone = True
+        for value in persisted:
+            if not value:
+                seen_failure = True
+            elif seen_failure:
+                monotone = False
+
+        persisted_rows = [
+            row
+            for row in subset
+            if int(row["joint_persisted"]) == 1
+        ]
+        if persisted_rows:
+            frontier_row = max(
+                persisted_rows,
+                key=lambda row: float(
+                    row["climate_velocity"]
+                ),
+            )
+            max_persisted = float(
+                frontier_row["climate_velocity"]
+            )
+            migration = float(frontier_row["migration_rate"])
+            phenology = float(frontier_row["phenology_rate"])
+            crossing = float(
+                frontier_row["mean_fraction_beyond_barrier"]
+            )
+            outcome = str(frontier_row["outcome"])
+            limit_fraction = float(
+                frontier_row["phenology_limit_fraction"]
+            )
+        else:
+            frontier_row = None
+            max_persisted = None
+            migration = None
+            phenology = None
+            crossing = None
+            outcome = "none"
+            limit_fraction = None
+
+        failures_above = [
+            row
+            for row in subset
+            if int(row["joint_persisted"]) == 0
+            and (
+                max_persisted is None
+                or float(row["climate_velocity"])
+                > max_persisted
+            )
+        ]
+        first_failed = (
+            min(
+                float(row["climate_velocity"])
+                for row in failures_above
+            )
+            if failures_above
+            else None
+        )
+
+        out.append(
+            {
+                "gap_width": gap_width,
+                "phenology_limit": phenology_limit,
+                "max_persisted_velocity": max_persisted,
+                "first_failed_velocity_above": first_failed,
+                "monotone_persistence": int(monotone),
+                "outcome_at_frontier": outcome,
+                "migration_rate_at_frontier": migration,
+                "phenology_rate_at_frontier": phenology,
+                "mean_crossing_at_frontier": crossing,
+                "phenology_limit_fraction_at_frontier": (
+                    limit_fraction
+                ),
+            }
+        )
+
+    return out
