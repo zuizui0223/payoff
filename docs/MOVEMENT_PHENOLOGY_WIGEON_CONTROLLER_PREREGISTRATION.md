@@ -199,3 +199,161 @@ environment gate fails:
 This preregistration does not claim that the current stopover-gain similarity is a new law.
 
 A universal actuator-gain claim requires prospective replication in wigeon or another independent taxon plus a mechanism excluding trivial time-budget compression.
+
+
+## Frozen outcome
+
+Status: direct reconstruction completed after this preregistration was written.
+
+### Replication gates
+
+~~~text
+movement reconstruction:
+  PASS
+
+environmental TGS validation:
+  PASS
+
+minimum transition / individual support:
+  PASS
+~~~
+
+Key validation receipts:
+
+~~~text
+33 reconstructed tracks / 29 individuals
+versus 35 / 31 published
+
+median endpoint distance:
+  1911 km reconstructed
+  1899 km published
+
+median TGS-relative staging arrival:
+  20.93 d reconstructed
+  22.5 d published
+~~~
+
+### W1 — net phase contraction
+
+Prediction:
+
+\[
+\lambda<1.
+\]
+
+Observed:
+
+~~~text
+lambda = 0.85994
+SE = 0.04509
+p versus lambda=1 = 0.00190
+~~~
+
+Outcome:
+
+~~~text
+PRIMARY W1:
+  PASS
+~~~
+
+### Exploratory strong-contraction forecast
+
+Prediction:
+
+\[
+|\lambda|<0.75.
+\]
+
+Observed:
+
+\[
+|\lambda|=0.860.
+\]
+
+Outcome:
+
+~~~text
+EXPLORATORY STRONG-CONTRACTION FORECAST:
+  FAIL
+~~~
+
+### W2 — stopover actuator
+
+Directional prediction:
+
+\[
+S'(E)<0.
+\]
+
+Observed:
+
+~~~text
+slope = -0.000140
+SE = 0.003902
+p = 0.972
+~~~
+
+The sign alone is not treated as support because the fitted effect is effectively zero.
+
+Secondary magnitude forecast:
+
+\[
+0.3<g_S<0.8.
+\]
+
+Outcome:
+
+~~~text
+W2 STOPOVER ACTUATOR:
+  NOT SUPPORTED
+
+SECONDARY GAIN BAND:
+  FAIL
+~~~
+
+### W3 — actuator decomposition
+
+Measured transit-speed response:
+
+~~~text
+log-speed gain = +0.00109 per phase day
+p = 0.197
+~~~
+
+Neither measured stopover duration nor between-staging travel speed explains the significant net phase contraction.
+
+Outcome:
+
+~~~text
+COMMON PHASE-RETENTION COORDINATE:
+  SUPPORTED
+
+COMMON MULE-DEER / GOOSE ACTUATOR:
+  NOT SUPPORTED
+~~~
+
+### W4 — migration-distance moderation
+
+Observed moderation of phase retention:
+
+~~~text
+beta = -0.0253
+p = 0.371
+~~~
+
+Outcome:
+
+~~~text
+DIRECT DISTANCE MODERATION:
+  NOT SUPPORTED
+~~~
+
+The published migration-distance result remains valid literature context but is not promoted as a replicated controller moderator here.
+
+## Prospective interpretation
+
+The third-taxon result supports a weaker and more general claim than the strongest initial forecast:
+
+> wigeons retain less than the full incoming phase deviation across consecutive staging transitions, but they do so much more weakly than the strongest mule-deer / goose examples and without a detected speed or stopover actuator.
+
+This outcome is retained as a partial-success / partial-falsification result and must not be rewritten as full confirmation.
