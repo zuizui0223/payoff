@@ -461,6 +461,26 @@ For two interacting species the climate-equivalent interaction distance is
 This preserves the previous nonspatial interaction geometry while allowing
 xbar to emerge from an explicit abundance distribution.
 
+The spatial layer keeps evolutionary fitness and density regulation separate.
+Patch-level low-density fitness is
+
+    g0_j
+    = baseline
+      - architecture cost
+      - abiotic mismatch penalty
+      - interaction mismatch penalty,
+
+while realized demographic growth is
+
+    g_j
+    = g0_j - d N/K.
+
+Reproduction uses g_j, so density controls abundance. Strategy optimization and
+coevolution use the abundance-weighted low-density g0_j, not g_j. This prevents
+a spurious evolutionary incentive to pay unnecessary tracking costs merely to
+depress abundance and relax competition. A regression test freezes this
+separation in static environments.
+
 The landscape layer therefore distinguishes four failure modes that were
 collapsed in the abstract model:
 
