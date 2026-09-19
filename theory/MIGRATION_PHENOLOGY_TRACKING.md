@@ -531,6 +531,52 @@ That sequence is now the main theoretical reason to keep optimization,
 accessibility, persistence, and stochastic evolutionary occupancy as separate
 estimands.
 
+The canonical explicit-landscape results are frozen separately in
+[../docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md](../docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md).
+
+The spatial layer adds three further separations.
+
+First,
+
+    phenological capacity
+    != replacement of spatial tracking.
+
+Across the canonical finite landscape, increasing the allowed phenological
+shift expands the sampled persistence frontier from climate velocity 0.030 to
+0.065, but every frontier strategy remains migration-dominant. The same six
+frontier brackets are recovered on 7 x 7 and 11 x 11 strategy grids.
+
+Second,
+
+    coordination barrier
+    != endpoint interaction mismatch.
+
+At both the local endpoint and the coordinated optimum the two species can be
+perfectly matched to one another. The barrier is transient: a unilateral move
+toward the alternative tracking architecture creates mismatch before the other
+species follows.
+
+Third,
+
+    coordinated persistence
+    != unilateral evolutionary accessibility.
+
+In the explicit landscape, a representative local endpoint at
+(migration,phenology)=(0.2,0) has negative joint low-density growth and
+collapses against the range edge, while a coordinated mixed strategy has
+positive low-density growth and persists. The one-step audit closes the
+mechanism: moving both partners together gives payoff gain +1.115, whereas
+either partner moving alone gives approximately -1.427 because interaction
+mismatch increases to approximately 3.189.
+
+The expanded hierarchy is therefore
+
+    tracking capacity
+    != chosen tracking architecture
+    != jointly valuable architecture
+    != unilaterally accessible architecture
+    != population persistence.
+
 ## Claim ceiling
 
 The current implementation supports mechanism exploration and code-level
