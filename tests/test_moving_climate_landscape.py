@@ -5,6 +5,7 @@ from src.moving_climate_landscape import (
     gaussian_initial_distribution,
     geometric_tracking_capacity,
     landscape_persistence_frontier,
+    mixed_range_dispersal,
     nearest_neighbor_dispersal,
     optimize_matched_landscape_strategy,
     reflect_nearest_neighbor_dispersal,
@@ -463,4 +464,60 @@ def test_reflect_wrapper_matches_general_boundary_retention_one():
             abundance,
             migration_rate,
             boundary_retention=1.0,
+        )
+
+
+def test_mixed_range_tail_zero_matches_nearest_neighbor_kernel():
+    abundance = (2.0, 3.0, 5.0, 7.0, 11.0)
+    for migration_rate in (0.0, 0.2, 1.0):
+        observed = mixed_range_dispersal(
+            abundance,
+            migration_rate,
+            boundary_retention=0.5,
+            long_distance_fraction=0.0,
+            long_distance_step=2,
+        )
+        expected = nearest_neighbor_dispersal(
+            abundance,
+            migration_rate,
+            boundary_retention=0.5,
+        )
+        assert all(
+            isclose(a, b, rel_tol=1e-12, abs_tol=1e-12)
+            for a, b in zip(observed, expected)
+        )
+
+
+def test_reflecting_long_distance_kernel_conserves_total_abundance():
+    abundance = (1.0, 2.0, 3.0, 4.0, 5.0)
+    observed = mixed_range_dispersal(
+        abundance,
+        0.8,
+        boundary_retention=1.0,
+        long_distance_fraction=0.5,
+        long_distance_step=2,
+    )
+    assert isclose(
+        sum(observed),
+        sum(abundance),
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+
+
+def test_long_distance_kernel_validation():
+    import pytest
+
+    with pytest.raises(ValueError):
+        MovingLandscapeScenario(long_distance_fraction=-0.1)
+    with pytest.raises(ValueError):
+        MovingLandscapeScenario(long_distance_fraction=1.1)
+    with pytest.raises(ValueError):
+        MovingLandscapeScenario(long_distance_step=1)
+
+    with pytest.raises(ValueError):
+        mixed_range_dispersal(
+            (1.0, 2.0, 3.0),
+            0.2,
+            long_distance_fraction=1.1,
         )
