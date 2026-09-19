@@ -501,6 +501,88 @@ The phase sweep is
 and maps climate velocity x phenological shift limit to the best matched
 migration/phenology tracking architecture.
 
+## Two-dimensional habitat connectivity
+
+The moving-landscape layer now has an explicit two-dimensional extension.
+Patches occupy a rectangular grid and climate moves along a declared spatial
+direction. Local mismatch remains
+
+    e_ij(t)
+    = D_t - g c_ij - s z_t,
+
+where c_ij is the cell coordinate projected onto the climate-motion axis.
+
+Dispersal occurs among the four cardinal neighbors. Habitat quality q_ij lies
+in [0,1]:
+
+    q_ij = 0
+        -> blocked habitat / barrier cell,
+
+    0 < q_ij <= 1
+        -> local carrying capacity
+           K_ij = q_ij K_local.
+
+As in the one-dimensional model, low-density growth is the evolutionary
+fitness estimand. Local density regulation changes abundance but does not
+create an indirect payoff reward for costly tracking.
+
+The scientific reason for using two dimensions is connectivity geometry rather
+than dimensionality by itself. Vertical habitat walls can contain finite gaps,
+and multiple walls can create routes with different path lengths:
+
+    open:
+        no wall,
+
+    straight:
+        successive gaps aligned with the climate axis,
+
+    shifted:
+        gaps displaced from the climate axis but aligned with each other,
+
+    zigzag:
+        successive gaps displaced in opposite transverse directions.
+
+The last case creates a genuine spatial detour that cannot be represented by a
+one-dimensional projection.
+
+This allows a direct test of **space-time substitution under fragmentation**:
+
+    low phenological capacity
+        -> moving climate must be tracked mainly through spatial redistribution,
+
+    high phenological capacity
+        -> some climate displacement can be absorbed in time,
+           reducing the amount or urgency of corridor crossing.
+
+The declared diagnostic is not merely whether narrow corridors reduce
+movement. That effect is mechanically expected. The higher-value comparison
+is whether increasing phenological capacity changes:
+
+- the low-density growth penalty caused by route geometry;
+- the climate-velocity persistence frontier;
+- the spatial fraction that must cross a barrier;
+- the optimal migration-versus-phenology allocation.
+
+The two-dimensional layer also carries the same coevolutionary accessibility
+distinction as the one-dimensional model. Alternating unilateral substitutions
+are compared with a coordinated matched-pair optimum, and a direct gate audit
+can test
+
+    coordinated joint gain > 0
+
+while
+
+    unilateral gain of species A < 0
+    unilateral gain of species B < 0.
+
+Therefore habitat connectivity can be studied separately from, and jointly
+with, interaction-mediated coordination barriers.
+
+The present 2D implementation is still a synthetic regular grid. It does not
+yet claim realistic landscape resistance, species-specific habitat maps,
+anisotropic dispersal estimated from movement data, or empirical corridor
+widths.
+
 ## Frozen synthetic evidence
 
 The first model results are frozen in
