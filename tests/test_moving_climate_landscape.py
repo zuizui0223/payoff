@@ -3,6 +3,7 @@ from math import isclose
 from src.moving_climate_landscape import (
     MovingLandscapeScenario,
     gaussian_initial_distribution,
+    landscape_persistence_frontier,
     optimize_matched_landscape_strategy,
     reflect_nearest_neighbor_dispersal,
     simulate_moving_landscape_pair,
@@ -231,3 +232,79 @@ def test_fast_climate_with_no_phenology_pushes_population_to_right_edge():
     assert result.right_edge_mass_fraction_a > 0.30
     assert result.rms_abiotic_mismatch_a > 0.5
     assert not result.joint_persisted
+
+
+def test_landscape_persistence_frontier_reports_bracket_without_assuming_monotonicity():
+    rows = [
+        {
+            "phenology_limit": 0.0,
+            "climate_velocity": 0.01,
+            "joint_persisted": 1,
+            "outcome": "migration",
+            "migration_rate": 0.4,
+            "phenology_rate": 0.0,
+            "right_edge_mass_fraction": 0.01,
+            "phenology_limit_fraction": 0.0,
+        },
+        {
+            "phenology_limit": 0.0,
+            "climate_velocity": 0.03,
+            "joint_persisted": 1,
+            "outcome": "migration",
+            "migration_rate": 0.6,
+            "phenology_rate": 0.0,
+            "right_edge_mass_fraction": 0.10,
+            "phenology_limit_fraction": 0.0,
+        },
+        {
+            "phenology_limit": 0.0,
+            "climate_velocity": 0.05,
+            "joint_persisted": 0,
+            "outcome": "failure",
+            "migration_rate": 0.8,
+            "phenology_rate": 0.0,
+            "right_edge_mass_fraction": 0.45,
+            "phenology_limit_fraction": 0.0,
+        },
+        {
+            "phenology_limit": 2.0,
+            "climate_velocity": 0.01,
+            "joint_persisted": 1,
+            "outcome": "phenology",
+            "migration_rate": 0.0,
+            "phenology_rate": 0.5,
+            "right_edge_mass_fraction": 0.0,
+            "phenology_limit_fraction": 0.0,
+        },
+        {
+            "phenology_limit": 2.0,
+            "climate_velocity": 0.03,
+            "joint_persisted": 0,
+            "outcome": "failure",
+            "migration_rate": 0.2,
+            "phenology_rate": 0.5,
+            "right_edge_mass_fraction": 0.2,
+            "phenology_limit_fraction": 1.0,
+        },
+        {
+            "phenology_limit": 2.0,
+            "climate_velocity": 0.05,
+            "joint_persisted": 1,
+            "outcome": "mixed",
+            "migration_rate": 0.4,
+            "phenology_rate": 0.4,
+            "right_edge_mass_fraction": 0.3,
+            "phenology_limit_fraction": 1.0,
+        },
+    ]
+    frontier = landscape_persistence_frontier(rows)
+    first = frontier[0]
+    second = frontier[1]
+
+    assert first["max_persisted_velocity"] == 0.03
+    assert first["first_failed_velocity_above"] == 0.05
+    assert first["monotone_persistence"] == 1
+
+    assert second["max_persisted_velocity"] == 0.05
+    assert second["first_failed_velocity_above"] is None
+    assert second["monotone_persistence"] == 0
