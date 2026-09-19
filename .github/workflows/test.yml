@@ -41,3 +41,4 @@ jobs:
       - run: python scripts/predict_hard_module_partition.py --functions examples/three_function/functions.csv --extra-module-cost 1.0 --output-dir outputs/ci_hard_modules
       - run: python scripts/migration_phenology_phase_sweep.py --climate-velocities 0.02,0.04 --partner-spatial-shares 0,0.5,1 --max-rate 0.8 --grid-points 5 --steps 60 --burn-in 10 --output outputs/ci_migration_phenology_phase.csv
       - run: python scripts/migration_phenology_stochastic_sweep.py --samples 2 --replicates 2 --strategy-points 3 --max-rate 0.6 --steps 40 --burn-in 10 --output outputs/ci_migration_phenology_stochastic.csv
+      - run: python scripts/migration_phenology_coevolution_sweep.py --interaction-strengths 0,0.3 --cost-biases 0,0.08 --steps 60 --burn-in 10 --mutation-step 0.2 --max-rate 0.8 --max-cycles 20 --output outputs/ci_migration_phenology_coevolution.csv
