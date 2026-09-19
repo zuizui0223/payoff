@@ -16,7 +16,10 @@ from src.moving_climate_landscape import (
     MovingLandscapeScenario,
     landscape_persistence_frontier,
     landscape_strategy_sweep,
+    terminal_nonnegative_growth_velocity_ceiling,
+    zero_mismatch_velocity_ceiling,
 )
+from src.spatiotemporal_tracking import TrackingStrategy
 from src.tracking_coevolution import SpeciesTrackingParameters
 
 
@@ -119,6 +122,64 @@ def main() -> None:
     )
     frontier = landscape_persistence_frontier(rows)
 
+    for row in frontier:
+        limit = float(row["phenology_limit"])
+        limit_scenario = MovingLandscapeScenario(
+            patches=scenario.patches,
+            patch_spacing=scenario.patch_spacing,
+            spatial_gradient=scenario.spatial_gradient,
+            climate_velocity=0.0,
+            phenology_scale=scenario.phenology_scale,
+            max_abs_phenology_shift=limit,
+            initial_distribution_sd=scenario.initial_distribution_sd,
+            carrying_capacity=scenario.carrying_capacity,
+            density_coefficient=scenario.density_coefficient,
+            extinction_threshold=scenario.extinction_threshold,
+            steps=scenario.steps,
+            burn_in=scenario.burn_in,
+            species_a=scenario.species_a,
+            species_b=scenario.species_b,
+        )
+        zero_ceiling = zero_mismatch_velocity_ceiling(
+            limit_scenario
+        )
+        row["zero_mismatch_velocity_ceiling"] = zero_ceiling
+
+        migration = row["migration_rate_at_frontier"]
+        phenology = row["phenology_rate_at_frontier"]
+        max_velocity = row["max_persisted_velocity"]
+        if (
+            migration is not None
+            and phenology is not None
+            and max_velocity is not None
+        ):
+            strategy = TrackingStrategy(
+                float(migration),
+                float(phenology),
+            )
+            terminal_ceiling = (
+                terminal_nonnegative_growth_velocity_ceiling(
+                    limit_scenario,
+                    strategy,
+                    parameters,
+                )
+            )
+            row["terminal_growth_velocity_ceiling"] = (
+                terminal_ceiling
+            )
+            row["frontier_minus_zero_ceiling"] = (
+                float(max_velocity) - zero_ceiling
+            )
+            row["frontier_minus_terminal_ceiling"] = (
+                None
+                if terminal_ceiling is None
+                else float(max_velocity) - terminal_ceiling
+            )
+        else:
+            row["terminal_growth_velocity_ceiling"] = None
+            row["frontier_minus_zero_ceiling"] = None
+            row["frontier_minus_terminal_ceiling"] = None
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open(
         "w", newline="", encoding="utf-8"
@@ -156,7 +217,10 @@ def main() -> None:
             f"migration={row['migration_rate_at_frontier']} "
             f"phenology={row['phenology_rate_at_frontier']} "
             f"edge_mass={row['right_edge_mass_at_frontier']} "
-            f"limit_fraction={row['phenology_limit_fraction_at_frontier']}"
+            f"limit_fraction={row['phenology_limit_fraction_at_frontier']} "
+            f"zero_ceiling={row['zero_mismatch_velocity_ceiling']} "
+            f"terminal_ceiling={row['terminal_growth_velocity_ceiling']} "
+            f"frontier_minus_terminal={row['frontier_minus_terminal_ceiling']}"
         )
 
 
