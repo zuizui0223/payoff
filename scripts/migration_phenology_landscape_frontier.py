@@ -58,6 +58,7 @@ def main() -> None:
     parser.add_argument("--carrying-capacity", type=float, default=1000.0)
     parser.add_argument("--density-coefficient", type=float, default=0.30)
     parser.add_argument("--extinction-threshold", type=float, default=1.0)
+    parser.add_argument("--boundary-retention", type=float, default=1.0)
     parser.add_argument("--baseline-growth", type=float, default=0.30)
     parser.add_argument("--interaction-strength", type=float, default=0.25)
     parser.add_argument("--migration-cost", type=float, default=0.03)
@@ -105,6 +106,7 @@ def main() -> None:
         carrying_capacity=args.carrying_capacity,
         density_coefficient=args.density_coefficient,
         extinction_threshold=args.extinction_threshold,
+        boundary_retention=args.boundary_retention,
         steps=args.steps,
         burn_in=args.burn_in,
         species_a=parameters,
