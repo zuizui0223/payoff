@@ -169,6 +169,14 @@ def main():
             if not isinstance(v, dict):
                 continue
             vid = v.get("id") or v.get("version")
+            if vid is None:
+                href = (
+                    (v.get("_links") or {})
+                    .get("self", {})
+                    .get("href")
+                )
+                if href and "/versions/" in str(href):
+                    vid = str(href).rstrip("/").split("/")[-1]
             if vid is not None:
                 version_ids.append(str(vid))
 
@@ -205,6 +213,13 @@ def main():
                 "size": f.get("size"),
                 "mime_type": f.get("mimeType"),
                 "digest": f.get("digest"),
+                "status": f.get("status"),
+                "path": f.get("path"),
+                "download_url_metadata": (
+                    ((f.get("_links") or {}).get("stash:download") or {}).get("href")
+                    or ((f.get("_links") or {}).get("download") or {}).get("href")
+                ),
+                "raw_metadata": f,
             }
             files.append(row)
 
