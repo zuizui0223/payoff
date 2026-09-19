@@ -1,121 +1,300 @@
-# Direct phase-contraction synthesis receipt
+# Direct phase-retention synthesis receipt
 
-Status: **descriptive synthesis of preregistered primary direct-controller systems; no pooled meta-analytic effect claimed**.
+Status: **three-taxon descriptive synthesis complete; no universal effect size claimed**.
 
-## Common outcome
+## Common coordinate
 
-Different migration systems use different actuators, but they can be compared by the fraction of incoming phase error retained after one ecologically meaningful correction opportunity:
+Across continuous and stopover-based migration systems, define signed phase transfer over one ecologically meaningful correction interval as
 
 \[
 E_{\rm next}=a+\lambda E_{\rm current}+\epsilon.
 \]
 
-Define
+The common descriptive coordinate is
 
 \[
-C=1-|\lambda|
+R_\phi=|\lambda|,
 \]
 
-as net contraction strength.
+with contraction strength
+
+\[
+C_\phi=1-|\lambda|.
+\]
+
+Interpretation:
 
 ~~~text
-C = 0
-no reduction in phase-error magnitude
-
-0 < C < 1
-stable contraction
+|lambda| < 1
+  stable contraction of incoming phase deviation
 
 lambda < 0
-correction with overshoot
+  contraction with overshoot / sign reversal
+
+lambda ~ 0
+  near-complete reset
 
 |lambda| > 1
-phase amplification
+  local phase amplification
 ~~~
 
-## Primary direct systems currently available
+This coordinate does **not** imply one behavioral mechanism.
 
-| System | Architecture | lambda | |lambda| | contraction C |
-| --- | --- | ---: | ---: | ---: |
-| Wyoming mule deer | distributed speed + stopover | 0.107 | 0.107 | 0.893 |
-| Svalbard barnacle goose R2 -> R4 | STEP + OVERTAKE | -0.106 | 0.106 | 0.894 |
-| Greenland barnacle goose R2 -> R3 | STEP | 0.131 | 0.131 | 0.869 |
-| Barents barnacle goose R1 -> R2 | STEP | 0.494 | 0.494 | 0.506 |
+## Direct taxon-level synthesis
 
-Across these selected primary systems:
+The registry contains repeated barnacle-goose routes, so cross-taxon comparison is reduced to one descriptive record per taxon. Repeated routes contribute a within-taxon range rather than separate meta-analytic study weights.
+
+### Odocoileus hemionus — mule deer
 
 ~~~text
-range of |lambda|:
-  0.106 .. 0.494
-
-range of correction strength:
-  0.506 .. 0.894
-
-median correction strength:
-  approximately 0.88
+direct rows = 1
+lambda = 0.107
+|lambda| = 0.107
+correction strength = 0.893
 ~~~
 
-This is not an independence-weighted estimate because three rows are the same species on different flyways.
+Detected actuators:
 
-## What is general and what is not
+~~~text
+movement-speed response
++ stopover shortening
+~~~
 
-The actuator is not conserved.
+This is strong distributed phase correction over the spring migration interval.
+
+### Branta leucopsis — barnacle goose
+
+Highlighted direct route-stage estimates:
+
+~~~text
+Svalbard:   |lambda| = 0.106
+Greenland:  |lambda| = 0.131
+Barents:    |lambda| = 0.494
+~~~
+
+Taxon-level descriptive summary:
+
+~~~text
+median |lambda| = 0.131
+range           = 0.106 .. 0.494
+
+median correction strength = 0.869
+range                      = 0.506 .. 0.894
+~~~
+
+The repeatable actuator in the highlighted stable transitions is stopover-duration adjustment. Other route stages include near-reset, overshoot, and local amplification, so there is no biologically defensible single flyway-wide lambda.
+
+### Mareca penelope — Eurasian wigeon
+
+Prospectively reconstructed result:
+
+~~~text
+N transitions = 224
+N individuals = 28
+
+lambda = 0.860
+SE = 0.045
+p versus no-correction lambda=1 = 0.00190
+
+correction strength = 0.140
+~~~
+
+The preregistered contraction prediction is supported, but the stronger exploratory forecast
+
+\[
+|\lambda|<0.75
+\]
+
+is falsified.
+
+Detected actuators:
+
+~~~text
+stopover response: unsupported
+travel-speed response: unsupported
+~~~
+
+Thus wigeon contributes direct **phase-retention** replication without identifying the same reactive actuator seen in mule deer or barnacle geese.
+
+## Cross-taxon result
+
+Taxon-level median phase retention spans
+
+\[
+0.107\;\text{to}\;0.860.
+\]
+
+Taxon-level median correction strength spans
+
+\[
+0.140\;\text{to}\;0.893.
+\]
+
+Therefore the evidence rejects both of these stronger ideas:
+
+> successful migrants all nearly reset phase error;
+
+and
+
+> successful migrants use one common speed/stopover controller.
+
+The licensed common result is:
+
+> **Phenological migration can be compared on a shared phase-retention coordinate across at least three taxa, while both correction strength and actuator architecture differ strongly.**
+
+This makes heterogeneity part of the result rather than residual noise.
+
+## Pseudoreplication rule
+
+Do not pool the five primary registry rows as five independent studies.
+
+The three barnacle-goose rows share:
+
+~~~text
+species
+source paper
+broad ecological design
+partly shared route-level inference framework
+~~~
+
+For cross-taxon graphics and descriptive comparison:
 
 ~~~text
 mule deer:
-  movement speed increases with lateness
-  + stopover time decreases
+  point = direct estimate
 
-Svalbard goose:
-  flight pace response is not detectable
-  + stopover time decreases strongly
-  + final Arctic crossing produces overtake
+barnacle goose:
+  point = median across declared primary routes
+  whisker = observed route range
 
-Greenland goose:
-  stopover correction plus additional phase reset
-
-Barents goose:
-  stopover shortening explains much of the retained-phase slope
+wigeon:
+  point = direct estimate
 ~~~
 
-The candidate common variable is therefore **phase contraction**, not one movement-speed response.
+The whisker is an observed within-taxon range, **not** a confidence interval.
 
-## Stopover-gain pattern
+A conventional random-effects meta-analysis is not licensed at the current taxonomic sample size.
 
-Primary systems with an estimated stopover actuator currently give:
+## Actuator architecture
+
+The current direct systems separate into three regimes:
 
 ~~~text
-mule deer:  0.492
-Svalbard:   0.589
-Greenland:  0.524
-Barents:    0.591
+MIXED reactive controller
+  mule deer
+  speed + stopover
+
+STEP reactive controller
+  barnacle goose
+  stopover-dominated route-stage correction
+
+PHASE RETENTION WITHOUT IDENTIFIED REACTIVE ACTUATOR
+  Eurasian wigeon
+  significant lambda < 1
+  no detected speed or stopover response
 ~~~
 
-The narrow range is scientifically interesting but currently underpowered and phylogenetically non-independent.
+This is central to the manuscript.
 
-It is frozen as a prospective prediction for the wigeon analysis rather than promoted as a result.
+The ecological invariant candidate is no longer an actuator coefficient such as kappa or stopover gain.
 
-## Stronger working statement
-
-Current evidence supports:
-
-> **Phenological migrants can strongly contract inherited phase deviation even when the behavioral actuator differs among systems.**
-
-It does not yet support:
-
-> all migrants remove a fixed fraction of mismatch.
-
-The latter requires a third taxon direct estimate and substantially broader replication.
-
-## Relation to PAYOFF-B
-
-PAYOFF-B1 identifies a unique fixed movement rate in an exact periodic benchmark.
-
-The empirical extension now identifies a different invariance candidate:
+It is the more abstract mapping:
 
 \[
-\text{actuator-specific behavior}
-\quad\longrightarrow\quad
-\text{shared phase-error contraction}.
+\text{incoming phase deviation}
+\rightarrow
+\text{retained phase deviation after a movement opportunity}.
 \]
 
-If cross-taxon replication survives, this becomes the cleanest ecological bridge between the exact fixed-rate theory and natural adaptive movement.
+## Relation to environmental information
+
+Behavioral phase retention and environmental predictability are different channels.
+
+For a linearized step,
+
+\[
+e_{i+1}=\lambda_i e_i-\xi_i,
+\]
+
+with environmental innovation \(\xi_i\),
+
+\[
+V_{i+1}=\lambda_i^2V_i+\sigma_{\xi,i}^2.
+\]
+
+Thus precise timing can arise from:
+
+~~~text
+small environmental innovation
+OR
+strong feedback contraction
+OR
+both
+~~~
+
+The barnacle-goose multi-flyway screen does not support a simple positive predictability -> stronger-feedback relationship.
+
+That negative result motivates the information-versus-retention plane used in the macro manuscript.
+
+## PAYOFF-B connection
+
+PAYOFF-B1 asks which **fixed movement rate** maximizes long-run growth in an exact periodic benchmark.
+
+The empirical programme finds a different transferable object:
+
+~~~text
+PAYOFF-B1:
+  fixed-rate timescale matching
+
+natural migration:
+  state- and route-dependent phase transformation
+~~~
+
+The bridge is not that all natural migrants should satisfy the exact PAYOFF-B optimum.
+
+It is that temporal environmental change creates a measurable timescale/phase problem, and natural systems solve that problem with heterogeneous controller architectures.
+
+## Publication gate consequence
+
+~~~text
+population / route replication:
+  PASS
+
+three-taxon direct phase-retention coordinate:
+  PASS
+
+three-taxon common reactive actuator:
+  OPEN
+
+universal phase-retention magnitude:
+  REJECTED / NOT SUPPORTED
+~~~
+
+The next inferential target is not a pooled mean lambda. It is explaining where systems fall in the space of:
+
+~~~text
+environmental innovation
+phase retention
+actuator architecture
+route strategy
+control permeability
+environmental endogeneity
+~~~
+
+## Claim boundary
+
+Licensed:
+
+- direct phase-retention estimates exist in three taxa;
+- all declared primary taxon/route rows used for synthesis have \(|\lambda|<1\);
+- phase-retention magnitude varies strongly;
+- reactive actuator identity is not universal;
+- wigeon prospectively confirms weak phase contraction while falsifying a stronger near-reset forecast.
+
+Not licensed:
+
+- one universal lambda;
+- one universal correction fraction;
+- three-taxon proof of one reactive feedback mechanism;
+- conventional five-row meta-analysis;
+- evolutionary optimality of the observed lambda values.
