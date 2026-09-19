@@ -94,9 +94,26 @@ def regularise_track_hourly(
     if len(tmp) < 2:
         return tmp.iloc[0:0].copy()
 
+    # The Supplement identifies PP00456-2018 as two-hourly. Public
+    # harmonized releases can replace local identifiers with numeric IDs, so
+    # infer the same schedule from the observed regular interval when the
+    # original local ID is unavailable.
+    positive_dt = (
+        tmp["time"].sort_values().diff().dt.total_seconds().dropna()
+    )
+    schedule_dt = positive_dt[
+        (positive_dt >= 1800.0) & (positive_dt <= 10800.0)
+    ]
+    median_schedule = (
+        float(schedule_dt.median()) if len(schedule_dt) else TARGET_TIME_SECONDS
+    )
+    inferred_two_hour = median_schedule > 5400.0
     target_time = (
         SPECIAL_TARGET_TIME_SECONDS
-        if individual_year == SPECIAL_TWO_HOUR_INDIVIDUAL_YEAR
+        if (
+            individual_year == SPECIAL_TWO_HOUR_INDIVIDUAL_YEAR
+            or inferred_two_hour
+        )
         else TARGET_TIME_SECONDS
     )
 
@@ -235,7 +252,26 @@ def prepare_track(
         "n_migration_rows_after_regularise": int(len(mig)),
         "target_time_seconds": (
             SPECIAL_TARGET_TIME_SECONDS
-            if individual_year == SPECIAL_TWO_HOUR_INDIVIDUAL_YEAR
+            if (
+                individual_year == SPECIAL_TWO_HOUR_INDIVIDUAL_YEAR
+                or (
+                    len(
+                        x["time"].sort_values().diff().dt.total_seconds()
+                        .dropna()
+                        .loc[
+                            lambda z: (z >= 1800.0) & (z <= 10800.0)
+                        ]
+                    )
+                    and float(
+                        x["time"].sort_values().diff().dt.total_seconds()
+                        .dropna()
+                        .loc[
+                            lambda z: (z >= 1800.0) & (z <= 10800.0)
+                        ]
+                        .median()
+                    ) > 5400.0
+                )
+            )
             else TARGET_TIME_SECONDS
         ),
         "regularise_wiggle_seconds": REGULARISE_WIGGLE_SECONDS,
