@@ -2,6 +2,7 @@ from math import exp, isclose
 
 from src.spatiotemporal_tracking import TrackingScenario
 from src.tracking_finite_evolution import (
+    finite_stationary_tracking_summary,
     moran_fixation_probability_from_growth_difference,
     simulate_finite_tracking_evolution,
     weak_mutation_stationary_distribution,
@@ -138,3 +139,34 @@ def test_selected_finite_chain_moves_away_from_stasis():
     stasis = lattice.index(0, 0)
     assert occupancy[stasis] < 0.5
     assert result.accepted_substitutions > 0
+
+
+def test_finite_stationary_summary_concentrates_more_at_larger_population_size():
+    scenario = TrackingScenario(
+        climate_velocity=0.04,
+        partner_spatial_share=1.0,
+        interaction_strength=0.3,
+        migration_cost=0.03,
+        phenology_cost=0.03,
+        baseline_growth=0.3,
+        steps=80,
+        burn_in=20,
+    )
+    lattice = StrategyLattice(max_rate=0.8, points=5)
+    small = finite_stationary_tracking_summary(
+        scenario,
+        lattice,
+        population_size=10,
+        selection_strength=5.0,
+    )
+    large = finite_stationary_tracking_summary(
+        scenario,
+        lattice,
+        population_size=100,
+        selection_strength=5.0,
+    )
+    assert large["top_probability"] > small["top_probability"]
+    assert (
+        large["effective_strategy_count"]
+        < small["effective_strategy_count"]
+    )
