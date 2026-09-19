@@ -3,10 +3,13 @@ from math import isclose
 from src.moving_climate_landscape import (
     MovingLandscapeScenario,
     gaussian_initial_distribution,
+    geometric_tracking_capacity,
     landscape_persistence_frontier,
     optimize_matched_landscape_strategy,
     reflect_nearest_neighbor_dispersal,
     simulate_moving_landscape_pair,
+    terminal_nonnegative_growth_velocity_ceiling,
+    zero_mismatch_velocity_ceiling,
 )
 from src.spatiotemporal_tracking import TrackingStrategy
 from src.tracking_coevolution import SpeciesTrackingParameters
@@ -345,3 +348,53 @@ def test_static_landscape_low_density_fitness_penalizes_costly_tracking():
         costly.mean_realized_log_growth_a
         != costly.mean_log_growth_a
     )
+
+
+def test_geometric_tracking_capacity_and_zero_mismatch_velocity_ceiling():
+    scenario = MovingLandscapeScenario(
+        patches=41,
+        patch_spacing=1.0,
+        spatial_gradient=0.20,
+        max_abs_phenology_shift=2.0,
+        phenology_scale=1.0,
+        steps=160,
+        burn_in=20,
+    )
+    # Edge position is +/-20, so spatial capacity is 4 and phenology adds 2.
+    assert isclose(
+        geometric_tracking_capacity(scenario),
+        6.0,
+        abs_tol=1e-12,
+    )
+    assert isclose(
+        zero_mismatch_velocity_ceiling(scenario),
+        6.0 / 160.0,
+        abs_tol=1e-12,
+    )
+
+
+def test_terminal_growth_ceiling_exceeds_perfect_tracking_ceiling():
+    parameters = SpeciesTrackingParameters(
+        interaction_strength=0.0,
+        migration_cost=0.03,
+        phenology_cost=0.03,
+        baseline_growth=0.30,
+        abiotic_strength=1.0,
+    )
+    scenario = MovingLandscapeScenario(
+        patches=41,
+        spatial_gradient=0.20,
+        max_abs_phenology_shift=2.0,
+        steps=160,
+        burn_in=20,
+        species_a=parameters,
+        species_b=parameters,
+    )
+    strategy = TrackingStrategy(1.0 / 3.0, 1.0 / 6.0)
+    terminal = terminal_nonnegative_growth_velocity_ceiling(
+        scenario,
+        strategy,
+        parameters,
+    )
+    assert terminal is not None
+    assert terminal > zero_mismatch_velocity_ceiling(scenario)
