@@ -1,0 +1,83 @@
+name: payoff-b 2d corridor frontier pilot
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-migration-phenology-20260919
+    paths:
+      - .github/workflows/payoff-b-2d-corridor-frontier-pilot.yml
+
+jobs:
+  centered:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run centered-corridor high-velocity frontier
+        run: >
+          python scripts/migration_phenology_2d_corridor.py
+          --climate-velocities 0.04,0.045,0.05,0.055,0.06
+          --phenology-limits 0,2,4
+          --gap-widths 1,3,15
+          --width 31
+          --height 15
+          --barrier-x-offset 4
+          --gap-center-offset 0
+          --initial-total-abundance 400
+          --local-carrying-capacity 80
+          --density-coefficient 0.30
+          --baseline-growth 0.30
+          --interaction-strength 0.25
+          --migration-cost 0.03
+          --phenology-cost 0.03
+          --steps 100
+          --burn-in 20
+          --migration-points 5
+          --phenology-points 5
+          --output outputs/payoff_b_2d_centered_frontier.csv
+          --frontier-output outputs/payoff_b_2d_centered_frontier_summary.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-2d-centered-frontier
+          path: |
+            outputs/payoff_b_2d_centered_frontier.csv
+            outputs/payoff_b_2d_centered_frontier_summary.csv
+
+  offset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run offset-corridor high-velocity frontier
+        run: >
+          python scripts/migration_phenology_2d_corridor.py
+          --climate-velocities 0.04,0.045,0.05,0.055,0.06
+          --phenology-limits 0,2,4
+          --gap-widths 1,3,15
+          --width 31
+          --height 15
+          --barrier-x-offset 4
+          --gap-center-offset 4
+          --initial-total-abundance 400
+          --local-carrying-capacity 80
+          --density-coefficient 0.30
+          --baseline-growth 0.30
+          --interaction-strength 0.25
+          --migration-cost 0.03
+          --phenology-cost 0.03
+          --steps 100
+          --burn-in 20
+          --migration-points 5
+          --phenology-points 5
+          --output outputs/payoff_b_2d_offset_frontier.csv
+          --frontier-output outputs/payoff_b_2d_offset_frontier_summary.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-2d-offset-frontier
+          path: |
+            outputs/payoff_b_2d_offset_frontier.csv
+            outputs/payoff_b_2d_offset_frontier_summary.csv
