@@ -1,0 +1,43 @@
+name: payoff-b stochastic landscape validation
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-migration-phenology-20260919
+    paths:
+      - .github/workflows/payoff-b-stochastic-landscape-validation.yml
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate spatial rescue under local demographic noise
+        run: >
+          python scripts/migration_phenology_stochastic_landscape_validation.py
+          --boundary-retentions 0,0.5,1
+          --interaction-strength 0.5
+          --cost-bias=-0.08
+          --base-cost 0.06
+          --climate-velocity 0.05
+          --phenology-limit 4
+          --baseline-growth 0.30
+          --patches 31
+          --spatial-gradient 0.20
+          --carrying-capacity 800
+          --density-coefficient 0.30
+          --steps 120
+          --burn-in 30
+          --mutation-step 0.1
+          --max-rate 1.0
+          --max-cycles 80
+          --replicates 128
+          --seed 20260920
+          --output outputs/payoff_b_stochastic_landscape_validation.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stochastic-landscape-validation
+          path: outputs/payoff_b_stochastic_landscape_validation.csv
