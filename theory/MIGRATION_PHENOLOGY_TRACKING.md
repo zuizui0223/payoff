@@ -150,6 +150,54 @@ The stationary occupancy reports:
 This layer separates "which point maximizes payoff?" from "where does a
 mutation-selection population spend its time?"
 
+## Finite-N weak-mutation occupancy
+
+The strategy lattice also has a finite-population weak-mutation interpretation
+that is distinct from the recurrent-mutation replicator-mutator layer.
+
+Assume a monomorphic resident strategy i and a one-step mutant j. Treat the
+declared tracking payoff g as a frequency-independent Malthusian score and use
+
+    r_ji = exp[beta (g_j - g_i)]
+
+as the mutant/resident relative fitness in a Moran process of size N.
+
+The exact one-mutant fixation probability is
+
+    rho(j|i)
+    = [1 - exp(-beta Delta g)]
+      / [1 - exp(-N beta Delta g)],
+
+with neutral limit 1/N.
+
+For symmetric nearest-neighbor mutation proposals,
+
+    rho(j|i) / rho(i|j)
+    = exp[beta (N-1)(g_j-g_i)],
+
+so detailed balance gives the exact stationary law
+
+    Pi_i
+    proportional to
+    exp[beta (N-1) g_i].
+
+This is the tracking analogue of PAYOFF's existing Gibbs-form weak-mutation
+architecture occupancy. Population size acts as an inverse-temperature
+multiplier:
+
+- small N spreads occupancy across multiple migration/phenology strategies;
+- large N concentrates occupancy near high-payoff tracking strategies;
+- beta=0 gives exact uniform occupancy over the symmetric lattice.
+
+The implementation includes both the exact stationary distribution and an
+explicit stochastic substitution chain. Therefore deterministic optimum,
+recurrent-mutation occupancy, and finite-N weak-mutation occupancy remain
+separate estimands rather than being collapsed into one "evolved strategy."
+
+The finite-N phase sweep is
+
+    python scripts/migration_phenology_finite_occupancy.py
+
 ## Two-species coevolution and coordination barriers
 
 A second implementation lets both interacting lineages carry their own
@@ -351,7 +399,7 @@ Current progression:
 4. partner coevolution — implemented as alternating rare substitutions;
 5. reproducible sharded large replicated parameter sweeps — implemented;
 6. density regulation and demographic extinction — implemented;
-7. finite-N evolutionary drift in strategy substitution — pending;
+7. finite-N weak-mutation evolutionary drift and exact occupancy — implemented;
 8. spatial landscape with local climatic velocity — pending;
 9. coevolutionary phase-boundary mapping at large scale — pilot implemented.
 
