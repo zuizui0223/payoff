@@ -162,7 +162,6 @@ class MovingLandscape2DScenario:
 
 
 @dataclass(frozen=True)
-@dataclass(frozen=True)
 class Landscape2DGeometry:
     x_positions: tuple[float, ...]
     y_positions: tuple[float, ...]
@@ -222,6 +221,7 @@ def build_landscape_2d_geometry(
     )
 
 
+@dataclass(frozen=True)
 class Landscape2DPairResult:
     strategy_a: TrackingStrategy
     strategy_b: TrackingStrategy
