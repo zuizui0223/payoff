@@ -71,6 +71,12 @@ def main() -> None:
         default=5,
         help="barrier column offset east of the centered initial optimum",
     )
+    parser.add_argument(
+        "--gap-center-offset",
+        type=int,
+        default=0,
+        help="corridor center offset in the transverse y direction",
+    )
     parser.add_argument("--patch-spacing", type=float, default=1.0)
     parser.add_argument("--spatial-gradient", type=float, default=0.20)
     parser.add_argument("--initial-distribution-sd", type=float, default=2.0)
@@ -107,6 +113,11 @@ def main() -> None:
     barrier_x_position = (
         barrier_x_index - args.width // 2
     ) * args.patch_spacing
+    gap_center_y_index = (
+        args.height // 2 + args.gap_center_offset
+    )
+    if not 0 <= gap_center_y_index < args.height:
+        raise SystemExit("gap center lies outside the landscape")
 
     parameters = SpeciesTrackingParameters(
         abiotic_strength=args.abiotic_strength,
@@ -124,6 +135,7 @@ def main() -> None:
             args.height,
             barrier_x_index=barrier_x_index,
             gap_width=gap_width,
+            gap_center_y_index=gap_center_y_index,
         )
         for velocity in args.climate_velocities:
             for phenology_limit in args.phenology_limits:
@@ -173,6 +185,7 @@ def main() -> None:
                 rows.append(
                     {
                         "gap_width": gap_width,
+                        "gap_center_offset": args.gap_center_offset,
                         "open_fraction": gap_width / args.height,
                         "climate_velocity": velocity,
                         "phenology_limit": phenology_limit,
