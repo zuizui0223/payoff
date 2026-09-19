@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """Normalize the public Eurasian-wigeon source data for controller reconstruction.
 
-Preferred source:
+Provenance source:
   original Movebank ORIGINAL bundle for DOI 10.5441/001/1.dv5mm289
 
-Fallback source:
+Canonical HMM-replication source:
   public Zenodo hourly union DOI 10.5281/zenodo.16940654
 
-Both lanes are normalized to the same columns consumed by the published-HMM
-reconstruction. The original source is always preferred when it is available
-and contains the required GPS schema.
+The paper Supplement loaded four tracking files and then regularized them to
+one- or two-hour schedules. The current Movebank ORIGINAL bundle is a much
+higher-frequency raw export and does not reproduce that analytical input when
+used directly. Therefore the curated hourly Zenodo union is preferred for HMM
+replication, while the original Movebank bundle is retained as source provenance
+and a fallback only if the hourly union is unavailable.
 """
 
 from __future__ import annotations
@@ -180,28 +183,48 @@ def clean_normalized(w: pd.DataFrame) -> pd.DataFrame:
 
 
 def source_choice():
+    """Prefer the hourly supplement-like union; retain original raw as audit."""
     original_error = None
+    original_available = False
     if ORIGINAL.exists() and ORIGINAL.stat().st_size > 0:
         try:
-            raw = pd.read_csv(ORIGINAL, low_memory=False)
-            w = clean_normalized(normalize_original(raw))
-            if len(w) > 0:
-                return "ORIGINAL_MOVEBANK", ORIGINAL, w, original_error
+            raw_original = pd.read_csv(ORIGINAL, low_memory=False, nrows=1000)
+            _ = normalize_original(raw_original)
+            original_available = True
         except Exception as exc:
             original_error = f"{type(exc).__name__}:{exc}"
 
-    if not ZENODO.exists():
-        raise SystemExit(
-            f"Neither usable original source nor fallback exists. "
-            f"Original error={original_error}; missing {ZENODO}"
+    if ZENODO.exists() and ZENODO.stat().st_size > 0:
+        raw = pd.read_csv(ZENODO, low_memory=False)
+        w = clean_normalized(normalize_zenodo(raw))
+        if len(w) > 0:
+            return (
+                "ZENODO_SUPPLEMENT_UNION_HOURLY",
+                ZENODO,
+                w,
+                original_error,
+                original_available,
+            )
+
+    if original_available:
+        raw = pd.read_csv(ORIGINAL, low_memory=False)
+        w = clean_normalized(normalize_original(raw))
+        return (
+            "ORIGINAL_MOVEBANK_FALLBACK",
+            ORIGINAL,
+            w,
+            original_error,
+            original_available,
         )
-    raw = pd.read_csv(ZENODO, low_memory=False)
-    w = clean_normalized(normalize_zenodo(raw))
-    return "ZENODO_FALLBACK", ZENODO, w, original_error
+
+    raise SystemExit(
+        f"Neither supplement-like hourly union nor usable original source exists. "
+        f"Original error={original_error}; Zenodo exists={ZENODO.exists()}"
+    )
 
 
 def main():
-    lane, source_path, w, original_error = source_choice()
+    lane, source_path, w, original_error, original_available = source_choice()
 
     individual_summary = (
         w.groupby("individual.id")
@@ -230,6 +253,7 @@ def main():
         "zenodo_fallback_doi": "10.5281/zenodo.16940654",
         "source_lane": lane,
         "source_path": str(source_path),
+        "original_source_available": bool(original_available),
         "original_source_error_if_any": original_error,
         "primary_study_name": TARGET_STUDY,
         "registered_source_study_tokens": list(
@@ -272,7 +296,8 @@ def main():
         ],
         "normalized_columns": [str(x) for x in w.columns],
         "claim_ceiling": (
-            "Normalized raw-source inventory. Controller inference remains "
+            "Normalized supplement-like hourly analysis source; the original "
+            "Movebank raw bundle is audited separately. Controller inference remains "
             "gated on replication of the published track/HMM/staging summaries "
             "and environmental TGS reconstruction."
         ),
