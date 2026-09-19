@@ -146,6 +146,7 @@ def main():
         "version_files_requests": [],
         "files": [],
         "download_attempts": [],
+        "bulk_download_attempts": [],
         "downloaded_archives": [],
     }
 
@@ -200,6 +201,14 @@ def main():
             if not isinstance(f, dict):
                 continue
             file_id = f.get("id")
+            if file_id is None:
+                self_href = (
+                    ((f.get("_links") or {}).get("self") or {}).get("href")
+                )
+                if self_href and "/files/" in str(self_href):
+                    token = str(self_href).rstrip("/").split("/")[-1]
+                    if token.isdigit():
+                        file_id = int(token)
             name = (
                 f.get("path")
                 or f.get("name")
@@ -280,6 +289,54 @@ def main():
         except Exception as exc:
             attempt["error"] = f"{type(exc).__name__}:{exc}"
         receipt["download_attempts"].append(attempt)
+
+    # Try public dataset/version bulk-download routes exposed by Dryad metadata.
+    bulk_targets = [
+        (
+            "dataset",
+            f"{BASE}/datasets/{ENCODED_DOI}/download",
+        )
+    ]
+    for vid in version_ids:
+        bulk_targets.append(
+            ("version_" + str(vid), f"{BASE}/versions/{vid}/download")
+        )
+
+    for label, url in bulk_targets:
+        attempt = {"label": label, "url": url}
+        try:
+            r = get(url, timeout=180, stream=True)
+            attempt.update(
+                {
+                    "status": r.status_code,
+                    "final_url": str(r.url),
+                    "content_type": r.headers.get("content-type"),
+                }
+            )
+            if r.ok:
+                target = EXT / f"dryad_bulk_{label}.zip"
+                with target.open("wb") as h:
+                    for chunk in r.iter_content(1024 * 1024):
+                        if chunk:
+                            h.write(chunk)
+                attempt["downloaded_bytes"] = int(target.stat().st_size)
+                if target.stat().st_size > 0:
+                    archive = {
+                        "file_id": None,
+                        "name": target.name,
+                        "path": str(target),
+                        "source": "bulk_" + label,
+                        "members": inspect_archive(target),
+                    }
+                    receipt["downloaded_archives"].append(archive)
+            else:
+                try:
+                    attempt["body_preview"] = r.text[:500]
+                except Exception:
+                    pass
+        except Exception as exc:
+            attempt["error"] = f"{type(exc).__name__}:{exc}"
+        receipt["bulk_download_attempts"].append(attempt)
 
     receipt["public_zip_downloaded"] = any(
         str(x.get("name", "")).lower().endswith(".zip")
