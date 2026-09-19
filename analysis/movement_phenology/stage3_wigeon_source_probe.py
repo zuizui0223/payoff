@@ -183,14 +183,28 @@ def clean_normalized(w: pd.DataFrame) -> pd.DataFrame:
 
 
 def source_choice():
-    """Prefer the hourly supplement-like union; retain original raw as audit."""
+    """Prefer the original Movebank burst export used by the published analysis.
+
+    The article states that tracking data were downloaded from Movebank on
+    2020-06-01 and burst fixes were subsequently regularized. The curated
+    Zenodo hourly union is therefore retained only as a fallback / sensitivity
+    lane when the original public bundle cannot be fetched.
+    """
     original_error = None
     original_available = False
     if ORIGINAL.exists() and ORIGINAL.stat().st_size > 0:
         try:
-            raw_original = pd.read_csv(ORIGINAL, low_memory=False, nrows=1000)
-            _ = normalize_original(raw_original)
-            original_available = True
+            raw = pd.read_csv(ORIGINAL, low_memory=False)
+            w = clean_normalized(normalize_original(raw))
+            if len(w) > 0:
+                original_available = True
+                return (
+                    "ORIGINAL_MOVEBANK_PRIMARY",
+                    ORIGINAL,
+                    w,
+                    original_error,
+                    original_available,
+                )
         except Exception as exc:
             original_error = f"{type(exc).__name__}:{exc}"
 
@@ -199,26 +213,15 @@ def source_choice():
         w = clean_normalized(normalize_zenodo(raw))
         if len(w) > 0:
             return (
-                "ZENODO_SUPPLEMENT_UNION_HOURLY",
+                "ZENODO_SUPPLEMENT_UNION_FALLBACK",
                 ZENODO,
                 w,
                 original_error,
                 original_available,
             )
 
-    if original_available:
-        raw = pd.read_csv(ORIGINAL, low_memory=False)
-        w = clean_normalized(normalize_original(raw))
-        return (
-            "ORIGINAL_MOVEBANK_FALLBACK",
-            ORIGINAL,
-            w,
-            original_error,
-            original_available,
-        )
-
     raise SystemExit(
-        f"Neither supplement-like hourly union nor usable original source exists. "
+        f"Neither original Movebank source nor hourly fallback is usable. "
         f"Original error={original_error}; Zenodo exists={ZENODO.exists()}"
     )
 
@@ -296,10 +299,10 @@ def main():
         ],
         "normalized_columns": [str(x) for x in w.columns],
         "claim_ceiling": (
-            "Normalized supplement-like hourly analysis source; the original "
-            "Movebank raw bundle is audited separately. Controller inference remains "
-            "gated on replication of the published track/HMM/staging summaries "
-            "and environmental TGS reconstruction."
+            "Normalized analysis source with the original Movebank burst export "
+            "preferred to match the paper's declared download/preprocessing lane. "
+            "Controller inference remains gated on replication of the published "
+            "track/HMM/staging summaries and environmental TGS reconstruction."
         ),
     }
     (OUT / "stage3_wigeon_source_receipt.json").write_text(
