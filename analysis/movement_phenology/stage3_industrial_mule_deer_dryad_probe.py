@@ -22,6 +22,11 @@ import zipfile
 import pandas as pd
 import requests
 
+try:
+    import shapefile
+except Exception:
+    shapefile = None
+
 
 BASE = "https://datadryad.org/api/v2"
 DOI = "doi:10.5061/dryad.7d7wm37z5"
@@ -83,6 +88,41 @@ def inspect_tabular_bytes(name: str, raw: bytes):
         "name": name,
         "bytes": len(raw),
     }
+
+    if lower.endswith(".txt"):
+        for encoding in ("utf-8-sig", "utf-8", "latin-1"):
+            try:
+                text = raw.decode(encoding)
+                out["text_preview"] = text[:12000]
+                break
+            except Exception:
+                continue
+
+    if lower.endswith(".dbf") and shapefile is not None:
+        try:
+            reader = shapefile.Reader(dbf=io.BytesIO(raw))
+            fields = [f[0] for f in reader.fields[1:]]
+            records = []
+            for rec in reader.iterRecords():
+                row = {
+                    field: value
+                    for field, value in zip(fields, list(rec))
+                }
+                records.append(row)
+                if len(records) >= 3:
+                    break
+            out.update(
+                {
+                    "table_rows": int(len(reader)),
+                    "table_cols": int(len(fields)),
+                    "columns": fields,
+                    "head": records,
+                    "parser": "pyshp_dbf",
+                }
+            )
+            return out
+        except Exception as exc:
+            out["dbf_parse_error"] = f"{type(exc).__name__}:{exc}"
 
     if lower.endswith(".csv") or lower.endswith(".txt") or lower.endswith(".tsv"):
         for encoding in ("utf-8-sig", "utf-8", "latin-1"):
@@ -400,6 +440,7 @@ def main():
                         default=str,
                     ),
                     "archive_depth": member.get("archive_depth"),
+                    "text_preview": content.get("text_preview"),
                 }
             )
     pd.DataFrame(rows).to_csv(
