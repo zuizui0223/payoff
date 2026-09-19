@@ -211,6 +211,73 @@ replicates and T ecological steps, planned work is
 This is the layer that can legitimately be scaled into a multi-day or
 month-scale computational experiment.
 
+## Density regulation and demographic extinction
+
+The tracking payoff is now transported into explicit integer population
+dynamics rather than interpreting negative mean growth as extinction by
+definition.
+
+For abundance N_t, the current demographic layer uses
+
+    E[N_(t+1) | N_t]
+    = N_t * exp[g_t - d N_t / K],
+
+followed by Poisson demographic sampling.
+
+Here:
+
+- g_t is the same low-density Malthusian tracking payoff defined above;
+- d is the density-regulation coefficient;
+- K is the abundance scale;
+- zero abundance is absorbing.
+
+Thus the causal chain is explicit:
+
+    environmental movement
+    -> spatial/phenological mismatch
+    -> interaction mismatch
+    -> low-density growth
+    -> density-regulated integer abundance
+    -> persistence or extinction.
+
+No new hidden "extinction score" is introduced.
+
+For the two-species coevolution model, joint-system persistence is measured
+until the first partner extinction. The current model intentionally stops there
+because post-partner-loss growth has not yet been specified. It therefore
+estimates persistence of the interacting pair, not secondary dynamics after
+one partner disappears.
+
+The demographic coordination-barrier comparison holds the ecological scenario,
+population design and replicate seeds fixed while contrasting:
+
+    locally accessible coevolution endpoint
+
+against
+
+    coordinated matched optimum.
+
+This yields two linked quantities:
+
+    accessibility gap
+    = matched mean payoff - local mean payoff,
+
+and
+
+    persistence gain
+    = matched joint-persistence fraction
+      - local joint-persistence fraction.
+
+A coordination barrier can therefore be classified as demographically cryptic
+or as carrying a measurable persistence cost.
+
+The dedicated sweep is
+
+    python scripts/migration_phenology_population_barrier_sweep.py
+
+and can be sharded across the interaction-strength x cost-bias x climate-speed
+design.
+
 ## Phase diagram
 
 The first sweep varies:
@@ -283,13 +350,14 @@ Current progression:
    implemented;
 4. partner coevolution — implemented as alternating rare substitutions;
 5. reproducible sharded large replicated parameter sweeps — implemented;
-6. explicit density, demographic extinction and finite-N drift — pending;
-7. spatial landscape with local climatic velocity — pending;
-8. coevolutionary phase-boundary mapping at large scale — pending.
+6. density regulation and demographic extinction — implemented;
+7. finite-N evolutionary drift in strategy substitution — pending;
+8. spatial landscape with local climatic velocity — pending;
+9. coevolutionary phase-boundary mapping at large scale — pilot implemented.
 
-Stages 2-5 already provide a reproducible route to very large run counts.
-Stages 6-8 are the next scientific upgrades rather than prerequisites for
-basic computational scaling.
+Stages 2-6 already provide a reproducible route to very large run counts.
+Finite-N evolutionary drift and explicit landscapes are the next scientific
+upgrades rather than prerequisites for basic computational scaling.
 
 ## Claim ceiling
 
