@@ -310,6 +310,62 @@ def vertical_barrier_habitat(
     return tuple(quality)
 
 
+def multiple_vertical_barriers_habitat(
+    width: int,
+    height: int,
+    *,
+    barriers: tuple[tuple[int, int, int], ...],
+    background_quality: float = 1.0,
+) -> tuple[float, ...]:
+    """Return habitat with multiple vertical walls and declared gaps.
+
+    Each barrier tuple is
+        (barrier_x_index, gap_width, gap_center_y_index).
+
+    Distinct wall columns are required. This helper supports straight corridors
+    and staggered/zigzag routes whose path length is genuinely two-dimensional.
+    """
+
+    if width < 3 or height < 3:
+        raise ValueError("width and height must be at least 3")
+    if not 0.0 < background_quality <= 1.0:
+        raise ValueError("background_quality must lie in (0,1]")
+    if not barriers:
+        return (background_quality,) * (width * height)
+
+    wall_columns = [item[0] for item in barriers]
+    if len(set(wall_columns)) != len(wall_columns):
+        raise ValueError("barrier columns must be distinct")
+
+    quality = [background_quality] * (width * height)
+    for barrier_x_index, gap_width, gap_center_y_index in barriers:
+        if not 0 <= barrier_x_index < width:
+            raise ValueError("barrier_x_index out of bounds")
+        if gap_width < 0 or gap_width > height:
+            raise ValueError("gap_width must lie between 0 and height")
+        if not 0 <= gap_center_y_index < height:
+            raise ValueError("gap_center_y_index out of bounds")
+
+        if gap_width >= height:
+            continue
+        if gap_width == 0:
+            gap_rows: set[int] = set()
+        else:
+            lower = gap_center_y_index - (gap_width - 1) // 2
+            upper = lower + gap_width
+            if lower < 0 or upper > height:
+                raise ValueError("gap does not fit inside landscape height")
+            gap_rows = set(range(lower, upper))
+
+        for y_index in range(height):
+            if y_index not in gap_rows:
+                quality[
+                    y_index * width + barrier_x_index
+                ] = 0.0
+
+    return tuple(quality)
+
+
 def dispersal_fraction(migration_rate: float) -> float:
     if migration_rate < 0.0 or not isfinite(migration_rate):
         raise ValueError("migration_rate must be non-negative and finite")
