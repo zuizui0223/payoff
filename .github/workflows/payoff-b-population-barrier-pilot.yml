@@ -20,7 +20,7 @@ jobs:
         run: >
           python scripts/migration_phenology_population_barrier_sweep.py
           --interaction-strengths 0,0.1,0.3,0.6,1.0
-          --cost-biases -0.08,-0.04,0,0.04,0.08
+          --cost-biases=-0.08,-0.04,0,0.04,0.08
           --climate-velocities 0.02,0.04,0.06
           --steps 140
           --burn-in 20
