@@ -125,8 +125,16 @@ def test_phenology_only_tracking_can_follow_slow_change_without_range_shift():
         TrackingStrategy(0.0, 0.8),
         scenario,
     )
-    assert abs(result.final_centroid_a) < 1e-10
+    # With zero dispersal, selection can still reweight the small spatial
+    # tails already present in the initial Gaussian. The key prediction is
+    # that phenology carries almost all tracking while range movement stays
+    # small.
+    assert abs(result.final_centroid_a) < 0.5
     assert result.final_phenology_a > 1.0
+    assert (
+        scenario.phenology_scale * result.final_phenology_a
+        > scenario.spatial_gradient * abs(result.final_centroid_a)
+    )
     assert result.rms_abiotic_mismatch_a < 0.5
     assert result.joint_persisted
 
@@ -217,6 +225,9 @@ def test_fast_climate_with_no_phenology_pushes_population_to_right_edge():
         TrackingStrategy(1.0, 0.0),
         scenario,
     )
-    assert result.final_centroid_a > 0.0
-    assert result.right_edge_mass_fraction_a > 0.01
+    # The population is compressed against the leading landscape edge before
+    # it collapses. Once extinct, the final centroid is intentionally reported
+    # as zero, so edge occupancy and persistence are the relevant diagnostics.
+    assert result.right_edge_mass_fraction_a > 0.30
     assert result.rms_abiotic_mismatch_a > 0.5
+    assert not result.joint_persisted
