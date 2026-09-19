@@ -227,7 +227,22 @@ def individual_year_permeability(
                 "log_G": math.log(g) if g > 0 else np.nan,
             }
         )
-    return pd.DataFrame(rows)
+    columns = [
+        "AID_Year",
+        "animal_id",
+        "year",
+        "pop",
+        "development_class",
+        "edge_km",
+        "far_km",
+        "n_edge_steps",
+        "n_far_steps",
+        "median_edge_speed_km_day",
+        "median_far_speed_km_day",
+        "control_permeability_G",
+        "log_G",
+    ]
+    return pd.DataFrame(rows, columns=columns)
 
 
 def cluster_fit(formula: str, data: pd.DataFrame):
@@ -251,7 +266,9 @@ def named_term(model, name):
 
 
 def fit_longitudinal_g(d: pd.DataFrame):
-    x = d[np.isfinite(d["log_G"])].copy()
+    if d.empty or "log_G" not in d.columns:
+        return None
+    x = d[np.isfinite(pd.to_numeric(d["log_G"], errors="coerce"))].copy()
     if len(x) < 12 or x["animal_id"].nunique() < 6 or x["year"].nunique() < 4:
         return None
     x["year_centered"] = x["year"] - x["year"].mean()
@@ -424,6 +441,7 @@ def main():
         "primary_animals": int(primary_g["animal_id"].nunique())
         if len(primary_g)
         else 0,
+        "primary_G_estimable": bool(len(primary_g) > 0),
         "median_G_overall": float(
             primary_g["control_permeability_G"].median()
         )
@@ -466,7 +484,9 @@ def main():
             "near-boundary versus far-route movement within individual-years. "
             "Population and time contrasts can be confounded by landscape and "
             "sampling differences; this is not a causal development effect and "
-            "does not estimate phenological lambda directly."
+            "does not estimate phenological lambda directly. If the registered "
+            "individual-year G contrast has insufficient support, it remains "
+            "explicitly NOT_ESTIMABLE rather than triggering threshold changes."
         ),
     }
     (OUT / "stage3_industrial_mule_deer_permeability_receipt.json").write_text(
