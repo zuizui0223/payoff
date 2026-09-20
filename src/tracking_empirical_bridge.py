@@ -26,6 +26,8 @@ from src.tracking_interval_calibration import (
 
 @dataclass(frozen=True)
 class EmpiricalTrackingControls:
+    observation_interval_seconds: float
+    latent_substeps: int
     decision_interval_seconds: float
     calibration_patch_spacing: float
     climate_axis_angle_degrees: float
@@ -134,6 +136,8 @@ def controls_from_interval_audit(
         phenology_licensed = False
 
     return EmpiricalTrackingControls(
+        observation_interval_seconds=audit.target_interval_seconds,
+        latent_substeps=audit.latent_substeps,
         decision_interval_seconds=audit.model_step_seconds,
         calibration_patch_spacing=audit.patch_spacing,
         climate_axis_angle_degrees=audit.climate_axis_angle_degrees,
