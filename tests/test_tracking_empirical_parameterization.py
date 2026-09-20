@@ -3,6 +3,7 @@ from math import isclose
 import pytest
 
 from src.tracking_empirical_parameterization import (
+    audit_residual_compression,
     build_tracking_parameterization,
     climate_velocity_from_wave_speed,
     implied_component_variances,
@@ -206,3 +207,35 @@ def test_matched_growth_contrasts_reject_negative_penalty_identification():
             joint_migration_rate=0.5,
             joint_phenology_rate=0.5,
         )
+
+
+def test_residual_compression_audit_classifies_sign_crossing():
+    audit = audit_residual_compression(
+        residual_before=-30.0,
+        residual_after=4.0,
+    )
+    assert audit.status == "sign_crossing_or_overshoot"
+    assert not audit.monotone_first_order_compatible
+    assert audit.compression_ratio is None
+
+
+def test_residual_compression_audit_classifies_monotone_compression():
+    audit = audit_residual_compression(
+        residual_before=20.0,
+        residual_after=11.0,
+    )
+    assert audit.status == "monotone_compression"
+    assert audit.monotone_first_order_compatible
+    assert audit.compression_ratio == pytest.approx(0.55)
+    assert audit.log_compression == pytest.approx(
+        -__import__("math").log(0.55)
+    )
+
+
+def test_residual_compression_audit_rejects_amplification():
+    audit = audit_residual_compression(
+        residual_before=5.0,
+        residual_after=8.0,
+    )
+    assert audit.status == "mismatch_amplification"
+    assert not audit.monotone_first_order_compatible
