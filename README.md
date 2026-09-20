@@ -642,6 +642,31 @@ audit shows the mechanism: moving both partners from (migration, phenology)
 either partner moving alone has payoff change about -1.427 because interaction
 mismatch rises to about 3.189.
 
+The two-dimensional connectivity extension is frozen in
+[docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md](docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md).
+The key added result is **temporal buffering of connectivity costs**. In the
+7 x 7 zigzag-route resolution check, the mean open-to-zigzag low-density
+growth penalty shrinks from about -0.0419 at phenology limit 0 to -0.0070 at
+limit 4. With limit 4 the optimum is phenology-only at climate velocities
+0.04-0.05, mixed at 0.06, and increasingly migration-dependent by 0.07.
+This temporal-bypass transition is bracketed by an explicit finite-horizon
+capacity diagnostic.
+
+The 2D coevolutionary result is robust to route geometry and mutation
+resolution. At mutation step 0.1, 22/24 positive-interaction cells contain
+coordination barriers and 21/24 convert local extinction into coordinated
+persistence. The canonical zigzag gate has resident growth about -0.840,
+coordinated growth about +0.255, coordinated gain +1.095, and unilateral gain
+about -5.946. Adding an explicit Bhattacharyya distribution-overlap penalty
+does not remove the gate; it makes the unilateral step still more costly.
+
+Partner-specific tracking costs expose a forcing-dependent role of
+interaction. At moderate climate speed, interaction synchronizes quantitatively
+different partner strategies while all sampled pairs persist. At stronger
+forcing, the same synchronizing pressure locks the pair into a migration-only
+local attractor and all sampled pairs go extinct. The retained interpretation
+is therefore **synchronization can become maladaptive synchronization**.
+
 ---
 
 
