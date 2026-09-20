@@ -503,3 +503,64 @@ high innovation + high |lambda|
 
 This is stronger than a one-dimensional ranking of migration "tracking
 quality".
+
+
+## Quantitative perturbation result — actuation can be attenuated
+
+The industrial-mule-deer boundary system is now reconstructed directly from
+the archived GPS and development-footprint files rather than retained only as
+literature context.
+
+Define within each animal-year
+
+\[
+G
+=
+\frac{\text{median movement speed within 2 km of the development boundary}}
+{\text{median movement speed at least 10 km from the boundary}}.
+\]
+
+Across 188 analyzable animal-years from 103 animals:
+
+~~~text
+median G, small-development population = 1.656
+median G, large-development population = 1.037
+~~~
+
+The clustered population shift in log G is
+
+~~~text
+beta = -0.476
+SE   =  0.197
+p    =  0.017
+~~~
+
+and the direction is stable across all eight registered near/far threshold
+definitions.
+
+A step-level individual-year fixed-effect model gives the same qualitative
+message:
+
+~~~text
+edge × large-development beta = -0.152
+p = 0.038
+~~~
+
+Thus the local movement response associated with approaching the development
+footprint is attenuated in the large-development population.
+
+The stronger longitudinal prediction is not supported:
+
+~~~text
+year × large-development effect on log G:
+  beta = +0.0405
+  p = 0.327
+~~~
+
+The perturbation therefore supports **actuation limitation** cross-sectionally
+without showing that the registered permeability metric became progressively
+worse through time.
+
+This distinction strengthens the controller framework: boundary systems can
+test specific components and can falsify stronger mechanistic extensions rather
+than serving only as illustrative examples.
