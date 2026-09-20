@@ -121,7 +121,7 @@ def main() -> None:
     steps = build_fixed_intervals(
         observations,
         target_interval_seconds=(
-            controls.decision_interval_seconds
+            controls.observation_interval_seconds
         ),
         interval_tolerance_fraction=(
             args.interval_tolerance_fraction
@@ -142,6 +142,10 @@ def main() -> None:
         "tracking_controls_source": (
             str(args.tracking_controls_json)
         ),
+        "observation_interval_seconds": (
+            controls.observation_interval_seconds
+        ),
+        "latent_substeps": controls.latent_substeps,
         "decision_interval_seconds": (
             controls.decision_interval_seconds
         ),
