@@ -1,0 +1,256 @@
+{
+  "frozen_date": "2026-09-20",
+  "scope": "two_dimensional_connectivity_synthetic_receipt",
+  "model_boundary": {
+    "dimensions": 2,
+    "evolutionary_fitness": "abundance-weighted low-density growth",
+    "demographic_growth": "local density-regulated growth",
+    "interaction_baseline": "centroid spatial distance + phenology distance",
+    "distribution_overlap_extension": "optional Bhattacharyya penalty; default scale 0"
+  },
+  "connectivity_frontier": {
+    "centered_and_offset6_resolution": {
+      "strategy_grid": "7x7",
+      "gap_widths": [
+        1,
+        3,
+        15
+      ],
+      "phenology_limit_2": {
+        "max_persisted_velocity": 0.065,
+        "first_failed_velocity": 0.07
+      },
+      "phenology_limit_4": {
+        "max_persisted_velocity": 0.085,
+        "first_failed_velocity": 0.09
+      },
+      "geometry_effect": "frontier brackets unchanged; crossing fractions differ"
+    }
+  },
+  "zigzag_temporal_buffering": {
+    "strategy_grid": "7x7",
+    "mean_growth_penalty_open_minus_zigzag": {
+      "phenology_limit_0": -0.0418879547194,
+      "phenology_limit_2": -0.0331414673223,
+      "phenology_limit_4": -0.00699569708325
+    },
+    "penalty_magnitude_reduction_0_to_4": 0.833,
+    "sampled_persistence_difference_open_minus_zigzag": 0,
+    "canonical_zmax4_sequence": [
+      {
+        "velocity": 0.04,
+        "migration": 0,
+        "phenology": 0.3333333333333333,
+        "second_wall_crossing": "~0"
+      },
+      {
+        "velocity": 0.05,
+        "migration": 0,
+        "phenology": 0.3333333333333333,
+        "second_wall_crossing": "~0"
+      },
+      {
+        "velocity": 0.06,
+        "migration": 0.16666666666666666,
+        "phenology": 0.16666666666666666,
+        "second_wall_crossing": 0.1318
+      },
+      {
+        "velocity": 0.07,
+        "migration": 0.3333333333333333,
+        "phenology": 0.16666666666666666,
+        "second_wall_crossing": 0.3144
+      }
+    ]
+  },
+  "temporal_bypass_capacity": {
+    "formula": "[g*x_max + s*z_max + sqrt(2*(baseline-C_h)/A)] / T",
+    "canonical_zmax4_h_one_third": "between 0.05 and 0.06",
+    "observed_switch": "phenology-only at 0.05; migration re-enters by 0.06",
+    "boundary": "best-case finite-horizon diagnostic, not a persistence theorem"
+  },
+  "coevolution": {
+    "coarse_mutation_step_0_2": {
+      "interaction_0": {
+        "barriers": 0,
+        "total": 12,
+        "rescues": 0
+      },
+      "interaction_0_5": {
+        "barriers": 9,
+        "total": 12,
+        "rescues": 9
+      },
+      "interaction_1": {
+        "barriers": 12,
+        "total": 12,
+        "rescues": 12
+      }
+    },
+    "fine_mutation_step_0_1": {
+      "positive_interaction_cells": 24,
+      "barriers": 22,
+      "persistence_rescues": 21,
+      "interaction_0_5": {
+        "open": {
+          "barriers": 3,
+          "total": 4,
+          "rescues": 3
+        },
+        "straight": {
+          "barriers": 3,
+          "total": 4,
+          "rescues": 3
+        },
+        "zigzag": {
+          "barriers": 4,
+          "total": 4,
+          "rescues": 3
+        }
+      },
+      "interaction_1": {
+        "open": {
+          "barriers": 4,
+          "total": 4,
+          "rescues": 4
+        },
+        "straight": {
+          "barriers": 4,
+          "total": 4,
+          "rescues": 4
+        },
+        "zigzag": {
+          "barriers": 4,
+          "total": 4,
+          "rescues": 4
+        }
+      }
+    },
+    "direct_gate": {
+      "resident_strategy": [
+        0.2,
+        0
+      ],
+      "coordinated_strategy": [
+        0.2,
+        0.2
+      ],
+      "resident_joint_growth": -0.840083297868,
+      "coordinated_joint_growth": 0.254888656312,
+      "coordinated_gain": 1.09497195418,
+      "unilateral_gain_a": -5.94568135867,
+      "unilateral_gain_b": -5.94568135867,
+      "unilateral_interaction_mismatch": 3.74728044583,
+      "resident_persisted": false,
+      "coordinated_persisted": true
+    }
+  },
+  "distribution_overlap_sensitivity": {
+    "scales": [
+      0,
+      0.5,
+      1,
+      2
+    ],
+    "barrier_all": true,
+    "persistence_rescue_all": true,
+    "fixed_gate_all": true,
+    "unilateral_distribution_overlap_range": [
+      0.07038,
+      0.07463
+    ],
+    "unilateral_gain_by_scale": {
+      "0": -5.94568135867,
+      "1": -6.41999673588,
+      "2": -7.80362269907,
+      "0.5": -6.06470812418
+    }
+  },
+  "partner_asymmetry": {
+    "moderate_velocity_0_04": {
+      "interaction_0": {
+        "persisted": "9/9",
+        "mean_strategy_distance": 0.0888888888889,
+        "opposed_bias_mean_distance": 0.2,
+        "mean_interaction_mismatch": 0.0671400613654
+      },
+      "interaction_0_5": {
+        "persisted": "9/9",
+        "mean_strategy_distance": 0,
+        "mean_interaction_mismatch": 0.00437797150964,
+        "endpoint": "all sampled pairs synchronized to migration-only (0.2,0)"
+      },
+      "interaction_1": {
+        "persisted": "9/9",
+        "mean_strategy_distance": 0,
+        "mean_interaction_mismatch": 0.00437797925469,
+        "endpoint": "all sampled pairs synchronized to migration-only (0.2,0)"
+      },
+      "retained_interpretation": "interaction synchronizes quantitatively different intrinsic responses while persistence remains possible"
+    },
+    "strong_velocity_0_06": {
+      "interaction_0": {
+        "persisted": "9/9",
+        "endpoint": "all sampled pairs matched mixed tracking around (0.2,0.2)"
+      },
+      "interaction_0_5": {
+        "persisted": "0/9",
+        "mean_strategy_distance": 0,
+        "endpoint": "sampled pairs synchronized to migration-only lock"
+      },
+      "interaction_1": {
+        "persisted": "0/9",
+        "mean_strategy_distance": 0,
+        "endpoint": "sampled pairs synchronized to migration-only lock"
+      },
+      "retained_interpretation": "synchronization becomes maladaptive under stronger forcing"
+    }
+  },
+  "provenance": {
+    "centered_frontier_resolution": {
+      "workflow_run": 35476324392,
+      "artifact_id": 10594321600,
+      "sha256": "16e10954c8cca0448cb4b17c13aefd838dd799c7eb840eec0f795b08816b2bd6"
+    },
+    "offset6_frontier_resolution": {
+      "workflow_run": 35476324392,
+      "artifact_id": 10593174785,
+      "sha256": "bb903a0fe7dc7103284695e6c185bd4daae325374ecba03100ccdef9d8c7003e"
+    },
+    "zigzag_resolution": {
+      "workflow_run": 35476611109,
+      "artifact_id": 10593374777,
+      "sha256": "9c23e0ee6c5724b1f2d7dc37433bad706104ad5c47324fee264304ab6cb001c1"
+    },
+    "coevolution_coarse": {
+      "workflow_run": 35476662171,
+      "artifact_id": 10594646436,
+      "sha256": "5a8b7a1aa13324f8db0d1ff9ce877045520828901a9f0f90021989acac44b3d1"
+    },
+    "coevolution_fine": {
+      "workflow_run": 35478423904,
+      "artifact_id": 10595351557,
+      "sha256": "bfadc9e26f1208cace85e5f9cb44bc050b1e50ffab154f547d19642ccbde911a"
+    },
+    "overlap_sensitivity": {
+      "workflow_run": 35478538667,
+      "artifact_id": 10595076778,
+      "sha256": "5bd1d575e686d58c30991ee48daa107b8e38d901f6e0ade674af2e08adec7108"
+    },
+    "asymmetry_strong": {
+      "workflow_run": 35478704014,
+      "artifact_id": 10595407391,
+      "sha256": "0867ec0fca88a8ff0fb90bd52723e3066c1acdde369b5fcb287d7954b27e19cf"
+    },
+    "asymmetry_moderate": {
+      "workflow_run": 35478835579,
+      "artifact_id": 10594734226,
+      "sha256": "42674ddb42b8fc0ca30847838db7fbd6e9c8b0dbe65aae7b6f718ca3332141cb"
+    },
+    "canonical_gate_ci": {
+      "workflow_run": 35478420135,
+      "job_id": 105991651172
+    }
+  },
+  "claim_boundary": "synthetic regular-grid mechanism results; no natural prevalence or empirical threshold claim"
+}
