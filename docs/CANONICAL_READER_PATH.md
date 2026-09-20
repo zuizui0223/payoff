@@ -418,6 +418,7 @@ theory/MIGRATION_PHENOLOGY_TRACKING.md
 -> docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md
 -> docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md
 -> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md
+-> docs/PAYOFF_B_AIKENS_2022_PHASE_CONTROLLER_RECEIPT.md
 -> docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md.
 ```
 
@@ -466,6 +467,21 @@ controller diagnostic, not silently relabeled as h.
 Baseline growth, mismatch strengths, interaction strength and tracking costs
 require independent matched fitness contrasts and are deliberately not imputed
 from movement data.
+
+The Aikens 2022 controller receipt adds a different empirical layer before
+full parameterization. It separates
+
+    mismatch when a barrier is encountered
+
+from
+
+    downstream ability to reduce phase mismatch.
+
+Across the eight published footprint x development conditions, restoring
+route-distance controllers are detected in four conditions and no downstream
+phase change is detected in four. This controller evidence is explicitly
+movement/stopover mediated and is not relabeled as the independent timing-axis
+phenology rate h.
 
 The mule-deer readiness receipt then applies that refusal logic to a named
 public system. The published Ortega et al. group summaries establish strong
