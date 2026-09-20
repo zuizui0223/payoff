@@ -39,6 +39,8 @@ class MovingLandscape2DScenario:
     extinction_threshold: float = 1.0
     boundary_retention: float = 1.0
     barrier_retention: float = 1.0
+    dispersal_x_weight: float = 1.0
+    dispersal_y_weight: float = 1.0
     distribution_overlap_scale: float = 0.0
     monitor_climate_coordinate: float | None = None
     habitat_quality: tuple[float, ...] | None = None
@@ -70,6 +72,8 @@ class MovingLandscape2DScenario:
             "extinction_threshold",
             "boundary_retention",
             "barrier_retention",
+            "dispersal_x_weight",
+            "dispersal_y_weight",
             "distribution_overlap_scale",
             "climate_velocity",
             "climate_angle_degrees",
@@ -99,6 +103,12 @@ class MovingLandscape2DScenario:
             raise ValueError("boundary_retention must lie in [0,1]")
         if not 0.0 <= self.barrier_retention <= 1.0:
             raise ValueError("barrier_retention must lie in [0,1]")
+        if self.dispersal_x_weight < 0.0:
+            raise ValueError("dispersal_x_weight must be non-negative")
+        if self.dispersal_y_weight < 0.0:
+            raise ValueError("dispersal_y_weight must be non-negative")
+        if self.dispersal_x_weight + self.dispersal_y_weight <= 0.0:
+            raise ValueError("at least one dispersal axis must have positive weight")
         if self.distribution_overlap_scale < 0.0:
             raise ValueError(
                 "distribution_overlap_scale must be non-negative"
@@ -402,15 +412,34 @@ def grid_dispersal_2d(
     if geometry is None:
         geometry = build_landscape_2d_geometry(scenario)
     out = [0.0] * len(abundance)
+    axis_total = (
+        scenario.dispersal_x_weight
+        + scenario.dispersal_y_weight
+    )
+    x_direction_fraction = (
+        0.5 * scenario.dispersal_x_weight / axis_total
+    )
+    y_direction_fraction = (
+        0.5 * scenario.dispersal_y_weight / axis_total
+    )
+    direction_fractions = (
+        x_direction_fraction,
+        x_direction_fraction,
+        y_direction_fraction,
+        y_direction_fraction,
+    )
 
     for index, value in enumerate(abundance):
         if value <= 0.0:
             continue
         moving = fraction * value
         out[index] += value - moving
-        directional_mass = moving / 4.0
 
-        for target in geometry.neighbor_targets[index]:
+        for target, direction_fraction in zip(
+            geometry.neighbor_targets[index],
+            direction_fractions,
+        ):
+            directional_mass = moving * direction_fraction
             if target == -1:
                 out[index] += (
                     scenario.boundary_retention
