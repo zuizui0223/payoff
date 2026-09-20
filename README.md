@@ -676,18 +676,28 @@ persistence rescue is claimed.
 
 The empirical bridge is now explicit in
 [docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md).
-Under the declared one-step kernel, movement component variances identify the
-migration rate and x/y movement-weight ratio; environmental wave speed and
-gradient identify climate velocity; and first-order timing correction identifies
-the phenology response rate. Fitness terms require separate matched growth
+Under the declared one-step movement family, projected fixed-interval component
+second moments identify migration rate and x/y movement weights; adding mean
+displacements identifies x/y directional biases. Environmental wave speed and
+gradient identify climate velocity.
+
+Phase-error compression is kept separate from the independent phenology rate:
+the latter is licensed only when timing has been isolated from movement and
+other tracking pathways. Fitness terms require separate matched growth
 contrasts rather than being imputed from movement data.
 
 The first named-system readiness receipt is
 [docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md](docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md).
 The public mule-deer system is biologically appropriate for tracking
-calibration, but the published group summaries are not silently converted into
-per-step model rates: early/mid phase summaries cross zero, while the late
-summary is a whole-route compression rather than one frozen decision interval.
+calibration, and the interval pipeline can now fit a directional movement kernel
+from raw projected GPS means and second moments. The published group summaries,
+however, are not silently converted into per-step model rates: they do not
+contain those interval movement moments, early/mid phase summaries cross zero,
+and the late summary is a whole-route compression rather than one frozen
+decision interval. Because the observed compensation also uses movement speed
+and stopovers, the group-level Days-From-Peak compression is not treated as the
+independent phenology rate h.
+
 The current status is therefore **public system identified, direct tracking
 calibration pending source-file ingestion**.
 
