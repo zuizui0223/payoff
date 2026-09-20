@@ -47,12 +47,23 @@
     "mean_low_density_growth": 0.196379923938,
     "final_abundance": 1829.96049903,
     "persisted": true,
-    "habitat": "synthetic_open_regular_grid"
+    "habitat": "synthetic_open_regular_grid",
+    "status_with_gate": "tracking_controls_validated_held_out_forcing_projection",
+    "status_without_gate": "held_out_forcing_mechanistic_projection_unvalidated_tracking"
   },
   "mule_deer_status": [
     "PUBLIC_SYSTEM_IDENTIFIED",
     "DIRECT_TRACKING_CALIBRATION_PENDING_SOURCE_FILE_INGESTION",
     "FITNESS_PARAMETERIZATION_NOT_IDENTIFIED"
   ],
-  "claim_boundary": "pipeline regression witness only; no named-system empirical validation"
+  "claim_boundary": "pipeline regression witness only; validation thresholds are predeclared and not fitted to held-out data; no named-system ecological outcome validation",
+  "validation_gate_witness": {
+    "max_movement_moment_rmse": 0.01,
+    "min_held_out_intervals": 4,
+    "require_phase_validation": true,
+    "max_abs_phase_log_error": 0.01,
+    "min_phase_intervals": 4,
+    "expected_status": "held_out_tracking_gate_pass",
+    "interpretation": "synthetic CI regression thresholds only; real-data thresholds must be predeclared independently"
+  }
 }
