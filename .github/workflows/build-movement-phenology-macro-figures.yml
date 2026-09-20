@@ -7,6 +7,7 @@ on:
       - 'scripts/build_movement_phenology_macro_figures.py'
       - 'data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv'
       - 'data/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_REGISTRY.csv'
+      - 'data/MOVEMENT_PHENOLOGY_INDUSTRIAL_PERMEABILITY_REGISTRY.csv'
       - '.github/workflows/build-movement-phenology-macro-figures.yml'
   pull_request:
     paths:
@@ -37,4 +38,8 @@ jobs:
             outputs/movement_phenology/figures/FIG4_PHASE_RETENTION_INFORMATION.svg
             outputs/movement_phenology/figures/FIG4_PANEL_A_DATA.csv
             outputs/movement_phenology/figures/FIG4_PANEL_B_DATA.csv
+            outputs/movement_phenology/figures/FIG5_CONTROL_PERMEABILITY.png
+            outputs/movement_phenology/figures/FIG5_CONTROL_PERMEABILITY.pdf
+            outputs/movement_phenology/figures/FIG5_CONTROL_PERMEABILITY.svg
+            outputs/movement_phenology/figures/FIG5_DATA.csv
           if-no-files-found: error
