@@ -11,7 +11,7 @@ estimators for arbitrary movement or phenology processes.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import isfinite, log1p
+from math import exp, isfinite, log, log1p
 
 
 @dataclass(frozen=True)
@@ -138,7 +138,7 @@ def implied_component_variances(
     if patch_spacing <= 0.0:
         raise ValueError("patch_spacing must be positive")
 
-    moving_fraction = 1.0 - __import__("math").exp(-migration_rate)
+    moving_fraction = 1.0 - exp(-migration_rate)
     total_weight = x_weight + y_weight
     variance_scale = moving_fraction * patch_spacing * patch_spacing
     return (
@@ -187,7 +187,7 @@ def infer_phenology_rate_from_residual_pair(
         raise ValueError(
             "residual pair is incompatible with monotone first-order correction"
         )
-    return -__import__("math").log(ratio)
+    return -log(ratio)
 
 
 def climate_velocity_from_wave_speed(
