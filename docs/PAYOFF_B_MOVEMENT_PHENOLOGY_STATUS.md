@@ -675,3 +675,62 @@ Remaining high-value work is no longer "find a third direct taxon." It is:
 5. complete the flagship prior-art novelty audit.
 
 PAYOFF-B1 remains independent and frozen for its Theoretical Ecology submission lane.
+
+
+## Update — quantitative actuation boundary reconstructed
+
+The Aikens et al. industrial-development mule-deer archive is now analyzed
+directly.
+
+Registered primary contrast:
+
+~~~text
+GPS points = 64,539
+animals = 137
+animal-years = 253
+
+primary G sample:
+  188 animal-years
+  103 animals
+
+median control permeability:
+  small-development WHB = 1.656
+  large-development DCC = 1.037
+~~~
+
+Clustered model:
+
+~~~text
+large-development population shift in log G:
+  beta = -0.476
+  p = 0.017
+~~~
+
+The large-development population therefore expresses a substantially smaller
+near-boundary relative movement response.
+
+The direction is robust across all registered near/far definitions.
+
+However:
+
+~~~text
+year × large-development:
+  beta = +0.0405
+  p = 0.327
+~~~
+
+so the stronger prediction of progressive temporal deterioration is not
+supported.
+
+Current boundary gate:
+
+~~~text
+quantitative actuation attenuation:
+  PASS / PARTIAL
+
+longitudinal deterioration:
+  NOT SUPPORTED
+~~~
+
+This result should be reported as a quantitative perturbation with an explicit
+falsified stronger sub-hypothesis.
