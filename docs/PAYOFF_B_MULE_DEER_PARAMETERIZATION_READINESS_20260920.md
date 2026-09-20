@@ -156,9 +156,19 @@ matched contrasts are justified.
 
 ## 5. Data-ingestion blocker in the current environment
 
-The Dryad landing page and file metadata are publicly accessible, but direct
-automated retrieval of the individual Dryad CSV returned HTTP 403 in the
-current tool environment.
+The Dryad landing page and file metadata are publicly accessible. The public
+individual-file links resolve to:
+
+    Ortega_et_al_2023_Data.csv
+        Dryad file_stream ID 2189257
+
+    README.md
+        Dryad file_stream ID 2189258.
+
+Direct retrieval of the CSV through the web tool returns HTTP 403, and the
+container has no working external DNS path for a direct requests/curl fallback.
+Therefore the current blocker is transport-level access to the public file,
+not uncertainty about which file to ingest.
 
 The Nature/PMC article also advertises a Source Data XLSX, but that file has not
 yet been ingested into the repository.
@@ -170,6 +180,8 @@ failure.
 
 Once the public source file is available locally:
 
+0. run `python scripts/inspect_mule_deer_source_csv.py <csv>` and stop if the
+   table is only animal-year summary grain;
 1. inspect the README and column definitions;
 2. determine whether records are animal-year summaries or interval-level
    movements;
