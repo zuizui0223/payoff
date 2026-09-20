@@ -10,7 +10,7 @@ from typing import Iterable
 from src.tracking_empirical_bridge import EmpiricalTrackingControls
 from src.tracking_empirical_parameterization import (
     audit_residual_compression,
-    implied_directional_movement_moments,
+    implied_aggregated_directional_movement_moments,
 )
 from src.tracking_interval_calibration import StepObservation
 
@@ -90,13 +90,14 @@ def validate_movement_controls(
         predicted_mean_y,
         predicted_second_x,
         predicted_second_y,
-    ) = implied_directional_movement_moments(
+    ) = implied_aggregated_directional_movement_moments(
         controls.migration_rate,
         controls.dispersal_x_weight,
         controls.dispersal_y_weight,
         controls.dispersal_x_bias,
         controls.dispersal_y_bias,
         controls.calibration_patch_spacing,
+        controls.latent_substeps,
     )
 
     error_mean_x = observed_mean_x - predicted_mean_x
@@ -105,11 +106,14 @@ def validate_movement_controls(
     error_second_y = observed_second_y - predicted_second_y
 
     d = controls.calibration_patch_spacing
+    n = controls.latent_substeps
+    mean_scale = n * d
+    second_scale = (n * d) * (n * d)
     scaled = (
-        error_mean_x / d,
-        error_mean_y / d,
-        error_second_x / (d * d),
-        error_second_y / (d * d),
+        error_mean_x / mean_scale,
+        error_mean_y / mean_scale,
+        error_second_x / second_scale,
+        error_second_y / second_scale,
     )
     rmse = sqrt(
         sum(value * value for value in scaled) / len(scaled)
@@ -170,7 +174,9 @@ def validate_phase_controls(
             incompatible_intervals=len(rows),
             observed_mean_log_compression=None,
             observed_median_log_compression=None,
-            predicted_log_compression=controls.phenology_rate,
+            predicted_log_compression=(
+                controls.phenology_rate * controls.latent_substeps
+            ),
             mean_log_compression_error=None,
             validation_licensed=False,
             license_reason=(
@@ -222,11 +228,14 @@ def validate_phase_controls(
         observed_median_log_compression=(
             median(logs) if logs else None
         ),
-        predicted_log_compression=controls.phenology_rate,
+        predicted_log_compression=(
+            controls.phenology_rate * controls.latent_substeps
+        ),
         mean_log_compression_error=(
             None
             if observed_mean is None
-            else observed_mean - controls.phenology_rate
+            else observed_mean
+            - controls.phenology_rate * controls.latent_substeps
         ),
         validation_licensed=licensed,
         license_reason=reason,
