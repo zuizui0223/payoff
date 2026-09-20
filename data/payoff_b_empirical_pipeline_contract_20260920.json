@@ -1,0 +1,58 @@
+{
+  "frozen_date": "2026-09-20",
+  "scope": "synthetic_empirical_pipeline_contract",
+  "provenance": {
+    "workflow_run": 35491555401,
+    "job_id": 106027257212
+  },
+  "calibration_witness": {
+    "decision_interval_hours": 1,
+    "migration_rate": 0.287682072452,
+    "x_weight": 0.5,
+    "y_weight": 0.5,
+    "x_bias": 0,
+    "y_bias": 0,
+    "climate_velocity": 0.06,
+    "phenology_rate": 0.6931471805599453
+  },
+  "fitness_witness": {
+    "baseline_growth": 0.4,
+    "abiotic_strength": 1.2,
+    "interaction_strength": 0.8,
+    "migration_cost": 0.1,
+    "phenology_cost": 0.05,
+    "joint_cost": 0.035
+  },
+  "independent_holdout_witness": {
+    "intervals": 8,
+    "movement_dimensionless_moment_rmse": 0,
+    "phase_validation_licensed": true,
+    "phase_mean_log_compression_error": 0
+  },
+  "grouped_cross_validation_witness": {
+    "split_unit": "animal",
+    "training_groups": 2,
+    "held_out_groups": 2,
+    "training_intervals": 8,
+    "held_out_intervals": 8,
+    "movement_dimensionless_moment_rmse": 0,
+    "phase_validation_licensed": true,
+    "phase_mean_log_compression_error": 0
+  },
+  "held_out_forcing_projection": {
+    "calibration_climate_velocity": 0.06,
+    "prediction_climate_velocity": 0.1,
+    "frozen_migration_rate": 0.287682072452,
+    "frozen_phenology_rate": 0.6931471805599453,
+    "mean_low_density_growth": 0.196379923938,
+    "final_abundance": 1829.96049903,
+    "persisted": true,
+    "habitat": "synthetic_open_regular_grid"
+  },
+  "mule_deer_status": [
+    "PUBLIC_SYSTEM_IDENTIFIED",
+    "DIRECT_TRACKING_CALIBRATION_PENDING_SOURCE_FILE_INGESTION",
+    "FITNESS_PARAMETERIZATION_NOT_IDENTIFIED"
+  ],
+  "claim_boundary": "pipeline regression witness only; no named-system empirical validation"
+}
