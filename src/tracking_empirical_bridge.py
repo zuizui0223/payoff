@@ -26,6 +26,9 @@ from src.tracking_interval_calibration import (
 
 @dataclass(frozen=True)
 class EmpiricalTrackingControls:
+    decision_interval_seconds: float
+    calibration_patch_spacing: float
+    climate_axis_angle_degrees: float
     climate_velocity: float
     migration_rate: float
     dispersal_x_weight: float
@@ -129,6 +132,9 @@ def controls_from_interval_audit(
         phenology_licensed = False
 
     return EmpiricalTrackingControls(
+        decision_interval_seconds=audit.target_interval_seconds,
+        calibration_patch_spacing=audit.patch_spacing,
+        climate_axis_angle_degrees=audit.climate_axis_angle_degrees,
         climate_velocity=climate_velocity_from_wave_speed(
             spatial_gradient,
             wave_speed,
