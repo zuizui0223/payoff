@@ -1,0 +1,45 @@
+name: payoff-b 2d partner asymmetry moderate climate
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-migration-phenology-20260919
+    paths:
+      - .github/workflows/payoff-b-2d-partner-asymmetry-moderate.yml
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run asymmetric partner-cost pilot at moderate climate speed
+        run: >
+          python scripts/migration_phenology_2d_partner_asymmetry.py
+          --cost-biases=-0.08,0,0.08
+          --interaction-strengths 0,0.5,1.0
+          --base-cost 0.06
+          --climate-velocity 0.04
+          --phenology-limit 4
+          --width 31
+          --height 15
+          --first-wall-offset 3
+          --second-wall-offset 7
+          --detour-offset 5
+          --gap-width 1
+          --baseline-growth 0.35
+          --initial-total-abundance 400
+          --local-carrying-capacity 80
+          --density-coefficient 0.35
+          --steps 100
+          --burn-in 20
+          --mutation-step 0.2
+          --max-rate 1.0
+          --max-cycles 60
+          --output outputs/payoff_b_2d_partner_asymmetry_moderate.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-2d-partner-asymmetry-moderate
+          path: outputs/payoff_b_2d_partner_asymmetry_moderate.csv
