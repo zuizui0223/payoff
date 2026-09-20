@@ -285,7 +285,39 @@ The empirical controller
     -> movement/stopover adjustment
     -> phase-error correction
 
-can inform correction fractions and directional movement summaries.
+is now represented as a separate estimand rather than being folded into h.
+The first published controller receipt is
+
+    docs/PAYOFF_B_AIKENS_2022_PHASE_CONTROLLER_RECEIPT.md
+
+with implementation
+
+    src/phase_error_controller.py
+    scripts/audit_aikens_2022_phase_controller.py.
+
+For a local route-distance regression
+
+    e(x)=beta0+beta1*x,
+
+the controller is restoring when
+
+    beta0*beta1 < 0.
+
+When beta0 is known, the local fractional relaxation coefficient
+
+    -beta1/beta0
+
+can be reported in the native regression-distance unit. This quantity describes
+downstream phase-error recovery and remains distinct from the independent
+timing-axis h.
+
+The published Aikens et al. (2022) text supports restoring controllers in
+4 of 8 footprint x development conditions and no detected downstream phase
+change in the other 4. This is a context-specific published evidence receipt,
+not a prevalence estimate.
+
+The controller can inform correction behavior and directional movement
+summaries.
 
 It does not by itself identify the two-species interaction strength, tracking
 architecture costs, or a population persistence frontier.
