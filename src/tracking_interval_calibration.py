@@ -23,7 +23,8 @@ from src.tracking_empirical_parameterization import (
     DirectionalMovementKernelEstimate,
     MovementKernelEstimate,
     audit_residual_compression,
-    infer_directional_movement_kernel_from_moments,
+    deaggregate_directional_moments,
+    infer_directional_movement_kernel_from_aggregated_moments,
     infer_movement_kernel_from_component_variances,
 )
 
@@ -50,10 +51,15 @@ class StepObservation:
 @dataclass(frozen=True)
 class MovementIntervalAudit:
     intervals: int
+    latent_substeps: int
     mean_longitudinal_displacement: float
     mean_transverse_displacement: float
     rms_longitudinal_displacement: float
     rms_transverse_displacement: float
+    per_step_mean_longitudinal: float
+    per_step_mean_transverse: float
+    per_step_second_longitudinal: float
+    per_step_second_transverse: float
     longitudinal_mean_to_rms: float
     transverse_mean_to_rms: float
     symmetry_tolerance: float
@@ -69,6 +75,7 @@ class MovementIntervalAudit:
 @dataclass(frozen=True)
 class PhaseCompressionAudit:
     intervals_with_phase: int
+    latent_substeps: int
     monotone_compression_intervals: int
     sign_crossing_intervals: int
     amplification_intervals: int
@@ -76,6 +83,8 @@ class PhaseCompressionAudit:
     complete_correction_intervals: int
     mean_log_compression: float | None
     median_log_compression: float | None
+    observation_interval_mean_log_compression: float | None
+    observation_interval_median_log_compression: float | None
     timing_axis_isolated: bool
     phenology_rate_licensed: bool
     license_reason: str
@@ -84,6 +93,8 @@ class PhaseCompressionAudit:
 @dataclass(frozen=True)
 class IntervalCalibrationAudit:
     target_interval_seconds: float
+    latent_substeps: int
+    model_step_seconds: float
     interval_tolerance_fraction: float
     climate_axis_angle_degrees: float
     patch_spacing: float
@@ -199,6 +210,7 @@ def audit_movement_intervals(
     *,
     patch_spacing: float,
     symmetry_tolerance: float = 0.25,
+    latent_substeps: int = 1,
 ) -> MovementIntervalAudit:
     """Audit compatibility with the symmetric one-step movement kernel."""
 
@@ -207,6 +219,8 @@ def audit_movement_intervals(
         raise ValueError("no fixed-interval steps were retained")
     if not isfinite(patch_spacing) or patch_spacing <= 0.0:
         raise ValueError("patch_spacing must be positive and finite")
+    if not isinstance(latent_substeps, int) or latent_substeps <= 0:
+        raise ValueError("latent_substeps must be a positive integer")
     if (
         not isfinite(symmetry_tolerance)
         or symmetry_tolerance < 0.0
@@ -220,16 +234,40 @@ def audit_movement_intervals(
     transverse = [
         row.transverse_displacement for row in rows
     ]
-    mean_long, rms_long, ratio_long = _mean_to_rms(longitudinal)
-    mean_trans, rms_trans, ratio_trans = _mean_to_rms(transverse)
+    mean_long, rms_long, _ = _mean_to_rms(longitudinal)
+    mean_trans, rms_trans, _ = _mean_to_rms(transverse)
+
+    second_long = _mean_square(longitudinal)
+    second_trans = _mean_square(transverse)
+    (
+        step_mean_long,
+        step_mean_trans,
+        step_second_long,
+        step_second_trans,
+    ) = deaggregate_directional_moments(
+        mean_long,
+        mean_trans,
+        second_long,
+        second_trans,
+        latent_substeps,
+    )
+    step_rms_long = sqrt(step_second_long)
+    step_rms_trans = sqrt(step_second_trans)
+    ratio_long = (
+        0.0
+        if step_rms_long == 0.0
+        else abs(step_mean_long) / step_rms_long
+    )
+    ratio_trans = (
+        0.0
+        if step_rms_trans == 0.0
+        else abs(step_mean_trans) / step_rms_trans
+    )
 
     symmetric = (
         ratio_long <= symmetry_tolerance
         and ratio_trans <= symmetry_tolerance
     )
-
-    second_long = _mean_square(longitudinal)
-    second_trans = _mean_square(transverse)
 
     kernel: MovementKernelEstimate | None = None
     failure: str | None = None
@@ -245,8 +283,8 @@ def audit_movement_intervals(
             # For a mean-zero declared kernel, the expected squared component
             # displacement equals the component variance.
             kernel = infer_movement_kernel_from_component_variances(
-                second_long,
-                second_trans,
+                step_second_long,
+                step_second_trans,
                 patch_spacing,
             )
             licensed = True
@@ -258,12 +296,13 @@ def audit_movement_intervals(
     directional_licensed = False
     try:
         directional_kernel = (
-            infer_directional_movement_kernel_from_moments(
+            infer_directional_movement_kernel_from_aggregated_moments(
                 mean_long,
                 mean_trans,
                 second_long,
                 second_trans,
                 patch_spacing,
+                latent_substeps,
             )
         )
         directional_licensed = True
@@ -272,10 +311,15 @@ def audit_movement_intervals(
 
     return MovementIntervalAudit(
         intervals=len(rows),
+        latent_substeps=latent_substeps,
         mean_longitudinal_displacement=mean_long,
         mean_transverse_displacement=mean_trans,
         rms_longitudinal_displacement=rms_long,
         rms_transverse_displacement=rms_trans,
+        per_step_mean_longitudinal=step_mean_long,
+        per_step_mean_transverse=step_mean_trans,
+        per_step_second_longitudinal=step_second_long,
+        per_step_second_transverse=step_second_trans,
         longitudinal_mean_to_rms=ratio_long,
         transverse_mean_to_rms=ratio_trans,
         symmetry_tolerance=symmetry_tolerance,
@@ -293,6 +337,7 @@ def audit_phase_intervals(
     steps: Iterable[StepObservation],
     *,
     timing_axis_isolated: bool = False,
+    latent_substeps: int = 1,
 ) -> PhaseCompressionAudit:
     """Summarize fixed-interval phase-error compression.
 
@@ -300,6 +345,9 @@ def audit_phase_intervals(
     PAYOFF-B timing-axis rate h unless movement and other correction pathways
     have been removed or otherwise held fixed.
     """
+
+    if not isinstance(latent_substeps, int) or latent_substeps <= 0:
+        raise ValueError("latent_substeps must be a positive integer")
 
     rows = [
         row
@@ -325,6 +373,12 @@ def audit_phase_intervals(
         counts[audit.status] = counts.get(audit.status, 0) + 1
         if audit.log_compression is not None:
             logs.append(audit.log_compression)
+
+    observation_logs = list(logs)
+    logs = [
+        value / latent_substeps
+        for value in observation_logs
+    ]
 
     if not timing_axis_isolated:
         licensed = False
@@ -359,6 +413,7 @@ def audit_phase_intervals(
 
     return PhaseCompressionAudit(
         intervals_with_phase=len(rows),
+        latent_substeps=latent_substeps,
         monotone_compression_intervals=counts["monotone_compression"],
         sign_crossing_intervals=counts["sign_crossing_or_overshoot"],
         amplification_intervals=counts["mismatch_amplification"],
@@ -368,6 +423,12 @@ def audit_phase_intervals(
         ],
         mean_log_compression=mean(logs) if logs else None,
         median_log_compression=median(logs) if logs else None,
+        observation_interval_mean_log_compression=(
+            mean(observation_logs) if observation_logs else None
+        ),
+        observation_interval_median_log_compression=(
+            median(observation_logs) if observation_logs else None
+        ),
         timing_axis_isolated=timing_axis_isolated,
         phenology_rate_licensed=licensed,
         license_reason=reason,
@@ -383,7 +444,11 @@ def audit_interval_calibration(
     climate_axis_angle_degrees: float = 0.0,
     symmetry_tolerance: float = 0.25,
     timing_axis_isolated: bool = False,
+    latent_substeps: int = 1,
 ) -> IntervalCalibrationAudit:
+    if not isinstance(latent_substeps, int) or latent_substeps <= 0:
+        raise ValueError("latent_substeps must be a positive integer")
+
     steps = build_fixed_intervals(
         observations,
         target_interval_seconds=target_interval_seconds,
@@ -394,13 +459,19 @@ def audit_interval_calibration(
         steps,
         patch_spacing=patch_spacing,
         symmetry_tolerance=symmetry_tolerance,
+        latent_substeps=latent_substeps,
     )
     phase = audit_phase_intervals(
         steps,
         timing_axis_isolated=timing_axis_isolated,
+        latent_substeps=latent_substeps,
     )
     return IntervalCalibrationAudit(
         target_interval_seconds=target_interval_seconds,
+        latent_substeps=latent_substeps,
+        model_step_seconds=(
+            target_interval_seconds / latent_substeps
+        ),
         interval_tolerance_fraction=interval_tolerance_fraction,
         climate_axis_angle_degrees=climate_axis_angle_degrees,
         patch_spacing=patch_spacing,
