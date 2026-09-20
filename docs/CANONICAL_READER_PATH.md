@@ -419,6 +419,7 @@ theory/MIGRATION_PHENOLOGY_TRACKING.md
 -> docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md
 -> theory/CLOSED_LOOP_MOVEMENT_PHENOLOGY_TRACKING.md
 -> docs/PAYOFF_B_CLOSED_LOOP_TRACKING_RESULTS_20260920.md
+-> docs/PAYOFF_B_MOVEMENT_FEEDBACK_LANDSCAPE_RESULTS_20260920.md
 -> docs/PAYOFF_B_AIKENS_2022_PHASE_CONTROLLER_RECEIPT.md
 -> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md
 -> docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md.
@@ -481,6 +482,13 @@ null through their total restoring gain K=q_m+q_h. Stability requires 0<K<2;
 quadratic controller costs determine how the required gain is allocated between
 the two channels. This is the analytic null against which route geometry,
 finite timing capacity, and partner interaction break exact substitutability.
+
+The explicit movement-feedback landscape then shows where the local
+substitutability null breaks. Under strong forcing, mismatch-dependent movement
+alone reduces error but remains non-persistent in the sampled high-forcing
+slices. Adding an independent timing response crosses the persistence boundary
+and sharply reduces the movement effort demanded by the controller. This is
+retained as forcing-dependent complementarity, not as a universal rescue rule.
 
 The Aikens 2022 controller receipt adds a different empirical layer before
 full parameterization. It separates
