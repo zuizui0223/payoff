@@ -216,6 +216,16 @@ In particular:
   criteria and must not be tuned to held-out performance;
 - a passing held-out tracking-control gate validates the controller layer, not
   habitat, demographic, fitness or ecological outcome predictions;
+- the explicit movement-rate feedback gain k_m in the landscape model is a
+  synthetic controller coefficient and is not numerically identified by the
+  published Aikens route-distance slope;
+- the sampled high-forcing movement-feedback result shows complementarity in
+  one declared design: movement feedback alone remains non-persistent while
+  timing enables persistence and reduces movement demand. It should not be
+  generalized as a universal requirement for joint movement and phenology;
+- a held-out ecological outcome gate is downstream of controller validation
+  and requires independently observed outcomes and independently predeclared
+  tolerances; the synthetic outcome fixture is only a regression witness;
 - interaction-mediated synchronization can be beneficial or maladaptive
   depending on forcing, so it should not be described as universally
   stabilizing or destabilizing.
@@ -330,7 +340,10 @@ TRACKING_DIRECTIONAL_MOVEMENT_INVERSE_IMPLEMENTED
 TRACKING_INTERVAL_CALIBRATION_AUDIT_IMPLEMENTED
 TRACKING_GROUPED_HOLDOUT_VALIDATION_IMPLEMENTED
 TRACKING_PREDECLARED_VALIDATION_GATE_IMPLEMENTED
+TRACKING_ECOLOGICAL_OUTCOME_VALIDATION_LAYER_IMPLEMENTED
+TRACKING_NAMED_SYSTEM_ECOLOGICAL_OUTCOME_VALIDATION_NOT_EXECUTED
 TRACKING_CLOSED_LOOP_LOCAL_THEORY_PROVED_UNDER_DECLARED_RECURRENCE
+TRACKING_EXPLICIT_MOVEMENT_FEEDBACK_LANDSCAPE_IMPLEMENTED
 TRACKING_NAMED_SYSTEM_CANDIDATE_IDENTIFIED
 TRACKING_NAMED_SYSTEM_CALIBRATION_PENDING_SOURCE_FILE_INGESTION
 TRACKING_FITNESS_PARAMETERIZATION_NOT_IDENTIFIED_FOR_MULE_DEER
