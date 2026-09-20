@@ -23,6 +23,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 DIRECT = ROOT / "data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv"
 UNCERTAINTY = ROOT / "data/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_REGISTRY.csv"
+INDUSTRIAL = ROOT / "data/MOVEMENT_PHENOLOGY_INDUSTRIAL_PERMEABILITY_REGISTRY.csv"
 OUT = ROOT / "outputs/movement_phenology/figures"
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -190,9 +191,107 @@ def build_figure4() -> Path:
     return png
 
 
+
+def build_figure5() -> Path:
+    """Industrial-development actuation sensitivity and failed time-trend forecast."""
+    d = pd.read_csv(INDUSTRIAL)
+    d["definition"] = (
+        d["edge_km"].astype(int).astype(str)
+        + "/"
+        + d["far_km"].astype(int).astype(str)
+        + " km"
+    )
+
+    fig, axes = plt.subplots(
+        1,
+        2,
+        figsize=(11.4, 4.9),
+        constrained_layout=True,
+    )
+
+    # Panel A: every registered threshold definition gives lower G in the
+    # large-development population.
+    ax = axes[0]
+    for i, row in d.iterrows():
+        ax.plot(
+            [0, 1],
+            [row["median_G_small"], row["median_G_large"]],
+            marker="o",
+            linewidth=1.2,
+            alpha=0.75,
+        )
+        if int(row["edge_km"]) == 2 and int(row["far_km"]) == 10:
+            ax.annotate(
+                "primary 2/10 km",
+                (1, row["median_G_large"]),
+                xytext=(7, -2),
+                textcoords="offset points",
+                fontsize=8,
+            )
+    ax.set_xticks([0, 1], ["Small development", "Large development"])
+    ax.set_ylabel("Median control permeability G")
+    ax.set_title("A  Development contrast is directionally robust")
+    ax.text(
+        0.02,
+        0.02,
+        "8/8 registered definitions: G_large < G_small\n"
+        "Primary clustered population shift: p = 0.017",
+        transform=ax.transAxes,
+        fontsize=8,
+        va="bottom",
+    )
+
+    # Panel B: stronger longitudinal decline was not supported.
+    ax = axes[1]
+    y = np.arange(len(d))
+    est = d["year_x_large_beta"].to_numpy(float)
+    se = d["year_x_large_se"].to_numpy(float)
+    ax.errorbar(
+        est,
+        y,
+        xerr=1.96 * se,
+        fmt="o",
+        capsize=4,
+        linewidth=1.3,
+        markersize=5,
+    )
+    ax.axvline(0.0, linestyle="--", linewidth=1.2)
+    ax.set_yticks(y, d["definition"])
+    ax.invert_yaxis()
+    ax.set_xlabel("Year × large-development coefficient")
+    ax.set_ylabel("Near / far definition")
+    ax.set_title("B  Stronger temporal deterioration is not supported")
+    ax.text(
+        0.98,
+        0.02,
+        "All registered interaction p-values > 0.32",
+        transform=ax.transAxes,
+        ha="right",
+        va="bottom",
+        fontsize=8,
+    )
+
+    fig.suptitle(
+        "Industrial development attenuates movement control without a detected extra time trend",
+        fontsize=13,
+    )
+
+    png = OUT / "FIG5_CONTROL_PERMEABILITY.png"
+    pdf = OUT / "FIG5_CONTROL_PERMEABILITY.pdf"
+    svg = OUT / "FIG5_CONTROL_PERMEABILITY.svg"
+    fig.savefig(png, dpi=300, bbox_inches="tight")
+    fig.savefig(pdf, bbox_inches="tight")
+    fig.savefig(svg, bbox_inches="tight")
+    plt.close(fig)
+
+    d.to_csv(OUT / "FIG5_DATA.csv", index=False)
+    return png
+
 def main():
-    path = build_figure4()
-    print(path)
+    path4 = build_figure4()
+    path5 = build_figure5()
+    print(path4)
+    print(path5)
 
 
 if __name__ == "__main__":
