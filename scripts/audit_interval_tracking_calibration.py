@@ -160,9 +160,13 @@ def main() -> None:
         "resolved_columns": resolved,
         "audit": asdict(audit),
         "movement_parameter_status": (
-            "licensed"
+            "symmetric_kernel_licensed"
             if audit.movement.direct_inverse_licensed
-            else "not_licensed"
+            else (
+                "directional_kernel_licensed"
+                if audit.movement.directional_inverse_licensed
+                else "not_licensed"
+            )
         ),
         "phenology_parameter_status": (
             "licensed_candidate"
@@ -175,10 +179,10 @@ def main() -> None:
             else "no_interval_phase_residual"
         ),
         "claim_boundary": (
-            "movement inverse is licensed only if projected fixed-interval "
-            "steps are compatible with the declared symmetric one-step kernel; "
-            "phase compression is not PAYOFF-B h unless the timing axis is "
-            "independently isolated"
+            "movement inversion requires projected fixed-interval steps and "
+            "compatibility with either the symmetric or directional declared "
+            "one-step kernel; phase compression is not PAYOFF-B h unless the "
+            "timing axis is independently isolated"
         ),
     }
 
@@ -192,15 +196,23 @@ def main() -> None:
     print(
         "interval_tracking_audit "
         f"retained_intervals={audit.retained_intervals} "
-        f"movement_licensed={int(audit.movement.direct_inverse_licensed)} "
+        f"symmetric_movement_licensed="
+        f"{int(audit.movement.direct_inverse_licensed)} "
+        f"directional_movement_licensed="
+        f"{int(audit.movement.directional_inverse_licensed)} "
         f"kernel_symmetric={int(audit.movement.symmetric_kernel_compatible)} "
         f"phase_intervals={audit.phase.intervals_with_phase} "
         f"h_licensed={int(audit.phase.phenology_rate_licensed)}"
     )
     if audit.movement.inverse_failure:
         print(
-            "movement_inverse_failure="
+            "symmetric_movement_inverse_failure="
             + audit.movement.inverse_failure
+        )
+    if audit.movement.directional_inverse_failure:
+        print(
+            "directional_movement_inverse_failure="
+            + audit.movement.directional_inverse_failure
         )
     if audit.phase.mean_log_compression is not None:
         print(
