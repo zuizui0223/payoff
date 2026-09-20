@@ -76,7 +76,7 @@ def test_interval_level_table_can_license_direct_tracking_inverse():
     assert readiness["full_direct_tracking_inverse_ready"]
 
 
-def test_missing_days_from_peak_blocks_phenology_but_not_movement():
+def test_geographic_lonlat_require_projection_before_movement_inverse():
     headers = [
         "animal_id",
         "year",
@@ -93,6 +93,39 @@ def test_missing_days_from_peak_blocks_phenology_but_not_movement():
                 "timestamp": f"2020-04-{step+1:02d}",
                 "longitude": str(-110 + step * 0.01),
                 "latitude": str(42 + step * 0.001),
+            }
+        )
+
+    resolved = resolve_aliases(headers)
+    grain = infer_grain(rows, resolved)
+    readiness = calibration_readiness(resolved, grain)
+
+    assert not readiness["movement_kernel_direct_inverse_ready"]
+    assert not readiness["phenology_step_inverse_ready"]
+    assert not readiness["full_direct_tracking_inverse_ready"]
+    assert any(
+        "metric projection" in blocker
+        for blocker in readiness["blockers"]
+    )
+
+
+def test_projected_metric_coordinates_can_license_movement_without_phenology():
+    headers = [
+        "animal_id",
+        "year",
+        "timestamp",
+        "utm_x",
+        "utm_y",
+    ]
+    rows = []
+    for step in range(20):
+        rows.append(
+            {
+                "animal_id": "A",
+                "year": "2020",
+                "timestamp": f"2020-04-{step+1:02d}",
+                "utm_x": str(step * 100.0),
+                "utm_y": str(step * 20.0),
             }
         )
 
