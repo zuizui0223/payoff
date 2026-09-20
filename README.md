@@ -667,6 +667,21 @@ forcing, the same synchronizing pressure locks the pair into a migration-only
 local attractor and all sampled pairs go extinct. The retained interpretation
 is therefore **synchronization can become maladaptive synchronization**.
 
+The 2D buffering result is also robust to directional movement limitation.
+Reducing transverse-to-longitudinal dispersal weight from 1 to 0.1 makes the
+zigzag growth penalty somewhat larger when phenology is unavailable, but
+raising the phenology limit from 0 to 4 still removes about 76% of the penalty
+magnitude across the sampled anisotropy levels. No anisotropy-specific
+persistence rescue is claimed.
+
+The empirical bridge is now explicit in
+[docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md).
+Under the declared one-step kernel, movement component variances identify the
+migration rate and x/y movement-weight ratio; environmental wave speed and
+gradient identify climate velocity; and first-order timing correction identifies
+the phenology response rate. Fitness terms require separate matched growth
+contrasts rather than being imputed from movement data.
+
 ---
 
 
@@ -726,6 +741,7 @@ Empirical handoffs:
 - [`docs/SCH_BALANCE_BITA_BRIDGE.md`](docs/SCH_BALANCE_BITA_BRIDGE.md)
 - [`docs/CONTINUOUS_ARCHITECTURE_HANDOFF.md`](docs/CONTINUOUS_ARCHITECTURE_HANDOFF.md)
 - [`docs/TEMPORAL_HANDOFF.md`](docs/TEMPORAL_HANDOFF.md)
+- [`docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md`](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md)
 
 Claim ceilings:
 
