@@ -182,6 +182,14 @@ In particular:
   resistance or movement pathways;
 - the optional Bhattacharyya overlap penalty is a robustness device, not an
   empirical interaction kernel;
+- the anisotropic x/y movement weights are synthetic movement-kernel
+  parameters unless independently estimated from movement data;
+- the empirical movement inverse
+  `Var_x,Var_y -> migration rate + x/y weight ratio` is exact only for the
+  declared one-step nearest-neighbor kernel; incompatible observed variance is
+  a model-rejection signal, not something to clip;
+- the matched growth-contrast inverse for mismatch strengths and tracking costs
+  requires a common low-density growth scale and matched background ecology;
 - interaction-mediated synchronization can be beneficial or maladaptive
   depending on forcing, so it should not be described as universally
   stabilizing or destabilizing.
