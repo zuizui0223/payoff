@@ -4,6 +4,7 @@ import pytest
 
 from src.tracking_interval_calibration import (
     IntervalObservation,
+    StepObservation,
     audit_interval_calibration,
     audit_movement_intervals,
     audit_phase_intervals,
@@ -233,10 +234,7 @@ def test_two_latent_substeps_deaggregate_movement_moments():
         + [0.0] * 6
     )
     steps = tuple(
-        __import__(
-            "src.tracking_interval_calibration",
-            fromlist=["StepObservation"],
-        ).StepObservation(
+        StepObservation(
             animal_id="A",
             dt_seconds=7200.0,
             longitudinal_displacement=value,
@@ -264,10 +262,6 @@ def test_two_latent_substeps_deaggregate_movement_moments():
 
 
 def test_two_latent_substeps_deaggregate_phase_rate():
-    StepObservation = __import__(
-        "src.tracking_interval_calibration",
-        fromlist=["StepObservation"],
-    ).StepObservation
     steps = (
         StepObservation(
             "A", 7200.0, 0.0, 0.0, 16.0, 4.0
