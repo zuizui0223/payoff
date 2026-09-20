@@ -280,3 +280,147 @@ def build_tracking_parameterization(
         phenology_scale=phenology_scale,
         max_abs_phenology_shift=max_abs_phenology_shift,
     )
+
+
+
+@dataclass(frozen=True)
+class TrackingFitnessEstimate:
+    baseline_growth: float
+    abiotic_strength: float
+    interaction_strength: float
+    migration_cost: float
+    phenology_cost: float
+    joint_cost: float
+
+
+def identify_tracking_fitness_from_matched_contrasts(
+    *,
+    baseline_growth: float,
+    abiotic_growth: float,
+    abiotic_mismatch: float,
+    interaction_growth: float,
+    interaction_mismatch: float,
+    migration_growth: float,
+    migration_rate: float,
+    phenology_growth: float,
+    phenology_rate: float,
+    joint_growth: float,
+    joint_migration_rate: float,
+    joint_phenology_rate: float,
+    require_nonnegative: bool = True,
+) -> TrackingFitnessEstimate:
+    """Identify the declared quadratic fitness terms from orthogonal contrasts.
+
+    The exact design is:
+
+        reference:
+            e=M=m=h=0
+
+        abiotic contrast:
+            e != 0, M=m=h=0
+
+        interaction contrast:
+            M != 0, e=m=h=0
+
+        migration-cost contrast:
+            m != 0, e=M=h=0
+
+        phenology-cost contrast:
+            h != 0, e=M=m=0
+
+        joint-cost contrast:
+            m,h != 0, e=M=0.
+
+    All observations must share the same payoff/growth scale and background
+    ecology. This function identifies the declared algebraic model only; it
+    does not verify those biological matching assumptions.
+    """
+
+    values = {
+        "baseline_growth": baseline_growth,
+        "abiotic_growth": abiotic_growth,
+        "abiotic_mismatch": abiotic_mismatch,
+        "interaction_growth": interaction_growth,
+        "interaction_mismatch": interaction_mismatch,
+        "migration_growth": migration_growth,
+        "migration_rate": migration_rate,
+        "phenology_growth": phenology_growth,
+        "phenology_rate": phenology_rate,
+        "joint_growth": joint_growth,
+        "joint_migration_rate": joint_migration_rate,
+        "joint_phenology_rate": joint_phenology_rate,
+    }
+    for name, value in values.items():
+        if not isfinite(value):
+            raise ValueError(f"{name} must be finite")
+
+    if abiotic_mismatch == 0.0:
+        raise ValueError("abiotic_mismatch must be non-zero")
+    if interaction_mismatch == 0.0:
+        raise ValueError("interaction_mismatch must be non-zero")
+    if migration_rate <= 0.0:
+        raise ValueError("migration_rate must be positive")
+    if phenology_rate <= 0.0:
+        raise ValueError("phenology_rate must be positive")
+    if joint_migration_rate <= 0.0 or joint_phenology_rate <= 0.0:
+        raise ValueError(
+            "joint migration and phenology rates must both be positive"
+        )
+
+    abiotic_strength = (
+        2.0
+        * (baseline_growth - abiotic_growth)
+        / (abiotic_mismatch * abiotic_mismatch)
+    )
+    interaction_strength = (
+        2.0
+        * (baseline_growth - interaction_growth)
+        / (interaction_mismatch * interaction_mismatch)
+    )
+    migration_cost = (
+        (baseline_growth - migration_growth)
+        / (migration_rate * migration_rate)
+    )
+    phenology_cost = (
+        (baseline_growth - phenology_growth)
+        / (phenology_rate * phenology_rate)
+    )
+    joint_numerator = (
+        baseline_growth
+        - joint_growth
+        - migration_cost
+        * joint_migration_rate
+        * joint_migration_rate
+        - phenology_cost
+        * joint_phenology_rate
+        * joint_phenology_rate
+    )
+    joint_cost = (
+        joint_numerator
+        / (joint_migration_rate * joint_phenology_rate)
+    )
+
+    estimate = TrackingFitnessEstimate(
+        baseline_growth=baseline_growth,
+        abiotic_strength=abiotic_strength,
+        interaction_strength=interaction_strength,
+        migration_cost=migration_cost,
+        phenology_cost=phenology_cost,
+        joint_cost=joint_cost,
+    )
+
+    if require_nonnegative:
+        for name in (
+            "abiotic_strength",
+            "interaction_strength",
+            "migration_cost",
+            "phenology_cost",
+            "joint_cost",
+        ):
+            if getattr(estimate, name) < 0.0:
+                raise ValueError(
+                    f"identified {name} is negative and incompatible "
+                    "with the declared non-negative penalty model"
+                )
+
+    return estimate
