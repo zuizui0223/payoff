@@ -55,6 +55,11 @@ def main() -> None:
         type=float,
         default=0.10,
     )
+    parser.add_argument(
+        "--latent-substeps",
+        type=int,
+        default=1,
+    )
     parser.add_argument("--patch-spacing", type=float, required=True)
     parser.add_argument(
         "--climate-axis-angle-degrees",
@@ -71,7 +76,15 @@ def main() -> None:
         action="store_true",
     )
     parser.add_argument("--spatial-gradient", type=float, required=True)
-    parser.add_argument("--wave-speed", type=float, required=True)
+    parser.add_argument(
+        "--wave-speed",
+        type=float,
+        help="environmental-wave displacement per model step",
+    )
+    parser.add_argument(
+        "--wave-displacement-per-observation-interval",
+        type=float,
+    )
     parser.add_argument("--phenology-scale", type=float, required=True)
     parser.add_argument(
         "--max-abs-phenology-shift",
@@ -170,6 +183,30 @@ def main() -> None:
     ]
 
     target_seconds = args.target_interval_hours * 3600.0
+    if (
+        args.wave_speed is not None
+        and args.wave_displacement_per_observation_interval is not None
+    ):
+        raise SystemExit(
+            "supply only one wave displacement option"
+        )
+    if (
+        args.wave_speed is None
+        and args.wave_displacement_per_observation_interval is None
+    ):
+        raise SystemExit(
+            "supply --wave-speed or "
+            "--wave-displacement-per-observation-interval"
+        )
+    if args.latent_substeps <= 0:
+        raise SystemExit("--latent-substeps must be positive")
+    model_wave_speed = args.wave_speed
+    if args.wave_displacement_per_observation_interval is not None:
+        model_wave_speed = (
+            args.wave_displacement_per_observation_interval
+            / args.latent_substeps
+        )
+
     calibration = audit_interval_calibration(
         training_observations,
         target_interval_seconds=target_seconds,
@@ -182,11 +219,12 @@ def main() -> None:
         ),
         symmetry_tolerance=args.symmetry_tolerance,
         timing_axis_isolated=args.timing_axis_isolated,
+        latent_substeps=args.latent_substeps,
     )
     controls = controls_from_interval_audit(
         calibration,
         spatial_gradient=args.spatial_gradient,
-        wave_speed=args.wave_speed,
+        wave_speed=model_wave_speed,
         phenology_scale=args.phenology_scale,
         max_abs_phenology_shift=args.max_abs_phenology_shift,
     )
@@ -244,6 +282,7 @@ def main() -> None:
         f"training_groups={len(split.training_groups)} "
         f"held_out_groups={len(split.held_out_groups)} "
         f"training_intervals={calibration.retained_intervals} "
+        f"latent_substeps={calibration.latent_substeps} "
         f"held_out_intervals={len(held_steps)} "
         f"movement_rmse="
         f"{validation.movement.dimensionless_moment_rmse:.12g} "
