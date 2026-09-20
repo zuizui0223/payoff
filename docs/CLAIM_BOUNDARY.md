@@ -201,6 +201,21 @@ In particular:
   completed calibration; published whole-route group summaries do not identify
   the per-step PAYOFF-B migration or phenology rates, and the source file must
   be ingested before interval-level parameterization;
+- the closed-loop identity q_m+q_h=K and stability boundary 0<K<2 are
+  exact only for the declared local linear mismatch recurrence; route geometry,
+  controller saturation, delays, nonlinear response and state-dependent costs
+  can change the stability region;
+- published route-distance controller slopes identify restoring direction and,
+  with confirmed distance units, a local relaxation coefficient; they do not
+  directly equal the PAYOFF-B movement-feedback gain q_m without a declared
+  forward distance per model decision interval;
+- the quadratic minimum-cost controller allocation is a synthetic local
+  control result until movement and timing feedback costs are independently
+  measured;
+- held-out tracking-control validation thresholds are predeclared analysis
+  criteria and must not be tuned to held-out performance;
+- a passing held-out tracking-control gate validates the controller layer, not
+  habitat, demographic, fitness or ecological outcome predictions;
 - interaction-mediated synchronization can be beneficial or maladaptive
   depending on forcing, so it should not be described as universally
   stabilizing or destabilizing.
@@ -313,6 +328,9 @@ RECURRENT_MUTATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
 TRACKING_EMPIRICAL_INVERSE_MAP_IMPLEMENTED
 TRACKING_DIRECTIONAL_MOVEMENT_INVERSE_IMPLEMENTED
 TRACKING_INTERVAL_CALIBRATION_AUDIT_IMPLEMENTED
+TRACKING_GROUPED_HOLDOUT_VALIDATION_IMPLEMENTED
+TRACKING_PREDECLARED_VALIDATION_GATE_IMPLEMENTED
+TRACKING_CLOSED_LOOP_LOCAL_THEORY_PROVED_UNDER_DECLARED_RECURRENCE
 TRACKING_NAMED_SYSTEM_CANDIDATE_IDENTIFIED
 TRACKING_NAMED_SYSTEM_CALIBRATION_PENDING_SOURCE_FILE_INGESTION
 TRACKING_FITNESS_PARAMETERIZATION_NOT_IDENTIFIED_FOR_MULE_DEER
