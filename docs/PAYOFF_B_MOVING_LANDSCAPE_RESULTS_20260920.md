@@ -380,7 +380,50 @@ The retained causal hierarchy is therefore
     -> range-edge compression / extinction
     -> coordinated architecture persists.
 
-## 8. Claim ceiling
+## 8. Boundary and stochastic-demography robustness
+
+The one-dimensional coordination barrier was also tested against two model
+choices that were potential artefacts of the canonical deterministic landscape.
+
+### 8.1 Leaky versus reflecting edges
+
+Across a 108-cell robustness design with boundary retention 0, 0.5, or 1:
+
+| boundary retention | barrier cells / 36 | persistence rescues / 36 | mean accessibility gap |
+|---:|---:|---:|---:|
+| 0.0 | 29 | 21 | 0.4050 |
+| 0.5 | 29 | 21 | 0.3999 |
+| 1.0 | 30 | 21 | 0.3947 |
+
+The persistence-rescue count is unchanged across the three boundary rules.
+Thus the barrier is not created by reflecting range edges.
+
+### 8.2 Integer stochastic patch demography
+
+The canonical strong barrier cell was then rerun with integer Poisson patch
+demography and 128 replicates for each boundary-retention value.
+
+For retention 0, 0.5, and 1:
+
+    local endpoint persistence fraction   = 0
+    matched optimum persistence fraction = 1.
+
+The deterministic persistence rescue therefore survives demographic sampling
+in this declared cell.
+
+The corresponding artifacts are:
+
+- boundary robustness:
+  workflow 35473486671,
+  artifact 10593862087,
+  sha256 e5bc68c851042b78b14425f3d714446863c4041b5293628a181b254593c8e3da;
+
+- stochastic patch validation:
+  workflow 35473605692,
+  artifact 10594116842,
+  sha256 3947f30e4b157723fdb3c74b10d5efcba88c0c72d14d53e5544553e9265f9f57.
+
+## 9. Claim ceiling
 
 These results do not establish:
 
@@ -388,11 +431,11 @@ These results do not establish:
 - a universal climate-velocity threshold;
 - a universal linear gain in climate tolerance per phenology unit;
 - that real partners must evolve identical tracking strategies;
-- that local range edges in nature are reflecting;
 - that explicit density regulation or dispersal follow this exact model;
 - that a named plant–pollinator system occupies any sampled cell.
 
 The strongest claims are synthetic mechanism claims under a declared explicit
-landscape. The next robustness targets are alternative dispersal kernels,
-absorbing/leaky boundaries, two-dimensional landscapes, spatially heterogeneous
-carrying capacity, and stochastic local demography.
+landscape. Boundary leakage, a long-distance dispersal tail, stochastic local
+demography, and two-dimensional route geometry have now been checked as
+robustness extensions. The next major step is empirical parameterization of
+landscape resistance, movement kernels, and partner-specific tracking costs.
