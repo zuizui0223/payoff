@@ -654,6 +654,55 @@ also not treated as the independent timing-axis h. The repository therefore
 records source-file ingestion as pending rather than converting published
 summaries into pseudo-calibrated m or h values.
 
+## Closed-loop controller extension
+
+The fixed-rate tracking architecture is complemented by an exact local
+closed-loop model in
+
+    theory/CLOSED_LOOP_MOVEMENT_PHENOLOGY_TRACKING.md.
+
+Let q_m be mismatch-dependent movement feedback and q_h the timing feedback
+fraction corresponding to h:
+
+    q_h = 1-exp(-h).
+
+The local mismatch recurrence is
+
+    e_(t+1)
+    = [1-(q_m+q_h)]e_t + r.
+
+Therefore:
+
+    movement feedback + timing feedback
+    -> one exact local restoring budget K=q_m+q_h.
+
+The stability boundary is
+
+    0 < K < 2.
+
+At fixed K with quadratic feedback costs, the minimum-cost allocation is
+
+    q_m* = K c_h/(c_m+c_h),
+    q_h* = K c_m/(c_m+c_h).
+
+With steady mismatch penalty 0.5 A e^2, the unconstrained optimum is
+
+    K*
+    = [A r^2 / c_eff]^(1/4),
+
+where
+
+    c_eff
+    = c_m c_h/(c_m+c_h).
+
+The canonical synthetic receipt is
+
+    docs/PAYOFF_B_CLOSED_LOOP_TRACKING_RESULTS_20260920.md.
+
+The controller gain q_m is not the same object as fixed movement-kernel rate m.
+This distinction is central to the empirical interpretation of the Aikens
+movement/stopover controller evidence.
+
 ## Frozen synthetic evidence
 
 The first model results are frozen in
