@@ -320,6 +320,146 @@ def implied_directional_movement_moments(
         moving_fraction * y_share * d * d,
     )
 
+def deaggregate_directional_moments(
+    mean_x: float,
+    mean_y: float,
+    second_moment_x: float,
+    second_moment_y: float,
+    latent_substeps: int,
+) -> tuple[float, float, float, float]:
+    """Recover one-step raw moments from an n-step aggregate.
+
+    For iid one-step increments X with mean mu and raw second moment q,
+
+        E[S_n] = n mu
+
+        E[S_n^2]
+        = n q + n(n-1) mu^2.
+
+    Therefore
+
+        mu = E[S_n] / n
+
+        q = E[S_n^2]/n
+            - (n-1) E[S_n]^2 / n^2.
+
+    The same identity is applied independently to x and y components.
+    """
+
+    if not isinstance(latent_substeps, int) or latent_substeps <= 0:
+        raise ValueError("latent_substeps must be a positive integer")
+    for name, value in (
+        ("mean_x", mean_x),
+        ("mean_y", mean_y),
+        ("second_moment_x", second_moment_x),
+        ("second_moment_y", second_moment_y),
+    ):
+        if not isfinite(value):
+            raise ValueError(f"{name} must be finite")
+    if second_moment_x < mean_x * mean_x - 1e-12:
+        raise ValueError(
+            "x aggregate second moment is smaller than mean squared"
+        )
+    if second_moment_y < mean_y * mean_y - 1e-12:
+        raise ValueError(
+            "y aggregate second moment is smaller than mean squared"
+        )
+
+    n = float(latent_substeps)
+    step_mean_x = mean_x / n
+    step_mean_y = mean_y / n
+    step_second_x = (
+        second_moment_x / n
+        - (n - 1.0) * mean_x * mean_x / (n * n)
+    )
+    step_second_y = (
+        second_moment_y / n
+        - (n - 1.0) * mean_y * mean_y / (n * n)
+    )
+    tolerance = 1e-12
+    if step_second_x < -tolerance or step_second_y < -tolerance:
+        raise ValueError(
+            "deaggregated one-step second moment is negative"
+        )
+    step_second_x = max(0.0, step_second_x)
+    step_second_y = max(0.0, step_second_y)
+
+    return (
+        step_mean_x,
+        step_mean_y,
+        step_second_x,
+        step_second_y,
+    )
+
+
+def infer_directional_movement_kernel_from_aggregated_moments(
+    mean_x: float,
+    mean_y: float,
+    second_moment_x: float,
+    second_moment_y: float,
+    patch_spacing: float,
+    latent_substeps: int,
+) -> DirectionalMovementKernelEstimate:
+    """Infer the one-step directional kernel from a fixed n-step interval."""
+
+    (
+        step_mean_x,
+        step_mean_y,
+        step_second_x,
+        step_second_y,
+    ) = deaggregate_directional_moments(
+        mean_x,
+        mean_y,
+        second_moment_x,
+        second_moment_y,
+        latent_substeps,
+    )
+    return infer_directional_movement_kernel_from_moments(
+        step_mean_x,
+        step_mean_y,
+        step_second_x,
+        step_second_y,
+        patch_spacing,
+    )
+
+
+def implied_aggregated_directional_movement_moments(
+    migration_rate: float,
+    x_weight: float,
+    y_weight: float,
+    x_bias: float,
+    y_bias: float,
+    patch_spacing: float,
+    latent_substeps: int,
+) -> tuple[float, float, float, float]:
+    """Forward n-step moments under iid repetition of the one-step kernel."""
+
+    if not isinstance(latent_substeps, int) or latent_substeps <= 0:
+        raise ValueError("latent_substeps must be a positive integer")
+    (
+        step_mean_x,
+        step_mean_y,
+        step_second_x,
+        step_second_y,
+    ) = implied_directional_movement_moments(
+        migration_rate,
+        x_weight,
+        y_weight,
+        x_bias,
+        y_bias,
+        patch_spacing,
+    )
+    n = float(latent_substeps)
+    return (
+        n * step_mean_x,
+        n * step_mean_y,
+        n * step_second_x
+        + n * (n - 1.0) * step_mean_x * step_mean_x,
+        n * step_second_y
+        + n * (n - 1.0) * step_mean_y * step_mean_y,
+    )
+
+
 def infer_tracking_rate_from_correction_fraction(
     correction_fraction: float,
 ) -> float:
