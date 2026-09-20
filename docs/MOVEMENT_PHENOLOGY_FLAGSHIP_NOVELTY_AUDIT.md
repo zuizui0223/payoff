@@ -375,3 +375,54 @@ first universal law
 new control theorem
 first demonstration that migrants compensate phenology
 ~~~
+
+
+## 2026-09-20 structured search update
+
+A dedicated structured web literature screen is now frozen in:
+
+```text
+docs/MOVEMENT_PHENOLOGY_SYSTEMATIC_NOVELTY_SEARCH_20260920.md
+```
+
+The most important new boundary identified is the older autoregressive
+phenology literature. Post et al. (2001) and Forchhammer et al. (2002) already
+use autoregressive coefficients to describe temporal dependence in phenological
+timing, including migration arrival. Chronobiology also has a mature
+phase/entrainment vocabulary.
+
+Therefore neither autoregression nor "phase" terminology is a novelty claim.
+
+The candidate contribution is narrower:
+
+```text
+within-migration animal-environment phase retention
++ direct cross-taxon reconstruction
++ environmental innovation separated from retained error
++ actuator-specific mechanism
++ perturbation/endogeneity boundaries
+```
+
+The structured search did not identify a prior migration paper combining this
+full empirical package.
+
+### Gate revision
+
+For the GEB lane:
+
+```text
+structured targeted novelty search:
+  PASS
+
+conservative novelty language:
+  PASS
+```
+
+For an Ecology Letters first-priority claim:
+
+```text
+formal bibliometric / citation-graph search:
+  OPEN
+```
+
+Use "we introduce a common empirical coordinate" rather than "first" language.
