@@ -23,6 +23,8 @@ The empirical route is now
         ->
     held-out interval validation
         ->
+    predeclared validation gate
+        ->
     independently identified fitness terms
         ->
     held-out environmental forcing projection.
@@ -148,7 +150,58 @@ The exact zero is expected because the synthetic train and holdout groups were
 generated from the same declared kernel. It is a pipeline regression test, not
 a target for real data.
 
-## 6. Frozen-control forcing projection
+## 6. Predeclared held-out validation gate
+
+Held-out diagnostics are not automatically promoted to a validated tracking
+controller. A separate gate now requires thresholds to be declared before the
+held-out result is interpreted.
+
+The gate can require:
+
+    movement dimensionless moment RMSE <= tau_m,
+
+    held-out movement intervals >= n_m,
+
+and, when the timing axis is part of the claimed controller,
+
+    timing-axis validation licensed,
+    phase intervals >= n_h,
+    |mean log-compression error| <= tau_h.
+
+The gate does not estimate tau_m or tau_h from held-out performance.
+
+The synthetic CI witness uses
+
+    tau_m = 0.01,
+    n_m   = 4,
+    require phase validation = yes,
+    tau_h = 0.01,
+    n_h   = 4.
+
+Because the synthetic held-out fixture is generated from the same declared
+kernel, it passes with
+
+    movement RMSE = 0
+    phase mean-log-compression error = 0.
+
+Those CI thresholds are pipeline regression settings, not ecological default
+acceptance thresholds.
+
+Run:
+
+    python scripts/evaluate_tracking_validation_gate.py \
+      --validation-json <heldout.json> \
+      --max-movement-moment-rmse <predeclared_tau_m> \
+      --min-held-out-intervals <n_m> \
+      --require-phase-validation \
+      --max-abs-phase-log-error <predeclared_tau_h> \
+      --min-phase-intervals <n_h>
+
+A failed gate blocks downstream validated projection. A projection without a
+gate can still be run as a mechanistic scenario, but its status is explicitly
+labeled unvalidated tracking.
+
+## 7. Frozen-control forcing projection
 
 The biological controls are then frozen and the external environmental wave
 speed is changed without refitting.
@@ -176,17 +229,21 @@ Canonical synthetic projection:
     projected persistence:
         yes.
 
-This is labeled
+With a passing held-out tracking gate this is labeled
 
-    held_out_forcing_projection,
+    tracking_controls_validated_held_out_forcing_projection.
 
-not empirical validation.
+Without a gate it is labeled
+
+    held_out_forcing_mechanistic_projection_unvalidated_tracking.
+
+Neither label by itself is ecological outcome validation.
 
 The current projection uses an open regular grid with declared demographic
 assumptions. A named-system persistence test additionally requires independent
 habitat, demographic, fitness, and held-out outcome data.
 
-## 7. Refusal gates
+## 8. Refusal gates
 
 The pipeline refuses or downgrades claims when:
 
@@ -203,7 +260,7 @@ The pipeline refuses or downgrades claims when:
   matched growth contrasts;
 - named-system habitat/demographic assumptions are unavailable.
 
-## 8. Mule-deer status
+## 9. Mule-deer status
 
 The Ortega et al. public system remains
 
@@ -214,7 +271,7 @@ The Ortega et al. public system remains
 The repository now has the complete downstream analysis path for the source
 file once it is available locally.
 
-## 9. Reproduce
+## 10. Reproduce
 
 Core commands:
 
@@ -223,6 +280,8 @@ Core commands:
     python scripts/audit_interval_tracking_calibration.py <training.csv> ...
 
     python scripts/validate_interval_tracking_controls.py <heldout.csv> ...
+
+    python scripts/evaluate_tracking_validation_gate.py ...
 
     python scripts/cross_validate_interval_tracking.py <interval.csv> ...
 
@@ -236,7 +295,7 @@ The fixtures used by CI are in
     examples/tracking/fixed_interval_validation.csv
     examples/tracking/grouped_cross_validation.csv.
 
-## 10. Claim boundary
+## 11. Claim boundary
 
 This receipt proves that the empirical workflow is executable, separated by
 estimand, and leakage-resistant under its declared synthetic witness.
