@@ -140,6 +140,15 @@ gives
 These are design equations, not permission to infer costs from movement
 variance alone.
 
+A six-contrast exact identification route is implemented in
+
+    scripts/parameterize_migration_phenology_fitness.py
+
+using one common reference plus isolated abiotic, interaction, migration-cost,
+phenology-cost, and joint-cost contrasts. If any identified penalty coefficient
+is negative, the default behavior is to reject the declared non-negative
+penalty model rather than silently truncate the coefficient.
+
 ## 6. Recommended empirical data contract
 
 A minimum direct tracking receipt should declare:
