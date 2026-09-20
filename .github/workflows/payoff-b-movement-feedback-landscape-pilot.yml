@@ -1,0 +1,43 @@
+name: payoff-b movement feedback landscape pilot
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-migration-phenology-20260919
+    paths:
+      - .github/workflows/payoff-b-movement-feedback-landscape-pilot.yml
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run mismatch-dependent movement controller sweep
+        run: >
+          python scripts/movement_feedback_landscape_sweep.py
+          --climate-velocities 0.02,0.03,0.04,0.05,0.06
+          --controller-gains 0,0.05,0.1,0.2,0.4,0.8,1.6
+          --phenology-rates 0,0.25,0.5
+          --baseline-migration-rate 0.1
+          --max-migration-rate 1.5
+          --width 31
+          --height 15
+          --spatial-gradient 0.20
+          --phenology-limit 4
+          --initial-total-abundance 400
+          --local-carrying-capacity 80
+          --density-coefficient 0.35
+          --baseline-growth 0.35
+          --abiotic-strength 1
+          --migration-cost 0.05
+          --phenology-cost 0.03
+          --steps 100
+          --burn-in 20
+          --output outputs/payoff_b_movement_feedback_landscape_pilot.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-movement-feedback-landscape-pilot
+          path: outputs/payoff_b_movement_feedback_landscape_pilot.csv
