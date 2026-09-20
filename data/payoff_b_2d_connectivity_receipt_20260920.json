@@ -250,7 +250,49 @@
     "canonical_gate_ci": {
       "workflow_run": 35478420135,
       "job_id": 105991651172
+    },
+    "anisotropic_movement": {
+      "workflow_run": 35479512321,
+      "artifact_id": 10595182956,
+      "sha256": "a151aa4b37892f73e7f11ad53b73685bca2bd533d9c2ccf31b480ee1ddd6068e"
     }
   },
-  "claim_boundary": "synthetic regular-grid mechanism results; no natural prevalence or empirical threshold claim"
+  "claim_boundary": "synthetic regular-grid mechanism results; no natural prevalence or empirical threshold claim",
+  "anisotropic_movement": {
+    "y_over_x_weight_ratios": [
+      1,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "climate_velocities": [
+      0.05,
+      0.06,
+      0.07
+    ],
+    "phenology_limits": [
+      0,
+      2,
+      4
+    ],
+    "mean_zigzag_growth_penalty": {
+      "y1_z0": -0.0450125480218,
+      "y1_z4": -0.0107308277572,
+      "y0.5_z0": -0.0486410086138,
+      "y0.5_z4": -0.0116055281833,
+      "y0.25_z0": -0.0496079358813,
+      "y0.25_z4": -0.0120279155532,
+      "y0.1_z0": -0.0524947673563,
+      "y0.1_z4": -0.0128454025393
+    },
+    "penalty_magnitude_reduction_z0_to_z4": {
+      "y1": 0.761603636568,
+      "y0.5": 0.7614044504,
+      "y0.25": 0.757540495497,
+      "y0.1": 0.755301276942,
+      "mean": 0.758834409364
+    },
+    "persistence_losses": "0 in every sampled 3-velocity slice",
+    "retained_interpretation": "temporal buffering of zigzag growth cost persists under strong transverse movement anisotropy; no anisotropy-specific persistence rescue claimed"
+  }
 }
