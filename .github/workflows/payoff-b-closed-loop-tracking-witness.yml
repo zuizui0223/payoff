@@ -1,0 +1,84 @@
+name: payoff-b closed-loop tracking witness
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-migration-phenology-20260919
+    paths:
+      - .github/workflows/payoff-b-closed-loop-tracking-witness.yml
+
+jobs:
+  equal_cost:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Equal-cost controller sweep
+        run: >
+          python scripts/closed_loop_tracking_phase_sweep.py
+          --residual-forcings 0.05,0.2,1,4
+          --movement-feedback-gains 0,0.25,0.5,0.75,1,1.25,1.5,1.75,2
+          --phenology-rates 0,0.25,0.5,1,2
+          --mismatch-strength 1
+          --movement-cost 1
+          --phenology-cost 1
+          --steps 200
+          --burn-in 50
+          --output outputs/closed_loop_equal_cost_phase.csv
+          --optima-output outputs/closed_loop_equal_cost_optima.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: closed-loop-equal-cost
+          path: outputs/closed_loop_equal_cost_*.csv
+
+  movement_expensive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Movement-expensive optimum
+        run: >
+          python scripts/closed_loop_tracking_phase_sweep.py
+          --residual-forcings 0.05,0.2,1
+          --movement-feedback-gains 0,0.25,0.5,0.75,1
+          --phenology-rates 0,0.25,0.5,1,2
+          --mismatch-strength 1
+          --movement-cost 4
+          --phenology-cost 1
+          --steps 200
+          --burn-in 50
+          --output outputs/closed_loop_movement_expensive_phase.csv
+          --optima-output outputs/closed_loop_movement_expensive_optima.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: closed-loop-movement-expensive
+          path: outputs/closed_loop_movement_expensive_*.csv
+
+  phenology_expensive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Phenology-expensive optimum
+        run: >
+          python scripts/closed_loop_tracking_phase_sweep.py
+          --residual-forcings 0.05,0.2,1
+          --movement-feedback-gains 0,0.25,0.5,0.75,1
+          --phenology-rates 0,0.25,0.5,1,2
+          --mismatch-strength 1
+          --movement-cost 1
+          --phenology-cost 4
+          --steps 200
+          --burn-in 50
+          --output outputs/closed_loop_phenology_expensive_phase.csv
+          --optima-output outputs/closed_loop_phenology_expensive_optima.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: closed-loop-phenology-expensive
+          path: outputs/closed_loop_phenology_expensive_*.csv
