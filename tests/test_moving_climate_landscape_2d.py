@@ -1,5 +1,7 @@
 from math import isclose
 
+import pytest
+
 from src.moving_climate_landscape_2d import (
     MovingLandscape2DScenario,
     bhattacharyya_overlap_2d,
@@ -740,3 +742,87 @@ def test_zero_y_weight_prevents_transverse_dispersal():
     assert dispersed[
         scenario.index(center_x + 1, center_y)
     ] > 0.0
+
+
+def test_directional_bias_pushes_moving_mass_along_positive_x():
+    width = 9
+    height = 9
+    scenario = MovingLandscape2DScenario(
+        width=width,
+        height=height,
+        climate_velocity=0.0,
+        dispersal_x_weight=1.0,
+        dispersal_y_weight=0.0,
+        dispersal_x_bias=1.0,
+        dispersal_y_bias=0.0,
+        steps=20,
+        burn_in=5,
+    )
+    abundance = [0.0] * (width * height)
+    center_x = width // 2
+    center_y = height // 2
+    center = scenario.index(center_x, center_y)
+    abundance[center] = 100.0
+
+    dispersed = grid_dispersal_2d(
+        tuple(abundance),
+        1.0,
+        scenario,
+    )
+
+    assert dispersed[
+        scenario.index(center_x - 1, center_y)
+    ] == 0.0
+    assert dispersed[
+        scenario.index(center_x + 1, center_y)
+    ] > 0.0
+    assert dispersed[
+        scenario.index(center_x, center_y - 1)
+    ] == 0.0
+    assert dispersed[
+        scenario.index(center_x, center_y + 1)
+    ] == 0.0
+    assert isclose(
+        sum(dispersed),
+        100.0,
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+
+
+def test_zero_directional_bias_matches_previous_isotropic_kernel():
+    common = dict(
+        width=9,
+        height=9,
+        climate_velocity=0.0,
+        dispersal_x_weight=1.0,
+        dispersal_y_weight=1.0,
+        steps=20,
+        burn_in=5,
+    )
+    implicit = MovingLandscape2DScenario(**common)
+    explicit = MovingLandscape2DScenario(
+        dispersal_x_bias=0.0,
+        dispersal_y_bias=0.0,
+        **common,
+    )
+    abundance = tuple(
+        float(index + 1)
+        for index in range(implicit.width * implicit.height)
+    )
+    assert grid_dispersal_2d(
+        abundance,
+        0.7,
+        implicit,
+    ) == grid_dispersal_2d(
+        abundance,
+        0.7,
+        explicit,
+    )
+
+
+def test_invalid_directional_bias_is_rejected():
+    with pytest.raises(ValueError):
+        MovingLandscape2DScenario(
+            dispersal_x_bias=1.01,
+        )
