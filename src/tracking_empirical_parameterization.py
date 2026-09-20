@@ -25,6 +25,17 @@ class MovementKernelEstimate:
 
 
 @dataclass(frozen=True)
+class DirectionalMovementKernelEstimate:
+    migration_rate: float
+    moving_fraction: float
+    x_weight: float
+    y_weight: float
+    x_bias: float
+    y_bias: float
+    anisotropy_ratio_y_over_x: float | None
+
+
+@dataclass(frozen=True)
 class TrackingParameterization:
     climate_velocity: float
     migration_rate: float
@@ -146,6 +157,168 @@ def implied_component_variances(
         variance_scale * y_weight / total_weight,
     )
 
+
+
+def infer_directional_movement_kernel_from_moments(
+    mean_x: float,
+    mean_y: float,
+    second_moment_x: float,
+    second_moment_y: float,
+    patch_spacing: float,
+) -> DirectionalMovementKernelEstimate:
+    """Invert the biased one-step nearest-neighbor movement kernel.
+
+    For movement fraction f, normalized axis shares s_x,s_y and directional
+    biases b_x,b_y in [-1,1]:
+
+        E[X]   = f s_x b_x d
+        E[X^2] = f s_x d^2
+        E[Y]   = f s_y b_y d
+        E[Y^2] = f s_y d^2.
+
+    Hence
+
+        f = [E[X^2] + E[Y^2]] / d^2
+        b_x = E[X] d / E[X^2]
+        b_y = E[Y] d / E[Y^2].
+
+    This exact inverse supports directional migration while preserving the
+    previous symmetric kernel as b_x=b_y=0.
+    """
+
+    for name, value in (
+        ("mean_x", mean_x),
+        ("mean_y", mean_y),
+        ("second_moment_x", second_moment_x),
+        ("second_moment_y", second_moment_y),
+        ("patch_spacing", patch_spacing),
+    ):
+        if not isfinite(value):
+            raise ValueError(f"{name} must be finite")
+    if second_moment_x < 0.0 or second_moment_y < 0.0:
+        raise ValueError("component second moments must be non-negative")
+    if patch_spacing <= 0.0:
+        raise ValueError("patch_spacing must be positive")
+
+    total_second = second_moment_x + second_moment_y
+    moving_fraction = total_second / (
+        patch_spacing * patch_spacing
+    )
+    if moving_fraction >= 1.0:
+        raise ValueError(
+            "observed second moment exceeds one-step kernel support; "
+            "use a wider or continuous movement kernel"
+        )
+
+    tolerance = 1e-12
+    if total_second == 0.0:
+        if abs(mean_x) > tolerance or abs(mean_y) > tolerance:
+            raise ValueError(
+                "non-zero mean displacement is incompatible with zero "
+                "component second moments"
+            )
+        return DirectionalMovementKernelEstimate(
+            migration_rate=0.0,
+            moving_fraction=0.0,
+            x_weight=1.0,
+            y_weight=1.0,
+            x_bias=0.0,
+            y_bias=0.0,
+            anisotropy_ratio_y_over_x=None,
+        )
+
+    x_share = second_moment_x / total_second
+    y_share = second_moment_y / total_second
+
+    if second_moment_x == 0.0:
+        if abs(mean_x) > tolerance:
+            raise ValueError(
+                "non-zero x mean is incompatible with zero x second moment"
+            )
+        x_bias = 0.0
+    else:
+        x_bias = mean_x * patch_spacing / second_moment_x
+
+    if second_moment_y == 0.0:
+        if abs(mean_y) > tolerance:
+            raise ValueError(
+                "non-zero y mean is incompatible with zero y second moment"
+            )
+        y_bias = 0.0
+    else:
+        y_bias = mean_y * patch_spacing / second_moment_y
+
+    for name, value in (("x_bias", x_bias), ("y_bias", y_bias)):
+        if value < -1.0 - tolerance or value > 1.0 + tolerance:
+            raise ValueError(
+                f"identified {name} lies outside [-1,1]; "
+                "the one-step directional kernel is incompatible with the "
+                "observed moments"
+            )
+
+    x_bias = min(1.0, max(-1.0, x_bias))
+    y_bias = min(1.0, max(-1.0, y_bias))
+
+    return DirectionalMovementKernelEstimate(
+        migration_rate=-log1p(-moving_fraction),
+        moving_fraction=moving_fraction,
+        x_weight=x_share,
+        y_weight=y_share,
+        x_bias=x_bias,
+        y_bias=y_bias,
+        anisotropy_ratio_y_over_x=(
+            second_moment_y / second_moment_x
+            if second_moment_x > 0.0
+            else None
+        ),
+    )
+
+
+def implied_directional_movement_moments(
+    migration_rate: float,
+    x_weight: float,
+    y_weight: float,
+    x_bias: float,
+    y_bias: float,
+    patch_spacing: float,
+) -> tuple[float, float, float, float]:
+    """Forward moments for the biased nearest-neighbor kernel."""
+
+    for name, value in (
+        ("migration_rate", migration_rate),
+        ("x_weight", x_weight),
+        ("y_weight", y_weight),
+        ("x_bias", x_bias),
+        ("y_bias", y_bias),
+        ("patch_spacing", patch_spacing),
+    ):
+        if not isfinite(value):
+            raise ValueError(f"{name} must be finite")
+    if migration_rate < 0.0:
+        raise ValueError("migration_rate must be non-negative")
+    if x_weight < 0.0 or y_weight < 0.0:
+        raise ValueError("movement weights must be non-negative")
+    if x_weight + y_weight <= 0.0:
+        raise ValueError("at least one movement weight must be positive")
+    if not -1.0 <= x_bias <= 1.0:
+        raise ValueError("x_bias must lie in [-1,1]")
+    if not -1.0 <= y_bias <= 1.0:
+        raise ValueError("y_bias must lie in [-1,1]")
+    if patch_spacing <= 0.0:
+        raise ValueError("patch_spacing must be positive")
+
+    moving_fraction = 1.0 - exp(-migration_rate)
+    total_weight = x_weight + y_weight
+    x_share = x_weight / total_weight
+    y_share = y_weight / total_weight
+    d = patch_spacing
+
+    return (
+        moving_fraction * x_share * x_bias * d,
+        moving_fraction * y_share * y_bias * d,
+        moving_fraction * x_share * d * d,
+        moving_fraction * y_share * d * d,
+    )
 
 def infer_tracking_rate_from_correction_fraction(
     correction_fraction: float,
