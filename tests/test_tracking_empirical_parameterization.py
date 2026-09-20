@@ -10,6 +10,9 @@ from src.tracking_empirical_parameterization import (
     identify_tracking_fitness_from_matched_contrasts,
     implied_directional_movement_moments,
     infer_directional_movement_kernel_from_moments,
+    deaggregate_directional_moments,
+    implied_aggregated_directional_movement_moments,
+    infer_directional_movement_kernel_from_aggregated_moments,
     infer_movement_kernel_from_component_variances,
     infer_phenology_rate_from_residual_pair,
     infer_quadratic_architecture_cost,
@@ -284,4 +287,54 @@ def test_directional_inverse_rejects_impossible_mean_given_second_moment():
             second_moment_x=0.1,
             second_moment_y=0.0,
             patch_spacing=1.0,
+        )
+
+
+def test_aggregated_directional_moment_inverse_round_trip():
+    migration_rate = 0.4
+    x_weight = 0.75
+    y_weight = 0.25
+    x_bias = 0.6
+    y_bias = -0.2
+    patch_spacing = 2.0
+    n = 3
+
+    aggregate = implied_aggregated_directional_movement_moments(
+        migration_rate,
+        x_weight,
+        y_weight,
+        x_bias,
+        y_bias,
+        patch_spacing,
+        n,
+    )
+    estimate = infer_directional_movement_kernel_from_aggregated_moments(
+        *aggregate,
+        patch_spacing,
+        n,
+    )
+
+    assert estimate.migration_rate == pytest.approx(migration_rate)
+    assert estimate.x_weight == pytest.approx(x_weight)
+    assert estimate.y_weight == pytest.approx(y_weight)
+    assert estimate.x_bias == pytest.approx(x_bias)
+    assert estimate.y_bias == pytest.approx(y_bias)
+
+
+def test_deaggregate_one_step_is_identity():
+    observed = (0.3, -0.1, 0.8, 0.2)
+    assert deaggregate_directional_moments(
+        *observed,
+        latent_substeps=1,
+    ) == pytest.approx(observed)
+
+
+def test_deaggregate_rejects_second_moment_below_mean_square():
+    with pytest.raises(ValueError):
+        deaggregate_directional_moments(
+            mean_x=2.0,
+            mean_y=0.0,
+            second_moment_x=3.0,
+            second_moment_y=0.0,
+            latent_substeps=2,
         )
