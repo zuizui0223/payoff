@@ -47,6 +47,15 @@ def main() -> None:
         type=float,
         default=0.10,
     )
+    parser.add_argument(
+        "--latent-substeps",
+        type=int,
+        default=1,
+        help=(
+            "number of iid model steps represented by one retained observation "
+            "interval"
+        ),
+    )
     parser.add_argument("--patch-spacing", type=float, required=True)
     parser.add_argument(
         "--climate-axis-angle-degrees",
@@ -67,7 +76,19 @@ def main() -> None:
         ),
     )
     parser.add_argument("--spatial-gradient", type=float)
-    parser.add_argument("--wave-speed", type=float)
+    parser.add_argument(
+        "--wave-speed",
+        type=float,
+        help="environmental-wave displacement per model step",
+    )
+    parser.add_argument(
+        "--wave-displacement-per-observation-interval",
+        type=float,
+        help=(
+            "alternative to --wave-speed; divided by latent_substeps to obtain "
+            "environmental-wave displacement per model step"
+        ),
+    )
     parser.add_argument("--phenology-scale", type=float)
     parser.add_argument("--max-abs-phenology-shift", type=float)
     parser.add_argument(
@@ -159,19 +180,37 @@ def main() -> None:
         ),
         symmetry_tolerance=args.symmetry_tolerance,
         timing_axis_isolated=args.timing_axis_isolated,
+        latent_substeps=args.latent_substeps,
     )
+
+    if (
+        args.wave_speed is not None
+        and args.wave_displacement_per_observation_interval is not None
+    ):
+        raise SystemExit(
+            "supply only one of --wave-speed or "
+            "--wave-displacement-per-observation-interval"
+        )
+    model_wave_speed = args.wave_speed
+    if args.wave_displacement_per_observation_interval is not None:
+        if args.latent_substeps <= 0:
+            raise SystemExit("--latent-substeps must be positive")
+        model_wave_speed = (
+            args.wave_displacement_per_observation_interval
+            / args.latent_substeps
+        )
 
     control_args = (
         args.spatial_gradient,
-        args.wave_speed,
+        model_wave_speed,
         args.phenology_scale,
         args.max_abs_phenology_shift,
     )
     supplied = [value is not None for value in control_args]
     if any(supplied) and not all(supplied):
         raise SystemExit(
-            "to build tracking controls, supply all of: "
-            "--spatial-gradient, --wave-speed, --phenology-scale, "
+            "to build tracking controls, supply --spatial-gradient, one wave "
+            "displacement option, --phenology-scale, and "
             "--max-abs-phenology-shift"
         )
 
@@ -181,7 +220,7 @@ def main() -> None:
             controls = controls_from_interval_audit(
                 audit,
                 spatial_gradient=args.spatial_gradient,
-                wave_speed=args.wave_speed,
+                wave_speed=model_wave_speed,
                 phenology_scale=args.phenology_scale,
                 max_abs_phenology_shift=args.max_abs_phenology_shift,
             )
@@ -238,6 +277,8 @@ def main() -> None:
     print(
         "interval_tracking_audit "
         f"retained_intervals={audit.retained_intervals} "
+        f"latent_substeps={audit.latent_substeps} "
+        f"model_step_seconds={audit.model_step_seconds:.12g} "
         f"symmetric_movement_licensed="
         f"{int(audit.movement.direct_inverse_licensed)} "
         f"directional_movement_licensed="
