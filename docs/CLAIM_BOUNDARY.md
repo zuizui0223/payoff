@@ -190,6 +190,10 @@ In particular:
   a model-rejection signal, not something to clip;
 - the matched growth-contrast inverse for mismatch strengths and tracking costs
   requires a common low-density growth scale and matched background ecology;
+- the Ortega et al. mule-deer system is a named calibration candidate, not a
+  completed calibration; published whole-route group summaries do not identify
+  the per-step PAYOFF-B migration or phenology rates, and the source file must
+  be ingested before interval-level parameterization;
 - interaction-mediated synchronization can be beneficial or maladaptive
   depending on forcing, so it should not be described as universally
   stabilizing or destabilizing.
@@ -299,5 +303,9 @@ MUTATION_SHIFTED_OCCUPANCY_CROSSING_PROVED
 EMPIRICAL_FREQUENCY_FEEDBACK_NOT_YET_IDENTIFIED
 FINITE_POPULATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
 RECURRENT_MUTATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
+TRACKING_EMPIRICAL_INVERSE_MAP_IMPLEMENTED
+TRACKING_NAMED_SYSTEM_CANDIDATE_IDENTIFIED
+TRACKING_NAMED_SYSTEM_CALIBRATION_PENDING_SOURCE_FILE_INGESTION
+TRACKING_FITNESS_PARAMETERIZATION_NOT_IDENTIFIED_FOR_MULE_DEER
 HISTORICAL_CAUSATION_NOT_IDENTIFIED
 ```
