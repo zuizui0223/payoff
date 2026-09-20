@@ -407,8 +407,8 @@ Current progression:
 10. two-dimensional habitat connectivity and route geometry — implemented;
 11. one- and two-dimensional coevolutionary coordination barriers —
     implemented and resolution-checked;
-12. empirical landscape parameterization and anisotropic movement kernels —
-    pending.
+12. anisotropic movement kernels and algebraic observation-to-parameter maps —
+    implemented; named-system calibration remains pending.
 
 The implemented layers already provide a reproducible route to very large run
 counts. The next major upgrade is empirical parameterization rather than merely
@@ -611,6 +611,23 @@ forcing, interaction synchronizes otherwise quantitatively different partner
 tracking responses while persistence remains possible. At stronger forcing,
 the same synchronization collapses onto a locally accessible migration-only
 attractor and becomes maladaptive.
+
+The temporal-buffering result is not restricted to isotropic four-neighbor
+movement. When transverse dispersal weight is reduced from 1 to 0.1 relative
+to the climate-axis direction, the sampled zigzag growth penalty becomes more
+negative without phenology, but phenology limit 4 still reduces penalty
+magnitude by about 75-76% across all sampled anisotropy levels. The sampled
+design shows growth-cost buffering, not an anisotropy-specific persistence
+rescue.
+
+An empirical handoff now provides exact inverse maps for the directly
+identifiable subset of tracking parameters under the declared kernel:
+movement-component variances -> migration rate and anisotropy; environmental
+wave speed x spatial gradient -> climate velocity; first-order residual
+correction -> phenology response rate. A separate matched-contrast design
+identifies baseline growth, abiotic and interaction mismatch strengths, and
+quadratic tracking costs. These maps are model-conditional and do not yet
+constitute a named-system calibration.
 
 ## Frozen synthetic evidence
 
