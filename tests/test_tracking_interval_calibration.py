@@ -85,6 +85,9 @@ def test_directional_migration_fails_symmetric_kernel_gate():
     assert not movement.direct_inverse_licensed
     assert movement.movement_kernel is None
     assert "directional drift" in movement.inverse_failure
+    assert movement.directional_inverse_licensed
+    assert movement.directional_movement_kernel is not None
+    assert movement.directional_movement_kernel.x_bias > 0.9
 
 
 def test_interval_tolerance_filters_nonmatching_steps():
@@ -180,3 +183,33 @@ def test_sign_crossing_blocks_isolated_h_license():
 
     assert not audit.phenology_rate_licensed
     assert audit.sign_crossing_intervals == 1
+
+
+def test_directional_interval_inverse_recovers_known_biased_kernel_moments():
+    # Deterministic empirical moments matching a biased one-step kernel:
+    # x second moment dominates and mean x is positive.
+    displacements = (
+        [(2.0, 0.0)] * 6
+        + [(-2.0, 0.0)] * 2
+        + [(0.0, 2.0)] * 1
+        + [(0.0, -2.0)] * 1
+        + [(0.0, 0.0)] * 10
+    )
+    observations = make_observations(displacements)
+    steps = build_fixed_intervals(
+        observations,
+        target_interval_seconds=3600.0,
+    )
+    movement = audit_movement_intervals(
+        steps,
+        patch_spacing=3.0,
+        symmetry_tolerance=0.1,
+    )
+
+    assert not movement.symmetric_kernel_compatible
+    assert movement.directional_inverse_licensed
+    kernel = movement.directional_movement_kernel
+    assert kernel is not None
+    assert kernel.x_bias > 0.0
+    assert abs(kernel.y_bias) < 1e-12
+    assert kernel.x_weight > kernel.y_weight
