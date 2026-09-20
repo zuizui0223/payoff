@@ -27,7 +27,11 @@ The empirical route is now
         ->
     independently identified fitness terms
         ->
-    held-out environmental forcing projection.
+    held-out environmental forcing projection
+        ->
+    independently held-out ecological outcome validation
+        ->
+    predeclared ecological outcome gate.
 
 The held-out groups never refit the tracking controls.
 
@@ -243,7 +247,81 @@ The current projection uses an open regular grid with declared demographic
 assumptions. A named-system persistence test additionally requires independent
 habitat, demographic, fitness, and held-out outcome data.
 
-## 8. Refusal gates
+## 8. Held-out ecological outcome validation
+
+Passing the tracking-control gate is not the end of empirical validation.
+
+A controller can predict held-out movement and timing moments while still
+failing to predict ecological outcomes. Therefore PAYOFF-B now keeps a
+separate downstream layer for held-out:
+
+    final abundance,
+    climate-axis centroid,
+    phenology shift,
+    RMS abiotic mismatch,
+    low-density growth,
+    persistence.
+
+Only observed metrics are compared. Tolerances are independently predeclared
+and are not fitted to the held-out outcome errors.
+
+The synthetic CI witness uses a separately stored outcome fixture and checks:
+
+    final abundance relative error <= 1e-6,
+    low-density growth absolute error <= 1e-6,
+    persistence state must match.
+
+Canonical CI result:
+
+    workflow run:
+        35495509263
+
+    job:
+        106037613620
+
+    tracking gate:
+        PASS
+
+    projection class:
+        tracking_controls_validated_held_out_forcing_projection
+
+    ecological outcome metrics compared:
+        3
+
+    final abundance relative error:
+        2.17e-12
+
+    low-density growth error:
+        -1.66e-13
+
+    persistence match:
+        yes
+
+    ecological outcome gate:
+        PASS.
+
+The tiny errors are expected because this is a synthetic pipeline regression
+fixture generated from the same declared model. They are not targets for real
+data.
+
+Run:
+
+    python scripts/validate_empirical_tracking_outcome.py \
+      --prediction-json <prediction.json> \
+      --observed-outcome-json <heldout_outcome.json> \
+      --max-abs-final-abundance-relative-error <predeclared_value> \
+      --max-abs-low-density-growth-error <predeclared_value> \
+      --require-persistence-match
+
+This layer is what separates
+
+    controller validation
+
+from
+
+    ecological outcome validation.
+
+## 9. Refusal gates
 
 The pipeline refuses or downgrades claims when:
 
@@ -260,7 +338,7 @@ The pipeline refuses or downgrades claims when:
   matched growth contrasts;
 - named-system habitat/demographic assumptions are unavailable.
 
-## 9. Mule-deer status
+## 10. Mule-deer status
 
 The Ortega et al. public system remains
 
@@ -271,7 +349,7 @@ The Ortega et al. public system remains
 The repository now has the complete downstream analysis path for the source
 file once it is available locally.
 
-## 10. Reproduce
+## 11. Reproduce
 
 Core commands:
 
@@ -289,13 +367,15 @@ Core commands:
 
     python scripts/predict_empirical_tracking_landscape.py ...
 
+    python scripts/validate_empirical_tracking_outcome.py ...
+
 The fixtures used by CI are in
 
     examples/tracking/fixed_interval_calibration.csv
     examples/tracking/fixed_interval_validation.csv
     examples/tracking/grouped_cross_validation.csv.
 
-## 11. Claim boundary
+## 12. Claim boundary
 
 This receipt proves that the empirical workflow is executable, separated by
 estimand, and leakage-resistant under its declared synthetic witness.
