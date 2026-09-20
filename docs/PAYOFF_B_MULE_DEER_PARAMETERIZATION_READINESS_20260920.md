@@ -63,18 +63,24 @@ Current status:
 
     NOT YET IDENTIFIED.
 
-The declared one-step kernel requires component displacement variances on a
-fixed decision interval:
+The movement layer now supports both symmetric and directional one-step
+kernels on a fixed decision interval.
 
-    Var_x, Var_y
+For a symmetric kernel the direct inverse uses component second moments with
+negligible directional drift. For a directional kernel the raw GPS steps can
+identify
 
-plus the chosen patch spacing d.
+    E[Delta x], E[Delta y],
+    E[Delta x^2], E[Delta y^2]
 
-The article summary reports movement-rate contrasts, not the component
-step-variance pair required by the exact kernel inverse.
+after projection onto the declared climate axis, together with patch spacing d.
 
-The raw GPS trajectories or a source-data table containing compatible
-displacements are needed.
+These moments identify migration rate, x/y movement weights, and x/y directional
+biases under the declared biased nearest-neighbor kernel.
+
+The article summary reports movement-rate contrasts, not the fixed-interval
+projected step moments required by either exact inverse. Raw GPS trajectories or
+an interval-level source table are therefore still required.
 
 ### x/y anisotropy
 
@@ -82,12 +88,11 @@ Current status:
 
     NOT YET IDENTIFIED.
 
-The current exact map is
+The current exact map uses projected component second moments for the x/y
+weights and projected component means for directional bias.
 
-    w_x : w_y = Var_x : Var_y.
-
-Route-level migration distance or mean speed cannot substitute for directional
-component variance.
+Route-level migration distance or group-average speed cannot substitute for
+those fixed-interval moments.
 
 ### Climate-coordinate velocity v
 
@@ -112,9 +117,12 @@ Current status:
 
     NOT YET IDENTIFIED ON THE MODEL TIME SCALE.
 
-Published group summaries show strong phase compression, but several group
-means cross zero between migration start and end. A sign reversal is
-incompatible with the simple one-step monotone inverse
+Published group summaries show strong phase compression, but that compression
+is produced in part by movement-speed and stopover adjustment and therefore is
+not automatically the independent timing-axis parameter h.
+
+Several group means also cross zero between migration start and end. A sign
+reversal is incompatible with the simple one-step monotone timing-axis inverse
 
     e_after = exp(-h) e_before.
 
@@ -124,7 +132,9 @@ whole-route ratio 11/20 is monotone, but it spans an entire migration rather
 than one frozen decision interval. It therefore must not be inserted directly
 as a per-generation PAYOFF-B h.
 
-Individual or interval-level residual transitions are required.
+Individual or interval-level residual transitions are required, and h is only
+licensed if the timing contribution is independently separated from movement
+and other tracking pathways.
 
 ### Phenology limit z_max
 
@@ -186,15 +196,18 @@ Once the public source file is available locally:
 2. determine whether records are animal-year summaries or interval-level
    movements;
 3. freeze one decision interval;
-4. derive movement displacement components in a declared route coordinate
-   system;
-5. estimate Var_x and Var_y on that interval;
-6. construct interval-level Days-From-Peak residual transitions;
-7. test the first-order residual-correction assumption before estimating h;
-8. estimate route-specific green-wave speed and environmental gradient in
-   compatible units;
-9. run `parameterize_migration_phenology_tracking.py`;
-10. leave fitness terms unfilled unless matched growth contrasts are available.
+4. project coordinates into declared metric x/y units;
+5. rotate steps into climate-axis and transverse components;
+6. estimate fixed-interval component means and second moments;
+7. audit the symmetric kernel and, when directional drift is present, the
+   directional kernel;
+8. construct interval-level Days-From-Peak residual transitions;
+9. treat phase compression as a movement/controller diagnostic unless the
+   timing axis is independently isolated;
+10. estimate route-specific green-wave speed and environmental gradient in
+    compatible units;
+11. run the interval and directional parameterization CLIs;
+12. leave fitness terms unfilled unless matched growth contrasts are available.
 
 ## 7. Claim boundary
 
