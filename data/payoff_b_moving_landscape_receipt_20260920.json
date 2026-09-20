@@ -126,5 +126,64 @@
     "unilateral_mismatch_b": 3.188946176164034,
     "blocked": true
   },
-  "claim_boundary": "synthetic explicit-landscape mechanisms and finite-grid frontiers are not natural prevalence estimates or calibrated ecological thresholds"
+  "claim_boundary": "synthetic explicit-landscape mechanisms and finite-grid frontiers are not natural prevalence estimates or calibrated ecological thresholds",
+  "boundary_robustness": {
+    "workflow_run": 35473486671,
+    "artifact_id": 10593862087,
+    "sha256": "e5bc68c851042b78b14425f3d714446863c4041b5293628a181b254593c8e3da",
+    "by_retention": [
+      {
+        "retention": 0,
+        "cells": 36,
+        "barriers": 29,
+        "persistence_rescues": 21,
+        "mean_gap": 0.405018051943
+      },
+      {
+        "retention": 0.5,
+        "cells": 36,
+        "barriers": 29,
+        "persistence_rescues": 21,
+        "mean_gap": 0.399858752657
+      },
+      {
+        "retention": 1,
+        "cells": 36,
+        "barriers": 30,
+        "persistence_rescues": 21,
+        "mean_gap": 0.39466866966
+      }
+    ],
+    "retained_interpretation": "persistence-rescue count unchanged across absorbing/intermediate/reflecting edges"
+  },
+  "stochastic_patch_validation": {
+    "workflow_run": 35473605692,
+    "artifact_id": 10594116842,
+    "sha256": "3947f30e4b157723fdb3c74b10d5efcba88c0c72d14d53e5544553e9265f9f57",
+    "replicates_per_boundary": 128,
+    "by_retention": [
+      {
+        "retention": 0,
+        "barrier": true,
+        "accessibility_gap": 1.1387545552,
+        "local_persistence": 0,
+        "matched_persistence": 1
+      },
+      {
+        "retention": 0.5,
+        "barrier": true,
+        "accessibility_gap": 1.12785777037,
+        "local_persistence": 0,
+        "matched_persistence": 1
+      },
+      {
+        "retention": 1,
+        "barrier": true,
+        "accessibility_gap": 1.11842698471,
+        "local_persistence": 0,
+        "matched_persistence": 1
+      }
+    ],
+    "retained_interpretation": "canonical rescue persists under integer Poisson patch demography"
+  }
 }
