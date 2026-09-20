@@ -416,7 +416,8 @@ Read in this order:
 theory/MIGRATION_PHENOLOGY_TRACKING.md
 -> docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md
 -> docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md
--> docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md.
+-> docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md
+-> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md.
 ```
 
 The estimand hierarchy is:
@@ -444,6 +445,16 @@ The canonical explicit-landscape results now include:
 
 These are synthetic mechanism results and should not be read as calibrated
 natural climate-speed or corridor-width thresholds.
+
+The empirical parameterization handoff then separates directly recoverable
+tracking quantities from still-unidentified fitness terms. Under the declared
+nearest-neighbor kernel, observed movement component variances identify the
+migration rate and x/y movement-weight ratio exactly; environmental wave speed
+and spatial gradient identify the model climate velocity; and a first-order
+phenology correction fraction identifies the phenology response rate. Baseline
+growth, mismatch strengths, interaction strength and tracking costs require
+independent fitness contrasts and are deliberately not imputed from movement
+data.
 
 ---
 
