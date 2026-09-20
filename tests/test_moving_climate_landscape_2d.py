@@ -9,6 +9,7 @@ from src.moving_climate_landscape_2d import (
     grid_dispersal_2d,
     multiple_vertical_barriers_habitat,
     optimize_matched_2d_strategy,
+    phenology_only_capacity_velocity_ceiling,
     simulate_moving_landscape_2d_pair,
     vertical_barrier_habitat,
 )
@@ -565,4 +566,88 @@ def test_distribution_overlap_term_detects_same_centroid_spatial_segregation():
     assert (
         aware.mean_joint_growth
         < baseline.mean_joint_growth - 0.49
+    )
+
+
+def test_temporal_bypass_capacity_ceiling_brackets_canonical_transition():
+    width = 31
+    height = 15
+    center_x = width // 2
+    barrier_x = center_x + 3
+    parameters = SpeciesTrackingParameters(
+        abiotic_strength=1.0,
+        interaction_strength=0.25,
+        migration_cost=0.03,
+        phenology_cost=0.03,
+        baseline_growth=0.30,
+    )
+    scenario = MovingLandscape2DScenario(
+        width=width,
+        height=height,
+        climate_velocity=0.0,
+        max_abs_phenology_shift=4.0,
+        steps=100,
+        burn_in=20,
+        species_a=parameters,
+        species_b=parameters,
+    )
+    accessible = tuple(
+        scenario.index(x_index, y_index)
+        for x_index in range(barrier_x)
+        for y_index in range(height)
+    )
+    ceiling = phenology_only_capacity_velocity_ceiling(
+        scenario,
+        accessible,
+        phenology_rate=1.0 / 3.0,
+    )
+
+    # Best-case terminal capacity predicts the observed canonical switch:
+    # phenology-only is selected at v=0.05, while migration re-enters by v=0.06.
+    assert 0.05 < ceiling < 0.06
+
+
+def test_temporal_bypass_capacity_increases_with_phenology_limit():
+    width = 15
+    height = 9
+    barrier_x = width // 2 + 2
+    parameters = SpeciesTrackingParameters(
+        abiotic_strength=1.0,
+        interaction_strength=0.0,
+        migration_cost=0.03,
+        phenology_cost=0.03,
+        baseline_growth=0.30,
+    )
+
+    ceilings = []
+    for limit in (0.0, 2.0, 4.0):
+        scenario = MovingLandscape2DScenario(
+            width=width,
+            height=height,
+            climate_velocity=0.0,
+            max_abs_phenology_shift=limit,
+            steps=100,
+            burn_in=20,
+            species_a=parameters,
+            species_b=parameters,
+        )
+        accessible = tuple(
+            scenario.index(x_index, y_index)
+            for x_index in range(barrier_x)
+            for y_index in range(height)
+        )
+        ceilings.append(
+            phenology_only_capacity_velocity_ceiling(
+                scenario,
+                accessible,
+                phenology_rate=0.25,
+            )
+        )
+
+    assert ceilings[0] < ceilings[1] < ceilings[2]
+    assert isclose(
+        ceilings[2] - ceilings[0],
+        4.0 / 100.0,
+        rel_tol=1e-12,
+        abs_tol=1e-12,
     )
