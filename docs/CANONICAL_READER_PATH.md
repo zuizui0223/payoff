@@ -417,8 +417,10 @@ theory/MIGRATION_PHENOLOGY_TRACKING.md
 -> docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md
 -> docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md
 -> docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md
--> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md
+-> theory/CLOSED_LOOP_MOVEMENT_PHENOLOGY_TRACKING.md
+-> docs/PAYOFF_B_CLOSED_LOOP_TRACKING_RESULTS_20260920.md
 -> docs/PAYOFF_B_AIKENS_2022_PHASE_CONTROLLER_RECEIPT.md
+-> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md
 -> docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md.
 ```
 
@@ -467,6 +469,18 @@ controller diagnostic, not silently relabeled as h.
 Baseline growth, mismatch strengths, interaction strength and tracking costs
 require independent matched fitness contrasts and are deliberately not imputed
 from movement data.
+
+The closed-loop tracking layer adds an exact local controller beneath the
+explicit landscape. If q_m is movement-mediated feedback and q_h is
+timing-mediated feedback, local mismatch obeys
+
+    e_(t+1) = (1-q_m-q_h)e_t + r.
+
+Thus movement and timing feedback are exactly substitutable in the local linear
+null through their total restoring gain K=q_m+q_h. Stability requires 0<K<2;
+quadratic controller costs determine how the required gain is allocated between
+the two channels. This is the analytic null against which route geometry,
+finite timing capacity, and partner interaction break exact substitutability.
 
 The Aikens 2022 controller receipt adds a different empirical layer before
 full parameterization. It separates
