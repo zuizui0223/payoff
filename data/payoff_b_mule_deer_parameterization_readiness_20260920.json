@@ -31,10 +31,10 @@
     }
   },
   "parameter_status": {
-    "migration_rate": "not identified; needs component displacement variances on a frozen interval",
-    "anisotropy": "not identified; needs Var_x and Var_y",
+    "migration_rate": "not identified from published summary; raw projected fixed-interval GPS moments can identify the directional one-step kernel",
+    "anisotropy": "not identified from published summary; raw fixed-interval component second moments identify x/y weights and means identify directional biases",
     "climate_velocity": "not identified; needs compatible spatial gradient and green-wave speed",
-    "phenology_rate": "not identified on model time scale; published start/end group summaries are whole-route aggregates and some cross zero",
+    "phenology_rate": "not identified; phase compression includes movement/stopover correction and h requires timing-axis isolation on the model decision interval",
     "phenology_limit": "not identified; starting mismatch support is not response-capacity support",
     "fitness_terms": "not identified from movement summary"
   },
@@ -43,5 +43,10 @@
     "DIRECT_TRACKING_CALIBRATION_PENDING_SOURCE_FILE_INGESTION",
     "FITNESS_PARAMETERIZATION_NOT_IDENTIFIED"
   ],
-  "ingestion_tool": "scripts/inspect_mule_deer_source_csv.py"
+  "ingestion_tool": "scripts/inspect_mule_deer_source_csv.py",
+  "ingestion_pipeline": [
+    "scripts/inspect_mule_deer_source_csv.py",
+    "scripts/audit_interval_tracking_calibration.py",
+    "scripts/parameterize_directional_movement_kernel.py"
+  ]
 }
