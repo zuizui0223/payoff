@@ -86,6 +86,7 @@ class IntervalCalibrationAudit:
     target_interval_seconds: float
     interval_tolerance_fraction: float
     climate_axis_angle_degrees: float
+    patch_spacing: float
     retained_intervals: int
     movement: MovementIntervalAudit
     phase: PhaseCompressionAudit
@@ -402,6 +403,7 @@ def audit_interval_calibration(
         target_interval_seconds=target_interval_seconds,
         interval_tolerance_fraction=interval_tolerance_fraction,
         climate_axis_angle_degrees=climate_axis_angle_degrees,
+        patch_spacing=patch_spacing,
         retained_intervals=len(steps),
         movement=movement,
         phase=phase,
