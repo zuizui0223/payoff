@@ -58,6 +58,59 @@ continuous movement kernel is required.
 
 When both variances are zero, m=0 is identified but the x/y anisotropy is not.
 
+### Directional movement extension
+
+Migratory GPS tracks can have non-zero mean displacement on the declared
+decision interval. That does not have to be forced into the symmetric kernel.
+
+The 2D simulator now also allows directional biases
+
+    b_x, b_y in [-1,1].
+
+For a biased nearest-neighbor kernel,
+
+    E[X]
+    = f s_x b_x d,
+
+    E[X^2]
+    = f s_x d^2,
+
+and equivalently for Y. Therefore fixed-interval projected moments identify
+
+    f
+    = [E[X^2]+E[Y^2]] / d^2,
+
+    b_x
+    = E[X] d / E[X^2],
+
+    b_y
+    = E[Y] d / E[Y^2].
+
+The previous symmetric kernel is the special case
+
+    b_x=b_y=0.
+
+This inverse is implemented in
+
+    scripts/parameterize_directional_movement_kernel.py.
+
+If an identified bias lies outside [-1,1], or if the total second moment exceeds
+one-patch support, the one-step kernel is rejected rather than clipped.
+
+### Projected coordinates are mandatory
+
+Longitude/latitude degrees are not accepted as metric x/y for the exact
+movement inverse. The source table must first be projected into declared
+distance units.
+
+The source-file inspector distinguishes:
+
+    metric x/y columns
+    versus
+    geographic longitude/latitude.
+
+A lon/lat-only file is therefore not marked movement-ready.
+
 ## 2. Phenology response
 
 The model uses
@@ -82,6 +135,27 @@ so
 Sign reversal, amplification or overshoot are rejected by this exact inverse.
 They indicate that the simple first-order response is not adequate for that
 transition.
+
+### Phase-error compression is not automatically h
+
+For migratory systems, a Days-From-Peak residual can shrink because the animal
+changes movement speed, stopover use, route, or timing. Therefore
+
+    phase-error compression
+    !=
+    timing-axis phenology rate h.
+
+The interval-level audit
+
+    scripts/audit_interval_tracking_calibration.py
+
+reports phase-error log compression descriptively, but licenses h only when the
+timing axis has been independently isolated from spatial movement and other
+correction pathways.
+
+This distinction is especially important for the Ortega et al. mule-deer
+system, where the published mechanism is movement-speed and stopover adjustment
+along the green wave.
 
 ## 3. Moving-environment velocity
 
@@ -154,14 +228,17 @@ penalty model rather than silently truncate the coefficient.
 A minimum direct tracking receipt should declare:
 
 1. time unit and generation/decision interval;
-2. spatial coordinate system;
+2. projected metric spatial coordinate system;
 3. patch spacing d;
-4. movement displacement variance along x and y;
-5. environmental gradient g in compatible units;
-6. environmental/resource-wave speed c;
-7. phenology residual before and after adjustment, or q_h directly;
-8. phenology scale s;
-9. predeclared maximum supported phenology shift z_max.
+4. fixed-interval movement component means and second moments, or variances when
+   a symmetric kernel is independently justified;
+5. climate-axis orientation used to rotate movement components;
+6. environmental gradient g in compatible units;
+7. environmental/resource-wave speed c;
+8. interval-level phase residuals;
+9. whether the timing axis is independently isolated from movement;
+10. phenology scale s;
+11. predeclared maximum supported phenology shift z_max.
 
 Then run, for example:
 
@@ -177,6 +254,21 @@ Then run, for example:
 
 The JSON output explicitly lists the directly identified subset and the terms
 that remain unidentified.
+
+For interval/GPS-level data, first run
+
+    python scripts/inspect_mule_deer_source_csv.py <source.csv>
+
+and then, only if projected fixed-interval columns are present,
+
+    python scripts/audit_interval_tracking_calibration.py <source.csv> \
+      --target-interval-hours <hours> \
+      --patch-spacing <distance> \
+      --climate-axis-angle-degrees <angle>.
+
+The second command audits both the symmetric and directional movement kernels.
+It also reports phase-error compression while keeping the timing-axis h
+unlicensed unless explicitly isolated.
 
 ## 7. Relationship to the mule-deer / bird phase-locking programme
 
