@@ -152,6 +152,60 @@ Mutation, drift, demography, spatial structure, assortative interaction, linkage
 
 `eta>0` creates a coordination threshold from current frequency dependence. `C_SD,C_DS>0` create path dependence from transition costs. Either can occur without the other.
 
+### Moving-environment tracking results are synthetic mechanism claims
+
+The migration–phenology extension introduces a separate family of assumptions:
+
+```text
+- directional environmental forcing,
+- heritable migration and phenology response rates,
+- finite phenological shift capacity,
+- declared movement costs,
+- partner-matching penalties,
+- explicit finite spatial landscapes,
+- synthetic habitat resistance / corridor geometry,
+- declared demographic update rules.
+```
+
+The resulting persistence frontiers, corridor-width comparisons, temporal
+bypass ceilings, coordination-barrier frequencies, and rescue frequencies are
+design-specific model quantities. They are not empirical climate velocities,
+natural corridor thresholds, or prevalence estimates.
+
+In particular:
+
+- a larger phenological limit expanding the sampled persistence frontier does
+  not imply a universal amount of climate tolerance per calendar-day shift;
+- a coordination barrier in the model does not establish that real interacting
+  species are coevolutionarily trapped;
+- the 2D regular-grid and zigzag-route results do not identify real landscape
+  resistance or movement pathways;
+- the optional Bhattacharyya overlap penalty is a robustness device, not an
+  empirical interaction kernel;
+- interaction-mediated synchronization can be beneficial or maladaptive
+  depending on forcing, so it should not be described as universally
+  stabilizing or destabilizing.
+
+Preferred:
+
+> In the declared moving-landscape model, phenological capacity buffers spatial
+> tracking demand over a finite range, while interaction-mediated matching can
+> create local coordination barriers between jointly valuable tracking
+> strategies.
+
+Avoid:
+
+> Phenology universally rescues fragmented populations from climate change.
+
+Preferred:
+
+> Across the sampled synthetic 2D designs, coordination barriers persist under
+> mutation-step refinement and alternative spatial-overlap penalties.
+
+Avoid:
+
+> Most real mutualists are trapped by coordination barriers.
+
 ## Appropriate manuscript language
 
 Preferred:
