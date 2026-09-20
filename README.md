@@ -674,6 +674,18 @@ raising the phenology limit from 0 to 4 still removes about 76% of the penalty
 magnitude across the sampled anisotropy levels. No anisotropy-specific
 persistence rescue is claimed.
 
+The fixed-rate tracking layer now also has an exact closed-loop
+controller extension in
+[theory/CLOSED_LOOP_MOVEMENT_PHENOLOGY_TRACKING.md](theory/CLOSED_LOOP_MOVEMENT_PHENOLOGY_TRACKING.md),
+with frozen results in
+[docs/PAYOFF_B_CLOSED_LOOP_TRACKING_RESULTS_20260920.md](docs/PAYOFF_B_CLOSED_LOOP_TRACKING_RESULTS_20260920.md).
+If q_m is mismatch-dependent movement feedback and q_h is timing feedback, the
+local recurrence depends only on K=q_m+q_h. Stability requires 0<K<2; at fixed
+K, quadratic costs allocate more restoring effort to the cheaper axis. Under
+equal costs the unconstrained optimum becomes dynamically and phenologically
+infeasible at sufficiently strong forcing, so stronger feedback is not
+universally better.
+
 The empirical bridge is now explicit in
 [docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md).
 Under the declared one-step movement family, projected fixed-interval component
