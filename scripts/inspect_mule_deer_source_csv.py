@@ -41,19 +41,30 @@ ALIASES = {
         "time",
         "date",
     ),
-    "x": (
+    "x_metric": (
         "x",
         "easting",
-        "longitude",
-        "lon",
         "utm_x",
+        "x_m",
+        "x_meter",
+        "x_meters",
     ),
-    "y": (
+    "y_metric": (
         "y",
         "northing",
+        "utm_y",
+        "y_m",
+        "y_meter",
+        "y_meters",
+    ),
+    "longitude": (
+        "longitude",
+        "lon",
+        "long",
+    ),
+    "latitude": (
         "latitude",
         "lat",
-        "utm_y",
     ),
     "days_from_peak": (
         "days_from_peak",
@@ -194,8 +205,8 @@ def calibration_readiness(
         interval_like
         and resolved["animal_id"] is not None
         and resolved["timestamp"] is not None
-        and resolved["x"] is not None
-        and resolved["y"] is not None
+        and resolved["x_metric"] is not None
+        and resolved["y_metric"] is not None
     )
 
     phenology_ready = (
@@ -222,10 +233,24 @@ def calibration_readiness(
         )
     if resolved["timestamp"] is None:
         blockers.append("no timestamp column identified")
-    if resolved["x"] is None or resolved["y"] is None:
-        blockers.append(
-            "no 2D position pair identified for component step variances"
-        )
+    if (
+        resolved["x_metric"] is None
+        or resolved["y_metric"] is None
+    ):
+        if (
+            resolved["longitude"] is not None
+            and resolved["latitude"] is not None
+        ):
+            blockers.append(
+                "geographic lon/lat are present but the exact movement inverse "
+                "requires a declared metric projection before component "
+                "step variances are computed"
+            )
+        else:
+            blockers.append(
+                "no metric 2D position pair identified for component step "
+                "variances"
+            )
     if resolved["days_from_peak"] is None:
         blockers.append(
             "no interval-level Days-From-Peak residual column identified"
@@ -278,8 +303,8 @@ def main() -> None:
         "grain": grain,
         "readiness": readiness,
         "claim_boundary": (
-            "column/grain audit only; does not estimate tracking parameters "
-            "unless the declared fixed-interval inputs are present"
+            "column/grain audit only; movement readiness requires metric "
+            "projected x/y coordinates, not unprojected longitude/latitude"
         ),
     }
 
