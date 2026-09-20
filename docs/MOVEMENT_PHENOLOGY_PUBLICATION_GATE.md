@@ -134,8 +134,17 @@ Current:
 literature-supported boundary evidence:
   PASS
 
-harmonized quantitative boundary test:
-  DESIRABLE, NOT YET REQUIRED FOR GEB
+harmonized quantitative actuation test:
+  PASS / PARTIAL
+
+industrial mule deer:
+  large-development population has lower registered control permeability G
+  primary large-population shift beta = -0.476, p = 0.017
+  qualitative contrast stable across all registered near/far thresholds
+
+stronger longitudinal deterioration prediction:
+  NOT SUPPORTED
+  year × large-development p = 0.327
 ~~~
 
 ## Gate E — novelty
@@ -250,7 +259,7 @@ Internal promotion criterion:
 three-taxon direct phase retention          PASS
 prospective third-taxon test                PASS
 cross-system explanatory principle          OPEN
-quantitative perturbation prediction        OPEN / PARTIAL
+quantitative perturbation prediction        PARTIAL PASS
 strong novelty audit                        OPEN
 broad conceptual gain beyond synthesis      OPEN
 ~~~
