@@ -51,6 +51,17 @@ jobs:
       - run: python scripts/migration_phenology_2d_gate_audit.py --interaction-strength 1.0 --climate-velocity 0.06 --phenology-limit 4 --width 31 --height 15 --first-wall-offset 3 --second-wall-offset 7 --detour-offset 5 --gap-width 1 --migration-cost 0.10 --phenology-cost 0.02 --baseline-growth 0.35 --initial-total-abundance 400 --local-carrying-capacity 80 --density-coefficient 0.35 --steps 100 --burn-in 20 --resident-migration 0.2 --resident-phenology 0 --neighbor-migration 0.2 --neighbor-phenology 0.2
       - run: python scripts/migration_phenology_2d_anisotropy.py --y-weight-ratios 1,0.25 --climate-velocities 0.05 --phenology-limits 0,4 --width 15 --height 9 --first-wall-offset 2 --second-wall-offset 5 --detour-offset 3 --gap-width 1 --initial-total-abundance 120 --local-carrying-capacity 40 --steps 40 --burn-in 10 --migration-points 3 --phenology-points 3 --output outputs/ci_payoff_b_2d_anisotropy.csv
       - run: python scripts/parameterize_migration_phenology_tracking.py --variance-x 0.08 --variance-y 0.02 --patch-spacing 0.5 --spatial-gradient 0.2 --wave-speed 0.3 --phenology-correction-fraction 0.25 --phenology-scale 0.1 --max-abs-phenology-shift 20 --output outputs/ci_payoff_b_empirical_tracking_parameterization.json
+      - run: python scripts/parameterize_directional_movement_kernel.py --mean-x 0.2 --mean-y 0 --second-moment-x 0.5 --second-moment-y 0.1 --patch-spacing 1 --output outputs/ci_payoff_b_directional_movement_kernel.json
+      - run: |
+          cat > outputs/ci_interval_tracking.csv <<'EOF'
+          animal_id,timestamp,utm_x,utm_y,days_from_peak
+          A,2020-04-01T00:00:00,0,0,8
+          A,2020-04-01T01:00:00,1,0,4
+          A,2020-04-01T02:00:00,0,0,2
+          A,2020-04-01T03:00:00,1,0,1
+          A,2020-04-01T04:00:00,0,0,0.5
+          EOF
+          python scripts/audit_interval_tracking_calibration.py outputs/ci_interval_tracking.csv --target-interval-hours 1 --patch-spacing 2 --output outputs/ci_interval_tracking_audit.json
       - run: python scripts/parameterize_migration_phenology_fitness.py --baseline-growth 0.4 --abiotic-growth 0.25 --abiotic-mismatch 0.5 --interaction-growth 0.336 --interaction-mismatch 0.4 --migration-growth 0.364 --migration-rate 0.6 --phenology-growth 0.3755 --phenology-rate 0.7 --joint-growth 0.3645 --joint-migration-rate 0.4 --joint-phenology-rate 0.5 --output outputs/ci_payoff_b_tracking_fitness_parameterization.json
       - run: python scripts/audit_mule_deer_phase_summary.py
       - run: |
