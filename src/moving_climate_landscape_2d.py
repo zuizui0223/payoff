@@ -1127,3 +1127,83 @@ def corridor_persistence_frontier(
         )
 
     return out
+
+
+
+def phenology_only_capacity_velocity_ceiling(
+    scenario: MovingLandscape2DScenario,
+    accessible_indices: tuple[int, ...] | list[int],
+    *,
+    phenology_rate: float,
+    parameters: SpeciesTrackingParameters | None = None,
+) -> float:
+    """Best-case terminal velocity ceiling without spatial dispersal.
+
+    The lineage is constrained to the declared accessible cells and allowed to
+    saturate its phenological shift at +z_max. The best accessible spatial
+    climate coordinate supplies the spatial capacity. The remaining mismatch
+    tolerated at non-negative low-density growth is
+
+        sqrt(2 * (baseline - phenology_cost*h^2) / abiotic_strength).
+
+    Dividing total climate-equivalent capacity by the finite horizon gives a
+    diagnostic velocity ceiling. This is not a persistence theorem: transient
+    population inertia and imperfect phenological tracking can move the
+    realized boundary around this terminal best-case value.
+    """
+
+    if parameters is None:
+        parameters = scenario.species_a
+    if phenology_rate < 0.0 or not isfinite(phenology_rate):
+        raise ValueError(
+            "phenology_rate must be non-negative and finite"
+        )
+    indices = tuple(accessible_indices)
+    if not indices:
+        raise ValueError("accessible_indices cannot be empty")
+
+    quality = scenario.quality
+    climate_coordinates = []
+    for index in indices:
+        if not 0 <= index < scenario.width * scenario.height:
+            raise ValueError("accessible cell index out of bounds")
+        if quality[index] > 0.0:
+            climate_coordinates.append(
+                scenario.climate_coordinate(index)
+            )
+    if not climate_coordinates:
+        raise ValueError("no habitable accessible cells")
+
+    architecture_cost = (
+        parameters.phenology_cost
+        * phenology_rate
+        * phenology_rate
+    )
+    growth_margin = (
+        parameters.baseline_growth - architecture_cost
+    )
+    if growth_margin < 0.0:
+        return float("-inf")
+
+    if parameters.abiotic_strength == 0.0:
+        return float("inf")
+
+    mismatch_tolerance = sqrt(
+        2.0
+        * growth_margin
+        / parameters.abiotic_strength
+    )
+    spatial_capacity = (
+        scenario.spatial_gradient
+        * max(climate_coordinates)
+    )
+    temporal_capacity = (
+        scenario.phenology_scale
+        * scenario.max_abs_phenology_shift
+    )
+    total_capacity = (
+        spatial_capacity
+        + temporal_capacity
+        + mismatch_tolerance
+    )
+    return total_capacity / scenario.steps
