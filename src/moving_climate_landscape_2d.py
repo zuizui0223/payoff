@@ -41,6 +41,8 @@ class MovingLandscape2DScenario:
     barrier_retention: float = 1.0
     dispersal_x_weight: float = 1.0
     dispersal_y_weight: float = 1.0
+    dispersal_x_bias: float = 0.0
+    dispersal_y_bias: float = 0.0
     distribution_overlap_scale: float = 0.0
     monitor_climate_coordinate: float | None = None
     habitat_quality: tuple[float, ...] | None = None
@@ -74,6 +76,8 @@ class MovingLandscape2DScenario:
             "barrier_retention",
             "dispersal_x_weight",
             "dispersal_y_weight",
+            "dispersal_x_bias",
+            "dispersal_y_bias",
             "distribution_overlap_scale",
             "climate_velocity",
             "climate_angle_degrees",
@@ -109,6 +113,10 @@ class MovingLandscape2DScenario:
             raise ValueError("dispersal_y_weight must be non-negative")
         if self.dispersal_x_weight + self.dispersal_y_weight <= 0.0:
             raise ValueError("at least one dispersal axis must have positive weight")
+        if not -1.0 <= self.dispersal_x_bias <= 1.0:
+            raise ValueError("dispersal_x_bias must lie in [-1,1]")
+        if not -1.0 <= self.dispersal_y_bias <= 1.0:
+            raise ValueError("dispersal_y_bias must lie in [-1,1]")
         if self.distribution_overlap_scale < 0.0:
             raise ValueError(
                 "distribution_overlap_scale must be non-negative"
@@ -416,17 +424,25 @@ def grid_dispersal_2d(
         scenario.dispersal_x_weight
         + scenario.dispersal_y_weight
     )
-    x_direction_fraction = (
-        0.5 * scenario.dispersal_x_weight / axis_total
+    x_axis_fraction = (
+        scenario.dispersal_x_weight / axis_total
     )
-    y_direction_fraction = (
-        0.5 * scenario.dispersal_y_weight / axis_total
+    y_axis_fraction = (
+        scenario.dispersal_y_weight / axis_total
     )
     direction_fractions = (
-        x_direction_fraction,
-        x_direction_fraction,
-        y_direction_fraction,
-        y_direction_fraction,
+        0.5
+        * x_axis_fraction
+        * (1.0 - scenario.dispersal_x_bias),
+        0.5
+        * x_axis_fraction
+        * (1.0 + scenario.dispersal_x_bias),
+        0.5
+        * y_axis_fraction
+        * (1.0 - scenario.dispersal_y_bias),
+        0.5
+        * y_axis_fraction
+        * (1.0 + scenario.dispersal_y_bias),
     )
 
     for index, value in enumerate(abundance):
