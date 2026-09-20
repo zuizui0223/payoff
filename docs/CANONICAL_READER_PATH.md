@@ -449,22 +449,38 @@ natural climate-speed or corridor-width thresholds.
 
 The empirical parameterization handoff then separates directly recoverable
 tracking quantities from still-unidentified fitness terms. Under the declared
-nearest-neighbor kernel, observed movement component variances identify the
-migration rate and x/y movement-weight ratio exactly; environmental wave speed
-and spatial gradient identify the model climate velocity; and a first-order
-phenology correction fraction identifies the phenology response rate. Baseline
-growth, mismatch strengths, interaction strength and tracking costs require
-independent fitness contrasts and are deliberately not imputed from movement
-data.
+nearest-neighbor family:
+
+- mean-zero projected component second moments identify migration rate and x/y
+  movement weights for the symmetric kernel;
+- projected fixed-interval means plus second moments additionally identify x/y
+  directional biases for the biased kernel;
+- environmental wave speed and spatial gradient identify model climate
+  velocity.
+
+A first-order phase-residual inverse identifies the independent phenology rate
+only when the timing axis is isolated from spatial movement and other tracking
+pathways. Generic Days-From-Peak compression is otherwise retained as a
+controller diagnostic, not silently relabeled as h.
+
+Baseline growth, mismatch strengths, interaction strength and tracking costs
+require independent matched fitness contrasts and are deliberately not imputed
+from movement data.
 
 The mule-deer readiness receipt then applies that refusal logic to a named
 public system. The published Ortega et al. group summaries establish strong
 en-route behavioral compensation, but they do not by themselves license the
-current per-step kernel parameters. Early and mid group means cross the
-Days-From-Peak sign boundary; the late group is monotone but spans a whole
-migration rather than one frozen decision interval. The repository therefore
-keeps the named-system status at source-file ingestion pending instead of
-turning group summaries into a pseudo-calibration.
+current per-step kernel parameters. The interval pipeline now has a directional
+movement inverse suitable for raw projected GPS moments, but the public summary
+does not contain those fixed-interval means and second moments.
+
+Early and mid group Days-From-Peak means cross the sign boundary; the late group
+is monotone but spans a whole migration rather than one frozen decision
+interval. Because the observed compensation is itself partly mediated by
+movement speed and stopover behavior, none of those group summaries is inserted
+as the independent timing-axis h. The repository therefore keeps the
+named-system status at source-file ingestion pending instead of turning
+published summaries into a pseudo-calibration.
 
 ---
 
