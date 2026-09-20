@@ -20,8 +20,10 @@ from statistics import mean, median
 from typing import Iterable
 
 from src.tracking_empirical_parameterization import (
+    DirectionalMovementKernelEstimate,
     MovementKernelEstimate,
     audit_residual_compression,
+    infer_directional_movement_kernel_from_moments,
     infer_movement_kernel_from_component_variances,
 )
 
@@ -59,6 +61,9 @@ class MovementIntervalAudit:
     direct_inverse_licensed: bool
     inverse_failure: str | None
     movement_kernel: MovementKernelEstimate | None
+    directional_inverse_licensed: bool
+    directional_inverse_failure: str | None
+    directional_movement_kernel: DirectionalMovementKernelEstimate | None
 
 
 @dataclass(frozen=True)
@@ -222,6 +227,9 @@ def audit_movement_intervals(
         and ratio_trans <= symmetry_tolerance
     )
 
+    second_long = _mean_square(longitudinal)
+    second_trans = _mean_square(transverse)
+
     kernel: MovementKernelEstimate | None = None
     failure: str | None = None
     licensed = False
@@ -236,13 +244,30 @@ def audit_movement_intervals(
             # For a mean-zero declared kernel, the expected squared component
             # displacement equals the component variance.
             kernel = infer_movement_kernel_from_component_variances(
-                _mean_square(longitudinal),
-                _mean_square(transverse),
+                second_long,
+                second_trans,
                 patch_spacing,
             )
             licensed = True
         except ValueError as exc:
             failure = str(exc)
+
+    directional_kernel: DirectionalMovementKernelEstimate | None = None
+    directional_failure: str | None = None
+    directional_licensed = False
+    try:
+        directional_kernel = (
+            infer_directional_movement_kernel_from_moments(
+                mean_long,
+                mean_trans,
+                second_long,
+                second_trans,
+                patch_spacing,
+            )
+        )
+        directional_licensed = True
+    except ValueError as exc:
+        directional_failure = str(exc)
 
     return MovementIntervalAudit(
         intervals=len(rows),
@@ -257,6 +282,9 @@ def audit_movement_intervals(
         direct_inverse_licensed=licensed,
         inverse_failure=failure,
         movement_kernel=kernel,
+        directional_inverse_licensed=directional_licensed,
+        directional_inverse_failure=directional_failure,
+        directional_movement_kernel=directional_kernel,
     )
 
 
