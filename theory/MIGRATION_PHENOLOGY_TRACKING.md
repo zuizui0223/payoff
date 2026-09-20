@@ -10,11 +10,12 @@ shifting seasonal timing, when are those axes substitutes, when is a mixed
 response favored, and when can abiotic tracking succeed while an interaction
 partner is lost?**
 
-The current implementation now has four nested layers: deterministic strategy
-payoffs, mutation-selection occupancy on the two-axis strategy lattice,
-two-species rare-mutation coevolution, and seed-explicit stochastic forcing
-with reproducible sharded sweeps. Explicit density regulation and finite-N
-demographic birth-death noise remain future extensions.
+The current implementation now spans deterministic strategy payoffs,
+mutation-selection occupancy, finite-N weak-mutation evolution, two-species
+coevolution, seed-explicit stochastic forcing, density-regulated demographic
+extinction, explicit one- and two-dimensional moving landscapes, stochastic
+integer patch demography, heterogeneous connectivity geometry, and
+reproducible sharded sweeps.
 
 ## Shared moving demand
 
@@ -400,12 +401,18 @@ Current progression:
 5. reproducible sharded large replicated parameter sweeps — implemented;
 6. density regulation and demographic extinction — implemented;
 7. finite-N weak-mutation evolutionary drift and exact occupancy — implemented;
-8. spatial landscape with local climatic velocity — pending;
-9. coevolutionary phase-boundary mapping at large scale — pilot implemented.
+8. one-dimensional explicit moving landscapes — implemented;
+9. stochastic integer patch demography and alternative dispersal/boundary
+   conditions — implemented;
+10. two-dimensional habitat connectivity and route geometry — implemented;
+11. one- and two-dimensional coevolutionary coordination barriers —
+    implemented and resolution-checked;
+12. empirical landscape parameterization and anisotropic movement kernels —
+    pending.
 
-Stages 2-6 already provide a reproducible route to very large run counts.
-Finite-N evolutionary drift and explicit landscapes are the next scientific
-upgrades rather than prerequisites for basic computational scaling.
+The implemented layers already provide a reproducible route to very large run
+counts. The next major upgrade is empirical parameterization rather than merely
+adding more synthetic computational scale.
 
 ## Explicit moving-climate landscape
 
@@ -490,9 +497,10 @@ collapsed in the abstract model:
     and range-edge compression when the moving envelope approaches the
     landscape boundary.
 
-The current implementation uses deterministic expected abundance with global
-density regulation. It is a spatial mechanism benchmark, not yet a
-fully stochastic patch birth-death metapopulation.
+The deterministic expected-abundance layer remains the evolutionary mechanism
+benchmark, and a separate stochastic integer patch-demography layer provides
+Poisson demographic realizations. Boundary leakage and a long-distance
+dispersal tail have also been checked as robustness extensions.
 
 The phase sweep is
 
@@ -582,6 +590,27 @@ The present 2D implementation is still a synthetic regular grid. It does not
 yet claim realistic landscape resistance, species-specific habitat maps,
 anisotropic dispersal estimated from movement data, or empirical corridor
 widths.
+
+The canonical two-dimensional results are frozen in
+[../docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md](../docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md).
+They retain four results:
+
+1. phenological capacity buffers the low-density growth cost of zigzag spatial
+   routes, reducing the sampled open-to-zigzag penalty by about 83% from
+   z_max=0 to z_max=4;
+2. the temporal bypass has a finite capacity ceiling, after which migration
+   re-enters the optimal tracking strategy;
+3. positive-interaction 2D coevolution retains 22/24 barriers and 21/24
+   persistence rescues at mutation step 0.1 across open, straight and zigzag
+   geometries;
+4. the canonical gate survives an explicit distribution-level overlap penalty
+   and partner-specific cost asymmetry.
+
+The partner-asymmetry experiments further separate two regimes. At moderate
+forcing, interaction synchronizes otherwise quantitatively different partner
+tracking responses while persistence remains possible. At stronger forcing,
+the same synchronization collapses onto a locally accessible migration-only
+attractor and becomes maladaptive.
 
 ## Frozen synthetic evidence
 
