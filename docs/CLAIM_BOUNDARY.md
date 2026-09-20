@@ -184,10 +184,17 @@ In particular:
   empirical interaction kernel;
 - the anisotropic x/y movement weights are synthetic movement-kernel
   parameters unless independently estimated from movement data;
-- the empirical movement inverse
+- the symmetric empirical movement inverse
   `Var_x,Var_y -> migration rate + x/y weight ratio` is exact only for the
-  declared one-step nearest-neighbor kernel; incompatible observed variance is
-  a model-rejection signal, not something to clip;
+  mean-zero declared one-step nearest-neighbor kernel;
+- the directional extension uses projected fixed-interval means and second
+  moments to identify migration rate, x/y weights, and x/y directional biases,
+  but remains conditional on the biased one-step nearest-neighbor family;
+- bias estimates outside [-1,1] or total second moment beyond one-patch support
+  are model-rejection signals, not quantities to clip;
+- phase-error compression caused by movement speed, stopover use, or route
+  adjustment is a tracking-controller observation and does not identify the
+  independent phenology rate h unless the timing axis is separately isolated;
 - the matched growth-contrast inverse for mismatch strengths and tracking costs
   requires a common low-density growth scale and matched background ecology;
 - the Ortega et al. mule-deer system is a named calibration candidate, not a
@@ -304,6 +311,8 @@ EMPIRICAL_FREQUENCY_FEEDBACK_NOT_YET_IDENTIFIED
 FINITE_POPULATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
 RECURRENT_MUTATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
 TRACKING_EMPIRICAL_INVERSE_MAP_IMPLEMENTED
+TRACKING_DIRECTIONAL_MOVEMENT_INVERSE_IMPLEMENTED
+TRACKING_INTERVAL_CALIBRATION_AUDIT_IMPLEMENTED
 TRACKING_NAMED_SYSTEM_CANDIDATE_IDENTIFIED
 TRACKING_NAMED_SYSTEM_CALIBRATION_PENDING_SOURCE_FILE_INGESTION
 TRACKING_FITNESS_PARAMETERIZATION_NOT_IDENTIFIED_FOR_MULE_DEER
