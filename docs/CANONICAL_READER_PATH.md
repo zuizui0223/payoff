@@ -405,6 +405,48 @@ seasonal L,s,K,eta first
 
 ---
 
+## Part VII — moving-environment tracking architecture
+
+This lane is distinct from the static architecture game above. Here migration
+and phenological change are themselves heritable tracking axes.
+
+Read in this order:
+
+```text
+theory/MIGRATION_PHENOLOGY_TRACKING.md
+-> docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md
+-> docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md
+-> docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md.
+```
+
+The estimand hierarchy is:
+
+```text
+moving environmental demand
+-> migration / phenology tracking allocation
+-> partner matching
+-> coordinated value versus unilateral accessibility
+-> demographic persistence
+-> finite-N barrier crossing
+-> explicit route/connectivity effects.
+```
+
+The canonical explicit-landscape results now include:
+
+- a finite phenological buffering window followed by re-entry of spatial
+  tracking;
+- coordination barriers that convert local extinction into coordinated
+  persistence;
+- robustness to mutation-step refinement, boundary leakage, integer patch
+  demography, 2D route geometry, and explicit distributional overlap;
+- an interaction regime that synchronizes partner tracking at moderate forcing
+  but becomes maladaptive synchronization under stronger forcing.
+
+These are synthetic mechanism results and should not be read as calibrated
+natural climate-speed or corridor-width thresholds.
+
+---
+
 ## Boundary atlas
 
 Before writing a manuscript result, consult
