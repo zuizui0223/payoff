@@ -24,7 +24,11 @@
       }
     ],
     "article_source_data_xlsx_kb": 614.3,
-    "current_ingestion_status": "direct Dryad file retrieval returned HTTP 403 in current tool environment"
+    "current_ingestion_status": "web individual-file retrieval returns HTTP 403; container direct fallback has no external DNS resolution",
+    "dryad_file_stream_ids": {
+      "Ortega_et_al_2023_Data.csv": 2189257,
+      "README.md": 2189258
+    }
   },
   "parameter_status": {
     "migration_rate": "not identified; needs component displacement variances on a frozen interval",
@@ -38,5 +42,6 @@
     "PUBLIC_SYSTEM_IDENTIFIED",
     "DIRECT_TRACKING_CALIBRATION_PENDING_SOURCE_FILE_INGESTION",
     "FITNESS_PARAMETERIZATION_NOT_IDENTIFIED"
-  ]
+  ],
+  "ingestion_tool": "scripts/inspect_mule_deer_source_csv.py"
 }
