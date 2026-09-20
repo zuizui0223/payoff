@@ -69,7 +69,12 @@ def test_symmetric_fixed_interval_steps_license_declared_kernel_inverse():
 
 
 def test_directional_migration_fails_symmetric_kernel_gate():
-    displacements = [(1.0, 0.1)] * 20
+    # Valid biased nearest-neighbor kernel realization:
+    # 60% move +1 along x, 40% stay.
+    displacements = (
+        [(1.0, 0.0)] * 12
+        + [(0.0, 0.0)] * 8
+    )
     observations = make_observations(displacements)
     steps = build_fixed_intervals(
         observations,
@@ -77,7 +82,7 @@ def test_directional_migration_fails_symmetric_kernel_gate():
     )
     movement = audit_movement_intervals(
         steps,
-        patch_spacing=2.0,
+        patch_spacing=1.0,
         symmetry_tolerance=0.25,
     )
 
