@@ -408,7 +408,9 @@ Current progression:
 11. one- and two-dimensional coevolutionary coordination barriers —
     implemented and resolution-checked;
 12. anisotropic movement kernels and algebraic observation-to-parameter maps —
-    implemented; named-system calibration remains pending.
+    implemented;
+13. mule-deer named-system readiness / refusal audit — implemented;
+14. interval-level named-system calibration — pending source-file ingestion.
 
 The implemented layers already provide a reproducible route to very large run
 counts. The next major upgrade is empirical parameterization rather than merely
@@ -628,6 +630,16 @@ correction -> phenology response rate. A separate matched-contrast design
 identifies baseline growth, abiotic and interaction mismatch strengths, and
 quadratic tracking costs. These maps are model-conditional and do not yet
 constitute a named-system calibration.
+
+A first named-system readiness audit now targets the Red Desert long-distance
+mule-deer system of Ortega et al. (2023). The study supplies a strong
+movement-phenology compensation example and public Dryad/source-data links,
+but the currently ingested published summaries do not meet the model time-scale
+contract. Group-level early and mid Days-From-Peak means cross the zero
+boundary, and the monotone late-group compression is measured across a whole
+migration rather than a fixed per-step interval. The repository therefore
+records source-file ingestion as pending and refuses to treat those group means
+as calibrated h or m values.
 
 ## Frozen synthetic evidence
 
