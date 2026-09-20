@@ -686,6 +686,17 @@ equal costs the unconstrained optimum becomes dynamically and phenologically
 infeasible at sufficiently strong forcing, so stronger feedback is not
 universally better.
 
+The closed-loop null has also been returned to the explicit 2D landscape via
+a mismatch-dependent movement-rate controller. In the sampled high-forcing
+regime, movement feedback alone improves tracking but remains non-persistent,
+whereas an independent timing response crosses the persistence boundary and
+then substantially reduces the movement effort required by the controller.
+The frozen result is
+[docs/PAYOFF_B_MOVEMENT_FEEDBACK_LANDSCAPE_RESULTS_20260920.md](docs/PAYOFF_B_MOVEMENT_FEEDBACK_LANDSCAPE_RESULTS_20260920.md).
+This is the current clearest demonstration that exact local space-time
+substitutability can become complementarity once spatial mechanics and finite
+capacities are restored.
+
 The empirical bridge is now explicit in
 [docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md).
 Under the declared one-step movement family, projected fixed-interval component
