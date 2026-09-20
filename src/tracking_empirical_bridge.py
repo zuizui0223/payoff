@@ -134,7 +134,7 @@ def controls_from_interval_audit(
         phenology_licensed = False
 
     return EmpiricalTrackingControls(
-        decision_interval_seconds=audit.target_interval_seconds,
+        decision_interval_seconds=audit.model_step_seconds,
         calibration_patch_spacing=audit.patch_spacing,
         climate_axis_angle_degrees=audit.climate_axis_angle_degrees,
         spatial_gradient=spatial_gradient,
