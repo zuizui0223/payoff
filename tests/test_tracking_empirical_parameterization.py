@@ -8,6 +8,8 @@ from src.tracking_empirical_parameterization import (
     climate_velocity_from_wave_speed,
     implied_component_variances,
     identify_tracking_fitness_from_matched_contrasts,
+    implied_directional_movement_moments,
+    infer_directional_movement_kernel_from_moments,
     infer_movement_kernel_from_component_variances,
     infer_phenology_rate_from_residual_pair,
     infer_quadratic_architecture_cost,
@@ -239,3 +241,47 @@ def test_residual_compression_audit_rejects_amplification():
     )
     assert audit.status == "mismatch_amplification"
     assert not audit.monotone_first_order_compatible
+
+
+def test_directional_movement_moment_inverse_round_trip():
+    migration_rate = 0.7
+    x_weight = 0.8
+    y_weight = 0.2
+    x_bias = 0.6
+    y_bias = -0.25
+    patch_spacing = 2.0
+
+    mean_x, mean_y, second_x, second_y = (
+        implied_directional_movement_moments(
+            migration_rate,
+            x_weight,
+            y_weight,
+            x_bias,
+            y_bias,
+            patch_spacing,
+        )
+    )
+    estimate = infer_directional_movement_kernel_from_moments(
+        mean_x,
+        mean_y,
+        second_x,
+        second_y,
+        patch_spacing,
+    )
+
+    assert estimate.migration_rate == pytest.approx(migration_rate)
+    assert estimate.x_weight == pytest.approx(x_weight)
+    assert estimate.y_weight == pytest.approx(y_weight)
+    assert estimate.x_bias == pytest.approx(x_bias)
+    assert estimate.y_bias == pytest.approx(y_bias)
+
+
+def test_directional_inverse_rejects_impossible_mean_given_second_moment():
+    with pytest.raises(ValueError):
+        infer_directional_movement_kernel_from_moments(
+            mean_x=1.0,
+            mean_y=0.0,
+            second_moment_x=0.1,
+            second_moment_y=0.0,
+            patch_spacing=1.0,
+        )
