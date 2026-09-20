@@ -651,3 +651,92 @@ def test_temporal_bypass_capacity_increases_with_phenology_limit():
         rel_tol=1e-12,
         abs_tol=1e-12,
     )
+
+
+def test_anisotropic_dispersal_preserves_mass():
+    scenario = MovingLandscape2DScenario(
+        width=9,
+        height=7,
+        climate_velocity=0.0,
+        dispersal_x_weight=1.0,
+        dispersal_y_weight=0.2,
+        steps=20,
+        burn_in=5,
+    )
+    abundance = tuple(
+        float(index + 1)
+        for index in range(scenario.width * scenario.height)
+    )
+    dispersed = grid_dispersal_2d(
+        abundance,
+        0.8,
+        scenario,
+    )
+    assert isclose(
+        sum(dispersed),
+        sum(abundance),
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+
+
+def test_default_anisotropy_matches_explicit_isotropic_weights():
+    common = dict(
+        width=11,
+        height=9,
+        climate_velocity=0.02,
+        max_abs_phenology_shift=2.0,
+        steps=40,
+        burn_in=10,
+    )
+    default = MovingLandscape2DScenario(**common)
+    explicit = MovingLandscape2DScenario(
+        dispersal_x_weight=1.0,
+        dispersal_y_weight=1.0,
+        **common,
+    )
+    strategy = TrackingStrategy(0.4, 0.2)
+    assert simulate_moving_landscape_2d_pair(
+        strategy,
+        strategy,
+        default,
+    ) == simulate_moving_landscape_2d_pair(
+        strategy,
+        strategy,
+        explicit,
+    )
+
+
+def test_zero_y_weight_prevents_transverse_dispersal():
+    width = 9
+    height = 9
+    scenario = MovingLandscape2DScenario(
+        width=width,
+        height=height,
+        climate_velocity=0.0,
+        dispersal_x_weight=1.0,
+        dispersal_y_weight=0.0,
+        steps=20,
+        burn_in=5,
+    )
+    abundance = [0.0] * (width * height)
+    center_x = width // 2
+    center_y = height // 2
+    abundance[scenario.index(center_x, center_y)] = 100.0
+    dispersed = grid_dispersal_2d(
+        tuple(abundance),
+        1.0,
+        scenario,
+    )
+    assert dispersed[
+        scenario.index(center_x, center_y - 1)
+    ] == 0.0
+    assert dispersed[
+        scenario.index(center_x, center_y + 1)
+    ] == 0.0
+    assert dispersed[
+        scenario.index(center_x - 1, center_y)
+    ] > 0.0
+    assert dispersed[
+        scenario.index(center_x + 1, center_y)
+    ] > 0.0
