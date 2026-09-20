@@ -6,6 +6,7 @@ from src.tracking_empirical_parameterization import (
     build_tracking_parameterization,
     climate_velocity_from_wave_speed,
     implied_component_variances,
+    identify_tracking_fitness_from_matched_contrasts,
     infer_movement_kernel_from_component_variances,
     infer_phenology_rate_from_residual_pair,
     infer_quadratic_architecture_cost,
@@ -131,3 +132,77 @@ def test_build_parameterization_keeps_unidentified_growth_terms_out():
     assert result.dispersal_y_weight == pytest.approx(0.2)
     assert result.phenology_rate > 0.0
     assert result.max_abs_phenology_shift == 20.0
+
+
+def test_matched_growth_contrasts_recover_tracking_fitness_terms():
+    baseline = 0.4
+    abiotic_strength = 1.2
+    interaction_strength = 0.8
+    migration_cost = 0.10
+    phenology_cost = 0.05
+    joint_cost = 0.03
+
+    e = 0.5
+    mismatch = 0.4
+    m = 0.6
+    h = 0.7
+    jm = 0.4
+    jh = 0.5
+
+    estimate = identify_tracking_fitness_from_matched_contrasts(
+        baseline_growth=baseline,
+        abiotic_growth=(
+            baseline - 0.5 * abiotic_strength * e * e
+        ),
+        abiotic_mismatch=e,
+        interaction_growth=(
+            baseline
+            - 0.5 * interaction_strength * mismatch * mismatch
+        ),
+        interaction_mismatch=mismatch,
+        migration_growth=(
+            baseline - migration_cost * m * m
+        ),
+        migration_rate=m,
+        phenology_growth=(
+            baseline - phenology_cost * h * h
+        ),
+        phenology_rate=h,
+        joint_growth=(
+            baseline
+            - migration_cost * jm * jm
+            - phenology_cost * jh * jh
+            - joint_cost * jm * jh
+        ),
+        joint_migration_rate=jm,
+        joint_phenology_rate=jh,
+    )
+
+    assert estimate.baseline_growth == pytest.approx(baseline)
+    assert estimate.abiotic_strength == pytest.approx(
+        abiotic_strength
+    )
+    assert estimate.interaction_strength == pytest.approx(
+        interaction_strength
+    )
+    assert estimate.migration_cost == pytest.approx(migration_cost)
+    assert estimate.phenology_cost == pytest.approx(phenology_cost)
+    assert estimate.joint_cost == pytest.approx(joint_cost)
+
+
+def test_matched_growth_contrasts_reject_negative_penalty_identification():
+    with pytest.raises(ValueError):
+        identify_tracking_fitness_from_matched_contrasts(
+            baseline_growth=0.4,
+            abiotic_growth=0.5,
+            abiotic_mismatch=0.5,
+            interaction_growth=0.3,
+            interaction_mismatch=0.5,
+            migration_growth=0.3,
+            migration_rate=0.5,
+            phenology_growth=0.3,
+            phenology_rate=0.5,
+            joint_growth=0.2,
+            joint_migration_rate=0.5,
+            joint_phenology_rate=0.5,
+        )
