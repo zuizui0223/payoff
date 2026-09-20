@@ -417,7 +417,8 @@ theory/MIGRATION_PHENOLOGY_TRACKING.md
 -> docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md
 -> docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md
 -> docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md
--> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md.
+-> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md
+-> docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md.
 ```
 
 The estimand hierarchy is:
@@ -455,6 +456,15 @@ phenology correction fraction identifies the phenology response rate. Baseline
 growth, mismatch strengths, interaction strength and tracking costs require
 independent fitness contrasts and are deliberately not imputed from movement
 data.
+
+The mule-deer readiness receipt then applies that refusal logic to a named
+public system. The published Ortega et al. group summaries establish strong
+en-route behavioral compensation, but they do not by themselves license the
+current per-step kernel parameters. Early and mid group means cross the
+Days-From-Peak sign boundary; the late group is monotone but spans a whole
+migration rather than one frozen decision interval. The repository therefore
+keeps the named-system status at source-file ingestion pending instead of
+turning group summaries into a pseudo-calibration.
 
 ---
 
