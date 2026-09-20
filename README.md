@@ -682,6 +682,15 @@ gradient identify climate velocity; and first-order timing correction identifies
 the phenology response rate. Fitness terms require separate matched growth
 contrasts rather than being imputed from movement data.
 
+The first named-system readiness receipt is
+[docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md](docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md).
+The public mule-deer system is biologically appropriate for tracking
+calibration, but the published group summaries are not silently converted into
+per-step model rates: early/mid phase summaries cross zero, while the late
+summary is a whole-route compression rather than one frozen decision interval.
+The current status is therefore **public system identified, direct tracking
+calibration pending source-file ingestion**.
+
 ---
 
 
