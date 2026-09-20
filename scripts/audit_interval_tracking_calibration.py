@@ -15,6 +15,9 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.inspect_mule_deer_source_csv import resolve_aliases
+from src.tracking_empirical_bridge import (
+    controls_from_interval_audit,
+)
 from src.tracking_interval_calibration import (
     IntervalObservation,
     audit_interval_calibration,
@@ -63,6 +66,10 @@ def main() -> None:
             "already isolated timing from spatial movement and other pathways"
         ),
     )
+    parser.add_argument("--spatial-gradient", type=float)
+    parser.add_argument("--wave-speed", type=float)
+    parser.add_argument("--phenology-scale", type=float)
+    parser.add_argument("--max-abs-phenology-shift", type=float)
     parser.add_argument(
         "--output",
         type=Path,
@@ -154,11 +161,46 @@ def main() -> None:
         timing_axis_isolated=args.timing_axis_isolated,
     )
 
+    control_args = (
+        args.spatial_gradient,
+        args.wave_speed,
+        args.phenology_scale,
+        args.max_abs_phenology_shift,
+    )
+    supplied = [value is not None for value in control_args]
+    if any(supplied) and not all(supplied):
+        raise SystemExit(
+            "to build tracking controls, supply all of: "
+            "--spatial-gradient, --wave-speed, --phenology-scale, "
+            "--max-abs-phenology-shift"
+        )
+
+    controls = None
+    if all(supplied):
+        try:
+            controls = controls_from_interval_audit(
+                audit,
+                spatial_gradient=args.spatial_gradient,
+                wave_speed=args.wave_speed,
+                phenology_scale=args.phenology_scale,
+                max_abs_phenology_shift=args.max_abs_phenology_shift,
+            )
+        except ValueError as exc:
+            raise SystemExit(
+                "tracking controls not licensed: " + str(exc)
+            ) from exc
+
     receipt = {
         "source_file": str(args.csv_path),
         "rows": len(rows),
         "resolved_columns": resolved,
         "audit": asdict(audit),
+        "tracking_controls": (
+            None if controls is None else asdict(controls)
+        ),
+        "full_tracking_controls_ready": (
+            False if controls is None else controls.full_tracking_controls_ready
+        ),
         "movement_parameter_status": (
             "symmetric_kernel_licensed"
             if audit.movement.direct_inverse_licensed
@@ -218,6 +260,19 @@ def main() -> None:
         print(
             "phase_mean_log_compression="
             f"{audit.phase.mean_log_compression:.12g}"
+        )
+    if controls is not None:
+        print(
+            "tracking_controls "
+            f"kernel={controls.movement_kernel_kind} "
+            f"migration_rate={controls.migration_rate:.12g} "
+            f"x_weight={controls.dispersal_x_weight:.12g} "
+            f"y_weight={controls.dispersal_y_weight:.12g} "
+            f"x_bias={controls.dispersal_x_bias:.12g} "
+            f"y_bias={controls.dispersal_y_bias:.12g} "
+            f"climate_velocity={controls.climate_velocity:.12g} "
+            f"phenology_rate={controls.phenology_rate} "
+            f"full_ready={int(controls.full_tracking_controls_ready)}"
         )
 
 
