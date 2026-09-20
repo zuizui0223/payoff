@@ -1,6 +1,6 @@
 # Industrial-development mule-deer perturbation receipt
 
-Status: independent published perturbation evidence. Raw Dryad reanalysis is deferred because the current Dryad file-stream endpoint requires an authenticated session.
+Status: **quantitative actuation / control-permeability perturbation reconstructed from public archived GPS**.
 
 Source: Aikens et al. (2022), *Nature Ecology & Evolution* 6:1733–1741, DOI 10.1038/s41559-022-01887-9.
 
@@ -17,148 +17,238 @@ late relative to resource wave
 -> reduced phase error
 ~~~
 
-The Aikens long-term gas-field system is a natural perturbation of that mechanism.
+The Aikens system asks a different question:
 
-It asks whether a migration corridor can remain geometrically connected while industrial disturbance prevents animals from expressing the movement response needed to stay coupled to phenology.
+> Does industrial development attenuate the ability to express movement control along a migration route?
 
-## Published result
+This is an **actuation** test, not a second estimate of phenological phase-retention lambda.
 
-Across a 14-year period of coalbed natural-gas development, migrating mule deer initially synchronized movement with peak spring green-up.
+## Source reconstruction
 
-As development expanded, deer increasingly held up at the edge of the developed gas field and allowed the green wave to pass.
+The public Dryad archive contains spring-migration GPS points and two development footprints.
 
-The published study reports:
+Registered analysis input:
 
 ~~~text
-route-scale green-wave surfing reduction = 38.65%
-study duration = 14 years
+GPS points               = 64,539
+valid movement steps     = 64,286
+GPS animal-years         = 253
+GPS animals              = 137
+years                    = 2005, 2006, 2008, 2009, 2010, 2015, 2016, 2017, 2018
+
+WHB / small-development points = 52,063
+DCC / large-development points = 12,476
 ~~~
 
-The behavioral disruption propagated beyond the physically developed section of the migration corridor.
+All shapefiles are transformed into the GPS coordinate reference system before distance calculations.
 
-The study found no evidence that animals acclimatized sufficiently to recover the earlier surfing behavior as development increased.
+## Control-permeability quantity
 
-## Controller interpretation
-
-In the phase-feedback framework, development can be represented as a constraint on the behavioral response:
-
-\[
-u_{\rm realized}(E,s)
-=
-G(s)\,u_{\rm desired}(E),
-\]
-
-where \(G(s)\) is a route-specific movement-permeability or behavioral-gating term.
-
-For an undisturbed route,
-
-\[
-G(s)\approx1.
-\]
-
-At a strongly disruptive segment,
-
-\[
-0<G(s)<1,
-\]
-
-so an animal that is late may be unable to realize the speed/stopover response implied by its phase error.
-
-Then
-
-\[
-\frac{dE}{ds}
-=
-\frac{1/u_{\rm realized}(E,s)-1}{c_e}
-\]
-
-can remain positive even when the unconstrained controller would have produced phase correction.
-
-This provides a mechanistic interpretation of corridor degradation:
-
-> A corridor can remain physically traversable yet lose its **phenological control bandwidth**.
-
-## New macro quantity — control permeability
-
-Define
+For each animal-year, define
 
 \[
 G
 =
-\frac{u_{\rm realized}}
-{u_{\rm expected}(E)}
+\frac{\operatorname{median}(\text{movement speed near development boundary})}
+{\operatorname{median}(\text{movement speed far from development boundary})}.
 \]
 
-relative to a reference controller calibrated in undisturbed conditions.
+Primary registered spatial contrast:
 
 ~~~text
-G ~ 1
-behavioral control is fully expressed
-
-G < 1
-movement response is attenuated
-
-G -> 0
-effective controller failure / hold-up
+near boundary <= 2 km
+far from boundary >= 10 km
+minimum 3 movement steps in each zone
 ~~~
 
-In a before–after or developed–undeveloped design, \(G\) can be estimated from deviations in realized relative movement speed after conditioning on phase error.
-
-## Macro prediction
-
-Infrastructure should not merely increase raw travel time.
-
-It should specifically:
-
-1. lower effective control permeability \(G\);
-2. lengthen phase-correction distance;
-3. increase the probability that a green wave overtakes the animal;
-4. reduce route-scale surfing even when only a small route fraction is directly disturbed.
-
-This is stronger than a generic "barriers slow migration" hypothesis because it predicts failure relative to the animal's current phase error.
-
-## Relation to barnacle geese
-
-The goose evidence and this perturbation system separate two different roles of barriers:
+Interpretation is relative rather than absolute:
 
 ~~~text
-barnacle geese:
-barriers can reduce environmental predictability,
-but binary barrier presence is not itself the strongest phase predictor.
+larger G
+  stronger local movement response near the boundary relative to the animal's
+  own far-route pace
 
-gas-field mule deer:
-disturbance changes realized movement behavior,
-directly attenuating the tracking response.
+smaller G
+  attenuation of that local movement response
 ~~~
 
-Thus barrier effects should be decomposed into:
+The quantity is not itself a phenological phase-retention coefficient.
+
+## Primary result — large-development population has lower control permeability
+
+Primary analyzable sample:
 
 ~~~text
-information effect:
-does the route make future phenology less predictable?
-
-control effect:
-does the route prevent the animal from expressing corrective behavior?
+188 animal-years
+103 animals
+9 study years
 ~~~
 
-A single binary barrier variable conflates those processes.
+Median G:
+
+~~~text
+small-development WHB = 1.656
+large-development DCC = 1.037
+~~~
+
+Clustered longitudinal model:
+
+\[
+\log G
+\sim
+\text{year}\times\text{large-development population}.
+\]
+
+At centered study year, the large-development population shift is
+
+~~~text
+beta = -0.4763
+SE   =  0.1967
+p    =  0.0172
+~~~
+
+On the multiplicative G scale,
+
+\[
+\exp(-0.4763)\approx0.621.
+\]
+
+Thus the fitted relative movement response is approximately **38% lower** in the large-development population at the centered study year.
+
+This effect size is conceptually distinct from the published 38.65% reduction in route-scale green-wave surfing and should not be treated as a replication of that exact published percentage.
+
+## Sensitivity to near/far distance definitions
+
+The qualitative contrast is stable across all registered combinations:
+
+~~~text
+edge / far km      median G small      median G large
+
+1 / 5                 2.137               1.123
+1 / 10                2.157               0.966
+1 / 20                2.340               0.841
+
+2 / 5                 1.685               1.115
+2 / 10                1.656               1.037
+2 / 20                1.790               0.941
+
+5 / 10                1.453               0.889
+5 / 20                1.517               0.808
+~~~
+
+The large-development intercept shift is negative throughout the grid.
+
+Therefore the primary inference does not depend on a single arbitrary spatial threshold.
+
+## Step-level within-animal-year analysis
+
+A second model uses all valid movement steps with individual-year fixed effects.
+
+Registered terms:
+
+~~~text
+near-boundary edge effect:
+  beta = +0.1963
+  p = 4.59e-5
+
+edge × large-development population:
+  beta = -0.1518
+  p = 0.0382
+
+edge × year:
+  beta = -0.0260
+  p = 0.00106
+
+edge × large-development × year:
+  beta = +0.0146
+  p = 0.226
+~~~
+
+The negative edge × large-development interaction means that the local edge-associated movement response is attenuated in the large-development population.
+
+Because the response is \(\log(1+\text{speed})\), exponentiated coefficients should not be described as exact percentage changes in raw speed.
+
+## Longitudinal prediction — not supported
+
+The preregistered stronger prediction was:
+
+> permeability should decline more strongly through time in the large-development population.
+
+Observed interaction:
+
+~~~text
+year × large-development beta = +0.0405
+SE = 0.0411
+p = 0.327
+~~~
+
+There is therefore **no support** for a stronger temporal decline of G in the large-development population.
+
+This is an important negative result.
+
+The quantitative perturbation evidence supports a persistent cross-population attenuation of realized movement control, but not the stronger claim that this attenuation became progressively more severe through the sampled years.
+
+## Relation to the published result
+
+Aikens et al. report that industrial development caused mule deer to hold up and become decoupled from the green wave, with a 38.65% route-scale decline in surfing across the long-term study.
+
+The PAYOFF-B reanalysis asks a different question at GPS-step scale:
+
+> Is the local movement response near the development footprint attenuated relative to far-route movement?
+
+The answer is yes in the registered comparison.
+
+The archived GPS therefore supplies a quantitative **actuation-boundary** result consistent with the control-permeability interpretation, while the absence of a significant year × development interaction prevents claiming a newly demonstrated longitudinal erosion of G.
+
+## Framework interpretation
+
+The result supports separating environmental information from behavioral actuation.
+
+A route can remain spatially passable while its effective control permeability is reduced.
+
+In the controller notation,
+
+\[
+u_{\rm realized}(E,s)
+=
+G(s)\,u_{\rm desired}(E).
+\]
+
+The data do not identify \(u_{\rm desired}(E)\) directly in this population, so the observed G is a relative movement-permeability proxy rather than the literal latent multiplier in this equation.
+
+## Gate consequence
+
+~~~text
+published perturbation / failure evidence:
+  PASS
+
+harmonized quantitative actuation test:
+  PASS, with claim boundary
+
+cross-sectional attenuation prediction:
+  PASS
+
+stronger longitudinal deterioration prediction:
+  NOT SUPPORTED
+~~~
+
+This partial success is more informative than treating the perturbation system as a simple confirmatory example.
 
 ## Claim boundary
 
 Licensed:
 
-- published industrial development caused mule deer to hold up and become decoupled from green-up;
-- route-scale surfing declined 38.65% over 14 years;
-- the finding is consistent with attenuation of a phase-correction controller;
-- the system is a strong perturbation test for the proposed framework.
+- public archived GPS and development footprints are directly reanalyzed;
+- relative near-boundary movement response is lower in the large-development population;
+- the contrast is qualitatively stable across the registered near/far sensitivity grid;
+- step-level within-animal-year analysis also detects attenuation in the large-development population;
+- the result is consistent with reduced movement control permeability.
 
 Not licensed:
 
-- a numerical estimate of \(G\) from the current branch;
-- direct comparison of \(\kappa\) between the Ortega and Aikens herds;
-- proof that development changes fitness specifically through the controller mechanism;
-- treatment of all ecological barriers as equivalent to industrial disturbance.
-
-## Promotion rule
-
-Upgrade this system to a quantitative Tier A/B perturbation test when the Dryad source tables are retrieved and the published days-from-peak / route-progress metrics can be harmonized with the controller model.
+- a causal development effect, because the two populations differ in more than development footprint;
+- a direct phenological phase-retention lambda from this dataset;
+- a claim that G is below one in all developed animals;
+- reproduction of the published 38.65% surfing decline from this new metric;
+- a stronger longitudinal deterioration of G through time;
+- universal treatment of all ecological barriers as the same actuation mechanism.
