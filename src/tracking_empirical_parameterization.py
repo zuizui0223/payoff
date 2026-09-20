@@ -424,3 +424,88 @@ def identify_tracking_fitness_from_matched_contrasts(
                 )
 
     return estimate
+
+
+
+@dataclass(frozen=True)
+class ResidualCompressionAudit:
+    residual_before: float
+    residual_after: float
+    status: str
+    monotone_first_order_compatible: bool
+    compression_ratio: float | None
+    log_compression: float | None
+
+
+def audit_residual_compression(
+    residual_before: float,
+    residual_after: float,
+) -> ResidualCompressionAudit:
+    """Classify whether an aggregated residual pair licenses the simple inverse.
+
+    This checks mathematical compatibility only. Even a compatible pair does
+    not identify a per-generation rate unless the before/after interval equals
+    the model decision interval and spatial state is held appropriately fixed.
+    """
+
+    if not isfinite(residual_before) or not isfinite(residual_after):
+        raise ValueError("residuals must be finite")
+
+    if residual_before == 0.0:
+        return ResidualCompressionAudit(
+            residual_before=residual_before,
+            residual_after=residual_after,
+            status="zero_start_residual",
+            monotone_first_order_compatible=False,
+            compression_ratio=None,
+            log_compression=None,
+        )
+
+    if residual_after == 0.0:
+        return ResidualCompressionAudit(
+            residual_before=residual_before,
+            residual_after=residual_after,
+            status="complete_correction_boundary",
+            monotone_first_order_compatible=False,
+            compression_ratio=0.0,
+            log_compression=None,
+        )
+
+    if residual_before * residual_after < 0.0:
+        return ResidualCompressionAudit(
+            residual_before=residual_before,
+            residual_after=residual_after,
+            status="sign_crossing_or_overshoot",
+            monotone_first_order_compatible=False,
+            compression_ratio=None,
+            log_compression=None,
+        )
+
+    ratio = abs(residual_after / residual_before)
+    if ratio > 1.0:
+        return ResidualCompressionAudit(
+            residual_before=residual_before,
+            residual_after=residual_after,
+            status="mismatch_amplification",
+            monotone_first_order_compatible=False,
+            compression_ratio=ratio,
+            log_compression=None,
+        )
+    if ratio == 1.0:
+        return ResidualCompressionAudit(
+            residual_before=residual_before,
+            residual_after=residual_after,
+            status="no_correction",
+            monotone_first_order_compatible=True,
+            compression_ratio=1.0,
+            log_compression=0.0,
+        )
+
+    return ResidualCompressionAudit(
+        residual_before=residual_before,
+        residual_after=residual_after,
+        status="monotone_compression",
+        monotone_first_order_compatible=True,
+        compression_ratio=ratio,
+        log_compression=-log(ratio),
+    )
