@@ -44,6 +44,14 @@ def main() -> None:
             "JSON produced by parameterize_migration_phenology_fitness.py"
         ),
     )
+    parser.add_argument(
+        "--validation-gate-json",
+        type=Path,
+        help=(
+            "optional JSON from evaluate_tracking_validation_gate.py; "
+            "if supplied, the gate must pass"
+        ),
+    )
     parser.add_argument("--prediction-wave-speed", type=float)
     parser.add_argument("--prediction-spatial-gradient", type=float)
     parser.add_argument("--width", type=int, default=41)
@@ -86,6 +94,24 @@ def main() -> None:
         )
     fitness = TrackingFitnessEstimate(**fitness_payload)
 
+    validation_gate = None
+    tracking_controls_validated = False
+    if args.validation_gate_json is not None:
+        validation_gate = load_json(args.validation_gate_json)
+        gate_payload = validation_gate.get("gate")
+        if gate_payload is None:
+            raise SystemExit(
+                "validation-gate JSON has no gate payload"
+            )
+        if not bool(gate_payload.get("passed", False)):
+            reasons = gate_payload.get("reasons", [])
+            detail = "; ".join(str(item) for item in reasons)
+            raise SystemExit(
+                "held-out tracking validation gate failed"
+                + (": " + detail if detail else "")
+            )
+        tracking_controls_validated = True
+
     bundle = build_empirical_landscape_bundle(
         controls,
         fitness,
@@ -105,16 +131,29 @@ def main() -> None:
     )
     prediction = simulate_empirical_landscape_prediction(bundle)
 
-    prediction_class = (
-        "calibration_environment_mechanistic_projection"
-        if bundle.prediction_is_calibration_environment
-        else "held_out_forcing_projection"
-    )
+    if tracking_controls_validated:
+        prediction_class = (
+            "tracking_controls_validated_calibration_environment_projection"
+            if bundle.prediction_is_calibration_environment
+            else "tracking_controls_validated_held_out_forcing_projection"
+        )
+    else:
+        prediction_class = (
+            "calibration_environment_mechanistic_projection_unvalidated_tracking"
+            if bundle.prediction_is_calibration_environment
+            else "held_out_forcing_mechanistic_projection_unvalidated_tracking"
+        )
 
     receipt = {
         "status": prediction_class,
         "tracking_controls_source": str(args.tracking_controls_json),
         "fitness_source": str(args.fitness_json),
+        "validation_gate_source": (
+            None
+            if args.validation_gate_json is None
+            else str(args.validation_gate_json)
+        ),
+        "tracking_controls_validated": tracking_controls_validated,
         "decision_interval_seconds": bundle.decision_interval_seconds,
         "frozen_strategy": asdict(bundle.strategy),
         "movement_kernel": {
@@ -188,9 +227,11 @@ def main() -> None:
             "persisted": prediction.persisted,
         },
         "claim_boundary": (
-            "frozen-control open-grid mechanistic projection; not empirical "
-            "validation unless forcing, habitat, fitness scale and held-out "
-            "outcome are independently observed"
+            "held-out tracking-control validation, when supplied, tests the "
+            "movement/timing controller only. The landscape projection is not "
+            "an empirical outcome validation unless forcing, habitat, fitness "
+            "scale, demographics and held-out ecological outcome are all "
+            "independently observed."
         ),
     }
 
