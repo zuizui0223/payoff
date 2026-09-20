@@ -2,6 +2,7 @@ from math import isclose
 
 from src.moving_climate_landscape_2d import (
     MovingLandscape2DScenario,
+    bhattacharyya_overlap_2d,
     build_landscape_2d_geometry,
     corridor_persistence_frontier,
     gaussian_initial_distribution_2d,
@@ -464,4 +465,104 @@ def test_zigzag_double_barrier_requires_transverse_route():
     ) > beyond_second_wall(
         zigzag_state,
         zigzag_scenario,
+    )
+
+
+def test_bhattacharyya_overlap_detects_identical_and_disjoint_distributions():
+    identical_a = (1.0, 3.0, 0.0, 2.0)
+    identical_b = (2.0, 6.0, 0.0, 4.0)
+    disjoint_a = (1.0, 0.0, 2.0, 0.0)
+    disjoint_b = (0.0, 3.0, 0.0, 4.0)
+
+    assert isclose(
+        bhattacharyya_overlap_2d(
+            identical_a,
+            identical_b,
+        ),
+        1.0,
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
+    assert bhattacharyya_overlap_2d(
+        disjoint_a,
+        disjoint_b,
+    ) == 0.0
+
+
+def test_distribution_overlap_term_detects_same_centroid_spatial_segregation():
+    width = 7
+    height = 7
+    center_x = width // 2
+    center_y = height // 2
+    parameters = SpeciesTrackingParameters(
+        abiotic_strength=0.0,
+        interaction_strength=1.0,
+        migration_cost=0.0,
+        phenology_cost=0.0,
+        baseline_growth=0.30,
+    )
+    common = dict(
+        width=width,
+        height=height,
+        climate_velocity=0.0,
+        max_abs_phenology_shift=0.0,
+        density_coefficient=0.0,
+        steps=20,
+        burn_in=5,
+        species_a=parameters,
+        species_b=parameters,
+    )
+    centroid_only = MovingLandscape2DScenario(
+        distribution_overlap_scale=0.0,
+        **common,
+    )
+    overlap_aware = MovingLandscape2DScenario(
+        distribution_overlap_scale=1.0,
+        **common,
+    )
+
+    abundance_a = [0.0] * (width * height)
+    abundance_b = [0.0] * (width * height)
+    for dy in (-1, 1):
+        abundance_a[
+            centroid_only.index(
+                center_x,
+                center_y + dy,
+            )
+        ] = 100.0
+    for dy in (-2, 2):
+        abundance_b[
+            centroid_only.index(
+                center_x,
+                center_y + dy,
+            )
+        ] = 100.0
+
+    strategy = TrackingStrategy(0.0, 0.0)
+    baseline = simulate_moving_landscape_2d_pair(
+        strategy,
+        strategy,
+        centroid_only,
+        initial_abundance_a=tuple(abundance_a),
+        initial_abundance_b=tuple(abundance_b),
+    )
+    aware = simulate_moving_landscape_2d_pair(
+        strategy,
+        strategy,
+        overlap_aware,
+        initial_abundance_a=tuple(abundance_a),
+        initial_abundance_b=tuple(abundance_b),
+    )
+
+    # Both distributions have the same spatial centroid, so the legacy
+    # centroid metric alone sees no mismatch.
+    assert baseline.rms_interaction_mismatch < 1e-12
+    assert baseline.mean_distribution_overlap == 0.0
+
+    # The optional distribution term detects their disjoint support.
+    assert aware.mean_distribution_overlap == 0.0
+    assert aware.rms_interaction_mismatch > 0.99
+    assert (
+        aware.mean_joint_growth
+        < baseline.mean_joint_growth - 0.49
     )
