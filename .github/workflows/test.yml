@@ -64,6 +64,7 @@ jobs:
           python scripts/audit_interval_tracking_calibration.py outputs/ci_interval_tracking.csv --target-interval-hours 1 --patch-spacing 2 --output outputs/ci_interval_tracking_audit.json
       - run: python scripts/parameterize_migration_phenology_fitness.py --baseline-growth 0.4 --abiotic-growth 0.25 --abiotic-mismatch 0.5 --interaction-growth 0.336 --interaction-mismatch 0.4 --migration-growth 0.364 --migration-rate 0.6 --phenology-growth 0.3755 --phenology-rate 0.7 --joint-growth 0.3645 --joint-migration-rate 0.4 --joint-phenology-rate 0.5 --output outputs/ci_payoff_b_tracking_fitness_parameterization.json
       - run: python scripts/audit_mule_deer_phase_summary.py
+      - run: python scripts/audit_aikens_2022_phase_controller.py
       - run: |
           cat > outputs/ci_mule_deer_summary.csv <<'EOF'
           animal_id,year,migration_distance,movement_rate,start_days_from_peak,end_days_from_peak
