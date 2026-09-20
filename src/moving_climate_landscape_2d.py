@@ -39,6 +39,7 @@ class MovingLandscape2DScenario:
     extinction_threshold: float = 1.0
     boundary_retention: float = 1.0
     barrier_retention: float = 1.0
+    distribution_overlap_scale: float = 0.0
     monitor_climate_coordinate: float | None = None
     habitat_quality: tuple[float, ...] | None = None
     steps: int = 120
@@ -69,6 +70,7 @@ class MovingLandscape2DScenario:
             "extinction_threshold",
             "boundary_retention",
             "barrier_retention",
+            "distribution_overlap_scale",
             "climate_velocity",
             "climate_angle_degrees",
         ):
@@ -97,6 +99,10 @@ class MovingLandscape2DScenario:
             raise ValueError("boundary_retention must lie in [0,1]")
         if not 0.0 <= self.barrier_retention <= 1.0:
             raise ValueError("barrier_retention must lie in [0,1]")
+        if self.distribution_overlap_scale < 0.0:
+            raise ValueError(
+                "distribution_overlap_scale must be non-negative"
+            )
         if self.monitor_climate_coordinate is not None and not isfinite(
             self.monitor_climate_coordinate
         ):
@@ -244,6 +250,8 @@ class Landscape2DPairResult:
     rms_abiotic_mismatch_a: float
     rms_abiotic_mismatch_b: float
     rms_interaction_mismatch: float
+    mean_distribution_overlap: float
+    final_distribution_overlap: float
     phenology_limit_fraction_a: float
     phenology_limit_fraction_b: float
     final_monitor_fraction_a: float
@@ -472,6 +480,40 @@ def climate_centroid_2d(
     x, y = centroid_2d(abundance, scenario, geometry)
     ux, uy = scenario.climate_unit
     return ux * x + uy * y
+
+
+def bhattacharyya_overlap_2d(
+    abundance_a: tuple[float, ...] | list[float],
+    abundance_b: tuple[float, ...] | list[float],
+) -> float:
+    """Return distributional overlap in [0,1].
+
+    Abundances are normalized to probability distributions before computing
+    the Bhattacharyya coefficient sum_i sqrt(p_i q_i). It is 1 for identical
+    normalized distributions and 0 for disjoint support.
+    """
+
+    if len(abundance_a) != len(abundance_b) or not abundance_a:
+        raise ValueError(
+            "abundance vectors must have equal non-zero length"
+        )
+    if any(
+        value < 0.0 or not isfinite(value)
+        for value in abundance_a
+    ) or any(
+        value < 0.0 or not isfinite(value)
+        for value in abundance_b
+    ):
+        raise ValueError("abundances must be finite and non-negative")
+
+    total_a = sum(abundance_a)
+    total_b = sum(abundance_b)
+    if total_a <= 0.0 or total_b <= 0.0:
+        return 0.0
+    return sum(
+        sqrt((a / total_a) * (b / total_b))
+        for a, b in zip(abundance_a, abundance_b)
+    )
 
 
 def monitor_fraction_2d(
@@ -709,6 +751,7 @@ def simulate_moving_landscape_2d_pair(
     abiotic_sq_a_sum = 0.0
     abiotic_sq_b_sum = 0.0
     interaction_sq_sum = 0.0
+    distribution_overlap_sum = 0.0
     monitor_a_sum = 0.0
     monitor_b_sum = 0.0
     limit_a_count = 0
@@ -754,7 +797,18 @@ def simulate_moving_landscape_2d_pair(
         dz = scenario.phenology_scale * (
             phenology_a - phenology_b
         )
-        interaction_sq = dx * dx + dy * dy + dz * dz
+        distribution_overlap = bhattacharyya_overlap_2d(
+            abundance_a,
+            abundance_b,
+        )
+        interaction_sq = (
+            dx * dx
+            + dy * dy
+            + dz * dz
+            + scenario.distribution_overlap_scale
+            * scenario.distribution_overlap_scale
+            * (1.0 - distribution_overlap)
+        )
 
         (
             abundance_a,
@@ -813,6 +867,7 @@ def simulate_moving_landscape_2d_pair(
             abiotic_sq_a_sum += rms_a * rms_a
             abiotic_sq_b_sum += rms_b * rms_b
             interaction_sq_sum += interaction_sq
+            distribution_overlap_sum += distribution_overlap
             monitor_a_sum += monitor_fraction_2d(
                 abundance_a,
                 scenario,
@@ -876,6 +931,13 @@ def simulate_moving_landscape_2d_pair(
         ),
         rms_interaction_mismatch=sqrt(
             interaction_sq_sum / observed
+        ),
+        mean_distribution_overlap=(
+            distribution_overlap_sum / observed
+        ),
+        final_distribution_overlap=bhattacharyya_overlap_2d(
+            abundance_a,
+            abundance_b,
         ),
         phenology_limit_fraction_a=limit_a_count / observed,
         phenology_limit_fraction_b=limit_b_count / observed,
