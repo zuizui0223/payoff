@@ -98,6 +98,7 @@ def build_figure4() -> Path:
             capsize=5,
             linewidth=1.6,
             markersize=7,
+            color="black",
         )
         ax.text(
             row["median_abs_lambda"] + 0.025,
@@ -113,17 +114,18 @@ def build_figure4() -> Path:
     ax.set_xlabel(r"Phase retention $R_\phi=|\lambda|$")
     ax.set_title("A  Phase retention spans a broad range")
     ax.text(
-        1.0,
-        len(taxa) - 0.2,
+        0.985,
+        0.50,
         "no correction",
+        transform=ax.transAxes,
         rotation=90,
-        va="bottom",
+        va="center",
         ha="right",
         fontsize=8,
     )
     ax.text(
         0.01,
-        -0.52,
+        -0.17,
         "Barnacle-goose whisker = observed route range, not a CI",
         transform=ax.transAxes,
         fontsize=8,
@@ -134,13 +136,27 @@ def build_figure4() -> Path:
     ax = axes[1]
     markers = {"Greenland": "s", "Barents": "o"}
     for flyway, d in env.groupby("flyway"):
-        ax.scatter(
-            d["environmental_innovation_sd_days"],
-            d["abs_lambda"],
-            marker=markers.get(flyway, "o"),
-            s=55,
-            label=flyway,
-        )
+        marker = markers.get(flyway, "o")
+        if flyway == "Greenland":
+            ax.scatter(
+                d["environmental_innovation_sd_days"],
+                d["abs_lambda"],
+                marker=marker,
+                s=55,
+                label=flyway,
+                facecolors="white",
+                edgecolors="black",
+                linewidths=1.4,
+            )
+        else:
+            ax.scatter(
+                d["environmental_innovation_sd_days"],
+                d["abs_lambda"],
+                marker=marker,
+                s=55,
+                label=flyway,
+                color="black",
+            )
         for _, row in d.iterrows():
             ax.annotate(
                 row["transition"],
@@ -165,7 +181,7 @@ def build_figure4() -> Path:
     ax.legend(frameon=False, title="Flyway", loc="upper left")
     ax.text(
         0.99,
-        -0.20,
+        -0.17,
         "Transition points share species/routes; not independent studies",
         transform=ax.transAxes,
         fontsize=8,
@@ -213,14 +229,17 @@ def build_figure5() -> Path:
     # large-development population.
     ax = axes[0]
     for i, row in d.iterrows():
+        primary = int(row["edge_km"]) == 2 and int(row["far_km"]) == 10
         ax.plot(
             [0, 1],
             [row["median_G_small"], row["median_G_large"]],
             marker="o",
-            linewidth=1.2,
-            alpha=0.75,
+            linewidth=2.2 if primary else 1.0,
+            alpha=1.0 if primary else 0.45,
+            color="black",
+            markersize=6 if primary else 5,
         )
-        if int(row["edge_km"]) == 2 and int(row["far_km"]) == 10:
+        if primary:
             ax.annotate(
                 "primary 2/10 km",
                 (1, row["median_G_large"]),
@@ -246,15 +265,18 @@ def build_figure5() -> Path:
     y = np.arange(len(d))
     est = d["year_x_large_beta"].to_numpy(float)
     se = d["year_x_large_se"].to_numpy(float)
-    ax.errorbar(
-        est,
-        y,
-        xerr=1.96 * se,
-        fmt="o",
-        capsize=4,
-        linewidth=1.3,
-        markersize=5,
-    )
+    for i, row in d.reset_index(drop=True).iterrows():
+        primary = int(row["edge_km"]) == 2 and int(row["far_km"]) == 10
+        ax.errorbar(
+            row["year_x_large_beta"],
+            i,
+            xerr=1.96 * row["year_x_large_se"],
+            fmt="D" if primary else "o",
+            capsize=4,
+            linewidth=1.4 if primary else 1.1,
+            markersize=6 if primary else 4.5,
+            color="black",
+        )
     ax.axvline(0.0, linestyle="--", linewidth=1.2)
     ax.set_yticks(y, d["definition"])
     ax.invert_yaxis()
@@ -272,7 +294,7 @@ def build_figure5() -> Path:
     )
 
     fig.suptitle(
-        "Industrial development attenuates movement control without a detected extra time trend",
+        "Industrial development attenuates movement control; extra temporal decline is not detected",
         fontsize=13,
     )
 
