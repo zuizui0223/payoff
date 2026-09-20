@@ -703,6 +703,54 @@ The controller gain q_m is not the same object as fixed movement-kernel rate m.
 This distinction is central to the empirical interpretation of the Aikens
 movement/stopover controller evidence.
 
+## Explicit state-dependent movement feedback
+
+The exact closed-loop null can now be reinserted into the explicit 2D
+landscape through a mismatch-dependent movement-rate controller:
+
+    m_eff(t)
+    = clip[m_0 + k_m e_t, m_min, m_max].
+
+The canonical explicit-landscape receipt is
+
+    docs/PAYOFF_B_MOVEMENT_FEEDBACK_LANDSCAPE_RESULTS_20260920.md.
+
+Its retained result is deliberately asymmetric.
+
+At weak forcing, movement feedback is not worth its additional movement cost.
+
+At intermediate forcing, a positive controller improves mismatch and
+low-density growth.
+
+At stronger forcing in the sampled design:
+
+    movement feedback alone
+        improves tracking
+        but does not restore persistence;
+
+    independent timing response
+        crosses the persistence boundary;
+
+    movement feedback inside the timing-enabled regime
+        further improves mismatch and growth.
+
+At v=0.05 and 0.06, all seven sampled feedback gains are non-persistent when
+h=0, whereas all seven persist for h=0.25 and h=0.5. At the strongest sampled
+controller gain, timing also sharply unloads movement demand and eliminates
+movement-ceiling contact.
+
+This gives the key cross-scale contrast:
+
+    local linear null:
+        exact space-time feedback substitutability;
+
+    explicit finite landscape:
+        forcing-dependent complementarity.
+
+The difference is created by movement geometry, movement cost, finite
+movement-rate ceilings, finite timing capacity, and spatial population
+dynamics rather than by contradiction of the local theorem.
+
 ## Frozen synthetic evidence
 
 The first model results are frozen in
