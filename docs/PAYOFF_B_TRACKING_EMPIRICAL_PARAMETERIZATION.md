@@ -205,6 +205,22 @@ A named-system PAYOFF-B calibration should therefore preserve the separation:
     -> independently measured fitness terms
     -> out-of-sample landscape prediction.
 
+The first named-system readiness audit is frozen in
+
+    docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md.
+
+For the published mule-deer group means, the repository also runs
+
+    python scripts/audit_mule_deer_phase_summary.py
+
+as a refusal audit. With negative Days-From-Peak meaning ahead of peak IRG and
+positive meaning behind, the published early and mid start/end means cross
+zero and therefore violate the simple monotone first-order residual inverse.
+The late group compresses from approximately +20 to +11 days and is
+mathematically monotone, but that change spans an entire migration rather than
+one declared PAYOFF-B decision interval. It is recorded as whole-route
+compression, not inserted as a per-step phenology rate.
+
 ## 8. Claim boundary
 
 This handoff licenses algebraic parameter recovery under the declared kernel.
