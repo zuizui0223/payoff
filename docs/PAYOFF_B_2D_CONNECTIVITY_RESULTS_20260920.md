@@ -384,7 +384,69 @@ The retained interpretation is not that interaction is inherently beneficial
 or harmful. Its effect depends on where the synchronized local attractor lies
 relative to the moving-environment persistence envelope.
 
-## 9. Retained 2D synthesis
+## 9. Robustness to anisotropic movement
+
+The regular-grid baseline disperses equally along x and y. To test whether the
+temporal-buffering result depends on isotropic movement, the x movement weight
+was fixed at 1 and the transverse y weight was reduced through
+
+    y/x weight ratio:
+        1, 0.5, 0.25, 0.1.
+
+The same open-versus-zigzag comparison was rerun at climate velocities
+
+    0.05, 0.06, 0.07
+
+and phenology limits
+
+    0, 2, 4
+
+with a 7 x 7 strategy grid.
+
+At phenology limit 0, the mean zigzag low-density growth penalty became
+progressively larger as transverse movement became harder:
+
+    y/x = 1:
+        -0.04501
+
+    y/x = 0.5:
+        -0.04864
+
+    y/x = 0.25:
+        -0.04961
+
+    y/x = 0.1:
+        -0.05249.
+
+Phenological capacity strongly buffered that penalty at every anisotropy level.
+At phenology limit 4 the corresponding penalties were
+
+    -0.01073,
+    -0.01161,
+    -0.01203,
+    -0.01285.
+
+Thus increasing the phenology limit from 0 to 4 reduced the magnitude of the
+zigzag penalty by approximately
+
+    76.2%, 76.1%, 75.8%, and 75.5%
+
+across the four sampled movement anisotropies. Averaged across anisotropy
+levels, the penalty magnitude fell by about 75.9%.
+
+No sampled open-versus-zigzag persistence loss occurred in this design at any
+anisotropy level. The retained result is therefore:
+
+> temporal buffering of route-growth costs survives strong directional
+> movement anisotropy,
+
+not a demonstrated anisotropy-specific persistence rescue.
+
+The movement kernel retains its original isotropic behavior at the default
+weights w_x=w_y=1, and exact mass conservation is regression-tested for
+anisotropic weights.
+
+## 10. Retained 2D synthesis
 
 The two-dimensional model supports three nested mechanism claims.
 
@@ -417,7 +479,7 @@ In compact form:
     -> possible coordination lock
     -> persistence or extinction.
 
-## 10. Claim ceiling
+## 11. Claim ceiling
 
 These results do not establish:
 
@@ -433,7 +495,7 @@ These results do not establish:
 The strongest statements are synthetic mechanism results with explicit
 provenance and declared finite landscapes.
 
-## 11. Provenance
+## 12. Provenance
 
 Canonical workflow artifacts:
 
@@ -476,6 +538,11 @@ Canonical workflow artifacts:
    - workflow run: 35478835579
    - artifact: 10594734226
    - sha256: 42674ddb42b8fc0ca30847838db7fbd6e9c8b0dbe65aae7b6f718ca3332141cb
+
+9. Anisotropic-movement sensitivity
+   - workflow run: 35479512321
+   - artifact: 10595182956
+   - sha256: a151aa4b37892f73e7f11ad53b73685bca2bd533d9c2ccf31b480ee1ddd6068e
 
 The direct canonical gate is also exercised in standard CI; one verified run is
 workflow 35478420135, job 105991651172.
