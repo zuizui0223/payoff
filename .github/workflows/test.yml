@@ -65,6 +65,7 @@ jobs:
       - run: python scripts/parameterize_migration_phenology_fitness.py --baseline-growth 0.4 --abiotic-growth 0.25 --abiotic-mismatch 0.5 --interaction-growth 0.336 --interaction-mismatch 0.4 --migration-growth 0.364 --migration-rate 0.6 --phenology-growth 0.3755 --phenology-rate 0.7 --joint-growth 0.3645 --joint-migration-rate 0.4 --joint-phenology-rate 0.5 --output outputs/ci_payoff_b_tracking_fitness_parameterization.json
       - run: python scripts/audit_interval_tracking_calibration.py examples/tracking/fixed_interval_calibration.csv --target-interval-hours 1 --patch-spacing 2 --symmetry-tolerance 0.05 --timing-axis-isolated --spatial-gradient 0.2 --wave-speed 0.3 --phenology-scale 0.1 --max-abs-phenology-shift 20 --output outputs/ci_payoff_b_interval_controls.json
       - run: python scripts/predict_empirical_tracking_landscape.py --tracking-controls-json outputs/ci_payoff_b_interval_controls.json --fitness-json outputs/ci_payoff_b_tracking_fitness_parameterization.json --prediction-wave-speed 0.5 --width 15 --height 9 --steps 40 --burn-in 10 --output outputs/ci_payoff_b_empirical_landscape_projection.json
+      - run: python scripts/validate_interval_tracking_controls.py examples/tracking/fixed_interval_validation.csv --tracking-controls-json outputs/ci_payoff_b_interval_controls.json --timing-axis-isolated --output outputs/ci_payoff_b_held_out_tracking_validation.json
       - run: python scripts/audit_mule_deer_phase_summary.py
       - run: python scripts/audit_aikens_2022_phase_controller.py
       - run: |
