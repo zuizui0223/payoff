@@ -421,6 +421,7 @@ theory/MIGRATION_PHENOLOGY_TRACKING.md
 -> docs/PAYOFF_B_CLOSED_LOOP_TRACKING_RESULTS_20260920.md
 -> docs/PAYOFF_B_MOVEMENT_FEEDBACK_LANDSCAPE_RESULTS_20260920.md
 -> docs/PAYOFF_B_AIKENS_2022_PHASE_CONTROLLER_RECEIPT.md
+-> docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md
 -> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md
 -> docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md.
 ```
@@ -476,6 +477,19 @@ explicit landscape. If q_m is movement-mediated feedback and q_h is
 timing-mediated feedback, local mismatch obeys
 
     e_(t+1) = (1-q_m-q_h)e_t + r.
+
+For cross-system empirical synthesis, define
+
+    lambda = 1-q_m-q_h,
+
+so that
+
+    e_out = r + lambda e_in.
+
+The canonical empirical comparison is lambda. The decomposition into speed,
+stopover, route reset, timing, or other actuators belongs to a separate
+system-specific prospective gate. Taxon count is therefore secondary to the
+number and diversity of independent lambda tests.
 
 Thus movement and timing feedback are exactly substitutable in the local linear
 null through their total restoring gain K=q_m+q_h. Stability requires 0<K<2;
