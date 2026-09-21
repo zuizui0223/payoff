@@ -205,6 +205,26 @@ In particular:
   exact only for the declared local linear mismatch recurrence; route geometry,
   controller saturation, delays, nonlinear response and state-dependent costs
   can change the stability region;
+- for cross-system synthesis, the preferred common controller coordinate is
+  phase retention `lambda=1-K` on a predeclared signed phase coordinate and
+  segment scale; lambda values from incompatible interval or route definitions
+  should not be pooled;
+- speed, stopover duration, route reset, directional movement and other
+  actuator variables are system-specific prospective predictions, not required
+  cross-taxon parameters;
+- a passing lambda gate with a failing actuator gate is a coherent result:
+  it supports shared phase-retention geometry while rejecting that actuator
+  hypothesis for the focal system;
+- actuator outcomes must not be combined with lambda into one omnibus score,
+  because doing so would make mechanism non-portability look like failure of
+  the common phase coordinate;
+- adding taxa mechanically does not strengthen the cross-system claim unless
+  the added system supplies an independent lambda test, a new forcing regime,
+  a predicted lambda boundary/sign change, or a discriminating prospective
+  actuator test;
+- the current wigeon lambda-supported / shared-actuator-not-supported pattern
+  motivates this architecture, but remains qualitative in PAYOFF until its
+  numerical source-backed receipt is frozen;
 - published route-distance controller slopes identify restoring direction and,
   with confirmed distance units, a local relaxation coefficient; they do not
   directly equal the PAYOFF-B movement-feedback gain q_m without a declared
@@ -343,6 +363,9 @@ TRACKING_PREDECLARED_VALIDATION_GATE_IMPLEMENTED
 TRACKING_ECOLOGICAL_OUTCOME_VALIDATION_LAYER_IMPLEMENTED
 TRACKING_NAMED_SYSTEM_ECOLOGICAL_OUTCOME_VALIDATION_NOT_EXECUTED
 TRACKING_CLOSED_LOOP_LOCAL_THEORY_PROVED_UNDER_DECLARED_RECURRENCE
+TRACKING_PHASE_RETENTION_COMMON_COORDINATE_IMPLEMENTED
+TRACKING_SYSTEM_SPECIFIC_ACTUATOR_GATE_IMPLEMENTED
+TRACKING_WIGEON_RETENTION_ACTUATOR_PATTERN_REPORTED_NUMERIC_RECEIPT_PENDING
 TRACKING_EXPLICIT_MOVEMENT_FEEDBACK_LANDSCAPE_IMPLEMENTED
 TRACKING_NAMED_SYSTEM_CANDIDATE_IDENTIFIED
 TRACKING_NAMED_SYSTEM_CALIBRATION_PENDING_SOURCE_FILE_INGESTION
