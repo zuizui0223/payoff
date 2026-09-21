@@ -92,6 +92,8 @@ class ActuatorPrediction:
     expected_direction: ActuatorDirection
     observed_effect: float
     zero_tolerance: float = 0.0
+    observed_p_value: float | None = None
+    max_p_value: float | None = None
     prospective: bool = True
 
     def __post_init__(self) -> None:
@@ -103,6 +105,26 @@ class ActuatorPrediction:
             raise ValueError(
                 "zero_tolerance must be non-negative and finite"
             )
+        if self.observed_p_value is not None:
+            if (
+                not isfinite(self.observed_p_value)
+                or not 0.0 <= self.observed_p_value <= 1.0
+            ):
+                raise ValueError(
+                    "observed_p_value must lie in [0,1] when supplied"
+                )
+        if self.max_p_value is not None:
+            if (
+                not isfinite(self.max_p_value)
+                or not 0.0 < self.max_p_value <= 1.0
+            ):
+                raise ValueError(
+                    "max_p_value must lie in (0,1] when supplied"
+                )
+            if self.observed_p_value is None:
+                raise ValueError(
+                    "max_p_value requires an observed_p_value"
+                )
 
 
 @dataclass(frozen=True)
@@ -110,6 +132,10 @@ class ActuatorPredictionResult:
     name: str
     expected_direction: ActuatorDirection
     observed_effect: float
+    observed_p_value: float | None
+    max_p_value: float | None
+    direction_passed: bool
+    support_passed: bool
     passed: bool
     prospective: bool
 
@@ -289,7 +315,7 @@ def evaluate_phase_retention_gate(
     )
 
 
-def _actuator_prediction_passes(
+def _actuator_direction_passes(
     prediction: ActuatorPrediction,
 ) -> bool:
     value = prediction.observed_effect
@@ -299,6 +325,15 @@ def _actuator_prediction_passes(
     if prediction.expected_direction == "decrease":
         return value < -tolerance
     return abs(value) <= tolerance
+
+
+def _actuator_support_passes(
+    prediction: ActuatorPrediction,
+) -> bool:
+    if prediction.max_p_value is None:
+        return True
+    assert prediction.observed_p_value is not None
+    return prediction.observed_p_value <= prediction.max_p_value
 
 
 def evaluate_actuator_gate(
@@ -318,7 +353,14 @@ def evaluate_actuator_gate(
             name=row.name,
             expected_direction=row.expected_direction,
             observed_effect=row.observed_effect,
-            passed=_actuator_prediction_passes(row),
+            observed_p_value=row.observed_p_value,
+            max_p_value=row.max_p_value,
+            direction_passed=_actuator_direction_passes(row),
+            support_passed=_actuator_support_passes(row),
+            passed=(
+                _actuator_direction_passes(row)
+                and _actuator_support_passes(row)
+            ),
             prospective=row.prospective,
         )
         for row in rows
