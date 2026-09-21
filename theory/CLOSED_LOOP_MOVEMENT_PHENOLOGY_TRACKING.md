@@ -65,9 +65,14 @@ restoring budget.
 
 ## 2. Exact stability classes
 
-The multiplier is
+The multiplier is the phase-retention coefficient
 
-    a = 1-K.
+    lambda = 1-K.
+
+For within-model dynamics this is the same object previously described as the
+closed-loop multiplier. For cross-system empirical synthesis, lambda is the
+preferred common coordinate because it describes retained phase mismatch
+without requiring systems to share the same physical actuator.
 
 The equilibrium is dynamically stable iff
 
@@ -112,7 +117,20 @@ For any two controller architectures satisfying
 
     q_m + q_h = K,
 
-the mismatch recurrence is identical.
+the mismatch recurrence is identical. Equivalently, they share the same
+
+    lambda = 1-K.
+
+This identity motivates a two-gate empirical architecture:
+
+    Gate 1:
+        test lambda on a shared signed phase coordinate;
+
+    Gate 2:
+        test speed, stopover, route reset, timing, or other actuators
+        prospectively within each system.
+
+The actuator decomposition is not part of the cross-system lambda gate.
 
 Hence, before costs, ceilings, route geometry, or partner effects are added,
 
@@ -330,7 +348,42 @@ Aikens receipts:
     !=
     independent timing-axis response.
 
-## 10. Reproduce
+## 10. Cross-system phase retention versus system-specific actuators
+
+The empirical synthesis should not require taxa to share one actuator rule.
+
+The common retained quantity is
+
+    e_out = r + lambda e_in.
+
+A system may realize the same lambda through different combinations of:
+
+- speed adjustment;
+- stopover adjustment;
+- route reset or rerouting;
+- directional movement;
+- timing change;
+- other system-specific controls.
+
+Therefore a successful lambda prediction with a failed actuator prediction is
+a coherent scientific outcome:
+
+    lambda PASS
+    actuator FAIL
+
+means that the shared controller geometry is supported while the proposed
+physical mechanism is not portable to that system.
+
+The current wigeon result motivates this separation: the strong lambda
+prediction was retained while shared actuator predictions were not. Until its
+numerical source-backed receipt is frozen, that result is used as architectural
+motivation rather than as a pooled quantitative datum.
+
+The executable contract is frozen in
+
+    docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md.
+
+## 11. Reproduce
 
 Core implementation:
 
@@ -357,7 +410,7 @@ The sweep records:
 
 It also writes the closed-form unconstrained optimum for each forcing level.
 
-## 11. Claim boundary
+## 12. Claim boundary
 
 The exact results above hold for the declared local linear recurrence.
 
