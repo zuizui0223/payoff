@@ -1,0 +1,27 @@
+{
+  "system_name": "Eurasian wigeon",
+  "taxon": "Mareca penelope",
+  "source": {
+    "payoff_pr": 144,
+    "branch": "empirical/movement-phenology-macro-20260918",
+    "head_sha": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "direct_receipt_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
+    "direct_receipt_blob_sha": "d1a4014ce36a589cd32386890bb0cc5ee39fa478"
+  },
+  "W3_travel_speed_diagnostic": {
+    "status": "NOT_SUPPORTED",
+    "role": "secondary actuator-decomposition diagnostic, not promoted to the formal W2 actuator gate",
+    "log_speed_gain_per_phase_day": 0.00109,
+    "cluster_se": 0.000824,
+    "p_value": 0.197,
+    "interpretation": "measured between-staging travel speed does not explain the significant net phase contraction"
+  },
+  "W4_distance_moderation_diagnostic": {
+    "status": "NOT_SUPPORTED",
+    "beta": -0.0253,
+    "se": 0.0278,
+    "p_value": 0.371,
+    "route_progress_endpoint_distance_p": 0.67,
+    "interpretation": "published distance pattern remains literature context but is not promoted as a replicated controller moderator"
+  }
+}
