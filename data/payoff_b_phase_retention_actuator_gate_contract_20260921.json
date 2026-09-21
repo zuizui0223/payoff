@@ -39,10 +39,22 @@
     "prospective system-specific actuator discrimination"
   ],
   "wigeon_current_project_interpretation": {
-    "lambda_prediction": "supported",
-    "shared_actuator_predictions": "not_supported",
-    "quantitative_receipt": "pending_source_analysis_freeze",
-    "use": "architectural motivation, not pooled quantitative datum"
+    "status": "source_backed_quantitative_receipt_frozen",
+    "receipt": "docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md",
+    "machine_receipt": "data/payoff_b_wigeon_phase_retention_receipt_20260921.json",
+    "evidence_tier": "prospective_third_taxon",
+    "transitions": 224,
+    "individuals": 28,
+    "lambda": 0.85994,
+    "lambda_se": 0.04509,
+    "p_vs_lambda_1": 0.0019,
+    "primary_prediction": "lambda < 1",
+    "primary_outcome": "PASS",
+    "stronger_prediction": "abs(lambda) < 0.75",
+    "stronger_outcome": "FAIL",
+    "stopover_actuator": "NOT_SUPPORTED",
+    "travel_speed_actuator": "NOT_SUPPORTED",
+    "two_gate_class": "LAMBDA_PASS_ACTUATOR_FAIL"
   },
   "no_combined_score": true,
   "cross_system_synthesis": {
@@ -108,5 +120,14 @@
       "prospective actuator mechanism discriminator"
     ],
     "at_least_one_qualifying_contribution_required": true
+  },
+  "three_taxon_direct_coordinate": {
+    "receipt": "docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md",
+    "machine_receipt": "data/payoff_b_three_taxon_phase_retention_receipt_20260921.json",
+    "taxa": 3,
+    "descriptive_only": true,
+    "conventional_meta_analysis": false,
+    "universal_lambda_claim": false,
+    "prospective_extension_taxon": "Mareca penelope"
   }
 }
