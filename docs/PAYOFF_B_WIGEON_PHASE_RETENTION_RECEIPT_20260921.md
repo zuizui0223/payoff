@@ -194,11 +194,19 @@ strong-correction coefficient.
 
 ## 5. System-specific actuator tests
 
-### Stopover
+### Stopover — formal prospective actuator gate
 
 Registered directional prediction:
 
     S'(E) < 0.
+
+The source-backed actuator registration is frozen in
+
+    data/wigeon_stopover_actuator_registration_20260921.json
+
+with the preregistered inferential support rule
+
+    p <= 0.05.
 
 Observed:
 
@@ -211,12 +219,27 @@ Observed:
     p
         = 0.972.
 
-The point sign is negative but the fitted response is effectively zero.
+Thus the point estimate has the preregistered negative direction but the
+inferential support requirement fails.
+
+Machine interpretation:
+
+    direction_passed:
+        TRUE
+
+    support_passed:
+        FALSE
+
+    formal actuator gate:
+        FAIL.
 
 Therefore:
 
     STOPOVER ACTUATOR:
         NOT SUPPORTED.
+
+This distinction is important: PAYOFF-B does not count a nearly-zero coefficient
+as actuator support merely because its sign happens to match the prediction.
 
 The secondary registered stopover-gain band
 
