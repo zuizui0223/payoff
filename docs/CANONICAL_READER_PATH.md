@@ -425,6 +425,8 @@ theory/MIGRATION_PHENOLOGY_TRACKING.md
 -> docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md
 -> docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md
 -> docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md
+-> docs/PAYOFF_B_AIKENS_LAMBDA_PERTURBATION_PREREGISTRATION_20260921.md
+-> docs/PAYOFF_B_AIKENS_IRG_RECONSTRUCTION_HANDOFF_20260921.md
 -> docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md
 -> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md
 -> docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md.
@@ -514,9 +516,23 @@ must add a registered lambda prediction on the common coordinate/scale. An
 actuator-only perturbation can enter separately without a lambda coordinate,
 but it adds zero cross-system lambda support.
 
-The industrial mule-deer perturbation is the current example: it adds
-source-backed actuator-permeability evidence in a new forcing regime without
-adding a taxon or a lambda test.
+The industrial mule-deer perturbation first entered as source-backed
+actuator-permeability evidence in a new forcing regime without adding a taxon
+or a lambda test.
+
+A prospective within-taxon lambda perturbation is now frozen separately:
+
+    lambda_large-development
+    >
+    lambda_small-development
+
+on the signed local peak-IRG phase coordinate and a fixed 24-hour segment.
+The movement archive is already reconstructed. The offline environmental
+pipeline now implements MODIS-like NDVI preprocessing, annual double-logistic
+fitting, peak-IRG extraction, explicit GPS environmental joining, and fixed-24h
+phase-pair construction. The lambda outcome remains unopened because the
+required MODIS NDVI plus snow/quality source table has not yet been
+materialized.
 
 Taxon count is therefore secondary to the number and diversity of independent
 prospective lambda tests and mechanism-discriminating actuator tests.
