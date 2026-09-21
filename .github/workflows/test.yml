@@ -1,5 +1,9 @@
 name: test
 
+concurrency:
+  group: payoff-b-test-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
 on:
   push:
   pull_request:
