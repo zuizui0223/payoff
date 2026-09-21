@@ -13,6 +13,7 @@ dependencies = []
 test = ["pytest>=8"]
 irg = ["numpy>=1.26", "scipy>=1.11"]
 earthdata = ["pyproj>=3.6", "requests>=2.31", "pyshp>=2.3"]
+empirical = ["numpy>=1.26", "statsmodels>=0.14"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
