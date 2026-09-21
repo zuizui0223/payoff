@@ -1,0 +1,55 @@
+{
+  "frozen_date": "2026-09-21",
+  "status": "exact_raw_gps_manifest_materialized_source_gate_pass",
+  "source_artifact": {
+    "workflow_run": 35605623469,
+    "source_branch": "empirical/movement-phenology-macro-20260918",
+    "source_head": "0a934adbeaa386edf27fcfaabff9ca7837a2382b",
+    "artifact_id": 10643405042,
+    "artifact_name": "movement-phenology-industrial-mule-deer",
+    "artifact_sha256": "1f0d706dc6a102261009b7099c748dcce40abb2adedf7b88828395a1d392cfa0",
+    "raw_gps_file": "stage3_industrial_mule_deer_gps.csv",
+    "raw_gps_sha256": "03426804557a0244be3ed6eb9f461db578d3ce26fa2b28637f8e98bee9f09466"
+  },
+  "exact_source_identity": {
+    "gps_observations": 64539,
+    "animals": 137,
+    "animal_years": 253,
+    "groups": {
+      "small": 52063,
+      "large": 12476
+    },
+    "years": [
+      2005,
+      2006,
+      2008,
+      2009,
+      2010,
+      2015,
+      2016,
+      2017,
+      2018
+    ],
+    "canonical_source_gate": "PASS"
+  },
+  "exact_modis250_manifest": {
+    "unique_cells": 10899,
+    "unique_cell_years": 19500,
+    "year_scoped_tasks_at_1000_cells": 24,
+    "source_crs": "EPSG:32613",
+    "reconstruction_lane": "v061_sensitivity_only",
+    "manifest_sha256": "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463",
+    "cells_sha256": "3570bc04dfef9da677954246b636a99fa069c4b2e5b0020dd9ac1c4ee9dc8d02",
+    "links_sha256": "ef7445152bf2217a81088e1765cd215dfafb87036366c8f789e6ebe3747cbff1",
+    "receipt_sha256": "74df0f8c2463e25129160d8e5baaca94f61191a7eab16ea63aedad74e5da8e60"
+  },
+  "superseded_midpoint_preflight": {
+    "unique_cells": 11414,
+    "unique_cell_years": 20327,
+    "tasks": 25,
+    "status": "SUPERSEDED_BY_EXACT_RAW_GPS_MANIFEST"
+  },
+  "lambda_outcome_opened": false,
+  "next_blocker": "authenticated AppEEARS V061 sensitivity extraction from the exact 24-task manifest; study-faithful V006 remains preferred for primary reconstruction if independently materialized",
+  "claim_boundary": "source materialization and exact request geometry only; no AppEEARS environmental values, peak IRG, fixed-24h phase pairs, or lambda contrast have been opened"
+}
