@@ -323,3 +323,39 @@ def test_registered_actuator_can_require_predeclared_p_value_support():
     assert result.direction_passed
     assert not result.support_passed
     assert not evaluation.gate.all_prospective_passed
+
+
+def test_wigeon_strong_contraction_forecast_fails_on_reported_estimate():
+    registration = PhaseRetentionRegistration(
+        system_name="Eurasian wigeon",
+        independent_test_id="wigeon_vantoor2021_W1",
+        forcing_regime="consecutive_staging_transitions",
+        phase_coordinate_id="arrival_day_minus_local_5C_TGS_onset",
+        segment_scale_id="one_staging_transition",
+        lambda_low=-0.75,
+        lambda_high=0.75,
+        min_pairs=30,
+        require_retention_class="restoring",
+    )
+    observations = ReportedPhaseObservation(
+        system_name="Eurasian wigeon",
+        independent_test_id="wigeon_vantoor2021_W1",
+        phase_coordinate_id="arrival_day_minus_local_5C_TGS_onset",
+        segment_scale_id="one_staging_transition",
+        pairs=224,
+        lambda_retention=0.85994,
+        lambda_se=0.04509,
+        p_vs_no_correction=0.00190,
+    )
+    evaluation = evaluate_registered_reported_phase(
+        registration,
+        observations,
+    )
+
+    assert not evaluation.gate.passed
+    assert not evaluation.gate.interval_passed
+    assert evaluation.gate.class_passed
+    assert (
+        "observed lambda lies outside the predeclared prediction interval"
+        in evaluation.gate.reasons
+    )
