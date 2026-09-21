@@ -1,0 +1,17 @@
+{
+  "system_name": "system_A",
+  "independent_test_id": "A_lambda_holdout",
+  "forcing_regime": "moderate",
+  "predictions": [
+    {
+      "name": "speed",
+      "expected_direction": "increase",
+      "zero_tolerance": 0
+    },
+    {
+      "name": "stopover",
+      "expected_direction": "decrease",
+      "zero_tolerance": 0
+    }
+  ]
+}
