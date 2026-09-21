@@ -488,8 +488,30 @@ so that
 
 The canonical empirical comparison is lambda. The decomposition into speed,
 stopover, route reset, timing, or other actuators belongs to a separate
-system-specific prospective gate. Taxon count is therefore secondary to the
-number and diversity of independent lambda tests.
+system-specific prospective gate.
+
+The confirmatory path is now:
+
+    freeze phase-coordinate + segment scale
+    -> register lambda prediction
+    -> register system-specific actuator predictions
+    -> observe held-out system
+    -> evaluate lambda and actuator gates separately
+    -> synthesize prospective lambda tests only.
+
+Retrospective lambda analyses can be retained as descriptive evidence, but they
+are counted separately from prospective support. The synthesis layer refuses
+mixed phase coordinates or segment scales and exposes no actuator omnibus
+score.
+
+Before adding another taxon, run the taxon-inclusion gate. Raw-data availability
+alone is not sufficient; the proposed system must add an independent
+prospective lambda test, a new forcing regime, a predeclared lambda
+boundary/sign-change test, or a prospective actuator discriminator while
+remaining compatible with the common lambda coordinate.
+
+Taxon count is therefore secondary to the number and diversity of independent
+prospective lambda tests.
 
 Thus movement and timing feedback are exactly substitutable in the local linear
 null through their total restoring gain K=q_m+q_h. Stability requires 0<K<2;
