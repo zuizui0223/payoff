@@ -57,7 +57,7 @@
     "sensitivity_label": "v061_sensitivity_only",
     "silent_substitution_forbidden": true
   },
-  "current_blocker": "complete source-workflow raw GPS re-export, pass the canonical 64,539-point manifest gate, then materialize authenticated AppEEARS V061 sensitivity surface-reflectance/snow/quality data; V006 remains preferred for the study-faithful primary lane",
+  "current_blocker": "materialize the empirical MODIS/IRG environmental source after exact raw GPS re-export; all downstream fixed-24h pairing, clustered lambda fitting, and preregistered contrast evaluation are implemented",
   "lambda_outcome_opened": false,
   "pipeline_validation": {
     "workflow": "payoff-b IRG reconstruction",
@@ -141,5 +141,28 @@
     "unique_cell_years": 20327,
     "estimated_tasks_at_1000_cells": 25,
     "final_request_licensed": false
+  },
+  "phase_contrast_fitting": {
+    "module": "src/phase_retention_contrast_fit.py",
+    "cli": "scripts/fit_aikens_phase_retention_contrast.py",
+    "gate_cli": "scripts/evaluate_phase_retention_contrast.py",
+    "dependency_group": "empirical",
+    "model": "E_next ~ E_current + E_current:large_development + C(animal_year)",
+    "cluster_uncertainty": "animal_id",
+    "support_gate": {
+      "min_animals_per_group": 10,
+      "min_fixed_24h_transitions_per_group": 100
+    },
+    "outputs": [
+      "lambda_small",
+      "lambda_small_se",
+      "lambda_large",
+      "lambda_large_se",
+      "delta_lambda_large",
+      "delta_lambda_se",
+      "p_difference"
+    ],
+    "workflow": ".github/workflows/payoff-b-aikens-phase-contrast.yml",
+    "empirical_lambda_outcome_opened": false
   }
 }
