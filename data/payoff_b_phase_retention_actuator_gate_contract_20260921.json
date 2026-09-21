@@ -107,19 +107,10 @@
     "retrospective_evidence_counts_as_prospective_support": false
   },
   "taxon_inclusion_gate": {
+    "deprecated_name_for": "evidence_inclusion_gate",
     "raw_data_availability_is_sufficient": false,
-    "hard_compatibility_requirements": [
-      "common phase_coordinate_id",
-      "common segment_scale_id",
-      "new independent_test_id"
-    ],
-    "qualifying_contributions": [
-      "prospectively registered independent lambda test",
-      "new forcing regime",
-      "predeclared lambda boundary or sign change",
-      "prospective actuator mechanism discriminator"
-    ],
-    "at_least_one_qualifying_contribution_required": true
+    "new_forcing_regime_alone_is_sufficient": false,
+    "note": "backward-compatible API name; current inference unit is an independent test"
   },
   "three_taxon_direct_coordinate": {
     "receipt": "docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md",
@@ -143,5 +134,32 @@
     "fourth_taxon_status": "HOLD",
     "fourth_taxon_requires_inclusion_gate": true,
     "raw_data_availability_alone_is_sufficient": false
+  },
+  "evidence_inclusion_gate": {
+    "evidence_unit": "independent test, not taxon",
+    "raw_data_availability_sufficient": false,
+    "new_forcing_regime_alone_sufficient": false,
+    "new_independent_test_id_required": true,
+    "lambda_evidence": {
+      "requires_registered_lambda_endpoint": true,
+      "requires_common_phase_coordinate": true,
+      "requires_common_segment_scale": true,
+      "can_increase_lambda_support": true
+    },
+    "actuator_only_evidence": {
+      "prospective_actuator_endpoint_required": true,
+      "common_phase_coordinate_required": false,
+      "common_lambda_segment_scale_required": false,
+      "can_increase_lambda_support": false
+    },
+    "source_backed_actuator_only_example": {
+      "receipt": "docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md",
+      "taxon": "Odocoileus hemionus",
+      "forcing": "industrial development route boundary",
+      "lambda_status": "NOT_MEASURED",
+      "actuator_perturbation": "SUPPORTED",
+      "stronger_longitudinal_forecast": "NOT_SUPPORTED"
+    },
+    "preferred_cli": "scripts/evaluate_evidence_inclusion.py"
   }
 }
