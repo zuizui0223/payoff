@@ -30,6 +30,7 @@ class TaxonInclusionProposal:
     forcing_regime_is_new: bool
     tests_lambda_boundary_or_sign_change: bool
     prospective_actuator_discriminator: bool
+    within_system_lambda_perturbation: bool = False
     phase_coordinate_id: str | None = None
     segment_scale_id: str | None = None
     raw_data_available: bool = False
@@ -59,7 +60,15 @@ class TaxonInclusionProposal:
         return (
             self.lambda_test_preregistered
             or self.tests_lambda_boundary_or_sign_change
+            or self.within_system_lambda_perturbation
         )
+
+    @property
+    def requests_cross_system_lambda_evidence(self) -> bool:
+        return (
+            self.lambda_test_preregistered
+            or self.tests_lambda_boundary_or_sign_change
+        ) and not self.within_system_lambda_perturbation
 
     @property
     def requests_actuator_evidence(self) -> bool:
@@ -80,6 +89,7 @@ class TaxonInclusionGate:
     independent_test_id_is_new: bool
     registered_endpoint_present: bool
     contributes_to_lambda_synthesis: bool
+    contributes_within_system_lambda_perturbation: bool
     contributes_actuator_only: bool
     scientific_contribution_count: int
     contributions: tuple[str, ...]
@@ -113,12 +123,18 @@ def evaluate_taxon_inclusion(
         )
 
     lambda_requested = proposal.requests_lambda_evidence
+    cross_system_lambda_requested = (
+        proposal.requests_cross_system_lambda_evidence
+    )
+    within_system_lambda_requested = (
+        proposal.within_system_lambda_perturbation
+    )
     actuator_requested = proposal.requests_actuator_evidence
     registered_endpoint_present = (
         lambda_requested or actuator_requested
     )
 
-    if lambda_requested:
+    if cross_system_lambda_requested:
         coordinate_compatible: bool | None = (
             proposal.phase_coordinate_id
             == canonical_phase_coordinate_id
@@ -126,6 +142,17 @@ def evaluate_taxon_inclusion(
         segment_scale_compatible: bool | None = (
             proposal.segment_scale_id
             == canonical_segment_scale_id
+        )
+    elif within_system_lambda_requested:
+        # A within-system perturbation needs a declared coordinate/scale, but
+        # it does not need to match the cross-system synthesis contract.
+        coordinate_compatible = (
+            proposal.phase_coordinate_id is not None
+            and bool(proposal.phase_coordinate_id.strip())
+        )
+        segment_scale_compatible = (
+            proposal.segment_scale_id is not None
+            and bool(proposal.segment_scale_id.strip())
         )
     else:
         # Not applicable to actuator-only evidence.
@@ -148,6 +175,10 @@ def evaluate_taxon_inclusion(
         contributions.append(
             "predeclared_lambda_boundary_or_sign_change"
         )
+    if proposal.within_system_lambda_perturbation:
+        contributions.append(
+            "prospective_within_system_lambda_perturbation"
+        )
     if proposal.prospective_actuator_discriminator:
         contributions.append(
             "prospective_actuator_mechanism_discriminator"
@@ -159,14 +190,25 @@ def evaluate_taxon_inclusion(
     if not registered_endpoint_present:
         blockers.append("NO_REGISTERED_ENDPOINT")
 
-    if lambda_requested:
+    if cross_system_lambda_requested:
         if not coordinate_compatible:
             blockers.append("PHASE_COORDINATE_INCOMPATIBLE")
         if not segment_scale_compatible:
             blockers.append("SEGMENT_SCALE_INCOMPATIBLE")
+    elif within_system_lambda_requested:
+        if not coordinate_compatible:
+            blockers.append("WITHIN_SYSTEM_PHASE_COORDINATE_MISSING")
+        if not segment_scale_compatible:
+            blockers.append("WITHIN_SYSTEM_SEGMENT_SCALE_MISSING")
 
     lambda_eligible = (
-        lambda_requested
+        cross_system_lambda_requested
+        and bool(coordinate_compatible)
+        and bool(segment_scale_compatible)
+        and independent_test_id_is_new
+    )
+    within_system_lambda_eligible = (
+        within_system_lambda_requested
         and bool(coordinate_compatible)
         and bool(segment_scale_compatible)
         and independent_test_id_is_new
@@ -181,6 +223,7 @@ def evaluate_taxon_inclusion(
         and independent_test_id_is_new
         and (
             lambda_eligible
+            or within_system_lambda_eligible
             or actuator_eligible
         )
     )
@@ -194,8 +237,13 @@ def evaluate_taxon_inclusion(
         independent_test_id_is_new=independent_test_id_is_new,
         registered_endpoint_present=registered_endpoint_present,
         contributes_to_lambda_synthesis=lambda_eligible,
+        contributes_within_system_lambda_perturbation=(
+            within_system_lambda_eligible
+        ),
         contributes_actuator_only=(
-            actuator_eligible and not lambda_eligible
+            actuator_eligible
+            and not lambda_eligible
+            and not within_system_lambda_eligible
         ),
         scientific_contribution_count=len(contributions),
         contributions=tuple(contributions),
