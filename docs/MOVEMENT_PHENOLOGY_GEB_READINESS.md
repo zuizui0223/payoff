@@ -78,7 +78,7 @@ funding
 conflicts of interest
 CRediT contributions
 acknowledgements
-anonymous reviewer repository / snapshot
+anonymous reviewer hosting / access test
 all-author approval
 portal metadata
 ~~~
@@ -108,12 +108,15 @@ BLINDED MAIN-TEXT FORMAT:
   GO
 
 FIGURES:
-  GO pending latest mechanical QA receipt
+  GO — latest mechanical QA PASS
 
 HUMAN METADATA:
   OPEN
 
-ANONYMOUS REVIEWER SNAPSHOT:
+ANONYMOUS REVIEWER SNAPSHOT BUILD:
+  GO — CI-built, identity scan PASS, immutable checksum recorded
+
+ANONYMOUS REVIEWER HOST / ACCESS TEST:
   OPEN
 
 PORTAL SUBMISSION:
@@ -121,3 +124,32 @@ PORTAL SUBMISSION:
 ~~~
 
 The project is now in submission assembly rather than exploratory analysis.
+
+
+## Reviewer-snapshot assembly receipt
+
+The anonymous reviewer package is now generated reproducibly by:
+
+~~~text
+scripts/build_movement_phenology_reviewer_snapshot.py
+.github/workflows/build-movement-phenology-reviewer-snapshot.yml
+~~~
+
+Latest validated package:
+
+~~~text
+files = 74
+identity / secret hits = 0
+raw tracking data included = false
+Git history included = false
+title page included = false
+public author-repository link included = false
+
+archive SHA-256 =
+f3d1a08f746f0c5dc81d49261c11855a200a1f0327154711f506c266de120ce4
+~~~
+
+This closes the snapshot-construction blocker. The remaining reviewer-code
+blocker is external delivery only: place the frozen archive on an anonymous
+reviewer-access host and verify that opening the link does not expose account
+ownership.
