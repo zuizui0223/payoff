@@ -58,5 +58,21 @@
     "silent_substitution_forbidden": true
   },
   "current_blocker": "materialize MODIS NDVI plus snow/quality time series for GPS-used pixel-years",
-  "lambda_outcome_opened": false
+  "lambda_outcome_opened": false,
+  "pipeline_validation": {
+    "workflow": "payoff-b IRG reconstruction",
+    "run_id": 35603379065,
+    "head_sha": "ed3a9aec4fd952c932dea9cebcff677ec9084553",
+    "artifact_id": 10640161096,
+    "artifact_sha256": "9659fac9a34cf39102675ab283474d025fcffe71eef2dbca16e5b79402840483",
+    "status": "SUCCESS",
+    "validated_steps": [
+      "IRG unit tests",
+      "synthetic annual NDVI",
+      "double-logistic peak IRG",
+      "GPS environmental join",
+      "fixed 24-hour phase pairs"
+    ],
+    "interpretation": "computational pipeline validation only; empirical environmental source remains pending"
+  }
 }
