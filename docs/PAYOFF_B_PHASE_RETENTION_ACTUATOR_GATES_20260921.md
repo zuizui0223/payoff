@@ -399,42 +399,106 @@ coordinate in
 That three-taxon receipt does not estimate one universal lambda and does not
 convert repeated barnacle-goose flyways into independent taxa.
 
-## 10. Taxon inclusion rule
+## 10. Independent evidence-inclusion rule
 
-A new taxon should be added when at least one of the following is true:
+The inclusion unit is now an **independent test**, not a taxon.
 
-1. it provides a genuinely independent prospectively registered lambda test;
-2. it occupies a forcing regime not represented by existing systems;
-3. it tests a predeclared boundary or sign change in lambda;
-4. it provides a prospective actuator test that discriminates among competing
-   mechanisms within that system.
+A candidate test can contribute through either gate.
 
-A taxon should not be added merely because another movement dataset is
-available.
+### Lambda evidence
 
-This policy is executable in:
+A proposed lambda test must:
+
+1. have a new independent-test ID;
+2. be prospectively registered or test a predeclared lambda boundary/sign
+   change;
+3. use the canonical phase-coordinate ID;
+4. use the canonical segment-scale ID.
+
+Only this branch can increase cross-system lambda support.
+
+### Actuator-only evidence
+
+A prospective system-specific actuator discriminator can be included without a
+lambda estimate.
+
+For actuator-only evidence:
+
+    phase coordinate:
+        not applicable
+
+    segment scale for lambda:
+        not applicable
+
+    contribution to cross-system lambda support:
+        zero.
+
+This permits informative within-taxon perturbations without pretending they are
+additional taxon-level lambda replications.
+
+The industrial-development mule-deer analysis is the current source-backed
+example:
+
+    same taxon:
+        Odocoileus hemionus
+
+    new forcing:
+        industrial-development route boundary
+
+    lambda:
+        not measured
+
+    movement-control permeability:
+        attenuated in the large-development population
+
+    stronger longitudinal deterioration:
+        not supported.
+
+Its frozen receipt is
+
+    docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md.
+
+### What is not enough
+
+Neither
+
+    raw-data availability
+
+nor
+
+    a new forcing regime by itself
+
+licenses inclusion.
+
+At least one registered endpoint is required:
+
+    lambda endpoint
+    or
+    prospective actuator endpoint.
+
+The implementation is
 
     src/taxon_inclusion_gate.py
-    scripts/evaluate_taxon_inclusion.py.
 
-Every candidate declares the proposed independent test ID, common phase
-coordinate, common segment scale, forcing regime, and which inferential
-contribution it adds.
+with preferred CLI
 
-Hard blockers are:
+    scripts/evaluate_evidence_inclusion.py.
+
+The historical taxon-named API is retained for backward compatibility.
+
+Hard blockers can include:
+
+    INDEPENDENT_TEST_ID_ALREADY_USED
+    NO_REGISTERED_ENDPOINT
+
+and, when lambda evidence is requested,
 
     PHASE_COORDINATE_INCOMPATIBLE
-    SEGMENT_SCALE_INCOMPATIBLE
-    INDEPENDENT_TEST_ID_ALREADY_USED
-    NO_NEW_INFERENTIAL_CONTRIBUTION.
+    SEGMENT_SCALE_INCOMPATIBLE.
 
-Raw-data availability is recorded but never counts as an inferential
-contribution by itself.
-
-The purpose is to prevent a large comparative panel from becoming a mechanical
-taxon-count exercise. Generality is earned by independent tests of the common
-lambda geometry and by prospective mechanism discrimination, not by adding
-another species label.
+The purpose is to prevent the empirical programme from becoming a mechanical
+taxon-count exercise. Generality is earned by independent tests of lambda
+geometry and by prospective within-system mechanism discrimination.
 
 ## 11. Code contract
 
