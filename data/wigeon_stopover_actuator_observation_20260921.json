@@ -1,0 +1,16 @@
+{
+  "system_name": "Eurasian wigeon",
+  "independent_test_id": "wigeon_vantoor2021_W2_stopover",
+  "observations": [
+    {
+      "name": "stopover_duration",
+      "observed_effect": -0.00014,
+      "p_value": 0.972
+    }
+  ],
+  "provenance": {
+    "direct_receipt_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
+    "direct_receipt_blob_sha": "d1a4014ce36a589cd32386890bb0cc5ee39fa478",
+    "cluster_se": 0.003902
+  }
+}
