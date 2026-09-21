@@ -2,8 +2,10 @@ import pytest
 
 from src.prospective_tracking_evaluation import (
     PhaseObservationSet,
+    ReportedPhaseObservation,
     evaluate_registered_actuators,
     evaluate_registered_phase,
+    evaluate_registered_reported_phase,
 )
 from src.prospective_tracking_registry import (
     ActuatorObservation,
@@ -224,5 +226,66 @@ def test_registered_actuator_evaluation_rejects_system_mismatch():
     with pytest.raises(ValueError, match="system_name"):
         evaluate_registered_actuators(
             actuator_registration(),
+            observations,
+        )
+
+
+def test_registered_reported_phase_evaluates_wigeon_style_summary():
+    registration = PhaseRetentionRegistration(
+        system_name="Eurasian wigeon",
+        independent_test_id="wigeon_W1",
+        forcing_regime="consecutive_staging_transitions",
+        phase_coordinate_id="arrival_day_minus_local_5C_TGS_onset",
+        segment_scale_id="one_staging_transition",
+        lambda_low=None,
+        lambda_high=1.0,
+        min_pairs=30,
+        require_retention_class="restoring",
+    )
+    observations = ReportedPhaseObservation(
+        system_name="Eurasian wigeon",
+        independent_test_id="wigeon_W1",
+        phase_coordinate_id="arrival_day_minus_local_5C_TGS_onset",
+        segment_scale_id="one_staging_transition",
+        pairs=224,
+        lambda_retention=0.85994,
+        lambda_se=0.04509,
+        p_vs_no_correction=0.00190,
+    )
+    evaluation = evaluate_registered_reported_phase(
+        registration,
+        observations,
+    )
+
+    assert evaluation.prospective_contract_satisfied
+    assert evaluation.gate.passed
+    assert evaluation.gate.estimate.lambda_retention == pytest.approx(
+        0.85994
+    )
+    assert evaluation.gate.estimate.source_kind == "reported_summary"
+
+
+def test_registered_reported_phase_rejects_source_scale_mismatch():
+    registration = PhaseRetentionRegistration(
+        system_name="Eurasian wigeon",
+        independent_test_id="wigeon_W1",
+        forcing_regime="consecutive_staging_transitions",
+        phase_coordinate_id="arrival_day_minus_local_5C_TGS_onset",
+        segment_scale_id="one_staging_transition",
+        lambda_high=1.0,
+        min_pairs=30,
+        require_retention_class="restoring",
+    )
+    observations = ReportedPhaseObservation(
+        system_name="Eurasian wigeon",
+        independent_test_id="wigeon_W1",
+        phase_coordinate_id="arrival_day_minus_local_5C_TGS_onset",
+        segment_scale_id="whole_route",
+        pairs=224,
+        lambda_retention=0.85994,
+    )
+    with pytest.raises(ValueError, match="segment scale"):
+        evaluate_registered_reported_phase(
+            registration,
             observations,
         )
