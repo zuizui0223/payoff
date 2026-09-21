@@ -300,23 +300,216 @@ All steps completed successfully.
 This receipt validates the computational handoff. It does not validate the
 Aikens environmental source reconstruction itself.
 
-## 9. Current blocker
+## 10. AppEEARS request-preparation layer
+
+The current-product sensitivity extraction is now implemented up to the
+authenticated network boundary.
+
+### Raw movement geometry
+
+The previously frozen movement artifact proves that the source contains
+
+    64,539 raw GPS points
+
+across
+
+    253 animal-years
+    137 animals
+    9 observed years
+    both WHB and DCC populations.
+
+The first movement artifact retained the valid step table but not the raw GPS
+point coordinates as a standalone CSV. The source branch has therefore been
+patched to export
+
+    stage3_industrial_mule_deer_gps.csv
+
+with
+
+    observation_id
+    animal_id
+    animal_year
+    group
+    timestamp
+    x
+    y
+
+in the original UTM Zone 13 metric coordinate system.
+
+The source workflow rerun is pending in GitHub Actions. The canonical
+AppEEARS request is not finalized from step midpoints.
+
+### Midpoint-only preflight
+
+To size the extraction before raw GPS re-export completes, the 64,286 valid
+step midpoints were projected to the standard MODIS 250 m sinusoidal grid.
+
+This proxy gives approximately
+
+    unique 250 m cells:
+        11,414
+
+    unique cell-years:
+        20,327
+
+    year-scoped tasks at 1000 cells/task:
+        25.
+
+Frozen receipt:
+
+    data/payoff_b_aikens_appeears_preflight_20260921.json
+
+This is an operational preflight only. It is explicitly rejected by the final
+source-identity gate because
+
+    64,286 != 64,539.
+
+### Exact manifest builder
+
+Implementation:
+
+    src/appeears_modis_request.py
+
+CLI:
+
+    scripts/build_aikens_appeears_manifest.py
+
+The builder:
+
+1. transforms projected GPS coordinates to MODIS sinusoidal coordinates;
+2. assigns the standard 250 m global cell;
+3. deduplicates repeated GPS observations to cells;
+4. retains observation-to-cell links;
+5. counts unique cell-years;
+6. creates year-scoped AppEEARS point tasks;
+7. requests current-product V061 sensitivity layers only.
+
+The current V061 task layers are:
+
+    MOD09Q1.061
+        sur_refl_b01
+        sur_refl_b02
+        sur_refl_qc_250m
+        sur_refl_state_250m
+
+    MOD10A2.061
+        Maximum_Snow_Extent
+        Eight_Day_Snow_Cover.
+
+### Source-identity gate
+
+Implementation:
+
+    src/appeears_manifest_gate.py
+
+CLI:
+
+    scripts/evaluate_aikens_appeears_manifest.py
+
+The canonical Aikens gate requires exactly
+
+    64,539 GPS observations
+
+and the frozen year set
+
+    2005
+    2006
+    2008
+    2009
+    2010
+    2015
+    2016
+    2017
+    2018
+
+with both
+
+    small
+    large
+
+development groups represented.
+
+This prevents the 64,286 midpoint proxy, an accidental subset, or a
+single-population extraction from being submitted as the canonical request.
+
+### Authenticated AppEEARS operational client
+
+Implementation:
+
+    src/appeears_client.py
+
+CLI:
+
+    scripts/run_appeears_manifest.py
+
+Default behavior is dry-run only.
+
+Authenticated submission requires explicit
+
+    --submit
+
+and reads credentials only from environment variables:
+
+    APPEEARS_TOKEN
+
+or
+
+    EARTHDATA_USERNAME
+    EARTHDATA_PASSWORD.
+
+The client implements the official flow
+
+    login
+    -> submit task
+    -> retrieve task status
+    -> list bundle
+    -> download bundle files.
+
+Credential values are never serialized to request receipts.
+
+The dedicated CI workflow is
+
+    .github/workflows/payoff-b-appeears-manifest.yml
+
+and tests request construction, source coverage gating, authenticated-client
+logic using a fake session, and dry-run task selection without contacting
+AppEEARS.
+
+### Version boundary remains unchanged
+
+This operational layer prepares
+
+    MOD09Q1.061 / MOD10A2.061
+
+as
+
+    v061_sensitivity_only.
+
+It does not promote V061 to the study-faithful lane.
+
+A historical V006 source remains preferred for the primary reconstruction if it
+can be materialized independently.
+
+## 11. Current blocker
 
 The movement archive is complete.
 
-The missing source layer is:
+The remaining operational sequence is:
 
-    annual MODIS surface-reflectance / NDVI time series
-    + snow / quality information
+    source-workflow raw GPS CSV re-export
+    -> canonical 64,539-point source gate
+    -> exact MODIS cell/year manifest
+    -> authenticated AppEEARS V061 sensitivity extraction
+    -> surface-reflectance / snow / quality materialization
+    -> IRG reconstruction
+    -> fixed 24-hour phase pairs
+    -> preregistered lambda contrast.
 
-for the GPS-used pixel-years.
-
-The offline IRG reconstruction is now executable once that source table is
-materialized.
+The current GitHub source workflow rerun is waiting for Actions capacity.
 
 The lambda outcome remains unopened.
 
-## 10. Why this is preferred over adding a fourth taxon
+## 11. Why this is preferred over adding a fourth taxon
 
 This design holds taxon largely fixed while changing forcing regime.
 
@@ -338,7 +531,7 @@ and
 Either result is more diagnostic of the controller architecture than adding a
 fourth species solely because another tracking dataset exists.
 
-## 11. Claim ceiling
+## 12. Claim ceiling
 
 Licensed now:
 
