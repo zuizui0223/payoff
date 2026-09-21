@@ -53,6 +53,11 @@ def main() -> None:
             name=str(row["name"]),
             expected_direction=str(row["expected_direction"]),
             zero_tolerance=float(row.get("zero_tolerance", 0.0)),
+            max_p_value=(
+                None
+                if row.get("max_p_value") is None
+                else float(row["max_p_value"])
+            ),
         )
         for row in registration_payload["predictions"]
     )
@@ -73,6 +78,11 @@ def main() -> None:
             ActuatorObservation(
                 name=str(row["name"]),
                 observed_effect=float(row["observed_effect"]),
+                p_value=(
+                    None
+                    if row.get("p_value") is None
+                    else float(row["p_value"])
+                ),
             )
             for row in observation_payload["observations"]
         ),
