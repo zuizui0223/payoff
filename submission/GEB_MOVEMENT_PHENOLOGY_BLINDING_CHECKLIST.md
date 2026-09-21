@@ -109,12 +109,27 @@ raw data whose licence forbids redistribution
 
 Reviewer snapshot gates:
 
+- [x] identity-scrubbed snapshot builds in CI
+- [x] snapshot contains no Git history, title page, raw tracking data or public author-owned repository link
+- [x] reviewer README and reproduction environment are included
+- [x] Figures 4–5 can be rebuilt from included derived registries
+- [x] original public datasets are fetched from source repositories/DOIs rather than redistributed
+- [x] checksum / immutable snapshot identifier recorded internally
 - [ ] anonymous/private reviewer link exists
 - [ ] link opens without revealing account owner
-- [ ] README reproduces Figures 4–5 and all promoted numeric receipts
-- [ ] original public datasets are fetched from source DOIs rather than redistributed when required
-- [ ] checksum / immutable snapshot identifier recorded internally
 - [ ] public repository link withheld until unblinding / acceptance as appropriate
+
+Current internal snapshot receipt:
+
+~~~text
+files = 74
+identity / secret hits = 0
+archive SHA-256 =
+f3d1a08f746f0c5dc81d49261c11855a200a1f0327154711f506c266de120ce4
+~~~
+
+The GitHub Actions artifact is an internal assembly receipt only; do not supply
+that author-owned Actions URL to blinded reviewers.
 
 ## E. Figure package
 
