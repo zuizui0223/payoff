@@ -1,5 +1,9 @@
 name: payoff-b IRG reconstruction
 
+concurrency:
+  group: payoff-b-irg-reconstruction-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     paths:
