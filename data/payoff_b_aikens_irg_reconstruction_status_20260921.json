@@ -1,0 +1,62 @@
+{
+  "frozen_date": "2026-09-21",
+  "status": "offline_irg_reconstruction_implemented_environmental_source_pending",
+  "study": {
+    "citation": "Aikens et al. 2022 Nature Ecology & Evolution 6:1733-1741",
+    "doi": "10.1038/s41559-022-01887-9",
+    "dryad_doi": "10.5061/dryad.7d7wm37z5"
+  },
+  "movement_source": {
+    "workflow_run": 35558837950,
+    "head_sha": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "artifact_id": 10621500814,
+    "artifact_sha256": "4e7071281487c29da107f135f9c388edd4eef836eecce1ba7401878038bdce10",
+    "gps_points": 64539,
+    "valid_steps": 64286,
+    "animal_years": 253,
+    "animals": 137,
+    "vegetation_fields_present": false
+  },
+  "phase_registration": {
+    "document": "docs/PAYOFF_B_AIKENS_LAMBDA_PERTURBATION_PREREGISTRATION_20260921.md",
+    "machine": "data/aikens2022_lambda_perturbation_registration_20260921.json",
+    "phase_coordinate_id": "signed_days_relative_to_local_peak_IRG",
+    "segment_scale_id": "fixed_24h_spring_migration_interval",
+    "primary_prediction": "lambda_large-development > lambda_small-development",
+    "max_p_value": 0.05,
+    "min_animals_per_group": 10,
+    "min_transitions_per_group": 100
+  },
+  "irg_reconstruction": {
+    "module": "src/irg_reconstruction.py",
+    "cli": "scripts/fit_peak_irg_from_ndvi.py",
+    "required_columns": [
+      "pixel_id",
+      "year",
+      "doy",
+      "ndvi",
+      "snow_free",
+      "quality_good"
+    ],
+    "processing": [
+      "quality screen",
+      "2.5% snow-free winter baseline",
+      "winter floor",
+      "three-observation moving median",
+      "92.5% upper scaling reference",
+      "0-1 annual scaling",
+      "double-logistic fit",
+      "analytic first derivative",
+      "maximum positive derivative day = peak IRG"
+    ]
+  },
+  "product_version_policy": {
+    "study_faithful": "MOD09Q1.006",
+    "study_faithful_label": "study_faithful_v006",
+    "sensitivity": "MOD09Q1.061",
+    "sensitivity_label": "v061_sensitivity_only",
+    "silent_substitution_forbidden": true
+  },
+  "current_blocker": "materialize MODIS NDVI plus snow/quality time series for GPS-used pixel-years",
+  "lambda_outcome_opened": false
+}
