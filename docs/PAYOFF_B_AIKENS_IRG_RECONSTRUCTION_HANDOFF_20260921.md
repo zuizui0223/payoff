@@ -2,7 +2,7 @@
 
 Frozen: 2026-09-21
 
-Status: **environmental-phase reconstruction implemented offline; source MODIS extraction still pending**.
+Status: **exact 64,539-point source manifest frozen; authenticated environmental extraction pending**.
 
 ## 1. Why this handoff exists
 
@@ -398,26 +398,48 @@ across
     9 observed years
     both WHB and DCC populations.
 
-The first movement artifact retained the valid step table but not the raw GPS
-point coordinates as a standalone CSV. The source branch has therefore been
-patched to export
+The raw GPS re-export is now complete.
+
+Source workflow:
+
+    run:
+        35605623469
+
+    source branch:
+        empirical/movement-phenology-macro-20260918
+
+    source commit:
+        0a934adbeaa386edf27fcfaabff9ca7837a2382b
+
+Frozen artifact:
+
+    artifact:
+        10643405042
+
+    sha256:
+        1f0d706dc6a102261009b7099c748dcce40abb2adedf7b88828395a1d392cfa0
+
+Exact raw file:
 
     stage3_industrial_mule_deer_gps.csv
 
-with
+    sha256:
+        03426804557a0244be3ed6eb9f461db578d3ce26fa2b28637f8e98bee9f09466
 
-    observation_id
-    animal_id
-    animal_year
-    group
-    timestamp
-    x
-    y
+The table contains exactly
 
-in the original UTM Zone 13 metric coordinate system.
+    64,539 GPS points
+    137 animals
+    253 animal-years
 
-The source workflow rerun is pending in GitHub Actions. The canonical
-AppEEARS request is not finalized from step midpoints.
+with both
+
+    small
+    large
+
+development groups and the frozen year set.
+
+The canonical source-identity gate therefore passes.
 
 ### Midpoint-only preflight
 
@@ -443,6 +465,50 @@ This is an operational preflight only. It is explicitly rejected by the final
 source-identity gate because
 
     64,286 != 64,539.
+
+The midpoint geometry is now superseded by the exact raw-GPS manifest.
+
+### Frozen exact raw-GPS manifest
+
+The canonical builder has now been run on the full 64,539-point source.
+
+Frozen receipt:
+
+    data/payoff_b_aikens_exact_manifest_status_20260921.json
+
+Exact request geometry:
+
+    GPS observations:
+        64,539
+
+    unique MODIS 250 m cells:
+        10,899
+
+    unique cell-years:
+        19,500
+
+    year-scoped tasks
+    at 1000 cells/task:
+        24.
+
+Frozen SHA256 values:
+
+    manifest:
+        d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463
+
+    cells table:
+        3570bc04dfef9da677954246b636a99fa069c4b2e5b0020dd9ac1c4ee9dc8d02
+
+    GPS-to-cell links:
+        ef7445152bf2217a81088e1765cd215dfafb87036366c8f789e6ebe3747cbff1.
+
+This exact manifest supersedes the midpoint preflight counts
+
+    11,414 cells
+    20,327 cell-years
+    25 tasks.
+
+The difference is operational only. No lambda or IRG outcome is opened.
 
 ### Exact manifest builder
 
@@ -572,21 +638,20 @@ can be materialized independently.
 
 ## 12. Current blocker
 
-The movement archive is complete.
+The movement archive, raw GPS re-export, source-identity gate, and exact MODIS
+cell/year manifest are complete.
 
-The remaining operational sequence is:
+The remaining operational sequence is now:
 
-    source-workflow raw GPS CSV re-export
-    -> canonical 64,539-point source gate
-    -> exact MODIS cell/year manifest
-    -> authenticated AppEEARS V061 sensitivity extraction
+    authenticated AppEEARS V061 sensitivity extraction
     -> surface-reflectance / snow / quality materialization
     -> IRG reconstruction
     -> fixed 24-hour phase pairs
     -> frozen clustered lambda fit
     -> preregistered lambda contrast gate.
 
-The current GitHub source workflow rerun is waiting for Actions capacity.
+Thus the only empirical data blocker in the V061 sensitivity lane is the
+authenticated environmental extraction itself.
 
 The lambda outcome remains unopened.
 
