@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate whether a candidate taxon adds inferential value to PAYOFF-B."""
+"""Evaluate whether a candidate independent test adds inferential value."""
 
 from __future__ import annotations
 
@@ -14,8 +14,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.taxon_inclusion_gate import (
-    TaxonInclusionProposal,
-    evaluate_taxon_inclusion,
+    EvidenceInclusionProposal,
+    evaluate_evidence_inclusion,
 )
 
 
@@ -53,7 +53,7 @@ def main() -> None:
     proposal_payload = json.loads(
         args.proposal_json.read_text(encoding="utf-8")
     )
-    proposal = TaxonInclusionProposal(**proposal_payload)
+    proposal = EvidenceInclusionProposal(**proposal_payload)
 
     existing: set[str] = set()
     if args.existing_test_ids_json is not None:
@@ -68,7 +68,7 @@ def main() -> None:
             )
         existing = {str(value) for value in payload}
 
-    gate = evaluate_taxon_inclusion(
+    gate = evaluate_evidence_inclusion(
         proposal,
         canonical_phase_coordinate_id=(
             args.canonical_phase_coordinate_id
@@ -81,16 +81,18 @@ def main() -> None:
 
     receipt = {
         "status": (
-            "taxon_inclusion_gate_pass"
+            "evidence_inclusion_gate_pass"
             if gate.include
-            else "taxon_inclusion_gate_fail"
+            else "evidence_inclusion_gate_fail"
         ),
         "proposal_source": str(args.proposal_json),
         "proposal": asdict(proposal),
         "gate": asdict(gate),
         "policy": (
-            "raw-data availability alone never licenses taxon addition; "
-            "at least one new inferential contribution is required"
+            "raw-data availability or a new forcing regime alone never "
+            "licenses inclusion; at least one registered lambda or actuator "
+            "endpoint is required. Lambda evidence additionally requires the "
+            "canonical coordinate and segment scale."
         ),
     }
 
@@ -102,7 +104,7 @@ def main() -> None:
 
     print(args.output)
     print(
-        "taxon_inclusion_gate "
+        "evidence_inclusion_gate "
         f"system={proposal.system_name} "
         f"include={int(gate.include)} "
         f"contributions={gate.scientific_contribution_count} "
@@ -111,7 +113,7 @@ def main() -> None:
 
     if args.fail_on_exclusion and not gate.include:
         raise SystemExit(
-            "candidate taxon does not add a licensed inferential contribution"
+            "candidate evidence unit does not add a licensed inferential contribution"
         )
 
 
