@@ -26,8 +26,8 @@ class PhaseRetentionRegistration:
     forcing_regime: str
     phase_coordinate_id: str
     segment_scale_id: str
-    lambda_low: float
-    lambda_high: float
+    lambda_low: float | None = None
+    lambda_high: float | None = None
     min_pairs: int = 3
     require_retention_class: RetentionClass | None = None
 
