@@ -73,6 +73,8 @@ jobs:
       - run: python scripts/audit_interval_tracking_calibration.py examples/tracking/three_hour_latent_substeps.csv --target-interval-hours 3 --latent-substeps 3 --patch-spacing 1 --symmetry-tolerance 0.05 --timing-axis-isolated --spatial-gradient 0.2 --wave-displacement-per-observation-interval 0.9 --phenology-scale 0.1 --max-abs-phenology-shift 20 --output outputs/ci_payoff_b_three_hour_latent_controls.json
       - run: python scripts/audit_mule_deer_phase_summary.py
       - run: python scripts/audit_aikens_2022_phase_controller.py
+      - run: python scripts/evaluate_phase_retention_gate.py examples/tracking/phase_retention_gate.csv --lambda-low 0.45 --lambda-high 0.55 --min-pairs 4 --require-retention-class restoring --fail-on-gate-failure --output outputs/ci_payoff_b_phase_retention_gate.json
+      - run: python scripts/evaluate_actuator_gate.py examples/tracking/system_specific_actuator_gate.json --output outputs/ci_payoff_b_actuator_gate.json
       - run: |
           cat > outputs/ci_mule_deer_summary.csv <<'EOF'
           animal_id,year,migration_distance,movement_rate,start_days_from_peak,end_days_from_peak
