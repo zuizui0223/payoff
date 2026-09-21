@@ -65,7 +65,7 @@ figure manual QA:
   PASS for current Fig.4 and Fig.5
 
 figure mechanical QA:
-  IMPLEMENTED — CI result required on latest head
+  PASS — latest-head CI complete
 ~~~
 
 ## Human-input gates still open
@@ -120,7 +120,7 @@ ANONYMOUS REVIEWER HOST / ACCESS TEST:
   OPEN
 
 PORTAL SUBMISSION:
-  NOT YET
+  READY AFTER HUMAN METADATA + EXTERNAL ANONYMOUS-HOST ACCESS CHECK
 ~~~
 
 The project is now in submission assembly rather than exploratory analysis.
@@ -153,3 +153,32 @@ This closes the snapshot-construction blocker. The remaining reviewer-code
 blocker is external delivery only: place the frozen archive on an anonymous
 reviewer-access host and verify that opening the link does not expose account
 ownership.
+
+
+## Repository handoff state — 2026-09-21
+
+All repository-controlled submission gates are now closed:
+
+~~~text
+science / claim ceiling                  PASS
+three-taxon direct phase retention       PASS
+prospective wigeon primary test           PASS
+stronger wigeon forecast                  FAILED AS REGISTERED
+multi-flyway route replication            PASS
+information-vs-retention decomposition    PASS
+quantitative actuation perturbation       PASS WITH NEGATIVE LONGITUDINAL TEST
+structured novelty search                 PASS FOR GEB
+GEB manuscript audit                      PASS
+figure build + mechanical QA              PASS
+double-anonymous identity audit           PASS
+reviewer snapshot construction            PASS
+latest-head repository test suite         PASS
+~~~
+
+Remaining actions require human/account-specific information or an external
+anonymous hosting surface and are therefore intentionally not auto-filled.
+See:
+
+~~~text
+submission/GEB_MOVEMENT_PHENOLOGY_PORTAL_HANDOFF.md
+~~~
