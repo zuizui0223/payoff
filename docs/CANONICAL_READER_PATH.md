@@ -424,6 +424,7 @@ theory/MIGRATION_PHENOLOGY_TRACKING.md
 -> docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md
 -> docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md
 -> docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md
+-> docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md
 -> docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md
 -> docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md
 -> docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md.
@@ -507,14 +508,18 @@ are counted separately from prospective support. The synthesis layer refuses
 mixed phase coordinates or segment scales and exposes no actuator omnibus
 score.
 
-Before adding another taxon, run the taxon-inclusion gate. Raw-data availability
-alone is not sufficient; the proposed system must add an independent
-prospective lambda test, a new forcing regime, a predeclared lambda
-boundary/sign-change test, or a prospective actuator discriminator while
-remaining compatible with the common lambda coordinate.
+Before adding another evidence unit, run the inclusion gate. Raw-data
+availability and a new forcing regime are context, not endpoints. A lambda test
+must add a registered lambda prediction on the common coordinate/scale. An
+actuator-only perturbation can enter separately without a lambda coordinate,
+but it adds zero cross-system lambda support.
+
+The industrial mule-deer perturbation is the current example: it adds
+source-backed actuator-permeability evidence in a new forcing regime without
+adding a taxon or a lambda test.
 
 Taxon count is therefore secondary to the number and diversity of independent
-prospective lambda tests.
+prospective lambda tests and mechanism-discriminating actuator tests.
 
 Thus movement and timing feedback are exactly substitutable in the local linear
 null through their total restoring gain K=q_m+q_h. Stability requires 0<K<2;
