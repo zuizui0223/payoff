@@ -11,6 +11,7 @@ dependencies = []
 
 [project.optional-dependencies]
 test = ["pytest>=8"]
+irg = ["numpy>=1.26", "scipy>=1.11"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
