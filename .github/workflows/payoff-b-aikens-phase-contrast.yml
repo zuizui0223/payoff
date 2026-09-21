@@ -1,5 +1,9 @@
 name: payoff-b Aikens phase contrast
 
+concurrency:
+  group: payoff-b-aikens-phase-contrast-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     paths:
