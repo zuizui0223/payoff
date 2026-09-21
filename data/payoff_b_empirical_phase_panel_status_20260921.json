@@ -1,6 +1,6 @@
 {
   "frozen_date": "2026-09-21",
-  "status": "three_taxon_coordinate_established_fourth_taxon_hold",
+  "status": "three_taxon_lambda_coordinate_plus_within_taxon_actuator_evidence",
   "direct_taxa": [
     {
       "taxon": "Odocoileus hemionus",
@@ -46,13 +46,33 @@
   "fourth_taxon": {
     "status": "HOLD",
     "raw_data_availability_sufficient": false,
-    "inclusion_gate_required": true,
-    "qualifying_contributions": [
-      "new prospective independent lambda test",
-      "new forcing regime",
-      "predeclared lambda boundary or sign-change test",
-      "prospective actuator mechanism discriminator"
-    ]
+    "new_forcing_regime_alone_sufficient": false,
+    "evidence_inclusion_gate_required": true,
+    "lambda_candidate_requirements": [
+      "new prospective independent lambda test or boundary test",
+      "common phase coordinate",
+      "common segment scale",
+      "new independent test ID"
+    ],
+    "actuator_only_alternative": "same-taxon prospective mechanism perturbations can add evidence without adding taxon count or lambda support"
   },
-  "preferred_next_empirical_move": "test a new lambda region or boundary rather than add taxonomy mechanically"
+  "preferred_next_empirical_move": "add inferential coverage in lambda-space or mechanism-space before adding taxonomy",
+  "evidence_units": {
+    "direct_phase_retention_taxa": 3,
+    "prospective_lambda_extensions": 1,
+    "actuator_only_forcing_perturbations": 1,
+    "actuator_only_examples": [
+      {
+        "system": "industrial mule deer",
+        "taxon": "Odocoileus hemionus",
+        "forcing": "industrial development route boundary",
+        "lambda_status": "NOT_MEASURED",
+        "lambda_tests_added": 0,
+        "taxon_count_added": 0,
+        "actuator_permeability": "SUPPORTED",
+        "stronger_longitudinal_forecast": "NOT_SUPPORTED",
+        "receipt": "docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md"
+      }
+    ]
+  }
 }
