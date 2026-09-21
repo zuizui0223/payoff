@@ -22,9 +22,9 @@
 
 ## Introduction
 
-Seasonal migration is a tracking problem. Animals move through landscapes in which food availability, temperature, snowmelt, vegetation development, and breeding opportunity change in both space and time. A large literature shows that migrants can follow green-up, adjust migration timing, alter stopover behavior, and respond to spatial variation in the predictability of spring. The same literature also shows striking departures from continuous tracking: some migrants jump between seasonal ranges, some overtake a green wave near breeding sites, infrastructure can decouple movement from phenology, and large herbivores can modify the vegetation dynamics they appear to track.
+Seasonal migration is a tracking problem. Animals move through landscapes in which food availability, temperature, snowmelt, vegetation development, and breeding opportunity change in both space and time. A large literature shows that migrants can follow green-up, adjust migration timing, alter stopover behavior, and respond to spatial variation in the predictability of spring (Bischof et al., 2012; Kölzsch et al., 2015; Aikens et al., 2017; Bauer et al., 2020). The same literature also shows striking departures from continuous tracking: some migrants jump between seasonal ranges, some overtake a green wave near breeding sites, infrastructure can decouple movement from phenology, and large herbivores can modify the vegetation dynamics they appear to track (Bischof et al., 2012; van Toor et al., 2021; Aikens et al., 2022; Geremia et al., 2019).
 
-These results are usually expressed with system-specific quantities: days from peak green-up, arrival relative to onset of spring, migration speed, stopover duration, a green-wave surfing score, or a reaction-norm slope. Each is biologically meaningful, but they do not provide an obvious common response variable for comparing how strongly different movement systems preserve or correct phenological phase.
+These results are usually expressed with system-specific quantities: days from peak green-up, arrival relative to onset of spring, migration speed, stopover duration, a green-wave surfing score, or a reaction-norm slope (Aikens et al., 2017; Ortega et al., 2023; Laforge et al., 2025). Each is biologically meaningful, but they do not provide an obvious common response variable for comparing how strongly different movement systems preserve or correct phenological phase.
 
 Our starting point was an exact theoretical result from PAYOFF-B. In a symmetric two-patch environment with exact anti-phase seasonal switching, a constant migration rate has one positive long-run growth optimum, and the optimum scales with the environmental switching timescale. That benchmark suggested an empirical hypothesis: animal movement and environmental phenology might show an order-one timescale match in nature. We tested the broad version of that prediction first.
 
@@ -76,7 +76,7 @@ We therefore tested four linked predictions. First, a broad universal speed opti
 
 ### Broad bird test of a universal timescale optimum
 
-We reanalyzed the published Amaral et al. migration-front dataset, containing spring migration and vegetation green-up estimates for 55 eastern North American migratory bird species across 2002–2017. After the registered completeness and velocity filters, the analysis contained 5,816 species-year-cell observations.
+We reanalyzed the published Amaral et al. (2025) migration-front dataset, containing spring migration and vegetation green-up estimates for 55 eastern North American migratory bird species across 2002–2017. After the registered completeness and velocity filters, the analysis contained 5,816 species-year-cell observations.
 
 For each observation we defined
 
@@ -105,11 +105,11 @@ Observation intervals differed by movement architecture and were declared explic
 
 #### Mule deer
 
-For Ortega et al. mule deer, we used the official Nature Communications source-data workbook. The dataset provided 152 animal-years from 72 individuals across eight years. Phase was expressed as days from peak instantaneous rate of green-up. Published movement-rate and stopover summaries were combined with annual green-wave propagation estimates. We quantified the association between initial phase and relative animal-to-environment movement speed, stopover duration, and phase at migration end. Individual-clustered uncertainty was used for repeated animals.
+For Ortega et al. (2023) mule deer, we used the official Nature Communications source-data workbook. The dataset provided 152 animal-years from 72 individuals across eight years. Phase was expressed as days from peak instantaneous rate of green-up. Published movement-rate and stopover summaries were combined with annual green-wave propagation estimates. We quantified the association between initial phase and relative animal-to-environment movement speed, stopover duration, and phase at migration end. Individual-clustered uncertainty was used for repeated animals.
 
 #### Barnacle geese
 
-For Svalbard, Greenland, and Barents barnacle geese, we reconstructed spring stopovers from public Movebank GPS data using a common stay-region pipeline and independently reconstructed annual spring-onset anomalies from daily temperature. For fixed region-to-region transitions, unknown constant regional timing anchors shift intercepts but not the slope \(\lambda\), allowing anchor-invariant phase-transfer estimation.
+For Svalbard, Greenland, and Barents barnacle geese, we reconstructed spring stopovers from public Movebank GPS data from Kölzsch et al. (2015) using a common stay-region pipeline and independently reconstructed annual spring-onset anomalies from daily temperature. For fixed region-to-region transitions, unknown constant regional timing anchors shift intercepts but not the slope \(\lambda\), allowing anchor-invariant phase-transfer estimation.
 
 For each eligible transition we estimated
 
@@ -131,7 +131,7 @@ The three flyways were treated as repeated routes within one taxon, not as indep
 
 #### Eurasian wigeon
 
-The wigeon analysis was preregistered internally before promotion of a direct result. We reconstructed the original Movebank source, published four-state HMM parameters, track filtering, staging events, and the published 5 °C thermal-growing-season definition. The movement reconstruction was required to pass gates against reported trajectory counts, individual counts, endpoint distances, and migration speed. The independent environmental reconstruction was required to reproduce the published staging-event phase distribution within registered tolerance.
+The wigeon analysis, based on the public tracking system of van Toor et al. (2021), was preregistered internally before promotion of a direct result. We reconstructed the original Movebank source, published four-state HMM parameters, track filtering, staging events, and the published 5 °C thermal-growing-season definition. The movement reconstruction was required to pass gates against reported trajectory counts, individual counts, endpoint distances, and migration speed. The independent environmental reconstruction was required to reproduce the published staging-event phase distribution within registered tolerance.
 
 For consecutive staging events we modeled phase change as
 
@@ -165,7 +165,7 @@ was used as the environmental innovation scale. We compared this quantity descri
 
 ### Industrial-development actuation test
 
-We reanalyzed the archived spring-migration GPS and development-footprint shapefiles from Aikens et al. Coordinates were transformed into the GPS reference system before calculating distances.
+We reanalyzed the archived spring-migration GPS and development-footprint shapefiles from Aikens et al. (2022). Coordinates were transformed into the GPS reference system before calculating distances.
 
 For each animal-year we defined a movement control-permeability proxy
 
@@ -379,13 +379,13 @@ Mule deer, barnacle geese, and wigeon all admit a direct phase-retention represe
 
 Mule deer combine movement-speed acceleration and stopover shortening. Barnacle geese show strong stopover-mediated STEP control, with deliberate overtake in some route stages. Wigeon exhibit much weaker but significant phase contraction without a detected stopover or transit-speed response.
 
-The third taxon is therefore more valuable than a simple replication. It falsifies the emerging stronger idea that successful tracking requires near-complete reactive reset. A common response variable survives while the common mechanism does not.
+The third taxon is therefore more valuable than a simple replication. It falsifies the emerging stronger idea that successful tracking requires near-complete reactive reset. A common response variable survives while the common mechanism does not. This distinction is also important because temporal-dependence coefficients in phenology are not new: autoregressive models have long been used for life-history timing and migratory arrival (Post et al., 2001; Forchhammer et al., 2002). Our λ instead describes retention of animal-minus-environment phase within a migration, across a declared movement opportunity.
 
 ### Information and feedback solve different parts of the same timing problem
 
 The barnacle-goose multi-flyway analysis also falsified a tempting but overly simple prediction: more predictable environments did not show stronger direct feedback correction in the current transition screen.
 
-This distinction matters mechanistically. Environmental predictability reduces uncertainty before the animal experiences the next condition. Feedback alters error after mismatch exists. A highly predictable route can therefore maintain precise timing with relatively weak reactive correction, while an unpredictable route may require stronger correction after new error is introduced.
+This distinction matters mechanistically. Environmental predictability reduces uncertainty before the animal experiences the next condition, an information problem already emphasized in migration theory and stopover studies (Kölzsch et al., 2015; Bauer et al., 2020). Feedback alters error after mismatch exists. A highly predictable route can therefore maintain precise timing with relatively weak reactive correction, while an unpredictable route may require stronger correction after new error is introduced.
 
 The variance decomposition
 
@@ -421,7 +421,7 @@ The current comparison spans three directly reconstructed taxa, not a global sam
 
 Environmental reconstructions are also heterogeneous. Wigeon validation uses an independent NASA POWER reconstruction rather than the original ERA5 grid, and barnacle-goose analyses use independently reconstructed annual phenology anomalies rather than byte-identical historical climate inputs. These reconstructions were validated against available published timing summaries and were handled with explicit claim ceilings.
 
-All direct results are observational. Phase contraction does not by itself demonstrate that the measured controller maximizes lifetime fitness or evolved specifically to minimize phenological error. Finally, the industrial-development comparison cannot isolate development causally from all population and landscape differences.
+All direct results are observational. Phase contraction does not by itself demonstrate that the measured controller maximizes lifetime fitness or evolved specifically to minimize phenological error. Cue accuracy, behavioral timing, and fitness consequences need not coincide, as emphasized by recent phenology theory and migration reaction-norm studies (Torstenson & Shaw, 2025; Laforge et al., 2025). Finally, the industrial-development comparison cannot isolate development causally from all population and landscape differences.
 
 ### Outlook
 
@@ -459,15 +459,21 @@ All analyses use previously published public datasets or archived source data. R
 
 **Figure 5. Industrial development attenuates relative movement control but does not show the predicted extra temporal decline.** (A) Median control permeability \(G\) for small- and large-development populations across all registered near/far distance definitions. (B) Year-by-large-development interaction estimates and 95% intervals across the same definitions; all intervals include zero.
 
-## References currently central to the claim boundary
+## References
 
-- Bischof et al. 2012. A migratory northern ungulate in the pursuit of spring: jumping or surfing the green wave? *The American Naturalist*. DOI 10.1086/667590.
-- Kölzsch et al. 2015. Forecasting spring from winter: predicting phenology of a migrant across its route. *Journal of Animal Ecology*. DOI 10.1111/1365-2656.12281.
-- Bauer, McNamara & Barta 2020. Environmental variability, reliability of information and the timing of migration. *Proceedings of the Royal Society B*. DOI 10.1098/rspb.2020.0622.
-- van Toor et al. 2021. Migration distance affects how closely Eurasian wigeons follow spring phenology during migration. *Movement Ecology*. DOI 10.1186/s40462-021-00296-0.
-- Aikens et al. 2022. Industrial energy development decouples ungulate migration from the green wave. *Nature Ecology & Evolution*. DOI 10.1038/s41559-022-01887-9.
-- Ortega et al. 2023. Phenological mismatch with environmental conditions is mitigated by compensatory plasticity in a migratory large herbivore. *Nature Communications*. DOI 10.1038/s41467-023-37750-z.
-- Geremia et al. 2019. Migrating bison engineer the green wave. *Proceedings of the National Academy of Sciences*. DOI 10.1073/pnas.1913783116.
+- Aikens, E. O., Kauffman, M. J., Merkle, J. A., Dwinnell, S. P. H., Fralick, G. L., & Monteith, K. L. (2017). The greenscape shapes surfing of resource waves in a large migratory herbivore. *Ecology Letters, 20*, 741–750. https://doi.org/10.1111/ele.12772
+- Aikens, E. O., Wyckoff, T. B., Sawyer, H., & Kauffman, M. J. (2022). Industrial energy development decouples ungulate migration from the green wave. *Nature Ecology & Evolution, 6*, 1733–1741. https://doi.org/10.1038/s41559-022-01887-9
+- Amaral, B. R., Youngflesh, C., Tingley, M., & Miller, D. A. W. (2025). Shifting gears in a shifting climate: Birds adjust migration speed in response to spring vegetation green-up. *Diversity and Distributions, 31*, e70033. https://doi.org/10.1111/ddi.70033
+- Bauer, S., McNamara, J. M., & Barta, Z. (2020). Environmental variability, reliability of information and the timing of migration. *Proceedings of the Royal Society B: Biological Sciences, 287*, 20200622. https://doi.org/10.1098/rspb.2020.0622
+- Bischof, R., Loe, L. E., Meisingset, E. L., Zimmermann, B., Van Moorter, B., & Mysterud, A. (2012). A migratory northern ungulate in the pursuit of spring: Jumping or surfing the green wave? *The American Naturalist, 180*, 407–424. https://doi.org/10.1086/667590
+- Forchhammer, M. C., Post, E., & Stenseth, N. C. (2002). North Atlantic Oscillation timing of long- and short-distance migration. *Journal of Animal Ecology, 71*, 1002–1014. https://doi.org/10.1046/j.1365-2656.2002.00664.x
+- Geremia, C., Merkle, J. A., Eacker, D. R., Wallen, R. L., White, P. J., Hebblewhite, M., & Kauffman, M. J. (2019). Migrating bison engineer the green wave. *Proceedings of the National Academy of Sciences, 116*, 25707–25713. https://doi.org/10.1073/pnas.1913783116
+- Kölzsch, A., Bauer, S., de Boer, R., Griffin, L., Cabot, D., Exo, K.-M., van der Jeugd, H. P., & Nolet, B. A. (2015). Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore. *Journal of Animal Ecology, 84*, 272–283. https://doi.org/10.1111/1365-2656.12281
+- Laforge, M. P., Vander Wal, E., Webber, Q. M. R., Geremia, C., Kauffman, M. J., McWhirter, D. E., Middleton, A., Mong, T. W., Monteith, K. L., Ortega, A. C., Sawyer, H., & Merkle, J. A. (2025). Consistent individual differences and plasticity in migration behaviour of three North American ungulates. *Ecology Letters, 28*, e70101. https://doi.org/10.1111/ele.70101
+- Ortega, A. C., Aikens, E. O., Merkle, J. A., Monteith, K. L., & Kauffman, M. J. (2023). Migrating mule deer compensate en route for phenological mismatches. *Nature Communications, 14*, 2008. https://doi.org/10.1038/s41467-023-37750-z
+- Post, E., Forchhammer, M. C., Stenseth, N. C., & Callaghan, T. V. (2001). The timing of life-history events in a changing climate. *Proceedings of the Royal Society B: Biological Sciences, 268*, 15–23. https://doi.org/10.1098/rspb.2000.1324
+- Torstenson, M., & Shaw, A. K. (2025). Strength of seasonality and type of migratory cue determine the fitness consequences of changing phenology for migratory animals. *Oikos, 2025*, e10862. https://doi.org/10.1111/oik.10862
+- van Toor, M. L., Kharitonov, S., Švažas, S., Dagys, M., Kleyheeg, E., Müskens, G., Ottosson, U., Žydelis, R., & Waldenström, J. (2021). Migration distance affects how closely Eurasian wigeons follow spring phenology during migration. *Movement Ecology, 9*, 61. https://doi.org/10.1186/s40462-021-00296-0
 
 ## Claim ceiling
 
