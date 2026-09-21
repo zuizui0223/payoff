@@ -261,6 +261,45 @@ Do not:
 - change product version after observing the contrast;
 - use the previously observed movement-permeability result to construct phase.
 
+## 9. Pipeline validation provenance
+
+The complete offline environmental handoff has been validated end to end on a
+synthetic annual NDVI curve.
+
+GitHub Actions:
+
+    workflow:
+        payoff-b IRG reconstruction
+
+    run:
+        35603379065
+
+    head:
+        ed3a9aec4fd952c932dea9cebcff677ec9084553
+
+Frozen artifact:
+
+    artifact:
+        10640161096
+
+    sha256:
+        9659fac9a34cf39102675ab283474d025fcffe71eef2dbca16e5b79402840483
+
+The successful workflow executes, in order:
+
+    optional IRG dependency installation
+    -> IRG unit tests
+    -> synthetic MODIS-like annual NDVI construction
+    -> double-logistic peak-IRG reconstruction
+    -> synthetic GPS pixel mapping
+    -> peak-IRG to GPS environmental join
+    -> fixed 24-hour phase-pair reconstruction.
+
+All steps completed successfully.
+
+This receipt validates the computational handoff. It does not validate the
+Aikens environmental source reconstruction itself.
+
 ## 9. Current blocker
 
 The movement archive is complete.
