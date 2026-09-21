@@ -56,6 +56,16 @@ def main() -> None:
                     zero_tolerance=float(
                         row.get("zero_tolerance", 0.0)
                     ),
+                    observed_p_value=(
+                        None
+                        if row.get("p_value") is None
+                        else float(row["p_value"])
+                    ),
+                    max_p_value=(
+                        None
+                        if row.get("max_p_value") is None
+                        else float(row["max_p_value"])
+                    ),
                     prospective=bool(
                         row.get("prospective", True)
                     ),
