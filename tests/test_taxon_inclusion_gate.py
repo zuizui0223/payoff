@@ -45,7 +45,7 @@ def test_raw_data_availability_alone_does_not_license_taxon_addition():
     assert not gate.include
     assert gate.raw_data_available
     assert gate.scientific_contribution_count == 0
-    assert "NO_NEW_INFERENTIAL_CONTRIBUTION" in gate.blockers
+    assert "NO_REGISTERED_ENDPOINT" in gate.blockers
 
 
 def test_preregistered_independent_lambda_test_is_sufficient_contribution():
@@ -61,7 +61,7 @@ def test_preregistered_independent_lambda_test_is_sufficient_contribution():
     )
 
 
-def test_new_forcing_regime_can_license_addition_even_without_actuator_commonality():
+def test_new_forcing_regime_alone_does_not_license_addition():
     gate = evaluate(
         proposal(
             forcing_regime_is_new=True,
@@ -69,8 +69,33 @@ def test_new_forcing_regime_can_license_addition_even_without_actuator_commonali
         )
     )
 
-    assert gate.include
+    assert not gate.include
     assert gate.contributions == ("new_forcing_regime",)
+    assert "NO_REGISTERED_ENDPOINT" in gate.blockers
+
+
+def test_new_forcing_plus_actuator_discriminator_can_license_same_taxon_perturbation():
+    gate = evaluate(
+        proposal(
+            phase_coordinate_id=None,
+            segment_scale_id=None,
+            forcing_regime_is_new=True,
+            prospective_actuator_discriminator=True,
+            raw_data_available=True,
+        )
+    )
+
+    assert gate.include
+    assert gate.lambda_evidence_requested is False
+    assert gate.actuator_evidence_requested is True
+    assert gate.coordinate_compatible is None
+    assert gate.segment_scale_compatible is None
+    assert gate.contributes_to_lambda_synthesis is False
+    assert gate.contributes_actuator_only is True
+    assert gate.contributions == (
+        "new_forcing_regime",
+        "prospective_actuator_mechanism_discriminator",
+    )
 
 
 def test_lambda_boundary_prediction_can_license_addition():
@@ -97,6 +122,8 @@ def test_system_specific_actuator_discriminator_can_license_addition():
     assert gate.contributions == (
         "prospective_actuator_mechanism_discriminator",
     )
+    assert gate.contributes_to_lambda_synthesis is False
+    assert gate.contributes_actuator_only is True
 
 
 def test_reused_independent_test_id_is_rejected():
@@ -158,3 +185,25 @@ def test_empty_canonical_coordinate_is_rejected():
             canonical_segment_scale_id=COMMON_SCALE,
             existing_independent_test_ids=EXISTING,
         )
+
+
+def test_actuator_only_evidence_does_not_require_phase_coordinate():
+    row = TaxonInclusionProposal(
+        system_name="industrial_mule_deer_perturbation",
+        independent_test_id="aikens_actuator_perturbation",
+        forcing_regime="industrial_development",
+        lambda_test_preregistered=False,
+        forcing_regime_is_new=True,
+        tests_lambda_boundary_or_sign_change=False,
+        prospective_actuator_discriminator=True,
+        phase_coordinate_id=None,
+        segment_scale_id=None,
+        raw_data_available=True,
+    )
+    gate = evaluate(row)
+
+    assert gate.include
+    assert gate.coordinate_compatible is None
+    assert gate.segment_scale_compatible is None
+    assert gate.contributes_actuator_only
+    assert not gate.contributes_to_lambda_synthesis
