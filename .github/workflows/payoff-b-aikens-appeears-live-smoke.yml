@@ -91,6 +91,53 @@ jobs:
           --download-dir outputs/appeears_task0_files
           --output outputs/aikens_appeears_live_smoke_receipt.json
 
+      - name: Convert downloaded V061 point results to IRG input
+        if: steps.creds.outputs.configured == 'true'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          receipt = json.loads(
+              Path("outputs/aikens_appeears_live_smoke_receipt.json").read_text()
+          )
+          if receipt.get("status") != "submitted_tasks_complete":
+              print(
+                  "Skip IRG conversion because live AppEEARS task status is "
+                  + str(receipt.get("status"))
+              )
+              raise SystemExit(0)
+
+          root = Path("outputs/appeears_task0_files")
+          csvs = sorted(root.rglob("*.csv"))
+          mod09 = [
+              path for path in csvs
+              if "MOD09Q1" in path.name.upper()
+          ]
+          mod10 = [
+              path for path in csvs
+              if "MOD10A2" in path.name.upper()
+          ]
+          if len(mod09) != 1 or len(mod10) != 1:
+              raise SystemExit(
+                  "expected exactly one MOD09Q1 CSV and one MOD10A2 CSV; "
+                  f"found mod09={len(mod09)} mod10={len(mod10)} files="
+                  + ",".join(path.name for path in csvs)
+              )
+
+          Path("outputs/aikens_live_mod09_path.txt").write_text(
+              str(mod09[0]) + "\n"
+          )
+          Path("outputs/aikens_live_mod10_path.txt").write_text(
+              str(mod10[0]) + "\n"
+          )
+          print("MOD09:", mod09[0])
+          print("MOD10:", mod10[0])
+          PY
+          MOD09="$(cat outputs/aikens_live_mod09_path.txt)"
+          MOD10="$(cat outputs/aikens_live_mod10_path.txt)"
+          python scripts/prepare_aikens_irg_input_from_appeears.py             --mod09q1-results "$MOD09"             --mod10a2-results "$MOD10"             --output outputs/aikens_live_task0_v061_irg_input.csv             --receipt-output outputs/aikens_live_task0_v061_irg_input_receipt.json
+
       - name: Write safe skip receipt when credentials are absent
         if: steps.creds.outputs.configured != 'true'
         run: |
@@ -119,4 +166,6 @@ jobs:
             outputs/aikens_exact_appeears_v061_manifest_receipt.json
             outputs/aikens_exact_manifest_coverage_gate.json
             outputs/aikens_appeears_live_smoke_receipt.json
+            outputs/aikens_live_task0_v061_irg_input.csv
+            outputs/aikens_live_task0_v061_irg_input_receipt.json
             outputs/appeears_task0_files
