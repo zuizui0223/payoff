@@ -697,6 +697,26 @@ This is the current clearest demonstration that exact local space-time
 substitutability can become complementarity once spatial mechanics and finite
 capacities are restored.
 
+The cross-system empirical architecture is now explicitly split into two
+independent gates in
+[docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md](docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md).
+
+The common coordinate is phase retention
+
+    e_out = r + lambda e_in.
+
+Under the local closed-loop model,
+
+    lambda = 1-K.
+
+This is the quantity to compare across systems. Speed, stopover use, route
+reset, directional movement, or other actuators are tested prospectively within
+each system and are not required to generalize across taxa. Therefore
+**lambda PASS / actuator FAIL is a valid and informative outcome**, not a
+contradiction. The current wigeon result motivates this separation: the strong
+lambda prediction was retained while shared actuator predictions were not.
+Its numerical receipt remains separate pending a source-backed freeze.
+
 The empirical bridge is now explicit in
 [docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md).
 Under the declared one-step movement family, projected fixed-interval component
