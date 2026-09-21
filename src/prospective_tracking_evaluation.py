@@ -16,6 +16,7 @@ from src.phase_retention_gate import (
     ActuatorPrediction,
     PhaseRetentionGate,
     estimate_phase_retention,
+    reported_phase_retention_estimate,
     evaluate_actuator_gate,
     evaluate_phase_retention_gate,
 )
@@ -50,6 +51,35 @@ class PhaseObservationSet:
 
 
 @dataclass(frozen=True)
+class ReportedPhaseObservation:
+    system_name: str
+    independent_test_id: str
+    phase_coordinate_id: str
+    segment_scale_id: str
+    pairs: int
+    lambda_retention: float
+    lambda_se: float | None = None
+    p_vs_no_correction: float | None = None
+
+    def __post_init__(self) -> None:
+        for name in (
+            "system_name",
+            "independent_test_id",
+            "phase_coordinate_id",
+            "segment_scale_id",
+        ):
+            if not str(getattr(self, name)).strip():
+                raise ValueError(f"{name} must be non-empty")
+        # Full numerical validation is centralized in the estimate builder.
+        reported_phase_retention_estimate(
+            pairs=self.pairs,
+            lambda_retention=self.lambda_retention,
+            lambda_se=self.lambda_se,
+            p_vs_no_correction=self.p_vs_no_correction,
+        )
+
+
+@dataclass(frozen=True)
 class ProspectivePhaseEvaluation:
     system_name: str
     independent_test_id: str
@@ -69,28 +99,78 @@ class ProspectiveActuatorEvaluation:
     prospective_contract_satisfied: bool = True
 
 
+def _check_phase_identity(
+    registration: PhaseRetentionRegistration,
+    *,
+    system_name: str,
+    independent_test_id: str,
+    phase_coordinate_id: str,
+    segment_scale_id: str,
+) -> None:
+    if registration.system_name != system_name:
+        raise ValueError(
+            "phase observation system_name does not match registration"
+        )
+    if registration.independent_test_id != independent_test_id:
+        raise ValueError(
+            "phase observation independent_test_id does not match registration"
+        )
+    if registration.phase_coordinate_id != phase_coordinate_id:
+        raise ValueError(
+            "phase observation coordinate does not match registered coordinate"
+        )
+    if registration.segment_scale_id != segment_scale_id:
+        raise ValueError(
+            "phase observation segment scale does not match registration"
+        )
+
+
+def evaluate_registered_reported_phase(
+    registration: PhaseRetentionRegistration,
+    observations: ReportedPhaseObservation,
+) -> ProspectivePhaseEvaluation:
+    """Evaluate a preregistered lambda prediction from a frozen summary estimate."""
+
+    _check_phase_identity(
+        registration,
+        system_name=observations.system_name,
+        independent_test_id=observations.independent_test_id,
+        phase_coordinate_id=observations.phase_coordinate_id,
+        segment_scale_id=observations.segment_scale_id,
+    )
+    estimate = reported_phase_retention_estimate(
+        pairs=observations.pairs,
+        lambda_retention=observations.lambda_retention,
+        lambda_se=observations.lambda_se,
+        p_vs_no_correction=observations.p_vs_no_correction,
+    )
+    gate = evaluate_phase_retention_gate(
+        estimate,
+        registration.prediction(),
+    )
+    return ProspectivePhaseEvaluation(
+        system_name=registration.system_name,
+        independent_test_id=registration.independent_test_id,
+        forcing_regime=registration.forcing_regime,
+        phase_coordinate_id=registration.phase_coordinate_id,
+        segment_scale_id=registration.segment_scale_id,
+        gate=gate,
+    )
+
+
 def evaluate_registered_phase(
     registration: PhaseRetentionRegistration,
     observations: PhaseObservationSet,
 ) -> ProspectivePhaseEvaluation:
     """Evaluate a frozen lambda prediction against later observations."""
 
-    if registration.system_name != observations.system_name:
-        raise ValueError(
-            "phase observation system_name does not match registration"
-        )
-    if registration.independent_test_id != observations.independent_test_id:
-        raise ValueError(
-            "phase observation independent_test_id does not match registration"
-        )
-    if registration.phase_coordinate_id != observations.phase_coordinate_id:
-        raise ValueError(
-            "phase observation coordinate does not match registered coordinate"
-        )
-    if registration.segment_scale_id != observations.segment_scale_id:
-        raise ValueError(
-            "phase observation segment scale does not match registration"
-        )
+    _check_phase_identity(
+        registration,
+        system_name=observations.system_name,
+        independent_test_id=observations.independent_test_id,
+        phase_coordinate_id=observations.phase_coordinate_id,
+        segment_scale_id=observations.segment_scale_id,
+    )
 
     estimate = estimate_phase_retention(observations.pairs)
     gate = evaluate_phase_retention_gate(
