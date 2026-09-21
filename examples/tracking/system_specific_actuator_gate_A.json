@@ -1,0 +1,17 @@
+{
+  "system_name": "system_A",
+  "predictions": [
+    {
+      "name": "speed",
+      "expected_direction": "increase",
+      "observed_effect": 0.4,
+      "prospective": true
+    },
+    {
+      "name": "stopover",
+      "expected_direction": "decrease",
+      "observed_effect": -0.2,
+      "prospective": true
+    }
+  ]
+}
