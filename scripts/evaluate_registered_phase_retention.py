@@ -15,7 +15,9 @@ if str(ROOT) not in sys.path:
 
 from src.prospective_tracking_evaluation import (
     PhaseObservationSet,
+    ReportedPhaseObservation,
     evaluate_registered_phase,
+    evaluate_registered_reported_phase,
 )
 from src.prospective_tracking_registry import (
     PhaseRetentionRegistration,
@@ -49,27 +51,57 @@ def main() -> None:
     registration = PhaseRetentionRegistration(
         **registration_payload
     )
-    pairs = tuple(
-        (float(row[0]), float(row[1]))
-        for row in observation_payload["pairs"]
-    )
-    observations = PhaseObservationSet(
-        system_name=str(observation_payload["system_name"]),
-        independent_test_id=str(
+    common = {
+        "system_name": str(observation_payload["system_name"]),
+        "independent_test_id": str(
             observation_payload["independent_test_id"]
         ),
-        phase_coordinate_id=str(
+        "phase_coordinate_id": str(
             observation_payload["phase_coordinate_id"]
         ),
-        segment_scale_id=str(
+        "segment_scale_id": str(
             observation_payload["segment_scale_id"]
         ),
-        pairs=pairs,
-    )
-    evaluation = evaluate_registered_phase(
-        registration,
-        observations,
-    )
+    }
+
+    if "reported_estimate" in observation_payload:
+        reported = observation_payload["reported_estimate"]
+        observations = ReportedPhaseObservation(
+            **common,
+            pairs=int(reported["pairs"]),
+            lambda_retention=float(
+                reported["lambda_retention"]
+            ),
+            lambda_se=(
+                None
+                if reported.get("lambda_se") is None
+                else float(reported["lambda_se"])
+            ),
+            p_vs_no_correction=(
+                None
+                if reported.get("p_vs_no_correction") is None
+                else float(reported["p_vs_no_correction"])
+            ),
+        )
+        evaluation = evaluate_registered_reported_phase(
+            registration,
+            observations,
+        )
+        observation_mode = "reported_summary"
+    else:
+        pairs = tuple(
+            (float(row[0]), float(row[1]))
+            for row in observation_payload["pairs"]
+        )
+        observations = PhaseObservationSet(
+            **common,
+            pairs=pairs,
+        )
+        evaluation = evaluate_registered_phase(
+            registration,
+            observations,
+        )
+        observation_mode = "raw_pairs"
 
     receipt = {
         "status": (
@@ -85,6 +117,7 @@ def main() -> None:
         "phase_coordinate_id": evaluation.phase_coordinate_id,
         "segment_scale_id": evaluation.segment_scale_id,
         "prospective_contract_satisfied": True,
+        "observation_mode": observation_mode,
         "gate": asdict(evaluation.gate),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
