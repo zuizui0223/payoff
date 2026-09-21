@@ -1,0 +1,53 @@
+name: Movement-phenology anonymous reviewer snapshot
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V2.md'
+      - 'analysis/movement_phenology/**'
+      - 'data/MOVEMENT_PHENOLOGY_*.csv'
+      - 'docs/MOVEMENT_PHENOLOGY_*.md'
+      - 'theory/MOVEMENT_PHENOLOGY_*.md'
+      - 'scripts/build_movement_phenology_macro_figures.py'
+      - 'scripts/audit_movement_phenology_*.py'
+      - 'scripts/build_movement_phenology_reviewer_snapshot.py'
+      - '.github/workflows/build-movement-phenology-reviewer-snapshot.yml'
+  pull_request:
+    paths:
+      - 'manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V2.md'
+      - 'analysis/movement_phenology/**'
+      - 'data/MOVEMENT_PHENOLOGY_*.csv'
+      - 'docs/MOVEMENT_PHENOLOGY_*.md'
+      - 'theory/MOVEMENT_PHENOLOGY_*.md'
+      - 'scripts/build_movement_phenology_macro_figures.py'
+      - 'scripts/audit_movement_phenology_*.py'
+      - 'scripts/build_movement_phenology_reviewer_snapshot.py'
+      - '.github/workflows/build-movement-phenology-reviewer-snapshot.yml'
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build identity-scrubbed reviewer snapshot
+        run: python scripts/build_movement_phenology_reviewer_snapshot.py
+
+      - name: Verify archive contains no git directory
+        run: |
+          unzip -l outputs/movement_phenology/GEB_REVIEWER_SNAPSHOT.zip | tee /tmp/snapshot-list.txt
+          ! grep -E '(^|/)\.git(/|$)' /tmp/snapshot-list.txt
+          cat outputs/movement_phenology/reviewer_snapshot_receipt.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: geb-anonymous-reviewer-snapshot
+          path: |
+            outputs/movement_phenology/GEB_REVIEWER_SNAPSHOT.zip
+            outputs/movement_phenology/reviewer_snapshot_receipt.json
+          if-no-files-found: error
