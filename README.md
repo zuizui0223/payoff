@@ -743,10 +743,19 @@ test on the common coordinate and segment scale. A prospective actuator-only
 test can also be included, but contributes zero additional lambda support.
 Raw-data availability or a new forcing regime alone is not enough.
 
-The source-backed industrial-development mule-deer analysis is the current
-actuator-only example. It adds a new within-taxon forcing perturbation without
-increasing the direct-taxon count or the lambda-support count. Its receipt is
+The source-backed industrial-development mule-deer analysis first entered as
+an actuator-only forcing perturbation without increasing the direct-taxon
+count. Its actuator receipt is
 [docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md](docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md).
+
+A stronger within-taxon test is now preregistered: large-development animals
+are predicted to retain more phase mismatch than small-development animals on
+a fixed 24-hour local peak-IRG coordinate. The offline peak-IRG reconstruction,
+MODIS product-version firewall, GPS environmental join, and fixed-interval
+phase-pair pipeline are implemented in
+[docs/PAYOFF_B_AIKENS_IRG_RECONSTRUCTION_HANDOFF_20260921.md](docs/PAYOFF_B_AIKENS_IRG_RECONSTRUCTION_HANDOFF_20260921.md).
+The lambda outcome remains unopened until the MODIS NDVI plus snow/quality
+source layer is materialized.
 
 Confirmatory evidence is now stricter than that verbal separation. Prediction
 registration and observation files are separate. A prospective lambda receipt
