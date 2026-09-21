@@ -1,16 +1,19 @@
-"""Prospective taxon-inclusion gate for PAYOFF-B cross-system tests.
+"""Inferential inclusion gate for PAYOFF-B cross-system evidence.
 
-Taxa are not added to increase sample size mechanically. A candidate system
-must add a distinct inferential contribution to the phase-retention programme.
+The evidence unit is an independent test, not a taxon label.
 
-At least one of the following scientific contributions is required:
-- an independent prospectively registered lambda test;
-- a forcing regime not represented in the current synthesis;
-- a predeclared lambda boundary / sign-change test;
-- a prospective actuator discriminator between competing mechanisms.
+A candidate is not included merely because data exist or because it occupies a
+new forcing regime. It must supply at least one prospectively evaluable endpoint:
 
-Compatibility with the common phase coordinate and segment scale is a separate
-hard requirement.
+- a lambda endpoint on the common phase-retention coordinate; or
+- a system-specific actuator discriminator.
+
+Lambda evidence additionally requires compatibility with the canonical phase
+coordinate and segment scale. Actuator-only perturbations do not, because they
+contribute zero lambda support by construction.
+
+The historical class/function names retain "Taxon" for backward compatibility,
+but the gate now applies equally to within-taxon forcing perturbations.
 """
 
 from __future__ import annotations
@@ -22,37 +25,69 @@ from dataclasses import dataclass
 class TaxonInclusionProposal:
     system_name: str
     independent_test_id: str
-    phase_coordinate_id: str
-    segment_scale_id: str
     forcing_regime: str
     lambda_test_preregistered: bool
     forcing_regime_is_new: bool
     tests_lambda_boundary_or_sign_change: bool
     prospective_actuator_discriminator: bool
+    phase_coordinate_id: str | None = None
+    segment_scale_id: str | None = None
     raw_data_available: bool = False
 
     def __post_init__(self) -> None:
         for name in (
             "system_name",
             "independent_test_id",
-            "phase_coordinate_id",
-            "segment_scale_id",
             "forcing_regime",
         ):
             if not str(getattr(self, name)).strip():
                 raise ValueError(f"{name} must be non-empty")
 
+        if self.phase_coordinate_id is not None:
+            if not self.phase_coordinate_id.strip():
+                raise ValueError(
+                    "phase_coordinate_id must be non-empty when supplied"
+                )
+        if self.segment_scale_id is not None:
+            if not self.segment_scale_id.strip():
+                raise ValueError(
+                    "segment_scale_id must be non-empty when supplied"
+                )
+
+    @property
+    def requests_lambda_evidence(self) -> bool:
+        return (
+            self.lambda_test_preregistered
+            or self.tests_lambda_boundary_or_sign_change
+        )
+
+    @property
+    def requests_actuator_evidence(self) -> bool:
+        return self.prospective_actuator_discriminator
+
+
+# Preferred semantic alias for new code.
+EvidenceInclusionProposal = TaxonInclusionProposal
+
 
 @dataclass(frozen=True)
 class TaxonInclusionGate:
     include: bool
-    coordinate_compatible: bool
-    segment_scale_compatible: bool
+    lambda_evidence_requested: bool
+    actuator_evidence_requested: bool
+    coordinate_compatible: bool | None
+    segment_scale_compatible: bool | None
     independent_test_id_is_new: bool
+    registered_endpoint_present: bool
+    contributes_to_lambda_synthesis: bool
+    contributes_actuator_only: bool
     scientific_contribution_count: int
     contributions: tuple[str, ...]
     blockers: tuple[str, ...]
     raw_data_available: bool
+
+
+EvidenceInclusionGate = TaxonInclusionGate
 
 
 def evaluate_taxon_inclusion(
@@ -62,10 +97,10 @@ def evaluate_taxon_inclusion(
     canonical_segment_scale_id: str,
     existing_independent_test_ids: set[str] | frozenset[str],
 ) -> TaxonInclusionGate:
-    """Evaluate whether a candidate taxon adds inferential value.
+    """Evaluate whether a candidate independent test adds inferential value.
 
-    Raw-data availability is recorded but never counts as a scientific
-    contribution by itself.
+    New forcing is informative context, but is not sufficient by itself.
+    At least one registered endpoint (lambda or actuator) is required.
     """
 
     if not canonical_phase_coordinate_id.strip():
@@ -77,14 +112,26 @@ def evaluate_taxon_inclusion(
             "canonical_segment_scale_id must be non-empty"
         )
 
-    coordinate_compatible = (
-        proposal.phase_coordinate_id
-        == canonical_phase_coordinate_id
+    lambda_requested = proposal.requests_lambda_evidence
+    actuator_requested = proposal.requests_actuator_evidence
+    registered_endpoint_present = (
+        lambda_requested or actuator_requested
     )
-    segment_scale_compatible = (
-        proposal.segment_scale_id
-        == canonical_segment_scale_id
-    )
+
+    if lambda_requested:
+        coordinate_compatible: bool | None = (
+            proposal.phase_coordinate_id
+            == canonical_phase_coordinate_id
+        )
+        segment_scale_compatible: bool | None = (
+            proposal.segment_scale_id
+            == canonical_segment_scale_id
+        )
+    else:
+        # Not applicable to actuator-only evidence.
+        coordinate_compatible = None
+        segment_scale_compatible = None
+
     independent_test_id_is_new = (
         proposal.independent_test_id
         not in existing_independent_test_ids
@@ -107,29 +154,68 @@ def evaluate_taxon_inclusion(
         )
 
     blockers: list[str] = []
-    if not coordinate_compatible:
-        blockers.append("PHASE_COORDINATE_INCOMPATIBLE")
-    if not segment_scale_compatible:
-        blockers.append("SEGMENT_SCALE_INCOMPATIBLE")
     if not independent_test_id_is_new:
         blockers.append("INDEPENDENT_TEST_ID_ALREADY_USED")
-    if not contributions:
-        blockers.append("NO_NEW_INFERENTIAL_CONTRIBUTION")
+    if not registered_endpoint_present:
+        blockers.append("NO_REGISTERED_ENDPOINT")
+
+    if lambda_requested:
+        if not coordinate_compatible:
+            blockers.append("PHASE_COORDINATE_INCOMPATIBLE")
+        if not segment_scale_compatible:
+            blockers.append("SEGMENT_SCALE_INCOMPATIBLE")
+
+    lambda_eligible = (
+        lambda_requested
+        and bool(coordinate_compatible)
+        and bool(segment_scale_compatible)
+        and independent_test_id_is_new
+    )
+    actuator_eligible = (
+        actuator_requested
+        and independent_test_id_is_new
+    )
 
     include = (
-        coordinate_compatible
-        and segment_scale_compatible
+        registered_endpoint_present
         and independent_test_id_is_new
-        and bool(contributions)
+        and (
+            lambda_eligible
+            or actuator_eligible
+        )
     )
 
     return TaxonInclusionGate(
         include=include,
+        lambda_evidence_requested=lambda_requested,
+        actuator_evidence_requested=actuator_requested,
         coordinate_compatible=coordinate_compatible,
         segment_scale_compatible=segment_scale_compatible,
         independent_test_id_is_new=independent_test_id_is_new,
+        registered_endpoint_present=registered_endpoint_present,
+        contributes_to_lambda_synthesis=lambda_eligible,
+        contributes_actuator_only=(
+            actuator_eligible and not lambda_eligible
+        ),
         scientific_contribution_count=len(contributions),
         contributions=tuple(contributions),
         blockers=tuple(blockers),
         raw_data_available=proposal.raw_data_available,
+    )
+
+
+def evaluate_evidence_inclusion(
+    proposal: EvidenceInclusionProposal,
+    *,
+    canonical_phase_coordinate_id: str,
+    canonical_segment_scale_id: str,
+    existing_independent_test_ids: set[str] | frozenset[str],
+) -> EvidenceInclusionGate:
+    """Preferred alias for the generalized independent-test gate."""
+
+    return evaluate_taxon_inclusion(
+        proposal,
+        canonical_phase_coordinate_id=canonical_phase_coordinate_id,
+        canonical_segment_scale_id=canonical_segment_scale_id,
+        existing_independent_test_ids=existing_independent_test_ids,
     )
