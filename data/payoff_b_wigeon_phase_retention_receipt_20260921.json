@@ -102,5 +102,23 @@
     "no universal actuator gain",
     "no causal identification of the hidden wigeon actuator",
     "no numerical pooling across incompatible segment definitions"
-  ]
+  ],
+  "gate_bundle": {
+    "primary_phase_registration": "data/wigeon_phase_retention_registration_20260921.json",
+    "primary_phase_observation": "data/wigeon_phase_retention_observation_20260921.json",
+    "strong_phase_registration": "data/wigeon_strong_contraction_registration_20260921.json",
+    "stopover_registration": "data/wigeon_stopover_actuator_registration_20260921.json",
+    "stopover_observation": "data/wigeon_stopover_actuator_observation_20260921.json",
+    "secondary_diagnostics": "data/wigeon_secondary_actuator_diagnostics_20260921.json",
+    "assembler": "scripts/assemble_wigeon_gate_bundle.py",
+    "expected": {
+      "primary_lambda": "PASS",
+      "strong_contraction": "FAIL",
+      "stopover_formal_gate": "FAIL",
+      "travel_speed_diagnostic": "NOT_SUPPORTED",
+      "distance_moderation_diagnostic": "NOT_SUPPORTED",
+      "two_gate_class": "LAMBDA_PASS_ACTUATOR_FAIL"
+    },
+    "omnibus_score": false
+  }
 }
