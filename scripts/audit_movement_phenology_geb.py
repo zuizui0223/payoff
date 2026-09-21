@@ -33,7 +33,7 @@ def first_author(author_text: str) -> str:
     x = author_text.strip()
     x = re.sub(r"\bet\s+al\.?", "", x, flags=re.I).strip()
     x = x.split("&", 1)[0].strip()
-    x = re.sub(r"^(?:see|from|by|using|based\\s+on)\\s+", "", x, flags=re.I).strip()
+    x = re.sub(r"^(?:see|from|by|using|based\s+on)\s+", "", x, flags=re.I).strip()
     return x
 
 
