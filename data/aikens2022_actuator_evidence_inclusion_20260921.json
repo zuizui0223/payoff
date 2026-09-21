@@ -1,0 +1,12 @@
+{
+  "system_name": "industrial_mule_deer_actuator_perturbation",
+  "independent_test_id": "aikens2022_control_permeability",
+  "phase_coordinate_id": null,
+  "segment_scale_id": null,
+  "forcing_regime": "industrial_development_route_boundary",
+  "lambda_test_preregistered": false,
+  "forcing_regime_is_new": true,
+  "tests_lambda_boundary_or_sign_change": false,
+  "prospective_actuator_discriminator": true,
+  "raw_data_available": true
+}
