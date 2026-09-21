@@ -1,0 +1,23 @@
+{
+  "system_name": "Eurasian wigeon",
+  "independent_test_id": "wigeon_vantoor2021_W1",
+  "phase_coordinate_id": "arrival_day_minus_local_5C_TGS_onset",
+  "segment_scale_id": "one_staging_transition",
+  "reported_estimate": {
+    "pairs": 224,
+    "lambda_retention": 0.85994,
+    "lambda_se": 0.04509,
+    "p_vs_no_correction": 0.0019
+  },
+  "provenance": {
+    "payoff_source_pr": 144,
+    "payoff_source_branch": "empirical/movement-phenology-macro-20260918",
+    "payoff_source_head": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "preregistration_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_CONTROLLER_PREREGISTRATION.md",
+    "preregistration_blob_sha": "e3b6b5d223a5707667883991f88197448729111c",
+    "direct_receipt_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
+    "direct_receipt_blob_sha": "d1a4014ce36a589cd32386890bb0cc5ee39fa478",
+    "direct_registry_path": "data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv",
+    "direct_registry_blob_sha": "dea4917baa362e0805015151ae34c7de4456b1ae"
+  }
+}
