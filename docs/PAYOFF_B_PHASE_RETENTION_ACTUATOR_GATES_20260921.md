@@ -162,6 +162,64 @@ present.
 Neither the common coordinate nor the declared system-specific mechanism is
 supported for that system.
 
+## 5. Cross-system synthesis contract
+
+The repository now has an explicit synthesis layer:
+
+    src/cross_system_phase_synthesis.py
+
+and
+
+    scripts/synthesize_cross_system_phase.py.
+
+The synthesis unit is an **independent lambda test**, not a taxon label and not
+an actuator prediction.
+
+Every system entry must declare:
+
+    independent_test_id
+    phase_coordinate_id
+    segment_scale_id
+    forcing_regime.
+
+The first field prevents the same data from being relabeled and counted more
+than once.
+
+The next two fields are stricter. Cross-system synthesis is refused unless all
+systems share one predeclared
+
+    phase_coordinate_id
+
+and one predeclared
+
+    segment_scale_id.
+
+This is necessary because lambda is interval- and segment-dependent. Two
+systems can use the same algebraic equation but still have incomparable lambda
+values if one coefficient describes a one-day transition and another describes
+an entire migration.
+
+Therefore standardization must happen **before** synthesis.
+
+The cross-system output reports:
+
+- the number of independent lambda tests;
+- lambda PASS / FAIL counts;
+- lambda values and descriptive range/median;
+- retention-class counts;
+- forcing regimes represented;
+- systems in the lambda PASS / actuator FAIL quadrant;
+- systems in the lambda FAIL / actuator PASS quadrant;
+- actuator results system by system.
+
+It intentionally does **not** report:
+
+- a pooled actuator pass rate;
+- a taxon-level actuator score;
+- an omnibus lambda + actuator score.
+
+The API raises an error if a caller requests an actuator omnibus score.
+
 ## 5. Manuscript hierarchy
 
 The manuscript should therefore use the hierarchy
@@ -260,7 +318,12 @@ System-specific actuator gate:
 
     python scripts/evaluate_actuator_gate.py ...
 
-The two outputs remain separate.
+Cross-system lambda synthesis:
+
+    python scripts/synthesize_cross_system_phase.py ...
+
+The synthesis manifest must declare one common phase-coordinate ID and segment-
+scale ID. The lambda and actuator outputs remain separate.
 
 There is intentionally no combined pass/fail score.
 
