@@ -6,6 +6,10 @@ on:
       - 'src/irg_reconstruction.py'
       - 'scripts/fit_peak_irg_from_ndvi.py'
       - 'tests/test_irg_reconstruction.py'
+      - 'src/phase_environment_join.py'
+      - 'scripts/attach_peak_irg_to_gps.py'
+      - 'scripts/build_fixed_interval_phase_pairs.py'
+      - 'tests/test_phase_environment_join.py'
       - 'pyproject.toml'
       - '.github/workflows/payoff-b-irg-reconstruction.yml'
   pull_request:
@@ -13,6 +17,10 @@ on:
       - 'src/irg_reconstruction.py'
       - 'scripts/fit_peak_irg_from_ndvi.py'
       - 'tests/test_irg_reconstruction.py'
+      - 'src/phase_environment_join.py'
+      - 'scripts/attach_peak_irg_to_gps.py'
+      - 'scripts/build_fixed_interval_phase_pairs.py'
+      - 'tests/test_phase_environment_join.py'
       - 'pyproject.toml'
       - '.github/workflows/payoff-b-irg-reconstruction.yml'
   workflow_dispatch:
@@ -81,6 +89,33 @@ jobs:
           --modis-product MOD09Q1.006
           --output outputs/ci_peak_irg.csv
           --receipt-output outputs/ci_peak_irg_receipt.json
+      - name: Build synthetic GPS pixel mapping
+        run: |
+          cat > outputs/ci_phase_gps.csv <<'EOF'
+          observation_id,animal_id,animal_year,group,timestamp,pixel_id
+          o1,A,A_2020,small,2020-04-20T12:00:00,synthetic_pixel
+          o2,A,A_2020,small,2020-04-21T12:00:00,synthetic_pixel
+          o3,A,A_2020,small,2020-04-22T12:00:00,synthetic_pixel
+          o4,A,A_2020,small,2020-04-23T12:00:00,synthetic_pixel
+          o5,A,A_2020,small,2020-04-24T12:00:00,synthetic_pixel
+          EOF
+      - name: Attach peak IRG to GPS
+        run: >
+          python scripts/attach_peak_irg_to_gps.py
+          outputs/ci_phase_gps.csv
+          outputs/ci_peak_irg.csv
+          --required-modis-product MOD09Q1.006
+          --minimum-matched-fraction 1.0
+          --output outputs/ci_phase_annotated_gps.csv
+          --receipt-output outputs/ci_phase_environment_join_receipt.json
+      - name: Build fixed 24-hour phase pairs
+        run: >
+          python scripts/build_fixed_interval_phase_pairs.py
+          outputs/ci_phase_annotated_gps.csv
+          --target-interval-hours 24
+          --max-target-deviation-hours 3
+          --pairs-output outputs/ci_fixed_interval_phase_pairs.csv
+          --receipt-output outputs/ci_fixed_interval_phase_pairs_receipt.json
       - uses: actions/upload-artifact@v4
         with:
           name: payoff-b-irg-reconstruction
@@ -88,3 +123,8 @@ jobs:
             outputs/ci_synthetic_modis_ndvi.csv
             outputs/ci_peak_irg.csv
             outputs/ci_peak_irg_receipt.json
+            outputs/ci_phase_gps.csv
+            outputs/ci_phase_annotated_gps.csv
+            outputs/ci_phase_environment_join_receipt.json
+            outputs/ci_fixed_interval_phase_pairs.csv
+            outputs/ci_fixed_interval_phase_pairs_receipt.json
