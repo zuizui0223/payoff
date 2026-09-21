@@ -220,7 +220,70 @@ It intentionally does **not** report:
 
 The API raises an error if a caller requests an actuator omnibus score.
 
-## 5. Manuscript hierarchy
+## 6. Prospective registration contract
+
+Confirmatory PAYOFF-B evidence is now required to pass through a frozen
+registration before observations are evaluated.
+
+The implementation separates:
+
+    prediction registration
+    -> later observations
+    -> evaluation receipt.
+
+Phase-retention registration freezes:
+
+    system_name
+    independent_test_id
+    forcing_regime
+    phase_coordinate_id
+    segment_scale_id
+    lambda_low
+    lambda_high
+    minimum pair count
+    optional required retention class.
+
+Actuator registration freezes:
+
+    system_name
+    independent_test_id
+    forcing_regime
+    actuator names
+    predicted directions
+    zero tolerances.
+
+The registration object contains **no observed effect sizes**.
+
+After observations arrive, evaluation requires exact matching of:
+
+    system_name
+    independent_test_id
+
+and, for lambda,
+
+    phase_coordinate_id
+    segment_scale_id.
+
+For actuator evaluation, the set of observed actuator names must exactly equal
+the registered names. Missing registered actuators and extra post-hoc actuator
+variables are both rejected.
+
+Confirmatory cross-system synthesis accepts prospective evidence only when the
+phase and actuator receipts explicitly record that the prospective contract was
+satisfied. Retrospective analyses can remain visible as a separate evidence
+tier but do not inflate prospective lambda support.
+
+Code:
+
+    src/prospective_tracking_registry.py
+    src/prospective_tracking_evaluation.py
+
+CLIs:
+
+    scripts/evaluate_registered_phase_retention.py
+    scripts/evaluate_registered_actuators.py
+
+## 7. Manuscript hierarchy
 
 The manuscript should therefore use the hierarchy
 
@@ -243,7 +306,7 @@ as the main measure of generality.
 A system can strengthen the paper even when its actuator gate fails, provided
 it gives an informative independent lambda test.
 
-## 6. Relationship to existing PAYOFF-B controller theory
+## 8. Relationship to existing PAYOFF-B controller theory
 
 The existing closed-loop model writes
 
@@ -272,7 +335,7 @@ This prevents the empirical program from relabeling:
 - stopover control as a universal movement coefficient;
 - route resetting as the same actuator as continuous speed adjustment.
 
-## 7. Wigeon interpretation
+## 9. Wigeon interpretation
 
 Current project interpretation supplied by the ongoing wigeon analysis:
 
@@ -291,20 +354,44 @@ Until the numerical wigeon analysis is frozen in its own source-backed receipt,
 this statement is architectural motivation rather than a quantitative
 meta-analytic datum.
 
-## 8. Taxon inclusion rule
+## 10. Taxon inclusion rule
 
 A new taxon should be added when at least one of the following is true:
 
-1. it provides a genuinely independent lambda test;
+1. it provides a genuinely independent prospectively registered lambda test;
 2. it occupies a forcing regime not represented by existing systems;
-3. it tests a predicted boundary or sign change in lambda;
+3. it tests a predeclared boundary or sign change in lambda;
 4. it provides a prospective actuator test that discriminates among competing
    mechanisms within that system.
 
 A taxon should not be added merely because another movement dataset is
 available.
 
-## 9. Code contract
+This policy is executable in:
+
+    src/taxon_inclusion_gate.py
+    scripts/evaluate_taxon_inclusion.py.
+
+Every candidate declares the proposed independent test ID, common phase
+coordinate, common segment scale, forcing regime, and which inferential
+contribution it adds.
+
+Hard blockers are:
+
+    PHASE_COORDINATE_INCOMPATIBLE
+    SEGMENT_SCALE_INCOMPATIBLE
+    INDEPENDENT_TEST_ID_ALREADY_USED
+    NO_NEW_INFERENTIAL_CONTRIBUTION.
+
+Raw-data availability is recorded but never counts as an inferential
+contribution by itself.
+
+The purpose is to prevent a large comparative panel from becoming a mechanical
+taxon-count exercise. Generality is earned by independent tests of the common
+lambda geometry and by prospective mechanism discrimination, not by adding
+another species label.
+
+## 11. Code contract
 
 Common-coordinate implementation:
 
@@ -327,7 +414,7 @@ scale ID. The lambda and actuator outputs remain separate.
 
 There is intentionally no combined pass/fail score.
 
-## 10. Claim boundary
+## 12. Claim boundary
 
 The phase-retention coefficient is not automatically scale-free across arbitrary
 time intervals or route segments.
