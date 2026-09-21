@@ -16,17 +16,6 @@ on:
       - 'tests/test_phase_environment_join.py'
       - 'pyproject.toml'
       - '.github/workflows/payoff-b-irg-reconstruction.yml'
-  pull_request:
-    paths:
-      - 'src/irg_reconstruction.py'
-      - 'scripts/fit_peak_irg_from_ndvi.py'
-      - 'tests/test_irg_reconstruction.py'
-      - 'src/phase_environment_join.py'
-      - 'scripts/attach_peak_irg_to_gps.py'
-      - 'scripts/build_fixed_interval_phase_pairs.py'
-      - 'tests/test_phase_environment_join.py'
-      - 'pyproject.toml'
-      - '.github/workflows/payoff-b-irg-reconstruction.yml'
   workflow_dispatch:
 
 jobs:
