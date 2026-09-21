@@ -717,6 +717,27 @@ contradiction. The current wigeon result motivates this separation: the strong
 lambda prediction was retained while shared actuator predictions were not.
 Its numerical receipt remains separate pending a source-backed freeze.
 
+Confirmatory evidence is now stricter than that verbal separation. Prediction
+registration and observation files are separate. A prospective lambda receipt
+must match its frozen system ID, independent-test ID, phase-coordinate ID and
+segment-scale ID. A prospective actuator receipt must contain exactly the
+registered actuator names: missing predictions and post-hoc added actuator
+variables are both rejected.
+
+Cross-system synthesis then counts **independent prospectively registered
+lambda tests**, not taxa and not actuator successes. Retrospective lambda
+analyses remain visible in a separate tier but do not increase prospective
+support. Synthesis is refused if phase-coordinate or segment-scale definitions
+differ across systems, and the API deliberately exposes no pooled actuator or
+lambda-plus-actuator omnibus score.
+
+Candidate taxa are screened before addition by
+`src/taxon_inclusion_gate.py`. Raw-data availability alone is insufficient.
+A candidate must use the common phase coordinate and segment scale, have a new
+independent-test ID, and add at least one inferential contribution: a
+prospectively registered lambda test, a new forcing regime, a predeclared lambda
+boundary/sign-change test, or a prospective actuator mechanism discriminator.
+
 The empirical bridge is now explicit in
 [docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md).
 Under the declared one-step movement family, projected fixed-interval component
@@ -803,6 +824,7 @@ Empirical handoffs:
 - [`docs/SCH_BALANCE_BITA_BRIDGE.md`](docs/SCH_BALANCE_BITA_BRIDGE.md)
 - [`docs/CONTINUOUS_ARCHITECTURE_HANDOFF.md`](docs/CONTINUOUS_ARCHITECTURE_HANDOFF.md)
 - [`docs/TEMPORAL_HANDOFF.md`](docs/TEMPORAL_HANDOFF.md)
+- [`docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md`](docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md)
 - [`docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md`](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md)
 
 Claim ceilings:
