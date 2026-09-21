@@ -259,6 +259,50 @@ def deduplicate_to_modis_250m_cells(
     )
 
 
+def summarize_appeears_coverage(
+    deduplication: MODISCellDeduplication,
+) -> dict:
+    """Summarize source coverage before authenticated request submission."""
+
+    observation_counts_by_year: dict[int, int] = {}
+    observation_counts_by_group: dict[str, int] = {}
+    cell_ids_by_year: dict[int, set[str]] = {}
+    cell_ids_by_group: dict[str, set[str]] = {}
+
+    for link in deduplication.links:
+        observation_counts_by_year[link.year] = (
+            observation_counts_by_year.get(link.year, 0) + 1
+        )
+        observation_counts_by_group[link.group] = (
+            observation_counts_by_group.get(link.group, 0) + 1
+        )
+        cell_ids_by_year.setdefault(link.year, set()).add(
+            link.cell_id
+        )
+        cell_ids_by_group.setdefault(link.group, set()).add(
+            link.cell_id
+        )
+
+    return {
+        "gps_observations_by_year": {
+            str(year): observation_counts_by_year[year]
+            for year in sorted(observation_counts_by_year)
+        },
+        "gps_observations_by_group": {
+            group: observation_counts_by_group[group]
+            for group in sorted(observation_counts_by_group)
+        },
+        "unique_cells_by_year": {
+            str(year): len(cell_ids_by_year[year])
+            for year in sorted(cell_ids_by_year)
+        },
+        "unique_cells_by_group": {
+            group: len(cell_ids_by_group[group])
+            for group in sorted(cell_ids_by_group)
+        },
+    }
+
+
 def _chunks(values, size: int):
     for start in range(0, len(values), size):
         yield values[start : start + size]
@@ -340,6 +384,10 @@ def build_appeears_v061_tasks(
                 }
             )
 
+    coverage = summarize_appeears_coverage(
+        deduplication
+    )
+
     return {
         "status": "appeears_v061_sensitivity_manifest",
         "reconstruction_lane": "v061_sensitivity_only",
@@ -352,6 +400,7 @@ def build_appeears_v061_tasks(
         "operational_max_points_per_task": max_points_per_task,
         "task_count": len(tasks),
         "years": sorted(cells_by_year),
+        "coverage": coverage,
         "layers": layers,
         "tasks": tasks,
         "claim_boundary": (
