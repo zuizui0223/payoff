@@ -261,7 +261,87 @@ Do not:
 - change product version after observing the contrast;
 - use the previously observed movement-permeability result to construct phase.
 
-## 9. Pipeline validation provenance
+## 9. Frozen pair-level lambda contrast fitter
+
+The statistical layer downstream of the fixed 24-hour phase pairs is now
+implemented explicitly rather than left as a manual analysis step.
+
+Implementation:
+
+    src/phase_retention_contrast_fit.py
+
+CLI:
+
+    scripts/fit_aikens_phase_retention_contrast.py
+
+Optional dependency group:
+
+    empirical
+
+with
+
+    numpy
+    statsmodels.
+
+The frozen model is the preregistered design:
+
+    E_next
+    ~
+    E_current
+    + E_current : large_development
+    + C(animal_year)
+
+with cluster-robust uncertainty by animal ID.
+
+The fitter reports:
+
+    lambda_small
+    SE(lambda_small)
+
+    delta_lambda_large
+    SE(delta_lambda_large)
+
+    lambda_large
+    SE(lambda_large)
+
+    p_difference.
+
+It applies the frozen support gate **before fitting**:
+
+    >=10 animals per development population
+    >=100 fixed-24h transitions per development population.
+
+If support fails, the fitter returns
+
+    NOT ESTIMABLE
+
+with no lambda coefficients.
+
+If support passes, the CLI writes the exact observation JSON consumed by
+
+    scripts/evaluate_phase_retention_contrast.py
+
+using the frozen registration
+
+    data/aikens2022_lambda_perturbation_registration_20260921.json.
+
+A dedicated CI workflow now validates the complete statistical handoff on a
+synthetic known-contrast fixture:
+
+    .github/workflows/payoff-b-aikens-phase-contrast.yml
+
+The synthetic fixture contains 10 animals and 120 transitions per group with
+
+    lambda_small ~= 0.30
+    lambda_large ~= 0.60
+
+and is required to recover a positive supported contrast and pass the same
+preregistered gate used by the future empirical observation.
+
+This workflow is a regression test for the statistical implementation only. It
+does not open the empirical Aikens lambda outcome.
+
+## 10. Pipeline validation provenance
 
 The complete offline environmental handoff has been validated end to end on a
 synthetic annual NDVI curve.
@@ -300,7 +380,7 @@ All steps completed successfully.
 This receipt validates the computational handoff. It does not validate the
 Aikens environmental source reconstruction itself.
 
-## 10. AppEEARS request-preparation layer
+## 11. AppEEARS request-preparation layer
 
 The current-product sensitivity extraction is now implemented up to the
 authenticated network boundary.
@@ -490,7 +570,7 @@ It does not promote V061 to the study-faithful lane.
 A historical V006 source remains preferred for the primary reconstruction if it
 can be materialized independently.
 
-## 11. Current blocker
+## 12. Current blocker
 
 The movement archive is complete.
 
@@ -503,13 +583,14 @@ The remaining operational sequence is:
     -> surface-reflectance / snow / quality materialization
     -> IRG reconstruction
     -> fixed 24-hour phase pairs
-    -> preregistered lambda contrast.
+    -> frozen clustered lambda fit
+    -> preregistered lambda contrast gate.
 
 The current GitHub source workflow rerun is waiting for Actions capacity.
 
 The lambda outcome remains unopened.
 
-## 11. Why this is preferred over adding a fourth taxon
+## 13. Why this is preferred over adding a fourth taxon
 
 This design holds taxon largely fixed while changing forcing regime.
 
@@ -531,7 +612,7 @@ and
 Either result is more diagnostic of the controller architecture than adding a
 fourth species solely because another tracking dataset exists.
 
-## 12. Claim ceiling
+## 14. Claim ceiling
 
 Licensed now:
 
