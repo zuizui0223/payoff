@@ -73,5 +73,40 @@
       "cross-system actuator score",
       "combined lambda-actuator omnibus score"
     ]
+  },
+  "prospective_registration": {
+    "required_for_confirmatory_evidence": true,
+    "prediction_and_observation_files_separate": true,
+    "phase_registration_fields": [
+      "system_name",
+      "independent_test_id",
+      "forcing_regime",
+      "phase_coordinate_id",
+      "segment_scale_id",
+      "lambda_low",
+      "lambda_high",
+      "min_pairs",
+      "require_retention_class"
+    ],
+    "actuator_registration_contains_observed_effects": false,
+    "exact_identity_match_required": true,
+    "actuator_name_set_must_match_exactly": true,
+    "retrospective_evidence_allowed": true,
+    "retrospective_evidence_counts_as_prospective_support": false
+  },
+  "taxon_inclusion_gate": {
+    "raw_data_availability_is_sufficient": false,
+    "hard_compatibility_requirements": [
+      "common phase_coordinate_id",
+      "common segment_scale_id",
+      "new independent_test_id"
+    ],
+    "qualifying_contributions": [
+      "prospectively registered independent lambda test",
+      "new forcing regime",
+      "predeclared lambda boundary or sign change",
+      "prospective actuator mechanism discriminator"
+    ],
+    "at_least_one_qualifying_contribution_required": true
   }
 }
