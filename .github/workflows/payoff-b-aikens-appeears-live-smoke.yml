@@ -1,0 +1,122 @@
+name: payoff-b Aikens AppEEARS live smoke
+
+concurrency:
+  group: payoff-b-aikens-appeears-live-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    paths:
+      - '.github/workflows/payoff-b-aikens-appeears-live-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  live-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Earthdata dependencies
+        run: python -m pip install --disable-pip-version-check -e ".[test,earthdata]"
+
+      - name: Download frozen exact raw-GPS source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/source
+          curl -fL             -H "Authorization: Bearer ${GH_TOKEN}"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10643405042/zip"             -o outputs/aikens_raw_gps_source.zip
+          echo "1f0d706dc6a102261009b7099c748dcce40abb2adedf7b88828395a1d392cfa0  outputs/aikens_raw_gps_source.zip" | sha256sum -c -
+          unzip -q outputs/aikens_raw_gps_source.zip             stage3_industrial_mule_deer_gps.csv             -d outputs/source
+          echo "03426804557a0244be3ed6eb9f461db578d3ce26fa2b28637f8e98bee9f09466  outputs/source/stage3_industrial_mule_deer_gps.csv" | sha256sum -c -
+
+      - name: Build exact canonical manifest
+        run: >
+          python scripts/build_aikens_appeears_manifest.py
+          outputs/source/stage3_industrial_mule_deer_gps.csv
+          --source-crs EPSG:32613
+          --max-points-per-task 1000
+          --manifest-output outputs/aikens_exact_appeears_v061_manifest.json
+          --cells-output outputs/aikens_exact_modis250_cells.csv
+          --links-output outputs/aikens_exact_gps_modis250_links.csv
+          --receipt-output outputs/aikens_exact_appeears_v061_manifest_receipt.json
+
+      - name: Require canonical source gate
+        run: >
+          python scripts/evaluate_aikens_appeears_manifest.py
+          outputs/aikens_exact_appeears_v061_manifest.json
+          --canonical-aikens
+          --fail-on-gate-failure
+          --output outputs/aikens_exact_manifest_coverage_gate.json
+
+      - name: Check credential availability
+        id: creds
+        env:
+          APPEEARS_TOKEN: ${{ secrets.APPEEARS_TOKEN }}
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: |
+          if [ -n "${APPEEARS_TOKEN}" ]; then
+            echo "configured=true" >> "${GITHUB_OUTPUT}"
+            echo "source=APPEEARS_TOKEN" >> "${GITHUB_OUTPUT}"
+          elif [ -n "${EARTHDATA_USERNAME}" ] && [ -n "${EARTHDATA_PASSWORD}" ]; then
+            echo "configured=true" >> "${GITHUB_OUTPUT}"
+            echo "source=EARTHDATA_USERNAME_PASSWORD" >> "${GITHUB_OUTPUT}"
+          else
+            echo "configured=false" >> "${GITHUB_OUTPUT}"
+            echo "source=none" >> "${GITHUB_OUTPUT}"
+          fi
+          echo "AppEEARS credentials configured: ${{ steps.creds.outputs.configured || 'pending' }}" || true
+
+      - name: Submit and download one exact-manifest task
+        if: steps.creds.outputs.configured == 'true'
+        env:
+          APPEEARS_TOKEN: ${{ secrets.APPEEARS_TOKEN }}
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: >
+          python scripts/run_appeears_manifest.py
+          outputs/aikens_exact_appeears_v061_manifest.json
+          --submit
+          --task-index 0
+          --wait
+          --poll-seconds 10
+          --max-polls 180
+          --download-dir outputs/appeears_task0_files
+          --output outputs/aikens_appeears_live_smoke_receipt.json
+
+      - name: Write safe skip receipt when credentials are absent
+        if: steps.creds.outputs.configured != 'true'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          payload = {
+              "status": "SKIPPED_NO_APPEEARS_CREDENTIALS",
+              "exact_manifest_source_gate": "PASS",
+              "selected_task_index": 0,
+              "network_submission_performed": False,
+              "credential_values_recorded": False,
+              "lambda_outcome_opened": False,
+          }
+          Path("outputs/aikens_appeears_live_smoke_receipt.json").write_text(
+              json.dumps(payload, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print("AppEEARS live smoke skipped: no configured credentials")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-aikens-appeears-live-smoke
+          path: |
+            outputs/aikens_exact_appeears_v061_manifest_receipt.json
+            outputs/aikens_exact_manifest_coverage_gate.json
+            outputs/aikens_appeears_live_smoke_receipt.json
+            outputs/appeears_task0_files
