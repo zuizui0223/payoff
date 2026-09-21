@@ -335,24 +335,69 @@ This prevents the empirical program from relabeling:
 - stopover control as a universal movement coefficient;
 - route resetting as the same actuator as continuous speed adjustment.
 
-## 9. Wigeon interpretation
+## 9. Wigeon quantitative result
 
-Current project interpretation supplied by the ongoing wigeon analysis:
+The preregistered Eurasian-wigeon analysis is now frozen in
 
-    strong lambda prediction:
-        supported;
+    docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md.
 
-    shared actuator predictions:
-        not supported.
+Source-backed prospective result:
+
+    consecutive staging transitions:
+        224
+
+    individuals:
+        28
+
+    lambda:
+        0.85994
+
+    SE:
+        0.04509
+
+    p versus lambda=1:
+        0.00190.
+
+Thus the preregistered primary prediction
+
+    lambda < 1
+
+passes.
+
+The stronger preregistered / exploratory forecast
+
+    |lambda| < 0.75
+
+fails.
+
+Measured actuator tests also fail to reproduce the mule-deer / goose
+architecture:
+
+    stopover slope:
+        -0.000140
+        p = 0.972
+
+    log travel-speed gain / phase-day:
+        +0.00109
+        p = 0.197.
+
+This is therefore the observed prospective example of
+
+    lambda PASS
+    actuator FAIL.
 
 The retained scientific consequence is:
 
 > phase retention is a stronger candidate for the cross-system coordinate than
 > a universal actuator rule.
 
-Until the numerical wigeon analysis is frozen in its own source-backed receipt,
-this statement is architectural motivation rather than a quantitative
-meta-analytic datum.
+A separate descriptive receipt freezes the existing three-taxon direct
+coordinate in
+
+    docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md.
+
+That three-taxon receipt does not estimate one universal lambda and does not
+convert repeated barnacle-goose flyways into independent taxa.
 
 ## 10. Taxon inclusion rule
 
