@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install figure dependencies
-        run: python -m pip install --disable-pip-version-check pandas numpy matplotlib
+        run: python -m pip install --disable-pip-version-check pandas numpy matplotlib pillow
       - name: Build synthesis figure
         run: python scripts/build_movement_phenology_macro_figures.py
       - uses: actions/upload-artifact@v4
@@ -41,5 +41,5 @@ jobs:
             outputs/movement_phenology/figures/FIG5_CONTROL_PERMEABILITY.png
             outputs/movement_phenology/figures/FIG5_CONTROL_PERMEABILITY.pdf
             outputs/movement_phenology/figures/FIG5_CONTROL_PERMEABILITY.svg
-            outputs/movement_phenology/figures/FIG5_DATA.csv
+            outputs/movement_phenology/figures/FIG5_DATA.csv\n            outputs/movement_phenology/figure_qa.json
           if-no-files-found: error
