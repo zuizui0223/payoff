@@ -212,3 +212,60 @@ def test_phase_prediction_requires_at_least_one_bound_or_class():
             min_pairs=3,
             require_retention_class=None,
         )
+
+
+def test_actuator_matching_direction_can_fail_inferential_support():
+    gate = evaluate_actuator_gate(
+        "wigeon_style_stopover",
+        [
+            ActuatorPrediction(
+                name="stopover",
+                expected_direction="decrease",
+                observed_effect=-0.000140,
+                observed_p_value=0.972,
+                max_p_value=0.05,
+            )
+        ],
+    )
+    result = gate.predictions[0]
+    assert result.direction_passed
+    assert not result.support_passed
+    assert not result.passed
+    assert gate.failed_predictions == 1
+
+
+def test_actuator_requires_direction_and_registered_support_threshold():
+    gate = evaluate_actuator_gate(
+        "supported_speed",
+        [
+            ActuatorPrediction(
+                name="speed",
+                expected_direction="increase",
+                observed_effect=0.20,
+                observed_p_value=0.01,
+                max_p_value=0.05,
+            )
+        ],
+    )
+    result = gate.predictions[0]
+    assert result.direction_passed
+    assert result.support_passed
+    assert result.passed
+    assert gate.all_prospective_passed
+
+
+def test_actuator_direction_only_mode_remains_backward_compatible():
+    gate = evaluate_actuator_gate(
+        "direction_only",
+        [
+            ActuatorPrediction(
+                name="speed",
+                expected_direction="increase",
+                observed_effect=0.20,
+            )
+        ],
+    )
+    result = gate.predictions[0]
+    assert result.direction_passed
+    assert result.support_passed
+    assert result.passed
