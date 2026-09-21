@@ -1,0 +1,21 @@
+{
+  "system_name": "Eurasian wigeon",
+  "independent_test_id": "wigeon_vantoor2021_W2_stopover",
+  "forcing_regime": "consecutive_staging_transitions",
+  "predictions": [
+    {
+      "name": "stopover_duration",
+      "expected_direction": "decrease",
+      "zero_tolerance": 0,
+      "max_p_value": 0.05
+    }
+  ],
+  "provenance": {
+    "payoff_source_pr": 144,
+    "payoff_source_branch": "empirical/movement-phenology-macro-20260918",
+    "payoff_source_head": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "preregistration_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_CONTROLLER_PREREGISTRATION.md",
+    "preregistration_blob_sha": "e3b6b5d223a5707667883991f88197448729111c",
+    "hypothesis": "W2 stopover compensation"
+  }
+}
