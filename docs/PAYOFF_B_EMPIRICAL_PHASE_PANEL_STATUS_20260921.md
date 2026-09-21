@@ -49,6 +49,56 @@ The wigeon prospective result is especially informative because it expands the
 observed direct coordinate into a weak-correction regime while failing the
 stronger cross-system correction forecast.
 
+## Additional within-taxon actuator evidence
+
+The empirical evidence base now contains an additional source-backed
+within-taxon perturbation without increasing the direct phase-retention taxon
+count.
+
+Industrial-development mule deer:
+
+    taxon:
+        Odocoileus hemionus
+
+    forcing:
+        industrial-development route boundary
+
+    direct lambda:
+        NOT MEASURED
+
+    primary movement-control permeability contrast:
+        supported
+
+    median G small-development:
+        1.656
+
+    median G large-development:
+        1.037
+
+    centered large-development log-G shift:
+        -0.4763
+        p = 0.0172
+
+    stronger year x large-development deterioration:
+        NOT SUPPORTED
+        p = 0.327.
+
+This result is frozen in
+
+    docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md.
+
+It contributes:
+
+    +1 actuator / forcing evidence unit
+
+and contributes:
+
+    +0 lambda tests
+    +0 taxa.
+
+This is the intended alternative to mechanical panel expansion: increase
+inferential coverage before increasing taxonomy.
+
 ## Broad falsification retained
 
 The movement-phenology macro branch also retains the earlier broad-bird
@@ -92,17 +142,24 @@ Current status:
 
 A fourth taxon is not justified by data availability alone.
 
-It should be added only if the taxon-inclusion gate identifies at least one
-new inferential contribution while preserving the common phase coordinate and
-segment-scale contract:
+A fourth taxon should be added only if the evidence-inclusion gate identifies
+a registered endpoint with genuine incremental value.
 
-- a new prospectively registered independent lambda test;
-- a genuinely new forcing regime;
-- a predeclared lambda boundary or sign-change test;
-- a prospective actuator discriminator that separates competing mechanisms.
+For lambda evidence this requires:
 
-Until such a candidate exists, adding another taxon would increase panel size
-without materially strengthening the central claim.
+- a new prospectively registered independent lambda test or lambda-boundary
+  test;
+- the common phase coordinate;
+- the common segment scale.
+
+For actuator-only evidence, a same-taxon perturbation can be included without
+a lambda coordinate, but it adds zero lambda support.
+
+A new forcing regime by itself is not enough.
+
+Until a fourth taxon offers an inferential contribution that cannot be obtained
+from existing systems or within-taxon perturbations, adding it would increase
+panel size without materially strengthening the central claim.
 
 ## Current preferred next empirical move
 
@@ -139,11 +196,15 @@ Gate contract:
 
     docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md
 
-Taxon inclusion implementation:
+Evidence inclusion implementation:
 
     src/taxon_inclusion_gate.py
 
-    scripts/evaluate_taxon_inclusion.py
+    scripts/evaluate_evidence_inclusion.py
+
+Industrial mule-deer actuator receipt:
+
+    docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md
 
 ## Claim ceiling
 
