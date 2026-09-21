@@ -57,7 +57,7 @@
     "sensitivity_label": "v061_sensitivity_only",
     "silent_substitution_forbidden": true
   },
-  "current_blocker": "materialize MODIS NDVI plus snow/quality time series for GPS-used pixel-years",
+  "current_blocker": "complete source-workflow raw GPS re-export, pass the canonical 64,539-point manifest gate, then materialize authenticated AppEEARS V061 sensitivity surface-reflectance/snow/quality data; V006 remains preferred for the study-faithful primary lane",
   "lambda_outcome_opened": false,
   "pipeline_validation": {
     "workflow": "payoff-b IRG reconstruction",
@@ -74,5 +74,72 @@
       "fixed 24-hour phase pairs"
     ],
     "interpretation": "computational pipeline validation only; empirical environmental source remains pending"
+  },
+  "raw_gps_reexport": {
+    "source_branch": "empirical/movement-phenology-macro-20260918",
+    "source_commit": "0a934adbeaa386edf27fcfaabff9ca7837a2382b",
+    "workflow_run": 35605623469,
+    "expected_file": "stage3_industrial_mule_deer_gps.csv",
+    "expected_points": 64539,
+    "expected_columns": [
+      "observation_id",
+      "source_record_index",
+      "animal_id",
+      "animal_year",
+      "group",
+      "pop",
+      "year",
+      "timestamp",
+      "x",
+      "y"
+    ],
+    "status": "queued"
+  },
+  "appeears_request_preparation": {
+    "module": "src/appeears_modis_request.py",
+    "build_cli": "scripts/build_aikens_appeears_manifest.py",
+    "coverage_gate_module": "src/appeears_manifest_gate.py",
+    "coverage_gate_cli": "scripts/evaluate_aikens_appeears_manifest.py",
+    "authenticated_client": "src/appeears_client.py",
+    "submit_cli": "scripts/run_appeears_manifest.py",
+    "ci_workflow": ".github/workflows/payoff-b-appeears-manifest.yml",
+    "lane": "v061_sensitivity_only",
+    "layers": [
+      "MOD09Q1.061:sur_refl_b01",
+      "MOD09Q1.061:sur_refl_b02",
+      "MOD09Q1.061:sur_refl_qc_250m",
+      "MOD09Q1.061:sur_refl_state_250m",
+      "MOD10A2.061:Maximum_Snow_Extent",
+      "MOD10A2.061:Eight_Day_Snow_Cover"
+    ],
+    "canonical_source_gate": {
+      "gps_observations": 64539,
+      "years": [
+        2005,
+        2006,
+        2008,
+        2009,
+        2010,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "groups": [
+        "small",
+        "large"
+      ]
+    },
+    "network_default": "dry_run",
+    "credential_storage": "environment_only",
+    "lambda_outcome_opened": false
+  },
+  "appeears_midpoint_preflight": {
+    "receipt": "data/payoff_b_aikens_appeears_preflight_20260921.json",
+    "proxy_points": 64286,
+    "unique_cells": 11414,
+    "unique_cell_years": 20327,
+    "estimated_tasks_at_1000_cells": 25,
+    "final_request_licensed": false
   }
 }
