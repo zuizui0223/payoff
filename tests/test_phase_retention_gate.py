@@ -1,5 +1,6 @@
 import pytest
 
+from src.closed_loop_tracking import simulate_closed_loop_tracking
 from src.phase_retention_gate import (
     ActuatorPrediction,
     PhaseRetentionPrediction,
@@ -149,3 +150,17 @@ def test_lambda_maps_to_total_feedback_without_actuator_decomposition():
     assert total_feedback_from_lambda(0.4) == pytest.approx(0.6)
     assert total_feedback_from_lambda(1.0) == pytest.approx(0.0)
     assert total_feedback_from_lambda(-0.2) == pytest.approx(1.2)
+
+
+def test_closed_loop_multiplier_is_exact_phase_retention_lambda():
+    result = simulate_closed_loop_tracking(
+        residual_forcing=0.1,
+        movement_feedback_gain=0.2,
+        phenology_feedback_gain=0.3,
+        steps=20,
+        burn_in=5,
+    )
+    assert result.phase_retention_lambda == pytest.approx(0.5)
+    assert total_feedback_from_lambda(
+        result.phase_retention_lambda
+    ) == pytest.approx(0.5)
