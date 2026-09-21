@@ -1,0 +1,13 @@
+{
+  "system_name": "industrial_mule_deer_lambda_perturbation",
+  "independent_test_id": "aikens2022_lambda_perturbation_v1",
+  "forcing_regime": "industrial_development_route_boundary",
+  "lambda_test_preregistered": false,
+  "forcing_regime_is_new": true,
+  "tests_lambda_boundary_or_sign_change": false,
+  "prospective_actuator_discriminator": false,
+  "within_system_lambda_perturbation": true,
+  "phase_coordinate_id": "signed_days_relative_to_local_peak_IRG",
+  "segment_scale_id": "fixed_24h_spring_migration_interval",
+  "raw_data_available": true
+}
