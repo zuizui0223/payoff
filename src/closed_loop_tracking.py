@@ -48,6 +48,11 @@ class ClosedLoopTrackingResult:
     mean_mismatch: float
     rms_mismatch: float
 
+    @property
+    def phase_retention_lambda(self) -> float:
+        """Common cross-system phase-retention coordinate lambda=1-K."""
+        return self.multiplier
+
 
 @dataclass(frozen=True)
 class FeedbackAllocation:
