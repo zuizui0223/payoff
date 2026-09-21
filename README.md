@@ -713,9 +713,24 @@ This is the quantity to compare across systems. Speed, stopover use, route
 reset, directional movement, or other actuators are tested prospectively within
 each system and are not required to generalize across taxa. Therefore
 **lambda PASS / actuator FAIL is a valid and informative outcome**, not a
-contradiction. The current wigeon result motivates this separation: the strong
-lambda prediction was retained while shared actuator predictions were not.
-Its numerical receipt remains separate pending a source-backed freeze.
+contradiction. The source-backed wigeon result now provides the prospective
+`lambda PASS / actuator FAIL` example. Across 224 consecutive staging
+transitions from 28 individuals,
+
+    lambda = 0.85994
+    SE = 0.04509
+    p versus lambda=1 = 0.00190.
+
+The primary preregistered `lambda<1` prediction passes, while the stronger
+`|lambda|<0.75` forecast fails and neither stopover nor measured travel-speed
+actuator is supported. The quantitative receipt is frozen in
+[docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md](docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md).
+
+The existing mule-deer, barnacle-goose, and wigeon direct results are frozen
+separately in
+[docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md](docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md).
+That three-taxon receipt is descriptive: it establishes a portable response
+coordinate, not one universal lambda or a pooled actuator rule.
 
 Confirmatory evidence is now stricter than that verbal separation. Prediction
 registration and observation files are separate. A prospective lambda receipt
