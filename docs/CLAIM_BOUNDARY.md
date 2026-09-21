@@ -242,9 +242,14 @@ In particular:
   and post-hoc added actuator variables are both rejected;
 - cross-system synthesis must not mix lambda values defined on different phase
   coordinates or segment scales, even when they share the same symbol;
-- a candidate taxon is not licensed by data availability alone; it must add a
-  new inferential contribution and pass the common-coordinate, common-scale,
-  and independent-test-ID checks;
+- candidate evidence is not licensed by raw-data availability or a new
+  forcing regime alone; it must contain a registered lambda endpoint or a
+  prospective actuator endpoint and use a new independent-test ID;
+- lambda evidence must use the canonical phase coordinate and segment scale,
+  whereas actuator-only evidence need not because it contributes zero
+  cross-system lambda support;
+- within-taxon actuator perturbations can therefore strengthen mechanism
+  coverage without being counted as new taxa or new lambda replications;
 - published route-distance controller slopes identify restoring direction and,
   with confirmed distance units, a local relaxation coefficient; they do not
   directly equal the PAYOFF-B movement-feedback gain q_m without a declared
@@ -389,6 +394,9 @@ TRACKING_PROSPECTIVE_PHASE_ACTUATOR_REGISTRY_IMPLEMENTED
 TRACKING_CROSS_SYSTEM_PROSPECTIVE_LAMBDA_SYNTHESIS_IMPLEMENTED
 TRACKING_RETROSPECTIVE_LAMBDA_TIER_SEPARATED
 TRACKING_TAXON_INCLUSION_GATE_IMPLEMENTED
+TRACKING_EVIDENCE_INCLUSION_GATE_GENERALIZED
+TRACKING_ACTUATOR_ONLY_EVIDENCE_PATH_IMPLEMENTED
+TRACKING_INDUSTRIAL_MULE_DEER_ACTUATOR_PERTURBATION_FROZEN
 TRACKING_WIGEON_PROSPECTIVE_PHASE_RETENTION_RECEIPT_FROZEN
 TRACKING_THREE_TAXON_DIRECT_PHASE_RETENTION_COORDINATE_FROZEN
 TRACKING_FOURTH_TAXON_DEFAULT_HOLD_PENDING_INCLUSION_GATE
