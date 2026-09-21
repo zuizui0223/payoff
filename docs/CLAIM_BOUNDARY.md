@@ -225,6 +225,19 @@ In particular:
 - the current wigeon lambda-supported / shared-actuator-not-supported pattern
   motivates this architecture, but remains qualitative in PAYOFF until its
   numerical source-backed receipt is frozen;
+- confirmatory cross-system lambda support is counted only from
+  prospectively registered tests whose later observations match the frozen
+  system ID, independent-test ID, phase-coordinate ID, and segment-scale ID;
+- retrospective lambda analyses remain reportable but must be counted
+  separately from prospective support;
+- prospective actuator evaluation requires the observed actuator-name set to
+  exactly match the registered prediction set; missing registered actuators
+  and post-hoc added actuator variables are both rejected;
+- cross-system synthesis must not mix lambda values defined on different phase
+  coordinates or segment scales, even when they share the same symbol;
+- a candidate taxon is not licensed by data availability alone; it must add a
+  new inferential contribution and pass the common-coordinate, common-scale,
+  and independent-test-ID checks;
 - published route-distance controller slopes identify restoring direction and,
   with confirmed distance units, a local relaxation coefficient; they do not
   directly equal the PAYOFF-B movement-feedback gain q_m without a declared
@@ -365,6 +378,10 @@ TRACKING_NAMED_SYSTEM_ECOLOGICAL_OUTCOME_VALIDATION_NOT_EXECUTED
 TRACKING_CLOSED_LOOP_LOCAL_THEORY_PROVED_UNDER_DECLARED_RECURRENCE
 TRACKING_PHASE_RETENTION_COMMON_COORDINATE_IMPLEMENTED
 TRACKING_SYSTEM_SPECIFIC_ACTUATOR_GATE_IMPLEMENTED
+TRACKING_PROSPECTIVE_PHASE_ACTUATOR_REGISTRY_IMPLEMENTED
+TRACKING_CROSS_SYSTEM_PROSPECTIVE_LAMBDA_SYNTHESIS_IMPLEMENTED
+TRACKING_RETROSPECTIVE_LAMBDA_TIER_SEPARATED
+TRACKING_TAXON_INCLUSION_GATE_IMPLEMENTED
 TRACKING_WIGEON_RETENTION_ACTUATOR_PATTERN_REPORTED_NUMERIC_RECEIPT_PENDING
 TRACKING_EXPLICIT_MOVEMENT_FEEDBACK_LANDSCAPE_IMPLEMENTED
 TRACKING_NAMED_SYSTEM_CANDIDATE_IDENTIFIED
