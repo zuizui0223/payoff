@@ -73,10 +73,10 @@ jobs:
       - run: python scripts/audit_interval_tracking_calibration.py examples/tracking/three_hour_latent_substeps.csv --target-interval-hours 3 --latent-substeps 3 --patch-spacing 1 --symmetry-tolerance 0.05 --timing-axis-isolated --spatial-gradient 0.2 --wave-displacement-per-observation-interval 0.9 --phenology-scale 0.1 --max-abs-phenology-shift 20 --output outputs/ci_payoff_b_three_hour_latent_controls.json
       - run: python scripts/audit_mule_deer_phase_summary.py
       - run: python scripts/audit_aikens_2022_phase_controller.py
-      - run: python scripts/evaluate_phase_retention_gate.py examples/tracking/phase_retention_gate_A.csv --lambda-low 0.45 --lambda-high 0.55 --min-pairs 4 --require-retention-class restoring --fail-on-gate-failure --output outputs/ci_payoff_b_phase_retention_gate_A.json
-      - run: python scripts/evaluate_actuator_gate.py examples/tracking/system_specific_actuator_gate_A.json --fail-on-gate-failure --output outputs/ci_payoff_b_actuator_gate_A.json
-      - run: python scripts/evaluate_phase_retention_gate.py examples/tracking/phase_retention_gate.csv --lambda-low 0.45 --lambda-high 0.55 --min-pairs 4 --require-retention-class restoring --fail-on-gate-failure --output outputs/ci_payoff_b_phase_retention_gate_W.json
-      - run: python scripts/evaluate_actuator_gate.py examples/tracking/system_specific_actuator_gate.json --output outputs/ci_payoff_b_actuator_gate_W.json
+      - run: python scripts/evaluate_registered_phase_retention.py --registration-json examples/tracking/prospective_A_phase_registration.json --observation-json examples/tracking/prospective_A_phase_observation.json --fail-on-gate-failure --output outputs/ci_payoff_b_registered_phase_A.json
+      - run: python scripts/evaluate_registered_actuators.py --registration-json examples/tracking/prospective_A_actuator_registration.json --observation-json examples/tracking/prospective_A_actuator_observation.json --fail-on-gate-failure --output outputs/ci_payoff_b_registered_actuator_A.json
+      - run: python scripts/evaluate_registered_phase_retention.py --registration-json examples/tracking/prospective_W_phase_registration.json --observation-json examples/tracking/prospective_W_phase_observation.json --fail-on-gate-failure --output outputs/ci_payoff_b_registered_phase_W.json
+      - run: python scripts/evaluate_registered_actuators.py --registration-json examples/tracking/prospective_W_actuator_registration.json --observation-json examples/tracking/prospective_W_actuator_observation.json --output outputs/ci_payoff_b_registered_actuator_W.json
       - run: python scripts/synthesize_cross_system_phase.py examples/tracking/cross_system_phase_manifest.json --output outputs/ci_payoff_b_cross_system_phase_synthesis.json
       - run: |
           cat > outputs/ci_mule_deer_summary.csv <<'EOF'
