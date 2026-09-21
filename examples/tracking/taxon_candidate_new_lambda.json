@@ -1,0 +1,12 @@
+{
+  "system_name": "novel_lambda_candidate",
+  "independent_test_id": "novel_lambda_candidate_1",
+  "phase_coordinate_id": "signed_resource_phase_error",
+  "segment_scale_id": "standardized_tracking_segment_v1",
+  "forcing_regime": "new_forcing_regime",
+  "lambda_test_preregistered": true,
+  "forcing_regime_is_new": true,
+  "tests_lambda_boundary_or_sign_change": false,
+  "prospective_actuator_discriminator": false,
+  "raw_data_available": true
+}
