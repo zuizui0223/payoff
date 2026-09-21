@@ -8,6 +8,7 @@ from src.phase_retention_gate import (
     estimate_phase_retention,
     evaluate_actuator_gate,
     evaluate_phase_retention_gate,
+    reported_phase_retention_estimate,
     total_feedback_from_lambda,
 )
 
@@ -164,3 +165,50 @@ def test_closed_loop_multiplier_is_exact_phase_retention_lambda():
     assert total_feedback_from_lambda(
         result.phase_retention_lambda
     ) == pytest.approx(0.5)
+
+
+def test_one_sided_lambda_prediction_allows_preregistered_lambda_less_than_one():
+    estimate = reported_phase_retention_estimate(
+        pairs=224,
+        lambda_retention=0.85994,
+        lambda_se=0.04509,
+        p_vs_no_correction=0.00190,
+    )
+    gate = evaluate_phase_retention_gate(
+        estimate,
+        PhaseRetentionPrediction(
+            lambda_low=None,
+            lambda_high=1.0,
+            min_pairs=30,
+            require_retention_class="restoring",
+        ),
+    )
+
+    assert gate.passed
+    assert gate.interval_passed
+    assert gate.class_passed
+    assert gate.estimate.source_kind == "reported_summary"
+    assert gate.estimate.residual_forcing is None
+    assert gate.estimate.rmse is None
+    assert gate.estimate.r_squared is None
+
+
+def test_reported_summary_preserves_wigeon_uncertainty_fields():
+    estimate = reported_phase_retention_estimate(
+        pairs=224,
+        lambda_retention=0.85994,
+        lambda_se=0.04509,
+        p_vs_no_correction=0.00190,
+    )
+    assert estimate.lambda_se == pytest.approx(0.04509)
+    assert estimate.p_vs_no_correction == pytest.approx(0.00190)
+
+
+def test_phase_prediction_requires_at_least_one_bound_or_class():
+    with pytest.raises(ValueError):
+        PhaseRetentionPrediction(
+            lambda_low=None,
+            lambda_high=None,
+            min_pairs=3,
+            require_retention_class=None,
+        )
