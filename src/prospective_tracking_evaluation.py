@@ -235,6 +235,8 @@ def evaluate_registered_actuators(
             expected_direction=spec.expected_direction,
             observed_effect=observed[spec.name].observed_effect,
             zero_tolerance=spec.zero_tolerance,
+            observed_p_value=observed[spec.name].p_value,
+            max_p_value=spec.max_p_value,
             prospective=True,
         )
         for spec in registration.predictions
