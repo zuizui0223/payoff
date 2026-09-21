@@ -50,8 +50,19 @@ def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def phase_gate_from_receipt(path: Path) -> PhaseRetentionGate:
+def phase_gate_from_receipt(
+    path: Path,
+    *,
+    require_prospective: bool,
+) -> PhaseRetentionGate:
     receipt = load_json(path)
+    if require_prospective and not bool(
+        receipt.get("prospective_contract_satisfied", False)
+    ):
+        raise SystemExit(
+            "prospective phase evidence requires a prospectively registered "
+            f"evaluation receipt: {path}"
+        )
     payload = receipt.get("gate")
     if payload is None:
         raise SystemExit(
@@ -74,8 +85,19 @@ def phase_gate_from_receipt(path: Path) -> PhaseRetentionGate:
     )
 
 
-def actuator_gate_from_receipt(path: Path) -> ActuatorGate:
+def actuator_gate_from_receipt(
+    path: Path,
+    *,
+    require_prospective: bool,
+) -> ActuatorGate:
     receipt = load_json(path)
+    if require_prospective and not bool(
+        receipt.get("prospective_contract_satisfied", False)
+    ):
+        raise SystemExit(
+            "prospective actuator evidence requires a prospectively "
+            f"registered evaluation receipt: {path}"
+        )
     payload = receipt.get("gate")
     if payload is None:
         raise SystemExit(
@@ -128,6 +150,9 @@ def main() -> None:
             forcing_regime = str(row["forcing_regime"])
             phase_coordinate_id = str(row["phase_coordinate_id"])
             segment_scale_id = str(row["segment_scale_id"])
+            evidence_tier = str(
+                row.get("evidence_tier", "prospective")
+            )
             phase_path = Path(row["phase_gate_json"])
         except (KeyError, TypeError) as exc:
             raise SystemExit(
@@ -147,7 +172,10 @@ def main() -> None:
             None
             if actuator_path_value in (None, "")
             else actuator_gate_from_receipt(
-                Path(actuator_path_value)
+                Path(actuator_path_value),
+                require_prospective=(
+                    evidence_tier == "prospective"
+                ),
             )
         )
 
@@ -159,8 +187,12 @@ def main() -> None:
                 phase_coordinate_id=phase_coordinate_id,
                 segment_scale_id=segment_scale_id,
                 phase_gate=phase_gate_from_receipt(
-                    phase_path
+                    phase_path,
+                    require_prospective=(
+                        evidence_tier == "prospective"
+                    ),
                 ),
+                evidence_tier=evidence_tier,
                 actuator_gate=actuator,
             )
         )
@@ -174,7 +206,7 @@ def main() -> None:
         "phase_coordinate_id": synthesis.phase_coordinate_id,
         "segment_scale_id": synthesis.segment_scale_id,
         "synthesis": asdict(synthesis),
-        "cross_system_claim_target": "lambda",
+        "cross_system_claim_target": "prospectively registered lambda",
         "actuator_policy": (
             "system-specific prospective results only; "
             "no pooled actuator score"
