@@ -1,0 +1,24 @@
+{
+  "system_name": "cross_system_synthetic_witness",
+  "predictions": [
+    {
+      "name": "speed",
+      "expected_direction": "increase",
+      "observed_effect": -0.2,
+      "prospective": true
+    },
+    {
+      "name": "stopover",
+      "expected_direction": "decrease",
+      "observed_effect": 0.1,
+      "prospective": true
+    },
+    {
+      "name": "route_reset",
+      "expected_direction": "increase",
+      "observed_effect": -0.3,
+      "prospective": true
+    }
+  ],
+  "expected_architectural_interpretation": "lambda gate can pass while actuator gate fails"
+}
