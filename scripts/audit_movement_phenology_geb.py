@@ -53,13 +53,16 @@ def citation_keys(body: str) -> set[tuple[str, int]]:
     # Narrative forms:
     # Amaral et al. (2025); van Toor et al. (2021)
     narrative = re.compile(
-        r"\b((?:[a-z]{1,4}\s+)?"
-        r"[A-ZÀ-ÖØ-Þ][A-Za-zÀ-ÖØ-öø-ÿ'’\-]+)"
+        r"\b(?:(van|von|de|del|der|di|da)\s+)?"
+        r"([A-ZÀ-ÖØ-Þ][A-Za-zÀ-ÖØ-öø-ÿ'’\-]+)"
         r"(?:\s+et\s+al\.)?\s*"
         r"\(((?:19|20)\d{2})\)"
     )
     for hit in narrative.finditer(body):
-        keys.add((hit.group(1).strip(), int(hit.group(2))))
+        particle = (hit.group(1) or "").strip()
+        surname = hit.group(2).strip()
+        author = f"{particle} {surname}".strip()
+        keys.add((author, int(hit.group(3))))
 
     return keys
 
