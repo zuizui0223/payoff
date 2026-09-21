@@ -21,7 +21,6 @@ from src.phase_retention_gate import (
 )
 
 
-@dataclass(frozen=True)
 EvidenceTier = Literal["prospective", "retrospective"]
 
 
