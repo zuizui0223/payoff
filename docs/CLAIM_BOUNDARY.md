@@ -222,9 +222,16 @@ In particular:
   the added system supplies an independent lambda test, a new forcing regime,
   a predicted lambda boundary/sign change, or a discriminating prospective
   actuator test;
-- the current wigeon lambda-supported / shared-actuator-not-supported pattern
-  motivates this architecture, but remains qualitative in PAYOFF until its
-  numerical source-backed receipt is frozen;
+- the wigeon lambda-supported / actuator-not-supported pattern is now frozen
+  quantitatively from the preregistered PAYOFF-B macro branch: 224 consecutive
+  staging transitions from 28 individuals give lambda=0.85994, SE=0.04509 and
+  p=0.00190 against lambda=1; the primary lambda<1 prediction passes, the
+  stronger |lambda|<0.75 forecast fails, and stopover/travel-speed actuator
+  tests are not supported;
+- the frozen three-taxon direct receipt establishes a descriptive phase-
+  retention coordinate across mule deer, barnacle goose, and Eurasian wigeon,
+  but does not estimate one universal lambda and does not treat repeated goose
+  flyways as independent taxa;
 - confirmatory cross-system lambda support is counted only from
   prospectively registered tests whose later observations match the frozen
   system ID, independent-test ID, phase-coordinate ID, and segment-scale ID;
@@ -382,7 +389,9 @@ TRACKING_PROSPECTIVE_PHASE_ACTUATOR_REGISTRY_IMPLEMENTED
 TRACKING_CROSS_SYSTEM_PROSPECTIVE_LAMBDA_SYNTHESIS_IMPLEMENTED
 TRACKING_RETROSPECTIVE_LAMBDA_TIER_SEPARATED
 TRACKING_TAXON_INCLUSION_GATE_IMPLEMENTED
-TRACKING_WIGEON_RETENTION_ACTUATOR_PATTERN_REPORTED_NUMERIC_RECEIPT_PENDING
+TRACKING_WIGEON_PROSPECTIVE_PHASE_RETENTION_RECEIPT_FROZEN
+TRACKING_THREE_TAXON_DIRECT_PHASE_RETENTION_COORDINATE_FROZEN
+TRACKING_FOURTH_TAXON_DEFAULT_HOLD_PENDING_INCLUSION_GATE
 TRACKING_EXPLICIT_MOVEMENT_FEEDBACK_LANDSCAPE_IMPLEMENTED
 TRACKING_NAMED_SYSTEM_CANDIDATE_IDENTIFIED
 TRACKING_NAMED_SYSTEM_CALIBRATION_PENDING_SOURCE_FILE_INGESTION
