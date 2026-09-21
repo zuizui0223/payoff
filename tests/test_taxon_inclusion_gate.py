@@ -207,3 +207,45 @@ def test_actuator_only_evidence_does_not_require_phase_coordinate():
     assert gate.segment_scale_compatible is None
     assert gate.contributes_actuator_only
     assert not gate.contributes_to_lambda_synthesis
+
+
+def test_within_system_lambda_perturbation_is_included_without_cross_system_pooling():
+    gate = evaluate(
+        proposal(
+            system_name="industrial_mule_deer_lambda_perturbation",
+            independent_test_id="aikens2022_lambda_perturbation_v1",
+            phase_coordinate_id="signed_days_relative_to_local_peak_IRG",
+            segment_scale_id="fixed_24h_spring_migration_interval",
+            forcing_regime="industrial_development_route_boundary",
+            forcing_regime_is_new=True,
+            within_system_lambda_perturbation=True,
+            raw_data_available=True,
+        )
+    )
+
+    assert gate.include
+    assert not gate.contributes_to_lambda_synthesis
+    assert gate.contributes_within_system_lambda_perturbation
+    assert not gate.contributes_actuator_only
+    assert (
+        "prospective_within_system_lambda_perturbation"
+        in gate.contributions
+    )
+    assert gate.coordinate_compatible is True
+    assert gate.segment_scale_compatible is True
+
+
+def test_within_system_lambda_perturbation_requires_declared_local_coordinate_and_scale():
+    gate = evaluate(
+        proposal(
+            system_name="bad_within_system_test",
+            independent_test_id="bad_within_system_test_v1",
+            phase_coordinate_id=None,
+            segment_scale_id=None,
+            within_system_lambda_perturbation=True,
+        )
+    )
+
+    assert not gate.include
+    assert "WITHIN_SYSTEM_PHASE_COORDINATE_MISSING" in gate.blockers
+    assert "WITHIN_SYSTEM_SEGMENT_SCALE_MISSING" in gate.blockers
