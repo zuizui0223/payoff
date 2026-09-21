@@ -1,7 +1,7 @@
 name: payoff-b AppEEARS manifest
 
 concurrency:
-  group: payoff-b-appeears-manifest-${{ github.ref }}
+  group: payoff-b-appeears-manifest-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 on:
