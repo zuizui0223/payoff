@@ -74,5 +74,22 @@
         "receipt": "docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md"
       }
     ]
+  },
+  "next_empirical_experiment": {
+    "status": "SELECTED_PENDING_ENVIRONMENTAL_SOURCE",
+    "study": "Aikens et al. 2022 industrial mule deer",
+    "evidence_lane": "within_system_lambda_perturbation",
+    "adds_taxon": false,
+    "contributes_to_cross_system_lambda_synthesis": false,
+    "independent_test_id": "aikens2022_lambda_perturbation_v1",
+    "phase_coordinate_id": "signed_days_relative_to_local_peak_IRG",
+    "segment_scale_id": "fixed_24h_spring_migration_interval",
+    "prospective_prediction": "lambda_large_development > lambda_small_development",
+    "forcing_regime": "industrial_development_route_boundary",
+    "actuator_perturbation_already_supported": true,
+    "exact_movement_source_ready": true,
+    "exact_appeears_manifest_ready": true,
+    "current_blocker": "authenticated environmental extraction",
+    "lambda_outcome_opened": false
   }
 }
