@@ -64,6 +64,7 @@ class ActuatorPredictionSpec:
     name: str
     expected_direction: ActuatorDirection
     zero_tolerance: float = 0.0
+    max_p_value: float | None = None
 
     def __post_init__(self) -> None:
         if not self.name.strip():
@@ -72,6 +73,14 @@ class ActuatorPredictionSpec:
             raise ValueError(
                 "zero_tolerance must be non-negative and finite"
             )
+        if self.max_p_value is not None:
+            if (
+                not isfinite(self.max_p_value)
+                or not 0.0 < self.max_p_value <= 1.0
+            ):
+                raise ValueError(
+                    "max_p_value must lie in (0,1] when supplied"
+                )
 
 
 @dataclass(frozen=True)
@@ -104,12 +113,21 @@ class ActuatorRegistration:
 class ActuatorObservation:
     name: str
     observed_effect: float
+    p_value: float | None = None
 
     def __post_init__(self) -> None:
         if not self.name.strip():
             raise ValueError("actuator observation name must be non-empty")
         if not isfinite(self.observed_effect):
             raise ValueError("observed_effect must be finite")
+        if self.p_value is not None:
+            if (
+                not isfinite(self.p_value)
+                or not 0.0 <= self.p_value <= 1.0
+            ):
+                raise ValueError(
+                    "p_value must lie in [0,1] when supplied"
+                )
 
 
 @dataclass(frozen=True)
