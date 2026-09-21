@@ -167,9 +167,72 @@ The preferred next empirical task is therefore not
 
     find another migratory species.
 
-It is
+The selected next experiment is now the **Aikens industrial-development
+within-mule-deer lambda perturbation**.
 
-    find a system that tests a new region or boundary of lambda-space.
+This holds taxon fixed while changing forcing regime and asks
+
+    lambda_large-development
+    >
+    lambda_small-development
+
+on the preregistered coordinate
+
+    signed_days_relative_to_local_peak_IRG
+
+and segment scale
+
+    fixed_24h_spring_migration_interval.
+
+This experiment is intentionally **not** added to the cross-system lambda
+synthesis because its phase-coordinate / segment contract differs from the
+current direct migratory panel. It occupies the separate
+
+    within-system lambda perturbation
+
+evidence lane.
+
+The inferential sequence is stronger than adding a fourth taxon mechanically:
+
+    independently measured actuator attenuation
+    -> prospective forcing perturbation
+    -> does lambda itself change?
+
+Possible outcomes are both informative:
+
+    actuator attenuation PASS
+    lambda perturbation PASS
+
+would show that the forcing perturbation propagates into the common controller
+coordinate within one taxon;
+
+    actuator attenuation PASS
+    lambda perturbation FAIL
+
+would show that the measured actuator change does not necessarily alter lambda.
+
+The fixed registration is
+
+    docs/PAYOFF_B_AIKENS_LAMBDA_PERTURBATION_PREREGISTRATION_20260921.md
+
+and its machine registration is
+
+    data/aikens2022_lambda_perturbation_registration_20260921.json.
+
+The evidence-inclusion gate classifies it as included, but with
+
+    contributes_to_lambda_synthesis = FALSE
+
+and
+
+    contributes_within_system_lambda_perturbation = TRUE.
+
+The exact 64,539-point movement source and canonical AppEEARS request geometry
+are already frozen. The remaining V061 sensitivity-lane blocker is authenticated
+environmental extraction; the lambda outcome remains unopened.
+
+More generally, future additional systems should test a new region or boundary
+of lambda-space.
 
 Examples of useful future tests include:
 
