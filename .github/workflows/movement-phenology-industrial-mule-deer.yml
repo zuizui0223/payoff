@@ -34,6 +34,7 @@ jobs:
             outputs/movement_phenology/stage3_industrial_mule_deer_dryad_receipt.json
             outputs/movement_phenology/stage3_industrial_mule_deer_schema.csv
             outputs/movement_phenology/stage3_industrial_mule_deer_steps.csv
+            outputs/movement_phenology/stage3_industrial_mule_deer_gps.csv
             outputs/movement_phenology/stage3_industrial_mule_deer_individual_year_G.csv
             outputs/movement_phenology/stage3_industrial_mule_deer_G_by_year_population.csv
             outputs/movement_phenology/stage3_industrial_mule_deer_permeability_sensitivity.csv
