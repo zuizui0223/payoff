@@ -250,3 +250,36 @@ def test_cross_system_synthesis_rejects_mixed_phase_coordinates():
     ]
     with pytest.raises(ValueError, match="phase_coordinate_id"):
         synthesize_cross_system_phase(rows)
+
+
+def test_retrospective_lambda_is_reported_but_not_counted_as_prospective_support():
+    synthesis = synthesize_cross_system_phase(
+        [
+            CrossSystemEvidence(
+                system_name="prospective_A",
+                independent_test_id="P1",
+                forcing_regime="moderate",
+                phase_coordinate_id="signed_resource_phase_error",
+                segment_scale_id="standardized_tracking_segment_v1",
+                phase_gate=phase_gate(0.5, 0.4, 0.6),
+                evidence_tier="prospective",
+            ),
+            CrossSystemEvidence(
+                system_name="retrospective_B",
+                independent_test_id="R1",
+                forcing_regime="legacy",
+                phase_coordinate_id="signed_resource_phase_error",
+                segment_scale_id="standardized_tracking_segment_v1",
+                phase_gate=phase_gate(0.5, 0.4, 0.6),
+                evidence_tier="retrospective",
+            ),
+        ]
+    )
+
+    assert synthesis.independent_lambda_tests == 2
+    assert synthesis.lambda_passed == 2
+    assert synthesis.prospective_lambda_tests == 1
+    assert synthesis.retrospective_lambda_tests == 1
+    assert synthesis.prospective_lambda_passed == 1
+    assert synthesis.prospective_lambda_failed == 0
+    assert synthesis.all_prospective_lambda_predictions_passed
