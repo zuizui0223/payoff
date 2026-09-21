@@ -247,7 +247,10 @@ The secondary registered stopover-gain band
 
 also fails.
 
-### Travel speed
+### Travel speed — secondary W3 diagnostic
+
+This quantity is retained as a source-backed actuator-decomposition diagnostic.
+It is **not** promoted to the same formal prospective gate as W2 stopover.
 
 Observed:
 
@@ -337,7 +340,82 @@ Wigeon is the prospectively registered third-taxon test that both supports the
 primary no-correction rejection and falsifies the stronger |lambda|<0.75
 forecast.
 
-## 8. Relationship to the current prospective-gate architecture
+## 8. Reproducible source-backed gate bundle
+
+The current branch evaluates the frozen wigeon result through the generic
+prospective-gate API.
+
+Primary W1 phase retention:
+
+    python scripts/evaluate_registered_phase_retention.py \
+      --registration-json data/wigeon_phase_retention_registration_20260921.json \
+      --observation-json data/wigeon_phase_retention_observation_20260921.json
+
+Stronger |lambda|<0.75 forecast:
+
+    python scripts/evaluate_registered_phase_retention.py \
+      --registration-json data/wigeon_strong_contraction_registration_20260921.json \
+      --observation-json data/wigeon_phase_retention_observation_20260921.json
+
+Formal W2 stopover gate:
+
+    python scripts/evaluate_registered_actuators.py \
+      --registration-json data/wigeon_stopover_actuator_registration_20260921.json \
+      --observation-json data/wigeon_stopover_actuator_observation_20260921.json
+
+The W2 registration freezes both
+
+    expected direction:
+        decrease
+
+and
+
+    inferential support:
+        p <= 0.05.
+
+The observed stopover estimate therefore has
+
+    direction_passed = TRUE
+
+but
+
+    support_passed = FALSE
+
+because
+
+    p = 0.972.
+
+Finally,
+
+    python scripts/assemble_wigeon_gate_bundle.py ...
+
+combines those already evaluated receipts with
+
+    data/wigeon_secondary_actuator_diagnostics_20260921.json
+
+without producing an omnibus score.
+
+The expected frozen bundle is
+
+    primary lambda:
+        PASS
+
+    strong contraction forecast:
+        FAIL
+
+    W2 stopover actuator:
+        FAIL
+
+    W3 travel-speed diagnostic:
+        NOT SUPPORTED
+
+    W4 distance moderation:
+        NOT SUPPORTED
+
+    two-gate class:
+        LAMBDA_PASS_ACTUATOR_FAIL.
+
+## 9. Relationship to the current prospective-gate architecture
 
 This receipt resolves the former PAYOFF-B status
 
@@ -356,7 +434,7 @@ Any confirmatory pooled lambda analysis must therefore declare how other
 systems map onto the same correction-opportunity scale before numerical
 pooling.
 
-## 9. Claim ceiling
+## 10. Claim ceiling
 
 Licensed:
 
