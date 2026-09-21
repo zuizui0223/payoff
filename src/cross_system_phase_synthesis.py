@@ -12,13 +12,17 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from statistics import median
-from typing import Iterable
+from typing import Iterable, Literal
 
 from src.phase_retention_gate import (
     ActuatorGate,
     PhaseRetentionGate,
     RetentionClass,
 )
+
+
+@dataclass(frozen=True)
+EvidenceTier = Literal["prospective", "retrospective"]
 
 
 @dataclass(frozen=True)
@@ -29,6 +33,7 @@ class CrossSystemEvidence:
     phase_coordinate_id: str
     segment_scale_id: str
     phase_gate: PhaseRetentionGate
+    evidence_tier: EvidenceTier = "prospective"
     actuator_gate: ActuatorGate | None = None
 
     def __post_init__(self) -> None:
@@ -42,6 +47,10 @@ class CrossSystemEvidence:
             raise ValueError("phase_coordinate_id must be non-empty")
         if not self.segment_scale_id.strip():
             raise ValueError("segment_scale_id must be non-empty")
+        if self.evidence_tier not in ("prospective", "retrospective"):
+            raise ValueError(
+                "evidence_tier must be 'prospective' or 'retrospective'"
+            )
         if (
             self.actuator_gate is not None
             and self.actuator_gate.system_name != self.system_name
@@ -66,10 +75,14 @@ class SystemActuatorSummary:
 class CrossSystemPhaseSynthesis:
     systems: int
     independent_lambda_tests: int
+    prospective_lambda_tests: int
+    retrospective_lambda_tests: int
     phase_coordinate_id: str
     segment_scale_id: str
     lambda_passed: int
     lambda_failed: int
+    prospective_lambda_passed: int
+    prospective_lambda_failed: int
     lambda_values: tuple[float, ...]
     lambda_min: float
     lambda_median: float
@@ -83,6 +96,13 @@ class CrossSystemPhaseSynthesis:
     @property
     def all_lambda_predictions_passed(self) -> bool:
         return self.lambda_failed == 0
+
+    @property
+    def all_prospective_lambda_predictions_passed(self) -> bool:
+        return (
+            self.prospective_lambda_tests > 0
+            and self.prospective_lambda_failed == 0
+        )
 
     @property
     def actuator_omnibus_score(self):
@@ -129,6 +149,21 @@ def synthesize_cross_system_phase(
     )
     lambda_passed = sum(row.phase_gate.passed for row in rows)
     lambda_failed = len(rows) - lambda_passed
+
+    prospective_rows = tuple(
+        row for row in rows
+        if row.evidence_tier == "prospective"
+    )
+    retrospective_rows = tuple(
+        row for row in rows
+        if row.evidence_tier == "retrospective"
+    )
+    prospective_lambda_passed = sum(
+        row.phase_gate.passed for row in prospective_rows
+    )
+    prospective_lambda_failed = (
+        len(prospective_rows) - prospective_lambda_passed
+    )
 
     class_order: tuple[RetentionClass, ...] = (
         "sign_reversing",
@@ -197,10 +232,14 @@ def synthesize_cross_system_phase(
     return CrossSystemPhaseSynthesis(
         systems=len(rows),
         independent_lambda_tests=len(rows),
+        prospective_lambda_tests=len(prospective_rows),
+        retrospective_lambda_tests=len(retrospective_rows),
         phase_coordinate_id=phase_coordinate_id,
         segment_scale_id=segment_scale_id,
         lambda_passed=lambda_passed,
         lambda_failed=lambda_failed,
+        prospective_lambda_passed=prospective_lambda_passed,
+        prospective_lambda_failed=prospective_lambda_failed,
         lambda_values=lambda_values,
         lambda_min=min(lambda_values),
         lambda_median=median(lambda_values),
