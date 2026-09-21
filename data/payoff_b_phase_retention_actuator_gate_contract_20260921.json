@@ -44,5 +44,34 @@
     "quantitative_receipt": "pending_source_analysis_freeze",
     "use": "architectural motivation, not pooled quantitative datum"
   },
-  "no_combined_score": true
+  "no_combined_score": true,
+  "cross_system_synthesis": {
+    "evidence_unit": "independent lambda test",
+    "required_fields": [
+      "independent_test_id",
+      "phase_coordinate_id",
+      "segment_scale_id",
+      "forcing_regime"
+    ],
+    "phase_coordinate_ids_must_match": true,
+    "segment_scale_ids_must_match": true,
+    "duplicate_independent_test_ids_rejected": true,
+    "duplicate_phase_receipt_reuse_rejected": true,
+    "outputs": [
+      "independent lambda test count",
+      "lambda pass/fail counts",
+      "lambda values",
+      "lambda descriptive min/median/max",
+      "retention class counts",
+      "forcing regimes",
+      "lambda-pass actuator-fail systems",
+      "lambda-fail actuator-pass systems",
+      "system-specific actuator table"
+    ],
+    "prohibited_outputs": [
+      "pooled actuator pass rate",
+      "cross-system actuator score",
+      "combined lambda-actuator omnibus score"
+    ]
+  }
 }
