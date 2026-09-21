@@ -1,0 +1,48 @@
+{
+  "frozen_date": "2026-09-21",
+  "common_coordinate": {
+    "equation": "e_out = r + lambda * e_in",
+    "cross_system_parameter": "lambda",
+    "local_closed_loop_identity": "lambda = 1 - K",
+    "total_feedback_identity": "K = 1 - lambda",
+    "actuator_decomposition_identified": false
+  },
+  "phase_retention_gate": {
+    "cross_system": true,
+    "requires_predeclared_phase_coordinate": true,
+    "requires_predeclared_segment_scale": true,
+    "pooled_actuator_information": false
+  },
+  "actuator_gate": {
+    "cross_system": false,
+    "system_specific": true,
+    "prospective": true,
+    "examples": [
+      "speed",
+      "stopover",
+      "route_reset",
+      "directional_movement",
+      "timing"
+    ],
+    "failure_invalidates_lambda_gate": false
+  },
+  "four_outcomes": {
+    "lambda_pass_actuator_pass": "common coordinate and local mechanism supported",
+    "lambda_pass_actuator_fail": "common coordinate supported; shared actuator hypothesis rejected for system",
+    "lambda_fail_actuator_pass": "local mechanism supported; cross-system lambda prediction rejected",
+    "lambda_fail_actuator_fail": "neither layer supported"
+  },
+  "taxon_inclusion_rule": [
+    "independent lambda test",
+    "new forcing or life-history regime",
+    "predicted lambda boundary or sign change",
+    "prospective system-specific actuator discrimination"
+  ],
+  "wigeon_current_project_interpretation": {
+    "lambda_prediction": "supported",
+    "shared_actuator_predictions": "not_supported",
+    "quantitative_receipt": "pending_source_analysis_freeze",
+    "use": "architectural motivation, not pooled quantitative datum"
+  },
+  "no_combined_score": true
+}
