@@ -1,5 +1,9 @@
 name: payoff-b AppEEARS manifest
 
+concurrency:
+  group: payoff-b-appeears-manifest-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     paths:
