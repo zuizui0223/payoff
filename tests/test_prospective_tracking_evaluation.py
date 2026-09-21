@@ -289,3 +289,37 @@ def test_registered_reported_phase_rejects_source_scale_mismatch():
             registration,
             observations,
         )
+
+
+def test_registered_actuator_can_require_predeclared_p_value_support():
+    registration = ActuatorRegistration(
+        system_name="system_sig",
+        independent_test_id="sig_holdout",
+        forcing_regime="moderate",
+        predictions=(
+            ActuatorPredictionSpec(
+                name="stopover",
+                expected_direction="decrease",
+                max_p_value=0.05,
+            ),
+        ),
+    )
+    observations = ActuatorObservationSet(
+        system_name="system_sig",
+        independent_test_id="sig_holdout",
+        observations=(
+            ActuatorObservation(
+                name="stopover",
+                observed_effect=-0.000140,
+                p_value=0.972,
+            ),
+        ),
+    )
+    evaluation = evaluate_registered_actuators(
+        registration,
+        observations,
+    )
+    result = evaluation.gate.predictions[0]
+    assert result.direction_passed
+    assert not result.support_passed
+    assert not evaluation.gate.all_prospective_passed
