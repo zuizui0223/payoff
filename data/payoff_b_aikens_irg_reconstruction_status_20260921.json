@@ -1,6 +1,6 @@
 {
   "frozen_date": "2026-09-21",
-  "status": "offline_irg_reconstruction_implemented_environmental_source_pending",
+  "status": "exact_source_manifest_ready_authenticated_environmental_extraction_pending",
   "study": {
     "citation": "Aikens et al. 2022 Nature Ecology & Evolution 6:1733-1741",
     "doi": "10.1038/s41559-022-01887-9",
@@ -57,7 +57,7 @@
     "sensitivity_label": "v061_sensitivity_only",
     "silent_substitution_forbidden": true
   },
-  "current_blocker": "materialize the empirical MODIS/IRG environmental source after exact raw GPS re-export; all downstream fixed-24h pairing, clustered lambda fitting, and preregistered contrast evaluation are implemented",
+  "current_blocker": "authenticated AppEEARS V061 sensitivity extraction from the exact 64,539-point / 24-task canonical manifest; downstream IRG, fixed-24h pairing, clustered lambda fitting, and preregistered contrast evaluation remain implemented and the lambda outcome remains unopened",
   "lambda_outcome_opened": false,
   "pipeline_validation": {
     "workflow": "payoff-b IRG reconstruction",
@@ -79,21 +79,29 @@
     "source_branch": "empirical/movement-phenology-macro-20260918",
     "source_commit": "0a934adbeaa386edf27fcfaabff9ca7837a2382b",
     "workflow_run": 35605623469,
-    "expected_file": "stage3_industrial_mule_deer_gps.csv",
-    "expected_points": 64539,
-    "expected_columns": [
-      "observation_id",
-      "source_record_index",
-      "animal_id",
-      "animal_year",
-      "group",
-      "pop",
-      "year",
-      "timestamp",
-      "x",
-      "y"
+    "artifact_id": 10643405042,
+    "artifact_sha256": "1f0d706dc6a102261009b7099c748dcce40abb2adedf7b88828395a1d392cfa0",
+    "file": "stage3_industrial_mule_deer_gps.csv",
+    "file_sha256": "03426804557a0244be3ed6eb9f461db578d3ce26fa2b28637f8e98bee9f09466",
+    "gps_points": 64539,
+    "animals": 137,
+    "animal_years": 253,
+    "groups": [
+      "small",
+      "large"
     ],
-    "status": "queued"
+    "years": [
+      2005,
+      2006,
+      2008,
+      2009,
+      2010,
+      2015,
+      2016,
+      2017,
+      2018
+    ],
+    "status": "COMPLETE"
   },
   "appeears_request_preparation": {
     "module": "src/appeears_modis_request.py",
@@ -140,7 +148,8 @@
     "unique_cells": 11414,
     "unique_cell_years": 20327,
     "estimated_tasks_at_1000_cells": 25,
-    "final_request_licensed": false
+    "final_request_licensed": false,
+    "status": "SUPERSEDED_BY_EXACT_RAW_GPS_MANIFEST"
   },
   "phase_contrast_fitting": {
     "module": "src/phase_retention_contrast_fit.py",
@@ -164,5 +173,16 @@
     ],
     "workflow": ".github/workflows/payoff-b-aikens-phase-contrast.yml",
     "empirical_lambda_outcome_opened": false
+  },
+  "appeears_exact_manifest": {
+    "receipt": "data/payoff_b_aikens_exact_manifest_status_20260921.json",
+    "gps_observations": 64539,
+    "unique_modis250_cells": 10899,
+    "unique_modis250_cell_years": 19500,
+    "year_scoped_tasks_at_1000_cells": 24,
+    "source_gate": "PASS",
+    "manifest_sha256": "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463",
+    "cells_sha256": "3570bc04dfef9da677954246b636a99fa069c4b2e5b0020dd9ac1c4ee9dc8d02",
+    "links_sha256": "ef7445152bf2217a81088e1765cd215dfafb87036366c8f789e6ebe3747cbff1"
   }
 }
