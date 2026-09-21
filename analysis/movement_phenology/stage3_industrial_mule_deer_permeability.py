@@ -126,7 +126,7 @@ def read_gps(shp_path: Path) -> pd.DataFrame:
         raise ValueError(f"Missing GPS fields {sorted(missing)}; fields={fields}")
 
     rows = []
-    for sr in r.iterShapeRecords():
+    for source_record_index, sr in enumerate(r.iterShapeRecords()):
         rec = dict(zip(fields, list(sr.record)))
         pts = sr.shape.points
         if not pts:
@@ -134,6 +134,7 @@ def read_gps(shp_path: Path) -> pd.DataFrame:
         x, y = pts[0]
         rows.append(
             {
+                "source_record_index": int(source_record_index),
                 "AID_Year": str(rec["AID_Year"]),
                 "Timestamp": rec["Timestamp"],
                 "pop": str(rec["pop"]).lower(),
@@ -359,6 +360,36 @@ def main():
         paths = extract_nested_shapefiles(Path(td))
         gps = read_gps(paths["gps"])
         gps_crs = read_crs(paths["gps"])
+
+        gps_export = gps.copy()
+        gps_export["group"] = gps_export["pop"].map(
+            {"whb": "small", "dcc": "large"}
+        )
+        gps_export["observation_id"] = gps_export[
+            "source_record_index"
+        ].map(lambda value: f"aikens_gps_{int(value):06d}")
+        gps_export["animal_year"] = gps_export["AID_Year"].astype(str)
+        gps_export["timestamp"] = gps_export["time"].dt.strftime(
+            "%Y-%m-%dT%H:%M:%S"
+        )
+        gps_export[
+            [
+                "observation_id",
+                "source_record_index",
+                "animal_id",
+                "animal_year",
+                "group",
+                "pop",
+                "year",
+                "timestamp",
+                "x",
+                "y",
+            ]
+        ].to_csv(
+            OUT / "stage3_industrial_mule_deer_gps.csv",
+            index=False,
+        )
+
         footprints = {
             "small": read_polygon(paths["small"], gps_crs),
             "large": read_polygon(paths["large"], gps_crs),
@@ -455,6 +486,19 @@ def main():
         "gps_crs": gps_crs.to_string(),
         "gps_crs_wkt_name": gps_crs.name,
         "gps_points": int(len(gps)),
+        "raw_gps_export": "stage3_industrial_mule_deer_gps.csv",
+        "raw_gps_export_columns": [
+            "observation_id",
+            "source_record_index",
+            "animal_id",
+            "animal_year",
+            "group",
+            "pop",
+            "year",
+            "timestamp",
+            "x",
+            "y"
+        ],
         "gps_individual_years": int(gps["AID_Year"].nunique()),
         "gps_animals": int(gps["animal_id"].nunique()),
         "gps_years": sorted(int(x) for x in gps["year"].unique()),
