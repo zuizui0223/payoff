@@ -69,13 +69,23 @@
       "slope": -0.00014,
       "se": 0.003902,
       "p": 0.972,
-      "outcome": "NOT_SUPPORTED"
+      "outcome": "NOT_SUPPORTED",
+      "formal_gate": {
+        "registration": "data/wigeon_stopover_actuator_registration_20260921.json",
+        "observation": "data/wigeon_stopover_actuator_observation_20260921.json",
+        "expected_direction": "decrease",
+        "max_p_value": 0.05,
+        "direction_passed": true,
+        "support_passed": false,
+        "outcome": "FAIL"
+      }
     },
     "travel_speed": {
       "log_gain_per_phase_day": 0.00109,
       "se": 0.000824,
       "p": 0.197,
-      "outcome": "NOT_SUPPORTED"
+      "outcome": "NOT_SUPPORTED",
+      "evidence_role": "secondary_actuator_diagnostic_not_primary_formal_gate"
     },
     "migration_distance_moderation": {
       "beta": -0.0253,
