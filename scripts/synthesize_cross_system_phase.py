@@ -9,6 +9,8 @@ Manifest schema:
       "system_name": "system_A",
       "independent_test_id": "A_heldout",
       "forcing_regime": "moderate",
+      "phase_coordinate_id": "signed_resource_phase_error",
+      "segment_scale_id": "standardized_tracking_segment_v1",
       "phase_gate_json": "outputs/A_phase_gate.json",
       "actuator_gate_json": "outputs/A_actuator_gate.json"
     }
@@ -124,6 +126,8 @@ def main() -> None:
             system_name = str(row["system_name"])
             test_id = str(row["independent_test_id"])
             forcing_regime = str(row["forcing_regime"])
+            phase_coordinate_id = str(row["phase_coordinate_id"])
+            segment_scale_id = str(row["segment_scale_id"])
             phase_path = Path(row["phase_gate_json"])
         except (KeyError, TypeError) as exc:
             raise SystemExit(
@@ -152,6 +156,8 @@ def main() -> None:
                 system_name=system_name,
                 independent_test_id=test_id,
                 forcing_regime=forcing_regime,
+                phase_coordinate_id=phase_coordinate_id,
+                segment_scale_id=segment_scale_id,
                 phase_gate=phase_gate_from_receipt(
                     phase_path
                 ),
@@ -165,6 +171,8 @@ def main() -> None:
         "common_coordinate": (
             "e_out = residual_forcing + lambda * e_in"
         ),
+        "phase_coordinate_id": synthesis.phase_coordinate_id,
+        "segment_scale_id": synthesis.segment_scale_id,
         "synthesis": asdict(synthesis),
         "cross_system_claim_target": "lambda",
         "actuator_policy": (
@@ -173,9 +181,9 @@ def main() -> None:
         ),
         "no_combined_score": True,
         "claim_boundary": (
-            "lambda comparisons require predeclared comparable phase "
-            "coordinates and segment scales; actuator failures do not "
-            "invalidate passing lambda gates"
+            "lambda synthesis is refused unless all independent tests share "
+            "the same predeclared phase_coordinate_id and segment_scale_id; "
+            "actuator failures do not invalidate passing lambda gates"
         ),
     }
 
