@@ -1,0 +1,58 @@
+{
+  "frozen_date": "2026-09-21",
+  "status": "three_taxon_coordinate_established_fourth_taxon_hold",
+  "direct_taxa": [
+    {
+      "taxon": "Odocoileus hemionus",
+      "common_name": "mule deer",
+      "lambda_approx": 0.10734,
+      "evidence_role": "existing_direct_system",
+      "actuator": "speed_plus_stopover"
+    },
+    {
+      "taxon": "Branta leucopsis",
+      "common_name": "barnacle goose",
+      "lambdas": [
+        -0.106320907,
+        0.130730883,
+        0.494113942
+      ],
+      "evidence_role": "existing_direct_system_within_taxon_route_replication",
+      "actuator": "route_stage_stopover"
+    },
+    {
+      "taxon": "Mareca penelope",
+      "common_name": "Eurasian wigeon",
+      "lambda": 0.85994,
+      "se": 0.04509,
+      "p_vs_lambda_1": 0.0019,
+      "transitions": 224,
+      "individuals": 28,
+      "evidence_role": "prospective_third_taxon",
+      "primary_prediction": "lambda < 1",
+      "primary_outcome": "PASS",
+      "stronger_prediction": "abs(lambda) < 0.75",
+      "stronger_outcome": "FAIL",
+      "stopover_actuator": "NOT_SUPPORTED",
+      "travel_speed_actuator": "NOT_SUPPORTED"
+    }
+  ],
+  "broad_bird_falsification": {
+    "observations": 5816,
+    "species": 55,
+    "universal_speed_ratio_supported": false
+  },
+  "current_cross_system_claim": "phase retention is a portable response coordinate; correction strength and actuator architecture are not universal constants",
+  "fourth_taxon": {
+    "status": "HOLD",
+    "raw_data_availability_sufficient": false,
+    "inclusion_gate_required": true,
+    "qualifying_contributions": [
+      "new prospective independent lambda test",
+      "new forcing regime",
+      "predeclared lambda boundary or sign-change test",
+      "prospective actuator mechanism discriminator"
+    ]
+  },
+  "preferred_next_empirical_move": "test a new lambda region or boundary rather than add taxonomy mechanically"
+}
