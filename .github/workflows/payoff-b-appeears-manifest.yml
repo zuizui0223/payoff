@@ -1,0 +1,60 @@
+name: payoff-b AppEEARS manifest
+
+on:
+  push:
+    paths:
+      - 'src/appeears_modis_request.py'
+      - 'scripts/build_aikens_appeears_manifest.py'
+      - 'tests/test_appeears_modis_request.py'
+      - 'pyproject.toml'
+      - '.github/workflows/payoff-b-appeears-manifest.yml'
+  pull_request:
+    paths:
+      - 'src/appeears_modis_request.py'
+      - 'scripts/build_aikens_appeears_manifest.py'
+      - 'tests/test_appeears_modis_request.py'
+      - 'pyproject.toml'
+      - '.github/workflows/payoff-b-appeears-manifest.yml'
+  workflow_dispatch:
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Earthdata manifest dependencies
+        run: python -m pip install --disable-pip-version-check -e ".[test,earthdata]"
+      - name: Test AppEEARS request builder
+        run: pytest -q tests/test_appeears_modis_request.py
+      - name: Build synthetic projected GPS fixture
+        run: |
+          mkdir -p outputs
+          cat > outputs/ci_aikens_projected_gps.csv <<'EOF'
+          observation_id,animal_id,animal_year,group,timestamp,x,y
+          o1,A,A_2020,small,2020-04-01T12:00:00,500000,4700000
+          o2,A,A_2020,small,2020-04-02T12:00:00,500010,4700010
+          o3,A,A_2020,small,2020-04-03T12:00:00,501000,4700000
+          o4,A,A_2021,small,2021-04-01T12:00:00,500000,4700000
+          EOF
+      - name: Build AppEEARS V061 sensitivity manifest
+        run: >
+          python scripts/build_aikens_appeears_manifest.py
+          outputs/ci_aikens_projected_gps.csv
+          --source-crs EPSG:32613
+          --max-points-per-task 1
+          --manifest-output outputs/ci_aikens_appeears_v061_manifest.json
+          --cells-output outputs/ci_aikens_modis250_cells.csv
+          --links-output outputs/ci_aikens_gps_modis250_links.csv
+          --receipt-output outputs/ci_aikens_appeears_v061_manifest_receipt.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-appeears-manifest
+          path: |
+            outputs/ci_aikens_projected_gps.csv
+            outputs/ci_aikens_appeears_v061_manifest.json
+            outputs/ci_aikens_modis250_cells.csv
+            outputs/ci_aikens_gps_modis250_links.csv
+            outputs/ci_aikens_appeears_v061_manifest_receipt.json
