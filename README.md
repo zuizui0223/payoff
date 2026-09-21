@@ -735,10 +735,18 @@ coordinate, not one universal lambda or a pooled actuator rule.
 The current empirical panel status is frozen in
 [docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md](docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md).
 The panel now has three direct taxa, with wigeon as the prospective third-taxon
-extension. A fourth taxon is **HOLD by default** and must pass the taxon-
-inclusion gate by adding a genuinely new lambda test, forcing regime, boundary
-prediction, or actuator discriminator. Raw-data availability alone is not a
-reason to expand the panel.
+extension. A fourth taxon remains **HOLD by default**.
+
+The inclusion rule is now test-based rather than taxon-based. A candidate
+lambda test must add a new prospectively registered lambda endpoint or boundary
+test on the common coordinate and segment scale. A prospective actuator-only
+test can also be included, but contributes zero additional lambda support.
+Raw-data availability or a new forcing regime alone is not enough.
+
+The source-backed industrial-development mule-deer analysis is the current
+actuator-only example. It adds a new within-taxon forcing perturbation without
+increasing the direct-taxon count or the lambda-support count. Its receipt is
+[docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md](docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md).
 
 Confirmatory evidence is now stricter than that verbal separation. Prediction
 registration and observation files are separate. A prospective lambda receipt
@@ -754,12 +762,13 @@ support. Synthesis is refused if phase-coordinate or segment-scale definitions
 differ across systems, and the API deliberately exposes no pooled actuator or
 lambda-plus-actuator omnibus score.
 
-Candidate taxa are screened before addition by
-`src/taxon_inclusion_gate.py`. Raw-data availability alone is insufficient.
-A candidate must use the common phase coordinate and segment scale, have a new
-independent-test ID, and add at least one inferential contribution: a
-prospectively registered lambda test, a new forcing regime, a predeclared lambda
-boundary/sign-change test, or a prospective actuator mechanism discriminator.
+Candidate evidence is screened before addition by
+`src/taxon_inclusion_gate.py` with preferred CLI
+`scripts/evaluate_evidence_inclusion.py`. The inference unit is an independent
+test. Lambda tests require the common phase coordinate and segment scale;
+actuator-only tests do not, because they contribute zero lambda support. A new
+forcing regime by itself is not a registered endpoint and therefore does not
+license inclusion.
 
 The empirical bridge is now explicit in
 [docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md).
