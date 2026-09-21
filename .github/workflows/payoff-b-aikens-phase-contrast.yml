@@ -16,17 +16,6 @@ on:
       - 'data/aikens2022_lambda_perturbation_registration_20260921.json'
       - 'pyproject.toml'
       - '.github/workflows/payoff-b-aikens-phase-contrast.yml'
-  pull_request:
-    paths:
-      - 'src/phase_retention_contrast_fit.py'
-      - 'scripts/fit_aikens_phase_retention_contrast.py'
-      - 'src/phase_retention_contrast.py'
-      - 'scripts/evaluate_phase_retention_contrast.py'
-      - 'tests/test_phase_retention_contrast_fit.py'
-      - 'tests/test_phase_retention_contrast.py'
-      - 'data/aikens2022_lambda_perturbation_registration_20260921.json'
-      - 'pyproject.toml'
-      - '.github/workflows/payoff-b-aikens-phase-contrast.yml'
   workflow_dispatch:
 
 jobs:
