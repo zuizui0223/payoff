@@ -4,19 +4,19 @@
 
 ## Abstract
 
-**Aim:** Migratory phenology is usually compared using arrival mismatch, movement speed or resource-surfing scores. We test whether a common phase-retention coordinate can compare how realized animal–environment timing deviations are transformed during migration while separating this process from environmental predictability.
+**Aim:** We test whether migratory systems can be compared by a common phase-retention coordinate that measures how animal–environment timing deviation changes after movement, while keeping environmental predictability separate from realized correction.
 
-**Location:** Eastern North America, the western United States, North Atlantic–Arctic barnacle-goose flyways, and the Eurasian wigeon migration corridor.
+**Location:** Eastern North America, the western United States, North Atlantic–Arctic goose flyways, and the Eurasian wigeon migration corridor.
 
-**Time period:** Published movement and phenology datasets spanning 2002–2020, with longer environmental baselines used where required for phenology reconstruction.
+**Time period:** Published movement and phenology datasets spanning 2002–2020, with longer environmental baselines where required.
 
-**Major taxa studied:** Migratory birds and ungulates, with direct controller reconstructions for mule deer (*Odocoileus hemionus*), barnacle goose (*Branta leucopsis*) and Eurasian wigeon (*Mareca penelope*).
+**Major taxa studied:** Migratory birds and ungulates, with direct reconstructions for mule deer (*Odocoileus hemionus*), barnacle goose (*Branta leucopsis*) and Eurasian wigeon (*Mareca penelope*).
 
-**Methods:** We first reanalysed 5,816 bird-year-cell observations from 55 migratory species to test a universal movement-to-phenology speed-ratio prediction. We then defined signed phenological phase, (E=T_a-T_e), and estimated phase retention, (lambda), from (E_{next}=a+lambda E_{current}+epsilon) over ecologically meaningful movement intervals. We reconstructed direct phase dynamics from public biologging and environmental data, estimated environmental timing innovation separately from retained phase error, and tested an industrial-development perturbation of movement control.
+**Methods:** We first tested a universal movement-to-phenology speed-ratio prediction using 5,816 bird-year-cell observations from 55 species. We then defined signed phase, (E=T_a-T_e), and estimated phase retention from (E_{next}=a+lambda E_{current}+epsilon) over declared movement intervals. Public biologging and environmental data were reconstructed for three taxa, environmental timing innovation was estimated separately, and an industrial-development perturbation tested actuation limits.
 
-**Results:** Broad bird data did not support one universal natural speed optimum. Direct systems instead showed significant phase contraction with strongly heterogeneous retention: mule deer (|lambda|approx0.11), primary barnacle-goose transitions (|lambda|approx0.11)–0.49, and wigeon (|lambda|approx0.86). Behavioral implementation differed: mule deer used speed and stopover adjustments, barnacle geese used stage-specific stopover control and overtaking, whereas wigeon showed weak contraction without detected stopover or travel-speed responses. Environmental predictability did not map monotonically onto feedback strength. Industrial development reduced a registered movement-control permeability proxy, but the stronger predicted temporal deterioration was unsupported.
+**Results:** Broad bird data rejected one universal natural speed optimum. Direct systems nevertheless showed phase contraction with strongly heterogeneous retention: mule deer ((|lambda|approx0.11)), primary barnacle-goose transitions ((|lambda|approx0.11	ext{–}0.49)), and wigeon ((|lambda|approx0.86)). Mule deer used speed and stopover adjustments, barnacle geese used stage-specific stopover control and overtaking, whereas wigeon showed weak contraction without detected stopover or travel-speed responses. Environmental predictability did not map monotonically onto correction strength. Industrial development attenuated a movement-control permeability proxy, while a stronger predicted temporal deterioration was unsupported.
 
-**Main conclusions:** Phenological migration is better compared through the fraction of incoming phase deviation retained after movement than through a universal migration rate or zero-lag target. Environmental information and realized phase correction are separable channels, and a common phase-retention coordinate can reveal generality while preserving taxon- and route-specific controller architecture.
+**Main conclusions:** Phenological migration is better compared by retained phase deviation than by a universal migration rate or zero-lag target. Environmental information and realized phase correction are separable channels, and a shared phase-retention coordinate reveals generality without erasing taxon- and route-specific control architecture.
 
 **Keywords:** animal tracking, biologging, environmental predictability, green wave, macroecology, migration, phenological mismatch, phase retention, plasticity, spring phenology
 
