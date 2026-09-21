@@ -2,21 +2,23 @@
   "systems": [
     {
       "system_name": "system_A",
-      "independent_test_id": "system_A_lambda_holdout",
+      "independent_test_id": "A_lambda_holdout",
       "forcing_regime": "moderate",
-      "phase_gate_json": "outputs/ci_payoff_b_phase_retention_gate_A.json",
-      "actuator_gate_json": "outputs/ci_payoff_b_actuator_gate_A.json",
       "phase_coordinate_id": "signed_resource_phase_error",
-      "segment_scale_id": "standardized_tracking_segment_v1"
+      "segment_scale_id": "standardized_tracking_segment_v1",
+      "evidence_tier": "prospective",
+      "phase_gate_json": "outputs/ci_payoff_b_registered_phase_A.json",
+      "actuator_gate_json": "outputs/ci_payoff_b_registered_actuator_A.json"
     },
     {
       "system_name": "cross_system_synthetic_witness",
-      "independent_test_id": "system_W_lambda_holdout",
+      "independent_test_id": "W_lambda_holdout",
       "forcing_regime": "strong",
-      "phase_gate_json": "outputs/ci_payoff_b_phase_retention_gate_W.json",
-      "actuator_gate_json": "outputs/ci_payoff_b_actuator_gate_W.json",
       "phase_coordinate_id": "signed_resource_phase_error",
-      "segment_scale_id": "standardized_tracking_segment_v1"
+      "segment_scale_id": "standardized_tracking_segment_v1",
+      "evidence_tier": "prospective",
+      "phase_gate_json": "outputs/ci_payoff_b_registered_phase_W.json",
+      "actuator_gate_json": "outputs/ci_payoff_b_registered_actuator_W.json"
     }
   ]
 }
