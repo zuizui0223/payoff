@@ -78,6 +78,8 @@ jobs:
       - run: python scripts/evaluate_registered_phase_retention.py --registration-json examples/tracking/prospective_W_phase_registration.json --observation-json examples/tracking/prospective_W_phase_observation.json --fail-on-gate-failure --output outputs/ci_payoff_b_registered_phase_W.json
       - run: python scripts/evaluate_registered_actuators.py --registration-json examples/tracking/prospective_W_actuator_registration.json --observation-json examples/tracking/prospective_W_actuator_observation.json --output outputs/ci_payoff_b_registered_actuator_W.json
       - run: python scripts/synthesize_cross_system_phase.py examples/tracking/cross_system_phase_manifest.json --output outputs/ci_payoff_b_cross_system_phase_synthesis.json
+      - run: python scripts/evaluate_taxon_inclusion.py examples/tracking/taxon_candidate_new_lambda.json --canonical-phase-coordinate-id signed_resource_phase_error --canonical-segment-scale-id standardized_tracking_segment_v1 --existing-test-ids-json examples/tracking/existing_lambda_test_ids.json --fail-on-exclusion --output outputs/ci_payoff_b_taxon_inclusion_pass.json
+      - run: python scripts/evaluate_taxon_inclusion.py examples/tracking/taxon_candidate_mechanical.json --canonical-phase-coordinate-id signed_resource_phase_error --canonical-segment-scale-id standardized_tracking_segment_v1 --existing-test-ids-json examples/tracking/existing_lambda_test_ids.json --output outputs/ci_payoff_b_taxon_inclusion_fail.json
       - run: |
           cat > outputs/ci_mule_deer_summary.csv <<'EOF'
           animal_id,year,migration_distance,movement_rate,start_days_from_peak,end_days_from_peak
