@@ -530,9 +530,11 @@ on the signed local peak-IRG phase coordinate and a fixed 24-hour segment.
 The movement archive is already reconstructed. The offline environmental
 pipeline now implements MODIS-like NDVI preprocessing, annual double-logistic
 fitting, peak-IRG extraction, explicit GPS environmental joining, and fixed-24h
-phase-pair construction. The lambda outcome remains unopened because the
-required MODIS NDVI plus snow/quality source table has not yet been
-materialized.
+phase-pair construction. The downstream statistical layer is also frozen:
+animal-year fixed effects, animal-clustered uncertainty, support gating, lambda
+estimation, and preregistered contrast evaluation are implemented end to end.
+The lambda outcome remains unopened because the required empirical MODIS NDVI
+plus snow/quality source table has not yet been materialized.
 
 Taxon count is therefore secondary to the number and diversity of independent
 prospective lambda tests and mechanism-discriminating actuator tests.
