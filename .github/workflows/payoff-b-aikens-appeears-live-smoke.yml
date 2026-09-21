@@ -139,6 +139,13 @@ jobs:
           MOD10="$(cat outputs/aikens_live_mod10_path.txt)"
           python scripts/prepare_aikens_irg_input_from_appeears.py             --mod09q1-results "$MOD09"             --mod10a2-results "$MOD10"             --output outputs/aikens_live_task0_v061_irg_input.csv             --receipt-output outputs/aikens_live_task0_v061_irg_input_receipt.json
 
+      - name: Evaluate live-product structural go/no-go gate
+        if: steps.creds.outputs.configured == 'true'
+        run: >
+          python scripts/evaluate_appeears_live_smoke.py
+          outputs/aikens_live_task0_v061_irg_input_receipt.json
+          --output outputs/aikens_appeears_live_smoke_gate.json
+
       - name: Write safe skip receipt when credentials are absent
         if: steps.creds.outputs.configured != 'true'
         run: |
@@ -169,4 +176,5 @@ jobs:
             outputs/aikens_appeears_live_smoke_receipt.json
             outputs/aikens_live_task0_v061_irg_input.csv
             outputs/aikens_live_task0_v061_irg_input_receipt.json
+            outputs/aikens_appeears_live_smoke_gate.json
             outputs/appeears_task0_files
