@@ -26,6 +26,8 @@ class CrossSystemEvidence:
     system_name: str
     independent_test_id: str
     forcing_regime: str
+    phase_coordinate_id: str
+    segment_scale_id: str
     phase_gate: PhaseRetentionGate
     actuator_gate: ActuatorGate | None = None
 
@@ -36,6 +38,10 @@ class CrossSystemEvidence:
             raise ValueError("independent_test_id must be non-empty")
         if not self.forcing_regime.strip():
             raise ValueError("forcing_regime must be non-empty")
+        if not self.phase_coordinate_id.strip():
+            raise ValueError("phase_coordinate_id must be non-empty")
+        if not self.segment_scale_id.strip():
+            raise ValueError("segment_scale_id must be non-empty")
         if (
             self.actuator_gate is not None
             and self.actuator_gate.system_name != self.system_name
@@ -60,6 +66,8 @@ class SystemActuatorSummary:
 class CrossSystemPhaseSynthesis:
     systems: int
     independent_lambda_tests: int
+    phase_coordinate_id: str
+    segment_scale_id: str
     lambda_passed: int
     lambda_failed: int
     lambda_values: tuple[float, ...]
@@ -99,6 +107,21 @@ def synthesize_cross_system_phase(
             "independent_test_id values must be unique; duplicate phase tests "
             "cannot be counted as independent cross-system evidence"
         )
+
+    coordinate_ids = {row.phase_coordinate_id for row in rows}
+    if len(coordinate_ids) != 1:
+        raise ValueError(
+            "cross-system lambda synthesis requires one predeclared common "
+            "phase_coordinate_id"
+        )
+    scale_ids = {row.segment_scale_id for row in rows}
+    if len(scale_ids) != 1:
+        raise ValueError(
+            "cross-system lambda synthesis requires one predeclared common "
+            "segment_scale_id"
+        )
+    phase_coordinate_id = next(iter(coordinate_ids))
+    segment_scale_id = next(iter(scale_ids))
 
     lambda_values = tuple(
         row.phase_gate.estimate.lambda_retention
@@ -174,6 +197,8 @@ def synthesize_cross_system_phase(
     return CrossSystemPhaseSynthesis(
         systems=len(rows),
         independent_lambda_tests=len(rows),
+        phase_coordinate_id=phase_coordinate_id,
+        segment_scale_id=segment_scale_id,
         lambda_passed=lambda_passed,
         lambda_failed=lambda_failed,
         lambda_values=lambda_values,
