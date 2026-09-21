@@ -732,6 +732,14 @@ separately in
 That three-taxon receipt is descriptive: it establishes a portable response
 coordinate, not one universal lambda or a pooled actuator rule.
 
+The current empirical panel status is frozen in
+[docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md](docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md).
+The panel now has three direct taxa, with wigeon as the prospective third-taxon
+extension. A fourth taxon is **HOLD by default** and must pass the taxon-
+inclusion gate by adding a genuinely new lambda test, forcing regime, boundary
+prediction, or actuator discriminator. Raw-data availability alone is not a
+reason to expand the panel.
+
 Confirmatory evidence is now stricter than that verbal separation. Prediction
 registration and observation files are separate. A prospective lambda receipt
 must match its frozen system ID, independent-test ID, phase-coordinate ID and
