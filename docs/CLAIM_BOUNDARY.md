@@ -251,10 +251,11 @@ In particular:
 - within-taxon actuator perturbations can therefore strengthen mechanism
   coverage without being counted as new taxa or new lambda replications;
 - the Aikens industrial mule-deer lambda perturbation is preregistered but
-  remains outcome-closed; the movement archive is recovered and the offline
-  peak-IRG / environmental-join / fixed-24h phase-pair pipeline is implemented,
-  but no small- versus large-development lambda contrast is licensed until the
-  MODIS NDVI plus snow/quality source layer is materialized;
+  remains outcome-closed; movement reconstruction, peak-IRG reconstruction,
+  environmental joining, fixed-24h phase pairing, the animal-year-fixed-effect
+  clustered lambda fitter, and the preregistered contrast evaluator are all
+  implemented; no small- versus large-development lambda contrast is licensed
+  until the empirical MODIS NDVI plus snow/quality source layer is materialized;
 - MOD09Q1.006 is the study-faithful product lane for the Aikens/Merkle-style
   reconstruction; MOD09Q1.061 is an explicitly labeled sensitivity lane and
   must not be silently substituted for V006;
@@ -407,6 +408,7 @@ TRACKING_ACTUATOR_ONLY_EVIDENCE_PATH_IMPLEMENTED
 TRACKING_INDUSTRIAL_MULE_DEER_ACTUATOR_PERTURBATION_FROZEN
 TRACKING_AIKENS_LAMBDA_PERTURBATION_PREREGISTERED
 TRACKING_AIKENS_OFFLINE_IRG_RECONSTRUCTION_IMPLEMENTED
+TRACKING_AIKENS_PHASE_CONTRAST_FITTER_IMPLEMENTED
 TRACKING_AIKENS_MODIS_SOURCE_MATERIALIZATION_PENDING
 TRACKING_AIKENS_LAMBDA_OUTCOME_UNOPENED
 TRACKING_WIGEON_PROSPECTIVE_PHASE_RETENTION_RECEIPT_FROZEN
