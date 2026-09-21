@@ -52,6 +52,8 @@ def test_lambda_pass_actuator_fail_does_not_reduce_lambda_support():
                 system_name="system_A",
                 independent_test_id="A_heldout",
                 forcing_regime="moderate",
+                phase_coordinate_id="signed_resource_phase_error",
+                segment_scale_id="standardized_tracking_segment_v1",
                 phase_gate=phase_gate(0.5, 0.45, 0.55),
                 actuator_gate=actuator_gate(
                     "system_A",
@@ -62,6 +64,8 @@ def test_lambda_pass_actuator_fail_does_not_reduce_lambda_support():
                 system_name="wigeon_type",
                 independent_test_id="W_heldout",
                 forcing_regime="strong",
+                phase_coordinate_id="signed_resource_phase_error",
+                segment_scale_id="standardized_tracking_segment_v1",
                 phase_gate=phase_gate(0.5, 0.45, 0.55),
                 actuator_gate=actuator_gate(
                     "wigeon_type",
@@ -90,6 +94,8 @@ def test_lambda_fail_actuator_pass_is_kept_as_separate_quadrant():
                 system_name="system_B",
                 independent_test_id="B_heldout",
                 forcing_regime="edge",
+                phase_coordinate_id="signed_resource_phase_error",
+                segment_scale_id="standardized_tracking_segment_v1",
                 phase_gate=phase_gate(0.8, 0.4, 0.6),
                 actuator_gate=actuator_gate(
                     "system_B",
@@ -113,12 +119,16 @@ def test_duplicate_independent_test_ids_are_rejected():
             system_name="system_A",
             independent_test_id="same_data",
             forcing_regime="moderate",
+            phase_coordinate_id="signed_resource_phase_error",
+            segment_scale_id="standardized_tracking_segment_v1",
             phase_gate=phase_gate(0.5, 0.4, 0.6),
         ),
         CrossSystemEvidence(
             system_name="system_A_relabelled",
             independent_test_id="same_data",
             forcing_regime="moderate",
+            phase_coordinate_id="signed_resource_phase_error",
+            segment_scale_id="standardized_tracking_segment_v1",
             phase_gate=phase_gate(0.5, 0.4, 0.6),
         ),
     ]
@@ -132,6 +142,8 @@ def test_actuator_gate_system_name_must_match_evidence_system():
             system_name="system_A",
             independent_test_id="A1",
             forcing_regime="moderate",
+            phase_coordinate_id="signed_resource_phase_error",
+            segment_scale_id="standardized_tracking_segment_v1",
             phase_gate=phase_gate(0.5, 0.4, 0.6),
             actuator_gate=actuator_gate(
                 "different_system",
@@ -147,6 +159,8 @@ def test_cross_system_synthesis_has_no_actuator_omnibus_score():
                 system_name="A",
                 independent_test_id="A1",
                 forcing_regime="moderate",
+                phase_coordinate_id="signed_resource_phase_error",
+                segment_scale_id="standardized_tracking_segment_v1",
                 phase_gate=phase_gate(0.3, 0.2, 0.4),
                 actuator_gate=actuator_gate("A", passes=True),
             ),
@@ -154,6 +168,8 @@ def test_cross_system_synthesis_has_no_actuator_omnibus_score():
                 system_name="B",
                 independent_test_id="B1",
                 forcing_regime="strong",
+                phase_coordinate_id="signed_resource_phase_error",
+                segment_scale_id="standardized_tracking_segment_v1",
                 phase_gate=phase_gate(0.7, 0.6, 0.8),
                 actuator_gate=actuator_gate("B", passes=False),
             ),
@@ -174,6 +190,8 @@ def test_missing_actuator_gate_is_allowed_without_penalizing_lambda():
                 system_name="C",
                 independent_test_id="C1",
                 forcing_regime="novel",
+                phase_coordinate_id="signed_resource_phase_error",
+                segment_scale_id="standardized_tracking_segment_v1",
                 phase_gate=phase_gate(0.4, 0.3, 0.5),
                 actuator_gate=None,
             )
@@ -186,3 +204,49 @@ def test_missing_actuator_gate_is_allowed_without_penalizing_lambda():
         synthesis.actuator_by_system[0].all_prospective_passed
         is None
     )
+
+
+def test_cross_system_synthesis_rejects_mixed_segment_scales():
+    rows = [
+        CrossSystemEvidence(
+            system_name="A",
+            independent_test_id="A1",
+            forcing_regime="moderate",
+            phase_coordinate_id="signed_resource_phase_error",
+            segment_scale_id="one_day",
+            phase_gate=phase_gate(0.5, 0.4, 0.6),
+        ),
+        CrossSystemEvidence(
+            system_name="B",
+            independent_test_id="B1",
+            forcing_regime="strong",
+            phase_coordinate_id="signed_resource_phase_error",
+            segment_scale_id="whole_route",
+            phase_gate=phase_gate(0.5, 0.4, 0.6),
+        ),
+    ]
+    with pytest.raises(ValueError, match="segment_scale_id"):
+        synthesize_cross_system_phase(rows)
+
+
+def test_cross_system_synthesis_rejects_mixed_phase_coordinates():
+    rows = [
+        CrossSystemEvidence(
+            system_name="A",
+            independent_test_id="A1",
+            forcing_regime="moderate",
+            phase_coordinate_id="signed_resource_phase_error",
+            segment_scale_id="standardized_tracking_segment_v1",
+            phase_gate=phase_gate(0.5, 0.4, 0.6),
+        ),
+        CrossSystemEvidence(
+            system_name="B",
+            independent_test_id="B1",
+            forcing_regime="strong",
+            phase_coordinate_id="arrival_date_residual",
+            segment_scale_id="standardized_tracking_segment_v1",
+            phase_gate=phase_gate(0.5, 0.4, 0.6),
+        ),
+    ]
+    with pytest.raises(ValueError, match="phase_coordinate_id"):
+        synthesize_cross_system_phase(rows)
