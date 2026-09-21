@@ -1,0 +1,78 @@
+{
+  "frozen_date": "2026-09-21",
+  "status": "three_taxon_direct_phase_retention_coordinate_descriptive",
+  "source": {
+    "payoff_pr": 144,
+    "branch": "empirical/movement-phenology-macro-20260918",
+    "head_sha": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "registry_path": "data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv",
+    "registry_blob_sha": "dea4917baa362e0805015151ae34c7de4456b1ae",
+    "synthesis_script": "analysis/movement_phenology/cross_taxon_phase_retention.py"
+  },
+  "taxa": [
+    {
+      "taxon": "Odocoileus hemionus",
+      "common_name": "mule deer",
+      "direct_rows": 1,
+      "median_signed_lambda": 0.10734,
+      "median_abs_lambda": 0.10734,
+      "min_abs_lambda": 0.10734,
+      "max_abs_lambda": 0.10734,
+      "actuator_architecture": "MIXED_SPEED_STOPOVER"
+    },
+    {
+      "taxon": "Branta leucopsis",
+      "common_name": "barnacle goose",
+      "direct_rows": 3,
+      "signed_lambdas": [
+        -0.106320907,
+        0.130730883,
+        0.494113942
+      ],
+      "abs_lambdas": [
+        0.106320907,
+        0.130730883,
+        0.494113942
+      ],
+      "median_signed_lambda": 0.130730883,
+      "median_abs_lambda": 0.130730883,
+      "min_abs_lambda": 0.106320907,
+      "max_abs_lambda": 0.494113942,
+      "actuator_architecture": "STEP_STOPOVER_ROUTE_STAGE"
+    },
+    {
+      "taxon": "Mareca penelope",
+      "common_name": "Eurasian wigeon",
+      "direct_rows": 1,
+      "median_signed_lambda": 0.859942433,
+      "median_abs_lambda": 0.859942433,
+      "min_abs_lambda": 0.859942433,
+      "max_abs_lambda": 0.859942433,
+      "prospective_third_taxon": true,
+      "actuator_architecture": "STAGING_PHASE_RETENTION_NO_DETECTED_ACTUATOR"
+    }
+  ],
+  "n_taxa": 3,
+  "all_registered_direct_rows_abs_lambda_below_1": true,
+  "taxon_median_abs_lambda_range": [
+    0.10734,
+    0.859942433
+  ],
+  "aggregation_rule": "one descriptive record per taxon; repeated flyways/routes contribute only within-taxon range",
+  "prospective_result": {
+    "taxon": "Mareca penelope",
+    "primary_prediction": "lambda < 1",
+    "primary_outcome": "PASS",
+    "stronger_prediction": "abs(lambda) < 0.75",
+    "stronger_outcome": "FAIL",
+    "shared_actuator_prediction": "NOT_SUPPORTED"
+  },
+  "retained_interpretation": "phase retention is a portable response coordinate; actuator architecture and correction strength are not portable constants",
+  "claim_boundary": [
+    "no universal lambda",
+    "no conventional meta-analytic mean at n=3 taxa",
+    "no route-level pseudoreplication",
+    "no pooled actuator score",
+    "no numerical pooling across nonstandardized segment definitions"
+  ]
+}
