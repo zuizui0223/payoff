@@ -25,7 +25,6 @@ FILES = [
     "manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V2.md",
     "scripts/build_movement_phenology_macro_figures.py",
     "scripts/audit_movement_phenology_figures.py",
-    "scripts/audit_movement_phenology_geb.py",
     "data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv",
     "data/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_REGISTRY.csv",
     "data/MOVEMENT_PHENOLOGY_INDUSTRIAL_PERMEABILITY_REGISTRY.csv",
@@ -78,7 +77,7 @@ Included:
 - source/claim receipts for promoted results;
 - theory notes defining phase-retention coordinates;
 - movement-phenology tests;
-- figure and manuscript audit scripts.
+- figure audit and reproducibility scripts.
 
 Original GPS, environmental and source-data archives remain at their cited
 public repositories/DOIs. Acquisition scripts document and reconstruct promoted
@@ -88,7 +87,7 @@ Minimal figure reproduction:
 1. install packages from requirements-reviewer.txt;
 2. run scripts/build_movement_phenology_macro_figures.py;
 3. run scripts/audit_movement_phenology_figures.py;
-4. run scripts/audit_movement_phenology_geb.py.
+4. verify the blinded manuscript against the supplied claim receipts.
 
 Figure 4 and Figure 5 use only included derived registries.
 
