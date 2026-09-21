@@ -37,24 +37,41 @@ RetentionClass = Literal[
 class PhaseRetentionEstimate:
     pairs: int
     lambda_retention: float
-    residual_forcing: float
-    rmse: float
+    residual_forcing: float | None
+    rmse: float | None
     r_squared: float | None
     retention_class: RetentionClass
+    source_kind: Literal["raw_pair_fit", "reported_summary"] = "raw_pair_fit"
+    lambda_se: float | None = None
+    p_vs_no_correction: float | None = None
 
 
 @dataclass(frozen=True)
 class PhaseRetentionPrediction:
-    lambda_low: float
-    lambda_high: float
+    lambda_low: float | None = None
+    lambda_high: float | None = None
     min_pairs: int = 3
     require_retention_class: RetentionClass | None = None
 
     def __post_init__(self) -> None:
-        if not isfinite(self.lambda_low) or not isfinite(self.lambda_high):
-            raise ValueError("lambda bounds must be finite")
-        if self.lambda_low > self.lambda_high:
+        if self.lambda_low is not None and not isfinite(self.lambda_low):
+            raise ValueError("lambda_low must be finite when supplied")
+        if self.lambda_high is not None and not isfinite(self.lambda_high):
+            raise ValueError("lambda_high must be finite when supplied")
+        if (
+            self.lambda_low is not None
+            and self.lambda_high is not None
+            and self.lambda_low > self.lambda_high
+        ):
             raise ValueError("lambda_low must be <= lambda_high")
+        if (
+            self.lambda_low is None
+            and self.lambda_high is None
+            and self.require_retention_class is None
+        ):
+            raise ValueError(
+                "phase-retention prediction needs at least one bound or class"
+            )
         if self.min_pairs < 3:
             raise ValueError("min_pairs must be at least 3")
 
@@ -176,6 +193,54 @@ def estimate_phase_retention(
     )
 
 
+def reported_phase_retention_estimate(
+    *,
+    pairs: int,
+    lambda_retention: float,
+    lambda_se: float | None = None,
+    p_vs_no_correction: float | None = None,
+) -> PhaseRetentionEstimate:
+    """Create a source-backed estimate when raw phase pairs are unavailable.
+
+    This path is intended for a preregistered analysis whose promoted
+    regression estimate is frozen in a source-backed receipt. Diagnostics that
+    require the raw pairs (intercept, RMSE, R-squared) remain unavailable
+    instead of being fabricated.
+    """
+
+    if pairs < 3:
+        raise ValueError("at least three phase-error pairs are required")
+    if not isfinite(lambda_retention):
+        raise ValueError("lambda_retention must be finite")
+    if lambda_se is not None:
+        if not isfinite(lambda_se) or lambda_se < 0.0:
+            raise ValueError(
+                "lambda_se must be non-negative and finite when supplied"
+            )
+    if p_vs_no_correction is not None:
+        if (
+            not isfinite(p_vs_no_correction)
+            or not 0.0 <= p_vs_no_correction <= 1.0
+        ):
+            raise ValueError(
+                "p_vs_no_correction must lie in [0,1] when supplied"
+            )
+
+    return PhaseRetentionEstimate(
+        pairs=pairs,
+        lambda_retention=lambda_retention,
+        residual_forcing=None,
+        rmse=None,
+        r_squared=None,
+        retention_class=classify_phase_retention(
+            lambda_retention
+        ),
+        source_kind="reported_summary",
+        lambda_se=lambda_se,
+        p_vs_no_correction=p_vs_no_correction,
+    )
+
+
 def evaluate_phase_retention_gate(
     estimate: PhaseRetentionEstimate,
     prediction: PhaseRetentionPrediction,
@@ -190,11 +255,15 @@ def evaluate_phase_retention_gate(
     if not enough_pairs:
         reasons.append("phase-error pair count below predeclared minimum")
 
-    interval_passed = (
-        prediction.lambda_low
-        <= estimate.lambda_retention
-        <= prediction.lambda_high
+    lower_passed = (
+        prediction.lambda_low is None
+        or estimate.lambda_retention >= prediction.lambda_low
     )
+    upper_passed = (
+        prediction.lambda_high is None
+        or estimate.lambda_retention <= prediction.lambda_high
+    )
+    interval_passed = lower_passed and upper_passed
     if not interval_passed:
         reasons.append(
             "observed lambda lies outside the predeclared prediction interval"
