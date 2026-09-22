@@ -214,6 +214,20 @@ jobs:
           PY
           fi
 
+      - name: Render preregistered Aikens outcome into GEB manuscript
+        run: >
+          python scripts/render_aikens_lambda_manuscript.py
+          --baseline manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md
+          --result-json outputs/aikens_primary_lambda_result.json
+          --output outputs/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_RENDERED.md
+          --claim-state-output outputs/aikens_primary_lambda_claim_state.json
+
+      - name: Audit rendered GEB manuscript
+        run: >
+          python scripts/audit_movement_phenology_geb.py
+          --manuscript outputs/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_RENDERED.md
+          --output outputs/aikens_primary_geb_submission_audit.json
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -238,6 +252,9 @@ jobs:
             outputs/aikens_primary_lambda_fit_receipt.json
             outputs/aikens_primary_lambda_observation.json
             outputs/aikens_primary_lambda_result.json
+            outputs/aikens_primary_lambda_claim_state.json
+            outputs/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_RENDERED.md
+            outputs/aikens_primary_geb_submission_audit.json
             data/aikens2022_environment_product_amendment_20260922.json
             data/aikens2022_phase_reconstruction_execution_contract_20260922.json
             docs/PAYOFF_B_AIKENS_ENVIRONMENT_PRODUCT_AMENDMENT_20260922.md
