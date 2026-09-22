@@ -329,3 +329,114 @@ def exact_iid_target_coverage_support(
         min_pairs_per_group=min_pairs_per_group,
         joint_probability_all_groups_pass=joint,
     )
+
+
+
+@dataclass(frozen=True)
+class CoverageProbabilityThreshold:
+    target_joint_support_probability: float
+    minimum_target_validity_probability: float | None
+    achieved_joint_support_probability: float
+    groups: tuple[GroupCoverageSupport, ...]
+    iterations: int
+    tolerance: float
+
+
+def find_minimum_iid_target_validity(
+    targets: Iterable[FixedIntervalGPSTarget],
+    *,
+    target_joint_support_probability: float = 0.95,
+    min_animals_per_group: int = 10,
+    min_pairs_per_group: int = 100,
+    tolerance: float = 1e-4,
+    max_iterations: int = 60,
+) -> CoverageProbabilityThreshold:
+    """Find the smallest IID target-validity probability meeting a joint gate.
+
+    The search is exact up to the declared bisection tolerance because each
+    support probability evaluation uses the exact dynamic programme above.
+
+    If even p=1 cannot reach the requested joint support probability, the
+    returned minimum_target_validity_probability is None.
+    """
+
+    if (
+        not isfinite(target_joint_support_probability)
+        or not 0.0 < target_joint_support_probability <= 1.0
+    ):
+        raise ValueError(
+            "target_joint_support_probability must lie in (0,1]"
+        )
+    if not isfinite(tolerance) or tolerance <= 0.0:
+        raise ValueError("tolerance must be positive and finite")
+    if max_iterations <= 0:
+        raise ValueError("max_iterations must be positive")
+
+    rows = tuple(targets)
+    if not rows:
+        raise ValueError("at least one fixed GPS target is required")
+
+    at_one = exact_iid_target_coverage_support(
+        rows,
+        target_validity_probability=1.0,
+        min_animals_per_group=min_animals_per_group,
+        min_pairs_per_group=min_pairs_per_group,
+    )
+    if (
+        at_one.joint_probability_all_groups_pass
+        < target_joint_support_probability
+    ):
+        return CoverageProbabilityThreshold(
+            target_joint_support_probability=(
+                target_joint_support_probability
+            ),
+            minimum_target_validity_probability=None,
+            achieved_joint_support_probability=(
+                at_one.joint_probability_all_groups_pass
+            ),
+            groups=at_one.groups,
+            iterations=0,
+            tolerance=tolerance,
+        )
+
+    low = 0.0
+    high = 1.0
+    best = at_one
+    iterations = 0
+
+    while iterations < max_iterations and high - low > tolerance:
+        iterations += 1
+        mid = 0.5 * (low + high)
+        audit = exact_iid_target_coverage_support(
+            rows,
+            target_validity_probability=mid,
+            min_animals_per_group=min_animals_per_group,
+            min_pairs_per_group=min_pairs_per_group,
+        )
+        if (
+            audit.joint_probability_all_groups_pass
+            >= target_joint_support_probability
+        ):
+            high = mid
+            best = audit
+        else:
+            low = mid
+
+    final = exact_iid_target_coverage_support(
+        rows,
+        target_validity_probability=high,
+        min_animals_per_group=min_animals_per_group,
+        min_pairs_per_group=min_pairs_per_group,
+    )
+    return CoverageProbabilityThreshold(
+        target_joint_support_probability=(
+            target_joint_support_probability
+        ),
+        minimum_target_validity_probability=high,
+        achieved_joint_support_probability=(
+            final.joint_probability_all_groups_pass
+        ),
+        groups=final.groups,
+        iterations=iterations,
+        tolerance=tolerance,
+    )
