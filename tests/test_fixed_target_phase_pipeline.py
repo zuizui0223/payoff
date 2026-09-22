@@ -109,3 +109,28 @@ def test_target_windows_are_anchored_to_earliest_raw_observation():
     assert selection.selected_targets[1].target_timestamp == (
         start + timedelta(hours=24)
     )
+
+
+
+def test_equidistant_target_uses_frozen_earlier_timestamp_tiebreak():
+    selection = select_fixed_interval_gps_targets(
+        [
+            gps("anchor", 0, "p0"),
+            # Reverse input order deliberately: target 24 h is equally
+            # distant from 23 h and 25 h, so source order must not matter.
+            gps("later", 25, "p25"),
+            gps("earlier", 23, "p23"),
+            gps("end", 48, "p48"),
+        ],
+        target_interval_seconds=24 * 3600,
+        max_target_deviation_seconds=3 * 3600,
+    )
+
+    by_index = {
+        row.target_index: row
+        for row in selection.selected_targets
+    }
+    assert by_index[1].observation_id == "earlier"
+    assert by_index[1].observed_timestamp == (
+        datetime(2020, 4, 1) + timedelta(hours=23)
+    )
