@@ -2,6 +2,16 @@
 
 Frozen: 2026-09-21
 
+> **2026-09-22 revalidation override:** the previously promoted wigeon
+> `lambda=0.85994` result is suspended after a source-faithfulness audit found
+> that the POWER reconstruction used a full-year TGS cumulative-minimum window,
+> whereas the published environmental code first restricts the TGS calculation
+> to January--July (`month(days)<8`). Wigeon is temporarily removed from
+> confirmatory cross-system support until the source-faithful reconstruction is
+> complete. See
+> `docs/PAYOFF_B_WIGEON_TGS_SOURCE_WINDOW_REVALIDATION_20260922.md`.
+
+
 ## Current panel
 
 Direct phase-retention coordinate currently contains three taxa:
