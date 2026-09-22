@@ -57,7 +57,7 @@
     "sensitivity_label": "v061_sensitivity_only",
     "silent_substitution_forbidden": true
   },
-  "current_blocker": "GitHub Actions has no configured AppEEARS/Earthdata credential. Live smoke workflow run 35612310294 completed safely as SKIPPED_NO_APPEEARS_CREDENTIALS. The exact 64,539-point manifest, V061 primary-successor product amendment, fixed-target execution v2, IRG reconstruction, adjacent-pair construction, clustered lambda fit, registered gate evaluation, manuscript rendering and outcome audit are implemented.",
+  "current_blocker": "Authenticated environmental access is required. GitHub Actions live smoke run 35612310294 found no configured AppEEARS/Earthdata credentials, and anonymous S3 smoke run 35686454317 confirmed MOD09Q1.061 and MOD10A2.061 Requester Pays buckets reject anonymous requests. All downstream fixed-target v2, IRG, lambda-gate and manuscript-rendering code is implemented.",
   "lambda_outcome_opened": false,
   "pipeline_validation": {
     "workflow": "payoff-b IRG reconstruction",
@@ -228,5 +228,15 @@
       "IRG reconstruction pipeline",
       "frozen fixed-target components via unit tests"
     ]
+  },
+  "anonymous_s3_fallback": {
+    "status": "NOT_AVAILABLE",
+    "receipt": "data/payoff_b_modis_anonymous_s3_status_20260922.json",
+    "workflow_run": 35686454317,
+    "artifact_id": 10676503767,
+    "artifact_sha256": "a0ca035a11c07183bd634814245bd925daa6fe12103af49e03d5f8dad22e676c",
+    "mod09q1_061": "AccessDenied: Requester Pays bucket requires authentication",
+    "mod10a2_061": "AccessDenied: Requester Pays bucket requires authentication",
+    "implication": "authenticated AppEEARS/Earthdata access remains required"
   }
 }
