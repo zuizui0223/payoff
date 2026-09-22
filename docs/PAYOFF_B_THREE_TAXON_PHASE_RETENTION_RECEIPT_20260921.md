@@ -1,8 +1,9 @@
 # PAYOFF-B three-taxon direct phase-retention coordinate receipt
 
 Frozen: 2026-09-21
+Source-window revalidation updated: 2026-09-22
 
-Status: **descriptive cross-taxon coordinate established; universal lambda not estimated**.
+Status: **descriptive three-taxon coordinate restored after source-faithful wigeon revalidation; universal or measurement-error-corrected lambda not estimated**.
 
 Primary source:
 
@@ -124,7 +125,12 @@ System:
     Mareca penelope
     van Toor et al. 2021
 
-Prospective third-taxon direct result:
+The original POWER reconstruction was superseded after a source audit showed
+that the published TGS code restricts daily temperatures to January--July
+before applying the cumulative-minimum 5 C rule. The corrected reconstruction
+was frozen before the corrected lambda was inspected.
+
+Source-faithful prospective third-taxon result:
 
     transitions:
         224
@@ -132,81 +138,130 @@ Prospective third-taxon direct result:
     individuals:
         28
 
-    lambda:
-        0.859942433
+    lambda_hat:
+        0.749768021
 
     SE:
-        0.045093213
+        0.049905667
 
-    p versus lambda=1:
-        0.001896645
+    naive p versus lambda_hat=1:
+        5.328e-07
 
-    |lambda|:
-        0.859942433
+    |lambda_hat|:
+        0.749768021
 
-    correction fraction:
-        0.140057567.
+    estimator-scale correction fraction:
+        0.250231979.
 
-Measured stopover and travel-speed actuator predictions were not supported.
+Formal W2 stopover actuator:
 
-Wigeon therefore expands the direct coordinate into a weak-correction regime
-without reproducing the mule-deer / goose actuator architecture.
+    slope:
+        -0.0628626 stopover-days / phase-day
+
+    cluster SE:
+        0.0277386
+
+    p:
+        0.03166
+
+    preregistered direction + support gate:
+        PASS.
+
+Travel-speed response remains unsupported:
+
+    p:
+        0.417.
+
+Distance moderation remains unsupported at p<=0.05.
+
+The corrected wigeon result is therefore
+
+    primary lambda gate:
+        PASS
+
+    strong |lambda|<=0.75 point forecast:
+        PASS, narrowly
+
+    stopover actuator:
+        PASS
+
+    travel-speed actuator:
+        NOT SUPPORTED.
+
+The canonical corrected receipt is
+
+    docs/PAYOFF_B_WIGEON_PHASE_RETENTION_REVALIDATED_20260922.md.
 
 ## 5. Taxon-level descriptive synthesis
 
-One descriptive record per taxon gives approximately:
+One descriptive naive-estimator record per taxon gives approximately:
 
     mule deer:
-        median |lambda| = 0.10734
+        median |lambda_hat| = 0.10734
 
     barnacle goose:
-        median |lambda| = 0.130730883
+        median |lambda_hat| = 0.130730883
 
     Eurasian wigeon:
-        median |lambda| = 0.859942433.
+        |lambda_hat| = 0.749768021.
 
-Taxon-level median-|lambda| range:
+Taxon-level observed-|lambda_hat| range:
 
-    0.10734 .. 0.859942433.
+    0.10734 .. 0.749768021.
 
 All registered direct rows satisfy
 
-    |lambda| < 1,
+    |lambda_hat| < 1,
 
-but the strength of retention correction is highly heterogeneous.
+but these are regression-scale estimands. Differential phase-measurement error
+can alter both absolute values and cross-system contrasts, so biological
+differences in latent correction strength remain subject to the frozen
+measurement-error audit.
 
-This is why the licensed cross-system statement is not
+A new qualitative pattern is nevertheless visible in the directly measured
+actuators:
 
-> migrants share one universal correction coefficient.
+    mule deer:
+        speed + stopover
 
-It is
+    barnacle goose:
+        stopover / route-stage control
 
-> direct migratory systems with different actuator architectures can be placed
-> on a common phase-retention response coordinate.
+    Eurasian wigeon:
+        stopover supported
+        travel speed not supported.
+
+Thus stopover / waiting-time adjustment is now a recurrent actuator across the
+three taxa, while speed and route-level contributions remain system-dependent.
 
 ## 6. Prospective status
 
 The evidence tiers are not identical.
 
 Wigeon is the preregistered third-taxon test and therefore provides the
-prospective cross-system extension.
+prospective cross-system extension after source-faithful TGS revalidation.
 
 Mule deer and the barnacle-goose route reconstructions provide the existing
 direct empirical coordinate against which the wigeon forecast was generated.
 
 Accordingly:
 
-    prospective third-taxon lambda test:
+    prospective third-taxon naive lambda test:
         PASS
 
-    stronger |lambda|<0.75 forecast:
-        FAIL
+    stronger |lambda_hat|<=0.75 point forecast:
+        PASS, narrowly
 
-    common actuator forecast:
+    formal W2 stopover actuator prediction:
+        PASS
+
+    W3 travel-speed diagnostic:
         NOT SUPPORTED.
 
-This combination is the empirical reason for separating lambda and actuator
-gates.
+This no longer supports a simple "lambda portable / actuator non-portable"
+dichotomy. Instead, the data support a common phase coordinate plus a recurrent
+stopover/waiting actuator embedded within broader system-specific controller
+architectures.
 
 ## 7. Why no conventional three-taxon meta-analysis
 
@@ -229,31 +284,37 @@ opened.
 
 ## 8. Retained conclusion
 
-The frozen three-taxon result is:
+The updated three-taxon result is:
 
-> **phase retention is a portable response coordinate; actuator architecture
-> and correction strength are not portable constants.**
+> **phase retention is a portable response coordinate; stopover/waiting is a
+> recurrent correction actuator across the three direct taxa, while the full
+> controller architecture and estimator-scale retention magnitude are not
+> portable constants.**
 
-This conclusion survives the wigeon partial falsification because the wigeon
-primary lambda<1 prediction passes while the stronger common-strength and
-shared-actuator predictions do not.
+The biological interpretation of lambda magnitude remains conditional on the
+separate errors-in-variables audit.
 
 ## 9. Claim ceiling
 
 Licensed:
 
-- direct phase-retention estimates exist in three migratory taxa;
-- all registered direct rows have |lambda|<1;
-- taxon-level retention strength spans a wide range;
-- wigeon is a prospective third-taxon extension;
-- actuator architectures differ;
+- direct naive phase-retention estimates exist in three migratory taxa;
+- all registered direct rows have |lambda_hat|<1 on their declared intervals;
+- the source-faithful wigeon primary prospective gate passes;
+- the source-faithful wigeon W2 stopover gate passes;
+- stopover/waiting adjustment recurs across mule deer, barnacle goose and
+  wigeon;
+- speed and route-level actuator evidence remains heterogeneous;
 - one common response coordinate is empirically useful.
 
 Not licensed:
 
-- one universal lambda;
+- one universal latent lambda;
 - one universal correction strength;
-- one universal actuator;
+- one universal full actuator architecture;
+- treating naive lambda_hat<1 as sufficient proof of latent lambda<1 before
+  measurement-error calibration;
+- attributing cross-taxon lambda magnitude differences entirely to biology;
 - treating three barnacle-goose flyways as three independent taxa;
 - a conventional meta-analytic mean at n=3 taxa;
 - numerical pooling across segment definitions that were not prospectively
