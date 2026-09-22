@@ -1,0 +1,49 @@
+name: payoff-b Aikens pixel-year clustered support
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-migration-phenology-20260919
+    paths:
+      - .github/workflows/payoff-b-aikens-pixel-year-clustered-support.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download frozen fixed-target artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/source
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10676913354/zip" \
+            -o outputs/aikens_support_ceiling.zip
+          echo "ab88ade2ec53c8f91b1a2099d58ad210ad57ab80d826375938c94bfe8689efa2  outputs/aikens_support_ceiling.zip" | sha256sum -c -
+          unzip -q outputs/aikens_support_ceiling.zip aikens_primary_fixed_gps_targets.csv -d outputs/source
+      - name: Run pixel-year clustered coverage sensitivity
+        run: >
+          python scripts/audit_pixel_year_clustered_support.py
+          outputs/source/aikens_primary_fixed_gps_targets.csv
+          --probabilities 0.32,0.33,0.335,0.34,0.345,0.35
+          --replicates 10000
+          --seed 20260922
+          --min-animals-per-group 10
+          --min-pairs-per-group 100
+          --output outputs/aikens_pixel_year_clustered_support.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-aikens-pixel-year-clustered-support
+          path: outputs/aikens_pixel_year_clustered_support.json
