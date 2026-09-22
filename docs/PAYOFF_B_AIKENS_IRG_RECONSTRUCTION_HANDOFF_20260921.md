@@ -747,6 +747,33 @@ Machine receipt:
 This is an upper-bound feasibility result, not final estimability. Environmental
 filtering can still remove frozen targets and adjacent pairs.
 
+A second outcome-blind audit quantifies support robustness under IID target-level
+environmental validity:
+
+    docs/PAYOFF_B_AIKENS_IID_TARGET_COVERAGE_SUPPORT_20260922.md
+
+Exact result:
+
+    P(final support in both groups) >= 0.95
+
+once
+
+    p >= 0.34198
+
+under the IID target-validity model.
+
+The large-development population is the limiting group. At the 95% joint
+threshold it has expected support of about
+
+    119.5 adjacent valid pairs
+    34.2 animals,
+
+whereas the small-development group is already effectively certain to pass.
+
+This does not model real pixel-year clustering and does not alter the registered
+support threshold. It only shows that near-complete environmental coverage is
+not required under the declared independence envelope.
+
 Thus the current blocker is operational credential configuration plus the
 subsequent empirical environmental-coverage realization, not an unresolved
 analysis choice or an already-known sample-support impossibility.
