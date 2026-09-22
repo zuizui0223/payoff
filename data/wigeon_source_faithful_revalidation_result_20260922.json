@@ -54,9 +54,16 @@
       "slope_days_per_phase_day": -0.06286262115570287,
       "cluster_se": 0.027738561977373986,
       "p_value": 0.031661798202295054,
-      "registered_expected_direction": "decrease",
-      "registered_max_p_value": 0.05,
-      "status": "PASS"
+      "primary_preregistered_prediction": "S'(E) < 0",
+      "fixed_p_value_threshold_preregistered": false,
+      "formal_directional_gate": "PASS",
+      "conventional_cluster_inference": "p=0.03166",
+      "secondary_gain_band": {
+        "registered_prediction": "0.3 < g_S < 0.8",
+        "observed_gain": 0.06286262115570287,
+        "status": "FAIL"
+      },
+      "source_status": "SUPPORTED"
     },
     "W3_travel_speed": {
       "log_speed_gain_per_phase_day": 0.0027573744846977923,
@@ -72,7 +79,7 @@
       "status": "NOT_SUPPORTED"
     }
   },
-  "two_gate_class": "LAMBDA_PASS_ACTUATOR_PASS",
+  "two_gate_class": "LAMBDA_PASS_ACTUATOR_SUPPORTED",
   "old_result_superseded": {
     "old_lambda_hat": 0.85994,
     "old_stopover_p": 0.972,
@@ -86,7 +93,8 @@
   },
   "claim_boundary": [
     "The corrected naive estimator-scale lambda and W2 stopover result are source-faithful to the published Jan-Jul TGS window.",
-    "The primary and W2 prospective gates are evaluated using their original frozen criteria.",
+    "W1 is evaluated with its original frozen lambda criterion; W2's frozen primary criterion is directional S'(E)<0 and did not preregister a fixed p-value threshold.",
+    "The corrected W2 direction passes; the conventional clustered p-value is 0.03166, while the secondary preregistered 0.3-0.8 stopover-gain band fails.",
     "The old lambda=0.85994 and actuator-fail classification are superseded.",
     "The corrected naive lambda<1 does not by itself identify latent biological lambda<1 until the measurement-error null is calibrated.",
     "Travel speed and distance moderation remain unsupported."
