@@ -2,7 +2,7 @@
 
 Frozen: 2026-09-21
 
-Status: **exact 64,539-point source manifest frozen; authenticated environmental extraction pending**.
+Status: **fixed-target execution v2 frozen; exact 64,539-point source manifest ready; AppEEARS execution blocked only by missing GitHub Actions credentials**.
 
 ## 1. Why this handoff exists
 
@@ -212,26 +212,33 @@ The fitter fails closed when:
 
 The peak-IRG output is not itself a phase-retention result.
 
-After peak IRG is reconstructed:
+After peak IRG is reconstructed, execution follows the frozen v2 ordering:
 
-1. map each retained GPS location to its local pixel-year peak-IRG date;
-2. create a phase-annotated GPS table with
+1. convert the exact GPS-to-MODIS links into identity-preserving raw GPS keys;
+2. select the 24 h target grid **before** environmental availability is used:
 
-       timestamp
-       local_peak_irg_timestamp;
+       scripts/select_fixed_interval_gps_targets.py
 
-3. run
+3. freeze the nearest raw GPS observation within the preregistered ±3 h window
+   for each target;
+4. attach local peak IRG to those already selected targets:
 
-       scripts/build_fixed_interval_phase_pairs.py
+       scripts/attach_peak_irg_to_fixed_targets.py
 
-   at the frozen 24-hour segment scale;
+5. if a selected target lacks valid environmental reconstruction, mark that
+   target invalid; do not select a replacement GPS observation;
+6. build pairs only from adjacent valid target indices:
 
-4. retain the preregistered maximum target-time deviation;
-5. verify the support gate separately in WHB and DCC;
-6. fit the frozen phase-retention contrast model;
-7. only then create the observation JSON for
+       scripts/build_phase_pairs_from_fixed_targets.py
+
+7. verify the support gate separately in WHB and DCC;
+8. fit the frozen phase-retention contrast model;
+9. only then create the observation JSON for
 
        scripts/evaluate_phase_retention_contrast.py.
+
+This ordering prevents environmental missingness from changing which GPS
+observation represents a registered 24 h target.
 
 The primary test remains
 
@@ -638,20 +645,50 @@ can be materialized independently.
 
 ## 12. Current blocker
 
-The movement archive, raw GPS re-export, source-identity gate, and exact MODIS
-cell/year manifest are complete.
+The movement archive, raw GPS re-export, source-identity gate, exact MODIS
+cell/year manifest, V061 primary-successor amendment, and fixed-target execution
+v2 are complete.
 
-The remaining operational sequence is now:
+A live AppEEARS smoke test was executed in GitHub Actions:
 
-    authenticated AppEEARS V061 sensitivity extraction
-    -> surface-reflectance / snow / quality materialization
+    workflow:
+        payoff-b Aikens AppEEARS live smoke
+
+    run:
+        35612310294
+
+    outcome:
+        SKIPPED_NO_APPEEARS_CREDENTIALS.
+
+No network extraction was performed.
+
+The required credential is one of:
+
+    APPEEARS_TOKEN
+
+or
+
+    EARTHDATA_USERNAME
+    EARTHDATA_PASSWORD.
+
+These values are read only from GitHub Actions secrets or the process
+environment; they are never written into PAYOFF receipts.
+
+Once credentials are configured, the frozen operational sequence is:
+
+    exact manifest
+    -> AppEEARS V061 extraction
     -> IRG reconstruction
-    -> fixed 24-hour phase pairs
-    -> frozen clustered lambda fit
-    -> preregistered lambda contrast gate.
+    -> environment-independent 24 h GPS target selection
+    -> attach phase to those frozen targets
+    -> invalidate missing environmental targets without replacement
+    -> adjacent valid target pairs
+    -> frozen clustered lambda contrast
+    -> preregistered outcome class
+    -> outcome-specific manuscript rendering and submission audit.
 
-Thus the only empirical data blocker in the V061 sensitivity lane is the
-authenticated environmental extraction itself.
+Thus the current blocker is operational credential configuration, not an
+unresolved analysis choice.
 
 The lambda outcome remains unopened.
 
