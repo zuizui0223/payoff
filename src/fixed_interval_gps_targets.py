@@ -64,12 +64,20 @@ def _closest(
 ) -> GPSObservation | None:
     if not rows:
         return None
-    deviation, row = min(
-        (
-            abs((row.timestamp - target).total_seconds()),
-            row,
-        )
-        for row in rows
+    row = min(
+        rows,
+        key=lambda candidate: (
+            abs(
+                (
+                    candidate.timestamp - target
+                ).total_seconds()
+            ),
+            candidate.timestamp,
+            candidate.observation_id,
+        ),
+    )
+    deviation = abs(
+        (row.timestamp - target).total_seconds()
     )
     if deviation > max_deviation_seconds:
         return None
