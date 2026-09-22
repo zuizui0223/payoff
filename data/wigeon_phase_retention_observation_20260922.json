@@ -1,0 +1,27 @@
+{
+  "system_name": "Eurasian wigeon",
+  "independent_test_id": "wigeon_vantoor2021_W1",
+  "phase_coordinate_id": "arrival_day_minus_local_5C_TGS_onset",
+  "segment_scale_id": "one_staging_transition",
+  "reported_estimate": {
+    "pairs": 224,
+    "lambda_retention": 0.7497680211367301,
+    "lambda_se": 0.04990566712278233,
+    "p_vs_no_correction": 5.328241982727779e-7
+  },
+  "provenance": {
+    "payoff_source_pr": 144,
+    "payoff_source_branch": "empirical/movement-phenology-macro-20260918",
+    "payoff_source_head": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+    "workflow_run": 35689856130,
+    "artifact_id": 10678143392,
+    "artifact_name": "movement-phenology-stage3-wigeon",
+    "artifact_zip_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+    "direct_receipt_sha256": "3cd182079dc24e3f7cc1342e5db371d5d3c787b91e75f4d7abf4b36116a68772",
+    "transitions_sha256": "095b8b63a1a6ee284941be914fef226e360c222cea27ea24ed50c57791db5d48",
+    "tgs_validation_sha256": "c73b4ce75a6dace44665c45beebc66278331f561212c22480d432e76a009a730",
+    "source_window_amendment": "data/wigeon_tgs_source_window_revalidation_20260922.json",
+    "published_tgs_window_contract": "days <- days[month(days)<8]",
+    "supersedes_full_year_reconstruction_lambda": 0.85994
+  }
+}
