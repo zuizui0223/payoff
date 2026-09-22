@@ -270,6 +270,12 @@ In particular:
   clustered lambda fitter, and the preregistered contrast evaluator are all
   implemented; no small- versus large-development lambda contrast is licensed
   until the empirical MODIS NDVI plus snow/quality source layer is materialized;
+- the frozen Aikens fixed-target support geometry has an exact IID
+  target-validity robustness envelope: under independent target validity,
+  approximately p=0.34198 is sufficient for a 95% probability that both
+  registered >=10-animal / >=100-pair support gates pass; this is not a
+  guarantee for real environmental missingness because MODIS/IRG failures can
+  be correlated by pixel-year, date, snow/quality state, geography, or group;
 - MOD09Q1.006 is the study-faithful product lane for the Aikens/Merkle-style
   reconstruction; MOD09Q1.061 is an explicitly labeled sensitivity lane and
   must not be silently substituted for V006;
@@ -425,6 +431,7 @@ TRACKING_AIKENS_OFFLINE_IRG_RECONSTRUCTION_IMPLEMENTED
 TRACKING_AIKENS_PHASE_CONTRAST_FITTER_IMPLEMENTED
 TRACKING_AIKENS_MODIS_SOURCE_MATERIALIZATION_PENDING
 TRACKING_AIKENS_LAMBDA_OUTCOME_UNOPENED
+TRACKING_AIKENS_IID_TARGET_COVERAGE_SUPPORT_ENVELOPE_FROZEN
 TRACKING_WIGEON_PROSPECTIVE_PHASE_RETENTION_RECEIPT_FROZEN
 TRACKING_THREE_TAXON_DIRECT_PHASE_RETENTION_COORDINATE_FROZEN
 TRACKING_FOURTH_TAXON_DEFAULT_HOLD_PENDING_INCLUSION_GATE
