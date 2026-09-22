@@ -101,6 +101,24 @@ def doy_fraction(ts: pd.Timestamp) -> float:
     return 1.0 + (ts - start).total_seconds() / 86400.0
 
 
+def published_tgs_input_window(daily: pd.DataFrame) -> pd.DataFrame:
+    """Match van Toor et al. Additional file 3: use only Jan--Jul.
+
+    The published environmental code applies:
+
+        days <- days[month(days) < 8]
+
+    before evaluating the cumulative-minimum 5 C TGS rule. Keeping August--
+    December can move the annual cumulative minimum to day 365/366 in cold
+    northern cells and create a spurious end-of-year 'spring onset'.
+    """
+
+    if "date" not in daily.columns:
+        raise ValueError("daily environmental data require a date column")
+    dates = pd.to_datetime(daily["date"])
+    return daily.loc[dates.dt.month < 8].copy()
+
+
 def robust_fit(formula: str, data: pd.DataFrame):
     base = smf.ols(formula, data=data).fit()
     if data["individual_id"].nunique() >= 4:
@@ -198,15 +216,21 @@ def main():
             temp = power_daily_t2m(lat, lon, start_year, end_year)
             n_pass = 0
             for year in years:
-                d = temp[temp["year"] == year].sort_values("date")
-                if len(d) < 350:
+                d_full = temp[temp["year"] == year].sort_values("date")
+                d = published_tgs_input_window(d_full)
+                # Jan--Jul contains 212 days in common years and 213 in leap
+                # years. Require near-complete source-faithful coverage.
+                expected_days = 213 if pd.Timestamp(
+                    year=year, month=12, day=31
+                ).dayofyear == 366 else 212
+                if len(d) < expected_days - 2:
                     tgs_rows.append(
                         {
                             "cell_lat": lat,
                             "cell_lon": lon,
                             "year": year,
                             "tgs_onset_doy": np.nan,
-                            "status": "INSUFFICIENT_DAILY_DATA",
+                            "status": "INSUFFICIENT_JAN_JUL_DAILY_DATA",
                         }
                     )
                     continue
@@ -285,9 +309,15 @@ def main():
     else:
         phase_median = phase_q1 = phase_q3 = np.nan
 
+    valid_tgs_rows = tgs[tgs["status"] == "PASS"].copy()
     validation = {
         "n_staging_events_total": int(len(env)),
         "n_staging_events_with_tgs": int(valid_phase.notna().sum()),
+        "tgs_source_window": "January through July (month < 8)",
+        "tgs_source_code_contract": "days <- days[month(days)<8]",
+        "n_valid_tgs_at_or_after_doy_300": int(
+            (valid_tgs_rows["tgs_onset_doy"] >= 300).sum()
+        ) if len(valid_tgs_rows) else 0,
         "arrival_phase_median_days": phase_median,
         "arrival_phase_q1_days": phase_q1,
         "arrival_phase_q3_days": phase_q3,
@@ -306,10 +336,14 @@ def main():
         and phase_q1 <= PUBLISHED["arrival_phase_q3_days"]
         and phase_q3 >= PUBLISHED["arrival_phase_q1_days"]
     )
+    validation["source_window_gate"] = (
+        validation["n_valid_tgs_at_or_after_doy_300"] == 0
+    )
     env_gate = bool(
         validation["event_count_gate"]
         and validation["median_phase_gate"]
         and validation["iqr_overlap_gate"]
+        and validation["source_window_gate"]
     )
 
     pd.DataFrame([validation]).to_csv(
@@ -442,7 +476,7 @@ def main():
         if env_gate
         else "SENSITIVITY_ONLY",
         "source_environment": (
-            "NASA POWER T2M + published 5C thermal-growing-season rule"
+            "NASA POWER T2M + published 5C cumulative-minimum rule on the source-faithful Jan-Jul window"
         ),
         "environment_validation": validation,
         "n_transitions": int(len(tr)),
