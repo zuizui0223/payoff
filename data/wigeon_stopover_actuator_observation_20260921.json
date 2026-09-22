@@ -4,13 +4,20 @@
   "observations": [
     {
       "name": "stopover_duration",
-      "observed_effect": -0.00014,
-      "p_value": 0.972
+      "observed_effect": -0.06286262115570287,
+      "p_value": 0.031661798202295054
     }
   ],
   "provenance": {
-    "direct_receipt_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
-    "direct_receipt_blob_sha": "d1a4014ce36a589cd32386890bb0cc5ee39fa478",
-    "cluster_se": 0.003902
+    "payoff_source_pr": 144,
+    "payoff_source_branch": "empirical/movement-phenology-macro-20260918",
+    "payoff_source_head": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+    "workflow_run": 35689856130,
+    "artifact_id": 10678143392,
+    "direct_receipt_sha256": "3cd182079dc24e3f7cc1342e5db371d5d3c787b91e75f4d7abf4b36116a68772",
+    "cluster_se": 0.027738561977373986,
+    "correction_amendment": "data/wigeon_tgs_source_window_revalidation_20260922.json",
+    "corrected_from_old_effect": -0.00014,
+    "corrected_from_old_p": 0.972
   }
 }
