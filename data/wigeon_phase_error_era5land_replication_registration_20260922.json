@@ -36,7 +36,7 @@
     "role": "independent ERA5-Land replicate reconstruction; not claimed byte-identical to the original authors' archived CDS files"
   },
   "published_TGS_contract": {
-    "threshold_c": 5.0,
+    "threshold_c": 5,
     "window": "January 1 through July 31",
     "published_code": "days <- days[month(days)<8]",
     "daily_rule": "tgs_doy = day of minimum cumulative sum(daily_mean_temperature_c - 5)"
@@ -59,10 +59,10 @@
     "published_phase_validation": {
       "reference_event_count": 208,
       "reference_median_days": 22.5,
-      "reference_q1_days": 13.0,
+      "reference_q1_days": 13,
       "reference_q3_days": 35.3,
       "minimum_events": 150,
-      "maximum_abs_median_difference_days": 12.0,
+      "maximum_abs_median_difference_days": 12,
       "require_IQR_overlap": true
     }
   },
@@ -98,7 +98,12 @@
       "naive_p_vs_lambda_one",
       "stopover_slope",
       "travel_speed_slope"
-    ]
+    ],
+    "power_refit_identity_gate": {
+      "expected_lambda_hat": 0.7497680211367301,
+      "maximum_absolute_difference": 1e-8,
+      "purpose": "refuse calibration if the frozen POWER transition model is not reproduced exactly enough"
+    }
   },
   "attenuation_signal_scale": {
     "primary_predictor_variance": "sample variance of origin_phase after Frisch-Waugh-Lovell residualization against z_progress + z_endpoint + z_progress:z_endpoint + C(year)",
@@ -111,7 +116,7 @@
         "name": "equal_independent_replicates_rho0",
         "predictor_error_sd": "SD(event_phase_difference)/sqrt(2)",
         "outcome_error_sd": "same",
-        "error_correlation": 0.0
+        "error_correlation": 0
       },
       {
         "name": "equal_replicates_discrepancy_correlation_proxy",
@@ -123,11 +128,24 @@
         "name": "conservative_full_disagreement_rho0",
         "predictor_error_sd": "SD(event_phase_difference)",
         "outcome_error_sd": "same",
-        "error_correlation": 0.0
+        "error_correlation": 0
       }
     ],
     "decision_rule": "No scenario changes the registered W1 result; each is a measurement-error sensitivity / claim audit.",
-    "no_tuning_after_result": true
+    "no_tuning_after_result": true,
+    "null_distribution": {
+      "role": "FWL residual-scale parametric sensitivity null, not a cluster-exact sampling theorem",
+      "n_pairs": 224,
+      "replicates": 10000,
+      "seed": 20260922,
+      "true_lambda": 1,
+      "latent_predictor_distribution": "zero-mean Gaussian with variance = observed residualized POWER predictor variance - calibrated predictor-error variance",
+      "process_noise_sd": "sample SD (ddof=1) of frozen source-faithful POWER controller residuals",
+      "measurement_error_distribution": "bivariate Gaussian with scenario-specific equal marginal SD and frozen error correlation",
+      "estimator": "OLS slope with intercept on simulated residualized phase pairs",
+      "tail_probability": "P(lambda_hat <= observed source-faithful POWER lambda_hat) with plus-one Monte Carlo correction",
+      "cluster_dependence": "not modeled in this first observation-error sensitivity null"
+    }
   },
   "claim_boundary": {
     "licensed_if_completed": [
