@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
 from src.phase_retention_recovery import (
     LambdaRecoveryDesign,
     lower_tail_null_probability,
+    recovery_design_from_observed_predictor_sd,
     simulate_lambda_recovery,
     simulate_naive_lambda_once,
 )
@@ -24,7 +25,9 @@ from src.phase_retention_recovery import (
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--true-lambda", type=float, required=True)
-    p.add_argument("--latent-phase-sd", type=float, required=True)
+    phase_sd = p.add_mutually_exclusive_group(required=True)
+    phase_sd.add_argument("--latent-phase-sd", type=float)
+    phase_sd.add_argument("--observed-predictor-sd", type=float)
     p.add_argument("--predictor-error-sd", type=float, required=True)
     p.add_argument("--outcome-error-sd", type=float, required=True)
     p.add_argument("--error-correlation", type=float, default=0.0)
@@ -40,15 +43,28 @@ def main() -> None:
     )
     args = p.parse_args()
 
-    design = LambdaRecoveryDesign(
-        true_lambda=args.true_lambda,
-        latent_phase_sd=args.latent_phase_sd,
-        predictor_error_sd=args.predictor_error_sd,
-        outcome_error_sd=args.outcome_error_sd,
-        error_correlation=args.error_correlation,
-        process_noise_sd=args.process_noise_sd,
-        n_pairs=args.n_pairs,
-    )
+    if args.observed_predictor_sd is not None:
+        design = recovery_design_from_observed_predictor_sd(
+            true_lambda=args.true_lambda,
+            observed_predictor_sd=args.observed_predictor_sd,
+            predictor_error_sd=args.predictor_error_sd,
+            outcome_error_sd=args.outcome_error_sd,
+            error_correlation=args.error_correlation,
+            process_noise_sd=args.process_noise_sd,
+            n_pairs=args.n_pairs,
+        )
+        phase_variance_source = "observed_predictor_sd_minus_error_variance"
+    else:
+        design = LambdaRecoveryDesign(
+            true_lambda=args.true_lambda,
+            latent_phase_sd=args.latent_phase_sd,
+            predictor_error_sd=args.predictor_error_sd,
+            outcome_error_sd=args.outcome_error_sd,
+            error_correlation=args.error_correlation,
+            process_noise_sd=args.process_noise_sd,
+            n_pairs=args.n_pairs,
+        )
+        phase_variance_source = "direct_latent_phase_sd_benchmark"
     summary = simulate_lambda_recovery(
         design,
         replicates=args.replicates,
@@ -58,6 +74,7 @@ def main() -> None:
     payload = {
         "status": "lambda_recovery_complete",
         "design": asdict(design),
+        "phase_variance_source": phase_variance_source,
         "summary": asdict(summary),
         "observed_lambda": args.observed_lambda,
         "lower_tail_null_probability": None,
