@@ -1,4 +1,4 @@
-name: payoff-b Aikens V061 primary environmental extraction
+name: payoff-b Aikens V061 primary lambda test
 
 concurrency:
   group: payoff-b-aikens-appeears-full-${{ github.ref_name }}
@@ -14,7 +14,7 @@ permissions:
 jobs:
   full-extraction:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,7 +22,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Earthdata dependencies
-        run: python -m pip install --disable-pip-version-check -e ".[test,earthdata]"
+        run: python -m pip install --disable-pip-version-check -e ".[test,earthdata,irg,empirical]"
 
       - name: Require configured AppEEARS credentials
         env:
@@ -126,10 +126,96 @@ jobs:
           python scripts/prepare_aikens_irg_input_from_appeears.py
           --mod09q1-results outputs/aikens_full_mod09q1_v061.csv
           --mod10a2-results outputs/aikens_full_mod10a2_v061.csv
+          --reconstruction-lane v061_primary_successor_after_v006_decommission
           --output outputs/aikens_full_v061_irg_input.csv
           --receipt-output outputs/aikens_full_v061_irg_input_receipt.json
 
+
+      - name: Reconstruct primary V061 peak IRG
+        run: >
+          python scripts/fit_peak_irg_from_ndvi.py
+          outputs/aikens_full_v061_irg_input.csv
+          --modis-product MOD09Q1.061
+          --v061-reconstruction-lane v061_primary_successor_after_v006_decommission
+          --output outputs/aikens_primary_v061_peak_irg.csv
+          --receipt-output outputs/aikens_primary_v061_peak_irg_receipt.json
+
+      - name: Build frozen GPS-to-pixel phase keys
+        run: >
+          python scripts/prepare_phase_gps_from_modis_links.py
+          outputs/aikens_exact_gps_modis250_links.csv
+          --expected-observations 64539
+          --output outputs/aikens_primary_phase_gps_keys.csv
+          --receipt-output outputs/aikens_primary_phase_gps_keys_receipt.json
+
+      - name: Attach primary local peak IRG to every retained GPS observation
+        run: >
+          python scripts/attach_peak_irg_to_gps.py
+          outputs/aikens_primary_phase_gps_keys.csv
+          outputs/aikens_primary_v061_peak_irg.csv
+          --required-modis-product MOD09Q1.061
+          --minimum-matched-fraction 1.0
+          --output outputs/aikens_primary_phase_annotated_gps.csv
+          --receipt-output outputs/aikens_primary_phase_environment_join_receipt.json
+
+      - name: Build preregistered fixed 24-hour phase pairs
+        run: >
+          python scripts/build_fixed_interval_phase_pairs.py
+          outputs/aikens_primary_phase_annotated_gps.csv
+          --target-interval-hours 24
+          --max-target-deviation-hours 3
+          --pairs-output outputs/aikens_primary_fixed_24h_phase_pairs.csv
+          --receipt-output outputs/aikens_primary_fixed_24h_phase_pairs_receipt.json
+
+      - name: Fit preregistered within-mule-deer lambda contrast
+        run: >
+          python scripts/fit_aikens_phase_retention_contrast.py
+          outputs/aikens_primary_fixed_24h_phase_pairs.csv
+          --registration-json data/aikens2022_lambda_perturbation_registration_20260921.json
+          --group-a-value small
+          --group-b-value large
+          --min-animals-per-group 10
+          --min-pairs-per-group 100
+          --fit-receipt-output outputs/aikens_primary_lambda_fit_receipt.json
+          --observation-output outputs/aikens_primary_lambda_observation.json
+
+      - name: Evaluate registered lambda gate or record NOT ESTIMABLE
+        run: |
+          if [ -f outputs/aikens_primary_lambda_observation.json ]; then
+            python scripts/evaluate_phase_retention_contrast.py \
+              --registration-json data/aikens2022_lambda_perturbation_registration_20260921.json \
+              --observation-json outputs/aikens_primary_lambda_observation.json \
+              --output outputs/aikens_primary_lambda_result.json
+          else
+            python - <<'PY'
+          import json
+          from pathlib import Path
+
+          fit_path = Path("outputs/aikens_primary_lambda_fit_receipt.json")
+          fit = json.loads(fit_path.read_text(encoding="utf-8"))
+          payload = {
+              "status": "phase_retention_contrast_not_estimable",
+              "scientific_result": "NOT_ESTIMABLE",
+              "fit_receipt": str(fit_path),
+              "reasons": fit["fit"].get("reasons", []),
+              "lambda_outcome_opened": False,
+              "retuning_permitted": False,
+              "claim_boundary": (
+                  "registered support or reconstruction gate was not met; "
+                  "the phase scale, tolerance, product, and support thresholds "
+                  "remain frozen"
+              ),
+          }
+          Path("outputs/aikens_primary_lambda_result.json").write_text(
+              json.dumps(payload, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print("AIKENS_PRIMARY_LAMBDA_NOT_ESTIMABLE")
+          PY
+          fi
+
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: payoff-b-aikens-appeears-full-extraction
           path: |
@@ -137,7 +223,21 @@ jobs:
             outputs/aikens_exact_manifest_coverage_gate.json
             outputs/aikens_appeears_full_submission_receipt.json
             outputs/aikens_full_appeears_merge_receipt.json
+            outputs/aikens_full_mod09q1_v061.csv
+            outputs/aikens_full_mod10a2_v061.csv
             outputs/aikens_full_v061_irg_input.csv
             outputs/aikens_full_v061_irg_input_receipt.json
+            outputs/aikens_primary_v061_peak_irg.csv
+            outputs/aikens_primary_v061_peak_irg_receipt.json
+            outputs/aikens_primary_phase_gps_keys.csv
+            outputs/aikens_primary_phase_gps_keys_receipt.json
+            outputs/aikens_primary_phase_annotated_gps.csv
+            outputs/aikens_primary_phase_environment_join_receipt.json
+            outputs/aikens_primary_fixed_24h_phase_pairs.csv
+            outputs/aikens_primary_fixed_24h_phase_pairs_receipt.json
+            outputs/aikens_primary_lambda_fit_receipt.json
+            outputs/aikens_primary_lambda_observation.json
+            outputs/aikens_primary_lambda_result.json
             data/aikens2022_environment_product_amendment_20260922.json
+            data/aikens2022_phase_reconstruction_execution_contract_20260922.json
             docs/PAYOFF_B_AIKENS_ENVIRONMENT_PRODUCT_AMENDMENT_20260922.md
