@@ -1,0 +1,49 @@
+{
+  "frozen_date": "2026-09-22",
+  "status": "PRE_ENV_SUPPORT_CEILING_PASSES",
+  "lambda_outcome_opened": false,
+  "source": {
+    "gps_observations": 64539,
+    "animals": 137,
+    "animal_years": 253,
+    "raw_artifact_id": 10643405042,
+    "raw_artifact_sha256": "1f0d706dc6a102261009b7099c748dcce40abb2adedf7b88828395a1d392cfa0",
+    "raw_csv_sha256": "03426804557a0244be3ed6eb9f461db578d3ce26fa2b28637f8e98bee9f09466",
+    "exact_manifest_sha256": "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463"
+  },
+  "target_contract": {
+    "interval_hours": 24,
+    "tolerance_hours": 3,
+    "anchor": "earliest raw spring-migration observation per animal-year",
+    "environment_used_for_selection": false,
+    "tie_break": [
+      "minimum absolute target-time deviation",
+      "earlier observed timestamp",
+      "lexicographically smaller observation_id"
+    ]
+  },
+  "registered_support_gate": {
+    "min_animals_per_group": 10,
+    "min_adjacent_pairs_per_group": 100
+  },
+  "groups": {
+    "large": {
+      "animals_with_possible_pairs": 48,
+      "max_possible_adjacent_pairs": 1022,
+      "support_possible": true
+    },
+    "small": {
+      "animals_with_possible_pairs": 89,
+      "max_possible_adjacent_pairs": 4434,
+      "support_possible": true
+    }
+  },
+  "interpretation": "final support is feasible before environmental filtering; final estimability remains unresolved",
+  "provenance": {
+    "workflow": "payoff-b Aikens pre-environment support ceiling",
+    "run_id": 35687039708,
+    "head_sha": "06e88f100a6d3b0b5ed77dbdd3f32eb5a8589a3a",
+    "artifact_id": 10676913354,
+    "artifact_sha256": "ab88ade2ec53c8f91b1a2099d58ad210ad57ab80d826375938c94bfe8689efa2"
+  }
+}
