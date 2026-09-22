@@ -18,11 +18,11 @@ jobs:
           mkdir -p outputs
           MOD09_OUT="$(mktemp)"
           MOD10_OUT="$(mktemp)"
-          aws s3 ls --no-sign-request --region us-west-2 s3://lp-prod-protected/MOD09Q1.061/ >"\${MOD09_OUT}" 2>&1
+          aws s3 ls --no-sign-request --region us-west-2 s3://lp-prod-protected/MOD09Q1.061/ >"${MOD09_OUT}" 2>&1
           MOD09_CODE=$?
-          aws s3 ls --no-sign-request --region us-west-2 s3://lp-prod-protected/MOD10A2.061/ >"\${MOD10_OUT}" 2>&1
+          aws s3 ls --no-sign-request --region us-west-2 s3://lp-prod-protected/MOD10A2.061/ >"${MOD10_OUT}" 2>&1
           MOD10_CODE=$?
-          python - "\${MOD09_CODE}" "\${MOD10_CODE}" "\${MOD09_OUT}" "\${MOD10_OUT}" <<'PY'
+          python - "${MOD09_CODE}" "${MOD10_CODE}" "${MOD09_OUT}" "${MOD10_OUT}" <<'PY'
           import json
           import sys
           from pathlib import Path
