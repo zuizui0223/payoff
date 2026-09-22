@@ -1,0 +1,145 @@
+{
+  "frozen_date": "2026-09-22",
+  "status": "PIXEL_YEAR_CLUSTERED_SUPPORT_SENSITIVITY_FROZEN",
+  "lambda_outcome_opened": false,
+  "source": {
+    "fixed_target_artifact_id": 10676913354,
+    "fixed_target_artifact_sha256": "ab88ade2ec53c8f91b1a2099d58ad210ad57ab80d826375938c94bfe8689efa2",
+    "targets": 5710,
+    "unique_pixel_years": 4304
+  },
+  "simulation": {
+    "cluster_definition": "pixel_id x target_timestamp.year",
+    "replicates_per_probability": 10000,
+    "base_seed": 20260922,
+    "probabilities": [
+      0.32,
+      0.33,
+      0.335,
+      0.34,
+      0.345,
+      0.35
+    ],
+    "min_animals_per_group": 10,
+    "min_pairs_per_group": 100
+  },
+  "results": {
+    "0.32": {
+      "joint": 0.7975,
+      "ci95": [
+        0.78951,
+        0.805261
+      ],
+      "large": {
+        "support": 0.7975,
+        "mean_pairs": 111.5,
+        "mean_animals": 32.7394
+      },
+      "small": {
+        "support": 1,
+        "mean_pairs": 498.191,
+        "mean_animals": 69.1368
+      }
+    },
+    "0.33": {
+      "joint": 0.9031,
+      "ci95": [
+        0.897146,
+        0.908744
+      ],
+      "large": {
+        "support": 0.9031,
+        "mean_pairs": 118.205,
+        "mean_animals": 33.4091
+      },
+      "small": {
+        "support": 1,
+        "mean_pairs": 527.525,
+        "mean_animals": 70.2011
+      }
+    },
+    "0.335": {
+      "joint": 0.9348,
+      "ci95": [
+        0.929792,
+        0.939474
+      ],
+      "large": {
+        "support": 0.9348,
+        "mean_pairs": 121.701,
+        "mean_animals": 33.7715
+      },
+      "small": {
+        "support": 1,
+        "mean_pairs": 543.819,
+        "mean_animals": 70.6551
+      }
+    },
+    "0.34": {
+      "joint": 0.9619,
+      "ci95": [
+        0.957967,
+        0.965478
+      ],
+      "large": {
+        "support": 0.9619,
+        "mean_pairs": 125.409,
+        "mean_animals": 34.1073
+      },
+      "small": {
+        "support": 1,
+        "mean_pairs": 558.558,
+        "mean_animals": 71.1287
+      }
+    },
+    "0.345": {
+      "joint": 0.9786,
+      "ci95": [
+        0.975574,
+        0.981258
+      ],
+      "large": {
+        "support": 0.9786,
+        "mean_pairs": 128.663,
+        "mean_animals": 34.4515
+      },
+      "small": {
+        "support": 1,
+        "mean_pairs": 573.662,
+        "mean_animals": 71.5531
+      }
+    },
+    "0.35": {
+      "joint": 0.9876,
+      "ci95": [
+        0.985236,
+        0.989589
+      ],
+      "large": {
+        "support": 0.9876,
+        "mean_pairs": 132.133,
+        "mean_animals": 34.7428
+      },
+      "small": {
+        "support": 1,
+        "mean_pairs": 589.558,
+        "mean_animals": 72.0787
+      }
+    }
+  },
+  "support_95_bracket": {
+    "lower_not_passing": 0.335,
+    "upper_passing": 0.34
+  },
+  "comparison_to_iid": {
+    "iid_p95": 0.34197998046875,
+    "retained_interpretation": "pixel-year sharing does not shift the support transition into a qualitatively different coverage regime under the declared sensitivity"
+  },
+  "provenance": {
+    "workflow_run": 35689632962,
+    "head_sha": "b8a00eb30c502cf2e5802f8b473215a7b7dc611e",
+    "artifact_id": 10678357377,
+    "artifact_sha256": "7e5722aee567a484ef1724476e06a77156f7973e512bfb3aa3e233d3ce96f38d"
+  },
+  "claim_boundary": "fixed-seed Monte Carlo under independent pixel-year validity only; real environmental missingness may have broader dependence"
+}
