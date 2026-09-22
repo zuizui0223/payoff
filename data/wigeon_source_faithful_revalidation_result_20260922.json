@@ -1,0 +1,94 @@
+{
+  "result_id": "wigeon_source_faithful_jan_jul_revalidation_20260922",
+  "completed_date": "2026-09-22",
+  "amendment": "data/wigeon_tgs_source_window_revalidation_20260922.json",
+  "source": {
+    "payoff_source_pr": 144,
+    "branch": "empirical/movement-phenology-macro-20260918",
+    "head_sha": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+    "workflow_run": 35689856130,
+    "artifact_id": 10678143392,
+    "artifact_name": "movement-phenology-stage3-wigeon",
+    "artifact_zip_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+    "direct_receipt_sha256": "3cd182079dc24e3f7cc1342e5db371d5d3c787b91e75f4d7abf4b36116a68772",
+    "transitions_sha256": "095b8b63a1a6ee284941be914fef226e360c222cea27ea24ed50c57791db5d48",
+    "tgs_validation_sha256": "c73b4ce75a6dace44665c45beebc66278331f561212c22480d432e76a009a730"
+  },
+  "source_faithful_tgs": {
+    "threshold_c": 5,
+    "window": "January through July",
+    "published_code_contract": "days <- days[month(days)<8]",
+    "n_staging_events_total": 256,
+    "n_staging_events_with_tgs": 256,
+    "n_valid_tgs_at_or_after_doy_300": 0,
+    "arrival_phase_median_days": 21.96782407407408,
+    "arrival_phase_q1_days": 13.182282986111108,
+    "arrival_phase_q3_days": 34.24508680555555,
+    "published_reference": {
+      "n_arrival_events_with_environment": 208,
+      "median_days": 22.5,
+      "q1_days": 13,
+      "q3_days": 35.3
+    },
+    "event_count_gate": true,
+    "median_phase_gate": true,
+    "iqr_overlap_gate": true,
+    "source_window_gate": true
+  },
+  "primary_phase_retention": {
+    "n_transitions": 224,
+    "n_individuals": 28,
+    "beta_phase_change_on_origin_error": -0.2502319788632698,
+    "beta_cluster_se": 0.04990566712278233,
+    "beta_cluster_p": 0.000029323381476664958,
+    "lambda_hat": 0.7497680211367301,
+    "lambda_se": 0.04990566712278233,
+    "naive_p_vs_lambda_one": 5.328241982727779e-7,
+    "correction_strength_one_minus_abs_lambda": 0.25023197886326987,
+    "registered_primary_lambda_less_than_one": "PASS",
+    "registered_strong_abs_lambda_le_0_75": "PASS",
+    "note": "strong forecast passes only narrowly on the frozen point-estimate boundary and is not upgraded beyond the registered point-estimate gate"
+  },
+  "actuator_gates": {
+    "W2_stopover": {
+      "slope_days_per_phase_day": -0.06286262115570287,
+      "cluster_se": 0.027738561977373986,
+      "p_value": 0.031661798202295054,
+      "registered_expected_direction": "decrease",
+      "registered_max_p_value": 0.05,
+      "status": "PASS"
+    },
+    "W3_travel_speed": {
+      "log_speed_gain_per_phase_day": 0.0027573744846977923,
+      "cluster_se": 0.0033451590730534287,
+      "p_value": 0.41699858388761735,
+      "status": "NOT_SUPPORTED"
+    },
+    "W4_distance_moderation": {
+      "beta": -0.06315608322821453,
+      "se": 0.0349973353955935,
+      "p_value": 0.08230417519325887,
+      "route_progress_x_endpoint_phase_p": 0.2523827833446669,
+      "status": "NOT_SUPPORTED"
+    }
+  },
+  "two_gate_class": "LAMBDA_PASS_ACTUATOR_PASS",
+  "old_result_superseded": {
+    "old_lambda_hat": 0.85994,
+    "old_stopover_p": 0.972,
+    "old_two_gate_class": "LAMBDA_PASS_ACTUATOR_FAIL"
+  },
+  "measurement_error_status": {
+    "observed_origin_phase_sd_days": 15.881166579869618,
+    "source_backed_measurement_error_sd": "PENDING",
+    "true_lambda_one_errors_in_variables_null": "PENDING",
+    "biological_latent_lambda_less_than_one_claim": "PENDING_MEASUREMENT_ERROR_AUDIT"
+  },
+  "claim_boundary": [
+    "The corrected naive estimator-scale lambda and W2 stopover result are source-faithful to the published Jan-Jul TGS window.",
+    "The primary and W2 prospective gates are evaluated using their original frozen criteria.",
+    "The old lambda=0.85994 and actuator-fail classification are superseded.",
+    "The corrected naive lambda<1 does not by itself identify latent biological lambda<1 until the measurement-error null is calibrated.",
+    "Travel speed and distance moderation remain unsupported."
+  ]
+}
