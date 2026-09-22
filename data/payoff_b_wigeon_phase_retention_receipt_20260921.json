@@ -1,6 +1,6 @@
 {
   "frozen_date": "2026-09-21",
-  "status": "prospective_third_taxon_quantitative_receipt_frozen",
+  "status": "SUPERSEDED",
   "system": {
     "common_name": "Eurasian wigeon",
     "taxon": "Mareca penelope",
@@ -120,5 +120,8 @@
       "two_gate_class": "LAMBDA_PASS_ACTUATOR_FAIL"
     },
     "omnibus_score": false
-  }
+  },
+  "superseded_date": "2026-09-22",
+  "superseded_by": "data/payoff_b_wigeon_phase_retention_receipt_20260922.json",
+  "supersession_reason": "published wigeon TGS source window is January-July; the full-year reconstruction was not source-faithful"
 }
