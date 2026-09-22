@@ -22,8 +22,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Audit blinded GEB manuscript
-        run: python scripts/audit_movement_phenology_geb.py
+      - name: Audit blinded GEB manuscript and record science hold
+        run: python scripts/audit_movement_phenology_geb.py --allow-science-hold
       - uses: actions/upload-artifact@v4
         with:
           name: movement-phenology-geb-submission-audit
