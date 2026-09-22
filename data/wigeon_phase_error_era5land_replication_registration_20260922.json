@@ -1,0 +1,145 @@
+{
+  "registration_id": "wigeon_phase_error_era5land_replication_v1",
+  "frozen_date": "2026-09-22",
+  "freeze_state": {
+    "Aikens_lambda_outcome_opened": false,
+    "wigeon_source_faithful_naive_lambda_already_known": true,
+    "measurement_error_calibration_result_opened": false
+  },
+  "purpose": "Calibrate observation-layer sensitivity for the source-faithful wigeon phase-retention estimator using an independent ERA5-Land reconstruction paired event-by-event with the frozen NASA POWER reconstruction.",
+  "source_wigeon_artifact": {
+    "source_pr": 144,
+    "source_branch": "empirical/movement-phenology-macro-20260918",
+    "source_head": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+    "workflow_run": 35689856130,
+    "artifact_id": 10678143392,
+    "artifact_name": "movement-phenology-stage3-wigeon",
+    "artifact_zip_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+    "required_files": {
+      "staging_events": "stage3_wigeon_tgs_events.csv",
+      "controller_transitions": "stage3_wigeon_controller_transitions.csv"
+    }
+  },
+  "replicate_environment_source": {
+    "provider": "Open-Meteo Historical Weather API",
+    "dataset": "ERA5-Land",
+    "api_endpoint": "https://archive-api.open-meteo.com/v1/archive",
+    "model_parameter": "era5_land",
+    "native_dataset_resolution": "0.1 degree",
+    "temperature_variable": "temperature_2m_mean",
+    "aggregation": "provider daily mean; documented as simple 24-hour aggregation of hourly values",
+    "timezone": "GMT",
+    "cell_selection": "nearest",
+    "elevation": "nan",
+    "downscaling": "disabled",
+    "api_key_required": false,
+    "role": "independent ERA5-Land replicate reconstruction; not claimed byte-identical to the original authors' archived CDS files"
+  },
+  "published_TGS_contract": {
+    "threshold_c": 5.0,
+    "window": "January 1 through July 31",
+    "published_code": "days <- days[month(days)<8]",
+    "daily_rule": "tgs_doy = day of minimum cumulative sum(daily_mean_temperature_c - 5)"
+  },
+  "spatial_temporal_matching": {
+    "query_coordinate": "original reconstructed staging-event latitude and longitude",
+    "query_year": "staging-event calendar year",
+    "interpolation": "none beyond provider nearest ERA5-Land cell selection",
+    "record_provider_grid_coordinate": true,
+    "event_identity": [
+      "individual_id",
+      "year",
+      "segment"
+    ]
+  },
+  "coverage_gate": {
+    "minimum_events_with_both_reconstructions": 200,
+    "minimum_fraction_of_frozen_256_events": 0.9,
+    "require_no_ERA5_TGS_at_or_after_doy_300": true,
+    "published_phase_validation": {
+      "reference_event_count": 208,
+      "reference_median_days": 22.5,
+      "reference_q1_days": 13.0,
+      "reference_q3_days": 35.3,
+      "minimum_events": 150,
+      "maximum_abs_median_difference_days": 12.0,
+      "require_IQR_overlap": true
+    }
+  },
+  "primary_disagreement_estimands": {
+    "event_phase_difference": "era5land_phase_days - power_phase_days",
+    "event_TGS_difference_equivalent": "power_TGS_doy - era5land_TGS_doy",
+    "summaries": [
+      "mean",
+      "median",
+      "sample_sd",
+      "q025",
+      "q25",
+      "q75",
+      "q975"
+    ],
+    "equal_independent_replicate_sensitivity_error_sd": "SD(event_phase_difference) / sqrt(2)",
+    "conservative_disagreement_scale": "SD(event_phase_difference)",
+    "warning": "Neither quantity is promoted as the true measurement-error SD without additional assumptions."
+  },
+  "consecutive_error_dependence": {
+    "proxy": "Pearson correlation of paired-reconstruction phase discrepancies at the origin and destination events of the frozen 224 staging transitions",
+    "role": "sensitivity proxy for consecutive phase-error correlation, not direct identification of the latent source-specific error correlation"
+  },
+  "lambda_reestimation": {
+    "power_model": "phase_change ~ origin_phase + z_progress + z_endpoint + z_progress:z_endpoint + C(year)",
+    "era5land_model": "same formula after replacing event TGS with ERA5-Land replicate TGS",
+    "cluster_unit": "individual_id",
+    "frozen_transitions": 224,
+    "frozen_individuals": 28,
+    "compare": [
+      "lambda_hat",
+      "cluster_se",
+      "naive_p_vs_lambda_one",
+      "stopover_slope",
+      "travel_speed_slope"
+    ]
+  },
+  "attenuation_signal_scale": {
+    "primary_predictor_variance": "sample variance of origin_phase after Frisch-Waugh-Lovell residualization against z_progress + z_endpoint + z_progress:z_endpoint + C(year)",
+    "reason": "The fitted lambda is a partial slope, so raw origin-phase variance is not the relevant attenuation signal variance.",
+    "report_raw_predictor_sd_also": true
+  },
+  "true_lambda_one_sensitivity": {
+    "scenarios": [
+      {
+        "name": "equal_independent_replicates_rho0",
+        "predictor_error_sd": "SD(event_phase_difference)/sqrt(2)",
+        "outcome_error_sd": "same",
+        "error_correlation": 0.0
+      },
+      {
+        "name": "equal_replicates_discrepancy_correlation_proxy",
+        "predictor_error_sd": "SD(event_phase_difference)/sqrt(2)",
+        "outcome_error_sd": "same",
+        "error_correlation": "observed origin-destination discrepancy correlation"
+      },
+      {
+        "name": "conservative_full_disagreement_rho0",
+        "predictor_error_sd": "SD(event_phase_difference)",
+        "outcome_error_sd": "same",
+        "error_correlation": 0.0
+      }
+    ],
+    "decision_rule": "No scenario changes the registered W1 result; each is a measurement-error sensitivity / claim audit.",
+    "no_tuning_after_result": true
+  },
+  "claim_boundary": {
+    "licensed_if_completed": [
+      "event-level disagreement between two independently reconstructed environmental phase surfaces",
+      "sensitivity of naive wigeon lambda to ERA5-Land versus POWER reconstruction",
+      "measurement-error null sensitivity under explicitly declared replicate-error assumptions"
+    ],
+    "not_licensed": [
+      "treating POWER-ERA5 disagreement as a gold-standard measurement error",
+      "claiming Open-Meteo output is byte-identical to the original authors' ERA5-Land files",
+      "estimating true latent lambda without additional assumptions",
+      "changing the registered Aikens lambda analysis or opening its outcome"
+    ]
+  }
+}
