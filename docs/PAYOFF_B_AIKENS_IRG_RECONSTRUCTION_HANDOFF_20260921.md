@@ -662,6 +662,31 @@ A live AppEEARS smoke test was executed in GitHub Actions:
 
 No network extraction was performed.
 
+An anonymous AWS Open Data fallback was also tested prospectively without
+opening environmental values or lambda outcomes:
+
+    workflow:
+        payoff-b MODIS anonymous S3 smoke
+
+    run:
+        35686454317
+
+Both frozen products returned:
+
+    AccessDenied:
+        Anonymous users cannot invoke requests against Requester Pays buckets.
+
+Products tested:
+
+    s3://lp-prod-protected/MOD09Q1.061/
+    s3://lp-prod-protected/MOD10A2.061/
+
+The result is frozen in:
+
+    data/payoff_b_modis_anonymous_s3_status_20260922.json
+
+Therefore anonymous S3 cannot replace authenticated AppEEARS/Earthdata access.
+
 The required credential is one of:
 
     APPEEARS_TOKEN
