@@ -1,6 +1,6 @@
 {
   "frozen_date": "2026-09-21",
-  "status": "exact_source_manifest_ready_authenticated_environmental_extraction_pending",
+  "status": "fixed_target_v2_ready_authenticated_environmental_extraction_blocked_by_missing_credentials",
   "study": {
     "citation": "Aikens et al. 2022 Nature Ecology & Evolution 6:1733-1741",
     "doi": "10.1038/s41559-022-01887-9",
@@ -57,7 +57,7 @@
     "sensitivity_label": "v061_sensitivity_only",
     "silent_substitution_forbidden": true
   },
-  "current_blocker": "authenticated AppEEARS V061 sensitivity extraction from the exact 64,539-point / 24-task canonical manifest; downstream IRG, fixed-24h pairing, clustered lambda fitting, and preregistered contrast evaluation remain implemented and the lambda outcome remains unopened",
+  "current_blocker": "GitHub Actions has no configured AppEEARS/Earthdata credential. Live smoke workflow run 35612310294 completed safely as SKIPPED_NO_APPEEARS_CREDENTIALS. The exact 64,539-point manifest, V061 primary-successor product amendment, fixed-target execution v2, IRG reconstruction, adjacent-pair construction, clustered lambda fit, registered gate evaluation, manuscript rendering and outcome audit are implemented.",
   "lambda_outcome_opened": false,
   "pipeline_validation": {
     "workflow": "payoff-b IRG reconstruction",
@@ -184,5 +184,49 @@
     "manifest_sha256": "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463",
     "cells_sha256": "3570bc04dfef9da677954246b636a99fa069c4b2e5b0020dd9ac1c4ee9dc8d02",
     "links_sha256": "ef7445152bf2217a81088e1765cd215dfafb87036366c8f789e6ebe3747cbff1"
+  },
+  "environment_product_policy": {
+    "original_study_product": "MOD09Q1.006",
+    "original_distribution_status": "decommissioned_2023_07_31",
+    "frozen_primary_successor": "MOD09Q1.061",
+    "frozen_primary_lane": "v061_primary_successor_after_v006_decommission",
+    "snow_product": "MOD10A2.061",
+    "byte_faithful_v006_replication_claimed": false
+  },
+  "execution_contract_v2": {
+    "document": "docs/PAYOFF_B_AIKENS_FIXED_TARGET_EXECUTION_AMENDMENT_V2_20260922.md",
+    "machine": "data/aikens2022_phase_reconstruction_execution_contract_v2_20260922.json",
+    "status": "FROZEN_PRE_OUTCOME",
+    "ordering": [
+      "raw GPS observations",
+      "frozen MODIS cell identity",
+      "environment-independent 24h target selection",
+      "target identity frozen",
+      "attach environmental phase",
+      "invalid environmental target remains missing",
+      "adjacent valid targets form phase pairs",
+      "support gate",
+      "registered lambda contrast"
+    ],
+    "environment_can_reselect_gps": false
+  },
+  "live_smoke": {
+    "workflow": "payoff-b Aikens AppEEARS live smoke",
+    "run_id": 35612310294,
+    "status": "SKIPPED_NO_APPEEARS_CREDENTIALS",
+    "network_submission_performed": false,
+    "implication": "credential configuration is the only external execution blocker for the frozen V061 lane"
+  },
+  "latest_pipeline_validation": {
+    "workflow": "payoff-b IRG reconstruction",
+    "run_id": 35686060101,
+    "head_sha": "d038c0a39fc6b34b664538ed56c04aa4e7f267e1",
+    "conclusion": "SUCCESS",
+    "validated": [
+      "V061 primary-successor lane CLI",
+      "auditable unfit pixel-year coverage loss",
+      "IRG reconstruction pipeline",
+      "frozen fixed-target components via unit tests"
+    ]
   }
 }
