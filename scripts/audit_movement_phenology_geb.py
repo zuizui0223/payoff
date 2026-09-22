@@ -82,6 +82,11 @@ def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--manuscript", default=str(DEFAULT))
     p.add_argument("--output", default=str(OUT / "geb_submission_audit.json"))
+    p.add_argument(
+        "--allow-science-hold",
+        action="store_true",
+        help="emit a blocked receipt instead of failing when readiness is on SCIENCE HOLD",
+    )
     args = p.parse_args()
 
     path = Path(args.manuscript)
@@ -179,6 +184,24 @@ def main() -> None:
     }
     result["hard_gates"] = hard
     result["all_hard_gates_pass"] = all(hard.values())
+    readiness_path = Path("docs/MOVEMENT_PHENOLOGY_GEB_READINESS.md")
+    readiness_text = (
+        readiness_path.read_text(encoding="utf-8")
+        if readiness_path.exists()
+        else ""
+    )
+    science_hold = "SCIENCE HOLD" in readiness_text
+    result["science_hold"] = science_hold
+    result["submission_ready"] = (
+        result["all_hard_gates_pass"] and not science_hold
+    )
+    result["status"] = (
+        "READY"
+        if result["submission_ready"]
+        else "BLOCKED_SCIENCE_HOLD"
+        if science_hold
+        else "HARD_GATE_FAIL"
+    )
     result["soft_checks"] = {
         "main_text_near_5000_words": 3000 <= result["main_text_words"] <= 6000,
         "reference_core_at_least_12": result["reference_count"] >= 12,
@@ -194,7 +217,12 @@ def main() -> None:
 
     print(json.dumps(result, indent=2))
     if not result["all_hard_gates_pass"]:
-        raise SystemExit("GEB manuscript hard gate failed")
+        if args.allow_science_hold and science_hold:
+            print("GEB submission remains blocked by SCIENCE HOLD")
+        else:
+            raise SystemExit("GEB manuscript hard gate failed")
+    elif science_hold and not args.allow_science_hold:
+        raise SystemExit("GEB submission blocked by SCIENCE HOLD")
 
 
 if __name__ == "__main__":
