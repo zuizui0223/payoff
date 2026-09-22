@@ -60,6 +60,9 @@ def main() -> None:
         load_json(args.primary_phase_json),
         load_json(args.strong_phase_json),
         load_json(args.stopover_actuator_json),
+        stopover_source_interpretation=diagnostics.get(
+            "W2_stopover_source_interpretation"
+        ),
         travel_speed_diagnostic=diagnostics.get(
             "W3_travel_speed_diagnostic"
         ),
@@ -83,9 +86,11 @@ def main() -> None:
         "bundle": asdict(bundle),
         "no_omnibus_score": True,
         "claim_boundary": (
-            "W2 stopover is the formal prospective actuator gate. "
-            "W3 travel speed and W4 distance moderation remain secondary "
-            "diagnostics and are not promoted to equivalent formal gates."
+            "W2 preregisters a directional stopover prediction and secondary "
+            "gain band but no fixed p-value threshold. The literal direction "
+            "gate and frozen source-level support interpretation are therefore "
+            "reported separately. W3 travel speed and W4 distance moderation "
+            "remain secondary diagnostics."
         ),
     }
 
@@ -101,7 +106,8 @@ def main() -> None:
         f"lambda={bundle.lambda_retention:.12g} "
         f"primary_pass={int(bundle.primary_lambda_passed)} "
         f"strong_pass={int(bundle.strong_contraction_passed)} "
-        f"stopover_pass={int(bundle.stopover_actuator_passed)} "
+        f"stopover_direction_pass={int(bundle.stopover_direction_passed)} "
+        f"stopover_source_supported={int(bundle.stopover_source_supported)} "
         f"class={bundle.two_gate_class}"
     )
 
