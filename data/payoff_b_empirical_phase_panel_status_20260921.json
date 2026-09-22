@@ -23,18 +23,23 @@
     {
       "taxon": "Mareca penelope",
       "common_name": "Eurasian wigeon",
-      "lambda": 0.85994,
-      "se": 0.04509,
-      "p_vs_lambda_1": 0.0019,
+      "lambda": 0.7497680211367301,
+      "se": 0.04990566712278233,
+      "p_vs_lambda_1": 5.328241982727779e-7,
       "transitions": 224,
       "individuals": 28,
-      "evidence_role": "prospective_third_taxon",
+      "evidence_role": "prospective_third_taxon_source_faithful",
       "primary_prediction": "lambda < 1",
       "primary_outcome": "PASS",
       "stronger_prediction": "abs(lambda) < 0.75",
-      "stronger_outcome": "FAIL",
-      "stopover_actuator": "NOT_SUPPORTED",
-      "travel_speed_actuator": "NOT_SUPPORTED"
+      "stronger_outcome": "PASS_NARROW_POINT_ESTIMATE_GATE",
+      "stopover_actuator": "DIRECTIONAL_GATE_PASS_SOURCE_SUPPORTED",
+      "travel_speed_actuator": "NOT_SUPPORTED",
+      "stopover_conventional_cluster_p": 0.031661798202295054,
+      "stopover_fixed_p_threshold_preregistered": false,
+      "stopover_secondary_gain_band": "FAIL",
+      "distance_moderation": "NOT_SUPPORTED",
+      "source_faithful_revalidation": "data/wigeon_source_faithful_revalidation_result_20260922.json"
     }
   ],
   "broad_bird_falsification": {
@@ -42,7 +47,7 @@
     "species": 55,
     "universal_speed_ratio_supported": false
   },
-  "current_cross_system_claim": "phase retention is a portable response coordinate; correction strength and actuator architecture are not universal constants",
+  "current_cross_system_claim": "phase retention is a portable estimator-scale response coordinate; stopover/waiting direction recurs across the three direct taxa, while full actuator architecture and latent lambda magnitude are not universal constants",
   "fourth_taxon": {
     "status": "HOLD",
     "raw_data_availability_sufficient": false,
@@ -89,7 +94,16 @@
     "actuator_perturbation_already_supported": true,
     "exact_movement_source_ready": true,
     "exact_appeears_manifest_ready": true,
-    "current_blocker": "authenticated environmental extraction",
+    "current_blocker": "authenticated Aikens environmental extraction; wigeon measurement-error calibration is a parallel claim-audit lane",
     "lambda_outcome_opened": false
+  },
+  "revalidated_date": "2026-09-22",
+  "measurement_error_status": {
+    "latent_lambda_comparison_ready": false,
+    "reason": "source-backed phase-error calibration remains incomplete; naive lambda_hat values are estimator-scale quantities",
+    "wigeon_observed_origin_phase_sd_days": 15.881166579869618,
+    "wigeon_true_lambda_one_equal_independent_stress_error_sd_days": 7.944266530669527,
+    "stress_value_role": "threshold only, not an empirical error estimate",
+    "calibration_registration": "data/wigeon_phase_error_era5land_replication_registration_20260922.json"
   }
 }
