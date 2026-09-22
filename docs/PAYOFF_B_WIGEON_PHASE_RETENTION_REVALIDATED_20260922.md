@@ -100,11 +100,18 @@ constant.
 
 ## 5. Corrected W2 stopover actuator result
 
-The preregistered W2 prediction was:
+The preregistered **primary** W2 prediction was directional:
 
 ```text
 stopover_duration decreases with later phase
-and p <= 0.05
+S'(E) < 0
+```
+
+No fixed p-value threshold was preregistered for W2. A secondary magnitude
+forecast was frozen separately:
+
+```text
+0.3 < g_S < 0.8
 ```
 
 Corrected source-faithful result:
@@ -115,20 +122,30 @@ cluster SE = 0.027739
 p = 0.03166
 ```
 
-Therefore:
+Therefore the frozen **directional** W2 gate passes. The conventional
+individual-clustered p-value (0.03166) also supports a nonzero negative slope,
+but it is reported as supporting evidence rather than as a preregistered
+threshold.
+
+The observed stopover gain is
 
 ```text
-W2 STOPOVER ACTUATOR:
-    PASS
+g_S = 0.062863
 ```
 
-The previous near-zero estimate and p=0.972 are superseded.
+so the secondary preregistered `0.3 < g_S < 0.8` band **fails**.
 
-This means the corrected wigeon case is no longer
-`LAMBDA_PASS_ACTUATOR_FAIL`. Under the frozen formal gates it is:
+The previous near-zero estimate and p=0.972 are superseded. For the two-gate
+summary, the corrected source interpretation is:
 
 ```text
-LAMBDA_PASS_ACTUATOR_PASS
+primary lambda gate:            PASS
+W2 directional actuator gate:   PASS
+W2 source support:              SUPPORTED
+W2 secondary gain band:         FAIL
+
+two-gate class:
+    LAMBDA_PASS_ACTUATOR_SUPPORTED
 ```
 
 ## 6. Secondary actuator diagnostics
@@ -206,7 +223,7 @@ Therefore PAYOFF-B currently licenses:
 
 - the corrected estimator-scale lambda;
 - the registered primary W1 PASS;
-- the registered W2 stopover PASS;
+- the registered W2 **directional** stopover PASS;
 - the corrected source-faithful environmental reconstruction.
 
 It does not yet license:
