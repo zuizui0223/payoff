@@ -540,3 +540,57 @@ def recovery_design_from_observed_predictor_sd(
         process_noise_sd=process_noise_sd,
         n_pairs=n_pairs,
     )
+
+
+def required_equal_error_sd_over_observed_predictor_sd(
+    *,
+    observed_naive_lambda: float,
+    true_lambda: float = 1.0,
+    error_correlation: float = 0.0,
+) -> float | None:
+    """Error SD divided by observed predictor SD needed to mimic a slope.
+
+    Under the same equal-error additive model used by
+    :func:`required_equal_error_sd_ratio`,
+
+        beta_naive
+        = true_lambda * (1-q^2) + rho * q^2,
+
+    where
+
+        q = error_sd / observed_predictor_sd.
+
+    This observed-scale ratio is often easier to apply to an empirical phase
+    series because its observed SD is directly available. The return value is a
+    stress threshold, not an empirical error estimate.
+    """
+
+    observed = _finite(
+        "observed_naive_lambda",
+        observed_naive_lambda,
+    )
+    latent = _finite(
+        "true_lambda",
+        true_lambda,
+    )
+    rho = _finite(
+        "error_correlation",
+        error_correlation,
+    )
+    if not -1.0 <= rho <= 1.0:
+        raise ValueError(
+            "error_correlation must lie in [-1,1]"
+        )
+
+    denominator = latent - rho
+    numerator = latent - observed
+
+    if abs(numerator) <= 1e-15:
+        return 0.0
+    if numerator < 0.0 or denominator <= 0.0:
+        return None
+
+    q_squared = numerator / denominator
+    if not 0.0 <= q_squared < 1.0:
+        return None
+    return sqrt(q_squared)
