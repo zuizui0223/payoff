@@ -712,8 +712,38 @@ Once credentials are configured, the frozen operational sequence is:
     -> preregistered outcome class
     -> outcome-specific manuscript rendering and submission audit.
 
-Thus the current blocker is operational credential configuration, not an
-unresolved analysis choice.
+The pre-environment support ceiling has also been evaluated from the frozen
+targets without using MODIS environmental values:
+
+    large-development:
+        48 animals with possible adjacent pairs
+        1,022 maximum possible adjacent pairs
+
+    small-development:
+        89 animals with possible adjacent pairs
+        4,434 maximum possible adjacent pairs.
+
+Both exceed the registered final support thresholds of
+
+    >=10 animals
+    >=100 adjacent valid phase pairs
+
+per group.
+
+Receipt:
+
+    docs/PAYOFF_B_AIKENS_PRE_ENV_SUPPORT_CEILING_20260922.md
+
+Machine receipt:
+
+    data/aikens2022_pre_environment_support_ceiling_20260922.json
+
+This is an upper-bound feasibility result, not final estimability. Environmental
+filtering can still remove frozen targets and adjacent pairs.
+
+Thus the current blocker is operational credential configuration plus the
+subsequent empirical environmental-coverage realization, not an unresolved
+analysis choice or an already-known sample-support impossibility.
 
 The lambda outcome remains unopened.
 
