@@ -16,6 +16,10 @@ RESULTS_START = "<!-- AIKENS_LAMBDA_RESULTS_START -->"
 RESULTS_END = "<!-- AIKENS_LAMBDA_RESULTS_END -->"
 DISCUSSION_START = "<!-- AIKENS_LAMBDA_DISCUSSION_START -->"
 DISCUSSION_END = "<!-- AIKENS_LAMBDA_DISCUSSION_END -->"
+ABSTRACT_START = "<!-- AIKENS_LAMBDA_ABSTRACT_START -->"
+ABSTRACT_END = "<!-- AIKENS_LAMBDA_ABSTRACT_END -->"
+CONCLUSION_START = "<!-- AIKENS_LAMBDA_CONCLUSION_START -->"
+CONCLUSION_END = "<!-- AIKENS_LAMBDA_CONCLUSION_END -->"
 
 
 def _fmt(value: float | None) -> str:
@@ -49,7 +53,7 @@ def classify_result(payload: dict) -> str:
     return "FAIL_INSUFFICIENT_SUPPORT"
 
 
-def render_blocks(payload: dict) -> tuple[str, str, dict]:
+def render_blocks(payload: dict) -> tuple[str, str, str, str, dict]:
     result_class = classify_result(payload)
 
     if result_class == "NOT_ESTIMABLE":
@@ -69,6 +73,15 @@ def render_blocks(payload: dict) -> tuple[str, str, dict]:
             "contrast remains valid, while the forcing-to-retention link remains "
             "open rather than being rescued by retuning the analysis."
         )
+        abstract = (
+            "The preregistered within-taxon lambda perturbation was not "
+            "estimable under the frozen reconstruction and support criteria."
+        )
+        conclusion = (
+            "The within-taxon forcing-to-lambda test remained unresolved under "
+            "its frozen criteria, so no phase-retention response to development "
+            "is inferred."
+        )
         claim_state = {
             "scientific_result": result_class,
             "lambda_shift_supported": False,
@@ -77,7 +90,7 @@ def render_blocks(payload: dict) -> tuple[str, str, dict]:
             "cross_taxon_lambda_synthesis_changed": False,
             "actuator_result_changed": False,
         }
-        return results, discussion, claim_state
+        return results, discussion, abstract, conclusion, claim_state
 
     gate = payload["gate"]
     obs = gate["observation"]
@@ -111,6 +124,16 @@ def render_blocks(payload: dict) -> tuple[str, str, dict]:
             "the permeability proxy G and lambda, nor does it imply a universal "
             "forcing response across taxa."
         )
+        abstract = (
+            f"The preregistered within-taxon forcing test also supported greater "
+            f"phase retention under large development "
+            f"(Delta lambda={_fmt(delta)}, p={_fmt(p)})."
+        )
+        conclusion = (
+            "Within mule deer, the preregistered forcing perturbation linked "
+            "independently observed actuation attenuation with greater retained "
+            "phase error, while remaining separate from the cross-taxon synthesis."
+        )
         claim_state = {
             "scientific_result": result_class,
             "lambda_shift_supported": True,
@@ -137,6 +160,15 @@ def render_blocks(payload: dict) -> tuple[str, str, dict]:
             "invalidate the common phase-retention coordinate observed across the "
             "three direct taxa."
         )
+        abstract = (
+            "The preregistered within-taxon forcing-to-lambda prediction failed "
+            "in direction despite independently supported actuator attenuation."
+        )
+        conclusion = (
+            "Within mule deer, actuator attenuation did not propagate into the "
+            "preregistered increase in phase retention, reinforcing that actuator "
+            "and lambda are distinct empirical levels."
+        )
         claim_state = {
             "scientific_result": result_class,
             "lambda_shift_supported": False,
@@ -161,6 +193,15 @@ def render_blocks(payload: dict) -> tuple[str, str, dict]:
             "as a change in phase retention at the frozen 24 h scale. Actuator "
             "architecture and phase retention remain separate levels of inference."
         )
+        abstract = (
+            "The preregistered within-taxon forcing-to-lambda contrast pointed "
+            "in the predicted direction but did not pass the inferential support gate."
+        )
+        conclusion = (
+            "Within mule deer, the independently supported actuator attenuation "
+            "was not accompanied by a supported shift in phase retention at the "
+            "frozen 24 h scale."
+        )
         claim_state = {
             "scientific_result": result_class,
             "lambda_shift_supported": False,
@@ -178,7 +219,7 @@ def render_blocks(payload: dict) -> tuple[str, str, dict]:
             "p_difference": p,
         }
     )
-    return results, discussion, claim_state
+    return results, discussion, abstract, conclusion, claim_state
 
 
 def replace_between(text: str, start: str, end: str, body: str) -> str:
@@ -199,7 +240,7 @@ def main() -> None:
 
     baseline = args.baseline.read_text(encoding="utf-8")
     payload = json.loads(args.result_json.read_text(encoding="utf-8"))
-    results, discussion, claim_state = render_blocks(payload)
+    results, discussion, abstract, conclusion, claim_state = render_blocks(payload)
 
     rendered = replace_between(
         baseline, RESULTS_START, RESULTS_END, results
@@ -207,11 +248,21 @@ def main() -> None:
     rendered = replace_between(
         rendered, DISCUSSION_START, DISCUSSION_END, discussion
     )
+    rendered = replace_between(
+        rendered, ABSTRACT_START, ABSTRACT_END, abstract
+    )
+    rendered = replace_between(
+        rendered, CONCLUSION_START, CONCLUSION_END, conclusion
+    )
 
     if "AIKENS LAMBDA RESULT PENDING" in rendered:
         raise SystemExit("unresolved Aikens result placeholder remains")
     if "AIKENS LAMBDA DISCUSSION PENDING" in rendered:
         raise SystemExit("unresolved Aikens discussion placeholder remains")
+    if "AIKENS LAMBDA ABSTRACT PENDING" in rendered:
+        raise SystemExit("unresolved Aikens abstract placeholder remains")
+    if "AIKENS LAMBDA CONCLUSION PENDING" in rendered:
+        raise SystemExit("unresolved Aikens conclusion placeholder remains")
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(rendered, encoding="utf-8")
