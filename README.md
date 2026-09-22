@@ -769,6 +769,14 @@ effectively certain to pass at that threshold. This is an IID support envelope,
 not a model of real pixel-year-correlated MODIS/IRG missingness. Receipt:
 [docs/PAYOFF_B_AIKENS_IID_TARGET_COVERAGE_SUPPORT_20260922.md](docs/PAYOFF_B_AIKENS_IID_TARGET_COVERAGE_SUPPORT_20260922.md).
 
+A pixel-year-correlated sensitivity gives nearly the same support boundary:
+joint support is 0.9348 at p=0.335 and 0.9619 at p=0.340, with the
+large-development group again limiting. Thus the support transition remains
+near one-third environmental validity under both declared missingness models.
+This is sensitivity evidence only, not a guarantee about realized AppEEARS/IRG
+coverage. Receipt:
+[docs/PAYOFF_B_AIKENS_PIXEL_YEAR_CLUSTERED_SUPPORT_20260922.md](docs/PAYOFF_B_AIKENS_PIXEL_YEAR_CLUSTERED_SUPPORT_20260922.md).
+
 Confirmatory evidence is now stricter than that verbal separation. Prediction
 registration and observation files are separate. A prospective lambda receipt
 must match its frozen system ID, independent-test ID, phase-coordinate ID and
