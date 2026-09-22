@@ -20,6 +20,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "outputs/movement_phenology/reviewer_snapshot"
 ARCHIVE = ROOT / "outputs/movement_phenology/GEB_REVIEWER_SNAPSHOT.zip"
+READINESS = ROOT / "docs/MOVEMENT_PHENOLOGY_GEB_READINESS.md"
 
 FILES = [
     "manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V2.md",
@@ -172,6 +173,35 @@ def refresh_manifest() -> None:
 
 
 def main() -> None:
+    readiness = READINESS.read_text(encoding="utf-8")
+    science_hold = (
+        "SCIENCE HOLD" in readiness
+        or "SCIENCE / CLAIM CEILING:\n  HOLD" in readiness
+    )
+    if science_hold:
+        ARCHIVE.parent.mkdir(parents=True, exist_ok=True)
+        if ARCHIVE.exists():
+            ARCHIVE.unlink()
+        receipt = {
+            "status": "BLOCKED_SCIENCE_HOLD",
+            "archive_created": False,
+            "readiness_source": str(READINESS.relative_to(ROOT)),
+            "reason": (
+                "GEB science gate is on hold pending source-backed lambda "
+                "measurement-error calibration"
+            ),
+        }
+        receipt_path = (
+            ROOT
+            / "outputs/movement_phenology/reviewer_snapshot_receipt.json"
+        )
+        receipt_path.write_text(
+            json.dumps(receipt, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        print(json.dumps(receipt, indent=2))
+        return
+
     if BUILD.exists():
         shutil.rmtree(BUILD)
     BUILD.mkdir(parents=True)
