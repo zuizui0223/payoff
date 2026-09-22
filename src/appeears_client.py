@@ -88,8 +88,10 @@ class AppEEARSClient:
             raise ValueError("username must be non-empty")
         if not password:
             raise ValueError("password must be non-empty")
-        requests = _requests_module()
-        active_session = session or requests.Session()
+        if session is None:
+            active_session = _requests_module().Session()
+        else:
+            active_session = session
         url = api_base.rstrip("/") + "/login"
         response = active_session.post(
             url,
