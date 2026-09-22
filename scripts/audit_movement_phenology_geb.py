@@ -177,6 +177,8 @@ def main() -> None:
     hard["aikens_lambda_result_resolved"] = (
         "AIKENS LAMBDA RESULT PENDING" not in text
         and "AIKENS LAMBDA DISCUSSION PENDING" not in text
+        and "AIKENS LAMBDA ABSTRACT PENDING" not in text
+        and "AIKENS LAMBDA CONCLUSION PENDING" not in text
     )
     result["hard_gates"] = hard
     result["all_hard_gates_pass"] = all(hard.values())
