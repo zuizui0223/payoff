@@ -66,18 +66,33 @@
     {
       "system_id": "eurasian_wigeon_staging_transition",
       "taxon": "Mareca penelope",
-      "observed_lambda": 0.85994,
-      "observed_lambda_se": 0.04509,
+      "observed_lambda": 0.7497680211367301,
+      "observed_lambda_se": 0.04990566712278233,
       "n_pairs": 224,
       "n_individuals": 28,
       "interval_id": "consecutive_reconstructed_staging_transition",
       "source_receipt": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
-      "predictor_phase_sd_days": null,
+      "predictor_phase_sd_days": 15.881166579869618,
       "predictor_error_sd_days": null,
       "outcome_error_sd_days": null,
       "error_correlation": null,
       "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
-      "confirmatory_recovery_ready": false
+      "confirmatory_recovery_ready": false,
+      "predictor_phase_sd_role": "observed_source_faithful_predictor_sd",
+      "predictor_phase_sd_provenance": {
+        "source_branch": "empirical/movement-phenology-macro-20260918",
+        "source_head": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+        "workflow_run": 35689856130,
+        "artifact_id": 10678143392,
+        "transitions_sha256": "095b8b63a1a6ee284941be914fef226e360c222cea27ea24ed50c57791db5d48",
+        "tgs_window": "January through July"
+      },
+      "independent_equal_error_true_lambda_one_stress": {
+        "required_error_sd_over_latent_phase_sd": 0.5777074240481979,
+        "required_error_sd_over_observed_predictor_sd": 0.5002319250740299,
+        "required_error_sd_days_given_observed_predictor_sd": 7.944266530669527,
+        "role": "stress threshold only, not empirical error estimate"
+      }
     }
   ],
   "rules": {
