@@ -6,8 +6,7 @@
     {
       "name": "stopover_duration",
       "expected_direction": "decrease",
-      "zero_tolerance": 0,
-      "max_p_value": 0.05
+      "zero_tolerance": 0
     }
   ],
   "provenance": {
@@ -17,5 +16,10 @@
     "preregistration_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_CONTROLLER_PREREGISTRATION.md",
     "preregistration_blob_sha": "e3b6b5d223a5707667883991f88197448729111c",
     "hypothesis": "W2 stopover compensation"
+  },
+  "preregistration_boundary": {
+    "primary_prediction": "S'(E) < 0",
+    "secondary_gain_band": "0.3 < g_S < 0.8",
+    "fixed_p_value_threshold_preregistered": false
   }
 }
