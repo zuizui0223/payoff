@@ -25,5 +25,18 @@
     "p_value": 0.08230417519325887,
     "route_progress_endpoint_distance_p": 0.2523827833446669,
     "interpretation": "distance moderation remains unsupported at p<=0.05 after the source-faithful Jan-Jul TGS reconstruction"
+  },
+  "W2_stopover_source_interpretation": {
+    "source_status": "SUPPORTED",
+    "role": "source-level interpretation kept separate from the literal prospective sign gate because W2 preregistered no fixed p-value threshold",
+    "directional_sign_observed": true,
+    "observed_effect": -0.06286262115570287,
+    "cluster_se": 0.027738561977373986,
+    "p_value": 0.031661798202295054,
+    "fixed_p_value_threshold_preregistered": false,
+    "secondary_gain_band": "0.3 < g_S < 0.8",
+    "observed_gain": 0.06286262115570287,
+    "secondary_gain_band_passed": false,
+    "interpretation": "source-faithful Jan-Jul reconstruction supports a negative stopover response; the preregistered secondary magnitude band fails"
   }
 }
