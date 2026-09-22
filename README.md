@@ -757,6 +757,18 @@ phase-pair pipeline are implemented in
 The lambda outcome remains unopened until the MODIS NDVI plus snow/quality
 source layer is materialized.
 
+The frozen fixed-target geometry is already support-robust under a simple
+outcome-blind missingness envelope. If each preselected target independently has
+valid environmental phase with probability p, exact dynamic programming gives
+
+    p ~= 0.34198
+
+for a 95% probability that both registered final support gates pass. The
+large-development group is limiting; the small-development group is already
+effectively certain to pass at that threshold. This is an IID support envelope,
+not a model of real pixel-year-correlated MODIS/IRG missingness. Receipt:
+[docs/PAYOFF_B_AIKENS_IID_TARGET_COVERAGE_SUPPORT_20260922.md](docs/PAYOFF_B_AIKENS_IID_TARGET_COVERAGE_SUPPORT_20260922.md).
+
 Confirmatory evidence is now stricter than that verbal separation. Prediction
 registration and observation files are separate. A prospective lambda receipt
 must match its frozen system ID, independent-test ID, phase-coordinate ID and
