@@ -774,6 +774,23 @@ This does not model real pixel-year clustering and does not alter the registered
 support threshold. It only shows that near-complete environmental coverage is
 not required under the declared independence envelope.
 
+A separate pixel-year-clustered sensitivity is now frozen in
+
+    docs/PAYOFF_B_AIKENS_PIXEL_YEAR_CLUSTERED_SUPPORT_20260922.md.
+
+Using one shared validity state for all targets within each pixel-year and
+10,000 fixed-seed replicates per probability, the joint support probability is
+
+    0.9348 at p=0.335
+    0.9619 at p=0.340.
+
+Therefore the 95% support transition remains near one-third environmental
+validity even after introducing the observed pixel-year sharing structure.
+
+This is still a sensitivity analysis. Real environmental failures can have
+dependence beyond pixel-year, so final estimability remains governed by the
+observed fixed-target phase table after AppEEARS / IRG reconstruction.
+
 Thus the current blocker is operational credential configuration plus the
 subsequent empirical environmental-coverage realization, not an unresolved
 analysis choice or an already-known sample-support impossibility.
