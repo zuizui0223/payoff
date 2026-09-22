@@ -94,12 +94,13 @@ def test_controller_helper_matches_frozen_formula_on_synthetic_fixture():
         year = 2018 + group % 3
         endpoint = 1000.0 + 20.0 * group
         for index in range(20):
-            origin_phase = float(index - 10) + group * 0.1
+            phase_index = (index * 7 + group * 3) % 20
+            origin_phase = float(phase_index - 10) + group * 0.1
             progress = 50.0 * index + group
             destination_phase = (
                 2.0
                 + 0.6 * origin_phase
-                + 0.01 * (index % 3 - 1)
+                + 0.01 * ((index + group) % 3 - 1)
             )
             rows.append(
                 {
@@ -124,5 +125,5 @@ def test_controller_helper_matches_frozen_formula_on_synthetic_fixture():
     )
     assert result.n_pairs == 240
     assert result.n_individuals == 12
-    assert result.lambda_hat == pytest.approx(0.6, abs=0.01)
+    assert result.lambda_hat == pytest.approx(0.6, abs=0.005)
     assert result.stopover_slope == pytest.approx(-0.2, abs=0.01)
