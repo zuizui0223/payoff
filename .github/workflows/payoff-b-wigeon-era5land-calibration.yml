@@ -13,6 +13,8 @@ on:
       - 'src/phase_retention_recovery.py'
       - 'scripts/calibrate_wigeon_phase_error_era5land.py'
       - 'tests/test_wigeon_phase_error_calibration.py'
+      - 'tests/test_wigeon_era5land_calibration_script.py'
+      - 'data/wigeon_era5land_calibration_implementation_amendment_20260923.json'
       - '.github/workflows/payoff-b-wigeon-era5land-calibration.yml'
 
 permissions:
@@ -39,6 +41,7 @@ jobs:
         run: >
           pytest -q
           tests/test_wigeon_phase_error_calibration.py
+          tests/test_wigeon_era5land_calibration_script.py
           tests/test_phase_retention_recovery.py
 
       - name: Download frozen source-faithful wigeon artifact
@@ -81,3 +84,4 @@ jobs:
             outputs/wigeon_era5land_request_receipt.json
             outputs/wigeon_phase_error_era5land_calibration_receipt.json
             data/wigeon_phase_error_era5land_replication_registration_20260922.json
+            data/wigeon_era5land_calibration_implementation_amendment_20260923.json
