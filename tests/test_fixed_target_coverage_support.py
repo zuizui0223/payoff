@@ -5,6 +5,7 @@ import pytest
 from src.fixed_interval_gps_targets import FixedIntervalGPSTarget
 from src.fixed_target_coverage_support import (
     exact_iid_target_coverage_support,
+    find_minimum_iid_target_validity,
 )
 
 
@@ -158,3 +159,39 @@ def test_invalid_probability_rejected():
             min_animals_per_group=1,
             min_pairs_per_group=1,
         )
+
+
+def test_minimum_validity_recovers_square_root_for_single_edge():
+    rows = [
+        target(index=0),
+        target(index=1),
+    ]
+    result = find_minimum_iid_target_validity(
+        rows,
+        target_joint_support_probability=0.95,
+        min_animals_per_group=1,
+        min_pairs_per_group=1,
+        tolerance=1e-6,
+    )
+
+    assert result.minimum_target_validity_probability is not None
+    assert result.minimum_target_validity_probability == pytest.approx(
+        0.95 ** 0.5,
+        abs=2e-6,
+    )
+    assert result.achieved_joint_support_probability >= 0.95
+
+
+def test_minimum_validity_returns_none_if_support_impossible_even_at_p_one():
+    result = find_minimum_iid_target_validity(
+        [
+            target(index=0),
+            target(index=2),
+        ],
+        target_joint_support_probability=0.95,
+        min_animals_per_group=1,
+        min_pairs_per_group=1,
+    )
+
+    assert result.minimum_target_validity_probability is None
+    assert result.achieved_joint_support_probability == 0.0
