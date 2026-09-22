@@ -14,6 +14,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.phase_retention_recovery import (
+    required_equal_error_sd_over_observed_predictor_sd,
     required_equal_error_sd_ratio,
 )
 
@@ -82,6 +83,22 @@ def main() -> None:
                 true_lambda=args.true_lambda,
                 error_correlation=rho,
             )
+            observed_ratio = (
+                required_equal_error_sd_over_observed_predictor_sd(
+                    observed_naive_lambda=observed,
+                    true_lambda=args.true_lambda,
+                    error_correlation=rho,
+                )
+            )
+            predictor_sd = system.get(
+                "predictor_phase_sd_days"
+            )
+            required_error_sd_days = (
+                None
+                if observed_ratio is None
+                or predictor_sd is None
+                else observed_ratio * float(predictor_sd)
+            )
             rows.append(
                 {
                     "system_id": system["system_id"],
@@ -92,7 +109,17 @@ def main() -> None:
                     "true_lambda_null": args.true_lambda,
                     "error_correlation": rho,
                     "required_equal_error_sd_over_latent_phase_sd": ratio,
-                    "finite_equal_error_solution": ratio is not None,
+                    "required_equal_error_sd_over_observed_predictor_sd": (
+                        observed_ratio
+                    ),
+                    "observed_predictor_phase_sd_days": predictor_sd,
+                    "required_equal_error_sd_days": (
+                        required_error_sd_days
+                    ),
+                    "finite_equal_error_solution": (
+                        ratio is not None
+                        and observed_ratio is not None
+                    ),
                 }
             )
 
