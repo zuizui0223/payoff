@@ -49,17 +49,17 @@ def stopover_receipt(*, passed=False):
                     "expected_direction": "decrease",
                     "observed_effect": -0.00014,
                     "observed_p_value": 0.972,
-                    "max_p_value": 0.05,
+                    "max_p_value": None,
                     "direction_passed": True,
-                    "support_passed": False,
-                    "passed": passed,
+                    "support_passed": True,
+                    "passed": True,
                     "prospective": True,
                 }
             ],
             "prospective_predictions": 1,
-            "passed_predictions": int(passed),
-            "failed_predictions": int(not passed),
-            "all_prospective_passed": passed,
+            "passed_predictions": 1,
+            "failed_predictions": 0,
+            "all_prospective_passed": True,
         },
     }
 
@@ -69,6 +69,9 @@ def test_wigeon_bundle_recovers_lambda_pass_actuator_fail():
         phase_receipt(passed=True, high=1.0),
         phase_receipt(passed=False, high=0.75),
         stopover_receipt(passed=False),
+        stopover_source_interpretation={
+            "source_status": "NOT_SUPPORTED",
+        },
         travel_speed_diagnostic={
             "status": "NOT_SUPPORTED",
             "p_value": 0.197,
@@ -81,11 +84,13 @@ def test_wigeon_bundle_recovers_lambda_pass_actuator_fail():
 
     assert bundle.primary_lambda_passed
     assert not bundle.strong_contraction_passed
+    assert bundle.stopover_direction_passed
+    assert not bundle.stopover_source_supported
     assert not bundle.stopover_actuator_passed
     assert bundle.lambda_retention == pytest.approx(0.85994)
     assert bundle.lambda_se == pytest.approx(0.04509)
     assert bundle.p_vs_no_correction == pytest.approx(0.00190)
-    assert bundle.two_gate_class == "LAMBDA_PASS_ACTUATOR_FAIL"
+    assert bundle.two_gate_class == "LAMBDA_PASS_ACTUATOR_NOT_SUPPORTED"
     assert bundle.travel_speed_diagnostic["status"] == "NOT_SUPPORTED"
 
 
@@ -98,6 +103,9 @@ def test_wigeon_bundle_rejects_nonprospective_primary_receipt():
             primary,
             phase_receipt(passed=False, high=0.75),
             stopover_receipt(passed=False),
+        stopover_source_interpretation={
+            "source_status": "NOT_SUPPORTED",
+        },
         )
 
 
@@ -110,6 +118,9 @@ def test_wigeon_bundle_rejects_wrong_stopover_test_id():
             phase_receipt(passed=True, high=1.0),
             phase_receipt(passed=False, high=0.75),
             stopover,
+            stopover_source_interpretation={
+                "source_status": "NOT_SUPPORTED",
+            },
         )
 
 
@@ -118,7 +129,38 @@ def test_wigeon_bundle_exposes_no_omnibus_score():
         phase_receipt(passed=True, high=1.0),
         phase_receipt(passed=False, high=0.75),
         stopover_receipt(passed=False),
+        stopover_source_interpretation={
+            "source_status": "NOT_SUPPORTED",
+        },
     )
 
     with pytest.raises(AttributeError, match="no omnibus"):
         _ = bundle.omnibus_score
+
+
+def test_wigeon_bundle_keeps_literal_w2_direction_separate_from_source_support():
+    bundle = assemble_wigeon_gate_bundle(
+        phase_receipt(passed=True, high=1.0),
+        phase_receipt(passed=False, high=0.75),
+        stopover_receipt(passed=False),
+        stopover_source_interpretation={
+            "source_status": "NOT_SUPPORTED",
+            "directional_sign_observed": True,
+            "p_value": 0.972,
+        },
+    )
+
+    assert bundle.stopover_direction_passed
+    assert not bundle.stopover_source_supported
+    assert bundle.two_gate_class == (
+        "LAMBDA_PASS_ACTUATOR_NOT_SUPPORTED"
+    )
+
+
+def test_wigeon_bundle_requires_source_support_interpretation():
+    with pytest.raises(ValueError, match="source interpretation"):
+        assemble_wigeon_gate_bundle(
+            phase_receipt(passed=True, high=1.0),
+            phase_receipt(passed=False, high=0.75),
+            stopover_receipt(passed=False),
+        )
