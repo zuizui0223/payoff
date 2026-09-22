@@ -1,184 +1,169 @@
 # GEB movement–phenology submission readiness
 
-Status date: 2026-09-21.
+Status date: **2026-09-22**.
 
-## Scientific gates
+Status: **SCIENCE HOLD — measurement-error calibration required before submission**.
 
-~~~text
+## Why the former GO status was withdrawn
+
+The source-faithfulness audit of the Eurasian-wigeon environmental
+reconstruction found that the first NASA POWER implementation omitted the
+published January--July window applied before the 5 C cumulative-minimum TGS
+calculation.
+
+The corrected source-faithful reconstruction is now complete and passes its
+movement/environmental validation gates. It changes the wigeon result from:
+
+```text
+old, superseded:
+lambda_hat = 0.85994
+stopover p = 0.972
+strong |lambda|<0.75 forecast = FAIL
+```
+
+to:
+
+```text
+source-faithful:
+lambda_hat = 0.749768
+SE = 0.049906
+naive p versus lambda_hat=1 = 5.33e-07
+
+primary lambda<1 gate = PASS
+strong |lambda|<0.75 point gate = PASS, narrowly
+
+W2 directional stopover gate = PASS
+stopover slope = -0.06286 d/d
+cluster p = 0.0317
+secondary 0.3<g_S<0.8 band = FAIL
+
+travel-speed diagnostic = NOT SUPPORTED
+```
+
+The correction also exposed a higher-value inferential issue: phase is measured
+with error on the predictor axis, so naive lambda can be attenuated toward zero.
+
+## Current scientific gates
+
+```text
 broad universal-optimum test:
   COMPLETE — universal natural optimum not supported
 
 direct phase-retention taxa:
-  3 — PASS
+  3 source-faithful naive estimators — PASS
 
 within-species route replication:
   PASS — three barnacle-goose flyways
 
-prospective third-taxon test:
-  PASS for lambda < 1
-  FAIL for stronger |lambda| < 0.75 forecast
-
-common reactive actuator:
-  NOT SUPPORTED / intentionally not claimed
+prospective wigeon estimator-scale test:
+  lambda_hat < 1                      PASS
+  stronger |lambda_hat| < 0.75       PASS, narrowly
+  W2 directional stopover            PASS
+  secondary W2 gain band             FAIL
+  travel speed                       NOT SUPPORTED
 
 environmental-information vs feedback separation:
-  PASS as mechanistic decomposition
-  positive predictability -> stronger feedback hypothesis NOT supported
+  retained as conceptual decomposition
 
-quantitative actuation perturbation:
+quantitative industrial actuation perturbation:
   PASS for cross-sectional attenuation
-  stronger longitudinal deterioration prediction NOT supported
+  stronger longitudinal deterioration prediction NOT SUPPORTED
 
-structured GEB novelty screen:
-  PASS with conservative wording
-~~~
+measurement-error recovery layer:
+  IMPLEMENTED
 
-## Submission-format gates
+taxon-specific source-backed error calibration:
+  OPEN
 
-~~~text
-structured abstract:
+true-lambda=1 observation-scale null:
+  OPEN pending error calibration
+
+Aikens lambda perturbation:
+  preregistered
+  outcome UNOPENED
+```
+
+## Why measurement error is now a hard pre-submission gate
+
+For the corrected wigeon transitions:
+
+```text
+observed origin-phase SD = 15.88 d
+lambda_hat = 0.749768
+```
+
+Under a simple equal independent-error model with true latent lambda=1, an
+error SD of about **7.94 d** would be sufficient in expectation to reproduce a
+naive slope near 0.75.
+
+That is only a stress threshold, not an empirical error estimate. But it is
+small enough relative to the observed phase spread that the latent-correction
+claim should not be submitted before source-backed phase-error calibration.
+
+The same audit must distinguish:
+
+```text
+process innovation
+!=
+phase measurement error
+```
+
+so the existing barnacle-goose environmental-innovation SD values cannot be
+reused as measurement-error SDs.
+
+## Submission gate
+
+```text
+SCIENCE / CLAIM CEILING:
+  HOLD
+
+SOURCE-FAITHFUL WIGEON RECONSTRUCTION:
   PASS
 
-abstract <=300 words:
-  PASS
-
-keywords 6–10:
-  PASS
-
-display pieces 6–8:
-  PASS
-
-blinded-text identity scan:
-  PASS
-
-citation/reference consistency:
-  PASS
-
-reference core:
-  PASS for initial-submission completeness;
-  final copy-edit bibliography expansion may still be useful
-
-figure build:
-  PASS
-
-figure manual QA:
-  PASS for current Fig.4 and Fig.5
-
-figure mechanical QA:
-  PASS — latest-head CI complete
-~~~
-
-## Human-input gates still open
-
-~~~text
-final author list / order
-affiliations
-corresponding author
-funding
-conflicts of interest
-CRediT contributions
-acknowledgements
-anonymous reviewer hosting / access test
-all-author approval
-portal metadata
-~~~
-
-## Submission route
-
-Primary:
-
-> **Global Ecology and Biogeography — Research Article**
->
-> Special issue: **Scaling Up Individual-Based Ecology: Macroecological Insights Gained from the Biologging Revolution**
-
-Working title:
-
-> **Migration timing as phase control: environmental information and phase retention across migratory taxa**
-
-## Current go/no-go
-
-~~~text
-SCIENCE:
-  GO
-
-MANUSCRIPT STRUCTURE:
-  GO
-
-BLINDED MAIN-TEXT FORMAT:
-  GO
+GEB MANUSCRIPT STRUCTURE:
+  AVAILABLE BUT REQUIRES UPDATED CLAIMS
 
 FIGURES:
-  GO — latest mechanical QA PASS
+  REQUIRE REBUILD WITH corrected wigeon lambda/actuator result
+
+MEASUREMENT-ERROR CALIBRATION:
+  REQUIRED BEFORE GO
+
+Aikens outcome:
+  REMAINS UNOPENED
 
 HUMAN METADATA:
   OPEN
 
-ANONYMOUS REVIEWER SNAPSHOT BUILD:
-  GO — CI-built, identity scan PASS, immutable checksum recorded
-
-ANONYMOUS REVIEWER HOST / ACCESS TEST:
+ANONYMOUS REVIEWER HOST:
   OPEN
+```
 
-PORTAL SUBMISSION:
-  READY AFTER HUMAN METADATA + EXTERNAL ANONYMOUS-HOST ACCESS CHECK
-~~~
+## Conditions for returning to GO
 
-The project is now in submission assembly rather than exploratory analysis.
+All of the following are required:
 
+1. freeze a source-backed definition of phase measurement error for each direct
+   system;
+2. estimate or bound predictor phase variance, predictor/outcome error SDs, and
+   consecutive-error correlation without tuning to the observed lambda;
+3. run the already frozen parameter-recovery and true-lambda=1 null simulations
+   at the actual sample sizes / intervals;
+4. update the manuscript to distinguish naive estimator-scale lambda from any
+   error-corrected latent quantity;
+5. rebuild figures and reviewer snapshot from the corrected wigeon registry;
+6. keep the Aikens preregistration and outcome closed until its own execution
+   contract is satisfied.
 
-## Reviewer-snapshot assembly receipt
+## Current interpretation
 
-The anonymous reviewer package is now generated reproducibly by:
+The source-faithful direct data support a useful empirical coordinate and now
+suggest a recurrent **waiting / stopover** actuator across mule deer, barnacle
+geese and wigeon. Movement-speed and route-level contributions remain
+system-dependent.
 
-~~~text
-scripts/build_movement_phenology_reviewer_snapshot.py
-.github/workflows/build-movement-phenology-reviewer-snapshot.yml
-~~~
+What remains unresolved is whether the magnitude of naive lambda differences,
+and in particular latent lambda<1 for the weak/moderate cases, survives a
+source-backed errors-in-variables audit.
 
-Latest validated package:
-
-~~~text
-files = 74
-identity / secret hits = 0
-raw tracking data included = false
-Git history included = false
-title page included = false
-public author-repository link included = false
-
-archive SHA-256 =
-f3d1a08f746f0c5dc81d49261c11855a200a1f0327154711f506c266de120ce4
-~~~
-
-This closes the snapshot-construction blocker. The remaining reviewer-code
-blocker is external delivery only: place the frozen archive on an anonymous
-reviewer-access host and verify that opening the link does not expose account
-ownership.
-
-
-## Repository handoff state — 2026-09-21
-
-All repository-controlled submission gates are now closed:
-
-~~~text
-science / claim ceiling                  PASS
-three-taxon direct phase retention       PASS
-prospective wigeon primary test           PASS
-stronger wigeon forecast                  FAILED AS REGISTERED
-multi-flyway route replication            PASS
-information-vs-retention decomposition    PASS
-quantitative actuation perturbation       PASS WITH NEGATIVE LONGITUDINAL TEST
-structured novelty search                 PASS FOR GEB
-GEB manuscript audit                      PASS
-figure build + mechanical QA              PASS
-double-anonymous identity audit           PASS
-reviewer snapshot construction            PASS
-latest-head repository test suite         PASS
-~~~
-
-Remaining actions require human/account-specific information or an external
-anonymous hosting surface and are therefore intentionally not auto-filled.
-See:
-
-~~~text
-submission/GEB_MOVEMENT_PHENOLOGY_PORTAL_HANDOFF.md
-~~~
+Until that question is closed, GEB submission is intentionally held.
