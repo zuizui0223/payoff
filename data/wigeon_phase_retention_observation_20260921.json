@@ -5,19 +5,24 @@
   "segment_scale_id": "one_staging_transition",
   "reported_estimate": {
     "pairs": 224,
-    "lambda_retention": 0.85994,
-    "lambda_se": 0.04509,
-    "p_vs_no_correction": 0.0019
+    "lambda_retention": 0.7497680211367301,
+    "lambda_se": 0.04990566712278233,
+    "p_vs_no_correction": 5.328241982727779e-7
   },
   "provenance": {
     "payoff_source_pr": 144,
     "payoff_source_branch": "empirical/movement-phenology-macro-20260918",
-    "payoff_source_head": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "payoff_source_head": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+    "workflow_run": 35689856130,
+    "artifact_id": 10678143392,
+    "artifact_name": "movement-phenology-stage3-wigeon",
+    "artifact_zip_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+    "direct_receipt_sha256": "3cd182079dc24e3f7cc1342e5db371d5d3c787b91e75f4d7abf4b36116a68772",
+    "transitions_sha256": "095b8b63a1a6ee284941be914fef226e360c222cea27ea24ed50c57791db5d48",
+    "tgs_validation_sha256": "c73b4ce75a6dace44665c45beebc66278331f561212c22480d432e76a009a730",
     "preregistration_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_CONTROLLER_PREREGISTRATION.md",
-    "preregistration_blob_sha": "e3b6b5d223a5707667883991f88197448729111c",
-    "direct_receipt_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
-    "direct_receipt_blob_sha": "d1a4014ce36a589cd32386890bb0cc5ee39fa478",
-    "direct_registry_path": "data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv",
-    "direct_registry_blob_sha": "dea4917baa362e0805015151ae34c7de4456b1ae"
+    "correction_amendment": "data/wigeon_tgs_source_window_revalidation_20260922.json",
+    "source_tgs_contract": "days <- days[month(days)<8]",
+    "corrected_from_old_lambda": 0.85994
   }
 }
