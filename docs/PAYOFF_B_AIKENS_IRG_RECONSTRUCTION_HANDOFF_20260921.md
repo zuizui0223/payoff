@@ -699,18 +699,24 @@ or
 These values are read only from GitHub Actions secrets or the process
 environment; they are never written into PAYOFF receipts.
 
-Once credentials are configured, the frozen operational sequence is:
+The frozen operational sequence is now:
 
     exact manifest
+    -> environment-independent 24 h GPS target selection
+    -> pre-environment support-ceiling audit
+    -> credential gate
     -> AppEEARS V061 extraction
     -> IRG reconstruction
-    -> environment-independent 24 h GPS target selection
-    -> attach phase to those frozen targets
+    -> attach phase to those already frozen targets
     -> invalidate missing environmental targets without replacement
     -> adjacent valid target pairs
     -> frozen clustered lambda contrast
     -> preregistered outcome class
     -> outcome-specific manuscript rendering and submission audit.
+
+Thus target geometry and its maximum possible support are materialized before
+any environmental network response is available. Credentials are required only
+when the workflow reaches the environmental extraction step.
 
 The pre-environment support ceiling has also been evaluated from the frozen
 targets without using MODIS environmental values:
