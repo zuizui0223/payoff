@@ -23,10 +23,16 @@ class WigeonGateBundle:
     lambda_se: float | None
     p_vs_no_correction: float | None
     strong_contraction_passed: bool
-    stopover_actuator_passed: bool
+    stopover_direction_passed: bool
+    stopover_source_supported: bool
     two_gate_class: str
     travel_speed_diagnostic: dict[str, Any] | None
     distance_moderation_diagnostic: dict[str, Any] | None
+
+    @property
+    def stopover_actuator_passed(self) -> bool:
+        """Backward-compatible source-support status, not literal sign gate."""
+        return self.stopover_source_supported
 
     @property
     def omnibus_score(self):
@@ -41,6 +47,7 @@ def assemble_wigeon_gate_bundle(
     strong_phase_receipt: dict[str, Any],
     stopover_actuator_receipt: dict[str, Any],
     *,
+    stopover_source_interpretation: dict[str, Any] | None = None,
     travel_speed_diagnostic: dict[str, Any] | None = None,
     distance_moderation_diagnostic: dict[str, Any] | None = None,
 ) -> WigeonGateBundle:
@@ -115,18 +122,34 @@ def assemble_wigeon_gate_bundle(
 
     primary_pass = bool(primary_gate["passed"])
     strong_pass = bool(strong_gate["passed"])
-    stopover_pass = bool(
+
+    # W2 preregistered a directional sign and a secondary gain band, but no
+    # fixed p-value threshold. The literal directional gate and the source
+    # inferential conclusion are therefore kept separate.
+    stopover_direction_pass = bool(
         stopover_gate["all_prospective_passed"]
     )
+    if stopover_source_interpretation is None:
+        raise ValueError(
+            "wigeon bundle requires the frozen W2 source interpretation"
+        )
+    source_status = str(
+        stopover_source_interpretation.get("source_status", "")
+    )
+    if source_status not in ("SUPPORTED", "NOT_SUPPORTED"):
+        raise ValueError(
+            "W2 source interpretation must declare SUPPORTED or NOT_SUPPORTED"
+        )
+    stopover_source_supported = source_status == "SUPPORTED"
 
-    if primary_pass and not stopover_pass:
-        two_gate_class = "LAMBDA_PASS_ACTUATOR_FAIL"
-    elif primary_pass and stopover_pass:
-        two_gate_class = "LAMBDA_PASS_ACTUATOR_PASS"
-    elif (not primary_pass) and stopover_pass:
-        two_gate_class = "LAMBDA_FAIL_ACTUATOR_PASS"
+    if primary_pass and not stopover_source_supported:
+        two_gate_class = "LAMBDA_PASS_ACTUATOR_NOT_SUPPORTED"
+    elif primary_pass and stopover_source_supported:
+        two_gate_class = "LAMBDA_PASS_ACTUATOR_SUPPORTED"
+    elif (not primary_pass) and stopover_source_supported:
+        two_gate_class = "LAMBDA_FAIL_ACTUATOR_SUPPORTED"
     else:
-        two_gate_class = "LAMBDA_FAIL_ACTUATOR_FAIL"
+        two_gate_class = "LAMBDA_FAIL_ACTUATOR_NOT_SUPPORTED"
 
     return WigeonGateBundle(
         system_name="Eurasian wigeon",
@@ -135,7 +158,8 @@ def assemble_wigeon_gate_bundle(
         lambda_se=lambda_se,
         p_vs_no_correction=p_vs_no_correction,
         strong_contraction_passed=strong_pass,
-        stopover_actuator_passed=stopover_pass,
+        stopover_direction_passed=stopover_direction_pass,
+        stopover_source_supported=stopover_source_supported,
         two_gate_class=two_gate_class,
         travel_speed_diagnostic=travel_speed_diagnostic,
         distance_moderation_diagnostic=(
