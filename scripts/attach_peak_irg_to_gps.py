@@ -45,6 +45,14 @@ def main() -> None:
         default=0.0,
     )
     parser.add_argument(
+        "--allow-below-minimum",
+        action="store_true",
+        help=(
+            "write the coverage audit even when the predeclared matched "
+            "fraction is not reached"
+        ),
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=Path(
@@ -164,6 +172,9 @@ def main() -> None:
             minimum_matched_fraction=(
                 args.minimum_matched_fraction
             ),
+            enforce_minimum=(
+                not args.allow_below_minimum
+            ),
         )
     except ValueError as exc:
         raise SystemExit(
@@ -216,8 +227,17 @@ def main() -> None:
                 }
             )
 
+    coverage_gate_passed = (
+        audit.matched_fraction
+        >= args.minimum_matched_fraction
+    )
     receipt = {
-        "status": "environmental_phase_join_complete",
+        "status": (
+            "environmental_phase_join_complete"
+            if coverage_gate_passed
+            else "environmental_phase_join_below_required_coverage"
+        ),
+        "coverage_gate_passed": coverage_gate_passed,
         "gps_source": str(args.gps_csv),
         "peak_irg_source": str(args.peak_irg_csv),
         "required_modis_product": (
