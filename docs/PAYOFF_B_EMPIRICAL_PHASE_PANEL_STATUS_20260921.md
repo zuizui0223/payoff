@@ -46,8 +46,39 @@ It also does not support:
 > one universal speed / stopover / route-reset actuator.
 
 The wigeon prospective result is especially informative because it expands the
-observed direct coordinate into a weak-correction regime while failing the
+observed direct coordinate into a weak-contraction regime while failing the
 stronger cross-system correction forecast.
+
+## Measurement-error audit added 2026-09-22
+
+The direct lambda values above are naive regression-scale estimates. Because
+phase is reconstructed and appears on the predictor axis, predictor measurement
+error can attenuate lambda toward zero.
+
+A pre-Aikens recovery layer is now frozen in:
+
+    src/phase_retention_recovery.py
+    data/payoff_b_lambda_recovery_validation_contract_20260922.json
+    data/payoff_b_lambda_recovery_taxon_registry_20260922.json
+
+Until source-backed phase-error SDs, predictor phase variances, and consecutive
+error correlations are calibrated for each system:
+
+    portable phase coordinate:
+        RETAINED
+
+    universal lambda:
+        NOT CLAIMED
+
+    biological interpretation of cross-system lambda magnitude differences:
+        PENDING MEASUREMENT-ERROR AUDIT
+
+    latent lambda < 1 from naive lambda_hat < 1 alone:
+        NOT YET LICENSED
+
+The preregistered wigeon result remains a valid estimator-scale result, but its
+p-value against lambda_hat=1 is not a substitute for a true-lambda=1
+errors-in-variables null.
 
 ## Additional within-taxon actuator evidence
 
