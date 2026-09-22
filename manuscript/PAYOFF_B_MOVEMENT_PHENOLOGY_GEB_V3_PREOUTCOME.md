@@ -14,7 +14,7 @@
 
 **Methods:** We tested a universal movement-to-phenology speed ratio in 5,816 bird-year-cell observations from 55 species, then estimated signed phase retention from E_next = a + λE_current + ε over declared movement intervals. We reconstructed three direct taxa, estimated environmental timing innovation separately, and tested an industrial-development perturbation.
 
-**Results:** Broad bird data rejected one universal natural speed optimum. Direct systems nevertheless yielded strongly heterogeneous naive phase-retention estimates: mule deer (|λ| ≈ 0.11), primary barnacle-goose transitions (|λ| ≈ 0.11–0.49), and wigeon (|λ| ≈ 0.86). Mule deer used speed and stopover adjustments, barnacle geese used stage-specific stopover control and overtaking, whereas wigeon showed weak contraction without detected stopover or travel-speed responses. Environmental predictability did not map monotonically onto correction strength. Industrial development attenuated a movement-control permeability proxy, while a stronger predicted temporal deterioration was unsupported. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
+**Results:** Broad bird data rejected one universal natural speed optimum. Direct systems yielded strongly heterogeneous naive phase-retention estimates in mule deer (|λ| ≈ 0.11) and primary barnacle-goose transitions (|λ| ≈ 0.11–0.49). The wigeon estimate is under source-window revalidation after an audit found that the independent POWER reconstruction used a full-year TGS window rather than the published January–July window. Mule deer used speed and stopover adjustments and barnacle geese used stage-specific stopover control and overtaking. Environmental predictability did not map monotonically onto correction strength. Industrial development attenuated a movement-control permeability proxy, while a stronger predicted temporal deterioration was unsupported. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
 [AIKENS LAMBDA ABSTRACT PENDING — render from the registered result JSON before submission.]
 <!-- AIKENS_LAMBDA_ABSTRACT_END -->
 
@@ -312,53 +312,43 @@ with stopover slope -0.524 d/d, while Barents R1→R2 had
 
 with stopover slope -0.591 d/d. Other route stages included near-complete reset and local amplification, demonstrating that a single species-wide \(\lambda\) is not biologically adequate.
 
-### Wigeon prospectively show weak estimator-scale contraction and falsify near-reset convergence
+### Wigeon source-window revalidation
 
-The wigeon movement reconstruction recovered 33 spring trajectories from 29 individuals, compared with 35 trajectories from 31 individuals in the published analysis. Median endpoint distance was 1,911 km versus 1,899 km published. The registered movement reconstruction gates all passed.
+<!-- WIGEON_SOURCE_WINDOW_REVALIDATION_PENDING -->
 
-The independent thermal-growing-season reconstruction linked 256 staging events to local TGS. Median arrival phase was 20.93 d after TGS onset, compared with 22.5 d published, and the registered event-count, median-phase, and IQR-overlap gates passed.
+The wigeon movement reconstruction still passes the published movement-source
+gates, but the promoted phase-retention result is temporarily suspended. A
+source audit of van Toor et al. (2021) Additional file 3 showed that the
+published TGS code restricts the environmental series to January--July before
+applying the 5 C cumulative-minimum rule. The independent POWER reconstruction
+had instead evaluated the cumulative minimum over the full calendar year,
+allowing cold northern cell-years to return day 365/366 as apparent TGS onset.
 
-Across 224 consecutive staging transitions from 28 individuals,
+The previously reported `lambda=0.8599` and its naive `p=0.00190` versus
+`lambda=1` are therefore not used as confirmatory support in this manuscript
+until the source-faithful January--July reconstruction is complete. The
+movement/HMM contract, controller model, route covariates and clustered
+uncertainty remain unchanged.
 
-\[
-\beta_E=-0.1401\pm0.0451,
-\]
+### Cross-system coordinate synthesis pending wigeon source revalidation
 
-so
-
-\[
-\lambda=0.8599.
-\]
-
-The no-correction null \(\lambda=1\) was rejected (\(p=0.00190\)). Thus approximately 14% of incoming phase deviation was removed per reconstructed staging transition.
-
-The stronger prospective forecast
-
-\[
-|\lambda|<0.75
-\]
-
-was not supported. Stopover duration showed essentially no phase response (\(p=0.972\)), and measured between-staging travel speed also lacked convincing phase dependence (\(p=0.197\)). Wigeon therefore validate a common phase-retention coordinate without reproducing the reactive speed/stopover mechanisms detected in mule deer and barnacle geese.
-
-### Three taxa share a coordinate, not a universal controller
-
-The direct taxon-level phase-retention summaries span a broad range:
+The source-cleared direct phase-retention summaries currently include:
 
 ~~~text
 Mule deer:
-  |lambda| ~ 0.107
+  |lambda_hat| ~ 0.107
 
 Barnacle goose:
-  median |lambda| ~ 0.131
+  median |lambda_hat| ~ 0.131
   highlighted route range ~ 0.106–0.494
 
 Eurasian wigeon:
-  |lambda| ~ 0.860
+  SOURCE-WINDOW REVALIDATION PENDING
 ~~~
 
-All declared taxon-level primary examples show contraction, but correction strength ranges from approximately 0.14 to 0.89. The data therefore reject both a universal near-reset expectation and a universal actuator coefficient.
-
-Instead, phase retention is portable as a measurement coordinate while controller architecture is heterogeneous.
+The common phase coordinate remains defined across all three systems, but the
+three-taxon empirical synthesis is not promoted while the wigeon environmental
+reconstruction is being corrected.
 
 ### Environmental predictability and feedback strength are separate channels
 
@@ -419,7 +409,7 @@ and remained non-significant across the registered sensitivity grid. Thus the re
 | Barnacle goose, Svalbard | Southern Norway → Svalbard | −0.106 | 0.106 | 0.894 | Stopover + overtake |
 | Barnacle goose, Greenland | R2 → R3 | 0.131 | 0.131 | 0.869 | Stopover |
 | Barnacle goose, Barents | R1 → R2 | 0.494 | 0.494 | 0.506 | Stopover |
-| Eurasian wigeon | Consecutive staging transitions | 0.860 | 0.860 | 0.140 | Net phase retention; no detected speed/stopover actuator |
+| Eurasian wigeon | Consecutive staging transitions | pending | pending | pending | Source-window revalidation in progress |
 
 The three barnacle-goose rows are within-taxon route replications and are not treated as independent taxonomic observations.
 
@@ -433,11 +423,9 @@ This reframing preserves the temporal core of PAYOFF-B without claiming that a t
 
 ### Phase retention is more portable than behavioral gain
 
-Mule deer, barnacle geese, and wigeon all admit a direct phase-retention representation, but their actuator architectures differ sharply.
+Mule deer and barnacle geese admit direct source-cleared phase-retention representations with sharply different actuator architectures. Wigeon uses the same coordinate, but its numeric phase-retention estimate is held out of the synthesis until the source-faithful environmental reconstruction is complete.
 
-Mule deer combine movement-speed acceleration and stopover shortening. Barnacle geese show strong stopover-mediated STEP control, with deliberate overtake in some route stages. Wigeon exhibit much weaker but significant phase contraction without a detected stopover or transit-speed response.
-
-The third taxon is therefore more valuable than a simple replication. It falsifies the emerging stronger idea that successful tracking requires near-complete reactive reset. A common response variable survives while the common mechanism does not. This distinction is also important because temporal-dependence coefficients in phenology are not new: autoregressive models have long been used for life-history timing and migratory arrival (Post et al., 2001; Forchhammer et al., 2002). Our λ instead describes retention of animal-minus-environment phase within a migration, across a declared movement opportunity.
+Mule deer combine movement-speed acceleration and stopover shortening, whereas barnacle geese show strong stopover-mediated STEP control with deliberate overtake in some route stages. The broader claim that phase retention is more portable than any single actuator remains the working hypothesis; the prospective third-taxon quantitative test is under revalidation rather than counted as support. This distinction is also important because temporal-dependence coefficients in phenology are not new: autoregressive models have long been used for life-history timing and migratory arrival (Post et al., 2001; Forchhammer et al., 2002). Our λ instead describes retention of animal-minus-environment phase within a migration, across a declared movement opportunity.
 
 ### Information and feedback solve different parts of the same timing problem
 
@@ -550,8 +538,8 @@ All analyses use previously published public datasets or archived source data. R
 This manuscript supports:
 
 - failure of a universal natural speed-ratio optimum in the registered broad bird test;
-- direct phase-retention estimates across three taxa;
-- strong heterogeneity in retention magnitude and actuator architecture;
+- direct phase-retention estimates in mule deer and barnacle goose, with the prospective wigeon estimate under source-window revalidation;
+- heterogeneity in currently source-cleared retention estimates and actuator architecture;
 - separation of environmental innovation from realized phase retention;
 - a quantitative industrial-development actuation contrast with a falsified stronger longitudinal prediction.
 
