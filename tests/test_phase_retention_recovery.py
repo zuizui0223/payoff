@@ -9,6 +9,7 @@ from src.phase_retention_recovery import (
     fit_naive_lambda,
     lambda_from_tracking_rates,
     lower_tail_null_probability,
+    required_equal_error_sd_ratio,
     simulate_lambda_recovery,
 )
 
@@ -166,3 +167,39 @@ def test_correction_refuses_error_variance_that_exhausts_predictor_variance():
 def test_invalid_error_correlation_is_rejected():
     with pytest.raises(ValueError, match="correlation"):
         design(error_correlation=1.1)
+
+
+def test_required_error_ratio_quantifies_wigeon_null_fragility():
+    ratio = required_equal_error_sd_ratio(
+        observed_naive_lambda=0.85994,
+        true_lambda=1.0,
+        error_correlation=0.0,
+    )
+    assert ratio == pytest.approx(
+        0.4035738201,
+        rel=1e-9,
+    )
+
+
+def test_negative_observed_lambda_cannot_come_from_independent_classical_dilution_of_one():
+    assert required_equal_error_sd_ratio(
+        observed_naive_lambda=-0.106,
+        true_lambda=1.0,
+        error_correlation=0.0,
+    ) is None
+
+
+def test_positive_error_correlation_requires_more_noise_for_same_attenuation():
+    independent = required_equal_error_sd_ratio(
+        observed_naive_lambda=0.85994,
+        true_lambda=1.0,
+        error_correlation=0.0,
+    )
+    correlated = required_equal_error_sd_ratio(
+        observed_naive_lambda=0.85994,
+        true_lambda=1.0,
+        error_correlation=0.5,
+    )
+    assert independent is not None
+    assert correlated is not None
+    assert correlated > independent
