@@ -1,305 +1,223 @@
 # Eurasian-wigeon direct phase-retention receipt
 
-Status: **third-taxon direct phase-retention reconstruction complete**.
+Status: **source-faithful third-taxon revalidation complete; measurement-error calibration pending**.
 
 Primary source: van Toor et al. (2021), *Movement Ecology* 9:61, DOI 10.1186/s40462-021-00296-0.
 
-Tracking source: public Movebank DOI 10.5441/001/1.dv5mm289.
+Tracking source: Movebank DOI 10.5441/001/1.dv5mm289.
 
-Environmental validation source: NASA POWER daily T2M, transformed with the published 5 °C thermal-growing-season rule.
+Environmental source: NASA POWER daily T2M used as an independent reconstruction of the published ERA5-based thermal-growing-season analysis.
 
-This analysis was preregistered internally in docs/MOVEMENT_PHENOLOGY_WIGEON_CONTROLLER_PREREGISTRATION.md before a promoted direct estimate was available.
+## Source-faithfulness correction
 
-## 1. Movement reconstruction gate
+A 2026-09-22 audit of Additional file 3 recovered a preprocessing step that
+had been omitted from the first POWER reconstruction. The published code
+restricts the temperature series before estimating TGS:
 
-The published study reports:
+```r
+days <- days[month(days)<8]
+```
 
-~~~text
-35 spring trajectories
-31 individuals
-median endpoint distance = 1899 km
-Q1 / Q3 = 1155 / 3130 km
-maximum = 4184 km
-median migration speed = 48.2 km/day
-Q1 / Q3 = 30.0 / 60.9 km/day
-~~~
+so TGS is estimated from **January through July**, not the full calendar year.
 
-The reconstructed original-Movebank lane gives:
+The earlier full-year reconstruction could place the cumulative minimum at
+day 365/366 in cold northern cell-years, producing artificial phase values near
+-200 d. That result is superseded.
 
-~~~text
-33 spring trajectories
-29 individuals
-median endpoint distance = 1911.0 km
-Q1 / Q3 = 1153.0 / 3170.2 km
-maximum = 4186.6 km
+The movement source, HMM, staging reconstruction, controller formula,
+route covariates, and individual clustering were unchanged.
 
-published-summary speed analogue:
-median = 56.37 km/day
-Q1 / Q3 = 39.00 / 85.53 km/day
-~~~
+## Movement reconstruction gate
 
-All registered movement gates pass:
+```text
+reconstructed spring trajectories = 33
+reconstructed individuals         = 29
 
-~~~text
-track count within 4:             PASS
-individual count within 4:        PASS
-endpoint median within 25%:       PASS
-speed median within 35%:          PASS
-~~~
+published trajectories            = 35
+published individuals             = 31
 
-### Speed-estimator correction
+reconstructed median endpoint distance = 1911 km
+published median endpoint distance     = 1899 km
+```
 
-An earlier internal reconstruction reported a median of about 74.6 km/day because it accumulated the full high-frequency HMM path.
+All registered movement gates pass.
 
-The published Supplement computes its summary migration-speed quantity after HMM state 4 has been removed. The registered reconstruction was corrected to the same ecological object: cumulative geodesic distance through the non-state-4 sequence divided by its elapsed migration time.
+## Source-faithful environmental validation
 
-The gate threshold was not relaxed.
+```text
+staging events total          = 256
+events with reconstructed TGS = 256
+TGS onset >= day 300          = 0
 
-## 2. Environmental validation gate
+arrival phase median = 21.97 d
+Q1 / Q3             = 13.18 / 34.25 d
 
-The direct analysis assigns local annual TGS onset to all reconstructed staging events using the published cumulative-minimum 5 °C rule.
+published median    = 22.5 d
+published Q1 / Q3   = 13.0 / 35.3 d
+```
 
-Observed independent reconstruction:
+The event-count, median-phase, IQR-overlap, and source-window gates all pass.
 
-~~~text
-staging events total       = 256
-events with TGS            = 256
+The predictor phase SD across the 224 controller transitions is **15.88 d**;
+the old full-year reconstruction produced about 78.6 d because of the
+end-of-year TGS artefact.
 
-arrival phase median       = 20.93 d
-Q1 / Q3                    = 8.95 / 33.45 d
-~~~
+## W1 — preregistered phase-retention test
 
-Published reference:
+For consecutive staging events:
 
-~~~text
-environment-linked arrivals = 208
-median                       = 22.5 d
-Q1 / Q3                      = 13.0 / 35.3 d
-~~~
-
-Registered validation:
-
-~~~text
-event-count gate     PASS
-median-phase gate    PASS
-IQR-overlap gate     PASS
-~~~
-
-NASA POWER is an independent reconstruction, not the paper's original ERA5 grid.
-
-## 3. Primary preregistered test W1 — phase contraction
-
-For consecutive staging events, fit the progress-adjusted model
-
-\[
-E_{i+1}
-=
-a+\lambda E_i
-+\text{route covariates}
-+\epsilon.
-\]
-
-Equivalent fitted change coefficient:
-
-\[
+[
 E_{i+1}-E_i
 =
-\beta_E E_i+\cdots
-\]
-
-with
-
-\[
-\lambda=1+\beta_E.
-\]
+eta_EE_i
++	ext{route covariates}
++epsilon,
+qquad
+lambda=1+eta_E.
+]
 
 Data:
 
-~~~text
+```text
 N transitions = 224
 N individuals = 28
-~~~
+```
 
-Result:
+Corrected result:
 
-~~~text
-beta_E = -0.14006
-cluster SE = 0.04509
-cluster p = 0.00442
+```text
+beta_E = -0.250232
+cluster SE = 0.049906
+cluster p = 2.93e-05
 
-lambda = 0.85994
-SE = 0.04509
+lambda_hat = 0.749768
+SE         = 0.049906
 
-test of no correction:
-H0: lambda = 1
-p = 0.00190
-~~~
+naive H0: lambda_hat = 1
+p = 5.33e-07
+```
 
-Thus the registered primary prediction
+The registered estimator-scale primary prediction
 
-\[
-\lambda<1
-\]
+[
+lambda<1
+]
 
-is supported.
+**passes**.
 
-The corresponding phase-retention and correction coordinates are
+The stronger frozen point-estimate forecast
 
-\[
-R_\phi=|\lambda|=0.860,
-\]
+[
+|lambda|<0.75
+]
 
-\[
-C_\phi=1-|\lambda|=0.140.
-\]
+also **passes narrowly** because the corrected estimate is 0.749768. This
+boundary result is retained mechanically and is not promoted as evidence for a
+universal strong-correction constant.
 
-Approximately 14% of incoming phase deviation is removed per reconstructed staging-to-staging transition under this observational model.
+## W2 — preregistered stopover direction
 
-## 4. Exploratory strong-contraction forecast — failed
+Primary preregistered W2 prediction:
 
-Before the promoted result was available, the exploratory cross-system forecast was
-
-\[
-|\lambda|<0.75.
-\]
-
-Observed:
-
-\[
-|\lambda|=0.860.
-\]
-
-Therefore the strong-contraction forecast is **not supported**.
-
-This is important: the third taxon broadens the direct-controller range rather than reproducing the near-reset behavior seen in the strongest mule-deer and barnacle-goose examples.
-
-## 5. Preregistered W2 — stopover actuator not supported
-
-Registered prediction:
-
-\[
+[
 S'(E)<0.
-\]
+]
 
-Observed:
+No fixed p-value threshold was preregistered for this primary directional gate.
 
-~~~text
-stopover slope = -0.000140 day/day
-cluster SE = 0.003902
-p = 0.972
-~~~
+Corrected result:
 
-The point sign is negative but the effect is essentially zero and unsupported.
+```text
+stopover slope = -0.0628626 d / phase-day
+cluster SE     =  0.0277386
+p              =  0.03166
+```
 
-The secondary predicted stopover-gain band
+Therefore the **formal directional W2 gate passes**. The conventional
+individual-clustered p-value is also compatible with a nonzero negative slope,
+but it is supporting evidence rather than a retrospectively imposed
+preregistered threshold.
 
-\[
+The secondary registered gain band
+
+[
 0.3<g_S<0.8
-\]
+]
 
-is therefore not supported.
+fails because
 
-## 6. Transit-speed actuator not supported
+[
+g_S=0.06286.
+]
 
-Observed travel-speed response:
+## Secondary actuator diagnostics
 
-~~~text
-log travel-speed gain per phase day
-= +0.00109
+Between-staging travel speed remains unsupported:
 
-cluster SE = 0.000824
-p = 0.197
-~~~
+```text
+log-speed slope = +0.002757
+cluster p       = 0.417
+```
 
-There is no convincing evidence that late wigeons compensate through measured between-staging travel speed.
+Distance moderation remains unsupported at p<=0.05:
 
-Therefore the observed net phase contraction should **not** be described as a replicated speed or stopover feedback mechanism.
+```text
+origin phase x endpoint distance p = 0.0823
+route-progress x endpoint-distance p = 0.252
+```
 
-## 7. Migration-distance moderation not detected in the direct controller
+## Cross-system consequence
 
-Preregistered strategy hypothesis W4 was motivated by the published result that long-distance migrants progressively approach spring phenology.
+The corrected wigeon result no longer supports the simple classification
 
-In the direct retention model:
+```text
+lambda PASS / actuator FAIL
+```
 
-~~~text
-origin-phase × total-distance moderation
-beta = -0.0253
-SE = 0.0278
-p = 0.371
-~~~
+used by the superseded full-year reconstruction.
 
-The independent route-progress × endpoint-distance phase model is also unsupported in this reconstruction:
+The source-faithful result is:
 
-~~~text
-p = 0.670
-~~~
+```text
+primary lambda gate:          PASS
+strong |lambda|<0.75 gate:    PASS, narrowly
+W2 directional stopover:      PASS
+W2 secondary gain band:       FAIL
+travel speed:                 NOT SUPPORTED
+distance moderation:          NOT SUPPORTED
+```
 
-Thus the original literature result remains useful context, but the present direct-controller reconstruction does not promote a new distance-moderation effect.
+Across the direct taxa, stopover/waiting adjustment is therefore a recurrent
+actuator, while speed and route-level contributions remain system-dependent.
 
-## 8. Cross-system interpretation
+## Measurement-error ceiling
 
-The three directly reconstructed taxa now occupy different controller regimes.
+The corrected lambda remains a **naive errors-in-variables estimator**.
 
-~~~text
-mule deer
-  strong distributed correction
-  speed + stopover actuators
-  lambda ~ 0.107
+For the source-faithful transition set:
 
-barnacle goose
-  strong route-stage STEP correction
-  stopover actuator
-  primary |lambda| ~ 0.106–0.494
-  plus explicit route-stage amplification / overtake cases
+```text
+observed predictor phase SD = 15.881 d
+```
 
-Eurasian wigeon
-  weak but significant phase contraction
-  lambda ~ 0.860
-  no detected stopover or travel-speed actuator
-~~~
+Under a simple true-lambda=1, equal independent predictor/outcome error model,
+an error SD of about **7.94 d** would be sufficient in expectation to attenuate
+the naive slope to approximately 0.75. This is a stress threshold, not an
+empirical error estimate.
 
-Therefore the cross-taxon result is **not**
+Therefore the source analysis currently licenses:
 
-> all migrants use the same behavioral feedback rule.
+- a source-faithful estimator-scale lambda;
+- W1 primary PASS;
+- W2 directional stopover PASS;
+- the secondary gain-band FAIL;
+- continued failure of the travel-speed diagnostic.
 
-The licensed result is:
+It does **not** yet license:
 
-> **phase retention after an ecologically meaningful movement step can be placed on a common coordinate across taxa, while the strength and actuator architecture differ sharply.**
+- measurement-error-corrected latent lambda;
+- proof that latent lambda<1 after phase-reconstruction error;
+- attribution of cross-taxon lambda magnitude differences entirely to biology.
 
-Wigeon is compatible with a more feed-forward / target-scheduling-dominated regime, but that mechanism is not directly identified by this analysis.
-
-## 9. Gate consequence
-
-~~~text
-population / route direct replication:
-  PASS
-
-cross-taxon direct phase-retention gate:
-  PASS
-  taxa = 3
-
-cross-taxon reactive-actuator gate:
-  OPEN
-  wigeon does not show the mule-deer / goose actuator signature
-~~~
-
-This distinction must be preserved in the manuscript.
-
-## Claim ceiling
-
-Licensed:
-
-- the original Movebank/HMM movement reconstruction passes the registered movement gate;
-- independent TGS reconstruction passes the registered environmental gate;
-- wigeon phase retention is significantly below the no-correction value of one;
-- the preregistered primary W1 phase-contraction prediction is supported;
-- the stronger exploratory \(|\lambda|<0.75\) forecast is falsified;
-- stopover and measured travel-speed actuator predictions are unsupported;
-- the third taxon expands the common phase-retention coordinate without establishing a universal feedback actuator.
-
-Not licensed:
-
-- a causal behavioral-feedback interpretation of wigeon \(\lambda\);
-- universal \(\lambda\), universal stopover gain, or universal correction fraction;
-- claiming the published migration-distance mechanism was directly replicated;
-- treating NASA POWER as the original ERA5 environmental dataset.
+The next validation task is source-backed phase-error calibration and a
+true-lambda=1 observation-scale null.
