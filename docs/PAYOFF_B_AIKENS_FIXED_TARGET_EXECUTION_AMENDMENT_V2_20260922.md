@@ -32,6 +32,15 @@ Version 2 therefore freezes the order as:
 The target grid is anchored at the earliest raw spring-migration observation in
 each animal-year. Adjacent target windows cannot overlap.
 
+If two raw GPS observations are exactly equidistant from one target, the
+pre-outcome deterministic tie-break is:
+
+    smaller absolute time deviation
+    -> earlier observed timestamp
+    -> lexicographically smaller observation_id.
+
+This rule is independent of environmental availability and source-row order.
+
 This amendment does **not** change the hypothesis, phase coordinate, 24 h segment
 scale, +/-3 h tolerance, statistical model, p-value threshold, group definitions,
 or sample-support thresholds. It also does not inspect any MODIS environmental
