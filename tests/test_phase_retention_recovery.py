@@ -10,6 +10,7 @@ from src.phase_retention_recovery import (
     lambda_from_tracking_rates,
     lower_tail_null_probability,
     required_equal_error_sd_ratio,
+    recovery_design_from_observed_predictor_sd,
     simulate_lambda_recovery,
 )
 
@@ -203,3 +204,28 @@ def test_positive_error_correlation_requires_more_noise_for_same_attenuation():
     assert independent is not None
     assert correlated is not None
     assert correlated > independent
+
+
+def test_recovery_design_can_use_observed_predictor_sd_without_guessing_latent_sd():
+    row = recovery_design_from_observed_predictor_sd(
+        true_lambda=1.0,
+        observed_predictor_sd=(136.0 ** 0.5),
+        predictor_error_sd=6.0,
+        outcome_error_sd=6.0,
+        error_correlation=0.0,
+        process_noise_sd=0.0,
+        n_pairs=224,
+    )
+    assert row.latent_phase_sd == pytest.approx(10.0)
+    assert row.n_pairs == 224
+
+
+def test_observed_predictor_sd_constructor_rejects_unidentifiable_latent_variance():
+    with pytest.raises(ValueError, match="positive latent phase variance"):
+        recovery_design_from_observed_predictor_sd(
+            true_lambda=1.0,
+            observed_predictor_sd=5.0,
+            predictor_error_sd=5.0,
+            outcome_error_sd=5.0,
+            n_pairs=100,
+        )
