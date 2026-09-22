@@ -149,44 +149,32 @@ jobs:
           --output outputs/aikens_primary_phase_gps_keys.csv
           --receipt-output outputs/aikens_primary_phase_gps_keys_receipt.json
 
-      - name: Attach primary local peak IRG and audit frozen coverage
+      - name: Select fixed 24-hour GPS targets before environmental joining
         run: >
-          python scripts/attach_peak_irg_to_gps.py
+          python scripts/select_fixed_interval_gps_targets.py
           outputs/aikens_primary_phase_gps_keys.csv
-          outputs/aikens_primary_v061_peak_irg.csv
-          --required-modis-product MOD09Q1.061
-          --minimum-matched-fraction 1.0
-          --allow-below-minimum
-          --output outputs/aikens_primary_phase_annotated_gps.csv
-          --receipt-output outputs/aikens_primary_phase_environment_join_receipt.json
-
-      - name: Evaluate frozen environmental reconstruction gate
-        id: environment_gate
-        run: |
-          python - <<'PY' >> "${GITHUB_OUTPUT}"
-          import json
-          from pathlib import Path
-
-          join = json.loads(
-              Path("outputs/aikens_primary_phase_environment_join_receipt.json")
-              .read_text(encoding="utf-8")
-          )
-          passed = bool(join.get("coverage_gate_passed"))
-          print("passed=" + ("true" if passed else "false"))
-          PY
-
-      - name: Build preregistered fixed 24-hour phase pairs
-        if: steps.environment_gate.outputs.passed == 'true'
-        run: >
-          python scripts/build_fixed_interval_phase_pairs.py
-          outputs/aikens_primary_phase_annotated_gps.csv
           --target-interval-hours 24
           --max-target-deviation-hours 3
+          --output outputs/aikens_primary_fixed_gps_targets.csv
+          --receipt-output outputs/aikens_primary_fixed_gps_targets_receipt.json
+
+      - name: Attach primary V061 phase to frozen GPS targets
+        run: >
+          python scripts/attach_peak_irg_to_fixed_targets.py
+          outputs/aikens_primary_fixed_gps_targets.csv
+          outputs/aikens_primary_v061_peak_irg.csv
+          --required-modis-product MOD09Q1.061
+          --output outputs/aikens_primary_fixed_targets_with_phase.csv
+          --receipt-output outputs/aikens_primary_fixed_targets_phase_receipt.json
+
+      - name: Build adjacent valid fixed-target phase pairs
+        run: >
+          python scripts/build_phase_pairs_from_fixed_targets.py
+          outputs/aikens_primary_fixed_targets_with_phase.csv
           --pairs-output outputs/aikens_primary_fixed_24h_phase_pairs.csv
           --receipt-output outputs/aikens_primary_fixed_24h_phase_pairs_receipt.json
 
       - name: Fit preregistered within-mule-deer lambda contrast
-        if: steps.environment_gate.outputs.passed == 'true'
         run: >
           python scripts/fit_aikens_phase_retention_contrast.py
           outputs/aikens_primary_fixed_24h_phase_pairs.csv
@@ -200,48 +188,7 @@ jobs:
 
       - name: Evaluate registered lambda gate or record NOT ESTIMABLE
         run: |
-          if [ "${{ steps.environment_gate.outputs.passed }}" != "true" ]; then
-            python - <<'PY'
-          import json
-          from pathlib import Path
-
-          join_path = Path(
-              "outputs/aikens_primary_phase_environment_join_receipt.json"
-          )
-          irg_path = Path(
-              "outputs/aikens_primary_v061_peak_irg_receipt.json"
-          )
-          join = json.loads(join_path.read_text(encoding="utf-8"))
-          irg = json.loads(irg_path.read_text(encoding="utf-8"))
-          reasons = [
-              (
-                  "environmental coverage gate failed: "
-                  f"matched_fraction={join['matched_fraction']:.6f} "
-                  "required=1.000000"
-              ),
-              "unfit pixel-years=" + str(irg.get("failed_pixel_years", 0)),
-          ]
-          payload = {
-              "status": "phase_retention_contrast_not_estimable",
-              "scientific_result": "NOT_ESTIMABLE",
-              "environment_join_receipt": str(join_path),
-              "irg_receipt": str(irg_path),
-              "reasons": reasons,
-              "lambda_outcome_opened": False,
-              "retuning_permitted": False,
-              "claim_boundary": (
-                  "the preregistered environmental reconstruction gate failed; "
-                  "the product, phase scale, matching tolerance and support "
-                  "thresholds remain frozen"
-              ),
-          }
-          Path("outputs/aikens_primary_lambda_result.json").write_text(
-              json.dumps(payload, indent=2) + "\\n",
-              encoding="utf-8",
-          )
-          print("AIKENS_PRIMARY_LAMBDA_NOT_ESTIMABLE_ENVIRONMENT")
-          PY
-          elif [ -f outputs/aikens_primary_lambda_observation.json ]; then
+          if [ -f outputs/aikens_primary_lambda_observation.json ]; then
             python scripts/evaluate_phase_retention_contrast.py \
               --registration-json data/aikens2022_lambda_perturbation_registration_20260921.json \
               --observation-json outputs/aikens_primary_lambda_observation.json \
@@ -252,21 +199,44 @@ jobs:
           from pathlib import Path
 
           fit_path = Path("outputs/aikens_primary_lambda_fit_receipt.json")
+          phase_path = Path(
+              "outputs/aikens_primary_fixed_targets_phase_receipt.json"
+          )
+          pair_path = Path(
+              "outputs/aikens_primary_fixed_24h_phase_pairs_receipt.json"
+          )
           fit = json.loads(fit_path.read_text(encoding="utf-8"))
+          phase = json.loads(phase_path.read_text(encoding="utf-8"))
+          pairs = json.loads(pair_path.read_text(encoding="utf-8"))
+          reasons = list(fit["fit"].get("reasons", []))
+          reasons.append(
+              "valid environmental targets="
+              + str(phase.get("valid_targets", 0))
+              + "/"
+              + str(phase.get("total_targets", 0))
+          )
+          reasons.append(
+              "adjacent valid phase pairs="
+              + str(pairs.get("phase_pairs", 0))
+          )
           payload = {
               "status": "phase_retention_contrast_not_estimable",
               "scientific_result": "NOT_ESTIMABLE",
               "fit_receipt": str(fit_path),
-              "reasons": fit["fit"].get("reasons", []),
+              "phase_receipt": str(phase_path),
+              "pair_receipt": str(pair_path),
+              "reasons": reasons,
               "lambda_outcome_opened": False,
               "retuning_permitted": False,
               "claim_boundary": (
-                  "registered sample-support gate was not met; the phase scale, "
-                  "tolerance, product, and support thresholds remain frozen"
+                  "registered sample-support gate was not met after frozen "
+                  "GPS target selection and environmental validity filtering; "
+                  "the interval, tolerance, product and support thresholds "
+                  "remain unchanged"
               ),
           }
           Path("outputs/aikens_primary_lambda_result.json").write_text(
-              json.dumps(payload, indent=2) + "\\n",
+              json.dumps(payload, indent=2) + "\n",
               encoding="utf-8",
           )
           print("AIKENS_PRIMARY_LAMBDA_NOT_ESTIMABLE_SUPPORT")
@@ -304,8 +274,10 @@ jobs:
             outputs/aikens_primary_v061_peak_irg_receipt.json
             outputs/aikens_primary_phase_gps_keys.csv
             outputs/aikens_primary_phase_gps_keys_receipt.json
-            outputs/aikens_primary_phase_annotated_gps.csv
-            outputs/aikens_primary_phase_environment_join_receipt.json
+            outputs/aikens_primary_fixed_gps_targets.csv
+            outputs/aikens_primary_fixed_gps_targets_receipt.json
+            outputs/aikens_primary_fixed_targets_with_phase.csv
+            outputs/aikens_primary_fixed_targets_phase_receipt.json
             outputs/aikens_primary_fixed_24h_phase_pairs.csv
             outputs/aikens_primary_fixed_24h_phase_pairs_receipt.json
             outputs/aikens_primary_lambda_fit_receipt.json
@@ -316,4 +288,6 @@ jobs:
             outputs/aikens_primary_geb_submission_audit.json
             data/aikens2022_environment_product_amendment_20260922.json
             data/aikens2022_phase_reconstruction_execution_contract_20260922.json
+            data/aikens2022_phase_reconstruction_execution_contract_v2_20260922.json
             docs/PAYOFF_B_AIKENS_ENVIRONMENT_PRODUCT_AMENDMENT_20260922.md
+            docs/PAYOFF_B_AIKENS_FIXED_TARGET_EXECUTION_AMENDMENT_V2_20260922.md
