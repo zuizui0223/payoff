@@ -200,7 +200,7 @@ jobs:
 
       - name: Evaluate registered lambda gate or record NOT ESTIMABLE
         run: |
-          if [ "\${{ steps.environment_gate.outputs.passed }}" != "true" ]; then
+          if [ "${{ steps.environment_gate.outputs.passed }}" != "true" ]; then
             python - <<'PY'
           import json
           from pathlib import Path
@@ -272,6 +272,7 @@ jobs:
           print("AIKENS_PRIMARY_LAMBDA_NOT_ESTIMABLE_SUPPORT")
           PY
           fi
+
       - name: Render preregistered Aikens outcome into GEB manuscript
         run: >
           python scripts/render_aikens_lambda_manuscript.py
