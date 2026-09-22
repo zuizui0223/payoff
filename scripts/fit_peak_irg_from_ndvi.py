@@ -41,6 +41,26 @@ def main() -> None:
         choices=("MOD09Q1.006", "MOD09Q1.061"),
         required=True,
     )
+    parser.add_argument(
+        "--v061-reconstruction-lane",
+        choices=(
+            "v061_sensitivity_only",
+            "v061_primary_successor_after_v006_decommission",
+        ),
+        default="v061_sensitivity_only",
+        help=(
+            "declared role of MOD09Q1.061; ignored for historical V006 "
+            "except that non-default V061 roles are rejected"
+        ),
+    )
+    parser.add_argument(
+        "--allow-unfit-pixel-years",
+        action="store_true",
+        help=(
+            "record pixel-year reconstruction failures as auditable coverage "
+            "loss instead of aborting the whole environmental reconstruction"
+        ),
+    )
     parser.add_argument("--pixel-column", default="pixel_id")
     parser.add_argument("--year-column", default="year")
     parser.add_argument("--doy-column", default="doy")
