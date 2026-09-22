@@ -56,6 +56,21 @@ jobs:
           --output outputs/aikens_primary_phase_gps_keys.csv
           --receipt-output outputs/aikens_primary_phase_gps_keys_receipt.json
 
+      - name: Require frozen target-selection v2 contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          contract = json.loads(
+              Path("data/aikens2022_phase_reconstruction_execution_contract_v2_20260922.json")
+              .read_text(encoding="utf-8")
+          )
+          assert contract["outcome_state_at_freeze"] == "lambda_outcome_unopened"
+          assert contract["target_selection"]["environment_used_for_selection"] is False
+          assert "earlier observed timestamp" in contract["target_selection"]["tie_break_rule"]
+          print("AIKENS_FIXED_TARGET_V2_CONTRACT_OK")
+          PY
+
       - name: Freeze 24-hour GPS targets before environment
         run: >
           python scripts/select_fixed_interval_gps_targets.py
