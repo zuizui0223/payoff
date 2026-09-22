@@ -4,7 +4,7 @@
 
 ## Abstract
 
-**Aim:** We test whether migratory systems can be compared by a common phase-retention coordinate that measures how animal–environment timing deviation changes after movement, while keeping environmental predictability separate from realized correction.
+**Aim:** We test whether a common phase-retention coordinate compares migratory systems while separating environmental predictability from realized correction.
 
 **Location:** Eastern North America, the western United States, North Atlantic–Arctic goose flyways, and the Eurasian wigeon migration corridor.
 
@@ -12,7 +12,7 @@
 
 **Major taxa studied:** Migratory birds and ungulates, with direct reconstructions for mule deer (*Odocoileus hemionus*), barnacle goose (*Branta leucopsis*) and Eurasian wigeon (*Mareca penelope*).
 
-**Methods:** We first tested a universal movement-to-phenology speed-ratio prediction using 5,816 bird-year-cell observations from 55 species. We then defined signed phase as E = T_a − T_e and estimated phase retention from E_next = a + λE_current + ε over declared movement intervals. Public biologging and environmental data were reconstructed for three taxa, environmental timing innovation was estimated separately, and an industrial-development perturbation tested actuation limits.
+**Methods:** We tested a universal movement-to-phenology speed ratio in 5,816 bird-year-cell observations from 55 species, then estimated signed phase retention from E_next = a + λE_current + ε over declared movement intervals. We reconstructed three direct taxa, estimated environmental timing innovation separately, and tested an industrial-development perturbation.
 
 **Results:** Broad bird data rejected one universal natural speed optimum. Direct systems nevertheless showed phase contraction with strongly heterogeneous retention: mule deer (|λ| ≈ 0.11), primary barnacle-goose transitions (|λ| ≈ 0.11–0.49), and wigeon (|λ| ≈ 0.86). Mule deer used speed and stopover adjustments, barnacle geese used stage-specific stopover control and overtaking, whereas wigeon showed weak contraction without detected stopover or travel-speed responses. Environmental predictability did not map monotonically onto correction strength. Industrial development attenuated a movement-control permeability proxy, while a stronger predicted temporal deterioration was unsupported. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
 [AIKENS LAMBDA ABSTRACT PENDING — render from the registered result JSON before submission.]
