@@ -1,7 +1,13 @@
 # GEB movement–phenology portal handoff
 
-Status: **repository-controlled submission package complete**  
-Status date: 2026-09-21
+Status: **SCIENCE HOLD — DO NOT SUBMIT**  
+Status date: 2026-09-22
+
+The former submission-ready package is superseded. The source-faithful wigeon
+Jan--Jul reconstruction changed both lambda and the stopover actuator result.
+Submission is blocked until the frozen measurement-error calibration and
+true-lambda=1 observation-scale null are completed. The historical V2
+manuscript and reviewer snapshot must not be uploaded to the journal.
 
 ## Submission target
 
