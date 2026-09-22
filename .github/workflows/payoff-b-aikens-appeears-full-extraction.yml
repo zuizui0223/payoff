@@ -137,6 +137,7 @@ jobs:
           outputs/aikens_full_v061_irg_input.csv
           --modis-product MOD09Q1.061
           --v061-reconstruction-lane v061_primary_successor_after_v006_decommission
+          --allow-unfit-pixel-years
           --output outputs/aikens_primary_v061_peak_irg.csv
           --receipt-output outputs/aikens_primary_v061_peak_irg_receipt.json
 
@@ -148,17 +149,34 @@ jobs:
           --output outputs/aikens_primary_phase_gps_keys.csv
           --receipt-output outputs/aikens_primary_phase_gps_keys_receipt.json
 
-      - name: Attach primary local peak IRG to every retained GPS observation
+      - name: Attach primary local peak IRG and audit frozen coverage
         run: >
           python scripts/attach_peak_irg_to_gps.py
           outputs/aikens_primary_phase_gps_keys.csv
           outputs/aikens_primary_v061_peak_irg.csv
           --required-modis-product MOD09Q1.061
           --minimum-matched-fraction 1.0
+          --allow-below-minimum
           --output outputs/aikens_primary_phase_annotated_gps.csv
           --receipt-output outputs/aikens_primary_phase_environment_join_receipt.json
 
+      - name: Evaluate frozen environmental reconstruction gate
+        id: environment_gate
+        run: |
+          python - <<'PY' >> "${GITHUB_OUTPUT}"
+          import json
+          from pathlib import Path
+
+          join = json.loads(
+              Path("outputs/aikens_primary_phase_environment_join_receipt.json")
+              .read_text(encoding="utf-8")
+          )
+          passed = bool(join.get("coverage_gate_passed"))
+          print("passed=" + ("true" if passed else "false"))
+          PY
+
       - name: Build preregistered fixed 24-hour phase pairs
+        if: steps.environment_gate.outputs.passed == 'true'
         run: >
           python scripts/build_fixed_interval_phase_pairs.py
           outputs/aikens_primary_phase_annotated_gps.csv
@@ -168,6 +186,7 @@ jobs:
           --receipt-output outputs/aikens_primary_fixed_24h_phase_pairs_receipt.json
 
       - name: Fit preregistered within-mule-deer lambda contrast
+        if: steps.environment_gate.outputs.passed == 'true'
         run: >
           python scripts/fit_aikens_phase_retention_contrast.py
           outputs/aikens_primary_fixed_24h_phase_pairs.csv
@@ -181,7 +200,48 @@ jobs:
 
       - name: Evaluate registered lambda gate or record NOT ESTIMABLE
         run: |
-          if [ -f outputs/aikens_primary_lambda_observation.json ]; then
+          if [ "\${{ steps.environment_gate.outputs.passed }}" != "true" ]; then
+            python - <<'PY'
+          import json
+          from pathlib import Path
+
+          join_path = Path(
+              "outputs/aikens_primary_phase_environment_join_receipt.json"
+          )
+          irg_path = Path(
+              "outputs/aikens_primary_v061_peak_irg_receipt.json"
+          )
+          join = json.loads(join_path.read_text(encoding="utf-8"))
+          irg = json.loads(irg_path.read_text(encoding="utf-8"))
+          reasons = [
+              (
+                  "environmental coverage gate failed: "
+                  f"matched_fraction={join['matched_fraction']:.6f} "
+                  "required=1.000000"
+              ),
+              "unfit pixel-years=" + str(irg.get("failed_pixel_years", 0)),
+          ]
+          payload = {
+              "status": "phase_retention_contrast_not_estimable",
+              "scientific_result": "NOT_ESTIMABLE",
+              "environment_join_receipt": str(join_path),
+              "irg_receipt": str(irg_path),
+              "reasons": reasons,
+              "lambda_outcome_opened": False,
+              "retuning_permitted": False,
+              "claim_boundary": (
+                  "the preregistered environmental reconstruction gate failed; "
+                  "the product, phase scale, matching tolerance and support "
+                  "thresholds remain frozen"
+              ),
+          }
+          Path("outputs/aikens_primary_lambda_result.json").write_text(
+              json.dumps(payload, indent=2) + "\\n",
+              encoding="utf-8",
+          )
+          print("AIKENS_PRIMARY_LAMBDA_NOT_ESTIMABLE_ENVIRONMENT")
+          PY
+          elif [ -f outputs/aikens_primary_lambda_observation.json ]; then
             python scripts/evaluate_phase_retention_contrast.py \
               --registration-json data/aikens2022_lambda_perturbation_registration_20260921.json \
               --observation-json outputs/aikens_primary_lambda_observation.json \
@@ -201,19 +261,17 @@ jobs:
               "lambda_outcome_opened": False,
               "retuning_permitted": False,
               "claim_boundary": (
-                  "registered support or reconstruction gate was not met; "
-                  "the phase scale, tolerance, product, and support thresholds "
-                  "remain frozen"
+                  "registered sample-support gate was not met; the phase scale, "
+                  "tolerance, product, and support thresholds remain frozen"
               ),
           }
           Path("outputs/aikens_primary_lambda_result.json").write_text(
-              json.dumps(payload, indent=2) + "\n",
+              json.dumps(payload, indent=2) + "\\n",
               encoding="utf-8",
           )
-          print("AIKENS_PRIMARY_LAMBDA_NOT_ESTIMABLE")
+          print("AIKENS_PRIMARY_LAMBDA_NOT_ESTIMABLE_SUPPORT")
           PY
           fi
-
       - name: Render preregistered Aikens outcome into GEB manuscript
         run: >
           python scripts/render_aikens_lambda_manuscript.py
