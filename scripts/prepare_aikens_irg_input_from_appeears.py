@@ -226,6 +226,14 @@ def main() -> None:
         required=True,
     )
     parser.add_argument(
+        "--reconstruction-lane",
+        choices=(
+            "v061_sensitivity_only",
+            "v061_primary_successor_after_v006_decommission",
+        ),
+        default="v061_sensitivity_only",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=Path(
@@ -323,7 +331,7 @@ def main() -> None:
 
     receipt = {
         "status": "appeears_v061_irg_input_ready",
-        "reconstruction_lane": "v061_sensitivity_only",
+        "reconstruction_lane": args.reconstruction_lane,
         "mod09q1_source": str(
             args.mod09q1_results
         ),
@@ -344,7 +352,7 @@ def main() -> None:
             "AppEEARS scale-applied physical reflectance"
         ),
         "quality_rule": (
-            "strict V061 sensitivity screen: ideal MODLAND, highest b1/b2 "
+            "strict V061 screen: ideal MODLAND, highest b1/b2 "
             "quality, atmospheric correction, clear/no-shadow/no-internal-"
             "cloud/no-adjacent-cloud, non-high aerosol"
         ),
@@ -354,8 +362,17 @@ def main() -> None:
         ),
         "lambda_outcome_opened": False,
         "claim_boundary": (
-            "current-product V061 sensitivity preprocessing only; "
-            "not study-faithful V006 reconstruction"
+            (
+                "current-product V061 preprocessing under the frozen "
+                "2026-09-22 primary-successor amendment; not a byte-faithful "
+                "V006 reconstruction"
+            )
+            if args.reconstruction_lane
+            == "v061_primary_successor_after_v006_decommission"
+            else (
+                "current-product V061 sensitivity preprocessing only; "
+                "not study-faithful V006 reconstruction"
+            )
         ),
     }
     args.receipt_output.parent.mkdir(
