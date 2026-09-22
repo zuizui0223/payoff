@@ -2,15 +2,14 @@
 
 Frozen: 2026-09-21
 
-> **2026-09-22 revalidation override:** the previously promoted wigeon
-> `lambda=0.85994` result is suspended after a source-faithfulness audit found
-> that the POWER reconstruction used a full-year TGS cumulative-minimum window,
-> whereas the published environmental code first restricts the TGS calculation
-> to January--July (`month(days)<8`). Wigeon is temporarily removed from
-> confirmatory cross-system support until the source-faithful reconstruction is
-> complete. See
-> `docs/PAYOFF_B_WIGEON_TGS_SOURCE_WINDOW_REVALIDATION_20260922.md`.
-
+> **2026-09-22 revalidation update:** source-faithful wigeon reconstruction is
+> complete. The published TGS contract restricts temperatures to January--July
+> before applying the 5 C cumulative-minimum rule. The corrected prospective
+> estimate is `lambda_hat=0.749768` (SE 0.049906; naive p versus 1 =
+> 5.33e-07). The formal W2 stopover prediction now passes
+> (slope=-0.06286, p=0.0317), while travel speed remains unsupported.
+> The old `lambda=0.85994 / actuator FAIL` classification is superseded.
+> See `docs/PAYOFF_B_WIGEON_PHASE_RETENTION_REVALIDATED_20260922.md`.
 
 ## Current panel
 
@@ -31,15 +30,16 @@ Direct phase-retention coordinate currently contains three taxa:
 
 3. Eurasian wigeon
    - taxon: Mareca penelope
-   - preregistered prospective third-taxon result
+   - preregistered prospective third-taxon result, source-window revalidated
    - 224 consecutive staging transitions / 28 individuals
-   - lambda = 0.85994
-   - SE = 0.04509
-   - p versus lambda=1 = 0.00190
+   - naive lambda_hat = 0.749768
+   - SE = 0.049906
+   - naive p versus lambda_hat=1 = 5.33e-07
    - primary lambda<1 prediction PASS
-   - stronger |lambda|<0.75 forecast FAIL
-   - stopover actuator NOT SUPPORTED
+   - stronger |lambda|<=0.75 point forecast PASS, narrowly
+   - formal stopover actuator PASS
    - travel-speed actuator NOT SUPPORTED
+   - distance moderation NOT SUPPORTED
 
 ## What is established
 
@@ -51,13 +51,15 @@ It does not support:
 
 > one universal retention coefficient.
 
-It also does not support:
+It does not support:
 
-> one universal speed / stopover / route-reset actuator.
+> one universal full actuator architecture.
 
-The wigeon prospective result is especially informative because it expands the
-observed direct coordinate into a weak-contraction regime while failing the
-stronger cross-system correction forecast.
+The source-faithful wigeon result adds a different pattern from the previously
+promoted analysis. Stopover/waiting compensation is now prospectively supported
+in wigeon and is also observed in mule deer and barnacle geese, making it a
+recurrent cross-system actuator. Travel-speed and route-level contributions
+remain system-dependent.
 
 ## Measurement-error audit added 2026-09-22
 
@@ -86,9 +88,13 @@ error correlations are calibrated for each system:
     latent lambda < 1 from naive lambda_hat < 1 alone:
         NOT YET LICENSED
 
-The preregistered wigeon result remains a valid estimator-scale result, but its
-p-value against lambda_hat=1 is not a substitute for a true-lambda=1
-errors-in-variables null.
+The corrected wigeon result is a valid source-faithful estimator-scale result,
+but its naive p-value against lambda_hat=1 is not a substitute for a
+true-lambda=1 errors-in-variables null. Its observed origin-phase SD is
+15.88 d; under the simple equal-independent-error stress model, about 7.94 d of
+phase-error SD would be sufficient in expectation to reproduce the observed
+lambda_hat from latent lambda=1. That number is a stress threshold, not an
+empirical error estimate.
 
 ## Additional within-taxon actuator evidence
 
@@ -159,13 +165,16 @@ The empirical programme therefore moved from
 
 to
 
-    common phase-retention coordinate + system-specific actuator.
+    common phase-retention coordinate
+    + recurrent stopover/waiting correction
+    + system-dependent speed / route components.
 
 ## Confirmatory versus descriptive evidence
 
 The three-taxon direct coordinate is descriptive.
 
-The wigeon third-taxon lambda test is prospective.
+The source-faithful wigeon third-taxon lambda test and W2 stopover prediction
+are prospective.
 
 Retrospective or previously reconstructed systems remain visible, but they do
 not count as additional prospective lambda support merely because they can be
@@ -204,14 +213,37 @@ panel size without materially strengthening the central claim.
 
 ## Current preferred next empirical move
 
-The preferred next empirical task is therefore not
+The preferred next empirical task is **not** to add a fourth taxon and is now
+also **not** to open the Aikens lambda outcome immediately.
 
-    find another migratory species.
+The source-faithful wigeon correction shows that environmental observation
+details can materially shift both lambda and actuator inference. The next gate
+is therefore source-backed phase-error calibration for the direct systems,
+with wigeon first because it is the prospective third-taxon test.
 
-The selected next experiment is now the **Aikens industrial-development
-within-mule-deer lambda perturbation**.
+Required before biological interpretation of latent lambda:
 
-This holds taxon fixed while changing forcing regime and asks
+    observed predictor phase variance:
+        source-faithful value frozen
+
+    predictor measurement-error SD:
+        PENDING
+
+    outcome measurement-error SD:
+        PENDING
+
+    consecutive-error correlation:
+        PENDING
+
+    true-lambda=1 observation-scale null:
+        PENDING.
+
+The Aikens industrial-development within-mule-deer lambda perturbation remains
+preregistered and unopened. It should stay unopened until this recovery/null
+layer is frozen enough that the new Aikens result cannot determine how phase
+measurement error will be handled.
+
+The Aikens prediction remains
 
     lambda_large-development
     >
@@ -225,52 +257,8 @@ and segment scale
 
     fixed_24h_spring_migration_interval.
 
-This experiment is intentionally **not** added to the cross-system lambda
-synthesis because its phase-coordinate / segment contract differs from the
-current direct migratory panel. It occupies the separate
-
-    within-system lambda perturbation
-
-evidence lane.
-
-The inferential sequence is stronger than adding a fourth taxon mechanically:
-
-    independently measured actuator attenuation
-    -> prospective forcing perturbation
-    -> does lambda itself change?
-
-Possible outcomes are both informative:
-
-    actuator attenuation PASS
-    lambda perturbation PASS
-
-would show that the forcing perturbation propagates into the common controller
-coordinate within one taxon;
-
-    actuator attenuation PASS
-    lambda perturbation FAIL
-
-would show that the measured actuator change does not necessarily alter lambda.
-
-The fixed registration is
-
-    docs/PAYOFF_B_AIKENS_LAMBDA_PERTURBATION_PREREGISTRATION_20260921.md
-
-and its machine registration is
-
-    data/aikens2022_lambda_perturbation_registration_20260921.json.
-
-The evidence-inclusion gate classifies it as included, but with
-
-    contributes_to_lambda_synthesis = FALSE
-
-and
-
-    contributes_within_system_lambda_perturbation = TRUE.
-
-The exact 64,539-point movement source and canonical AppEEARS request geometry
-are already frozen. The remaining V061 sensitivity-lane blocker is authenticated
-environmental extraction; the lambda outcome remains unopened.
+It remains a within-system lambda perturbation and is not added to the
+cross-system lambda synthesis.
 
 More generally, future additional systems should test a new region or boundary
 of lambda-space.
@@ -288,7 +276,11 @@ These would test the geometry rather than merely replicate taxonomy.
 
 ## Frozen references
 
-Wigeon quantitative receipt:
+Wigeon corrected quantitative receipt:
+
+    docs/PAYOFF_B_WIGEON_PHASE_RETENTION_REVALIDATED_20260922.md
+
+Historical superseded receipt:
 
     docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md
 
@@ -323,7 +315,8 @@ Do not report:
 
 Preferred:
 
-> Direct movement systems occupy a common phase-retention coordinate but differ
-> strongly in correction strength and actuator architecture; the prospective
-> wigeon test supports the common coordinate while falsifying a stronger
-> correction forecast and shared actuator expectation.
+> Direct movement systems occupy a common phase-retention coordinate.
+> Stopover/waiting compensation recurs across all three direct taxa, whereas
+> movement-speed and route-level contributions remain system-dependent.
+> Magnitude comparisons among naive lambda estimates remain conditional on the
+> frozen measurement-error audit.
