@@ -1,0 +1,31 @@
+name: Movement-phenology GEB submission audit
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V2.md'
+      - 'scripts/audit_movement_phenology_geb.py'
+      - '.github/workflows/audit-movement-phenology-geb.yml'
+  pull_request:
+    paths:
+      - 'manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V2.md'
+      - 'scripts/audit_movement_phenology_geb.py'
+      - '.github/workflows/audit-movement-phenology-geb.yml'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit blinded GEB manuscript and record science hold
+        run: python scripts/audit_movement_phenology_geb.py --allow-science-hold
+      - uses: actions/upload-artifact@v4
+        with:
+          name: movement-phenology-geb-submission-audit
+          path: outputs/movement_phenology/geb_submission_audit.json
+          if-no-files-found: error

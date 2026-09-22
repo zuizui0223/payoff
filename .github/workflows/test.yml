@@ -12,9 +12,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python -m pip install --upgrade pip pytest
+      - run: python -m pip install --upgrade pip pytest numpy scipy pandas numpy scipy
       - run: python scripts/self_check.py
       - run: pytest -q
+      - run: python analysis/movement_phenology/cross_taxon_phase_retention.py
       - run: python scripts/phase_sweep.py --phi-min -0.2 --phi-max 0.2 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_phase_grid.csv
       - run: python scripts/lke_phase_sweep.py --s 0.5 --l-min 0 --l-max 0.4 --k-min 0 --k-max 0.4 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_lke_phase_grid.csv
       - run: python scripts/finite_population_sweep.py --n 20 --beta 0.05 --phi-min -0.2 --phi-max 0.2 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_finite_population_grid.csv

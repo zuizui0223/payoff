@@ -1,0 +1,42 @@
+name: Movement-phenology industrial mule deer Dryad audit
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'analysis/movement_phenology/stage3_industrial_mule_deer_dryad_probe.py'
+      - '.github/workflows/movement-phenology-industrial-mule-deer.yml'
+  pull_request:
+    paths:
+      - 'analysis/movement_phenology/stage3_industrial_mule_deer_dryad_probe.py'
+      - '.github/workflows/movement-phenology-industrial-mule-deer.yml'
+
+jobs:
+  dryad-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install source-audit dependencies
+        run: python -m pip install --disable-pip-version-check requests pandas pyshp shapely statsmodels numpy pyproj
+      - name: Audit public Dryad source and attempt documented download
+        run: python analysis/movement_phenology/stage3_industrial_mule_deer_dryad_probe.py
+
+      - name: Quantify development control permeability
+        run: python analysis/movement_phenology/stage3_industrial_mule_deer_permeability.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: movement-phenology-industrial-mule-deer
+          path: |
+            outputs/movement_phenology/stage3_industrial_mule_deer_dryad_receipt.json
+            outputs/movement_phenology/stage3_industrial_mule_deer_schema.csv
+            outputs/movement_phenology/stage3_industrial_mule_deer_steps.csv
+            outputs/movement_phenology/stage3_industrial_mule_deer_gps.csv
+            outputs/movement_phenology/stage3_industrial_mule_deer_individual_year_G.csv
+            outputs/movement_phenology/stage3_industrial_mule_deer_G_by_year_population.csv
+            outputs/movement_phenology/stage3_industrial_mule_deer_permeability_sensitivity.csv
+            outputs/movement_phenology/stage3_industrial_mule_deer_permeability_receipt.json
+          if-no-files-found: error

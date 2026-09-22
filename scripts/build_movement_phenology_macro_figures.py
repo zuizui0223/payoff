@@ -1,0 +1,320 @@
+#!/usr/bin/env python3
+"""Build publication-oriented movement–phenology synthesis figures.
+
+Figure 4 has two panels:
+A. one descriptive phase-retention record per taxon; repeated barnacle-goose
+   routes appear as an observed within-taxon range, not independent studies;
+B. independently reconstructed environmental innovation versus phase retention
+   for stable barnacle-goose transitions.
+
+The figure is descriptive. Whiskers in panel A are within-taxon route ranges,
+not confidence intervals. Panel B transition points are not independent studies.
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DIRECT = ROOT / "data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv"
+UNCERTAINTY = ROOT / "data/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_REGISTRY.csv"
+INDUSTRIAL = ROOT / "data/MOVEMENT_PHENOLOGY_INDUSTRIAL_PERMEABILITY_REGISTRY.csv"
+OUT = ROOT / "outputs/movement_phenology/figures"
+OUT.mkdir(parents=True, exist_ok=True)
+
+
+TAXON_LABELS = {
+    "Odocoileus hemionus": "Mule deer",
+    "Branta leucopsis": "Barnacle goose",
+    "Mareca penelope": "Eurasian wigeon",
+}
+
+
+def taxon_summary() -> pd.DataFrame:
+    d = pd.read_csv(DIRECT)
+    d = d[d["status"].astype(str).str.startswith("DIRECT_")].copy()
+    d["phase_retention_abs"] = pd.to_numeric(
+        d["phase_retention_abs"], errors="coerce"
+    )
+    d = d[np.isfinite(d["phase_retention_abs"])].copy()
+
+    rows = []
+    for taxon, x in d.groupby("taxon"):
+        vals = x["phase_retention_abs"].to_numpy(float)
+        rows.append(
+            {
+                "taxon": taxon,
+                "label": TAXON_LABELS.get(taxon, taxon),
+                "median_abs_lambda": float(np.median(vals)),
+                "min_abs_lambda": float(np.min(vals)),
+                "max_abs_lambda": float(np.max(vals)),
+                "n_direct_rows": int(len(x)),
+            }
+        )
+    order = ["Odocoileus hemionus", "Branta leucopsis", "Mareca penelope"]
+    out = pd.DataFrame(rows)
+    out["order"] = out["taxon"].map({x: i for i, x in enumerate(order)})
+    return out.sort_values("order").reset_index(drop=True)
+
+
+def build_figure4() -> Path:
+    taxa = taxon_summary()
+    env = pd.read_csv(UNCERTAINTY)
+    env = env[
+        env["stable_phase_map"].astype(str).str.lower().eq("true")
+    ].copy()
+    env["environmental_innovation_sd_days"] = pd.to_numeric(
+        env["environmental_innovation_sd_days"], errors="coerce"
+    )
+    env["abs_lambda"] = pd.to_numeric(env["abs_lambda"], errors="coerce")
+    env = env.dropna(
+        subset=["environmental_innovation_sd_days", "abs_lambda"]
+    )
+
+    fig, axes = plt.subplots(
+        1,
+        2,
+        figsize=(11.4, 4.9),
+        gridspec_kw={"width_ratios": [0.9, 1.1]},
+        constrained_layout=True,
+    )
+
+    # Panel A — taxon-level retention.
+    ax = axes[0]
+    y = np.arange(len(taxa))
+    for i, row in taxa.iterrows():
+        lo = row["median_abs_lambda"] - row["min_abs_lambda"]
+        hi = row["max_abs_lambda"] - row["median_abs_lambda"]
+        ax.errorbar(
+            row["median_abs_lambda"],
+            i,
+            xerr=np.array([[lo], [hi]]),
+            fmt="o",
+            capsize=5,
+            linewidth=1.6,
+            markersize=7,
+            color="black",
+        )
+        ax.text(
+            row["median_abs_lambda"] + 0.025,
+            i + 0.14,
+            f'{row["median_abs_lambda"]:.2f}',
+            fontsize=9,
+        )
+
+    ax.axvline(1.0, linestyle="--", linewidth=1.2)
+    ax.set_xlim(-0.02, 1.06)
+    ax.set_yticks(y, taxa["label"])
+    ax.invert_yaxis()
+    ax.set_xlabel(r"Phase retention $R_\phi=|\lambda|$")
+    ax.set_title("A  Phase retention spans a broad range")
+    ax.text(
+        0.985,
+        0.50,
+        "no correction",
+        transform=ax.transAxes,
+        rotation=90,
+        va="center",
+        ha="right",
+        fontsize=8,
+    )
+    ax.text(
+        0.01,
+        -0.17,
+        "Barnacle-goose whisker = observed route range, not a CI",
+        transform=ax.transAxes,
+        fontsize=8,
+        va="top",
+    )
+
+    # Panel B — two-channel plane.
+    ax = axes[1]
+    markers = {"Greenland": "s", "Barents": "o"}
+    for flyway, d in env.groupby("flyway"):
+        marker = markers.get(flyway, "o")
+        if flyway == "Greenland":
+            ax.scatter(
+                d["environmental_innovation_sd_days"],
+                d["abs_lambda"],
+                marker=marker,
+                s=55,
+                label=flyway,
+                facecolors="white",
+                edgecolors="black",
+                linewidths=1.4,
+            )
+        else:
+            ax.scatter(
+                d["environmental_innovation_sd_days"],
+                d["abs_lambda"],
+                marker=marker,
+                s=55,
+                label=flyway,
+                color="black",
+            )
+        for _, row in d.iterrows():
+            ax.annotate(
+                row["transition"],
+                (
+                    row["environmental_innovation_sd_days"],
+                    row["abs_lambda"],
+                ),
+                xytext=(5, 5),
+                textcoords="offset points",
+                fontsize=8,
+            )
+
+    ax.axhline(1.0, linestyle="--", linewidth=1.2)
+    ax.set_xlim(
+        max(0, env["environmental_innovation_sd_days"].min() - 0.5),
+        env["environmental_innovation_sd_days"].max() + 0.7,
+    )
+    ax.set_ylim(-0.03, 1.05)
+    ax.set_xlabel("Environmental innovation SD (days)")
+    ax.set_ylabel(r"Phase retention $|\lambda|$")
+    ax.set_title("B  Information and correction are separate channels")
+    ax.legend(frameon=False, title="Flyway", loc="upper left")
+    ax.text(
+        0.99,
+        -0.17,
+        "Transition points share species/routes; not independent studies",
+        transform=ax.transAxes,
+        fontsize=8,
+        ha="right",
+        va="top",
+    )
+
+    fig.suptitle(
+        "Movement–phenology phase control: common coordinate, heterogeneous regimes",
+        fontsize=13,
+    )
+
+    png = OUT / "FIG4_PHASE_RETENTION_INFORMATION.png"
+    pdf = OUT / "FIG4_PHASE_RETENTION_INFORMATION.pdf"
+    svg = OUT / "FIG4_PHASE_RETENTION_INFORMATION.svg"
+    fig.savefig(png, dpi=300, bbox_inches="tight")
+    fig.savefig(pdf, bbox_inches="tight")
+    fig.savefig(svg, bbox_inches="tight")
+    plt.close(fig)
+
+    taxa.to_csv(OUT / "FIG4_PANEL_A_DATA.csv", index=False)
+    env.to_csv(OUT / "FIG4_PANEL_B_DATA.csv", index=False)
+    return png
+
+
+
+def build_figure5() -> Path:
+    """Industrial-development actuation sensitivity and failed time-trend forecast."""
+    d = pd.read_csv(INDUSTRIAL)
+    d["definition"] = (
+        d["edge_km"].astype(int).astype(str)
+        + "/"
+        + d["far_km"].astype(int).astype(str)
+        + " km"
+    )
+
+    fig, axes = plt.subplots(
+        1,
+        2,
+        figsize=(11.4, 4.9),
+        constrained_layout=True,
+    )
+
+    # Panel A: every registered threshold definition gives lower G in the
+    # large-development population.
+    ax = axes[0]
+    for i, row in d.iterrows():
+        primary = int(row["edge_km"]) == 2 and int(row["far_km"]) == 10
+        ax.plot(
+            [0, 1],
+            [row["median_G_small"], row["median_G_large"]],
+            marker="o",
+            linewidth=2.2 if primary else 1.0,
+            alpha=1.0 if primary else 0.45,
+            color="black",
+            markersize=6 if primary else 5,
+        )
+        if primary:
+            ax.annotate(
+                "primary 2/10 km",
+                (1, row["median_G_large"]),
+                xytext=(7, -2),
+                textcoords="offset points",
+                fontsize=8,
+            )
+    ax.set_xticks([0, 1], ["Small development", "Large development"])
+    ax.set_ylabel("Median control permeability G")
+    ax.set_title("A  Development contrast is directionally robust")
+    ax.text(
+        0.02,
+        0.02,
+        "8/8 registered definitions: G_large < G_small\n"
+        "Primary clustered population shift: p = 0.017",
+        transform=ax.transAxes,
+        fontsize=8,
+        va="bottom",
+    )
+
+    # Panel B: stronger longitudinal decline was not supported.
+    ax = axes[1]
+    y = np.arange(len(d))
+    est = d["year_x_large_beta"].to_numpy(float)
+    se = d["year_x_large_se"].to_numpy(float)
+    for i, row in d.reset_index(drop=True).iterrows():
+        primary = int(row["edge_km"]) == 2 and int(row["far_km"]) == 10
+        ax.errorbar(
+            row["year_x_large_beta"],
+            i,
+            xerr=1.96 * row["year_x_large_se"],
+            fmt="D" if primary else "o",
+            capsize=4,
+            linewidth=1.4 if primary else 1.1,
+            markersize=6 if primary else 4.5,
+            color="black",
+        )
+    ax.axvline(0.0, linestyle="--", linewidth=1.2)
+    ax.set_yticks(y, d["definition"])
+    ax.invert_yaxis()
+    ax.set_xlabel("Year × large-development coefficient")
+    ax.set_ylabel("Near / far definition")
+    ax.set_title("B  Stronger temporal deterioration is not supported")
+    ax.text(
+        0.98,
+        0.02,
+        "All registered interaction p-values > 0.32",
+        transform=ax.transAxes,
+        ha="right",
+        va="bottom",
+        fontsize=8,
+    )
+
+    fig.suptitle(
+        "Industrial development attenuates movement control; extra temporal decline is not detected",
+        fontsize=13,
+    )
+
+    png = OUT / "FIG5_CONTROL_PERMEABILITY.png"
+    pdf = OUT / "FIG5_CONTROL_PERMEABILITY.pdf"
+    svg = OUT / "FIG5_CONTROL_PERMEABILITY.svg"
+    fig.savefig(png, dpi=300, bbox_inches="tight")
+    fig.savefig(pdf, bbox_inches="tight")
+    fig.savefig(svg, bbox_inches="tight")
+    plt.close(fig)
+
+    d.to_csv(OUT / "FIG5_DATA.csv", index=False)
+    return png
+
+def main():
+    path4 = build_figure4()
+    path5 = build_figure5()
+    print(path4)
+    print(path5)
+
+
+if __name__ == "__main__":
+    main()

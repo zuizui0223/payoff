@@ -1,0 +1,8 @@
+flyway,transition,predictability_r,environmental_innovation_sd_days,lambda,abs_lambda,predicted_stationary_phase_sd_days,stable_phase_map,source_receipt
+Greenland,R2 -> R3,0.169,5.278,0.130730883,0.130730883,5.324,true,docs/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_RECEIPT.md
+Barents,R1 -> R2,0.892,6.190,0.494113942,0.494113942,7.120,true,docs/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_RECEIPT.md
+Barents,R1 -> R5,-0.002,6.084,-0.0086,0.0086,6.085,true,docs/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_RECEIPT.md
+Barents,R2 -> R3,0.950,3.590,0.538,0.538,4.261,true,docs/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_RECEIPT.md
+Barents,R3 -> R5,0.283,5.836,0.225,0.225,5.989,true,docs/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_RECEIPT.md
+Greenland,R1 -> R2,,,,1.080,,false,docs/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_RECEIPT.md
+Barents,R4 -> R5,,,,1.249,,false,docs/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_RECEIPT.md

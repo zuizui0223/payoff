@@ -1,0 +1,45 @@
+name: Movement-phenology macro figures
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/build_movement_phenology_macro_figures.py'
+      - 'data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv'
+      - 'data/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_REGISTRY.csv'
+      - 'data/MOVEMENT_PHENOLOGY_INDUSTRIAL_PERMEABILITY_REGISTRY.csv'
+      - '.github/workflows/build-movement-phenology-macro-figures.yml'
+  pull_request:
+    paths:
+      - 'scripts/build_movement_phenology_macro_figures.py'
+      - 'data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv'
+      - 'data/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_REGISTRY.csv'
+      - '.github/workflows/build-movement-phenology-macro-figures.yml'
+
+jobs:
+  figures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install figure dependencies
+        run: python -m pip install --disable-pip-version-check pandas numpy matplotlib pillow
+      - name: Build synthesis figure
+        run: python scripts/build_movement_phenology_macro_figures.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: movement-phenology-macro-figures
+          path: |
+            outputs/movement_phenology/figures/FIG4_PHASE_RETENTION_INFORMATION.png
+            outputs/movement_phenology/figures/FIG4_PHASE_RETENTION_INFORMATION.pdf
+            outputs/movement_phenology/figures/FIG4_PHASE_RETENTION_INFORMATION.svg
+            outputs/movement_phenology/figures/FIG4_PANEL_A_DATA.csv
+            outputs/movement_phenology/figures/FIG4_PANEL_B_DATA.csv
+            outputs/movement_phenology/figures/FIG5_CONTROL_PERMEABILITY.png
+            outputs/movement_phenology/figures/FIG5_CONTROL_PERMEABILITY.pdf
+            outputs/movement_phenology/figures/FIG5_CONTROL_PERMEABILITY.svg
+            outputs/movement_phenology/figures/FIG5_DATA.csv\n            outputs/movement_phenology/figure_qa.json
+          if-no-files-found: error
