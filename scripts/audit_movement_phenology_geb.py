@@ -167,6 +167,9 @@ def main() -> None:
     }
 
     hard = {
+        "source_faithful_wigeon_revalidation_present": (
+            "SOURCE_FAITHFUL_WIGEON_REVALIDATED_20260922" in text
+        ),
         "structured_abstract_complete": not missing_abstract,
         "abstract_at_most_300_words": result["abstract_words"] <= 300,
         "keywords_between_6_and_10": 6 <= len(keywords) <= 10,
