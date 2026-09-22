@@ -57,7 +57,7 @@
     "sensitivity_label": "v061_sensitivity_only",
     "silent_substitution_forbidden": true
   },
-  "current_blocker": "Authenticated environmental access is required. GitHub Actions live smoke run 35612310294 found no configured AppEEARS/Earthdata credentials, and anonymous S3 smoke run 35686454317 confirmed MOD09Q1.061 and MOD10A2.061 Requester Pays buckets reject anonymous requests. All downstream fixed-target v2, IRG, lambda-gate and manuscript-rendering code is implemented.",
+  "current_blocker": "Authenticated MODIS environmental access remains the only external execution blocker. The pre-environment fixed-target support ceiling passes strongly (large: 48 animals / 1,022 maximum adjacent pairs; small: 89 animals / 4,434 maximum adjacent pairs), so the registered test is not sample-size doomed before environmental filtering. Final estimability depends on valid environmental phase for the frozen targets.",
   "lambda_outcome_opened": false,
   "pipeline_validation": {
     "workflow": "payoff-b IRG reconstruction",
@@ -238,5 +238,28 @@
     "mod09q1_061": "AccessDenied: Requester Pays bucket requires authentication",
     "mod10a2_061": "AccessDenied: Requester Pays bucket requires authentication",
     "implication": "authenticated AppEEARS/Earthdata access remains required"
+  },
+  "pre_environment_support_ceiling": {
+    "status": "PASS",
+    "receipt": "data/aikens2022_pre_environment_support_ceiling_20260922.json",
+    "document": "docs/PAYOFF_B_AIKENS_PRE_ENV_SUPPORT_CEILING_20260922.md",
+    "run_id": 35687039708,
+    "artifact_id": 10676913354,
+    "artifact_sha256": "ab88ade2ec53c8f91b1a2099d58ad210ad57ab80d826375938c94bfe8689efa2",
+    "large_development": {
+      "animals_with_possible_pairs": 48,
+      "max_possible_adjacent_pairs": 1022,
+      "threshold_animals": 10,
+      "threshold_pairs": 100,
+      "support_possible": true
+    },
+    "small_development": {
+      "animals_with_possible_pairs": 89,
+      "max_possible_adjacent_pairs": 4434,
+      "threshold_animals": 10,
+      "threshold_pairs": 100,
+      "support_possible": true
+    },
+    "interpretation": "registered support gate is feasible before environmental filtering; final estimability remains unresolved"
   }
 }
