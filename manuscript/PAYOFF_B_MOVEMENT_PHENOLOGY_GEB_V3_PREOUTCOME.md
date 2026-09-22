@@ -343,9 +343,14 @@ The naive no-correction test \(\hat\lambda=1\) was rejected
 \(|\hat\lambda|\le0.75\) therefore passed, but only narrowly
 (0.7498), so we do not promote it as a universal correction constant.
 
-The preregistered stopover actuator also passed after source-faithful
-reconstruction: stopover duration declined by 0.0629 d per additional day late
-relative to local TGS onset (clustered \(p=0.0317\)). In contrast, measured
+The preregistered **directional** stopover prediction also passed after
+source-faithful reconstruction: stopover duration declined by 0.0629 d per
+additional day late relative to local TGS onset (clustered \(p=0.0317\)).
+No fixed p-value threshold was preregistered for this primary W2 test. The
+secondary magnitude forecast, \(0.3<g_S<0.8\), failed because the observed
+stopover gain was only \(g_S=0.0629\). Thus wigeon replicate the direction of
+waiting-time compensation, not the larger stopover-gain magnitude observed in
+the mule-deer and highlighted goose systems. In contrast, measured
 between-staging travel speed remained unsupported (\(p=0.417\)), as did direct
 distance moderation at \(p\le0.05\) (\(p=0.082\)).
 
@@ -461,8 +466,10 @@ Mule deer combine movement-speed acceleration and stopover shortening.
 Barnacle geese show strong stopover-mediated STEP control with deliberate
 overtake in some route stages. Wigeon now prospectively shows stopover
 shortening as well, but no detected between-staging travel-speed response.
-Waiting time therefore emerges as a recurrent actuator across all three taxa,
-whereas movement-speed and route-level contributions remain system-dependent.
+Waiting time therefore emerges as a recurrent **directional** actuator across
+all three taxa, whereas its gain is not portable: the preregistered wigeon
+0.3--0.8 stopover-gain band failed. Movement-speed and route-level contributions
+also remain system-dependent.
 
 This distinction is important because a shared response coordinate does not
 require every physical actuator to recur, but recurrent actuator components can
