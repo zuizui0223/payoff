@@ -155,11 +155,14 @@ def main() -> None:
     if not grouped:
         raise SystemExit("input CSV contains no pixel-year groups")
 
-    lane = (
-        "study_faithful_v006"
-        if args.modis_product == "MOD09Q1.006"
-        else "v061_sensitivity_only"
-    )
+    if args.modis_product == "MOD09Q1.006":
+        if args.v061_reconstruction_lane != "v061_sensitivity_only":
+            raise SystemExit(
+                "--v061-reconstruction-lane applies only to MOD09Q1.061"
+            )
+        lane = "study_faithful_v006"
+    else:
+        lane = args.v061_reconstruction_lane
 
     rows = []
     for (pixel_id, year), observations in sorted(
@@ -244,10 +247,21 @@ def main() -> None:
         ),
         "output": str(args.output),
         "claim_boundary": (
-            "environmental reconstruction only; no lambda "
-            "outcome is estimated here. MOD09Q1.061 is a "
-            "sensitivity lane and must not be labeled as "
-            "study-faithful MOD09Q1.006 replication."
+            "environmental reconstruction only; no lambda outcome is "
+            "estimated here. "
+            + (
+                "MOD09Q1.061 is the frozen primary successor under the "
+                "2026-09-22 pre-outcome product amendment; this is not a "
+                "byte-faithful MOD09Q1.006 replication."
+                if lane
+                == "v061_primary_successor_after_v006_decommission"
+                else (
+                    "MOD09Q1.061 remains a sensitivity lane and must not be "
+                    "labeled as study-faithful MOD09Q1.006 replication."
+                    if args.modis_product == "MOD09Q1.061"
+                    else "MOD09Q1.006 is the historical study-faithful lane."
+                )
+            )
         ),
     }
     args.receipt_output.parent.mkdir(
