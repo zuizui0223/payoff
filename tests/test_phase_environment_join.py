@@ -124,3 +124,37 @@ def test_peak_record_rejects_product_lane_disagreement():
             reconstruction_lane="study_faithful_v006",
             peak_irg_date="2020-04-15",
         )
+
+
+def test_primary_successor_v061_lane_is_valid_for_v061_product():
+    record = PeakIRGRecord(
+        pixel_id="p1",
+        year=2020,
+        modis_product="MOD09Q1.061",
+        reconstruction_lane="v061_primary_successor_after_v006_decommission",
+        peak_irg_date="2020-04-15",
+    )
+    audit = attach_peak_irg_to_gps(
+        [gps("a1", "small", 1, "p1")],
+        [record],
+        required_modis_product="MOD09Q1.061",
+        minimum_matched_fraction=1.0,
+    )
+    assert audit.matched_fraction == 1.0
+    assert audit.reconstruction_lanes == (
+        "v061_primary_successor_after_v006_decommission",
+    )
+
+
+def test_environment_join_can_audit_below_threshold_without_raising():
+    audit = attach_peak_irg_to_gps(
+        [
+            gps("a1", "small", 1, "p1"),
+            gps("a2", "small", 2, "missing"),
+        ],
+        [irg("p1")],
+        minimum_matched_fraction=1.0,
+        enforce_minimum=False,
+    )
+    assert audit.matched_fraction == pytest.approx(0.5)
+    assert audit.missing_observations == 1
