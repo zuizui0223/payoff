@@ -165,6 +165,7 @@ def main() -> None:
         lane = args.v061_reconstruction_lane
 
     rows = []
+    failures = []
     for (pixel_id, year), observations in sorted(
         grouped.items()
     ):
@@ -179,12 +180,22 @@ def main() -> None:
                 require_snow_flags=True,
             )
             fit = fit_peak_irg(processed)
-        except Exception as exc:
-            raise SystemExit(
-                "IRG reconstruction failed for "
-                f"pixel={pixel_id}, year={year}: "
-                f"{type(exc).__name__}: {exc}"
-            ) from exc
+        except ValueError as exc:
+            if not args.allow_unfit_pixel_years:
+                raise SystemExit(
+                    "IRG reconstruction failed for "
+                    f"pixel={pixel_id}, year={year}: "
+                    f"{type(exc).__name__}: {exc}"
+                ) from exc
+            failures.append(
+                {
+                    "pixel_id": pixel_id,
+                    "year": year,
+                    "error_type": type(exc).__name__,
+                    "reason": str(exc),
+                }
+            )
+            continue
 
         peak_date = (
             datetime(year, 1, 1)
@@ -227,9 +238,30 @@ def main() -> None:
         newline="",
         encoding="utf-8",
     ) as handle:
+        fieldnames = [
+            "pixel_id",
+            "year",
+            "modis_product",
+            "reconstruction_lane",
+            "peak_irg_doy",
+            "peak_irg_date",
+            "peak_irg_value",
+            "spring_scale_days",
+            "fit_rmse",
+            "valid_observations",
+            "snow_release_doy",
+            "winter_baseline",
+            "upper_scale_reference",
+            "alpha",
+            "beta",
+            "gamma",
+            "delta",
+            "epsilon",
+            "theta",
+        ]
         writer = csv.DictWriter(
             handle,
-            fieldnames=list(rows[0]),
+            fieldnames=fieldnames,
         )
         writer.writeheader()
         writer.writerows(rows)
@@ -240,6 +272,9 @@ def main() -> None:
         "modis_product": args.modis_product,
         "reconstruction_lane": lane,
         "pixel_years": len(rows),
+        "attempted_pixel_years": len(grouped),
+        "failed_pixel_years": len(failures),
+        "failed_pixel_year_details": failures,
         "baseline_quantile": args.baseline_quantile,
         "upper_quantile": args.upper_quantile,
         "snow_search_start_doy": (
@@ -278,7 +313,8 @@ def main() -> None:
     print(
         "peak_irg_reconstruction "
         f"lane={lane} "
-        f"pixel_years={len(rows)}"
+        f"pixel_years={len(rows)} "
+        f"failed_pixel_years={len(failures)}"
     )
 
 
