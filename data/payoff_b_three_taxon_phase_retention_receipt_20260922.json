@@ -1,0 +1,80 @@
+{
+  "frozen_date": "2026-09-22",
+  "status": "three_taxon_direct_phase_retention_coordinate_source_faithful",
+  "supersedes": "data/payoff_b_three_taxon_phase_retention_receipt_20260921.json",
+  "taxa": [
+    {
+      "taxon": "Odocoileus hemionus",
+      "common_name": "mule deer",
+      "direct_rows": 1,
+      "median_signed_lambda_hat": 0.10734,
+      "median_abs_lambda_hat": 0.10734,
+      "actuator_architecture": "MIXED_SPEED_STOPOVER",
+      "evidence_tier": "retrospective_direct"
+    },
+    {
+      "taxon": "Branta leucopsis",
+      "common_name": "barnacle goose",
+      "direct_rows": 3,
+      "signed_lambda_hat": [-0.106320907, 0.130730883, 0.494113942],
+      "abs_lambda_hat": [0.106320907, 0.130730883, 0.494113942],
+      "median_abs_lambda_hat": 0.130730883,
+      "within_taxon_abs_range": [0.106320907, 0.494113942],
+      "actuator_architecture": "STEP_STOPOVER_ROUTE_STAGE",
+      "evidence_tier": "retrospective_direct_within_taxon_replication"
+    },
+    {
+      "taxon": "Mareca penelope",
+      "common_name": "Eurasian wigeon",
+      "direct_rows": 1,
+      "lambda_hat": 0.7497680211367301,
+      "lambda_se": 0.04990566712278233,
+      "naive_p_vs_lambda_one": 5.328241982727779e-7,
+      "abs_lambda_hat": 0.7497680211367301,
+      "prospective_third_taxon": true,
+      "source_faithful_revalidation": "data/wigeon_source_faithful_revalidation_result_20260922.json",
+      "actuator_architecture": {
+        "stopover_direction": "SUPPORTED",
+        "stopover_secondary_gain_band": "FAIL",
+        "travel_speed": "NOT_SUPPORTED",
+        "distance_moderation": "NOT_SUPPORTED"
+      },
+      "evidence_tier": "prospective_source_faithful"
+    }
+  ],
+  "n_taxa": 3,
+  "all_registered_direct_rows_abs_lambda_hat_below_1": true,
+  "taxon_median_abs_lambda_hat_range": [0.10734, 0.7497680211367301],
+  "aggregation_rule": "one descriptive record per taxon; repeated barnacle-goose routes contribute only within-taxon range",
+  "prospective_result": {
+    "taxon": "Mareca penelope",
+    "primary_prediction": "lambda < 1",
+    "primary_outcome": "PASS",
+    "stronger_prediction": "abs(lambda) < 0.75",
+    "machine_interval": "[-0.75,0.75]",
+    "stronger_outcome": "PASS_NARROW_POINT_ESTIMATE_GATE",
+    "W2_primary_directional_prediction": "S'(E)<0",
+    "W2_directional_outcome": "PASS",
+    "W2_fixed_p_value_threshold_preregistered": false,
+    "W2_conventional_cluster_p": 0.031661798202295054,
+    "W2_secondary_gain_band": "FAIL",
+    "travel_speed_diagnostic": "NOT_SUPPORTED"
+  },
+  "retained_interpretation": "phase retention is a portable estimator-scale response coordinate; stopover/waiting direction recurs across the three direct taxa while full actuator architecture remains heterogeneous",
+  "measurement_error_status": {
+    "latent_lambda_comparison_ready": false,
+    "reason": "source-backed phase-measurement error moments remain incomplete",
+    "wigeon_observed_predictor_phase_sd_days": 15.881166579869618,
+    "wigeon_true_lambda_one_independent_equal_error_stress_sd_days": 7.944266530669527
+  },
+  "claim_boundary": [
+    "no universal latent lambda",
+    "no conventional meta-analytic mean at n=3 taxa",
+    "no route-level pseudoreplication",
+    "no pooled actuator score",
+    "no universal stopover gain",
+    "the wigeon secondary 0.3-0.8 stopover gain band failed",
+    "naive lambda_hat magnitude differences are not attributed entirely to biology before measurement-error calibration",
+    "no numerical pooling across nonstandardized segment definitions"
+  ]
+}
