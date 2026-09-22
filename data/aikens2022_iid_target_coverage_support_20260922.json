@@ -1,0 +1,72 @@
+{
+  "frozen_date": "2026-09-22",
+  "status": "IID_TARGET_VALIDITY_SUPPORT_ENVELOPE_FROZEN",
+  "lambda_outcome_opened": false,
+  "source": {
+    "fixed_target_artifact_id": 10676913354,
+    "fixed_target_artifact_sha256": "ab88ade2ec53c8f91b1a2099d58ad210ad57ab80d826375938c94bfe8689efa2",
+    "targets": 5710,
+    "large_targets": 1114,
+    "small_targets": 4596
+  },
+  "registered_support_gate": {
+    "min_animals_per_group": 10,
+    "min_adjacent_pairs_per_group": 100
+  },
+  "support_ceiling": {
+    "large": {
+      "animals": 48,
+      "pairs": 1022
+    },
+    "small": {
+      "animals": 89,
+      "pairs": 4434
+    }
+  },
+  "iid_model": {
+    "assumption": "each frozen target independently has valid environmental phase with common probability p",
+    "target_joint_support_probability": 0.95,
+    "minimum_target_validity_probability": 0.34197998046875,
+    "achieved_joint_support_probability": 0.9500173211708703,
+    "threshold_groups": {
+      "large": {
+        "support_probability": 0.950017321170865,
+        "expected_valid_adjacent_pairs": 119.52321379631758,
+        "expected_animals_with_valid_pairs": 34.19334305235309
+      },
+      "small": {
+        "support_probability": 1,
+        "expected_valid_adjacent_pairs": 518.557661421597,
+        "expected_animals_with_valid_pairs": 71.30824302292375
+      }
+    },
+    "selected_grid": {
+      "p_0_25_joint": 0.00014613697495580622,
+      "p_0_30_joint": 0.2414813546158401,
+      "p_0_35_joint": 0.9814926977550835,
+      "p_0_40_joint": 0.999999187126241
+    }
+  },
+  "pixel_year_geometry": {
+    "large": {
+      "targets": 1114,
+      "unique_pixel_years": 910,
+      "fraction_targets_in_reused_pixel_years": 0.30789946140035906,
+      "max_targets_per_pixel_year": 10
+    },
+    "small": {
+      "targets": 4596,
+      "unique_pixel_years": 3400,
+      "fraction_targets_in_reused_pixel_years": 0.41753698868581374,
+      "max_targets_per_pixel_year": 10
+    }
+  },
+  "provenance": {
+    "canonical_workflow_run": 35689293494,
+    "head_sha": "be5182bb6c2d2703c7c54f78581734e06e9a997a",
+    "artifact_id": 10677867402,
+    "artifact_sha256": "dc377ddaaf56b7c641a9b9b666fbcbfee677edac1010b1cd564558447fbcd37c",
+    "original_unoptimized_run": 35689048123
+  },
+  "claim_boundary": "exact only under IID target-level validity; correlated pixel-year/environmental missingness is a separate sensitivity problem"
+}
