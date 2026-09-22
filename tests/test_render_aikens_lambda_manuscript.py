@@ -37,40 +37,46 @@ def payload(*, passed, direction=True, support=True, a=0.2, b=0.5, p=0.01):
 
 def test_pass_wording_is_forcing_association_not_cross_taxon_replication():
     m = load_module()
-    results, discussion, claim = m.render_blocks(payload(passed=True))
+    results, discussion, abstract, conclusion, claim = m.render_blocks(payload(passed=True))
     assert claim["scientific_result"] == "PASS"
     assert claim["lambda_shift_supported"]
     assert not claim["cross_taxon_lambda_synthesis_changed"]
     assert "within-taxon" in results
     assert "not counted as an additional cross-taxon" in results
     assert "does not identify a causal equality" in discussion
+    assert "supported greater" in abstract
+    assert "actuation attenuation" in conclusion
 
 
 def test_wrong_direction_is_scientific_fail_not_common_coordinate_failure():
     m = load_module()
-    results, discussion, claim = m.render_blocks(
+    results, discussion, abstract, conclusion, claim = m.render_blocks(
         payload(passed=False, direction=False, support=True, a=0.5, b=0.2)
     )
     assert claim["scientific_result"] == "FAIL_WRONG_DIRECTION"
     assert claim["wrong_direction"]
     assert "failed in direction" in results
     assert "does not invalidate the common phase-retention coordinate" in discussion
+    assert "failed" in abstract
+    assert "distinct empirical levels" in conclusion
 
 
 def test_positive_direction_without_support_does_not_license_shift():
     m = load_module()
-    results, discussion, claim = m.render_blocks(
+    results, discussion, abstract, conclusion, claim = m.render_blocks(
         payload(passed=False, direction=True, support=False, p=0.2)
     )
     assert claim["scientific_result"] == "FAIL_INSUFFICIENT_SUPPORT"
     assert not claim["lambda_shift_supported"]
     assert "do not claim" in results
     assert "without a supported shift in lambda" in discussion
+    assert "did not pass" in abstract
+    assert "not accompanied by a supported shift" in conclusion
 
 
 def test_not_estimable_forbids_retuning_language():
     m = load_module()
-    results, discussion, claim = m.render_blocks(
+    results, discussion, abstract, conclusion, claim = m.render_blocks(
         {
             "status": "phase_retention_contrast_not_estimable",
             "reasons": ["too few fixed-24h transitions"],
@@ -81,6 +87,8 @@ def test_not_estimable_forbids_retuning_language():
     assert "not estimable" in results
     assert "did not change the 24 h interval" in results
     assert "rather than being rescued by retuning" in discussion
+    assert "not estimable" in abstract
+    assert "remained unresolved" in conclusion
 
 
 def test_marker_replacement_preserves_markers_and_removes_pending_text():
