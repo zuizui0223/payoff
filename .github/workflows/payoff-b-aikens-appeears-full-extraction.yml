@@ -1,4 +1,4 @@
-name: payoff-b Aikens AppEEARS full extraction
+name: payoff-b Aikens V061 primary environmental extraction
 
 concurrency:
   group: payoff-b-aikens-appeears-full-${{ github.ref_name }}
@@ -72,6 +72,31 @@ jobs:
         run: |
           echo "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463  outputs/aikens_exact_appeears_v061_manifest.json" | sha256sum -c -
 
+      - name: Require pre-outcome V061 primary-successor amendment
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          amendment_path = Path(
+              "data/aikens2022_environment_product_amendment_20260922.json"
+          )
+          amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
+          assert amendment["outcome_state_at_freeze"] == "lambda_outcome_unopened"
+          assert (
+              amendment["effective_primary_environment_lane"]
+              == "v061_primary_successor_after_v006_decommission"
+          )
+          manifest_path = Path("outputs/aikens_exact_appeears_v061_manifest.json")
+          digest = hashlib.sha256(manifest_path.read_bytes()).hexdigest()
+          assert digest == amendment["frozen_v061_manifest_sha256"]
+          assert amendment["invariants"]["hypothesis_unchanged"]
+          assert amendment["invariants"]["model_unchanged"]
+          assert amendment["invariants"]["significance_threshold_unchanged"]
+          print("AIKENS_V061_PRIMARY_AMENDMENT_OK")
+          PY
+
       - name: Submit all exact-manifest tasks and download bundles
         env:
           APPEEARS_TOKEN: ${{ secrets.APPEEARS_TOKEN }}
@@ -114,3 +139,5 @@ jobs:
             outputs/aikens_full_appeears_merge_receipt.json
             outputs/aikens_full_v061_irg_input.csv
             outputs/aikens_full_v061_irg_input_receipt.json
+            data/aikens2022_environment_product_amendment_20260922.json
+            docs/PAYOFF_B_AIKENS_ENVIRONMENT_PRODUCT_AMENDMENT_20260922.md
