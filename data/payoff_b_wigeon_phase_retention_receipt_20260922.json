@@ -1,0 +1,100 @@
+{
+  "frozen_date": "2026-09-22",
+  "status": "source_faithful_prospective_third_taxon_receipt_canonical",
+  "supersedes": "data/payoff_b_wigeon_phase_retention_receipt_20260921.json",
+  "system": {
+    "common_name": "Eurasian wigeon",
+    "taxon": "Mareca penelope",
+    "study": "van Toor et al. 2021",
+    "doi": "10.1186/s40462-021-00296-0",
+    "tracking_doi": "10.5441/001/1.dv5mm289"
+  },
+  "provenance": {
+    "source_pr": 144,
+    "source_branch": "empirical/movement-phenology-macro-20260918",
+    "source_head": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+    "workflow_run": 35689856130,
+    "artifact_id": 10678143392,
+    "artifact_zip_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+    "source_window_amendment": "data/wigeon_tgs_source_window_revalidation_20260922.json",
+    "published_tgs_contract": "days <- days[month(days)<8]"
+  },
+  "environment_validation": {
+    "staging_events_total": 256,
+    "staging_events_with_tgs": 256,
+    "tgs_onset_at_or_after_doy_300": 0,
+    "arrival_phase_median_days": 21.96782407407408,
+    "arrival_phase_q1_days": 13.182282986111108,
+    "arrival_phase_q3_days": 34.24508680555555,
+    "published_median_days": 22.5,
+    "published_q1_days": 13.0,
+    "published_q3_days": 35.3,
+    "gate": "PASS"
+  },
+  "primary_phase_retention": {
+    "registration": "data/wigeon_phase_retention_registration_20260921.json",
+    "observation": "data/wigeon_phase_retention_observation_20260922.json",
+    "prediction": "lambda < 1",
+    "transitions": 224,
+    "individuals": 28,
+    "lambda_hat": 0.7497680211367301,
+    "lambda_se": 0.04990566712278233,
+    "naive_p_vs_lambda_one": 5.328241982727779e-7,
+    "outcome": "PASS",
+    "measurement_error_status": "ESTIMATOR_SCALE_ONLY_PENDING_ERROR_CALIBRATION"
+  },
+  "stronger_forecast": {
+    "registration": "data/wigeon_strong_contraction_registration_20260921.json",
+    "prediction": "abs(lambda) < 0.75",
+    "machine_interval": "[-0.75,0.75]",
+    "observed_abs_lambda_hat": 0.7497680211367301,
+    "distance_inside_upper_boundary": 0.0002319788632699,
+    "outcome": "PASS_NARROW_POINT_ESTIMATE_GATE",
+    "claim_ceiling": "not evidence for a universal strong-correction coefficient"
+  },
+  "actuators": {
+    "stopover": {
+      "registration": "data/wigeon_stopover_actuator_registration_20260921.json",
+      "observation": "data/wigeon_stopover_actuator_observation_20260922.json",
+      "primary_preregistered_prediction": "slope < 0",
+      "fixed_p_value_threshold_preregistered": false,
+      "slope": -0.06286262115570287,
+      "cluster_se": 0.027738561977373986,
+      "cluster_p": 0.031661798202295054,
+      "formal_directional_gate": "PASS",
+      "source_support": "SUPPORTED",
+      "secondary_gain_band_prediction": "0.3 < g_S < 0.8",
+      "observed_gain": 0.06286262115570287,
+      "secondary_gain_band_outcome": "FAIL"
+    },
+    "travel_speed": {
+      "log_gain_per_phase_day": 0.0027573744846977923,
+      "cluster_se": 0.0033451590730534287,
+      "p": 0.41699858388761735,
+      "outcome": "NOT_SUPPORTED"
+    },
+    "distance_moderation": {
+      "beta": -0.06315608322821453,
+      "se": 0.0349973353955935,
+      "p": 0.08230417519325887,
+      "outcome": "NOT_SUPPORTED"
+    }
+  },
+  "two_gate_class": "LAMBDA_PASS_ACTUATOR_SUPPORTED",
+  "measurement_error_stress": {
+    "observed_origin_phase_sd_days": 15.881166579869618,
+    "equal_independent_error_true_lambda_one_required_error_sd_over_latent_phase_sd": 0.5777074240481979,
+    "equal_independent_error_true_lambda_one_required_error_sd_over_observed_predictor_sd": 0.5002319250740299,
+    "required_error_sd_days_given_observed_predictor_sd": 7.944266530669527,
+    "role": "stress threshold only, not empirical error estimate"
+  },
+  "retained_interpretation": "phase retention is a portable estimator-scale response coordinate; stopover/waiting is a recurrent actuator, while speed and route-level components remain system-specific",
+  "claim_boundary": [
+    "no universal latent lambda",
+    "no universal stopover gain",
+    "the secondary 0.3-0.8 stopover gain band failed",
+    "no causal identification of stopover as the sole wigeon actuator",
+    "no biological latent-lambda claim before source-backed measurement-error calibration",
+    "no numerical pooling across incompatible segment definitions"
+  ]
+}
