@@ -164,8 +164,17 @@ Formal W2 stopover actuator:
     p:
         0.03166
 
-    preregistered direction + support gate:
-        PASS.
+    primary preregistered directional gate:
+        PASS
+
+    conventional clustered p:
+        0.03166
+
+    fixed p threshold preregistered:
+        NO
+
+    secondary 0.3 < g_S < 0.8 band:
+        FAIL.
 
 Travel-speed response remains unsupported:
 
@@ -252,8 +261,11 @@ Accordingly:
     stronger |lambda_hat|<=0.75 point forecast:
         PASS, narrowly
 
-    formal W2 stopover actuator prediction:
+    formal W2 directional stopover prediction:
         PASS
+
+    secondary W2 gain band:
+        FAIL
 
     W3 travel-speed diagnostic:
         NOT SUPPORTED.
@@ -301,7 +313,8 @@ Licensed:
 - direct naive phase-retention estimates exist in three migratory taxa;
 - all registered direct rows have |lambda_hat|<1 on their declared intervals;
 - the source-faithful wigeon primary prospective gate passes;
-- the source-faithful wigeon W2 stopover gate passes;
+- the source-faithful wigeon W2 directional stopover gate passes;
+- the secondary wigeon stopover-gain band fails;
 - stopover/waiting adjustment recurs across mule deer, barnacle goose and
   wigeon;
 - speed and route-level actuator evidence remains heterogeneous;
