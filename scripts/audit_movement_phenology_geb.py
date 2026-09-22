@@ -180,6 +180,9 @@ def main() -> None:
         and "AIKENS LAMBDA ABSTRACT PENDING" not in text
         and "AIKENS LAMBDA CONCLUSION PENDING" not in text
     )
+    hard["wigeon_source_window_revalidated"] = (
+        "WIGEON_SOURCE_WINDOW_REVALIDATION_PENDING" not in text
+    )
     result["hard_gates"] = hard
     result["all_hard_gates_pass"] = all(hard.values())
     result["soft_checks"] = {
