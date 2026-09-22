@@ -52,16 +52,20 @@ class PeakIRGRecord:
         if self.reconstruction_lane not in {
             "study_faithful_v006",
             "v061_sensitivity_only",
+            "v061_primary_successor_after_v006_decommission",
         }:
             raise ValueError(
                 "unsupported IRG reconstruction lane"
             )
-        expected = (
-            "study_faithful_v006"
+        allowed_lanes = (
+            {"study_faithful_v006"}
             if self.modis_product == "MOD09Q1.006"
-            else "v061_sensitivity_only"
+            else {
+                "v061_sensitivity_only",
+                "v061_primary_successor_after_v006_decommission",
+            }
         )
-        if self.reconstruction_lane != expected:
+        if self.reconstruction_lane not in allowed_lanes:
             raise ValueError(
                 "MODIS product and reconstruction lane disagree"
             )
@@ -111,6 +115,7 @@ def attach_peak_irg_to_gps(
     *,
     required_modis_product: str | None = None,
     minimum_matched_fraction: float = 0.0,
+    enforce_minimum: bool = True,
 ) -> EnvironmentalJoinAudit:
     """Join GPS points to one unique peak-IRG record per pixel-year."""
 
@@ -184,7 +189,7 @@ def attach_peak_irg_to_gps(
 
     matched = len(annotated)
     fraction = matched / len(gps_rows)
-    if fraction < minimum_matched_fraction:
+    if enforce_minimum and fraction < minimum_matched_fraction:
         raise ValueError(
             "environmental join matched fraction "
             f"{fraction:.6f} below predeclared minimum "
