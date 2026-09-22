@@ -1,0 +1,41 @@
+{
+  "contract_id": "aikens2022_phase_reconstruction_execution_v1",
+  "frozen_date": "2026-09-22",
+  "outcome_state_at_freeze": "lambda_outcome_unopened",
+  "environment_product_amendment": "aikens2022_environment_product_v061_primary_successor_20260922",
+  "source_identity": {
+    "gps_observations": 64539,
+    "modis250_manifest_sha256": "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463",
+    "pixel_mapping": "exact_modis250_cell_id_from_frozen_manifest"
+  },
+  "environment_join": {
+    "required_modis_product": "MOD09Q1.061",
+    "required_reconstruction_lane": "v061_primary_successor_after_v006_decommission",
+    "minimum_matched_fraction": 1.0,
+    "cross_group_processing_rule_identical": true
+  },
+  "phase_pairing": {
+    "target_interval_hours": 24.0,
+    "max_target_deviation_hours": 3.0,
+    "pair_endpoints_must_both_have_valid_peak_irg": true
+  },
+  "support_gate": {
+    "min_animals_per_group": 10,
+    "min_transitions_per_group": 100
+  },
+  "contrast": {
+    "registration": "data/aikens2022_lambda_perturbation_registration_20260921.json",
+    "group_a_value": "small",
+    "group_b_value": "large",
+    "scientific_fail_is_pipeline_success": true,
+    "not_estimable_is_reported_not_retuned": true
+  },
+  "invariants": {
+    "phase_coordinate_unchanged": true,
+    "segment_scale_unchanged": true,
+    "hypothesis_unchanged": true,
+    "model_unchanged": true,
+    "p_threshold_unchanged": true
+  },
+  "claim_boundary": "Execution settings frozen before environmental extraction and before the Aikens lambda outcome is opened."
+}
