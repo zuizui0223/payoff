@@ -37,7 +37,8 @@ Direct phase-retention coordinate currently contains three taxa:
    - naive p versus lambda_hat=1 = 5.33e-07
    - primary lambda<1 prediction PASS
    - stronger |lambda|<=0.75 point forecast PASS, narrowly
-   - formal stopover actuator PASS
+   - primary directional stopover actuator PASS
+   - secondary 0.3<g_S<0.8 band FAIL
    - travel-speed actuator NOT SUPPORTED
    - distance moderation NOT SUPPORTED
 
@@ -56,7 +57,8 @@ It does not support:
 > one universal full actuator architecture.
 
 The source-faithful wigeon result adds a different pattern from the previously
-promoted analysis. Stopover/waiting compensation is now prospectively supported
+promoted analysis. The preregistered stopover/waiting **direction** is now
+prospectively supported
 in wigeon and is also observed in mule deer and barnacle geese, making it a
 recurrent cross-system actuator. Travel-speed and route-level contributions
 remain system-dependent.
