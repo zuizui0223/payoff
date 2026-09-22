@@ -222,12 +222,14 @@ In particular:
   the added system supplies an independent lambda test, a new forcing regime,
   a predicted lambda boundary/sign change, or a discriminating prospective
   actuator test;
-- the wigeon lambda-supported / actuator-not-supported pattern is now frozen
-  quantitatively from the preregistered PAYOFF-B macro branch: 224 consecutive
-  staging transitions from 28 individuals give lambda=0.85994, SE=0.04509 and
-  p=0.00190 against lambda=1; the primary lambda<1 prediction passes, the
-  stronger |lambda|<0.75 forecast fails, and stopover/travel-speed actuator
-  tests are not supported;
+- the previously promoted wigeon result (224 transitions, 28 individuals,
+  lambda=0.85994) is suspended pending source-faithful revalidation: the
+  independent POWER reconstruction used the full calendar year when deriving
+  the cumulative-minimum TGS onset, while the published supplementary code
+  first restricts environmental days to January--July with
+  `days <- days[month(days)<8]`; the old numeric lambda and its prospective
+  PASS status must not be used as cross-system support until the Jan--Jul
+  reconstruction is complete;
 - the frozen three-taxon direct receipt establishes a descriptive phase-
   retention coordinate across mule deer, barnacle goose, and Eurasian wigeon,
   but does not estimate one universal lambda and does not treat repeated goose
