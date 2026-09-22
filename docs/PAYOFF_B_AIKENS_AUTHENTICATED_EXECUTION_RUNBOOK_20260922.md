@@ -70,6 +70,33 @@ Frozen receipt:
 This is a robustness envelope, not a guarantee: real environmental failures can
 be correlated by pixel-year, snow/quality state, date, or geography.
 
+That dependence has now been stress-tested explicitly at the pixel-year level.
+A fixed-seed 10,000-replicate sensitivity assigns one shared validity state to
+all targets within each pixel_id x year cluster.
+
+Result:
+
+    p = 0.335:
+        joint support = 0.9348
+        95% CI = 0.9298 .. 0.9395
+
+    p = 0.340:
+        joint support = 0.9619
+        95% CI = 0.9580 .. 0.9655.
+
+Thus the 95% support transition remains bracketed near
+
+    0.335 < p <= 0.340,
+
+very close to the exact IID target-level threshold 0.34198.
+
+Frozen receipt:
+
+    docs/PAYOFF_B_AIKENS_PIXEL_YEAR_CLUSTERED_SUPPORT_20260922.md
+
+This remains a sensitivity model, not the final observed AppEEARS/IRG
+missingness process.
+
 ## 2. Current external blocker
 
 A live GitHub Actions smoke test found no configured AppEEARS/Earthdata
