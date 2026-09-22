@@ -232,6 +232,20 @@ In particular:
   retention coordinate across mule deer, barnacle goose, and Eurasian wigeon,
   but does not estimate one universal lambda and does not treat repeated goose
   flyways as independent taxa;
+- the direct lambda values are naive regression-scale estimands until
+  source-backed phase-measurement error is calibrated; predictor phase error can
+  attenuate lambda toward zero, so lambda_hat<1 alone is not sufficient to
+  identify latent lambda<1 under an errors-in-variables observation model;
+- a true-lambda=1 null must be simulated on the observed estimator scale using
+  the frozen sample size, ecological interval, predictor phase variance,
+  predictor/outcome measurement-error SDs, and consecutive-error correlation;
+- cross-system differences in naive lambda magnitude must not be attributed
+  entirely to controller biology until differential phase reliability has been
+  audited;
+- environmental innovation SD is process noise, not phase measurement-error SD,
+  and must not be reused as an errors-in-variables calibration quantity;
+- taxon-specific EIV or SIMEX correction is not licensed until its error moments
+  are source-backed and frozen before comparison with the observed lambda;
 - confirmatory cross-system lambda support is counted only from
   prospectively registered tests whose later observations match the frozen
   system ID, independent-test ID, phase-coordinate ID, and segment-scale ID;
