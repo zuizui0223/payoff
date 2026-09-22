@@ -44,6 +44,32 @@ Registered final threshold per group:
 Therefore the registered test is support-feasible before environmental
 filtering.
 
+An outcome-blind robustness envelope has now been computed on the same frozen
+targets. Under the synthetic assumption that each selected target independently
+has valid environmental phase with common probability p, the exact dynamic
+programme gives a 95% joint support threshold at
+
+    p = 0.34198.
+
+At that threshold:
+
+    large-development:
+        support probability = 0.95002
+        expected valid adjacent pairs = 119.5
+        expected animals with valid pairs = 34.2
+
+    small-development:
+        support probability ~= 1
+        expected valid adjacent pairs = 518.6
+        expected animals with valid pairs = 71.3.
+
+Frozen receipt:
+
+    docs/PAYOFF_B_AIKENS_IID_TARGET_COVERAGE_SUPPORT_20260922.md
+
+This is a robustness envelope, not a guarantee: real environmental failures can
+be correlated by pixel-year, snow/quality state, date, or geography.
+
 ## 2. Current external blocker
 
 A live GitHub Actions smoke test found no configured AppEEARS/Earthdata
