@@ -4,39 +4,26 @@
   "source": {
     "payoff_pr": 144,
     "branch": "empirical/movement-phenology-macro-20260918",
-    "head_sha": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
-    "direct_receipt_path": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
-    "direct_receipt_blob_sha": "d1a4014ce36a589cd32386890bb0cc5ee39fa478"
+    "head_sha": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+    "workflow_run": 35689856130,
+    "artifact_id": 10678143392,
+    "direct_receipt_sha256": "3cd182079dc24e3f7cc1342e5db371d5d3c787b91e75f4d7abf4b36116a68772",
+    "correction_amendment": "data/wigeon_tgs_source_window_revalidation_20260922.json"
   },
   "W3_travel_speed_diagnostic": {
     "status": "NOT_SUPPORTED",
     "role": "secondary actuator-decomposition diagnostic, not promoted to the formal W2 actuator gate",
-    "log_speed_gain_per_phase_day": 0.00109,
-    "cluster_se": 0.000824,
-    "p_value": 0.197,
-    "interpretation": "measured between-staging travel speed does not explain the significant net phase contraction"
+    "log_speed_gain_per_phase_day": 0.0027573744846977923,
+    "cluster_se": 0.0033451590730534287,
+    "p_value": 0.41699858388761735,
+    "interpretation": "measured between-staging travel speed remains unsupported after the source-faithful Jan-Jul TGS reconstruction"
   },
   "W4_distance_moderation_diagnostic": {
     "status": "NOT_SUPPORTED",
-    "beta": -0.0253,
-    "se": 0.0278,
-    "p_value": 0.371,
-    "route_progress_endpoint_distance_p": 0.67,
-    "interpretation": "published distance pattern remains literature context but is not promoted as a replicated controller moderator"
-  },
-  "W2_stopover_source_interpretation": {
-    "preregistered_primary_direction": "S'(E) < 0",
-    "directional_sign_observed": true,
-    "slope": -0.00014,
-    "cluster_se": 0.003902,
-    "p_value": 0.972,
-    "preregistered_secondary_gain_band": [
-      0.3,
-      0.8
-    ],
-    "observed_g_S": 0.00014,
-    "secondary_gain_band_passed": false,
-    "source_status": "NOT_SUPPORTED",
-    "inferential_note": "the literal preregistered sign is negative, but the fitted effect is effectively zero and the preregistered secondary gain band fails; no fixed p-value threshold was preregistered"
+    "beta": -0.06315608322821453,
+    "se": 0.0349973353955935,
+    "p_value": 0.08230417519325887,
+    "route_progress_endpoint_distance_p": 0.2523827833446669,
+    "interpretation": "distance moderation remains unsupported at p<=0.05 after the source-faithful Jan-Jul TGS reconstruction"
   }
 }
