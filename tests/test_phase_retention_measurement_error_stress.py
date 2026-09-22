@@ -51,8 +51,20 @@ def test_stress_audit_identifies_wigeon_as_low_required_independent_error_ratio(
                 "required_equal_error_sd_over_latent_phase_sd"
             ]
         )
-        - 0.4035738201
-    ) < 1e-9
+        - 0.5777074240481979
+    ) < 1e-12
+    assert abs(
+        float(
+            wigeon[
+                "required_equal_error_sd_over_observed_predictor_sd"
+            ]
+        )
+        - 0.5002319250740299
+    ) < 1e-12
+    assert abs(
+        float(wigeon["required_equal_error_sd_days"])
+        - 7.944266530669527
+    ) < 1e-12
     assert float(
         mule[
             "required_equal_error_sd_over_latent_phase_sd"
