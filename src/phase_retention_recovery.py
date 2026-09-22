@@ -445,3 +445,51 @@ def corrected_lambda_from_known_error(
         latent_covariance
         / latent_variance
     )
+
+
+def required_equal_error_sd_ratio(
+    *,
+    observed_naive_lambda: float,
+    true_lambda: float = 1.0,
+    error_correlation: float = 0.0,
+) -> float | None:
+    """Noise-to-signal SD ratio needed to produce an expected naive slope.
+
+    Assumes equal predictor/outcome measurement-error SDs, both expressed as a
+    ratio r to the latent predictor SD. Then
+
+        beta_naive = (true_lambda + rho*r^2) / (1 + r^2).
+
+    Returns r when a finite non-negative solution exists, otherwise None.
+    This is a stress threshold, not an estimate of empirical error.
+    """
+
+    observed = _finite(
+        "observed_naive_lambda",
+        observed_naive_lambda,
+    )
+    latent = _finite(
+        "true_lambda",
+        true_lambda,
+    )
+    rho = _finite(
+        "error_correlation",
+        error_correlation,
+    )
+    if not -1.0 <= rho <= 1.0:
+        raise ValueError(
+            "error_correlation must lie in [-1,1]"
+        )
+
+    numerator = latent - observed
+    denominator = observed - rho
+
+    if abs(numerator) <= 1e-15:
+        return 0.0
+    if numerator < 0.0 or denominator <= 0.0:
+        return None
+
+    ratio_squared = numerator / denominator
+    if ratio_squared < 0.0:
+        return None
+    return sqrt(ratio_squared)
