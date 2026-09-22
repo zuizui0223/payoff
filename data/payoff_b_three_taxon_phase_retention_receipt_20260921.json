@@ -1,6 +1,6 @@
 {
   "frozen_date": "2026-09-21",
-  "status": "three_taxon_direct_phase_retention_coordinate_descriptive",
+  "status": "SUPERSEDED",
   "source": {
     "payoff_pr": 144,
     "branch": "empirical/movement-phenology-macro-20260918",
@@ -74,5 +74,8 @@
     "no route-level pseudoreplication",
     "no pooled actuator score",
     "no numerical pooling across nonstandardized segment definitions"
-  ]
+  ],
+  "superseded_date": "2026-09-22",
+  "superseded_by": "data/payoff_b_three_taxon_phase_retention_receipt_20260922.json",
+  "supersession_reason": "wigeon component superseded by source-faithful January-July TGS reconstruction"
 }
