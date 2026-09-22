@@ -493,3 +493,50 @@ def required_equal_error_sd_ratio(
     if ratio_squared < 0.0:
         return None
     return sqrt(ratio_squared)
+
+
+def recovery_design_from_observed_predictor_sd(
+    *,
+    true_lambda: float,
+    observed_predictor_sd: float,
+    predictor_error_sd: float,
+    outcome_error_sd: float,
+    error_correlation: float = 0.0,
+    process_noise_sd: float = 0.0,
+    n_pairs: int,
+) -> LambdaRecoveryDesign:
+    """Construct a recovery design without guessing latent phase variance.
+
+    Under the additive independent-of-signal measurement model,
+
+        Var(E_obs) = Var(E_true) + Var(error_current).
+
+    The implied latent phase SD is therefore recovered from the empirical
+    predictor SD and an independently calibrated predictor-error SD.
+    """
+
+    observed_sd = _nonnegative(
+        "observed_predictor_sd",
+        observed_predictor_sd,
+    )
+    predictor_sd = _nonnegative(
+        "predictor_error_sd",
+        predictor_error_sd,
+    )
+    latent_variance = (
+        observed_sd**2
+        - predictor_sd**2
+    )
+    if latent_variance <= 0.0:
+        raise ValueError(
+            "predictor error SD leaves no positive latent phase variance"
+        )
+    return LambdaRecoveryDesign(
+        true_lambda=true_lambda,
+        latent_phase_sd=sqrt(latent_variance),
+        predictor_error_sd=predictor_sd,
+        outcome_error_sd=outcome_error_sd,
+        error_correlation=error_correlation,
+        process_noise_sd=process_noise_sd,
+        n_pairs=n_pairs,
+    )
