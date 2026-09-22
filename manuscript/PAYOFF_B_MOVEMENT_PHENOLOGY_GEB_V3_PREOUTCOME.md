@@ -14,7 +14,7 @@
 
 **Methods:** We tested a universal movement-to-phenology speed ratio in 5,816 bird-year-cell observations from 55 species, then estimated signed phase retention from E_next = a + λE_current + ε over declared movement intervals. We reconstructed three direct taxa, estimated environmental timing innovation separately, and tested an industrial-development perturbation.
 
-**Results:** Broad bird data rejected one universal natural speed optimum. Direct systems nevertheless showed phase contraction with strongly heterogeneous retention: mule deer (|λ| ≈ 0.11), primary barnacle-goose transitions (|λ| ≈ 0.11–0.49), and wigeon (|λ| ≈ 0.86). Mule deer used speed and stopover adjustments, barnacle geese used stage-specific stopover control and overtaking, whereas wigeon showed weak contraction without detected stopover or travel-speed responses. Environmental predictability did not map monotonically onto correction strength. Industrial development attenuated a movement-control permeability proxy, while a stronger predicted temporal deterioration was unsupported. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
+**Results:** Broad bird data rejected one universal natural speed optimum. Direct systems nevertheless yielded strongly heterogeneous naive phase-retention estimates: mule deer (|λ| ≈ 0.11), primary barnacle-goose transitions (|λ| ≈ 0.11–0.49), and wigeon (|λ| ≈ 0.86). Mule deer used speed and stopover adjustments, barnacle geese used stage-specific stopover control and overtaking, whereas wigeon showed weak contraction without detected stopover or travel-speed responses. Environmental predictability did not map monotonically onto correction strength. Industrial development attenuated a movement-control permeability proxy, while a stronger predicted temporal deterioration was unsupported. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
 [AIKENS LAMBDA ABSTRACT PENDING — render from the registered result JSON before submission.]
 <!-- AIKENS_LAMBDA_ABSTRACT_END -->
 
@@ -312,7 +312,7 @@ with stopover slope -0.524 d/d, while Barents R1→R2 had
 
 with stopover slope -0.591 d/d. Other route stages included near-complete reset and local amplification, demonstrating that a single species-wide \(\lambda\) is not biologically adequate.
 
-### Wigeon prospectively confirm weak phase contraction and falsify near-reset convergence
+### Wigeon prospectively show weak estimator-scale contraction and falsify near-reset convergence
 
 The wigeon movement reconstruction recovered 33 spring trajectories from 29 individuals, compared with 35 trajectories from 31 individuals in the published analysis. Median endpoint distance was 1,911 km versus 1,899 km published. The registered movement reconstruction gates all passed.
 
@@ -484,6 +484,8 @@ These mechanisms can produce similar observed arrival mismatch while implying di
 The current comparison spans three directly reconstructed taxa, not a global sample of migration strategies. Barnacle-goose flyways are repeated routes within one species and are not independent taxonomic replicates. Observation intervals differ among continuous and stopover-based systems, so \(\lambda\) should be interpreted as phase retention over a declared ecological correction interval rather than per unit time.
 
 Environmental reconstructions are also heterogeneous. Wigeon validation uses an independent NASA POWER reconstruction rather than the original ERA5 grid, and barnacle-goose analyses use independently reconstructed annual phenology anomalies rather than byte-identical historical climate inputs. These reconstructions were validated against available published timing summaries and were handled with explicit claim ceilings.
+
+A further limitation is errors-in-variables bias in the phase-retention slope. Because reconstructed phase appears on the predictor axis, additive error in \(E_{\rm current}\) can attenuate the naive slope toward zero even when latent \(\lambda=1\). If consecutive phase errors are correlated, the attenuation depends on their covariance and need not follow the independent-error case. We therefore froze a pre-Aikens parameter-recovery layer that simulates the exact observation-scale estimator under known \(\lambda\), including a true-\(\lambda=1\) null. Taxon-specific phase-error variances and consecutive-error correlations are not yet source-backed, so the present \(\lambda\) values should be treated as estimator-scale coordinates rather than measurement-error-corrected biological gains. In particular, differences among taxa cannot yet be attributed entirely to controller biology rather than differences in phase reliability.
 
 All direct results are observational. Phase contraction does not by itself demonstrate that the measured controller maximizes lifetime fitness or evolved specifically to minimize phenological error. Cue accuracy, behavioral timing, and fitness consequences need not coincide, as emphasized by recent phenology theory and migration reaction-norm studies (Torstenson & Shaw, 2025; Laforge et al., 2025). Finally, the industrial-development comparison cannot isolate development causally from all population and landscape differences.
 
