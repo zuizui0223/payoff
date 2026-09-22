@@ -1,3 +1,10 @@
+> **SUPERSEDED — DO NOT SUBMIT.** This V2 manuscript contains the pre-audit
+> full-year wigeon TGS reconstruction (lambda_hat=0.85994). The source-faithful
+> Jan--Jul reconstruction changed the wigeon lambda and stopover result, and the
+> GEB science gate is now on HOLD pending measurement-error calibration. The
+> current integration manuscript lives on PR #145; this file is retained only
+> as a historical pre-revalidation draft.
+
 # Migration timing as phase control: environmental information and phase retention across migratory taxa
 
 **Running title:** Phase control of migration
