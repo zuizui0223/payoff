@@ -1,0 +1,89 @@
+{
+  "registry_id": "payoff_b_lambda_recovery_taxon_registry_v1",
+  "frozen_date": "2026-09-22",
+  "Aikens_lambda_outcome_opened": false,
+  "systems": [
+    {
+      "system_id": "mule_deer_whole_migration",
+      "taxon": "Odocoileus hemionus",
+      "observed_lambda": 0.107,
+      "n_pairs": 152,
+      "n_individuals": 72,
+      "interval_id": "whole_spring_migration_start_to_end",
+      "source_receipt": "docs/MOVEMENT_PHENOLOGY_MULE_DEER_RECEIPT.md",
+      "predictor_phase_sd_days": null,
+      "predictor_error_sd_days": null,
+      "outcome_error_sd_days": null,
+      "error_correlation": null,
+      "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
+      "confirmatory_recovery_ready": false
+    },
+    {
+      "system_id": "barnacle_svalbard_southern_norway_to_svalbard",
+      "taxon": "Branta leucopsis",
+      "observed_lambda": -0.106,
+      "n_pairs": 16,
+      "n_individuals": 15,
+      "interval_id": "fixed_route_transition_southern_norway_to_svalbard",
+      "source_receipt": "docs/MOVEMENT_PHENOLOGY_BARNACLE_MULTIFLYWAY_DIRECT_RECEIPT.md",
+      "predictor_phase_sd_days": null,
+      "predictor_error_sd_days": null,
+      "outcome_error_sd_days": null,
+      "error_correlation": null,
+      "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
+      "confirmatory_recovery_ready": false
+    },
+    {
+      "system_id": "barnacle_greenland_R2_R3",
+      "taxon": "Branta leucopsis",
+      "observed_lambda": 0.130730883,
+      "n_pairs": 6,
+      "n_individuals": 6,
+      "interval_id": "fixed_route_transition_R2_R3",
+      "source_receipt": "docs/MOVEMENT_PHENOLOGY_BARNACLE_MULTIFLYWAY_DIRECT_RECEIPT.md",
+      "predictor_phase_sd_days": null,
+      "predictor_error_sd_days": null,
+      "outcome_error_sd_days": null,
+      "error_correlation": null,
+      "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
+      "confirmatory_recovery_ready": false
+    },
+    {
+      "system_id": "barnacle_barents_R1_R2",
+      "taxon": "Branta leucopsis",
+      "observed_lambda": 0.494113942,
+      "n_pairs": 12,
+      "n_individuals": 8,
+      "interval_id": "fixed_route_transition_R1_R2",
+      "source_receipt": "docs/MOVEMENT_PHENOLOGY_BARNACLE_MULTIFLYWAY_DIRECT_RECEIPT.md",
+      "predictor_phase_sd_days": null,
+      "predictor_error_sd_days": null,
+      "outcome_error_sd_days": null,
+      "error_correlation": null,
+      "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
+      "confirmatory_recovery_ready": false
+    },
+    {
+      "system_id": "eurasian_wigeon_staging_transition",
+      "taxon": "Mareca penelope",
+      "observed_lambda": 0.85994,
+      "observed_lambda_se": 0.04509,
+      "n_pairs": 224,
+      "n_individuals": 28,
+      "interval_id": "consecutive_reconstructed_staging_transition",
+      "source_receipt": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
+      "predictor_phase_sd_days": null,
+      "predictor_error_sd_days": null,
+      "outcome_error_sd_days": null,
+      "error_correlation": null,
+      "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
+      "confirmatory_recovery_ready": false
+    }
+  ],
+  "rules": {
+    "environmental_innovation_sd_is_not_measurement_error_sd": true,
+    "route_rows_are_not_extra_taxa": true,
+    "no_taxon_specific_null_until_error_calibration_ready": true,
+    "no_Aikens_profile_until_registered_outcome_is_opened": true
+  }
+}
