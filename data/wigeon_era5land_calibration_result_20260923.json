@@ -1,0 +1,114 @@
+{
+  "result_id": "wigeon_era5land_phase_error_calibration_run4_20260923",
+  "frozen_date": "2026-09-23",
+  "workflow_run": 35746519876,
+  "source_head": "4b9b45954e48fe64ed56f772a5742b7d28ccf7e6",
+  "artifact_id": 10703650109,
+  "artifact_name": "payoff-b-wigeon-era5land-phase-error-calibration",
+  "artifact_zip_sha256": "1c4aa34f008a3fc6bd45c1747b0e5978446be5581fefe4233c2b954f00799265",
+  "registration": "data/wigeon_phase_error_era5land_replication_registration_20260922.json",
+  "implementation_amendment": "data/wigeon_era5land_calibration_implementation_amendment_20260923.json",
+  "registered_calibration_status": "FAIL",
+  "failure_reason": {
+    "coverage_gate_passed": false,
+    "paired_events": 220,
+    "frozen_events": 256,
+    "paired_fraction": 0.859375,
+    "minimum_events_required": 200,
+    "minimum_fraction_required": 0.9,
+    "published_phase_validation_passed": true,
+    "power_refit_identity_passed": true,
+    "complete_transition_pairs": 181,
+    "all_frozen_transitions_complete": false
+  },
+  "replicate_disagreement": {
+    "n_events": 220,
+    "mean_days": 2.0136363636363632,
+    "median_days": 0.0,
+    "sample_sd_days": 5.434104670117694,
+    "q025_days": -6.100000000000001,
+    "q25_days": 0.0,
+    "q75_days": 2.0,
+    "q975_days": 18.0,
+    "equal_independent_replicate_sensitivity_error_sd_days": 3.842492261917708,
+    "conservative_full_disagreement_scale_days": 5.434104670117694,
+    "consecutive_discrepancy_correlation": 0.28808890118612246,
+    "consecutive_discrepancy_correlation_p": 8.399943234841401e-05
+  },
+  "controller_checks": {
+    "full_power": {
+      "pairs": 224,
+      "individuals": 28,
+      "lambda_hat": 0.7497680211367304,
+      "cluster_se": 0.04990566712278243,
+      "naive_p_vs_one": 5.328241982728164e-07,
+      "residualized_origin_phase_sd_days": 14.627754946081419,
+      "process_residual_sd_days": 10.084153314053367
+    },
+    "paired_power": {
+      "pairs": 181,
+      "individuals": 25,
+      "lambda_hat": 0.8379631788095746,
+      "cluster_se": 0.06189043961755417,
+      "naive_p_vs_one": 0.008841477102916447
+    },
+    "paired_era5land": {
+      "pairs": 181,
+      "individuals": 25,
+      "lambda_hat": 0.8651588000237029,
+      "cluster_se": 0.06813179331633679,
+      "naive_p_vs_one": 0.047802158201126176
+    },
+    "paired_era5land_minus_power_lambda_hat": 0.02719562121412833
+  },
+  "true_lambda_one_sensitivity": [
+    {
+      "name": "equal_independent_replicates_rho0",
+      "predictor_error_sd_days": 3.842492261917708,
+      "error_correlation": 0.0,
+      "expected_naive_lambda_under_true_one": 0.9309965744725138,
+      "null_q025": 0.8256975897506801,
+      "null_q50": 0.931245068580429,
+      "null_q975": 1.0338739513131079,
+      "lower_tail_probability_at_observed_lambda": 0.00029997000299970003,
+      "eiv_corrected_observed_lambda": 0.8053391835104611
+    },
+    {
+      "name": "equal_replicates_discrepancy_correlation_proxy",
+      "predictor_error_sd_days": 3.842492261917708,
+      "error_correlation": 0.28808890118612246,
+      "expected_naive_lambda_under_true_one": 0.9508756955108058,
+      "null_q025": 0.8537642707318001,
+      "null_q50": 0.9505533098168151,
+      "null_q975": 1.0512632290969797,
+      "lower_tail_probability_at_observed_lambda": 0.00009999000099990002,
+      "eiv_corrected_observed_lambda": 0.78398666559217
+    },
+    {
+      "name": "conservative_full_disagreement_rho0",
+      "predictor_error_sd_days": 5.434104670117694,
+      "error_correlation": 0.0,
+      "expected_naive_lambda_under_true_one": 0.8619931489450278,
+      "null_q025": 0.748390341827434,
+      "null_q50": 0.8621016669307412,
+      "null_q975": 0.9746065770534731,
+      "lower_tail_probability_at_observed_lambda": 0.026597340265973404,
+      "eiv_corrected_observed_lambda": 0.8698074016647964
+    }
+  ],
+  "interpretation": {
+    "registered_calibration_complete": false,
+    "reason": "event coverage 0.859375 is below the frozen 0.90 threshold",
+    "paired_reconstruction_lambda_similarity": "POWER and ERA5-Land differ by only 0.0272 on the same 181-transition subset",
+    "measurement_error_sensitivity_role": "INCOMPLETE_CALIBRATION_DIAGNOSTIC_ONLY",
+    "wigeon_primary_W1_changed": false,
+    "Aikens_lambda_outcome_opened": false
+  },
+  "claim_boundary": [
+    "The frozen ERA5-Land calibration gate remains FAIL.",
+    "POWER-ERA5-Land disagreement is not a gold-standard error estimate.",
+    "The true-lambda=1 nulls are observation-error sensitivity diagnostics from an incomplete calibration and do not promote a measurement-error-corrected latent lambda.",
+    "The numerical sensitivity results may be used to prioritize follow-up calibration but not to erase the registered coverage failure.",
+    "The post-hoc coastal-mask diagnostic is separate and cannot retroactively convert this registered FAIL to PASS."
+  ]
+}
