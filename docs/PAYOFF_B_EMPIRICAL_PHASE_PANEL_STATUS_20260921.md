@@ -69,14 +69,88 @@ The direct lambda values above are naive regression-scale estimates. Because
 phase is reconstructed and appears on the predictor axis, predictor measurement
 error can attenuate lambda toward zero.
 
-A pre-Aikens recovery layer is now frozen in:
+The observation-error recovery layer is frozen in:
 
     src/phase_retention_recovery.py
     data/payoff_b_lambda_recovery_validation_contract_20260922.json
     data/payoff_b_lambda_recovery_taxon_registry_20260922.json
 
-Until source-backed phase-error SDs, predictor phase variances, and consecutive
-error correlations are calibrated for each system:
+The registered wigeon POWER-versus-ERA5-Land event-level replicate calibration
+was executed on 2026-09-23.
+
+Registered calibration outcome:
+
+    paired events:
+        220 / 256
+
+    paired fraction:
+        0.859375
+
+    frozen minimum fraction:
+        0.90
+
+    minimum count >=200:
+        PASS
+
+    published phase validation:
+        PASS
+
+    full-224 POWER identity:
+        PASS
+
+    REGISTERED CALIBRATION:
+        FAIL
+        reason = event coverage below frozen 0.90 threshold
+
+The coverage threshold is not relaxed.
+
+The incomplete calibration is nevertheless informative as a sensitivity lane.
+
+Paired-event disagreement:
+
+    median:
+        0 d
+
+    SD:
+        5.434 d
+
+Paired 181-transition controller comparison:
+
+    POWER lambda_hat:
+        0.83796
+
+    ERA5-Land lambda_hat:
+        0.86516
+
+    difference:
+        +0.02720
+
+True-lambda=1 sensitivity using the frozen full-224 POWER signal:
+
+    equal-independent-replicate error SD = 3.842 d
+        lower-tail probability at observed lambda_hat:
+            0.000300
+
+    discrepancy-correlation proxy rho = 0.288
+        lower-tail probability:
+            0.000100
+
+    deliberately conservative full-disagreement SD = 5.434 d
+        null 2.5% quantile:
+            0.74839
+
+        observed source-faithful lambda_hat:
+            0.74977
+
+        lower-tail probability:
+            0.0266
+
+These values are **incomplete-calibration robustness diagnostics**, not a final
+measurement-error correction. They show that the source-faithful wigeon
+estimate is not trivially reproduced by the observed POWER--ERA5-Land
+disagreement scales, while preserving the registered calibration FAIL.
+
+Current measurement-error claim state:
 
     portable phase coordinate:
         RETAINED
@@ -85,18 +159,23 @@ error correlations are calibrated for each system:
         NOT CLAIMED
 
     biological interpretation of cross-system lambda magnitude differences:
-        PENDING MEASUREMENT-ERROR AUDIT
+        PENDING COMPLETE RELIABILITY AUDIT
 
-    latent lambda < 1 from naive lambda_hat < 1 alone:
-        NOT YET LICENSED
+    final measurement-error-corrected wigeon latent lambda:
+        NOT LICENSED
 
-The corrected wigeon result is a valid source-faithful estimator-scale result,
-but its naive p-value against lambda_hat=1 is not a substitute for a
-true-lambda=1 errors-in-variables null. Its observed origin-phase SD is
-15.88 d; under the simple equal-independent-error stress model, about 7.94 d of
-phase-error SD would be sufficient in expectation to reproduce the observed
-lambda_hat from latent lambda=1. That number is a stress threshold, not an
-empirical error estimate.
+    wigeon source-faithful estimator-scale contraction:
+        RETAINED
+
+Machine receipt:
+
+    data/wigeon_era5land_calibration_result_20260923.json
+
+A post-hoc coastal-mask diagnostic now tests why 36 registered nearest-cell
+ERA5-Land requests returned HTTP 200 but no finite Jan--Jul temperatures.
+Because the primary registration froze cell_selection=nearest, that diagnostic
+cannot retroactively convert the calibration FAIL to PASS.
+
 
 ## Additional within-taxon actuator evidence
 
@@ -215,66 +294,22 @@ panel size without materially strengthening the central claim.
 
 ## Current preferred next empirical move
 
-The preferred next empirical task is **not** to add a fourth taxon and is now
-also **not** to open the Aikens lambda outcome immediately.
+The preferred next task remains **not** to add a fourth taxon.
 
-The source-faithful wigeon correction shows that environmental observation
-details can materially shift both lambda and actuator inference. The next gate
-is therefore source-backed phase-error calibration for the direct systems,
-with wigeon first because it is the prospective third-taxon test.
+The immediate sequence is:
 
-Required before biological interpretation of latent lambda:
+    1. complete the post-hoc wigeon coastal-mask diagnostic;
+    2. preserve the registered nearest-cell ERA5-Land calibration as FAIL;
+    3. use the replicate-disagreement simulations only as a robustness/claim
+       audit unless a new independently frozen calibration lane is justified;
+    4. keep Aikens lambda unopened until its registered environmental extraction
+       is executable.
 
-    observed predictor phase variance:
-        source-faithful value frozen
+The wigeon source correction and error audit show that environmental observation
+details can move both lambda and actuator inference. Generality should therefore
+be expanded by increasing **inferential coverage**, not by mechanically
+increasing taxon count.
 
-    predictor measurement-error SD:
-        PENDING
-
-    outcome measurement-error SD:
-        PENDING
-
-    consecutive-error correlation:
-        PENDING
-
-    true-lambda=1 observation-scale null:
-        PENDING.
-
-The Aikens industrial-development within-mule-deer lambda perturbation remains
-preregistered and unopened. It should stay unopened until this recovery/null
-layer is frozen enough that the new Aikens result cannot determine how phase
-measurement error will be handled.
-
-The Aikens prediction remains
-
-    lambda_large-development
-    >
-    lambda_small-development
-
-on the preregistered coordinate
-
-    signed_days_relative_to_local_peak_IRG
-
-and segment scale
-
-    fixed_24h_spring_migration_interval.
-
-It remains a within-system lambda perturbation and is not added to the
-cross-system lambda synthesis.
-
-More generally, future additional systems should test a new region or boundary
-of lambda-space.
-
-Examples of useful future tests include:
-
-- a system predicted to approach lambda ~= 1 under weak control;
-- a system predicted to cross lambda=0 into overshoot;
-- a forcing regime expected to change lambda while preserving actuator
-  architecture;
-- two systems with similar lambda but deliberately different actuators;
-- one system with a registered actuator switch while lambda remains stable.
-
-These would test the geometry rather than merely replicate taxonomy.
 
 ## Frozen references
 
