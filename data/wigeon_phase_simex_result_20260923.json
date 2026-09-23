@@ -1,0 +1,75 @@
+{
+  "result_id": "wigeon_phase_simex_sensitivity_local_reproduction_20260923",
+  "frozen_date": "2026-09-23",
+  "status": "PROVISIONAL_EXACT_CONTRACT_REPRODUCTION_PENDING_ACTIONS_CONFIRMATION",
+  "contract": "data/wigeon_phase_simex_sensitivity_contract_20260923.json",
+  "source_artifact_id": 10678143392,
+  "source_artifact_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+  "pairs": 224,
+  "individuals": 28,
+  "execution": {
+    "mode": "local exact-contract reproduction",
+    "zeta": [0.5, 1.0, 1.5, 2.0],
+    "replicates_per_zeta": 1000,
+    "base_seed": 20260923,
+    "event_error_unit": "individual_id/year/segment",
+    "shared_adjacent_event_error": true,
+    "within_individual_year_error_process": "stationary Gaussian AR1",
+    "quadratic_extrapolation_target_zeta": -1
+  },
+  "results": [
+    {
+      "scenario_name": "equal_independent_replicates_rho0",
+      "error_sd_days": 3.842492261917708,
+      "error_correlation": 0.0,
+      "observed_lambda_hat": 0.7497680211367306,
+      "zeta_points": [
+        {"zeta": 0.5, "replicates": 1000, "mean_lambda_hat": 0.724164272379294, "sd_lambda_hat": 0.01458072152301058, "q025": 0.6956693271507952, "q50": 0.7241847481170467, "q975": 0.7519967570478088},
+        {"zeta": 1.0, "replicates": 1000, "mean_lambda_hat": 0.7013726992147564, "sd_lambda_hat": 0.018513043770567818, "q025": 0.6646788245211808, "q50": 0.7014809003044827, "q975": 0.737286419368337},
+        {"zeta": 1.5, "replicates": 1000, "mean_lambda_hat": 0.6781980433034847, "sd_lambda_hat": 0.023574957993208908, "q025": 0.630449781933747, "q50": 0.6781208017494776, "q975": 0.7245789770607542},
+        {"zeta": 2.0, "replicates": 1000, "mean_lambda_hat": 0.6597467071464602, "sd_lambda_hat": 0.02745436337647629, "q025": 0.604886678091028, "q50": 0.6601560268571632, "q975": 0.7119200186412014}
+      ],
+      "quadratic_coefficients": [0.003977640701168549, -0.05315705281360737, 0.7498405403979991],
+      "simex_extrapolated_lambda_at_minus_one": 0.806975233912775
+    },
+    {
+      "scenario_name": "equal_replicates_discrepancy_correlation_proxy",
+      "error_sd_days": 3.842492261917708,
+      "error_correlation": 0.28808890118612246,
+      "observed_lambda_hat": 0.7497680211367306,
+      "zeta_points": [
+        {"zeta": 0.5, "replicates": 1000, "mean_lambda_hat": 0.7338556875857003, "sd_lambda_hat": 0.013391503420261833, "q025": 0.7072329138878733, "q50": 0.7339708370477936, "q975": 0.7574828917557627},
+        {"zeta": 1.0, "replicates": 1000, "mean_lambda_hat": 0.7186881204732369, "sd_lambda_hat": 0.01755188903935405, "q025": 0.6849734507170496, "q50": 0.7182308116280463, "q975": 0.7545079732924244},
+        {"zeta": 1.5, "replicates": 1000, "mean_lambda_hat": 0.7067084459438553, "sd_lambda_hat": 0.022539041803922057, "q025": 0.6630420199896347, "q50": 0.7077342638536414, "q975": 0.7497808376044739},
+        {"zeta": 2.0, "replicates": 1000, "mean_lambda_hat": 0.6919094506231293, "sd_lambda_hat": 0.024553334552427215, "q025": 0.6424336314660244, "q50": 0.6912579330931738, "q975": 0.739093958597294}
+      ],
+      "quadratic_coefficients": [0.001547019726768466, -0.03166691598734654, 0.7495323315497239],
+      "simex_extrapolated_lambda_at_minus_one": 0.7827462672638389
+    },
+    {
+      "scenario_name": "conservative_full_disagreement_rho0",
+      "error_sd_days": 5.434104670117694,
+      "error_correlation": 0.0,
+      "observed_lambda_hat": 0.7497680211367306,
+      "zeta_points": [
+        {"zeta": 0.5, "replicates": 1000, "mean_lambda_hat": 0.7023505900352174, "sd_lambda_hat": 0.018860876120678712, "q025": 0.665845312818852, "q50": 0.7035163604622803, "q975": 0.7373352035175326},
+        {"zeta": 1.0, "replicates": 1000, "mean_lambda_hat": 0.6572536769161839, "sd_lambda_hat": 0.02830641962551659, "q025": 0.6005238321175431, "q50": 0.6574467863224439, "q975": 0.7096134043391527},
+        {"zeta": 1.5, "replicates": 1000, "mean_lambda_hat": 0.6213131677585504, "sd_lambda_hat": 0.0326775583747327, "q025": 0.5548531284634161, "q50": 0.6220238012331498, "q975": 0.6835488969371447},
+        {"zeta": 2.0, "replicates": 1000, "mean_lambda_hat": 0.5860499399234016, "sd_lambda_hat": 0.036366106857935426, "q025": 0.513360932450583, "q50": 0.5867108086135219, "q975": 0.6564869815064593}
+      ],
+      "quadratic_coefficients": [0.009561374426893855, -0.10081746579445289, 0.7498224833081284],
+      "simex_extrapolated_lambda_at_minus_one": 0.8602013235294751
+    }
+  ],
+  "summary": {
+    "simex_extrapolated_lambda_range": [0.7827462672638389, 0.8602013235294751],
+    "all_extrapolated_values_below_one": true,
+    "interpretation": "measurement-error extrapolation raises lambda relative to the naive 0.749768 estimate but does not approach complete retention under any frozen sensitivity scenario"
+  },
+  "claim_boundary": [
+    "These are SIMEX sensitivity values conditional on error scales derived from an incomplete registered ERA5-Land calibration.",
+    "The registered ERA5-Land calibration remains FAIL.",
+    "The extrapolated values are not promoted as true latent biological lambda.",
+    "Canonical status requires matching GitHub Actions reproduction from the frozen workflow."
+  ]
+}
