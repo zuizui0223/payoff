@@ -165,6 +165,37 @@ For fixed barnacle-goose region pairs we modeled destination spring anomaly from
 
 was used as the environmental innovation scale. We compared this quantity descriptively with direct phase retention \(|\lambda|\). Transition rows share species, routes, and sometimes individuals, so they were not analyzed as independent studies.
 
+### Measurement-error recovery and replicate environmental calibration
+
+Because phase is reconstructed and appears on the predictor axis, ordinary
+least-squares estimates of \(\lambda\) are vulnerable to regression dilution.
+We therefore used the local PAYOFF-B tracking recurrence as a known-\(\lambda\)
+generator and added an explicit observation layer. If latent incoming phase has
+variance \(V_E\), predictor error variance \(V_u\), and covariance \(C_{uv}\)
+between consecutive phase errors, the large-sample naive slope is
+
+\[
+E[\hat\lambda]
+=
+\frac{\lambda V_E+C_{uv}}
+{V_E+V_u}.
+\]
+
+We verified this attenuation analytically and by seed-explicit Monte Carlo
+simulation, then generated true-\(\lambda=1\) null distributions on the same
+estimator scale.
+
+For wigeon, the highest-risk direct system because its naive retention is
+closest to one, we froze an independent POWER-versus-ERA5-Land event-level
+replicate calibration before the Aikens outcome was opened. The ERA5-Land
+replicate used the same January--July 5 C TGS rule and the frozen wigeon staging
+events. The registered coverage gate required at least 200 paired events and
+90% coverage of the 256 frozen events. POWER was refit on the full 224
+transitions as an identity check, and like-for-like POWER and ERA5-Land
+controllers were compared on transitions with both environmental
+reconstructions. Replicate disagreement was used only as a sensitivity scale,
+not as a gold-standard measurement-error estimate.
+
 ### Industrial-development actuation test
 
 We reanalyzed the archived spring-migration GPS and development-footprint shapefiles from Aikens et al. (2022). Coordinates were transformed into the GPS reference system before calculating distances.
@@ -359,6 +390,42 @@ contraction and a specific waiting-time actuator. Its numeric lambda remains a
 naive errors-in-variables estimate and is interpreted separately from the
 measurement-error audit below.
 
+### Observation-error recovery does not trivially explain the wigeon estimate
+
+The registered ERA5-Land replicate calibration did not pass its complete
+coverage gate: 220 of 256 staging events had both reconstructions
+(85.9%, below the frozen 90% threshold), although the minimum count criterion,
+the published-phase validation, and the full-224 POWER identity check passed.
+The calibration is therefore retained as a registered **FAIL**, not promoted
+to a completed error model.
+
+The incomplete paired data were nevertheless informative as a robustness
+diagnostic. Across 220 paired events, the ERA5-Land-minus-POWER phase
+difference had median 0 d and SD 5.43 d. On the identical 181 complete staging
+transitions,
+
+\[
+\hat\lambda_{\rm POWER}=0.838,
+\qquad
+\hat\lambda_{\rm ERA5-Land}=0.865,
+\]
+
+a difference of 0.027.
+
+Under an equal-independent-replicate interpretation, the corresponding error
+SD was 3.84 d. A true-\(\lambda=1\) simulation using the frozen 224-transition
+POWER signal and process-noise scales gave a lower-tail probability of
+\(3.0\times10^{-4}\) at the observed source-faithful
+\(\hat\lambda=0.7498\). Using the observed consecutive discrepancy correlation
+gave \(1.0\times10^{-4}\). In a deliberately conservative sensitivity that
+treated the entire 5.43-d POWER--ERA5-Land disagreement SD as measurement error,
+the true-\(\lambda=1\) null had a 2.5% quantile of 0.7484 and a lower-tail
+probability of 0.0266.
+
+These simulations therefore do not make the wigeon contraction disappear under
+the observed replicate-disagreement scales, but the failed coverage gate
+prevents us from treating them as a final measurement-error correction.
+
 ### Three taxa share a phase coordinate and a recurrent waiting-time actuator
 
 The source-faithful direct naive phase-retention summaries now span:
@@ -522,7 +589,7 @@ The current comparison spans three directly reconstructed taxa, not a global sam
 
 Environmental reconstructions are also heterogeneous. Wigeon validation uses an independent NASA POWER reconstruction rather than the original ERA5 grid, and barnacle-goose analyses use independently reconstructed annual phenology anomalies rather than byte-identical historical climate inputs. These reconstructions were validated against available published timing summaries and were handled with explicit claim ceilings.
 
-A further limitation is errors-in-variables bias in the phase-retention slope. Because reconstructed phase appears on the predictor axis, additive error in \(E_{\rm current}\) can attenuate the naive slope toward zero even when latent \(\lambda=1\). If consecutive phase errors are correlated, the attenuation depends on their covariance and need not follow the independent-error case. We therefore froze a pre-Aikens parameter-recovery layer that simulates the exact observation-scale estimator under known \(\lambda\), including a true-\(\lambda=1\) null. Taxon-specific phase-error variances and consecutive-error correlations are not yet source-backed, so the present \(\lambda\) values should be treated as estimator-scale coordinates rather than measurement-error-corrected biological gains. In particular, differences among taxa cannot yet be attributed entirely to controller biology rather than differences in phase reliability.
+A further limitation is errors-in-variables bias in the phase-retention slope. Because reconstructed phase appears on the predictor axis, additive error in \(E_{\rm current}\) can attenuate the naive slope toward zero even when latent \(\lambda=1\). If consecutive phase errors are correlated, the attenuation depends on their covariance and need not follow the independent-error case. The pre-Aikens recovery layer shows that the source-faithful wigeon estimate remains unusually low relative to true-\(\lambda=1\) nulls across several frozen replicate-disagreement sensitivities. However, the registered ERA5-Land calibration itself failed its 90% event-coverage gate, so these are robustness diagnostics rather than a completed error model. The present \(\lambda\) values therefore remain estimator-scale coordinates rather than measurement-error-corrected biological gains, and cross-taxon magnitude differences cannot yet be attributed entirely to controller biology rather than differences in phase reliability.
 
 All direct results are observational. Phase contraction does not by itself demonstrate that the measured controller maximizes lifetime fitness or evolved specifically to minimize phenological error. Cue accuracy, behavioral timing, and fitness consequences need not coincide, as emphasized by recent phenology theory and migration reaction-norm studies (Torstenson & Shaw, 2025; Laforge et al., 2025). Finally, the industrial-development comparison cannot isolate development causally from all population and landscape differences.
 
@@ -588,6 +655,7 @@ This manuscript supports:
 
 - failure of a universal natural speed-ratio optimum in the registered broad bird test;
 - source-faithful naive phase-retention estimates in mule deer, barnacle goose and prospectively tested wigeon;
+- a pre-Aikens observation-error recovery analysis showing that the wigeon estimator remains below true-lambda=1 null expectations across frozen replicate-disagreement sensitivities, while the registered ERA5-Land calibration itself fails its coverage gate;
 - recurrent stopover/waiting compensation across the three direct taxa, with heterogeneous speed and route-level actuator evidence;
 - separation of environmental innovation from realized phase retention;
 - a quantitative industrial-development actuation contrast with a falsified stronger longitudinal prediction.
@@ -595,6 +663,7 @@ This manuscript supports:
 It does not support:
 
 - a universal phase-retention coefficient;
+- a final measurement-error-corrected latent wigeon lambda or a completed cross-taxon reliability correction;
 - one common reactive behavioral mechanism across taxa;
 - a causal effect of predictability on feedback strength;
 - an evolutionary fitness optimum for the empirical \(\lambda\) values;
