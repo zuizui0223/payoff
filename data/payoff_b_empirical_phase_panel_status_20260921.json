@@ -61,7 +61,7 @@
     ],
     "actuator_only_alternative": "same-taxon prospective mechanism perturbations can add evidence without adding taxon count or lambda support"
   },
-  "preferred_next_empirical_move": "complete wigeon coastal-mask diagnosis and preserve the registered calibration FAIL before expanding taxonomy or opening new lambda evidence",
+  "preferred_next_empirical_move": "complete the frozen actual-design wigeon SIMEX sensitivity, preserve registered ERA5-Land FAIL, then keep Aikens unopened until its registered extraction is executable",
   "evidence_units": {
     "direct_phase_retention_taxa": 3,
     "prospective_lambda_extensions": 1,
@@ -122,13 +122,22 @@
     },
     "sensitivity_role": "INCOMPLETE_CALIBRATION_ROBUSTNESS_DIAGNOSTIC_ONLY",
     "calibration_receipt": "data/wigeon_era5land_calibration_result_20260923.json",
-    "coastal_mask_diagnostic_status": "PENDING_POST_HOC_DIAGNOSTIC",
+    "coastal_mask_diagnostic_status": "COMPLETE_ZERO_OF_36_RECOVERED",
     "calibration_registration": "data/wigeon_phase_error_era5land_replication_registration_20260922.json",
     "claim_boundary": [
       "registered ERA5-Land calibration remains failed",
       "no final corrected latent lambda is licensed",
       "cross-taxon lambda magnitude differences remain estimator-scale",
       "post-hoc land-cell diagnosis cannot retroactively satisfy the registered nearest-cell gate"
-    ]
+    ],
+    "coastal_mask_diagnostic": {
+      "primary_missing_events": 36,
+      "diagnostic_cell_selection": "land",
+      "recovered_events": 0,
+      "recovery_fraction": 0,
+      "counterfactual_event_coverage": 0.859375,
+      "conclusion": "nearest-ocean-cell explanation not supported; missingness unresolved",
+      "receipt": "data/wigeon_era5land_coastal_mask_diagnostic_result_20260923.json"
+    }
   }
 }
