@@ -61,7 +61,7 @@
     ],
     "actuator_only_alternative": "same-taxon prospective mechanism perturbations can add evidence without adding taxon count or lambda support"
   },
-  "preferred_next_empirical_move": "add inferential coverage in lambda-space or mechanism-space before adding taxonomy",
+  "preferred_next_empirical_move": "complete wigeon coastal-mask diagnosis and preserve the registered calibration FAIL before expanding taxonomy or opening new lambda evidence",
   "evidence_units": {
     "direct_phase_retention_taxa": 3,
     "prospective_lambda_extensions": 1,
@@ -94,16 +94,41 @@
     "actuator_perturbation_already_supported": true,
     "exact_movement_source_ready": true,
     "exact_appeears_manifest_ready": true,
-    "current_blocker": "authenticated Aikens environmental extraction; wigeon measurement-error calibration is a parallel claim-audit lane",
+    "current_blocker": "authenticated Aikens environmental extraction; wigeon registered measurement-error calibration failed coverage and is under separate coastal-mask diagnosis",
     "lambda_outcome_opened": false
   },
   "revalidated_date": "2026-09-22",
   "measurement_error_status": {
     "latent_lambda_comparison_ready": false,
-    "reason": "source-backed phase-error calibration remains incomplete; naive lambda_hat values are estimator-scale quantities",
-    "wigeon_observed_origin_phase_sd_days": 15.881166579869618,
-    "wigeon_true_lambda_one_equal_independent_stress_error_sd_days": 7.944266530669527,
-    "stress_value_role": "threshold only, not an empirical error estimate",
-    "calibration_registration": "data/wigeon_phase_error_era5land_replication_registration_20260922.json"
+    "registered_wigeon_calibration_status": "FAIL_COVERAGE",
+    "paired_events": 220,
+    "frozen_events": 256,
+    "paired_fraction": 0.859375,
+    "frozen_minimum_fraction": 0.9,
+    "minimum_event_count_passed": true,
+    "published_phase_validation_passed": true,
+    "power_refit_identity_passed": true,
+    "paired_event_disagreement_sd_days": 5.434104670117694,
+    "equal_independent_replicate_error_sd_days": 3.842492261917708,
+    "paired_power_lambda_hat": 0.8379631788095746,
+    "paired_era5land_lambda_hat": 0.8651588000237029,
+    "paired_lambda_difference": 0.02719562121412833,
+    "true_lambda_one_sensitivity": {
+      "equal_independent_replicates_lower_tail_probability": 0.00029997000299970003,
+      "discrepancy_correlation_proxy_lower_tail_probability": 0.00009999000099990002,
+      "conservative_full_disagreement_lower_tail_probability": 0.026597340265973404,
+      "conservative_full_disagreement_null_q025": 0.748390341827434,
+      "observed_source_faithful_lambda_hat": 0.7497680211367301
+    },
+    "sensitivity_role": "INCOMPLETE_CALIBRATION_ROBUSTNESS_DIAGNOSTIC_ONLY",
+    "calibration_receipt": "data/wigeon_era5land_calibration_result_20260923.json",
+    "coastal_mask_diagnostic_status": "PENDING_POST_HOC_DIAGNOSTIC",
+    "calibration_registration": "data/wigeon_phase_error_era5land_replication_registration_20260922.json",
+    "claim_boundary": [
+      "registered ERA5-Land calibration remains failed",
+      "no final corrected latent lambda is licensed",
+      "cross-taxon lambda magnitude differences remain estimator-scale",
+      "post-hoc land-cell diagnosis cannot retroactively satisfy the registered nearest-cell gate"
+    ]
   }
 }
