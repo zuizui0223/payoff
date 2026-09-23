@@ -12,6 +12,7 @@ on:
       - 'src/wigeon_phase_simex.py'
       - 'scripts/run_wigeon_phase_simex_sensitivity.py'
       - 'tests/test_wigeon_phase_simex.py'
+      - 'data/wigeon_phase_simex_result_20260923.json'
       - '.github/workflows/payoff-b-wigeon-phase-simex.yml'
 
 permissions:
@@ -63,6 +64,52 @@ jobs:
           --curve-output outputs/wigeon_phase_simex_curve.csv
           --receipt-output outputs/wigeon_phase_simex_receipt.json
 
+      - name: Verify deterministic SIMEX result against frozen provisional receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          observed = json.loads(
+              Path("outputs/wigeon_phase_simex_receipt.json").read_text()
+          )
+          expected = json.loads(
+              Path("data/wigeon_phase_simex_result_20260923.json").read_text()
+          )
+
+          obs = {
+              row["scenario_name"]: row
+              for row in observed["results"]
+          }
+          exp = {
+              row["scenario_name"]: row
+              for row in expected["results"]
+          }
+          assert set(obs) == set(exp)
+          for name in sorted(exp):
+              assert abs(
+                  obs[name]["observed_lambda_hat"]
+                  - exp[name]["observed_lambda_hat"]
+              ) <= 1e-12
+              assert abs(
+                  obs[name]["simex_extrapolated_lambda_at_minus_one"]
+                  - exp[name]["simex_extrapolated_lambda_at_minus_one"]
+              ) <= 1e-10
+              assert len(obs[name]["zeta_points"]) == len(
+                  exp[name]["zeta_points"]
+              )
+              for got, want in zip(
+                  obs[name]["zeta_points"],
+                  exp[name]["zeta_points"],
+              ):
+                  assert got["zeta"] == want["zeta"]
+                  assert abs(
+                      got["mean_lambda_hat"]
+                      - want["mean_lambda_hat"]
+                  ) <= 1e-10
+          print("WIGEON_SIMEX_FROZEN_RESULT_MATCH")
+          PY
+
       - uses: actions/upload-artifact@v4
         with:
           name: payoff-b-wigeon-phase-simex
@@ -70,3 +117,4 @@ jobs:
             outputs/wigeon_phase_simex_curve.csv
             outputs/wigeon_phase_simex_receipt.json
             data/wigeon_phase_simex_sensitivity_contract_20260923.json
+            data/wigeon_phase_simex_result_20260923.json
