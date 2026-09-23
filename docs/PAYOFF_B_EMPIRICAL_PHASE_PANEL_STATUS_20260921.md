@@ -171,10 +171,17 @@ Machine receipt:
 
     data/wigeon_era5land_calibration_result_20260923.json
 
-A post-hoc coastal-mask diagnostic now tests why 36 registered nearest-cell
+A post-hoc coastal-mask diagnostic tested why 36 registered nearest-cell
 ERA5-Land requests returned HTTP 200 but no finite Jan--Jul temperatures.
-Because the primary registration froze cell_selection=nearest, that diagnostic
-cannot retroactively convert the calibration FAIL to PASS.
+Repeating all 36 failed coordinate-year requests with cell_selection=land
+recovered **0 / 36** events. The simple nearest-ocean-cell explanation is
+therefore not supported. Missingness remains unresolved provider/model response
+or availability behavior. No replacement values are introduced and the
+registered calibration remains FAIL.
+
+Diagnostic receipt:
+
+    data/wigeon_era5land_coastal_mask_diagnostic_result_20260923.json
 
 
 ## Additional within-taxon actuator evidence
@@ -298,11 +305,12 @@ The preferred next task remains **not** to add a fourth taxon.
 
 The immediate sequence is:
 
-    1. complete the post-hoc wigeon coastal-mask diagnostic;
-    2. preserve the registered nearest-cell ERA5-Land calibration as FAIL;
-    3. use the replicate-disagreement simulations only as a robustness/claim
-       audit unless a new independently frozen calibration lane is justified;
-    4. keep Aikens lambda unopened until its registered environmental extraction
+    1. preserve the registered nearest-cell ERA5-Land calibration as FAIL;
+    2. treat the zero-recovery coastal diagnostic as closing that technical
+       explanation rather than opening a new tuning path;
+    3. complete the already frozen actual-design SIMEX sensitivity;
+    4. use all measurement-error results only as robustness/claim audits;
+    5. keep Aikens lambda unopened until its registered environmental extraction
        is executable.
 
 The wigeon source correction and error audit show that environmental observation
