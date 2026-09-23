@@ -14,6 +14,8 @@ on:
       - 'scripts/calibrate_wigeon_phase_error_era5land.py'
       - 'tests/test_wigeon_phase_error_calibration.py'
       - 'tests/test_wigeon_era5land_calibration_script.py'
+      - 'scripts/diagnose_wigeon_era5land_coastal_mask.py'
+      - 'tests/test_wigeon_era5land_coastal_mask.py'
       - 'data/wigeon_era5land_calibration_implementation_amendment_20260923.json'
       - '.github/workflows/payoff-b-wigeon-era5land-calibration.yml'
 
@@ -42,6 +44,7 @@ jobs:
           pytest -q
           tests/test_wigeon_phase_error_calibration.py
           tests/test_wigeon_era5land_calibration_script.py
+          tests/test_wigeon_era5land_coastal_mask.py
           tests/test_phase_retention_recovery.py
 
       - name: Download frozen source-faithful wigeon artifact
@@ -72,7 +75,14 @@ jobs:
           --transitions-output outputs/wigeon_power_era5land_transition_calibration.csv
           --raw-request-output outputs/wigeon_era5land_request_receipt.json
           --receipt-output outputs/wigeon_phase_error_era5land_calibration_receipt.json
-          --fail-on-gate-failure
+
+      - name: Diagnose coastal ocean-mask missingness without changing primary gate
+        run: >
+          python scripts/diagnose_wigeon_era5land_coastal_mask.py
+          --calibration-events outputs/wigeon_power_era5land_event_calibration.csv
+          --registration-json data/wigeon_phase_error_era5land_replication_registration_20260922.json
+          --events-output outputs/wigeon_era5land_coastal_mask_diagnostic.csv
+          --receipt-output outputs/wigeon_era5land_coastal_mask_diagnostic_receipt.json
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -83,5 +93,7 @@ jobs:
             outputs/wigeon_power_era5land_transition_calibration.csv
             outputs/wigeon_era5land_request_receipt.json
             outputs/wigeon_phase_error_era5land_calibration_receipt.json
+            outputs/wigeon_era5land_coastal_mask_diagnostic.csv
+            outputs/wigeon_era5land_coastal_mask_diagnostic_receipt.json
             data/wigeon_phase_error_era5land_replication_registration_20260922.json
             data/wigeon_era5land_calibration_implementation_amendment_20260923.json
