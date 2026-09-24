@@ -552,6 +552,14 @@ two-gate architecture: a phase-retention signal can replicate while one proposed
 actuator does not. This is more informative than classifying an entire taxon as
 having or lacking a common controller mechanism.
 
+A preregistered POWER-to-ERA5 substitution in two highlighted barnacle-goose
+transitions provides the complementary case. Greenland R2->R3 changed only from
+\(\hat\lambda=0.131\) to 0.144, and Barents R1->R2 from 0.494 to
+0.515. Their negative stopover slopes also remained supported under ERA5.
+Response and actuator reliability therefore need to be evaluated as separate
+system-by-estimand properties: both layers were stable in these barnacle
+transitions, whereas only the response coordinate was stable in wigeon.
+
 ### Information and feedback solve different parts of the same timing problem
 
 The barnacle-goose multi-flyway analysis also falsified a tempting but overly simple prediction: more predictable environments did not show stronger direct feedback correction in the current transition screen.
@@ -607,7 +615,12 @@ and remains a failure. A separately frozen source-faithful ERA5 hourly follow-up
 achieved 256/256 coverage and reproduced the estimator-scale contraction on all
 224 transitions. The two environmental surfaces nevertheless shifted
 \(\hat\lambda\) from 0.750 to 0.811 and changed the stopover result from
-supported under POWER to unsupported under ERA5.
+supported under POWER to unsupported under ERA5. In two
+preregistered barnacle-goose fixed transitions, by contrast, POWER-to-ERA5
+substitution shifted \(\hat\lambda\) by only 0.013--0.021 and preserved
+supported negative stopover responses. These replicate calibrations increase
+confidence in reconstruction robustness for those specific rows, but do not
+identify a gold-standard error distribution.
 
 Errors-in-variables bias remains important. The complete POWER-versus-ERA5
 replicate calibration and event-structure SIMEX show that plausible frozen
@@ -634,12 +647,13 @@ taxonomic expansion. The present evidence identifies two sharper tests.
 
 First, the preregistered industrial-mule-deer perturbation asks whether a
 forcing regime that independently attenuates movement control also changes
-phase retention while holding taxon fixed. Second, reliability calibration
-should be extended to the existing mule-deer and barnacle-goose phase
-coordinates before cross-taxon differences in \(\lambda\) magnitude are
-interpreted biologically. The wigeon POWER--ERA5 comparison shows why this is
-necessary: the phase-retention signal reproduces across environmental surfaces,
-but its magnitude changes and one proposed actuator does not replicate.
+phase retention while holding taxon fixed. Second, reliability calibration should be extended to the
+remaining mule-deer and Svalbard-goose phase coordinates before cross-taxon
+differences in \(\lambda\) magnitude are interpreted biologically. The
+existing reliability contrasts already show two distinct cases: wigeon
+phase-retention reproduces while one proposed actuator does not, whereas the
+highlighted Greenland and Barents goose transitions reproduce both
+\(\hat\lambda\) and stopover response across POWER and ERA5.
 
 Future taxa should therefore be added only when they test a new inferential
 boundary--for example a preregistered approach to \(\lambda\approx1\), a sign
