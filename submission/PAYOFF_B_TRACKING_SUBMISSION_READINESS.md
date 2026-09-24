@@ -48,7 +48,13 @@ Canonical figure captions:
 - the existing robustness programme is organized into Supplements S1–S6 in
   `submission/PAYOFF_B_TRACKING_SUPPLEMENT_MAP.md`;
 - the eight references currently cited by the manuscript are normalized in
-  `submission/PAYOFF_B_TRACKING_REFERENCES.bib` with DOI-checked metadata.
+  `submission/PAYOFF_B_TRACKING_REFERENCES.bib` with DOI-checked metadata;
+- all six rendered SVGs passed a visual clipping/overlap audit recorded in
+  `submission/PAYOFF_B_TRACKING_FIGURE_VISUAL_AUDIT.md` against green run
+  `35987790697`;
+- the final novelty sentence is frozen in the manuscript as separation of
+  adaptive capacity from unilateral accessibility, not as novelty of
+  space-time climate response itself.
 
 ## Not required before a first manuscript freeze
 
@@ -66,26 +72,19 @@ The following are **not** prerequisites for freezing a submission draft:
 Adding these merely to make the simulation look larger would weaken the
 claim boundary.
 
-## Remaining manuscript work
+## Scientific freeze status
 
-### 1. Figure inspection
+The standalone synthetic tracking-theory manuscript is **scientifically frozen
+for first-submission preparation**. No unresolved synthetic result, figure,
+bibliography, claim-boundary, parameter-status, or Results-to-Figure mapping
+task remains in the current v1 package.
 
-After CI rendering succeeds:
+Remaining work is journal-specific packaging only: target-journal formatting,
+title-page metadata, declarations, cover-letter wording, and any file-format
+conversion required by the submission portal.
 
-- inspect all six SVGs for clipping, overlap and legibility;
-- retain numeric values exactly as produced from frozen figure data;
-- change layout only, not scientific content, if a panel needs visual repair.
-
-### 2. Final novelty sentence
-
-Use a narrow formulation:
-
-> The contribution is not a new demonstration that species can respond to
-> climate change in both space and time. It is the separation of adaptive
-> capacity from unilateral accessibility when interacting partners can
-> reallocate tracking between spatial and temporal axes.
-
-Do not use a "first ever" claim unless a later literature audit supports it.
+Do not introduce a "first ever" claim unless a later literature audit supports
+it.
 
 ## Current stop rule for new simulation
 
