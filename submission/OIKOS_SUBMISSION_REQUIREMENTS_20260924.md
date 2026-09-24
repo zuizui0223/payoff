@@ -180,8 +180,9 @@ Status:
 - `scripts/build_tracking_theory_supporting_information.py` assembles a
   portal-ready Supporting Information document directly from the five frozen
   JSON receipts;
-- the submission-package builder includes the generated file as
-  `PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md`.
+- the submission-package builder includes both the generated source text
+  `PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md` and the portal-ready
+  `OIKOS_TRACKING_SUPPORTING_INFORMATION.rtf`.
 
 This is **packaging work only** and introduces no new simulations.
 

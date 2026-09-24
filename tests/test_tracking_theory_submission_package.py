@@ -25,7 +25,7 @@ def test_tracking_submission_package_builds_with_manifest(tmp_path):
     assert manifest["scientific_freeze_date"] == "2026-09-24"
     assert manifest["synthetic_receipt_freeze_date"] == "2026-09-20"
     assert manifest["figure_count"] == 6
-    assert manifest["file_count"] == 39
+    assert manifest["file_count"] == 40
     assert zip_path.exists()
     assert manifest["zip_sha256"] == digest(zip_path)
 
@@ -56,6 +56,7 @@ def test_tracking_submission_package_contains_core_files(tmp_path):
     assert "submission_ready/OIKOS_TRACKING_HANDOFF_V1.md" in names
     assert "submission_ready/PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md" in names
     assert "submission_ready/OIKOS_TRACKING_ANON_MAIN_TEXT.rtf" in names
+    assert "submission_ready/OIKOS_TRACKING_SUPPORTING_INFORMATION.rtf" in names
     assert "submission_ready/OIKOS_SIGNIFICANCE_STATEMENT.md" in names
     assert "submission_ready/OIKOS_DATA_AVAILABILITY_TEMPLATE.md" in names
     assert "submission_ready/OIKOS_AI_USE_STATEMENT.md" in names

@@ -13,6 +13,7 @@ from pathlib import Path
 from render_tracking_theory_figures import render_all
 from build_tracking_theory_supporting_information import build_supporting_information
 from build_oikos_review_manuscript import build_review_rtf
+from build_oikos_supporting_information import build_supporting_rtf
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -144,6 +145,22 @@ def build_package(output_dir: Path, zip_path: Path | None = None) -> dict:
         "source": "generated:supporting_information",
         "bytes": supporting_path.stat().st_size,
         "sha256": sha256(supporting_path),
+    })
+
+    supporting_rtf_path = (
+        output_dir
+        / "submission_ready"
+        / "OIKOS_TRACKING_SUPPORTING_INFORMATION.rtf"
+    )
+    supporting_rtf_path.write_text(
+        build_supporting_rtf(),
+        encoding="ascii",
+    )
+    manifest["files"].append({
+        "bundle_path": str(supporting_rtf_path.relative_to(output_dir)),
+        "source": "generated:oikos_supporting_information_rtf",
+        "bytes": supporting_rtf_path.stat().st_size,
+        "sha256": sha256(supporting_rtf_path),
     })
 
     review_rtf_path = (

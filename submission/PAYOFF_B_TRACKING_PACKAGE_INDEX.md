@@ -76,8 +76,10 @@ Supplement structure:
 
 Portal-ready Supporting Information:
 
-- generator: `scripts/build_tracking_theory_supporting_information.py`
-- generated bundle file: `PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md`
+- source generator: `scripts/build_tracking_theory_supporting_information.py`
+- RTF renderer: `scripts/build_oikos_supporting_information.py`
+- generated source file: `PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md`
+- upload file: `OIKOS_TRACKING_SUPPORTING_INFORMATION.rtf`
 
 These files define what remains in the main paper versus what belongs in
 robustness/supplementary material.
@@ -116,6 +118,7 @@ Journal targeting:
 Oikos handoff:
 
 - `submission/OIKOS_TRACKING_HANDOFF_V1.md`
+- `submission/OIKOS_INITIAL_SUBMISSION_PACKET.md`
 
 Tracking-specific administrative templates:
 
