@@ -1,0 +1,78 @@
+{
+  "result_id": "barnacle_phase_error_era5_replication_20260924",
+  "frozen_date": "2026-09-24",
+  "status": "COMPLETE",
+  "workflow_run": 35974167089,
+  "artifact_id": 10797665905,
+  "artifact_name": "payoff-b-barnacle-era5-reliability",
+  "artifact_zip_sha256": "c37502b116f4170760e0fbf5029fe1804999def4de3f702cdb5bf61e61b8606f",
+  "registration": "data/barnacle_phase_error_era5_registration_20260924.json",
+  "Aikens_lambda_outcome_opened": false,
+  "flyways": [
+    {
+      "flyway": "greenland",
+      "transition": "R2_to_R3",
+      "n": 6,
+      "n_individuals": 6,
+      "coverage_gate": true,
+      "power_identity_gate": true,
+      "power": {
+        "lambda_hat": 0.13073088347575457,
+        "cluster_se": 0.08284369272940648,
+        "p_vs_one": 9.314286940281342e-26,
+        "stopover_slope": -0.5241744704211612,
+        "stopover_p": 0.003393266308775191
+      },
+      "era5": {
+        "lambda_hat": 0.14420353006747622,
+        "cluster_se": 0.05861634736040695,
+        "p_vs_one": 2.8100013349168784e-48,
+        "stopover_slope": -0.37894176832560234,
+        "stopover_p": 0.008021719040118738
+      },
+      "era5_minus_power_lambda_hat": 0.013472646591721649,
+      "region_year_replicate_disagreement_sd_days": 4.226872635036805,
+      "equal_independent_replicate_sensitivity_error_sd_days": 2.9888503034463754,
+      "interpretation": "phase-retention contraction and negative stopover response are reproduced under ERA5"
+    },
+    {
+      "flyway": "barents",
+      "transition": "R1_to_R2",
+      "n": 12,
+      "n_individuals": 8,
+      "coverage_gate": true,
+      "power_identity_gate": true,
+      "power": {
+        "lambda_hat": 0.4941139415235434,
+        "cluster_se": 0.129352858428397,
+        "p_vs_one": 0.00009195294468349882,
+        "stopover_slope": -0.5914512616556745,
+        "stopover_p": 0.0009881111959264804
+      },
+      "era5": {
+        "lambda_hat": 0.515328602183836,
+        "cluster_se": 0.12858079915940834,
+        "p_vs_one": 0.00016364589307242734,
+        "stopover_slope": -0.5738036991897653,
+        "stopover_p": 0.0009948941017993798
+      },
+      "era5_minus_power_lambda_hat": 0.02121466066029265,
+      "region_year_replicate_disagreement_sd_days": 2.8389541531506723,
+      "equal_independent_replicate_sensitivity_error_sd_days": 2.0074437331705526,
+      "interpretation": "phase-retention contraction and negative stopover response are reproduced under ERA5"
+    }
+  ],
+  "interpretation": {
+    "barnacle_phase_retention_reconstruction_robust_in_registered_transitions": true,
+    "barnacle_stopover_reconstruction_robust_in_registered_transitions": true,
+    "replicate_disagreement_is_gold_standard_error": false,
+    "cross_taxon_latent_lambda_ranking_licensed": false
+  },
+  "claim_boundary": [
+    "Greenland R2-R3 and Barents R1-R2 were frozen before ERA5 outcomes were opened.",
+    "ERA5 replication strengthens reconstruction robustness of the highlighted barnacle-goose phase-retention and stopover results.",
+    "POWER-versus-ERA5 disagreement is replicate disagreement, not a uniquely identified source-specific measurement-error distribution.",
+    "Svalbard remains outside this ERA5 replication lane and retains its separate anchor-sensitive reconstruction.",
+    "The result does not alter or open the Aikens lambda outcome."
+  ]
+}
