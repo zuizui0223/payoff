@@ -303,7 +303,7 @@ def figure5(data):
     ]
     return svg_page(
         "Figure 5. Barrier visibility and finite-population crossing",
-        "Higher-replication demographic result retained; pilot large effects rejected",
+        "Frozen higher-replication demographic result retained; pilot large effects rejected",
         "".join(out),
     )
 
