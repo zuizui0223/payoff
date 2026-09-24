@@ -18,10 +18,11 @@ def test_tracking_theory_manuscript_has_no_control_character_corruption():
         if ord(ch) < 32 and ch not in ("\n", "\t")
     ]
     assert illegal == []
-    assert "\\n" not in text
-    assert "\frac" not in text
-    assert "\\beta" not in text
-    assert "\\times" not in text
+    slash = chr(92)
+    assert slash + "n" not in text
+    assert slash + "frac" not in text
+    assert slash + "beta" not in text
+    assert slash + "times" not in text
     assert "rac{" not in text
     assert "Nge" not in text
 
