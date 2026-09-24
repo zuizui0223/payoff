@@ -219,6 +219,19 @@ the observed estimator to approximately 0.75.
 
 That 7.94 d value is a stress threshold, **not an empirical error estimate**.
 
+A frozen event-structure SIMEX sensitivity was subsequently reproduced in
+GitHub Actions. Conditional on the three predeclared incomplete-calibration
+scenarios, the extrapolated values were:
+
+```text
+equal-independent replicate scale:     lambda_SIMEX = 0.8070
+correlated-discrepancy proxy:           lambda_SIMEX = 0.7827
+conservative full-disagreement scale:   lambda_SIMEX = 0.8602
+```
+
+All are above the naive 0.7498 estimate and below one. They remain sensitivity
+values because the ERA5-Land calibration coverage gate failed.
+
 Therefore PAYOFF-B currently licenses:
 
 - the corrected estimator-scale lambda;
