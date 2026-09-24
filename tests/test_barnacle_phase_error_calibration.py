@@ -1,8 +1,9 @@
 import math
 
-import numpy as np
-import pandas as pd
 import pytest
+
+np = pytest.importorskip("numpy")
+pd = pytest.importorskip("pandas")
 
 from src.barnacle_phase_error_calibration import (
     EARLY_JERK_LOGIT,
