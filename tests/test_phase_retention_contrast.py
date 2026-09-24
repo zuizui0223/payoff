@@ -117,3 +117,26 @@ def test_new_forcing_lambda_contrast_does_not_require_new_taxon():
         ),
     )
     assert gate.passed
+
+
+def test_phase_retention_contrast_accepts_fit_provenance_metadata():
+    provenance = {
+        "source_pairs": "outputs/fixed_24h_phase_pairs.csv",
+        "fit_receipt": "outputs/phase_contrast_fit_receipt.json",
+        "delta_lambda_b_minus_a": 0.25,
+        "delta_lambda_se": 0.04,
+        "total_pairs": 240,
+        "total_animals": 20,
+    }
+    gate = evaluate_phase_retention_contrast(
+        registration(),
+        observation(fit_provenance=provenance),
+    )
+
+    assert gate.passed
+    assert gate.observation.fit_provenance == provenance
+
+
+def test_phase_retention_contrast_rejects_invalid_fit_provenance():
+    with pytest.raises(ValueError, match="fit_provenance"):
+        observation(fit_provenance="not-a-mapping")
