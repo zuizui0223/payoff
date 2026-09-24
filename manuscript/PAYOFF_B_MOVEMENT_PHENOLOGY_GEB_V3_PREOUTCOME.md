@@ -625,15 +625,40 @@ differences.
 
 ### Outlook
 
-The immediate next step is not to estimate a pooled universal \(\lambda\). A more useful macroecological expansion would increase taxonomic coverage while retaining the two-channel structure:
+The immediate next step is neither a pooled universal \(\lambda\) nor mechanical
+taxonomic expansion. The present evidence identifies two sharper tests.
+
+First, the preregistered industrial-mule-deer perturbation asks whether a
+forcing regime that independently attenuates movement control also changes
+phase retention while holding taxon fixed. Second, reliability calibration
+should be extended to the existing mule-deer and barnacle-goose phase
+coordinates before cross-taxon differences in \(\lambda\) magnitude are
+interpreted biologically. The wigeon POWER--ERA5 comparison shows why this is
+necessary: the phase-retention signal reproduces across environmental surfaces,
+but its magnitude changes and one proposed actuator does not replicate.
+
+Future taxa should therefore be added only when they test a new inferential
+boundary--for example a preregistered approach to \(\lambda\approx1\), a sign
+change or overshoot boundary, or a discriminating actuator prediction--rather
+than simply increasing panel size. The organizing state remains
 
 \[
-(\sigma_\xi,\ |\lambda|,\ \text{actuator architecture}).
+(\sigma_\xi,\ \hat\lambda,\ \text{actuator architecture},
+\ \text{reliability state}).
 \]
 
-This framework yields testable predictions for climate change. Increasing interannual or spatial innovation can worsen timing even if behavioral control remains unchanged. Conversely, infrastructure can increase mismatch by attenuating actuation even if environmental predictability is stable. Systems with strong resource engineering require coupled animal–environment dynamics rather than the exogenous-wave approximation.
+This framework yields testable predictions for climate change. Increasing
+interannual or spatial innovation can worsen timing even if behavioral control
+remains unchanged. Conversely, infrastructure can increase mismatch by
+attenuating actuation even if environmental predictability is stable. Systems
+with strong resource engineering require coupled animal--environment dynamics
+rather than the exogenous-wave approximation.
 
-PAYOFF-B1 and the empirical macro programme therefore remain distinct but connected. PAYOFF-B1 gives an exact benchmark for fixed-rate timescale matching in a periodic environment. The empirical results show that natural migrants solve the broader temporal problem through heterogeneous, state- and route-dependent transformations of phenological phase.
+PAYOFF-B1 and the empirical macro programme therefore remain distinct but
+connected. PAYOFF-B1 gives an exact benchmark for fixed-rate timescale matching
+in a periodic environment. The empirical programme tests which parts of that
+temporal-control language survive source reconstruction, measurement error and
+real ecological forcing.
 
 ## Conclusion
 
