@@ -27,7 +27,8 @@ def test_frozen_cross_system_reliability_receipt_matches_live_registry_gate():
     gate = evaluate_cross_system_lambda_reliability(
         systems_from_registry(registry)
     )
-    assert receipt["gate"] == asdict(gate)
+    live_gate = json.loads(json.dumps(asdict(gate)))
+    assert receipt["gate"] == live_gate
 
 
 def test_current_receipt_keeps_coordinate_and_magnitude_claims_separate():
