@@ -1,0 +1,55 @@
+{
+  "result_id": "wigeon_phase_simex_era5_complete_20260924",
+  "frozen_date": "2026-09-24",
+  "status": "CANONICAL_ACTIONS_REPRODUCED",
+  "contract": "data/wigeon_phase_simex_era5_complete_contract_20260924.json",
+  "workflow_run": 35942135223,
+  "source_head": "0b503c21f823ed96273e3c93b035529feaa4920d",
+  "artifact_id": 10785620894,
+  "artifact_name": "payoff-b-wigeon-era5-simex-v2",
+  "artifact_zip_sha256": "37d0adbfc1d68b77bd16c1dbec2c0ea2ad17da466674ccaf38391dabd3f3aad0",
+  "pairs": 224,
+  "individuals": 28,
+  "execution": {
+    "zeta": [0.5, 1.0, 1.5, 2.0],
+    "replicates_per_zeta": 1000,
+    "base_seed": 20260924,
+    "event_error_unit": "individual_id/year/segment",
+    "shared_adjacent_event_error": true,
+    "within_individual_year_error_process": "stationary Gaussian AR1",
+    "quadratic_extrapolation_target_zeta": -1
+  },
+  "observed_lambda_hat": 0.7497680211367304,
+  "results": [
+    {
+      "scenario_name": "era5_complete_equal_independent_replicates_rho0",
+      "error_sd_days": 5.010239973852373,
+      "error_correlation": 0.0,
+      "simex_extrapolated_lambda_at_minus_one": 0.8411694225451272
+    },
+    {
+      "scenario_name": "era5_complete_discrepancy_correlation_proxy",
+      "error_sd_days": 5.010239973852373,
+      "error_correlation": 0.3666144716835741,
+      "simex_extrapolated_lambda_at_minus_one": 0.7978928038433668
+    },
+    {
+      "scenario_name": "era5_complete_conservative_full_disagreement_rho0",
+      "error_sd_days": 7.085549321765848,
+      "error_correlation": 0.0,
+      "simex_extrapolated_lambda_at_minus_one": 0.9353935594001919
+    }
+  ],
+  "summary": {
+    "simex_extrapolated_lambda_range": [0.7978928038433668, 0.9353935594001919],
+    "all_extrapolated_values_below_one": true,
+    "interpretation": "Complete-ERA5-calibrated event-structure SIMEX raises lambda substantially relative to the naive 0.749768 estimate. The estimated strength of correction is measurement-error-assumption sensitive, while all three frozen sensitivity extrapolations remain below one."
+  },
+  "claim_boundary": [
+    "The complete 256-event ERA5 calibration improves source support for the sensitivity scales but does not identify a gold-standard source-specific measurement-error distribution.",
+    "SIMEX-extrapolated values are not promoted as the true latent biological lambda.",
+    "The conservative full-disagreement scenario approaches complete retention and demonstrates material uncertainty in correction magnitude.",
+    "The result supports sensitivity robustness of the phase-retention signal, not a universal or precisely corrected lambda.",
+    "The Aikens lambda outcome remains unopened."
+  ]
+}
