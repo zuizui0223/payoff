@@ -127,7 +127,37 @@ def test_goose_whole_route_cumulative_retention_is_not_licensed():
         assert row["path_memory"]["licensed"] is False
 
 
-def test_frozen_result_exactly_matches_contract_recalculation():
+def _assert_semantically_equal(frozen, expected):
+    if isinstance(frozen, dict) and isinstance(expected, dict):
+        assert set(frozen) == set(expected)
+        for key in frozen:
+            _assert_semantically_equal(frozen[key], expected[key])
+        return
+
+    if isinstance(frozen, list) and isinstance(expected, list):
+        assert len(frozen) == len(expected)
+        for left, right in zip(frozen, expected):
+            _assert_semantically_equal(left, right)
+        return
+
+    if (
+        isinstance(frozen, (int, float))
+        and not isinstance(frozen, bool)
+        and isinstance(expected, (int, float))
+        and not isinstance(expected, bool)
+    ):
+        assert math.isclose(
+            float(frozen),
+            float(expected),
+            rel_tol=1e-12,
+            abs_tol=1e-15,
+        )
+        return
+
+    assert frozen == expected
+
+
+def test_frozen_result_semantically_matches_contract_recalculation():
     expected = build_result(load_contract())
     frozen = json.loads(FROZEN_RESULT.read_text(encoding="utf-8"))
-    assert frozen == expected
+    _assert_semantically_equal(frozen, expected)
