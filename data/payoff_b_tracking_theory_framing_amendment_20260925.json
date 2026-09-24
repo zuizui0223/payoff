@@ -1,0 +1,44 @@
+{
+  "amendment_id": "payoff_b_tracking_theory_framing_amendment_20260925",
+  "amendment_date": "2026-09-25",
+  "applies_to_claim_freeze": "payoff_b_tracking_theory_claim_freeze_20260924",
+  "scientific_evidence_freeze_unchanged": true,
+  "new_simulation_added": false,
+  "quantitative_claim_changed": false,
+  "previous_headline_role": "adaptive_capacity_vs_unilateral_accessibility",
+  "revised_headline_claim": "Environmental mismatch is an outcome of a multi-axis tracking system: similar low mismatch can be maintained by different allocations between movement and timing, while finite temporal capacity, spatial geometry and partner matching determine when that buffering must change or fail.",
+  "coordination_barrier_role": "failure_mode_of_spatiotemporal_buffering",
+  "core_claim_chain": [
+    "endpoint_mismatch_does_not_identify_tracking_architecture",
+    "exact_local_space_time_feedback_substitutability",
+    "finite_temporal_buffering",
+    "spatial_tracking_reentry",
+    "route_cost_buffering",
+    "partner_dependent_reallocation_failure",
+    "demographic_visibility_window",
+    "drift_assisted_crossing_not_automatic_rescue"
+  ],
+  "licensed_framing": [
+    "low environmental mismatch can be actively maintained by compensation across spatial and temporal tracking axes",
+    "similar endpoint mismatch can arise from different movement-timing allocations under the exact local null",
+    "temporal buffering is finite and spatial tracking re-enters under stronger forcing",
+    "coordination barriers are a failure mode of reallocating tracking burden between interacting partners",
+    "small mismatch is not by itself evidence of weak environmental forcing or little adaptive response"
+  ],
+  "prior_art_limits": [
+    "do not claim novelty for generic mismatch buffering",
+    "do not claim novelty for integrating spatial and temporal climate responses",
+    "do not claim that all low mismatch implies high hidden cost",
+    "do not treat synthetic thresholds as empirical thresholds"
+  ],
+  "added_prior_art": [
+    {
+      "citation": "Weir & Phillimore 2024, Global Change Biology 30:e17294",
+      "doi": "10.1111/gcb.17294"
+    },
+    {
+      "citation": "Fredston et al. 2025, Trends in Ecology & Evolution 40:629-638",
+      "doi": "10.1016/j.tree.2025.03.015"
+    }
+  ]
+}
