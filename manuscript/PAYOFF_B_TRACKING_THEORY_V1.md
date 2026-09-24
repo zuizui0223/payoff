@@ -453,16 +453,17 @@ The full novelty audit is frozen in
 
 The manuscript does **not** claim novelty for combining dispersal and phenology, for modelling moving habitat, or for climate-driven mismatch between interacting species. Its candidate contribution is the estimand chain from exact local space-time substitutability to finite temporal bypass, spatial re-entry, a direct unilateral coordination gate, demographic visibility, and finite-N crossing without automatic rescue.
 
-Core references:
+The submission bibliography is frozen in
+`submission/PAYOFF_B_TRACKING_REFERENCES.bib`. The compact manuscript list is:
 
-- Gilman RT, Fabina NS, Abbott KC, Rafferty NE. 2012. Evolution of plant–pollinator mutualisms in response to climate change. *Evolutionary Applications* 5:2–16. DOI: 10.1111/j.1752-4571.2011.00202.x.
-- Hällfors MH et al. 2021. Combining range and phenology shifts offers a winning strategy for boreal Lepidoptera. *Ecology Letters*. DOI: 10.1111/ele.13774.
-- Harsch MA et al. 2017. Moving forward: insights and applications of moving-habitat models for climate change ecology. *Journal of Ecology*. DOI: 10.1111/1365-2745.12724.
-- Kharouba HM, Wolkovich EM. 2020. Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. DOI: 10.1038/s41558-020-0752-x.
-- Macgregor CJ et al. 2019. Climate-induced phenology shifts linked to range expansions in species with multiple reproductive cycles per year. *Nature Communications* 10:4455.
-- Muthukrishnan R, Smiley TM, Title PO, Fudickar AM, Jahn AE, Lau JA. 2025. Chasing the Niche: Escaping Climate Change Threats in Place, Time, and Space. *Global Change Biology*. DOI: 10.1111/gcb.70167.
-- Pontarp M, Johansson J, Jonzén N, Lundberg P et al. 2015. Adaptation of timing of life history traits and population dynamic responses to climate change in spatially structured populations. *Evolutionary Ecology* 29:565–579. DOI: 10.1007/s10682-015-9759-6.
-- Visser ME, Gienapp P. 2019. Evolutionary and demographic consequences of phenological mismatches. *Nature Ecology & Evolution* 3:879–885. DOI: 10.1038/s41559-019-0880-8.
+- Gilman RT, Fabina NS, Abbott KC, Rafferty NE (2012) Evolution of plant–pollinator mutualisms in response to climate change. *Evolutionary Applications* 5:2–16. DOI: 10.1111/j.1752-4571.2011.00202.x.
+- Hällfors MH et al. (2021) Combining range and phenology shifts offers a winning strategy for boreal Lepidoptera. *Ecology Letters* 24:1619–1632. DOI: 10.1111/ele.13774.
+- Harsch MA et al. (2017) Moving forward: insights and applications of moving-habitat models for climate change ecology. *Journal of Ecology* 105:1169–1181. DOI: 10.1111/1365-2745.12724.
+- Kharouba HM, Wolkovich EM (2020) Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. DOI: 10.1038/s41558-020-0752-x.
+- Macgregor CJ et al. (2019) Climate-induced phenology shifts linked to range expansions in species with multiple reproductive cycles per year. *Nature Communications* 10:4455. DOI: 10.1038/s41467-019-12479-w.
+- Muthukrishnan R et al. (2025) Chasing the Niche: Escaping Climate Change Threats in Place, Time, and Space. *Global Change Biology* 31:e70167. DOI: 10.1111/gcb.70167.
+- Pontarp M, Johansson J, Jonzén N, Lundberg P (2015) Adaptation of timing of life history traits and population dynamic responses to climate change in spatially structured populations. *Evolutionary Ecology* 29:565–579. DOI: 10.1007/s10682-015-9759-6.
+- Visser ME, Gienapp P (2019) Evolutionary and demographic consequences of phenological mismatches. *Nature Ecology & Evolution* 3:879–885. DOI: 10.1038/s41559-019-0880-8.
 
 ---
 
