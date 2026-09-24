@@ -159,6 +159,11 @@ def lambda_hat_from_phases(
         *nuisance_columns[1:],
     ]
     X = np.column_stack(columns)
+    rank = int(np.linalg.matrix_rank(X))
+    if rank < X.shape[1]:
+        raise ValueError(
+            "wigeon SIMEX controller design matrix is rank deficient"
+        )
     beta, *_ = np.linalg.lstsq(
         X,
         phase_change,
