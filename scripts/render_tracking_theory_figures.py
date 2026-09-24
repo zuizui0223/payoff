@@ -82,6 +82,25 @@ def scale(value, lo, hi, start, end):
     return start + (value - lo) * (end - start) / (hi - lo)
 
 
+def wrap_words(value, max_chars):
+    words = str(value).replace("\n", " ").split()
+    lines = []
+    current = []
+    current_len = 0
+    for word in words:
+        extra = len(word) if not current else len(word) + 1
+        if current and current_len + extra > max_chars:
+            lines.append(" ".join(current))
+            current = [word]
+            current_len = len(word)
+        else:
+            current.append(word)
+            current_len += extra
+    if current:
+        lines.append(" ".join(current))
+    return lines
+
+
 def figure1(data):
     stages = [
         ("Local null", "movement + timing\nshare one restoring budget"),
@@ -95,18 +114,21 @@ def figure1(data):
     out = [
         text(72, 125, "Adaptive capacity is not the same as adaptive accessibility", 21, "bold"),
     ]
-    x = 70
-    y = 245
-    w = 140
-    gap = 22
+    x = 65
+    y = 235
+    w = 145
+    gap = 14
     for i, (title, subtitle) in enumerate(stages):
-        out.append(rect(x, y, w, 150, fill="#fafafa"))
-        out.append(text(x+w/2, y+32, title, 15, "bold", "middle"))
-        for j, row in enumerate(subtitle.split("\n")):
-            out.append(text(x+w/2, y+70+j*24, row, 13, anchor="middle"))
+        out.append(rect(x, y, w, 160, fill="#fafafa"))
+        title_lines = wrap_words(title, 16)
+        for j, row in enumerate(title_lines):
+            out.append(text(x+w/2, y+28+j*19, row, 14, "bold", "middle"))
+        subtitle_lines = wrap_words(subtitle, 21)
+        for j, row in enumerate(subtitle_lines):
+            out.append(text(x+w/2, y+80+j*20, row, 11.5, anchor="middle"))
         if i < len(stages)-1:
-            out.append(line(x+w, y+75, x+w+gap-4, y+75, 2))
-            out.append(text(x+w+gap/2, y+80, ">", 18, "bold", "middle"))
+            out.append(line(x+w, y+80, x+w+gap-4, y+80, 2))
+            out.append(text(x+w+gap/2, y+85, ">", 17, "bold", "middle"))
         x += w + gap
     out += [
         text(72, 470, "Mechanistic sequence frozen for the standalone synthetic tracking-theory paper.", 17),
@@ -176,8 +198,9 @@ def figure2(data):
     out += [
         text(700, 210, "solid = migration", 14),
         text(700, 232, "dashed = phenology", 14),
-        text(680, 625, "Timing buffers movement demand at v=0.04–0.05; migration re-enters by v=0.06.", 16),
-        text(680, 648, f"Zigzag growth-penalty magnitude reduction at zmax=4: {100*d['zigzag_penalty_reduction']:.1f}%.", 16),
+        text(680, 615, "Timing buffers movement demand at v=0.04–0.05;", 15),
+        text(680, 638, "migration re-enters by v=0.06.", 15),
+        text(680, 666, f"Zigzag growth-penalty reduction at zmax=4: {100*d['zigzag_penalty_reduction']:.1f}%.", 15),
     ]
     return svg_page(
         "Figure 2. Finite temporal bypass and spatial re-entry",
@@ -251,11 +274,12 @@ def figure4(data):
     x = 90
     for label, row in groups2:
         out += [
-            rect(x, 465, 300, 145, fill="#fafafa"),
+            rect(x, 465, 300, 160, fill="#fafafa"),
             text(x+18, 495, label, 18, "bold"),
             text(x+18, 530, f"persisted: {row['persisted']}", 17),
-            text(x+18, 565, row["endpoint"], 14),
         ]
+        for j, endpoint_line in enumerate(wrap_words(row["endpoint"], 36)):
+            out.append(text(x+18, 563+j*20, endpoint_line, 12.5))
         x += 355
     out.append(text(72, 655, "The same matching interaction becomes a maladaptive synchronization lock under stronger forcing.", 17, "bold"))
     return svg_page(
@@ -270,20 +294,20 @@ def figure5(data):
     examples = d["replication_128"]["visibility_examples"]
     drift = d["drift_beta_5"]
     out = [text(72, 125, "A  Demographic visibility window", 19, "bold")]
-    x0, x1, y0, y1 = 95, 555, 165, 520
+    x0, x1, y0, y1 = 95, 555, 165, 440
     out.append(axes(x0, y0, x1, y1, "local persistence", "matched - local persistence"))
     for row in examples:
         x = scale(row["local"], 0, 1, x0, x1)
         y = scale(row["gain"], 0, 0.025, y1, y0)
         out.append(circle(x, y, 7, "#eeeeee"))
     out += [
-        text(100, 552, f"mean gain near transition (0.3–0.7): {d['replication_128']['local_persistence_bin_0_3_to_0_7']['mean_persistence_gain']:.4f}", 14),
-        text(100, 574, f"mean gain in safe regime (0.9–1): {d['replication_128']['local_persistence_bin_0_9_to_1_0']['mean_persistence_gain']:.4f}", 14),
-        text(100, 596, f"pilot cells >=0.10: {d['pilot_ge_0_10']}; replication cells >=0.10: {d['replication_ge_0_10']}", 14),
+        text(100, 510, f"mean gain near transition (0.3–0.7): {d['replication_128']['local_persistence_bin_0_3_to_0_7']['mean_persistence_gain']:.4f}", 13),
+        text(100, 532, f"mean gain in safe regime (0.9–1): {d['replication_128']['local_persistence_bin_0_9_to_1_0']['mean_persistence_gain']:.4f}", 13),
+        text(100, 554, f"pilot cells >=0.10: {d['pilot_ge_0_10']}; replication cells >=0.10: {d['replication_ge_0_10']}", 13),
     ]
 
     out.append(text(650, 125, "B  Drift-assisted crossing is not drift rescue", 19, "bold"))
-    bx0, bx1, by0, by1 = 690, 1120, 165, 520
+    bx0, bx1, by0, by1 = 690, 1120, 165, 440
     out.append(axes(bx0, by0, bx1, by1, "population size N (log-spaced positions)", "escape fraction"))
     ns = [row["N"] for row in drift]
     positions = {n: bx0 + i*(bx1-bx0)/(len(ns)-1) for i, n in enumerate(ns)}
@@ -297,9 +321,10 @@ def figure5(data):
         out.append(line(a[0],a[1],b[0],b[1],3))
     local_growth = 0.340292788918
     out += [
-        text(690, 558, f"deterministic local joint growth: {local_growth:.3f}", 14),
-        text(690, 580, "N=10 and 30 cross frequently, but their mean long-run joint growth is lower.", 14),
-        text(690, 615, "Crossing probability and evolutionary rescue are distinct estimands.", 16, "bold"),
+        text(690, 510, f"deterministic local joint growth: {local_growth:.3f}", 13),
+        text(690, 532, "N=10 and 30 cross frequently,", 13),
+        text(690, 553, "but mean long-run joint growth remains lower.", 13),
+        text(690, 590, "Crossing probability != evolutionary rescue.", 15, "bold"),
     ]
     return svg_page(
         "Figure 5. Barrier visibility and finite-population crossing",
