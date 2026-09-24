@@ -42,6 +42,14 @@ Pontarp et al. (2015), *Adaptation of timing of life history traits and populati
 
 The sharper distinction is that PAYOFF-B makes **movement effort and timing effort themselves alternative heritable tracking axes**, then asks whether a coordinated change in axis allocation is accessible under unilateral evolution.
 
+### Spatial eco-evolutionary climate models already combine dispersal, evolution and species interactions
+
+Åkesson et al. (2021), *The importance of species interactions in eco-evolutionary community dynamics under climate change* (*Nature Communications* 12:4759, DOI: 10.1038/s41467-021-24977-x), develops a spatially explicit framework that integrates dispersal, trait evolution and interspecific interactions under climate change. It also shows that combinations of dispersal, evolutionary capacity and interactions can have non-additive effects on persistence.
+
+A particularly close 2026 comparison is Shirani, Miller & Freeman (2026), *Coevolution of species' range borders: Interactions between interspecific competition, gene flow, and matching habitat choice* (*Evolution Letters* 10:427–440, DOI: 10.1093/evlett/qrag022). Their two-species theory includes interspecific competition and an adaptive, phenotype-dependent dispersal rule that moves individuals toward habitats reducing phenotype–environment mismatch.
+
+**Boundary for PAYOFF-B:** do not claim novelty for combining dispersal, evolution and species interactions under climate change, or for allowing interacting species to evolve directed mismatch-reducing movement. The remaining distinction is narrower: PAYOFF-B gives each partner two alternative climate-tracking axes (space and timing), then tests whether changing the *allocation between those axes* is accessible through unilateral improving substitutions. The canonical gate compares the same adjacent tracking-axis change made jointly versus by one partner alone.
+
 ### Phenological mismatch between interacting species is a mature literature
 
 Visser & Gienapp (2019), *Evolutionary and demographic consequences of phenological mismatches* (*Nature Ecology & Evolution* 3:879–885, DOI: 10.1038/s41559-019-0880-8), reviews the evolutionary and demographic consequences of phenological mismatch.
@@ -187,6 +195,8 @@ Prefer:
 9. Gilman RT, Fabina NS, Abbott KC, Rafferty NE. 2012. Evolution of plant–pollinator mutualisms in response to climate change. *Evolutionary Applications* 5:2–16. DOI: 10.1111/j.1752-4571.2011.00202.x.
 10. Memmott J et al. 2007. Global warming and the disruption of plant–pollinator interactions. *Ecology Letters*. DOI: 10.1111/j.1461-0248.2007.01061.x.
 11. Ramirez-Parada TH et al. 2025. Shifts in Phenology and Species Ranges Synergistically Alter the Timing and Species Composition of the Flowering Season. *Global Change Biology*. DOI: 10.1111/gcb.70607.
+12. Åkesson A, Curtsdotter A, Eklöf A, Ebenman B, Norberg J, Barabás G. 2021. The importance of species interactions in eco-evolutionary community dynamics under climate change. *Nature Communications* 12:4759. DOI: 10.1038/s41467-021-24977-x.
+13. Shirani F, Miller JR, Freeman BG. 2026. Coevolution of species' range borders: Interactions between interspecific competition, gene flow, and matching habitat choice. *Evolution Letters* 10:427–440. DOI: 10.1093/evlett/qrag022.
 
 ## 5. Current novelty ceiling
 
