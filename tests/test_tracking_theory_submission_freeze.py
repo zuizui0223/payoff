@@ -40,7 +40,8 @@ def test_tracking_theory_readiness_declares_scientific_freeze():
     text = READINESS.read_text(encoding="utf-8")
     assert "scientifically frozen" in text
     assert "No unresolved synthetic result" in text
-    assert "journal-specific packaging only" in text
+    assert "administrative rather than scientific" in text
+    assert "double-anonymized line-numbered main-text export" in text
 
 
 def test_tracking_theory_freeze_assets_exist():
