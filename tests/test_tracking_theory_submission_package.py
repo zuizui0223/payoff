@@ -1,4 +1,5 @@
 import hashlib
+import json
 import sys
 import zipfile
 from pathlib import Path
@@ -27,6 +28,13 @@ def test_tracking_submission_package_builds_with_manifest(tmp_path):
     assert manifest["file_count"] == 34
     assert zip_path.exists()
     assert manifest["zip_sha256"] == digest(zip_path)
+
+    receipt_path = Path(manifest["archive_receipt_path"])
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    package_manifest = output_dir / "PAYOFF_B_TRACKING_SUBMISSION_MANIFEST.json"
+    assert receipt["zip_sha256"] == digest(zip_path)
+    assert receipt["package_manifest_sha256"] == digest(package_manifest)
+    assert receipt["zip_timestamp"] == "2026-09-24T00:00:00"
 
     for row in manifest["files"]:
         path = output_dir / row["bundle_path"]
@@ -60,3 +68,18 @@ def test_tracking_submission_package_excludes_later_empirical_programme(tmp_path
     assert "wigeon" not in sources
     assert "barnacle" not in sources
     assert "phase_retention_observation" not in sources
+
+
+def test_tracking_submission_zip_is_byte_stable(tmp_path):
+    output_dir = tmp_path / "package"
+    zip_path = tmp_path / "tracking.zip"
+
+    first = build_package(output_dir, zip_path)["zip_sha256"]
+    second = build_package(output_dir, zip_path)["zip_sha256"]
+
+    assert first == second
+    assert first == digest(zip_path)
+
+    with zipfile.ZipFile(zip_path) as archive:
+        timestamps = {info.date_time for info in archive.infolist()}
+    assert timestamps == {(2026, 9, 24, 0, 0, 0)}
