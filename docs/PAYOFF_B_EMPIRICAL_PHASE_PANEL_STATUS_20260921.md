@@ -59,6 +59,30 @@ surfaces, while the POWER stopover association is not reproduced under ERA5.
 Thus the response coordinate is empirically more reconstruction-stable than the
 proposed actuator in this system.
 
+A separately preregistered POWER-to-ERA5 reconstruction for two highlighted
+barnacle-goose transitions gives a complementary reliability result:
+
+    Greenland R2 -> R3:
+        POWER lambda_hat = 0.130731
+        ERA5  lambda_hat = 0.144204
+        delta = +0.013473
+
+        POWER stopover p = 0.00339
+        ERA5  stopover p = 0.00802
+
+    Barents R1 -> R2:
+        POWER lambda_hat = 0.494114
+        ERA5  lambda_hat = 0.515329
+        delta = +0.021215
+
+        POWER stopover p = 0.000988
+        ERA5  stopover p = 0.000995
+
+Thus both the phase-retention response and the negative stopover actuator
+replicate across environmental surfaces in these two preregistered goose
+transitions. Reliability is therefore not a property of lambda alone: it is a
+system-by-estimand property that must be audited separately.
+
 ## Measurement-error audit updated 2026-09-24
 
 The direct lambda values are regression-scale estimates and can be attenuated by
