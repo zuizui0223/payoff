@@ -80,8 +80,25 @@ barnacle-goose transitions gives a complementary reliability result:
 
 Thus both the phase-retention response and the negative stopover actuator
 replicate across environmental surfaces in these two preregistered goose
-transitions. Reliability is therefore not a property of lambda alone: it is a
-system-by-estimand property that must be audited separately.
+transitions.
+
+A separately frozen Svalbard R2 -> R4 ERA5 replication extends this result to
+the overshoot boundary:
+
+    POWER lambda_hat = -0.106321
+    ERA5  lambda_hat = -0.286983
+
+    POWER stopover slope = -0.588996
+        p = 9.73e-06
+
+    ERA5 stopover slope = -0.621530
+        p = 3.44e-06.
+
+The negative lambda sign therefore survives environmental-source substitution.
+All three highlighted barnacle-goose flyways now reproduce both phase
+transformation and the negative stopover response under POWER and ERA5.
+Reliability is not a property of lambda alone: it is a system-by-estimand
+property that must be audited separately.
 
 ## Measurement-error audit updated 2026-09-24
 
