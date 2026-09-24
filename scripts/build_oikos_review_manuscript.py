@@ -173,7 +173,10 @@ def extract_parts() -> tuple[str, str, str, list[str]]:
     body_end = lines.index("## Prior-art boundary and core references")
     body_lines = lines[body_start:body_end]
 
-    reference_marker = lines.index("The compact manuscript list is:") + 1
+    reference_marker = next(
+        i for i, line in enumerate(lines)
+        if "compact manuscript list is:" in line
+    ) + 1
     reference_end = next(
         i for i in range(reference_marker, len(lines))
         if lines[i].strip() == "---"
