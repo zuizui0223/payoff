@@ -6,6 +6,10 @@ Canonical manuscript:
 
 `manuscript/PAYOFF_B_TRACKING_THEORY_V1.md`
 
+Portal-ready Supporting Information is assembled from the frozen JSON receipts
+by `scripts/build_tracking_theory_supporting_information.py` and bundled as
+`PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md`.
+
 This map defines the supplementary structure for the standalone synthetic
 tracking-theory paper. It reorganizes existing frozen results only. It does not
 license new simulations or new claims.

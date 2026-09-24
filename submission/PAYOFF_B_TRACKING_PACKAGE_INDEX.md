@@ -74,7 +74,12 @@ Supplement structure:
 
 - `submission/PAYOFF_B_TRACKING_SUPPLEMENT_MAP.md`
 
-These three files define what remains in the main paper versus what belongs in
+Portal-ready Supporting Information:
+
+- generator: `scripts/build_tracking_theory_supporting_information.py`
+- generated bundle file: `PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md`
+
+These files define what remains in the main paper versus what belongs in
 robustness/supplementary material.
 
 ## References
@@ -139,7 +144,8 @@ python scripts/build_tracking_theory_submission_package.py \
   --zip outputs/PAYOFF_B_TRACKING_SUBMISSION_PACKAGE.zip
 ```
 
-The builder assembles the manuscript-facing files, internal claim/provenance
+The builder assembles the manuscript-facing files, a Supporting Information
+document generated from the five frozen JSON receipts, internal claim/provenance
 contracts, the five frozen synthetic receipt families, the two core theory
 documents, and freshly rendered Figures 1–6. It writes per-file SHA256 values
 to `PAYOFF_B_TRACKING_SUBMISSION_MANIFEST.json`. The ZIP uses a fixed frozen
@@ -168,7 +174,10 @@ The tracking-theory package is guarded by tests covering:
 - bibliography normalization;
 - final novelty sentence;
 - visual-audit receipt;
-- scientific-freeze declaration.
+- scientific-freeze declaration;
+- Oikos abstract <=300-word/citation/acronym compliance;
+- frozen Supporting Information generation;
+- deterministic submission ZIP across output paths.
 
 ## Stop rule
 

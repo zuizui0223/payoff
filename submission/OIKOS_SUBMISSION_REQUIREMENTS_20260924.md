@@ -72,11 +72,13 @@ Requirement:
 - no references;
 - no unexplained abbreviations/acronyms.
 
-Action before portal upload:
+Current status:
 
-- run a word-count contract on the frozen abstract;
-- expand all unexplained abbreviations if any;
-- do not add literature citations to the abstract.
+- **PASS — 295 words** under the repository word-count contract;
+- no literature citations;
+- no unexplained all-caps acronym tokens detected.
+
+The contract is guarded by `tests/test_oikos_tracking_submission_contract.py`.
 
 ### 4. Main-text formatting
 
@@ -167,10 +169,13 @@ Current repo:
 Status:
 
 - supplement structure S1–S6 is frozen;
-- a portal-ready Supporting Information document still needs to be assembled
-  from those frozen contents.
+- `scripts/build_tracking_theory_supporting_information.py` assembles a
+  portal-ready Supporting Information document directly from the five frozen
+  JSON receipts;
+- the submission-package builder includes the generated file as
+  `PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md`.
 
-This is **packaging work only**; it must not introduce new simulations.
+This is **packaging work only** and introduces no new simulations.
 
 ### 10. ORCID and CRediT
 
@@ -198,13 +203,11 @@ These are author/admin metadata. Do not infer them from repository contents.
 
 Scientific analysis is frozen. Remaining Oikos preparation tasks are:
 
-1. assemble a portal-ready Supporting Information file from S1–S6;
-2. create anonymous main-text export with page + continuous line numbers;
-3. verify abstract <=300 words and citation/acronym rules;
-4. prepare anonymous code/data review-access route;
-5. finalize Data Availability Statement;
-6. finalize factual AI-use disclosure;
-7. fill title-page author/affiliation/ORCID metadata;
-8. enter conflict/funding/ethics/acknowledgment fields in ScholarOne.
+1. create anonymous main-text export with page + continuous line numbers;
+2. prepare anonymous code/data review-access route;
+3. finalize Data Availability Statement;
+4. finalize factual AI-use disclosure;
+5. fill title-page author/affiliation/ORCID metadata;
+6. enter conflict/funding/ethics/acknowledgment fields in ScholarOne.
 
 None of these tasks justifies new synthetic parameter sweeps.

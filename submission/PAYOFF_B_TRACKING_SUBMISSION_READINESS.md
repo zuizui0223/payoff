@@ -57,7 +57,11 @@ Canonical figure captions:
   space-time climate response itself;
 - journal targeting is frozen for preparation purposes as Oikos first shot,
   Theoretical Ecology fallback, with a dedicated Oikos handoff and
-  tracking-specific title-page/cover-letter templates.
+  tracking-specific title-page/cover-letter templates;
+- the frozen abstract passes the Oikos <=300-word contract at 295 words with no
+  citations or unexplained all-caps acronym tokens;
+- a portal-ready Supporting Information document is generated directly from
+  the five frozen JSON receipts and bundled automatically.
 
 ## Not required before a first manuscript freeze
 
@@ -82,10 +86,11 @@ for first-submission preparation**. No unresolved synthetic result, figure,
 bibliography, claim-boundary, parameter-status, or Results-to-Figure mapping
 task remains in the current v1 package.
 
-Remaining work is administrative rather than scientific: fill verified
-author/title-page metadata, finalize declarations, archive the frozen package
-to obtain a persistent DOI, adapt journal style, and complete portal-specific
-file conversion/upload steps.
+Remaining work is administrative rather than scientific: create the
+double-anonymized line-numbered main-text export, establish anonymous review
+access for code/data, fill verified author/title-page metadata, finalize the
+Data Availability and AI-use disclosures plus other declarations, archive the
+frozen package to obtain a persistent DOI, and complete portal upload steps.
 
 Do not introduce a "first ever" claim unless a later literature audit supports
 it.

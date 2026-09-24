@@ -148,7 +148,11 @@ Core:
 
 Supplement:
 
-- material organized by
+- generated portal-ready Supporting Information:
+  `PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md`
+- generator:
+  `scripts/build_tracking_theory_supporting_information.py`
+- structural map:
   `submission/PAYOFF_B_TRACKING_SUPPLEMENT_MAP.md`
 
 Administrative:
