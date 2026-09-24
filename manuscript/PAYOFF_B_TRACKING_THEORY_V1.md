@@ -451,7 +451,7 @@ The central lesson is therefore not that organisms should move or change timing.
 The full novelty audit is frozen in
 `docs/PAYOFF_B_TRACKING_THEORY_PRIOR_ART_20260924.md`.
 
-The manuscript does **not** claim novelty for combining dispersal and phenology, for modelling moving habitat, or for climate-driven mismatch between interacting species. Its candidate contribution is the estimand chain from exact local space-time substitutability to finite temporal bypass, spatial re-entry, a direct unilateral coordination gate, demographic visibility, and finite-N crossing without automatic rescue.
+The manuscript does **not** claim novelty for combining dispersal and phenology, for modelling moving habitat, or for climate-driven mismatch between interacting species. **The contribution is not a new demonstration that species can respond to climate change in both space and time. It is the separation of adaptive capacity from unilateral accessibility when interacting partners can reallocate tracking between spatial and temporal axes.** The supporting estimand chain runs from exact local space-time substitutability to finite temporal bypass, spatial re-entry, a direct unilateral coordination gate, demographic visibility, and finite-N crossing without automatic rescue.
 
 The submission bibliography is frozen in
 `submission/PAYOFF_B_TRACKING_REFERENCES.bib`. The compact manuscript list is:
