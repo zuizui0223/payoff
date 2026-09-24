@@ -56,7 +56,7 @@
         ],
         "power_onsets": [
           "stage3_svalbard_goose_power_gdd_onsets.csv",
-          ""
+          "cfa6f06f6f00ee7a8c18687307cf38555fcb22380e161e961ac8094a244cbbfc"
         ],
         "transitions": [
           "stage3_svalbard_goose_transitions.csv",
