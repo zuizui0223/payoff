@@ -73,11 +73,11 @@
       "interval_id": "consecutive_reconstructed_staging_transition",
       "source_receipt": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
       "predictor_phase_sd_days": 15.881166579869618,
-      "predictor_error_sd_days": null,
-      "outcome_error_sd_days": null,
-      "error_correlation": null,
-      "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
-      "confirmatory_recovery_ready": false,
+      "predictor_error_sd_days": 5.010239973852373,
+      "outcome_error_sd_days": 5.010239973852373,
+      "error_correlation": 0.3666144716835741,
+      "error_calibration_status": "COMPLETE_REPLICATE_CALIBRATION_ASSUMPTION_CONDITIONAL",
+      "confirmatory_recovery_ready": true,
       "predictor_phase_sd_role": "observed_source_faithful_predictor_sd",
       "predictor_phase_sd_provenance": {
         "source_branch": "empirical/movement-phenology-macro-20260918",
@@ -92,13 +92,20 @@
         "required_error_sd_over_observed_predictor_sd": 0.5002319250740299,
         "required_error_sd_days_given_observed_predictor_sd": 7.944266530669527,
         "role": "stress threshold only, not empirical error estimate"
-      }
+      },
+      "calibration_source": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json",
+      "simex_source": "data/wigeon_phase_simex_era5_complete_result_20260924.json",
+      "calibration_caveat": "POWER-versus-ERA5 disagreement does not uniquely identify source-specific measurement error; values define frozen sensitivity scenarios",
+      "independent_environmental_replication_lambda_hat": 0.8113122876847199
     }
   ],
   "rules": {
     "environmental_innovation_sd_is_not_measurement_error_sd": true,
     "route_rows_are_not_extra_taxa": true,
     "no_taxon_specific_null_until_error_calibration_ready": true,
-    "no_Aikens_profile_until_registered_outcome_is_opened": true
-  }
+    "no_Aikens_profile_until_registered_outcome_is_opened": true,
+    "wigeon_complete_calibration_is_assumption_conditional": true,
+    "wigeon_simex_v2_is_sensitivity_not_corrected_truth": true
+  },
+  "updated_date": "2026-09-24"
 }
