@@ -136,12 +136,50 @@ data/wigeon_phase_simex_era5_complete_result_20260924.json
 The earlier registered ERA5-Land lane remains a coverage failure at 220/256
 events and is not retroactively repaired.
 
-### Mule deer and barnacle goose — still pending
+### Barnacle goose — two preregistered replicate calibrations complete
 
-For mule deer and barnacle-goose direct systems, source-backed predictor phase
+A separately frozen ERA5 reconstruction repeated the exact POWER GDD-jerk
+phenology transform over the same 1982--2013 baseline for two transitions chosen
+before ERA5 outcomes were opened.
+
+```text
+Greenland R2 -> R3
+    POWER lambda_hat = 0.130731
+    ERA5  lambda_hat = 0.144204
+    ERA5 - POWER     = +0.013473
+
+    POWER stopover slope = -0.5242, p=0.00339
+    ERA5  stopover slope = -0.3789, p=0.00802
+
+Barents R1 -> R2
+    POWER lambda_hat = 0.494114
+    ERA5  lambda_hat = 0.515329
+    ERA5 - POWER     = +0.021215
+
+    POWER stopover slope = -0.5915, p=0.000988
+    ERA5  stopover slope = -0.5738, p=0.000995
+```
+
+The corresponding POWER--ERA5 region-year onset-anomaly disagreement SDs are
+4.227 d (Greenland) and 2.839 d (Barents). Their equal-independent-replicate
+sensitivity scales are 2.989 d and 2.007 d respectively.
+
+These values are assumption-conditional replicate calibrations, not
+source-specific gold-standard measurement-error distributions. Svalbard remains
+outside this lane because it uses a separate anchor-sensitive construction.
+
+Source:
+
+```text
+data/barnacle_era5_reliability_result_20260924.json
+docs/PAYOFF_B_BARNACLE_ERA5_RELIABILITY_20260924.md
+```
+
+### Mule deer and Svalbard goose — source-specific error still pending
+
+For mule deer and the Svalbard direct transition, source-backed predictor phase
 error distributions and consecutive-error correlations have not yet been
-identified. Their recovery-registry fields therefore remain
-`PENDING_SOURCE_BACKED_CALIBRATION`.
+identified.
 
 Consequently:
 
@@ -149,8 +187,14 @@ Consequently:
 three-taxon estimator-scale lambda coordinate:
     LICENSED
 
-wigeon assumption-conditional observation-error sensitivity:
+wigeon assumption-conditional replicate calibration:
     COMPLETE
+
+barnacle Greenland/Barents assumption-conditional replicate calibration:
+    COMPLETE
+
+source-specific measurement-error identification for all taxa:
+    INCOMPLETE
 
 cross-taxon latent biological lambda magnitude comparison:
     HOLD
