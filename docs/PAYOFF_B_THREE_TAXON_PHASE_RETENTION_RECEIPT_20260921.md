@@ -119,7 +119,7 @@ Detected architecture:
     averaged away.
 
 Independent ERA5 reliability replication was frozen before ERA5 outcomes for
-two highlighted fixed transitions.
+all three highlighted barnacle-goose fixed transitions.
 
     Greenland R2 -> R3:
         POWER lambda_hat = 0.130731
@@ -135,20 +135,36 @@ two highlighted fixed transitions.
         difference = +0.021215
 
         POWER stopover slope = -0.5915, p=0.000988
-        ERA5  stopover slope = -0.5738, p=0.000995.
+        ERA5  stopover slope = -0.5738, p=0.000995
 
-Thus both estimator-scale phase contraction and the negative stopover response
-are reconstruction-robust in these two preregistered barnacle-goose
-transitions. The POWER--ERA5 disagreement remains an assumption-conditional
-reliability calibration, not a gold-standard error distribution.
+    Svalbard R2 -> R4:
+        POWER lambda_hat = -0.106321
+        ERA5  lambda_hat = -0.286983
+        difference = -0.180662
 
-Machine result:
+        POWER stopover slope = -0.588996, p=9.73e-06
+        ERA5  stopover slope = -0.621530, p=3.44e-06.
+
+The Svalbard reliability lane uses annual onset anomalies only, so uncertain
+region-specific absolute anchors alter intercepts but not the fixed-transition
+lambda or stopover slopes.
+
+Thus phase transformation and the negative stopover response are
+reconstruction-robust in all three highlighted barnacle-goose flyways. The
+Svalbard negative lambda sign also survives source substitution, providing a
+boundary case that simple independent classical attenuation of a latent
+lambda=1 process cannot generate in expectation.
+
+The POWER--ERA5 disagreement remains an assumption-conditional reliability
+calibration, not a gold-standard error distribution.
+
+Machine results:
 
     data/barnacle_era5_reliability_result_20260924.json
-    docs/PAYOFF_B_BARNACLE_ERA5_RELIABILITY_20260924.md.
+    docs/PAYOFF_B_BARNACLE_ERA5_RELIABILITY_20260924.md
 
-Svalbard remains outside this ERA5 lane and retains its separate
-anchor-sensitive construction.
+    data/svalbard_barnacle_era5_reliability_result_20260924.json
+    docs/PAYOFF_B_SVALBARD_ERA5_RELIABILITY_20260924.md.
 
 ## 4. Eurasian wigeon
 
