@@ -14,6 +14,7 @@ from render_tracking_theory_figures import render_all
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ZIP_TIMESTAMP = (2026, 9, 24, 0, 0, 0)
 
 SUBMISSION_FILES = [
     "manuscript/PAYOFF_B_TRACKING_THEORY_V1.md",
@@ -76,6 +77,30 @@ def copy_one(source_rel: str, destination: Path, prefix: str) -> dict:
         "bytes": target.stat().st_size,
         "sha256": sha256(target),
     }
+
+
+def write_deterministic_zip(source_dir: Path, zip_path: Path) -> None:
+    """Write byte-stable ZIP metadata for a fixed package content set."""
+    with zipfile.ZipFile(
+        zip_path,
+        "w",
+        compression=zipfile.ZIP_DEFLATED,
+        compresslevel=9,
+    ) as archive:
+        for path in sorted(source_dir.rglob("*")):
+            if not path.is_file():
+                continue
+            relative = path.relative_to(source_dir).as_posix()
+            info = zipfile.ZipInfo(relative, date_time=ZIP_TIMESTAMP)
+            info.create_system = 3
+            info.external_attr = (0o644 & 0xFFFF) << 16
+            info.compress_type = zipfile.ZIP_DEFLATED
+            archive.writestr(
+                info,
+                path.read_bytes(),
+                compress_type=zipfile.ZIP_DEFLATED,
+                compresslevel=9,
+            )
 
 
 def build_package(output_dir: Path, zip_path: Path | None = None) -> dict:
@@ -144,14 +169,29 @@ def build_package(output_dir: Path, zip_path: Path | None = None) -> dict:
         zip_path.parent.mkdir(parents=True, exist_ok=True)
         if zip_path.exists():
             zip_path.unlink()
-        with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-            for path in sorted(output_dir.rglob("*")):
-                if path.is_file():
-                    archive.write(path, path.relative_to(output_dir))
+        write_deterministic_zip(output_dir, zip_path)
+        archive_receipt = {
+            "status": "payoff_b_tracking_theory_submission_archive_receipt",
+            "scientific_freeze_date": manifest["scientific_freeze_date"],
+            "package_manifest": str(manifest_path.name),
+            "package_manifest_sha256": sha256(manifest_path),
+            "zip_file": zip_path.name,
+            "zip_bytes": zip_path.stat().st_size,
+            "zip_sha256": sha256(zip_path),
+            "zip_timestamp": "2026-09-24T00:00:00",
+        }
+        receipt_path = (
+            zip_path.parent
+            / "PAYOFF_B_TRACKING_SUBMISSION_ARCHIVE_RECEIPT.json"
+        )
+        receipt_path.write_text(
+            json.dumps(archive_receipt, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        manifest["archive_receipt_path"] = str(receipt_path)
         manifest["zip_path"] = str(zip_path)
-        manifest["zip_bytes"] = zip_path.stat().st_size
-        manifest["zip_sha256"] = sha256(zip_path)
-        manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+        manifest["zip_bytes"] = archive_receipt["zip_bytes"]
+        manifest["zip_sha256"] = archive_receipt["zip_sha256"]
 
     return manifest
 
