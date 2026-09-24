@@ -6,7 +6,7 @@
     "estimator_scale_coordinate_licensed": true,
     "unique_taxa": 3,
     "direct_system_rows": 5,
-    "taxa_with_any_reliability_calibration": 1,
+    "taxa_with_any_reliability_calibration": 2,
     "taxa_with_source_specific_error_identification": 0,
     "taxa_pending_reliability_calibration": 3,
     "latent_magnitude_comparison_licensed": false,
@@ -19,12 +19,12 @@
       [
         "barnacle_barents_R1_R2",
         "Branta leucopsis",
-        "PENDING"
+        "SENSITIVITY_ASSUMPTION_CONDITIONAL"
       ],
       [
         "barnacle_greenland_R2_R3",
         "Branta leucopsis",
-        "PENDING"
+        "SENSITIVITY_ASSUMPTION_CONDITIONAL"
       ],
       [
         "barnacle_svalbard_southern_norway_to_svalbard",
@@ -46,7 +46,8 @@
   "claim_boundary": {
     "licensed": [
       "three-taxon estimator-scale phase-retention coordinate",
-      "wigeon assumption-conditional observation-error sensitivity"
+      "wigeon assumption-conditional observation-error sensitivity",
+      "barnacle-goose POWER-versus-ERA5 assumption-conditional reconstruction sensitivity for Greenland R2-R3 and Barents R1-R2"
     ],
     "hold": [
       "cross-taxon comparison of latent biological lambda magnitudes",
@@ -54,7 +55,7 @@
     ],
     "next_steps": [
       "execute the frozen Aikens within-system lambda perturbation when authenticated environmental extraction is available",
-      "seek source-backed reliability calibration for existing mule-deer and barnacle-goose phase coordinates before biological magnitude comparison",
+      "seek source-backed reliability calibration for mule deer and the remaining Svalbard goose phase coordinate before biological magnitude comparison",
       "add future taxa only for new inferential boundaries rather than panel size"
     ]
   }
