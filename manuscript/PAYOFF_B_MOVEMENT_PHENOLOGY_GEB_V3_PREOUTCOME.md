@@ -14,11 +14,11 @@
 
 **Methods:** We tested a universal movement-to-phenology speed ratio in 5,816 bird-year-cell observations from 55 species, then estimated signed phase retention from E_next = a + λE_current + ε over declared movement intervals. We reconstructed three direct taxa, estimated environmental timing innovation separately, and tested an industrial-development perturbation.
 
-**Results:** Broad bird data rejected one universal natural speed optimum. Source-faithful direct reconstructions yielded naive phase-retention estimates of about 0.11 in mule deer, 0.11–0.49 across highlighted barnacle-goose transitions, and 0.75 in wigeon. Stopover/waiting compensation occurred in all three taxa, whereas a travel-speed response was not detected in wigeon. Environmental predictability did not map monotonically onto correction strength. Industrial development attenuated a movement-control permeability proxy, while a stronger predicted temporal deterioration was unsupported. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
+**Results:** Broad bird data rejected one universal natural speed optimum. Source-faithful direct reconstructions yielded naive phase-retention estimates of about 0.11 in mule deer, 0.11–0.49 across highlighted barnacle-goose transitions, and 0.75 in wigeon. An independent ERA5 reconstruction gave wigeon lambda=0.81 on the same 224 transitions, whereas the POWER-based stopover association did not replicate under ERA5. Environmental predictability did not map monotonically onto correction strength. Industrial development attenuated a movement-control permeability proxy, while a stronger predicted temporal deterioration was unsupported. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
 [AIKENS LAMBDA ABSTRACT PENDING — render from the registered result JSON before submission.]
 <!-- AIKENS_LAMBDA_ABSTRACT_END -->
 
-**Main conclusions:** Phenological migration is better compared by retained phase deviation than by a universal migration rate or zero-lag target. Environmental information and realized phase correction are separable channels. Stopover/waiting emerges as a recurrent correction actuator, while speed and route-level contributions remain system-dependent; lambda magnitudes remain subject to measurement-error calibration.
+**Main conclusions:** Phenological migration is better compared by retained phase deviation than by a universal migration rate or zero-lag target. Environmental information and realized phase correction are separable channels. In wigeon, phase retention replicated across independent environmental reconstructions more clearly than the inferred stopover actuator, emphasizing that response coordinates and physical mechanisms require separate validation.
 
 **Keywords:** animal tracking, biologging, environmental predictability, green wave, macroecology, migration, phenological mismatch, phase retention, plasticity, spring phenology
 
@@ -181,20 +181,29 @@ E[\hat\lambda]
 {V_E+V_u}.
 \]
 
-We verified this attenuation analytically and by seed-explicit Monte Carlo
-simulation, then generated true-\(\lambda=1\) null distributions on the same
-estimator scale.
+We verified this attenuation analytically and with seed-explicit Monte Carlo
+simulation and event-structure-preserving SIMEX.
 
-For wigeon, the highest-risk direct system because its naive retention is
-closest to one, we froze an independent POWER-versus-ERA5-Land event-level
-replicate calibration before the Aikens outcome was opened. The ERA5-Land
-replicate used the same January--July 5 C TGS rule and the frozen wigeon staging
-events. The registered coverage gate required at least 200 paired events and
-90% coverage of the 256 frozen events. POWER was refit on the full 224
-transitions as an identity check, and like-for-like POWER and ERA5-Land
-controllers were compared on transitions with both environmental
-reconstructions. Replicate disagreement was used only as a sensitivity scale,
-not as a gold-standard measurement-error estimate.
+For wigeon, we first executed a preregistered POWER-versus-ERA5-Land replicate
+calibration. That lane retained only 220 of 256 staging events and therefore
+failed its frozen 90% coverage gate; its numerical disagreement summaries were
+kept as incomplete-calibration diagnostics only.
+
+We then froze a separate source-faithful follow-up before inspecting its
+outcome. The original study used hourly ERA5 2-m temperature, so the follow-up
+queried ERA5 rather than ERA5-Land, computed GMT daily means from exactly 24
+finite hourly values, restricted each year to January--July, and applied the
+same cumulative-minimum 5 C TGS rule. The same 256 staging events, 224
+transitions, controller formula, clustering rule, published-phase validation
+and 90% coverage threshold were retained. Replicate disagreement was used as a
+sensitivity scale rather than treated as a gold-standard measurement-error
+distribution.
+
+Finally, using the complete ERA5 calibration, we froze a second SIMEX analysis
+that assigned one shared error to each unique staging event, preserved
+origin--destination error dependence within individual-year sequences, used
+\(\zeta=0.5,1,1.5,2\) with 1000 replicates each, and quadratically
+extrapolated the mean \(\hat\lambda\) curve to \(\zeta=-1\).
 
 ### Industrial-development actuation test
 
@@ -343,103 +352,90 @@ with stopover slope -0.524 d/d, while Barents R1→R2 had
 
 with stopover slope -0.591 d/d. Other route stages included near-complete reset and local amplification, demonstrating that a single species-wide \(\lambda\) is not biologically adequate.
 
-### Wigeon prospectively shows phase contraction with stopover compensation
+### Wigeon prospectively shows phase contraction; actuator inference is reconstruction-sensitive
 
 A source-faithfulness audit changed the promoted wigeon result before this
 manuscript was finalized. The published environmental code restricts daily
 temperatures to January--July before applying the 5 C cumulative-minimum TGS
 rule. Our original independent POWER reconstruction had used the full calendar
 year, which allowed cold northern cell-years to return day 365/366 as apparent
-TGS onset. We froze the correction rule before inspecting the corrected lambda.
+TGS onset. We froze the correction rule before inspecting the corrected
+coefficient.
 
-The source-faithful reconstruction retained 256 staging events. No valid TGS
-onset occurred at or after day 300. Median arrival phase was 21.97 d after TGS
-onset (Q1=13.18, Q3=34.25), closely matching the published 22.5 d
-(Q1=13.0, Q3=35.3).
-
-Across the same 224 consecutive staging transitions from 28 individuals,
+The corrected POWER reconstruction retained all 256 staging events and closely
+matched the published phase distribution. Across the same 224 consecutive
+staging transitions from 28 individuals,
 
 \[
-\beta_E=-0.2502\pm0.0499,
+\hat\lambda_{\rm POWER}=0.7498\pm0.0499,
 \]
 
-so
+with a naive test against complete retention of
+\(p=5.33\times10^{-7}\). The preregistered primary \(\lambda<1\) gate
+therefore passed. The stronger frozen POWER point forecast
+\(|\hat\lambda|<0.75\) also passed, but by only 0.00023.
 
-\[
-\hat\lambda=0.7498.
-\]
+Under the registered POWER phase surface, the directional W2 stopover
+prediction also passed: stopover duration declined by 0.0629 d per additional
+day late (clustered \(p=0.0317\)). No fixed p-value threshold was preregistered
+for W2, and the secondary magnitude forecast \(0.3<g_S<0.8\) failed because
+the observed gain was only 0.0629. Between-staging travel speed remained
+unsupported.
 
-The naive no-correction test \(\hat\lambda=1\) was rejected
-(\(p=5.33\times10^{-7}\)). The frozen stronger point forecast
-\(|\hat\lambda|\le0.75\) therefore passed, but only narrowly
-(0.7498), so we do not promote it as a universal correction constant.
-
-The preregistered **directional** stopover prediction also passed after
-source-faithful reconstruction: stopover duration declined by 0.0629 d per
-additional day late relative to local TGS onset (clustered \(p=0.0317\)).
-No fixed p-value threshold was preregistered for this primary W2 test. The
-secondary magnitude forecast, \(0.3<g_S<0.8\), failed because the observed
-stopover gain was only \(g_S=0.0629\). Thus wigeon replicate the direction of
-waiting-time compensation, not the larger stopover-gain magnitude observed in
-the mule-deer and highlighted goose systems. In contrast, measured
-between-staging travel speed remained unsupported (\(p=0.417\)), as did direct
-distance moderation at \(p\le0.05\) (\(p=0.082\)).
-
-Thus the prospective wigeon result now supports both estimator-scale phase
-contraction and a specific waiting-time actuator. Its numeric lambda remains a
-naive errors-in-variables estimate and is interpreted separately from the
-measurement-error audit below.
-
-### Observation-error recovery does not trivially explain the wigeon estimate
-
-The registered ERA5-Land replicate calibration did not pass its complete
-coverage gate: 220 of 256 staging events had both reconstructions
-(85.9%, below the frozen 90% threshold), although the minimum count criterion,
-the published-phase validation, and the full-224 POWER identity check passed.
-The calibration is therefore retained as a registered **FAIL**, not promoted
-to a completed error model.
-
-The incomplete paired data were nevertheless informative as a robustness
-diagnostic. Across 220 paired events, the ERA5-Land-minus-POWER phase
-difference had median 0 d and SD 5.43 d. On the identical 181 complete staging
+The independently frozen source-faithful ERA5 reconstruction then provided a
+stronger robustness test. It achieved 256/256 event coverage and passed the
+published phase-validation and POWER identity gates. On exactly the same 224
 transitions,
 
 \[
-\hat\lambda_{\rm POWER}=0.838,
-\qquad
-\hat\lambda_{\rm ERA5-Land}=0.865,
+\hat\lambda_{\rm ERA5}=0.8113\pm0.0448,
 \]
 
-a difference of 0.027.
+with a naive \(p=2.51\times10^{-5}\) against one. Thus estimator-scale phase
+contraction reproduced across the POWER and ERA5 environmental surfaces, even
+though its magnitude shifted by 0.0615.
 
-Under an equal-independent-replicate interpretation, the corresponding error
-SD was 3.84 d. A true-\(\lambda=1\) simulation using the frozen 224-transition
-POWER signal and process-noise scales gave a lower-tail probability of
-\(3.0\times10^{-4}\) at the observed source-faithful
-\(\hat\lambda=0.7498\). Using the observed consecutive discrepancy correlation
-gave \(1.0\times10^{-4}\). In a deliberately conservative sensitivity that
-treated the entire 5.43-d POWER--ERA5-Land disagreement SD as measurement error,
-the true-\(\lambda=1\) null had a 2.5% quantile of 0.7484 and a lower-tail
-probability of 0.0266.
+The actuator result was less stable. With ERA5 phase, the stopover slope was
+-0.0242 d/d with \(p=0.310\), and travel speed again remained unsupported.
+Accordingly, the preregistered POWER W2 result remains a valid source-specific
+prospective outcome, but it is not independently replicated by the ERA5 phase
+surface.
 
-These simulations therefore do not make the wigeon contraction disappear under
-the observed replicate-disagreement scales, but the failed coverage gate
-prevents us from treating them as a final measurement-error correction.
+### Observation-error calibration changes correction magnitude more than the qualitative phase signal
 
-As a second observation-layer sensitivity, we applied event-structure-preserving
-SIMEX to the same 224 transitions, assigning one shared error to each unique
-staging event and preserving origin--destination error dependence along each
-individual-year sequence. Under the three frozen incomplete-calibration
-scenarios, quadratic extrapolation to zero measurement error moved
-\(\hat\lambda\) upward from 0.7498 to 0.7827--0.8602. All extrapolated values
-remained below one. GitHub Actions reproduced the frozen seed-explicit result
-exactly. Because the error scales derive from the incomplete ERA5-Land
-calibration, these SIMEX values are robustness diagnostics rather than estimates
-of the latent biological \(\lambda\).
+The registered ERA5-Land replicate calibration remains a formal failure because
+it reached only 220/256 events, below the frozen 90% coverage threshold. A
+separate source-faithful ERA5 follow-up, frozen without relaxing that failed
+gate, achieved complete 256/256 coverage.
 
-### Three taxa share a phase coordinate and a recurrent waiting-time actuator
+Across the complete paired events, ERA5-minus-POWER phase disagreement had
+median 1 d and SD 7.09 d. Treating two reconstructions as equal independent
+replicates gives a sensitivity error scale of 5.01 d; consecutive discrepancy
+correlation was 0.367. These quantities describe replicate disagreement and do
+not uniquely identify either source's measurement error.
 
-The source-faithful direct naive phase-retention summaries now span:
+True-\(\lambda=1\) simulations showed strong assumption dependence. With the
+5.01-d equal-independent-replicate scale, the lower-tail probability at the
+observed POWER \(\hat\lambda=0.7498\) was 0.0099; incorporating the observed
+discrepancy-correlation proxy reduced it to 0.00050. In a deliberately
+conservative scenario that assigned the full 7.09-d disagreement SD to each
+source, the lower-tail probability rose to 0.401.
+
+The complete-calibration event-structure SIMEX gave the same qualitative
+message. Extrapolated values were 0.8412 under equal independent replicate
+error, 0.7979 with the discrepancy-correlation proxy, and 0.9354 under the
+conservative full-disagreement scenario. Measurement error therefore materially
+changes the inferred strength of correction and can bring the estimate close to
+complete retention under an extreme allocation of replicate disagreement.
+Nevertheless, all three frozen SIMEX extrapolations remained below one.
+
+We therefore treat wigeon phase retention as a robust estimator-scale response
+coordinate across two environmental reconstructions, while leaving the latent
+biological correction magnitude interval- and assumption-dependent.
+
+### Three taxa share a phase coordinate; actuator evidence is less reconstruction-stable
+
+The source-faithful direct naive phase-retention summaries span:
 
 ~~~text
 Mule deer:
@@ -450,18 +446,21 @@ Barnacle goose:
   highlighted route range ~ 0.106–0.494
 
 Eurasian wigeon:
-  |lambda_hat| ~ 0.750
+  POWER |lambda_hat| ~ 0.750
+  ERA5  |lambda_hat| ~ 0.811
 ~~~
 
-All highlighted direct rows lie below one on their declared ecological
-intervals. More importantly for mechanism, stopover/waiting compensation is
-detected in mule deer, barnacle goose and prospectively in wigeon. Movement
-speed is supported in mule deer but not in the wigeon staging-transition
-analysis, and route-level effects vary within geese.
+Mule deer show speed and stopover compensation, and highlighted barnacle-goose
+transitions show strong stopover-mediated control. Wigeon is more diagnostic:
+the phase-retention coefficient remained below one under both POWER and ERA5,
+but the negative stopover association was supported only on the registered
+POWER phase surface and not on the independent ERA5 reconstruction.
 
-Thus a recurrent waiting-time actuator can coexist with heterogeneous full
-controller architectures. Numeric lambda differences remain estimator-scale
-comparisons until phase-measurement reliability is calibrated.
+Thus the common response coordinate is empirically more reconstruction-stable
+than the inferred physical actuator in the wigeon system. Full controller
+architecture remains system- and measurement-dependent, and numeric
+cross-system \(\lambda\) differences remain estimator-scale comparisons rather
+than portable biological constants.
 
 ### Environmental predictability and feedback strength are separate channels
 
@@ -522,7 +521,7 @@ and remained non-significant across the registered sensitivity grid. Thus the re
 | Barnacle goose, Svalbard | Southern Norway → Svalbard | −0.106 | 0.106 | 0.894 | Stopover + overtake |
 | Barnacle goose, Greenland | R2 → R3 | 0.131 | 0.131 | 0.869 | Stopover |
 | Barnacle goose, Barents | R1 → R2 | 0.494 | 0.494 | 0.506 | Stopover |
-| Eurasian wigeon | Consecutive staging transitions | 0.750 | 0.750 | 0.250 | Stopover supported; travel speed not supported |
+| Eurasian wigeon | Consecutive staging transitions | 0.750 POWER; 0.811 ERA5 | 0.750–0.811 | 0.189–0.250 | Phase contraction replicates; POWER stopover association not replicated under ERA5 |
 
 The three barnacle-goose rows are within-taxon route replications and are not treated as independent taxonomic observations.
 
@@ -536,23 +535,22 @@ This reframing preserves the temporal core of PAYOFF-B without claiming that a t
 
 ### Phase retention is more portable than behavioral gain
 
-Mule deer, barnacle geese and wigeon all admit direct source-faithful
-phase-retention representations, but the actuator comparison is more structured
-than a simple portable/non-portable split.
+Mule deer, barnacle geese and wigeon all admit direct phase-retention
+representations, but the wigeon replicate calibration shows why the response
+coordinate and actuator layer must remain separate.
 
 Mule deer combine movement-speed acceleration and stopover shortening.
-Barnacle geese show strong stopover-mediated STEP control with deliberate
-overtake in some route stages. Wigeon now prospectively shows stopover
-shortening as well, but no detected between-staging travel-speed response.
-Waiting time therefore emerges as a recurrent **directional** actuator across
-all three taxa, whereas its gain is not portable: the preregistered wigeon
-0.3--0.8 stopover-gain band failed. Movement-speed and route-level contributions
-also remain system-dependent.
+Barnacle geese show strong stopover-mediated STEP control with overtaking in
+some route stages. Under the registered POWER reconstruction, wigeon also show
+a negative stopover response, but this association weakens and is unsupported
+when phase is reconstructed independently from source-faithful ERA5. By
+contrast, \(\hat\lambda\) remains below one under both POWER and ERA5 on the
+same 224 transitions.
 
-This distinction is important because a shared response coordinate does not
-require every physical actuator to recur, but recurrent actuator components can
-still be identified without collapsing the systems onto one universal
-controller. This distinction is also important because temporal-dependence coefficients in phenology are not new: autoregressive models have long been used for life-history timing and migratory arrival (Post et al., 2001; Forchhammer et al., 2002). Our λ instead describes retention of animal-minus-environment phase within a migration, across a declared movement opportunity.
+The wigeon comparison therefore supplies a within-system robustness test of the
+two-gate architecture: a phase-retention signal can replicate while one proposed
+actuator does not. This is more informative than classifying an entire taxon as
+having or lacking a common controller mechanism.
 
 ### Information and feedback solve different parts of the same timing problem
 
@@ -596,13 +594,34 @@ These mechanisms can produce similar observed arrival mismatch while implying di
 
 ### Limitations
 
-The current comparison spans three directly reconstructed taxa, not a global sample of migration strategies. Barnacle-goose flyways are repeated routes within one species and are not independent taxonomic replicates. Observation intervals differ among continuous and stopover-based systems, so \(\lambda\) should be interpreted as phase retention over a declared ecological correction interval rather than per unit time.
+The current comparison spans three directly reconstructed taxa, not a global
+sample of migration strategies. Barnacle-goose flyways are repeated routes
+within one species and are not independent taxonomic replicates. Observation
+intervals differ among continuous and stopover-based systems, so \(\lambda\)
+should be interpreted as phase retention over a declared ecological correction
+interval rather than per unit time.
 
-Environmental reconstructions are also heterogeneous. Wigeon validation uses an independent NASA POWER reconstruction rather than the original ERA5 grid, and barnacle-goose analyses use independently reconstructed annual phenology anomalies rather than byte-identical historical climate inputs. These reconstructions were validated against available published timing summaries and were handled with explicit claim ceilings.
+Environmental reconstructions are heterogeneous. For wigeon, the initial
+registered ERA5-Land error-calibration lane failed its 90% event-coverage gate
+and remains a failure. A separately frozen source-faithful ERA5 hourly follow-up
+achieved 256/256 coverage and reproduced the estimator-scale contraction on all
+224 transitions. The two environmental surfaces nevertheless shifted
+\(\hat\lambda\) from 0.750 to 0.811 and changed the stopover result from
+supported under POWER to unsupported under ERA5.
 
-A further limitation is errors-in-variables bias in the phase-retention slope. Because reconstructed phase appears on the predictor axis, additive error in \(E_{\rm current}\) can attenuate the naive slope toward zero even when latent \(\lambda=1\). If consecutive phase errors are correlated, the attenuation depends on their covariance and need not follow the independent-error case. The pre-Aikens recovery layer shows that the source-faithful wigeon estimate remains unusually low relative to true-\(\lambda=1\) nulls across several frozen replicate-disagreement sensitivities. However, the registered ERA5-Land calibration itself failed its 90% event-coverage gate, so these are robustness diagnostics rather than a completed error model. The present \(\lambda\) values therefore remain estimator-scale coordinates rather than measurement-error-corrected biological gains, and cross-taxon magnitude differences cannot yet be attributed entirely to controller biology rather than differences in phase reliability.
+Errors-in-variables bias remains important. The complete POWER-versus-ERA5
+replicate calibration and event-structure SIMEX show that plausible frozen
+error allocations move wigeon \(\lambda\) upward, with SIMEX extrapolations
+from 0.798 to 0.935. Replicate disagreement does not identify a gold-standard
+error distribution, so these values are sensitivity diagnostics rather than
+corrected truth. Cross-taxon magnitude differences therefore cannot yet be
+attributed entirely to controller biology.
 
-All direct results are observational. Phase contraction does not by itself demonstrate that the measured controller maximizes lifetime fitness or evolved specifically to minimize phenological error. Cue accuracy, behavioral timing, and fitness consequences need not coincide, as emphasized by recent phenology theory and migration reaction-norm studies (Torstenson & Shaw, 2025; Laforge et al., 2025). Finally, the industrial-development comparison cannot isolate development causally from all population and landscape differences.
+All direct results are observational. Phase contraction does not by itself
+demonstrate that the measured controller maximizes lifetime fitness or evolved
+specifically to minimize phenological error. Finally, the industrial-development
+comparison cannot isolate development causally from all population and landscape
+differences.
 
 ### Outlook
 
@@ -626,7 +645,7 @@ Separating phase retention from environmental innovation clarifies why precise m
 [AIKENS LAMBDA CONCLUSION PENDING — render from the registered result JSON before submission.]
 <!-- AIKENS_LAMBDA_CONCLUSION_END -->
 
-The resulting picture is not a universal controller. It is a common phase-control problem in which waiting/stopover adjustment recurs across taxa, while movement-speed and route-level components remain contingent on system and scale.
+The resulting picture is not a universal controller. It is a common phase-control problem in which the phase-retention response is more portable than any single actuator: movement-speed, stopover and route-level components remain contingent on system, environmental reconstruction and scale.
 
 ## Data and Code Availability Statement
 
@@ -667,7 +686,7 @@ This manuscript supports:
 - failure of a universal natural speed-ratio optimum in the registered broad bird test;
 - source-faithful naive phase-retention estimates in mule deer, barnacle goose and prospectively tested wigeon;
 - a pre-Aikens observation-error recovery analysis showing that the wigeon estimator remains below true-lambda=1 null expectations across frozen replicate-disagreement sensitivities, while the registered ERA5-Land calibration itself fails its coverage gate;
-- recurrent stopover/waiting compensation across the three direct taxa, with heterogeneous speed and route-level actuator evidence;
+- source-faithful phase-retention estimates in three direct taxa, including wigeon contraction reproduced under independent POWER and ERA5 environmental surfaces;
 - separation of environmental innovation from realized phase retention;
 - a quantitative industrial-development actuation contrast with a falsified stronger longitudinal prediction.
 
@@ -675,7 +694,7 @@ It does not support:
 
 - a universal phase-retention coefficient;
 - a final measurement-error-corrected latent wigeon lambda or a completed cross-taxon reliability correction;
-- one common reactive behavioral mechanism across taxa;
+- one common reactive behavioral mechanism across taxa, or a robust wigeon stopover actuator across environmental reconstructions;
 - a causal effect of predictability on feedback strength;
 - an evolutionary fitness optimum for the empirical \(\lambda\) values;
 - causal attribution of the industrial population contrast solely to development;
