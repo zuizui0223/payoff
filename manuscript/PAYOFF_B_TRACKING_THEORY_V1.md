@@ -38,62 +38,57 @@ The resulting prediction is not that one axis is generally superior. Instead, sp
 
 Environmental demand moves directionally as
 
-[
-D_t = vt.
-]
+```text
+D_t = v t
+```
 
-A lineage responds through spatial displacement (x) and phenological shift (z). A conversion factor (s) puts the two responses on one climate-equivalent coordinate,
+A lineage responds through spatial displacement `x` and phenological shift `z`. A conversion factor `s` puts the two responses on one climate-equivalent coordinate,
 
-[
-y = gx + sz,
-]
+```text
+y = g x + s z
+```
 
-where (g) converts spatial position into environmental units. Abiotic mismatch is
+where `g` converts spatial position into environmental units. Abiotic mismatch is
 
-[
-e_t = D_t - gx_t - sz_t.
-]
+```text
+e_t = D_t - g x_t - s z_t
+```
 
 This construction gives the strongest possible substitution null: movement and timing can close the same mismatch when measured in common units.
 
 ### 2.2 Fixed tracking rates
 
-In the nonspatial benchmark, migration/spatial tracking rate (m) and phenological tracking rate (h) jointly close a fraction
+In the nonspatial benchmark, migration/spatial tracking rate `m` and phenological tracking rate `h` jointly close a fraction
 
-[
-q = 1-exp[-(m+h)]
-]
+```text
+q = 1 - exp[-(m + h)]
+```
 
-of current mismatch per update. Correction is partitioned according to the relative rates. In the absence of costs, limits, and interactions, strategies with equal (m+h) therefore generate the same abiotic mismatch trajectory.
+of current mismatch per update. Correction is partitioned according to the relative rates. In the absence of costs, limits, and interactions, strategies with equal `m+h` therefore generate the same abiotic mismatch trajectory.
 
 ### 2.3 Explicit moving landscape
 
-The spatial model replaces direct spatial displacement with local population dynamics on fixed patches. In patch (j),
+The spatial model replaces direct spatial displacement with local population dynamics on fixed patches. In patch `j`,
 
-[
-e_j(t)=D_t-gx_j-sz_t.
-]
+```text
+e_j(t) = D_t - g x_j - s z_t
+```
 
 Low-density growth is
 
-[
-g_{0j}
-=
-b
--rac{A}{2}e_j^2
--C_{mathrm{track}}
--C_{mathrm{int}},
-]
+```text
+g0_j = b - (A/2)e_j^2 - C_track - C_int
+```
 
-where (A) is abiotic mismatch strength. Realized demographic growth additionally contains local density regulation. Evolutionary optimization uses low-density growth; density regulation affects abundance only. This separation prevents costly tracking from appearing favorable merely because it depresses abundance and relaxes competition.
+where `A` is abiotic mismatch strength. Realized demographic growth additionally contains local density regulation. Evolutionary optimization uses low-density growth; density regulation affects abundance only. This separation prevents costly tracking from appearing favorable merely because it depresses abundance and relaxes competition.
 
 Offspring disperse conservatively among neighboring habitat cells. Movement is therefore an emergent shift of the abundance distribution rather than a direct push toward the environmental optimum.
 
 Phenology responds to residual mismatch but is bounded by
 
-[
-|z_t|le z_{max}.
-]
+```text
+|z_t| <= z_max
+```
 
 This finite bound is the key mechanism that prevents unlimited replacement of movement by timing.
 
@@ -101,15 +96,11 @@ This finite bound is the key mechanism that prevents unlimited replacement of mo
 
 For two interacting species, mismatch contains a partner term. In the explicit landscape the climate-equivalent interaction distance is
 
-[
-M^2
-=
-[g(ar x_A-ar x_B)]^2
-+
-[s(z_A-z_B)]^2.
-]
+```text
+M^2 = [g(xbar_A - xbar_B)]^2 + [s(z_A - z_B)]^2
+```
 
-Interaction strength (I) penalizes this separation. Both species can therefore track the abiotic environment while still failing because they track it on different axes.
+Interaction strength `I` penalizes this separation. Both species can therefore track the abiotic environment while still failing because they track it on different axes.
 
 ### 2.5 Evolutionary accessibility
 
@@ -125,80 +116,65 @@ Low-density growth is transported into integer abundance through density-regulat
 
 This creates a second distinction:
 
-[
-	ext{accessibility gap}
-
-eq
-	ext{persistence consequence}.
-]
+```text
+accessibility gap != persistence consequence
+```
 
 A large payoff barrier need not matter demographically if both strategies are safely persistent or nearly doomed.
 
 ### 2.7 Finite-population evolutionary drift
 
-For a monomorphic resident and one-step mutant with low-density growth difference (Delta g), relative fitness is
+For a monomorphic resident and one-step mutant with low-density growth difference `Delta g`, relative fitness is
 
-[
-r=exp(etaDelta g).
-]
+```text
+r = exp(beta * Delta g)
+```
 
 Under a frequency-independent Moran mapping with symmetric nearest-neighbor mutation proposals, the exact weak-mutation stationary distribution is
 
-[
-Pi_i propto exp[eta(N-1)g_i].
-]
+```text
+Pi_i ∝ exp[beta (N - 1) g_i]
+```
 
 Small populations therefore explore broader regions of the strategy landscape, while large populations concentrate near high-payoff local states. This layer tests whether stochastic substitution can cross a deterministic coordination barrier.
 
 ### 2.8 Local closed-loop null
 
-A separate local controller isolates the pure feedback geometry. Let (q_m) be movement-mediated restoring feedback and (q_h) timing-mediated feedback. Mismatch obeys
+A separate local controller isolates the pure feedback geometry. Let `q_m` be movement-mediated restoring feedback and `q_h` timing-mediated feedback. Mismatch obeys
 
-[
-e_{t+1}
-=
-(1-q_m-q_h)e_t+r.
-]
+```text
+e_(t+1) = (1 - q_m - q_h)e_t + r
+```
 
 Defining
 
-[
-K=q_m+q_h,
-]
+```text
+K = q_m + q_h
+```
 
 the local controller depends on movement and timing only through total restoring gain. Stability requires
 
-[
-0<K<2,
-]
+```text
+0 < K < 2
+```
 
 and equilibrium mismatch is
 
-[
-e^*=rac{r}{K}.
-]
+```text
+e* = r / K
+```
 
 With quadratic feedback costs,
 
-[
-C
-=
-rac12 c_m q_m^2
-+
-rac12 c_h q_h^2,
-]
+```text
+C = 0.5 c_m q_m^2 + 0.5 c_h q_h^2
+```
 
-the minimum-cost allocation at fixed (K) is
+the minimum-cost allocation at fixed `K` is
 
-[
-q_m^*
-=
-Krac{c_h}{c_m+c_h},
-qquad
-q_h^*
-=
-Krac{c_m}{c_m+c_h}.
-]
+```text
+q_m* = K c_h / (c_m + c_h)\nq_h* = K c_m / (c_m + c_h)
+```
 
 This exact substitutability is the analytic null against which the explicit landscape results are interpreted.
 
@@ -208,7 +184,7 @@ This exact substitutability is the analytic null against which the explicit land
 
 ### 3.1 Phenological capacity extends tracking but does not remove the need for movement
 
-In the canonical one-dimensional moving landscape, increasing the allowed phenological shift expanded the sampled persistence frontier. With phenology limit (z_{max}=0), the maximum persisted climate velocity was 0.030 and the first failed velocity was 0.035. At (z_{max}=5), the corresponding bracket was 0.065 and 0.070.
+In the canonical one-dimensional moving landscape, increasing the allowed phenological shift expanded the sampled persistence frontier. With phenology limit `z_max=0`, the maximum persisted climate velocity was 0.030 and the first failed velocity was 0.035. At `z_max=5`, the corresponding bracket was 0.065 and 0.070.
 
 The frontier was stable to refinement of the migration–phenology strategy grid from (7	imes7) to (11	imes11). Importantly, every frontier strategy remained migration dominant. Phenological capacity therefore expanded the range of environmental velocities that could be tolerated, but did not replace spatial redistribution near the persistence boundary.
 
@@ -218,7 +194,7 @@ A simple finite-horizon capacity diagnostic reproduced the same trend. The avail
 
 Two-dimensional landscapes allow route geometry that cannot be represented in one dimension. We compared open habitat with straight and zigzag wall configurations while climate moved along a fixed axis.
 
-At high phenological capacity, the optimal strategy showed a three-stage sequence. In the canonical zigzag design with (z_{max}=4),
+At high phenological capacity, the optimal strategy showed a three-stage sequence. In the canonical zigzag design with `z_max=4`,
 
 - at climate velocity 0.04, the optimum was phenology only;
 - at 0.05, the optimum remained phenology only;
@@ -233,15 +209,15 @@ This is a finite temporal bypass. Timing can temporarily absorb environmental di
 
 In the canonical open-versus-zigzag comparison, the mean low-density growth penalty of the zigzag route was
 
-[
+```text
 -0.0419
-]
+```
 
 at phenology limit 0 and only
 
-[
+```text
 -0.0070
-]
+```
 
 at phenology limit 4, an approximately 83% reduction in penalty magnitude.
 
@@ -265,39 +241,39 @@ A direct one-step audit isolates the mechanism in the canonical two-dimensional 
 
 The resident matched strategy was
 
-[
-(m,h)=(0.2,0).
-]
+```text
+(m, h) = (0.2, 0)
+```
 
 The coordinated neighboring strategy was
 
-[
-(m,h)=(0.2,0.2).
-]
+```text
+(m, h) = (0.2, 0.2)
+```
 
 When both species made the timing shift together, joint low-density growth changed from approximately
 
-[
+```text
 -0.840
-]
+```
 
 to
 
-[
-+0.255,
-]
+```text
++0.255
+```
 
 for a coordinated gain of
 
-[
-+1.095.
-]
+```text
++1.095
+```
 
 Yet if either species made the same timing shift alone, its unilateral gain was approximately
 
-[
--5.946.
-]
+```text
+-5.946
+```
 
 The unilateral move created a climate-equivalent interaction mismatch of about 3.747.
 
@@ -323,7 +299,7 @@ Partner-specific tracking preferences were introduced by varying relative moveme
 
 At moderate forcing, interaction acted as a synchronizer. Without interaction, opposed cost biases produced quantitatively different partner strategies. With interaction strength 0.5 or 1, strategy distance collapsed to zero, interaction mismatch became very small, and all sampled pairs persisted.
 
-At stronger forcing the same synchronizing mechanism became maladaptive. Without interaction, all sampled partner pairs converged to a matched mixed strategy near ((0.2,0.2)) and persisted. With interaction strength 0.5 or 1, all sampled pairs converged to the same locally accessible migration-only attractor and all went extinct.
+At stronger forcing the same synchronizing mechanism became maladaptive. Without interaction, all sampled partner pairs converged to a matched mixed strategy near `(0.2, 0.2)` and persisted. With interaction strength 0.5 or 1, all sampled pairs converged to the same locally accessible migration-only attractor and all went extinct.
 
 Interaction-mediated synchronization is therefore not intrinsically beneficial or harmful. Its sign depends on whether the synchronized local attractor remains inside the persistence envelope.
 
@@ -339,7 +315,7 @@ The retained interpretation is a demographic visibility window. Coordination bar
 
 Finite-population substitution simulations began at a deterministic local endpoint.
 
-At (eta=5), small populations frequently crossed the barrier: the escape-replicate fraction was 0.94 at (N=10) and 0.97 at (N=30). At (N=100), no retained high-payoff escape occurred in the sampled design, and at (Nge300) the local endpoint dominated.
+At (eta=5), small populations frequently crossed the barrier: the escape-replicate fraction was 0.94 at `N=10` and 0.97 at `N=30`. At `N=100`, no retained high-payoff escape occurred in the sampled design, and at `N>=300` the local endpoint dominated.
 
 However, stochastic exploration carried a load. The coordinated payoff gain in the representative barrier regime was small relative to the broader distribution of lower-payoff states explored by small populations. Mean long-run joint growth therefore did not exceed the deterministic local endpoint.
 
@@ -363,30 +339,15 @@ Thus local space–time substitutability becomes forcing-dependent complementari
 
 The model produces a nested hierarchy:
 
-[
-	ext{tracking capacity}
-
-eq
-	ext{chosen tracking architecture}
-
-eq
-	ext{coordinated value}
-
-eq
-	ext{unilateral accessibility}
-
-eq
-	ext{population persistence}.
-]
+```text
+tracking capacity\n!= chosen tracking architecture\n!= coordinated value\n!= unilateral accessibility\n!= population persistence
+```
 
 Finite populations add a sixth distinction:
 
-[
-	ext{barrier crossing}
-
-eq
-	ext{long-run payoff improvement}.
-]
+```text
+barrier crossing != long-run payoff improvement
+```
 
 This hierarchy explains why apparently simple questions such as “can phenology compensate for movement?” or “can drift rescue maladaptation?” do not have one-dimensional answers.
 
