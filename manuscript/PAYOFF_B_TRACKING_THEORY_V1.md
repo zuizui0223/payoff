@@ -24,6 +24,8 @@ Second, how does habitat connectivity change this substitution? A spatial respon
 
 Third, what happens when successful tracking must remain coordinated with another species? Two interacting lineages may face the same moving environment but allocate adaptation differently between movement and timing. A coordinated change could improve both species while the same move by either species alone is deleterious because it transiently breaks spatial or phenological matching. In that case the global adaptive solution exists but is inaccessible to unilateral evolution.
 
+Several components of this problem are already established. Climate responses in behaviour, phenology, and geographic range have been explicitly framed as related ways of realigning organisms with their niches (Muthukrishnan et al. 2025), and empirical work shows that combined range and phenology shifts can be associated with stronger population performance (Hällfors et al. 2021; Macgregor et al. 2019). Moving-habitat models already treat dispersal, multidimensional landscapes, and species interactions, while spatial eco-evolutionary models have shown that dispersal can alter adaptation of seasonal timing (Harsch et al. 2017; Pontarp et al. 2015). Likewise, phenological mismatch and the evolution of interacting phenologies under climate change are mature research areas (Visser & Gienapp 2019; Kharouba & Wolkovich 2020; Gilman et al. 2012). We therefore do not treat the coexistence of spatial and temporal responses, or climate-driven interaction mismatch, as the novelty here. The narrower question is whether interacting species that can allocate tracking between space and time can actually reach a jointly valuable alternative through unilateral adaptive changes.
+
 Here we separate these questions explicitly. The framework combines five layers that are usually conflated: environmental tracking capacity, optimization over migration and phenology, unilateral evolutionary accessibility, demographic persistence, and finite-population barrier crossing. The central null is deliberately simple. In a local linear controller, movement and timing enter only through their summed restoring gain and are exactly substitutable before costs and constraints are added. We then restore the ingredients that break this null one by one: finite phenological capacity, explicit spatial redistribution, two-dimensional connectivity, interaction matching, demographic stochasticity, and finite-population evolutionary drift.
 
 The resulting prediction is not that one axis is generally superior. Instead, space–time substitution is scale dependent. Timing can buffer spatial costs and delay movement, but finite capacity forces spatial tracking to re-enter. Interaction matching can synchronize partner responses under moderate forcing, yet the same synchronization can lock both partners into a maladaptive local attractor under stronger forcing. Adaptation can therefore fail even when a jointly persistent tracking architecture is present in the strategy space.
@@ -467,6 +469,26 @@ Movement and phenological change are exactly substitutable only in the most loca
 Timing can buffer connectivity costs and postpone movement, but it has a finite bypass range. Interaction can synchronize partner tracking, but synchronization can become maladaptive under stronger forcing. A jointly persistent alternative can be present one mutation step away while remaining inaccessible because either partner moving first is selected against. Drift can cross that barrier without guaranteeing a long-run fitness gain.
 
 The central lesson is therefore not that organisms should move or change timing. It is that **adaptive capacity is not the same as adaptive accessibility**. Under a moving environment, persistence can fail because the viable tracking architecture cannot be reached by the sequence of individually favorable changes available to interacting populations.
+
+---
+
+## Prior-art boundary and core references
+
+The full novelty audit is frozen in
+`docs/PAYOFF_B_TRACKING_THEORY_PRIOR_ART_20260924.md`.
+
+The manuscript does **not** claim novelty for combining dispersal and phenology, for modelling moving habitat, or for climate-driven mismatch between interacting species. Its candidate contribution is the estimand chain from exact local space-time substitutability to finite temporal bypass, spatial re-entry, a direct unilateral coordination gate, demographic visibility, and finite-N crossing without automatic rescue.
+
+Core references:
+
+- Gilman RT, Fabina NS, Abbott KC, Rafferty NE. 2012. Evolution of plant–pollinator mutualisms in response to climate change. *Evolutionary Applications* 5:2–16. DOI: 10.1111/j.1752-4571.2011.00202.x.
+- Hällfors MH et al. 2021. Combining range and phenology shifts offers a winning strategy for boreal Lepidoptera. *Ecology Letters*. DOI: 10.1111/ele.13774.
+- Harsch MA et al. 2017. Moving forward: insights and applications of moving-habitat models for climate change ecology. *Journal of Ecology*. DOI: 10.1111/1365-2745.12724.
+- Kharouba HM, Wolkovich EM. 2020. Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. DOI: 10.1038/s41558-020-0752-x.
+- Macgregor CJ et al. 2019. Climate-induced phenology shifts linked to range expansions in species with multiple reproductive cycles per year. *Nature Communications* 10:4455.
+- Muthukrishnan R, Smiley TM, Title PO, Fudickar AM, Jahn AE, Lau JA. 2025. Chasing the Niche: Escaping Climate Change Threats in Place, Time, and Space. *Global Change Biology*. DOI: 10.1111/gcb.70167.
+- Pontarp M, Johansson J, Jonzén N, Lundberg P et al. 2015. Adaptation of timing of life history traits and population dynamic responses to climate change in spatially structured populations. *Evolutionary Ecology* 29:565–579. DOI: 10.1007/s10682-015-9759-6.
+- Visser ME, Gienapp P. 2019. Evolutionary and demographic consequences of phenological mismatches. *Nature Ecology & Evolution* 3:879–885. DOI: 10.1038/s41559-019-0880-8.
 
 ---
 
