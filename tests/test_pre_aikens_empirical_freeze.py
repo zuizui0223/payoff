@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FREEZE = ROOT / "data" / "payoff_b_pre_aikens_empirical_freeze_20260924.json"
 WIGEON = ROOT / "data" / "wigeon_era5_sourcefaithful_calibration_result_20260924.json"
 BARNACLE = ROOT / "data" / "barnacle_era5_reliability_result_20260924.json"
+SVALBARD = ROOT / "data" / "svalbard_barnacle_era5_reliability_result_20260924.json"
 RELIABILITY = ROOT / "data" / "payoff_b_cross_system_lambda_reliability_gate_20260924.json"
 
 
@@ -33,6 +34,10 @@ def test_pre_aikens_freeze_matches_barnacle_reliability_result():
     assert by_transition["Greenland_R2_R3"]["ERA5_lambda_hat"] == greenland["era5"]["lambda_hat"]
     assert by_transition["Barents_R1_R2"]["POWER_lambda_hat"] == barents["power"]["lambda_hat"]
     assert by_transition["Barents_R1_R2"]["ERA5_lambda_hat"] == barents["era5"]["lambda_hat"]
+    svalbard=load(SVALBARD)
+    assert by_transition["Svalbard_R2_R4"]["POWER_lambda_hat"] == svalbard["power"]["lambda_hat"]
+    assert by_transition["Svalbard_R2_R4"]["ERA5_lambda_hat"] == svalbard["era5"]["lambda_hat"]
+    assert by_transition["Svalbard_R2_R4"]["negative_lambda_sign_replicated"] is True
     assert all(row["response_reconstruction_robust"] for row in by_transition.values())
     assert all(row["actuator_reconstruction_robust"] for row in by_transition.values())
 
