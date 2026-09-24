@@ -133,6 +133,7 @@ Primary source:
 | coarse unilateral mutation step | 0.2 | first gate map |
 | fine unilateral mutation step | 0.1 | barrier-resolution check |
 | fine positive-interaction cells | 24 | confirmatory synthetic subset |
+| fine frozen outcome | 22/24 barriers; 21/24 persistence rescues | result, not a design parameter |
 
 The direct gate uses resident `(m,h)=(0.2,0)` and coordinated adjacent
 strategy `(0.2,0.2)`. These are diagnostic strategy coordinates, not proposed
