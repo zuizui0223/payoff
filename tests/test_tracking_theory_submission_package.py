@@ -71,15 +71,24 @@ def test_tracking_submission_package_excludes_later_empirical_programme(tmp_path
 
 
 def test_tracking_submission_zip_is_byte_stable(tmp_path):
-    output_dir = tmp_path / "package"
-    zip_path = tmp_path / "tracking.zip"
+    first_dir = tmp_path / "package_a"
+    second_dir = tmp_path / "different_output_path" / "package_b"
+    first_zip = tmp_path / "tracking_a.zip"
+    second_zip = tmp_path / "another_place" / "tracking_b.zip"
 
-    first = build_package(output_dir, zip_path)["zip_sha256"]
-    second = build_package(output_dir, zip_path)["zip_sha256"]
+    first = build_package(first_dir, first_zip)["zip_sha256"]
+    second = build_package(second_dir, second_zip)["zip_sha256"]
 
     assert first == second
-    assert first == digest(zip_path)
+    assert first == digest(first_zip)
+    assert second == digest(second_zip)
 
-    with zipfile.ZipFile(zip_path) as archive:
+    with zipfile.ZipFile(second_zip) as archive:
         timestamps = {info.date_time for info in archive.infolist()}
+        figure_manifest = json.loads(
+            archive.read("figures/PAYOFF_B_TRACKING_FIGURE_MANIFEST.json")
+        )
     assert timestamps == {(2026, 9, 24, 0, 0, 0)}
+    for row in figure_manifest["figures"].values():
+        assert "/" not in row["path"]
+        assert "\\" not in row["path"]
