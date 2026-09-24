@@ -42,11 +42,11 @@
       "interval_id": "fixed_route_transition_southern_norway_to_svalbard",
       "source_receipt": "docs/MOVEMENT_PHENOLOGY_BARNACLE_MULTIFLYWAY_DIRECT_RECEIPT.md",
       "predictor_phase_sd_days": 9.071370336848188,
-      "predictor_error_sd_days": null,
-      "outcome_error_sd_days": null,
-      "error_correlation": null,
-      "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
-      "confirmatory_recovery_ready": false,
+      "predictor_error_sd_days": 1.9982421921804094,
+      "outcome_error_sd_days": 1.9982421921804094,
+      "error_correlation": 0,
+      "error_calibration_status": "COMPLETE_REPLICATE_CALIBRATION_ASSUMPTION_CONDITIONAL",
+      "confirmatory_recovery_ready": true,
       "predictor_phase_sd_role": "observed_origin_arrival_phase_sample_sd",
       "predictor_phase_sd_provenance": {
         "source_branch": "empirical/movement-phenology-macro-20260918",
@@ -61,7 +61,10 @@
         "finite_solution": false,
         "reason": "negative observed lambda cannot be the large-sample expectation of true lambda=1 under nonnegative equal independent classical measurement-error variance",
         "role": "stress-model boundary only"
-      }
+      },
+      "calibration_source": "data/svalbard_barnacle_era5_reliability_result_20260924.json",
+      "independent_environmental_replication_lambda_hat": -0.28698340002500444,
+      "calibration_caveat": "POWER-versus-ERA5 onset-anomaly disagreement is an assumption-conditional replicate sensitivity scale, not a gold-standard source-specific measurement-error distribution"
     },
     {
       "system_id": "barnacle_greenland_R2_R3",
@@ -176,7 +179,8 @@
     "wigeon_simex_v2_is_sensitivity_not_corrected_truth": true,
     "predictor_phase_sd_is_signal_scale_not_error_calibration": true,
     "classical_error_stress_threshold_does_not_count_as_calibration": true,
-    "barnacle_ERA5_replicate_calibration_is_assumption_conditional": true
+    "barnacle_ERA5_replicate_calibration_is_assumption_conditional": true,
+    "svalbard_ERA5_replicate_calibration_is_assumption_conditional": true
   },
   "updated_date": "2026-09-24"
 }
