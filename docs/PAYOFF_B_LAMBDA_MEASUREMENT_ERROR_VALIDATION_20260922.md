@@ -2,7 +2,7 @@
 
 Frozen: **2026-09-22**
 
-Status: **pre-Aikens-outcome validation layer**.
+Status: **pre-Aikens-outcome validation layer; wigeon replicate calibration and SIMEX v2 complete, cross-taxon reliability incomplete**.
 
 ## Why this layer exists
 
@@ -99,14 +99,65 @@ Implemented:
 Frozen registry entries carry the actual empirical sample sizes and ecological
 intervals already used by the direct systems.
 
-Not yet filled:
+Current empirical calibration state:
 
-- empirical predictor phase SD;
-- predictor measurement-error SD;
-- outcome measurement-error SD;
-- start/end error correlation.
+### Eurasian wigeon — source-backed sensitivity complete
 
-Those fields remain `PENDING_SOURCE_BACKED_CALIBRATION`.
+A separately frozen source-faithful ERA5 hourly reconstruction now covers all
+256/256 staging events and all 224 controller transitions. On the identical
+transitions:
+
+```text
+POWER lambda_hat = 0.749768
+ERA5  lambda_hat = 0.811312
+```
+
+POWER-versus-ERA5 phase disagreement has SD 7.086 d. Under the equal-independent-
+replicate sensitivity interpretation this corresponds to 5.010 d per replicate;
+the observed consecutive discrepancy correlation is 0.3666.
+
+The complete event-structure SIMEX v2 gives frozen extrapolations:
+
+```text
+0.7979 .. 0.9354
+```
+
+and all three frozen scenarios remain below one. These values are **sensitivity
+diagnostics, not corrected truth**, because replicate disagreement does not
+identify a gold-standard source-specific measurement-error distribution.
+
+Sources:
+
+```text
+data/wigeon_era5_sourcefaithful_calibration_result_20260924.json
+data/wigeon_phase_simex_era5_complete_result_20260924.json
+```
+
+The earlier registered ERA5-Land lane remains a coverage failure at 220/256
+events and is not retroactively repaired.
+
+### Mule deer and barnacle goose — still pending
+
+For mule deer and barnacle-goose direct systems, source-backed predictor phase
+error distributions and consecutive-error correlations have not yet been
+identified. Their recovery-registry fields therefore remain
+`PENDING_SOURCE_BACKED_CALIBRATION`.
+
+Consequently:
+
+```text
+three-taxon estimator-scale lambda coordinate:
+    LICENSED
+
+wigeon assumption-conditional observation-error sensitivity:
+    COMPLETE
+
+cross-taxon latent biological lambda magnitude comparison:
+    HOLD
+```
+
+This separation is machine-enforced by
+`src/cross_system_lambda_reliability.py`.
 
 ## Why environmental innovation SD cannot fill this field
 
