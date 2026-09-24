@@ -46,7 +46,9 @@ Canonical figure captions:
 - all Results subsections are mapped to a main figure or frozen supplementary
   receipt through `submission/PAYOFF_B_TRACKING_RESULTS_FIGURE_CROSSWALK.md`;
 - the existing robustness programme is organized into Supplements S1–S6 in
-  `submission/PAYOFF_B_TRACKING_SUPPLEMENT_MAP.md`.
+  `submission/PAYOFF_B_TRACKING_SUPPLEMENT_MAP.md`;
+- the eight references currently cited by the manuscript are normalized in
+  `submission/PAYOFF_B_TRACKING_REFERENCES.bib` with DOI-checked metadata.
 
 ## Not required before a first manuscript freeze
 
@@ -66,12 +68,7 @@ claim boundary.
 
 ## Remaining manuscript work
 
-### 1. Bibliography completion
-
-Convert the prior-art audit into one consistent bibliography format and verify
-the full metadata for every cited paper.
-
-### 2. Figure inspection
+### 1. Figure inspection
 
 After CI rendering succeeds:
 
@@ -79,7 +76,7 @@ After CI rendering succeeds:
 - retain numeric values exactly as produced from frozen figure data;
 - change layout only, not scientific content, if a panel needs visual repair.
 
-### 3. Final novelty sentence
+### 2. Final novelty sentence
 
 Use a narrow formulation:
 
