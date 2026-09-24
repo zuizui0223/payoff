@@ -1,9 +1,10 @@
 # PAYOFF-B wigeon event-structure SIMEX sensitivity
 
 Frozen contract: **2026-09-23**  
-Local exact-contract reproduction: **2026-09-23**
+Local exact-contract reproduction: **2026-09-23**  
+GitHub Actions confirmation: **2026-09-24, run 35941228677**
 
-Status: **provisional numerical result pending GitHub Actions confirmation**.
+Status: **canonical frozen sensitivity; GitHub Actions reproduction PASS**.
 
 This sensitivity uses the real 224 source-faithful wigeon transitions rather
 than an IID pair generator. Measurement error is attached to unique staging
@@ -41,5 +42,5 @@ The result is deliberately not called a recovered true lambda. Error scales
 come from an incomplete POWER-versus-ERA5-Land calibration whose registered
 coverage gate failed. SIMEX therefore functions as a robustness/claim audit.
 
-The dedicated GitHub Actions workflow must reproduce the same deterministic
-numbers before this receipt is promoted from provisional to canonical.
+The dedicated GitHub Actions workflow reproduced the same deterministic numbers
+(unit tests PASS; frozen-result identity PASS). Artifact: `10785680482`.
