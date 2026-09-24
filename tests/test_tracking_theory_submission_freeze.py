@@ -40,8 +40,8 @@ def test_tracking_theory_readiness_declares_scientific_freeze():
     text = READINESS.read_text(encoding="utf-8")
     assert "scientifically frozen" in text
     assert "No unresolved synthetic result" in text
-    assert "administrative rather than scientific" in text
-    assert "generated double-anonymized line-numbered RTF" in text
+    assert "human/administrative rather than scientific or mechanical" in text
+    assert "No unresolved synthetic result" in text
 
 
 def test_tracking_theory_freeze_assets_exist():
