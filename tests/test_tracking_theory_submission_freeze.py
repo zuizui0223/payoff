@@ -41,7 +41,7 @@ def test_tracking_theory_readiness_declares_scientific_freeze():
     assert "scientifically frozen" in text
     assert "No unresolved synthetic result" in text
     assert "administrative rather than scientific" in text
-    assert "double-anonymized line-numbered main-text export" in text
+    assert "generated double-anonymized line-numbered RTF" in text
 
 
 def test_tracking_theory_freeze_assets_exist():

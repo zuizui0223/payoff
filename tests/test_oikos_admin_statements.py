@@ -16,7 +16,8 @@ def test_oikos_significance_statement_covers_required_logic():
 
 def test_oikos_data_availability_does_not_invent_archive():
     text = DATA.read_text(encoding="utf-8")
-    assert "[ANONYMOUS REVIEW FILE UPLOAD OR ANONYMOUS REPOSITORY LINK]" in text
+    assert "OIKOS_TRACKING_ANON_CODE_DATA.zip" in text
+    assert "direct anonymous file upload" in text
     assert "[PUBLIC REPOSITORY NAME, VERSION, DOI/PERSISTENT IDENTIFIER]" in text
     assert "No empirical individual-level" in text
 
