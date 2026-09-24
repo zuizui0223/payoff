@@ -54,7 +54,10 @@ Canonical figure captions:
   `35987790697`;
 - the final novelty sentence is frozen in the manuscript as separation of
   adaptive capacity from unilateral accessibility, not as novelty of
-  space-time climate response itself.
+  space-time climate response itself;
+- journal targeting is frozen for preparation purposes as Oikos first shot,
+  Theoretical Ecology fallback, with a dedicated Oikos handoff and
+  tracking-specific title-page/cover-letter templates.
 
 ## Not required before a first manuscript freeze
 
@@ -79,9 +82,10 @@ for first-submission preparation**. No unresolved synthetic result, figure,
 bibliography, claim-boundary, parameter-status, or Results-to-Figure mapping
 task remains in the current v1 package.
 
-Remaining work is journal-specific packaging only: target-journal formatting,
-title-page metadata, declarations, cover-letter wording, and any file-format
-conversion required by the submission portal.
+Remaining work is administrative rather than scientific: fill verified
+author/title-page metadata, finalize declarations, archive the frozen package
+to obtain a persistent DOI, adapt journal style, and complete portal-specific
+file conversion/upload steps.
 
 Do not introduce a "first ever" claim unless a later literature audit supports
 it.
