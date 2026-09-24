@@ -13,8 +13,8 @@
     "latent_cross_taxon_magnitude_ranking_licensed": false
   },
   "wigeon": {
-    "source_faithful_POWER_lambda_hat": 0.7497680211367301,
-    "POWER_lambda_se": 0.04990566712278233,
+    "source_faithful_POWER_lambda_hat": 0.7497680211367307,
+    "POWER_lambda_se": 0.04990566712278232,
     "ERA5_lambda_hat": 0.8113122876847199,
     "ERA5_lambda_se": 0.044776882831975916,
     "phase_contraction_replicated_across_environmental_surfaces": true,
