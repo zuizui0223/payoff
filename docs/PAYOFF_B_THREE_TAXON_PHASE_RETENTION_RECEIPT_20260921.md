@@ -125,12 +125,10 @@ System:
     Mareca penelope
     van Toor et al. 2021
 
-The original POWER reconstruction was superseded after a source audit showed
-that the published TGS code restricts daily temperatures to January--July
-before applying the cumulative-minimum 5 C rule. The corrected reconstruction
-was frozen before the corrected lambda was inspected.
+The wigeon environmental reconstruction was first corrected to the published
+January--July TGS window before the corrected POWER result was inspected.
 
-Source-faithful prospective third-taxon result:
+Registered POWER result:
 
     transitions:
         224
@@ -147,27 +145,19 @@ Source-faithful prospective third-taxon result:
     naive p versus lambda_hat=1:
         5.328e-07
 
-    |lambda_hat|:
-        0.749768021
-
-    estimator-scale correction fraction:
-        0.250231979.
-
-Formal W2 stopover actuator:
-
-    slope:
-        -0.0628626 stopover-days / phase-day
-
-    cluster SE:
-        0.0277386
-
-    p:
-        0.03166
-
-    primary preregistered directional gate:
+    primary lambda<1 gate:
         PASS
 
-    conventional clustered p:
+    strong |lambda_hat|<0.75 POWER point forecast:
+        PASS, narrowly.
+
+Under the registered POWER phase surface the W2 directional stopover gate also
+passes:
+
+    slope:
+        -0.0628626 d / phase-day
+
+    clustered p:
         0.03166
 
     fixed p threshold preregistered:
@@ -176,30 +166,65 @@ Formal W2 stopover actuator:
     secondary 0.3 < g_S < 0.8 band:
         FAIL.
 
-Travel-speed response remains unsupported:
+A separately frozen source-faithful ERA5 hourly calibration then achieved
+256/256 event coverage and reconstructed phase for all 224 transitions.
 
-    p:
-        0.417.
+On the identical transitions:
 
-Distance moderation remains unsupported at p<=0.05.
+    ERA5 lambda_hat:
+        0.811312288
 
-The corrected wigeon result is therefore
+    SE:
+        0.044776883
 
-    primary lambda gate:
+    naive p versus lambda_hat=1:
+        2.509e-05.
+
+Thus estimator-scale phase contraction replicates across POWER and ERA5.
+
+The actuator result does not replicate as cleanly:
+
+    POWER stopover slope:
+        -0.0628626
+        p = 0.03166
+
+    ERA5 stopover slope:
+        -0.0241815
+        p = 0.3104
+
+    travel speed:
+        unsupported under both reconstructions.
+
+Accordingly:
+
+    registered POWER W1:
         PASS
 
-    strong |lambda|<=0.75 point forecast:
+    registered POWER strong point forecast:
         PASS, narrowly
 
-    stopover actuator:
+    registered POWER W2 directional gate:
         PASS
 
-    travel-speed actuator:
+    independent ERA5 lambda replication:
+        SUPPORTS CONTRACTION
+
+    independent ERA5 stopover replication:
         NOT SUPPORTED.
 
-The canonical corrected receipt is
+The complete ERA5 calibration is frozen in:
 
-    docs/PAYOFF_B_WIGEON_PHASE_RETENTION_REVALIDATED_20260922.md.
+    data/wigeon_era5_sourcefaithful_calibration_result_20260924.json
+    docs/PAYOFF_B_WIGEON_ERA5_SOURCEFAITHFUL_CALIBRATION_20260924.md.
+
+The current primary measurement-error sensitivity is:
+
+    data/wigeon_phase_simex_era5_complete_result_20260924.json
+    docs/PAYOFF_B_WIGEON_ERA5_SIMEX_V2_20260924.md.
+
+Across the three frozen SIMEX v2 scenarios, extrapolated lambda ranges from
+0.7979 to 0.9354. These are sensitivity values, not one recovered biological
+lambda.
 
 ## 5. Taxon-level descriptive synthesis
 
@@ -212,23 +237,14 @@ One descriptive naive-estimator record per taxon gives approximately:
         median |lambda_hat| = 0.130730883
 
     Eurasian wigeon:
-        |lambda_hat| = 0.749768021.
+        POWER |lambda_hat| = 0.749768021
+        ERA5  |lambda_hat| = 0.811312288.
 
-Taxon-level observed-|lambda_hat| range:
+All highlighted direct systems admit phase-retention estimates below one on
+their declared intervals. For wigeon, the qualitative contraction signal is
+reproduced across two independently reconstructed environmental surfaces.
 
-    0.10734 .. 0.749768021.
-
-All registered direct rows satisfy
-
-    |lambda_hat| < 1,
-
-but these are regression-scale estimands. Differential phase-measurement error
-can alter both absolute values and cross-system contrasts, so biological
-differences in latent correction strength remain subject to the frozen
-measurement-error audit.
-
-A new qualitative pattern is nevertheless visible in the directly measured
-actuators:
+The actuator layer is less stable.
 
     mule deer:
         speed + stopover
@@ -237,31 +253,31 @@ actuators:
         stopover / route-stage control
 
     Eurasian wigeon:
-        stopover supported
-        travel speed not supported.
+        POWER stopover direction supported
+        ERA5 stopover association not supported
+        travel speed unsupported under both.
 
-Thus stopover / waiting-time adjustment is now a recurrent actuator across the
-three taxa, while speed and route-level contributions remain system-dependent.
+Therefore the strongest current cross-system pattern is not a recurrent
+stopover actuator in all three taxa. It is a common phase-retention response
+coordinate whose physical implementation and even actuator detectability are
+more system- and reconstruction-dependent.
+
+Numeric lambda magnitudes remain measurement-error-sensitive and should not be
+treated as portable biological constants.
 
 ## 6. Prospective status
 
-The evidence tiers are not identical.
+Wigeon remains the prospectively registered third-taxon extension.
 
-Wigeon is the preregistered third-taxon test and therefore provides the
-prospective cross-system extension after source-faithful TGS revalidation.
+The frozen registered POWER gates are reported exactly as executed:
 
-Mule deer and the barnacle-goose route reconstructions provide the existing
-direct empirical coordinate against which the wigeon forecast was generated.
-
-Accordingly:
-
-    prospective third-taxon naive lambda test:
+    primary lambda<1:
         PASS
 
-    stronger |lambda_hat|<=0.75 point forecast:
+    strong |lambda_hat|<0.75 POWER point forecast:
         PASS, narrowly
 
-    formal W2 directional stopover prediction:
+    W2 directional stopover prediction on POWER phase:
         PASS
 
     secondary W2 gain band:
@@ -270,10 +286,17 @@ Accordingly:
     W3 travel-speed diagnostic:
         NOT SUPPORTED.
 
-This no longer supports a simple "lambda portable / actuator non-portable"
-dichotomy. Instead, the data support a common phase coordinate plus a recurrent
-stopover/waiting actuator embedded within broader system-specific controller
-architectures.
+The independent ERA5 follow-up does not rewrite those registered outcomes.
+Instead it supplies a robustness layer:
+
+    ERA5 lambda_hat<1:
+        REPLICATED
+
+    ERA5 stopover association:
+        NOT SUPPORTED.
+
+This creates a useful two-level result: the phase-retention response is more
+stable to environmental reconstruction than the proposed stopover actuator.
 
 ## 7. Why no conventional three-taxon meta-analysis
 
@@ -298,37 +321,44 @@ opened.
 
 The updated three-taxon result is:
 
-> **phase retention is a portable response coordinate; stopover/waiting is a
-> recurrent correction actuator across the three direct taxa, while the full
-> controller architecture and estimator-scale retention magnitude are not
-> portable constants.**
+> **phase retention is a portable empirical response coordinate, while actuator
+> evidence is less portable and can be sensitive to how environmental phase is
+> reconstructed.**
 
-The biological interpretation of lambda magnitude remains conditional on the
-separate errors-in-variables audit.
+In wigeon specifically, contraction is reproduced under both POWER and ERA5,
+whereas the POWER stopover association is not reproduced by the ERA5 phase
+surface.
+
+The biological magnitude of lambda remains conditional on the separate
+errors-in-variables audit.
 
 ## 9. Claim ceiling
 
 Licensed:
 
 - direct naive phase-retention estimates exist in three migratory taxa;
-- all registered direct rows have |lambda_hat|<1 on their declared intervals;
-- the source-faithful wigeon primary prospective gate passes;
-- the source-faithful wigeon W2 directional stopover gate passes;
-- the secondary wigeon stopover-gain band fails;
-- stopover/waiting adjustment recurs across mule deer, barnacle goose and
-  wigeon;
-- speed and route-level actuator evidence remains heterogeneous;
+- the source-faithful wigeon registered POWER primary lambda gate passes;
+- wigeon estimator-scale contraction is independently reproduced with ERA5 on
+  the same 224 transitions;
+- the registered POWER W2 directional stopover gate passes as a source-specific
+  prospective result;
+- the independent ERA5 reconstruction does not support the wigeon stopover
+  association, demonstrating actuator reconstruction sensitivity;
+- movement-speed and route-level actuator evidence remain heterogeneous;
+- complete ERA5 calibration and SIMEX v2 quantify observation-error sensitivity
+  without defining one true latent lambda;
 - one common response coordinate is empirically useful.
 
 Not licensed:
 
-- one universal latent lambda;
-- one universal correction strength;
+- one universal latent lambda or one universal correction strength;
 - one universal full actuator architecture;
-- treating naive lambda_hat<1 as sufficient proof of latent lambda<1 before
-  measurement-error calibration;
+- a robust recurrent stopover actuator across all three taxa;
+- treating naive lambda_hat<1 as sufficient by itself to identify latent
+  lambda<1 without observation-error assumptions;
+- treating any SIMEX or EIV sensitivity value as the corrected truth;
 - attributing cross-taxon lambda magnitude differences entirely to biology;
-- treating three barnacle-goose flyways as three independent taxa;
-- a conventional meta-analytic mean at n=3 taxa;
+- treating three barnacle-goose flyways as independent taxa;
+- a conventional three-taxon meta-analytic mean;
 - numerical pooling across segment definitions that were not prospectively
   standardized.
