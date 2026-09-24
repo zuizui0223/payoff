@@ -24,6 +24,16 @@ Updated: **2026-09-24**
 - Cover-letter source:
   `submission/PAYOFF_B_TRACKING_COVER_LETTER_TEMPLATE.md`
 
+## Machine audit
+
+- canonical green workflow: `35999337326`
+- audit receipt:
+  `submission/OIKOS_MACHINE_PREPARATION_AUDIT_20260924.md`
+- anonymous main-text RTF: visually verified after PDF rendering;
+- Supporting Information RTF: visually verified after PDF rendering;
+- anonymous code/data ZIP: manifest-verified with zero identity or empirical
+  programme leakage.
+
 ## Human metadata still required
 
 These cannot be inferred safely from the scientific repository and must be

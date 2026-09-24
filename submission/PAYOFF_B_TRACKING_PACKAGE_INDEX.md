@@ -119,19 +119,21 @@ Oikos handoff:
 
 - `submission/OIKOS_TRACKING_HANDOFF_V1.md`
 - `submission/OIKOS_INITIAL_SUBMISSION_PACKET.md`
+- `submission/OIKOS_MACHINE_PREPARATION_AUDIT_20260924.md`
 
 Tracking-specific administrative templates:
 
 - `submission/PAYOFF_B_TRACKING_TITLE_PAGE_TEMPLATE.md`
 - `submission/PAYOFF_B_TRACKING_COVER_LETTER_TEMPLATE.md`
 
-Remaining tasks are target-journal-specific only:
+Remaining tasks are human/portal-specific only:
 
-- fill verified author/title-page metadata;
-- adapt references to the selected journal style;
-- finalize declarations;
-- replace repository placeholders with an archived DOI;
-- perform portal-specific file conversion or upload steps.
+- fill verified author/title-page metadata and ORCID;
+- finalize funding, conflict, ethics, acknowledgment and CRediT declarations;
+- complete ScholarOne entries and uploads;
+- replace the post-acceptance repository placeholder when a public DOI exists.
+
+No unresolved machine-generation or synthetic-analysis task remains.
 
 ## Reproducible working package
 
