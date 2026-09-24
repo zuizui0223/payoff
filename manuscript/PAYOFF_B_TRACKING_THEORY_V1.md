@@ -179,6 +179,14 @@ q_h* = K c_m / (c_m + c_h)
 
 This exact substitutability is the analytic null against which the explicit landscape results are interpreted.
 
+### 2.9 Parameter and design status
+
+The complete submission-style parameter map is frozen in
+`submission/PAYOFF_B_TRACKING_PARAMETER_TABLE.md`. It separates exact
+mathematical definitions from synthetic design axes, robustness-only settings,
+and reporting conventions. Numerical grid values are therefore treated as
+declared model design choices rather than empirical estimates.
+
 ---
 
 ## 3. Results
