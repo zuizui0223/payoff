@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT = ROOT / "manuscript" / "PAYOFF_B_TRACKING_THEORY_V1.md"
 CAPTIONS = ROOT / "submission" / "PAYOFF_B_TRACKING_FIGURE_CAPTIONS.md"
+AI_STATEMENT = ROOT / "submission" / "OIKOS_AI_USE_STATEMENT.md"
 BS = chr(92)
 NL = chr(10)
 
@@ -169,8 +170,21 @@ def extract_parts() -> tuple[str, str, str, list[str]]:
     keywords = strip_inline_markdown(lines[keyword_index])
 
     body_start = lines.index("## 1. Introduction")
-    body_end = lines.index("## 9. Frozen result provenance")
+    body_end = lines.index("## Prior-art boundary and core references")
     body_lines = lines[body_start:body_end]
+
+    reference_marker = lines.index("The compact manuscript list is:") + 1
+    reference_end = next(
+        i for i in range(reference_marker, len(lines))
+        if lines[i].strip() == "---"
+    )
+    reference_lines = ["## References", ""] + lines[
+        reference_marker:reference_end
+    ]
+
+    ai_lines = AI_STATEMENT.read_text(encoding="utf-8").splitlines()
+    if ai_lines and ai_lines[0].startswith("# "):
+        ai_lines[0] = "## " + ai_lines[0][2:]
 
     caption_lines = CAPTIONS.read_text(encoding="utf-8").splitlines()
     caption_start = next(
@@ -179,7 +193,16 @@ def extract_parts() -> tuple[str, str, str, list[str]]:
     )
     figure_lines = ["## Figure legends", ""] + caption_lines[caption_start:]
 
-    return title, abstract, keywords, body_lines + [""] + figure_lines
+    review_lines = (
+        body_lines
+        + [""]
+        + reference_lines
+        + [""]
+        + ai_lines
+        + [""]
+        + figure_lines
+    )
+    return title, abstract, keywords, review_lines
 
 
 def build_review_rtf() -> str:

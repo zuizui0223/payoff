@@ -1,0 +1,7 @@
+# Oikos Significance Statement
+
+Existing work has established that organisms can respond to environmental change through both spatial redistribution and phenological shifts, and that dispersal, moving habitats, and phenological mismatch can interact with population dynamics. Our manuscript builds directly on that literature but asks a different question: when interacting populations have more than one adaptive tracking axis, can they actually reach the jointly viable combination through unilateral selection?
+
+We show that the answer can be no. An exact local controller first provides a strong null in which movement- and timing-mediated correction are interchangeable. Explicit landscapes then reveal finite temporal bypass followed by spatial re-entry, while partner matching creates a one-step coordination gate in which the same adjacent change is beneficial when made jointly but strongly deleterious when made by either partner alone. We further separate the existence of this evolutionary barrier from its demographic visibility and from stochastic barrier crossing.
+
+Oikos is an appropriate outlet because the central contribution is a general ecological mechanism rather than a taxon-specific prediction: adaptive capacity does not guarantee adaptive accessibility. The framework links environmental tracking, landscape connectivity, species interactions, evolutionary paths, and persistence, and therefore speaks broadly to ecologists studying how populations cope with directional environmental change.

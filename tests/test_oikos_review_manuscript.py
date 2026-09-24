@@ -47,6 +47,12 @@ def test_oikos_review_rtf_is_anonymous_and_strips_internal_notes():
 
 def test_oikos_review_rtf_includes_figure_legends():
     text = build_review_rtf()
+    assert "References" in text
+    assert "Gilman RT" in text
+    assert "AI use statement" in text
+    assert "OpenAI ChatGPT was used" in text
+    assert "Prior-art boundary" not in text
+    assert "PAYOFF_B_TRACKING_THEORY_PRIOR_ART" not in text
     assert "Figure legends" in text
     for figure in range(1, 7):
         assert f"Figure {figure}." in text
