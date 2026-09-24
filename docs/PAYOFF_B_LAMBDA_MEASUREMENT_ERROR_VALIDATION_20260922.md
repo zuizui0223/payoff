@@ -175,11 +175,37 @@ data/barnacle_era5_reliability_result_20260924.json
 docs/PAYOFF_B_BARNACLE_ERA5_RELIABILITY_20260924.md
 ```
 
-### Mule deer and Svalbard goose — source-specific error still pending
+### Svalbard overshoot — independent ERA5 sign replication complete
 
-For mule deer and the Svalbard direct transition, source-backed predictor phase
-error distributions and consecutive-error correlations have not yet been
-identified.
+The frozen R2 -> R4 transition was also reconstructed from ERA5 using annual
+GDD-jerk anomalies only, so uncertain region-specific mean onset anchors do not
+enter the fixed-transition slope.
+
+```text
+POWER lambda_hat = -0.106321
+ERA5  lambda_hat = -0.286983
+
+POWER stopover slope = -0.588996, p=9.73e-06
+ERA5  stopover slope = -0.621530, p=3.44e-06
+
+POWER--ERA5 onset-anomaly disagreement SD = 2.826 d
+equal-independent-replicate sensitivity scale = 1.998 d
+```
+
+The negative lambda sign replicates. Under the simple independent classical
+attenuation model with true lambda=1, nonnegative predictor-error variance can
+attenuate the expected slope toward zero but cannot produce a negative
+large-sample expectation. Svalbard is therefore a useful boundary case against
+that specific measurement-error null.
+
+The replicate disagreement remains assumption-conditional sensitivity rather
+than gold-standard error identification.
+
+### Mule deer — source-backed reliability still pending
+
+For mule deer, an independent reconstruction of the phase coordinate has not
+yet been identified. Internal workbook IRG curves share the same source as the
+published DFP values and are therefore not counted as independent calibration.
 
 Consequently:
 
