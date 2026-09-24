@@ -72,11 +72,11 @@
       "interval_id": "fixed_route_transition_R2_R3",
       "source_receipt": "docs/MOVEMENT_PHENOLOGY_BARNACLE_MULTIFLYWAY_DIRECT_RECEIPT.md",
       "predictor_phase_sd_days": 12.487553937746076,
-      "predictor_error_sd_days": null,
-      "outcome_error_sd_days": null,
-      "error_correlation": null,
-      "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
-      "confirmatory_recovery_ready": false,
+      "predictor_error_sd_days": 2.9888503034463754,
+      "outcome_error_sd_days": 2.9888503034463754,
+      "error_correlation": 0,
+      "error_calibration_status": "COMPLETE_REPLICATE_CALIBRATION_ASSUMPTION_CONDITIONAL",
+      "confirmatory_recovery_ready": true,
       "predictor_phase_sd_role": "observed_origin_arrival_phase_anomaly_sample_sd",
       "predictor_phase_sd_provenance": {
         "source_branch": "empirical/movement-phenology-macro-20260918",
@@ -92,7 +92,10 @@
         "required_error_sd_over_observed_predictor_sd": 0.9323460285752281,
         "required_error_sd_days_given_observed_predictor_sd": 11.642721320476506,
         "role": "stress threshold only, not empirical error estimate"
-      }
+      },
+      "calibration_source": "data/barnacle_era5_reliability_result_20260924.json",
+      "independent_environmental_replication_lambda_hat": 0.14420353006747622,
+      "calibration_caveat": "POWER-versus-ERA5 onset-anomaly disagreement is an assumption-conditional replicate sensitivity scale, not a gold-standard source-specific measurement-error distribution"
     },
     {
       "system_id": "barnacle_barents_R1_R2",
@@ -103,11 +106,11 @@
       "interval_id": "fixed_route_transition_R1_R2",
       "source_receipt": "docs/MOVEMENT_PHENOLOGY_BARNACLE_MULTIFLYWAY_DIRECT_RECEIPT.md",
       "predictor_phase_sd_days": 27.769963220570872,
-      "predictor_error_sd_days": null,
-      "outcome_error_sd_days": null,
-      "error_correlation": null,
-      "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
-      "confirmatory_recovery_ready": false,
+      "predictor_error_sd_days": 2.0074437331705526,
+      "outcome_error_sd_days": 2.0074437331705526,
+      "error_correlation": 0,
+      "error_calibration_status": "COMPLETE_REPLICATE_CALIBRATION_ASSUMPTION_CONDITIONAL",
+      "confirmatory_recovery_ready": true,
       "predictor_phase_sd_role": "observed_origin_arrival_phase_anomaly_sample_sd",
       "predictor_phase_sd_provenance": {
         "source_branch": "empirical/movement-phenology-macro-20260918",
@@ -123,7 +126,10 @@
         "required_error_sd_over_observed_predictor_sd": 0.7112566751883598,
         "required_error_sd_days_given_observed_predictor_sd": 19.751571710366274,
         "role": "stress threshold only, not empirical error estimate"
-      }
+      },
+      "calibration_source": "data/barnacle_era5_reliability_result_20260924.json",
+      "independent_environmental_replication_lambda_hat": 0.515328602183836,
+      "calibration_caveat": "POWER-versus-ERA5 onset-anomaly disagreement is an assumption-conditional replicate sensitivity scale, not a gold-standard source-specific measurement-error distribution"
     },
     {
       "system_id": "eurasian_wigeon_staging_transition",
@@ -169,7 +175,8 @@
     "wigeon_complete_calibration_is_assumption_conditional": true,
     "wigeon_simex_v2_is_sensitivity_not_corrected_truth": true,
     "predictor_phase_sd_is_signal_scale_not_error_calibration": true,
-    "classical_error_stress_threshold_does_not_count_as_calibration": true
+    "classical_error_stress_threshold_does_not_count_as_calibration": true,
+    "barnacle_ERA5_replicate_calibration_is_assumption_conditional": true
   },
   "updated_date": "2026-09-24"
 }
