@@ -39,7 +39,28 @@
       "stopover_fixed_p_threshold_preregistered": false,
       "stopover_secondary_gain_band": "FAIL",
       "distance_moderation": "NOT_SUPPORTED",
-      "source_faithful_revalidation": "data/wigeon_source_faithful_revalidation_result_20260922.json"
+      "source_faithful_revalidation": "data/wigeon_source_faithful_revalidation_result_20260922.json",
+      "independent_era5_replication": {
+        "lambda_hat": 0.8113122876847199,
+        "se": 0.044776882831975916,
+        "naive_p_vs_lambda_1": 0.000025093871829659954,
+        "phase_contraction_replication": "SUPPORTED",
+        "stopover_slope": -0.02418153728541716,
+        "stopover_p": 0.31039716561251024,
+        "stopover_replication": "NOT_SUPPORTED",
+        "travel_speed_replication": "NOT_SUPPORTED",
+        "source": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json"
+      },
+      "measurement_error_sensitivity": {
+        "status": "COMPLETE_ASSUMPTION_CONDITIONAL",
+        "simex_lambda_range": [
+          0.7978928038433668,
+          0.9353935594001919
+        ],
+        "all_frozen_simex_values_below_one": true,
+        "source": "data/wigeon_phase_simex_era5_complete_result_20260924.json",
+        "corrected_truth_identified": false
+      }
     }
   ],
   "broad_bird_falsification": {
@@ -47,7 +68,7 @@
     "species": 55,
     "universal_speed_ratio_supported": false
   },
-  "current_cross_system_claim": "phase retention is a portable estimator-scale response coordinate; stopover/waiting direction recurs across the three direct taxa, while full actuator architecture and latent lambda magnitude are not universal constants",
+  "current_cross_system_claim": "phase retention is a portable estimator-scale response coordinate; wigeon contraction replicates across POWER and source-faithful ERA5, while actuator detectability and latent lambda magnitude remain reconstruction- and reliability-sensitive",
   "fourth_taxon": {
     "status": "HOLD",
     "raw_data_availability_sufficient": false,
@@ -61,7 +82,7 @@
     ],
     "actuator_only_alternative": "same-taxon prospective mechanism perturbations can add evidence without adding taxon count or lambda support"
   },
-  "preferred_next_empirical_move": "complete the frozen actual-design wigeon SIMEX sensitivity, preserve registered ERA5-Land FAIL, then keep Aikens unopened until its registered extraction is executable",
+  "preferred_next_empirical_move": "wigeon source-faithful ERA5 calibration and SIMEX v2 are complete; next execute the frozen Aikens environmental extraction and within-system lambda perturbation when AppEEARS/Earthdata credentials are available",
   "evidence_units": {
     "direct_phase_retention_taxa": 3,
     "prospective_lambda_extensions": 1,
@@ -81,7 +102,7 @@
     ]
   },
   "next_empirical_experiment": {
-    "status": "SELECTED_PENDING_ENVIRONMENTAL_SOURCE",
+    "status": "SELECTED_READY_EXCEPT_AUTHENTICATED_ENVIRONMENTAL_EXTRACTION",
     "study": "Aikens et al. 2022 industrial mule deer",
     "evidence_lane": "within_system_lambda_perturbation",
     "adds_taxon": false,
@@ -94,50 +115,56 @@
     "actuator_perturbation_already_supported": true,
     "exact_movement_source_ready": true,
     "exact_appeears_manifest_ready": true,
-    "current_blocker": "authenticated Aikens environmental extraction; wigeon registered measurement-error calibration failed coverage and is under separate coastal-mask diagnosis",
+    "current_blocker": "authenticated AppEEARS/Earthdata environmental extraction; all downstream IRG, fixed-24h pairing, registered lambda contrast, outcome rendering and manuscript audit paths are implemented",
     "lambda_outcome_opened": false
   },
   "revalidated_date": "2026-09-22",
   "measurement_error_status": {
-    "latent_lambda_comparison_ready": false,
-    "registered_wigeon_calibration_status": "FAIL_COVERAGE",
-    "paired_events": 220,
-    "frozen_events": 256,
-    "paired_fraction": 0.859375,
-    "frozen_minimum_fraction": 0.9,
-    "minimum_event_count_passed": true,
-    "published_phase_validation_passed": true,
-    "power_refit_identity_passed": true,
-    "paired_event_disagreement_sd_days": 5.434104670117694,
-    "equal_independent_replicate_error_sd_days": 3.842492261917708,
-    "paired_power_lambda_hat": 0.8379631788095746,
-    "paired_era5land_lambda_hat": 0.8651588000237029,
-    "paired_lambda_difference": 0.02719562121412833,
-    "true_lambda_one_sensitivity": {
-      "equal_independent_replicates_lower_tail_probability": 0.00029997000299970003,
-      "discrepancy_correlation_proxy_lower_tail_probability": 0.00009999000099990002,
-      "conservative_full_disagreement_lower_tail_probability": 0.026597340265973404,
-      "conservative_full_disagreement_null_q025": 0.748390341827434,
-      "observed_source_faithful_lambda_hat": 0.7497680211367301
+    "cross_system_estimator_scale_coordinate_licensed": true,
+    "cross_system_latent_magnitude_comparison_licensed": false,
+    "source_specific_error_identified_taxa": 0,
+    "taxa_with_any_reliability_calibration": 1,
+    "wigeon_source_faithful_era5_calibration": {
+      "status": "COMPLETE",
+      "paired_events": 256,
+      "frozen_events": 256,
+      "paired_fraction": 1,
+      "complete_transition_pairs": 224,
+      "era5_lambda_hat": 0.8113122876847199,
+      "power_lambda_hat": 0.7497680211367301,
+      "disagreement_sd_days": 7.085549321765848,
+      "equal_independent_replicate_error_sd_days": 5.010239973852373,
+      "consecutive_discrepancy_correlation": 0.3666144716835741,
+      "gold_standard_measurement_error_identified": false,
+      "receipt": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json"
     },
-    "sensitivity_role": "INCOMPLETE_CALIBRATION_ROBUSTNESS_DIAGNOSTIC_ONLY",
-    "calibration_receipt": "data/wigeon_era5land_calibration_result_20260923.json",
-    "coastal_mask_diagnostic_status": "COMPLETE_ZERO_OF_36_RECOVERED",
-    "calibration_registration": "data/wigeon_phase_error_era5land_replication_registration_20260922.json",
+    "wigeon_simex_v2": {
+      "status": "COMPLETE",
+      "extrapolated_lambda_range": [
+        0.7978928038433668,
+        0.9353935594001919
+      ],
+      "all_frozen_scenarios_below_one": true,
+      "role": "assumption-conditional sensitivity, not corrected truth",
+      "receipt": "data/wigeon_phase_simex_era5_complete_result_20260924.json"
+    },
+    "registered_era5land_lane": {
+      "status": "FAIL_COVERAGE_RETAINED",
+      "paired_events": 220,
+      "frozen_events": 256,
+      "paired_fraction": 0.859375,
+      "frozen_minimum_fraction": 0.9,
+      "receipt": "data/wigeon_era5land_calibration_result_20260923.json"
+    },
+    "mule_deer_reliability_calibration": "PENDING_SOURCE_BACKED_CALIBRATION",
+    "barnacle_goose_reliability_calibration": "PENDING_SOURCE_BACKED_CALIBRATION",
+    "cross_system_reliability_gate": "src/cross_system_lambda_reliability.py",
     "claim_boundary": [
-      "registered ERA5-Land calibration remains failed",
-      "no final corrected latent lambda is licensed",
-      "cross-taxon lambda magnitude differences remain estimator-scale",
-      "post-hoc land-cell diagnosis cannot retroactively satisfy the registered nearest-cell gate"
-    ],
-    "coastal_mask_diagnostic": {
-      "primary_missing_events": 36,
-      "diagnostic_cell_selection": "land",
-      "recovered_events": 0,
-      "recovery_fraction": 0,
-      "counterfactual_event_coverage": 0.859375,
-      "conclusion": "nearest-ocean-cell explanation not supported; missingness unresolved",
-      "receipt": "data/wigeon_era5land_coastal_mask_diagnostic_result_20260923.json"
-    }
-  }
+      "wigeon replicate disagreement calibrates frozen sensitivity scenarios but does not identify one source-specific true error distribution",
+      "mule deer and barnacle goose remain uncalibrated for observation-error reliability",
+      "cross-taxon lambda magnitudes remain estimator-scale and must not be interpreted as corrected biological constants",
+      "the old registered ERA5-Land failure remains a failure and is not retroactively repaired"
+    ]
+  },
+  "updated_date": "2026-09-24"
 }
