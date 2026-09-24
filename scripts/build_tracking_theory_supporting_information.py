@@ -41,7 +41,7 @@ def build_supporting_information() -> str:
     lines = [
         "# Supporting Information",
         "",
-        "## Tracking together or failing apart: space-time substitution, finite temporal buffering, and coordination barriers under moving environments",
+        "## Hidden tracking: space-time buffering of environmental mismatch and its limits under moving environments",
         "",
         "Frozen synthetic evidence date: **2026-09-20**",
         "",

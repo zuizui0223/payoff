@@ -7,45 +7,43 @@
 
 Dear **[Editor / Editors]**,
 
-Please consider our manuscript, **“Tracking together or failing apart:
-space–time substitution, finite temporal buffering, and coordination barriers
-under moving environments,”** for publication as **[article type]** in
-**[journal]**.
+Please consider our manuscript, **“Hidden tracking: space–time buffering of environmental mismatch and its limits under moving environments,”** for publication as
+**[article type]** in **[journal]**.
 
-Organisms can respond to moving environments in both space and time, but the
-availability of multiple response axes does not guarantee that interacting
-populations can evolve toward the jointly viable combination. Our manuscript
-separates those two questions.
+Environmental change does not necessarily produce a large observed mismatch.
+When organisms can respond through both spatial redistribution and seasonal
+timing, a small mismatch can be actively maintained by different tracking
+architectures. Our manuscript asks what that apparently successful endpoint
+hides, and when the buffering breaks down.
 
 The paper makes three linked contributions. First, an exact local controller
-provides a deliberately strong null in which movement- and timing-mediated
-correction are substitutable through a common restoring gain. Second, explicit
-moving landscapes show how finite phenological capacity turns that local
-substitutability into temporal bypass followed by spatial re-entry. Third,
-partner matching creates a unilateral coordination gate: a jointly beneficial
-adjacent tracking change can be strongly deleterious to either partner moving
-first. The same framework then separates barrier existence from demographic
-visibility and finite-population crossing from long-run rescue.
+provides a strong null in which movement- and timing-mediated correction are
+substitutable through a common restoring gain; the same mismatch dynamics can
+therefore arise from different allocations between space and time. Second,
+explicit moving landscapes show that temporal buffering is finite: phenological
+capacity can delay movement and reduce route costs, but spatial tracking
+re-enters as directional forcing increases. Third, partner matching creates a
+failure mode of that reallocation: a jointly beneficial adjacent change can be
+strongly deleterious to either partner moving first.
 
-The novelty claim is intentionally narrow. We do **not** claim that combining
-range shifts and phenological change is new, nor that moving-habitat models,
-phenological mismatch, dispersal–evolution coupling, or climate-driven species
-interactions are new. The contribution is the separation of **adaptive
-capacity from unilateral accessibility** when interacting partners can
-reallocate tracking between spatial and temporal axes.
+The novelty claim is intentionally narrow. We do **not** claim that mismatch
+buffering is new, that combining range shifts and phenological change is new, or
+that space and time have not previously been integrated in climate-response
+frameworks. The contribution is the formal separation of **endpoint mismatch
+from the tracking architecture that produces it**, followed by explicit
+capacity-, geometry-, and partner-dependent conditions under which that hidden
+compensation changes or fails.
 
-All quantitative claims in the manuscript are restricted to a frozen synthetic
-evidence set dated 2026-09-20. The initially large cell-level demographic
-effect was independently rerun and did not replicate at that magnitude; the
-manuscript retains this negative result and narrows the claim to a demographic
-visibility window near persistence transitions. Synthetic barrier frequencies
-and climate-velocity values are not presented as natural prevalence estimates
-or empirical thresholds.
+All quantitative claims remain restricted to the frozen synthetic evidence set
+dated 2026-09-20. No new simulation was added for this framing. Each main
+qualitative prediction now declares the field or experimental quantity that
+would be measured and a condition that would count against the mechanism.
+Synthetic frequencies and climate-velocity values are not presented as natural
+prevalence estimates or empirical thresholds.
 
-The manuscript is self-contained and is kept separate from a distinct empirical
-phase-retention programme. Code, frozen result receipts, claim contracts,
-reproducible vector figures, and a provenance map are available in the project
-repository and can be archived for review/submission.
+The manuscript is self-contained and remains separate from the empirical
+phase-retention programme. Code, frozen result receipts, reproducible vector
+figures, and provenance contracts can be archived for review and submission.
 
 This manuscript is **[not under consideration elsewhere / journal-required
 statement]**. All authors have **[approved the submission]** and **[declare

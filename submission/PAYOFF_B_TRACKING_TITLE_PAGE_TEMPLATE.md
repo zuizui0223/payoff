@@ -4,7 +4,7 @@ Target journal: **[TO BE CHOSEN]**
 
 ## Manuscript title
 
-**Tracking together or failing apart: space–time substitution, finite temporal buffering, and coordination barriers under moving environments**
+**Hidden tracking: space–time buffering of environmental mismatch and its limits under moving environments**
 
 ## Authors
 
@@ -23,7 +23,7 @@ ORCID:
 
 ## Short title
 
-**Space–time tracking and coordination barriers**
+**Mismatch buffering across space and time**
 
 ## Article type
 
@@ -32,8 +32,8 @@ ORCID:
 
 ## Keywords
 
-climate tracking; phenology; migration; coevolution; evolutionary accessibility;
-habitat fragmentation; persistence; coordination barrier
+environmental mismatch; climate tracking; phenology; migration; spatiotemporal buffering;
+coevolution; habitat fragmentation; persistence
 
 ## Manuscript metrics
 
@@ -41,7 +41,7 @@ Populate only after journal formatting:
 
 - abstract words: **[AUTO/CHECK]**
 - main-text words: **[AUTO/CHECK]**
-- references: **8**
+- references: **10**
 - main figures: **6**
 - supplementary sections: **S1–S6**
 - tables in main text: **[journal-format dependent]**

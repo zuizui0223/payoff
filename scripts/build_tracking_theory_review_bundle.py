@@ -264,7 +264,7 @@ def review_readme(entry_scripts: list[str], third_party: list[str]) -> str:
         "# Anonymous review code and synthetic data",
         "",
         "This bundle contains the code and frozen synthetic outputs supporting the manuscript",
-        "'Tracking together or failing apart: space-time substitution, finite temporal buffering, and coordination barriers under moving environments.'",
+        "'Hidden tracking: space-time buffering of environmental mismatch and its limits under moving environments.'",
         "",
         "The bundle is restricted to the synthetic tracking-theory programme. It excludes the separate empirical phase-retention programme and contains no author names, email addresses, repository-owner identifiers, or private data.",
         "",
