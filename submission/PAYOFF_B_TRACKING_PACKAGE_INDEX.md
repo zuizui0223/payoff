@@ -101,13 +101,29 @@ Scientific status:
 - no unresolved bibliography issue;
 - no unresolved figure clipping/overlap issue.
 
+Journal targeting:
+
+- `submission/PAYOFF_B_TRACKING_JOURNAL_TARGETING_20260924.md`
+- first shot: **Oikos**
+- strong fallback: **Theoretical Ecology**
+- stretch option: **Global Change Biology**
+
+Oikos handoff:
+
+- `submission/OIKOS_TRACKING_HANDOFF_V1.md`
+
+Tracking-specific administrative templates:
+
+- `submission/PAYOFF_B_TRACKING_TITLE_PAGE_TEMPLATE.md`
+- `submission/PAYOFF_B_TRACKING_COVER_LETTER_TEMPLATE.md`
+
 Remaining tasks are target-journal-specific only:
 
-- title-page metadata;
-- journal reference style;
-- declarations;
-- cover letter;
-- portal-specific file conversion or upload requirements.
+- fill verified author/title-page metadata;
+- adapt references to the selected journal style;
+- finalize declarations;
+- replace repository placeholders with an archived DOI;
+- perform portal-specific file conversion or upload steps.
 
 ## CI contracts
 
