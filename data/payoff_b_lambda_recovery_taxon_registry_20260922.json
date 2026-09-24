@@ -6,17 +6,32 @@
     {
       "system_id": "mule_deer_whole_migration",
       "taxon": "Odocoileus hemionus",
-      "observed_lambda": 0.107,
+      "observed_lambda": 0.10734051982279666,
       "n_pairs": 152,
       "n_individuals": 72,
       "interval_id": "whole_spring_migration_start_to_end",
       "source_receipt": "docs/MOVEMENT_PHENOLOGY_MULE_DEER_RECEIPT.md",
-      "predictor_phase_sd_days": null,
+      "predictor_phase_sd_days": 26.40595330244822,
       "predictor_error_sd_days": null,
       "outcome_error_sd_days": null,
       "error_correlation": null,
       "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
-      "confirmatory_recovery_ready": false
+      "confirmatory_recovery_ready": false,
+      "predictor_phase_sd_role": "observed_DFP_Start_sample_sd",
+      "predictor_phase_sd_provenance": {
+        "source_branch": "empirical/movement-phenology-macro-20260918",
+        "workflow_run": 35742153046,
+        "artifact_id": 10700007158,
+        "file": "stage3_mule_deer_joined_source_data.csv",
+        "column": "DFP_Start",
+        "n": 152
+      },
+      "independent_equal_error_true_lambda_one_stress": {
+        "finite_solution": true,
+        "required_error_sd_over_observed_predictor_sd": 0.9448063509770708,
+        "required_error_sd_days_given_observed_predictor_sd": 24.948512220399383,
+        "role": "stress threshold only, not empirical error estimate"
+      }
     },
     {
       "system_id": "barnacle_svalbard_southern_norway_to_svalbard",
@@ -26,12 +41,27 @@
       "n_individuals": 15,
       "interval_id": "fixed_route_transition_southern_norway_to_svalbard",
       "source_receipt": "docs/MOVEMENT_PHENOLOGY_BARNACLE_MULTIFLYWAY_DIRECT_RECEIPT.md",
-      "predictor_phase_sd_days": null,
+      "predictor_phase_sd_days": 9.071370336848188,
       "predictor_error_sd_days": null,
       "outcome_error_sd_days": null,
       "error_correlation": null,
       "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
-      "confirmatory_recovery_ready": false
+      "confirmatory_recovery_ready": false,
+      "predictor_phase_sd_role": "observed_origin_arrival_phase_sample_sd",
+      "predictor_phase_sd_provenance": {
+        "source_branch": "empirical/movement-phenology-macro-20260918",
+        "workflow_run": 35741445012,
+        "artifact_id": 10699871077,
+        "file": "stage3_svalbard_goose_transitions.csv",
+        "transition": "R2_to_R4",
+        "column": "origin_arrival_phase_days",
+        "n": 16
+      },
+      "independent_equal_error_true_lambda_one_stress": {
+        "finite_solution": false,
+        "reason": "negative observed lambda cannot be the large-sample expectation of true lambda=1 under nonnegative equal independent classical measurement-error variance",
+        "role": "stress-model boundary only"
+      }
     },
     {
       "system_id": "barnacle_greenland_R2_R3",
@@ -41,12 +71,28 @@
       "n_individuals": 6,
       "interval_id": "fixed_route_transition_R2_R3",
       "source_receipt": "docs/MOVEMENT_PHENOLOGY_BARNACLE_MULTIFLYWAY_DIRECT_RECEIPT.md",
-      "predictor_phase_sd_days": null,
+      "predictor_phase_sd_days": 12.487553937746076,
       "predictor_error_sd_days": null,
       "outcome_error_sd_days": null,
       "error_correlation": null,
       "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
-      "confirmatory_recovery_ready": false
+      "confirmatory_recovery_ready": false,
+      "predictor_phase_sd_role": "observed_origin_arrival_phase_anomaly_sample_sd",
+      "predictor_phase_sd_provenance": {
+        "source_branch": "empirical/movement-phenology-macro-20260918",
+        "workflow_run": 35742152966,
+        "artifact_id": 10700391090,
+        "file": "stage3_greenland_goose_anomaly_phase_transitions.csv",
+        "transition": "R2_to_R3",
+        "column": "origin_arrival_phase_anom",
+        "n": 6
+      },
+      "independent_equal_error_true_lambda_one_stress": {
+        "finite_solution": true,
+        "required_error_sd_over_observed_predictor_sd": 0.9323460283200896,
+        "required_error_sd_days_given_observed_predictor_sd": 11.64272131729045,
+        "role": "stress threshold only, not empirical error estimate"
+      }
     },
     {
       "system_id": "barnacle_barents_R1_R2",
@@ -56,12 +102,28 @@
       "n_individuals": 8,
       "interval_id": "fixed_route_transition_R1_R2",
       "source_receipt": "docs/MOVEMENT_PHENOLOGY_BARNACLE_MULTIFLYWAY_DIRECT_RECEIPT.md",
-      "predictor_phase_sd_days": null,
+      "predictor_phase_sd_days": 27.769963220570872,
       "predictor_error_sd_days": null,
       "outcome_error_sd_days": null,
       "error_correlation": null,
       "error_calibration_status": "PENDING_SOURCE_BACKED_CALIBRATION",
-      "confirmatory_recovery_ready": false
+      "confirmatory_recovery_ready": false,
+      "predictor_phase_sd_role": "observed_origin_arrival_phase_anomaly_sample_sd",
+      "predictor_phase_sd_provenance": {
+        "source_branch": "empirical/movement-phenology-macro-20260918",
+        "workflow_run": 35742152966,
+        "artifact_id": 10700391090,
+        "file": "stage3_barents_goose_anomaly_phase_transitions.csv",
+        "transition": "R1_to_R2",
+        "column": "origin_arrival_phase_anom",
+        "n": 12
+      },
+      "independent_equal_error_true_lambda_one_stress": {
+        "finite_solution": true,
+        "required_error_sd_over_observed_predictor_sd": 0.7112566755232999,
+        "required_error_sd_days_given_observed_predictor_sd": 19.75157171966755,
+        "role": "stress threshold only, not empirical error estimate"
+      }
     },
     {
       "system_id": "eurasian_wigeon_staging_transition",
@@ -105,7 +167,9 @@
     "no_taxon_specific_null_until_error_calibration_ready": true,
     "no_Aikens_profile_until_registered_outcome_is_opened": true,
     "wigeon_complete_calibration_is_assumption_conditional": true,
-    "wigeon_simex_v2_is_sensitivity_not_corrected_truth": true
+    "wigeon_simex_v2_is_sensitivity_not_corrected_truth": true,
+    "predictor_phase_sd_is_signal_scale_not_error_calibration": true,
+    "classical_error_stress_threshold_does_not_count_as_calibration": true
   },
   "updated_date": "2026-09-24"
 }
