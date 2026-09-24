@@ -77,26 +77,32 @@ def retention_class(value: float) -> str:
     return "AMPLIFICATION_OR_BOUNDARY"
 
 
-def request_daily_era5(
+def request_daily_era5_batch(
     session,
     endpoint: str,
+    regions,
     *,
-    lat: float,
-    lon: float,
     start_year: int,
     end_year: int,
     max_retries: int,
 ):
+    rows = list(regions.itertuples(index=False))
+    if not rows:
+        raise ValueError("ERA5 batch requires at least one region")
+
+    latitudes = [float(row.lat) for row in rows]
+    longitudes = [float(row.lon) for row in rows]
+    count = len(rows)
     params = {
-        "latitude": f"{lat:.8f}",
-        "longitude": f"{lon:.8f}",
+        "latitude": ",".join(f"{v:.8f}" for v in latitudes),
+        "longitude": ",".join(f"{v:.8f}" for v in longitudes),
         "start_date": f"{start_year}-01-01",
         "end_date": f"{end_year}-12-31",
         "daily": "temperature_2m_mean",
         "models": "era5",
-        "timezone": "GMT",
+        "timezone": ",".join(["GMT"] * count),
         "cell_selection": "nearest",
-        "elevation": "nan",
+        "elevation": ",".join(["nan"] * count),
         "temperature_unit": "celsius",
     }
     last = None
@@ -105,33 +111,39 @@ def request_daily_era5(
             response = session.get(
                 endpoint,
                 params=params,
-                timeout=180,
+                timeout=240,
             )
             response.raise_for_status()
             payload = response.json()
-            daily = payload.get("daily", {})
-            dates = daily.get("time", [])
-            values = daily.get("temperature_2m_mean", [])
-            if len(dates) != len(values) or not dates:
+            if isinstance(payload, dict):
+                payload = [payload]
+            if not isinstance(payload, list) or len(payload) != count:
                 raise RuntimeError(
-                    "ERA5 daily response missing aligned time/temperature"
+                    "ERA5 batch response count does not match region count"
                 )
+            for item in payload:
+                daily = item.get("daily", {})
+                dates = daily.get("time", [])
+                values = daily.get("temperature_2m_mean", [])
+                if len(dates) != len(values) or not dates:
+                    raise RuntimeError(
+                        "ERA5 daily response missing aligned time/temperature"
+                    )
             return payload, {
                 "url": response.url,
                 "status_code": int(response.status_code),
-                "lat": lat,
-                "lon": lon,
                 "start_year": start_year,
                 "end_year": end_year,
-                "daily_rows": len(dates),
+                "locations": count,
             }
         except Exception as exc:
             last = exc
-            time.sleep(1.5 * (attempt + 1))
+            # Long multi-decade requests can trigger provider throttling.
+            # Retrieval backoff changes no scientific parameter.
+            time.sleep(5.0 * (attempt + 1))
     raise RuntimeError(
-        f"ERA5 request failed after {max_retries} attempts: {last}"
+        f"ERA5 batch request failed after {max_retries} attempts: {last}"
     )
-
 
 def era5_onsets_for_flyway(
     flyway: str,
@@ -155,23 +167,24 @@ def era5_onsets_for_flyway(
             eligible["published_region_eligible"] == True  # noqa:E712
         ].copy()
 
-    for region in eligible.itertuples(index=False):
+    payloads, batch_meta = request_daily_era5_batch(
+        session,
+        endpoint,
+        eligible,
+        start_year=start_year,
+        end_year=end_year,
+        max_retries=max_retries,
+    )
+    batch_meta["flyway"] = flyway
+    batch_meta["request_kind"] = "flyway_coordinate_batch"
+    requests_log.append(batch_meta)
+
+    for region, payload in zip(
+        eligible.itertuples(index=False),
+        payloads,
+    ):
         rid = str(region.region_id)
         lat = float(region.lat)
-        lon = float(region.lon)
-        payload, meta = request_daily_era5(
-            session,
-            endpoint,
-            lat=lat,
-            lon=lon,
-            start_year=start_year,
-            end_year=end_year,
-            max_retries=max_retries,
-        )
-        meta["flyway"] = flyway
-        meta["region_id"] = rid
-        requests_log.append(meta)
-
         daily = payload["daily"]
         frame = pd.DataFrame(
             {
@@ -229,7 +242,7 @@ def era5_onsets_for_flyway(
                         "status": f"FAIL:{type(exc).__name__}",
                     }
                 )
-        time.sleep(sleep_seconds)
+    time.sleep(sleep_seconds)
 
     result = pd.DataFrame(rows)
     ok = result["status"] == "PASS"
