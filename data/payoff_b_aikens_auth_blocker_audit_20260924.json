@@ -1,0 +1,65 @@
+{
+  "status": "aikens_exact_environment_lane_blocked_by_authentication_only",
+  "audited_date": "2026-09-24",
+  "source_identity_gate": {
+    "status": "PASS",
+    "gps_observations": 64539,
+    "unique_modis250_cells": 10899,
+    "unique_modis250_cell_years": 19500,
+    "task_count": 24,
+    "years": [
+      2005,
+      2006,
+      2008,
+      2009,
+      2010,
+      2015,
+      2016,
+      2017,
+      2018
+    ]
+  },
+  "exact_manifest": {
+    "workflow_run": 36014102013,
+    "artifact_id": 10813652391,
+    "artifact_sha256": "8f30c2ffc77613eba0657132728b909fd7ca7ecf907e6dac453011af0c098b3a",
+    "coverage_gate": "PASS",
+    "credentials_configured": false,
+    "authentication_source": null,
+    "network_submission_performed": false
+  },
+  "live_smoke": {
+    "workflow_run": 36014102064,
+    "artifact_id": 10813373749,
+    "artifact_sha256": "a2aa4d0bdccb68dc8d4e58e9a5b8ef2e66fee9217433c9f2659c806f70d99afe",
+    "status": "SKIPPED_NO_APPEEARS_CREDENTIALS",
+    "selected_task_index": 0,
+    "network_submission_performed": false
+  },
+  "anonymous_s3_probe": {
+    "workflow_run": 36014101924,
+    "artifact_id": 10813433240,
+    "artifact_sha256": "086155fa0e1163dc044686953000007438a2eb0d3d472c5583e1b4c31e944a02",
+    "status": "ANONYMOUS_S3_ACCESS_INCOMPLETE",
+    "MOD09Q1_061": "AccessDenied_RequesterPays_authentication_required",
+    "MOD10A2_061": "AccessDenied_authentication_required"
+  },
+  "lambda_outcome_opened": false,
+  "scientific_contract_changed": false,
+  "retuning_permitted": false,
+  "blocker_classification": "authentication_only",
+  "accepted_authentication_routes": [
+    "APPEEARS_TOKEN",
+    "EARTHDATA_USERNAME_plus_EARTHDATA_PASSWORD"
+  ],
+  "next_authorized_execution": "dispatch .github/workflows/payoff-b-aikens-appeears-full-extraction.yml only after one accepted authentication route is configured",
+  "frozen_scientific_invariants": [
+    "hypothesis_unchanged",
+    "phase_coordinate_unchanged",
+    "fixed_24h_segment_scale_unchanged",
+    "support_thresholds_unchanged",
+    "significance_threshold_unchanged",
+    "MOD09Q1.061_and_MOD10A2.061_environment_lane_unchanged"
+  ],
+  "claim_boundary": "source identity, manifest geometry and transport blocker are resolved; no MODIS environmental values, IRG reconstruction, phase pairs or Aikens lambda outcome have been opened"
+}
