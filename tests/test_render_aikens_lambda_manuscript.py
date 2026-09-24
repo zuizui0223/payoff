@@ -56,7 +56,7 @@ def test_wrong_direction_is_scientific_fail_not_common_coordinate_failure():
     assert claim["scientific_result"] == "FAIL_WRONG_DIRECTION"
     assert claim["wrong_direction"]
     assert "failed in direction" in results
-    assert "does not invalidate the common phase-retention coordinate" in discussion
+    assert "does not invalidate the shared within-system phase-retention estimator form" in discussion
     assert "failed" in abstract
     assert "distinct empirical levels" in conclusion
 

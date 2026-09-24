@@ -267,6 +267,25 @@ In particular:
   and post-hoc added actuator variables are both rejected;
 - cross-system synthesis must not mix lambda values defined on different phase
   coordinates or segment scales, even when they share the same symbol;
+- the 2026-09-25 pre-Aikens interval-standardization contract adds
+  `k_eq=-ln|lambda|/Delta t_ref` and homogeneous path-memory
+  `R_path=|lambda|^n` as **secondary** comparison coordinates; it does not
+  replace the registered raw-lambda estimators;
+- `k_eq` is an equivalent reference-interval transformation using the
+  median observed duration of the frozen pair sample, not a directly fitted
+  continuous-time controller parameter;
+- negative lambda values retain their overshoot/sign-reversal status even when
+  `|lambda|` is used for the magnitude-decay transform;
+- wigeon path-memory propagation uses the observed 32 animal-years and their
+  transition-count distribution (mean and median seven), not `224/28=8`;
+- homogeneous `R_path` propagates only memory of the incoming phase
+  deviation and does not include new environmental innovation, intercepts,
+  route-stage heterogeneity, or process noise;
+- whole-route cumulative retention is not licensed for the highlighted goose
+  fixed transitions because no common preregistered full-route chain exists;
+- the standardization does not license a universal claim that 80--90% of phase
+  deviation is removed per migration; the conservative wigeon SIMEX
+  sensitivity retains substantially more path memory;
 - candidate evidence is not licensed by raw-data availability or a new
   forcing regime alone; it must contain a registered lambda endpoint or a
   prospective actuator endpoint and use a new independent-test ID;

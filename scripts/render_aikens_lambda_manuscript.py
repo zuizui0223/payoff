@@ -157,8 +157,9 @@ def render_blocks(payload: dict) -> tuple[str, str, str, str, dict]:
             "measured movement response without producing the preregistered increase "
             "in retained phase error. The result therefore strengthens the need to "
             "treat actuators and lambda as distinct empirical gates; it does not "
-            "invalidate the common phase-retention coordinate observed across the "
-            "three direct taxa."
+            "invalidate the shared within-system phase-retention estimator form observed "
+            "across the three direct taxa; raw cross-system magnitudes remain "
+            "interval-scale dependent."
         )
         abstract = (
             "The preregistered within-taxon forcing-to-lambda prediction failed "
