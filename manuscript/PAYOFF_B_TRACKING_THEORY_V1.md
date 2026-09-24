@@ -477,22 +477,24 @@ No post-2026-09-20 empirical phase-retention result is used as evidence for the 
 
 ---
 
-## 10. Figure plan
+## 10. Figure set
 
-**Figure 1 — Conceptual hierarchy.**  
-Moving demand -> movement/timing substitution -> finite timing capacity -> spatial re-entry -> partner matching -> coordination gate -> persistence.
+The complete vector figure set is rendered by:
 
-**Figure 2 — Finite temporal bypass.**  
-Persistence frontier versus phenological capacity, plus the 2D zigzag sequence showing phenology-only tracking at lower forcing and migration re-entry at higher forcing.
+```bash
+python scripts/render_tracking_theory_figures.py \
+  --output-dir submission/tracking_theory_figures
+```
 
-**Figure 3 — Coordination gate.**  
-Local two-species strategy geometry showing resident, coordinated adjacent mutant, and the two unilateral mutants, with the direct gain signs (+1.095) versus approximately (-5.946).
+Full submission captions are frozen in
+`submission/PAYOFF_B_TRACKING_FIGURE_CAPTIONS.md`.
 
-**Figure 4 — Synchronization changes sign.**  
-Moderate forcing: interaction collapses partner strategy distance while persistence remains. Strong forcing: the same synchronization collapses onto the migration-only extinct attractor.
+- **Figure 1 — Conceptual hierarchy:** `PAYOFF_B_TRACKING_FIG1_CONCEPT.svg`
+- **Figure 2 — Finite temporal bypass:** `PAYOFF_B_TRACKING_FIG2_TEMPORAL_BYPASS.svg`
+- **Figure 3 — Coordination gate:** `PAYOFF_B_TRACKING_FIG3_COORDINATION_GATE.svg`
+- **Figure 4 — Synchronization changes sign:** `PAYOFF_B_TRACKING_FIG4_SYNCHRONIZATION.svg`
+- **Figure 5 — Demographic visibility and finite-N crossing:** `PAYOFF_B_TRACKING_FIG5_DEMOGRAPHY_DRIFT.svg`
+- **Figure 6 — Local null versus explicit landscape:** `PAYOFF_B_TRACKING_FIG6_COMPLEMENTARITY.svg`
 
-**Figure 5 — Demographic visibility and finite-N crossing.**  
-Persistence gain versus local persistence regime, together with finite-N barrier-crossing frequency and mean joint growth to separate crossing from rescue.
-
-**Figure 6 — Local null versus explicit landscape.**  
-Exact (K=q_m+q_h) substitutability in the local controller contrasted with strong-forcing explicit-landscape complementarity.
+CI renders the same six figures from the frozen receipt chain and uploads them
+as artifact `payoff-b-tracking-theory-figures`.
