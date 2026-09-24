@@ -81,6 +81,10 @@ def test_wigeon_bundle_recovers_source_faithful_lambda_and_stopover_support():
             "fixed_p_value_threshold_preregistered": False,
             "secondary_gain_band_passed": False,
         },
+        stopover_replication_diagnostic={
+            "status": "NOT_SUPPORTED",
+            "p_value": 0.31039716561251024,
+        },
         travel_speed_diagnostic={
             "status": "NOT_SUPPORTED",
             "p_value": 0.41699858388761735,
@@ -96,6 +100,7 @@ def test_wigeon_bundle_recovers_source_faithful_lambda_and_stopover_support():
     assert bundle.stopover_direction_passed
     assert bundle.stopover_source_supported
     assert bundle.stopover_actuator_passed
+    assert bundle.stopover_reconstruction_robust is False
     assert bundle.lambda_retention == pytest.approx(LAMBDA)
     assert bundle.lambda_se == pytest.approx(LAMBDA_SE)
     assert bundle.p_vs_no_correction == pytest.approx(LAMBDA_P)
@@ -172,3 +177,22 @@ def test_wigeon_bundle_requires_source_support_interpretation():
             phase_receipt(passed=True, high=0.75),
             stopover_receipt(),
         )
+
+
+def test_wigeon_bundle_can_distinguish_formal_power_pass_from_era5_nonreplication():
+    bundle = assemble_wigeon_gate_bundle(
+        phase_receipt(passed=True, high=1.0),
+        phase_receipt(passed=True, high=0.75),
+        stopover_receipt(),
+        stopover_source_interpretation={
+            "source_status": "SUPPORTED",
+        },
+        stopover_replication_diagnostic={
+            "status": "NOT_SUPPORTED",
+            "observed_effect": -0.02418153728541716,
+            "p_value": 0.31039716561251024,
+        },
+    )
+    assert bundle.two_gate_class == "LAMBDA_PASS_ACTUATOR_SUPPORTED"
+    assert bundle.stopover_source_supported
+    assert bundle.stopover_reconstruction_robust is False
