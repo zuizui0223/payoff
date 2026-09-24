@@ -173,7 +173,8 @@ C = 0.5 c_m q_m^2 + 0.5 c_h q_h^2
 the minimum-cost allocation at fixed `K` is
 
 ```text
-q_m* = K c_h / (c_m + c_h)\nq_h* = K c_m / (c_m + c_h)
+q_m* = K c_h / (c_m + c_h)
+q_h* = K c_m / (c_m + c_h)
 ```
 
 This exact substitutability is the analytic null against which the explicit landscape results are interpreted.
@@ -186,7 +187,7 @@ This exact substitutability is the analytic null against which the explicit land
 
 In the canonical one-dimensional moving landscape, increasing the allowed phenological shift expanded the sampled persistence frontier. With phenology limit `z_max=0`, the maximum persisted climate velocity was 0.030 and the first failed velocity was 0.035. At `z_max=5`, the corresponding bracket was 0.065 and 0.070.
 
-The frontier was stable to refinement of the migration–phenology strategy grid from (7	imes7) to (11	imes11). Importantly, every frontier strategy remained migration dominant. Phenological capacity therefore expanded the range of environmental velocities that could be tolerated, but did not replace spatial redistribution near the persistence boundary.
+The frontier was stable to refinement of the migration–phenology strategy grid from `7 x 7` to `11 x 11`. Importantly, every frontier strategy remained migration dominant. Phenological capacity therefore expanded the range of environmental velocities that could be tolerated, but did not replace spatial redistribution near the persistence boundary.
 
 A simple finite-horizon capacity diagnostic reproduced the same trend. The available climate-equivalent tracking capacity increases with both the spatial leading edge and the phenological bound, yielding a near-linear increase in the sampled persistence frontier. The diagnostic is not a persistence theorem, but it captures why timing has a finite operating range.
 
@@ -315,7 +316,7 @@ The retained interpretation is a demographic visibility window. Coordination bar
 
 Finite-population substitution simulations began at a deterministic local endpoint.
 
-At (eta=5), small populations frequently crossed the barrier: the escape-replicate fraction was 0.94 at `N=10` and 0.97 at `N=30`. At `N=100`, no retained high-payoff escape occurred in the sampled design, and at `N>=300` the local endpoint dominated.
+At `beta=5`, small populations frequently crossed the barrier: the escape-replicate fraction was 0.94 at `N=10` and 0.97 at `N=30`. At `N=100`, no retained high-payoff escape occurred in the sampled design, and at `N>=300` the local endpoint dominated.
 
 However, stochastic exploration carried a load. The coordinated payoff gain in the representative barrier regime was small relative to the broader distribution of lower-payoff states explored by small populations. Mean long-run joint growth therefore did not exceed the deterministic local endpoint.
 
@@ -323,7 +324,7 @@ The correct conclusion is drift-assisted barrier crossing, not drift rescue.
 
 ### 3.10 Explicit feedback turns local substitutability into forcing-dependent complementarity
 
-The local controller predicts exact equivalence of movement and timing feedback at fixed total gain (K). The explicit landscape violates that equivalence because movement has route costs, finite movement-rate ceilings, and spatial population consequences, whereas timing has its own finite capacity and cost.
+The local controller predicts exact equivalence of movement and timing feedback at fixed total gain `K`. The explicit landscape violates that equivalence because movement has route costs, finite movement-rate ceilings, and spatial population consequences, whereas timing has its own finite capacity and cost.
 
 In the canonical state-dependent movement-feedback landscape, feedback was unnecessary under weak forcing. Under intermediate forcing, positive movement feedback improved mismatch and low-density growth.
 
@@ -340,7 +341,11 @@ Thus local space–time substitutability becomes forcing-dependent complementari
 The model produces a nested hierarchy:
 
 ```text
-tracking capacity\n!= chosen tracking architecture\n!= coordinated value\n!= unilateral accessibility\n!= population persistence
+tracking capacity
+!= chosen tracking architecture
+!= coordinated value
+!= unilateral accessibility
+!= population persistence
 ```
 
 Finite populations add a sixth distinction:
