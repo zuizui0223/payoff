@@ -29,7 +29,7 @@
       [
         "barnacle_svalbard_southern_norway_to_svalbard",
         "Branta leucopsis",
-        "PENDING"
+        "SENSITIVITY_ASSUMPTION_CONDITIONAL"
       ],
       [
         "eurasian_wigeon_staging_transition",
@@ -47,7 +47,8 @@
     "licensed": [
       "three-taxon estimator-scale phase-retention coordinate",
       "wigeon assumption-conditional observation-error sensitivity",
-      "barnacle-goose POWER-versus-ERA5 assumption-conditional reconstruction sensitivity for Greenland R2-R3 and Barents R1-R2"
+      "barnacle-goose POWER-versus-ERA5 assumption-conditional reconstruction sensitivity for Greenland R2-R3 and Barents R1-R2",
+      "Svalbard R2-R4 POWER-versus-ERA5 assumption-conditional reliability replication with negative lambda sign preserved"
     ],
     "hold": [
       "cross-taxon comparison of latent biological lambda magnitudes",
