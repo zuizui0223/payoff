@@ -58,11 +58,12 @@ def paragraph(
     align: str = "ql",
     before: int = 0,
     after: int = 120,
+    line_twips: int = 480,
 ) -> str:
     controls = (
         BS + "pard"
         + BS + align
-        + BS + "sl480"
+        + BS + f"sl{line_twips}"
         + BS + "slmult1"
         + BS + f"sb{before}"
         + BS + f"sa{after}"
@@ -248,10 +249,33 @@ def build_review_rtf() -> str:
 
     return "".join([
         header,
-        paragraph(title, bold=True, size=30, align="qc", after=240),
-        paragraph("Abstract", bold=True, size=26, after=100),
-        paragraph(abstract, size=24, after=180),
-        paragraph(keywords, size=22, after=120),
+        paragraph(
+            title,
+            bold=True,
+            size=26,
+            align="qc",
+            after=120,
+            line_twips=360,
+        ),
+        paragraph(
+            "Abstract",
+            bold=True,
+            size=22,
+            after=60,
+            line_twips=360,
+        ),
+        paragraph(
+            abstract,
+            size=19,
+            after=100,
+            line_twips=380,
+        ),
+        paragraph(
+            keywords,
+            size=19,
+            after=60,
+            line_twips=380,
+        ),
         BS + "page" + NL,
         render_markdown(review_lines),
         "}" + NL,
