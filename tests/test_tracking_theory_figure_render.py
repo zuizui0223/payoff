@@ -11,7 +11,7 @@ if str(SCRIPTS) not in sys.path:
 from render_tracking_theory_figures import render_all
 
 
-def test_tracking_theory_renderer_writes_five_svg_figures(tmp_path):
+def test_tracking_theory_renderer_writes_six_svg_figures(tmp_path):
     manifest = render_all(tmp_path)
     assert manifest["frozen_date"] == "2026-09-20"
     assert len(manifest["figures"]) == 6
@@ -20,9 +20,9 @@ def test_tracking_theory_renderer_writes_five_svg_figures(tmp_path):
         path = Path(row["path"])
         assert path.exists(), key
         assert path.suffix == ".svg"
-        text = path.read_text(encoding="utf-8")
-        assert text.startswith("<svg")
-        assert "Frozen" in text or "frozen" in text
+        rendered = path.read_text(encoding="utf-8")
+        assert rendered.startswith("<svg")
+        assert "Frozen" in rendered or "frozen" in rendered
         assert row["bytes"] == path.stat().st_size
         assert row["bytes"] > 1000
 
@@ -36,7 +36,10 @@ def test_tracking_theory_renderer_writes_five_svg_figures(tmp_path):
 
 def test_tracking_theory_svg_contains_core_claim_labels(tmp_path):
     render_all(tmp_path)
-    figure1 = (\n        tmp_path / "PAYOFF_B_TRACKING_FIG1_CONCEPT.svg"\n    ).read_text(encoding="utf-8")\n    figure3 = (
+    figure1 = (
+        tmp_path / "PAYOFF_B_TRACKING_FIG1_CONCEPT.svg"
+    ).read_text(encoding="utf-8")
+    figure3 = (
         tmp_path / "PAYOFF_B_TRACKING_FIG3_COORDINATION_GATE.svg"
     ).read_text(encoding="utf-8")
     figure5 = (
@@ -46,8 +49,15 @@ def test_tracking_theory_svg_contains_core_claim_labels(tmp_path):
         tmp_path / "PAYOFF_B_TRACKING_FIG6_COMPLEMENTARITY.svg"
     ).read_text(encoding="utf-8")
 
-    assert "Adaptive capacity is not the same as adaptive accessibility" in figure1\n    assert "coordinated gain" in figure3
+    assert (
+        "Adaptive capacity is not the same as adaptive accessibility"
+        in figure1
+    )
+    assert "coordinated gain" in figure3
     assert "unilateral gain A" in figure3
-    assert "pilot cells &gt;=0.10: 9; replication cells &gt;=0.10: 0" in figure5
+    assert (
+        "pilot cells &gt;=0.10: 9; replication cells &gt;=0.10: 0"
+        in figure5
+    )
     assert "0/7 controller gains persist" in figure6
     assert "7/7 persist" in figure6
