@@ -40,7 +40,9 @@ Canonical figure captions:
 - six dependency-free SVG figures are reproducibly rendered from that
   figure-data layer;
 - CI checks manuscript corruption, claim-freeze consistency, negative-result
-  retention and rendered-figure contracts.
+  retention and rendered-figure contracts;
+- a submission-style parameter map now separates analytic definitions,
+  synthetic design values, robustness-only settings and reporting conventions.
 
 ## Not required before a first manuscript freeze
 
@@ -65,20 +67,7 @@ claim boundary.
 Convert the prior-art audit into one consistent bibliography format and verify
 the full metadata for every cited paper.
 
-### 2. Methods compression
-
-The current manuscript contains the model hierarchy but still needs a concise
-submission-style parameter table distinguishing:
-
-- analytic symbols;
-- synthetic design parameters;
-- sensitivity-only parameters;
-- reporting conventions.
-
-The table should point to frozen receipts rather than duplicating every sweep
-setting in the main text.
-
-### 3. Figure inspection
+### 2. Figure inspection
 
 After CI rendering succeeds:
 
@@ -86,13 +75,13 @@ After CI rendering succeeds:
 - retain numeric values exactly as produced from frozen figure data;
 - change layout only, not scientific content, if a panel needs visual repair.
 
-### 4. Results-to-figure crosswalk
+### 3. Results-to-figure crosswalk
 
 Every principal numerical result in the Results section should map to one of
 Figures 2–6 or to a clearly labeled supplementary receipt. Avoid adding
 orphan numbers that are not visualized or frozen.
 
-### 5. Supplement design
+### 4. Supplement design
 
 Recommended supplement structure:
 
@@ -104,7 +93,7 @@ Recommended supplement structure:
 6. finite-N drift diagnostics;
 7. code and workflow provenance.
 
-### 6. Final novelty sentence
+### 5. Final novelty sentence
 
 Use a narrow formulation:
 
