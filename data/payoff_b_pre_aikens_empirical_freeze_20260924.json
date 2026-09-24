@@ -1,0 +1,85 @@
+{
+  "freeze_id": "payoff_b_pre_aikens_empirical_freeze_20260924",
+  "frozen_date": "2026-09-24",
+  "Aikens_lambda_outcome_opened": false,
+  "programme_state": {
+    "theorem_paper": "complete_on_main",
+    "tracking_theory": "separate_synthetic_mechanism_programme",
+    "GEB_empirical_programme": "pre_Aikens_reliability_hardened"
+  },
+  "direct_coordinate": {
+    "taxa": 3,
+    "pooled_universal_lambda": false,
+    "latent_cross_taxon_magnitude_ranking_licensed": false
+  },
+  "wigeon": {
+    "source_faithful_POWER_lambda_hat": 0.7497680211367301,
+    "POWER_lambda_se": 0.04990566712278233,
+    "ERA5_lambda_hat": 0.8113122876847199,
+    "ERA5_lambda_se": 0.044776882831975916,
+    "phase_contraction_replicated_across_environmental_surfaces": true,
+    "POWER_stopover_direction_supported": true,
+    "ERA5_stopover_supported": false,
+    "stopover_reconstruction_robust": false,
+    "travel_speed_supported": false,
+    "latent_lambda_unique_correction_licensed": false
+  },
+  "barnacle_goose": {
+    "preregistered_ERA5_transitions": [
+      {
+        "transition": "Greenland_R2_R3",
+        "POWER_lambda_hat": 0.13073088347575457,
+        "ERA5_lambda_hat": 0.14420353006747622,
+        "lambda_difference": 0.013472646591721649,
+        "POWER_stopover_p": 0.003393266308775191,
+        "ERA5_stopover_p": 0.008021719040118738,
+        "response_reconstruction_robust": true,
+        "actuator_reconstruction_robust": true
+      },
+      {
+        "transition": "Barents_R1_R2",
+        "POWER_lambda_hat": 0.4941139415235434,
+        "ERA5_lambda_hat": 0.515328602183836,
+        "lambda_difference": 0.02121466066029265,
+        "POWER_stopover_p": 0.0009881111959264804,
+        "ERA5_stopover_p": 0.0009948941017993798,
+        "response_reconstruction_robust": true,
+        "actuator_reconstruction_robust": true
+      }
+    ],
+    "Svalbard_reliability_status": "PENDING_SOURCE_SPECIFIC_CALIBRATION"
+  },
+  "mule_deer": {
+    "observed_lambda_hat": 0.10734051982279666,
+    "reliability_status": "PENDING_SOURCE_SPECIFIC_CALIBRATION"
+  },
+  "cross_system_reliability": {
+    "taxa_with_any_assumption_conditional_reliability_calibration": 2,
+    "taxa_with_source_specific_error_identification": 0,
+    "latent_magnitude_comparison_licensed": false,
+    "interpretation": "estimator-scale coordinate retained; reliability must be attached to each response/actuator claim"
+  },
+  "simulation_role_for_GEB": {
+    "use": "lambda estimator recovery, true-lambda=1 observation-error nulls, sensitivity auditing",
+    "exclude": [
+      "large synthetic coevolution sweeps as empirical evidence",
+      "synthetic persistence frontiers as natural thresholds",
+      "using tracking-theory simulation size to strengthen GEB generality"
+    ]
+  },
+  "frozen_next_priority": [
+    "execute preregistered Aikens within-taxon lambda perturbation when identical MOD09Q1.061 plus MOD10A2.061 extraction is authenticated",
+    "seek source-backed reliability calibration for mule deer and Svalbard before biological cross-taxon lambda magnitude ranking"
+  ],
+  "explicitly_not_priority": [
+    "mechanical fourth-taxon expansion",
+    "larger tracking-theory parameter sweeps for the GEB paper",
+    "post-hoc tuning of measurement-error scenarios to narrow corrected lambda ranges"
+  ],
+  "sources": {
+    "wigeon": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json",
+    "barnacle": "data/barnacle_era5_reliability_result_20260924.json",
+    "reliability_gate": "data/payoff_b_cross_system_lambda_reliability_gate_20260924.json",
+    "Aikens_registration": "data/aikens2022_lambda_perturbation_registration_20260921.json"
+  }
+}
