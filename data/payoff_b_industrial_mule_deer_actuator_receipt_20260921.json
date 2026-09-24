@@ -1,0 +1,66 @@
+{
+  "frozen_date": "2026-09-21",
+  "status": "within_taxon_actuator_perturbation_source_backed",
+  "system": {
+    "taxon": "Odocoileus hemionus",
+    "study": "Aikens et al. 2022",
+    "doi": "10.1038/s41559-022-01887-9",
+    "dryad_doi": "10.5061/dryad.7d7wm37z5"
+  },
+  "provenance": {
+    "payoff_pr": 144,
+    "source_branch": "empirical/movement-phenology-macro-20260918",
+    "source_head": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "source_receipt": {
+      "path": "docs/MOVEMENT_PHENOLOGY_INDUSTRIAL_MULE_DEER_RECEIPT.md",
+      "blob_sha": "40fd458a3185270c98e8a5cbbb60976feb5b295d"
+    },
+    "analysis": {
+      "path": "analysis/movement_phenology/stage3_industrial_mule_deer_permeability.py",
+      "blob_sha": "8cd42ef65c9165f1be79e9629919f5796ba7d355"
+    },
+    "sensitivity_registry": {
+      "path": "data/MOVEMENT_PHENOLOGY_INDUSTRIAL_PERMEABILITY_REGISTRY.csv",
+      "blob_sha": "fc6de2f32539fbe6d1f9c76587687f2b8f92729a"
+    }
+  },
+  "source_reconstruction": {
+    "gps_points": 64539,
+    "valid_steps": 64286,
+    "gps_animal_years": 253,
+    "gps_animals": 137,
+    "study_years": 9
+  },
+  "primary_analysis": {
+    "animal_years": 188,
+    "animals": 103,
+    "median_G_small": 1.6555638715,
+    "median_G_large": 1.0372058493,
+    "large_development_logG_shift": -0.4762671764,
+    "se": 0.1966896363,
+    "p": 0.01722624
+  },
+  "step_level": {
+    "edge_beta": 0.1963,
+    "edge_p": 0.0000459,
+    "edge_x_large_beta": -0.1518,
+    "edge_x_large_p": 0.0382,
+    "edge_x_year_beta": -0.026,
+    "edge_x_year_p": 0.00106,
+    "edge_x_large_x_year_beta": 0.0146,
+    "edge_x_large_x_year_p": 0.226
+  },
+  "stronger_longitudinal_forecast": {
+    "beta": 0.0405002378,
+    "se": 0.0411089291,
+    "p": 0.326860378,
+    "outcome": "NOT_SUPPORTED"
+  },
+  "lambda_status": "NOT_MEASURED",
+  "lambda_tests_added_to_cross_system_synthesis": 0,
+  "actuator_layer": {
+    "cross_sectional_attenuation": "SUPPORTED",
+    "stronger_longitudinal_deterioration": "NOT_SUPPORTED"
+  },
+  "retained_interpretation": "within-taxon forcing perturbation informs actuator permeability without adding a lambda test or a new taxon"
+}

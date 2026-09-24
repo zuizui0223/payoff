@@ -1,0 +1,12 @@
+{
+  "system_name": "mechanical_candidate",
+  "independent_test_id": "mechanical_candidate_1",
+  "phase_coordinate_id": "signed_resource_phase_error",
+  "segment_scale_id": "standardized_tracking_segment_v1",
+  "forcing_regime": "already_represented",
+  "lambda_test_preregistered": false,
+  "forcing_regime_is_new": false,
+  "tests_lambda_boundary_or_sign_change": false,
+  "prospective_actuator_discriminator": false,
+  "raw_data_available": true
+}

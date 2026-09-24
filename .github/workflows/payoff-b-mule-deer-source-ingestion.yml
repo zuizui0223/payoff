@@ -1,0 +1,63 @@
+name: payoff-b mule deer source ingestion
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-migration-phenology-20260919
+    paths:
+      - .github/workflows/payoff-b-mule-deer-source-ingestion.yml
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download Dryad public files
+        run: |
+          mkdir -p outputs/mule_deer_source
+          curl -L --fail --retry 3 -A "Mozilla/5.0" \
+            https://datadryad.org/downloads/file_stream/2189257 \
+            -o outputs/mule_deer_source/Ortega_et_al_2023_Data.csv
+          curl -L --fail --retry 3 -A "Mozilla/5.0" \
+            https://datadryad.org/downloads/file_stream/2189258 \
+            -o outputs/mule_deer_source/README.md
+      - name: Audit table granularity
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+
+          root = Path("outputs/mule_deer_source")
+          csv_path = root / "Ortega_et_al_2023_Data.csv"
+          readme_path = root / "README.md"
+
+          with csv_path.open(newline="", encoding="utf-8-sig") as handle:
+              reader = csv.reader(handle)
+              header = next(reader)
+              rows = list(reader)
+
+          audit = {
+              "file": csv_path.name,
+              "rows": len(rows),
+              "columns": header,
+              "column_count": len(header),
+              "readme_bytes": readme_path.stat().st_size,
+              "csv_bytes": csv_path.stat().st_size,
+          }
+          (root / "ingestion_audit.json").write_text(
+              json.dumps(audit, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print("rows=", audit["rows"])
+          print("column_count=", audit["column_count"])
+          print("columns=", "|".join(header))
+          print("csv_bytes=", audit["csv_bytes"])
+          print("readme_bytes=", audit["readme_bytes"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-mule-deer-source-ingestion
+          path: outputs/mule_deer_source

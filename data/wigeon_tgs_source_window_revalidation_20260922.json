@@ -1,0 +1,45 @@
+{
+  "amendment_id": "wigeon_tgs_jan_jul_source_window_revalidation_20260922",
+  "frozen_date": "2026-09-22",
+  "trigger": "source-faithfulness audit after measurement-error validation review",
+  "published_source": {
+    "article": "van Toor et al. 2021, Movement Ecology 9:61",
+    "doi": "10.1186/s40462-021-00296-0",
+    "supplement": "Additional file 3: Environmental data preparation",
+    "supplement_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1186%2Fs40462-021-00296-0/MediaObjects/40462_2021_296_MOESM3_ESM.html",
+    "frozen_code_contract": "days <- days[month(days)<8]"
+  },
+  "implementation_difference_found": {
+    "old_power_reconstruction_window": "full calendar year",
+    "published_environment_window": "January through July",
+    "mechanism": "full-year cumulative minimum can move to day 365/366 in cold northern cell-years and create extreme negative arrival-phase values"
+  },
+  "old_result": {
+    "lambda_hat": 0.85994,
+    "se": 0.04509,
+    "p_vs_naive_lambda_one": 0.00190,
+    "n_transitions": 224,
+    "n_individuals": 28,
+    "status": "SUPERSEDED_PENDING_SOURCE_FAITHFUL_RECONSTRUCTION"
+  },
+  "revalidation_rules": {
+    "movement_reconstruction_unchanged": true,
+    "HMM_contract_unchanged": true,
+    "TGS_threshold_c": 5.0,
+    "TGS_window": "January through July",
+    "TGS_rule": "cumulative minimum of daily mean temperature minus 5 C",
+    "controller_model_unchanged": true,
+    "route_covariates_unchanged": true,
+    "cluster_unit_unchanged": "individual_id",
+    "environment_validation_gates_retained": true,
+    "no_threshold_tuning_after_corrected_lambda": true
+  },
+  "claim_status_until_revalidation": {
+    "wigeon_naive_lambda_numeric_claim": "SUSPENDED",
+    "wigeon_primary_lambda_less_than_one_gate": "REVALIDATION_REQUIRED",
+    "wigeon_actuator_results": "REVALIDATION_REQUIRED_WHERE_PHASE_IS_PREDICTOR",
+    "three_taxon_portable_coordinate": "PROVISIONAL_PENDING_WIGEON_REVALIDATION",
+    "Aikens_outcome_state": "UNCHANGED_UNOPENED"
+  },
+  "claim_boundary": "The old wigeon lambda is not treated as confirmatory support after discovery of the source-window mismatch. The corrected result must be generated with the published Jan-Jul environmental window before wigeon is restored to the cross-system synthesis."
+}

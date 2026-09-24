@@ -1,0 +1,170 @@
+{
+  "frozen_date": "2026-09-21",
+  "status": "three_taxon_lambda_coordinate_plus_within_taxon_actuator_evidence",
+  "direct_taxa": [
+    {
+      "taxon": "Odocoileus hemionus",
+      "common_name": "mule deer",
+      "lambda_approx": 0.10734,
+      "evidence_role": "existing_direct_system",
+      "actuator": "speed_plus_stopover"
+    },
+    {
+      "taxon": "Branta leucopsis",
+      "common_name": "barnacle goose",
+      "lambdas": [
+        -0.106320907,
+        0.130730883,
+        0.494113942
+      ],
+      "evidence_role": "existing_direct_system_within_taxon_route_replication",
+      "actuator": "route_stage_stopover"
+    },
+    {
+      "taxon": "Mareca penelope",
+      "common_name": "Eurasian wigeon",
+      "lambda": 0.7497680211367301,
+      "se": 0.04990566712278233,
+      "p_vs_lambda_1": 5.328241982727779e-7,
+      "transitions": 224,
+      "individuals": 28,
+      "evidence_role": "prospective_third_taxon_source_faithful",
+      "primary_prediction": "lambda < 1",
+      "primary_outcome": "PASS",
+      "stronger_prediction": "abs(lambda) < 0.75",
+      "stronger_outcome": "PASS_NARROW_POINT_ESTIMATE_GATE",
+      "stopover_actuator": "DIRECTIONAL_GATE_PASS_SOURCE_SUPPORTED",
+      "travel_speed_actuator": "NOT_SUPPORTED",
+      "stopover_conventional_cluster_p": 0.031661798202295054,
+      "stopover_fixed_p_threshold_preregistered": false,
+      "stopover_secondary_gain_band": "FAIL",
+      "distance_moderation": "NOT_SUPPORTED",
+      "source_faithful_revalidation": "data/wigeon_source_faithful_revalidation_result_20260922.json",
+      "independent_era5_replication": {
+        "lambda_hat": 0.8113122876847199,
+        "se": 0.044776882831975916,
+        "naive_p_vs_lambda_1": 0.000025093871829659954,
+        "phase_contraction_replication": "SUPPORTED",
+        "stopover_slope": -0.02418153728541716,
+        "stopover_p": 0.31039716561251024,
+        "stopover_replication": "NOT_SUPPORTED",
+        "travel_speed_replication": "NOT_SUPPORTED",
+        "source": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json"
+      },
+      "measurement_error_sensitivity": {
+        "status": "COMPLETE_ASSUMPTION_CONDITIONAL",
+        "simex_lambda_range": [
+          0.7978928038433668,
+          0.9353935594001919
+        ],
+        "all_frozen_simex_values_below_one": true,
+        "source": "data/wigeon_phase_simex_era5_complete_result_20260924.json",
+        "corrected_truth_identified": false
+      }
+    }
+  ],
+  "broad_bird_falsification": {
+    "observations": 5816,
+    "species": 55,
+    "universal_speed_ratio_supported": false
+  },
+  "current_cross_system_claim": "phase retention is a portable estimator-scale response coordinate; wigeon contraction replicates across POWER and source-faithful ERA5, while actuator detectability and latent lambda magnitude remain reconstruction- and reliability-sensitive",
+  "fourth_taxon": {
+    "status": "HOLD",
+    "raw_data_availability_sufficient": false,
+    "new_forcing_regime_alone_sufficient": false,
+    "evidence_inclusion_gate_required": true,
+    "lambda_candidate_requirements": [
+      "new prospective independent lambda test or boundary test",
+      "common phase coordinate",
+      "common segment scale",
+      "new independent test ID"
+    ],
+    "actuator_only_alternative": "same-taxon prospective mechanism perturbations can add evidence without adding taxon count or lambda support"
+  },
+  "preferred_next_empirical_move": "wigeon source-faithful ERA5 calibration and SIMEX v2 are complete; next execute the frozen Aikens environmental extraction and within-system lambda perturbation when AppEEARS/Earthdata credentials are available",
+  "evidence_units": {
+    "direct_phase_retention_taxa": 3,
+    "prospective_lambda_extensions": 1,
+    "actuator_only_forcing_perturbations": 1,
+    "actuator_only_examples": [
+      {
+        "system": "industrial mule deer",
+        "taxon": "Odocoileus hemionus",
+        "forcing": "industrial development route boundary",
+        "lambda_status": "NOT_MEASURED",
+        "lambda_tests_added": 0,
+        "taxon_count_added": 0,
+        "actuator_permeability": "SUPPORTED",
+        "stronger_longitudinal_forecast": "NOT_SUPPORTED",
+        "receipt": "docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md"
+      }
+    ]
+  },
+  "next_empirical_experiment": {
+    "status": "SELECTED_READY_EXCEPT_AUTHENTICATED_ENVIRONMENTAL_EXTRACTION",
+    "study": "Aikens et al. 2022 industrial mule deer",
+    "evidence_lane": "within_system_lambda_perturbation",
+    "adds_taxon": false,
+    "contributes_to_cross_system_lambda_synthesis": false,
+    "independent_test_id": "aikens2022_lambda_perturbation_v1",
+    "phase_coordinate_id": "signed_days_relative_to_local_peak_IRG",
+    "segment_scale_id": "fixed_24h_spring_migration_interval",
+    "prospective_prediction": "lambda_large_development > lambda_small_development",
+    "forcing_regime": "industrial_development_route_boundary",
+    "actuator_perturbation_already_supported": true,
+    "exact_movement_source_ready": true,
+    "exact_appeears_manifest_ready": true,
+    "current_blocker": "authenticated AppEEARS/Earthdata environmental extraction; all downstream IRG, fixed-24h pairing, registered lambda contrast, outcome rendering and manuscript audit paths are implemented",
+    "lambda_outcome_opened": false
+  },
+  "revalidated_date": "2026-09-22",
+  "measurement_error_status": {
+    "cross_system_estimator_scale_coordinate_licensed": true,
+    "cross_system_latent_magnitude_comparison_licensed": false,
+    "source_specific_error_identified_taxa": 0,
+    "taxa_with_any_reliability_calibration": 1,
+    "wigeon_source_faithful_era5_calibration": {
+      "status": "COMPLETE",
+      "paired_events": 256,
+      "frozen_events": 256,
+      "paired_fraction": 1,
+      "complete_transition_pairs": 224,
+      "era5_lambda_hat": 0.8113122876847199,
+      "power_lambda_hat": 0.7497680211367301,
+      "disagreement_sd_days": 7.085549321765848,
+      "equal_independent_replicate_error_sd_days": 5.010239973852373,
+      "consecutive_discrepancy_correlation": 0.3666144716835741,
+      "gold_standard_measurement_error_identified": false,
+      "receipt": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json"
+    },
+    "wigeon_simex_v2": {
+      "status": "COMPLETE",
+      "extrapolated_lambda_range": [
+        0.7978928038433668,
+        0.9353935594001919
+      ],
+      "all_frozen_scenarios_below_one": true,
+      "role": "assumption-conditional sensitivity, not corrected truth",
+      "receipt": "data/wigeon_phase_simex_era5_complete_result_20260924.json"
+    },
+    "registered_era5land_lane": {
+      "status": "FAIL_COVERAGE_RETAINED",
+      "paired_events": 220,
+      "frozen_events": 256,
+      "paired_fraction": 0.859375,
+      "frozen_minimum_fraction": 0.9,
+      "receipt": "data/wigeon_era5land_calibration_result_20260923.json"
+    },
+    "mule_deer_reliability_calibration": "PENDING_SOURCE_BACKED_CALIBRATION",
+    "barnacle_goose_reliability_calibration": "PENDING_SOURCE_BACKED_CALIBRATION",
+    "cross_system_reliability_gate": "src/cross_system_lambda_reliability.py",
+    "claim_boundary": [
+      "wigeon replicate disagreement calibrates frozen sensitivity scenarios but does not identify one source-specific true error distribution",
+      "mule deer and barnacle goose remain uncalibrated for observation-error reliability",
+      "cross-taxon lambda magnitudes remain estimator-scale and must not be interpreted as corrected biological constants",
+      "the old registered ERA5-Land failure remains a failure and is not retroactively repaired"
+    ]
+  },
+  "updated_date": "2026-09-24"
+}

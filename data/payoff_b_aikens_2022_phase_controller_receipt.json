@@ -1,0 +1,110 @@
+{
+  "frozen_date": "2026-09-20",
+  "source": {
+    "citation": "Aikens et al. 2022 Nature Ecology & Evolution 6:1733-1741",
+    "doi": "10.1038/s41559-022-01887-9",
+    "data_doi": "10.5061/dryad.7d7wm37z5"
+  },
+  "estimand": "signed Days-From-Peak ~ intercept + slope * distance from development",
+  "conditions": [
+    {
+      "footprint": "large",
+      "development": "low",
+      "phase": "early",
+      "intercept_days": -13.1,
+      "slope": 0.0008,
+      "slope_detected": true,
+      "p": "0.02",
+      "controller": "restoring"
+    },
+    {
+      "footprint": "small",
+      "development": "low",
+      "phase": "early",
+      "intercept_days": -7.6,
+      "slope": null,
+      "slope_detected": false,
+      "p": null,
+      "controller": "no_detected_change"
+    },
+    {
+      "footprint": "large",
+      "development": "medium",
+      "phase": "late",
+      "intercept_days": null,
+      "slope": -0.001,
+      "slope_detected": true,
+      "p": "<0.0001",
+      "controller": "restoring"
+    },
+    {
+      "footprint": "small",
+      "development": "medium",
+      "phase": "late",
+      "intercept_days": null,
+      "slope": -0.0004,
+      "slope_detected": true,
+      "p": "<0.0001",
+      "controller": "restoring"
+    },
+    {
+      "footprint": "large",
+      "development": "high",
+      "phase": "late_descriptive_intercept_P_0.06",
+      "intercept_days": null,
+      "slope": null,
+      "slope_detected": false,
+      "p": null,
+      "controller": "no_detected_change"
+    },
+    {
+      "footprint": "small",
+      "development": "high",
+      "phase": "late",
+      "intercept_days": null,
+      "slope": null,
+      "slope_detected": false,
+      "p": null,
+      "controller": "no_detected_change"
+    },
+    {
+      "footprint": "large",
+      "development": "sustained_high",
+      "phase": "late",
+      "intercept_days": null,
+      "slope": -0.001,
+      "slope_detected": true,
+      "p": "<0.001",
+      "controller": "restoring"
+    },
+    {
+      "footprint": "small",
+      "development": "sustained_high",
+      "phase": "late",
+      "intercept_days": null,
+      "slope": null,
+      "slope_detected": false,
+      "p": null,
+      "controller": "no_detected_change"
+    }
+  ],
+  "summary": {
+    "restoring_controller_detected": 4,
+    "no_detected_change": 4,
+    "total": 8
+  },
+  "exact_low_large_diagnostics": {
+    "local_squared_error_recovery_native": 0.01048,
+    "local_fractional_relaxation_per_native_distance": 0.00006106870229007635,
+    "linear_zero_crossing_native_distance": 16375,
+    "distance_unit_status": "not rescaled pending source-table/code confirmation"
+  },
+  "retained_interpretation": "initial mismatch burden and downstream controller recovery are distinct empirical estimands",
+  "not_identified": [
+    "PAYOFF-B timing-axis h",
+    "fixed-interval directional movement kernel",
+    "fitness penalties",
+    "persistence effect"
+  ],
+  "claim_boundary": "published aggregate regression evidence only; no figure digitization or individual-trajectory refit"
+}

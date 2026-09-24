@@ -1,0 +1,91 @@
+{
+  "registration_id": "barnacle_phase_error_era5_replication_v1",
+  "frozen_date": "2026-09-24",
+  "freeze_state": {
+    "Aikens_lambda_outcome_opened": false,
+    "barnacle_POWER_results_known": true,
+    "ERA5_results_opened": false
+  },
+  "source_artifact": {
+    "source_pr": 144,
+    "source_branch": "empirical/movement-phenology-macro-20260918",
+    "source_head": "06743748f89ce2b33296871175ab8a261adc22c9",
+    "workflow_run": 35742152966,
+    "artifact_id": 10700391090,
+    "artifact_name": "movement-phenology-barnacle-multiflyway",
+    "artifact_zip_sha256": "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f"
+  },
+  "replicate_environment_source": {
+    "provider": "Open-Meteo Historical Weather API",
+    "dataset": "ERA5",
+    "api_endpoint": "https://archive-api.open-meteo.com/v1/archive",
+    "model_parameter": "era5",
+    "temperature_variable": "temperature_2m",
+    "temporal_resolution": "hourly",
+    "daily_aggregation": "arithmetic mean of exactly 24 finite GMT hourly values",
+    "timezone": "GMT",
+    "cell_selection": "nearest",
+    "elevation": "nan",
+    "api_key_required": false
+  },
+  "phenology_contract": {
+    "baseline_start_year": 1982,
+    "baseline_end_year": 2013,
+    "annual_transform": "latitude-dependent GDD + logistic third-derivative early jerk",
+    "base_temperature": "T_base=-0.25*latitude+13 C",
+    "daily_gdu": "max(Tmean-T_base,0)",
+    "minimum_gdd_fit_r_squared": 0.95,
+    "anomaly": "annual onset minus source-specific region mean onset over 1982-2013"
+  },
+  "flyways": [
+    {
+      "flyway": "greenland",
+      "primary_transition": {
+        "origin_region": "R2",
+        "destination_region": "R3",
+        "expected_POWER_lambda": 0.130730883,
+        "expected_n": 6,
+        "expected_individuals": 6
+      },
+      "required_files": {
+        "regions": "stage3_greenland_goose_regions.csv",
+        "stopovers": "stage3_greenland_goose_stopovers.csv",
+        "power_anomalies": "stage3_greenland_goose_power_gdd_anomalies.csv"
+      }
+    },
+    {
+      "flyway": "barents",
+      "primary_transition": {
+        "origin_region": "R1",
+        "destination_region": "R2",
+        "expected_POWER_lambda": 0.494113942,
+        "expected_n": 12,
+        "expected_individuals": 8
+      },
+      "required_files": {
+        "regions": "stage3_barents_goose_regions.csv",
+        "stopovers": "stage3_barents_goose_stopovers.csv",
+        "power_anomalies": "stage3_barents_goose_power_gdd_anomalies.csv"
+      }
+    }
+  ],
+  "gates": {
+    "require_all_eligible_region_years_era5_fit": true,
+    "expected_baseline_years_per_region": 32,
+    "power_refit_max_abs_lambda_error": 1e-8,
+    "require_primary_transition_n_identity": true
+  },
+  "claim_boundary": {
+    "licensed_if_complete": [
+      "same-transition POWER versus ERA5 lambda comparison for the two preregistered barnacle-goose transitions",
+      "region-year POWER-versus-ERA5 onset-anomaly disagreement",
+      "assumption-conditional reliability sensitivity"
+    ],
+    "not_licensed": [
+      "choosing additional transitions after seeing ERA5 results",
+      "calling replicate disagreement a gold-standard source-specific measurement-error distribution",
+      "pooling goose flyways as independent taxa",
+      "changing the Aikens preregistration"
+    ]
+  }
+}

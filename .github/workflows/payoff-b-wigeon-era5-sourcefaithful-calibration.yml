@@ -1,0 +1,83 @@
+name: payoff-b wigeon source-faithful ERA5 calibration
+
+concurrency:
+  group: payoff-b-wigeon-era5-calibration-${{ github.ref_name }}
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/wigeon_phase_error_era5_sourcefaithful_registration_20260924.json'
+      - 'scripts/calibrate_wigeon_phase_error_era5.py'
+      - 'src/wigeon_phase_error_calibration.py'
+      - 'src/phase_retention_recovery.py'
+      - 'tests/test_wigeon_era5_sourcefaithful_calibration.py'
+      - '.github/workflows/payoff-b-wigeon-era5-sourcefaithful-calibration.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install empirical calibration dependencies
+        run: >
+          python -m pip install --disable-pip-version-check
+          -e ".[test,empirical]" requests scipy pandas
+
+      - name: Test source-faithful ERA5 calibration
+        run: >
+          pytest -q
+          tests/test_wigeon_era5_sourcefaithful_calibration.py
+          tests/test_wigeon_phase_error_calibration.py
+          tests/test_phase_retention_recovery.py
+
+      - name: Download frozen source-faithful wigeon artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/source
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10678143392/zip" \
+            -o outputs/wigeon_source_faithful.zip
+          echo "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388  outputs/wigeon_source_faithful.zip" | sha256sum -c -
+          unzip -q outputs/wigeon_source_faithful.zip \
+            stage3_wigeon_tgs_events.csv \
+            stage3_wigeon_controller_transitions.csv \
+            -d outputs/source
+
+      - name: Run source-faithful ERA5 hourly calibration
+        run: >
+          python scripts/calibrate_wigeon_phase_error_era5.py
+          --staging-events outputs/source/stage3_wigeon_tgs_events.csv
+          --transitions outputs/source/stage3_wigeon_controller_transitions.csv
+          --registration-json data/wigeon_phase_error_era5_sourcefaithful_registration_20260924.json
+          --batch-size 20
+          --events-output outputs/wigeon_power_era5_event_calibration.csv
+          --transitions-output outputs/wigeon_power_era5_transition_calibration.csv
+          --raw-request-output outputs/wigeon_era5_request_receipt.json
+          --receipt-output outputs/wigeon_phase_error_era5_calibration_receipt.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-wigeon-era5-sourcefaithful-calibration
+          path: |
+            outputs/wigeon_power_era5_event_calibration.csv
+            outputs/wigeon_power_era5_transition_calibration.csv
+            outputs/wigeon_era5_request_receipt.json
+            outputs/wigeon_phase_error_era5_calibration_receipt.json
+            data/wigeon_phase_error_era5_sourcefaithful_registration_20260924.json

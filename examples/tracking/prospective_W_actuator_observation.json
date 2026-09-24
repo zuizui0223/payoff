@@ -1,0 +1,18 @@
+{
+  "system_name": "cross_system_synthetic_witness",
+  "independent_test_id": "W_lambda_holdout",
+  "observations": [
+    {
+      "name": "speed",
+      "observed_effect": -0.2
+    },
+    {
+      "name": "stopover",
+      "observed_effect": 0.1
+    },
+    {
+      "name": "route_reset",
+      "observed_effect": -0.3
+    }
+  ]
+}

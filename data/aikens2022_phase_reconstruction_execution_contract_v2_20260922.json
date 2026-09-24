@@ -1,0 +1,56 @@
+{
+  "contract_id": "aikens2022_phase_reconstruction_execution_v2",
+  "frozen_date": "2026-09-22",
+  "outcome_state_at_freeze": "lambda_outcome_unopened",
+  "supersedes": "aikens2022_phase_reconstruction_execution_v1",
+  "reason_for_pre_outcome_revision": "v1 applied the environmental coverage requirement to all raw GPS observations. The original preregistration instead defines a fixed 24 h target grid first and forms pairs only when the preselected endpoints pass phase reconstruction. v2 restores that ordering before any environmental extraction or lambda outcome is opened.",
+  "environment_product_amendment": "aikens2022_environment_product_v061_primary_successor_20260922",
+  "source_identity": {
+    "gps_observations": 64539,
+    "modis250_manifest_sha256": "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463"
+  },
+  "target_selection": {
+    "target_interval_hours": 24,
+    "max_target_deviation_hours": 3,
+    "anchor_rule": "earliest_raw_spring_migration_observation_per_animal_year",
+    "selection_input": "raw GPS with frozen MODIS cell identity",
+    "environment_used_for_selection": false,
+    "nearest_observation_rule": "nearest raw GPS within non-overlapping +/-3 h target window",
+    "tie_break_rule": "minimum absolute target-time deviation; if tied, earlier observed timestamp; if still tied, lexicographically smaller observation_id"
+  },
+  "environmental_phase": {
+    "required_modis_product": "MOD09Q1.061",
+    "required_reconstruction_lane": "v061_primary_successor_after_v006_decommission",
+    "one_processing_rule_across_groups": true,
+    "invalid_environmental_target_rule": "mark the already selected target invalid; do not substitute another GPS observation",
+    "global_raw_gps_match_fraction_gate": null
+  },
+  "pairing": {
+    "rule": "form a phase pair only for adjacent target indices when both preselected targets have valid environmental phase",
+    "missing_target_breaks_chain": true,
+    "longer_intervals_are_not_substituted": true
+  },
+  "support_gate": {
+    "min_animals_per_group": 10,
+    "min_transitions_per_group": 100,
+    "failure_class": "NOT_ESTIMABLE"
+  },
+  "contrast": {
+    "registration": "data/aikens2022_lambda_perturbation_registration_20260921.json",
+    "group_a_value": "small",
+    "group_b_value": "large",
+    "model": "E_next ~ E_current + E_current:large_development + C(animal_year)",
+    "cluster_uncertainty_by": "animal_id",
+    "scientific_fail_is_pipeline_success": true
+  },
+  "invariants": {
+    "lambda_hypothesis_unchanged": true,
+    "phase_coordinate_unchanged": true,
+    "segment_scale_unchanged": true,
+    "model_unchanged": true,
+    "p_threshold_unchanged": true,
+    "sample_support_thresholds_unchanged": true,
+    "environmental_processing_rule_unchanged_across_groups": true
+  },
+  "claim_boundary": "This v2 revision changes only the pre-outcome ordering of GPS target selection and environmental validity so that environmental missingness cannot alter which GPS observation represents a registered 24 h target."
+}

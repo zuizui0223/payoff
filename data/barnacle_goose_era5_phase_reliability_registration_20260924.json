@@ -1,0 +1,163 @@
+{
+  "registration_id": "barnacle_goose_era5_phase_reliability_replication_v1",
+  "frozen_date": "2026-09-24",
+  "freeze_state": {
+    "Aikens_lambda_outcome_opened": false,
+    "highlighted_POWER_lambdas_known": true,
+    "ERA5_goose_replication_result_opened": false
+  },
+  "purpose": "Independent ERA5 environmental-surface replication of the three highlighted barnacle-goose phase-retention routes, preserving the frozen GDD-jerk phenology transform and fixed-transition controller estimator.",
+  "source_artifacts": {
+    "multiflyway": {
+      "source_pr": 144,
+      "source_branch": "empirical/movement-phenology-macro-20260918",
+      "workflow_run": 35742152966,
+      "artifact_id": 10700391090,
+      "artifact_name": "movement-phenology-barnacle-multiflyway",
+      "artifact_zip_sha256": "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f",
+      "required_files": {
+        "greenland_regions": [
+          "stage3_greenland_goose_regions.csv",
+          "64e39cbbbb68631a8303a0dadc243948e525d542e9f5d6504065d653aff09b09"
+        ],
+        "greenland_power_onsets": [
+          "stage3_greenland_goose_power_gdd_anomalies.csv",
+          "d7792a93e34ef6dfff2677f99697c70ab0bfd2e91aec0997ab5c4efaa5136aec"
+        ],
+        "greenland_transitions": [
+          "stage3_greenland_goose_anomaly_phase_transitions.csv",
+          "033d244ef1321d19055b77b3c71fd2a81249044394026634e4f186289896d0d2"
+        ],
+        "barents_regions": [
+          "stage3_barents_goose_regions.csv",
+          "42c9d7cbd410f3730a7e97dd73398b673e810620d42608889ae3c9bcd601d194"
+        ],
+        "barents_power_onsets": [
+          "stage3_barents_goose_power_gdd_anomalies.csv",
+          "b1cb70b0770e6b208735d0c26217531bc903b5b07577daa42974f7c3708f7b15"
+        ],
+        "barents_transitions": [
+          "stage3_barents_goose_anomaly_phase_transitions.csv",
+          "2838b14dd41481301ae0e7053aaab08d502cce3374198fbed21c16e1cd6e632d"
+        ]
+      }
+    },
+    "svalbard": {
+      "source_pr": 144,
+      "source_branch": "empirical/movement-phenology-macro-20260918",
+      "workflow_run": 35741445012,
+      "artifact_id": 10699871077,
+      "artifact_name": "movement-phenology-stage3-svalbard-goose-source",
+      "artifact_zip_sha256": "29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856",
+      "required_files": {
+        "regions": [
+          "stage3_svalbard_goose_regions.csv",
+          "838a001edd4330ac6cc57cde4520dc2c189acd25c76be8d0a8f9c358fca999c3"
+        ],
+        "power_onsets": [
+          "stage3_svalbard_goose_power_gdd_onsets.csv",
+          "cfa6f06f6f00ee7a8c18687307cf38555fcb22380e161e961ac8094a244cbbfc"
+        ],
+        "transitions": [
+          "stage3_svalbard_goose_transitions.csv",
+          "e1302c5d74f32ffb07af8123b89591ce24927a47e146e791493cc57a0b82ba3b"
+        ]
+      }
+    }
+  },
+  "environmental_replicate": {
+    "provider": "Open-Meteo Historical Weather API",
+    "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+    "model": "era5",
+    "daily_variable": "temperature_2m_mean",
+    "timezone": "GMT",
+    "cell_selection": "nearest",
+    "elevation": "nan",
+    "role": "independent ERA5 replicate surface; not claimed to reproduce the historical ECA/NOAA inputs of Kölzsch et al. (2015)"
+  },
+  "phenology_transform": {
+    "rule": "same frozen latitude-dependent GDD + logistic third-derivative jerk transform used for POWER reconstruction",
+    "base_temperature_c": "-0.25 * latitude + 13",
+    "daily_gdu": "max(Tmean - Tbase, 0)",
+    "cumulative_start": "January 1",
+    "logistic_min_r_squared": 0.95,
+    "onset": "early positive maximum of fitted logistic third derivative",
+    "phase_coordinate_for_fixed_route": "arrival_doy - annual_onset_anomaly_days",
+    "note": "region-specific mean onset constants alter intercepts but not fixed-transition lambda slopes"
+  },
+  "flyways": [
+    {
+      "flyway": "svalbard",
+      "period": [
+        1982,
+        2011
+      ],
+      "highlighted_route": [
+        "R2",
+        "R4"
+      ],
+      "expected_power_lambda": -0.10632090683602247,
+      "minimum_route_pairs": 16,
+      "minimum_route_individuals": 15
+    },
+    {
+      "flyway": "greenland",
+      "period": [
+        1982,
+        2013
+      ],
+      "highlighted_route": [
+        "R2",
+        "R3"
+      ],
+      "expected_power_lambda": 0.130730883475755,
+      "minimum_route_pairs": 6,
+      "minimum_route_individuals": 6
+    },
+    {
+      "flyway": "barents",
+      "period": [
+        1982,
+        2013
+      ],
+      "highlighted_route": [
+        "R1",
+        "R2"
+      ],
+      "expected_power_lambda": 0.49411394152354327,
+      "minimum_route_pairs": 12,
+      "minimum_route_individuals": 8
+    }
+  ],
+  "gates": {
+    "power_refit_identity_max_abs_difference": 1e-8,
+    "minimum_paired_region_year_fraction": 0.9,
+    "require_all_highlighted_transition_endpoints_have_ERA5_phase": true,
+    "require_all_highlighted_route_support_counts_preserved": true,
+    "no_threshold_tuning_after_ERA5_result": true
+  },
+  "primary_outputs": [
+    "POWER versus ERA5 lambda_hat for each highlighted fixed route",
+    "ERA5-minus-POWER annual onset-anomaly disagreement by region-year",
+    "equal-independent-replicate sensitivity SD = disagreement SD / sqrt(2)",
+    "whether the direction/class of each highlighted lambda is preserved"
+  ],
+  "decision_policy": {
+    "no_pooled_goose_lambda": true,
+    "no_gold_standard_error_claim": true,
+    "cross_taxon_latent_magnitude_gate_remains_hold": true,
+    "Aikens_analysis_unchanged": true
+  },
+  "claim_boundary": {
+    "licensed_if_complete": [
+      "independent environmental-surface robustness of highlighted goose lambda estimates",
+      "source-backed replicate-disagreement sensitivity scale for barnacle goose"
+    ],
+    "not_licensed": [
+      "calling ERA5 the original 2015 environmental dataset",
+      "treating POWER-versus-ERA5 disagreement as a gold-standard measurement-error distribution",
+      "promoting a corrected latent goose lambda without a separately frozen correction model",
+      "changing the Aikens preregistration or opening its outcome"
+    ]
+  }
+}

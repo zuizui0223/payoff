@@ -1,0 +1,64 @@
+{
+  "contract_id": "aikens2022_lambda_outcome_interpretation_v1",
+  "frozen_date": "2026-09-22",
+  "outcome_state_at_freeze": "lambda_outcome_unopened",
+  "registered_test_id": "aikens2022_lambda_perturbation_v1",
+  "result_classes": {
+    "PASS": {
+      "condition": "registered contrast gate passed",
+      "licensed_claims": [
+        "large-development forcing is associated with greater phase retention on the frozen within-taxon coordinate",
+        "independently observed actuation attenuation and phase-retention weakening co-occur in the same taxon and forcing contrast"
+      ],
+      "not_licensed": [
+        "industrial development causally changes lambda",
+        "G equals lambda or 1-lambda",
+        "the Aikens result is an additional cross-taxon replication",
+        "one universal lambda across taxa"
+      ]
+    },
+    "FAIL_WRONG_DIRECTION": {
+      "condition": "delta_lambda_large <= 0",
+      "licensed_claims": [
+        "the preregistered forcing-to-lambda prediction failed in direction",
+        "actuation attenuation does not necessarily propagate into greater phase retention"
+      ],
+      "not_licensed": [
+        "large-development forcing increases lambda",
+        "absence of any development effect on migration",
+        "failure of the common phase-retention coordinate"
+      ]
+    },
+    "FAIL_INSUFFICIENT_SUPPORT": {
+      "condition": "delta_lambda_large > 0 but p_difference > 0.05",
+      "licensed_claims": [
+        "the point direction matched the preregistration but the inferential gate was not passed",
+        "the independently supported actuator attenuation remains without a supported lambda shift"
+      ],
+      "not_licensed": [
+        "large-development forcing increases lambda",
+        "evidence of no lambda difference",
+        "failure of the common phase-retention coordinate"
+      ]
+    },
+    "NOT_ESTIMABLE": {
+      "condition": "registered reconstruction or sample-support gate failed",
+      "licensed_claims": [
+        "no inference is made about the registered lambda perturbation",
+        "the previously frozen actuator attenuation result remains unchanged"
+      ],
+      "not_licensed": [
+        "PASS",
+        "FAIL",
+        "retuning interval, tolerance, product, or support thresholds after inspection"
+      ]
+    }
+  },
+  "cross_system_invariants": {
+    "three_taxon_descriptive_coordinate_unchanged": true,
+    "wigeon_prospective_result_unchanged": true,
+    "actuator_nonportability_claim_unchanged": true,
+    "aikens_not_added_to_cross_taxon_lambda_synthesis": true,
+    "universal_lambda_not_claimed": true
+  }
+}

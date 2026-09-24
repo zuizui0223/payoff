@@ -1,0 +1,9 @@
+{
+  "status": "synthetic_held_out_outcome_fixture",
+  "observed_outcome": {
+    "final_abundance": 1829.96049903,
+    "mean_low_density_growth": 0.196379923938,
+    "persisted": true
+  },
+  "claim_boundary": "synthetic pipeline regression fixture generated from the declared model; not empirical data"
+}

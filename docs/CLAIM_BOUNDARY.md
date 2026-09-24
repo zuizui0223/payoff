@@ -152,6 +152,240 @@ Mutation, drift, demography, spatial structure, assortative interaction, linkage
 
 `eta>0` creates a coordination threshold from current frequency dependence. `C_SD,C_DS>0` create path dependence from transition costs. Either can occur without the other.
 
+### Moving-environment tracking results are synthetic mechanism claims
+
+The migration–phenology extension introduces a separate family of assumptions:
+
+```text
+- directional environmental forcing,
+- heritable migration and phenology response rates,
+- finite phenological shift capacity,
+- declared movement costs,
+- partner-matching penalties,
+- explicit finite spatial landscapes,
+- synthetic habitat resistance / corridor geometry,
+- declared demographic update rules.
+```
+
+The resulting persistence frontiers, corridor-width comparisons, temporal
+bypass ceilings, coordination-barrier frequencies, and rescue frequencies are
+design-specific model quantities. They are not empirical climate velocities,
+natural corridor thresholds, or prevalence estimates.
+
+In particular:
+
+- a larger phenological limit expanding the sampled persistence frontier does
+  not imply a universal amount of climate tolerance per calendar-day shift;
+- a coordination barrier in the model does not establish that real interacting
+  species are coevolutionarily trapped;
+- the 2D regular-grid and zigzag-route results do not identify real landscape
+  resistance or movement pathways;
+- the optional Bhattacharyya overlap penalty is a robustness device, not an
+  empirical interaction kernel;
+- the anisotropic x/y movement weights are synthetic movement-kernel
+  parameters unless independently estimated from movement data;
+- the symmetric empirical movement inverse
+  `Var_x,Var_y -> migration rate + x/y weight ratio` is exact only for the
+  mean-zero declared one-step nearest-neighbor kernel;
+- the directional extension uses projected fixed-interval means and second
+  moments to identify migration rate, x/y weights, and x/y directional biases,
+  but remains conditional on the biased one-step nearest-neighbor family;
+- bias estimates outside [-1,1] or total second moment beyond one-patch support
+  are model-rejection signals, not quantities to clip;
+- phase-error compression caused by movement speed, stopover use, or route
+  adjustment is a tracking-controller observation and does not identify the
+  independent phenology rate h unless the timing axis is separately isolated;
+- the matched growth-contrast inverse for mismatch strengths and tracking costs
+  requires a common low-density growth scale and matched background ecology;
+- the Ortega et al. mule-deer system is a named calibration candidate, not a
+  completed calibration; published whole-route group summaries do not identify
+  the per-step PAYOFF-B migration or phenology rates, and the source file must
+  be ingested before interval-level parameterization;
+- the closed-loop identity q_m+q_h=K and stability boundary 0<K<2 are
+  exact only for the declared local linear mismatch recurrence; route geometry,
+  controller saturation, delays, nonlinear response and state-dependent costs
+  can change the stability region;
+- for cross-system synthesis, the preferred common controller coordinate is
+  phase retention `lambda=1-K` on a predeclared signed phase coordinate and
+  segment scale; lambda values from incompatible interval or route definitions
+  should not be pooled;
+- speed, stopover duration, route reset, directional movement and other
+  actuator variables are system-specific prospective predictions, not required
+  cross-taxon parameters;
+- a passing lambda gate with a failing actuator gate is a coherent result:
+  it supports shared phase-retention geometry while rejecting that actuator
+  hypothesis for the focal system;
+- actuator outcomes must not be combined with lambda into one omnibus score,
+  because doing so would make mechanism non-portability look like failure of
+  the common phase coordinate;
+- adding taxa mechanically does not strengthen the cross-system claim unless
+  the added system supplies an independent lambda test, a new forcing regime,
+  a predicted lambda boundary/sign change, or a discriminating prospective
+  actuator test;
+- the old wigeon full-calendar-year POWER result (lambda=0.85994) is
+  superseded by the source-faithful January--July reconstruction and must not be
+  used;
+- the current registered POWER wigeon result uses 224 transitions from 28
+  individuals and gives lambda_hat=0.749768; its primary lambda<1 gate passes,
+  while the stronger POWER point forecast |lambda_hat|<0.75 passes only
+  narrowly;
+- a separately frozen source-faithful hourly ERA5 follow-up achieved 256/256
+  event coverage and gives lambda_hat=0.811312 on the same 224 transitions;
+  estimator-scale phase contraction therefore replicates across POWER and ERA5;
+- the registered POWER W2 directional stopover gate remains a valid
+  source-specific prospective PASS, but the ERA5 reconstruction yields a weaker
+  unsupported stopover association (p=0.310), so a reconstruction-robust wigeon
+  stopover mechanism is not established;
+- the frozen three-taxon direct receipt establishes a descriptive phase-
+  retention coordinate across mule deer, barnacle goose, and Eurasian wigeon,
+  but does not estimate one universal lambda and does not treat repeated goose
+  flyways as independent taxa;
+- direct lambda values are regression-scale estimands and predictor phase error
+  can attenuate them toward zero; cross-system magnitude differences must not be
+  attributed entirely to controller biology without reliability analysis;
+- the complete wigeon POWER-versus-ERA5 replicate calibration supplies
+  source-backed disagreement scales, but does not uniquely identify either
+  source's latent measurement-error distribution;
+- true-lambda=1 sensitivity is assumption-dependent: under the complete ERA5
+  calibration the equal-independent and correlation-proxy scenarios make the
+  observed POWER lambda unusual, whereas assigning the full replicate
+  disagreement SD to each source makes complete retention plausible;
+- complete-calibration event-structure SIMEX v2 moves the wigeon estimate from
+  0.749768 to the frozen range 0.7979--0.9354; these are sensitivity values, not
+  corrected truth;
+- environmental innovation SD is process noise, not phase measurement-error SD,
+  and must not be reused as an errors-in-variables calibration quantity;
+- no EIV or SIMEX value is licensed as the true latent biological lambda without
+  stronger source-specific error identification;
+- confirmatory cross-system lambda support is counted only from
+  prospectively registered tests whose later observations match the frozen
+  system ID, independent-test ID, phase-coordinate ID, and segment-scale ID;
+- retrospective lambda analyses remain reportable but must be counted
+  separately from prospective support;
+- prospective actuator evaluation requires the observed actuator-name set to
+  exactly match the registered prediction set; missing registered actuators
+  and post-hoc added actuator variables are both rejected;
+- cross-system synthesis must not mix lambda values defined on different phase
+  coordinates or segment scales, even when they share the same symbol;
+- candidate evidence is not licensed by raw-data availability or a new
+  forcing regime alone; it must contain a registered lambda endpoint or a
+  prospective actuator endpoint and use a new independent-test ID;
+- lambda evidence must use the canonical phase coordinate and segment scale,
+  whereas actuator-only evidence need not because it contributes zero
+  cross-system lambda support;
+- within-taxon actuator perturbations can therefore strengthen mechanism
+  coverage without being counted as new taxa or new lambda replications;
+- the Aikens industrial mule-deer lambda perturbation is preregistered but
+  remains outcome-closed; movement reconstruction, peak-IRG reconstruction,
+  environmental joining, fixed-24h phase pairing, the animal-year-fixed-effect
+  clustered lambda fitter, and the preregistered contrast evaluator are all
+  implemented; no small- versus large-development lambda contrast is licensed
+  until the empirical MODIS NDVI plus snow/quality source layer is materialized;
+- the frozen Aikens fixed-target support geometry has an exact IID
+  target-validity robustness envelope: under independent target validity,
+  approximately p=0.34198 is sufficient for a 95% probability that both
+  registered >=10-animal / >=100-pair support gates pass; this is not a
+  guarantee for real environmental missingness because MODIS/IRG failures can
+  be correlated by pixel-year, date, snow/quality state, geography, or group;
+- a separate 10,000-replicate pixel-year-clustered sensitivity keeps the
+  95% support transition near the same region (0.335 fails at 0.9348 joint
+  support; 0.340 passes at 0.9619); this still does not identify the true
+  AppEEARS/IRG missingness process, because dependence can extend beyond
+  pixel-year;
+- MOD09Q1.006 is the study-faithful product lane for the Aikens/Merkle-style
+  reconstruction; MOD09Q1.061 is an explicitly labeled sensitivity lane and
+  must not be silently substituted for V006;
+- published route-distance controller slopes identify restoring direction and,
+  with confirmed distance units, a local relaxation coefficient; they do not
+  directly equal the PAYOFF-B movement-feedback gain q_m without a declared
+  forward distance per model decision interval;
+- the quadratic minimum-cost controller allocation is a synthetic local
+  control result until movement and timing feedback costs are independently
+  measured;
+- held-out tracking-control validation thresholds are predeclared analysis
+  criteria and must not be tuned to held-out performance;
+- a passing held-out tracking-control gate validates the controller layer, not
+  habitat, demographic, fitness or ecological outcome predictions;
+- the explicit movement-rate feedback gain k_m in the landscape model is a
+  synthetic controller coefficient and is not numerically identified by the
+  published Aikens route-distance slope;
+- the sampled high-forcing movement-feedback result shows complementarity in
+  one declared design: movement feedback alone remains non-persistent while
+  timing enables persistence and reduces movement demand. It should not be
+  generalized as a universal requirement for joint movement and phenology;
+- a held-out ecological outcome gate is downstream of controller validation
+  and requires independently observed outcomes and independently predeclared
+  tolerances; the synthetic outcome fixture is only a regression witness;
+- interaction-mediated synchronization can be beneficial or maladaptive
+  depending on forcing, so it should not be described as universally
+  stabilizing or destabilizing.
+
+Preferred:
+
+> In the declared moving-landscape model, phenological capacity buffers spatial
+> tracking demand over a finite range, while interaction-mediated matching can
+> create local coordination barriers between jointly valuable tracking
+> strategies.
+
+Avoid:
+
+> Phenology universally rescues fragmented populations from climate change.
+
+Preferred:
+
+> Across the sampled synthetic 2D designs, coordination barriers persist under
+> mutation-step refinement and alternative spatial-overlap penalties.
+
+Avoid:
+
+> Most real mutualists are trapped by coordination barriers.
+
+
+## Current empirical lambda reliability state — 2026-09-24
+
+The movement-phenology empirical programme currently separates two licenses:
+
+```text
+three-taxon estimator-scale phase-retention coordinate:
+    LICENSED
+
+cross-taxon latent biological lambda magnitude comparison:
+    HOLD
+```
+
+Current reliability state:
+
+- **Eurasian wigeon**: complete 256/256 POWER-versus-source-faithful-ERA5
+  replicate calibration and frozen event-structure SIMEX v2 are available.
+  The SIMEX range is 0.7979--0.9354, but replicate disagreement does not identify
+  one gold-standard source-specific error distribution. These values remain
+  assumption-conditional sensitivity diagnostics.
+- **mule deer**: observed predictor phase SD is source-backed, but no independent
+  phase-error distribution is identified from the published workbook.
+- **barnacle goose**: observed predictor phase SD is source-backed for the
+  highlighted route transitions, but no source-specific phase-error distribution
+  is identified.
+- Equal-independent-error true-`lambda=1` stress thresholds are diagnostic
+  boundaries only and do not count as reliability calibration.
+
+Machine contracts:
+
+```text
+src/cross_system_lambda_reliability.py
+data/payoff_b_cross_system_lambda_reliability_gate_20260924.json
+data/payoff_b_lambda_classical_error_stress_20260924.json
+```
+
+Therefore do not:
+
+- rank the three taxa by "corrected" biological lambda;
+- treat the wigeon SIMEX sensitivity as corrected truth;
+- infer that low mule-deer or goose lambda values are measurement-error free;
+- convert the stress thresholds into empirical error estimates.
+
+The Aikens within-system perturbation remains outcome-unopened and is not
+modified by these reliability analyses.
+
 ## Appropriate manuscript language
 
 Preferred:
@@ -237,5 +471,39 @@ MUTATION_SHIFTED_OCCUPANCY_CROSSING_PROVED
 EMPIRICAL_FREQUENCY_FEEDBACK_NOT_YET_IDENTIFIED
 FINITE_POPULATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
 RECURRENT_MUTATION_EMPIRICAL_TEST_NOT_YET_EXECUTED
+TRACKING_EMPIRICAL_INVERSE_MAP_IMPLEMENTED
+TRACKING_DIRECTIONAL_MOVEMENT_INVERSE_IMPLEMENTED
+TRACKING_INTERVAL_CALIBRATION_AUDIT_IMPLEMENTED
+TRACKING_GROUPED_HOLDOUT_VALIDATION_IMPLEMENTED
+TRACKING_PREDECLARED_VALIDATION_GATE_IMPLEMENTED
+TRACKING_ECOLOGICAL_OUTCOME_VALIDATION_LAYER_IMPLEMENTED
+TRACKING_NAMED_SYSTEM_ECOLOGICAL_OUTCOME_VALIDATION_NOT_EXECUTED
+TRACKING_CLOSED_LOOP_LOCAL_THEORY_PROVED_UNDER_DECLARED_RECURRENCE
+TRACKING_PHASE_RETENTION_COMMON_COORDINATE_IMPLEMENTED
+TRACKING_SYSTEM_SPECIFIC_ACTUATOR_GATE_IMPLEMENTED
+TRACKING_PROSPECTIVE_PHASE_ACTUATOR_REGISTRY_IMPLEMENTED
+TRACKING_CROSS_SYSTEM_PROSPECTIVE_LAMBDA_SYNTHESIS_IMPLEMENTED
+TRACKING_RETROSPECTIVE_LAMBDA_TIER_SEPARATED
+TRACKING_TAXON_INCLUSION_GATE_IMPLEMENTED
+TRACKING_EVIDENCE_INCLUSION_GATE_GENERALIZED
+TRACKING_ACTUATOR_ONLY_EVIDENCE_PATH_IMPLEMENTED
+TRACKING_INDUSTRIAL_MULE_DEER_ACTUATOR_PERTURBATION_FROZEN
+TRACKING_AIKENS_LAMBDA_PERTURBATION_PREREGISTERED
+TRACKING_AIKENS_OFFLINE_IRG_RECONSTRUCTION_IMPLEMENTED
+TRACKING_AIKENS_PHASE_CONTRAST_FITTER_IMPLEMENTED
+TRACKING_AIKENS_MODIS_SOURCE_MATERIALIZATION_PENDING
+TRACKING_AIKENS_LAMBDA_OUTCOME_UNOPENED
+TRACKING_AIKENS_IID_TARGET_COVERAGE_SUPPORT_ENVELOPE_FROZEN
+TRACKING_AIKENS_PIXEL_YEAR_CLUSTERED_SUPPORT_SENSITIVITY_FROZEN
+TRACKING_WIGEON_PROSPECTIVE_PHASE_RETENTION_RECEIPT_FROZEN
+TRACKING_WIGEON_SOURCE_FAITHFUL_ERA5_CALIBRATION_COMPLETE
+TRACKING_WIGEON_EVENT_STRUCTURE_SIMEX_V2_COMPLETE
+TRACKING_WIGEON_ACTUATOR_RECONSTRUCTION_SENSITIVITY_FROZEN
+TRACKING_THREE_TAXON_DIRECT_PHASE_RETENTION_COORDINATE_FROZEN
+TRACKING_FOURTH_TAXON_DEFAULT_HOLD_PENDING_INCLUSION_GATE
+TRACKING_EXPLICIT_MOVEMENT_FEEDBACK_LANDSCAPE_IMPLEMENTED
+TRACKING_NAMED_SYSTEM_CANDIDATE_IDENTIFIED
+TRACKING_NAMED_SYSTEM_CALIBRATION_PENDING_SOURCE_FILE_INGESTION
+TRACKING_FITNESS_PARAMETERIZATION_NOT_IDENTIFIED_FOR_MULE_DEER
 HISTORICAL_CAUSATION_NOT_IDENTIFIED
 ```

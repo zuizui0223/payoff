@@ -1,0 +1,123 @@
+{
+  "frozen_date": "2026-09-20",
+  "scope": "synthetic_model_receipt",
+  "ecological_grid": {
+    "cells": 75,
+    "coordination_barrier_cells": 44
+  },
+  "demographic_stress": {
+    "total_cells": 675,
+    "barrier_cells": 396,
+    "pilot_32_replicates": {
+      "workflow_run": 35469501599,
+      "barrier_cells_gain_ge_0_10": 9,
+      "max_persistence_gain": 0.1875
+    },
+    "replication_128_replicates": {
+      "workflow_run": 35469664405,
+      "barrier_cells_gain_ge_0_10": 0,
+      "max_persistence_gain": 0.09375,
+      "mean_persistence_gain_all_barrier_cells": 0.005523989898989899,
+      "visibility_examples": [
+        {
+          "baseline_growth": 0.04,
+          "K": 30,
+          "local": 0.0186434659091,
+          "matched": 0.0227272727273,
+          "gain": 0.00408380681818
+        },
+        {
+          "baseline_growth": 0.04,
+          "K": 100,
+          "local": 0.549360795455,
+          "matched": 0.570490056818,
+          "gain": 0.0211292613636
+        },
+        {
+          "baseline_growth": 0.04,
+          "K": 300,
+          "local": 0.988991477273,
+          "matched": 0.991299715909,
+          "gain": 0.00230823863636
+        },
+        {
+          "baseline_growth": 0.12,
+          "K": 30,
+          "local": 0.260120738636,
+          "matched": 0.26953125,
+          "gain": 0.00941051136364
+        },
+        {
+          "baseline_growth": 0.12,
+          "K": 300,
+          "local": 1,
+          "matched": 1,
+          "gain": 0
+        }
+      ],
+      "local_persistence_bin_0_3_to_0_7": {
+        "mean_persistence_gain": 0.019744
+      },
+      "local_persistence_bin_0_9_to_1_0": {
+        "mean_persistence_gain": 0.001106
+      }
+    }
+  },
+  "drift_escape": {
+    "workflow_run": 35469853874,
+    "accessibility_gap": 0.0016,
+    "local_joint_growth": 0.340292788918,
+    "matched_joint_growth": 0.341892788918,
+    "beta_5": {
+      "N_10": {
+        "escape_fraction": 0.9375,
+        "high_payoff_fraction": 0.004944,
+        "mean_joint_growth": 0.316574
+      },
+      "N_30": {
+        "escape_fraction": 0.96875,
+        "high_payoff_fraction": 0.047093,
+        "mean_joint_growth": 0.334161
+      },
+      "N_100": {
+        "escape_fraction": 0,
+        "local_fraction": 0.870894,
+        "mean_joint_growth": 0.339848
+      },
+      "N_300": {
+        "escape_fraction": 0,
+        "local_fraction": 1,
+        "mean_joint_growth": 0.340293
+      },
+      "N_1000": {
+        "escape_fraction": 0,
+        "local_fraction": 1,
+        "mean_joint_growth": 0.340293
+      }
+    },
+    "retained_interpretation": "drift_assisted_barrier_crossing_not_drift_rescue"
+  },
+  "claim_boundary": "synthetic design frequencies and effects are not natural prevalence estimates",
+  "provenance": {
+    "population_barrier_pilot": {
+      "workflow_run": 35469425990,
+      "artifact_id": 10592321946,
+      "sha256": "9c2aad324c5ba2cacb2b6e4dd2e878d009e0da15e18b6b980b2acd23b8057e91"
+    },
+    "population_stress_pilot": {
+      "workflow_run": 35469501599,
+      "artifact_id": 10591922657,
+      "sha256": "a5cd7c6bf95d9ca6df495c3c4493332d873868a768da6029eab3cce5053e2770"
+    },
+    "population_stress_replication": {
+      "workflow_run": 35469664405,
+      "artifact_id": 10592032813,
+      "sha256": "a41b4806a3b788e524688bcd0fe9bfd01a5890305110d991d2d9df12ec83a6b0"
+    },
+    "drift_escape_pilot": {
+      "workflow_run": 35469853874,
+      "artifact_id": 10592456956,
+      "sha256": "0c4b9c472134553b2d49dc3124db427282daa5f5ec609f3be86b7bb679d7c2be"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "system_name": "cross_system_synthetic_witness",
+  "independent_test_id": "W_lambda_holdout",
+  "forcing_regime": "strong",
+  "phase_coordinate_id": "signed_resource_phase_error",
+  "segment_scale_id": "standardized_tracking_segment_v1",
+  "lambda_low": 0.45,
+  "lambda_high": 0.55,
+  "min_pairs": 4,
+  "require_retention_class": "restoring"
+}

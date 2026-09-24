@@ -1,0 +1,121 @@
+name: payoff-b Aikens phase contrast
+
+concurrency:
+  group: payoff-b-aikens-phase-contrast-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    paths:
+      - 'src/phase_retention_contrast_fit.py'
+      - 'scripts/fit_aikens_phase_retention_contrast.py'
+      - 'src/phase_retention_contrast.py'
+      - 'scripts/evaluate_phase_retention_contrast.py'
+      - 'tests/test_phase_retention_contrast_fit.py'
+      - 'tests/test_phase_retention_contrast.py'
+      - 'data/aikens2022_lambda_perturbation_registration_20260921.json'
+      - 'pyproject.toml'
+      - '.github/workflows/payoff-b-aikens-phase-contrast.yml'
+  workflow_dispatch:
+
+jobs:
+  contrast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install empirical contrast dependencies
+        run: python -m pip install --disable-pip-version-check -e ".[test,empirical]"
+      - name: Test phase-retention contrast fitter and gate
+        run: >
+          pytest -q
+          tests/test_phase_retention_contrast_fit.py
+          tests/test_phase_retention_contrast.py
+      - name: Build synthetic fixed-24h phase-pair fixture
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+
+          output = Path("outputs/ci_aikens_fixed_24h_phase_pairs.csv")
+          output.parent.mkdir(parents=True, exist_ok=True)
+
+          fieldnames = [
+              "animal_id",
+              "animal_year",
+              "group",
+              "start_target_index",
+              "start_timestamp",
+              "end_timestamp",
+              "phase_before",
+              "phase_after",
+          ]
+
+          with output.open("w", newline="", encoding="utf-8") as handle:
+              writer = csv.DictWriter(handle, fieldnames=fieldnames)
+              writer.writeheader()
+
+              for group, lam, prefix in (
+                  ("small", 0.30, "S"),
+                  ("large", 0.60, "L"),
+              ):
+                  for animal_index in range(10):
+                      animal_id = f"{prefix}{animal_index:02d}"
+                      animal_year = f"{animal_id}_2020"
+                      intercept = (animal_index - 5) * 0.03
+
+                      for pair_index in range(12):
+                          before = float(pair_index - 6)
+                          residual = (
+                              ((pair_index % 3) - 1)
+                              * 0.02
+                              * (1.0 + animal_index / 20.0)
+                          )
+                          after = intercept + lam * before + residual
+
+                          writer.writerow(
+                              {
+                                  "animal_id": animal_id,
+                                  "animal_year": animal_year,
+                                  "group": group,
+                                  "start_target_index": pair_index,
+                                  "start_timestamp": (
+                                      f"2020-04-{pair_index+1:02d}T12:00:00"
+                                  ),
+                                  "end_timestamp": (
+                                      f"2020-04-{pair_index+2:02d}T12:00:00"
+                                  ),
+                                  "phase_before": before,
+                                  "phase_after": after,
+                              }
+                          )
+          PY
+      - name: Fit frozen Aikens contrast model
+        run: >
+          python scripts/fit_aikens_phase_retention_contrast.py
+          outputs/ci_aikens_fixed_24h_phase_pairs.csv
+          --registration-json data/aikens2022_lambda_perturbation_registration_20260921.json
+          --group-a-value small
+          --group-b-value large
+          --min-animals-per-group 10
+          --min-pairs-per-group 100
+          --fail-on-not-estimable
+          --fit-receipt-output outputs/ci_aikens_phase_contrast_fit_receipt.json
+          --observation-output outputs/ci_aikens_phase_contrast_observation.json
+      - name: Evaluate preregistered lambda contrast gate
+        run: >
+          python scripts/evaluate_phase_retention_contrast.py
+          --registration-json data/aikens2022_lambda_perturbation_registration_20260921.json
+          --observation-json outputs/ci_aikens_phase_contrast_observation.json
+          --fail-on-gate-failure
+          --output outputs/ci_aikens_phase_contrast_gate.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-aikens-phase-contrast
+          path: |
+            outputs/ci_aikens_fixed_24h_phase_pairs.csv
+            outputs/ci_aikens_phase_contrast_fit_receipt.json
+            outputs/ci_aikens_phase_contrast_observation.json
+            outputs/ci_aikens_phase_contrast_gate.json

@@ -1,0 +1,58 @@
+{
+  "amendment_id": "aikens2022_environment_product_v061_primary_successor_20260922",
+  "frozen_date": "2026-09-22",
+  "outcome_state_at_freeze": "lambda_outcome_unopened",
+  "external_availability_change": {
+    "original_study_product": "MOD09Q1.006",
+    "official_distribution_end_date": "2023-07-31",
+    "distribution_status": "decommissioned",
+    "official_notice": "https://www.earthdata.nasa.gov/data/alerts-outages/modis-version-6-land-data-product-distribution-end-july-2023",
+    "replacement_current_product": "MOD09Q1.061",
+    "replacement_snow_product": "MOD10A2.061",
+    "replacement_access": "AppEEARS"
+  },
+  "effective_primary_environment_lane": "v061_primary_successor_after_v006_decommission",
+  "frozen_v061_manifest_sha256": "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463",
+  "frozen_source_contract": {
+    "gps_observations": 64539,
+    "unique_modis250_cells": 10899,
+    "unique_modis250_cell_years": 19500,
+    "year_scoped_tasks_at_1000_cells": 24
+  },
+  "unchanged_confirmatory_contract": {
+    "independent_test_id": "aikens2022_lambda_perturbation_v1",
+    "phase_coordinate_id": "signed_days_relative_to_local_peak_IRG",
+    "segment_scale_id": "fixed_24h_spring_migration_interval",
+    "expected_direction": "b_greater_than_a",
+    "max_p_value": 0.05,
+    "min_abs_difference": 0,
+    "min_animals_per_group": 10,
+    "min_transitions_per_group": 100,
+    "primary_model": "E_next ~ E_current + E_current:large_development + C(animal_year)",
+    "cluster_uncertainty_by": "animal_id"
+  },
+  "invariants": {
+    "hypothesis_unchanged": true,
+    "phase_coordinate_unchanged": true,
+    "segment_scale_unchanged": true,
+    "model_unchanged": true,
+    "significance_threshold_unchanged": true,
+    "sample_support_thresholds_unchanged": true,
+    "exact_v061_request_geometry_unchanged": true,
+    "cross_group_processing_rule_identical": true
+  },
+  "supersedes_role_labels_only": [
+    "v061_sensitivity_only",
+    "study_faithful_v006_primary_if_materialized"
+  ],
+  "does_not_supersede": [
+    "frozen_v061_manifest_hash",
+    "frozen_source_identity",
+    "lambda_perturbation_hypothesis",
+    "phase_coordinate",
+    "segment_scale",
+    "statistical_model",
+    "inferential_thresholds"
+  ],
+  "claim_boundary": "V061 is the preregistered primary successor because V006 official distribution ended before this analysis. The reconstruction is not claimed to be a byte-faithful reproduction of the original V006 environmental values."
+}

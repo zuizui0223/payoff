@@ -1,0 +1,189 @@
+{
+  "frozen_date": "2026-09-20",
+  "scope": "explicit_moving_landscape_synthetic_receipt",
+  "canonical_model": {
+    "evolutionary_fitness": "low_density_growth",
+    "demographic_growth": "low_density_growth_minus_density_penalty",
+    "note": "pre-fix runs using realized density-regulated growth as evolutionary fitness are superseded"
+  },
+  "superseded_runs": [
+    {
+      "workflow_run": 35472485844,
+      "reason": "pre low-density fitness separation"
+    },
+    {
+      "workflow_run": 35472609750,
+      "reason": "pre low-density fitness separation"
+    },
+    {
+      "workflow_run": 35472709087,
+      "reason": "pre low-density fitness separation"
+    }
+  ],
+  "persistence_frontier": {
+    "canonical_run": 35472802030,
+    "artifact_id": 10593885973,
+    "sha256": "78dd1e229f469a7e315468bbf83e761ad4627e4505159494f8af8333303f4901",
+    "strategy_resolution_run": 35472806452,
+    "strategy_resolution_artifact_id": 10593036709,
+    "strategy_resolution_sha256": "de80b90512071c92e335b41ee356ebea2b7d3ef2e684dde842244011460599b7",
+    "brackets": [
+      {
+        "phenology_limit": 0,
+        "max_persisted_velocity": 0.03,
+        "first_failed_velocity": 0.035
+      },
+      {
+        "phenology_limit": 1,
+        "max_persisted_velocity": 0.035,
+        "first_failed_velocity": 0.04
+      },
+      {
+        "phenology_limit": 2,
+        "max_persisted_velocity": 0.045,
+        "first_failed_velocity": 0.05
+      },
+      {
+        "phenology_limit": 3,
+        "max_persisted_velocity": 0.05,
+        "first_failed_velocity": 0.055
+      },
+      {
+        "phenology_limit": 4,
+        "max_persisted_velocity": 0.055,
+        "first_failed_velocity": 0.06
+      },
+      {
+        "phenology_limit": 5,
+        "max_persisted_velocity": 0.065,
+        "first_failed_velocity": 0.07
+      }
+    ],
+    "unchanged_across_strategy_grids": true,
+    "frontier_outcome": "migration_dominant",
+    "descriptive_frontier_vs_phenology_limit": {
+      "slope": 0.00685714,
+      "r2": 0.98743
+    },
+    "terminal_capacity_diagnostic": {
+      "r2": 0.98746,
+      "mean_absolute_error": 0.00158
+    }
+  },
+  "landscape_coordination_barrier": {
+    "coarse": {
+      "workflow_run": 35472831211,
+      "artifact_id": 10593711112,
+      "sha256": "0ba5140c941d2b8099ff656805b20a1f798288ab5270f7773642fee345d77794",
+      "cells": 108,
+      "barriers": 52,
+      "persistence_rescues": 24
+    },
+    "fine": {
+      "workflow_run": 35472957790,
+      "artifact_id": 10593706469,
+      "sha256": "8129ee6664bf922670f122a10a35d9d9a17ba9a205cf11e5a425d29419561064",
+      "cells": 81,
+      "barriers": 57,
+      "persistence_rescues": 21,
+      "mutation_step": 0.1
+    },
+    "strongest_cell": {
+      "interaction_strength": 0.5,
+      "cost_bias": -0.08,
+      "climate_velocity": 0.05,
+      "phenology_limit": 4,
+      "local_strategy": {
+        "migration": 0.2,
+        "phenology": 0
+      },
+      "local_joint_growth": -0.88015485281,
+      "local_persisted": false,
+      "matched_strategy_fine": {
+        "migration": 0.1,
+        "phenology": 0.2
+      },
+      "matched_joint_growth_fine": 0.238272131903,
+      "matched_persisted": true,
+      "accessibility_gap_fine": 1.11842698471
+    }
+  },
+  "one_step_gate": {
+    "workflow_run": 35473142861,
+    "job_id": 105977669568,
+    "resident": {
+      "migration": 0.2,
+      "phenology": 0
+    },
+    "coordinated_neighbor": {
+      "migration": 0.2,
+      "phenology": 0.2
+    },
+    "coordinated_gain": 1.1150262299432603,
+    "unilateral_gain_a": -1.427318198674544,
+    "unilateral_gain_b": -1.427318198674544,
+    "unilateral_mismatch_a": 3.188946176164034,
+    "unilateral_mismatch_b": 3.188946176164034,
+    "blocked": true
+  },
+  "claim_boundary": "synthetic explicit-landscape mechanisms and finite-grid frontiers are not natural prevalence estimates or calibrated ecological thresholds",
+  "boundary_robustness": {
+    "workflow_run": 35473486671,
+    "artifact_id": 10593862087,
+    "sha256": "e5bc68c851042b78b14425f3d714446863c4041b5293628a181b254593c8e3da",
+    "by_retention": [
+      {
+        "retention": 0,
+        "cells": 36,
+        "barriers": 29,
+        "persistence_rescues": 21,
+        "mean_gap": 0.405018051943
+      },
+      {
+        "retention": 0.5,
+        "cells": 36,
+        "barriers": 29,
+        "persistence_rescues": 21,
+        "mean_gap": 0.399858752657
+      },
+      {
+        "retention": 1,
+        "cells": 36,
+        "barriers": 30,
+        "persistence_rescues": 21,
+        "mean_gap": 0.39466866966
+      }
+    ],
+    "retained_interpretation": "persistence-rescue count unchanged across absorbing/intermediate/reflecting edges"
+  },
+  "stochastic_patch_validation": {
+    "workflow_run": 35473605692,
+    "artifact_id": 10594116842,
+    "sha256": "3947f30e4b157723fdb3c74b10d5efcba88c0c72d14d53e5544553e9265f9f57",
+    "replicates_per_boundary": 128,
+    "by_retention": [
+      {
+        "retention": 0,
+        "barrier": true,
+        "accessibility_gap": 1.1387545552,
+        "local_persistence": 0,
+        "matched_persistence": 1
+      },
+      {
+        "retention": 0.5,
+        "barrier": true,
+        "accessibility_gap": 1.12785777037,
+        "local_persistence": 0,
+        "matched_persistence": 1
+      },
+      {
+        "retention": 1,
+        "barrier": true,
+        "accessibility_gap": 1.11842698471,
+        "local_persistence": 0,
+        "matched_persistence": 1
+      }
+    ],
+    "retained_interpretation": "canonical rescue persists under integer Poisson patch demography"
+  }
+}

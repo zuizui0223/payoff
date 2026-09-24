@@ -1,0 +1,65 @@
+{
+  "frozen_date": "2026-09-24",
+  "status": "cross_system_true_lambda_one_classical_error_stress",
+  "model": {
+    "latent_null_lambda": 1,
+    "predictor_and_outcome_error_sd": "equal",
+    "predictor_outcome_error_correlation": 0,
+    "interpretation": "large-sample equal independent classical measurement-error stress threshold"
+  },
+  "systems": [
+    {
+      "system_id": "mule_deer_whole_migration",
+      "observed_lambda_hat": 0.10734051982279666,
+      "observed_predictor_sd_days": 26.40595330244822,
+      "required_error_sd_over_observed_predictor_sd": 0.944806583474736,
+      "required_error_sd_days": 24.948518523079528,
+      "finite_solution": true
+    },
+    {
+      "system_id": "barnacle_svalbard_southern_norway_to_svalbard",
+      "observed_lambda_hat": -0.106320907,
+      "observed_predictor_sd_days": 9.071370336848188,
+      "required_error_sd_over_observed_predictor_sd": null,
+      "required_error_sd_days": null,
+      "finite_solution": false,
+      "reason": "negative expected slope is not generated from true lambda=1 by this independent classical attenuation model"
+    },
+    {
+      "system_id": "barnacle_greenland_R2_R3",
+      "observed_lambda_hat": 0.130730883,
+      "observed_predictor_sd_days": 12.487553937746076,
+      "required_error_sd_over_observed_predictor_sd": 0.9323460285752281,
+      "required_error_sd_days": 11.642721320476506,
+      "finite_solution": true
+    },
+    {
+      "system_id": "barnacle_barents_R1_R2",
+      "observed_lambda_hat": 0.494113942,
+      "observed_predictor_sd_days": 27.769963220570872,
+      "required_error_sd_over_observed_predictor_sd": 0.7112566751883598,
+      "required_error_sd_days": 19.751571710366274,
+      "finite_solution": true
+    },
+    {
+      "system_id": "eurasian_wigeon_staging_transition",
+      "observed_lambda_hat": 0.7497680211367301,
+      "observed_predictor_sd_days": 15.881166579869618,
+      "required_error_sd_over_observed_predictor_sd": 0.5002319250740299,
+      "required_error_sd_days": 7.944266530669527,
+      "finite_solution": true,
+      "empirical_sensitivity_calibration_now_available": true
+    }
+  ],
+  "interpretation": {
+    "most_classical_error_fragile_highlighted_system": "eurasian_wigeon_staging_transition",
+    "strong_contraction_rows_require_large_error_relative_to_observed_signal": true,
+    "no_cross_taxon_corrected_ranking_licensed": true
+  },
+  "claim_boundary": [
+    "required error SD values are null stress thresholds, not measured error",
+    "the rho=0 equal-error model is a diagnostic boundary, not a universal observation model",
+    "source-backed error calibration remains pending for mule deer and barnacle goose",
+    "wigeon has separate POWER-versus-ERA5 assumption-conditional sensitivity calibration"
+  ]
+}

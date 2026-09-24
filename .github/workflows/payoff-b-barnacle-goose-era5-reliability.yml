@@ -1,0 +1,88 @@
+name: payoff-b barnacle-goose ERA5 reliability
+
+concurrency:
+  group: payoff-b-barnacle-goose-era5-reliability-${{ github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    paths:
+      - 'src/barnacle_goose_phase_error_calibration.py'
+      - 'scripts/calibrate_barnacle_goose_phase_error_era5.py'
+      - 'tests/test_barnacle_goose_phase_error_calibration.py'
+      - 'data/barnacle_goose_era5_phase_reliability_registration_20260924.json'
+      - '.github/workflows/payoff-b-barnacle-goose-era5-reliability.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install calibration dependencies
+        run: >
+          python -m pip install --disable-pip-version-check
+          pytest pandas numpy scipy statsmodels requests
+
+      - name: Run offline reliability tests
+        run: >
+          pytest -q
+          tests/test_barnacle_goose_phase_error_calibration.py
+
+      - name: Download frozen PR144 goose artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/source/multiflyway outputs/source/svalbard
+
+          curl -fL             -H "Authorization: Bearer ${GH_TOKEN}"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10700391090/zip"             -o outputs/barnacle_multiflyway.zip
+          echo "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f  outputs/barnacle_multiflyway.zip" | sha256sum -c -
+          unzip -q outputs/barnacle_multiflyway.zip -d outputs/source/multiflyway
+
+          curl -fL             -H "Authorization: Bearer ${GH_TOKEN}"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10699871077/zip"             -o outputs/svalbard_goose_source.zip
+          echo "29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856  outputs/svalbard_goose_source.zip" | sha256sum -c -
+          unzip -q outputs/svalbard_goose_source.zip -d outputs/source/svalbard
+
+      - name: Verify frozen input file identities
+        run: |
+          echo "64e39cbbbb68631a8303a0dadc243948e525d542e9f5d6504065d653aff09b09  outputs/source/multiflyway/stage3_greenland_goose_regions.csv" | sha256sum -c -
+          echo "d7792a93e34ef6dfff2677f99697c70ab0bfd2e91aec0997ab5c4efaa5136aec  outputs/source/multiflyway/stage3_greenland_goose_power_gdd_anomalies.csv" | sha256sum -c -
+          echo "033d244ef1321d19055b77b3c71fd2a81249044394026634e4f186289896d0d2  outputs/source/multiflyway/stage3_greenland_goose_anomaly_phase_transitions.csv" | sha256sum -c -
+          echo "42c9d7cbd410f3730a7e97dd73398b673e810620d42608889ae3c9bcd601d194  outputs/source/multiflyway/stage3_barents_goose_regions.csv" | sha256sum -c -
+          echo "b1cb70b0770e6b208735d0c26217531bc903b5b07577daa42974f7c3708f7b15  outputs/source/multiflyway/stage3_barents_goose_power_gdd_anomalies.csv" | sha256sum -c -
+          echo "2838b14dd41481301ae0e7053aaab08d502cce3374198fbed21c16e1cd6e632d  outputs/source/multiflyway/stage3_barents_goose_anomaly_phase_transitions.csv" | sha256sum -c -
+          echo "838a001edd4330ac6cc57cde4520dc2c189acd25c76be8d0a8f9c358fca999c3  outputs/source/svalbard/stage3_svalbard_goose_regions.csv" | sha256sum -c -
+          echo "cfa6f06f6f00ee7a8c18687307cf38555fcb22380e161e961ac8094a244cbbfc  outputs/source/svalbard/stage3_svalbard_goose_power_gdd_onsets.csv" | sha256sum -c -
+          echo "e1302c5d74f32ffb07af8123b89591ce24927a47e146e791493cc57a0b82ba3b  outputs/source/svalbard/stage3_svalbard_goose_transitions.csv" | sha256sum -c -
+
+      - name: Run frozen ERA5 environmental replicate
+        run: >
+          python scripts/calibrate_barnacle_goose_phase_error_era5.py
+          --multiflyway-dir outputs/source/multiflyway
+          --svalbard-dir outputs/source/svalbard
+          --registration-json data/barnacle_goose_era5_phase_reliability_registration_20260924.json
+          --fail-on-gate-failure
+          --onsets-output outputs/barnacle_goose_power_era5_onsets.csv
+          --routes-output outputs/barnacle_goose_power_era5_routes.csv
+          --request-output outputs/barnacle_goose_era5_request_receipt.json
+          --receipt-output outputs/barnacle_goose_era5_reliability_receipt.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-barnacle-goose-era5-reliability
+          path: |
+            outputs/barnacle_goose_power_era5_onsets.csv
+            outputs/barnacle_goose_power_era5_routes.csv
+            outputs/barnacle_goose_era5_request_receipt.json
+            outputs/barnacle_goose_era5_reliability_receipt.json
+            data/barnacle_goose_era5_phase_reliability_registration_20260924.json

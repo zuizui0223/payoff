@@ -1,0 +1,303 @@
+name: payoff-b Aikens V061 primary lambda test
+
+concurrency:
+  group: payoff-b-aikens-appeears-full-${{ github.ref_name }}
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  full-extraction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Earthdata dependencies
+        run: python -m pip install --disable-pip-version-check -e ".[test,earthdata,irg,empirical]"
+
+      - name: Download frozen exact raw-GPS source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/source
+          curl -fL             -H "Authorization: Bearer ${GH_TOKEN}"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10643405042/zip"             -o outputs/aikens_raw_gps_source.zip
+          echo "1f0d706dc6a102261009b7099c748dcce40abb2adedf7b88828395a1d392cfa0  outputs/aikens_raw_gps_source.zip" | sha256sum -c -
+          unzip -q outputs/aikens_raw_gps_source.zip             stage3_industrial_mule_deer_gps.csv             -d outputs/source
+          echo "03426804557a0244be3ed6eb9f461db578d3ce26fa2b28637f8e98bee9f09466  outputs/source/stage3_industrial_mule_deer_gps.csv" | sha256sum -c -
+
+      - name: Build exact canonical manifest
+        run: >
+          python scripts/build_aikens_appeears_manifest.py
+          outputs/source/stage3_industrial_mule_deer_gps.csv
+          --source-crs EPSG:32613
+          --max-points-per-task 1000
+          --manifest-output outputs/aikens_exact_appeears_v061_manifest.json
+          --cells-output outputs/aikens_exact_modis250_cells.csv
+          --links-output outputs/aikens_exact_gps_modis250_links.csv
+          --receipt-output outputs/aikens_exact_appeears_v061_manifest_receipt.json
+
+      - name: Require canonical source identity
+        run: >
+          python scripts/evaluate_aikens_appeears_manifest.py
+          outputs/aikens_exact_appeears_v061_manifest.json
+          --canonical-aikens
+          --fail-on-gate-failure
+          --output outputs/aikens_exact_manifest_coverage_gate.json
+
+      - name: Verify exact manifest hash
+        run: |
+          echo "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463  outputs/aikens_exact_appeears_v061_manifest.json" | sha256sum -c -
+
+      - name: Require pre-outcome V061 primary-successor amendment
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          amendment_path = Path(
+              "data/aikens2022_environment_product_amendment_20260922.json"
+          )
+          amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
+          assert amendment["outcome_state_at_freeze"] == "lambda_outcome_unopened"
+          assert (
+              amendment["effective_primary_environment_lane"]
+              == "v061_primary_successor_after_v006_decommission"
+          )
+          manifest_path = Path("outputs/aikens_exact_appeears_v061_manifest.json")
+          digest = hashlib.sha256(manifest_path.read_bytes()).hexdigest()
+          assert digest == amendment["frozen_v061_manifest_sha256"]
+          assert amendment["invariants"]["hypothesis_unchanged"]
+          assert amendment["invariants"]["model_unchanged"]
+          assert amendment["invariants"]["significance_threshold_unchanged"]
+          print("AIKENS_V061_PRIMARY_AMENDMENT_OK")
+          PY
+
+      - name: Build frozen GPS-to-pixel phase keys
+        run: >
+          python scripts/prepare_phase_gps_from_modis_links.py
+          outputs/aikens_exact_gps_modis250_links.csv
+          --expected-observations 64539
+          --output outputs/aikens_primary_phase_gps_keys.csv
+          --receipt-output outputs/aikens_primary_phase_gps_keys_receipt.json
+
+      - name: Select fixed 24-hour GPS targets before environmental joining
+        run: >
+          python scripts/select_fixed_interval_gps_targets.py
+          outputs/aikens_primary_phase_gps_keys.csv
+          --target-interval-hours 24
+          --max-target-deviation-hours 3
+          --output outputs/aikens_primary_fixed_gps_targets.csv
+          --receipt-output outputs/aikens_primary_fixed_gps_targets_receipt.json
+
+      - name: Require pre-environment support ceiling
+        run: >
+          python scripts/audit_fixed_target_support_ceiling.py
+          outputs/aikens_primary_fixed_gps_targets.csv
+          --min-animals-per-group 10
+          --min-pairs-per-group 100
+          --fail-if-necessarily-not-estimable
+          --output outputs/aikens_pre_environment_support_ceiling.json
+
+      - name: Require configured AppEEARS credentials
+        env:
+          APPEEARS_TOKEN: ${{ secrets.APPEEARS_TOKEN }}
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: |
+          if [ -n "${APPEEARS_TOKEN}" ]; then
+            echo "AppEEARS credentials configured via token"
+          elif [ -n "${EARTHDATA_USERNAME}" ] && [ -n "${EARTHDATA_PASSWORD}" ]; then
+            echo "AppEEARS credentials configured via username/password"
+          else
+            echo "Missing AppEEARS credentials" >&2
+            exit 1
+          fi
+
+      - name: Submit all exact-manifest tasks and download bundles
+        env:
+          APPEEARS_TOKEN: ${{ secrets.APPEEARS_TOKEN }}
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: >
+          python scripts/run_appeears_manifest.py
+          outputs/aikens_exact_appeears_v061_manifest.json
+          --submit
+          --submit-all
+          --wait
+          --poll-seconds 20
+          --max-polls 360
+          --download-dir outputs/appeears_full
+          --output outputs/aikens_appeears_full_submission_receipt.json
+
+      - name: Merge task-level point results
+        run: >
+          python scripts/merge_aikens_appeears_results.py
+          outputs/appeears_full
+          --mod09-output outputs/aikens_full_mod09q1_v061.csv
+          --mod10-output outputs/aikens_full_mod10a2_v061.csv
+          --receipt-output outputs/aikens_full_appeears_merge_receipt.json
+
+      - name: Convert full V061 extraction to IRG-input table
+        run: >
+          python scripts/prepare_aikens_irg_input_from_appeears.py
+          --mod09q1-results outputs/aikens_full_mod09q1_v061.csv
+          --mod10a2-results outputs/aikens_full_mod10a2_v061.csv
+          --reconstruction-lane v061_primary_successor_after_v006_decommission
+          --output outputs/aikens_full_v061_irg_input.csv
+          --receipt-output outputs/aikens_full_v061_irg_input_receipt.json
+
+
+      - name: Reconstruct primary V061 peak IRG
+        run: >
+          python scripts/fit_peak_irg_from_ndvi.py
+          outputs/aikens_full_v061_irg_input.csv
+          --modis-product MOD09Q1.061
+          --v061-reconstruction-lane v061_primary_successor_after_v006_decommission
+          --allow-unfit-pixel-years
+          --output outputs/aikens_primary_v061_peak_irg.csv
+          --receipt-output outputs/aikens_primary_v061_peak_irg_receipt.json
+
+      - name: Attach primary V061 phase to frozen GPS targets
+        run: >
+          python scripts/attach_peak_irg_to_fixed_targets.py
+          outputs/aikens_primary_fixed_gps_targets.csv
+          outputs/aikens_primary_v061_peak_irg.csv
+          --required-modis-product MOD09Q1.061
+          --output outputs/aikens_primary_fixed_targets_with_phase.csv
+          --receipt-output outputs/aikens_primary_fixed_targets_phase_receipt.json
+
+      - name: Build adjacent valid fixed-target phase pairs
+        run: >
+          python scripts/build_phase_pairs_from_fixed_targets.py
+          outputs/aikens_primary_fixed_targets_with_phase.csv
+          --pairs-output outputs/aikens_primary_fixed_24h_phase_pairs.csv
+          --receipt-output outputs/aikens_primary_fixed_24h_phase_pairs_receipt.json
+
+      - name: Fit preregistered within-mule-deer lambda contrast
+        run: >
+          python scripts/fit_aikens_phase_retention_contrast.py
+          outputs/aikens_primary_fixed_24h_phase_pairs.csv
+          --registration-json data/aikens2022_lambda_perturbation_registration_20260921.json
+          --group-a-value small
+          --group-b-value large
+          --min-animals-per-group 10
+          --min-pairs-per-group 100
+          --fit-receipt-output outputs/aikens_primary_lambda_fit_receipt.json
+          --observation-output outputs/aikens_primary_lambda_observation.json
+
+      - name: Evaluate registered lambda gate or record NOT ESTIMABLE
+        run: |
+          if [ -f outputs/aikens_primary_lambda_observation.json ]; then
+            python scripts/evaluate_phase_retention_contrast.py \
+              --registration-json data/aikens2022_lambda_perturbation_registration_20260921.json \
+              --observation-json outputs/aikens_primary_lambda_observation.json \
+              --output outputs/aikens_primary_lambda_result.json
+          else
+            python - <<'PY'
+          import json
+          from pathlib import Path
+
+          fit_path = Path("outputs/aikens_primary_lambda_fit_receipt.json")
+          phase_path = Path(
+              "outputs/aikens_primary_fixed_targets_phase_receipt.json"
+          )
+          pair_path = Path(
+              "outputs/aikens_primary_fixed_24h_phase_pairs_receipt.json"
+          )
+          fit = json.loads(fit_path.read_text(encoding="utf-8"))
+          phase = json.loads(phase_path.read_text(encoding="utf-8"))
+          pairs = json.loads(pair_path.read_text(encoding="utf-8"))
+          reasons = list(fit["fit"].get("reasons", []))
+          reasons.append(
+              "valid environmental targets="
+              + str(phase.get("valid_targets", 0))
+              + "/"
+              + str(phase.get("total_targets", 0))
+          )
+          reasons.append(
+              "adjacent valid phase pairs="
+              + str(pairs.get("phase_pairs", 0))
+          )
+          payload = {
+              "status": "phase_retention_contrast_not_estimable",
+              "scientific_result": "NOT_ESTIMABLE",
+              "fit_receipt": str(fit_path),
+              "phase_receipt": str(phase_path),
+              "pair_receipt": str(pair_path),
+              "reasons": reasons,
+              "lambda_outcome_opened": False,
+              "retuning_permitted": False,
+              "claim_boundary": (
+                  "registered sample-support gate was not met after frozen "
+                  "GPS target selection and environmental validity filtering; "
+                  "the interval, tolerance, product and support thresholds "
+                  "remain unchanged"
+              ),
+          }
+          Path("outputs/aikens_primary_lambda_result.json").write_text(
+              json.dumps(payload, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print("AIKENS_PRIMARY_LAMBDA_NOT_ESTIMABLE_SUPPORT")
+          PY
+          fi
+
+      - name: Render preregistered Aikens outcome into GEB manuscript
+        run: >
+          python scripts/render_aikens_lambda_manuscript.py
+          --baseline manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md
+          --result-json outputs/aikens_primary_lambda_result.json
+          --output outputs/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_RENDERED.md
+          --claim-state-output outputs/aikens_primary_lambda_claim_state.json
+
+      - name: Audit rendered GEB manuscript
+        run: >
+          python scripts/audit_movement_phenology_geb.py
+          --manuscript outputs/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_RENDERED.md
+          --output outputs/aikens_primary_geb_submission_audit.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-aikens-appeears-full-extraction
+          path: |
+            outputs/aikens_exact_appeears_v061_manifest_receipt.json
+            outputs/aikens_exact_manifest_coverage_gate.json
+            outputs/aikens_appeears_full_submission_receipt.json
+            outputs/aikens_full_appeears_merge_receipt.json
+            outputs/aikens_full_mod09q1_v061.csv
+            outputs/aikens_full_mod10a2_v061.csv
+            outputs/aikens_full_v061_irg_input.csv
+            outputs/aikens_full_v061_irg_input_receipt.json
+            outputs/aikens_primary_v061_peak_irg.csv
+            outputs/aikens_primary_v061_peak_irg_receipt.json
+            outputs/aikens_primary_phase_gps_keys.csv
+            outputs/aikens_primary_phase_gps_keys_receipt.json
+            outputs/aikens_primary_fixed_gps_targets.csv
+            outputs/aikens_primary_fixed_gps_targets_receipt.json
+            outputs/aikens_pre_environment_support_ceiling.json
+            outputs/aikens_primary_fixed_targets_with_phase.csv
+            outputs/aikens_primary_fixed_targets_phase_receipt.json
+            outputs/aikens_primary_fixed_24h_phase_pairs.csv
+            outputs/aikens_primary_fixed_24h_phase_pairs_receipt.json
+            outputs/aikens_primary_lambda_fit_receipt.json
+            outputs/aikens_primary_lambda_observation.json
+            outputs/aikens_primary_lambda_result.json
+            outputs/aikens_primary_lambda_claim_state.json
+            outputs/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_RENDERED.md
+            outputs/aikens_primary_geb_submission_audit.json
+            data/aikens2022_environment_product_amendment_20260922.json
+            data/aikens2022_phase_reconstruction_execution_contract_20260922.json
+            data/aikens2022_phase_reconstruction_execution_contract_v2_20260922.json
+            docs/PAYOFF_B_AIKENS_ENVIRONMENT_PRODUCT_AMENDMENT_20260922.md
+            docs/PAYOFF_B_AIKENS_FIXED_TARGET_EXECUTION_AMENDMENT_V2_20260922.md

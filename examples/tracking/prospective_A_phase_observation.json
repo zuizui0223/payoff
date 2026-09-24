@@ -1,0 +1,24 @@
+{
+  "system_name": "system_A",
+  "independent_test_id": "A_lambda_holdout",
+  "phase_coordinate_id": "signed_resource_phase_error",
+  "segment_scale_id": "standardized_tracking_segment_v1",
+  "pairs": [
+    [
+      -6,
+      -3
+    ],
+    [
+      -3,
+      -1.5
+    ],
+    [
+      1,
+      0.5
+    ],
+    [
+      5,
+      2.5
+    ]
+  ]
+}

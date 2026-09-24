@@ -1,0 +1,106 @@
+{
+  "frozen_date": "2026-09-20",
+  "scope": "state_dependent_movement_feedback_explicit_landscape",
+  "design": {
+    "climate_velocities": [
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06
+    ],
+    "controller_gains": [
+      0,
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.8,
+      1.6
+    ],
+    "phenology_rates": [
+      0,
+      0.25,
+      0.5
+    ],
+    "baseline_migration_rate": 0.1,
+    "max_migration_rate": 1.5,
+    "migration_cost": 0.05,
+    "phenology_cost": 0.03,
+    "phenology_limit": 4,
+    "cells": 105
+  },
+  "high_forcing_persistence": {
+    "v_0_05": {
+      "h_0": "0/7 controller gains persist",
+      "h_0_25": "7/7 persist",
+      "h_0_5": "7/7 persist"
+    },
+    "v_0_06": {
+      "h_0": "0/7 controller gains persist",
+      "h_0_25": "7/7 persist",
+      "h_0_5": "7/7 persist"
+    }
+  },
+  "fixed_gain_1_6": {
+    "v_0_05": {
+      "h_0": {
+        "mean_migration": 0.751685,
+        "growth": -0.086343,
+        "ceiling_fraction": 0.2875,
+        "persisted": false
+      },
+      "h_0_25": {
+        "mean_migration": 0.250782,
+        "growth": 0.280116,
+        "ceiling_fraction": 0,
+        "persisted": true
+      },
+      "h_0_5": {
+        "mean_migration": 0.191582,
+        "growth": 0.269134,
+        "ceiling_fraction": 0,
+        "persisted": true
+      }
+    },
+    "v_0_06": {
+      "h_0": {
+        "mean_migration": 0.947854,
+        "growth": -0.713611,
+        "ceiling_fraction": 0.45,
+        "persisted": false
+      },
+      "h_0_25": {
+        "mean_migration": 0.325324,
+        "growth": 0.284509,
+        "ceiling_fraction": 0,
+        "persisted": true
+      },
+      "h_0_5": {
+        "mean_migration": 0.231577,
+        "growth": 0.27585,
+        "ceiling_fraction": 0,
+        "persisted": true
+      }
+    }
+  },
+  "within_persistent_controller_benefit": {
+    "v_0_06_h_0_25": {
+      "delta_growth": 0.014602,
+      "mismatch_fixed": 0.38725,
+      "mismatch_feedback": 0.332533
+    },
+    "v_0_06_h_0_5": {
+      "delta_growth": 0.01435,
+      "mismatch_fixed": 0.39866,
+      "mismatch_feedback": 0.353445
+    }
+  },
+  "provenance": {
+    "workflow_run": 35495412741,
+    "artifact_id": 10599954360,
+    "sha256": "9d4ef34759f0fc7c69a17a38f34693455307dc3bed897258ef051966f5c228cd"
+  },
+  "retained_interpretation": "exact local feedback substitutability becomes forcing-dependent complementarity in the explicit spatial model: timing crosses the sampled persistence boundary while movement feedback further improves tracking quality and growth",
+  "claim_boundary": "synthetic explicit-landscape result only; no empirical controller gain or natural climate threshold"
+}

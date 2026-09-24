@@ -1,0 +1,75 @@
+name: payoff-b barnacle-goose ERA5 reliability
+
+concurrency:
+  group: payoff-b-barnacle-era5-reliability-${{ github.ref_name }}
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/barnacle_phase_error_era5_registration_20260924.json'
+      - 'src/barnacle_phase_error_calibration.py'
+      - 'scripts/calibrate_barnacle_phase_error_era5.py'
+      - 'tests/test_barnacle_phase_error_calibration.py'
+      - '.github/workflows/payoff-b-barnacle-era5-reliability.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install reliability dependencies
+        run: >
+          python -m pip install --disable-pip-version-check
+          -e ".[test,empirical]" pandas scipy requests
+
+      - name: Test barnacle reliability helpers
+        run: pytest -q tests/test_barnacle_phase_error_calibration.py
+
+      - name: Download frozen barnacle multi-flyway artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/source
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10700391090/zip" \
+            -o outputs/barnacle_multiflyway.zip
+          echo "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f  outputs/barnacle_multiflyway.zip" | sha256sum -c -
+          unzip -q outputs/barnacle_multiflyway.zip \
+            stage3_greenland_goose_regions.csv \
+            stage3_greenland_goose_stopovers.csv \
+            stage3_greenland_goose_power_gdd_anomalies.csv \
+            stage3_barents_goose_regions.csv \
+            stage3_barents_goose_stopovers.csv \
+            stage3_barents_goose_power_gdd_anomalies.csv \
+            -d outputs/source
+
+      - name: Run preregistered ERA5 replication
+        run: >
+          python scripts/calibrate_barnacle_phase_error_era5.py
+          --source-dir outputs/source
+          --registration-json data/barnacle_phase_error_era5_registration_20260924.json
+          --output-dir outputs/barnacle_era5
+          --receipt-output outputs/barnacle_era5_reliability_receipt.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-barnacle-era5-reliability
+          path: |
+            outputs/barnacle_era5/*.csv
+            outputs/barnacle_era5_reliability_receipt.json
+            data/barnacle_phase_error_era5_registration_20260924.json

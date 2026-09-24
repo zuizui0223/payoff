@@ -1,5 +1,9 @@
 name: test
 
+concurrency:
+  group: payoff-b-test-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
 on:
   push:
   pull_request:
@@ -15,6 +19,28 @@ jobs:
       - run: python -m pip install --upgrade pip pytest
       - run: python scripts/self_check.py
       - run: pytest -q
+      - run: python scripts/build_tracking_theory_figure_data.py --output outputs/ci_payoff_b_tracking_theory_figure_data.json
+      - run: python scripts/render_tracking_theory_figures.py --output-dir outputs/ci_tracking_theory_figures
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-tracking-theory-figures
+          path: outputs/ci_tracking_theory_figures
+      - run: python scripts/build_tracking_theory_submission_package.py --output-dir outputs/ci_tracking_submission_package --zip outputs/PAYOFF_B_TRACKING_SUBMISSION_PACKAGE.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-tracking-theory-submission-package
+          path: |
+            outputs/PAYOFF_B_TRACKING_SUBMISSION_PACKAGE.zip
+            outputs/PAYOFF_B_TRACKING_SUBMISSION_ARCHIVE_RECEIPT.json
+            outputs/ci_tracking_submission_package/PAYOFF_B_TRACKING_SUBMISSION_MANIFEST.json
+      - run: python scripts/build_tracking_theory_review_bundle.py --output-dir outputs/ci_oikos_tracking_review_bundle --zip outputs/OIKOS_TRACKING_ANON_CODE_DATA.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-tracking-theory-anonymous-review-bundle
+          path: |
+            outputs/OIKOS_TRACKING_ANON_CODE_DATA.zip
+            outputs/OIKOS_TRACKING_ANON_CODE_DATA_ARCHIVE_RECEIPT.json
+            outputs/ci_oikos_tracking_review_bundle/OIKOS_TRACKING_ANON_CODE_DATA_MANIFEST.json
       - run: python scripts/phase_sweep.py --phi-min -0.2 --phi-max 0.2 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_phase_grid.csv
       - run: python scripts/lke_phase_sweep.py --s 0.5 --l-min 0 --l-max 0.4 --k-min 0 --k-max 0.4 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_lke_phase_grid.csv
       - run: python scripts/finite_population_sweep.py --n 20 --beta 0.05 --phi-min -0.2 --phi-max 0.2 --eta-min -0.2 --eta-max 0.2 --step 0.2 --output outputs/ci_finite_population_grid.csv
@@ -39,3 +65,66 @@ jobs:
       - run: python scripts/hard_module_end_to_end.py --functions examples/three_function/functions.csv --worldlines examples/three_function/hard_module_end_to_end_worldlines.csv --output-dir outputs/ci_hard_module_end_to_end
       - run: python scripts/validate_hard_partition_feedback.py --functions examples/three_function/functions.csv --pairs examples/three_function/hard_partition_feedback_validation.csv --kappa 1.0 --output-dir outputs/ci_hard_partition_feedback
       - run: python scripts/predict_hard_module_partition.py --functions examples/three_function/functions.csv --extra-module-cost 1.0 --output-dir outputs/ci_hard_modules
+      - run: python scripts/migration_phenology_phase_sweep.py --climate-velocities 0.02,0.04 --partner-spatial-shares 0,0.5,1 --max-rate 0.8 --grid-points 5 --steps 60 --burn-in 10 --output outputs/ci_migration_phenology_phase.csv
+      - run: python scripts/migration_phenology_stochastic_sweep.py --samples 2 --replicates 2 --strategy-points 3 --max-rate 0.6 --steps 40 --burn-in 10 --output outputs/ci_migration_phenology_stochastic.csv
+      - run: python scripts/migration_phenology_coevolution_sweep.py --interaction-strengths 0,0.3 --cost-biases 0,0.08 --steps 60 --burn-in 10 --mutation-step 0.2 --max-rate 0.8 --max-cycles 20 --output outputs/ci_migration_phenology_coevolution.csv
+      - run: python scripts/migration_phenology_population_barrier_sweep.py --interaction-strengths 0,0.3 --cost-biases 0,0.08 --climate-velocities 0.04 --steps 60 --burn-in 10 --mutation-step 0.2 --max-rate 0.8 --max-cycles 20 --replicates 4 --initial-population 30 --carrying-capacity 60 --density-coefficient 0.12 --extinction-threshold 1 --output outputs/ci_migration_phenology_population_barriers.csv
+      - run: python scripts/migration_phenology_population_stress_sweep.py --interaction-strengths 0.3 --cost-biases 0.08 --climate-velocities 0.04 --baseline-growths 0.04,0.12 --carrying-capacities 30,100 --steps 50 --burn-in 10 --mutation-step 0.2 --max-rate 0.8 --max-cycles 20 --replicates 2 --output outputs/ci_migration_phenology_population_stress.csv
+      - run: python scripts/migration_phenology_finite_occupancy.py --population-sizes 10,30 --selection-strengths 2,5 --partner-spatial-shares 0,1 --steps 50 --burn-in 10 --max-rate 0.8 --grid-points 5 --output outputs/ci_migration_phenology_finite_occupancy.csv
+      - run: python scripts/migration_phenology_drift_escape.py --population-sizes 10,30 --selection-strengths 5 --interaction-strength 0.3 --cost-bias 0.08 --base-cost 0.08 --steps 50 --burn-in 10 --max-rate 0.8 --grid-points 5 --mutation-events 200 --evolutionary-burn-in 20 --replicates 2 --output outputs/ci_migration_phenology_drift_escape.csv
+      - run: python scripts/migration_phenology_moving_landscape.py --climate-velocities 0.02,0.06 --phenology-limits 0,2 --patches 21 --steps 50 --burn-in 10 --max-migration-rate 0.8 --max-phenology-rate 0.8 --migration-points 3 --phenology-points 3 --output outputs/ci_migration_phenology_moving_landscape.csv
+      - run: python scripts/migration_phenology_2d_corridor.py --climate-velocities 0.02 --phenology-limits 0,2 --gap-widths 1,11 --width 21 --height 11 --barrier-x-offset 3 --steps 40 --burn-in 10 --max-migration-rate 0.6 --max-phenology-rate 0.6 --migration-points 3 --phenology-points 3 --output outputs/ci_migration_phenology_2d_corridor.csv
+      - run: python scripts/migration_phenology_2d_gate_audit.py --interaction-strength 1.0 --climate-velocity 0.06 --phenology-limit 4 --width 31 --height 15 --first-wall-offset 3 --second-wall-offset 7 --detour-offset 5 --gap-width 1 --migration-cost 0.10 --phenology-cost 0.02 --baseline-growth 0.35 --initial-total-abundance 400 --local-carrying-capacity 80 --density-coefficient 0.35 --steps 100 --burn-in 20 --resident-migration 0.2 --resident-phenology 0 --neighbor-migration 0.2 --neighbor-phenology 0.2
+      - run: python scripts/migration_phenology_2d_anisotropy.py --y-weight-ratios 1,0.25 --climate-velocities 0.05 --phenology-limits 0,4 --width 15 --height 9 --first-wall-offset 2 --second-wall-offset 5 --detour-offset 3 --gap-width 1 --initial-total-abundance 120 --local-carrying-capacity 40 --steps 40 --burn-in 10 --migration-points 3 --phenology-points 3 --output outputs/ci_payoff_b_2d_anisotropy.csv
+      - run: python scripts/parameterize_migration_phenology_tracking.py --variance-x 0.08 --variance-y 0.02 --patch-spacing 0.5 --spatial-gradient 0.2 --wave-speed 0.3 --phenology-correction-fraction 0.25 --phenology-scale 0.1 --max-abs-phenology-shift 20 --output outputs/ci_payoff_b_empirical_tracking_parameterization.json
+      - run: python scripts/parameterize_directional_movement_kernel.py --mean-x 0.2 --mean-y 0 --second-moment-x 0.5 --second-moment-y 0.1 --patch-spacing 1 --output outputs/ci_payoff_b_directional_movement_kernel.json
+      - run: |
+          cat > outputs/ci_interval_tracking.csv <<'EOF'
+          animal_id,timestamp,utm_x,utm_y,days_from_peak
+          A,2020-04-01T00:00:00,0,0,8
+          A,2020-04-01T01:00:00,1,0,4
+          A,2020-04-01T02:00:00,0,0,2
+          A,2020-04-01T03:00:00,1,0,1
+          A,2020-04-01T04:00:00,0,0,0.5
+          EOF
+          python scripts/audit_interval_tracking_calibration.py outputs/ci_interval_tracking.csv --target-interval-hours 1 --patch-spacing 2 --output outputs/ci_interval_tracking_audit.json
+      - run: python scripts/parameterize_migration_phenology_fitness.py --baseline-growth 0.4 --abiotic-growth 0.25 --abiotic-mismatch 0.5 --interaction-growth 0.336 --interaction-mismatch 0.4 --migration-growth 0.364 --migration-rate 0.6 --phenology-growth 0.3755 --phenology-rate 0.7 --joint-growth 0.3645 --joint-migration-rate 0.4 --joint-phenology-rate 0.5 --output outputs/ci_payoff_b_tracking_fitness_parameterization.json
+      - run: python scripts/audit_interval_tracking_calibration.py examples/tracking/fixed_interval_calibration.csv --target-interval-hours 1 --patch-spacing 2 --symmetry-tolerance 0.05 --timing-axis-isolated --spatial-gradient 0.2 --wave-speed 0.3 --phenology-scale 0.1 --max-abs-phenology-shift 20 --output outputs/ci_payoff_b_interval_controls.json
+      - run: python scripts/predict_empirical_tracking_landscape.py --tracking-controls-json outputs/ci_payoff_b_interval_controls.json --fitness-json outputs/ci_payoff_b_tracking_fitness_parameterization.json --prediction-wave-speed 0.5 --width 15 --height 9 --steps 40 --burn-in 10 --output outputs/ci_payoff_b_empirical_landscape_projection.json
+      - run: python scripts/validate_interval_tracking_controls.py examples/tracking/fixed_interval_validation.csv --tracking-controls-json outputs/ci_payoff_b_interval_controls.json --timing-axis-isolated --output outputs/ci_payoff_b_held_out_tracking_validation.json
+      - run: python scripts/evaluate_tracking_validation_gate.py --validation-json outputs/ci_payoff_b_held_out_tracking_validation.json --max-movement-moment-rmse 0.01 --min-held-out-intervals 4 --require-phase-validation --max-abs-phase-log-error 0.01 --min-phase-intervals 4 --fail-on-gate-failure --output outputs/ci_payoff_b_tracking_validation_gate.json
+      - run: python scripts/predict_empirical_tracking_landscape.py --tracking-controls-json outputs/ci_payoff_b_interval_controls.json --fitness-json outputs/ci_payoff_b_tracking_fitness_parameterization.json --validation-gate-json outputs/ci_payoff_b_tracking_validation_gate.json --prediction-wave-speed 0.5 --width 15 --height 9 --steps 40 --burn-in 10 --output outputs/ci_payoff_b_validated_empirical_landscape_projection.json
+      - run: python scripts/validate_empirical_tracking_outcome.py --prediction-json outputs/ci_payoff_b_validated_empirical_landscape_projection.json --observed-outcome-json examples/tracking/held_out_outcome.json --max-abs-final-abundance-relative-error 0.000001 --max-abs-low-density-growth-error 0.000001 --require-persistence-match --fail-on-gate-failure --output outputs/ci_payoff_b_ecological_outcome_validation.json
+      - run: python scripts/cross_validate_interval_tracking.py examples/tracking/grouped_cross_validation.csv --split-unit animal --holdout-fraction 0.5 --split-seed ci --target-interval-hours 1 --patch-spacing 2 --symmetry-tolerance 0.05 --timing-axis-isolated --spatial-gradient 0.2 --wave-speed 0.3 --phenology-scale 0.1 --max-abs-phenology-shift 20 --output outputs/ci_payoff_b_grouped_tracking_cross_validation.json
+      - run: python scripts/audit_interval_tracking_calibration.py examples/tracking/three_hour_latent_substeps.csv --target-interval-hours 3 --latent-substeps 3 --patch-spacing 1 --symmetry-tolerance 0.05 --timing-axis-isolated --spatial-gradient 0.2 --wave-displacement-per-observation-interval 0.9 --phenology-scale 0.1 --max-abs-phenology-shift 20 --output outputs/ci_payoff_b_three_hour_latent_controls.json
+      - run: python scripts/audit_mule_deer_phase_summary.py
+      - run: python scripts/audit_aikens_2022_phase_controller.py
+      - run: python scripts/evaluate_registered_phase_retention.py --registration-json examples/tracking/prospective_A_phase_registration.json --observation-json examples/tracking/prospective_A_phase_observation.json --fail-on-gate-failure --output outputs/ci_payoff_b_registered_phase_A.json
+      - run: python scripts/evaluate_registered_actuators.py --registration-json examples/tracking/prospective_A_actuator_registration.json --observation-json examples/tracking/prospective_A_actuator_observation.json --fail-on-gate-failure --output outputs/ci_payoff_b_registered_actuator_A.json
+      - run: python scripts/evaluate_registered_phase_retention.py --registration-json examples/tracking/prospective_W_phase_registration.json --observation-json examples/tracking/prospective_W_phase_observation.json --fail-on-gate-failure --output outputs/ci_payoff_b_registered_phase_W.json
+      - run: python scripts/evaluate_registered_phase_retention.py --registration-json data/wigeon_phase_retention_registration_20260921.json --observation-json data/wigeon_phase_retention_observation_20260922.json --fail-on-gate-failure --output outputs/ci_payoff_b_wigeon_source_backed_phase_gate.json
+      - run: python scripts/evaluate_registered_phase_retention.py --registration-json data/wigeon_strong_contraction_registration_20260921.json --observation-json data/wigeon_phase_retention_observation_20260922.json --output outputs/ci_payoff_b_wigeon_strong_contraction_gate.json
+      - run: python scripts/evaluate_registered_actuators.py --registration-json data/wigeon_stopover_actuator_registration_20260921.json --observation-json data/wigeon_stopover_actuator_observation_20260922.json --output outputs/ci_payoff_b_wigeon_source_backed_stopover_gate.json
+      - run: python scripts/assemble_wigeon_gate_bundle.py --primary-phase-json outputs/ci_payoff_b_wigeon_source_backed_phase_gate.json --strong-phase-json outputs/ci_payoff_b_wigeon_strong_contraction_gate.json --stopover-actuator-json outputs/ci_payoff_b_wigeon_source_backed_stopover_gate.json --secondary-diagnostics-json data/wigeon_secondary_actuator_diagnostics_20260922.json --output outputs/ci_payoff_b_wigeon_gate_bundle.json
+      - run: python scripts/evaluate_registered_actuators.py --registration-json examples/tracking/prospective_W_actuator_registration.json --observation-json examples/tracking/prospective_W_actuator_observation.json --output outputs/ci_payoff_b_registered_actuator_W.json
+      - run: python scripts/synthesize_cross_system_phase.py examples/tracking/cross_system_phase_manifest.json --output outputs/ci_payoff_b_cross_system_phase_synthesis.json
+      - run: python scripts/evaluate_evidence_inclusion.py examples/tracking/taxon_candidate_new_lambda.json --canonical-phase-coordinate-id signed_resource_phase_error --canonical-segment-scale-id standardized_tracking_segment_v1 --existing-test-ids-json examples/tracking/existing_lambda_test_ids.json --fail-on-exclusion --output outputs/ci_payoff_b_evidence_inclusion_pass.json
+      - run: python scripts/evaluate_evidence_inclusion.py data/aikens2022_actuator_evidence_inclusion_20260921.json --canonical-phase-coordinate-id signed_resource_phase_error --canonical-segment-scale-id standardized_tracking_segment_v1 --existing-test-ids-json examples/tracking/existing_lambda_test_ids.json --fail-on-exclusion --output outputs/ci_payoff_b_aikens_actuator_inclusion_pass.json
+      - run: python scripts/evaluate_evidence_inclusion.py data/aikens2022_lambda_evidence_inclusion_20260921.json --canonical-phase-coordinate-id signed_resource_phase_error --canonical-segment-scale-id standardized_tracking_segment_v1 --existing-test-ids-json examples/tracking/existing_lambda_test_ids.json --fail-on-exclusion --output outputs/ci_payoff_b_aikens_within_system_lambda_inclusion_pass.json
+      - run: python scripts/evaluate_evidence_inclusion.py examples/tracking/taxon_candidate_mechanical.json --canonical-phase-coordinate-id signed_resource_phase_error --canonical-segment-scale-id standardized_tracking_segment_v1 --existing-test-ids-json examples/tracking/existing_lambda_test_ids.json --output outputs/ci_payoff_b_evidence_inclusion_fail.json
+      - run: |
+          cat > outputs/ci_mule_deer_summary.csv <<'EOF'
+          animal_id,year,migration_distance,movement_rate,start_days_from_peak,end_days_from_peak
+          A,2020,200,4,-20,5
+          B,2020,220,5,10,6
+          EOF
+          python scripts/inspect_mule_deer_source_csv.py outputs/ci_mule_deer_summary.csv --output outputs/ci_mule_deer_source_ingest_audit.json
+      - run: python scripts/migration_phenology_2d_bypass_capacity.py --phenology-limits 0,2,4 --phenology-rates 0,0.16666666666666666,0.3333333333333333 --width 31 --height 15 --barrier-x-offset 3 --spatial-gradient 0.20 --baseline-growth 0.30 --phenology-cost 0.03 --steps 100
+      - run: python scripts/migration_phenology_2d_partner_asymmetry.py --cost-biases=-0.08,0.08 --interaction-strengths 0,1 --width 15 --height 9 --first-wall-offset 2 --second-wall-offset 5 --detour-offset 3 --gap-width 1 --climate-velocity 0.04 --phenology-limit 3 --steps 40 --burn-in 10 --mutation-step 0.2 --max-rate 0.6 --max-cycles 20 --output outputs/ci_migration_phenology_2d_partner_asymmetry.csv
+      - run: python scripts/migration_phenology_2d_zigzag.py --climate-velocities 0.03 --phenology-limits 0,2 --gap-widths 1 --width 21 --height 11 --first-wall-offset 2 --second-wall-offset 5 --detour-offset 3 --steps 40 --burn-in 10 --max-migration-rate 0.6 --max-phenology-rate 0.6 --migration-points 3 --phenology-points 3 --output outputs/ci_migration_phenology_2d_zigzag.csv
+      - run: python scripts/migration_phenology_2d_coevolution.py --interaction-strengths 0,0.5 --climate-velocities 0.03 --phenology-limits 2 --width 15 --height 9 --first-wall-offset 2 --second-wall-offset 4 --detour-offset 2 --gap-width 1 --steps 40 --burn-in 10 --mutation-step 0.3 --max-migration-rate 0.6 --max-phenology-rate 0.6 --max-cycles 12 --output outputs/ci_migration_phenology_2d_coevolution.csv
+      - run: python scripts/migration_phenology_landscape_coevolution.py --interaction-strengths 0,0.5 --cost-biases 0.08 --climate-velocities 0.03 --phenology-limits 2 --patches 21 --steps 50 --burn-in 10 --mutation-step 0.2 --max-migration-rate 0.8 --max-phenology-rate 0.8 --max-cycles 20 --output outputs/ci_migration_phenology_landscape_coevolution.csv
+      - run: python scripts/migration_phenology_landscape_gate_audit.py --interaction-strength 0.5 --migration-cost 0.10 --phenology-cost 0.02 --climate-velocity 0.05 --phenology-limit 4 --patches 31 --steps 120 --burn-in 30 --resident-migration 0.2 --resident-phenology 0 --mutation-step 0.2
+      - run: python scripts/migration_phenology_landscape_frontier.py --climate-velocities 0.02,0.04 --phenology-limits 0,2 --patches 21 --steps 50 --burn-in 10 --max-migration-rate 0.8 --max-phenology-rate 0.8 --migration-points 3 --phenology-points 3 --output outputs/ci_landscape_frontier_grid.csv --frontier-output outputs/ci_landscape_frontier_summary.csv
+      - run: python scripts/closed_loop_tracking_phase_sweep.py --residual-forcings 0.05,0.2 --movement-feedback-gains 0,0.5,1,1.5 --phenology-rates 0,0.5,1 --mismatch-strength 1 --movement-cost 1 --phenology-cost 1 --steps 80 --burn-in 20 --output outputs/ci_closed_loop_tracking_phase.csv --optima-output outputs/ci_closed_loop_tracking_optima.csv
+      - run: python scripts/movement_feedback_landscape_sweep.py --climate-velocities 0.03 --controller-gains 0,0.25,0.5 --phenology-rates 0,0.5 --baseline-migration-rate 0.1 --max-migration-rate 1.0 --width 15 --height 9 --steps 40 --burn-in 10 --output outputs/ci_movement_feedback_landscape.csv

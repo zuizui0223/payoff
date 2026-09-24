@@ -1,0 +1,56 @@
+{
+  "system_name": "Eurasian wigeon",
+  "taxon": "Mareca penelope",
+  "source": {
+    "payoff_pr": 144,
+    "branch": "empirical/movement-phenology-macro-20260918",
+    "head_sha": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+    "workflow_run": 35689856130,
+    "artifact_id": 10678143392,
+    "direct_receipt_sha256": "3cd182079dc24e3f7cc1342e5db371d5d3c787b91e75f4d7abf4b36116a68772",
+    "correction_amendment": "data/wigeon_tgs_source_window_revalidation_20260922.json"
+  },
+  "W3_travel_speed_diagnostic": {
+    "status": "NOT_SUPPORTED",
+    "role": "secondary actuator-decomposition diagnostic, not promoted to the formal W2 actuator gate",
+    "log_speed_gain_per_phase_day": 0.0027573744846977923,
+    "cluster_se": 0.0033451590730534287,
+    "p_value": 0.41699858388761735,
+    "interpretation": "measured between-staging travel speed remains unsupported after the source-faithful Jan-Jul TGS reconstruction"
+  },
+  "W4_distance_moderation_diagnostic": {
+    "status": "NOT_SUPPORTED",
+    "beta": -0.06315608322821453,
+    "se": 0.0349973353955935,
+    "p_value": 0.08230417519325887,
+    "route_progress_endpoint_distance_p": 0.2523827833446669,
+    "interpretation": "distance moderation remains unsupported at p<=0.05 after the source-faithful Jan-Jul TGS reconstruction"
+  },
+  "W2_stopover_source_interpretation": {
+    "source_status": "SUPPORTED",
+    "role": "source-level interpretation kept separate from the literal prospective sign gate because W2 preregistered no fixed p-value threshold",
+    "directional_sign_observed": true,
+    "observed_effect": -0.06286262115570287,
+    "cluster_se": 0.027738561977373986,
+    "p_value": 0.031661798202295054,
+    "fixed_p_value_threshold_preregistered": false,
+    "secondary_gain_band": "0.3 < g_S < 0.8",
+    "observed_gain": 0.06286262115570287,
+    "secondary_gain_band_passed": false,
+    "interpretation": "source-faithful Jan-Jul reconstruction supports a negative stopover response; the preregistered secondary magnitude band fails"
+  },
+  "W2_ERA5_replication_diagnostic": {
+    "status": "NOT_SUPPORTED",
+    "role": "independent environmental-phase reconstruction robustness diagnostic; does not rewrite the registered POWER W2 gate",
+    "source": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json",
+    "observed_effect": -0.02418153728541716,
+    "cluster_se": 0.02378517424333495,
+    "p_value": 0.31039716561251024,
+    "interpretation": "negative point direction persists but the stopover association is not supported under ERA5; POWER W2 is therefore not reconstruction-robust"
+  },
+  "cross_reconstruction_actuator_conclusion": {
+    "power_W2_source_status": "SUPPORTED",
+    "era5_replication_status": "NOT_SUPPORTED",
+    "robust_stopover_mechanism_established": false
+  }
+}

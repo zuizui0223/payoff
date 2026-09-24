@@ -1,0 +1,45 @@
+{
+  "frozen_date": "2026-09-21",
+  "status": "preflight_only_midpoint_proxy_not_final_request",
+  "source_artifact": {
+    "workflow_run": 35558837950,
+    "artifact_id": 10621500814,
+    "artifact_name": "movement-phenology-industrial-mule-deer",
+    "sha256": "4e7071281487c29da107f135f9c388edd4eef836eecce1ba7401878038bdce10",
+    "source_head": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "source_table": "stage3_industrial_mule_deer_steps.csv"
+  },
+  "proxy_input": {
+    "points": 64286,
+    "coordinate_fields": [
+      "mid_x",
+      "mid_y"
+    ],
+    "source_crs": "EPSG:32613",
+    "warning": "step midpoints are not raw GPS locations and must not be submitted as the final environmental extraction geometry"
+  },
+  "modis_250m_preflight": {
+    "unique_cells": 11414,
+    "unique_cell_years": 20327,
+    "unique_cells_by_year": {
+      "2005": 1925,
+      "2006": 1554,
+      "2008": 1422,
+      "2009": 1782,
+      "2010": 1390,
+      "2015": 3378,
+      "2016": 3430,
+      "2017": 3030,
+      "2018": 2416
+    },
+    "unique_cells_by_development_class": {
+      "small": 9071,
+      "large": 2726
+    },
+    "operational_chunk_size_cells": 1000,
+    "estimated_year_scoped_tasks": 25
+  },
+  "finalization_blocker": "rerun source workflow with stage3_industrial_mule_deer_gps.csv containing all raw 64,539 GPS points, then regenerate exact MODIS cell/year manifest",
+  "lambda_outcome_opened": false,
+  "claim_boundary": "operational request-size estimate only; not an environmental reconstruction result and not a final AppEEARS task manifest"
+}

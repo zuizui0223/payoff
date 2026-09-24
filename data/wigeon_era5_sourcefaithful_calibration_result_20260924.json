@@ -1,0 +1,106 @@
+{
+  "result_id": "wigeon_era5_sourcefaithful_phase_error_calibration_20260924",
+  "frozen_date": "2026-09-24",
+  "status": "COMPLETE",
+  "workflow_run": 35941774903,
+  "source_head": "29851eff369aa8bd06aafa797a4d8b8a854b5ce1",
+  "artifact_id": 10785655358,
+  "artifact_name": "payoff-b-wigeon-era5-sourcefaithful-calibration",
+  "artifact_zip_sha256": "f65dac21dd23cdc38c84b2165daec06c5290688e90992eb824496cca82cf409f",
+  "registration": "data/wigeon_phase_error_era5_sourcefaithful_registration_20260924.json",
+  "old_era5land_registered_calibration_status": "FAIL_COVERAGE_RETAINED",
+  "coverage": {
+    "paired_events": 256,
+    "frozen_events": 256,
+    "paired_fraction": 1.0,
+    "complete_transition_pairs": 224,
+    "coverage_gate_passed": true,
+    "published_phase_validation_passed": true,
+    "power_refit_identity_passed": true,
+    "era5_tgs_at_or_after_doy_300": 0
+  },
+  "published_phase_validation": {
+    "era5_median_days": 23.95953125,
+    "era5_q1_days": 15.15844618055555,
+    "era5_q3_days": 38.87930266203705,
+    "published_median_days": 22.5,
+    "published_q1_days": 13.0,
+    "published_q3_days": 35.3
+  },
+  "replicate_disagreement": {
+    "era5_minus_power_phase_mean_days": 3.41796875,
+    "median_days": 1.0,
+    "sample_sd_days": 7.085549321765848,
+    "q025_days": -14.5,
+    "q25_days": 0.0,
+    "q75_days": 8.0,
+    "q975_days": 19.0,
+    "equal_independent_replicate_sensitivity_error_sd_days": 5.010239973852373,
+    "conservative_full_disagreement_scale_days": 7.085549321765848,
+    "consecutive_discrepancy_correlation": 0.3666144716835741,
+    "consecutive_discrepancy_correlation_p": 1.5639892704036582e-8
+  },
+  "controller_comparison": {
+    "power": {
+      "lambda_hat": 0.7497680211367307,
+      "cluster_se": 0.04990566712278232,
+      "naive_p_vs_one": 5.328241982728047e-7,
+      "stopover_slope": -0.06286262115570275,
+      "stopover_cluster_p": 0.03166179820229487,
+      "travel_speed_slope": 0.002757374484697971,
+      "travel_speed_cluster_p": 0.41699858388758854
+    },
+    "era5": {
+      "lambda_hat": 0.8113122876847199,
+      "cluster_se": 0.044776882831975916,
+      "naive_p_vs_one": 2.5093871829659954e-5,
+      "stopover_slope": -0.02418153728541716,
+      "stopover_cluster_p": 0.31039716561251024,
+      "travel_speed_slope": 0.004076336573011247,
+      "travel_speed_cluster_p": 0.24779343279794633
+    },
+    "era5_minus_power_lambda_hat": 0.06154426654798917,
+    "interpretation": "phase-retention contraction is reproduced across environmental reconstructions, while stopover support is reconstruction-sensitive"
+  },
+  "true_lambda_one_sensitivity": [
+    {
+      "name": "equal_independent_replicates_rho0",
+      "predictor_error_sd_days": 5.010239973852373,
+      "error_correlation": 0.0,
+      "expected_naive_lambda_under_true_one": 0.8826827962656649,
+      "lower_tail_probability_at_observed_lambda": 0.0098990100989901,
+      "eiv_corrected_observed_lambda": 0.8494195472130509
+    },
+    {
+      "name": "equal_replicates_discrepancy_correlation_proxy",
+      "predictor_error_sd_days": 5.010239973852373,
+      "error_correlation": 0.3666144716835741,
+      "expected_naive_lambda_under_true_one": 0.9256929809321225,
+      "lower_tail_probability_at_observed_lambda": 0.0004999500049995,
+      "eiv_corrected_observed_lambda": 0.8006928870261534
+    },
+    {
+      "name": "conservative_full_disagreement_rho0",
+      "predictor_error_sd_days": 7.085549321765848,
+      "error_correlation": 0.0,
+      "expected_naive_lambda_under_true_one": 0.7653655925313295,
+      "lower_tail_probability_at_observed_lambda": 0.40085991400859916,
+      "eiv_corrected_observed_lambda": 0.9796207569992632
+    }
+  ],
+  "interpretation": {
+    "source_faithful_era5_replication_complete": true,
+    "phase_contraction_replicates_across_environmental_surfaces": true,
+    "stopover_actuator_replication": "NOT_SUPPORTED_IN_ERA5_RECONSTRUCTION",
+    "travel_speed_actuator_replication": "NOT_SUPPORTED",
+    "gold_standard_measurement_error_identified": false,
+    "Aikens_lambda_outcome_opened": false
+  },
+  "claim_boundary": [
+    "The old registered ERA5-Land calibration remains FAIL and is not retroactively repaired.",
+    "The ERA5 hourly calibration is a new independently frozen source-faithful follow-up lane.",
+    "POWER-versus-ERA5 disagreement is replicate disagreement, not a gold-standard measurement-error distribution.",
+    "The complete calibration licenses source-backed sensitivity analyses but not one uniquely identified latent biological lambda.",
+    "The POWER stopover association is not robust to replacing POWER phase with the source-faithful ERA5 replicate."
+  ]
+}

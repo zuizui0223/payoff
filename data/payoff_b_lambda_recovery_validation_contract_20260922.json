@@ -1,0 +1,51 @@
+{
+  "contract_id": "payoff_b_lambda_measurement_error_validation_v1",
+  "frozen_date": "2026-09-22",
+  "freeze_state": "before_Aikens_lambda_outcome",
+  "purpose": "quantify regression dilution and build a true-lambda=1 observation-error null before interpreting cross-system phase contraction",
+  "ecological_bridge": {
+    "latent_recurrence": "E_next_true = a + lambda_true * E_current_true + process_innovation",
+    "tracking_identity": "lambda_true = exp[-(migration_rate + phenology_rate) * interval_scale]"
+  },
+  "observation_model": {
+    "predictor": "E_current_obs = E_current_true + error_current",
+    "outcome": "E_next_obs = E_next_true + error_next",
+    "error_moments": [
+      "predictor_error_sd",
+      "outcome_error_sd",
+      "corr(error_current,error_next)"
+    ],
+    "large_sample_naive_expectation": "(lambda_true * Var(E_current_true) + Cov(error_current,error_next)) / (Var(E_current_true) + Var(error_current))"
+  },
+  "reference_grid": {
+    "role": "implementation benchmark only; not a taxon calibration",
+    "latent_phase_sd_days": 10,
+    "n_pairs": 200,
+    "true_lambda": [0.1, 0.5, 0.86, 1.0],
+    "equal_predictor_outcome_error_sd_days": [0, 3, 6, 10],
+    "error_correlation": [0.0, 0.5, 1.0],
+    "process_noise_sd_days": 0
+  },
+  "confirmatory_rules": {
+    "taxon_specific_error_sd_requires_source_backed_calibration": true,
+    "taxon_specific_predictor_phase_variance_requires_empirical_or_registered_source": true,
+    "error_correlation_must_be_declared_before_observed_lambda_is_compared_to_null": true,
+    "no_error_sd_tuning_to_rescue_observed_lambda": true,
+    "lambda_1_null_is_evaluated_on_observed_estimator_scale": true,
+    "Aikens_primary_registered_naive_contrast_is_not_replaced": true,
+    "measurement_error_validation_is_parallel_sensitivity_and_claim_audit": true
+  },
+  "claim_boundary": {
+    "licensed_now": [
+      "classical predictor measurement error can attenuate naive lambda estimates toward zero",
+      "correlated consecutive phase errors can weaken or reverse the amount of attenuation",
+      "a true lambda=1 observation-error null must be compared with observed lambda before treating lambda_hat<1 as standalone evidence of correction"
+    ],
+    "not_licensed_now": [
+      "any taxon-specific corrected lambda",
+      "SIMEX correction without source-backed error calibration",
+      "a conclusion that the existing three-taxon contraction pattern is entirely measurement error",
+      "a conclusion that measurement error is negligible"
+    ]
+  }
+}

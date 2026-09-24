@@ -1,0 +1,130 @@
+{
+  "registration_id": "wigeon_phase_error_era5_sourcefaithful_replication_v1",
+  "frozen_date": "2026-09-24",
+  "freeze_state": {
+    "Aikens_lambda_outcome_opened": false,
+    "wigeon_source_faithful_naive_lambda_known": true,
+    "prior_ERA5Land_calibration_status": "FAIL_COVERAGE",
+    "prior_SIMEX_sensitivity_result_known": true,
+    "ERA5_sourcefaithful_calibration_result_opened": false
+  },
+  "purpose": "Independent source-faithful phase-reconstruction calibration using ERA5 hourly 2 m temperature, matching the environmental dataset family described by van Toor et al. (2021), without altering the failed registered ERA5-Land calibration.",
+  "source_wigeon_artifact": {
+    "source_pr": 144,
+    "source_branch": "empirical/movement-phenology-macro-20260918",
+    "source_head": "906aa634ff260ee2f8dfe8a42bcdd60cc7f0f907",
+    "workflow_run": 35689856130,
+    "artifact_id": 10678143392,
+    "artifact_name": "movement-phenology-stage3-wigeon",
+    "artifact_zip_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+    "required_files": {
+      "staging_events": "stage3_wigeon_tgs_events.csv",
+      "controller_transitions": "stage3_wigeon_controller_transitions.csv"
+    }
+  },
+  "replicate_environment_source": {
+    "provider": "Open-Meteo Historical Weather API",
+    "dataset": "ERA5",
+    "api_endpoint": "https://archive-api.open-meteo.com/v1/archive",
+    "model_parameter": "era5",
+    "documented_resolution": "0.25 degree",
+    "temperature_variable": "temperature_2m",
+    "temporal_resolution": "hourly",
+    "daily_aggregation": "arithmetic mean of exactly 24 finite GMT hourly values computed inside PAYOFF-B",
+    "timezone": "GMT",
+    "cell_selection": "nearest",
+    "elevation": "nan",
+    "downscaling": "disabled",
+    "api_key_required": false,
+    "role": "independent ERA5 replicate reconstruction closer to the environmental dataset family described in the original paper; not claimed byte-identical to the authors' archived CDS extraction"
+  },
+  "published_environment_contract": {
+    "article_dataset_family": "ECMWF ERA5 hourly climate reanalysis",
+    "temperature_height_m": 2,
+    "hourly_to_daily_rule": "daily arithmetic mean",
+    "TGS_threshold_c": 5,
+    "TGS_window": "January 1 through July 31",
+    "published_code_window": "days <- days[month(days)<8]",
+    "TGS_rule": "tgs_doy = day of minimum cumulative sum(daily_mean_temperature_c - 5)"
+  },
+  "spatial_temporal_matching": {
+    "query_coordinate": "original reconstructed staging-event latitude and longitude",
+    "query_year": "staging-event calendar year",
+    "provider_grid_selection": "nearest ERA5 cell",
+    "record_provider_grid_coordinate": true,
+    "interpolation": "none beyond provider nearest-cell selection",
+    "event_identity": ["individual_id", "year", "segment"]
+  },
+  "coverage_gate": {
+    "minimum_events_with_both_reconstructions": 200,
+    "minimum_fraction_of_frozen_256_events": 0.9,
+    "minimum_complete_hourly_values_per_day": 24,
+    "minimum_complete_daily_means_per_event": 210,
+    "require_no_ERA5_TGS_at_or_after_doy_300": true,
+    "published_phase_validation": {
+      "reference_event_count": 208,
+      "reference_median_days": 22.5,
+      "reference_q1_days": 13,
+      "reference_q3_days": 35.3,
+      "minimum_events": 150,
+      "maximum_abs_median_difference_days": 12,
+      "require_IQR_overlap": true
+    }
+  },
+  "primary_disagreement_estimands": {
+    "event_phase_difference": "era5_phase_days - power_phase_days",
+    "event_TGS_difference_equivalent": "power_TGS_doy - era5_TGS_doy",
+    "summaries": ["mean", "median", "sample_sd", "q025", "q25", "q75", "q975"],
+    "equal_independent_replicate_sensitivity_error_sd": "SD(event_phase_difference) / sqrt(2)",
+    "conservative_disagreement_scale": "SD(event_phase_difference)",
+    "warning": "Neither quantity is promoted as the true measurement-error SD without additional assumptions."
+  },
+  "consecutive_error_dependence": {
+    "proxy": "Pearson correlation of ERA5-minus-POWER phase discrepancies at origin and destination events of the frozen 224 transitions",
+    "role": "sensitivity proxy only"
+  },
+  "lambda_reestimation": {
+    "power_model": "phase_change ~ origin_phase + z_progress + z_endpoint + z_progress:z_endpoint + C(year)",
+    "era5_model": "same formula after replacing event TGS with ERA5 replicate TGS",
+    "cluster_unit": "individual_id",
+    "frozen_transitions": 224,
+    "frozen_individuals": 28,
+    "power_refit_identity_gate": {
+      "expected_lambda_hat": 0.7497680211367301,
+      "maximum_absolute_difference": 1e-8
+    }
+  },
+  "true_lambda_one_sensitivity": {
+    "reuse_registered_observation_error_scenarios": true,
+    "null_distribution": {
+      "n_pairs": 224,
+      "replicates": 10000,
+      "seed": 20260924,
+      "true_lambda": 1,
+      "latent_predictor_distribution": "zero-mean Gaussian on FWL-residualized predictor scale",
+      "process_noise_sd": "sample SD of frozen full-224 POWER controller residuals",
+      "measurement_error_distribution": "bivariate Gaussian with scenario-specific equal marginal SD and frozen error correlation",
+      "tail_probability": "P(lambda_hat <= observed source-faithful POWER lambda_hat) with plus-one correction"
+    }
+  },
+  "decision_policy": {
+    "old_ERA5Land_registered_FAIL_remains_FAIL": true,
+    "new_ERA5_lane_is_independent_followup": true,
+    "coverage_threshold_not_relaxed": true,
+    "no_parameter_tuning_after_ERA5_result": true,
+    "Aikens_analysis_unchanged": true
+  },
+  "claim_boundary": {
+    "licensed_if_completed": [
+      "event-level disagreement between source-faithful POWER and ERA5 reconstructions",
+      "same-subset POWER versus ERA5 lambda comparison",
+      "measurement-error sensitivity under frozen replicate-error assumptions"
+    ],
+    "not_licensed": [
+      "calling the old ERA5-Land calibration a pass",
+      "claiming Open-Meteo ERA5 is byte-identical to the original authors' CDS files",
+      "promoting a SIMEX or EIV value as the true latent biological lambda",
+      "changing the Aikens preregistration or opening the Aikens outcome"
+    ]
+  }
+}

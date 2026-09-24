@@ -1,0 +1,113 @@
+{
+  "frozen_date": "2026-09-20",
+  "scope": "closed_loop_movement_phenology_tracking",
+  "exact_results": {
+    "recurrence": "e_(t+1)=(1-q_m-q_h)e_t+r",
+    "total_feedback_gain": "K=q_m+q_h",
+    "stability": "0<K<2",
+    "equilibrium_mismatch": "e*=r/K",
+    "phenology_mapping": "q_h=1-exp(-h)",
+    "fixed_K_allocation": {
+      "movement": "q_m=K*c_h/(c_m+c_h)",
+      "phenology": "q_h=K*c_m/(c_m+c_h)"
+    },
+    "effective_feedback_cost": "c_eff=c_m*c_h/(c_m+c_h)",
+    "unconstrained_total_optimum": "K*=(A*r^2/c_eff)^(1/4)"
+  },
+  "equal_cost_witness": {
+    "costs": {
+      "movement": 1,
+      "phenology": 1,
+      "mismatch_strength": 1
+    },
+    "rows": [
+      {
+        "r": 0.05,
+        "K": 0.265914794847,
+        "q_m": 0.132957397424,
+        "q_h": 0.132957397424,
+        "e_star": 0.188030154654,
+        "stable": true,
+        "phenology_feasible": true
+      },
+      {
+        "r": 0.2,
+        "K": 0.531829589694,
+        "q_m": 0.265914794847,
+        "q_h": 0.265914794847,
+        "e_star": 0.376060309309,
+        "stable": true,
+        "phenology_feasible": true
+      },
+      {
+        "r": 1,
+        "K": 1.189207115,
+        "q_m": 0.594603557501,
+        "q_h": 0.594603557501,
+        "e_star": 0.840896415254,
+        "stable": true,
+        "phenology_feasible": true
+      },
+      {
+        "r": 4,
+        "K": 2.37841423001,
+        "q_m": 1.189207115,
+        "q_h": 1.189207115,
+        "e_star": 1.68179283051,
+        "stable": false,
+        "phenology_feasible": false
+      }
+    ]
+  },
+  "cost_asymmetry_witness": {
+    "movement_expensive": {
+      "costs": {
+        "movement": 4,
+        "phenology": 1
+      },
+      "r_0_2": {
+        "K": 0.472870804502,
+        "q_m": 0.0945741609003,
+        "q_h": 0.378296643601
+      },
+      "r_1": {
+        "K": 1.05737126344,
+        "q_m": 0.211474252688,
+        "q_h": 0.845897010752
+      }
+    },
+    "phenology_expensive": {
+      "costs": {
+        "movement": 1,
+        "phenology": 4
+      },
+      "r_0_2": {
+        "K": 0.472870804502,
+        "q_m": 0.378296643601,
+        "q_h": 0.0945741609003
+      },
+      "r_1": {
+        "K": 1.05737126344,
+        "q_m": 0.845897010752,
+        "q_h": 0.211474252688
+      }
+    }
+  },
+  "provenance": {
+    "workflow_run": 35495157481,
+    "equal_cost": {
+      "artifact_id": 10600532697,
+      "sha256": "a60b5b99da70e80ec5dfd0ccf6cf815d85477edd356396869d4448dc5e489ed5"
+    },
+    "movement_expensive": {
+      "artifact_id": 10599788900,
+      "sha256": "274d69410980560fffbbf036ce951b4577deb88ae3aefc77da68ba937d72563d"
+    },
+    "phenology_expensive": {
+      "artifact_id": 10599359831,
+      "sha256": "df0c97911395753e336a55e789da0174fb80ffd84c750fdcbd3b82bbd9904e0e"
+    }
+  },
+  "retained_interpretation": "local movement and timing feedback share one restoring budget; costs allocate it and excessive gain can destabilize the discrete-time controller",
+  "claim_boundary": "exact local-control theorem and synthetic witness only; no natural controller-gain or climate-tolerance estimate"
+}

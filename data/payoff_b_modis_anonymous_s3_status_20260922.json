@@ -1,0 +1,29 @@
+{
+  "frozen_date": "2026-09-22",
+  "status": "ANONYMOUS_S3_NOT_AVAILABLE",
+  "workflow": {
+    "name": "payoff-b MODIS anonymous S3 smoke",
+    "run_id": 35686454317,
+    "head_sha": "0e43e51066dbac1af9f6fc63ea20ffaa3e7111c4",
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10676503767,
+    "name": "payoff-b-modis-anonymous-s3-smoke",
+    "sha256": "a0ca035a11c07183bd634814245bd925daa6fe12103af49e03d5f8dad22e676c"
+  },
+  "products": {
+    "MOD09Q1.061": {
+      "bucket": "s3://lp-prod-protected/MOD09Q1.061/",
+      "result": "AccessDenied",
+      "reason": "Anonymous users cannot invoke requests against Requester Pays buckets. Please authenticate."
+    },
+    "MOD10A2.061": {
+      "bucket": "s3://lp-prod-protected/MOD10A2.061/",
+      "result": "AccessDenied",
+      "reason": "Anonymous users cannot invoke requests against Requester Pays buckets. Please authenticate."
+    }
+  },
+  "implication": "anonymous S3 cannot replace authenticated AppEEARS/Earthdata access for the frozen Aikens V061 lane",
+  "lambda_outcome_opened": false
+}

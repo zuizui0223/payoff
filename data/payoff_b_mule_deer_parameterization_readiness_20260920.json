@@ -1,0 +1,52 @@
+{
+  "frozen_date": "2026-09-20",
+  "system": "Red Desert long-distance migratory mule deer",
+  "article": {
+    "citation": "Ortega et al. 2023 Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "individuals": 72,
+    "animal_years": 152,
+    "migration_distance_km": [
+      134,
+      293
+    ]
+  },
+  "public_data": {
+    "dryad_doi": "10.5061/dryad.8kprr4xsj",
+    "listed_files": [
+      {
+        "name": "Ortega_et_al_2023_Data.csv",
+        "size_kb": 19.34
+      },
+      {
+        "name": "README.md",
+        "size_kb": 1.97
+      }
+    ],
+    "article_source_data_xlsx_kb": 614.3,
+    "current_ingestion_status": "web individual-file retrieval returns HTTP 403; container direct fallback has no external DNS resolution",
+    "dryad_file_stream_ids": {
+      "Ortega_et_al_2023_Data.csv": 2189257,
+      "README.md": 2189258
+    }
+  },
+  "parameter_status": {
+    "migration_rate": "not identified from published summary; raw projected fixed-interval GPS moments can identify the directional one-step kernel",
+    "anisotropy": "not identified from published summary; raw fixed-interval component second moments identify x/y weights and means identify directional biases",
+    "climate_velocity": "not identified; needs compatible spatial gradient and green-wave speed",
+    "phenology_rate": "not identified; phase compression includes movement/stopover correction and h requires timing-axis isolation on the model decision interval",
+    "phenology_limit": "not identified; starting mismatch support is not response-capacity support",
+    "fitness_terms": "not identified from movement summary"
+  },
+  "retained_status": [
+    "PUBLIC_SYSTEM_IDENTIFIED",
+    "DIRECT_TRACKING_CALIBRATION_PENDING_SOURCE_FILE_INGESTION",
+    "FITNESS_PARAMETERIZATION_NOT_IDENTIFIED"
+  ],
+  "ingestion_tool": "scripts/inspect_mule_deer_source_csv.py",
+  "ingestion_pipeline": [
+    "scripts/inspect_mule_deer_source_csv.py",
+    "scripts/audit_interval_tracking_calibration.py",
+    "scripts/parameterize_directional_movement_kernel.py"
+  ]
+}

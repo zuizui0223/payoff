@@ -1,0 +1,57 @@
+{
+  "contract_id": "wigeon_phase_simex_sensitivity_v1",
+  "frozen_date": "2026-09-23",
+  "freeze_state": {
+    "Aikens_lambda_outcome_opened": false,
+    "source_faithful_wigeon_lambda_known": true,
+    "registered_ERA5Land_calibration_status": "FAIL_COVERAGE",
+    "registered_calibration_result_known": true,
+    "SIMEX_result_opened": false
+  },
+  "source": {
+    "wigeon_artifact_id": 10678143392,
+    "wigeon_artifact_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+    "transition_file": "stage3_wigeon_controller_transitions.csv",
+    "expected_pairs": 224,
+    "expected_individuals": 28,
+    "expected_naive_lambda_hat": 0.7497680211367301,
+    "identity_tolerance": 1e-8
+  },
+  "simulation_design": {
+    "error_unit": "unique staging event keyed by individual_id, year, segment",
+    "shared_event_error": "the same event error is reused when an event is destination of one transition and origin of the next",
+    "within_individual_year_error_process": "stationary Gaussian AR1 across ordered staging events",
+    "simex_zeta": [0.5, 1.0, 1.5, 2.0],
+    "replicates_per_zeta": 1000,
+    "seed": 20260923,
+    "point_estimator": "exact OLS point slope for the frozen wigeon controller design; lambda_hat=1+beta_origin_phase",
+    "extrapolation": "quadratic mean-lambda curve evaluated at zeta=-1"
+  },
+  "scenarios": [
+    {
+      "name": "equal_independent_replicates_rho0",
+      "error_sd_days": 3.842492261917708,
+      "error_correlation": 0.0,
+      "origin": "SD(ERA5Land_phase-POWER_phase)/sqrt(2) from failed registered calibration run4"
+    },
+    {
+      "name": "equal_replicates_discrepancy_correlation_proxy",
+      "error_sd_days": 3.842492261917708,
+      "error_correlation": 0.28808890118612246,
+      "origin": "equal-replicate SD plus observed consecutive discrepancy correlation proxy"
+    },
+    {
+      "name": "conservative_full_disagreement_rho0",
+      "error_sd_days": 5.434104670117694,
+      "error_correlation": 0.0,
+      "origin": "entire POWER-ERA5Land disagreement SD treated as event error"
+    }
+  ],
+  "claim_boundary": [
+    "SIMEX is a sensitivity analysis conditional on error scales from an incomplete registered calibration.",
+    "It does not convert the registered ERA5-Land calibration from FAIL to PASS.",
+    "It does not identify a gold-standard measurement-error distribution.",
+    "A SIMEX-extrapolated lambda is not promoted as the true latent biological lambda.",
+    "No scenario or extrapolation rule may be changed after SIMEX results are opened."
+  ]
+}

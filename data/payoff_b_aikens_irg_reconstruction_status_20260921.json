@@ -1,0 +1,265 @@
+{
+  "frozen_date": "2026-09-21",
+  "status": "fixed_target_v2_ready_authenticated_environmental_extraction_blocked_by_missing_credentials",
+  "study": {
+    "citation": "Aikens et al. 2022 Nature Ecology & Evolution 6:1733-1741",
+    "doi": "10.1038/s41559-022-01887-9",
+    "dryad_doi": "10.5061/dryad.7d7wm37z5"
+  },
+  "movement_source": {
+    "workflow_run": 35558837950,
+    "head_sha": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "artifact_id": 10621500814,
+    "artifact_sha256": "4e7071281487c29da107f135f9c388edd4eef836eecce1ba7401878038bdce10",
+    "gps_points": 64539,
+    "valid_steps": 64286,
+    "animal_years": 253,
+    "animals": 137,
+    "vegetation_fields_present": false
+  },
+  "phase_registration": {
+    "document": "docs/PAYOFF_B_AIKENS_LAMBDA_PERTURBATION_PREREGISTRATION_20260921.md",
+    "machine": "data/aikens2022_lambda_perturbation_registration_20260921.json",
+    "phase_coordinate_id": "signed_days_relative_to_local_peak_IRG",
+    "segment_scale_id": "fixed_24h_spring_migration_interval",
+    "primary_prediction": "lambda_large-development > lambda_small-development",
+    "max_p_value": 0.05,
+    "min_animals_per_group": 10,
+    "min_transitions_per_group": 100
+  },
+  "irg_reconstruction": {
+    "module": "src/irg_reconstruction.py",
+    "cli": "scripts/fit_peak_irg_from_ndvi.py",
+    "required_columns": [
+      "pixel_id",
+      "year",
+      "doy",
+      "ndvi",
+      "snow_free",
+      "quality_good"
+    ],
+    "processing": [
+      "quality screen",
+      "2.5% snow-free winter baseline",
+      "winter floor",
+      "three-observation moving median",
+      "92.5% upper scaling reference",
+      "0-1 annual scaling",
+      "double-logistic fit",
+      "analytic first derivative",
+      "maximum positive derivative day = peak IRG"
+    ]
+  },
+  "product_version_policy": {
+    "study_faithful": "MOD09Q1.006",
+    "study_faithful_label": "study_faithful_v006",
+    "sensitivity": "MOD09Q1.061",
+    "sensitivity_label": "v061_sensitivity_only",
+    "silent_substitution_forbidden": true
+  },
+  "current_blocker": "Authenticated MODIS environmental access remains the only external execution blocker. The pre-environment fixed-target support ceiling passes strongly (large: 48 animals / 1,022 maximum adjacent pairs; small: 89 animals / 4,434 maximum adjacent pairs), so the registered test is not sample-size doomed before environmental filtering. Final estimability depends on valid environmental phase for the frozen targets.",
+  "lambda_outcome_opened": false,
+  "pipeline_validation": {
+    "workflow": "payoff-b IRG reconstruction",
+    "run_id": 35603379065,
+    "head_sha": "ed3a9aec4fd952c932dea9cebcff677ec9084553",
+    "artifact_id": 10640161096,
+    "artifact_sha256": "9659fac9a34cf39102675ab283474d025fcffe71eef2dbca16e5b79402840483",
+    "status": "SUCCESS",
+    "validated_steps": [
+      "IRG unit tests",
+      "synthetic annual NDVI",
+      "double-logistic peak IRG",
+      "GPS environmental join",
+      "fixed 24-hour phase pairs"
+    ],
+    "interpretation": "computational pipeline validation only; empirical environmental source remains pending"
+  },
+  "raw_gps_reexport": {
+    "source_branch": "empirical/movement-phenology-macro-20260918",
+    "source_commit": "0a934adbeaa386edf27fcfaabff9ca7837a2382b",
+    "workflow_run": 35605623469,
+    "artifact_id": 10643405042,
+    "artifact_sha256": "1f0d706dc6a102261009b7099c748dcce40abb2adedf7b88828395a1d392cfa0",
+    "file": "stage3_industrial_mule_deer_gps.csv",
+    "file_sha256": "03426804557a0244be3ed6eb9f461db578d3ce26fa2b28637f8e98bee9f09466",
+    "gps_points": 64539,
+    "animals": 137,
+    "animal_years": 253,
+    "groups": [
+      "small",
+      "large"
+    ],
+    "years": [
+      2005,
+      2006,
+      2008,
+      2009,
+      2010,
+      2015,
+      2016,
+      2017,
+      2018
+    ],
+    "status": "COMPLETE"
+  },
+  "appeears_request_preparation": {
+    "module": "src/appeears_modis_request.py",
+    "build_cli": "scripts/build_aikens_appeears_manifest.py",
+    "coverage_gate_module": "src/appeears_manifest_gate.py",
+    "coverage_gate_cli": "scripts/evaluate_aikens_appeears_manifest.py",
+    "authenticated_client": "src/appeears_client.py",
+    "submit_cli": "scripts/run_appeears_manifest.py",
+    "ci_workflow": ".github/workflows/payoff-b-appeears-manifest.yml",
+    "lane": "v061_sensitivity_only",
+    "layers": [
+      "MOD09Q1.061:sur_refl_b01",
+      "MOD09Q1.061:sur_refl_b02",
+      "MOD09Q1.061:sur_refl_qc_250m",
+      "MOD09Q1.061:sur_refl_state_250m",
+      "MOD10A2.061:Maximum_Snow_Extent",
+      "MOD10A2.061:Eight_Day_Snow_Cover"
+    ],
+    "canonical_source_gate": {
+      "gps_observations": 64539,
+      "years": [
+        2005,
+        2006,
+        2008,
+        2009,
+        2010,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "groups": [
+        "small",
+        "large"
+      ]
+    },
+    "network_default": "dry_run",
+    "credential_storage": "environment_only",
+    "lambda_outcome_opened": false
+  },
+  "appeears_midpoint_preflight": {
+    "receipt": "data/payoff_b_aikens_appeears_preflight_20260921.json",
+    "proxy_points": 64286,
+    "unique_cells": 11414,
+    "unique_cell_years": 20327,
+    "estimated_tasks_at_1000_cells": 25,
+    "final_request_licensed": false,
+    "status": "SUPERSEDED_BY_EXACT_RAW_GPS_MANIFEST"
+  },
+  "phase_contrast_fitting": {
+    "module": "src/phase_retention_contrast_fit.py",
+    "cli": "scripts/fit_aikens_phase_retention_contrast.py",
+    "gate_cli": "scripts/evaluate_phase_retention_contrast.py",
+    "dependency_group": "empirical",
+    "model": "E_next ~ E_current + E_current:large_development + C(animal_year)",
+    "cluster_uncertainty": "animal_id",
+    "support_gate": {
+      "min_animals_per_group": 10,
+      "min_fixed_24h_transitions_per_group": 100
+    },
+    "outputs": [
+      "lambda_small",
+      "lambda_small_se",
+      "lambda_large",
+      "lambda_large_se",
+      "delta_lambda_large",
+      "delta_lambda_se",
+      "p_difference"
+    ],
+    "workflow": ".github/workflows/payoff-b-aikens-phase-contrast.yml",
+    "empirical_lambda_outcome_opened": false
+  },
+  "appeears_exact_manifest": {
+    "receipt": "data/payoff_b_aikens_exact_manifest_status_20260921.json",
+    "gps_observations": 64539,
+    "unique_modis250_cells": 10899,
+    "unique_modis250_cell_years": 19500,
+    "year_scoped_tasks_at_1000_cells": 24,
+    "source_gate": "PASS",
+    "manifest_sha256": "d50e69a20d6e65ec3426a8c938d1dea9d4e2f836c9bf07e02d30c560f5fa8463",
+    "cells_sha256": "3570bc04dfef9da677954246b636a99fa069c4b2e5b0020dd9ac1c4ee9dc8d02",
+    "links_sha256": "ef7445152bf2217a81088e1765cd215dfafb87036366c8f789e6ebe3747cbff1"
+  },
+  "environment_product_policy": {
+    "original_study_product": "MOD09Q1.006",
+    "original_distribution_status": "decommissioned_2023_07_31",
+    "frozen_primary_successor": "MOD09Q1.061",
+    "frozen_primary_lane": "v061_primary_successor_after_v006_decommission",
+    "snow_product": "MOD10A2.061",
+    "byte_faithful_v006_replication_claimed": false
+  },
+  "execution_contract_v2": {
+    "document": "docs/PAYOFF_B_AIKENS_FIXED_TARGET_EXECUTION_AMENDMENT_V2_20260922.md",
+    "machine": "data/aikens2022_phase_reconstruction_execution_contract_v2_20260922.json",
+    "status": "FROZEN_PRE_OUTCOME",
+    "ordering": [
+      "raw GPS observations",
+      "frozen MODIS cell identity",
+      "environment-independent 24h target selection",
+      "target identity frozen",
+      "attach environmental phase",
+      "invalid environmental target remains missing",
+      "adjacent valid targets form phase pairs",
+      "support gate",
+      "registered lambda contrast"
+    ],
+    "environment_can_reselect_gps": false
+  },
+  "live_smoke": {
+    "workflow": "payoff-b Aikens AppEEARS live smoke",
+    "run_id": 35612310294,
+    "status": "SKIPPED_NO_APPEEARS_CREDENTIALS",
+    "network_submission_performed": false,
+    "implication": "credential configuration is the only external execution blocker for the frozen V061 lane"
+  },
+  "latest_pipeline_validation": {
+    "workflow": "payoff-b IRG reconstruction",
+    "run_id": 35686060101,
+    "head_sha": "d038c0a39fc6b34b664538ed56c04aa4e7f267e1",
+    "conclusion": "SUCCESS",
+    "validated": [
+      "V061 primary-successor lane CLI",
+      "auditable unfit pixel-year coverage loss",
+      "IRG reconstruction pipeline",
+      "frozen fixed-target components via unit tests"
+    ]
+  },
+  "anonymous_s3_fallback": {
+    "status": "NOT_AVAILABLE",
+    "receipt": "data/payoff_b_modis_anonymous_s3_status_20260922.json",
+    "workflow_run": 35686454317,
+    "artifact_id": 10676503767,
+    "artifact_sha256": "a0ca035a11c07183bd634814245bd925daa6fe12103af49e03d5f8dad22e676c",
+    "mod09q1_061": "AccessDenied: Requester Pays bucket requires authentication",
+    "mod10a2_061": "AccessDenied: Requester Pays bucket requires authentication",
+    "implication": "authenticated AppEEARS/Earthdata access remains required"
+  },
+  "pre_environment_support_ceiling": {
+    "status": "PASS",
+    "receipt": "data/aikens2022_pre_environment_support_ceiling_20260922.json",
+    "document": "docs/PAYOFF_B_AIKENS_PRE_ENV_SUPPORT_CEILING_20260922.md",
+    "run_id": 35687039708,
+    "artifact_id": 10676913354,
+    "artifact_sha256": "ab88ade2ec53c8f91b1a2099d58ad210ad57ab80d826375938c94bfe8689efa2",
+    "large_development": {
+      "animals_with_possible_pairs": 48,
+      "max_possible_adjacent_pairs": 1022,
+      "threshold_animals": 10,
+      "threshold_pairs": 100,
+      "support_possible": true
+    },
+    "small_development": {
+      "animals_with_possible_pairs": 89,
+      "max_possible_adjacent_pairs": 4434,
+      "threshold_animals": 10,
+      "threshold_pairs": 100,
+      "support_possible": true
+    },
+    "interpretation": "registered support gate is feasible before environmental filtering; final estimability remains unresolved"
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "frozen_date": "2026-09-21",
+  "common_coordinate": {
+    "equation": "e_out = r + lambda * e_in",
+    "cross_system_parameter": "lambda",
+    "local_closed_loop_identity": "lambda = 1 - K",
+    "total_feedback_identity": "K = 1 - lambda",
+    "actuator_decomposition_identified": false
+  },
+  "phase_retention_gate": {
+    "cross_system": true,
+    "requires_predeclared_phase_coordinate": true,
+    "requires_predeclared_segment_scale": true,
+    "pooled_actuator_information": false
+  },
+  "actuator_gate": {
+    "cross_system": false,
+    "system_specific": true,
+    "prospective": true,
+    "examples": [
+      "speed",
+      "stopover",
+      "route_reset",
+      "directional_movement",
+      "timing"
+    ],
+    "failure_invalidates_lambda_gate": false
+  },
+  "four_outcomes": {
+    "lambda_pass_actuator_pass": "common coordinate and local mechanism supported",
+    "lambda_pass_actuator_fail": "common coordinate supported; shared actuator hypothesis rejected for system",
+    "lambda_fail_actuator_pass": "local mechanism supported; cross-system lambda prediction rejected",
+    "lambda_fail_actuator_fail": "neither layer supported"
+  },
+  "taxon_inclusion_rule": [
+    "independent lambda test",
+    "new forcing or life-history regime",
+    "predicted lambda boundary or sign change",
+    "prospective system-specific actuator discrimination"
+  ],
+  "wigeon_current_project_interpretation": {
+    "status": "source_backed_quantitative_receipt_frozen",
+    "receipt": "docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md",
+    "machine_receipt": "data/payoff_b_wigeon_phase_retention_receipt_20260921.json",
+    "evidence_tier": "prospective_third_taxon",
+    "transitions": 224,
+    "individuals": 28,
+    "lambda": 0.85994,
+    "lambda_se": 0.04509,
+    "p_vs_lambda_1": 0.0019,
+    "primary_prediction": "lambda < 1",
+    "primary_outcome": "PASS",
+    "stronger_prediction": "abs(lambda) < 0.75",
+    "stronger_outcome": "FAIL",
+    "stopover_actuator": "NOT_SUPPORTED",
+    "travel_speed_actuator": "NOT_SUPPORTED",
+    "two_gate_class": "LAMBDA_PASS_ACTUATOR_FAIL"
+  },
+  "no_combined_score": true,
+  "cross_system_synthesis": {
+    "evidence_unit": "independent lambda test",
+    "required_fields": [
+      "independent_test_id",
+      "phase_coordinate_id",
+      "segment_scale_id",
+      "forcing_regime"
+    ],
+    "phase_coordinate_ids_must_match": true,
+    "segment_scale_ids_must_match": true,
+    "duplicate_independent_test_ids_rejected": true,
+    "duplicate_phase_receipt_reuse_rejected": true,
+    "outputs": [
+      "independent lambda test count",
+      "lambda pass/fail counts",
+      "lambda values",
+      "lambda descriptive min/median/max",
+      "retention class counts",
+      "forcing regimes",
+      "lambda-pass actuator-fail systems",
+      "lambda-fail actuator-pass systems",
+      "system-specific actuator table"
+    ],
+    "prohibited_outputs": [
+      "pooled actuator pass rate",
+      "cross-system actuator score",
+      "combined lambda-actuator omnibus score"
+    ]
+  },
+  "prospective_registration": {
+    "required_for_confirmatory_evidence": true,
+    "prediction_and_observation_files_separate": true,
+    "phase_registration_fields": [
+      "system_name",
+      "independent_test_id",
+      "forcing_regime",
+      "phase_coordinate_id",
+      "segment_scale_id",
+      "lambda_low",
+      "lambda_high",
+      "min_pairs",
+      "require_retention_class"
+    ],
+    "actuator_registration_contains_observed_effects": false,
+    "exact_identity_match_required": true,
+    "actuator_name_set_must_match_exactly": true,
+    "retrospective_evidence_allowed": true,
+    "retrospective_evidence_counts_as_prospective_support": false
+  },
+  "taxon_inclusion_gate": {
+    "deprecated_name_for": "evidence_inclusion_gate",
+    "raw_data_availability_is_sufficient": false,
+    "new_forcing_regime_alone_is_sufficient": false,
+    "note": "backward-compatible API name; current inference unit is an independent test"
+  },
+  "three_taxon_direct_coordinate": {
+    "receipt": "docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md",
+    "machine_receipt": "data/payoff_b_three_taxon_phase_retention_receipt_20260921.json",
+    "taxa": 3,
+    "descriptive_only": true,
+    "conventional_meta_analysis": false,
+    "universal_lambda_claim": false,
+    "prospective_extension_taxon": "Mareca penelope"
+  },
+  "current_empirical_panel": {
+    "status": "three_taxon_coordinate_established_fourth_taxon_hold",
+    "panel_receipt": "docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md",
+    "panel_machine_receipt": "data/payoff_b_empirical_phase_panel_status_20260921.json",
+    "direct_taxa": [
+      "Odocoileus hemionus",
+      "Branta leucopsis",
+      "Mareca penelope"
+    ],
+    "prospective_extension": "Mareca penelope",
+    "fourth_taxon_status": "HOLD",
+    "fourth_taxon_requires_inclusion_gate": true,
+    "raw_data_availability_alone_is_sufficient": false
+  },
+  "evidence_inclusion_gate": {
+    "evidence_unit": "independent test, not taxon",
+    "raw_data_availability_sufficient": false,
+    "new_forcing_regime_alone_sufficient": false,
+    "new_independent_test_id_required": true,
+    "lambda_evidence": {
+      "requires_registered_lambda_endpoint": true,
+      "requires_common_phase_coordinate": true,
+      "requires_common_segment_scale": true,
+      "can_increase_lambda_support": true
+    },
+    "actuator_only_evidence": {
+      "prospective_actuator_endpoint_required": true,
+      "common_phase_coordinate_required": false,
+      "common_lambda_segment_scale_required": false,
+      "can_increase_lambda_support": false
+    },
+    "source_backed_actuator_only_example": {
+      "receipt": "docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md",
+      "taxon": "Odocoileus hemionus",
+      "forcing": "industrial development route boundary",
+      "lambda_status": "NOT_MEASURED",
+      "actuator_perturbation": "SUPPORTED",
+      "stronger_longitudinal_forecast": "NOT_SUPPORTED"
+    },
+    "preferred_cli": "scripts/evaluate_evidence_inclusion.py"
+  }
+}

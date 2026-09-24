@@ -1,0 +1,93 @@
+{
+  "frozen_date": "2026-09-20",
+  "scope": "synthetic_empirical_pipeline_contract",
+  "provenance": {
+    "workflow_run": 35491555401,
+    "job_id": 106027257212
+  },
+  "calibration_witness": {
+    "decision_interval_hours": 1,
+    "migration_rate": 0.287682072452,
+    "x_weight": 0.5,
+    "y_weight": 0.5,
+    "x_bias": 0,
+    "y_bias": 0,
+    "climate_velocity": 0.06,
+    "phenology_rate": 0.6931471805599453
+  },
+  "fitness_witness": {
+    "baseline_growth": 0.4,
+    "abiotic_strength": 1.2,
+    "interaction_strength": 0.8,
+    "migration_cost": 0.1,
+    "phenology_cost": 0.05,
+    "joint_cost": 0.035
+  },
+  "independent_holdout_witness": {
+    "intervals": 8,
+    "movement_dimensionless_moment_rmse": 0,
+    "phase_validation_licensed": true,
+    "phase_mean_log_compression_error": 0
+  },
+  "grouped_cross_validation_witness": {
+    "split_unit": "animal",
+    "training_groups": 2,
+    "held_out_groups": 2,
+    "training_intervals": 8,
+    "held_out_intervals": 8,
+    "movement_dimensionless_moment_rmse": 0,
+    "phase_validation_licensed": true,
+    "phase_mean_log_compression_error": 0
+  },
+  "held_out_forcing_projection": {
+    "calibration_climate_velocity": 0.06,
+    "prediction_climate_velocity": 0.1,
+    "frozen_migration_rate": 0.287682072452,
+    "frozen_phenology_rate": 0.6931471805599453,
+    "mean_low_density_growth": 0.196379923938,
+    "final_abundance": 1829.96049903,
+    "persisted": true,
+    "habitat": "synthetic_open_regular_grid",
+    "status_with_gate": "tracking_controls_validated_held_out_forcing_projection",
+    "status_without_gate": "held_out_forcing_mechanistic_projection_unvalidated_tracking"
+  },
+  "mule_deer_status": [
+    "PUBLIC_SYSTEM_IDENTIFIED",
+    "DIRECT_TRACKING_CALIBRATION_PENDING_SOURCE_FILE_INGESTION",
+    "FITNESS_PARAMETERIZATION_NOT_IDENTIFIED"
+  ],
+  "claim_boundary": "pipeline regression witness only; tracking-controller and ecological-outcome validation are separate estimands; no named-system empirical outcome validation",
+  "validation_gate_witness": {
+    "max_movement_moment_rmse": 0.01,
+    "min_held_out_intervals": 4,
+    "require_phase_validation": true,
+    "max_abs_phase_log_error": 0.01,
+    "min_phase_intervals": 4,
+    "expected_status": "held_out_tracking_gate_pass",
+    "interpretation": "synthetic CI regression thresholds only; real-data thresholds must be predeclared independently"
+  },
+  "ecological_outcome_validation_witness": {
+    "workflow_run": 35495509263,
+    "job_id": 106037613620,
+    "prediction_status": "tracking_controls_validated_held_out_forcing_projection",
+    "metrics_compared": 3,
+    "final_abundance_relative_error": 2.1682970819660267e-12,
+    "low_density_growth_error": -1.664501869669266e-13,
+    "persistence_match": true,
+    "gate_status": "held_out_ecological_outcome_gate_pass",
+    "interpretation": "synthetic pipeline regression witness only; real ecological outcome tolerances must be independently predeclared"
+  },
+  "required_sequence": [
+    "projected fixed-interval observations",
+    "grouped calibration / holdout split",
+    "movement-kernel audit",
+    "timing-axis audit",
+    "frozen tracking controls",
+    "held-out interval validation",
+    "predeclared tracking validation gate",
+    "independently identified fitness terms",
+    "held-out environmental forcing projection",
+    "independently held-out ecological outcome validation",
+    "predeclared ecological outcome gate"
+  ]
+}

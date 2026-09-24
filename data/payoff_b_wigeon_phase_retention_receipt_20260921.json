@@ -1,0 +1,127 @@
+{
+  "frozen_date": "2026-09-21",
+  "status": "SUPERSEDED",
+  "system": {
+    "common_name": "Eurasian wigeon",
+    "taxon": "Mareca penelope",
+    "study": "van Toor et al. 2021",
+    "doi": "10.1186/s40462-021-00296-0",
+    "tracking_doi": "10.5441/001/1.dv5mm289"
+  },
+  "provenance": {
+    "payoff_pr": 144,
+    "payoff_source_branch": "empirical/movement-phenology-macro-20260918",
+    "payoff_source_head": "df79ddba9bcf7d8c8f77829fa7e9b8f670b36ff6",
+    "preregistration": {
+      "path": "docs/MOVEMENT_PHENOLOGY_WIGEON_CONTROLLER_PREREGISTRATION.md",
+      "blob_sha": "e3b6b5d223a5707667883991f88197448729111c"
+    },
+    "direct_receipt": {
+      "path": "docs/MOVEMENT_PHENOLOGY_WIGEON_DIRECT_RECEIPT.md",
+      "blob_sha": "d1a4014ce36a589cd32386890bb0cc5ee39fa478"
+    },
+    "direct_registry": {
+      "path": "data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv",
+      "blob_sha": "dea4917baa362e0805015151ae34c7de4456b1ae"
+    },
+    "research_daily": {
+      "repository": "zuizui0223/zuizui0223.github.io",
+      "path": "research-daily/2026-09-21.md",
+      "commit": "41b9ed85e72a2d4abf74bb89b8db34834b531d44"
+    }
+  },
+  "reconstruction_gates": {
+    "tracks_reconstructed": 33,
+    "individuals_reconstructed": 29,
+    "tracks_published": 35,
+    "individuals_published": 31,
+    "endpoint_median_km_reconstructed": 1911,
+    "endpoint_median_km_published": 1899,
+    "staging_events_with_tgs": 256,
+    "arrival_phase_median_days_reconstructed": 20.93,
+    "arrival_phase_median_days_published": 22.5,
+    "movement_gate": "PASS",
+    "environment_gate": "PASS",
+    "transition_support_gate": "PASS"
+  },
+  "primary_phase_retention": {
+    "prospective_prediction": "lambda < 1",
+    "transitions": 224,
+    "individuals": 28,
+    "beta_E": -0.14006,
+    "beta_E_cluster_se": 0.04509,
+    "beta_E_cluster_p": 0.00442,
+    "lambda": 0.85994,
+    "lambda_se": 0.04509,
+    "p_vs_lambda_1": 0.0019,
+    "R_phi_abs_lambda": 0.86,
+    "C_phi_correction_fraction": 0.14,
+    "outcome": "PASS"
+  },
+  "stronger_forecast": {
+    "prediction": "abs(lambda) < 0.75",
+    "observed_abs_lambda": 0.86,
+    "outcome": "FAIL"
+  },
+  "actuators": {
+    "stopover": {
+      "prediction": "slope < 0",
+      "slope": -0.00014,
+      "se": 0.003902,
+      "p": 0.972,
+      "outcome": "NOT_SUPPORTED",
+      "formal_gate": {
+        "registration": "data/wigeon_stopover_actuator_registration_20260921.json",
+        "observation": "data/wigeon_stopover_actuator_observation_20260921.json",
+        "expected_direction": "decrease",
+        "max_p_value": 0.05,
+        "direction_passed": true,
+        "support_passed": false,
+        "outcome": "FAIL"
+      }
+    },
+    "travel_speed": {
+      "log_gain_per_phase_day": 0.00109,
+      "se": 0.000824,
+      "p": 0.197,
+      "outcome": "NOT_SUPPORTED",
+      "evidence_role": "secondary_actuator_diagnostic_not_primary_formal_gate"
+    },
+    "migration_distance_moderation": {
+      "beta": -0.0253,
+      "se": 0.0278,
+      "p": 0.371,
+      "route_progress_endpoint_distance_p": 0.67,
+      "outcome": "NOT_SUPPORTED"
+    }
+  },
+  "two_gate_class": "LAMBDA_PASS_ACTUATOR_FAIL",
+  "retained_interpretation": "prospective support for a common phase-retention coordinate with non-portable actuator architecture",
+  "claim_boundary": [
+    "no universal lambda",
+    "no universal actuator gain",
+    "no causal identification of the hidden wigeon actuator",
+    "no numerical pooling across incompatible segment definitions"
+  ],
+  "gate_bundle": {
+    "primary_phase_registration": "data/wigeon_phase_retention_registration_20260921.json",
+    "primary_phase_observation": "data/wigeon_phase_retention_observation_20260921.json",
+    "strong_phase_registration": "data/wigeon_strong_contraction_registration_20260921.json",
+    "stopover_registration": "data/wigeon_stopover_actuator_registration_20260921.json",
+    "stopover_observation": "data/wigeon_stopover_actuator_observation_20260921.json",
+    "secondary_diagnostics": "data/wigeon_secondary_actuator_diagnostics_20260921.json",
+    "assembler": "scripts/assemble_wigeon_gate_bundle.py",
+    "expected": {
+      "primary_lambda": "PASS",
+      "strong_contraction": "FAIL",
+      "stopover_formal_gate": "FAIL",
+      "travel_speed_diagnostic": "NOT_SUPPORTED",
+      "distance_moderation_diagnostic": "NOT_SUPPORTED",
+      "two_gate_class": "LAMBDA_PASS_ACTUATOR_FAIL"
+    },
+    "omnibus_score": false
+  },
+  "superseded_date": "2026-09-22",
+  "superseded_by": "data/payoff_b_wigeon_phase_retention_receipt_20260922.json",
+  "supersession_reason": "published wigeon TGS source window is January-July; the full-year reconstruction was not source-faithful"
+}

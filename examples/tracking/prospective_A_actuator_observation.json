@@ -1,0 +1,14 @@
+{
+  "system_name": "system_A",
+  "independent_test_id": "A_lambda_holdout",
+  "observations": [
+    {
+      "name": "speed",
+      "observed_effect": 0.4
+    },
+    {
+      "name": "stopover",
+      "observed_effect": -0.2
+    }
+  ]
+}

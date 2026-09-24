@@ -1,0 +1,22 @@
+{
+  "system_name": "cross_system_synthetic_witness",
+  "independent_test_id": "W_lambda_holdout",
+  "forcing_regime": "strong",
+  "predictions": [
+    {
+      "name": "speed",
+      "expected_direction": "increase",
+      "zero_tolerance": 0
+    },
+    {
+      "name": "stopover",
+      "expected_direction": "decrease",
+      "zero_tolerance": 0
+    },
+    {
+      "name": "route_reset",
+      "expected_direction": "increase",
+      "zero_tolerance": 0
+    }
+  ]
+}

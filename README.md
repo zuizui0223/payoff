@@ -562,6 +562,274 @@ The exact critical seasonal contrast and two migration boundaries are implemente
 
 ---
 
+### 11b. Migration–phenology tracking under a moving environment
+
+An exploratory PAYOFF-B extension now treats spatial movement and phenological
+change as alternative heritable axes for closing the same moving environmental
+mismatch. The interaction partner can track that demand through a different
+mixture of the two axes, so a lineage can be abiotically successful yet fail
+because partner overlap is lost.
+
+The current implementation provides:
+
+- a dependency-free deterministic tracking simulator;
+- a global migration x phenology strategy-grid optimizer;
+- a rare-mutation local adaptive walk;
+- mutation-selection stationary occupancy on the 2D strategy lattice;
+- two-species alternating rare-mutation coevolution;
+- seed-explicit stochastic climate and partner forcing;
+- phase classification into migration, phenology, mixed, stasis,
+  interaction failure, and abiotic failure;
+- reproducible sharded large sweeps with resume and dry-run workload counting.
+
+A notable accessibility result already appears in the coevolution tests:
+interaction matching can lock two species on a matched mixed strategy even when
+both have the same intrinsic cost bias toward one tracking axis, because a
+unilateral move first creates partner mismatch.
+
+Run the deterministic phase sweep with:
+
+    python scripts/migration_phenology_phase_sweep.py
+
+Run or size the stochastic sweep with:
+
+    python scripts/migration_phenology_stochastic_sweep.py --dry-run
+
+The model and claim boundary are documented in
+[theory/MIGRATION_PHENOLOGY_TRACKING.md](theory/MIGRATION_PHENOLOGY_TRACKING.md).
+
+This lane is not another pollinator-community realization model: its focal
+question is which adaptive axis tracks a moving environment, and when axis
+mismatch between interactors breaks otherwise successful environmental
+tracking.
+
+The first frozen synthetic receipt is
+[docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md](docs/PAYOFF_B_TRACKING_SYNTHETIC_RESULTS_20260920.md).
+Within the declared 75-cell ecological design, 44 cells contain a positive
+coordination gap between the locally accessible coevolution endpoint and a
+coordinated matched-pair optimum. Crossing that design with demographic stress
+showed that the barrier is usually demographically cryptic: an independent
+128-replicate rerun retained no cell with a >=0.10 persistence gain. Instead,
+the replicated signal is a **demographic visibility window**: mean persistence
+gain is largest when local persistence is intermediate and approaches zero
+when both alternatives are almost certainly lost or almost certainly persist.
+
+Finite-N weak-mutation evolution adds a second distinction. Small populations
+can stochastically cross the deterministic coordination barrier, whereas large
+populations remain locked at the local endpoint. In the first drift pilot this
+barrier crossing did **not** raise long-run mean joint growth because broader
+drift occupancy imposed a larger payoff load. The retained result is therefore
+drift-assisted barrier crossing, not drift rescue.
+
+The explicit spatial extension is frozen separately in
+[docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md](docs/PAYOFF_B_MOVING_LANDSCAPE_RESULTS_20260920.md).
+Here migration is actual conservative movement among patches and the climate
+envelope moves across a finite landscape. The canonical low-density-fitness
+runs give a monotone persistence frontier: increasing the allowed phenological
+shift from 0 to 5 raises the sampled maximum persistent climate velocity from
+0.030 to 0.065, with identical frontier brackets on 7 x 7 and 11 x 11 strategy
+grids. Every frontier strategy remains migration-dominant, so phenology extends
+the persistence envelope without replacing spatial range tracking near the
+boundary.
+
+Spatialization also makes the coordination problem demographically sharp. In
+the coarse explicit-landscape design, 52/108 cells contain a coordination
+barrier and 24/108 have local coevolutionary extinction but coordinated
+persistence. With a finer unilateral mutation step, 57/81 positive-interaction
+cells retain barriers and 21/81 retain persistence rescue. A direct one-step
+audit shows the mechanism: moving both partners from (migration, phenology)
+=(0.2,0.0) to (0.2,0.2) raises joint low-density payoff by about +1.115, while
+either partner moving alone has payoff change about -1.427 because interaction
+mismatch rises to about 3.189.
+
+The two-dimensional connectivity extension is frozen in
+[docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md](docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md).
+The key added result is **temporal buffering of connectivity costs**. In the
+7 x 7 zigzag-route resolution check, the mean open-to-zigzag low-density
+growth penalty shrinks from about -0.0419 at phenology limit 0 to -0.0070 at
+limit 4. With limit 4 the optimum is phenology-only at climate velocities
+0.04-0.05, mixed at 0.06, and increasingly migration-dependent by 0.07.
+This temporal-bypass transition is bracketed by an explicit finite-horizon
+capacity diagnostic.
+
+The 2D coevolutionary result is robust to route geometry and mutation
+resolution. At mutation step 0.1, 22/24 positive-interaction cells contain
+coordination barriers and 21/24 convert local extinction into coordinated
+persistence. The canonical zigzag gate has resident growth about -0.840,
+coordinated growth about +0.255, coordinated gain +1.095, and unilateral gain
+about -5.946. Adding an explicit Bhattacharyya distribution-overlap penalty
+does not remove the gate; it makes the unilateral step still more costly.
+
+Partner-specific tracking costs expose a forcing-dependent role of
+interaction. At moderate climate speed, interaction synchronizes quantitatively
+different partner strategies while all sampled pairs persist. At stronger
+forcing, the same synchronizing pressure locks the pair into a migration-only
+local attractor and all sampled pairs go extinct. The retained interpretation
+is therefore **synchronization can become maladaptive synchronization**.
+
+The 2D buffering result is also robust to directional movement limitation.
+Reducing transverse-to-longitudinal dispersal weight from 1 to 0.1 makes the
+zigzag growth penalty somewhat larger when phenology is unavailable, but
+raising the phenology limit from 0 to 4 still removes about 76% of the penalty
+magnitude across the sampled anisotropy levels. No anisotropy-specific
+persistence rescue is claimed.
+
+The fixed-rate tracking layer now also has an exact closed-loop
+controller extension in
+[theory/CLOSED_LOOP_MOVEMENT_PHENOLOGY_TRACKING.md](theory/CLOSED_LOOP_MOVEMENT_PHENOLOGY_TRACKING.md),
+with frozen results in
+[docs/PAYOFF_B_CLOSED_LOOP_TRACKING_RESULTS_20260920.md](docs/PAYOFF_B_CLOSED_LOOP_TRACKING_RESULTS_20260920.md).
+If q_m is mismatch-dependent movement feedback and q_h is timing feedback, the
+local recurrence depends only on K=q_m+q_h. Stability requires 0<K<2; at fixed
+K, quadratic costs allocate more restoring effort to the cheaper axis. Under
+equal costs the unconstrained optimum becomes dynamically and phenologically
+infeasible at sufficiently strong forcing, so stronger feedback is not
+universally better.
+
+The closed-loop null has also been returned to the explicit 2D landscape via
+a mismatch-dependent movement-rate controller. In the sampled high-forcing
+regime, movement feedback alone improves tracking but remains non-persistent,
+whereas an independent timing response crosses the persistence boundary and
+then substantially reduces the movement effort required by the controller.
+The frozen result is
+[docs/PAYOFF_B_MOVEMENT_FEEDBACK_LANDSCAPE_RESULTS_20260920.md](docs/PAYOFF_B_MOVEMENT_FEEDBACK_LANDSCAPE_RESULTS_20260920.md).
+This is the current clearest demonstration that exact local space-time
+substitutability can become complementarity once spatial mechanics and finite
+capacities are restored.
+
+The cross-system empirical architecture is now explicitly split into two
+independent gates in
+[docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md](docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md).
+
+The common coordinate is phase retention
+
+    e_out = r + lambda e_in.
+
+Under the local closed-loop model,
+
+    lambda = 1-K.
+
+This is the quantity to compare across systems. Speed, stopover use, route
+reset, directional movement, or other actuators are tested prospectively within
+each system and are not required to generalize across taxa. Therefore
+**lambda PASS / actuator FAIL is a valid and informative outcome**, not a
+contradiction. The source-backed wigeon result now provides the prospective
+`lambda PASS / actuator FAIL` example. Across 224 consecutive staging
+transitions from 28 individuals,
+
+    lambda = 0.85994
+    SE = 0.04509
+    p versus lambda=1 = 0.00190.
+
+The primary preregistered `lambda<1` prediction passes, while the stronger
+`|lambda|<0.75` forecast fails and neither stopover nor measured travel-speed
+actuator is supported. The quantitative receipt is frozen in
+[docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md](docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md).
+
+The existing mule-deer, barnacle-goose, and wigeon direct results are frozen
+separately in
+[docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md](docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md).
+That three-taxon receipt is descriptive: it establishes a portable response
+coordinate, not one universal lambda or a pooled actuator rule.
+
+The current empirical panel status is frozen in
+[docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md](docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md).
+The panel now has three direct taxa, with wigeon as the prospective third-taxon
+extension. A fourth taxon remains **HOLD by default**.
+
+The inclusion rule is now test-based rather than taxon-based. A candidate
+lambda test must add a new prospectively registered lambda endpoint or boundary
+test on the common coordinate and segment scale. A prospective actuator-only
+test can also be included, but contributes zero additional lambda support.
+Raw-data availability or a new forcing regime alone is not enough.
+
+The source-backed industrial-development mule-deer analysis first entered as
+an actuator-only forcing perturbation without increasing the direct-taxon
+count. Its actuator receipt is
+[docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md](docs/PAYOFF_B_INDUSTRIAL_MULE_DEER_ACTUATOR_RECEIPT_20260921.md).
+
+A stronger within-taxon test is now preregistered: large-development animals
+are predicted to retain more phase mismatch than small-development animals on
+a fixed 24-hour local peak-IRG coordinate. The offline peak-IRG reconstruction,
+MODIS product-version firewall, GPS environmental join, and fixed-interval
+phase-pair pipeline are implemented in
+[docs/PAYOFF_B_AIKENS_IRG_RECONSTRUCTION_HANDOFF_20260921.md](docs/PAYOFF_B_AIKENS_IRG_RECONSTRUCTION_HANDOFF_20260921.md).
+The lambda outcome remains unopened until the MODIS NDVI plus snow/quality
+source layer is materialized.
+
+The frozen fixed-target geometry is already support-robust under a simple
+outcome-blind missingness envelope. If each preselected target independently has
+valid environmental phase with probability p, exact dynamic programming gives
+
+    p ~= 0.34198
+
+for a 95% probability that both registered final support gates pass. The
+large-development group is limiting; the small-development group is already
+effectively certain to pass at that threshold. This is an IID support envelope,
+not a model of real pixel-year-correlated MODIS/IRG missingness. Receipt:
+[docs/PAYOFF_B_AIKENS_IID_TARGET_COVERAGE_SUPPORT_20260922.md](docs/PAYOFF_B_AIKENS_IID_TARGET_COVERAGE_SUPPORT_20260922.md).
+
+A pixel-year-correlated sensitivity gives nearly the same support boundary:
+joint support is 0.9348 at p=0.335 and 0.9619 at p=0.340, with the
+large-development group again limiting. Thus the support transition remains
+near one-third environmental validity under both declared missingness models.
+This is sensitivity evidence only, not a guarantee about realized AppEEARS/IRG
+coverage. Receipt:
+[docs/PAYOFF_B_AIKENS_PIXEL_YEAR_CLUSTERED_SUPPORT_20260922.md](docs/PAYOFF_B_AIKENS_PIXEL_YEAR_CLUSTERED_SUPPORT_20260922.md).
+
+Confirmatory evidence is now stricter than that verbal separation. Prediction
+registration and observation files are separate. A prospective lambda receipt
+must match its frozen system ID, independent-test ID, phase-coordinate ID and
+segment-scale ID. A prospective actuator receipt must contain exactly the
+registered actuator names: missing predictions and post-hoc added actuator
+variables are both rejected.
+
+Cross-system synthesis then counts **independent prospectively registered
+lambda tests**, not taxa and not actuator successes. Retrospective lambda
+analyses remain visible in a separate tier but do not increase prospective
+support. Synthesis is refused if phase-coordinate or segment-scale definitions
+differ across systems, and the API deliberately exposes no pooled actuator or
+lambda-plus-actuator omnibus score.
+
+Candidate evidence is screened before addition by
+`src/taxon_inclusion_gate.py` with preferred CLI
+`scripts/evaluate_evidence_inclusion.py`. The inference unit is an independent
+test. Lambda tests require the common phase coordinate and segment scale;
+actuator-only tests do not, because they contribute zero lambda support. A new
+forcing regime by itself is not a registered endpoint and therefore does not
+license inclusion.
+
+The empirical bridge is now explicit in
+[docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md).
+Under the declared one-step movement family, projected fixed-interval component
+second moments identify migration rate and x/y movement weights; adding mean
+displacements identifies x/y directional biases. Environmental wave speed and
+gradient identify climate velocity.
+
+Phase-error compression is kept separate from the independent phenology rate:
+the latter is licensed only when timing has been isolated from movement and
+other tracking pathways. Fitness terms require separate matched growth
+contrasts rather than being imputed from movement data.
+
+The first named-system readiness receipt is
+[docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md](docs/PAYOFF_B_MULE_DEER_PARAMETERIZATION_READINESS_20260920.md).
+The public mule-deer system is biologically appropriate for tracking
+calibration, and the interval pipeline can now fit a directional movement kernel
+from raw projected GPS means and second moments. The published group summaries,
+however, are not silently converted into per-step model rates: they do not
+contain those interval movement moments, early/mid phase summaries cross zero,
+and the late summary is a whole-route compression rather than one frozen
+decision interval. Because the observed compensation also uses movement speed
+and stopovers, the group-level Days-From-Peak compression is not treated as the
+independent phenology rate h.
+
+The current status is therefore **public system identified, direct tracking
+calibration pending source-file ingestion**.
+
+---
+
+
+
 ## 12. Main organizing principle
 
 PAYOFF is now best read as one transport hierarchy:
@@ -617,6 +885,8 @@ Empirical handoffs:
 - [`docs/SCH_BALANCE_BITA_BRIDGE.md`](docs/SCH_BALANCE_BITA_BRIDGE.md)
 - [`docs/CONTINUOUS_ARCHITECTURE_HANDOFF.md`](docs/CONTINUOUS_ARCHITECTURE_HANDOFF.md)
 - [`docs/TEMPORAL_HANDOFF.md`](docs/TEMPORAL_HANDOFF.md)
+- [`docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md`](docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md)
+- [`docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md`](docs/PAYOFF_B_TRACKING_EMPIRICAL_PARAMETERIZATION.md)
 
 Claim ceilings:
 

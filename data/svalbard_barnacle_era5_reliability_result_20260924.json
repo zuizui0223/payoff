@@ -1,0 +1,61 @@
+{
+  "result_id": "svalbard_barnacle_phase_error_era5_replication_20260924",
+  "frozen_date": "2026-09-24",
+  "status": "COMPLETE",
+  "workflow_run": 35975472359,
+  "artifact_id": 10796909675,
+  "artifact_name": "payoff-b-svalbard-era5-reliability",
+  "artifact_zip_sha256": "6155a9efe854167883190db7410ce60c151721e4569d564f23bc01a555013825",
+  "registration": "data/svalbard_barnacle_phase_error_era5_registration_20260924.json",
+  "Aikens_lambda_outcome_opened": false,
+  "transition": "R2_to_R4",
+  "n": 16,
+  "n_individuals": 15,
+  "coverage_by_region": {
+    "R1": 30,
+    "R2": 30,
+    "R3": 30,
+    "R4": 30
+  },
+  "coverage_gate": true,
+  "power_identity_gate": true,
+  "sample_identity_gate": true,
+  "power": {
+    "lambda_hat": -0.10632090683602469,
+    "cluster_se": 0.25947437919903366,
+    "p_vs_one": 0.000020106937551622,
+    "stopover_slope": -0.5889955061287788,
+    "stopover_cluster_se": 0.08760273999938015,
+    "stopover_p": 0.000009727733614943757,
+    "origin_phase_sd": 9.071370336848188
+  },
+  "era5": {
+    "lambda_hat": -0.28698340002500444,
+    "cluster_se": 0.36687566690091256,
+    "p_vs_one": 0.0004515651027068013,
+    "stopover_slope": -0.6215300805894803,
+    "stopover_cluster_se": 0.08417597343901118,
+    "stopover_p": 0.0000034374442641766893,
+    "origin_phase_sd": 9.000986526002272
+  },
+  "era5_minus_power_lambda_hat": -0.18066249318897976,
+  "region_year_replicate_disagreement": {
+    "n": 120,
+    "sample_sd_days": 2.82594120908768,
+    "equal_independent_replicate_sensitivity_error_sd_days": 1.9982421921804094
+  },
+  "interpretation": {
+    "negative_lambda_sign_replicated": true,
+    "phase_overshoot_reconstruction_robust": true,
+    "stopover_response_reconstruction_robust": true,
+    "independent_classical_attenuation_of_true_lambda_one_can_generate_negative_expected_lambda": false,
+    "replicate_disagreement_is_gold_standard_error": false
+  },
+  "claim_boundary": [
+    "The R2-R4 transition was frozen before the Svalbard ERA5 outcome was opened.",
+    "Region-specific constant phenology anchors do not alter the fixed-transition slope, so the reliability lane uses annual onset anomalies only.",
+    "The negative lambda sign and negative stopover response reproduce under ERA5.",
+    "POWER-versus-ERA5 disagreement is assumption-conditional replicate sensitivity, not a source-specific gold-standard measurement-error distribution.",
+    "The result does not alter or open the Aikens lambda outcome."
+  ]
+}

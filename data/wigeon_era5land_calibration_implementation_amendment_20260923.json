@@ -1,0 +1,64 @@
+{
+  "amendment_id": "wigeon_era5land_calibration_implementation_fix_v1",
+  "frozen_date": "2026-09-23",
+  "prior_failed_run": {
+    "workflow_run": 35739101971,
+    "artifact_id": 10699081130,
+    "status": "wigeon_phase_error_calibration_gate_fail",
+    "paired_events": 220,
+    "paired_fraction": 0.859375,
+    "complete_transition_pairs": 181,
+    "note": "failed calibration result inspected only to diagnose implementation and transport behavior; no registered threshold is changed"
+  },
+  "implementation_errors_to_fix": [
+    {
+      "id": "POWER_IDENTITY_APPLIED_TO_PAIRED_SUBSET",
+      "old_behavior": "compare lambda from ERA5-complete transition subset against the frozen full-224 POWER lambda",
+      "corrected_behavior": "refit POWER on all frozen 224 transitions for identity; keep a separate paired-subset POWER fit only for like-for-like ERA5 comparison"
+    },
+    {
+      "id": "NULL_SCALE_USED_PAIRED_SUBSET",
+      "old_behavior": "true-lambda=1 sensitivity used paired-subset POWER lambda, residualized predictor SD and process residual SD while n_pairs remained 224",
+      "corrected_behavior": "use the full-224 frozen POWER fit for observed lambda, residualized predictor SD and process residual SD, matching the preregistered n_pairs=224"
+    },
+    {
+      "id": "UNREGISTERED_ALL_224_ERA5_TRANSITION_GATE",
+      "old_behavior": "require all 224 transitions to have ERA5-Land at both endpoints even though the frozen coverage gate permits >=90% event coverage",
+      "corrected_behavior": "retain complete-transition count as a diagnostic but do not add it as an extra completion gate beyond the frozen registration"
+    }
+  ],
+  "transport_retry": {
+    "trigger": "batch response contains fewer than 210 finite Jan-Jul daily values for an event",
+    "action": "retry that exact event as a single-location request",
+    "invariants": {
+      "provider": "Open-Meteo Historical Weather API",
+      "dataset": "ERA5-Land",
+      "model_parameter": "era5_land",
+      "coordinate": "unchanged original reconstructed staging-event latitude/longitude",
+      "year": "unchanged",
+      "date_window": "January 1 through July 31",
+      "daily_variable": "temperature_2m_mean",
+      "timezone": "GMT",
+      "cell_selection": "nearest",
+      "elevation": "nan",
+      "downscaling": "disabled"
+    },
+    "interpretation": "transport/response-shape retry only; no scientific parameter or spatial rule changes"
+  },
+  "frozen_invariants": {
+    "minimum_events_with_both_reconstructions": 200,
+    "minimum_fraction_of_frozen_256_events": 0.9,
+    "require_no_ERA5_TGS_at_or_after_doy_300": true,
+    "published_phase_validation_unchanged": true,
+    "TGS_threshold_c": 5,
+    "TGS_window": "January through July",
+    "controller_model_unchanged": true,
+    "cluster_unit": "individual_id",
+    "power_identity_expected_lambda_hat": 0.7497680211367301,
+    "power_identity_tolerance": 1e-8,
+    "true_lambda_one_replicates": 10000,
+    "true_lambda_one_seed": 20260922,
+    "Aikens_lambda_outcome_opened": false
+  },
+  "claim_boundary": "This amendment repairs implementation/data-transport mismatches without relaxing any preregistered scientific gate. If single-location retries still return no ERA5-Land data and coverage remains below 90%, the registered calibration remains failed."
+}

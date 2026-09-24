@@ -1,0 +1,123 @@
+name: payoff-b IRG reconstruction
+
+concurrency:
+  group: payoff-b-irg-reconstruction-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    paths:
+      - 'src/irg_reconstruction.py'
+      - 'scripts/fit_peak_irg_from_ndvi.py'
+      - 'tests/test_irg_reconstruction.py'
+      - 'src/phase_environment_join.py'
+      - 'scripts/attach_peak_irg_to_gps.py'
+      - 'scripts/build_fixed_interval_phase_pairs.py'
+      - 'tests/test_phase_environment_join.py'
+      - 'pyproject.toml'
+      - '.github/workflows/payoff-b-irg-reconstruction.yml'
+  workflow_dispatch:
+
+jobs:
+  irg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install IRG reconstruction dependencies
+        run: python -m pip install --disable-pip-version-check -e ".[test,irg]"
+      - name: Test IRG reconstruction
+        run: pytest -q tests/test_irg_reconstruction.py
+      - name: Build synthetic MODIS-like NDVI fixture
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          from src.irg_reconstruction import (
+              DoubleLogisticParameters,
+              double_logistic_ndvi,
+          )
+
+          output = Path("outputs/ci_synthetic_modis_ndvi.csv")
+          output.parent.mkdir(parents=True, exist_ok=True)
+          params = DoubleLogisticParameters(
+              alpha=0.05,
+              beta=0.85,
+              gamma=0.08,
+              delta=120.0,
+              epsilon=0.04,
+              theta=285.0,
+          )
+          with output.open("w", newline="", encoding="utf-8") as handle:
+              writer = csv.DictWriter(
+                  handle,
+                  fieldnames=[
+                      "pixel_id",
+                      "year",
+                      "doy",
+                      "ndvi",
+                      "snow_free",
+                      "quality_good",
+                  ],
+              )
+              writer.writeheader()
+              for doy in range(1, 362, 8):
+                  writer.writerow(
+                      {
+                          "pixel_id": "synthetic_pixel",
+                          "year": 2020,
+                          "doy": doy,
+                          "ndvi": double_logistic_ndvi(float(doy), params),
+                          "snow_free": int(doy >= 73),
+                          "quality_good": 1,
+                      }
+                  )
+          PY
+      - name: Reconstruct synthetic peak IRG
+        run: >
+          python scripts/fit_peak_irg_from_ndvi.py
+          outputs/ci_synthetic_modis_ndvi.csv
+          --modis-product MOD09Q1.006
+          --output outputs/ci_peak_irg.csv
+          --receipt-output outputs/ci_peak_irg_receipt.json
+      - name: Build synthetic GPS pixel mapping
+        run: |
+          cat > outputs/ci_phase_gps.csv <<'EOF'
+          observation_id,animal_id,animal_year,group,timestamp,pixel_id
+          o1,A,A_2020,small,2020-04-20T12:00:00,synthetic_pixel
+          o2,A,A_2020,small,2020-04-21T12:00:00,synthetic_pixel
+          o3,A,A_2020,small,2020-04-22T12:00:00,synthetic_pixel
+          o4,A,A_2020,small,2020-04-23T12:00:00,synthetic_pixel
+          o5,A,A_2020,small,2020-04-24T12:00:00,synthetic_pixel
+          EOF
+      - name: Attach peak IRG to GPS
+        run: >
+          python scripts/attach_peak_irg_to_gps.py
+          outputs/ci_phase_gps.csv
+          outputs/ci_peak_irg.csv
+          --required-modis-product MOD09Q1.006
+          --minimum-matched-fraction 1.0
+          --output outputs/ci_phase_annotated_gps.csv
+          --receipt-output outputs/ci_phase_environment_join_receipt.json
+      - name: Build fixed 24-hour phase pairs
+        run: >
+          python scripts/build_fixed_interval_phase_pairs.py
+          outputs/ci_phase_annotated_gps.csv
+          --target-interval-hours 24
+          --max-target-deviation-hours 3
+          --pairs-output outputs/ci_fixed_interval_phase_pairs.csv
+          --receipt-output outputs/ci_fixed_interval_phase_pairs_receipt.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-irg-reconstruction
+          path: |
+            outputs/ci_synthetic_modis_ndvi.csv
+            outputs/ci_peak_irg.csv
+            outputs/ci_peak_irg_receipt.json
+            outputs/ci_phase_gps.csv
+            outputs/ci_phase_annotated_gps.csv
+            outputs/ci_phase_environment_join_receipt.json
+            outputs/ci_fixed_interval_phase_pairs.csv
+            outputs/ci_fixed_interval_phase_pairs_receipt.json

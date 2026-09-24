@@ -1,0 +1,11 @@
+{
+  "system_name": "Eurasian wigeon",
+  "independent_test_id": "wigeon_vantoor2021_W1",
+  "forcing_regime": "consecutive_staging_transitions",
+  "phase_coordinate_id": "arrival_day_minus_local_5C_TGS_onset",
+  "segment_scale_id": "one_staging_transition",
+  "lambda_low": null,
+  "lambda_high": 1,
+  "min_pairs": 30,
+  "require_retention_class": "restoring"
+}
