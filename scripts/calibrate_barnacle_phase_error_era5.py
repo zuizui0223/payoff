@@ -192,7 +192,12 @@ def main():
         power_identity=abs(pfit.lambda_hat-float(primary["expected_POWER_lambda"])) <= float(reg["gates"]["power_refit_max_abs_lambda_error"])
         n_identity=(pfit.n==int(primary["expected_n"]) and pfit.n_individuals==int(primary["expected_individuals"]) and efit.n==pfit.n and efit.n_individuals==pfit.n_individuals)
         coverage_by_region={
-            str(rid):int((era[(era.region_id.astype(str)==str(rid))]&passed)["year"].nunique())
+            str(rid):int(
+                era.loc[
+                    (era["region_id"].astype(str)==str(rid)) & passed,
+                    "year",
+                ].nunique()
+            )
             for rid in sorted(eligible)
         }
         coverage_gate=all(v==expected_years for v in coverage_by_region.values())
