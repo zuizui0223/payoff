@@ -1,0 +1,60 @@
+{
+  "contract_id": "wigeon_phase_simex_era5_complete_calibration_v2",
+  "frozen_date": "2026-09-24",
+  "freeze_state": {
+    "Aikens_lambda_outcome_opened": false,
+    "source_faithful_wigeon_lambda_known": true,
+    "source_faithful_ERA5_calibration_status": "COMPLETE",
+    "ERA5_calibration_result_known": true,
+    "SIMEX_v2_result_opened": false
+  },
+  "source": {
+    "wigeon_artifact_id": 10678143392,
+    "wigeon_artifact_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+    "transition_file": "stage3_wigeon_controller_transitions.csv",
+    "expected_pairs": 224,
+    "expected_individuals": 28,
+    "expected_naive_lambda_hat": 0.7497680211367301,
+    "identity_tolerance": 1e-8,
+    "calibration_result": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json"
+  },
+  "simulation_design": {
+    "error_unit": "unique staging event keyed by individual_id, year, segment",
+    "shared_event_error": "same event error reused when an event is destination of one transition and origin of the next",
+    "within_individual_year_error_process": "stationary Gaussian AR1 across ordered staging events",
+    "simex_zeta": [0.5, 1.0, 1.5, 2.0],
+    "replicates_per_zeta": 1000,
+    "seed": 20260924,
+    "point_estimator": "exact OLS point slope for frozen wigeon controller design; lambda_hat=1+beta_origin_phase",
+    "extrapolation": "quadratic mean-lambda curve evaluated at zeta=-1"
+  },
+  "scenarios": [
+    {
+      "name": "era5_complete_equal_independent_replicates_rho0",
+      "error_sd_days": 5.010239973852373,
+      "error_correlation": 0.0,
+      "origin": "SD(ERA5_phase-POWER_phase)/sqrt(2) from complete 256-event source-faithful ERA5 calibration"
+    },
+    {
+      "name": "era5_complete_discrepancy_correlation_proxy",
+      "error_sd_days": 5.010239973852373,
+      "error_correlation": 0.3666144716835741,
+      "origin": "equal-replicate SD plus observed consecutive ERA5-minus-POWER discrepancy correlation"
+    },
+    {
+      "name": "era5_complete_conservative_full_disagreement_rho0",
+      "error_sd_days": 7.085549321765848,
+      "error_correlation": 0.0,
+      "origin": "entire ERA5-minus-POWER disagreement SD treated as each-event error"
+    }
+  ],
+  "claim_boundary": [
+    "SIMEX v2 is conditional on error scales from the complete 256-event POWER-versus-ERA5 replicate calibration.",
+    "The calibration is complete but does not identify a gold-standard source-specific error distribution.",
+    "The equal-independent-replicate interpretation and correlation proxy are assumptions, not direct latent-error identification.",
+    "The conservative full-disagreement scenario deliberately over-assigns replicate disagreement to each source.",
+    "SIMEX-extrapolated values are sensitivity diagnostics and are not promoted as the true latent biological lambda.",
+    "No scenario, seed, zeta grid or extrapolation rule may be changed after SIMEX v2 results are opened.",
+    "The registered Aikens analysis remains unchanged and unopened."
+  ]
+}
