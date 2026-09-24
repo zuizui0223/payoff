@@ -16,8 +16,26 @@ def synthetic_frame():
         for segment in range(1, 7):
             if segment == 6:
                 continue
-            origin = float(segment - 3)
-            destination = 0.6 * origin + 0.1 * animal_index
+            origin = float(
+                segment - 3
+                + 0.07 * animal_index
+                + 0.03 * ((animal_index + segment) % 3)
+            )
+            progress = float(
+                segment * 10
+                + animal_index * animal_index
+                + 0.5 * ((animal_index + segment) % 2)
+            )
+            endpoint = float(
+                100
+                + animal_index * 5
+                + (animal_index % 3) * 1.7
+            )
+            destination = (
+                0.6 * origin
+                + 0.01 * progress
+                + 0.02 * endpoint
+            )
             rows.append(
                 {
                     "individual_id": animal,
@@ -26,8 +44,8 @@ def synthetic_frame():
                     "destination_segment": segment + 1,
                     "origin_phase": origin,
                     "destination_phase": destination,
-                    "origin_progress_km": float(segment * 10 + animal_index),
-                    "endpoint_distance_km": float(100 + animal_index * 5),
+                    "origin_progress_km": progress,
+                    "endpoint_distance_km": endpoint,
                 }
             )
     return pd.DataFrame(rows)
@@ -102,3 +120,31 @@ def test_positive_added_error_changes_mean_curve_and_simex_returns_finite_value(
     assert result.simex_extrapolated_lambda_at_minus_one == pytest.approx(
         result.simex_extrapolated_lambda_at_minus_one
     )
+
+
+def test_rank_deficient_controller_design_is_rejected():
+    pd = pytest.importorskip("pandas")
+    frame = pd.DataFrame(
+        [
+            {
+                "individual_id": f"A{i}",
+                "year": 2020,
+                "origin_segment": j,
+                "destination_segment": j + 1,
+                "origin_phase": float(j),
+                "destination_phase": 0.6 * float(j),
+                "origin_progress_km": float(j),
+                "endpoint_distance_km": float(i),
+            }
+            for i in range(4)
+            for j in range(1, 5)
+        ]
+    )
+    data, nuisance = prepare_wigeon_design(frame)
+    with pytest.raises(ValueError, match="rank deficient"):
+        lambda_hat_from_phases(
+            data,
+            nuisance,
+            origin_phase=data["origin_phase"],
+            destination_phase=data["destination_phase"],
+        )
