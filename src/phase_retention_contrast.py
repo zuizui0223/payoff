@@ -76,6 +76,7 @@ class PhaseRetentionContrastObservation:
     lambda_a: float
     lambda_b: float
     p_difference: float | None = None
+    fit_provenance: dict[str, object] | None = None
 
     def __post_init__(self) -> None:
         for name in (
@@ -99,6 +100,13 @@ class PhaseRetentionContrastObservation:
                 raise ValueError(
                     "p_difference must lie in [0,1] when supplied"
                 )
+        if (
+            self.fit_provenance is not None
+            and not isinstance(self.fit_provenance, dict)
+        ):
+            raise ValueError(
+                "fit_provenance must be a mapping when supplied"
+            )
 
 
 @dataclass(frozen=True)
