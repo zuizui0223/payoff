@@ -15,6 +15,8 @@ EXPECTED = {
     "Visser2019PhenologicalMismatch": "10.1038/s41559-019-0880-8",
     "Kharouba2020MismatchDisconnects": "10.1038/s41558-020-0752-x",
     "Gilman2012Mutualisms": "10.1111/j.1752-4571.2011.00202.x",
+    "Weir2024BufferingMismatch": "10.1111/gcb.17294",
+    "Fredston2025SpaceTime": "10.1016/j.tree.2025.03.015",
 }
 
 

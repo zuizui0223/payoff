@@ -243,7 +243,9 @@ When the manuscript, table and implementation disagree, use this order:
 2. frozen 2026-09-20 JSON receipts in `data/`;
 3. frozen 2026-09-20 result receipts in `docs/`;
 4. `data/payoff_b_tracking_theory_claim_freeze_20260924.json`;
-5. manuscript prose and figure captions.
+5. `data/payoff_b_tracking_theory_framing_amendment_20260925.json` for
+   submission framing only;
+6. manuscript prose and figure captions.
 
 No later empirical phase-retention result can change a synthetic design value
 without an explicit new tracking-theory version.

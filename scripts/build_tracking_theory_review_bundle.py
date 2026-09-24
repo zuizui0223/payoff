@@ -50,6 +50,7 @@ UTILITY_SCRIPTS = [
 
 FROZEN_FILES = [
     "data/payoff_b_tracking_theory_claim_freeze_20260924.json",
+    "data/payoff_b_tracking_theory_framing_amendment_20260925.json",
     "data/payoff_b_tracking_synthetic_receipt_20260920.json",
     "data/payoff_b_moving_landscape_receipt_20260920.json",
     "data/payoff_b_2d_connectivity_receipt_20260920.json",
@@ -264,7 +265,7 @@ def review_readme(entry_scripts: list[str], third_party: list[str]) -> str:
         "# Anonymous review code and synthetic data",
         "",
         "This bundle contains the code and frozen synthetic outputs supporting the manuscript",
-        "'Tracking together or failing apart: space-time substitution, finite temporal buffering, and coordination barriers under moving environments.'",
+        "'Hidden tracking: space-time buffering of environmental mismatch and its limits under moving environments.'",
         "",
         "The bundle is restricted to the synthetic tracking-theory programme. It excludes the separate empirical phase-retention programme and contains no author names, email addresses, repository-owner identifiers, or private data.",
         "",

@@ -19,20 +19,19 @@ All quantitative panels are rendered from the five frozen synthetic receipts dat
 2026-09-20 through `scripts/build_tracking_theory_figure_data.py`. Post-2026-09-20
 empirical phase-retention results are excluded.
 
-## Figure 1. Tracking architecture from capacity to accessibility
+## Figure 1. From buffered mismatch to tracking breakdown
 
 **File:** `PAYOFF_B_TRACKING_FIG1_CONCEPT.svg`
 
-Conceptual hierarchy linking the exact local movement–timing substitution null to
-the explicit-landscape and evolutionary results. Movement and timing first share
-one local restoring budget. Finite phenological capacity then creates a temporal
-bypass ceiling, after which spatial tracking re-enters under stronger forcing.
-Interaction matching can synchronize partner tracking, but the same coupling
-creates a coordination gate when a jointly favourable change is deleterious to
-either partner acting alone. Population consequences are most visible near
-persistence boundaries, and finite-population barrier crossing is distinct from
-long-run payoff improvement. This panel is a synthesis diagram and contains no
-additional simulation result.
+Conceptual hierarchy showing why endpoint environmental mismatch does not
+identify the tracking architecture that produces it. In the exact local null,
+movement and timing share one restoring budget, so similar mismatch can be
+maintained by different allocations between axes. Finite phenological capacity
+then imposes a temporal-buffer ceiling, after which spatial tracking re-enters
+under stronger forcing. Partner matching adds a second limit: reallocation can
+be jointly favourable yet deleterious to either partner moving first. Population
+consequences are most visible near persistence boundaries. This panel is a
+synthesis diagram and contains no additional simulation result.
 
 ## Figure 2. Finite temporal bypass and spatial re-entry
 

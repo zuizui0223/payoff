@@ -103,16 +103,16 @@ def wrap_words(value, max_chars):
 
 def figure1(data):
     stages = [
+        ("Low mismatch", "can hide a changing\ntracking burden"),
         ("Local null", "movement + timing\nshare one restoring budget"),
-        ("Finite timing", "temporal bypass\nhas a capacity ceiling"),
+        ("Finite timing", "temporal buffering\nhas a capacity ceiling"),
         ("Spatial re-entry", "movement returns\nunder stronger forcing"),
-        ("Partner matching", "interaction synchronizes\ntracking allocation"),
-        ("Coordination gate", "jointly good change\ncan be unilaterally bad"),
+        ("Partner coupling", "reallocation must\nremain aligned"),
+        ("Buffering failure", "jointly good change\ncan be unilaterally bad"),
         ("Population outcome", "visibility peaks near\npersistence boundaries"),
-        ("Finite N", "barrier crossing\n!= automatic rescue"),
     ]
     out = [
-        text(72, 125, "Adaptive capacity is not the same as adaptive accessibility", 21, "bold"),
+        text(72, 125, "Low environmental mismatch does not identify the tracking architecture", 21, "bold"),
     ]
     x = 65
     y = 235
@@ -138,7 +138,7 @@ def figure1(data):
         text(72, 620, "barrier crossing != long-run payoff improvement", 16),
     ]
     return svg_page(
-        "Figure 1. Tracking architecture from capacity to accessibility",
+        "Figure 1. From buffered mismatch to tracking breakdown",
         "Conceptual synthesis of the frozen model hierarchy",
         "".join(out),
     )

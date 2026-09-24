@@ -12,17 +12,18 @@ PARAMETERS = ROOT / "submission" / "PAYOFF_B_TRACKING_PARAMETER_TABLE.md"
 CAPTIONS = ROOT / "submission" / "PAYOFF_B_TRACKING_FIGURE_CAPTIONS.md"
 
 
-NOVELTY = (
-    "The contribution is not a new demonstration that species can respond to "
-    "climate change in both space and time. It is the separation of adaptive "
-    "capacity from unilateral accessibility when interacting partners can "
-    "reallocate tracking between spatial and temporal axes."
+FRAMING_AMENDMENT = (
+    ROOT / "data" / "payoff_b_tracking_theory_framing_amendment_20260925.json"
 )
 
 
-def test_tracking_theory_final_novelty_sentence_is_frozen():
+def test_tracking_theory_final_novelty_sentence_is_amendment_frozen():
     text = MANUSCRIPT.read_text(encoding="utf-8")
-    assert NOVELTY in text
+    assert (
+        "formal separation of endpoint environmental mismatch from the tracking "
+        "architecture that produces it"
+    ) in text
+    assert FRAMING_AMENDMENT.exists()
 
 
 def test_tracking_theory_visual_audit_is_frozen():

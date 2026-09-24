@@ -21,26 +21,27 @@ https://onlinelibrary.wiley.com/journal/16000706
 
 The manuscript is mechanism-first rather than system-first:
 
-- exact local substitution null;
-- finite temporal bypass and spatial re-entry;
-- interaction-mediated synchronization;
-- unilateral coordination gates;
-- demographic visibility;
-- finite-N crossing without automatic rescue.
+- endpoint mismatch does not identify tracking architecture;
+- exact local movement/timing substitution supplies that null;
+- finite temporal buffering is followed by spatial re-entry;
+- landscape geometry changes the cost of maintaining correction;
+- partner dependence creates a coordination failure mode;
+- demographic visibility and finite-N crossing remain downstream layers.
 
-The core result is an ecological mechanism about adaptation in interacting
-populations, not merely a climate-model application. That broad mechanism is
-the strongest pitch for Oikos.
+The core result is an ecological inference mechanism: a small mismatch can hide
+a large and changing tracking burden. The explicit limits of that buffering
+make the mechanism testable beyond the synthetic model.
 
 ### Framing for an Oikos submission
 
 Lead with:
 
-> Multiple adaptive axes do not imply evolutionary access to their best
-> combination.
+> Small environmental mismatch does not identify the tracking architecture that
+> keeps it small.
 
-Keep climate change as the motivating moving-environment case, while presenting
-the coordination barrier as a general ecological/evolutionary mechanism.
+Keep climate change as the motivating moving-environment case. Present temporal
+bypass and spatial re-entry as the primary buffering mechanism, and the
+coordination barrier as a partner-dependent failure mode.
 
 Do not lead with:
 
@@ -113,9 +114,10 @@ rather than simply providing another climate-tracking model.
 A GCB first shot becomes more defensible only if the cover letter and
 Introduction emphasize broad empirical predictions:
 
+- similar endpoint mismatch can conceal different movement/timing allocations;
 - apparent short-term timing compensation can precede renewed spatial demand;
-- stronger partner dependence can increase failure risk despite a viable joint
-  solution;
+- stronger partner dependence can block a required reallocation despite a
+  viable joint solution;
 - abundance data may miss real evolutionary constraints away from persistence
   boundaries.
 

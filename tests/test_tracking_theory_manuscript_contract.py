@@ -5,6 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANUSCRIPT = ROOT / "manuscript" / "PAYOFF_B_TRACKING_THEORY_V1.md"
 PRIOR_ART = ROOT / "docs" / "PAYOFF_B_TRACKING_THEORY_PRIOR_ART_20260924.md"
 CLAIM_FREEZE = ROOT / "data" / "payoff_b_tracking_theory_claim_freeze_20260924.json"
+FRAMING_AMENDMENT = ROOT / "data" / "payoff_b_tracking_theory_framing_amendment_20260925.json"
 
 
 def manuscript_text():
@@ -31,7 +32,8 @@ def test_tracking_theory_manuscript_states_programme_boundary():
     text = manuscript_text()
     assert "separate from the PAYOFF-B GEB empirical phase-retention paper" in text
     assert "no post-2026-09-20 empirical phase-retention result is used" in text.lower()
-    assert "adaptive capacity is not the same as adaptive accessibility" in text.lower()
+    assert "environmental mismatch is an outcome of a multi-axis tracking system" in text.lower()
+    assert "coordination barriers are therefore a failure mode" in text.lower()
 
 
 def test_tracking_theory_manuscript_preserves_negative_results():
@@ -44,6 +46,30 @@ def test_tracking_theory_manuscript_preserves_negative_results():
 def test_tracking_theory_prior_art_and_claim_freeze_exist():
     assert PRIOR_ART.exists()
     assert CLAIM_FREEZE.exists()
+    assert FRAMING_AMENDMENT.exists()
     prior = PRIOR_ART.read_text(encoding="utf-8")
     assert "do not claim that it is novel" in prior.lower()
-    assert "coordinated value != unilateral accessibility" in prior.lower()
+    assert "mismatch can be buffered" in prior.lower()
+    assert "endpoint mismatch can remain non-identifying" in prior.lower()
+
+
+def test_tracking_theory_predictions_are_empirically_falsifiable():
+    text = manuscript_text()
+    section = text.split("## 6. Testable predictions", 1)[1].split(
+        "## 7. Scope and limitations", 1
+    )[0]
+    assert section.count("**Observable:**") == 7
+    assert section.count("**Falsified if:**") == 7
+
+
+def test_tracking_theory_framing_amendment_preserves_scientific_freeze():
+    import json
+
+    amendment = json.loads(FRAMING_AMENDMENT.read_text(encoding="utf-8"))
+    assert amendment["scientific_evidence_freeze_unchanged"] is True
+    assert amendment["new_simulation_added"] is False
+    assert amendment["quantitative_claim_changed"] is False
+    assert (
+        amendment["coordination_barrier_role"]
+        == "failure_mode_of_spatiotemporal_buffering"
+    )

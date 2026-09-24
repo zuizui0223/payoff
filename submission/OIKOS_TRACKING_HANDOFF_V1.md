@@ -1,112 +1,109 @@
 # Oikos handoff — PAYOFF-B tracking theory v1
 
-Prepared: **2026-09-24**
+Prepared: **2026-09-25**
 
 Target journal: **Oikos**
 
-Scientific package status: frozen. This handoff changes framing and submission
-packaging only.
+Scientific evidence status: frozen. The 2026-09-25 amendment changes framing
+and empirical testability only; no simulation, numerical result, or empirical
+phase-retention result is added.
 
 ## Why Oikos is the first shot
 
-Oikos explicitly publishes innovative theoretical ecology and emphasizes
-ecological mechanisms, processes and patterns that can shape broader ecological
-thinking.
-
-Official journal page:
-
-https://onlinelibrary.wiley.com/journal/16000706
-
-The manuscript's strongest transferable mechanism is:
+The manuscript now leads with a broadly ecological inference problem:
 
 ```text
-multiple adaptive axes
-do not imply
-evolutionary access to their best combination
+small environmental mismatch
+does not identify
+the tracking architecture that keeps it small
 ```
 
-The climate-tracking model is the vehicle for that mechanism.
+Oikos explicitly emphasizes innovative theoretical work on ecological
+mechanisms, processes and patterns. The moving-environment model is used to
+show when hidden compensation can be sustained and when it breaks.
 
 ## Submission-facing one-sentence contribution
 
-> Interacting populations can possess enough combined spatial and temporal
-> adaptive capacity to persist, yet fail because the jointly viable tracking
-> architecture is inaccessible through unilateral improving changes.
+> Low environmental mismatch can conceal a shifting burden between movement and
+> timing until finite capacity, landscape geometry, or partner dependence makes
+> that buffering change or fail.
 
-This sentence is a submission framing, not an additional scientific claim.
+## Abstract emphasis
 
-## Abstract emphasis for Oikos
+Order the logic as:
 
-Retain the frozen quantitative content, but order the logic as:
+1. endpoint mismatch is an outcome, not a direct measure of tracking effort;
+2. exact local movement/timing substitution supplies the non-identification null;
+3. finite timing creates temporal buffering followed by spatial re-entry;
+4. landscape geometry changes the cost of maintaining correction;
+5. partner matching creates a failure mode when reallocation is jointly
+   favourable but unilaterally inaccessible;
+6. demographic visibility and finite-N crossing are downstream consequences.
 
-1. adaptive capacity and adaptive accessibility are different;
-2. local movement/timing substitution supplies the null;
-3. finite timing creates temporal bypass and spatial re-entry;
-4. interaction matching creates the direct one-step coordination gate;
-5. demographic visibility and finite-N crossing are separate downstream
-   consequences.
+## Prior-art boundary
 
-Avoid opening with a catalogue of climate-response modes. The paper should read
-as a general mechanism paper that happens to use moving environments as the
-ecological setting.
+Do not claim novelty for:
 
-## Introduction emphasis
+- generic mismatch buffering;
+- integrating spatial and temporal climate responses;
+- combined range and phenology shifts;
+- moving-habitat models;
+- climate-driven interaction mismatch.
 
-First paragraph:
+The narrower contribution is that endpoint mismatch can be non-identifying even
+when both tracking axes exist, followed by explicit finite, spatial and
+partner-dependent limits on reallocating the tracking burden.
 
-- multiple response axes can close the same environmental mismatch;
-- this says nothing about whether interacting populations can evolve from one
-  allocation to another.
+## Empirical testability
 
-Core question:
+Section 6 now gives every main prediction:
 
-> When partners must remain matched, can a jointly valuable reallocation
-> between spatial and temporal tracking be reached by unilateral selection?
+- a named observable;
+- an explicit falsification condition.
 
-Keep existing prior-art boundary:
+The strongest direct tests are:
 
-- combined range + phenology response is already known;
-- moving-habitat models are already known;
-- dispersal/timing evolution is already known;
-- climate-driven mismatch is already known.
+- concurrent mismatch + phenology + spatial redistribution time series;
+- fragmentation × timing-flexibility contrasts;
+- one-partner versus both-partners manipulation for the coordination gate;
+- forcing gradients measuring partner divergence and persistence;
+- population-size experiments separating crossing from long-run performance.
 
-Do not convert those established ideas into novelty claims.
+No empirical cutoff is imported from the synthetic parameter values.
 
 ## Main figures for the editorial read
 
-If editors inspect only three figures, the conceptual sequence should still be
-clear from:
+If editors inspect only three figures, the preferred sequence is:
 
-- Figure 1 — capacity versus accessibility hierarchy;
-- Figure 3 — direct one-step coordination gate;
-- Figure 4 — synchronization changes ecological sign.
+- Figure 1 — buffered mismatch to tracking breakdown;
+- Figure 2 — finite temporal bypass and spatial re-entry;
+- Figure 3 — direct one-step partner-dependent failure gate.
 
-Figures 2, 5 and 6 provide the spatial, demographic and analytic depth.
+Figures 4–6 provide synchronization, demographic, drift and analytic depth.
 
 ## Discussion emphasis
 
-Use this hierarchy:
+Use two nested chains:
 
 ```text
-capacity
--> architecture
--> coordinated value
--> unilateral accessibility
--> persistence
+environmental forcing
+-> tracking burden
+-> movement/timing allocation
+-> observed mismatch
 ```
 
-Then add:
+and
 
 ```text
-barrier crossing
-!=
-long-run payoff improvement
+tracking capacity
+!= chosen architecture
+!= coordinated value
+!= unilateral accessibility
+!= persistence
 ```
 
-The broad ecological message is not that phenology or movement is superior. It
-is that substitutable ecological functions can become non-substitutable once
-their evolutionary path is constrained by partner matching and landscape
-mechanics.
+The coordination result is the sharpest demonstration of buffering failure,
+not the headline by itself.
 
 ## Cover-letter pitch
 
@@ -114,69 +111,19 @@ Use:
 
 `submission/PAYOFF_B_TRACKING_COVER_LETTER_TEMPLATE.md`
 
-For Oikos, the first paragraph after the manuscript title should emphasize the
-general ecological mechanism, not the climate-change application.
-
 Suggested editorial hook:
 
-> The paper asks why interacting populations can fail to use an adaptive
-> solution that already exists one mutation step away.
+> The paper asks why a small environmental mismatch can hide a large and
+> changing adaptive response, and why that buffering can suddenly fail.
 
 ## Data/code packaging
 
-Before actual submission:
-
-- archive the scientific-freeze code/results to a persistent repository such as
-  Zenodo or another journal-acceptable archive;
-- replace the temporary repository statement in the title-page template with
-  the archived DOI;
-- preserve the five frozen 2026-09-20 result families and claim contracts in
-  that archive.
-
-Recent Oikos papers routinely include explicit data-availability statements and
-repository records; the tracking paper should do the same for code and
-synthetic outputs.
-
-## Files to submit or derive
-
-Core:
-
-- `manuscript/PAYOFF_B_TRACKING_THEORY_V1.md`
-- `submission/PAYOFF_B_TRACKING_REFERENCES.bib`
-- six main SVG figures
-- `submission/PAYOFF_B_TRACKING_FIGURE_CAPTIONS.md`
-
-Supplement:
-
-- generated portal-ready Supporting Information:
-  `PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md`
-- generator:
-  `scripts/build_tracking_theory_supporting_information.py`
-- structural map:
-  `submission/PAYOFF_B_TRACKING_SUPPLEMENT_MAP.md`
-
-Administrative:
-
-- `submission/PAYOFF_B_TRACKING_TITLE_PAGE_TEMPLATE.md`
-- `submission/PAYOFF_B_TRACKING_COVER_LETTER_TEMPLATE.md`
-
-Internal, not normally uploaded as manuscript files:
-
-- claim freeze;
-- prior-art audit;
-- parameter map;
-- Results-to-Figure crosswalk;
-- figure visual audit;
-- package index.
+Preserve the five frozen 2026-09-20 result families, the original 2026-09-24
+claim freeze, and the 2026-09-25 framing amendment in the archive.
 
 ## Fallback rule
 
-If Oikos declines on breadth/fit rather than on a scientific flaw, do **not**
-retune the simulations.
+If Oikos declines on breadth/fit rather than a scientific flaw, do **not** retune
+the simulations. Move the same scientific freeze to **Theoretical Ecology**.
 
-Move the same scientific freeze to **Theoretical Ecology**, where the
-combination of exact local theory, computational landscape models and
-evolutionary accessibility is directly within scope.
-
-A rejection on journal breadth is not evidence that more parameter sweeps are
-needed.
+A journal-fit decision is not evidence that more parameter sweeps are needed.

@@ -50,7 +50,7 @@ def test_tracking_theory_svg_contains_core_claim_labels(tmp_path):
     ).read_text(encoding="utf-8")
 
     assert (
-        "Adaptive capacity is not the same as adaptive accessibility"
+        "Low environmental mismatch does not identify the tracking architecture"
         in figure1
     )
     assert "coordinated gain" in figure3

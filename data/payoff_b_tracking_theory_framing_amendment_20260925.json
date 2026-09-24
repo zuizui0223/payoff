@@ -1,0 +1,17 @@
+{
+  "amendment_id": "payoff_b_tracking_theory_framing_amendment_20260925",
+  "amendment_date": "2026-09-25",
+  "applies_to_claim_freeze": "payoff_b_tracking_theory_claim_freeze_20260924",
+  "scientific_evidence_freeze_unchanged": true,
+  "new_simulation_added": false,
+  "quantitative_claim_changed": false,
+  "revised_headline_claim": "Environmental mismatch is an outcome of a multi-axis tracking system: similar low mismatch can be maintained by different allocations between movement and timing, while finite temporal capacity, spatial geometry and partner matching determine when that buffering must change or fail.",
+  "coordination_barrier_role": "failure_mode_of_spatiotemporal_buffering",
+  "testability_contract": "each main qualitative prediction declares an observable and a falsification condition",
+  "prior_art_limits": [
+    "do not claim novelty for generic mismatch buffering",
+    "do not claim novelty for integrating spatial and temporal climate responses",
+    "do not claim that all low mismatch implies high hidden cost",
+    "do not treat synthetic thresholds as empirical thresholds"
+  ]
+}
