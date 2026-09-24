@@ -34,7 +34,10 @@ jobs:
           -e ".[test,empirical]" pandas scipy requests
 
       - name: Test barnacle reliability helpers
-        run: pytest -q tests/test_barnacle_phase_error_calibration.py
+        run: >
+          pytest -q
+          tests/test_barnacle_phase_error_calibration.py
+          tests/test_barnacle_era5_rate_limit.py
 
       - name: Download frozen barnacle multi-flyway artifact
         env:
