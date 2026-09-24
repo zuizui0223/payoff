@@ -11,6 +11,7 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 from build_tracking_theory_review_bundle import (
+    EMAIL_RE,
     FORBIDDEN_PATH_TERMS,
     FORBIDDEN_TEXT_TOKENS,
     build_review_bundle,
@@ -61,7 +62,7 @@ def test_anonymous_review_bundle_excludes_empirical_programme_and_identity(tmp_p
             text = path.read_text(encoding="utf-8").lower()
             for token in FORBIDDEN_TEXT_TOKENS:
                 assert token.lower() not in text
-            assert "@" not in text or "@" in "exp[beta (N-1) g_i]"
+            assert EMAIL_RE.search(text) is None
 
 
 def test_anonymous_review_bundle_is_byte_stable_across_output_paths(tmp_path):
