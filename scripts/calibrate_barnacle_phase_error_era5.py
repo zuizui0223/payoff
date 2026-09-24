@@ -32,7 +32,37 @@ def parse_args():
     return p.parse_args()
 
 
-def request_era5_daily(session, endpoint, lat, lon, start_year, end_year):
+def _retry_delay(response, attempt):
+    retry_after = None
+    if response is not None:
+        retry_after = getattr(response, "headers", {}).get("Retry-After")
+    if retry_after is not None:
+        try:
+            value = float(retry_after)
+        except (TypeError, ValueError):
+            value = None
+        if value is not None and math.isfinite(value) and value >= 0.0:
+            return min(value, 60.0)
+
+    status = getattr(response, "status_code", None)
+    if status == 429:
+        return min(5.0 * (2 ** attempt), 60.0)
+    if status is not None and 500 <= status < 600:
+        return min(2.0 * (2 ** attempt), 30.0)
+    return min(1.5 * (attempt + 1), 15.0)
+
+
+def request_era5_daily(
+    session,
+    endpoint,
+    lat,
+    lon,
+    start_year,
+    end_year,
+    *,
+    max_attempts=8,
+    sleep_fn=time.sleep,
+):
     rows=[]
     for y0 in range(start_year,end_year+1,4):
         y1=min(end_year,y0+3)
@@ -49,7 +79,8 @@ def request_era5_daily(session, endpoint, lat, lon, start_year, end_year):
             "temperature_unit":"celsius",
         }
         last=None
-        for attempt in range(5):
+        for attempt in range(max_attempts):
+            response=None
             try:
                 response=session.get(endpoint,params=params,timeout=120)
                 response.raise_for_status()
@@ -70,10 +101,15 @@ def request_era5_daily(session, endpoint, lat, lon, start_year, end_year):
                 break
             except Exception as exc:
                 last=exc
-                time.sleep(1.5*(attempt+1))
+                if attempt + 1 >= max_attempts:
+                    break
+                sleep_fn(_retry_delay(response,attempt))
         if last is not None:
-            raise RuntimeError(f"ERA5 request failed for {lat},{lon}: {last}")
-        time.sleep(0.15)
+            raise RuntimeError(
+                f"ERA5 request failed for {lat},{lon} after "
+                f"{max_attempts} attempts: {last}"
+            )
+        sleep_fn(0.5)
     return rows
 
 
