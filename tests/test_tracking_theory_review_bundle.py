@@ -15,6 +15,7 @@ from build_tracking_theory_review_bundle import (
     FORBIDDEN_PATH_TERMS,
     FORBIDDEN_TEXT_TOKENS,
     build_review_bundle,
+    imports_from,
 )
 
 
@@ -85,3 +86,20 @@ def test_anonymous_review_bundle_is_byte_stable_across_output_paths(tmp_path):
         )
     assert timestamps == {(2026, 9, 24, 0, 0, 0)}
     assert manifest["synthetic_receipt_freeze_date"] == "2026-09-20"
+
+
+def test_review_bundle_resolves_relative_and_bare_local_imports():
+    relative_local, relative_external = imports_from(
+        ROOT / "src" / "invasion.py"
+    )
+    assert ROOT / "src" / "numerical_tolerance.py" in relative_local
+    assert "numerical_tolerance" not in relative_external
+
+    bare_local, bare_external = imports_from(
+        ROOT / "scripts" / "render_tracking_theory_figures.py"
+    )
+    assert (
+        ROOT / "scripts" / "build_tracking_theory_figure_data.py"
+        in bare_local
+    )
+    assert "build_tracking_theory_figure_data" not in bare_external

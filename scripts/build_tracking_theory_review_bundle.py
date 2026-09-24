@@ -119,7 +119,29 @@ def imports_from(path: Path) -> tuple[set[Path], set[str]]:
     for node in ast.walk(tree):
         if isinstance(node, ast.ImportFrom):
             module = node.module or ""
-            if module == "src":
+            if node.level > 0:
+                base = path.parent
+                for _ in range(node.level - 1):
+                    base = base.parent
+
+                if module:
+                    dependency = base / (module.replace(".", "/") + ".py")
+                    if dependency.exists():
+                        local.add(dependency)
+                    else:
+                        raise FileNotFoundError(
+                            f"cannot resolve relative module {'.' * node.level + module!r} imported by {path}"
+                        )
+                else:
+                    for alias in node.names:
+                        dependency = base / (alias.name.replace(".", "/") + ".py")
+                        if dependency.exists():
+                            local.add(dependency)
+                        else:
+                            raise FileNotFoundError(
+                                f"cannot resolve relative module {'.' * node.level + alias.name!r} imported by {path}"
+                            )
+            elif module == "src":
                 for alias in node.names:
                     dependency = local_module_path("src." + alias.name, path)
                     if dependency is None:
@@ -127,7 +149,7 @@ def imports_from(path: Path) -> tuple[set[Path], set[str]]:
                             f"cannot resolve local module src.{alias.name!s} imported by {path}"
                         )
                     local.add(dependency)
-            elif module and node.level == 0:
+            elif module:
                 dependency = local_module_path(module, path)
                 if dependency is not None:
                     local.add(dependency)
