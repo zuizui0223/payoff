@@ -142,7 +142,10 @@ python scripts/build_tracking_theory_submission_package.py \
 The builder assembles the manuscript-facing files, internal claim/provenance
 contracts, the five frozen synthetic receipt families, the two core theory
 documents, and freshly rendered Figures 1–6. It writes per-file SHA256 values
-to `PAYOFF_B_TRACKING_SUBMISSION_MANIFEST.json` and a SHA256 for the final ZIP.
+to `PAYOFF_B_TRACKING_SUBMISSION_MANIFEST.json`. The ZIP uses a fixed frozen
+timestamp so identical content produces an identical archive, and
+`PAYOFF_B_TRACKING_SUBMISSION_ARCHIVE_RECEIPT.json` records the package-manifest
+hash and final ZIP SHA256 without creating a circular self-hash.
 
 CI artifact name:
 
