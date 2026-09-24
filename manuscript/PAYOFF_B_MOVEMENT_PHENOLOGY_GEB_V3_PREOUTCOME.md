@@ -426,6 +426,17 @@ These simulations therefore do not make the wigeon contraction disappear under
 the observed replicate-disagreement scales, but the failed coverage gate
 prevents us from treating them as a final measurement-error correction.
 
+As a second observation-layer sensitivity, we applied event-structure-preserving
+SIMEX to the same 224 transitions, assigning one shared error to each unique
+staging event and preserving origin--destination error dependence along each
+individual-year sequence. Under the three frozen incomplete-calibration
+scenarios, quadratic extrapolation to zero measurement error moved
+\(\hat\lambda\) upward from 0.7498 to 0.7827--0.8602. All extrapolated values
+remained below one. GitHub Actions reproduced the frozen seed-explicit result
+exactly. Because the error scales derive from the incomplete ERA5-Land
+calibration, these SIMEX values are robustness diagnostics rather than estimates
+of the latent biological \(\lambda\).
+
 ### Three taxa share a phase coordinate and a recurrent waiting-time actuator
 
 The source-faithful direct naive phase-retention summaries now span:
