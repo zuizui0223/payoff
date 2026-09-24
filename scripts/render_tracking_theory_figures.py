@@ -82,6 +82,46 @@ def scale(value, lo, hi, start, end):
     return start + (value - lo) * (end - start) / (hi - lo)
 
 
+def figure1(data):
+    stages = [
+        ("Local null", "movement + timing\nshare one restoring budget"),
+        ("Finite timing", "temporal bypass\nhas a capacity ceiling"),
+        ("Spatial re-entry", "movement returns\nunder stronger forcing"),
+        ("Partner matching", "interaction synchronizes\ntracking allocation"),
+        ("Coordination gate", "jointly good change\ncan be unilaterally bad"),
+        ("Population outcome", "visibility peaks near\npersistence boundaries"),
+        ("Finite N", "barrier crossing\n!= automatic rescue"),
+    ]
+    out = [
+        text(72, 125, "Adaptive capacity is not the same as adaptive accessibility", 21, "bold"),
+    ]
+    x = 70
+    y = 245
+    w = 140
+    gap = 22
+    for i, (title, subtitle) in enumerate(stages):
+        out.append(rect(x, y, w, 150, fill="#fafafa"))
+        out.append(text(x+w/2, y+32, title, 15, "bold", "middle"))
+        for j, row in enumerate(subtitle.split("\n")):
+            out.append(text(x+w/2, y+70+j*24, row, 13, anchor="middle"))
+        if i < len(stages)-1:
+            out.append(line(x+w, y+75, x+w+gap-4, y+75, 2))
+            out.append(text(x+w+gap/2, y+80, ">", 18, "bold", "middle"))
+        x += w + gap
+    out += [
+        text(72, 470, "Mechanistic sequence frozen for the standalone synthetic tracking-theory paper.", 17),
+        text(72, 505, "The GEB phase-retention programme is intentionally excluded from this evidence chain.", 16),
+        text(72, 560, "Core estimand hierarchy:", 17, "bold"),
+        text(72, 590, "tracking capacity != chosen architecture != coordinated value != unilateral accessibility != persistence", 16),
+        text(72, 620, "barrier crossing != long-run payoff improvement", 16),
+    ]
+    return svg_page(
+        "Figure 1. Tracking architecture from capacity to accessibility",
+        "Conceptual synthesis of the frozen model hierarchy",
+        "".join(out),
+    )
+
+
 def figure2(data):
     d = data["figure_2_temporal_bypass"]
     frontier = d["one_dimensional_frontier"]
@@ -313,6 +353,7 @@ def render_all(output_dir: Path) -> dict:
     data = build_figure_data()
     output_dir.mkdir(parents=True, exist_ok=True)
     figures = {
+        "figure_1": ("PAYOFF_B_TRACKING_FIG1_CONCEPT.svg", figure1(data)),
         "figure_2": ("PAYOFF_B_TRACKING_FIG2_TEMPORAL_BYPASS.svg", figure2(data)),
         "figure_3": ("PAYOFF_B_TRACKING_FIG3_COORDINATION_GATE.svg", figure3(data)),
         "figure_4": ("PAYOFF_B_TRACKING_FIG4_SYNCHRONIZATION.svg", figure4(data)),
