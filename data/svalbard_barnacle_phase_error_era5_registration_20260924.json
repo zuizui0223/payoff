@@ -1,0 +1,71 @@
+{
+  "registration_id": "svalbard_barnacle_phase_error_era5_replication_v1",
+  "frozen_date": "2026-09-24",
+  "freeze_state": {
+    "Aikens_lambda_outcome_opened": false,
+    "Svalbard_POWER_result_known": true,
+    "Greenland_Barents_ERA5_results_known": true,
+    "Svalbard_ERA5_result_opened": false
+  },
+  "source_artifact": {
+    "source_branch": "empirical/movement-phenology-macro-20260918",
+    "workflow_run": 35742152940,
+    "artifact_id": 10699807795,
+    "artifact_name": "movement-phenology-stage3-svalbard-goose-source",
+    "artifact_zip_sha256": "71f8a902f59b0e43012eb18e2cbe3b7b21d4679b6a608793c73360be00b54161",
+    "required_files": {
+      "regions": "stage3_svalbard_goose_regions.csv",
+      "stopovers": "stage3_svalbard_goose_stopovers.csv",
+      "power_onsets": "stage3_svalbard_goose_power_gdd_onsets.csv"
+    }
+  },
+  "primary_transition": {
+    "origin_region": "R2",
+    "destination_region": "R4",
+    "expected_POWER_lambda": -0.10632090683602258,
+    "expected_n": 16,
+    "expected_individuals": 15
+  },
+  "replicate_environment_source": {
+    "provider": "Open-Meteo Historical Weather API",
+    "dataset": "ERA5",
+    "api_endpoint": "https://archive-api.open-meteo.com/v1/archive",
+    "model_parameter": "era5",
+    "temperature_variable": "temperature_2m",
+    "temporal_resolution": "hourly",
+    "daily_aggregation": "arithmetic mean of exactly 24 finite GMT hourly values",
+    "timezone": "GMT",
+    "cell_selection": "nearest",
+    "elevation": "nan",
+    "api_key_required": false
+  },
+  "phenology_contract": {
+    "baseline_start_year": 1982,
+    "baseline_end_year": 2011,
+    "expected_years_per_region": 30,
+    "annual_transform": "latitude-dependent GDD + logistic third-derivative early jerk",
+    "base_temperature": "T_base=-0.25*latitude+13 C",
+    "minimum_gdd_fit_r_squared": 0.95,
+    "phase_coordinate": "arrival_doy - source-specific annual onset anomaly",
+    "anchor_invariance": "fixed-transition lambda and stopover slopes are unchanged by region-specific constant onset anchors"
+  },
+  "gates": {
+    "require_all_four_eligible_regions": true,
+    "require_all_region_years_ERA5_fit": true,
+    "power_refit_max_abs_lambda_error": 1e-8,
+    "require_transition_n_identity": true
+  },
+  "claim_boundary": {
+    "licensed_if_complete": [
+      "same-transition POWER versus ERA5 lambda comparison for frozen R2-R4",
+      "same-transition POWER versus ERA5 stopover-slope comparison",
+      "region-year onset-anomaly replicate disagreement"
+    ],
+    "not_licensed": [
+      "changing the primary transition after ERA5 outcome",
+      "calling replicate disagreement a gold-standard measurement-error distribution",
+      "using anchor sensitivity as a reason to change the lambda estimand",
+      "changing or opening the Aikens analysis"
+    ]
+  }
+}
