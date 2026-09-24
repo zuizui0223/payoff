@@ -340,6 +340,52 @@ Avoid:
 
 > Most real mutualists are trapped by coordination barriers.
 
+
+## Current empirical lambda reliability state — 2026-09-24
+
+The movement-phenology empirical programme currently separates two licenses:
+
+```text
+three-taxon estimator-scale phase-retention coordinate:
+    LICENSED
+
+cross-taxon latent biological lambda magnitude comparison:
+    HOLD
+```
+
+Current reliability state:
+
+- **Eurasian wigeon**: complete 256/256 POWER-versus-source-faithful-ERA5
+  replicate calibration and frozen event-structure SIMEX v2 are available.
+  The SIMEX range is 0.7979--0.9354, but replicate disagreement does not identify
+  one gold-standard source-specific error distribution. These values remain
+  assumption-conditional sensitivity diagnostics.
+- **mule deer**: observed predictor phase SD is source-backed, but no independent
+  phase-error distribution is identified from the published workbook.
+- **barnacle goose**: observed predictor phase SD is source-backed for the
+  highlighted route transitions, but no source-specific phase-error distribution
+  is identified.
+- Equal-independent-error true-`lambda=1` stress thresholds are diagnostic
+  boundaries only and do not count as reliability calibration.
+
+Machine contracts:
+
+```text
+src/cross_system_lambda_reliability.py
+data/payoff_b_cross_system_lambda_reliability_gate_20260924.json
+data/payoff_b_lambda_classical_error_stress_20260924.json
+```
+
+Therefore do not:
+
+- rank the three taxa by "corrected" biological lambda;
+- treat the wigeon SIMEX sensitivity as corrected truth;
+- infer that low mule-deer or goose lambda values are measurement-error free;
+- convert the stress thresholds into empirical error estimates.
+
+The Aikens within-system perturbation remains outcome-unopened and is not
+modified by these reliability analyses.
+
 ## Appropriate manuscript language
 
 Preferred:
