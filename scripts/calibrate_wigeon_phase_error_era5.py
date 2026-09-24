@@ -43,7 +43,7 @@ def parse_args():
         "--registration-json",
         type=Path,
         default=Path(
-            "data/wigeon_phase_error_era5_replication_registration_20260922.json"
+            "data/wigeon_phase_error_era5_sourcefaithful_registration_20260924.json"
         ),
     )
     p.add_argument("--batch-size", type=int, default=20)
@@ -99,8 +99,8 @@ def request_batch(session, endpoint, rows, year, *, max_retries):
         "longitude": ",".join(f"{v:.8f}" for v in longitudes),
         "start_date": f"{year}-01-01",
         "end_date": f"{year}-07-31",
-        "daily": "temperature_2m_mean",
-        "models": "era5_land",
+        "hourly": "temperature_2m",
+        "models": "era5",
         "timezone": ",".join(["GMT"] * count),
         "cell_selection": "nearest",
         "elevation": ",".join(["nan"] * count),
