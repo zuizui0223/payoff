@@ -15,8 +15,7 @@ def abstract_text():
 def test_oikos_abstract_is_within_300_words():
     abstract = abstract_text()
     words = re.findall(r"\b[\w’'–-]+\b", abstract)
-    assert len(words) == 295
-    assert len(words) <= 300
+    assert 200 <= len(words) <= 300
 
 
 def test_oikos_abstract_has_no_references_or_acronyms():

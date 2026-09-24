@@ -25,7 +25,7 @@ def test_tracking_submission_package_builds_with_manifest(tmp_path):
     assert manifest["scientific_freeze_date"] == "2026-09-24"
     assert manifest["synthetic_receipt_freeze_date"] == "2026-09-20"
     assert manifest["figure_count"] == 6
-    assert manifest["file_count"] == 40
+    assert manifest["file_count"] == 41
     assert zip_path.exists()
     assert manifest["zip_sha256"] == digest(zip_path)
 

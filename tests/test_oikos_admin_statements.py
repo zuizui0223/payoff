@@ -10,8 +10,9 @@ AI = ROOT / "submission" / "OIKOS_AI_USE_STATEMENT.md"
 def test_oikos_significance_statement_covers_required_logic():
     text = SIGNIFICANCE.read_text(encoding="utf-8")
     assert "Oikos is an appropriate outlet" in text
-    assert "adaptive capacity does not guarantee adaptive accessibility" in text
-    assert "Existing work has established" in text
+    assert "endpoint mismatch" in text
+    assert "tracking architecture" in text
+    assert "explicit falsification condition" in text
 
 
 def test_oikos_data_availability_does_not_invent_archive():
