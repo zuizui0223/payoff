@@ -1,0 +1,61 @@
+{
+  "frozen_date": "2026-09-24",
+  "status": "cross_system_lambda_reliability_gate_current",
+  "registry_source": "data/payoff_b_lambda_recovery_taxon_registry_20260922.json",
+  "gate": {
+    "estimator_scale_coordinate_licensed": true,
+    "unique_taxa": 3,
+    "direct_system_rows": 5,
+    "taxa_with_any_reliability_calibration": 1,
+    "taxa_with_source_specific_error_identification": 0,
+    "taxa_pending_reliability_calibration": 3,
+    "latent_magnitude_comparison_licensed": false,
+    "blockers": [
+      "SOURCE_SPECIFIC_MEASUREMENT_ERROR_NOT_IDENTIFIED_FOR_ALL_TAXA",
+      "ASSUMPTION_CONDITIONAL_SENSITIVITY_IS_NOT_CORRECTED_TRUTH",
+      "DIRECT_SYSTEMS_PENDING_RELIABILITY_CALIBRATION"
+    ],
+    "system_classes": [
+      [
+        "barnacle_barents_R1_R2",
+        "Branta leucopsis",
+        "PENDING"
+      ],
+      [
+        "barnacle_greenland_R2_R3",
+        "Branta leucopsis",
+        "PENDING"
+      ],
+      [
+        "barnacle_svalbard_southern_norway_to_svalbard",
+        "Branta leucopsis",
+        "PENDING"
+      ],
+      [
+        "eurasian_wigeon_staging_transition",
+        "Mareca penelope",
+        "SENSITIVITY_ASSUMPTION_CONDITIONAL"
+      ],
+      [
+        "mule_deer_whole_migration",
+        "Odocoileus hemionus",
+        "PENDING"
+      ]
+    ]
+  },
+  "claim_boundary": {
+    "licensed": [
+      "three-taxon estimator-scale phase-retention coordinate",
+      "wigeon assumption-conditional observation-error sensitivity"
+    ],
+    "hold": [
+      "cross-taxon comparison of latent biological lambda magnitudes",
+      "ranking taxa by corrected phase-retention strength"
+    ],
+    "next_steps": [
+      "execute the frozen Aikens within-system lambda perturbation when authenticated environmental extraction is available",
+      "seek source-backed reliability calibration for existing mule-deer and barnacle-goose phase coordinates before biological magnitude comparison",
+      "add future taxa only for new inferential boundaries rather than panel size"
+    ]
+  }
+}
