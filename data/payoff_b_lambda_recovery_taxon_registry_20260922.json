@@ -28,8 +28,8 @@
       },
       "independent_equal_error_true_lambda_one_stress": {
         "finite_solution": true,
-        "required_error_sd_over_observed_predictor_sd": 0.9448063509770708,
-        "required_error_sd_days_given_observed_predictor_sd": 24.948512220399383,
+        "required_error_sd_over_observed_predictor_sd": 0.944806583474736,
+        "required_error_sd_days_given_observed_predictor_sd": 24.948518523079528,
         "role": "stress threshold only, not empirical error estimate"
       }
     },
@@ -89,8 +89,8 @@
       },
       "independent_equal_error_true_lambda_one_stress": {
         "finite_solution": true,
-        "required_error_sd_over_observed_predictor_sd": 0.9323460283200896,
-        "required_error_sd_days_given_observed_predictor_sd": 11.64272131729045,
+        "required_error_sd_over_observed_predictor_sd": 0.9323460285752281,
+        "required_error_sd_days_given_observed_predictor_sd": 11.642721320476506,
         "role": "stress threshold only, not empirical error estimate"
       }
     },
@@ -120,8 +120,8 @@
       },
       "independent_equal_error_true_lambda_one_stress": {
         "finite_solution": true,
-        "required_error_sd_over_observed_predictor_sd": 0.7112566755232999,
-        "required_error_sd_days_given_observed_predictor_sd": 19.75157171966755,
+        "required_error_sd_over_observed_predictor_sd": 0.7112566751883598,
+        "required_error_sd_days_given_observed_predictor_sd": 19.751571710366274,
         "role": "stress threshold only, not empirical error estimate"
       }
     },
