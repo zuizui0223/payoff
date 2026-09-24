@@ -63,6 +63,9 @@ def main() -> None:
         stopover_source_interpretation=diagnostics.get(
             "W2_stopover_source_interpretation"
         ),
+        stopover_replication_diagnostic=diagnostics.get(
+            "W2_ERA5_replication_diagnostic"
+        ),
         travel_speed_diagnostic=diagnostics.get(
             "W3_travel_speed_diagnostic"
         ),
@@ -87,10 +90,10 @@ def main() -> None:
         "no_omnibus_score": True,
         "claim_boundary": (
             "W2 preregisters a directional stopover prediction and secondary "
-            "gain band but no fixed p-value threshold. The literal direction "
-            "gate and frozen source-level support interpretation are therefore "
-            "reported separately. W3 travel speed and W4 distance moderation "
-            "remain secondary diagnostics."
+            "gain band but no fixed p-value threshold. The formal POWER gate, "
+            "source-level support interpretation, and independent ERA5 "
+            "reconstruction robustness are reported separately. W3 travel "
+            "speed and W4 distance moderation remain secondary diagnostics."
         ),
     }
 
@@ -108,6 +111,7 @@ def main() -> None:
         f"strong_pass={int(bundle.strong_contraction_passed)} "
         f"stopover_direction_pass={int(bundle.stopover_direction_passed)} "
         f"stopover_source_supported={int(bundle.stopover_source_supported)} "
+        f"stopover_reconstruction_robust={bundle.stopover_reconstruction_robust} "
         f"class={bundle.two_gate_class}"
     )
 
