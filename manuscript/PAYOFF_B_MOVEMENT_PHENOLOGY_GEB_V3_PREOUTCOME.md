@@ -614,7 +614,11 @@ replicate calibration and event-structure SIMEX show that plausible frozen
 error allocations move wigeon \(\lambda\) upward, with SIMEX extrapolations
 from 0.798 to 0.935. Replicate disagreement does not identify a gold-standard
 error distribution, so these values are sensitivity diagnostics rather than
-corrected truth. Cross-taxon magnitude differences therefore cannot yet be
+corrected truth. A common independent-classical-error stress calculation
+identifies wigeon as the most error-fragile highlighted positive system, whereas
+the strongest mule-deer and goose contractions would require error SDs
+comparable to most of their observed predictor-phase variation under that
+specific null. Cross-taxon magnitude differences nevertheless cannot yet be
 attributed entirely to controller biology.
 
 All direct results are observational. Phase contraction does not by itself
