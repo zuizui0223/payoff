@@ -118,6 +118,38 @@ Detected architecture:
     with explicit overshoot or amplification cases retained rather than
     averaged away.
 
+Independent ERA5 reliability replication was frozen before ERA5 outcomes for
+two highlighted fixed transitions.
+
+    Greenland R2 -> R3:
+        POWER lambda_hat = 0.130731
+        ERA5  lambda_hat = 0.144204
+        difference = +0.013473
+
+        POWER stopover slope = -0.5242, p=0.00339
+        ERA5  stopover slope = -0.3789, p=0.00802
+
+    Barents R1 -> R2:
+        POWER lambda_hat = 0.494114
+        ERA5  lambda_hat = 0.515329
+        difference = +0.021215
+
+        POWER stopover slope = -0.5915, p=0.000988
+        ERA5  stopover slope = -0.5738, p=0.000995.
+
+Thus both estimator-scale phase contraction and the negative stopover response
+are reconstruction-robust in these two preregistered barnacle-goose
+transitions. The POWER--ERA5 disagreement remains an assumption-conditional
+reliability calibration, not a gold-standard error distribution.
+
+Machine result:
+
+    data/barnacle_era5_reliability_result_20260924.json
+    docs/PAYOFF_B_BARNACLE_ERA5_RELIABILITY_20260924.md.
+
+Svalbard remains outside this ERA5 lane and retains its separate
+anchor-sensitive construction.
+
 ## 4. Eurasian wigeon
 
 System:
