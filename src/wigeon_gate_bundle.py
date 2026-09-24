@@ -25,6 +25,7 @@ class WigeonGateBundle:
     strong_contraction_passed: bool
     stopover_direction_passed: bool
     stopover_source_supported: bool
+    stopover_replication_diagnostic: dict[str, Any] | None
     two_gate_class: str
     travel_speed_diagnostic: dict[str, Any] | None
     distance_moderation_diagnostic: dict[str, Any] | None
@@ -33,6 +34,19 @@ class WigeonGateBundle:
     def stopover_actuator_passed(self) -> bool:
         """Backward-compatible source-support status, not literal sign gate."""
         return self.stopover_source_supported
+
+    @property
+    def stopover_reconstruction_robust(self) -> bool | None:
+        if self.stopover_replication_diagnostic is None:
+            return None
+        status = str(
+            self.stopover_replication_diagnostic.get("status", "")
+        )
+        if status == "SUPPORTED":
+            return True
+        if status == "NOT_SUPPORTED":
+            return False
+        return None
 
     @property
     def omnibus_score(self):
@@ -48,6 +62,7 @@ def assemble_wigeon_gate_bundle(
     stopover_actuator_receipt: dict[str, Any],
     *,
     stopover_source_interpretation: dict[str, Any] | None = None,
+    stopover_replication_diagnostic: dict[str, Any] | None = None,
     travel_speed_diagnostic: dict[str, Any] | None = None,
     distance_moderation_diagnostic: dict[str, Any] | None = None,
 ) -> WigeonGateBundle:
@@ -160,6 +175,7 @@ def assemble_wigeon_gate_bundle(
         strong_contraction_passed=strong_pass,
         stopover_direction_passed=stopover_direction_pass,
         stopover_source_supported=stopover_source_supported,
+        stopover_replication_diagnostic=stopover_replication_diagnostic,
         two_gate_class=two_gate_class,
         travel_speed_diagnostic=travel_speed_diagnostic,
         distance_moderation_diagnostic=(
