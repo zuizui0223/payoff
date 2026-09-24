@@ -1,0 +1,245 @@
+{
+  "contract_id": "payoff_b_phase_retention_interval_standardization_v1",
+  "frozen_date": "2026-09-25",
+  "freeze_timing": "before_Aikens_lambda_outcome_opened",
+  "Aikens_lambda_outcome_opened": false,
+  "purpose": "Separate segment-scale phase retention from interval-normalized equivalent decay and propagated path-memory retention before any Aikens phase-retention outcome is opened.",
+  "definitions": {
+    "segment_retention_magnitude": "R = abs(lambda)",
+    "sign": "sign(lambda); negative values retain the overshoot/sign-reversal flag and are never silently converted to positive lambda",
+    "equivalent_decay_constant_per_day": "k_eq = -ln(R) / delta_t_ref_days",
+    "equivalent_daily_retention": "R_day = exp(-k_eq) = R^(1/delta_t_ref_days)",
+    "equivalent_daily_correction": "1 - R_day",
+    "path_memory_retention_homogeneous": "R_path(n) = R^n",
+    "path_memory_correction_homogeneous": "1 - R_path(n)"
+  },
+  "interpretation_limits": [
+    "k_eq is an equivalent reference-interval transformation, not a direct continuous-time controller estimate.",
+    "When source intervals vary, delta_t_ref_days is the preregistered median observed interval; the IQR is retained as a duration-sensitivity envelope.",
+    "R_path propagates only the retained-memory component of the initial phase deviation under a homogeneous transition coefficient; intercepts, new environmental innovations, route-stage heterogeneity, and process noise are not propagated by this summary.",
+    "Negative lambda remains an overshoot/sign-reversal case; k_eq describes only the magnitude envelope abs(lambda).",
+    "Whole-route cumulative retention is not reported for fixed goose transitions because a common preregistered full-route chain is absent.",
+    "SIMEX values are sensitivity scenarios and are not promoted as corrected biological truth."
+  ],
+  "source_policy": {
+    "reference_duration_rule": "median_observed_elapsed_days_on_the_frozen_pair_sample",
+    "duration_sensitivity_rule": "report_q25_and_q75_equivalent_k_envelope",
+    "wigeon_path_rule": "use observed animal-year transition-count distribution, not total_transitions/unique_individuals",
+    "cross_system_primary_rule": "raw lambda remains system-specific primary estimator; interval-normalized quantities are secondary comparison coordinates",
+    "Aikens_future_rule": "if the preregistered fixed-24h Aikens contrast becomes estimable, delta_t_ref_days is exactly 1.0 and standardization is secondary to the frozen group contrast"
+  },
+  "systems": [
+    {
+      "system_id": "mule_deer_whole_migration",
+      "taxon": "Odocoileus hemionus",
+      "interval_id": "whole_spring_migration_start_to_end",
+      "source_artifact_id": 10700007158,
+      "source_file": "stage3_mule_deer_joined_source_data.csv",
+      "source_file_sha256": "adfb7c7cd1db9cd8fbd9bec3d8e582122a4635f738696d293293326af8480907",
+      "duration_column_definition": "DOY_End - DOY_Start",
+      "duration_days": {
+        "n": 152,
+        "mean": 50.11842105263158,
+        "median": 47,
+        "sd": 24.468099034009505,
+        "min": 15,
+        "q25": 30.75,
+        "q75": 65.25,
+        "max": 147
+      },
+      "lambda_variants": [
+        {
+          "variant_id": "source_naive",
+          "lambda": 0.10734051982279666,
+          "role": "primary retrospective whole-migration estimator"
+        }
+      ],
+      "path_rule": {
+        "mode": "whole_interval_is_path",
+        "licensed": true
+      }
+    },
+    {
+      "system_id": "barnacle_svalbard_R2_R4",
+      "taxon": "Branta leucopsis",
+      "interval_id": "fixed_route_transition_R2_R4",
+      "source_artifact_id": 10699871077,
+      "source_file": "stage3_svalbard_goose_transitions.csv",
+      "source_file_sha256": "e1302c5d74f32ffb07af8123b89591ce24927a47e146e791493cc57a0b82ba3b",
+      "duration_column_definition": "destination_arrival_doy - origin_arrival_doy",
+      "duration_days": {
+        "n": 16,
+        "mean": 15.734375000000004,
+        "median": 14.833333333333314,
+        "sd": 6.044987114375263,
+        "min": 4.166666666666686,
+        "q25": 12.677083333333321,
+        "q75": 19.18750000000003,
+        "max": 27.958333333333343
+      },
+      "lambda_variants": [
+        {
+          "variant_id": "POWER",
+          "lambda": -0.10632090683602469,
+          "role": "primary fixed-transition estimator"
+        },
+        {
+          "variant_id": "ERA5",
+          "lambda": -0.28698340002500444,
+          "role": "independent environmental reconstruction"
+        }
+      ],
+      "path_rule": {
+        "mode": "not_licensed",
+        "licensed": false,
+        "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+      }
+    },
+    {
+      "system_id": "barnacle_greenland_R2_R3",
+      "taxon": "Branta leucopsis",
+      "interval_id": "fixed_route_transition_R2_R3",
+      "source_artifact_id": 10700391090,
+      "source_file": "stage3_greenland_goose_anomaly_phase_transitions.csv",
+      "source_file_sha256": "033d244ef1321d19055b77b3c71fd2a81249044394026634e4f186289896d0d2",
+      "duration_column_definition": "destination_arrival_doy - origin_arrival_doy",
+      "duration_days": {
+        "n": 6,
+        "mean": 16.743055555555557,
+        "median": 18.54166666666667,
+        "sd": 7.77631806738801,
+        "min": 3.791666666666657,
+        "q25": 13.604166666666679,
+        "q75": 20.854166666666664,
+        "max": 26
+      },
+      "lambda_variants": [
+        {
+          "variant_id": "POWER",
+          "lambda": 0.13073088347575457,
+          "role": "primary fixed-transition estimator"
+        },
+        {
+          "variant_id": "ERA5",
+          "lambda": 0.14420353006747622,
+          "role": "independent environmental reconstruction"
+        }
+      ],
+      "path_rule": {
+        "mode": "not_licensed",
+        "licensed": false,
+        "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+      }
+    },
+    {
+      "system_id": "barnacle_barents_R1_R2",
+      "taxon": "Branta leucopsis",
+      "interval_id": "fixed_route_transition_R1_R2",
+      "source_artifact_id": 10700391090,
+      "source_file": "stage3_barents_goose_anomaly_phase_transitions.csv",
+      "source_file_sha256": "2838b14dd41481301ae0e7053aaab08d502cce3374198fbed21c16e1cd6e632d",
+      "duration_column_definition": "destination_arrival_doy - origin_arrival_doy",
+      "duration_days": {
+        "n": 12,
+        "mean": 30.680555555555543,
+        "median": 26.64583333333332,
+        "sd": 21.002655355609978,
+        "min": 7.958333333333314,
+        "q25": 11.552083333333307,
+        "q75": 43.83333333333333,
+        "max": 66.83333333333333
+      },
+      "lambda_variants": [
+        {
+          "variant_id": "POWER",
+          "lambda": 0.4941139415235434,
+          "role": "primary fixed-transition estimator"
+        },
+        {
+          "variant_id": "ERA5",
+          "lambda": 0.515328602183836,
+          "role": "independent environmental reconstruction"
+        }
+      ],
+      "path_rule": {
+        "mode": "not_licensed",
+        "licensed": false,
+        "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+      }
+    },
+    {
+      "system_id": "eurasian_wigeon_staging_transition",
+      "taxon": "Mareca penelope",
+      "interval_id": "consecutive_reconstructed_staging_transition",
+      "source_artifact_id": 10678143392,
+      "source_file": "stage3_wigeon_controller_transitions.csv",
+      "source_file_sha256": "095b8b63a1a6ee284941be914fef226e360c222cea27ea24ed50c57791db5d48",
+      "event_source_file": "stage3_wigeon_tgs_events.csv",
+      "event_source_file_sha256": "79b3b528bedcc6c1d95da67a5282f0762e63a5371e85194c5a0ebdf7309ea7f3",
+      "duration_column_definition": "destination staging arrival_doy - origin staging arrival_doy after exact individual/year/segment join",
+      "duration_days": {
+        "n": 224,
+        "mean": 5.153715019427911,
+        "median": 1.056550925925933,
+        "sd": 7.049945727319229,
+        "min": 0.12615740740739056,
+        "q25": 0.926056134259273,
+        "q75": 8.041458333333345,
+        "max": 39.92495370370369
+      },
+      "lambda_variants": [
+        {
+          "variant_id": "POWER",
+          "lambda": 0.7497680211367301,
+          "role": "registered source-faithful primary"
+        },
+        {
+          "variant_id": "ERA5",
+          "lambda": 0.8113122876847199,
+          "role": "independent environmental reconstruction"
+        },
+        {
+          "variant_id": "SIMEX_correlation_proxy",
+          "lambda": 0.7978928038433668,
+          "role": "measurement-error sensitivity only"
+        },
+        {
+          "variant_id": "SIMEX_equal_independent",
+          "lambda": 0.8411694225451272,
+          "role": "measurement-error sensitivity only"
+        },
+        {
+          "variant_id": "SIMEX_conservative_full_disagreement",
+          "lambda": 0.9353935594001919,
+          "role": "measurement-error sensitivity only"
+        }
+      ],
+      "path_rule": {
+        "mode": "homogeneous_transition_count_histogram",
+        "licensed": true,
+        "unit": "animal_year",
+        "animal_years": 32,
+        "unique_individuals": 28,
+        "transitions": 224,
+        "transition_count_mean": 7,
+        "transition_count_median": 7,
+        "transition_count_histogram": {
+          "1": 5,
+          "2": 2,
+          "3": 3,
+          "5": 2,
+          "6": 3,
+          "7": 2,
+          "8": 4,
+          "9": 1,
+          "10": 3,
+          "11": 2,
+          "12": 1,
+          "13": 1,
+          "14": 1,
+          "16": 2
+        }
+      }
+    }
+  ]
+}
