@@ -20,6 +20,11 @@ CONTRACT = (
     / "data"
     / "payoff_b_phase_retention_interval_standardization_contract_20260925.json"
 )
+FROZEN_RESULT = (
+    ROOT
+    / "data"
+    / "payoff_b_phase_retention_interval_standardization_result_20260925.json"
+)
 
 
 def load_contract():
@@ -120,3 +125,9 @@ def test_goose_whole_route_cumulative_retention_is_not_licensed():
     ):
         row = find_variant(result, system_id, variant_id)
         assert row["path_memory"]["licensed"] is False
+
+
+def test_frozen_result_exactly_matches_contract_recalculation():
+    expected = build_result(load_contract())
+    frozen = json.loads(FROZEN_RESULT.read_text(encoding="utf-8"))
+    assert frozen == expected
