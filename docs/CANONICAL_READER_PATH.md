@@ -410,7 +410,30 @@ seasonal L,s,K,eta first
 This lane is distinct from the static architecture game above. Here migration
 and phenological change are themselves heritable tracking axes.
 
-Read in this order:
+Read the standalone synthetic manuscript first if the goal is the
+movement–phenology theory story:
+
+```text
+manuscript/PAYOFF_B_TRACKING_THEORY_V1.md
+```
+
+It freezes the tracking-theory claim as
+
+```text
+local space-time substitutability
+-> finite temporal bypass
+-> spatial re-entry
+-> partner synchronization
+-> coordination barrier
+-> persistence consequence
+-> finite-N barrier crossing.
+```
+
+The manuscript is intentionally separated from the GEB empirical
+phase-retention paper: post-2026-09-20 empirical lambda results do not count as
+evidence for its synthetic claims.
+
+For the full derivation and receipts, read in this order:
 
 ```text
 theory/MIGRATION_PHENOLOGY_TRACKING.md
