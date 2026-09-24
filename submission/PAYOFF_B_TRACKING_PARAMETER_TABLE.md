@@ -173,8 +173,9 @@ Primary source:
 | simulation | 100 steps; 20-step burn-in | frozen controller comparison |
 | total design cells | 105 | 5 x 7 x 3 |
 
-The controller gain `k_m` is **not** the baseline migration rate `m`, and
-neither is an empirical Aikens estimate.
+The controller gain `k_m` is **not** the baseline migration rate `m` and is
+**not an empirical Aikens estimate**. The baseline migration rate is likewise a
+synthetic model quantity in this paper.
 
 ## G. Finite-population and demographic visibility layer
 
