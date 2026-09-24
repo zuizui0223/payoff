@@ -38,5 +38,19 @@
     "observed_gain": 0.06286262115570287,
     "secondary_gain_band_passed": false,
     "interpretation": "source-faithful Jan-Jul reconstruction supports a negative stopover response; the preregistered secondary magnitude band fails"
+  },
+  "W2_ERA5_replication_diagnostic": {
+    "status": "NOT_SUPPORTED",
+    "role": "independent environmental-phase reconstruction robustness diagnostic; does not rewrite the registered POWER W2 gate",
+    "source": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json",
+    "observed_effect": -0.02418153728541716,
+    "cluster_se": 0.02378517424333495,
+    "p_value": 0.31039716561251024,
+    "interpretation": "negative point direction persists but the stopover association is not supported under ERA5; POWER W2 is therefore not reconstruction-robust"
+  },
+  "cross_reconstruction_actuator_conclusion": {
+    "power_W2_source_status": "SUPPORTED",
+    "era5_replication_status": "NOT_SUPPORTED",
+    "robust_stopover_mechanism_established": false
   }
 }
