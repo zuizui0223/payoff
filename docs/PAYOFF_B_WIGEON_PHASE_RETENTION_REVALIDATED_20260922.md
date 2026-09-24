@@ -3,7 +3,7 @@
 Frozen source-window amendment: **2026-09-22**  
 Corrected workflow result: **2026-09-22**
 
-Status: **source-faithful naive estimator restored; measurement-error audit still pending**.
+Status: **source-faithful POWER result retained; complete ERA5 reliability audit and SIMEX v2 completed**.
 
 ## 1. Why the previous result was superseded
 
@@ -100,150 +100,163 @@ constant.
 
 ## 5. Corrected W2 stopover actuator result
 
-The preregistered **primary** W2 prediction was directional:
+The preregistered primary W2 prediction was directional:
 
-```text
-stopover_duration decreases with later phase
-S'(E) < 0
-```
+    S'(E) < 0.
 
-No fixed p-value threshold was preregistered for W2. A secondary magnitude
-forecast was frozen separately:
+No fixed p-value threshold was preregistered. A secondary magnitude forecast
+was frozen separately:
 
-```text
-0.3 < g_S < 0.8
-```
+    0.3 < g_S < 0.8.
 
-Corrected source-faithful result:
+Under the registered POWER phase surface:
 
-```text
-slope = -0.062863 stopover-days / phase-day
-cluster SE = 0.027739
-p = 0.03166
-```
+    slope = -0.062863 d / phase-day
+    cluster SE = 0.027739
+    conventional clustered p = 0.03166.
 
-Therefore the frozen **directional** W2 gate passes. The conventional
-individual-clustered p-value (0.03166) also supports a nonzero negative slope,
-but it is reported as supporting evidence rather than as a preregistered
-threshold.
+Therefore the frozen POWER directional W2 gate passes. The secondary gain band
+fails because g_S=0.062863.
 
-The observed stopover gain is
+This remains the correct prospective outcome for the registered POWER analysis.
 
-```text
-g_S = 0.062863
-```
+A separately frozen source-faithful ERA5 reconstruction provides an independent
+robustness test, not a rewrite of that preregistration. On the same 224
+transitions:
 
-so the secondary preregistered `0.3 < g_S < 0.8` band **fails**.
+    ERA5 stopover slope = -0.024182 d / phase-day
+    clustered p = 0.3104.
 
-The previous near-zero estimate and p=0.972 are superseded. For the two-gate
-summary, the corrected source interpretation is:
+Thus the POWER stopover association is not replicated under ERA5. The current
+interpretation distinguishes:
 
-```text
-primary lambda gate:            PASS
-W2 directional actuator gate:   PASS
-W2 source support:              SUPPORTED
-W2 secondary gain band:         FAIL
+    registered POWER W2 directional gate:
+        PASS
 
-two-gate class:
-    LAMBDA_PASS_ACTUATOR_SUPPORTED
-```
+    independent ERA5 actuator replication:
+        NOT SUPPORTED
+
+    reconstruction-robust wigeon stopover mechanism:
+        NOT ESTABLISHED.
 
 ## 6. Secondary actuator diagnostics
 
-Travel speed remains unsupported:
+Travel speed remains unsupported under both environmental reconstructions.
 
-```text
-log-speed slope = +0.002757
-p = 0.417
-```
+POWER:
 
-Distance moderation also remains unsupported at the registered descriptive
-level:
+    log-speed slope = +0.002757
+    p = 0.417.
 
-```text
-direct endpoint-distance moderation:
-    p = 0.0823
+ERA5:
 
-route-progress x endpoint-distance phase term:
-    p = 0.252
-```
+    log-speed slope = +0.004076
+    p = 0.248.
 
-Thus the corrected actuator picture is specific rather than omnibus:
+Distance moderation remains unsupported at the registered descriptive level in
+the POWER analysis.
 
-```text
-stopover:
-    supported
-
-between-staging travel speed:
-    not supported
-
-distance moderation:
-    not supported
-```
+The wigeon actuator picture is therefore reconstruction-sensitive: the POWER
+phase surface supports a negative stopover response, whereas the ERA5 phase
+surface does not; travel speed is unsupported in both.
 
 ## 7. Cross-system interpretation
 
-The source correction changes the biological story in a useful way.
+The common response coordinate remains lambda, but the complete ERA5 follow-up
+changes the actuator story.
 
-The common response coordinate remains lambda, while a **recurrent waiting-time
-actuator** is now prospectively supported in wigeon as well as being observed
-in mule deer and barnacle geese. Movement-speed compensation is still not
-portable across all systems.
+Phase retention is reproduced across the two wigeon environmental surfaces:
 
-The defensible synthesis is therefore no longer:
+    POWER lambda_hat = 0.749768
+    ERA5  lambda_hat = 0.811312.
 
-> common lambda but wholly system-specific actuators.
+Both estimates are below one on the identical 224 transitions.
 
-It is closer to:
+By contrast, the stopover association is supported only under POWER. This makes
+wigeon a direct demonstration of why PAYOFF-B separates a response-coordinate
+gate from actuator-specific gates.
 
-> phase retention provides a common response coordinate; stopover/waiting is a
-> recurrent correction actuator across distinct migrants, while speed and
-> route-level contributions remain system-dependent.
+The defensible synthesis is:
 
-Effect magnitudes should not be pooled across the very different ecological
-intervals without an explicit scale map.
+> phase retention provides a common response coordinate; actuator inference is
+> less portable and can depend on the environmental phase reconstruction.
 
-## 8. Measurement-error ceiling remains active
+This no longer licenses a claim that stopover/waiting is robustly recurrent
+across all three taxa, although stopover compensation remains strong in mule
+deer and barnacle geese and is prospectively detected in the registered POWER
+wigeon analysis.
 
-The corrected lambda is still a naive errors-in-variables estimator.
+## 8. Measurement-error calibration and SIMEX v2
 
-For the source-faithful transitions:
+The corrected POWER lambda is a naive errors-in-variables estimator.
 
-```text
-observed predictor phase SD = 15.88 d
-```
+A first registered ERA5-Land calibration failed its frozen coverage gate at
+220/256 events and remains a formal FAIL.
 
-Under the simple equal-error, independent-error, true-lambda=1 stress model,
-an error SD of about **7.94 d** would be sufficient in expectation to attenuate
-the observed estimator to approximately 0.75.
+A separately frozen source-faithful ERA5 hourly follow-up then achieved:
 
-That 7.94 d value is a stress threshold, **not an empirical error estimate**.
+    256 / 256 paired events
+    224 / 224 complete transitions
+    coverage gate PASS
+    published phase validation PASS
+    POWER identity PASS.
 
-A frozen event-structure SIMEX sensitivity was subsequently reproduced in
-GitHub Actions. Conditional on the three predeclared incomplete-calibration
-scenarios, the extrapolated values were:
+Across all paired events:
 
-```text
-equal-independent replicate scale:     lambda_SIMEX = 0.8070
-correlated-discrepancy proxy:           lambda_SIMEX = 0.7827
-conservative full-disagreement scale:   lambda_SIMEX = 0.8602
-```
+    ERA5 - POWER phase median = 1 d
+    disagreement SD = 7.086 d
+    equal-independent replicate sensitivity SD = 5.010 d
+    consecutive discrepancy correlation = 0.3666.
 
-All are above the naive 0.7498 estimate and below one. They remain sensitivity
-values because the ERA5-Land calibration coverage gate failed.
+On the identical 224 transitions:
+
+    POWER lambda_hat = 0.749768
+    ERA5  lambda_hat = 0.811312.
+
+True-lambda=1 sensitivities are assumption-dependent:
+
+    equal-independent replicate scale:
+        lower-tail p = 0.00990
+
+    discrepancy-correlation proxy:
+        lower-tail p = 0.000500
+
+    conservative full-disagreement-as-each-source-error:
+        lower-tail p = 0.40086.
+
+The complete-calibration event-structure SIMEX v2 gives:
+
+    equal-independent replicate:
+        lambda_SIMEX = 0.8412
+
+    discrepancy-correlation proxy:
+        lambda_SIMEX = 0.7979
+
+    conservative full disagreement:
+        lambda_SIMEX = 0.9354.
+
+All frozen SIMEX v2 values are above the naive 0.7498 estimate and below one.
+However, the conservative scenario approaches complete retention, demonstrating
+material uncertainty in correction magnitude.
 
 Therefore PAYOFF-B currently licenses:
 
-- the corrected estimator-scale lambda;
-- the registered primary W1 PASS;
-- the registered W2 **directional** stopover PASS;
-- the corrected source-faithful environmental reconstruction.
+- the registered POWER W1 PASS;
+- estimator-scale contraction independently reproduced under ERA5;
+- the registered POWER W2 directional PASS as a source-specific prospective
+  result;
+- explicit reconstruction sensitivity of the wigeon stopover association;
+- complete-calibration measurement-error sensitivity.
 
-It does not yet license:
+It does not license:
 
-- a measurement-error-corrected biological lambda;
-- the claim that latent lambda is below one after accounting for phase error;
-- attributing cross-taxon lambda differences entirely to biology.
+- one uniquely corrected biological lambda;
+- a reconstruction-robust wigeon stopover mechanism;
+- attributing cross-taxon lambda magnitude differences entirely to biology.
 
-The next empirical task is source-backed phase-error calibration, especially
-for the wigeon system.
+Primary reliability receipts:
+
+    data/wigeon_era5_sourcefaithful_calibration_result_20260924.json
+    docs/PAYOFF_B_WIGEON_ERA5_SOURCEFAITHFUL_CALIBRATION_20260924.md
+    data/wigeon_phase_simex_era5_complete_result_20260924.json
+    docs/PAYOFF_B_WIGEON_ERA5_SIMEX_V2_20260924.md.
