@@ -160,6 +160,18 @@ CI artifact name:
 The bundle contract explicitly excludes the later empirical phase-retention
 programme (including Aikens/wigeon/barnacle observation products).
 
+
+Anonymous review code/data bundle:
+
+- builder: `scripts/build_tracking_theory_review_bundle.py`
+- ZIP: `OIKOS_TRACKING_ANON_CODE_DATA.zip`
+- CI artifact: `payoff-b-tracking-theory-anonymous-review-bundle`
+- contents: frozen synthetic receipts/results, theory documents, declared sweep
+  entry points, figure/SI builders, and recursively resolved `src/`
+  dependencies only;
+- anonymity gate: rejects author-identifying tokens, email addresses, and
+  empirical-programme paths before archive creation.
+
 ## CI contracts
 
 The tracking-theory package is guarded by tests covering:

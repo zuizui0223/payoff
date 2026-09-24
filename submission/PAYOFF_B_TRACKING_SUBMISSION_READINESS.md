@@ -61,7 +61,12 @@ Canonical figure captions:
 - the frozen abstract passes the Oikos <=300-word contract at 295 words with no
   citations or unexplained all-caps acronym tokens;
 - a portal-ready Supporting Information document is generated directly from
-  the five frozen JSON receipts and bundled automatically.
+  the five frozen JSON receipts and bundled automatically;
+- an anonymous code/data review ZIP is reproducibly generated from the
+  synthetic-theory entry scripts plus recursively resolved local dependencies,
+  and excludes empirical-programme paths and author-identifying tokens;
+- the initial-submission Data Availability statement and AI-use disclosure are
+  drafted for Oikos without inventing a repository DOI.
 
 ## Not required before a first manuscript freeze
 
@@ -86,11 +91,11 @@ for first-submission preparation**. No unresolved synthetic result, figure,
 bibliography, claim-boundary, parameter-status, or Results-to-Figure mapping
 task remains in the current v1 package.
 
-Remaining work is administrative rather than scientific: create the
-double-anonymized line-numbered main-text export, establish anonymous review
-access for code/data, fill verified author/title-page metadata, finalize the
-Data Availability and AI-use disclosures plus other declarations, archive the
-frozen package to obtain a persistent DOI, and complete portal upload steps.
+Remaining work is administrative rather than scientific: visually verify the
+generated double-anonymized line-numbered RTF, fill verified author/title-page
+metadata, enter conflict/funding/ethics/acknowledgment declarations, upload the
+prepared anonymous code/data and Supporting Information files, and later mint a
+public persistent DOI if the journal requires it after acceptance.
 
 Do not introduce a "first ever" claim unless a later literature audit supports
 it.

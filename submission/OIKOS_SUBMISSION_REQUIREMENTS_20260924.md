@@ -129,18 +129,23 @@ Current package:
 - scripts and tests in repository;
 - deterministic submission ZIP with SHA256 manifest/receipt.
 
-Action:
+Current status:
 
-- for first submission, prepare an anonymous review-access route for code and
-  synthetic data;
-- before/after acceptance as required, mint a persistent archive DOI.
+- **READY for initial submission** via direct anonymous file upload:
+  `OIKOS_TRACKING_ANON_CODE_DATA.zip`;
+- the bundle is built from the frozen synthetic theory only, recursively
+  includes local source dependencies, and fails if empirical-programme paths
+  or author-identifying tokens are detected;
+- before/after acceptance as required, mint a persistent public archive DOI.
 
 ### 7. Data Availability Statement
 
 Required at submission.
 
-Draft only after the actual anonymous archive/review-access route is chosen.
-Do not insert a fake DOI or repository URL.
+Current initial-submission statement is ready in
+`submission/OIKOS_DATA_AVAILABILITY_TEMPLATE.md` and points to direct
+anonymous file upload rather than an invented repository URL. The public
+archive/DOI line remains a post-acceptance placeholder.
 
 ### 8. AI-use disclosure
 
@@ -150,7 +155,10 @@ text.
 
 Current status:
 
-- **required administrative disclosure not yet finalized**.
+- **draft ready** in `submission/OIKOS_AI_USE_STATEMENT.md`, explicitly
+  disclosing ChatGPT-assisted coding, drafting/editing, literature organization,
+  figure and submission-material preparation, with author validation and
+  responsibility.
 
 Use a verified factual statement only. It should describe the actual use of
 AI-assisted drafting, coding, editing, or other tasks as applicable, and state
@@ -203,11 +211,10 @@ These are author/admin metadata. Do not infer them from repository contents.
 
 Scientific analysis is frozen. Remaining Oikos preparation tasks are:
 
-1. create anonymous main-text export with page + continuous line numbers;
-2. prepare anonymous code/data review-access route;
-3. finalize Data Availability Statement;
-4. finalize factual AI-use disclosure;
-5. fill title-page author/affiliation/ORCID metadata;
-6. enter conflict/funding/ethics/acknowledgment fields in ScholarOne.
+1. verify the generated anonymous RTF in a word processor/PDF preview;
+2. fill title-page author/affiliation/ORCID metadata;
+3. enter conflict/funding/ethics/acknowledgment fields in ScholarOne;
+4. upload the anonymous code/data ZIP and Supporting Information;
+5. replace the public-archive placeholder only when a DOI exists.
 
 None of these tasks justifies new synthetic parameter sweeps.
