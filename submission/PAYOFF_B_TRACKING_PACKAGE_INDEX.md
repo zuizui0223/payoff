@@ -125,6 +125,32 @@ Remaining tasks are target-journal-specific only:
 - replace repository placeholders with an archived DOI;
 - perform portal-specific file conversion or upload steps.
 
+## Reproducible working package
+
+Builder:
+
+- `scripts/build_tracking_theory_submission_package.py`
+
+Canonical command:
+
+```bash
+python scripts/build_tracking_theory_submission_package.py \
+  --output-dir outputs/tracking_theory_submission_package \
+  --zip outputs/PAYOFF_B_TRACKING_SUBMISSION_PACKAGE.zip
+```
+
+The builder assembles the manuscript-facing files, internal claim/provenance
+contracts, the five frozen synthetic receipt families, the two core theory
+documents, and freshly rendered Figures 1–6. It writes per-file SHA256 values
+to `PAYOFF_B_TRACKING_SUBMISSION_MANIFEST.json` and a SHA256 for the final ZIP.
+
+CI artifact name:
+
+`payoff-b-tracking-theory-submission-package`
+
+The bundle contract explicitly excludes the later empirical phase-retention
+programme (including Aikens/wigeon/barnacle observation products).
+
 ## CI contracts
 
 The tracking-theory package is guarded by tests covering:
