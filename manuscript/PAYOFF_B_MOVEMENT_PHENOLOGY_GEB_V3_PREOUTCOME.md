@@ -199,6 +199,20 @@ and 90% coverage threshold were retained. Replicate disagreement was used as a
 sensitivity scale rather than treated as a gold-standard measurement-error
 distribution.
 
+For barnacle geese, we prospectively froze one highlighted fixed transition per
+flyway before the corresponding ERA5 outcome was inspected: Greenland R2->R3,
+Barents R1->R2 and Svalbard R2->R4. ERA5 hourly 2-m temperature was aggregated
+to GMT daily means and passed through the identical latitude-dependent
+GDD--logistic-jerk transform used for the POWER reconstruction. Greenland and
+Barents used the frozen 1982--2013 baseline; Svalbard used its pre-existing
+1982--2011 baseline. Annual onset anomalies were centered separately within
+each environmental source. Because a region-specific constant onset offset
+changes only the intercept in a fixed origin/destination regression, the
+Svalbard reliability lane did not require the uncertain absolute regional
+anchors. POWER refits had to reproduce the frozen transition lambda values and
+sample sizes before ERA5 estimates were interpreted. POWER--ERA5 anomaly
+differences were again treated only as replicate sensitivity scales.
+
 Finally, using the complete ERA5 calibration, we froze a second SIMEX analysis
 that assigned one shared error to each unique staging event, preserved
 origin--destination error dependence within individual-year sequences, used
