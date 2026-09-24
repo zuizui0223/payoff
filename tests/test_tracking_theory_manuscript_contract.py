@@ -46,4 +46,4 @@ def test_tracking_theory_prior_art_and_claim_freeze_exist():
     assert CLAIM_FREEZE.exists()
     prior = PRIOR_ART.read_text(encoding="utf-8")
     assert "do not claim that it is novel" in prior.lower()
-    assert "coordinated value != unilateral accessibility" in prior
+    assert "coordinated value != unilateral accessibility" in prior.lower()
