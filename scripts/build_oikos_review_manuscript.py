@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 from pathlib import Path
 
 
@@ -40,7 +41,11 @@ def strip_inline_markdown(text: str) -> str:
     text = text.replace("**", "")
     text = text.replace("__", "")
     text = text.replace(chr(96), "")
-    text = text.replace("*", "")
+    text = re.sub(
+        r"(?<![A-Za-z0-9])\*([A-Za-z][A-Za-z &–—:-]+)\*(?![A-Za-z0-9])",
+        r"\1",
+        text,
+    )
     return text.strip()
 
 
