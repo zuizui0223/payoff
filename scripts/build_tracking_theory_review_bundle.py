@@ -95,32 +95,49 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def module_path(module: str) -> Path | None:
-    if not module.startswith("src."):
-        return None
-    candidate = ROOT / (module.replace(".", "/") + ".py")
-    return candidate if candidate.exists() else None
+def local_module_path(module: str, importer: Path) -> Path | None:
+    if module.startswith("src."):
+        candidate = ROOT / (module.replace(".", "/") + ".py")
+        return candidate if candidate.exists() else None
+
+    same_dir = importer.parent / (module.replace(".", "/") + ".py")
+    if same_dir.exists():
+        return same_dir
+
+    scripts_candidate = ROOT / "scripts" / (module.replace(".", "/") + ".py")
+    if scripts_candidate.exists():
+        return scripts_candidate
+
+    return None
 
 
-def imports_from(path: Path) -> tuple[set[str], set[str]]:
+def imports_from(path: Path) -> tuple[set[Path], set[str]]:
     tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-    local: set[str] = set()
+    local: set[Path] = set()
     external: set[str] = set()
 
     for node in ast.walk(tree):
         if isinstance(node, ast.ImportFrom):
             module = node.module or ""
-            if module.startswith("src."):
-                local.add(module)
-            elif module == "src":
+            if module == "src":
                 for alias in node.names:
-                    local.add("src." + alias.name)
+                    dependency = local_module_path("src." + alias.name, path)
+                    if dependency is None:
+                        raise FileNotFoundError(
+                            f"cannot resolve local module src.{alias.name!s} imported by {path}"
+                        )
+                    local.add(dependency)
             elif module and node.level == 0:
-                external.add(module.split(".")[0])
+                dependency = local_module_path(module, path)
+                if dependency is not None:
+                    local.add(dependency)
+                else:
+                    external.add(module.split(".")[0])
         elif isinstance(node, ast.Import):
             for alias in node.names:
-                if alias.name.startswith("src."):
-                    local.add(alias.name)
+                dependency = local_module_path(alias.name, path)
+                if dependency is not None:
+                    local.add(dependency)
                 elif alias.name != "src":
                     external.add(alias.name.split(".")[0])
 
@@ -141,14 +158,9 @@ def resolve_source_closure(seed_paths: list[str]) -> tuple[list[str], list[str]]
             raise FileNotFoundError(path)
         seen_paths.add(path)
 
-        local_modules, third_party = imports_from(path)
+        local_dependencies, third_party = imports_from(path)
         external.update(third_party)
-        for module in sorted(local_modules):
-            dependency = module_path(module)
-            if dependency is None:
-                raise FileNotFoundError(
-                    f"cannot resolve local module {module!r} imported by {path}"
-                )
+        for dependency in sorted(local_dependencies):
             if dependency not in seen_paths:
                 pending.append(dependency)
 
