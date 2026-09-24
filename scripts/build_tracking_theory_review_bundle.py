@@ -50,6 +50,7 @@ UTILITY_SCRIPTS = [
 
 FROZEN_FILES = [
     "data/payoff_b_tracking_theory_claim_freeze_20260924.json",
+    "data/payoff_b_tracking_theory_framing_amendment_20260925.json",
     "data/payoff_b_tracking_synthetic_receipt_20260920.json",
     "data/payoff_b_moving_landscape_receipt_20260920.json",
     "data/payoff_b_2d_connectivity_receipt_20260920.json",

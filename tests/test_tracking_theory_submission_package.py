@@ -61,6 +61,7 @@ def test_tracking_submission_package_contains_core_files(tmp_path):
     assert "submission_ready/OIKOS_DATA_AVAILABILITY_TEMPLATE.md" in names
     assert "submission_ready/OIKOS_AI_USE_STATEMENT.md" in names
     assert "internal_contracts/payoff_b_tracking_theory_claim_freeze_20260924.json" in names
+    assert "internal_contracts/payoff_b_tracking_theory_framing_amendment_20260925.json" in names
     assert "theory/MIGRATION_PHENOLOGY_TRACKING.md" in names
     assert len([name for name in names if name.startswith("figures/") and name.endswith(".svg")]) == 6
 

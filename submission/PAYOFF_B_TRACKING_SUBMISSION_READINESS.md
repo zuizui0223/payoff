@@ -6,9 +6,13 @@ Canonical manuscript:
 
 `manuscript/PAYOFF_B_TRACKING_THEORY_V1.md`
 
-Canonical claim freeze:
+Canonical scientific claim freeze:
 
 `data/payoff_b_tracking_theory_claim_freeze_20260924.json`
+
+Submission-framing amendment, with scientific evidence unchanged:
+
+`data/payoff_b_tracking_theory_framing_amendment_20260925.json`
 
 Canonical prior-art boundary:
 

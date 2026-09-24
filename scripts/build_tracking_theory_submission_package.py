@@ -34,6 +34,7 @@ SUBMISSION_FILES = [
 
 INTERNAL_FILES = [
     "data/payoff_b_tracking_theory_claim_freeze_20260924.json",
+    "data/payoff_b_tracking_theory_framing_amendment_20260925.json",
     "docs/PAYOFF_B_TRACKING_THEORY_PRIOR_ART_20260924.md",
     "submission/PAYOFF_B_TRACKING_PARAMETER_TABLE.md",
     "submission/PAYOFF_B_TRACKING_RESULTS_FIGURE_CROSSWALK.md",

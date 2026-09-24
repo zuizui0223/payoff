@@ -19,6 +19,7 @@ Branch:
 ## Claim and provenance boundary
 
 - `data/payoff_b_tracking_theory_claim_freeze_20260924.json`
+- `data/payoff_b_tracking_theory_framing_amendment_20260925.json`
 - `docs/PAYOFF_B_TRACKING_THEORY_PRIOR_ART_20260924.md`
 - five frozen 2026-09-20 synthetic receipt families in `data/` and `docs/`
 
