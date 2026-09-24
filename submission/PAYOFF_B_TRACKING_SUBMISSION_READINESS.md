@@ -42,7 +42,11 @@ Canonical figure captions:
 - CI checks manuscript corruption, claim-freeze consistency, negative-result
   retention and rendered-figure contracts;
 - a submission-style parameter map now separates analytic definitions,
-  synthetic design values, robustness-only settings and reporting conventions.
+  synthetic design values, robustness-only settings and reporting conventions;
+- all Results subsections are mapped to a main figure or frozen supplementary
+  receipt through `submission/PAYOFF_B_TRACKING_RESULTS_FIGURE_CROSSWALK.md`;
+- the existing robustness programme is organized into Supplements S1–S6 in
+  `submission/PAYOFF_B_TRACKING_SUPPLEMENT_MAP.md`.
 
 ## Not required before a first manuscript freeze
 
@@ -75,25 +79,7 @@ After CI rendering succeeds:
 - retain numeric values exactly as produced from frozen figure data;
 - change layout only, not scientific content, if a panel needs visual repair.
 
-### 3. Results-to-figure crosswalk
-
-Every principal numerical result in the Results section should map to one of
-Figures 2–6 or to a clearly labeled supplementary receipt. Avoid adding
-orphan numbers that are not visualized or frozen.
-
-### 4. Supplement design
-
-Recommended supplement structure:
-
-1. deterministic benchmark and occupancy details;
-2. one-dimensional moving-landscape robustness;
-3. boundary-retention and stochastic patch-demography checks;
-4. 2D anisotropy and distribution-overlap sensitivities;
-5. full partner-asymmetry cells;
-6. finite-N drift diagnostics;
-7. code and workflow provenance.
-
-### 5. Final novelty sentence
+### 3. Final novelty sentence
 
 Use a narrow formulation:
 
