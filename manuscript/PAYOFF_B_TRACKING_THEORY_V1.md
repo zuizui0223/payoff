@@ -1,4 +1,4 @@
-# Tracking together or failing apart: space–time substitution, finite temporal buffering, and coordination barriers under moving environments
+# Hidden tracking: space–time buffering of environmental mismatch and its limits under moving environments
 
 **Status:** synthetic theory manuscript v1  
 **Programme boundary:** separate from the PAYOFF-B GEB empirical phase-retention paper and from the anti-phase Theoretical Ecology Brief.  
@@ -6,29 +6,25 @@
 
 ## Abstract
 
-Organisms can track a moving environment by redistributing in space, shifting seasonal timing, or combining both responses. These axes are often discussed as alternative forms of climate tracking, but substitution at the level of environmental mismatch does not imply substitution at the level of evolutionary accessibility or population persistence. We develop a coupled migration–phenology model in which movement and timing close a common environmental mismatch while interacting species additionally pay for spatial and phenological separation. A local linear controller gives an exact null: movement and timing feedback are interchangeable through their summed restoring gain. Explicit moving landscapes break that equivalence. Phenological capacity extends persistence under faster environmental movement but only over a finite temporal-bypass window, after which spatial redistribution re-enters the optimal strategy. In two-dimensional fragmented landscapes, increasing phenological capacity reduced the sampled zigzag-route growth penalty by about 83%, yet movement again became necessary as forcing increased. Interactions introduce a second failure mode. With positive matching dependence and a fine unilateral mutation step, 22 of 24 sampled two-dimensional cells contained a coordination barrier and 21 of 24 converted local extinction into coordinated persistence. In a direct local audit, a coordinated timing shift increased joint low-density growth by 1.095, whereas the same shift by either partner alone decreased its payoff by 5.946 because the partners temporarily became mismatched. Finite-population drift can cross such barriers, but in the sampled regime the accompanying exploration load prevented a gain in long-run mean joint growth. The resulting hierarchy is therefore not simply movement versus phenology. Tracking capacity, locally accessible adaptation, coordinated value, demographic visibility, and stochastic barrier crossing are distinct ecological quantities. The model predicts that temporal adjustment can delay spatial tracking demands while interspecific matching can convert a technically available adaptive route into an evolutionarily inaccessible one.
+Directional environmental change need not produce a large observed mismatch if organisms can redistribute tracking between space and seasonal timing. A small mismatch can therefore conceal a substantial and changing adaptive response. We develop a coupled migration–phenology model to ask what low mismatch hides, when temporal adjustment only delays spatial tracking, and when interactions make that buffering fail. A local linear controller gives an exact null: movement and timing feedback are interchangeable through their summed restoring gain, so the same mismatch dynamics can arise from different allocations between axes. Explicit moving landscapes break that equivalence. Phenological capacity extends persistence but only over a finite temporal-bypass window, after which spatial redistribution re-enters. In fragmented landscapes, timing strongly reduced sampled route costs without eliminating later movement demand. Interactions add a second limit: with positive matching dependence, 22 of 24 sampled two-dimensional cells contained a coordination barrier, and a direct one-step audit showed that a timing shift was beneficial when both partners changed together but strongly deleterious when either changed alone. Finite-population drift could cross such barriers without improving long-run mean growth. Environmental mismatch is therefore an outcome of a multi-axis tracking system rather than a direct measure of forcing or adaptive effort. Low mismatch can be maintained while the tracking burden shifts between space and time; that buffering becomes fragile when timing capacity is exhausted, landscape geometry raises spatial costs, or partner dependence blocks coordinated reallocation.
 
-**Keywords:** climate tracking; phenology; migration; coevolution; evolutionary accessibility; habitat fragmentation; persistence; coordination barrier
+**Keywords:** environmental mismatch; climate tracking; phenology; migration; spatiotemporal buffering; coevolution; habitat fragmentation; persistence
 
 ---
 
 ## 1. Introduction
 
-Environmental change can be tracked along more than one biological axis. A population may move toward newly suitable locations, alter the timing of migration or reproduction, or combine smaller changes in both dimensions. At the level of abiotic mismatch, these responses can look substitutable: one unit of spatial displacement and an appropriately scaled shift in timing may close the same environmental gap.
+A small observed mismatch under directional environmental change can be deceptively reassuring. Mismatch is an endpoint difference between experienced and favourable conditions; it does not reveal how much biological change was required to keep that difference small. A population may redistribute in space, alter seasonal timing, or combine both responses, so similar endpoint mismatch can be generated by different tracking architectures.
 
-That observation leaves three harder questions unresolved.
+This creates an inference problem as well as an ecological one. Existing work already recognizes that phenological mismatch can be buffered and that climate responses should be studied across space and time rather than one axis at a time (Weir & Phillimore 2024; Fredston et al. 2025). Combined range and phenology shifts are also empirically associated with population performance in some systems (Hällfors et al. 2021; Macgregor et al. 2019). We therefore do not claim novelty for mismatch buffering, for integrating spatial and temporal responses, or for climate-driven interaction mismatch.
 
-First, does temporal adjustment actually replace spatial tracking, or only postpone it? A seasonal schedule has finite room to shift, whereas directional environmental change can continue to accumulate. If timing saturates, movement should eventually re-enter even when phenological adjustment is initially cheaper.
+The narrower question is what a low mismatch does and does not identify. If movement and timing can close the same environmental gap, low mismatch alone may be insufficient to infer which axis is carrying the tracking burden. That ambiguity becomes consequential because the two axes have different constraints.
 
-Second, how does habitat connectivity change this substitution? A spatial response must be realized through actual movement across a landscape. Detours, bottlenecks, and anisotropic movement can make the spatial axis costly in ways that are absent from a one-dimensional moving-optimum model. Timing could therefore act as a temporary bypass of geometric route costs.
+Three questions follow. First, how long can temporal adjustment buffer spatial tracking demand? A seasonal schedule has finite room to shift, whereas directional environmental change can continue to accumulate. Second, how does landscape geometry alter the cost of keeping mismatch small? Spatial correction must be realized through actual movement across habitat, whereas timing can change mismatch without traversing a route. Third, when does buffering fail because successful tracking must remain coordinated with another species? A jointly favourable reallocation between axes can be inaccessible if either partner pays a transient mismatch cost by changing first.
 
-Third, what happens when successful tracking must remain coordinated with another species? Two interacting lineages may face the same moving environment but allocate adaptation differently between movement and timing. A coordinated change could improve both species while the same move by either species alone is deleterious because it transiently breaks spatial or phenological matching. In that case the global adaptive solution exists but is inaccessible to unilateral evolution.
+Here we separate these scales explicitly. The central null is deliberately strong: in a local linear controller, movement and timing enter only through their summed restoring gain and are exactly substitutable before costs and constraints are added. We then restore finite phenological capacity, explicit spatial redistribution, two-dimensional connectivity, interaction matching, demographic stochasticity, and finite-population evolutionary drift.
 
-Several components of this problem are already established. Climate responses in behaviour, phenology, and geographic range have been explicitly framed as related ways of realigning organisms with their niches (Muthukrishnan et al. 2025), and empirical work shows that combined range and phenology shifts can be associated with stronger population performance (Hällfors et al. 2021; Macgregor et al. 2019). Moving-habitat models already treat dispersal, multidimensional landscapes, and species interactions, while spatial eco-evolutionary models have shown that dispersal can alter adaptation of seasonal timing (Harsch et al. 2017; Pontarp et al. 2015). Likewise, phenological mismatch and the evolution of interacting phenologies under climate change are mature research areas (Visser & Gienapp 2019; Kharouba & Wolkovich 2020; Gilman et al. 2012). We therefore do not treat the coexistence of spatial and temporal responses, or climate-driven interaction mismatch, as the novelty here. The narrower question is whether interacting species that can allocate tracking between space and time can actually reach a jointly valuable alternative through unilateral adaptive changes.
-
-Here we separate these questions explicitly. The framework combines five layers that are usually conflated: environmental tracking capacity, optimization over migration and phenology, unilateral evolutionary accessibility, demographic persistence, and finite-population barrier crossing. The central null is deliberately simple. In a local linear controller, movement and timing enter only through their summed restoring gain and are exactly substitutable before costs and constraints are added. We then restore the ingredients that break this null one by one: finite phenological capacity, explicit spatial redistribution, two-dimensional connectivity, interaction matching, demographic stochasticity, and finite-population evolutionary drift.
-
-The resulting prediction is not that one axis is generally superior. Instead, space–time substitution is scale dependent. Timing can buffer spatial costs and delay movement, but finite capacity forces spatial tracking to re-enter. Interaction matching can synchronize partner responses under moderate forcing, yet the same synchronization can lock both partners into a maladaptive local attractor under stronger forcing. Adaptation can therefore fail even when a jointly persistent tracking architecture is present in the strategy space.
+The resulting prediction is not that one axis is generally superior. It is that **low environmental mismatch can mask a changing and eventually constrained tracking burden**. Timing can delay spatial demand, but finite capacity forces spatial tracking to re-enter. Partner matching can preserve alignment under moderate forcing, yet the same dependence can block the coordinated reallocation required under stronger forcing. Coordination barriers are therefore a failure mode of spatiotemporal buffering rather than the starting point of the theory.
 
 ---
 
@@ -344,9 +340,19 @@ Thus local space–time substitutability becomes forcing-dependent complementari
 
 ---
 
-## 4. Synthesis: five quantities that should not be collapsed
+## 4. Synthesis: mismatch is an outcome, not a tracking architecture
 
-The model produces a nested hierarchy:
+The first distinction is observational:
+
+```text
+similar environmental mismatch
+!=
+similar tracking architecture
+```
+
+In the exact local controller, movement and timing enter only through total restoring gain. The same mismatch dynamics can therefore be maintained by different allocations of effort between the two axes. Endpoint mismatch by itself does not identify where the tracking burden sits.
+
+The explicit models add a second hierarchy:
 
 ```text
 tracking capacity
@@ -356,71 +362,79 @@ tracking capacity
 != population persistence
 ```
 
-Finite populations add a sixth distinction:
+Finite populations add:
 
 ```text
 barrier crossing != long-run payoff improvement
 ```
 
-This hierarchy explains why apparently simple questions such as “can phenology compensate for movement?” or “can drift rescue maladaptation?” do not have one-dimensional answers.
+These separations explain why small mismatch is not automatically evidence of weak forcing or little adaptation. At the landscape level, movement and timing differ because movement must traverse geometry and timing has finite range. At the interaction level, partners must also remain aligned. At the evolutionary level, a coordinated reallocation may be unavailable to unilateral selection. At the demographic level, the consequences of that failure are most visible near persistence transitions.
 
-At the abiotic level, timing and movement can close the same mismatch. At the landscape level, they differ because movement must traverse geometry and timing has finite range. At the interaction level, both axes must remain aligned between partners. At the evolutionary level, coordinated changes may be unavailable to unilateral selection. At the demographic level, even a real accessibility barrier matters most near a persistence transition. Finally, stochastic exploration can cross a barrier while reducing mean performance.
+The paper therefore treats observed mismatch as the output of a tracking system, not as a direct readout of its adaptive burden.
 
 ---
 
 ## 5. Discussion
 
-### 5.1 Temporal adjustment is a buffer, not an unlimited substitute for movement
+### 5.1 Low mismatch can conceal substantial tracking
 
-The strongest recurring result across the landscape models is finite temporal bypass. Phenological adjustment can absorb environmental displacement and substantially reduce the cost of spatial detours. But directional environmental forcing accumulates while the timing axis is bounded. Movement therefore re-enters once the temporal buffer approaches its operating limit.
+The exact local controller makes the core inference problem explicit. If movement-mediated and timing-mediated correction contribute through the same total restoring gain, then the same environmental mismatch can be maintained by different mixtures of movement and timing. A low mismatch therefore does not identify low tracking demand; it can be the product of active compensation.
 
-This distinction matters conceptually. A short-term empirical association in which populations adjust timing while moving little does not imply that temporal adjustment can replace redistribution indefinitely. The model predicts a regime shift: timing first delays spatial demand, then mixed tracking emerges, and movement dominates again near the boundary.
+This matters for empirical interpretation. Studies that measure only phenology, only redistribution, or only endpoint mismatch can miss reallocation along the unmeasured axis. The model does not imply that all low mismatches are costly or adaptive. It shows more narrowly that mismatch alone is non-identifying when multiple correction pathways are available.
 
-### 5.2 Connectivity changes the realized cost of an otherwise substitutable axis
+### 5.2 Temporal buffering has a finite operating range
 
-In the local controller, one unit of restoring feedback has no memory of whether it came from movement or timing. In a landscape, the two axes have different mechanics. Spatial correction has to be realized through redistribution across habitat, while timing changes mismatch without physically crossing a barrier.
+The strongest recurring result across the landscape models is finite temporal bypass. Phenological adjustment can absorb environmental displacement and reduce the cost of spatial detours. But directional environmental forcing accumulates while the timing axis is bounded. Movement therefore re-enters once the temporal buffer approaches its operating limit.
 
-This gives phenology a special role under fragmentation: it can reduce the urgency of corridor traversal even when it cannot ultimately remove the need for spatial tracking. The persistence frontier can therefore be controlled by one axis while short-term movement burden is strongly modified by the other.
+A short-term observation in which populations maintain low mismatch by changing timing while moving little does not imply that temporal adjustment can replace redistribution indefinitely. The predicted sequence is timing-dominated buffering, mixed tracking as temporal capacity is approached, and stronger spatial redistribution near the persistence boundary.
 
-### 5.3 Mutual dependence can create maladaptive synchronization
+### 5.3 Spatial geometry changes the cost of keeping mismatch small
 
-Interaction matching adds a qualitatively different failure mode. Under moderate forcing, synchronization is useful because it keeps partners aligned despite intrinsic differences in preferred tracking allocation. Under strong forcing, the same matching pressure can trap both species on a locally accessible architecture that lies outside the persistence envelope.
+In the local controller, one unit of restoring feedback has no memory of whether it came from movement or timing. In a landscape, spatial correction has to be realized through redistribution across habitat, while timing can reduce environmental mismatch without physically crossing a barrier.
 
-This is not simply “coevolution slows adaptation.” The coordinated alternative can be adjacent in strategy space and strongly favorable when both partners move together. The obstruction is specifically unilateral accessibility: the transient mismatch cost of moving first is larger than the long-run benefit of reaching the joint alternative.
+Phenology can therefore reduce the urgency and cost of corridor traversal even when it cannot remove the long-run need for spatial tracking. Similar endpoint mismatch can be maintained at very different spatial costs.
 
-The result predicts that stronger dependence between partners can sometimes increase failure risk even when a jointly viable solution exists.
+### 5.4 Partner dependence is a failure mode of buffering
 
-### 5.4 Evolutionary accessibility and demographic consequence are different scales
+Interaction matching adds a qualitatively different limit. Under moderate forcing, synchronization is useful because it keeps partners aligned despite intrinsic differences in preferred tracking allocation. Under strong forcing, the same matching pressure can trap both species on a locally accessible architecture outside the persistence envelope.
 
-The higher-replication demographic rerun is important because it removes an initially tempting but unstable claim. Large cell-level persistence gains did not replicate. What did replicate was the location of demographic visibility: barriers matter most near persistence transitions.
+This is not simply “coevolution slows adaptation,” and it is not the generic claim that phenological mismatch is harmful. The coordinated alternative can be adjacent in strategy space and strongly favourable when both partners change together. The obstruction is the transient partner mismatch created by moving first.
 
-This makes the theory more, not less, informative. It predicts where an accessibility barrier should become observable as a population effect. Far from demographic thresholds, evolutionary constraints can remain hidden in abundance data even when the underlying strategy landscape is strongly structured.
+Coordination barriers therefore provide one mechanism by which previously effective spatiotemporal buffering can fail: each species possesses the relevant response axis, but the pair cannot reallocate the tracking burden through the sequence allowed by unilateral selection.
 
-### 5.5 Drift is a barrier-crossing mechanism, not automatically a rescue mechanism
+### 5.5 Buffering failure and demographic consequence occur at different scales
 
-Small populations explore more broadly and can cross deterministic adaptive barriers. But broader exploration also spends time in low-payoff states. Whether stochastic escape improves long-run performance therefore depends on the payoff gain beyond the barrier relative to the exploration load required to reach and retain it.
+The higher-replication demographic rerun removes an initially tempting but unstable claim. Large cell-level persistence gains did not replicate. What did replicate was the location of demographic visibility: coordination barriers matter most near persistence transitions.
 
-In the sampled regime the latter dominated. This separates two ideas that are often rhetorically merged: stochastic barrier crossing and adaptive rescue.
+A real constraint on tracking architecture can therefore remain hidden in abundance data when both strategies lie safely inside the persistence region. Mismatch, strategy, and demographic consequence need not become conspicuous at the same point.
+
+### 5.6 Drift crosses barriers without automatically restoring buffering
+
+Small populations explore more broadly and can cross deterministic adaptive barriers. But broader exploration also spends time in low-payoff states. Whether stochastic escape restores successful tracking depends on the payoff gain beyond the barrier relative to the exploration load required to reach and retain it.
+
+In the sampled regime the latter dominated. Stochastic barrier crossing and adaptive rescue should therefore remain separate claims.
 
 ---
 
 ## 6. Testable predictions
 
-The synthetic model supports qualitative predictions that can be tested without treating its parameter values as natural thresholds.
+The synthetic model supports qualitative predictions that can be evaluated without treating its numerical parameters as natural thresholds. Each prediction therefore has a declared observable and a condition that would count against the mechanism.
 
-1. **Spatial re-entry prediction.** Systems using strong timing adjustment under moderate directional environmental change should show increasing reliance on spatial redistribution as timing approaches an effective seasonal or physiological bound.
+1. **Hidden-burden prediction.** Populations can maintain similar environmental mismatch with different mixtures of timing and spatial tracking. **Observable:** simultaneous time series of environmental mismatch, phenological shift and spatial displacement expressed on a common environmental scale. **Falsified if:** after comparable forcing and measurement error are accounted for, low-mismatch populations consistently map to one unique movement–timing allocation rather than showing compensatory reallocation between axes.
 
-2. **Fragmentation-buffer prediction.** Greater timing flexibility should reduce short-term growth or performance penalties caused by spatial detours even when it does not eliminate long-run dependence on connectivity.
+2. **Spatial re-entry prediction.** Increasing timing adjustment should delay, not permanently replace, redistribution as directional forcing continues. **Observable:** longitudinal phenological shift, range/centroid displacement and residual environmental mismatch as timing approaches an empirical seasonal or physiological limit. **Falsified if:** continued forcing after timing saturates produces no increase in spatial redistribution while the population continues to maintain low mismatch and persistence.
 
-3. **Coordination-gate prediction.** In tightly interacting pairs, an individually induced shift in tracking axis should be more costly than the same shift performed by both partners, especially when interaction matching is strong.
+3. **Fragmentation-buffer prediction.** Timing flexibility should reduce the short-term demographic cost of spatial detours. **Observable:** matched populations or experimental landscapes differing in route resistance and timing flexibility, with growth/reproductive performance and realized movement distance measured together. **Falsified if:** increased timing flexibility does not attenuate the performance penalty associated with added route resistance under otherwise comparable forcing.
 
-4. **Forcing-dependent synchronization prediction.** Stronger partner matching should reduce between-partner tracking divergence under moderate forcing but can increase failure risk under stronger forcing if the synchronized local attractor lies outside the persistence envelope.
+4. **Coordination-gate prediction.** The same tracking-axis shift can have different fitness effects when made by one partner versus both. **Observable:** factorial manipulation or natural perturbation of timing/spatial tracking in partner A, partner B and both partners, with individual and joint fitness measured. **Falsified if:** the unilateral shift is not more costly than the coordinated shift, or if jointly changing partners does not restore performance when the unilateral treatment reduces it.
 
-5. **Demographic-visibility prediction.** The population-level effect of an evolutionary coordination barrier should be largest near persistence boundaries and weak when both strategies are safely persistent.
+5. **Forcing-dependent synchronization prediction.** Stronger partner coupling should reduce between-partner tracking divergence under moderate forcing but need not improve persistence under stronger forcing. **Observable:** partner strategy distance, interaction mismatch and demographic performance across a gradient of environmental forcing and interaction dependence. **Falsified if:** stronger dependence does not reduce partner divergence under moderate forcing, or if synchronized states remain equally persistent across the stronger-forcing regime where the model predicts a local lock.
 
-6. **Drift-load prediction.** Small populations may show more frequent exploration across a coordination barrier without higher mean long-run performance unless the payoff gain beyond the barrier is large enough to compensate for stochastic occupancy of inferior states.
+6. **Demographic-visibility prediction.** The population consequence of a tracking-accessibility barrier should be largest near persistence thresholds. **Observable:** independently estimated barrier strength together with baseline persistence or low-density growth across populations spanning safe, threshold and near-doomed regimes. **Falsified if:** barrier-associated demographic effects are no larger near the transition than in safely persistent regimes after accounting for sampling precision.
 
-These are directional predictions. The present synthetic parameter values do not define empirical cutoffs.
+7. **Drift-load prediction.** Smaller populations can cross a coordination barrier more often without obtaining higher long-run performance. **Observable:** replicated evolutionary trajectories across effective population sizes, recording barrier-crossing frequency and time-averaged fitness or growth separately. **Falsified if:** smaller populations neither increase crossing frequency nor incur any detectable exploration cost, or if crossing frequency and long-run performance always increase together.
+
+These are conditional mechanism tests, not empirical cutoffs. Failure of one prediction would reject that proposed mechanism without requiring retuning of the synthetic parameter grid.
 
 ---
 
@@ -438,11 +452,11 @@ The empirical PAYOFF-B phase-retention programme is therefore kept separate. It 
 
 ## 8. Conclusion
 
-Movement and phenological change are exactly substitutable only in the most local description of environmental correction. Once finite capacity, route geometry, partner matching, evolutionary accessibility, and demography are restored, that equivalence breaks in structured ways.
+Movement and phenological change are exactly substitutable only in the most local description of environmental correction. That null has an important consequence: **small environmental mismatch does not, by itself, reveal how an organism is keeping pace with change**.
 
-Timing can buffer connectivity costs and postpone movement, but it has a finite bypass range. Interaction can synchronize partner tracking, but synchronization can become maladaptive under stronger forcing. A jointly persistent alternative can be present one mutation step away while remaining inaccessible because either partner moving first is selected against. Drift can cross that barrier without guaranteeing a long-run fitness gain.
+Once finite capacity and route geometry are restored, the hidden tracking burden becomes structured. Timing can buffer connectivity costs and postpone movement, but the bypass is finite and spatial tracking re-enters under stronger forcing. Once partner matching is added, buffering can fail for a different reason: the pair may require a coordinated reallocation that neither species can profitably make first. Drift can cross such a barrier without guaranteeing long-run rescue.
 
-The central lesson is therefore not that organisms should move or change timing. It is that **adaptive capacity is not the same as adaptive accessibility**. Under a moving environment, persistence can fail because the viable tracking architecture cannot be reached by the sequence of individually favorable changes available to interacting populations.
+The central lesson is therefore not simply that organisms can respond in both space and time, and not simply that adaptive capacity differs from adaptive accessibility. It is that **environmental mismatch is an outcome of a multi-axis tracking system**. Low mismatch can remain stable while the burden shifts between movement and timing, and that apparent stability can break when a response axis reaches its limit or interacting partners cannot coordinate the required shift.
 
 ---
 
@@ -451,7 +465,7 @@ The central lesson is therefore not that organisms should move or change timing.
 The full novelty audit is frozen in
 `docs/PAYOFF_B_TRACKING_THEORY_PRIOR_ART_20260924.md`.
 
-The manuscript does **not** claim novelty for combining dispersal and phenology, for modelling moving habitat, or for climate-driven mismatch between interacting species. **The contribution is not a new demonstration that species can respond to climate change in both space and time. It is the separation of adaptive capacity from unilateral accessibility when interacting partners can reallocate tracking between spatial and temporal axes.** The supporting estimand chain runs from exact local space-time substitutability to finite temporal bypass, spatial re-entry, a direct unilateral coordination gate, demographic visibility, and finite-N crossing without automatic rescue.
+The manuscript does **not** claim novelty for combining dispersal and phenology, for modelling moving habitat, for recognizing that mismatch can be buffered, or for integrating spatial and temporal climate responses. **The contribution is the formal separation of endpoint environmental mismatch from the tracking architecture that produces it, followed by explicit failure conditions for that buffering: finite temporal capacity, spatial geometry, and partner-dependent accessibility of reallocating between axes.** The coordination gate is the sharpest failure-mode result, not the sole headline.
 
 The submission bibliography is frozen in
 `submission/PAYOFF_B_TRACKING_REFERENCES.bib`. The compact manuscript list is:
@@ -460,6 +474,8 @@ The submission bibliography is frozen in
 - Hällfors MH et al. (2021) Combining range and phenology shifts offers a winning strategy for boreal Lepidoptera. *Ecology Letters* 24:1619–1632. DOI: 10.1111/ele.13774.
 - Harsch MA et al. (2017) Moving forward: insights and applications of moving-habitat models for climate change ecology. *Journal of Ecology* 105:1169–1181. DOI: 10.1111/1365-2745.12724.
 - Kharouba HM, Wolkovich EM (2020) Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. DOI: 10.1038/s41558-020-0752-x.
+- Weir JC, Phillimore AB (2024) Buffering and phenological mismatch: a change of perspective. *Global Change Biology* 30:e17294. DOI: 10.1111/gcb.17294.
+- Fredston AL et al. (2025) Reimagining species on the move across space and time. *Trends in Ecology & Evolution* 40:629–638. DOI: 10.1016/j.tree.2025.03.015.
 - Macgregor CJ et al. (2019) Climate-induced phenology shifts linked to range expansions in species with multiple reproductive cycles per year. *Nature Communications* 10:4455. DOI: 10.1038/s41467-019-12479-w.
 - Muthukrishnan R et al. (2025) Chasing the Niche: Escaping Climate Change Threats in Place, Time, and Space. *Global Change Biology* 31:e70167. DOI: 10.1111/gcb.70167.
 - Pontarp M, Johansson J, Jonzén N, Lundberg P (2015) Adaptation of timing of life history traits and population dynamic responses to climate change in spatially structured populations. *Evolutionary Ecology* 29:565–579. DOI: 10.1007/s10682-015-9759-6.

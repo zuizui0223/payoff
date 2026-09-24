@@ -12,6 +12,19 @@ Muthukrishnan et al. (2025), *Chasing the Niche: Escaping Climate Change Threats
 
 **Boundary for PAYOFF-B:** do not claim that it is novel to place movement, timing, and other responses into one conceptual climate-tracking framework.
 
+
+### Mismatch buffering is already an explicit research programme
+
+Weir & Phillimore (2024), *Buffering and phenological mismatch: a change of perspective* (*Global Change Biology* 30:e17294, DOI: 10.1111/gcb.17294), argues directly that phenological asynchrony and its fitness consequences can be buffered through several mechanisms and that research should identify the limits of those buffers.
+
+**Boundary for PAYOFF-B:** do not claim novelty for the generic statement that ecological mismatch can be buffered or that climate impacts can remain cryptic because buffering operates.
+
+### Integrating shifts across space and time is already a current synthesis target
+
+Fredston et al. (2025), *Reimagining species on the move across space and time* (*Trends in Ecology & Evolution* 40:629–638, DOI: 10.1016/j.tree.2025.03.015), argues that distributional and phenological responses are too often analysed separately and advocates simultaneous analysis across spatiotemporal gradients.
+
+**Boundary for PAYOFF-B:** do not claim novelty for integrating range and phenology responses. The narrower object is that endpoint mismatch can remain non-identifying even when both axes are measured, because alternative allocations can generate the same local correction and have different finite or partner-dependent failure modes.
+
 ### Combined range and phenology shifts are already associated with better outcomes in empirical systems
 
 Hällfors et al. (2021), *Combining range and phenology shifts offers a winning strategy for boreal Lepidoptera* (*Ecology Letters*, DOI: 10.1111/ele.13774), analysed 289 Lepidoptera and found the strongest positive population trends among the minority of species showing both northward range shifts and phenological advances.
@@ -202,6 +215,6 @@ Prefer:
 
 The literature audit supports a **narrow but defensible** novelty statement:
 
-> The new object is not space-time climate response itself. It is the evolutionary accessibility of switching between spatial and temporal tracking architectures when interacting partners must remain matched. The exact local substitution null, finite temporal bypass, one-step coordination gate, demographic visibility window, and finite-N crossing/load separation are the manuscript's distinctive chain.
+> The new object is not mismatch buffering itself and not the integration of space and time. It is the non-identifiability of tracking architecture from endpoint mismatch, combined with explicit limits on that hidden compensation: finite temporal bypass, spatial re-entry, and partner-dependent accessibility of reallocating between axes. The one-step coordination gate is the sharpest failure-mode result, not the sole headline.
 
-This boundary should be revised only if a closer published model is found that explicitly allows both partners to evolve allocation between spatial and temporal tracking axes and demonstrates the same unilateral coordination barrier.
+This boundary should be revised if a closer published model is found that both treats movement and timing as substitutable contributors to the same environmental-mismatch correction and derives the same finite or partner-dependent breakdown of reallocating between them.
