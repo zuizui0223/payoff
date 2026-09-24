@@ -27,7 +27,7 @@
     "arrival_phase_q1_days": 13.182282986111108,
     "arrival_phase_q3_days": 34.24508680555555,
     "published_median_days": 22.5,
-    "published_q1_days": 13.0,
+    "published_q1_days": 13,
     "published_q3_days": 35.3,
     "gate": "PASS"
   },
@@ -41,7 +41,7 @@
     "lambda_se": 0.04990566712278233,
     "naive_p_vs_lambda_one": 5.328241982727779e-7,
     "outcome": "PASS",
-    "measurement_error_status": "ESTIMATOR_SCALE_ONLY_PENDING_ERROR_CALIBRATION"
+    "measurement_error_status": "COMPLETE_REPLICATE_CALIBRATION_SENSITIVITY_AVAILABLE"
   },
   "stronger_forecast": {
     "registration": "data/wigeon_strong_contraction_registration_20260921.json",
@@ -65,13 +65,26 @@
       "source_support": "SUPPORTED",
       "secondary_gain_band_prediction": "0.3 < g_S < 0.8",
       "observed_gain": 0.06286262115570287,
-      "secondary_gain_band_outcome": "FAIL"
+      "secondary_gain_band_outcome": "FAIL",
+      "independent_era5_replication": {
+        "source": "data/wigeon_era5_sourcefaithful_calibration_result_20260924.json",
+        "lambda_hat": 0.8113122876847199,
+        "stopover_slope": -0.02418153728541716,
+        "cluster_p": 0.31039716561251024,
+        "outcome": "NOT_SUPPORTED",
+        "interpretation": "registered POWER W2 remains PASS; independent ERA5 phase reconstruction does not replicate the stopover association"
+      }
     },
     "travel_speed": {
       "log_gain_per_phase_day": 0.0027573744846977923,
       "cluster_se": 0.0033451590730534287,
       "p": 0.41699858388761735,
-      "outcome": "NOT_SUPPORTED"
+      "outcome": "NOT_SUPPORTED",
+      "independent_era5_replication": {
+        "log_gain_per_phase_day": 0.004076336573011247,
+        "p": 0.24779343279794633,
+        "outcome": "NOT_SUPPORTED"
+      }
     },
     "distance_moderation": {
       "beta": -0.06315608322821453,
@@ -88,13 +101,33 @@
     "required_error_sd_days_given_observed_predictor_sd": 7.944266530669527,
     "role": "stress threshold only, not empirical error estimate"
   },
-  "retained_interpretation": "phase retention is a portable estimator-scale response coordinate; stopover/waiting is a recurrent actuator, while speed and route-level components remain system-specific",
+  "retained_interpretation": "phase retention is a portable estimator-scale response coordinate; in wigeon contraction replicates across POWER and ERA5 while the POWER stopover association does not, so actuator evidence is less reconstruction-stable",
   "claim_boundary": [
     "no universal latent lambda",
     "no universal stopover gain",
-    "the secondary 0.3-0.8 stopover gain band failed",
-    "no causal identification of stopover as the sole wigeon actuator",
-    "no biological latent-lambda claim before source-backed measurement-error calibration",
+    "registered POWER W2 directional gate remains a source-specific PASS",
+    "independent ERA5 reconstruction does not support the wigeon stopover association",
+    "no reconstruction-robust wigeon stopover mechanism claim",
+    "no unique corrected latent lambda from EIV or SIMEX sensitivities",
     "no numerical pooling across incompatible segment definitions"
-  ]
+  ],
+  "cross_reconstruction_reliability": {
+    "power_lambda_hat": 0.7497680211367301,
+    "era5_lambda_hat": 0.8113122876847199,
+    "era5_minus_power_lambda_hat": 0.0615442665479898,
+    "phase_contraction_replicated": true,
+    "stopover_actuator_replicated": false,
+    "interpretation": "phase-retention contraction is more reconstruction-stable than the proposed stopover actuator"
+  },
+  "measurement_error_calibration": {
+    "era5land_registered_lane": "FAIL_COVERAGE_RETAINED",
+    "source_faithful_era5_lane": "COMPLETE",
+    "paired_events": 256,
+    "discrepancy_sd_days": 7.085549321765848,
+    "simex_v2_range": [
+      0.7978928038433668,
+      0.9353935594001919
+    ],
+    "unique_corrected_lambda_licensed": false
+  }
 }
