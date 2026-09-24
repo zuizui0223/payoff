@@ -152,6 +152,15 @@ def build_package(output_dir: Path, zip_path: Path | None = None) -> dict:
         })
 
     generated_figure_manifest = figure_dir / "PAYOFF_B_TRACKING_FIGURE_MANIFEST.json"
+    bundled_figure_manifest = json.loads(
+        generated_figure_manifest.read_text(encoding="utf-8")
+    )
+    for row in bundled_figure_manifest["figures"].values():
+        row["path"] = Path(row["path"]).name
+    generated_figure_manifest.write_text(
+        json.dumps(bundled_figure_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
     manifest["files"].append({
         "bundle_path": str(generated_figure_manifest.relative_to(output_dir)),
         "source": "generated:figure_manifest",
