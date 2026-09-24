@@ -212,18 +212,31 @@ Barents   = 2.00744 d
 
 are therefore recorded only as assumption-conditional sensitivity scales.
 
-Svalbard remains outside this ERA5 replication lane and retains its separate
-anchor-sensitive reconstruction.
+This two-transition lane was subsequently complemented by a separately frozen
+Svalbard R2 -> R4 ERA5 replication. Because fixed-transition slopes are
+invariant to region-specific constant onset anchors, that follow-up used annual
+onset anomalies only and reproduced both the negative lambda sign and the
+negative stopover response.
+
+See:
+
+```text
+docs/PAYOFF_B_SVALBARD_ERA5_RELIABILITY_20260924.md
+data/svalbard_barnacle_era5_reliability_result_20260924.json
+```
 
 ## 7. Consequence for the cross-system claim
+
+Together with the separately frozen Svalbard follow-up, all three highlighted
+barnacle-goose flyways now carry POWER-to-ERA5 reliability evidence.
 
 The strengthened claim is:
 
 > A common phase-retention coordinate is not merely a consequence of one
 > environmental product. In wigeon, contraction reproduces under POWER and
-> ERA5 while one proposed actuator does not; in two preregistered
-> barnacle-goose transitions, both phase retention and stopover response are
-> stable across the same environmental-source substitution.
+> ERA5 while one proposed actuator does not; across the three highlighted
+> barnacle-goose flyways, phase transformation and the negative stopover
+> response are both stable across the same environmental-source substitution.
 
 This supports treating **response coordinate, actuator, and reliability state
 as separate empirical layers**.
