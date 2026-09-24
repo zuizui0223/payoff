@@ -1,7 +1,8 @@
 from math import sin, pi
 
-import pandas as pd
 import pytest
+
+pd = pytest.importorskip("pandas")
 
 from src.barnacle_goose_phase_error_calibration import (
     fit_fixed_route_lambda,
