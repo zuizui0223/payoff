@@ -1,0 +1,894 @@
+{
+  "result_id": "payoff_b_phase_retention_interval_standardization_20260925",
+  "frozen_date": "2026-09-25",
+  "contract_id": "payoff_b_phase_retention_interval_standardization_v1",
+  "Aikens_lambda_outcome_opened": false,
+  "status": "INTERVAL_STANDARDIZATION_SECONDARY_COORDINATES_COMPLETE",
+  "systems": [
+    {
+      "system_id": "mule_deer_whole_migration",
+      "taxon": "Odocoileus hemionus",
+      "interval_id": "whole_spring_migration_start_to_end",
+      "duration_days": {
+        "n": 152,
+        "mean": 50.11842105263158,
+        "median": 47,
+        "sd": 24.468099034009505,
+        "min": 15,
+        "q25": 30.75,
+        "q75": 65.25,
+        "max": 147
+      },
+      "path_rule": {
+        "mode": "whole_interval_is_path",
+        "licensed": true
+      },
+      "variants": [
+        {
+          "lambda": 0.10734051982279666,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.10734051982279666,
+          "reference_duration_days": 47,
+          "equivalent_decay_constant_per_day": 0.04748402275481786,
+          "equivalent_daily_retention": 0.9536257093226796,
+          "equivalent_daily_correction": 0.04637429067732035,
+          "equivalent_half_life_days": 14.597482276069726,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.10734051982279666,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.10734051982279666,
+                "reference_duration_days": 30.75,
+                "equivalent_decay_constant_per_day": 0.07257720551142893,
+                "equivalent_daily_retention": 0.929993943230491,
+                "equivalent_daily_correction": 0.070006056769509,
+                "equivalent_half_life_days": 9.550480425300936,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.10734051982279666,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.10734051982279666,
+                "reference_duration_days": 47,
+                "equivalent_decay_constant_per_day": 0.04748402275481786,
+                "equivalent_daily_retention": 0.9536257093226796,
+                "equivalent_daily_correction": 0.04637429067732035,
+                "equivalent_half_life_days": 14.597482276069726,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.10734051982279666,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.10734051982279666,
+                "reference_duration_days": 65.25,
+                "equivalent_decay_constant_per_day": 0.034203050873202134,
+                "equivalent_daily_retention": 0.966375261373835,
+                "equivalent_daily_correction": 0.033624738626164996,
+                "equivalent_half_life_days": 20.265653585394674,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.034203050873202134,
+            "k_eq_max_over_duration_iqr": 0.07257720551142893
+          },
+          "path_memory": {
+            "licensed": true,
+            "mode": "whole_interval_is_path",
+            "path_retention_magnitude": 0.10734051982279666,
+            "path_correction_magnitude": 0.8926594801772033,
+            "interpretation": "the original interval already spans the declared migration path"
+          },
+          "variant_id": "source_naive",
+          "role": "primary retrospective whole-migration estimator"
+        }
+      ]
+    },
+    {
+      "system_id": "barnacle_svalbard_R2_R4",
+      "taxon": "Branta leucopsis",
+      "interval_id": "fixed_route_transition_R2_R4",
+      "duration_days": {
+        "n": 16,
+        "mean": 15.734375000000004,
+        "median": 14.833333333333314,
+        "sd": 6.044987114375263,
+        "min": 4.166666666666686,
+        "q25": 12.677083333333321,
+        "q75": 19.18750000000003,
+        "max": 27.958333333333343
+      },
+      "path_rule": {
+        "mode": "not_licensed",
+        "licensed": false,
+        "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+      },
+      "variants": [
+        {
+          "lambda": -0.10632090683602469,
+          "lambda_sign": -1,
+          "retention_magnitude": 0.10632090683602469,
+          "reference_duration_days": 14.833333333333314,
+          "equivalent_decay_constant_per_day": 0.15109842709925003,
+          "equivalent_daily_retention": 0.8597630705093496,
+          "equivalent_daily_correction": 0.14023692949065036,
+          "equivalent_half_life_days": 4.587388458416227,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": -0.10632090683602469,
+                "lambda_sign": -1,
+                "retention_magnitude": 0.10632090683602469,
+                "reference_duration_days": 12.677083333333321,
+                "equivalent_decay_constant_per_day": 0.1767988169181035,
+                "equivalent_daily_retention": 0.8379483485975463,
+                "equivalent_daily_correction": 0.1620516514024537,
+                "equivalent_half_life_days": 3.9205419620031954,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": -0.10632090683602469,
+                "lambda_sign": -1,
+                "retention_magnitude": 0.10632090683602469,
+                "reference_duration_days": 14.833333333333314,
+                "equivalent_decay_constant_per_day": 0.15109842709925003,
+                "equivalent_daily_retention": 0.8597630705093496,
+                "equivalent_daily_correction": 0.14023692949065036,
+                "equivalent_half_life_days": 4.587388458416227,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": -0.10632090683602469,
+                "lambda_sign": -1,
+                "retention_magnitude": 0.10632090683602469,
+                "reference_duration_days": 19.18750000000003,
+                "equivalent_decay_constant_per_day": 0.1168100761071289,
+                "equivalent_daily_retention": 0.8897541626915048,
+                "equivalent_daily_correction": 0.11024583730849524,
+                "equivalent_half_life_days": 5.9339673738783105,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.1168100761071289,
+            "k_eq_max_over_duration_iqr": 0.1767988169181035
+          },
+          "path_memory": {
+            "licensed": false,
+            "mode": "not_licensed",
+            "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+          },
+          "variant_id": "POWER",
+          "role": "primary fixed-transition estimator"
+        },
+        {
+          "lambda": -0.28698340002500444,
+          "lambda_sign": -1,
+          "retention_magnitude": 0.28698340002500444,
+          "reference_duration_days": 14.833333333333314,
+          "equivalent_decay_constant_per_day": 0.08415713963119716,
+          "equivalent_daily_retention": 0.9192867883577315,
+          "equivalent_daily_correction": 0.08071321164226852,
+          "equivalent_half_life_days": 8.236344338668502,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": -0.28698340002500444,
+                "lambda_sign": -1,
+                "retention_magnitude": 0.28698340002500444,
+                "reference_duration_days": 12.677083333333321,
+                "equivalent_decay_constant_per_day": 0.09847146001218135,
+                "equivalent_daily_retention": 0.906221555797365,
+                "equivalent_daily_correction": 0.09377844420263504,
+                "equivalent_half_life_days": 7.039066755730035,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": -0.28698340002500444,
+                "lambda_sign": -1,
+                "retention_magnitude": 0.28698340002500444,
+                "reference_duration_days": 14.833333333333314,
+                "equivalent_decay_constant_per_day": 0.08415713963119716,
+                "equivalent_daily_retention": 0.9192867883577315,
+                "equivalent_daily_correction": 0.08071321164226852,
+                "equivalent_half_life_days": 8.236344338668502,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": -0.28698340002500444,
+                "lambda_sign": -1,
+                "retention_magnitude": 0.28698340002500444,
+                "reference_duration_days": 19.18750000000003,
+                "equivalent_decay_constant_per_day": 0.06505959111553986,
+                "equivalent_daily_retention": 0.9370116241457023,
+                "equivalent_daily_correction": 0.06298837585429773,
+                "equivalent_half_life_days": 10.654035303249595,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.06505959111553986,
+            "k_eq_max_over_duration_iqr": 0.09847146001218135
+          },
+          "path_memory": {
+            "licensed": false,
+            "mode": "not_licensed",
+            "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+          },
+          "variant_id": "ERA5",
+          "role": "independent environmental reconstruction"
+        }
+      ]
+    },
+    {
+      "system_id": "barnacle_greenland_R2_R3",
+      "taxon": "Branta leucopsis",
+      "interval_id": "fixed_route_transition_R2_R3",
+      "duration_days": {
+        "n": 6,
+        "mean": 16.743055555555557,
+        "median": 18.54166666666667,
+        "sd": 7.77631806738801,
+        "min": 3.791666666666657,
+        "q25": 13.604166666666679,
+        "q75": 20.854166666666664,
+        "max": 26
+      },
+      "path_rule": {
+        "mode": "not_licensed",
+        "licensed": false,
+        "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+      },
+      "variants": [
+        {
+          "lambda": 0.13073088347575457,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.13073088347575457,
+          "reference_duration_days": 18.54166666666667,
+          "equivalent_decay_constant_per_day": 0.10973201222900135,
+          "equivalent_daily_retention": 0.8960742400607642,
+          "equivalent_daily_correction": 0.1039257599392358,
+          "equivalent_half_life_days": 6.316727147164733,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.13073088347575457,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.13073088347575457,
+                "reference_duration_days": 13.604166666666679,
+                "equivalent_decay_constant_per_day": 0.14955817899511661,
+                "equivalent_daily_retention": 0.8610883393080813,
+                "equivalent_daily_correction": 0.13891166069191874,
+                "equivalent_half_life_days": 4.634632389998396,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.13073088347575457,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.13073088347575457,
+                "reference_duration_days": 18.54166666666667,
+                "equivalent_decay_constant_per_day": 0.10973201222900135,
+                "equivalent_daily_retention": 0.8960742400607642,
+                "equivalent_daily_correction": 0.1039257599392358,
+                "equivalent_half_life_days": 6.316727147164733,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.13073088347575457,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.13073088347575457,
+                "reference_duration_days": 20.854166666666664,
+                "equivalent_decay_constant_per_day": 0.09756392695685438,
+                "equivalent_daily_retention": 0.9070443551170186,
+                "equivalent_daily_correction": 0.09295564488298136,
+                "equivalent_half_life_days": 7.10454367900213,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.09756392695685438,
+            "k_eq_max_over_duration_iqr": 0.14955817899511661
+          },
+          "path_memory": {
+            "licensed": false,
+            "mode": "not_licensed",
+            "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+          },
+          "variant_id": "POWER",
+          "role": "primary fixed-transition estimator"
+        },
+        {
+          "lambda": 0.14420353006747622,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.14420353006747622,
+          "reference_duration_days": 18.54166666666667,
+          "equivalent_decay_constant_per_day": 0.10444204444443769,
+          "equivalent_daily_retention": 0.9008270038235148,
+          "equivalent_daily_correction": 0.09917299617648523,
+          "equivalent_half_life_days": 6.63666806071279,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.14420353006747622,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.14420353006747622,
+                "reference_duration_days": 13.604166666666679,
+                "equivalent_decay_constant_per_day": 0.14234826884463933,
+                "equivalent_daily_retention": 0.8673191436446319,
+                "equivalent_daily_correction": 0.13268085635536808,
+                "equivalent_half_life_days": 4.869375554657815,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.14420353006747622,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.14420353006747622,
+                "reference_duration_days": 18.54166666666667,
+                "equivalent_decay_constant_per_day": 0.10444204444443769,
+                "equivalent_daily_retention": 0.9008270038235148,
+                "equivalent_daily_correction": 0.09917299617648523,
+                "equivalent_half_life_days": 6.63666806071279,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.14420353006747622,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.14420353006747622,
+                "reference_duration_days": 20.854166666666664,
+                "equivalent_decay_constant_per_day": 0.09286055899655303,
+                "equivalent_daily_retention": 0.9113205668910971,
+                "equivalent_daily_correction": 0.08867943310890292,
+                "equivalent_half_life_days": 7.464387335700562,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.09286055899655303,
+            "k_eq_max_over_duration_iqr": 0.14234826884463933
+          },
+          "path_memory": {
+            "licensed": false,
+            "mode": "not_licensed",
+            "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+          },
+          "variant_id": "ERA5",
+          "role": "independent environmental reconstruction"
+        }
+      ]
+    },
+    {
+      "system_id": "barnacle_barents_R1_R2",
+      "taxon": "Branta leucopsis",
+      "interval_id": "fixed_route_transition_R1_R2",
+      "duration_days": {
+        "n": 12,
+        "mean": 30.680555555555543,
+        "median": 26.64583333333332,
+        "sd": 21.002655355609978,
+        "min": 7.958333333333314,
+        "q25": 11.552083333333307,
+        "q75": 43.83333333333333,
+        "max": 66.83333333333333
+      },
+      "path_rule": {
+        "mode": "not_licensed",
+        "licensed": false,
+        "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+      },
+      "variants": [
+        {
+          "lambda": 0.4941139415235434,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.4941139415235434,
+          "reference_duration_days": 26.64583333333332,
+          "equivalent_decay_constant_per_day": 0.026457762784650226,
+          "equivalent_daily_retention": 0.9738891773337566,
+          "equivalent_daily_correction": 0.026110822666243427,
+          "equivalent_half_life_days": 26.198253654389955,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.4941139415235434,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.4941139415235434,
+                "reference_duration_days": 11.552083333333307,
+                "equivalent_decay_constant_per_day": 0.06102701280715545,
+                "equivalent_daily_retention": 0.9407978258425187,
+                "equivalent_daily_correction": 0.0592021741574813,
+                "equivalent_half_life_days": 11.358038820452856,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.4941139415235434,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.4941139415235434,
+                "reference_duration_days": 26.64583333333332,
+                "equivalent_decay_constant_per_day": 0.026457762784650226,
+                "equivalent_daily_retention": 0.9738891773337566,
+                "equivalent_daily_correction": 0.026110822666243427,
+                "equivalent_half_life_days": 26.198253654389955,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.4941139415235434,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.4941139415235434,
+                "reference_duration_days": 43.83333333333333,
+                "equivalent_decay_constant_per_day": 0.016083402377170923,
+                "equivalent_daily_retention": 0.9840452449200319,
+                "equivalent_daily_correction": 0.01595475507996813,
+                "equivalent_half_life_days": 43.09704901394565,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.016083402377170923,
+            "k_eq_max_over_duration_iqr": 0.06102701280715545
+          },
+          "path_memory": {
+            "licensed": false,
+            "mode": "not_licensed",
+            "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+          },
+          "variant_id": "POWER",
+          "role": "primary fixed-transition estimator"
+        },
+        {
+          "lambda": 0.515328602183836,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.515328602183836,
+          "reference_duration_days": 26.64583333333332,
+          "equivalent_decay_constant_per_day": 0.024880082037873567,
+          "equivalent_daily_retention": 0.9754268762183383,
+          "equivalent_daily_correction": 0.024573123781661654,
+          "equivalent_half_life_days": 27.85952150418177,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.515328602183836,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.515328602183836,
+                "reference_duration_days": 11.552083333333307,
+                "equivalent_decay_constant_per_day": 0.05738796199538386,
+                "equivalent_daily_retention": 0.9442276738449087,
+                "equivalent_daily_correction": 0.05577232615509131,
+                "equivalent_half_life_days": 12.078267923431403,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.515328602183836,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.515328602183836,
+                "reference_duration_days": 26.64583333333332,
+                "equivalent_decay_constant_per_day": 0.024880082037873567,
+                "equivalent_daily_retention": 0.9754268762183383,
+                "equivalent_daily_correction": 0.024573123781661654,
+                "equivalent_half_life_days": 27.85952150418177,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.515328602183836,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.515328602183836,
+                "reference_duration_days": 43.83333333333333,
+                "equivalent_decay_constant_per_day": 0.015124346447927891,
+                "equivalent_daily_retention": 0.9849894520481657,
+                "equivalent_daily_correction": 0.015010547951834319,
+                "equivalent_half_life_days": 45.82989307646479,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.015124346447927891,
+            "k_eq_max_over_duration_iqr": 0.05738796199538386
+          },
+          "path_memory": {
+            "licensed": false,
+            "mode": "not_licensed",
+            "reason": "highlighted fixed transition is not a preregistered whole-route chain"
+          },
+          "variant_id": "ERA5",
+          "role": "independent environmental reconstruction"
+        }
+      ]
+    },
+    {
+      "system_id": "eurasian_wigeon_staging_transition",
+      "taxon": "Mareca penelope",
+      "interval_id": "consecutive_reconstructed_staging_transition",
+      "duration_days": {
+        "n": 224,
+        "mean": 5.153715019427911,
+        "median": 1.056550925925933,
+        "sd": 7.049945727319229,
+        "min": 0.12615740740739056,
+        "q25": 0.926056134259273,
+        "q75": 8.041458333333345,
+        "max": 39.92495370370369
+      },
+      "path_rule": {
+        "mode": "homogeneous_transition_count_histogram",
+        "licensed": true,
+        "unit": "animal_year",
+        "animal_years": 32,
+        "unique_individuals": 28,
+        "transitions": 224,
+        "transition_count_mean": 7,
+        "transition_count_median": 7,
+        "transition_count_histogram": {
+          "1": 5,
+          "2": 2,
+          "3": 3,
+          "5": 2,
+          "6": 3,
+          "7": 2,
+          "8": 4,
+          "9": 1,
+          "10": 3,
+          "11": 2,
+          "12": 1,
+          "13": 1,
+          "14": 1,
+          "16": 2
+        }
+      },
+      "variants": [
+        {
+          "lambda": 0.7497680211367301,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.7497680211367301,
+          "reference_duration_days": 1.056550925925933,
+          "equivalent_decay_constant_per_day": 0.27257694672419475,
+          "equivalent_daily_retention": 0.7614148385434764,
+          "equivalent_daily_correction": 0.23858516145652364,
+          "equivalent_half_life_days": 2.5429413194700645,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.7497680211367301,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.7497680211367301,
+                "reference_duration_days": 0.926056134259273,
+                "equivalent_decay_constant_per_day": 0.31098700693545767,
+                "equivalent_daily_retention": 0.7327233961298613,
+                "equivalent_daily_correction": 0.26727660387013874,
+                "equivalent_half_life_days": 2.228862187492615,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.7497680211367301,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.7497680211367301,
+                "reference_duration_days": 1.056550925925933,
+                "equivalent_decay_constant_per_day": 0.27257694672419475,
+                "equivalent_daily_retention": 0.7614148385434764,
+                "equivalent_daily_correction": 0.23858516145652364,
+                "equivalent_half_life_days": 2.5429413194700645,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.7497680211367301,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.7497680211367301,
+                "reference_duration_days": 8.041458333333345,
+                "equivalent_decay_constant_per_day": 0.03581333304355175,
+                "equivalent_daily_retention": 0.9648203767580504,
+                "equivalent_daily_correction": 0.035179623241949565,
+                "equivalent_half_life_days": 19.354444885568885,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.03581333304355175,
+            "k_eq_max_over_duration_iqr": 0.31098700693545767
+          },
+          "path_memory": {
+            "licensed": true,
+            "mode": "homogeneous_transition_count_histogram",
+            "unit": "animal_year",
+            "animal_years": 32,
+            "unique_individuals": 28,
+            "transitions": 224,
+            "transition_count_mean": 7,
+            "transition_count_median": 7,
+            "retention_at_median_transition_count": 0.13319514398192223,
+            "correction_at_median_transition_count": 0.8668048560180778,
+            "mean_path_retention_magnitude": 0.25720795813669206,
+            "median_path_retention_magnitude": 0.13319514398192223,
+            "minimum_path_retention_magnitude": 0.009973110006808047,
+            "maximum_path_retention_magnitude": 0.7497680211367301,
+            "interpretation": "propagated memory of the initial phase deviation under a homogeneous transition coefficient; not predicted final phase error after intercepts, innovations or route-stage heterogeneity"
+          },
+          "variant_id": "POWER",
+          "role": "registered source-faithful primary"
+        },
+        {
+          "lambda": 0.8113122876847199,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.8113122876847199,
+          "reference_duration_days": 1.056550925925933,
+          "equivalent_decay_constant_per_day": 0.1979102274121768,
+          "equivalent_daily_retention": 0.8204435031683468,
+          "equivalent_daily_correction": 0.1795564968316532,
+          "equivalent_half_life_days": 3.5023312823362365,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.8113122876847199,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.8113122876847199,
+                "reference_duration_days": 0.926056134259273,
+                "equivalent_decay_constant_per_day": 0.22579865980781227,
+                "equivalent_daily_retention": 0.797878730551558,
+                "equivalent_daily_correction": 0.202121269448442,
+                "equivalent_half_life_days": 3.069757726418372,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.8113122876847199,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.8113122876847199,
+                "reference_duration_days": 1.056550925925933,
+                "equivalent_decay_constant_per_day": 0.1979102274121768,
+                "equivalent_daily_retention": 0.8204435031683468,
+                "equivalent_daily_correction": 0.1795564968316532,
+                "equivalent_half_life_days": 3.5023312823362365,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.8113122876847199,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.8113122876847199,
+                "reference_duration_days": 8.041458333333345,
+                "equivalent_decay_constant_per_day": 0.026003023998244144,
+                "equivalent_daily_retention": 0.974332143225604,
+                "equivalent_daily_correction": 0.02566785677439598,
+                "equivalent_half_life_days": 26.656406601276455,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.026003023998244144,
+            "k_eq_max_over_duration_iqr": 0.22579865980781227
+          },
+          "path_memory": {
+            "licensed": true,
+            "mode": "homogeneous_transition_count_histogram",
+            "unit": "animal_year",
+            "animal_years": 32,
+            "unique_individuals": 28,
+            "transitions": 224,
+            "transition_count_mean": 7,
+            "transition_count_median": 7,
+            "retention_at_median_transition_count": 0.23137496990520476,
+            "correction_at_median_transition_count": 0.7686250300947952,
+            "mean_path_retention_magnitude": 0.3356906666019055,
+            "median_path_retention_magnitude": 0.23137496990520476,
+            "minimum_path_retention_magnitude": 0.035237805798735124,
+            "maximum_path_retention_magnitude": 0.8113122876847199,
+            "interpretation": "propagated memory of the initial phase deviation under a homogeneous transition coefficient; not predicted final phase error after intercepts, innovations or route-stage heterogeneity"
+          },
+          "variant_id": "ERA5",
+          "role": "independent environmental reconstruction"
+        },
+        {
+          "lambda": 0.7978928038433668,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.7978928038433668,
+          "reference_duration_days": 1.056550925925933,
+          "equivalent_decay_constant_per_day": 0.21369629805683973,
+          "equivalent_daily_retention": 0.8075936155326264,
+          "equivalent_daily_correction": 0.19240638446737357,
+          "equivalent_half_life_days": 3.243608742232771,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.7978928038433668,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.7978928038433668,
+                "reference_duration_days": 0.926056134259273,
+                "equivalent_decay_constant_per_day": 0.2438092176339766,
+                "equivalent_daily_retention": 0.7836371241470408,
+                "equivalent_daily_correction": 0.2163628758529592,
+                "equivalent_half_life_days": 2.8429900529870293,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.7978928038433668,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.7978928038433668,
+                "reference_duration_days": 1.056550925925933,
+                "equivalent_decay_constant_per_day": 0.21369629805683973,
+                "equivalent_daily_retention": 0.8075936155326264,
+                "equivalent_daily_correction": 0.19240638446737357,
+                "equivalent_half_life_days": 3.243608742232771,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.7978928038433668,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.7978928038433668,
+                "reference_duration_days": 8.041458333333345,
+                "equivalent_decay_constant_per_day": 0.028077123852397978,
+                "equivalent_daily_retention": 0.972313375356224,
+                "equivalent_daily_correction": 0.027686624643776026,
+                "equivalent_half_life_days": 24.687257291873426,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.028077123852397978,
+            "k_eq_max_over_duration_iqr": 0.2438092176339766
+          },
+          "path_memory": {
+            "licensed": true,
+            "mode": "homogeneous_transition_count_histogram",
+            "unit": "animal_year",
+            "animal_years": 32,
+            "unique_individuals": 28,
+            "transitions": 224,
+            "transition_count_mean": 7,
+            "transition_count_median": 7,
+            "retention_at_median_transition_count": 0.20587889919249652,
+            "correction_at_median_transition_count": 0.7941211008075035,
+            "mean_path_retention_magnitude": 0.31575211095240907,
+            "median_path_retention_magnitude": 0.20587889919249652,
+            "minimum_path_retention_magnitude": 0.02698440033652559,
+            "maximum_path_retention_magnitude": 0.7978928038433668,
+            "interpretation": "propagated memory of the initial phase deviation under a homogeneous transition coefficient; not predicted final phase error after intercepts, innovations or route-stage heterogeneity"
+          },
+          "variant_id": "SIMEX_correlation_proxy",
+          "role": "measurement-error sensitivity only"
+        },
+        {
+          "lambda": 0.8411694225451272,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.8411694225451272,
+          "reference_duration_days": 1.056550925925933,
+          "equivalent_decay_constant_per_day": 0.16370454217943495,
+          "equivalent_daily_retention": 0.848992826397467,
+          "equivalent_daily_correction": 0.15100717360253302,
+          "equivalent_half_life_days": 4.234135298458569,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.8411694225451272,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.8411694225451272,
+                "reference_duration_days": 0.926056134259273,
+                "equivalent_decay_constant_per_day": 0.18677289552896342,
+                "equivalent_daily_retention": 0.8296321281579075,
+                "equivalent_daily_correction": 0.17036787184209246,
+                "equivalent_half_life_days": 3.711176499121399,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.8411694225451272,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.8411694225451272,
+                "reference_duration_days": 1.056550925925933,
+                "equivalent_decay_constant_per_day": 0.16370454217943495,
+                "equivalent_daily_retention": 0.848992826397467,
+                "equivalent_daily_correction": 0.15100717360253302,
+                "equivalent_half_life_days": 4.234135298458569,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.8411694225451272,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.8411694225451272,
+                "reference_duration_days": 8.041458333333345,
+                "equivalent_decay_constant_per_day": 0.021508808284313605,
+                "equivalent_daily_retention": 0.9787208565796116,
+                "equivalent_daily_correction": 0.02127914342038839,
+                "equivalent_half_life_days": 32.226201070631056,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.021508808284313605,
+            "k_eq_max_over_duration_iqr": 0.18677289552896342
+          },
+          "path_memory": {
+            "licensed": true,
+            "mode": "homogeneous_transition_count_histogram",
+            "unit": "animal_year",
+            "animal_years": 32,
+            "unique_individuals": 28,
+            "transitions": 224,
+            "transition_count_mean": 7,
+            "transition_count_median": 7,
+            "retention_at_median_transition_count": 0.2979780957640612,
+            "correction_at_median_transition_count": 0.7020219042359388,
+            "mean_path_retention_magnitude": 0.3874006124363912,
+            "median_path_retention_magnitude": 0.2979780957640612,
+            "minimum_path_retention_magnitude": 0.06282545395404836,
+            "maximum_path_retention_magnitude": 0.8411694225451272,
+            "interpretation": "propagated memory of the initial phase deviation under a homogeneous transition coefficient; not predicted final phase error after intercepts, innovations or route-stage heterogeneity"
+          },
+          "variant_id": "SIMEX_equal_independent",
+          "role": "measurement-error sensitivity only"
+        },
+        {
+          "lambda": 0.9353935594001919,
+          "lambda_sign": 1,
+          "retention_magnitude": 0.9353935594001919,
+          "reference_duration_days": 1.056550925925933,
+          "equivalent_decay_constant_per_day": 0.06321315657543074,
+          "equivalent_daily_retention": 0.9387433530430321,
+          "equivalent_daily_correction": 0.061256646956967864,
+          "equivalent_half_life_days": 10.96523600641315,
+          "rate_status": "CONTRACTION",
+          "duration_sensitivity": {
+            "rows": {
+              "q25_duration": {
+                "lambda": 0.9353935594001919,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.9353935594001919,
+                "reference_duration_days": 0.926056134259273,
+                "equivalent_decay_constant_per_day": 0.07212081065031133,
+                "equivalent_daily_retention": 0.930418484558923,
+                "equivalent_daily_correction": 0.06958151544107705,
+                "equivalent_half_life_days": 9.610917768531117,
+                "rate_status": "CONTRACTION"
+              },
+              "median_duration": {
+                "lambda": 0.9353935594001919,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.9353935594001919,
+                "reference_duration_days": 1.056550925925933,
+                "equivalent_decay_constant_per_day": 0.06321315657543074,
+                "equivalent_daily_retention": 0.9387433530430321,
+                "equivalent_daily_correction": 0.061256646956967864,
+                "equivalent_half_life_days": 10.96523600641315,
+                "rate_status": "CONTRACTION"
+              },
+              "q75_duration": {
+                "lambda": 0.9353935594001919,
+                "lambda_sign": 1,
+                "retention_magnitude": 0.9353935594001919,
+                "reference_duration_days": 8.041458333333345,
+                "equivalent_decay_constant_per_day": 0.008305448631577674,
+                "equivalent_daily_retention": 0.9917289463192074,
+                "equivalent_daily_correction": 0.008271053680792617,
+                "equivalent_half_life_days": 83.45692223350461,
+                "rate_status": "CONTRACTION"
+              }
+            },
+            "k_eq_min_over_duration_iqr": 0.008305448631577674,
+            "k_eq_max_over_duration_iqr": 0.07212081065031133
+          },
+          "path_memory": {
+            "licensed": true,
+            "mode": "homogeneous_transition_count_histogram",
+            "unit": "animal_year",
+            "animal_years": 32,
+            "unique_individuals": 28,
+            "transitions": 224,
+            "transition_count_mean": 7,
+            "transition_count_median": 7,
+            "retention_at_median_transition_count": 0.6265570584998957,
+            "correction_at_median_transition_count": 0.37344294150010426,
+            "mean_path_retention_magnitude": 0.6535982500388061,
+            "median_path_retention_magnitude": 0.6265570584998957,
+            "minimum_path_retention_magnitude": 0.3434867622982543,
+            "maximum_path_retention_magnitude": 0.9353935594001919,
+            "interpretation": "propagated memory of the initial phase deviation under a homogeneous transition coefficient; not predicted final phase error after intercepts, innovations or route-stage heterogeneity"
+          },
+          "variant_id": "SIMEX_conservative_full_disagreement",
+          "role": "measurement-error sensitivity only"
+        }
+      ]
+    }
+  ],
+  "claim_boundary": [
+    "raw lambda remains the system-specific primary estimator",
+    "k_eq is an equivalent reference-interval transformation, not a fitted continuous-time controller rate",
+    "negative lambda sign remains a separate overshoot flag",
+    "path-memory retention propagates only the initial-error memory component under a homogeneous-lambda approximation",
+    "whole-route path retention is not licensed for the highlighted goose fixed transitions",
+    "SIMEX variants remain measurement-error sensitivities rather than corrected truth",
+    "the Aikens lambda outcome remains unopened and its preregistered contrast is unchanged"
+  ]
+}

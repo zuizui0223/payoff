@@ -4,7 +4,7 @@
 
 ## Abstract
 
-**Aim:** We test whether a common phase-retention coordinate compares migratory systems while separating environmental predictability from realized correction.
+**Aim:** We test whether migratory systems consistently contract incoming phenological phase deviation and whether explicit interval standardization separates segment scale from biological correction strength.
 
 **Location:** Eastern North America, the western United States, North Atlantic–Arctic goose flyways, and the Eurasian wigeon migration corridor.
 
@@ -12,13 +12,13 @@
 
 **Major taxa studied:** Migratory birds and ungulates, with direct reconstructions for mule deer (*Odocoileus hemionus*), barnacle goose (*Branta leucopsis*) and Eurasian wigeon (*Mareca penelope*).
 
-**Methods:** We tested a universal movement-to-phenology speed ratio in 5,816 bird-year-cell observations from 55 species, then estimated signed phase retention from E_next = a + λE_current + ε over declared movement intervals. We reconstructed three direct taxa, estimated environmental timing innovation separately, and tested an industrial-development perturbation.
+**Methods:** Across 55 bird species we tested a universal movement-to-phenology speed optimum, then estimated signed phase retention over declared intervals in three direct taxa. Before opening Aikens outcomes, we froze secondary interval-normalized and cumulative-memory summaries. We also estimated environmental innovation and tested industrial-development forcing.
 
-**Results:** Broad bird data rejected one universal natural speed optimum. Source-faithful direct reconstructions yielded naive phase-retention estimates of about 0.11 in mule deer, 0.11–0.49 across highlighted barnacle-goose transitions, and 0.75 in wigeon. An independent ERA5 reconstruction gave wigeon lambda=0.81 on the same 224 transitions, whereas the POWER-based stopover association did not replicate under ERA5. Environmental predictability did not map monotonically onto correction strength. Industrial development attenuated a movement-control permeability proxy, while a stronger predicted temporal deterioration was unsupported. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
+**Results:** Broad bird data rejected a universal speed optimum. Raw λ was ~0.11 in mule deer and highlighted goose transitions but 0.75–0.81 in wigeon; interval lengths differed markedly. Across a typical seven wigeon transitions, retained incoming-error memory was 0.133 (POWER) or 0.231 (ERA5), the same order as whole-migration mule deer (0.107), although conservative SIMEX allowed 0.627. Predictability did not map monotonically onto correction strength. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
 [AIKENS LAMBDA ABSTRACT PENDING — render from the registered result JSON before submission.]
 <!-- AIKENS_LAMBDA_ABSTRACT_END -->
 
-**Main conclusions:** Phenological migration is better compared by retained phase deviation than by a universal migration rate or zero-lag target. Environmental information and realized phase correction are separable channels. In wigeon, phase retention replicated across independent environmental reconstructions more clearly than the inferred stopover actuator, emphasizing that response coordinates and physical mechanisms require separate validation.
+**Main conclusions:** Phase retention is a common estimator form, not a directly comparable raw magnitude. Interval-standardized cumulative memory is more interpretable across systems, but measurement error prevents a universal migration-wide correction fraction. Environmental information, correction and physical actuators remain separable.
 
 **Keywords:** animal tracking, biologging, environmental predictability, green wave, macroecology, migration, phenological mismatch, phase retention, plasticity, spring phenology
 
@@ -105,6 +105,10 @@ a+\lambda E_{\rm current}
 
 Observation intervals differed by movement architecture and were declared explicitly rather than forced onto one spatial or temporal grain.
 
+Accordingly, raw \(\lambda\) is treated as a **segment-scale within-system
+estimand**, not as a cross-system rate constant. A shared regression form does
+not make the numerical coefficient invariant to interval length.
+
 #### Mule deer
 
 For Ortega et al. (2023) mule deer, we used the official Nature Communications source-data workbook. The dataset provided 152 animal-years from 72 individuals across eight years. Phase was expressed as days from peak instantaneous rate of green-up. Published movement-rate and stopover summaries were combined with annual green-wave propagation estimates. We quantified the association between initial phase and relative animal-to-environment movement speed, stopover duration, and phase at migration end. Individual-clustered uncertainty was used for repeated animals.
@@ -155,6 +159,66 @@ with
 
 The primary preregistered prediction was \(\lambda<1\). A stronger exploratory prediction, \(|\lambda|<0.75\), was frozen before the promoted result.
 
+### Interval standardization of phase retention
+
+Before the preregistered Aikens phase-retention outcome was opened, we froze a
+secondary standardization that leaves every primary raw-\(\lambda\) analysis
+unchanged.
+
+For each system we define the retained magnitude
+
+\[
+R=|\lambda|.
+\]
+
+Using the median observed elapsed duration of the exact frozen pair sample as
+the reference interval \(\Delta t_{\rm ref}\), we report the equivalent
+decay constant
+
+\[
+k_{\rm eq}
+=
+-\frac{\log R}{\Delta t_{\rm ref}},
+\]
+
+with units d\(^{-1}\), and the corresponding daily retained magnitude
+
+\[
+R_{\rm day}=\exp(-k_{\rm eq}).
+\]
+
+Because several interval distributions are strongly skewed, especially for
+wigeon, the 25th and 75th percentile durations are retained as a sensitivity
+envelope. \(k_{\rm eq}\) is a reference-interval transformation, **not** a
+direct fit of a continuous-time controller.
+
+For repeated homogeneous transitions we additionally report the propagated
+memory of the incoming phase deviation,
+
+\[
+R_{\rm path}(n)=R^n.
+\]
+
+This is not expected final phase error: intercepts, new environmental
+innovations, route-stage heterogeneity and process noise can add new error
+between transitions. For wigeon, \(n\) is taken from the observed
+animal-year transition-count distribution, not from total transitions divided
+by unique individuals. The 224 transitions comprise 32 animal-years from 28
+unique individuals, with both mean and median \(n=7\). For mule deer the
+original interval already spans the full spring migration. We do not construct
+post-hoc whole-route products for the highlighted goose transitions because a
+common preregistered full-route chain is absent.
+
+Negative \(\lambda\) values retain their sign as overshoot/reversal cases;
+the logarithmic transformation uses \(|\lambda|\) only for the magnitude
+envelope. Wigeon SIMEX values are propagated as sensitivity scenarios, not as
+corrected truth.
+
+The prospective Aikens phase-retention contrast uses fixed 24-h pairs, so if it
+is estimable its secondary standardization has
+\(\Delta t_{\rm ref}=1\) d by construction. This standardization cannot
+alter the frozen Aikens group contrast, support threshold, direction, or
+significance rule.
 ### Environmental information and innovation
 
 For fixed barnacle-goose region pairs we modeled destination spring anomaly from origin spring anomaly. The residual standard deviation
@@ -447,34 +511,71 @@ We therefore treat wigeon phase retention as a robust estimator-scale response
 coordinate across two environmental reconstructions, while leaving the latent
 biological correction magnitude interval- and assumption-dependent.
 
-### Three taxa share a phase coordinate; actuator evidence is less reconstruction-stable
+### Raw phase-retention magnitudes partly reflect interval scale
 
-The source-faithful direct naive phase-retention summaries span:
+The source-faithful direct estimates use the same regression form but markedly
+different ecological intervals. Median elapsed duration was 47.0 d for the
+whole-migration mule-deer rows, 14.8--26.6 d for the three highlighted
+barnacle-goose transitions, and only 1.06 d for consecutive wigeon staging
+transitions.
+
+At those reference durations, the equivalent magnitude-decay constants for the
+primary reconstructions were approximately
 
 ~~~text
-Mule deer:
-  |lambda_hat| ~ 0.107
+Mule deer whole migration:
+  k_eq = 0.047 d^-1
 
 Barnacle goose:
-  median |lambda_hat| ~ 0.131
-  highlighted route range ~ 0.106–0.494
+  Svalbard R2->R4  k_eq = 0.151 d^-1, with negative-lambda overshoot retained
+  Greenland R2->R3 k_eq = 0.110 d^-1
+  Barents R1->R2   k_eq = 0.026 d^-1
 
 Eurasian wigeon:
-  POWER |lambda_hat| ~ 0.750
-  ERA5  |lambda_hat| ~ 0.811
+  POWER k_eq = 0.273 d^-1
+  ERA5  k_eq = 0.198 d^-1
 ~~~
 
-Mule deer show speed and stopover compensation, and highlighted barnacle-goose
-transitions show strong stopover-mediated control. Wigeon is more diagnostic:
-the phase-retention coefficient remained below one under both POWER and ERA5,
-but the negative stopover association was supported only on the registered
-POWER phase surface and not on the independent ERA5 reconstruction.
+Thus interval normalization does not create one universal rate. It does,
+however, show why the raw contrast between mule-deer \(|\lambda|=0.107\)
+and wigeon \(|\lambda|=0.750--0.811\) should not be read as a seven-fold
+difference in whole-migration correction.
 
-Thus the common response coordinate is empirically more reconstruction-stable
-than the inferred physical actuator in the wigeon system. Full controller
-architecture remains system- and measurement-dependent, and numeric
-cross-system \(\lambda\) differences remain estimator-scale comparisons rather
-than portable biological constants.
+The wigeon source contains 32 animal-years from 28 unique individuals, with a
+mean and median of seven consecutive staging transitions per animal-year.
+Under the explicitly homogeneous-coefficient retained-memory summary,
+
+\[
+R_{\rm path}(7)=0.133
+\]
+
+for the registered POWER estimate and
+
+\[
+R_{\rm path}(7)=0.231
+\]
+
+for the independent ERA5 reconstruction. These values are the same order as
+the retrospective whole-spring-migration mule-deer retention
+\(R=0.107\).
+
+This apparent convergence is not promoted as a universal controller
+coefficient. Under the frozen wigeon SIMEX sensitivity range, the same
+seven-transition retained-memory component spans approximately 0.206--0.627.
+Measurement-error assumptions therefore remain large enough to prevent a claim
+that all taxa remove a common 80--90% fraction of phase deviation over one
+migration.
+
+Mule deer show speed and stopover compensation, and highlighted barnacle-goose
+transitions show strong stopover-mediated control. Wigeon remains diagnostic:
+phase contraction replicated under POWER and ERA5, whereas the negative
+stopover association was supported only on the registered POWER phase surface.
+
+The shared object is therefore the **phase-retention estimator form**. Raw
+cross-system \(\lambda\) magnitudes are segment-scale quantities;
+interval-standardized retained-memory summaries are secondary comparison
+coordinates, and actuator architecture remains system- and
+reconstruction-dependent.
 
 ### Environmental predictability and feedback strength are separate channels
 
@@ -527,17 +628,21 @@ and remained non-significant across the registered sensitivity grid. Thus the re
 
 ## Cross-taxon direct-controller summary
 
-**Table 1. Registered primary direct phase-retention systems.** The common coordinate is phase retention (|\lambda|); actuator coefficients are not assumed to be mechanistically interchangeable across taxa.
+**Table 1. Registered primary direct phase-retention systems.** Raw \(\lambda\) is a segment-scale estimator. \(k_{\rm eq}\) is the frozen secondary equivalent decay constant using the median observed interval and is not a fitted continuous-time controller rate.
 
-| Taxon / system | Interval | \(\lambda\) | \(|\lambda|\) | Correction strength \(1-|\lambda|\) | Detected actuator architecture |
+| Taxon / system | Interval | Median \(\Delta t\) (d) | \(\lambda\) | \(k_{\rm eq}\) (d\(^{-1}\)) | Detected actuator architecture |
 | --- | --- | ---: | ---: | ---: | --- |
-| Mule deer | Full spring migration | 0.107 | 0.107 | 0.893 | Movement speed + stopover |
-| Barnacle goose, Svalbard | Southern Norway → Svalbard | −0.106 | 0.106 | 0.894 | Stopover + overtake |
-| Barnacle goose, Greenland | R2 → R3 | 0.131 | 0.131 | 0.869 | Stopover |
-| Barnacle goose, Barents | R1 → R2 | 0.494 | 0.494 | 0.506 | Stopover |
-| Eurasian wigeon | Consecutive staging transitions | 0.750 POWER; 0.811 ERA5 | 0.750–0.811 | 0.189–0.250 | Phase contraction replicates; POWER stopover association not replicated under ERA5 |
+| Mule deer | Full spring migration | 47.0 | 0.107 | 0.047 | Movement speed + stopover |
+| Barnacle goose, Svalbard | Southern Norway → Svalbard | 14.8 | −0.106 | 0.151 magnitude decay; overshoot sign retained | Stopover + overtake |
+| Barnacle goose, Greenland | R2 → R3 | 18.5 | 0.131 | 0.110 | Stopover |
+| Barnacle goose, Barents | R1 → R2 | 26.6 | 0.494 | 0.026 | Stopover |
+| Eurasian wigeon | Consecutive staging transitions | 1.06 | 0.750 POWER; 0.811 ERA5 | 0.273 POWER; 0.198 ERA5 | Phase contraction replicates; POWER stopover association not replicated under ERA5 |
 
-The three barnacle-goose rows are within-taxon route replications and are not treated as independent taxonomic observations.
+The three barnacle-goose rows are within-taxon route replications and are not
+treated as independent taxonomic observations. Whole-route cumulative
+retention is not constructed for these fixed goose transitions. For wigeon,
+the typical observed seven-transition animal-year gives retained-memory
+\(R_{\rm path}=0.133\) under POWER and 0.231 under ERA5.
 
 ## Discussion
 
@@ -547,11 +652,17 @@ The broad bird analysis was designed as a direct transport test of the PAYOFF-B 
 
 This reframing preserves the temporal core of PAYOFF-B without claiming that a two-patch fixed-rate optimum should appear literally in continuous natural migrations.
 
-### Phase retention is more portable than behavioral gain
+### Phase retention is more portable as an estimator form than as a raw magnitude
 
 Mule deer, barnacle geese and wigeon all admit direct phase-retention
-representations, but the wigeon replicate calibration shows why the response
-coordinate and actuator layer must remain separate.
+representations, but unequal segment durations show why a common regression
+form is not the same as a common biological rate. The interval-standardized
+analysis narrows the comparison: wigeon transition-scale retention accumulates
+to a migration-sequence memory component of the same order as whole-migration
+mule-deer retention under the naive POWER and independent ERA5
+reconstructions, while SIMEX sensitivity prevents a universal magnitude claim.
+The wigeon replicate calibration also shows why the response coordinate and
+actuator layer must remain separate.
 
 Mule deer combine movement-speed acceleration and stopover shortening.
 Barnacle geese show strong stopover-mediated STEP control with overtaking in
@@ -621,9 +732,14 @@ These mechanisms can produce similar observed arrival mismatch while implying di
 The current comparison spans three directly reconstructed taxa, not a global
 sample of migration strategies. Barnacle-goose flyways are repeated routes
 within one species and are not independent taxonomic replicates. Observation
-intervals differ among continuous and stopover-based systems, so \(\lambda\)
-should be interpreted as phase retention over a declared ecological correction
-interval rather than per unit time.
+intervals differ among continuous and stopover-based systems, so raw
+\(\lambda\) should be interpreted as phase retention over a declared
+ecological correction interval rather than per unit time. We therefore froze
+the secondary \(k_{\rm eq}\) and retained-memory standardization before the
+Aikens outcome was opened. This removes an obvious scale ambiguity but does not
+turn a pooled discrete regression into a fitted continuous-time controller:
+interval distributions remain broad, route stages can differ, and innovations
+enter between transitions.
 
 Environmental reconstructions are heterogeneous. For wigeon, the initial
 registered ERA5-Land error-calibration lane failed its 90% event-coverage gate
@@ -676,10 +792,12 @@ response across POWER and ERA5.
 Future taxa should therefore be added only when they test a new inferential
 boundary--for example a preregistered approach to \(\lambda\approx1\), a sign
 change or overshoot boundary, or a discriminating actuator prediction--rather
-than simply increasing panel size. The organizing state remains
+than simply increasing panel size. The organizing state now separates raw interval scale from the secondary
+standardization:
 
 \[
-(\sigma_\xi,\ \hat\lambda,\ \text{actuator architecture},
+(\sigma_\xi,\ \hat\lambda,\ \Delta t,\ k_{\rm eq},
+\ R_{\rm path},\ \text{actuator architecture},
 \ \text{reliability state}).
 \]
 
@@ -698,7 +816,7 @@ real ecological forcing.
 
 ## Conclusion
 
-Phenological migration does not collapse onto one natural migration rate, zero-lag target, or universal behavioral feedback coefficient. Across three directly reconstructed taxa, however, incoming phase deviation can be placed on a common retention coordinate. That coordinate spans weak to near-complete correction and is generated by different movement architectures.
+Phenological migration does not collapse onto one natural migration rate, zero-lag target, or universal behavioral feedback coefficient. Across three directly reconstructed taxa, incoming phase deviation can be represented with a common retention estimator form, but raw coefficient magnitudes depend on the declared ecological interval. Explicit interval standardization shows that some apparently large cross-system differences shrink when retention is propagated over a migration sequence, while measurement-error sensitivity prevents a universal migration-wide correction fraction.
 
 Separating phase retention from environmental innovation clarifies why precise migration timing can arise through predictable environments, strong realized correction, or both. Quantitative disturbance evidence further shows that actuation can be attenuated without supporting every stronger temporal prediction.
 
@@ -706,7 +824,7 @@ Separating phase retention from environmental innovation clarifies why precise m
 [AIKENS LAMBDA CONCLUSION PENDING — render from the registered result JSON before submission.]
 <!-- AIKENS_LAMBDA_CONCLUSION_END -->
 
-The resulting picture is not a universal controller. It is a common phase-control problem in which the phase-retention response is more portable than any single actuator: movement-speed, stopover and route-level components remain contingent on system, environmental reconstruction and scale.
+The resulting picture is not a universal controller. It is a common phase-control problem in which the estimator form is portable, the raw magnitude is interval-dependent, and the physical actuators remain contingent on system, environmental reconstruction and scale. Cross-system biological comparison therefore rests on predeclared interval-standardized secondary coordinates rather than on ranking raw λ values.
 
 ## Data and Code Availability Statement
 
@@ -748,12 +866,16 @@ This manuscript supports:
 - source-faithful naive phase-retention estimates in mule deer, barnacle goose and prospectively tested wigeon;
 - a pre-Aikens observation-error recovery analysis showing that the wigeon estimator remains below true-lambda=1 null expectations across frozen replicate-disagreement sensitivities, while the registered ERA5-Land calibration itself fails its coverage gate;
 - source-faithful phase-retention estimates in three direct taxa, including wigeon contraction reproduced under independent POWER and ERA5 environmental surfaces;
+- a pre-Aikens interval-standardization contract separating raw segment-scale λ from equivalent daily magnitude decay and homogeneous path-memory retention;
+- wigeon typical seven-transition retained-memory values of about 0.133 (POWER) and 0.231 (ERA5), while the conservative SIMEX sensitivity permits substantially greater retained memory;
 - separation of environmental innovation from realized phase retention;
 - a quantitative industrial-development actuation contrast with a falsified stronger longitudinal prediction.
 
 It does not support:
 
 - a universal phase-retention coefficient;
+- direct biological ranking of taxa by raw λ magnitude across incompatible interval definitions;
+- a universal claim that migration removes 80–90% of phase deviation;
 - a final measurement-error-corrected latent wigeon lambda or a completed cross-taxon reliability correction;
 - one common reactive behavioral mechanism across taxa, or a robust wigeon stopover actuator across environmental reconstructions;
 - a causal effect of predictability on feedback strength;
