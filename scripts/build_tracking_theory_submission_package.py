@@ -11,6 +11,7 @@ import zipfile
 from pathlib import Path
 
 from render_tracking_theory_figures import render_all
+from build_tracking_theory_supporting_information import build_supporting_information
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -124,6 +125,22 @@ def build_package(output_dir: Path, zip_path: Path | None = None) -> dict:
         manifest["files"].append(
             copy_one(source_rel, output_dir, "submission_ready")
         )
+
+    supporting_path = (
+        output_dir
+        / "submission_ready"
+        / "PAYOFF_B_TRACKING_SUPPORTING_INFORMATION_V1.md"
+    )
+    supporting_path.write_text(
+        build_supporting_information(),
+        encoding="utf-8",
+    )
+    manifest["files"].append({
+        "bundle_path": str(supporting_path.relative_to(output_dir)),
+        "source": "generated:supporting_information",
+        "bytes": supporting_path.stat().st_size,
+        "sha256": sha256(supporting_path),
+    })
 
     for source_rel in INTERNAL_FILES:
         manifest["files"].append(
