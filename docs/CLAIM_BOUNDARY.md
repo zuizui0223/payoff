@@ -222,32 +222,41 @@ In particular:
   the added system supplies an independent lambda test, a new forcing regime,
   a predicted lambda boundary/sign change, or a discriminating prospective
   actuator test;
-- the previously promoted wigeon result (224 transitions, 28 individuals,
-  lambda=0.85994) is suspended pending source-faithful revalidation: the
-  independent POWER reconstruction used the full calendar year when deriving
-  the cumulative-minimum TGS onset, while the published supplementary code
-  first restricts environmental days to January--July with
-  `days <- days[month(days)<8]`; the old numeric lambda and its prospective
-  PASS status must not be used as cross-system support until the Jan--Jul
-  reconstruction is complete;
+- the old wigeon full-calendar-year POWER result (lambda=0.85994) is
+  superseded by the source-faithful January--July reconstruction and must not be
+  used;
+- the current registered POWER wigeon result uses 224 transitions from 28
+  individuals and gives lambda_hat=0.749768; its primary lambda<1 gate passes,
+  while the stronger POWER point forecast |lambda_hat|<0.75 passes only
+  narrowly;
+- a separately frozen source-faithful hourly ERA5 follow-up achieved 256/256
+  event coverage and gives lambda_hat=0.811312 on the same 224 transitions;
+  estimator-scale phase contraction therefore replicates across POWER and ERA5;
+- the registered POWER W2 directional stopover gate remains a valid
+  source-specific prospective PASS, but the ERA5 reconstruction yields a weaker
+  unsupported stopover association (p=0.310), so a reconstruction-robust wigeon
+  stopover mechanism is not established;
 - the frozen three-taxon direct receipt establishes a descriptive phase-
   retention coordinate across mule deer, barnacle goose, and Eurasian wigeon,
   but does not estimate one universal lambda and does not treat repeated goose
   flyways as independent taxa;
-- the direct lambda values are naive regression-scale estimands until
-  source-backed phase-measurement error is calibrated; predictor phase error can
-  attenuate lambda toward zero, so lambda_hat<1 alone is not sufficient to
-  identify latent lambda<1 under an errors-in-variables observation model;
-- a true-lambda=1 null must be simulated on the observed estimator scale using
-  the frozen sample size, ecological interval, predictor phase variance,
-  predictor/outcome measurement-error SDs, and consecutive-error correlation;
-- cross-system differences in naive lambda magnitude must not be attributed
-  entirely to controller biology until differential phase reliability has been
-  audited;
+- direct lambda values are regression-scale estimands and predictor phase error
+  can attenuate them toward zero; cross-system magnitude differences must not be
+  attributed entirely to controller biology without reliability analysis;
+- the complete wigeon POWER-versus-ERA5 replicate calibration supplies
+  source-backed disagreement scales, but does not uniquely identify either
+  source's latent measurement-error distribution;
+- true-lambda=1 sensitivity is assumption-dependent: under the complete ERA5
+  calibration the equal-independent and correlation-proxy scenarios make the
+  observed POWER lambda unusual, whereas assigning the full replicate
+  disagreement SD to each source makes complete retention plausible;
+- complete-calibration event-structure SIMEX v2 moves the wigeon estimate from
+  0.749768 to the frozen range 0.7979--0.9354; these are sensitivity values, not
+  corrected truth;
 - environmental innovation SD is process noise, not phase measurement-error SD,
   and must not be reused as an errors-in-variables calibration quantity;
-- taxon-specific EIV or SIMEX correction is not licensed until its error moments
-  are source-backed and frozen before comparison with the observed lambda;
+- no EIV or SIMEX value is licensed as the true latent biological lambda without
+  stronger source-specific error identification;
 - confirmatory cross-system lambda support is counted only from
   prospectively registered tests whose later observations match the frozen
   system ID, independent-test ID, phase-coordinate ID, and segment-scale ID;
@@ -441,6 +450,9 @@ TRACKING_AIKENS_LAMBDA_OUTCOME_UNOPENED
 TRACKING_AIKENS_IID_TARGET_COVERAGE_SUPPORT_ENVELOPE_FROZEN
 TRACKING_AIKENS_PIXEL_YEAR_CLUSTERED_SUPPORT_SENSITIVITY_FROZEN
 TRACKING_WIGEON_PROSPECTIVE_PHASE_RETENTION_RECEIPT_FROZEN
+TRACKING_WIGEON_SOURCE_FAITHFUL_ERA5_CALIBRATION_COMPLETE
+TRACKING_WIGEON_EVENT_STRUCTURE_SIMEX_V2_COMPLETE
+TRACKING_WIGEON_ACTUATOR_RECONSTRUCTION_SENSITIVITY_FROZEN
 TRACKING_THREE_TAXON_DIRECT_PHASE_RETENTION_COORDINATE_FROZEN
 TRACKING_FOURTH_TAXON_DEFAULT_HOLD_PENDING_INCLUSION_GATE
 TRACKING_EXPLICIT_MOVEMENT_FEEDBACK_LANDSCAPE_IMPLEMENTED
