@@ -84,3 +84,12 @@ def test_integrated_package_contains_templates_and_six_figures(
         (out / "figures").glob("PAYOFF_B_INTEGRATED_FIG*.svg")
     )
     assert len(figures) == 6
+
+
+def test_integrated_package_excludes_self_referential_status_receipts(tmp_path: Path) -> None:
+    out = tmp_path / "package"
+    manifest = module.build_package(out)
+    sources = {row["source"] for row in manifest["files"]}
+    assert "docs/PUBLICATION_STATUS.md" not in sources
+    assert "submission/PAYOFF_B_INTEGRATED_PREOUTCOME_READINESS_20260925.md" not in sources
+    assert manifest["file_count"] == 31
