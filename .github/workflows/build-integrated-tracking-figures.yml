@@ -1,10 +1,10 @@
-name: Integrated PAYOFF-B empirical figures
+name: Integrated PAYOFF-B six figures
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - feature/payoff-b-integrated-ecology-paper-20260925
+      - main
     paths:
       - 'scripts/render_integrated_tracking_empirical_figures.py'
       - 'scripts/render_integrated_tracking_figures.py'
@@ -16,6 +16,7 @@ on:
   pull_request:
     paths:
       - 'scripts/render_integrated_tracking_empirical_figures.py'
+      - 'scripts/render_integrated_tracking_figures.py'
       - 'data/payoff_b_broad_bird_stage1_result_20260925.json'
       - 'data/payoff_b_integrated_empirical_figure_inputs_20260925.json'
       - 'data/payoff_b_empirical_phase_panel_status_20260921.json'
