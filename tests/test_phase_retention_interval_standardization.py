@@ -207,4 +207,4 @@ def test_geb_manuscript_does_not_call_raw_lambda_a_common_cross_system_coordinat
     text = MANUSCRIPT.read_text(encoding="utf-8")
     assert "as a common phase-retention coordinate" not in text
     assert "segment-scale phase-retention coordinate" in text
-    assert "raw cross-system" in text.lower() or "raw coefficient magnitudes" in text.lower()
+    assert "not as a cross-system rate constant" in text.lower()
