@@ -10,28 +10,27 @@ for *Global Ecology and Biogeography*.
 
 ### Why this paper is of interest to GEB readers (<250 words)
 
-Ecologists commonly summarize environmental tracking by the mismatch between an
-organism and favourable conditions, but the same endpoint can be produced by
-different mixtures of movement, seasonal timing, environmental information and
-behavioral actuation. We connect theory, simulation and registered reanalyses to
-ask whether mismatch identifies the tracking process that produced it.
+Organisms can track changing conditions by moving through space or shifting
+seasonal timing. Our manuscript asks whether timing can permanently replace
+spatial tracking under sustained environmental change, or whether it only
+buffers and postpones the need to move.
 
-A local controller first shows an exact identification problem: movement and
-timing can produce identical mismatch dynamics through different allocations of
-restoring feedback. Explicit landscapes then reveal why those hidden
-architectures matter, because timing has finite capacity, movement experiences
-landscape geometry, and interacting partners can face coordination barriers.
-We test the corresponding one-dimensional natural prediction across 5,816
-observations from 55 migratory bird species and do not recover one portable
-animal-speed/environmental-wave-speed optimum. Direct reconstructions in mule
-deer, barnacle geese and Eurasian wigeon then show that incoming phase error can
-be transformed, but on different ecological intervals and through different
-actuator architectures.
+A local controller first supplies an exact substitution null in which movement
+and timing can carry the same corrective burden. Explicit landscapes then show
+the ecological asymmetry: timing has finite capacity. It expands persistence and
+reduces immediate fragmentation costs, but under stronger directional forcing
+movement re-enters. We test the corresponding one-dimensional natural
+prediction across 5,816 observations from 55 migratory bird species and do not
+recover one portable animal-speed/environmental-wave-speed optimum. Direct
+reconstructions in mule deer, barnacle geese and Eurasian wigeon instead show
+phase correction through different actuator architectures and ecological
+intervals.
 
-The resulting general conclusion is not a new universal coefficient. It is that
-**mismatch is an outcome, not a tracking architecture**: similar observed
-alignment can conceal different mechanisms and different remaining capacities
-to respond to continued environmental change.
+The central ecological conclusion is therefore **temporal buffering, not
+temporal replacement**. Low mismatch can conceal latent spatial tracking demand
+until timing capacity is exhausted. The inference consequence follows from that
+mechanism: current mismatch is not a direct measure of the tracking architecture
+or remaining response capacity that keeps mismatch small.
 
 Potential reviewers / handling editors: [AUTHOR-CONTROLLED, CONFLICT-CHECKED].
 
