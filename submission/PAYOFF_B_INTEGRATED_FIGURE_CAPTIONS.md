@@ -45,16 +45,21 @@ coordination barrier and 21/24 convert a local-extinction endpoint to
 coordinated persistence. These counts describe the sampled synthetic grid and
 are not natural prevalence estimates.
 
-## Figure 4. Broad natural data reject one universal movement-to-environment speed rule
+## Figure 4. Broad natural data reject a universal speed rule and simple temporal substitution
 
-Registered Stage-1 reanalysis of 5,816 observations from 55 migratory bird
+(A) Registered Stage-1 reanalysis of 5,816 observations from 55 migratory bird
 species. The flexible raw-mismatch minimum occurs near speed ratio 0.405 at
 median directional alignment. After species-by-cell phase centering, the point
 minimum moves to approximately 1.043 at median alignment and 1.397 under perfect
-alignment, but coefficient-draw uncertainty is broad and species-level curvature
-and vertex diagnostics are heterogeneous. The panel therefore treats the
-order-one centered point estimate as a descriptive feature, not validation of a
-portable natural optimum.
+alignment, but coefficient-draw uncertainty is broad. (B) Species-level
+curvature and vertex diagnostics remain heterogeneous. (C) Fresh chronological
+holdout test: timing responsiveness estimated from 2002–2009 did not flatten
+the 2010–2017 mismatch-versus-speed curve among 39 species and 3,268 holdout
+observations. The registered quadratic interaction was +0.035 ± 0.029
+(p=0.225), opposite to the predicted negative direction, so the substitution
+test failed in direction. The timing-responsiveness main effect was negative in
+the same model but is secondary descriptive evidence rather than the registered
+primary result.
 
 ## Figure 5. Real migration systems transform phase error through different architectures
 
