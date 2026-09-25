@@ -91,10 +91,12 @@ different ecological intervals and through different actuator architectures.
 
 Registered perturbation result: **{result_class}**. {summary}
 
-The broad conclusion is unchanged by the perturbation class: **mismatch is an
-outcome, not a tracking architecture**. Similar observed alignment can conceal
-different mechanisms and different remaining capacities to respond to continued
-environmental change.
+The broad conclusion is unchanged by the perturbation class: **temporal
+buffering delays but does not permanently replace spatial tracking under
+sustained environmental change**. Low mismatch can therefore conceal latent
+spatial tracking demand until timing capacity is exhausted; mismatch is the
+outcome of that tracking system rather than a direct measure of its remaining
+capacity.
 
 [AUTHOR-CONFIRMED statement that the work is original, approved by all authors,
 and not under consideration elsewhere.]
