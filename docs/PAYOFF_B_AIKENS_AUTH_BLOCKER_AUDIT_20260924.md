@@ -101,6 +101,32 @@ lambda outcome = UNOPENED
 This is a transport/credential blocker, not a negative scientific result and not
 an estimability result.
 
+
+## 2026-09-25 credential-only recheck
+
+A network-free GitHub Actions preflight rechecked the current repository secret
+state without submitting an AppEEARS task or opening any environmental value:
+
+```text
+workflow = payoff-b Aikens credential preflight
+run = 36113621057
+artifact = 10853764396
+artifact_sha256 = 4dd3e148c57fdb96c5bb92a8d96236bf05f123c361be94bc8ea6f12f6b0df471
+status = NOT_CONFIGURED
+credential_route = none
+network_submission_performed = false
+environmental_values_opened = false
+lambda_outcome_opened = false
+```
+
+Thus the 2026-09-24 diagnosis remains current on 2026-09-25: authentication is
+still the only external execution blocker. No new scientific blocker was found
+and no registered analysis setting was changed.
+
+Machine receipt:
+
+`data/payoff_b_aikens_credential_preflight_20260925.json`
+
 ## Machine-readable receipt
 
 `data/payoff_b_aikens_auth_blocker_audit_20260924.json`
