@@ -1,15 +1,16 @@
 # PAYOFF-B integrated six-figure audit — 2026-09-25
 
-Status: **PASS — complete preoutcome six-figure set rendered from the integrated publication branch**
+Status: **PASS — canonical adopted PREOUTCOME six-figure set**
 
 ## Canonical render
 
-- workflow: `Integrated PAYOFF-B empirical figures`
-- workflow run: `36101750251`
-- head SHA: `06f374ff3fdca6a2ba95ccae949d016c3b7e8120`
+- workflow: `Integrated PAYOFF-B six figures`
+- validated PR head SHA: `cc8674cefecf0a09b85ac25446275b5bdc44dc4b`
+- adoption merge commit: `572b3a63de54a6a9abf46739108ed57ee8a876f9`
+- workflow run: `36106665345`
 - artifact: `payoff-b-integrated-tracking-six-figures`
-- artifact ID: `10848409538`
-- artifact SHA256: `80b056cd15c18706653d495715e8a3384185a7780a656f1b92341c2e9ccf095b`
+- artifact ID: `10851039331`
+- artifact SHA256: `c6529f1f16b6df25dbff6fa7cf1c37bc11536b0b1792a5f65ddda93378bc62be`
 
 The artifact expands to exactly six SVG figures plus one machine manifest.
 
@@ -66,5 +67,6 @@ DIRECT_SYSTEM_MACHINE_PROVENANCE = COMPLETE
 AIKENS_LAMBDA_OUTCOME = UNOPENED
 ```
 
-The existing frozen Oikos and GEB sources remain rollback/provenance sources
-until the publication architecture is formally adopted.
+The two-paper publication architecture is adopted. The existing frozen Oikos
+and GEB sources remain rollback/provenance sources and are not submitted as
+separate overlapping papers while the integrated paper is active.

@@ -197,7 +197,7 @@ SLK owns the flagship transport spine
 L -> R -> Phi -> accessibility -> invasion -> fixation -> occupancy
 ```
 
-and the registered fixation-occupancy invariant. PAYOFF retains the deeper mathematical machinery as provenance and reusable modules, but only the anti-phase exact optimum theorem is currently promoted as an independent paper.
+and the registered fixation-occupancy invariant. PAYOFF retains the deeper mathematical machinery as provenance and reusable modules. Its active independent publication queue now contains the anti-phase exact theorem and the integrated tracking-ecology paper; the remaining architecture, spatial and topology branches stay dormant modules unless they satisfy the reactivation rule below.
 
 ## Reactivation rule
 
