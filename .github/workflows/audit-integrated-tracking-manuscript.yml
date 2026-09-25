@@ -1,0 +1,41 @@
+name: Integrated PAYOFF-B manuscript audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/payoff-b-integrated-ecology-paper-20260925
+    paths:
+      - 'manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md'
+      - 'scripts/audit_integrated_tracking_manuscript.py'
+      - 'data/payoff_b_broad_bird_stage1_result_20260925.json'
+      - 'data/payoff_b_empirical_phase_panel_status_20260921.json'
+      - 'submission/PAYOFF_B_INTEGRATED_SIX_FIGURE_AUDIT_20260925.md'
+      - '.github/workflows/audit-integrated-tracking-manuscript.yml'
+  pull_request:
+    paths:
+      - 'manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md'
+      - 'scripts/audit_integrated_tracking_manuscript.py'
+      - 'data/payoff_b_broad_bird_stage1_result_20260925.json'
+      - 'data/payoff_b_empirical_phase_panel_status_20260921.json'
+      - 'submission/PAYOFF_B_INTEGRATED_SIX_FIGURE_AUDIT_20260925.md'
+      - '.github/workflows/audit-integrated-tracking-manuscript.yml'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit integrated PREOUTCOME manuscript
+        run: >-
+          python scripts/audit_integrated_tracking_manuscript.py
+          --fail-on-preoutcome-gate-failure
+          --output outputs/integrated_tracking_submission_audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-integrated-tracking-submission-audit
+          path: outputs/integrated_tracking_submission_audit.json
+          if-no-files-found: error
