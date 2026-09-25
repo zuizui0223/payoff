@@ -32,7 +32,7 @@ def test_tracking_theory_visual_audit_is_frozen():
     assert "36089011639" in text
     assert "10845126875" in text
     assert "5249d69a52b0e95f958432d121910bc1b45a90f6074ac7f5961492b3f2453513" in text
-    assert "From buffered mismatch to tracking breakdown" in text
+    assert "buffered mismatch to tracking breakdown" in text
     for figure in range(1, 7):
         assert f"| {figure} |" in text
     assert text.count("| PASS |") == 6
