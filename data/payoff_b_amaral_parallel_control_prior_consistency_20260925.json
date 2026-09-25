@@ -1,0 +1,101 @@
+{
+  "receipt_id": "payoff_b_amaral_parallel_control_prior_consistency_20260925",
+  "frozen_date": "2026-09-25",
+  "role": "prior-published consistency evidence; not a new PAYOFF confirmatory test",
+  "source": {
+    "repository": "br-amaral/BirdMigrationSpeed",
+    "commit": "62c58d77c2028bd863dfe3697b0d9cf29ceaeab0",
+    "table": "tables/tab1.csv",
+    "data_dictionary": "data_cols.md",
+    "source_study": "Amaral et al. 2025"
+  },
+  "published_model2_bird_speed": {
+    "response": "log bird migration speed",
+    "n": 6418,
+    "terms": [
+      {
+        "term": "green-up date anomaly",
+        "estimate": -0.549,
+        "ci95": [
+          -0.77,
+          -0.327
+        ]
+      },
+      {
+        "term": "green-up speed anomaly",
+        "estimate": 0.088,
+        "ci95": [
+          0.041,
+          0.134
+        ]
+      },
+      {
+        "term": "migratory cell",
+        "estimate": 0.13,
+        "ci95": [
+          0.055,
+          0.205
+        ]
+      }
+    ],
+    "interpretation": "bird migration speed itself changes with green-up timing and green-up propagation speed"
+  },
+  "published_model3_species_traits": {
+    "response": "log bird migration speed",
+    "n": 4026,
+    "terms": [
+      {
+        "term": "species sensitivity",
+        "estimate": 0.119,
+        "ci95": [
+          -0.034,
+          0.203
+        ]
+      },
+      {
+        "term": "species first arrival date",
+        "estimate": 0.203,
+        "ci95": [
+          0.11,
+          0.295
+        ]
+      },
+      {
+        "term": "body mass",
+        "estimate": 0.099,
+        "ci95": [
+          -0.012,
+          0.211
+        ]
+      },
+      {
+        "term": "wintering latitude",
+        "estimate": 0.098,
+        "ci95": [
+          -0.022,
+          0.217
+        ]
+      },
+      {
+        "term": "hand-wing index",
+        "estimate": 0.147,
+        "ci95": [
+          -0.032,
+          0.327
+        ]
+      }
+    ],
+    "interpretation": "published timing sensitivity does not show the negative association with migration speed expected from a simple timing-for-speed tradeoff; its point estimate is positive but the interval overlaps zero"
+  },
+  "source_definitions": {
+    "xi_mean": "posterior mean species-specific sensitivity (days/day) to green-up for each cell",
+    "sensi_mean": "mean species sensitivity (days/day) across cells"
+  },
+  "synthesis_with_registered_holdout": {
+    "holdout_primary_status": "FAIL_WRONG_DIRECTION",
+    "holdout_primary_estimate": 0.03506263176814132,
+    "holdout_primary_p": 0.2249164339850812,
+    "licensed_statement": "The source study and the fresh split-sample holdout both fail to support a simple tradeoff in which stronger timing responsiveness reduces reliance on migration-speed matching.",
+    "prohibited_statement": "Do not claim positive timing-movement complementarity from the unsupported positive holdout interaction or the positive-but-uncertain published species-sensitivity coefficient."
+  }
+}
