@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - feature/payoff-b-integrated-ecology-paper-20260925
+      - main
     paths:
       - 'manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md'
       - 'scripts/audit_integrated_tracking_manuscript.py'
