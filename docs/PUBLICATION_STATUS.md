@@ -166,11 +166,11 @@ Current audited metrics after the temporal-buffering reframe are: abstract 198 w
 21 references with zero uncited entries, 8 keywords, and 6 main figures.
 
 The journal-neutral PREOUTCOME working package also passes deterministic build
-and inspection after the reframe: workflow run `36117335637`, artifact
-`10855786194`, artifact SHA256
-`efcfd13f34533c94f1050eb7ee6e1a7901d51d7ddf905510f36b9b204037063f`.
-Its inner 33-file / 6-figure ZIP has SHA256
-`9a880f75fa86ceef1a93b28d7a92c2c19eefad7b744f94e7596418bdefcdde4f`
+and inspection after the reframe: workflow run `36118090547`, artifact
+`10856440257`, artifact SHA256
+`f9d7004081bc236bcdd86521c8bc07b46458366b2fd1edb0b88ce73451069e9d`.
+Its hash-stable inner 31-file / 6-figure ZIP has SHA256
+`b5628da1383960bdbbb637960d78d4f9c71588269f0ddee3111be37bba3fffc8`
 and zero identity leaks in the anonymous main text.
 
 The GEB first-shot overlay is also machine-ready in PREOUTCOME state after the
