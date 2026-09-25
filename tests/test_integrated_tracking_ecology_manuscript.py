@@ -46,3 +46,45 @@ def test_integration_does_not_promote_universal_lambda() -> None:
 def test_original_source_manuscripts_remain_available() -> None:
     assert TRACKING_SOURCE.exists()
     assert GEB_SOURCE.exists()
+
+
+def test_integrated_manuscript_has_single_aikens_marker_pairs() -> None:
+    m = text(INTEGRATED)
+    for name in ("ABSTRACT", "RESULTS", "DISCUSSION", "CONCLUSION"):
+        assert m.count(f"<!-- AIKENS_LAMBDA_{name}_START -->") == 1
+        assert m.count(f"<!-- AIKENS_LAMBDA_{name}_END -->") == 1
+
+
+def test_integrated_manuscript_keeps_compact_six_figure_architecture() -> None:
+    import re
+
+    m = text(INTEGRATED)
+    figure_block = m.split("## Figure architecture", 1)[1].split("## Claim ceiling", 1)[0]
+    figures = re.findall(r"^\*\*Figure\s+(\d+)\s+—", figure_block, flags=re.M)
+    assert figures == ["1", "2", "3", "4", "5", "6"]
+
+
+def test_integrated_manuscript_has_reference_spine() -> None:
+    m = text(INTEGRATED)
+    refs = m.split("## References", 1)[1].split("## Figure architecture", 1)[0]
+    reference_lines = [line for line in refs.splitlines() if line.startswith("- ")]
+    assert len(reference_lines) >= 15
+    for required in (
+        "Weir JC, Phillimore AB (2024)",
+        "Amaral BR, Youngflesh C, Tingley M, Miller DAW (2025)",
+        "Ortega AC, Aikens EO, Merkle JA, Monteith KL, Kauffman MJ (2023)",
+        "van Toor ML et al. (2021)",
+        "Aikens EO, Wyckoff TB, Sawyer H, Kauffman MJ (2022)",
+    ):
+        assert required in refs
+
+
+def test_integrated_abstract_stays_short_preoutcome() -> None:
+    import re
+
+    m = text(INTEGRATED)
+    abstract = m.split("## Abstract", 1)[1].split("**Keywords:**", 1)[0]
+    abstract = re.sub(r"<!--.*?-->", " ", abstract, flags=re.S)
+    abstract = re.sub(r"\[AIKENS LAMBDA ABSTRACT PENDING.*?\]", " ", abstract, flags=re.S)
+    words = re.findall(r"\b[\w’'-]+\b", abstract, flags=re.UNICODE)
+    assert len(words) <= 300
