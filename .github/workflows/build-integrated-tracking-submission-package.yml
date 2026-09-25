@@ -1,0 +1,46 @@
+name: Integrated PAYOFF-B submission package
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - feature/payoff-b-integrated-submission-package-20260925
+    paths:
+      - 'manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md'
+      - 'scripts/build_integrated_tracking_supporting_information.py'
+      - 'scripts/build_integrated_tracking_submission_package.py'
+      - 'scripts/render_integrated_tracking_figures.py'
+      - 'submission/PAYOFF_B_INTEGRATED_*'
+      - '.github/workflows/build-integrated-tracking-submission-package.yml'
+  pull_request:
+    paths:
+      - 'manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md'
+      - 'scripts/build_integrated_tracking_supporting_information.py'
+      - 'scripts/build_integrated_tracking_submission_package.py'
+      - 'scripts/render_integrated_tracking_figures.py'
+      - 'submission/PAYOFF_B_INTEGRATED_*'
+      - '.github/workflows/build-integrated-tracking-submission-package.yml'
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build deterministic integrated submission package
+        run: >-
+          python scripts/build_integrated_tracking_submission_package.py
+          --output-dir outputs/integrated_tracking_submission_package
+          --zip outputs/PAYOFF_B_INTEGRATED_TRACKING_SUBMISSION_PACKAGE.zip
+          --review-zip outputs/PAYOFF_B_INTEGRATED_TRACKING_ANON_REVIEW.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-integrated-tracking-submission-package
+          path: |
+            outputs/PAYOFF_B_INTEGRATED_TRACKING_SUBMISSION_PACKAGE.zip
+            outputs/PAYOFF_B_INTEGRATED_TRACKING_ANON_REVIEW.zip
+            outputs/integrated_tracking_submission_package/PAYOFF_B_INTEGRATED_SUBMISSION_MANIFEST.json
+          if-no-files-found: error
