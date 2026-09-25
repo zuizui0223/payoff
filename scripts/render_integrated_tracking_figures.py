@@ -42,8 +42,8 @@ def render_integrated_concept(path: Path) -> None:
     out=[
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
         '<rect width="100%" height="100%" fill="white"/>',
-        text(36,40,"Figure 1. From a simple tracking benchmark to hidden tracking architecture",22,"700"),
-        text(36,68,"One ecological argument links the exact benchmark, mechanism breakdown, broad falsification and direct phase-control decomposition.",13),
+        text(36,40,"Figure 1. Temporal buffering and latent spatial tracking demand",22,"700"),
+        text(36,68,"Timing can absorb tracking demand temporarily, but finite capacity causes spatial response to re-enter under sustained forcing.",13),
     ]
     out.append(box(55,110,280,125,"1  PAYOFF-B1 benchmark",[
         "Exact anti-phase two-patch model:",
@@ -57,11 +57,11 @@ def render_integrated_concept(path: Path) -> None:
         "same mismatch can hide different allocations."
     ]))
     out.append(arrow(735,172,825,172))
-    out.append(box(825,95,315,155,"3  Ecological constraints",[
-        "finite timing capacity",
-        "landscape geometry / fragmentation",
-        "partner matching / coordination",
-        "=> substitution becomes fragile."
+    out.append(box(825,95,315,155,"3  Finite temporal buffer",[
+        "timing postpones movement",
+        "capacity is finite",
+        "geometry and coordination constrain reallocation",
+        "=> spatial demand re-enters."
     ]))
 
     out.append(arrow(585,235,585,320))
@@ -83,7 +83,7 @@ def render_integrated_concept(path: Path) -> None:
         "fixed-24 h lambda test",
         "remains outcome-blind."
     ]))
-    out.append(text(55,680,"Headline inference: mismatch is an outcome, not a tracking architecture.",16,"700"))
+    out.append(text(55,680,"Headline: temporal buffering delays but does not replace spatial tracking.",16,"700"))
     out.append("</svg>")
     path.write_text("\n".join(out)+"\n",encoding="utf-8")
 
