@@ -24,9 +24,9 @@ Canonical PREOUTCOME source:
 
 \`manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md\`
 
-This combines the former standalone tracking-theory and movement–phenology empirical manuscripts around one ecological inference problem:
+This combines the former standalone tracking-theory and movement–phenology empirical manuscripts around one ecological mechanism:
 
-> **Observed environmental mismatch does not uniquely identify the tracking architecture that produced it.**
+> **Temporal adjustment can buffer spatial tracking demand, but cannot replace movement indefinitely under sustained environmental change.**
 
 The integrated paper uses one sequential argument:
 
@@ -41,17 +41,21 @@ The paper therefore does not move from “theory confirmed by data”. It moves 
 
 ## Headline claim
 
-Preferred headline:
+Primary ecological headline:
 
-> **Low environmental mismatch can conceal a changing, system-specific tracking burden distributed across space, timing, information and actuation.**
+> **Temporal buffering delays but does not permanently replace spatial tracking under sustained environmental change.**
 
-Equivalent shorter form:
+Ecological consequence:
+
+> **Low current mismatch can conceal latent spatial tracking demand and shrinking response options.**
+
+Inference consequence:
 
 > **Mismatch is an outcome, not a tracking architecture.**
 
 ## Why integration is scientifically coherent
 
-The former theory and empirical manuscripts answer adjacent halves of the same identification problem.
+The former theory and empirical manuscripts answer adjacent parts of one buffering-and-reentry problem.
 
 The synthetic theory establishes:
 
@@ -82,7 +86,7 @@ observed mismatch
 
 with the response coordinate separated from system-specific actuators.
 
-The integrated paper is therefore one falsification-and-explanation sequence, not a theory manuscript with unrelated case studies appended.
+The integrated paper is therefore one mechanism-to-falsification sequence: finite temporal buffering explains why current mismatch can stay small while expressed movement demand changes, and why a universal natural speed rule need not emerge.
 
 ## Evidence hierarchy
 
@@ -150,7 +154,9 @@ The integrated manuscript may claim:
 
 - absence of one portable natural speed optimum in the registered 55-species bird analysis;
 - non-identifiability of tracking architecture from endpoint mismatch in the declared local controller;
-- finite temporal buffering and later spatial re-entry in the declared synthetic landscapes;
+- finite temporal buffering that delays but does not permanently replace spatial tracking in the declared synthetic landscapes;
+- low mismatch concealing latent spatial tracking demand in those declared synthetic landscapes;
+- later spatial re-entry in the declared synthetic landscapes;
 - interaction-generated coordination barriers in the declared sampled systems;
 - real phase transformation in the three directly reconstructed migration systems;
 - heterogeneity of actuator architecture and ecological correction interval;
@@ -164,6 +170,8 @@ It may not claim:
 - that the three direct taxa form a formal meta-analysis;
 - direct biological ranking of taxa by raw lambda;
 - causal attribution of the industrial population contrast solely to development;
+- direct empirical measurement of latent spatial tracking demand across the 55-species or three-system datasets;
+- that all natural phenological adjustment necessarily creates hidden spatial demand;
 - that all low mismatch indicates strong adaptation;
 - that the anti-phase theorem holds in the general moving-landscape or empirical systems.
 
