@@ -90,6 +90,25 @@ def extract_caption_body() -> str:
     return "\n".join(lines).strip()
 
 
+def compact_prior_art() -> str:
+    return (
+        "Phenological mismatch and climate-driven timing shifts are established "
+        "(Post et al. 2001; Visser & Gienapp 2019; Kharouba & Wolkovich 2020; "
+        "Weir & Phillimore 2024), as are coupled space–time responses "
+        "(Harsch et al. 2017; Macgregor et al. 2019; Hällfors et al. 2021; "
+        "Muthukrishnan et al. 2025; Fredston et al. 2025; Pontarp et al. 2015), "
+        "green-wave and compensatory migration (Bischof et al. 2012; "
+        "Aikens et al. 2017; Ortega et al. 2023; Amaral et al. 2025; "
+        "van Toor et al. 2021), information effects (Kölzsch et al. 2015; "
+        "Bauer et al. 2020; Torstenson & Shaw 2025), interaction mismatch "
+        "(Gilman et al. 2012), ecosystem engineering (Geremia et al. 2019), "
+        "and anthropogenic decoupling (Aikens et al. 2022). Our narrower "
+        "contribution is the finite-buffering / spatial-reentry mechanism, its "
+        "registered natural substitution test, and the phase–velocity division "
+        "of labor that follows."
+    )
+
+
 def geb_data_statement() -> str:
     text = DATA_TEMPLATE.read_text(encoding="utf-8")
     review = between(
@@ -120,24 +139,8 @@ def build_source(source_path: Path = DEFAULT_SOURCE) -> str:
 
     body = strip_rule(source[body_start:prior_start])
     # GEB uses a compact literature-positioning paragraph so the
-    # journal-facing source retains outcome-rendering headroom under the
-    # ~5,000-word Research Article envelope. All references remain cited.
-    prior = (
-        "Phenological mismatch and climate-driven timing shifts are established "
-        "(Post et al. 2001; Visser & Gienapp 2019; Kharouba & Wolkovich 2020; "
-        "Weir & Phillimore 2024), as are coupled space–time responses "
-        "(Harsch et al. 2017; Macgregor et al. 2019; Hällfors et al. 2021; "
-        "Muthukrishnan et al. 2025; Fredston et al. 2025; Pontarp et al. 2015), "
-        "green-wave and compensatory migration (Bischof et al. 2012; "
-        "Aikens et al. 2017; Ortega et al. 2023; Amaral et al. 2025; "
-        "van Toor et al. 2021), information effects (Kölzsch et al. 2015; "
-        "Bauer et al. 2020; Torstenson & Shaw 2025), interaction mismatch "
-        "(Gilman et al. 2012), ecosystem engineering (Geremia et al. 2019), "
-        "and anthropogenic decoupling (Aikens et al. 2022). Our narrower "
-        "contribution is the finite-buffering / spatial-reentry mechanism, its "
-        "registered natural substitution test, and the phase–velocity division "
-        "of labor that follows."
-    )
+    # journal-facing source retains outcome-rendering headroom.
+    prior = compact_prior_art()
     references = strip_rule(source[refs_start:figure_start]).strip()
 
     limitation = "### 5.8 Limitations"
