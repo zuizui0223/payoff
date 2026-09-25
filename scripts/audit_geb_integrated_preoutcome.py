@@ -65,11 +65,12 @@ def reference_records(refs: str) -> list[tuple[str, int]]:
 
 
 def cited(text: str, surname: str, year: int) -> bool:
+    normalized = re.sub(r"\s+", " ", text)
     pattern = (
         rf"(?i)(?<![\w]){re.escape(surname)}(?![\w])"
-        rf"[^\n]{{0,180}}(?<!\d){year}(?!\d)"
+        rf".{{0,180}}(?<!\d){year}(?!\d)"
     )
-    return bool(re.search(pattern, text))
+    return bool(re.search(pattern, normalized))
 
 
 def audit(path: Path) -> dict:
