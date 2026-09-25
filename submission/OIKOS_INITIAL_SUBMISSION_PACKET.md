@@ -1,6 +1,6 @@
 # Oikos initial-submission packet — PAYOFF-B tracking theory
 
-Updated: **2026-09-24**
+Updated: **2026-09-25**
 
 ## Upload-ready generated files
 
@@ -26,13 +26,18 @@ Updated: **2026-09-24**
 
 ## Machine audit
 
-- canonical green workflow: `35999337326`
-- audit receipt:
+- current post-reframing audit receipt:
+  `submission/OIKOS_MACHINE_PREPARATION_AUDIT_20260925.md`
+- historical pre-reframing receipt:
   `submission/OIKOS_MACHINE_PREPARATION_AUDIT_20260924.md`
-- anonymous main-text RTF: visually verified after PDF rendering;
-- Supporting Information RTF: visually verified after PDF rendering;
+- anonymous main-text RTF: re-rendered after reframing and visually verified
+  across all 28 pages;
+- Supporting Information RTF: re-rendered and visually verified across all
+  10 pages;
 - anonymous code/data ZIP: manifest-verified with zero identity or empirical
-  programme leakage.
+  programme leakage;
+- current framing authority is the 2026-09-25 amendment; the 2026-09-24 claim
+  freeze remains the numerical/evidence provenance record.
 
 ## Human metadata still required
 
