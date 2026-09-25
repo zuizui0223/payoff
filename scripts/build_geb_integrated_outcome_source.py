@@ -15,6 +15,7 @@ from build_geb_integrated_preoutcome_source import (
     strip_rule,
     structured_abstract,
     extract_caption_body,
+    compact_prior_art,
 )
 from render_aikens_lambda_manuscript import classify_result
 
@@ -108,9 +109,9 @@ def build_source(source_path: Path, result_json: Path) -> str:
     figure_start = source.index("## Figure architecture")
 
     body = strip_rule(source[body_start:prior_start])
-    prior = strip_rule(
-        source[prior_start + len("## Prior-art boundary"):refs_start]
-    ).strip()
+    # Reuse the exact compact literature-positioning block from the
+    # PREOUTCOME overlay so outcome rendering cannot re-expand the manuscript.
+    prior = compact_prior_art()
     references = strip_rule(source[refs_start:figure_start]).strip()
 
     limitation = "### 5.8 Limitations"
