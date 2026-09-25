@@ -6,11 +6,11 @@
 
 ## Abstract
 
-Organisms can track changing environments by moving through space or adjusting seasonal timing, but whether temporal adjustment can replace movement under sustained change is unresolved. We combine theory, moving-landscape simulations and migration data to test temporal buffering of spatial tracking demand. A local controller provides an exact substitution null: movement and phenological feedback enter through their summed restoring gain, so either can suppress mismatch. Explicit landscapes break this equivalence. Finite phenological capacity expands persistence and reduces sampled fragmentation costs, but movement re-enters under stronger directional forcing; timing therefore delays rather than removes spatial tracking demand. Partner dependence can further block jointly beneficial reallocations. Across 5,816 observations from 55 migratory bird species, the corresponding one-dimensional prediction of a portable movement-speed/environmental-wave-speed optimum is not supported. Direct reconstructions in mule deer, barnacle geese and Eurasian wigeon instead show phase correction over different ecological intervals and through different actuator architectures.
+Organisms can track changing environments by moving through space or adjusting seasonal timing, but whether temporal adjustment can replace movement under sustained change is unresolved. We combine theory, moving-landscape simulations and migration data to test temporal buffering of spatial tracking demand. A local controller provides an exact substitution null, whereas explicit landscapes show that finite phenological capacity expands persistence and reduces sampled fragmentation costs before movement re-enters under stronger directional forcing. Across 5,816 observations from 55 migratory bird species, one portable movement-speed/environmental-wave-speed optimum is not supported. We then tested temporal substitution directly with a response-blind chronological split: 2002–2009 estimated species timing responsiveness and 2010–2017 formed the holdout. Among 39 species and 3,268 holdout observations, stronger historical timing responsiveness did not flatten the later mismatch-versus-speed curve; the registered quadratic interaction was opposite-signed (+0.035 ± 0.029, p=0.225). In the same frozen model, timing responsiveness was associated with lower average holdout mismatch (secondary descriptive effect −0.300 ± 0.105), so better timing did not make movement-speed dependence dispensable. Direct reconstructions in mule deer, barnacle geese and Eurasian wigeon likewise show phase correction through different actuator architectures and ecological intervals.
 <!-- AIKENS_LAMBDA_ABSTRACT_START -->
 [AIKENS LAMBDA ABSTRACT PENDING — outcome-blind renderer insertion only.]
 <!-- AIKENS_LAMBDA_ABSTRACT_END -->
-Together, these results identify temporal adjustment as a finite buffer rather than a permanent substitute for spatial tracking. Low mismatch can therefore conceal latent spatial tracking demand and shrinking response options. Mismatch is consequently an outcome of the tracking system, not a direct measure of its mechanism or remaining resilience.
+Together, these results identify temporal adjustment as a buffer rather than a substitute for spatial tracking. Low mismatch can therefore conceal continued dependence on movement and movement-permitting landscapes.
 
 **Keywords:** environmental tracking; phenological mismatch; migration; movement ecology; climate change; phase retention; habitat fragmentation; behavioral plasticity
 
@@ -32,9 +32,9 @@ First, we construct the strongest possible substitution null. In a local control
 
 Second, we add the ecological constraints that turn substitution into finite buffering: bounded phenological capacity, explicit spatial redistribution, fragmented movement routes and partner matching. These models ask whether a temporal bypass merely delays spatial response, when movement must re-enter, and whether the required reallocation remains accessible.
 
-Third, we test the corresponding one-dimensional natural prediction empirically. A registered broad analysis of 5,816 observations from 55 migratory bird species derived from Amaral et al. (2025) asks whether migration collapses onto one animal-speed/environment-speed optimum. It does not. We then use directly reconstructed mule-deer, barnacle-goose and Eurasian-wigeon systems to ask how real migrants instead transform phase error (Ortega et al. 2023; Kölzsch et al. 2015; van Toor et al. 2021), separating a common response coordinate from system-specific actuator mechanisms and ecological interval scales.
+Third, we test the corresponding one-dimensional natural prediction empirically. A registered broad analysis of 5,816 observations from 55 migratory bird species derived from Amaral et al. (2025) asks whether migration collapses onto one animal-speed/environment-speed optimum. It does not. We then test substitution itself using a fresh chronological split of the same archived dataset: early years estimate species-level timing responsiveness to green-up, and later years ask whether stronger historical timing responsiveness weakens the dependence of phase mismatch on movement speed. Finally, we use directly reconstructed mule-deer, barnacle-goose and Eurasian-wigeon systems to ask how real migrants transform phase error (Ortega et al. 2023; Kölzsch et al. 2015; van Toor et al. 2021), separating a common response coordinate from system-specific actuator mechanisms and ecological interval scales.
 
-Our central prediction is therefore directional and mechanistic: **temporal adjustment can buffer spatial tracking demand, but it cannot replace movement indefinitely under sustained environmental change**. During that buffering phase, low observed mismatch can conceal the spatial response that will become necessary once temporal capacity is exhausted. The familiar inference problem follows from this ecological mechanism: mismatch is an outcome of the tracking system rather than a direct measure of its architecture or remaining capacity.
+Our central prediction is therefore directional and mechanistic: **temporal adjustment can buffer spatial tracking demand, but it cannot replace movement indefinitely under sustained environmental change**. A true natural substitute should make later mismatch less dependent on movement speed. The split-sample test therefore provides a direct empirical attempt to falsify the substitution component while keeping the synthetic buffering mechanism and the broad speed-rule test distinct.
 
 ---
 
@@ -134,11 +134,13 @@ We compare open landscapes with straight and zigzag barriers, vary directional m
 
 The synthetic parameter values are mechanism probes, not estimates of natural climate velocity or corridor thresholds.
 
-### 3.2 Broad 55-species migration test
+### 3.2 Broad 55-species migration and split-sample substitution tests
 
 The primary cross-system empirical test uses 5,816 observations from 55 migratory bird species in the registered broad migration dataset. The analysis asks whether arrival mismatch is minimized at one portable ratio of animal migration speed to environmental-wave speed.
 
 Raw and phase-centered versions are evaluated under the frozen analysis. Species-level curvature and optimum heterogeneity are retained rather than replaced with one pooled optimum when the surface is shallow.
+
+A fresh response-blind secondary registration then tested temporal substitution directly. Unique years were split chronologically, with 2002–2009 used only to estimate each species' responsiveness of arrival-date anomalies to green-up anomalies and 2010–2017 reserved as holdout. Species required at least 60 calibration observations, five cells and five calibration years. Calibration years also defined each species-by-cell baseline phase. In holdout years, absolute deviation from that baseline was modelled as a quadratic function of log animal/environment speed ratio, timing responsiveness and their interactions, with speed scale, alignment, latitude, green-up anomaly, migration/breeding flags and species, species-by-cell and year random effects. The registered primary term was the interaction between squared log speed ratio and standardized timing responsiveness. Temporal substitution predicted a negative coefficient; support required the registered direction and p<0.05. No alternate split, timing-gain definition, response or moderator model was licensed after readout.
 
 ### 3.3 Direct migration systems
 
@@ -226,6 +228,10 @@ The primary macroecological result is therefore a falsification:
 
 This is not treated as a failed prelude. It is the cross-system result expected when temporal buffering, waiting, route geometry and other tracking dimensions redistribute demand away from movement speed alone. A single speed ratio cannot remain portable if the amount of spatial response currently expressed depends on how much tracking burden is being absorbed elsewhere.
 
+The chronological holdout then tested the stronger substitution prediction. Calibration years produced timing-responsiveness estimates for 39 eligible species; the holdout contained 3,268 observations from the same 39 species across eight years. The registered interaction between squared log speed ratio and timing responsiveness was **+0.0351 ± 0.0289** (p=0.225), opposite to the predicted negative direction. The registered test therefore failed in direction: historically stronger timing responsiveness did not flatten later dependence of mismatch on movement speed. In the same frozen model, timing responsiveness had a negative main association with holdout mismatch (−0.300 ± 0.105, p=0.0043), but this was not the registered primary test and is retained only as a secondary descriptive result.
+
+Thus the natural bird data provide no evidence that greater timing responsiveness makes movement-speed matching less relevant. Better temporal tracking can coexist with, rather than replace, dependence on the spatial movement axis.
+
 ### 4.6 Direct migration systems transform phase error, but not with one actuator or interval
 
 The three directly reconstructed systems share an estimator form but not one biological coefficient.
@@ -306,13 +312,13 @@ and
 
 This is where the identification result becomes biologically important: mismatch is an outcome of the tracking system, not a direct readout of the mechanism or reserve capacity that keeps it small.
 
-### 5.3 Why the 55-species falsification is expected under multidimensional tracking
+### 5.3 Natural data reject both a universal speed rule and simple temporal substitution
 
-The failure of a universal natural speed optimum is not surprising once tracking has multiple degrees of freedom.
+The failure of a universal natural speed optimum is not surprising once tracking has multiple degrees of freedom. A speed ratio compresses target phase, waiting opportunities, route geometry, information quality, actuator constraints and ecological interval into one scalar. The broad analysis is important precisely because it prevents the theory from becoming an unconstrained explanation after the fact: a simple portable optimum was testable and was not recovered.
 
-A speed ratio compresses target phase, waiting opportunities, route geometry, information quality, actuator constraints and ecological interval into one scalar. Species can therefore achieve similar realized timing with different combinations of movement and waiting, or maintain different characteristic phase offsets despite comparable movement speeds.
+The chronological holdout provides a sharper boundary. If timing responsiveness simply substituted for movement-speed matching, species that historically tracked green-up more strongly should have shown a flatter later mismatch-speed curve. They did not. The registered moderation coefficient was opposite-signed and unsupported, so the natural data reject that simple substitution prediction as well.
 
-The broad analysis is important precisely because it prevents the theory from becoming an unconstrained explanation after the fact. A simple portable optimum was testable and was not recovered.
+The secondary negative timing-responsiveness main effect suggests that historically more timing-responsive species can maintain lower mismatch overall while still retaining movement-speed dependence. Because that main effect was not the registered primary target, we treat it descriptively. The licensed inference is narrower: temporal responsiveness may improve tracking without making spatial tracking dispensable. This distinction aligns with the explicit landscapes, where timing buffers environmental change but movement re-enters once temporal capacity or geometry becomes limiting.
 
 ### 5.4 What is portable across migration systems
 
@@ -370,7 +376,7 @@ Temporal adjustment can postpone movement, but it cannot replace spatial trackin
 
 In the explicit landscapes, finite timing capacity expands persistence and buffers fragmentation costs before movement re-enters as forcing strengthens. Low mismatch can therefore hide latent spatial tracking demand until temporal capacity is exhausted, while interaction constraints can further block the reallocation required to keep tracking.
 
-Natural migration is consistent with the absence of a one-dimensional solution. Across 55 bird species, migration does not collapse onto one portable movement-to-environment speed optimum. Direct systems instead transform phase error through different combinations of movement, waiting and route-stage responses over different ecological intervals.
+Natural migration also rejects a simple substitution interpretation. Across 55 bird species, migration does not collapse onto one portable movement-to-environment speed optimum. In the independent chronological holdout, stronger historical timing responsiveness did not weaken later movement-speed dependence; the registered moderation test failed in the opposite direction. Direct systems instead transform phase error through different combinations of movement, waiting and route-stage responses over different ecological intervals.
 
 <!-- AIKENS_LAMBDA_CONCLUSION_START -->
 [AIKENS LAMBDA CONCLUSION PENDING — outcome-blind renderer insertion only.]
@@ -403,12 +409,14 @@ The narrower contribution is to show that temporal adjustment can act as a
 finite buffer of spatial tracking demand in explicit moving landscapes: timing
 delays spatial response and reduces immediate route costs, but movement re-enters
 under sustained forcing, while geometry and coordination can constrain that
-reallocation. The broad 55-species test then rejects a one-dimensional universal
-speed rule, and direct migration systems show that natural phase correction is
-implemented through different actuators and ecological intervals. The
-identification result is a consequence of this mechanism: low mismatch can
-conceal latent spatial demand and does not directly measure remaining response
-capacity.
+reallocation. The broad 55-species test rejects a one-dimensional universal
+speed rule, and a fresh chronological holdout additionally rejects the simple
+prediction that historically stronger timing responsiveness should weaken later
+movement-speed dependence. Direct migration systems show that natural phase
+correction is implemented through different actuators and ecological intervals.
+The identification result is a consequence of this mechanism: low mismatch can
+conceal continued dependence on spatial tracking and does not directly measure
+remaining response capacity.
 
 ## References
 
@@ -447,8 +455,8 @@ Synthetic one- and two-dimensional results: persistence frontier, zigzag tempora
 **Figure 3 — Interaction can block coordinated tracking reallocation.**  
 Canonical one-step coordination gate plus compact 22/24 two-dimensional summary.
 
-**Figure 4 — Broad natural test rejects one universal speed rule.**  
-55-species raw and phase-centered movement/environment speed analysis with heterogeneity diagnostics.
+**Figure 4 — Broad natural data reject a universal speed rule and simple temporal substitution.**  
+The 55-species raw and phase-centered movement/environment speed analysis is paired with the registered 2002–2009 / 2010–2017 timing-responsiveness holdout test.
 
 **Figure 5 — Real systems transform phase error through different architectures.**  
 Mule deer, barnacle goose and wigeon phase-retention and actuator summaries, with raw interval scale made explicit.
@@ -465,6 +473,7 @@ The integrated paper should use no more than six main figures. Extended simulati
 This integrated manuscript supports:
 
 - failure of one universal natural movement-speed/environmental-wave-speed optimum in the registered 55-species broad bird analysis;
+- failure, in the registered chronological holdout, of the prediction that stronger historical timing responsiveness weakens later movement-speed dependence;
 - exact movement–timing substitutability in the declared local controller;
 - finite temporal buffering that delays but does not permanently replace spatial tracking in the declared synthetic landscapes;
 - low mismatch concealing latent spatial tracking demand within those declared synthetic landscapes;
@@ -488,4 +497,6 @@ It does not support:
 - an evolutionary fitness optimum for the empirical lambda values;
 - direct empirical measurement of latent spatial tracking demand across the 55-species or three-system datasets;
 - a claim that all natural phenological adjustment necessarily produces hidden spatial demand;
+- promotion of the secondary timing-responsiveness main effect to the registered primary holdout result;
+- a positive empirical claim that timing and movement are complementary based on the unsupported positive holdout interaction;
 - extension of the PAYOFF-B1 anti-phase uniqueness theorem to the general moving-landscape or empirical systems.
