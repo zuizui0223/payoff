@@ -109,16 +109,22 @@ Canonical PREOUTCOME source:
 
 `manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`
 
-Headline inference:
+Primary ecological conclusion:
 
-**Mismatch is an outcome, not a tracking architecture. Low mismatch can conceal a changing burden distributed across movement, timing, environmental information and actuation.**
+**Temporal buffering delays but does not permanently replace spatial tracking under sustained environmental change. Low current mismatch can therefore conceal latent spatial tracking demand.**
+
+Inference consequence:
+
+**Mismatch is an outcome, not a tracking architecture.**
 
 The integrated sequence is:
 
 ```text
 simple seasonal-timescale benchmark
--> local movement/timing non-identifiability
--> finite-capacity / fragmentation / coordination breakdown
+-> local movement/timing substitutability
+-> finite temporal buffering
+-> timing-capacity exhaustion and spatial re-entry
+-> fragmentation / coordination constraints on reallocation
 -> 55-species rejection of one universal natural speed optimum
 -> direct phase-control decomposition in mule deer, barnacle goose and wigeon
 -> preregistered within-taxon Aikens actuation-to-retention test
@@ -156,20 +162,20 @@ The integrated PREOUTCOME package has passed:
 - universal-lambda claim ceiling;
 - Aikens outcome-blind marker checks.
 
-Current audited metrics are: abstract 231 words, main text 3,458 words,
+Current audited metrics after the temporal-buffering reframe are: abstract 198 words, main text 3,699 words,
 21 references with zero uncited entries, 8 keywords, and 6 main figures.
 
 The journal-neutral PREOUTCOME working package also passes deterministic build
-and inspection: workflow run `36108335115`, artifact `10851908495`,
-artifact SHA256
-`44141280ac1c86b86671d52e02abb85e11985615903f84be351416b57f7bfeca`.
-Its inner 33-file / 6-figure ZIP has SHA256
-`09e6a822ed32301ce360ae78ac39ab64484c36f030c00f677022c0bb4455e47a`
+and inspection after the reframe: workflow run `36118090547`, artifact
+`10856440257`, artifact SHA256
+`f9d7004081bc236bcdd86521c8bc07b46458366b2fd1edb0b88ce73451069e9d`.
+Its hash-stable inner 31-file / 6-figure ZIP has SHA256
+`b5628da1383960bdbbb637960d78d4f9c71588269f0ddee3111be37bba3fffc8`
 and zero identity leaks in the anonymous main text.
 
-The GEB first-shot overlay is also machine-ready in PREOUTCOME state: structured
-abstract 222 words, GEB main body 3,690 words, 21 references, 6 display pieces,
-8 alphabetized keywords and zero identity leaks. Its deterministic package is
+The GEB first-shot overlay is also machine-ready in PREOUTCOME state after the
+reframe: structured abstract 241 words, GEB main body 3,967 words, 21
+references, 6 display pieces, 8 alphabetized keywords and zero identity leaks. Its deterministic package is
 recorded in
 `submission/GEB_INTEGRATED_PREOUTCOME_PACKAGE_AUDIT_20260925.md`.
 

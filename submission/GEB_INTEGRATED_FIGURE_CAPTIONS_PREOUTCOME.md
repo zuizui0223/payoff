@@ -3,17 +3,18 @@
 These legends are journal-facing overlays. Numerical content is unchanged from
 the canonical six-figure set. GEB panel labels are lower-case.
 
-**Figure 1. From a simple tracking benchmark to hidden tracking architecture.**
-Conceptual sequence linking the separate anti-phase seasonal-timescale benchmark
-to the integrated ecological inference problem. In the local null, movement-
-and timing-mediated feedback enter through one restoring gain, so the same
-endpoint mismatch can arise from different allocations between response axes.
-Finite timing capacity, landscape geometry and partner matching then break that
-local equivalence. The empirical programme tests a one-dimensional natural
-speed prediction across migratory birds and decomposes its failure using direct
-phase-control systems. The industrial-mule-deer phase-retention test is a
-preregistered within-taxon perturbation, not an additional cross-taxon
-replication.
+**Figure 1. Temporal buffering and latent spatial tracking demand.**
+Conceptual sequence linking the anti-phase seasonal-timescale benchmark to a
+finite temporal-buffering mechanism. In the local null, movement- and
+timing-mediated feedback enter through one restoring gain, so timing can absorb
+the same corrective burden as movement while mismatch remains low. Explicit
+landscapes make that substitution temporary: timing capacity is finite,
+fragmented geometry remains unresolved and partner matching can block
+reallocation, so spatial tracking demand re-enters under sustained forcing. The
+empirical programme then tests whether natural migration nevertheless collapses
+onto one movement-speed rule and decomposes phase correction across direct
+systems. The industrial-mule-deer phase-retention test is a preregistered
+within-taxon perturbation, not an additional cross-taxon replication.
 
 **Figure 2. Finite temporal buffering and spatial re-entry.** Frozen synthetic
 moving-landscape results. Increasing phenological capacity expands the sampled

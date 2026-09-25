@@ -1,17 +1,18 @@
 # PAYOFF-B integrated PREOUTCOME package audit — 2026-09-25
 
-Status: **PASS — deterministic PREOUTCOME working package built and inspected**
+Status: **PASS — temporal-buffering PREOUTCOME working package**
 
 ## Source state
 
-Validated package source head:
+Validated reframe head:
 
-`7ed53264c8c2bb6dbd8c9d077d43b394a6892a06`
+`d44dbfa09024ee87a473e6d0d1c28538fdde0209`
 
 Scientific state:
 
 ```text
 PREOUTCOME_INTERNAL_READY
+primary_conclusion = temporal buffering delays but does not permanently replace spatial tracking
 final_submission_eligible = false
 final_submission_blocker = registered Aikens fixed-24h lambda adjudication
 ```
@@ -20,122 +21,86 @@ final_submission_blocker = registered Aikens fixed-24h lambda adjudication
 
 ```text
 workflow = Integrated PAYOFF-B PREOUTCOME package
-run = 36108335115
+run = 36118090547
 status = PASS
 artifact = payoff-b-integrated-tracking-preoutcome-package
-artifact_id = 10851908495
-artifact_sha256 = 44141280ac1c86b86671d52e02abb85e11985615903f84be351416b57f7bfeca
+artifact_id = 10856440257
+artifact_sha256 = f9d7004081bc236bcdd86521c8bc07b46458366b2fd1edb0b88ce73451069e9d
 ```
 
-Full repository CI on the same head:
-
-```text
-workflow = test
-run = 36108335117
-status = PASS
-```
-
-## Inner deterministic archive
-
-The workflow artifact contains the deterministic submission-working ZIP:
+Inner deterministic archive:
 
 ```text
 file = PAYOFF_B_INTEGRATED_TRACKING_PREOUTCOME_PACKAGE.zip
-bytes = 83719
-sha256 = 09e6a822ed32301ce360ae78ac39ab64484c36f030c00f677022c0bb4455e47a
-fixed_zip_timestamp = 2026-09-25T00:00:00
-```
-
-Package manifest:
-
-```text
-file = PAYOFF_B_INTEGRATED_PREOUTCOME_PACKAGE_MANIFEST.json
-sha256 = 06febc1219c89d07be8823d8ceafca5d3b08addeae8b2d387c8553a3f470dc4e
-file_count = 33
+bytes = 78615
+sha256 = b5628da1383960bdbbb637960d78d4f9c71588269f0ddee3111be37bba3fffc8
+manifest_sha256 = 3487e6f9ad489e4ff8aa98cb76460da11f05476e277831f97930b78c470ca4c1
+file_count = 31
 figure_count = 6
 aikens_result_present = false
 aikens_outcome_opened = false
 ```
 
-## Submission-ready working layer
+## Hash-stability boundary
 
-The package contains:
+`PUBLICATION_STATUS.md` and
+`PAYOFF_B_INTEGRATED_PREOUTCOME_READINESS_20260925.md` are deliberately
+excluded from the ZIP. They audit the package from outside rather than being
+embedded inside the object whose hash they report. This removes the previous
+self-reference and makes the deterministic archive hash stable under later
+audit/status updates.
 
-- anonymized PREOUTCOME main text;
-- integrated Supporting Information;
-- title-page template;
-- cover-letter template;
-- data/code statement template;
-- integrated figure captions;
-- package index;
-- six deterministic SVG main figures.
+## Manuscript state
 
-The anonymous main text was inspected for the following identity leaks:
+The machine manuscript audit passes with:
 
 ```text
-ZHANG = false
-Ruiqi = false
-zuizui0223 = false
-email_pattern = false
-internal_status_line = absent
+abstract_words = 198
+main_text_words = 3699
+keywords = 8
+references = 21
+uncited_references = 0
+main_figures = 6
+identity_leaks = 0
 ```
 
-The main text deliberately retains the registered Aikens placeholder:
+The anonymous main text SHA256 is
+`61c99d8e46681db3daae259a72b9d8df25ce94f97c163d1a329c85575d672fe8`.
 
-```text
-AIKENS LAMBDA RESULT PENDING = present
-```
-
-so the PREOUTCOME working package cannot be mistaken for a final-submission manuscript.
-
-## Supporting Information
-
-The generated Supporting Information contains:
-
-- S1–S8: frozen synthetic mechanism evidence;
-- S9: broad 55-species macroecological test;
-- S10: direct phase-control systems and interval scale;
-- S11: environmental-reconstruction reliability;
-- S12: industrial actuation perturbation and preregistered Aikens gate;
-- S13: integrated claim boundary.
-
-The Supporting Information explicitly retains:
-
-```text
-PREOUTCOME STATE: the Aikens lambda outcome is unopened
-```
+The generated Supporting Information SHA256 is
+`c9600d30ed609261ddf3dbe056db4e5a19ebe97d565a4ae0c1ae3cb3bdf96feb`.
 
 ## Figure integrity
 
-The package contains exactly six SVG main figures. Their hashes are identical to
-the canonical pre-Aikens integrated render:
-
-| Figure | SHA256 |
-|---|---|
-| 1 | `34fc00c0b117bf8e7d6e1cb39cebde860f92afc01eea70bb127386a7ebcce0b6` |
-| 2 | `166202cb17e74cca857afcb383038a8e082d5337a78a35dd7fab3bbda50375dc` |
-| 3 | `f34f60a63590b7c7ea101b9c55c680f30786aee6a1a3f1ec7f9c654d819c4591` |
-| 4 | `1f0aa3de78be965d14162cf22d7081a56750a3447ab5516c53f9061828538a6e` |
-| 5 | `b5c0230ee5edb19ee9452d69b2a2c38ce34995dd40245a15d549cdeeb5b66295` |
-| 6 | `e83e38f6f47c62b92f5628612d3411dfb7e7061e1a3dc935ab1cf14425c3001b` |
-
-## Publication implication
-
-The integrated paper now has a reproducible, anonymous, journal-neutral
-PREOUTCOME working package. No internal manuscript, citation, figure,
-Supporting Information, packaging, provenance or anonymity task remains open.
-
-This audit does **not** promote the package to final-submission eligibility.
-
-Final scientific progression remains:
+Only Figure 1 changes under the reframe:
 
 ```text
-authenticated Aikens environmental extraction
--> registered fixed-24h adjudication
--> outcome-rendered manuscript
--> outcome-rendered Figure 6 / six-figure set
--> post-outcome manuscript audit
--> journal-specific finalization
+Figure 1 = 0f7917c86f2521ee435bb9e8178293e5f0b83733dc5f0eb8aec97a876ad441d3
+Figures 2-6 = unchanged from the frozen pre-reframe quantitative set
 ```
 
-No post-outcome narrative retuning is licensed.
+This is an editorial / inferential hierarchy change, not a numerical reanalysis.
+
+## Claim boundary
+
+The package now treats:
+
+1. finite temporal buffering followed by spatial re-entry as the primary
+   synthetic mechanism;
+2. low mismatch concealing latent spatial tracking demand as the ecological
+   consequence within the declared synthetic landscapes;
+3. the 55-species speed-rule rejection as the primary natural generality test;
+4. direct migration systems as mechanistic decomposition;
+5. “mismatch is an outcome, not a tracking architecture” as the inference
+   consequence.
+
+The package does **not** claim that latent spatial tracking demand has been
+directly estimated across the natural datasets.
+
+## Remaining blocker
+
+There is no unresolved internal manuscript, figure, citation, provenance,
+anonymity or packaging blocker.
+
+The package remains PREOUTCOME because the registered Aikens fixed-24 h lambda
+adjudication is still unopened.

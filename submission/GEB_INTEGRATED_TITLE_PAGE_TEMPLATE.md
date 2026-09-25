@@ -5,11 +5,11 @@
 
 ## Title
 
-Hidden tracking: why environmental mismatch does not reveal how organisms keep pace with changing environments
+Temporal buffering delays but does not replace spatial tracking under environmental change
 
 ## Running title
 
-Hidden tracking architecture
+Temporal buffering and spatial tracking
 
 ## Authors
 

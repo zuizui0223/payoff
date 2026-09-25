@@ -12,7 +12,7 @@ DEFAULT_SOURCE = ROOT / "manuscript" / "PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_
 DATA_TEMPLATE = ROOT / "submission" / "GEB_INTEGRATED_DATA_CODE_TEMPLATE.md"
 CAPTIONS = ROOT / "submission" / "GEB_INTEGRATED_FIGURE_CAPTIONS_PREOUTCOME.md"
 
-RUNNING_TITLE = "Hidden tracking architecture"
+RUNNING_TITLE = "Temporal buffering and spatial tracking"
 KEYWORDS = [
     "behavioral plasticity",
     "climate change",
@@ -41,10 +41,10 @@ def strip_rule(text: str) -> str:
 def structured_abstract(aikens_abstract_block: str) -> str:
     return f"""## Abstract
 
-**Aim:** Determine whether low environmental mismatch identifies the biological
-tracking process that produced it, test whether migration collapses onto one
-portable animal-speed/environmental-wave-speed optimum, and identify mechanisms
-that make apparently successful tracking fragile.
+**Aim:** Test whether seasonal timing can replace spatial tracking under sustained
+environmental change or instead acts as a finite buffer that postpones movement,
+and ask whether natural migration collapses onto one portable
+animal-speed/environmental-wave-speed optimum.
 
 **Location:** Synthetic landscapes; eastern North America for the broad
 55-species bird analysis; and published North American and northern
@@ -63,20 +63,21 @@ scale-declared phase-retention reconstructions with independent environmental
 reliability checks.
 
 **Results:** Movement and timing can generate identical local mismatch dynamics,
-but finite timing capacity, landscape geometry and partner dependence break
-that substitutability. Across 5,816 bird observations, one universal natural
-speed optimum was not supported. Direct systems nevertheless transformed
-incoming phase error, with ecological interval and actuator architecture
-differing among systems.
+but explicit landscapes show that finite timing acts as a temporary bypass:
+phenological capacity expands persistence and reduces route costs before movement
+re-enters under stronger directional forcing. Across 5,816 bird observations,
+one universal natural speed optimum was not supported. Direct systems
+transformed incoming phase error through different actuator architectures and
+ecological intervals.
 {ABSTRACT_START}
 {aikens_abstract_block}
 {ABSTRACT_END}
 
-**Main conclusions:** Environmental mismatch is an outcome of a
-multidimensional tracking system rather than a direct measure of tracking
-mechanism or remaining resilience. General inference improves by separating
-environmental innovation, phase retention, actuation constraints and the
-ecological interval over which correction is expressed.
+**Main conclusions:** Temporal adjustment buffers rather than permanently
+replaces spatial tracking under sustained environmental change. Low mismatch can
+therefore conceal latent spatial tracking demand until temporal capacity is
+exhausted. Mismatch is consequently an outcome of the tracking system, not a
+direct measure of its mechanism or remaining resilience.
 
 **Keywords:** {", ".join(KEYWORDS)}
 """

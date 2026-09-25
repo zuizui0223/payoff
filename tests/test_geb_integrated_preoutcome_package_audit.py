@@ -8,14 +8,13 @@ HANDOFF = ROOT / "submission" / "GEB_INTEGRATED_PORTAL_HANDOFF_PREOUTCOME.md"
 
 def test_geb_preoutcome_package_audit_records_passing_artifact() -> None:
     text = AUDIT.read_text(encoding="utf-8")
-    assert "run = 36109813368" in text
-    assert "artifact_id = 10852587229" in text
-    assert "d5ac9123d9d90b4216d37b02b42db543f4d93443f254cc7fb3c035653d51580d" in text
-    assert "5a7743af95734532b6f3515c09ea3493584b9f9617dda3b949962c078e8469cf" in text
-    assert "run = 36109813351" in text
+    assert "run = 36117335501" in text
+    assert "artifact_id = 10855522438" in text
+    assert "fdb5e8aeaf912aa31368ce4690f74ff9b88bb0cc5ffa846312dcdd191c44815f" in text
+    assert "596ebbf63860d8faf06eb95345ed1ec6b282d6d573a5d9a17514b2f9d532f750" in text
     assert "status = PASS" in text
-    assert "structured_abstract_words = 222" in text
-    assert "main_body_words = 3690" in text
+    assert "structured_abstract_words = 241" in text
+    assert "main_body_words = 3967" in text
 
 
 def test_geb_first_shot_and_blockers_are_synchronized() -> None:

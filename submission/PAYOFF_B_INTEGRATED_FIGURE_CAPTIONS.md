@@ -7,18 +7,20 @@ Canonical renderer:
 All quantitative panels are generated from frozen receipts or their materialized
 machine summaries. Figure 1 is conceptual synthesis only.
 
-## Figure 1. From a simple tracking benchmark to hidden tracking architecture
+## Figure 1. Temporal buffering and latent spatial tracking demand
 
 Conceptual sequence linking the separate PAYOFF-B1 anti-phase seasonal-timescale
-benchmark to the integrated ecological inference problem. In the local null,
-movement- and timing-mediated feedback enter through one restoring gain, so the
-same endpoint mismatch can arise from different allocations between response
-axes. Finite timing capacity, landscape geometry and partner matching then break
-that local equivalence. The empirical programme tests a one-dimensional natural
-speed prediction across 55 migratory bird species and decomposes the resulting
-failure using direct phase-control systems. The industrial-mule-deer Aikens
-phase-retention test remains a preregistered within-taxon perturbation rather
-than an additional cross-taxon replication.
+benchmark to finite temporal buffering of spatial tracking demand. In the local
+null, movement- and timing-mediated feedback enter through one restoring gain,
+so timing can absorb the same corrective burden as movement while mismatch
+remains low. Explicit landscapes make that substitution temporary: timing
+capacity is finite, fragmented geometry remains unresolved and partner matching
+can block reallocation, so spatial tracking demand re-enters under sustained
+forcing. The empirical programme tests whether natural migration nevertheless
+collapses onto one movement-speed rule and decomposes phase correction across
+direct systems. The industrial-mule-deer Aikens phase-retention test remains a
+preregistered within-taxon perturbation rather than an additional cross-taxon
+replication.
 
 ## Figure 2. Finite temporal buffering and spatial re-entry
 

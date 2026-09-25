@@ -4,7 +4,7 @@ Target journal: **[TO BE CHOSEN]**
 
 ## Manuscript title
 
-**Hidden tracking: why environmental mismatch does not reveal how organisms keep pace with changing environments**
+**Temporal buffering delays but does not replace spatial tracking under environmental change**
 
 ## Authors
 
@@ -23,7 +23,7 @@ ORCID:
 
 ## Short title
 
-**Hidden tracking architecture**
+**Temporal buffering and spatial tracking**
 
 ## Article type
 
@@ -36,8 +36,8 @@ environmental tracking; phenological mismatch; migration; movement ecology; clim
 
 ## Current PREOUTCOME manuscript metrics
 
-- abstract words: **231**
-- main-text words: **3,458**
+- abstract words: **198**
+- main-text words: **3,699**
 - references: **21**
 - main figures: **6**
 - keywords: **8**
