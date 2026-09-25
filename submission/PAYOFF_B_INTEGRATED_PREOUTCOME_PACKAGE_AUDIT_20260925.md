@@ -21,25 +21,34 @@ final_submission_blocker = registered Aikens fixed-24h lambda adjudication
 
 ```text
 workflow = Integrated PAYOFF-B PREOUTCOME package
-run = 36117335637
+run = 36118090547
 status = PASS
 artifact = payoff-b-integrated-tracking-preoutcome-package
-artifact_id = 10855786194
-artifact_sha256 = efcfd13f34533c94f1050eb7ee6e1a7901d51d7ddf905510f36b9b204037063f
+artifact_id = 10856440257
+artifact_sha256 = f9d7004081bc236bcdd86521c8bc07b46458366b2fd1edb0b88ce73451069e9d
 ```
 
 Inner deterministic archive:
 
 ```text
 file = PAYOFF_B_INTEGRATED_TRACKING_PREOUTCOME_PACKAGE.zip
-bytes = 85616
-sha256 = 9a880f75fa86ceef1a93b28d7a92c2c19eefad7b744f94e7596418bdefcdde4f
-manifest_sha256 = 5ea12bf37ab66d9c26014e8d17f171eba994a85a7ce22fcc93912f373eb9563e
-file_count = 33
+bytes = 78615
+sha256 = b5628da1383960bdbbb637960d78d4f9c71588269f0ddee3111be37bba3fffc8
+manifest_sha256 = 3487e6f9ad489e4ff8aa98cb76460da11f05476e277831f97930b78c470ca4c1
+file_count = 31
 figure_count = 6
 aikens_result_present = false
 aikens_outcome_opened = false
 ```
+
+## Hash-stability boundary
+
+`PUBLICATION_STATUS.md` and
+`PAYOFF_B_INTEGRATED_PREOUTCOME_READINESS_20260925.md` are deliberately
+excluded from the ZIP. They audit the package from outside rather than being
+embedded inside the object whose hash they report. This removes the previous
+self-reference and makes the deterministic archive hash stable under later
+audit/status updates.
 
 ## Manuscript state
 
