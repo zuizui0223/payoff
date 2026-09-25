@@ -1,0 +1,74 @@
+name: payoff-b phase-duration decay sensitivity
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/interval_duration_phase_decay.py'
+      - 'scripts/evaluate_phase_retention_duration_sensitivity.py'
+      - 'tests/test_interval_duration_phase_decay.py'
+      - 'data/payoff_b_phase_duration_decay_sensitivity_contract_20260925.json'
+      - '.github/workflows/payoff-b-phase-duration-decay-sensitivity.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  duration-sensitivity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install empirical dependencies
+        run: python -m pip install --disable-pip-version-check -e ".[test,empirical]"
+
+      - name: Test duration sensitivity implementation
+        run: pytest -q tests/test_interval_duration_phase_decay.py tests/test_phase_retention_interval_standardization.py
+
+      - name: Download frozen source artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/duration_sources
+          curl -fL -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10700007158/zip"             -o outputs/duration_sources/mule.zip
+          echo "3458dee96e4372b84365c4acaac7a1646afaec55464abe4cff63cadae6c24e42  outputs/duration_sources/mule.zip" | sha256sum -c -
+
+          curl -fL -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10678143392/zip"             -o outputs/duration_sources/wigeon.zip
+          echo "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388  outputs/duration_sources/wigeon.zip" | sha256sum -c -
+
+          curl -fL -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10700391090/zip"             -o outputs/duration_sources/goose.zip
+          echo "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f  outputs/duration_sources/goose.zip" | sha256sum -c -
+
+          curl -fL -H "Authorization: Bearer ${GH_TOKEN}" -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10785655358/zip"             -o outputs/duration_sources/wigeon_era5.zip
+          echo "f65dac21dd23cdc38c84b2165daec06c5290688e90992eb824496cca82cf409f  outputs/duration_sources/wigeon_era5.zip" | sha256sum -c -
+
+      - name: Extract exact analysis tables
+        run: |
+          cd outputs/duration_sources
+          unzip -q mule.zip stage3_mule_deer_joined_source_data.csv
+          unzip -q wigeon.zip stage3_wigeon_controller_transitions.csv stage3_wigeon_tgs_events.csv
+          unzip -q goose.zip stage3_greenland_goose_anomaly_phase_transitions.csv stage3_barents_goose_anomaly_phase_transitions.csv
+          unzip -q -j wigeon_era5.zip outputs/wigeon_power_era5_transition_calibration.csv outputs/wigeon_power_era5_event_calibration.csv
+
+      - name: Evaluate calendar-duration model
+        run: >
+          python scripts/evaluate_phase_retention_duration_sensitivity.py
+          --contract data/payoff_b_phase_duration_decay_sensitivity_contract_20260925.json
+          --mule-deer outputs/duration_sources/stage3_mule_deer_joined_source_data.csv
+          --wigeon-power-transitions outputs/duration_sources/stage3_wigeon_controller_transitions.csv
+          --wigeon-power-events outputs/duration_sources/stage3_wigeon_tgs_events.csv
+          --wigeon-era5-transitions outputs/duration_sources/wigeon_power_era5_transition_calibration.csv
+          --wigeon-era5-events outputs/duration_sources/wigeon_power_era5_event_calibration.csv
+          --greenland outputs/duration_sources/stage3_greenland_goose_anomaly_phase_transitions.csv
+          --barents outputs/duration_sources/stage3_barents_goose_anomaly_phase_transitions.csv
+          --output outputs/payoff_b_phase_duration_decay_sensitivity_20260925.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-phase-duration-decay-sensitivity
+          path: outputs/payoff_b_phase_duration_decay_sensitivity_20260925.json

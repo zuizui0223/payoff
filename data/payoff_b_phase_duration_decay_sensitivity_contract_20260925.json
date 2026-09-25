@@ -1,0 +1,98 @@
+{
+  "contract_id": "payoff_b_phase_duration_decay_sensitivity_v1",
+  "created_date": "2026-09-25",
+  "status": "RETROSPECTIVE_DIAGNOSTIC",
+  "prospective": false,
+  "direct_lambda_outcomes_already_known": true,
+  "Aikens_lambda_outcome_opened": false,
+  "purpose": "Test whether unequal calendar duration plausibly explains cross-system lambda magnitudes by directly comparing the frozen constant segment-retention model with a monotone exponential calendar-time retention model.",
+  "models": {
+    "segment_constant": {
+      "equation": "E_next = Z gamma + lambda E_current + error",
+      "role": "reproduces the original segment-scale retention estimand"
+    },
+    "calendar_exponential": {
+      "equation": "E_next = Z gamma + exp(-k * delta_t_days) E_current + error",
+      "k_bounds_per_day": [
+        0,
+        2
+      ],
+      "role": "retrospective continuous-calendar-time sensitivity, not a new primary estimator"
+    }
+  },
+  "nuisance_specifications": [
+    {
+      "id": "original_matched",
+      "rule": "use the same nuisance structure as the frozen primary segment model"
+    },
+    {
+      "id": "log_duration_adjusted",
+      "rule": "add standardized log(delta_t_days) as a nuisance term to both competing models so mean downstream phase may vary with interval duration"
+    }
+  ],
+  "comparison": {
+    "metric": "Gaussian AIC difference with equal parameter counts, delta_AIC = n*log(SSE_exponential/SSE_segment)",
+    "segment_preferred_threshold": 2,
+    "duration_decay_preferred_threshold": -2,
+    "classification_rule": "both specifications >=2 => SEGMENT_RETENTION_PREFERRED; both <=-2 => CALENDAR_DURATION_DECAY_SUPPORTED; otherwise SPECIFICATION_SENSITIVE_OR_INCONCLUSIVE"
+  },
+  "scientific_limits": [
+    "This diagnostic is retrospective and cannot count as prospective support.",
+    "A monotone exponential model cannot represent negative lambda sign reversal; Svalbard is therefore a declared nonrepresentable boundary, not forced into k.",
+    "Failure of calendar-time exponential decay does not prove that duration never matters; it rejects this simple time-homogeneous retention model on the frozen design.",
+    "The interval-standardized k_eq remains descriptive even if calendar exponential decay is unsupported.",
+    "No result from this diagnostic may alter the preregistered Aikens fixed-24h contrast."
+  ],
+  "sources": {
+    "mule_deer": {
+      "workflow_run": 35742153046,
+      "artifact_id": 10700007158,
+      "artifact_sha256": "3458dee96e4372b84365c4acaac7a1646afaec55464abe4cff63cadae6c24e42",
+      "file": "stage3_mule_deer_joined_source_data.csv",
+      "file_sha256": "adfb7c7cd1db9cd8fbd9bec3d8e582122a4635f738696d293293326af8480907",
+      "expected_lambda": 0.10734051982279666
+    },
+    "wigeon_power": {
+      "workflow_run": 35689856130,
+      "artifact_id": 10678143392,
+      "artifact_sha256": "d61afae4a4dcf62f0947c5ec49684aeb4cebad18fabde9b8eb74035fe4326388",
+      "transition_file": "stage3_wigeon_controller_transitions.csv",
+      "transition_sha256": "095b8b63a1a6ee284941be914fef226e360c222cea27ea24ed50c57791db5d48",
+      "event_file": "stage3_wigeon_tgs_events.csv",
+      "event_sha256": "79b3b528bedcc6c1d95da67a5282f0762e63a5371e85194c5a0ebdf7309ea7f3",
+      "expected_lambda": 0.7497680211367301
+    },
+    "wigeon_era5": {
+      "workflow_run": 35941774903,
+      "artifact_id": 10785655358,
+      "artifact_sha256": "f65dac21dd23cdc38c84b2165daec06c5290688e90992eb824496cca82cf409f",
+      "transition_file": "wigeon_power_era5_transition_calibration.csv",
+      "transition_sha256": "e0ac811dffe45bf9e10f2f5b53ba50d0f86353fb82a1a67eac6bb33c9ecc2d3a",
+      "event_file": "wigeon_power_era5_event_calibration.csv",
+      "event_sha256": "5b020ca71db59597734314d0a231ce1b9d672fad142d71cd61b2bf9669c0e215",
+      "expected_lambda": 0.8113122876847199
+    },
+    "barnacle_greenland": {
+      "workflow_run": 35742152966,
+      "artifact_id": 10700391090,
+      "artifact_sha256": "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f",
+      "file": "stage3_greenland_goose_anomaly_phase_transitions.csv",
+      "file_sha256": "033d244ef1321d19055b77b3c71fd2a81249044394026634e4f186289896d0d2",
+      "transition": "R2_to_R3",
+      "expected_lambda": 0.13073088347575457
+    },
+    "barnacle_barents": {
+      "workflow_run": 35742152966,
+      "artifact_id": 10700391090,
+      "artifact_sha256": "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f",
+      "file": "stage3_barents_goose_anomaly_phase_transitions.csv",
+      "file_sha256": "2838b14dd41481301ae0e7053aaab08d502cce3374198fbed21c16e1cd6e632d",
+      "transition": "R1_to_R2",
+      "expected_lambda": 0.4941139415235434
+    },
+    "barnacle_svalbard_boundary": {
+      "expected_lambda": -0.10632090683602469,
+      "outcome": "NOT_REPRESENTABLE_BY_MONOTONE_EXPONENTIAL_DECAY"
+    }
+  }
+}
