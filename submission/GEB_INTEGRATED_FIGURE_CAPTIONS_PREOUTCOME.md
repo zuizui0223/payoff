@@ -37,16 +37,18 @@ contain a coordination barrier and 21/24 convert a local-extinction endpoint to
 coordinated persistence. These counts describe a synthetic parameter grid, not
 natural prevalence.
 
-**Figure 4. Broad eastern North American migration data reject one universal
-movement-to-environment speed rule.** Registered reanalysis of 5,816
-species-year-cell observations from 55 migratory bird species across eastern
-North America during 2002–2017. The flexible raw-mismatch minimum occurs near
-speed ratio 0.405 at median directional alignment. After species-by-cell phase
-centering, the point minimum moves to approximately 1.043 at median alignment
-and 1.397 under perfect alignment, but coefficient-draw uncertainty is broad and
-species-level curvature and vertex diagnostics are heterogeneous. The centered
-point estimate is therefore descriptive rather than validation of a portable
-natural optimum.
+**Figure 4. Broad eastern North American migration data reject a universal
+speed rule and simple temporal substitution.** (a) Registered reanalysis of
+5,816 species-year-cell observations from 55 migratory bird species. The
+flexible raw-mismatch minimum occurs near speed ratio 0.405 at median
+directional alignment; species-by-cell phase centering moves the point minimum
+to approximately 1.043 at median alignment and 1.397 under perfect alignment,
+with broad uncertainty. (b) Species-level curvature and vertex diagnostics are
+heterogeneous. (c) In a fresh registered chronological holdout, 2002–2009
+timing responsiveness did not flatten the 2010–2017 mismatch-versus-speed curve
+among 39 species and 3,268 observations. The quadratic interaction was
++0.035 ± 0.029 (p=0.225), opposite to the predicted negative direction. The
+registered substitution test therefore failed in direction.
 
 **Figure 5. Real migration systems transform phase error through different
 architectures.** Segment-scale phase-retention estimates for North American
