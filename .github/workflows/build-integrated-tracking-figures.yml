@@ -34,6 +34,6 @@ jobs:
         run: python scripts/render_integrated_tracking_figures.py --output-dir outputs/integrated_tracking_figures
       - uses: actions/upload-artifact@v4
         with:
-          name: payoff-b-integrated-tracking-empirical-figures
+          name: payoff-b-integrated-tracking-six-figures
           path: outputs/integrated_tracking_figures
           if-no-files-found: error
