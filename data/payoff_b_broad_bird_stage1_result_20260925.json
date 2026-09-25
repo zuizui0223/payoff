@@ -1,0 +1,91 @@
+{
+  "receipt_id": "payoff_b_broad_bird_stage1_artifact_materialization_20260925",
+  "materialized_date": "2026-09-25",
+  "scientific_status": "frozen_stage1_broad_bird_result_materialized_from_existing_workflow_artifact",
+  "source_analysis": {
+    "script": "analysis/movement_phenology/reanalyse_amaral_payoff_b.R",
+    "source_data": "Amaral et al. 2025 / Dryad 10.5061/dryad.ttdz08m6w",
+    "source_data_commit": "62c58d77c2028bd863dfe3697b0d9cf29ceaeab0",
+    "workflow_run_id": 35328297725,
+    "workflow_artifact_id": 10540282539,
+    "workflow_artifact_name": "movement-phenology-stage1",
+    "workflow_artifact_sha256": "0ec049f6f325c63144d68950831e1afeae14e64d027d59de4d439e87c24b1c34",
+    "analysis_head_sha": "9c8d66aa3c71ee873643c25c5b9bfb0378ea0fbb"
+  },
+  "artifact_file_hashes": {
+    "stage1_summary.csv": "b26da5e32a3d94c0e2bd8252c1dfa60334e90a01da21d775c8cb829254349805",
+    "stage1_gam_minima.csv": "d1fd4a3fc3673922ade988e4322fe8775e9e9879b9afa6acec075c8b1f2e54c5",
+    "stage1_optimum_uncertainty.csv": "7e7ed555dfc914451d577e5f3e489e530be0d15b73ff9af28cab5a525925f231",
+    "stage1_species_summary.csv": "e956edb981de8928a29f9a87a806a2a96f63187e6be2cca24c4de207b5aa3557",
+    "stage1_gam_curves.csv": "7e13364e57d3789743f5ad070020311e88346db9b96b0ed49f75484a31c73308",
+    "stage1_species_vertices.csv": "0d2e39e87137262bd0c707ca0393908d72934b02299efc8045826d9a0b219c9d"
+  },
+  "sample": {
+    "n_rows": 5816,
+    "n_centered_rows": 5746,
+    "n_species": 55,
+    "n_years": 15,
+    "median_speed_ratio": 1.26267786915727,
+    "median_directional_alignment": 0.948293188488715
+  },
+  "gam_minima": [
+    {
+      "response": "raw_abs_lag",
+      "alignment_ref": 0.948293188488715,
+      "u_star": 0.405133727255802,
+      "fitted_minimum": 8.28290241786921
+    },
+    {
+      "response": "centered_abs_lag",
+      "alignment_ref": 0.948374287018569,
+      "u_star": 1.04272442046421,
+      "fitted_minimum": 2.37211754774292
+    },
+    {
+      "response": "centered_abs_lag",
+      "alignment_ref": 1,
+      "u_star": 1.39660423067479,
+      "fitted_minimum": 2.37823715903784
+    },
+    {
+      "response": "raw_abs_lag",
+      "alignment_ref": 1,
+      "u_star": 0.365433889275555,
+      "fitted_minimum": 8.30277151330259
+    }
+  ],
+  "centered_optimum_uncertainty": [
+    {
+      "alignment_ref": 0.948374287018569,
+      "n_draw": 1000,
+      "u_median": 1.07919370797555,
+      "u_lo_95": 0.346919700212747,
+      "u_hi_95": 14.4645131769157,
+      "boundary_hit_fraction": 0.065,
+      "in_payoff_b_reference_fraction": 0.277
+    },
+    {
+      "alignment_ref": 1,
+      "n_draw": 1000,
+      "u_median": 1.52194165211549,
+      "u_lo_95": 0.464855355642232,
+      "u_hi_95": 14.4645131769157,
+      "boundary_hit_fraction": 0.142,
+      "in_payoff_b_reference_fraction": 0.284
+    }
+  ],
+  "species_heterogeneity": {
+    "n_species_fit": 41,
+    "n_positive_curvature": 16,
+    "n_vertices_inside_5_95": 11,
+    "n_curvature_p_lt_0_1": 1,
+    "median_u_star_inside": 1.9127668269015,
+    "fraction_inside_payoff_b_reference": 0.363636363636364
+  },
+  "claim_boundary": [
+    "primary broad result is failure of one universal natural animal-to-environment speed optimum",
+    "phase-centered point minima are descriptive and shallow with broad coefficient uncertainty",
+    "species-level heterogeneity prevents promotion of one portable optimum",
+    "this receipt materializes existing frozen outputs and does not rerun or retune the analysis"
+  ]
+}
