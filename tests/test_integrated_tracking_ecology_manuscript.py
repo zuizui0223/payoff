@@ -30,6 +30,7 @@ def test_integrated_manuscript_retains_primary_broad_falsification() -> None:
 def test_integrated_manuscript_keeps_aikens_outcome_unopened() -> None:
     m = text(INTEGRATED)
     assert "Aikens industrial-development lambda outcome remains unopened" in m
+    assert "[AIKENS LAMBDA ABSTRACT PENDING" in m
     assert "[AIKENS LAMBDA RESULT PENDING" in m
     assert "[AIKENS LAMBDA DISCUSSION PENDING" in m
     assert "[AIKENS LAMBDA CONCLUSION PENDING" in m
