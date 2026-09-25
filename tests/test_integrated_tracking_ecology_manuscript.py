@@ -24,7 +24,8 @@ def test_two_paper_architecture_keeps_exact_theorem_independent() -> None:
 def test_integrated_manuscript_retains_primary_broad_falsification() -> None:
     m = text(INTEGRATED)
     assert "5,816 observations from 55 migratory bird species" in m
-    assert "do not support one portable natural movement-speed/environmental-wave-speed optimum" in m
+    assert "one portable natural movement-speed/environmental-wave-speed optimum" in m
+    assert "is not supported" in m
     assert "The primary macroecological result is therefore a falsification" in m
 
 
