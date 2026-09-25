@@ -11,48 +11,47 @@ environmental wave.
 
 Let an environmental front move as
 
-[
+\[
 E(t)=E_0+v_E t.
-]
+\]
 
-Let the organism's spatial tracking front move at speed (v_A), with a seasonal
-timing shift (z):
+Let the organism's spatial tracking front move at speed \(v_A\), with a
+seasonal timing shift \(z\):
 
-[
+\[
 A(t;z)=A_0+v_A(t+z).
-]
+\]
 
 The signed spatial mismatch is
 
-[
+\[
 e(t;z)=E(t)-A(t;z)
       =(E_0-A_0)-v_A z +(v_E-v_A)t.
-]
+\]
 
 This separates two controls exactly:
 
-[
-rac{partial e}{partial z}=-v_A,
-]
+\[
+\frac{\partial e}{\partial z}=-v_A,
+\]
 
 so timing changes the **intercept / phase offset**, whereas
 
-[
-rac{partial}{partial t}e=v_E-v_A,
-]
+\[
+\frac{\partial e}{\partial t}=v_E-v_A,
+\]
 
 so movement-speed matching changes the **drift / slope** of mismatch through
 time.
 
 A fixed timing shift can therefore set mismatch to zero at one time, but when
-(v_E
-eq v_A) it cannot keep mismatch zero over a sustained interval.
+\(v_E\neq v_A\) it cannot keep mismatch zero over a sustained interval.
 
-Persistent zero mismatch over an interval requires both:
+Persistent zero mismatch over an interval requires both
 
-[
+\[
 v_A=v_E
-]
+\]
 
 and a compatible initial phase offset.
 
@@ -62,50 +61,49 @@ This is elementary kinematics, not a claim of mathematical novelty.
 
 If timing adjustment is bounded,
 
-[
-|z|le z_{max},
-]
+\[
+|z|\le z_{\max},
+\]
 
 the largest spatial offset that timing alone can absorb is
 
-[
-B_z=v_A z_{max}.
-]
+\[
+B_z=v_A z_{\max}.
+\]
 
 When the animal and environmental fronts have a non-zero speed difference
 
-[
-Delta v=v_E-v_A,
-]
+\[
+\Delta v=v_E-v_A,
+\]
 
 the maximum additional time that a perfectly directed timing shift can buy
 before the same mismatch threshold is reached is
 
-[
-T_{m buffer}
+\[
+T_{\rm buffer}
 =
-rac{v_A z_{max}}{|v_E-v_A|}.
-]
+\frac{v_A z_{\max}}{|v_E-v_A|}.
+\]
 
 With the speed ratio
 
-[
-u=rac{v_A}{v_E},
-]
+\[
+u=\frac{v_A}{v_E},
+\]
 
 this becomes
 
-[
-T_{m buffer}
+\[
+T_{\rm buffer}
 =
-rac{u z_{max}}{|1-u|}.
-]
+\frac{u z_{\max}}{|1-u|}.
+\]
 
 Thus:
 
 - larger timing capacity extends the buffer;
-- the buffer is finite whenever (u
-eq1);
+- the buffer is finite whenever \(u\neq1\);
 - timing becomes especially effective near speed matching because spatial drift
   accumulates slowly;
 - timing cannot rescue persistent velocity mismatch indefinitely.
@@ -118,19 +116,19 @@ in which phenology creates a temporary bypass and movement later re-enters.
 The registered bird holdout treated species timing responsiveness as a possible
 substitute for movement-speed matching.
 
-The result was:
+The result was
 
-[
-eta_{q^2	imes h}=+0.0351pm0.0289,quad p=0.225,
-]
+\[
+\beta_{q^2\times h}=+0.0351\pm0.0289,\qquad p=0.225,
+\]
 
 opposite to the registered negative prediction.
 
 At the same time, the timing-responsiveness main effect was
 
-[
-eta_h=-0.300pm0.105,quad p=0.0043,
-]
+\[
+\beta_h=-0.300\pm0.105,\qquad p=0.0043,
+\]
 
 as a secondary descriptive term.
 
@@ -143,43 +141,65 @@ environmental wave**.
 
 Therefore
 
-[
-	ext{better timing}
-
-otRightarrow
-	ext{weaker speed dependence}.
-]
+\[
+\text{better timing}
+\not\Rightarrow
+\text{weaker speed dependence}.
+\]
 
 Instead, timing and movement can form a division of labor:
 
-[
-	ext{timing} ightarrow 	ext{phase / intercept control},
-]
+\[
+\text{timing}\rightarrow\text{phase / intercept control},
+\]
 
-[
-	ext{movement speed} ightarrow 	ext{propagation / drift control}.
-]
+\[
+\text{movement speed}\rightarrow\text{propagation / drift control}.
+\]
 
 ## 4. Independent consistency with the Amaral source analysis
 
 The original Amaral et al. analysis independently treated bird migration speed
 as environmentally responsive.
 
-Its published analysis code / Table 1 reports that bird migration speed changed
-with green-up date anomaly and green-up speed anomaly. Its species-sensitivity
-term in the migration-speed model was not negative; the reported standardized
-estimate was approximately (+0.119) with a 95% interval spanning zero
-((-0.034, 0.203)).
+Its published Table 1 reports:
+
+\[
+\beta_{\rm greenup\ date}=-0.549
+\quad
+(95\%\,{\rm CI}=-0.770,-0.327),
+\]
+
+and
+
+\[
+\beta_{\rm greenup\ speed}=+0.088
+\quad
+(95\%\,{\rm CI}=+0.041,+0.134)
+\]
+
+for bird migration speed.
+
+Its species-sensitivity term in the migration-speed model was
+
+\[
+\beta_{\rm sensitivity}=+0.119
+\quad
+(95\%\,{\rm CI}=-0.034,+0.203).
+\]
+
+The last estimate is uncertain, but importantly it is not a negative association
+supporting a simple timing-for-speed tradeoff.
 
 This is not a new PAYOFF confirmatory result. It is prior-source consistency:
-the source study itself does not suggest a simple trade-off in which greater
-phenological sensitivity removes movement-speed adjustment.
+the source study itself does not suggest that greater phenological sensitivity
+removes movement-speed adjustment.
 
 ## 5. Revised ecological architecture
 
 The useful hierarchy is therefore:
 
-```text
+\`\`\`text
 environmental forcing
     |
     +-- phase / calendar displacement
@@ -189,7 +209,7 @@ environmental forcing
     +-- spatial propagation / wave velocity
             -> movement speed / route progression
             -> controls mismatch drift
-```
+\`\`\`
 
 Stopover and route-stage changes can act between these levels by changing the
 effective movement schedule locally.
@@ -215,6 +235,6 @@ Not licensed:
 - claiming that the post-readout identity was a preregistered prediction;
 - claiming empirical support for a positive timing × movement synergy from the
   unsupported positive interaction;
-- treating (T_{m buffer}) as an empirically estimated natural value in the
+- treating \(T_{\rm buffer}\) as an empirically estimated natural value in the
   current bird dataset;
 - claiming all natural migration systems follow exactly this linear-front model.
