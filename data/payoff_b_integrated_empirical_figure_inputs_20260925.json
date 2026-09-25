@@ -1,0 +1,230 @@
+{
+  "input_id": "payoff_b_integrated_empirical_figure_inputs_20260925",
+  "frozen_date": "2026-09-25",
+  "source_branch": "empirical/movement-phenology-macro-20260918",
+  "source_branch_head_sha": "06743748f89ce2b33296871175ab8a261adc22c9",
+  "source_files": [
+    "data/MOVEMENT_PHENOLOGY_DIRECT_CONTROLLER_REGISTRY.csv",
+    "data/MOVEMENT_PHENOLOGY_PHASE_UNCERTAINTY_REGISTRY.csv",
+    "data/MOVEMENT_PHENOLOGY_INDUSTRIAL_PERMEABILITY_REGISTRY.csv"
+  ],
+  "direct_controller_rows": [
+    {
+      "system_id": "mule_deer_ortega_2023",
+      "taxon": "Odocoileus hemionus",
+      "label": "Mule deer",
+      "segment": "full spring migration",
+      "controller_architecture": "MIXED_SPEED_STOPOVER",
+      "lambda": 0.10734,
+      "lambda_abs": 0.10734,
+      "status": "DIRECT_CONTROLLER"
+    },
+    {
+      "system_id": "barnacle_goose_svalbard_R2_R4",
+      "taxon": "Branta leucopsis",
+      "label": "Barnacle Svalbard R2→R4",
+      "segment": "southern Norway to Svalbard",
+      "controller_architecture": "STEP_STOPOVER_OVERTAKE",
+      "lambda": -0.106320907,
+      "lambda_abs": 0.106320907,
+      "status": "DIRECT_CONTROLLER"
+    },
+    {
+      "system_id": "barnacle_goose_greenland_R2_R3",
+      "taxon": "Branta leucopsis",
+      "label": "Barnacle Greenland R2→R3",
+      "segment": "Iceland/Greenland route R2 to R3",
+      "controller_architecture": "STEP_STOPOVER",
+      "lambda": 0.130730883,
+      "lambda_abs": 0.130730883,
+      "status": "DIRECT_CONTROLLER_FLYWAY_REPLICATION"
+    },
+    {
+      "system_id": "barnacle_goose_barents_R1_R2",
+      "taxon": "Branta leucopsis",
+      "label": "Barnacle Barents R1→R2",
+      "segment": "Wadden/Central Europe to Baltic route R1 to R2",
+      "controller_architecture": "STEP_STOPOVER",
+      "lambda": 0.494113942,
+      "lambda_abs": 0.494113942,
+      "status": "DIRECT_CONTROLLER_FLYWAY_REPLICATION"
+    },
+    {
+      "system_id": "eurasian_wigeon_vantoor_2021",
+      "taxon": "Mareca penelope",
+      "label": "Eurasian wigeon POWER",
+      "segment": "consecutive staging transitions",
+      "controller_architecture": "STAGING_STOPOVER_PHASE_RETENTION",
+      "lambda": 0.749768021,
+      "lambda_abs": 0.749768021,
+      "status": "DIRECT_PHASE_RETENTION_THIRD_TAXON_REVALIDATED"
+    }
+  ],
+  "innovation_rows": [
+    {
+      "flyway": "Greenland",
+      "transition": "R2→R3",
+      "predictability_r": 0.169,
+      "environmental_innovation_sd_days": 5.278,
+      "lambda": 0.130730883,
+      "abs_lambda": 0.130730883,
+      "stable_phase_map": true
+    },
+    {
+      "flyway": "Barents",
+      "transition": "R1→R2",
+      "predictability_r": 0.892,
+      "environmental_innovation_sd_days": 6.19,
+      "lambda": 0.494113942,
+      "abs_lambda": 0.494113942,
+      "stable_phase_map": true
+    },
+    {
+      "flyway": "Barents",
+      "transition": "R1→R5",
+      "predictability_r": -0.002,
+      "environmental_innovation_sd_days": 6.084,
+      "lambda": -0.0086,
+      "abs_lambda": 0.0086,
+      "stable_phase_map": true
+    },
+    {
+      "flyway": "Barents",
+      "transition": "R2→R3",
+      "predictability_r": 0.95,
+      "environmental_innovation_sd_days": 3.59,
+      "lambda": 0.538,
+      "abs_lambda": 0.538,
+      "stable_phase_map": true
+    },
+    {
+      "flyway": "Barents",
+      "transition": "R3→R5",
+      "predictability_r": 0.283,
+      "environmental_innovation_sd_days": 5.836,
+      "lambda": 0.225,
+      "abs_lambda": 0.225,
+      "stable_phase_map": true
+    }
+  ],
+  "industrial_rows": [
+    {
+      "edge_km": 1,
+      "far_km": 5,
+      "n_individual_years": 197,
+      "n_animals": 113,
+      "median_G_small": 2.1374225292,
+      "median_G_large": 1.1230344147,
+      "year_x_large_beta": -0.0122463358,
+      "year_x_large_se": 0.0365559678,
+      "year_x_large_p": 0.738249913,
+      "large_intercept_shift": -0.6552031276,
+      "large_intercept_shift_se": 0.1796530406,
+      "large_intercept_shift_p": 0.000404101
+    },
+    {
+      "edge_km": 1,
+      "far_km": 10,
+      "n_individual_years": 170,
+      "n_animals": 94,
+      "median_G_small": 2.1571536247,
+      "median_G_large": 0.9656221291,
+      "year_x_large_beta": 0.0158255494,
+      "year_x_large_se": 0.0387112409,
+      "year_x_large_p": 0.683618839,
+      "large_intercept_shift": -0.8061513949,
+      "large_intercept_shift_se": 0.1851910519,
+      "large_intercept_shift_p": 0.000034441
+    },
+    {
+      "edge_km": 1,
+      "far_km": 20,
+      "n_individual_years": 122,
+      "n_animals": 68,
+      "median_G_small": 2.3400173981,
+      "median_G_large": 0.8410696357,
+      "year_x_large_beta": -0.0492713987,
+      "year_x_large_se": 0.0546132893,
+      "year_x_large_p": 0.370189533,
+      "large_intercept_shift": -0.8781766039,
+      "large_intercept_shift_se": 0.2506318624,
+      "large_intercept_shift_p": 0.000822192
+    },
+    {
+      "edge_km": 2,
+      "far_km": 5,
+      "n_individual_years": 226,
+      "n_animals": 125,
+      "median_G_small": 1.6850822729,
+      "median_G_large": 1.1151921055,
+      "year_x_large_beta": 0.0031362277,
+      "year_x_large_se": 0.0351136674,
+      "year_x_large_p": 0.92897453,
+      "large_intercept_shift": -0.3283863364,
+      "large_intercept_shift_se": 0.1720723916,
+      "large_intercept_shift_p": 0.0586486
+    },
+    {
+      "edge_km": 2,
+      "far_km": 10,
+      "n_individual_years": 188,
+      "n_animals": 103,
+      "median_G_small": 1.6555638715,
+      "median_G_large": 1.0372058493,
+      "year_x_large_beta": 0.0405002378,
+      "year_x_large_se": 0.0411089291,
+      "year_x_large_p": 0.326860378,
+      "large_intercept_shift": -0.4762671764,
+      "large_intercept_shift_se": 0.1966896363,
+      "large_intercept_shift_p": 0.01722624
+    },
+    {
+      "edge_km": 2,
+      "far_km": 20,
+      "n_individual_years": 133,
+      "n_animals": 74,
+      "median_G_small": 1.7902528886,
+      "median_G_large": 0.9414485885,
+      "year_x_large_beta": -0.0161653398,
+      "year_x_large_se": 0.0570864773,
+      "year_x_large_p": 0.777845827,
+      "large_intercept_shift": -0.5799935042,
+      "large_intercept_shift_se": 0.271201114,
+      "large_intercept_shift_p": 0.035813372
+    },
+    {
+      "edge_km": 5,
+      "far_km": 10,
+      "n_individual_years": 194,
+      "n_animals": 107,
+      "median_G_small": 1.4532888291,
+      "median_G_large": 0.8887129461,
+      "year_x_large_beta": 0.0180177436,
+      "year_x_large_se": 0.0288289429,
+      "year_x_large_p": 0.533322033,
+      "large_intercept_shift": -0.5683759568,
+      "large_intercept_shift_se": 0.1290943546,
+      "large_intercept_shift_p": 0.000025595
+    },
+    {
+      "edge_km": 5,
+      "far_km": 20,
+      "n_individual_years": 138,
+      "n_animals": 77,
+      "median_G_small": 1.516645197,
+      "median_G_large": 0.8083648811,
+      "year_x_large_beta": -0.0134288673,
+      "year_x_large_se": 0.0500571625,
+      "year_x_large_p": 0.789217823,
+      "large_intercept_shift": -0.4761949542,
+      "large_intercept_shift_se": 0.2382153973,
+      "large_intercept_shift_p": 0.049182847
+    }
+  ],
+  "claim_boundary": [
+    "snapshot reproduces pre-existing registry rows without refitting",
+    "barnacle transition rows are not independent taxonomic studies",
+    "industrial threshold rows are sensitivity definitions within one perturbation system",
+    "Aikens lambda outcome remains unopened"
+  ]
+}
