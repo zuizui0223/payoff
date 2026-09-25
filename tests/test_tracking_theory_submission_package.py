@@ -23,6 +23,11 @@ def test_tracking_submission_package_builds_with_manifest(tmp_path):
     manifest = build_package(output_dir, zip_path)
 
     assert manifest["scientific_freeze_date"] == "2026-09-24"
+    assert manifest["framing_amendment_date"] == "2026-09-25"
+    assert (
+        manifest["current_framing_authority"]
+        == "data/payoff_b_tracking_theory_framing_amendment_20260925.json"
+    )
     assert manifest["synthetic_receipt_freeze_date"] == "2026-09-20"
     assert manifest["figure_count"] == 6
     assert manifest["file_count"] == 41
