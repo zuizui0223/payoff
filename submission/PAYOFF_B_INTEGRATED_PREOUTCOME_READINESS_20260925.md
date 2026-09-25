@@ -2,48 +2,45 @@
 
 Frozen readiness date: **2026-09-25**
 
-Status: **PREOUTCOME_INTERNAL_READY**
+Status: **PREOUTCOME_INTERNAL_READY — TEMPORAL-BUFFERING REFRAME**
 
 Canonical manuscript:
 
 `manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`
 
-Adopted publication architecture merge:
+## Primary ecological conclusion
 
-`572b3a63de54a6a9abf46739108ed57ee8a876f9`
+> **Temporal buffering delays but does not permanently replace spatial tracking
+> under sustained environmental change.**
+
+Ecological consequence:
+
+> **Low current mismatch can conceal latent spatial tracking demand.**
+
+Inference consequence:
+
+> **Mismatch is an outcome, not a tracking architecture.**
+
+The latent-demand phrase is descriptive for the declared synthetic mechanism;
+it is not a fitted cross-taxon variable.
 
 ## Machine validation
 
-Validated source head:
-
-`cc8674cefecf0a09b85ac25446275b5bdc44dc4b`
-
-### Full repository CI
-
-```text
-workflow = test
-run = 36106665350
-status = PASS
-```
-
-The full pytest phase and all downstream repository smoke / reproducibility
-steps completed successfully.
-
-### Integrated manuscript audit
+### Manuscript audit
 
 ```text
 workflow = Integrated PAYOFF-B manuscript audit
-run = 36106665356
-artifact = 10850919823
-artifact_sha256 = 14a983f031287d344031b8a8636fc1b93b0889e76e8f78608c727407f994191d
+run = 36117335638
+artifact = 10855189992
+artifact_sha256 = 1e31e949facf8dd890b6c89b87fa2713e1ff3755ee31b7f2b93b71238dee067c
 status = PASS
 ```
 
-Audited manuscript metrics:
+Audited metrics:
 
 ```text
-abstract_words = 231
-main_text_words = 3458
+abstract_words = 198
+main_text_words = 3699
 keywords = 8
 references = 21
 uncited_references = 0
@@ -51,111 +48,76 @@ main_figures = 6
 identity_leaks = 0
 ```
 
-Every PREOUTCOME hard gate passed:
-
-- theorem manuscript remains separate;
-- broad 55-species falsification remains the primary cross-system result;
-- broad result is bound to the frozen Stage-1 workflow artifact;
-- all references are cited;
-- exactly six main figures are declared;
-- all four Aikens outcome-blind marker pairs occur exactly once;
-- the Aikens lambda outcome remains unopened;
-- anonymous text contains no author/repository/email leak;
-- universal lambda / universal actuator claims remain prohibited.
-
-### Integrated six-figure render
+### Six-figure render
 
 ```text
 workflow = Integrated PAYOFF-B six figures
-run = 36106665345
-artifact = 10851039331
-artifact_sha256 = c6529f1f16b6df25dbff6fa7cf1c37bc11536b0b1792a5f65ddda93378bc62be
+run = 36117335685
+artifact = 10854934244
+artifact_sha256 = 0b05b674926fac01834abd7d8bfb4cc5a98cfde9234be9c8147fa0e2660ff25c
 status = PASS
 ```
 
-The figure manifest records:
+Only conceptual Figure 1 changes under the reframe; Figures 2–6 retain their
+frozen quantitative hashes.
 
-```text
-aikens_result_present = false
-aikens_outcome_opened = false
-figure_count = 6
-```
-
-## Outcome-blind completion path
-
-The authenticated Aikens workflow is wired end to end:
-
-```text
-frozen GPS source
--> V061 environmental extraction
--> peak-IRG reconstruction
--> fixed 24 h phase pairs
--> preregistered lambda contrast
--> registered result JSON
--> outcome-rendered integrated manuscript
--> six-figure set with adjudicated Figure 6
--> post-outcome integrated manuscript audit
-```
-
-The same frozen renderer has test coverage for all four licensed result classes:
-
-- `PASS`;
-- `FAIL_WRONG_DIRECTION`;
-- `FAIL_INSUFFICIENT_SUPPORT`;
-- `NOT_ESTIMABLE`.
-
-No outcome class is allowed to add Aikens as a fourth cross-taxon replication or
-to retune the narrative after outcome inspection.
-
-## PREOUTCOME submission working package
-
-A deterministic journal-neutral working package has now also passed:
+### Journal-neutral PREOUTCOME package
 
 ```text
 workflow = Integrated PAYOFF-B PREOUTCOME package
-run = 36108335115
-artifact = 10851908495
-artifact_sha256 = 44141280ac1c86b86671d52e02abb85e11985615903f84be351416b57f7bfeca
+run = 36117335637
+artifact = 10855786194
+artifact_sha256 = efcfd13f34533c94f1050eb7ee6e1a7901d51d7ddf905510f36b9b204037063f
 status = PASS
+inner_zip_sha256 = 9a880f75fa86ceef1a93b28d7a92c2c19eefad7b744f94e7596418bdefcdde4f
 ```
 
-The inner deterministic archive is:
-
-```text
-PAYOFF_B_INTEGRATED_TRACKING_PREOUTCOME_PACKAGE.zip
-bytes = 83719
-sha256 = 09e6a822ed32301ce360ae78ac39ab64484c36f030c00f677022c0bb4455e47a
-manifest_sha256 = 06febc1219c89d07be8823d8ceafca5d3b08addeae8b2d387c8553a3f470dc4e
-files = 33
-figures = 6
-```
-
-Package inspection confirmed zero author-name, repository-owner or email-pattern
-leaks in the anonymous main text. The PREOUTCOME Aikens placeholder remains
-present by design. Canonical package audit:
+Canonical package audit:
 
 `submission/PAYOFF_B_INTEGRATED_PREOUTCOME_PACKAGE_AUDIT_20260925.md`
+
+### GEB first-shot overlay and package
+
+```text
+overlay_run = 36117335589
+overlay_status = PASS
+structured_abstract_words = 241
+main_body_words = 3967
+
+package_run = 36117335501
+package_status = PASS
+artifact = 10855522438
+inner_zip_sha256 = 596ebbf63860d8faf06eb95345ed1ec6b282d6d573a5d9a17514b2f9d532f750
+```
+
+Canonical GEB audit:
+
+`submission/GEB_INTEGRATED_PREOUTCOME_PACKAGE_AUDIT_20260925.md`
+
+## Frozen scientific invariants
+
+The reframe does not change:
+
+- any synthetic quantitative receipt;
+- the broad 55-species Stage-1 analysis or its machine source;
+- direct-system lambda estimates;
+- interval standardization;
+- reconstruction reliability results;
+- industrial-development actuator result;
+- Aikens registration, thresholds or marker locations;
+- prohibition on universal lambda / universal actuator claims.
 
 ## Remaining blocker
 
 There is no unresolved internal manuscript, citation, figure, provenance,
-anonymity, or code blocker.
+anonymity, packaging or GEB-format blocker.
 
-The remaining scientific dependency is execution of the registered authenticated
-AppEEARS/Earthdata environmental extraction and consequent Aikens fixed-24 h
-adjudication. The workflow requires either an AppEEARS token or the configured
-Earthdata username/password pair; credential values are not stored in or exposed
-by this repository receipt.
-
-After that adjudication, the post-outcome audit determines whether the rendered
-integrated manuscript is scientifically ready for final submission preparation.
+The remaining scientific dependency is the registered authenticated
+AppEEARS/Earthdata extraction and consequent Aikens fixed-24 h adjudication.
+The real Aikens lambda outcome remains unopened.
 
 ## Rollback boundary
 
-The former standalone sources remain preserved:
-
-- `manuscript/PAYOFF_B_TRACKING_THEORY_V1.md`;
-- `manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md`.
-
-They are provenance / rollback sources, not simultaneous submission manuscripts
-under the adopted two-paper architecture.
+The former standalone Oikos and GEB source manuscripts remain provenance /
+rollback sources and are not simultaneous submissions under the adopted
+two-paper architecture.
