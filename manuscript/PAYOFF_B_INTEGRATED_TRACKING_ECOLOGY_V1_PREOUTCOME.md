@@ -392,12 +392,22 @@ The general lesson is not that one tracking mechanism dominates. It is that **mi
 
 ## Prior-art boundary
 
-This paper does not claim novelty for recognizing phenological mismatch,
-combining spatial and temporal climate responses, green-wave surfing,
-surf-versus-jump migration, timing plasticity, compensatory movement,
-environmental predictability effects, anthropogenic decoupling, ecosystem
-engineering, or generic negative-feedback mathematics. Those are established
-ideas and empirical phenomena.
+This paper does not claim novelty for recognizing phenological mismatch or
+climate-driven shifts in seasonal timing (Post et al. 2001; Visser & Gienapp
+2019; Kharouba & Wolkovich 2020; Weir & Phillimore 2024), for combining spatial
+and temporal responses to environmental change (Harsch et al. 2017; Macgregor
+et al. 2019; Hällfors et al. 2021; Muthukrishnan et al. 2025; Fredston et al.
+2025), or for earlier theory linking timing adaptation to spatial structure
+(Pontarp et al. 2015).
+
+Nor do we claim novelty for green-wave surfing, surf-versus-jump migration or
+compensatory tracking behavior (Bischof et al. 2012; Aikens et al. 2017;
+Ortega et al. 2023; Amaral et al. 2025; van Toor et al. 2021), for migration
+timing under variable or predictable information (Kölzsch et al. 2015; Bauer
+et al. 2020; Torstenson & Shaw 2025), for climate-driven interaction mismatch
+(Gilman et al. 2012), for resource-wave engineering (Geremia et al. 2019), or
+for anthropogenic decoupling of migration from the green wave (Aikens et al.
+2022). Generic negative-feedback mathematics is likewise not claimed as new.
 
 The narrower contribution is the linked inference argument: endpoint mismatch
 does not identify the tracking architecture that produced it; explicit capacity,
