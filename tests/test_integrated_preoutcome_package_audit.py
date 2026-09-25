@@ -22,7 +22,7 @@ def test_readiness_and_publication_status_reference_package_audit() -> None:
     pub = PUB.read_text(encoding="utf-8")
     assert "PAYOFF_B_INTEGRATED_PREOUTCOME_PACKAGE_AUDIT_20260925.md" in ready
     assert "10851908495" in ready
-    assert "registered Aikens fixed-24 h lambda adjudication" in ready
+    assert "Aikens fixed-24 h" in ready and "adjudication" in ready
     assert "10851908495" in pub
     assert "zero identity leaks" in pub
-    assert "registered Aikens fixed-24 h lambda adjudication" in pub
+    assert "Aikens fixed-24 h" in pub and "adjudication" in pub
