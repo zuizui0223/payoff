@@ -36,8 +36,8 @@ environmental tracking; phenological mismatch; migration; movement ecology; clim
 
 ## Current PREOUTCOME manuscript metrics
 
-- abstract words: **231**
-- main-text words: **3,458**
+- abstract words: **198**
+- main-text words: **3,699**
 - references: **21**
 - main figures: **6**
 - keywords: **8**
