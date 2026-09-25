@@ -2,9 +2,10 @@
 
 Frozen as a **post-readout mechanistic interpretation** on 2026-09-25.
 
-This note does not retroactively redefine the registered bird holdout test. It
-explains why the failed temporal-substitution prediction is structurally
-plausible in a moving environmental wave.
+This note does not retroactively redefine the registered bird holdout test and
+is **not a preregistered prediction**. It explains why the failed
+temporal-substitution prediction is structurally plausible in a moving
+environmental wave.
 
 ## 1. Minimal moving-front identity
 
