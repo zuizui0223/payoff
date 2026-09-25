@@ -1,0 +1,23 @@
+{
+  "amendment_id": "payoff_b_geb_broad_test_primary_framing_20260925",
+  "amendment_date": "2026-09-25",
+  "scientific_results_changed": false,
+  "registered_thresholds_changed": false,
+  "aikens_outcome_opened": false,
+  "previous_emphasis": "three_taxon_phase_retention_coordinate",
+  "revised_hierarchy": {
+    "tier_1_primary": "55-species broad test of a universal migration-to-phenology speed optimum",
+    "tier_2_mechanistic": "direct phase-control reconstructions in mule deer, barnacle goose and Eurasian wigeon",
+    "tier_3_perturbation": "preregistered within-mule-deer industrial-development phase-retention contrast"
+  },
+  "primary_claim": "The registered 55-species macroecological analysis does not support one universal animal-to-environment migration speed optimum.",
+  "mechanistic_role": "Direct controller systems explain why a universal speed rule fails by showing phase transformation through different actuator architectures and interval scales.",
+  "prohibited_interpretations": [
+    "do not count the three direct taxa as three independent estimates of one universal lambda",
+    "do not replace the rejected universal speed rule with a universal raw lambda",
+    "do not promote interval-standardized k_eq to a universal biological constant",
+    "do not let the Aikens outcome determine whether the 55-species primary result is retained"
+  ],
+  "relationship_to_interval_standardization": "compatible_with payoff_b_phase_retention_interval_standardization_v1; raw lambda remains system-specific and secondary standardized coordinates remain descriptive",
+  "manuscript": "manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md"
+}
