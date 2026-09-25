@@ -1,0 +1,44 @@
+name: Integrated PAYOFF-B PREOUTCOME package
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md'
+      - 'scripts/build_integrated_tracking_supporting_information.py'
+      - 'scripts/build_integrated_tracking_submission_package.py'
+      - 'scripts/render_integrated_tracking_figures.py'
+      - 'submission/PAYOFF_B_INTEGRATED_*'
+      - '.github/workflows/build-integrated-tracking-package.yml'
+  pull_request:
+    paths:
+      - 'manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md'
+      - 'scripts/build_integrated_tracking_supporting_information.py'
+      - 'scripts/build_integrated_tracking_submission_package.py'
+      - 'scripts/render_integrated_tracking_figures.py'
+      - 'submission/PAYOFF_B_INTEGRATED_*'
+      - '.github/workflows/build-integrated-tracking-package.yml'
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build deterministic PREOUTCOME package
+        run: >-
+          python scripts/build_integrated_tracking_submission_package.py
+          --output-dir outputs/integrated_tracking_submission_package
+          --zip outputs/PAYOFF_B_INTEGRATED_TRACKING_PREOUTCOME_PACKAGE.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-integrated-tracking-preoutcome-package
+          path: |
+            outputs/integrated_tracking_submission_package
+            outputs/PAYOFF_B_INTEGRATED_TRACKING_PREOUTCOME_PACKAGE.zip
+            outputs/PAYOFF_B_INTEGRATED_PREOUTCOME_ARCHIVE_RECEIPT.json
+          if-no-files-found: error
