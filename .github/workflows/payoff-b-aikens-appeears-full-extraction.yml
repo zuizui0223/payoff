@@ -290,6 +290,17 @@ jobs:
           --output outputs/aikens_primary_integrated_submission_audit.json
           --fail-on-gate-failure
 
+      - name: Build science-ready integrated outcome package
+        run: >
+          python scripts/build_integrated_tracking_outcome_package.py
+          --manuscript outputs/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_RENDERED.md
+          --result-json outputs/aikens_primary_lambda_result.json
+          --claim-state-json outputs/aikens_primary_integrated_claim_state.json
+          --figure-dir outputs/aikens_integrated_six_figures
+          --postoutcome-audit-json outputs/aikens_primary_integrated_submission_audit.json
+          --output-dir outputs/aikens_integrated_outcome_package
+          --zip outputs/PAYOFF_B_INTEGRATED_TRACKING_OUTCOME_PACKAGE.zip
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -324,6 +335,9 @@ jobs:
             outputs/aikens_primary_integrated_claim_state.json
             outputs/aikens_primary_integrated_submission_audit.json
             outputs/aikens_integrated_six_figures
+            outputs/aikens_integrated_outcome_package
+            outputs/PAYOFF_B_INTEGRATED_TRACKING_OUTCOME_PACKAGE.zip
+            outputs/PAYOFF_B_INTEGRATED_OUTCOME_ARCHIVE_RECEIPT.json
             data/aikens2022_environment_product_amendment_20260922.json
             data/aikens2022_phase_reconstruction_execution_contract_20260922.json
             data/aikens2022_phase_reconstruction_execution_contract_v2_20260922.json
