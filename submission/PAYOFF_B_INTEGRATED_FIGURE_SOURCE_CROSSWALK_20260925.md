@@ -141,7 +141,13 @@ Current provenance:
 
 Build decision:
 
-**NEW INTEGRATED EMPIRICAL RENDERER REQUIRED.**
+**IMPLEMENTED PREOUTCOME.**
+
+Figure 6 is rendered from
+`data/payoff_b_integrated_empirical_figure_inputs_20260925.json`.
+Panel C is explicitly `UNOPENED` before Aikens execution. The same renderer
+accepts an optional registered Aikens result JSON and populates only that panel
+without changing panels A or B.
 
 Before this PR can merge, the exact machine result / derived table supplying the
 0.405 / 1.043 / 1.397 curves must be named explicitly in this crosswalk. The
@@ -187,8 +193,13 @@ Key main values:
 
 Build decision:
 
-**NEW INTEGRATED EMPIRICAL RENDERER REQUIRED**, but all major panel values have
-machine-readable frozen sources.
+**IMPLEMENTED IN INTEGRATED RENDERER.**
+
+Figure 5 is rendered from
+`data/payoff_b_integrated_empirical_figure_inputs_20260925.json`,
+`data/payoff_b_empirical_phase_panel_status_20260921.json`, and
+`data/payoff_b_phase_retention_interval_standardization_result_20260925.json`.
+No manuscript prose is parsed for numerical values.
 
 ## Figure 6 — Information, retention and actuation are distinct
 
@@ -244,9 +255,31 @@ This crosswalk is considered complete only when:
 
 1. Figures 1–3 can be rendered from the existing frozen synthetic builder or a
    deterministic wrapper;
-2. the exact Figure 4 broad-bird machine result path is identified;
+2. the exact Figure 4 broad-bird machine result path is identified and bound to
+   an artifact digest;
 3. Figures 5–6 consume machine-readable empirical receipts rather than values
    copied from manuscript prose;
 4. all Aikens-dependent material is outcome-blind;
 5. no integrated figure implies a pooled universal lambda or a prevalence
    estimate from a synthetic parameter grid.
+
+
+## Integrated empirical renderer
+
+Current renderer:
+
+`scripts/render_integrated_tracking_empirical_figures.py`
+
+Frozen input snapshot:
+
+`data/payoff_b_integrated_empirical_figure_inputs_20260925.json`
+
+Rendered outputs:
+
+- `PAYOFF_B_INTEGRATED_FIG4_BROAD_BIRD.svg`
+- `PAYOFF_B_INTEGRATED_FIG5_DIRECT_SYSTEMS.svg`
+- `PAYOFF_B_INTEGRATED_FIG6_INFORMATION_ACTUATION.svg`
+- `PAYOFF_B_INTEGRATED_EMPIRICAL_FIGURE_MANIFEST.json`
+
+The renderer is dependency-free and tested in
+`tests/test_integrated_tracking_empirical_figures.py`.
