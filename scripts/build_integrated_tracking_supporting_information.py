@@ -75,7 +75,7 @@ def build_supporting_information() -> str:
     lines = [
         "# Supporting Information",
         "",
-        "## Hidden tracking: why environmental mismatch does not reveal how organisms keep pace with changing environments",
+        "## Temporal buffering delays but does not replace spatial tracking under environmental change",
         "",
         "**PREOUTCOME working Supporting Information - 2026-09-25**",
         "",
@@ -222,6 +222,8 @@ def build_supporting_information() -> str:
         "",
         "## S13. Integrated claim boundary",
         "",
+        "- The synthetic mechanism result is finite temporal buffering followed by spatial re-entry under sustained forcing.",
+        "- Low mismatch can conceal latent spatial tracking demand in the declared synthetic landscapes.",
         "- The 55-species result is the primary cross-system generality test.",
         "- Direct taxa share a phase-retention estimator form, not a universal raw lambda.",
         "- Interval-standardized retained memory is a secondary scale-explicit coordinate.",
