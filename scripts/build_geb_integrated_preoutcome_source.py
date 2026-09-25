@@ -133,14 +133,14 @@ def build_source(source_path: Path = DEFAULT_SOURCE) -> str:
     ).strip()
     references = strip_rule(source[refs_start:figure_start]).strip()
 
-    limitation = "### 5.7 Limitations"
+    limitation = "### 5.8 Limitations"
     if limitation not in body:
-        raise ValueError("canonical integrated manuscript is missing 5.7 Limitations")
+        raise ValueError("canonical integrated manuscript is missing 5.8 Limitations")
     body = body.replace(
         limitation,
-        "### 5.7 Relationship to existing literature\n\n"
+        "### 5.8 Relationship to existing literature\n\n"
         + prior
-        + "\n\n### 5.8 Limitations",
+        + "\n\n### 5.9 Limitations",
         1,
     )
 
