@@ -18,9 +18,9 @@ These results support a common inference framework rather than a common coeffici
 
 ## 1. Introduction
 
-Organisms exposed to changing environments can respond by moving through space, changing seasonal timing, altering behavior, or combining these responses. Yet many ecological analyses compress this multidimensional process into a single endpoint: the difference between where or when an organism occurs and where or when conditions are favorable.
+Organisms exposed to changing environments can respond by moving through space, changing seasonal timing, altering behavior, or combining these responses (Hällfors et al. 2021; Fredston et al. 2025). Yet many ecological analyses compress this multidimensional process into a single endpoint: the difference between where or when an organism occurs and where or when conditions are favorable.
 
-That endpoint is important, but it is not a mechanism. A small mismatch may reflect weak environmental forcing, high predictability, strong behavioral correction, large movement effort, substantial phenological adjustment, or several of these at once. Conversely, similar mismatch in two populations need not mean that they have similar capacity to continue tracking future change.
+That endpoint is important, but it is not a mechanism. Phenological-mismatch research already emphasizes that apparent alignment can be buffered and that theory and observed mismatch are not interchangeable descriptions of process (Kharouba & Wolkovich 2020; Weir & Phillimore 2024). A small mismatch may reflect weak environmental forcing, high predictability, strong behavioral correction, large movement effort, substantial phenological adjustment, or several of these at once. Conversely, similar mismatch in two populations need not mean that they have similar capacity to continue tracking future change.
 
 This creates an identification problem. If different tracking responses can close the same environmental gap, then endpoint mismatch alone cannot reveal which response is carrying the burden. The problem becomes ecologically important because those responses have different constraints. Movement must be realized through landscapes and corridors. Phenological adjustment has finite seasonal range. Behavioral responses depend on information. Interacting species may need to remain aligned while changing their tracking strategy.
 
@@ -32,7 +32,7 @@ First, we construct the strongest possible substitution null. In a local control
 
 Second, we add constraints that should break this equivalence: finite phenological capacity, explicit spatial redistribution, fragmented movement routes and partner matching. These models generate testable failure modes in which timing temporarily substitutes for movement but later becomes complementary to it, and in which jointly favorable reallocations can be blocked by coordination barriers.
 
-Third, we test the one-dimensional prediction empirically. A registered broad analysis of 5,816 observations from 55 migratory bird species asks whether migration naturally collapses onto one animal-speed/environment-speed optimum. It does not. We then use directly reconstructed mule-deer, barnacle-goose and Eurasian-wigeon systems to ask what replaces the failed universal rule. Rather than estimating one biological constant, we separate a common phase-retention estimator from system-specific actuator mechanisms and ecological interval scales.
+Third, we test the one-dimensional prediction empirically. A registered broad analysis of 5,816 observations from 55 migratory bird species derived from Amaral et al. (2025) asks whether migration naturally collapses onto one animal-speed/environment-speed optimum. It does not. We then use directly reconstructed mule-deer, barnacle-goose and Eurasian-wigeon systems to ask what replaces the failed universal rule (Ortega et al. 2023; Kölzsch et al. 2015; van Toor et al. 2021). Rather than estimating one biological constant, we separate a common phase-retention estimator from system-specific actuator mechanisms and ecological interval scales.
 
 The resulting hypothesis is not that movement or phenology is generally superior. It is that **mismatch is an outcome, not a tracking architecture**. Low mismatch can be maintained while the burden of tracking shifts among space, time, information and actuation, and the hidden architecture determines when apparent resilience will fail.
 
@@ -156,7 +156,7 @@ Wigeon POWER-versus-ERA5 disagreement and event-structure SIMEX are treated as s
 
 ### 3.5 Industrial-development perturbation
 
-Published industrial-development mule-deer data provide an independent actuation contrast. The registered control-permeability analysis asks whether movement response is attenuated in the large-development population and whether a stronger temporal deterioration prediction is supported.
+Published industrial-development mule-deer data provide an independent actuation contrast (Aikens et al. 2022). The registered control-permeability analysis asks whether movement response is attenuated in the large-development population and whether a stronger temporal deterioration prediction is supported.
 
 A separate preregistered 24-hour phase-retention analysis asks whether this independently observed actuation contrast propagates into \(\lambda\) while holding taxon fixed.
 
@@ -250,7 +250,7 @@ Interval normalization therefore clarifies comparison without producing a new un
 
 Barnacle-goose transitions occupy different combinations of environmental innovation and phase retention. The preregistered expectation that higher environmental predictability should mechanically imply stronger realized correction was not supported in the current screen.
 
-This matters because prediction and correction solve different parts of the timing problem. Environmental information can reduce the error that appears at the next transition; behavioral feedback acts on error that already exists.
+This matters because prediction and correction solve different parts of the timing problem, a distinction already central to migration-information theory (Bauer et al. 2020; Kölzsch et al. 2015). Environmental information can reduce the error that appears at the next transition; behavioral feedback acts on error that already exists.
 
 Low realized mismatch can therefore arise from low innovation, strong phase transformation, or both.
 
@@ -387,6 +387,49 @@ Direct migration systems reveal what replaces the failed universal rule. Incomin
 <!-- AIKENS_LAMBDA_CONCLUSION_END -->
 
 The general lesson is not that one tracking mechanism dominates. It is that **mismatch is an outcome of a tracking system whose internal burden can shift before the endpoint visibly deteriorates**. Predicting resilience under continued environmental change therefore requires measuring not only mismatch, but also the mechanisms and remaining capacities that keep mismatch small.
+
+---
+
+## Prior-art boundary
+
+This paper does not claim novelty for recognizing phenological mismatch,
+combining spatial and temporal climate responses, green-wave surfing,
+surf-versus-jump migration, timing plasticity, compensatory movement,
+environmental predictability effects, anthropogenic decoupling, ecosystem
+engineering, or generic negative-feedback mathematics. Those are established
+ideas and empirical phenomena.
+
+The narrower contribution is the linked inference argument: endpoint mismatch
+does not identify the tracking architecture that produced it; explicit capacity,
+geometry and coordination constraints make that hidden architecture
+consequential; a broad 55-species test rejects the corresponding one-dimensional
+universal speed rule; and direct migration systems show that the remaining
+portable object is a scale-declared phase-transformation framework rather than a
+common controller coefficient.
+
+## References
+
+- Aikens EO, Kauffman MJ, Merkle JA, Dwinnell SPH, Fralick GL, Monteith KL (2017) The greenscape shapes surfing of resource waves in a large migratory herbivore. *Ecology Letters* 20:741–750. DOI: 10.1111/ele.12772.
+- Aikens EO, Wyckoff TB, Sawyer H, Kauffman MJ (2022) Industrial energy development decouples ungulate migration from the green wave. *Nature Ecology & Evolution* 6:1733–1741. DOI: 10.1038/s41559-022-01887-9.
+- Amaral BR, Youngflesh C, Tingley M, Miller DAW (2025) Shifting gears in a shifting climate: Birds adjust migration speed in response to spring vegetation green-up. *Diversity and Distributions* 31:e70033. DOI: 10.1111/ddi.70033.
+- Bauer S, McNamara JM, Barta Z (2020) Environmental variability, reliability of information and the timing of migration. *Proceedings of the Royal Society B* 287:20200622. DOI: 10.1098/rspb.2020.0622.
+- Bischof R, Loe LE, Meisingset EL, Zimmermann B, Van Moorter B, Mysterud A (2012) A migratory northern ungulate in the pursuit of spring: Jumping or surfing the green wave? *The American Naturalist* 180:407–424. DOI: 10.1086/667590.
+- Fredston AL et al. (2025) Reimagining species on the move across space and time. *Trends in Ecology & Evolution* 40:629–638. DOI: 10.1016/j.tree.2025.03.015.
+- Geremia C, Merkle JA, Eacker DR, Wallen RL, White PJ, Hebblewhite M, Kauffman MJ (2019) Migrating bison engineer the green wave. *Proceedings of the National Academy of Sciences* 116:25707–25713. DOI: 10.1073/pnas.1913783116.
+- Gilman RT, Fabina NS, Abbott KC, Rafferty NE (2012) Evolution of plant–pollinator mutualisms in response to climate change. *Evolutionary Applications* 5:2–16. DOI: 10.1111/j.1752-4571.2011.00202.x.
+- Hällfors MH et al. (2021) Combining range and phenology shifts offers a winning strategy for boreal Lepidoptera. *Ecology Letters* 24:1619–1632. DOI: 10.1111/ele.13774.
+- Harsch MA et al. (2017) Moving forward: insights and applications of moving-habitat models for climate change ecology. *Journal of Ecology* 105:1169–1181. DOI: 10.1111/1365-2745.12724.
+- Kharouba HM, Wolkovich EM (2020) Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. DOI: 10.1038/s41558-020-0752-x.
+- Kölzsch A et al. (2015) Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore. *Journal of Animal Ecology* 84:272–283. DOI: 10.1111/1365-2656.12281.
+- Macgregor CJ et al. (2019) Climate-induced phenology shifts linked to range expansions in species with multiple reproductive cycles per year. *Nature Communications* 10:4455. DOI: 10.1038/s41467-019-12479-w.
+- Muthukrishnan R et al. (2025) Chasing the Niche: Escaping Climate Change Threats in Place, Time, and Space. *Global Change Biology* 31:e70167. DOI: 10.1111/gcb.70167.
+- Ortega AC, Aikens EO, Merkle JA, Monteith KL, Kauffman MJ (2023) Migrating mule deer compensate en route for phenological mismatches. *Nature Communications* 14:2008. DOI: 10.1038/s41467-023-37750-z.
+- Pontarp M, Johansson J, Jonzén N, Lundberg P (2015) Adaptation of timing of life history traits and population dynamic responses to climate change in spatially structured populations. *Evolutionary Ecology* 29:565–579. DOI: 10.1007/s10682-015-9759-6.
+- Post E, Forchhammer MC, Stenseth NC, Callaghan TV (2001) The timing of life-history events in a changing climate. *Proceedings of the Royal Society B* 268:15–23. DOI: 10.1098/rspb.2000.1324.
+- Torstenson M, Shaw AK (2025) Strength of seasonality and type of migratory cue determine the fitness consequences of changing phenology for migratory animals. *Oikos* 2025:e10862. DOI: 10.1111/oik.10862.
+- van Toor ML et al. (2021) Migration distance affects how closely Eurasian wigeons follow spring phenology during migration. *Movement Ecology* 9:61. DOI: 10.1186/s40462-021-00296-0.
+- Visser ME, Gienapp P (2019) Evolutionary and demographic consequences of phenological mismatches. *Nature Ecology & Evolution* 3:879–885. DOI: 10.1038/s41559-019-0880-8.
+- Weir JC, Phillimore AB (2024) Buffering and phenological mismatch: a change of perspective. *Global Change Biology* 30:e17294. DOI: 10.1111/gcb.17294.
 
 ---
 
