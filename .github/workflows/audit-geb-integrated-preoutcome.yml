@@ -1,0 +1,51 @@
+name: GEB integrated PREOUTCOME overlay
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/payoff-b-integrated-geb-overlay-20260925
+    paths:
+      - 'scripts/build_geb_integrated_preoutcome_source.py'
+      - 'scripts/audit_geb_integrated_preoutcome.py'
+      - 'scripts/render_geb_integrated_figures.py'
+      - 'submission/GEB_INTEGRATED_*'
+      - '.github/workflows/audit-geb-integrated-preoutcome.yml'
+  pull_request:
+    paths:
+      - 'scripts/build_geb_integrated_preoutcome_source.py'
+      - 'scripts/audit_geb_integrated_preoutcome.py'
+      - 'scripts/render_geb_integrated_figures.py'
+      - 'submission/GEB_INTEGRATED_*'
+      - '.github/workflows/audit-geb-integrated-preoutcome.yml'
+
+jobs:
+  overlay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build blinded GEB PREOUTCOME source
+        run: >-
+          python scripts/build_geb_integrated_preoutcome_source.py
+          --output outputs/GEB_INTEGRATED_BLINDED_PREOUTCOME.md
+      - name: Audit GEB PREOUTCOME source
+        run: >-
+          python scripts/audit_geb_integrated_preoutcome.py
+          --manuscript outputs/GEB_INTEGRATED_BLINDED_PREOUTCOME.md
+          --output outputs/GEB_INTEGRATED_PREOUTCOME_AUDIT.json
+          --fail-on-gate-failure
+      - name: Render GEB-formatted six-figure set
+        run: >-
+          python scripts/render_geb_integrated_figures.py
+          --output-dir outputs/geb_integrated_figures
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-geb-integrated-preoutcome-overlay
+          path: |
+            outputs/GEB_INTEGRATED_BLINDED_PREOUTCOME.md
+            outputs/GEB_INTEGRATED_PREOUTCOME_AUDIT.json
+            outputs/geb_integrated_figures
+          if-no-files-found: error
