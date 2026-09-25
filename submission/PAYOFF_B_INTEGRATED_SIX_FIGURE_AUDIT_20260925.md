@@ -1,72 +1,74 @@
 # PAYOFF-B integrated six-figure audit — 2026-09-25
 
-Status: **PASS — canonical adopted PREOUTCOME six-figure set**
+Status: **PASS — temporal-buffering PREOUTCOME six-figure set**
 
-## Canonical render
+## Canonical reframe render
 
 - workflow: `Integrated PAYOFF-B six figures`
-- validated PR head SHA: `cc8674cefecf0a09b85ac25446275b5bdc44dc4b`
-- adoption merge commit: `572b3a63de54a6a9abf46739108ed57ee8a876f9`
-- workflow run: `36106665345`
+- validated PR: `#164`
+- validated source head: `d44dbfa09024ee87a473e6d0d1c28538fdde0209`
+- workflow run: `36117335685`
 - artifact: `payoff-b-integrated-tracking-six-figures`
-- artifact ID: `10851039331`
-- artifact SHA256: `c6529f1f16b6df25dbff6fa7cf1c37bc11536b0b1792a5f65ddda93378bc62be`
+- artifact ID: `10854934244`
+- artifact SHA256: `0b05b674926fac01834abd7d8bfb4cc5a98cfde9234be9c8147fa0e2660ff25c`
 
 The artifact expands to exactly six SVG figures plus one machine manifest.
 
 ## Outcome boundary
 
 ```text
+aikens_result_present = false
 aikens_outcome_opened = false
 ```
 
-Figure 6 therefore contains the preregistered within-taxon Aikens slot as
-`UNOPENED`. The figure set contains no inferred, guessed or manually inserted
-Aikens lambda result.
+Figure 6 therefore remains outcome-blind.
 
 ## Figure hashes
 
-| Figure | File | SHA256 | Provenance |
-|---|---|---|---|
-| 1 | `PAYOFF_B_INTEGRATED_FIG1_CONCEPT.svg` | `34fc00c0b117bf8e7d6e1cb39cebde860f92afc01eea70bb127386a7ebcce0b6` | integrated conceptual synthesis; no new quantitative result |
-| 2 | `PAYOFF_B_INTEGRATED_FIG2_TEMPORAL_BYPASS.svg` | `166202cb17e74cca857afcb383038a8e082d5337a78a35dd7fab3bbda50375dc` | frozen 2026-09-20 synthetic receipt chain |
-| 3 | `PAYOFF_B_INTEGRATED_FIG3_COORDINATION_GATE.svg` | `f34f60a63590b7c7ea101b9c55c680f30786aee6a1a3f1ec7f9c654d819c4591` | frozen 2026-09-20 synthetic receipt chain |
-| 4 | `PAYOFF_B_INTEGRATED_FIG4_BROAD_BIRD.svg` | `1f0aa3de78be965d14162cf22d7081a56750a3447ab5516c53f9061828538a6e` | frozen Amaral Stage-1 workflow artifact materialization |
-| 5 | `PAYOFF_B_INTEGRATED_FIG5_DIRECT_SYSTEMS.svg` | `b5c0230ee5edb19ee9452d69b2a2c38ce34995dd40245a15d549cdeeb5b66295` | machine direct-system + interval-standardization receipts |
-| 6 | `PAYOFF_B_INTEGRATED_FIG6_INFORMATION_ACTUATION.svg` | `e83e38f6f47c62b92f5628612d3411dfb7e7061e1a3dc935ab1cf14425c3001b` | machine innovation / industrial-actuation snapshot + unopened Aikens slot |
+| Figure | SHA256 | Reframe effect |
+|---|---|---|
+| 1 | `0f7917c86f2521ee435bb9e8178293e5f0b83733dc5f0eb8aec97a876ad441d3` | **changed: conceptual hierarchy only** |
+| 2 | `166202cb17e74cca857afcb383038a8e082d5337a78a35dd7fab3bbda50375dc` | unchanged |
+| 3 | `f34f60a63590b7c7ea101b9c55c680f30786aee6a1a3f1ec7f9c654d819c4591` | unchanged |
+| 4 | `1f0aa3de78be965d14162cf22d7081a56750a3447ab5516c53f9061828538a6e` | unchanged |
+| 5 | `b5c0230ee5edb19ee9452d69b2a2c38ce34995dd40245a15d549cdeeb5b66295` | unchanged |
+| 6 | `e83e38f6f47c62b92f5628612d3411dfb7e7061e1a3dc935ab1cf14425c3001b` | unchanged |
 
-## Figure 4 provenance closure
+Machine manifest SHA256:
 
-The previously missing broad-bird provenance is closed by:
+`78d05ac0b5698bdb3a6c2ed6172fa71e3e129d02eec5b046026d781438294a06`
 
-- original Stage-1 workflow run `35328297725`;
-- original artifact ID `10540282539`;
-- original artifact SHA256
-  `0ec049f6f325c63144d68950831e1afeae14e64d027d59de4d439e87c24b1c34`;
-- analysis head `9c8d66aa3c71ee873643c25c5b9bfb0378ea0fbb`;
-- materialized machine receipt
-  `data/payoff_b_broad_bird_stage1_result_20260925.json`.
+The unchanged hashes for Figures 2–6 document that the temporal-buffering
+reframe changes the conceptual hierarchy, not the frozen quantitative results.
 
-The materialized receipt binds hashes for `stage1_summary.csv`,
-`stage1_gam_minima.csv`, `stage1_optimum_uncertainty.csv`,
-`stage1_species_summary.csv`, `stage1_gam_curves.csv` and
-`stage1_species_vertices.csv`.
+## Scientific interpretation
 
-## Publication implication
-
-The integrated paper no longer has a figure-generation or Figure-4 provenance
-blocker before the Aikens result.
-
-Remaining scientific state:
+Figure 1 now makes the hierarchy explicit:
 
 ```text
-INTEGRATED_MANUSCRIPT = PREOUTCOME
-FIGURE_ARCHITECTURE = COMPLETE
-BROAD_BIRD_MACHINE_PROVENANCE = COMPLETE
-DIRECT_SYSTEM_MACHINE_PROVENANCE = COMPLETE
-AIKENS_LAMBDA_OUTCOME = UNOPENED
+local movement/timing substitution
+-> finite temporal buffering
+-> timing-capacity exhaustion
+-> spatial tracking re-entry
+-> broad one-speed falsification
+-> multiple realized phase-control routes
 ```
 
-The two-paper publication architecture is adopted. The existing frozen Oikos
-and GEB sources remain rollback/provenance sources and are not submitted as
-separate overlapping papers while the integrated paper is active.
+Primary ecological conclusion:
+
+> Temporal buffering delays but does not permanently replace spatial tracking
+> under sustained environmental change.
+
+Ecological consequence:
+
+> Low current mismatch can conceal latent spatial tracking demand.
+
+The latter phrase is descriptive for the declared synthetic mechanism and is
+not treated as a directly measured cross-taxon variable.
+
+## Provenance boundary
+
+Figures 2–6 retain their existing frozen receipt chains. In particular, the
+55-species Figure 4 remains bound to Stage-1 workflow run `35328297725`,
+artifact `10540282539`, and the materialized machine receipt
+`data/payoff_b_broad_bird_stage1_result_20260925.json`.
