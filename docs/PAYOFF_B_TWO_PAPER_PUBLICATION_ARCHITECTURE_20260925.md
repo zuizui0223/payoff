@@ -1,10 +1,10 @@
 # PAYOFF-B two-paper publication architecture — 2026-09-25
 
-Status: **experimental publication restructuring on a feature branch; main scientific freezes remain untouched**
+Status: **adopted two-paper publication architecture; underlying scientific freezes and source manuscripts remain preserved**
 
-## Decision under test
+## Adopted publication decision
 
-PAYOFF-B is tested as a two-paper programme rather than three independent papers.
+PAYOFF-B uses a two-paper programme rather than three independent papers.
 
 ### Paper 1 — exact benchmark
 
@@ -20,7 +20,7 @@ This paper remains a short exact result. It should not absorb the moving-landsca
 
 ### Paper 2 — integrated ecology paper
 
-New experimental source:
+Canonical PREOUTCOME source:
 
 \`manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md\`
 
@@ -180,9 +180,9 @@ No retuning of the integrated narrative based on the sign or significance of the
 
 ## Publication-state rule
 
-Until this experiment is reviewed, the existing frozen Oikos package and GEB source remain intact as rollback sources.
+The existing frozen Oikos package and GEB source remain intact as rollback / provenance sources.
 
-If the integrated manuscript is accepted as the preferred architecture, publication status should become:
+The active publication architecture is:
 
 \`\`\`text
 PAPER 1: PAYOFF-B1 exact theorem — Theoretical Ecology
@@ -192,4 +192,4 @@ SOURCE MANUSCRIPTS:
     PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md
 \`\`\`
 
-The source manuscripts are then retained as provenance and extraction sources, not submitted as separate overlapping papers.
+The source manuscripts are retained as provenance and extraction sources, not submitted as separate overlapping papers.
