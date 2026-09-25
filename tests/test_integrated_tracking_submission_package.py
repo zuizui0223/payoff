@@ -92,4 +92,17 @@ def test_integrated_package_excludes_self_referential_status_receipts(tmp_path: 
     sources = {row["source"] for row in manifest["files"]}
     assert "docs/PUBLICATION_STATUS.md" not in sources
     assert "submission/PAYOFF_B_INTEGRATED_PREOUTCOME_READINESS_20260925.md" not in sources
-    assert manifest["file_count"] == 31
+    assert manifest["file_count"] == 35
+
+
+def test_integrated_package_contains_registered_bird_holdout_receipts(tmp_path: Path) -> None:
+    out = tmp_path / "package"
+    manifest = module.build_package(out)
+    sources = {row["source"] for row in manifest["files"]}
+    for required in (
+        "data/payoff_b_temporal_buffering_bird_holdout_registration_20260925.json",
+        "data/payoff_b_temporal_buffering_bird_preflight_receipt_20260925.json",
+        "data/payoff_b_temporal_buffering_bird_holdout_result_20260925.json",
+        "theory/PHASE_VELOCITY_TEMPORAL_BUFFERING.md",
+    ):
+        assert required in sources
