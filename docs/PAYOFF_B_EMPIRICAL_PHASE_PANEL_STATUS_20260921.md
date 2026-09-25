@@ -2,17 +2,17 @@
 
 Frozen: 2026-09-21
 
-> **2026-09-24 reliability update:** the source-faithful wigeon POWER result
-> remains lambda_hat=0.749768, and a separately frozen hourly ERA5
-> reconstruction achieved 256/256 event coverage and gave lambda_hat=0.811312
-> on the same 224 transitions. Estimator-scale contraction therefore replicates
-> across the two environmental surfaces. The POWER W2 directional stopover
-> result remains a valid prospective source-specific PASS, but ERA5 gives a
-> weaker unsupported stopover slope (p=0.310), so the actuator is not considered
-> reconstruction-robust. Complete-calibration SIMEX v2 spans 0.7979--0.9354.
-> Aikens lambda remains unopened.
+> **2026-09-25 synthesis update:** the registered 55-species speed-ratio test
+> is now the primary cross-system result and rejects one universal natural
+> movement-speed/environmental-wave-speed optimum. The three direct taxa are
+> retained as a mechanistic panel. Raw lambda is a segment-scale estimator,
+> not a portable biological rate. A pre-Aikens secondary standardization now
+> reports equivalent interval decay and cumulative retained-memory summaries.
+> Wigeon POWER/ERA5 contraction remains replicated, all three highlighted
+> barnacle-goose transitions have POWER/ERA5 assumption-conditional
+> reliability checks, and mule-deer reliability remains pending. Aikens lambda
+> remains unopened.
 >
-
 ## Current panel
 
 Direct phase-retention coordinate currently contains three taxa:
@@ -46,12 +46,18 @@ Direct phase-retention coordinate currently contains three taxa:
 
 ## What is established
 
-The current direct empirical panel supports:
+The primary generality result is the broad falsification:
 
-> phase retention is a portable response coordinate across migratory systems.
+> Across 5,816 observations from 55 migratory bird species, the registered
+> analysis does not support one universal natural movement-speed /
+> environmental-wave-speed optimum.
 
-It does not support one universal retention coefficient or one universal full
-actuator architecture.
+The direct three-taxon panel then asks what replaces that failed universal
+rule. Mule deer, barnacle goose and wigeon can all be written with the same
+phase-retention estimator form, but **raw lambda magnitudes are interval-scale
+dependent** and are not ranked as portable biological constants. System-specific
+actuators and environmental-reconstruction reliability are evaluated
+separately.
 
 The wigeon replicate calibration sharpens the distinction. Phase-retention
 contraction is reproduced under two independently reconstructed environmental
@@ -166,20 +172,32 @@ correction strength. They do not identify one corrected true lambda.
 
 Current measurement-error claim state:
 
-    portable phase coordinate:
+    common phase-retention estimator form:
         RETAINED
+
+    raw cross-system lambda magnitude as common biological rate:
+        NOT LICENSED
+
+    interval-standardized secondary comparison:
+        FROZEN PRE-AIKENS
 
     wigeon contraction across POWER and ERA5:
         REPLICATED ON ESTIMATOR SCALE
 
-    universal lambda:
-        NOT CLAIMED
+    barnacle-goose highlighted transition reconstruction sensitivity:
+        COMPLETE / ASSUMPTION-CONDITIONAL
+
+    taxa with any reliability calibration:
+        2 / 3
+
+    taxa with source-specific gold-standard phase-error identification:
+        0 / 3
 
     unique corrected latent wigeon lambda:
         NOT LICENSED
 
     cross-taxon biological magnitude ranking:
-        NOT YET LICENSED.
+        NOT LICENSED.
 
 Machine receipts:
 
@@ -187,6 +205,36 @@ Machine receipts:
     data/wigeon_era5_sourcefaithful_calibration_result_20260924.json
     data/wigeon_phase_simex_era5_complete_result_20260924.json
 
+## Interval standardization frozen before Aikens outcome
+
+The secondary interval-standardization result is frozen in
+
+    data/payoff_b_phase_retention_interval_standardization_result_20260925.json
+
+and does not alter any primary raw-lambda analysis.
+
+Reference median interval lengths are:
+
+    mule deer whole migration: 47.0 d
+    Svalbard goose R2 -> R4: 14.8 d
+    Greenland goose R2 -> R3: 18.5 d
+    Barents goose R1 -> R2: 26.6 d
+    wigeon consecutive staging transition: 1.06 d.
+
+For wigeon, the 224 transitions are distributed across 32 animal-years from
+28 unique individuals. The observed mean and median are both seven transitions
+per animal-year, so the representative homogeneous retained-memory summary is
+
+    POWER R_path(7) = 0.133
+    ERA5  R_path(7) = 0.231.
+
+These are the same order as the retrospective mule-deer whole-migration
+retention R=0.107. The conservative wigeon SIMEX sensitivity gives
+R_path(7) about 0.627, so no universal 80--90% migration-wide correction
+fraction is licensed.
+
+The goose rows remain fixed-transition evidence. Whole-route products are not
+constructed post hoc.
 ## Additional within-taxon actuator evidence
 
 The empirical evidence base now contains an additional source-backed
@@ -237,7 +285,7 @@ and contributes:
 This is the intended alternative to mechanical panel expansion: increase
 inferential coverage before increasing taxonomy.
 
-## Broad falsification retained
+## Broad falsification is the primary cross-system result
 
 The movement-phenology macro branch also retains the earlier broad-bird
 falsification:
@@ -248,17 +296,21 @@ falsification:
 do not support one universal natural movement-speed / environmental-wave-speed
 optimum.
 
-This negative result is not rescued by the direct controller systems.
-
-The empirical programme therefore moved from
+This negative result is not rescued by the direct controller systems. It is the
+primary macroecological conclusion. The direct systems instead provide the
+mechanistic decomposition:
 
     universal speed optimum
+        -> rejected in 55 species
 
-to
+    shared phase-retention estimator form
+        + explicit interval scale
+        + actuator-specific tests
+        + reconstruction/reliability audits.
 
-    common phase-retention coordinate
-    + actuator-specific tests
-    + explicit environmental-reconstruction reliability audits.
+The direct panel therefore explains how phase correction can occur after the
+universal speed rule fails; it does not replace the 55-species test as the
+main generality evidence.
 
 The wigeon result shows that actuator evidence can be less reconstruction-stable
 than the phase-retention response itself.
@@ -382,8 +434,9 @@ Do not report:
 
 Preferred:
 
-> Direct movement systems occupy a common phase-retention coordinate. In wigeon,
-> estimator-scale contraction replicates under independent POWER and ERA5
-> environmental reconstructions, whereas the stopover association does not.
-> The response coordinate is therefore more reconstruction-stable than the
-> inferred actuator, and lambda magnitude remains measurement-error-sensitive.
+> The registered 55-species analysis rejects one universal natural migration-
+> phenology speed optimum. Direct systems nevertheless admit a common
+> phase-retention estimator form, but raw lambda magnitude depends on interval
+> scale. In wigeon, contraction replicates under POWER and ERA5 while the
+> stopover association does not; interval-standardized retained memory is a
+> secondary comparison and remains measurement-error-sensitive.

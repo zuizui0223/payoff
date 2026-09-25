@@ -701,7 +701,7 @@ The cross-system empirical architecture is now explicitly split into two
 independent gates in
 [docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md](docs/PAYOFF_B_PHASE_RETENTION_ACTUATOR_GATES_20260921.md).
 
-The common coordinate is phase retention
+The shared empirical estimator form is phase retention
 
     e_out = r + lambda e_in.
 
@@ -709,28 +709,39 @@ Under the local closed-loop model,
 
     lambda = 1-K.
 
-This is the quantity to compare across systems. Speed, stopover use, route
-reset, directional movement, or other actuators are tested prospectively within
-each system and are not required to generalize across taxa. Therefore
-**lambda PASS / actuator FAIL is a valid and informative outcome**, not a
-contradiction. The source-backed wigeon result now provides the prospective
-`lambda PASS / actuator FAIL` example. Across 224 consecutive staging
-transitions from 28 individuals,
+Raw lambda is nevertheless **segment-scale dependent**. It is the primary
+within-system estimator, not a portable biological rate to rank across unequal
+intervals. The pre-Aikens secondary standardization is frozen in
+[docs/PAYOFF_B_PHASE_RETENTION_INTERVAL_STANDARDIZATION_20260925.md](docs/PAYOFF_B_PHASE_RETENTION_INTERVAL_STANDARDIZATION_20260925.md).
 
-    lambda = 0.85994
-    SE = 0.04509
-    p versus lambda=1 = 0.00190.
+The current source-faithful wigeon result uses 224 consecutive staging
+transitions from 28 unique individuals (32 animal-years):
 
-The primary preregistered `lambda<1` prediction passes, while the stronger
-`|lambda|<0.75` forecast fails and neither stopover nor measured travel-speed
-actuator is supported. The quantitative receipt is frozen in
-[docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md](docs/PAYOFF_B_WIGEON_PHASE_RETENTION_RECEIPT_20260921.md).
+    POWER lambda = 0.749768
+    ERA5  lambda = 0.811312.
+
+Estimator-scale contraction reproduces across environmental reconstructions.
+The registered POWER stopover directional gate is source-specific PASS, but
+the ERA5 stopover association is unsupported; travel speed is unsupported
+under both. The typical observed animal-year contains seven transitions, giving
+homogeneous retained incoming-error memory
+
+    R_path(7) = 0.133  (POWER)
+    R_path(7) = 0.231  (ERA5).
+
+The conservative SIMEX sensitivity permits substantially greater retained
+memory, so no universal migration-wide correction fraction is claimed.
+**lambda PASS / actuator FAIL remains a valid outcome because response and
+mechanism are separate gates.**
 
 The existing mule-deer, barnacle-goose, and wigeon direct results are frozen
 separately in
 [docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md](docs/PAYOFF_B_THREE_TAXON_PHASE_RETENTION_RECEIPT_20260921.md).
-That three-taxon receipt is descriptive: it establishes a portable response
-coordinate, not one universal lambda or a pooled actuator rule.
+That three-taxon receipt is a historical descriptive snapshot. Current
+cross-system interpretation is governed by the panel status, reliability gate,
+and interval-standardization receipt: the estimator form is shared, whereas raw
+lambda magnitude is interval-dependent and no pooled biological lambda is
+licensed.
 
 The current empirical panel status is frozen in
 [docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md](docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md).

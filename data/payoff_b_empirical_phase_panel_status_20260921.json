@@ -1,6 +1,6 @@
 {
   "frozen_date": "2026-09-21",
-  "status": "three_taxon_lambda_coordinate_plus_within_taxon_actuator_evidence",
+  "status": "broad_bird_primary_plus_interval_standardized_mechanistic_panel",
   "direct_taxa": [
     {
       "taxon": "Odocoileus hemionus",
@@ -66,9 +66,11 @@
   "broad_bird_falsification": {
     "observations": 5816,
     "species": 55,
-    "universal_speed_ratio_supported": false
+    "universal_speed_ratio_supported": false,
+    "primary_cross_system_result": true,
+    "interpretation": "registered 55-species analysis rejects one universal natural movement-speed/environmental-wave-speed optimum; direct taxa are retained as mechanistic decomposition rather than the primary generality claim"
   },
-  "current_cross_system_claim": "phase retention is a portable estimator-scale response coordinate; wigeon contraction replicates across POWER and source-faithful ERA5, while actuator detectability and latent lambda magnitude remain reconstruction- and reliability-sensitive",
+  "current_cross_system_claim": "the 55-species broad test rejects one universal natural speed optimum; direct systems share a phase-retention estimator form, but raw lambda magnitude is segment-scale dependent, so interval-standardized retained memory is secondary and actuator architecture remains system-specific",
   "fourth_taxon": {
     "status": "HOLD",
     "raw_data_availability_sufficient": false,
@@ -82,7 +84,7 @@
     ],
     "actuator_only_alternative": "same-taxon prospective mechanism perturbations can add evidence without adding taxon count or lambda support"
   },
-  "preferred_next_empirical_move": "wigeon source-faithful ERA5 calibration and SIMEX v2 are complete; next execute the frozen Aikens environmental extraction and within-system lambda perturbation when AppEEARS/Earthdata credentials are available",
+  "preferred_next_empirical_move": "do not add taxa mechanically; execute the frozen Aikens fixed-24h within-system lambda perturbation when AppEEARS/Earthdata credentials are available, with the interval-standardization method already frozen before outcome opening",
   "evidence_units": {
     "direct_phase_retention_taxa": 3,
     "prospective_lambda_extensions": 1,
@@ -123,7 +125,7 @@
     "cross_system_estimator_scale_coordinate_licensed": true,
     "cross_system_latent_magnitude_comparison_licensed": false,
     "source_specific_error_identified_taxa": 0,
-    "taxa_with_any_reliability_calibration": 1,
+    "taxa_with_any_reliability_calibration": 2,
     "wigeon_source_faithful_era5_calibration": {
       "status": "COMPLETE",
       "paired_events": 256,
@@ -157,14 +159,45 @@
       "receipt": "data/wigeon_era5land_calibration_result_20260923.json"
     },
     "mule_deer_reliability_calibration": "PENDING_SOURCE_BACKED_CALIBRATION",
-    "barnacle_goose_reliability_calibration": "PENDING_SOURCE_BACKED_CALIBRATION",
+    "barnacle_goose_reliability_calibration": {
+      "status": "COMPLETE_ASSUMPTION_CONDITIONAL",
+      "highlighted_fixed_transitions": 3,
+      "greenland_power_lambda": 0.13073088347575457,
+      "greenland_era5_lambda": 0.14420353006747622,
+      "barents_power_lambda": 0.4941139415235434,
+      "barents_era5_lambda": 0.515328602183836,
+      "svalbard_power_lambda": -0.10632090683602469,
+      "svalbard_era5_lambda": -0.28698340002500444,
+      "negative_svalbard_sign_replicated": true,
+      "source_specific_error_distribution_identified": false,
+      "sources": [
+        "data/barnacle_era5_reliability_result_20260924.json",
+        "data/svalbard_barnacle_era5_reliability_result_20260924.json"
+      ]
+    },
     "cross_system_reliability_gate": "src/cross_system_lambda_reliability.py",
     "claim_boundary": [
-      "wigeon replicate disagreement calibrates frozen sensitivity scenarios but does not identify one source-specific true error distribution",
-      "mule deer and barnacle goose remain uncalibrated for observation-error reliability",
-      "cross-taxon lambda magnitudes remain estimator-scale and must not be interpreted as corrected biological constants",
-      "the old registered ERA5-Land failure remains a failure and is not retroactively repaired"
-    ]
+      "the 55-species broad test is the primary cross-system result",
+      "direct taxa share a phase-retention estimator form, not a portable raw biological lambda magnitude",
+      "raw lambda values remain segment-scale estimands and should not be ranked across incompatible interval definitions",
+      "interval-standardized k_eq and R_path are secondary comparison coordinates rather than corrected biological constants",
+      "wigeon and barnacle goose have assumption-conditional reconstruction/reliability calibration; mule deer remains pending",
+      "no taxon has a source-specific gold-standard phase-error distribution",
+      "wigeon SIMEX remains sensitivity rather than corrected truth",
+      "the Aikens lambda outcome remains unopened"
+    ],
+    "interval_standardization": {
+      "status": "INTERVAL_STANDARDIZATION_SECONDARY_COORDINATES_COMPLETE",
+      "source": "data/payoff_b_phase_retention_interval_standardization_result_20260925.json",
+      "role": "secondary_cross_system_comparison_only",
+      "raw_lambda_role": "system_specific_primary_segment_scale_estimator",
+      "mule_deer_whole_migration_retention": 0.10734051982279666,
+      "wigeon_typical_transition_count": 7,
+      "wigeon_power_typical_path_retention": 0.13319514398192223,
+      "wigeon_era5_typical_path_retention": 0.23137496990520476,
+      "wigeon_conservative_simex_typical_path_retention": 0.6265570584998957,
+      "universal_migration_wide_correction_fraction_licensed": false
+    }
   },
-  "updated_date": "2026-09-24"
+  "updated_date": "2026-09-25"
 }
