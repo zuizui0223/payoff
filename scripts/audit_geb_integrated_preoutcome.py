@@ -161,8 +161,8 @@ def audit(path: Path) -> dict:
             in data_statement
         ),
         "relationship_to_existing_literature_moved_into_discussion": (
-            "### 5.7 Relationship to existing literature" in main
-            and "### 5.8 Limitations" in main
+            "### 5.8 Relationship to existing literature" in main
+            and "### 5.9 Limitations" in main
         ),
     }
 
