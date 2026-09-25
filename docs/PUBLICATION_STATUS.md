@@ -156,6 +156,15 @@ The integrated PREOUTCOME package has passed:
 
 Current audited metrics are: abstract 231 words, main text 3,458 words,
 21 references with zero uncited entries, 8 keywords, and 6 main figures.
+
+The journal-neutral PREOUTCOME working package also passes deterministic build
+and inspection: workflow run `36108335115`, artifact `10851908495`,
+artifact SHA256
+`44141280ac1c86b86671d52e02abb85e11985615903f84be351416b57f7bfeca`.
+Its inner 33-file / 6-figure ZIP has SHA256
+`09e6a822ed32301ce360ae78ac39ab64484c36f030c00f677022c0bb4455e47a`
+and zero identity leaks in the anonymous main text.
+
 The only remaining scientific blocker before outcome-rendered submission
 preparation is the registered Aikens fixed-24 h lambda adjudication.
 

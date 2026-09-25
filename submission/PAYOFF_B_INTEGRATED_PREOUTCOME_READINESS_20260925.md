@@ -107,6 +107,35 @@ The same frozen renderer has test coverage for all four licensed result classes:
 No outcome class is allowed to add Aikens as a fourth cross-taxon replication or
 to retune the narrative after outcome inspection.
 
+## PREOUTCOME submission working package
+
+A deterministic journal-neutral working package has now also passed:
+
+```text
+workflow = Integrated PAYOFF-B PREOUTCOME package
+run = 36108335115
+artifact = 10851908495
+artifact_sha256 = 44141280ac1c86b86671d52e02abb85e11985615903f84be351416b57f7bfeca
+status = PASS
+```
+
+The inner deterministic archive is:
+
+```text
+PAYOFF_B_INTEGRATED_TRACKING_PREOUTCOME_PACKAGE.zip
+bytes = 83719
+sha256 = 09e6a822ed32301ce360ae78ac39ab64484c36f030c00f677022c0bb4455e47a
+manifest_sha256 = 06febc1219c89d07be8823d8ceafca5d3b08addeae8b2d387c8553a3f470dc4e
+files = 33
+figures = 6
+```
+
+Package inspection confirmed zero author-name, repository-owner or email-pattern
+leaks in the anonymous main text. The PREOUTCOME Aikens placeholder remains
+present by design. Canonical package audit:
+
+`submission/PAYOFF_B_INTEGRATED_PREOUTCOME_PACKAGE_AUDIT_20260925.md`
+
 ## Remaining blocker
 
 There is no unresolved internal manuscript, citation, figure, provenance,
