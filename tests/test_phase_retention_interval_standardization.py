@@ -25,6 +25,7 @@ FROZEN_RESULT = (
     / "data"
     / "payoff_b_phase_retention_interval_standardization_result_20260925.json"
 )
+MANUSCRIPT = ROOT / "manuscript" / "PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md"
 
 
 def load_contract():
@@ -161,3 +162,49 @@ def test_frozen_result_semantically_matches_contract_recalculation():
     expected = build_result(load_contract())
     frozen = json.loads(FROZEN_RESULT.read_text(encoding="utf-8"))
     _assert_semantically_equal(frozen, expected)
+
+
+def test_geb_manuscript_numbers_are_bound_to_frozen_standardization_result():
+    frozen = json.loads(FROZEN_RESULT.read_text(encoding="utf-8"))
+    text = MANUSCRIPT.read_text(encoding="utf-8")
+
+    def variant(system_id, variant_id):
+        system = next(
+            row for row in frozen["systems"] if row["system_id"] == system_id
+        )
+        return next(
+            row for row in system["variants"] if row["variant_id"] == variant_id
+        )
+
+    mule = variant("mule_deer_whole_migration", "source_naive")
+    power = variant("eurasian_wigeon_staging_transition", "POWER")
+    era5 = variant("eurasian_wigeon_staging_transition", "ERA5")
+    upper = variant(
+        "eurasian_wigeon_staging_transition",
+        "SIMEX_conservative_full_disagreement",
+    )
+
+    assert f'{mule["reference_duration_days"]:.1f} d' in text
+    assert f'{power["reference_duration_days"]:.2f} d' in text
+    assert (
+        f'{power["path_memory"]["retention_at_median_transition_count"]:.3f}'
+        in text
+    )
+    assert (
+        f'{era5["path_memory"]["retention_at_median_transition_count"]:.3f}'
+        in text
+    )
+    assert (
+        f'{upper["path_memory"]["retention_at_median_transition_count"]:.3f}'
+        in text
+    )
+    assert f'{mule["equivalent_decay_constant_per_day"]:.3f}' in text
+    assert f'{power["equivalent_decay_constant_per_day"]:.3f}' in text
+    assert f'{era5["equivalent_decay_constant_per_day"]:.3f}' in text
+
+
+def test_geb_manuscript_does_not_call_raw_lambda_a_common_cross_system_coordinate():
+    text = MANUSCRIPT.read_text(encoding="utf-8")
+    assert "as a common phase-retention coordinate" not in text
+    assert "segment-scale phase-retention coordinate" in text
+    assert "not as a cross-system rate constant" in text.lower()

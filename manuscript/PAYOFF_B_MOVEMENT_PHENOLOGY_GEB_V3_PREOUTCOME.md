@@ -52,7 +52,14 @@ The dimensionless coefficient \(\lambda\) is the fraction and sign of incoming p
 R_\phi=|\lambda|
 \]
 
-as a common phase-retention coordinate. Values below one indicate phase contraction, values near zero indicate near-complete reset, negative values indicate contraction with overshoot, and magnitudes above one indicate local amplification. Importantly, the same \(\lambda\) can arise through different mechanisms.
+as a segment-scale phase-retention coordinate **within each declared ecological
+interval**. Values below one indicate phase contraction, values near zero
+indicate near-complete reset, negative values indicate contraction with
+overshoot, and magnitudes above one indicate local amplification. Importantly,
+the same \(\lambda\) can arise through different mechanisms, and equal raw
+\(\lambda\) values need not imply equal per-time correction when interval
+durations differ. Cross-system magnitude comparison therefore uses the
+pre-outcome interval standardization defined below.
 
 A second distinction follows from environmental uncertainty. Let \(\xi\) denote the portion of downstream environmental timing that cannot be predicted from current conditions. A linearized phase map can be organized as
 
@@ -855,7 +862,7 @@ All analyses use previously published public datasets or archived source data. R
 
 **Figure 3. Mule deer correct phenological phase through movement speed and stopover behavior.** Initial phase versus relative movement speed, initial phase versus stopover duration, start-to-end phase compression, and annual controller estimates.
 
-**Figure 4. A common phase-retention coordinate spans heterogeneous migration regimes.** (A) Taxon-level phase retention \(|\lambda|\). The barnacle-goose point is the declared route median and the whisker is the observed route range, not a confidence interval. (B) Environmental innovation versus \(|\lambda|\) for stable barnacle-goose transitions. Transition points share species, routes, and individuals and are not independent study estimates.
+**Figure 4. Segment-scale phase retention spans heterogeneous migration regimes.** (A) Raw taxon-level phase retention \(|\lambda|\) on each declared ecological interval. These coefficients share an estimator form but are not interpreted as directly comparable biological rates; interval-standardized retained-memory summaries are reported separately in the text and Table 1. The barnacle-goose point is the declared route median and the whisker is the observed route range, not a confidence interval. (B) Environmental innovation versus raw \(|\lambda|\) for stable barnacle-goose transitions. Transition points share species, routes, and individuals and are not independent study estimates.
 
 **Figure 5. Industrial development attenuates relative movement control but does not show the predicted extra temporal decline.** (A) Median control permeability \(G\) for small- and large-development populations across all registered near/far distance definitions. (B) Year-by-large-development interaction estimates and 95% intervals across the same definitions; all intervals include zero.
 
