@@ -109,52 +109,69 @@ Supporting Information unless a reviewer requires them in main text.
 
 This is the largest compression relative to the standalone Oikos manuscript.
 
-## Figure 4 — Broad natural test rejects one universal speed rule
+## Figure 4 — Broad natural data reject a universal speed rule and simple temporal substitution
 
-**Role:** primary empirical generality test.
+**Role:** primary natural-data falsification layer.
 
 Required content:
 
-- registered 5,816-observation / 55-species sample;
-- raw absolute arrival–green-up mismatch versus speed ratio;
-- local species-by-cell phase-centered mismatch versus speed ratio;
-- species-level curvature / vertex heterogeneity summary;
-- moderator null summary only if visually compact.
+- registered 5,816-observation / 55-species Stage-1 sample;
+- raw and species-by-cell phase-centered speed-ratio minima;
+- species-level curvature / vertex heterogeneity;
+- fresh registered 2002–2009 / 2010–2017 chronological holdout;
+- registered temporal-substitution classification and secondary descriptive
+  timing main effect.
 
 Current frozen headline values:
 
-- median observed animal/environment front-speed ratio: 1.263;
-- median directional alignment: 0.948;
 - raw-mismatch flexible minimum at median alignment:
-  \(u_{\rm macro}\approx0.405\);
+  (u_{\rm macro}\approx0.405);
 - phase-centered flexible minimum at median alignment:
-  \(u_{\rm macro}\approx1.043\);
+  (u_{\rm macro}\approx1.043);
 - phase-centered flexible minimum under perfect alignment:
   approximately 1.397;
-- minima remain shallow / heterogeneous and no registered moderator recovers one
-  convincing universal rule.
+- Stage-1 minima remain shallow / heterogeneous;
+- holdout eligible species: 39;
+- holdout rows: 3,268;
+- registered (q^2\times\) timing-responsiveness interaction:
+  (+0.0351\pm0.0289), p=0.2249;
+- registered holdout classification: `FAIL_WRONG_DIRECTION`;
+- secondary descriptive timing-responsiveness main effect:
+  (-0.300\pm0.105), p=0.0043.
 
 Current provenance:
 
-- \`manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md\`,
-  section “Broad bird data reject a universal natural speed-ratio optimum”;
-- \`data/payoff_b_empirical_phase_panel_status_20260921.json::broad_bird_falsification\`;
-- \`docs/PAYOFF_B_EMPIRICAL_PHASE_PANEL_STATUS_20260921.md\`.
+- broad Stage-1 machine receipt:
+  `data/payoff_b_broad_bird_stage1_result_20260925.json`;
+- original Stage-1 workflow run `35328297725`, artifact `10540282539`;
+- response-blind holdout registration:
+  `data/payoff_b_temporal_buffering_bird_holdout_registration_20260925.json`;
+- metadata-only preflight receipt:
+  `data/payoff_b_temporal_buffering_bird_preflight_receipt_20260925.json`;
+- frozen holdout result:
+  `data/payoff_b_temporal_buffering_bird_holdout_result_20260925.json`;
+- holdout workflow run `36122102742`, artifact `10857712843`,
+  artifact SHA256
+  `a0147a378927b3fdc29fac790bc606ddb7d2c64ff23875592ce04f98eb446a0f`.
 
 Build decision:
 
-**IMPLEMENTED PREOUTCOME.**
+**IMPLEMENTED IN INTEGRATED RENDERER.**
 
-Figure 6 is rendered from
-`data/payoff_b_integrated_empirical_figure_inputs_20260925.json`.
-Panel C is explicitly `UNOPENED` before Aikens execution. The same renderer
-accepts an optional registered Aikens result JSON and populates only that panel
-without changing panels A or B.
+`scripts/render_integrated_tracking_empirical_figures.py` renders Stage-1
+minima/heterogeneity and the registered holdout result from machine JSON
+receipts only. Manuscript prose is not parsed for numerical values.
 
-Before this PR can merge, the exact machine result / derived table supplying the
-0.405 / 1.043 / 1.397 curves must be named explicitly in this crosswalk. The
-manuscript is an acceptable prose source for the experimental draft but is not
-a sufficient final figure-data provenance layer.
+Claim boundary:
+
+- Figure 4 may state that the universal speed rule is not supported;
+- Figure 4 may state that the registered simple temporal-substitution
+  prediction failed in direction;
+- the negative timing-responsiveness main effect must remain labelled
+  secondary descriptive evidence;
+- the unsupported positive interaction may not be promoted to evidence for
+  timing–movement complementarity.
+
 
 ## Figure 5 — Real systems transform phase error through different architectures
 
