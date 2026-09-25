@@ -162,20 +162,20 @@ The integrated PREOUTCOME package has passed:
 - universal-lambda claim ceiling;
 - Aikens outcome-blind marker checks.
 
-Current audited metrics are: abstract 231 words, main text 3,458 words,
+Current audited metrics after the temporal-buffering reframe are: abstract 198 words, main text 3,699 words,
 21 references with zero uncited entries, 8 keywords, and 6 main figures.
 
 The journal-neutral PREOUTCOME working package also passes deterministic build
-and inspection: workflow run `36108335115`, artifact `10851908495`,
-artifact SHA256
-`44141280ac1c86b86671d52e02abb85e11985615903f84be351416b57f7bfeca`.
+and inspection after the reframe: workflow run `36117335637`, artifact
+`10855786194`, artifact SHA256
+`efcfd13f34533c94f1050eb7ee6e1a7901d51d7ddf905510f36b9b204037063f`.
 Its inner 33-file / 6-figure ZIP has SHA256
-`09e6a822ed32301ce360ae78ac39ab64484c36f030c00f677022c0bb4455e47a`
+`9a880f75fa86ceef1a93b28d7a92c2c19eefad7b744f94e7596418bdefcdde4f`
 and zero identity leaks in the anonymous main text.
 
-The GEB first-shot overlay is also machine-ready in PREOUTCOME state: structured
-abstract 222 words, GEB main body 3,690 words, 21 references, 6 display pieces,
-8 alphabetized keywords and zero identity leaks. Its deterministic package is
+The GEB first-shot overlay is also machine-ready in PREOUTCOME state after the
+reframe: structured abstract 241 words, GEB main body 3,967 words, 21
+references, 6 display pieces, 8 alphabetized keywords and zero identity leaks. Its deterministic package is
 recorded in
 `submission/GEB_INTEGRATED_PREOUTCOME_PACKAGE_AUDIT_20260925.md`.
 
