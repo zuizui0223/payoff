@@ -26,10 +26,11 @@ SUBMISSION_FILES = [
     "submission/PAYOFF_B_INTEGRATED_PACKAGE_INDEX.md",
 ]
 
+# Package-internal contracts must not contain the package's own artifact/hash
+# receipts. PUBLICATION_STATUS and PREOUTCOME_READINESS live outside the archive
+# so updating the external audit cannot recursively change the archive hash.
 INTERNAL_FILES = [
     "docs/PAYOFF_B_TWO_PAPER_PUBLICATION_ARCHITECTURE_20260925.md",
-    "docs/PUBLICATION_STATUS.md",
-    "submission/PAYOFF_B_INTEGRATED_PREOUTCOME_READINESS_20260925.md",
     "submission/PAYOFF_B_INTEGRATED_FIGURE_SOURCE_CROSSWALK_20260925.md",
     "submission/PAYOFF_B_INTEGRATED_SIX_FIGURE_AUDIT_20260925.md",
 ]
