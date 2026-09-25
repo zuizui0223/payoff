@@ -27,9 +27,12 @@ stronger 2002–2009 timing responsiveness does not weaken 2010–2017
 movement-speed dependence; the primary moderation is opposite-signed
 (+0.035 ± 0.029, p=0.225). In the same frozen model, timing responsiveness is
 associated with lower average mismatch, but that main effect is secondary
-descriptive evidence. Direct reconstructions in mule deer, barnacle geese and
-Eurasian wigeon show phase correction through different actuator architectures
-and ecological intervals.
+descriptive evidence. This phase–velocity division of labor is independently
+consistent with the source study, where green-up date and green-up speed
+anomalies predict bird migration speed and the published species timing-
+sensitivity coefficient for migration speed is not negative. Direct
+reconstructions in mule deer, barnacle geese and Eurasian wigeon show phase
+correction through different actuator architectures and ecological intervals.
 
 The central ecological conclusion is therefore **temporal buffering, not
 temporal replacement**. Timing responsiveness can improve alignment without
