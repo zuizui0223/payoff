@@ -30,3 +30,12 @@ def test_aikens_cannot_retune_primary_conclusion() -> None:
     for cls in ("PASS", "wrong-direction", "insufficient-support", "NOT_ESTIMABLE"):
         assert cls in text
     assert "leave the primary temporal-buffering conclusion unchanged" in text
+
+
+def test_claim_hierarchy_records_registered_natural_substitution_failure() -> None:
+    text = DOC.read_text(encoding="utf-8")
+    assert "FAIL_WRONG_DIRECTION" in text
+    assert "+0.0351 ± 0.0289" in text
+    assert "Timing responsiveness can improve average alignment without making" in text
+    assert "movement-speed matching dispensable" in text
+    assert "secondary timing main effect" in text
