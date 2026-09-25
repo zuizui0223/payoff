@@ -73,8 +73,8 @@ classification = FAIL_WRONG_DIRECTION
 
 Thus the natural dataset does **not** support simple temporal substitution.
 
-The same frozen model contained a secondary descriptive timing-responsiveness
-main effect of approximately (-0.300pm0.105) with p=0.0043. This may be
+The same frozen model contained a **secondary timing main effect**, retained
+only as a descriptive timing-responsiveness association, of approximately (-0.300pm0.105) with p=0.0043. This may be
 reported as evidence that greater historical timing responsiveness is associated
 with lower average holdout mismatch, but it is not the registered primary test.
 
