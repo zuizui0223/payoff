@@ -28,10 +28,16 @@ def convert_panel_labels(svg: str) -> str:
     return svg
 
 
-def render_all(output_dir: Path) -> dict:
+def render_all(
+    output_dir: Path,
+    aikens_result_path: Path | None = None,
+) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
     source_dir = output_dir / "_canonical"
-    canonical = render_canonical(source_dir)
+    canonical = render_canonical(source_dir, aikens_result_path)
+    canonical_manifest = json.loads(
+        Path(canonical["manifest"]).read_text(encoding="utf-8")
+    )
 
     figures = {}
     figure_paths = {}
@@ -59,6 +65,12 @@ def render_all(output_dir: Path) -> dict:
         "status": "geb_integrated_six_figure_format_overlay",
         "scientific_result_changed": False,
         "panel_label_rule": "lower-case parenthetical labels",
+        "aikens_result_present": canonical_manifest.get(
+            "aikens_result_present", False
+        ),
+        "aikens_outcome_opened": canonical_manifest.get(
+            "aikens_outcome_opened", False
+        ),
         "figures": figures,
     }
     mp = output_dir / "GEB_INTEGRATED_FIGURE_MANIFEST.json"
@@ -73,8 +85,9 @@ def main() -> None:
         type=Path,
         default=Path("outputs/geb_integrated_figures"),
     )
+    p.add_argument("--aikens-result", type=Path)
     args = p.parse_args()
-    render_all(args.output_dir)
+    render_all(args.output_dir, args.aikens_result)
     print(args.output_dir / "GEB_INTEGRATED_FIGURE_MANIFEST.json")
 
 

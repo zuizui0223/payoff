@@ -301,6 +301,15 @@ jobs:
           --output-dir outputs/aikens_integrated_outcome_package
           --zip outputs/PAYOFF_B_INTEGRATED_TRACKING_OUTCOME_PACKAGE.zip
 
+      - name: Build science-ready GEB outcome package
+        run: >
+          python scripts/build_geb_integrated_outcome_package.py
+          --manuscript outputs/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_RENDERED.md
+          --result-json outputs/aikens_primary_lambda_result.json
+          --claim-state-json outputs/aikens_primary_integrated_claim_state.json
+          --output-dir outputs/aikens_geb_outcome_package
+          --zip outputs/GEB_INTEGRATED_OUTCOME_PACKAGE.zip
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -338,6 +347,8 @@ jobs:
             outputs/aikens_integrated_outcome_package
             outputs/PAYOFF_B_INTEGRATED_TRACKING_OUTCOME_PACKAGE.zip
             outputs/PAYOFF_B_INTEGRATED_OUTCOME_ARCHIVE_RECEIPT.json
+            outputs/aikens_geb_outcome_package
+            outputs/GEB_INTEGRATED_OUTCOME_PACKAGE.zip
             data/aikens2022_environment_product_amendment_20260922.json
             data/aikens2022_phase_reconstruction_execution_contract_20260922.json
             data/aikens2022_phase_reconstruction_execution_contract_v2_20260922.json

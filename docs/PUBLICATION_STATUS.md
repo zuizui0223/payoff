@@ -129,8 +129,10 @@ Current state:
 ```text
 ACTIVE_PUBLICATION_QUEUE = true
 ROLE = INTEGRATED_BROAD_ECOLOGY_PAPER
+FIRST_SHOT = Global Ecology and Biogeography / Research Article
 SCIENTIFIC_STATE = PREOUTCOME_INTERNAL_READY
 OPEN_SCIENCE_GATE = registered Aikens lambda outcome
+POSTOUTCOME_GEB_PIPELINE = READY
 RETUNING_AFTER_AIKENS = forbidden
 ```
 
@@ -164,6 +166,17 @@ artifact SHA256
 Its inner 33-file / 6-figure ZIP has SHA256
 `09e6a822ed32301ce360ae78ac39ab64484c36f030c00f677022c0bb4455e47a`
 and zero identity leaks in the anonymous main text.
+
+The GEB first-shot overlay is also machine-ready in PREOUTCOME state: structured
+abstract 222 words, GEB main body 3,690 words, 21 references, 6 display pieces,
+8 alphabetized keywords and zero identity leaks. Its deterministic package is
+recorded in
+`submission/GEB_INTEGRATED_PREOUTCOME_PACKAGE_AUDIT_20260925.md`.
+
+The post-Aikens GEB completion route is implemented and CI-tested for PASS,
+wrong-direction, insufficient-support and NOT_ESTIMABLE result classes. That
+pipeline readiness is recorded in
+`submission/GEB_INTEGRATED_POSTOUTCOME_PIPELINE_READINESS_20260925.md`.
 
 The only remaining scientific blocker before outcome-rendered submission
 preparation is the registered Aikens fixed-24 h lambda adjudication.
