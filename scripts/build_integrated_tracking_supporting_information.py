@@ -164,6 +164,20 @@ def build_supporting_information() -> str:
         "positive hypothesis: timing responsiveness can improve average alignment "
         "without making movement-speed matching dispensable.",
         "",
+        "### S9.6 Published source consistency with phase–velocity control",
+        "",
+        "The Amaral source study independently modelled bird migration speed. In its "
+        "published Table 1, green-up date anomaly had coefficient -0.549 "
+        "(95% CI -0.770 to -0.327) and green-up speed anomaly had coefficient "
+        "+0.088 (95% CI +0.041 to +0.134). The species timing-sensitivity term "
+        "in the migration-speed model was +0.119 (95% CI -0.034 to +0.203).",
+        "",
+        "These published results are prior consistency only. They show that migration "
+        "speed itself responds to environmental timing and propagation and provide no "
+        "evidence for a simple negative tradeoff in which stronger timing response "
+        "makes movement speed less important. They do not establish positive "
+        "timing-movement complementarity.",
+        "",
         "## S10. Direct phase-control systems and interval scale",
         "",
         "| system | raw lambda / range | evidence role | actuator architecture |",
