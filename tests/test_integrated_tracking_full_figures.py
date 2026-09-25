@@ -25,7 +25,7 @@ def test_integrated_full_six_figure_set(tmp_path: Path) -> None:
     assert "PAYOFF-B1 benchmark" in f1
     assert "Local identifiability null" in f1
     assert "Broad empirical test" in f1
-    assert "mismatch is an outcome, not a tracking architecture" in f1
+    assert "temporal buffering delays but does not replace spatial tracking" in f1
 
     import json
     manifest=json.loads(paths["manifest"].read_text(encoding="utf-8"))
