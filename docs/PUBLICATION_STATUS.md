@@ -178,8 +178,14 @@ wrong-direction, insufficient-support and NOT_ESTIMABLE result classes. That
 pipeline readiness is recorded in
 `submission/GEB_INTEGRATED_POSTOUTCOME_PIPELINE_READINESS_20260925.md`.
 
+A credential-only preflight on 2026-09-25 reconfirmed that the AppEEARS /
+Earthdata route is still not configured (run `36113621057`, artifact
+`10853764396`); it performed no network submission, opened no environmental
+values, and left the lambda outcome unopened.
+
 The only remaining scientific blocker before outcome-rendered submission
-preparation is the registered Aikens fixed-24 h lambda adjudication.
+preparation is therefore still the registered Aikens fixed-24 h lambda
+adjudication, whose execution is waiting only on authentication.
 
 
 ## DOI modules / dormant branches
