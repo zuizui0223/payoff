@@ -41,10 +41,10 @@ Reusable source:
 
 Build decision:
 
-**RENDER NEW INTEGRATED VERSION.** The current tracking-theory Figure 1 already
-contains most of the conceptual hierarchy, but the integrated paper needs one
-additional empirical phase-retention branch and a visually subordinate PAYOFF-B1
-benchmark box.
+**IMPLEMENTED.** `scripts/render_integrated_tracking_figures.py` renders a new
+integrated Figure 1 linking the PAYOFF-B1 benchmark, local identifiability null,
+capacity/geometry/coordination breakdown, 55-species falsification, direct
+phase-control decomposition and outcome-blind Aikens perturbation slot.
 
 No new quantitative result is licensed.
 
@@ -72,8 +72,9 @@ Licensed main numbers:
 
 Build decision:
 
-**REUSE / LIGHT REFRAME.** The current Figure 2 already carries the exact
-mechanistic content needed by the integrated paper.
+**IMPLEMENTED BY FROZEN REUSE.** The full integrated renderer copies the
+deterministic frozen tracking-theory Figure 2 into the integrated six-figure set
+without changing its numerical content.
 
 ## Figure 3 — Partner dependence blocks coordinated reallocation
 
@@ -101,9 +102,10 @@ Licensed main numbers:
 
 Build decision:
 
-**REUSE / COMPRESS.** Distribution-overlap, synchronization, demographic
-visibility and drift panels move to integrated Supporting Information unless a
-reviewer requires them in main text.
+**IMPLEMENTED BY FROZEN REUSE / COMPRESSION.** The full integrated renderer
+copies the deterministic frozen coordination-gate Figure 3. Distribution-overlap,
+synchronization, demographic visibility and drift panels move to integrated
+Supporting Information unless a reviewer requires them in main text.
 
 This is the largest compression relative to the standalone Oikos manuscript.
 
@@ -283,3 +285,18 @@ Rendered outputs:
 
 The renderer is dependency-free and tested in
 `tests/test_integrated_tracking_empirical_figures.py`.
+
+
+## Complete six-figure renderer
+
+Canonical experimental command:
+
+```bash
+python scripts/render_integrated_tracking_figures.py \
+  --output-dir outputs/integrated_tracking_figures
+```
+
+This produces exactly six SVGs plus
+`PAYOFF_B_INTEGRATED_SIX_FIGURE_MANIFEST.json`. Figures 2–3 are copied from
+the frozen synthetic renderer; Figures 4–6 are generated from machine empirical
+receipts; Figure 1 is conceptual synthesis only.
