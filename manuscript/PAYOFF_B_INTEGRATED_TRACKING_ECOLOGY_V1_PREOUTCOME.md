@@ -80,7 +80,48 @@ are observationally equivalent from mismatch alone.
 
 This is deliberately stronger than we expect in nature. It supplies a null against which ecological constraints can be added one at a time.
 
-### 2.3 Temporal buffering, latent spatial demand and three failure modes
+### 2.3 Phase and velocity are different control channels
+
+Following the registered bird holdout readout, we use a minimal moving-front identity as a **post-readout mechanistic interpretation**, not as a preregistered prediction. Let an environmental front move as
+
+\[
+E(t)=E_0+v_E t,
+\]
+
+and let the organism's spatial front move at speed \(v_A\) with a seasonal timing shift \(z\),
+
+\[
+A(t;z)=A_0+v_A(t+z).
+\]
+
+The signed spatial mismatch is
+
+\[
+e(t;z)=(E_0-A_0)-v_A z+(v_E-v_A)t.
+\]
+
+Timing therefore changes the phase offset,
+
+\[
+\frac{\partial e}{\partial z}=-v_A,
+\]
+
+whereas movement-speed matching determines the rate at which mismatch drifts,
+
+\[
+\frac{\partial e}{\partial t}=v_E-v_A.
+\]
+
+A fixed timing shift can remove mismatch at one instant but cannot keep mismatch zero over a sustained interval when \(v_E\neq v_A\). If timing adjustment is bounded by \(|z|\le z_{\max}\), the maximum extra time it can buy before the same mismatch threshold is reached is
+
+\[
+T_{\rm buffer}=\frac{v_A z_{\max}}{|v_E-v_A|}
+=\frac{u z_{\max}}{|1-u|},
+\]
+
+with \(u=v_A/v_E\). This is elementary kinematics rather than a claim of mathematical novelty. It clarifies the ecological asymmetry: timing can shift **when** a tracker meets the environmental wave, whereas movement speed determines whether it can keep pace with the wave once tracking continues.
+
+### 2.4 Temporal buffering, latent spatial demand and three failure modes
 
 We use **latent spatial tracking demand** descriptively to mean the spatial redistribution that becomes necessary to maintain tracking once finite temporal adjustment is exhausted; it is not a separately fitted empirical parameter. Temporal buffering can keep mismatch low while this future spatial requirement remains unexpressed. We distinguish three ways that buffer can fail.
 
@@ -98,7 +139,7 @@ These constraints yield a general expectation:
 
 The same endpoint can therefore conceal different amounts of remaining temporal capacity and different exposure to spatial constraints.
 
-### 2.4 Empirical phase retention
+### 2.5 Empirical phase retention
 
 For a realized migration system, let \(E_i\) denote phase error entering an ecological correction interval and \(E_{i+1}\) the error after the interval. We use
 
@@ -320,7 +361,17 @@ The chronological holdout provides a sharper boundary. If timing responsiveness 
 
 The secondary negative timing-responsiveness main effect suggests that historically more timing-responsive species can maintain lower mismatch overall while still retaining movement-speed dependence. Because that main effect was not the registered primary target, we treat it descriptively. The licensed inference is narrower: temporal responsiveness may improve tracking without making spatial tracking dispensable. This distinction aligns with the explicit landscapes, where timing buffers environmental change but movement re-enters once temporal capacity or geometry becomes limiting.
 
-### 5.4 What is portable across migration systems
+### 5.4 Phase–velocity division of labor explains the failed substitution test
+
+The registered holdout result sharpens the mechanism. Species with stronger historical timing responsiveness had lower holdout mismatch on average, yet that responsiveness did not weaken the mismatch dependence on movement-speed ratio. The predicted negative moderation therefore failed even though timing responsiveness itself was associated with improved alignment.
+
+The phase–velocity identity explains this combination. A timing shift changes the phase intercept of the tracking problem, whereas a speed difference changes how mismatch accumulates along a moving environmental wave. Better timing can therefore lower the whole mismatch surface without flattening its dependence on movement speed. In control terms, timing and speed are not redundant actuators acting on one scalar gain; they can regulate different components of the forcing.
+
+This interpretation is also consistent with the Amaral source analysis, which independently modelled bird migration speed as responding to green-up date and green-up speed. Its species-sensitivity term in the migration-speed model was not negative. We treat that source result as prior consistency rather than a new PAYOFF confirmatory test.
+
+The deeper ecological distinction is therefore between **phase control** and **propagation control**. Phenological responsiveness helps determine when the organism enters the moving environmental wave; movement speed helps determine whether it keeps pace with the spatial propagation of that wave. Timing can improve tracking without making transport dispensable.
+
+### 5.5 What is portable across migration systems
 
 The direct systems suggest a more modest portable object: the transformation of incoming phase error over a declared ecological interval.
 
@@ -330,7 +381,7 @@ Actuators are even less portable. Mule deer use movement speed and stopover. Bar
 
 The useful generalization is therefore a decomposition, not a constant.
 
-### 5.5 Information, retention and actuation should not be collapsed into “tracking ability”
+### 5.6 Information, retention and actuation should not be collapsed into “tracking ability”
 
 Observed mismatch can be organized into at least three distinct components:
 
@@ -342,7 +393,7 @@ A fourth boundary occurs when organisms change the resource wave itself, as in e
 
 This decomposition changes how climate responses should be interpreted. Increasing environmental innovation can worsen mismatch without any decline in behavioral control. Conversely, infrastructure can increase mismatch by reducing actuation even if environmental predictability is unchanged.
 
-### 5.6 Within-taxon perturbation is the decisive next mechanism test
+### 5.7 Within-taxon perturbation is the decisive next mechanism test
 
 The industrial-development system is especially valuable because it changes the inferential structure. Cross-species differences can always reflect many unmeasured differences in life history, routes and observation scale. A preregistered within-taxon comparison can instead ask whether an independently observed actuation contrast is accompanied by a change in phase retention.
 
@@ -352,11 +403,11 @@ The industrial-development system is especially valuable because it changes the 
 
 The purpose of this test is not to rescue a universal lambda. It is to distinguish response-coordinate stability from a specific mechanistic perturbation.
 
-### 5.7 Limitations
+### 5.8 Limitations
 
 The synthetic landscapes are mechanism models, not calibrated forecasts. Their velocities, costs and corridor geometries should not be interpreted as natural thresholds.
 
-The 55-species analysis tests a broad speed-ratio hypothesis but does not observe every behavioral decision available to each species.
+The 55-species analysis tests a broad speed-ratio hypothesis but does not observe every behavioral decision available to each species. The chronological holdout directly tests one substitution prediction but does not measure remaining phenological capacity; its timing-responsiveness slope is a realized phase-response metric, not the synthetic \(z_{\max}\).
 
 The direct empirical panel contains three reconstructed taxa, with repeated barnacle-goose flyways sharing species and individuals. It is not a formal meta-analysis of independent taxa.
 
