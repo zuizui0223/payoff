@@ -119,9 +119,94 @@ Remaining tasks are human/administrative:
 
 ## Canonical post-maintenance artifacts
 
-**PENDING_POST_MERGE_REFRESH**
+Canonical main HEAD:
 
-This section is intentionally the only pending field. It will be populated from
-the first green main workflow after the provenance-maintenance merge; updating
-this audit file alone will not alter the deterministic submission or review
-archives because this audit is not bundled into those archives.
+`63e3c3e22aaf43b4745a43776c5204f2c3b67dbb`
+
+Canonical green main workflow:
+
+`36091567207` — **success**
+
+### Submission package
+
+GitHub artifact:
+
+- name: `payoff-b-tracking-theory-submission-package`;
+- artifact ID: `10845437462`;
+- outer artifact SHA256:
+  `90e289f1b2993a68aed616c3414e6b3de7c8548af0a34c52cf17c608143791c4`.
+
+Deterministic inner archive:
+
+- file: `PAYOFF_B_TRACKING_SUBMISSION_PACKAGE.zip`;
+- bytes: **135,813**;
+- SHA256:
+  `23211ac3924378de66cec2225feb84a79bb81c692e75939591a38d4b5b23fe7d`.
+
+Package manifest:
+
+- file: `PAYOFF_B_TRACKING_SUBMISSION_MANIFEST.json`;
+- SHA256:
+  `cab383ac287ab323fa7000e7e6da675c9d9d21627c3f31363ff24e663ed61d4f`.
+
+The manifest explicitly records:
+
+- scientific evidence freeze: 2026-09-24;
+- framing amendment date: 2026-09-25;
+- current framing authority:
+  `data/payoff_b_tracking_theory_framing_amendment_20260925.json`;
+- original claim freeze retained as evidence/numerical provenance.
+
+### Anonymous code/data review bundle
+
+GitHub artifact:
+
+- name: `payoff-b-tracking-theory-anonymous-review-bundle`;
+- artifact ID: `10845387525`;
+- outer artifact SHA256:
+  `3c39aed96fcf287f6d8d532ab00138cde7036176e49a348057a7298f01128538`.
+
+Deterministic inner archive:
+
+- file: `OIKOS_TRACKING_ANON_CODE_DATA.zip`;
+- bytes: **174,154**;
+- SHA256:
+  `8d87f892eeb96fec441eb3a821bf3d731698174390859835241aae42ef574bd7`.
+
+Review manifest:
+
+- file: `OIKOS_TRACKING_ANON_CODE_DATA_MANIFEST.json`;
+- SHA256:
+  `1d37c522e3d500add1f1e6180156c4058bdf1dd85054d56608dba65e1d7b36e3`.
+
+The generated review README and manifest explicitly state that the 2026-09-25
+framing amendment is authoritative for the current title/headline/novelty
+hierarchy, while the 2026-09-24 claim freeze is retained for evidence and
+numerical provenance.
+
+### Figures
+
+GitHub artifact:
+
+- name: `payoff-b-tracking-theory-figures`;
+- artifact ID: `10845911908`;
+- outer artifact SHA256:
+  `acd17f0bc1b72f7965e3ba7db2f87afdbadff3788a0b40a2352c466c3dfd73c5`.
+
+The figure set is the same post-reframing six-panel set audited above.
+
+## Final machine state
+
+At the canonical post-maintenance main HEAD:
+
+- full repository CI: **PASS**;
+- deterministic submission package: **PASS**;
+- anonymous review bundle: **PASS**;
+- six-figure render: **PASS**;
+- anonymity / empirical-lane exclusion guards: **PASS**;
+- framing-authority guards: **PASS**;
+- post-reframing visual audit: **PASS**;
+- Oikos abstract <=300 words: **PASS (235 words)**.
+
+No machine-preparation task remains for the frozen Oikos scientific package.
+Remaining work is human/administrative submission metadata and portal action.
