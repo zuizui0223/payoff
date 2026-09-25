@@ -87,6 +87,35 @@ This result strengthens the distinction between phase control and spatial
 propagation control, but it still does not directly measure latent spatial
 tracking demand as a natural state variable.
 
+## Phase–velocity division of labor
+
+The minimal moving-front identity used in the manuscript separates the two
+control channels:
+
+```text
+timing shift -> phase offset
+animal/environment speed difference -> mismatch accumulation rate
+```
+
+A fixed timing shift can reduce mismatch at one point in the trajectory without
+eliminating later drift when animal and environmental front speeds differ.
+
+This interpretation is independently consistent with the Amaral source-study
+models. In the published bird-speed model, green-up date anomaly
+(`-0.549`, 95% CI `-0.770 to -0.327`) and green-up speed anomaly
+(`+0.088`, 95% CI `+0.041 to +0.134`) both predict migration speed. The
+published species timing-sensitivity coefficient for migration speed is
+`+0.119` (95% CI `-0.034 to +0.203`): uncertain but not negative.
+
+Licensed synthesis:
+
+> **Timing and speed are parallel control channels, not evidence for a simple
+> one-for-one substitution tradeoff.**
+
+The positive point estimates do not license a claim of positive
+timing–movement complementarity because the registered holdout moderation is
+unsupported and the published sensitivity interval overlaps zero.
+
 ## Direct-system evidence
 
 Mule deer, barnacle geese and Eurasian wigeon provide mechanistic decomposition,
