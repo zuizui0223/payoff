@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "manuscript" / "PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md"
 RENDER = ROOT / "scripts" / "render_aikens_lambda_manuscript.py"
 AUDIT_SCRIPT = ROOT / "scripts" / "audit_rendered_integrated_tracking_manuscript.py"
+sys.path.insert(0, str(ROOT / "scripts"))
 
 spec = importlib.util.spec_from_file_location("rendered_audit", AUDIT_SCRIPT)
 audit_module = importlib.util.module_from_spec(spec)
@@ -60,7 +61,7 @@ CASES = {
 
 
 @pytest.mark.parametrize("name", tuple(CASES))
-def test_all_registered_outcomes_render_final_integrated_science稿(
+def test_all_registered_outcomes_render_final_integrated_science(
     tmp_path: Path,
     name: str,
 ) -> None:
