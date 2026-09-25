@@ -41,6 +41,7 @@ EMPIRICAL_RECEIPTS = [
     "data/payoff_b_temporal_buffering_bird_holdout_registration_20260925.json",
     "data/payoff_b_temporal_buffering_bird_preflight_receipt_20260925.json",
     "data/payoff_b_temporal_buffering_bird_holdout_result_20260925.json",
+    "data/payoff_b_amaral_parallel_control_prior_consistency_20260925.json",
     "data/payoff_b_empirical_phase_panel_status_20260921.json",
     "data/payoff_b_phase_retention_interval_standardization_result_20260925.json",
     "data/payoff_b_industrial_mule_deer_actuator_receipt_20260921.json",
