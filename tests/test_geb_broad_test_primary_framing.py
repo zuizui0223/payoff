@@ -19,7 +19,7 @@ def test_direct_taxa_are_mechanistic_not_meta_analytic_replication():
     text = MANUSCRIPT.read_text(encoding="utf-8")
     assert "mechanistic panel rather than a three-study meta-analysis" in text
     assert "mechanistic decomposition rather than independent meta-analytic replication" in text
-    assert "not “one optimal speed” and not “one universal \\(\\lambda\\)”" in text
+    assert "not “one optimal speed” and not “one universal \\(\\lambda\\).”" in text
 
 
 def test_framing_amendment_changes_no_scientific_result():
