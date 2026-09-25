@@ -4,21 +4,21 @@
 
 ## Abstract
 
-**Aim:** We first test whether migration timing follows one universal animal-to-environment speed optimum across species. After that broad hypothesis fails, we ask whether system-specific phase control provides a more informative description of how migrants correct timing error.
+**Aim:** We test whether migration follows one universal animal-to-environment speed optimum and, if not, whether phase control better describes timing correction.
 
-**Location:** Eastern North America, the western United States, North Atlantic–Arctic goose flyways, and the Eurasian wigeon migration corridor.
+**Location:** Eastern North America, western USA, North Atlantic–Arctic flyways and the Eurasian wigeon corridor.
 
-**Time period:** Published movement and phenology datasets spanning 2002–2020, with longer environmental baselines where required.
+**Time period:** Movement and phenology data from 2002–2020, with longer environmental baselines.
 
-**Major taxa studied:** Migratory birds and ungulates, with direct reconstructions for mule deer (*Odocoileus hemionus*), barnacle goose (*Branta leucopsis*) and Eurasian wigeon (*Mareca penelope*).
+**Major taxa studied:** Migratory birds and ungulates; direct systems were mule deer, barnacle goose and Eurasian wigeon.
 
-**Methods:** We tested the universal-speed hypothesis in 5,816 species-year-cell observations from 55 migratory bird species. We then used mule deer, barnacle geese and Eurasian wigeon as direct controller systems to estimate signed phase retention, actuator responses and interval-standardized retained memory. A within-taxon industrial-development perturbation was preregistered separately.
+**Methods:** We tested the speed hypothesis in 5,816 observations from 55 bird species, then estimated phase retention, actuator responses and interval-standardized retained memory in three direct systems. A within-taxon development perturbation was preregistered separately.
 
-**Results:** The broad 55-species analysis did not support one universal speed optimum: raw and locally centered minima differed, both were shallow, and species-level optima were heterogeneous. Direct controller reconstructions then showed phase contraction through different mechanisms and on different interval scales. After interval standardization, typical seven-transition wigeon retained-memory estimates (0.133 POWER; 0.231 ERA5) were the same order as whole-migration mule deer (0.107), although conservative SIMEX allowed 0.627. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
+**Results:** The 55-species analysis did not support one universal speed optimum: minima were shallow and species-level optima heterogeneous. Direct systems showed phase contraction through different mechanisms and interval scales. Typical seven-transition wigeon retained memory was 0.133 (POWER) or 0.231 (ERA5), versus 0.107 over whole-migration mule deer; conservative SIMEX allowed 0.627. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
 [AIKENS LAMBDA ABSTRACT PENDING — render from the registered result JSON before submission.]
 <!-- AIKENS_LAMBDA_ABSTRACT_END -->
 
-**Main conclusions:** Migration timing does not collapse onto one universal speed-matching rule. The direct systems instead support a scale-dependent feedback view: migrants can contract phase error through different actuator architectures, while raw retention coefficients depend on the correction interval. Phase control is therefore a mechanistic decomposition of why the broad universal-speed hypothesis fails, not evidence for a new universal coefficient.
+**Main conclusions:** Migration does not collapse onto one universal speed rule. Direct systems instead support scale-dependent phase feedback through different actuators. Phase control explains the broad failure without replacing it with a universal retention coefficient.
 
 **Keywords:** animal tracking, biologging, environmental predictability, green wave, macroecology, migration, phenological mismatch, phase retention, plasticity, spring phenology
 
