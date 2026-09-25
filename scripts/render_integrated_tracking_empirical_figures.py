@@ -144,17 +144,13 @@ def render_figure5(out: Path, inputs: dict, panel: dict, standard: dict) -> None
     s.append(text((x0+x1)/2,525,"|lambda| on declared ecological interval",12,anchor="middle"))
 
     s.append(text(675,78,"B  Secondary path-memory comparison",15,"700"))
-    vals=[]
-    for sys in standard["systems"]:
-        if sys["system_id"]=="mule_deer_whole_migration":
-            vals.append(("Mule deer whole migration",sys["variants"][0]["path_memory"]["path_retention_magnitude"]))
-        if sys["system_id"]=="wigeon_staging_transitions":
-            for v in sys["variants"]:
-                pm=v.get("path_memory",{})
-                if pm.get("licensed"):
-                    vals.append((f"Wigeon {v['variant_id']}",pm["path_retention_magnitude"]))
     ist=panel["measurement_error_status"]["interval_standardization"]
-    vals.append(("Wigeon conservative SIMEX",ist["wigeon_conservative_simex_typical_path_retention"]))
+    vals=[
+        ("Mule deer whole migration",ist["mule_deer_whole_migration_retention"]),
+        ("Wigeon POWER ×7",ist["wigeon_power_typical_path_retention"]),
+        ("Wigeon ERA5 ×7",ist["wigeon_era5_typical_path_retention"]),
+        ("Wigeon conservative SIMEX ×7",ist["wigeon_conservative_simex_typical_path_retention"]),
+    ]
     bx0,bx1=760,1030
     for i,(label,val) in enumerate(vals):
         y=160+i*78
