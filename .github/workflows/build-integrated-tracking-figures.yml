@@ -1,0 +1,38 @@
+name: Integrated PAYOFF-B empirical figures
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/payoff-b-integrated-ecology-paper-20260925
+    paths:
+      - 'scripts/render_integrated_tracking_empirical_figures.py'
+      - 'data/payoff_b_broad_bird_stage1_result_20260925.json'
+      - 'data/payoff_b_integrated_empirical_figure_inputs_20260925.json'
+      - 'data/payoff_b_empirical_phase_panel_status_20260921.json'
+      - 'data/payoff_b_phase_retention_interval_standardization_result_20260925.json'
+      - '.github/workflows/build-integrated-tracking-figures.yml'
+  pull_request:
+    paths:
+      - 'scripts/render_integrated_tracking_empirical_figures.py'
+      - 'data/payoff_b_broad_bird_stage1_result_20260925.json'
+      - 'data/payoff_b_integrated_empirical_figure_inputs_20260925.json'
+      - 'data/payoff_b_empirical_phase_panel_status_20260921.json'
+      - 'data/payoff_b_phase_retention_interval_standardization_result_20260925.json'
+      - '.github/workflows/build-integrated-tracking-figures.yml'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Render preoutcome empirical figures
+        run: python scripts/render_integrated_tracking_empirical_figures.py --output-dir outputs/integrated_tracking_figures
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-integrated-tracking-empirical-figures
+          path: outputs/integrated_tracking_figures
+          if-no-files-found: error
