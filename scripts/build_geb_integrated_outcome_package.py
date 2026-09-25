@@ -88,7 +88,10 @@ from 55 migratory bird species, the data do not support one portable natural
 animal-speed/environmental-wave-speed optimum. A registered chronological
 holdout also found that stronger historical timing responsiveness did not
 weaken later movement-speed dependence; the primary moderation failed in
-direction. Direct reconstructions in mule deer, barnacle geese and Eurasian
+direction. The source-study bird-speed models are consistent with the same
+phase–velocity division of labor: environmental timing and propagation both
+predict migration speed, while the published timing-sensitivity coefficient is
+not negative. Direct reconstructions in mule deer, barnacle geese and Eurasian
 wigeon instead show phase transformation on different ecological intervals and
 through different actuator architectures.
 
