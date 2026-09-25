@@ -25,7 +25,7 @@
   },
   "calibration_timing_gain": {
     "species_cell_arrival_baseline": "mean(arr_GAM_mean) within species x cell over calibration years",
-    "cell_greenup_baseline": "mean(gr_mn) within cell over calibration years",
+    "cell_greenup_baseline": "mean(gr_mn) across unique cell x year values within each cell over calibration years",
     "arrival_anomaly": "arr_GAM_mean - species_cell_arrival_baseline",
     "greenup_anomaly": "gr_mn - cell_greenup_baseline",
     "per_species_model": "lm(arrival_anomaly ~ greenup_anomaly)",
@@ -35,7 +35,8 @@
       "min_calibration_observations": 60,
       "min_calibration_cells": 5,
       "min_calibration_years": 5,
-      "finite_slope_required": true
+      "finite_slope_required": true,
+      "observation_definition": "finite arr_GAM_mean and gr_mn rows used in the calibration timing-gain model"
     },
     "forbidden_inputs": [
       "holdout years",
@@ -98,5 +99,12 @@
     "change the p-value threshold",
     "switch from phase-centered holdout mismatch to raw mismatch as the primary response",
     "promote a descriptive secondary result to the primary test"
-  ]
+  ],
+  "implementation_clarification_before_readout": {
+    "date": "2026-09-25",
+    "outcome_opened": false,
+    "changes_to_split_thresholds_or_primary_model": false,
+    "calibration_observation_definition": "rows with finite arr_GAM_mean and gr_mn used by the timing-gain regression",
+    "cell_greenup_baseline_weighting": "mean across unique cell x year gr_mn values in calibration years, so species replication does not reweight years"
+  }
 }
