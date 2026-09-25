@@ -66,7 +66,10 @@ reliability checks.
 but explicit landscapes show that finite timing acts as a temporary bypass:
 phenological capacity expands persistence and reduces route costs before movement
 re-enters under stronger directional forcing. Across 5,816 bird observations,
-one universal natural speed optimum was not supported. Direct systems
+one universal natural speed optimum was not supported. A registered 2002–2009 /
+2010–2017 holdout then found that stronger historical timing responsiveness did
+not flatten later mismatch dependence on movement speed; the quadratic
+moderation was opposite-signed (+0.035 ± 0.029, p=0.225). Direct systems
 transformed incoming phase error through different actuator architectures and
 ecological intervals.
 {ABSTRACT_START}
@@ -74,10 +77,11 @@ ecological intervals.
 {ABSTRACT_END}
 
 **Main conclusions:** Temporal adjustment buffers rather than permanently
-replaces spatial tracking under sustained environmental change. Low mismatch can
-therefore conceal latent spatial tracking demand until temporal capacity is
-exhausted. Mismatch is consequently an outcome of the tracking system, not a
-direct measure of its mechanism or remaining resilience.
+replaces spatial tracking under sustained environmental change. The natural
+holdout likewise provides no evidence that greater timing responsiveness makes
+movement-speed matching dispensable. Low mismatch can therefore coexist with
+continued dependence on spatial tracking and is not a direct measure of
+remaining resilience.
 
 **Keywords:** {", ".join(KEYWORDS)}
 """
