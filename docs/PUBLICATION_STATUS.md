@@ -1,8 +1,13 @@
 # Publication status
 
-PAYOFF is split into one active short paper and several citable technical modules.
+> **Feature-branch publication experiment — 2026-09-25.** Main remains unchanged.
+> PAYOFF-B is being evaluated as a **two-paper programme**: the exact anti-phase
+> theorem remains independent, while the frozen tracking theory and movement–
+> phenology empirical programme are combined into one broad ecology manuscript.
+> See `docs/PAYOFF_B_TWO_PAPER_PUBLICATION_ARCHITECTURE_20260925.md`.
 
-## Active paper: PAYOFF-B short theorem paper
+## Paper 1: PAYOFF-B exact theorem
+
 
 Target:
 
@@ -97,6 +102,48 @@ EXTERNAL_ACTIONS = author metadata + funding/COI/contributions + AI disclosure a
 ```
 
 The paper should not carry the full PAYOFF hierarchy. In particular, do not make continuous architecture, general topology, generic spatial spectral theory, or rare-mutation occupancy co-equal storylines.
+
+## Paper 2: integrated tracking ecology — PREOUTCOME
+
+Experimental canonical source on this branch:
+
+`manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`
+
+Headline inference:
+
+**Mismatch is an outcome, not a tracking architecture. Low mismatch can conceal a changing burden distributed across movement, timing, environmental information and actuation.**
+
+The integrated sequence is:
+
+```text
+simple seasonal-timescale benchmark
+-> local movement/timing non-identifiability
+-> finite-capacity / fragmentation / coordination breakdown
+-> 55-species rejection of one universal natural speed optimum
+-> direct phase-control decomposition in mule deer, barnacle goose and wigeon
+-> preregistered within-taxon Aikens actuation-to-retention test
+```
+
+Current state:
+
+```text
+ACTIVE_PUBLICATION_QUEUE = experimental
+ROLE = INTEGRATED_BROAD_ECOLOGY_PAPER
+SCIENTIFIC_STATE = PREOUTCOME
+OPEN_SCIENCE_GATE = registered Aikens lambda outcome
+RETUNING_AFTER_AIKENS = forbidden
+```
+
+The existing frozen sources remain intact as provenance and rollback sources:
+
+- `manuscript/PAYOFF_B_TRACKING_THEORY_V1.md`;
+- `manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md`.
+
+If the integrated architecture is adopted, those two sources are not submitted
+as separate overlapping papers. The already frozen Oikos package remains a
+rollback artifact until the integrated manuscript has passed its own figure,
+reference, anonymity and submission-package audits.
+
 
 ## DOI modules / dormant branches
 
