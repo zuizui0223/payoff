@@ -1,24 +1,24 @@
-# Migration timing as phase control: environmental information and phase retention across migratory taxa
+# No universal migration–phenology speed optimum: scale-dependent phase control across migratory systems
 
-**Running title:** Phase control of migration
+**Running title:** Scale-dependent phase control
 
 ## Abstract
 
-**Aim:** We test whether migratory systems consistently contract incoming phenological phase deviation and whether explicit interval standardization separates segment scale from biological correction strength.
+**Aim:** We test whether migration follows one universal animal-to-environment speed optimum and, if not, whether phase control better describes timing correction.
 
-**Location:** Eastern North America, the western United States, North Atlantic–Arctic goose flyways, and the Eurasian wigeon migration corridor.
+**Location:** Eastern North America, western USA, North Atlantic–Arctic flyways and the Eurasian wigeon corridor.
 
-**Time period:** Published movement and phenology datasets spanning 2002–2020, with longer environmental baselines where required.
+**Time period:** Movement and phenology data from 2002–2020, with longer environmental baselines.
 
-**Major taxa studied:** Migratory birds and ungulates, with direct reconstructions for mule deer (*Odocoileus hemionus*), barnacle goose (*Branta leucopsis*) and Eurasian wigeon (*Mareca penelope*).
+**Major taxa studied:** Migratory birds and ungulates; direct systems were mule deer, barnacle goose and Eurasian wigeon.
 
-**Methods:** Across 55 bird species we tested a universal movement-to-phenology speed optimum, then estimated signed phase retention over declared intervals in three direct taxa. Before opening Aikens outcomes, we froze secondary interval-normalized and cumulative-memory summaries. We also estimated environmental innovation and tested industrial-development forcing.
+**Methods:** We tested the speed hypothesis in 5,816 observations from 55 bird species, then estimated phase retention, actuator responses and interval-standardized retained memory in three direct systems. A within-taxon development perturbation was preregistered separately.
 
-**Results:** Broad bird data rejected a universal speed optimum. Raw λ was ~0.11 in mule deer and highlighted goose transitions but 0.75–0.81 in wigeon; interval lengths differed markedly. Across a typical seven wigeon transitions, retained incoming-error memory was 0.133 (POWER) or 0.231 (ERA5), the same order as whole-migration mule deer (0.107), although conservative SIMEX allowed 0.627. Predictability did not map monotonically onto correction strength. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
+**Results:** The 55-species analysis did not support one universal speed optimum: minima were shallow and species-level optima heterogeneous. Direct systems showed phase contraction through different mechanisms and interval scales. Typical seven-transition wigeon retained memory was 0.133 (POWER) or 0.231 (ERA5), versus 0.107 over whole-migration mule deer; conservative SIMEX allowed 0.627. <!-- AIKENS_LAMBDA_ABSTRACT_START -->
 [AIKENS LAMBDA ABSTRACT PENDING — render from the registered result JSON before submission.]
 <!-- AIKENS_LAMBDA_ABSTRACT_END -->
 
-**Main conclusions:** Phase retention is a common estimator form, not a directly comparable raw magnitude. Interval-standardized cumulative memory is more interpretable across systems, but measurement error prevents a universal migration-wide correction fraction. Environmental information, correction and physical actuators remain separable.
+**Main conclusions:** Migration does not collapse onto one universal speed rule. Direct systems instead support scale-dependent phase feedback through different actuators. Phase control explains the broad failure without replacing it with a universal retention coefficient.
 
 **Keywords:** animal tracking, biologging, environmental predictability, green wave, macroecology, migration, phenological mismatch, phase retention, plasticity, spring phenology
 
@@ -72,7 +72,15 @@ V_{i+1}
 
 The equation is standard control/AR algebra; our ecological question is whether separating environmental innovation from phase retention organizes migration systems better than treating both as a single “tracking ability.”
 
-We therefore tested four linked predictions. First, a broad universal speed optimum should fail if systems differ in target phase and controller architecture. Second, direct phase contraction should nevertheless be measurable across taxonomically different migrants. Third, environmental predictability and realized phase correction should act as separable channels rather than necessarily covarying positively. Fourth, a perturbation that constrains movement should attenuate realized control even if the migration corridor remains spatially traversable.
+We therefore used a deliberately hierarchical design.
+
+**Tier 1 was the primary macroecological test:** does one universal movement-to-phenology speed optimum organize migration across 55 bird species? A positive result would have supported a portable natural speed rule; a broad negative result would reject that simplification.
+
+**Tier 2 was mechanistic decomposition:** if the universal speed rule fails, can direct migratory systems still be described as phase-error controllers, and do different movement architectures achieve correction on different interval scales? Mule deer, barnacle geese and wigeon are therefore not treated as three independent estimates of one universal coefficient. They are case studies of how a common feedback form is implemented differently.
+
+**Tier 3 was perturbation:** does an independently observed movement constraint propagate into phase retention within a taxon under a preregistered forcing contrast?
+
+This hierarchy separates the general macroecological conclusion from the smaller mechanistic panel. The 55-species test determines whether a universal speed rule survives; the direct systems explain what replaces that rule when it does not.
 
 ## Methods
 
@@ -348,9 +356,11 @@ classified as not estimable without changing the interval, tolerance, product
 or support threshold. This within-taxon perturbation is kept separate from the
 cross-taxon lambda synthesis.
 
-### Cross-taxon synthesis and claim control
+### Cross-system synthesis and claim control
 
-We reduced the direct registry to one descriptive record per taxon before cross-taxon presentation. Barnacle-goose routes contribute an observed within-taxon range, not independent meta-analytic weights. At three taxa we did not estimate a pooled universal \(\lambda\).
+The broad 55-species speed-ratio analysis is the primary cross-system test. The three direct taxa are a mechanistic panel rather than a three-study meta-analysis.
+
+We therefore reduced the direct registry to one descriptive record per taxon and did not estimate a pooled universal \(\lambda\). Barnacle-goose routes contribute an observed within-taxon range, not independent taxonomic weights. Interval-standardized quantities are used only to diagnose how much of the apparent between-system magnitude difference is attributable to correction scale; they are not promoted as a universal biological rate.
 
 We separately audited prior literature. Green-wave surfing, surf-versus-jump strategies, migration-timing plasticity, predictability effects, compensatory movement, anthropogenic decoupling, ecosystem engineering, and generic negative-feedback mathematics were treated as prior art rather than novel claims.
 
@@ -646,13 +656,15 @@ the typical observed seven-transition animal-year gives retained-memory
 
 ## Discussion
 
-### A failed universal-optimum hypothesis reveals a more useful invariant
+### The broad result is the absence of a universal speed rule
 
-The broad bird analysis was designed as a direct transport test of the PAYOFF-B timescale idea. Its failure is therefore part of the result, not a nuisance. Raw animal-to-environment speed matching does not collapse heterogeneous migration systems onto one optimum. Once system-specific phase is recognized, however, a more transferable question appears: how much incoming phase deviation is retained after movement?
+The broad bird analysis is the strongest independent test in the empirical programme because it spans 55 species rather than a handful of reconstructed controller systems. It does not support a single natural animal-to-environment speed optimum. Raw mismatch favored a point well below one, local phase centering moved the point estimate toward one, but the surface remained shallow and species-level optima were heterogeneous. No measured moderator recovered a convincing universal rule.
 
-This reframing preserves the temporal core of PAYOFF-B without claiming that a two-patch fixed-rate optimum should appear literally in continuous natural migrations.
+That negative result is the macroecological conclusion, not a failed prelude. A single speed ratio is too coarse because migration systems differ in target phase, route structure, opportunities to wait, and the interval over which correction is expressed.
 
-### Phase retention is more portable as an estimator form than as a raw magnitude
+The direct systems are therefore used to explain the failure rather than to replace one universal constant with another. Mule deer, barnacle geese and wigeon all show phase transformation, but they do so through different actuator architectures and on markedly different segment scales. Phase retention provides a common mathematical language for those feedbacks; interval standardization makes clear that the raw coefficient itself is not the invariant.
+
+### Direct controller systems explain how the universal rule breaks
 
 Mule deer, barnacle geese and wigeon all admit direct phase-retention
 representations, but unequal segment durations show why a common regression
@@ -777,13 +789,16 @@ differences.
 ### Outlook
 
 The immediate next step is neither a pooled universal \(\lambda\) nor mechanical
-taxonomic expansion. The present evidence identifies two sharper tests.
+taxonomic expansion. The main macroecological result already comes from the
+55-species test; adding more direct taxa would not strengthen that result by
+simple counting.
 
-First, the preregistered industrial-mule-deer perturbation asks whether a
-forcing regime that independently attenuates movement control also changes
-phase retention while holding taxon fixed. Second, an independent reliability calibration should be added for the
-mule-deer phase coordinate before cross-taxon differences in \(\lambda\)
-magnitude are interpreted biologically. The current reliability contrasts
+The sharper next tests concern mechanism. First, the preregistered
+industrial-mule-deer perturbation asks whether a forcing regime that
+independently attenuates movement control also changes phase retention while
+holding taxon fixed. Second, independent reliability calibration should be
+added for the mule-deer phase coordinate before remaining cross-system
+differences in standardized retention are interpreted biologically. The current reliability contrasts
 already show two distinct cases: wigeon phase retention reproduces while one
 proposed actuator does not, whereas the highlighted Greenland, Barents and
 Svalbard goose transitions reproduce both phase transformation and stopover
@@ -816,7 +831,9 @@ real ecological forcing.
 
 ## Conclusion
 
-Phenological migration does not collapse onto one natural migration rate, zero-lag target, or universal behavioral feedback coefficient. Across three directly reconstructed taxa, incoming phase deviation can be represented with a common retention estimator form, but raw coefficient magnitudes depend on the declared ecological interval. Explicit interval standardization shows that some apparently large cross-system differences shrink when retention is propagated over a migration sequence, while measurement-error sensitivity prevents a universal migration-wide correction fraction.
+The primary empirical conclusion is negative but general: phenological migration does not collapse onto one natural animal-to-environment speed optimum. Across 55 bird species, the location of the apparent optimum depended on phase centering and remained shallow and heterogeneous rather than defining one portable speed rule.
+
+The direct controller systems explain why. Incoming phase deviation can be transformed through movement speed, stopover and route-stage responses, but the resulting retention coefficient is conditional on the ecological interval over which correction is measured. Interval standardization shrinks some apparent between-system differences without producing a new universal migration-wide coefficient.
 
 Separating phase retention from environmental innovation clarifies why precise migration timing can arise through predictable environments, strong realized correction, or both. Quantitative disturbance evidence further shows that actuation can be attenuated without supporting every stronger temporal prediction.
 
@@ -824,7 +841,7 @@ Separating phase retention from environmental innovation clarifies why precise m
 [AIKENS LAMBDA CONCLUSION PENDING — render from the registered result JSON before submission.]
 <!-- AIKENS_LAMBDA_CONCLUSION_END -->
 
-The resulting picture is not a universal controller. It is a common phase-control problem in which the estimator form is portable, the raw magnitude is interval-dependent, and the physical actuators remain contingent on system, environmental reconstruction and scale. Cross-system biological comparison therefore rests on predeclared interval-standardized secondary coordinates rather than on ranking raw λ values.
+The resulting picture is therefore not “one optimal speed” and not “one universal \(\lambda\).” It is a family of phase-control problems whose feedback architecture and correction scale differ among systems. The macroecological regularity is the failure of a universal speed rule; the mechanistic regularity is that migrants can actively transform phase error through system-specific feedback.
 
 ## Data and Code Availability Statement
 
@@ -862,10 +879,10 @@ All analyses use previously published public datasets or archived source data. R
 
 This manuscript supports:
 
-- failure of a universal natural speed-ratio optimum in the registered broad bird test;
+- **as the primary cross-system result**, failure of a universal natural speed-ratio optimum in the registered 55-species broad bird test;
 - source-faithful naive phase-retention estimates in mule deer, barnacle goose and prospectively tested wigeon;
 - a pre-Aikens observation-error recovery analysis showing that the wigeon estimator remains below true-lambda=1 null expectations across frozen replicate-disagreement sensitivities, while the registered ERA5-Land calibration itself fails its coverage gate;
-- source-faithful phase-retention estimates in three direct taxa, including wigeon contraction reproduced under independent POWER and ERA5 environmental surfaces;
+- **as mechanistic decomposition rather than independent meta-analytic replication**, source-faithful phase-retention estimates in three direct taxa, including wigeon contraction reproduced under independent POWER and ERA5 environmental surfaces;
 - a pre-Aikens interval-standardization contract separating raw segment-scale λ from equivalent daily magnitude decay and homogeneous path-memory retention;
 - wigeon typical seven-transition retained-memory values of about 0.133 (POWER) and 0.231 (ERA5), while the conservative SIMEX sensitivity permits substantially greater retained memory;
 - separation of environmental innovation from realized phase retention;
@@ -874,6 +891,7 @@ This manuscript supports:
 It does not support:
 
 - a universal phase-retention coefficient;
+- treating the three direct taxa as three independent estimates of one universal biological controller;
 - direct biological ranking of taxa by raw λ magnitude across incompatible interval definitions;
 - a universal claim that migration removes 80–90% of phase deviation;
 - a final measurement-error-corrected latent wigeon lambda or a completed cross-taxon reliability correction;
