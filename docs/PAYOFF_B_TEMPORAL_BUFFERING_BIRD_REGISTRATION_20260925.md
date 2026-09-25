@@ -151,3 +151,16 @@ variable.
 
 A failure does not reopen the synthetic mechanism result or license alternative
 splits, traits or models.
+
+
+## Response-blind implementation clarification
+
+Added before any holdout readout:
+
+- calibration observation counts refer to rows with finite arrival and green-up
+  dates that enter the timing-gain regression;
+- the calibration green-up baseline is the mean of **unique cell × year**
+  green-up values within each cell, so unequal species coverage does not
+  reweight years.
+
+No split, threshold, primary term, direction or support rule changed.
