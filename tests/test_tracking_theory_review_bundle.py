@@ -35,6 +35,8 @@ def test_anonymous_review_bundle_contains_frozen_evidence_and_code(tmp_path):
         "data/payoff_b_2d_connectivity_receipt_20260920.json",
         "data/payoff_b_closed_loop_tracking_receipt_20260920.json",
         "data/payoff_b_movement_feedback_landscape_receipt_20260920.json",
+        "data/payoff_b_tracking_theory_claim_freeze_20260924.json",
+        "data/payoff_b_tracking_theory_framing_amendment_20260925.json",
         "theory/MIGRATION_PHENOLOGY_TRACKING.md",
         "theory/CLOSED_LOOP_MOVEMENT_PHENOLOGY_TRACKING.md",
         "scripts/migration_phenology_2d_coevolution.py",
@@ -103,3 +105,18 @@ def test_review_bundle_resolves_relative_and_bare_local_imports():
         in bare_local
     )
     assert "build_tracking_theory_figure_data" not in bare_external
+
+
+def test_review_bundle_declares_current_framing_authority(tmp_path):
+    out = tmp_path / "review"
+    manifest = build_review_bundle(out, None)
+    readme = (out / "README_REVIEW.md").read_text(encoding="utf-8")
+
+    assert manifest["framing_amendment_date"] == "2026-09-25"
+    assert (
+        manifest["current_framing_authority"]
+        == "data/payoff_b_tracking_theory_framing_amendment_20260925.json"
+    )
+    assert "Framing authority" in readme
+    assert "2026-09-24 claim-freeze JSON is retained as provenance" in readme
+    assert "2026-09-25 framing amendment is authoritative" in readme

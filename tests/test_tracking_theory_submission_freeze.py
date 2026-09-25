@@ -29,9 +29,10 @@ def test_tracking_theory_final_novelty_sentence_is_amendment_frozen():
 def test_tracking_theory_visual_audit_is_frozen():
     assert AUDIT.exists()
     text = AUDIT.read_text(encoding="utf-8")
-    assert "35987790697" in text
-    assert "10803495155" in text
-    assert "0d61c3f691d3d37cdffcb3703ec0fd6dd43efdf1d3442cda1cd8ba379a01914e" in text
+    assert "36089011639" in text
+    assert "10845126875" in text
+    assert "5249d69a52b0e95f958432d121910bc1b45a90f6074ac7f5961492b3f2453513" in text
+    assert "buffered mismatch to tracking breakdown" in text
     for figure in range(1, 7):
         assert f"| {figure} |" in text
     assert text.count("| PASS |") == 6
@@ -43,6 +44,10 @@ def test_tracking_theory_readiness_declares_scientific_freeze():
     assert "No unresolved synthetic result" in text
     assert "human/administrative rather than scientific or mechanical" in text
     assert "No unresolved synthetic result" in text
+    assert "10" in text
+    assert "235" in text
+    assert "endpoint mismatch" in text
+    assert "OIKOS_MACHINE_PREPARATION_AUDIT_20260925.md" in text
 
 
 def test_tracking_theory_freeze_assets_exist():

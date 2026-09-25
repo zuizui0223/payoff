@@ -1,20 +1,22 @@
 # PAYOFF-B tracking theory — submission package index
 
-Updated: **2026-09-24**
+Updated: **2026-09-25**
 
 Status: **scientifically frozen for first-submission preparation**
 
-Branch:
+Canonical branch:
 
-`feature/payoff-b-migration-phenology-20260919`
+`main`
 
 ## Core manuscript
 
 - `manuscript/PAYOFF_B_TRACKING_THEORY_V1.md`
   - standalone synthetic theory manuscript;
   - separate from the GEB empirical phase-retention programme;
-  - final novelty sentence frozen around adaptive capacity versus unilateral
-    accessibility.
+  - current framing is governed by the 2026-09-25 amendment: endpoint
+    environmental mismatch does not identify the tracking architecture that
+    produces it; coordination barriers are retained as one buffering-failure
+    mode rather than the sole headline.
 
 ## Claim and provenance boundary
 
@@ -23,10 +25,14 @@ Branch:
 - `docs/PAYOFF_B_TRACKING_THEORY_PRIOR_ART_20260924.md`
 - five frozen 2026-09-20 synthetic receipt families in `data/` and `docs/`
 
-Rule:
+Authority rule:
 
-No post-2026-09-20 empirical phase-retention result licenses a new synthetic
-claim in this manuscript.
+- the 2026-09-24 claim freeze governs the scientific evidence and numerical
+  claim boundary;
+- the 2026-09-25 framing amendment governs the current title, headline
+  contribution, novelty hierarchy, and testability framing when wording differs;
+- no post-2026-09-20 empirical phase-retention result licenses a new synthetic
+  claim in this manuscript.
 
 ## Figures
 
@@ -55,11 +61,12 @@ Visual audit:
 
 - `submission/PAYOFF_B_TRACKING_FIGURE_VISUAL_AUDIT.md`
 
-Audited green artifact:
+Post-reframing audited figure artifact:
 
-- workflow run `35987790697`;
-- artifact `10803495155`;
-- SHA256 `0d61c3f691d3d37cdffcb3703ec0fd6dd43efdf1d3442cda1cd8ba379a01914e`.
+- audited main HEAD `a89deb56ae096bf2d3840b16cfed2a7cd7f1dc98`;
+- workflow run `36089011639`;
+- artifact `10845126875`;
+- SHA256 `5249d69a52b0e95f958432d121910bc1b45a90f6074ac7f5961492b3f2453513`.
 
 ## Methods and result organization
 
@@ -93,7 +100,7 @@ BibTeX:
 
 Current manuscript reference count:
 
-- eight normalized references;
+- **10** normalized references;
 - DOI metadata checked and guarded by CI.
 
 ## Submission readiness
@@ -120,7 +127,8 @@ Oikos handoff:
 
 - `submission/OIKOS_TRACKING_HANDOFF_V1.md`
 - `submission/OIKOS_INITIAL_SUBMISSION_PACKET.md`
-- `submission/OIKOS_MACHINE_PREPARATION_AUDIT_20260924.md`
+- current machine audit: `submission/OIKOS_MACHINE_PREPARATION_AUDIT_20260925.md`
+- historical pre-reframing audit: `submission/OIKOS_MACHINE_PREPARATION_AUDIT_20260924.md`
 
 Tracking-specific administrative templates:
 
@@ -190,7 +198,7 @@ The tracking-theory package is guarded by tests covering:
 - parameter-map values;
 - Results-to-Figure and supplement maps;
 - bibliography normalization;
-- final novelty sentence;
+- current framing-amendment authority and novelty boundary;
 - visual-audit receipt;
 - scientific-freeze declaration;
 - Oikos abstract <=300-word/citation/acronym compliance;

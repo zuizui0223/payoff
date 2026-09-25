@@ -1,18 +1,22 @@
 # PAYOFF-B tracking theory — submission readiness
 
-Updated: **2026-09-24**
+Updated: **2026-09-25**
 
 Canonical manuscript:
 
 `manuscript/PAYOFF_B_TRACKING_THEORY_V1.md`
 
-Canonical scientific claim freeze:
+Canonical scientific evidence / numerical-claim freeze:
 
 `data/payoff_b_tracking_theory_claim_freeze_20260924.json`
 
-Submission-framing amendment, with scientific evidence unchanged:
+Current submission-framing authority, with scientific evidence unchanged:
 
 `data/payoff_b_tracking_theory_framing_amendment_20260925.json`
+
+Where the two files differ only in narrative framing, the 2026-09-25 amendment
+is authoritative; the original freeze remains the provenance record for the
+underlying evidence.
 
 Canonical prior-art boundary:
 
@@ -51,19 +55,20 @@ Canonical figure captions:
   receipt through `submission/PAYOFF_B_TRACKING_RESULTS_FIGURE_CROSSWALK.md`;
 - the existing robustness programme is organized into Supplements S1–S6 in
   `submission/PAYOFF_B_TRACKING_SUPPLEMENT_MAP.md`;
-- the eight references currently cited by the manuscript are normalized in
+- the **10** references currently cited by the manuscript are normalized in
   `submission/PAYOFF_B_TRACKING_REFERENCES.bib` with DOI-checked metadata;
-- all six rendered SVGs passed a visual clipping/overlap audit recorded in
-  `submission/PAYOFF_B_TRACKING_FIGURE_VISUAL_AUDIT.md` against green run
-  `35987790697`;
-- the final novelty sentence is frozen in the manuscript as separation of
-  adaptive capacity from unilateral accessibility, not as novelty of
-  space-time climate response itself;
+- all six post-reframing SVGs passed a fresh visual clipping/overlap audit
+  recorded in `submission/PAYOFF_B_TRACKING_FIGURE_VISUAL_AUDIT.md` against
+  green main run `36089011639` and artifact `10845126875`;
+- the current contribution is frozen around **endpoint mismatch versus the
+  tracking architecture that produces it**, followed by explicit finite-capacity,
+  landscape and partner-dependent buffering failures; adaptive accessibility is
+  retained as one downstream failure mechanism rather than the sole headline;
 - journal targeting is frozen for preparation purposes as Oikos first shot,
   Theoretical Ecology fallback, with a dedicated Oikos handoff and
   tracking-specific title-page/cover-letter templates;
-- the frozen abstract passes the Oikos <=300-word contract at 295 words with no
-  citations or unexplained all-caps acronym tokens;
+- the post-reframing abstract passes the Oikos <=300-word contract at **235
+  words**, with no citations or unexplained all-caps acronym tokens;
 - a portal-ready Supporting Information document is generated directly from
   the five frozen JSON receipts and bundled automatically;
 - an anonymous code/data review ZIP is reproducibly generated from the
@@ -71,10 +76,11 @@ Canonical figure captions:
   and excludes empirical-programme paths and author-identifying tokens;
 - the initial-submission Data Availability statement and AI-use disclosure are
   drafted for Oikos without inventing a repository DOI;
-- the complete Oikos machine-preparation audit is frozen in
-  `submission/OIKOS_MACHINE_PREPARATION_AUDIT_20260924.md`: green PR run,
-  deterministic submission/review archives, zero anonymity violations, and
-  rendered-RFT layout checks all pass.
+- the post-reframing Oikos machine-preparation audit is maintained in
+  `submission/OIKOS_MACHINE_PREPARATION_AUDIT_20260925.md`; it supersedes the
+  2026-09-24 submission-layout receipt while preserving that older audit as
+  history. The refreshed RTF render has 28 anonymous-main pages and 10 SI pages,
+  with no observed clipping or overlap.
 
 ## Not required before a first manuscript freeze
 
