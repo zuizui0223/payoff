@@ -41,51 +41,42 @@ def strip_rule(text: str) -> str:
 def structured_abstract(aikens_abstract_block: str) -> str:
     return f"""## Abstract
 
-**Aim:** Test whether seasonal timing can replace spatial tracking under sustained
-environmental change or instead acts as a finite buffer that postpones movement,
-and ask whether natural migration collapses onto one portable
-animal-speed/environmental-wave-speed optimum.
+**Aim:** Test whether seasonal timing can replace spatial tracking under
+sustained environmental change or instead provides only finite buffering.
 
-**Location:** Synthetic landscapes; eastern North America for the broad
-55-species bird analysis; and published North American and northern
-European–Arctic migration systems for direct phase-control reconstruction.
+**Location:** Synthetic landscapes; eastern North America; and published North
+American and northern European–Arctic migration systems.
 
-**Time period:** Broad bird analysis, 2002–2017; direct systems use the archived
-periods of their source studies; synthetic analyses have no calendar period.
+**Time period:** Bird analysis, 2002–2017; direct systems follow their source
+studies; synthetic analyses have no calendar period.
 
 **Major taxa studied:** Fifty-five migratory bird species, mule deer
 (*Odocoileus hemionus*), barnacle goose (*Branta leucopsis*) and Eurasian
 wigeon (*Mareca penelope*).
 
-**Methods:** We combined an exact local movement–timing feedback null, explicit
-moving-landscape simulations, a registered macroecological reanalysis, and
-scale-declared phase-retention reconstructions with independent environmental
-reliability checks.
+**Methods:** We combined a movement–timing substitution null, explicit
+moving-landscape simulations, a registered 55-species reanalysis, a
+response-blind chronological holdout, and scale-declared phase-retention
+reconstructions.
 
-**Results:** Movement and timing can generate identical local mismatch dynamics,
-but explicit landscapes show that finite timing acts as a temporary bypass:
-phenological capacity expands persistence and reduces route costs before movement
-re-enters under stronger directional forcing. Across 5,816 bird observations,
-one universal natural speed optimum was not supported. A registered 2002–2009 /
-2010–2017 holdout then found that stronger historical timing responsiveness did
-not flatten later mismatch dependence on movement speed; the quadratic
-moderation was opposite-signed (+0.035 ± 0.029, p=0.225). Direct systems
-transformed incoming phase error through different actuator architectures and
-ecological intervals.
+**Results:** Finite timing expanded persistence and reduced route costs before
+movement re-entered under stronger forcing. The 55-species analysis did not
+support one universal natural speed optimum. In the registered 2002–2009 /
+2010–2017 holdout, stronger historical timing responsiveness did not flatten
+later mismatch dependence on movement speed; the quadratic moderation was
+opposite-signed (+0.035 ± 0.029, p=0.225). Direct systems transformed phase
+error through different actuator architectures and ecological intervals.
 {ABSTRACT_START}
 {aikens_abstract_block}
 {ABSTRACT_END}
 
-**Main conclusions:** Temporal adjustment buffers rather than permanently
-replaces spatial tracking under sustained environmental change. The natural
-holdout likewise provides no evidence that greater timing responsiveness makes
-movement-speed matching dispensable. Low mismatch can therefore coexist with
-continued dependence on spatial tracking and is not a direct measure of
-remaining resilience.
+**Main conclusions:** Temporal adjustment improves tracking but does not make
+spatial tracking dispensable. Timing primarily shifts phase, whereas movement
+speed controls propagation mismatch, so low mismatch can coexist with continued
+dependence on movement.
 
 **Keywords:** {", ".join(KEYWORDS)}
 """
-
 
 def extract_caption_body() -> str:
     text = CAPTIONS.read_text(encoding="utf-8")
@@ -128,9 +119,25 @@ def build_source(source_path: Path = DEFAULT_SOURCE) -> str:
     figure_start = source.index("## Figure architecture")
 
     body = strip_rule(source[body_start:prior_start])
-    prior = strip_rule(
-        source[prior_start + len("## Prior-art boundary"):refs_start]
-    ).strip()
+    # GEB uses a compact literature-positioning paragraph so the
+    # journal-facing source retains outcome-rendering headroom under the
+    # ~5,000-word Research Article envelope. All references remain cited.
+    prior = (
+        "Phenological mismatch and climate-driven timing shifts are established "
+        "(Post et al. 2001; Visser & Gienapp 2019; Kharouba & Wolkovich 2020; "
+        "Weir & Phillimore 2024), as are coupled space–time responses "
+        "(Harsch et al. 2017; Macgregor et al. 2019; Hällfors et al. 2021; "
+        "Muthukrishnan et al. 2025; Fredston et al. 2025; Pontarp et al. 2015), "
+        "green-wave and compensatory migration (Bischof et al. 2012; "
+        "Aikens et al. 2017; Ortega et al. 2023; Amaral et al. 2025; "
+        "van Toor et al. 2021), information effects (Kölzsch et al. 2015; "
+        "Bauer et al. 2020; Torstenson & Shaw 2025), interaction mismatch "
+        "(Gilman et al. 2012), ecosystem engineering (Geremia et al. 2019), "
+        "and anthropogenic decoupling (Aikens et al. 2022). Our narrower "
+        "contribution is the finite-buffering / spatial-reentry mechanism, its "
+        "registered natural substitution test, and the phase–velocity division "
+        "of labor that follows."
+    )
     references = strip_rule(source[refs_start:figure_start]).strip()
 
     limitation = "### 5.8 Limitations"
