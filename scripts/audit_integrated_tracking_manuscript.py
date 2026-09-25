@@ -66,7 +66,7 @@ def reference_records(refs: str) -> list[dict]:
 def cited_in_body(body: str, surname: str, year: int) -> bool:
     pattern = (
         rf"(?i)(?<![\w]){re.escape(surname)}(?![\w])"
-        rf"[^\n.]{{0,180}}(?<!\d){year}(?!\d)"
+        rf"[^\n]{{0,180}}(?<!\d){year}(?!\d)"
     )
     return bool(re.search(pattern, body))
 
