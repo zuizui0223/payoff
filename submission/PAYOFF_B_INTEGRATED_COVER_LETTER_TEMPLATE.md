@@ -11,30 +11,32 @@ Please consider our manuscript, **“Hidden tracking: why environmental mismatch
 does not reveal how organisms keep pace with changing environments,”** for
 publication as **[article type]** in **[journal]**.
 
-Observed environmental mismatch is often interpreted as a direct measure of
-how successfully organisms track changing conditions. Our manuscript shows why
-that endpoint can be misleading when tracking is distributed among movement,
-seasonal timing, environmental information and behavioral actuation.
+Organisms can track changing conditions by moving through space or shifting
+seasonal timing. Our manuscript tests whether temporal adjustment can replace
+spatial tracking under sustained environmental change or instead acts as a
+finite buffer that postpones movement.
 
-The paper follows one falsification-and-explanation sequence. A local controller
-first establishes a deliberately strong null in which movement and timing can
-produce the same mismatch through different allocations of corrective effort.
-Explicit landscapes then show how finite timing capacity, fragmentation and
-partner dependence break that equivalence. We next test the corresponding
-one-dimensional natural prediction in 5,816 observations from 55 migratory bird
-species and find no portable animal-speed/environmental-wave-speed optimum.
-Direct reconstructions in mule deer, barnacle geese and Eurasian wigeon then
-show what replaces that failed universal rule: phase error can be transformed
-through different actuator architectures and over different ecological
-intervals.
+The paper follows one mechanism-to-falsification sequence. A local controller
+first establishes a deliberately strong substitution null in which movement and
+timing can carry the same corrective burden. Explicit landscapes then show the
+ecological asymmetry: timing capacity is finite. It expands persistence and
+buffers immediate fragmentation costs, but movement re-enters under stronger
+directional forcing, while partner dependence can block the required
+reallocation. We next test the corresponding one-dimensional natural prediction
+in 5,816 observations from 55 migratory bird species and find no portable
+animal-speed/environmental-wave-speed optimum. Direct reconstructions in mule
+deer, barnacle geese and Eurasian wigeon show phase correction through different
+actuator architectures and ecological intervals.
 
 The novelty claim is intentionally narrow. We do not claim novelty for
 phenological mismatch, green-wave tracking, combined spatial and temporal
 responses, migration-timing plasticity, environmental predictability effects,
-or generic negative-feedback mathematics. The contribution is the linked
-inference argument that **mismatch is an outcome, not a tracking architecture**,
-together with explicit ecological failure conditions and a broad empirical
-falsification of a single natural speed rule.
+or generic negative-feedback mathematics. The contribution is the demonstration
+that **temporal buffering delays but does not permanently replace spatial
+tracking** in the declared moving-landscape models, together with a broad
+empirical falsification of a single natural speed rule. Low mismatch can
+therefore conceal latent spatial tracking demand; the familiar identification
+problem is an ecological consequence rather than the headline result.
 
 The exact anti-phase migration-optimum theorem that motivates the simplest
 timescale benchmark is developed in a separate short mathematical manuscript.
