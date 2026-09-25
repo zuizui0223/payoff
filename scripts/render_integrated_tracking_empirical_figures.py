@@ -241,9 +241,19 @@ def render_all(output_dir: Path, aikens_result_path: Path | None = None) -> dict
     render_figure4(paths["figure_4"],broad)
     render_figure5(paths["figure_5"],inputs,panel,standard)
     render_figure6(paths["figure_6"],inputs,aikens)
+    aikens_result_present = aikens is not None
+    aikens_outcome_opened = False
+    if aikens is not None:
+        aikens_outcome_opened = bool(
+            aikens.get(
+                "lambda_outcome_opened",
+                aikens.get("status") != "phase_retention_contrast_not_estimable",
+            )
+        )
     manifest={
         "status":"integrated_tracking_empirical_figures",
-        "aikens_outcome_opened":aikens is not None,
+        "aikens_result_present":aikens_result_present,
+        "aikens_outcome_opened":aikens_outcome_opened,
         "sources":[str(BROAD.relative_to(ROOT)),str(INPUTS.relative_to(ROOT)),str(PANEL.relative_to(ROOT)),str(STANDARD.relative_to(ROOT))],
         "files":{k:{"path":str(v),"sha256":sha256(v)} for k,v in paths.items()},
     }
