@@ -139,6 +139,8 @@ def audit(path: Path) -> dict:
         "structured_abstract_complete": not headings_missing,
         "abstract_at_most_300_words": len(words(abstract_for_count)) <= 300,
         "main_body_at_most_5000_words": len(words(main)) <= 5000,
+        "abstract_reserves_outcome_headroom": len(words(abstract_for_count)) <= 250,
+        "main_body_reserves_outcome_headroom": len(words(main)) <= 4850,
         "reference_count_at_most_50": len(reference_rows) <= 50,
         "all_references_cited": not uncited,
         "display_pieces_6_to_8": 6 <= len(figures) <= 8,
