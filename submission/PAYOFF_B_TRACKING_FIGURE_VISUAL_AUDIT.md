@@ -1,18 +1,16 @@
 # PAYOFF-B tracking theory — figure visual audit
 
-Audited: **2026-09-24**
+Audited: **2026-09-25**
 
-Branch:
+Scope: **post-reframing Oikos figure set**
 
-`feature/payoff-b-migration-phenology-20260919`
+Audited main HEAD:
 
-Audited HEAD:
-
-`3cb931230b6ddc294d7ef6615f44de89a3bda7ce`
+`a89deb56ae096bf2d3840b16cfed2a7cd7f1dc98`
 
 Green workflow run:
 
-`35987790697`
+`36089011639`
 
 Artifact:
 
@@ -20,17 +18,21 @@ Artifact:
 
 Artifact ID:
 
-`10803495155`
+`10845126875`
 
 Artifact SHA256:
 
-`0d61c3f691d3d37cdffcb3703ec0fd6dd43efdf1d3442cda1cd8ba379a01914e`
+`5249d69a52b0e95f958432d121910bc1b45a90f6074ac7f5961492b3f2453513`
+
+This supersedes the layout receipt from 2026-09-24 for the current
+mismatch-buffering framing. The earlier audit remains in repository history but
+does not govern the post-reframing Figure 1.
 
 ## Audit method
 
-The CI artifact was downloaded from the successful workflow run, the six SVG
-files were rasterized at their native 1200 x 720 canvas, and each figure was
-inspected for:
+The successful main artifact was downloaded and all six SVG files were
+rasterized at their native **1200 x 720** canvas. The complete six-figure set
+was visually inspected for:
 
 - text clipping;
 - panel overlap;
@@ -38,26 +40,28 @@ inspected for:
 - titles colliding with neighboring panels;
 - unreadable wrapping;
 - annotations colliding with axes;
-- scientific values changing during layout repair.
+- accidental numeric changes during the framing revision.
 
 This is a visual-layout audit only. Numeric content remains governed by the
-frozen figure-data and claim contracts.
+frozen 2026-09-20 figure-data and scientific claim contracts.
 
 ## Result
 
 | Figure | File | Visual status | Notes |
 |---|---|---|---|
-| 1 | `PAYOFF_B_TRACKING_FIG1_CONCEPT.svg` | PASS | all seven conceptual boxes fit; wrapped titles/subtitles remain inside boxes |
-| 2 | `PAYOFF_B_TRACKING_FIG2_TEMPORAL_BYPASS.svg` | PASS | A/B panels remain distinct; lower annotations fit inside canvas |
-| 3 | `PAYOFF_B_TRACKING_FIG3_COORDINATION_GATE.svg` | PASS | negative and positive bars, zero line and labels are all legible |
-| 4 | `PAYOFF_B_TRACKING_FIG4_SYNCHRONIZATION.svg` | PASS | strong-forcing endpoint descriptions wrap inside all three boxes |
+| 1 | `PAYOFF_B_TRACKING_FIG1_CONCEPT.svg` | PASS | new “buffered mismatch to tracking breakdown” headline and all seven conceptual boxes fit without clipping |
+| 2 | `PAYOFF_B_TRACKING_FIG2_TEMPORAL_BYPASS.svg` | PASS | A/B panels remain distinct; annotations remain inside the canvas |
+| 3 | `PAYOFF_B_TRACKING_FIG3_COORDINATION_GATE.svg` | PASS | negative/positive bars, zero line and labels remain legible |
+| 4 | `PAYOFF_B_TRACKING_FIG4_SYNCHRONIZATION.svg` | PASS | endpoint descriptions fit inside all six boxes |
 | 5 | `PAYOFF_B_TRACKING_FIG5_DEMOGRAPHY_DRIFT.svg` | PASS | both panels and explanatory text fit without collision |
 | 6 | `PAYOFF_B_TRACKING_FIG6_COMPLEMENTARITY.svg` | PASS | theorem, persistence contrast and fixed-gain boxes remain fully visible |
 
 ## Scientific-content check
 
-The visual repairs do not change the frozen scientific values. In particular,
-the audited figures still display:
+The reframing changed **Figure 1 wording and hierarchy**, not the frozen
+simulation evidence. Figures 2–6 retain the same quantitative results.
+
+The current figure set still displays:
 
 - Figure 2: finite temporal bypass and migration re-entry;
 - Figure 3: coordinated gain approximately +1.095 versus unilateral gains
@@ -71,6 +75,7 @@ the audited figures still display:
 ## Freeze rule
 
 Future figure changes before submission are limited to typography, journal
-formatting, or accessibility improvements. Any change to a numeric value,
-scientific interpretation, panel membership, or evidence source requires a new
-figure-data/claim-contract review rather than being treated as layout repair.
+formatting, accessibility, or correction of a documented layout defect. Any
+change to a numeric value, evidence source, or scientific interpretation
+requires a new figure-data/claim-contract review rather than being treated as
+layout repair.
