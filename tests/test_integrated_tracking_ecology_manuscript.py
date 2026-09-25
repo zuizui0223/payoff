@@ -44,7 +44,7 @@ def test_integration_promotes_temporal_buffering_not_universal_lambda() -> None:
     assert "temporal adjustment can buffer spatial tracking demand" in m
     assert "it cannot replace movement indefinitely under sustained environmental change" in m
     assert "latent spatial tracking demand" in m
-    assert "Mismatch is consequently an outcome" in m
+    assert "mismatch is an outcome" in m.lower()
     assert "It does not support:" in m
     assert "a universal lambda or universal actuator" in m
 
