@@ -65,11 +65,11 @@ frozen quantitative hashes.
 
 ```text
 workflow = Integrated PAYOFF-B PREOUTCOME package
-run = 36117335637
-artifact = 10855786194
-artifact_sha256 = efcfd13f34533c94f1050eb7ee6e1a7901d51d7ddf905510f36b9b204037063f
+run = 36118090547
+artifact = 10856440257
+artifact_sha256 = f9d7004081bc236bcdd86521c8bc07b46458366b2fd1edb0b88ce73451069e9d
 status = PASS
-inner_zip_sha256 = 9a880f75fa86ceef1a93b28d7a92c2c19eefad7b744f94e7596418bdefcdde4f
+inner_zip_sha256 = b5628da1383960bdbbb637960d78d4f9c71588269f0ddee3111be37bba3fffc8
 ```
 
 Canonical package audit:
