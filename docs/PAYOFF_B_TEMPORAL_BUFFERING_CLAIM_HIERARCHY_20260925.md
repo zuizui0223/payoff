@@ -51,6 +51,42 @@ This is consistent with tracking burden being distributed among movement,
 waiting, timing, route geometry and other constraints rather than expressed on
 one movement-speed axis.
 
+## Registered natural substitution test
+
+A fresh chronological holdout tested the stronger natural prediction that
+species with greater historical timing responsiveness should show weaker later
+dependence of phase mismatch on movement-speed ratio.
+
+Frozen result:
+
+```text
+calibration = 2002–2009
+holdout = 2010–2017
+species = 39
+holdout observations = 3,268
+
+q² × timing responsiveness = +0.0351 ± 0.0289
+p = 0.2249
+registered prediction = negative
+classification = FAIL_WRONG_DIRECTION
+```
+
+Thus the natural dataset does **not** support simple temporal substitution.
+
+The same frozen model contained a secondary descriptive timing-responsiveness
+main effect of approximately (-0.300pm0.105) with p=0.0043. This may be
+reported as evidence that greater historical timing responsiveness is associated
+with lower average holdout mismatch, but it is not the registered primary test.
+
+The licensed natural-data synthesis is therefore:
+
+> **Timing responsiveness can improve average alignment without making
+> movement-speed matching dispensable.**
+
+This result strengthens the distinction between phase control and spatial
+propagation control, but it still does not directly measure latent spatial
+tracking demand as a natural state variable.
+
 ## Direct-system evidence
 
 Mule deer, barnacle geese and Eurasian wigeon provide mechanistic decomposition,
@@ -104,9 +140,12 @@ No Aikens outcome may be used to retune:
 
 The integrated paper may claim that temporal buffering can conceal latent
 spatial tracking demand **in the declared synthetic moving landscapes** and use
-the natural datasets to reject a universal one-speed description and document
-multiple realized phase-control routes.
+the natural datasets to reject a universal one-speed description, reject the
+registered simple temporal-substitution prediction, and document multiple
+realized phase-control routes.
 
 It may not claim that latent spatial tracking demand has already been directly
-measured across natural taxa or that all low mismatch in nature necessarily
-contains hidden movement demand.
+measured across natural taxa, that the unsupported positive holdout interaction
+demonstrates timing–movement complementarity, that the secondary timing main
+effect replaces the failed registered primary test, or that all low mismatch in
+nature necessarily contains hidden movement demand.
