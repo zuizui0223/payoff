@@ -6,6 +6,7 @@ ARCH = ROOT / "docs" / "PAYOFF_B_TWO_PAPER_PUBLICATION_ARCHITECTURE_20260925.md"
 THEOREM = ROOT / "manuscript" / "PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md"
 TRACKING_SOURCE = ROOT / "manuscript" / "PAYOFF_B_TRACKING_THEORY_V1.md"
 GEB_SOURCE = ROOT / "manuscript" / "PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md"
+BROAD = ROOT / "data" / "payoff_b_broad_bird_stage1_result_20260925.json"
 
 
 def text(path: Path) -> str:
@@ -23,7 +24,7 @@ def test_two_paper_architecture_keeps_exact_theorem_independent() -> None:
 def test_integrated_manuscript_retains_primary_broad_falsification() -> None:
     m = text(INTEGRATED)
     assert "5,816 observations from 55 migratory bird species" in m
-    assert "does not support one portable natural movement-speed/environmental-wave-speed optimum" in m
+    assert "do not support one portable natural movement-speed/environmental-wave-speed optimum" in m
     assert "The primary macroecological result is therefore a falsification" in m
 
 
@@ -88,3 +89,18 @@ def test_integrated_abstract_stays_short_preoutcome() -> None:
     abstract = re.sub(r"\[AIKENS LAMBDA ABSTRACT PENDING.*?\]", " ", abstract, flags=re.S)
     words = re.findall(r"\b[\w’'-]+\b", abstract, flags=re.UNICODE)
     assert len(words) <= 300
+
+
+def test_integrated_broad_bird_claims_are_bound_to_machine_receipt() -> None:
+    import json
+
+    payload = json.loads(BROAD.read_text(encoding="utf-8"))
+    assert payload["sample"]["n_rows"] == 5816
+    assert payload["sample"]["n_species"] == 55
+    minima = {(x["response"], round(float(x["alignment_ref"]), 6)): x for x in payload["gam_minima"]}
+    assert abs(minima[("raw_abs_lag", 0.948293)]["u_star"] - 0.405133727255802) < 1e-12
+    assert abs(minima[("centered_abs_lag", 0.948374)]["u_star"] - 1.04272442046421) < 1e-12
+    assert abs(minima[("centered_abs_lag", 1.0)]["u_star"] - 1.39660423067479) < 1e-12
+    assert payload["species_heterogeneity"]["n_vertices_inside_5_95"] == 11
+    assert payload["source_analysis"]["workflow_run_id"] == 35328297725
+    assert payload["source_analysis"]["workflow_artifact_id"] == 10540282539
