@@ -8,9 +8,9 @@ PUB = ROOT / "docs" / "PUBLICATION_STATUS.md"
 
 def test_integrated_preoutcome_package_audit_is_canonical_and_blocked() -> None:
     text = AUDIT.read_text(encoding="utf-8")
-    assert "run = 36108335115" in text
-    assert "artifact_id = 10851908495" in text
-    assert "09e6a822ed32301ce360ae78ac39ab64484c36f030c00f677022c0bb4455e47a" in text
+    assert "run = 36117335637" in text
+    assert "artifact_id = 10855786194" in text
+    assert "9a880f75fa86ceef1a93b28d7a92c2c19eefad7b744f94e7596418bdefcdde4f" in text
     assert "file_count = 33" in text
     assert "figure_count = 6" in text
     assert "aikens_outcome_opened = false" in text
