@@ -1,10 +1,10 @@
 # Publication status
 
-> **Feature-branch publication experiment — 2026-09-25.** Main remains unchanged.
-> PAYOFF-B is being evaluated as a **two-paper programme**: the exact anti-phase
-> theorem remains independent, while the frozen tracking theory and movement–
-> phenology empirical programme are combined into one broad ecology manuscript.
-> See `docs/PAYOFF_B_TWO_PAPER_PUBLICATION_ARCHITECTURE_20260925.md`.
+PAYOFF-B is organized as a **two-paper publication programme**. The exact
+anti-phase theorem remains independent, while the frozen tracking theory and
+movement–phenology empirical programme are combined into one broad ecology
+manuscript. See
+`docs/PAYOFF_B_TWO_PAPER_PUBLICATION_ARCHITECTURE_20260925.md`.
 
 ## Paper 1: PAYOFF-B exact theorem
 
@@ -105,7 +105,7 @@ The paper should not carry the full PAYOFF hierarchy. In particular, do not make
 
 ## Paper 2: integrated tracking ecology — PREOUTCOME
 
-Experimental canonical source on this branch:
+Canonical PREOUTCOME source:
 
 `manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`
 
@@ -127,9 +127,9 @@ simple seasonal-timescale benchmark
 Current state:
 
 ```text
-ACTIVE_PUBLICATION_QUEUE = experimental
+ACTIVE_PUBLICATION_QUEUE = true
 ROLE = INTEGRATED_BROAD_ECOLOGY_PAPER
-SCIENTIFIC_STATE = PREOUTCOME
+SCIENTIFIC_STATE = PREOUTCOME_INTERNAL_READY
 OPEN_SCIENCE_GATE = registered Aikens lambda outcome
 RETUNING_AFTER_AIKENS = forbidden
 ```
@@ -139,10 +139,25 @@ The existing frozen sources remain intact as provenance and rollback sources:
 - `manuscript/PAYOFF_B_TRACKING_THEORY_V1.md`;
 - `manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md`.
 
-If the integrated architecture is adopted, those two sources are not submitted
-as separate overlapping papers. The already frozen Oikos package remains a
-rollback artifact until the integrated manuscript has passed its own figure,
-reference, anonymity and submission-package audits.
+Those two sources are retained as provenance / rollback sources and are not
+submitted as separate overlapping papers while the integrated architecture is
+active. The frozen Oikos package remains a rollback artifact.
+
+The integrated PREOUTCOME package has passed:
+
+- full repository CI;
+- six-figure deterministic rendering;
+- broad-bird machine-provenance checks;
+- reference completeness;
+- anonymous-text scan;
+- six-main-figure contract;
+- universal-lambda claim ceiling;
+- Aikens outcome-blind marker checks.
+
+Current audited metrics are: abstract 231 words, main text 3,458 words,
+21 references with zero uncited entries, 8 keywords, and 6 main figures.
+The only remaining scientific blocker before outcome-rendered submission
+preparation is the registered Aikens fixed-24 h lambda adjudication.
 
 
 ## DOI modules / dormant branches
