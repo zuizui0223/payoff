@@ -126,6 +126,8 @@ simple seasonal-timescale benchmark
 -> timing-capacity exhaustion and spatial re-entry
 -> fragmentation / coordination constraints on reallocation
 -> 55-species rejection of one universal natural speed optimum
+-> registered chronological failure of simple temporal substitution
+-> phase–velocity division of labor
 -> direct phase-control decomposition in mule deer, barnacle goose and wigeon
 -> preregistered within-taxon Aikens actuation-to-retention test
 ```
@@ -150,6 +152,22 @@ The existing frozen sources remain intact as provenance and rollback sources:
 Those two sources are retained as provenance / rollback sources and are not
 submitted as separate overlapping papers while the integrated architecture is
 active. The frozen Oikos package remains a rollback artifact.
+
+A fresh response-blind chronological holdout is now frozen and opened. Using
+2002–2009 to estimate species timing responsiveness and 2010–2017 as holdout,
+the registered prediction that stronger timing responsiveness would flatten the
+later mismatch-versus-speed curve **failed in direction**:
+
+```text
+q² × timing responsiveness = +0.0351 ± 0.0289
+p = 0.2249
+classification = FAIL_WRONG_DIRECTION
+```
+
+The same frozen model contains a secondary descriptive timing-responsiveness
+main effect of (-0.300pm0.105), p=0.0043. It is not promoted to the primary
+result. The licensed synthesis is that timing responsiveness can improve average
+alignment without making movement-speed matching dispensable.
 
 The integrated PREOUTCOME package has passed:
 
