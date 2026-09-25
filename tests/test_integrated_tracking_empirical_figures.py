@@ -16,11 +16,15 @@ def test_integrated_empirical_figures_render_from_machine_inputs(tmp_path: Path)
         assert paths[key].exists()
 
     f4 = paths["figure_4"].read_text(encoding="utf-8")
-    assert "Broad natural test rejects one universal speed rule" in f4
+    assert "Natural data reject a universal speed rule and simple temporal substitution" in f4
     assert "u*=0.405" in f4
     assert "u*=1.043" in f4
     assert "u*=1.397" in f4
     assert "11/41" in f4
+    assert "Registered timing-substitution holdout" in f4
+    assert "FAIL_WRONG_DIRECTION" in f4
+    assert "+0.035 ± 0.029" in f4
+    assert "Timing responsiveness lowers mean mismatch" in f4
 
     f5 = paths["figure_5"].read_text(encoding="utf-8")
     assert "Mule deer" in f5
