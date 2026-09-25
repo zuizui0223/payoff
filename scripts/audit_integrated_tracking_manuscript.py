@@ -153,7 +153,8 @@ def audit(path: Path = DEFAULT) -> dict:
         "figure_set_machine_audited": (
             "Status: **PASS" in figure_audit
             and "aikens_outcome_opened = false" in figure_audit
-            and "10848409538" in figure_audit
+            and "artifact: `payoff-b-integrated-tracking-six-figures`" in figure_audit
+            and all(f"| {i} |" in figure_audit for i in range(1, 7))
         ),
         "universal_lambda_prohibited": (
             "a universal lambda or universal actuator" in text
