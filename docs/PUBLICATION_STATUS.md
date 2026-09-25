@@ -109,16 +109,22 @@ Canonical PREOUTCOME source:
 
 `manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`
 
-Headline inference:
+Primary ecological conclusion:
 
-**Mismatch is an outcome, not a tracking architecture. Low mismatch can conceal a changing burden distributed across movement, timing, environmental information and actuation.**
+**Temporal buffering delays but does not permanently replace spatial tracking under sustained environmental change. Low current mismatch can therefore conceal latent spatial tracking demand.**
+
+Inference consequence:
+
+**Mismatch is an outcome, not a tracking architecture.**
 
 The integrated sequence is:
 
 ```text
 simple seasonal-timescale benchmark
--> local movement/timing non-identifiability
--> finite-capacity / fragmentation / coordination breakdown
+-> local movement/timing substitutability
+-> finite temporal buffering
+-> timing-capacity exhaustion and spatial re-entry
+-> fragmentation / coordination constraints on reallocation
 -> 55-species rejection of one universal natural speed optimum
 -> direct phase-control decomposition in mule deer, barnacle goose and wigeon
 -> preregistered within-taxon Aikens actuation-to-retention test
