@@ -81,6 +81,8 @@ def build(output_dir: Path, zip_path: Path | None = None) -> dict:
     audit_result = audit_geb(blinded)
     if not audit_result["all_preoutcome_hard_gates_pass"]:
         raise ValueError("GEB PREOUTCOME overlay does not pass hard gates")
+    # Package-local provenance must not depend on the caller's temporary path.
+    audit_result["manuscript"] = blinded.name
 
     audit_path = output_dir / "GEB_INTEGRATED_PREOUTCOME_AUDIT.json"
     audit_path.write_text(json.dumps(audit_result, indent=2) + "\n", encoding="utf-8")
