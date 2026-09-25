@@ -125,8 +125,8 @@ def audit(
             figures.get("aikens_outcome_opened") is expected_opened
         ),
         "relationship_to_existing_literature_in_discussion": (
-            "### 5.7 Relationship to existing literature" in main
-            and "### 5.8 Limitations" in main
+            "### 5.8 Relationship to existing literature" in main
+            and "### 5.9 Limitations" in main
         ),
     }
 
