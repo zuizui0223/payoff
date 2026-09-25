@@ -114,9 +114,22 @@ def render_all(output_dir: Path, aikens_result: Path | None = None) -> dict:
     shutil.copyfile(empirical["figure_5"],paths["figure_5"])
     shutil.copyfile(empirical["figure_6"],paths["figure_6"])
 
+    aikens_payload = None
+    if aikens_result is not None:
+        aikens_payload = json.loads(aikens_result.read_text(encoding="utf-8"))
+    aikens_result_present = aikens_payload is not None
+    aikens_outcome_opened = False
+    if aikens_payload is not None:
+        aikens_outcome_opened = bool(
+            aikens_payload.get(
+                "lambda_outcome_opened",
+                aikens_payload.get("status") != "phase_retention_contrast_not_estimable",
+            )
+        )
     manifest={
         "status":"payoff_b_integrated_six_figure_set",
-        "aikens_outcome_opened":aikens_result is not None,
+        "aikens_result_present":aikens_result_present,
+        "aikens_outcome_opened":aikens_outcome_opened,
         "source_policy":{
             "figure_1":"integrated conceptual synthesis; no new quantitative result",
             "figures_2_3":"frozen synthetic 2026-09-20 receipt chain",
