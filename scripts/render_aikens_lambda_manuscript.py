@@ -256,6 +256,16 @@ def main() -> None:
         rendered, CONCLUSION_START, CONCLUSION_END, conclusion
     )
 
+    integrated_preoutcome_status = (
+        "**Status:** integrated ecology manuscript v1, PREOUTCOME"
+    )
+    if integrated_preoutcome_status in rendered:
+        rendered = rendered.replace(
+            integrated_preoutcome_status,
+            "**Status:** integrated ecology manuscript v1, OUTCOME-RENDERED",
+            1,
+        )
+
     if "AIKENS LAMBDA RESULT PENDING" in rendered:
         raise SystemExit("unresolved Aikens result placeholder remains")
     if "AIKENS LAMBDA DISCUSSION PENDING" in rendered:
