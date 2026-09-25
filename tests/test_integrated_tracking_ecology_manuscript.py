@@ -37,9 +37,12 @@ def test_integrated_manuscript_keeps_aikens_outcome_unopened() -> None:
     assert "[AIKENS LAMBDA CONCLUSION PENDING" in m
 
 
-def test_integration_does_not_promote_universal_lambda() -> None:
+def test_integration_promotes_temporal_buffering_not_universal_lambda() -> None:
     m = text(INTEGRATED)
-    assert "common inference framework rather than a common coefficient" in m
+    assert "temporal adjustment can buffer spatial tracking demand" in m
+    assert "it cannot replace movement indefinitely under sustained environmental change" in m
+    assert "latent spatial tracking demand" in m
+    assert "Mismatch is consequently an outcome" in m
     assert "It does not support:" in m
     assert "a universal lambda or universal actuator" in m
 
