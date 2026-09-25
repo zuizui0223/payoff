@@ -266,6 +266,30 @@ jobs:
           --manuscript outputs/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_RENDERED.md
           --output outputs/aikens_primary_geb_submission_audit.json
 
+      - name: Render preregistered Aikens outcome into integrated ecology manuscript
+        run: >
+          python scripts/render_aikens_lambda_manuscript.py
+          --baseline manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md
+          --result-json outputs/aikens_primary_lambda_result.json
+          --output outputs/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_RENDERED.md
+          --claim-state-output outputs/aikens_primary_integrated_claim_state.json
+
+      - name: Render complete integrated six-figure set with Aikens adjudication
+        run: >
+          python scripts/render_integrated_tracking_figures.py
+          --output-dir outputs/aikens_integrated_six_figures
+          --aikens-result outputs/aikens_primary_lambda_result.json
+
+      - name: Audit outcome-rendered integrated ecology manuscript
+        run: >
+          python scripts/audit_rendered_integrated_tracking_manuscript.py
+          --manuscript outputs/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_RENDERED.md
+          --result-json outputs/aikens_primary_lambda_result.json
+          --claim-state-json outputs/aikens_primary_integrated_claim_state.json
+          --figure-manifest-json outputs/aikens_integrated_six_figures/PAYOFF_B_INTEGRATED_SIX_FIGURE_MANIFEST.json
+          --output outputs/aikens_primary_integrated_submission_audit.json
+          --fail-on-gate-failure
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -296,6 +320,10 @@ jobs:
             outputs/aikens_primary_lambda_claim_state.json
             outputs/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_RENDERED.md
             outputs/aikens_primary_geb_submission_audit.json
+            outputs/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_RENDERED.md
+            outputs/aikens_primary_integrated_claim_state.json
+            outputs/aikens_primary_integrated_submission_audit.json
+            outputs/aikens_integrated_six_figures
             data/aikens2022_environment_product_amendment_20260922.json
             data/aikens2022_phase_reconstruction_execution_contract_20260922.json
             data/aikens2022_phase_reconstruction_execution_contract_v2_20260922.json
