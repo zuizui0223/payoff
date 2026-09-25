@@ -18,6 +18,7 @@ BROAD = ROOT / "data" / "payoff_b_broad_bird_stage1_result_20260925.json"
 INPUTS = ROOT / "data" / "payoff_b_integrated_empirical_figure_inputs_20260925.json"
 PANEL = ROOT / "data" / "payoff_b_empirical_phase_panel_status_20260921.json"
 STANDARD = ROOT / "data" / "payoff_b_phase_retention_interval_standardization_result_20260925.json"
+HOLDOUT = ROOT / "data" / "payoff_b_temporal_buffering_bird_holdout_result_20260925.json"
 
 
 def load(path: Path) -> dict:
@@ -61,12 +62,18 @@ def linear_map(v, lo, hi, x0, x1):
     return x0 + (v - lo) / (hi - lo) * (x1 - x0)
 
 
-def render_figure4(out: Path, broad: dict) -> None:
-    w, h = 1100, 560
-    s = svg_start(w, h, "Figure 4. Broad natural test rejects one universal speed rule")
+def render_figure4(out: Path, broad: dict, holdout: dict) -> None:
+    w, h = 1260, 640
+    s = svg_start(
+        w,
+        h,
+        "Figure 4. Natural data reject a universal speed rule and simple temporal substitution",
+    )
+
+    # Panel A — broad speed-ratio minima
     s.append(text(45, 78, "A  Fitted speed-ratio minima", 15, "700"))
-    x0, x1 = 120, 610
-    y0 = 455
+    x0, x1 = 120, 650
+    y0 = 525
     lo, hi = 0.25, 16.0
     for tick in [0.25, 0.5, 1, 1.6061152988, 2, 4, 8, 16]:
         x = log_map(tick, lo, hi, x0, x1)
@@ -74,33 +81,51 @@ def render_figure4(out: Path, broad: dict) -> None:
         s.append(text(x, y0 + 24, f"{tick:g}", 11, anchor="middle"))
     band0 = log_map(1.0, lo, hi, x0, x1)
     band1 = log_map(1.6061152988, lo, hi, x0, x1)
-    s.append(f'<rect x="{band0}" y="105" width="{band1-band0}" height="{y0-105}" fill="#eeeeee" stroke="none"/>')
-    s.append(text((band0+band1)/2, 130, "PAYOFF-B1 benchmark", 10, anchor="middle"))
+    s.append(
+        f'<rect x="{band0}" y="105" width="{band1-band0}" height="{y0-105}" '
+        'fill="#eeeeee" stroke="none"/>'
+    )
+    s.append(text((band0 + band1) / 2, 130, "PAYOFF-B1 benchmark", 10, anchor="middle"))
 
     minima = broad["gam_minima"]
     rows = [
-        ("Raw mismatch, median alignment", "raw_abs_lag", 0.948293188488715, 190),
-        ("Phase-centered, median alignment", "centered_abs_lag", 0.948374287018569, 275),
-        ("Phase-centered, perfect alignment", "centered_abs_lag", 1.0, 360),
+        ("Raw mismatch, median alignment", "raw_abs_lag", 0.948293188488715, 205),
+        ("Phase-centered, median alignment", "centered_abs_lag", 0.948374287018569, 305),
+        ("Phase-centered, perfect alignment", "centered_abs_lag", 1.0, 405),
     ]
-    unc = {round(float(x["alignment_ref"]),6): x for x in broad["centered_optimum_uncertainty"]}
+    unc = {
+        round(float(x["alignment_ref"]), 6): x
+        for x in broad["centered_optimum_uncertainty"]
+    }
     for label, response, align, y in rows:
-        m = min((x for x in minima if x["response"] == response), key=lambda x: abs(float(x["alignment_ref"]) - align))
+        m = min(
+            (x for x in minima if x["response"] == response),
+            key=lambda x: abs(float(x["alignment_ref"]) - align),
+        )
         x = log_map(float(m["u_star"]), lo, hi, x0, x1)
         if response == "centered_abs_lag":
-            u = unc[round(align,6)]
+            u = unc[round(align, 6)]
             xl = log_map(float(u["u_lo_95"]), lo, hi, x0, x1)
             xh = log_map(float(u["u_hi_95"]), lo, hi, x0, x1)
             s.append(line(xl, y, xh, y, 3))
-            s.append(line(xl, y-7, xl, y+7, 1.5))
-            s.append(line(xh, y-7, xh, y+7, 1.5))
+            s.append(line(xl, y - 7, xl, y + 7, 1.5))
+            s.append(line(xh, y - 7, xh, y + 7, 1.5))
         s.append(circle(x, y, 6))
-        s.append(text(55, y+5, label, 12))
-        s.append(text(x+10, y-10, f'u*={float(m["u_star"]):.3f}', 11))
+        s.append(text(55, y + 5, label, 12))
+        s.append(text(x + 10, y - 10, f'u*={float(m["u_star"]):.3f}', 11))
     s.append(line(x0, y0, x1, y0, 1.5))
-    s.append(text((x0+x1)/2, y0+48, "animal speed / environmental-wave speed (log scale)", 12, anchor="middle"))
+    s.append(
+        text(
+            (x0 + x1) / 2,
+            y0 + 48,
+            "animal speed / environmental-wave speed (log scale)",
+            12,
+            anchor="middle",
+        )
+    )
 
-    s.append(text(675, 78, "B  Species-level heterogeneity", 15, "700"))
+    # Panel B — species heterogeneity
+    s.append(text(715, 78, "B  Species-level heterogeneity", 15, "700"))
     sh = broad["species_heterogeneity"]
     cats = [
         ("Species fit", sh["n_species_fit"]),
@@ -108,18 +133,71 @@ def render_figure4(out: Path, broad: dict) -> None:
         ("Internal vertex", sh["n_vertices_inside_5_95"]),
         ("Curvature p<0.1", sh["n_curvature_p_lt_0_1"]),
     ]
-    bx0, bx1 = 760, 1030
-    for i,(label,val) in enumerate(cats):
-        y = 165 + i*72
-        s.append(text(675, y+6, label, 12))
-        barw = (bx1-bx0) * float(val) / max(1, float(sh["n_species_fit"]))
-        s.append(rect(bx0, y-15, barw, 26, fill="#dddddd"))
-        s.append(text(bx0+barw+8, y+5, f"{val}/{sh['n_species_fit']}", 12))
-    s.append(text(675, 475, "Point minima shift with phase centering,", 12))
-    s.append(text(675, 493, "but uncertainty and heterogeneity remain large.", 12))
-    s.append("</svg>")
-    out.write_text("\n".join(s)+"\n", encoding="utf-8")
+    bx0, bx1 = 840, 1180
+    for i, (label, val) in enumerate(cats):
+        y = 125 + i * 48
+        s.append(text(715, y + 5, label, 11))
+        barw = (bx1 - bx0) * float(val) / max(1, float(sh["n_species_fit"]))
+        s.append(rect(bx0, y - 13, barw, 22, fill="#dddddd"))
+        s.append(text(bx0 + barw + 7, y + 4, f"{val}/{sh['n_species_fit']}", 10))
 
+    # Panel C — registered temporal-substitution holdout
+    s.append(text(715, 345, "C  Registered timing-substitution holdout", 15, "700"))
+    p = holdout["primary_registered_test"]
+    estimate = float(p["estimate"])
+    se = float(p["std_error"])
+    lo95 = estimate - 1.96 * se
+    hi95 = estimate + 1.96 * se
+    cx0, cx1 = 825, 1160
+    cmin, cmax = -0.08, 0.12
+    zero = linear_map(0.0, cmin, cmax, cx0, cx1)
+    s.append(line(zero, 380, zero, 485, 1.0, "4,4"))
+    for tick in [-0.08, -0.04, 0, 0.04, 0.08, 0.12]:
+        x = linear_map(tick, cmin, cmax, cx0, cx1)
+        s.append(text(x, 505, f"{tick:.2f}", 9, anchor="middle"))
+    y = 420
+    xl = linear_map(max(cmin, lo95), cmin, cmax, cx0, cx1)
+    xh = linear_map(min(cmax, hi95), cmin, cmax, cx0, cx1)
+    xe = linear_map(estimate, cmin, cmax, cx0, cx1)
+    s.append(line(xl, y, xh, y, 3))
+    s.append(line(xl, y - 7, xl, y + 7, 1.5))
+    s.append(line(xh, y - 7, xh, y + 7, 1.5))
+    s.append(circle(xe, y, 6))
+    s.append(text(715, 405, "q² × timing gain", 11))
+    s.append(text(715, 438, f"+0.035 ± 0.029; p={float(p['p_value']):.3f}", 11))
+    s.append(text(715, 458, "predicted direction: negative", 10))
+    s.append(text(715, 478, "classification: FAIL_WRONG_DIRECTION", 10, "700"))
+
+    secondary = holdout["secondary_descriptive_terms"]["z_timing_gain"]
+    s.append(
+        text(
+            715,
+            548,
+            f"Secondary descriptive timing main effect: {float(secondary['estimate']):.3f} ± "
+            f"{float(secondary['std_error']):.3f}; p={float(secondary['p_value']):.4f}",
+            10,
+        )
+    )
+    s.append(
+        text(
+            715,
+            567,
+            "Timing responsiveness lowers mean mismatch but does not flatten speed dependence.",
+            10,
+        )
+    )
+    s.append(
+        text(
+            715,
+            588,
+            f"holdout: {holdout['holdout']['n_species']} species, "
+            f"{holdout['holdout']['n_rows']:,} observations, 2010–2017",
+            10,
+        )
+    )
+
+    s.append("</svg>")
+    out.write_text("\n".join(s) + "\n", encoding="utf-8")
 
 def render_figure5(out: Path, inputs: dict, panel: dict, standard: dict) -> None:
     w, h = 1100, 600
@@ -232,13 +310,14 @@ def sha256(path: Path) -> str:
 def render_all(output_dir: Path, aikens_result_path: Path | None = None) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
     broad=load(BROAD); inputs=load(INPUTS); panel=load(PANEL); standard=load(STANDARD)
+    holdout=load(HOLDOUT)
     aikens=load(aikens_result_path) if aikens_result_path else None
     paths={
         "figure_4":output_dir/"PAYOFF_B_INTEGRATED_FIG4_BROAD_BIRD.svg",
         "figure_5":output_dir/"PAYOFF_B_INTEGRATED_FIG5_DIRECT_SYSTEMS.svg",
         "figure_6":output_dir/"PAYOFF_B_INTEGRATED_FIG6_INFORMATION_ACTUATION.svg",
     }
-    render_figure4(paths["figure_4"],broad)
+    render_figure4(paths["figure_4"],broad,holdout)
     render_figure5(paths["figure_5"],inputs,panel,standard)
     render_figure6(paths["figure_6"],inputs,aikens)
     aikens_result_present = aikens is not None
@@ -254,7 +333,7 @@ def render_all(output_dir: Path, aikens_result_path: Path | None = None) -> dict
         "status":"integrated_tracking_empirical_figures",
         "aikens_result_present":aikens_result_present,
         "aikens_outcome_opened":aikens_outcome_opened,
-        "sources":[str(BROAD.relative_to(ROOT)),str(INPUTS.relative_to(ROOT)),str(PANEL.relative_to(ROOT)),str(STANDARD.relative_to(ROOT))],
+        "sources":[str(BROAD.relative_to(ROOT)),str(HOLDOUT.relative_to(ROOT)),str(INPUTS.relative_to(ROOT)),str(PANEL.relative_to(ROOT)),str(STANDARD.relative_to(ROOT))],
         "files":{k:{"path":str(v),"sha256":sha256(v)} for k,v in paths.items()},
     }
     mp=output_dir/"PAYOFF_B_INTEGRATED_EMPIRICAL_FIGURE_MANIFEST.json"
