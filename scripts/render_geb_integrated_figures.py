@@ -34,6 +34,7 @@ def render_all(output_dir: Path) -> dict:
     canonical = render_canonical(source_dir)
 
     figures = {}
+    figure_paths = {}
     for i in range(1, 7):
         source = Path(canonical[f"figure_{i}"])
         target = output_dir / source.name.replace(
@@ -41,8 +42,9 @@ def render_all(output_dir: Path) -> dict:
         )
         converted = convert_panel_labels(source.read_text(encoding="utf-8"))
         target.write_text(converted, encoding="utf-8")
+        figure_paths[f"figure_{i}"] = target
         figures[f"figure_{i}"] = {
-            "path": str(target),
+            "path": target.name,
             "sha256": sha256(target),
             "canonical_source_sha256": sha256(source),
             "format_change_only": True,
@@ -61,7 +63,7 @@ def render_all(output_dir: Path) -> dict:
     }
     mp = output_dir / "GEB_INTEGRATED_FIGURE_MANIFEST.json"
     mp.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-    return {"manifest": mp, **{k: Path(v["path"]) for k, v in figures.items()}}
+    return {"manifest": mp, **figure_paths}
 
 
 def main() -> None:
