@@ -278,6 +278,10 @@ def review_readme(entry_scripts: list[str], third_party: list[str]) -> str:
         "",
         "All manuscript numerical claims are restricted to the five JSON result receipts dated 2026-09-20. Human-readable result summaries and the two core theory documents are included alongside them.",
         "",
+        "## Framing authority",
+        "",
+        "The 2026-09-24 claim-freeze JSON is retained as provenance for the scientific evidence and numerical claim boundary. The 2026-09-25 framing amendment is authoritative for the current title, headline contribution, novelty hierarchy, and testability framing. The amendment changes interpretation and presentation only; it does not add or alter a synthetic result.",
+        "",
         "## Reproduction entry points",
         "",
     ]
@@ -309,6 +313,14 @@ def build_review_bundle(output_dir: Path, zip_path: Path | None = None) -> dict:
         "status": "anonymous_synthetic_tracking_review_bundle",
         "synthetic_receipt_freeze_date": "2026-09-20",
         "scientific_freeze_date": "2026-09-24",
+        "framing_amendment_date": "2026-09-25",
+        "current_framing_authority": (
+            "data/payoff_b_tracking_theory_framing_amendment_20260925.json"
+        ),
+        "original_claim_freeze_role": (
+            "scientific evidence and numerical-claim provenance; current "
+            "framing follows the 2026-09-25 amendment where wording differs"
+        ),
         "entry_scripts": ENTRY_SCRIPTS,
         "utility_scripts": UTILITY_SCRIPTS,
         "third_party_import_roots": third_party,

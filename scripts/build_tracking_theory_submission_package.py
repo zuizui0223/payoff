@@ -118,6 +118,14 @@ def build_package(output_dir: Path, zip_path: Path | None = None) -> dict:
     manifest = {
         "status": "payoff_b_tracking_theory_submission_working_package",
         "scientific_freeze_date": "2026-09-24",
+        "framing_amendment_date": "2026-09-25",
+        "current_framing_authority": (
+            "data/payoff_b_tracking_theory_framing_amendment_20260925.json"
+        ),
+        "original_claim_freeze_role": (
+            "scientific evidence and numerical-claim provenance; current "
+            "framing follows the 2026-09-25 amendment where wording differs"
+        ),
         "synthetic_receipt_freeze_date": "2026-09-20",
         "journal_preparation": {
             "first_shot": "Oikos",
