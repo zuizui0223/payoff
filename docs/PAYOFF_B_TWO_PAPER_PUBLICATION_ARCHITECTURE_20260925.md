@@ -210,20 +210,22 @@ Maximum six main figures.
 
 ## Aikens status
 
-The preregistered Aikens phase-retention outcome remains unopened.
+The preregistered Aikens phase-retention outcome remains unopened and is now
+**frozen to Supplementary Information before opening**.
 
-It is no longer structurally central to the v2 headline. If retained after
-opening, its role is a capacity/actuation boundary test.
+Its role is a capacity/actuation boundary test regardless of outcome.
 
-The v2 paper must remain coherent under:
+The main v2 manuscript therefore no longer contains an outcome placeholder and
+is required to remain unchanged under:
 
 - supported Aikens phase-retention contrast;
 - null contrast;
 - opposite-signed but uncertain contrast;
 - NOT_ESTIMABLE outcome.
 
-No title, information-timing mechanism, Bayesian network result or empirical
-predictive-connectivity claim may be retuned based on the Aikens outcome.
+No title, abstract, information-timing mechanism, Bayesian network result,
+empirical predictive-connectivity claim or journal routing may be retuned based
+on the Aikens outcome.
 
 ## Prior-art firewall
 
