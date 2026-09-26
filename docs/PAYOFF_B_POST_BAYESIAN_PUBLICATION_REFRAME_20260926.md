@@ -18,9 +18,10 @@ The stronger organizing question is:
 
 PAYOFF-B now gives three answers:
 
-    cannot do it      -> capacity
-    cannot know it    -> information
-    cannot get there  -> coordination / history.
+    cannot do it          -> capacity
+    cannot predict it     -> spatial predictive information
+    cannot wait to know it -> information timing
+    cannot get there      -> coordination / history.
 
 This gives the paper a sharper conceptual architecture than treating movement,
 phenology, phase retention and mismatch as parallel observations.
@@ -29,8 +30,8 @@ phenology, phase retention and mismatch as parallel observations.
 
 Primary working title:
 
-**When adaptation is possible but unknowable: predictive information and
-coordination memory in seasonal tracking**
+**When information arrives too late: prediction, coordination and ecological
+memory in seasonal tracking**
 
 Alternative:
 
@@ -47,21 +48,27 @@ Figure 1:
 three-barrier framework: cannot do / cannot know / cannot get there.
 
 Figure 2:
-exact information--coordination wedge and strict Bayesian timing phase diagram.
+act-now versus wait-for-information theory: actionable-information threshold,
+private versus joint value of waiting, the non-monotone desynchronization
+window, and flycatcher--tit experimental anchor.
 
 Figure 3:
+exact partial-information coordination wedge and strict Bayesian timing phase
+diagram.
+
+Figure 4:
 topology contrast: complete vs chain vs migrant-star; distinguish shock
 transmission from historical storage.
 
-Figure 4:
+Figure 5:
 broad-bird predictive-connectivity result, including detrended vs raw
 correlation and dependence-aware uncertainty.
 
-Figure 5:
+Figure 6:
 wigeon null interaction, used explicitly to separate predictive information
 from phase correction.
 
-Figure 6:
+Figure 7:
 connection back to spatial/temporal capacity: finite temporal buffering and
 spatial re-entry as the capacity layer.
 
@@ -81,3 +88,67 @@ axis with mixed strength across scales:
 The strongest causal/hysteretic result remains theoretical.
 
 That limitation should be stated directly rather than diluted.
+
+
+## New organizing sentence
+
+The paper should now distinguish three temporal positions of information:
+
+    before commitment:
+        predictive connectivity can reduce uncertainty about what lies ahead;
+
+    at / after local arrival:
+        additional heterospecific or environmental information can become
+        observable, but only if the organism has not already made an
+        irreversible or costly decision;
+
+    after mismatch is realized:
+        phase correction acts on an error that has already occurred.
+
+These are different ecological functions of information.
+
+The flycatcher--tit experiment provides an external empirical anchor for the
+middle position. Earlier male settlement occurred before manipulated tit
+hatching became visible and did not respond detectably to treatment, whereas
+later female settlement did.
+
+The wigeon null then becomes conceptually useful rather than awkward: stronger
+historical predictive connectivity does not necessarily produce stronger
+post-error correction.
+
+## Revised one-line message
+
+> **The bottleneck in seasonal adaptation may be not whether useful information
+> exists, but whether it arrives before the decision deadline; interactions can
+> then convert a temporary information delay into persistent ecological
+> history.**
+
+
+## Counterintuitive hook
+
+The strongest conceptual hook is not simply that migrants lack information.
+
+The new exact result predicts:
+
+    poor cue:
+        both partners ignore it -> remain synchronized
+
+    intermediate cue:
+        only the lower-delay partner waits and uses it
+        -> synchronization breaks
+
+    strong cue:
+        both partners wait and use it
+        -> synchronization returns.
+
+Thus a monotonic improvement in environmental information can cause a
+non-monotonic ecological response.
+
+Working headline:
+
+> **Better information can temporarily worsen phenological coordination when
+> interacting species face different decision deadlines.**
+
+This hook should be presented before the longer-term hysteresis result. It gives
+the paper an immediate mechanism, while topology-dependent memory explains why
+a transient desynchronization can become historically persistent.

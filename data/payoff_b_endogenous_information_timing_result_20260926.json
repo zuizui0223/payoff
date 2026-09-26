@@ -1,0 +1,92 @@
+{
+  "result_id": "payoff_b_endogenous_information_timing_result_20260926",
+  "frozen_date": "2026-09-26",
+  "status": "EXACT_SYNTHETIC_PHASE_MAP_COMPLETE",
+  "workflow": {
+    "run_id": 36239517852,
+    "artifact_id": 10904792937,
+    "artifact_sha256": "294d7e2e5a1b2462be6f2fb8646fe3feef3035d7621e0e480a1fbf0fd81c6609",
+    "head_sha": "b68da1ace82028075d3c0bd66235f8b39f62e696"
+  },
+  "canonical_parameters": {
+    "prior_early": 0.4,
+    "false_early_cost": 2,
+    "missed_early_cost": 1,
+    "partner_externality_each_error": 1,
+    "cue_accuracy_grid": {
+      "min": 0.5,
+      "max": 1,
+      "step": 0.01,
+      "n": 51
+    },
+    "delay_cost_grid": {
+      "min": 0,
+      "max": 0.8,
+      "step": 0.01,
+      "n": 81
+    },
+    "cells": 4131
+  },
+  "phase_counts": {
+    "both_commit": 2848,
+    "private_commit_joint_wait": 753,
+    "both_wait": 530
+  },
+  "phase_fractions": {
+    "both_commit": 0.6894214475913822,
+    "private_commit_joint_wait": 0.1822803195352215,
+    "both_wait": 0.12829823287339628
+  },
+  "exact_witness": {
+    "prior_early": 0.4,
+    "cue_accuracy": 0.9,
+    "private_information_value": 0.24,
+    "joint_information_value": 0.54,
+    "example_delay_cost": 0.4,
+    "private_decision": "commit_now",
+    "joint_decision": "wait_for_information",
+    "interpretation": "the focal actor rationally commits before the cue while the interacting system would gain by waiting"
+  },
+  "endogenous_information_asymmetry_witness": {
+    "early_actor_delay_cost": 0.3,
+    "late_actor_delay_cost": 0.1,
+    "late_actor_first_wait_accuracy_on_0_01_grid": 0.82,
+    "early_actor_first_wait_accuracy_on_0_01_grid": 0.94,
+    "interpretation": "identical cue process can generate different information access solely because actors face different opportunity costs of waiting"
+  },
+  "source_backed_ecological_anchor": {
+    "paper_doi": "10.1111/1365-2656.12640",
+    "dataset_doi": "10.5061/dryad.bs427",
+    "male_early_decision": "male settlement did not respond detectably to manipulated tit timing and was largely completed before hatching treatment became apparent",
+    "female_later_decision": "later female settlement/pairing responded to manipulated tit timing and treatment separation increased later in the season",
+    "caveat": "the experiment does not estimate PAYOFF-B delay-cost or information-value parameters"
+  },
+  "prior_art_boundary": [
+    "Bauer, McNamara & Barta 2020 already model environmental predictability, information and migration timing",
+    "Schneeberger & Taborsky 2020 review costs of acquiring and using social information",
+    "value-of-information methods are established in ecology",
+    "PAYOFF-B novelty cannot be that waiting for information is costly",
+    "social-information theory already allows maladaptive information use and informational cascades; the candidate contribution is the asynchronous uptake mechanism under a monotonically improving shared cue"
+  ],
+  "retained_candidate_contribution": "embed timing-dependent information acquisition into an interacting seasonal game, derive a private-versus-joint value-of-waiting wedge, connect unequal decision deadlines to endogenous information asymmetry, and then link this to topology-dependent coordination memory",
+  "claim_boundary": [
+    "phase-map frequencies are design frequencies, not natural prevalences",
+    "canonical delay costs are illustrative payoff units",
+    "cue accuracy is an abstract information coordinate",
+    "flycatcher source data bytes were not independently reanalysed in this session because current Dryad file downloads require authenticated bearer access",
+    "the source-backed experiment anchors timing-dependent cue availability but not the quantitative model parameters"
+  ],
+  "information_induced_desynchronization": {
+    "actor_a_delay_cost": 0.3,
+    "actor_b_delay_cost": 0.1,
+    "same_future_cue": true,
+    "first_positive_mismatch_accuracy": 0.82,
+    "last_positive_mismatch_accuracy": 0.93,
+    "peak_mismatch_accuracy": 0.82,
+    "peak_mismatch_probability": 0.436,
+    "low_information_regime": "both commit before cue; expected action mismatch = 0",
+    "intermediate_information_regime": "lower-delay actor waits while higher-delay actor commits; expected mismatch > 0",
+    "high_information_regime": "both wait for the shared cue; expected action mismatch returns to 0",
+    "retained_inference": "monotonic improvement in cue reliability can generate a nonmonotonic coordination response when interactors cross their value-of-information thresholds at different cue qualities"
+  }
+}
