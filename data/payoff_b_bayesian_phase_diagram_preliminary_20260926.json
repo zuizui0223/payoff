@@ -3,9 +3,28 @@
   "status": "exploratory deterministic robustness enumeration",
   "model": "three_player_bayesian_timing_game_v1",
   "grid": {
-    "local_cue_accuracy": {"min": 0.75, "max": 1.0, "step": 0.025, "n": 11},
-    "interaction_strength": {"min": 0.0, "max": 1.0, "step": 0.025, "n": 41},
-    "migrant_cue_accuracy_path": {"min": 0.5, "max": 1.0, "step": 0.01, "n": 51, "directions": ["degrading", "recovering"]},
+    "local_cue_accuracy": {
+      "min": 0.75,
+      "max": 1,
+      "step": 0.025,
+      "n": 11
+    },
+    "interaction_strength": {
+      "min": 0,
+      "max": 1,
+      "step": 0.025,
+      "n": 41
+    },
+    "migrant_cue_accuracy_path": {
+      "min": 0.5,
+      "max": 1,
+      "step": 0.01,
+      "n": 51,
+      "directions": [
+        "degrading",
+        "recovering"
+      ]
+    },
     "cells": 451
   },
   "strict_promotion_rule": [
@@ -30,17 +49,99 @@
     "inefficient_information_hysteresis": 0.309462915601023
   },
   "by_local_cue_accuracy": [
-    {"local_accuracy":0.75,"eligible":14,"cascade":14,"hysteresis":14,"inefficient_hysteresis":0,"cascade_interaction_min":0.675,"cascade_interaction_max":1.0},
-    {"local_accuracy":0.775,"eligible":24,"cascade":24,"hysteresis":24,"inefficient_hysteresis":0,"cascade_interaction_min":0.425,"cascade_interaction_max":1.0},
-    {"local_accuracy":0.8,"eligible":31,"cascade":31,"hysteresis":31,"inefficient_hysteresis":0,"cascade_interaction_min":0.25,"cascade_interaction_max":1.0},
-    {"local_accuracy":0.825,"eligible":36,"cascade":36,"hysteresis":36,"inefficient_hysteresis":28,"inefficient_interaction_min":0.3,"inefficient_interaction_max":0.975},
-    {"local_accuracy":0.85,"eligible":40,"cascade":40,"hysteresis":40,"inefficient_hysteresis":38,"inefficient_interaction_min":0.05,"inefficient_interaction_max":0.975},
-    {"local_accuracy":0.875,"eligible":41,"cascade":36,"hysteresis":34,"inefficient_hysteresis":33,"inefficient_interaction_min":0.175,"inefficient_interaction_max":0.975},
-    {"local_accuracy":0.9,"eligible":41,"cascade":27,"hysteresis":21,"inefficient_hysteresis":21,"inefficient_interaction_min":0.5,"inefficient_interaction_max":1.0},
-    {"local_accuracy":0.925,"eligible":41,"cascade":13,"hysteresis":1,"inefficient_hysteresis":1,"inefficient_interaction_min":1.0,"inefficient_interaction_max":1.0},
-    {"local_accuracy":0.95,"eligible":41,"cascade":0,"hysteresis":0,"inefficient_hysteresis":0},
-    {"local_accuracy":0.975,"eligible":41,"cascade":0,"hysteresis":0,"inefficient_hysteresis":0},
-    {"local_accuracy":1.0,"eligible":41,"cascade":0,"hysteresis":0,"inefficient_hysteresis":0}
+    {
+      "local_accuracy": 0.75,
+      "eligible": 14,
+      "cascade": 14,
+      "hysteresis": 14,
+      "inefficient_hysteresis": 0,
+      "cascade_interaction_min": 0.675,
+      "cascade_interaction_max": 1
+    },
+    {
+      "local_accuracy": 0.775,
+      "eligible": 24,
+      "cascade": 24,
+      "hysteresis": 24,
+      "inefficient_hysteresis": 0,
+      "cascade_interaction_min": 0.425,
+      "cascade_interaction_max": 1
+    },
+    {
+      "local_accuracy": 0.8,
+      "eligible": 31,
+      "cascade": 31,
+      "hysteresis": 31,
+      "inefficient_hysteresis": 0,
+      "cascade_interaction_min": 0.25,
+      "cascade_interaction_max": 1
+    },
+    {
+      "local_accuracy": 0.825,
+      "eligible": 36,
+      "cascade": 36,
+      "hysteresis": 36,
+      "inefficient_hysteresis": 28,
+      "inefficient_interaction_min": 0.3,
+      "inefficient_interaction_max": 0.975
+    },
+    {
+      "local_accuracy": 0.85,
+      "eligible": 40,
+      "cascade": 40,
+      "hysteresis": 40,
+      "inefficient_hysteresis": 38,
+      "inefficient_interaction_min": 0.05,
+      "inefficient_interaction_max": 0.975
+    },
+    {
+      "local_accuracy": 0.875,
+      "eligible": 41,
+      "cascade": 36,
+      "hysteresis": 34,
+      "inefficient_hysteresis": 33,
+      "inefficient_interaction_min": 0.175,
+      "inefficient_interaction_max": 0.975
+    },
+    {
+      "local_accuracy": 0.9,
+      "eligible": 41,
+      "cascade": 27,
+      "hysteresis": 21,
+      "inefficient_hysteresis": 21,
+      "inefficient_interaction_min": 0.5,
+      "inefficient_interaction_max": 1
+    },
+    {
+      "local_accuracy": 0.925,
+      "eligible": 41,
+      "cascade": 13,
+      "hysteresis": 1,
+      "inefficient_hysteresis": 1,
+      "inefficient_interaction_min": 1,
+      "inefficient_interaction_max": 1
+    },
+    {
+      "local_accuracy": 0.95,
+      "eligible": 41,
+      "cascade": 0,
+      "hysteresis": 0,
+      "inefficient_hysteresis": 0
+    },
+    {
+      "local_accuracy": 0.975,
+      "eligible": 41,
+      "cascade": 0,
+      "hysteresis": 0,
+      "inefficient_hysteresis": 0
+    },
+    {
+      "local_accuracy": 1,
+      "eligible": 41,
+      "cascade": 0,
+      "hysteresis": 0,
+      "inefficient_hysteresis": 0
+    }
   ],
   "canonical_witness": {
     "local_cue_accuracy": 0.9,
@@ -59,5 +160,64 @@
     "the local-information vulnerability window is a model prediction requiring external empirical testing",
     "sequential best response is one declared historical accessibility dynamic",
     "no existing PAYOFF-B empirical freeze or Aikens preregistration is changed"
-  ]
+  ],
+  "canonical_prior_sensitivity": [
+    {
+      "prior_early": 0.2,
+      "baseline": "follow|follow|follow",
+      "cascade_accuracy": 0.87,
+      "recovered": "late|late|follow",
+      "best_recovered_equilibrium": "late|late|follow",
+      "history_lock_loss": 0
+    },
+    {
+      "prior_early": 0.25,
+      "baseline": "follow|follow|follow",
+      "cascade_accuracy": 0.83,
+      "recovered": "late|late|follow",
+      "best_recovered_equilibrium": "follow|follow|follow",
+      "history_lock_loss": 0.0225
+    },
+    {
+      "prior_early": 0.3,
+      "baseline": "follow|follow|follow",
+      "cascade_accuracy": 0.79,
+      "recovered": "late|late|follow",
+      "best_recovered_equilibrium": "follow|follow|follow",
+      "history_lock_loss": 0.105
+    },
+    {
+      "prior_early": 0.35,
+      "baseline": "follow|follow|follow",
+      "cascade_accuracy": 0.76,
+      "recovered": "late|late|follow",
+      "best_recovered_equilibrium": "follow|follow|follow",
+      "history_lock_loss": 0.1875
+    },
+    {
+      "prior_early": 0.4,
+      "baseline": "follow|follow|follow",
+      "cascade_accuracy": 0.71,
+      "recovered": "late|late|follow",
+      "best_recovered_equilibrium": "follow|follow|follow",
+      "history_lock_loss": 0.27
+    },
+    {
+      "prior_early": 0.45,
+      "baseline": "follow|follow|follow",
+      "cascade_accuracy": null,
+      "recovered": "follow|follow|follow",
+      "best_recovered_equilibrium": "follow|follow|follow",
+      "history_lock_loss": 0
+    },
+    {
+      "prior_early": 0.5,
+      "baseline": "follow|follow|follow",
+      "cascade_accuracy": null,
+      "recovered": "follow|follow|follow",
+      "best_recovered_equilibrium": "follow|follow|follow",
+      "history_lock_loss": 0
+    }
+  ],
+  "secondary_exploratory_inference": "for the canonical local-information and interaction parameters, inefficient hysteresis is concentrated at intermediate early-spring priors: early spring is possible enough to support cue-following but not common enough to make early action unconditional"
 }
