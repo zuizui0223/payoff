@@ -80,6 +80,7 @@ def run_historical_path(
         interaction_strength=interaction_strength,
         local_accuracy=local_accuracy,
         prior_early=prior_early,
+        interaction_topology=interaction_topology,
     )
     baseline = sequential_best_response(
         baseline_game,
@@ -129,6 +130,7 @@ def run_historical_path(
         interaction_strength=interaction_strength,
         local_accuracy=local_accuracy,
         prior_early=prior_early,
+        interaction_topology=interaction_topology,
     )
     recovered_evaluation = sequential_best_response(
         recovered_game,
