@@ -1,0 +1,38 @@
+name: payoff-b-bayesian-strict-phase-diagram
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-predictive-connectivity-20260926
+    paths:
+      - "src/bayesian_timing_coordination.py"
+      - "scripts/payoff_b_bayesian_phase_diagram.py"
+      - "tests/test_bayesian_timing_phase_diagram.py"
+      - ".github/workflows/payoff-b-bayesian-strict-phase-diagram.yml"
+
+jobs:
+  strict-phase-diagram:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        topology: [complete, chain, migrant_star]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run strict Bayesian phase diagram
+        run: >
+          python scripts/payoff_b_bayesian_phase_diagram.py
+          --interaction-topology ${{ matrix.topology }}
+          --output outputs/payoff_b_bayesian_phase_diagram_${{ matrix.topology }}.csv
+          --summary-output outputs/payoff_b_bayesian_phase_diagram_${{ matrix.topology }}_summary.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-bayesian-strict-${{ matrix.topology }}
+          path: |
+            outputs/payoff_b_bayesian_phase_diagram_${{ matrix.topology }}.csv
+            outputs/payoff_b_bayesian_phase_diagram_${{ matrix.topology }}_summary.json
+          if-no-files-found: error
