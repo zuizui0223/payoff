@@ -246,6 +246,41 @@ This is a prospective prediction. The current repository does not yet contain
 a source-backed estimate showing that climate change has reduced a particular
 migration teleconnection.
 
+
+## Prior-art boundary
+
+The broad ecological ingredients are not claimed as new.
+
+Phenological mismatch in long-distance migrants, the need to anticipate future
+conditions at distant destinations, and the importance of environmental
+connectivity between departure and destination sites are established ideas in
+migration ecology. Work on Asian houbara, for example, provides direct evidence
+that migrants can use departure-site temperature when that cue is correlated
+with later conditions along the migration system. The phrase and general idea
+of climate-driven **informational mismatch** in interspecific interactions also
+predate this model.
+
+Accordingly, PAYOFF-B must not claim novelty for:
+
+- the existence of phenological mismatch;
+- the statement that long-distance migrants have incomplete information about
+  destination conditions;
+- the general idea that climate change can alter informational relationships.
+
+The candidate contribution here is narrower and mathematical:
+
+1. derive separate private and joint posterior thresholds under the same
+   available cue;
+2. show an exact information--coordination wedge produced by interaction
+   externalities;
+3. decompose adaptation deficit into information and decentralized-strategy
+   components on a common payoff scale;
+4. connect that Bayesian pre-commitment wedge to the already independent
+   PAYOFF-B unilateral coordination barrier after the environmental state is
+   known.
+
+This prior-art boundary should remain explicit if the extension is promoted.
+
 ## Claim boundary
 
 This model does not establish that:
