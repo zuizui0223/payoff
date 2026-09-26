@@ -1,0 +1,124 @@
+{
+  "result_id": "payoff_b_flycatcher_social_information_published_anchor_20260926",
+  "frozen_date": "2026-09-26",
+  "status": "SOURCE_BACKED_PUBLISHED_ANCHOR_NOT_INDEPENDENT_REANALYSIS",
+  "paper": {
+    "title": "Competitor phenology as a social cue in breeding site selection",
+    "authors": [
+      "Jelmer M. Samplonius",
+      "Christiaan Both"
+    ],
+    "journal": "Journal of Animal Ecology",
+    "year": 2017,
+    "doi": "10.1111/1365-2656.12640",
+    "pmid": "28118482"
+  },
+  "dataset": {
+    "doi": "10.5061/dryad.bs427",
+    "temporal_coverage": [
+      2014,
+      2015
+    ],
+    "files": [
+      {
+        "name": "arrival_early_late.R",
+        "dryad_file_id": 34678,
+        "bytes": 23454
+      },
+      {
+        "name": "arrival.csv",
+        "dryad_file_id": 34672,
+        "bytes": 14207
+      },
+      {
+        "name": "arrorder.csv",
+        "dryad_file_id": 34677,
+        "bytes": 13139
+      },
+      {
+        "name": "population.csv",
+        "dryad_file_id": 34676,
+        "bytes": 133039
+      },
+      {
+        "name": "replicates.csv",
+        "dryad_file_id": 34675,
+        "bytes": 21593
+      },
+      {
+        "name": "swaps14.csv",
+        "dryad_file_id": 34673,
+        "bytes": 3789
+      },
+      {
+        "name": "swaps15.csv",
+        "dryad_file_id": 34674,
+        "bytes": 4270
+      }
+    ],
+    "manifest_source": {
+      "repository": "Lakens/cooper-bes-validation-manuscript",
+      "commit": "7da8dd1d5655ccbe978f63fd99700704b6ddd9e2",
+      "path": "manuscript/data/manifests/10_1111_1365_2656_12640.manifest.json",
+      "generated": "2026-09-10T02:29:05+0200"
+    },
+    "byte_access_status": "NOT_FETCHED_IN_PAYOFF_SESSION_DRYAD_FILE_DOWNLOAD_REQUIRES_BEARER_TOKEN"
+  },
+  "experiment": {
+    "manipulation": "resident great-tit and blue-tit hatching phenology advanced versus delayed at forest-plot level",
+    "allocation": "random assignment in two consecutive years with treatment swapping between years in reused sites",
+    "observed_migrant": "pied flycatcher Ficedula hypoleuca",
+    "total_males": 159,
+    "total_females": 114
+  },
+  "published_results": {
+    "male_arrival_mean_april_day_2014": 19.1,
+    "male_arrival_n_2014": 72,
+    "male_arrival_mean_april_day_2015": 22.2,
+    "male_arrival_n_2015": 87,
+    "female_arrival_mean_april_day_2014": 30.2,
+    "female_arrival_n_2014": 48,
+    "female_arrival_mean_april_day_2015": 29,
+    "female_arrival_n_2015": 66,
+    "arrival_date_treatment_effect": {
+      "male_p_greater_than": 0.74,
+      "female_p_greater_than": 0.73
+    },
+    "male_settlement_treatment_effect": {
+      "z": 0.854,
+      "p": 0.393,
+      "interpretation": "male settlement among available boxes did not respond detectably to tit timing treatment; authors note almost all males settled before treatment became apparent"
+    },
+    "male_pairing_glmm": {
+      "tit_timing_estimate": -0.101,
+      "tit_timing_se": 0.05,
+      "tit_timing_z": -2.03,
+      "tit_timing_p": 0.042,
+      "relative_male_arrival_estimate": -0.111,
+      "relative_male_arrival_se": 0.028,
+      "relative_male_arrival_z": -3.908,
+      "relative_male_arrival_p_less_than": 0.001
+    },
+    "female_settlement_cox": {
+      "tit_timing_estimate": -0.065,
+      "exp_coefficient": 0.936,
+      "standard_error": 0.025,
+      "z": -2.61,
+      "p_less_than": 0.009,
+      "interpretation": "later in the season, males in delayed-tit plots remained unpaired disproportionately; treatment differences became more pronounced after early-treatment tits began hatching"
+    }
+  },
+  "payoff_b_mapping": {
+    "early_commitment_anchor": "males largely settled before manipulated tit hatching was observable and showed no detectable settlement response to treatment",
+    "post_arrival_information_anchor": "later-arriving females preferentially settled with males in earlier-tit plots, with treatment separation increasing later in the season",
+    "key_distinction": "information availability depends on decision timing; arrival timing and settlement information use are separable",
+    "not_claimed": "the experiment does not identify whether females used tit phenology directly versus correlated resource, predation, or competition information"
+  },
+  "claim_boundary": [
+    "published-result anchor rather than a new PAYOFF-B reanalysis",
+    "female arrival timing itself was not experimentally caused by information availability",
+    "sex differences in waiting cost are a PAYOFF-B interpretation, not a measured parameter in the source paper",
+    "the exact sensory or ecological mechanism producing the social cue is unresolved by the original experiment",
+    "full Dryad-byte reanalysis remains pending authenticated file access"
+  ]
+}
