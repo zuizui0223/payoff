@@ -127,7 +127,7 @@ simple seasonal-timescale benchmark
 -> fragmentation / coordination constraints on reallocation
 -> 55-species rejection of one universal natural speed optimum
 -> registered chronological failure of simple temporal substitution
--> phase–velocity division of labor
+-> gain–capacity–propagation decomposition
 -> direct phase-control decomposition in mule deer, barnacle goose and wigeon
 -> preregistered within-taxon Aikens actuation-to-retention test
 ```
@@ -169,12 +169,13 @@ main effect of -0.300 ± 0.105, p=0.0043. It is not promoted to the primary
 result. The licensed synthesis is that timing responsiveness can improve average
 alignment without making movement-speed matching dispensable.
 
-The source-study bird-speed models are consistent with a phase–velocity
-division of labor rather than a timing-for-speed tradeoff: published green-up
-date and green-up-speed anomaly coefficients predict migration speed, while the
-published species timing-sensitivity coefficient for migration speed is
-+0.119 with a 95% CI spanning zero. This is prior consistency, not a new
-confirmatory result.
+The source-study bird-speed models are consistent with a
+gain–capacity–propagation decomposition rather than a timing-for-speed tradeoff:
+published green-up date and green-up-speed anomaly coefficients predict
+migration speed, while the published species timing-sensitivity coefficient for
+migration speed is +0.119 with a 95% CI spanning zero. The holdout timing slope
+is interpreted as gain-like responsiveness, not remaining timing capacity. This
+is prior consistency, not a new confirmatory result.
 
 The integrated PREOUTCOME package has passed:
 
