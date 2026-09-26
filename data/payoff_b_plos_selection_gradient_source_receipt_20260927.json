@@ -1,0 +1,65 @@
+{
+  "result_id": "payoff_b_plos_selection_gradient_source_receipt_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "PUBLIC_SOURCE_BYTES_VERIFIED",
+  "paper_doi": "10.1371/journal.pbio.1002120",
+  "workflow_run_id": 36270512455,
+  "artifact_id": 10915606347,
+  "artifact_sha256": "fa2dc53820a56564c44a2507c794b263e0d554f677147588bfbcc3dcdf501360",
+  "files": {
+    "S1_Data": {
+      "doi": "10.1371/journal.pbio.1002120.s001",
+      "sha256": "8c0b5bdb8265a11a41ab01caf98f4dd98cc2d1b677c6de58279b4fd32a1d2a45",
+      "bytes": 14791,
+      "sheets": {
+        "panel A": {
+          "rows": 31,
+          "columns": 3,
+          "role": "year, standardized selection gradient, standard error"
+        },
+        "panel B": {
+          "rows": 25,
+          "columns": 3,
+          "role": "mismatch versus selection gradient"
+        },
+        "panel C": {
+          "rows": 7,
+          "columns": 7,
+          "role": "recruitment response by laying-date group and spring class"
+        },
+        "panel D": {
+          "rows": 31,
+          "columns": 3,
+          "role": "arrival temperature versus selection gradient"
+        }
+      },
+      "panel_A_selection_years": 30,
+      "year_min": 1980,
+      "year_max": 2010,
+      "missing_year": 1995
+    },
+    "S2_Data": {
+      "doi": "10.1371/journal.pbio.1002120.s002",
+      "sha256": "95d532529919326ab1d608221418681d0d9342db65bda1e38f0833b2671ec71f",
+      "bytes": 8581,
+      "sheets": {
+        "Sheet1": {
+          "rows": 31,
+          "columns": 2,
+          "role": "year and arrival temperature"
+        }
+      },
+      "annual_rows": 30
+    }
+  },
+  "scientific_use": [
+    "S1 panel A supplies the frozen annual selection-gradient driver without requiring Dryad raw bytes",
+    "S2 supplies the published local arrival-temperature series for source validation and secondary diagnostics",
+    "PLOS supplements are proximate published data and do not reproduce the full individual-level Dryad dataset"
+  ],
+  "claim_boundary": [
+    "annual selection gradients are treated as published derived outcomes",
+    "no individual-level re-estimation of selection is claimed from S1",
+    "the missing 1995 selection-gradient year is retained as missing rather than imputed"
+  ]
+}
