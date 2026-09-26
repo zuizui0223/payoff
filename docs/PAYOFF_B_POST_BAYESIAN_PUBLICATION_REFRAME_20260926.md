@@ -49,7 +49,8 @@ three-barrier framework: cannot do / cannot know / cannot get there.
 
 Figure 2:
 act-now versus wait-for-information theory: actionable-information threshold,
-private versus joint value of waiting, and flycatcher--tit experimental anchor.
+private versus joint value of waiting, the non-monotone desynchronization
+window, and flycatcher--tit experimental anchor.
 
 Figure 3:
 exact partial-information coordination wedge and strict Bayesian timing phase
@@ -121,3 +122,33 @@ post-error correction.
 > exists, but whether it arrives before the decision deadline; interactions can
 > then convert a temporary information delay into persistent ecological
 > history.**
+
+
+## Counterintuitive hook
+
+The strongest conceptual hook is not simply that migrants lack information.
+
+The new exact result predicts:
+
+    poor cue:
+        both partners ignore it -> remain synchronized
+
+    intermediate cue:
+        only the lower-delay partner waits and uses it
+        -> synchronization breaks
+
+    strong cue:
+        both partners wait and use it
+        -> synchronization returns.
+
+Thus a monotonic improvement in environmental information can cause a
+non-monotonic ecological response.
+
+Working headline:
+
+> **Better information can temporarily worsen phenological coordination when
+> interacting species face different decision deadlines.**
+
+This hook should be presented before the longer-term hysteresis result. It gives
+the paper an immediate mechanism, while topology-dependent memory explains why
+a transient desynchronization can become historically persistent.
