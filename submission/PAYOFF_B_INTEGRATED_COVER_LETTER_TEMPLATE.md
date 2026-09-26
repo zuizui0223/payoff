@@ -40,10 +40,10 @@ or generic negative-feedback mathematics. The contribution is the demonstration
 that **temporal buffering delays but does not permanently replace spatial
 tracking** in the declared moving-landscape models, together with a broad
 empirical falsification of a single natural speed rule and a registered natural
-failure of simple temporal substitution. Timing responsiveness can improve
-alignment without making movement-speed matching dispensable. The familiar
-identification problem is an ecological consequence rather than the headline
-result.
+failure of simple temporal substitution. Timing responsiveness can improve alignment without making movement-speed
+matching dispensable because responsiveness is a gain-like property, not a
+measure of remaining timing capacity. The familiar identification problem is an
+ecological consequence rather than the headline result.
 
 The exact anti-phase migration-optimum theorem that motivates the simplest
 timescale benchmark is developed in a separate short mathematical manuscript.
