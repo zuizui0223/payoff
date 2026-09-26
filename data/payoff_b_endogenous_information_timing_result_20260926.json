@@ -1,0 +1,78 @@
+{
+  "result_id": "payoff_b_endogenous_information_timing_result_20260926",
+  "frozen_date": "2026-09-26",
+  "status": "EXACT_SYNTHETIC_PHASE_MAP_COMPLETE",
+  "workflow": {
+    "run_id": 36239256632,
+    "artifact_id": 10904947517,
+    "artifact_sha256": "640527cb1bb9e95d48fcc1a91d156e3eee3349c6d1cffe7c401533c6776b3593",
+    "head_sha": "7d6750f2425b2b68584aeac82a2be59db5ce5582"
+  },
+  "canonical_parameters": {
+    "prior_early": 0.4,
+    "false_early_cost": 2,
+    "missed_early_cost": 1,
+    "partner_externality_each_error": 1,
+    "cue_accuracy_grid": {
+      "min": 0.5,
+      "max": 1,
+      "step": 0.01,
+      "n": 51
+    },
+    "delay_cost_grid": {
+      "min": 0,
+      "max": 0.8,
+      "step": 0.01,
+      "n": 81
+    },
+    "cells": 4131
+  },
+  "phase_counts": {
+    "both_commit": 2848,
+    "private_commit_joint_wait": 753,
+    "both_wait": 530
+  },
+  "phase_fractions": {
+    "both_commit": 0.6894214475913822,
+    "private_commit_joint_wait": 0.1822803195352215,
+    "both_wait": 0.12829823287339628
+  },
+  "exact_witness": {
+    "prior_early": 0.4,
+    "cue_accuracy": 0.9,
+    "private_information_value": 0.24,
+    "joint_information_value": 0.54,
+    "example_delay_cost": 0.4,
+    "private_decision": "commit_now",
+    "joint_decision": "wait_for_information",
+    "interpretation": "the focal actor rationally commits before the cue while the interacting system would gain by waiting"
+  },
+  "endogenous_information_asymmetry_witness": {
+    "early_actor_delay_cost": 0.3,
+    "late_actor_delay_cost": 0.1,
+    "late_actor_first_wait_accuracy_on_0_01_grid": 0.82,
+    "early_actor_first_wait_accuracy_on_0_01_grid": 0.94,
+    "interpretation": "identical cue process can generate different information access solely because actors face different opportunity costs of waiting"
+  },
+  "source_backed_ecological_anchor": {
+    "paper_doi": "10.1111/1365-2656.12640",
+    "dataset_doi": "10.5061/dryad.bs427",
+    "male_early_decision": "male settlement did not respond detectably to manipulated tit timing and was largely completed before hatching treatment became apparent",
+    "female_later_decision": "later female settlement/pairing responded to manipulated tit timing and treatment separation increased later in the season",
+    "caveat": "the experiment does not estimate PAYOFF-B delay-cost or information-value parameters"
+  },
+  "prior_art_boundary": [
+    "Bauer, McNamara & Barta 2020 already model environmental predictability, information and migration timing",
+    "Schneeberger & Taborsky 2020 review costs of acquiring and using social information",
+    "value-of-information methods are established in ecology",
+    "PAYOFF-B novelty cannot be that waiting for information is costly"
+  ],
+  "retained_candidate_contribution": "embed timing-dependent information acquisition into an interacting seasonal game, derive a private-versus-joint value-of-waiting wedge, connect unequal decision deadlines to endogenous information asymmetry, and then link this to topology-dependent coordination memory",
+  "claim_boundary": [
+    "phase-map frequencies are design frequencies, not natural prevalences",
+    "canonical delay costs are illustrative payoff units",
+    "cue accuracy is an abstract information coordinate",
+    "flycatcher source data bytes were not independently reanalysed in this session because current Dryad file downloads require authenticated bearer access",
+    "the source-backed experiment anchors timing-dependent cue availability but not the quantitative model parameters"
+  ]
+}
