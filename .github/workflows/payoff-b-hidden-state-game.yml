@@ -33,7 +33,7 @@ jobs:
         run: python -m pytest -q tests/test_partial_information_coordination.py
       - name: Build canonical receipt
         run: >-
-          python scripts/payoff_b_hidden_state_game.py
+          PYTHONPATH=. python scripts/payoff_b_hidden_state_game.py
           --output outputs/payoff_b_hidden_state_game_canonical_20260926.json
       - uses: actions/upload-artifact@v4
         with:
