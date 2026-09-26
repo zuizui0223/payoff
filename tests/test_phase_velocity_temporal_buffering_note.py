@@ -8,13 +8,14 @@ def test_phase_velocity_note_has_intact_latex_and_no_control_character_corruptio
     text = NOTE.read_text(encoding="utf-8")
     for required in (
         r"\frac{\partial e}{\partial z}=-v_A",
-        r"\frac{\partial e}{\partial t}=v_E-v_A",
+        r"\frac{de}{dt}=v_E-v_A-v_A\dot z(t)",
+        r"\dot z^*",
         r"v_E\neq v_A",
-        r"|z|\le z_{\max}",
+        r"|z(t)|\le z_{\max}",
         r"T_{\rm buffer}",
         r"\frac{u z_{\max}}{|1-u|}",
         r"\beta_{q^2\times h}=+0.0351\pm0.0289",
-        r"\text{better timing}",
+        r"\text{better timing responsiveness}",
         r"\not\Rightarrow",
     ):
         assert required in text
@@ -28,3 +29,11 @@ def test_phase_velocity_note_preserves_post_readout_boundary() -> None:
     assert "not a preregistered prediction" in text
     assert "not a new PAYOFF confirmatory result" in text
     assert "unsupported positive interaction" in text
+
+
+def test_note_distinguishes_gain_capacity_and_transport() -> None:
+    text = NOTE.read_text(encoding="utf-8")
+    assert "timing gain" in text
+    assert "timing capacity / temporal budget" in text
+    assert "movement speed / route progression" in text
+    assert "high gain does not imply large remaining capacity" in text
