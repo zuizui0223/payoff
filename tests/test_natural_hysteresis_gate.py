@@ -81,7 +81,7 @@ def test_ten_year_competition_series_cannot_be_relabelled_hysteresis():
 
     assert not gate.duration_passed
     assert not gate.direct_hysteresis_ready
-    assert gate.evidence_level == "INTERACTION_TIMING_CONSEQUENCE"
+    assert gate.evidence_level == "INTERACTION_TIMING_TEST"
 
 
 def test_population_series_without_timing_is_not_direct_hysteresis():
