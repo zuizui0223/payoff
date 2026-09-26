@@ -3,18 +3,17 @@
 These legends are journal-facing overlays. Numerical content is unchanged from
 the canonical six-figure set. GEB panel labels are lower-case.
 
-**Figure 1. Temporal buffering and latent spatial tracking demand.**
-Conceptual sequence linking the anti-phase seasonal-timescale benchmark to a
-finite temporal-buffering mechanism. In the local null, movement- and
-timing-mediated feedback enter through one restoring gain, so timing can absorb
-the same corrective burden as movement while mismatch remains low. Explicit
-landscapes make that substitution temporary: timing capacity is finite,
-fragmented geometry remains unresolved and partner matching can block
-reallocation, so spatial tracking demand re-enters under sustained forcing. The
-empirical programme then tests whether natural migration nevertheless collapses
-onto one movement-speed rule and decomposes phase correction across direct
-systems. The industrial-mule-deer phase-retention test is a preregistered
-within-taxon perturbation, not an additional cross-taxon replication.
+**Figure 1. Temporal buffering and phase–velocity division of labor.**
+Conceptual sequence linking the anti-phase timescale benchmark to the breakdown
+of local movement–timing substitution. Timing changes phase offset whereas
+movement speed controls mismatch drift along a moving environmental wave, so
+bounded timing can buy time without replacing spatial transport. Explicit
+landscapes add finite capacity, route geometry and coordination constraints.
+Natural tests reject both one universal speed rule and the registered prediction
+that stronger timing responsiveness should weaken later movement-speed
+dependence. Direct systems decompose the remaining phase-control routes. The
+industrial-mule-deer phase-retention test is a preregistered within-taxon
+perturbation, not an additional cross-taxon replication.
 
 **Figure 2. Finite temporal buffering and spatial re-entry.** Frozen synthetic
 moving-landscape results. Increasing phenological capacity expands the sampled
