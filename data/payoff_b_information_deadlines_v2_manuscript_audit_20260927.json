@@ -35,9 +35,16 @@
   "unresolved_before_submission": [
     "render the preregistered Aikens outcome in Supplementary Information without changing the main text",
     "complete full reference list and final in-text reference audit",
-    "build figures from frozen receipts",
     "prepare stable archived code/data package rather than relying on GitHub alone",
-    "prepare Ecology Letters title page, novelty statement and 500-character graphical-abstract text"
+    "prepare Ecology Letters title page, novelty statement and 500-character graphical-abstract text",
+    "convert/re-export the frozen SVG set to journal-required final production formats if needed, without changing quantitative content"
   ],
-  "claim_ceiling": "direct natural interaction-network hysteresis remains prospective"
+  "claim_ceiling": "direct natural interaction-network hysteresis remains prospective",
+  "figure_status": {
+    "status": "SIX_FIGURE_SET_RENDERED_AND_TESTED",
+    "receipt": "data/payoff_b_information_deadlines_v2_figure_receipt_20260927.json",
+    "workflow_run_id": 36271966135,
+    "artifact_id": 10915558044,
+    "aikens_outcome_used": false
+  }
 }
