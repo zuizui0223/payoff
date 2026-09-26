@@ -130,10 +130,11 @@ def run_cell(
     accuracies: list[float],
 ) -> dict[str, object]:
     profile = FOLLOW_ALL
+    baseline_follow_stable = None
     first_resident_departure_q = None
     collapse_q = None
 
-    for q in accuracies:
+    for q_index, q in enumerate(accuracies):
         game = build_game(
             prior=prior,
             resident_accuracy=resident_accuracy,
@@ -145,7 +146,11 @@ def run_cell(
         dynamics = sequential_best_response(game, profile)
         profile = dynamics.final.profile
 
-        if (
+        if q_index == 0:
+            baseline_follow_stable = profile == FOLLOW_ALL
+            continue
+
+        if baseline_follow_stable and (
             first_resident_departure_q is None
             and (
                 profile[0] != FOLLOW_CUE
@@ -154,7 +159,11 @@ def run_cell(
         ):
             first_resident_departure_q = q
 
-        if collapse_q is None and profile == LATE_ALL:
+        if (
+            baseline_follow_stable
+            and collapse_q is None
+            and profile == LATE_ALL
+        ):
             collapse_q = q
 
     low_profile = profile
@@ -211,7 +220,8 @@ def run_cell(
         else follow_eval.joint_payoff - recovered_eval.joint_payoff
     )
     hysteresis = bool(
-        recovered_profile != FOLLOW_ALL
+        baseline_follow_stable
+        and recovered_profile != FOLLOW_ALL
         and FOLLOW_ALL in equilibrium_profiles
         and recovered_profile in equilibrium_profiles
         and payoff_gap is not None
@@ -224,6 +234,7 @@ def run_cell(
         "interaction_strength": interaction_strength,
         "migrant_false_early_cost": migrant_false_early_cost,
         "migrant_missed_early_cost": migrant_missed_early_cost,
+        "baseline_follow_stable_q1": bool(baseline_follow_stable),
         "first_resident_departure_q": first_resident_departure_q,
         "all_late_collapse_q": collapse_q,
         "collective_all_late_cascade": collapse_q is not None,
@@ -271,10 +282,14 @@ def main() -> None:
         writer.writerows(rows)
 
     positive_interaction = [
-        row for row in rows if row["interaction_strength"] > 0.0
+        row for row in rows
+        if row["interaction_strength"] > 0.0
+        and row["baseline_follow_stable_q1"]
     ]
     zero_interaction = [
-        row for row in rows if row["interaction_strength"] == 0.0
+        row for row in rows
+        if row["interaction_strength"] == 0.0
+        and row["baseline_follow_stable_q1"]
     ]
     cascade_rows = [
         row for row in positive_interaction
@@ -294,17 +309,17 @@ def main() -> None:
             "migrant_missed_early_cost": args.migrant_missed_early_cost,
             "migrant_accuracy_grid": accuracies,
             "n_cells": len(rows),
-            "n_positive_interaction_cells": len(positive_interaction),
-            "n_zero_interaction_cells": len(zero_interaction),
+            "n_positive_interaction_baseline_eligible_cells": len(positive_interaction),
+            "n_zero_interaction_baseline_eligible_cells": len(zero_interaction),
         },
         "readout": {
             "positive_interaction_collective_cascade_cells": len(cascade_rows),
             "positive_interaction_hysteresis_cells": len(hysteresis_rows),
-            "zero_interaction_resident_cascade_cells": sum(
+            "zero_interaction_information_triggered_resident_cascade_cells": sum(
                 bool(row["resident_cascade"])
                 for row in zero_interaction
             ),
-            "zero_interaction_collective_cascade_cells": sum(
+            "zero_interaction_information_triggered_collective_cascade_cells": sum(
                 bool(row["collective_all_late_cascade"])
                 for row in zero_interaction
             ),
@@ -338,6 +353,7 @@ def main() -> None:
             ),
         },
         "claim_boundary": [
+            "information-triggered counts require all-follow to be stable at q=1 before cue degradation",
             "cell counts are frequencies in a declared synthetic grid, not natural prevalence",
             "parameter ranges are mechanism probes rather than fitted ecological values",
             "hysteresis uses sequential best response as a declared accessibility rule",
