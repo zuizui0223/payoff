@@ -1,5 +1,12 @@
 # PAYOFF-B integrated tracking ecology — journal targeting
 
+> **Legacy v1 routing notice (2026-09-27):** This memo applies only to the
+> temporal-buffering v1 integrated manuscript. The canonical v2 manuscript is
+> `manuscript/PAYOFF_B_INFORMATION_DEADLINES_V2_PREOUTCOME.md`, whose active
+> first-shot routing is Ecology Letters / Letter under
+> `submission/PAYOFF_B_INFORMATION_DEADLINES_JOURNAL_TARGETING_20260927.md`.
+> This file is retained for provenance and rollback only.
+
 Verified against current journal guidance: **2026-09-25**
 
 Scientific source remains:
