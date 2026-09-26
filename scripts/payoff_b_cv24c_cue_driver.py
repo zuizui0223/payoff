@@ -20,6 +20,7 @@ import io
 import json
 import math
 import sys
+import tempfile
 from dataclasses import dataclass
 from datetime import date, timedelta
 from pathlib import Path
@@ -165,44 +166,91 @@ def _ncep_query_url(base: str, year: int) -> str:
     )
 
 
-def _download_annual_cue(session, base: str, year: int):
-    import pandas as pd
+def _download_psl_fallback(session, year: int):
+    import numpy as np
+    import xarray as xr
 
-    url = _ncep_query_url(base, year)
-    response = session.get(url, timeout=90)
+    url = (
+        "https://psl.noaa.gov/thredds/fileServer/"
+        "Datasets/ncep.reanalysis.dailyavgs/surface/"
+        f"air.sig995.{year}.nc"
+    )
+    response = session.get(url, timeout=180)
     response.raise_for_status()
-    frame = pd.read_csv(io.StringIO(response.text))
-    if "air" not in frame.columns:
-        raise ValueError(
-            f"ERDDAP response missing air column for {year}: "
-            f"{list(frame.columns)}"
-        )
-    frame["air"] = pd.to_numeric(frame["air"], errors="coerce")
-    frame["latitude"] = pd.to_numeric(
-        frame.get("latitude"),
-        errors="coerce",
-    )
-    frame["longitude"] = pd.to_numeric(
-        frame.get("longitude"),
-        errors="coerce",
-    )
-    frame = frame.dropna(subset=["air"]).copy()
-    if len(frame) < 100:
-        raise ValueError(
-            f"unexpectedly few NCEP rows for {year}: {len(frame)}"
-        )
-    # Fixed 3x3 coarse-grid proxy. No spatial selection uses the outcome.
-    cue_c = float(frame["air"].mean() - 273.15)
+    with tempfile.NamedTemporaryFile(suffix=".nc") as handle:
+        handle.write(response.content)
+        handle.flush()
+        with xr.open_dataset(handle.name, engine="netcdf4") as ds:
+            start = date(year, 2, 18)
+            end = start + timedelta(days=19)
+            subset = ds["air"].sel(
+                time=slice(start.isoformat(), end.isoformat()),
+                lat=[10.0, 7.5, 5.0],
+                lon=[352.5, 355.0, 357.5],
+            )
+            values = np.asarray(subset.values, dtype=float)
+            finite = values[np.isfinite(values)]
+            if finite.size < 100:
+                raise ValueError(
+                    f"unexpectedly few PSL NCEP values for {year}: "
+                    f"{finite.size}"
+                )
+            cue_c = float(finite.mean() - 273.15)
     return {
         "year": year,
         "ivory_coast_temp_c": cue_c,
-        "ncep_rows": int(len(frame)),
-        "grid_lat_min": float(frame["latitude"].min()),
-        "grid_lat_max": float(frame["latitude"].max()),
-        "grid_lon_min": float(frame["longitude"].min()),
-        "grid_lon_max": float(frame["longitude"].max()),
+        "ncep_rows": int(finite.size),
+        "grid_lat_min": 5.0,
+        "grid_lat_max": 10.0,
+        "grid_lon_min": 352.5,
+        "grid_lon_max": 357.5,
         "source_url": url,
+        "transport": "psl_http_fallback",
     }
+
+
+def _download_annual_cue(session, base: str, year: int):
+    import pandas as pd
+    import requests
+
+    url = _ncep_query_url(base, year)
+    try:
+        response = session.get(url, timeout=90)
+        response.raise_for_status()
+        frame = pd.read_csv(io.StringIO(response.text))
+        if "air" not in frame.columns:
+            raise ValueError(
+                f"ERDDAP response missing air column for {year}: "
+                f"{list(frame.columns)}"
+            )
+        frame["air"] = pd.to_numeric(frame["air"], errors="coerce")
+        frame["latitude"] = pd.to_numeric(
+            frame.get("latitude"),
+            errors="coerce",
+        )
+        frame["longitude"] = pd.to_numeric(
+            frame.get("longitude"),
+            errors="coerce",
+        )
+        frame = frame.dropna(subset=["air"]).copy()
+        if len(frame) < 100:
+            raise ValueError(
+                f"unexpectedly few NCEP rows for {year}: {len(frame)}"
+            )
+        cue_c = float(frame["air"].mean() - 273.15)
+        return {
+            "year": year,
+            "ivory_coast_temp_c": cue_c,
+            "ncep_rows": int(len(frame)),
+            "grid_lat_min": float(frame["latitude"].min()),
+            "grid_lat_max": float(frame["latitude"].max()),
+            "grid_lon_min": float(frame["longitude"].min()),
+            "grid_lon_max": float(frame["longitude"].max()),
+            "source_url": url,
+            "transport": "erddap",
+        }
+    except (requests.RequestException, ValueError):
+        return _download_psl_fallback(session, year)
 
 
 def _build_connectivity(annual, window_years: int, min_pairs: int):
@@ -448,6 +496,10 @@ def main():
                 "10.1371/journal.pbio.1002120.s001"
             ),
             "cue": "NCEP/NCAR Reanalysis 1 daily air.sig995",
+            "transport_rule": (
+                "ERDDAP primary; identical PSL yearly NetCDF fallback "
+                "on transport failure"
+            ),
             "cue_window": "20 calendar days beginning 18 February",
             "spatial_proxy": {
                 "latitudes_deg_n": [10.0, 7.5, 5.0],
