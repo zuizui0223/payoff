@@ -1,0 +1,44 @@
+name: PAYOFF-B information-deadlines figures
+
+on:
+  push:
+    branches:
+      - revision/payoff-b-information-deadlines-manuscript-20260927
+    paths:
+      - "scripts/render_information_deadlines_figures.py"
+      - "tests/test_information_deadlines_figure_render.py"
+      - "data/payoff_b_endogenous_information_timing_result_20260926.json"
+      - "data/payoff_b_bayesian_strict_phase_diagram_20260926.json"
+      - "data/payoff_b_broad_predictive_connectivity_result_20260926.json"
+      - "data/payoff_b_wigeon_predictive_connectivity_result_20260926.json"
+      - "data/payoff_b_cv24c_cue_driver_result_20260927.json"
+      - ".github/workflows/build-information-deadlines-figures.yml"
+  pull_request:
+    paths:
+      - "scripts/render_information_deadlines_figures.py"
+      - "tests/test_information_deadlines_figure_render.py"
+      - "data/payoff_b_endogenous_information_timing_result_20260926.json"
+      - "data/payoff_b_bayesian_strict_phase_diagram_20260926.json"
+      - "data/payoff_b_broad_predictive_connectivity_result_20260926.json"
+      - "data/payoff_b_wigeon_predictive_connectivity_result_20260926.json"
+      - "data/payoff_b_cv24c_cue_driver_result_20260927.json"
+      - ".github/workflows/build-information-deadlines-figures.yml"
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Render v2 six-figure set
+        run: python scripts/render_information_deadlines_figures.py --output-dir outputs/information_deadlines_v2_figures
+      - name: Run renderer tests
+        run: python -m pytest -q tests/test_information_deadlines_figure_render.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-information-deadlines-v2-figures
+          path: outputs/information_deadlines_v2_figures/
+          if-no-files-found: error
