@@ -80,34 +80,56 @@ are observationally equivalent from mismatch alone.
 
 This is deliberately stronger than we expect in nature. It supplies a null against which ecological constraints can be added one at a time.
 
-### 2.3 Phase and velocity are different control channels
+### 2.3 Timing gain, timing capacity and propagation are distinct
 
-Following the registered bird holdout, we use a minimal moving-front identity as a **post-readout mechanistic interpretation**, not as a preregistered prediction:
+Following the registered bird holdout, we use a minimal moving-front identity as
+a **post-readout mechanistic interpretation**, not as a preregistered
+prediction. Let \(z(t)\) be a schedule displacement relative to a baseline
+spatial trajectory moving at speed \(v_A\):
 
 \[
-e(t;z)=(E_0-A_0)-v_A z+(v_E-v_A)t.
+e(t)=(E_0-A_0)+(v_E-v_A)t-v_A z(t).
 \]
 
-Thus timing changes phase,
+A static timing shift changes phase,
 
 \[
 \frac{\partial e}{\partial z}=-v_A,
 \]
 
-whereas the animal–environment speed difference controls mismatch drift,
+whereas changing timing through time contributes to mismatch drift,
 
 \[
-\frac{\partial e}{\partial t}=v_E-v_A.
+\frac{de}{dt}=v_E-v_A-v_A\dot z(t).
 \]
 
-A fixed timing shift can zero mismatch at one instant but cannot maintain zero mismatch when \(v_E\neq v_A\). With \(|z|\le z_{\max}\), the maximum extra time bought by timing is
+Thus timing can transiently compensate a speed mismatch if schedule displacement
+keeps changing. Perfect compensation would require
 
 \[
-T_{\rm buffer}=\frac{v_A z_{\max}}{|v_E-v_A|}
-=\frac{u z_{\max}}{|1-u|}.
+\dot z^*=\frac{v_E-v_A}{v_A}.
 \]
 
-This elementary identity separates **phase control** from **propagation control**: timing changes when a tracker meets the wave; movement speed determines whether it keeps pace.
+But if \(|z(t)|\le z_{\max}\), that correction can persist only for a finite
+interval,
+
+\[
+T_{\rm buffer}
+=
+\frac{v_A z_{\max}}{|v_E-v_A|}
+=
+\frac{u z_{\max}}{|1-u|}.
+\]
+
+This separates three quantities that should not be conflated:
+
+- **timing gain** — how strongly timing responds now;
+- **timing capacity** — how much temporal displacement remains available;
+- **movement speed** — the baseline spatial propagation rate.
+
+The bird holdout estimates the first quantity, not the second. High historical
+timing responsiveness can therefore improve current alignment without implying
+a larger remaining temporal buffer.
 
 ### 2.4 Temporal buffering, latent spatial demand and three failure modes
 
@@ -333,13 +355,33 @@ The 55-species analysis rejects one portable movement/environment speed optimum.
 
 Timing responsiveness nevertheless had a negative descriptive main association with holdout mismatch. We therefore retain a narrower inference: better temporal tracking can improve average alignment without making spatial tracking dispensable.
 
-### 5.4 Phase–velocity division of labor explains the failed substitution test
+### 5.4 The failed substitution test reveals a gain–capacity distinction
 
-The moving-front identity explains why lower mean mismatch need not imply weaker speed dependence. Timing changes the **phase offset**; the animal–environment speed difference controls the **rate of mismatch accumulation**. These are distinct control targets, so timing can lower the mismatch surface without flattening its speed dependence.
+The holdout result is most informative when separated from the synthetic
+capacity parameter. The bird calibration slope measures **timing gain**—how
+strongly arrival timing responds to green-up. It does not measure \(z_{\max}\),
+unused timing reserve or the duration for which a compensating schedule shift can
+be sustained.
 
-The published Amaral source analysis is independently consistent with this interpretation: bird speed responded to green-up date (−0.549, 95% CI −0.770 to −0.327) and green-up speed (+0.088, 0.041 to 0.134), while the species timing-sensitivity coefficient for migration speed was +0.119 (−0.034 to 0.203), not the negative association expected from a simple timing-for-speed tradeoff. These are prior-consistency results, not a new PAYOFF confirmatory test.
+The moving-front identity makes the distinction explicit. A changing timing
+schedule can contribute to effective mismatch drift through \(\dot z(t)\), but
+persistent compensation consumes the finite timing budget until a bound is
+reached. Hence high responsiveness can lower average phase error without
+flattening the dependence of mismatch on movement speed.
 
-The resulting division of labor is **phase control versus propagation control**: timing helps determine when an organism meets the environmental wave; movement speed helps determine whether it keeps pace.
+The Amaral source analysis is independently consistent with this architecture.
+Bird migration speed responded to green-up date (−0.549, 95% CI −0.770 to
+−0.327) and green-up speed (+0.088, 0.041 to 0.134), while the published
+species timing-sensitivity coefficient for migration speed was +0.119
+(−0.034 to 0.203), not the negative association expected from a simple
+timing-for-speed tradeoff. These are prior-consistency results, not a new PAYOFF
+confirmatory test.
+
+The deeper ecological decomposition is therefore **gain, capacity and
+propagation**: timing gain affects current phase correction, timing capacity
+sets the duration of buffering, and movement governs sustained spatial
+propagation. The registered holdout directly rejects the shortcut
+\(\text{high gain}\Rightarrow\text{low movement dependence}\).
 
 ### 5.5 What is portable across migration systems
 
