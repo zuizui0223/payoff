@@ -377,6 +377,8 @@ def main():
     try:
         import pandas as pd
         import requests
+        from requests.adapters import HTTPAdapter
+        from urllib3.util.retry import Retry
     except ImportError as exc:
         raise RuntimeError(
             "analysis requires pandas, requests, openpyxl, statsmodels, numpy"
@@ -387,6 +389,22 @@ def main():
     session.headers.update(
         {"User-Agent": "PAYOFF-B-cue-driver/1.0"}
     )
+    retry = Retry(
+        total=8,
+        connect=5,
+        read=5,
+        status=8,
+        backoff_factor=1.0,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=frozenset({"GET"}),
+        respect_retry_after_header=True,
+    )
+    adapter = HTTPAdapter(
+        max_retries=retry,
+        pool_connections=2,
+        pool_maxsize=2,
+    )
+    session.mount("https://", adapter)
     cue_rows = [
         _download_annual_cue(session, args.erddap, year)
         for year in range(args.start_year, args.end_year + 1)
