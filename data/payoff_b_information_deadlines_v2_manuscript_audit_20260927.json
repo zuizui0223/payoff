@@ -6,11 +6,11 @@
   "metrics": {
     "title": "Better information can transiently worsen seasonal coordination under unequal decision deadlines",
     "abstract_words": 150,
-    "main_text_words_approx": 3816,
+    "main_text_words_approx": 3791,
     "references": 9,
-    "main_figures": 6,
+    "figures": 6,
     "keywords": 8,
-    "aikens_placeholders": 2
+    "aikens_placeholders": 0
   },
   "ecology_letters_letter_fit": {
     "main_text_limit": 5000,
@@ -29,10 +29,11 @@
     "cue_driver_decoupling_claimed_as_novel": false,
     "long_term_negative_reversal_gate_retained": true,
     "wigeon_registered_null_retained": true,
-    "aikens_outcome_required_for_coherence": false
+    "aikens_outcome_required_for_coherence": false,
+    "main_text_aikens_outcome_independent": true
   },
   "unresolved_before_submission": [
-    "render the preregistered Aikens outcome or formally move the unopened block to Supplementary/companion material without changing its contract",
+    "render the preregistered Aikens outcome in Supplementary Information without changing the main text",
     "complete full reference list and final in-text reference audit",
     "build figures from frozen receipts",
     "prepare stable archived code/data package rather than relying on GitHub alone",
