@@ -219,5 +219,47 @@
       "history_lock_loss": 0
     }
   ],
-  "secondary_exploratory_inference": "for the canonical local-information and interaction parameters, inefficient hysteresis is concentrated at intermediate early-spring priors: early spring is possible enough to support cue-following but not common enough to make early action unconditional"
+  "secondary_exploratory_inference": "for the canonical local-information and interaction parameters, inefficient hysteresis is concentrated at intermediate early-spring priors: early spring is possible enough to support cue-following but not common enough to make early action unconditional",
+  "interaction_topology_robustness": {
+    "same_edge_count_contrast": {
+      "chain": "flower--local_pollinator--migrant",
+      "migrant_star": "flower--migrant--local_pollinator",
+      "note": "both have two undirected links; the contrast changes arrangement rather than edge count"
+    },
+    "complete": {
+      "eligible": 391,
+      "resident_cascade": 221,
+      "hysteresis": 201,
+      "inefficient_hysteresis": 121,
+      "strict_fraction_among_eligible": 0.309462915601023
+    },
+    "chain": {
+      "eligible": 364,
+      "resident_cascade": 194,
+      "hysteresis": 174,
+      "inefficient_hysteresis": 55,
+      "strict_fraction_among_eligible": 0.1510989010989011,
+      "canonical": {
+        "collapse_migrant_accuracy": 0.71,
+        "low_information_profile": "always_late|always_late|always_late",
+        "full_recovery_profile": "always_late|always_late|follow_cue",
+        "best_full_recovery_equilibrium": "follow_cue|follow_cue|follow_cue",
+        "history_lock_joint_payoff_loss": 0.15
+      }
+    },
+    "migrant_star": {
+      "eligible": 404,
+      "resident_cascade": 367,
+      "hysteresis": 14,
+      "inefficient_hysteresis": 9,
+      "strict_fraction_among_eligible": 0.022277227722772276,
+      "canonical": {
+        "collapse_migrant_accuracy": 0.71,
+        "low_information_profile": "always_late|always_late|always_late",
+        "full_recovery_profile": "follow_cue|follow_cue|follow_cue",
+        "history_lock_joint_payoff_loss": 0
+      }
+    },
+    "interpretation": "information cascades can occur without resident-resident coupling, but resident-resident coupling strongly increases persistence of the displaced timing basin after migrant information recovers; this is a topology-dependent memory effect rather than an edge-count effect"
+  }
 }
