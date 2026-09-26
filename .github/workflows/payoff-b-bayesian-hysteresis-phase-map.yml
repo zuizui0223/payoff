@@ -1,0 +1,33 @@
+name: payoff-b Bayesian hysteresis phase map
+
+concurrency:
+  group: payoff-b-bayesian-hysteresis-${{ github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    paths:
+      - 'src/bayesian_timing_coordination.py'
+      - 'scripts/payoff_b_bayesian_phase_map.py'
+      - '.github/workflows/payoff-b-bayesian-hysteresis-phase-map.yml'
+  workflow_dispatch:
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run Bayesian phase map
+        run: >
+          python scripts/payoff_b_bayesian_phase_map.py
+          --output outputs/payoff_b_bayesian_phase_map.csv
+          --summary-output outputs/payoff_b_bayesian_phase_map_summary.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-bayesian-hysteresis-phase-map
+          path: |
+            outputs/payoff_b_bayesian_phase_map.csv
+            outputs/payoff_b_bayesian_phase_map_summary.json
