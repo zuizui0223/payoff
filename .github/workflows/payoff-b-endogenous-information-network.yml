@@ -1,0 +1,38 @@
+name: payoff-b-endogenous-information-network
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-endogenous-information-network-20260926
+    paths:
+      - "src/endogenous_information_network.py"
+      - "scripts/payoff_b_endogenous_information_network_sweep.py"
+      - "tests/test_endogenous_information_network.py"
+      - ".github/workflows/payoff-b-endogenous-information-network.yml"
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        topology: [complete, chain, migrant_star]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run unified information-network sweep
+        run: >
+          python scripts/payoff_b_endogenous_information_network_sweep.py
+          --topology ${{ matrix.topology }}
+          --output outputs/payoff_b_endogenous_information_network_${{ matrix.topology }}.csv
+          --summary-output outputs/payoff_b_endogenous_information_network_${{ matrix.topology }}_summary.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-endogenous-information-network-${{ matrix.topology }}
+          path: |
+            outputs/payoff_b_endogenous_information_network_${{ matrix.topology }}.csv
+            outputs/payoff_b_endogenous_information_network_${{ matrix.topology }}_summary.json
+          if-no-files-found: error
