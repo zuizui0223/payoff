@@ -295,7 +295,7 @@ def figure3():
     )
 
 
-def ci_row(out, x0, x1, y, label, estimate, low, high, lo=-0.18, hi=0.08, bold=False):
+def ci_row(out, x0, x1, y, label, estimate, low, high, *, lo=-0.18, hi=0.08, bold=False):
     zero = scale(0, lo, hi, x0, x1)
     xl = scale(low, lo, hi, x0, x1)
     xh = scale(high, lo, hi, x0, x1)
@@ -336,7 +336,7 @@ def figure4():
         rows.append((label, row["coefficient"], row["ci_low_95"], row["ci_high_95"], False))
     y = 190
     for row in rows:
-        ci_row(out, x0, x1, y, *row, lo=lo, hi=hi)
+        ci_row(out, x0, x1, y, row[0], row[1], row[2], row[3], lo=lo, hi=hi, bold=row[4])
         y += 52
 
     dep = d["dependency_audit"]
