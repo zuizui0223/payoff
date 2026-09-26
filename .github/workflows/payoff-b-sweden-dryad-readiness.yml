@@ -33,27 +33,32 @@ jobs:
           grep -Eo "api/v2/files/[0-9]+/download|files/[0-9]+|All laydate.xlsx" outputs/sweden/page.html 2>/dev/null | sort -u > outputs/sweden/links.txt || true
           cat outputs/sweden/dataset.json 2>/dev/null || true
           cat outputs/sweden/links.txt 2>/dev/null || true
-      - name: Try file links discovered from API
+      - name: Download public Dryad file stream
         shell: bash
         run: |
+          set -euo pipefail
+          curl -fL --retry 3 \
+            "https://datadryad.org/downloads/file_stream/34004" \
+            -o "outputs/sweden/All laydate.xlsx"
+          echo "50bb3503258e5f8ce4db043d0bfe895d  outputs/sweden/All laydate.xlsx" | md5sum -c -
+          file "outputs/sweden/All laydate.xlsx"
+          python -m pip install --disable-pip-version-check pandas openpyxl
           python - <<'PY'
-          import json, pathlib, re, subprocess
-          root=pathlib.Path("outputs/sweden")
-          ids=[]
-          for name in ("dataset.json","versions.json","version_files.json"):
-              p=root/name
-              if not p.exists(): continue
-              text=p.read_text(errors="ignore")
-              ids += re.findall(r'"id"\s*:\s*(\d+)', text)
-              ids += re.findall(r'/files/(\d+)', text)
-          ids=list(dict.fromkeys(ids))
-          (root/"candidate_ids.txt").write_text("\n".join(ids)+"\n")
-          for fid in ids:
-              url=f"https://datadryad.org/api/v2/files/{fid}/download"
-              out=root/f"file_{fid}"
-              proc=subprocess.run(["curl","-fL","--retry","2",url,"-o",str(out)])
-              if proc.returncode==0 and out.stat().st_size>1000:
-                  subprocess.run(["file",str(out)])
+          import json
+          import pandas as pd
+          from pathlib import Path
+          p=Path("outputs/sweden/All laydate.xlsx")
+          xls=pd.ExcelFile(p)
+          out={"sheets":xls.sheet_names,"tables":{}}
+          for sheet in xls.sheet_names:
+              df=pd.read_excel(p,sheet_name=sheet)
+              out["tables"][sheet]={
+                  "rows":int(len(df)),
+                  "columns":[str(c) for c in df.columns],
+                  "head":df.head(8).astype(object).where(pd.notna(df),None).to_dict(orient="records")
+              }
+              df.to_csv(Path("outputs/sweden")/f"{sheet}.csv",index=False)
+          Path("outputs/sweden/workbook_audit.json").write_text(json.dumps(out,indent=2,default=str)+"\n")
           PY
           find outputs/sweden -maxdepth 1 -type f -printf "%f\t%s\n" | sort > outputs/sweden/files.txt
       - uses: actions/upload-artifact@v4
