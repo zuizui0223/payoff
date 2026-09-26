@@ -7,20 +7,18 @@ Canonical renderer:
 All quantitative panels are generated from frozen receipts or their materialized
 machine summaries. Figure 1 is conceptual synthesis only.
 
-## Figure 1. Temporal buffering and latent spatial tracking demand
+## Figure 1. Temporal buffering and phase–velocity division of labor
 
-Conceptual sequence linking the separate PAYOFF-B1 anti-phase seasonal-timescale
-benchmark to finite temporal buffering of spatial tracking demand. In the local
-null, movement- and timing-mediated feedback enter through one restoring gain,
-so timing can absorb the same corrective burden as movement while mismatch
-remains low. Explicit landscapes make that substitution temporary: timing
-capacity is finite, fragmented geometry remains unresolved and partner matching
-can block reallocation, so spatial tracking demand re-enters under sustained
-forcing. The empirical programme tests whether natural migration nevertheless
-collapses onto one movement-speed rule and decomposes phase correction across
-direct systems. The industrial-mule-deer Aikens phase-retention test remains a
-preregistered within-taxon perturbation rather than an additional cross-taxon
-replication.
+Conceptual sequence linking the PAYOFF-B1 timescale benchmark to the ecological
+breakdown of local movement–timing substitution. In a moving front, timing
+changes phase offset whereas movement speed controls mismatch drift, so bounded
+timing can buy time without replacing spatial transport. Explicit landscapes
+add finite capacity, route geometry and coordination constraints. Natural tests
+then reject both one universal speed rule and the registered prediction that
+stronger timing responsiveness should weaken later movement-speed dependence.
+Direct systems decompose the remaining phase-control routes. The industrial
+mule-deer Aikens test remains a preregistered within-taxon perturbation rather
+than an additional cross-taxon replication.
 
 ## Figure 2. Finite temporal buffering and spatial re-entry
 
