@@ -61,8 +61,8 @@ The canonical cell remains:
     interaction strength   = 0.50
     cascade threshold      = migrant accuracy 0.71
     low-information state  = late | late | late
-    recovered state        = late | late | follow
-    better recovered BNE   = follow | follow | follow
+    recovered state        = late/late/follow
+    better recovered BNE   = follow/follow/follow
     history-lock loss      = 0.27 joint-payoff units.
 
 The qualitative canonical result also survives all six update orders: the
@@ -158,13 +158,13 @@ varying the prior probability of an early spring.
 
 | prior early | resident cascade threshold | recovered state | better full-information equilibrium? | history-lock loss |
 |---:|---:|---|---|---:|
-| 0.20 | 0.87 | late | late | follow | no | 0 |
-| 0.25 | 0.83 | late | late | follow | yes | 0.0225 |
-| 0.30 | 0.79 | late | late | follow | yes | 0.105 |
-| 0.35 | 0.76 | late | late | follow | yes | 0.1875 |
-| 0.40 | 0.71 | late | late | follow | yes | 0.270 |
-| 0.45 | none | follow | follow | follow | no lock | 0 |
-| 0.50 | none | follow | follow | follow | no lock | 0 |
+| 0.20 | 0.87 | late/late/follow | no | 0 |
+| 0.25 | 0.83 | late/late/follow | yes | 0.0225 |
+| 0.30 | 0.79 | late/late/follow | yes | 0.105 |
+| 0.35 | 0.76 | late/late/follow | yes | 0.1875 |
+| 0.40 | 0.71 | late/late/follow | yes | 0.270 |
+| 0.45 | none | follow/follow/follow | no lock | 0 |
+| 0.50 | none | follow/follow/follow | no lock | 0 |
 
 Thus the strict mechanism is also non-monotone in the environmental prior. It
 is strongest in an intermediate regime where an early spring is plausible
