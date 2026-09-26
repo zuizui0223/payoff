@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
 from src.endogenous_information_timing import (
     InformationTimingScenario,
     evaluate_information_timing,
+    expected_shared_cue_action_mismatch,
     information_value,
     sex_specific_information_access,
 )
@@ -129,6 +130,11 @@ def main():
             early_sex_delay_cost=args.early_sex_delay,
             late_sex_delay_cost=args.late_sex_delay,
         )
+        mismatch_probability = expected_shared_cue_action_mismatch(
+            scenario,
+            actor_a_delay_cost=args.early_sex_delay,
+            actor_b_delay_cost=args.late_sex_delay,
+        )
         sex_rows.append(
             {
                 "cue_accuracy": cue,
@@ -140,6 +146,9 @@ def main():
                 ),
                 "early_sex_decision": early_decision,
                 "late_sex_decision": late_decision,
+                "shared_cue_action_mismatch_probability": (
+                    mismatch_probability
+                ),
             }
         )
 
@@ -159,6 +168,28 @@ def main():
         ),
         None,
     )
+    positive_mismatch = [
+        row for row in sex_rows
+        if row["shared_cue_action_mismatch_probability"] > 1e-12
+    ]
+    first_positive_mismatch = (
+        positive_mismatch[0]["cue_accuracy"]
+        if positive_mismatch else None
+    )
+    last_positive_mismatch = (
+        positive_mismatch[-1]["cue_accuracy"]
+        if positive_mismatch else None
+    )
+    peak_mismatch = (
+        max(
+            positive_mismatch,
+            key=lambda row: row[
+                "shared_cue_action_mismatch_probability"
+            ],
+        )
+        if positive_mismatch else None
+    )
+
     phase_counts = {}
     for row in rows:
         phase_counts[row["phase"]] = phase_counts.get(row["phase"], 0) + 1
@@ -178,6 +209,20 @@ def main():
         "sex_specific_information_thresholds_on_sampled_grid": {
             "late_sex_first_wait_accuracy": first_late_wait,
             "early_sex_first_wait_accuracy": first_early_wait,
+        },
+        "information_induced_desynchronization": {
+            "first_positive_mismatch_accuracy": first_positive_mismatch,
+            "last_positive_mismatch_accuracy": last_positive_mismatch,
+            "peak_mismatch_accuracy": (
+                None if peak_mismatch is None
+                else peak_mismatch["cue_accuracy"]
+            ),
+            "peak_mismatch_probability": (
+                None if peak_mismatch is None
+                else peak_mismatch[
+                    "shared_cue_action_mismatch_probability"
+                ]
+            ),
         },
         "claim_boundary": [
             "delay costs are illustrative payoff units, not fitted sex-specific parameters",
