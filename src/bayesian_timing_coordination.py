@@ -309,6 +309,8 @@ def sequential_best_response(
 
 def canonical_three_player_game(
     migrant_accuracy: float,
+    *,
+    interaction_strength: float = 0.50,
 ) -> BayesianTimingGame:
     """Transparent resident--resident--migrant hysteresis witness.
 
@@ -323,21 +325,21 @@ def canonical_three_player_game(
                 cue_accuracy=0.90,
                 false_early_cost=1.0,
                 missed_early_cost=0.25,
-                interaction_strength=0.50,
+                interaction_strength=interaction_strength,
             ),
             TimingPlayer(
                 name="local_pollinator",
                 cue_accuracy=0.90,
                 false_early_cost=1.0,
                 missed_early_cost=0.25,
-                interaction_strength=0.50,
+                interaction_strength=interaction_strength,
             ),
             TimingPlayer(
                 name="migrant",
                 cue_accuracy=migrant_accuracy,
                 false_early_cost=2.0,
                 missed_early_cost=1.0,
-                interaction_strength=0.50,
+                interaction_strength=interaction_strength,
             ),
         ),
     )
