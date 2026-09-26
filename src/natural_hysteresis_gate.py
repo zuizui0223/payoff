@@ -89,9 +89,9 @@ def evaluate_natural_hysteresis_gate(
     elif dataset.experimental_information_timing:
         evidence_level = "DECISION_TIME_INFORMATION_ANCHOR"
     elif information_pair_passed and dataset.has_focal_timing:
-        evidence_level = "PREDICTIVE_INFORMATION_EFFECT"
+        evidence_level = "PREDICTIVE_INFORMATION_TEST"
     elif timing_pair_passed and dataset.has_interaction_outcome:
-        evidence_level = "INTERACTION_TIMING_CONSEQUENCE"
+        evidence_level = "INTERACTION_TIMING_TEST"
     elif timing_pair_passed:
         evidence_level = "LONG_TERM_PHENOLOGY_CONTRAST"
     elif dataset.has_interaction_outcome:
@@ -122,8 +122,8 @@ def rank_evidence_ladder(
     order = {
         "DIRECT_HYSTERESIS_READY": 0,
         "DECISION_TIME_INFORMATION_ANCHOR": 1,
-        "PREDICTIVE_INFORMATION_EFFECT": 2,
-        "INTERACTION_TIMING_CONSEQUENCE": 3,
+        "PREDICTIVE_INFORMATION_TEST": 2,
+        "INTERACTION_TIMING_TEST": 3,
         "LONG_TERM_PHENOLOGY_CONTRAST": 4,
         "INTERACTION_OUTCOME_ONLY": 5,
         "BACKGROUND_ONLY": 6,
