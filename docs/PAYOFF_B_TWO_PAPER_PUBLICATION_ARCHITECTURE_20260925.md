@@ -1,203 +1,301 @@
-# PAYOFF-B two-paper publication architecture — 2026-09-25
+# PAYOFF-B two-paper publication architecture — information-deadline revision
 
-Status: **adopted two-paper publication architecture; underlying scientific freezes and source manuscripts remain preserved**
+Updated: **2026-09-27**  
+Status: **candidate replacement architecture; all earlier frozen manuscripts and receipts remain preserved**
 
-## Adopted publication decision
+## Publication decision
 
-PAYOFF-B uses a two-paper programme rather than three independent papers.
+PAYOFF-B remains a two-paper programme.
 
 ### Paper 1 — exact benchmark
 
-Retain the existing Theoretical Ecology manuscript unchanged:
+Retain unchanged:
 
-\`manuscript/PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md\`
+`manuscript/PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md`
 
 Core contribution:
 
 > In the symmetric two-patch, two-season anti-phase model, the temporal growth premium has exactly one positive migration optimum for every nonzero environmental contrast, and the optimum collapses onto a dimensionless seasonal-timescale curve.
 
-This paper remains a short exact result. It should not absorb the moving-landscape simulations or the empirical migration programme.
+Paper 1 remains a short mathematical benchmark. It should not absorb the
+partial-information, information-timing or natural-data programme.
 
-### Paper 2 — integrated ecology paper
+### Paper 2 — information, coordination and ecological memory
 
-Canonical PREOUTCOME source:
+New canonical PREOUTCOME source:
 
-\`manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md\`
+`manuscript/PAYOFF_B_INFORMATION_DEADLINES_V2_PREOUTCOME.md`
 
-This combines the former standalone tracking-theory and movement–phenology empirical manuscripts around one ecological mechanism:
+The previous integrated v1 remains a provenance source:
 
-> **Temporal adjustment can buffer spatial tracking demand, but cannot replace movement indefinitely under sustained environmental change.**
+`manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`
 
-The integrated paper uses one sequential argument:
+The v2 paper asks a sharper ecological question:
 
-1. **Exact benchmark:** the separate PAYOFF-B1 theorem supplies a simple timescale-matching null.
-2. **Mechanistic null:** in a local controller, movement and timing are substitutable through total restoring gain, so equal mismatch can arise from different allocations.
-3. **Mechanistic breakdown:** finite timing capacity, landscape geometry and partner dependence break that substitution.
-4. **Broad empirical falsification:** 5,816 observations from 55 migratory bird species do not recover one universal natural movement-speed/environmental-wave-speed optimum.
-5. **Direct mechanistic decomposition:** mule deer, barnacle goose and wigeon transform incoming phase error, but on different ecological intervals and through different actuator architectures.
-6. **Perturbation test:** the preregistered industrial-development Aikens lambda analysis asks whether independent actuation attenuation propagates into phase retention within taxon.
+> **What prevents an interaction network from taking an adaptive seasonal
+> response that physically exists?**
 
-The paper therefore does not move from “theory confirmed by data”. It moves from a deliberately simple benchmark to a documented failure of one-dimensional universality, then explains that failure mechanistically.
+The answer is decomposed into:
 
-## Headline claim
+```text
+cannot do it
+    -> response-capacity barrier
 
-Primary ecological headline:
+cannot predict it
+    -> pre-commitment information barrier
 
-> **Temporal buffering delays but does not permanently replace spatial tracking under sustained environmental change.**
+cannot wait to know it
+    -> decision-deadline / information-timing barrier
 
-Ecological consequence:
+cannot get there alone
+    -> coordination-history barrier
+```
 
-> **Low current mismatch can conceal latent spatial tracking demand and shrinking response options.**
+## Primary headline
 
-Inference consequence:
+The main theoretical surprise is:
 
-> **Mismatch is an outcome, not a tracking architecture.**
+> **Better information can temporarily worsen phenological coordination when
+> interacting species face different decision deadlines.**
 
-## Why integration is scientifically coherent
+The exact mechanism is asynchronous information uptake:
 
-The former theory and empirical manuscripts answer adjacent parts of one buffering-and-reentry problem.
+```text
+poor cue
+    -> both ignore it
+    -> coordinated ignorance
 
-The synthetic theory establishes:
+intermediate cue
+    -> lower-delay partner uses it first
+    -> desynchronization
 
-\`\`\`text
-same endpoint mismatch
-!=
-same movement–timing allocation
-\`\`\`
+strong cue
+    -> both use it
+    -> informed coordination
+```
 
-and then shows why finite capacities and interactions make that ambiguity consequential.
+In the declared witness, expected partner mismatch is zero below cue accuracy
+0.82, positive from 0.82–0.93, and zero again from 0.94, peaking at 0.436.
 
-The broad bird analysis establishes:
+The longer-term second result is:
 
-\`\`\`text
-one observed speed ratio
-!=
-one universal tracking rule
-\`\`\`
+> **Interaction topology determines whether a transient information shock is
+> erased or stored as ecological timing memory.**
 
-The direct systems then provide the missing decomposition:
-
-\`\`\`text
-observed mismatch
-= inherited phase error after realized correction
-+ new environmental innovation
-+ remaining behavioral / measurement variation
-\`\`\`
-
-with the response coordinate separated from system-specific actuators.
-
-The integrated paper is therefore one mechanism-to-falsification sequence: finite temporal buffering explains why current mismatch can stay small while expressed movement demand changes, and why a universal natural speed rule need not emerge.
+Strict lower-payoff hysteresis occurs in 118/391 eligible complete-network cells
+and 52/364 chain cells, but 0/404 migrant-star cells.
 
 ## Evidence hierarchy
 
-### Tier A — general cross-system evidence
+### Tier A — exact information-timing mechanism
 
-The 55-species broad bird test is the primary empirical generality result.
+Primary theoretical evidence:
 
-It rejects a portable natural speed-ratio optimum. It is not demoted below the three direct systems.
+- exact value-of-information threshold;
+- private-versus-joint information-acquisition wedge;
+- endogenous information asymmetry generated by unequal waiting costs;
+- non-monotonic desynchronization under monotonically improving cue quality.
 
-### Tier B — mechanistic theory
+This is the conceptual core of Paper 2.
 
-The local controller, explicit moving landscapes, fragmentation and interaction models explain why one-dimensional tracking summaries can fail.
+### Tier B — network accessibility and memory
 
-Synthetic parameter values are not natural thresholds.
+The three-player Bayesian game establishes:
 
-### Tier C — direct empirical decomposition
+- temporary migrant information loss can alter resident timing policies;
+- strict alternative timing equilibria can remain after information recovery;
+- edge placement, not merely edge number, determines whether the information
+  shock is stored.
 
-Mule deer, barnacle goose and wigeon establish that phase error can be transformed in real migration systems.
+The primary interior witness is local cue accuracy 0.875 and interaction
+strength 0.50. The old 0.90/0.50 point remains a documented tie boundary.
 
-They are not treated as three independent estimates of a universal biological lambda.
+### Tier C — natural information-axis evidence
 
-Raw lambda remains segment-scale. Interval-standardized quantities are secondary comparison coordinates.
+The broad migratory-bird analysis is the main quantitative natural-data result.
 
-### Tier D — prospective within-taxon perturbation
+Registered pooled analysis:
 
-Aikens industrial-development lambda is retained as the strongest discriminating mechanism test because it holds taxon fixed and uses an independently observed actuation contrast.
+- 3,311 observations;
+- 37 species;
+- 635 species-cell units;
+- beta_connectivity = -0.0462;
+- 95% CI = -0.0870 to -0.0054.
 
-Its outcome remains unopened at this restructuring step.
+This is **pooled directional support with dependence-sensitive uncertainty**,
+not a universal species-level coefficient.
 
-## Material retained in main text
+The Samplonius & Both experiment is the main causal/source-backed timing anchor:
 
-The integrated paper should keep only synthetic results that directly explain empirical non-universality:
+- early male settlement occurred before the manipulated resident-phenology cue
+  became apparent and showed no detectable treatment response;
+- later female settlement/pairing responded to resident phenology.
 
-- exact local movement–timing substitutability;
-- finite phenological bypass followed by spatial re-entry;
-- route-cost buffering under fragmentation;
-- coordination barriers under partner dependence;
-- forcing-dependent complementarity of movement and timing.
+It anchors the premise that the same seasonal information can be unavailable to
+an early decision and behaviorally relevant to a later one.
 
-The following belong primarily in Supplementary Information unless required by reviewers:
+### Tier D — discriminating negative evidence
 
-- the full 1D 81-cell coordination grid;
-- full overlap-penalty sweep;
-- full finite-N drift grid;
-- all demographic-replicate diagnostics;
-- secondary anisotropy sweeps;
-- extended stochastic robustness tables.
+Negative results are retained as part of the argument rather than hidden.
 
-This compression is essential. Integration should reduce story count rather than concatenate two manuscripts.
+**Wigeon:** historical route predictive connectivity does not strengthen
+post-error phase correction (registered interaction p=0.756).
 
-## Main empirical results retained
+**Long-term Hoge Veluwe cue-driver lane:** the 1980–2010 series is strongly
+nonstationary but fails the preregistered decline–recovery gate. The history
+model is therefore NOT_RUN.
 
-- 55-species / 5,816-observation universal-speed falsification;
-- mule-deer phase transformation and movement-speed + stopover response;
-- barnacle-goose route-stage phase transformation and stopover/overtake architecture;
-- wigeon POWER/ERA5 phase-retention replication plus actuator non-replication;
-- pre-Aikens interval standardization;
-- environmental innovation versus retained phase-error decomposition;
-- industrial-development actuation attenuation;
-- Aikens lambda result only after the registered environmental reconstruction is executed and frozen.
+These results separate:
 
-## Explicit claim ceiling
+```text
+pre-commitment information
+!=
+post-error correction
+!=
+demonstrated natural hysteresis
+```
 
-The integrated manuscript may claim:
+### Tier E — capacity baseline
 
-- absence of one portable natural speed optimum in the registered 55-species bird analysis;
-- non-identifiability of tracking architecture from endpoint mismatch in the declared local controller;
-- finite temporal buffering that delays but does not permanently replace spatial tracking in the declared synthetic landscapes;
-- low mismatch concealing latent spatial tracking demand in those declared synthetic landscapes;
-- later spatial re-entry in the declared synthetic landscapes;
-- interaction-generated coordination barriers in the declared sampled systems;
-- real phase transformation in the three directly reconstructed migration systems;
-- heterogeneity of actuator architecture and ecological correction interval;
-- separation of environmental information, phase retention and actuation constraints.
+The former temporal-buffering headline becomes the capacity layer:
+
+- movement and timing are locally substitutable;
+- finite phenological capacity delays spatial response;
+- movement re-enters under sustained forcing;
+- temporal adjustment can temporarily hide fragmentation costs.
+
+This remains scientifically valid but is no longer the opening novelty claim.
+
+## What moves out of the Paper 2 main text
+
+The v2 main text should not carry every historical PAYOFF-B result.
+
+Move primarily to Supplementary Information:
+
+- full 55-species universal speed-ratio analysis;
+- extended 1D and 2D migration–phenology sweeps;
+- finite-N drift and demographic robustness grids;
+- full mule-deer and barnacle-goose phase-retention tables;
+- interval-standardization derivations and cross-system lambda comparison;
+- full anisotropy and fragmentation sensitivity sweeps;
+- actuator-by-system diagnostics not needed to distinguish information from
+  correction.
+
+These remain source-backed evidence and can be cited selectively in the main
+text.
+
+## Main-text figure architecture
+
+Maximum six main figures.
+
+1. **Decision deadline and value of information**  
+   Act now versus wait, private versus joint information value, and the
+   flycatcher timing anchor.
+
+2. **Information-induced desynchronization**  
+   Cue reliability versus actor decisions and expected mismatch.
+
+3. **Topology-dependent ecological memory**  
+   Complete, chain and migrant-star contrasts plus strict phase-diagram counts.
+
+4. **Natural predictive connectivity**  
+   Broad-bird registered effect, raw-versus-detrended contrast and
+   dependence-aware uncertainty.
+
+5. **Prediction is not correction**  
+   Wigeon registered null plus the long-term cue-driver reversal-gate failure.
+
+6. **Capacity is a separate barrier**  
+   Compact finite temporal-buffering / spatial-reentry result.
+
+## Aikens status
+
+The preregistered Aikens phase-retention outcome remains unopened.
+
+It is no longer structurally central to the v2 headline. If retained after
+opening, its role is a capacity/actuation boundary test.
+
+The v2 paper must remain coherent under:
+
+- supported Aikens phase-retention contrast;
+- null contrast;
+- opposite-signed but uncertain contrast;
+- NOT_ESTIMABLE outcome.
+
+No title, information-timing mechanism, Bayesian network result or empirical
+predictive-connectivity claim may be retuned based on the Aikens outcome.
+
+## Prior-art firewall
+
+Paper 2 does **not** claim novelty for:
+
+- game-theoretic phenology;
+- migration timing under uncertain information;
+- costs or value of information;
+- social information use;
+- predictive environmental connectivity;
+- cue-driver decoupling under climate change;
+- phenological mismatch or ecological traps;
+- hysteresis in ecological phenology in general.
+
+Tomotani et al. (2021) is direct prior art for the hypothesis that climate
+change can disrupt migration cue–driver correlations.
+
+PAYOFF-B novelty begins downstream:
+
+```text
+changing cue quality
+x unequal decision deadlines
+-> asynchronous cue uptake
+-> non-monotonic interactor mismatch
+-> topology-dependent storage of timing history
+```
+
+## Claim ceiling
+
+Paper 2 may claim:
+
+- exact private and joint information-value thresholds in the declared model;
+- non-monotonic coordination under monotonically improving cue quality in the
+  declared unequal-delay model;
+- strict topology-dependent lower-payoff hysteresis in the declared Bayesian
+  interaction game;
+- pooled natural association between pre-outcome predictive connectivity and
+  smaller migration mismatch, with dependence-sensitive uncertainty;
+- source-backed timing-dependent social-information availability in the
+  flycatcher experiment;
+- the registered wigeon null as evidence that predictive information and
+  post-error correction are distinct coordinates;
+- failure of the registered 1980–2010 natural cue-driver reversal gate;
+- finite temporal buffering as a separate capacity mechanism.
 
 It may not claim:
 
-- a universal lambda;
-- a universal controller mechanism;
-- that synthetic climate velocities are natural thresholds;
-- that the three direct taxa form a formal meta-analysis;
-- direct biological ranking of taxa by raw lambda;
-- causal attribution of the industrial population contrast solely to development;
-- direct empirical measurement of latent spatial tracking demand across the 55-species or three-system datasets;
-- that all natural phenological adjustment necessarily creates hidden spatial demand;
-- that all low mismatch indicates strong adaptation;
-- that the anti-phase theorem holds in the general moving-landscape or empirical systems.
+- observed natural interaction-network hysteresis;
+- a universal benefit or harm of improved information;
+- a universal predictive-connectivity coefficient;
+- that the synthetic cue thresholds are natural thresholds;
+- that female flycatchers deliberately wait to collect tit information;
+- that the 2001 long-term segmented change is a confirmed climate-driven
+  information-collapse event;
+- a universal lambda or controller.
 
-## Aikens gate
+## Active programme
 
-The integrated draft remains **PREOUTCOME** until the registered Aikens environmental table is materialized and the frozen outcome-blind pipeline renders:
+```text
+PAPER 1:
+    PAYOFF-B1 exact theorem
+    -> Theoretical Ecology manuscript retained unchanged
 
-- result paragraph;
-- discussion paragraph;
-- conclusion sentence;
-- claim-state receipt.
+PAPER 2:
+    PAYOFF-B information deadlines / coordination memory
+    -> manuscript/PAYOFF_B_INFORMATION_DEADLINES_V2_PREOUTCOME.md
 
-No retuning of the integrated narrative based on the sign or significance of the Aikens lambda contrast is allowed. The manuscript is required to remain coherent under supported, null or non-estimable Aikens outcomes.
-
-## Publication-state rule
-
-The existing frozen Oikos package and GEB source remain intact as rollback / provenance sources.
-
-The active publication architecture is:
-
-\`\`\`text
-PAPER 1: PAYOFF-B1 exact theorem — Theoretical Ecology
-PAPER 2: integrated tracking ecology — broad ecology target
-SOURCE MANUSCRIPTS:
+PROVENANCE / ROLLBACK SOURCES:
+    PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md
     PAYOFF_B_TRACKING_THEORY_V1.md
     PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md
-\`\`\`
+```
 
-The source manuscripts are retained as provenance and extraction sources, not submitted as separate overlapping papers.
+The v1 integrated manuscript is no longer the canonical writing source once v2
+passes manuscript audit, but it remains preserved and citable for provenance.
