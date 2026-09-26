@@ -1,8 +1,11 @@
 # Better information can transiently worsen seasonal coordination under unequal decision deadlines
 
-**Status:** integrated ecology manuscript v2, PREOUTCOME  
+**Status:** integrated ecology manuscript v2; main-text narrative outcome-independent, with the separately preregistered Aikens lambda result still unopened for Supplementary Information.  
+**Article type:** Letter  
+**Running title:** Information deadlines and coordination  
+**Current submission counts:** abstract 150 words; main text approximately 3,816 words; 6 main figures; 9 references.  
 **Relation to v1:** candidate replacement narrative for `PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`; v1 remains retained for provenance.  
-**Outcome boundary:** all Bayesian, information-timing, predictive-connectivity and temporal-buffering claims below are inherited from frozen receipts already in the repository. The preregistered Aikens phase-retention outcome remains unopened and is not required for the argument.
+**Outcome boundary:** all Bayesian, information-timing, predictive-connectivity and temporal-buffering claims below are inherited from frozen receipts already in the repository. The Aikens result is frozen to Supplementary Information regardless of outcome and cannot alter the main-text argument.
 
 ## Abstract
 
@@ -445,15 +448,12 @@ A seasonal response can fail because:
 
 These mechanisms can produce similar endpoint mismatch but imply different interventions and different responses to future forcing.
 
-### 5.7 Outcome-blind perturbation test
+### 5.7 Supplementary actuation boundary
 
-The registered Aikens within-taxon phase-retention result remains unopened.
-
-<!-- AIKENS_LAMBDA_DISCUSSION_START -->
-[AIKENS LAMBDA DISCUSSION PENDING — if retained in this manuscript, it is an actuation/capacity boundary test and must not alter the information-timing headline.]
-<!-- AIKENS_LAMBDA_DISCUSSION_END -->
-
-The information-deadline argument does not depend on its sign or estimability.
+A separately preregistered within-taxon industrial-development actuation test
+is frozen to Supplementary Information regardless of its outcome. It is
+reported as a capacity/actuation boundary and cannot alter the
+information-timing headline.
 
 ### 5.8 Limitations
 
