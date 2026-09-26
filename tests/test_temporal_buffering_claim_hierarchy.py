@@ -39,3 +39,13 @@ def test_claim_hierarchy_records_registered_natural_substitution_failure() -> No
     assert "Timing responsiveness can improve average alignment without making" in text
     assert "movement-speed matching dispensable" in text
     assert "secondary timing main effect" in text
+
+
+def test_claim_hierarchy_distinguishes_gain_capacity_and_transport() -> None:
+    text = DOC.read_text(encoding="utf-8")
+    assert "Gain–capacity–propagation decomposition" in text
+    assert "timing gain" in text
+    assert "timing capacity / temporal budget" in text
+    assert "movement speed / route progression" in text
+    assert "high gain" in text
+    assert "remaining capacity" in text
