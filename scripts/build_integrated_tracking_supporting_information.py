@@ -13,6 +13,7 @@ from build_tracking_theory_supporting_information import (
 
 ROOT = Path(__file__).resolve().parents[1]
 BROAD = ROOT / "data" / "payoff_b_broad_bird_stage1_result_20260925.json"
+HOLDOUT = ROOT / "data" / "payoff_b_temporal_buffering_bird_holdout_result_20260925.json"
 PANEL = ROOT / "data" / "payoff_b_empirical_phase_panel_status_20260921.json"
 INDUSTRIAL = ROOT / "data" / "payoff_b_industrial_mule_deer_actuator_receipt_20260921.json"
 WIGEON = ROOT / "data" / "wigeon_era5_sourcefaithful_calibration_result_20260924.json"
@@ -44,6 +45,7 @@ def build_supporting_information() -> str:
     )
 
     broad = load(BROAD)
+    holdout = load(HOLDOUT)
     panel = load(PANEL)
     industrial = load(INDUSTRIAL)
     wigeon = load(WIGEON)
@@ -124,6 +126,57 @@ def build_supporting_information() -> str:
         "",
         "Retained inference: the registered broad test does not support one universal "
         "natural movement-speed/environmental-wave-speed optimum.",
+        "",
+        "### S9.5 Registered chronological temporal-substitution holdout",
+        "",
+        "A fresh response-blind registration split the archived bird dataset into "
+        "2002–2009 calibration years and 2010–2017 holdout years. Calibration "
+        "years estimated species timing responsiveness to green-up; holdout years "
+        "tested whether stronger historical timing responsiveness flattened the "
+        "mismatch-versus-speed-ratio curve.",
+        "",
+        "| quantity | value |",
+        "|---|---:|",
+        f"| timing-gain eligible species | {holdout['calibration']['n_species_timing_gain_eligible']} |",
+        f"| holdout observations | {holdout['holdout']['n_rows']} |",
+        f"| holdout species | {holdout['holdout']['n_species']} |",
+        f"| holdout years | {holdout['holdout']['n_years']} |",
+        "",
+        "| registered primary test | value |",
+        "|---|---:|",
+        f"| q² × timing-gain estimate | {holdout['primary_registered_test']['estimate']:.5f} |",
+        f"| standard error | {holdout['primary_registered_test']['std_error']:.5f} |",
+        f"| p-value | {holdout['primary_registered_test']['p_value']:.4f} |",
+        f"| expected direction | {holdout['primary_registered_test']['expected_direction']} |",
+        f"| classification | {holdout['primary_registered_test']['classification']} |",
+        "",
+        "The registered temporal-substitution prediction therefore failed in "
+        "direction: stronger historical timing responsiveness did not weaken later "
+        "movement-speed dependence.",
+        "",
+        "The same frozen model contained a secondary descriptive timing-responsiveness "
+        f"main effect of {holdout['secondary_descriptive_terms']['z_timing_gain']['estimate']:.3f} "
+        f"± {holdout['secondary_descriptive_terms']['z_timing_gain']['std_error']:.3f} "
+        f"(p={holdout['secondary_descriptive_terms']['z_timing_gain']['p_value']:.4f}). "
+        "This association is not promoted to the registered primary result.",
+        "",
+        "The holdout therefore supports the claim boundary, not a replacement "
+        "positive hypothesis: timing responsiveness can improve average alignment "
+        "without making movement-speed matching dispensable.",
+        "",
+        "### S9.6 Published source consistency with phase–velocity control",
+        "",
+        "The Amaral source study independently modelled bird migration speed. In its "
+        "published Table 1, green-up date anomaly had coefficient -0.549 "
+        "(95% CI -0.770 to -0.327) and green-up speed anomaly had coefficient "
+        "+0.088 (95% CI +0.041 to +0.134). The species timing-sensitivity term "
+        "in the migration-speed model was +0.119 (95% CI -0.034 to +0.203).",
+        "",
+        "These published results are prior consistency only. They show that migration "
+        "speed itself responds to environmental timing and propagation and provide no "
+        "evidence for a simple negative tradeoff in which stronger timing response "
+        "makes movement speed less important. They do not establish positive "
+        "timing-movement complementarity.",
         "",
         "## S10. Direct phase-control systems and interval scale",
         "",
@@ -225,6 +278,8 @@ def build_supporting_information() -> str:
         "- The synthetic mechanism result is finite temporal buffering followed by spatial re-entry under sustained forcing.",
         "- Low mismatch can conceal latent spatial tracking demand in the declared synthetic landscapes.",
         "- The 55-species result is the primary cross-system generality test.",
+        "- The registered chronological holdout failed the prediction that stronger timing responsiveness weakens later movement-speed dependence.",
+        "- Its negative timing-responsiveness main effect is secondary descriptive evidence, not a replacement primary result.",
         "- Direct taxa share a phase-retention estimator form, not a universal raw lambda.",
         "- Interval-standardized retained memory is a secondary scale-explicit coordinate.",
         "- Actuator architecture remains system- and reconstruction-dependent.",

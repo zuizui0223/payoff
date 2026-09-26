@@ -43,7 +43,7 @@ def test_geb_overlay_strips_internal_sections_and_preserves_aikens_markers() -> 
     assert "## Claim ceiling" not in text
     assert "## Figure architecture" not in text
     assert "## Prior-art boundary" not in text
-    assert "### 5.7 Relationship to existing literature" in text
+    assert "### 5.8 Relationship to existing literature" in text
     for name in ("ABSTRACT", "RESULTS", "DISCUSSION", "CONCLUSION"):
         assert text.count(f"<!-- AIKENS_LAMBDA_{name}_START -->") == 1
         assert text.count(f"<!-- AIKENS_LAMBDA_{name}_END -->") == 1

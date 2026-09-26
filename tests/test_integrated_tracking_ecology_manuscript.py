@@ -7,6 +7,7 @@ THEOREM = ROOT / "manuscript" / "PAYOFF_B_THEORETICAL_ECOLOGY_BRIEF_V1.md"
 TRACKING_SOURCE = ROOT / "manuscript" / "PAYOFF_B_TRACKING_THEORY_V1.md"
 GEB_SOURCE = ROOT / "manuscript" / "PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md"
 BROAD = ROOT / "data" / "payoff_b_broad_bird_stage1_result_20260925.json"
+HOLDOUT = ROOT / "data" / "payoff_b_temporal_buffering_bird_holdout_result_20260925.json"
 
 
 def text(path: Path) -> str:
@@ -43,7 +44,7 @@ def test_integration_promotes_temporal_buffering_not_universal_lambda() -> None:
     assert "temporal adjustment can buffer spatial tracking demand" in m
     assert "it cannot replace movement indefinitely under sustained environmental change" in m
     assert "latent spatial tracking demand" in m
-    assert "Mismatch is consequently an outcome" in m
+    assert "mismatch is an outcome" in m.lower()
     assert "It does not support:" in m
     assert "a universal lambda or universal actuator" in m
 
@@ -108,3 +109,30 @@ def test_integrated_broad_bird_claims_are_bound_to_machine_receipt() -> None:
     assert payload["species_heterogeneity"]["n_vertices_inside_5_95"] == 11
     assert payload["source_analysis"]["workflow_run_id"] == 35328297725
     assert payload["source_analysis"]["workflow_artifact_id"] == 10540282539
+
+
+def test_integrated_manuscript_retains_failed_temporal_substitution_test() -> None:
+    import json
+
+    m = text(INTEGRATED)
+    x = json.loads(HOLDOUT.read_text(encoding="utf-8"))
+    assert x["scientific_status"] == "FAIL_WRONG_DIRECTION"
+    assert x["retuning_permitted"] is False
+    assert "+0.0351 ± 0.0289" in m
+    assert "opposite to the predicted negative direction" in m
+    assert "not the registered primary test" in m
+    assert "post-readout mechanistic interpretation" in m
+    assert "timing gain" in m
+    assert "timing capacity" in m
+    assert "movement speed" in m
+    assert "does not measure" in m
+    assert "z_{\\max}" in m
+
+
+def test_integrated_manuscript_distinguishes_gain_from_capacity() -> None:
+    m = text(INTEGRATED)
+    assert "timing gain" in m
+    assert "timing capacity" in m
+    assert "The bird holdout estimates the first quantity, not the second." in m
+    assert "high gain" in m.lower()
+    assert "remaining phenological capacity" in m

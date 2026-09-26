@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT = ROOT / "manuscript" / "PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md"
 BROAD = ROOT / "data" / "payoff_b_broad_bird_stage1_result_20260925.json"
+HOLDOUT = ROOT / "data" / "payoff_b_temporal_buffering_bird_holdout_result_20260925.json"
 PANEL = ROOT / "data" / "payoff_b_empirical_phase_panel_status_20260921.json"
 FIGURE_AUDIT = ROOT / "submission" / "PAYOFF_B_INTEGRATED_SIX_FIGURE_AUDIT_20260925.md"
 
@@ -115,6 +116,7 @@ def audit(path: Path = DEFAULT) -> dict:
     }
 
     broad = json.loads(BROAD.read_text(encoding="utf-8"))
+    holdout = json.loads(HOLDOUT.read_text(encoding="utf-8"))
     panel = json.loads(PANEL.read_text(encoding="utf-8"))
     figure_audit = FIGURE_AUDIT.read_text(encoding="utf-8")
 
@@ -150,6 +152,24 @@ def audit(path: Path = DEFAULT) -> dict:
             panel["broad_bird_falsification"]["primary_cross_system_result"] is True
             and panel["broad_bird_falsification"]["universal_speed_ratio_supported"] is False
         ),
+        "registered_temporal_substitution_failure_retained": (
+            holdout["scientific_status"] == "FAIL_WRONG_DIRECTION"
+            and holdout["retuning_permitted"] is False
+            and holdout["primary_registered_test"]["expected_direction"] == "negative"
+            and holdout["primary_registered_test"]["estimate"] > 0
+            and "failed in direction" in text.lower()
+        ),
+        "secondary_timing_main_effect_not_promoted": (
+            "not the registered primary test" in text
+            or "secondary descriptive" in text
+        ),
+        "gain_capacity_interpretation_is_transparent": (
+            "post-readout mechanistic interpretation" in text
+            and "timing gain" in text
+            and "timing capacity" in text
+            and "does not measure" in text
+            and "z_{\\max}" in text
+        ),
         "figure_set_machine_audited": (
             "Status: **PASS" in figure_audit
             and "aikens_outcome_opened = false" in figure_audit
@@ -184,6 +204,7 @@ def audit(path: Path = DEFAULT) -> dict:
         ],
         "claim_state": {
             "universal_speed_rule_supported": False,
+            "temporal_substitution_supported": False,
             "universal_lambda_licensed": False,
             "aikens_lambda_outcome_opened": False,
         },

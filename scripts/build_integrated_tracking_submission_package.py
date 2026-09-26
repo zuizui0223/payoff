@@ -33,10 +33,15 @@ INTERNAL_FILES = [
     "docs/PAYOFF_B_TWO_PAPER_PUBLICATION_ARCHITECTURE_20260925.md",
     "submission/PAYOFF_B_INTEGRATED_FIGURE_SOURCE_CROSSWALK_20260925.md",
     "submission/PAYOFF_B_INTEGRATED_SIX_FIGURE_AUDIT_20260925.md",
+    "theory/PHASE_VELOCITY_TEMPORAL_BUFFERING.md",
 ]
 
 EMPIRICAL_RECEIPTS = [
     "data/payoff_b_broad_bird_stage1_result_20260925.json",
+    "data/payoff_b_temporal_buffering_bird_holdout_registration_20260925.json",
+    "data/payoff_b_temporal_buffering_bird_preflight_receipt_20260925.json",
+    "data/payoff_b_temporal_buffering_bird_holdout_result_20260925.json",
+    "data/payoff_b_amaral_parallel_control_prior_consistency_20260925.json",
     "data/payoff_b_empirical_phase_panel_status_20260921.json",
     "data/payoff_b_phase_retention_interval_standardization_result_20260925.json",
     "data/payoff_b_industrial_mule_deer_actuator_receipt_20260921.json",

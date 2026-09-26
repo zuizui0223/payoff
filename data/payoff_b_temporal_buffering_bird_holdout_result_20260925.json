@@ -1,0 +1,94 @@
+{
+  "receipt_id": "payoff_b_temporal_buffering_bird_holdout_result_20260925",
+  "frozen_date": "2026-09-25",
+  "registration_id": "payoff_b_temporal_buffering_bird_holdout_v1_20260925",
+  "workflow_run_id": 36122102742,
+  "workflow_artifact_id": 10857712843,
+  "workflow_artifact_sha256": "a0147a378927b3fdc29fac790bc606ddb7d2c64ff23875592ce04f98eb446a0f",
+  "scientific_status": "FAIL_WRONG_DIRECTION",
+  "outcome_opened": true,
+  "retuning_permitted": false,
+  "split": {
+    "calibration_years": [
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009
+    ],
+    "holdout_years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017
+    ]
+  },
+  "calibration": {
+    "n_species_timing_gain_eligible": 39,
+    "timing_gain_mean": 0.1452627472537285,
+    "timing_gain_sd": 0.1575874866205476
+  },
+  "holdout": {
+    "n_rows": 3268,
+    "n_species": 39,
+    "n_years": 8
+  },
+  "estimability_reasons": [],
+  "primary_registered_test": {
+    "term": "I(log_speed_ratio^2):z_timing_gain",
+    "expected_direction": "negative",
+    "estimate": 0.03506263176814132,
+    "std_error": 0.02888649274176977,
+    "statistic": 1.213807161761832,
+    "p_value": 0.2249164339850812,
+    "support_gate": {
+      "direction": "estimate < 0",
+      "max_p_value": 0.05
+    },
+    "classification": "FAIL_WRONG_DIRECTION"
+  },
+  "registered_interpretation": "Historical timing responsiveness did not weaken later movement-speed dependence in the predicted direction.",
+  "secondary_descriptive_terms": {
+    "z_timing_gain": {
+      "estimate": -0.29993,
+      "std_error": 0.10505,
+      "p_value": 0.00433,
+      "role": "descriptive model term; not the registered primary test"
+    },
+    "quadratic_at_mean_timing_gain": {
+      "estimate": 0.06128,
+      "std_error": 0.03193,
+      "p_value": 0.05506,
+      "role": "descriptive model term"
+    },
+    "implied_curvature": {
+      "z_minus_1": 0.0262140822159242,
+      "z_plus_1": 0.0963393457522068,
+      "role": "descriptive fitted curvature; interaction uncertainty prevents a positive complementarity claim"
+    }
+  },
+  "claim_boundary": [
+    "the registered temporal-substitution prediction failed in direction",
+    "the result does not support the claim that stronger historical timing responsiveness flattens later mismatch dependence on movement speed",
+    "the negative z_timing_gain main effect may be reported only as a secondary descriptive association",
+    "the positive interaction cannot be promoted to evidence for complementarity because it is unsupported under the frozen primary gate",
+    "no alternative split, trait, response, model, or threshold may replace the registered primary test",
+    "the synthetic finite-buffering and spatial-reentry results are not reopened by this archived-data failure"
+  ],
+  "artifact_file_hashes": {
+    "temporal_buffering_bird_holdout_result.json": "eab89ec7ce536760ff29ae2fab2cc047b2cc8cf209e612908a38d2c13f64aa87",
+    "temporal_buffering_holdout_primary.csv": "513545786ef68b8adb7d65ec164d1b2e7ca61be82cca88d5d9ffaa65a230ad40",
+    "temporal_buffering_holdout_curvature.csv": "8a76409bc44ca9e0ab348d9c1fddd2d55753da1aaed632669cc2df38dc6e21e5",
+    "temporal_buffering_holdout_curves.csv": "605230f89e140df653e832b908611628b9c0c6e355bebcb255001cfb3c59b0c3",
+    "temporal_buffering_timing_gain_species.csv": "5cb6f14e4ce65f12006e1886ceb365921ac460280555c6e86d7f23d03ff7f953",
+    "temporal_buffering_holdout_counts_by_year.csv": "501201747dd1d3c0e4505c3883a23c64771f0f168e940da7e2413830d2e6068d",
+    "temporal_buffering_holdout_model_summary.txt": "2e9a35399619f384e367cdaa61e073a6836c398cc23a7256eeb5e0b4ea24e5b6"
+  }
+}

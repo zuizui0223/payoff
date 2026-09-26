@@ -1,0 +1,74 @@
+{
+  "receipt_id": "payoff_b_temporal_buffering_bird_preflight_20260925",
+  "frozen_date": "2026-09-25",
+  "status": "RESPONSE_BLIND_PREFLIGHT_PASS",
+  "registration_id": "payoff_b_temporal_buffering_bird_holdout_v1_20260925",
+  "workflow_run_id": 36121707677,
+  "workflow_artifact_id": 10858356944,
+  "workflow_artifact_sha256": "96c5ccf41359d456b67a0dd1d6f660c5ce316c277ef67d0be1e8cdca1a4e2b73",
+  "source_columns_read": [
+    "year",
+    "species",
+    "cell"
+  ],
+  "outcome_columns_inspected": false,
+  "unique_years": [
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017
+  ],
+  "n_unique_years": 16,
+  "split_rule": "first floor(n_unique_years/2) years calibration; remaining later years holdout",
+  "calibration_years": [
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009
+  ],
+  "holdout_years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017
+  ],
+  "calibration": {
+    "n_rows": 5149,
+    "n_species": 56,
+    "n_cells": 56,
+    "n_species_cells": 1324
+  },
+  "holdout": {
+    "n_rows": 10726,
+    "n_species": 56,
+    "n_cells": 56,
+    "n_species_cells": 1400
+  },
+  "n_species_passing_structural_count_gate": 39,
+  "structural_count_gate": {
+    "min_observations": 60,
+    "min_cells": 5,
+    "min_years": 5
+  },
+  "implication": "structural coverage is compatible with the frozen estimability thresholds; scientific readout remains unopened until this receipt commit triggers the registered workflow"
+}

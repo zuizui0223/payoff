@@ -1,0 +1,110 @@
+{
+  "registration_id": "payoff_b_temporal_buffering_bird_holdout_v1_20260925",
+  "frozen_date": "2026-09-25",
+  "status": "FROZEN_BEFORE_HOLDOUT_READOUT",
+  "scientific_role": "fresh split-sample empirical test of the temporal-buffering mechanism using the archived 55-species bird dataset",
+  "source": {
+    "study": "Amaral et al. 2025",
+    "doi": "10.5061/dryad.ttdz08m6w",
+    "pinned_repository_file": "https://raw.githubusercontent.com/br-amaral/BirdMigrationSpeed/62c58d77c2028bd863dfe3697b0d9cf29ceaeab0/data/final.rds",
+    "source_commit": "62c58d77c2028bd863dfe3697b0d9cf29ceaeab0"
+  },
+  "hypothesis": {
+    "statement": "Species with stronger historical temporal responsiveness of arrival date to green-up timing will show weaker holdout dependence of phase mismatch on the animal/environment speed ratio.",
+    "mechanistic_link": "If seasonal timing buffers spatial tracking demand, greater timing responsiveness should flatten the holdout mismatch-versus-speed-ratio curve rather than generate one common speed optimum.",
+    "primary_parameter": "beta_q2_x_timing_gain",
+    "expected_direction": "negative"
+  },
+  "split_rule": {
+    "unit": "calendar_year",
+    "order": "ascending unique observed years after source-level availability only",
+    "calibration": "first floor(n_unique_years / 2) years",
+    "holdout": "all remaining later years",
+    "retuning_after_preflight": false,
+    "reason": "chronological split prevents the holdout mismatch-speed relation from contributing to the temporal-responsiveness estimate"
+  },
+  "calibration_timing_gain": {
+    "species_cell_arrival_baseline": "mean(arr_GAM_mean) within species x cell over calibration years",
+    "cell_greenup_baseline": "mean(gr_mn) across unique cell x year values within each cell over calibration years",
+    "arrival_anomaly": "arr_GAM_mean - species_cell_arrival_baseline",
+    "greenup_anomaly": "gr_mn - cell_greenup_baseline",
+    "per_species_model": "lm(arrival_anomaly ~ greenup_anomaly)",
+    "raw_timing_gain": "slope on greenup_anomaly",
+    "standardized_timing_gain": "z score of raw_timing_gain across eligible species, using calibration-only mean and SD",
+    "eligibility": {
+      "min_calibration_observations": 60,
+      "min_calibration_cells": 5,
+      "min_calibration_years": 5,
+      "finite_slope_required": true,
+      "observation_definition": "finite arr_GAM_mean and gr_mn rows used in the calibration timing-gain model"
+    },
+    "forbidden_inputs": [
+      "holdout years",
+      "migration speed variables",
+      "speed ratio",
+      "holdout mismatch"
+    ]
+  },
+  "holdout_phase_error": {
+    "baseline_lag": "mean(arr_GAM_mean - gr_mn) within species x cell over calibration years",
+    "baseline_min_calibration_observations": 3,
+    "holdout_signed_deviation": "(arr_GAM_mean - gr_mn) - calibration baseline_lag",
+    "response": "absolute value of holdout_signed_deviation"
+  },
+  "holdout_filters": {
+    "positive_animal_speed": true,
+    "positive_environment_speed": true,
+    "max_speed_each": 3000,
+    "finite_alignment": true,
+    "finite_cell_latitude": true,
+    "eligible_species_only": true,
+    "calibration_baseline_required": true
+  },
+  "primary_model": {
+    "engine": "mgcv::bam",
+    "method": "fREML",
+    "formula": "abs_lag_deviation_holdout ~ log_speed_ratio + I(log_speed_ratio^2) + z_timing_gain + log_speed_ratio:z_timing_gain + I(log_speed_ratio^2):z_timing_gain + log_speed_scale + alignment + cell_lat2 + greenup_date_anom_from_calibration + mig_flag + breed_flag + s(species, bs='re') + s(species_cell, bs='re') + s(year_f, bs='re')",
+    "primary_term": "I(log_speed_ratio^2):z_timing_gain",
+    "support_gate": {
+      "direction": "coefficient < 0",
+      "max_p_value": 0.05
+    }
+  },
+  "estimability_gate": {
+    "min_eligible_species": 15,
+    "min_holdout_rows": 1000,
+    "min_holdout_years": 5,
+    "timing_gain_sd_must_be_positive": true,
+    "model_must_fit": true,
+    "if_failed": "NOT_ESTIMABLE"
+  },
+  "secondary_descriptive_outputs": [
+    "eligible species timing-gain table",
+    "primary coefficient estimate, SE, t statistic and p value",
+    "predicted holdout speed-ratio curves at z_timing_gain = -1, 0, +1",
+    "quadratic curvature implied at z_timing_gain = -1 and +1",
+    "holdout sample counts by year and species"
+  ],
+  "claim_rule": {
+    "PASS": "Historical timing responsiveness weakens later movement-speed dependence, supporting temporal buffering as a natural moderator of spatial tracking demand.",
+    "FAIL_WRONG_DIRECTION": "Historical timing responsiveness does not buffer later movement-speed dependence in the predicted direction.",
+    "FAIL_INSUFFICIENT_SUPPORT": "The estimated moderation points in the predicted direction but does not pass the frozen support gate.",
+    "NOT_ESTIMABLE": "The archived split sample does not satisfy the frozen estimability gate; no retuning is permitted."
+  },
+  "prohibited_post_readout_actions": [
+    "change the chronological split",
+    "change the timing-gain definition",
+    "change the quadratic interaction term",
+    "add species traits to rescue support",
+    "change the p-value threshold",
+    "switch from phase-centered holdout mismatch to raw mismatch as the primary response",
+    "promote a descriptive secondary result to the primary test"
+  ],
+  "implementation_clarification_before_readout": {
+    "date": "2026-09-25",
+    "outcome_opened": false,
+    "changes_to_split_thresholds_or_primary_model": false,
+    "calibration_observation_definition": "rows with finite arr_GAM_mean and gr_mn used by the timing-gain regression",
+    "cell_greenup_baseline_weighting": "mean across unique cell x year gr_mn values in calibration years, so species replication does not reweight years"
+  }
+}

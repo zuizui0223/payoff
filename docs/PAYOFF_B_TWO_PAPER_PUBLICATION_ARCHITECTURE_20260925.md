@@ -34,8 +34,10 @@ The integrated paper uses one sequential argument:
 2. **Mechanistic null:** in a local controller, movement and timing are substitutable through total restoring gain, so equal mismatch can arise from different allocations.
 3. **Mechanistic breakdown:** finite timing capacity, landscape geometry and partner dependence break that substitution.
 4. **Broad empirical falsification:** 5,816 observations from 55 migratory bird species do not recover one universal natural movement-speed/environmental-wave-speed optimum.
-5. **Direct mechanistic decomposition:** mule deer, barnacle goose and wigeon transform incoming phase error, but on different ecological intervals and through different actuator architectures.
-6. **Perturbation test:** the preregistered industrial-development Aikens lambda analysis asks whether independent actuation attenuation propagates into phase retention within taxon.
+5. **Registered substitution test:** a response-blind 2002–2009 / 2010–2017 holdout rejects the simple prediction that stronger historical timing responsiveness weakens later movement-speed dependence.
+6. **Phase–velocity interpretation:** timing primarily changes phase offset whereas movement speed controls mismatch drift along a moving environmental wave.
+7. **Direct mechanistic decomposition:** mule deer, barnacle goose and wigeon transform incoming phase error, but on different ecological intervals and through different actuator architectures.
+8. **Perturbation test:** the preregistered industrial-development Aikens lambda analysis asks whether independent actuation attenuation propagates into phase retention within taxon.
 
 The paper therefore does not move from “theory confirmed by data”. It moves from a deliberately simple benchmark to a documented failure of one-dimensional universality, then explains that failure mechanistically.
 
@@ -92,9 +94,13 @@ The integrated paper is therefore one mechanism-to-falsification sequence: finit
 
 ### Tier A — general cross-system evidence
 
-The 55-species broad bird test is the primary empirical generality result.
+The 55-species broad bird test remains the primary empirical generality result.
 
-It rejects a portable natural speed-ratio optimum. It is not demoted below the three direct systems.
+It rejects a portable natural speed-ratio optimum. A fresh chronological
+holdout then tests a stronger mechanistic implication and fails the prediction
+that greater timing responsiveness should flatten later speed dependence. These
+two falsifications are retained together and are not demoted below the three
+direct systems.
 
 ### Tier B — mechanistic theory
 
@@ -140,6 +146,10 @@ This compression is essential. Integration should reduce story count rather than
 ## Main empirical results retained
 
 - 55-species / 5,816-observation universal-speed falsification;
+- registered chronological temporal-substitution failure: q² × timing
+  responsiveness = +0.0351 ± 0.0289, p=0.2249, FAIL_WRONG_DIRECTION;
+- secondary descriptive timing-responsiveness main effect
+  −0.300 ± 0.105, p=0.0043, not promoted to the primary test;
 - mule-deer phase transformation and movement-speed + stopover response;
 - barnacle-goose route-stage phase transformation and stopover/overtake architecture;
 - wigeon POWER/ERA5 phase-retention replication plus actuator non-replication;
@@ -153,6 +163,7 @@ This compression is essential. Integration should reduce story count rather than
 The integrated manuscript may claim:
 
 - absence of one portable natural speed optimum in the registered 55-species bird analysis;
+- failure of the registered natural prediction that stronger timing responsiveness weakens later movement-speed dependence;
 - non-identifiability of tracking architecture from endpoint mismatch in the declared local controller;
 - finite temporal buffering that delays but does not permanently replace spatial tracking in the declared synthetic landscapes;
 - low mismatch concealing latent spatial tracking demand in those declared synthetic landscapes;
@@ -172,6 +183,8 @@ It may not claim:
 - causal attribution of the industrial population contrast solely to development;
 - direct empirical measurement of latent spatial tracking demand across the 55-species or three-system datasets;
 - that all natural phenological adjustment necessarily creates hidden spatial demand;
+- that the secondary timing-responsiveness main effect replaces the failed registered substitution test;
+- that the unsupported positive holdout interaction demonstrates natural timing–movement complementarity;
 - that all low mismatch indicates strong adaptation;
 - that the anti-phase theorem holds in the general moving-landscape or empirical systems.
 

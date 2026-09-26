@@ -69,8 +69,8 @@ def outcome_cover_letter(result_json: Path) -> str:
 
 Dear Editors,
 
-Please consider our Research Article, **“Hidden tracking: why environmental
-mismatch does not reveal how organisms keep pace with changing environments,”**
+Please consider our Research Article, **“Temporal buffering delays but does not
+replace spatial tracking under environmental change,”**
 for *Global Ecology and Biogeography*.
 
 Environmental mismatch is often used as a summary of how organisms track
@@ -85,9 +85,15 @@ restoring feedback. Explicit landscapes show why the hidden allocation matters,
 because timing has finite capacity, movement experiences landscape geometry, and
 interacting partners can face coordination barriers. Across 5,816 observations
 from 55 migratory bird species, the data do not support one portable natural
-animal-speed/environmental-wave-speed optimum. Direct reconstructions in mule
-deer, barnacle geese and Eurasian wigeon instead show phase transformation on
-different ecological intervals and through different actuator architectures.
+animal-speed/environmental-wave-speed optimum. A registered chronological
+holdout also found that stronger historical timing responsiveness did not
+weaken later movement-speed dependence; the primary moderation failed in
+direction. The source-study bird-speed models are consistent with the same
+phase–velocity division of labor: environmental timing and propagation both
+predict migration speed, while the published timing-sensitivity coefficient is
+not negative. Direct reconstructions in mule deer, barnacle geese and Eurasian
+wigeon instead show phase transformation on different ecological intervals and
+through different actuator architectures.
 
 Registered perturbation result: **{result_class}**. {summary}
 

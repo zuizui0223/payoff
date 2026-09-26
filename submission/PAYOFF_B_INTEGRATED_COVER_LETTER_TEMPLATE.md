@@ -7,8 +7,8 @@
 
 Dear **[Editor / Editors]**,
 
-Please consider our manuscript, **“Hidden tracking: why environmental mismatch
-does not reveal how organisms keep pace with changing environments,”** for
+Please consider our manuscript, **“Temporal buffering delays but does not
+replace spatial tracking under environmental change,”** for
 publication as **[article type]** in **[journal]**.
 
 Organisms can track changing conditions by moving through space or shifting
@@ -22,11 +22,16 @@ timing can carry the same corrective burden. Explicit landscapes then show the
 ecological asymmetry: timing capacity is finite. It expands persistence and
 buffers immediate fragmentation costs, but movement re-enters under stronger
 directional forcing, while partner dependence can block the required
-reallocation. We next test the corresponding one-dimensional natural prediction
-in 5,816 observations from 55 migratory bird species and find no portable
-animal-speed/environmental-wave-speed optimum. Direct reconstructions in mule
-deer, barnacle geese and Eurasian wigeon show phase correction through different
-actuator architectures and ecological intervals.
+reallocation. We next test the corresponding one-dimensional natural prediction in 5,816
+observations from 55 migratory bird species and find no portable
+animal-speed/environmental-wave-speed optimum. A fresh registered chronological
+holdout then tests temporal substitution directly and fails in direction:
+stronger historical timing responsiveness does not weaken later movement-speed
+dependence. In the same frozen model, timing responsiveness is associated with
+lower average mismatch, but that main effect remains secondary descriptive
+evidence. Direct reconstructions in mule deer, barnacle geese and Eurasian
+wigeon show phase correction through different actuator architectures and
+ecological intervals.
 
 The novelty claim is intentionally narrow. We do not claim novelty for
 phenological mismatch, green-wave tracking, combined spatial and temporal
@@ -34,9 +39,11 @@ responses, migration-timing plasticity, environmental predictability effects,
 or generic negative-feedback mathematics. The contribution is the demonstration
 that **temporal buffering delays but does not permanently replace spatial
 tracking** in the declared moving-landscape models, together with a broad
-empirical falsification of a single natural speed rule. Low mismatch can
-therefore conceal latent spatial tracking demand; the familiar identification
-problem is an ecological consequence rather than the headline result.
+empirical falsification of a single natural speed rule and a registered natural
+failure of simple temporal substitution. Timing responsiveness can improve alignment without making movement-speed
+matching dispensable because responsiveness is a gain-like property, not a
+measure of remaining timing capacity. The familiar identification problem is an
+ecological consequence rather than the headline result.
 
 The exact anti-phase migration-optimum theorem that motivates the simplest
 timescale benchmark is developed in a separate short mathematical manuscript.
