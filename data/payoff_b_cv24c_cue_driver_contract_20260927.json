@@ -1,0 +1,67 @@
+{
+  "contract_id": "payoff_b_cv24c_cue_driver_decoupling_v1_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "PREOUTCOME_CONTRACT_SOURCE_ACCESS_PENDING",
+  "source": {
+    "breeding_dataset_doi": "10.5061/dryad.cv24c",
+    "paper_doi": "10.1371/journal.pbio.1002120",
+    "years": [
+      1980,
+      2010
+    ],
+    "file": "data_breed.txt",
+    "published_structure": "individual breeding records with lay date, recruits/fledglings and biotic/abiotic annual variables",
+    "cue_source": "public NOAA/NCEP Ivory Coast daily temperature using the Tomotani 2021 source-defined wintering-ground cue window if reconstructable without outcome tuning"
+  },
+  "prior_art_boundary": {
+    "source_doi": "10.3389/fevo.2021.630823",
+    "already_known": [
+      "Ivory Coast and Dutch temperature/NDVI can explain pied-flycatcher arrival timing",
+      "those cue variables did not detectably predict the estimated annual male arrival fitness optimum in 2005-2015",
+      "climate-driven cue-driver decoupling was explicitly proposed by the authors"
+    ],
+    "payoff_b_question": "whether a longer 1980-2010 breeding-fitness driver series shows a time-varying predictive relationship with a biologically prior African cue, without using the known nonlinear selection trajectory to choose regimes"
+  },
+  "annual_driver": {
+    "primary": "annual standardized linear selection gradient of egg-laying date on number of local recruits",
+    "method": "reproduce Visser et al. 2015 annual Poisson GLM/gsg-style directional selection estimate as closely as possible from data_breed; if gsg-compatible reproduction is not possible, stop primary lane rather than substitute a differently selected fitness metric",
+    "low_recruit_years": "use linear-only model in 1981, 1989, 1990, 1991 and 2006, matching the source paper",
+    "known_selection_reversal": "never used for cue breakpoint selection"
+  },
+  "cue_coordinate": {
+    "primary": "annual Ivory Coast temperature cue using the source-defined Tomotani 2021 lagged window",
+    "preferred_window": "20-day mean with 60-day lag relative to the arrival-risk date framework; if the exact annual scalar cannot be reconstructed without individual arrival-risk dates, mark cue scalar NOT_ESTIMABLE and do not tune a new window against selection",
+    "secondary_if_available": "Ivory Coast NDVI using the same source-defined lagged window",
+    "no_outcome_tuning": true
+  },
+  "predictive_connectivity": {
+    "target": "annual selection gradient",
+    "source": "African cue",
+    "window_years": 8,
+    "min_pairs": 6,
+    "processing": "within each trailing window ending at t-1, separately linear-detrend cue and annual selection gradient on year, then calculate signed Pearson rho",
+    "current_year_excluded": true
+  },
+  "regime_detection": {
+    "data_used": "predictive-connectivity series only",
+    "algorithm": "single interior breakpoint minimizing segmented linear SSE",
+    "min_segment_years": 6,
+    "comparator": "single linear trend",
+    "gate": "segmented AICc <= linear AICc - 4 and pre/post slopes have opposite signs",
+    "recovery_gate": "post-break endpoint recovers at least 50% of the pre-break-to-break connectivity decline",
+    "fail_state": "NO_CUE_DRIVER_REVERSAL"
+  },
+  "history_test_if_reversal_passes": {
+    "primary_response": "annual selection gradient",
+    "model": "selection_gradient ~ connectivity + regime_direction + connectivity:regime_direction",
+    "support": "interaction 95% CI excludes zero over overlapping connectivity support",
+    "interpretation": "within-population cue-driver path dependence only; not interaction-network hysteresis"
+  },
+  "forbidden_moves": [
+    "do not choose the 2000/2001 selection reversal as the information breakpoint",
+    "do not choose a climate window by maximising correlation with selection",
+    "do not replace local recruits with another fitness component after seeing the result",
+    "do not call a monotonic cue-driver decline hysteresis",
+    "do not promote this single-species lane to network memory"
+  ]
+}
