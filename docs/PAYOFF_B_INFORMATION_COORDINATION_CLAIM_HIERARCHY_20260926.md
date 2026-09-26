@@ -5,11 +5,11 @@ Status: **candidate reframe after Bayesian + predictive-connectivity programme**
 
 ## Proposed ecological headline
 
-> **Environmental tracking can fail through loss of predictive information
-> before it fails through lack of adaptive capacity: a transient information
-> shock in one mobile partner can reorganize the timing strategies of an
-> interaction network, and network topology can store that history after the
-> information itself recovers.**
+> **Useful seasonal information can arrive after the costly decision that
+> needs it. Species may therefore rationally commit under uncertainty even when
+> an adequate response exists; interaction partners can amplify that information
+> timing problem, and network topology can store the resulting timing history
+> after information recovers.**
 
 This is stronger and more specific than the previous headline that temporal
 buffering is finite.
@@ -36,6 +36,33 @@ later destination state.
 The exact binary game contains an information--coordination wedge in which the
 jointly valuable action is not privately selected under the migrant's available
 information.
+
+### 2b. Information-timing barrier
+
+Information quality is not only spatially unequal; it can also be temporally
+unavailable.
+
+The new exact waiting model separates
+
+    act now under uncertainty
+
+from
+
+    wait until a more informative cue becomes observable.
+
+If the private value of the future cue is V and delaying the decision costs D,
+the focal individual waits only when
+
+    V > D.
+
+Thus an organism can have sufficient physiological capacity and a highly
+informative future cue, yet still rationally act before that cue exists because
+the opportunity cost of waiting is larger.
+
+When a wrong decision also harms partners, the joint value of waiting can exceed
+the focal individual's private value. This creates an information-acquisition
+coordination wedge: privately optimal early commitment can coexist with a
+system-level benefit of waiting for information.
 
 ### 3. Coordination-memory barrier
 
@@ -92,6 +119,28 @@ However, cluster-robust intervals and the species-level summary cross zero.
 The licensed claim is therefore a pooled directional macroecological signal,
 not species-independent confirmation.
 
+### Flycatcher--tit experiment: timing-dependent information availability
+
+A source-backed experimental anchor now separates early and late decisions in a
+resident--migrant interaction.
+
+Samplonius & Both (2017) experimentally advanced or delayed resident tit
+hatching phenology across forest plots. Male pied flycatcher settlement was not
+detectably related to treatment (Z = 0.854, P = 0.393), and the authors note
+that almost all males settled before the manipulated tit-hatching difference
+became apparent.
+
+Later-arriving females, by contrast, preferentially settled in earlier-tit
+plots. The published pairing GLMM gives a tit-timing effect of -0.101
+(SE 0.050, P = 0.042), and the time-dependent Cox analysis gives a treatment
+effect of -0.065 (SE 0.025, P < 0.009), with treatment separation increasing
+later in the season.
+
+This does not show that females deliberately waited to collect information.
+It does support the narrower timing claim required by PAYOFF-B: the same
+heterospecific phenological state can be unavailable to an early decision maker
+and behaviourally relevant to a later one.
+
 ### Wigeon: registered controller prediction not supported
 
 Across 224 consecutive staging transitions, historical route predictive
@@ -146,29 +195,36 @@ They become layers in the argument:
 1. **Local null:** movement and timing can close the same mismatch.
 2. **Capacity:** finite timing means successful alignment can hide future
    spatial demand.
-3. **Information:** some actors must choose before the destination state is
-   known.
-4. **Bayesian game:** the jointly adaptive action and privately rational action
-   can diverge.
-5. **Network game:** a transient information shock can change resident timing
+3. **Predictive information:** some actors must choose before the destination
+   state is known.
+4. **Information timing:** useful cues can become available only after an early
+   commitment deadline; waiting is favoured only when information value exceeds
+   delay cost.
+5. **Bayesian coordination:** private and joint incentives can diverge both in
+   action choice and in whether to wait for information.
+6. **Network game:** a transient information shock can change resident timing
    policies and produce strict recovery hysteresis.
-6. **Broad empirical test:** higher pre-outcome predictive connectivity is
+7. **Broad empirical test:** higher pre-outcome predictive connectivity is
    associated with smaller natural phenological mismatch in the registered
    pooled analysis.
-7. **Mechanistic boundary:** wigeon connectivity does not strengthen
-   post-error phase correction, showing that prediction and correction are
-   different axes.
-8. **Conclusion:** mismatch reflects not only response capacity, but what the
-   system could know when action was required and which historically accessible
-   timing regime the interaction network occupies.
+8. **Experimental anchor:** the flycatcher--tit manipulation shows that a
+   heterospecific phenology treatment is irrelevant to an earlier decision made
+   before cue visibility but affects later settlement.
+9. **Mechanistic boundary:** wigeon connectivity does not strengthen post-error
+   phase correction, showing that prediction, information timing and correction
+   are different axes.
+10. **Conclusion:** mismatch reflects not only response capacity, but what the
+   system could know before a decision deadline and which historically
+   accessible timing regime the interaction network occupies.
 
 ## Recommended main conclusion
 
-> **Climate adaptation can fail even when an adequate response exists. If
-> interacting species make seasonal decisions with unequal information, a
-> temporary loss of predictive connectivity can redirect the whole interaction
-> network into another timing regime. Local ecological coupling can then retain
-> that history after the original information has recovered.**
+> **Climate adaptation can fail even when an adequate response and useful
+> information both exist, because the information may become available only
+> after the costly seasonal decision that needs it. Unequal decision deadlines
+> create unequal information among interacting species; a transient information
+> shock can then redirect the interaction network, and local ecological coupling
+> can retain that history after information recovers.**
 
 Empirical qualifier:
 
@@ -189,7 +245,11 @@ PAYOFF-B may currently claim:
 - a null registered wigeon prediction for predictive-connectivity modulation of
   phase correction;
 - separation of pre-commitment information and post-error correction as
-  empirical coordinates.
+  empirical coordinates;
+- an exact private value-of-waiting threshold and information-acquisition
+  coordination wedge;
+- a source-backed flycatcher--tit experimental anchor for timing-dependent
+  information availability.
 
 PAYOFF-B may not currently claim:
 
