@@ -1,0 +1,66 @@
+name: payoff-b-cv24c-readiness
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-cue-driver-prior-art-20260927
+    paths:
+      - ".github/workflows/payoff-b-cv24c-readiness.yml"
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe Dryad metadata and downloads
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p outputs/cv24c
+          curl -fL --retry 3 \
+            "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.cv24c" \
+            -o outputs/cv24c/dataset.json
+          python - <<'PY'
+          import json, pathlib, subprocess
+          root=pathlib.Path("outputs/cv24c")
+          d=json.loads((root/"dataset.json").read_text())
+          out={"dataset_id":d.get("id"),"links":d.get("_links",{}),"storageSize":d.get("storageSize")}
+          (root/"metadata_summary.json").write_text(json.dumps(out,indent=2)+"\n")
+          version_href=(d.get("_links",{}).get("stash:version") or {}).get("href")
+          download_href=(d.get("_links",{}).get("stash:download") or {}).get("href")
+          if version_href:
+              subprocess.run(["curl","-fL","--retry","3","https://datadryad.org"+version_href,"-o",str(root/"version.json")],check=True)
+          if download_href:
+              subprocess.run(["curl","-fL","--retry","2","https://datadryad.org"+download_href,"-o",str(root/"dataset_download")])
+          PY
+          python - <<'PY'
+          import json, pathlib, re, subprocess
+          root=pathlib.Path("outputs/cv24c")
+          v=root/"version.json"
+          if v.exists():
+              d=json.loads(v.read_text())
+              files_href=(d.get("_links",{}).get("stash:files") or {}).get("href")
+              if files_href:
+                  subprocess.run(["curl","-fL","--retry","3","https://datadryad.org"+files_href,"-o",str(root/"files.json")],check=True)
+          f=root/"files.json"
+          if f.exists():
+              d=json.loads(f.read_text())
+              rows=d.get("_embedded",{}).get("stash:files",[])
+              (root/"file_manifest.json").write_text(json.dumps(rows,indent=2)+"\n")
+              for row in rows:
+                  fid=row.get("id")
+                  name=row.get("path") or row.get("filename") or f"file_{fid}"
+                  if not fid: continue
+                  out=root/f"file_{fid}"
+                  subprocess.run(["curl","-fL","--retry","2",f"https://datadryad.org/api/v2/files/{fid}/download","-o",str(out)])
+          PY
+          for f in outputs/cv24c/*; do file "$f" || true; done
+          sha256sum outputs/cv24c/* 2>/dev/null > outputs/cv24c/sha256.txt || true
+          find outputs/cv24c -maxdepth 1 -type f -printf "%f\t%s\n" | sort > outputs/cv24c/files.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-cv24c-readiness
+          path: outputs/cv24c/
+          if-no-files-found: error
