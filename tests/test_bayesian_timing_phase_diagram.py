@@ -16,7 +16,13 @@ from src.bayesian_timing_coordination import (
 FOLLOW_ALL = (FOLLOW_CUE, FOLLOW_CUE, FOLLOW_CUE)
 
 
-def trace(local_accuracy: float, interaction_strength: float):
+def trace(
+    local_accuracy: float,
+    interaction_strength: float,
+    *,
+    interaction_topology: str = "complete",
+    prior_early: float = 0.40,
+):
     accuracies = [round(0.50 + 0.01 * i, 2) for i in range(51)]
 
     profile = FOLLOW_ALL
@@ -37,6 +43,8 @@ def trace(local_accuracy: float, interaction_strength: float):
                 migrant_accuracy,
                 local_accuracy=local_accuracy,
                 interaction_strength=interaction_strength,
+                interaction_topology=interaction_topology,
+                prior_early=prior_early,
             ),
             profile,
         )
@@ -55,6 +63,8 @@ def trace(local_accuracy: float, interaction_strength: float):
                 migrant_accuracy,
                 local_accuracy=local_accuracy,
                 interaction_strength=interaction_strength,
+                interaction_topology=interaction_topology,
+                prior_early=prior_early,
             ),
             profile,
         )
@@ -64,6 +74,8 @@ def trace(local_accuracy: float, interaction_strength: float):
         1.0,
         local_accuracy=local_accuracy,
         interaction_strength=interaction_strength,
+        interaction_topology=interaction_topology,
+        prior_early=prior_early,
     )
     recovered = sequential_best_response(
         recovered_game,
@@ -226,3 +238,49 @@ def test_canonical_game_exposes_prior_without_changing_default():
 
     assert default == explicit
     assert default.prior_early == pytest.approx(0.40)
+
+
+
+def test_chain_topology_retains_information_hysteresis():
+    baseline, collapse, low_profile, recovered, best = trace(
+        0.90,
+        0.50,
+        interaction_topology="chain",
+    )
+
+    assert baseline.profile == FOLLOW_ALL
+    assert collapse == pytest.approx(0.71)
+    assert low_profile == (
+        ALWAYS_LATE,
+        ALWAYS_LATE,
+        ALWAYS_LATE,
+    )
+    assert recovered.profile == (
+        ALWAYS_LATE,
+        ALWAYS_LATE,
+        FOLLOW_CUE,
+    )
+    assert best.profile == FOLLOW_ALL
+    assert best.joint_payoff - recovered.joint_payoff == pytest.approx(0.15)
+
+
+def test_removing_resident_resident_edge_makes_canonical_recovery_reversible():
+    baseline, collapse, _, recovered, best = trace(
+        0.90,
+        0.50,
+        interaction_topology="migrant_star",
+    )
+
+    assert baseline.profile == FOLLOW_ALL
+    assert collapse == pytest.approx(0.71)
+    assert recovered.profile == FOLLOW_ALL
+    assert best.profile == FOLLOW_ALL
+
+
+def test_interaction_weight_matrix_validation():
+    with pytest.raises(ValueError):
+        BayesianTimingGame(
+            prior_early=0.40,
+            players=canonical_three_player_game(1.0).players,
+            interaction_weights=((0.0, 1.0), (1.0, 0.0)),
+        )
