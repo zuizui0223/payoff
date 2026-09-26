@@ -53,8 +53,11 @@ class ResponseBlindGenotoxicityQualificationReceipt:
     assay_unit_frozen_declared: bool
     sampling_context_frozen_declared: bool
     distinct_from_direct_mu_outcome_declared: bool
+    direct_dna_lesion_or_break_readout_declared: bool
     not_pigment_amount_only_declared: bool
     not_ros_amount_only_declared: bool
+    not_sos_repair_reporter_only_declared: bool
+    mitomycin_c_or_equivalent_positive_control_declared: bool
 
     @property
     def genotoxicity_scale_qualified(self) -> bool:
@@ -73,8 +76,11 @@ class ResponseBlindGenotoxicityQualificationReceipt:
                 self.assay_unit_frozen_declared,
                 self.sampling_context_frozen_declared,
                 self.distinct_from_direct_mu_outcome_declared,
+                self.direct_dna_lesion_or_break_readout_declared,
                 self.not_pigment_amount_only_declared,
                 self.not_ros_amount_only_declared,
+                self.not_sos_repair_reporter_only_declared,
+                self.mitomycin_c_or_equivalent_positive_control_declared,
             )
         )
 
@@ -109,8 +115,11 @@ def adjudicate_genotoxicity_assay(
         (receipt.assay_unit_frozen_declared, "ASSAY_UNIT_NOT_FROZEN"),
         (receipt.sampling_context_frozen_declared, "SAMPLING_CONTEXT_NOT_FROZEN"),
         (receipt.distinct_from_direct_mu_outcome_declared, "ASSAY_NOT_DISTINCT_FROM_DIRECT_MU"),
+        (receipt.direct_dna_lesion_or_break_readout_declared, "PRIMARY_READOUT_NOT_DIRECT_DNA_LESION_OR_BREAK"),
         (receipt.not_pigment_amount_only_declared, "PIGMENT_AMOUNT_ONLY_IS_NOT_GENOTOXICITY"),
         (receipt.not_ros_amount_only_declared, "ROS_AMOUNT_ONLY_IS_NOT_GENOTOXICITY"),
+        (receipt.not_sos_repair_reporter_only_declared, "SOS_REPAIR_REPORTER_ONLY_IS_NOT_GENOTOXICITY"),
+        (receipt.mitomycin_c_or_equivalent_positive_control_declared, "DNA_DAMAGE_POSITIVE_CONTROL_CLASS_NOT_FROZEN"),
     )
     blockers = tuple(label for passed, label in checks if not passed)
     return AssayQualificationAdjudication(
