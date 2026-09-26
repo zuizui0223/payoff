@@ -38,6 +38,14 @@ jobs:
         run: |
           set -euo pipefail
           curl -fL --retry 3 \
+            -A "Mozilla/5.0 PAYOFF-B research audit" \
+            -c outputs/sweden/cookies.txt \
+            "https://datadryad.org/dataset/doi%3A10.5061/dryad.sq651" \
+            -o outputs/sweden/download_page.html
+          curl -fL --retry 3 \
+            -A "Mozilla/5.0 PAYOFF-B research audit" \
+            -b outputs/sweden/cookies.txt \
+            -e "https://datadryad.org/dataset/doi%3A10.5061/dryad.sq651" \
             "https://datadryad.org/downloads/file_stream/34004" \
             -o "outputs/sweden/All laydate.xlsx"
           echo "50bb3503258e5f8ce4db043d0bfe895d  outputs/sweden/All laydate.xlsx" | md5sum -c -
