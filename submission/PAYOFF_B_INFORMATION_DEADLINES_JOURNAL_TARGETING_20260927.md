@@ -126,8 +126,8 @@ Before submission:
 5. archive data/code in stable repositories and add DOI-based accessibility
    statements;
 6. prepare the graphical abstract and short graphical-abstract text;
-7. resolve the unopened Aikens block without allowing its outcome to alter the
-   information-deadline headline.
+7. render the preregistered Aikens result in Supplementary Information after
+   opening; main-text routing is already frozen.
 
 ## Novelty sentence for the cover letter
 
@@ -140,5 +140,5 @@ A concise provisional statement is:
 > interaction topology can determine whether the resulting transient mismatch
 > disappears or persists as a lower-payoff historical state.
 
-This statement should be updated only for wording, not for scientific content,
-after the Aikens outcome is opened.
+This statement is outcome-independent and must not change when the Aikens
+Supplementary result is opened.
