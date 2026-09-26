@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from math import comb
 from pathlib import Path
 
 
@@ -99,6 +100,61 @@ def main():
         dtype=float,
     )
 
+    within_species = []
+    for species in sorted(data["species"].astype(str).unique()):
+        subset = data[data["species"].astype(str) == species].copy()
+        if len(subset) < 20 or float(subset["z_connectivity"].std()) <= 0.0:
+            continue
+        model = smf.ols(formula, data=subset).fit()
+        if "z_connectivity" not in model.params.index:
+            continue
+        within_species.append(
+            {
+                "species": species,
+                "rows": int(len(subset)),
+                "species_cells": int(subset["species_cell"].nunique()),
+                "coefficient": float(model.params["z_connectivity"]),
+                "standard_error": float(model.bse["z_connectivity"]),
+                "p_value_two_sided": float(model.pvalues["z_connectivity"]),
+            }
+        )
+
+    within_coef = np.asarray(
+        [row["coefficient"] for row in within_species],
+        dtype=float,
+    )
+    within_se = np.asarray(
+        [row["standard_error"] for row in within_species],
+        dtype=float,
+    )
+    negative_count = int(np.sum(within_coef < 0.0))
+    n_within = int(len(within_coef))
+    sign_p_one_sided = (
+        sum(
+            comb(n_within, k)
+            for k in range(negative_count, n_within + 1)
+        )
+        / (2 ** n_within)
+        if n_within > 0
+        else None
+    )
+    valid_meta = np.isfinite(within_se) & (within_se > 0.0)
+    if np.any(valid_meta):
+        weights = 1.0 / np.square(within_se[valid_meta])
+        meta_estimate = float(
+            np.sum(weights * within_coef[valid_meta])
+            / np.sum(weights)
+        )
+        meta_se = float(np.sqrt(1.0 / np.sum(weights)))
+        meta = {
+            "estimate": meta_estimate,
+            "standard_error": meta_se,
+            "ci_low_95": meta_estimate - 1.96 * meta_se,
+            "ci_high_95": meta_estimate + 1.96 * meta_se,
+        }
+    else:
+        meta = None
+
     result = {
         "status": "POST_PRIMARY_DEPENDENCY_AUDIT",
         "primary_inference_unchanged": True,
@@ -126,10 +182,29 @@ def main():
             "maximum_coefficient": float(year_coefficients.max()),
             "rows": loo_year,
         },
+        "within_species_effects": {
+            "estimable_species": n_within,
+            "negative_species": negative_count,
+            "negative_fraction": (
+                float(negative_count / n_within)
+                if n_within > 0 else None
+            ),
+            "median_coefficient": (
+                float(np.median(within_coef))
+                if n_within > 0 else None
+            ),
+            "one_sided_sign_test_p_for_negative_majority": (
+                sign_p_one_sided
+            ),
+            "inverse_variance_fixed_summary": meta,
+            "rows": within_species,
+        },
         "interpretation_rule": (
-            "sign stability supports robustness of direction; clustered "
-            "intervals are an uncertainty audit and do not overwrite the "
-            "preregistered GAM support rule"
+            "the preregistered GAM support rule remains primary; clustered "
+            "intervals and within-species effects audit ecological dependence. "
+            "If species-clustered or species-level summaries cross zero, the "
+            "result must be described as a pooled directional signal rather "
+            "than species-independent confirmation"
         ),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
