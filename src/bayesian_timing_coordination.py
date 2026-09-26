@@ -312,6 +312,7 @@ def canonical_three_player_game(
     *,
     interaction_strength: float = 0.50,
     local_accuracy: float = 0.90,
+    prior_early: float = 0.40,
 ) -> BayesianTimingGame:
     """Transparent resident--resident--migrant hysteresis witness.
 
@@ -319,7 +320,7 @@ def canonical_three_player_game(
     """
 
     return BayesianTimingGame(
-        prior_early=0.40,
+        prior_early=prior_early,
         players=(
             TimingPlayer(
                 name="flower",
