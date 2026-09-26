@@ -7,109 +7,93 @@ is **not a preregistered prediction**. It explains why the failed
 temporal-substitution prediction is structurally plausible in a moving
 environmental wave.
 
-## 1. Minimal moving-front identity
+## 1. Minimal moving-front identity with a dynamic timing shift
 
-Let an environmental front move as
-
-\[
-E(t)=E_0+v_E t.
-\]
-
-Let the organism's spatial tracking front move at speed \(v_A\), with a
-seasonal timing shift \(z\):
+Let the environmental front move as
 
 \[
-A(t;z)=A_0+v_A(t+z).
+E(t)=E_0+v_E t,
 \]
 
-The signed spatial mismatch is
+and represent the organism's baseline spatial front by speed \(v_A\). Let
+\(z(t)\) be a schedule displacement, measured in units of time, relative to
+that baseline trajectory:
 
 \[
-e(t;z)=E(t)-A(t;z)
-      =(E_0-A_0)-v_A z +(v_E-v_A)t.
+A(t)=A_0+v_A[t+z(t)].
 \]
 
-This separates two controls exactly:
+Then
 
 \[
-\frac{\partial e}{\partial z}=-v_A,
+e(t)=E(t)-A(t)
+=(E_0-A_0)+(v_E-v_A)t-v_A z(t).
 \]
 
-so timing changes the **intercept / phase offset**, whereas
+A **static** timing shift changes phase,
 
 \[
-\frac{\partial e}{\partial t}=v_E-v_A,
+\frac{\partial e}{\partial z}=-v_A.
 \]
 
-so movement-speed matching changes the **drift / slope** of mismatch through
-time.
-
-A fixed timing shift can therefore set mismatch to zero at one time, but when
-\(v_E\neq v_A\) it cannot keep mismatch zero over a sustained interval.
-
-Persistent zero mismatch over an interval requires both
+But when timing itself keeps changing,
 
 \[
-v_A=v_E
+\frac{de}{dt}=v_E-v_A-v_A\dot z(t).
 \]
 
-and a compatible initial phase offset.
-
-This is elementary kinematics, not a claim of mathematical novelty.
-
-## 2. Finite timing capacity buys time, not permanent substitution
-
-If timing adjustment is bounded,
+Thus dynamic timing adjustment can contribute a temporary effective velocity
+correction. To hold mismatch constant despite \(v_E\neq v_A\), timing would
+have to change at
 
 \[
-|z|\le z_{\max},
+\dot z^*
+=
+\frac{v_E-v_A}{v_A}
+=
+\frac{1-u}{u},
 \]
 
-the largest spatial offset that timing alone can absorb is
+where \(u=v_A/v_E\).
+
+This is elementary kinematics, not a claim of mathematical novelty. It resolves
+the apparent tension between the local substitution null and the explicit
+landscape: timing can transiently compensate velocity mismatch, but doing so
+requires continually spending temporal displacement.
+
+## 2. Capacity turns time warping into a finite buffer
+
+If schedule displacement is bounded,
 
 \[
-B_z=v_A z_{\max}.
+|z(t)|\le z_{\max},
 \]
 
-When the animal and environmental fronts have a non-zero speed difference
-
-\[
-\Delta v=v_E-v_A,
-\]
-
-the maximum additional time that a perfectly directed timing shift can buy
-before the same mismatch threshold is reached is
+a non-zero compensating \(\dot z^*\) cannot be sustained indefinitely. Starting
+from the center of the available timing range, the longest idealized interval
+of perfect compensation is
 
 \[
 T_{\rm buffer}
 =
-\frac{v_A z_{\max}}{|v_E-v_A|}.
-\]
-
-With the speed ratio
-
-\[
-u=\frac{v_A}{v_E},
-\]
-
-this becomes
-
-\[
-T_{\rm buffer}
+\frac{z_{\max}}{|\dot z^*|}
+=
+\frac{v_A z_{\max}}{|v_E-v_A|}
 =
 \frac{u z_{\max}}{|1-u|}.
 \]
 
-Thus:
+Hence:
 
-- larger timing capacity extends the buffer;
-- the buffer is finite whenever \(u\neq1\);
-- timing becomes especially effective near speed matching because spatial drift
-  accumulates slowly;
-- timing cannot rescue persistent velocity mismatch indefinitely.
+- **timing gain** controls how strongly schedule displacement responds;
+- **timing capacity** \(z_{\max}\) controls how long that response can continue;
+- **movement speed** determines the baseline spatial propagation rate;
+- sustained speed mismatch consumes the timing budget until movement or another
+  spatial actuator must take over.
 
-This provides a simple analytic interpretation of the explicit-landscape result
-in which phenology creates a temporary bypass and movement later re-enters.
+The explicit-landscape result is therefore not merely “phase versus velocity.”
+It is **bounded time warping**: phenology can generate a temporary effective
+velocity correction, but finite capacity forces spatial tracking to re-enter.
 
 ## 3. Why the bird holdout substitution prediction failed
 
@@ -122,40 +106,50 @@ The result was
 \beta_{q^2\times h}=+0.0351\pm0.0289,\qquad p=0.225,
 \]
 
-opposite to the registered negative prediction.
-
-At the same time, the timing-responsiveness main effect was
+opposite to the registered negative prediction. The secondary descriptive
+timing-responsiveness main effect was
 
 \[
-\beta_h=-0.300\pm0.105,\qquad p=0.0043,
+\beta_h=-0.300\pm0.105,\qquad p=0.0043.
 \]
 
-as a secondary descriptive term.
+The failed substitution test exposes a distinction the registration
+deliberately did not make: **responsiveness is not capacity**.
 
-The phase–velocity identity explains this combination naturally.
+The calibration slope is gain-like: it measures how strongly arrival timing
+moves with green-up. It does not measure the remaining timing range
+\(z_{\max}\), nor the amount of temporal budget left unused. High timing gain can
+therefore lower average phase error without implying that a species can sustain
+a compensating \(\dot z(t)\) for longer.
 
-A species can use timing responsiveness to reduce its **overall phase offset**
-(the vertical level of the mismatch surface) while still requiring appropriate
-movement speed to control the **rate at which mismatch changes along a moving
-environmental wave**.
+\[
+\text{timing gain}
+\rightarrow
+\text{current phase correction},
+\]
+
+\[
+\text{timing capacity}
+\rightarrow
+\text{duration of temporal buffering},
+\]
+
+\[
+\text{movement speed}
+\rightarrow
+\text{baseline spatial propagation}.
+\]
 
 Therefore
 
 \[
-\text{better timing}
+\text{better timing responsiveness}
 \not\Rightarrow
 \text{weaker speed dependence}.
 \]
 
-Instead, timing and movement can form a division of labor:
-
-\[
-\text{timing}\rightarrow\text{phase / intercept control},
-\]
-
-\[
-\text{movement speed}\rightarrow\text{propagation / drift control}.
-\]
+This gain–capacity distinction is the main mechanistic lesson of the failed
+holdout test.
 
 ## 4. Independent consistency with the Amaral source analysis
 
@@ -202,21 +196,46 @@ The useful hierarchy is therefore:
 \`\`\`text
 environmental forcing
     |
-    +-- phase / calendar displacement
-    |       -> timing responsiveness
-    |       -> lowers mean phase error
+    +-- timing gain
+    |       -> how strongly phase is corrected now
     |
-    +-- spatial propagation / wave velocity
-            -> movement speed / route progression
-            -> controls mismatch drift
+    +-- timing capacity / temporal budget
+    |       -> how long dynamic timing can offset propagation mismatch
+    |
+    +-- movement speed / route progression
+            -> baseline spatial propagation
 \`\`\`
 
-Stopover and route-stage changes can act between these levels by changing the
-effective movement schedule locally.
+Stopover and route-stage changes can redistribute both schedule and effective
+progression locally.
 
-This architecture is stronger than a generic statement that organisms have
-multiple responses. It predicts that a species may be highly phenologically
-responsive and still remain strongly dependent on spatial transport.
+This predicts that a species can be highly phenologically responsive, maintain
+low current mismatch, and still remain strongly dependent on spatial transport
+because high gain does not imply large remaining capacity.
+
+## 6. Claim boundary
+
+Licensed:
+
+- a static timing shift changes phase, while changing timing through time can
+  transiently alter effective mismatch drift;
+- bounded timing capacity converts that dynamic correction into a finite buffer;
+- timing responsiveness (gain) is not the same quantity as remaining timing
+  capacity;
+- the failed bird holdout substitution test is consistent with this
+  gain–capacity–propagation decomposition;
+- timing responsiveness may improve average tracking without eliminating
+  movement-speed dependence.
+
+Not licensed:
+
+- claiming that the post-readout identity was a preregistered prediction;
+- claiming empirical support for a positive timing × movement synergy from the
+  unsupported positive interaction;
+- treating \(T_{\rm buffer}\), timing capacity, or remaining temporal budget as
+  empirically estimated natural quantities in the current bird dataset;
+- claiming all natural migration systems follow exactly this linear-front
+  time-warp model.
 
 ## 6. Claim boundary
 
