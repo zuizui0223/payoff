@@ -95,7 +95,9 @@
     "holdout_primary_status": "FAIL_WRONG_DIRECTION",
     "holdout_primary_estimate": 0.03506263176814132,
     "holdout_primary_p": 0.2249164339850812,
-    "licensed_statement": "The source study and the fresh split-sample holdout both fail to support a simple tradeoff in which stronger timing responsiveness reduces reliance on migration-speed matching.",
-    "prohibited_statement": "Do not claim positive timing-movement complementarity from the unsupported positive holdout interaction or the positive-but-uncertain published species-sensitivity coefficient."
+    "licensed_statement": "The source study and fresh split-sample holdout both fail to support a simple tradeoff in which stronger timing responsiveness reduces reliance on migration-speed matching.",
+    "prohibited_statement": "Do not claim positive timing-movement complementarity, directly measured natural timing capacity, or that high timing responsiveness implies low spatial transport dependence.",
+    "gain_capacity_boundary": "The holdout timing slope is interpreted as a gain-like measure of phase responsiveness, not as remaining timing capacity or unused temporal budget.",
+    "mechanistic_synthesis": "High timing gain can improve average alignment while movement speed remains necessary for sustained spatial propagation; bounded timing capacity determines how long dynamic schedule adjustment can offset velocity mismatch."
   }
 }
