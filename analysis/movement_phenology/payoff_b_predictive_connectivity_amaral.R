@@ -233,10 +233,16 @@ write.csv(
   row.names = FALSE
 )
 
+analysis$cell_year <- factor(paste(analysis$cell, analysis$year, sep = "_"))
+analysis$source_target_pair <- factor(
+  paste(analysis$source_cell, analysis$cell, sep = "_")
+)
 audit_rows <- analysis[, c(
   "species", "year", "cell", "source_cell",
+  "species_cell", "cell_year", "source_target_pair",
   "connectivity_rho", "connectivity_training_n",
-  "primary_response", "gr_mn", "arr_GAM_mean", "vArrMag",
+  "primary_response", "gr_mn", "arr_GAM_mean", "vArrMag", "AnomDGr",
+  "z_connectivity", "z_destination_greenup_anomaly", "z_bird_speed",
   "source_target_distance_km"
 )]
 write.csv(
