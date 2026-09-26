@@ -1,0 +1,60 @@
+{
+  "result_id": "payoff_b_information_deadlines_v2_figure_receipt_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "SIX_FIGURE_SET_RENDERED_AND_TESTED",
+  "workflow": {
+    "run_id": 36271966135,
+    "head_sha": "d5a571da2bd205e1e9b20bb4a32c2c80adef0747",
+    "conclusion": "success",
+    "artifact_id": 10915558044,
+    "artifact_name": "payoff-b-information-deadlines-v2-figures",
+    "artifact_sha256": "9b346ffc2e76ed2593e9dee7e36a54215f1ba93a302ff2d90a4b2d2da6cf68a5"
+  },
+  "aikens_outcome_used": false,
+  "source_policy": {
+    "figure_1": "exact endogenous-information model + frozen published flycatcher anchor",
+    "figure_2": "exact endogenous-information model + frozen result receipt",
+    "figure_3": "frozen strict Bayesian topology receipt",
+    "figure_4": "frozen broad predictive-connectivity receipt",
+    "figure_5": "frozen wigeon null + frozen long-term cue-driver negative gate + flycatcher anchor",
+    "figure_6": "frozen 2026-09-20 capacity / temporal-bypass synthetic receipts"
+  },
+  "figures": {
+    "figure_1": {
+      "file": "PAYOFF_B_INFO_V2_FIG1_DECISION_DEADLINE.svg",
+      "bytes": 19171,
+      "sha256": "b27a162f6feabcd36378e5662279644c8492fd9a2a8dd3d3e5362e9285462f23"
+    },
+    "figure_2": {
+      "file": "PAYOFF_B_INFO_V2_FIG2_DESYNCHRONIZATION.svg",
+      "bytes": 11004,
+      "sha256": "d317a07654e571b612415fe35c35d8180f9327e12ff09a3248ae754012bbd0ab"
+    },
+    "figure_3": {
+      "file": "PAYOFF_B_INFO_V2_FIG3_NETWORK_MEMORY.svg",
+      "bytes": 6526,
+      "sha256": "e37772587b2c17474fe3aa368b06fc38073187ba58b0acb9e8cffe42273788f1"
+    },
+    "figure_4": {
+      "file": "PAYOFF_B_INFO_V2_FIG4_BROAD_CONNECTIVITY.svg",
+      "bytes": 7716,
+      "sha256": "e623a4958e7d908b6916df819dedcc6fc6241f00826eac9a161c6e235920750f"
+    },
+    "figure_5": {
+      "file": "PAYOFF_B_INFO_V2_FIG5_INFORMATION_AXES.svg",
+      "bytes": 4048,
+      "sha256": "f71d5565d3a5836b80a5dc8feff973d30650cc7d569c7097fca01a61444d1ff3"
+    },
+    "figure_6": {
+      "file": "PAYOFF_B_INFO_V2_FIG6_CAPACITY.svg",
+      "bytes": 11033,
+      "sha256": "0350424dda7c8ea5da67859a209dc59469a9542cd71574e26d56d703e88415ac"
+    }
+  },
+  "verification": [
+    "all six SVGs rendered successfully",
+    "renderer-specific tests passed",
+    "manifest contains six figures",
+    "no Aikens outcome or placeholder enters any rendered figure"
+  ]
+}
