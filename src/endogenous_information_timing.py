@@ -288,3 +288,111 @@ def maximum_affordable_wait_days(
     if not isfinite(daily) or daily <= 0.0:
         raise ValueError("delay_cost_per_day must be positive and finite")
     return value / daily
+
+
+
+def prior_optimal_action(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+) -> int:
+    """Return 0=late or 1=early before the cue; ties retain late."""
+
+    pi = float(prior_early)
+    early_loss = (1.0 - pi) * _validate_cost(
+        false_early_cost,
+        "false_early_cost",
+    )
+    late_loss = pi * _validate_cost(
+        missed_early_cost,
+        "missed_early_cost",
+    )
+    return 1 if early_loss < late_loss else 0
+
+
+def cue_optimal_action(
+    prior_early: float,
+    cue_accuracy: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    signal: int,
+) -> int:
+    """Return the Bayes-optimal action after one binary signal."""
+
+    if signal not in (0, 1):
+        raise ValueError("signal must be 0 or 1")
+    pi = float(prior_early)
+    q = float(cue_accuracy)
+    if not isfinite(pi) or not 0.0 < pi < 1.0:
+        raise ValueError("prior_early must lie strictly between 0 and 1")
+    if not isfinite(q) or not 0.5 <= q <= 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    cf = _validate_cost(false_early_cost, "false_early_cost")
+    cm = _validate_cost(missed_early_cost, "missed_early_cost")
+
+    if signal == 1:
+        p_late_and_signal = (1.0 - pi) * (1.0 - q)
+        p_early_and_signal = pi * q
+    else:
+        p_late_and_signal = (1.0 - pi) * q
+        p_early_and_signal = pi * (1.0 - q)
+
+    early_loss = p_late_and_signal * cf
+    late_loss = p_early_and_signal * cm
+    return 1 if early_loss < late_loss else 0
+
+
+def expected_shared_cue_action_mismatch(
+    scenario: InformationTimingScenario,
+    *,
+    actor_a_delay_cost: float,
+    actor_b_delay_cost: float,
+) -> float:
+    """Expected timing disagreement for two actors sharing the same later cue.
+
+    Both actors have the same state-loss structure and cue.  They differ only
+    in the opportunity cost of waiting.  If both commit, they take the same
+    prior-optimal action.  If both wait, they condition on the same signal and
+    again take the same action.  Mismatch can therefore arise only when one
+    actor waits and the other commits.
+    """
+
+    value = information_value(
+        scenario.prior_early,
+        scenario.cue_accuracy_after_wait,
+        scenario.false_early_cost,
+        scenario.missed_early_cost,
+    )
+    decision_a = decision_for_delay_cost(value, actor_a_delay_cost)
+    decision_b = decision_for_delay_cost(value, actor_b_delay_cost)
+    if decision_a == decision_b:
+        return 0.0
+
+    committed_action = prior_optimal_action(
+        scenario.prior_early,
+        scenario.false_early_cost,
+        scenario.missed_early_cost,
+    )
+
+    q = scenario.cue_accuracy_after_wait
+    pi = scenario.prior_early
+    p_signal_early = pi * q + (1.0 - pi) * (1.0 - q)
+    p_signal_late = 1.0 - p_signal_early
+
+    mismatch = 0.0
+    for signal, probability in (
+        (1, p_signal_early),
+        (0, p_signal_late),
+    ):
+        informed_action = cue_optimal_action(
+            pi,
+            q,
+            scenario.false_early_cost,
+            scenario.missed_early_cost,
+            signal=signal,
+        )
+        if informed_action != committed_action:
+            mismatch += probability
+
+    return mismatch
