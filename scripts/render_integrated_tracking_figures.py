@@ -51,26 +51,27 @@ def render_integrated_concept(path: Path) -> None:
         "on the environmental switching timescale."
     ]))
     out.append(arrow(335,172,425,172))
-    out.append(box(425,110,310,125,"2  Local identifiability null",[
+    out.append(box(425,110,310,125,"2  Local substitution null",[
         "movement feedback + timing feedback",
-        "enter through one restoring gain K;",
-        "same mismatch can hide different allocations."
+        "can share one restoring gain K;",
+        "local mismatch alone cannot distinguish them."
     ]))
     out.append(arrow(735,172,825,172))
-    out.append(box(825,95,315,155,"3  Finite temporal buffer",[
-        "timing postpones movement",
-        "capacity is finite",
-        "geometry and coordination constrain reallocation",
-        "=> spatial demand re-enters."
+    out.append(box(825,90,315,165,"3  Phase–velocity separation",[
+        "timing -> phase / intercept control",
+        "movement speed -> propagation / drift control",
+        "bounded timing buys time, not transport",
+        "=> spatial demand persists."
     ]))
 
     out.append(arrow(585,235,585,320))
-    out.append(box(390,320,390,115,"4  Broad empirical test",[
-        "5,816 observations / 55 migratory bird species:",
-        "one universal natural speed rule is rejected.",
-        "Phase centering shifts the point minimum but not heterogeneity."
+    out.append(box(390,310,390,135,"4  Natural falsification",[
+        "55 species: no universal natural speed rule;",
+        "2002–2009 / 2010–2017 holdout:",
+        "timing responsiveness does not flatten speed dependence;",
+        "simple temporal substitution fails."
     ]))
-    out.append(arrow(585,435,585,495))
+    out.append(arrow(585,445,585,495))
     out.append(box(295,495,580,125,"5  What replaces the failed universal rule",[
         "mule deer, barnacle geese and wigeon transform incoming phase error;",
         "raw lambda is interval-scale, actuator architecture is system-specific;",
@@ -83,7 +84,7 @@ def render_integrated_concept(path: Path) -> None:
         "fixed-24 h lambda test",
         "remains outcome-blind."
     ]))
-    out.append(text(55,680,"Headline: temporal buffering delays but does not replace spatial tracking.",16,"700"))
+    out.append(text(55,680,"Headline: timing improves phase alignment without making spatial tracking dispensable.",16,"700"))
     out.append("</svg>")
     path.write_text("\n".join(out)+"\n",encoding="utf-8")
 
