@@ -1,7 +1,12 @@
 import importlib.util
 from pathlib import Path
 
-import pandas as pd
+import pytest
+
+pd = pytest.importorskip(
+    "pandas",
+    reason="cv24c empirical gate tests require optional pandas/numpy dependencies",
+)
 
 
 MODULE_PATH = (
