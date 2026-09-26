@@ -59,6 +59,7 @@ class TimingPlayer:
 class BayesianTimingGame:
     prior_early: float
     players: tuple[TimingPlayer, ...]
+    interaction_weights: tuple[tuple[float, ...], ...] | None = None
 
     def __post_init__(self) -> None:
         if not isfinite(self.prior_early) or not 0.0 < self.prior_early < 1.0:
@@ -67,6 +68,25 @@ class BayesianTimingGame:
             raise ValueError("at least two players are required")
         if len({player.name for player in self.players}) != len(self.players):
             raise ValueError("player names must be unique")
+        if self.interaction_weights is not None:
+            if len(self.interaction_weights) != len(self.players):
+                raise ValueError(
+                    "interaction_weights must have one row per player"
+                )
+            for index, row in enumerate(self.interaction_weights):
+                if len(row) != len(self.players):
+                    raise ValueError(
+                        "interaction_weights must be a square matrix"
+                    )
+                for other_index, value in enumerate(row):
+                    if not isfinite(value) or value < 0.0:
+                        raise ValueError(
+                            "interaction weights must be non-negative and finite"
+                        )
+                    if index == other_index and value != 0.0:
+                        raise ValueError(
+                            "interaction-weight diagonal must be zero"
+                        )
 
 
 @dataclass(frozen=True)
@@ -162,15 +182,44 @@ def evaluate_profile(
                         else player.false_early_cost
                     )
 
-                mismatches = sum(
-                    1
-                    for other_index, other_action in enumerate(actions)
-                    if other_index != index and other_action != action
-                )
+                if game.interaction_weights is None:
+                    mismatch_fraction = (
+                        sum(
+                            1
+                            for other_index, other_action
+                            in enumerate(actions)
+                            if (
+                                other_index != index
+                                and other_action != action
+                            )
+                        )
+                        / (n_players - 1)
+                    )
+                else:
+                    weights = game.interaction_weights[index]
+                    weight_sum = sum(
+                        weight
+                        for other_index, weight in enumerate(weights)
+                        if other_index != index
+                    )
+                    if weight_sum <= 0.0:
+                        mismatch_fraction = 0.0
+                    else:
+                        mismatch_fraction = (
+                            sum(
+                                weights[other_index]
+                                for other_index, other_action
+                                in enumerate(actions)
+                                if (
+                                    other_index != index
+                                    and other_action != action
+                                )
+                            )
+                            / weight_sum
+                        )
                 interaction_loss = (
                     player.interaction_strength
-                    * mismatches
-                    / (n_players - 1)
+                    * mismatch_fraction
                 )
                 expected[index] += probability * (
                     -state_loss - interaction_loss
@@ -311,25 +360,47 @@ def canonical_three_player_game(
     migrant_accuracy: float,
     *,
     interaction_strength: float = 0.50,
+    local_accuracy: float = 0.90,
+    prior_early: float = 0.40,
+    interaction_topology: str = "complete",
 ) -> BayesianTimingGame:
     """Transparent resident--resident--migrant hysteresis witness.
 
     The numbers are mechanism probes, not empirical parameter estimates.
     """
 
+    if interaction_topology == "complete":
+        interaction_weights = None
+    elif interaction_topology == "chain":
+        interaction_weights = (
+            (0.0, 1.0, 0.0),
+            (1.0, 0.0, 1.0),
+            (0.0, 1.0, 0.0),
+        )
+    elif interaction_topology == "migrant_star":
+        interaction_weights = (
+            (0.0, 0.0, 1.0),
+            (0.0, 0.0, 1.0),
+            (1.0, 1.0, 0.0),
+        )
+    else:
+        raise ValueError(
+            "interaction_topology must be complete, chain, or migrant_star"
+        )
+
     return BayesianTimingGame(
-        prior_early=0.40,
+        prior_early=prior_early,
         players=(
             TimingPlayer(
                 name="flower",
-                cue_accuracy=0.90,
+                cue_accuracy=local_accuracy,
                 false_early_cost=1.0,
                 missed_early_cost=0.25,
                 interaction_strength=interaction_strength,
             ),
             TimingPlayer(
                 name="local_pollinator",
-                cue_accuracy=0.90,
+                cue_accuracy=local_accuracy,
                 false_early_cost=1.0,
                 missed_early_cost=0.25,
                 interaction_strength=interaction_strength,
@@ -342,4 +413,5 @@ def canonical_three_player_game(
                 interaction_strength=interaction_strength,
             ),
         ),
+        interaction_weights=interaction_weights,
     )
