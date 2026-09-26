@@ -122,5 +122,17 @@ def test_integrated_manuscript_retains_failed_temporal_substitution_test() -> No
     assert "opposite to the predicted negative direction" in m
     assert "not the registered primary test" in m
     assert "post-readout mechanistic interpretation" in m
-    assert "phase intercept" in m
-    assert "mismatch drifts" in m
+    assert "timing gain" in m
+    assert "timing capacity" in m
+    assert "movement speed" in m
+    assert "does not measure" in m
+    assert "z_{\\max}" in m
+
+
+def test_integrated_manuscript_distinguishes_gain_from_capacity() -> None:
+    m = text(INTEGRATED)
+    assert "timing gain" in m
+    assert "timing capacity" in m
+    assert "The bird holdout estimates the first quantity, not the second." in m
+    assert "high gain" in m.lower()
+    assert "remaining phenological capacity" in m
