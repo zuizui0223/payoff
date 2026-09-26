@@ -163,9 +163,12 @@ def audit(path: Path = DEFAULT) -> dict:
             "not the registered primary test" in text
             or "secondary descriptive" in text
         ),
-        "phase_velocity_interpretation_is_transparent": (
+        "gain_capacity_interpretation_is_transparent": (
             "post-readout mechanistic interpretation" in text
-            and "elementary kinematics" in text
+            and "timing gain" in text
+            and "timing capacity" in text
+            and "does not measure" in text
+            and "z_{\\max}" in text
         ),
         "figure_set_machine_audited": (
             "Status: **PASS" in figure_audit
