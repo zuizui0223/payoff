@@ -300,6 +300,41 @@ def main() -> None:
         if row["hysteresis_with_better_original_equilibrium"]
     ]
 
+    by_interaction = {}
+    for interaction in interactions:
+        eligible = [
+            row for row in rows
+            if row["interaction_strength"] == interaction
+            and row["baseline_follow_stable_q1"]
+        ]
+        cascades = [
+            row for row in eligible
+            if row["collective_all_late_cascade"]
+        ]
+        hysteresis = [
+            row for row in eligible
+            if row["hysteresis_with_better_original_equilibrium"]
+        ]
+        by_interaction[str(interaction)] = {
+            "baseline_eligible_cells": len(eligible),
+            "collective_cascade_cells": len(cascades),
+            "hysteresis_cells": len(hysteresis),
+            "collapse_q_min": (
+                min(
+                    float(row["all_late_collapse_q"])
+                    for row in cascades
+                )
+                if cascades else None
+            ),
+            "collapse_q_max": (
+                max(
+                    float(row["all_late_collapse_q"])
+                    for row in cascades
+                )
+                if cascades else None
+            ),
+        }
+
     summary = {
         "design": {
             "priors": priors,
@@ -351,6 +386,7 @@ def main() -> None:
                 )
                 if cascade_rows else None
             ),
+            "by_interaction_strength": by_interaction,
         },
         "claim_boundary": [
             "information-triggered counts require all-follow to be stable at q=1 before cue degradation",
