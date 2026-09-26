@@ -1,4 +1,4 @@
-# When information arrives too late: decision deadlines, coordination and ecological memory in seasonal tracking
+# Better information can transiently worsen seasonal coordination under unequal decision deadlines
 
 **Status:** integrated ecology manuscript v2, PREOUTCOME  
 **Relation to v1:** candidate replacement narrative for `PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`; v1 remains retained for provenance.  
@@ -552,6 +552,7 @@ Extended speed-ratio falsification, direct-system phase-retention comparisons, i
 - Johansson J, Jonzén N (2012) Game theory sheds new light on ecological responses to current climate change when phenology is historically mismatched. *Ecology Letters* 15:881–888. DOI: 10.1111/j.1461-0248.2012.01812.x.
 - Samplonius JM, Both C (2017) Competitor phenology as a social cue in breeding site selection. *Journal of Animal Ecology* 86:615–623. DOI: 10.1111/1365-2656.12640.
 - Tomotani BM, Gienapp P, de la Hera I, Terpstra M, Pulido F, Visser ME (2021) Integrating Causal and Evolutionary Analysis of Life-History Evolution: Arrival Date in a Long-Distant Migrant. *Frontiers in Ecology and Evolution* 9:630823. DOI: 10.3389/fevo.2021.630823.
+- Visser ME, Gienapp P, Husby A, Morrisey M, de la Hera I, Pulido F, Both C (2015) Effects of Spring Temperatures on the Strength of Selection on Timing of Reproduction in a Long-Distance Migratory Bird. *PLOS Biology* 13:e1002120. DOI: 10.1371/journal.pbio.1002120.
 - van Toor ML et al. (2021) Migration distance affects how closely Eurasian wigeons follow spring phenology during migration. *Movement Ecology* 9:61. DOI: 10.1186/s40462-021-00296-0.
 - Visser ME, Gienapp P (2019) Evolutionary and demographic consequences of phenological mismatches. *Nature Ecology & Evolution* 3:879–885. DOI: 10.1038/s41559-019-0880-8.
 - Weir JC, Phillimore AB (2024) Buffering and phenological mismatch: a change of perspective. *Global Change Biology* 30:e17294. DOI: 10.1111/gcb.17294.
