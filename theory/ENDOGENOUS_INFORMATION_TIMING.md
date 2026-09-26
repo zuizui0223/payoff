@@ -267,3 +267,101 @@ Not licensed:
 - that female flycatchers delay arrival in order to observe tit phenology;
 - that the original experiment measured C_F, C_M or D;
 - that the flycatcher system exhibits the predicted recovery hysteresis.
+
+
+## Counterintuitive consequence: better information can transiently worsen coordination
+
+Unequal waiting costs create a non-monotone system response to improving cue
+quality.
+
+Consider two actors facing the same state, the same future cue and the same
+private decision losses, but different costs of delaying commitment.
+
+With the canonical values
+
+    prior early = 0.40
+    false-early loss = 2
+    missed-early loss = 1
+
+and
+
+    actor A delay cost = 0.30
+    actor B delay cost = 0.10,
+
+the lower-delay actor begins waiting for the cue at approximately q=0.82 on the
+declared 0.01 grid, while the higher-delay actor does not wait until q=0.94.
+
+This produces three regimes.
+
+### Low cue quality
+
+Both actors commit before the cue.
+
+    q <= 0.81:
+        commit | commit
+
+They therefore use the same prior-optimal timing policy.
+
+### Intermediate cue quality
+
+Only the lower-delay actor waits.
+
+    0.82 <= q <= 0.93:
+        commit | wait
+
+The waiting actor sometimes follows the new cue away from the prior-optimal
+action while the early actor remains committed. Expected action mismatch jumps
+from zero to about 0.436 at q=0.82 and remains positive across the interval.
+
+### High cue quality
+
+Both actors wait.
+
+    q >= 0.94:
+        wait | wait
+
+Because the declared comparison gives both actors the same cue and decision
+losses, they again take the same cue-contingent action and mismatch returns to
+zero.
+
+Thus in the declared model:
+
+    worse information
+        -> shared ignorance / coordination
+
+    intermediate information
+        -> asymmetric information use / desynchronization
+
+    better information
+        -> shared informed coordination.
+
+The important prediction is not that information is generally harmful. It is
+that **improving information can temporarily increase interactor mismatch when
+partners cross their value-of-information thresholds at different cue
+qualities**.
+
+This is an information-induced desynchronization window.
+
+## Prior-art boundary for the non-monotone result
+
+Social-information theory already establishes that information acquisition is
+costly, that information reliability changes its value, and that social
+information can sometimes generate maladaptive decisions or informational
+cascades. Migration theory already shows that environmental predictability
+changes optimal timing and the value of intermediate stopovers.
+
+PAYOFF-B therefore does not claim that "more information can never be bad" is a
+new idea.
+
+The narrower mechanism here is:
+
+    improving one shared cue
+    x unequal costs of waiting
+    -> asynchronous adoption of information
+    -> transient interspecific timing mismatch
+    -> re-synchronization when both actors cross the waiting threshold.
+
+This mechanism is analytically distinct from following erroneous social
+information: the cue can improve monotonically in reliability while system
+coordination changes non-monotonically because information uptake is
+asynchronous.
