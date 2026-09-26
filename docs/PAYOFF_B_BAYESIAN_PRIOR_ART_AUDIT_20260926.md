@@ -66,6 +66,57 @@ Therefore the novelty claim cannot rest on "resident and migrant phenology
 respond differently" or on the existence of phenological interaction effects
 between those groups.
 
+
+### Cue--driver decoupling in pied flycatcher migration
+
+Tomotani et al. (2021, Frontiers in Ecology and Evolution, DOI
+10.3389/fevo.2021.630823) already separated environmental variables that
+predict male arrival timing from the environmental variables that predict the
+annual fitness optimum. In 11 years of Hoge Veluwe male-arrival data, Dutch
+and Ivory Coast temperature and NDVI explained arrival timing, while those cue
+variables did not detectably shift the estimated fitness peak. The authors
+explicitly proposed that climate change may have disrupted the correlation
+between migration cues and the drivers of selection.
+
+Therefore PAYOFF-B cannot claim novelty for:
+
+- "migration cues may cease to predict future optimal conditions";
+- "climate change can break cue--driver correlations";
+- "Ivory Coast conditions provide information used by Dutch pied flycatchers";
+- "predictive information before migration matters."
+
+This is a particularly important boundary because it is conceptually very close
+to PAYOFF-B predictive connectivity.
+
+The narrower PAYOFF-B contribution must occur **after** cue--driver decoupling:
+
+    cue reliability changes
+    x unequal decision deadlines
+    -> asynchronous adoption of information
+    -> interactor desynchronization
+    -> topology-dependent historical storage.
+
+The 2021 study also reports that cue windows and fitness-peak effects were
+estimated from the same 2005--2015 male-arrival system, so it is a direct
+theoretical predecessor rather than a generic migration reference.
+
+### Costly information and information timing
+
+Bauer, McNamara & Barta (2020, Proceedings of the Royal Society B, DOI
+10.1098/rspb.2020.0622) already model environmental predictability, migration
+timing and the value of information gathered at intermediate stopovers.
+Schneeberger & Taborsky (2020, Functional Ecology, DOI
+10.1111/1365-2435.13488) review costs of acquiring and using social
+information.
+
+Therefore PAYOFF-B cannot claim novelty for "waiting for information has a
+cost" or for value-of-information analysis itself.
+
+The distinguishing result is the **interaction between unequal waiting costs
+and a shared improving cue**: cue quality can improve monotonically while
+coordination becomes non-monotonic because partners start using that cue at
+different thresholds.
+
 ## Narrow candidate contribution
 
 The PAYOFF-B candidate contribution is the conjunction of mechanisms that are
@@ -80,8 +131,9 @@ normally studied separately:
     ->
     persistent lower-joint-payoff timing regime after migrant information recovers.
 
-The key distinguishing prediction is therefore **cross-species information
-contagion with recovery hysteresis**.
+The key distinguishing predictions are therefore **information-induced
+desynchronization under asynchronous cue uptake** and **cross-species
+information contagion with recovery hysteresis**.
 
 A migrant's predictive connectivity can deteriorate while the flower and local
 pollinator retain the same cue accuracy. Nevertheless the residents may change
