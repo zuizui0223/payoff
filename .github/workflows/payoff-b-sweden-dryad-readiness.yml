@@ -42,7 +42,7 @@ jobs:
             -o "outputs/sweden/All laydate.xlsx"
           echo "50bb3503258e5f8ce4db043d0bfe895d  outputs/sweden/All laydate.xlsx" | md5sum -c -
           file "outputs/sweden/All laydate.xlsx"
-          python -m pip install --disable-pip-version-check pandas openpyxl
+          python -m pip install --disable-pip-version-check pandas openpyxl statsmodels
           python - <<'PY'
           import json
           import pandas as pd
@@ -60,6 +60,10 @@ jobs:
               df.to_csv(Path("outputs/sweden")/f"{sheet}.csv",index=False)
           Path("outputs/sweden/workbook_audit.json").write_text(json.dumps(out,indent=2,default=str)+"\n")
           PY
+          python scripts/payoff_b_sweden_resident_migrant_timing.py \
+            --input "outputs/sweden/All laydate.xlsx" \
+            --output-json outputs/sweden/sweden_long_term_timing_result.json \
+            --paired-output outputs/sweden/sweden_resident_migrant_pairs.csv
           find outputs/sweden -maxdepth 1 -type f -printf "%f\t%s\n" | sort > outputs/sweden/files.txt
       - uses: actions/upload-artifact@v4
         if: always()
