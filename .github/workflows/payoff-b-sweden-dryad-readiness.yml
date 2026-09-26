@@ -25,6 +25,9 @@ jobs:
             "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.sq651/versions" \
             -o outputs/sweden/versions.json || true
           curl -fL --retry 3 \
+            "https://datadryad.org/api/v2/versions/7042/files" \
+            -o outputs/sweden/version_files.json
+          curl -fL --retry 3 \
             "https://datadryad.org/dataset/doi%3A10.5061/dryad.sq651" \
             -o outputs/sweden/page.html || true
           grep -Eo "api/v2/files/[0-9]+/download|files/[0-9]+|All laydate.xlsx" outputs/sweden/page.html 2>/dev/null | sort -u > outputs/sweden/links.txt || true
@@ -37,7 +40,7 @@ jobs:
           import json, pathlib, re, subprocess
           root=pathlib.Path("outputs/sweden")
           ids=[]
-          for name in ("dataset.json","versions.json"):
+          for name in ("dataset.json","versions.json","version_files.json"):
               p=root/name
               if not p.exists(): continue
               text=p.read_text(errors="ignore")
