@@ -8,6 +8,7 @@ on:
       - "analysis/movement_phenology/payoff_b_predictive_connectivity_amaral.R"
       - ".github/workflows/payoff-b-predictive-connectivity-broad.yml"
       - "data/payoff_b_predictive_connectivity_contract_20260926.json"
+      - "scripts/audit_broad_predictive_connectivity_dependency.py"
 
 jobs:
   broad-connectivity:
