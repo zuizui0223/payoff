@@ -82,3 +82,17 @@ def test_canonical_joint_payoff_order_at_full_migrant_information():
     assert efficient.joint_payoff == pytest.approx(-0.33)
     assert history_locked.joint_payoff == pytest.approx(-0.60)
     assert efficient.joint_payoff > history_locked.joint_payoff
+
+
+def test_without_interaction_information_loss_does_not_cascade_to_residents():
+    game = canonical_three_player_game(
+        0.50,
+        interaction_strength=0.0,
+    )
+    result = sequential_best_response(game, FOLLOW_ALL)
+    assert result.converged
+    assert labels(result.final.profile) == (
+        "follow_cue",
+        "follow_cue",
+        "always_late",
+    )
