@@ -189,3 +189,40 @@ def test_canonical_cascade_and_recovery_are_qualitatively_update_order_robust():
             if policy == FOLLOW_CUE
         }
         assert following_names == {"migrant"}
+
+
+
+def test_early_spring_prior_changes_cascade_regime_nonmonotonically():
+    low_prior = canonical_three_player_game(
+        0.50,
+        local_accuracy=0.90,
+        interaction_strength=0.50,
+        prior_early=0.40,
+    )
+    higher_prior = canonical_three_player_game(
+        0.50,
+        local_accuracy=0.90,
+        interaction_strength=0.50,
+        prior_early=0.50,
+    )
+
+    low_result = sequential_best_response(low_prior, FOLLOW_ALL)
+    high_result = sequential_best_response(higher_prior, FOLLOW_ALL)
+
+    assert low_result.final.profile == (
+        ALWAYS_LATE,
+        ALWAYS_LATE,
+        ALWAYS_LATE,
+    )
+    assert high_result.final.profile[:2] == (
+        FOLLOW_CUE,
+        FOLLOW_CUE,
+    )
+
+
+def test_canonical_game_exposes_prior_without_changing_default():
+    default = canonical_three_player_game(0.8)
+    explicit = canonical_three_player_game(0.8, prior_early=0.40)
+
+    assert default == explicit
+    assert default.prior_early == pytest.approx(0.40)
