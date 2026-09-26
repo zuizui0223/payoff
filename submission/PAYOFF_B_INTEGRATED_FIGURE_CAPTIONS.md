@@ -7,18 +7,18 @@ Canonical renderer:
 All quantitative panels are generated from frozen receipts or their materialized
 machine summaries. Figure 1 is conceptual synthesis only.
 
-## Figure 1. Temporal buffering and phase–velocity division of labor
+## Figure 1. Temporal buffering as gain, capacity and propagation
 
-Conceptual sequence linking the PAYOFF-B1 timescale benchmark to the ecological
-breakdown of local movement–timing substitution. In a moving front, timing
-changes phase offset whereas movement speed controls mismatch drift, so bounded
-timing can buy time without replacing spatial transport. Explicit landscapes
-add finite capacity, route geometry and coordination constraints. Natural tests
-then reject both one universal speed rule and the registered prediction that
-stronger timing responsiveness should weaken later movement-speed dependence.
-Direct systems decompose the remaining phase-control routes. The industrial
-mule-deer Aikens test remains a preregistered within-taxon perturbation rather
-than an additional cross-taxon replication.
+Conceptual sequence linking the PAYOFF-B1 timescale benchmark to three distinct
+tracking quantities. Timing gain describes how strongly phase is corrected now;
+timing capacity determines how long schedule displacement can continue; movement
+speed sets baseline spatial propagation. Dynamic timing can temporarily
+contribute to effective propagation, but bounded capacity makes that correction
+finite. Natural tests reject both one universal speed rule and the registered
+shortcut that stronger timing responsiveness should weaken later movement-speed
+dependence. Direct systems decompose the remaining phase-control routes. The
+industrial mule-deer Aikens test remains a preregistered within-taxon
+perturbation rather than an additional cross-taxon replication.
 
 ## Figure 2. Finite temporal buffering and spatial re-entry
 
