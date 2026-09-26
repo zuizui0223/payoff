@@ -31,6 +31,8 @@ def trace(
             1.0,
             local_accuracy=local_accuracy,
             interaction_strength=interaction_strength,
+            interaction_topology=interaction_topology,
+            prior_early=prior_early,
         ),
         profile,
     ).final
