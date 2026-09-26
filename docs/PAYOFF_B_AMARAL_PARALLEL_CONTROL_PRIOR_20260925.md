@@ -60,9 +60,9 @@ classification = FAIL_WRONG_DIRECTION
 
 The two evidence layers support only the conservative synthesis:
 
-> **Timing and movement speed can respond in parallel to environmental forcing;
-> stronger timing responsiveness does not make movement-speed matching
-> dispensable.**
+> **Timing responsiveness and movement speed can respond in parallel to
+> environmental forcing; stronger timing gain does not make movement-speed
+> matching dispensable and does not measure remaining timing capacity.**
 
 This does not license a positive complementarity claim. The holdout interaction
 is unsupported, and the published species-sensitivity coefficient overlaps
@@ -70,12 +70,15 @@ zero.
 
 ## Mechanistic interpretation
 
-For a moving environmental wave, a timing shift primarily changes **phase**,
-whereas the difference between animal and environmental front speeds controls
-how mismatch accumulates through time.
+For a moving environmental wave, a static timing shift changes **phase**.
+Changing timing through time can transiently alter effective mismatch drift, but
+that correction consumes a finite temporal budget. Movement speed sets the
+baseline propagation rate.
 
-Hence a species can improve alignment through timing while still needing speed
-adjustment to keep pace spatially.
+The holdout timing slope is therefore a gain-like measure, not a capacity
+measure. A species can improve alignment through strong timing responsiveness
+while still needing speed adjustment to keep pace spatially.
 
-This is the proposed explanation for why the timing-responsiveness main effect
-is negative in the holdout while the registered flattening interaction fails.
+This gain–capacity distinction explains why the timing-responsiveness main
+effect is negative in the holdout while the registered flattening interaction
+fails.
