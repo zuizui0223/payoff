@@ -311,6 +311,7 @@ def canonical_three_player_game(
     migrant_accuracy: float,
     *,
     interaction_strength: float = 0.50,
+    local_accuracy: float = 0.90,
 ) -> BayesianTimingGame:
     """Transparent resident--resident--migrant hysteresis witness.
 
@@ -322,14 +323,14 @@ def canonical_three_player_game(
         players=(
             TimingPlayer(
                 name="flower",
-                cue_accuracy=0.90,
+                cue_accuracy=local_accuracy,
                 false_early_cost=1.0,
                 missed_early_cost=0.25,
                 interaction_strength=interaction_strength,
             ),
             TimingPlayer(
                 name="local_pollinator",
-                cue_accuracy=0.90,
+                cue_accuracy=local_accuracy,
                 false_early_cost=1.0,
                 missed_early_cost=0.25,
                 interaction_strength=interaction_strength,
