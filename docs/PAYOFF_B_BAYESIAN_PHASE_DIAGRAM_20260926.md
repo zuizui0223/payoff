@@ -149,3 +149,28 @@ The current map remains synthetic. In particular:
   remain robustness targets;
 - the empirical discriminator is predictive connectivity from the migrant's
   decision site to the future destination state, not migration distance alone.
+
+
+## Prior-state sensitivity: a transition-window effect
+
+The canonical local-information / interaction cell was also checked while
+varying the prior probability of an early spring.
+
+| prior early | resident cascade threshold | recovered state | better full-information equilibrium? | history-lock loss |
+|---:|---:|---|---|---:|
+| 0.20 | 0.87 | late | late | follow | no | 0 |
+| 0.25 | 0.83 | late | late | follow | yes | 0.0225 |
+| 0.30 | 0.79 | late | late | follow | yes | 0.105 |
+| 0.35 | 0.76 | late | late | follow | yes | 0.1875 |
+| 0.40 | 0.71 | late | late | follow | yes | 0.270 |
+| 0.45 | none | follow | follow | follow | no lock | 0 |
+| 0.50 | none | follow | follow | follow | no lock | 0 |
+
+Thus the strict mechanism is also non-monotone in the environmental prior. It
+is strongest in an intermediate regime where an early spring is plausible
+enough that cue-contingent timing is worthwhile, but not yet common enough that
+early action becomes effectively unconditional.
+
+This suggests a second empirical discriminator: information-triggered
+coordination failure should be most visible during environmental transitions,
+not necessarily after the new seasonal state has become commonplace.
