@@ -258,6 +258,52 @@ def is_pure_bayesian_nash(
     return True
 
 
+
+def best_response_margins(
+    game: BayesianTimingGame,
+    profile: Iterable[Policy],
+) -> tuple[float, ...]:
+    """Chosen payoff minus the best unilateral alternative for each player.
+
+    Positive values identify a strict pure Bayesian Nash equilibrium.
+    Zero identifies a tie-supported equilibrium, which should not be used as a
+    primary hysteresis witness.
+    """
+
+    profile_tuple = tuple(profile)
+    if len(profile_tuple) != len(game.players):
+        raise ValueError("profile length must match number of players")
+    baseline = evaluate_profile(game, profile_tuple)
+    margins: list[float] = []
+    for player_index in range(len(game.players)):
+        alternatives: list[float] = []
+        for policy in POLICIES:
+            if policy == profile_tuple[player_index]:
+                continue
+            candidate = list(profile_tuple)
+            candidate[player_index] = policy
+            alternatives.append(
+                evaluate_profile(
+                    game,
+                    candidate,
+                ).expected_payoffs[player_index]
+            )
+        margins.append(
+            baseline.expected_payoffs[player_index] - max(alternatives)
+        )
+    return tuple(margins)
+
+
+def is_strict_pure_bayesian_nash(
+    game: BayesianTimingGame,
+    profile: Iterable[Policy],
+    *,
+    minimum_margin: float = 1e-9,
+) -> bool:
+    if not isfinite(minimum_margin) or minimum_margin <= 0.0:
+        raise ValueError("minimum_margin must be positive and finite")
+    return min(best_response_margins(game, profile)) > minimum_margin
+
 def pure_bayesian_nash_equilibria(
     game: BayesianTimingGame,
     *,
