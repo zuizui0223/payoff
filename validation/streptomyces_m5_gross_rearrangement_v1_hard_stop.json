@@ -1,0 +1,28 @@
+{
+  "receipt_id": "STREPTOMYCES_M5_GROSS_REARRANGEMENT_V1_HARD_STOP",
+  "candidate_id": "M5_T0",
+  "trigger": "STREPTOMYCES_M5_GROSS_REARRANGEMENT_AUDIT_RESULT_V1",
+  "v1_audit_completed": false,
+  "v1_blockers": [
+    "LEFT_TERMINAL_BOUNDARY_UNRESOLVED",
+    "RIGHT_TERMINAL_BOUNDARY_UNRESOLVED"
+  ],
+  "forbidden_recovery": [
+    "CHOOSE_A_NONZERO_TERMINAL_DEPTH_TOLERANCE_AFTER_INSPECTING_M5_TO_FORCE_BOUNDARY_PASS",
+    "RECLASSIFY_M5_BND_CALLS_AS_TERMINAL_BOUNDARIES_WITHOUT_A_PREDECLARED_RULE",
+    "DROP_THE_GROSS_REARRANGEMENT_GATE_BECAUSE_THE_FOUR_LOCUS_PATTERN_LOOKS_DEEP"
+  ],
+  "allowed_recovery_paths": [
+    {
+      "path": "AUTHOR_OR_ARCHIVE_METADATA",
+      "requirement": "recover exact M5_T0 terminal breakpoint coordinates and gross-event metadata from an external pre-existing record"
+    },
+    {
+      "path": "TARGET_EXCLUDED_V2_BOUNDARY_CALIBRATION",
+      "requirement": "freeze any nonzero-depth tolerance and boundary rule using only WT/non-M5 controls before applying it to M5_T0"
+    }
+  ],
+  "qualified_d_reference": false,
+  "qualified_d_reference_count_increment": 0,
+  "architecture_specific_inference_open": false
+}
