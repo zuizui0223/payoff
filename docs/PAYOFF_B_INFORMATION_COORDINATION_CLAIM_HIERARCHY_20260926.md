@@ -37,6 +37,11 @@ The exact binary game contains an information--coordination wedge in which the
 jointly valuable action is not privately selected under the migrant's available
 information.
 
+The endogenous-timing extension adds a second wedge: even when a future cue
+would improve decisions, a focal actor may rationally commit before the cue if
+its opportunity cost of waiting exceeds the private value of information while
+remaining below the joint value of waiting.
+
 ### 2b. Information-timing barrier
 
 Information quality is not only spatially unequal; it can also be temporally
@@ -63,6 +68,16 @@ When a wrong decision also harms partners, the joint value of waiting can exceed
 the focal individual's private value. This creates an information-acquisition
 coordination wedge: privately optimal early commitment can coexist with a
 system-level benefit of waiting for information.
+
+Unequal delay costs also create a non-monotone information effect. In the
+canonical shared-cue comparison, both actors commit at low cue quality, only
+the lower-delay actor waits at intermediate cue quality, and both wait at high
+cue quality. Expected action mismatch is therefore zero, then positive, then
+zero again. On the declared 0.01 grid the desynchronization window is
+q=0.82--0.93 and peaks at mismatch probability 0.436 at q=0.82.
+
+So improving information can transiently worsen interactor coordination because
+information uptake is asynchronous.
 
 ### 3. Coordination-memory barrier
 
@@ -249,7 +264,10 @@ PAYOFF-B may currently claim:
 - an exact private value-of-waiting threshold and information-acquisition
   coordination wedge;
 - a source-backed flycatcher--tit experimental anchor for timing-dependent
-  information availability.
+  information availability;
+- a non-monotone information-induced desynchronization result in which
+  monotonically improving cue reliability temporarily increases partner
+  mismatch because actors cross waiting thresholds at different cue qualities.
 
 PAYOFF-B may not currently claim:
 
