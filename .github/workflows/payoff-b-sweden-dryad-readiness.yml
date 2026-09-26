@@ -33,25 +33,58 @@ jobs:
           grep -Eo "api/v2/files/[0-9]+/download|files/[0-9]+|All laydate.xlsx" outputs/sweden/page.html 2>/dev/null | sort -u > outputs/sweden/links.txt || true
           cat outputs/sweden/dataset.json 2>/dev/null || true
           cat outputs/sweden/links.txt 2>/dev/null || true
-      - name: Download public Dryad file stream
+      - name: Classify byte access and run analysis if available
         shell: bash
         run: |
-          set -euo pipefail
-          curl -fL --retry 3 \
+          set -u
+          python -m pip install --disable-pip-version-check pandas openpyxl statsmodels
+          curl -fL --retry 2 \
             -A "Mozilla/5.0 PAYOFF-B research audit" \
             -c outputs/sweden/cookies.txt \
             "https://datadryad.org/dataset/doi%3A10.5061/dryad.sq651" \
-            -o outputs/sweden/download_page.html
-          curl -fL --retry 3 \
+            -o outputs/sweden/download_page.html || true
+          HTTP_CODE=$(curl -sS -L --retry 1 \
             -A "Mozilla/5.0 PAYOFF-B research audit" \
             -b outputs/sweden/cookies.txt \
             -e "https://datadryad.org/dataset/doi%3A10.5061/dryad.sq651" \
+            -w "%{http_code}" \
             "https://datadryad.org/downloads/file_stream/34004" \
-            -o "outputs/sweden/All laydate.xlsx"
-          echo "50bb3503258e5f8ce4db043d0bfe895d  outputs/sweden/All laydate.xlsx" | md5sum -c -
-          file "outputs/sweden/All laydate.xlsx"
-          python -m pip install --disable-pip-version-check pandas openpyxl statsmodels
-          python - <<'PY'
+            -o "outputs/sweden/All laydate.xlsx" || true)
+          python - "$HTTP_CODE" <<'PY'
+          import hashlib, json, pathlib, sys
+          root=pathlib.Path("outputs/sweden")
+          p=root/"All laydate.xlsx"
+          http_code=sys.argv[1]
+          expected_md5="50bb3503258e5f8ce4db043d0bfe895d"
+          status={
+              "dataset_doi":"10.5061/dryad.sq651",
+              "dryad_version_id":7042,
+              "file_id":34004,
+              "file_name":"All laydate.xlsx",
+              "metadata_visibility":"public",
+              "http_status":http_code,
+              "bytes_available":False,
+              "access_status":"BYTE_DOWNLOAD_BLOCKED_DRYAD_WAF",
+          }
+          if p.exists() and p.stat().st_size>1000:
+              digest=hashlib.md5(p.read_bytes()).hexdigest()
+              status["downloaded_bytes"]=p.stat().st_size
+              status["md5"]=digest
+              if digest==expected_md5:
+                  status["bytes_available"]=True
+                  status["access_status"]="BYTES_AVAILABLE_VERIFIED"
+              else:
+                  status["access_status"]="BYTE_PAYLOAD_MD5_MISMATCH"
+          (root/"access_status.json").write_text(json.dumps(status,indent=2)+"\n")
+          print(json.dumps(status,indent=2))
+          PY
+          if python - <<'PY'
+          import json
+          s=json.load(open("outputs/sweden/access_status.json"))
+          raise SystemExit(0 if s["bytes_available"] else 1)
+          PY
+          then
+            python - <<'PY'
           import json
           import pandas as pd
           from pathlib import Path
@@ -63,15 +96,18 @@ jobs:
               out["tables"][sheet]={
                   "rows":int(len(df)),
                   "columns":[str(c) for c in df.columns],
-                  "head":df.head(8).astype(object).where(pd.notna(df),None).to_dict(orient="records")
+                  "head":df.head(8).astype(object).where(pd.notna(df),None).to_dict(orient="records"),
               }
               df.to_csv(Path("outputs/sweden")/f"{sheet}.csv",index=False)
           Path("outputs/sweden/workbook_audit.json").write_text(json.dumps(out,indent=2,default=str)+"\n")
           PY
-          python scripts/payoff_b_sweden_resident_migrant_timing.py \
-            --input "outputs/sweden/All laydate.xlsx" \
-            --output-json outputs/sweden/sweden_long_term_timing_result.json \
-            --paired-output outputs/sweden/sweden_resident_migrant_pairs.csv
+            python scripts/payoff_b_sweden_resident_migrant_timing.py \
+              --input "outputs/sweden/All laydate.xlsx" \
+              --output-json outputs/sweden/sweden_long_term_timing_result.json \
+              --paired-output outputs/sweden/sweden_resident_migrant_pairs.csv
+          else
+            echo "Dryad metadata is public but automated file bytes are WAF-blocked; scientific analysis skipped."
+          fi
           find outputs/sweden -maxdepth 1 -type f -printf "%f\t%s\n" | sort > outputs/sweden/files.txt
       - uses: actions/upload-artifact@v4
         if: always()
