@@ -174,3 +174,57 @@ early action becomes effectively unconditional.
 This suggests a second empirical discriminator: information-triggered
 coordination failure should be most visible during environmental transitions,
 not necessarily after the new seasonal state has become commonplace.
+
+
+## Interaction topology creates ecological memory
+
+The three-player result was then separated from the assumption of an all-to-all
+interaction network.
+
+Two sparse networks with the **same number of undirected interaction edges**
+were compared:
+
+    chain:
+        flower -- local pollinator -- migrant
+
+    migrant-star:
+        flower -- migrant -- local pollinator
+
+The chain retains a resident--resident ecological link; the migrant-star does
+not.
+
+Across the same local-information x interaction grid:
+
+| topology | eligible high-information cells | resident cascade | hysteresis after recovery | strict inefficient hysteresis |
+|---|---:|---:|---:|---:|
+| complete | 391 | 221 | 201 | 121 |
+| chain | 364 | 194 | 174 | 55 |
+| migrant-star | 404 | 367 | 14 | 9 |
+
+The important contrast is not cascade frequency. The migrant-star actually
+shows many temporary resident cascades. What largely disappears is **memory**:
+most resident changes reverse once migrant information is restored.
+
+In the canonical parameter cell both sparse networks collapse at migrant cue
+accuracy 0.71. Under the chain, recovery ends at
+'late/late/follow' even though 'follow/follow/follow' is again a higher-joint-
+payoff pure Bayesian Nash equilibrium; the history-lock loss is 0.15. Under the
+migrant-star, the same information recovery returns to
+'follow/follow/follow' with no history-lock loss.
+
+Because the chain and migrant-star have the same number of links, this contrast
+cannot be attributed simply to interaction density in the declared model.
+
+The candidate mechanism is therefore:
+
+> **local ecological coupling can store the historical effect of a migrant's
+> temporary information loss.**
+
+The migrant can initiate the timing cascade, but coupling among destination
+partners can preserve the displaced basin after the migrant itself again has
+good information.
+
+This suggests a network-level extension of the empirical prediction:
+predictive-connectivity loss should have more persistent community effects when
+destination partners are themselves strongly coupled, even at similar migrant
+dependence.
