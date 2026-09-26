@@ -1,0 +1,63 @@
+{
+  "result_id": "payoff_b_bayesian_phase_diagram_preliminary_20260926",
+  "status": "exploratory deterministic robustness enumeration",
+  "model": "three_player_bayesian_timing_game_v1",
+  "grid": {
+    "local_cue_accuracy": {"min": 0.75, "max": 1.0, "step": 0.025, "n": 11},
+    "interaction_strength": {"min": 0.0, "max": 1.0, "step": 0.025, "n": 41},
+    "migrant_cue_accuracy_path": {"min": 0.5, "max": 1.0, "step": 0.01, "n": 51, "directions": ["degrading", "recovering"]},
+    "cells": 451
+  },
+  "strict_promotion_rule": [
+    "high-information endpoint is follow_cue|follow_cue|follow_cue",
+    "degrading migrant cue reliability causes at least one local resident to leave follow_cue",
+    "restoring migrant cue reliability to 1.0 does not restore the initial profile",
+    "at recovered full information a pure Bayesian Nash equilibrium with higher joint payoff remains available"
+  ],
+  "counts": {
+    "eligible_high_information_cells": 391,
+    "resident_cascade_cells": 221,
+    "hysteresis_cells": 201,
+    "inefficient_information_hysteresis_cells": 121,
+    "reversible_cascade_cells": 20,
+    "history_dependence_without_joint_loss_cells": 80,
+    "no_resident_cascade_cells": 170,
+    "baseline_not_following_cells": 60
+  },
+  "conditional_fractions_among_eligible": {
+    "resident_cascade": 0.5652173913043478,
+    "hysteresis": 0.5140664961636828,
+    "inefficient_information_hysteresis": 0.309462915601023
+  },
+  "by_local_cue_accuracy": [
+    {"local_accuracy":0.75,"eligible":14,"cascade":14,"hysteresis":14,"inefficient_hysteresis":0,"cascade_interaction_min":0.675,"cascade_interaction_max":1.0},
+    {"local_accuracy":0.775,"eligible":24,"cascade":24,"hysteresis":24,"inefficient_hysteresis":0,"cascade_interaction_min":0.425,"cascade_interaction_max":1.0},
+    {"local_accuracy":0.8,"eligible":31,"cascade":31,"hysteresis":31,"inefficient_hysteresis":0,"cascade_interaction_min":0.25,"cascade_interaction_max":1.0},
+    {"local_accuracy":0.825,"eligible":36,"cascade":36,"hysteresis":36,"inefficient_hysteresis":28,"inefficient_interaction_min":0.3,"inefficient_interaction_max":0.975},
+    {"local_accuracy":0.85,"eligible":40,"cascade":40,"hysteresis":40,"inefficient_hysteresis":38,"inefficient_interaction_min":0.05,"inefficient_interaction_max":0.975},
+    {"local_accuracy":0.875,"eligible":41,"cascade":36,"hysteresis":34,"inefficient_hysteresis":33,"inefficient_interaction_min":0.175,"inefficient_interaction_max":0.975},
+    {"local_accuracy":0.9,"eligible":41,"cascade":27,"hysteresis":21,"inefficient_hysteresis":21,"inefficient_interaction_min":0.5,"inefficient_interaction_max":1.0},
+    {"local_accuracy":0.925,"eligible":41,"cascade":13,"hysteresis":1,"inefficient_hysteresis":1,"inefficient_interaction_min":1.0,"inefficient_interaction_max":1.0},
+    {"local_accuracy":0.95,"eligible":41,"cascade":0,"hysteresis":0,"inefficient_hysteresis":0},
+    {"local_accuracy":0.975,"eligible":41,"cascade":0,"hysteresis":0,"inefficient_hysteresis":0},
+    {"local_accuracy":1.0,"eligible":41,"cascade":0,"hysteresis":0,"inefficient_hysteresis":0}
+  ],
+  "canonical_witness": {
+    "local_cue_accuracy": 0.9,
+    "interaction_strength": 0.5,
+    "collapse_migrant_accuracy": 0.71,
+    "low_information_profile": "always_late|always_late|always_late",
+    "full_recovery_profile": "always_late|always_late|follow_cue",
+    "best_full_recovery_equilibrium": "follow_cue|follow_cue|follow_cue",
+    "history_lock_joint_payoff_loss": 0.27,
+    "qualitative_result_is_robust_to_all_six_player_update_orders": true
+  },
+  "main_exploratory_inference": "vulnerability to migrant information loss is non-monotone in local cue quality: near-perfect local information resists the cascade, while an intermediate-high local-information window can be tipped into a lower-joint-payoff historical basin",
+  "claim_boundary": [
+    "grid frequencies describe this synthetic design and are not natural prevalences",
+    "cue accuracies are model parameters rather than empirical teleconnection estimates",
+    "the local-information vulnerability window is a model prediction requiring external empirical testing",
+    "sequential best response is one declared historical accessibility dynamic",
+    "no existing PAYOFF-B empirical freeze or Aikens preregistration is changed"
+  ]
+}
