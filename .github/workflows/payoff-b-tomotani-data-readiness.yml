@@ -46,6 +46,15 @@ jobs:
                   t.extractall("outputs/tomotani/extracted")
           else:
               out["format"]="single_file"
+          text=p.read_text(errors="ignore") if out["format"]=="single_file" else ""
+          if "request the file by email" in text.lower():
+              out["access_status"]="OWNER_APPROVAL_REQUIRED"
+              out["archive_file_name"]="Tomotani et al.zip"
+              out["archive_file_id"]="VLIZ_00000444_5dd3fba4f38f8"
+          elif out["format"] in ("zip","tar"):
+              out["access_status"]="BYTES_AVAILABLE"
+          else:
+              out["access_status"]="NON_ARCHIVE_RESPONSE"
           Path("outputs/tomotani/readiness.json").write_text(json.dumps(out,indent=2)+"\n")
           PY
           find outputs/tomotani -maxdepth 3 -type f -printf "%p\t%s bytes\n" | sort > outputs/tomotani/files.txt
