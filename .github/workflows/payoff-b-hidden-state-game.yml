@@ -1,0 +1,40 @@
+name: PAYOFF-B hidden-state game
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'src/partial_information_coordination.py'
+      - 'tests/test_partial_information_coordination.py'
+      - 'scripts/payoff_b_hidden_state_game.py'
+      - 'theory/HIDDEN_STATE_COORDINATION_GAME.md'
+      - '.github/workflows/payoff-b-hidden-state-game.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/partial_information_coordination.py'
+      - 'tests/test_partial_information_coordination.py'
+      - 'scripts/payoff_b_hidden_state_game.py'
+      - 'theory/HIDDEN_STATE_COORDINATION_GAME.md'
+      - '.github/workflows/payoff-b-hidden-state-game.yml'
+
+jobs:
+  test-and-receipt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test hidden-state game
+        run: python -m pytest -q tests/test_partial_information_coordination.py
+      - name: Build canonical receipt
+        run: >-
+          python scripts/payoff_b_hidden_state_game.py
+          --output outputs/payoff_b_hidden_state_game_canonical_20260926.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-hidden-state-game-canonical
+          path: outputs/payoff_b_hidden_state_game_canonical_20260926.json
+          if-no-files-found: error
