@@ -11,16 +11,18 @@ existing figure sets. Each main figure must answer one step in the single
 argument
 
 \`\`\`text
-non-identifiability
--> ecological breakdown
--> broad falsification
--> mechanistic decomposition
+local movement/timing substitution
+-> gain–capacity–propagation separation
+-> finite temporal buffering and spatial re-entry
+-> broad speed-rule falsification
+-> registered temporal-substitution failure
+-> direct mechanistic decomposition
 -> information / actuation test
 \`\`\`
 
 and every quantitative panel must trace to a frozen source.
 
-## Figure 1 — One mismatch, multiple tracking architectures
+## Figure 1 — Temporal buffering as gain, capacity and propagation
 
 **Role:** conceptual bridge only.
 
@@ -29,9 +31,12 @@ Required content:
 - separate PAYOFF-B1 anti-phase seasonal-timescale benchmark as a small
   contextual box, not a new theorem panel;
 - local movement + timing restoring-budget null;
-- empirical phase-retention coordinate;
-- explicit statement that equal endpoint mismatch does not identify allocation
-  among movement, timing, information and actuation.
+- timing gain as current phase responsiveness;
+- timing capacity as the finite duration of dynamic schedule compensation;
+- movement speed as baseline spatial propagation;
+- natural rejection of both one universal speed rule and simple timing-for-speed
+  substitution;
+- empirical phase-retention coordinate as the downstream response language.
 
 Reusable source:
 
@@ -42,9 +47,10 @@ Reusable source:
 Build decision:
 
 **IMPLEMENTED.** `scripts/render_integrated_tracking_figures.py` renders a new
-integrated Figure 1 linking the PAYOFF-B1 benchmark, local identifiability null,
-capacity/geometry/coordination breakdown, 55-species falsification, direct
-phase-control decomposition and outcome-blind Aikens perturbation slot.
+integrated Figure 1 linking the PAYOFF-B1 benchmark, local substitution null,
+gain–capacity–propagation separation, finite buffering, the 55-species
+speed-rule falsification, the registered substitution failure, direct
+phase-control decomposition and the outcome-blind Aikens perturbation slot.
 
 No new quantitative result is licensed.
 
@@ -248,7 +254,10 @@ Sources:
 
 Build decision:
 
-**NEW INTEGRATED EMPIRICAL RENDERER REQUIRED.**
+**IMPLEMENTED PREOUTCOME.**
+
+Figure 6 is rendered from frozen machine inputs with an explicit unopened Aikens
+slot and is populated only by the registered result path after adjudication.
 
 ## Material intentionally removed from integrated main figures
 
