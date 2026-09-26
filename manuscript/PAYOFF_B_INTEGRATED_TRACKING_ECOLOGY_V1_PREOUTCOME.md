@@ -82,44 +82,32 @@ This is deliberately stronger than we expect in nature. It supplies a null again
 
 ### 2.3 Phase and velocity are different control channels
 
-Following the registered bird holdout readout, we use a minimal moving-front identity as a **post-readout mechanistic interpretation**, not as a preregistered prediction. Let an environmental front move as
-
-\[
-E(t)=E_0+v_E t,
-\]
-
-and let the organism's spatial front move at speed \(v_A\) with a seasonal timing shift \(z\),
-
-\[
-A(t;z)=A_0+v_A(t+z).
-\]
-
-The signed spatial mismatch is
+Following the registered bird holdout, we use a minimal moving-front identity as a **post-readout mechanistic interpretation**, not as a preregistered prediction:
 
 \[
 e(t;z)=(E_0-A_0)-v_A z+(v_E-v_A)t.
 \]
 
-Timing therefore changes the phase offset,
+Thus timing changes phase,
 
 \[
 \frac{\partial e}{\partial z}=-v_A,
 \]
 
-whereas movement-speed matching determines the rate at which mismatch drifts,
+whereas the animal–environment speed difference controls mismatch drift,
 
 \[
 \frac{\partial e}{\partial t}=v_E-v_A.
 \]
 
-A fixed timing shift can remove mismatch at one instant but cannot keep mismatch zero over a sustained interval when \(v_E\neq v_A\). If timing adjustment is bounded by \(|z|\le z_{\max}\), the maximum extra time it can buy before the same mismatch threshold is reached is
+A fixed timing shift can zero mismatch at one instant but cannot maintain zero mismatch when \(v_E\neq v_A\). With \(|z|\le z_{\max}\), the maximum extra time bought by timing is
 
 \[
 T_{\rm buffer}=\frac{v_A z_{\max}}{|v_E-v_A|}
-=\frac{u z_{\max}}{|1-u|},
+=\frac{u z_{\max}}{|1-u|}.
 \]
 
-with \(u=v_A/v_E\). This is elementary kinematics rather than a claim of mathematical novelty. It clarifies the ecological asymmetry: timing can shift **when** a tracker meets the environmental wave, whereas movement speed determines whether it can keep pace with the wave once tracking continues.
+This elementary identity separates **phase control** from **propagation control**: timing changes when a tracker meets the wave; movement speed determines whether it keeps pace.
 
 ### 2.4 Temporal buffering, latent spatial demand and three failure modes
 
@@ -325,51 +313,33 @@ This separates an actuation constraint from a general decline in every timing me
 
 ### 5.1 Temporal buffering delays rather than removes spatial tracking
 
-The strongest mechanistic result is not merely that movement and timing are difficult to identify from the same mismatch. In explicit moving landscapes, finite timing capacity acts as a **temporal bypass**: it expands the persistence envelope, reduces the immediate cost of fragmented routes and can support phenology-only tracking over part of the forcing range. Under stronger sustained directional forcing, however, movement re-enters and remains necessary near the persistence frontier.
-
-This distinguishes buffering from permanent substitution. The local controller permits exact substitution at fixed total feedback, but the explicit landscape does not because timing has finite range while the environmental target continues to move. Temporal adjustment therefore changes **when** spatial tracking becomes necessary; it does not abolish spatial demand.
+Explicit landscapes convert the local substitution null into a finite **temporal bypass**. Timing expands persistence and reduces immediate route costs, but movement re-enters under stronger directional forcing and remains necessary near the persistence frontier. The asymmetry is simple: timing has finite range while the environmental target keeps moving. Temporal adjustment therefore changes **when** spatial tracking becomes necessary, not whether spatial demand exists.
 
 ### 5.2 Low mismatch can conceal latent spatial tracking demand
 
-The ecological consequence is that current alignment can remain good while the future requirement for movement grows. A population can maintain low mismatch by spending finite timing capacity, yet once that capacity is exhausted the deferred spatial response becomes explicit. We call that deferred requirement latent spatial tracking demand.
-
-Two additional constraints make this hidden demand consequential. First, temporal adjustment can reduce the immediate cost of fragmented movement routes without repairing those routes, so fragmentation can become important precisely when movement re-enters. Second, partner dependence can make a jointly beneficial reallocation inaccessible to unilateral change.
-
-Hence,
+A population can remain well aligned while spending finite timing capacity, so the spatial response required later remains hidden until timing is exhausted. Fragmentation then matters because timing can delay route use without repairing the route, and partner dependence can block the reallocation needed when movement re-enters.
 
 \[
-\text{low current mismatch}
-\neq
-\text{low future spatial demand},
+\text{low current mismatch}\neq\text{low future spatial demand},
+\qquad
+\text{same mismatch}\neq\text{same remaining capacity}.
 \]
 
-and
-
-\[
-\text{same mismatch}
-\neq
-\text{same remaining response capacity}.
-\]
-
-This is where the identification result becomes biologically important: mismatch is an outcome of the tracking system, not a direct readout of the mechanism or reserve capacity that keeps it small.
+This is the biological meaning of the identification problem: mismatch is an outcome, not a direct readout of the mechanism or reserve capacity keeping it small.
 
 ### 5.3 Natural data reject both a universal speed rule and simple temporal substitution
 
-The failure of a universal natural speed optimum is not surprising once tracking has multiple degrees of freedom. A speed ratio compresses target phase, waiting opportunities, route geometry, information quality, actuator constraints and ecological interval into one scalar. The broad analysis is important precisely because it prevents the theory from becoming an unconstrained explanation after the fact: a simple portable optimum was testable and was not recovered.
+The 55-species analysis rejects one portable movement/environment speed optimum. The chronological holdout then tests the stronger alternative that timing responsiveness substitutes for speed matching. It does not: historically more timing-responsive species did not show a flatter later mismatch-speed curve; the registered moderation was opposite-signed and unsupported.
 
-The chronological holdout provides a sharper boundary. If timing responsiveness simply substituted for movement-speed matching, species that historically tracked green-up more strongly should have shown a flatter later mismatch-speed curve. They did not. The registered moderation coefficient was opposite-signed and unsupported, so the natural data reject that simple substitution prediction as well.
-
-The secondary negative timing-responsiveness main effect suggests that historically more timing-responsive species can maintain lower mismatch overall while still retaining movement-speed dependence. Because that main effect was not the registered primary target, we treat it descriptively. The licensed inference is narrower: temporal responsiveness may improve tracking without making spatial tracking dispensable. This distinction aligns with the explicit landscapes, where timing buffers environmental change but movement re-enters once temporal capacity or geometry becomes limiting.
+Timing responsiveness nevertheless had a negative descriptive main association with holdout mismatch. We therefore retain a narrower inference: better temporal tracking can improve average alignment without making spatial tracking dispensable.
 
 ### 5.4 Phase–velocity division of labor explains the failed substitution test
 
-The registered holdout result sharpens the mechanism. Species with stronger historical timing responsiveness had lower holdout mismatch on average, yet that responsiveness did not weaken the mismatch dependence on movement-speed ratio. The predicted negative moderation therefore failed even though timing responsiveness itself was associated with improved alignment.
+The moving-front identity explains why lower mean mismatch need not imply weaker speed dependence. Timing changes the **phase offset**; the animal–environment speed difference controls the **rate of mismatch accumulation**. These are distinct control targets, so timing can lower the mismatch surface without flattening its speed dependence.
 
-The phase–velocity identity explains this combination. A timing shift changes the phase intercept of the tracking problem, whereas a speed difference changes how mismatch accumulates along a moving environmental wave. Better timing can therefore lower the whole mismatch surface without flattening its dependence on movement speed. In control terms, timing and speed are not redundant actuators acting on one scalar gain; they can regulate different components of the forcing.
+The published Amaral source analysis is independently consistent with this interpretation: bird speed responded to green-up date (−0.549, 95% CI −0.770 to −0.327) and green-up speed (+0.088, 0.041 to 0.134), while the species timing-sensitivity coefficient for migration speed was +0.119 (−0.034 to 0.203), not the negative association expected from a simple timing-for-speed tradeoff. These are prior-consistency results, not a new PAYOFF confirmatory test.
 
-This interpretation is also consistent with the Amaral source analysis, which independently modelled bird migration speed as responding to green-up date and green-up speed. In the published bird-speed model, the green-up date anomaly coefficient was −0.549 (95% CI −0.770 to −0.327) and the green-up speed anomaly coefficient was +0.088 (95% CI +0.041 to +0.134). The published species-sensitivity coefficient in the migration-speed model was +0.119 (95% CI −0.034 to +0.203): uncertain, but not the negative association expected from a simple timing-for-speed tradeoff. We treat these published source results as prior consistency rather than a new PAYOFF confirmatory test.
-
-The deeper ecological distinction is therefore between **phase control** and **propagation control**. Phenological responsiveness helps determine when the organism enters the moving environmental wave; movement speed helps determine whether it keeps pace with the spatial propagation of that wave. Timing can improve tracking without making transport dispensable.
+The resulting division of labor is **phase control versus propagation control**: timing helps determine when an organism meets the environmental wave; movement speed helps determine whether it keeps pace.
 
 ### 5.5 What is portable across migration systems
 
