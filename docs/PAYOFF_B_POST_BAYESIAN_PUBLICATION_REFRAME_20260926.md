@@ -200,3 +200,44 @@ The longer-term second result is:
 > **A temporary information-induced desynchronization can become ecological
 > memory when the interaction network contains a strict alternative timing
 > equilibrium.**
+
+
+## Long-term natural reversal lane: closed negative
+
+The preregistered 1980--2010 Hoge Veluwe cue--driver lane did **not** pass the
+information decline--recovery gate. The connectivity series is visibly
+nonstationary and the best two-line description changes around 2001, but the
+pre-break fitted slope is positive rather than negative.
+
+Accordingly:
+
+- no natural hysteresis model was opened;
+- the cue window was not retuned;
+- the breakpoint was not redefined from the known selection trajectory;
+- the result is retained as `NO_CUE_DRIVER_REVERSAL`.
+
+This strengthens the publication logic. Cue--driver disruption remains
+well-motivated prior art, not a new result that PAYOFF-B needs to rescue.
+
+The main empirical/theoretical chain should therefore be presented as:
+
+    broad birds:
+        predictive information relates to realized mismatch, pooled but
+        dependence-sensitive
+
+    flycatcher manipulation:
+        cue usefulness depends on whether it is visible before the decision
+
+    long-term flycatcher lane:
+        no preregistered natural decline--recovery information cycle
+
+    wigeon:
+        predictive connectivity does not act as a stronger post-error controller
+
+    exact theory:
+        unequal decision deadlines make cue uptake asynchronous
+
+    network theory:
+        topology can store a transient desynchronization as ecological memory.
+
+The natural network-hysteresis prediction remains deliberately prospective.
