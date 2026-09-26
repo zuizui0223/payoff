@@ -1,0 +1,50 @@
+{
+  "result_id": "payoff_b_long_term_source_access_audit_20260926",
+  "frozen_date": "2026-09-26",
+  "status": "DATA_ACCESS_BOUNDARIES_VERIFIED",
+  "tomotani": {
+    "paper_doi": "10.1111/gcb.14006",
+    "source_period": [
+      1980,
+      2015
+    ],
+    "archive": "Marine Data Archive",
+    "archive_file_name": "Tomotani et al.zip",
+    "archive_file_id": "VLIZ_00000444_5dd3fba4f38f8",
+    "workflow_run_id": 36246774533,
+    "artifact_id": 10908265410,
+    "artifact_sha256": "d7328f3b238f2bdec798d4fb799930c2d450df474ed1b55f9b4ec0e4d8b47a11",
+    "access_status": "OWNER_APPROVAL_REQUIRED",
+    "response_bytes": 6336,
+    "evidence": "direct-link page states that file access must be requested by email and owner permission checked",
+    "analysis_status": "PREOUTCOME_CONTRACT_FROZEN_NOT_RUN"
+  },
+  "sweden": {
+    "paper_doi": "10.1111/jav.01287",
+    "dataset_doi": "10.5061/dryad.sq651",
+    "source_period": [
+      1969,
+      2012
+    ],
+    "dryad_dataset_id": 7005,
+    "dryad_version_id": 7042,
+    "dryad_file_id": 34004,
+    "file_name": "All laydate.xlsx",
+    "file_size_bytes": 225522,
+    "expected_md5": "50bb3503258e5f8ce4db043d0bfe895d",
+    "workflow_run_id": 36246767192,
+    "artifact_id": 10908200887,
+    "artifact_sha256": "87dbaeb9b1d5caa011c307ab1d1d9581ed94068b450e58dc428a7199e3cfccc0",
+    "metadata_visibility": "PUBLIC",
+    "byte_http_status": 403,
+    "access_status": "BYTE_DOWNLOAD_BLOCKED_DRYAD_WAF",
+    "analysis_script": "scripts/payoff_b_sweden_resident_migrant_timing.py",
+    "analysis_status": "READY_BUT_NOT_RUN_WITH_SOURCE_BYTES"
+  },
+  "methodological_conclusion": [
+    "do not treat access failure as ecological non-estimability",
+    "do not substitute paper summaries for raw-data reanalysis",
+    "retain preoutcome contracts and execute unchanged if source bytes later become available",
+    "natural network hysteresis remains prospective because no currently accessible dataset passes both variable and byte-access gates"
+  ]
+}

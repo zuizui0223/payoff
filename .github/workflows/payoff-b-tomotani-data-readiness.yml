@@ -1,0 +1,66 @@
+name: payoff-b-tomotani-data-readiness
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-natural-hysteresis-gate-20260926
+    paths:
+      - ".github/workflows/payoff-b-tomotani-data-readiness.yml"
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download archived processed data
+        run: |
+          mkdir -p outputs/tomotani
+          curl -fL --retry 3 --retry-delay 2 \
+            "https://mda.vliz.be/directlink.php?fid=VLIZ_00000444_5dd3fba4f38f8" \
+            -o outputs/tomotani/source_download
+          file outputs/tomotani/source_download | tee outputs/tomotani/file_type.txt
+          sha256sum outputs/tomotani/source_download | tee outputs/tomotani/source_sha256.txt
+          ls -lh outputs/tomotani/source_download | tee outputs/tomotani/source_size.txt
+      - name: Inspect archive or tabular payload
+        shell: bash
+        run: |
+          set -e
+          python - <<'PY'
+          from pathlib import Path
+          import json, zipfile, tarfile
+          p=Path("outputs/tomotani/source_download")
+          out={"size_bytes":p.stat().st_size}
+          if zipfile.is_zipfile(p):
+              out["format"]="zip"
+              with zipfile.ZipFile(p) as z:
+                  out["members"]=[{"name":i.filename,"size":i.file_size} for i in z.infolist()]
+                  z.extractall("outputs/tomotani/extracted")
+          elif tarfile.is_tarfile(p):
+              out["format"]="tar"
+              with tarfile.open(p) as t:
+                  out["members"]=[{"name":i.name,"size":i.size} for i in t.getmembers() if i.isfile()]
+                  t.extractall("outputs/tomotani/extracted")
+          else:
+              out["format"]="single_file"
+          text=p.read_text(errors="ignore") if out["format"]=="single_file" else ""
+          if "request the file by email" in text.lower():
+              out["access_status"]="OWNER_APPROVAL_REQUIRED"
+              out["archive_file_name"]="Tomotani et al.zip"
+              out["archive_file_id"]="VLIZ_00000444_5dd3fba4f38f8"
+          elif out["format"] in ("zip","tar"):
+              out["access_status"]="BYTES_AVAILABLE"
+          else:
+              out["access_status"]="NON_ARCHIVE_RESPONSE"
+          Path("outputs/tomotani/readiness.json").write_text(json.dumps(out,indent=2)+"\n")
+          PY
+          find outputs/tomotani -maxdepth 3 -type f -printf "%p\t%s bytes\n" | sort > outputs/tomotani/files.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-tomotani-data-readiness
+          path: outputs/tomotani/
+          if-no-files-found: error

@@ -1,0 +1,71 @@
+{
+  "contract_id": "payoff_b_tomotani_information_history_v1_20260926",
+  "frozen_date": "2026-09-26",
+  "status": "PREOUTCOME_CONTRACT_DATA_ACCESS_PENDING",
+  "source": {
+    "paper_doi": "10.1111/gcb.14006",
+    "source_period": [
+      1980,
+      2015
+    ],
+    "archive": "Marine Data Archive",
+    "archive_file": "Tomotani et al.zip",
+    "archive_file_id": "VLIZ_00000444_5dd3fba4f38f8",
+    "byte_access_status": "OWNER_APPROVAL_REQUIRED",
+    "published_long_series": {
+      "male_calculated_arrival": true,
+      "female_nest_building_arrival_proxy": true,
+      "egg_laying": true,
+      "hatching": true,
+      "Dutch_temperature": true,
+      "African_temperature": true
+    }
+  },
+  "purpose": "test within-species information-history and reversal, not full interaction-network hysteresis",
+  "anti_overfit_rules": [
+    "do not use the published 2008 arrival-breeding reversal to choose an information changepoint",
+    "do not inspect arrival-breeding interval before the information-regime algorithm is frozen and run",
+    "do not choose climate-window definitions by their association with the PAYOFF-B response",
+    "if archived source-defined climate covariates are available, use their published definitions unchanged",
+    "if source-defined annual climate covariates are unavailable, stop as NOT_ESTIMABLE rather than select a new window from outcome fit"
+  ],
+  "primary_information_coordinate": {
+    "type": "trailing signed detrended predictive connectivity",
+    "window_years": 8,
+    "minimum_pairs": 6,
+    "predictor": "published African temperature cue available before or during spring migration",
+    "target": "published Dutch spring temperature state",
+    "processing": "separately detrend predictor and target on year within each trailing window, then Pearson correlate residuals",
+    "focal_year_excluded": true
+  },
+  "regime_detection": {
+    "response_used": "predictive_connectivity_only",
+    "algorithm": "single-break segmented least squares over all eligible interior years, selecting the breakpoint minimizing connectivity SSE",
+    "minimum_segment_length_years": 6,
+    "null_comparator": "single linear trend in predictive connectivity",
+    "break_gate": "segmented model must improve AICc by >= 4 over linear trend",
+    "recovery_gate": [
+      "post-break connectivity slope must have opposite sign to pre-break slope",
+      "absolute post-break endpoint connectivity must recover at least 50% of the pre-break-to-break decline"
+    ],
+    "no_regime_outcome": "if gates fail, classify NO_INFORMATION_REVERSAL and do not fit a hysteresis model"
+  },
+  "timing_outcome": {
+    "primary": "annual mean male calculated arrival-to-egg-laying interval",
+    "secondary": "female nest-building-to-egg-laying interval",
+    "published_2008_break": "external comparison only; never used to define regime"
+  },
+  "hysteresis_test_if_information_reversal_passes": {
+    "model": "timing_interval ~ connectivity + regime_direction + connectivity:regime_direction",
+    "regime_direction": "degradation versus recovery arm defined solely from connectivity breakpoint",
+    "primary_estimand": "connectivity:regime_direction",
+    "hysteresis_support_rule": "interaction 95% CI excludes zero and predicted timing interval differs between degradation and recovery arms at the overlapping middle 50% of connectivity support",
+    "stronger_state_memory_rule": "at matched connectivity, recovery-arm predicted interval remains shifted in the historical direction by >= 2 days with 95% CI excluding zero",
+    "null_rule": "otherwise NOT_SUPPORTED; do not retune breakpoint, connectivity window or outcome"
+  },
+  "interpretation_ceiling": [
+    "this lane is within-species information-history, not interaction-network memory because partner timing is absent",
+    "a supported path-dependence interaction would motivate, not prove, the full network-hysteresis mechanism",
+    "published nonlinear interval reversal around 2008 is not itself evidence for information hysteresis"
+  ]
+}
