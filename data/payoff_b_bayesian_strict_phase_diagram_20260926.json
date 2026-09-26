@@ -1,0 +1,99 @@
+{
+  "result_id": "payoff_b_bayesian_strict_phase_diagram_20260926",
+  "frozen_date": "2026-09-26",
+  "status": "STRICT_SYNTHETIC_ROBUSTNESS_COMPLETE",
+  "workflow": {
+    "run_id": 36233538599,
+    "head_sha": "549e94db191a65777cde7612cd88b72ce4e3ba38",
+    "conclusion": "success",
+    "artifacts": {
+      "complete": {
+        "id": 10903252871,
+        "sha256": "441590e3dbda2404736677573987261c1b46419e1b1e33d7066f920f6ae5df0b"
+      },
+      "chain": {
+        "id": 10903890021,
+        "sha256": "f569c3e6c0251e674b7df75a13453049686a253b3645967c3d05bd11cef311a0"
+      },
+      "migrant_star": {
+        "id": 10903113212,
+        "sha256": "2494c55ad5d91e44f2f34dde8e76df47b80342a48f1caa5952670cc3502f13a2"
+      }
+    }
+  },
+  "grid": {
+    "prior_early": 0.4,
+    "local_accuracy": {
+      "min": 0.75,
+      "max": 1,
+      "step": 0.025,
+      "n": 11
+    },
+    "interaction_strength": {
+      "min": 0,
+      "max": 1,
+      "step": 0.025,
+      "n": 41
+    },
+    "migrant_accuracy_path": {
+      "min": 0.5,
+      "max": 1,
+      "step": 0.01,
+      "n": 51,
+      "directions": [
+        "degrading",
+        "recovering"
+      ]
+    },
+    "cells_per_topology": 451
+  },
+  "strict_definition": [
+    "high-information state remains follow_cue|follow_cue|follow_cue",
+    "migrant information degradation changes at least one resident timing policy",
+    "full migrant-information recovery does not restore the initial timing profile",
+    "a higher-joint-payoff pure Bayesian Nash equilibrium exists after recovery",
+    "the historical recovered profile has strictly positive unilateral best-response margins for every player"
+  ],
+  "results": {
+    "complete": {
+      "eligible": 391,
+      "resident_cascade": 221,
+      "hysteresis": 201,
+      "inefficient_hysteresis": 121,
+      "strict_inefficient_hysteresis": 118,
+      "tie_supported_inefficient_hysteresis": 3,
+      "strict_fraction_among_eligible": 0.30179028132992325
+    },
+    "chain": {
+      "eligible": 364,
+      "resident_cascade": 194,
+      "hysteresis": 174,
+      "inefficient_hysteresis": 55,
+      "strict_inefficient_hysteresis": 52,
+      "tie_supported_inefficient_hysteresis": 3,
+      "strict_fraction_among_eligible": 0.14285714285714285
+    },
+    "migrant_star": {
+      "eligible": 404,
+      "resident_cascade": 367,
+      "hysteresis": 14,
+      "inefficient_hysteresis": 9,
+      "strict_inefficient_hysteresis": 0,
+      "tie_supported_inefficient_hysteresis": 9,
+      "strict_fraction_among_eligible": 0
+    }
+  },
+  "retained_inference": [
+    "strict information-triggered coordination hysteresis occupies a nontrivial region of the complete and chain designs and is not a tie artifact",
+    "the migrant-star transmits many temporary timing cascades but produces no strict inefficient hysteresis in the declared grid",
+    "the same edge count can therefore support very different ecological memory depending on edge placement",
+    "resident-resident coupling is a strong determinant of whether a migrant information shock is stored after information recovery in this three-player model"
+  ],
+  "supersedes_for_headline": "preliminary inefficient-hysteresis counts in payoff_b_bayesian_phase_diagram_preliminary_20260926; old counts remain provenance but strict counts govern headline claims",
+  "claim_boundary": [
+    "synthetic design prevalence is not natural prevalence",
+    "sequential best response is one declared accessibility dynamic",
+    "binary timing policies and independent cue errors are simplifications",
+    "natural community-level hysteresis has not yet been demonstrated"
+  ]
+}

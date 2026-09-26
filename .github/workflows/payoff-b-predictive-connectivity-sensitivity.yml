@@ -1,0 +1,26 @@
+name: payoff-b-predictive-connectivity-sensitivity
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-predictive-connectivity-20260926
+    paths:
+      - "analysis/movement_phenology/payoff_b_predictive_connectivity_amaral_sensitivity.R"
+      - ".github/workflows/payoff-b-predictive-connectivity-sensitivity.yml"
+
+jobs:
+  sensitivity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run registered predictive-connectivity sensitivities
+        run: Rscript analysis/movement_phenology/payoff_b_predictive_connectivity_amaral_sensitivity.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-broad-predictive-connectivity-sensitivity
+          path: outputs/payoff_b_broad_predictive_connectivity_sensitivity.csv
+          if-no-files-found: error

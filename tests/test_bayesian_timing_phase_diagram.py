@@ -7,6 +7,8 @@ from src.bayesian_timing_coordination import (
     FOLLOW_CUE,
     BayesianTimingGame,
     TimingPlayer,
+    best_response_margins,
+    is_strict_pure_bayesian_nash,
     canonical_three_player_game,
     pure_bayesian_nash_equilibria,
     sequential_best_response,
@@ -286,3 +288,63 @@ def test_interaction_weight_matrix_validation():
             players=canonical_three_player_game(1.0).players,
             interaction_weights=((0.0, 1.0), (1.0, 0.0)),
         )
+
+
+
+def test_old_canonical_recovery_is_tie_supported_boundary():
+    _, _, _, recovered, _ = trace(0.90, 0.50)
+    game = canonical_three_player_game(
+        1.0,
+        local_accuracy=0.90,
+        interaction_strength=0.50,
+    )
+    margins = best_response_margins(game, recovered.profile)
+
+    assert recovered.profile == (
+        ALWAYS_LATE,
+        ALWAYS_LATE,
+        FOLLOW_CUE,
+    )
+    assert min(margins[:2]) == pytest.approx(0.0, abs=1e-12)
+    assert not is_strict_pure_bayesian_nash(game, recovered.profile)
+
+
+def test_interior_hysteresis_witness_is_strict_and_topology_sensitive():
+    complete = trace(0.875, 0.50, interaction_topology="complete")
+    chain = trace(0.875, 0.50, interaction_topology="chain")
+    star = trace(0.875, 0.50, interaction_topology="migrant_star")
+
+    for result, topology in (
+        (complete, "complete"),
+        (chain, "chain"),
+    ):
+        _, collapse, low_profile, recovered, best = result
+        assert collapse == pytest.approx(0.72)
+        assert low_profile == (
+            ALWAYS_LATE,
+            ALWAYS_LATE,
+            ALWAYS_LATE,
+        )
+        assert recovered.profile == (
+            ALWAYS_LATE,
+            ALWAYS_LATE,
+            FOLLOW_CUE,
+        )
+        game = canonical_three_player_game(
+            1.0,
+            local_accuracy=0.875,
+            interaction_strength=0.50,
+            interaction_topology=topology,
+        )
+        margins = best_response_margins(game, recovered.profile)
+        assert min(margins) > 0.02
+        assert is_strict_pure_bayesian_nash(
+            game,
+            recovered.profile,
+        )
+        assert best.joint_payoff > recovered.joint_payoff
+
+    _, star_collapse, _, star_recovered, star_best = star
+    assert star_collapse == pytest.approx(0.72)
+    assert star_recovered.profile == FOLLOW_ALL
+    assert star_best.profile == FOLLOW_ALL

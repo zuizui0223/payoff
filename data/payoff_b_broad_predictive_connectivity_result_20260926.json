@@ -1,0 +1,163 @@
+{
+  "result_id": "payoff_b_broad_predictive_connectivity_result_20260926",
+  "frozen_date": "2026-09-26",
+  "contract_id": "payoff_b_predictive_connectivity_v1_20260926",
+  "status": "POOLED_DIRECTIONAL_SUPPORT_DEPENDENCE_SENSITIVE",
+  "source": {
+    "dataset": "Amaral et al. BirdMigrationSpeed",
+    "source_commit": "62c58d77c2028bd863dfe3697b0d9cf29ceaeab0",
+    "doi": "10.5061/dryad.ttdz08m6w"
+  },
+  "primary_workflow": {
+    "run_id": 36233116170,
+    "artifact_id": 10903132499,
+    "artifact_sha256": "a14f80f4ddcfe55aff27e1069cadb1ccd35189ee2c5643968d69e54e856fc10c"
+  },
+  "sensitivity_workflow": {
+    "run_id": 36231377031,
+    "artifact_id": 10903000065,
+    "artifact_sha256": "5416d21a08a133af16a17307498afd82c5544b0d63c796d70f2d45209ad8db9c"
+  },
+  "sample": {
+    "analysis_rows": 3311,
+    "species": 37,
+    "species_cells": 635,
+    "years": 8,
+    "source_target_pairs": 358,
+    "cell_years": 263
+  },
+  "predictive_connectivity": {
+    "mean": 0.687828059271109,
+    "sd": 0.366110471175162,
+    "min": -0.819271363280562,
+    "max": 0.99830098132015
+  },
+  "preregistered_primary": {
+    "window_years": 8,
+    "detrended": true,
+    "coefficient": -0.0461786180645446,
+    "standard_error": 0.0208070614525357,
+    "ci_low_95": -0.0869604585115145,
+    "ci_high_95": -0.00539677761757466,
+    "p_value_two_sided": 0.0265362141016171,
+    "registered_direction": "negative",
+    "support_status": "SUPPORTED"
+  },
+  "window_and_definition_sensitivity": [
+    {
+      "window_years": 6,
+      "detrended": true,
+      "coefficient": -0.0293530365381232,
+      "ci_low_95": -0.0642970197941276,
+      "ci_high_95": 0.00559094671788119,
+      "p_value_two_sided": 0.0997882070654671
+    },
+    {
+      "window_years": 8,
+      "detrended": true,
+      "coefficient": -0.046178618064545,
+      "ci_low_95": -0.0869604585115152,
+      "ci_high_95": -0.00539677761757475,
+      "p_value_two_sided": 0.026536214101617
+    },
+    {
+      "window_years": 10,
+      "detrended": true,
+      "coefficient": -0.056909639702907,
+      "ci_low_95": -0.09840723209228,
+      "ci_high_95": -0.015412047313534,
+      "p_value_two_sided": 0.00722937314324759
+    },
+    {
+      "window_years": 8,
+      "detrended": false,
+      "coefficient": 0.00429822393497291,
+      "ci_low_95": -0.0352013093899053,
+      "ci_high_95": 0.0437977572598512,
+      "p_value_two_sided": 0.831121971479958
+    },
+    {
+      "window_years": 8,
+      "detrended": true,
+      "gaussian_q_bridge": true,
+      "coefficient": -0.0684779270191376,
+      "ci_low_95": -0.11073736329363,
+      "ci_high_95": -0.0262184907446453,
+      "p_value_two_sided": 0.00150831742193222
+    }
+  ],
+  "dependency_audit": {
+    "fixed_effect_estimate": -0.06266626685493425,
+    "one_way_cluster_ci": {
+      "species": [
+        -0.15344259098753446,
+        0.028110057277665967
+      ],
+      "cell_year": [
+        -0.13149018960142295,
+        0.006157655891554439
+      ],
+      "source_target_pair": [
+        -0.14255332918749491,
+        0.01722079547762642
+      ]
+    },
+    "two_way_cluster_ci": {
+      "species_x_source_target_pair": [
+        -0.15916167977764334,
+        0.033829146067774846
+      ],
+      "species_x_cell_year": [
+        -0.1546427374841646,
+        0.029310203774296106
+      ],
+      "source_target_pair_x_cell_year": [
+        -0.14051939717446643,
+        0.015186863464597924
+      ]
+    },
+    "leave_one_species_out": {
+      "runs": 37,
+      "negative_fraction": 1,
+      "coefficient_range": [
+        -0.08767669349356391,
+        -0.05030694831916395
+      ]
+    },
+    "leave_one_year_out": {
+      "runs": 8,
+      "negative_fraction": 1,
+      "coefficient_range": [
+        -0.08134992979165108,
+        -0.039931736780493034
+      ]
+    },
+    "within_species": {
+      "estimable_species": 33,
+      "negative_species": 21,
+      "negative_fraction": 0.6363636363636364,
+      "median_coefficient": -0.053772948045951896,
+      "one_sided_sign_test_p_for_negative_majority": 0.08137782872654498,
+      "inverse_variance_fixed_summary": {
+        "estimate": -0.041522239742962326,
+        "standard_error": 0.022848929184144155,
+        "ci_low_95": -0.08630614094388486,
+        "ci_high_95": 0.0032616614579602174
+      }
+    }
+  },
+  "interpretation": [
+    "the preregistered pooled GAM supports the predicted negative relationship between pre-outcome predictive connectivity and arrival-greenup mismatch",
+    "the sign is stable to 8-year versus 10-year windows, Gaussian binary mapping, all leave-one-species-out fits and all leave-one-year-out fits",
+    "the effect disappears when raw undetrended correlation is used, supporting the distinction between interannual predictive information and a shared long-term climate trend",
+    "cluster-robust and species-level uncertainty intervals cross zero, so the result is not licensed as species-independent confirmation",
+    "the natural-data evidence is therefore a pooled directional signal with dependence-sensitive uncertainty"
+  ],
+  "claim_boundary": [
+    "37 of the original 55 species enter the 8-year pre-outcome analysis because sufficient trailing history is required",
+    "the 3311 rows are not independent biological replicates",
+    "grid frequencies and p-values must not be converted into a claim that predictive connectivity universally controls migration",
+    "this analysis tests realized mismatch, not community-level hysteresis",
+    "the frozen universal speed-ratio falsification remains unchanged"
+  ]
+}

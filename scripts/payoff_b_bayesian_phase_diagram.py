@@ -6,10 +6,16 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from src.bayesian_timing_coordination import (
     FOLLOW_CUE,
+    best_response_margins,
     canonical_three_player_game,
     policy_label,
     pure_bayesian_nash_equilibria,
@@ -145,10 +151,19 @@ def run_historical_path(
 
     cascade = eligible and collapse_accuracy is not None
     hysteresis = eligible and recovered_profile != baseline_profile
+    recovered_margins = best_response_margins(
+        recovered_game,
+        recovered_profile,
+    )
+    minimum_recovered_margin = min(recovered_margins)
     inefficient_hysteresis = (
         cascade
         and hysteresis
         and history_lock_loss > 1e-12
+    )
+    strict_inefficient_hysteresis = (
+        inefficient_hysteresis
+        and minimum_recovered_margin > 1e-9
     )
 
     if not eligible:
@@ -157,8 +172,10 @@ def run_historical_path(
         phase = "no_resident_cascade"
     elif not hysteresis:
         phase = "reversible_cascade"
+    elif strict_inefficient_hysteresis:
+        phase = "strict_inefficient_information_hysteresis"
     elif inefficient_hysteresis:
-        phase = "inefficient_information_hysteresis"
+        phase = "tie_supported_inefficient_hysteresis"
     else:
         phase = "history_dependence_without_joint_loss"
 
@@ -179,6 +196,12 @@ def run_historical_path(
         "history_lock_loss": history_lock_loss,
         "hysteresis": hysteresis,
         "inefficient_hysteresis": inefficient_hysteresis,
+        "minimum_recovered_best_response_margin": (
+            minimum_recovered_margin
+        ),
+        "strict_inefficient_hysteresis": (
+            strict_inefficient_hysteresis
+        ),
         "phase": phase,
         "recovered_pure_bne_count": len(equilibria),
     }
@@ -229,7 +252,14 @@ def main() -> None:
     eligible = [row for row in rows if row["baseline_profile"] == "follow_cue|follow_cue|follow_cue"]
     cascade = [row for row in eligible if row["resident_cascade"]]
     hysteresis = [row for row in eligible if row["hysteresis"]]
-    inefficient = [row for row in eligible if row["inefficient_hysteresis"]]
+    inefficient = [
+        row for row in eligible
+        if row["inefficient_hysteresis"]
+    ]
+    strict_inefficient = [
+        row for row in eligible
+        if row["strict_inefficient_hysteresis"]
+    ]
 
     phase_counts: dict[str, int] = {}
     for row in rows:
@@ -251,12 +281,16 @@ def main() -> None:
         "resident_cascade_cells": len(cascade),
         "hysteresis_cells": len(hysteresis),
         "inefficient_information_hysteresis_cells": len(inefficient),
+        "strict_inefficient_information_hysteresis_cells": (
+            len(strict_inefficient)
+        ),
         "phase_counts": phase_counts,
         "claim_rule": (
             "promote only cells that start in all-following coordination, "
             "show resident cascade under migrant information loss, fail to "
-            "return after information recovery, and retain a higher-joint-payoff "
-            "pure equilibrium at full recovered information"
+            "return after information recovery, retain a higher-joint-payoff "
+            "pure equilibrium at full recovered information, and have strictly "
+            "positive unilateral best-response margins at the recovered state"
         ),
         "claim_boundary": [
             "synthetic finite Bayesian game, not a calibrated natural network",

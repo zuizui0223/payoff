@@ -1,0 +1,52 @@
+{
+  "result_id": "payoff_b_wigeon_predictive_connectivity_result_20260926",
+  "frozen_date": "2026-09-26",
+  "contract_id": "payoff_b_predictive_connectivity_v1_20260926",
+  "status": "COMPLETE_NOT_SUPPORTED",
+  "workflow_run_id": 36231710127,
+  "artifact_id": 10902930534,
+  "artifact_name": "payoff-b-wigeon-predictive-connectivity",
+  "artifact_sha256": "323efb5a34b96d5f779340a5ce777a272dd2300ba078eec6fd079b4d3bbec262",
+  "training_period": [
+    2000,
+    2017
+  ],
+  "outcome_period": [
+    2018,
+    2020
+  ],
+  "sample": {
+    "transition_rows": 224,
+    "individuals": 28,
+    "staging_segments": 18,
+    "unique_segment_pairs": 17
+  },
+  "predictive_connectivity": {
+    "rho_min": 0.20822384272406996,
+    "rho_max": 0.9124637298089108,
+    "rho_mean": 0.5836486650452143,
+    "rho_sd_across_transition_rows": 0.17889364164922675
+  },
+  "primary_interaction": {
+    "term": "origin_phase:z_connectivity",
+    "estimate": 0.020154369419215487,
+    "cluster_se": 0.06425985525712277,
+    "ci_low_95": -0.10579494688474515,
+    "ci_high_95": 0.1461036857231761,
+    "p_value_two_sided": 0.75620586559088,
+    "registered_direction": "negative",
+    "support_status": "NOT_SUPPORTED"
+  },
+  "interpretation": [
+    "historical route-level predictive connectivity is estimable and varies substantially among the 17 staging-segment pairs",
+    "the preregistered prediction that higher connectivity strengthens wigeon phase correction is not supported",
+    "the point estimate is slightly positive rather than negative and is highly uncertain",
+    "this negative result remains part of the integrated evidence hierarchy and does not retune the Bayesian game"
+  ],
+  "claim_boundary": [
+    "the basic wigeon phase-retention result was known before this new predictor analysis",
+    "connectivity was estimated only from 2000-2017 ERA5 TGS onset before the 2018-2020 outcome period",
+    "the result does not test climate-driven temporal degradation of predictive connectivity",
+    "the result does not test community-level coordination hysteresis"
+  ]
+}

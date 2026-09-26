@@ -1,0 +1,67 @@
+{
+  "amendment_id": "payoff_b_bayesian_hysteresis_strictness_amendment_20260926",
+  "date": "2026-09-26",
+  "status": "STRICTNESS_AUDIT_COMPLETE_FOR_REPRESENTATIVE_WITNESSES",
+  "applies_to": "payoff_b_three_player_bayesian_timing_game_v1",
+  "old_canonical_boundary": {
+    "local_cue_accuracy": 0.9,
+    "interaction_strength": 0.5,
+    "prior_early": 0.4,
+    "topology": "complete",
+    "degradation_collapse_accuracy": 0.71,
+    "recovered_profile": "always_late|always_late|follow_cue",
+    "local_best_response_margins": [
+      0,
+      0
+    ],
+    "interpretation": "recovered resident late policies are tie-supported at this exact parameter point; retain for provenance but do not use as the primary strict hysteresis witness"
+  },
+  "interior_witness": {
+    "local_cue_accuracy": 0.875,
+    "interaction_strength": 0.5,
+    "prior_early": 0.4,
+    "complete": {
+      "degradation_collapse_accuracy": 0.72,
+      "low_information_profile": "always_late|always_late|always_late",
+      "recovered_profile": "always_late|always_late|follow_cue",
+      "best_recovered_equilibrium": "follow_cue|follow_cue|follow_cue",
+      "recovered_best_response_margins": [
+        0.025,
+        0.025,
+        0.2
+      ],
+      "recovered_joint_payoff": -0.6000000000000001,
+      "best_recovered_joint_payoff": -0.409375,
+      "history_lock_loss": 0.190625,
+      "strict": true
+    },
+    "chain": {
+      "degradation_collapse_accuracy": 0.72,
+      "low_information_profile": "always_late|always_late|always_late",
+      "recovered_profile": "always_late|always_late|follow_cue",
+      "best_recovered_equilibrium": "follow_cue|follow_cue|follow_cue",
+      "recovered_best_response_margins": [
+        0.2,
+        0.025,
+        0.2
+      ],
+      "recovered_joint_payoff": -0.5,
+      "best_recovered_joint_payoff": -0.4328125,
+      "history_lock_loss": 0.0671875,
+      "strict": true
+    },
+    "migrant_star": {
+      "degradation_collapse_accuracy": 0.72,
+      "low_information_profile": "always_late|always_late|always_late",
+      "recovered_profile": "follow_cue|follow_cue|follow_cue",
+      "history_lock_loss": 0,
+      "strict_hysteresis": false
+    }
+  },
+  "conclusion": "information-triggered coordination hysteresis is not a tie artifact, but the original illustrative .90/.50 point lies exactly on a recovery indifference boundary; use the .875/.50 interior point for primary illustrations",
+  "claim_boundary": [
+    "full-grid strict hysteresis prevalence must be taken from the dedicated strict phase-diagram workflow, not inferred from these representative points",
+    "the old canonical point remains documented as a tie-supported boundary",
+    "synthetic payoff units are not natural fitness estimates"
+  ]
+}
