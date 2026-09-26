@@ -23,6 +23,11 @@ FOLLOW_ALL = (FOLLOW_CUE, FOLLOW_CUE, FOLLOW_CUE)
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prior-early", type=float, default=0.40)
+    parser.add_argument(
+        "--interaction-topology",
+        choices=("complete", "chain", "migrant_star"),
+        default="complete",
+    )
     parser.add_argument("--local-accuracy-min", type=float, default=0.75)
     parser.add_argument("--local-accuracy-max", type=float, default=1.00)
     parser.add_argument("--local-accuracy-step", type=float, default=0.025)
@@ -67,6 +72,7 @@ def run_historical_path(
     interaction_strength: float,
     migrant_accuracies: list[float],
     prior_early: float = 0.40,
+    interaction_topology: str = "complete",
 ) -> dict[str, object]:
     descending = list(reversed(migrant_accuracies))
     baseline_game = canonical_three_player_game(
@@ -90,6 +96,7 @@ def run_historical_path(
             interaction_strength=interaction_strength,
             local_accuracy=local_accuracy,
             prior_early=prior_early,
+            interaction_topology=interaction_topology,
         )
         result = sequential_best_response(game, profile)
         profile = result.final.profile
@@ -111,6 +118,7 @@ def run_historical_path(
             interaction_strength=interaction_strength,
             local_accuracy=local_accuracy,
             prior_early=prior_early,
+            interaction_topology=interaction_topology,
         )
         result = sequential_best_response(game, profile)
         profile = result.final.profile
@@ -154,6 +162,7 @@ def run_historical_path(
 
     return {
         "prior_early": prior_early,
+        "interaction_topology": interaction_topology,
         "local_cue_accuracy": local_accuracy,
         "interaction_strength": interaction_strength,
         "baseline_profile": profile_text(baseline_profile),
@@ -203,6 +212,7 @@ def main() -> None:
             interaction,
             migrant_accuracies,
             prior_early=args.prior_early,
+            interaction_topology=args.interaction_topology,
         )
         for local_accuracy in local_accuracies
         for interaction in interactions
@@ -229,6 +239,7 @@ def main() -> None:
         "status": "synthetic robustness map",
         "grid": {
             "prior_early": args.prior_early,
+            "interaction_topology": args.interaction_topology,
             "local_accuracy_values": len(local_accuracies),
             "interaction_values": len(interactions),
             "migrant_accuracy_values_per_path": len(migrant_accuracies),
