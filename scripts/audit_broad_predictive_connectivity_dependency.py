@@ -38,6 +38,7 @@ def main():
     import numpy as np
     import pandas as pd
     import statsmodels.formula.api as smf
+    from statsmodels.stats.sandwich_covariance import cov_cluster_2groups
 
     data = pd.read_csv(args.rows)
     formula = (
@@ -67,6 +68,31 @@ def main():
             "ci_low_95": estimate - 1.96 * se,
             "ci_high_95": estimate + 1.96 * se,
             "p_value_two_sided": float(robust.pvalues[term_index]),
+        }
+
+    two_way_cluster = {}
+    for cluster_a, cluster_b in (
+        ("species", "source_target_pair"),
+        ("species", "cell_year"),
+        ("source_target_pair", "cell_year"),
+    ):
+        groups_a = pd.Categorical(data[cluster_a].astype(str)).codes
+        groups_b = pd.Categorical(data[cluster_b].astype(str)).codes
+        covariance, _, _ = cov_cluster_2groups(
+            fit,
+            groups_a,
+            groups_b,
+        )
+        estimate = float(fit.params["z_connectivity"])
+        se = float(np.sqrt(covariance[term_index, term_index]))
+        key = f"{cluster_a}_x_{cluster_b}"
+        two_way_cluster[key] = {
+            "clusters_a": int(data[cluster_a].astype(str).nunique()),
+            "clusters_b": int(data[cluster_b].astype(str).nunique()),
+            "estimate": estimate,
+            "cluster_se": se,
+            "ci_low_95": estimate - 1.96 * se,
+            "ci_high_95": estimate + 1.96 * se,
         }
 
     loo_species = []
@@ -164,6 +190,7 @@ def main():
         "fixed_effect_estimate": float(fit.params["z_connectivity"]),
         "fixed_effect_naive_se": float(fit.bse["z_connectivity"]),
         "cluster_robust": cluster_results,
+        "two_way_cluster_robust": two_way_cluster,
         "leave_one_species_out": {
             "runs": len(loo_species),
             "negative_fraction": float(
