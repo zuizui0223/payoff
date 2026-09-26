@@ -156,6 +156,31 @@ It does support the narrower timing claim required by PAYOFF-B: the same
 heterospecific phenological state can be unavailable to an early decision maker
 and behaviourally relevant to a later one.
 
+
+
+### Long-term cue--driver reversal gate: not supported
+
+A separately frozen 1980--2010 Hoge Veluwe lane used the published annual
+selection-gradient series and a fixed Ivory Coast NCEP temperature cue to ask
+whether cue--driver predictive connectivity showed a preregistered
+decline--recovery trajectory.
+
+It did not.
+
+The best segmented description changed near 2001 and was strongly preferred to
+one linear trend by AICc, but both fitted segment slopes were positive
+(+0.0087 before and +0.0494 after). Because the registered pre-break decline
+criterion failed, the result is `NO_CUE_DRIVER_REVERSAL` and the path-
+dependence model was not opened.
+
+This result sets an important boundary:
+
+> **PAYOFF-B has not observed a natural decline--recovery information cycle in
+> this long-term flycatcher system.**
+
+The visibly nonstationary cue--driver relationship is not relabelled as
+hysteresis after the fact.
+
 ### Wigeon: registered controller prediction not supported
 
 Across 224 consecutive staging transitions, historical route predictive
@@ -225,10 +250,13 @@ They become layers in the argument:
 8. **Experimental anchor:** the flycatcher--tit manipulation shows that a
    heterospecific phenology treatment is irrelevant to an earlier decision made
    before cue visibility but affects later settlement.
-9. **Mechanistic boundary:** wigeon connectivity does not strengthen post-error
+9. **Long-term boundary:** the 1980--2010 flycatcher cue--driver lane is highly
+   nonstationary but fails the preregistered decline--recovery gate, so no
+   natural path-dependence model is opened.
+10. **Mechanistic boundary:** wigeon connectivity does not strengthen post-error
    phase correction, showing that prediction, information timing and correction
    are different axes.
-10. **Conclusion:** mismatch reflects not only response capacity, but what the
+11. **Conclusion:** mismatch reflects not only response capacity, but what the
    system could know before a decision deadline and which historically
    accessible timing regime the interaction network occupies.
 
@@ -277,7 +305,9 @@ PAYOFF-B may not currently claim:
 - that climate change has caused the specific rho values in the synthetic game;
 - that the 118/391 or 52/364 grid frequencies are natural prevalences;
 - that predictive connectivity is a universal phase controller;
-- that the old 0.90/0.50 boundary witness is a strict equilibrium.
+- that the old 0.90/0.50 boundary witness is a strict equilibrium;
+- that the 1980--2010 Hoge Veluwe cue--driver series demonstrates a natural
+  information decline--recovery cycle or hysteresis.
 
 ## Next decisive empirical target
 

@@ -1,0 +1,63 @@
+name: payoff-b-plos-flycatcher-supplement-readiness
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-cue-driver-prior-art-20260927
+    paths:
+      - ".github/workflows/payoff-b-plos-flycatcher-supplement-readiness.yml"
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install workbook reader
+        run: python -m pip install --disable-pip-version-check openpyxl
+      - name: Download PLOS supporting datasets
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p outputs/plos_flycatcher
+          curl -fL --retry 3 \
+            "https://journals.plos.org/plosbiology/article/file?id=10.1371%2Fjournal.pbio.1002120.s001&type=supplementary" \
+            -o outputs/plos_flycatcher/S1_Data.xlsx
+          curl -fL --retry 3 \
+            "https://journals.plos.org/plosbiology/article/file?id=10.1371%2Fjournal.pbio.1002120.s002&type=supplementary" \
+            -o outputs/plos_flycatcher/S2_Data.xlsx
+          file outputs/plos_flycatcher/*.xlsx
+          sha256sum outputs/plos_flycatcher/*.xlsx > outputs/plos_flycatcher/sha256.txt
+      - name: Inspect workbook structure
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import openpyxl
+          out={}
+          for path in sorted(Path("outputs/plos_flycatcher").glob("*.xlsx")):
+              wb=openpyxl.load_workbook(path, data_only=True, read_only=True)
+              sheets=[]
+              for ws in wb.worksheets:
+                  rows=[]
+                  for i,row in enumerate(ws.iter_rows(values_only=True), start=1):
+                      rows.append(list(row))
+                      if i>=12: break
+                  sheets.append({
+                      "title":ws.title,
+                      "max_row":ws.max_row,
+                      "max_column":ws.max_column,
+                      "preview":rows
+                  })
+              out[path.name]=sheets
+          Path("outputs/plos_flycatcher/workbook_structure.json").write_text(json.dumps(out,indent=2,default=str)+"\n")
+          print(json.dumps(out,indent=2,default=str))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-plos-flycatcher-supplements
+          path: outputs/plos_flycatcher/
+          if-no-files-found: error

@@ -1,0 +1,42 @@
+name: payoff-b-cv24c-cue-driver
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-cue-driver-prior-art-20260927
+    paths:
+      - "scripts/payoff_b_cv24c_cue_driver.py"
+      - "data/payoff_b_cv24c_cue_driver_contract_20260927.json"
+      - ".github/workflows/payoff-b-cv24c-cue-driver.yml"
+
+jobs:
+  cue-driver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check pandas numpy requests openpyxl statsmodels xarray netCDF4
+      - name: Download frozen PLOS selection-gradient supplement
+        run: |
+          mkdir -p outputs/source
+          curl -fL --retry 3 \
+            "https://journals.plos.org/plosbiology/article/file?id=10.1371%2Fjournal.pbio.1002120.s001&type=supplementary" \
+            -o outputs/source/S1_Data.xlsx
+          sha256sum outputs/source/S1_Data.xlsx
+      - name: Run frozen cue-driver history test
+        run: >
+          python scripts/payoff_b_cv24c_cue_driver.py
+          --s1 outputs/source/S1_Data.xlsx
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-cv24c-cue-driver
+          path: |
+            outputs/cv24c_cue_driver_annual.csv
+            outputs/cv24c_cue_driver_connectivity.csv
+            outputs/cv24c_cue_driver_result.json
+          if-no-files-found: error

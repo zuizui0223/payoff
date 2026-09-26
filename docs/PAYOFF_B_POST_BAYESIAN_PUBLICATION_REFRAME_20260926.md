@@ -152,3 +152,92 @@ Working headline:
 This hook should be presented before the longer-term hysteresis result. It gives
 the paper an immediate mechanism, while topology-dependent memory explains why
 a transient desynchronization can become historically persistent.
+
+
+## Cue--driver prior-art firewall
+
+Tomotani et al. (2021; DOI 10.3389/fevo.2021.630823) already provide the
+closest direct predecessor to the predictive-information argument. In the same
+Hoge Veluwe pied-flycatcher system, Ivory Coast and Dutch temperature/NDVI
+variables explained male arrival timing, while those variables did not
+detectably predict the estimated annual fitness optimum. They explicitly
+proposed climate-driven disruption of cue--driver correlations.
+
+Therefore Paper 2 must not sell any of the following as its primary novelty:
+
+- migrants use remote environmental cues;
+- cue reliability can decline under climate change;
+- wintering-ground conditions may cease to predict breeding-ground optima;
+- cue--driver decoupling can generate phenological mismatch.
+
+Those are setup.
+
+The PAYOFF-B novelty begins after the cue is already imperfect:
+
+1. **decision deadlines make information access endogenous;**
+2. **partners with different waiting costs cross information-use thresholds at
+   different cue qualities;**
+3. **therefore improving a shared cue can temporarily increase mismatch;**
+4. **interaction topology determines whether that transient mismatch is erased
+   or stored as a lower-payoff historical timing regime.**
+
+This sequence is the novelty firewall for the integrated paper.
+
+## Preferred hook after prior-art audit
+
+The strongest opening claim is now:
+
+> **Better information need not improve ecological coordination monotonically.
+> When interacting species face different decision deadlines, improving the
+> same seasonal cue can first desynchronize them and only later restore
+> coordination.**
+
+Cue--driver disruption is the ecological motivation for changing cue quality;
+it is not the contribution itself.
+
+The longer-term second result is:
+
+> **A temporary information-induced desynchronization can become ecological
+> memory when the interaction network contains a strict alternative timing
+> equilibrium.**
+
+
+## Long-term natural reversal lane: closed negative
+
+The preregistered 1980--2010 Hoge Veluwe cue--driver lane did **not** pass the
+information decline--recovery gate. The connectivity series is visibly
+nonstationary and the best two-line description changes around 2001, but the
+pre-break fitted slope is positive rather than negative.
+
+Accordingly:
+
+- no natural hysteresis model was opened;
+- the cue window was not retuned;
+- the breakpoint was not redefined from the known selection trajectory;
+- the result is retained as `NO_CUE_DRIVER_REVERSAL`.
+
+This strengthens the publication logic. Cue--driver disruption remains
+well-motivated prior art, not a new result that PAYOFF-B needs to rescue.
+
+The main empirical/theoretical chain should therefore be presented as:
+
+    broad birds:
+        predictive information relates to realized mismatch, pooled but
+        dependence-sensitive
+
+    flycatcher manipulation:
+        cue usefulness depends on whether it is visible before the decision
+
+    long-term flycatcher lane:
+        no preregistered natural decline--recovery information cycle
+
+    wigeon:
+        predictive connectivity does not act as a stronger post-error controller
+
+    exact theory:
+        unequal decision deadlines make cue uptake asynchronous
+
+    network theory:
+        topology can store a transient desynchronization as ecological memory.
+
+The natural network-hysteresis prediction remains deliberately prospective.

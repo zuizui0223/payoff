@@ -1,0 +1,86 @@
+{
+  "result_id": "payoff_b_cv24c_cue_driver_result_20260927",
+  "frozen_date": "2026-09-27",
+  "contract_id": "payoff_b_cv24c_cue_driver_decoupling_v1_20260927",
+  "status": "NO_CUE_DRIVER_REVERSAL",
+  "provenance": {
+    "workflow_run_id": 36270835505,
+    "head_sha": "02d11a6bf73777dac1de832cc45dc7f4235ac6ac",
+    "artifact_id": 10915252374,
+    "artifact_sha256": "655258a69978e71221e4f80b707a8915d289383ea0bfe036381e80edd0b379fb",
+    "note": "first successful frozen run after transient ERDDAP retry; later transport fallback changes are not used to define this result"
+  },
+  "source": {
+    "selection_gradient": "PLOS S1 Data panel A, DOI 10.1371/journal.pbio.1002120.s001",
+    "selection_source_sha256": "8c0b5bdb8265a11a41ab01caf98f4dd98cc2d1b677c6de58279b4fd32a1d2a45",
+    "cue": "NCEP/NCAR Reanalysis 1 daily air.sig995",
+    "cue_window": "20 calendar days beginning 18 February",
+    "spatial_proxy": {
+      "latitudes_deg_n": [
+        10,
+        7.5,
+        5
+      ],
+      "longitudes_deg_e": [
+        352.5,
+        355,
+        357.5
+      ],
+      "description": "fixed 3x3 coarse-grid bounding proxy for Ivory Coast"
+    }
+  },
+  "sample": {
+    "selection_gradient_years": 30,
+    "cue_years": 31,
+    "trailing_connectivity_years": 25,
+    "source_period": [
+      1980,
+      2010
+    ],
+    "missing_selection_year": 1995
+  },
+  "frozen_reversal_gate": {
+    "status": "NO_CUE_DRIVER_REVERSAL",
+    "linear": {
+      "slope": -0.017392559298985092,
+      "aicc": -64.52771266866598,
+      "sse": 1.577670096592475
+    },
+    "best_segmented": {
+      "break_year": 2001,
+      "left_slope": 0.008687252911806886,
+      "right_slope": 0.049441592003671334,
+      "aicc": -74.72646646351146,
+      "sse": 0.8435105803600293,
+      "delta_aicc_vs_linear": 10.198753794845473,
+      "predicted_start_connectivity": 0.2727024089314263,
+      "predicted_break_connectivity": 0.394323949696723,
+      "predicted_final_connectivity": 0.16771115340672793,
+      "recovery_fraction": null
+    },
+    "failed_conditions": [
+      "pre-break slope is positive rather than negative",
+      "there is no declared pre-break decline from which a recovery fraction can be defined"
+    ]
+  },
+  "history_test": {
+    "status": "NOT_RUN",
+    "reason": "information reversal gate did not pass"
+  },
+  "observed_connectivity_notes": [
+    "the rolling cue-driver correlation is highly nonstationary and changes sign multiple times",
+    "a sharp level change is visible near 2001 in the best unconstrained two-line fit, followed by increasing connectivity within the later segment",
+    "these patterns do not satisfy the preregistered decline-then-recovery definition and are not promoted to hysteresis"
+  ],
+  "interpretation": [
+    "the long-term lane does not support the preregistered cue-driver reversal required to open a path-dependence test",
+    "the negative gate result is retained without changing the cue window, breakpoint algorithm, driver or recovery criterion",
+    "Tomotani et al. 2021 remains prior art for cue-driver decoupling; PAYOFF-B novelty therefore remains asynchronous information uptake and topology-dependent memory rather than cue-decoupling itself"
+  ],
+  "claim_boundary": [
+    "do not relabel the 2001 segmented breakpoint as a confirmed climate-driven information collapse",
+    "do not use the known selection reversal around 2000/2001 to redefine the information breakpoint",
+    "do not open the registered history interaction after a failed reversal gate",
+    "this is a within-population cue-driver test, not an interaction-network hysteresis test"
+  ]
+}
