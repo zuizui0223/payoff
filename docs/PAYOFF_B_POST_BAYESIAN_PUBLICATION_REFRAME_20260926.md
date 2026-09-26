@@ -152,3 +152,51 @@ Working headline:
 This hook should be presented before the longer-term hysteresis result. It gives
 the paper an immediate mechanism, while topology-dependent memory explains why
 a transient desynchronization can become historically persistent.
+
+
+## Cue--driver prior-art firewall
+
+Tomotani et al. (2021; DOI 10.3389/fevo.2021.630823) already provide the
+closest direct predecessor to the predictive-information argument. In the same
+Hoge Veluwe pied-flycatcher system, Ivory Coast and Dutch temperature/NDVI
+variables explained male arrival timing, while those variables did not
+detectably predict the estimated annual fitness optimum. They explicitly
+proposed climate-driven disruption of cue--driver correlations.
+
+Therefore Paper 2 must not sell any of the following as its primary novelty:
+
+- migrants use remote environmental cues;
+- cue reliability can decline under climate change;
+- wintering-ground conditions may cease to predict breeding-ground optima;
+- cue--driver decoupling can generate phenological mismatch.
+
+Those are setup.
+
+The PAYOFF-B novelty begins after the cue is already imperfect:
+
+1. **decision deadlines make information access endogenous;**
+2. **partners with different waiting costs cross information-use thresholds at
+   different cue qualities;**
+3. **therefore improving a shared cue can temporarily increase mismatch;**
+4. **interaction topology determines whether that transient mismatch is erased
+   or stored as a lower-payoff historical timing regime.**
+
+This sequence is the novelty firewall for the integrated paper.
+
+## Preferred hook after prior-art audit
+
+The strongest opening claim is now:
+
+> **Better information need not improve ecological coordination monotonically.
+> When interacting species face different decision deadlines, improving the
+> same seasonal cue can first desynchronize them and only later restore
+> coordination.**
+
+Cue--driver disruption is the ecological motivation for changing cue quality;
+it is not the contribution itself.
+
+The longer-term second result is:
+
+> **A temporary information-induced desynchronization can become ecological
+> memory when the interaction network contains a strict alternative timing
+> equilibrium.**
