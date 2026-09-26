@@ -43,7 +43,7 @@ def render_integrated_concept(path: Path) -> None:
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
         '<rect width="100%" height="100%" fill="white"/>',
         text(36,40,"Figure 1. Temporal buffering and latent spatial tracking demand",22,"700"),
-        text(36,68,"Timing can absorb tracking demand temporarily, but finite capacity causes spatial response to re-enter under sustained forcing.",13),
+        text(36,68,"Timing responsiveness, timing capacity and movement speed solve different parts of tracking under sustained forcing.",13),
     ]
     out.append(box(55,110,280,125,"1  PAYOFF-B1 benchmark",[
         "Exact anti-phase two-patch model:",
@@ -57,11 +57,12 @@ def render_integrated_concept(path: Path) -> None:
         "local mismatch alone cannot distinguish them."
     ]))
     out.append(arrow(735,172,825,172))
-    out.append(box(825,90,315,165,"3  Phase–velocity separation",[
-        "timing -> phase / intercept control",
-        "movement speed -> propagation / drift control",
-        "bounded timing buys time, not transport",
-        "=> spatial demand persists."
+    out.append(box(825,82,315,181,"3  Gain, capacity, propagation",[
+        "timing gain -> phase correction now",
+        "timing capacity -> buffer duration",
+        "movement speed -> spatial propagation",
+        "high gain ≠ large remaining capacity",
+        "=> transport can remain necessary."
     ]))
 
     out.append(arrow(585,235,585,320))
@@ -84,7 +85,7 @@ def render_integrated_concept(path: Path) -> None:
         "fixed-24 h lambda test",
         "remains outcome-blind."
     ]))
-    out.append(text(55,680,"Headline: timing improves phase alignment without making spatial tracking dispensable.",16,"700"))
+    out.append(text(55,680,"Headline: high timing gain can improve alignment without removing transport dependence.",16,"700"))
     out.append("</svg>")
     path.write_text("\n".join(out)+"\n",encoding="utf-8")
 
