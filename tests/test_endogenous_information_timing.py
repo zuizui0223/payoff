@@ -4,6 +4,7 @@ from src.endogenous_information_timing import (
     InformationTimingScenario,
     decision_for_delay_cost,
     evaluate_information_timing,
+    expected_shared_cue_action_mismatch,
     information_value,
     maximum_affordable_wait_days,
     posterior_cue_bayes_risk,
@@ -100,3 +101,49 @@ def test_canonical_information_value_curve(accuracy, expected_value):
         2.0,
         1.0,
     ) == pytest.approx(expected_value)
+
+
+
+def test_improving_information_can_create_intermediate_desynchronization():
+    def mismatch(q):
+        return expected_shared_cue_action_mismatch(
+            InformationTimingScenario(
+                prior_early=0.40,
+                cue_accuracy_after_wait=q,
+                false_early_cost=2.0,
+                missed_early_cost=1.0,
+            ),
+            actor_a_delay_cost=0.30,
+            actor_b_delay_cost=0.10,
+        )
+
+    assert mismatch(0.81) == pytest.approx(0.0)
+    assert mismatch(0.82) == pytest.approx(0.436)
+    assert mismatch(0.90) == pytest.approx(0.42)
+    assert mismatch(0.93) == pytest.approx(0.414)
+    assert mismatch(0.94) == pytest.approx(0.0)
+
+
+def test_information_desynchronization_requires_unequal_waiting_decisions():
+    scenario = InformationTimingScenario(
+        prior_early=0.40,
+        cue_accuracy_after_wait=0.90,
+        false_early_cost=2.0,
+        missed_early_cost=1.0,
+    )
+
+    assert expected_shared_cue_action_mismatch(
+        scenario,
+        actor_a_delay_cost=0.10,
+        actor_b_delay_cost=0.10,
+    ) == pytest.approx(0.0)
+    assert expected_shared_cue_action_mismatch(
+        scenario,
+        actor_a_delay_cost=0.30,
+        actor_b_delay_cost=0.30,
+    ) == pytest.approx(0.0)
+    assert expected_shared_cue_action_mismatch(
+        scenario,
+        actor_a_delay_cost=0.30,
+        actor_b_delay_cost=0.10,
+    ) > 0.0
