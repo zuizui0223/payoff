@@ -87,18 +87,24 @@ This result strengthens the distinction between phase control and spatial
 propagation control, but it still does not directly measure latent spatial
 tracking demand as a natural state variable.
 
-## Phase–velocity division of labor
+## Gain–capacity–propagation decomposition
 
-The minimal moving-front identity used in the manuscript separates the two
-control channels:
+The post-readout moving-front identity separates three quantities:
 
 ```text
-timing shift -> phase offset
-animal/environment speed difference -> mismatch accumulation rate
+timing gain
+    -> how strongly phase is corrected now
+
+timing capacity / temporal budget
+    -> how long dynamic timing can offset propagation mismatch
+
+movement speed / route progression
+    -> baseline spatial propagation
 ```
 
-A fixed timing shift can reduce mismatch at one point in the trajectory without
-eliminating later drift when animal and environmental front speeds differ.
+A static timing shift changes phase. A changing timing schedule can temporarily
+alter effective mismatch drift, but sustained compensation consumes finite
+timing capacity.
 
 This interpretation is independently consistent with the Amaral source-study
 models. In the published bird-speed model, green-up date anomaly
@@ -109,12 +115,14 @@ published species timing-sensitivity coefficient for migration speed is
 
 Licensed synthesis:
 
-> **Timing and speed are parallel control channels, not evidence for a simple
-> one-for-one substitution tradeoff.**
+> **Timing responsiveness, timing capacity and movement speed are distinct
+> tracking quantities. High timing gain can improve alignment without implying
+> large remaining capacity or weak dependence on spatial transport.**
 
 The positive point estimates do not license a claim of positive
 timing–movement complementarity because the registered holdout moderation is
-unsupported and the published sensitivity interval overlaps zero.
+unsupported and the published sensitivity interval overlaps zero. The bird
+holdout estimates timing gain, not remaining timing capacity.
 
 ## Direct-system evidence
 
