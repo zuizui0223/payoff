@@ -1,0 +1,125 @@
+{
+  "audit_id": "payoff_b_natural_information_hysteresis_candidates_20260926",
+  "frozen_date": "2026-09-26",
+  "gate": {
+    "primary_predictive_window_years": 8,
+    "minimum_nonoverlapping_regimes": 3,
+    "minimum_duration_years": 24,
+    "direct_requirements": [
+      "pre-commitment cue series",
+      "later destination-state series",
+      "focal timing series",
+      "partner/resource timing series",
+      "enough duration for baseline, disruption, and recovery regimes"
+    ]
+  },
+  "candidates": [
+    {
+      "name": "Samplonius_Both_2017_manipulation",
+      "period": "2014-2015",
+      "years": 2,
+      "variables": "manipulated resident tit hatch timing; male/female flycatcher arrival and settlement/pairing",
+      "level": "DECISION_TIME_INFORMATION_ANCHOR",
+      "direct_hysteresis_ready": false,
+      "blockers": [
+        "duration",
+        "no long pre-commitment cue time series"
+      ],
+      "retained_role": "causal anchor that a heterospecific phenology signal can be unavailable to an earlier decision and relevant to a later decision",
+      "doi": "10.1111/1365-2656.12640",
+      "data_doi": "10.5061/dryad.bs427"
+    },
+    {
+      "name": "Samplonius_Both_2019_fatal_competition",
+      "period": "2007-2016",
+      "years": 10,
+      "variables": "flycatcher arrival, tit laying phenology, tit density, flycatcher mortality in tit nests",
+      "level": "INTERACTION_TIMING_TEST",
+      "direct_hysteresis_ready": false,
+      "blockers": [
+        "duration",
+        "no pre-commitment remote cue series"
+      ],
+      "retained_role": "natural interaction consequence of resident-migrant synchrony",
+      "doi": "10.1016/j.cub.2018.11.063",
+      "data_doi": "10.34894/85Y1HY"
+    },
+    {
+      "name": "Amaral_broad_birds",
+      "period": "2002-2017",
+      "years": 16,
+      "variables": "bird arrival, source and destination green-up, migration speed",
+      "level": "PREDICTIVE_INFORMATION_TEST",
+      "direct_hysteresis_ready": false,
+      "blockers": [
+        "duration below 24 years for three non-overlapping 8-year regimes"
+      ],
+      "retained_role": "pooled predictive-connectivity versus mismatch test",
+      "data_doi": "10.5061/dryad.ttdz08m6w"
+    },
+    {
+      "name": "Wigeon_staging",
+      "period": "2018-2020 outcomes; 2000-2017 historical ERA5 predictor",
+      "years": 3,
+      "variables": "staging phase errors, historical route TGS predictive connectivity",
+      "level": "PREDICTIVE_INFORMATION_TEST",
+      "direct_hysteresis_ready": false,
+      "blockers": [
+        "only three outcome years",
+        "no observed degradation-recovery episode"
+      ],
+      "retained_role": "within-route null test separating pre-commitment information from post-error correction"
+    },
+    {
+      "name": "Kallander_southern_Sweden",
+      "period": "1969-2012",
+      "years": 44,
+      "variables": "laying dates of three resident tits and pied flycatcher; species-specific 30-day spring temperature",
+      "level": "LONG_TERM_PHENOLOGY_CONTRAST",
+      "direct_hysteresis_ready": false,
+      "blockers": [
+        "no pre-commitment remote cue series"
+      ],
+      "retained_role": "long resident-migrant phenology divergence anchor",
+      "doi": "10.1111/jav.01287",
+      "data_doi": "10.5061/dryad.sq651"
+    },
+    {
+      "name": "Wittwer_Lund_population_dynamics",
+      "period": "1956-2012",
+      "years": 57,
+      "variables": "four cavity-nesting bird population sizes and local weather",
+      "level": "INTERACTION_OUTCOME_ONLY",
+      "direct_hysteresis_ready": false,
+      "blockers": [
+        "no migration/decision timing series",
+        "no pre-commitment cue series"
+      ],
+      "retained_role": "long-term demographic evidence for negative resident effects on pied flycatcher",
+      "doi": "10.1111/oik.01559"
+    },
+    {
+      "name": "Tomotani_Dutch_annual_cycle",
+      "period": "1980-2015",
+      "years": 36,
+      "variables": "male arrival, female nest-building arrival proxy, laying/hatching, moult, Dutch and African temperature covariates",
+      "level": "WITHIN_SPECIES_INFORMATION_TIMING_CANDIDATE",
+      "direct_hysteresis_ready": false,
+      "blockers": [
+        "no interacting partner timing in the archived focal dataset"
+      ],
+      "retained_role": "best current candidate for a long natural test of information timing and reversal within one migrant annual cycle; not sufficient alone for network hysteresis",
+      "doi": "10.1111/gcb.14006",
+      "data_url": "http://mda.vliz.be/directlink.php?fid=VLIZ_00000444_5dd3fba4f38f8",
+      "notable_published_pattern": "male arrival-to-laying interval shortened until about 2008 and then lengthened"
+    }
+  ],
+  "conclusion": {
+    "direct_natural_network_hysteresis_dataset_found": false,
+    "best_within_species_candidate": "Tomotani_Dutch_annual_cycle",
+    "best_interaction_anchor": "Samplonius_Both_2019_fatal_competition",
+    "best_decision_time_anchor": "Samplonius_Both_2017_manipulation",
+    "required_next_data": "a >=24-year system combining a biologically prior cue, later destination state, focal timing, and interacting partner/resource timing; or a justified merge of independently sourced variables for the same population"
+  },
+  "claim_rule": "Do not describe any current natural dataset as direct information-triggered network hysteresis. Natural hysteresis remains a prospective prediction until the full gate passes."
+}
