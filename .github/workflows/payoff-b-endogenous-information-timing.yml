@@ -1,0 +1,30 @@
+name: payoff-b-endogenous-information-timing
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-endogenous-information-timing-20260926
+    paths:
+      - "src/endogenous_information_timing.py"
+      - "scripts/payoff_b_information_timing_sweep.py"
+      - "tests/test_endogenous_information_timing.py"
+      - ".github/workflows/payoff-b-endogenous-information-timing.yml"
+
+jobs:
+  information-timing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run endogenous information-timing phase map
+        run: python scripts/payoff_b_information_timing_sweep.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-endogenous-information-timing
+          path: |
+            outputs/payoff_b_information_timing_phase.csv
+            outputs/payoff_b_information_timing_summary.json
+          if-no-files-found: error
