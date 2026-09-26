@@ -1,0 +1,96 @@
+{
+  "contract_id": "payoff_b_predictive_connectivity_v1_20260926",
+  "frozen_date": "2026-09-26",
+  "status": "PREANALYSIS_FROZEN_NEW_INFORMATION_AXIS",
+  "theory_link": {
+    "primary_empirical_coordinate": "signed detrended predictive connectivity rho",
+    "definition": "correlation between environmental state available earlier along the route and environmental state realized later at the destination, estimated without using the focal outcome year",
+    "secondary_binary_bridge": "q = 0.5 + asin(rho)/pi under a centered bivariate-Gaussian sign-threshold approximation",
+    "bridge_role": "secondary model-conditional interpretation only; rho remains the primary empirical coordinate"
+  },
+  "shared_rules": {
+    "no_current_outcome_year_in_connectivity_training": true,
+    "detrend_origin_and_destination_separately_before_correlation": true,
+    "retain_signed_rho": true,
+    "do_not_fold_negative_rho_to_absolute_value_in_primary_analysis": true,
+    "minimum_training_pairs": 6,
+    "no_redefinition_after_outcome_fit": true
+  },
+  "lane_a_wigeon": {
+    "role": "retrospective mechanistic bridge; not independent confirmation because phase-retention outcomes are already known",
+    "source_system": "Mareca penelope consecutive staging transitions",
+    "existing_transition_count": 224,
+    "existing_event_count": 256,
+    "existing_environment_family": "source-faithful ERA5",
+    "connectivity_training_period": [
+      2000,
+      2017
+    ],
+    "outcome_period": [
+      2018,
+      2020
+    ],
+    "route_geometry_rule": "for each staging segment, use the median observed event latitude and longitude across the existing 256-event table; coordinates only, not phase values, define the historical ERA5 extraction point",
+    "environmental_state": "annual TGS onset day under the already frozen January-July 5C cumulative-minimum rule",
+    "pair_connectivity": "for each ordered consecutive staging-segment pair, separately detrend origin and destination annual TGS onset on year over 2000-2017, then compute signed Pearson rho",
+    "primary_model": "phase_change ~ origin_phase * z_connectivity + z_progress + z_endpoint + z_progress:z_endpoint + C(year), with individual-clustered uncertainty",
+    "primary_estimand": "origin_phase:z_connectivity interaction coefficient",
+    "directional_prediction": "negative interaction: higher predictive connectivity strengthens phase correction, so lambda = 1 + beta_origin + beta_interaction*z_connectivity decreases as connectivity rises",
+    "estimability_gate": {
+      "min_transition_rows": 100,
+      "min_unique_segment_pair_connectivities": 4,
+      "require_nonzero_connectivity_variance": true,
+      "require_cluster_count": 8
+    },
+    "support_rule": "directional prediction supported only if the interaction estimate is negative and its two-sided 95% clustered confidence interval excludes zero",
+    "null_rule": "if estimable but the confidence interval includes zero, record NOT_SUPPORTED without retuning",
+    "claim_ceiling": [
+      "does not demonstrate historical climate-driven degradation of predictive connectivity",
+      "does not by itself test community-level coordination hysteresis",
+      "tests whether phase correction covaries with a pre-outcome route-information coordinate"
+    ]
+  },
+  "lane_b_broad_birds": {
+    "role": "cross-species generality test of the information axis, separate from the frozen universal-speed falsification",
+    "source": "Amaral et al. BirdMigrationSpeed",
+    "source_commit": "62c58d77c2028bd863dfe3697b0d9cf29ceaeab0",
+    "source_doi": "10.5061/dryad.ttdz08m6w",
+    "years": [
+      2002,
+      2017
+    ],
+    "existing_species_count": 55,
+    "target_rows": "species x year x breeding-range grid cells with valid bird arrival and green-up dates",
+    "source_cell_rule": "for each species and target breeding cell, choose the geographically nearest species cell marked migratory-range with strictly lower latitude; ties are resolved by numeric cell id; source selection uses spatial/range metadata only",
+    "connectivity_window": "trailing 8 calendar years ending at year t-1",
+    "connectivity_min_pairs": 6,
+    "connectivity_state": "green-up day at source and target cells",
+    "connectivity_processing": "within each trailing window, separately regress source and target green-up day on year and correlate the residuals",
+    "primary_response": "log1p(abs(gr_mn - arr_GAM_mean))",
+    "primary_model": "primary_response ~ z_connectivity + z_destination_greenup_anomaly + z_bird_speed + s(year, bs='re') + s(species_cell, bs='re') + s(species, bs='re')",
+    "primary_estimand": "linear coefficient of z_connectivity",
+    "directional_prediction": "negative coefficient: stronger pre-existing route predictive connectivity is associated with smaller realized arrival-green-up mismatch",
+    "support_rule": "directional prediction supported only if the z_connectivity estimate is negative and its two-sided 95% confidence interval excludes zero",
+    "null_rule": "if estimable but the interval includes zero, record NOT_SUPPORTED; do not redefine source cells, window length, or mismatch response",
+    "sensitivity_only": [
+      "6-year and 10-year trailing windows",
+      "raw undetrended rho",
+      "Gaussian binary-accuracy bridge q",
+      "migration-distance and wintering-latitude moderators"
+    ],
+    "separation_from_existing_result": "the frozen 55-species universal speed-ratio falsification remains unchanged regardless of this result"
+  },
+  "promotion_rule": {
+    "headline_requires": [
+      "the Bayesian synthetic mechanism and topology-dependent hysteresis remain robust",
+      "at least one natural-data lane supports the preregistered information-axis direction",
+      "claims about recovery hysteresis remain synthetic unless a time series with information degradation and recovery is analyzed"
+    ],
+    "forbidden_reframings": [
+      "do not claim that migration distance itself is predictive connectivity",
+      "do not call same-year source-destination correlation pre-commitment information",
+      "do not convert a null empirical result into support by changing the connectivity window or source-cell rule",
+      "do not claim a natural hysteresis threshold from synthetic cue-accuracy values"
+    ]
+  }
+}
