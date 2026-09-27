@@ -58,7 +58,8 @@ def test_v2_abstract_keeps_only_the_core_deadline_and_recovery_story():
     assert "better information increases" in abstract
     assert "strict Nash equilibria" in abstract
     assert "perfect cue accuracy does not recover" in abstract
-    assert "Environmental information can recover before ecological coordination does." in abstract
+    assert "Theory predicts that environmental information can recover before ecological coordination does." in abstract
+    assert "Natural evidence supports pieces of this mechanism rather than the full hysteresis process" in abstract
 
     # Important secondary results stay in Results/Discussion rather than
     # competing with T1-T3 and T7-T8 in the abstract.
