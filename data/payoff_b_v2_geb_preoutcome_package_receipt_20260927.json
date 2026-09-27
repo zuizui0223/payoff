@@ -7,16 +7,16 @@
   "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "v1_status": "FROZEN_PROVENANCE_ONLY",
   "workflow": {
-    "run_id": 36308706101,
-    "head_sha": "17c1f0b1b814661a337695f9205ae82aca7b5b96",
+    "run_id": 36309072630,
+    "head_sha": "1893ec08115d68bb1f51db1834b944c3fb7305a5",
     "conclusion": "success",
-    "artifact_id": 10927314277,
+    "artifact_id": 10927484417,
     "artifact_name": "payoff-b-v2-geb-preoutcome-package",
-    "artifact_sha256": "331f213ae75605179a3bc07b6c779ec16d88f0dc0e85757aed5b7cb6cb546286"
+    "artifact_sha256": "7b1033684a17e8018ce12e8d9d1809583bffbf98eb9431c3aa9075e573e857f5"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip",
-    "sha256": "069ea50e18d9d54c08e6aceab1daf8d2cda561954cca9c2a58080ca916bb693f"
+    "sha256": "d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b"
   },
   "audited_metrics": {
     "structured_abstract_words": 243,
@@ -52,7 +52,6 @@
     "V2 cover-letter template",
     "V2 data/code statement",
     "V2 portal handoff",
-    "V1/V2 publication relation",
     "seven deterministic SVG figures",
     "figure manifest"
   ],
@@ -68,5 +67,6 @@
     "V1 remains provenance only",
     "the unopened registered result is excluded from blinded main text and figures",
     "natural network hysteresis is not claimed"
-  ]
+  ],
+  "package_file_count": 16
 }
