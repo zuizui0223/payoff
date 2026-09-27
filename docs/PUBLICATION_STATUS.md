@@ -210,7 +210,12 @@ CURRENT_V2_PREOUTCOME_PACKAGE = READY
 CURRENT_V2_PREOUTCOME_BUILD_RUN = 36309072630
 CURRENT_V2_PREOUTCOME_ARTIFACT = 10927484417
 CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b
-CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = REBUILD_REQUIRED
+CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = READY
+CURRENT_V2_POSTOUTCOME_FASTCHECK_RUN = 36311298413
+CURRENT_V2_POSTOUTCOME_PACKAGE_CHECK_RUN = 36311298440
+CURRENT_V2_POSTOUTCOME_READINESS =
+    PAYOFF_B_V2_POSTOUTCOME_PIPELINE_READINESS_20260927.md
+REAL_AIKENS_LAMBDA_OUTCOME = UNOPENED
 ```
 
 The legacy V1 PREOUTCOME package had zero identity leaks in its anonymous main
@@ -231,15 +236,19 @@ The V2 manuscript must remain coherent under PASS, wrong-direction,
 insufficient-support and NOT_ESTIMABLE outcomes. Its information-deadline and
 coordination conclusions do not depend on the Aikens sign.
 
-The V2 PREOUTCOME package is now built and audited. The remaining
-pre-submission tasks are therefore:
+The V2 PREOUTCOME package is built and audited, and the V2 postoutcome
+pipeline is now outcome-invariance tested across PASS, wrong-direction,
+insufficient-support and NOT_ESTIMABLE completion classes. The real Aikens
+result remains unopened.
+
+The remaining pre-submission tasks are therefore:
 
 1. execute and freeze the registered Aikens outcome when authentication permits;
-2. supply an anonymous stable reviewer archive link;
-3. complete author-controlled title-page and declaration metadata;
-4. regenerate the final V2 package after the registered result and rerun the
-   existing anonymity, reference, word-count, display-piece and claim-ceiling
-   audits.
+2. allow the already-tested V2 postoutcome pipeline to render that result into
+   Supporting Information and regenerate the package without changing the
+   title, structured abstract, main text or seven figures;
+3. supply an anonymous stable reviewer archive link;
+4. complete author-controlled title-page and declaration metadata.
 
 
 ## DOI modules / dormant branches
