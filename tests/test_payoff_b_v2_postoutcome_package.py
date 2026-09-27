@@ -141,7 +141,10 @@ def test_main_and_figures_are_identical_across_all_aikens_outcomes(tmp_path: Pat
         )
 
         assert manifest["scientific_state"] == "POSTOUTCOME_INTERNAL_READY"
-        assert manifest["aikens_outcome_opened"] is True
+        assert manifest["aikens_gate_resolved"] is True
+        assert manifest["aikens_lambda_outcome_opened"] is (
+            name != "NOT_ESTIMABLE"
+        )
         assert manifest["aikens_result_surface"] == "Supporting Information only"
         assert manifest["retuning_permitted"] is False
         assert manifest["final_submission_eligible"] is False
