@@ -167,6 +167,8 @@ def _dryad_dataset_archive_download(
     candidates = [
         f"{DRYAD_API}/datasets/{encoded_once}/download",
         f"{DRYAD_API}/datasets/{encoded_twice}/download",
+        f"http://datadryad.org/api/v2/datasets/{encoded_once}/download",
+        f"http://datadryad.org/api/v2/datasets/{encoded_twice}/download",
     ]
     errors = []
     for url in candidates:

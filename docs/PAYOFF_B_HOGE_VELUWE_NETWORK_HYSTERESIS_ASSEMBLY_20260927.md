@@ -184,16 +184,17 @@ resident_migrant_mismatch
 ~ centered_connectivity
 + branch
 + centered_connectivity:branch
++ centered_year
 ```
 
-Predictive connectivity is centered at the mean of the connectivity range
-represented on both branches. Primary support requires the **Newey–West HAC,
-lag 7 (= 8-year window − 1), finite-sample-corrected 95% CI** for the branch
-coefficient to exclude zero at that point. HAC(2) and HC3 are reported as
-sensitivities only. This tests whether coordination differs at comparable
-information quality depending on the path by which that information state was
-reached while accounting for the seven shared calendar years between adjacent
-8-year connectivity estimates.
+Within the overlap-support subset, predictive connectivity and calendar year
+are both centered at their means. Primary support requires the **Newey–West
+HAC, lag 7 (= 8-year window − 1), finite-sample-corrected 95% CI** for the
+branch coefficient to exclude zero at mean connectivity **after linear
+calendar-year adjustment**. This time-trend guard is mandatory because decline
+and recovery branches are necessarily earlier and later periods; a secular
+resident–migrant timing trend must not be relabelled path dependence. HAC(2),
+HC3 and the unadjusted branch model are sensitivities only.
 
 ## Claim ceiling
 
