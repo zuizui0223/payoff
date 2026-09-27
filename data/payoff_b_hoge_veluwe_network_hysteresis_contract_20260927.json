@@ -43,11 +43,12 @@
       "primary_variable": "annual unweighted mean laying date of included first great-tit clutches",
       "role": "resident interactor phenology",
       "source_transport": {
-        "primary": "Dryad DOI/API metadata + Dryad public bytes if accessible",
+        "primary": "Dryad DOI/API metadata + Dryad individual bytes if accessible",
+        "authoritative_fallback": "Dryad full-dataset ZIP download; extract exact registered filename and record dataset/archive SHA-256 plus file SHA-256",
         "digest_verified_public_mirror": {
           "provider": "Zenodo",
           "record_id": 5730499,
-          "use_rule": "fallback transport only if exact filename is present and computed SHA-256 equals the Dryad-declared SHA-256"
+          "use_rule": "last-resort transport only if exact filename is present and computed SHA-256 equals an authoritative Dryad-declared SHA-256"
         }
       }
     },
@@ -64,11 +65,12 @@
       "primary_variable": "annual observed peak date of caterpillar biomass",
       "role": "later breeding-ground resource state",
       "source_transport": {
-        "primary": "Dryad DOI/API metadata + Dryad public bytes if accessible",
+        "primary": "Dryad DOI/API metadata + Dryad individual bytes if accessible",
+        "authoritative_fallback": "Dryad full-dataset ZIP download; extract exact registered filename and record dataset/archive SHA-256 plus file SHA-256",
         "digest_verified_public_mirror": {
           "provider": "Zenodo",
           "record_id": 5730499,
-          "use_rule": "fallback transport only if exact filename is present and computed SHA-256 equals the Dryad-declared SHA-256"
+          "use_rule": "last-resort transport only if exact filename is present and computed SHA-256 equals an authoritative Dryad-declared SHA-256"
         }
       }
     },
@@ -98,8 +100,8 @@
     ],
     "transport_amendment": {
       "date": "2026-09-27",
-      "reason": "Dryad API file download returned HTTP 401 and current public file-stream routes returned HTTP 403 in GitHub Actions",
-      "scientific_effect": "none; Dryad DOI, exact filenames and Dryad-declared SHA-256 remain authoritative",
+      "reason": "Dryad individual-file API/public file-stream routes returned HTTP 401/403 in GitHub Actions; Gate A therefore tries the Dryad full-dataset Open Access ZIP before any mirror",
+      "scientific_effect": "none; Dryad DOI and exact filenames remain authoritative; mirror bytes are accepted only with authoritative Dryad SHA-256 identity",
       "outcome_data_inspected": false
     },
     "inferential_amendment": {
