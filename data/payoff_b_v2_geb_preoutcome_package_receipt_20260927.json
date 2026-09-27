@@ -1,0 +1,72 @@
+{
+  "result_id": "payoff_b_v2_geb_preoutcome_package_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "PASS_PREOUTCOME_PACKAGE_READY",
+  "journal": "Global Ecology and Biogeography",
+  "article_type": "Research Article",
+  "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
+  "v1_status": "FROZEN_PROVENANCE_ONLY",
+  "workflow": {
+    "run_id": 36309072630,
+    "head_sha": "1893ec08115d68bb1f51db1834b944c3fb7305a5",
+    "conclusion": "success",
+    "artifact_id": 10927484417,
+    "artifact_name": "payoff-b-v2-geb-preoutcome-package",
+    "artifact_sha256": "7b1033684a17e8018ce12e8d9d1809583bffbf98eb9431c3aa9075e573e857f5"
+  },
+  "inner_archive": {
+    "file": "PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip",
+    "sha256": "d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b"
+  },
+  "audited_metrics": {
+    "structured_abstract_words": 243,
+    "main_body_words": 4148,
+    "references": 13,
+    "display_pieces": 7,
+    "keywords": 8,
+    "running_title_chars": 38,
+    "internal_token_hits": 0,
+    "email_hits": 0,
+    "citation_presence_pass": true
+  },
+  "gates": {
+    "structured_abstract": true,
+    "abstract_words_le_300": true,
+    "keywords_6_to_10": true,
+    "keywords_alphabetical": true,
+    "running_title_lt_40": true,
+    "main_body_words_le_5000": true,
+    "references_1_to_50": true,
+    "seven_display_pieces": true,
+    "anonymous_internal_tokens_zero": true,
+    "email_hits_zero": true,
+    "expected_citations_present": true,
+    "aikens_placeholder_absent": true
+  },
+  "package_contents": [
+    "blinded V2 main text",
+    "V2 audit JSON",
+    "V2 Supporting Information PREOUTCOME",
+    "registered industrial-development supplement pending marker",
+    "V2 title-page template",
+    "V2 cover-letter template",
+    "V2 data/code statement",
+    "V2 portal handoff",
+    "seven deterministic SVG figures",
+    "figure manifest"
+  ],
+  "final_submission_eligible": false,
+  "final_submission_blockers": [
+    "registered industrial-development phase-retention result remains unopened",
+    "anonymous stable reviewer archive link not yet supplied",
+    "author-controlled title-page and declarations not yet completed",
+    "final package must be regenerated after the registered result is frozen"
+  ],
+  "scientific_boundary": [
+    "package generation does not retune scientific claims",
+    "V1 remains provenance only",
+    "the unopened registered result is excluded from blinded main text and figures",
+    "natural network hysteresis is not claimed"
+  ],
+  "package_file_count": 16
+}

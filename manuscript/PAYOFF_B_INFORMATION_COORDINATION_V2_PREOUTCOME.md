@@ -18,11 +18,11 @@ Climate-change ecology often asks whether organisms can keep pace with changing 
 
 Mismatch is important, but it compresses several different ecological problems. A species can be mismatched because it lacks response capacity, because the future state is difficult to predict, because useful information becomes available only after a decision deadline, or because an individually costly transition blocks a jointly beneficial response. These mechanisms make different predictions even when they produce the same observed timing error.
 
-Migration makes the information problem especially clear. A resident organism can often sample local spring directly. A long-distance migrant must make some decisions before the destination state is observed. Environmental conditions at wintering or stopover sites can provide predictive information, but that information need not remain reliable under climate change. This general problem is established in migration theory and empirical work: migrants use remote environmental cues, environmental predictability changes optimal migration timing, and climate change can decouple cues from the later conditions that determine fitness. PAYOFF-B therefore does not treat cue–driver decoupling itself as a new idea.
+Migration makes the information problem especially clear. A resident organism can often sample local spring directly. A long-distance migrant must make some decisions before the destination state is observed. Environmental conditions at wintering or stopover sites can provide predictive information, but that information need not remain reliable under climate change. This general problem is established in migration theory and empirical work: migrants use remote environmental cues, environmental predictability changes optimal migration timing, and climate change can decouple cues from the later conditions that determine fitness (Kölzsch et al., 2015; Bauer et al., 2020; Tomotani et al., 2021). PAYOFF-B therefore does not treat cue–driver decoupling itself as a new idea.
 
 The unresolved problem is what happens **after cue quality is allowed to vary among decision contexts**. Interacting species do not necessarily face the same cost of delaying action. Early arrival can affect rank, mating opportunities or territory acquisition; later decisions can use richer local information. Thus two species, or two demographic classes within a species, can observe the same future cue but rationally begin using it at different reliability thresholds.
 
-This immediately produces a counterintuitive possibility: better information need not improve ecological coordination monotonically. If one actor begins waiting for a cue before another, the first becomes informed while its partner remains committed to the previous timing convention. Coordination can worsen during the transition from shared ignorance to shared information.
+Game-theoretic phenology already shows that individually selected timing can differ from a simple system-level optimum under climate change (Johansson & Jonzén, 2012). This immediately produces a counterintuitive possibility: better information need not improve ecological coordination monotonically. If one actor begins waiting for a cue before another, the first becomes informed while its partner remains committed to the previous timing convention. Coordination can worsen during the transition from shared ignorance to shared information.
 
 Interaction adds a second problem. Once a seasonal network has coordinated on one timing convention, being the first actor to adopt a different information-dependent strategy can itself create partner mismatch. The network may therefore remain in an obsolete timing regime even after environmental information has fully recovered. In that case the constraint is neither uncertainty nor response capacity. It is strategic accessibility.
 
@@ -430,7 +430,7 @@ Thus trap existence and rescue leverage are different network properties.
 > **A network can be unable to recover spontaneously yet remain recoverable
 > through a small, strategically placed temporary information seed.**
 
-Threshold cascades and seed effects are established in network science. The
+Threshold cascades and seed effects are established in network science (Watts, 2002). The
 ecological content here is that the node threshold is derived from seasonal
 mismatch risk, information/deadline cost and interaction mismatch rather than
 introduced as a free adoption parameter.
@@ -441,7 +441,7 @@ introduced as a free adoption parameter.
 
 ### 3.1 Predictive connectivity and realized mismatch across migratory birds
 
-The preregistered broad-bird analysis uses 3,311 observations from 37 species after requiring a trailing eight-year information window.
+The preregistered broad-bird analysis reanalyses the migration and green-up dataset of Amaral et al. (2025), retaining 3,311 observations from 37 species after requiring a trailing eight-year information window.
 
 Predictive connectivity is defined as the signed correlation between source and destination green-up anomalies after the two locations are separately detrended within the pre-outcome window.
 
@@ -469,7 +469,7 @@ Importantly, using raw undetrended source–destination correlation removes the 
 
 ### 3.2 A manipulated heterospecific cue affects later but not earlier decisions
 
-Samplonius & Both experimentally advanced and delayed resident tit hatching phenology while observing pied-flycatcher settlement.
+Samplonius and Both (2017) experimentally advanced and delayed resident tit hatching phenology while observing pied-flycatcher settlement.
 
 Male flycatcher settlement was not detectably related to treatment
 
@@ -505,7 +505,7 @@ The experiment does not show that females deliberately delayed settlement in ord
 
 ### 3.3 Predictive connectivity does not strengthen post-error correction in wigeon
 
-A registered wigeon analysis uses historical 2000–2017 ERA5 timing relationships to define route-level predictive connectivity before analysing 2018–2020 staging transitions.
+A registered wigeon analysis builds on the Eurasian wigeon migration system of van Toor et al. (2021), using historical 2000–2017 ERA5 timing relationships to define route-level predictive connectivity before analysing 2018–2020 staging transitions.
 
 Across 224 transitions from 28 individuals, the preregistered interaction between incoming phase error and predictive connectivity is
 
@@ -545,7 +545,7 @@ PAYOFF-B therefore does not claim to have observed natural information-recovery 
 
 The earlier moving-landscape programme supplies a separate capacity result. In a local controller, movement and phenological feedback can be exactly substitutable at fixed total restoring gain. Explicit landscapes break that equivalence.
 
-Finite timing capacity extends persistence and reduces immediate route costs, but movement re-enters under stronger directional forcing. In the canonical one-dimensional landscape, increasing phenological capacity shifts the persistence bracket substantially, yet frontier strategies remain migration-dominant. In a two-dimensional zigzag landscape, phenology-only tracking is favoured at moderate forcing before migration re-enters as forcing increases.
+Finite timing capacity extends persistence and reduces immediate route costs, but movement re-enters under stronger directional forcing. This capacity layer is motivated by empirical work showing green-wave tracking, compensation for phenological error and anthropogenic decoupling of movement from seasonal resources (Aikens et al., 2017, 2022; Ortega et al., 2023). In the canonical one-dimensional landscape, increasing phenological capacity shifts the persistence bracket substantially, yet frontier strategies remain migration-dominant. In a two-dimensional zigzag landscape, phenology-only tracking is favoured at moderate forcing before migration re-enters as forcing increases.
 
 Timing therefore acts as a finite buffer, not a permanent substitute for spatial tracking.
 
@@ -668,9 +668,9 @@ Improving connectivity habitat addresses a spatial capacity problem. Improving e
 
 ### 4.8 Relation to prior work
 
-Remote environmental cues, information value in migration, climate-driven cue–driver decoupling, phenological games and ecological hysteresis all have substantial prior literatures.
+Remote environmental cues, information value in migration, climate-driven cue–driver decoupling, phenological games and ecological mismatch all have substantial prior literatures (Johansson & Jonzén, 2012; Kharouba & Wolkovich, 2020; Visser & Gienapp, 2019; Bauer et al., 2020).
 
-The closest direct predecessor is the pied-flycatcher work showing that wintering- and breeding-ground environmental variables can explain arrival timing without predicting the annual fitness optimum, with climate-driven cue–driver decoupling proposed explicitly.
+The closest direct predecessor is the pied-flycatcher work showing that wintering- and breeding-ground environmental variables can explain arrival timing without predicting the annual fitness optimum, with climate-driven cue–driver decoupling proposed explicitly (Tomotani et al., 2021).
 
 PAYOFF-B therefore begins one step later.
 
@@ -723,3 +723,22 @@ and
 > **A community that cannot recover spontaneously may still be recoverable through a small, strategically placed information seed.**
 
 Climate adaptation can therefore fail not only because organisms cannot respond or cannot predict the future, but because information use itself has become a historically contingent property of the interaction network.
+
+---
+
+## References
+
+- Aikens EO, Kauffman MJ, Merkle JA, Dwinnell SPH, Fralick GL, Monteith KL (2017) The greenscape shapes surfing of resource waves in a large migratory herbivore. *Ecology Letters* 20:741–750. DOI: 10.1111/ele.12772.
+- Aikens EO, Wyckoff TB, Sawyer H, Kauffman MJ (2022) Industrial energy development decouples ungulate migration from the green wave. *Nature Ecology & Evolution* 6:1733–1741. DOI: 10.1038/s41559-022-01887-9.
+- Amaral BR, Youngflesh C, Tingley M, Miller DAW (2025) Shifting gears in a shifting climate: Birds adjust migration speed in response to spring vegetation green-up. *Diversity and Distributions* 31:e70033. DOI: 10.1111/ddi.70033.
+- Bauer S, McNamara JM, Barta Z (2020) Environmental variability, reliability of information and the timing of migration. *Proceedings of the Royal Society B* 287:20200622. DOI: 10.1098/rspb.2020.0622.
+- Johansson J, Jonzén N (2012) Game theory sheds new light on ecological responses to current climate change when phenology is historically mismatched. *Ecology Letters* 15:881–888. DOI: 10.1111/j.1461-0248.2012.01812.x.
+- Kharouba HM, Wolkovich EM (2020) Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. DOI: 10.1038/s41558-020-0752-x.
+- Kölzsch A et al. (2015) Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore. *Journal of Animal Ecology* 84:272–283. DOI: 10.1111/1365-2656.12281.
+- Ortega AC, Aikens EO, Merkle JA, Monteith KL, Kauffman MJ (2023) Migrating mule deer compensate en route for phenological mismatches. *Nature Communications* 14:2008. DOI: 10.1038/s41467-023-37750-z.
+- Samplonius JM, Both C (2017) Competitor phenology as a social cue in breeding site selection. *Journal of Animal Ecology* 86:615–623. DOI: 10.1111/1365-2656.12640.
+- Tomotani BM, Gienapp P, de la Hera I, Terpstra M, Pulido F, Visser ME (2021) Integrating causal and evolutionary analysis of life-history evolution: Arrival date in a long-distant migrant. *Frontiers in Ecology and Evolution* 9:630823. DOI: 10.3389/fevo.2021.630823.
+- van Toor ML et al. (2021) Migration distance affects how closely Eurasian wigeons follow spring phenology during migration. *Movement Ecology* 9:61. DOI: 10.1186/s40462-021-00296-0.
+- Visser ME, Gienapp P (2019) Evolutionary and demographic consequences of phenological mismatches. *Nature Ecology & Evolution* 3:879–885. DOI: 10.1038/s41559-019-0880-8.
+- Watts DJ (2002) A simple model of global cascades on random networks. *Proceedings of the National Academy of Sciences USA* 99:5766–5771. DOI: 10.1073/pnas.082090499.
+

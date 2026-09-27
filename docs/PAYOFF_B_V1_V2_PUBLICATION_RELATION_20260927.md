@@ -66,9 +66,20 @@ Only V2 may generate new Paper 2 journal-facing material.
 Existing submission packages derived from V1 are retained for provenance but
 are **not current submission packages** after this decision.
 
-In particular, any previous GEB PREOUTCOME package, word count, figure count,
-anonymous-text receipt or post-Aikens rendering pipeline must be rebuilt or
-revalidated against the V2 canonical source before journal upload.
+Previous V1-derived GEB packages remain provenance only. A new V2 PREOUTCOME
+package has now been rebuilt and audited directly from the canonical V2 source:
+
+```text
+V2_PREOUTCOME_BUILD_RUN = 36309072630
+V2_PREOUTCOME_ARTIFACT = 10927484417
+V2_PREOUTCOME_ARCHIVE_SHA256 = d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b
+V2_PREOUTCOME_STATUS = READY_FOR_INTERNAL_REVIEW
+FINAL_SUBMISSION_STATUS = BLOCKED
+```
+
+The final journal package must still be regenerated after the registered
+industrial-development result is frozen and author/reviewer-link metadata are
+complete.
 
 No V1 and V2 dual submission is allowed.
 

@@ -29,4 +29,5 @@ def test_docs_reference_latest_safe_preflight() -> None:
     assert "LEGACY_V1_CREDENTIAL_PREFLIGHT_RUN = 36113621057" in pub
     assert "LEGACY_V1_CREDENTIAL_PREFLIGHT_ARTIFACT = 10853764396" in pub
     assert "opened no environmental" in pub
-    assert "CURRENT_V2_PREOUTCOME_PACKAGE = REBUILD_REQUIRED" in pub
+    assert "CURRENT_V2_PREOUTCOME_PACKAGE = READY" in pub
+    assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED" in pub
