@@ -78,7 +78,20 @@
       "source": "NCEP/NCAR or source-faithful equivalent used by the already frozen CV24C cue reconstruction",
       "primary_variable": "Ivory Coast temperature, fixed 20-day mean beginning 18 February",
       "spatial_rule": "reuse the frozen 3x3 coarse-grid Ivory Coast proxy from PAYOFF_B_CV24C_CUE_DRIVER_RESULT_20260927; extend identically through 2015 using the same NCEP/NCAR source and transform",
-      "no_window_retuning": true
+      "no_window_retuning": true,
+      "frozen_prefix_validation": {
+        "period": [
+          1980,
+          2010
+        ],
+        "source_workflow_run_id": 36270835505,
+        "source_artifact_id": 10915252374,
+        "source_artifact_sha256": "655258a69978e71221e4f80b707a8915d289383ea0bfe036381e80edd0b379fb",
+        "source_annual_csv_sha256": "96bc00d67b8fd55f62509b81787330f30b4346a3e3745aa6adba70138db4c12b",
+        "baseline_file": "data/payoff_b_cv24c_frozen_cue_prefix_1980_2010.json",
+        "max_abs_difference_c": 1e-9,
+        "rule": "the 1980-2010 prefix of the 1980-2015 extension must reproduce the frozen annual Ivory Coast cue values before Gate B may open"
+      }
     }
   },
   "source_gate": {
@@ -113,6 +126,16 @@
     "migrant_aggregation_amendment": {
       "date": "2026-09-27",
       "basis": "published source Methods, before joined source outcome inspection",
+      "outcome_data_inspected": false
+    },
+    "cue_extension_gate": {
+      "required": true,
+      "period": [
+        1980,
+        2015
+      ],
+      "pass_state": "CUE_EXTENSION_SOURCE_FAITHFUL_PASS",
+      "failure_state": "CUE_EXTENSION_NOT_SOURCE_FAITHFUL",
       "outcome_data_inspected": false
     }
   },
