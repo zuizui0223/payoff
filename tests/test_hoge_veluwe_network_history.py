@@ -132,3 +132,61 @@ def test_full_sample_reversal_can_fail_the_frozen_stability_gate():
     assert result["stability"]["slope_signs_preserved_fraction"] >= 0.80
     assert result["stability"]["breakpoint_within_tolerance_fraction"] < 0.80
 
+def test_gate_c_sorts_calendar_year_before_hac():
+    pytest.importorskip("pandas")
+    pytest.importorskip("statsmodels")
+
+    records = []
+    for branch_index, years in enumerate(
+        (list(range(1992, 2004)), list(range(2004, 2016)))
+    ):
+        for i, year in enumerate(years):
+            connectivity = 0.2 + 0.05 * (i % 10)
+            noise = ((i % 3) - 1) * 0.05
+            records.append(
+                {
+                    "year": year,
+                    "connectivity": connectivity,
+                    "mismatch": (
+                        4.0
+                        - 1.5 * connectivity
+                        + 2.0 * branch_index
+                        + noise
+                    ),
+                }
+            )
+
+    ordered = fit_history_hac(
+        records,
+        break_year=2004,
+        reversal_status="INFORMATION_REVERSAL",
+    )
+    shuffled = fit_history_hac(
+        list(reversed(records)),
+        break_year=2004,
+        reversal_status="INFORMATION_REVERSAL",
+    )
+
+    assert shuffled["branch_at_mean_overlap"][
+        "primary_hac7_year_adjusted"
+    ] == pytest.approx(
+        ordered["branch_at_mean_overlap"][
+            "primary_hac7_year_adjusted"
+        ]
+    )
+
+
+def test_gate_c_rejects_duplicate_calendar_years():
+    pytest.importorskip("pandas")
+    pytest.importorskip("statsmodels")
+
+    with pytest.raises(ValueError, match="one annual record per year"):
+        fit_history_hac(
+            [
+                {"year": 2000, "connectivity": 0.2, "mismatch": 1.0},
+                {"year": 2000, "connectivity": 0.3, "mismatch": 1.2},
+            ],
+            break_year=2001,
+            reversal_status="INFORMATION_REVERSAL",
+        )
+
