@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 
-def test_information_deadlines_renderer_builds_six_outcome_independent_svgs(tmp_path):
+def test_information_deadlines_renderer_builds_seven_outcome_independent_svgs(tmp_path):
     root = Path(__file__).resolve().parents[1]
     out = tmp_path / "figures"
     subprocess.run(
@@ -22,7 +22,7 @@ def test_information_deadlines_renderer_builds_six_outcome_independent_svgs(tmp_
     assert manifest_path.exists()
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["aikens_outcome_used"] is False
-    assert len(manifest["figures"]) == 6
+    assert len(manifest["figures"]) == 7
 
     for row in manifest["figures"].values():
         path = Path(row["path"])
@@ -62,3 +62,26 @@ def test_information_figures_include_core_headlines(tmp_path):
     assert "52 / 364 strict-memory cells" in fig3
     assert "0 / 404 strict-memory cells" in fig3
     assert "history model: NOT RUN" in fig5
+
+
+
+def test_information_figures_include_rescue_topology(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    out = tmp_path / "figures"
+    subprocess.run(
+        [
+            sys.executable,
+            str(root / "scripts" / "render_information_deadlines_figures.py"),
+            "--output-dir",
+            str(out),
+        ],
+        cwd=root,
+        check=True,
+    )
+
+    fig7 = (out / "PAYOFF_B_INFO_V2_FIG7_RESCUE.svg").read_text(
+        encoding="utf-8"
+    )
+    assert "local pollinator only" in fig7
+    assert "any actor" in fig7
+    assert "Trap stability and rescue leverage are different network properties." in fig7
