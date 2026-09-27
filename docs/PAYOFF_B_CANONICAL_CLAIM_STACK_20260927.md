@@ -270,7 +270,8 @@ x heterogeneous decision deadlines
 -> asynchronous information uptake
 -> network cut / transient mismatch
 -> coordination barrier to first adoption
--> possible historical lock-in after cue recovery.
+-> possible historical lock-in after cue recovery
+-> derived rescue threshold and topology-dependent seed leverage.
 
 The compact conceptual claim is:
 
