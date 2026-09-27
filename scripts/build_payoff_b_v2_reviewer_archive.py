@@ -83,7 +83,7 @@ def sha256(path: Path) -> str:
 
 
 def local_module_path(module: str, importer: Path) -> Path | None:
-    if module.startswith("src."):
+    if module.startswith(("src.", "scripts.")):
         candidate = ROOT / (module.replace(".", "/") + ".py")
         return candidate if candidate.exists() else None
 
