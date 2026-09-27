@@ -24,8 +24,16 @@ def test_hoge_veluwe_network_lane_is_preoutcome_and_fixed():
     assert c["information_reversal_gate"]["fail_state"] == "NO_CUE_RESOURCE_REVERSAL"
     assert c["information_reversal_gate"]["aicc_parameter_count"]["linear"] == 2
     assert c["information_reversal_gate"]["aicc_parameter_count"]["segmented"] == 5
-    assert c["history_test_if_reversal_passes"]["covariance"] == "Newey-West HAC covariance, maxlags=2, finite-sample correction"
+    assert c["history_test_if_reversal_passes"]["covariance"] == "Newey-West HAC covariance, maxlags=7 (= window_years - 1), finite-sample correction"
     assert c["history_test_if_reversal_passes"]["no_naive_iid_inference"] is True
+    stability = c["information_reversal_gate"]["leave_one_history_year_out_stability_gate"]
+    assert stability["required"] is True
+    assert stability["minimum_fraction_preserving_both_slope_signs"] == 0.8
+    assert stability["minimum_fraction_breakpoint_within_years_of_full_fit"] == {
+        "fraction": 0.8,
+        "tolerance_years": 2,
+    }
+    assert stability["failure_state"] == "UNSTABLE_CUE_RESOURCE_REVERSAL"
 
 
 def test_history_test_cannot_open_before_information_reversal():
