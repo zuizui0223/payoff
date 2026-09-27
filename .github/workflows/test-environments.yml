@@ -1,0 +1,35 @@
+name: test-environments
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pandas-without-statsmodels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pandas/scipy without statsmodels
+        run: python -m pip install --disable-pip-version-check pytest pandas scipy
+      - name: Verify dynamic loaders and graceful empirical skips
+        run: >
+          pytest -q
+          tests/test_dynamic_test_module_loaders.py
+          tests/test_cv24c_cue_driver.py
+          tests/test_barnacle_goose_phase_error_calibration.py
+          tests/test_barnacle_phase_error_calibration.py
+
+  empirical-extras:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install declared empirical test environment
+        run: python -m pip install --disable-pip-version-check -e ".[test,empirical]"
+      - name: Run full pytest suite with empirical dependencies enabled
+        run: pytest -q
