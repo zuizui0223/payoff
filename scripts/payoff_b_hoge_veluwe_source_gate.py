@@ -278,7 +278,16 @@ def _dryad_download_file(
     declared_digest = meta.get("digest")
     declared_type = str(meta.get("digestType") or "").lower()
     digest_match = None
-    if declared_digest and declared_type in {"sha-256", "sha256"}:
+    has_authoritative_sha256 = (
+        bool(declared_digest)
+        and declared_type in {"sha-256", "sha256"}
+    )
+    if mirror is not None and not has_authoritative_sha256:
+        raise RuntimeError(
+            f"Dryad metadata lacks authoritative SHA-256 for mirror validation "
+            f"of {exact_name}: digestType={meta.get('digestType')!r}"
+        )
+    if has_authoritative_sha256:
         digest_match = digest.lower() == str(declared_digest).lower()
         if not digest_match:
             raise RuntimeError(
