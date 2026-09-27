@@ -108,7 +108,8 @@ def test_gate_c_uses_overlap_support_and_hac7_when_licensed():
     assert result["n"] >= 12
     assert result["branch_counts"]["decline"] >= 6
     assert result["branch_counts"]["recovery"] >= 6
-    assert result["covariance"]["primary"] == "calendar-distance HAC(7) finite-sample corrected"\n    assert result["covariance"]["lag_unit"] == "calendar_year"
+    assert result["covariance"]["primary"] == "calendar-distance HAC(7) finite-sample corrected"
+    assert result["covariance"]["lag_unit"] == "calendar_year"
     assert result["time_trend_guard"]["required"] is True
     assert math.isfinite(result["year_center"])
     primary = result["branch_at_mean_overlap"]["primary_hac7_year_adjusted"]
