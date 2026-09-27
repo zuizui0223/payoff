@@ -1,9 +1,11 @@
 # Publication status
 
 PAYOFF-B is organized as a **two-paper publication programme**. The exact
-anti-phase theorem remains independent, while the frozen tracking theory and
-movement–phenology empirical programme are combined into one broad ecology
-manuscript. See
+anti-phase theorem remains independent. Paper 2 has advanced to the canonical
+information-coordination V2 manuscript, which absorbs the earlier
+temporal-buffering V1 generation as its capacity layer and retains V1 only as
+provenance/rollback. See
+`docs/PAYOFF_B_V1_V2_PUBLICATION_RELATION_20260927.md` and
 `docs/PAYOFF_B_TWO_PAPER_PUBLICATION_ARCHITECTURE_20260925.md`.
 
 ## Paper 1: PAYOFF-B exact theorem
