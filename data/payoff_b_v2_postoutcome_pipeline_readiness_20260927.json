@@ -1,0 +1,50 @@
+{
+  "receipt_id": "payoff_b_v2_postoutcome_pipeline_readiness_20260927",
+  "checked_date": "2026-09-27",
+  "status": "PASS_PIPELINE_READY_REAL_OUTCOME_UNOPENED",
+  "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
+  "v1_status": "FROZEN_PROVENANCE_ONLY",
+  "fastcheck": {
+    "workflow": "PAYOFF-B V2 postoutcome fastcheck",
+    "run_id": 36311298413,
+    "head_sha": "9e6a44736a3828398aafc292c8d848129a8e9544",
+    "conclusion": "success"
+  },
+  "package_invariance_check": {
+    "workflow": "PAYOFF-B V2 GEB postoutcome pipeline",
+    "run_id": 36311298440,
+    "head_sha": "9e6a44736a3828398aafc292c8d848129a8e9544",
+    "conclusion": "success"
+  },
+  "verified_outcome_classes": [
+    "PASS",
+    "FAIL_WRONG_DIRECTION",
+    "FAIL_INSUFFICIENT_SUPPORT",
+    "NOT_ESTIMABLE"
+  ],
+  "invariants": {
+    "same_blinded_main_hash_across_outcome_classes": true,
+    "same_seven_figure_manifest_hash_across_outcome_classes": true,
+    "supporting_information_is_only_outcome_specific_narrative_surface": true,
+    "title_outcome_invariant": true,
+    "structured_abstract_outcome_invariant": true,
+    "main_claim_hierarchy_outcome_invariant": true,
+    "active_authenticated_workflow_routes_to_v2_only": true,
+    "active_authenticated_workflow_generates_v1_outcome_packages": false
+  },
+  "outcome_state": {
+    "real_aikens_lambda_outcome": "UNOPENED",
+    "credentials_configured": false,
+    "external_blocker": "AppEEARS/Earthdata authentication"
+  },
+  "active_workflow": ".github/workflows/payoff-b-aikens-appeears-full-extraction.yml",
+  "postoutcome_builder": "scripts/build_payoff_b_v2_geb_postoutcome_package.py",
+  "postoutcome_si_renderer": "scripts/build_payoff_b_v2_geb_postoutcome_supporting_information.py",
+  "claim_boundary": [
+    "pipeline readiness is not an Aikens scientific result",
+    "synthetic outcome payloads are used only to verify all registered rendering branches",
+    "the real registered outcome remains unopened",
+    "NOT_ESTIMABLE is a resolved scientific gate without an opened lambda estimate",
+    "final journal upload remains blocked by reviewer archive and author-controlled metadata after the registered result is frozen"
+  ]
+}
