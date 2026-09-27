@@ -17,7 +17,7 @@ def test_reviewer_archive_is_ready_but_delivery_remains_external():
     assert "CURRENT_V2_REVIEWER_ARCHIVE = READY_PREOUTCOME" in status
     assert "CURRENT_V2_REVIEWER_ARCHIVE_ARTIFACT = 10930372460" in status
     assert "CURRENT_V2_REVIEWER_ARCHIVE_IDENTITY_SCAN = PASS" in status
-    assert "delivery, not construction" in readiness
+    assert "remaining reviewer-archive task is therefore **delivery**, not construction" in readiness
 
     archive = state["reviewer_archive"]
     assert archive["status"] == "READY_PREOUTCOME"
