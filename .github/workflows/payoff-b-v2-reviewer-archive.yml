@@ -1,1 +1,52 @@
-name: PAYOFF-B V2 anonymous reviewer archive\n\non:\n  push:\n    branches:\n      - feature/payoff-b-v2-reviewer-archive-20260927\n    paths:\n      - "scripts/build_payoff_b_v2_reviewer_archive.py"\n      - "scripts/build_payoff_b_v2_geb_*"\n      - "scripts/render_information_deadlines_figures.py"\n      - "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"\n      - "data/payoff_b_*"\n      - "analysis/movement_phenology/payoff_b_predictive_connectivity_amaral*.R"\n      - "tests/test_payoff_b_v2_reviewer_archive.py"\n      - ".github/workflows/payoff-b-v2-reviewer-archive.yml"\n  pull_request:\n    paths:\n      - "scripts/build_payoff_b_v2_reviewer_archive.py"\n      - "scripts/build_payoff_b_v2_geb_*"\n      - "scripts/render_information_deadlines_figures.py"\n      - "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"\n      - "data/payoff_b_*"\n      - "analysis/movement_phenology/payoff_b_predictive_connectivity_amaral*.R"\n      - "tests/test_payoff_b_v2_reviewer_archive.py"\n      - ".github/workflows/payoff-b-v2-reviewer-archive.yml"\n\njobs:\n  archive:\n    runs-on: ubuntu-latest\n    timeout-minutes: 15\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: "3.12"\n      - name: Run reviewer-archive tests\n        run: >\n          python -m pip install --disable-pip-version-check pytest\n          && pytest -q tests/test_payoff_b_v2_reviewer_archive.py\n      - name: Build PREOUTCOME anonymous reviewer archive\n        run: >\n          python scripts/build_payoff_b_v2_reviewer_archive.py\n          --output-dir outputs/payoff_b_v2_anonymous_review\n          --zip outputs/PAYOFF_B_V2_ANON_REVIEW.zip\n      - uses: actions/upload-artifact@v4\n        with:\n          name: payoff-b-v2-anonymous-review-archive\n          path: |\n            outputs/PAYOFF_B_V2_ANON_REVIEW.zip\n            outputs/PAYOFF_B_V2_ANON_REVIEW_ARCHIVE_RECEIPT.json\n            outputs/payoff_b_v2_anonymous_review/PAYOFF_B_V2_ANON_REVIEW_MANIFEST.json\n          if-no-files-found: error\n
+name: PAYOFF-B V2 anonymous reviewer archive
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-v2-reviewer-archive-20260927
+    paths:
+      - "scripts/build_payoff_b_v2_reviewer_archive.py"
+      - "scripts/build_payoff_b_v2_geb_*"
+      - "scripts/render_information_deadlines_figures.py"
+      - "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"
+      - "data/payoff_b_*"
+      - "analysis/movement_phenology/payoff_b_predictive_connectivity_amaral*.R"
+      - "tests/test_payoff_b_v2_reviewer_archive.py"
+      - ".github/workflows/payoff-b-v2-reviewer-archive.yml"
+  pull_request:
+    paths:
+      - "scripts/build_payoff_b_v2_reviewer_archive.py"
+      - "scripts/build_payoff_b_v2_geb_*"
+      - "scripts/render_information_deadlines_figures.py"
+      - "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"
+      - "data/payoff_b_*"
+      - "analysis/movement_phenology/payoff_b_predictive_connectivity_amaral*.R"
+      - "tests/test_payoff_b_v2_reviewer_archive.py"
+      - ".github/workflows/payoff-b-v2-reviewer-archive.yml"
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run reviewer-archive tests
+        run: >
+          python -m pip install --disable-pip-version-check pytest
+          && pytest -q tests/test_payoff_b_v2_reviewer_archive.py
+      - name: Build PREOUTCOME anonymous reviewer archive
+        run: >
+          python scripts/build_payoff_b_v2_reviewer_archive.py
+          --output-dir outputs/payoff_b_v2_anonymous_review
+          --zip outputs/PAYOFF_B_V2_ANON_REVIEW.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v2-anonymous-review-archive
+          path: |
+            outputs/PAYOFF_B_V2_ANON_REVIEW.zip
+            outputs/PAYOFF_B_V2_ANON_REVIEW_ARCHIVE_RECEIPT.json
+            outputs/payoff_b_v2_anonymous_review/PAYOFF_B_V2_ANON_REVIEW_MANIFEST.json
+          if-no-files-found: error
