@@ -23,6 +23,12 @@ from urllib.parse import quote, urljoin
 ROOT = Path(__file__).resolve().parents[1]
 DRYAD_API = "https://datadryad.org/api/v2"
 DRYAD_WEB = "https://datadryad.org"
+DRYAD_PUBLIC_MIRRORS = {
+    "10.5061/dryad.f1vhhmgx6": {
+        "provider": "zenodo",
+        "record_id": 5730499,
+    }
+}
 
 YEAR_HEADER_RE = re.compile(r"(?i)(^|[^a-z])(year|yr|jaar)([^a-z]|$)")
 FILENAME_RE = re.compile(r'filename\*?=(?:UTF-8\'\')?"?([^";]+)', re.I)
@@ -148,6 +154,51 @@ def _dryad_latest_files(session, doi: str, timeout: int):
     return latest, files
 
 
+def _zenodo_mirror_download(
+    session,
+    *,
+    record_id: int,
+    exact_name: str,
+    output_dir: Path,
+    timeout: int,
+) -> dict:
+    api_url = f"https://zenodo.org/api/records/{record_id}"
+    payload = _get_json(session, api_url, timeout)
+    files = payload.get("files", [])
+    matches = [row for row in files if row.get("key") == exact_name]
+    if len(matches) != 1:
+        raise RuntimeError(
+            f"Zenodo mirror {record_id} has {len(matches)} matches for "
+            f"{exact_name!r}; available={[row.get('key') for row in files]}"
+        )
+    meta = matches[0]
+    links = meta.get("links", {})
+    download_url = links.get("content") or links.get("self")
+    if not download_url:
+        raise RuntimeError(
+            f"Zenodo mirror {record_id} has no download URL for {exact_name!r}"
+        )
+    response = session.get(download_url, timeout=timeout, allow_redirects=True)
+    response.raise_for_status()
+    if not response.content:
+        raise RuntimeError(
+            f"Zenodo mirror {record_id} returned empty bytes for {exact_name!r}"
+        )
+    target = output_dir / exact_name
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(response.content)
+    return {
+        "provider": "zenodo",
+        "record_id": record_id,
+        "filename": exact_name,
+        "download_url_used": response.url,
+        "downloaded_size": target.stat().st_size,
+        "zenodo_checksum": meta.get("checksum"),
+        "sha256": sha256_path(target),
+        "path": str(target),
+    }
+
+
 def _dryad_download_file(
     session,
     doi: str,
@@ -195,14 +246,33 @@ def _dryad_download_file(
             errors.append(f"{url}: HTTP {trial.status_code}")
         except Exception as exc:
             errors.append(f"{url}: {type(exc).__name__}: {exc}")
+    mirror = None
     if response is None:
-        raise RuntimeError(
-            f"could not download Dryad file {exact_name!r}: {errors}"
-        )
+        mirror_spec = DRYAD_PUBLIC_MIRRORS.get(doi)
+        if mirror_spec and mirror_spec.get("provider") == "zenodo":
+            try:
+                mirror = _zenodo_mirror_download(
+                    session,
+                    record_id=int(mirror_spec["record_id"]),
+                    exact_name=exact_name,
+                    output_dir=output_dir,
+                    timeout=timeout,
+                )
+            except Exception as exc:
+                errors.append(
+                    "zenodo mirror "
+                    f"{mirror_spec.get('record_id')}: "
+                    f"{type(exc).__name__}: {exc}"
+                )
+        if mirror is None:
+            raise RuntimeError(
+                f"could not download Dryad file {exact_name!r}: {errors}"
+            )
 
     target = output_dir / exact_name
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_bytes(response.content)
+    if response is not None:
+        target.write_bytes(response.content)
     digest = sha256_path(target)
 
     declared_digest = meta.get("digest")
@@ -230,7 +300,24 @@ def _dryad_download_file(
         "declared_digest_type": meta.get("digestType"),
         "sha256": digest,
         "declared_digest_match": digest_match,
-        "download_url_used": response.url,
+        "download_url_used": (
+            response.url if response is not None else mirror["download_url_used"]
+        ),
+        "download_transport": (
+            "dryad"
+            if response is not None
+            else "zenodo_mirror_digest_verified"
+        ),
+        "mirror": (
+            None
+            if mirror is None
+            else {
+                "provider": mirror["provider"],
+                "record_id": mirror["record_id"],
+                "zenodo_checksum": mirror.get("zenodo_checksum"),
+                "sha256": mirror["sha256"],
+            }
+        ),
         "path": str(target),
     }
 
