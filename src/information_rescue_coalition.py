@@ -63,6 +63,28 @@ class CompleteGraphCoalitionThreshold:
     strict_minimum_size: int | None
 
 
+@dataclass(frozen=True)
+class PinnedRescue:
+    pinned_members: tuple[int, ...]
+    pinned_names: tuple[str, ...]
+    final_profile_while_pinned: tuple[tuple[int, int], ...]
+    reaches_fully_informed_while_pinned: bool
+    final_profile_after_release: tuple[tuple[int, int], ...]
+    persists_after_release: bool
+
+
+@dataclass(frozen=True)
+class CompleteGraphPinnedSeedThreshold:
+    n: int
+    prior_risk: float
+    information_cost: float
+    switch_probability: float
+    interaction_strength: float
+    outsider_gain_with_no_seed: float
+    weak_outsider_adoption_seed_size: int | None
+    strict_outsider_adoption_seed_size: int | None
+
+
 def _perfect_information_components(game: SharedCueGame):
     if abs(game.cue_accuracy - 1.0) > 1e-12:
         raise ValueError("coalition rescue diagnostic requires cue accuracy q=1")
@@ -331,4 +353,229 @@ def complete_graph_minimum_coalition_size(
         full_coalition_gain_per_actor=full_gain,
         weak_minimum_size=weak,
         strict_minimum_size=strict,
+    )
+
+
+
+def sequential_best_response_with_pinned_information(
+    game: SharedCueGame,
+    pinned_members: Iterable[int],
+    *,
+    max_cycles: int = 100,
+    tolerance: float = 1e-12,
+) -> tuple:
+    """Best-response dynamics while a temporary seed is fixed at FOLLOW_CUE.
+
+    All non-pinned actors begin in the common prior-optimal old convention.
+    Pinned actors are held at FOLLOW_CUE during the intervention.  Ties for
+    non-pinned actors preserve their current policy, matching the main
+    path-dependence rule.
+    """
+
+    n = len(game.players)
+    pinned = tuple(sorted(set(int(i) for i in pinned_members)))
+    if not pinned:
+        raise ValueError("at least one pinned member is required")
+    if any(i < 0 or i >= n for i in pinned):
+        raise IndexError("pinned member index out of range")
+
+    _, _, _, old_policy = _perfect_information_components(game)
+    pinned_set = set(pinned)
+    current = tuple(
+        FOLLOW_CUE if i in pinned_set else old_policy
+        for i in range(n)
+    )
+    path = [evaluate_shared_cue_profile(game, current)]
+
+    from src.bayesian_timing_coordination import POLICIES
+
+    for _ in range(max_cycles):
+        changed = False
+        working = list(current)
+        for i in range(n):
+            if i in pinned_set:
+                working[i] = FOLLOW_CUE
+                continue
+
+            current_eval = evaluate_shared_cue_profile(game, working)
+            current_payoff = current_eval.expected_payoffs[i]
+            candidates = []
+            for policy in POLICIES:
+                candidate = list(working)
+                candidate[i] = policy
+                for pinned_i in pinned_set:
+                    candidate[pinned_i] = FOLLOW_CUE
+                payoff = evaluate_shared_cue_profile(
+                    game,
+                    candidate,
+                ).expected_payoffs[i]
+                candidates.append((payoff, policy))
+
+            best = max(value for value, _ in candidates)
+            if current_payoff >= best - tolerance:
+                continue
+
+            best_policy = next(
+                policy
+                for value, policy in candidates
+                if abs(value - best) <= tolerance
+            )
+            working[i] = best_policy
+            current = tuple(working)
+            path.append(evaluate_shared_cue_profile(game, current))
+            changed = True
+
+        for pinned_i in pinned_set:
+            working[pinned_i] = FOLLOW_CUE
+        current = tuple(working)
+        if not changed:
+            return tuple(path)
+
+    raise RuntimeError("pinned shared-cue best response did not converge")
+
+
+def pinned_rescue(
+    game: SharedCueGame,
+    pinned_members: Iterable[int],
+    *,
+    tolerance: float = 1e-12,
+) -> PinnedRescue:
+    """Diagnose whether a temporary informed seed permanently rescues the network."""
+
+    pinned = tuple(sorted(set(int(i) for i in pinned_members)))
+    path = sequential_best_response_with_pinned_information(
+        game,
+        pinned,
+        tolerance=tolerance,
+    )
+    final_pinned = path[-1].profile
+    fully_informed = tuple(FOLLOW_CUE for _ in game.players)
+    reaches = final_pinned == fully_informed
+
+    release_path = sequential_shared_cue_best_response(
+        game,
+        final_pinned,
+        tolerance=tolerance,
+    )
+    final_release = release_path[-1].profile
+    persists = reaches and final_release == fully_informed
+
+    return PinnedRescue(
+        pinned_members=pinned,
+        pinned_names=tuple(game.players[i].name for i in pinned),
+        final_profile_while_pinned=final_pinned,
+        reaches_fully_informed_while_pinned=reaches,
+        final_profile_after_release=final_release,
+        persists_after_release=persists,
+    )
+
+
+def minimum_pinned_rescue_coalitions(
+    game: SharedCueGame,
+    *,
+    tolerance: float = 1e-12,
+) -> tuple[PinnedRescue, ...]:
+    """Return all smallest temporary seed sets causing persistent full recovery."""
+
+    n = len(game.players)
+    for size in range(1, n + 1):
+        rows = []
+        for members in combinations(range(n), size):
+            result = pinned_rescue(
+                game,
+                members,
+                tolerance=tolerance,
+            )
+            if result.persists_after_release:
+                rows.append(result)
+        if rows:
+            return tuple(rows)
+    return ()
+
+
+def complete_graph_pinned_seed_threshold(
+    *,
+    n: int,
+    prior_risk: float,
+    information_cost: float,
+    switch_probability: float,
+    interaction_strength: float,
+) -> CompleteGraphPinnedSeedThreshold:
+    """Exact temporary seed threshold for homogeneous complete networks.
+
+    If k actors are externally held informed and all other actors remain old,
+    the gain for one unpinned actor to adopt is
+
+        H(k) = R-D + pI(2k-N+1)/(N-1).
+
+    H(k) increases monotonically with k.  Once one outsider adopts, subsequent
+    outsiders face an even stronger incentive, so a strict positive H(k)
+    nucleates a full best-response cascade.
+
+    The weak threshold is included for algebraic reference; the main
+    path-preserving implementation requires the strict threshold because an
+    outsider at exact indifference remains old.
+    """
+
+    if n < 2:
+        raise ValueError("n must be at least 2")
+    r = float(prior_risk)
+    d = float(information_cost)
+    p = float(switch_probability)
+    interaction = float(interaction_strength)
+    for name, value in (
+        ("prior_risk", r),
+        ("information_cost", d),
+        ("switch_probability", p),
+        ("interaction_strength", interaction),
+    ):
+        if not isfinite(value) or value < 0.0:
+            raise ValueError(f"{name} must be non-negative and finite")
+    if not 0.0 < p <= 1.0:
+        raise ValueError("switch_probability must lie in (0,1]")
+
+    if interaction == 0.0:
+        no_seed_gain = r - d
+        if no_seed_gain > 0.0:
+            weak_seed = 0
+            strict_seed = 0
+        elif abs(no_seed_gain) <= 1e-12:
+            weak_seed = 0
+            strict_seed = None
+        else:
+            weak_seed = None
+            strict_seed = None
+    else:
+        scale = p * interaction
+        no_seed_gain = r - d - scale
+
+        # H(k) >= 0 iff
+        # k >= (N-1)/2 * [1 - (R-D)/(pI)].
+        threshold = (
+            (n - 1)
+            / 2.0
+            * (1.0 - (r - d) / scale)
+        )
+
+        weak_candidate = max(0, ceil(threshold - 1e-12))
+        strict_candidate = max(0, floor(threshold + 1e-12) + 1)
+
+        # Seeding all N actors trivially reaches the informed profile; outsider
+        # adoption is meaningful only for k <= N-1.
+        weak_seed = weak_candidate if weak_candidate <= n - 1 else None
+        strict_seed = (
+            strict_candidate
+            if strict_candidate <= n - 1
+            else None
+        )
+
+    return CompleteGraphPinnedSeedThreshold(
+        n=n,
+        prior_risk=r,
+        information_cost=d,
+        switch_probability=p,
+        interaction_strength=interaction,
+        outsider_gain_with_no_seed=no_seed_gain,
+        weak_outsider_adoption_seed_size=weak_seed,
+        strict_outsider_adoption_seed_size=strict_seed,
     )
