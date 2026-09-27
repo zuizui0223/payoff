@@ -1,0 +1,56 @@
+name: PAYOFF-B Hoge Veluwe source Gate A
+
+concurrency:
+  group: payoff-b-hv-source-gate-a-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-hv-source-gate-a-20260927
+    paths:
+      - "scripts/payoff_b_hoge_veluwe_source_gate.py"
+      - "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json"
+      - "tests/test_hoge_veluwe_source_gate.py"
+      - ".github/workflows/payoff-b-hoge-veluwe-source-gate-a.yml"
+  pull_request:
+    paths:
+      - "scripts/payoff_b_hoge_veluwe_source_gate.py"
+      - "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json"
+      - "tests/test_hoge_veluwe_source_gate.py"
+      - ".github/workflows/payoff-b-hoge-veluwe-source-gate-a.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source-gate-a:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source-audit dependencies
+        run: >
+          python -m pip install --disable-pip-version-check
+          pytest requests openpyxl
+      - name: Run network-free Gate-A unit tests
+        run: pytest -q tests/test_hoge_veluwe_source_gate.py
+      - name: Materialize and hash registered public sources
+        run: >
+          python scripts/payoff_b_hoge_veluwe_source_gate.py
+          --output-dir outputs/hoge_veluwe_source_gate_a
+      - name: Verify raw source bytes are not retained in artifact directory
+        shell: bash
+        run: |
+          test -f outputs/hoge_veluwe_source_gate_a/source_gate_a_receipt.json
+          test ! -d outputs/hoge_veluwe_source_gate_a/source_files
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-hoge-veluwe-source-gate-a
+          path: outputs/hoge_veluwe_source_gate_a/source_gate_a_receipt.json
+          if-no-files-found: error
