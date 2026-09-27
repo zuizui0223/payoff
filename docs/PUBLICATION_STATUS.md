@@ -103,95 +103,104 @@ EXTERNAL_ACTIONS = author metadata + funding/COI/contributions + AI disclosure a
 
 The paper should not carry the full PAYOFF hierarchy. In particular, do not make continuous architecture, general topology, generic spatial spectral theory, or rare-mutation occupancy co-equal storylines.
 
-## Paper 2: integrated tracking ecology — PREOUTCOME
+## Paper 2: information coordination in seasonal tracking — PREOUTCOME
 
 Canonical PREOUTCOME source:
 
-`manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`
+`manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md`
+
+Authoritative V1/V2 publication relation:
+
+`docs/PAYOFF_B_V1_V2_PUBLICATION_RELATION_20260927.md`
 
 Primary ecological conclusion:
 
-**Temporal buffering delays but does not permanently replace spatial tracking under sustained environmental change. Low current mismatch can therefore conceal latent spatial tracking demand.**
+**Information use is an ecological coordination state. Interacting organisms can
+begin using the same improving environmental information at different decision
+thresholds, so better information can transiently worsen phenological
+coordination; after coordinated information use collapses, even perfect
+environmental information need not restore the informed state.**
 
-Inference consequence:
-
-**Mismatch is an outcome, not a tracking architecture.**
-
-The integrated sequence is:
+Exact analytic spine:
 
 ```text
-simple seasonal-timescale benchmark
--> local movement/timing substitutability
--> finite temporal buffering
--> timing-capacity exhaustion and spatial re-entry
--> fragmentation / coordination constraints on reallocation
--> 55-species rejection of one universal natural speed optimum
--> direct phase-control decomposition in mule deer, barnacle goose and wigeon
--> preregistered within-taxon Aikens actuation-to-retention test
+T1  cue information has an action threshold
+-> T2  decision deadlines determine information uptake
+-> T3  heterogeneous deadlines create a finite desynchronization window
+-> T7  perfect information can support old and informed strict equilibria
+-> T8  temporary cue degradation can collapse information use without recovery
 ```
+
+T4–T6, T9 and the rescue/topology results remain important results and
+mechanistic extensions, but they do not share equal weight in the abstract.
+
+Natural evidence is deliberately modular:
+
+- **broad birds:** preregistered pooled association between stronger
+  pre-outcome predictive connectivity and smaller arrival–green-up mismatch;
+  dependence-aware uncertainty prevents a universal species-level claim;
+- **pied flycatcher experiment:** heterospecific phenology was unavailable to
+  an earlier settlement decision but affected later settlement;
+- **wigeon:** the registered predictive-connectivity × incoming-phase
+  interaction is NOT_SUPPORTED, separating pre-commitment information from
+  post-error correction;
+- **long-term flycatcher cue–driver lane:** NO_CUE_DRIVER_REVERSAL under the
+  preregistered gate; no natural information-recovery hysteresis is claimed.
+
+The earlier temporal-buffering conclusion remains valid as the **capacity
+layer**, not the primary novelty claim.
 
 Current state:
 
 ```text
 ACTIVE_PUBLICATION_QUEUE = true
 ROLE = INTEGRATED_BROAD_ECOLOGY_PAPER
+CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md
+V1_STATUS = FROZEN_PROVENANCE_ONLY
 FIRST_SHOT = Global Ecology and Biogeography / Research Article
-SCIENTIFIC_STATE = PREOUTCOME_INTERNAL_READY
+SCIENTIFIC_STATE = PREOUTCOME
 OPEN_SCIENCE_GATE = registered Aikens lambda outcome
-POSTOUTCOME_GEB_PIPELINE = READY
 RETUNING_AFTER_AIKENS = forbidden
 ```
 
-The existing frozen sources remain intact as provenance and rollback sources:
+### V1/V2 rule
 
-- `manuscript/PAYOFF_B_TRACKING_THEORY_V1.md`;
-- `manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md`.
+`manuscript/PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md` is frozen as
+the temporal-buffering generation and rollback source. It is not submitted
+separately while V2 is active.
 
-Those two sources are retained as provenance / rollback sources and are not
-submitted as separate overlapping papers while the integrated architecture is
-active. The frozen Oikos package remains a rollback artifact.
+The earlier source manuscripts and frozen Oikos/GEB artifacts remain
+provenance sources only.
 
-The integrated PREOUTCOME package has passed:
+### Submission-package rule
 
-- full repository CI;
-- six-figure deterministic rendering;
-- broad-bird machine-provenance checks;
-- reference completeness;
-- anonymous-text scan;
-- six-main-figure contract;
-- universal-lambda claim ceiling;
-- Aikens outcome-blind marker checks.
+Previous Paper 2 submission packages and audits built from V1 are retained for
+provenance but are **not current journal-facing packages after the V2
+promotion**.
 
-Current audited metrics after the temporal-buffering reframe are: abstract 198 words, main text 3,699 words,
-21 references with zero uncited entries, 8 keywords, and 6 main figures.
+Therefore the prior GEB PREOUTCOME package, its word/figure counts, anonymous
+scan receipt and the old post-Aikens rendering route must be rebuilt or
+revalidated against V2 before upload.
 
-The journal-neutral PREOUTCOME working package also passes deterministic build
-and inspection after the reframe: workflow run `36118090547`, artifact
-`10856440257`, artifact SHA256
-`f9d7004081bc236bcdd86521c8bc07b46458366b2fd1edb0b88ce73451069e9d`.
-Its hash-stable inner 31-file / 6-figure ZIP has SHA256
-`b5628da1383960bdbbb637960d78d4f9c71588269f0ddee3111be37bba3fffc8`
-and zero identity leaks in the anonymous main text.
+```text
+CURRENT_V2_JOURNAL_PACKAGE = REBUILD_REQUIRED
+OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
+```
 
-The GEB first-shot overlay is also machine-ready in PREOUTCOME state after the
-reframe: structured abstract 241 words, GEB main body 3,967 words, 21
-references, 6 display pieces, 8 alphabetized keywords and zero identity leaks. Its deterministic package is
-recorded in
-`submission/GEB_INTEGRATED_PREOUTCOME_PACKAGE_AUDIT_20260925.md`.
+### Aikens gate
 
-The post-Aikens GEB completion route is implemented and CI-tested for PASS,
-wrong-direction, insufficient-support and NOT_ESTIMABLE result classes. That
-pipeline readiness is recorded in
-`submission/GEB_INTEGRATED_POSTOUTCOME_PIPELINE_READINESS_20260925.md`.
+The preregistered Aikens fixed-24 h lambda outcome remains unopened.
 
-A credential-only preflight on 2026-09-25 reconfirmed that the AppEEARS /
-Earthdata route is still not configured (run `36113621057`, artifact
-`10853764396`); it performed no network submission, opened no environmental
-values, and left the lambda outcome unopened.
+The V2 manuscript must remain coherent under PASS, wrong-direction,
+insufficient-support and NOT_ESTIMABLE outcomes. Its information-deadline and
+coordination conclusions do not depend on the Aikens sign.
 
-The only remaining scientific blocker before outcome-rendered submission
-preparation is therefore still the registered Aikens fixed-24 h lambda
-adjudication, whose execution is waiting only on authentication.
+The remaining pre-submission tasks are therefore:
+
+1. execute and freeze the registered Aikens outcome when authentication permits;
+2. rebuild the journal-facing Paper 2 package from V2;
+3. rerun anonymity, reference, word-count, display-piece and claim-ceiling
+   audits on that V2-derived package.
 
 
 ## DOI modules / dormant branches
