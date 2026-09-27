@@ -108,7 +108,7 @@ def test_gate_c_uses_overlap_support_and_hac7_when_licensed():
     assert result["n"] >= 12
     assert result["branch_counts"]["decline"] >= 6
     assert result["branch_counts"]["recovery"] >= 6
-    assert result["covariance"]["primary"] == "HAC(7) finite-sample corrected"
+    assert result["covariance"]["primary"] == "calendar-distance HAC(7) finite-sample corrected"\n    assert result["covariance"]["lag_unit"] == "calendar_year"
     assert result["time_trend_guard"]["required"] is True
     assert math.isfinite(result["year_center"])
     primary = result["branch_at_mean_overlap"]["primary_hac7_year_adjusted"]
@@ -189,4 +189,48 @@ def test_gate_c_rejects_duplicate_calendar_years():
             break_year=2001,
             reversal_status="INFORMATION_REVERSAL",
         )
+
+def test_gate_c_calendar_hac_handles_gapped_overlap_support():
+    pytest.importorskip("pandas")
+    pytest.importorskip("statsmodels")
+
+    records = []
+    # Intentionally omit years within both branches. The covariance lag must
+    # remain calendar-year based rather than treating adjacent retained rows as
+    # adjacent years.
+    decline_years = [1992, 1993, 1995, 1997, 1999, 2001, 2003]
+    recovery_years = [2004, 2006, 2008, 2010, 2012, 2014, 2015]
+    for branch_index, years in enumerate((decline_years, recovery_years)):
+        for i, year in enumerate(years):
+            connectivity = 0.25 + 0.04 * (i % 6)
+            mismatch = (
+                3.0
+                - 1.0 * connectivity
+                + 1.5 * branch_index
+                + ((i % 3) - 1) * 0.04
+            )
+            records.append(
+                {
+                    "year": year,
+                    "connectivity": connectivity,
+                    "mismatch": mismatch,
+                }
+            )
+
+    result = fit_history_hac(
+        list(reversed(records)),
+        break_year=2004,
+        reversal_status="INFORMATION_REVERSAL",
+    )
+
+    assert result["status"] == "COMPLETE"
+    assert result["covariance"]["lag_unit"] == "calendar_year"
+    assert result["covariance"]["primary"].startswith(
+        "calendar-distance HAC(7)"
+    )
+    assert math.isfinite(
+        result["branch_at_mean_overlap"][
+            "primary_hac7_year_adjusted"
+        ]["se"]
+    )
 
