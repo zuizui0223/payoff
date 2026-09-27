@@ -94,3 +94,16 @@ def test_contract_keeps_gate_a_separate_from_outcome_opening():
     assert contract["status"] == "PREOUTCOME_ASSEMBLY_REGISTERED_SOURCE_FILES_UNOPENED"
     assert contract["information_reversal_gate"]["data_used"] == "cue-resource predictive-connectivity series only"
     assert "focal and partner timing are not opened" in contract["information_reversal_gate"]["rule"]
+
+def test_dryad_transport_fallback_is_digest_guarded_and_outcome_blind():
+    contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
+    resident = contract["sources"]["resident_partner_timing"]["source_transport"]
+    mirror = resident["digest_verified_public_mirror"]
+
+    assert mirror["provider"] == "Zenodo"
+    assert mirror["record_id"] == 5730499
+    assert "computed SHA-256 equals the Dryad-declared SHA-256" in mirror["use_rule"]
+    amendment = contract["source_gate"]["transport_amendment"]
+    assert amendment["scientific_effect"] == "none; Dryad DOI, exact filenames and Dryad-declared SHA-256 remain authoritative"
+    assert amendment["outcome_data_inspected"] is False
+
