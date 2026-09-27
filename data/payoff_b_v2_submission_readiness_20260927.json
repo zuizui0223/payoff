@@ -1,0 +1,86 @@
+{
+  "result_id": "payoff_b_v2_submission_readiness_20260927",
+  "frozen_date": "2026-09-27",
+  "canonical_main_commit": "28f9f5750c0be4531bf0dd464dc7154e3edb9c9e",
+  "paper2_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
+  "v1_status": "FROZEN_PROVENANCE_ONLY",
+  "journal_route": {
+    "first_shot": "Global Ecology and Biogeography",
+    "article_type": "Research Article"
+  },
+  "preoutcome_package": {
+    "status": "READY",
+    "frozen_workflow_run": 36309072630,
+    "frozen_artifact_id": 10927484417,
+    "frozen_artifact_sha256": "7b1033684a17e8018ce12e8d9d1809583bffbf98eb9431c3aa9075e573e857f5",
+    "deterministic_inner_zip_sha256": "d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b",
+    "latest_reproduction_workflow_run": 36312188417,
+    "latest_reproduction_artifact_id": 10928838334,
+    "latest_reproduction_artifact_sha256": "8d1ad5bec217300542c2f3b6dbaaa0489f7fabfa847ab0c73a0b725a731c4391",
+    "latest_reproduction_inner_zip_sha256": "d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b",
+    "deterministic_reproduction_pass": true,
+    "metrics": {
+      "structured_abstract_words": 243,
+      "main_body_words": 4148,
+      "references": 13,
+      "display_pieces": 7,
+      "keywords": 8,
+      "running_title_chars": 38,
+      "identity_leaks": 0,
+      "internal_token_hits": 0
+    }
+  },
+  "postoutcome_pipeline": {
+    "status": "READY_UNOPENED",
+    "merged_pr": 178,
+    "merge_commit": "28f9f5750c0be4531bf0dd464dc7154e3edb9c9e",
+    "supported_result_classes": [
+      "PASS",
+      "FAIL_WRONG_DIRECTION",
+      "FAIL_INSUFFICIENT_SUPPORT",
+      "NOT_ESTIMABLE"
+    ],
+    "result_location": "Supporting Information only",
+    "main_text_retuning": false,
+    "main_figures_retuning": false,
+    "main_figure_count": 7,
+    "package_ci_run": 36312188417,
+    "package_ci_conclusion": "success",
+    "environment_ci_run": 36312188377,
+    "environment_ci_conclusion": "success",
+    "full_ci_run": 36312188416,
+    "full_ci_conclusion": "success"
+  },
+  "real_aikens_execution": {
+    "scientific_contract": "FROZEN",
+    "outcome_state": "UNOPENED",
+    "last_verified_credential_preflight": {
+      "date": "2026-09-25",
+      "workflow_run": 36113621057,
+      "artifact_id": 10853764396,
+      "status": "NOT_CONFIGURED",
+      "configured": false,
+      "credential_route": "none"
+    },
+    "current_secret_state": "NOT_READABLE_FROM_REPOSITORY_AUDIT_RECHECK_REQUIRED",
+    "permitted_next_action": "rerun credential preflight; if configured, execute the existing frozen full-extraction workflow",
+    "scientific_retuning_permitted": false
+  },
+  "portal_readiness": {
+    "final_submission_eligible": false,
+    "blockers": [
+      "registered Aikens phase-retention result remains unopened",
+      "anonymous stable reviewer archive link",
+      "author-controlled title-page metadata and declarations",
+      "final human review of outcome-rendered package"
+    ]
+  },
+  "claim_ceiling": {
+    "natural_network_hysteresis_observed": false,
+    "theoretical_recovery_failure": true,
+    "theoretical_rescue_leverage": true,
+    "broad_bird_evidence": "pooled directional support with dependence-sensitive uncertainty",
+    "wigeon_predictive_connectivity_controller": "NOT_SUPPORTED",
+    "long_term_cue_driver_reversal": "NO_CUE_DRIVER_REVERSAL"
+  }
+}
