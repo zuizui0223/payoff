@@ -7,20 +7,20 @@
   "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "v1_status": "FROZEN_PROVENANCE_ONLY",
   "workflow": {
-    "run_id": 36309072630,
-    "head_sha": "1893ec08115d68bb1f51db1834b944c3fb7305a5",
+    "run_id": 36313076476,
+    "head_sha": "3524f28d00299c5fc5990c8b64154c9057954e2d",
     "conclusion": "success",
-    "artifact_id": 10927484417,
+    "artifact_id": 10930130067,
     "artifact_name": "payoff-b-v2-geb-preoutcome-package",
-    "artifact_sha256": "7b1033684a17e8018ce12e8d9d1809583bffbf98eb9431c3aa9075e573e857f5"
+    "artifact_sha256": "c47efff79a125945361d4a7f576141d70df6cbd30512556337be1c3f62c693c6"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip",
-    "sha256": "d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b"
+    "sha256": "cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd"
   },
   "audited_metrics": {
-    "structured_abstract_words": 243,
-    "main_body_words": 4148,
+    "structured_abstract_words": 246,
+    "main_body_words": 4167,
     "references": 13,
     "display_pieces": 7,
     "keywords": 8,
@@ -66,7 +66,8 @@
     "package generation does not retune scientific claims",
     "V1 remains provenance only",
     "the unopened registered result is excluded from blinded main text and figures",
-    "natural network hysteresis is not claimed"
+    "natural network hysteresis is not claimed",
+    "natural singleton rescue species is not identified"
   ],
   "package_file_count": 16
 }
