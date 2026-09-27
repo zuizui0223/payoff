@@ -151,8 +151,12 @@ AICc counts 2 parameters for the single line and **5** for the segmented
 candidate: two intercepts, two slopes and the selected breakpoint. If candidate
 segmented AICc values tie within 1e-12, the earlier break year is chosen.
 Because adjacent connectivity years share most of their trailing 8-year
-history, leave-one-history-year-out breakpoint/slope-sign stability is reported
-as a robustness diagnostic rather than treated as independent replication.
+history, the full-sample reversal must also pass a predeclared
+leave-one-history-year-out stability gate: at least 80% of leave-one-year-out
+fits must retain the negative/positive slope signs, and at least 80% must place
+the breakpoint within ±2 years of the full-fit breakpoint. Failure is
+`UNSTABLE_CUE_RESOURCE_REVERSAL` and Gate C remains closed. All leave-one-year
+diagnostics are reported.
 
 The breakpoint is selected from the **cue–resource connectivity series only**.
 Flycatcher and great-tit timing cannot define it.
@@ -184,11 +188,12 @@ resident_migrant_mismatch
 
 Predictive connectivity is centered at the mean of the connectivity range
 represented on both branches. Primary support requires the **Newey–West HAC,
-lag 2, finite-sample-corrected 95% CI** for the branch coefficient to exclude
-zero at that point. HC3 is reported as a sensitivity only. This tests whether
-coordination differs at comparable information quality depending on the path
-by which that information state was reached while accounting for annual serial
-dependence.
+lag 7 (= 8-year window − 1), finite-sample-corrected 95% CI** for the branch
+coefficient to exclude zero at that point. HAC(2) and HC3 are reported as
+sensitivities only. This tests whether coordination differs at comparable
+information quality depending on the path by which that information state was
+reached while accounting for the seven shared calendar years between adjacent
+8-year connectivity estimates.
 
 ## Claim ceiling
 
