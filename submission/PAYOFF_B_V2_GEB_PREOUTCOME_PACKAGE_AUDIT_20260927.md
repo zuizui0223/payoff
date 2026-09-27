@@ -61,27 +61,28 @@ The deterministic package contains:
 - V2 cover-letter template;
 - V2 data/code statement;
 - V2 portal handoff;
-- V1/V2 publication relation;
 - seven deterministic SVG figures;
 - figure manifest.
+
+Internal V1/V2 provenance documents are deliberately excluded from the journal-facing ZIP so package hashes do not depend on publication-state bookkeeping.
 
 Figure panels in the V2 renderer use lower-case journal-style panel labels.
 
 ## Frozen build provenance
 
 ```text
-workflow_run = 36308706101
-validated_head = 17c1f0b1b814661a337695f9205ae82aca7b5b96
+workflow_run = 36309072630
+validated_head = 1893ec08115d68bb1f51db1834b944c3fb7305a5
 workflow_conclusion = success
 
-artifact_id = 10927314277
+artifact_id = 10927484417
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-331f213ae75605179a3bc07b6c779ec16d88f0dc0e85757aed5b7cb6cb546286
+7b1033684a17e8018ce12e8d9d1809583bffbf98eb9431c3aa9075e573e857f5
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-069ea50e18d9d54c08e6aceab1daf8d2cda561954cca9c2a58080ca916bb693f
+d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b
 ```
 
 ## Scientific boundary
