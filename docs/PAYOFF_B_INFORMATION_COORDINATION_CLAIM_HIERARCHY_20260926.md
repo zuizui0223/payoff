@@ -108,6 +108,42 @@ So improving information can transiently worsen interactor coordination because
 information uptake is asynchronous, and sufficiently hard deadlines can prevent
 re-synchronization altogether.
 
+### 2c. Perfect-information accessibility barrier
+
+Information can be available and still remain unused.
+
+In the shared-cue deadline game, let player i have prior mismatch risk R_i,
+information/waiting cost D_i, interaction strength I_i, and let p be the
+probability of the state in which cue use changes its action.
+
+At q=1 the obsolete uninformed profile is a Nash equilibrium when
+
+    D_i + p I_i >= R_i
+
+for every player.
+
+The fully informed profile is also a Nash equilibrium when
+
+    D_i <= R_i + p I_i.
+
+Both are strict whenever
+
+    |D_i - R_i| < p I_i.
+
+Yet the fully informed profile has higher joint payoff whenever
+
+    sum D_i < sum R_i.
+
+Thus perfect information and a better coordinated solution do not guarantee
+that the network can reach that solution by unilateral change.
+
+In the canonical three-player witness, both profiles are strict at q=1, the
+informed joint payoff is -0.45 versus -0.60 for the obsolete profile, and every
+player has a negative unilateral gain from becoming the first information user.
+
+A decline in cue quality collapses the informed convention at q=0.79 on the
+0.01 grid. Restoring q to 1 does not restore information use.
+
 ### 3. Coordination-memory barrier
 
 When partners are strategic, a temporary migrant information shock can change
@@ -291,12 +327,12 @@ They become layers in the argument:
 
 ## Recommended main conclusion
 
-> **Climate adaptation can fail even when an adequate response and useful
-> information both exist, because the information may become available only
-> after the costly seasonal decision that needs it. Unequal decision deadlines
-> create unequal information among interacting species; a transient information
-> shock can then redirect the interaction network, and local ecological coupling
-> can retain that history after information recovers.**
+> **Climate adaptation can fail even when an adequate response exists and the
+> relevant environmental information is eventually perfect. Unequal decision
+> deadlines can make information uptake asynchronous; interaction can make it
+> costly to be the first species to use that information; and a temporary loss
+> of cue reliability can therefore lock the network into an obsolete timing
+> regime that persists after information fully recovers.**
 
 Empirical qualifier:
 
@@ -329,7 +365,13 @@ PAYOFF-B may currently claim:
   mismatch because actors cross waiting thresholds at different cue qualities;
 - a persistent-asymmetric-uptake regime in which one actor's waiting cost
   exceeds the maximum value of perfect information, so cue improvement cannot
-  restore coordination even at q=1.
+  restore coordination even at q=1;
+- an exact perfect-information coordination trap in which obsolete and informed
+  timing profiles are both strict equilibria at q=1, the informed profile has
+  higher joint payoff, and no actor benefits from adopting information first;
+- a shared-cue degradation/recovery path in which coordinated information use
+  collapses at q=0.79 on the declared grid and does not recover after q returns
+  to 1.
 
 PAYOFF-B may not currently claim:
 
