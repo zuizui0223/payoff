@@ -48,9 +48,9 @@ Figure 1:
 three-barrier framework: cannot do / cannot know / cannot get there.
 
 Figure 2:
-act-now versus wait-for-information theory: actionable-information threshold,
-private versus joint value of waiting, the non-monotone desynchronization
-window, and flycatcher--tit experimental anchor.
+the information-deadline theorem: exact actionable-cue threshold, actor-specific
+wait thresholds, the identity Delta q=(D2-D1)/(A+L), persistent asymmetry under
+hard deadlines, and the flycatcher--tit experimental anchor.
 
 Figure 3:
 exact partial-information coordination wedge and strict Bayesian timing phase
@@ -241,3 +241,47 @@ The main empirical/theoretical chain should therefore be presented as:
         topology can store a transient desynchronization as ecological memory.
 
 The natural network-hysteresis prediction remains deliberately prospective.
+
+
+## Exact theorem upgrade
+
+The information-induced mismatch is no longer only a numerical phase-diagram
+result.
+
+For the declared binary seasonal decision, define the prior expected costs of
+committing early and late as
+
+    A=(1-pi) C_F
+    L=pi C_M.
+
+An actor with waiting cost D begins using a future cue only above
+
+    q_wait(D)
+    = [max(A,L)+D]/(A+L),
+
+provided D < min(A,L).
+
+Thus two interacting actors with unequal deadlines have an exact
+desynchronization width
+
+    Delta q
+    = |D2-D1|/(A+L)
+
+when both eventually wait.
+
+This makes the primary comparative prediction unusually simple:
+
+> **The ecological range over which better information worsens coordination is
+> proportional to heterogeneity in the opportunity cost of waiting.**
+
+There is also a stronger regime. If one actor has
+
+    D >= min(A,L),
+
+even perfect information is not valuable enough to justify delaying its
+decision. Cue reliability can reach q=1 without restoring shared information
+use.
+
+This should become the analytic centerpiece of Figure 2. The earlier numerical
+q=0.82--0.93 window is retained as one transparent witness of the theorem, not
+as the result itself.
