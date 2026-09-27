@@ -37,6 +37,7 @@ def test_registered_reversal_gate_detects_stable_decline_recovery():
     assert result["segmented"]["k"] == 5
     assert result["linear"]["k"] == 2
     assert result["stability"]["slope_signs_preserved_fraction"] >= 0.80
+    assert result["stability"]["recovery_threshold_preserved_fraction"] >= 0.80
     assert result["stability"]["breakpoint_within_tolerance_fraction"] >= 0.80
 
 
