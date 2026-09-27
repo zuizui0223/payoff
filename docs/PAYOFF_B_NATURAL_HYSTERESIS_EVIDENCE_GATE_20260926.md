@@ -97,9 +97,16 @@ Africa-to-Netherlands environmental predictability precedes a change in the
 arrival-to-breeding interval, and whether the timing state follows the same
 path when predictability returns.
 
-The archived focal dataset lacks an interacting partner timing series, so even
-a positive result would be **within-species information-timing history**, not
-the full network-memory claim.
+The archived focal Tomotani dataset itself lacks an interacting partner timing
+series. However, an independent public Dryad archive now supplies same-site
+Hoge Veluwe great-tit first-clutch phenology and caterpillar peak dates. This
+removes the partner/resource variables as an intrinsic data-availability
+blocker, but creates a stricter cross-source assembly requirement.
+
+A prospective joined analysis is now frozen in
+`data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json`.
+It remains **PREOUTCOME** until the source files are materialized, hash-frozen,
+and pass exact site/year/schema gates.
 
 ## Consequence for the paper
 
@@ -128,12 +135,16 @@ Each empirical system identifies a different edge of the causal chain.
 
 ## Next execution target
 
-The next data-analysis target should be the 1980–2015 Tomotani archive, but only
-for the narrower within-species question:
+The next data-analysis target is now the preregistered cross-source Hoge Veluwe
+assembly, not a retuned version of the failed CV24C lane.
 
-> Did Africa-to-Netherlands predictive connectivity change through time, and
-> does the arrival-to-breeding interval show path dependence relative to that
-> information coordinate?
+The frozen sequence is:
 
-Promotion to the full network-hysteresis claim would still require matched
-resident/resource phenology for the same population and years.
+    materialize + hash sources
+    -> certify 1985–2013 overlap (1991 excluded)
+    -> test fixed African-cue / caterpillar-resource reversal
+    -> only if that gate passes, open resident–migrant history test
+
+The resident/resource series are independently sourced from the same Hoge
+Veluwe system; they must not be inspected jointly with the migrant timing
+outcome before the assembly contract is frozen.
