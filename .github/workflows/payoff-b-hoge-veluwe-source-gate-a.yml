@@ -11,12 +11,14 @@ on:
       - analysis/payoff-b-hv-source-gate-a-20260927
     paths:
       - "scripts/payoff_b_hoge_veluwe_source_gate.py"
+      - "scripts/payoff_b_hoge_veluwe_cue_extension.py"
       - "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json"
       - "tests/test_hoge_veluwe_source_gate.py"
       - ".github/workflows/payoff-b-hoge-veluwe-source-gate-a.yml"
   pull_request:
     paths:
       - "scripts/payoff_b_hoge_veluwe_source_gate.py"
+      - "scripts/payoff_b_hoge_veluwe_cue_extension.py"
       - "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json"
       - "tests/test_hoge_veluwe_source_gate.py"
       - ".github/workflows/payoff-b-hoge-veluwe-source-gate-a.yml"
@@ -36,21 +38,31 @@ jobs:
       - name: Install source-audit dependencies
         run: >
           python -m pip install --disable-pip-version-check
-          pytest requests openpyxl
+          pytest requests openpyxl pandas numpy xarray netCDF4
       - name: Run network-free Gate-A unit tests
         run: pytest -q tests/test_hoge_veluwe_source_gate.py
-      - name: Materialize and hash registered public sources
+      - name: Extend frozen Ivory Coast cue source-faithfully through 2015
+        run: >
+          python scripts/payoff_b_hoge_veluwe_cue_extension.py
+          --annual-output outputs/hoge_veluwe_source_gate_a/ivory_coast_cue_1980_2015.csv
+          --receipt-output outputs/hoge_veluwe_source_gate_a/cue_extension_receipt.json
+      - name: Materialize and hash registered public biological sources
         run: >
           python scripts/payoff_b_hoge_veluwe_source_gate.py
           --output-dir outputs/hoge_veluwe_source_gate_a
-      - name: Verify raw source bytes are not retained in artifact directory
+      - name: Verify raw biological source bytes are not retained
+        if: always()
         shell: bash
         run: |
           test -f outputs/hoge_veluwe_source_gate_a/source_gate_a_receipt.json
+          test -f outputs/hoge_veluwe_source_gate_a/cue_extension_receipt.json
           test ! -d outputs/hoge_veluwe_source_gate_a/source_files
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: payoff-b-hoge-veluwe-source-gate-a
-          path: outputs/hoge_veluwe_source_gate_a/source_gate_a_receipt.json
+          path: |
+            outputs/hoge_veluwe_source_gate_a/source_gate_a_receipt.json
+            outputs/hoge_veluwe_source_gate_a/cue_extension_receipt.json
+            outputs/hoge_veluwe_source_gate_a/ivory_coast_cue_1980_2015.csv
           if-no-files-found: error
