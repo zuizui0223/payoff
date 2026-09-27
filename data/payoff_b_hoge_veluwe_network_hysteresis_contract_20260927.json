@@ -39,7 +39,15 @@
         2020
       ],
       "primary_variable": "annual unweighted mean laying date of included first great-tit clutches",
-      "role": "resident interactor phenology"
+      "role": "resident interactor phenology",
+      "source_transport": {
+        "primary": "Dryad DOI/API metadata + Dryad public bytes if accessible",
+        "digest_verified_public_mirror": {
+          "provider": "Zenodo",
+          "record_id": 5730499,
+          "use_rule": "fallback transport only if exact filename is present and computed SHA-256 equals the Dryad-declared SHA-256"
+        }
+      }
     },
     "destination_resource_state": {
       "dataset_doi": "10.5061/dryad.f1vhhmgx6",
@@ -52,7 +60,15 @@
         1991
       ],
       "primary_variable": "annual observed peak date of caterpillar biomass",
-      "role": "later breeding-ground resource state"
+      "role": "later breeding-ground resource state",
+      "source_transport": {
+        "primary": "Dryad DOI/API metadata + Dryad public bytes if accessible",
+        "digest_verified_public_mirror": {
+          "provider": "Zenodo",
+          "record_id": 5730499,
+          "use_rule": "fallback transport only if exact filename is present and computed SHA-256 equals the Dryad-declared SHA-256"
+        }
+      }
     },
     "precommitment_cue": {
       "source": "NCEP/NCAR or source-faithful equivalent used by the already frozen CV24C cue reconstruction",
@@ -77,7 +93,13 @@
     "require_expected_primary_history_span": [
       1992,
       2015
-    ]
+    ],
+    "transport_amendment": {
+      "date": "2026-09-27",
+      "reason": "Dryad API file download returned HTTP 401 and current public file-stream routes returned HTTP 403 in GitHub Actions",
+      "scientific_effect": "none; Dryad DOI, exact filenames and Dryad-declared SHA-256 remain authoritative",
+      "outcome_data_inspected": false
+    }
   },
   "coordinates": {
     "cue_resource_predictive_connectivity": {
