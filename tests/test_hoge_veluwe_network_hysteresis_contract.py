@@ -53,6 +53,8 @@ def test_declared_public_sources_are_specific():
     c = load_contract()
     sources = c["sources"]
     assert sources["migrant_timing"]["paper_doi"] == "10.1111/gcb.14006"
+    assert "annual arithmetic mean" in sources["migrant_timing"]["primary_variable"]
+    assert "unweighted arithmetic mean within calendar year" in sources["migrant_timing"]["aggregation_rule"]
     assert sources["resident_partner_timing"]["dataset_doi"] == "10.5061/dryad.f1vhhmgx6"
     assert sources["destination_resource_state"]["dataset_doi"] == "10.5061/dryad.f1vhhmgx6"
     assert sources["resident_partner_timing"]["file"].endswith(".xlsx")
