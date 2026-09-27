@@ -255,6 +255,7 @@ def evaluate_information_reversal(
 
     diagnostics = []
     sign_ok = 0
+    recovery_ok = 0
     break_ok = 0
     for omitted_index, omitted_year in enumerate(years):
         y_loo = [
@@ -281,8 +282,14 @@ def evaluate_information_reversal(
                 abs(best_loo.break_year - best.break_year)
                 <= breakpoint_tolerance_years
             )
+            recovery_preserved = (
+                math.isfinite(best_loo.recovery_fraction)
+                and best_loo.recovery_fraction >= min_recovery_fraction
+            )
             if signs:
                 sign_ok += 1
+            if recovery_preserved:
+                recovery_ok += 1
             if close:
                 break_ok += 1
             diagnostics.append(
@@ -294,6 +301,7 @@ def evaluate_information_reversal(
                     "right_slope": best_loo.right.slope,
                     "recovery_fraction": best_loo.recovery_fraction,
                     "slope_signs_preserved": signs,
+                    "recovery_threshold_preserved": recovery_preserved,
                     "breakpoint_within_tolerance": close,
                 }
             )
@@ -304,15 +312,18 @@ def evaluate_information_reversal(
                     "estimable": False,
                     "reason": str(exc),
                     "slope_signs_preserved": False,
+                    "recovery_threshold_preserved": False,
                     "breakpoint_within_tolerance": False,
                 }
             )
 
     denominator = len(years)
     sign_fraction = sign_ok / denominator
+    recovery_fraction_stable = recovery_ok / denominator
     break_fraction = break_ok / denominator
     stability_pass = (
         sign_fraction >= stability_fraction
+        and recovery_fraction_stable >= stability_fraction
         and break_fraction >= stability_fraction
     )
     result["stability"] = {
@@ -320,6 +331,8 @@ def evaluate_information_reversal(
         "denominator": denominator,
         "slope_signs_preserved_n": sign_ok,
         "slope_signs_preserved_fraction": sign_fraction,
+        "recovery_threshold_preserved_n": recovery_ok,
+        "recovery_threshold_preserved_fraction": recovery_fraction_stable,
         "breakpoint_within_tolerance_n": break_ok,
         "breakpoint_within_tolerance_fraction": break_fraction,
         "diagnostics": diagnostics,
