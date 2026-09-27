@@ -107,3 +107,91 @@ def test_dryad_transport_fallback_is_digest_guarded_and_outcome_blind():
     assert amendment["scientific_effect"] == "none; Dryad DOI, exact filenames and Dryad-declared SHA-256 remain authoritative"
     assert amendment["outcome_data_inspected"] is False
 
+def test_dryad_download_accepts_only_digest_matching_zenodo_fallback(
+    tmp_path: Path,
+    monkeypatch,
+):
+    module = load_module()
+    payload = b"registered source bytes"
+    declared = module.sha256_bytes(payload)
+
+    monkeypatch.setattr(
+        module,
+        "_dryad_latest_files",
+        lambda session, doi, timeout: (
+            {"versionNumber": 1, "publicationDate": "2021-11-26"},
+            [
+                {
+                    "path": "target.xlsx",
+                    "size": len(payload),
+                    "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    "digest": declared,
+                    "digestType": "sha-256",
+                    "_links": {
+                        "self": {"href": "/api/v2/files/123"},
+                        "stash:download": {"href": "/api/v2/files/123/download"},
+                    },
+                }
+            ],
+        ),
+    )
+    monkeypatch.setattr(
+        module,
+        "DRYAD_PUBLIC_MIRRORS",
+        {
+            "10.5061/dryad.test": {
+                "provider": "zenodo",
+                "record_id": 99,
+            }
+        },
+    )
+
+    class Response:
+        def __init__(self, status, content=b"", url="", json_payload=None):
+            self.status_code = status
+            self.content = content
+            self.url = url
+            self._json = json_payload
+
+        @property
+        def ok(self):
+            return 200 <= self.status_code < 300
+
+        def raise_for_status(self):
+            if not self.ok:
+                raise RuntimeError(f"HTTP {self.status_code}")
+
+        def json(self):
+            return self._json
+
+    class Session:
+        def get(self, url, timeout=None, allow_redirects=True):
+            if "zenodo.org/api/records/99" in url:
+                return Response(
+                    200,
+                    url=url,
+                    json_payload={
+                        "files": [
+                            {
+                                "key": "target.xlsx",
+                                "checksum": "md5:irrelevant",
+                                "links": {"content": "https://mirror.test/target"},
+                            }
+                        ]
+                    },
+                )
+            if "mirror.test/target" in url:
+                return Response(200, content=payload, url=url)
+            return Response(403, url=url)
+
+    result = module._dryad_download_file(
+        Session(),
+        "10.5061/dryad.test",
+        "target.xlsx",
+        tmp_path,
+        10,
+    )
+    assert result["declared_digest_match"] is True
+    assert result["download_transport"] == "zenodo_mirror_digest_verified"
+    assert result["sha256"] == declared
+
