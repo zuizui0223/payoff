@@ -1,4 +1,5 @@
 import importlib.util
+import sys
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -15,6 +16,7 @@ def load_module():
         SCRIPT,
     )
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     assert spec.loader is not None
     spec.loader.exec_module(module)
     return module
