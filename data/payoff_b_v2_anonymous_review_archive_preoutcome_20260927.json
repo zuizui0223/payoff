@@ -1,0 +1,38 @@
+{
+  "result_id": "payoff_b_v2_anonymous_review_archive_preoutcome_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "PASS_PREOUTCOME_ANONYMOUS_ARCHIVE_READY",
+  "canonical_science_generation": "information_coordination_v2",
+  "workflow": {
+    "run_id": 36311421594,
+    "head_sha": "1f53201f4211f24a15256e7329232e340c52fe83",
+    "conclusion": "success",
+    "artifact_id": 10928629032,
+    "artifact_name": "payoff-b-v2-anonymous-review-archive-preoutcome",
+    "artifact_sha256": "3fa84755f482d63dc1523b18892bedb1b178d1701b7fde7deef410c8cbfaa74e"
+  },
+  "inner_archive": {
+    "file": "PAYOFF_B_V2_ANON_REVIEW_CODE_DATA_PREOUTCOME.zip",
+    "sha256": "da7fa4da41a6febaeb8c88bc00aeff55360673e782b9ae8e4348a2d7a049df21"
+  },
+  "manifest": {
+    "file_count": 34,
+    "code_file_count": 17,
+    "aikens_gate_resolved": false,
+    "aikens_result_included": false
+  },
+  "anonymity_checks": {
+    "author_name_tokens_zero": true,
+    "email_tokens_zero": true,
+    "repository_owner_tokens_zero": true,
+    "publication_metadata_excluded": true,
+    "credential_surfaces_excluded": true
+  },
+  "current_use": "ready to upload to an anonymous stable reviewer-access repository after final Aikens adjudication; the same builder will regenerate the archive with the frozen result included",
+  "remaining_external_step": "obtain anonymous stable reviewer URL from an external repository/archive service",
+  "claim_boundary": [
+    "this receipt certifies archive construction and anonymity, not external archival persistence",
+    "the preoutcome archive intentionally omits the unresolved Aikens result",
+    "the final reviewer archive must be regenerated after Aikens adjudication"
+  ]
+}
