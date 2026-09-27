@@ -61,8 +61,8 @@ strict equilibria.
 
 Canonical joint payoffs:
 
-- old state = {trap['canonical']['old_joint_payoff']};
-- informed state = {trap['canonical']['informed_joint_payoff']}.
+- old state = {trap['canonical']['old_joint_payoff_q1']};
+- informed state = {trap['canonical']['informed_joint_payoff_q1']}.
 
 The informed state has higher joint payoff while unilateral first adoption is
 unprofitable for every actor.
