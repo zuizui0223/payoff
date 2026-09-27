@@ -216,6 +216,14 @@ CURRENT_V2_POSTOUTCOME_PACKAGE_CHECK_RUN = 36311298440
 CURRENT_V2_POSTOUTCOME_READINESS =
     PAYOFF_B_V2_POSTOUTCOME_PIPELINE_READINESS_20260927.md
 REAL_AIKENS_LAMBDA_OUTCOME = UNOPENED
+CURRENT_AIKENS_CREDENTIAL_STATUS = NOT_CONFIGURED
+CURRENT_AIKENS_CREDENTIAL_PREFLIGHT_RUN = 36113621057
+CURRENT_AIKENS_CREDENTIAL_PREFLIGHT_ARTIFACT = 10928866638
+CURRENT_V2_REVIEW_ARCHIVE_PREOUTCOME = READY
+CURRENT_V2_REVIEW_ARCHIVE_BUILD_RUN = 36311421594
+CURRENT_V2_REVIEW_ARCHIVE_ARTIFACT = 10928629032
+CURRENT_V2_REVIEW_ARCHIVE_INNER_SHA256 = da7fa4da41a6febaeb8c88bc00aeff55360673e782b9ae8e4348a2d7a049df21
+ANONYMOUS_STABLE_REVIEWER_LINK = PENDING_EXTERNAL_UPLOAD
 ```
 
 The legacy V1 PREOUTCOME package had zero identity leaks in its anonymous main
@@ -243,12 +251,19 @@ result remains unopened.
 
 The remaining pre-submission tasks are therefore:
 
-1. execute and freeze the registered Aikens outcome when authentication permits;
-2. allow the already-tested V2 postoutcome pipeline to render that result into
-   Supporting Information and regenerate the package without changing the
-   title, structured abstract, main text or seven figures;
-3. supply an anonymous stable reviewer archive link;
+1. configure either `APPEEARS_TOKEN` or the Earthdata username/password secret
+   pair; the credential-only preflight was rerun on 2026-09-27 and remains
+   `NOT_CONFIGURED`;
+2. execute and freeze the registered Aikens outcome; the already-tested V2
+   postoutcome pipeline will render it into Supporting Information and
+   regenerate both the journal package and anonymous reviewer archive without
+   changing the title, structured abstract, main text or seven figures;
+3. upload the already-built anonymous reviewer archive to a stable anonymous
+   reviewer-access repository and insert that URL;
 4. complete author-controlled title-page and declaration metadata.
+
+The anonymous archive **content** is therefore no longer a blocker. Only its
+final post-Aikens regeneration and external stable reviewer URL remain.
 
 
 ## DOI modules / dormant branches
