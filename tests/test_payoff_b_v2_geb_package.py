@@ -1,0 +1,67 @@
+from pathlib import Path
+import importlib.util
+import sys
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPTS = ROOT / "scripts"
+sys.path.insert(0, str(SCRIPTS))
+
+
+def load(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
+source = load(
+    "v2_geb_source",
+    SCRIPTS / "build_payoff_b_v2_geb_source.py",
+)
+audit = load(
+    "v2_geb_audit",
+    SCRIPTS / "audit_payoff_b_v2_geb_source.py",
+)
+package = load(
+    "v2_geb_package",
+    SCRIPTS / "build_payoff_b_v2_geb_preoutcome_package.py",
+)
+
+
+def test_v2_geb_blinded_source_passes_hard_gates():
+    text = source.build_source()
+    result = audit.audit(text)
+
+    assert result["all_preoutcome_hard_gates_pass"]
+    assert result["metrics"]["abstract_words"] <= 300
+    assert result["metrics"]["main_body_words"] <= 5000
+    assert result["metrics"]["reference_count"] <= 50
+    assert result["metrics"]["figure_legend_count"] == 7
+    assert result["metrics"]["internal_token_hits"] == []
+    assert result["metrics"]["email_hits"] == []
+
+
+def test_v2_geb_package_is_complete_but_not_finally_eligible(tmp_path):
+    out = tmp_path / "package"
+    zip_path = tmp_path / "package.zip"
+    manifest = package.build(out, zip_path)
+
+    assert manifest["canonical_source"].endswith(
+        "PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"
+    )
+    assert manifest["v1_status"] == "FROZEN_PROVENANCE_ONLY"
+    assert manifest["aikens_outcome_opened"] is False
+    assert manifest["final_submission_eligible"] is False
+    assert manifest["figure_count"] == 7
+    assert zip_path.exists()
+
+
+def test_v2_geb_package_zip_is_deterministic(tmp_path):
+    z1 = tmp_path / "one.zip"
+    z2 = tmp_path / "two.zip"
+    package.build(tmp_path / "one", z1)
+    package.build(tmp_path / "two", z2)
+    assert package.sha256(z1) == package.sha256(z2)
