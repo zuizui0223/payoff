@@ -25,8 +25,8 @@ def test_aikens_full_workflow_freezes_target_geometry_before_environment():
         "Build adjacent valid fixed-target phase pairs",
         "Fit preregistered within-mule-deer lambda contrast",
         "Evaluate registered lambda gate or record NOT ESTIMABLE",
-        "Render preregistered Aikens outcome into GEB manuscript",
-        "Audit rendered GEB manuscript",
+        "Build canonical V2 GEB outcome package",
+        "Require V2 postoutcome invariants",
     ]
 
     positions = []
@@ -71,3 +71,22 @@ def test_aikens_full_workflow_keeps_registered_support_thresholds():
     # registered support thresholds.
     assert text.count("--min-animals-per-group 10") >= 2
     assert text.count("--min-pairs-per-group 100") >= 2
+
+
+
+def test_aikens_full_workflow_does_not_reactivate_v1_outcome_packages():
+    text = WORKFLOW.read_text(encoding="utf-8")
+
+    forbidden = (
+        "PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_RENDERED.md",
+        "PAYOFF_B_INTEGRATED_TRACKING_OUTCOME_PACKAGE.zip",
+        "GEB_INTEGRATED_OUTCOME_PACKAGE.zip",
+        "build_integrated_tracking_outcome_package.py",
+        "build_geb_integrated_outcome_package.py",
+        "render_integrated_tracking_figures.py",
+    )
+    for token in forbidden:
+        assert token not in text
+
+    assert "build_payoff_b_v2_geb_outcome_package.py" in text
+    assert "PAYOFF_B_V2_GEB_OUTCOME_PACKAGE.zip" in text
