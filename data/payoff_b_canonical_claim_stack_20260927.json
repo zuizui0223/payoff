@@ -1,12 +1,13 @@
 {
   "status_id": "payoff_b_canonical_claim_stack_20260927",
   "date": "2026-09-27",
-  "canonical_headline": "Environmental information can recover before ecological coordination does.",
-  "strongest_exact_claim": "Better information can transiently increase coordination mismatch under asynchronous uptake, and a collapsed information-using convention can remain obsolete even after cue reliability returns to one.",
+  "canonical_headline": "Theory predicts that environmental information can recover before ecological coordination does.",
+  "strongest_exact_claim": "Better information can transiently increase coordination mismatch under asynchronous uptake; a collapsed information-using convention can remain obsolete after cue reliability returns to one; and recovery can be nucleated by a temporary informed seed once derived network thresholds are crossed.",
   "exact_theory_files": [
     "theory/INFORMATION_DEADLINE_THEOREM.md",
     "theory/NETWORK_INFORMATION_UPTAKE_THEOREM.md",
-    "theory/PERFECT_INFORMATION_COORDINATION_TRAP.md"
+    "theory/PERFECT_INFORMATION_COORDINATION_TRAP.md",
+    "theory/INFORMATION_RESCUE_COALITION_THEOREM.md"
   ],
   "integrated_manuscript": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "empirical_status": {
@@ -14,7 +15,8 @@
     "flycatcher_experiment": "SOURCE_BACKED_TIMING_OF_INFORMATION_ANCHOR",
     "wigeon_predictive_controller": "NOT_SUPPORTED",
     "long_term_cue_driver_reversal": "NO_CUE_DRIVER_REVERSAL",
-    "natural_network_hysteresis": "NOT_OBSERVED"
+    "natural_network_hysteresis": "NOT_OBSERVED",
+    "natural_rescue_seed": "NOT_IDENTIFIED"
   },
   "older_temporal_buffering": "retained as capacity layer, not current headline",
   "aikens_lambda": "UNOPENED"

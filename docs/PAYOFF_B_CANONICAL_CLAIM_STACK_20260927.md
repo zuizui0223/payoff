@@ -182,6 +182,30 @@ PAYOFF-B therefore distinguishes:
 2. **topological memory** — a heterogeneous displaced timing configuration is
    stored or erased depending on network structure.
 
+
+### T10 — recovery can be nucleated by a temporary informed seed
+
+At perfect information, let S be a temporarily informed seed and let a_i(S) be
+the fraction of an uninformed actor i's interaction weight already attached to
+informed neighbours. Its exact adoption gain is
+
+H_i(S) = R_i - D_i + p I_i [2 a_i(S) - 1].
+
+With non-negative interaction weights this gain is non-decreasing as adoption
+spreads, so recovery is a progressive threshold cascade.
+
+In the canonical three-species chain, the central local pollinator is the
+unique singleton rescue seed; either peripheral species alone fails to restart
+the full informed state. In the complete and migrant-star canonical networks,
+any singleton can nucleate recovery.
+
+Licensed wording: **a coordination trap can be theoretically recoverable by a
+small, strategically placed temporary information seed.**
+
+Not licensed: a natural singleton rescue species has been identified, or a
+one-species manipulation is a management prescription.
+
+
 ## Natural evidence
 
 ### E1 — broad birds
@@ -246,7 +270,8 @@ x heterogeneous decision deadlines
 -> asynchronous information uptake
 -> network cut / transient mismatch
 -> coordination barrier to first adoption
--> possible historical lock-in after cue recovery.
+-> possible historical lock-in after cue recovery
+-> derived rescue threshold and topology-dependent seed leverage.
 
 The compact conceptual claim is:
 
@@ -277,8 +302,8 @@ The integrated framework is:
 
 ## Current headline
 
-> **Environmental information can recover before ecological coordination
-> does.**
+> **Theory predicts that environmental information can recover before
+> ecological coordination does.**
 
 ## Claim ceiling
 

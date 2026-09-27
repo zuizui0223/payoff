@@ -10,18 +10,18 @@
   },
   "preoutcome_package": {
     "status": "READY",
-    "frozen_workflow_run": 36309072630,
-    "frozen_artifact_id": 10927484417,
-    "frozen_artifact_sha256": "7b1033684a17e8018ce12e8d9d1809583bffbf98eb9431c3aa9075e573e857f5",
-    "deterministic_inner_zip_sha256": "d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b",
-    "latest_reproduction_workflow_run": 36312188417,
-    "latest_reproduction_artifact_id": 10928838334,
-    "latest_reproduction_artifact_sha256": "8d1ad5bec217300542c2f3b6dbaaa0489f7fabfa847ab0c73a0b725a731c4391",
-    "latest_reproduction_inner_zip_sha256": "d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b",
+    "frozen_workflow_run": 36313076476,
+    "frozen_artifact_id": 10930130067,
+    "frozen_artifact_sha256": "c47efff79a125945361d4a7f576141d70df6cbd30512556337be1c3f62c693c6",
+    "deterministic_inner_zip_sha256": "cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd",
+    "latest_reproduction_workflow_run": 36315132279,
+    "latest_reproduction_artifact_id": 10929879336,
+    "latest_reproduction_artifact_sha256": "b5a97c983936c80cbfd9ef68b8af35ee6879f5d049b0383912d84096fcbb28b7",
+    "latest_reproduction_inner_zip_sha256": "cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd",
     "deterministic_reproduction_pass": true,
     "metrics": {
-      "structured_abstract_words": 243,
-      "main_body_words": 4148,
+      "structured_abstract_words": 246,
+      "main_body_words": 4167,
       "references": 13,
       "display_pieces": 7,
       "keywords": 8,
@@ -81,6 +81,7 @@
     "theoretical_rescue_leverage": true,
     "broad_bird_evidence": "pooled directional support with dependence-sensitive uncertainty",
     "wigeon_predictive_connectivity_controller": "NOT_SUPPORTED",
-    "long_term_cue_driver_reversal": "NO_CUE_DRIVER_REVERSAL"
+    "long_term_cue_driver_reversal": "NO_CUE_DRIVER_REVERSAL",
+    "natural_rescue_seed_identified": false
   }
 }
