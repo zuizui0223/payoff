@@ -25,22 +25,6 @@ PENDING_HEADING = (
 
 def render_supporting_information(payload: dict) -> tuple[str, dict]:
     preoutcome = build_preoutcome_si()
-    preoutcome_status = (
-        "Status: working PREOUTCOME supplement. The registered industrial-development\n"
-        "phase-retention result remains unopened."
-    )
-    resolved_status = (
-        "Status: outcome-rendered supplement. The registered industrial-development\n"
-        "phase-retention gate has been adjudicated under the frozen contract; the\n"
-        "result class is reported in Appendix S8."
-    )
-    if preoutcome_status not in preoutcome:
-        raise ValueError("PREOUTCOME Supporting Information status marker not found")
-    preoutcome = preoutcome.replace(
-        preoutcome_status,
-        resolved_status,
-        1,
-    )
     if PENDING_HEADING not in preoutcome:
         raise ValueError("PREOUTCOME Supporting Information lacks Appendix S8 marker")
 
