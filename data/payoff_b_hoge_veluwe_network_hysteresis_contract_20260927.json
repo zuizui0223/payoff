@@ -7,12 +7,17 @@
     "justification": "same long-term cavity-nesting bird study system; pied flycatcher and great tit are monitored in the same breeding population",
     "primary_overlap_years": [
       1985,
-      2013
+      2015
     ],
     "excluded_years": [
       1991
     ],
-    "exclusion_reason": "caterpillar biomass peak is unavailable/anomalous in the published resource series; no imputation"
+    "exclusion_reason": "caterpillar biomass peak is unavailable/anomalous in the published resource series; no imputation",
+    "primary_history_years_after_connectivity_construction": [
+      1992,
+      2015
+    ],
+    "expected_primary_history_year_count": 24
   },
   "sources": {
     "migrant_timing": {
@@ -52,7 +57,7 @@
     "precommitment_cue": {
       "source": "NCEP/NCAR or source-faithful equivalent used by the already frozen CV24C cue reconstruction",
       "primary_variable": "Ivory Coast temperature, fixed 20-day mean beginning 18 February",
-      "spatial_rule": "reuse the frozen 3x3 coarse-grid Ivory Coast proxy from PAYOFF_B_CV24C_CUE_DRIVER_RESULT_20260927; extend identically through 2013 if source permits",
+      "spatial_rule": "reuse the frozen 3x3 coarse-grid Ivory Coast proxy from PAYOFF_B_CV24C_CUE_DRIVER_RESULT_20260927; extend identically through 2015 using the same NCEP/NCAR source and transform",
       "no_window_retuning": true
     }
   },
@@ -67,6 +72,11 @@
       "SCHEMA_MISMATCH",
       "INSUFFICIENT_OVERLAP",
       "CUE_EXTENSION_NOT_SOURCE_FAITHFUL"
+    ],
+    "require_at_least_24_history_years_after_connectivity_construction": true,
+    "require_expected_primary_history_span": [
+      1992,
+      2015
     ]
   },
   "coordinates": {
@@ -103,7 +113,12 @@
     "primary_support": "95% CI for the branch coefficient excludes zero at the mean overlapping connectivity",
     "secondary_support": "report interaction estimate and CI without changing the primary criterion",
     "interpretation_if_supported": "natural path dependence in resident-migrant seasonal coordination conditional on a recovered information coordinate",
-    "interpretation_ceiling": "does not identify the exact Nash mechanism, does not identify a natural rescue seed, and does not establish that either species intentionally acquires the declared temperature cue"
+    "interpretation_ceiling": "does not identify the exact Nash mechanism, does not identify a natural rescue seed, and does not establish that either species intentionally acquires the declared temperature cue",
+    "primary_history_span": [
+      1992,
+      2015
+    ],
+    "expected_history_years": 24
   },
   "forbidden_moves": [
     "do not choose a different African temperature window from the focal or partner timing outcome",
@@ -114,7 +129,8 @@
     "do not choose aggregation rules for great-tit laying date after inspecting mismatch",
     "do not redefine a monotonic or one-way connectivity change as recovery hysteresis",
     "do not promote a failed reversal gate to a history test",
-    "do not infer a natural singleton rescue species from this analysis"
+    "do not infer a natural singleton rescue species from this analysis",
+    "do not truncate the registered 1985-2015 source overlap after inspecting the cue-resource reversal"
   ],
   "relationship_to_prior_negative_lane": {
     "prior_contract": "data/payoff_b_cv24c_cue_driver_contract_20260927.json",
