@@ -198,18 +198,23 @@ Current state:
 ```text
 PAPER_2_CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md
 V1_STATUS = FROZEN_PROVENANCE_ONLY
-CURRENT_V2_JOURNAL_PACKAGE = REBUILD_REQUIRED
+CURRENT_V2_PREOUTCOME_PACKAGE = READY
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36308706101
+CURRENT_V2_PREOUTCOME_ARTIFACT = 10927314277
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 069ea50e18d9d54c08e6aceab1daf8d2cda561954cca9c2a58080ca916bb693f
+CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 
-Before submission, V2 requires fresh:
+The V2 PREOUTCOME package has completed fresh word-count, display-piece,
+reference, anonymity, citation and journal-facing package audits.
 
-- word-count audit;
-- figure/display-piece audit;
-- reference audit;
-- anonymity scan;
-- claim-ceiling audit;
-- journal-facing package build.
+Before final submission, V2 still requires:
+
+- the registered industrial-development result to be frozen;
+- an anonymous stable reviewer archive link;
+- author-controlled title-page and declaration metadata;
+- final package regeneration and re-audit after the registered result.
 
 ## Journal routing
 
