@@ -10,6 +10,8 @@ def test_dynamic_file_loaders_register_modules_before_exec():
     offenders = []
 
     for path in sorted(TESTS.glob("test_*.py")):
+        if path.resolve() == Path(__file__).resolve():
+            continue
         text = path.read_text(encoding="utf-8")
         if "importlib.util.spec_from_file_location(" not in text:
             continue
