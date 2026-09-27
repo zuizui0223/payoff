@@ -343,8 +343,9 @@ def fit_history_hac(
 
     Required record keys are year, connectivity and mismatch. The fit is
     restricted to the connectivity range observed on both branches, then
-    centered at the mean of that overlap support. Primary inference uses
-    Newey-West HAC with maxlags=7 and finite-sample correction.
+    centered at the mean of that overlap support. Calendar year is also
+    centered and included as the preregistered secular-trend guard. Primary
+    inference uses Newey-West HAC with maxlags=7 and finite-sample correction.
     """
     if reversal_status != "INFORMATION_REVERSAL":
         return {
@@ -398,13 +399,22 @@ def fit_history_hac(
         }
 
     center = float(data["connectivity"].mean())
+    year_center = float(data["year"].mean())
     data["centered_connectivity"] = data["connectivity"] - center
+    data["centered_year"] = data["year"] - year_center
     formula = (
+        "mismatch ~ centered_connectivity "
+        "+ C(branch, Treatment(reference='decline')) "
+        "+ centered_connectivity:C(branch, Treatment(reference='decline')) "
+        "+ centered_year"
+    )
+    unadjusted_formula = (
         "mismatch ~ centered_connectivity "
         "+ C(branch, Treatment(reference='decline')) "
         "+ centered_connectivity:C(branch, Treatment(reference='decline'))"
     )
     model = smf.ols(formula, data=data)
+    unadjusted_model = smf.ols(unadjusted_formula, data=data)
     hac = model.fit(
         cov_type="HAC",
         cov_kwds={
@@ -420,6 +430,13 @@ def fit_history_hac(
         },
     )
     hc3 = model.fit(cov_type="HC3")
+    unadjusted_hac = unadjusted_model.fit(
+        cov_type="HAC",
+        cov_kwds={
+            "maxlags": maxlags,
+            "use_correction": True,
+        },
+    )
 
     branch_terms = [
         name
@@ -477,16 +494,24 @@ def fit_history_hac(
         },
         "overlap_support": [lower, upper],
         "connectivity_center": center,
+        "year_center": year_center,
         "break_year": int(break_year),
+        "time_trend_guard": {
+            "required": True,
+            "term": "centered_year",
+            "primary_model_adjusted": True,
+            "unadjusted_model_is_sensitivity_only": True,
+        },
         "covariance": {
             "primary": f"HAC({maxlags}) finite-sample corrected",
-            "secondary": ["HAC(2)", "HC3"],
+            "secondary": ["HAC(2)", "HC3", "unadjusted HAC(7)"],
         },
         "branch_term": branch_term,
         "branch_at_mean_overlap": {
-            "primary_hac7": primary,
-            "hac2": extract(hac2, branch_term),
-            "hc3": extract(hc3, branch_term),
+            "primary_hac7_year_adjusted": primary,
+            "hac2_year_adjusted": extract(hac2, branch_term),
+            "hc3_year_adjusted": extract(hc3, branch_term),
+            "unadjusted_hac7": extract(unadjusted_hac, branch_term),
         },
         "interaction_term": interaction_term,
         "interaction": {
