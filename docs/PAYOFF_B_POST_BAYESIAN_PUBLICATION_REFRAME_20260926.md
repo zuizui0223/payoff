@@ -69,6 +69,10 @@ wigeon null interaction, used explicitly to separate predictive information
 from phase correction.
 
 Figure 7:
+recovery leverage: voluntary coalition size versus temporary rescue seed, with
+the chain's central local pollinator as the unique singleton rescue adopter.
+
+Figure 8:
 connection back to spatial/temporal capacity: finite temporal buffering and
 spatial re-entry as the capacity layer.
 
@@ -345,3 +349,40 @@ state.**
 This combines the information-deadline theorem and network game in one
 mechanism and should replace the weaker framing that the system simply "cannot
 know" the future.
+
+
+## Recovery is a separate network property
+
+The integrated model now distinguishes three questions that should not be
+collapsed:
+
+    Can the informed convention persist?
+    Can the obsolete convention persist?
+    What is the smallest perturbation that moves the system between them?
+
+For a temporary informed seed S, an old actor i adopts when
+
+    R_i-D_i+pI_i[2a_i(S)-1] > 0,
+
+where a_i(S) is the fraction of its interaction weight already attached to
+informed neighbours.
+
+This turns ecological recovery into a threshold-cascade problem with thresholds
+derived from biological timing costs.
+
+The canonical result is especially clean:
+
+- complete network: any singleton seed rescues the system;
+- migrant-star: any singleton seed rescues the system;
+- chain: only the central local pollinator is a singleton rescue seed.
+
+Thus the strongest applied-looking statement should remain theoretical:
+
+> **The species that determines whether a seasonal convention can be rescued
+> need not be the species that caused the mismatch or the species with the worst
+> information; it can be the interactor whose network position gives the
+> greatest recovery leverage.**
+
+Generic seed-triggered cascades are established network science. PAYOFF-B's
+claim is the ecological derivation of those thresholds from seasonal risk,
+decision deadlines and partner mismatch.
