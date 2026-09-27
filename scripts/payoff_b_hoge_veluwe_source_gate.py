@@ -154,6 +154,65 @@ def _dryad_latest_files(session, doi: str, timeout: int):
     return latest, files
 
 
+def _dryad_dataset_archive_download(
+    session,
+    *,
+    doi: str,
+    exact_name: str,
+    output_dir: Path,
+    timeout: int,
+) -> dict:
+    encoded_once = quote(f"doi:{doi}", safe="")
+    encoded_twice = quote(encoded_once, safe="")
+    candidates = [
+        f"{DRYAD_API}/datasets/{encoded_once}/download",
+        f"{DRYAD_API}/datasets/{encoded_twice}/download",
+    ]
+    errors = []
+    for url in candidates:
+        try:
+            response = session.get(url, timeout=timeout, allow_redirects=True)
+            if not response.ok or not response.content:
+                errors.append(f"{url}: HTTP {response.status_code}")
+                continue
+            try:
+                with zipfile.ZipFile(io.BytesIO(response.content)) as archive:
+                    matches = [
+                        member
+                        for member in archive.namelist()
+                        if Path(member).name == exact_name
+                    ]
+                    if len(matches) != 1:
+                        errors.append(
+                            f"{url}: exact file count {len(matches)} "
+                            f"for {exact_name!r}"
+                        )
+                        continue
+                    payload = archive.read(matches[0])
+            except zipfile.BadZipFile:
+                errors.append(f"{url}: response was not a ZIP archive")
+                continue
+
+            target = output_dir / exact_name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(payload)
+            return {
+                "provider": "dryad_dataset_archive",
+                "doi": doi,
+                "filename": exact_name,
+                "download_url_used": response.url,
+                "dataset_archive_sha256": sha256_bytes(response.content),
+                "downloaded_size": target.stat().st_size,
+                "sha256": sha256_path(target),
+                "path": str(target),
+            }
+        except Exception as exc:
+            errors.append(f"{url}: {type(exc).__name__}: {exc}")
+    raise RuntimeError(
+        f"Dryad dataset archive could not supply {exact_name!r}: {errors}"
+    )
+
+
 def _zenodo_mirror_download(
     session,
     *,
@@ -246,8 +305,24 @@ def _dryad_download_file(
             errors.append(f"{url}: HTTP {trial.status_code}")
         except Exception as exc:
             errors.append(f"{url}: {type(exc).__name__}: {exc}")
+    archive_copy = None
     mirror = None
     if response is None:
+        try:
+            archive_copy = _dryad_dataset_archive_download(
+                session,
+                doi=doi,
+                exact_name=exact_name,
+                output_dir=output_dir,
+                timeout=timeout,
+            )
+        except Exception as exc:
+            errors.append(
+                "dryad dataset archive: "
+                f"{type(exc).__name__}: {exc}"
+            )
+
+    if response is None and archive_copy is None:
         mirror_spec = DRYAD_PUBLIC_MIRRORS.get(doi)
         if mirror_spec and mirror_spec.get("provider") == "zenodo":
             try:
@@ -273,6 +348,7 @@ def _dryad_download_file(
     target.parent.mkdir(parents=True, exist_ok=True)
     if response is not None:
         target.write_bytes(response.content)
+    # archive_copy and mirror already wrote the exact registered file.
     digest = sha256_path(target)
 
     declared_digest = meta.get("digest")
@@ -310,12 +386,30 @@ def _dryad_download_file(
         "sha256": digest,
         "declared_digest_match": digest_match,
         "download_url_used": (
-            response.url if response is not None else mirror["download_url_used"]
+            response.url
+            if response is not None
+            else (
+                archive_copy["download_url_used"]
+                if archive_copy is not None
+                else mirror["download_url_used"]
+            )
         ),
         "download_transport": (
-            "dryad"
+            "dryad_individual"
             if response is not None
-            else "zenodo_mirror_digest_verified"
+            else (
+                "dryad_dataset_archive"
+                if archive_copy is not None
+                else "zenodo_mirror_digest_verified"
+            )
+        ),
+        "dryad_dataset_archive": (
+            None
+            if archive_copy is None
+            else {
+                "dataset_archive_sha256": archive_copy["dataset_archive_sha256"],
+                "file_sha256": archive_copy["sha256"],
+            }
         ),
         "mirror": (
             None
