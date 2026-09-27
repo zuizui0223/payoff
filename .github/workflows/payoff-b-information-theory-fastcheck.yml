@@ -8,9 +8,12 @@ on:
       - "src/endogenous_information_timing.py"
       - "src/shared_cue_deadline_network.py"
       - "src/information_uptake_network.py"
+      - "src/information_rescue_coalition.py"
       - "tests/test_endogenous_information_timing.py"
       - "tests/test_shared_cue_deadline_network.py"
       - "tests/test_information_uptake_network.py"
+      - "tests/test_information_rescue_coalition.py"
+      - "scripts/build_information_theory_figure_data.py"
       - ".github/workflows/payoff-b-information-theory-fastcheck.yml"
 
 jobs:
@@ -30,3 +33,6 @@ jobs:
           tests/test_endogenous_information_timing.py
           tests/test_shared_cue_deadline_network.py
           tests/test_information_uptake_network.py
+          tests/test_information_rescue_coalition.py
+      - name: Build information-theory figure data
+        run: python scripts/build_information_theory_figure_data.py
