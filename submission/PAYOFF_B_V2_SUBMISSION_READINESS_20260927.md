@@ -22,8 +22,8 @@ Research Article
 The canonical V2 GEB package has passed all hard gates.
 
 ```text
-structured abstract = 243 words
-main body = 4,148 words
+structured abstract = 246 words
+main body = 4,167 words
 references = 13
 display pieces = 7
 keywords = 8
@@ -35,23 +35,23 @@ internal tokens = 0
 Frozen package:
 
 ```text
-workflow run = 36309072630
-artifact = 10927484417
+workflow run = 36313076476
+artifact = 10930130067
 artifact digest =
-7b1033684a17e8018ce12e8d9d1809583bffbf98eb9431c3aa9075e573e857f5
+c47efff79a125945361d4a7f576141d70df6cbd30512556337be1c3f62c693c6
 
 inner deterministic ZIP SHA256 =
-d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b
+cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
 ```
 
-After the postoutcome pipeline was added, the package was rebuilt in run
-36312188417. The deterministic inner ZIP remained byte-identical:
+The frozen package was reproduced after the claim-ceiling update in run
+36315132279. The deterministic inner ZIP remained byte-identical:
 
 ```text
-d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b
+cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
 ```
 
-So postoutcome plumbing did not alter the frozen PREOUTCOME journal package.
+The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
 
 ## 2. Postoutcome V2 pipeline — READY, outcome unopened
 
