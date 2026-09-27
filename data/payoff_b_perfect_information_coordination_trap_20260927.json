@@ -1,0 +1,63 @@
+{
+  "result_id": "payoff_b_perfect_information_coordination_trap_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "EXACT_SHARED_CUE_GAME_RESULT",
+  "theorem": {
+    "old_profile_nash": "D_i + p I_i >= R_i for all i",
+    "informed_profile_nash": "D_i <= R_i + p I_i for all i",
+    "strict_bistability": "abs(D_i-R_i) < p I_i for all i",
+    "minimum_interaction_for_old_profile": "max(0,(R_i-D_i)/p)",
+    "minimum_interaction_for_informed_profile": "max(0,(D_i-R_i)/p)",
+    "minimum_interaction_for_bistability": "abs(R_i-D_i)/p",
+    "informed_joint_better": "sum(D_i) < sum(R_i)"
+  },
+  "canonical": {
+    "prior_early": 0.4,
+    "switch_probability": 0.4,
+    "information_costs": [
+      0.05,
+      0.1,
+      0.3
+    ],
+    "prior_risks": [
+      0.1,
+      0.1,
+      0.4
+    ],
+    "interaction_strength": 0.5,
+    "first_mover_interaction_penalty": [
+      0.2,
+      0.2,
+      0.2
+    ],
+    "unilateral_information_gains": [
+      -0.15,
+      -0.2,
+      -0.1
+    ],
+    "minimum_interaction_for_bistability": [
+      0.125,
+      0,
+      0.25
+    ],
+    "old_joint_payoff_q1": -0.6,
+    "informed_joint_payoff_q1": -0.45,
+    "coordinated_information_gain": 0.15,
+    "both_profiles_strict_nash": true,
+    "degradation_grid_collapse_q": 0.79,
+    "exact_informed_stability_boundary_q": 0.8,
+    "recovery_to_q1": "old profile retained"
+  },
+  "inference": [
+    "perfect environmental information can coexist with a strict obsolete uninformed equilibrium",
+    "coordinated cue use can have higher joint payoff while no actor benefits from adopting it first",
+    "temporary cue degradation can collapse information use and restoration to perfect cue quality need not restore it",
+    "interaction affects accessibility of coordinated information use even when it does not affect the joint value of that fully coordinated state"
+  ],
+  "claim_boundary": [
+    "exact result for the declared shared-cue binary game",
+    "canonical information costs and interaction strengths are illustrative",
+    "generic game-theoretic coordination under perfect information is prior art; the ecological contribution is the seasonal information-acquisition interpretation",
+    "natural network recovery hysteresis remains unobserved"
+  ]
+}

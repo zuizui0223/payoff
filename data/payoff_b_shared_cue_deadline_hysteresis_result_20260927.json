@@ -1,0 +1,85 @@
+{
+  "result_id": "payoff_b_shared_cue_deadline_hysteresis_result_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "COMPLETE_EXACT_FINITE_GAME_TRACE",
+  "workflow": {
+    "run_id": 36286708314,
+    "head_sha": "9a1c6cd2b7ebd0f9a36212d11a67b8d15334bb07",
+    "artifact_id": 10920975444,
+    "artifact_sha256": "e8f4b0e8839e55d6bd5ed176a00c02120383f6e778ec71fb82c0cef1d2ebdc78"
+  },
+  "canonical_parameters": {
+    "prior_early": 0.4,
+    "information_costs": [
+      0.05,
+      0.1,
+      0.3
+    ],
+    "interaction_strength": 0.5,
+    "cue_path": "1.00 down to 0.50 and back to 1.00 by 0.01"
+  },
+  "exact_stability": {
+    "informed_player_thresholds": [
+      0.5833333333333334,
+      0.6666666666666666,
+      0.8
+    ],
+    "network_informed_stability_boundary": 0.8,
+    "tie_preserving_grid_collapse": 0.79,
+    "perfect_information_bistability_condition": "abs(D_i-R_i) < p I_i",
+    "canonical_minimum_interaction_for_bistability": [
+      0.125,
+      0,
+      0.25
+    ]
+  },
+  "topology_results": {
+    "complete": {
+      "collapse_q": 0.79,
+      "final_profile_after_q1_recovery": "late|late|late",
+      "recovery": false
+    },
+    "chain": {
+      "collapse_q": 0.79,
+      "final_profile_after_q1_recovery": "late|late|late",
+      "recovery": false
+    },
+    "migrant_star": {
+      "collapse_q": 0.79,
+      "final_profile_after_q1_recovery": "late|late|late",
+      "recovery": false
+    }
+  },
+  "q1": {
+    "old_profile": "late|late|late",
+    "informed_profile": "follow|follow|follow",
+    "old_joint_payoff": -0.6,
+    "informed_joint_payoff": -0.45,
+    "joint_information_gain": 0.15,
+    "unilateral_first_adoption_gains": [
+      -0.15,
+      -0.2,
+      -0.1
+    ],
+    "old_profile_strict_nash": true,
+    "informed_profile_strict_nash": true,
+    "perfect_information_coordination_trap": true
+  },
+  "inference": [
+    "temporary degradation of one shared environmental cue can collapse a coordinated information-using convention",
+    "restoring cue accuracy to one does not necessarily restore information use",
+    "perfect information can coexist with two strict timing equilibria and the historically occupied equilibrium can have lower joint payoff",
+    "interaction changes accessibility of coordinated information use even when the fully coordinated informed state has no interaction mismatch"
+  ],
+  "relation_to_private_cue_topology_result": [
+    "the symmetric shared-cue trap is topology-independent across the three connected canonical topologies because a lone deviator mismatches all of its connected neighbours",
+    "the earlier private-cue heterogeneous-state result remains topology-dependent, with strict lower-payoff hysteresis in complete and chain but not migrant-star networks",
+    "these are complementary mechanisms: acquisition accessibility versus storage geometry"
+  ],
+  "claim_boundary": [
+    "synthetic finite game, not calibrated natural payoffs",
+    "shared binary cue is a mechanism probe",
+    "generic perfect-information coordination traps are game-theoretic prior art",
+    "natural recovery hysteresis remains prospective"
+  ]
+}

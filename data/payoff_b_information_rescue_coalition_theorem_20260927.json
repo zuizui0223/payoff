@@ -1,0 +1,96 @@
+{
+  "result_id": "payoff_b_information_rescue_coalition_theorem_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "EXACT_SHARED_CUE_NETWORK_RESULT",
+  "exact_results": {
+    "coalition_member_gain": "G_i(K)=R_i-D_i-p*I_i*b_i(K)",
+    "self_financing_condition": "G_i(K)>=0 for all coalition members",
+    "pinned_outsider_gain": "H_i(S)=R_i-D_i+p*I_i*(2*a_i(S)-1)",
+    "node_adoption_threshold": "a_i(S) > 0.5*(1-(R_i-D_i)/(p*I_i)) under strict path-preserving adoption",
+    "complete_graph_voluntary_gain": "G(k)=R-D-pI*(N-k)/(N-1)",
+    "complete_graph_pinned_gain": "H(k)=R-D+pI*(2k-N+1)/(N-1)",
+    "complete_graph_strict_seed_condition": "k > (N-1)/2 * [1-(R-D)/(pI)]"
+  },
+  "canonical": {
+    "prior_risks": [
+      0.1,
+      0.1,
+      0.4
+    ],
+    "information_costs": [
+      0.05,
+      0.1,
+      0.3
+    ],
+    "interaction_strength": 0.5,
+    "switch_probability": 0.4,
+    "minimum_weak_voluntary_coalition": {
+      "complete": [
+        "flower",
+        "local_pollinator",
+        "migrant"
+      ],
+      "chain": [
+        "flower",
+        "local_pollinator",
+        "migrant"
+      ],
+      "migrant_star": [
+        [
+          "flower",
+          "migrant"
+        ],
+        [
+          "local_pollinator",
+          "migrant"
+        ]
+      ]
+    },
+    "minimum_temporary_rescue_seed": {
+      "complete": [
+        [
+          "flower"
+        ],
+        [
+          "local_pollinator"
+        ],
+        [
+          "migrant"
+        ]
+      ],
+      "chain": [
+        [
+          "local_pollinator"
+        ]
+      ],
+      "migrant_star": [
+        [
+          "flower"
+        ],
+        [
+          "local_pollinator"
+        ],
+        [
+          "migrant"
+        ]
+      ]
+    },
+    "chain_keystone_rescue_adopter": "local_pollinator"
+  },
+  "inference": [
+    "spontaneous recovery can fail while a small temporary informed seed can still restore the better equilibrium",
+    "trap existence and rescue topology are different properties",
+    "in the canonical chain the central local pollinator is the unique one-species rescue seed",
+    "minimum voluntary coalition size can exceed minimum temporary rescue seed size"
+  ],
+  "prior_art_boundary": [
+    "generic threshold cascades and seed-triggered network cascades are established in network science",
+    "ecological keystoneness and structural controllability already study disproportionate network control by selected species or interactions",
+    "the candidate ecological contribution is the derivation of information-use and rescue thresholds from seasonal mismatch risk, decision deadlines/information costs and interaction mismatch"
+  ],
+  "claim_boundary": [
+    "exact only for the declared perfect-information shared-cue game",
+    "temporary pinning is a mechanism probe, not a management recommendation",
+    "no natural singleton rescue species has been identified"
+  ]
+}

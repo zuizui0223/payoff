@@ -1,0 +1,38 @@
+name: payoff-b-information-theory-fastcheck
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-information-threshold-theorem-20260927
+    paths:
+      - "src/endogenous_information_timing.py"
+      - "src/shared_cue_deadline_network.py"
+      - "src/information_uptake_network.py"
+      - "src/information_rescue_coalition.py"
+      - "tests/test_endogenous_information_timing.py"
+      - "tests/test_shared_cue_deadline_network.py"
+      - "tests/test_information_uptake_network.py"
+      - "tests/test_information_rescue_coalition.py"
+      - "scripts/build_information_theory_figure_data.py"
+      - ".github/workflows/payoff-b-information-theory-fastcheck.yml"
+
+jobs:
+  fastcheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pytest
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Run information-theory unit tests
+        run: >
+          pytest -q
+          tests/test_endogenous_information_timing.py
+          tests/test_shared_cue_deadline_network.py
+          tests/test_information_uptake_network.py
+          tests/test_information_rescue_coalition.py
+      - name: Build information-theory figure data
+        run: python scripts/build_information_theory_figure_data.py
