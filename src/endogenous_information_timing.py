@@ -396,3 +396,245 @@ def expected_shared_cue_action_mismatch(
             mismatch += probability
 
     return mismatch
+
+
+
+@dataclass(frozen=True)
+class ClosedFormInformationThreshold:
+    prior_action: int
+    early_action_prior_loss: float
+    late_action_prior_loss: float
+    prior_bayes_risk: float
+    maximum_information_value: float
+    actionable_cue_accuracy: float
+    delay_cost: float
+    wait_cue_accuracy: float | None
+    ever_waits: bool
+
+
+@dataclass(frozen=True)
+class DesynchronizationWindow:
+    lower_delay_cost: float
+    higher_delay_cost: float
+    lower_wait_threshold: float | None
+    higher_wait_threshold: float | None
+    regime: str
+    lower_bound_open: float | None
+    upper_bound_closed: float | None
+    finite_window_width: float | None
+
+
+def closed_form_information_threshold(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    delay_cost: float,
+) -> ClosedFormInformationThreshold:
+    """Closed-form cue threshold for waiting in the symmetric binary model.
+
+    Let
+
+        A = (1-pi) C_F
+        L = pi C_M
+
+    be the prior expected losses of committing early and late.  The prior action
+    has risk min(A,L), which is also the maximum possible value of information.
+
+    The cue first becomes action-changing at
+
+        q0 = max(A,L) / (A+L).
+
+    For q > q0 the value of information is linear:
+
+        V(q) = q(A+L) - max(A,L).
+
+    Hence an actor with delay cost D waits iff
+
+        q > [max(A,L)+D] / (A+L),
+
+    provided D < min(A,L).  If D >= min(A,L), even perfect information is not
+    worth waiting for.
+    """
+
+    pi = float(prior_early)
+    if not isfinite(pi) or not 0.0 < pi < 1.0:
+        raise ValueError("prior_early must lie strictly between 0 and 1")
+    cf = _validate_cost(false_early_cost, "false_early_cost")
+    cm = _validate_cost(missed_early_cost, "missed_early_cost")
+    delay = _validate_cost(delay_cost, "delay_cost")
+    if cf + cm <= 0.0:
+        raise ValueError("at least one state-mismatch cost is required")
+
+    early_loss = (1.0 - pi) * cf
+    late_loss = pi * cm
+    total = early_loss + late_loss
+    if total <= 0.0:
+        raise ValueError("prior expected-loss scale must be positive")
+
+    prior_action = 1 if early_loss < late_loss else 0
+    prior_risk = min(early_loss, late_loss)
+    other_loss = max(early_loss, late_loss)
+    actionable = other_loss / total
+
+    ever_waits = delay < prior_risk
+    wait_threshold = (
+        (other_loss + delay) / total
+        if ever_waits
+        else None
+    )
+    return ClosedFormInformationThreshold(
+        prior_action=prior_action,
+        early_action_prior_loss=early_loss,
+        late_action_prior_loss=late_loss,
+        prior_bayes_risk=prior_risk,
+        maximum_information_value=prior_risk,
+        actionable_cue_accuracy=actionable,
+        delay_cost=delay,
+        wait_cue_accuracy=wait_threshold,
+        ever_waits=ever_waits,
+    )
+
+
+def desynchronization_window(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    actor_a_delay_cost: float,
+    actor_b_delay_cost: float,
+) -> DesynchronizationWindow:
+    """Classify asynchronous information uptake for two otherwise equal actors.
+
+    If both actors eventually wait, unequal delay costs create a finite
+    zero-positive-zero mismatch window.  Its exact width in cue-accuracy space is
+
+        |D_A-D_B| / (A+L).
+
+    If only the lower-delay actor ever waits, desynchronization begins at its
+    threshold and persists through perfect information.  If neither waits, no
+    information-induced desynchronization occurs.
+    """
+
+    da = _validate_cost(actor_a_delay_cost, "actor_a_delay_cost")
+    db = _validate_cost(actor_b_delay_cost, "actor_b_delay_cost")
+    low, high = sorted((da, db))
+
+    low_threshold = closed_form_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=low,
+    )
+    high_threshold = closed_form_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=high,
+    )
+
+    if da == db:
+        return DesynchronizationWindow(
+            lower_delay_cost=low,
+            higher_delay_cost=high,
+            lower_wait_threshold=low_threshold.wait_cue_accuracy,
+            higher_wait_threshold=high_threshold.wait_cue_accuracy,
+            regime="NO_ASYNCHRONY_EQUAL_DELAY",
+            lower_bound_open=None,
+            upper_bound_closed=None,
+            finite_window_width=0.0,
+        )
+
+    if not low_threshold.ever_waits:
+        return DesynchronizationWindow(
+            lower_delay_cost=low,
+            higher_delay_cost=high,
+            lower_wait_threshold=None,
+            higher_wait_threshold=None,
+            regime="NO_ONE_WAITS",
+            lower_bound_open=None,
+            upper_bound_closed=None,
+            finite_window_width=0.0,
+        )
+
+    if not high_threshold.ever_waits:
+        return DesynchronizationWindow(
+            lower_delay_cost=low,
+            higher_delay_cost=high,
+            lower_wait_threshold=low_threshold.wait_cue_accuracy,
+            higher_wait_threshold=None,
+            regime="PERSISTENT_ASYMMETRIC_UPTAKE",
+            lower_bound_open=low_threshold.wait_cue_accuracy,
+            upper_bound_closed=1.0,
+            finite_window_width=None,
+        )
+
+    assert low_threshold.wait_cue_accuracy is not None
+    assert high_threshold.wait_cue_accuracy is not None
+    total = (
+        low_threshold.early_action_prior_loss
+        + low_threshold.late_action_prior_loss
+    )
+    width = (high - low) / total
+    return DesynchronizationWindow(
+        lower_delay_cost=low,
+        higher_delay_cost=high,
+        lower_wait_threshold=low_threshold.wait_cue_accuracy,
+        higher_wait_threshold=high_threshold.wait_cue_accuracy,
+        regime="FINITE_DESYNCHRONIZATION_WINDOW",
+        lower_bound_open=low_threshold.wait_cue_accuracy,
+        upper_bound_closed=high_threshold.wait_cue_accuracy,
+        finite_window_width=width,
+    )
+
+
+def closed_form_mismatch_probability_during_asynchrony(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    cue_accuracy: float,
+) -> float:
+    """Expected action mismatch when one actor waits and one commits.
+
+    The committed actor takes the prior-optimal action.  The waiting actor can
+    differ only when the cue signal points to the opposite action and is
+    sufficiently reliable to change the Bayes-optimal action.
+    """
+
+    threshold = closed_form_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=0.0,
+    )
+    q = float(cue_accuracy)
+    if not isfinite(q) or not 0.5 <= q <= 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    if q <= threshold.actionable_cue_accuracy:
+        return 0.0
+
+    pi = float(prior_early)
+    if threshold.prior_action == 0:
+        return pi * q + (1.0 - pi) * (1.0 - q)
+    return (1.0 - pi) * q + pi * (1.0 - q)
+
+
+def information_acquisition_wedge_interval(
+    scenario: InformationTimingScenario,
+) -> tuple[float, float] | None:
+    """Exact delay-cost interval where private commit but joint waiting is optimal.
+
+    The interval is [V_private, V_joint).  It is empty unless partner
+    externalities strictly increase the value of information.
+    """
+
+    diagnostic = evaluate_information_timing(
+        scenario,
+        delay_cost=0.0,
+    )
+    lower = diagnostic.private_information_value
+    upper = diagnostic.joint_information_value
+    if upper <= lower + 1e-12:
+        return None
+    return (lower, upper)
