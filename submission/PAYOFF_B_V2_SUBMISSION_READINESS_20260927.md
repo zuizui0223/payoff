@@ -30,25 +30,27 @@ keywords = 8
 running title = 38 characters
 identity leaks = 0
 internal tokens = 0
+package files = 17
 ```
 
 Frozen package:
 
 ```text
-workflow run = 36313076476
-artifact = 10930130067
+workflow run = 36318360954 (attempt 1)
+artifact = 10930659946
 artifact digest =
-c47efff79a125945361d4a7f576141d70df6cbd30512556337be1c3f62c693c6
+d5d914c827e2e77b165145c55f38f07b55e99fcf6aee455a358fe3363779efdc
 
 inner deterministic ZIP SHA256 =
-cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
+28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7
 ```
 
-The frozen package was reproduced after the claim-ceiling update in run
-36315132279. The deterministic inner ZIP remained byte-identical:
+The declarations-inclusive package was rerun from the same frozen head in
+workflow run 36318360954 (attempt 2; artifact 10931800433). The deterministic
+inner ZIP remained byte-identical:
 
 ```text
-cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
+28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7
 ```
 
 The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
@@ -103,6 +105,9 @@ Python source closure = 23
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
+reviewer archive reproduction run = 36318360955
+reviewer archive reproduction artifact = 10930779317
+reviewer archive deterministic inner SHA256 = 857d6e22fe2b9bc4724c35659667fa9159d69a8c93f7789f68f496828df918a6
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
@@ -115,30 +120,30 @@ remaining reviewer-archive task is therefore **delivery**, not construction:
 upload the ZIP through the journal review portal or provide a stable anonymous
 link.
 
-## 3. Real Aikens execution — credential recheck required
+## 3. Real Aikens execution — credentials not configured
 
 The scientific contract is frozen and the outcome is still unopened.
 
-The last verified credential-only preflight was 2026-09-25:
+A fresh credential-only preflight was run on 2026-09-27:
 
 ```text
-workflow run = 36113621057
-artifact = 10853764396
+workflow run = 36318036795
+artifact = 10931233185
 status = NOT_CONFIGURED
 credential route = none
+credential values recorded = false
+network submission performed = false
 environmental values opened = false
 lambda outcome opened = false
 ```
 
-This is a historical verified state, not a claim about the current GitHub
-Secrets configuration. Secret values are not visible from repository audit.
-
-The next execution step is therefore:
+The next execution step therefore requires external credential configuration:
 
 ```text
-rerun credential preflight
--> if credentials are configured:
-   execute the already frozen full AppEEARS / V061 / fixed-24 h workflow
+configure APPEEARS_TOKEN
+or configure EARTHDATA_USERNAME + EARTHDATA_PASSWORD
+-> rerun credential preflight
+-> execute the already frozen full AppEEARS / V061 / fixed-24 h workflow
 -> classify result
 -> render Supporting Information only
 -> generate final V2 outcome package

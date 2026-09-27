@@ -199,9 +199,9 @@ Current state:
 PAPER_2_CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md
 V1_STATUS = FROZEN_PROVENANCE_ONLY
 CURRENT_V2_PREOUTCOME_PACKAGE = READY
-CURRENT_V2_PREOUTCOME_BUILD_RUN = 36313076476
-CURRENT_V2_PREOUTCOME_ARTIFACT = 10930130067
-CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36318360954
+CURRENT_V2_PREOUTCOME_ARTIFACT = 10930659946
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7
 CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
@@ -211,10 +211,12 @@ reference, anonymity, citation and journal-facing package audits.
 
 Before final submission, V2 still requires:
 
-- the registered industrial-development result to be frozen;
-- an anonymous stable reviewer archive link;
+- AppEEARS/Earthdata credentials to be configured and the registered
+  industrial-development result to be frozen;
+- delivery of the already-built anonymous reviewer archive through the journal
+  portal or a stable anonymous review link;
 - author-controlled title-page and declaration metadata;
-- final package regeneration and re-audit after the registered result.
+- final human review of the outcome-rendered package and portal metadata.
 
 ## Journal routing
 

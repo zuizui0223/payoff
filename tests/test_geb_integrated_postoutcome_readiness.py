@@ -25,8 +25,10 @@ def test_publication_status_routes_v2_to_geb_without_inheriting_v1_pipeline_read
     )
     assert "Aikens fixed-24 h" in text and "adjudication" in text
     assert "CURRENT_V2_POSTOUTCOME_RESULT_LOCATION = Supporting Information only" in text
-    assert "LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT = NOT_CONFIGURED_2026-09-25" in text
-    assert "CURRENT_CREDENTIAL_STATE = RECHECK_REQUIRED_BEFORE_REAL_EXECUTION" in text
+    assert "LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT = NOT_CONFIGURED_2026-09-27" in text
+    assert "LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT_RUN = 36318036795" in text
+    assert "LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT_ARTIFACT = 10931233185" in text
+    assert "CURRENT_CREDENTIAL_STATE = NOT_CONFIGURED_CONFIRMED_2026-09-27" in text
 
 
 def test_authenticated_aikens_workflow_builds_canonical_v2_outcome_package() -> None:
