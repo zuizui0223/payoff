@@ -1,0 +1,550 @@
+# Better information can fail to restore seasonal coordination under environmental change
+
+**Status:** PAYOFF-B integrated ecology manuscript v2, PREOUTCOME  
+**Lineage:** preserves `PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md` unchanged as the temporal-buffering generation.  
+**Evidence boundary:** exact theoretical claims are restricted to declared finite games and frozen synthetic programmes. Natural-data claims retain their registered dependence and source boundaries. The preregistered Aikens industrial-development lambda outcome remains unopened.
+
+## Abstract
+
+Seasonal adaptation is often framed as a problem of insufficient response: organisms fail because they cannot move or change timing fast enough. Yet interacting species may also fail when useful environmental information becomes available only after costly decisions must be made. We develop a theory of **information deadlines** in seasonal tracking and connect it to interaction-network coordination. In a binary seasonal decision, the cue reliability at which an actor begins waiting for information is exactly determined by its timing-error losses and opportunity cost of delay. Two interactors facing the same improving cue but different delay costs therefore begin using that cue at different thresholds. This creates a finite range in which improving information increases, rather than decreases, phenological mismatch. We then show a stronger coordination result. Under perfect environmental information, an obsolete uninformed timing profile and a better informed profile can both be strict Nash equilibria: coordinated information use raises joint payoff, yet no species benefits from adopting it first. In a three-player seasonal network, cue degradation collapses coordinated information use at the exact stability boundary and restoration to perfect cue accuracy does not restore the informed state. Across 3,311 observations from 37 migratory bird species, stronger pre-outcome predictive connectivity is associated with smaller arrival–green-up mismatch in the preregistered pooled analysis, although dependence-aware uncertainty does not support a universal species-level coefficient. A pied-flycatcher experiment independently shows that manipulated heterospecific phenology was unavailable to an earlier settlement decision but influenced later settlement, whereas a registered wigeon test finds no evidence that predictive connectivity strengthens post-error phase correction. A long-term cue–driver reversal gate is negative and no natural network hysteresis is claimed. Together, these results separate response capacity, predictive information, information timing and strategic accessibility. Environmental information can recover before ecological coordination does.
+
+**Keywords:** phenological mismatch; migration; information ecology; Bayesian games; seasonal timing; predictive connectivity; ecological hysteresis; climate change
+
+---
+
+## 1. Introduction
+
+Climate-change ecology often asks whether organisms can keep pace with changing environments. Species may move through space, shift seasonal timing, alter stopover behaviour or combine these responses. The usual endpoint is mismatch: the difference between when or where organisms occur and when or where favourable conditions occur.
+
+Mismatch is important, but it compresses several different ecological problems. A species can be mismatched because it lacks response capacity, because the future state is difficult to predict, because useful information becomes available only after a decision deadline, or because an individually costly transition blocks a jointly beneficial response. These mechanisms make different predictions even when they produce the same observed timing error.
+
+Migration makes the information problem especially clear. A resident organism can often sample local spring directly. A long-distance migrant must make some decisions before the destination state is observed. Environmental conditions at wintering or stopover sites can provide predictive information, but that information need not remain reliable under climate change. This general problem is established in migration theory and empirical work: migrants use remote environmental cues, environmental predictability changes optimal migration timing, and climate change can decouple cues from the later conditions that determine fitness. PAYOFF-B therefore does not treat cue–driver decoupling itself as a new idea.
+
+The unresolved problem is what happens **after cue quality is allowed to vary among decision contexts**. Interacting species do not necessarily face the same cost of delaying action. Early arrival can affect rank, mating opportunities or territory acquisition; later decisions can use richer local information. Thus two species, or two demographic classes within a species, can observe the same future cue but rationally begin using it at different reliability thresholds.
+
+This immediately produces a counterintuitive possibility: better information need not improve ecological coordination monotonically. If one actor begins waiting for a cue before another, the first becomes informed while its partner remains committed to the previous timing convention. Coordination can worsen during the transition from shared ignorance to shared information.
+
+Interaction adds a second problem. Once a seasonal network has coordinated on one timing convention, being the first actor to adopt a different information-dependent strategy can itself create partner mismatch. The network may therefore remain in an obsolete timing regime even after environmental information has fully recovered. In that case the constraint is neither uncertainty nor response capacity. It is strategic accessibility.
+
+We develop this argument in four layers.
+
+First, we derive an exact **information-deadline theorem** for a binary seasonal decision. It gives the cue reliability at which information becomes actionable, the actor-specific threshold at which waiting for that information becomes worthwhile, and the exact width of the information-induced desynchronization window between two actors with different delay costs.
+
+Second, we embed information acquisition in an interaction game. We show conditions under which an obsolete uninformed profile and a fully informed profile are both strict equilibria under perfect environmental information, even though the informed profile has higher joint payoff. We then perturb cue quality down and back up to ask whether environmental recovery restores information use.
+
+Third, we connect the theory to natural systems using deliberately separated empirical tests. A preregistered broad-bird analysis asks whether pre-outcome predictive connectivity is associated with realized phenological mismatch. A source-backed pied-flycatcher manipulation asks whether heterospecific phenology affects decisions made before versus after that information becomes visible. A registered wigeon analysis asks a different question: whether predictive connectivity strengthens correction after phase error has already appeared. These tests distinguish prediction, information timing and feedback rather than collapsing them into one “tracking ability.”
+
+Fourth, we retain the earlier PAYOFF-B temporal-buffering result as a capacity layer. Timing can temporarily substitute for movement, but finite temporal capacity eventually forces spatial tracking to re-enter. Capacity, information and coordination are therefore complementary failure modes.
+
+Our central conclusion is:
+
+> **Seasonal adaptation can fail even when an adequate response exists and environmental information later becomes perfect, because interacting organisms can face different decision deadlines and information use can itself become a coordination state.**
+
+---
+
+## 2. Theory
+
+### 2.1 The information-deadline problem
+
+Let the future seasonal state be normal or early, with
+
+[
+P(early)=\pi.
+]
+
+An actor chooses an early or late seasonal action. Define
+
+[
+A=(1-\pi)C_F
+]
+
+as the prior expected loss of committing early and
+
+[
+L=\pi C_M
+]
+
+as the prior expected loss of committing late.
+
+Before observing a cue, the Bayes-optimal action has risk
+
+[
+R_0=\min(A,L).
+]
+
+A later binary cue has state-classification accuracy (q\ge 1/2). Waiting for that cue has opportunity cost (D\).
+
+The cue first becomes capable of changing the Bayes-optimal action at
+
+[
+q_0=\frac{\max(A,L)}{A+L}.
+]
+
+The exact value of waiting for the cue is
+
+[
+V(q)=
+\max\left[
+0,;
+q(A+L)-\max(A,L)
+\right].
+]
+
+The actor waits only when
+
+[
+V(q)>D.
+]
+
+If (D<R_0), the actor-specific information-use threshold is
+
+[
+q_{wait}(D)=
+\frac{\max(A,L)+D}{A+L}.
+]
+
+If (D\ge R_0), even perfect information is not worth waiting for.
+
+### 2.2 Better information can transiently increase mismatch
+
+Consider two actors facing the same future cue and the same state-dependent losses but different waiting costs
+
+[
+D_1<D_2.
+]
+
+When both costs are below (R_0), their information-use thresholds satisfy
+
+[
+q_1<q_2.
+]
+
+Three regimes follow:
+
+[
+q\le q_1:
+\quad
+commit\mid commit,
+]
+
+[
+q_1<q\le q_2:
+\quad
+wait\mid commit,
+]
+
+[
+q>q_2:
+\quad
+wait\mid wait.
+]
+
+The exact width of the asynchronous information-use interval is
+
+[
+\boxed{
+\Delta q
+=
+\frac{D_2-D_1}{A+L}.
+}
+]
+
+Thus cue quality can improve monotonically while ecological mismatch follows a zero–positive–zero trajectory.
+
+In the transparent PAYOFF-B witness,
+
+[
+\pi=0.4,\quad C_F=2,\quad C_M=1,
+]
+
+with delay costs (0.10) and (0.30). The exact thresholds are
+
+[
+q_1=0.8125,qquad q_2=0.9375.
+]
+
+On a 0.01 grid this appears as a mismatch window from (q=0.82) to (0.93), with expected action mismatch 0.436 at the first sampled asynchronous point.
+
+If the higher delay cost exceeds (R_0), the higher-cost actor never waits, even at (q=1). In this regime information asymmetry persists under perfect cue reliability.
+
+### 2.3 Private and joint value of waiting can diverge
+
+If a timing error also imposes costs on interaction partners, the joint value of waiting can exceed the focal actor’s private value.
+
+Let (V_P(q)) be the private value of information and (V_J(q)) the joint value when partner losses are included. Whenever
+
+[
+V_J(q)>V_P(q),
+]
+
+there is a delay-cost interval
+
+[
+D\in[V_P(q),V_J(q))
+]
+
+in which the focal actor rationally commits under uncertainty while the interacting system would gain if the decision were delayed.
+
+Coordination failure can therefore begin before the actors choose their seasonal actions: selection can under-invest in information acquisition itself.
+
+### 2.4 Perfect information does not guarantee information use
+
+We next consider a shared-cue interaction network at
+
+[
+q=1.
+]
+
+For player (i), let (R_i) be its prior mismatch risk under the old timing convention, (D_i) its information/waiting cost, (I_i) its interaction-mismatch strength, and (p) the probability of the state in which informed action differs from the old action.
+
+If all players retain the old action, player (i) receives
+
+[
+U_i^{old}=-R_i.
+]
+
+If it alone begins using perfect information while all neighbours remain old,
+
+[
+U_i^{first}=-D_i-pI_i.
+]
+
+The old profile is therefore stable when
+
+[
+D_i+pI_i\ge R_i.
+]
+
+If all players use perfect information, there is no state mismatch and no interaction mismatch:
+
+[
+U_i^{info}=-D_i.
+]
+
+The informed profile is stable when
+
+[
+D_i\le R_i+pI_i.
+]
+
+Both are strict equilibria when
+
+[
+\boxed{
+|D_i-R_i|<pI_i.
+}
+]
+
+Yet the informed profile has higher joint payoff whenever
+
+[
+\boxed{
+\sum_i D_i<\sum_i R_i.
+}
+]
+
+Thus perfect environmental information can coexist with a strictly stable obsolete timing regime and a strictly stable better-informed regime.
+
+### 2.5 Temporary information degradation can create permanent behavioural lock-in
+
+The canonical shared-cue network has three actors: flower, local pollinator and migrant. Their information costs are
+
+[
+(0.05,0.10,0.30),
+]
+
+their prior-late risks are
+
+[
+(0.10,0.10,0.40),
+]
+
+and interaction strength is (0.50).
+
+At (q=1), the unilateral gains from being the first information user are
+
+[
+(-0.15,-0.20,-0.10).
+]
+
+No player wants to move first.
+
+Nevertheless, the fully informed joint payoff is
+
+[
+-0.45,
+]
+
+compared with
+
+[
+-0.60
+]
+
+for the obsolete all-late profile.
+
+The exact player-specific stability thresholds of the informed profile are approximately
+
+[
+0.583,quad 0.667,quad 0.800.
+]
+
+The migrant therefore defines the network boundary. Under path-preserving best response, the informed profile remains at the exact tie (q=0.80) and collapses at (q=0.79) on the 0.01 grid.
+
+When cue quality is restored stepwise to (q=1), the network remains in the all-late profile. Environmental information recovers completely, but ecological information use does not.
+
+---
+
+## 3. Empirical evidence hierarchy
+
+### 3.1 Predictive connectivity and realized mismatch across migratory birds
+
+The preregistered broad-bird analysis uses 3,311 observations from 37 species after requiring a trailing eight-year information window.
+
+Predictive connectivity is defined as the signed correlation between source and destination green-up anomalies after the two locations are separately detrended within the pre-outcome window.
+
+The registered pooled GAM gives
+
+[
+\hat\beta_{\rho}=-0.0462,
+]
+
+with
+
+[
+95\%\ CI=[-0.0870,-0.0054],
+\quad
+p=0.0265.
+]
+
+Thus stronger pre-existing predictive connectivity is associated with smaller arrival–green-up mismatch in the declared pooled analysis.
+
+The sign remains negative in all leave-one-species-out and all leave-one-year-out fits. The 10-year trailing-window sensitivity is also negative with its interval below zero.
+
+However, dependence-aware uncertainty is wider. Species-, cell-year- and source–target-pair clustered intervals cross zero, as does the species-level inverse-variance summary. The licensed interpretation is therefore a pooled directional macroecological signal, not a universal species-level coefficient.
+
+Importantly, using raw undetrended source–destination correlation removes the effect. The signal is associated with interannual predictive information rather than a shared long-term warming trend.
+
+### 3.2 A manipulated heterospecific cue affects later but not earlier decisions
+
+Samplonius & Both experimentally advanced and delayed resident tit hatching phenology while observing pied-flycatcher settlement.
+
+Male flycatcher settlement was not detectably related to treatment
+
+[
+Z=0.854,
+\quad
+P=0.393,
+]
+
+and the authors note that almost all males settled before the manipulated hatching difference became apparent.
+
+Later female settlement did respond to treatment. The published pairing model gives a tit-timing effect of approximately
+
+[
+-0.101
+]
+
+with
+
+[
+P=0.042,
+]
+
+and the time-dependent Cox analysis gives
+
+[
+-0.065,
+\quad
+P<0.009.
+]
+
+The experiment does not show that females deliberately delayed settlement in order to collect information, nor does it identify the exact sensory pathway. It does support the narrower timing claim required by the model: the same heterospecific seasonal state can be unavailable to an earlier decision and behaviourally relevant to a later decision.
+
+### 3.3 Predictive connectivity does not strengthen post-error correction in wigeon
+
+A registered wigeon analysis uses historical 2000–2017 ERA5 timing relationships to define route-level predictive connectivity before analysing 2018–2020 staging transitions.
+
+Across 224 transitions from 28 individuals, the preregistered interaction between incoming phase error and predictive connectivity is
+
+[
+\hat\beta=+0.0202,
+]
+
+with
+
+[
+95\%\ CI=[-0.1058,0.1461],
+\quad
+p=0.756.
+]
+
+The predicted negative interaction is not supported.
+
+This null is informative because it separates two functions of information. Predictive connectivity may influence which action or timing regime is chosen before error appears without acting as a universal amplifier of correction after error has already appeared.
+
+### 3.4 A long-term natural decline–recovery information cycle was not recovered
+
+A preregistered 1980–2010 Hoge Veluwe lane combines published annual standardized selection gradients with a fixed Ivory Coast NCEP temperature cue.
+
+The rolling cue–driver relationship is highly nonstationary, and an unconstrained two-line fit changes near 2001. However, the registered decline–recovery geometry is not met: the fitted pre-break slope is positive rather than negative.
+
+The frozen outcome is therefore
+
+[
+\texttt{NO\_CUE\_DRIVER\_REVERSAL}.
+]
+
+The path-dependence model was not opened.
+
+PAYOFF-B therefore does not claim to have observed natural information-recovery hysteresis in this system.
+
+### 3.5 Capacity remains a distinct failure mode
+
+The earlier moving-landscape programme supplies a separate capacity result. In a local controller, movement and phenological feedback can be exactly substitutable at fixed total restoring gain. Explicit landscapes break that equivalence.
+
+Finite timing capacity extends persistence and reduces immediate route costs, but movement re-enters under stronger directional forcing. In the canonical one-dimensional landscape, increasing phenological capacity shifts the persistence bracket substantially, yet frontier strategies remain migration-dominant. In a two-dimensional zigzag landscape, phenology-only tracking is favoured at moderate forcing before migration re-enters as forcing increases.
+
+Timing therefore acts as a finite buffer, not a permanent substitute for spatial tracking.
+
+---
+
+## 4. Discussion
+
+### 4.1 Cue quality and cue use are different ecological state variables
+
+A central result of PAYOFF-B is that environmental information quality should not be equated with information use.
+
+The information-deadline theorem gives actor-specific cue thresholds. Two species can experience the same external cue and nevertheless occupy different information states because they face different costs of waiting.
+
+This distinction changes how phenological mismatch should be interpreted. A mismatch peak during a period of improving environmental predictability need not imply that organisms are becoming less responsive. It can arise because one partner has begun using a cue that the other partner still rationally ignores.
+
+### 4.2 Better information can transiently worsen coordination
+
+The exact desynchronization-width identity
+
+[
+\Delta q=
+\frac{|D_2-D_1|}{A+L}
+]
+
+gives a direct comparative prediction.
+
+Greater heterogeneity in decision deadlines widens the range of cue qualities over which interacting species use information asymmetrically. For a fixed delay-cost difference, larger costs of making the wrong seasonal decision compress that interval because both actors begin valuing information at more similar cue reliabilities.
+
+The prediction is deliberately not “information is bad.” At low cue quality both actors ignore the cue. At high enough cue quality both use it. The mismatch peak occurs during the transition between those conventions.
+
+### 4.3 Environmental recovery can precede ecological recovery
+
+The shared-cue network produces a stronger path-dependent result.
+
+Once coordinated information use collapses, restoring cue reliability is not sufficient to restore the informed state. At perfect information, the obsolete and informed timing profiles can both remain strict equilibria. The informed state has higher joint payoff, but each individual actor loses by moving first because it pays the information cost while temporarily mismatching partners.
+
+Thus environmental recovery and behavioural recovery are not equivalent:
+
+[
+\text{information recovery}
+\neq
+\text{coordination recovery}.
+]
+
+This is a seasonal ecological version of a coordination trap. The contribution is not the generic existence of multiple equilibria, which is established in game theory, but the link from decision deadlines and information acquisition to a persistent ecological timing convention.
+
+### 4.4 Acquisition memory and topological memory are distinct
+
+The shared-cue recovery failure is topology-independent across the three canonical connected graphs because a lone information adopter mismatches all of its own neighbours.
+
+The earlier private-cue game shows a different mechanism. There, displaced heterogeneous timing profiles are stored differently by different graph structures. Under the strict phase diagram, complete and chain networks retain lower-payoff hysteresis across nontrivial parameter regions, whereas the migrant-star does not.
+
+PAYOFF-B therefore distinguishes:
+
+1. **acquisition memory** — failure to restart a coordinated information-using convention;
+2. **topological memory** — storage of heterogeneous timing states by network geometry.
+
+The first concerns strategic accessibility of shared information use; the second concerns which mixed timing configurations a network can retain.
+
+### 4.5 Natural evidence currently supports the information axis, not natural network hysteresis
+
+The empirical evidence is deliberately modular.
+
+The broad-bird result supports an association between predictive information and realized mismatch, but dependence-aware uncertainty prevents a universal species-level claim.
+
+The flycatcher manipulation anchors the idea that the availability of heterospecific phenology depends on when a decision is made.
+
+The wigeon null shows that predictive connectivity should not be treated as a universal post-error controller.
+
+The long-term cue–driver lane fails its preregistered reversal gate.
+
+No current natural dataset therefore demonstrates the full degradation–recovery network hysteresis predicted by the shared-cue and private-cue games. That remains a prospective test.
+
+### 4.6 Capacity, information and coordination are separate constraints
+
+The current programme resolves the earlier PAYOFF-B story into distinct layers.
+
+**Capacity:** can the organism physically express enough spatial or temporal response?
+
+**Prediction:** does information available before commitment predict the later environmental state?
+
+**Information timing:** does the information become useful before the decision deadline?
+
+**Strategic accessibility:** can one actor begin using the information without incurring prohibitive partner mismatch?
+
+**Network memory:** once a timing convention changes, does interaction topology preserve or erase it?
+
+These constraints can produce similar mismatch trajectories but imply different interventions and different forecasts.
+
+Improving connectivity habitat addresses a spatial capacity problem. Improving environmental forecasts addresses an information problem. Neither necessarily resolves a coordination trap once partner timing has become historically locked.
+
+### 4.7 Relation to prior work
+
+Remote environmental cues, information value in migration, climate-driven cue–driver decoupling, phenological games and ecological hysteresis all have substantial prior literatures.
+
+The closest direct predecessor is the pied-flycatcher work showing that wintering- and breeding-ground environmental variables can explain arrival timing without predicting the annual fitness optimum, with climate-driven cue–driver decoupling proposed explicitly.
+
+PAYOFF-B therefore begins one step later.
+
+Its candidate contribution is the conjunction:
+
+[
+\text{changing cue reliability}
+\times
+\text{heterogeneous decision deadlines}
+\rightarrow
+\text{asynchronous cue uptake}
+\rightarrow
+\text{temporary mismatch}
+\rightarrow
+\text{coordination trap or network memory}.
+]
+
+The exact threshold and bistability conditions make that conjunction testable rather than metaphorical.
+
+---
+
+## 5. Registered perturbation still unopened
+
+The industrial-development mule-deer lane remains part of the broader PAYOFF-B programme. It asks whether an independently observed actuation contrast propagates into phase retention within taxon.
+
+<!-- AIKENS_LAMBDA_RESULTS_START -->
+[AIKENS LAMBDA RESULT PENDING — render only from the registered result JSON after the frozen environmental reconstruction executes.]
+<!-- AIKENS_LAMBDA_RESULTS_END -->
+
+The information-deadline conclusions above do not depend on the sign of the unopened Aikens result.
+
+---
+
+## 6. Conclusion
+
+Seasonal adaptation is not limited only by how fast organisms can move or how far they can shift phenology.
+
+An organism may possess an adequate response but face a decision before useful information becomes available. Interacting organisms can face different costs of waiting, causing them to begin using the same improving cue at different reliability thresholds. Better information can therefore transiently worsen coordination.
+
+The stronger result is historical. Once an information-using convention collapses, restoring environmental information can be insufficient. Under perfect cue accuracy, an obsolete timing convention and a better informed convention can both be strict equilibria. The informed state can have higher joint payoff while no actor benefits from adopting it first.
+
+Natural data currently support pieces of this causal chain rather than the complete hysteresis process. Predictive connectivity is associated with smaller mismatch in a pooled broad-bird analysis; heterospecific phenology affects decisions made after, but not before, it becomes visible in a flycatcher manipulation; predictive connectivity does not strengthen post-error correction in wigeon; and a preregistered long-term natural reversal gate is negative.
+
+The resulting ecological message is:
+
+> **Environmental information can recover before ecological coordination does.**
+
+Climate adaptation can therefore fail not only because organisms cannot respond or cannot predict the future, but because information use itself has become a historically contingent property of the interaction network.
