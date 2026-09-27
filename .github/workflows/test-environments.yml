@@ -33,3 +33,48 @@ jobs:
         run: python -m pip install --disable-pip-version-check -e ".[test,empirical]"
       - name: Run full pytest suite with empirical dependencies enabled
         run: pytest -q
+      - name: Prove lambda estimators execute without skips
+        run: |
+          python - <<'PY'
+          import numpy
+          import pandas
+          import scipy
+          import statsmodels
+          print(
+              "empirical imports:",
+              numpy.__version__,
+              pandas.__version__,
+              scipy.__version__,
+              statsmodels.__version__,
+          )
+          PY
+
+          pytest -q \
+            tests/test_barnacle_phase_error_calibration.py::test_fixed_transition_controller_recovers_phase_slope_and_stopover_sign \
+            tests/test_barnacle_goose_phase_error_calibration.py::test_fixed_route_lambda_recovers_exact_slope_with_intercept \
+            tests/test_wigeon_phase_error_calibration.py::test_controller_helper_matches_frozen_formula_on_synthetic_fixture \
+            tests/test_phase_retention_contrast_fit.py::test_clustered_fixed_effect_fit_recovers_registered_lambda_contrast \
+            --junitxml=lambda-estimator-ci.xml
+
+          python - <<'PY'
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+
+          report = Path("lambda-estimator-ci.xml")
+          root = ET.parse(report).getroot()
+          suites = [root] if root.tag == "testsuite" else list(root.findall("testsuite"))
+          tests = sum(int(suite.attrib.get("tests", "0")) for suite in suites)
+          skipped = sum(int(suite.attrib.get("skipped", "0")) for suite in suites)
+          failures = sum(int(suite.attrib.get("failures", "0")) for suite in suites)
+          errors = sum(int(suite.attrib.get("errors", "0")) for suite in suites)
+
+          if tests != 4:
+              raise SystemExit(f"expected 4 lambda checks, observed {tests}")
+          if skipped != 0:
+              raise SystemExit(f"lambda checks must not skip; observed {skipped}")
+          if failures != 0 or errors != 0:
+              raise SystemExit(
+                  f"lambda checks failed: failures={failures}, errors={errors}"
+              )
+          print("lambda estimator audit: 4 executed, 0 skipped, 0 failed")
+          PY
