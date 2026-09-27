@@ -280,3 +280,38 @@ def test_mirror_fails_closed_without_authoritative_dryad_sha256(
             10,
         )
 
+def test_dryad_dataset_archive_extracts_exact_registered_file(tmp_path: Path):
+    module = load_module()
+
+    archive_buf = io.BytesIO()
+    import zipfile
+    with zipfile.ZipFile(archive_buf, "w") as archive:
+        archive.writestr("nested/target.xlsx", b"registered bytes")
+        archive.writestr("nested/other.txt", b"other")
+
+    class Response:
+        status_code = 200
+        ok = True
+        content = archive_buf.getvalue()
+        url = "https://datadryad.org/api/v2/datasets/example/download"
+
+        def raise_for_status(self):
+            return None
+
+    class Session:
+        def get(self, url, timeout=None, allow_redirects=True):
+            return Response()
+
+    result = module._dryad_dataset_archive_download(
+        Session(),
+        doi="10.5061/dryad.example",
+        exact_name="target.xlsx",
+        output_dir=tmp_path,
+        timeout=10,
+    )
+
+    assert result["provider"] == "dryad_dataset_archive"
+    assert result["filename"] == "target.xlsx"
+    assert (tmp_path / "target.xlsx").read_bytes() == b"registered bytes"
+    assert result["sha256"] == module.sha256_bytes(b"registered bytes")
+
