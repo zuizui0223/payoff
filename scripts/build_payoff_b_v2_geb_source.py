@@ -53,7 +53,7 @@ separate parts of the mechanism rather than the full hysteresis sequence.
 
 ### Main conclusions
 
-Environmental information can recover before ecological coordination does.
+Theory predicts that environmental information can recover before ecological coordination does.
 Seasonal mismatch therefore depends not only on response capacity and
 information quality, but also on when interacting organisms can afford to use
 that information and on the strategic accessibility of coordinated change.
