@@ -77,11 +77,15 @@ def audit(text: str | None = None) -> dict:
     running_title = running.group(1).strip() if running else ""
 
     intro_start = text.index("## 1. Introduction")
-    data_start = text.index("## Data and Code Availability Statement")
-    main_body = text[intro_start:data_start]
+    references_start = text.index("## References")
+    main_body = text[intro_start:references_start]
     main_body_words = word_count(main_body)
 
-    references_text = section(text, "## References", "---\n\n## Figure legends")
+    references_text = section(
+        text,
+        "## References",
+        "## Data and Code Availability Statement",
+    )
     references = [
         line for line in references_text.splitlines()
         if line.startswith("- ")
