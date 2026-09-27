@@ -6,7 +6,8 @@
   "exact_theory_files": [
     "theory/INFORMATION_DEADLINE_THEOREM.md",
     "theory/NETWORK_INFORMATION_UPTAKE_THEOREM.md",
-    "theory/PERFECT_INFORMATION_COORDINATION_TRAP.md"
+    "theory/PERFECT_INFORMATION_COORDINATION_TRAP.md",
+    "theory/INFORMATION_RESCUE_COALITION_THEOREM.md"
   ],
   "integrated_manuscript": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "empirical_status": {
