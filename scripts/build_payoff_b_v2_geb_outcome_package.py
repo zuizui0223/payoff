@@ -281,7 +281,13 @@ def build(
         "scientific_state": "OUTCOME_RENDERED_SCIENCE_READY",
         "scientific_result": result_class,
         "v1_status": "FROZEN_PROVENANCE_ONLY",
-        "aikens_outcome_opened": True,
+        "registered_result_frozen": True,
+        "phase_retention_estimate_available": bool(
+            claim_state.get("estimable", False)
+        ),
+        "aikens_outcome_opened": bool(
+            claim_state.get("estimable", False)
+        ),
         "aikens_result_location": "Supporting Information only",
         "main_text_retuned": False,
         "main_figures_retuned": False,
