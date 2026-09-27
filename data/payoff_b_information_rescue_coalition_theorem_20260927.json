@@ -85,11 +85,12 @@
   ],
   "prior_art_boundary": [
     "generic threshold cascades and seed-triggered network cascades are established in network science",
-    "the candidate ecological contribution is the seasonal-risk/deadline/interaction derivation of adoption thresholds and their connection to phenological recovery"
+    "ecological keystoneness and structural controllability already study disproportionate network control by selected species or interactions",
+    "the candidate ecological contribution is the derivation of information-use and rescue thresholds from seasonal mismatch risk, decision deadlines/information costs and interaction mismatch"
   ],
   "claim_boundary": [
     "exact only for the declared perfect-information shared-cue game",
     "temporary pinning is a mechanism probe, not a management recommendation",
-    "no natural keystone rescue species has been identified"
+    "no natural singleton rescue species has been identified"
   ]
 }
