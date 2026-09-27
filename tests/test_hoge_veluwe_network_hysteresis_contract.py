@@ -22,6 +22,10 @@ def test_hoge_veluwe_network_lane_is_preoutcome_and_fixed():
     assert c["source_gate"]["require_at_least_24_history_years_after_connectivity_construction"] is True
     assert c["source_gate"]["require_expected_primary_history_span"] == [1992, 2015]
     assert c["information_reversal_gate"]["fail_state"] == "NO_CUE_RESOURCE_REVERSAL"
+    assert c["information_reversal_gate"]["aicc_parameter_count"]["linear"] == 2
+    assert c["information_reversal_gate"]["aicc_parameter_count"]["segmented"] == 5
+    assert c["history_test_if_reversal_passes"]["covariance"] == "Newey-West HAC covariance, maxlags=2, finite-sample correction"
+    assert c["history_test_if_reversal_passes"]["no_naive_iid_inference"] is True
 
 
 def test_history_test_cannot_open_before_information_reversal():
