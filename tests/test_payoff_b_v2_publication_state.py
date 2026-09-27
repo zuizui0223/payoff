@@ -30,8 +30,8 @@ def test_v2_is_the_only_active_paper2_source():
     assert "CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md" in status
     assert "V1_STATUS = FROZEN_PROVENANCE_ONLY" in status
     assert "CURRENT_V2_PREOUTCOME_PACKAGE = READY" in status
-    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36308706101" in status
-    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10927314277" in status
+    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36309072630" in status
+    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10927484417" in status
     assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED" in status
     assert "sole active integrated ecology manuscript" in relation
     assert "No V1 and V2 dual submission is allowed." in relation
