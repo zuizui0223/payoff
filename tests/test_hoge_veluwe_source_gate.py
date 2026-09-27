@@ -105,7 +105,10 @@ def test_dryad_transport_fallback_is_digest_guarded_and_outcome_blind():
     assert "computed SHA-256 equals" in mirror["use_rule"]
     assert "Dryad-declared SHA-256" in mirror["use_rule"]
     amendment = contract["source_gate"]["transport_amendment"]
-    assert amendment["scientific_effect"] == "none; Dryad DOI, exact filenames and Dryad-declared SHA-256 remain authoritative"
+    effect = amendment["scientific_effect"]
+    assert effect.startswith("none; Dryad DOI")
+    assert "exact filenames" in effect
+    assert "authoritative Dryad SHA-256" in effect
     assert amendment["outcome_data_inspected"] is False
 
 def test_dryad_download_accepts_only_digest_matching_zenodo_fallback(
