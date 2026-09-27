@@ -142,6 +142,13 @@ post-break slope > 0
 endpoint recovery >= 50% of the pre-break-to-break decline
 ```
 
+AICc counts 2 parameters for the single line and **5** for the segmented
+candidate: two intercepts, two slopes and the selected breakpoint. If candidate
+segmented AICc values tie within 1e-12, the earlier break year is chosen.
+Because adjacent connectivity years share most of their trailing 8-year
+history, leave-one-history-year-out breakpoint/slope-sign stability is reported
+as a robustness diagnostic rather than treated as independent replication.
+
 The breakpoint is selected from the **cue–resource connectivity series only**.
 Flycatcher and great-tit timing cannot define it.
 
@@ -170,9 +177,13 @@ resident_migrant_mismatch
 + centered_connectivity:branch
 ```
 
-Primary support requires the 95% CI for the branch coefficient to exclude zero.
-This tests whether coordination differs at comparable information quality
-depending on the path by which that information state was reached.
+Predictive connectivity is centered at the mean of the connectivity range
+represented on both branches. Primary support requires the **Newey–West HAC,
+lag 2, finite-sample-corrected 95% CI** for the branch coefficient to exclude
+zero at that point. HC3 is reported as a sensitivity only. This tests whether
+coordination differs at comparable information quality depending on the path
+by which that information state was reached while accounting for annual serial
+dependence.
 
 ## Claim ceiling
 
