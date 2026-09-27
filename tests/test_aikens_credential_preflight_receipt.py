@@ -26,4 +26,7 @@ def test_docs_reference_latest_safe_preflight() -> None:
         assert "36113621057" in text
         assert "10853764396" in text
     assert "status = NOT_CONFIGURED" in auth
+    assert "LEGACY_V1_CREDENTIAL_PREFLIGHT_RUN = 36113621057" in pub
+    assert "LEGACY_V1_CREDENTIAL_PREFLIGHT_ARTIFACT = 10853764396" in pub
     assert "opened no environmental" in pub
+    assert "CURRENT_V2_PREOUTCOME_PACKAGE = REBUILD_REQUIRED" in pub

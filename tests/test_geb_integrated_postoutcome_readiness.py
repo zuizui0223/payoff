@@ -15,11 +15,12 @@ def test_geb_postoutcome_readiness_keeps_real_outcome_unopened() -> None:
     assert "No simulated test payload is a scientific result." in text
 
 
-def test_publication_status_routes_integrated_paper_to_geb() -> None:
+def test_publication_status_routes_v2_to_geb_without_inheriting_v1_pipeline_readiness() -> None:
     text = PUB.read_text(encoding="utf-8")
     assert "FIRST_SHOT = Global Ecology and Biogeography / Research Article" in text
-    assert "POSTOUTCOME_GEB_PIPELINE = READY" in text
-    assert "GEB_INTEGRATED_POSTOUTCOME_PIPELINE_READINESS_20260925.md" in text
+    assert "LEGACY_V1_POSTOUTCOME_GEB_PIPELINE = READY_FOR_V1_ONLY" in text
+    assert "LEGACY_V1_POSTOUTCOME_READINESS = GEB_INTEGRATED_POSTOUTCOME_PIPELINE_READINESS_20260925.md" in text
+    assert "CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = REBUILD_REQUIRED" in text
     assert "Aikens fixed-24 h" in text and "adjudication" in text
 
 
