@@ -211,6 +211,11 @@ text. The credential-only preflight opened no environmental values and left the
 Aikens lambda outcome unopened. These statements are retained as provenance,
 not inherited automatically by V2.
 
+The legacy V1 package also retained the **Aikens fixed-24 h adjudication** as its
+registered final science gate. That adjudication record remains provenance for
+V1 only; V2 must rebuild its own journal-facing postoutcome route and may not
+inherit V1 pipeline readiness.
+
 ### Aikens gate
 
 The preregistered Aikens fixed-24 h lambda outcome remains unopened.
