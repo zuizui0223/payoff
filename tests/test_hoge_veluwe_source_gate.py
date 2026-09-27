@@ -395,3 +395,41 @@ def test_mda_html_landing_form_resolves_binary_file(tmp_path: Path):
     assert out["filename"] == "TomotaniData.xlsx"
     assert out["landing_resolution"]["resolution"] == "html_form_post"
 
+def test_cue_extension_receipt_is_required_for_final_gate_a_pass(tmp_path: Path):
+    module = load_module()
+
+    missing, missing_ok = module._load_cue_extension_receipt(None)
+    assert missing["status"] == "NOT_PROVIDED"
+    assert missing_ok is False
+
+    receipt = tmp_path / "cue.json"
+    receipt.write_text(
+        json.dumps(
+            {
+                "status": "SOURCE_FAITHFUL_CUE_EXTENSION_COMPLETE",
+                "years": [1980, 2015],
+                "n_years": 36,
+                "annual_csv_sha256": "abc123",
+                "cue_window": "20 calendar days beginning 18 February",
+                "grid_latitudes_deg_n": [10.0, 7.5, 5.0],
+                "grid_longitudes_deg_e": [352.5, 355.0, 357.5],
+                "transport_counts": {"erddap": 36},
+                "outcome_firewall": {
+                    "resource_data_read": False,
+                    "resident_timing_read": False,
+                    "migrant_timing_read": False,
+                    "cue_resource_connectivity_computed": False,
+                    "information_reversal_gate_opened": False,
+                    "history_test_opened": False,
+                },
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    summary, ok = module._load_cue_extension_receipt(receipt)
+    assert ok is True
+    assert summary["certified"] is True
+    assert summary["firewall_true_flags"] == []
+
