@@ -25,7 +25,7 @@ def test_information_deadlines_renderer_builds_seven_outcome_independent_svgs(tm
     assert len(manifest["figures"]) == 7
 
     for row in manifest["figures"].values():
-        path = Path(row["path"])
+        path = out / row["path"]
         assert path.exists()
         text = path.read_text(encoding="utf-8")
         assert text.startswith("<svg")
