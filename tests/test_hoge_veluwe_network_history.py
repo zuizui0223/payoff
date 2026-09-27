@@ -109,9 +109,12 @@ def test_gate_c_uses_overlap_support_and_hac7_when_licensed():
     assert result["branch_counts"]["decline"] >= 6
     assert result["branch_counts"]["recovery"] >= 6
     assert result["covariance"]["primary"] == "HAC(7) finite-sample corrected"
-    primary = result["branch_at_mean_overlap"]["primary_hac7"]
+    assert result["time_trend_guard"]["required"] is True
+    assert math.isfinite(result["year_center"])
+    primary = result["branch_at_mean_overlap"]["primary_hac7_year_adjusted"]
     assert math.isfinite(primary["estimate"])
     assert primary["estimate"] == pytest.approx(2.0, abs=0.20)
+    assert "unadjusted_hac7" in result["branch_at_mean_overlap"]
 
 def test_full_sample_reversal_can_fail_the_frozen_stability_gate():
     years = list(range(1992, 2016))
