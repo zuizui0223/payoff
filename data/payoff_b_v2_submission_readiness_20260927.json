@@ -55,15 +55,20 @@
     "scientific_contract": "FROZEN",
     "outcome_state": "UNOPENED",
     "last_verified_credential_preflight": {
-      "date": "2026-09-25",
-      "workflow_run": 36113621057,
-      "artifact_id": 10853764396,
+      "date": "2026-09-27",
+      "workflow_run": 36318036795,
+      "artifact_id": 10931233185,
+      "artifact_sha256": "bc264ec514b76632d0e4f3b0d88f1b4383b81dce9451a194b7cebe799449d044",
       "status": "NOT_CONFIGURED",
       "configured": false,
-      "credential_route": "none"
+      "credential_route": "none",
+      "credential_values_recorded": false,
+      "network_submission_performed": false,
+      "environmental_values_opened": false,
+      "lambda_outcome_opened": false
     },
-    "current_secret_state": "NOT_READABLE_FROM_REPOSITORY_AUDIT_RECHECK_REQUIRED",
-    "permitted_next_action": "rerun credential preflight; if configured, execute the existing frozen full-extraction workflow",
+    "current_secret_state": "NOT_CONFIGURED_CONFIRMED_2026-09-27",
+    "permitted_next_action": "configure AppEEARS token or Earthdata username/password; rerun credential preflight; then execute the existing frozen full-extraction workflow",
     "scientific_retuning_permitted": false
   },
   "portal_readiness": {
