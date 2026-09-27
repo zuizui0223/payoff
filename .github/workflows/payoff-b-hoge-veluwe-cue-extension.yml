@@ -1,0 +1,54 @@
+name: PAYOFF-B Hoge Veluwe cue extension
+
+concurrency:
+  group: payoff-b-hv-cue-extension-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-hv-cue-extension-20260927
+    paths:
+      - "scripts/payoff_b_hoge_veluwe_cue_extension.py"
+      - "data/payoff_b_cv24c_frozen_cue_prefix_1980_2010.json"
+      - "tests/test_hoge_veluwe_cue_extension.py"
+      - ".github/workflows/payoff-b-hoge-veluwe-cue-extension.yml"
+  pull_request:
+    paths:
+      - "scripts/payoff_b_hoge_veluwe_cue_extension.py"
+      - "data/payoff_b_cv24c_frozen_cue_prefix_1980_2010.json"
+      - "tests/test_hoge_veluwe_cue_extension.py"
+      - ".github/workflows/payoff-b-hoge-veluwe-cue-extension.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  cue-extension:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen cue dependencies
+        run: >
+          python -m pip install --disable-pip-version-check
+          pytest pandas numpy requests xarray netCDF4
+      - name: Test frozen prefix gate
+        run: pytest -q tests/test_hoge_veluwe_cue_extension.py
+      - name: Extend exact frozen Ivory Coast cue through 2015
+        run: >
+          python scripts/payoff_b_hoge_veluwe_cue_extension.py
+          --annual-output outputs/hoge_veluwe_cue_extension_annual.csv
+          --receipt-output outputs/hoge_veluwe_cue_extension_receipt.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-hoge-veluwe-cue-extension
+          path: |
+            outputs/hoge_veluwe_cue_extension_annual.csv
+            outputs/hoge_veluwe_cue_extension_receipt.json
+          if-no-files-found: error
