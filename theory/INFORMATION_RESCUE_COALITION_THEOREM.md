@@ -210,7 +210,7 @@ remaining old actor through the informed-neighbour term.
 A seed that makes one outsider cross its strict threshold can therefore
 nucleate a self-reinforcing recovery cascade.
 
-This is the mechanism behind **keystone rescue adopters**.
+This is the mechanism behind **singleton rescue seeds**.
 
 ---
 
@@ -368,7 +368,7 @@ Temporarily restoring cue use in the central local pollinator does.
 After the other species switch, the intervention can be removed and the
 fully-informed state persists.
 
-This makes the central pollinator a **keystone rescue adopter** in the declared
+This makes the central pollinator a **singleton rescue seed** in the declared
 chain.
 
 ---
@@ -437,10 +437,14 @@ This suggests the empirical quantity:
 ## Prior-art boundary
 
 Threshold cascades and seed-triggered network cascades are established ideas in
-network science, including Watts' threshold-cascade model.
+network science, including Watts' threshold-cascade model. Ecological network
+research has likewise used keystone interactions, structural controllability
+and critical nodes to identify species or interactions with disproportionate
+effects on community state and recovery.
 
-PAYOFF-B does not claim generic threshold diffusion or influence maximization as
-new.
+PAYOFF-B therefore does not claim generic threshold diffusion, influence
+maximization, ecological controllability, or the existence of keystone network
+positions as new.
 
 Its candidate ecological contribution is the derivation of the node threshold
 
@@ -476,7 +480,7 @@ network with normalized non-negative interaction weights.
 A temporary pinned actor is a mechanism probe, not a literal management
 prescription.
 
-Natural keystone rescue adopters have not been empirically identified.
+Natural singleton rescue seeds have not been empirically identified.
 
 The result does not imply that manipulating one species is safe or desirable in
 a real ecosystem.
