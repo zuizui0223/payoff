@@ -50,6 +50,12 @@ def parse_args():
         default=Path("outputs/hoge_veluwe_source_gate_a"),
     )
     p.add_argument(
+        "--cue-receipt",
+        type=Path,
+        default=None,
+        help="receipt from the frozen 1980-2015 Ivory Coast cue extension",
+    )
+    p.add_argument(
         "--timeout",
         type=int,
         default=120,
@@ -891,9 +897,48 @@ def _source_gate_status(
     return "BIOLOGICAL_SOURCE_GATE_PASS_CUE_EXTENSION_PENDING", reasons
 
 
+def _load_cue_extension_receipt(path: Path | None) -> tuple[dict, bool]:
+    if path is None:
+        return {"status": "NOT_PROVIDED"}, False
+    if not path.exists():
+        return {"status": "MISSING", "path": str(path)}, False
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    firewall = payload.get("outcome_firewall", {})
+    forbidden_true = [
+        key
+        for key, value in firewall.items()
+        if value is True
+    ]
+    ok = (
+        payload.get("status") == "SOURCE_FAITHFUL_CUE_EXTENSION_COMPLETE"
+        and payload.get("years") == [1980, 2015]
+        and payload.get("n_years") == 36
+        and not forbidden_true
+        and bool(payload.get("annual_csv_sha256"))
+    )
+    summary = {
+        "status": payload.get("status"),
+        "years": payload.get("years"),
+        "n_years": payload.get("n_years"),
+        "annual_csv_sha256": payload.get("annual_csv_sha256"),
+        "cue_window": payload.get("cue_window"),
+        "grid_latitudes_deg_n": payload.get("grid_latitudes_deg_n"),
+        "grid_longitudes_deg_e": payload.get("grid_longitudes_deg_e"),
+        "transport_counts": payload.get("transport_counts"),
+        "outcome_firewall": firewall,
+        "firewall_true_flags": forbidden_true,
+        "certified": ok,
+    }
+    return summary, ok
+
+
 def main():
     args = parse_args()
     contract = json.loads(args.contract.read_text(encoding="utf-8"))
+    cue_extension, cue_extension_ok = _load_cue_extension_receipt(
+        args.cue_receipt
+    )
     args.output_dir.mkdir(parents=True, exist_ok=True)
     sources_dir = args.output_dir / "source_files"
     if sources_dir.exists():
@@ -941,6 +986,7 @@ def main():
             "result_id": "payoff_b_hoge_veluwe_source_gate_a_20260927",
             "contract_id": contract["contract_id"],
             "status": "SOURCE_ACCESS_FAILURE",
+            "cue_extension": cue_extension,
             "error_type": type(exc).__name__,
             "error": str(exc),
             "acquired_sources_before_failure": {
@@ -981,6 +1027,12 @@ def main():
         resident_schema,
         resource_schema,
     )
+    if status == "BIOLOGICAL_SOURCE_GATE_PASS_CUE_EXTENSION_PENDING":
+        if cue_extension_ok:
+            status = "GATE_A_PASS_SOURCE_READY"
+        else:
+            status = "CUE_EXTENSION_NOT_SOURCE_FAITHFUL"
+            reasons = [*reasons, "CUE_EXTENSION_NOT_CERTIFIED"]
 
     receipt = {
         "result_id": "payoff_b_hoge_veluwe_source_gate_a_20260927",
@@ -1033,8 +1085,8 @@ def main():
             },
         },
         "cue_extension": {
-            "status": "PENDING_SEPARATE_SOURCE_FAITHFUL_EXTENSION",
-            "rule": contract["sources"]["precommitment_cue"]["spatial_rule"],
+            **cue_extension,
+            "registered_rule": contract["sources"]["precommitment_cue"]["spatial_rule"],
         },
         "outcome_firewall": {
             "cross_source_join_performed": False,
