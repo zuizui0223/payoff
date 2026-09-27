@@ -2,6 +2,16 @@
 
 Status: **adopted two-paper publication architecture; underlying scientific freezes and source manuscripts remain preserved**
 
+> **2026-09-27 canonical amendment:** the two-paper architecture remains
+> adopted, but Paper 2 has advanced from the temporal-buffering V1 generation
+> to `manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md`.
+> V1 is frozen as provenance/rollback and is not an active parallel submission.
+> See `docs/PAYOFF_B_V1_V2_PUBLICATION_RELATION_20260927.md`.
+> Where this 2026-09-25 document names V1 as the active Paper 2 source or gives
+> the temporal-buffering headline as the primary novelty, the 2026-09-27
+> amendment supersedes that publication-state statement while preserving the
+> historical scientific record.
+
 ## Adopted publication decision
 
 PAYOFF-B uses a two-paper programme rather than three independent papers.
