@@ -21,10 +21,12 @@ def test_publication_status_routes_v2_to_geb_without_inheriting_v1_pipeline_read
     assert "LEGACY_V1_POSTOUTCOME_GEB_PIPELINE = READY_FOR_V1_ONLY" in text
     assert "LEGACY_V1_POSTOUTCOME_READINESS = GEB_INTEGRATED_POSTOUTCOME_PIPELINE_READINESS_20260925.md" in text
     assert (
-        "CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = REBUILD_REQUIRED" in text
-        or "CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = READY_UNOPENED" in text
+        "CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = READY_UNOPENED" in text
     )
     assert "Aikens fixed-24 h" in text and "adjudication" in text
+    assert "CURRENT_V2_POSTOUTCOME_RESULT_LOCATION = Supporting Information only" in text
+    assert "LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT = NOT_CONFIGURED_2026-09-25" in text
+    assert "CURRENT_CREDENTIAL_STATE = RECHECK_REQUIRED_BEFORE_REAL_EXECUTION" in text
 
 
 def test_authenticated_aikens_workflow_builds_canonical_v2_outcome_package() -> None:

@@ -18,8 +18,8 @@ reuse the superseded temporal-buffering V1 GEB overlay.
 ## Verified GEB-facing metrics
 
 ```text
-structured_abstract_words = 243
-main_body_words = 4148
+structured_abstract_words = 246
+main_body_words = 4167
 references = 13
 display_pieces = 7
 keywords = 8
@@ -71,18 +71,31 @@ Figure panels in the V2 renderer use lower-case journal-style panel labels.
 ## Frozen build provenance
 
 ```text
-workflow_run = 36309072630
-validated_head = 1893ec08115d68bb1f51db1834b944c3fb7305a5
+workflow_run = 36313076476
+validated_head = 3524f28d00299c5fc5990c8b64154c9057954e2d
 workflow_conclusion = success
 
-artifact_id = 10927484417
+artifact_id = 10930130067
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-7b1033684a17e8018ce12e8d9d1809583bffbf98eb9431c3aa9075e573e857f5
+c47efff79a125945361d4a7f576141d70df6cbd30512556337be1c3f62c693c6
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b
+cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
+```
+
+Deterministic reproduction check:
+
+```text
+reproduction_workflow_run = 36315132279
+reproduction_head = 2684c0cb3a37bc531a723a661186172b0a47ca38
+reproduction_artifact_id = 10929879336
+reproduction_artifact_sha256 =
+b5a97c983936c80cbfd9ef68b8af35ee6879f5d049b0383912d84096fcbb28b7
+reproduction_inner_zip_sha256 =
+cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
+deterministic_inner_archive = PASS
 ```
 
 ## Scientific boundary
@@ -100,7 +113,8 @@ Supporting Information gate. Its eventual sign is not permitted to change:
 - the broad-bird/flycatcher/wigeon claim boundaries.
 
 No natural interaction network is claimed to have demonstrated the full
-degradation–recovery hysteresis sequence.
+degradation–recovery hysteresis sequence, and no natural singleton rescue
+species is claimed to have been identified.
 
 ## Final-submission state
 

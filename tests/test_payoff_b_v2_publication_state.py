@@ -30,8 +30,8 @@ def test_v2_is_the_only_active_paper2_source():
     assert "CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md" in status
     assert "V1_STATUS = FROZEN_PROVENANCE_ONLY" in status
     assert "CURRENT_V2_PREOUTCOME_PACKAGE = READY" in status
-    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36309072630" in status
-    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10927484417" in status
+    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36313076476" in status
+    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10930130067" in status
     assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED" in status
     assert "sole active integrated ecology manuscript" in relation
     assert "No V1 and V2 dual submission is allowed." in relation
@@ -40,8 +40,8 @@ def test_v2_is_the_only_active_paper2_source():
 
     package_audit = PACKAGE_AUDIT.read_text(encoding="utf-8")
     assert "PASS — canonical V2 PREOUTCOME working package ready" in package_audit
-    assert "structured_abstract_words = 243" in package_audit
-    assert "main_body_words = 4148" in package_audit
+    assert "structured_abstract_words = 246" in package_audit
+    assert "main_body_words = 4167" in package_audit
     assert "references = 13" in package_audit
     assert "display_pieces = 7" in package_audit
     assert "FINAL_SUBMISSION_ELIGIBLE = false" in package_audit
@@ -58,7 +58,8 @@ def test_v2_abstract_keeps_only_the_core_deadline_and_recovery_story():
     assert "better information increases" in abstract
     assert "strict Nash equilibria" in abstract
     assert "perfect cue accuracy does not recover" in abstract
-    assert "Environmental information can recover before ecological coordination does." in abstract
+    assert "Theory predicts that environmental information can recover before ecological coordination does." in abstract
+    assert "Natural evidence supports pieces of this mechanism rather than the full hysteresis process" in abstract
 
     # Important secondary results stay in Results/Discussion rather than
     # competing with T1-T3 and T7-T8 in the abstract.

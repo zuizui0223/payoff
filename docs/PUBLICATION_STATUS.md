@@ -186,9 +186,9 @@ ready for internal review but remains blocked from final journal upload.
 
 ```text
 CURRENT_V2_PREOUTCOME_PACKAGE = READY
-CURRENT_V2_PREOUTCOME_BUILD_RUN = 36309072630
-CURRENT_V2_PREOUTCOME_ARTIFACT = 10927484417
-CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36313076476
+CURRENT_V2_PREOUTCOME_ARTIFACT = 10930130067
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
 CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
@@ -207,10 +207,10 @@ LEGACY_V1_POSTOUTCOME_READINESS = GEB_INTEGRATED_POSTOUTCOME_PIPELINE_READINESS_
 LEGACY_V1_CREDENTIAL_PREFLIGHT_RUN = 36113621057
 LEGACY_V1_CREDENTIAL_PREFLIGHT_ARTIFACT = 10853764396
 CURRENT_V2_PREOUTCOME_PACKAGE = READY
-CURRENT_V2_PREOUTCOME_BUILD_RUN = 36309072630
-CURRENT_V2_PREOUTCOME_ARTIFACT = 10927484417
-CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = d5b5652beb032ea8dfed90eab85527f20310c6b4e0a304e50f48755d233d653b
-CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = REBUILD_REQUIRED
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36313076476
+CURRENT_V2_PREOUTCOME_ARTIFACT = 10930130067
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
+CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = READY_UNOPENED
 ```
 
 The legacy V1 PREOUTCOME package had zero identity leaks in its anonymous main
@@ -220,8 +220,26 @@ not inherited automatically by V2.
 
 The legacy V1 package also retained the **Aikens fixed-24 h adjudication** as its
 registered final science gate. That adjudication record remains provenance for
-V1 only; V2 must rebuild its own journal-facing postoutcome route and may not
-inherit V1 pipeline readiness.
+V1 only.
+
+The canonical V2 postoutcome route has now been rebuilt and tested independently.
+All four registered result classes (PASS, wrong-direction, insufficient-support
+and NOT_ESTIMABLE) generate a science-ready V2 package while leaving the blinded
+main text and seven main figures unchanged. The registered result is rendered
+into Supporting Information only.
+
+```text
+CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = READY_UNOPENED
+CURRENT_V2_POSTOUTCOME_MAIN_TEXT_RETUNING = forbidden
+CURRENT_V2_POSTOUTCOME_MAIN_FIGURE_RETUNING = forbidden
+CURRENT_V2_POSTOUTCOME_RESULT_LOCATION = Supporting Information only
+LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT = NOT_CONFIGURED_2026-09-25
+CURRENT_CREDENTIAL_STATE = RECHECK_REQUIRED_BEFORE_REAL_EXECUTION
+```
+
+The credential line is deliberately a last-verified state, not a claim about
+the current secret configuration. GitHub secret values are not readable from
+the repository audit surface.
 
 ### Aikens gate
 
@@ -234,12 +252,13 @@ coordination conclusions do not depend on the Aikens sign.
 The V2 PREOUTCOME package is now built and audited. The remaining
 pre-submission tasks are therefore:
 
-1. execute and freeze the registered Aikens outcome when authentication permits;
+1. re-run credential preflight and, if authentication is configured, execute
+   and freeze the registered Aikens outcome through the canonical V2-only
+   workflow;
 2. supply an anonymous stable reviewer archive link;
 3. complete author-controlled title-page and declaration metadata;
-4. regenerate the final V2 package after the registered result and rerun the
-   existing anonymity, reference, word-count, display-piece and claim-ceiling
-   audits.
+4. perform final human review of the already automated outcome-rendered package
+   and portal metadata.
 
 
 ## DOI modules / dormant branches

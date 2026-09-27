@@ -1,5 +1,9 @@
 name: PAYOFF-B V2 GEB package
 
+concurrency:
+  group: payoff-b-v2-geb-package-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
