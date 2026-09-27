@@ -17,8 +17,9 @@ import json
 import re
 import shutil
 import zipfile
+from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import quote, urljoin
+from urllib.parse import parse_qsl, quote, urlencode, urljoin, urlparse, urlunparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DRYAD_API = "https://datadryad.org/api/v2"
@@ -30,7 +31,7 @@ DRYAD_PUBLIC_MIRRORS = {
     }
 }
 
-YEAR_HEADER_RE = re.compile(r"(?i)(^|[^a-z])(year|yr|jaar)([^a-z]|$)")
+YEAR_HEADER_RE = re.compile(r"(?i)(year|yr|jaar)")
 FILENAME_RE = re.compile(r'filename\*?=(?:UTF-8\'\')?"?([^";]+)', re.I)
 
 
@@ -427,6 +428,185 @@ def _dryad_download_file(
     }
 
 
+
+class _MdaLandingParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.links = []
+        self.clicks = []
+        self.forms = []
+        self._form = None
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        href = attrs.get("href")
+        if href:
+            self.links.append(href)
+        onclick = attrs.get("onclick")
+        if onclick:
+            self.clicks.append(onclick)
+        if tag.lower() == "form":
+            self._form = {
+                "method": str(attrs.get("method") or "get").lower(),
+                "action": attrs.get("action") or "",
+                "fields": {},
+            }
+        elif tag.lower() == "input" and self._form is not None:
+            name = attrs.get("name")
+            if name:
+                self._form["fields"][name] = attrs.get("value") or ""
+
+    def handle_endtag(self, tag):
+        if tag.lower() == "form" and self._form is not None:
+            self.forms.append(self._form)
+            self._form = None
+
+
+def _looks_html(response) -> bool:
+    content_type = str(response.headers.get("Content-Type") or "").lower()
+    prefix = response.content[:256].lstrip().lower()
+    return (
+        "text/html" in content_type
+        or prefix.startswith(b"<!doctype html")
+        or prefix.startswith(b"<html")
+    )
+
+
+def _landing_filename(html: str) -> str | None:
+    plain = re.sub(r"<[^>]+>", " ", html)
+    match = re.search(r"(?is)\bFile\s*:\s*['\"]([^'\"]+)['\"]", plain)
+    return match.group(1).strip() if match else None
+
+
+def _quoted_url_candidates(script: str) -> list[str]:
+    rows = []
+    for value in re.findall(r"""['"]([^'"]+)['"]""", script):
+        low = value.lower()
+        if (
+            "download" in low
+            or "getfile" in low
+            or "file=" in low
+            or "fid=" in low
+            or low.endswith((".csv", ".tsv", ".txt", ".xlsx", ".xls", ".zip"))
+        ):
+            rows.append(value)
+    return rows
+
+
+def _append_query(url: str, fields: dict[str, str]) -> str:
+    parsed = urlparse(url)
+    query = list(parse_qsl(parsed.query, keep_blank_values=True))
+    query.extend((str(k), str(v)) for k, v in fields.items())
+    return urlunparse(parsed._replace(query=urlencode(query)))
+
+
+def _resolve_mda_landing_download(
+    session,
+    response,
+    *,
+    registered_url: str,
+    timeout: int,
+):
+    html = response.content.decode(
+        response.encoding or "utf-8",
+        errors="replace",
+    )
+    parser = _MdaLandingParser()
+    parser.feed(html)
+    landing_name = _landing_filename(html)
+
+    attempts = []
+    seen = set()
+
+    def accept(trial, route: str):
+        if not trial.ok or not trial.content:
+            attempts.append(f"{route}: HTTP {trial.status_code}")
+            return None
+        if _looks_html(trial):
+            attempts.append(f"{route}: HTML landing page")
+            return None
+        return trial
+
+    candidates = []
+    for href in parser.links:
+        low = href.lower()
+        if (
+            "download" in low
+            or "getfile" in low
+            or "file=" in low
+            or "fid=" in low
+            or low.endswith((".csv", ".tsv", ".txt", ".xlsx", ".xls", ".zip"))
+        ):
+            candidates.append(urljoin(response.url, href))
+    for script in parser.clicks:
+        for value in _quoted_url_candidates(script):
+            candidates.append(urljoin(response.url, value))
+
+    for url in candidates:
+        if url in seen or url == registered_url or url == response.url:
+            continue
+        seen.add(url)
+        try:
+            trial = session.get(url, timeout=timeout, allow_redirects=True)
+            accepted = accept(trial, f"GET {url}")
+            if accepted is not None:
+                return accepted, landing_name, {
+                    "landing_url": response.url,
+                    "resolution": "html_link_or_onclick",
+                    "attempts": attempts,
+                }
+        except Exception as exc:
+            attempts.append(f"GET {url}: {type(exc).__name__}: {exc}")
+
+    for form in parser.forms:
+        action = urljoin(response.url, form["action"] or response.url)
+        method = form["method"]
+        fields = form["fields"]
+        try:
+            if method == "post":
+                trial = session.post(
+                    action,
+                    data=fields,
+                    timeout=timeout,
+                    allow_redirects=True,
+                )
+                route = f"POST {action}"
+            else:
+                target = _append_query(action, fields)
+                trial = session.get(
+                    target,
+                    timeout=timeout,
+                    allow_redirects=True,
+                )
+                route = f"GET {target}"
+            accepted = accept(trial, route)
+            if accepted is not None:
+                return accepted, landing_name, {
+                    "landing_url": response.url,
+                    "resolution": f"html_form_{method}",
+                    "attempts": attempts,
+                }
+        except Exception as exc:
+            attempts.append(
+                f"{method.upper()} {action}: {type(exc).__name__}: {exc}"
+            )
+
+    probe = {
+        "landing_filename": landing_name,
+        "href_count": len(parser.links),
+        "form_count": len(parser.forms),
+        "onclick_count": len(parser.clicks),
+        "hrefs": parser.links[:20],
+        "forms": parser.forms[:10],
+        "onclicks": parser.clicks[:10],
+        "attempts": attempts[-20:],
+    }
+    raise RuntimeError(
+        "MDA landing page did not expose a retrievable file route; "
+        + json.dumps(probe, sort_keys=True)
+    )
+
+
 def _content_disposition_filename(headers) -> str | None:
     value = headers.get("Content-Disposition", "")
     match = FILENAME_RE.search(value)
@@ -438,14 +618,29 @@ def _content_disposition_filename(headers) -> str | None:
 def _mda_download_file(session, url: str, output_dir: Path, timeout: int) -> dict:
     response = session.get(url, timeout=timeout, allow_redirects=True)
     response.raise_for_status()
+
+    landing = None
+    landing_name = None
+    if _looks_html(response):
+        response, landing_name, landing = _resolve_mda_landing_download(
+            session,
+            response,
+            registered_url=url,
+            timeout=timeout,
+        )
+        response.raise_for_status()
+
     payload = response.content
     if not payload:
         raise RuntimeError("Marine Data Archive returned an empty source file")
 
-    name = _content_disposition_filename(response.headers)
+    name = _content_disposition_filename(response.headers) or landing_name
     content_type = response.headers.get("Content-Type", "")
     if not name:
-        if payload[:4] == b"PK\x03\x04":
+        parsed_name = Path(urlparse(response.url).path).name
+        if parsed_name and "." in parsed_name:
+            name = parsed_name
+        elif payload[:4] == b"PK\x03\x04":
             name = "tomotani_migrant_source.xlsx"
         elif payload[:2] == b"\x1f\x8b":
             name = "tomotani_migrant_source.gz"
@@ -463,6 +658,7 @@ def _mda_download_file(session, url: str, output_dir: Path, timeout: int) -> dic
         "downloaded_size": target.stat().st_size,
         "content_type": content_type,
         "sha256": sha256_path(target),
+        "landing_resolution": landing,
         "path": str(target),
     }
 
