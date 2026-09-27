@@ -26,6 +26,14 @@ from src.endogenous_information_timing import (  # noqa: E402
     evaluate_information_timing,
     expected_shared_cue_action_mismatch,
 )
+from src.information_rescue_coalition import (  # noqa: E402
+    minimum_pinned_rescue_coalitions,
+    minimum_self_financing_coalitions,
+    pinned_rescue,
+)
+from src.shared_cue_deadline_network import (  # noqa: E402
+    canonical_shared_cue_deadline_game,
+)
 from build_tracking_theory_figure_data import build_figure_data  # noqa: E402
 from render_tracking_theory_figures import (  # noqa: E402
     axes,
@@ -428,6 +436,97 @@ def figure6():
     return svg
 
 
+
+def figure7():
+    topologies = ("complete", "chain", "migrant_star")
+    labels = {
+        "complete": "complete",
+        "chain": "chain",
+        "migrant_star": "migrant-star",
+    }
+    out = [
+        text(72, 120, "Recovery leverage after perfect-information lock-in", 20, "bold"),
+        text(
+            72,
+            150,
+            "Temporary cue use can nucleate a self-sustaining return to the informed equilibrium.",
+            14,
+        ),
+    ]
+
+    x_centers = [235, 600, 965]
+    for x, topology in zip(x_centers, topologies):
+        game = canonical_shared_cue_deadline_game(
+            1.0,
+            interaction_topology=topology,
+        )
+        voluntary = minimum_self_financing_coalitions(game)
+        pinned = minimum_pinned_rescue_coalitions(game)
+        voluntary_size = len(voluntary[0].members) if voluntary else None
+        seed_names = [
+            row.pinned_names[0]
+            for row in pinned
+            if len(row.pinned_members) == 1
+        ]
+
+        out.append(network_icon(x, 285, topology))
+        out.append(text(x, 395, labels[topology], 17, "bold", "middle"))
+        out.append(
+            text(
+                x,
+                430,
+                f"minimum voluntary coalition: {voluntary_size if voluntary_size is not None else 'none'}",
+                13,
+                anchor="middle",
+            )
+        )
+
+        if seed_names:
+            if topology == "chain":
+                seed_text = "singleton rescue: local pollinator only"
+            else:
+                seed_text = "singleton rescue: any actor"
+        else:
+            seed_text = "singleton rescue: none"
+        out.append(text(x, 462, seed_text, 13, "bold", "middle"))
+
+        y = 505
+        for i, player in enumerate(game.players):
+            result = pinned_rescue(game, (i,))
+            status = "rescues" if result.persists_after_release else "fails"
+            out.append(
+                text(
+                    x,
+                    y,
+                    f"{player.name}: {status}",
+                    12,
+                    anchor="middle",
+                )
+            )
+            y += 25
+
+    out += [
+        text(
+            72,
+            635,
+            "Trap stability and rescue leverage are different network properties.",
+            16,
+            "bold",
+        ),
+        text(
+            72,
+            663,
+            "In the chain, only the central local pollinator is a one-species rescue seed; either peripheral actor fails.",
+            14,
+        ),
+    ]
+    return svg_page(
+        "Figure 7. Network position determines minimum rescue intervention",
+        "Exact temporary-seed recovery result at perfect cue accuracy",
+        "".join(out),
+    )
+
+
 def sha256(path: Path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -441,9 +540,10 @@ def render_all(output_dir: Path):
         "figure_4": ("PAYOFF_B_INFO_V2_FIG4_BROAD_CONNECTIVITY.svg", figure4()),
         "figure_5": ("PAYOFF_B_INFO_V2_FIG5_INFORMATION_AXES.svg", figure5()),
         "figure_6": ("PAYOFF_B_INFO_V2_FIG6_CAPACITY.svg", figure6()),
+        "figure_7": ("PAYOFF_B_INFO_V2_FIG7_RESCUE.svg", figure7()),
     }
     manifest = {
-        "status": "payoff_b_information_deadlines_v2_six_figure_set",
+        "status": "payoff_b_information_coordination_v2_seven_figure_set",
         "aikens_outcome_used": False,
         "source_policy": {
             "figure_1": "exact endogenous-information model + frozen published flycatcher anchor",
@@ -452,6 +552,7 @@ def render_all(output_dir: Path):
             "figure_4": "frozen broad predictive-connectivity receipt",
             "figure_5": "frozen wigeon null + frozen long-term cue-driver negative gate + flycatcher anchor",
             "figure_6": "frozen 2026-09-20 capacity / temporal-bypass synthetic receipts",
+            "figure_7": "exact perfect-information rescue-coalition theorem",
         },
         "figures": {},
     }
