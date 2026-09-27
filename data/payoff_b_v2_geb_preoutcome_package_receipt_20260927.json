@@ -7,16 +7,17 @@
   "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "v1_status": "FROZEN_PROVENANCE_ONLY",
   "workflow": {
-    "run_id": 36313076476,
-    "head_sha": "3524f28d00299c5fc5990c8b64154c9057954e2d",
+    "run_id": 36318360954,
+    "run_attempt": 1,
+    "head_sha": "5278eeec416fac7ec679ef4920594984f95723a0",
     "conclusion": "success",
-    "artifact_id": 10930130067,
+    "artifact_id": 10930659946,
     "artifact_name": "payoff-b-v2-geb-preoutcome-package",
-    "artifact_sha256": "c47efff79a125945361d4a7f576141d70df6cbd30512556337be1c3f62c693c6"
+    "artifact_sha256": "d5d914c827e2e77b165145c55f38f07b55e99fcf6aee455a358fe3363779efdc"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip",
-    "sha256": "cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd"
+    "sha256": "28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7"
   },
   "audited_metrics": {
     "structured_abstract_words": 246,
@@ -52,15 +53,16 @@
     "V2 cover-letter template",
     "V2 data/code statement",
     "V2 portal handoff",
+    "V2 declarations template",
     "seven deterministic SVG figures",
     "figure manifest"
   ],
   "final_submission_eligible": false,
   "final_submission_blockers": [
-    "registered industrial-development phase-retention result remains unopened",
-    "anonymous stable reviewer archive link not yet supplied",
-    "author-controlled title-page and declarations not yet completed",
-    "final package must be regenerated after the registered result is frozen"
+    "registered industrial-development phase-retention result remains unopened; AppEEARS/Earthdata credentials are not configured",
+    "anonymous reviewer archive delivery channel",
+    "author-controlled title-page and declaration metadata",
+    "final human review of outcome-rendered package and portal metadata"
   ],
   "scientific_boundary": [
     "package generation does not retune scientific claims",
@@ -69,13 +71,14 @@
     "natural network hysteresis is not claimed",
     "natural singleton rescue species is not identified"
   ],
-  "package_file_count": 16,
+  "package_file_count": 17,
   "reproduction": {
-    "run_id": 36315132279,
-    "head_sha": "2684c0cb3a37bc531a723a661186172b0a47ca38",
-    "artifact_id": 10929879336,
-    "artifact_sha256": "b5a97c983936c80cbfd9ef68b8af35ee6879f5d049b0383912d84096fcbb28b7",
-    "inner_archive_sha256": "cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd",
+    "run_id": 36318360954,
+    "run_attempt": 2,
+    "head_sha": "5278eeec416fac7ec679ef4920594984f95723a0",
+    "artifact_id": 10931800433,
+    "artifact_sha256": "8f7cfd1622cca9540b9f6c09ebef4485a71a39a0eb94b770a247db1e5e863826",
+    "inner_archive_sha256": "28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7",
     "deterministic_inner_archive": true
   }
 }
