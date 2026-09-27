@@ -74,7 +74,7 @@ and reviewers through an anonymized stable repository link. A public persistent
 archive will replace the blinded reviewer link at publication.
 
 The preregistered industrial-development phase-retention analysis remains
-unopened in this PREOUTCOME package and is not used by the main-text theory,
+unopened in this working package and is not used by the main-text theory,
 empirical results or figures.
 """
 
