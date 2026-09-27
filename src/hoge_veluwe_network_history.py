@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 import math
+from statistics import NormalDist
 from typing import Iterable, Sequence
 
 
@@ -331,6 +332,94 @@ def evaluate_information_reversal(
     return result
 
 
+
+def _calendar_hac_estimates(
+    fit,
+    years: Sequence[int],
+    *,
+    max_year_lag: int,
+) -> dict[str, dict]:
+    """Newey-West covariance using actual calendar-year separation.
+
+    Statsmodels' standard HAC treats adjacent retained rows as adjacent time
+    points. Gate C first restricts to overlapping connectivity support, which
+    can remove calendar years. Here a pair contributes at lag h only when its
+    actual year difference is h, preserving the registered 8-year-window
+    dependence geometry after support restriction.
+    """
+    import numpy as np
+
+    x = np.asarray(fit.model.exog, dtype=float)
+    residual = np.asarray(fit.resid, dtype=float)
+    year = np.asarray(list(years), dtype=int)
+    if x.shape[0] != len(year):
+        raise ValueError("calendar-HAC year/exog length mismatch")
+    if len(set(int(value) for value in year)) != len(year):
+        raise ValueError("calendar-HAC requires unique years")
+    if max_year_lag < 0:
+        raise ValueError("max_year_lag must be non-negative")
+
+    xu = x * residual[:, None]
+    meat = xu.T @ xu
+    for i in range(len(year)):
+        for j in range(i + 1, len(year)):
+            lag = abs(int(year[j]) - int(year[i]))
+            if lag < 1 or lag > max_year_lag:
+                continue
+            weight = 1.0 - lag / (max_year_lag + 1.0)
+            cross = np.outer(xu[i], xu[j])
+            meat += weight * (cross + cross.T)
+
+    bread = np.linalg.pinv(x.T @ x)
+    covariance = bread @ meat @ bread
+    nobs, k_params = x.shape
+    if nobs > k_params:
+        covariance *= nobs / (nobs - k_params)
+
+    params = np.asarray(fit.params, dtype=float)
+    names = list(fit.model.exog_names)
+    normal = NormalDist()
+    out = {}
+    for index, name in enumerate(names):
+        variance = float(covariance[index, index])
+        if variance < -1e-12:
+            raise ValueError(
+                f"calendar-HAC produced negative variance for {name}: "
+                f"{variance}"
+            )
+        se = math.sqrt(max(0.0, variance))
+        estimate = float(params[index])
+        if se == 0.0:
+            z_value = math.inf if estimate != 0.0 else 0.0
+            p_value = 0.0 if estimate != 0.0 else 1.0
+        else:
+            z_value = estimate / se
+            p_value = 2.0 * (1.0 - normal.cdf(abs(z_value)))
+        critical = normal.inv_cdf(0.975)
+        out[name] = {
+            "estimate": estimate,
+            "se": se,
+            "ci_low_95": estimate - critical * se,
+            "ci_high_95": estimate + critical * se,
+            "p_value_two_sided": p_value,
+            "z_value": z_value,
+        }
+    return out
+
+
+def _robust_extract(fit, term: str) -> dict:
+    estimate = float(fit.params[term])
+    se = float(fit.bse[term])
+    ci = fit.conf_int().loc[term]
+    return {
+        "estimate": estimate,
+        "se": se,
+        "ci_low_95": float(ci.iloc[0]),
+        "ci_high_95": float(ci.iloc[1]),
+        "p_value_two_sided": float(fit.pvalues[term]),
+    }
+
+
 def fit_history_hac(
     records: Iterable[dict],
     *,
@@ -418,32 +507,28 @@ def fit_history_hac(
     )
     model = smf.ols(formula, data=data)
     unadjusted_model = smf.ols(unadjusted_formula, data=data)
-    hac = model.fit(
-        cov_type="HAC",
-        cov_kwds={
-            "maxlags": maxlags,
-            "use_correction": True,
-        },
+    ols = model.fit()
+    unadjusted_ols = unadjusted_model.fit()
+    calendar_hac7 = _calendar_hac_estimates(
+        ols,
+        data["year"].tolist(),
+        max_year_lag=maxlags,
     )
-    hac2 = model.fit(
-        cov_type="HAC",
-        cov_kwds={
-            "maxlags": 2,
-            "use_correction": True,
-        },
+    calendar_hac2 = _calendar_hac_estimates(
+        ols,
+        data["year"].tolist(),
+        max_year_lag=2,
+    )
+    calendar_unadjusted_hac7 = _calendar_hac_estimates(
+        unadjusted_ols,
+        data["year"].tolist(),
+        max_year_lag=maxlags,
     )
     hc3 = model.fit(cov_type="HC3")
-    unadjusted_hac = unadjusted_model.fit(
-        cov_type="HAC",
-        cov_kwds={
-            "maxlags": maxlags,
-            "use_correction": True,
-        },
-    )
 
     branch_terms = [
         name
-        for name in hac.params.index
+        for name in ols.params.index
         if name.startswith("C(branch")
         and ":centered_connectivity" not in name
     ]
@@ -456,7 +541,7 @@ def fit_history_hac(
 
     interaction_terms = [
         name
-        for name in hac.params.index
+        for name in ols.params.index
         if "centered_connectivity:C(branch" in name
         or (
             "C(branch" in name
@@ -470,19 +555,7 @@ def fit_history_hac(
         }
     interaction_term = interaction_terms[0]
 
-    def extract(fit, term):
-        estimate = float(fit.params[term])
-        se = float(fit.bse[term])
-        ci = fit.conf_int().loc[term]
-        return {
-            "estimate": estimate,
-            "se": se,
-            "ci_low_95": float(ci.iloc[0]),
-            "ci_high_95": float(ci.iloc[1]),
-            "p_value_two_sided": float(fit.pvalues[term]),
-        }
-
-    primary = extract(hac, branch_term)
+    primary = calendar_hac7[branch_term]
     supported = (
         primary["ci_low_95"] > 0.0
         or primary["ci_high_95"] < 0.0
@@ -506,20 +579,27 @@ def fit_history_hac(
             "unadjusted_model_is_sensitivity_only": True,
         },
         "covariance": {
-            "primary": f"HAC({maxlags}) finite-sample corrected",
-            "secondary": ["HAC(2)", "HC3", "unadjusted HAC(7)"],
+            "primary": (
+                f"calendar-distance HAC({maxlags}) finite-sample corrected"
+            ),
+            "secondary": [
+                "calendar-distance HAC(2)",
+                "HC3",
+                "unadjusted calendar-distance HAC(7)",
+            ],
+            "lag_unit": "calendar_year",
         },
         "branch_term": branch_term,
         "branch_at_mean_overlap": {
             "primary_hac7_year_adjusted": primary,
-            "hac2_year_adjusted": extract(hac2, branch_term),
-            "hc3_year_adjusted": extract(hc3, branch_term),
-            "unadjusted_hac7": extract(unadjusted_hac, branch_term),
+            "hac2_year_adjusted": calendar_hac2[branch_term],
+            "hc3_year_adjusted": _robust_extract(hc3, branch_term),
+            "unadjusted_hac7": calendar_unadjusted_hac7[branch_term],
         },
         "interaction_term": interaction_term,
         "interaction": {
-            "primary_hac7": extract(hac, interaction_term),
-            "hac2": extract(hac2, interaction_term),
-            "hc3": extract(hc3, interaction_term),
+            "primary_hac7": calendar_hac7[interaction_term],
+            "hac2": calendar_hac2[interaction_term],
+            "hc3": _robust_extract(hc3, interaction_term),
         },
     }
