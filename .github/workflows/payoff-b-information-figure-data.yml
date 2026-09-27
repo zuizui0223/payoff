@@ -1,0 +1,29 @@
+name: payoff-b-information-figure-data
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-information-threshold-theorem-20260927
+    paths:
+      - "scripts/build_information_theory_figure_data.py"
+      - "src/endogenous_information_timing.py"
+      - "src/information_uptake_network.py"
+      - "src/shared_cue_deadline_network.py"
+      - ".github/workflows/payoff-b-information-figure-data.yml"
+
+jobs:
+  figure-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build frozen V2 figure data
+        run: python scripts/build_information_theory_figure_data.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-information-theory-figure-data
+          path: outputs/payoff_b_information_figure_data/
+          if-no-files-found: error
