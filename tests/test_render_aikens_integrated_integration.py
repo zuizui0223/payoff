@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 spec = importlib.util.spec_from_file_location("rendered_audit", AUDIT_SCRIPT)
 audit_module = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = audit_module
 assert spec.loader is not None
 spec.loader.exec_module(audit_module)
 
