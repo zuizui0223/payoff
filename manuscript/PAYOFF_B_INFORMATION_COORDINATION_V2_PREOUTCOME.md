@@ -36,7 +36,7 @@ Third, we connect the theory to natural systems using deliberately separated emp
 
 Fourth, we retain the earlier PAYOFF-B temporal-buffering result as a capacity layer. Timing can temporarily substitute for movement, but finite temporal capacity eventually forces spatial tracking to re-enter. Capacity, information and coordination are therefore complementary failure modes.
 
-Our central conclusion is:
+Our central theoretical conclusion is:
 
 > **Seasonal adaptation can fail even when an adequate response exists and environmental information later becomes perfect, because interacting organisms can face different decision deadlines and information use can itself become a coordination state.**
 
