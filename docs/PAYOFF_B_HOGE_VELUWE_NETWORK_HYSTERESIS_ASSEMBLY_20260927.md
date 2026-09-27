@@ -26,15 +26,23 @@ The joined outcome has **not** been inspected.
 
 ## Frozen primary overlap
 
-Primary calendar span:
+Primary source-overlap span:
 
 ```text
-1985–2013
-exclude 1991
+1985–2015
+exclude 1991 from the resource series
 ```
 
-This is fixed by the intersection of the public source spans, not by any
-observed PAYOFF-B outcome.
+With the frozen 8-year trailing connectivity window, current year excluded and
+a minimum of six paired cue-resource years per window, the first eligible
+history year is 1992. The preregistered primary history span is therefore:
+
+```text
+1992–2015 = 24 annual history outcomes
+```
+
+This is fixed from source availability and the predeclared window rule, not by
+any observed PAYOFF-B outcome.
 
 ## Four required coordinates
 
@@ -48,7 +56,7 @@ fixed 3×3 coarse-grid Ivory Coast proxy
 no outcome-selected weather window
 ```
 
-The reconstruction rule must be extended source-faithfully through 2013.
+The reconstruction rule must be extended source-faithfully through 2015.
 Failure to do so closes the lane.
 
 ### 2. Later destination/resource state
@@ -107,8 +115,11 @@ Before any joined outcome is calculated:
 2. record immutable hashes;
 3. verify exact Hoge Veluwe identity and year columns;
 4. verify the primary overlap and missingness;
-5. verify at least 24 calendar years and at least six valid pairs in each
-   eight-year connectivity window.
+5. verify the source overlap through 2015;
+6. verify that connectivity construction yields the frozen 1992–2015 history
+   span (24 annual outcomes);
+7. verify at least six valid cue-resource pairs in every eight-year
+   connectivity window.
 
 Any source/schema failure stops the lane.
 
