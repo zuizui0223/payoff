@@ -293,6 +293,10 @@ Natural-data analyses support separate links of the mechanism. No natural
 interaction network is claimed to demonstrate the complete information-loss →
 coordination-shift → information-recovery → persistent-state hysteresis sequence.
 
+The rescue-seed result is a theoretical prediction of the declared network
+model. No natural singleton rescue species is claimed to have been identified,
+and the result is not a management prescription.
+
 The registered industrial-development result is {'included in Supporting Information' if outcome_rendered else 'not yet opened; the archive remains PREOUTCOME'}.
 """
 
