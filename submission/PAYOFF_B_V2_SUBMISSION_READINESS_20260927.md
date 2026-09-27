@@ -115,30 +115,30 @@ remaining reviewer-archive task is therefore **delivery**, not construction:
 upload the ZIP through the journal review portal or provide a stable anonymous
 link.
 
-## 3. Real Aikens execution — credential recheck required
+## 3. Real Aikens execution — credentials not configured
 
 The scientific contract is frozen and the outcome is still unopened.
 
-The last verified credential-only preflight was 2026-09-25:
+A fresh credential-only preflight was run on 2026-09-27:
 
 ```text
-workflow run = 36113621057
-artifact = 10853764396
+workflow run = 36318036795
+artifact = 10931233185
 status = NOT_CONFIGURED
 credential route = none
+credential values recorded = false
+network submission performed = false
 environmental values opened = false
 lambda outcome opened = false
 ```
 
-This is a historical verified state, not a claim about the current GitHub
-Secrets configuration. Secret values are not visible from repository audit.
-
-The next execution step is therefore:
+The next execution step therefore requires external credential configuration:
 
 ```text
-rerun credential preflight
--> if credentials are configured:
-   execute the already frozen full AppEEARS / V061 / fixed-24 h workflow
+configure APPEEARS_TOKEN
+or configure EARTHDATA_USERNAME + EARTHDATA_PASSWORD
+-> rerun credential preflight
+-> execute the already frozen full AppEEARS / V061 / fixed-24 h workflow
 -> classify result
 -> render Supporting Information only
 -> generate final V2 outcome package
