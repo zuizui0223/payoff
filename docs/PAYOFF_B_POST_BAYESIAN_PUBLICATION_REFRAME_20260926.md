@@ -1,9 +1,13 @@
 # PAYOFF-B post-Bayesian publication reframe
 
 Date: **2026-09-26**  
-Status: **candidate reframe; preserves all earlier frozen receipts**
+Status: **ADOPTED for Paper 2 by the 2026-09-27 V1/V2 publication decision; preserves all earlier frozen receipts**
 
 ## Decision
+
+This reframe is now the adopted Paper 2 direction. The authoritative
+publication-state rule is
+`docs/PAYOFF_B_V1_V2_PUBLICATION_RELATION_20260927.md`.
 
 Do not discard the temporal-buffering programme. Reorder it.
 
