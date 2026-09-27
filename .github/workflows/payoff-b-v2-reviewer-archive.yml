@@ -1,5 +1,9 @@
 name: PAYOFF-B V2 anonymous reviewer archive
 
+concurrency:
+  group: payoff-b-v2-reviewer-archive-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
