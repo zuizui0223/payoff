@@ -180,12 +180,16 @@ Previous Paper 2 submission packages and audits built from V1 are retained for
 provenance but are **not current journal-facing packages after the V2
 promotion**.
 
-Therefore the prior GEB PREOUTCOME package, its word/figure counts, anonymous
-scan receipt and the old post-Aikens rendering route must be rebuilt or
-revalidated against V2 before upload.
+The prior V1 GEB package remains provenance only. A fresh V2 PREOUTCOME package
+has now been built and audited directly from the canonical V2 source. It is
+ready for internal review but remains blocked from final journal upload.
 
 ```text
-CURRENT_V2_JOURNAL_PACKAGE = REBUILD_REQUIRED
+CURRENT_V2_PREOUTCOME_PACKAGE = READY
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36308706101
+CURRENT_V2_PREOUTCOME_ARTIFACT = 10927314277
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 069ea50e18d9d54c08e6aceab1daf8d2cda561954cca9c2a58080ca916bb693f
+CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 
@@ -202,7 +206,10 @@ LEGACY_V1_POSTOUTCOME_GEB_PIPELINE = READY_FOR_V1_ONLY
 LEGACY_V1_POSTOUTCOME_READINESS = GEB_INTEGRATED_POSTOUTCOME_PIPELINE_READINESS_20260925.md
 LEGACY_V1_CREDENTIAL_PREFLIGHT_RUN = 36113621057
 LEGACY_V1_CREDENTIAL_PREFLIGHT_ARTIFACT = 10853764396
-CURRENT_V2_PREOUTCOME_PACKAGE = REBUILD_REQUIRED
+CURRENT_V2_PREOUTCOME_PACKAGE = READY
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36308706101
+CURRENT_V2_PREOUTCOME_ARTIFACT = 10927314277
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 069ea50e18d9d54c08e6aceab1daf8d2cda561954cca9c2a58080ca916bb693f
 CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = REBUILD_REQUIRED
 ```
 
@@ -224,12 +231,15 @@ The V2 manuscript must remain coherent under PASS, wrong-direction,
 insufficient-support and NOT_ESTIMABLE outcomes. Its information-deadline and
 coordination conclusions do not depend on the Aikens sign.
 
-The remaining pre-submission tasks are therefore:
+The V2 PREOUTCOME package is now built and audited. The remaining
+pre-submission tasks are therefore:
 
 1. execute and freeze the registered Aikens outcome when authentication permits;
-2. rebuild the journal-facing Paper 2 package from V2;
-3. rerun anonymity, reference, word-count, display-piece and claim-ceiling
-   audits on that V2-derived package.
+2. supply an anonymous stable reviewer archive link;
+3. complete author-controlled title-page and declaration metadata;
+4. regenerate the final V2 package after the registered result and rerun the
+   existing anonymity, reference, word-count, display-piece and claim-ceiling
+   audits.
 
 
 ## DOI modules / dormant branches
