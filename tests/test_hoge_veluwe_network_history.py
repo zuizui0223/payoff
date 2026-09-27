@@ -112,3 +112,20 @@ def test_gate_c_uses_overlap_support_and_hac7_when_licensed():
     primary = result["branch_at_mean_overlap"]["primary_hac7"]
     assert math.isfinite(primary["estimate"])
     assert primary["estimate"] == pytest.approx(2.0, abs=0.20)
+
+def test_full_sample_reversal_can_fail_the_frozen_stability_gate():
+    years = list(range(1992, 2016))
+    values = [
+        1.071796, 0.844474, 0.906202, 1.050682, 1.043100, 0.744754,
+        0.716719, 0.820574, 0.872824, 0.791050, 0.780355, 0.626116,
+        0.778679, 0.861685, 0.736433, 0.666651, 0.764118, 0.946166,
+        0.726630, 0.920812, 0.860899, 0.976887, 0.995548, 1.051586,
+    ]
+
+    result = evaluate_information_reversal(years, values)
+
+    assert result["full_geometry_pass"] is True
+    assert result["status"] == "UNSTABLE_CUE_RESOURCE_REVERSAL"
+    assert result["stability"]["slope_signs_preserved_fraction"] >= 0.80
+    assert result["stability"]["breakpoint_within_tolerance_fraction"] < 0.80
+
