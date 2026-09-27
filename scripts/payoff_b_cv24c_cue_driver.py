@@ -453,10 +453,12 @@ def main():
         pool_maxsize=2,
     )
     session.mount("https://", adapter)
-    cue_rows = [
-        _download_annual_cue(session, args.erddap, year)
-        for year in range(args.start_year, args.end_year + 1)
-    ]
+    cue_rows = _download_cue_series(
+        session,
+        args.erddap,
+        args.start_year,
+        args.end_year,
+    )
     cue = pd.DataFrame(cue_rows)
 
     annual = pd.DataFrame(
