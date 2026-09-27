@@ -5,6 +5,7 @@ import math
 import pytest
 
 from src.hoge_veluwe_network_history import (
+    _calendar_hac_estimates,
     evaluate_information_reversal,
     fit_history_hac,
 )
@@ -234,5 +235,45 @@ def test_gate_c_calendar_hac_handles_gapped_overlap_support():
         result["branch_at_mean_overlap"][
             "primary_hac7_year_adjusted"
         ]["se"]
+    )
+
+def test_calendar_hac_matches_statsmodels_hac_on_consecutive_years():
+    pd = pytest.importorskip("pandas")
+    smf = pytest.importorskip("statsmodels.formula.api")
+
+    frame = pd.DataFrame(
+        {
+            "year": list(range(2000, 2016)),
+            "x": [float(i - 8) for i in range(16)],
+            "y": [
+                1.0
+                + 0.4 * (i - 8)
+                + ((i % 4) - 1.5) * 0.07
+                for i in range(16)
+            ],
+        }
+    )
+    plain = smf.ols("y ~ x", data=frame).fit()
+    standard = smf.ols("y ~ x", data=frame).fit(
+        cov_type="HAC",
+        cov_kwds={
+            "maxlags": 3,
+            "use_correction": True,
+        },
+    )
+    calendar = _calendar_hac_estimates(
+        plain,
+        frame["year"].tolist(),
+        max_year_lag=3,
+    )
+
+    assert calendar["x"]["estimate"] == pytest.approx(
+        float(standard.params["x"]),
+        abs=1e-12,
+    )
+    assert calendar["x"]["se"] == pytest.approx(
+        float(standard.bse["x"]),
+        rel=1e-10,
+        abs=1e-12,
     )
 
