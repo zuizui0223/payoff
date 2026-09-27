@@ -156,7 +156,9 @@
         "tolerance_years": 2
       },
       "failure_state": "UNSTABLE_CUE_RESOURCE_REVERSAL",
-      "rule": "history test remains closed if the full-sample geometry passes but this stability gate fails"
+      "rule": "history test remains closed unless at least 80% of leave-one-history-year-out refits preserve the negative/positive slope signs, the >=50% recovery threshold, and a breakpoint within +/-2 years of the full fit",
+      "minimum_fraction_preserving_recovery_threshold": 0.8,
+      "recovery_threshold": "recovery_fraction >= 0.50"
     }
   },
   "history_test_if_reversal_passes": {
