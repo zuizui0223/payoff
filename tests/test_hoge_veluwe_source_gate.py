@@ -102,7 +102,7 @@ def test_dryad_transport_fallback_is_digest_guarded_and_outcome_blind():
 
     assert mirror["provider"] == "Zenodo"
     assert mirror["record_id"] == 5730499
-    assert "computed SHA-256 equals the Dryad-declared SHA-256" in mirror["use_rule"]
+    assert "computed SHA-256 equals" in mirror["use_rule"]\n    assert "Dryad-declared SHA-256" in mirror["use_rule"]
     amendment = contract["source_gate"]["transport_amendment"]
     assert amendment["scientific_effect"] == "none; Dryad DOI, exact filenames and Dryad-declared SHA-256 remain authoritative"
     assert amendment["outcome_data_inspected"] is False
