@@ -1,0 +1,51 @@
+{
+  "result_id": "payoff_b_information_deadline_theorem_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "EXACT_DECLARED_MODEL_RESULT",
+  "definitions": {
+    "A": "(1-pi)*C_false_early",
+    "L": "pi*C_missed_early",
+    "S": "A+L",
+    "prior_bayes_risk": "min(A,L)"
+  },
+  "exact_results": {
+    "actionable_cue_threshold": "max(A,L)/(A+L)",
+    "information_value": "max(0, q*(A+L)-max(A,L))",
+    "wait_threshold_if_D_below_prior_risk": "(max(A,L)+D)/(A+L)",
+    "never_wait_condition": "D >= min(A,L)",
+    "finite_desynchronization_condition": "D_low < D_high < min(A,L)",
+    "finite_window": "q in (q_wait(D_low), q_wait(D_high)]",
+    "finite_window_width": "(D_high-D_low)/(A+L)",
+    "persistent_asymmetric_uptake_condition": "D_low < min(A,L) <= D_high"
+  },
+  "canonical": {
+    "prior_early": 0.4,
+    "false_early_cost": 2,
+    "missed_early_cost": 1,
+    "A": 1.2,
+    "L": 0.4,
+    "actionable_threshold": 0.75,
+    "lower_delay_cost": 0.1,
+    "higher_delay_cost": 0.3,
+    "lower_wait_threshold": 0.8125,
+    "higher_wait_threshold": 0.9375,
+    "exact_window_width": 0.125,
+    "sampled_window": [
+      0.82,
+      0.93
+    ],
+    "mismatch_probability_at_q_0_82": 0.436
+  },
+  "new_predictions": [
+    "greater waiting-cost heterogeneity widens the information-induced desynchronization window",
+    "for fixed waiting-cost heterogeneity, larger total timing-error losses narrow the cue-quality window between uptake thresholds",
+    "if one actor's delay cost exceeds the maximum value of perfect information, information asymmetry persists even at cue accuracy one",
+    "cue quality and information uptake are distinct ecological state variables"
+  ],
+  "claim_boundary": [
+    "exact only for the declared binary state/action model with a symmetric shared cue",
+    "waiting costs and state-loss parameters are not estimated natural quantities",
+    "the theorem does not itself demonstrate natural network hysteresis",
+    "costly information and cue-driver decoupling are prior art; the candidate novelty is asynchronous uptake under heterogeneous deadlines and its network consequences"
+  ]
+}
