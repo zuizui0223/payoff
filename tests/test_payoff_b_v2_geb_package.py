@@ -56,6 +56,7 @@ def test_v2_geb_package_is_complete_but_not_finally_eligible(tmp_path):
     assert manifest["aikens_outcome_opened"] is False
     assert manifest["final_submission_eligible"] is False
     assert manifest["figure_count"] == 7
+    assert not (out / "PAYOFF_B_V1_V2_PUBLICATION_RELATION_20260927.md").exists()
     assert zip_path.exists()
 
 
