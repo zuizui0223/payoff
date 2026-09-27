@@ -107,7 +107,7 @@
     "inferential_amendment": {
       "date": "2026-09-27",
       "timing": "before Gate-A source outcome certification and before Gate-B/C outcomes are opened",
-      "reason": "overlapping 8-year connectivity windows induce serial dependence and breakpoint search adds model flexibility",
+      "reason": "overlapping 8-year connectivity windows induce serial dependence; breakpoint search adds model flexibility; decline/recovery branch is temporally ordered; and overlap-support filtering can create gaps, so HAC lags must use actual calendar-year distance",
       "outcome_data_inspected": false
     },
     "migrant_aggregation_amendment": {
@@ -175,9 +175,9 @@
     ],
     "expected_history_years": 24,
     "centering": "center predictive connectivity at the mean connectivity within the decline/recovery overlap support before fitting",
-    "covariance": "Newey-West HAC covariance, maxlags=7 (= window_years - 1), finite-sample correction",
+    "covariance": "calendar-distance Newey-West HAC covariance, max calendar-year lag=7 (= window_years - 1), Bartlett weights, finite-sample correction",
     "no_naive_iid_inference": true,
-    "covariance_rationale": "adjacent 8-year trailing connectivity estimates share seven calendar years, so the primary covariance horizon is frozen at window_years - 1 before Gate-B/C outcomes are opened"
+    "covariance_rationale": "adjacent 8-year trailing connectivity estimates share seven calendar years; after overlap-support restriction may remove years, covariance lags are computed from actual calendar-year separation rather than retained row order"
   },
   "forbidden_moves": [
     "do not choose a different African temperature window from the focal or partner timing outcome",
