@@ -12,7 +12,7 @@ on:
       - "scripts/render_information_deadlines_figures.py"
       - "scripts/render_aikens_lambda_manuscript.py"
       - "submission/GEB_V2_*POSTOUTCOME*"
-      - "tests/test_payoff_b_v2_geb_postoutcome_pipeline.py"
+      - "tests/test_payoff_b_v2_postoutcome_package.py"
       - ".github/workflows/payoff-b-v2-geb-postoutcome.yml"
   pull_request:
     paths:
@@ -23,7 +23,7 @@ on:
       - "scripts/render_information_deadlines_figures.py"
       - "scripts/render_aikens_lambda_manuscript.py"
       - "submission/GEB_V2_*POSTOUTCOME*"
-      - "tests/test_payoff_b_v2_geb_postoutcome_pipeline.py"
+      - "tests/test_payoff_b_v2_postoutcome_package.py"
       - ".github/workflows/payoff-b-v2-geb-postoutcome.yml"
 
 jobs:
@@ -38,4 +38,4 @@ jobs:
       - name: Run V2 postoutcome invariance tests
         run: >
           python -m pip install --disable-pip-version-check pytest
-          && pytest -q tests/test_payoff_b_v2_geb_postoutcome_pipeline.py
+          && pytest -q tests/test_payoff_b_v2_postoutcome_package.py
