@@ -135,7 +135,7 @@
     "algorithm": "single interior breakpoint minimizing segmented linear SSE",
     "min_segment_years": 6,
     "comparator": "single linear trend",
-    "pass_rule": "segmented AICc <= linear AICc - 4; pre-break slope < 0; post-break slope > 0; post-break endpoint recovers at least 50% of the pre-break-to-break decline",
+    "pass_rule": "segmented AICc <= linear AICc - 4; pre-break slope < 0; post-break slope > 0; post-break endpoint recovers at least 50% of the pre-break-to-break decline; leave-one-history-year-out stability gate passes",
     "fail_state": "NO_CUE_RESOURCE_REVERSAL",
     "rule": "focal and partner timing are not opened for hysteresis testing if this gate fails",
     "aicc_parameter_count": {
@@ -145,7 +145,17 @@
     },
     "breakpoint_tie_rule": "if candidate segmented AICc values are numerically tied within 1e-12, choose the earlier break year",
     "serial_dependence_note": "annual connectivity values are overlapping trailing-window estimates; AICc is used only as the predeclared geometry gate, not as an independent-year hypothesis test",
-    "robustness_reporting": "report leave-one-history-year-out breakpoint and slope-sign stability without changing the primary pass rule"
+    "robustness_reporting": "report all leave-one-history-year-out breakpoint, slope-sign and recovery diagnostics",
+    "leave_one_history_year_out_stability_gate": {
+      "required": true,
+      "minimum_fraction_preserving_both_slope_signs": 0.8,
+      "minimum_fraction_breakpoint_within_years_of_full_fit": {
+        "fraction": 0.8,
+        "tolerance_years": 2
+      },
+      "failure_state": "UNSTABLE_CUE_RESOURCE_REVERSAL",
+      "rule": "history test remains closed if the full-sample geometry passes but this stability gate fails"
+    }
   },
   "history_test_if_reversal_passes": {
     "branch_definition": "decline versus recovery branch defined only from the frozen cue-resource connectivity breakpoint",
@@ -153,8 +163,8 @@
     "minimum_branch_years": 6,
     "primary_response": "signed pied-flycatcher minus great-tit timing difference",
     "model": "mismatch ~ centered_connectivity + branch + centered_connectivity:branch",
-    "primary_support": "HAC(2) 95% CI for the branch coefficient excludes zero at the mean overlapping connectivity",
-    "secondary_support": "report HAC(2) interaction estimate and CI; also report HC3 sensitivity without changing the primary criterion",
+    "primary_support": "HAC(7) 95% CI for the branch coefficient excludes zero at the mean overlapping connectivity",
+    "secondary_support": "report HAC(2) and HC3 sensitivity estimates and CIs without changing the primary criterion",
     "interpretation_if_supported": "natural path dependence in resident-migrant seasonal coordination conditional on a recovered information coordinate",
     "interpretation_ceiling": "does not identify the exact Nash mechanism, does not identify a natural rescue seed, and does not establish that either species intentionally acquires the declared temperature cue",
     "primary_history_span": [
@@ -163,8 +173,9 @@
     ],
     "expected_history_years": 24,
     "centering": "center predictive connectivity at the mean connectivity within the decline/recovery overlap support before fitting",
-    "covariance": "Newey-West HAC covariance, maxlags=2, finite-sample correction",
-    "no_naive_iid_inference": true
+    "covariance": "Newey-West HAC covariance, maxlags=7 (= window_years - 1), finite-sample correction",
+    "no_naive_iid_inference": true,
+    "covariance_rationale": "adjacent 8-year trailing connectivity estimates share seven calendar years, so the primary covariance horizon is frozen at window_years - 1 before Gate-B/C outcomes are opened"
   },
   "forbidden_moves": [
     "do not choose a different African temperature window from the focal or partner timing outcome",
