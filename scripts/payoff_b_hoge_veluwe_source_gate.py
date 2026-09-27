@@ -619,6 +619,10 @@ def main():
             sources_dir,
             args.timeout,
         )
+        acquired["migrant_timing"]["schema"] = inspect_source(
+            Path(acquired["migrant_timing"]["path"])
+        )
+
         acquired["resident_partner_timing"] = _dryad_download_file(
             session,
             contract["sources"]["resident_partner_timing"]["dataset_doi"],
@@ -626,12 +630,19 @@ def main():
             sources_dir,
             args.timeout,
         )
+        acquired["resident_partner_timing"]["schema"] = inspect_source(
+            Path(acquired["resident_partner_timing"]["path"])
+        )
+
         acquired["destination_resource_state"] = _dryad_download_file(
             session,
             contract["sources"]["destination_resource_state"]["dataset_doi"],
             contract["sources"]["destination_resource_state"]["file"],
             sources_dir,
             args.timeout,
+        )
+        acquired["destination_resource_state"]["schema"] = inspect_source(
+            Path(acquired["destination_resource_state"]["path"])
         )
     except Exception as exc:
         failure = {
@@ -668,9 +679,9 @@ def main():
     resident = acquired["resident_partner_timing"]
     resource = acquired["destination_resource_state"]
 
-    migrant_schema = inspect_source(Path(migrant["path"]))
-    resident_schema = inspect_source(Path(resident["path"]))
-    resource_schema = inspect_source(Path(resource["path"]))
+    migrant_schema = migrant["schema"]
+    resident_schema = resident["schema"]
+    resource_schema = resource["schema"]
 
     status, reasons = _source_gate_status(
         contract,
@@ -705,15 +716,27 @@ def main():
         },
         "sources": {
             "migrant_timing": {
-                "provenance": migrant,
+                "provenance": {
+                    key: value
+                    for key, value in migrant.items()
+                    if key not in {"path", "schema"}
+                },
                 "schema": migrant_schema,
             },
             "resident_partner_timing": {
-                "provenance": resident,
+                "provenance": {
+                    key: value
+                    for key, value in resident.items()
+                    if key not in {"path", "schema"}
+                },
                 "schema": resident_schema,
             },
             "destination_resource_state": {
-                "provenance": resource,
+                "provenance": {
+                    key: value
+                    for key, value in resource.items()
+                    if key not in {"path", "schema"}
+                },
                 "schema": resource_schema,
             },
         },
