@@ -175,8 +175,13 @@ def _dryad_download_file(
     if download_href:
         candidates.append(_api_url(download_href))
     if file_id:
-        candidates.append(
-            f"{DRYAD_WEB}/stash/downloads/file_stream/{file_id}"
+        # Public Dryad landing pages expose file bytes through /downloads/
+        # rather than the authenticated API /files/{id}/download endpoint.
+        candidates.extend(
+            [
+                f"{DRYAD_WEB}/downloads/file_stream/{file_id}",
+                f"http://datadryad.org/downloads/file_stream/{file_id}",
+            ]
         )
 
     response = None
