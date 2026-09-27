@@ -6,7 +6,7 @@
 
 ## Abstract
 
-Seasonal adaptation is often framed as a problem of insufficient response: organisms fail because they cannot move or change timing fast enough. Yet interacting species may also fail when useful environmental information becomes available only after costly decisions must be made. We develop a theory of **information deadlines** in seasonal tracking and connect it to interaction-network coordination. In a binary seasonal decision, the cue reliability at which an actor begins waiting for information is exactly determined by its timing-error losses and opportunity cost of delay. Two interactors facing the same improving cue but different delay costs therefore begin using that cue at different thresholds. This creates a finite range in which improving information increases, rather than decreases, phenological mismatch. We then show a stronger coordination result. Under perfect environmental information, an obsolete uninformed timing profile and a better informed profile can both be strict Nash equilibria: coordinated information use raises joint payoff, yet no species benefits from adopting it first. In a three-player seasonal network, cue degradation collapses coordinated information use at the exact stability boundary and restoration to perfect cue accuracy does not restore the informed state. Across 3,311 observations from 37 migratory bird species, stronger pre-outcome predictive connectivity is associated with smaller arrival–green-up mismatch in the preregistered pooled analysis, although dependence-aware uncertainty does not support a universal species-level coefficient. A pied-flycatcher experiment independently shows that manipulated heterospecific phenology was unavailable to an earlier settlement decision but influenced later settlement, whereas a registered wigeon test finds no evidence that predictive connectivity strengthens post-error phase correction. A long-term cue–driver reversal gate is negative and no natural network hysteresis is claimed. Together, these results separate response capacity, predictive information, information timing and strategic accessibility. Environmental information can recover before ecological coordination does.
+Seasonal adaptation is often framed as a problem of insufficient response: organisms fail because they cannot move or change timing fast enough. Yet interacting species may also fail when useful environmental information becomes available only after costly decisions must be made. We develop a theory of **information deadlines** in seasonal tracking and connect it to interaction-network coordination. In a binary seasonal decision, the cue reliability at which an actor begins waiting for information is exactly determined by its timing-error losses and opportunity cost of delay. Two interactors facing the same improving cue but different delay costs therefore begin using that cue at different thresholds. This creates a finite range in which improving information increases, rather than decreases, phenological mismatch. We then show a stronger coordination result. Under perfect environmental information, an obsolete uninformed timing profile and a better informed profile can both be strict Nash equilibria: coordinated information use raises joint payoff, yet no species benefits from adopting it first. In a three-player seasonal network, cue degradation collapses coordinated information use at the exact stability boundary and restoration to perfect cue accuracy does not restore the informed state. Recovery nevertheless need not require simultaneous manipulation of the whole network: the minimum temporary informed seed is topology-dependent, and in the canonical chain the central local pollinator alone nucleates persistent return to the informed equilibrium. Across 3,311 observations from 37 migratory bird species, stronger pre-outcome predictive connectivity is associated with smaller arrival–green-up mismatch in the preregistered pooled analysis, although dependence-aware uncertainty does not support a universal species-level coefficient. A pied-flycatcher experiment independently shows that manipulated heterospecific phenology was unavailable to an earlier settlement decision but influenced later settlement, whereas a registered wigeon test finds no evidence that predictive connectivity strengthens post-error phase correction. A long-term cue–driver reversal gate is negative and no natural network hysteresis is claimed. Together, these results separate response capacity, predictive information, information timing and strategic accessibility. Environmental information can recover before ecological coordination does.
 
 **Keywords:** phenological mismatch; migration; information ecology; Bayesian games; seasonal timing; predictive connectivity; ecological hysteresis; climate change
 
@@ -30,7 +30,7 @@ We develop this argument in four layers.
 
 First, we derive an exact **information-deadline theorem** for a binary seasonal decision. It gives the cue reliability at which information becomes actionable, the actor-specific threshold at which waiting for that information becomes worthwhile, and the exact width of the information-induced desynchronization window between two actors with different delay costs.
 
-Second, we embed information acquisition in an interaction game. We show conditions under which an obsolete uninformed profile and a fully informed profile are both strict equilibria under perfect environmental information, even though the informed profile has higher joint payoff. We then perturb cue quality down and back up to ask whether environmental recovery restores information use.
+Second, we embed information acquisition in an interaction game. We show conditions under which an obsolete uninformed profile and a fully informed profile are both strict equilibria under perfect environmental information, even though the informed profile has higher joint payoff. We then perturb cue quality down and back up to ask whether environmental recovery restores information use, and derive the minimum voluntary coalition and temporary informed seed needed to restart recovery.
 
 Third, we connect the theory to natural systems using deliberately separated empirical tests. A preregistered broad-bird analysis asks whether pre-outcome predictive connectivity is associated with realized phenological mismatch. A source-backed pied-flycatcher manipulation asks whether heterospecific phenology affects decisions made before versus after that information becomes visible. A registered wigeon analysis asks a different question: whether predictive connectivity strengthens correction after phase error has already appeared. These tests distinguish prediction, information timing and feedback rather than collapsing them into one “tracking ability.”
 
@@ -340,6 +340,101 @@ The migrant therefore defines the network boundary. Under path-preserving best r
 
 When cue quality is restored stepwise to (q=1), the network remains in the all-late profile. Environmental information recovers completely, but ecological information use does not.
 
+### 2.7 Recovery can be nucleated by a small informed seed
+
+Failure of spontaneous recovery does not imply that all actors must be shifted
+simultaneously.
+
+At perfect information, let a set (K) adopt the informed convention while
+actors outside (K) remain old. For coalition member (i), let (b_i(K)) be
+the fraction of its interaction weight that still points outside the coalition.
+Its gain relative to the all-old state is
+
+[
+G_i(K)=R_i-D_i-pI_i b_i(K).
+]
+
+A simultaneous voluntary coalition is therefore self-financing exactly when
+
+[
+R_i-D_ige pI_i b_i(K)
+]
+
+for every coalition member.
+
+A different quantity governs a temporary rescue intervention. Suppose an
+informed seed (S) is temporarily maintained while the remaining actors are
+free to best respond. For uninformed actor (i), let (a_i(S)) be the fraction
+of its interaction weight already attached to informed neighbours. Its gain
+from adopting is
+
+[
+oxed{
+H_i(S)
+=
+R_i-D_i+pI_i[2a_i(S)-1].
+}
+]
+
+Thus actor (i) follows the informed state when
+
+[
+a_i(S)>
+rac12
+left[
+1-rac{R_i-D_i}{pI_i}
+ight].
+]
+
+Because non-negative network weights make (a_i(S)) non-decreasing as adoption
+spreads, information-use recovery is a progressive threshold cascade.
+
+For a homogeneous complete graph with (N) actors and (k) temporary informed
+seeds,
+
+[
+H(k)=
+R-D+
+pIrac{2k-N+1}{N-1}.
+]
+
+The strict seed threshold is therefore the smallest integer satisfying
+
+[
+k>
+rac{N-1}{2}
+left[
+1-rac{R-D}{pI}
+ight].
+]
+
+The canonical three-species example produces a sharp topology contrast.
+Spontaneous recovery fails in all three tested connected networks. Yet a
+temporary one-species seed can restore the fully informed equilibrium.
+
+In the complete graph and migrant-star, any single actor can nucleate recovery.
+In the chain
+
+[
+flower-local pollinator-migrant,
+]
+
+only the central local pollinator is a one-species rescue seed. Temporarily
+restoring cue use at either peripheral node does not cause full recovery.
+
+After the central seed triggers the other actors to adopt, the intervention can
+be removed and the informed equilibrium persists.
+
+Thus trap existence and rescue leverage are different network properties.
+
+> **A network can be unable to recover spontaneously yet remain recoverable
+> through a small, strategically placed temporary information seed.**
+
+Threshold cascades and seed effects are established in network science. The
+ecological content here is that the node threshold is derived from seasonal
+mismatch risk, information/deadline cost and interaction mismatch rather than
+introduced as a free adoption parameter.
+
 ---
 
 ## 3. Empirical evidence hierarchy
@@ -510,7 +605,34 @@ PAYOFF-B therefore distinguishes:
 
 The first concerns strategic accessibility of shared information use; the second concerns which mixed timing configurations a network can retain.
 
-### 4.5 Natural evidence currently supports the information axis, not natural network hysteresis
+### 4.5 Recovery leverage is topology-dependent
+
+The coordination trap is not the same as irreversible loss.
+
+At perfect information the all-old profile can be strict, so no actor moves
+first voluntarily. Yet temporary cue use by a sufficiently influential seed can
+change the incentives facing its neighbours and initiate a recovery cascade.
+
+The canonical chain makes this distinction concrete. The central local
+pollinator is the unique singleton rescue seed, whereas either peripheral
+species fails to restart the network alone. In the complete and migrant-star
+topologies, any singleton seed is sufficient.
+
+This creates a new comparative prediction: the species most important for
+**maintaining** a timing convention need not be the same species that is most
+effective at **rescuing** it after collapse.
+
+The model therefore separates:
+
+1. vulnerability to information degradation;
+2. stability of the obsolete state;
+3. rescue leverage of individual network positions.
+
+A real ecosystem test would require observing or manipulating a temporary
+change in information use or timing flexibility. PAYOFF-B does not infer such a
+keystone rescue species from the current natural datasets.
+
+### 4.6 Natural evidence currently supports the information axis, not natural network hysteresis
 
 The empirical evidence is deliberately modular.
 
@@ -524,7 +646,7 @@ The long-term cue–driver lane fails its preregistered reversal gate.
 
 No current natural dataset therefore demonstrates the full degradation–recovery network hysteresis predicted by the shared-cue and private-cue games. That remains a prospective test.
 
-### 4.6 Capacity, information and coordination are separate constraints
+### 4.7 Capacity, information and coordination are separate constraints
 
 The current programme resolves the earlier PAYOFF-B story into distinct layers.
 
@@ -538,11 +660,13 @@ The current programme resolves the earlier PAYOFF-B story into distinct layers.
 
 **Network memory:** once a timing convention changes, does interaction topology preserve or erase it?
 
+**Recovery leverage:** if an obsolete convention is locked in, which temporary informed seed is sufficient to restart the better equilibrium?
+
 These constraints can produce similar mismatch trajectories but imply different interventions and different forecasts.
 
 Improving connectivity habitat addresses a spatial capacity problem. Improving environmental forecasts addresses an information problem. Neither necessarily resolves a coordination trap once partner timing has become historically locked.
 
-### 4.7 Relation to prior work
+### 4.8 Relation to prior work
 
 Remote environmental cues, information value in migration, climate-driven cue–driver decoupling, phenological games and ecological hysteresis all have substantial prior literatures.
 
@@ -586,12 +710,16 @@ Seasonal adaptation is not limited only by how fast organisms can move or how fa
 
 An organism may possess an adequate response but face a decision before useful information becomes available. Interacting organisms can face different costs of waiting, causing them to begin using the same improving cue at different reliability thresholds. Better information can therefore transiently worsen coordination.
 
-The stronger result is historical. Once an information-using convention collapses, restoring environmental information can be insufficient. Under perfect cue accuracy, an obsolete timing convention and a better informed convention can both be strict equilibria. The informed state can have higher joint payoff while no actor benefits from adopting it first.
+The stronger result is historical. Once an information-using convention collapses, restoring environmental information can be insufficient. Under perfect cue accuracy, an obsolete timing convention and a better informed convention can both be strict equilibria. The informed state can have higher joint payoff while no actor benefits from adopting it first. But the trap need not require network-wide intervention: a temporary informed seed can change neighbour incentives and nucleate recovery, with the minimum rescue set determined by network position.
 
 Natural data currently support pieces of this causal chain rather than the complete hysteresis process. Predictive connectivity is associated with smaller mismatch in a pooled broad-bird analysis; heterospecific phenology affects decisions made after, but not before, it becomes visible in a flycatcher manipulation; predictive connectivity does not strengthen post-error correction in wigeon; and a preregistered long-term natural reversal gate is negative.
 
-The resulting ecological message is:
+The resulting ecological messages are:
 
 > **Environmental information can recover before ecological coordination does.**
+
+and
+
+> **A community that cannot recover spontaneously may still be recoverable through a small, strategically placed information seed.**
 
 Climate adaptation can therefore fail not only because organisms cannot respond or cannot predict the future, but because information use itself has become a historically contingent property of the interaction network.
