@@ -69,15 +69,44 @@ the focal individual's private value. This creates an information-acquisition
 coordination wedge: privately optimal early commitment can coexist with a
 system-level benefit of waiting for information.
 
-Unequal delay costs also create a non-monotone information effect. In the
-canonical shared-cue comparison, both actors commit at low cue quality, only
-the lower-delay actor waits at intermediate cue quality, and both wait at high
-cue quality. Expected action mismatch is therefore zero, then positive, then
-zero again. On the declared 0.01 grid the desynchronization window is
-q=0.82--0.93 and peaks at mismatch probability 0.436 at q=0.82.
+Unequal delay costs also create an exact non-monotone information effect.
+
+Let
+
+    A = (1-pi) C_false_early
+    L = pi C_missed_early.
+
+The cue first becomes behaviourally actionable at
+
+    q0 = max(A,L) / (A+L).
+
+For an actor with delay cost D < min(A,L), the exact accuracy threshold above
+which it waits for the cue is
+
+    q_wait(D) = [max(A,L) + D] / (A+L).
+
+Therefore two actors with D1 < D2 < min(A,L) have a finite asynchronous-use
+window
+
+    q_wait(D1) < q <= q_wait(D2)
+
+whose exact width is
+
+    Delta q = (D2-D1)/(A+L).
+
+Below the window both commit without the cue; inside it only the lower-delay
+actor waits; above it both wait. Expected mismatch is therefore zero, then
+positive, then zero again.
+
+For the canonical witness the exact thresholds are 0.8125 and 0.9375, which
+appear as q=0.82--0.93 on the 0.01 grid, with peak sampled mismatch 0.436.
+
+If the higher delay cost is at least min(A,L), that actor never waits even under
+perfect information. In that regime information asymmetry persists at q=1.
 
 So improving information can transiently worsen interactor coordination because
-information uptake is asynchronous.
+information uptake is asynchronous, and sufficiently hard deadlines can prevent
+re-synchronization altogether.
 
 ### 3. Coordination-memory barrier
 
@@ -293,9 +322,14 @@ PAYOFF-B may currently claim:
   coordination wedge;
 - a source-backed flycatcher--tit experimental anchor for timing-dependent
   information availability;
+- an exact information-deadline theorem giving the actionable-cue threshold,
+  each actor's waiting threshold and the desynchronization-window width;
 - a non-monotone information-induced desynchronization result in which
   monotonically improving cue reliability temporarily increases partner
-  mismatch because actors cross waiting thresholds at different cue qualities.
+  mismatch because actors cross waiting thresholds at different cue qualities;
+- a persistent-asymmetric-uptake regime in which one actor's waiting cost
+  exceeds the maximum value of perfect information, so cue improvement cannot
+  restore coordination even at q=1.
 
 PAYOFF-B may not currently claim:
 
