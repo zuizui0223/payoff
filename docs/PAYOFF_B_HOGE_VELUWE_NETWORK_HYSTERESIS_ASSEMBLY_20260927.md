@@ -76,12 +76,17 @@ file: Tbl_PeakDate_Biomass_HVLim.xlsx
 Primary migrant coordinate:
 
 ```text
-annual female pied-flycatcher nest-building onset
+annual arithmetic mean of individual female pied-flycatcher nest-building start dates
 role: source-defined proxy for female arrival
 source period: 1980–2015
 paper DOI: 10.1111/gcb.14006
 archive: Marine Data Archive
 ```
+
+The arithmetic mean is fixed from the published Methods, which states that
+female individual arrival was proxied by nest-building start and that analyses
+used annual means of annual-cycle stages. Median, quantile, first-arrival and
+model-derived replacements are not allowed after source inspection.
 
 Calculated male arrival is a predeclared secondary lane only.
 
