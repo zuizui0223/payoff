@@ -344,7 +344,7 @@ state.**
 
 ### Updated preferred opening
 
-> **Environmental information can recover before ecological coordination does.
+> **Theory predicts that environmental information can recover before ecological coordination does.
 > When interacting species face different decision deadlines, information use
 > becomes a strategic convention: better information can first desynchronize
 > partners, and after an information-using convention collapses, even perfect
