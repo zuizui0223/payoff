@@ -1,0 +1,201 @@
+from __future__ import annotations
+
+import importlib.util
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPTS = ROOT / "scripts"
+sys.path.insert(0, str(SCRIPTS))
+
+
+def load(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
+outcome = load(
+    "v2_geb_outcome_package",
+    SCRIPTS / "build_payoff_b_v2_geb_outcome_package.py",
+)
+
+
+def payload(result_class: str) -> dict:
+    if result_class == "NOT_ESTIMABLE":
+        return {
+            "status": "phase_retention_contrast_not_estimable",
+            "reasons": ["too few fixed-24h transitions"],
+        }
+
+    if result_class == "PASS":
+        passed = True
+        direction = True
+        support = True
+        a, b, p = 0.2, 0.5, 0.01
+    elif result_class == "FAIL_WRONG_DIRECTION":
+        passed = False
+        direction = False
+        support = True
+        a, b, p = 0.5, 0.2, 0.01
+    elif result_class == "FAIL_INSUFFICIENT_SUPPORT":
+        passed = False
+        direction = True
+        support = False
+        a, b, p = 0.2, 0.5, 0.20
+    else:
+        raise ValueError(result_class)
+
+    return {
+        "status": (
+            "phase_retention_contrast_gate_pass"
+            if passed
+            else "phase_retention_contrast_gate_fail"
+        ),
+        "gate": {
+            "passed": passed,
+            "direction_passed": direction,
+            "support_passed": support,
+            "lambda_difference_b_minus_a": b - a,
+            "observation": {
+                "lambda_a": a,
+                "lambda_b": b,
+                "p_difference": p,
+            },
+        },
+    }
+
+
+def write_payload(tmp_path: Path, result_class: str) -> Path:
+    path = tmp_path / f"{result_class}.json"
+    path.write_text(
+        json.dumps(payload(result_class), indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return path
+
+
+def file_hash_map(manifest: dict) -> dict[str, str]:
+    return {
+        row["path"]: row["sha256"]
+        for row in manifest["files"]
+    }
+
+
+def test_all_four_result_classes_build_science_ready_v2_packages(tmp_path: Path):
+    for result_class in (
+        "PASS",
+        "FAIL_WRONG_DIRECTION",
+        "FAIL_INSUFFICIENT_SUPPORT",
+        "NOT_ESTIMABLE",
+    ):
+        result_json = write_payload(tmp_path, result_class)
+        out = tmp_path / result_class
+        zip_path = tmp_path / f"{result_class}.zip"
+
+        manifest = outcome.build(result_json, out, zip_path)
+
+        assert manifest["scientific_result"] == result_class
+        assert manifest["scientific_state"] == "OUTCOME_RENDERED_SCIENCE_READY"
+        assert manifest["final_science_blocker"] is None
+        assert manifest["final_submission_eligible"] is False
+        assert manifest["main_text_retuned"] is False
+        assert manifest["main_figures_retuned"] is False
+        assert manifest["aikens_result_location"] == "Supporting Information only"
+        assert manifest["figure_count"] == 7
+        assert zip_path.exists()
+
+        main = (out / "GEB_V2_BLINDED_OUTCOME.md").read_text(encoding="utf-8")
+        si = (out / "GEB_V2_SUPPORTING_INFORMATION_OUTCOME.md").read_text(
+            encoding="utf-8"
+        )
+        claim = json.loads(
+            (out / "GEB_V2_AIKENS_CLAIM_STATE.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        audit = json.loads(
+            (out / "GEB_V2_OUTCOME_AUDIT.json").read_text(
+                encoding="utf-8"
+            )
+        )
+
+        assert result_class not in main
+        assert result_class in si
+        assert claim["scientific_result"] == result_class
+        assert claim["retuning_permitted"] is False
+        assert audit["all_outcome_hard_gates_pass"]
+        assert "PREOUTCOME" not in si
+        assert "remains unopened" not in si
+
+
+def test_main_text_and_seven_figures_are_identical_across_result_classes(
+    tmp_path: Path,
+):
+    hashes = {}
+    for result_class in (
+        "PASS",
+        "FAIL_WRONG_DIRECTION",
+        "FAIL_INSUFFICIENT_SUPPORT",
+        "NOT_ESTIMABLE",
+    ):
+        result_json = write_payload(tmp_path, result_class)
+        manifest = outcome.build(
+            result_json,
+            tmp_path / f"out_{result_class}",
+            tmp_path / f"out_{result_class}.zip",
+        )
+        mapping = file_hash_map(manifest)
+        invariant = {
+            path: digest
+            for path, digest in mapping.items()
+            if path == "GEB_V2_BLINDED_OUTCOME.md"
+            or (
+                path.startswith("figures/")
+                and path.endswith(".svg")
+            )
+        }
+        assert len(invariant) == 8
+        hashes[result_class] = invariant
+
+    first = hashes["PASS"]
+    for result_class, mapping in hashes.items():
+        assert mapping == first, result_class
+
+
+def test_supporting_information_changes_with_registered_result(tmp_path: Path):
+    hashes = {}
+    for result_class in (
+        "PASS",
+        "FAIL_WRONG_DIRECTION",
+        "FAIL_INSUFFICIENT_SUPPORT",
+        "NOT_ESTIMABLE",
+    ):
+        result_json = write_payload(tmp_path, result_class)
+        manifest = outcome.build(
+            result_json,
+            tmp_path / f"si_{result_class}",
+            None,
+        )
+        mapping = file_hash_map(manifest)
+        hashes[result_class] = mapping[
+            "GEB_V2_SUPPORTING_INFORMATION_OUTCOME.md"
+        ]
+
+    assert len(set(hashes.values())) == 4
+
+
+def test_outcome_zip_is_deterministic_for_same_registered_result(tmp_path: Path):
+    result_json = write_payload(tmp_path, "PASS")
+    z1 = tmp_path / "one.zip"
+    z2 = tmp_path / "two.zip"
+
+    outcome.build(result_json, tmp_path / "one", z1)
+    outcome.build(result_json, tmp_path / "two", z2)
+
+    assert outcome.sha256(z1) == outcome.sha256(z2)
