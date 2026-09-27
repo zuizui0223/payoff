@@ -32,6 +32,7 @@ def test_v2_is_the_only_active_paper2_source():
     assert "CURRENT_V2_PREOUTCOME_PACKAGE = READY" in status
     assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36318360954" in status
     assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10930659946" in status
+    assert "CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7" in status
     assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED" in status
     assert "sole active integrated ecology manuscript" in relation
     assert "No V1 and V2 dual submission is allowed." in relation
@@ -44,6 +45,7 @@ def test_v2_is_the_only_active_paper2_source():
     assert "main_body_words = 4167" in package_audit
     assert "references = 13" in package_audit
     assert "display_pieces = 7" in package_audit
+    assert "package_file_count = 17" in package_audit
     assert "FINAL_SUBMISSION_ELIGIBLE = false" in package_audit
 
 
