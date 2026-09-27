@@ -85,6 +85,19 @@ inner_zip_sha256 =
 cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
 ```
 
+Deterministic reproduction check:
+
+```text
+reproduction_workflow_run = 36315132279
+reproduction_head = 2684c0cb3a37bc531a723a661186172b0a47ca38
+reproduction_artifact_id = 10929879336
+reproduction_artifact_sha256 =
+b5a97c983936c80cbfd9ef68b8af35ee6879f5d049b0383912d84096fcbb28b7
+reproduction_inner_zip_sha256 =
+cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
+deterministic_inner_archive = PASS
+```
+
 ## Scientific boundary
 
 The package does not open or infer the registered industrial-development
