@@ -26,6 +26,9 @@ def test_hoge_veluwe_network_lane_is_preoutcome_and_fixed():
     assert c["information_reversal_gate"]["aicc_parameter_count"]["segmented"] == 5
     assert c["history_test_if_reversal_passes"]["covariance"] == "Newey-West HAC covariance, maxlags=7 (= window_years - 1), finite-sample correction"
     assert c["history_test_if_reversal_passes"]["no_naive_iid_inference"] is True
+    assert c["history_test_if_reversal_passes"]["model"].endswith("+ centered_year")
+    assert c["history_test_if_reversal_passes"]["time_trend_guard"]["required"] is True
+    assert "unadjusted model does not support natural path dependence" in c["history_test_if_reversal_passes"]["time_trend_guard"]["interpretation_rule"]
     stability = c["information_reversal_gate"]["leave_one_history_year_out_stability_gate"]
     assert stability["required"] is True
     assert stability["minimum_fraction_preserving_both_slope_signs"] == 0.8
