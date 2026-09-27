@@ -24,6 +24,11 @@ from payoff_b_cv24c_cue_driver import ERDDAP, _download_annual_cue
 
 def parse_args():
     p = argparse.ArgumentParser()
+    p.add_argument(
+        "--baseline",
+        type=Path,
+        default=ROOT / "data" / "payoff_b_cv24c_frozen_cue_prefix_1980_2010.json",
+    )
     p.add_argument("--start-year", type=int, default=1980)
     p.add_argument("--end-year", type=int, default=2015)
     p.add_argument(
@@ -46,6 +51,65 @@ def sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+
+def canonical_hash(rows: list[dict], digits: int = 9) -> str:
+    canonical = [
+        [
+            int(row["year"]),
+            round(float(row["ivory_coast_temp_c"]), digits),
+        ]
+        for row in sorted(rows, key=lambda row: int(row["year"]))
+    ]
+    payload = (json.dumps(canonical, separators=(",", ":")) + "\n").encode()
+    return hashlib.sha256(payload).hexdigest()
+
+
+def validate_frozen_prefix(
+    frame,
+    baseline: dict,
+    *,
+    tolerance_c: float = 1e-9,
+) -> dict:
+    expected = {
+        int(row["year"]): float(row["ivory_coast_temp_c"])
+        for row in baseline["rows"]
+    }
+    observed = {
+        int(row.year): float(row.ivory_coast_temp_c)
+        for row in frame.itertuples(index=False)
+        if int(row.year) in expected
+    }
+    if set(observed) != set(expected):
+        return {
+            "passed": False,
+            "reason": "frozen prefix years do not match",
+            "expected_years": sorted(expected),
+            "observed_years": sorted(observed),
+        }
+    differences = {
+        year: observed[year] - expected[year]
+        for year in sorted(expected)
+    }
+    max_abs = max(abs(value) for value in differences.values())
+    expected_rows = [
+        {"year": year, "ivory_coast_temp_c": expected[year]}
+        for year in sorted(expected)
+    ]
+    observed_rows = [
+        {"year": year, "ivory_coast_temp_c": observed[year]}
+        for year in sorted(expected)
+    ]
+    return {
+        "passed": max_abs <= tolerance_c,
+        "tolerance_c": tolerance_c,
+        "max_abs_difference_c": max_abs,
+        "expected_round9_sha256": canonical_hash(expected_rows, 9),
+        "observed_round9_sha256": canonical_hash(observed_rows, 9),
+        "expected_round12_sha256": baseline["canonical_round_12_sha256"],
+        "observed_round12_sha256": canonical_hash(observed_rows, 12),
+    }
 
 
 def build_rows(start_year: int, end_year: int, erddap: str):
@@ -83,6 +147,7 @@ def main():
             "registered Hoge Veluwe cue extension is fixed at 1980-2015"
         )
 
+    baseline = json.loads(args.baseline.read_text(encoding="utf-8"))
     rows = build_rows(args.start_year, args.end_year, args.erddap)
     frame = pd.DataFrame(rows).sort_values("year")
     expected = list(range(1980, 2016))
@@ -103,6 +168,13 @@ def main():
                 f"registered grid changed in {column}: {sorted(observed)}"
             )
 
+    prefix = validate_frozen_prefix(frame, baseline)
+    if not prefix["passed"]:
+        raise RuntimeError(
+            "1980-2010 cue prefix failed frozen-value comparison: "
+            + json.dumps(prefix, sort_keys=True)
+        )
+
     args.annual_output.parent.mkdir(parents=True, exist_ok=True)
     frame.to_csv(args.annual_output, index=False, float_format="%.10g")
 
@@ -122,6 +194,13 @@ def main():
             "imports the exact ERDDAP/PSL annual downloader from "
             "scripts/payoff_b_cv24c_cue_driver.py"
         ),
+        "frozen_prefix_validation": prefix,
+        "frozen_prefix_provenance": {
+            "workflow_run_id": baseline["source_workflow_run_id"],
+            "artifact_id": baseline["source_artifact_id"],
+            "artifact_sha256": baseline["source_artifact_sha256"],
+            "annual_csv_sha256": baseline["source_annual_csv_sha256"],
+        },
         "annual_csv_sha256": sha256(args.annual_output),
         "transport_counts": transports,
         "outcome_firewall": {
