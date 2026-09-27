@@ -103,7 +103,7 @@ def figure1():
         joint.append(d.joint_information_value)
 
     out = [
-        text(72, 125, "A  Value of waiting for information", 19, "bold"),
+        text(72, 125, "(a) Value of waiting for information", 19, "bold"),
     ]
     x0, x1, y0, y1 = 95, 610, 165, 550
     out.append(axes(x0, y0, x1, y1, "cue accuracy q", "value / delay cost"))
@@ -138,7 +138,7 @@ def figure1():
     ]
 
     out += [
-        text(680, 125, "B  Information becomes available after an early decision", 19, "bold"),
+        text(680, 125, "(b) Information becomes available after an early decision", 19, "bold"),
         rect(680, 170, 440, 150, fill="#fafafa"),
         text(700, 202, "Earlier male settlement", 17, "bold"),
         text(700, 232, "tit-timing treatment: no detectable settlement effect", 14),
@@ -262,7 +262,7 @@ def figure3():
     d = load_json("payoff_b_bayesian_strict_phase_diagram_20260926.json")
     order = ["complete", "chain", "migrant_star"]
     labels = {"complete": "complete", "chain": "chain", "migrant_star": "migrant-star"}
-    out = [text(72, 125, "A  Shock transmission versus strict ecological memory", 19, "bold")]
+    out = [text(72, 125, "(a) Shock transmission versus strict ecological memory", 19, "bold")]
     x0, x1, y0, y1 = 100, 650, 190, 550
     out.append(axes(x0, y0, x1, y1, "network topology", "fraction of eligible cells"))
     xpos = [190, 370, 550]
@@ -284,7 +284,7 @@ def figure3():
         text(350, 175, "right bar = strict lower-payoff hysteresis", 13),
     ]
 
-    out += [text(710, 125, "B  Same edge count, different memory", 19, "bold")]
+    out += [text(710, 125, "(b) Same edge count, different memory", 19, "bold")]
     out.append(network_icon(830, 270, "chain"))
     out.append(text(830, 380, "chain", 16, "bold", "middle"))
     out.append(text(830, 410, "52 / 364 strict-memory cells", 14, anchor="middle"))
@@ -382,7 +382,7 @@ def figure5():
     c = load_json("payoff_b_cv24c_cue_driver_result_20260927.json")
     fly = load_json("payoff_b_flycatcher_social_information_anchor_20260926.json")
     out = [
-        text(72, 125, "A  Post-error correction: wigeon registered prediction not supported", 18, "bold"),
+        text(72, 125, "(a) Post-error correction: wigeon registered prediction not supported", 18, "bold"),
     ]
     x0, x1, y = 180, 600, 255
     lo, hi = -0.18, 0.18
@@ -402,7 +402,7 @@ def figure5():
     ]
 
     out += [
-        text(665, 125, "B  Long-term cue-driver path: gate fails before hysteresis test", 18, "bold"),
+        text(665, 125, "(b) Long-term cue-driver path: gate fails before hysteresis test", 18, "bold"),
         rect(680, 170, 430, 205, fill="#fafafa"),
         text(705, 205, f"best segmented change: {c['frozen_reversal_gate']['best_segmented']['break_year']}", 15, "bold"),
         text(705, 237, f"pre slope = {c['frozen_reversal_gate']['best_segmented']['left_slope']:+.4f}", 14),
@@ -410,7 +410,7 @@ def figure5():
         text(705, 293, f"ΔAICc = {c['frozen_reversal_gate']['best_segmented']['delta_aicc_vs_linear']:.2f}", 14),
         text(705, 328, "required pre-break decline: FAIL", 15, "bold"),
         text(705, 353, "history model: NOT RUN", 15, "bold"),
-        text(72, 435, "C  Decision-time anchor", 18, "bold"),
+        text(72, 435, "(c) Decision-time anchor", 18, "bold"),
         rect(80, 470, 1030, 105, fill="#fafafa"),
         text(105, 503, "Flycatcher manipulation:", 15, "bold"),
         text(270, 503, "early male settlement before cue visibility → no treatment response", 14),
