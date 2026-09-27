@@ -468,3 +468,81 @@ def canonical_shared_cue_deadline_game(
         ),
         interaction_weights=weights,
     )
+
+
+
+def informed_profile_stability_thresholds(
+    game: SharedCueGame,
+) -> tuple[float, ...]:
+    """Exact q boundary above which all-follow resists old-action deviation.
+
+    This result assumes all players share the same prior-optimal constant action
+    and that each player's linear stability denominator is positive.
+
+    For player i, write R_i for prior risk, H_i for the expected loss of the
+    opposite constant action, S_i=R_i+H_i, D_i for information cost, I_i for
+    interaction strength, and p for the probability of the state opposite the
+    prior action.  The all-follow profile is stable against reverting to the
+    prior action when
+
+        q >= [D_i + H_i - I_i(1-p)] / [S_i + I_i(2p-1)].
+
+    The maximum player-specific threshold is the network's first local
+    stability boundary under homogeneous shared cue quality.
+    """
+
+    prior_actions = tuple(
+        prior_optimal_action(
+            game.prior_early,
+            player.false_early_cost,
+            player.missed_early_cost,
+        )
+        for player in game.players
+    )
+    if len(set(prior_actions)) != 1:
+        raise ValueError("players must share one prior-optimal action")
+    prior_action = prior_actions[0]
+    p = (
+        game.prior_early
+        if prior_action == 0
+        else 1.0 - game.prior_early
+    )
+
+    thresholds = []
+    for player in game.players:
+        early_loss = (
+            (1.0 - game.prior_early)
+            * player.false_early_cost
+        )
+        late_loss = (
+            game.prior_early
+            * player.missed_early_cost
+        )
+        risk = min(early_loss, late_loss)
+        other = max(early_loss, late_loss)
+        total = risk + other
+        denominator = (
+            total
+            + player.interaction_strength * (2.0 * p - 1.0)
+        )
+        if denominator <= 0.0:
+            raise ValueError(
+                "closed-form stability threshold requires positive denominator"
+            )
+        numerator = (
+            player.information_cost
+            + other
+            - player.interaction_strength * (1.0 - p)
+        )
+        thresholds.append(numerator / denominator)
+    return tuple(thresholds)
+
+
+def perfect_information_first_mover_gains(
+    game: SharedCueGame,
+) -> tuple[float, ...]:
+    """Return exact gains from first cue adoption at q=1."""
+
+    return perfect_information_coordination_trap(
+        game
+    ).unilateral_information_gains
