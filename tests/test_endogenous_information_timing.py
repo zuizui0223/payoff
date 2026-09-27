@@ -310,3 +310,77 @@ def test_no_externality_means_no_information_acquisition_wedge():
         missed_early_cost=1.0,
     )
     assert information_acquisition_wedge_interval(scenario) is None
+
+
+
+@pytest.mark.parametrize("prior", [0.2, 0.4, 0.5, 0.7, 0.8])
+@pytest.mark.parametrize("false_cost", [0.5, 1.0, 2.0])
+@pytest.mark.parametrize("missed_cost", [0.5, 1.0, 2.0])
+def test_closed_form_wait_rule_matches_bruteforce_grid(
+    prior,
+    false_cost,
+    missed_cost,
+):
+    early_loss = (1.0 - prior) * false_cost
+    late_loss = prior * missed_cost
+    risk = min(early_loss, late_loss)
+    delays = [0.0, 0.25 * risk, 0.75 * risk, risk, 1.25 * risk]
+
+    for delay in delays:
+        threshold = closed_form_information_threshold(
+            prior,
+            false_cost,
+            missed_cost,
+            delay_cost=delay,
+        )
+        for step in range(51):
+            q = 0.5 + 0.01 * step
+            brute = decision_for_delay_cost(
+                information_value(
+                    prior,
+                    q,
+                    false_cost,
+                    missed_cost,
+                ),
+                delay,
+            )
+            if threshold.wait_cue_accuracy is None:
+                expected = "commit_now"
+            elif q > threshold.wait_cue_accuracy + 1e-12:
+                expected = "wait_for_information"
+            else:
+                expected = "commit_now"
+            assert brute == expected
+
+
+@pytest.mark.parametrize(
+    "prior,false_cost,missed_cost,low_delay,high_delay",
+    [
+        (0.4, 2.0, 1.0, 0.1, 0.3),
+        (0.7, 1.0, 2.0, 0.05, 0.15),
+        (0.5, 1.0, 1.0, 0.05, 0.20),
+    ],
+)
+def test_window_width_identity_is_exact_across_parameterizations(
+    prior,
+    false_cost,
+    missed_cost,
+    low_delay,
+    high_delay,
+):
+    result = desynchronization_window(
+        prior,
+        false_cost,
+        missed_cost,
+        actor_a_delay_cost=low_delay,
+        actor_b_delay_cost=high_delay,
+    )
+    assert result.regime == "FINITE_DESYNCHRONIZATION_WINDOW"
+
+    total_loss = (
+        (1.0 - prior) * false_cost
+        + prior * missed_cost
+    )
+    assert result.finite_window_width == pytest.approx(
+        (high_delay - low_delay) / total_loss
+    )
