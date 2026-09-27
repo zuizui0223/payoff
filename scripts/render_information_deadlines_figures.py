@@ -433,6 +433,16 @@ def figure6():
         "Figure 6. Capacity is a separate barrier: temporal bypass and spatial re-entry",
         1,
     )
+    svg = svg.replace(
+        "A  Finite phenological capacity extends the persistence frontier",
+        "(a) Finite phenological capacity extends the persistence frontier",
+        1,
+    )
+    svg = svg.replace(
+        "B  Temporal bypass, then spatial re-entry",
+        "(b) Temporal bypass, then spatial re-entry",
+        1,
+    )
     return svg
 
 
