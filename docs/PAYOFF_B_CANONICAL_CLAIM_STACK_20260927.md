@@ -277,8 +277,8 @@ The integrated framework is:
 
 ## Current headline
 
-> **Environmental information can recover before ecological coordination
-> does.**
+> **Theory predicts that environmental information can recover before
+> ecological coordination does.**
 
 ## Claim ceiling
 
