@@ -41,9 +41,9 @@ Information deadlines and coordination
 
 ## Data and code availability
 
-Use the blinded review statement supplied with the V2 package and replace the
-reviewer placeholder with an anonymized stable repository link before
-submission.
+Use the blinded review statement supplied with the V2 package. The deterministic
+anonymous reviewer archive is already built; before submission, deliver it
+through the journal portal or provide a stable anonymous review link.
 
 ## Current working-package state
 
@@ -51,6 +51,8 @@ submission.
 - main manuscript: blinded V2 GEB overlay;
 - display pieces: 7;
 - abstract: structured and <=300 words;
+- reviewer archive: built and identity-scanned; delivery channel pending;
 - final submission eligible: **NO** until the registered industrial-development
-  phase-retention result is frozen, a stable anonymous reviewer archive exists,
-  and author-controlled metadata/declarations are completed.
+  phase-retention result is frozen, author-controlled metadata/declarations are
+  completed, the archive is delivered anonymously, and final human review is
+  complete.
