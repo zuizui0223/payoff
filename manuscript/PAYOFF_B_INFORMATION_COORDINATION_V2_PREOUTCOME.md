@@ -714,7 +714,7 @@ The stronger result is historical. Once an information-using convention collapse
 
 Natural data currently support pieces of this causal chain rather than the complete hysteresis process. Predictive connectivity is associated with smaller mismatch in a pooled broad-bird analysis; heterospecific phenology affects decisions made after, but not before, it becomes visible in a flycatcher manipulation; predictive connectivity does not strengthen post-error correction in wigeon; and a preregistered long-term natural reversal gate is negative.
 
-The resulting ecological messages are:
+The following two statements are theoretical predictions of the model, not claims that complete natural-network hysteresis or seed-driven rescue has already been observed:
 
 > **Environmental information can recover before ecological coordination does.**
 
