@@ -1,0 +1,26 @@
+{
+  "result_id": "payoff_b_network_information_uptake_theorem_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "EXACT_DECLARED_MODEL_RESULT",
+  "exact_results": {
+    "informed_set": "S(q)={i:D_i<V(q)}",
+    "weighted_cut": "C(q)=sum of w_ij over informed-uninformed edges",
+    "expected_edge_mismatch": "M(q)*C(q)/W",
+    "complete_graph_cut_fraction": "2*k*(N-k)/(N*(N-1))",
+    "random_mixing_async_pair_fraction": "2*f*(1-f)",
+    "random_mixing_maximum": "1/2 at f=1/2",
+    "adoption_cut_change": "weight to still-uninformed neighbours minus weight to already-informed neighbours"
+  },
+  "predictions": [
+    "greater deadline heterogeneity spreads cue uptake over a wider reliability range",
+    "network position of early adopters changes transient mismatch even with the same deadline distribution",
+    "high-centrality early adopters can create larger initial coordination cuts",
+    "clustered within-module adoption can reduce cross-information-state edge exposure relative to dispersed adoption"
+  ],
+  "claim_boundary": [
+    "half-adoption maximizes the asynchronous edge boundary, not necessarily total ecological mismatch when M(q) varies with q",
+    "exact for symmetric weighted undirected networks with a common cue and common informed action mapping",
+    "does not itself establish natural network hysteresis",
+    "generic threshold diffusion is prior art; the seasonal information-deadline interpretation is the PAYOFF-B contribution"
+  ]
+}
