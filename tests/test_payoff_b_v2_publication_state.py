@@ -7,6 +7,7 @@ V2 = ROOT / "manuscript" / "PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"
 STATUS = ROOT / "docs" / "PUBLICATION_STATUS.md"
 RELATION = ROOT / "docs" / "PAYOFF_B_V1_V2_PUBLICATION_RELATION_20260927.md"
 ARCHITECTURE = ROOT / "docs" / "PAYOFF_B_TWO_PAPER_PUBLICATION_ARCHITECTURE_20260925.md"
+REFRAME = ROOT / "docs" / "PAYOFF_B_POST_BAYESIAN_PUBLICATION_REFRAME_20260926.md"
 
 
 def _abstract(text: str) -> str:
@@ -23,6 +24,7 @@ def test_v2_is_the_only_active_paper2_source():
     status = STATUS.read_text(encoding="utf-8")
     relation = RELATION.read_text(encoding="utf-8")
     architecture = ARCHITECTURE.read_text(encoding="utf-8")
+    reframe = REFRAME.read_text(encoding="utf-8")
 
     assert "CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md" in status
     assert "V1_STATUS = FROZEN_PROVENANCE_ONLY" in status
@@ -30,6 +32,7 @@ def test_v2_is_the_only_active_paper2_source():
     assert "sole active integrated ecology manuscript" in relation
     assert "No V1 and V2 dual submission is allowed." in relation
     assert "2026-09-27 canonical amendment" in architecture
+    assert "ADOPTED for Paper 2" in reframe
 
 
 def test_v2_abstract_keeps_only_the_core_deadline_and_recovery_story():
