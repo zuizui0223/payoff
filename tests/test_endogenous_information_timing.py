@@ -2,9 +2,13 @@ import pytest
 
 from src.endogenous_information_timing import (
     InformationTimingScenario,
+    closed_form_information_threshold,
+    closed_form_mismatch_probability_during_asynchrony,
     decision_for_delay_cost,
+    desynchronization_window,
     evaluate_information_timing,
     expected_shared_cue_action_mismatch,
+    information_acquisition_wedge_interval,
     information_value,
     maximum_affordable_wait_days,
     posterior_cue_bayes_risk,
@@ -147,3 +151,162 @@ def test_information_desynchronization_requires_unequal_waiting_decisions():
         actor_a_delay_cost=0.30,
         actor_b_delay_cost=0.10,
     ) > 0.0
+
+
+
+def test_closed_form_canonical_wait_thresholds_match_grid_result():
+    low = closed_form_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.10,
+    )
+    high = closed_form_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.30,
+    )
+
+    assert low.prior_action == 0
+    assert low.prior_bayes_risk == pytest.approx(0.40)
+    assert low.actionable_cue_accuracy == pytest.approx(0.75)
+    assert low.wait_cue_accuracy == pytest.approx(0.8125)
+    assert high.wait_cue_accuracy == pytest.approx(0.9375)
+
+
+def test_exact_desynchronization_window_width_is_delay_gap_over_loss_scale():
+    result = desynchronization_window(
+        0.40,
+        2.0,
+        1.0,
+        actor_a_delay_cost=0.30,
+        actor_b_delay_cost=0.10,
+    )
+
+    assert result.regime == "FINITE_DESYNCHRONIZATION_WINDOW"
+    assert result.lower_bound_open == pytest.approx(0.8125)
+    assert result.upper_bound_closed == pytest.approx(0.9375)
+    assert result.finite_window_width == pytest.approx(0.125)
+    assert result.finite_window_width == pytest.approx(
+        (0.30 - 0.10) / (1.20 + 0.40)
+    )
+
+
+@pytest.mark.parametrize(
+    "q",
+    [0.76, 0.82, 0.90, 0.93, 0.99],
+)
+def test_closed_form_mismatch_matches_bruteforce_when_one_actor_waits(q):
+    scenario = InformationTimingScenario(
+        prior_early=0.40,
+        cue_accuracy_after_wait=q,
+        false_early_cost=2.0,
+        missed_early_cost=1.0,
+    )
+    brute = expected_shared_cue_action_mismatch(
+        scenario,
+        actor_a_delay_cost=0.30,
+        actor_b_delay_cost=0.10,
+    )
+    window = desynchronization_window(
+        0.40,
+        2.0,
+        1.0,
+        actor_a_delay_cost=0.30,
+        actor_b_delay_cost=0.10,
+    )
+    assert window.lower_bound_open is not None
+    assert window.upper_bound_closed is not None
+
+    if window.lower_bound_open < q <= window.upper_bound_closed:
+        expected = closed_form_mismatch_probability_during_asynchrony(
+            0.40,
+            2.0,
+            1.0,
+            cue_accuracy=q,
+        )
+    else:
+        expected = 0.0
+
+    assert brute == pytest.approx(expected)
+
+
+def test_prior_early_case_has_symmetric_closed_form_threshold():
+    result = closed_form_information_threshold(
+        0.80,
+        1.0,
+        2.0,
+        delay_cost=0.10,
+    )
+
+    # Prior early loss = 0.20; prior late loss = 1.60.
+    assert result.prior_action == 1
+    assert result.prior_bayes_risk == pytest.approx(0.20)
+    assert result.actionable_cue_accuracy == pytest.approx(1.60 / 1.80)
+    assert result.wait_cue_accuracy == pytest.approx(1.70 / 1.80)
+
+
+def test_high_delay_actor_never_waits_and_asynchrony_persists_to_perfect_cue():
+    result = desynchronization_window(
+        0.40,
+        2.0,
+        1.0,
+        actor_a_delay_cost=0.50,
+        actor_b_delay_cost=0.10,
+    )
+
+    assert result.regime == "PERSISTENT_ASYMMETRIC_UPTAKE"
+    assert result.lower_bound_open == pytest.approx(0.8125)
+    assert result.upper_bound_closed == pytest.approx(1.0)
+    assert result.finite_window_width is None
+
+    perfect = expected_shared_cue_action_mismatch(
+        InformationTimingScenario(
+            prior_early=0.40,
+            cue_accuracy_after_wait=1.0,
+            false_early_cost=2.0,
+            missed_early_cost=1.0,
+        ),
+        actor_a_delay_cost=0.50,
+        actor_b_delay_cost=0.10,
+    )
+    assert perfect == pytest.approx(0.40)
+
+
+def test_equal_delays_remove_asynchronous_information_window():
+    result = desynchronization_window(
+        0.40,
+        2.0,
+        1.0,
+        actor_a_delay_cost=0.20,
+        actor_b_delay_cost=0.20,
+    )
+    assert result.regime == "NO_ASYNCHRONY_EQUAL_DELAY"
+    assert result.finite_window_width == pytest.approx(0.0)
+
+
+def test_information_acquisition_wedge_interval_is_exact():
+    scenario = InformationTimingScenario(
+        prior_early=0.40,
+        cue_accuracy_after_wait=0.90,
+        false_early_cost=2.0,
+        missed_early_cost=1.0,
+        partner_false_early_externality=1.0,
+        partner_missed_early_externality=1.0,
+    )
+    interval = information_acquisition_wedge_interval(scenario)
+
+    assert interval is not None
+    assert interval[0] == pytest.approx(0.24)
+    assert interval[1] == pytest.approx(0.54)
+
+
+def test_no_externality_means_no_information_acquisition_wedge():
+    scenario = InformationTimingScenario(
+        prior_early=0.40,
+        cue_accuracy_after_wait=0.90,
+        false_early_cost=2.0,
+        missed_early_cost=1.0,
+    )
+    assert information_acquisition_wedge_interval(scenario) is None
