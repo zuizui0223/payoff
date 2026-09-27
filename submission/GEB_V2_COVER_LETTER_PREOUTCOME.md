@@ -33,7 +33,7 @@ pied-flycatcher experiment anchors timing-dependent access to heterospecific
 phenology, whereas a registered wigeon analysis does not support a universal
 effect of predictive connectivity on post-error correction.
 
-The general conclusion is that **environmental information can recover before
+The theory predicts that **environmental information can recover before
 ecological coordination does**. The framework separates response capacity,
 predictive information, decision timing and strategic accessibility, providing
 testable expectations for seasonal interaction networks across taxa and
