@@ -4,6 +4,7 @@ from src.bayesian_timing_coordination import ALWAYS_LATE, FOLLOW_CUE
 from src.shared_cue_deadline_network import (
     canonical_shared_cue_deadline_game,
     evaluate_shared_cue_profile,
+    informed_profile_stability_thresholds,
     is_shared_cue_nash,
     perfect_information_coordination_trap,
     sequential_shared_cue_best_response,
@@ -141,3 +142,44 @@ def test_perfect_information_trap_is_not_specific_to_edge_placement_when_all_nod
         assert diagnostic.old_profile_is_strict_nash
         assert diagnostic.informed_profile_is_strict_nash
         assert diagnostic.joint_information_gain == pytest.approx(0.15)
+
+
+
+def test_exact_all_informed_stability_boundary_is_driven_by_migrant():
+    game = canonical_shared_cue_deadline_game(
+        1.0,
+        interaction_topology="chain",
+    )
+    thresholds = informed_profile_stability_thresholds(game)
+
+    assert thresholds[0] == pytest.approx(7.0 / 12.0)
+    assert thresholds[1] == pytest.approx(2.0 / 3.0)
+    assert thresholds[2] == pytest.approx(0.80)
+    assert max(thresholds) == pytest.approx(0.80)
+
+
+def test_grid_collapse_occurs_immediately_below_exact_boundary():
+    topology = "chain"
+    informed = (FOLLOW_CUE, FOLLOW_CUE, FOLLOW_CUE)
+
+    at_boundary = sequential_shared_cue_best_response(
+        canonical_shared_cue_deadline_game(
+            0.80,
+            interaction_topology=topology,
+        ),
+        informed,
+    )[-1].profile
+    below_boundary = sequential_shared_cue_best_response(
+        canonical_shared_cue_deadline_game(
+            0.79,
+            interaction_topology=topology,
+        ),
+        informed,
+    )[-1].profile
+
+    assert at_boundary == informed
+    assert below_boundary == (
+        ALWAYS_LATE,
+        ALWAYS_LATE,
+        ALWAYS_LATE,
+    )
