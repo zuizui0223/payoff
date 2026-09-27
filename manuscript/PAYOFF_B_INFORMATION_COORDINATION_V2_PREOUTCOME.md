@@ -6,7 +6,7 @@
 
 ## Abstract
 
-Seasonal adaptation can fail even when organisms can respond and useful environmental information exists. We develop a theory of **information deadlines** in which cue quality and cue use are distinct ecological state variables. In a binary seasonal decision, information becomes actionable only above an exact reliability threshold, and each actor begins waiting for that information at a threshold set by its timing-error losses and opportunity cost of delay. Interactors facing the same improving cue but different delay costs therefore use it asynchronously, creating a finite range in which better information increases phenological mismatch. We then show that perfect information need not restore coordination. An obsolete uninformed timing profile and a better informed profile can coexist as strict Nash equilibria, and temporary cue degradation can collapse coordinated information use such that recovery to perfect cue accuracy does not recover the informed state. Natural evidence supports pieces of this mechanism rather than the full hysteresis process: predictive connectivity is associated with smaller mismatch in a pooled 37-species bird analysis, a pied-flycatcher experiment anchors timing-dependent cue availability, and a registered wigeon test does not support stronger post-error correction. **Environmental information can recover before ecological coordination does.**
+Seasonal adaptation can fail even when organisms can respond and useful environmental information exists. We develop a theory of **information deadlines** in which cue quality and cue use are distinct ecological state variables. In a binary seasonal decision, information becomes actionable only above an exact reliability threshold, and each actor begins waiting for that information at a threshold set by its timing-error losses and opportunity cost of delay. Interactors facing the same improving cue but different delay costs therefore use it asynchronously, creating a finite range in which better information increases phenological mismatch. We then show that perfect information need not restore coordination. An obsolete uninformed timing profile and a better informed profile can coexist as strict Nash equilibria, and temporary cue degradation can collapse coordinated information use such that recovery to perfect cue accuracy does not recover the informed state. Natural evidence supports pieces of this mechanism rather than the full hysteresis process: predictive connectivity is associated with smaller mismatch in a pooled 37-species bird analysis, a pied-flycatcher experiment anchors timing-dependent cue availability, and a registered wigeon test does not support stronger post-error correction. **Theory predicts that environmental information can recover before ecological coordination does.**
 
 **Keywords:** phenological mismatch; migration; information ecology; Bayesian games; seasonal timing; predictive connectivity; ecological hysteresis; climate change
 
@@ -714,15 +714,15 @@ The stronger result is historical. Once an information-using convention collapse
 
 Natural data currently support pieces of this causal chain rather than the complete hysteresis process. Predictive connectivity is associated with smaller mismatch in a pooled broad-bird analysis; heterospecific phenology affects decisions made after, but not before, it becomes visible in a flycatcher manipulation; predictive connectivity does not strengthen post-error correction in wigeon; and a preregistered long-term natural reversal gate is negative.
 
-The resulting ecological messages are:
+The resulting theoretical predictions remain prospective at the full network-hysteresis level:
 
-> **Environmental information can recover before ecological coordination does.**
+> **Theory predicts that environmental information can recover before ecological coordination does.**
 
 and
 
-> **A community that cannot recover spontaneously may still be recoverable through a small, strategically placed information seed.**
+> **The model further predicts that a community that cannot recover spontaneously may still be recoverable through a small, strategically placed information seed.**
 
-Climate adaptation can therefore fail not only because organisms cannot respond or cannot predict the future, but because information use itself has become a historically contingent property of the interaction network.
+The framework therefore predicts that climate adaptation can fail not only because organisms cannot respond or cannot predict the future, but because information use itself has become a historically contingent property of the interaction network.
 
 ---
 
