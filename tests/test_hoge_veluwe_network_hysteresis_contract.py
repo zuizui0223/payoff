@@ -13,10 +13,14 @@ def load_contract():
 def test_hoge_veluwe_network_lane_is_preoutcome_and_fixed():
     c = load_contract()
     assert c["status"] == "PREOUTCOME_ASSEMBLY_REGISTERED_SOURCE_FILES_UNOPENED"
-    assert c["population"]["primary_overlap_years"] == [1985, 2015]\n    assert c["population"]["primary_history_years_after_connectivity_construction"] == [1992, 2015]\n    assert c["population"]["expected_primary_history_year_count"] == 24
+    assert c["population"]["primary_overlap_years"] == [1985, 2015]
+    assert c["population"]["primary_history_years_after_connectivity_construction"] == [1992, 2015]
+    assert c["population"]["expected_primary_history_year_count"] == 24
     assert c["population"]["excluded_years"] == [1991]
     assert c["sources"]["precommitment_cue"]["no_window_retuning"] is True
-    assert c["coordinates"]["cue_resource_predictive_connectivity"]["window_years"] == 8\n    assert c["source_gate"]["require_at_least_24_history_years_after_connectivity_construction"] is True\n    assert c["source_gate"]["require_expected_primary_history_span"] == [1992, 2015]
+    assert c["coordinates"]["cue_resource_predictive_connectivity"]["window_years"] == 8
+    assert c["source_gate"]["require_at_least_24_history_years_after_connectivity_construction"] is True
+    assert c["source_gate"]["require_expected_primary_history_span"] == [1992, 2015]
     assert c["information_reversal_gate"]["fail_state"] == "NO_CUE_RESOURCE_REVERSAL"
 
 
