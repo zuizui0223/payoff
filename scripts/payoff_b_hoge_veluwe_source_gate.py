@@ -601,26 +601,63 @@ def main():
 
     session = _session()
 
-    migrant = _mda_download_file(
-        session,
-        contract["sources"]["migrant_timing"]["archive_url"],
-        sources_dir,
-        args.timeout,
-    )
-    resident = _dryad_download_file(
-        session,
-        contract["sources"]["resident_partner_timing"]["dataset_doi"],
-        contract["sources"]["resident_partner_timing"]["file"],
-        sources_dir,
-        args.timeout,
-    )
-    resource = _dryad_download_file(
-        session,
-        contract["sources"]["destination_resource_state"]["dataset_doi"],
-        contract["sources"]["destination_resource_state"]["file"],
-        sources_dir,
-        args.timeout,
-    )
+    receipt_path = args.output_dir / "source_gate_a_receipt.json"
+    acquired = {}
+    try:
+        acquired["migrant_timing"] = _mda_download_file(
+            session,
+            contract["sources"]["migrant_timing"]["archive_url"],
+            sources_dir,
+            args.timeout,
+        )
+        acquired["resident_partner_timing"] = _dryad_download_file(
+            session,
+            contract["sources"]["resident_partner_timing"]["dataset_doi"],
+            contract["sources"]["resident_partner_timing"]["file"],
+            sources_dir,
+            args.timeout,
+        )
+        acquired["destination_resource_state"] = _dryad_download_file(
+            session,
+            contract["sources"]["destination_resource_state"]["dataset_doi"],
+            contract["sources"]["destination_resource_state"]["file"],
+            sources_dir,
+            args.timeout,
+        )
+    except Exception as exc:
+        failure = {
+            "result_id": "payoff_b_hoge_veluwe_source_gate_a_20260927",
+            "contract_id": contract["contract_id"],
+            "status": "SOURCE_ACCESS_FAILURE",
+            "error_type": type(exc).__name__,
+            "error": str(exc),
+            "acquired_sources_before_failure": {
+                key: {
+                    field: value
+                    for field, value in meta.items()
+                    if field != "path"
+                }
+                for key, meta in acquired.items()
+            },
+            "outcome_firewall": {
+                "cross_source_join_performed": False,
+                "focal_partner_mismatch_computed": False,
+                "cue_resource_connectivity_computed": False,
+                "information_reversal_gate_opened": False,
+                "history_test_opened": False,
+            },
+        }
+        receipt_path.write_text(
+            json.dumps(failure, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        shutil.rmtree(sources_dir, ignore_errors=True)
+        print(json.dumps(failure, indent=2))
+        raise
+
+    migrant = acquired["migrant_timing"]
+    resident = acquired["resident_partner_timing"]
+    resource = acquired["destination_resource_state"]
 
     migrant_schema = inspect_source(Path(migrant["path"]))
     resident_schema = inspect_source(Path(resident["path"]))
@@ -692,7 +729,6 @@ def main():
     }
 
     # Do not retain raw source files in the uploaded Gate-A artifact.
-    receipt_path = args.output_dir / "source_gate_a_receipt.json"
     receipt_path.write_text(
         json.dumps(receipt, indent=2) + "\n",
         encoding="utf-8",
