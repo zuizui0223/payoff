@@ -61,6 +61,7 @@ The deterministic package contains:
 - V2 cover-letter template;
 - V2 data/code statement;
 - V2 portal handoff;
+- V2 declarations template;
 - seven deterministic SVG figures;
 - figure manifest.
 
