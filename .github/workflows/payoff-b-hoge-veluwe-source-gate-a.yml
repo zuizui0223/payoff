@@ -50,6 +50,7 @@ jobs:
         run: >
           python scripts/payoff_b_hoge_veluwe_source_gate.py
           --output-dir outputs/hoge_veluwe_source_gate_a
+          --cue-receipt outputs/hoge_veluwe_source_gate_a/cue_extension_receipt.json
       - name: Verify raw biological source bytes are not retained
         if: always()
         shell: bash
