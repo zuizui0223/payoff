@@ -15,6 +15,7 @@ from src.barnacle_phase_error_calibration import (
 
 
 def test_gdd_jerk_recovers_exact_logistic_accumulation():
+    pytest.importorskip("scipy")
     latitude = 60.0
     t_base = latitude_base_temperature(latitude)
     asymptote = 1200.0
@@ -44,6 +45,8 @@ def test_gdd_jerk_recovers_exact_logistic_accumulation():
 
 
 def test_fixed_transition_controller_recovers_phase_slope_and_stopover_sign():
+    pytest.importorskip("statsmodels")
+    pytest.importorskip("scipy")
     rows = []
     for i in range(12):
         x = float(i - 6)

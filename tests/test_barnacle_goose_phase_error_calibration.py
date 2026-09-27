@@ -16,6 +16,8 @@ def test_latitude_base_temperature_matches_frozen_goose_transform():
 
 
 def test_gdd_jerk_fit_returns_finite_spring_onset_for_complete_year():
+    pytest.importorskip("numpy")
+    pytest.importorskip("scipy")
     # Smooth synthetic seasonal cycle with enough summer heat to accumulate GDD.
     temp = [
         2.0 + 12.0 * sin(2.0 * pi * (day - 90.0) / 365.0)
@@ -31,6 +33,8 @@ def test_gdd_jerk_fit_returns_finite_spring_onset_for_complete_year():
 
 
 def test_fixed_route_lambda_recovers_exact_slope_with_intercept():
+    pytest.importorskip("statsmodels")
+    pytest.importorskip("scipy")
     rows = []
     for animal in range(8):
         for year in (2008, 2009):
@@ -55,6 +59,8 @@ def test_fixed_route_lambda_recovers_exact_slope_with_intercept():
 
 
 def test_fixed_route_lambda_rejects_missing_columns():
+    pytest.importorskip("statsmodels")
+    pytest.importorskip("scipy")
     with pytest.raises(ValueError, match="missing"):
         fit_fixed_route_lambda(
             pd.DataFrame(
