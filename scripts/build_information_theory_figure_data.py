@@ -286,8 +286,8 @@ def main():
             "all_informed_stability_q": 0.80,
             "grid_collapse_q": 0.79,
             "chain_keystone_rescue_actor": "local_pollinator",
-            "complete_singleton_rescue_any_actor": true,
-            "migrant_star_singleton_rescue_any_actor": true,
+            "complete_singleton_rescue_any_actor": True,
+            "migrant_star_singleton_rescue_any_actor": True,
         },
         "files": filenames,
         "claim_boundary": [
