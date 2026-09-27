@@ -25,6 +25,7 @@ STATIC_FILES = (
     "submission/GEB_V2_COVER_LETTER_PREOUTCOME.md",
     "submission/GEB_V2_DATA_CODE_TEMPLATE.md",
     "submission/GEB_V2_PORTAL_HANDOFF_PREOUTCOME.md",
+    "submission/GEB_V2_DECLARATIONS_TEMPLATE.md",
 )
 
 
@@ -174,10 +175,10 @@ def build(output_dir: Path, zip_path: Path | None = None) -> dict:
         "aikens_outcome_opened": False,
         "final_submission_eligible": False,
         "final_submission_blockers": [
-            "registered industrial-development phase-retention result",
-            "anonymous stable reviewer archive link",
+            "registered industrial-development phase-retention result; external credentials currently not configured",
+            "anonymous reviewer archive delivery channel",
             "author-controlled title-page and declaration metadata",
-            "final post-result package regeneration",
+            "final human review of outcome-rendered package and portal metadata",
         ],
         "structured_abstract_words": audit_result["metrics"]["abstract_words"],
         "main_body_words": audit_result["metrics"]["main_body_words"],
