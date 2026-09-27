@@ -104,6 +104,10 @@ def test_all_four_result_classes_build_science_ready_v2_packages(tmp_path: Path)
         assert manifest["scientific_state"] == "OUTCOME_RENDERED_SCIENCE_READY"
         assert manifest["final_science_blocker"] is None
         assert manifest["final_submission_eligible"] is False
+        assert manifest["registered_result_frozen"] is True
+        expected_estimable = result_class != "NOT_ESTIMABLE"
+        assert manifest["phase_retention_estimate_available"] is expected_estimable
+        assert manifest["aikens_outcome_opened"] is expected_estimable
         assert manifest["main_text_retuned"] is False
         assert manifest["main_figures_retuned"] is False
         assert manifest["aikens_result_location"] == "Supporting Information only"
