@@ -72,31 +72,34 @@ Figure panels in the V2 renderer use lower-case journal-style panel labels.
 ## Frozen build provenance
 
 ```text
-workflow_run = 36313076476
-validated_head = 3524f28d00299c5fc5990c8b64154c9057954e2d
+workflow_run = 36318360954
+workflow_run_attempt = 1
+validated_head = 5278eeec416fac7ec679ef4920594984f95723a0
 workflow_conclusion = success
 
-artifact_id = 10930130067
+artifact_id = 10930659946
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-c47efff79a125945361d4a7f576141d70df6cbd30512556337be1c3f62c693c6
+d5d914c827e2e77b165145c55f38f07b55e99fcf6aee455a358fe3363779efdc
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
+28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7
 ```
 
 Deterministic reproduction check:
 
 ```text
-reproduction_workflow_run = 36315132279
-reproduction_head = 2684c0cb3a37bc531a723a661186172b0a47ca38
-reproduction_artifact_id = 10929879336
+reproduction_workflow_run = 36318360954
+reproduction_run_attempt = 2
+reproduction_head = 5278eeec416fac7ec679ef4920594984f95723a0
+reproduction_artifact_id = 10931800433
 reproduction_artifact_sha256 =
-b5a97c983936c80cbfd9ef68b8af35ee6879f5d049b0383912d84096fcbb28b7
+8f7cfd1622cca9540b9f6c09ebef4485a71a39a0eb94b770a247db1e5e863826
 reproduction_inner_zip_sha256 =
-cf1ada3fb67b603b972f6e3994f439292b3ed3b18f17d2f0c3407c0bc90288cd
+28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7
 deterministic_inner_archive = PASS
+package_file_count = 17
 ```
 
 ## Scientific boundary
