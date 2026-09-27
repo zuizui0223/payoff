@@ -49,3 +49,25 @@ def test_declared_public_sources_are_specific():
     assert sources["destination_resource_state"]["dataset_doi"] == "10.5061/dryad.f1vhhmgx6"
     assert sources["resident_partner_timing"]["file"].endswith(".xlsx")
     assert sources["destination_resource_state"]["file"].endswith(".xlsx")
+
+def test_window_rule_yields_exact_registered_24_year_history_span():
+    c = load_contract()
+    source_start, source_end = c["population"]["primary_overlap_years"]
+    excluded = set(c["population"]["excluded_years"])
+    window = c["coordinates"]["cue_resource_predictive_connectivity"]["window_years"]
+    min_pairs = c["coordinates"]["cue_resource_predictive_connectivity"]["min_pairs"]
+
+    eligible = []
+    for year in range(source_start, source_end + 1):
+        prior = range(year - window, year)
+        valid_pairs = sum(
+            source_start <= prior_year <= source_end
+            and prior_year not in excluded
+            for prior_year in prior
+        )
+        if year not in excluded and valid_pairs >= min_pairs:
+            eligible.append(year)
+
+    assert eligible == list(range(1992, 2016))
+    assert len(eligible) == 24
+
