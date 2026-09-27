@@ -909,3 +909,24 @@ Claim ceilings:
 - [`docs/TEMPORAL_PRIOR_ART_BOUNDARY.md`](docs/TEMPORAL_PRIOR_ART_BOUNDARY.md)
 
 PAYOFF does not claim to invent specialization, adaptive dynamics, branching, modularity, evolutionary games, Moran processes, source-sink theory, graph selection, or Floquet theory. The candidate contribution is the **explicit architecture payoff transport from measured functional compromise into those established population-theoretic objects, with exact receipts under declared models.**
+
+---
+
+## Reproducing the empirical estimator tests
+
+The dependency-light default test environment is intentionally allowed to skip
+optional empirical estimators. To reproduce the phase-retention and controller
+fits with their statistical dependencies installed, use:
+
+```bash
+python -m pip install -e ".[test,empirical]"
+pytest -q -rs \
+  tests/test_phase_retention_contrast_fit.py \
+  tests/test_barnacle_goose_phase_error_calibration.py \
+  tests/test_barnacle_phase_error_calibration.py \
+  tests/test_wigeon_phase_error_calibration.py
+```
+
+The `test-environments` GitHub Actions workflow runs the same estimator set
+and fails the empirical job if any of these tests are skipped.
+
