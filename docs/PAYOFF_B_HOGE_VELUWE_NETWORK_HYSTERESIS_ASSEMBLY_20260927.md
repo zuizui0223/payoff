@@ -188,13 +188,15 @@ resident_migrant_mismatch
 ```
 
 Within the overlap-support subset, predictive connectivity and calendar year
-are both centered at their means. Primary support requires the **Newey–West
-HAC, lag 7 (= 8-year window − 1), finite-sample-corrected 95% CI** for the
-branch coefficient to exclude zero at mean connectivity **after linear
-calendar-year adjustment**. This time-trend guard is mandatory because decline
-and recovery branches are necessarily earlier and later periods; a secular
-resident–migrant timing trend must not be relabelled path dependence. HAC(2),
-HC3 and the unadjusted branch model are sensitivities only.
+are both centered at their means. Primary support requires the
+**calendar-distance Newey–West HAC, maximum lag 7 years (= 8-year window − 1),
+finite-sample-corrected 95% CI** for the branch coefficient to exclude zero at
+mean connectivity **after linear calendar-year adjustment**. Calendar distance,
+rather than retained row distance, is used because overlap-support filtering may
+remove years. This time-trend guard is mandatory because decline and recovery
+branches are necessarily earlier and later periods; a secular resident–migrant
+timing trend must not be relabelled path dependence. Calendar-HAC(2), HC3 and
+the unadjusted calendar-HAC(7) branch model are sensitivities only.
 
 ## Claim ceiling
 
