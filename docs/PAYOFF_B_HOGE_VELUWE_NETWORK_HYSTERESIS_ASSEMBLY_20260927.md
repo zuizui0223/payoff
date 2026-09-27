@@ -153,8 +153,9 @@ segmented AICc values tie within 1e-12, the earlier break year is chosen.
 Because adjacent connectivity years share most of their trailing 8-year
 history, the full-sample reversal must also pass a predeclared
 leave-one-history-year-out stability gate: at least 80% of leave-one-year-out
-fits must retain the negative/positive slope signs, and at least 80% must place
-the breakpoint within ±2 years of the full-fit breakpoint. Failure is
+fits must retain the negative/positive slope signs, at least 80% must retain
+the registered recovery fraction >=50%, and at least 80% must place the
+breakpoint within ±2 years of the full-fit breakpoint. Failure is
 `UNSTABLE_CUE_RESOURCE_REVERSAL` and Gate C remains closed. All leave-one-year
 diagnostics are reported.
 
