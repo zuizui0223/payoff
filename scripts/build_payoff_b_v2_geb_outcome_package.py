@@ -29,6 +29,7 @@ STATIC_FILES = (
     "submission/GEB_V2_TITLE_PAGE_OUTCOME_TEMPLATE.md",
     "submission/GEB_V2_DATA_CODE_OUTCOME.md",
     "submission/GEB_V2_PORTAL_HANDOFF_OUTCOME.md",
+    "submission/GEB_V2_DECLARATIONS_TEMPLATE.md",
 )
 
 
@@ -113,7 +114,7 @@ This registered result does not alter the manuscript's title, abstract,
 information-deadline theorem, perfect-information recovery-failure result or
 main figures.
 
-The general conclusion is that **environmental information can recover before
+The theory predicts that **environmental information can recover before
 ecological coordination does**.
 
 [AUTHOR-CONFIRMED statement that the work is original, approved by all authors,
@@ -294,9 +295,9 @@ def build(
         "final_science_blocker": None,
         "final_submission_eligible": False,
         "remaining_portal_blockers": [
-            "anonymous stable reviewer archive link",
+            "anonymous reviewer archive delivery channel",
             "author-controlled title-page and declaration metadata",
-            "final human review of generated package",
+            "final human review of generated package and portal metadata",
         ],
         "structured_abstract_words": audit_result["main_metrics"]["abstract_words"],
         "main_body_words": audit_result["main_metrics"]["main_body_words"],

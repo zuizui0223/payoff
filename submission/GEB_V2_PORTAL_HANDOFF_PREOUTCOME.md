@@ -41,8 +41,10 @@ information-deadline conclusion.
 ## Final-submission blockers
 
 ```text
-1. registered industrial-development phase-retention result frozen
-2. anonymous stable reviewer archive link
-3. author-controlled title page / declarations
-4. final V2 package regeneration and audit
+1. configure AppEEARS/Earthdata credentials and freeze the registered
+   industrial-development phase-retention result
+2. deliver the already-built anonymous reviewer archive through the journal
+   portal or a stable anonymous review link
+3. complete author-controlled title page / declarations
+4. perform final human review of the outcome-rendered package and portal metadata
 ```

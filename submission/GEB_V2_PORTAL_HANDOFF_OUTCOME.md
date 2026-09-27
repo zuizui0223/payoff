@@ -33,8 +33,8 @@ FAIL_WRONG_DIRECTION, FAIL_INSUFFICIENT_SUPPORT and NOT_ESTIMABLE.
 ## Remaining portal blockers
 
 ```text
-1. anonymous stable reviewer archive link
+1. delivery of the already-built reviewer archive through the journal portal or a stable anonymous review link
 2. author list / affiliations / ORCID / corresponding-author metadata
 3. funding / conflict / acknowledgement / contribution declarations
-4. final human review of generated package
+4. final human review of generated package and portal metadata
 ```
