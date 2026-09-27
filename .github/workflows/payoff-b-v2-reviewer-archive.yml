@@ -7,6 +7,7 @@ concurrency:
 on:
   push:
     branches:
+      - main
       - feature/payoff-b-v2-reviewer-archive-20260927
     paths:
       - "scripts/build_payoff_b_v2_reviewer_archive.py"
