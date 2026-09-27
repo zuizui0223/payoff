@@ -103,15 +103,29 @@
       "period": "1980-2015",
       "years": 36,
       "variables": "male arrival, female nest-building arrival proxy, laying/hatching, moult, Dutch and African temperature covariates",
-      "level": "WITHIN_SPECIES_INFORMATION_TIMING_CANDIDATE",
+      "level": "NETWORK_HYSTERESIS_ASSEMBLY_CANDIDATE",
       "direct_hysteresis_ready": false,
       "blockers": [
-        "no interacting partner timing in the archived focal dataset"
+        "joined source files not yet materialized and hash-frozen",
+        "fixed Ivory Coast cue must be extended source-faithfully through the frozen overlap",
+        "cross-source year/schema alignment not yet certified"
       ],
-      "retained_role": "best current candidate for a long natural test of information timing and reversal within one migrant annual cycle; not sufficient alone for network hysteresis",
+      "retained_role": "best current prospective assembly for a same-system natural network-history test: pied-flycatcher timing + public Hoge Veluwe great-tit first-clutch timing + public caterpillar resource peak; outcome remains unopened",
       "doi": "10.1111/gcb.14006",
       "data_url": "http://mda.vliz.be/directlink.php?fid=VLIZ_00000444_5dd3fba4f38f8",
-      "notable_published_pattern": "male arrival-to-laying interval shortened until about 2008 and then lengthened"
+      "notable_published_pattern": "male arrival-to-laying interval shortened until about 2008 and then lengthened",
+      "partner_source": {
+        "dataset_doi": "10.5061/dryad.f1vhhmgx6",
+        "file": "Tbl_Fitness_GT_HV_FirstClutches_CSNot0_YrLargerThan1973_IncludeIs1.xlsx",
+        "coordinate": "annual mean first-clutch great-tit laying date"
+      },
+      "resource_source": {
+        "dataset_doi": "10.5061/dryad.f1vhhmgx6",
+        "file": "Tbl_PeakDate_Biomass_HVLim.xlsx",
+        "coordinate": "annual observed caterpillar biomass peak",
+        "period": "1985-2020 excluding 1991"
+      },
+      "registered_followup": "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json"
     }
   ],
   "conclusion": {
@@ -119,9 +133,10 @@
     "best_within_species_candidate": "none currently unresolved with accessible outcome-independent evidence; Tomotani 1980-2015 remains access-pending, while Hoge Veluwe 1980-2010 failed its frozen reversal gate",
     "best_interaction_anchor": "Samplonius_Both_2019_fatal_competition",
     "best_decision_time_anchor": "Samplonius_Both_2017_manipulation",
-    "required_next_data": "a >=24-year system combining a biologically prior cue, later destination state, focal timing, and interacting partner/resource timing; or a justified merge of independently sourced variables for the same population"
+    "required_next_data": "materialize and hash-freeze the Tomotani migrant-timing archive and Visser 2021 Hoge Veluwe great-tit/resource files, then certify schema/year alignment under the frozen network-hysteresis contract",
+    "best_network_assembly_candidate": "Hoge Veluwe 1985-2015 cross-source registered lane with frozen 1992-2015 history support; source assembly pending and joined outcome unopened"
   },
-  "claim_rule": "Do not describe any current natural dataset as direct information-triggered network hysteresis. Natural hysteresis remains a prospective prediction until the full gate passes.",
+  "claim_rule": "Do not describe any current natural dataset as direct information-triggered network hysteresis. The Hoge Veluwe cross-source lane is now prospectively registered but remains PREOUTCOME until its source and reversal gates pass.",
   "followup_20260927": {
     "lane": "Hoge Veluwe 1980-2010 cue-driver information history",
     "source_driver": "PLOS S1 annual standardized selection gradients",

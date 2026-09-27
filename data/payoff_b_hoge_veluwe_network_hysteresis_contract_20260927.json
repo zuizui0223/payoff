@@ -1,0 +1,141 @@
+{
+  "contract_id": "payoff_b_hoge_veluwe_network_hysteresis_v1_20260927",
+  "frozen_date": "2026-09-27",
+  "status": "PREOUTCOME_ASSEMBLY_REGISTERED_SOURCE_FILES_UNOPENED",
+  "population": {
+    "site": "Hoge Veluwe National Park, Netherlands",
+    "justification": "same long-term cavity-nesting bird study system; pied flycatcher and great tit are monitored in the same breeding population",
+    "primary_overlap_years": [
+      1985,
+      2015
+    ],
+    "excluded_years": [
+      1991
+    ],
+    "exclusion_reason": "caterpillar biomass peak is unavailable/anomalous in the published resource series; no imputation",
+    "primary_history_years_after_connectivity_construction": [
+      1992,
+      2015
+    ],
+    "expected_primary_history_year_count": 24
+  },
+  "sources": {
+    "migrant_timing": {
+      "paper_doi": "10.1111/gcb.14006",
+      "archive": "Marine Data Archive",
+      "archive_url": "http://mda.vliz.be/directlink.php?fid=VLIZ_00000444_5dd3fba4f38f8",
+      "years": [
+        1980,
+        2015
+      ],
+      "primary_variable": "annual female nest-building onset as the source-defined proxy for female arrival at Hoge Veluwe",
+      "secondary_variable": "calculated male arrival date; secondary lane only, never substituted into the primary lane after seeing outcomes"
+    },
+    "resident_partner_timing": {
+      "dataset_doi": "10.5061/dryad.f1vhhmgx6",
+      "file": "Tbl_Fitness_GT_HV_FirstClutches_CSNot0_YrLargerThan1973_IncludeIs1.xlsx",
+      "years": [
+        1973,
+        2020
+      ],
+      "primary_variable": "annual unweighted mean laying date of included first great-tit clutches",
+      "role": "resident interactor phenology"
+    },
+    "destination_resource_state": {
+      "dataset_doi": "10.5061/dryad.f1vhhmgx6",
+      "file": "Tbl_PeakDate_Biomass_HVLim.xlsx",
+      "years": [
+        1985,
+        2020
+      ],
+      "excluded_years": [
+        1991
+      ],
+      "primary_variable": "annual observed peak date of caterpillar biomass",
+      "role": "later breeding-ground resource state"
+    },
+    "precommitment_cue": {
+      "source": "NCEP/NCAR or source-faithful equivalent used by the already frozen CV24C cue reconstruction",
+      "primary_variable": "Ivory Coast temperature, fixed 20-day mean beginning 18 February",
+      "spatial_rule": "reuse the frozen 3x3 coarse-grid Ivory Coast proxy from PAYOFF_B_CV24C_CUE_DRIVER_RESULT_20260927; extend identically through 2015 using the same NCEP/NCAR source and transform",
+      "no_window_retuning": true
+    }
+  },
+  "source_gate": {
+    "require_exact_site_alignment": true,
+    "require_calendar_year_alignment": true,
+    "require_source_file_hashes_before_outcome_analysis": true,
+    "require_at_least_24_calendar_years": true,
+    "require_at_least_6_pairs_per_8yr_connectivity_window": true,
+    "fail_states": [
+      "SOURCE_ACCESS_FAILURE",
+      "SCHEMA_MISMATCH",
+      "INSUFFICIENT_OVERLAP",
+      "CUE_EXTENSION_NOT_SOURCE_FAITHFUL"
+    ],
+    "require_at_least_24_history_years_after_connectivity_construction": true,
+    "require_expected_primary_history_span": [
+      1992,
+      2015
+    ]
+  },
+  "coordinates": {
+    "cue_resource_predictive_connectivity": {
+      "source": "fixed Ivory Coast cue",
+      "target": "caterpillar biomass peak date",
+      "window_years": 8,
+      "processing": "within each trailing window ending at t-1, separately linear-detrend cue and resource peak on year, then calculate signed Pearson rho",
+      "current_year_excluded": true,
+      "min_pairs": 6
+    },
+    "focal_partner_coordination": {
+      "focal": "annual female pied-flycatcher nest-building onset",
+      "partner": "annual mean first-clutch great-tit laying date",
+      "primary": "signed calendar-day difference focal minus partner",
+      "note": "a fixed stage offset does not affect branch contrasts; no post-hoc standardization or stage shifting is allowed"
+    }
+  },
+  "information_reversal_gate": {
+    "data_used": "cue-resource predictive-connectivity series only",
+    "algorithm": "single interior breakpoint minimizing segmented linear SSE",
+    "min_segment_years": 6,
+    "comparator": "single linear trend",
+    "pass_rule": "segmented AICc <= linear AICc - 4; pre-break slope < 0; post-break slope > 0; post-break endpoint recovers at least 50% of the pre-break-to-break decline",
+    "fail_state": "NO_CUE_RESOURCE_REVERSAL",
+    "rule": "focal and partner timing are not opened for hysteresis testing if this gate fails"
+  },
+  "history_test_if_reversal_passes": {
+    "branch_definition": "decline versus recovery branch defined only from the frozen cue-resource connectivity breakpoint",
+    "overlap_support": "restrict to the range of predictive-connectivity values observed on both branches",
+    "minimum_branch_years": 6,
+    "primary_response": "signed pied-flycatcher minus great-tit timing difference",
+    "model": "mismatch ~ centered_connectivity + branch + centered_connectivity:branch",
+    "primary_support": "95% CI for the branch coefficient excludes zero at the mean overlapping connectivity",
+    "secondary_support": "report interaction estimate and CI without changing the primary criterion",
+    "interpretation_if_supported": "natural path dependence in resident-migrant seasonal coordination conditional on a recovered information coordinate",
+    "interpretation_ceiling": "does not identify the exact Nash mechanism, does not identify a natural rescue seed, and does not establish that either species intentionally acquires the declared temperature cue",
+    "primary_history_span": [
+      1992,
+      2015
+    ],
+    "expected_history_years": 24
+  },
+  "forbidden_moves": [
+    "do not choose a different African temperature window from the focal or partner timing outcome",
+    "do not use the previously observed 2000/2001 CV24C selection-gradient breakpoint as this network breakpoint",
+    "do not use the published circa-2008 flycatcher interval reversal to choose regimes",
+    "do not impute the 1991 caterpillar peak",
+    "do not substitute male calculated arrival for female nest-building in the primary lane after seeing results",
+    "do not choose aggregation rules for great-tit laying date after inspecting mismatch",
+    "do not redefine a monotonic or one-way connectivity change as recovery hysteresis",
+    "do not promote a failed reversal gate to a history test",
+    "do not infer a natural singleton rescue species from this analysis",
+    "do not truncate the registered 1985-2015 source overlap after inspecting the cue-resource reversal"
+  ],
+  "relationship_to_prior_negative_lane": {
+    "prior_contract": "data/payoff_b_cv24c_cue_driver_contract_20260927.json",
+    "prior_result": "NO_CUE_DRIVER_REVERSAL",
+    "distinction": "the prior lane tested African cue versus annual selection-gradient driver and had no partner timing; this contract prospectively tests African cue versus breeding-ground resource state and, only after an independent reversal gate, resident-migrant coordination history",
+    "anti_retuning_rule": "the new resource and partner coordinates were identified from independent published datasets and are frozen before their joined outcome is opened"
+  }
+}
