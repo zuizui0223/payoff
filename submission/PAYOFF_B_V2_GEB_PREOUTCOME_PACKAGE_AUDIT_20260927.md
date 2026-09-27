@@ -125,10 +125,12 @@ FINAL_SUBMISSION_ELIGIBLE = false
 
 Remaining blockers:
 
-1. freeze the registered industrial-development phase-retention result;
-2. supply an anonymous stable reviewer archive link;
+1. configure AppEEARS/Earthdata credentials and freeze the registered
+   industrial-development phase-retention result;
+2. deliver the already-built anonymous reviewer archive through the journal
+   portal or a stable anonymous review link;
 3. populate author-controlled title-page and declaration metadata;
-4. regenerate and re-audit the final V2 package.
+4. perform final human review of the outcome-rendered package and portal metadata.
 
 The package is therefore ready for internal scientific review and for immediate
 post-result regeneration, but not for journal upload yet.
