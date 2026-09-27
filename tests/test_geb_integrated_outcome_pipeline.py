@@ -25,6 +25,7 @@ PACKAGE = ROOT / "scripts" / "build_geb_integrated_outcome_package.py"
 
 spec = importlib.util.spec_from_file_location("geb_outcome_package", PACKAGE)
 module = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = module
 assert spec.loader is not None
 spec.loader.exec_module(module)
 
