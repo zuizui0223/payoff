@@ -112,6 +112,10 @@ def test_all_four_result_classes_build_science_ready_v2_packages(tmp_path: Path)
         assert manifest["main_figures_retuned"] is False
         assert manifest["aikens_result_location"] == "Supporting Information only"
         assert manifest["figure_count"] == 7
+        assert (out / "GEB_V2_DECLARATIONS_TEMPLATE.md").exists()
+        assert "anonymous reviewer archive delivery channel" in manifest["remaining_portal_blockers"]
+        cover = (out / "GEB_V2_COVER_LETTER_OUTCOME.md").read_text(encoding="utf-8")
+        assert "The theory predicts that **environmental information can recover before" in cover
         assert zip_path.exists()
 
         main = (out / "GEB_V2_BLINDED_OUTCOME.md").read_text(encoding="utf-8")
