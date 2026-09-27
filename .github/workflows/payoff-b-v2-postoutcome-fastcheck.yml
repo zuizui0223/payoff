@@ -12,6 +12,8 @@ on:
       - "scripts/render_information_deadlines_figures.py"
       - "submission/GEB_V2_*POSTOUTCOME*"
       - "tests/test_payoff_b_v2_postoutcome_package.py"
+      - "scripts/build_payoff_b_v2_review_archive.py"
+      - "tests/test_payoff_b_v2_review_archive.py"
       - "tests/test_aikens_full_workflow_order.py"
       - ".github/workflows/payoff-b-aikens-appeears-full-extraction.yml"
       - ".github/workflows/payoff-b-v2-postoutcome-fastcheck.yml"
@@ -43,4 +45,5 @@ jobs:
         run: >
           pytest -q
           tests/test_payoff_b_v2_postoutcome_package.py
+          tests/test_payoff_b_v2_review_archive.py
           tests/test_aikens_full_workflow_order.py
