@@ -560,7 +560,7 @@ def render_all(output_dir: Path):
         path = output_dir / name
         path.write_text(svg, encoding="utf-8")
         manifest["figures"][key] = {
-            "path": str(path),
+            "path": path.name,
             "bytes": path.stat().st_size,
             "sha256": sha256(path),
         }
