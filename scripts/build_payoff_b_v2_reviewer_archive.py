@@ -26,7 +26,6 @@ ENTRY_PY = (
     "scripts/payoff_b_wigeon_predictive_connectivity.py",
     "scripts/payoff_b_cv24c_cue_driver.py",
     "scripts/build_payoff_b_v2_geb_source.py",
-    "scripts/audit_payoff_b_v2_geb_source.py",
     "scripts/build_payoff_b_v2_geb_supporting_information.py",
     "scripts/build_payoff_b_v2_geb_outcome_supporting_information.py",
 )
