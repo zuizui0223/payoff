@@ -1,0 +1,30 @@
+name: payoff-b-shared-cue-deadline-hysteresis
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-information-threshold-theorem-20260927
+    paths:
+      - "src/shared_cue_deadline_network.py"
+      - "scripts/payoff_b_shared_cue_deadline_hysteresis.py"
+      - "tests/test_shared_cue_deadline_network.py"
+      - ".github/workflows/payoff-b-shared-cue-deadline-hysteresis.yml"
+
+jobs:
+  shared-cue-hysteresis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run shared-cue deadline hysteresis trace
+        run: python scripts/payoff_b_shared_cue_deadline_hysteresis.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-shared-cue-deadline-hysteresis
+          path: |
+            outputs/payoff_b_shared_cue_deadline_hysteresis.json
+            outputs/payoff_b_shared_cue_deadline_trace.csv
+          if-no-files-found: error
