@@ -58,7 +58,7 @@ Compact conceptual claim:
 
 Current headline:
 
-> **Environmental information can recover before ecological coordination does.**
+> **Theory predicts that environmental information can recover before ecological coordination does.**
 
 ## Analytic spine of Paper 2
 
