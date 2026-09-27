@@ -211,10 +211,12 @@ reference, anonymity, citation and journal-facing package audits.
 
 Before final submission, V2 still requires:
 
-- the registered industrial-development result to be frozen;
-- an anonymous stable reviewer archive link;
+- AppEEARS/Earthdata credentials to be configured and the registered
+  industrial-development result to be frozen;
+- delivery of the already-built anonymous reviewer archive through the journal
+  portal or a stable anonymous review link;
 - author-controlled title-page and declaration metadata;
-- final package regeneration and re-audit after the registered result.
+- final human review of the outcome-rendered package and portal metadata.
 
 ## Journal routing
 
