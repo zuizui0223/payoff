@@ -370,6 +370,9 @@ def fit_history_hac(
         subset=["year", "connectivity", "mismatch"]
     ).copy()
     frame["year"] = frame["year"].astype(int)
+    if frame["year"].duplicated().any():
+        raise ValueError("Gate C requires one annual record per year")
+    frame = frame.sort_values("year").reset_index(drop=True)
     frame["branch"] = frame["year"].map(
         lambda year: "decline" if year < break_year else "recovery"
     )
