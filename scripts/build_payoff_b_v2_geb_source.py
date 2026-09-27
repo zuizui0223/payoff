@@ -184,11 +184,11 @@ def build_source() -> str:
         + text[title_end + 1 :]
     )
 
+    if "## References" not in text:
+        raise ValueError("canonical V2 manuscript has no References section")
+
     if "## Data and Code Availability Statement" not in text:
-        ref = text.find("## References")
-        if ref < 0:
-            raise ValueError("canonical V2 manuscript has no References section")
-        text = text[:ref] + DATA_CODE.strip() + "\n\n---\n\n" + text[ref:]
+        text = text.rstrip() + "\n\n---\n\n" + DATA_CODE.strip()
 
     text = text.rstrip() + "\n\n---\n\n" + FIGURE_LEGENDS.strip() + "\n"
     return text
