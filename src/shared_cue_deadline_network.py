@@ -99,6 +99,11 @@ class PerfectInformationTrap:
     information_costs: tuple[float, ...]
     interaction_penalties_for_first_mover: tuple[float, ...]
     unilateral_information_gains: tuple[float, ...]
+    old_profile_stability_margins: tuple[float, ...]
+    informed_profile_stability_margins: tuple[float, ...]
+    minimum_interaction_for_old_profile: tuple[float, ...]
+    minimum_interaction_for_informed_profile: tuple[float, ...]
+    minimum_interaction_for_bistability: tuple[float, ...]
     joint_information_gain: float
     old_profile_is_nash: bool
     old_profile_is_strict_nash: bool
@@ -332,6 +337,36 @@ def perfect_information_coordination_trap(
             first_mover_penalties,
         )
     )
+    old_stability_margins = tuple(
+        cost + penalty - risk
+        for risk, cost, penalty in zip(
+            prior_risks,
+            information_costs,
+            first_mover_penalties,
+        )
+    )
+    informed_stability_margins = tuple(
+        risk + penalty - cost
+        for risk, cost, penalty in zip(
+            prior_risks,
+            information_costs,
+            first_mover_penalties,
+        )
+    )
+    if switch_probability <= 0.0:
+        raise ValueError("opposite-state probability must be positive")
+    minimum_old_interaction = tuple(
+        max(0.0, (risk - cost) / switch_probability)
+        for risk, cost in zip(prior_risks, information_costs)
+    )
+    minimum_informed_interaction = tuple(
+        max(0.0, (cost - risk) / switch_probability)
+        for risk, cost in zip(prior_risks, information_costs)
+    )
+    minimum_bistability_interaction = tuple(
+        abs(risk - cost) / switch_probability
+        for risk, cost in zip(prior_risks, information_costs)
+    )
     joint_gain = sum(prior_risks) - sum(information_costs)
 
     old_nash = is_shared_cue_nash(
@@ -364,6 +399,11 @@ def perfect_information_coordination_trap(
         information_costs=information_costs,
         interaction_penalties_for_first_mover=first_mover_penalties,
         unilateral_information_gains=unilateral_gains,
+        old_profile_stability_margins=old_stability_margins,
+        informed_profile_stability_margins=informed_stability_margins,
+        minimum_interaction_for_old_profile=minimum_old_interaction,
+        minimum_interaction_for_informed_profile=minimum_informed_interaction,
+        minimum_interaction_for_bistability=minimum_bistability_interaction,
         joint_information_gain=joint_gain,
         old_profile_is_nash=old_nash,
         old_profile_is_strict_nash=old_strict,
