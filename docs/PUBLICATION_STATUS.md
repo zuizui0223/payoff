@@ -251,13 +251,15 @@ CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = READY_UNOPENED
 CURRENT_V2_POSTOUTCOME_MAIN_TEXT_RETUNING = forbidden
 CURRENT_V2_POSTOUTCOME_MAIN_FIGURE_RETUNING = forbidden
 CURRENT_V2_POSTOUTCOME_RESULT_LOCATION = Supporting Information only
-LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT = NOT_CONFIGURED_2026-09-25
-CURRENT_CREDENTIAL_STATE = RECHECK_REQUIRED_BEFORE_REAL_EXECUTION
+LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT = NOT_CONFIGURED_2026-09-27
+LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT_RUN = 36318036795
+LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT_ARTIFACT = 10931233185
+CURRENT_CREDENTIAL_STATE = NOT_CONFIGURED_CONFIRMED_2026-09-27
 ```
 
-The credential line is deliberately a last-verified state, not a claim about
-the current secret configuration. GitHub secret values are not readable from
-the repository audit surface.
+The credential state above was freshly rechecked on 2026-09-27 without
+recording secret values or opening environmental data. No usable AppEEARS token
+or Earthdata username/password pair was configured in that run.
 
 ### Aikens gate
 
@@ -270,10 +272,10 @@ coordination conclusions do not depend on the Aikens sign.
 The V2 PREOUTCOME package is now built and audited. The remaining
 pre-submission tasks are therefore:
 
-1. re-run credential preflight and, if authentication is configured, execute
-   and freeze the registered Aikens outcome through the canonical V2-only
-   workflow;
-2. deliver the already-built anonymous reviewer archive through the journal portal or a stable anonymous link;
+1. configure either APPEEARS_TOKEN or Earthdata username/password, then rerun
+   credential preflight and execute the already-frozen Aikens workflow;
+2. deliver the already-built anonymous reviewer archive through the journal
+   portal or a stable anonymous link;
 3. complete author-controlled title-page and declaration metadata;
 4. perform final human review of the already automated outcome-rendered package
    and portal metadata.
