@@ -167,7 +167,54 @@ On a 0.01 grid this appears as a mismatch window from (q=0.82) to (0.93), with e
 
 If the higher delay cost exceeds (R_0), the higher-cost actor never waits, even at (q=1). In this regime information asymmetry persists under perfect cue reliability.
 
-### 2.3 Private and joint value of waiting can diverge
+### 2.3 In communities, asynchronous information use is a network cut
+
+The two-actor result generalizes directly to an interaction network. At cue
+quality q, let S(q) be the set of actors whose waiting cost is below the current
+value of information. These actors use the cue; all others retain the old
+timing convention.
+
+For symmetric edge weights w_ij, define C(q) as the total interaction weight
+joining an information user to a non-user, and W as total interaction weight.
+If M(q) is the probability that the cue-contingent action differs from the old
+action, expected interaction mismatch is exactly
+
+    E(q) = M(q) C(q) / W.
+
+Thus environmental information acts through a moving **uptake frontier** in the
+ecological network.
+
+In an unweighted complete network with N actors and k information users,
+
+    C/W = 2 k (N-k) / [N(N-1)].
+
+The informed--uninformed edge boundary is therefore maximized when uptake is
+split as evenly as possible. In the large randomly mixed limit, with informed
+fraction f,
+
+    P(asynchronous pair) = 2 f (1-f),
+
+which peaks at f=1/2.
+
+This does not imply that total ecological mismatch must peak at exactly 50%
+uptake, because M(q) can change with cue reliability. It does imply that
+exposure of interaction edges to asynchronous information use is greatest near
+the middle of the adoption transition.
+
+Topology matters because crossing an information threshold can either create or
+repair mismatch edges. If actor i is the next adopter, the exact change in cut
+weight is
+
+    Delta C_i
+      = weight(i, still-uninformed neighbours)
+      - weight(i, already-informed neighbours).
+
+An early adopter with many uninformed neighbours increases the coordination
+boundary, whereas a later adopter surrounded by informed neighbours repairs it.
+The same distribution of decision deadlines can therefore produce different
+mismatch trajectories depending on where those deadlines sit in the network.
+
+### 2.4 Private and joint value of waiting can diverge
 
 If a timing error also imposes costs on interaction partners, the joint value of waiting can exceed the focal actor’s private value.
 
@@ -187,7 +234,7 @@ in which the focal actor rationally commits under uncertainty while the interact
 
 Coordination failure can therefore begin before the actors choose their seasonal actions: selection can under-invest in information acquisition itself.
 
-### 2.4 Perfect information does not guarantee information use
+### 2.5 Perfect information does not guarantee information use
 
 We next consider a shared-cue interaction network at
 
@@ -245,7 +292,7 @@ Yet the informed profile has higher joint payoff whenever
 
 Thus perfect environmental information can coexist with a strictly stable obsolete timing regime and a strictly stable better-informed regime.
 
-### 2.5 Temporary information degradation can create permanent behavioural lock-in
+### 2.6 Temporary information degradation can create permanent behavioural lock-in
 
 The canonical shared-cue network has three actors: flower, local pollinator and migrant. Their information costs are
 
