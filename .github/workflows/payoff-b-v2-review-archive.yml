@@ -1,0 +1,46 @@
+name: PAYOFF-B V2 anonymous reviewer archive
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-v2-postoutcome-pipeline-20260927
+    paths:
+      - "scripts/build_payoff_b_v2_review_archive.py"
+      - "tests/test_payoff_b_v2_review_archive.py"
+      - "data/payoff_b_*"
+      - "data/aikens2022_lambda_*"
+      - "theory/INFORMATION_*"
+      - "theory/PERFECT_INFORMATION_COORDINATION_TRAP.md"
+      - "docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md"
+      - ".github/workflows/payoff-b-v2-review-archive.yml"
+  pull_request:
+    paths:
+      - "scripts/build_payoff_b_v2_review_archive.py"
+      - "tests/test_payoff_b_v2_review_archive.py"
+      - ".github/workflows/payoff-b-v2-review-archive.yml"
+
+jobs:
+  review-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test anonymous archive builder
+        run: >
+          python -m pip install --disable-pip-version-check pytest
+          && pytest -q tests/test_payoff_b_v2_review_archive.py
+      - name: Build PREOUTCOME anonymous archive
+        run: >
+          python scripts/build_payoff_b_v2_review_archive.py
+          --output-dir outputs/payoff_b_v2_anonymous_review_archive
+          --zip outputs/PAYOFF_B_V2_ANON_REVIEW_CODE_DATA_PREOUTCOME.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v2-anonymous-review-archive-preoutcome
+          path: |
+            outputs/PAYOFF_B_V2_ANON_REVIEW_CODE_DATA_PREOUTCOME.zip
+            outputs/payoff_b_v2_anonymous_review_archive/REVIEW_ARCHIVE_MANIFEST.json
+          if-no-files-found: error
