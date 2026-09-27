@@ -99,6 +99,12 @@
       "reason": "Dryad API file download returned HTTP 401 and current public file-stream routes returned HTTP 403 in GitHub Actions",
       "scientific_effect": "none; Dryad DOI, exact filenames and Dryad-declared SHA-256 remain authoritative",
       "outcome_data_inspected": false
+    },
+    "inferential_amendment": {
+      "date": "2026-09-27",
+      "timing": "before Gate-A source outcome certification and before Gate-B/C outcomes are opened",
+      "reason": "overlapping 8-year connectivity windows induce serial dependence and breakpoint search adds model flexibility",
+      "outcome_data_inspected": false
     }
   },
   "coordinates": {
@@ -124,7 +130,15 @@
     "comparator": "single linear trend",
     "pass_rule": "segmented AICc <= linear AICc - 4; pre-break slope < 0; post-break slope > 0; post-break endpoint recovers at least 50% of the pre-break-to-break decline",
     "fail_state": "NO_CUE_RESOURCE_REVERSAL",
-    "rule": "focal and partner timing are not opened for hysteresis testing if this gate fails"
+    "rule": "focal and partner timing are not opened for hysteresis testing if this gate fails",
+    "aicc_parameter_count": {
+      "linear": 2,
+      "segmented": 5,
+      "segmented_components": "two intercepts + two slopes + selected breakpoint"
+    },
+    "breakpoint_tie_rule": "if candidate segmented AICc values are numerically tied within 1e-12, choose the earlier break year",
+    "serial_dependence_note": "annual connectivity values are overlapping trailing-window estimates; AICc is used only as the predeclared geometry gate, not as an independent-year hypothesis test",
+    "robustness_reporting": "report leave-one-history-year-out breakpoint and slope-sign stability without changing the primary pass rule"
   },
   "history_test_if_reversal_passes": {
     "branch_definition": "decline versus recovery branch defined only from the frozen cue-resource connectivity breakpoint",
@@ -132,15 +146,18 @@
     "minimum_branch_years": 6,
     "primary_response": "signed pied-flycatcher minus great-tit timing difference",
     "model": "mismatch ~ centered_connectivity + branch + centered_connectivity:branch",
-    "primary_support": "95% CI for the branch coefficient excludes zero at the mean overlapping connectivity",
-    "secondary_support": "report interaction estimate and CI without changing the primary criterion",
+    "primary_support": "HAC(2) 95% CI for the branch coefficient excludes zero at the mean overlapping connectivity",
+    "secondary_support": "report HAC(2) interaction estimate and CI; also report HC3 sensitivity without changing the primary criterion",
     "interpretation_if_supported": "natural path dependence in resident-migrant seasonal coordination conditional on a recovered information coordinate",
     "interpretation_ceiling": "does not identify the exact Nash mechanism, does not identify a natural rescue seed, and does not establish that either species intentionally acquires the declared temperature cue",
     "primary_history_span": [
       1992,
       2015
     ],
-    "expected_history_years": 24
+    "expected_history_years": 24,
+    "centering": "center predictive connectivity at the mean connectivity within the decline/recovery overlap support before fitting",
+    "covariance": "Newey-West HAC covariance, maxlags=2, finite-sample correction",
+    "no_naive_iid_inference": true
   },
   "forbidden_moves": [
     "do not choose a different African temperature window from the focal or partner timing outcome",
