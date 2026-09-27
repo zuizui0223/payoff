@@ -33,6 +33,22 @@ def render_supporting_information(payload: dict) -> tuple[str, dict]:
     )
     result_class = claim_state["scientific_result"]
 
+    preoutcome_status = (
+        "Status: working PREOUTCOME supplement. The registered industrial-development\n"
+        "phase-retention result remains unopened."
+    )
+    postoutcome_status = (
+        "Status: postoutcome supplement. The registered industrial-development\n"
+        f"phase-retention gate is resolved as **{result_class}**."
+    )
+    if preoutcome_status not in preoutcome:
+        raise ValueError("PREOUTCOME Supporting Information status line changed")
+    preoutcome = preoutcome.replace(
+        preoutcome_status,
+        postoutcome_status,
+        1,
+    )
+
     prefix, _ = preoutcome.split(PENDING_HEADING, 1)
     replacement = f"""## Appendix S8. Registered industrial-development phase-retention result
 
