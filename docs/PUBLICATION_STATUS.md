@@ -189,6 +189,28 @@ CURRENT_V2_JOURNAL_PACKAGE = REBUILD_REQUIRED
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 
+### Legacy V1 package provenance
+
+The following identifiers are retained so the frozen V1 publication state
+remains auditable. They do **not** describe the current V2 submission package.
+
+```text
+LEGACY_V1_PREOUTCOME_BUILD_RUN = 36118090547
+LEGACY_V1_PREOUTCOME_ARTIFACT = 10856440257
+LEGACY_V1_PREOUTCOME_ARCHIVE_SHA256 = b5628da1383960bdbbb637960d78d4f9c71588269f0ddee3111be37bba3fffc8
+LEGACY_V1_POSTOUTCOME_GEB_PIPELINE = READY_FOR_V1_ONLY
+LEGACY_V1_POSTOUTCOME_READINESS = GEB_INTEGRATED_POSTOUTCOME_PIPELINE_READINESS_20260925.md
+LEGACY_V1_CREDENTIAL_PREFLIGHT_RUN = 36113621057
+LEGACY_V1_CREDENTIAL_PREFLIGHT_ARTIFACT = 10853764396
+CURRENT_V2_PREOUTCOME_PACKAGE = REBUILD_REQUIRED
+CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = REBUILD_REQUIRED
+```
+
+The legacy V1 PREOUTCOME package had zero identity leaks in its anonymous main
+text. The credential-only preflight opened no environmental values and left the
+Aikens lambda outcome unopened. These statements are retained as provenance,
+not inherited automatically by V2.
+
 ### Aikens gate
 
 The preregistered Aikens fixed-24 h lambda outcome remains unopened.
