@@ -22,6 +22,11 @@ from src.information_uptake_network import (
     complete_graph_weights,
     evaluate_network_uptake,
 )
+from src.information_rescue_coalition import (
+    minimum_pinned_rescue_coalitions,
+    minimum_self_financing_coalitions,
+    pinned_rescue,
+)
 from src.shared_cue_deadline_network import (
     canonical_shared_cue_deadline_game,
     sequential_shared_cue_best_response,
@@ -199,6 +204,54 @@ def panel_d_recovery_hysteresis():
     return rows
 
 
+
+def panel_e_rescue_topology():
+    rows = []
+    for topology in ("complete", "chain", "migrant_star"):
+        game = canonical_shared_cue_deadline_game(
+            1.0,
+            interaction_topology=topology,
+        )
+        voluntary = minimum_self_financing_coalitions(game)
+        pinned_min = minimum_pinned_rescue_coalitions(game)
+        voluntary_size = (
+            len(voluntary[0].members) if voluntary else None
+        )
+        pinned_size = (
+            len(pinned_min[0].pinned_members) if pinned_min else None
+        )
+        minimum_singletons = {
+            row.pinned_members for row in pinned_min
+            if len(row.pinned_members) == 1
+        }
+
+        for seed_index, player in enumerate(game.players):
+            result = pinned_rescue(game, (seed_index,))
+            rows.append(
+                {
+                    "topology": topology,
+                    "seed_index": seed_index,
+                    "seed_name": player.name,
+                    "minimum_voluntary_coalition_size": voluntary_size,
+                    "minimum_pinned_rescue_size": pinned_size,
+                    "singleton_is_minimum_rescue": (
+                        (seed_index,) in minimum_singletons
+                    ),
+                    "reaches_fully_informed_while_pinned": (
+                        result.reaches_fully_informed_while_pinned
+                    ),
+                    "persists_after_release": result.persists_after_release,
+                    "final_profile_while_pinned": _profile_label(
+                        result.final_profile_while_pinned
+                    ),
+                    "final_profile_after_release": _profile_label(
+                        result.final_profile_after_release
+                    ),
+                }
+            )
+    return rows
+
+
 def main():
     args = parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -208,6 +261,7 @@ def main():
         "panel_b_complete_network": panel_b_complete_network(),
         "panel_c_deadline_placement": panel_c_deadline_placement(),
         "panel_d_recovery_hysteresis": panel_d_recovery_hysteresis(),
+        "panel_e_rescue_topology": panel_e_rescue_topology(),
     }
     filenames = {}
     for name, rows in panels.items():
@@ -223,6 +277,7 @@ def main():
             "B": "complete-network information-uptake frontier and edge cut",
             "C": "same delay-cost distribution rearranged on a chain",
             "D": "shared-cue degradation and recovery hysteresis",
+            "E": "minimum temporary rescue seeds across network topologies",
         },
         "canonical_exact_markers": {
             "actionable_q": 0.75,
@@ -230,6 +285,9 @@ def main():
             "high_wait_q": 0.9375,
             "all_informed_stability_q": 0.80,
             "grid_collapse_q": 0.79,
+            "chain_keystone_rescue_actor": "local_pollinator",
+            "complete_singleton_rescue_any_actor": true,
+            "migrant_star_singleton_rescue_any_actor": true,
         },
         "files": filenames,
         "claim_boundary": [
