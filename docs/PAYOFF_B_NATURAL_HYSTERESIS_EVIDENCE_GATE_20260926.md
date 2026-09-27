@@ -101,7 +101,10 @@ The archived focal Tomotani dataset itself lacks an interacting partner timing
 series. However, an independent public Dryad archive now supplies same-site
 Hoge Veluwe great-tit first-clutch phenology and caterpillar peak dates. This
 removes the partner/resource variables as an intrinsic data-availability
-blocker, but creates a stricter cross-source assembly requirement.
+blocker, but creates a stricter cross-source assembly requirement. The
+registered source overlap now runs through 2015; after the fixed trailing-window
+construction this yields a 1992–2015 primary history span of 24 annual
+outcomes, matching the readiness threshold.
 
 A prospective joined analysis is now frozen in
 `data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json`.
@@ -141,7 +144,7 @@ assembly, not a retuned version of the failed CV24C lane.
 The frozen sequence is:
 
     materialize + hash sources
-    -> certify 1985–2013 overlap (1991 excluded)
+    -> certify 1985–2015 source overlap and frozen 1992–2015 history span
     -> test fixed African-cue / caterpillar-resource reversal
     -> only if that gate passes, open resident–migrant history test
 
