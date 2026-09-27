@@ -319,3 +319,79 @@ def test_dryad_dataset_archive_extracts_exact_registered_file(tmp_path: Path):
     assert (tmp_path / "target.xlsx").read_bytes() == b"registered bytes"
     assert result["sha256"] == module.sha256_bytes(b"registered bytes")
 
+def test_compound_year_header_is_certified():
+    module = load_module()
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "data"
+    ws.append(["YearOfBreeding", "LayDateApril"])
+    for year in range(1973, 2021):
+        ws.append([year, 20])
+    buf = io.BytesIO()
+    wb.save(buf)
+
+    schema = module._inspect_xlsx_bytes(buf.getvalue())
+    row = schema["sheets"][0]["year_columns"][0]
+    assert row["column"] == "YearOfBreeding"
+    assert row["min_year"] == 1973
+    assert row["max_year"] == 2020
+
+
+def test_mda_html_landing_form_resolves_binary_file(tmp_path: Path):
+    module = load_module()
+    html = b"""<!doctype html><html><body>
+    <h3>File: 'TomotaniData.xlsx'</h3>
+    <form method="post" action="download.php">
+      <input type="hidden" name="fid" value="VLIZ_TEST">
+      <button type="submit">Download</button>
+    </form>
+    </body></html>"""
+    payload = workbook_bytes(1980, 2015)
+
+    class Response:
+        def __init__(self, status=200, content=b"", url="", headers=None):
+            self.status_code = status
+            self.content = content
+            self.url = url
+            self.headers = headers or {}
+            self.encoding = "utf-8"
+
+        @property
+        def ok(self):
+            return 200 <= self.status_code < 300
+
+        def raise_for_status(self):
+            if not self.ok:
+                raise RuntimeError(f"HTTP {self.status_code}")
+
+    class Session:
+        def get(self, url, timeout=None, allow_redirects=True):
+            return Response(
+                200,
+                html,
+                "https://mda.example/directlink.php?fid=VLIZ_TEST",
+                {"Content-Type": "text/html; charset=UTF-8"},
+            )
+
+        def post(self, url, data=None, timeout=None, allow_redirects=True):
+            assert url == "https://mda.example/download.php"
+            assert data == {"fid": "VLIZ_TEST"}
+            return Response(
+                200,
+                payload,
+                url,
+                {
+                    "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    "Content-Disposition": 'attachment; filename="TomotaniData.xlsx"',
+                },
+            )
+
+    out = module._mda_download_file(
+        Session(),
+        "https://mda.example/directlink.php?fid=VLIZ_TEST",
+        tmp_path,
+        10,
+    )
+    assert out["filename"] == "TomotaniData.xlsx"
+    assert out["landing_resolution"]["resolution"] == "html_form_post"
+
