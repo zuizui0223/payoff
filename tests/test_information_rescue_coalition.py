@@ -74,7 +74,7 @@ def test_chain_has_one_keystone_single_species_rescue_seed():
     rescues = minimum_pinned_rescue_coalitions(game)
 
     assert len(rescues) == 1
-    assert rescues[0].members == (1,)
+    assert rescues[0].pinned_members == (1,)
     assert rescues[0].pinned_names == ("local_pollinator",)
     assert rescues[0].reaches_fully_informed_while_pinned
     assert rescues[0].persists_after_release
@@ -91,7 +91,7 @@ def test_complete_and_migrant_star_any_singleton_can_nucleate_recovery():
         )
         rescues = minimum_pinned_rescue_coalitions(game)
 
-        assert {row.members for row in rescues} == {
+        assert {row.pinned_members for row in rescues} == {
             (0,),
             (1,),
             (2,),
