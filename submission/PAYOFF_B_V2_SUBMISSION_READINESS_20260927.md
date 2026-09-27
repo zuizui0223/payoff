@@ -84,6 +84,37 @@ full repository CI = 36312188416 — success
 Thus the postoutcome pipeline is **READY_UNOPENED**, not
 `REBUILD_REQUIRED`.
 
+## 2.5 Anonymous reviewer archive — READY, delivery pending
+
+A deterministic PREOUTCOME reviewer archive has been built from the canonical
+claim-ceiling V2 source.
+
+```text
+workflow run = 36315711405
+artifact = 10930372460
+artifact digest =
+2b364730325982cfb12d7152d41810a58f52b24c662f4bca55b1d57bc81e7a4d
+
+inner reviewer ZIP SHA256 =
+857d6e22fe2b9bc4724c35659667fa9159d69a8c93f7789f68f496828df918a6
+
+files = 64
+Python source closure = 23
+figures = 7
+identity scan = PASS
+raw empirical data redistributed = false
+```
+
+The archive contains the blinded manuscript, Supporting Information, exact
+theory sources, frozen derived receipts and the code closure needed to audit
+the reported analyses. Raw source datasets with separate access terms are not
+silently redistributed.
+
+The archive builder also supports the frozen postoutcome result classes. The
+remaining reviewer-archive task is therefore **delivery**, not construction:
+upload the ZIP through the journal review portal or provide a stable anonymous
+link.
+
 ## 3. Real Aikens execution — credential recheck required
 
 The scientific contract is frozen and the outcome is still unopened.
@@ -119,7 +150,7 @@ No scientific tuning is permitted at any stage.
 
 Even after the science result is frozen, portal upload still requires:
 
-1. anonymous stable reviewer archive link;
+1. delivery of the already-built anonymous reviewer archive through the journal portal or a stable anonymous link;
 2. author list, affiliations, ORCID and corresponding-author metadata;
 3. funding, conflict-of-interest, acknowledgements and contribution
    declarations;
