@@ -177,6 +177,47 @@ The mechanistic interpretation is therefore:
 
 Partner topology controls ecological memory.
 
+### 4. Recovery barrier and rescue leverage
+
+The perfect-information trap does not imply that recovery requires moving the
+entire network at once.
+
+At q=1, an uninformed actor i exposed to an informed seed set S has exact
+adoption gain
+
+    H_i(S)
+    = R_i - D_i + p I_i [2 a_i(S) - 1],
+
+where a_i(S) is the fraction of its interaction weight already attached to
+informed neighbours.
+
+Thus each actor has a derived network threshold
+
+    a_i(S)
+    >
+    1/2 [1 - (R_i-D_i)/(p I_i)].
+
+Information-use recovery is therefore a progressive threshold cascade.
+
+In the canonical three-species system:
+
+- spontaneous recovery fails in complete, chain and migrant-star networks;
+- complete: any one temporary informed actor restores all-follow;
+- migrant-star: any one temporary informed actor restores all-follow;
+- chain: **only the central local pollinator** is a one-species rescue seed.
+
+The two peripheral chain species do not nucleate recovery alone and revert to
+the old state when the temporary intervention is removed.
+
+This yields a new distinction:
+
+    trap stability
+    !=
+    rescue leverage.
+
+Network position can be irrelevant to whether the symmetric trap exists but
+decisive for which actor can catalyse escape from it.
+
 ## Natural-data evidence
 
 ### Broad migratory birds: pooled directional support
@@ -383,7 +424,9 @@ PAYOFF-B may not currently claim:
 - that predictive connectivity is a universal phase controller;
 - that the old 0.90/0.50 boundary witness is a strict equilibrium;
 - that the 1980--2010 Hoge Veluwe cue--driver series demonstrates a natural
-  information decline--recovery cycle or hysteresis.
+  information decline--recovery cycle or hysteresis;
+- that any natural species has been identified as a keystone rescue adopter or
+  that temporary manipulation of such a species would be safe or effective.
 
 ## Next decisive empirical target
 
