@@ -193,6 +193,24 @@ CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 
+The anonymous reviewer archive is also built and audited from the canonical V2
+source:
+
+```text
+CURRENT_V2_REVIEWER_ARCHIVE = READY_PREOUTCOME
+CURRENT_V2_REVIEWER_ARCHIVE_RUN = 36315711405
+CURRENT_V2_REVIEWER_ARCHIVE_ARTIFACT = 10930372460
+CURRENT_V2_REVIEWER_ARCHIVE_INNER_SHA256 = 857d6e22fe2b9bc4724c35659667fa9159d69a8c93f7789f68f496828df918a6
+CURRENT_V2_REVIEWER_ARCHIVE_IDENTITY_SCAN = PASS
+CURRENT_V2_REVIEWER_ARCHIVE_RAW_DATA_REDISTRIBUTED = false
+CURRENT_V2_REVIEWER_ARCHIVE_DELIVERY = PENDING_ANONYMOUS_CHANNEL
+```
+
+The archive contains 64 files, including 23 Python source files and seven main
+figures. It can be regenerated deterministically and can switch to
+outcome-rendered Supporting Information after the registered Aikens result is
+frozen without changing the blinded main text or main figures.
+
 ### Legacy V1 package provenance
 
 The following identifiers are retained so the frozen V1 publication state
@@ -255,7 +273,7 @@ pre-submission tasks are therefore:
 1. re-run credential preflight and, if authentication is configured, execute
    and freeze the registered Aikens outcome through the canonical V2-only
    workflow;
-2. supply an anonymous stable reviewer archive link;
+2. deliver the already-built anonymous reviewer archive through the journal portal or a stable anonymous link;
 3. complete author-controlled title-page and declaration metadata;
 4. perform final human review of the already automated outcome-rendered package
    and portal metadata.

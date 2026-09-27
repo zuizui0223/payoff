@@ -1,0 +1,35 @@
+{
+  "result_id": "payoff_b_v2_anonymous_review_archive_20260927",
+  "date": "2026-09-27",
+  "status": "READY_PREOUTCOME",
+  "canonical_science_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
+  "merged_pr": 180,
+  "merge_commit": "8cbcd6f22b925d09651fe3140268a70cd9c4c301",
+  "workflow": {
+    "run_id": 36315711405,
+    "head_sha": "d137f88c0714b3c7ce45899d6c4aa935744cf236",
+    "conclusion": "success",
+    "artifact_id": 10930372460,
+    "artifact_name": "payoff-b-v2-anonymous-review-archive",
+    "artifact_sha256": "2b364730325982cfb12d7152d41810a58f52b24c662f4bca55b1d57bc81e7a4d"
+  },
+  "inner_archive": {
+    "file": "PAYOFF_B_V2_ANON_REVIEW.zip",
+    "sha256": "857d6e22fe2b9bc4724c35659667fa9159d69a8c93f7789f68f496828df918a6"
+  },
+  "contents": {
+    "file_count": 64,
+    "python_source_count": 23,
+    "figure_count": 7,
+    "identity_scan_passed": true,
+    "raw_empirical_data_redistributed": false
+  },
+  "outcome_rendering_supported": true,
+  "aikens_outcome_state": "UNOPENED",
+  "claim_boundary": [
+    "natural network hysteresis is not claimed",
+    "natural singleton rescue species is not identified",
+    "reviewer archive construction is complete; anonymous delivery channel remains external"
+  ],
+  "delivery_state": "PENDING_ANONYMOUS_CHANNEL"
+}

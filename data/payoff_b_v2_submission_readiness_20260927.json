@@ -1,7 +1,7 @@
 {
   "result_id": "payoff_b_v2_submission_readiness_20260927",
   "frozen_date": "2026-09-27",
-  "canonical_main_commit": "28f9f5750c0be4531bf0dd464dc7154e3edb9c9e",
+  "canonical_main_commit": "8cbcd6f22b925d09651fe3140268a70cd9c4c301",
   "paper2_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "v1_status": "FROZEN_PROVENANCE_ONLY",
   "journal_route": {
@@ -70,7 +70,7 @@
     "final_submission_eligible": false,
     "blockers": [
       "registered Aikens phase-retention result remains unopened",
-      "anonymous stable reviewer archive link",
+      "anonymous reviewer archive delivery channel (journal portal upload or stable anonymous link)",
       "author-controlled title-page metadata and declarations",
       "final human review of outcome-rendered package"
     ]
@@ -83,5 +83,22 @@
     "wigeon_predictive_connectivity_controller": "NOT_SUPPORTED",
     "long_term_cue_driver_reversal": "NO_CUE_DRIVER_REVERSAL",
     "natural_rescue_seed_identified": false
+  },
+  "reviewer_archive": {
+    "status": "READY_PREOUTCOME",
+    "merged_pr": 180,
+    "merge_commit": "8cbcd6f22b925d09651fe3140268a70cd9c4c301",
+    "workflow_run": 36315711405,
+    "head_sha": "d137f88c0714b3c7ce45899d6c4aa935744cf236",
+    "artifact_id": 10930372460,
+    "artifact_sha256": "2b364730325982cfb12d7152d41810a58f52b24c662f4bca55b1d57bc81e7a4d",
+    "inner_zip_sha256": "857d6e22fe2b9bc4724c35659667fa9159d69a8c93f7789f68f496828df918a6",
+    "file_count": 64,
+    "python_source_count": 23,
+    "figure_count": 7,
+    "identity_scan_passed": true,
+    "raw_empirical_data_redistributed": false,
+    "outcome_rendering_supported": true,
+    "delivery_state": "PENDING_ANONYMOUS_CHANNEL"
   }
 }
