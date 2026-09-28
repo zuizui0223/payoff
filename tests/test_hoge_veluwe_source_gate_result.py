@@ -12,8 +12,10 @@ def load_result():
 
 def test_gate_a_freezes_three_certified_coordinates_and_one_access_block():
     r = load_result()
-    assert r["status"] == "MIGRANT_SOURCE_ACCESS_BLOCKED"
-    assert r["gate_b_licensed"] is False
+    assert r["status"] == "ENVIRONMENTAL_SOURCE_GATE_PASS_HISTORY_SOURCE_BLOCKED"
+    assert r["workflow_observed_status"] == "MIGRANT_SOURCE_ACCESS_BLOCKED"
+    assert r["gate_b_licensed"] is True
+    assert r["gate_c_licensed"] is False
     assert r["registered_source_overlap"] == [1985, 2015]
     assert r["registered_history_span"] == [1992, 2015]
     assert r["registered_history_year_count"] == 24
@@ -50,6 +52,8 @@ def test_gate_a_source_hashes_and_year_coverages_are_frozen():
 def test_gate_a_keeps_all_outcome_firewalls_closed():
     r = load_result()
     assert all(value is False for value in r["outcome_firewall"].values())
+    assert r["gate_adjudication"]["environmental_source_gate"]["status"] == "PASS"
+    assert r["gate_adjudication"]["history_source_gate"]["status"] == "MIGRANT_SOURCE_ACCESS_BLOCKED"
     assert r["blocked_source"]["coordinate"] == "migrant_timing"
     assert r["blocked_source"]["landing_filename"] == "Tomotani et al.zip"
     assert r["blocked_source"]["state"] == "ANONYMOUS_DOWNLOAD_UNAVAILABLE"
