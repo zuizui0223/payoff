@@ -43,5 +43,6 @@
     "artifact_sha256": "24f3a7ee1e4b15f5cafea6e50cf1f48dbaf9bfaf97f65bfd535c6a4b728841cd",
     "inner_archive_sha256": "6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf",
     "deterministic_inner_archive": true
-  }
+  },
+  "latest_build_date": "2026-09-28"
 }
