@@ -125,11 +125,11 @@ link.
 
 The scientific contract is frozen and the outcome is still unopened.
 
-A fresh credential-only preflight was run on 2026-09-27:
+A fresh credential-only preflight was rerun on 2026-09-28:
 
 ```text
-workflow run = 36318036795
-artifact = 10931233185
+workflow run = 36372973062
+artifact = 10950280495
 status = NOT_CONFIGURED
 credential route = none
 credential values recorded = false
