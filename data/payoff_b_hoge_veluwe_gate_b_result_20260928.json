@@ -1,0 +1,99 @@
+{
+  "result_id": "payoff_b_hoge_veluwe_gate_b_20260928",
+  "frozen_date": "2026-09-28",
+  "contract_id": "payoff_b_hoge_veluwe_network_hysteresis_v1_20260927",
+  "gate_a_result": "payoff_b_hoge_veluwe_source_gate_a_20260928",
+  "status": "NO_CUE_RESOURCE_REVERSAL",
+  "gate_b_passed": false,
+  "gate_c_licensed": false,
+  "gate_c_status": "NOT_RUN",
+  "gate_c_license_reason": "Gate B did not pass the preregistered decline-to-recovery geometry; history sources and resident-migrant mismatch remain unopened",
+  "registered_source_overlap": [
+    1985,
+    2015
+  ],
+  "registered_history_span": [
+    1992,
+    2015
+  ],
+  "source_provenance": {
+    "cue_csv_sha256": "14cf9d5d249e582cf07079f3724b227a835acae95c297e3e8a1bac1bede5cc31",
+    "resource_file_sha256": "9f113eb3f95d239ac31652c4083a159d82dacb61355b03fa2f355a2733a0b984",
+    "resource_transport": "zenodo_mirror_digest_verified",
+    "resource_dryad_doi": "10.5061/dryad.f1vhhmgx6",
+    "resource_filename": "Tbl_PeakDate_Biomass_HVLim.xlsx",
+    "resource_units": "April days; 1 April = day 1"
+  },
+  "annual_pair_rows": 30,
+  "connectivity_rows": 24,
+  "window_years": 8,
+  "min_pairs": 6,
+  "full_fit": {
+    "estimable": true,
+    "geometry_pass": false,
+    "linear": {
+      "intercept": -33.109105033067685,
+      "slope": 0.016586826930721457,
+      "sse": 2.5786225960618667,
+      "aicc": -48.967734263927106,
+      "k": 2
+    },
+    "segmented": {
+      "break_year": 1999,
+      "left_final_year": 1998,
+      "left_intercept": -454.5561511789739,
+      "left_slope": 0.22789897552857935,
+      "right_intercept": -53.92360482510299,
+      "right_slope": 0.02693301715660318,
+      "sse": 1.140721873028201,
+      "aicc": -59.780087779964425,
+      "k": 5,
+      "delta_aicc_vs_linear": 10.81235351603732,
+      "predicted_start_connectivity": -0.581391926043807,
+      "predicted_break_low_connectivity": 0.7860019271276428,
+      "predicted_final_connectivity": 0.34642474545240987,
+      "decline": -1.3673938531714498,
+      "recovery": -0.43957718167523296,
+      "recovery_fraction": null
+    }
+  },
+  "stability": null,
+  "output_hashes": {
+    "annual_pairs_sha256": "ced64102567054326f77ff32628c97f0266e6d759257fe1c38fb21cc57c78f6c",
+    "connectivity_sha256": "36cef859c759599d9a2bc6254e86e2e19b9081be18e29e125ce095cadeafae62"
+  },
+  "selected_connectivity_points": {
+    "1992": -0.5299328120083358,
+    "1998": 0.7027082399525083,
+    "1999": 0.15988986988773182,
+    "2004": -0.31403839582952303,
+    "2015": 0.4126933816937195
+  },
+  "outcome_firewall": {
+    "cue_data_read": true,
+    "resource_data_read": true,
+    "resident_timing_read": false,
+    "migrant_timing_read": false,
+    "focal_partner_mismatch_computed": false,
+    "history_test_opened": false
+  },
+  "workflow_provenance": {
+    "run_id": 36368451182,
+    "head_sha": "f8f968d627a01f8545c9a376d224be81f154db41",
+    "conclusion": "success",
+    "artifact_id": 10947973142,
+    "artifact_sha256": "24d5deab09532151745c0a217dbc3a575918a7f69131fcccb8151d716943a787"
+  },
+  "interpretation": [
+    "the registered environmental information coordinate does not show the required decline-to-recovery geometry",
+    "the segmented model is lower-AICc than a single line, but both fitted segment slopes are positive rather than negative then positive",
+    "there is therefore no licensed environmental recovery branch on which to test resident-migrant history dependence",
+    "Gate C remains unopened and the access-blocked migrant archive is no longer required for this registered lane"
+  ],
+  "claim_boundary": [
+    "this is a preregistered negative natural validation, not evidence of natural network hysteresis",
+    "do not redefine the observed nonmonotonic connectivity series as recovery hysteresis",
+    "do not choose another breakpoint, cue window, resource coordinate, or timing source after seeing this result",
+    "the theoretical hysteresis and rescue results remain theory predictions"
+  ]
+}

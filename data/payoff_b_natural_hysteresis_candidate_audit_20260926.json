@@ -103,13 +103,13 @@
       "period": "1980-2015",
       "years": 36,
       "variables": "male arrival, female nest-building arrival proxy, laying/hatching, moult, Dutch and African temperature covariates",
-      "level": "NETWORK_HYSTERESIS_ASSEMBLY_CANDIDATE",
+      "level": "CLOSED_NEGATIVE_NETWORK_HYSTERESIS_ASSEMBLY",
       "direct_hysteresis_ready": false,
       "blockers": [
-        "Gate C requires the exact registered Tomotani Marine Data Archive; anonymous download is unavailable",
-        "Gate C also requires Gate B to pass the frozen environmental reversal/stability gate"
+        "preregistered cue-resource Gate B returned NO_CUE_RESOURCE_REVERSAL",
+        "Gate C is not licensed because the required environmental recovery branch was absent"
       ],
-      "retained_role": "best current prospective same-system network-history assembly; three of four registered coordinates are source-certified and the joined outcome remains unopened",
+      "retained_role": "prospective same-system negative validation: environmental predictive connectivity was non-monotone but did not satisfy the frozen decline-to-recovery gate",
       "doi": "10.1111/gcb.14006",
       "data_url": "http://mda.vliz.be/directlink.php?fid=VLIZ_00000444_5dd3fba4f38f8",
       "notable_published_pattern": "male arrival-to-laying interval shortened until about 2008 and then lengthened",
@@ -135,6 +135,17 @@
         "migrant_timing": "ACCESS_BLOCKED_MDA",
         "gate_b_licensed": true,
         "gate_c_licensed": false
+      },
+      "gate_b": {
+        "status": "NO_CUE_RESOURCE_REVERSAL",
+        "result": "data/payoff_b_hoge_veluwe_gate_b_result_20260928.json",
+        "workflow_run": 36368451182,
+        "gate_b_passed": false,
+        "gate_c_licensed": false,
+        "breakpoint_year": 1999,
+        "pre_break_slope": 0.22789897552857935,
+        "post_break_slope": 0.02693301715660318,
+        "delta_aicc_vs_linear": 10.81235351603732
       }
     }
   ],
@@ -143,10 +154,10 @@
     "best_within_species_candidate": "none currently unresolved with accessible outcome-independent evidence; Tomotani 1980-2015 remains access-pending, while Hoge Veluwe 1980-2010 failed its frozen reversal gate",
     "best_interaction_anchor": "Samplonius_Both_2019_fatal_competition",
     "best_decision_time_anchor": "Samplonius_Both_2017_manipulation",
-    "required_next_data": "run the independently licensed cue-resource Gate B; only if it passes, obtain the exact registered Tomotani Marine Data Archive through an authorized MDA route before Gate C",
-    "best_network_assembly_candidate": "Hoge Veluwe 1985-2015 lane: environmental source gate passed, Gate B licensed and unopened; history source gate remains blocked on the exact migrant archive"
+    "required_next_data": "none for the registered Hoge Veluwe lane; Gate C is permanently closed because Gate B failed",
+    "best_network_assembly_candidate": "none currently open: the strongest registered Hoge Veluwe assembly failed its environmental reversal prerequisite before timing-history outcomes were opened"
   },
-  "claim_rule": "Do not describe the Hoge Veluwe lane as natural hysteresis. Environmental Gate A passed, but Gate B is still unopened and Gate C is closed until both Gate B passes and the exact migrant source is certified.",
+  "claim_rule": "No current natural dataset supports direct information-triggered network hysteresis. The preregistered Hoge Veluwe assembly failed Gate B and Gate C was not run.",
   "followup_20260927": {
     "lane": "Hoge Veluwe 1980-2010 cue-driver information history",
     "source_driver": "PLOS S1 annual standardized selection gradients",
@@ -166,5 +177,13 @@
     "raw_workflow_status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
     "gate_b_licensed": true,
     "gate_c_licensed": false
+  },
+  "gate_b_20260928": {
+    "result": "data/payoff_b_hoge_veluwe_gate_b_result_20260928.json",
+    "status": "NO_CUE_RESOURCE_REVERSAL",
+    "workflow_run": 36368451182,
+    "artifact_id": 10947973142,
+    "gate_c_status": "NOT_RUN",
+    "history_timing_opened": false
   }
 }
