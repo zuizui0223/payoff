@@ -12,10 +12,19 @@
       "paper_doi": "10.1098/rspb.2021.2142",
       "data_doi": "10.5061/dryad.v41ns1rxv",
       "license": "CC0",
-      "raw_files": ["rnd_eff_temp.csv", "rnd_eff_year.csv"],
+      "raw_files": [
+        "rnd_eff_temp.csv",
+        "rnd_eff_year.csv"
+      ],
       "published_scope": "Germany, 1980-2020; 1764 species total including 20 bee, 22 fly, 206 butterfly/moth and 77 beetle species plus 1438 plants",
       "role": "local-information benchmark",
-      "published_results_known_before_contract": true
+      "published_results_known_before_contract": true,
+      "archive_semantics": {
+        "rnd_eff_temp_slope": "species random-slope deviation from the taxonomic-group mixed model, not the total species temperature slope",
+        "rnd_eff_temp_slope_std_err": "standard error of the random-slope estimate",
+        "total_species_slope_rule": "do not use the archived random slope as a total species slope; total slope requires the appropriate group fixed temperature coefficient plus the species random-slope deviation",
+        "group_reconstruction_requirement": "taxonomic-group membership and group fixed temperature coefficients must be source-backed before any total species-slope distribution is reported"
+      }
     },
     {
       "source_id": "usui_2017_bird_meta",
@@ -23,7 +32,9 @@
       "paper_doi": "10.1111/1365-2656.12612",
       "data_doi": "10.5061/dryad.mb4nd",
       "license": "CC0",
-      "raw_files": ["Usui_et_al_2016_metadata_dryad.csv"],
+      "raw_files": [
+        "Usui_et_al_2016_metadata_dryad.csv"
+      ],
       "published_scope": "413 bird species across five continents",
       "role": "within-bird information-distance contrast",
       "published_results_known_before_contract": true
@@ -35,19 +46,34 @@
     "moderator": "population migration distance class as coded by the source study",
     "contrast": "short-distance minus long-distance migrant temperature responsiveness",
     "directional_prediction": "short-distance migrants show more negative temperature slopes than long-distance migrants",
-    "interpretation": "replication/benchmark for spatial information-distance, not a novel effect and not proof that cue distance is the causal mechanism"
+    "interpretation": "replication/benchmark for spatial information-distance, not a novel effect and not proof that cue distance is the causal mechanism",
+    "reconstruction_model": {
+      "target": "temperature-response effect-size rows only",
+      "effect_size": "reported slope in days per degree C",
+      "sampling_variance": "reported standard error squared",
+      "primary_moderator": "source-coded short- versus long-distance migration class",
+      "dependence": "retain repeated species/study/location structure; at minimum use a multilevel meta-regression with source identifiers and a study-level robust sensitivity",
+      "phylogeny_boundary": "the source paper's published result used Bayesian phylogenetic meta-analysis across 100 trees; a reconstruction without those trees is a dependence-aware robustness analysis, not an exact reproduction of the published phylogenetic model"
+    }
   },
   "secondary_benchmark": {
     "dataset": "freimuth_2022_pollinator",
-    "response": "species-level temperature slope in days per degree C",
-    "groups": ["bees", "flies", "butterflies/moths", "beetles", "plants"],
-    "use": "quantify the distribution of local phenological temperature responsiveness and plant-pollinator asynchrony change",
-    "cross_source_inference": "descriptive only"
+    "response": "archived species random-slope deviation for temperature plus source-backed taxonomic-group fixed temperature effect when reconstructable",
+    "groups": [
+      "bees",
+      "flies",
+      "butterflies/moths",
+      "beetles",
+      "plants"
+    ],
+    "use": "audit local phenological temperature-response heterogeneity; published group-level fixed-effect slopes remain external anchors unless the exact fixed coefficients and group mapping are source-reconstructed",
+    "cross_source_inference": "descriptive triangulation only; no pooled pollinator-versus-bird causal coefficient",
+    "random_effect_warning": "rnd_eff_temp.csv slope is a random-effect deviation and must never be reported directly as the species total days-per-degree-C response"
   },
   "published_anchor_values": {
     "freimuth": {
       "plant_temp_days_per_C": -5.2,
-      "bee_temp_days_per_C": -2.0,
+      "bee_temp_days_per_C": -2,
       "fly_temp_days_per_C": -3.9,
       "butterfly_moth_temp_days_per_C": -1.9,
       "bee_plant_asynchrony_days_per_decade": -11.35,
@@ -64,15 +90,17 @@
     "Do not call the cross-system comparison a new meta-analysis until raw effect-size rows, variances, dependence structure and eligibility are reconstructed.",
     "Do not use published aggregate values as if they were independent effect-size rows.",
     "Do not claim that local pollinators universally track climate better than migrants.",
-    "Do not alter the canonical Paper 2 manuscript until the raw-source reconstruction and declared analyses are complete."
+    "Do not alter the canonical Paper 2 manuscript until the raw-source reconstruction and declared analyses are complete.",
+    "Do not treat Freimuth rnd_eff_temp.csv random slopes as total species temperature slopes; they are deviations around source-model fixed effects.",
+    "Do not describe a non-phylogenetic Usui reconstruction as an exact reproduction of the original 100-tree MCMCglmm analysis."
   ],
   "promotion_gate": [
     "R0 source identity recorded for both datasets",
     "R1 raw bytes acquired and checksums pinned",
-    "R2 schema and effect-size units reproduced",
-    "R3 published source-level benchmark results reproduced within tolerance",
-    "R4 bird migration-distance model rerun with dependence-aware uncertainty",
-    "R5 pollinator benchmark summarized without cross-source causal overclaim",
+    "R2 schema, units and random-effect semantics reproduced",
+    "R3 published source-level anchor values and data dimensions cross-checked within declared tolerance",
+    "R4 Usui temperature-effect rows rerun with dependence-aware uncertainty; any omission of phylogeny is explicit",
+    "R5 Freimuth benchmark reports group fixed-effect anchors separately from species random-slope deviations; total species slopes only if source-backed reconstruction is possible",
     "R6 only then decide whether this becomes Paper 2 E6"
   ]
 }
