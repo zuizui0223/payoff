@@ -30,9 +30,9 @@ def test_v2_is_the_only_active_paper2_source():
     assert "CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md" in status
     assert "V1_STATUS = FROZEN_PROVENANCE_ONLY" in status
     assert "CURRENT_V2_PREOUTCOME_PACKAGE = READY" in status
-    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36318360954" in status
-    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10930659946" in status
-    assert "CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7" in status
+    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36370295430" in status
+    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10949330110" in status
+    assert "CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 262c6f1d5fdee798db5c2a8bc60b81ef05f480da70eb9de3d93de67de49c585f" in status
     assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED" in status
     assert "sole active integrated ecology manuscript" in relation
     assert "No V1 and V2 dual submission is allowed." in relation
@@ -42,8 +42,8 @@ def test_v2_is_the_only_active_paper2_source():
     package_audit = PACKAGE_AUDIT.read_text(encoding="utf-8")
     assert "PASS — canonical V2 PREOUTCOME working package ready" in package_audit
     assert "structured_abstract_words = 246" in package_audit
-    assert "main_body_words = 4167" in package_audit
-    assert "references = 13" in package_audit
+    assert "main_body_words = 4298" in package_audit
+    assert "references = 14" in package_audit
     assert "display_pieces = 7" in package_audit
     assert "package_file_count = 17" in package_audit
     assert "FINAL_SUBMISSION_ELIGIBLE = false" in package_audit
