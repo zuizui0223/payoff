@@ -40,14 +40,14 @@ Frozen package:
 workflow run = 36405110540 (attempt 1)
 artifact = 10962346030
 artifact digest =
-66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa
+69baef789e80ded8bc8f34cecc690841944a1b9fa7ee744dcb6176c1e1848721
 
 inner deterministic ZIP SHA256 =
 6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
 ```
 
 The declarations-inclusive package was rerun from the same frozen head in
-workflow run 36405110540 (attempt 2; artifact 10956526561). The deterministic
+workflow run 36405110540 (attempt 2; artifact 10961642891). The deterministic
 inner ZIP remained byte-identical:
 
 ```text
@@ -104,7 +104,7 @@ claim-ceiling V2 source.
 workflow run = 36405110527
 artifact = 10962266489
 artifact digest =
-3945c71f7c8e00521cb8a7d9a5793a8b0b688d3d27d58914a9d3decd72d1acba
+4687657bff785c4507a559b066dde83c3e5d472773a1c9498a65caa36bc45ce7
 
 inner reviewer ZIP SHA256 =
 6e4ef8542ba7f02737d77328b72217ff766ed1c7b4d1362d35cf7f3b77ce1275
@@ -115,7 +115,7 @@ figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
 reviewer archive reproduction run = 36405110527
-reviewer archive reproduction artifact = 10956531442
+reviewer archive reproduction artifact = 10961963285
 reviewer archive deterministic inner SHA256 = 6e4ef8542ba7f02737d77328b72217ff766ed1c7b4d1362d35cf7f3b77ce1275
 ```
 
@@ -176,7 +176,7 @@ The deterministic ACCESS_BLOCKED submission package was built in workflow
 ```text
 attempt 1 artifact = 10962600581
 attempt 1 artifact digest =
-1c6041c9c26d849eb3d2b856fe50875acb2ee13dff0feca5e719d096463fb5ff
+6851473f533a3b4105c794f2e0fa1545a3578191341f5138d4e5b6b9e75d31d5
 
 GEB inner ZIP SHA256 =
 f84157091ebc07a8dc17a86b6da21fcc97698d81d806a14bc6558904fc95a69e
@@ -186,7 +186,7 @@ outcome reviewer ZIP SHA256 =
 
 attempt 2 artifact = 10962317280
 attempt 2 artifact digest =
-9e6194e02484bc95d651ff7b01a34b6dd11d3e12e143c852ad7490c588808a67
+783f6c5010258838eca90bc105c4d9106416b16a2b673eaa46755ac75a13bdf7
 
 deterministic inner archives = PASS
 ```
