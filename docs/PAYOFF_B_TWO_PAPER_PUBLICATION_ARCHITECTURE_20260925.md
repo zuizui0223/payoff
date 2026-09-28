@@ -178,6 +178,19 @@ E6 interpretation is explicitly non-causal: photoperiodic/endogenous control is 
 
 Figure 5 carries the migration-distance reconstruction and independent local plant–pollinator benchmark with an explicit no-causal-taxon-contrast boundary.
 
+### E6b — interaction-level response-asymmetry bridge
+
+Burgess et al. (2018) provide published consumer--resource pair evidence:
+temporal major-axis slopes of bird first-egg date on caterpillar peak are
+0.510 (Blue Tit), 0.515 (Great Tit) and 0.348 (Pied Flycatcher), with all
+95% credible intervals below the perfect-tracking value of one.
+
+Licensed role: **actual interacting pairs show response asymmetry that
+translates into mismatch.**
+
+Not licensed: D2-D1 has been measured, q1 < q <= q2 has been observed, or
+information distance is the causal mechanism for the deficits.
+
 ## Capacity layer inherited from V1
 
 The earlier V1 conclusion remains scientifically valid:
@@ -224,12 +237,12 @@ Current state:
 PAPER_2_CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md
 V1_STATUS = FROZEN_PROVENANCE_ONLY
 CURRENT_V2_PREOUTCOME_PACKAGE = READY
-CURRENT_V2_PREOUTCOME_BUILD_RUN = 36405110540
-CURRENT_V2_PREOUTCOME_ARTIFACT = 10962346030
-CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36472958953
+CURRENT_V2_PREOUTCOME_ARTIFACT = 10992297519
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6
 CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED
-CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = f84157091ebc07a8dc17a86b6da21fcc97698d81d806a14bc6558904fc95a69e
-CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = 071de59f078a57ea900da56e9e0aa3fc0f0d4b411b3324288f9409919b0b50eb
+CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = ed015112d749ec515c7576d5078afb03a7fb0511e7f5d4a47e2474890aaa6f40
+CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = 6ff24580b76e552d34294c1302b2afa0fe2d0013f51f7a9890038b7502d3581b
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 

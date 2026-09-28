@@ -3,23 +3,23 @@
   "date": "2026-09-27",
   "status": "READY_PREOUTCOME",
   "canonical_science_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
-  "merged_pr": 201,
-  "merge_commit": "f2aebae88710f768afc3ff86873236c25ee6b5a2",
+  "merged_pr": 204,
+  "merge_commit": "f008bc6e6d595eae7bebdbe584ba7ea79e0e1eea",
   "workflow": {
-    "run_id": 36405110527,
+    "run_id": 36473718901,
     "run_attempt": 1,
-    "head_sha": "fb7621a3df4a1963897c858d6fd2714f2482af70",
+    "head_sha": "7d7b745fe1a24d9f57f456dad0e4bec17d2553a1",
     "conclusion": "success",
-    "artifact_id": 10962266489,
+    "artifact_id": 10992188743,
     "artifact_name": "payoff-b-v2-anonymous-review-archive",
-    "artifact_sha256": "4687657bff785c4507a559b066dde83c3e5d472773a1c9498a65caa36bc45ce7"
+    "artifact_sha256": "2fd421974f03051803bdab395d0b4a48d793f1104a55b5298fbef3288b797ec9"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_ANON_REVIEW.zip",
-    "sha256": "6e4ef8542ba7f02737d77328b72217ff766ed1c7b4d1362d35cf7f3b77ce1275"
+    "sha256": "3bcfb8f4f4d13fc49ff8be58efedc56ab9ca233fd82680e6c9559218c6cec9bd"
   },
   "contents": {
-    "file_count": 74,
+    "file_count": 76,
     "python_source_count": 27,
     "figure_count": 7,
     "identity_scan_passed": true,
@@ -32,18 +32,20 @@
     "natural singleton rescue species is not identified",
     "reviewer archive construction is complete; anonymous delivery channel remains external",
     "review archive includes frozen Hoge Veluwe Gate-A/Gate-B code and negative result receipts",
-    "review archive includes E6 cross-system information-distance contract, result receipt and analysis code"
+    "review archive includes E6 cross-system information-distance contract, result receipt and analysis code",
+    "review archive includes the frozen Burgess bird-caterpillar pairwise bridge JSON and memo",
+    "Burgess bridge source boundary records DOI 10.1038/s41559-018-0543-1 and DataShare DOI 10.7488/ds/2215; underlying BTO bird records are not redistributed"
   ],
   "delivery_state": "PENDING_ANONYMOUS_CHANNEL",
-  "latest_science_update_pr": 201,
+  "latest_science_update_pr": 204,
   "reproduction": {
-    "run_id": 36405110527,
+    "run_id": 36473718901,
     "run_attempt": 2,
-    "head_sha": "fb7621a3df4a1963897c858d6fd2714f2482af70",
-    "artifact_id": 10961963285,
-    "artifact_sha256": "4021c3cc0fd6fab5883a5d012cb9ecd64a673da4763335c724192aa76809dac0",
-    "inner_archive_sha256": "6e4ef8542ba7f02737d77328b72217ff766ed1c7b4d1362d35cf7f3b77ce1275",
+    "head_sha": "7d7b745fe1a24d9f57f456dad0e4bec17d2553a1",
+    "artifact_id": 10991859800,
+    "artifact_sha256": "0cc9ec65caad8a7d7cf9c242e1cd79ba3ec2c1da3c9beafed436436d9927c2ae",
+    "inner_archive_sha256": "3bcfb8f4f4d13fc49ff8be58efedc56ab9ca233fd82680e6c9559218c6cec9bd",
     "deterministic_inner_archive": true
   },
-  "latest_build_date": "2026-09-28"
+  "latest_build_date": "2026-09-29"
 }

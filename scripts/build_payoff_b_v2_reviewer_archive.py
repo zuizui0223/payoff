@@ -55,6 +55,8 @@ DIRECT_FILES = (
     "data/payoff_b_wigeon_predictive_connectivity_result_20260926.json",
     "data/payoff_b_cross_system_empirical_contract_20260928.json",
     "data/payoff_b_cross_system_information_result_20260928.json",
+    "data/payoff_b_pairwise_tracking_bridge_20260929.json",
+    "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
     "data/payoff_b_cv24c_cue_driver_result_20260927.json",
     "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json",
     "data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json",
@@ -295,7 +297,11 @@ Raw source datasets are not silently redistributed in this archive.
 - Usui migratory-bird meta-analysis: Dryad DOI 10.5061/dryad.mb4nd and the
   frozen source SHA-256 are recorded in the E6 contract/result receipt;
 - Freimuth local plant--pollinator benchmark: Dryad DOI 10.5061/dryad.v41ns1rxv
-  and the frozen source SHA-256 are recorded in the E6 contract/result receipt.
+  and the frozen source SHA-256 are recorded in the E6 contract/result receipt;
+- Burgess bird--caterpillar pairwise bridge: paper DOI
+  10.1038/s41559-018-0543-1, Edinburgh DataShare DOI 10.7488/ds/2215 and the
+  published major-axis values are recorded in the frozen bridge receipt. The
+  underlying BTO Nest Record Scheme bird records are not redistributed.
 
 Where source repositories require their own access terms, reviewers should use
 the cited source records; derived result receipts in this archive document the

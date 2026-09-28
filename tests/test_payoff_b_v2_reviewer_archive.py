@@ -75,6 +75,8 @@ def test_preoutcome_reviewer_archive_is_anonymous_and_complete(tmp_path: Path):
         "data/payoff_b_wigeon_predictive_connectivity_result_20260926.json",
         "data/payoff_b_cross_system_empirical_contract_20260928.json",
         "data/payoff_b_cross_system_information_result_20260928.json",
+        "data/payoff_b_pairwise_tracking_bridge_20260929.json",
+        "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
         "scripts/payoff_b_cross_system_information.py",
         "analysis/movement_phenology/payoff_b_predictive_connectivity_amaral.R",
     }
@@ -84,6 +86,8 @@ def test_preoutcome_reviewer_archive_is_anonymous_and_complete(tmp_path: Path):
     readme = (out / "README_REVIEW.md").read_text(encoding="utf-8")
     assert "10.5061/dryad.mb4nd" in readme
     assert "10.5061/dryad.v41ns1rxv" in readme
+    assert "10.7488/ds/2215" in readme
+    assert "10.1038/s41559-018-0543-1" in readme
 
     for path in out.rglob("*"):
         if path.is_file():
