@@ -30,7 +30,9 @@ def test_e7_screen_is_fail_closed():
 def test_published_effect_input_is_explicitly_noninferential():
     x = json.loads(INPUT.read_text(encoding="utf-8"))
     assert x["status"] == "NONPROMOTABLE_DIAGNOSTIC"
-    assert len(x["rows"]) == 4\n    assert sum(row["inferential_variance_valid"] is True for row in x["rows"]) == 1\n    assert any(row["inferential_variance_valid"] is False for row in x["rows"])
+    assert len(x["rows"]) == 4
+    assert sum(row["inferential_variance_valid"] is True for row in x["rows"]) == 1
+    assert any(row["inferential_variance_valid"] is False for row in x["rows"])
     assert "must not appear" in x["hard_boundary"]
 
 
