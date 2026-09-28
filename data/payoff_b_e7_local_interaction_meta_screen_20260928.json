@@ -1,7 +1,7 @@
 {
   "contract_id": "payoff_b_e7_local_interaction_meta_screen_v1_20260928",
   "date": "2026-09-28",
-  "status": "SOURCE_SCREEN_ONLY_NOT_CANONICAL",
+  "status": "SOURCE_SCREEN_COMMON_UNIT_FOUND_POOLING_BLOCKED_BY_UNCERTAINTY_AND_DESIGN",
   "paper_role": "prospective Paper 2 extension after E6; no manuscript claim change unless promotion gate passes",
   "question": "Can multiple independent local plant-pollinator systems be harmonized onto a common temperature-response effect-size contract, so the local-information side of E6 is no longer represented by one large study?",
   "design_principle": [
@@ -20,7 +20,8 @@
       "id": "delta_beta_partner_C",
       "unit": "days / degree C",
       "definition": "pollinator temperature slope minus plant temperature slope estimated against a matched temperature exposure in the same system",
-      "primary_candidate": true
+      "primary_candidate": false,
+      "use": "secondary signed contrast; do not pool across studies when sign conventions or phenological response directions differ"
     },
     "C": {
       "id": "beta_sync_time",
@@ -28,6 +29,14 @@
       "definition": "long-term synchrony trend when no commensurate temperature estimand is recoverable",
       "primary_candidate": false,
       "use": "separate sensitivity / ecological context only"
+    },
+    "B_abs": {
+      "id": "delta_abs_beta_partner_C",
+      "unit": "days / degree C",
+      "definition": "absolute pollinator temperature-response magnitude minus absolute plant temperature-response magnitude: |beta_pollinator| - |beta_plant|",
+      "sign": "negative = plant is more temperature-sensitive; positive = pollinator is more temperature-sensitive",
+      "primary_candidate": true,
+      "rationale": "direction-preserving magnitude contrast is directly reported by Kharouba & Vellend 2015 and remains interpretable when both partners advance but at different rates"
     }
   },
   "candidate_sources": [
@@ -42,10 +51,27 @@
       "system": "Germany; plants plus beetles, flies, bees, butterflies/moths",
       "candidate_tiers": [
         "A",
-        "B"
+        "B",
+        "B_abs"
       ],
       "current_state": "E6 source already reconstructed; group means and 1763 species slopes frozen",
-      "caveat": "interaction-level synchrony is derived from predicted pairings; retain pair/study dependence"
+      "caveat": "interaction-level synchrony is derived from predicted pairings; retain pair/study dependence",
+      "published_anchor": {
+        "plant_days_per_C": {
+          "estimate": -5.2,
+          "se": 0.2
+        },
+        "bee_days_per_C": {
+          "estimate": -2,
+          "se": 1.3
+        },
+        "delta_abs_beta_days_per_C": -3.2,
+        "direct_bee_plant_asynchrony_days_per_C": {
+          "estimate": -5.72,
+          "se": 0.24
+        },
+        "uncertainty_boundary": "group-level delta_abs variance needs covariance or an explicit independence sensitivity; direct interaction-level asynchrony has source-reported uncertainty"
+      }
     },
     {
       "source_id": "bartomeus_2013",
@@ -78,7 +104,8 @@
       },
       "system": "Claytonia virginica flowering and specialist bee Andrena erigeniae occurrence across eastern North American ecoregions",
       "candidate_tiers": [
-        "B"
+        "B",
+        "B_abs"
       ],
       "current_state": "one independent Claytonia-Andrena source family: 2022 paper supplies exact matched winter-temperature coefficients; 2025 raw/code extension supplies spatial validation but is not counted as a second independent system",
       "published_anchor": {
@@ -107,7 +134,10 @@
           "se": 0.5
         },
         "tier_B_delta_pollinator_minus_plant": -0.5,
-        "uncertainty_boundary": "reported partner coefficients are from separate fitted models; covariance is not published, so a delta SE using independent-model propagation is sensitivity-only until source covariance or raw joint reconstruction is available"
+        "uncertainty_boundary": "reported partner coefficients are from separate fitted models; covariance is not published, so a delta SE using independent-model propagation is sensitivity-only until source covariance or raw joint reconstruction is available",
+        "delta_abs_beta_days_per_C": 0.5,
+        "ecological_sign": "positive: specialist bee is more temperature-sensitive in the global fixed-effect comparison",
+        "spatial_reversal": "source paper reports plant flowering is more temperature-sensitive in warmer regions whereas bee phenology is more responsive in colder regions"
       }
     },
     {
@@ -119,10 +149,41 @@
       ],
       "system": "11 grasslands; one spring plant and two Osmia bee species",
       "candidate_tiers": [
-        "B"
+        "B",
+        "A",
+        "B_abs"
       ],
       "current_state": "public Dryad workbook identified; schema not yet reconstructed",
-      "caveat": "site-temperature gradient rather than long time series; keep study design as moderator"
+      "caveat": "site-temperature gradient; WMD partner-difference covariance is unpublished, while the direct first-event lag has valid uncertainty but a different phenophase than mean-date studies",
+      "published_anchor": {
+        "site_temperature_unit": "reported slopes are days per 0.1 C",
+        "osmia_cornuta_male_wmd": {
+          "slope_per_0_1C": -0.4,
+          "ci95_per_0_1C": [
+            -0.6,
+            -0.1
+          ],
+          "df": 9
+        },
+        "pulsatilla_vulgaris_wmd": {
+          "slope_per_0_1C": -1.3,
+          "ci95_per_0_1C": [
+            -2.4,
+            -0.2
+          ],
+          "df": 5
+        },
+        "derived_delta_abs_beta_days_per_C": -9,
+        "direct_first_bee_first_flower_lag": {
+          "slope_days_per_C": -8,
+          "ci95_days_per_C": [
+            -40,
+            24
+          ],
+          "df": 5,
+          "p": 0.557
+        }
+      }
     },
     {
       "source_id": "kudo_cooper_2019",
@@ -245,10 +306,44 @@
       ],
       "current_state": "open long-term paper; partner differences are modeled against snowmelt and accumulated growing degree-days",
       "caveat": "GDD and snowmelt coefficients are not days per degree C; mechanistic/Tier C context only unless a defensible common degree-C effect is reconstructed from raw weather and phenology"
+    },
+    {
+      "source_id": "kharouba_vellend_2015",
+      "citation": "Kharouba & Vellend 2015, Flowering time of butterfly nectar food plants is more sensitive to temperature than the timing of butterfly adult flight",
+      "paper_doi": "10.1111/1365-2656.12373",
+      "data_doi": "10.5061/dryad.tc3v2",
+      "system": "166 butterfly-plant associations in British Columbia; 61 butterfly species and 54-55 plant species",
+      "candidate_tiers": [
+        "B_abs"
+      ],
+      "current_state": "published pairwise magnitude contrast and SE are directly available; raw plant data are Dryad-backed and association structure is in Supporting Information",
+      "published_anchor": {
+        "temporal_same_spring_temperature": {
+          "delta_abs_beta_days_per_C": -5.7,
+          "se": 1.03,
+          "ci95": [
+            -7.75,
+            -3.65
+          ],
+          "interpretation": "negative means plant flowering is more temperature-sensitive than butterfly adult flight"
+        },
+        "temporal_best_predictor_each_taxon": {
+          "delta_abs_beta_days_per_C": -4.87,
+          "se": 1.065,
+          "ci95": [
+            -7,
+            -2.74
+          ]
+        },
+        "association_count": 166,
+        "butterfly_species": 61,
+        "plant_species": 54
+      },
+      "caveat": "same-spring predictor is preferred for E7 comparability; repeated butterfly and plant species require crossed dependence if row-level associations are reconstructed"
     }
   ],
   "promotion_gate": [
-    "At least three independent local plant-pollinator systems yield the same Tier A or Tier B estimand with recoverable uncertainty.",
+    "At least three independent local plant-pollinator systems yield the same Tier A or Tier B_abs estimand with defensible uncertainty that does not depend on unreported cross-model covariance.",
     "Each effect-size row has a study/system identifier and dependency structure; repeated species/pairs are not treated as independent.",
     "Source-level published results are reproduced within declared tolerance before pooled analysis.",
     "No single study contributes more than 50% of effective inverse-variance weight without a predeclared cap/robust sensitivity.",
@@ -266,13 +361,34 @@
   },
   "pilot_policy": {
     "status": "NONPROMOTABLE_PUBLISHED_EFFECT_DIAGNOSTIC_ONLY",
-    "rationale": "Three independent Tier-B-like contrasts can be written in d/C, but delta uncertainties require covariance assumptions and study designs/exposure definitions differ materially.",
-    "allowed_use": "decide whether a full covariance-aware reconstruction is worth doing; never cite as Paper 2 E7 result",
+    "common_unit_found": true,
+    "independent_systems_with_days_per_C_contrasts": [
+      "freimuth_2022",
+      "kehrberger_holzschuh_2019",
+      "xie_2022_with_2025_source_family",
+      "kharouba_vellend_2015"
+    ],
+    "ecological_pattern": "thermal response disparity is common but its direction is not universal; local co-occurrence and access to the same seasonal environment do not imply matched phenological sensitivity",
+    "blocking_issues": [
+      "Freimuth group-level delta_abs uses separately summarized group means and needs covariance handling; direct interaction asynchrony is a different Tier-A estimand",
+      "Kehrberger WMD plant and bee slopes share sites and their covariance is unpublished; the direct lag model uses first-event phenology",
+      "Xie reports partner coefficients from separate mixed models and labels uncertainty as coefficient ± SD; cross-model covariance is unpublished",
+      "Kharouba directly estimates the B_abs contrast with crossed butterfly/plant dependence, but one directly estimable study cannot anchor the entire pooled result",
+      "study designs include long-term temporal anomalies, spatial temperature gradients, and collection-record models"
+    ],
+    "allowed_use": "support source-screen conclusion and decide whether covariance-aware reconstruction is worthwhile; do not promote a pooled E7 coefficient",
     "forbidden_use": [
-      "canonical manuscript effect",
+      "canonical manuscript pooled effect",
       "abstract claim",
-      "cross-taxon coefficient",
-      "evidence of natural hysteresis"
+      "causal local-versus-migrant taxon coefficient",
+      "natural hysteresis claim"
     ]
+  },
+  "screen_conclusion": {
+    "date": "2026-09-28",
+    "common_unit": "days per degree C",
+    "result": "FOUR_INDEPENDENT_SYSTEMS_IDENTIFIED_BUT_FORMAL_POOLING_NOT_YET_LICENSED",
+    "ecological_takeaway": "local interaction partners frequently differ in thermal phenological sensitivity, and the identity of the more temperature-responsive partner can reverse across systems or geography",
+    "paper2_decision": "keep E6 as the canonical empirical ceiling until covariance-aware or direct relative-timing effects are reconstructed across at least three systems"
   }
 }
