@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import io
 import json
+import html
 import re
 import shutil
 import urllib.parse
@@ -27,42 +28,79 @@ def safe_name(name: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]+", "_", name)
 
 
-def download_dataset(doi: str) -> list[tuple[str, bytes, str]]:
+def landing_probe(doi: str, expected_names: list[str]) -> dict:
+    encoded = urllib.parse.quote("doi:" + doi, safe="")
+    url = "https://datadryad.org/dataset/" + encoded
+    r = requests.get(url, timeout=120, allow_redirects=True)
+    out = {
+        "url": r.url,
+        "status_code": r.status_code,
+        "content_type": r.headers.get("content-type"),
+        "href_candidates": [],
+        "filename_context": {},
+    }
+    if r.status_code != 200:
+        return out
+    text = html.unescape(r.text)
+    hrefs = re.findall(r'href=["\\\']([^"\\\']+)["\\\']', text, flags=re.I)
+    keep = []
+    for href in hrefs:
+        low = href.lower()
+        if any(token in low for token in ("file_stream", "download", "/api/v2/files/", "/stash/")):
+            keep.append(href)
+    out["href_candidates"] = sorted(set(keep))[:300]
+    for name in expected_names:
+        i = text.find(name)
+        if i >= 0:
+            out["filename_context"][name] = text[max(0, i - 800): i + 1200]
+    return out
+
+
+def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[str, bytes, str]], dict]:
     encoded = urllib.parse.quote("doi:" + doi, safe="")
     url = API.format(doi=encoded)
-    r = requests.get(url, timeout=120, allow_redirects=True)
-    r.raise_for_status()
-    ctype = (r.headers.get("content-type") or "").lower()
+    diagnostics = {"api_url": url}
+    try:
+        r = requests.get(url, timeout=120, allow_redirects=True)
+        diagnostics["api_status_code"] = r.status_code
+        diagnostics["api_content_type"] = r.headers.get("content-type")
+        r.raise_for_status()
+        ctype = (r.headers.get("content-type") or "").lower()
 
-    # Current Dryad API may return either an archive response or a JSON listing
-    # of files with per-file download links. Support both, fail closed otherwise.
-    if "zip" in ctype or r.content[:2] == b"PK":
+        # Current Dryad API may return either an archive response or a JSON
+        # listing of files with per-file download links.
+        if "zip" in ctype or r.content[:2] == b"PK":
+            out = []
+            with zipfile.ZipFile(io.BytesIO(r.content)) as z:
+                for info in z.infolist():
+                    if info.is_dir():
+                        continue
+                    out.append((Path(info.filename).name, z.read(info), "zip-member"))
+            return out, diagnostics
+
+        payload = r.json()
+        rows = payload.get("data", payload if isinstance(payload, list) else [])
         out = []
-        with zipfile.ZipFile(io.BytesIO(r.content)) as z:
-            for info in z.infolist():
-                if info.is_dir():
-                    continue
-                out.append((Path(info.filename).name, z.read(info), "zip-member"))
-        return out
+        for row in rows:
+            attrs = row.get("attributes", {})
+            links = row.get("links", {})
+            name = attrs.get("name") or attrs.get("path") or row.get("name")
+            link = links.get("download") or row.get("download")
+            if not name or not link:
+                continue
+            if link.startswith("/"):
+                link = "https://datadryad.org" + link
+            rr = requests.get(link, timeout=120, allow_redirects=True)
+            rr.raise_for_status()
+            out.append((Path(name).name, rr.content, link))
+        if out:
+            return out, diagnostics
+        diagnostics["api_payload_keys"] = list(payload) if isinstance(payload, dict) else str(type(payload))
+    except Exception as e:
+        diagnostics["api_error"] = repr(e)
 
-    payload = r.json()
-    rows = payload.get("data", payload if isinstance(payload, list) else [])
-    out = []
-    for row in rows:
-        attrs = row.get("attributes", {})
-        links = row.get("links", {})
-        name = attrs.get("name") or attrs.get("path") or row.get("name")
-        link = links.get("download") or row.get("download")
-        if not name or not link:
-            continue
-        if link.startswith("/"):
-            link = "https://datadryad.org" + link
-        rr = requests.get(link, timeout=120, allow_redirects=True)
-        rr.raise_for_status()
-        out.append((Path(name).name, rr.content, link))
-    if not out:
-        raise RuntimeError(f"Dryad download endpoint returned no files for {doi}: keys={list(payload) if isinstance(payload, dict) else type(payload)}")
-    return out
+    diagnostics["landing"] = landing_probe(doi, expected_names)
+    return [], diagnostics
 
 
 def inspect_csv(name: str, data: bytes) -> dict:
@@ -152,7 +190,9 @@ def main() -> None:
         print(f"PROBE {src['source_id']} {doi}", flush=True)
         entry = {"doi": doi, "files": []}
         try:
-            files = download_dataset(doi)
+            expected_names = list(src.get("data_files") or [])
+            files, diagnostics = download_dataset(doi, expected_names)
+            entry["diagnostics"] = diagnostics
             for name, data, route in files:
                 row = {
                     "name": name,
@@ -162,7 +202,7 @@ def main() -> None:
                     "inspection": inspect(name, data),
                 }
                 entry["files"].append(row)
-            entry["status"] = "ACQUIRED"
+            entry["status"] = "ACQUIRED" if files else "URL_RESOLUTION_PENDING"
         except Exception as e:
             entry["status"] = "ACCESS_OR_PARSE_FAILED"
             entry["error"] = repr(e)
