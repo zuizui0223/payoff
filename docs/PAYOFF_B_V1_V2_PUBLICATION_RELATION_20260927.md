@@ -73,13 +73,18 @@ package has now been rebuilt and audited directly from the canonical V2 source:
 V2_PREOUTCOME_BUILD_RUN = 36374436480
 V2_PREOUTCOME_ARTIFACT = 10950726054
 V2_PREOUTCOME_ARCHIVE_SHA256 = 07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
-V2_PREOUTCOME_STATUS = READY_FOR_INTERNAL_REVIEW
-FINAL_SUBMISSION_STATUS = BLOCKED
+V2_PREOUTCOME_STATUS = PROVENANCE_READY
+CURRENT_SUBMISSION_STATE = ACCESS_BLOCKED_SCIENCE_CLOSED
+CURRENT_ACCESS_BLOCKED_GEB_SHA256 = c4d96db3bda99fb68b475504dcdf1e0072264e6e4e4cb7435d51979111c40e8b
+CURRENT_ACCESS_BLOCKED_REVIEW_SHA256 = d11c518c3eb5499f85e99f1cf7125e067745b211b5da764b8d961c930460151c
+FINAL_SUBMISSION_STATUS = PORTAL_INPUTS_REMAIN
 ```
 
-The final journal package must still be regenerated after the registered
-industrial-development result is frozen and author/reviewer-link metadata are
-complete.
+The current journal-facing package is the deterministic ACCESS_BLOCKED
+outcome-rendered package. The Aikens scientific result remains unavailable and
+unopened; future authenticated execution remains permitted under the original
+registration. Submission now waits only on reviewer-archive delivery,
+author-controlled metadata/declarations and final human review.
 
 No V1 and V2 dual submission is allowed.
 
@@ -98,11 +103,13 @@ V2.
 
 ## Aikens rule
 
-The preregistered Aikens lambda outcome remains unopened.
+The preregistered Aikens lambda outcome remains unopened. The current
+submission state records only `ACCESS_BLOCKED`, not a scientific outcome.
 
 V2 must remain coherent under supported, wrong-direction, insufficient-support
-or NOT_ESTIMABLE Aikens outcomes. The V2 information-deadline headline cannot be
-retuned based on that result.
+or NOT_ESTIMABLE Aikens outcomes if authenticated execution occurs later. The
+V2 information-deadline headline cannot be retuned based on that result or on
+the ACCESS_BLOCKED state.
 
 ## Rollback rule
 

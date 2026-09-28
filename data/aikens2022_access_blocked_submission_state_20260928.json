@@ -1,0 +1,29 @@
+{
+  "result_id": "aikens2022_access_blocked_submission_state_20260928",
+  "status": "phase_retention_contrast_access_blocked",
+  "reason_code": "CREDENTIALS_NOT_CONFIGURED",
+  "credential_preflight": {
+    "date": "2026-09-28",
+    "workflow_run": 36372973062,
+    "artifact_id": 10950280495,
+    "configured": false,
+    "credential_route": "none",
+    "environmental_values_opened": false,
+    "lambda_outcome_opened": false
+  },
+  "author_decision": {
+    "date": "2026-09-28",
+    "decision": "SUBMIT_WITH_ACCESS_BLOCKED",
+    "rationale": "The frozen Aikens environmental reconstruction is operationally complete up to authenticated MODIS extraction, repeated credential-only preflight confirms no configured AppEEARS/Earthdata route, and ACCESS_BLOCKED is explicitly non-scientific and does not retune the manuscript.",
+    "scientific_result_claimed": false,
+    "future_authenticated_execution_permitted": true,
+    "original_registration_remains_binding": true,
+    "no_substitute_environmental_source": true
+  },
+  "claim_boundary": [
+    "ACCESS_BLOCKED is an external access state, not evidence for or against the lambda prediction",
+    "no lambda coefficient, contrast or p-value is inferred",
+    "main text and seven main figures remain unchanged",
+    "future authenticated execution remains permissible under the original frozen contract"
+  ]
+}
