@@ -277,14 +277,18 @@ Inverse-variance meta-regression with two-way Study x Species clustered
 uncertainty gives the adjusted long-minus-short migration-distance contrast
 
     +0.421 d / °C
-    95% CI [+0.135, +0.708]
-    p = 0.0040.
+    95% CI [+0.121, +0.722]
+    p = 0.0077.
 
 Because more negative slopes mean stronger advancement in warm years,
 long-distance migrants are less temperature-responsive than short-distance
 migrants. The contrast remains positive with a 99th-percentile weight cap
-(+0.417, 95% CI [+0.131, +0.702]) and in an unweighted adjusted fit
-(+0.538, 95% CI [+0.206, +0.871]).
+(+0.417, 95% CI [+0.118, +0.715]) and in an unweighted adjusted fit
+(+0.538, 95% CI [+0.190, +0.887]).
+
+All 28 leave-one-study-out refits retain a positive coefficient and a positive
+95% CI lower bound (coefficient range +0.378 to +0.608 d / °C; smallest lower
+bound +0.066; largest p = 0.0195).
 
 This is a reconstruction of an effect already reported by Usui et al., not a
 new PAYOFF-B discovery.
