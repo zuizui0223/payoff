@@ -106,9 +106,11 @@ def audit(text: str | None = None) -> dict:
     expected_citations = (
         ("Aikens", "2017"),
         ("Aikens", "2022"),
+        ("Åkesson", "2017"),
         ("Amaral", "2025"),
         ("Bauer", "2020"),
         ("Freimuth", "2022"),
+        ("Helm", "2024"),
         ("Johansson", "2012"),
         ("Kharouba", "2020"),
         ("Kölzsch", "2015"),

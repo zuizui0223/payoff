@@ -6,7 +6,7 @@
 
 ## Abstract
 
-Seasonal adaptation can fail even when organisms can respond and useful environmental information exists. We develop a theory of **information deadlines** in which cue quality and cue use are distinct ecological state variables. In a binary seasonal decision, information becomes actionable only above an exact reliability threshold, and each actor begins waiting for that information at a threshold set by its timing-error losses and opportunity cost of delay. Interactors facing the same improving cue but different delay costs therefore use it asynchronously, creating a finite range in which better information increases phenological mismatch. We then show that perfect information need not restore coordination. Obsolete uninformed and better informed profiles can coexist as strict Nash equilibria; after cue degradation collapses coordinated information use, restoring perfect cue accuracy does not recover the informed state. Natural evidence supports pieces of this mechanism rather than the full hysteresis process: predictive connectivity is associated with smaller mismatch across 37 bird species; a 944-effect reconstruction shows weaker temperature responses in long- than short-distance migrants; local plant–pollinator partners respond strongly but unequally; a flycatcher experiment supports timing-dependent cue availability; and wigeon do not show stronger post-error correction. **Theory predicts that environmental information can recover before ecological coordination does.**
+Seasonal adaptation can fail even when organisms can respond and useful environmental information exists. We develop a theory of **information deadlines** in which cue quality and cue use are distinct ecological state variables. In a binary seasonal decision, information becomes actionable only above an exact reliability threshold, and each actor begins waiting for that information at a threshold set by its timing-error losses and opportunity cost of delay. Interactors facing the same improving cue but different delay costs therefore use it asynchronously, creating a finite range in which better information increases phenological mismatch. We then show that perfect information need not restore coordination. Obsolete uninformed and better informed profiles can coexist as strict Nash equilibria; after cue degradation collapses coordinated information use, restoring perfect cue accuracy does not recover the informed state. Natural evidence supports pieces of this mechanism rather than the full hysteresis process: predictive connectivity is associated with smaller mismatch across 37 bird species; a 944-effect reconstruction shows weaker temperature responses in long- than short-distance migrants; and wigeon do not show stronger post-error correction. **Theory predicts that environmental information can recover before ecological coordination does.**
 
 **Keywords:** phenological mismatch; migration; information ecology; Bayesian games; seasonal timing; predictive connectivity; ecological hysteresis; climate change
 
@@ -167,74 +167,7 @@ On a 0.01 grid this appears as a mismatch window from (q=0.82) to (0.93), with e
 
 If the higher delay cost exceeds (R_0), the higher-cost actor never waits, even at (q=1). In this regime information asymmetry persists under perfect cue reliability.
 
-### 2.3 In communities, asynchronous information use is a network cut
-
-The two-actor result generalizes directly to an interaction network. At cue
-quality q, let S(q) be the set of actors whose waiting cost is below the current
-value of information. These actors use the cue; all others retain the old
-timing convention.
-
-For symmetric edge weights w_ij, define C(q) as the total interaction weight
-joining an information user to a non-user, and W as total interaction weight.
-If M(q) is the probability that the cue-contingent action differs from the old
-action, expected interaction mismatch is exactly
-
-    E(q) = M(q) C(q) / W.
-
-Thus environmental information acts through a moving **uptake frontier** in the
-ecological network.
-
-In an unweighted complete network with N actors and k information users,
-
-    C/W = 2 k (N-k) / [N(N-1)].
-
-The informed--uninformed edge boundary is therefore maximized when uptake is
-split as evenly as possible. In the large randomly mixed limit, with informed
-fraction f,
-
-    P(asynchronous pair) = 2 f (1-f),
-
-which peaks at f=1/2.
-
-This does not imply that total ecological mismatch must peak at exactly 50%
-uptake, because M(q) can change with cue reliability. It does imply that
-exposure of interaction edges to asynchronous information use is greatest near
-the middle of the adoption transition.
-
-Topology matters because crossing an information threshold can either create or
-repair mismatch edges. If actor i is the next adopter, the exact change in cut
-weight is
-
-    Delta C_i
-      = weight(i, still-uninformed neighbours)
-      - weight(i, already-informed neighbours).
-
-An early adopter with many uninformed neighbours increases the coordination
-boundary, whereas a later adopter surrounded by informed neighbours repairs it.
-The same distribution of decision deadlines can therefore produce different
-mismatch trajectories depending on where those deadlines sit in the network.
-
-### 2.4 Private and joint value of waiting can diverge
-
-If a timing error also imposes costs on interaction partners, the joint value of waiting can exceed the focal actor’s private value.
-
-Let (V_P(q)) be the private value of information and (V_J(q)) the joint value when partner losses are included. Whenever
-
-[
-V_J(q)>V_P(q),
-]
-
-there is a delay-cost interval
-
-[
-D\in[V_P(q),V_J(q))
-]
-
-in which the focal actor rationally commits under uncertainty while the interacting system would gain if the decision were delayed.
-
-Coordination failure can therefore begin before the actors choose their seasonal actions: selection can under-invest in information acquisition itself.
-
-### 2.5 Perfect information does not guarantee information use
+### 2.3 Perfect information does not guarantee information use
 
 We next consider a shared-cue interaction network at
 
@@ -292,7 +225,7 @@ Yet the informed profile has higher joint payoff whenever
 
 Thus perfect environmental information can coexist with a strictly stable obsolete timing regime and a strictly stable better-informed regime.
 
-### 2.6 Temporary information degradation can create permanent behavioural lock-in
+### 2.4 Temporary information degradation can create permanent behavioural lock-in
 
 The canonical shared-cue network has three actors: flower, local pollinator and migrant. Their information costs are
 
@@ -339,6 +272,73 @@ The exact player-specific stability thresholds of the informed profile are appro
 The migrant therefore defines the network boundary. Under path-preserving best response, the informed profile remains at the exact tie (q=0.80) and collapses at (q=0.79) on the 0.01 grid.
 
 When cue quality is restored stepwise to (q=1), the network remains in the all-late profile. Environmental information recovers completely, but ecological information use does not.
+
+### 2.5 In communities, asynchronous information use is a network cut
+
+The two-actor result generalizes directly to an interaction network. At cue
+quality q, let S(q) be the set of actors whose waiting cost is below the current
+value of information. These actors use the cue; all others retain the old
+timing convention.
+
+For symmetric edge weights w_ij, define C(q) as the total interaction weight
+joining an information user to a non-user, and W as total interaction weight.
+If M(q) is the probability that the cue-contingent action differs from the old
+action, expected interaction mismatch is exactly
+
+    E(q) = M(q) C(q) / W.
+
+Thus environmental information acts through a moving **uptake frontier** in the
+ecological network.
+
+In an unweighted complete network with N actors and k information users,
+
+    C/W = 2 k (N-k) / [N(N-1)].
+
+The informed--uninformed edge boundary is therefore maximized when uptake is
+split as evenly as possible. In the large randomly mixed limit, with informed
+fraction f,
+
+    P(asynchronous pair) = 2 f (1-f),
+
+which peaks at f=1/2.
+
+This does not imply that total ecological mismatch must peak at exactly 50%
+uptake, because M(q) can change with cue reliability. It does imply that
+exposure of interaction edges to asynchronous information use is greatest near
+the middle of the adoption transition.
+
+Topology matters because crossing an information threshold can either create or
+repair mismatch edges. If actor i is the next adopter, the exact change in cut
+weight is
+
+    Delta C_i
+      = weight(i, still-uninformed neighbours)
+      - weight(i, already-informed neighbours).
+
+An early adopter with many uninformed neighbours increases the coordination
+boundary, whereas a later adopter surrounded by informed neighbours repairs it.
+The same distribution of decision deadlines can therefore produce different
+mismatch trajectories depending on where those deadlines sit in the network.
+
+### 2.6 Private and joint value of waiting can diverge
+
+If a timing error also imposes costs on interaction partners, the joint value of waiting can exceed the focal actor’s private value.
+
+Let (V_P(q)) be the private value of information and (V_J(q)) the joint value when partner losses are included. Whenever
+
+[
+V_J(q)>V_P(q),
+]
+
+there is a delay-cost interval
+
+[
+D\in[V_P(q),V_J(q))
+]
+
+in which the focal actor rationally commits under uncertainty while the interacting system would gain if the decision were delayed.
+
+Coordination failure can therefore begin before the actors choose their seasonal actions: selection can under-invest in information acquisition itself.
 
 ### 2.7 Recovery can be nucleated by a small informed seed
 
@@ -470,6 +470,8 @@ Importantly, using raw undetrended source–destination correlation removes the 
 #### Information distance is visible in an independent migration meta-analysis
 
 A separate reconstruction of the Usui et al. (2017) effect-size table retains 944 temperature-response rows from 28 studies and 279 species after restricting the source-coded migration-distance moderator to short and long migrants. Inverse-variance meta-regression with two-way Study × Species clustered uncertainty gives an adjusted long-minus-short contrast of **+0.421 d / °C** (95% CI **+0.121 to +0.722**, p = 0.0077). Because negative slopes denote earlier migration in warmer years, long-distance migrants are less temperature-responsive than short-distance migrants. The result is stable to capping the largest inverse-variance weights (**+0.417**, 95% CI **+0.118 to +0.715**) and to an unweighted adjusted fit (**+0.538**, 95% CI **+0.190 to +0.887**). Leaving out each of the 28 studies in turn retains a positive contrast in every fit, and every 95% CI lower bound remains above zero (estimate range **+0.378 to +0.608 d / °C**; largest p = **0.0195**). This reconstructs a pattern already reported by Usui et al.; it is not a new PAYOFF-B discovery and does not reproduce the source paper's phylogenetic layer.
+
+A non-exclusive alternative explanation is that long-distance migrants rely more strongly on endogenous circannual programmes and photoperiodic timing, which can weaken short-term temperature responsiveness even when remote environmental information is available (Åkesson et al., 2017; Helm & Liedvogel, 2024). E6 therefore does not identify information distance as the causal mechanism: endogenous or photoperiodic control is treated here as a possible mechanistic source or correlate of early commitment, not as evidence that the deadline pathway itself has been observed.
 
 An independent local benchmark from Freimuth et al. (2022) reproduces all 1,763 archived species-level temperature slopes and the published group means: plants **−5.152 d / °C**, flies **−3.879**, bees **−2.024**, butterflies/moths **−1.848** and beetles **−1.706**. These sources are not pooled into a bird-versus-pollinator coefficient because taxon, geography, phenophase and study design are confounded. Their licensed role is triangulation: local partners can show large but unequal temperature responses, while within migratory birds responsiveness weakens with migration distance.
 
@@ -634,6 +636,8 @@ The empirical evidence is deliberately modular.
 
 The broad-bird result supports an association between predictive information and realized mismatch, but dependence-aware uncertainty prevents a universal species-level claim. The independent migration-distance reconstruction adds a second natural gradient: long-distance migrants are less temperature-responsive than short-distance migrants under Study × Species clustered uncertainty. The Freimuth plant–pollinator reconstruction provides a local-system benchmark in which all five source group means reproduce but response magnitudes differ strongly. Together these results support an information-distance axis without licensing a causal bird-versus-pollinator comparison.
 
+These natural gradients concern differences in information position and phenological responsiveness across migration classes and local partner groups. They do not estimate the theoretical quantity \(D_2-D_1\) within a specific interacting pair or observe the predicted \(q_1<q\le q_2\) desynchronization window; the pairwise deadline-difference mechanism therefore remains a prospective natural test.
+
 The flycatcher manipulation anchors the idea that the availability of heterospecific phenology depends on when a decision is made.
 
 The wigeon null shows that predictive connectivity should not be treated as a universal post-error controller.
@@ -688,19 +692,7 @@ The exact threshold and bistability conditions make that conjunction testable ra
 
 ---
 
-## 5. Registered perturbation still unopened
-
-The industrial-development mule-deer lane remains part of the broader PAYOFF-B programme. It asks whether an independently observed actuation contrast propagates into phase retention within taxon.
-
-<!-- AIKENS_LAMBDA_RESULTS_START -->
-[AIKENS LAMBDA RESULT PENDING — render only from the registered result JSON after the frozen environmental reconstruction executes.]
-<!-- AIKENS_LAMBDA_RESULTS_END -->
-
-The information-deadline conclusions above do not depend on the sign of the unopened Aikens result.
-
----
-
-## 6. Conclusion
+## 5. Conclusion
 
 Seasonal adaptation is not limited only by how fast organisms can move or how far they can shift phenology.
 
@@ -727,8 +719,10 @@ The framework therefore predicts that climate adaptation can fail not only becau
 - Aikens EO, Kauffman MJ, Merkle JA, Dwinnell SPH, Fralick GL, Monteith KL (2017) The greenscape shapes surfing of resource waves in a large migratory herbivore. *Ecology Letters* 20:741–750. DOI: 10.1111/ele.12772.
 - Aikens EO, Wyckoff TB, Sawyer H, Kauffman MJ (2022) Industrial energy development decouples ungulate migration from the green wave. *Nature Ecology & Evolution* 6:1733–1741. DOI: 10.1038/s41559-022-01887-9.
 - Amaral BR, Youngflesh C, Tingley M, Miller DAW (2025) Shifting gears in a shifting climate: Birds adjust migration speed in response to spring vegetation green-up. *Diversity and Distributions* 31:e70033. DOI: 10.1111/ddi.70033.
+- Åkesson S, Ilieva M, Karagicheva J, Rakhimberdiev E, Tomotani B, Helm B (2017) Timing avian long-distance migration: from internal clock mechanisms to global flights. *Philosophical Transactions of the Royal Society B* 372:20160252. DOI: 10.1098/rstb.2016.0252.
 - Bauer S, McNamara JM, Barta Z (2020) Environmental variability, reliability of information and the timing of migration. *Proceedings of the Royal Society B* 287:20200622. DOI: 10.1098/rspb.2020.0622.
 - Freimuth J, Bossdorf O, Scheepens JF, Willems FM (2022) Climate warming changes synchrony of plants and pollinators. *Proceedings of the Royal Society B* 289:20212142. DOI: 10.1098/rspb.2021.2142.
+- Helm B, Liedvogel M (2024) Avian migration clocks in a changing world. *Journal of Comparative Physiology A* 210:691–716. DOI: 10.1007/s00359-023-01688-w.
 - Johansson J, Jonzén N (2012) Game theory sheds new light on ecological responses to current climate change when phenology is historically mismatched. *Ecology Letters* 15:881–888. DOI: 10.1111/j.1461-0248.2012.01812.x.
 - Kharouba HM, Wolkovich EM (2020) Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. DOI: 10.1038/s41558-020-0752-x.
 - Kölzsch A et al. (2015) Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore. *Journal of Animal Ecology* 84:272–283. DOI: 10.1111/1365-2656.12281.
