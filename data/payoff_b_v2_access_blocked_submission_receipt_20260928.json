@@ -20,24 +20,24 @@
     "configured": false
   },
   "primary_build": {
-    "workflow_run": 36390286108,
+    "workflow_run": 36403646557,
     "run_attempt": 1,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
+    "head_sha": "3b23f3317acf399b3849e6026ea5c5123e48da19",
     "conclusion": "success",
-    "artifact_id": 10956335888,
-    "artifact_sha256": "1c6041c9c26d849eb3d2b856fe50875acb2ee13dff0feca5e719d096463fb5ff",
-    "geb_inner_zip_sha256": "3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd",
-    "reviewer_inner_zip_sha256": "6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75"
+    "artifact_id": 10960339744,
+    "artifact_sha256": "9ced5edcfde3c66d6fb61bfefb3ef06369a872e0f1129a9d430f32b57ceee290",
+    "geb_inner_zip_sha256": "ba2c990b9469cf48e59c264dfec8e3721028bb15298d858c90a966fe4dfac726",
+    "reviewer_inner_zip_sha256": "89f5da6454bb29bd188f654e6cf2ac7eb8137e6f131142af5535fe62dfce6755"
   },
   "reproduction": {
-    "workflow_run": 36390286108,
+    "workflow_run": 36403646557,
     "run_attempt": 2,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
+    "head_sha": "3b23f3317acf399b3849e6026ea5c5123e48da19",
     "conclusion": "success",
-    "artifact_id": 10955883655,
-    "artifact_sha256": "9e6194e02484bc95d651ff7b01a34b6dd11d3e12e143c852ad7490c588808a67",
-    "geb_inner_zip_sha256": "3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd",
-    "reviewer_inner_zip_sha256": "6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75",
+    "artifact_id": 10961526379,
+    "artifact_sha256": "77d44f5660c48c420301f9d0f28f7175b0fe103fd2bb6f8e4220162acafeab71",
+    "geb_inner_zip_sha256": "ba2c990b9469cf48e59c264dfec8e3721028bb15298d858c90a966fe4dfac726",
+    "reviewer_inner_zip_sha256": "89f5da6454bb29bd188f654e6cf2ac7eb8137e6f131142af5535fe62dfce6755",
     "deterministic_inner_archives": true
   },
   "manuscript_metrics": {
@@ -60,8 +60,10 @@
     "final human review of generated package and portal metadata"
   ],
   "science_update": {
-    "merged_pr": 196,
-    "merge_commit": "09b9561e994d79fe16c3f663fda3ecec8b3a61e8",
-    "e6_included": true
+    "merged_pr": 199,
+    "merge_commit": "444661bce2ac46c15538d152d245ffb5365bdbf5",
+    "e6_included": true,
+    "figure_5_e6_visual_integration": true,
+    "main_text_retuned_for_aikens": false
   }
 }
