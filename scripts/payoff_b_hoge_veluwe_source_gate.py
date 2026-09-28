@@ -35,6 +35,11 @@ YEAR_HEADER_RE = re.compile(r"(?i)(year|yr|jaar)")
 FILENAME_RE = re.compile(r'filename\*?=(?:UTF-8\'\')?"?([^";]+)', re.I)
 
 
+class SourceAccessBlocked(RuntimeError):
+    """Registered public source exists but cannot be fetched anonymously."""
+
+
+
 def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument(
@@ -217,7 +222,7 @@ def _dryad_dataset_archive_download(
             }
         except Exception as exc:
             errors.append(f"{url}: {type(exc).__name__}: {exc}")
-    raise RuntimeError(
+    raise SourceAccessBlocked(
         f"Dryad dataset archive could not supply {exact_name!r}: {errors}"
     )
 
@@ -349,7 +354,7 @@ def _dryad_download_file(
                     f"{type(exc).__name__}: {exc}"
                 )
         if mirror is None:
-            raise RuntimeError(
+            raise SourceAccessBlocked(
                 f"could not download Dryad file {exact_name!r}: {errors}"
             )
 
@@ -607,7 +612,7 @@ def _resolve_mda_landing_download(
         "onclicks": parser.clicks[:10],
         "attempts": attempts[-20:],
     }
-    raise RuntimeError(
+    raise SourceAccessBlocked(
         "MDA landing page did not expose a retrievable file route; "
         + json.dumps(probe, sort_keys=True)
     )
@@ -638,7 +643,7 @@ def _mda_download_file(session, url: str, output_dir: Path, timeout: int) -> dic
 
     payload = response.content
     if not payload:
-        raise RuntimeError("Marine Data Archive returned an empty source file")
+        raise SourceAccessBlocked("Marine Data Archive returned an empty source file")
 
     name = _content_disposition_filename(response.headers) or landing_name
     content_type = response.headers.get("Content-Type", "")
@@ -933,6 +938,50 @@ def _load_cue_extension_receipt(path: Path | None) -> tuple[dict, bool]:
     return summary, ok
 
 
+def _blocked_source_receipt(
+    *,
+    contract: dict,
+    cue_extension: dict,
+    blocked_source: str,
+    exc: Exception,
+    acquired: dict,
+) -> dict:
+    status_map = {
+        "migrant_timing": "MIGRANT_SOURCE_ACCESS_BLOCKED",
+        "resident_partner_timing": "RESIDENT_SOURCE_ACCESS_BLOCKED",
+        "destination_resource_state": "RESOURCE_SOURCE_ACCESS_BLOCKED",
+    }
+    return {
+        "result_id": "payoff_b_hoge_veluwe_source_gate_a_20260927",
+        "contract_id": contract["contract_id"],
+        "status": status_map[blocked_source],
+        "blocked_source": blocked_source,
+        "cue_extension": cue_extension,
+        "error_type": type(exc).__name__,
+        "error": str(exc),
+        "acquired_sources_before_block": {
+            key: {
+                field: value
+                for field, value in meta.items()
+                if field != "path"
+            }
+            for key, meta in acquired.items()
+        },
+        "gate_b_licensed": False,
+        "outcome_firewall": {
+            "cross_source_join_performed": False,
+            "focal_partner_mismatch_computed": False,
+            "cue_resource_connectivity_computed": False,
+            "information_reversal_gate_opened": False,
+            "history_test_opened": False,
+        },
+        "claim_boundary": (
+            "Source-access blocking is a Gate-A outcome only. "
+            "No biological history result has been opened."
+        ),
+    }
+
+
 def main():
     args = parse_args()
     contract = json.loads(args.contract.read_text(encoding="utf-8"))
@@ -949,69 +998,83 @@ def main():
 
     receipt_path = args.output_dir / "source_gate_a_receipt.json"
     acquired = {}
-    try:
-        acquired["migrant_timing"] = _mda_download_file(
-            session,
-            contract["sources"]["migrant_timing"]["archive_url"],
-            sources_dir,
-            args.timeout,
-        )
-        acquired["migrant_timing"]["schema"] = inspect_source(
-            Path(acquired["migrant_timing"]["path"])
-        )
+    acquisition_plan = (
+        (
+            "resident_partner_timing",
+            lambda: _dryad_download_file(
+                session,
+                contract["sources"]["resident_partner_timing"]["dataset_doi"],
+                contract["sources"]["resident_partner_timing"]["file"],
+                sources_dir,
+                args.timeout,
+            ),
+        ),
+        (
+            "destination_resource_state",
+            lambda: _dryad_download_file(
+                session,
+                contract["sources"]["destination_resource_state"]["dataset_doi"],
+                contract["sources"]["destination_resource_state"]["file"],
+                sources_dir,
+                args.timeout,
+            ),
+        ),
+        (
+            "migrant_timing",
+            lambda: _mda_download_file(
+                session,
+                contract["sources"]["migrant_timing"]["archive_url"],
+                sources_dir,
+                args.timeout,
+            ),
+        ),
+    )
 
-        acquired["resident_partner_timing"] = _dryad_download_file(
-            session,
-            contract["sources"]["resident_partner_timing"]["dataset_doi"],
-            contract["sources"]["resident_partner_timing"]["file"],
-            sources_dir,
-            args.timeout,
-        )
-        acquired["resident_partner_timing"]["schema"] = inspect_source(
-            Path(acquired["resident_partner_timing"]["path"])
-        )
-
-        acquired["destination_resource_state"] = _dryad_download_file(
-            session,
-            contract["sources"]["destination_resource_state"]["dataset_doi"],
-            contract["sources"]["destination_resource_state"]["file"],
-            sources_dir,
-            args.timeout,
-        )
-        acquired["destination_resource_state"]["schema"] = inspect_source(
-            Path(acquired["destination_resource_state"]["path"])
-        )
-    except Exception as exc:
-        failure = {
-            "result_id": "payoff_b_hoge_veluwe_source_gate_a_20260927",
-            "contract_id": contract["contract_id"],
-            "status": "SOURCE_ACCESS_FAILURE",
-            "cue_extension": cue_extension,
-            "error_type": type(exc).__name__,
-            "error": str(exc),
-            "acquired_sources_before_failure": {
-                key: {
-                    field: value
-                    for field, value in meta.items()
-                    if field != "path"
-                }
-                for key, meta in acquired.items()
-            },
-            "outcome_firewall": {
-                "cross_source_join_performed": False,
-                "focal_partner_mismatch_computed": False,
-                "cue_resource_connectivity_computed": False,
-                "information_reversal_gate_opened": False,
-                "history_test_opened": False,
-            },
-        }
-        receipt_path.write_text(
-            json.dumps(failure, indent=2) + "\n",
-            encoding="utf-8",
-        )
-        shutil.rmtree(sources_dir, ignore_errors=True)
-        print(json.dumps(failure, indent=2))
-        raise
+    for source_name, acquire in acquisition_plan:
+        try:
+            acquired[source_name] = acquire()
+            acquired[source_name]["schema"] = inspect_source(
+                Path(acquired[source_name]["path"])
+            )
+        except SourceAccessBlocked as exc:
+            blocked = _blocked_source_receipt(
+                contract=contract,
+                cue_extension=cue_extension,
+                blocked_source=source_name,
+                exc=exc,
+                acquired=acquired,
+            )
+            receipt_path.write_text(
+                json.dumps(blocked, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            shutil.rmtree(sources_dir, ignore_errors=True)
+            print(json.dumps(blocked, indent=2))
+            return
+        except Exception as exc:
+            failure = {
+                "result_id": "payoff_b_hoge_veluwe_source_gate_a_20260927",
+                "contract_id": contract["contract_id"],
+                "status": "UNEXPECTED_GATE_A_ERROR",
+                "failed_source": source_name,
+                "cue_extension": cue_extension,
+                "error_type": type(exc).__name__,
+                "error": str(exc),
+                "outcome_firewall": {
+                    "cross_source_join_performed": False,
+                    "focal_partner_mismatch_computed": False,
+                    "cue_resource_connectivity_computed": False,
+                    "information_reversal_gate_opened": False,
+                    "history_test_opened": False,
+                },
+            }
+            receipt_path.write_text(
+                json.dumps(failure, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            shutil.rmtree(sources_dir, ignore_errors=True)
+            print(json.dumps(failure, indent=2))
+            raise
 
     migrant = acquired["migrant_timing"]
     resident = acquired["resident_partner_timing"]
