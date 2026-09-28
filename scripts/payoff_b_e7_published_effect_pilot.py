@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Nonpromotable E7 diagnostic.
 
-This script intentionally computes what an ordinary three-study random-effects
-meta-analysis would return IF the registered diagnostic uncertainty
-approximations were treated as standard errors. That IF is false for at least
-two source systems. The output is therefore a stress test for heterogeneity,
+This script intentionally computes what an ordinary multi-study random-effects
+meta-analysis would return IF all registered diagnostic uncertainty
+approximations were treated as commensurate standard errors. That IF is false
+for several source systems. The output is therefore a stress test for heterogeneity,
 not an inferential result.
 """
 from __future__ import annotations
@@ -60,8 +60,9 @@ def main() -> None:
     payload = json.loads(args.input.read_text(encoding="utf-8"))
     if payload.get("status") != "NONPROMOTABLE_DIAGNOSTIC":
         raise SystemExit("refusing to run unless input is explicitly NONPROMOTABLE_DIAGNOSTIC")
-    if any(row.get("inferential_variance_valid") is not False for row in payload["rows"]):
-        raise SystemExit("diagnostic contract requires inferential_variance_valid=false for every row")
+    invalid = [row for row in payload["rows"] if row.get("inferential_variance_valid") is not True]
+    if not invalid:
+        raise SystemExit("pilot is only for a mixed-validity diagnostic; at least one row must have non-licensed variance")
 
     meta = dl_meta(payload["rows"])
     result = {
@@ -72,7 +73,12 @@ def main() -> None:
             {"study": r["study"], "effect": r["effect"]}
             for r in payload["rows"]
         ],
-        "diagnostic_meta_if_invalid_SE_assumptions_are_forced": meta,
+        "diagnostic_meta_if_all_uncertainties_are_forced_as_SE": meta,
+        "variance_audit": {
+            "valid_rows": [r["study"] for r in payload["rows"] if r.get("inferential_variance_valid") is True],
+            "nonlicensed_rows": [r["study"] for r in payload["rows"] if r.get("inferential_variance_valid") is not True],
+            "all_rows_inferentially_valid": all(r.get("inferential_variance_valid") is True for r in payload["rows"]),
+        },
         "ecological_readout": {
             "signs": [
                 "positive" if r["effect"] > 0 else "negative" if r["effect"] < 0 else "zero"
@@ -84,8 +90,8 @@ def main() -> None:
         "promotion": {
             "allowed": False,
             "reason": (
-                "At least two study-level delta variances depend on unverified "
-                "zero-covariance and/or SE-label assumptions. The pooled mean, "
+                "One or more study-level delta variances depend on unverified "
+                "zero-covariance and/or uncertainty-label assumptions. The pooled mean, "
                 "CI, tau2 and I2 are stress-test diagnostics only."
             ),
         },
@@ -95,6 +101,7 @@ def main() -> None:
     assert result["status"] == "NONPROMOTABLE_DIAGNOSTIC_ONLY"
     assert result["promotion"]["allowed"] is False
     assert len(set(result["ecological_readout"]["signs"])) > 1
+    assert result["variance_audit"]["all_rows_inferentially_valid"] is False
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
