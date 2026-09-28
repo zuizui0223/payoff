@@ -248,10 +248,12 @@ registered final science gate. That adjudication record remains provenance for
 V1 only.
 
 The canonical V2 postoutcome route has now been rebuilt and tested independently.
-All four registered result classes (PASS, wrong-direction, insufficient-support
-and NOT_ESTIMABLE) generate a science-ready V2 package while leaving the blinded
-main text and seven main figures unchanged. The registered result is rendered
-into Supporting Information only.
+Four scientific result classes (PASS, wrong-direction, insufficient-support and
+NOT_ESTIMABLE) generate a science-ready V2 package while leaving the blinded
+main text and seven main figures unchanged. A separate `ACCESS_BLOCKED`
+external-access render state is available but is not a scientific result and is
+not currently activated; using it requires an explicit author decision. All
+rendered Aikens states remain in Supporting Information only.
 
 ```text
 CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = READY_UNOPENED
@@ -264,7 +266,7 @@ LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT_ARTIFACT = 10950280495
 CURRENT_CREDENTIAL_STATE = NOT_CONFIGURED_CONFIRMED_2026-09-28
 ```
 
-The credential state above was freshly rechecked on 2026-09-27 without
+The credential state above was freshly rechecked on 2026-09-28 without
 recording secret values or opening environmental data. No usable AppEEARS token
 or Earthdata username/password pair was configured in that run.
 
@@ -273,7 +275,9 @@ or Earthdata username/password pair was configured in that run.
 The preregistered Aikens fixed-24 h lambda outcome remains unopened.
 
 The V2 manuscript must remain coherent under PASS, wrong-direction,
-insufficient-support and NOT_ESTIMABLE outcomes. Its information-deadline and
+insufficient-support and NOT_ESTIMABLE scientific outcomes. It must also remain
+unchanged if an author explicitly freezes the separate ACCESS_BLOCKED
+external-access state. Its information-deadline and
 coordination conclusions do not depend on the Aikens sign.
 
 The V2 PREOUTCOME package is now built and audited. The remaining
