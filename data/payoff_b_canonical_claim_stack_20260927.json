@@ -16,7 +16,10 @@
     "wigeon_predictive_controller": "NOT_SUPPORTED",
     "long_term_cue_driver_reversal": "NO_CUE_DRIVER_REVERSAL",
     "natural_network_hysteresis": "NOT_OBSERVED",
-    "natural_rescue_seed": "NOT_IDENTIFIED"
+    "natural_rescue_seed": "NOT_IDENTIFIED",
+    "hoge_veluwe_cue_resource_reversal": "NO_CUE_RESOURCE_REVERSAL",
+    "hoge_veluwe_history_gate_c": "NOT_RUN",
+    "hoge_veluwe_history_timing_opened": false
   },
   "older_temporal_buffering": "retained as capacity layer, not current headline",
   "aikens_lambda": "UNOPENED"
