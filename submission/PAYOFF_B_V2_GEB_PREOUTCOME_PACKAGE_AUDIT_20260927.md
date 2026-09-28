@@ -80,7 +80,7 @@ workflow_conclusion = success
 artifact_id = 10962346030
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa
+69baef789e80ded8bc8f34cecc690841944a1b9fa7ee744dcb6176c1e1848721
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
@@ -93,9 +93,9 @@ Deterministic reproduction check:
 reproduction_workflow_run = 36405110540
 reproduction_run_attempt = 2
 reproduction_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
-reproduction_artifact_id = 10956526561
+reproduction_artifact_id = 10961642891
 reproduction_artifact_sha256 =
-2c3b34d786bf702447285378653fcaaf3975cbff37bccfd80c2b5f8032a3ba35
+0edfee1625a87427072cc23cb4771981f6c79181d8e65288b53df6d122012b6c
 reproduction_inner_zip_sha256 =
 6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
 deterministic_inner_archive = PASS
