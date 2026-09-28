@@ -38,6 +38,7 @@ def landing_probe(doi: str, expected_names: list[str]) -> dict:
         "content_type": r.headers.get("content-type"),
         "href_candidates": [],
         "filename_context": {},
+        "file_links": {},
     }
     if r.status_code != 200:
         return out
@@ -49,6 +50,19 @@ def landing_probe(doi: str, expected_names: list[str]) -> dict:
         if any(token in low for token in ("file_stream", "download", "/api/v2/files/", "/stash/")):
             keep.append(href)
     out["href_candidates"] = sorted(set(keep))[:300]
+
+    # Dryad public landing pages expose individual files as:
+    # <a class="js-individual-dl" href="/downloads/file_stream/ID">...NAME</a>
+    for href, label in re.findall(
+        r'<a[^>]+href=["\\\']([^"\\\']*file_stream/[^"\\\']+)["\\\'][^>]*>(.*?)</a>',
+        text,
+        flags=re.I | re.S,
+    ):
+        clean = re.sub(r"<[^>]+>", "", label)
+        clean = html.unescape(clean).strip()
+        if clean:
+            out["file_links"][clean] = href
+
     for name in expected_names:
         i = text.find(name)
         if i >= 0:
@@ -99,8 +113,31 @@ def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[st
     except Exception as e:
         diagnostics["api_error"] = repr(e)
 
-    diagnostics["landing"] = landing_probe(doi, expected_names)
-    return [], diagnostics
+    landing = landing_probe(doi, expected_names)
+    diagnostics["landing"] = landing
+
+    file_links = landing.get("file_links", {})
+    selected = []
+    if expected_names:
+        for wanted in expected_names:
+            if wanted in file_links:
+                selected.append((wanted, file_links[wanted]))
+    else:
+        selected = sorted(file_links.items())
+
+    out = []
+    download_errors = {}
+    for name, href in selected:
+        link = href if href.startswith("http") else "https://datadryad.org" + href
+        try:
+            rr = requests.get(link, timeout=180, allow_redirects=True)
+            rr.raise_for_status()
+            out.append((Path(name).name, rr.content, link))
+        except Exception as e:
+            download_errors[name] = repr(e)
+    diagnostics["landing_selected_files"] = [name for name, _ in selected]
+    diagnostics["landing_download_errors"] = download_errors
+    return out, diagnostics
 
 
 def inspect_csv(name: str, data: bytes) -> dict:
