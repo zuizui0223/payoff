@@ -22,6 +22,21 @@ def test_hoge_veluwe_network_lane_is_preoutcome_and_fixed():
     assert c["source_gate"]["require_at_least_24_history_years_after_connectivity_construction"] is True
     assert c["source_gate"]["require_expected_primary_history_span"] == [1992, 2015]
     assert c["information_reversal_gate"]["fail_state"] == "NO_CUE_RESOURCE_REVERSAL"
+    assert c["information_reversal_gate"]["aicc_parameter_count"]["linear"] == 2
+    assert c["information_reversal_gate"]["aicc_parameter_count"]["segmented"] == 5
+    assert c["history_test_if_reversal_passes"]["covariance"] == "Newey-West HAC covariance, maxlags=7 (= window_years - 1), finite-sample correction"
+    assert c["history_test_if_reversal_passes"]["no_naive_iid_inference"] is True
+    assert c["history_test_if_reversal_passes"]["model"].endswith("+ centered_year")
+    assert c["history_test_if_reversal_passes"]["time_trend_guard"]["required"] is True
+    assert "unadjusted model does not support natural path dependence" in c["history_test_if_reversal_passes"]["time_trend_guard"]["interpretation_rule"]
+    stability = c["information_reversal_gate"]["leave_one_history_year_out_stability_gate"]
+    assert stability["required"] is True
+    assert stability["minimum_fraction_preserving_both_slope_signs"] == 0.8
+    assert stability["minimum_fraction_breakpoint_within_years_of_full_fit"] == {
+        "fraction": 0.8,
+        "tolerance_years": 2,
+    }
+    assert stability["failure_state"] == "UNSTABLE_CUE_RESOURCE_REVERSAL"
 
 
 def test_history_test_cannot_open_before_information_reversal():
@@ -49,6 +64,8 @@ def test_declared_public_sources_are_specific():
     c = load_contract()
     sources = c["sources"]
     assert sources["migrant_timing"]["paper_doi"] == "10.1111/gcb.14006"
+    assert "annual arithmetic mean" in sources["migrant_timing"]["primary_variable"]
+    assert "unweighted arithmetic mean within calendar year" in sources["migrant_timing"]["aggregation_rule"]
     assert sources["resident_partner_timing"]["dataset_doi"] == "10.5061/dryad.f1vhhmgx6"
     assert sources["destination_resource_state"]["dataset_doi"] == "10.5061/dryad.f1vhhmgx6"
     assert sources["resident_partner_timing"]["file"].endswith(".xlsx")
@@ -74,4 +91,16 @@ def test_window_rule_yields_exact_registered_24_year_history_span():
 
     assert eligible == list(range(1992, 2016))
     assert len(eligible) == 24
+
+def test_gate_b_is_independent_of_history_source_access_before_outcome_opening():
+    c = load_contract()
+    amendment = c["source_gate"]["gate_order_amendment_20260928"]
+    assert amendment["outcome_data_inspected"] is False
+    assert c["source_gate"]["gate_b_can_run_without_history_sources"] is True
+    assert c["source_gate"]["gate_c_requires_all_history_sources"] is True
+    assert amendment["gate_b_environmental_source_requirements"] == [
+        "precommitment_cue source-faithfully extended and frozen",
+        "destination_resource_state exact file hash/schema/year coverage certified",
+    ]
+    assert "resident and migrant timing values remain unopened during Gate B" in amendment["firewall"]
 

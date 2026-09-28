@@ -106,11 +106,10 @@
       "level": "NETWORK_HYSTERESIS_ASSEMBLY_CANDIDATE",
       "direct_hysteresis_ready": false,
       "blockers": [
-        "joined source files not yet materialized and hash-frozen",
-        "fixed Ivory Coast cue must be extended source-faithfully through the frozen overlap",
-        "cross-source year/schema alignment not yet certified"
+        "Gate C requires the exact registered Tomotani Marine Data Archive; anonymous download is unavailable",
+        "Gate C also requires Gate B to pass the frozen environmental reversal/stability gate"
       ],
-      "retained_role": "best current prospective assembly for a same-system natural network-history test: pied-flycatcher timing + public Hoge Veluwe great-tit first-clutch timing + public caterpillar resource peak; outcome remains unopened",
+      "retained_role": "best current prospective same-system network-history assembly; three of four registered coordinates are source-certified and the joined outcome remains unopened",
       "doi": "10.1111/gcb.14006",
       "data_url": "http://mda.vliz.be/directlink.php?fid=VLIZ_00000444_5dd3fba4f38f8",
       "notable_published_pattern": "male arrival-to-laying interval shortened until about 2008 and then lengthened",
@@ -125,7 +124,18 @@
         "coordinate": "annual observed caterpillar biomass peak",
         "period": "1985-2020 excluding 1991"
       },
-      "registered_followup": "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json"
+      "registered_followup": "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json",
+      "source_gate_a": {
+        "status": "ENVIRONMENTAL_SOURCE_GATE_PASS_HISTORY_SOURCE_BLOCKED",
+        "raw_workflow_status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
+        "result": "data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json",
+        "cue": "CERTIFIED_1980_2015",
+        "resident_partner": "CERTIFIED_1973_2020_HISTORY_GATE_ONLY",
+        "destination_resource": "CERTIFIED_1985_2020",
+        "migrant_timing": "ACCESS_BLOCKED_MDA",
+        "gate_b_licensed": true,
+        "gate_c_licensed": false
+      }
     }
   ],
   "conclusion": {
@@ -133,10 +143,10 @@
     "best_within_species_candidate": "none currently unresolved with accessible outcome-independent evidence; Tomotani 1980-2015 remains access-pending, while Hoge Veluwe 1980-2010 failed its frozen reversal gate",
     "best_interaction_anchor": "Samplonius_Both_2019_fatal_competition",
     "best_decision_time_anchor": "Samplonius_Both_2017_manipulation",
-    "required_next_data": "materialize and hash-freeze the Tomotani migrant-timing archive and Visser 2021 Hoge Veluwe great-tit/resource files, then certify schema/year alignment under the frozen network-hysteresis contract",
-    "best_network_assembly_candidate": "Hoge Veluwe 1985-2015 cross-source registered lane with frozen 1992-2015 history support; source assembly pending and joined outcome unopened"
+    "required_next_data": "run the independently licensed cue-resource Gate B; only if it passes, obtain the exact registered Tomotani Marine Data Archive through an authorized MDA route before Gate C",
+    "best_network_assembly_candidate": "Hoge Veluwe 1985-2015 lane: environmental source gate passed, Gate B licensed and unopened; history source gate remains blocked on the exact migrant archive"
   },
-  "claim_rule": "Do not describe any current natural dataset as direct information-triggered network hysteresis. The Hoge Veluwe cross-source lane is now prospectively registered but remains PREOUTCOME until its source and reversal gates pass.",
+  "claim_rule": "Do not describe the Hoge Veluwe lane as natural hysteresis. Environmental Gate A passed, but Gate B is still unopened and Gate C is closed until both Gate B passes and the exact migrant source is certified.",
   "followup_20260927": {
     "lane": "Hoge Veluwe 1980-2010 cue-driver information history",
     "source_driver": "PLOS S1 annual standardized selection gradients",
@@ -146,5 +156,15 @@
     "status": "NO_CUE_DRIVER_REVERSAL",
     "history_test": "NOT_RUN",
     "consequence": "remove this lane from the queue of unresolved natural-hysteresis candidates; do not retune it as a new decline-recovery test"
+  },
+  "gate_a_20260928": {
+    "result": "data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json",
+    "status": "ENVIRONMENTAL_SOURCE_GATE_PASS_HISTORY_SOURCE_BLOCKED",
+    "workflow_run": 36367383611,
+    "artifact_id": 10948380232,
+    "outcome_opened": false,
+    "raw_workflow_status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
+    "gate_b_licensed": true,
+    "gate_c_licensed": false
   }
 }

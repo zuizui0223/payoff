@@ -76,12 +76,17 @@ file: Tbl_PeakDate_Biomass_HVLim.xlsx
 Primary migrant coordinate:
 
 ```text
-annual female pied-flycatcher nest-building onset
+annual arithmetic mean of individual female pied-flycatcher nest-building start dates
 role: source-defined proxy for female arrival
 source period: 1980–2015
 paper DOI: 10.1111/gcb.14006
 archive: Marine Data Archive
 ```
+
+The arithmetic mean is fixed from the published Methods, which states that
+female individual arrival was proxied by nest-building start and that analyses
+used annual means of annual-cycle stages. Median, quantile, first-arrival and
+model-derived replacements are not allowed after source inspection.
 
 Calculated male arrival is a predeclared secondary lane only.
 
@@ -142,6 +147,17 @@ post-break slope > 0
 endpoint recovery >= 50% of the pre-break-to-break decline
 ```
 
+AICc counts 2 parameters for the single line and **5** for the segmented
+candidate: two intercepts, two slopes and the selected breakpoint. If candidate
+segmented AICc values tie within 1e-12, the earlier break year is chosen.
+Because adjacent connectivity years share most of their trailing 8-year
+history, the full-sample reversal must also pass a predeclared
+leave-one-history-year-out stability gate: at least 80% of leave-one-year-out
+fits must retain the negative/positive slope signs, and at least 80% must place
+the breakpoint within ±2 years of the full-fit breakpoint. Failure is
+`UNSTABLE_CUE_RESOURCE_REVERSAL` and Gate C remains closed. All leave-one-year
+diagnostics are reported.
+
 The breakpoint is selected from the **cue–resource connectivity series only**.
 Flycatcher and great-tit timing cannot define it.
 
@@ -168,11 +184,17 @@ resident_migrant_mismatch
 ~ centered_connectivity
 + branch
 + centered_connectivity:branch
++ centered_year
 ```
 
-Primary support requires the 95% CI for the branch coefficient to exclude zero.
-This tests whether coordination differs at comparable information quality
-depending on the path by which that information state was reached.
+Within the overlap-support subset, predictive connectivity and calendar year
+are both centered at their means. Primary support requires the **Newey–West
+HAC, lag 7 (= 8-year window − 1), finite-sample-corrected 95% CI** for the
+branch coefficient to exclude zero at mean connectivity **after linear
+calendar-year adjustment**. This time-trend guard is mandatory because decline
+and recovery branches are necessarily earlier and later periods; a secular
+resident–migrant timing trend must not be relabelled path dependence. HAC(2),
+HC3 and the unadjusted branch model are sensitivities only.
 
 ## Claim ceiling
 

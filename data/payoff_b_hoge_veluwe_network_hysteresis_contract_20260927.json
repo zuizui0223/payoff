@@ -28,8 +28,10 @@
         1980,
         2015
       ],
-      "primary_variable": "annual female nest-building onset as the source-defined proxy for female arrival at Hoge Veluwe",
-      "secondary_variable": "calculated male arrival date; secondary lane only, never substituted into the primary lane after seeing outcomes"
+      "primary_variable": "annual arithmetic mean of individual female nest-building start dates, used as the source-defined proxy for female arrival at Hoge Veluwe",
+      "secondary_variable": "calculated male arrival date; secondary lane only, never substituted into the primary lane after seeing outcomes",
+      "aggregation_rule": "unweighted arithmetic mean within calendar year, matching the source paper's annual-mean stage analysis; no median, quantile, first-arrival or model-derived replacement",
+      "source_method_basis": "Tomotani et al. 2018 Methods: female individual arrival proxied by start of nest building; analyses focused on annual means of each annual-cycle stage"
     },
     "resident_partner_timing": {
       "dataset_doi": "10.5061/dryad.f1vhhmgx6",
@@ -39,7 +41,16 @@
         2020
       ],
       "primary_variable": "annual unweighted mean laying date of included first great-tit clutches",
-      "role": "resident interactor phenology"
+      "role": "resident interactor phenology",
+      "source_transport": {
+        "primary": "Dryad DOI/API metadata + Dryad individual bytes if accessible",
+        "authoritative_fallback": "Dryad full-dataset ZIP download; extract exact registered filename and record dataset/archive SHA-256 plus file SHA-256",
+        "digest_verified_public_mirror": {
+          "provider": "Zenodo",
+          "record_id": 5730499,
+          "use_rule": "last-resort transport only if exact filename is present and computed SHA-256 equals an authoritative Dryad-declared SHA-256"
+        }
+      }
     },
     "destination_resource_state": {
       "dataset_doi": "10.5061/dryad.f1vhhmgx6",
@@ -52,7 +63,16 @@
         1991
       ],
       "primary_variable": "annual observed peak date of caterpillar biomass",
-      "role": "later breeding-ground resource state"
+      "role": "later breeding-ground resource state",
+      "source_transport": {
+        "primary": "Dryad DOI/API metadata + Dryad individual bytes if accessible",
+        "authoritative_fallback": "Dryad full-dataset ZIP download; extract exact registered filename and record dataset/archive SHA-256 plus file SHA-256",
+        "digest_verified_public_mirror": {
+          "provider": "Zenodo",
+          "record_id": 5730499,
+          "use_rule": "last-resort transport only if exact filename is present and computed SHA-256 equals an authoritative Dryad-declared SHA-256"
+        }
+      }
     },
     "precommitment_cue": {
       "source": "NCEP/NCAR or source-faithful equivalent used by the already frozen CV24C cue reconstruction",
@@ -77,7 +97,43 @@
     "require_expected_primary_history_span": [
       1992,
       2015
-    ]
+    ],
+    "transport_amendment": {
+      "date": "2026-09-27",
+      "reason": "Dryad individual-file API/public file-stream routes returned HTTP 401/403 in GitHub Actions; Gate A therefore tries the Dryad full-dataset Open Access ZIP before any mirror",
+      "scientific_effect": "none; Dryad DOI and exact filenames remain authoritative; mirror bytes are accepted only with authoritative Dryad SHA-256 identity",
+      "outcome_data_inspected": false
+    },
+    "inferential_amendment": {
+      "date": "2026-09-27",
+      "timing": "before Gate-A source outcome certification and before Gate-B/C outcomes are opened",
+      "reason": "overlapping 8-year connectivity windows induce serial dependence; breakpoint search adds model flexibility; and decline/recovery branch is temporally ordered, so secular timing drift must be separated from branch/path dependence",
+      "outcome_data_inspected": false
+    },
+    "migrant_aggregation_amendment": {
+      "date": "2026-09-27",
+      "basis": "published source Methods, before joined source outcome inspection",
+      "outcome_data_inspected": false
+    },
+    "gate_order_amendment_20260928": {
+      "timing": "after source-access audit but before cue-resource connectivity/reversal outcome and before any focal/partner timing values are opened",
+      "outcome_data_inspected": false,
+      "rationale": "Gate B is defined only on the precommitment cue and destination resource. Requiring migrant/resident timing bytes before that independent environmental gate adds no protection against outcome tuning and unnecessarily couples Gate B to an external MDA access restriction.",
+      "gate_b_environmental_source_requirements": [
+        "precommitment_cue source-faithfully extended and frozen",
+        "destination_resource_state exact file hash/schema/year coverage certified"
+      ],
+      "gate_c_history_source_requirements": [
+        "Gate B passes its frozen reversal and stability criteria",
+        "migrant_timing exact registered archive hash/schema/year coverage certified",
+        "resident_partner_timing exact file hash/schema/year coverage certified"
+      ],
+      "firewall": "resident and migrant timing values remain unopened during Gate B; Gate C remains closed until both history sources are certified",
+      "permitted_state": "Gate B may run while migrant source access is blocked; Gate C may not"
+    },
+    "relevant_source_hashes_required_before_each_gate": true,
+    "gate_b_can_run_without_history_sources": true,
+    "gate_c_requires_all_history_sources": true
   },
   "coordinates": {
     "cue_resource_predictive_connectivity": {
@@ -100,25 +156,53 @@
     "algorithm": "single interior breakpoint minimizing segmented linear SSE",
     "min_segment_years": 6,
     "comparator": "single linear trend",
-    "pass_rule": "segmented AICc <= linear AICc - 4; pre-break slope < 0; post-break slope > 0; post-break endpoint recovers at least 50% of the pre-break-to-break decline",
+    "pass_rule": "segmented AICc <= linear AICc - 4; pre-break slope < 0; post-break slope > 0; post-break endpoint recovers at least 50% of the pre-break-to-break decline; leave-one-history-year-out stability gate passes",
     "fail_state": "NO_CUE_RESOURCE_REVERSAL",
-    "rule": "focal and partner timing are not opened for hysteresis testing if this gate fails"
+    "rule": "focal and partner timing are not opened for hysteresis testing if this gate fails",
+    "aicc_parameter_count": {
+      "linear": 2,
+      "segmented": 5,
+      "segmented_components": "two intercepts + two slopes + selected breakpoint"
+    },
+    "breakpoint_tie_rule": "if candidate segmented AICc values are numerically tied within 1e-12, choose the earlier break year",
+    "serial_dependence_note": "annual connectivity values are overlapping trailing-window estimates; AICc is used only as the predeclared geometry gate, not as an independent-year hypothesis test",
+    "robustness_reporting": "report all leave-one-history-year-out breakpoint, slope-sign and recovery diagnostics",
+    "leave_one_history_year_out_stability_gate": {
+      "required": true,
+      "minimum_fraction_preserving_both_slope_signs": 0.8,
+      "minimum_fraction_breakpoint_within_years_of_full_fit": {
+        "fraction": 0.8,
+        "tolerance_years": 2
+      },
+      "failure_state": "UNSTABLE_CUE_RESOURCE_REVERSAL",
+      "rule": "history test remains closed if the full-sample geometry passes but this stability gate fails"
+    }
   },
   "history_test_if_reversal_passes": {
     "branch_definition": "decline versus recovery branch defined only from the frozen cue-resource connectivity breakpoint",
     "overlap_support": "restrict to the range of predictive-connectivity values observed on both branches",
     "minimum_branch_years": 6,
     "primary_response": "signed pied-flycatcher minus great-tit timing difference",
-    "model": "mismatch ~ centered_connectivity + branch + centered_connectivity:branch",
-    "primary_support": "95% CI for the branch coefficient excludes zero at the mean overlapping connectivity",
-    "secondary_support": "report interaction estimate and CI without changing the primary criterion",
+    "model": "mismatch ~ centered_connectivity + branch + centered_connectivity:branch + centered_year",
+    "primary_support": "HAC(7) 95% CI for the branch coefficient excludes zero at the mean overlapping connectivity after linear calendar-year adjustment",
+    "secondary_support": "report the unadjusted branch model, HAC(2), HC3 and interaction estimates/CIs without changing the primary criterion",
     "interpretation_if_supported": "natural path dependence in resident-migrant seasonal coordination conditional on a recovered information coordinate",
     "interpretation_ceiling": "does not identify the exact Nash mechanism, does not identify a natural rescue seed, and does not establish that either species intentionally acquires the declared temperature cue",
     "primary_history_span": [
       1992,
       2015
     ],
-    "expected_history_years": 24
+    "expected_history_years": 24,
+    "centering": "within the decline/recovery overlap-support subset, center predictive connectivity at its mean and calendar year at its mean before fitting",
+    "covariance": "Newey-West HAC covariance, maxlags=7 (= window_years - 1), finite-sample correction",
+    "no_naive_iid_inference": true,
+    "covariance_rationale": "adjacent 8-year trailing connectivity estimates share seven calendar years, so the primary covariance horizon is frozen at window_years - 1 before Gate-B/C outcomes are opened",
+    "time_trend_guard": {
+      "required": true,
+      "rationale": "decline and recovery branches occur at different calendar times; without an explicit secular-time term, ordinary long-term resident-migrant divergence can masquerade as branch/path dependence",
+      "primary_year_adjustment": "linear centered calendar year",
+      "interpretation_rule": "a branch effect that appears only in the unadjusted model does not support natural path dependence"
+    }
   },
   "forbidden_moves": [
     "do not choose a different African temperature window from the focal or partner timing outcome",
@@ -130,7 +214,9 @@
     "do not redefine a monotonic or one-way connectivity change as recovery hysteresis",
     "do not promote a failed reversal gate to a history test",
     "do not infer a natural singleton rescue species from this analysis",
-    "do not truncate the registered 1985-2015 source overlap after inspecting the cue-resource reversal"
+    "do not truncate the registered 1985-2015 source overlap after inspecting the cue-resource reversal",
+    "do not replace the registered annual arithmetic mean of female nest-building start dates with a median, quantile, first-arrival statistic or model-derived timing coordinate",
+    "do not interpret an unadjusted early-versus-late branch difference as path dependence if the preregistered year-adjusted branch coefficient is unsupported"
   ],
   "relationship_to_prior_negative_lane": {
     "prior_contract": "data/payoff_b_cv24c_cue_driver_contract_20260927.json",
