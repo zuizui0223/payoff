@@ -339,11 +339,22 @@ mismatch increases in early springs.
 Licensed wording: **actual interacting consumer--resource pairs show
 year-to-year phenological response asymmetry that translates into mismatch.**
 
+An independent same-guild bridge reaches the same structural conclusion.
+Across 10 European nest-box schemes, resident blue/great tits respond more
+strongly to spring temperature than migratory pied/collared flycatchers
+(-3.37/-2.84 versus -1.52/-1.54 d/°C), and the flycatcher-minus-tit laying-date
+interval increased by **0.0942 d/year** (SE 0.0293, p=0.0015; Samplonius et
+al. 2018).
+
+Licensed extension: **differential climate sensitivity among overlapping
+resident and migratory birds is associated with increasing phenological
+separation.**
+
 Not licensed: the theoretical delay-cost difference **D2-D1** has been
 measured, the exact **q1 < q <= q2** information-use window has been observed,
 or information distance is the causal mechanism for these pairwise deficits.
 
-This is published bridge evidence, not a new PAYOFF-B discovery.
+These are published bridge results, not new PAYOFF-B discoveries.
 
 ## Prior-art firewall
 
