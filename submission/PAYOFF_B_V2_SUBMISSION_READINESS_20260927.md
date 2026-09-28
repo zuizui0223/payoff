@@ -60,12 +60,17 @@ The inner archive remained byte-identical, confirming deterministic reproduction
 
 PR #178 routes the real registered Aikens result only into canonical V2.
 
-The pipeline supports all four registered outcomes:
+The pipeline supports four scientific result classes:
 
 - PASS;
 - FAIL_WRONG_DIRECTION;
 - FAIL_INSUFFICIENT_SUPPORT;
 - NOT_ESTIMABLE.
+
+It also supports a fifth **external-access render state**, `ACCESS_BLOCKED`.
+This is not a scientific result class and is not currently activated. It may be
+used only after an explicit author decision if the frozen authenticated source
+route remains unavailable; it cannot be relabelled as NOT_ESTIMABLE.
 
 For every class, automated tests require:
 
@@ -138,19 +143,21 @@ environmental values opened = false
 lambda outcome opened = false
 ```
 
-The next execution step therefore requires external credential configuration:
+The preferred next execution step remains external credential configuration:
 
 ```text
 configure APPEEARS_TOKEN
 or configure EARTHDATA_USERNAME + EARTHDATA_PASSWORD
 -> rerun credential preflight
 -> execute the already frozen full AppEEARS / V061 / fixed-24 h workflow
--> classify result
+-> classify one of the four scientific result classes
 -> render Supporting Information only
 -> generate final V2 outcome package
 ```
 
-No scientific tuning is permitted at any stage.
+A separate `ACCESS_BLOCKED` render path now exists for transparent external
+access closure. It is **not activated automatically** and requires an explicit
+author decision; no scientific tuning is permitted in either route.
 
 ## 4. Final journal upload — NOT YET ELIGIBLE
 
