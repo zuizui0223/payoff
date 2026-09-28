@@ -319,8 +319,7 @@ cross-taxon meta-analysis.
 
 The current natural evidence also does not estimate **D2-D1** within a specific
 interacting pair and does not observe the predicted **q1 < q <= q2**
-desynchronization window. The pairwise deadline-difference mechanism remains a
-prospective natural test.
+desynchronization window. The pairwise deadline-difference mechanism remains a prospective natural test.
 
 ## Prior-art firewall
 
