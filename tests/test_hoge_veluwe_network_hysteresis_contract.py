@@ -92,3 +92,15 @@ def test_window_rule_yields_exact_registered_24_year_history_span():
     assert eligible == list(range(1992, 2016))
     assert len(eligible) == 24
 
+def test_gate_b_is_independent_of_history_source_access_before_outcome_opening():
+    c = load_contract()
+    amendment = c["source_gate"]["gate_order_amendment_20260928"]
+    assert amendment["outcome_data_inspected"] is False
+    assert c["source_gate"]["gate_b_can_run_without_history_sources"] is True
+    assert c["source_gate"]["gate_c_requires_all_history_sources"] is True
+    assert amendment["gate_b_environmental_source_requirements"] == [
+        "precommitment_cue source-faithfully extended and frozen",
+        "destination_resource_state exact file hash/schema/year coverage certified",
+    ]
+    assert "resident and migrant timing values remain unopened during Gate B" in amendment["firewall"]
+
