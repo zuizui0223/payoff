@@ -269,6 +269,46 @@ test.
 Licensed wording: the strongest current same-system prospective validation
 failed before the network-history outcome was opened.
 
+### E6 — cross-system information-distance triangulation
+
+A frozen reanalysis of the Usui et al. migratory-bird meta-analysis retains
+944 temperature-response effect rows from 28 studies and 279 species.
+Inverse-variance meta-regression with two-way Study x Species clustered
+uncertainty gives the adjusted long-minus-short migration-distance contrast
+
+    +0.421 d / °C
+    95% CI [+0.135, +0.708]
+    p = 0.0040.
+
+Because more negative slopes mean stronger advancement in warm years,
+long-distance migrants are less temperature-responsive than short-distance
+migrants. The contrast remains positive with a 99th-percentile weight cap
+(+0.417, 95% CI [+0.131, +0.702]) and in an unweighted adjusted fit
+(+0.538, 95% CI [+0.206, +0.871]).
+
+This is a reconstruction of an effect already reported by Usui et al., not a
+new PAYOFF-B discovery.
+
+An independent local-system benchmark reconstructs 1,763 species-level
+temperature slopes from Freimuth et al. The five published group counts and
+rounded means reproduce exactly after three declared taxonomy-name overrides:
+
+- plants: n = 1,438, mean -5.152 d / °C;
+- bees: n = 20, mean -2.024 d / °C;
+- flies: n = 22, mean -3.879 d / °C;
+- butterflies/moths: n = 206, mean -1.848 d / °C;
+- beetles: n = 77, mean -1.706 d / °C.
+
+Licensed wording: **within migratory birds, phenological temperature
+responsiveness weakens with migration distance; independently, local
+plant--pollinator partners show strong but unequal temperature responsiveness.
+Together with E1, these patterns are consistent with an information-distance
+axis.**
+
+Not licensed: a causal pollinator-versus-bird coefficient, a universal
+taxonomic ranking, or a claim that these two sources alone constitute a new
+cross-taxon meta-analysis.
+
 ## Prior-art firewall
 
 PAYOFF-B does not claim novelty for game theory applied to phenology,
