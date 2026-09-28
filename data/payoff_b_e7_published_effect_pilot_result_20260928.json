@@ -3,9 +3,10 @@
   "date": "2026-09-28",
   "status": "SCREEN_COMPLETE_E7_NOT_PROMOTED",
   "provenance": {
-    "workflow_run": 36397661197,
-    "artifact_id": 10958638132,
-    "artifact_name": "payoff-b-e7-published-effect-pilot"
+    "workflow_run": 36398418157,
+    "artifact_id": 10959581086,
+    "artifact_name": "payoff-b-e7-published-effect-pilot",
+    "head_sha": "d91bf4a8a1c2901fcf7f3cfcc9f512a100b9e19c"
   },
   "effect_definition": "|beta_pollinator| - |beta_plant|, days per degree C; negative = plant more temperature-sensitive, positive = pollinator more temperature-sensitive",
   "source_point_estimates": {
