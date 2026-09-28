@@ -134,6 +134,34 @@ def landing_probe(doi: str, expected_names: list[str], session: requests.Session
     return out
 
 
+def download_static_mirrors(mirrors: dict[str, str]) -> tuple[list[tuple[str, bytes, str]], dict]:
+    out = []
+    diag = {"files": {}}
+    for name, link in (mirrors or {}).items():
+        row = {"url": link}
+        try:
+            rr = requests.get(
+                link,
+                timeout=180,
+                allow_redirects=True,
+                headers={"User-Agent": "Mozilla/5.0"},
+            )
+            row["status_code"] = rr.status_code
+            row["content_type"] = rr.headers.get("content-type")
+            row["final_url"] = rr.url
+            rr.raise_for_status()
+            row["bytes"] = len(rr.content)
+            if looks_like_html(rr.content, rr.headers.get("content-type")):
+                row["rejected_html"] = True
+            else:
+                row["rejected_html"] = False
+                out.append((Path(name).name, rr.content, link))
+        except Exception as e:
+            row["error"] = repr(e)
+        diag["files"][name] = row
+    return out, diag
+
+
 def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[str, bytes, str]], dict]:
     encoded = urllib.parse.quote("doi:" + doi, safe="")
     url = API.format(doi=encoded)
@@ -317,7 +345,15 @@ def main() -> None:
         entry = {"doi": doi, "files": []}
         try:
             expected_names = list(src.get("data_files") or [])
-            files, diagnostics = download_dataset(doi, expected_names)
+            static_mirrors = dict(src.get("static_mirror_files") or {})
+            files = []
+            diagnostics = {}
+            if static_mirrors:
+                files, mirror_diag = download_static_mirrors(static_mirrors)
+                diagnostics["static_mirrors"] = mirror_diag
+            if not files and doi.startswith("10.5061/"):
+                files, dryad_diag = download_dataset(doi, expected_names)
+                diagnostics["dryad"] = dryad_diag
             entry["diagnostics"] = diagnostics
             for name, data, route in files:
                 row = {
