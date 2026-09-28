@@ -1,8 +1,8 @@
 # PAYOFF-B cross-system empirical lane: local pollinators versus migratory birds
 
 Date: **2026-09-28**  
-Status: **source bytes pinned; source-export semantics corrected; execution running**  
-Role: candidate empirical generality lane for Paper 2. It does **not** yet change the canonical manuscript or claim ceiling.
+Status: **promotion gate passed; frozen as Paper 2 E6 empirical triangulation**  
+Role: canonical E6 empirical-generalization lane for Paper 2; the causal claim ceiling remains unchanged.
 
 ## Why this lane exists
 
@@ -114,9 +114,9 @@ Kharouba et al. (2018) provide a useful 54-interaction global synchrony database
 
 ## Decision for Paper 2
 
-This lane is worth developing because it fixes the clearest current imbalance: **the theory is multi-taxon but the natural evidence is mostly birds**.
+This lane passed its promotion gate and fixes the clearest prior imbalance: **the theory is multi-taxon but the natural evidence was mostly birds**.
 
-The expected manuscript role, if reconstruction passes, is one compact ecological paragraph or supplementary panel:
+The manuscript role is one compact ecological result plus supplementary provenance:
 
 > Local plant--pollinator systems show strong climate-linked shifts in phenology and synchrony, while within migratory birds phenological responsiveness weakens with migration distance. Together with PAYOFF-B's predictive-connectivity result, this is consistent with an information-distance interpretation, without implying a universal taxonomic ranking.
 
