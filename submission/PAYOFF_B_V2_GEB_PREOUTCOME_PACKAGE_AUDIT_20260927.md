@@ -19,7 +19,7 @@ reuse the superseded temporal-buffering V1 GEB overlay.
 
 ```text
 structured_abstract_words = 246
-main_body_words = 4242
+main_body_words = 4298
 references = 14
 display_pieces = 7
 keywords = 8
@@ -72,32 +72,32 @@ Figure panels in the V2 renderer use lower-case journal-style panel labels.
 ## Frozen build provenance
 
 ```text
-workflow_run = 36373701023
+workflow_run = 36370295430
 workflow_run_attempt = 1
-validated_head = 8f3db1a59a44bd5f8c8fcef7f594a6a159ae3f81
+validated_head = a518a4a4ca6bab3b05b3c1f87d2055a332c5ed08
 workflow_conclusion = success
 
-artifact_id = 10950426432
+artifact_id = 10949330110
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-f088c8675f4d0dc98b7e7314b9c1486d76d71f3d64c6cd5b1ef74eabd8167897
+0146afe2d091f951c7d5b9dd6b0afab853c70f977fce51729faf4fbd768127fb
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
+262c6f1d5fdee798db5c2a8bc60b81ef05f480da70eb9de3d93de67de49c585f
 ```
 
 Deterministic reproduction check:
 
 ```text
-reproduction_workflow_run = 36373701023
+reproduction_workflow_run = 36370295430
 reproduction_run_attempt = 2
 reproduction_head = a518a4a4ca6bab3b05b3c1f87d2055a332c5ed08
-reproduction_artifact_id = 10950137051
+reproduction_artifact_id = 10949105921
 reproduction_artifact_sha256 =
-1d84fb3b8ecba2001cc6ac6846051cb8b99d7202863ced82d533d2863dfd9b4a
+94527f1d47d6ad544e6c79ade914960922e198262dbdf2bf70a4fd09b3d72ca3
 reproduction_inner_zip_sha256 =
-07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
+262c6f1d5fdee798db5c2a8bc60b81ef05f480da70eb9de3d93de67de49c585f
 deterministic_inner_archive = PASS
 package_file_count = 17
 ```

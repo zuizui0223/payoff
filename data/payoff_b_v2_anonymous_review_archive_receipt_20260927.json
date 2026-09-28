@@ -6,17 +6,17 @@
   "merged_pr": 180,
   "merge_commit": "8cbcd6f22b925d09651fe3140268a70cd9c4c301",
   "workflow": {
-    "run_id": 36373701013,
+    "run_id": 36370295435,
     "run_attempt": 1,
-    "head_sha": "8f3db1a59a44bd5f8c8fcef7f594a6a159ae3f81",
+    "head_sha": "a518a4a4ca6bab3b05b3c1f87d2055a332c5ed08",
     "conclusion": "success",
-    "artifact_id": 10950371707,
+    "artifact_id": 10948908201,
     "artifact_name": "payoff-b-v2-anonymous-review-archive",
-    "artifact_sha256": "182315c6b309310704713bdd111e8692d86e97c043f39dc6d937c70e1d01d8f5"
+    "artifact_sha256": "cb1a090d6d2ace3ec54f72aba0a58e4dbd3a7e1348907214879529909e66fd4e"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_ANON_REVIEW.zip",
-    "sha256": "163f7fb722cb4f0a1abfd0019639a91bd78da1ee373883dd3360c1e62d03b457"
+    "sha256": "6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf"
   },
   "contents": {
     "file_count": 70,
@@ -34,14 +34,14 @@
     "review archive includes frozen Hoge Veluwe Gate-A/Gate-B code and negative result receipts"
   ],
   "delivery_state": "PENDING_ANONYMOUS_CHANNEL",
-  "latest_science_update_pr": 194,
+  "latest_science_update_pr": 191,
   "reproduction": {
-    "run_id": 36373701013,
+    "run_id": 36370295435,
     "run_attempt": 2,
-    "head_sha": "8f3db1a59a44bd5f8c8fcef7f594a6a159ae3f81",
-    "artifact_id": 10950421568,
-    "artifact_sha256": "dc8c0b1373823a8263a1ad32881b87f37dbbf7ef3e0d2eb70179947894ed0d31",
-    "inner_archive_sha256": "163f7fb722cb4f0a1abfd0019639a91bd78da1ee373883dd3360c1e62d03b457",
+    "head_sha": "a518a4a4ca6bab3b05b3c1f87d2055a332c5ed08",
+    "artifact_id": 10948993094,
+    "artifact_sha256": "24f3a7ee1e4b15f5cafea6e50cf1f48dbaf9bfaf97f65bfd535c6a4b728841cd",
+    "inner_archive_sha256": "6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf",
     "deterministic_inner_archive": true
   },
   "latest_build_date": "2026-09-28"

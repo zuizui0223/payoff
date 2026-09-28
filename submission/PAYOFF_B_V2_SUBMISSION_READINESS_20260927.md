@@ -24,7 +24,7 @@ The canonical V2 GEB package has passed all hard gates.
 
 ```text
 structured abstract = 246 words
-main body = 4,242 words
+main body = 4,298 words
 references = 14
 display pieces = 7
 keywords = 8
@@ -37,21 +37,21 @@ package files = 17
 Frozen package:
 
 ```text
-workflow run = 36373701023 (attempt 1)
-artifact = 10950426432
+workflow run = 36370295430 (attempt 1)
+artifact = 10949330110
 artifact digest =
-f088c8675f4d0dc98b7e7314b9c1486d76d71f3d64c6cd5b1ef74eabd8167897
+0146afe2d091f951c7d5b9dd6b0afab853c70f977fce51729faf4fbd768127fb
 
 inner deterministic ZIP SHA256 =
-07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
+262c6f1d5fdee798db5c2a8bc60b81ef05f480da70eb9de3d93de67de49c585f
 ```
 
 The declarations-inclusive package was rerun from the same frozen head in
-workflow run 36373701023 (attempt 2; artifact 10950137051). The deterministic
+workflow run 36370295430 (attempt 2; artifact 10949105921). The deterministic
 inner ZIP remained byte-identical:
 
 ```text
-07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
+262c6f1d5fdee798db5c2a8bc60b81ef05f480da70eb9de3d93de67de49c585f
 ```
 
 The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
@@ -60,12 +60,17 @@ The inner archive remained byte-identical, confirming deterministic reproduction
 
 PR #178 routes the real registered Aikens result only into canonical V2.
 
-The pipeline supports all four registered outcomes:
+The pipeline supports four scientific result classes:
 
 - PASS;
 - FAIL_WRONG_DIRECTION;
 - FAIL_INSUFFICIENT_SUPPORT;
 - NOT_ESTIMABLE.
+
+It also supports a fifth **external-access render state**, `ACCESS_BLOCKED`.
+This is not a scientific result class and is not currently activated. It may be
+used only after an explicit author decision if the frozen authenticated source
+route remains unavailable; it cannot be relabelled as NOT_ESTIMABLE.
 
 For every class, automated tests require:
 
@@ -79,11 +84,9 @@ retuning = forbidden
 Validated CI:
 
 ```text
-V2 package CI = 36374080499 — success
-environment CI = 36374080474 — success
-full repository CI = 36374080487 — success
-named lambda estimator gate = 20 passed / 0 skipped
-empirical full suite = 2009 passed / 1 skipped
+V2 package CI = 36312188417 — success
+environment CI = 36312188377 — success
+full repository CI = 36312188416 — success
 ```
 
 Thus the postoutcome pipeline is **READY_UNOPENED**, not
@@ -95,22 +98,22 @@ A deterministic PREOUTCOME reviewer archive has been built from the canonical
 claim-ceiling V2 source.
 
 ```text
-workflow run = 36373701013
-artifact = 10950371707
+workflow run = 36370295435
+artifact = 10948908201
 artifact digest =
-182315c6b309310704713bdd111e8692d86e97c043f39dc6d937c70e1d01d8f5
+cb1a090d6d2ace3ec54f72aba0a58e4dbd3a7e1348907214879529909e66fd4e
 
 inner reviewer ZIP SHA256 =
-163f7fb722cb4f0a1abfd0019639a91bd78da1ee373883dd3360c1e62d03b457
+6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf
 
 files = 70
 Python source closure = 26
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
-reviewer archive reproduction run = 36373701013
-reviewer archive reproduction artifact = 10950421568
-reviewer archive deterministic inner SHA256 = 163f7fb722cb4f0a1abfd0019639a91bd78da1ee373883dd3360c1e62d03b457
+reviewer archive reproduction run = 36370295435
+reviewer archive reproduction artifact = 10948993094
+reviewer archive deterministic inner SHA256 = 6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
@@ -140,19 +143,21 @@ environmental values opened = false
 lambda outcome opened = false
 ```
 
-The next execution step therefore requires external credential configuration:
+The preferred next execution step remains external credential configuration:
 
 ```text
 configure APPEEARS_TOKEN
 or configure EARTHDATA_USERNAME + EARTHDATA_PASSWORD
 -> rerun credential preflight
 -> execute the already frozen full AppEEARS / V061 / fixed-24 h workflow
--> classify result
+-> classify one of the four scientific result classes
 -> render Supporting Information only
 -> generate final V2 outcome package
 ```
 
-No scientific tuning is permitted at any stage.
+A separate `ACCESS_BLOCKED` render path now exists for transparent external
+access closure. It is **not activated automatically** and requires an explicit
+author decision; no scientific tuning is permitted in either route.
 
 ## 4. Final journal upload — NOT YET ELIGIBLE
 

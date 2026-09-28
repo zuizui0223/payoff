@@ -36,6 +36,22 @@ def pass_payload() -> dict:
     }
 
 
+def access_blocked_payload() -> dict:
+    return {
+        "status": "phase_retention_contrast_access_blocked",
+        "reason_code": "CREDENTIALS_NOT_CONFIGURED",
+        "credential_preflight": {
+            "date": "2026-09-28",
+            "workflow_run": 36372973062,
+            "artifact_id": 10950280495,
+            "configured": False,
+            "credential_route": "none",
+            "environmental_values_opened": False,
+            "lambda_outcome_opened": False,
+        },
+    }
+
+
 def test_preoutcome_reviewer_archive_is_anonymous_and_complete(tmp_path: Path):
     module = load_module()
     out = tmp_path / "review"
@@ -121,3 +137,40 @@ def test_archive_excludes_internal_publication_state_and_author_metadata(tmp_pat
         "submission/GEB_V2_COVER_LETTER_PREOUTCOME.md",
     }
     assert paths.isdisjoint(forbidden_paths)
+
+def test_access_blocked_reviewer_archive_is_explicit_and_noninferential(
+    tmp_path: Path,
+):
+    module = load_module()
+    result = tmp_path / "access_blocked.json"
+    result.write_text(
+        json.dumps(access_blocked_payload(), indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    out = tmp_path / "blocked"
+    manifest = module.build(
+        out,
+        zip_path=tmp_path / "blocked.zip",
+        result_json=result,
+    )
+
+    assert manifest["outcome_rendered"] is True
+    si = (
+        out
+        / "supporting_information"
+        / "GEB_V2_SUPPORTING_INFORMATION.md"
+    ).read_text(encoding="utf-8")
+    claim = json.loads(
+        (out / "registered_result" / "claim_state.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert "Registered result class: ACCESS_BLOCKED" in si
+    assert "not executed" in si
+    assert claim["scientific_result"] == "ACCESS_BLOCKED"
+    assert claim["executed"] is False
+    assert claim["estimable"] is False
+    assert claim["access_blocked"] is True
+    assert claim["retuning_permitted"] is False
+

@@ -29,6 +29,9 @@ def test_publication_status_routes_v2_to_geb_without_inheriting_v1_pipeline_read
     assert "LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT_RUN = 36372973062" in text
     assert "LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT_ARTIFACT = 10950280495" in text
     assert "CURRENT_CREDENTIAL_STATE = NOT_CONFIGURED_CONFIRMED_2026-09-28" in text
+    assert "ACCESS_BLOCKED" in text
+    assert "not a scientific result" in text
+    assert "explicit author decision" in text
 
 
 def test_authenticated_aikens_workflow_builds_canonical_v2_outcome_package() -> None:
