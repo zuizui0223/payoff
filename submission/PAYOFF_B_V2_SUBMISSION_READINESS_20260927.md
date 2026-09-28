@@ -23,9 +23,9 @@ Research Article
 The canonical V2 GEB package has passed all hard gates.
 
 ```text
-structured abstract = 246 words
-main body = 4,242 words
-references = 14
+structured abstract = 272 words
+main body = 4,633 words
+references = 16
 display pieces = 7
 keywords = 8
 running title = 38 characters
@@ -37,21 +37,21 @@ package files = 17
 Frozen package:
 
 ```text
-workflow run = 36374436480 (attempt 1)
-artifact = 10950726054
+workflow run = 36390286034 (attempt 1)
+artifact = 10955892924
 artifact digest =
-81e9b9383895193073c701e2ca63678a830ff1a619911f0f30a80f4d26000cab
+66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa
 
 inner deterministic ZIP SHA256 =
-07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
+31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
 ```
 
 The declarations-inclusive package was rerun from the same frozen head in
-workflow run 36374436480 (attempt 2; artifact 10950107881). The deterministic
+workflow run 36390286034 (attempt 2; artifact 10956526561). The deterministic
 inner ZIP remained byte-identical:
 
 ```text
-07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
+31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
 ```
 
 The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
@@ -101,22 +101,22 @@ A deterministic PREOUTCOME reviewer archive has been built from the canonical
 claim-ceiling V2 source.
 
 ```text
-workflow run = 36374436474
-artifact = 10949304838
+workflow run = 36390286021
+artifact = 10956570331
 artifact digest =
-4caf4a1dc083d2f4ec0212730c0cb76ef22d7f6fa11f4f52731b796601f3aeda
+3945c71f7c8e00521cb8a7d9a5793a8b0b688d3d27d58914a9d3decd72d1acba
 
 inner reviewer ZIP SHA256 =
-a933bc428ab9e6577536c381e493b565aadb88235b164713ce546509b698d960
+d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec
 
-files = 71
-Python source closure = 26
+files = 74
+Python source closure = 27
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
-reviewer archive reproduction run = 36374436474
-reviewer archive reproduction artifact = 10950815667
-reviewer archive deterministic inner SHA256 = a933bc428ab9e6577536c381e493b565aadb88235b164713ce546509b698d960
+reviewer archive reproduction run = 36390286021
+reviewer archive reproduction artifact = 10956531442
+reviewer archive deterministic inner SHA256 = d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
@@ -130,9 +130,9 @@ submission-state receipt:
 
 ```text
 ACCESS_BLOCKED reviewer ZIP SHA256 =
-d11c518c3eb5499f85e99f1cf7125e067745b211b5da764b8d961c930460151c
+6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75
 
-workflow run = 36381284351
+workflow run = 36390286108
 deterministic reproduction = PASS
 ```
 
@@ -171,22 +171,22 @@ original preregistration = remains binding
 ```
 
 The deterministic ACCESS_BLOCKED submission package was built in workflow
-`36381284351` from head `ac63cac9fd2b76946628304f98f81763804c89b2`.
+`36390286108` from head `7bcaaef50407f06a0624ec7e6931decffbfc664d`.
 
 ```text
-attempt 1 artifact = 10952901983
+attempt 1 artifact = 10956335888
 attempt 1 artifact digest =
-2344d57ba082510004c1c9b8251a5c704b8265209e22226eacaf9643b4703f59
+1c6041c9c26d849eb3d2b856fe50875acb2ee13dff0feca5e719d096463fb5ff
 
 GEB inner ZIP SHA256 =
-c4d96db3bda99fb68b475504dcdf1e0072264e6e4e4cb7435d51979111c40e8b
+3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd
 
 outcome reviewer ZIP SHA256 =
-d11c518c3eb5499f85e99f1cf7125e067745b211b5da764b8d961c930460151c
+6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75
 
-attempt 2 artifact = 10952483251
+attempt 2 artifact = 10955883655
 attempt 2 artifact digest =
-fd49a351cc46d95fd275874425ac7acb6919f48d08d4d7995847ac922c33f4e4
+9e6194e02484bc95d651ff7b01a34b6dd11d3e12e143c852ad7490c588808a67
 
 deterministic inner archives = PASS
 ```
@@ -220,6 +220,12 @@ Natural evidence currently provides:
 
 - pooled, dependence-sensitive support for predictive connectivity across
   migratory birds;
+- E6 cross-system information-distance triangulation: the 944-effect
+  migration meta-regression gives an adjusted long-minus-short response of
+  +0.421 d/°C (95% CI +0.121 to +0.722, p=0.0077; 28/28 leave-one-study-out
+  fits positive), while the independent 1,763-species plant–pollinator
+  benchmark reproduces all five published group means. This is not a causal
+  taxon ranking or a new two-source cross-taxon meta-analysis;
 - a decision-time cue-availability anchor from the pied-flycatcher experiment;
 - a registered wigeon predictive-connectivity controller null;
 - a negative long-term cue-driver decline–recovery gate;

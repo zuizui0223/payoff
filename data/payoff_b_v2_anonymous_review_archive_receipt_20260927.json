@@ -3,24 +3,24 @@
   "date": "2026-09-27",
   "status": "READY_PREOUTCOME",
   "canonical_science_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
-  "merged_pr": 180,
-  "merge_commit": "8cbcd6f22b925d09651fe3140268a70cd9c4c301",
+  "merged_pr": 196,
+  "merge_commit": "09b9561e994d79fe16c3f663fda3ecec8b3a61e8",
   "workflow": {
-    "run_id": 36374436474,
+    "run_id": 36390286021,
     "run_attempt": 1,
-    "head_sha": "f59bda34a4b8e13bef128b6f4632f3f6cae18543",
+    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
     "conclusion": "success",
-    "artifact_id": 10949304838,
+    "artifact_id": 10956570331,
     "artifact_name": "payoff-b-v2-anonymous-review-archive",
-    "artifact_sha256": "4caf4a1dc083d2f4ec0212730c0cb76ef22d7f6fa11f4f52731b796601f3aeda"
+    "artifact_sha256": "3945c71f7c8e00521cb8a7d9a5793a8b0b688d3d27d58914a9d3decd72d1acba"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_ANON_REVIEW.zip",
-    "sha256": "a933bc428ab9e6577536c381e493b565aadb88235b164713ce546509b698d960"
+    "sha256": "d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec"
   },
   "contents": {
-    "file_count": 71,
-    "python_source_count": 26,
+    "file_count": 74,
+    "python_source_count": 27,
     "figure_count": 7,
     "identity_scan_passed": true,
     "raw_empirical_data_redistributed": false
@@ -31,17 +31,18 @@
     "natural network hysteresis is not claimed",
     "natural singleton rescue species is not identified",
     "reviewer archive construction is complete; anonymous delivery channel remains external",
-    "review archive includes frozen Hoge Veluwe Gate-A/Gate-B code and negative result receipts"
+    "review archive includes frozen Hoge Veluwe Gate-A/Gate-B code and negative result receipts",
+    "review archive includes E6 cross-system information-distance contract, result receipt and analysis code"
   ],
   "delivery_state": "PENDING_ANONYMOUS_CHANNEL",
-  "latest_science_update_pr": 194,
+  "latest_science_update_pr": 196,
   "reproduction": {
-    "run_id": 36374436474,
+    "run_id": 36390286021,
     "run_attempt": 2,
-    "head_sha": "f59bda34a4b8e13bef128b6f4632f3f6cae18543",
-    "artifact_id": 10950815667,
-    "artifact_sha256": "f84de758337cf1e55f7f37b09185d3c184eb2ba0db0539c6ab478b24cb14d12c",
-    "inner_archive_sha256": "a933bc428ab9e6577536c381e493b565aadb88235b164713ce546509b698d960",
+    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
+    "artifact_id": 10956531442,
+    "artifact_sha256": "c121570418b53a4d71d9958df91eff7802c12520d8bda3584f230baaa4101375",
+    "inner_archive_sha256": "d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec",
     "deterministic_inner_archive": true
   },
   "latest_build_date": "2026-09-28"

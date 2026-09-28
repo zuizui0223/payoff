@@ -7,22 +7,22 @@
   "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "v1_status": "FROZEN_PROVENANCE_ONLY",
   "workflow": {
-    "run_id": 36374436480,
+    "run_id": 36390286034,
     "run_attempt": 1,
-    "head_sha": "f59bda34a4b8e13bef128b6f4632f3f6cae18543",
+    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
     "conclusion": "success",
-    "artifact_id": 10950726054,
+    "artifact_id": 10955892924,
     "artifact_name": "payoff-b-v2-geb-preoutcome-package",
-    "artifact_sha256": "81e9b9383895193073c701e2ca63678a830ff1a619911f0f30a80f4d26000cab"
+    "artifact_sha256": "66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip",
-    "sha256": "07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c"
+    "sha256": "31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5"
   },
   "audited_metrics": {
-    "structured_abstract_words": 246,
-    "main_body_words": 4242,
-    "references": 14,
+    "structured_abstract_words": 272,
+    "main_body_words": 4633,
+    "references": 16,
     "display_pieces": 7,
     "keywords": 8,
     "running_title_chars": 38,
@@ -74,13 +74,18 @@
   ],
   "package_file_count": 17,
   "reproduction": {
-    "run_id": 36374436480,
+    "run_id": 36390286034,
     "run_attempt": 2,
-    "head_sha": "f59bda34a4b8e13bef128b6f4632f3f6cae18543",
-    "artifact_id": 10950107881,
-    "artifact_sha256": "11f0bfc8fcf28a071380ef9e18bc965d4151378a341b51e6a2335cf0bd527731",
-    "inner_archive_sha256": "07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c",
+    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
+    "artifact_id": 10956526561,
+    "artifact_sha256": "2c3b34d786bf702447285378653fcaaf3975cbff37bccfd80c2b5f8032a3ba35",
+    "inner_archive_sha256": "31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5",
     "deterministic_inner_archive": true
   },
-  "latest_audit_date": "2026-09-28"
+  "latest_audit_date": "2026-09-28",
+  "science_update": {
+    "merged_pr": 196,
+    "merge_commit": "09b9561e994d79fe16c3f663fda3ecec8b3a61e8",
+    "role": "E6 cross-system information-distance evidence"
+  }
 }
