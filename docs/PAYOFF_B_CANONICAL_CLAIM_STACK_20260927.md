@@ -295,9 +295,7 @@ new PAYOFF-B discovery.
 
 Photoperiodic and endogenous migration programmes are retained as a
 non-exclusive alternative explanation for weaker short-term temperature
-responsiveness in long-distance migrants. E6 therefore does **not** causally
-identify information distance; endogenous control may itself contribute to, or
-covary with, early commitment.
+responsiveness in long-distance migrants. E6 therefore does **not** causally identify information distance; endogenous control may itself contribute to, or covary with, early commitment.
 
 An independent local-system benchmark reconstructs 1,763 species-level
 temperature slopes from Freimuth et al. The five published group counts and
