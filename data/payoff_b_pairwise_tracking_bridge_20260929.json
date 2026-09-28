@@ -93,18 +93,52 @@
     "pied_flycatcher_has_shallowest_tracking_slope": true,
     "no_evidence_for_latitudinal_bird_caterpillar_mismatch_trend": true
   },
-  "licensed_interpretation": "In three real bird-caterpillar interactions, consumer phenology tracks year-to-year resource phenology incompletely; the pairwise response disparity converts earlier resource years into larger timing mismatch. This is interaction-level evidence for response-asymmetry-to-mismatch, not a direct estimate of information-deadline difference.",
+  "licensed_interpretation": "Across two independent published interaction settings, phenological response asymmetry among actual ecological partners translates into changing relative timing: bird-caterpillar mismatch increases in early springs, and resident-tit/migratory-flycatcher laying intervals diverge as their climate sensitivities differ. This supports response-asymmetry-to-mismatch, not a direct estimate of information-deadline difference.",
   "not_licensed": [
     "the theoretical delay-cost difference D2-D1 has been measured",
     "the q1 < q <= q2 asynchronous information-use window has been observed",
     "information distance is the causal mechanism for the pairwise tracking deficits",
     "pied flycatchers are more mismatched because of migration distance alone",
-    "the published Burgess pattern is a new PAYOFF-B discovery"
+    "the published Burgess pattern is a new PAYOFF-B discovery",
+    "the resident-migrant interval divergence identifies competition, social information, migration constraint, endogenous timing, or deadline costs as the causal mechanism"
   ],
   "manuscript_decision": {
     "abstract_change": false,
     "figure_change": false,
     "section_4_6_bridge": true,
-    "claim_ceiling": "PAIRWISE_RESPONSE_DISPARITY_SUPPORTED_DEADLINE_MECHANISM_PROSPECTIVE"
+    "claim_ceiling": "TWO_INDEPENDENT_PAIRWISE_RESPONSE_DISPARITY_BRIDGES_SUPPORTED_DEADLINE_MECHANISM_PROSPECTIVE"
+  },
+  "same_guild_resident_migrant_bridge": {
+    "citation": "Samplonius JM et al. 2018. Phenological sensitivity to climate change is higher in resident than in migrant bird populations among European cavity breeders. Global Change Biology 24:3780-3790.",
+    "doi": "10.1111/gcb.14160",
+    "design": "10 European nest-box schemes, 1991-2015, each with at least one resident tit species and one migratory flycatcher species",
+    "temperature_slopes_days_per_C": {
+      "blue_tit": -3.37,
+      "great_tit": -2.84,
+      "pied_flycatcher": -1.52,
+      "collared_flycatcher": -1.54
+    },
+    "model_anchors": {
+      "blue_tit_temperature_estimate": -3.37,
+      "blue_tit_temperature_se": 0.36,
+      "great_tit_temperature_interaction_vs_blue": 0.53,
+      "great_tit_interaction_se": 0.39,
+      "pied_flycatcher_temperature_interaction_vs_blue": 1.85,
+      "pied_flycatcher_interaction_se": 0.38,
+      "collared_flycatcher_temperature_interaction_vs_blue": 1.83,
+      "collared_flycatcher_interaction_se": 0.43
+    },
+    "interval_model": {
+      "flycatcher_minus_tit_laying_interval_year_effect_days_per_year": 0.0942,
+      "se": 0.0293,
+      "p": 0.0015,
+      "equivalent_days_per_decade": 0.942,
+      "species_specific_temperature_difference_effect": -1.759,
+      "species_specific_temperature_difference_se": 0.347,
+      "species_specific_temperature_difference_p": 0.002
+    },
+    "interaction_context": "resident tits and migratory flycatchers overlap in nest-site competition, diet, and social-information ecology",
+    "published_interpretation": "resident tits were about twice as temperature-sensitive as migratory flycatchers, and differential climate sensitivity was associated with increasing phenological separation",
+    "uncertainty_boundary": "published source result only; PAYOFF-B does not reconstruct raw multi-site data or identify competition, social information, migration constraint, photoperiodic/endogenous control, or deadline costs as the causal pathway"
   }
 }
