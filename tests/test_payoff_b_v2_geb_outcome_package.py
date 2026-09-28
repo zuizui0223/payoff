@@ -249,3 +249,33 @@ def test_outcome_zip_is_deterministic_for_same_registered_result(tmp_path: Path)
     outcome.build(result_json, tmp_path / "two", z2)
 
     assert outcome.sha256(z1) == outcome.sha256(z2)
+
+def test_activated_access_blocked_clears_author_decision_science_blocker(tmp_path: Path):
+    state = ROOT / "data" / "aikens2022_access_blocked_submission_state_20260928.json"
+    payload_data = json.loads(state.read_text(encoding="utf-8"))
+    assert payload_data["author_decision"]["decision"] == "SUBMIT_WITH_ACCESS_BLOCKED"
+    assert payload_data["author_decision"]["scientific_result_claimed"] is False
+    assert payload_data["author_decision"]["future_authenticated_execution_permitted"] is True
+
+    out = tmp_path / "activated_access_blocked"
+    zip_path = tmp_path / "activated_access_blocked.zip"
+    manifest = outcome.build(state, out, zip_path)
+
+    assert manifest["scientific_result"] == "ACCESS_BLOCKED"
+    assert manifest["scientific_state"] == "OUTCOME_RENDERED_ACCESS_BLOCKED"
+    assert manifest["access_blocked_author_decision_frozen"] is True
+    assert manifest["final_science_blocker"] is None
+    assert "author decision on registered Aikens ACCESS_BLOCKED state" not in manifest["remaining_portal_blockers"]
+    assert manifest["registered_result_frozen"] is False
+    assert manifest["registered_scientific_result_available"] is False
+    assert manifest["aikens_outcome_opened"] is False
+
+    claim = json.loads(
+        (out / "GEB_V2_AIKENS_CLAIM_STATE.json").read_text(encoding="utf-8")
+    )
+    assert claim["scientific_result"] == "ACCESS_BLOCKED"
+    assert claim["author_decision_frozen"] is True
+    assert claim["author_decision"] == "SUBMIT_WITH_ACCESS_BLOCKED"
+    assert claim["future_authenticated_execution_permitted"] is True
+    assert claim["original_registration_remains_binding"] is True
+
