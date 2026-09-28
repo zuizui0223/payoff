@@ -424,7 +424,7 @@ def figure5():
             12,
             "bold",
         ),
-        text(72, 370, "944 effects; 28 studies; 279 species", 12),
+        text(72, 142, "944 effects; 28 studies; 279 species", 12),
     ]
 
     # Panel b: independent local plant-pollinator benchmark.
@@ -454,7 +454,7 @@ def figure5():
         out += [line(x, baxis, x, baxis + 6), text(x, baxis + 24, str(tick), 11, anchor="middle")]
     out += [
         text(965, 405, "temperature response (days / °C)", 12, anchor="middle"),
-        text(650, 385, "1,763 species; Germany, 1980–2020", 12),
+        text(650, 142, "1,763 species; Germany, 1980–2020", 12),
     ]
 
     # Panel c: information timing and post-error correction remain distinct.
