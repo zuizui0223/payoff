@@ -525,31 +525,11 @@ The predicted negative interaction is not supported.
 
 This null is informative because it separates two functions of information. Predictive connectivity may influence which action or timing regime is chosen before error appears without acting as a universal amplifier of correction after error has already appeared.
 
-### 3.4 Two preregistered natural reversal gates were negative
+### 3.4 Two preregistered natural reversal gates did not license a hysteresis test
 
-A preregistered 1980–2010 Hoge Veluwe lane first combined published annual standardized selection gradients with a fixed Ivory Coast NCEP temperature cue. Its rolling cue–driver relationship was highly nonstationary, but the registered decline–recovery geometry failed because the fitted pre-break slope was positive rather than negative. The frozen outcome was
+Two long-term gates were preregistered to ask whether a natural environmental-information coordinate first showed the decline→recovery geometry required before any network-history claim could be opened. The first, linking a fixed Ivory Coast temperature cue to annual pied-flycatcher selection gradients, returned \texttt{NO\_CUE\_DRIVER\_REVERSAL}. A second, closer same-system gate linked the same fixed cue to independently archived Hoge Veluwe caterpillar-peak dates over 24 registered predictive-connectivity years (1992–2015). That gate also failed the preregistered negative-then-positive reversal geometry and returned \texttt{NO\_CUE\_RESOURCE\_REVERSAL}.
 
-[
-\texttt{NO\_CUE\_DRIVER\_REVERSAL}.
-]
-
-We then preregistered a closer same-system environmental gate before opening resident–migrant timing history. The fixed Ivory Coast cue was paired with independently archived annual Hoge Veluwe caterpillar-peak dates from the long-term great-tit system (Visser et al., 2021), using 24 trailing-window predictive-connectivity estimates for 1992–2015. A two-segment fit improved AICc relative to one line by 10.81 units and selected a 1999 breakpoint, but the fitted slopes were positive both before and after the breakpoint:
-
-[
-\hat\beta_{pre}=+0.228,
-\qquad
-\hat\beta_{post}=+0.027.
-]
-
-The frozen outcome was therefore
-
-[
-\texttt{NO\_CUE\_RESOURCE\_REVERSAL}.
-]
-
-Because the environmental reversal prerequisite failed, the resident–migrant history test was not opened and neither pied-flycatcher nor great-tit timing was joined into a hysteresis analysis.
-
-PAYOFF-B therefore does not claim to have observed natural information-recovery hysteresis in this system.
+Because the environmental prerequisite failed, the resident–migrant history test remained unopened: pied-flycatcher and great-tit timing were not joined into a hysteresis analysis. Full breakpoint, slope and source-provenance diagnostics are retained in Supporting Information and frozen receipts. PAYOFF-B therefore does not claim a natural information-recovery hysteresis event.
 
 ### 3.5 Capacity remains a distinct failure mode
 
