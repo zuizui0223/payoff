@@ -28,10 +28,11 @@ def safe_name(name: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]+", "_", name)
 
 
-def landing_probe(doi: str, expected_names: list[str]) -> dict:
+def landing_probe(doi: str, expected_names: list[str], session: requests.Session | None = None) -> dict:
     encoded = urllib.parse.quote("doi:" + doi, safe="")
     url = "https://datadryad.org/dataset/" + encoded
-    r = requests.get(url, timeout=120, allow_redirects=True)
+    client = session or requests.Session()
+    r = client.get(url, timeout=120, allow_redirects=True)
     out = {
         "url": r.url,
         "status_code": r.status_code,
@@ -73,9 +74,14 @@ def landing_probe(doi: str, expected_names: list[str]) -> dict:
 def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[str, bytes, str]], dict]:
     encoded = urllib.parse.quote("doi:" + doi, safe="")
     url = API.format(doi=encoded)
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+    })
     diagnostics = {"api_url": url}
     try:
-        r = requests.get(url, timeout=120, allow_redirects=True)
+        r = session.get(url, timeout=120, allow_redirects=True)
         diagnostics["api_status_code"] = r.status_code
         diagnostics["api_content_type"] = r.headers.get("content-type")
         r.raise_for_status()
@@ -104,7 +110,7 @@ def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[st
                 continue
             if link.startswith("/"):
                 link = "https://datadryad.org" + link
-            rr = requests.get(link, timeout=120, allow_redirects=True)
+            rr = session.get(link, timeout=120, allow_redirects=True)
             rr.raise_for_status()
             out.append((Path(name).name, rr.content, link))
         if out:
@@ -113,7 +119,7 @@ def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[st
     except Exception as e:
         diagnostics["api_error"] = repr(e)
 
-    landing = landing_probe(doi, expected_names)
+    landing = landing_probe(doi, expected_names, session=session)
     diagnostics["landing"] = landing
 
     file_links = landing.get("file_links", {})
@@ -130,7 +136,12 @@ def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[st
     for name, href in selected:
         link = href if href.startswith("http") else "https://datadryad.org" + href
         try:
-            rr = requests.get(link, timeout=180, allow_redirects=True)
+            rr = session.get(
+                link,
+                timeout=180,
+                allow_redirects=True,
+                headers={"Referer": landing.get("url") or "https://datadryad.org/"},
+            )
             rr.raise_for_status()
             out.append((Path(name).name, rr.content, link))
         except Exception as e:
