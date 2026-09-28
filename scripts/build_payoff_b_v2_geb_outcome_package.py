@@ -32,6 +32,13 @@ STATIC_FILES = (
     "submission/GEB_V2_DECLARATIONS_TEMPLATE.md",
 )
 
+ACCESS_BLOCKED_STATIC_FILES = (
+    "submission/GEB_V2_TITLE_PAGE_ACCESS_BLOCKED_TEMPLATE.md",
+    "submission/GEB_V2_DATA_CODE_ACCESS_BLOCKED.md",
+    "submission/GEB_V2_PORTAL_HANDOFF_ACCESS_BLOCKED.md",
+    "submission/GEB_V2_DECLARATIONS_TEMPLATE.md",
+)
+
 
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
@@ -257,7 +264,12 @@ def build(
             }
         )
 
-    for rel in STATIC_FILES:
+    static_files = (
+        ACCESS_BLOCKED_STATIC_FILES
+        if result_class == "ACCESS_BLOCKED"
+        else STATIC_FILES
+    )
+    for rel in static_files:
         files.append(_copy(rel, output_dir))
 
     for index in range(1, 8):
