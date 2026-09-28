@@ -24,7 +24,7 @@ The canonical V2 GEB package has passed all hard gates.
 
 ```text
 structured abstract = 246 words
-main body = 4,298 words
+main body = 4,242 words
 references = 14
 display pieces = 7
 keywords = 8
@@ -37,21 +37,21 @@ package files = 17
 Frozen package:
 
 ```text
-workflow run = 36370295430 (attempt 1)
-artifact = 10949330110
+workflow run = 36374436480 (attempt 1)
+artifact = 10950726054
 artifact digest =
-0146afe2d091f951c7d5b9dd6b0afab853c70f977fce51729faf4fbd768127fb
+81e9b9383895193073c701e2ca63678a830ff1a619911f0f30a80f4d26000cab
 
 inner deterministic ZIP SHA256 =
-262c6f1d5fdee798db5c2a8bc60b81ef05f480da70eb9de3d93de67de49c585f
+07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
 ```
 
 The declarations-inclusive package was rerun from the same frozen head in
-workflow run 36370295430 (attempt 2; artifact 10949105921). The deterministic
+workflow run 36374436480 (attempt 2; artifact 10950107881). The deterministic
 inner ZIP remained byte-identical:
 
 ```text
-262c6f1d5fdee798db5c2a8bc60b81ef05f480da70eb9de3d93de67de49c585f
+07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
 ```
 
 The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
@@ -98,22 +98,22 @@ A deterministic PREOUTCOME reviewer archive has been built from the canonical
 claim-ceiling V2 source.
 
 ```text
-workflow run = 36370295435
-artifact = 10948908201
+workflow run = 36374436474
+artifact = 10949304838
 artifact digest =
-cb1a090d6d2ace3ec54f72aba0a58e4dbd3a7e1348907214879529909e66fd4e
+4caf4a1dc083d2f4ec0212730c0cb76ef22d7f6fa11f4f52731b796601f3aeda
 
 inner reviewer ZIP SHA256 =
-6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf
+a933bc428ab9e6577536c381e493b565aadb88235b164713ce546509b698d960
 
-files = 70
+files = 71
 Python source closure = 26
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
-reviewer archive reproduction run = 36370295435
-reviewer archive reproduction artifact = 10948993094
-reviewer archive deterministic inner SHA256 = 6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf
+reviewer archive reproduction run = 36374436474
+reviewer archive reproduction artifact = 10950815667
+reviewer archive deterministic inner SHA256 = a933bc428ab9e6577536c381e493b565aadb88235b164713ce546509b698d960
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
