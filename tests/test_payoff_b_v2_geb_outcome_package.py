@@ -277,9 +277,10 @@ def test_activated_access_blocked_clears_author_decision_science_blocker(tmp_pat
     access_data = (out / "GEB_V2_DATA_CODE_ACCESS_BLOCKED.md").read_text(
         encoding="utf-8"
     )
-    assert "was not executed" in access_data
-    assert "not evidence for or against" in access_data
-    assert "future authenticated execution remains permissible" in access_data
+    normalized_access_data = " ".join(access_data.split())
+    assert "was not executed" in normalized_access_data
+    assert "not evidence for or against" in normalized_access_data
+    assert "future authenticated execution remains permissible" in normalized_access_data
 
     claim = json.loads(
         (out / "GEB_V2_AIKENS_CLAIM_STATE.json").read_text(encoding="utf-8")
