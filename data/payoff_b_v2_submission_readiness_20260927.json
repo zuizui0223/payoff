@@ -37,12 +37,6 @@
     "status": "READY_UNOPENED",
     "merged_pr": 178,
     "merge_commit": "28f9f5750c0be4531bf0dd464dc7154e3edb9c9e",
-    "supported_result_classes": [
-      "PASS",
-      "FAIL_WRONG_DIRECTION",
-      "FAIL_INSUFFICIENT_SUPPORT",
-      "NOT_ESTIMABLE"
-    ],
     "result_location": "Supporting Information only",
     "main_text_retuning": false,
     "main_figures_retuning": false,
@@ -54,7 +48,18 @@
     "full_ci_run": 36312188416,
     "full_ci_conclusion": "success",
     "empirical_full_suite": "2006 passed, 1 skipped",
-    "lambda_named_gate": "20 passed, 0 skipped"
+    "lambda_named_gate": "20 passed, 0 skipped",
+    "scientific_result_classes": [
+      "PASS",
+      "FAIL_WRONG_DIRECTION",
+      "FAIL_INSUFFICIENT_SUPPORT",
+      "NOT_ESTIMABLE"
+    ],
+    "external_access_render_classes": [
+      "ACCESS_BLOCKED"
+    ],
+    "access_blocked_contract": "data/aikens2022_access_blocked_render_class_20260928.json",
+    "access_blocked_activation": "AUTHOR_DECISION_REQUIRED_NOT_ACTIVATED"
   },
   "real_aikens_execution": {
     "scientific_contract": "FROZEN",
@@ -74,12 +79,14 @@
     },
     "current_secret_state": "NOT_CONFIGURED_CONFIRMED_2026-09-28",
     "permitted_next_action": "configure AppEEARS token or Earthdata username/password; rerun credential preflight; then execute the existing frozen full-extraction workflow",
-    "scientific_retuning_permitted": false
+    "scientific_retuning_permitted": false,
+    "access_blocked_render_available": true,
+    "access_blocked_activated": false
   },
   "portal_readiness": {
     "final_submission_eligible": false,
     "blockers": [
-      "registered Aikens phase-retention result remains unopened",
+      "registered Aikens phase-retention result remains unopened; either configure authenticated source access or make an explicit author decision to freeze the ACCESS_BLOCKED external-access state",
       "anonymous reviewer archive delivery channel (journal portal upload or stable anonymous link)",
       "author-controlled title-page metadata and declarations",
       "final human review of outcome-rendered package"
