@@ -202,18 +202,22 @@ CURRENT_V2_PREOUTCOME_PACKAGE = READY
 CURRENT_V2_PREOUTCOME_BUILD_RUN = 36374436480
 CURRENT_V2_PREOUTCOME_ARTIFACT = 10950726054
 CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
-CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED
+CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED
+CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = c4d96db3bda99fb68b475504dcdf1e0072264e6e4e4cb7435d51979111c40e8b
+CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = d11c518c3eb5499f85e99f1cf7125e067745b211b5da764b8d961c930460151c
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 
 The V2 PREOUTCOME package has completed fresh word-count, display-piece,
 reference, anonymity, citation and journal-facing package audits.
 
+The current submission route is frozen as non-scientific `ACCESS_BLOCKED`.
+The Aikens lambda outcome remains unopened, but authenticated execution is now
+a permitted future extension rather than a current submission blocker.
+
 Before final submission, V2 still requires:
 
-- AppEEARS/Earthdata credentials to be configured and the registered
-  industrial-development result to be frozen;
-- delivery of the already-built anonymous reviewer archive through the journal
+- delivery of the ACCESS_BLOCKED anonymous reviewer archive through the journal
   portal or a stable anonymous review link;
 - author-controlled title-page and declaration metadata;
 - final human review of the outcome-rendered package and portal metadata.
@@ -231,8 +235,10 @@ retuning scientific claims to fit an outlet.
 
 The preregistered Aikens lambda outcome remains unopened.
 
-Paper 2 stays **PREOUTCOME** until that registered outcome is executed and
-frozen.
+For the current submission route, Paper 2 is **ACCESS_BLOCKED
+science-closed** rather than PREOUTCOME. The registered Aikens scientific
+outcome remains unopened and may still be executed later under the original
+frozen contract.
 
 The V2 information-deadline and recovery-failure conclusions must remain
 coherent under:
@@ -258,7 +264,7 @@ PAPER 1
 PAPER 2
     PAYOFF-B information coordination in seasonal tracking
     canonical source: PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md
-    status: active PREOUTCOME broad-ecology paper
+    status: active ACCESS_BLOCKED science-closed broad-ecology paper
 
 V1 integrated tracking manuscript
     status: frozen provenance / rollback only
