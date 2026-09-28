@@ -3,8 +3,8 @@
 Date: **2026-09-28**  
 Status: **promotion gate passed; candidate E6 for Paper 2**  
 Branch: `analysis/payoff-b-cross-system-information-20260928`  
-Frozen workflow run: **36383464308**  
-Frozen head: `986257f19abba0cd8b1387984e6f45607f68ecbc`
+Frozen workflow run: **36383988920**  
+Frozen head: `5c6122fdb83ffed058749eaa6f27266f7635276a`
 
 ## Question
 
@@ -66,7 +66,7 @@ The distance-only inverse-variance fit gives:
 | long-distance migrants | -0.630 | -0.869 to -0.390 |
 
 Thus the raw long-minus-short contrast is **+0.395 d / °C**, with
-95% CI **+0.125 to +0.666** and **p = 0.0041**.
+95% CI **+0.110 to +0.681** and **p = 0.0090**.
 
 The registered primary model uses inverse-variance weighting and two-way
 cluster-robust uncertainty by **Study x Species**, while adjusting for arrival
@@ -82,9 +82,20 @@ strongly with warming than short-distance migrants**.
 The sign and interval are stable to the declared sensitivity analyses:
 
 - 99th-percentile cap on inverse-variance weights:
-  **+0.417**, 95% CI **+0.131 to +0.702**, p = 0.0042;
+  **+0.417**, 95% CI **+0.118 to +0.715**, p = 0.0080;
 - unweighted adjusted fit:
-  **+0.538**, 95% CI **+0.206 to +0.871**, p = 0.0015.
+  **+0.538**, 95% CI **+0.190 to +0.887**, p = 0.0037.
+
+A leave-one-study-out audit refits the adjusted model 28 times. Every
+held-out-study coefficient is positive, every 95% CI retains a positive lower
+bound, the coefficient range is **+0.378 to +0.608 d / °C**, the smallest CI
+lower bound is **+0.066**, and the largest p-value is **0.0195**.
+
+Inference uses Student-t critical values with 27 degrees of freedom, based on
+the smaller marginal cluster count. PAYOFF-B clusters Study and Species but
+does not refit the source paper's phylogenetic random effect. The underlying
+migration-distance pattern is already reported by Usui et al. under their
+phylogenetic meta-analysis.
 
 This is a reconstruction of an effect already reported by Usui et al.; it is
 not a PAYOFF-B novelty claim. Its value here is that the information-distance
