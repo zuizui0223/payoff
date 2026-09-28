@@ -176,7 +176,9 @@ Natural evidence currently provides:
   migratory birds;
 - a decision-time cue-availability anchor from the pied-flycatcher experiment;
 - a registered wigeon predictive-connectivity controller null;
-- a negative long-term cue-driver decline–recovery gate.
+- a negative long-term cue-driver decline–recovery gate;
+- a second preregistered same-system cue–resource gate that returned
+  NO_CUE_RESOURCE_REVERSAL before resident–migrant history was opened.
 
 That boundary must remain explicit in the final abstract, cover letter and
 Discussion.
