@@ -73,7 +73,7 @@ cluster-robust uncertainty by **Study x Species**, while adjusting for arrival
 metric, temperature location, arrival location, data source and continent.
 
 The adjusted long-minus-short contrast is **+0.421 d / °C**, with 95% CI
-**+0.135 to +0.708** and **p = 0.0040**.
+**+0.121 to +0.722** and **p = 0.0077**.
 
 Because negative slopes mean earlier migration in warmer years, the positive
 long-minus-short coefficient means that **long-distance migrants advance less
