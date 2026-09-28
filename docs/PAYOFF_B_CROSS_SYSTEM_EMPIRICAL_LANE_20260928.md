@@ -14,7 +14,7 @@ That leaves a real ecological-generalization gap: the canonical three-node theor
 
 ### Local plant--pollinator system
 
-Freimuth et al. (2022; DOI 10.1098/rspb.2021.2142; Dryad 10.5061/dryad.v41ns1rxv) provide species-level phenological slopes for Germany, 1980--2020.
+Freimuth et al. (2022; DOI 10.1098/rspb.2021.2142; Dryad 10.5061/dryad.v41ns1rxv) provide archived species **random-effect deviations** from the time- and temperature-shift mixed models for Germany, 1980--2020. The Dryad `rnd_eff_temp.csv` column `slope` is not by itself a total species temperature-response slope. A total species response requires the appropriate taxonomic-group fixed temperature coefficient plus that species' random-slope deviation.
 
 Published scope:
 
@@ -51,6 +51,13 @@ Published aggregate results:
 
 The authors explicitly discuss the information interpretation: conditions encountered by short-distance migrants can be more predictive of breeding-ground conditions than those available to long-distance migrants.
 
+
+## Source-semantics correction
+
+Dryad documents `rnd_eff_temp.csv` as the random effects of the temperature-shift model. Its `slope` column is therefore a species-specific random-slope deviation, with `slope_std_err` the associated uncertainty. The PAYOFF-B contract treats this distinction as a hard gate: the file can quantify among-species heterogeneity around a group model, but the raw random-effect slope is not reported as a species' total days-per-degree-C response.
+
+For Usui et al., the published analysis used slope estimates plus sampling error in a Bayesian phylogenetic meta-analysis with phylogeny, species, study, location and species-by-location structure. Any PAYOFF-B rerun that omits the 100-tree phylogenetic layer is explicitly a source-table robustness reconstruction rather than an exact reproduction of the original model.
+
 ## What PAYOFF-B can test without cheating
 
 The primary inferential contrast must stay **within the bird meta-analysis**:
@@ -61,7 +68,9 @@ This is not a novelty claim; the source paper already reports the pattern. Its r
 
 The pollinator dataset is an independent **local-information benchmark**:
 
-> How broad and how strong are local plant/pollinator temperature responses, and how do those responses translate into changing interaction synchrony?
+> How heterogeneous are source-model species responses around the published taxonomic-group temperature effects, and what do the published group responses imply for changing interaction synchrony?
+
+The archived random slopes must not be relabelled as total species slopes. Published group-level fixed effects can be used as source anchors; species-level total responses are reported only if the group mapping and fixed coefficients are source-backed and reconstructed explicitly.
 
 The cross-system comparison is then triangulation:
 
@@ -81,10 +90,10 @@ That is biologically informative, but it is not licensed as one causal coefficie
 ## Analysis contract
 
 1. Acquire and checksum the two CC0 Dryad sources.
-2. Reconstruct units, sample identifiers, effect-size variance and dependence.
-3. Reproduce the published source-level summaries first.
-4. Refit the Usui short- versus long-distance contrast with the source hierarchy retained.
-5. Summarize Freimuth species-level local temperature sensitivities and interaction-asynchrony distributions.
+2. Reconstruct units, sample identifiers, effect-size variance and dependence, including the distinction between Freimuth fixed effects and species random-effect deviations.
+3. Cross-check the published source-level anchor values and data dimensions before any PAYOFF-B comparison.
+4. Refit the Usui short- versus long-distance temperature contrast with repeated species/study/location dependence retained. If the original 100-tree phylogenetic layer is not reproduced, label the result as a dependence-aware robustness reconstruction rather than an exact reproduction.
+5. Summarize Freimuth local temperature-response heterogeneity without treating `rnd_eff_temp.csv` random slopes as total species slopes; reconstruct total slopes only if source-backed group fixed effects and group membership are available.
 6. Do **not** pool pollinators and birds into one moderator model unless multiple independent source datasets per information-distance class are added.
 7. If the bird gradient reproduces and the pollinator benchmark is stable, add it to Paper 2 as an empirical **information-distance triangulation**, not as evidence that pollinators universally outperform migrants.
 
