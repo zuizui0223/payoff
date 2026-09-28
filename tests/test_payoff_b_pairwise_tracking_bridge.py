@@ -32,3 +32,14 @@ def test_deadline_mechanism_remains_prospective():
     assert "q1 < q <= q2" in prohibited
     assert "causal mechanism" in prohibited
     assert x["manuscript_decision"]["claim_ceiling"].endswith("DEADLINE_MECHANISM_PROSPECTIVE")
+
+
+def test_resident_migrant_bridge_links_sensitivity_to_interval():
+    x = json.loads(RESULT.read_text(encoding="utf-8"))
+    b = x["same_guild_resident_migrant_bridge"]
+    slopes = b["temperature_slopes_days_per_C"]
+    assert abs(slopes["blue_tit"]) > abs(slopes["pied_flycatcher"])
+    assert abs(slopes["great_tit"]) > abs(slopes["collared_flycatcher"])
+    assert b["interval_model"]["flycatcher_minus_tit_laying_interval_year_effect_days_per_year"] > 0
+    assert b["interval_model"]["p"] < 0.01
+    assert b["interval_model"]["equivalent_days_per_decade"] == 0.942
