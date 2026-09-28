@@ -321,6 +321,30 @@ The current natural evidence also does not estimate **D2-D1** within a specific
 interacting pair and does not observe the predicted **q1 < q <= q2**
 desynchronization window. The pairwise deadline-difference mechanism remains a prospective natural test.
 
+### E6b — interaction-level response-asymmetry bridge
+
+Burgess et al. (2018) provide published pairwise evidence from three real
+bird--caterpillar interactions. The temporal major-axis slopes of bird first-egg
+date on caterpillar-peak timing are:
+
+- Blue Tit: **0.510** (95% CrI 0.236--0.770);
+- Great Tit: **0.515** (0.109--0.904);
+- Pied Flycatcher: **0.348** (0.210--0.490).
+
+All three intervals are below the perfect-tracking value of one. In the source
+interpretation, a 10-day advance in the caterpillar peak corresponds to only
+about 5.1, 5.2 and 3.5 days of bird advance, respectively, so relative timing
+mismatch increases in early springs.
+
+Licensed wording: **actual interacting consumer--resource pairs show
+year-to-year phenological response asymmetry that translates into mismatch.**
+
+Not licensed: the theoretical delay-cost difference **D2-D1** has been
+measured, the exact **q1 < q <= q2** information-use window has been observed,
+or information distance is the causal mechanism for these pairwise deficits.
+
+This is published bridge evidence, not a new PAYOFF-B discovery.
+
 ## Prior-art firewall
 
 PAYOFF-B does not claim novelty for game theory applied to phenology,

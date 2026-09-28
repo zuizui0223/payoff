@@ -1,0 +1,110 @@
+{
+  "result_id": "payoff_b_pairwise_tracking_bridge_20260929",
+  "date": "2026-09-29",
+  "status": "SOURCE_BACKED_PAIRWISE_BRIDGE_READY",
+  "paper_role": "candidate E6b interaction-level bridge; supports pairwise phenological response disparity but does not identify theoretical deadline costs",
+  "source": {
+    "citation": "Burgess MD et al. 2018. Tritrophic phenological match-mismatch in space and time. Nature Ecology & Evolution 2:970-975.",
+    "doi": "10.1038/s41559-018-0543-1",
+    "data_doi": "10.7488/ds/2215",
+    "code_repository": "https://github.com/allyphillimore/birds_frass_oak",
+    "source_note": "Published bivariate MCMCglmm analysis of UK oak-caterpillar-bird phenology; bird first-egg dates came from the BTO Nest Record Scheme and are not redistributed here."
+  },
+  "estimand": {
+    "id": "temporal_pairwise_tracking_slope",
+    "definition": "major-axis slope of higher-trophic-level phenology on lower-trophic-level phenology across years",
+    "null_for_perfect_tracking": 1,
+    "interpretation": "slope < 1 means the consumer shifts less among years than the resource, generating temporal variation in relative timing"
+  },
+  "interaction_pairs": [
+    {
+      "pair": "peak caterpillar biomass -> blue tit first egg date",
+      "consumer": "Blue Tit",
+      "resource": "Caterpillar peak",
+      "temporal_correlation": 0.8,
+      "temporal_correlation_ci95": [
+        0.475,
+        0.95
+      ],
+      "major_axis_slope": 0.51,
+      "major_axis_ci95": [
+        0.236,
+        0.77
+      ],
+      "tracking_deficit_1_minus_slope": 0.49,
+      "consumer_advance_per_10d_resource_advance": 5.1,
+      "added_mismatch_per_10d_resource_advance": 4.9,
+      "mean_peak_demand_minus_resource_days": 7.22,
+      "mean_mismatch_ci95_days": [
+        -2.35,
+        11.82
+      ]
+    },
+    {
+      "pair": "peak caterpillar biomass -> great tit first egg date",
+      "consumer": "Great Tit",
+      "resource": "Caterpillar peak",
+      "temporal_correlation": 0.717,
+      "temporal_correlation_ci95": [
+        0.243,
+        0.939
+      ],
+      "major_axis_slope": 0.515,
+      "major_axis_ci95": [
+        0.109,
+        0.904
+      ],
+      "tracking_deficit_1_minus_slope": 0.485,
+      "consumer_advance_per_10d_resource_advance": 5.2,
+      "added_mismatch_per_10d_resource_advance": 4.8,
+      "mean_peak_demand_minus_resource_days": 6.3,
+      "mean_mismatch_ci95_days": [
+        0.09,
+        12.32
+      ]
+    },
+    {
+      "pair": "peak caterpillar biomass -> pied flycatcher first egg date",
+      "consumer": "Pied Flycatcher",
+      "resource": "Caterpillar peak",
+      "temporal_correlation": 0.911,
+      "temporal_correlation_ci95": [
+        0.663,
+        0.986
+      ],
+      "major_axis_slope": 0.348,
+      "major_axis_ci95": [
+        0.21,
+        0.49
+      ],
+      "tracking_deficit_1_minus_slope": 0.652,
+      "consumer_advance_per_10d_resource_advance": 3.5,
+      "added_mismatch_per_10d_resource_advance": 6.5,
+      "mean_peak_demand_minus_resource_days": 16.41,
+      "mean_mismatch_ci95_days": [
+        10.49,
+        22.12
+      ]
+    }
+  ],
+  "source_conclusions": {
+    "all_three_temporal_slopes_below_one": true,
+    "warm_early_springs_increase_bird_caterpillar_asynchrony": true,
+    "pied_flycatcher_has_shallowest_tracking_slope": true,
+    "no_evidence_for_latitudinal_bird_caterpillar_mismatch_trend": true
+  },
+  "licensed_interpretation": "In three real bird-caterpillar interactions, consumer phenology tracks year-to-year resource phenology incompletely; the pairwise response disparity converts earlier resource years into larger timing mismatch. This is interaction-level evidence for response-asymmetry-to-mismatch, not a direct estimate of information-deadline difference.",
+  "not_licensed": [
+    "the theoretical delay-cost difference D2-D1 has been measured",
+    "the q1 < q <= q2 asynchronous information-use window has been observed",
+    "information distance is the causal mechanism for the pairwise tracking deficits",
+    "pied flycatchers are more mismatched because of migration distance alone",
+    "the published Burgess pattern is a new PAYOFF-B discovery"
+  ],
+  "manuscript_decision": {
+    "abstract_change": false,
+    "figure_change": false,
+    "section_4_6_bridge": true,
+    "claim_ceiling": "PAIRWISE_RESPONSE_DISPARITY_SUPPORTED_DEADLINE_MECHANISM_PROSPECTIVE"
+  }
+}
