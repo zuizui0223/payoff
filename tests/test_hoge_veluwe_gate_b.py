@@ -27,6 +27,7 @@ def load_module():
 
 
 def test_clear_decline_recovery_geometry_passes_with_registered_penalty():
+    pytest.importorskip("numpy")
     module = load_module()
     years = list(range(1992, 2016))
     rho = []
@@ -54,6 +55,7 @@ def test_clear_decline_recovery_geometry_passes_with_registered_penalty():
 
 
 def test_clear_decline_recovery_is_leave_one_year_out_stable():
+    pytest.importorskip("numpy")
     module = load_module()
     years = list(range(1992, 2016))
     rho = [
@@ -84,6 +86,7 @@ def test_clear_decline_recovery_is_leave_one_year_out_stable():
 
 
 def test_monotonic_connectivity_does_not_pass_reversal_geometry():
+    pytest.importorskip("numpy")
     module = load_module()
     years = list(range(1992, 2016))
     rho = [-0.04 * (year - 1992) for year in years]
