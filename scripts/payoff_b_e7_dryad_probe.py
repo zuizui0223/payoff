@@ -28,6 +28,69 @@ def safe_name(name: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]+", "_", name)
 
 
+def looks_like_html(data: bytes, content_type: str | None = None) -> bool:
+    ctype = (content_type or "").lower()
+    head = data[:500].lstrip().lower()
+    return "text/html" in ctype or head.startswith(b"<!doctype html") or head.startswith(b"<html")
+
+
+def zenodo_resolve(doi: str, expected_names: list[str]) -> tuple[list[tuple[str, bytes, str]], dict]:
+    diag = {"query": doi, "records": []}
+    try:
+        r = requests.get(
+            "https://zenodo.org/api/records",
+            params={"q": f'"{doi}"', "size": 20},
+            timeout=120,
+            headers={"User-Agent": "Mozilla/5.0"},
+        )
+        diag["status_code"] = r.status_code
+        r.raise_for_status()
+        payload = r.json()
+    except Exception as e:
+        diag["error"] = repr(e)
+        return [], diag
+
+    hits = payload.get("hits", {}).get("hits", []) if isinstance(payload, dict) else []
+    out = []
+    seen = set()
+    for hit in hits:
+        blob = json.dumps(hit, ensure_ascii=False)
+        title = ((hit.get("metadata") or {}).get("title") or "")
+        if doi.lower() not in blob.lower():
+            continue
+        rid = str(hit.get("id") or hit.get("recid") or "")
+        rec = {"id": rid, "title": title, "files": []}
+        files = hit.get("files") or []
+        if isinstance(files, dict):
+            files = files.get("entries") or files.get("items") or []
+            if isinstance(files, dict):
+                files = [{"key": k, **(v if isinstance(v, dict) else {})} for k, v in files.items()]
+        for f in files:
+            name = f.get("key") or f.get("filename") or f.get("name")
+            links = f.get("links") or {}
+            link = links.get("content") or links.get("self") or f.get("links")
+            if isinstance(link, dict):
+                link = link.get("content") or link.get("self")
+            rec["files"].append({"name": name, "link": link})
+            if not name or not link:
+                continue
+            if expected_names and name not in expected_names:
+                continue
+            if name in seen:
+                continue
+            try:
+                rr = requests.get(link, timeout=180, allow_redirects=True, headers={"User-Agent": "Mozilla/5.0"})
+                rr.raise_for_status()
+                if looks_like_html(rr.content, rr.headers.get("content-type")):
+                    continue
+                out.append((Path(name).name, rr.content, link))
+                seen.add(name)
+            except Exception as e:
+                rec.setdefault("download_errors", {})[str(name)] = repr(e)
+        diag["records"].append(rec)
+    return out, diag
+
+
 def landing_probe(doi: str, expected_names: list[str], session: requests.Session | None = None) -> dict:
     encoded = urllib.parse.quote("doi:" + doi, safe="")
     url = "https://datadryad.org/dataset/" + encoded
@@ -133,6 +196,7 @@ def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[st
 
     out = []
     download_errors = {}
+    rejected_html = {}
     for name, href in selected:
         link = href if href.startswith("http") else "https://datadryad.org" + href
         try:
@@ -143,12 +207,26 @@ def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[st
                 headers={"Referer": landing.get("url") or "https://datadryad.org/"},
             )
             rr.raise_for_status()
+            if looks_like_html(rr.content, rr.headers.get("content-type")):
+                rejected_html[name] = {
+                    "bytes": len(rr.content),
+                    "final_url": rr.url,
+                    "content_type": rr.headers.get("content-type"),
+                    "prefix": rr.text[:160] if "text" in (rr.headers.get("content-type") or "") else None,
+                }
+                continue
             out.append((Path(name).name, rr.content, link))
         except Exception as e:
             download_errors[name] = repr(e)
     diagnostics["landing_selected_files"] = [name for name, _ in selected]
     diagnostics["landing_download_errors"] = download_errors
-    return out, diagnostics
+    diagnostics["landing_rejected_html"] = rejected_html
+    if out:
+        return out, diagnostics
+
+    zfiles, zdiag = zenodo_resolve(doi, expected_names)
+    diagnostics["zenodo"] = zdiag
+    return zfiles, diagnostics
 
 
 def inspect_csv(name: str, data: bytes) -> dict:
@@ -251,6 +329,7 @@ def main() -> None:
                 }
                 entry["files"].append(row)
             entry["status"] = "ACQUIRED" if files else "URL_RESOLUTION_PENDING"
+            entry["valid_file_count"] = len(files)
         except Exception as e:
             entry["status"] = "ACCESS_OR_PARSE_FAILED"
             entry["error"] = repr(e)
