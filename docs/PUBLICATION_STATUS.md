@@ -105,7 +105,7 @@ EXTERNAL_ACTIONS = author metadata + funding/COI/contributions + AI disclosure a
 
 The paper should not carry the full PAYOFF hierarchy. In particular, do not make continuous architecture, general topology, generic spatial spectral theory, or rare-mutation occupancy co-equal storylines.
 
-## Paper 2: information coordination in seasonal tracking — PREOUTCOME
+## Paper 2: information coordination in seasonal tracking — ACCESS_BLOCKED submission state
 
 Canonical PREOUTCOME source:
 
@@ -164,8 +164,12 @@ ROLE = INTEGRATED_BROAD_ECOLOGY_PAPER
 CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md
 V1_STATUS = FROZEN_PROVENANCE_ONLY
 FIRST_SHOT = Global Ecology and Biogeography / Research Article
-SCIENTIFIC_STATE = PREOUTCOME
-OPEN_SCIENCE_GATE = registered Aikens lambda outcome
+SCIENTIFIC_STATE = ACCESS_BLOCKED_SUBMISSION_STATE_FROZEN
+AIKENS_EXECUTION_STATE = ACCESS_BLOCKED_FROZEN_NONSCIENTIFIC
+AIKENS_SCIENTIFIC_RESULT = unavailable
+AIKENS_LAMBDA_OUTCOME_OPENED = false
+ACCESS_BLOCKED_AUTHOR_DECISION = FROZEN_SUBMIT_WITH_ACCESS_BLOCKED
+FUTURE_AUTHENTICATED_EXECUTION = permitted under original preregistration
 RETUNING_AFTER_AIKENS = forbidden
 ```
 
@@ -193,7 +197,7 @@ CURRENT_V2_PREOUTCOME_PACKAGE = READY
 CURRENT_V2_PREOUTCOME_BUILD_RUN = 36374436480
 CURRENT_V2_PREOUTCOME_ARTIFACT = 10950726054
 CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
-CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED
+CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 
@@ -249,17 +253,28 @@ V1 only.
 
 The canonical V2 postoutcome route has now been rebuilt and tested independently.
 Four scientific result classes (PASS, wrong-direction, insufficient-support and
-NOT_ESTIMABLE) generate a science-ready V2 package while leaving the blinded
-main text and seven main figures unchanged. A separate `ACCESS_BLOCKED`
-external-access render state is available but is not a scientific result and is
-not currently activated; using it requires an explicit author decision. All
-rendered Aikens states remain in Supporting Information only.
+NOT_ESTIMABLE) remain available for any future authenticated execution. The
+separate `ACCESS_BLOCKED` external-access state is now explicitly frozen for
+the current submission route. It is not a scientific result: no environmental
+values or lambda outcome were opened, and no substitute source or analysis was
+used. The original preregistration remains binding if authenticated execution
+becomes possible later. All rendered Aikens states remain in Supporting
+Information only.
 
 ```text
-CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = READY_UNOPENED
+CURRENT_V2_POSTOUTCOME_GEB_PIPELINE = ACCESS_BLOCKED_STATE_FROZEN
 CURRENT_V2_POSTOUTCOME_MAIN_TEXT_RETUNING = forbidden
 CURRENT_V2_POSTOUTCOME_MAIN_FIGURE_RETUNING = forbidden
 CURRENT_V2_POSTOUTCOME_RESULT_LOCATION = Supporting Information only
+CURRENT_V2_ACCESS_BLOCKED_PACKAGE = READY
+CURRENT_V2_ACCESS_BLOCKED_BUILD_RUN = 36381284351
+CURRENT_V2_ACCESS_BLOCKED_BUILD_ATTEMPT = 1
+CURRENT_V2_ACCESS_BLOCKED_ARTIFACT = 10952901983
+CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = c4d96db3bda99fb68b475504dcdf1e0072264e6e4e4cb7435d51979111c40e8b
+CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = d11c518c3eb5499f85e99f1cf7125e067745b211b5da764b8d961c930460151c
+CURRENT_V2_ACCESS_BLOCKED_REPRODUCTION_ATTEMPT = 2
+CURRENT_V2_ACCESS_BLOCKED_REPRODUCTION_ARTIFACT = 10952483251
+CURRENT_V2_ACCESS_BLOCKED_DETERMINISTIC_REPRODUCTION = PASS
 LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT = NOT_CONFIGURED_2026-09-28
 LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT_RUN = 36372973062
 LAST_VERIFIED_AIKENS_CREDENTIAL_PREFLIGHT_ARTIFACT = 10950280495
@@ -272,24 +287,27 @@ or Earthdata username/password pair was configured in that run.
 
 ### Aikens gate
 
-The preregistered Aikens fixed-24 h lambda outcome remains unopened.
+The preregistered Aikens fixed-24 h lambda outcome remains unopened. For the
+current submission route, the external-access state is frozen as
+`ACCESS_BLOCKED`. This does not count as a scientific null, a
+`NOT_ESTIMABLE` result, or evidence for or against the registered prediction.
 
-The V2 manuscript must remain coherent under PASS, wrong-direction,
-insufficient-support and NOT_ESTIMABLE scientific outcomes. It must also remain
-unchanged if an author explicitly freezes the separate ACCESS_BLOCKED
-external-access state. Its information-deadline and
-coordination conclusions do not depend on the Aikens sign.
+The V2 manuscript remains valid under PASS, wrong-direction,
+insufficient-support and NOT_ESTIMABLE scientific outcomes if authenticated
+execution occurs later. The original preregistration remains binding, and its
+information-deadline and coordination conclusions do not depend on the Aikens
+sign.
 
-The V2 PREOUTCOME package is now built and audited. The remaining
-pre-submission tasks are therefore:
+The deterministic ACCESS_BLOCKED GEB package and outcome-rendered reviewer
+archive are built and reproduced. The remaining pre-submission tasks are:
 
-1. configure either APPEEARS_TOKEN or Earthdata username/password, then rerun
-   credential preflight and execute the already-frozen Aikens workflow;
-2. deliver the already-built anonymous reviewer archive through the journal
-   portal or a stable anonymous link;
-3. complete author-controlled title-page and declaration metadata;
-4. perform final human review of the already automated outcome-rendered package
-   and portal metadata.
+1. deliver the already-built ACCESS_BLOCKED reviewer archive through the
+   journal portal or a stable anonymous link;
+2. complete author-controlled title-page and declaration metadata;
+3. perform final human review of the generated package and portal metadata.
+
+Authenticated Aikens execution is now a permitted future extension under the
+original registration, not a blocker for this frozen submission state.
 
 
 ## DOI modules / dormant branches
