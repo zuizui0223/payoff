@@ -65,32 +65,15 @@ The distance-only inverse-variance fit gives:
 | short-distance migrants | -1.025 | -1.312 to -0.739 |
 | long-distance migrants | -0.630 | -0.869 to -0.390 |
 
-Thus the raw long-minus-short contrast is
-
-[
-+0.395 {m d/^circ C}
-]
-
-with 95% CI **+0.125 to +0.666** and **p = 0.0041**.
+Thus the raw long-minus-short contrast is **+0.395 d / °C**, with
+95% CI **+0.125 to +0.666** and **p = 0.0041**.
 
 The registered primary model uses inverse-variance weighting and two-way
 cluster-robust uncertainty by **Study x Species**, while adjusting for arrival
 metric, temperature location, arrival location, data source and continent.
 
-The adjusted contrast is
-
-[
-oxed{
-eta_{m long-short}=+0.421 {m d/^circ C}
-}
-]
-
-with
-
-[
-95% {m CI}=+0.135 {m to} +0.708,
-qquad p=0.0040.
-]
+The adjusted long-minus-short contrast is **+0.421 d / °C**, with 95% CI
+**+0.135 to +0.708** and **p = 0.0040**.
 
 Because negative slopes mean earlier migration in warmer years, the positive
 long-minus-short coefficient means that **long-distance migrants advance less
