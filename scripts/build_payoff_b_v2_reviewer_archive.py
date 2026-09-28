@@ -62,6 +62,7 @@ DIRECT_FILES = (
     "data/payoff_b_closed_loop_tracking_receipt_20260920.json",
     "data/payoff_b_movement_feedback_landscape_receipt_20260920.json",
     "data/aikens2022_lambda_perturbation_registration_20260921.json",
+    "data/aikens2022_access_blocked_render_class_20260928.json",
     "data/aikens2022_environment_product_amendment_20260922.json",
     "data/aikens2022_phase_reconstruction_execution_contract_v2_20260922.json",
     "theory/INFORMATION_DEADLINE_THEOREM.md",
