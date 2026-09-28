@@ -51,6 +51,33 @@ jobs:
           python scripts/payoff_b_hoge_veluwe_source_gate.py
           --output-dir outputs/hoge_veluwe_source_gate_a
           --cue-receipt outputs/hoge_veluwe_source_gate_a/cue_extension_receipt.json
+      - name: Validate registered Gate-A outcome
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          receipt = json.loads(
+              Path("outputs/hoge_veluwe_source_gate_a/source_gate_a_receipt.json")
+              .read_text(encoding="utf-8")
+          )
+          allowed = {
+              "GATE_A_PASS_SOURCE_READY",
+              "MIGRANT_SOURCE_ACCESS_BLOCKED",
+              "RESIDENT_SOURCE_ACCESS_BLOCKED",
+              "RESOURCE_SOURCE_ACCESS_BLOCKED",
+              "SCHEMA_REVIEW_REQUIRED",
+              "CUE_EXTENSION_NOT_SOURCE_FAITHFUL",
+          }
+          status = receipt.get("status")
+          if status not in allowed:
+              raise SystemExit(f"unlicensed Gate-A status: {status!r}")
+          firewall = receipt.get("outcome_firewall", {})
+          if any(value is True for value in firewall.values()):
+              raise SystemExit(f"Gate-A outcome firewall opened: {firewall}")
+          print(f"registered Gate-A status: {status}")
+          PY
       - name: Verify raw biological source bytes are not retained
         if: always()
         shell: bash
