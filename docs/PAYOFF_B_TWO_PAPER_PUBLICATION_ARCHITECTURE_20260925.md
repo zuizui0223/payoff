@@ -153,6 +153,27 @@ The path-dependence model was not opened.
 Therefore no natural system is currently claimed to demonstrate
 information-recovery network hysteresis.
 
+### E5 — same-system cue–resource prospective gate
+
+The preregistered Hoge Veluwe cue–resource gate is
+**NO_CUE_RESOURCE_REVERSAL**. Because the environmental prerequisite failed,
+resident–migrant history was not opened.
+
+### E6 — cross-system information-distance triangulation
+
+A dependence-aware reconstruction of 944 temperature-response effects from 28
+studies and 279 bird species gives an adjusted long-minus-short migration
+contrast of **+0.421 d / °C** (95% CI **+0.121 to +0.722**, p = **0.0077**).
+All 28 leave-one-study-out fits retain positive effects and positive CI lower
+bounds. An independent Freimuth et al. benchmark reproduces 1,763 local
+plant/pollinator species slopes and all five published group means.
+
+Licensed role: evidence consistent with an **information-distance axis**.
+
+Not licensed: a causal bird-versus-pollinator coefficient, a universal
+taxonomic ranking, or a claim that these two sources constitute a new
+cross-taxon meta-analysis.
+
 ## Capacity layer inherited from V1
 
 The earlier V1 conclusion remains scientifically valid:
@@ -199,12 +220,12 @@ Current state:
 PAPER_2_CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md
 V1_STATUS = FROZEN_PROVENANCE_ONLY
 CURRENT_V2_PREOUTCOME_PACKAGE = READY
-CURRENT_V2_PREOUTCOME_BUILD_RUN = 36374436480
-CURRENT_V2_PREOUTCOME_ARTIFACT = 10950726054
-CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36390286034
+CURRENT_V2_PREOUTCOME_ARTIFACT = 10955892924
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
 CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED
-CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = c4d96db3bda99fb68b475504dcdf1e0072264e6e4e4cb7435d51979111c40e8b
-CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = d11c518c3eb5499f85e99f1cf7125e067745b211b5da764b8d961c930460151c
+CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = 3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd
+CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = 6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 
