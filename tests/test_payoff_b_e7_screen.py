@@ -20,7 +20,7 @@ def module():
 
 def test_e7_screen_is_fail_closed():
     x = json.loads(ELIGIBILITY.read_text(encoding="utf-8"))
-    assert x["status"] == "SCREEN_ACTIVE_PROMOTION_GATE_NOT_PASSED"
+    assert x["status"] == "SCREEN_COMPLETE_PROMOTION_GATE_NOT_PASSED"
     assert x["promotion_gate"]["passed"] is False
     assert x["paper2_decision"] == "KEEP_E6_AS_CANONICAL_CEILING"
     assert x["promotion_gate"]["independent_system_count_with_point_estimate"] == 4
