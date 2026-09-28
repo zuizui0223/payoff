@@ -7,22 +7,22 @@
   "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "v1_status": "FROZEN_PROVENANCE_ONLY",
   "workflow": {
-    "run_id": 36405110540,
+    "run_id": 36472958953,
     "run_attempt": 1,
-    "head_sha": "fb7621a3df4a1963897c858d6fd2714f2482af70",
+    "head_sha": "24a2956e44bd19f5fef3719711c8086eb9b28d50",
     "conclusion": "success",
-    "artifact_id": 10962346030,
+    "artifact_id": 10992297519,
     "artifact_name": "payoff-b-v2-geb-preoutcome-package",
-    "artifact_sha256": "69baef789e80ded8bc8f34cecc690841944a1b9fa7ee744dcb6176c1e1848721"
+    "artifact_sha256": "daa8ab9bd205eaa0cadedddae47b17cbf3e03ee08d7fa531bf7fb7a5ec79ac35"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip",
-    "sha256": "6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1"
+    "sha256": "d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6"
   },
   "audited_metrics": {
     "structured_abstract_words": 244,
-    "main_body_words": 4761,
-    "references": 18,
+    "main_body_words": 4857,
+    "references": 19,
     "display_pieces": 7,
     "keywords": 8,
     "running_title_chars": 38,
@@ -73,19 +73,21 @@
   ],
   "package_file_count": 17,
   "reproduction": {
-    "run_id": 36405110540,
+    "run_id": 36472958953,
     "run_attempt": 2,
-    "head_sha": "fb7621a3df4a1963897c858d6fd2714f2482af70",
-    "artifact_id": 10961642891,
-    "artifact_sha256": "0edfee1625a87427072cc23cb4771981f6c79181d8e65288b53df6d122012b6c",
-    "inner_archive_sha256": "6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1",
+    "head_sha": "24a2956e44bd19f5fef3719711c8086eb9b28d50",
+    "artifact_id": 10992333084,
+    "artifact_sha256": "f056124ea455cf78f4c4486723f6557f3015478869ed09afd539a03351956143",
+    "inner_archive_sha256": "d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6",
     "deterministic_inner_archive": true
   },
   "latest_audit_date": "2026-09-28",
   "science_update": {
-    "merged_pr": 201,
-    "merge_commit": "f2aebae88710f768afc3ff86873236c25ee6b5a2",
-    "role": "E6 interpretation tightened; abstract trimmed; theory reordered; standalone unopened perturbation section removed",
-    "figure_5_e6_visual_integration": true
+    "merged_pr": 204,
+    "merge_commit": "f008bc6e6d595eae7bebdbe584ba7ea79e0e1eea",
+    "role": "E6b interaction-level pairwise response-asymmetry bridge added; D2-D1 and q-window remain prospective",
+    "pairwise_bridge_source": "Burgess et al. 2018",
+    "abstract_change": false,
+    "figure_change": false
   }
 }
