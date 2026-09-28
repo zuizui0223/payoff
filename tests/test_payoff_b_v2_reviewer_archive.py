@@ -88,6 +88,7 @@ def test_preoutcome_reviewer_archive_is_anonymous_and_complete(tmp_path: Path):
     assert "10.5061/dryad.v41ns1rxv" in readme
     assert "10.7488/ds/2215" in readme
     assert "10.1038/s41559-018-0543-1" in readme
+    assert "10.1111/gcb.14160" in readme
 
     for path in out.rglob("*"):
         if path.is_file():
