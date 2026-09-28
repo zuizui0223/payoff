@@ -66,9 +66,30 @@ different year-to-year response magnitude
 larger relative timing mismatch
 ```
 
-So the natural evidence is no longer restricted to **levels**. There is
-published interaction-level evidence that a **difference between partners'
-phenological responses** produces mismatch.
+So the natural evidence is no longer restricted to **levels**. Two independent
+interaction settings now provide published bridge evidence that **differences
+between partners' phenological responses alter relative timing**: trophic
+bird–caterpillar mismatch and resident–migrant laying-date separation.
+
+## Independent same-guild bridge: resident tits and migratory flycatchers
+
+Samplonius et al. (2018; DOI **10.1111/gcb.14160**) provide a second,
+mechanistically different interaction-level bridge. Across 10 European nest-box
+schemes from 1991–2015, resident blue and great tits advanced laying by about
+**-3.37** and **-2.84 d/°C**, whereas migratory pied and collared flycatchers
+advanced by about **-1.52** and **-1.54 d/°C**.
+
+The same analysis models the phenological interval itself. The flycatcher-minus-
+tit laying-date interval increased by **0.0942 ± 0.0293 d/year**
+(**0.942 d/decade; p=0.0015**). Thus differential thermal sensitivity within
+overlapping resident–migrant bird guilds is already associated with increasing
+relative phenological separation.
+
+This source is especially useful because migration status, interaction context
+and relative timing are all present in the same study. It is **not** a causal
+test of the PAYOFF-B deadline mechanism: the published pattern does not
+distinguish migration constraints, photoperiodic/endogenous timing, competition,
+social-information effects or other sources of differential plasticity.
 
 ## What it still does not test
 
