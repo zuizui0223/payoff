@@ -105,17 +105,27 @@
     "R6 only then decide whether this becomes Paper 2 E6"
   ],
   "execution": {
-    "workflow_run": 36383464308,
-    "head_sha": "986257f19abba0cd8b1387984e6f45607f68ecbc",
-    "artifact_id": 10953507916,
+    "workflow_run": 36383988920,
+    "head_sha": "5c6122fdb83ffed058749eaa6f27266f7635276a",
+    "artifact_id": 10953792024,
     "result_receipt": "data/payoff_b_cross_system_information_result_20260928.json",
     "freimuth_reproduction": "PASS",
     "taxonomy_unresolved": 0,
-    "bird_adjusted_long_minus_short_days_per_C": 0.42147637990921183,
+    "bird_adjusted_long_minus_short_days_per_C": 0.4214763799092083,
     "bird_adjusted_ci95": [
-      0.13475907229077716,
-      0.7081936875276464
+      0.12132570573851081,
+      0.7216270540799057
     ],
-    "bird_adjusted_p": 0.003961475194754047
+    "bird_adjusted_p": 0.00767185267253349,
+    "bird_df": 27,
+    "leave_one_study_out": {
+      "n_fits": 28,
+      "all_ci_lower_positive": true,
+      "estimate_range": [
+        0.3779456280645599,
+        0.6083890673642456
+      ],
+      "max_p": 0.019465268785180942
+    }
   }
 }
