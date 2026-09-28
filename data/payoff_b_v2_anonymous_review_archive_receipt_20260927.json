@@ -3,20 +3,20 @@
   "date": "2026-09-27",
   "status": "READY_PREOUTCOME",
   "canonical_science_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
-  "merged_pr": 196,
-  "merge_commit": "09b9561e994d79fe16c3f663fda3ecec8b3a61e8",
+  "merged_pr": 199,
+  "merge_commit": "444661bce2ac46c15538d152d245ffb5365bdbf5",
   "workflow": {
-    "run_id": 36390286021,
+    "run_id": 36402882248,
     "run_attempt": 1,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
+    "head_sha": "18fba20b7e595619dcff7a8e0617e1f2999edb89",
     "conclusion": "success",
-    "artifact_id": 10956570331,
+    "artifact_id": 10960973197,
     "artifact_name": "payoff-b-v2-anonymous-review-archive",
-    "artifact_sha256": "3945c71f7c8e00521cb8a7d9a5793a8b0b688d3d27d58914a9d3decd72d1acba"
+    "artifact_sha256": "b5a0552a8cd7cdab07157a83ce6f4fc017ed8f684374c49a1fad1d1b6ba23a62"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_ANON_REVIEW.zip",
-    "sha256": "d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec"
+    "sha256": "00947ef76ff258ac7fe75733d5398347095336f13261b849cb5b6ef0ad29702d"
   },
   "contents": {
     "file_count": 74,
@@ -32,17 +32,18 @@
     "natural singleton rescue species is not identified",
     "reviewer archive construction is complete; anonymous delivery channel remains external",
     "review archive includes frozen Hoge Veluwe Gate-A/Gate-B code and negative result receipts",
-    "review archive includes E6 cross-system information-distance contract, result receipt and analysis code"
+    "review archive includes E6 cross-system information-distance contract, result receipt and analysis code",
+    "main Figure 5 contains E6 migration-distance and independent local plant-pollinator panels with an explicit no-causal-taxon-contrast boundary"
   ],
   "delivery_state": "PENDING_ANONYMOUS_CHANNEL",
-  "latest_science_update_pr": 196,
+  "latest_science_update_pr": 199,
   "reproduction": {
-    "run_id": 36390286021,
+    "run_id": 36402882248,
     "run_attempt": 2,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
-    "artifact_id": 10956531442,
-    "artifact_sha256": "c121570418b53a4d71d9958df91eff7802c12520d8bda3584f230baaa4101375",
-    "inner_archive_sha256": "d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec",
+    "head_sha": "18fba20b7e595619dcff7a8e0617e1f2999edb89",
+    "artifact_id": 10961511463,
+    "artifact_sha256": "f8a63e6b9d268f78a6bb3817ac43c165672f133a3c300569cc8370d9ffb5d701",
+    "inner_archive_sha256": "00947ef76ff258ac7fe75733d5398347095336f13261b849cb5b6ef0ad29702d",
     "deterministic_inner_archive": true
   },
   "latest_build_date": "2026-09-28"
