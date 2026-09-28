@@ -1,7 +1,7 @@
 # PAYOFF-B Hoge Veluwe Gate-A source result
 
 Date: **2026-09-28**  
-Status: **PARTIAL PASS — migrant source access blocked; Gate B closed**
+Status: **ENVIRONMENTAL SOURCE PASS — history source blocked; Gate B licensed, Gate C closed**
 
 The registered source-readiness workflow completed successfully at run
 `36367383611` without opening any joined biological outcome.
@@ -96,8 +96,9 @@ great-tit timing       = CERTIFIED
 caterpillar resource   = CERTIFIED
 flycatcher timing      = ACCESS_BLOCKED
 
-Gate A                 = PARTIAL PASS / BLOCKED
-Gate B reversal test   = CLOSED
+Gate A environmental  = PASS
+Gate A history         = MIGRANT SOURCE ACCESS BLOCKED
+Gate B reversal test   = LICENSED / UNOPENED
 Gate C history test    = CLOSED
 ```
 
@@ -106,7 +107,9 @@ breakpoint search or history model has been run.
 
 ## Interpretation
 
-This is now a narrow external-access blocker, not a design or data-availability
-problem. The lane can continue only when the exact registered MDA archive is
-obtained through an authorized access/request route. Until then, the natural
-hysteresis result remains unopened.
+This is now a narrow external-access blocker for the **history** layer, not for
+the independent environmental reversal gate. Gate B may proceed using only the
+already-certified cue and caterpillar source while resident and migrant timing
+remain sealed. If Gate B fails, the history test never opens. If Gate B passes,
+the exact registered MDA archive must then be obtained through an authorized
+access/request route before Gate C can run.
