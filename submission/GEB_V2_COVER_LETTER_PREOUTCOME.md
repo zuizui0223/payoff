@@ -31,7 +31,10 @@ pre-outcome predictive connectivity is associated with smaller mismatch in the
 registered pooled analysis, with dependence-sensitive uncertainty. A
 pied-flycatcher experiment anchors timing-dependent access to heterospecific
 phenology, whereas a registered wigeon analysis does not support a universal
-effect of predictive connectivity on post-error correction.
+effect of predictive connectivity on post-error correction. In a second
+preregistered Hoge Veluwe lane, the environmental cue–resource series failed
+the required decline-to-recovery geometry before resident–migrant history was
+opened, so no natural hysteresis claim is made.
 
 The theory predicts that **environmental information can recover before
 ecological coordination does**. The framework separates response capacity,
