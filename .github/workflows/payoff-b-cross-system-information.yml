@@ -71,6 +71,9 @@ jobs:
           print('FREIMUTH_REPRO_PASS', x['freimuth_local_benchmark']['all_group_count_and_mean_checks_pass'])
           print('FREIMUTH_UNRESOLVED', x['freimuth_local_benchmark']['taxonomy_unresolved'])
           print(json.dumps(x['freimuth_local_benchmark']['groups'], indent=2))
+          import pandas as pd
+          tax=pd.read_csv('outputs/cross_system/cache/freimuth_taxonomy.csv')
+          print('UNRESOLVED_TAXA', tax.loc[tax['payoff_group'].eq('Unresolved'), ['species','kingdom','order','scientificName','matchType','confidence']].to_json(orient='records'))
           PY
       - name: Remove raw source bytes before artifact upload
         run: rm -rf outputs/cross_system/source
