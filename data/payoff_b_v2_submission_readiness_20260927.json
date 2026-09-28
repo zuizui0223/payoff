@@ -90,7 +90,9 @@
     "broad_bird_evidence": "pooled directional support with dependence-sensitive uncertainty",
     "wigeon_predictive_connectivity_controller": "NOT_SUPPORTED",
     "long_term_cue_driver_reversal": "NO_CUE_DRIVER_REVERSAL",
-    "natural_rescue_seed_identified": false
+    "natural_rescue_seed_identified": false,
+    "hoge_veluwe_cue_resource_reversal": "NO_CUE_RESOURCE_REVERSAL",
+    "hoge_veluwe_history_gate_c": "NOT_RUN"
   },
   "reviewer_archive": {
     "status": "READY_PREOUTCOME",
