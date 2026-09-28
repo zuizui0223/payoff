@@ -117,6 +117,7 @@ def audit(text: str | None = None) -> dict:
         ("Kölzsch", "2015"),
         ("Ortega", "2023"),
         ("Samplonius", "2017"),
+        ("Samplonius", "2018"),
         ("Tomotani", "2021"),
         ("Usui", "2017"),
         ("van Toor", "2021"),
