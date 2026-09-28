@@ -37,24 +37,26 @@ package files = 17
 Frozen package:
 
 ```text
-workflow run = 36390286034 (attempt 1)
-artifact = 10955892924
+workflow run = 36402882222 (attempt 1)
+artifact = 10961191453
 artifact digest =
 66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa
 
 inner deterministic ZIP SHA256 =
-31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
+fee2e34729bc3659a1ff21f05e572f269b7230d670bc1bd48168ac2a98c133a4
 ```
 
 The declarations-inclusive package was rerun from the same frozen head in
-workflow run 36390286034 (attempt 2; artifact 10956526561). The deterministic
+workflow run 36402882222 (attempt 2; artifact 10956526561). The deterministic
 inner ZIP remained byte-identical:
 
 ```text
-31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
+fee2e34729bc3659a1ff21f05e572f269b7230d670bc1bd48168ac2a98c133a4
 ```
 
 The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
+
+Figure 5 now shows the E6 migration-distance meta-regression and the independent Freimuth local benchmark alongside decision-time and post-error evidence. The figure explicitly states that the bird and plant–pollinator panels are independent datasets, not a causal taxon contrast.
 
 ## 2. Postoutcome V2 pipeline — ACCESS_BLOCKED submission state frozen
 
@@ -101,22 +103,22 @@ A deterministic PREOUTCOME reviewer archive has been built from the canonical
 claim-ceiling V2 source.
 
 ```text
-workflow run = 36390286021
-artifact = 10956570331
+workflow run = 36402882248
+artifact = 10960973197
 artifact digest =
 3945c71f7c8e00521cb8a7d9a5793a8b0b688d3d27d58914a9d3decd72d1acba
 
 inner reviewer ZIP SHA256 =
-d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec
+00947ef76ff258ac7fe75733d5398347095336f13261b849cb5b6ef0ad29702d
 
 files = 74
 Python source closure = 27
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
-reviewer archive reproduction run = 36390286021
+reviewer archive reproduction run = 36402882248
 reviewer archive reproduction artifact = 10956531442
-reviewer archive deterministic inner SHA256 = d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec
+reviewer archive deterministic inner SHA256 = 00947ef76ff258ac7fe75733d5398347095336f13261b849cb5b6ef0ad29702d
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
@@ -130,9 +132,9 @@ submission-state receipt:
 
 ```text
 ACCESS_BLOCKED reviewer ZIP SHA256 =
-6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75
+89f5da6454bb29bd188f654e6cf2ac7eb8137e6f131142af5535fe62dfce6755
 
-workflow run = 36390286108
+workflow run = 36403646557
 deterministic reproduction = PASS
 ```
 
@@ -171,20 +173,20 @@ original preregistration = remains binding
 ```
 
 The deterministic ACCESS_BLOCKED submission package was built in workflow
-`36390286108` from head `7bcaaef50407f06a0624ec7e6931decffbfc664d`.
+`36403646557` from head `18fba20b7e595619dcff7a8e0617e1f2999edb89`.
 
 ```text
-attempt 1 artifact = 10956335888
+attempt 1 artifact = 10960339744
 attempt 1 artifact digest =
 1c6041c9c26d849eb3d2b856fe50875acb2ee13dff0feca5e719d096463fb5ff
 
 GEB inner ZIP SHA256 =
-3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd
+ba2c990b9469cf48e59c264dfec8e3721028bb15298d858c90a966fe4dfac726
 
 outcome reviewer ZIP SHA256 =
-6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75
+89f5da6454bb29bd188f654e6cf2ac7eb8137e6f131142af5535fe62dfce6755
 
-attempt 2 artifact = 10955883655
+attempt 2 artifact = 10961526379
 attempt 2 artifact digest =
 9e6194e02484bc95d651ff7b01a34b6dd11d3e12e143c852ad7490c588808a67
 
