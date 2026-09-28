@@ -269,6 +269,17 @@ def test_activated_access_blocked_clears_author_decision_science_blocker(tmp_pat
     assert manifest["registered_result_frozen"] is False
     assert manifest["registered_scientific_result_available"] is False
     assert manifest["aikens_outcome_opened"] is False
+    assert (out / "GEB_V2_TITLE_PAGE_ACCESS_BLOCKED_TEMPLATE.md").exists()
+    assert (out / "GEB_V2_DATA_CODE_ACCESS_BLOCKED.md").exists()
+    assert (out / "GEB_V2_PORTAL_HANDOFF_ACCESS_BLOCKED.md").exists()
+    assert not (out / "GEB_V2_TITLE_PAGE_OUTCOME_TEMPLATE.md").exists()
+
+    access_data = (out / "GEB_V2_DATA_CODE_ACCESS_BLOCKED.md").read_text(
+        encoding="utf-8"
+    )
+    assert "was not executed" in access_data
+    assert "not evidence for or against" in access_data
+    assert "future authenticated execution remains permissible" in access_data
 
     claim = json.loads(
         (out / "GEB_V2_AIKENS_CLAIM_STATE.json").read_text(encoding="utf-8")
