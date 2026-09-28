@@ -2,6 +2,14 @@ name: PAYOFF-B cross-system source probe
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/payoff-b-cross-system-information.yml'
+      - 'data/payoff_b_cross_system_empirical_contract_20260928.json'
+      - 'scripts/payoff_b_cross_system_information.py'
+      - 'tests/test_payoff_b_cross_system_information.py'
   push:
     branches:
       - analysis/payoff-b-cross-system-information-20260928
