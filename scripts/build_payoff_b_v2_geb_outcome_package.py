@@ -32,6 +32,13 @@ STATIC_FILES = (
     "submission/GEB_V2_DECLARATIONS_TEMPLATE.md",
 )
 
+ACCESS_BLOCKED_STATIC_FILES = (
+    "submission/GEB_V2_TITLE_PAGE_ACCESS_BLOCKED_TEMPLATE.md",
+    "submission/GEB_V2_DATA_CODE_ACCESS_BLOCKED.md",
+    "submission/GEB_V2_PORTAL_HANDOFF_ACCESS_BLOCKED.md",
+    "submission/GEB_V2_DECLARATIONS_TEMPLATE.md",
+)
+
 
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
@@ -257,7 +264,12 @@ def build(
             }
         )
 
-    for rel in STATIC_FILES:
+    static_files = (
+        ACCESS_BLOCKED_STATIC_FILES
+        if result_class == "ACCESS_BLOCKED"
+        else STATIC_FILES
+    )
+    for rel in static_files:
         files.append(_copy(rel, output_dir))
 
     for index in range(1, 8):
@@ -277,6 +289,16 @@ def build(
             "bytes": rendered["manifest"].stat().st_size,
             "sha256": sha256(rendered["manifest"]),
         }
+    )
+
+    access_blocked_author_decision = bool(
+        result_class == "ACCESS_BLOCKED"
+        and isinstance(payload.get("author_decision"), dict)
+        and payload["author_decision"].get("decision")
+        == "SUBMIT_WITH_ACCESS_BLOCKED"
+        and payload["author_decision"].get("scientific_result_claimed") is False
+        and payload["author_decision"].get("future_authenticated_execution_permitted") is True
+        and payload["author_decision"].get("original_registration_remains_binding") is True
     )
 
     manifest = {
@@ -307,22 +329,29 @@ def build(
         "aikens_result_location": "Supporting Information only",
         "main_text_retuned": False,
         "main_figures_retuned": False,
-        "final_science_blocker": (
-            "author decision required: submit with registered Aikens ACCESS_BLOCKED "
-            "state or wait for authenticated execution"
+        "access_blocked_author_decision_frozen": (
+            access_blocked_author_decision
             if result_class == "ACCESS_BLOCKED"
             else None
+        ),
+        "final_science_blocker": (
+            None
+            if result_class != "ACCESS_BLOCKED" or access_blocked_author_decision
+            else (
+                "author decision required: submit with registered Aikens ACCESS_BLOCKED "
+                "state or wait for authenticated execution"
+            )
         ),
         "final_submission_eligible": False,
         "remaining_portal_blockers": (
             [
-                "author decision on registered Aikens ACCESS_BLOCKED state",
                 "anonymous reviewer archive delivery channel",
                 "author-controlled title-page and declaration metadata",
                 "final human review of generated package and portal metadata",
             ]
-            if result_class == "ACCESS_BLOCKED"
+            if result_class != "ACCESS_BLOCKED" or access_blocked_author_decision
             else [
+                "author decision on registered Aikens ACCESS_BLOCKED state",
                 "anonymous reviewer archive delivery channel",
                 "author-controlled title-page and declaration metadata",
                 "final human review of generated package and portal metadata",

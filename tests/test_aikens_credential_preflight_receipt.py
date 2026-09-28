@@ -30,4 +30,6 @@ def test_docs_reference_latest_safe_preflight() -> None:
     assert "LEGACY_V1_CREDENTIAL_PREFLIGHT_ARTIFACT = 10853764396" in pub
     assert "opened no environmental" in pub
     assert "CURRENT_V2_PREOUTCOME_PACKAGE = READY" in pub
-    assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED" in pub
+    assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED" in pub
+    assert "AIKENS_LAMBDA_OUTCOME_OPENED = false" in pub
+    assert "FUTURE_AUTHENTICATED_EXECUTION = permitted under original preregistration" in pub
