@@ -3,7 +3,7 @@
   "date": "2026-09-28",
   "status": "SCREEN_ACTIVE_PROMOTION_GATE_NOT_PASSED",
   "canonical_paper_change": false,
-  "common_estimand_target": "Tier B: delta_beta_partner_C = beta_pollinator - beta_plant, days / degree C",
+  "common_estimand_target": "Tier B_abs: delta_abs_beta_partner_C = |beta_pollinator| - |beta_plant|, days / degree C; negative = plant more responsive",
   "independent_systems": {
     "freimuth_2022": {
       "class": "TIER_B_CANDIDATE_READY_SOURCE_RECONSTRUCTED",
@@ -12,9 +12,9 @@
       "plant_reported_sem": 0.2,
       "pollinator_beta_days_per_C": -2,
       "pollinator_reported_sem": 1.3,
-      "delta_days_per_C": 3.2,
       "uncertainty_status": "delta uncertainty can be approximated from disjoint group SEMs, but interaction-level dependence remains for a direct synchrony estimand",
-      "source_role": "large local-system benchmark already frozen in E6"
+      "source_role": "large local-system benchmark already frozen in E6",
+      "delta_abs_beta_days_per_C": -3.2
     },
     "kehrberger_holzschuh_2019": {
       "class": "TIER_A_PUBLISHED_EFFECT_READY_TIER_B_COVARIANCE_PENDING",
@@ -25,7 +25,6 @@
         "plant_beta_days_per_C": -13,
         "pollinator": "Osmia cornuta males",
         "pollinator_beta_days_per_C": -4,
-        "delta_days_per_C": 9,
         "source_ci_plant_per_0_1C": [
           -2.4,
           -0.2
@@ -34,7 +33,8 @@
           -0.6,
           -0.1
         ],
-        "uncertainty_status": "partner covariance is not reported; a difference SE reconstructed from marginal CIs under independence is diagnostic only"
+        "uncertainty_status": "partner covariance is not reported; a difference SE reconstructed from marginal CIs under independence is diagnostic only",
+        "delta_abs_beta_days_per_C": -9
       },
       "direct_tier_A": {
         "first_bee_minus_first_flower_days_per_0_1C": -0.8,
@@ -62,8 +62,8 @@
       "pollinator_beta_days_per_C": -1.8,
       "pollinator_reported_plusminus": 0.5,
       "pollinator_plusminus_label": "SD in source table",
-      "delta_days_per_C": -0.5,
-      "uncertainty_status": "source table labels coefficient spreads as SD and the two partner models have no reported cross-model covariance; do not treat sqrt(0.2^2+0.5^2) as an inferential SE"
+      "uncertainty_status": "source table labels coefficient spreads as SD and the two partner models have no reported cross-model covariance; do not treat sqrt(0.2^2+0.5^2) as an inferential SE",
+      "delta_abs_beta_days_per_C": 0.5
     },
     "de_manincor_2023": {
       "class": "EXPERIMENTAL_MECHANISM_ANCHOR_NOT_PRIMARY_META_EFFECT",
@@ -72,6 +72,22 @@
       "plant_result": "warming advanced community flowering onset and peak; peak 7.4 days earlier",
       "pollinator_result": "Osmia lignaria emergence not detectably altered by warming",
       "reason_not_primary": "one greenhouse room per temperature treatment; treatment is confounded with room and partner endpoints use different model scales"
+    },
+    "kharouba_vellend_2015": {
+      "class": "TIER_B_ABS_DIRECT_PUBLISHED_CONTRAST_READY",
+      "independent_family": "bc_butterfly_nectar_plants",
+      "primary_source": "Kharouba & Vellend 2015, DOI 10.1111/1365-2656.12373",
+      "matched_exposure": "same spring temperature predictor for butterfly flight and plant flowering",
+      "association_count": 166,
+      "butterfly_species": 61,
+      "plant_species": 54,
+      "delta_abs_beta_days_per_C": -5.7,
+      "se": 1.03,
+      "ci95": [
+        -7.75,
+        -3.65
+      ],
+      "uncertainty_status": "direct published mixed-model contrast; source accounts for repeated butterfly and plant identities"
     }
   },
   "nonpoolable_or_pending": {
@@ -84,30 +100,46 @@
     "stemkovski_2020": "BEE_EFFECT_READY_BUT_PLANT_COMPARATOR_NOT_SAME_SOURCE_CONTRACT"
   },
   "current_ecological_pattern": {
-    "published_Tier_B_point_estimates_days_per_C": [
-      3.2,
-      9,
-      -0.5
+    "published_Tier_B_abs_point_estimates_days_per_C": [
+      -3.2,
+      -9,
+      0.5,
+      -5.7
     ],
     "sign_pattern": [
-      "positive",
+      "negative",
+      "negative",
       "positive",
       "negative"
     ],
-    "interpretation": "local plant-pollinator systems do not show a universal ordering in which plant or pollinator phenology is always more temperature-responsive",
+    "interpretation": "local plant-pollinator systems do not show a universal ordering in which plant or pollinator phenology is always more temperature-responsive; three screened systems are plant-dominant whereas Xie is pollinator-dominant at the global fixed-effect level and reports geographic reversal",
     "inference_boundary": "point-estimate heterogeneity is descriptive; pooled inferential meta-analysis is blocked until partner-difference uncertainties are harmonized"
   },
   "promotion_gate": {
-    "independent_system_count_with_point_estimate": 3,
+    "independent_system_count_with_point_estimate": 4,
     "independent_system_count_with_harmonized_inferential_variance": 1,
     "minimum_required_with_harmonized_inferential_variance": 3,
     "passed": false,
     "blockers": [
-      "Kehrberger partner-difference covariance/variance is not directly reported",
+      "Freimuth B_abs contrast requires covariance handling between separately summarized group means; its direct interaction asynchrony effect is Tier A rather than B_abs",
+      "Kehrberger WMD partner-difference covariance is not directly reported; its direct lag model uses first-event phenology",
       "Xie partner coefficient ± values are labelled SD and cross-model covariance is not reported",
-      "study designs differ (long-term mixed models versus spatial temperature gradient), requiring a declared design moderator/sensitivity before pooling"
+      "study designs and phenophase summaries differ, requiring declared design/phenophase sensitivity before pooling"
     ]
   },
   "paper2_decision": "KEEP_E6_AS_CANONICAL_CEILING",
-  "next_allowed_step": "reconstruct source-level covariance or raw matched partner models for at least two additional independent systems; only then open a formal E7 meta-analysis"
+  "next_allowed_step": "recover covariance-safe B_abs or a common direct Tier-A relative-timing effect for at least two additional independent systems; only then open formal E7 pooling",
+  "pilot_diagnostic": {
+    "workflow_run": 36397661197,
+    "artifact_id": 10958638132,
+    "effect_count": 4,
+    "forced_Q": 34.314077343757155,
+    "forced_I2_percent": 91.25723250563868,
+    "forced_random_mean": -3.4956364025309545,
+    "forced_normal_ci95": [
+      -7.467421418498843,
+      0.476148613436933
+    ],
+    "status": "NONPROMOTABLE_DIAGNOSTIC_ONLY"
+  }
 }
