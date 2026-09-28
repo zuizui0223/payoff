@@ -114,7 +114,26 @@
       "date": "2026-09-27",
       "basis": "published source Methods, before joined source outcome inspection",
       "outcome_data_inspected": false
-    }
+    },
+    "gate_order_amendment_20260928": {
+      "timing": "after source-access audit but before cue-resource connectivity/reversal outcome and before any focal/partner timing values are opened",
+      "outcome_data_inspected": false,
+      "rationale": "Gate B is defined only on the precommitment cue and destination resource. Requiring migrant/resident timing bytes before that independent environmental gate adds no protection against outcome tuning and unnecessarily couples Gate B to an external MDA access restriction.",
+      "gate_b_environmental_source_requirements": [
+        "precommitment_cue source-faithfully extended and frozen",
+        "destination_resource_state exact file hash/schema/year coverage certified"
+      ],
+      "gate_c_history_source_requirements": [
+        "Gate B passes its frozen reversal and stability criteria",
+        "migrant_timing exact registered archive hash/schema/year coverage certified",
+        "resident_partner_timing exact file hash/schema/year coverage certified"
+      ],
+      "firewall": "resident and migrant timing values remain unopened during Gate B; Gate C remains closed until both history sources are certified",
+      "permitted_state": "Gate B may run while migrant source access is blocked; Gate C may not"
+    },
+    "relevant_source_hashes_required_before_each_gate": true,
+    "gate_b_can_run_without_history_sources": true,
+    "gate_c_requires_all_history_sources": true
   },
   "coordinates": {
     "cue_resource_predictive_connectivity": {
