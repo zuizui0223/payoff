@@ -250,6 +250,25 @@ decline-to-recovery gate fails and the path-dependence model was not opened.
 No current natural dataset is promoted as direct information-triggered network
 hysteresis.
 
+### E5 — prospective same-system cue-resource recovery gate
+
+A second preregistered Hoge Veluwe lane used the same fixed Ivory Coast cue but
+targeted observed caterpillar peak dates directly, before opening any
+resident-migrant timing history.
+
+Across the frozen 1992–2015 connectivity series, the best segmented fit
+improved AICc by 10.81 units but had positive slopes both before and after its
+1999 breakpoint (+0.228 and +0.027).
+
+Status: **NO_CUE_RESOURCE_REVERSAL**.
+
+Because the environmental decline-to-recovery prerequisite failed, Gate C was
+**NOT_RUN** and pied-flycatcher/great-tit timing was not joined into a history
+test.
+
+Licensed wording: the strongest current same-system prospective validation
+failed before the network-history outcome was opened.
+
 ## Prior-art firewall
 
 PAYOFF-B does not claim novelty for game theory applied to phenology,

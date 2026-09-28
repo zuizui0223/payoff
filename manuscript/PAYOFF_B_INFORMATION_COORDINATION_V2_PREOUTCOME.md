@@ -525,19 +525,29 @@ The predicted negative interaction is not supported.
 
 This null is informative because it separates two functions of information. Predictive connectivity may influence which action or timing regime is chosen before error appears without acting as a universal amplifier of correction after error has already appeared.
 
-### 3.4 A long-term natural decline–recovery information cycle was not recovered
+### 3.4 Two preregistered natural reversal gates were negative
 
-A preregistered 1980–2010 Hoge Veluwe lane combines published annual standardized selection gradients with a fixed Ivory Coast NCEP temperature cue.
-
-The rolling cue–driver relationship is highly nonstationary, and an unconstrained two-line fit changes near 2001. However, the registered decline–recovery geometry is not met: the fitted pre-break slope is positive rather than negative.
-
-The frozen outcome is therefore
+A preregistered 1980–2010 Hoge Veluwe lane first combined published annual standardized selection gradients with a fixed Ivory Coast NCEP temperature cue. Its rolling cue–driver relationship was highly nonstationary, but the registered decline–recovery geometry failed because the fitted pre-break slope was positive rather than negative. The frozen outcome was
 
 [
 \texttt{NO\_CUE\_DRIVER\_REVERSAL}.
 ]
 
-The path-dependence model was not opened.
+We then preregistered a closer same-system environmental gate before opening resident–migrant timing history. The fixed Ivory Coast cue was paired with independently archived annual Hoge Veluwe caterpillar-peak dates from the long-term great-tit system (Visser et al., 2021), using 24 trailing-window predictive-connectivity estimates for 1992–2015. A two-segment fit improved AICc relative to one line by 10.81 units and selected a 1999 breakpoint, but the fitted slopes were positive both before and after the breakpoint:
+
+[
+\hat\beta_{pre}=+0.228,
+\qquad
+\hat\beta_{post}=+0.027.
+]
+
+The frozen outcome was therefore
+
+[
+\texttt{NO\_CUE\_RESOURCE\_REVERSAL}.
+]
+
+Because the environmental reversal prerequisite failed, the resident–migrant history test was not opened and neither pied-flycatcher nor great-tit timing was joined into a hysteresis analysis.
 
 PAYOFF-B therefore does not claim to have observed natural information-recovery hysteresis in this system.
 
@@ -642,7 +652,7 @@ The flycatcher manipulation anchors the idea that the availability of heterospec
 
 The wigeon null shows that predictive connectivity should not be treated as a universal post-error controller.
 
-The long-term cue–driver lane fails its preregistered reversal gate.
+Two long-term preregistered reversal gates are negative. The second, more direct cue–resource gate failed before any resident–migrant history outcome was opened.
 
 No current natural dataset therefore demonstrates the full degradation–recovery network hysteresis predicted by the shared-cue and private-cue games. That remains a prospective test.
 
@@ -712,7 +722,7 @@ An organism may possess an adequate response but face a decision before useful i
 
 The stronger result is historical. Once an information-using convention collapses, restoring environmental information can be insufficient. Under perfect cue accuracy, an obsolete timing convention and a better informed convention can both be strict equilibria. The informed state can have higher joint payoff while no actor benefits from adopting it first. But the trap need not require network-wide intervention: a temporary informed seed can change neighbour incentives and nucleate recovery, with the minimum rescue set determined by network position.
 
-Natural data currently support pieces of this causal chain rather than the complete hysteresis process. Predictive connectivity is associated with smaller mismatch in a pooled broad-bird analysis; heterospecific phenology affects decisions made after, but not before, it becomes visible in a flycatcher manipulation; predictive connectivity does not strengthen post-error correction in wigeon; and a preregistered long-term natural reversal gate is negative.
+Natural data currently support pieces of this causal chain rather than the complete hysteresis process. Predictive connectivity is associated with smaller mismatch in a pooled broad-bird analysis; heterospecific phenology affects decisions made after, but not before, it becomes visible in a flycatcher manipulation; predictive connectivity does not strengthen post-error correction in wigeon; and two preregistered long-term natural reversal gates are negative, including a same-system cue–resource gate that failed before interaction history was opened.
 
 The resulting theoretical predictions remain prospective at the full network-hysteresis level:
 
@@ -740,5 +750,6 @@ The framework therefore predicts that climate adaptation can fail not only becau
 - Tomotani BM, Gienapp P, de la Hera I, Terpstra M, Pulido F, Visser ME (2021) Integrating causal and evolutionary analysis of life-history evolution: Arrival date in a long-distant migrant. *Frontiers in Ecology and Evolution* 9:630823. DOI: 10.3389/fevo.2021.630823.
 - van Toor ML et al. (2021) Migration distance affects how closely Eurasian wigeons follow spring phenology during migration. *Movement Ecology* 9:61. DOI: 10.1186/s40462-021-00296-0.
 - Visser ME, Gienapp P (2019) Evolutionary and demographic consequences of phenological mismatches. *Nature Ecology & Evolution* 3:879–885. DOI: 10.1038/s41559-019-0880-8.
+- Visser ME, Lindner M, Gienapp P, Long M, Jenouvrier S (2021) Recent natural variability in global warming weakened phenological mismatch and selection on seasonal timing in great tits (*Parus major*). *Proceedings of the Royal Society B* 288:20211337. DOI: 10.1098/rspb.2021.1337.
 - Watts DJ (2002) A simple model of global cascades on random networks. *Proceedings of the National Academy of Sciences USA* 99:5766–5771. DOI: 10.1073/pnas.082090499.
 

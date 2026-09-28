@@ -1,6 +1,7 @@
 # PAYOFF-B V2 submission readiness
 
-Frozen: **2026-09-27**
+Frozen: **2026-09-27**  
+Updated: **2026-09-28**
 
 ## Current state
 
@@ -23,8 +24,8 @@ The canonical V2 GEB package has passed all hard gates.
 
 ```text
 structured abstract = 246 words
-main body = 4,167 words
-references = 13
+main body = 4,298 words
+references = 14
 display pieces = 7
 keywords = 8
 running title = 38 characters
@@ -36,21 +37,21 @@ package files = 17
 Frozen package:
 
 ```text
-workflow run = 36318360954 (attempt 1)
-artifact = 10930659946
+workflow run = 36370295430 (attempt 1)
+artifact = 10949330110
 artifact digest =
-d5d914c827e2e77b165145c55f38f07b55e99fcf6aee455a358fe3363779efdc
+0146afe2d091f951c7d5b9dd6b0afab853c70f977fce51729faf4fbd768127fb
 
 inner deterministic ZIP SHA256 =
-28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7
+262c6f1d5fdee798db5c2a8bc60b81ef05f480da70eb9de3d93de67de49c585f
 ```
 
 The declarations-inclusive package was rerun from the same frozen head in
-workflow run 36318360954 (attempt 2; artifact 10931800433). The deterministic
+workflow run 36370295430 (attempt 2; artifact 10949105921). The deterministic
 inner ZIP remained byte-identical:
 
 ```text
-28b9aacc3a347845569ce86278a11f02be9e24b6e00b3dd59ed68a42044c65b7
+262c6f1d5fdee798db5c2a8bc60b81ef05f480da70eb9de3d93de67de49c585f
 ```
 
 The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
@@ -92,22 +93,22 @@ A deterministic PREOUTCOME reviewer archive has been built from the canonical
 claim-ceiling V2 source.
 
 ```text
-workflow run = 36315711405
-artifact = 10930372460
+workflow run = 36370295435
+artifact = 10948908201
 artifact digest =
-2b364730325982cfb12d7152d41810a58f52b24c662f4bca55b1d57bc81e7a4d
+cb1a090d6d2ace3ec54f72aba0a58e4dbd3a7e1348907214879529909e66fd4e
 
 inner reviewer ZIP SHA256 =
-857d6e22fe2b9bc4724c35659667fa9159d69a8c93f7789f68f496828df918a6
+6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf
 
-files = 64
-Python source closure = 23
+files = 70
+Python source closure = 26
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
-reviewer archive reproduction run = 36318360955
-reviewer archive reproduction artifact = 10930779317
-reviewer archive deterministic inner SHA256 = 857d6e22fe2b9bc4724c35659667fa9159d69a8c93f7789f68f496828df918a6
+reviewer archive reproduction run = 36370295435
+reviewer archive reproduction artifact = 10948993094
+reviewer archive deterministic inner SHA256 = 6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
@@ -176,7 +177,9 @@ Natural evidence currently provides:
   migratory birds;
 - a decision-time cue-availability anchor from the pied-flycatcher experiment;
 - a registered wigeon predictive-connectivity controller null;
-- a negative long-term cue-driver decline–recovery gate.
+- a negative long-term cue-driver decline–recovery gate;
+- a second preregistered same-system cue–resource gate that returned
+  NO_CUE_RESOURCE_REVERSAL before resident–migrant history was opened.
 
 That boundary must remain explicit in the final abstract, cover letter and
 Discussion.

@@ -105,9 +105,10 @@ state even after cue quality fully recovers.
 Natural analyses deliberately test separate links rather than claiming a
 complete observed hysteresis event. The broad migratory-bird analysis provides
 pooled, dependence-sensitive support for predictive connectivity; the
-pied-flycatcher manipulation anchors timing-dependent cue availability; and the
+pied-flycatcher manipulation anchors timing-dependent cue availability; the
 registered wigeon analysis does not support a universal effect of predictive
-connectivity on post-error correction.
+connectivity on post-error correction; and a preregistered Hoge Veluwe
+cue–resource recovery gate failed before resident–migrant history was opened.
 
 Registered Supplementary test: **{result_class}**. {summaries[result_class]}
 This registered result does not alter the manuscript's title, abstract,
