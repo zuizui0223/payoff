@@ -168,19 +168,44 @@ resident–migrant mismatch or history coefficient has yet been opened.
 See
 `data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json`.
 
+## Gate-B result — 2026-09-28
+
+The independently licensed cue–resource gate has now been opened and is
+**negative**:
+
+```text
+NO_CUE_RESOURCE_REVERSAL
+```
+
+The best two-segment fit used a 1999 breakpoint and improved AICc relative to a
+single line by 10.81 units, but its fitted slopes were **+0.228 before** and
+**+0.027 after** the breakpoint. The predeclared negative-then-positive
+degradation/recovery geometry is therefore absent.
+
+This distinction matters. The 24-year connectivity series is visibly
+non-monotone, but non-monotonicity was explicitly insufficient for a recovery
+claim. Because Gate B failed, the resident–migrant history test was not opened,
+great-tit timing was not joined to flycatcher timing, and the MDA migrant-source
+access blocker no longer needs to be resolved for this registered lane.
+
+Frozen result:
+`data/payoff_b_hoge_veluwe_gate_b_result_20260928.json`.
+
 ## Next execution target
 
-The next data-analysis target is now the preregistered cross-source Hoge Veluwe
-assembly, not a retuned version of the failed CV24C lane.
+The preregistered Hoge Veluwe lane is now closed at its environmental Gate B.
+It must not be retuned with another breakpoint, cue window, resource coordinate
+or timing source. Any future natural-hysteresis analysis requires a genuinely
+new, prospectively registered system or dataset.
 
-The frozen sequence is now:
+The frozen sequence resolved as:
 
     cue + resource sources certified
-    -> run the frozen African-cue / caterpillar-resource Gate B
-    -> if Gate B fails: stop, history layer remains unopened
-    -> if Gate B passes: obtain exact registered Tomotani MDA archive
-    -> certify migrant schema/year coverage
-    -> only then open resident–migrant Gate C
+    -> Gate B = NO_CUE_RESOURCE_REVERSAL
+    -> STOP
+    -> Gate C = NOT RUN
+
+The history layer remains unopened by design.
 
 The resident/resource series are independently sourced from the same Hoge
 Veluwe system; they must not be inspected jointly with the migrant timing
