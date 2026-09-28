@@ -1,0 +1,29 @@
+{
+  "diagnostic_id": "payoff_b_e7_published_effect_pilot_v1_20260928",
+  "status": "NONPROMOTABLE_DIAGNOSTIC",
+  "effect_definition": "pollinator temperature slope minus plant temperature slope, days per degree C",
+  "rows": [
+    {
+      "study": "Freimuth_2022",
+      "effect": 3.2,
+      "diagnostic_se": 1.3152946437965907,
+      "diagnostic_se_rule": "sqrt(bee_SEM^2 + plant_SEM^2); groups are disjoint but this does not reconstruct interaction-level covariance",
+      "inferential_variance_valid": false
+    },
+    {
+      "study": "Kehrberger_Holzschuh_2019",
+      "effect": 9,
+      "diagnostic_se": 5.755364373815549,
+      "diagnostic_se_rule": "convert marginal 95% CIs of WMD slopes to approximate SEs, scale per 0.1 C to per C, then propagate under zero covariance",
+      "inferential_variance_valid": false
+    },
+    {
+      "study": "Xie_2022",
+      "effect": -0.5,
+      "diagnostic_se": 0.5385164807134505,
+      "diagnostic_se_rule": "treat source table ±SD labels as if they were SE and assume zero cross-model covariance; intentionally invalid for inference and used only to stress-test sign/weight sensitivity",
+      "inferential_variance_valid": false
+    }
+  ],
+  "hard_boundary": "Any pooled estimate generated from these diagnostic SEs is illustrative only and must not appear in the Paper 2 manuscript, abstract, claim stack, or publication receipt."
+}
