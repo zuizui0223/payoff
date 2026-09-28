@@ -21,6 +21,7 @@ def build_supporting_information() -> str:
     broad = load_json("payoff_b_broad_predictive_connectivity_result_20260926.json")
     wigeon = load_json("payoff_b_wigeon_predictive_connectivity_result_20260926.json")
     longterm = load_json("payoff_b_cv24c_cue_driver_result_20260927.json")
+    hoge = load_json("payoff_b_hoge_veluwe_gate_b_result_20260928.json")
 
     return f"""# Supporting Information — information deadlines and seasonal coordination
 
@@ -126,7 +127,39 @@ The preregistered decline-to-recovery geometry did not pass. The downstream
 history model was therefore not opened. No natural information-recovery
 hysteresis is claimed from this lane.
 
-## Appendix S7. Capacity layer
+## Appendix S7. Same-system cue–resource reversal gate
+
+A second preregistered natural gate used the fixed Ivory Coast temperature cue
+and independently archived Hoge Veluwe caterpillar-peak dates. Its frozen
+status was
+
+{hoge['status']}.
+
+The registered history span contained {hoge['connectivity_rows']} trailing-window
+predictive-connectivity estimates ({hoge['registered_history_span'][0]}–
+{hoge['registered_history_span'][1]}). A two-segment fit improved AICc over a
+single line by {hoge['full_fit']['segmented']['delta_aicc_vs_linear']:.2f}
+units and selected break year {hoge['full_fit']['segmented']['break_year']},
+but the fitted segment slopes were
+
+- pre-break = {hoge['full_fit']['segmented']['left_slope']:.3f};
+- post-break = {hoge['full_fit']['segmented']['right_slope']:.3f}.
+
+Both were positive, so the preregistered negative-then-positive
+decline→recovery geometry failed. The resident–migrant history test therefore
+remained {hoge['gate_c_status']}; migrant and resident timing were not opened
+for the hysteresis analysis.
+
+Frozen source hashes:
+
+- cue CSV SHA-256 = {hoge['source_provenance']['cue_csv_sha256']};
+- caterpillar resource file SHA-256 =
+  {hoge['source_provenance']['resource_file_sha256']}.
+
+This gate is a negative natural validation of the required environmental
+prerequisite, not evidence for natural network hysteresis.
+
+## Appendix S8. Capacity layer
 
 The earlier moving-landscape programme is retained as a distinct capacity
 result. Finite temporal adjustment can extend persistence and buffer immediate
@@ -134,7 +167,7 @@ route costs, but spatial movement re-enters under stronger sustained forcing.
 Synthetic parameter values are mechanism illustrations and are not natural
 threshold estimates.
 
-## Appendix S8. Registered industrial-development supplement — pending
+## Appendix S9. Registered industrial-development supplement — pending
 
 The registered fixed-24 h industrial-development phase-retention analysis
 remains unopened at this PREOUTCOME stage.
