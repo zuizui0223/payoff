@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the six PAYOFF-B information-deadlines figures from frozen sources.
+"""Render the seven PAYOFF-B information-deadlines figures from frozen sources.
 
 Dependency-free SVG renderer. Quantitative panels consume frozen result JSONs or
 exact model functions already committed in the repository. No Aikens outcome is
