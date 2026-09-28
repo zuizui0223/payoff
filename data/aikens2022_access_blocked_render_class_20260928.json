@@ -1,0 +1,40 @@
+{
+  "contract_id": "aikens2022_access_blocked_render_class_v1_20260928",
+  "date": "2026-09-28",
+  "status": "RENDERABLE_NOT_ACTIVATED",
+  "purpose": "Represent external authenticated-source access failure without misclassifying it as a scientific null or statistical non-estimability result.",
+  "activation_rule": {
+    "allowed_only_when": [
+      "the frozen Aikens environmental reconstruction requires authenticated source access",
+      "a fresh credential-only preflight records configured=false",
+      "environmental_values_opened=false",
+      "lambda_outcome_opened=false",
+      "no alternative environmental product, time interval, matching tolerance, or unregistered source is substituted"
+    ],
+    "current_preflight": {
+      "workflow_run": 36372973062,
+      "artifact_id": 10950280495,
+      "status": "NOT_CONFIGURED",
+      "configured": false
+    },
+    "author_decision_required": true,
+    "automatic_activation": false
+  },
+  "distinction_from_not_estimable": {
+    "ACCESS_BLOCKED": "execution did not occur because required authenticated source access was unavailable",
+    "NOT_ESTIMABLE": "execution occurred far enough to evaluate the frozen reconstruction/support criteria, but the registered contrast could not be estimated"
+  },
+  "package_behavior": {
+    "result_location": "Supporting Information only",
+    "main_text_retuning": false,
+    "main_figures_retuning": false,
+    "headline_retuning": false,
+    "final_science_blocker": "author decision required: submit with ACCESS_BLOCKED state or wait for authenticated execution"
+  },
+  "claim_boundary": [
+    "ACCESS_BLOCKED is not evidence for or against the registered lambda prediction",
+    "ACCESS_BLOCKED must not be described as a null result",
+    "ACCESS_BLOCKED must not be converted to NOT_ESTIMABLE",
+    "future authenticated execution remains permissible under the original frozen contract"
+  ]
+}

@@ -37,6 +37,8 @@ def classify_result(payload: dict) -> str:
     status = str(payload.get("status", ""))
     if status == "phase_retention_contrast_not_estimable":
         return "NOT_ESTIMABLE"
+    if status == "phase_retention_contrast_access_blocked":
+        return "ACCESS_BLOCKED"
     if status not in {
         "phase_retention_contrast_gate_pass",
         "phase_retention_contrast_gate_fail",
@@ -55,6 +57,54 @@ def classify_result(payload: dict) -> str:
 
 def render_blocks(payload: dict) -> tuple[str, str, str, str, dict]:
     result_class = classify_result(payload)
+
+    if result_class == "ACCESS_BLOCKED":
+        reason_code = str(
+            payload.get("reason_code")
+            or "REQUIRED_AUTHENTICATED_SOURCE_UNAVAILABLE"
+        )
+        preflight = payload.get("credential_preflight") or {}
+        preflight_date = preflight.get("date", "unknown date")
+        preflight_run = preflight.get("workflow_run", "unknown run")
+        results = (
+            "The preregistered within-mule-deer phase-retention contrast was "
+            "**not executed because the frozen environmental reconstruction "
+            "requires authenticated source access that was unavailable in the "
+            f"registered execution environment** ({reason_code}; credential "
+            f"preflight {preflight_date}, run {preflight_run}). No environmental "
+            "values or lambda outcome were opened, and no alternative product, "
+            "time interval, matching tolerance or unregistered data source was "
+            "substituted."
+        )
+        discussion = (
+            "This is an external-access outcome, not a statistical "
+            "non-estimability result. The industrial-development perturbation "
+            "therefore contributes no inference about phase retention. The "
+            "previously frozen actuator contrast remains unchanged, and the "
+            "forcing-to-lambda link remains unresolved unless the registered "
+            "authenticated source route later becomes available."
+        )
+        abstract = (
+            "The preregistered within-taxon lambda perturbation was not executed "
+            "because its frozen environmental source required unavailable "
+            "authenticated access; no substitute analysis was used."
+        )
+        conclusion = (
+            "The registered forcing-to-lambda test remains unresolved because "
+            "the required authenticated source route was unavailable, not "
+            "because of a statistical null or estimation failure."
+        )
+        claim_state = {
+            "scientific_result": result_class,
+            "lambda_shift_supported": False,
+            "wrong_direction": False,
+            "estimable": False,
+            "executed": False,
+            "access_blocked": True,
+            "cross_taxon_lambda_synthesis_changed": False,
+            "actuator_result_changed": False,
+        }
+        return results, discussion, abstract, conclusion, claim_state
 
     if result_class == "NOT_ESTIMABLE":
         reasons = payload.get("reasons") or []

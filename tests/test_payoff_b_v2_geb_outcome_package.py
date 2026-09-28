@@ -32,6 +32,20 @@ def payload(result_class: str) -> dict:
             "status": "phase_retention_contrast_not_estimable",
             "reasons": ["too few fixed-24h transitions"],
         }
+    if result_class == "ACCESS_BLOCKED":
+        return {
+            "status": "phase_retention_contrast_access_blocked",
+            "reason_code": "CREDENTIALS_NOT_CONFIGURED",
+            "credential_preflight": {
+                "date": "2026-09-28",
+                "workflow_run": 36372973062,
+                "artifact_id": 10950280495,
+                "configured": False,
+                "credential_route": "none",
+                "environmental_values_opened": False,
+                "lambda_outcome_opened": False,
+            },
+        }
 
     if result_class == "PASS":
         passed = True
@@ -87,12 +101,13 @@ def file_hash_map(manifest: dict) -> dict[str, str]:
     }
 
 
-def test_all_four_result_classes_build_science_ready_v2_packages(tmp_path: Path):
+def test_four_scientific_results_plus_access_blocked_build_v2_packages(tmp_path: Path):
     for result_class in (
         "PASS",
         "FAIL_WRONG_DIRECTION",
         "FAIL_INSUFFICIENT_SUPPORT",
         "NOT_ESTIMABLE",
+        "ACCESS_BLOCKED",
     ):
         result_json = write_payload(tmp_path, result_class)
         out = tmp_path / result_class
@@ -101,11 +116,29 @@ def test_all_four_result_classes_build_science_ready_v2_packages(tmp_path: Path)
         manifest = outcome.build(result_json, out, zip_path)
 
         assert manifest["scientific_result"] == result_class
-        assert manifest["scientific_state"] == "OUTCOME_RENDERED_SCIENCE_READY"
-        assert manifest["final_science_blocker"] is None
+        expected_state = (
+            "OUTCOME_RENDERED_ACCESS_BLOCKED"
+            if result_class == "ACCESS_BLOCKED"
+            else "OUTCOME_RENDERED_SCIENCE_READY"
+        )
+        assert manifest["scientific_state"] == expected_state
+        if result_class == "ACCESS_BLOCKED":
+            assert manifest["final_science_blocker"] is not None
+            assert "author decision" in manifest["final_science_blocker"]
+        else:
+            assert manifest["final_science_blocker"] is None
         assert manifest["final_submission_eligible"] is False
-        assert manifest["registered_result_frozen"] is True
-        expected_estimable = result_class != "NOT_ESTIMABLE"
+        assert manifest["registered_execution_state_frozen"] is True
+        expected_result_frozen = result_class != "ACCESS_BLOCKED"
+        assert manifest["registered_result_frozen"] is expected_result_frozen
+        assert (
+            manifest["registered_scientific_result_available"]
+            is expected_result_frozen
+        )
+        expected_estimable = result_class not in {
+            "NOT_ESTIMABLE",
+            "ACCESS_BLOCKED",
+        }
         assert manifest["phase_retention_estimate_available"] is expected_estimable
         assert manifest["aikens_outcome_opened"] is expected_estimable
         assert manifest["main_text_retuned"] is False
@@ -137,6 +170,13 @@ def test_all_four_result_classes_build_science_ready_v2_packages(tmp_path: Path)
         assert result_class in si
         assert claim["scientific_result"] == result_class
         assert claim["retuning_permitted"] is False
+        if result_class == "ACCESS_BLOCKED":
+            assert claim["access_blocked"] is True
+            assert claim["executed"] is False
+            assert claim["estimable"] is False
+            assert "not executed" in si
+        else:
+            assert claim.get("access_blocked", False) is False
         assert audit["all_outcome_hard_gates_pass"]
         assert "PREOUTCOME" not in si
         assert "remains unopened" not in si
@@ -151,6 +191,7 @@ def test_main_text_and_seven_figures_are_identical_across_result_classes(
         "FAIL_WRONG_DIRECTION",
         "FAIL_INSUFFICIENT_SUPPORT",
         "NOT_ESTIMABLE",
+        "ACCESS_BLOCKED",
     ):
         result_json = write_payload(tmp_path, result_class)
         manifest = outcome.build(
@@ -183,6 +224,7 @@ def test_supporting_information_changes_with_registered_result(tmp_path: Path):
         "FAIL_WRONG_DIRECTION",
         "FAIL_INSUFFICIENT_SUPPORT",
         "NOT_ESTIMABLE",
+        "ACCESS_BLOCKED",
     ):
         result_json = write_payload(tmp_path, result_class)
         manifest = outcome.build(
@@ -195,7 +237,7 @@ def test_supporting_information_changes_with_registered_result(tmp_path: Path):
             "GEB_V2_SUPPORTING_INFORMATION_OUTCOME.md"
         ]
 
-    assert len(set(hashes.values())) == 4
+    assert len(set(hashes.values())) == 5
 
 
 def test_outcome_zip_is_deterministic_for_same_registered_result(tmp_path: Path):
