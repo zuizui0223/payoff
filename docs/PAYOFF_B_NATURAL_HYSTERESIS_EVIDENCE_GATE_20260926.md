@@ -159,8 +159,11 @@ download. Gate A therefore ends in:
 MIGRANT_SOURCE_ACCESS_BLOCKED
 ```
 
-Gate B and Gate C remain closed. No cue–resource connectivity, network
-breakpoint, resident–migrant mismatch or history coefficient has been opened.
+Because Gate B is defined only on the already-certified cue and resource
+coordinates, it is now independently licensed while resident and migrant timing
+remain sealed. Gate C remains closed until Gate B passes and the exact migrant
+source is certified. No cue–resource connectivity, network breakpoint,
+resident–migrant mismatch or history coefficient has yet been opened.
 
 See
 `data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json`.
@@ -172,11 +175,12 @@ assembly, not a retuned version of the failed CV24C lane.
 
 The frozen sequence is now:
 
-    cue + resident + resource sources certified
-    -> obtain exact registered Tomotani MDA archive
+    cue + resource sources certified
+    -> run the frozen African-cue / caterpillar-resource Gate B
+    -> if Gate B fails: stop, history layer remains unopened
+    -> if Gate B passes: obtain exact registered Tomotani MDA archive
     -> certify migrant schema/year coverage
-    -> only then test fixed African-cue / caterpillar-resource reversal
-    -> only if that gate passes, open resident–migrant history test
+    -> only then open resident–migrant Gate C
 
 The resident/resource series are independently sourced from the same Hoge
 Veluwe system; they must not be inspected jointly with the migrant timing
