@@ -106,8 +106,8 @@
       "level": "NETWORK_HYSTERESIS_ASSEMBLY_CANDIDATE",
       "direct_hysteresis_ready": false,
       "blockers": [
-        "registered Tomotani Marine Data Archive file requires an authorized MDA request/login route; anonymous download is unavailable",
-        "Gate B remains closed until the exact registered migrant source is obtained"
+        "Gate C requires the exact registered Tomotani Marine Data Archive; anonymous download is unavailable",
+        "Gate C also requires Gate B to pass the frozen environmental reversal/stability gate"
       ],
       "retained_role": "best current prospective same-system network-history assembly; three of four registered coordinates are source-certified and the joined outcome remains unopened",
       "doi": "10.1111/gcb.14006",
@@ -126,13 +126,15 @@
       },
       "registered_followup": "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json",
       "source_gate_a": {
-        "status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
+        "status": "ENVIRONMENTAL_SOURCE_GATE_PASS_HISTORY_SOURCE_BLOCKED",
+        "raw_workflow_status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
         "result": "data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json",
         "cue": "CERTIFIED_1980_2015",
-        "resident_partner": "CERTIFIED_1973_2020",
+        "resident_partner": "CERTIFIED_1973_2020_HISTORY_GATE_ONLY",
         "destination_resource": "CERTIFIED_1985_2020",
         "migrant_timing": "ACCESS_BLOCKED_MDA",
-        "gate_b_licensed": false
+        "gate_b_licensed": true,
+        "gate_c_licensed": false
       }
     }
   ],
@@ -141,10 +143,10 @@
     "best_within_species_candidate": "none currently unresolved with accessible outcome-independent evidence; Tomotani 1980-2015 remains access-pending, while Hoge Veluwe 1980-2010 failed its frozen reversal gate",
     "best_interaction_anchor": "Samplonius_Both_2019_fatal_competition",
     "best_decision_time_anchor": "Samplonius_Both_2017_manipulation",
-    "required_next_data": "obtain the exact registered Tomotani Marine Data Archive through an authorized MDA access/request route; no substitute migrant coordinate is licensed",
-    "best_network_assembly_candidate": "Hoge Veluwe 1985-2015 registered lane; cue, resident and resource sources certified; exact migrant timing source access-blocked; Gate B closed"
+    "required_next_data": "run the independently licensed cue-resource Gate B; only if it passes, obtain the exact registered Tomotani Marine Data Archive through an authorized MDA route before Gate C",
+    "best_network_assembly_candidate": "Hoge Veluwe 1985-2015 lane: environmental source gate passed, Gate B licensed and unopened; history source gate remains blocked on the exact migrant archive"
   },
-  "claim_rule": "Do not describe any current natural dataset as direct information-triggered network hysteresis. Hoge Veluwe Gate A has certified three coordinates, but the exact migrant source remains access-blocked and Gate B/C remain unopened.",
+  "claim_rule": "Do not describe the Hoge Veluwe lane as natural hysteresis. Environmental Gate A passed, but Gate B is still unopened and Gate C is closed until both Gate B passes and the exact migrant source is certified.",
   "followup_20260927": {
     "lane": "Hoge Veluwe 1980-2010 cue-driver information history",
     "source_driver": "PLOS S1 annual standardized selection gradients",
@@ -157,9 +159,12 @@
   },
   "gate_a_20260928": {
     "result": "data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json",
-    "status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
+    "status": "ENVIRONMENTAL_SOURCE_GATE_PASS_HISTORY_SOURCE_BLOCKED",
     "workflow_run": 36367383611,
     "artifact_id": 10948380232,
-    "outcome_opened": false
+    "outcome_opened": false,
+    "raw_workflow_status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
+    "gate_b_licensed": true,
+    "gate_c_licensed": false
   }
 }
