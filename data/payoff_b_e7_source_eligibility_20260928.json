@@ -1,7 +1,7 @@
 {
   "result_id": "payoff_b_e7_source_eligibility_20260928",
   "date": "2026-09-28",
-  "status": "SCREEN_ACTIVE_PROMOTION_GATE_NOT_PASSED",
+  "status": "SCREEN_COMPLETE_PROMOTION_GATE_NOT_PASSED",
   "canonical_paper_change": false,
   "common_estimand_target": "Tier B_abs: delta_abs_beta_partner_C = |beta_pollinator| - |beta_plant|, days / degree C; negative = plant more responsive",
   "independent_systems": {
@@ -142,5 +142,6 @@
     ],
     "status": "NONPROMOTABLE_DIAGNOSTIC_ONLY",
     "head_sha": "d91bf4a8a1c2901fcf7f3cfcc9f512a100b9e19c"
-  }
+  },
+  "screen_complete": true
 }
