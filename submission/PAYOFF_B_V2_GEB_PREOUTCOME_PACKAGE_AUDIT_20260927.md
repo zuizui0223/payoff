@@ -1,6 +1,6 @@
 # PAYOFF-B V2 GEB PREOUTCOME package audit
 
-Audited: **2026-09-27**
+Audited: **2026-09-28**
 
 Status: **PASS — canonical V2 PREOUTCOME working package ready**
 
