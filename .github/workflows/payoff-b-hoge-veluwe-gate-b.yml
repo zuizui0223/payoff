@@ -1,0 +1,106 @@
+name: PAYOFF-B Hoge Veluwe Gate B
+
+concurrency:
+  group: payoff-b-hv-gate-b-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-hv-gate-b-20260928
+    paths:
+      - "scripts/payoff_b_hoge_veluwe_gate_b.py"
+      - "scripts/payoff_b_hoge_veluwe_cue_extension.py"
+      - "scripts/payoff_b_hoge_veluwe_source_gate.py"
+      - "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json"
+      - "data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json"
+      - "tests/test_hoge_veluwe_gate_b.py"
+      - ".github/workflows/payoff-b-hoge-veluwe-gate-b.yml"
+  pull_request:
+    paths:
+      - "scripts/payoff_b_hoge_veluwe_gate_b.py"
+      - "scripts/payoff_b_hoge_veluwe_cue_extension.py"
+      - "scripts/payoff_b_hoge_veluwe_source_gate.py"
+      - "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json"
+      - "data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json"
+      - "tests/test_hoge_veluwe_gate_b.py"
+      - ".github/workflows/payoff-b-hoge-veluwe-gate-b.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  gate-b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Gate-B dependencies
+        run: >
+          python -m pip install --disable-pip-version-check
+          pytest pandas numpy requests openpyxl xarray netCDF4
+      - name: Run Gate-B unit tests
+        run: pytest -q tests/test_hoge_veluwe_gate_b.py
+      - name: Rebuild frozen Ivory Coast cue through 2015
+        run: >
+          python scripts/payoff_b_hoge_veluwe_cue_extension.py
+          --annual-output outputs/hoge_veluwe_gate_b/ivory_coast_cue_1980_2015.csv
+          --receipt-output outputs/hoge_veluwe_gate_b/cue_extension_receipt.json
+      - name: Open registered environmental Gate B
+        run: >
+          python scripts/payoff_b_hoge_veluwe_gate_b.py
+          --cue-csv outputs/hoge_veluwe_gate_b/ivory_coast_cue_1980_2015.csv
+          --output-dir outputs/hoge_veluwe_gate_b
+      - name: Validate registered Gate-B outcome and firewall
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          result = json.loads(
+              Path("outputs/hoge_veluwe_gate_b/gate_b_result.json")
+              .read_text(encoding="utf-8")
+          )
+          allowed = {
+              "NO_CUE_RESOURCE_REVERSAL",
+              "UNSTABLE_CUE_RESOURCE_REVERSAL",
+              "INFORMATION_REVERSAL_STABLE",
+          }
+          if result.get("status") not in allowed:
+              raise SystemExit(f"unlicensed Gate-B status: {result.get('status')!r}")
+          firewall = result.get("outcome_firewall", {})
+          if firewall.get("resident_timing_read") is not False:
+              raise SystemExit("resident timing opened during Gate B")
+          if firewall.get("migrant_timing_read") is not False:
+              raise SystemExit("migrant timing opened during Gate B")
+          if firewall.get("focal_partner_mismatch_computed") is not False:
+              raise SystemExit("focal-partner mismatch opened during Gate B")
+          if firewall.get("history_test_opened") is not False:
+              raise SystemExit("Gate C opened during Gate B")
+          if result.get("connectivity_rows") != 24:
+              raise SystemExit(
+                  f"expected 24 registered history rows, got {result.get('connectivity_rows')}"
+              )
+          print(
+              "registered Gate-B result:",
+              result["status"],
+              "passed=", result["gate_b_passed"],
+          )
+          PY
+      - name: Verify raw resource bytes were removed
+        shell: bash
+        run: test ! -d outputs/hoge_veluwe_gate_b/source
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-hoge-veluwe-gate-b
+          path: |
+            outputs/hoge_veluwe_gate_b/gate_b_result.json
+            outputs/hoge_veluwe_gate_b/gate_b_connectivity.csv
+            outputs/hoge_veluwe_gate_b/gate_b_cue_resource_annual.csv
+            outputs/hoge_veluwe_gate_b/cue_extension_receipt.json
+          if-no-files-found: error
