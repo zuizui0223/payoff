@@ -23,9 +23,9 @@ Research Article
 The canonical V2 GEB package has passed all hard gates.
 
 ```text
-structured abstract = 272 words
-main body = 4,633 words
-references = 16
+structured abstract = 244 words
+main body = 4,761 words
+references = 18
 display pieces = 7
 keywords = 8
 running title = 38 characters
@@ -37,21 +37,21 @@ package files = 17
 Frozen package:
 
 ```text
-workflow run = 36390286034 (attempt 1)
-artifact = 10955892924
+workflow run = 36405110540 (attempt 1)
+artifact = 10962346030
 artifact digest =
 66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa
 
 inner deterministic ZIP SHA256 =
-31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
+6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
 ```
 
 The declarations-inclusive package was rerun from the same frozen head in
-workflow run 36390286034 (attempt 2; artifact 10956526561). The deterministic
+workflow run 36405110540 (attempt 2; artifact 10956526561). The deterministic
 inner ZIP remained byte-identical:
 
 ```text
-31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
+6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
 ```
 
 The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
@@ -101,22 +101,22 @@ A deterministic PREOUTCOME reviewer archive has been built from the canonical
 claim-ceiling V2 source.
 
 ```text
-workflow run = 36390286021
-artifact = 10956570331
+workflow run = 36405110527
+artifact = 10962266489
 artifact digest =
 3945c71f7c8e00521cb8a7d9a5793a8b0b688d3d27d58914a9d3decd72d1acba
 
 inner reviewer ZIP SHA256 =
-d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec
+6e4ef8542ba7f02737d77328b72217ff766ed1c7b4d1362d35cf7f3b77ce1275
 
 files = 74
 Python source closure = 27
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
-reviewer archive reproduction run = 36390286021
+reviewer archive reproduction run = 36405110527
 reviewer archive reproduction artifact = 10956531442
-reviewer archive deterministic inner SHA256 = d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec
+reviewer archive deterministic inner SHA256 = 6e4ef8542ba7f02737d77328b72217ff766ed1c7b4d1362d35cf7f3b77ce1275
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
@@ -130,9 +130,9 @@ submission-state receipt:
 
 ```text
 ACCESS_BLOCKED reviewer ZIP SHA256 =
-6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75
+071de59f078a57ea900da56e9e0aa3fc0f0d4b411b3324288f9409919b0b50eb
 
-workflow run = 36390286108
+workflow run = 36405529626
 deterministic reproduction = PASS
 ```
 
@@ -171,20 +171,20 @@ original preregistration = remains binding
 ```
 
 The deterministic ACCESS_BLOCKED submission package was built in workflow
-`36390286108` from head `7bcaaef50407f06a0624ec7e6931decffbfc664d`.
+`36405529626` from head `7bcaaef50407f06a0624ec7e6931decffbfc664d`.
 
 ```text
-attempt 1 artifact = 10956335888
+attempt 1 artifact = 10962600581
 attempt 1 artifact digest =
 1c6041c9c26d849eb3d2b856fe50875acb2ee13dff0feca5e719d096463fb5ff
 
 GEB inner ZIP SHA256 =
-3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd
+f84157091ebc07a8dc17a86b6da21fcc97698d81d806a14bc6558904fc95a69e
 
 outcome reviewer ZIP SHA256 =
-6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75
+071de59f078a57ea900da56e9e0aa3fc0f0d4b411b3324288f9409919b0b50eb
 
-attempt 2 artifact = 10955883655
+attempt 2 artifact = 10962317280
 attempt 2 artifact digest =
 9e6194e02484bc95d651ff7b01a34b6dd11d3e12e143c852ad7490c588808a67
 
@@ -206,6 +206,8 @@ upload still requires:
 3. funding, conflict-of-interest, acknowledgements and contribution
    declarations;
 4. final human review of the generated outcome package.
+
+The current manuscript now explicitly states that photoperiodic/endogenous migration programmes are a non-exclusive alternative explanation for the E6 migration-distance gradient, and that the pairwise deadline-difference mechanism has not yet been directly tested in a natural interacting pair.
 
 ## Scientific ceiling
 
