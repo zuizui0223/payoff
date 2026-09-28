@@ -63,6 +63,38 @@
       "caveat": "verify whether temperature exposure needed for Tier A is included or must be reconstructed"
     },
     {
+      "source_id": "xie_2025",
+      "citation": "Xie et al. 2025, Shifting spring ephemeral pollination windows under climate change - a three-body problem",
+      "paper_doi": "10.1111/nph.70373",
+      "data_doi": "10.5281/zenodo.15627002",
+      "code_repository": "YingyingXie16/Springbeauty_pollination_windows",
+      "data_files": [
+        "Andrena_erigeniae_occurence_phenodata.csv",
+        "Claytonia_virginica_phenodata.csv"
+      ],
+      "static_mirror_files": {
+        "Andrena_erigeniae_occurence_phenodata.csv": "https://zenodo.org/records/15627002/files/Andrena_erigeniae_occurence_phenodata.csv?download=1",
+        "Claytonia_virginica_phenodata.csv": "https://zenodo.org/records/15627002/files/Claytonia_virginica_phenodata.csv?download=1"
+      },
+      "system": "Claytonia virginica flowering and specialist bee Andrena erigeniae occurrence across eastern North American ecoregions",
+      "candidate_tiers": [
+        "B"
+      ],
+      "current_state": "public Zenodo raw data plus source R code identified; published matched temperature sensitivities in d/C",
+      "published_anchor": {
+        "winter_minimum_temperature_C": {
+          "plant_days_per_C": -1.4,
+          "pollinator_days_per_C": -1,
+          "note": "2025 paper reports approximate average advances; source R code fits matched winter minimum and spring average temperature models with ecoregion random slopes"
+        },
+        "spring_average_temperature_C": {
+          "plant_days_per_C": -3,
+          "pollinator_days_per_C": -2.4
+        }
+      },
+      "caveat": "temperature effects vary by ecoregion and interact with precipitation; primary E7 extraction must use a declared common climatic reference point or ecoregion-level matched slopes, not a single unqualified global difference"
+    },
+    {
       "source_id": "kehrberger_holzschuh_2019",
       "citation": "Kehrberger & Holzschuh 2019, Warmer temperatures advance flowering in a spring plant more strongly than emergence of two solitary spring bee species",
       "data_doi": "10.5061/dryad.5tq5dn6",
