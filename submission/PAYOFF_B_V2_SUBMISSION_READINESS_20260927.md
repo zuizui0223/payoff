@@ -79,9 +79,11 @@ retuning = forbidden
 Validated CI:
 
 ```text
-V2 package CI = 36312188417 — success
-environment CI = 36312188377 — success
-full repository CI = 36312188416 — success
+V2 package CI = 36374080499 — success
+environment CI = 36374080474 — success
+full repository CI = 36374080487 — success
+named lambda estimator gate = 20 passed / 0 skipped
+empirical full suite = 2009 passed / 1 skipped
 ```
 
 Thus the postoutcome pipeline is **READY_UNOPENED**, not
