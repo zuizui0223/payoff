@@ -101,7 +101,7 @@ def file_hash_map(manifest: dict) -> dict[str, str]:
     }
 
 
-def test_all_four_result_classes_build_science_ready_v2_packages(tmp_path: Path):
+def test_four_scientific_results_plus_access_blocked_build_v2_packages(tmp_path: Path):
     for result_class in (
         "PASS",
         "FAIL_WRONG_DIRECTION",
@@ -164,6 +164,13 @@ def test_all_four_result_classes_build_science_ready_v2_packages(tmp_path: Path)
         assert result_class in si
         assert claim["scientific_result"] == result_class
         assert claim["retuning_permitted"] is False
+        if result_class == "ACCESS_BLOCKED":
+            assert claim["access_blocked"] is True
+            assert claim["executed"] is False
+            assert claim["estimable"] is False
+            assert "not executed" in si
+        else:
+            assert claim.get("access_blocked", False) is False
         assert audit["all_outcome_hard_gates_pass"]
         assert "PREOUTCOME" not in si
         assert "remains unopened" not in si
