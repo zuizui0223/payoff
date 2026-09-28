@@ -433,3 +433,31 @@ def test_cue_extension_receipt_is_required_for_final_gate_a_pass(tmp_path: Path)
     assert summary["certified"] is True
     assert summary["firewall_true_flags"] == []
 
+def test_registered_source_access_block_is_a_closed_gate_not_an_outcome():
+    module = load_module()
+    contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
+    receipt = module._blocked_source_receipt(
+        contract=contract,
+        cue_extension={"status": "SOURCE_FAITHFUL_CUE_EXTENSION_COMPLETE"},
+        blocked_source="migrant_timing",
+        exc=module.SourceAccessBlocked("request required"),
+        acquired={
+            "resident_partner_timing": {
+                "sha256": "resident",
+                "schema": {"format": "xlsx"},
+                "path": "/tmp/private-resident.xlsx",
+            },
+            "destination_resource_state": {
+                "sha256": "resource",
+                "schema": {"format": "xlsx"},
+                "path": "/tmp/private-resource.xlsx",
+            },
+        },
+    )
+
+    assert receipt["status"] == "MIGRANT_SOURCE_ACCESS_BLOCKED"
+    assert receipt["gate_b_licensed"] is False
+    assert receipt["blocked_source"] == "migrant_timing"
+    assert "path" not in receipt["acquired_sources_before_block"]["resident_partner_timing"]
+    assert all(value is False for value in receipt["outcome_firewall"].values())
+
