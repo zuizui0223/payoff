@@ -1,0 +1,78 @@
+{
+  "contract_id": "payoff_b_cross_system_information_distance_v1_20260928",
+  "frozen_date": "2026-09-28",
+  "status": "SOURCE_IDENTITIES_LOCKED_EXECUTION_PENDING",
+  "paper_role": "Paper 2 empirical generality lane; not yet part of the canonical claim stack",
+  "question": "Does phenological responsiveness weaken when organisms must act using information farther removed from the future ecological state they need to match?",
+  "design_principle": "Keep inferential contrasts within source datasets. Use pollinator-versus-migrant contrasts as cross-system triangulation, not as a causal taxon comparison.",
+  "sources": [
+    {
+      "source_id": "freimuth_2022_pollinator",
+      "citation": "Freimuth J, Bossdorf O, Scheepens JF, Willems FM. 2022. Climate warming changes synchrony of plants and pollinators. Proceedings of the Royal Society B 289:20212142.",
+      "paper_doi": "10.1098/rspb.2021.2142",
+      "data_doi": "10.5061/dryad.v41ns1rxv",
+      "license": "CC0",
+      "raw_files": ["rnd_eff_temp.csv", "rnd_eff_year.csv"],
+      "published_scope": "Germany, 1980-2020; 1764 species total including 20 bee, 22 fly, 206 butterfly/moth and 77 beetle species plus 1438 plants",
+      "role": "local-information benchmark",
+      "published_results_known_before_contract": true
+    },
+    {
+      "source_id": "usui_2017_bird_meta",
+      "citation": "Usui T, Butchart SHM, Phillimore AB. 2017. Temporal shifts and temperature sensitivity of avian spring migratory phenology: a phylogenetic meta-analysis. Journal of Animal Ecology 86:250-261.",
+      "paper_doi": "10.1111/1365-2656.12612",
+      "data_doi": "10.5061/dryad.mb4nd",
+      "license": "CC0",
+      "raw_files": ["Usui_et_al_2016_metadata_dryad.csv"],
+      "published_scope": "413 bird species across five continents",
+      "role": "within-bird information-distance contrast",
+      "published_results_known_before_contract": true
+    }
+  ],
+  "primary_analysis": {
+    "dataset": "usui_2017_bird_meta",
+    "response": "temperature slope in days per degree C with its reported standard error",
+    "moderator": "population migration distance class as coded by the source study",
+    "contrast": "short-distance minus long-distance migrant temperature responsiveness",
+    "directional_prediction": "short-distance migrants show more negative temperature slopes than long-distance migrants",
+    "interpretation": "replication/benchmark for spatial information-distance, not a novel effect and not proof that cue distance is the causal mechanism"
+  },
+  "secondary_benchmark": {
+    "dataset": "freimuth_2022_pollinator",
+    "response": "species-level temperature slope in days per degree C",
+    "groups": ["bees", "flies", "butterflies/moths", "beetles", "plants"],
+    "use": "quantify the distribution of local phenological temperature responsiveness and plant-pollinator asynchrony change",
+    "cross_source_inference": "descriptive only"
+  },
+  "published_anchor_values": {
+    "freimuth": {
+      "plant_temp_days_per_C": -5.2,
+      "bee_temp_days_per_C": -2.0,
+      "fly_temp_days_per_C": -3.9,
+      "butterfly_moth_temp_days_per_C": -1.9,
+      "bee_plant_asynchrony_days_per_decade": -11.35,
+      "bee_plant_asynchrony_temp_days_per_C": -5.72
+    },
+    "usui": {
+      "all_migrants_days_per_decade": -2.1,
+      "all_migrants_temp_days_per_C": -1.2,
+      "published_short_distance_more_responsive_than_long_distance": true
+    }
+  },
+  "hard_boundaries": [
+    "Do not fit a single pollinator-versus-bird coefficient and interpret it causally; source study, taxon, geography and phenophase are confounded.",
+    "Do not call the cross-system comparison a new meta-analysis until raw effect-size rows, variances, dependence structure and eligibility are reconstructed.",
+    "Do not use published aggregate values as if they were independent effect-size rows.",
+    "Do not claim that local pollinators universally track climate better than migrants.",
+    "Do not alter the canonical Paper 2 manuscript until the raw-source reconstruction and declared analyses are complete."
+  ],
+  "promotion_gate": [
+    "R0 source identity recorded for both datasets",
+    "R1 raw bytes acquired and checksums pinned",
+    "R2 schema and effect-size units reproduced",
+    "R3 published source-level benchmark results reproduced within tolerance",
+    "R4 bird migration-distance model rerun with dependence-aware uncertainty",
+    "R5 pollinator benchmark summarized without cross-source causal overclaim",
+    "R6 only then decide whether this becomes Paper 2 E6"
+  ]
+}
