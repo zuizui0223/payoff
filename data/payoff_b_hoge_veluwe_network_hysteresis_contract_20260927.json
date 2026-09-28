@@ -50,7 +50,9 @@
           "record_id": 5730499,
           "use_rule": "last-resort transport only if exact filename is present and computed SHA-256 equals an authoritative Dryad-declared SHA-256"
         }
-      }
+      },
+      "source_units": "April days; 1 April = day 1",
+      "source_units_basis": "Dryad variable description for LayDateApril"
     },
     "destination_resource_state": {
       "dataset_doi": "10.5061/dryad.f1vhhmgx6",
@@ -72,7 +74,9 @@
           "record_id": 5730499,
           "use_rule": "last-resort transport only if exact filename is present and computed SHA-256 equals an authoritative Dryad-declared SHA-256"
         }
-      }
+      },
+      "source_units": "April days; 1 April = day 1",
+      "source_units_basis": "Dryad variable description for MidDate"
     },
     "precommitment_cue": {
       "source": "NCEP/NCAR or source-faithful equivalent used by the already frozen CV24C cue reconstruction",
@@ -176,7 +180,10 @@
       },
       "failure_state": "UNSTABLE_CUE_RESOURCE_REVERSAL",
       "rule": "history test remains closed if the full-sample geometry passes but this stability gate fails"
-    }
+    },
+    "breakpoint_low_definition": "predicted connectivity from the left/degradation line at the final pre-break target year",
+    "recovery_endpoint_definition": "predicted connectivity from the right/recovery line at the final registered target year",
+    "loo_denominator_rule": "all registered leave-one-history-year-out refits; a non-estimable refit counts as not preserving the criterion"
   },
   "history_test_if_reversal_passes": {
     "branch_definition": "decline versus recovery branch defined only from the frozen cue-resource connectivity breakpoint",
