@@ -80,7 +80,7 @@
       "candidate_tiers": [
         "B"
       ],
-      "current_state": "public Zenodo raw data plus source R code identified; published matched temperature sensitivities in d/C",
+      "current_state": "one independent Claytonia-Andrena source family: 2022 paper supplies exact matched winter-temperature coefficients; 2025 raw/code extension supplies spatial validation but is not counted as a second independent system",
       "published_anchor": {
         "winter_minimum_temperature_C": {
           "plant_days_per_C": -1.4,
@@ -92,7 +92,23 @@
           "pollinator_days_per_C": -2.4
         }
       },
-      "caveat": "temperature effects vary by ecoregion and interact with precipitation; primary E7 extraction must use a declared common climatic reference point or ecoregion-level matched slopes, not a single unqualified global difference"
+      "caveat": "temperature effects vary by ecoregion and interact with precipitation; primary E7 extraction must use a declared common climatic reference point or ecoregion-level matched slopes, not a single unqualified global difference",
+      "independence_family": "claytonia_andrena_xie",
+      "independent_system_count": 1,
+      "published_anchor_2022": {
+        "citation": "Xie, Thammavong & Park 2022, New Phytologist, DOI 10.1111/nph.18361",
+        "matched_exposure": "mean winter minimum temperature anomaly",
+        "plant_days_per_C": {
+          "estimate": -1.3,
+          "se": 0.2
+        },
+        "pollinator_days_per_C": {
+          "estimate": -1.8,
+          "se": 0.5
+        },
+        "tier_B_delta_pollinator_minus_plant": -0.5,
+        "uncertainty_boundary": "reported partner coefficients are from separate fitted models; covariance is not published, so a delta SE using independent-model propagation is sensitivity-only until source covariance or raw joint reconstruction is available"
+      }
     },
     {
       "source_id": "kehrberger_holzschuh_2019",
@@ -178,6 +194,57 @@
       ],
       "current_state": "global synthesis benchmark; article/SI identified, machine-readable source table not yet pinned",
       "caveat": "do not treat published aggregate 6.1 d/decade magnitude as independent row-level data"
+    },
+    {
+      "source_id": "de_manincor_2023",
+      "citation": "de Manincor, Fisogni & Rafferty 2023, Warming of experimental plant-pollinator communities advances phenologies, alters traits, reduces interactions and depresses reproduction",
+      "paper_doi": "10.1111/ele.14158",
+      "data_doi": "10.5281/zenodo.7264150",
+      "system": "three annual plants and Osmia lignaria under ambient versus +4 C greenhouse warming",
+      "candidate_tiers": [
+        "B"
+      ],
+      "current_state": "open Zenodo raw files and published treatment means available; mechanistically strong experimental anchor",
+      "published_anchor": {
+        "warming_C": 4,
+        "plant_community_onset_days_after_start": {
+          "ambient_mean": 9.3,
+          "ambient_se": 0.53,
+          "warmed_mean": 7.2,
+          "warmed_se": 0.39
+        },
+        "bee_emergence_days_after_start": {
+          "ambient_mean": 2.14,
+          "ambient_se": 0.22,
+          "warmed_mean": 1.76,
+          "warmed_se": 0.24
+        },
+        "plant_peak_shift_days": -7.4,
+        "bee_emergence_treatment_test": "not detectably changed"
+      },
+      "caveat": "one greenhouse room per temperature treatment means treatment is confounded with room; do not use as a primary independent meta-analytic effect unless the design-level pseudoreplication limitation is explicitly accepted. Retain primarily as experimental mechanism anchor."
+    },
+    {
+      "source_id": "olliff_yang_mesler_2018",
+      "citation": "Olliff-Yang & Mesler 2018, The potential for phenological mismatch between a perennial herb and its ground-nesting bee pollinator",
+      "paper_doi": "10.1093/aobpla/ply040",
+      "system": "Lathyrus littoralis and Habropoda miserabilis in coastal dunes",
+      "candidate_tiers": [
+        "B"
+      ],
+      "current_state": "open article; both partners respond to temperature but source models use biologically distinct temperature/moisture structure",
+      "caveat": "do not pool until both partner responses can be expressed against the identical temperature metric; currently mechanistic different-cue benchmark"
+    },
+    {
+      "source_id": "iler_2013",
+      "citation": "Iler et al. 2013, Maintenance of temporal synchrony between syrphid flies and floral resources despite differential phenological responses to climate",
+      "paper_doi": "10.1111/gcb.12246",
+      "system": "flowering community and syrphid flies, 1992-2011",
+      "candidate_tiers": [
+        "C"
+      ],
+      "current_state": "open long-term paper; partner differences are modeled against snowmelt and accumulated growing degree-days",
+      "caveat": "GDD and snowmelt coefficients are not days per degree C; mechanistic/Tier C context only unless a defensible common degree-C effect is reconstructed from raw weather and phenology"
     }
   ],
   "promotion_gate": [
@@ -195,6 +262,17 @@
       "causal claim that taxonomic identity explains local-versus-migrant differences",
       "single pooled bird-versus-pollinator coefficient unless a common estimand and non-confounded design are demonstrated",
       "claim of natural information hysteresis"
+    ]
+  },
+  "pilot_policy": {
+    "status": "NONPROMOTABLE_PUBLISHED_EFFECT_DIAGNOSTIC_ONLY",
+    "rationale": "Three independent Tier-B-like contrasts can be written in d/C, but delta uncertainties require covariance assumptions and study designs/exposure definitions differ materially.",
+    "allowed_use": "decide whether a full covariance-aware reconstruction is worth doing; never cite as Paper 2 E7 result",
+    "forbidden_use": [
+      "canonical manuscript effect",
+      "abstract claim",
+      "cross-taxon coefficient",
+      "evidence of natural hysteresis"
     ]
   }
 }
