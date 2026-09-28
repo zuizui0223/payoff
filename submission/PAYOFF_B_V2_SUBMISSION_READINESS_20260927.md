@@ -125,9 +125,20 @@ the reported analyses. Raw source datasets with separate access terms are not
 silently redistributed.
 
 The archive builder also supports the frozen postoutcome result classes. The
-remaining reviewer-archive task is therefore **delivery**, not construction:
-upload the ZIP through the journal review portal or provide a stable anonymous
-link.
+current ACCESS_BLOCKED outcome archive was generated from the same frozen
+submission-state receipt:
+
+```text
+ACCESS_BLOCKED reviewer ZIP SHA256 =
+d11c518c3eb5499f85e99f1cf7125e067745b211b5da764b8d961c930460151c
+
+workflow run = 36381284351
+deterministic reproduction = PASS
+```
+
+The remaining reviewer-archive task is therefore **delivery**, not construction:
+upload the ACCESS_BLOCKED ZIP through the journal review portal or provide a
+stable anonymous link.
 
 ## 3. Aikens execution state — ACCESS_BLOCKED frozen for submission
 
