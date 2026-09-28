@@ -20,7 +20,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import requests
-from scipy.stats import norm
+from scipy.stats import norm, t as student_t
 
 USUI_SHA256 = "68816f6cbfccbb9b47b45be0df49f077db914c8e43e567d0ed2cac9bbafde56c"
 FREIMUTH_SHA256 = "946f56b8aa5f43bb15f5bbbd8c5174be23c12691332651e09bce2cb20edf7efd"
@@ -136,18 +136,26 @@ def model_matrix(df: pd.DataFrame, adjusted: bool) -> tuple[np.ndarray, list[str
     return out.to_numpy(float), list(out.columns)
 
 
+def cluster_df(fit: dict) -> int:
+    # Conservative inference uses the smaller marginal cluster count.
+    return max(1, min(int(fit["clusters_study"]), int(fit["clusters_species"])) - 1)
+
+
 def term_summary(fit: dict, names: list[str], term: str) -> dict:
     j = names.index(term)
     est = float(fit["beta"][j])
     var = float(fit["cov"][j, j])
     se = math.sqrt(max(var, 0.0))
-    z = est / se if se > 0 else float("nan")
-    p = 2 * norm.sf(abs(z)) if math.isfinite(z) else float("nan")
+    stat = est / se if se > 0 else float("nan")
+    df = cluster_df(fit)
+    crit = float(student_t.ppf(0.975, df))
+    p = 2 * student_t.sf(abs(stat), df) if math.isfinite(stat) else float("nan")
     return {
         "estimate": est,
         "se": se,
-        "ci95": [est - 1.96 * se, est + 1.96 * se],
-        "z": z,
+        "ci95": [est - crit * se, est + crit * se],
+        "t": stat,
+        "df": df,
         "p": p,
     }
 
@@ -156,7 +164,9 @@ def linear_combo(fit: dict, vector: np.ndarray) -> dict:
     est = float(vector @ fit["beta"])
     var = float(vector @ fit["cov"] @ vector)
     se = math.sqrt(max(var, 0.0))
-    return {"estimate": est, "se": se, "ci95": [est - 1.96 * se, est + 1.96 * se]}
+    df = cluster_df(fit)
+    crit = float(student_t.ppf(0.975, df))
+    return {"estimate": est, "se": se, "ci95": [est - crit * se, est + crit * se], "df": df}
 
 
 def fit_bird(usui: pd.DataFrame) -> tuple[dict, pd.DataFrame]:
@@ -205,6 +215,35 @@ def fit_bird(usui: pd.DataFrame) -> tuple[dict, pd.DataFrame]:
             entry["short_mean"] = linear_combo(fit, short_vec)
             entry["long_mean"] = linear_combo(fit, long_vec)
         fits[label] = entry
+
+    loo = []
+    for held_out_study in sorted(d["Study"].astype(str).unique()):
+        dd = d.loc[d["Study"].astype(str) != held_out_study].copy()
+        ww = 1.0 / np.square(dd["SE"].to_numpy(float))
+        xx, nn = model_matrix(dd, adjusted=True)
+        ff = two_way_cluster_wls(
+            dd["Slope"].to_numpy(float),
+            xx,
+            ww,
+            dd["Study"].astype(str).to_numpy(),
+            dd["Species"].astype(str).to_numpy(),
+        )
+        ss = term_summary(ff, nn, "long_minus_short")
+        loo.append({
+            "held_out_study": held_out_study,
+            "estimate": ss["estimate"],
+            "ci95": ss["ci95"],
+            "p": ss["p"],
+        })
+    fits["leave_one_study_out"] = {
+        "n_fits": len(loo),
+        "estimate_range": [float(min(x["estimate"] for x in loo)), float(max(x["estimate"] for x in loo))],
+        "min_ci_lower": float(min(x["ci95"][0] for x in loo)),
+        "max_p": float(max(x["p"] for x in loo)),
+        "all_estimates_positive": bool(all(x["estimate"] > 0 for x in loo)),
+        "all_ci_lower_positive": bool(all(x["ci95"][0] > 0 for x in loo)),
+        "fits": loo,
+    }
 
     fits["descriptives"] = {
         "rows_temperature_short_long": int(len(d)),
