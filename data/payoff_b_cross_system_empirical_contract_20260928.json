@@ -2,7 +2,7 @@
   "contract_id": "payoff_b_cross_system_information_distance_v1_20260928",
   "frozen_date": "2026-09-28",
   "status": "PROMOTION_GATE_PASSED",
-  "paper_role": "Paper 2 empirical generality lane; not yet part of the canonical claim stack",
+  "paper_role": "Paper 2 empirical generality result; promoted to canonical E6 information-distance triangulation",
   "question": "Does phenological responsiveness weaken when organisms must act using information farther removed from the future ecological state they need to match?",
   "design_principle": "Keep inferential contrasts within source datasets. Use pollinator-versus-migrant contrasts as cross-system triangulation, not as a causal taxon comparison.",
   "sources": [
@@ -88,7 +88,7 @@
   },
   "hard_boundaries": [
     "Do not fit a single pollinator-versus-bird coefficient and interpret it causally; source study, taxon, geography and phenophase are confounded.",
-    "Do not call the cross-system comparison a new meta-analysis until raw effect-size rows, variances, dependence structure and eligibility are reconstructed.",
+    "Do not call the two-source bird/pollinator triangulation a new cross-taxon meta-analysis; a genuine cross-system moderator meta-analysis requires multiple independent systems on both sides.",
     "Do not use published aggregate values as if they were independent effect-size rows.",
     "Do not claim that local pollinators universally track climate better than migrants.",
     "Do not alter the canonical Paper 2 manuscript until the raw-source reconstruction and declared analyses are complete.",
@@ -102,7 +102,7 @@
     "R3 published source-level anchor values and data dimensions cross-checked within declared tolerance",
     "R4 Usui temperature-effect rows rerun with dependence-aware uncertainty; any omission of phylogeny is explicit",
     "R5 Freimuth group summaries reproduced from archived total species slopes with a frozen taxonomic-group mapping",
-    "R6 only then decide whether this becomes Paper 2 E6"
+    "R6 PASS — promoted to Paper 2 E6 after source reconstruction, dependence-aware bird refit, Freimuth group reproduction and sensitivity checks"
   ],
   "execution": {
     "workflow_run": 36383988920,
