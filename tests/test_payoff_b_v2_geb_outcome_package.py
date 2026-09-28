@@ -128,7 +128,13 @@ def test_four_scientific_results_plus_access_blocked_build_v2_packages(tmp_path:
         else:
             assert manifest["final_science_blocker"] is None
         assert manifest["final_submission_eligible"] is False
-        assert manifest["registered_result_frozen"] is True
+        assert manifest["registered_execution_state_frozen"] is True
+        expected_result_frozen = result_class != "ACCESS_BLOCKED"
+        assert manifest["registered_result_frozen"] is expected_result_frozen
+        assert (
+            manifest["registered_scientific_result_available"]
+            is expected_result_frozen
+        )
         expected_estimable = result_class not in {
             "NOT_ESTIMABLE",
             "ACCESS_BLOCKED",
