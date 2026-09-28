@@ -28,6 +28,7 @@ ENTRY_PY = (
     "scripts/payoff_b_shared_cue_deadline_hysteresis.py",
     "scripts/audit_broad_predictive_connectivity_dependency.py",
     "scripts/payoff_b_wigeon_predictive_connectivity.py",
+    "scripts/payoff_b_cross_system_information.py",
     "scripts/payoff_b_cv24c_cue_driver.py",
     "scripts/payoff_b_hoge_veluwe_cue_extension.py",
     "scripts/payoff_b_hoge_veluwe_source_gate.py",
@@ -52,6 +53,8 @@ DIRECT_FILES = (
     "data/payoff_b_broad_predictive_connectivity_result_20260926.json",
     "data/payoff_b_flycatcher_social_information_anchor_20260926.json",
     "data/payoff_b_wigeon_predictive_connectivity_result_20260926.json",
+    "data/payoff_b_cross_system_empirical_contract_20260928.json",
+    "data/payoff_b_cross_system_information_result_20260928.json",
     "data/payoff_b_cv24c_cue_driver_result_20260927.json",
     "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json",
     "data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json",
@@ -262,6 +265,7 @@ author-controlled title-page metadata.
 - `scripts/payoff_b_information_timing_sweep.py`
 - `analysis/movement_phenology/payoff_b_predictive_connectivity_amaral.R`
 - `scripts/payoff_b_wigeon_predictive_connectivity.py`
+- `scripts/payoff_b_cross_system_information.py`
 - `scripts/payoff_b_cv24c_cue_driver.py`
 
 ## Software
@@ -287,7 +291,11 @@ Raw source datasets are not silently redistributed in this archive.
 - Eurasian wigeon: the analysis retains the published system and frozen derived
   transition/environment provenance;
 - long-term flycatcher selection: the frozen analysis uses the published PLOS
-  Supporting Data and public environmental reconstruction.
+  Supporting Data and public environmental reconstruction;
+- Usui migratory-bird meta-analysis: Dryad DOI 10.5061/dryad.mb4nd and the
+  frozen source SHA-256 are recorded in the E6 contract/result receipt;
+- Freimuth local plant--pollinator benchmark: Dryad DOI 10.5061/dryad.v41ns1rxv
+  and the frozen source SHA-256 are recorded in the E6 contract/result receipt.
 
 Where source repositories require their own access terms, reviewers should use
 the cited source records; derived result receipts in this archive document the
