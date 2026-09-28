@@ -1,0 +1,42 @@
+name: PAYOFF-B E7 local-interaction source probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-e7-cross-system-meta-screen-20260928
+    paths:
+      - 'data/payoff_b_e7_local_interaction_meta_screen_20260928.json'
+      - 'scripts/payoff_b_e7_dryad_probe.py'
+      - '.github/workflows/payoff-b-e7-dryad-probe.yml'
+  pull_request:
+    paths:
+      - 'data/payoff_b_e7_local_interaction_meta_screen_20260928.json'
+      - 'scripts/payoff_b_e7_dryad_probe.py'
+      - '.github/workflows/payoff-b-e7-dryad-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install probe dependencies
+        run: python -m pip install --disable-pip-version-check pandas openpyxl requests
+      - name: Probe public Dryad sources
+        run: |
+          python scripts/payoff_b_e7_dryad_probe.py \
+            --contract data/payoff_b_e7_local_interaction_meta_screen_20260928.json \
+            --output outputs/e7/source_probe.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-e7-source-probe
+          path: outputs/e7/source_probe.json
+          if-no-files-found: error
