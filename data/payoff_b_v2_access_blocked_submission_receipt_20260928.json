@@ -20,30 +20,30 @@
     "configured": false
   },
   "primary_build": {
-    "workflow_run": 36390286108,
+    "workflow_run": 36405529626,
     "run_attempt": 1,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
+    "head_sha": "4829be2c7f3e003349c18bd795829f5f4a8584ae",
     "conclusion": "success",
-    "artifact_id": 10956335888,
-    "artifact_sha256": "1c6041c9c26d849eb3d2b856fe50875acb2ee13dff0feca5e719d096463fb5ff",
-    "geb_inner_zip_sha256": "3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd",
-    "reviewer_inner_zip_sha256": "6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75"
+    "artifact_id": 10962600581,
+    "artifact_sha256": "6851473f533a3b4105c794f2e0fa1545a3578191341f5138d4e5b6b9e75d31d5",
+    "geb_inner_zip_sha256": "f84157091ebc07a8dc17a86b6da21fcc97698d81d806a14bc6558904fc95a69e",
+    "reviewer_inner_zip_sha256": "071de59f078a57ea900da56e9e0aa3fc0f0d4b411b3324288f9409919b0b50eb"
   },
   "reproduction": {
-    "workflow_run": 36390286108,
+    "workflow_run": 36405529626,
     "run_attempt": 2,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
+    "head_sha": "4829be2c7f3e003349c18bd795829f5f4a8584ae",
     "conclusion": "success",
-    "artifact_id": 10955883655,
-    "artifact_sha256": "9e6194e02484bc95d651ff7b01a34b6dd11d3e12e143c852ad7490c588808a67",
-    "geb_inner_zip_sha256": "3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd",
-    "reviewer_inner_zip_sha256": "6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75",
+    "artifact_id": 10962317280,
+    "artifact_sha256": "783f6c5010258838eca90bc105c4d9106416b16a2b673eaa46755ac75a13bdf7",
+    "geb_inner_zip_sha256": "f84157091ebc07a8dc17a86b6da21fcc97698d81d806a14bc6558904fc95a69e",
+    "reviewer_inner_zip_sha256": "071de59f078a57ea900da56e9e0aa3fc0f0d4b411b3324288f9409919b0b50eb",
     "deterministic_inner_archives": true
   },
   "manuscript_metrics": {
-    "structured_abstract_words": 272,
-    "main_body_words": 4633,
-    "references": 16,
+    "structured_abstract_words": 244,
+    "main_body_words": 4761,
+    "references": 18,
     "display_pieces": 7
   },
   "invariants": {
@@ -60,8 +60,12 @@
     "final human review of generated package and portal metadata"
   ],
   "science_update": {
-    "merged_pr": 196,
-    "merge_commit": "09b9561e994d79fe16c3f663fda3ecec8b3a61e8",
-    "e6_included": true
+    "merged_pr": 201,
+    "merge_commit": "f2aebae88710f768afc3ff86873236c25ee6b5a2",
+    "e6_included": true,
+    "figure_5_e6_visual_integration": true,
+    "e6_photoperiod_alternative_added": true,
+    "pairwise_deadline_gap_explicit": true,
+    "main_text_retuned_for_aikens": false
   }
 }

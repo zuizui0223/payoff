@@ -30,9 +30,9 @@ def test_v2_is_the_only_active_paper2_source():
     assert "CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md" in status
     assert "V1_STATUS = FROZEN_PROVENANCE_ONLY" in status
     assert "CURRENT_V2_PREOUTCOME_PACKAGE = READY" in status
-    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36390286034" in status
-    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10955892924" in status
-    assert "CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5" in status
+    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36405110540" in status
+    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10962346030" in status
+    assert "CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1" in status
     assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED" in status
     assert "CURRENT_V2_ACCESS_BLOCKED_PACKAGE = READY" in status
     assert "AIKENS_LAMBDA_OUTCOME_OPENED = false" in status
@@ -44,9 +44,9 @@ def test_v2_is_the_only_active_paper2_source():
 
     package_audit = PACKAGE_AUDIT.read_text(encoding="utf-8")
     assert "PASS — canonical V2 PREOUTCOME working package ready" in package_audit
-    assert "structured_abstract_words = 272" in package_audit
-    assert "main_body_words = 4633" in package_audit
-    assert "references = 16" in package_audit
+    assert "structured_abstract_words = 244" in package_audit
+    assert "main_body_words = 4761" in package_audit
+    assert "references = 18" in package_audit
     assert "display_pieces = 7" in package_audit
     assert "package_file_count = 17" in package_audit
     assert "FINAL_SUBMISSION_ELIGIBLE = false" in package_audit

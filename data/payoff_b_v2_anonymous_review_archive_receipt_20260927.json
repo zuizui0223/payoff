@@ -3,20 +3,20 @@
   "date": "2026-09-27",
   "status": "READY_PREOUTCOME",
   "canonical_science_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
-  "merged_pr": 196,
-  "merge_commit": "09b9561e994d79fe16c3f663fda3ecec8b3a61e8",
+  "merged_pr": 201,
+  "merge_commit": "f2aebae88710f768afc3ff86873236c25ee6b5a2",
   "workflow": {
-    "run_id": 36390286021,
+    "run_id": 36405110527,
     "run_attempt": 1,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
+    "head_sha": "fb7621a3df4a1963897c858d6fd2714f2482af70",
     "conclusion": "success",
-    "artifact_id": 10956570331,
+    "artifact_id": 10962266489,
     "artifact_name": "payoff-b-v2-anonymous-review-archive",
-    "artifact_sha256": "3945c71f7c8e00521cb8a7d9a5793a8b0b688d3d27d58914a9d3decd72d1acba"
+    "artifact_sha256": "4687657bff785c4507a559b066dde83c3e5d472773a1c9498a65caa36bc45ce7"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_ANON_REVIEW.zip",
-    "sha256": "d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec"
+    "sha256": "6e4ef8542ba7f02737d77328b72217ff766ed1c7b4d1362d35cf7f3b77ce1275"
   },
   "contents": {
     "file_count": 74,
@@ -35,14 +35,14 @@
     "review archive includes E6 cross-system information-distance contract, result receipt and analysis code"
   ],
   "delivery_state": "PENDING_ANONYMOUS_CHANNEL",
-  "latest_science_update_pr": 196,
+  "latest_science_update_pr": 201,
   "reproduction": {
-    "run_id": 36390286021,
+    "run_id": 36405110527,
     "run_attempt": 2,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
-    "artifact_id": 10956531442,
-    "artifact_sha256": "c121570418b53a4d71d9958df91eff7802c12520d8bda3584f230baaa4101375",
-    "inner_archive_sha256": "d4defa7cc8150eef78f84f94d324e2c1c83bc077deec24cc4ed5b532c26262ec",
+    "head_sha": "fb7621a3df4a1963897c858d6fd2714f2482af70",
+    "artifact_id": 10961963285,
+    "artifact_sha256": "4021c3cc0fd6fab5883a5d012cb9ecd64a673da4763335c724192aa76809dac0",
+    "inner_archive_sha256": "6e4ef8542ba7f02737d77328b72217ff766ed1c7b4d1362d35cf7f3b77ce1275",
     "deterministic_inner_archive": true
   },
   "latest_build_date": "2026-09-28"
