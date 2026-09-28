@@ -39,6 +39,19 @@ PUBLISHED_FREIMUTH = {
     "Plants": {"n": 1438, "mean": -5.2, "se": 0.2},
 }
 
+# Three exact raw-name overrides are required because the live GBIF name-match
+# endpoint returns NONE/HIGHERRANK for these historical strings. Each override
+# is constrained to the source name and only assigns the broad group needed by
+# the published Freimuth analysis. They are independently verifiable in GBIF:
+# Ammophila arenaria (L.) Link = Plantae/Poales/Poaceae,
+# Salix alba L. = Plantae,
+# Tethea or = Animalia/Lepidoptera/Drepanidae.
+FREIMUTH_TAXONOMY_OVERRIDES = {
+    "Ammophila arenaria": "Plants",
+    "Salix alba": "Plants",
+    "Tethea or": "Butterflies/Moths",
+}
+
 
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
@@ -240,6 +253,9 @@ def gbif_match(name: str, attempts: int = 4) -> dict:
 
 
 def group_from_taxonomy(row: pd.Series) -> str:
+    raw_name = str(row.get("species", ""))
+    if raw_name in FREIMUTH_TAXONOMY_OVERRIDES:
+        return FREIMUTH_TAXONOMY_OVERRIDES[raw_name]
     kingdom = str(row.get("kingdom", ""))
     order = str(row.get("order", ""))
     if kingdom == "Plantae":
@@ -270,6 +286,8 @@ def build_taxonomy(species: list[str], cache_path: Path | None, workers: int) ->
         out = pd.concat([cached, fresh], ignore_index=True)
     out = out.drop_duplicates("species", keep="last").sort_values("species")
     out["payoff_group"] = out.apply(group_from_taxonomy, axis=1)
+    out["taxonomy_override_applied"] = out["species"].astype(str).isin(FREIMUTH_TAXONOMY_OVERRIDES)
+    out["taxonomy_override_group"] = out["species"].astype(str).map(FREIMUTH_TAXONOMY_OVERRIDES)
     return out
 
 
