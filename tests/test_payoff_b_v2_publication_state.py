@@ -33,7 +33,9 @@ def test_v2_is_the_only_active_paper2_source():
     assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36374436480" in status
     assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 10950726054" in status
     assert "CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c" in status
-    assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = BLOCKED" in status
+    assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED" in status
+    assert "CURRENT_V2_ACCESS_BLOCKED_PACKAGE = READY" in status
+    assert "AIKENS_LAMBDA_OUTCOME_OPENED = false" in status
     assert "sole active integrated ecology manuscript" in relation
     assert "No V1 and V2 dual submission is allowed." in relation
     assert "2026-09-27 canonical amendment" in architecture
