@@ -62,11 +62,11 @@ The distance-only inverse-variance fit gives:
 
 | group | temperature slope (d / °C) | 95% CI |
 |---|---:|---:|
-| short-distance migrants | -1.025 | -1.312 to -0.739 |
-| long-distance migrants | -0.630 | -0.869 to -0.390 |
+| short-distance migrants | -1.025 | -1.325 to -0.725 |
+| long-distance migrants | -0.630 | -0.881 to -0.379 |
 
 Thus the raw long-minus-short contrast is **+0.395 d / °C**, with
-95% CI **+0.110 to +0.681** and **p = 0.0090**.
+95% CI **+0.113 to +0.678** and **p = 0.0079**.
 
 The registered primary model uses inverse-variance weighting and two-way
 cluster-robust uncertainty by **Study x Species**, while adjusting for arrival
