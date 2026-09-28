@@ -1,0 +1,38 @@
+name: PAYOFF-B E7 published-effect diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-e7-cross-system-meta-screen-20260928
+    paths:
+      - 'data/payoff_b_e7_published_effect_pilot_input_20260928.json'
+      - 'scripts/payoff_b_e7_published_effect_pilot.py'
+      - '.github/workflows/payoff-b-e7-published-effect-pilot.yml'
+  pull_request:
+    paths:
+      - 'data/payoff_b_e7_published_effect_pilot_input_20260928.json'
+      - 'scripts/payoff_b_e7_published_effect_pilot.py'
+      - '.github/workflows/payoff-b-e7-published-effect-pilot.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run nonpromotable E7 diagnostic
+        run: |
+          python scripts/payoff_b_e7_published_effect_pilot.py \
+            --input data/payoff_b_e7_published_effect_pilot_input_20260928.json \
+            --output outputs/e7/published_effect_pilot.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-e7-published-effect-pilot
+          path: outputs/e7/published_effect_pilot.json
+          if-no-files-found: error

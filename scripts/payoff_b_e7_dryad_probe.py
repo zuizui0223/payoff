@@ -1,0 +1,386 @@
+#!/usr/bin/env python3
+"""Probe public Dryad sources for PAYOFF-B E7 without promoting any claim."""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import io
+import json
+import html
+import re
+import shutil
+import urllib.parse
+import zipfile
+from pathlib import Path
+
+import pandas as pd
+import requests
+
+API = "https://datadryad.org/api/v2/datasets/{doi}/download"
+
+
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def safe_name(name: str) -> str:
+    name = name.replace("\\", "_").replace("/", "_")
+    return re.sub(r"[^A-Za-z0-9._-]+", "_", name)
+
+
+def looks_like_html(data: bytes, content_type: str | None = None) -> bool:
+    ctype = (content_type or "").lower()
+    head = data[:500].lstrip().lower()
+    return "text/html" in ctype or head.startswith(b"<!doctype html") or head.startswith(b"<html")
+
+
+def zenodo_resolve(doi: str, expected_names: list[str]) -> tuple[list[tuple[str, bytes, str]], dict]:
+    diag = {"query": doi, "records": []}
+    try:
+        r = requests.get(
+            "https://zenodo.org/api/records",
+            params={"q": f'"{doi}"', "size": 20},
+            timeout=120,
+            headers={"User-Agent": "Mozilla/5.0"},
+        )
+        diag["status_code"] = r.status_code
+        r.raise_for_status()
+        payload = r.json()
+    except Exception as e:
+        diag["error"] = repr(e)
+        return [], diag
+
+    hits = payload.get("hits", {}).get("hits", []) if isinstance(payload, dict) else []
+    out = []
+    seen = set()
+    for hit in hits:
+        blob = json.dumps(hit, ensure_ascii=False)
+        title = ((hit.get("metadata") or {}).get("title") or "")
+        if doi.lower() not in blob.lower():
+            continue
+        rid = str(hit.get("id") or hit.get("recid") or "")
+        rec = {"id": rid, "title": title, "files": []}
+        files = hit.get("files") or []
+        if isinstance(files, dict):
+            files = files.get("entries") or files.get("items") or []
+            if isinstance(files, dict):
+                files = [{"key": k, **(v if isinstance(v, dict) else {})} for k, v in files.items()]
+        for f in files:
+            name = f.get("key") or f.get("filename") or f.get("name")
+            links = f.get("links") or {}
+            link = links.get("content") or links.get("self") or f.get("links")
+            if isinstance(link, dict):
+                link = link.get("content") or link.get("self")
+            rec["files"].append({"name": name, "link": link})
+            if not name or not link:
+                continue
+            if expected_names and name not in expected_names:
+                continue
+            if name in seen:
+                continue
+            try:
+                rr = requests.get(link, timeout=180, allow_redirects=True, headers={"User-Agent": "Mozilla/5.0"})
+                rr.raise_for_status()
+                if looks_like_html(rr.content, rr.headers.get("content-type")):
+                    continue
+                out.append((Path(name).name, rr.content, link))
+                seen.add(name)
+            except Exception as e:
+                rec.setdefault("download_errors", {})[str(name)] = repr(e)
+        diag["records"].append(rec)
+    return out, diag
+
+
+def landing_probe(doi: str, expected_names: list[str], session: requests.Session | None = None) -> dict:
+    encoded = urllib.parse.quote("doi:" + doi, safe="")
+    url = "https://datadryad.org/dataset/" + encoded
+    client = session or requests.Session()
+    r = client.get(url, timeout=120, allow_redirects=True)
+    out = {
+        "url": r.url,
+        "status_code": r.status_code,
+        "content_type": r.headers.get("content-type"),
+        "href_candidates": [],
+        "filename_context": {},
+        "file_links": {},
+    }
+    if r.status_code != 200:
+        return out
+    text = html.unescape(r.text)
+    hrefs = re.findall(r'href=["\\\']([^"\\\']+)["\\\']', text, flags=re.I)
+    keep = []
+    for href in hrefs:
+        low = href.lower()
+        if any(token in low for token in ("file_stream", "download", "/api/v2/files/", "/stash/")):
+            keep.append(href)
+    out["href_candidates"] = sorted(set(keep))[:300]
+
+    # Dryad public landing pages expose individual files as:
+    # <a class="js-individual-dl" href="/downloads/file_stream/ID">...NAME</a>
+    for href, label in re.findall(
+        r'<a[^>]+href=["\\\']([^"\\\']*file_stream/[^"\\\']+)["\\\'][^>]*>(.*?)</a>',
+        text,
+        flags=re.I | re.S,
+    ):
+        clean = re.sub(r"<[^>]+>", "", label)
+        clean = html.unescape(clean).strip()
+        if clean:
+            out["file_links"][clean] = href
+
+    for name in expected_names:
+        i = text.find(name)
+        if i >= 0:
+            out["filename_context"][name] = text[max(0, i - 800): i + 1200]
+    return out
+
+
+def download_static_mirrors(mirrors: dict[str, str]) -> tuple[list[tuple[str, bytes, str]], dict]:
+    out = []
+    diag = {"files": {}}
+    for name, link in (mirrors or {}).items():
+        row = {"url": link}
+        try:
+            rr = requests.get(
+                link,
+                timeout=180,
+                allow_redirects=True,
+                headers={"User-Agent": "Mozilla/5.0"},
+            )
+            row["status_code"] = rr.status_code
+            row["content_type"] = rr.headers.get("content-type")
+            row["final_url"] = rr.url
+            rr.raise_for_status()
+            row["bytes"] = len(rr.content)
+            if looks_like_html(rr.content, rr.headers.get("content-type")):
+                row["rejected_html"] = True
+            else:
+                row["rejected_html"] = False
+                out.append((Path(name).name, rr.content, link))
+        except Exception as e:
+            row["error"] = repr(e)
+        diag["files"][name] = row
+    return out, diag
+
+
+def download_dataset(doi: str, expected_names: list[str]) -> tuple[list[tuple[str, bytes, str]], dict]:
+    encoded = urllib.parse.quote("doi:" + doi, safe="")
+    url = API.format(doi=encoded)
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+    })
+    diagnostics = {"api_url": url}
+    try:
+        r = session.get(url, timeout=120, allow_redirects=True)
+        diagnostics["api_status_code"] = r.status_code
+        diagnostics["api_content_type"] = r.headers.get("content-type")
+        r.raise_for_status()
+        ctype = (r.headers.get("content-type") or "").lower()
+
+        # Current Dryad API may return either an archive response or a JSON
+        # listing of files with per-file download links.
+        if "zip" in ctype or r.content[:2] == b"PK":
+            out = []
+            with zipfile.ZipFile(io.BytesIO(r.content)) as z:
+                for info in z.infolist():
+                    if info.is_dir():
+                        continue
+                    out.append((Path(info.filename).name, z.read(info), "zip-member"))
+            return out, diagnostics
+
+        payload = r.json()
+        rows = payload.get("data", payload if isinstance(payload, list) else [])
+        out = []
+        for row in rows:
+            attrs = row.get("attributes", {})
+            links = row.get("links", {})
+            name = attrs.get("name") or attrs.get("path") or row.get("name")
+            link = links.get("download") or row.get("download")
+            if not name or not link:
+                continue
+            if link.startswith("/"):
+                link = "https://datadryad.org" + link
+            rr = session.get(link, timeout=120, allow_redirects=True)
+            rr.raise_for_status()
+            out.append((Path(name).name, rr.content, link))
+        if out:
+            return out, diagnostics
+        diagnostics["api_payload_keys"] = list(payload) if isinstance(payload, dict) else str(type(payload))
+    except Exception as e:
+        diagnostics["api_error"] = repr(e)
+
+    landing = landing_probe(doi, expected_names, session=session)
+    diagnostics["landing"] = landing
+
+    file_links = landing.get("file_links", {})
+    selected = []
+    if expected_names:
+        for wanted in expected_names:
+            if wanted in file_links:
+                selected.append((wanted, file_links[wanted]))
+    else:
+        selected = sorted(file_links.items())
+
+    out = []
+    download_errors = {}
+    rejected_html = {}
+    for name, href in selected:
+        link = href if href.startswith("http") else "https://datadryad.org" + href
+        try:
+            rr = session.get(
+                link,
+                timeout=180,
+                allow_redirects=True,
+                headers={"Referer": landing.get("url") or "https://datadryad.org/"},
+            )
+            rr.raise_for_status()
+            if looks_like_html(rr.content, rr.headers.get("content-type")):
+                rejected_html[name] = {
+                    "bytes": len(rr.content),
+                    "final_url": rr.url,
+                    "content_type": rr.headers.get("content-type"),
+                    "prefix": rr.text[:160] if "text" in (rr.headers.get("content-type") or "") else None,
+                }
+                continue
+            out.append((Path(name).name, rr.content, link))
+        except Exception as e:
+            download_errors[name] = repr(e)
+    diagnostics["landing_selected_files"] = [name for name, _ in selected]
+    diagnostics["landing_download_errors"] = download_errors
+    diagnostics["landing_rejected_html"] = rejected_html
+    if out:
+        return out, diagnostics
+
+    zfiles, zdiag = zenodo_resolve(doi, expected_names)
+    diagnostics["zenodo"] = zdiag
+    return zfiles, diagnostics
+
+
+def inspect_csv(name: str, data: bytes) -> dict:
+    last = None
+    for enc in ("utf-8-sig", "utf-8", "cp1252", "latin1"):
+        try:
+            df = pd.read_csv(io.BytesIO(data), encoding=enc)
+            break
+        except Exception as e:
+            last = repr(e)
+    else:
+        return {"kind": "csv", "parse_error": last}
+
+    low = {}
+    for col in df.columns:
+        try:
+            n = int(df[col].nunique(dropna=True))
+            if n <= 20:
+                low[str(col)] = [str(x) for x in df[col].dropna().unique()[:30]]
+        except Exception:
+            pass
+    return {
+        "kind": "csv",
+        "rows": int(len(df)),
+        "columns": [str(c) for c in df.columns],
+        "dtypes": {str(c): str(df[c].dtype) for c in df.columns},
+        "low_cardinality": low,
+        "head": df.head(3).where(pd.notna(df), None).to_dict(orient="records"),
+    }
+
+
+def inspect_xlsx(name: str, data: bytes) -> dict:
+    try:
+        book = pd.ExcelFile(io.BytesIO(data), engine="openpyxl")
+    except Exception as e:
+        return {"kind": "xlsx", "parse_error": repr(e)}
+    sheets = {}
+    for sheet in book.sheet_names:
+        try:
+            df = pd.read_excel(book, sheet_name=sheet, nrows=8)
+            sheets[str(sheet)] = {
+                "columns": [str(c) for c in df.columns],
+                "preview_rows": int(len(df)),
+                "head": df.head(3).where(pd.notna(df), None).to_dict(orient="records"),
+            }
+        except Exception as e:
+            sheets[str(sheet)] = {"parse_error": repr(e)}
+    return {"kind": "xlsx", "sheets": sheets, "sheet_count": len(book.sheet_names)}
+
+
+def inspect(name: str, data: bytes) -> dict:
+    lower = name.lower()
+    if lower.endswith(".csv"):
+        return inspect_csv(name, data)
+    if lower.endswith((".xlsx", ".xls")):
+        return inspect_xlsx(name, data)
+    if lower.endswith(".zip"):
+        try:
+            with zipfile.ZipFile(io.BytesIO(data)) as z:
+                return {
+                    "kind": "zip",
+                    "members": [x.filename for x in z.infolist() if not x.is_dir()][:200],
+                    "member_count": sum(not x.is_dir() for x in z.infolist()),
+                }
+        except Exception as e:
+            return {"kind": "zip", "parse_error": repr(e)}
+    return {"kind": "other", "bytes": len(data)}
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--contract", type=Path, required=True)
+    ap.add_argument("--output", type=Path, required=True)
+    args = ap.parse_args()
+
+    contract = json.loads(args.contract.read_text(encoding="utf-8"))
+    result = {
+        "result_id": "payoff_b_e7_dryad_source_probe_20260928",
+        "status": "SOURCE_SCHEMA_PROBE",
+        "contract_id": contract["contract_id"],
+        "sources": {},
+    }
+    for src in contract["candidate_sources"]:
+        doi = src.get("data_doi")
+        if not doi:
+            continue
+        print(f"PROBE {src['source_id']} {doi}", flush=True)
+        entry = {"doi": doi, "files": []}
+        try:
+            expected_names = list(src.get("data_files") or [])
+            static_mirrors = dict(src.get("static_mirror_files") or {})
+            files = []
+            diagnostics = {}
+            if static_mirrors:
+                files, mirror_diag = download_static_mirrors(static_mirrors)
+                diagnostics["static_mirrors"] = mirror_diag
+            if not files and doi.startswith("10.5061/"):
+                files, dryad_diag = download_dataset(doi, expected_names)
+                diagnostics["dryad"] = dryad_diag
+            entry["diagnostics"] = diagnostics
+            for name, data, route in files:
+                row = {
+                    "name": name,
+                    "bytes": len(data),
+                    "sha256": sha256_bytes(data),
+                    "download_route": route,
+                    "inspection": inspect(name, data),
+                }
+                entry["files"].append(row)
+            entry["status"] = "ACQUIRED" if files else "URL_RESOLUTION_PENDING"
+            entry["valid_file_count"] = len(files)
+        except Exception as e:
+            entry["status"] = "ACCESS_OR_PARSE_FAILED"
+            entry["error"] = repr(e)
+        result["sources"][src["source_id"]] = entry
+
+    acquired = sum(v.get("status") == "ACQUIRED" for v in result["sources"].values())
+    result["summary"] = {
+        "source_count": len(result["sources"]),
+        "acquired": acquired,
+        "failed": len(result["sources"]) - acquired,
+    }
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False, default=str) + "\n", encoding="utf-8")
+    print(json.dumps(result["summary"], indent=2))
+
+
+if __name__ == "__main__":
+    main()
