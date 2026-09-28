@@ -1,4 +1,5 @@
 name: PAYOFF-B V2 ACCESS_BLOCKED package
+# Rebuild marker: E6 Figure 5 generation 2026-09-28
 
 concurrency:
   group: payoff-b-v2-access-blocked-${{ github.head_ref || github.ref_name }}
