@@ -15,8 +15,8 @@ def load_result() -> dict:
 def test_cross_system_result_is_frozen_and_passed():
     x = load_result()
     assert x["status"] == "PROMOTION_GATE_PASSED"
-    assert x["provenance"]["workflow_run"] == 36383464308
-    assert x["provenance"]["head_sha"] == "986257f19abba0cd8b1387984e6f45607f68ecbc"
+    assert x["provenance"]["workflow_run"] == 36383988920
+    assert x["provenance"]["head_sha"] == "5c6122fdb83ffed058749eaa6f27266f7635276a"
     assert x["provenance"]["usui_sha256"] == "68816f6cbfccbb9b47b45be0df49f077db914c8e43e567d0ed2cac9bbafde56c"
     assert x["provenance"]["freimuth_temp_sha256"] == "946f56b8aa5f43bb15f5bbbd8c5174be23c12691332651e09bce2cb20edf7efd"
 
@@ -34,6 +34,11 @@ def test_bird_information_distance_signal_is_robust():
 
     assert x["sensitivity"]["weight_cap_99"]["ci95"][0] > 0
     assert x["sensitivity"]["unweighted_adjusted"]["ci95"][0] > 0
+    loo = x["leave_one_study_out"]
+    assert loo["n_fits"] == 28
+    assert loo["all_estimates_positive"] is True
+    assert loo["all_ci_lower_positive"] is True
+    assert loo["max_p"] < 0.05
 
 
 def test_freimuth_published_group_reconstruction_passed():
