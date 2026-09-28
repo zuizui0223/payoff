@@ -1,0 +1,153 @@
+{
+  "result_id": "payoff_b_cross_system_information_result_20260928",
+  "frozen_date": "2026-09-28",
+  "contract_id": "payoff_b_cross_system_information_distance_v1_20260928",
+  "status": "PROMOTION_GATE_PASSED",
+  "provenance": {
+    "branch": "analysis/payoff-b-cross-system-information-20260928",
+    "head_sha": "986257f19abba0cd8b1387984e6f45607f68ecbc",
+    "workflow_run": 36383464308,
+    "artifact_id": 10953507916,
+    "artifact_digest_sha256": "f03a978deaaba6b241a9cd9e9890c550d96ce61d40ce3ec51a97e1336650c514",
+    "usui_sha256": "68816f6cbfccbb9b47b45be0df49f077db914c8e43e567d0ed2cac9bbafde56c",
+    "freimuth_temp_sha256": "946f56b8aa5f43bb15f5bbbd8c5174be23c12691332651e09bce2cb20edf7efd"
+  },
+  "bird_temperature_meta_regression": {
+    "eligible_rows": 944,
+    "studies": 28,
+    "species": 279,
+    "rows_by_distance": {
+      "short": 352,
+      "long": 592
+    },
+    "species_by_distance": {
+      "short": 181,
+      "long": 128
+    },
+    "distance_only": {
+      "short_mean_days_per_C": -1.0252371229546469,
+      "short_ci95": [
+        -1.3116362911677488,
+        -0.7388379547415449
+      ],
+      "long_mean_days_per_C": -0.6298574031625847,
+      "long_ci95": [
+        -0.8693994497421891,
+        -0.39031535658298017
+      ],
+      "long_minus_short": 0.3953797197920622,
+      "ci95": [
+        0.12520763663569834,
+        0.6655518029484261
+      ],
+      "p": 0.0041263735828607605
+    },
+    "adjusted_primary": {
+      "long_minus_short_days_per_C": 0.42147637990921183,
+      "se": 0.14628434062165036,
+      "ci95": [
+        0.13475907229077716,
+        0.7081936875276464
+      ],
+      "p": 0.003961475194754047,
+      "covariance": "two-way cluster robust: Study x Species",
+      "adjustment": [
+        "arrival metric",
+        "temperature location",
+        "arrival location",
+        "data source",
+        "continent"
+      ]
+    },
+    "sensitivity": {
+      "weight_cap_99": {
+        "estimate": 0.41658288656925757,
+        "ci95": [
+          0.131397932677025,
+          0.7017678404614902
+        ],
+        "p": 0.00419567279190782
+      },
+      "unweighted_adjusted": {
+        "estimate": 0.5384575691435765,
+        "ci95": [
+          0.2059772220492911,
+          0.8709379162378619
+        ],
+        "p": 0.0015022253670672352
+      }
+    },
+    "interpretation": "Long-distance migrants show less negative temperature slopes than short-distance migrants; the published migration-distance gradient survives the PAYOFF-B dependence-aware reconstruction.",
+    "novelty_boundary": "The short-versus-long effect is a reconstruction of an already published Usui et al. result, not a new discovery."
+  },
+  "freimuth_local_benchmark": {
+    "rows": 1763,
+    "taxonomy_unresolved": 0,
+    "taxonomy_overrides": {
+      "Ammophila arenaria": "Plants",
+      "Salix alba": "Plants",
+      "Tethea or": "Butterflies/Moths"
+    },
+    "groups": {
+      "Plants": {
+        "n": 1438,
+        "mean_days_per_C": -5.151571461452255,
+        "se": 0.15279033050152316,
+        "ci95": [
+          -5.4510405092352405,
+          -4.852102413669269
+        ],
+        "fraction_negative": 0.8442280945757997
+      },
+      "Bees": {
+        "n": 20,
+        "mean_days_per_C": -2.0239526225884146,
+        "se": 1.2975416136495912,
+        "ci95": [
+          -4.567134185341613,
+          0.5192289401647843
+        ],
+        "fraction_negative": 0.6
+      },
+      "Flies": {
+        "n": 22,
+        "mean_days_per_C": -3.878802961994384,
+        "se": 0.7065918807860171,
+        "ci95": [
+          -5.2637230483349775,
+          -2.4938828756537905
+        ],
+        "fraction_negative": 0.9090909090909091
+      },
+      "Butterflies/Moths": {
+        "n": 206,
+        "mean_days_per_C": -1.84821655010505,
+        "se": 0.2314505099843141,
+        "ci95": [
+          -2.3018595496743055,
+          -1.3945735505357943
+        ],
+        "fraction_negative": 0.7378640776699029
+      },
+      "Beetles": {
+        "n": 77,
+        "mean_days_per_C": -1.7058126264327804,
+        "se": 0.5177623991023048,
+        "ci95": [
+          -2.7206269286732976,
+          -0.690998324192263
+        ],
+        "fraction_negative": 0.7402597402597403
+      }
+    },
+    "published_group_count_and_mean_reproduction": "PASS",
+    "interpretation": "Local plant and pollinator phenologies are strongly temperature-responsive, but partner groups differ; local information access does not imply identical response or monotonic mismatch reduction."
+  },
+  "licensed_cross_system_claim": "Within migratory birds, temperature responsiveness weakens with migration distance; independently, local plant-pollinator systems show strong but unequal temperature responsiveness. Together with PAYOFF-B predictive-connectivity evidence, these results are consistent with an information-distance axis.",
+  "prohibited_claims": [
+    "pollinators universally track climate better than birds",
+    "the cross-system taxon contrast is causal",
+    "the Usui migration-distance effect is newly discovered by PAYOFF-B",
+    "these two datasets alone constitute a new cross-taxon meta-analysis"
+  ]
+}
