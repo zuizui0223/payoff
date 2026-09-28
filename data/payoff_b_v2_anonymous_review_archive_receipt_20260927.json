@@ -6,20 +6,20 @@
   "merged_pr": 180,
   "merge_commit": "8cbcd6f22b925d09651fe3140268a70cd9c4c301",
   "workflow": {
-    "run_id": 36370295435,
+    "run_id": 36374436474,
     "run_attempt": 1,
-    "head_sha": "a518a4a4ca6bab3b05b3c1f87d2055a332c5ed08",
+    "head_sha": "f59bda34a4b8e13bef128b6f4632f3f6cae18543",
     "conclusion": "success",
-    "artifact_id": 10948908201,
+    "artifact_id": 10949304838,
     "artifact_name": "payoff-b-v2-anonymous-review-archive",
-    "artifact_sha256": "cb1a090d6d2ace3ec54f72aba0a58e4dbd3a7e1348907214879529909e66fd4e"
+    "artifact_sha256": "4caf4a1dc083d2f4ec0212730c0cb76ef22d7f6fa11f4f52731b796601f3aeda"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_ANON_REVIEW.zip",
-    "sha256": "6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf"
+    "sha256": "a933bc428ab9e6577536c381e493b565aadb88235b164713ce546509b698d960"
   },
   "contents": {
-    "file_count": 70,
+    "file_count": 71,
     "python_source_count": 26,
     "figure_count": 7,
     "identity_scan_passed": true,
@@ -34,14 +34,14 @@
     "review archive includes frozen Hoge Veluwe Gate-A/Gate-B code and negative result receipts"
   ],
   "delivery_state": "PENDING_ANONYMOUS_CHANNEL",
-  "latest_science_update_pr": 191,
+  "latest_science_update_pr": 194,
   "reproduction": {
-    "run_id": 36370295435,
+    "run_id": 36374436474,
     "run_attempt": 2,
-    "head_sha": "a518a4a4ca6bab3b05b3c1f87d2055a332c5ed08",
-    "artifact_id": 10948993094,
-    "artifact_sha256": "24f3a7ee1e4b15f5cafea6e50cf1f48dbaf9bfaf97f65bfd535c6a4b728841cd",
-    "inner_archive_sha256": "6e7dd4d6ac3ad953eb2368743434d3bce10f52aceeb29cb0e66bcdf4c940babf",
+    "head_sha": "f59bda34a4b8e13bef128b6f4632f3f6cae18543",
+    "artifact_id": 10950815667,
+    "artifact_sha256": "f84de758337cf1e55f7f37b09185d3c184eb2ba0db0539c6ab478b24cb14d12c",
+    "inner_archive_sha256": "a933bc428ab9e6577536c381e493b565aadb88235b164713ce546509b698d960",
     "deterministic_inner_archive": true
   },
   "latest_build_date": "2026-09-28"
