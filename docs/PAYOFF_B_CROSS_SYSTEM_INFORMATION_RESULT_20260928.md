@@ -1,7 +1,7 @@
 # PAYOFF-B cross-system information-distance result
 
 Date: **2026-09-28**  
-Status: **promotion gate passed; candidate E6 for Paper 2**  
+Status: **canonical E6 for Paper 2; causal information-distance mechanism not identified**  
 Branch: `analysis/payoff-b-cross-system-information-20260928`  
 Frozen workflow run: **36383988920**  
 Frozen head: `5c6122fdb83ffed058749eaa6f27266f7635276a`
@@ -101,6 +101,12 @@ This is a reconstruction of an effect already reported by Usui et al.; it is
 not a PAYOFF-B novelty claim. Its value here is that the information-distance
 gradient remains visible under the PAYOFF-B dependence-aware contract.
 
+Photoperiodic/endogenous timing is therefore retained as a non-exclusive
+alternative explanation for the migration-distance gradient. The E6 result
+shows a robust ecological gradient compatible with information distance; it
+does not distinguish that mechanism from intrinsic/circannual timing
+constraints or prove that remote-information access is the causal driver.
+
 ## Result 2 — the local plant--pollinator benchmark reproduces exactly
 
 Species names in the Freimuth slope file were independently classified to the
@@ -164,6 +170,10 @@ PAYOFF-B may now say:
 > hypothesis that spatial and temporal access to information constrains
 > seasonal tracking.**
 
+The current sources also do not estimate the theoretical pairwise deadline
+difference D2-D1 in a specific interaction or observe the predicted
+desynchronization window. That mechanism remains prospective.
+
 PAYOFF-B may **not** say:
 
 - pollinators universally track climate better than birds;
@@ -188,7 +198,8 @@ claim ceiling:
 - local plant--pollinator systems provide a non-migratory benchmark;
 - full natural degradation--recovery hysteresis remains unobserved.
 
-The next escalation is a genuinely multi-study cross-system moderator
-meta-analysis. That requires multiple independent plant--pollinator and
-migration datasets on a harmonized effect-size contract and remains a separate
-gate.
+A follow-up E7 source screen identified four local plant--pollinator systems
+that can be written on a common descriptive days/°C scale, but formal pooling
+was not promoted because only one supplied a directly usable cross-partner
+contrast variance and the forced diagnostic was highly heterogeneous
+(I² ≈ 91%). E6 therefore remains the canonical empirical ceiling.

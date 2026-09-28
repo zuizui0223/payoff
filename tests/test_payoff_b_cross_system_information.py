@@ -65,3 +65,15 @@ def test_claim_boundary_blocks_taxon_ranking_and_fake_novelty():
     doc = DOC.read_text(encoding="utf-8")
     assert "E6 — cross-system information-distance" in doc
     assert "full natural degradation--recovery hysteresis remains unobserved" in doc
+
+    claim_stack = (ROOT / "docs" / "PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md").read_text(
+        encoding="utf-8"
+    )
+    assert "Photoperiodic and endogenous migration programmes" in claim_stack
+    assert "does **not** causally identify information distance" in claim_stack
+    assert "does not estimate **D2-D1**" in claim_stack
+    assert "pairwise deadline-difference mechanism remains a prospective natural test" in claim_stack
+
+    assert "canonical E6 for Paper 2" in doc
+    assert "Photoperiodic/endogenous timing is therefore retained" in doc
+    assert "E6 therefore remains the canonical empirical ceiling" in doc
