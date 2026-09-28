@@ -8,11 +8,19 @@ on:
     paths:
       - 'data/payoff_b_e7_local_interaction_meta_screen_20260928.json'
       - 'scripts/payoff_b_e7_dryad_probe.py'
+      - 'scripts/payoff_b_e7_published_effect_pilot.py'
+      - 'data/payoff_b_e7_published_effect_pilot_input_20260928.json'
+      - 'data/payoff_b_e7_source_eligibility_20260928.json'
+      - 'tests/test_payoff_b_e7_screen.py'
       - '.github/workflows/payoff-b-e7-dryad-probe.yml'
   pull_request:
     paths:
       - 'data/payoff_b_e7_local_interaction_meta_screen_20260928.json'
       - 'scripts/payoff_b_e7_dryad_probe.py'
+      - 'scripts/payoff_b_e7_published_effect_pilot.py'
+      - 'data/payoff_b_e7_published_effect_pilot_input_20260928.json'
+      - 'data/payoff_b_e7_source_eligibility_20260928.json'
+      - 'tests/test_payoff_b_e7_screen.py'
       - '.github/workflows/payoff-b-e7-dryad-probe.yml'
 
 permissions:
@@ -34,9 +42,18 @@ jobs:
           python scripts/payoff_b_e7_dryad_probe.py \
             --contract data/payoff_b_e7_local_interaction_meta_screen_20260928.json \
             --output outputs/e7/source_probe.json
+      - name: Run nonpromotable published-effect diagnostic
+        run: |
+          python scripts/payoff_b_e7_published_effect_pilot.py \
+            --input data/payoff_b_e7_published_effect_pilot_input_20260928.json \
+            --output outputs/e7/published_effect_pilot.json
+          python -m pip install --disable-pip-version-check pytest
+          pytest -q tests/test_payoff_b_e7_screen.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: payoff-b-e7-source-probe
-          path: outputs/e7/source_probe.json
+          path: |
+            outputs/e7/source_probe.json
+            outputs/e7/published_effect_pilot.json
           if-no-files-found: error
