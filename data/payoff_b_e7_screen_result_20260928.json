@@ -1,0 +1,79 @@
+{
+  "result_id": "payoff_b_e7_screen_result_20260928",
+  "date": "2026-09-28",
+  "status": "SCREEN_COMPLETE_NOT_PROMOTED",
+  "canonical_paper_change": false,
+  "provenance": {
+    "workflow_run": 36396358088,
+    "artifact_id": 10958276772,
+    "artifact_name": "payoff-b-e7-source-probe",
+    "head_sha": "d1094be47635762a0676a4059ddc8a580bac5ea5"
+  },
+  "source_byte_probe": {
+    "sources_probed": 9,
+    "valid_source_bytes_acquired_in_github_actions": 0,
+    "interpretation": "External repository anti-bot/access behavior blocked byte acquisition from GitHub Actions. This is an infrastructure access result, not evidence that the source datasets are unavailable to users through their public records.",
+    "dryad_pattern": "public landing pages resolve file identities, while API/file_stream routes returned authorization/challenge responses in the runner",
+    "zenodo_pattern": "record metadata and public file identities are externally verifiable, while direct file downloads returned 403 in the runner for the tested static routes"
+  },
+  "tier_B_point_estimate_screen": {
+    "effect_definition": "pollinator beta - plant beta, days per degree C",
+    "systems": [
+      {
+        "system": "Freimuth_2022",
+        "effect": 3.2,
+        "status": "source reconstructed; delta variance not treated as direct interaction variance"
+      },
+      {
+        "system": "Kehrberger_Holzschuh_2019",
+        "effect": 9,
+        "status": "matched WMD point estimate; cross-partner covariance not reported"
+      },
+      {
+        "system": "Xie_Claytonia_Andrena",
+        "effect": -0.5,
+        "status": "matched winter Tmin point estimate; source ± values labelled SD and cross-model covariance not reported"
+      }
+    ],
+    "sign_pattern": [
+      "positive",
+      "positive",
+      "negative"
+    ],
+    "universal_partner_ordering_supported": false
+  },
+  "forced_invalid_variance_diagnostic": {
+    "status": "NONPROMOTABLE_DIAGNOSTIC_ONLY",
+    "k": 3,
+    "fixed_mean": 0.09793604749003904,
+    "Q": 9.18757698301183,
+    "Q_df": 2,
+    "tau2_DL": 6.893500934508333,
+    "I2_percent": 78.23147491772777,
+    "random_mean": 1.878845255212231,
+    "random_se": 1.889286010282808,
+    "random_normal_ci95": [
+      -1.8241553249420726,
+      5.581845835366535
+    ],
+    "max_fixed_weight_fraction": 0.8500618555965244,
+    "max_random_weight_fraction": 0.49688886535860577,
+    "assumption_warning": "At least two diagnostic SEs require invalid/unverified zero-covariance and uncertainty-label assumptions. These statistics are stress-test diagnostics and not inferential meta-analysis estimates."
+  },
+  "additional_mechanistic_evidence": {
+    "de_manincor_2023": "+4 C experiment advanced plant flowering (community peak 7.4 d earlier) but did not detectably change Osmia lignaria emergence; retained as mechanistic anchor because temperature treatment is confounded with greenhouse room and endpoints use different inferential scales",
+    "olliff_yang_mesler_2018": "plant and bee timing both temperature-responsive but cue/model structure differs; not pooled until identical exposure metric is reconstructable",
+    "iler_2013": "flower and syrphid responses differ to snowmelt/GDD; not convertible to days/C without a new raw-data reconstruction"
+  },
+  "promotion_gate": {
+    "required_independent_systems_with_harmonized_inferential_variance": 3,
+    "currently_eligible": 1,
+    "passed": false
+  },
+  "decision": {
+    "paper2_claim_ceiling": "E6",
+    "e7_status": "DO_NOT_PROMOTE",
+    "ecological_conclusion_for_screen": "Local information access does not imply a universal plant-versus-pollinator response ordering; the limited commensurable systems are strongly heterogeneous.",
+    "manuscript_use": "none until variance/covariance and common exposure contracts are reconstructed for at least three independent systems"
+  }
+}
