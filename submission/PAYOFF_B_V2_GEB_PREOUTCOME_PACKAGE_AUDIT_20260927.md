@@ -18,9 +18,9 @@ reuse the superseded temporal-buffering V1 GEB overlay.
 ## Verified GEB-facing metrics
 
 ```text
-structured_abstract_words = 272
-main_body_words = 4633
-references = 16
+structured_abstract_words = 244
+main_body_words = 4761
+references = 18
 display_pieces = 7
 keywords = 8
 running_title_chars = 38
@@ -67,37 +67,37 @@ The deterministic package contains:
 
 Internal V1/V2 provenance documents are deliberately excluded from the journal-facing ZIP so package hashes do not depend on publication-state bookkeeping.
 
-Figure panels in the V2 renderer use lower-case journal-style panel labels.
+Figure panels in the V2 renderer use lower-case journal-style panel labels. Figure 5 integrates the E6 migration-distance and local benchmark evidence. The manuscript explicitly retains photoperiodic/endogenous timing as a non-exclusive alternative and states that pairwise deadline differences remain untested in nature.
 
 ## Frozen build provenance
 
 ```text
-workflow_run = 36390286034
+workflow_run = 36405110540
 workflow_run_attempt = 1
 validated_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
 workflow_conclusion = success
 
-artifact_id = 10955892924
+artifact_id = 10962346030
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
 66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
+6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
 ```
 
 Deterministic reproduction check:
 
 ```text
-reproduction_workflow_run = 36390286034
+reproduction_workflow_run = 36405110540
 reproduction_run_attempt = 2
 reproduction_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
 reproduction_artifact_id = 10956526561
 reproduction_artifact_sha256 =
 2c3b34d786bf702447285378653fcaaf3975cbff37bccfd80c2b5f8032a3ba35
 reproduction_inner_zip_sha256 =
-31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
+6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
 deterministic_inner_archive = PASS
 package_file_count = 17
 ```
