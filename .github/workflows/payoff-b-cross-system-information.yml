@@ -68,6 +68,7 @@ jobs:
           print('BIRD_PRIMARY', json.dumps(x['bird_meta_regression']['ivw_adjusted']['long_minus_short'], sort_keys=True))
           print('BIRD_SENSITIVITY_CAP99', json.dumps(x['bird_meta_regression']['ivw_adjusted_weightcap99']['long_minus_short'], sort_keys=True))
           print('BIRD_SENSITIVITY_UNWEIGHTED', json.dumps(x['bird_meta_regression']['unweighted_adjusted']['long_minus_short'], sort_keys=True))
+          print('BIRD_LOO_STUDY', json.dumps({k:v for k,v in x['bird_meta_regression']['leave_one_study_out'].items() if k != 'fits'}, sort_keys=True))
           print('FREIMUTH_REPRO_PASS', x['freimuth_local_benchmark']['all_group_count_and_mean_checks_pass'])
           print('FREIMUTH_UNRESOLVED', x['freimuth_local_benchmark']['taxonomy_unresolved'])
           print(json.dumps(x['freimuth_local_benchmark']['groups'], indent=2))
