@@ -279,6 +279,16 @@ def build(
         }
     )
 
+    access_blocked_author_decision = bool(
+        result_class == "ACCESS_BLOCKED"
+        and isinstance(payload.get("author_decision"), dict)
+        and payload["author_decision"].get("decision")
+        == "SUBMIT_WITH_ACCESS_BLOCKED"
+        and payload["author_decision"].get("scientific_result_claimed") is False
+        and payload["author_decision"].get("future_authenticated_execution_permitted") is True
+        and payload["author_decision"].get("original_registration_remains_binding") is True
+    )
+
     manifest = {
         "status": "payoff_b_v2_geb_outcome_package",
         "journal": "Global Ecology and Biogeography",
@@ -307,22 +317,29 @@ def build(
         "aikens_result_location": "Supporting Information only",
         "main_text_retuned": False,
         "main_figures_retuned": False,
-        "final_science_blocker": (
-            "author decision required: submit with registered Aikens ACCESS_BLOCKED "
-            "state or wait for authenticated execution"
+        "access_blocked_author_decision_frozen": (
+            access_blocked_author_decision
             if result_class == "ACCESS_BLOCKED"
             else None
+        ),
+        "final_science_blocker": (
+            None
+            if result_class != "ACCESS_BLOCKED" or access_blocked_author_decision
+            else (
+                "author decision required: submit with registered Aikens ACCESS_BLOCKED "
+                "state or wait for authenticated execution"
+            )
         ),
         "final_submission_eligible": False,
         "remaining_portal_blockers": (
             [
-                "author decision on registered Aikens ACCESS_BLOCKED state",
                 "anonymous reviewer archive delivery channel",
                 "author-controlled title-page and declaration metadata",
                 "final human review of generated package and portal metadata",
             ]
-            if result_class == "ACCESS_BLOCKED"
+            if result_class != "ACCESS_BLOCKED" or access_blocked_author_decision
             else [
+                "author decision on registered Aikens ACCESS_BLOCKED state",
                 "anonymous reviewer archive delivery channel",
                 "author-controlled title-page and declaration metadata",
                 "final human review of generated package and portal metadata",
