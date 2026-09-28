@@ -18,9 +18,9 @@ reuse the superseded temporal-buffering V1 GEB overlay.
 ## Verified GEB-facing metrics
 
 ```text
-structured_abstract_words = 246
-main_body_words = 4242
-references = 14
+structured_abstract_words = 272
+main_body_words = 4633
+references = 16
 display_pieces = 7
 keywords = 8
 running_title_chars = 38
@@ -72,30 +72,30 @@ Figure panels in the V2 renderer use lower-case journal-style panel labels.
 ## Frozen build provenance
 
 ```text
-workflow_run = 36374436480
+workflow_run = 36390286034
 workflow_run_attempt = 1
-validated_head = f59bda34a4b8e13bef128b6f4632f3f6cae18543
+validated_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
 workflow_conclusion = success
 
-artifact_id = 10950726054
+artifact_id = 10955892924
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-81e9b9383895193073c701e2ca63678a830ff1a619911f0f30a80f4d26000cab
+66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
+31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
 ```
 
 Deterministic reproduction check:
 
 ```text
-reproduction_workflow_run = 36374436480
+reproduction_workflow_run = 36390286034
 reproduction_run_attempt = 2
-reproduction_head = a518a4a4ca6bab3b05b3c1f87d2055a332c5ed08
-reproduction_artifact_id = 10950107881
+reproduction_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
+reproduction_artifact_id = 10956526561
 reproduction_artifact_sha256 =
-11f0bfc8fcf28a071380ef9e18bc965d4151378a341b51e6a2335cf0bd527731
+2c3b34d786bf702447285378653fcaaf3975cbff37bccfd80c2b5f8032a3ba35
 reproduction_inner_zip_sha256 =
 07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
 deterministic_inner_archive = PASS
@@ -114,7 +114,9 @@ Supporting Information gate. Its eventual sign is not permitted to change:
 - the structured abstract spine;
 - the information-deadline theorem;
 - the perfect-information recovery-failure result;
-- the broad-bird/flycatcher/wigeon claim boundaries.
+- the broad-bird/flycatcher/wigeon claim boundaries;
+- the E6 information-distance claim boundary: no causal bird-versus-pollinator
+  ranking and no new two-source cross-taxon meta-analysis.
 
 No natural interaction network is claimed to have demonstrated the full
 degradation–recovery hysteresis sequence, and no natural singleton rescue
@@ -129,14 +131,16 @@ CURRENT_V2_PREOUTCOME_PACKAGE = READY
 FINAL_SUBMISSION_ELIGIBLE = false
 ```
 
+The current submission route is the frozen non-scientific `ACCESS_BLOCKED`
+render; authenticated Aikens execution remains permitted later under the
+original preregistration but is not a present submission blocker.
+
 Remaining blockers:
 
-1. configure AppEEARS/Earthdata credentials and freeze the registered
-   industrial-development phase-retention result;
-2. deliver the already-built anonymous reviewer archive through the journal
+1. deliver the already-built anonymous reviewer archive through the journal
    portal or a stable anonymous review link;
-3. populate author-controlled title-page and declaration metadata;
-4. perform final human review of the outcome-rendered package and portal metadata.
+2. populate author-controlled title-page and declaration metadata;
+3. perform final human review of the outcome-rendered package and portal metadata.
 
-The package is therefore ready for internal scientific review and for immediate
-post-result regeneration, but not for journal upload yet.
+The package is therefore scientifically closed for the current submission
+route, with only portal-facing inputs remaining.
