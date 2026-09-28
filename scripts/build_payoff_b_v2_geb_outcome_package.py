@@ -77,6 +77,12 @@ def outcome_cover_letter(result_json: Path) -> str:
             "estimable under the frozen reconstruction and support criteria, and "
             "no retuning was performed."
         ),
+        "ACCESS_BLOCKED": (
+            "The registered within-taxon industrial-development contrast was not "
+            "executed because the frozen environmental reconstruction required "
+            "authenticated source access that was unavailable; no substitute "
+            "analysis was used."
+        ),
     }
 
     return f"""# Global Ecology and Biogeography — V2 cover-letter template
@@ -280,7 +286,11 @@ def build(
         "canonical_source": (
             "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"
         ),
-        "scientific_state": "OUTCOME_RENDERED_SCIENCE_READY",
+        "scientific_state": (
+            "OUTCOME_RENDERED_ACCESS_BLOCKED"
+            if result_class == "ACCESS_BLOCKED"
+            else "OUTCOME_RENDERED_SCIENCE_READY"
+        ),
         "scientific_result": result_class,
         "v1_status": "FROZEN_PROVENANCE_ONLY",
         "registered_result_frozen": True,
@@ -293,13 +303,27 @@ def build(
         "aikens_result_location": "Supporting Information only",
         "main_text_retuned": False,
         "main_figures_retuned": False,
-        "final_science_blocker": None,
+        "final_science_blocker": (
+            "author decision required: submit with registered Aikens ACCESS_BLOCKED "
+            "state or wait for authenticated execution"
+            if result_class == "ACCESS_BLOCKED"
+            else None
+        ),
         "final_submission_eligible": False,
-        "remaining_portal_blockers": [
-            "anonymous reviewer archive delivery channel",
-            "author-controlled title-page and declaration metadata",
-            "final human review of generated package and portal metadata",
-        ],
+        "remaining_portal_blockers": (
+            [
+                "author decision on registered Aikens ACCESS_BLOCKED state",
+                "anonymous reviewer archive delivery channel",
+                "author-controlled title-page and declaration metadata",
+                "final human review of generated package and portal metadata",
+            ]
+            if result_class == "ACCESS_BLOCKED"
+            else [
+                "anonymous reviewer archive delivery channel",
+                "author-controlled title-page and declaration metadata",
+                "final human review of generated package and portal metadata",
+            ]
+        ),
         "structured_abstract_words": audit_result["main_metrics"]["abstract_words"],
         "main_body_words": audit_result["main_metrics"]["main_body_words"],
         "references": audit_result["main_metrics"]["reference_count"],
