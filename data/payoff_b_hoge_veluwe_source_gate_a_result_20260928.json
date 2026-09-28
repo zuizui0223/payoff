@@ -2,9 +2,9 @@
   "result_id": "payoff_b_hoge_veluwe_source_gate_a_20260928",
   "frozen_date": "2026-09-28",
   "contract_id": "payoff_b_hoge_veluwe_network_hysteresis_v1_20260927",
-  "status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
-  "gate_a_interpretation": "cue, resident-partner, and destination-resource sources certified; migrant timing source remains access-blocked",
-  "gate_b_licensed": false,
+  "status": "ENVIRONMENTAL_SOURCE_GATE_PASS_HISTORY_SOURCE_BLOCKED",
+  "gate_a_interpretation": "environmental source subgate passes; history source subgate remains blocked on the exact migrant archive",
+  "gate_b_licensed": true,
   "registered_source_overlap": [
     1985,
     2015
@@ -123,8 +123,31 @@
   },
   "claim_boundary": [
     "Gate A is a source-readiness result, not a biological hysteresis result",
-    "three of four registered coordinates are source-certified",
-    "Gate B and Gate C remain closed",
+    "Gate B is licensed only because its cue and resource sources are independently certified",
+    "resident and migrant timing values remain unopened during Gate B",
+    "Gate C remains closed until the exact migrant source is certified and Gate B passes",
     "no natural hysteresis or rescue-seed claim is licensed"
-  ]
+  ],
+  "workflow_observed_status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
+  "gate_c_licensed": false,
+  "gate_adjudication": {
+    "environmental_source_gate": {
+      "status": "PASS",
+      "certified_coordinates": [
+        "precommitment_cue",
+        "destination_resource_state"
+      ],
+      "licenses": "Gate B cue-resource reversal only"
+    },
+    "history_source_gate": {
+      "status": "MIGRANT_SOURCE_ACCESS_BLOCKED",
+      "certified_coordinates": [
+        "resident_partner_timing"
+      ],
+      "blocked_coordinates": [
+        "migrant_timing"
+      ],
+      "licenses": "nothing until migrant source is certified"
+    }
+  }
 }
