@@ -25,23 +25,25 @@
       "long": 128
     },
     "distance_only": {
-      "short_mean_days_per_C": -1.0252371229546469,
+      "short_mean_days_per_C": -1.0252371229546466,
       "short_ci95": [
-        -1.325054752155776,
-        -0.7254194937535178
+        -1.318354924620469,
+        -0.732119321288824
       ],
-      "long_mean_days_per_C": -0.6298574031625847,
+      "long_mean_days_per_C": -0.6298574031625851,
       "long_ci95": [
-        -0.8806225466075714,
-        -0.3790922597175978
+        -0.8765810036897886,
+        -0.3831338026353816
       ],
-      "long_minus_short": 0.3953797197920622,
+      "long_minus_short": 0.39537971979206143,
+      "se": 0.13784289956957357,
       "ci95": [
-        0.11254945197508442,
-        0.6782099876090399
+        0.11254945197508331,
+        0.6782099876090395
       ],
-      "p": 0.007914044131956066,
-      "df": 27
+      "t": 2.868335772293451,
+      "df": 27,
+      "p": 0.00791404413195623
     },
     "adjusted_primary": {
       "long_minus_short_days_per_C": 0.4214763799092083,
@@ -166,6 +168,7 @@
     "pollinators universally track climate better than birds",
     "the cross-system taxon contrast is causal",
     "the Usui migration-distance effect is newly discovered by PAYOFF-B",
-    "these two datasets alone constitute a new cross-taxon meta-analysis"
+    "these two datasets alone constitute a new cross-taxon meta-analysis",
+    "this result demonstrates natural information hysteresis"
   ]
 }
