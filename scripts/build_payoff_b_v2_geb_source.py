@@ -20,25 +20,26 @@ thresholds.
 
 ### Location
 
-The theory is general. Empirical evidence comes from migratory-bird systems in
-eastern North America and Europe.
+The theory is general. Empirical evidence comes from migratory-bird systems
+across multiple continents and from a long-term plant--pollinator system in
+Germany.
 
 ### Time period
 
-The broad comparative analysis spans 2002–2017; the pied-flycatcher experiment
-was conducted in 2014–2015; the wigeon outcome data span 2018–2020 with
-historical environmental information estimated from 2000–2017.
+The broad comparative bird analysis spans 2002–2017; the plant--pollinator
+benchmark spans 1980–2020; the pied-flycatcher experiment was conducted in
+2014–2015; and the wigeon outcome data span 2018–2020.
 
 ### Major taxa studied
 
-Migratory birds, including broad multispecies migration data, pied flycatchers
-with resident tits, and Eurasian wigeon.
+Migratory birds, resident tits, flowering plants and pollinating insects.
 
 ### Methods
 
 We derive exact information-deadline and coordination conditions, analyse
 shared-cue interaction networks, and compare these predictions with a
-preregistered predictive-connectivity analysis, a source-backed phenology
+preregistered predictive-connectivity analysis, a dependence-aware migration
+meta-regression, a local plant--pollinator benchmark, a source-backed phenology
 experiment and a registered phase-correction test.
 
 ### Results
@@ -48,8 +49,11 @@ costs create an exact interval in which improving the same cue causes
 asynchronous information use and increased mismatch. Under perfect information,
 an obsolete uninformed state and a better informed state can both be strict
 equilibria, so temporary information degradation can produce persistent
-coordination failure after cue quality recovers. Natural evidence supports
-separate parts of the mechanism rather than the full hysteresis sequence.
+coordination failure after cue quality recovers. Long-distance migrants show
+weaker temperature responsiveness than short-distance migrants, while local
+plant--pollinator partners show strong but unequal temperature responses.
+Natural evidence supports separate parts of the mechanism rather than the full
+hysteresis sequence.
 
 ### Main conclusions
 
