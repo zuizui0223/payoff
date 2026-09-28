@@ -1,6 +1,7 @@
 # PAYOFF-B V2 submission readiness
 
-Frozen: **2026-09-27**
+Frozen: **2026-09-27**  
+Updated: **2026-09-28**
 
 ## Current state
 
