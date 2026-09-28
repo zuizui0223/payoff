@@ -174,6 +174,10 @@ Not licensed: a causal bird-versus-pollinator coefficient, a universal
 taxonomic ranking, or a claim that these two sources constitute a new
 cross-taxon meta-analysis.
 
+E6 interpretation is explicitly non-causal: photoperiodic/endogenous control is retained as a non-exclusive alternative explanation for the migration-distance gradient, and no current natural dataset estimates the pairwise theoretical deadline difference D2-D1 or observes the predicted desynchronization window directly.
+
+Figure 5 carries the migration-distance reconstruction and independent local plant–pollinator benchmark with an explicit no-causal-taxon-contrast boundary.
+
 ## Capacity layer inherited from V1
 
 The earlier V1 conclusion remains scientifically valid:
@@ -220,12 +224,12 @@ Current state:
 PAPER_2_CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md
 V1_STATUS = FROZEN_PROVENANCE_ONLY
 CURRENT_V2_PREOUTCOME_PACKAGE = READY
-CURRENT_V2_PREOUTCOME_BUILD_RUN = 36390286034
-CURRENT_V2_PREOUTCOME_ARTIFACT = 10955892924
-CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36405110540
+CURRENT_V2_PREOUTCOME_ARTIFACT = 10962346030
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = 6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
 CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED
-CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = 3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd
-CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = 6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75
+CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = f84157091ebc07a8dc17a86b6da21fcc97698d81d806a14bc6558904fc95a69e
+CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = 071de59f078a57ea900da56e9e0aa3fc0f0d4b411b3324288f9409919b0b50eb
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 
