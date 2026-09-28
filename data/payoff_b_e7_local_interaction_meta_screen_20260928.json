@@ -1,0 +1,168 @@
+{
+  "contract_id": "payoff_b_e7_local_interaction_meta_screen_v1_20260928",
+  "date": "2026-09-28",
+  "status": "SOURCE_SCREEN_ONLY_NOT_CANONICAL",
+  "paper_role": "prospective Paper 2 extension after E6; no manuscript claim change unless promotion gate passes",
+  "question": "Can multiple independent local plant-pollinator systems be harmonized onto a common temperature-response effect-size contract, so the local-information side of E6 is no longer represented by one large study?",
+  "design_principle": [
+    "Do not pool bird and plant-pollinator rows merely because both are expressed in days per degree C.",
+    "Build a multi-study local interaction meta-analysis first; compare it with the Usui migration-distance result only after source-level effects and dependence are reconstructed.",
+    "Never convert snowmelt, degree-day, annual-trend and temperature effects into one metric without an explicit defensible transformation."
+  ],
+  "estimand_tiers": {
+    "A": {
+      "id": "beta_sync_C",
+      "unit": "days of relative timing / degree C",
+      "definition": "direct temperature sensitivity of plant-pollinator relative timing or synchrony",
+      "primary_candidate": true
+    },
+    "B": {
+      "id": "delta_beta_partner_C",
+      "unit": "days / degree C",
+      "definition": "pollinator temperature slope minus plant temperature slope estimated against a matched temperature exposure in the same system",
+      "primary_candidate": true
+    },
+    "C": {
+      "id": "beta_sync_time",
+      "unit": "days of relative timing / decade",
+      "definition": "long-term synchrony trend when no commensurate temperature estimand is recoverable",
+      "primary_candidate": false,
+      "use": "separate sensitivity / ecological context only"
+    }
+  },
+  "candidate_sources": [
+    {
+      "source_id": "freimuth_2022",
+      "citation": "Freimuth et al. 2022, Climate warming changes synchrony of plants and pollinators",
+      "data_doi": "10.5061/dryad.v41ns1rxv",
+      "data_files": [
+        "rnd_eff_temp.csv",
+        "rnd_eff_year.csv"
+      ],
+      "system": "Germany; plants plus beetles, flies, bees, butterflies/moths",
+      "candidate_tiers": [
+        "A",
+        "B"
+      ],
+      "current_state": "E6 source already reconstructed; group means and 1763 species slopes frozen",
+      "caveat": "interaction-level synchrony is derived from predicted pairings; retain pair/study dependence"
+    },
+    {
+      "source_id": "bartomeus_2013",
+      "citation": "Bartomeus et al. 2013, Biodiversity ensures plant-pollinator phenological synchrony against climate change",
+      "data_doi": "10.5061/dryad.9g7d8",
+      "data_files": [
+        "BartomeusData.csv"
+      ],
+      "system": "apple flowering and native bee pollinators; 46-year historical series",
+      "candidate_tiers": [
+        "A",
+        "C"
+      ],
+      "current_state": "public Dryad bytes identified; schema not yet reconstructed",
+      "caveat": "verify whether temperature exposure needed for Tier A is included or must be reconstructed"
+    },
+    {
+      "source_id": "kehrberger_holzschuh_2019",
+      "citation": "Kehrberger & Holzschuh 2019, Warmer temperatures advance flowering in a spring plant more strongly than emergence of two solitary spring bee species",
+      "data_doi": "10.5061/dryad.5tq5dn6",
+      "data_files": [
+        "Dryad_Manuscript_PLOSONE.xlsx"
+      ],
+      "system": "11 grasslands; one spring plant and two Osmia bee species",
+      "candidate_tiers": [
+        "B"
+      ],
+      "current_state": "public Dryad workbook identified; schema not yet reconstructed",
+      "caveat": "site-temperature gradient rather than long time series; keep study design as moderator"
+    },
+    {
+      "source_id": "kudo_cooper_2019",
+      "citation": "Kudo & Cooper 2019, When spring ephemerals fail to meet pollinators",
+      "data_doi": "10.5061/dryad.q4fm37m",
+      "data_files": [
+        "Kudo&Cooper_SourceData.xlsx"
+      ],
+      "system": "Corydalis ambigua and overwintered bumble bees; 19 years plus snow-removal experiment",
+      "candidate_tiers": [
+        "C"
+      ],
+      "current_state": "public Dryad workbook identified; mechanistic anchor",
+      "caveat": "primary driver includes snowmelt and accumulated degree-days; do not force into days per degree C unless a matched linear effect is source-reconstructable"
+    },
+    {
+      "source_id": "weaver_mallinger_2022",
+      "citation": "Weaver & Mallinger 2022, A specialist bee and its host plants experience phenological shifts at different rates in response to climate change",
+      "data_doi": "10.5061/dryad.zcrjdfndn",
+      "data_files": [
+        "Hlaboriosa_phenology_weather_data.csv",
+        "Varboreum_phenology_weather_data.csv",
+        "Vcorymbosum_phenology_weather_data.csv",
+        "Vpallidum_phenology_weather_data.csv",
+        "Vstamineum_phenology_weather_data.csv"
+      ],
+      "system": "specialist bee Habropoda laboriosa and Vaccinium hosts; 117-year collection record",
+      "candidate_tiers": [
+        "B",
+        "C"
+      ],
+      "current_state": "public Dryad CSVs identified; schema not yet reconstructed",
+      "caveat": "latitudinal heterogeneity is central; effect extraction must preserve latitude interaction"
+    },
+    {
+      "source_id": "stemkovski_2020",
+      "citation": "Bee phenology is predicted by climatic variation and functional traits",
+      "data_doi": "10.5061/dryad.t76hdr7zc",
+      "system": "67 bee species at 18 Rocky Mountain sites, 2009-2017",
+      "candidate_tiers": [
+        "B"
+      ],
+      "current_state": "public Dryad source identified; plant comparison must be verified as source-backed and commensurate",
+      "caveat": "do not infer plant partner slopes from a different study unless exposure and scale are explicitly harmonized"
+    },
+    {
+      "source_id": "hall_2026",
+      "citation": "Hall et al. 2026, Plant-pollinator interaction potential varies with temperature and precipitation in a dryland ecosystem elevational gradient",
+      "data_doi": "10.5061/dryad.j0zpc86s2",
+      "data_files": [
+        "plant_poll_synchrony.csv",
+        "Plant_phenology_data.csv",
+        "plant_phenological_distributions.csv"
+      ],
+      "system": "dryland elevational gradient; plant flowering and pollinator visitation phenology",
+      "candidate_tiers": [
+        "A"
+      ],
+      "current_state": "public Dryad CSVs identified; direct synchrony-vs-temperature candidate",
+      "caveat": "published after the older synthesis literature; keep source-level model and spatial/elevation dependence"
+    },
+    {
+      "source_id": "kharouba_2018",
+      "citation": "Kharouba et al. 2018, Global shifts in the phenological synchrony of species interactions over recent decades",
+      "paper_doi": "10.1073/pnas.1714511115",
+      "system": "88 species, 54 pairwise interactions, four continents",
+      "candidate_tiers": [
+        "C"
+      ],
+      "current_state": "global synthesis benchmark; article/SI identified, machine-readable source table not yet pinned",
+      "caveat": "do not treat published aggregate 6.1 d/decade magnitude as independent row-level data"
+    }
+  ],
+  "promotion_gate": [
+    "At least three independent local plant-pollinator systems yield the same Tier A or Tier B estimand with recoverable uncertainty.",
+    "Each effect-size row has a study/system identifier and dependency structure; repeated species/pairs are not treated as independent.",
+    "Source-level published results are reproduced within declared tolerance before pooled analysis.",
+    "No single study contributes more than 50% of effective inverse-variance weight without a predeclared cap/robust sensitivity.",
+    "Leave-one-study-out sign and magnitude are reported.",
+    "Tier A/B are never pooled with Tier C.",
+    "Only after the local multi-study meta-analysis passes may Paper 2 decide whether to add an E7 result."
+  ],
+  "cross_system_boundary": {
+    "licensed_if_promoted": "multi-study local plant-pollinator estimate plus the independently reconstructed Usui migration-distance meta-regression can be compared as triangulation of the information-access hypothesis",
+    "not_licensed": [
+      "causal claim that taxonomic identity explains local-versus-migrant differences",
+      "single pooled bird-versus-pollinator coefficient unless a common estimand and non-confounded design are demonstrated",
+      "claim of natural information hysteresis"
+    ]
+  }
+}
