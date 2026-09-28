@@ -67,37 +67,37 @@ The deterministic package contains:
 
 Internal V1/V2 provenance documents are deliberately excluded from the journal-facing ZIP so package hashes do not depend on publication-state bookkeeping.
 
-Figure panels in the V2 renderer use lower-case journal-style panel labels.
+Figure panels in the V2 renderer use lower-case journal-style panel labels. Figure 5 visually integrates E6 migration-distance and local plant–pollinator evidence while explicitly prohibiting a causal cross-taxon interpretation.
 
 ## Frozen build provenance
 
 ```text
-workflow_run = 36390286034
+workflow_run = 36402882222
 workflow_run_attempt = 1
-validated_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
+validated_head = 18fba20b7e595619dcff7a8e0617e1f2999edb89
 workflow_conclusion = success
 
-artifact_id = 10955892924
+artifact_id = 10961191453
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
 66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
+fee2e34729bc3659a1ff21f05e572f269b7230d670bc1bd48168ac2a98c133a4
 ```
 
 Deterministic reproduction check:
 
 ```text
-reproduction_workflow_run = 36390286034
+reproduction_workflow_run = 36402882222
 reproduction_run_attempt = 2
-reproduction_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
+reproduction_head = 18fba20b7e595619dcff7a8e0617e1f2999edb89
 reproduction_artifact_id = 10956526561
 reproduction_artifact_sha256 =
 2c3b34d786bf702447285378653fcaaf3975cbff37bccfd80c2b5f8032a3ba35
 reproduction_inner_zip_sha256 =
-31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
+fee2e34729bc3659a1ff21f05e572f269b7230d670bc1bd48168ac2a98c133a4
 deterministic_inner_archive = PASS
 package_file_count = 17
 ```
