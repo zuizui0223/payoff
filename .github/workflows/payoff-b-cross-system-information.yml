@@ -50,7 +50,10 @@ jobs:
           out={}
           for name in ['usui','freimuth_temp']:
               p=Path(f'outputs/cross_system/source/{name}.csv')
-              df=pd.read_csv(p)
+              try:
+                  df=pd.read_csv(p, encoding='utf-8')
+              except UnicodeDecodeError:
+                  df=pd.read_csv(p, encoding='cp1252')
               out[name]={
                   'rows':len(df),
                   'columns':list(df.columns),
