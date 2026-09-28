@@ -147,7 +147,11 @@ Natural evidence is deliberately modular:
   interaction is NOT_SUPPORTED, separating pre-commitment information from
   post-error correction;
 - **long-term flycatcher cue–driver lane:** NO_CUE_DRIVER_REVERSAL under the
-  preregistered gate; no natural information-recovery hysteresis is claimed.
+  preregistered gate;
+- **prospective Hoge Veluwe cue–resource lane:** NO_CUE_RESOURCE_REVERSAL;
+  the environmental prerequisite failed before resident–migrant timing history
+  was opened, so Gate C was NOT_RUN and no natural information-recovery
+  hysteresis is claimed.
 
 The earlier temporal-buffering conclusion remains valid as the **capacity
 layer**, not the primary novelty claim.
