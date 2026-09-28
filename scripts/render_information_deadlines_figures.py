@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the six PAYOFF-B information-deadlines figures from frozen sources.
+"""Render the seven PAYOFF-B information-deadlines figures from frozen sources.
 
 Dependency-free SVG renderer. Quantitative panels consume frozen result JSONs or
 exact model functions already committed in the repository. No Aikens outcome is
@@ -378,49 +378,119 @@ def figure4():
 
 
 def figure5():
+    bird = load_json("payoff_b_cross_system_information_result_20260928.json")
     w = load_json("payoff_b_wigeon_predictive_connectivity_result_20260926.json")
-    c = load_json("payoff_b_cv24c_cue_driver_result_20260927.json")
     fly = load_json("payoff_b_flycatcher_social_information_anchor_20260926.json")
+
     out = [
-        text(72, 125, "(a) Post-error correction: wigeon registered prediction not supported", 18, "bold"),
-    ]
-    x0, x1, y = 180, 600, 255
-    lo, hi = -0.18, 0.18
-    zero = scale(0, lo, hi, x0, x1)
-    p = w["primary_interaction"]
-    xl = scale(p["ci_low_95"], lo, hi, x0, x1)
-    xh = scale(p["ci_high_95"], lo, hi, x0, x1)
-    xe = scale(p["estimate"], lo, hi, x0, x1)
-    out += [
-        line(x0, y, x1, y),
-        line(zero, y - 75, zero, y + 75, 2, "5 5"),
-        line(xl, y, xh, y, 4),
-        circle(xe, y, 8, "#eeeeee"),
-        text(190, 195, "registered direction: negative", 13),
-        text(190, 320, f"estimate={p['estimate']:+.3f}; 95% CI [{p['ci_low_95']:+.3f}, {p['ci_high_95']:+.3f}]", 13),
-        text(190, 345, f"p={p['p_value_two_sided']:.3f}", 13),
+        text(72, 112, "(a) Information distance within migratory birds", 18, "bold"),
     ]
 
+    # Panel a: short- versus long-distance migrant temperature response.
+    a = bird["bird_temperature_meta_regression"]["distance_only"]
+    x0, x1 = 225, 575
+    lo, hi = -1.6, 0.2
+    zero = scale(0.0, lo, hi, x0, x1)
+    out += [line(zero, 160, zero, 345, 2, "5 5")]
+    rows = [
+        ("short-distance", a["short_mean_days_per_C"], *a["short_ci95"]),
+        ("long-distance", a["long_mean_days_per_C"], *a["long_ci95"]),
+    ]
+    for y, row in zip((205, 275), rows):
+        label, est, low, high = row
+        xl = scale(low, lo, hi, x0, x1)
+        xh = scale(high, lo, hi, x0, x1)
+        xe = scale(est, lo, hi, x0, x1)
+        out += [
+            text(72, y + 5, label, 14, "bold"),
+            line(xl, y, xh, y, 4),
+            circle(xe, y, 7, "#eeeeee"),
+            text(x1 + 12, y + 5, f"{est:+.2f}", 12),
+        ]
+    axis_y = 345
+    out.append(line(x0, axis_y, x1, axis_y, 2))
+    for tick in (-1.5, -1.0, -0.5, 0.0):
+        x = scale(tick, lo, hi, x0, x1)
+        out += [line(x, axis_y, x, axis_y + 7), text(x, axis_y + 28, f"{tick:.1f}", 12, anchor="middle")]
     out += [
-        text(665, 125, "(b) Long-term cue-driver path: gate fails before hysteresis test", 18, "bold"),
-        rect(680, 170, 430, 205, fill="#fafafa"),
-        text(705, 205, f"best segmented change: {c['frozen_reversal_gate']['best_segmented']['break_year']}", 15, "bold"),
-        text(705, 237, f"pre slope = {c['frozen_reversal_gate']['best_segmented']['left_slope']:+.4f}", 14),
-        text(705, 265, f"post slope = {c['frozen_reversal_gate']['best_segmented']['right_slope']:+.4f}", 14),
-        text(705, 293, f"ΔAICc = {c['frozen_reversal_gate']['best_segmented']['delta_aicc_vs_linear']:.2f}", 14),
-        text(705, 328, "required pre-break decline: FAIL", 15, "bold"),
-        text(705, 353, "history model: NOT RUN", 15, "bold"),
-        text(72, 435, "(c) Decision-time anchor", 18, "bold"),
-        rect(80, 470, 1030, 105, fill="#fafafa"),
-        text(105, 503, "Flycatcher manipulation:", 15, "bold"),
-        text(270, 503, "early male settlement before cue visibility → no treatment response", 14),
-        text(270, 532, "later female settlement after cue visibility → treatment response", 14),
-        text(105, 555, "These are distinct informational positions, not one generic tracking coefficient.", 14, "bold"),
-        text(72, 645, "Predictive information before commitment, cue availability at settlement and correction after error appears are empirically separable.", 15, "bold"),
+        text(385, 390, "temperature response (days / °C)", 13, anchor="middle"),
+        text(
+            72,
+            325,
+            f"adjusted long-short = {bird['bird_temperature_meta_regression']['adjusted_primary']['long_minus_short_days_per_C']:+.3f} "
+            f"[{bird['bird_temperature_meta_regression']['adjusted_primary']['ci95'][0]:+.3f}, "
+            f"{bird['bird_temperature_meta_regression']['adjusted_primary']['ci95'][1]:+.3f}], "
+            f"p={bird['bird_temperature_meta_regression']['adjusted_primary']['p']:.4f}",
+            12,
+            "bold",
+        ),
+        text(72, 142, "944 effects; 28 studies; 279 species", 12),
+    ]
+
+    # Panel b: independent local plant-pollinator benchmark.
+    out += [text(650, 112, "(b) Local plant-pollinator temperature responses", 18, "bold")]
+    groups = bird["freimuth_local_benchmark"]["groups"]
+    order = ["Plants", "Flies", "Bees", "Butterflies/Moths", "Beetles"]
+    bx0, bx1 = 835, 1095
+    blo, bhi = -6.0, 1.2
+    bzero = scale(0.0, blo, bhi, bx0, bx1)
+    out.append(line(bzero, 145, bzero, 350, 2, "5 5"))
+    for y, name in zip((170, 210, 250, 290, 330), order):
+        row = groups[name]
+        xl = scale(row["ci95"][0], blo, bhi, bx0, bx1)
+        xh = scale(row["ci95"][1], blo, bhi, bx0, bx1)
+        xe = scale(row["mean_days_per_C"], blo, bhi, bx0, bx1)
+        label = "Butterflies/moths" if name == "Butterflies/Moths" else name
+        out += [
+            text(650, y + 5, label, 12, "bold" if name in ("Plants", "Bees") else "normal"),
+            line(xl, y, xh, y, 3),
+            circle(xe, y, 5, "#eeeeee"),
+            text(bx1 + 8, y + 4, f"{row['mean_days_per_C']:+.2f}", 11),
+        ]
+    baxis = 365
+    out.append(line(bx0, baxis, bx1, baxis, 2))
+    for tick in (-6, -4, -2, 0):
+        x = scale(tick, blo, bhi, bx0, bx1)
+        out += [line(x, baxis, x, baxis + 6), text(x, baxis + 24, str(tick), 11, anchor="middle")]
+    out += [
+        text(965, 405, "temperature response (days / °C)", 12, anchor="middle"),
+        text(650, 142, "1,763 species; Germany, 1980–2020", 12),
+    ]
+
+    # Panel c: information timing and post-error correction remain distinct.
+    out += [
+        text(72, 438, "(c) Cue availability and post-error correction are different", 18, "bold"),
+        rect(80, 465, 510, 130, fill="#fafafa"),
+        text(100, 495, "Flycatcher manipulation", 15, "bold"),
+        text(100, 524, "earlier male settlement: cue not yet visible → no treatment response", 12),
+        text(100, 551, "later female settlement / pairing: cue visible → treatment response", 12),
+        text(
+            100,
+            578,
+            f"pairing p={fly['published_results']['male_pairing_glmm']['tit_timing_p']:.3f}; "
+            f"female settlement p<{fly['published_results']['female_settlement_cox']['p_less_than']:.3f}",
+            12,
+        ),
+        rect(630, 465, 480, 130, fill="#fafafa"),
+        text(650, 495, "Wigeon registered post-error controller", 15, "bold"),
+    ]
+    p = w["primary_interaction"]
+    wx0, wx1, wy = 715, 1015, 545
+    wlo, whi = -0.18, 0.18
+    wzero = scale(0.0, wlo, whi, wx0, wx1)
+    out += [
+        line(wx0, wy, wx1, wy, 2),
+        line(wzero, wy - 24, wzero, wy + 24, 2, "5 5"),
+        line(scale(p["ci_low_95"], wlo, whi, wx0, wx1), wy,
+             scale(p["ci_high_95"], wlo, whi, wx0, wx1), wy, 4),
+        circle(scale(p["estimate"], wlo, whi, wx0, wx1), wy, 7, "#eeeeee"),
+        text(650, 582, f"estimate={p['estimate']:+.3f}; 95% CI [{p['ci_low_95']:+.3f}, {p['ci_high_95']:+.3f}]; p={p['p_value_two_sided']:.3f}", 11),
+        text(72, 630, "Panels (a) and (b) are independent datasets and are not a causal bird-versus-pollinator taxon contrast.", 13, "bold"),
+        text(72, 660, "Information distance, local thermal response, cue timing and error correction are empirically separable.", 15, "bold"),
     ]
     return svg_page(
-        "Figure 5. Prediction, decision-time information and correction are different axes",
-        "Registered negative evidence is retained rather than retuned",
+        "Figure 5. Information distance, local response and correction are distinct axes",
+        "E6 migration-distance meta-regression and local benchmark alongside decision-time and post-error tests",
         "".join(out),
     )
 
@@ -560,7 +630,7 @@ def render_all(output_dir: Path):
             "figure_2": "exact endogenous-information model + frozen result receipt",
             "figure_3": "frozen strict Bayesian topology receipt",
             "figure_4": "frozen broad predictive-connectivity receipt",
-            "figure_5": "frozen wigeon null + frozen long-term cue-driver negative gate + flycatcher anchor",
+            "figure_5": "frozen E6 migration-distance meta-regression + frozen Freimuth local benchmark + flycatcher anchor + frozen wigeon null",
             "figure_6": "frozen 2026-09-20 capacity / temporal-bypass synthetic receipts",
             "figure_7": "exact perfect-information rescue-coalition theorem",
         },

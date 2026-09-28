@@ -103,9 +103,13 @@ migrant-star networks.
 mismatch.** Broad migratory-bird analysis showing the preregistered pooled
 coefficient, window/definition sensitivities and dependence-aware uncertainty.
 
-**Figure 5. Prediction, decision-time information and correction are different
-axes.** Registered wigeon predictive-connectivity null, negative long-term
-cue-driver reversal gate and the flycatcher decision-time anchor.
+**Figure 5. Information distance, local response and correction are distinct
+axes.** The Usui migration-distance reconstruction shows weaker temperature
+responsiveness in long- than short-distance migrants; the independent Freimuth
+plant–pollinator benchmark shows strong but unequal local temperature
+responses; flycatcher and wigeon results separate decision-time cue availability
+from post-error correction. Panels from the bird and plant–pollinator datasets
+are not interpreted as a causal taxon contrast.
 
 **Figure 6. Capacity is a separate barrier: temporal bypass and spatial
 re-entry.** Frozen moving-landscape results showing finite timing capacity as a

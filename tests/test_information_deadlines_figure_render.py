@@ -61,7 +61,12 @@ def test_information_figures_include_core_headlines(tmp_path):
     assert "transiently worsen coordination" in fig2
     assert "52 / 364 strict-memory cells" in fig3
     assert "0 / 404 strict-memory cells" in fig3
-    assert "history model: NOT RUN" in fig5
+    assert "Information distance within migratory birds" in fig5
+    assert "Local plant-pollinator temperature responses" in fig5
+    assert "adjusted long-short = +0.421" in fig5
+    assert "944 effects; 28 studies; 279 species" in fig5
+    assert "not a causal bird-versus-pollinator taxon contrast" in fig5
+    assert "Wigeon registered post-error controller" in fig5
 
 
 
