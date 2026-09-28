@@ -7,17 +7,17 @@
   "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "v1_status": "FROZEN_PROVENANCE_ONLY",
   "workflow": {
-    "run_id": 36390286034,
+    "run_id": 36402882222,
     "run_attempt": 1,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
+    "head_sha": "18fba20b7e595619dcff7a8e0617e1f2999edb89",
     "conclusion": "success",
-    "artifact_id": 10955892924,
+    "artifact_id": 10961191453,
     "artifact_name": "payoff-b-v2-geb-preoutcome-package",
-    "artifact_sha256": "66919dc4bb327c601e48c0545f240789f56b9f03dcfe2ff947753d4cc24642aa"
+    "artifact_sha256": "0386995fa1f877fda05f12274f85e3376b38b65b9acff2058e9add0a5a56ff4a"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip",
-    "sha256": "31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5"
+    "sha256": "fee2e34729bc3659a1ff21f05e572f269b7230d670bc1bd48168ac2a98c133a4"
   },
   "audited_metrics": {
     "structured_abstract_words": 272,
@@ -59,10 +59,9 @@
   ],
   "final_submission_eligible": false,
   "final_submission_blockers": [
-    "registered industrial-development phase-retention result remains unopened; AppEEARS/Earthdata credentials are not configured",
     "anonymous reviewer archive delivery channel",
     "author-controlled title-page and declaration metadata",
-    "final human review of outcome-rendered package and portal metadata"
+    "final human review of the current ACCESS_BLOCKED outcome-rendered package and portal metadata"
   ],
   "scientific_boundary": [
     "package generation does not retune scientific claims",
@@ -74,18 +73,19 @@
   ],
   "package_file_count": 17,
   "reproduction": {
-    "run_id": 36390286034,
+    "run_id": 36402882222,
     "run_attempt": 2,
-    "head_sha": "7bcaaef50407f06a0624ec7e6931decffbfc664d",
-    "artifact_id": 10956526561,
-    "artifact_sha256": "2c3b34d786bf702447285378653fcaaf3975cbff37bccfd80c2b5f8032a3ba35",
-    "inner_archive_sha256": "31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5",
+    "head_sha": "18fba20b7e595619dcff7a8e0617e1f2999edb89",
+    "artifact_id": 10961461631,
+    "artifact_sha256": "058c455b4d3aa4cc3432475234bc5de822e7d009a1b54473ab535bee8a400712",
+    "inner_archive_sha256": "fee2e34729bc3659a1ff21f05e572f269b7230d670bc1bd48168ac2a98c133a4",
     "deterministic_inner_archive": true
   },
   "latest_audit_date": "2026-09-28",
   "science_update": {
-    "merged_pr": 196,
-    "merge_commit": "09b9561e994d79fe16c3f663fda3ecec8b3a61e8",
-    "role": "E6 cross-system information-distance evidence"
+    "merged_pr": 199,
+    "merge_commit": "444661bce2ac46c15538d152d245ffb5365bdbf5",
+    "role": "E6 information-distance ecology integrated into Figure 5",
+    "figure_5": "migration-distance meta-regression + independent local plant-pollinator benchmark + decision-time and post-error evidence"
   }
 }
