@@ -64,8 +64,22 @@ def render_blocks(payload: dict) -> tuple[str, str, str, str, dict]:
             or "REQUIRED_AUTHENTICATED_SOURCE_UNAVAILABLE"
         )
         preflight = payload.get("credential_preflight") or {}
+        author_decision = payload.get("author_decision") or {}
+        author_decision_frozen = (
+            author_decision.get("decision") == "SUBMIT_WITH_ACCESS_BLOCKED"
+            and author_decision.get("scientific_result_claimed") is False
+            and author_decision.get("future_authenticated_execution_permitted") is True
+            and author_decision.get("original_registration_remains_binding") is True
+        )
         preflight_date = preflight.get("date", "unknown date")
         preflight_run = preflight.get("workflow_run", "unknown run")
+        decision_sentence = (
+            " An explicit author decision freezes this external-access state for "
+            "submission while preserving the original preregistration for any "
+            "future authenticated execution."
+            if author_decision_frozen
+            else ""
+        )
         results = (
             "The preregistered within-mule-deer phase-retention contrast was "
             "**not executed because the frozen environmental reconstruction "
@@ -75,6 +89,7 @@ def render_blocks(payload: dict) -> tuple[str, str, str, str, dict]:
             "values or lambda outcome were opened, and no alternative product, "
             "time interval, matching tolerance or unregistered data source was "
             "substituted."
+            + decision_sentence
         )
         discussion = (
             "This is an external-access outcome, not a statistical "
@@ -101,6 +116,18 @@ def render_blocks(payload: dict) -> tuple[str, str, str, str, dict]:
             "estimable": False,
             "executed": False,
             "access_blocked": True,
+            "author_decision_frozen": bool(author_decision_frozen),
+            "author_decision": (
+                author_decision.get("decision")
+                if author_decision_frozen
+                else None
+            ),
+            "future_authenticated_execution_permitted": bool(
+                author_decision.get("future_authenticated_execution_permitted")
+            ),
+            "original_registration_remains_binding": bool(
+                author_decision.get("original_registration_remains_binding")
+            ),
             "cross_taxon_lambda_synthesis_changed": False,
             "actuator_result_changed": False,
         }
