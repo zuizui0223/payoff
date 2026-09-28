@@ -19,8 +19,8 @@ reuse the superseded temporal-buffering V1 GEB overlay.
 
 ```text
 structured_abstract_words = 244
-main_body_words = 4761
-references = 18
+main_body_words = 4857
+references = 19
 display_pieces = 7
 keywords = 8
 running_title_chars = 38
@@ -67,37 +67,37 @@ The deterministic package contains:
 
 Internal V1/V2 provenance documents are deliberately excluded from the journal-facing ZIP so package hashes do not depend on publication-state bookkeeping.
 
-Figure panels in the V2 renderer use lower-case journal-style panel labels. Figure 5 integrates the E6 migration-distance and local benchmark evidence. The manuscript explicitly retains photoperiodic/endogenous timing as a non-exclusive alternative and states that pairwise deadline differences remain untested in nature.
+Figure panels in the V2 renderer use lower-case journal-style panel labels. The Burgess pairwise bridge adds interaction-level response-asymmetry evidence without changing the seven-figure set; D2-D1 and the q1<q<=q2 information-use window remain prospective. Figure 5 integrates the E6 migration-distance and local benchmark evidence. The manuscript explicitly retains photoperiodic/endogenous timing as a non-exclusive alternative and states that pairwise deadline differences remain untested in nature.
 
 ## Frozen build provenance
 
 ```text
-workflow_run = 36405110540
+workflow_run = 36472958953
 workflow_run_attempt = 1
 validated_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
 workflow_conclusion = success
 
-artifact_id = 10962346030
+artifact_id = 10992297519
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-69baef789e80ded8bc8f34cecc690841944a1b9fa7ee744dcb6176c1e1848721
+daa8ab9bd205eaa0cadedddae47b17cbf3e03ee08d7fa531bf7fb7a5ec79ac35
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
+d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6
 ```
 
 Deterministic reproduction check:
 
 ```text
-reproduction_workflow_run = 36405110540
+reproduction_workflow_run = 36472958953
 reproduction_run_attempt = 2
 reproduction_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
-reproduction_artifact_id = 10961642891
+reproduction_artifact_id = 10992333084
 reproduction_artifact_sha256 =
-0edfee1625a87427072cc23cb4771981f6c79181d8e65288b53df6d122012b6c
+f056124ea455cf78f4c4486723f6557f3015478869ed09afd539a03351956143
 reproduction_inner_zip_sha256 =
-6d9e2aa0a1e9628d56d5a08fa23bd50999c7f8e059488b525585a4c2631cf1d1
+d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6
 deterministic_inner_archive = PASS
 package_file_count = 17
 ```
