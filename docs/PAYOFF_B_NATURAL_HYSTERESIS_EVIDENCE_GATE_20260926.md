@@ -136,16 +136,46 @@ The empirical ladder is now explicit:
 This is stronger than pretending one dataset verifies the whole mechanism.
 Each empirical system identifies a different edge of the causal chain.
 
+## Gate-A result — 2026-09-28
+
+The source-readiness gate has now been executed without opening the joined
+outcome.
+
+Certified:
+
+- fixed Ivory Coast cue, 1980–2015;
+- Hoge Veluwe great-tit first-clutch source, 1973–2020;
+- Hoge Veluwe caterpillar-peak source, 1985–2020.
+
+The two Dryad files were recovered through a public Zenodo mirror only after
+their bytes were verified against the authoritative Dryad SHA-256 digests.
+
+The exact registered Tomotani migrant-timing archive resolves to
+`Tomotani et al.zip` in the Marine Data Archive, but the current MDA landing
+page exposes a sendmail request and a login route rather than an anonymous
+download. Gate A therefore ends in:
+
+```text
+MIGRANT_SOURCE_ACCESS_BLOCKED
+```
+
+Gate B and Gate C remain closed. No cue–resource connectivity, network
+breakpoint, resident–migrant mismatch or history coefficient has been opened.
+
+See
+`data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json`.
+
 ## Next execution target
 
 The next data-analysis target is now the preregistered cross-source Hoge Veluwe
 assembly, not a retuned version of the failed CV24C lane.
 
-The frozen sequence is:
+The frozen sequence is now:
 
-    materialize + hash sources
-    -> certify 1985–2015 source overlap and frozen 1992–2015 history span
-    -> test fixed African-cue / caterpillar-resource reversal
+    cue + resident + resource sources certified
+    -> obtain exact registered Tomotani MDA archive
+    -> certify migrant schema/year coverage
+    -> only then test fixed African-cue / caterpillar-resource reversal
     -> only if that gate passes, open resident–migrant history test
 
 The resident/resource series are independently sourced from the same Hoge
