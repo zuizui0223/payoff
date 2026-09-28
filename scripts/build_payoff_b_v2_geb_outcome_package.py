@@ -293,7 +293,11 @@ def build(
         ),
         "scientific_result": result_class,
         "v1_status": "FROZEN_PROVENANCE_ONLY",
-        "registered_result_frozen": True,
+        "registered_execution_state_frozen": True,
+        "registered_result_frozen": result_class != "ACCESS_BLOCKED",
+        "registered_scientific_result_available": (
+            result_class != "ACCESS_BLOCKED"
+        ),
         "phase_retention_estimate_available": bool(
             claim_state.get("estimable", False)
         ),
