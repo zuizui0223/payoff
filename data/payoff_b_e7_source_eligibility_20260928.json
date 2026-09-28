@@ -130,8 +130,8 @@
   "paper2_decision": "KEEP_E6_AS_CANONICAL_CEILING",
   "next_allowed_step": "recover covariance-safe B_abs or a common direct Tier-A relative-timing effect for at least two additional independent systems; only then open formal E7 pooling",
   "pilot_diagnostic": {
-    "workflow_run": 36398418157,
-    "artifact_id": 10959581086,
+    "workflow_run": 36398854716,
+    "artifact_id": 10958999440,
     "effect_count": 4,
     "forced_Q": 34.314077343757155,
     "forced_I2_percent": 91.25723250563868,
@@ -141,7 +141,7 @@
       0.476148613436933
     ],
     "status": "NONPROMOTABLE_DIAGNOSTIC_ONLY",
-    "head_sha": "d91bf4a8a1c2901fcf7f3cfcc9f512a100b9e19c"
+    "head_sha": "7283c511c960005acccc922dbeffa2be76f69a48"
   },
   "screen_complete": true
 }
