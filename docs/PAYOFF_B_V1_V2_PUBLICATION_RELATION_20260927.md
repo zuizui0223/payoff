@@ -38,6 +38,7 @@ V2 retains the scientifically valid capacity layer from V1:
 - fragmentation exposure;
 - phase-retention / actuator decomposition;
 - the registered broad-bird and direct migration evidence;
+- E6 cross-system information-distance triangulation (bird migration-distance meta-regression plus local plant–pollinator benchmark);
 - the unopened Aikens within-taxon perturbation gate.
 
 These results now support the broader information-coordination story rather
@@ -70,13 +71,13 @@ Previous V1-derived GEB packages remain provenance only. A new V2 PREOUTCOME
 package has now been rebuilt and audited directly from the canonical V2 source:
 
 ```text
-V2_PREOUTCOME_BUILD_RUN = 36374436480
-V2_PREOUTCOME_ARTIFACT = 10950726054
-V2_PREOUTCOME_ARCHIVE_SHA256 = 07c6b9896d1536e5720770674ec02508bc8f302dd06ed25a248d91c82cf39e6c
+V2_PREOUTCOME_BUILD_RUN = 36390286034
+V2_PREOUTCOME_ARTIFACT = 10955892924
+V2_PREOUTCOME_ARCHIVE_SHA256 = 31f9bc7185ef292f0c9cb749f5095d685115202f3310b506c4a7002a241acdf5
 V2_PREOUTCOME_STATUS = PROVENANCE_READY
 CURRENT_SUBMISSION_STATE = ACCESS_BLOCKED_SCIENCE_CLOSED
-CURRENT_ACCESS_BLOCKED_GEB_SHA256 = c4d96db3bda99fb68b475504dcdf1e0072264e6e4e4cb7435d51979111c40e8b
-CURRENT_ACCESS_BLOCKED_REVIEW_SHA256 = d11c518c3eb5499f85e99f1cf7125e067745b211b5da764b8d961c930460151c
+CURRENT_ACCESS_BLOCKED_GEB_SHA256 = 3aefc6d7ef59996f8b4edc16ac52c4be10a3761282b1c7850fa4c4f1998198cd
+CURRENT_ACCESS_BLOCKED_REVIEW_SHA256 = 6bed01785d921a42f2e1659efd4da757bb86292b31fa779f5879db92c5911e75
 FINAL_SUBMISSION_STATUS = PORTAL_INPUTS_REMAIN
 ```
 
