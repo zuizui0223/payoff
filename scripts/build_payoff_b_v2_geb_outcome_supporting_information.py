@@ -13,7 +13,7 @@ from build_payoff_b_v2_geb_supporting_information import (
 from render_aikens_lambda_manuscript import classify_result, render_blocks
 
 
-PENDING_HEADING = "## Appendix S8. Registered industrial-development supplement — pending"
+PENDING_TITLE = "Registered industrial-development supplement — pending"
 
 
 def build_supporting_information(result_json: Path) -> tuple[str, dict]:
@@ -22,14 +22,20 @@ def build_supporting_information(result_json: Path) -> tuple[str, dict]:
     results, discussion, _, _, claim_state = render_blocks(payload)
 
     base = build_preoutcome_si()
-    start = base.find(PENDING_HEADING)
-    if start < 0:
+    title_pos = base.find(PENDING_TITLE)
+    if title_pos < 0:
         raise ValueError("V2 PREOUTCOME SI pending Aikens appendix not found")
+    start = base.rfind("## Appendix ", 0, title_pos)
+    if start < 0:
+        raise ValueError("V2 PREOUTCOME SI pending appendix heading not found")
+    heading_end = base.find("\n", start)
+    heading_line = base[start:heading_end]
+    appendix_prefix = heading_line.split(".", 1)[0]
     end = base.find("## Source and claim boundary", start)
     if end < 0:
         raise ValueError("V2 PREOUTCOME SI source boundary not found")
 
-    appendix = f"""## Appendix S8. Registered industrial-development phase-retention result
+    appendix = f"""{appendix_prefix}. Registered industrial-development phase-retention result
 
 **Registered result class: {result_class}.**
 
