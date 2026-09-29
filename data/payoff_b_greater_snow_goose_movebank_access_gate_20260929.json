@@ -28,15 +28,25 @@
       "implication": "study downloads may require user authentication and prior license-term acceptance"
     }
   },
-  "current_execution_status": "ACCESS_BLOCKED_BEFORE_OUTCOME",
+  "current_execution_status": "ACCESS_AND_CONTEXT_GEOMETRY_BLOCKED_BEFORE_OUTCOME",
   "current_blocker": "No authenticated/terms-accepted Movebank event-data download is available in the current execution environment.",
   "science_status": "PREOUTCOME_INTACT",
   "not_a_science_failure": true,
-  "next_permitted_step": "Obtain authorized Movebank event CSV, then run frozen movepp preprocessing and the preregistered decision-day executor without changing model or q definitions.",
+  "next_permitted_step": "Materialize authorized Movebank event CSV and the source-backed three-region polygon geometry, then run the frozen movepp preprocessing and preregistered decision-day executor without changing model, context, q, or threshold definitions.",
   "forbidden_workarounds": [
     "do not reconstruct individual GPS tracks from Bird Migration Explorer visualizations",
     "do not substitute another snow-goose population after seeing availability",
     "do not weaken the estimability gate because access is blocked",
     "do not infer cue-uptake outcome from published aggregate maps"
+  ],
+  "current_blockers": [
+    "No authenticated/terms-accepted Movebank event-data download is available in the current execution environment.",
+    "The exact three source stopover polygons used by Resendiz-Infante & Gauthier 2024 have not been materialized; per-individual movepp cluster IDs are forbidden as substitutes for shared route context."
+  ],
+  "resolved_implementation": [
+    "primary cue-uptake model and estimability gate implemented",
+    "secondary LOIO behavioral-threshold gate implemented",
+    "shared route-context semantics frozen as St_Lawrence, Nunavik, Baffin",
+    "Bylot frozen as future target only"
   ]
 }
