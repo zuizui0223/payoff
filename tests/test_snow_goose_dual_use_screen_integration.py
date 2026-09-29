@@ -103,3 +103,17 @@ def test_synthetic_dual_use_screen_recovers_registered_negative_signal(tmp_path)
     assert result["status"] == "DUAL_USE_BEHAVIORAL_SIGNAL_SUPPORTED"
     assert result["primary"]["estimate"] < 0.0
     assert result["primary"]["ci_high_95"] < 0.0
+
+
+
+def test_forward_route_skip_is_accepted_by_frozen_transition_semantics():
+    # Static contract guard: the script must define all forward route pairs,
+    # not only consecutive segments.
+    from scripts.payoff_b_greater_snow_goose_dual_use_compensation_screen import (
+        ALLOWED_SEGMENTS,
+    )
+
+    assert ("St_Lawrence", "Baffin") in ALLOWED_SEGMENTS
+    assert ("St_Lawrence", "Bylot") in ALLOWED_SEGMENTS
+    assert ("Nunavik", "Bylot") in ALLOWED_SEGMENTS
+    assert ("Baffin", "St_Lawrence") not in ALLOWED_SEGMENTS
