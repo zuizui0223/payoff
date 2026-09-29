@@ -1,0 +1,65 @@
+{
+  "contract_id": "payoff_b_greater_snow_goose_narr_climate_v1_20260929",
+  "date": "2026-09-29",
+  "status": "PREOUTCOME_CLIMATE_DEFINITION_FROZEN",
+  "dataset": {
+    "name": "NCEP North American Regional Reanalysis (NARR)",
+    "provider": "NOAA Physical Sciences Laboratory",
+    "spatial_resolution": "~32 km native Lambert conformal grid",
+    "temporal_input": "daily values derived from 3-hourly NARR",
+    "start": "1979",
+    "rationale": "source-faithful to Resendiz-Infante & Gauthier 2024 and supplies all registered immediate-weather controls"
+  },
+  "variables": {
+    "temperature": "2 m air temperature",
+    "precipitation": "daily accumulated total precipitation at surface",
+    "u_wind": "10 m zonal wind",
+    "v_wind": "10 m meridional wind"
+  },
+  "predictive_connectivity": {
+    "training_window": "20 complete years ending at focal year - 1",
+    "minimum_training_years": 15,
+    "spatial_aggregation": "unweighted mean of native NARR grid-cell centers falling inside each source-backed route polygon",
+    "context_windows": {
+      "St_Lawrence_primary": "1-15 May",
+      "St_Lawrence_sensitivity": "1 Apr-15 May",
+      "Nunavik": "10-31 May",
+      "Baffin": "20 May-5 Jun"
+    },
+    "target": {
+      "context": "Bylot",
+      "window": "30 May-15 Jun"
+    },
+    "processing": [
+      "compute annual context-window mean 2 m temperature",
+      "compute annual Bylot target-window mean 2 m temperature",
+      "within each trailing training window detrend context and Bylot series separately on calendar year",
+      "signed Pearson correlation of residuals is primary predictive_connectivity_rho"
+    ],
+    "leakage_rule": "no focal-year or future-year temperature may enter q",
+    "gaussian_bridge": "q = 0.5 + asin(rho)/pi is secondary/model-conditional only"
+  },
+  "decision_day_weather": {
+    "spatial_rule": "nearest native NARR grid cell to the focal GPS decision location",
+    "local_temp_anom3": "focal 3-day ending mean 2 m temperature minus the mean of the same 3-calendar-day window across the 20 pre-focal years at that grid cell",
+    "same_day_temp_anom": "focal daily 2 m temperature minus the mean for the same month-day across the 20 pre-focal years at that grid cell",
+    "precipitation": "daily accumulated total precipitation on the focal decision date",
+    "wind_support": {
+      "definition": "project daily mean 10 m wind onto the fixed route bearing from current source-region centroid to the next source-region/Bylot centroid",
+      "route_sequence": [
+        "St_Lawrence->Nunavik",
+        "Nunavik->Baffin",
+        "Baffin->Bylot"
+      ],
+      "bearing_source": "centroids of the frozen source-backed region polygons; never observed post-departure movement",
+      "projection": "u_east*sin(bearing_from_north) + v_north*cos(bearing_from_north)"
+    }
+  },
+  "missingness": "fail closed for any decision day lacking required climate values; do not impute focal weather",
+  "forbidden_reframings": [
+    "do not switch to ERA5 after outcome inspection",
+    "do not use same-year future Bylot temperature in q",
+    "do not choose St. Lawrence full-vs-short window by model fit",
+    "do not derive wind bearing from the bird's realized post-departure trajectory"
+  ]
+}
