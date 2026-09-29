@@ -1,0 +1,26 @@
+{
+  "contract_id": "payoff_b_snow_goose_dryad_delay_cost_v1_20260929",
+  "date": "2026-09-29",
+  "status": "PREOUTCOME_FILE_MANIFEST_GATE",
+  "source": {
+    "dryad_doi": "10.5061/dryad.cjsxksn6t",
+    "associated_studies": [
+      "Legagneux et al. 2012 Proc R Soc B 10.1098/rspb.2011.1351",
+      "Grandmont et al. 2023 Functional Ecology 10.1111/1365-2435.14256"
+    ]
+  },
+  "purpose": "Determine whether public Dryad files permit a source-faithful reanalysis that isolates a duration-dependent D-like perturbation axis more narrowly than the published all-treatment summary.",
+  "preregistered_next_design_if_fields_exist": {
+    "primary_subset": "fed-captivity birds plus immediate-release controls; exclude fasting treatment from primary",
+    "exposure": "captivity/delay duration fixed before reproductive outcome",
+    "rationale": "remove deliberate energetic deprivation while retaining elapsed captivity duration; confinement/handling stress remains a stated residual confound",
+    "primary_claim_ceiling": "duration-dependent reproductive carry-over under fed/control conditions is a D-like time/stress calibration, not pure PAYOFF-B opportunity cost D",
+    "forbidden": [
+      "do not select years based on effect significance",
+      "do not use 2009 only as primary because it has the strongest published effect",
+      "do not call captivity hours natural waiting cost D",
+      "do not combine with GPS q_wait outcome before a separate joint preregistration"
+    ]
+  },
+  "gate": "Inspect public file manifest and documentation before freezing exact columns, endpoint, random effects, and uncertainty estimator."
+}
