@@ -24,7 +24,15 @@
     "minimum_training_years": 15,
     "signed_rho_primary": true,
     "gaussian_q_bridge_secondary": "q = 0.5 + asin(rho)/pi",
-    "published_sanity_check": "Resendiz-Infante & Gauthier 2024 Table 2"
+    "published_sanity_check": "Resendiz-Infante & Gauthier 2024 Table 2",
+    "context_windows": {
+      "southern_staging": "01 Apr-15 May",
+      "mid_arctic_staging": "10-31 May",
+      "northern_arctic_staging": "20 May-05 Jun",
+      "target_bylot": "30 May-15 Jun"
+    },
+    "context_coordinate_rule": "median lon/lat of automatically classified staging habitat centroids assigned to each frozen shared route context, pooled across individuals/years before climate outcomes",
+    "target_coordinate_rule": "median lon/lat of automatically classified Breeding points during 30 May-15 Jun, pooled across individuals/years before climate outcomes"
   },
   "movement_decision": {
     "unit": "individual x staging-context x day at risk",
@@ -33,15 +41,17 @@
     "current_cue": "local 3-day mean 2-m temperature anomaly ending on the decision day",
     "immediate_weather_controls": [
       "wind support along next-route bearing",
-      "precipitation",
-      "same-day temperature anomaly"
-    ]
+      "precipitation"
+    ],
+    "same_day_temperature_anomaly": "retained as an audit/diagnostic column because it is a component of local_temp_anom3; not entered separately in the frozen primary formula"
   },
   "primary_model": {
     "formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + C(context) + C(year)",
     "uncertainty": "cluster by individual; if supported by software, two-way sensitivity by individual and year",
     "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
-    "directional_prediction": "positive on logit departure hazard: warm cues promote departure more strongly where they historically predict later warm/early Bylot conditions"
+    "directional_prediction": "positive on logit departure hazard: warm cues promote departure more strongly where they historically predict later warm/early Bylot conditions",
+    "formula_authoritative": true,
+    "formula_resolution_note": "The explicit frozen formula is authoritative over the earlier prose list of controls; same-day temperature anomaly is not an additional primary covariate."
   },
   "estimability_gate": {
     "minimum_individuals": 30,
@@ -74,7 +84,9 @@
     "do not treat captivity duration as identified PAYOFF-B D",
     "do not infer q_wait(D) from the GPS model",
     "do not use same-year future Bylot temperature to construct pre-commitment q",
-    "do not retune departure definition or q window after outcome inspection"
+    "do not retune departure definition or q window after outcome inspection",
+    "do not redraw, merge, split, or relabel shared staging contexts after climate-q or departure outcomes are inspected",
+    "do not use focal-year Bylot temperature in either predictive connectivity or local cue anomaly construction"
   ],
   "promotion_rule": "At most promote to natural behavioral cue-uptake support. Direct information-deadline confirmation remains forbidden without clean D and state-loss estimates.",
   "movement_preprocessing": {
@@ -97,6 +109,44 @@
     "primary_manual_annotation": false,
     "sensitivity_manual_annotation": "allowed only after primary automatic result and without access to climate q or model residuals",
     "departure_event_from_habitat": "last day in an automatically delineated spring staging_stopover habitat followed by outward movement and no return for >=48 h",
-    "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation"
+    "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation",
+    "spring_window": "01 Apr through 15 Jun UTC of each focal year",
+    "shared_context_mapping": {
+      "rationale": "movepp cluster_id is individual-specific; the primary model requires a common route-context label fixed before climate/outcome inspection",
+      "source_points": "centroids of automatic phase='staging_stopover' habitats within the frozen spring window, pooled across individuals and years",
+      "clustering_variable": "habitat-centroid latitude only",
+      "algorithm": "k-means with k=3, nstart=100, set.seed(1)",
+      "labels": "order cluster centers by mean latitude and label southern_staging, mid_arctic_staging, northern_arctic_staging",
+      "ecological_anchor": "three published route regions in Resendiz-Infante & Gauthier 2024: St. Lawrence, Nunavik, Baffin Island",
+      "manual_boundary_editing": false,
+      "climate_blinding": "context clustering uses only movement geometry and phase labels; no temperature, predictive-connectivity, departure-model coefficient, or residual may be inspected"
+    },
+    "movepp_repository": "EverTSZ/movepp",
+    "movepp_commit": "220e953a2f1c8f29540cb74d0ec69599f24e1d14",
+    "install_rule": "install and execute the pinned movepp commit; do not silently substitute a newer package revision"
+  },
+  "climate_source": {
+    "provider": "Open-Meteo Historical Weather API",
+    "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+    "reanalysis_model": "era5",
+    "spatial_resolution_note": "ERA5 approximately 0.25 degree; fixed for multidecadal consistency",
+    "timezone": "GMT",
+    "cell_selection": "nearest",
+    "hourly_variables": [
+      "temperature_2m",
+      "precipitation",
+      "wind_speed_10m",
+      "wind_direction_10m"
+    ],
+    "wind_speed_unit": "ms",
+    "temperature_unit": "celsius",
+    "precipitation_unit": "mm",
+    "query_window": "29 Mar through 15 Jun for route contexts; target Bylot needed only for historical training years",
+    "focal_daily_temperature_anomaly_baseline": "same calendar day mean over the 20 calendar years ending at focal_year-1, at the same fixed route-context coordinate",
+    "local_temp_anom3": "arithmetic mean of current-day and previous two daily temperature anomalies",
+    "same_day_temperature_anomaly": "current daily temperature minus its 20-year pre-outcome same-DOY mean",
+    "precipitation_control": "GMT daily sum of 24 hourly precipitation values",
+    "wind_support_control": "GMT daily mean of hourly 10-m wind projected onto fixed bearing from current route context to the next route context (northern context points to Bylot target)",
+    "no_focal_future_target_leakage": true
   }
 }
