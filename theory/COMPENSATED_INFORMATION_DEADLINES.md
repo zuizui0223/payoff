@@ -5,310 +5,355 @@ Status: **exact reduction plus linear closed form**
 
 ## Motivation
 
-The information-deadline theorem uses an opportunity cost (D) for waiting
-until a later cue becomes available. For a migrant, however, a one-day delay at
-a staging site need not cause a one-day delay at the breeding site. An animal
-may shorten later stopovers or travel faster.
+The information-deadline theorem uses a fitness-equivalent cost \(D\) for
+waiting until a later cue becomes available. Raw elapsed time is generally not
+that cost.
 
-The quantity entering the theorem should therefore be the **fitness-equivalent
-cost remaining after optimal downstream compensation**, not raw elapsed time.
+Waiting can create two qualitatively different losses:
 
-This distinction is empirically important in greater snow goose. Bêty, Giroux
-& Gauthier (2004) radio-tracked females between the southern Quebec staging
-area and Bylot Island in 1997–1999. Across all females, later departure was
-associated with shorter migration duration (Spearman (r=-0.35)); departure
-date and arrival date were weakly related ((r=0.14)), whereas migration
-duration and arrival were strongly related ((r=0.81)). These observations
-show that raw departure delay and downstream arrival delay are not
-interchangeable quantities. They do not by themselves estimate PAYOFF-B (D).
+1. **direct waiting cost** \(J(\delta)\): costs incurred while waiting that
+   cannot be undone by later timing compensation, such as physiological stress,
+   lost territorial opportunity or energetic depletion;
+2. **downstream timing cost**: the actor may recover some of the raw delay by
+   migrating faster, compressing stopovers or shortening a later pre-breeding
+   interval, but this compensation can itself be costly.
 
-## Proposition — compensated deadline reduction
+The theorem therefore requires the total fitness loss remaining after optimal
+compensation, not days delayed.
 
-Let waiting for information create a raw temporal delay (deltage0).
-After waiting, the actor can compensate by (c) time units, with
+Greater snow goose illustrates both pieces. Historical tracking shows that later
+departure can coincide with shorter migration duration, so departure delay and
+arrival delay are not interchangeable. Separately, captivity experiments show
+that longer perturbation can reduce later breeding propensity even when detected
+breeders do not show a corresponding delay in arrival or laying date. This
+combination is exactly why raw delay cannot be equated with \(D\).
 
-[
-0le cle min(C,delta),
-]
+## Proposition — effective deadline cost
 
-where (C) is compensatory capacity.
+Let waiting for information create raw temporal delay
 
-Let (K(c)) be the cost of compensation and (M(delta-c)) the fitness loss
-from the residual timing delay. Define
+\[
+\delta \ge 0.
+\]
 
-[
-oxed{
-D_{mathrm{eff}}(delta,C)
+Let \(J(\delta)\ge0\) be a direct, non-recoverable cost of waiting. After
+waiting, the actor can compensate by \(c\) time units, with
+
+\[
+0\le c\le \min(C,\delta),
+\]
+
+where \(C\) is compensatory capacity. Let \(K(c)\) be the cost of compensation
+and \(M(\delta-c)\) the fitness loss from residual timing delay.
+
+Define
+
+\[
+\boxed{
+D_{\mathrm{eff}}(\delta,C)
 =
-min_{0le clemin(C,delta)}
-left[
-K(c)+M(delta-c)
-ight].
+J(\delta)
++
+\min_{0\le c\le\min(C,\delta)}
+\left[
+K(c)+M(\delta-c)
+\right].
 }
-]
+\]
 
-If compensation and residual timing losses are additive to the cue-conditioned
-Bayes risk, the original information-deadline theorem applies unchanged after
+Under additive expected loss, the information-deadline theorem applies
+unchanged after
 
-[
-Dlongrightarrow D_{mathrm{eff}}.
-]
+\[
+D\longrightarrow D_{\mathrm{eff}}.
+\]
 
-Thus, when (D_{mathrm{eff}}<R_0),
+Thus, whenever \(D_{\mathrm{eff}}<R_0\),
 
-[
-oxed{
-q_{mathrm{wait}}
+\[
+\boxed{
+q_{\mathrm{wait}}
 =
-rac{
-max(A,L)+D_{mathrm{eff}}
-}{
-A+L
-}.
+\frac{\max(A,L)+D_{\mathrm{eff}}}{A+L}.
 }
-]
+\]
 
-This is the bridge between PAYOFF-B's previously separate **capacity** and
-**information** layers: response capacity changes whether waiting for
-information is costly enough to be worthwhile.
+The earlier compensation-only expression is the exact special case
+\(J(\delta)=0\).
 
 ## Immediate consequences
 
-Because zero compensation is always feasible,
+Because zero compensation is feasible,
 
-[
-D_{mathrm{eff}}le M(delta).
-]
+\[
+D_{\mathrm{eff}}
+\le
+J(\delta)+M(\delta).
+\]
 
 Increasing the feasible compensation set cannot increase
-(D_{mathrm{eff}}). Therefore greater downstream compensatory capacity weakly
-lowers the information-use threshold, all else equal.
+\(D_{\mathrm{eff}}\). Therefore, holding direct waiting cost fixed, greater
+downstream compensatory capacity weakly lowers the information-use threshold.
 
-For two actors,
+For two actors with finite thresholds,
 
-[
-Delta q
+\[
+\Delta q
 =
-rac{
-|D_{mathrm{eff},2}-D_{mathrm{eff},1}|
+\frac{
+|D_{\mathrm{eff},2}-D_{\mathrm{eff},1}|
 }{
 A+L
-}
-]
+}.
+\]
 
-whenever both thresholds are finite.
+Actors can therefore use the same cue asynchronously even when their raw
+waiting time is identical. Differences in direct waiting cost, compensatory
+capacity, compensation cost or residual timing-loss sensitivity can each create
+threshold heterogeneity.
 
-Consequently, actors can use the same cue asynchronously even when their raw
-waiting time is identical. Heterogeneity in downstream compensation alone can
-create different information-use thresholds.
-
-The reverse warning is equally important: raw delay rankings need not equal
-effective deadline-cost rankings. An actor that waits longer can still face a
-smaller (D_{mathrm{eff}}) if it can cheaply recover more of the lost time.
+The reverse warning is equally important: rankings in raw delay need not equal
+rankings in effective deadline cost.
 
 ## Linear closed form
 
 Let
 
-[
-K(c)=kappa c,
-qquad
-M(r)=mu r.
-]
+\[
+J(\delta)=\omega\delta,\qquad
+K(c)=\kappa c,\qquad
+M(r)=\mu r,
+\]
+
+with all marginal costs non-negative.
 
 Then
 
-[
-D_{mathrm{eff}}
+\[
+D_{\mathrm{eff}}
 =
-min_c
-left[
-kappa c+mu(delta-c)
-ight].
-]
+\omega\delta
++
+\min_c
+\left[
+\kappa c+\mu(\delta-c)
+\right].
+\]
 
-If (kappagemu), compensation costs at least as much as leaving the delay
-unrecovered, so
+If \(\kappa\ge\mu\), compensation is not worthwhile:
 
-[
+\[
 c^*=0,
-qquad
-D_{mathrm{eff}}=mudelta.
-]
+\qquad
+D_{\mathrm{eff}}=(\omega+\mu)\delta.
+\]
 
-If (kappa<mu),
+If \(\kappa<\mu\),
 
-[
-c^*=min(C,delta),
-]
+\[
+c^*=\min(C,\delta),
+\]
 
 and
 
-[
-oxed{
-D_{mathrm{eff}}
+\[
+\boxed{
+D_{\mathrm{eff}}
 =
-kappamin(C,delta)
+\omega\delta
 +
-mumax(delta-C,0).
+\kappa\min(C,\delta)
++
+\mu\max(\delta-C,0).
 }
-]
+\]
 
-The information threshold therefore has a capacity kink. With
-(S=A+L),
+With \(S=A+L\), the cue threshold has a capacity kink:
 
-[
-rac{partial q_{mathrm{wait}}}{partialdelta}
+\[
+\frac{\partial q_{\mathrm{wait}}}{\partial\delta}
 =
-egin{cases}
-kappa/S, & delta<C,\
-mu/S, & delta>C,
-end{cases}
-qquad
-(kappa<mu).
-]
+\begin{cases}
+(\omega+\kappa)/S, & \delta<C,\\
+(\omega+\mu)/S, & \delta>C,
+\end{cases}
+\qquad
+(\kappa<\mu).
+\]
 
-Before capacity is exhausted, raw delay raises the cue threshold only at the
-marginal compensation cost. After capacity is exhausted, the threshold rises
-at the full marginal timing-loss rate.
+Direct waiting cost \(\omega\) raises both slopes. Compensation can remove the
+timing component of waiting cost, but it cannot remove \(J\).
 
-## Canonical numerical witness
+## Numerical witnesses
 
-Use the original PAYOFF-B loss scale
+Use the canonical PAYOFF-B loss scale
 
-[
-pi=0.4,quad C_F=2,quad C_M=1,
-quad A+L=1.6,
-quad max(A,L)=1.2.
-]
+\[
+\pi=0.4,\quad C_F=2,\quad C_M=1,
+\quad A+L=1.6,
+\quad \max(A,L)=1.2.
+\]
 
-For raw delay (delta=0.30), no compensatory capacity gives
+### Compensation-only special case
 
-[
-D_{mathrm{eff}}=0.30,
-qquad
-q_{mathrm{wait}}=0.9375.
-]
+Let raw delay be \(\delta=0.30\), with \(J=0\). With no compensatory capacity,
 
-Now let (C=0.20), (kappa=0.20), and (mu=1). Optimal compensation is
-(c^*=0.20), leaving residual delay 0.10:
+\[
+D_{\mathrm{eff}}=0.30,
+\qquad
+q_{\mathrm{wait}}=0.9375.
+\]
 
-[
-D_{mathrm{eff}}
+With \(C=0.20,\ \kappa=0.20,\ \mu=1\),
+
+\[
+c^*=0.20,\qquad
+D_{\mathrm{eff}}=0.14,
+\qquad
+q_{\mathrm{wait}}=0.8375.
+\]
+
+Thus two actors with the same raw delay but different downstream capacity can
+have different information-use thresholds.
+
+### Full timing recovery with non-zero direct cost
+
+Let \(C=0.30,\ \kappa=0,\ \mu=1\), so the entire timing delay can be recovered
+for free, but let \(\omega=0.40\). Then
+
+\[
+c^*=0.30,\qquad
+\delta-c^*=0,
+\]
+
+yet
+
+\[
+D_{\mathrm{eff}}
 =
-0.20(0.20)+1(0.10)
+0.40(0.30)
 =
-0.14,
-]
+0.12.
+\]
 
-so
+Therefore
 
-[
-q_{mathrm{wait}}=0.8375.
-]
-
-The same raw information delay therefore produces substantially different
-information-use thresholds depending on downstream compensatory capacity.
-
-Two actors with the same raw (delta=0.30), but capacities 0 and 0.20 under
-these costs, have an exact asynchronous-window width
-
-[
-Delta q
+\[
+q_{\mathrm{wait}}
 =
-rac{0.30-0.14}{1.60}
+\frac{1.2+0.12}{1.6}
 =
-0.10.
-]
+0.825,
+\]
 
-## Ecological interpretation
+which remains above the cue-actionability boundary \(q_0=0.75\). Perfect
+timing compensation does not erase a direct cost of waiting.
 
-This result changes the empirical target for (D).
+## Hidden deadline states and information about compensation
 
-A direct test should not estimate waiting cost from migration distance, days
-spent waiting, or departure date alone. It should estimate the **incremental
-expected fitness loss of waiting after optimal feasible downstream
-compensation**.
+Suppose the direct cost, compensation cost or residual timing-loss surface
+depends on a future state \(H\).
 
-In migration systems this means separately estimating:
+If compensation can be selected after \(H\) is known, define
 
-1. the raw delay created by waiting for information;
-2. how much delay can be recovered through speed, stopover compression,
-   route changes or later phenological adjustment;
-3. the energetic or survival cost of that compensation;
-4. the fitness loss from residual arrival or breeding delay.
-
-Greater snow goose is especially useful because historical tracking shows
-substantial variation in migration duration and weak individual-level coupling
-between departure and arrival timing, while independent Bylot data quantify a
-strong timing-fitness surface. These pieces motivate the decomposition but do
-not yet identify its terms on the same individuals.
-
-## Relationship to hidden deadline states
-
-If the residual timing-loss surface or compensation cost depends on a future
-state (H), define the state-specific optimized cost
-
-[
-D_{mathrm{eff}}(H)
+\[
+D_{\mathrm{eff}}(H)
 =
-min_c
-[
-K(c,H)+M(delta-c,H)
-].
-]
+J(\delta,H)
++
+\min_c
+\left[
+K(c,H)+M(\delta-c,H)
+\right],
+\]
 
-When compensation can adapt after (H) becomes known but the wait/commit
-decision occurs earlier, the information-deadline theorem uses
+and the wait/commit decision made earlier uses
 
-[
-E[D_{mathrm{eff}}(H)midmathcal I].
-]
+\[
+E[D_{\mathrm{eff}}(H)\mid\mathcal I].
+\]
 
-If the compensatory action itself must be chosen before (H) is known, the
-relevant cost is instead
+If one compensation plan must instead be chosen before \(H\) is known, the
+relevant expected cost is
 
-[
-min_c
+\[
+E[J(\delta,H)\mid\mathcal I]
++
+\min_c
 E[
-K(c,H)+M(delta-c,H)
-midmathcal I
+K(c,H)+M(\delta-c,H)
+\mid\mathcal I
 ].
-]
+\]
 
 Because
 
-[
-E[min_c L(c,H)midmathcal I]
-le
-min_c E[L(c,H)midmathcal I],
-]
+\[
+E[\min_c L(c,H)\mid\mathcal I]
+\le
+\min_c E[L(c,H)\mid\mathcal I],
+\]
 
-later information that allows compensation to be state-contingent can itself
-reduce the effective deadline cost.
+later information that permits state-contingent compensation can lower the
+effective deadline cost. Information can therefore have value twice: first for
+choosing the seasonal action, and again for choosing how to compensate for
+having waited.
 
-This creates a second information value: information can help not only choose
-the seasonal action, but also choose **how to compensate for having waited**.
+## Ecological interpretation
+
+A direct estimate of \(D_{\mathrm{eff}}\) should separate four components:
+
+1. raw delay \(\delta\) created by waiting for information;
+2. direct waiting cost \(J(\delta)\) that cannot be recovered later;
+3. downstream compensation \(c\) and its fitness/energetic cost \(K(c)\);
+4. residual timing loss \(M(\delta-c)\).
+
+In a multi-stage life cycle, downstream compensation can itself occur in
+several steps. For migration, one might distinguish migration-speed/stopover
+compensation from post-arrival pre-breeding buffering. Observed correlations
+between sequential dates cannot simply be multiplied into a causal
+\(D_{\mathrm{eff}}\); the stagewise mapping must be specified independently.
+
+## Greater snow goose boundary
+
+Three source-backed findings motivate the decomposition without identifying its
+parameters:
+
+- Bêty, Giroux & Gauthier (2004) found that later departure was associated
+  with shorter migration duration, while departure and arrival timing were only
+  weakly coupled;
+- Bêty, Gauthier & Giroux (2003) found that later arrival was associated with a
+  shorter pre-laying interval and a less-than-one-for-one shift in laying date;
+- Legagneux et al. (2012) and Grandmont et al. (2023) found carry-over costs of
+  captivity duration, while Grandmont et al. reported no detectable captivity
+  effect on arrival date or laying date among females detected on the breeding
+  grounds.
+
+The first two are buffering anchors; the last shows that a direct waiting cost
+can remain even when downstream timing delay is small or compensated. None of
+these studies alone identifies \(J,K,M\), or numerical \(D_{\mathrm{eff}}\) on
+the theorem's common utility scale.
+
+In the downstream coordination game, player-specific \(D_i\) should likewise
+be interpreted as \(D_{\mathrm{eff},i}\) whenever compensation or direct
+waiting costs are relevant.
 
 ## Claim boundary
 
-The reduction is exact under the declared additive model. The greater-snow-goose
-tracking evidence is only an ecological anchor for compensation and cannot be
-used to assign numerical (C,kappa,mu) without an independently specified
-fitness model.
+The reduction is exact under the declared additive model. Natural observations
+currently support the existence of its components, not their joint causal
+identification.
 
-In the downstream coordination game, the player-specific (D_i) should likewise be read as this effective cost whenever compensation is available; the strategic inequalities are otherwise unchanged.
+The direct natural target is
 
-The natural direct-test target becomes
-
-[
-oxed{
-D_i^{mathrm{eff}}
-ightarrow
-q_{wait,i}
-ightarrow
-	ext{asynchronous cue use}.
+\[
+\boxed{
+D_{\mathrm{eff},i}
+\rightarrow
+q_{\mathrm{wait},i}
+\rightarrow
+\text{asynchronous cue use}.
 }
-]
+\]
 
 Raw waiting duration alone is not the theorem's empirical predictor.
