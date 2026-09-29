@@ -115,6 +115,9 @@
       "ecological_anchor": "three published route regions in Resendiz-Infante & Gauthier 2024: St. Lawrence, Nunavik, Baffin Island",
       "manual_boundary_editing": false,
       "climate_blinding": "context clustering uses only movement geometry and phase labels; no temperature, predictive-connectivity, departure-model coefficient, or residual may be inspected"
-    }
+    },
+    "movepp_repository": "EverTSZ/movepp",
+    "movepp_commit": "220e953a2f1c8f29540cb74d0ec69599f24e1d14",
+    "install_rule": "install and execute the pinned movepp commit; do not silently substitute a newer package revision"
   }
 }
