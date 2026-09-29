@@ -20,8 +20,9 @@ def test_synthetic_dual_use_screen_recovers_registered_negative_signal(tmp_path)
     for i in range(30):
         for year_index, year in enumerate(range(2020, 2024)):
             for context_index, (origin, destination) in enumerate(contexts):
-                # Context-year predictive connectivity with non-additive
-                # variation so it is not absorbed by context + year effects.
+                # Predictive connectivity is constant within each origin
+                # context-year cell. The registered model absorbs the cell
+                # intercept and identifies q through slope modulation.
                 rho = (
                     0.18
                     + 0.08 * context_index
@@ -117,3 +118,16 @@ def test_forward_route_skip_is_accepted_by_frozen_transition_semantics():
     assert ("St_Lawrence", "Bylot") in ALLOWED_SEGMENTS
     assert ("Nunavik", "Bylot") in ALLOWED_SEGMENTS
     assert ("Baffin", "St_Lawrence") not in ALLOWED_SEGMENTS
+
+
+def test_primary_formula_uses_context_year_fixed_intercepts():
+    from scripts.payoff_b_greater_snow_goose_dual_use_compensation_screen import (
+        PRIMARY_FORMULA,
+        SECONDARY_FORMULA,
+    )
+
+    assert "C(context_year_cell)" in PRIMARY_FORMULA
+    assert "C(context_year_cell)" in SECONDARY_FORMULA
+    assert "local_temp_anom3:z_predictive_connectivity" in PRIMARY_FORMULA
+    # The q main effect is intentionally omitted because q is cell-constant.
+    assert "* z_predictive_connectivity" not in PRIMARY_FORMULA
