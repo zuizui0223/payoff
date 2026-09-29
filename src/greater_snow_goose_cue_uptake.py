@@ -263,3 +263,21 @@ def adjudicate_threshold_folds(
         upper_paired_se=upper_se,
         reasons=tuple(reasons),
     )
+
+
+
+def dual_cluster_direction_supported(
+    estimate: float,
+    individual_ci_low: float,
+    context_year_ci_low: float,
+) -> bool:
+    """Primary directional support requires both clustered CIs above zero."""
+
+    values = (
+        float(estimate),
+        float(individual_ci_low),
+        float(context_year_ci_low),
+    )
+    if any(not isfinite(v) for v in values):
+        raise ValueError("primary inference inputs must be finite")
+    return values[0] > 0.0 and values[1] > 0.0 and values[2] > 0.0
