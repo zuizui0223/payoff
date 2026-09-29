@@ -214,3 +214,65 @@ def test_pair_window_can_be_created_by_direct_wait_cost_difference_only():
     # Timing delay fully recovered in both actors. D_eff is direct cost only:
     # 0.02 vs 0.10, so Delta q = 0.08/1.60.
     assert width == pytest.approx(0.05)
+
+
+def test_unequal_raw_delays_can_have_identical_thresholds_after_compensation():
+    short = linear_compensated_information_threshold(
+        0.4,
+        2.0,
+        1.0,
+        raw_delay=0.20,
+        compensation_capacity=0.0,
+        compensation_cost_per_unit=0.0,
+        residual_loss_per_unit=1.0,
+        direct_wait_cost_per_unit=0.0,
+    )
+    long = linear_compensated_information_threshold(
+        0.4,
+        2.0,
+        1.0,
+        raw_delay=0.40,
+        compensation_capacity=0.20,
+        compensation_cost_per_unit=0.0,
+        residual_loss_per_unit=1.0,
+        direct_wait_cost_per_unit=0.0,
+    )
+
+    assert short.effective_delay_cost == pytest.approx(0.20)
+    assert long.effective_delay_cost == pytest.approx(0.20)
+    assert short.wait_threshold == pytest.approx(long.wait_threshold)
+
+
+def test_raw_delay_ranking_can_reverse_threshold_ranking():
+    shorter_raw_delay = linear_compensated_information_threshold(
+        0.4,
+        2.0,
+        1.0,
+        raw_delay=0.20,
+        compensation_capacity=0.0,
+        compensation_cost_per_unit=0.0,
+        residual_loss_per_unit=1.0,
+        direct_wait_cost_per_unit=0.0,
+    )
+    longer_but_highly_compensable = linear_compensated_information_threshold(
+        0.4,
+        2.0,
+        1.0,
+        raw_delay=0.40,
+        compensation_capacity=0.40,
+        compensation_cost_per_unit=0.0,
+        residual_loss_per_unit=1.0,
+        direct_wait_cost_per_unit=0.05,
+    )
+
+    assert longer_but_highly_compensable.raw_delay > shorter_raw_delay.raw_delay
+    assert (
+        longer_but_highly_compensable.effective_delay_cost
+        < shorter_raw_delay.effective_delay_cost
+    )
+    assert (
+        longer_but_highly_compensable.wait_threshold
+        < shorter_raw_delay.wait_threshold
+    )
+    assert shorter_raw_delay.wait_threshold == pytest.approx(0.875)
+    assert longer_but_highly_compensable.wait_threshold == pytest.approx(0.7625)
