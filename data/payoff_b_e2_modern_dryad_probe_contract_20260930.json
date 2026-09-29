@@ -1,0 +1,23 @@
+{
+  "contract_id": "payoff_b_e2_modern_dryad_probe_v1_20260930",
+  "date": "2026-09-30",
+  "status": "SOURCE_REPRODUCTION_ONLY",
+  "source_doi": "10.5061/dryad.bs427",
+  "rationale": "historical probe hard-coded Dryad file IDs and acquired 0/7; current Dryad index resolves filenames, so retry by DOI -> current version -> current file manifest -> filename",
+  "required_files": [
+    "arrival_early_late.R",
+    "arrival.csv",
+    "arrorder.csv",
+    "population.csv",
+    "replicates.csv",
+    "swaps14.csv",
+    "swaps15.csv"
+  ],
+  "if_acquired_next_gate": "freeze any new analysis model after inspecting source schema and original R code but before fitting a new focal response model",
+  "claim_boundary": [
+    "source reproduction only",
+    "male/female settlement timing is not D_eff by definition",
+    "early/late competitor treatment is not q_wait by definition",
+    "no pairwise theorem claim from source acquisition alone"
+  ]
+}
