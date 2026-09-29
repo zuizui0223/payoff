@@ -191,7 +191,7 @@ We next consider a shared-cue interaction network at
 q=1.
 ]
 
-For player (i), let (R_i) be its prior mismatch risk under the old timing convention, (D_i) its information/waiting cost, (I_i) its interaction-mismatch strength, and (p) the probability of the state in which informed action differs from the old action.
+For player (i), let (R_i) be its prior mismatch risk under the old timing convention, (D_i) its effective waiting cost, (I_i) its interaction-mismatch strength, and (p) the probability of the state in which informed action differs from the old action.
 
 If all players retain the old action, player (i) receives
 
@@ -666,25 +666,32 @@ Two long-term preregistered reversal gates are negative. The second, more direct
 
 No current natural dataset therefore demonstrates the full degradation–recovery network hysteresis predicted by the shared-cue and private-cue games. That remains a prospective test.
 
-### 4.7 Capacity, information and coordination are separate constraints
+### 4.7 Capacity, information and coordination are distinct but coupled constraints
 
-The current programme resolves the earlier PAYOFF-B story into distinct layers.
+The framework separates six barriers: **capacity** (how much delay can be
+recovered), **prediction** (whether pre-commitment information forecasts the
+later state), **information timing** (whether it arrives before commitment),
+**strategic accessibility** (whether unilateral cue uptake is costly),
+**network memory** (whether topology retains altered timing), and **recovery
+leverage** (which temporary informed seed restarts coordination).
 
-**Capacity:** can the organism physically express enough spatial or temporal response?
+Capacity also changes the information threshold. If waiting creates raw delay
+(\delta), downstream compensation (c) costs (K(c)), and residual delay costs
+(M(\delta-c)), the theorem uses
 
-**Prediction:** does information available before commitment predict the later environmental state?
+[
+D_{eff}
+=
+\min_c[K(c)+M(\delta-c)],
+]
 
-**Information timing:** does the information become useful before the decision deadline?
+not raw delay. Greater compensatory capacity can therefore lower (q_{wait}).
+Greater-snow-goose tracking shows why: later departure can coincide with
+shorter migration, weakening departure–arrival coupling (Bêty et al., 2004).
 
-**Strategic accessibility:** can one actor begin using the information without incurring prohibitive partner mismatch?
-
-**Network memory:** once a timing convention changes, does interaction topology preserve or erase it?
-
-**Recovery leverage:** if an obsolete convention is locked in, which temporary informed seed is sufficient to restart the better equilibrium?
-
-These constraints can produce similar mismatch trajectories but imply different interventions and different forecasts.
-
-Improving connectivity habitat addresses a spatial capacity problem. Improving environmental forecasts addresses an information problem. Neither necessarily resolves a coordination trap once partner timing has become historically locked.
+These mechanisms imply different interventions. Capacity restoration can lower
+(D_{eff}); better forecasts increase cue quality; neither necessarily resolves
+a coordination trap.
 
 ### 4.8 Relation to prior work
 
@@ -741,6 +748,7 @@ The framework therefore predicts that climate adaptation can fail not only becau
 - Amaral BR, Youngflesh C, Tingley M, Miller DAW (2025) Shifting gears in a shifting climate: Birds adjust migration speed in response to spring vegetation green-up. *Diversity and Distributions* 31:e70033. DOI: 10.1111/ddi.70033.
 - Åkesson S, Ilieva M, Karagicheva J, Rakhimberdiev E, Tomotani B, Helm B (2017) Timing avian long-distance migration: from internal clock mechanisms to global flights. *Philosophical Transactions of the Royal Society B* 372:20160252. DOI: 10.1098/rstb.2016.0252.
 - Bauer S, McNamara JM, Barta Z (2020) Environmental variability, reliability of information and the timing of migration. *Proceedings of the Royal Society B* 287:20200622. DOI: 10.1098/rspb.2020.0622.
+- Bêty J, Giroux J-F, Gauthier G (2004) Individual variation in timing of migration: causes and reproductive consequences in greater snow geese (*Anser caerulescens atlanticus*). *Behavioral Ecology and Sociobiology* 57:1–8. DOI: 10.1007/s00265-004-0840-3.
 - Burgess MD, Smith KW, Evans KL, Leech D, Pearce-Higgins JW, Branston CJ, Briggs K, Clark JR, du Feu CR, Lewthwaite K, Nager RG, Sheldon BC, Smith JA, Whytock RC, Willis SG, Phillimore AB (2018) Tritrophic phenological match–mismatch in space and time. *Nature Ecology & Evolution* 2:970–975. DOI: 10.1038/s41559-018-0543-1.
 - Freimuth J, Bossdorf O, Scheepens JF, Willems FM (2022) Climate warming changes synchrony of plants and pollinators. *Proceedings of the Royal Society B* 289:20212142. DOI: 10.1098/rspb.2021.2142.
 - Grandmont T, Fast P, Grentzmann I, Gauthier G, Bêty J, Legagneux P (2023) Should I breed or should I go? Manipulating individual state during migration influences breeding decisions in a long-lived bird species. *Functional Ecology* 37:602–613. DOI: 10.1111/1365-2435.14256.

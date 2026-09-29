@@ -1,0 +1,42 @@
+{
+  "anchor_id": "payoff_b_greater_snow_goose_compensation_anchor_20260929",
+  "date": "2026-09-29",
+  "status": "SOURCE_BACKED_COMPENSATION_ANCHOR_NOT_DIRECT_D_ESTIMATE",
+  "source": {
+    "citation": "Bêty J, Giroux J-F, Gauthier G (2004) Individual variation in timing of migration: causes and reproductive consequences in greater snow geese (Anser caerulescens atlanticus). Behavioral Ecology and Sociobiology 57:1-8.",
+    "doi": "10.1007/s00265-004-0840-3",
+    "tracking_years": "1997-1999",
+    "population": "female greater snow geese, southern Quebec spring staging area to Bylot Island"
+  },
+  "published_correlations_all_females": {
+    "departure_date_vs_migration_duration": {
+      "spearman_r": -0.35,
+      "n": 75,
+      "p_category": "<0.05"
+    },
+    "departure_date_vs_arrival_date": {
+      "spearman_r": 0.14,
+      "n": 75,
+      "p_category": "not_reported_as_significant"
+    },
+    "migration_duration_vs_arrival_date": {
+      "spearman_r": 0.81,
+      "n": 75,
+      "p_category": "<0.001"
+    }
+  },
+  "published_repeatability": {
+    "departure_date": -0.02,
+    "migration_duration": 0.37,
+    "arrival_date": 0.42
+  },
+  "ecological_interpretation": "later departure can be partly offset by shorter migration duration; raw departure delay is not equivalent to downstream arrival delay",
+  "payoff_b_role": {
+    "compensation_capacity_anchor": true,
+    "direct_D_estimate": false,
+    "direct_compensation_cost_K_estimate": false,
+    "direct_capacity_C_estimate": false,
+    "direct_residual_loss_M_estimate": false,
+    "forbidden_reframing": "do not convert the observed departure-duration correlation directly into D_eff or q_wait"
+  }
+}
