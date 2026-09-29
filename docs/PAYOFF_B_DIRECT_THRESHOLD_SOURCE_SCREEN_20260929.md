@@ -70,7 +70,25 @@ Qualification:
 - cue-use threshold: **NOT YET**
 - exact asynchronous window: **NO**
 
-Classification: **BEST_CURRENT_DEVELOPMENT_CANDIDATE_NOT_DIRECT**
+Classification: **INFORMATION_USE_CANDIDATE_D_GATE_NOT_IDENTIFIED**
+
+### Post-screen D-identification gate
+
+The published Boom et al. analysis does not provide a clean marginal delay
+cost. Relative arrival (arrival date minus local spring onset) was explicitly
+tested as a predictor of breeding propensity, but models containing local
+spring onset outperformed models based on relative arrival. The best reported
+breeding-propensity model used latitude, spring onset and their interaction,
+not a stable per-day arrival penalty.
+
+This matters directly for PAYOFF-B: a state-dependent association between
+spring timing and breeding probability cannot be relabelled as the theorem's
+opportunity cost D. In this source, D is therefore **not identified** under the
+current simple model.
+
+Barnacle goose remains valuable for the information-quality -> timing-response
+edge, but the direct D -> q threshold route is stopped unless an independent
+delay-cost experiment or fitness model is introduced.
 
 ## Candidate 3 — American redstart delay-cost anchor
 
