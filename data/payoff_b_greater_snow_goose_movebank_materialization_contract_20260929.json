@@ -1,0 +1,51 @@
+{
+  "materialization_contract_id": "payoff_b_greater_snow_goose_movebank_materialization_v1_20260929",
+  "date": "2026-09-29",
+  "role": "operational authorized raw-data materialization only; no scientific model fitting",
+  "study_id": "1442516400",
+  "sensor_type_id": 653,
+  "frozen_years": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "download_scope": "all GPS events within each full calendar year; no spring-only truncation at raw-materialization stage",
+  "rationale": "movepp phase classification requires unbiased annual context; seasonal restriction occurs only in frozen downstream preprocessing",
+  "attributes": [
+    "timestamp",
+    "location_long",
+    "location_lat",
+    "individual_id",
+    "individual_local_identifier",
+    "tag_id",
+    "tag_local_identifier",
+    "visible"
+  ],
+  "authentication": {
+    "method": "MOVEBANK_API_TOKEN environment variable / GitHub secret only",
+    "command_line_credentials_forbidden": true,
+    "credentials_committed_to_git": false
+  },
+  "license": {
+    "auto_accept_terms": false,
+    "required_user_state": "authorized account must have accepted any required terms in Movebank before workflow execution",
+    "terms_page_behavior": "fail closed and write BLOCKED manifest"
+  },
+  "raw_data_governance": {
+    "git_commit": false,
+    "github_actions_artifact_retention_days": 30,
+    "year_level_files": true,
+    "manifest_fields": [
+      "row count",
+      "byte count",
+      "sha256",
+      "header",
+      "timestamp bounds"
+    ]
+  },
+  "frozen_science_reference": "freeze/payoff-b-snow-goose-preoutcome-v2-20260929",
+  "execution_boundary": "successful materialization opens raw movement events but does not open the preregistered cue-uptake coefficient or threshold result",
+  "next_gate": "run frozen movepp preprocessing only after exact/source-backed route geometry is materialized; do not analyze cue-uptake model before geometry gate"
+}\n
