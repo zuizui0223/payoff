@@ -16,7 +16,11 @@
       "late_reference_relative_day": 10,
       "late_reference_success_bound": "<0.01",
       "average_post_peak_decline_young_per_day": 0.036,
-      "descriptive_decline_fraction_of_peak_per_day": 0.06923076923076922
+      "descriptive_decline_fraction_of_peak_per_day": 0.06923076923076922,
+      "very_early_relative_laying_day": -10,
+      "very_early_reproductive_success_young_to_age1": 0.03,
+      "descriptive_very_early_to_peak_gain_young": 0.49,
+      "descriptive_very_early_to_peak_gain_per_day": 0.08166666666666667
     },
     "end_of_study": {
       "peak_relative_laying_day": -6,
@@ -46,6 +50,7 @@
       "waiting in the published example acquires nutrients, not information",
       "clutch-size and post-hatch survival components are embedded in reproductive success",
       "a theorem-scale C_M requires a prespecified early/late action contrast and common utility normalization"
-    ]
+    ],
+    "two_sided_timing_loss": "the published hump-shaped fitness surface independently anchors both too-early and too-late timing penalties, but not the theorem's binary C_F/C_M without a prespecified state-action mapping"
   }
 }
