@@ -12,6 +12,13 @@ on:
       - 'tests/test_deadline_threshold_empirics.py'
       - 'tests/test_endogenous_information_timing.py'
       - 'tests/test_greater_snow_goose_information_bridge.py'
+      - 'src/greater_snow_goose_cue_uptake.py'
+      - 'src/greater_snow_goose_climate.py'
+      - 'tests/test_greater_snow_goose_cue_uptake.py'
+      - 'tests/test_greater_snow_goose_climate.py'
+      - 'scripts/payoff_b_greater_snow_goose_cue_uptake.py'
+      - 'scripts/payoff_b_greater_snow_goose_climate.py'
+      - 'analysis/movement_phenology/payoff_b_greater_snow_goose_movepp_preprocess.R'
       - 'tests/test_state_dependent_information_deadline.py'
       - 'data/payoff_b_pairwise_deadline_threshold_contract_20260929.json'
       - 'data/payoff_b_greater_snow_goose_bridge_inputs_20260929.json'
@@ -32,4 +39,19 @@ jobs:
           tests/test_endogenous_information_timing.py
           tests/test_deadline_threshold_empirics.py
           tests/test_greater_snow_goose_information_bridge.py
+          tests/test_greater_snow_goose_cue_uptake.py
+          tests/test_greater_snow_goose_climate.py
           tests/test_state_dependent_information_deadline.py
+      - run: >
+          python -m py_compile
+          scripts/payoff_b_greater_snow_goose_cue_uptake.py
+          scripts/payoff_b_greater_snow_goose_climate.py
+
+  r-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+      - run: >
+          Rscript -e
+          "parse(file='analysis/movement_phenology/payoff_b_greater_snow_goose_movepp_preprocess.R')"
