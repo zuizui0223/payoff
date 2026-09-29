@@ -1,8 +1,8 @@
 {
   "result_id": "payoff_b_pairwise_tracking_bridge_20260929",
   "date": "2026-09-29",
-  "status": "SOURCE_BACKED_PAIRWISE_BRIDGE_READY",
-  "paper_role": "candidate E6b interaction-level bridge; supports pairwise phenological response disparity but does not identify theoretical deadline costs",
+  "status": "SOURCE_BACKED_INTERACTION_RESPONSE_BRIDGE_V2_READY",
+  "paper_role": "E6b interaction-level bridge with two independent published systems; supports response-asymmetry-to-interaction-timing change but not theoretical deadline costs",
   "source": {
     "citation": "Burgess MD et al. 2018. Tritrophic phenological match-mismatch in space and time. Nature Ecology & Evolution 2:970-975.",
     "doi": "10.1038/s41559-018-0543-1",
@@ -105,6 +105,39 @@
     "abstract_change": false,
     "figure_change": false,
     "section_4_6_bridge": true,
-    "claim_ceiling": "PAIRWISE_RESPONSE_DISPARITY_SUPPORTED_DEADLINE_MECHANISM_PROSPECTIVE"
+    "claim_ceiling": "INTERACTION_RESPONSE_ASYMMETRY_SUPPORTED_TWO_SYSTEMS_DEADLINE_MECHANISM_PROSPECTIVE"
+  },
+  "additional_source": {
+    "citation": "Samplonius JM et al. 2018. Phenological sensitivity to climate change is higher in resident than in migrant bird populations among European cavity breeders. Global Change Biology 24:3780-3790.",
+    "doi": "10.1111/gcb.14160",
+    "design": "10 European nest-box schemes, 1991-2015, each with at least one resident tit and one migratory flycatcher population",
+    "interaction_context": "resident tits and migratory flycatchers overlap in nest-site competition and breeding ecology",
+    "published_results": {
+      "blue_tit_temperature_slope_days_per_C": -3.37,
+      "blue_tit_se": 0.36,
+      "great_tit_difference_from_blue_tit_days_per_C": 0.53,
+      "great_tit_difference_se": 0.39,
+      "pied_flycatcher_difference_from_blue_tit_days_per_C": 1.85,
+      "pied_flycatcher_difference_se": 0.38,
+      "collared_flycatcher_difference_from_blue_tit_days_per_C": 1.83,
+      "collared_flycatcher_difference_se": 0.43,
+      "laying_date_divergence_days_per_decade": 0.94,
+      "mean_tit_temperature_window_earlier_than_flycatcher_days": 21,
+      "tit_laying_date_additional_effect_on_flycatcher_after_temperature_control": true
+    },
+    "licensed_interpretation": "Resident and migratory cavity breeders sharing breeding ecology have different temperature sensitivities, and those differences have already widened their phenological interval through time.",
+    "not_licensed": [
+      "statistical climate windows are decision deadlines",
+      "migration strategy alone causally explains the temperature-sensitivity difference",
+      "the theoretical D2-D1 parameter has been measured",
+      "the q1<q<=q2 information-use window has been observed"
+    ]
+  },
+  "independent_interaction_systems": 2,
+  "bridge_synthesis": {
+    "burgess_2018": "consumer-resource pair response asymmetry -> mismatch in early springs",
+    "samplonius_2018": "resident-migrant competitor response asymmetry -> widening laying-date interval",
+    "combined": "Two independent interaction contexts show that unequal phenological responsiveness among interacting partners changes their relative timing.",
+    "mechanism_boundary": "Neither study identifies waiting cost D nor information-use thresholds q1/q2."
   }
 }
