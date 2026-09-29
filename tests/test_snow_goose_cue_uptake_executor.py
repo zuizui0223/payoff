@@ -1,7 +1,8 @@
 import math
 
-import pandas as pd
 import pytest
+
+pd = pytest.importorskip("pandas")
 
 from scripts.payoff_b_greater_snow_goose_cue_uptake import (
     _estimability,
