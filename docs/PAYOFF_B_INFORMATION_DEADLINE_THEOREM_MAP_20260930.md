@@ -224,6 +224,17 @@ q_{wait}
 Thus downstream decision complexity changes **how reliable** the cue must be,
 but not whether perfect information can overcome the direct cost of waiting.
 
+A further comparison is essential:
+
+- for a **fixed** downstream problem, informing its solution reduces waiting
+  cost relative to leaving that problem uninformed;
+- adding a new waiting-contingent problem cannot make waiting more attractive
+  than a world in which that problem does not exist, because its posterior risk
+  remains non-negative.
+
+So "the cue has more downstream uses" does not imply a lower information-use
+threshold.
+
 ---
 
 ## Step 4 — pairwise asynchronous information use
