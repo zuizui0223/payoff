@@ -1,9 +1,11 @@
 import pytest
 
 from src.compensated_information_deadline import (
+    adaptive_state_expected_effective_cost,
     compensated_pair_window_width,
     linear_compensated_information_threshold,
     linear_effective_deadline_cost,
+    precommitted_state_expected_effective_cost,
     threshold_slope_with_raw_delay,
 )
 
@@ -136,3 +138,24 @@ def test_more_capacity_cannot_raise_linear_effective_cost_when_compensation_is_c
         )
         costs.append(cost)
     assert costs == sorted(costs, reverse=True)
+
+
+def test_state_contingent_compensation_information_has_nonnegative_value():
+    adaptive = adaptive_state_expected_effective_cost(
+        [0.5, 0.5],
+        raw_delay=0.30,
+        compensation_capacity=0.30,
+        compensation_costs_per_unit=[0.10, 2.0],
+        residual_losses_per_unit=[1.0, 1.0],
+    )
+    precommitted = precommitted_state_expected_effective_cost(
+        [0.5, 0.5],
+        raw_delay=0.30,
+        compensation_capacity=0.30,
+        compensation_costs_per_unit=[0.10, 2.0],
+        residual_losses_per_unit=[1.0, 1.0],
+    )
+
+    assert adaptive == pytest.approx(0.165)
+    assert precommitted == pytest.approx(0.30)
+    assert adaptive <= precommitted
