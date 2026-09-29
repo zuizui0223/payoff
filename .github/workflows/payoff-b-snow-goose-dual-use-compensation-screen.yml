@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/snow_goose_dual_use_screen.py'
       - 'tests/test_snow_goose_dual_use_screen.py'
+      - 'tests/test_snow_goose_dual_use_screen_integration.py'
       - 'scripts/payoff_b_greater_snow_goose_dual_use_compensation_screen.py'
       - 'data/payoff_b_greater_snow_goose_dual_use_compensation_screen_20260930.json'
       - '.github/workflows/payoff-b-snow-goose-dual-use-compensation-screen.yml'
@@ -31,6 +32,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install --upgrade pip pytest
-      - run: python -m pytest -q tests/test_snow_goose_dual_use_screen.py
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[test,empirical]'
+      - run: >
+          python -m pytest -q
+          tests/test_snow_goose_dual_use_screen.py
+          tests/test_snow_goose_dual_use_screen_integration.py
       - run: python scripts/payoff_b_greater_snow_goose_dual_use_compensation_screen.py --help
