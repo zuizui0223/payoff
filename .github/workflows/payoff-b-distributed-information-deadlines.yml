@@ -1,0 +1,29 @@
+name: PAYOFF-B distributed information deadlines
+
+on:
+  push:
+    branches:
+      - theory/payoff-b-distributed-information-deadlines-20260929
+    paths:
+      - 'src/distributed_information_deadlines.py'
+      - 'tests/test_distributed_information_deadlines.py'
+      - 'theory/DISTRIBUTED_INFORMATION_DEADLINES.md'
+      - '.github/workflows/payoff-b-distributed-information-deadlines.yml'
+  pull_request:
+    paths:
+      - 'src/distributed_information_deadlines.py'
+      - 'tests/test_distributed_information_deadlines.py'
+      - 'theory/DISTRIBUTED_INFORMATION_DEADLINES.md'
+      - '.github/workflows/payoff-b-distributed-information-deadlines.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e '.[test]'
+      - run: python -m pytest -q tests/test_distributed_information_deadlines.py
