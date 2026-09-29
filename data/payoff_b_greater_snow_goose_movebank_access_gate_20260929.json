@@ -1,0 +1,42 @@
+{
+  "gate_id": "payoff_b_greater_snow_goose_movebank_access_gate_20260929",
+  "date": "2026-09-29",
+  "study": {
+    "name": "Greater snow goose migration",
+    "movebank_study_id": "1442516400",
+    "years": [
+      2019,
+      2023
+    ],
+    "animals": 75,
+    "valid_locations_public_summary": 5156264,
+    "sensor": "GPS"
+  },
+  "public_evidence": {
+    "movebank_mbi_collection": {
+      "visibility": "summary",
+      "source": "https://www.movebank.org/cms/movebank-content/audubon-mbi-collection",
+      "implication": "study metadata are public but the MBI table does not mark event data as public-data access"
+    },
+    "zenodo_reproducibility_archive": {
+      "doi": "10.5281/zenodo.20686134",
+      "source": "https://zenodo.org/records/20686134",
+      "statement": "Greater Snow Goose data are CC BY-NC, are not redistributed in the archive, and must be downloaded from Movebank to run the species pipeline"
+    },
+    "movebank_api_documentation": {
+      "source": "https://github.com/movebank/movebank-api-doc/blob/master/movebank-api.md",
+      "implication": "study downloads may require user authentication and prior license-term acceptance"
+    }
+  },
+  "current_execution_status": "ACCESS_BLOCKED_BEFORE_OUTCOME",
+  "current_blocker": "No authenticated/terms-accepted Movebank event-data download is available in the current execution environment.",
+  "science_status": "PREOUTCOME_INTACT",
+  "not_a_science_failure": true,
+  "next_permitted_step": "Obtain authorized Movebank event CSV, then run frozen movepp preprocessing and the preregistered decision-day executor without changing model or q definitions.",
+  "forbidden_workarounds": [
+    "do not reconstruct individual GPS tracks from Bird Migration Explorer visualizations",
+    "do not substitute another snow-goose population after seeing availability",
+    "do not weaken the estimability gate because access is blocked",
+    "do not infer cue-uptake outcome from published aggregate maps"
+  ]
+}
