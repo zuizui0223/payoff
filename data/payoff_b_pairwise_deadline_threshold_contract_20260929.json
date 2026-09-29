@@ -56,5 +56,11 @@
     "exact_threshold": "q_wait(I) = (max(A,L)+E[D|I])/(A+L) when E[D|I] < R0",
     "posthoc_harshness_does_not_move_threshold_unless_predictable_before_commitment": true,
     "ex_post_reversal_without_irrationality_is_allowed": true
+  },
+  "inverse_validation": {
+    "identity": "D_revealed = q_wait*(A+L) - max(A,L)",
+    "role": "derive a model-implied deadline cost from an independently observed cue-use threshold",
+    "strongest_test": "compare D_revealed with a separately estimated or manipulated opportunity cost D",
+    "circularity_guard": "the focal cue-use observations used to estimate q_wait may not also define the independent D comparator"
   }
 }
