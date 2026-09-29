@@ -58,18 +58,22 @@ REQUIRED = {
 
 PRIMARY_FORMULA = (
     "log_transit_duration_days ~ "
-    "local_temp_anom3 * z_predictive_connectivity "
+    "local_temp_anom3 "
+    "+ local_temp_anom3:z_predictive_connectivity "
     "+ z_wait_days + day_of_year_within_context "
     "+ wind_support + precipitation + same_day_temp_anom "
-    "+ C(route_segment) + C(year)"
+    "+ C(route_segment) + C(context_year_cell)"
 )
 
 SECONDARY_FORMULA = (
     "log_transit_duration_days ~ "
-    "local_temp_anom3 * z_predictive_connectivity * z_wait_days "
+    "local_temp_anom3 * z_wait_days "
+    "+ local_temp_anom3:z_predictive_connectivity "
+    "+ z_wait_days:z_predictive_connectivity "
+    "+ local_temp_anom3:z_predictive_connectivity:z_wait_days "
     "+ day_of_year_within_context "
     "+ wind_support + precipitation + same_day_temp_anom "
-    "+ C(route_segment) + C(year)"
+    "+ C(route_segment) + C(context_year_cell)"
 )
 
 
@@ -329,10 +333,11 @@ def main():
 
                 skip_formula = (
                     "skip_next_context ~ "
-                    "local_temp_anom3 * z_predictive_connectivity "
+                    "local_temp_anom3 "
+                    "+ local_temp_anom3:z_predictive_connectivity "
                     "+ z_wait_days + day_of_year_within_context "
                     "+ wind_support + precipitation + same_day_temp_anom "
-                    "+ C(origin_context) + C(year)"
+                    "+ C(context_year_cell)"
                 )
                 skip_fit = smf.glm(
                     skip_formula,
