@@ -41,15 +41,17 @@
     "current_cue": "local 3-day mean 2-m temperature anomaly ending on the decision day",
     "immediate_weather_controls": [
       "wind support along next-route bearing",
-      "precipitation",
-      "same-day temperature anomaly"
-    ]
+      "precipitation"
+    ],
+    "same_day_temperature_anomaly": "retained as an audit/diagnostic column because it is a component of local_temp_anom3; not entered separately in the frozen primary formula"
   },
   "primary_model": {
     "formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + C(context) + C(year)",
     "uncertainty": "cluster by individual; if supported by software, two-way sensitivity by individual and year",
     "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
-    "directional_prediction": "positive on logit departure hazard: warm cues promote departure more strongly where they historically predict later warm/early Bylot conditions"
+    "directional_prediction": "positive on logit departure hazard: warm cues promote departure more strongly where they historically predict later warm/early Bylot conditions",
+    "formula_authoritative": true,
+    "formula_resolution_note": "The explicit frozen formula is authoritative over the earlier prose list of controls; same-day temperature anomaly is not an additional primary covariate."
   },
   "estimability_gate": {
     "minimum_individuals": 30,
