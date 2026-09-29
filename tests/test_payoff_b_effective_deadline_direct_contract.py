@@ -34,6 +34,19 @@ def test_effective_deadline_contract_supersedes_raw_delay_contract():
         "full_timing_recovery_for_zero_D_eff_when_direct_J_may_remain"
     ]
     assert "D_eff_revealed" in contract["inverse_validation"]["identity"]
+    assert contract["forbidden_substitutions"][
+        "fixed_D_eff_closed_form_when_focal_cue_changes_compensation"
+    ]
+    assert contract["forbidden_substitutions"][
+        "constant_window_width_identity_when_D_eff_is_q_dependent"
+    ]
+    assert contract["forbidden_substitutions"][
+        "inverse_D_eff_as_constant_when_focal_cue_changes_compensation"
+    ]
+    assert "dual_use_required_when" in contract["focal_cue_exogeneity_gate"]
+    assert "src/dual_use_information_value.py" == (
+        contract["focal_cue_exogeneity_gate"]["implementation"]
+    )
 
 
 def test_direct_test_document_defines_direct_plus_compensated_cost():
@@ -46,6 +59,10 @@ def test_direct_test_document_defines_direct_plus_compensated_cost():
     assert "mechanistic decomposition" in text
     assert "complete timing recovery does not imply" in text
     assert "src/compensated_information_deadline.py" in text
+    assert "## Focal-cue exogeneity gate" in text
+    assert "D_{eff}=D_{eff}(q)" in text
+    assert "src/dual_use_information_value.py" in text
+    assert "effective cost at the observed threshold" in text
 
 
 def test_manuscript_natural_test_uses_effective_cost_gap():
