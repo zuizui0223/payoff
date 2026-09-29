@@ -375,6 +375,58 @@ This yields a new empirical distinction:
 
 They should not be collapsed into one axis.
 
+### General pairwise headroom
+
+Allow the two actors to differ in both direct waiting cost (J_i) and
+compensation severity (G_i). Whenever (J_i<R_{A0}),
+
+[
+oxed{
+q_i
+=
+1-H_i,
+qquad
+H_i
+=
+rac{R_{A0}-J_i}{S_A+G_i}.
+}
+]
+
+The dimensionless quantity (H_i) is the actor's **information-waiting
+headroom**: residual direct fitness room before waiting becomes impossible,
+scaled by the total action-plus-compensation information problem.
+
+When both actors have finite thresholds,
+
+[
+oxed{
+Delta q
+=
+|H_1-H_2|.
+}
+]
+
+This unifies the two sources of threshold heterogeneity. Larger (J_i)
+shrinks headroom through the numerator; larger (G_i) shrinks it through the
+denominator.
+
+A useful consequence is an **iso-threshold contour**:
+
+[
+rac{R_{A0}-J_1}{S_A+G_1}
+=
+rac{R_{A0}-J_2}{S_A+G_2}.
+]
+
+Different direct waiting costs and different compensation problems can exactly
+offset, producing identical information-use thresholds. Conversely, one actor
+can have lower direct waiting cost yet a higher threshold if it faces a
+sufficiently larger downstream compensation problem.
+
+If (J_ige R_{A0}), actor (i) never waits even at perfect dual-use
+information. A pair with one finite threshold and one such actor therefore has
+persistent asymmetric uptake through (q=1).
+
 ## Relationship to effective deadline cost
 
 The theorem can also be written
