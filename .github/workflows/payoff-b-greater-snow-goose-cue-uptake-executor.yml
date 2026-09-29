@@ -1,5 +1,9 @@
 name: PAYOFF-B greater snow goose cue uptake executor
 
+concurrency:
+  group: payoff-b-greater-snow-goose-cue-uptake-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
