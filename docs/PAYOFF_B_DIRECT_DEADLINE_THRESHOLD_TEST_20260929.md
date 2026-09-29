@@ -1,7 +1,9 @@
 # PAYOFF-B direct empirical test of the information-deadline theorem
 
 Date: **2026-09-29**  
-Status: **prospective measurement contract; no current natural dataset qualifies as a direct test**
+Status: **v2 prospective measurement contract; no current natural dataset qualifies as a direct test**  
+Contract: `data/payoff_b_effective_deadline_threshold_contract_v2_20260929.json`  
+Provenance: v1 raw-`D` contract retained unchanged as the pre-compensation specification.
 
 ## What is already verified
 
