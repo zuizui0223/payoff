@@ -105,6 +105,22 @@ q_{wait}(D)=
 
 If (D\ge R_0), even perfect information is not worth waiting for.
 
+If waiting cost depends on an unresolved future **deadline state** (H), let
+(\mathcal I) be the information available at commitment. Under the same
+expected-loss assumptions, replace fixed (D) by
+
+[
+\bar D(\mathcal I)=E[D(H)\mid\mathcal I],
+\qquad
+q_{wait}(\mathcal I)
+=
+\frac{\max(A,L)+\bar D(\mathcal I)}{A+L}.
+]
+
+Thus later harshness changes the rational threshold only insofar as it was
+predictable at commitment; an ex-ante optimal decision can still look wrong
+ex post.
+
 ### 2.2 Better information can transiently increase mismatch
 
 Consider two actors facing the same future cue and the same state-dependent losses but different waiting costs
@@ -369,7 +385,7 @@ of its interaction weight already attached to informed neighbours. Its gain
 from adopting is
 
 [
-oxed{
+\boxed{
 H_i(S)
 =
 R_i-D_i+pI_i[2a_i(S)-1].
@@ -380,10 +396,10 @@ Thus actor (i) follows the informed state when
 
 [
 a_i(S)>
-rac12
+\frac12
 left[
-1-rac{R_i-D_i}{pI_i}
-ight].
+1-\frac{R_i-D_i}{pI_i}
+\right].
 ]
 
 Because non-negative network weights make (a_i(S)) non-decreasing as adoption
@@ -395,17 +411,17 @@ seeds,
 [
 H(k)=
 R-D+
-pIrac{2k-N+1}{N-1}.
+pI\frac{2k-N+1}{N-1}.
 ]
 
 The strict seed threshold is therefore the smallest integer satisfying
 
 [
 k>
-rac{N-1}{2}
+\frac{N-1}{2}
 left[
-1-rac{R-D}{pI}
-ight].
+1-\frac{R-D}{pI}
+\right].
 ]
 
 The canonical three-species example produces a sharp topology contrast.
@@ -570,11 +586,11 @@ The exact desynchronization-width identity
 
 gives a direct comparative prediction.
 
-Greater heterogeneity in decision deadlines widens the range of cue qualities over which interacting species use information asymmetrically. For a fixed delay-cost difference, larger costs of making the wrong seasonal decision compress that interval because both actors begin valuing information at more similar cue reliabilities.
+Greater deadline heterogeneity widens asynchronous cue uptake. For a fixed delay-cost difference, larger timing-error costs compress that interval because both actors value information sooner.
 
-The prediction is deliberately not “information is bad.” At low cue quality both actors ignore the cue. At high enough cue quality both use it. The mismatch peak occurs during the transition between those conventions.
+The prediction is transitional, not that information is harmful: both actors ignore poor cues and use sufficiently reliable cues, with mismatch concentrated between those regimes.
 
-Waiting costs may also vary among environmental states. If future-state costs are \(D_N\) and \(D_E\), the same expected-loss model replaces \(D\) by \(\bar D=(1-\pi)D_N+\pi D_E\); for two actors, the asynchronous-window width becomes \(|\bar D_2-\bar D_1|/(A+L)\). Environmental change can therefore shift or widen information-use thresholds through deadline costs even when cue reliability is unchanged. Greater-snow-goose captivity experiments motivate, but do not test, this extension because reproductive consequences varied among breeding contexts and captivity conflates elapsed time with capture and confinement stress (Legagneux et al., 2012; Grandmont et al., 2023).
+A second predictability channel arises when the future cost of waiting is itself uncertain. The relevant term is \(E[D_i(H)\mid\mathcal I_i]\), giving two-actor window width \(|E[D_2\mid\mathcal I_2]-E[D_1\mid\mathcal I_1]|/(A+L)\). Greater-snow-goose experiments motivate this hidden-deadline extension because perturbation costs vary among breeding contexts while southern conditions weakly predict later Arctic conditions; they do not estimate this conditional cost or an information-use threshold (Legagneux et al., 2012; Grandmont et al., 2023; Reséndiz-Infante & Gauthier, 2024).
 
 ### 4.3 Environmental recovery can precede ecological recovery
 
@@ -734,6 +750,7 @@ The framework therefore predicts that climate adaptation can fail not only becau
 - Kharouba HM, Wolkovich EM (2020) Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. DOI: 10.1038/s41558-020-0752-x.
 - Kölzsch A et al. (2015) Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore. *Journal of Animal Ecology* 84:272–283. DOI: 10.1111/1365-2656.12281.
 - Ortega AC, Aikens EO, Merkle JA, Monteith KL, Kauffman MJ (2023) Migrating mule deer compensate en route for phenological mismatches. *Nature Communications* 14:2008. DOI: 10.1038/s41467-023-37750-z.
+- Reséndiz-Infante C, Gauthier G (2024) Can arctic migrants adjust their phenology based on temperature encountered during the spring migration? The case of the greater snow goose. *Frontiers in Bird Science* 3:1307628. DOI: 10.3389/fbirs.2024.1307628.
 - Samplonius JM, Both C (2017) Competitor phenology as a social cue in breeding site selection. *Journal of Animal Ecology* 86:615–623. DOI: 10.1111/1365-2656.12640.
 - Samplonius JM, Bartošová L, Burgess MD, Bushuev AV, Eeva T, Ivankina EV, Kerimov AB, Krams I, Laaksonen T, Mägi M, Mänd R, Potti J, Török J, Trnka M, Visser ME, Zang H, Both C (2018) Phenological sensitivity to climate change is higher in resident than in migrant bird populations among European cavity breeders. *Global Change Biology* 24:3780–3790. DOI: 10.1111/gcb.14160.
 - Tomotani BM, Gienapp P, de la Hera I, Terpstra M, Pulido F, Visser ME (2021) Integrating causal and evolutionary analysis of life-history evolution: Arrival date in a long-distant migrant. *Frontiers in Ecology and Evolution* 9:630823. DOI: 10.3389/fevo.2021.630823.
