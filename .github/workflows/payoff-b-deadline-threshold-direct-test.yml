@@ -8,9 +8,11 @@ on:
       - 'src/deadline_threshold_empirics.py'
       - 'src/endogenous_information_timing.py'
       - 'src/greater_snow_goose_information_bridge.py'
+      - 'src/state_dependent_information_deadline.py'
       - 'tests/test_deadline_threshold_empirics.py'
       - 'tests/test_endogenous_information_timing.py'
       - 'tests/test_greater_snow_goose_information_bridge.py'
+      - 'tests/test_state_dependent_information_deadline.py'
       - 'data/payoff_b_pairwise_deadline_threshold_contract_20260929.json'
       - 'data/payoff_b_greater_snow_goose_bridge_inputs_20260929.json'
       - '.github/workflows/payoff-b-deadline-threshold-direct-test.yml'
@@ -30,3 +32,4 @@ jobs:
           tests/test_endogenous_information_timing.py
           tests/test_deadline_threshold_empirics.py
           tests/test_greater_snow_goose_information_bridge.py
+          tests/test_state_dependent_information_deadline.py
