@@ -5,6 +5,8 @@ from src.deadline_threshold_empirics import (
     interval_contains_prediction,
     predicted_information_use,
     predicted_pair_asynchrony,
+    revealed_delay_cost,
+    revealed_delay_cost_interval,
     threshold_prediction,
 )
 
@@ -93,3 +95,34 @@ def test_never_wait_prediction_rejects_any_observed_use():
         inferred_with_use,
         prediction.wait_threshold,
     )
+
+
+def test_inverse_theorem_recovers_canonical_delay_costs():
+    assert revealed_delay_cost(0.4, 2.0, 1.0, 0.8125) == pytest.approx(0.10)
+    assert revealed_delay_cost(0.4, 2.0, 1.0, 0.9375) == pytest.approx(0.30)
+
+
+def test_threshold_bracket_maps_to_revealed_delay_cost_bracket():
+    inferred = infer_deterministic_threshold_interval(
+        [(0.80, False), (0.81, False), (0.82, True), (0.90, True)]
+    )
+    costs = revealed_delay_cost_interval(0.4, 2.0, 1.0, inferred)
+    assert costs.compatible_with_nonnegative_cost
+    assert costs.lower_inclusive == pytest.approx(0.096)
+    assert costs.upper_exclusive == pytest.approx(0.112)
+    assert costs.lower_inclusive <= 0.10 < costs.upper_exclusive
+
+
+def test_revealed_cost_rejects_threshold_below_actionable_information():
+    with pytest.raises(ValueError):
+        revealed_delay_cost(0.4, 2.0, 1.0, 0.70)
+
+
+def test_nonmonotone_threshold_has_no_revealed_cost_interval():
+    inferred = infer_deterministic_threshold_interval(
+        [(0.70, False), (0.80, True), (0.90, False)]
+    )
+    costs = revealed_delay_cost_interval(0.4, 2.0, 1.0, inferred)
+    assert not costs.compatible_with_nonnegative_cost
+    assert costs.lower_inclusive is None
+    assert costs.upper_exclusive is None
