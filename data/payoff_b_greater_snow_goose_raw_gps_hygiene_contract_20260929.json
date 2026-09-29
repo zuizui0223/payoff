@@ -1,0 +1,59 @@
+{
+  "contract_id": "payoff_b_greater_snow_goose_raw_gps_hygiene_v1_20260929",
+  "date": "2026-09-29",
+  "status": "PREOUTCOME_INPUT_HYGIENE_FROZEN_BEFORE_EVENT_ACCESS",
+  "source": {
+    "provider": "Movebank",
+    "study_id": "1442516400",
+    "sensor_type_id": 653,
+    "years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  "required_raw_columns": [
+    "timestamp",
+    "location_long",
+    "location_lat",
+    "individual_id",
+    "individual_local_identifier",
+    "tag_id",
+    "tag_local_identifier",
+    "visible"
+  ],
+  "primary_rules": [
+    "retain only GPS sensor type 653 rows requested by the frozen materializer",
+    "parse timestamp as UTC and preserve sub-second ordering",
+    "retain only rows whose Movebank visible flag is explicitly true after case-insensitive normalization",
+    "require finite longitude and latitude within [-180,180] and [-90,90]",
+    "collapse exact duplicate rows across all required raw columns and audit their count",
+    "if the same individual_id and timestamp occur with non-identical required raw fields, fail closed for that individual-year; do not choose one record",
+    "sort by individual_id then timestamp before movepp",
+    "do not interpolate, regularize, smooth, or resample locations before compute_step_speed",
+    "do not apply a post-hoc speed threshold or manual outlier filter beyond the source-managed Movebank visible flag",
+    "do not trim tracks to the three route regions before movepp phase segmentation",
+    "retain full calendar-year movement context; route-region assignment occurs only after automatic staging habitats are defined"
+  ],
+  "audit_counts": [
+    "raw rows",
+    "visible=true rows retained",
+    "visible=false rows excluded",
+    "exact duplicate rows collapsed",
+    "invalid coordinate rows",
+    "conflicting individual-timestamp groups",
+    "individuals retained per year"
+  ],
+  "invalid_coordinate_rule": "fail closed if any visible=true GPS row has a nonfinite or out-of-range coordinate; do not silently drop",
+  "conflicting_duplicate_rule": "fail closed and report identifiers/timestamps without choosing a row",
+  "missing_visible_rule": "fail closed; the materializer requires the visible column",
+  "rationale": "Movebank states that visible summarizes data-owner outlier management and recommends requesting it so flagged events can be excluded; fixing this before access prevents result-dependent track cleaning.",
+  "forbidden": [
+    "no visual track cleaning after seeing cue-uptake results",
+    "no climate-informed movement filtering",
+    "no per-year tuning of cleaning rules",
+    "no replacement of visible=false filtering by a custom speed cutoff"
+  ]
+}
