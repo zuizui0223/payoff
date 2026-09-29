@@ -30,7 +30,7 @@ The key theoretical distinction is therefore:
 
 Let the realised opportunity cost of waiting be (D(H)), where (H) is a
 future deadline state. At the moment of commitment, the actor has information
-set (\\mathcal I) but does not necessarily know (H).
+set (\mathcal I) but does not necessarily know (H).
 
 Define
 
@@ -55,7 +55,7 @@ Therefore the exact waiting rule remains
 V(q)>\bar D(\mathcal I).
 ]
 
-If (\ar D(\mathcal I)<R_0), the threshold is
+If (\bar D(\mathcal I)<R_0), the threshold is
 
 [
 \boxed{
