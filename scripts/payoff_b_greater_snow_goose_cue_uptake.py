@@ -70,6 +70,7 @@ def main():
     import numpy as np
     import pandas as pd
     import statsmodels.formula.api as smf
+    from scipy.stats import t as student_t
 
     day = pd.read_csv(args.day_risk)
     conn = pd.read_csv(args.connectivity)
@@ -141,13 +142,39 @@ def main():
         raise ValueError("predictive connectivity violates pre-outcome history rule")
 
     data["q_bridge"] = data["connectivity_rho"].map(gaussian_binary_q)
-    rho_sd = float(data["connectivity_rho"].std(ddof=0))
+    context_year = (
+        data[["context", "year", "connectivity_rho"]]
+        .drop_duplicates()
+        .copy()
+    )
+    context_year["context_year"] = (
+        context_year["context"].astype(str)
+        + "::"
+        + context_year["year"].astype(str)
+    )
+    rho_sd = float(context_year["connectivity_rho"].std(ddof=0))
+    within_context_sds = []
+    for context in sorted(expected_contexts):
+        values = context_year.loc[
+            context_year["context"].astype(str) == context,
+            "connectivity_rho",
+        ].astype(float)
+        within_context_sds.append(
+            float(values.std(ddof=0)) if len(values) >= 2 else 0.0
+        )
+    minimum_within_context_sd = min(within_context_sds)
+
+    data["context_year"] = (
+        data["context"].astype(str) + "::" + data["year"].astype(str)
+    )
     gate = evaluate_estimability(
         individuals=int(data["individual_id"].nunique()),
         years=int(data["year"].nunique()),
         contexts=int(data["context"].nunique()),
         departure_events=int(data["depart_next_24h"].sum()),
+        context_years=int(context_year["context_year"].nunique()),
         predictive_connectivity_sd=rho_sd,
+        minimum_within_context_connectivity_sd=minimum_within_context_sd,
     )
 
     result = {
@@ -160,7 +187,11 @@ def main():
             "years": gate.years,
             "contexts": gate.contexts,
             "departure_events": gate.departure_events,
+            "context_years": gate.context_years,
             "predictive_connectivity_sd": gate.predictive_connectivity_sd,
+            "minimum_within_context_connectivity_sd": (
+                gate.minimum_within_context_connectivity_sd
+            ),
         },
         "claim_boundary": [
             "behavioral cue-uptake proxy only",
@@ -189,11 +220,21 @@ def main():
     )
     term = "local_temp_anom3:z_predictive_connectivity"
     try:
-        fit = smf.logit(formula, data=data).fit(
+        base_fit = smf.logit(formula, data=data).fit(
+            disp=False,
+            maxiter=200,
+        )
+        fit_individual = smf.logit(formula, data=data).fit(
             disp=False,
             maxiter=200,
             cov_type="cluster",
             cov_kwds={"groups": data["individual_id"].astype(str)},
+        )
+        fit_context_year = smf.logit(formula, data=data).fit(
+            disp=False,
+            maxiter=200,
+            cov_type="cluster",
+            cov_kwds={"groups": data["context_year"].astype(str)},
         )
     except Exception as exc:
         result["status"] = "PRIMARY_MODEL_FIT_FAILED"
@@ -207,22 +248,53 @@ def main():
         args.output.write_text(json.dumps(result, indent=2) + "\n")
         return
 
-    beta = float(fit.params[term])
-    se = float(fit.bse[term])
-    p = float(fit.pvalues[term])
-    ci = [beta - 1.96 * se, beta + 1.96 * se]
+    beta = float(base_fit.params[term])
+    n_individual_clusters = int(data["individual_id"].astype(str).nunique())
+    n_context_year_clusters = int(data["context_year"].astype(str).nunique())
+
+    def cluster_summary(fit, clusters):
+        se = float(fit.bse[term])
+        df = int(clusters) - 1
+        critical = float(student_t.ppf(0.975, df))
+        statistic = beta / se
+        p_value = float(2.0 * student_t.sf(abs(statistic), df))
+        return {
+            "clusters": int(clusters),
+            "df": df,
+            "standard_error": se,
+            "critical_t_95": critical,
+            "ci_low_95": beta - critical * se,
+            "ci_high_95": beta + critical * se,
+            "p_value_two_sided": p_value,
+        }
+
+    individual_inference = cluster_summary(
+        fit_individual,
+        n_individual_clusters,
+    )
+    context_year_inference = cluster_summary(
+        fit_context_year,
+        n_context_year_clusters,
+    )
+    supported = (
+        beta > 0.0
+        and individual_inference["ci_low_95"] > 0.0
+        and context_year_inference["ci_low_95"] > 0.0
+    )
 
     result["primary"] = {
         "formula": formula,
         "term": term,
         "estimate": beta,
-        "cluster_se": se,
-        "ci_low_95": ci[0],
-        "ci_high_95": ci[1],
-        "p_value_two_sided": p,
         "registered_direction": "positive",
+        "individual_cluster": individual_inference,
+        "context_year_cluster": context_year_inference,
+        "support_rule": (
+            "positive estimate with positive Student-t 95% CI lower bound "
+            "under both individual and context-year clustering"
+        ),
         "support_status": (
-            "SUPPORTED" if beta > 0 and ci[0] > 0 else "NOT_SUPPORTED"
+            "SUPPORTED" if supported else "NOT_SUPPORTED"
         ),
     }
 
