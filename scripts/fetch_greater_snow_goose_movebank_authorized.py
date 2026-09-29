@@ -32,6 +32,7 @@ import requests
 ENDPOINT = "https://www.movebank.org/movebank/service/direct-read"
 DEFAULT_STUDY_ID = "1442516400"
 GPS_SENSOR_TYPE_ID = "653"
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 EVENT_ATTRIBUTES = [
     "timestamp",
@@ -105,6 +106,21 @@ def parse_csv_rows(text: str) -> list[dict[str, str]]:
     if not text.strip():
         return []
     return list(csv.DictReader(io.StringIO(text)))
+
+
+def ensure_output_outside_repository(output_dir: Path) -> Path:
+    """Refuse to place raw or licensed Movebank material inside the git tree."""
+
+    resolved = output_dir.expanduser().resolve()
+    root = REPO_ROOT.resolve()
+    try:
+        resolved.relative_to(root)
+    except ValueError:
+        return resolved
+    raise ValueError(
+        "--output-dir must be outside the PAYOFF-B repository so raw "
+        "Movebank material cannot be accidentally committed."
+    )
 
 
 def require_credentials() -> tuple[str, str]:
@@ -217,8 +233,9 @@ def main():
         raise ValueError("--max-individuals must be >= 1")
 
     auth = require_credentials()
-    args.output_dir.mkdir(parents=True, exist_ok=True)
-    manifest_path = args.output_dir / "movebank_fetch_manifest.json"
+    output_dir = ensure_output_outside_repository(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = output_dir / "movebank_fetch_manifest.json"
 
     session = requests.Session()
     meta, status_code = study_metadata(
@@ -278,7 +295,7 @@ def main():
     if args.max_individuals is not None:
         chosen = chosen[: args.max_individuals]
 
-    event_dir = args.output_dir / "gps_events_by_individual"
+    event_dir = output_dir / "gps_events_by_individual"
     event_dir.mkdir(parents=True, exist_ok=True)
 
     files = []
@@ -316,7 +333,7 @@ def main():
             )
 
         if has_license_terms(response.text):
-            terms_path = args.output_dir / "movebank_license_terms.html"
+            terms_path = output_dir / "movebank_license_terms.html"
             terms_path.write_text(response.text, encoding="utf-8")
             manifest["status"] = "LICENSE_TERMS_ACCEPTANCE_REQUIRED"
             manifest["license_terms_path"] = str(terms_path)
