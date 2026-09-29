@@ -15,10 +15,10 @@
     "Baffin -> Bylot"
   ],
   "primary_response": "log transit_duration_days from departure of origin context to first entry into the next observed downstream frozen route context; skipped intermediate contexts remain valid compensation outcomes",
-  "primary_formula": "log_transit_duration_days ~ local_temp_anom3 * z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(year)",
+  "primary_formula": "log_transit_duration_days ~ local_temp_anom3 + local_temp_anom3:z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(context_year_cell)",
   "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
   "directional_prediction": "negative; warmer cues are followed by shorter transit when those cues historically contain more information about later Bylot conditions",
-  "uncertainty": "cluster-robust by individual; support additionally requires leave-one-context-year-out sign stability across at least 12 origin-context x year cells",
+  "uncertainty": "cluster-robust by individual; context-year fixed intercepts absorb all origin-context x year level mean differences; support additionally requires leave-one-context-year-out sign stability across at least 12 origin-context x year cells",
   "estimability_gate": {
     "minimum_individuals": 30,
     "minimum_years": 4,
@@ -29,7 +29,7 @@
     "minimum_context_year_cells": 12
   },
   "secondary": {
-    "formula": "log_transit_duration_days ~ local_temp_anom3 * z_predictive_connectivity * z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(year)",
+    "formula": "log_transit_duration_days ~ local_temp_anom3 * z_wait_days + local_temp_anom3:z_predictive_connectivity + z_wait_days:z_predictive_connectivity + local_temp_anom3:z_predictive_connectivity:z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(context_year_cell)",
     "focal_term": "local_temp_anom3:z_predictive_connectivity:z_wait_days",
     "directional_prediction": "negative",
     "role": "diagnostic that cue-linked transit compression strengthens after longer waiting; not required for primary classification"
@@ -54,7 +54,7 @@
       "Nunavik"
     ],
     "response": "skip_next_context = 1 when the next observed downstream frozen context is more than one route rank ahead",
-    "formula": "skip_next_context ~ local_temp_anom3 * z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(origin_context) + C(year)",
+    "formula": "skip_next_context ~ local_temp_anom3 + local_temp_anom3:z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(context_year_cell)",
     "focal_term": "local_temp_anom3:z_predictive_connectivity",
     "directional_prediction": "positive",
     "role": "secondary actuator diagnostic; route skipping is retained rather than excluded from the transit-duration analysis"
@@ -71,6 +71,13 @@
       "date": "2026-09-30",
       "issue": "predictive connectivity varies at the route-context x year level, so individual-clustered uncertainty alone could leave a supported interaction dependent on one context-year cell",
       "resolution": "require at least 12 context-year cells and require the registered interaction estimate to remain negative in every leave-one-context-year-out refit before classifying dual-use behavioral support",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-30",
+      "issue": "predictive connectivity is constant within origin-context x year cells; route-segment plus year fixed effects do not fully absorb arbitrary context-year mean differences that could correlate with q",
+      "resolution": "replace the q main-effect parameterization with context-year fixed intercepts and identify the focal local-temperature x q interaction from within-cell temperature variation and between-cell differences in temperature slopes; retain route-segment fixed effects for destination-distance heterogeneity",
       "outcome_data_opened": false,
       "result_dependent": false
     }
