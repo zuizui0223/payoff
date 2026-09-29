@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - analysis/payoff-b-deadline-threshold-direct-test-20260929
+      - analysis/payoff-b-deadline-threshold-execution-20260929
     paths:
       - 'src/deadline_threshold_empirics.py'
       - 'src/endogenous_information_timing.py'
