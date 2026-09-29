@@ -1,0 +1,130 @@
+{
+  "frozen_date": "2026-09-29",
+  "status": "PUBLISHED_INPUT_RECONSTRUCTION_NO_RAW_DATA",
+  "system": "greater snow goose (Anser caerulescens atlanticus), St. Lawrence spring staging to Bylot Island breeding",
+  "perturbation_source": {
+    "citation": "Legagneux et al. 2012, Proceedings of the Royal Society B",
+    "doi": "10.1098/rspb.2011.1351",
+    "interpretation_boundary": "captivity duration is an experimental perturbation-duration axis combining delay and captivity/handling stress; it is not a pure measurement of PAYOFF-B opportunity cost D",
+    "logistic_reproductive_success": [
+      {
+        "year": 2007,
+        "breeding_condition": "average",
+        "intercept": -1.8,
+        "days_coefficient": -0.37,
+        "coefficient_se": 0.18,
+        "p_value": 0.04
+      },
+      {
+        "year": 2008,
+        "breeding_condition": "highly_favourable",
+        "intercept": -1.07,
+        "days_coefficient": -0.03,
+        "coefficient_se": 0.11,
+        "p_value": 0.78
+      },
+      {
+        "year": 2009,
+        "breeding_condition": "unfavourable",
+        "intercept": -1.37,
+        "days_coefficient": -0.38,
+        "coefficient_se": 0.13,
+        "p_value": 0.01
+      }
+    ]
+  },
+  "breeding_propensity_source": {
+    "citation": "Grandmont et al. 2023, Functional Ecology",
+    "doi": "10.1111/1365-2435.14256",
+    "dryad_doi": "10.5061/dryad.cjsxksn6t",
+    "findings": [
+      "breeding-propensity proxies decreased with time spent in captivity",
+      "among birds detected on the breeding grounds, arrival date, laying date, clutch size and nesting success were not detectably related to captivity duration",
+      "the strongest population-level breeding suppression occurred in 2009, a year with particularly unfavourable breeding-ground conditions"
+    ]
+  },
+  "information_source": {
+    "citation": "Resendiz-Infante & Gauthier 2024, Frontiers in Bird Science",
+    "doi": "10.3389/fbirs.2024.1307628",
+    "period": "1979-2018",
+    "gaussian_binary_bridge": "q = 0.5 + asin(rho)/pi; secondary model-conditional mapping only",
+    "future_temperature_correlations": [
+      {
+        "origin": "St. Lawrence",
+        "origin_window": "1 Apr-15 May",
+        "destination": "Bylot",
+        "destination_window": "30 May-15 Jun",
+        "rho": 0.03,
+        "p_value": 0.835
+      },
+      {
+        "origin": "St. Lawrence",
+        "origin_window": "1-15 May",
+        "destination": "Bylot",
+        "destination_window": "30 May-15 Jun",
+        "rho": 0.25,
+        "p_value": 0.116
+      },
+      {
+        "origin": "Nunavik",
+        "origin_window": "10-31 May",
+        "destination": "Bylot",
+        "destination_window": "30 May-15 Jun",
+        "rho": 0.11,
+        "p_value": 0.501
+      },
+      {
+        "origin": "Baffin Island",
+        "origin_window": "20 May-5 Jun",
+        "destination": "Bylot",
+        "destination_window": "30 May-15 Jun",
+        "rho": 0.35,
+        "p_value": 0.029
+      }
+    ],
+    "next_stage_correlations": [
+      {
+        "origin": "St. Lawrence",
+        "origin_window": "1 Apr-15 May",
+        "destination": "Nunavik",
+        "destination_window": "10-31 May",
+        "rho": 0.37,
+        "p_value": 0.019
+      },
+      {
+        "origin": "St. Lawrence",
+        "origin_window": "1-15 May",
+        "destination": "Nunavik",
+        "destination_window": "10-31 May",
+        "rho": 0.28,
+        "p_value": 0.084
+      },
+      {
+        "origin": "Nunavik",
+        "origin_window": "10-31 May",
+        "destination": "Baffin Island",
+        "destination_window": "20 May-5 Jun",
+        "rho": 0.35,
+        "p_value": 0.026
+      },
+      {
+        "origin": "Baffin Island",
+        "origin_window": "20 May-5 Jun",
+        "destination": "Bylot",
+        "destination_window": "30 May-15 Jun",
+        "rho": 0.35,
+        "p_value": 0.029
+      }
+    ]
+  },
+  "movement_source": {
+    "study": "Greater snow goose migration",
+    "movebank_study_id": "1442516400",
+    "public_summary": {
+      "years": "2019-2023",
+      "animals": 75,
+      "sensor": "GPS"
+    },
+    "role": "prospective actor-level movement source; no cue-use threshold outcome opened in this branch"
+  }
+}
