@@ -1,6 +1,7 @@
 import pytest
 
 from scripts.fetch_greater_snow_goose_movebank_authorized import (
+    ensure_output_outside_repository,
     has_license_terms,
     parse_csv_rows,
     safe_file_stem,
@@ -49,3 +50,17 @@ def test_parse_csv_rows():
 def test_safe_file_stem():
     assert safe_file_stem("Bird 12/A", "99") == "Bird_12_A"
     assert safe_file_stem("", "99") == "individual_99"
+
+
+def test_output_directory_must_be_outside_repository(tmp_path, monkeypatch):
+    import scripts.fetch_greater_snow_goose_movebank_authorized as fetch
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    outside = tmp_path / "private"
+    monkeypatch.setattr(fetch, "REPO_ROOT", repo)
+
+    assert ensure_output_outside_repository(outside) == outside.resolve()
+
+    with pytest.raises(ValueError, match="outside the PAYOFF-B repository"):
+        ensure_output_outside_repository(repo / "raw_movebank")
