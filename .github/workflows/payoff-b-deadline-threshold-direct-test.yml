@@ -1,0 +1,24 @@
+name: PAYOFF-B direct deadline-threshold bridge
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-deadline-threshold-direct-test-20260929
+    paths:
+      - 'src/deadline_threshold_empirics.py'
+      - 'src/endogenous_information_timing.py'
+      - 'tests/test_deadline_threshold_empirics.py'
+      - 'tests/test_endogenous_information_timing.py'
+      - '.github/workflows/payoff-b-deadline-threshold-direct-test.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip pytest
+      - run: python -m pytest -q tests/test_endogenous_information_timing.py tests/test_deadline_threshold_empirics.py
