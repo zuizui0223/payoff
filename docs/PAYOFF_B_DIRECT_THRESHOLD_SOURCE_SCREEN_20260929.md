@@ -10,7 +10,7 @@ A direct natural test of the pairwise information-deadline mechanism requires al
 | quantity | required role |
 |---|---|
 | pre-commitment cue reliability q | environmental information quality |
-| delay/opportunity cost D_i | independent cost of postponing commitment |
+| effective delay/opportunity cost D_eff,i | total fitness cost of postponing commitment: direct nonrecoverable waiting cost plus optimally compensated downstream timing cost |
 | C_F, C_M, pi or equivalent state-loss scale | converts D_i to predicted q_i |
 | observed cue use | distinguishes commit-now from wait/use-cue |
 | repeated q support | must cross below, within and above the predicted asynchronous window |
@@ -57,13 +57,59 @@ breeding-site predictor.
 This supplies a source-backed **pre-commitment information-quality gradient**
 along the same ecological system.
 
+### Independent compensation evidence
+
+Bêty, Giroux & Gauthier (2004; DOI 10.1007/s00265-004-0840-3)
+radio-tracked female greater snow geese between southern Quebec and Bylot
+Island. Across all females, later departure was associated with shorter
+migration duration (Spearman r = -0.35), departure and arrival date were only
+weakly related (r = 0.14), and migration duration strongly tracked arrival
+(r = 0.81).
+
+This means raw departure delay cannot be substituted for the theorem's waiting
+cost. The relevant quantity is the fitness loss that remains after feasible
+downstream compensation:
+
+[
+D_{eff}=J(\delta)+\min_c[K(c)+M(\delta-c)].
+]
+
+The tracking study demonstrates the existence of compensation-like timing
+adjustment but does **not** identify (C), (K), (M), or numerical
+(D_{eff}).
+
+The captivity experiments add a complementary boundary. Longer captivity can
+reduce later breeding propensity or reproductive success, yet among females
+detected on the breeding grounds the published analyses do not show a clear
+captivity-duration shift in arrival or laying date. This is consistent with a
+direct carry-over-cost pathway (J(\delta)) that can remain even when downstream
+timing delay is small or compensated. It does **not** identify natural (J),
+because captivity adds handling, confinement and stress not intrinsic to simply
+waiting for environmental information.
+
+A second historical dataset from the same population adds a downstream
+buffering anchor (Bêty, Gauthier & Giroux 2003, *American Naturalist*,
+DOI 10.1086/375680). In radio-tracked females, lay date increased by only
+0.45 ± 0.09 days per one-day increase in relative arrival date after controlling
+for premigration body condition, while prelaying duration declined with later
+arrival (slope -0.53, R²=0.55). Thus residual arrival delay can be partly
+absorbed after reaching Bylot.
+
+This is retained as **phenomenological buffering evidence**, not a causal
+estimate of compensatory control. Correlations among sequential timing variables
+have a published methodological critique (Schroeder, Mitesser & Hinsch 2010,
+*American Naturalist*, DOI 10.1086/657275). The direct-test programme therefore
+does not multiply these slopes into a numerical (D_{eff}) without an
+independently specified causal fitness model.
+
+
 ### Why this still does not close the theorem empirically
 
 The 2024 study explicitly notes that individual migration chronology linked to
 subsequent reproductive performance exists only for few years and few
 individuals. The two source programmes therefore do not currently provide a
 dense actor-level series in which the same individuals experience measured q,
-an independently calibrated D, and repeated cue-use decisions spanning a switch
+an independently calibrated D_eff, and repeated cue-use decisions spanning a switch
 threshold.
 
 Qualification:
@@ -72,7 +118,8 @@ Qualification:
 - independently manipulated perturbation duration: **YES**
 - fitness consequence of perturbation duration: **YES**
 - q-like environmental predictability: **YES**
-- independent exact D in PAYOFF-B loss units: **NOT YET**
+- downstream compensation evidence: **YES**
+- independent exact D_eff in PAYOFF-B loss units: **NOT YET**
 - actor-level cue-use threshold: **NO**
 - repeated q support crossing q1 and q2: **NO**
 - direct asynchronous-use window: **NO**
@@ -82,7 +129,7 @@ Classification: **STRONGEST_COMPOSITE_D_LIKE_AND_Q_CANDIDATE_NOT_DIRECT_THRESHOL
 This candidate upgrades the source screen materially: the earlier problem was
 that no promising q system had an independent delay-cost anchor. Greater snow
 goose supplies a D-like perturbation axis and q-like predictability in one
-ecological lineage. The remaining bottlenecks are **clean information-waiting D identification**, **a prespecified mapping of the continuous two-sided fitness surface to binary C_F/C_M**, and **actor-level threshold identification**.
+ecological lineage. The remaining bottlenecks are **clean effective information-waiting D_eff identification after compensation**, **a prespecified mapping of the continuous two-sided fitness surface to binary C_F/C_M**, and **actor-level threshold identification**.
 
 ### Independent two-sided fitness-loss anchor
 
@@ -116,13 +163,34 @@ timing errors and waiting itself can carry large fitness costs. The remaining
 problem is identifying those quantities on the declared information-game scale
 and observing the cue-use switch.
 
+### Two valid D_eff identification routes
+
+A future direct test need not identify every component separately.
+
+**Total-effect route:** impose a biologically faithful information-waiting
+period, allow ordinary downstream compensation, and estimate the final fitness
+difference relative to immediate commitment:
+
+[
+D^{causal}_{eff}(\delta)
+=
+E[Y(0)]-E[Y(\delta,adapt)].
+]
+
+**Mechanistic route:** independently estimate direct waiting cost (J), raw
+delay, compensatory capacity/cost and residual timing loss, then reconstruct
+the optimized total.
+
+The current captivity experiments do not satisfy the total-effect route because
+the manipulation is not equivalent to natural information waiting. The
+historical timing correlations do not satisfy the mechanistic route because
+they do not identify causal compensation costs.
+
 ### Next gate for greater snow goose
 
 Before any threshold claim:
 
-1. use the published and/or Dryad captivity-duration data only as a
-   perturbation-cost calibration, and explicitly test whether any available
-   design can separate elapsed-time cost from captivity/handling stress;
+1. either design a biologically faithful waiting intervention that identifies total causal (D_eff), or separately identify direct waiting cost (J), raw delay, downstream compensation and residual timing loss on one utility scale;
 2. reconstruct pre-outcome rolling temperature predictability q for the exact
    St. Lawrence -> Arctic decision contexts without using focal behavioural
    outcomes;
@@ -130,8 +198,7 @@ Before any threshold claim:
    departure/stopover decisions across enough years to expose q variation;
 4. define cue use before inspecting its relationship with q;
 5. estimate early and late state-loss terms independently;
-6. only if steps 1-5 succeed, test whether the observed switch interval contains
-   the predicted q_wait(D).
+6. only if steps 1-5 succeed, test whether the observed switch interval contains the predicted q_wait(D_eff).
 
 If step 3 fails, retain this as a composite same-system bridge rather than a
 direct threshold test.
@@ -157,7 +224,7 @@ Qualification:
 
 - q-like information quality: **YES**
 - behaviour linked to q: **YES, continuous timing response**
-- independent D: **NO**
+- independent D_eff: **NO**
 - binary wait/use-cue decision: **NO**
 - exact q1 < q <= q2 window: **NO**
 
@@ -189,7 +256,7 @@ Qualification:
 
 - q-like information quality: **potentially reconstructable**
 - fitness consequence: **YES**
-- independent D: **NOT YET**
+- independent D_eff: **NOT YET**
 - cue-use threshold: **NOT YET**
 - exact asynchronous window: **NO**
 
@@ -237,11 +304,11 @@ Classification: **DELAY_COST_ANCHOR_ONLY**
 
 No screened source currently licenses the sentence:
 
-> measured D2-D1 predicts measured q2-q1, and the interval q1 < q <= q2 contains observed asynchronous cue use.
+> measured D_eff,2-D_eff,1 predicts measured q2-q1, and the interval q1 < q <= q2 contains observed asynchronous cue use.
 
-The strongest development path is now the greater-snow-goose St. Lawrence -> Bylot lineage because an experimental perturbation-duration manipulation and an independent route-predictability reconstruction exist in the same ecological system. Barnacle goose remains the strongest tracking-based information-use candidate.
+The strongest development path is now the greater-snow-goose St. Lawrence -> Bylot lineage because route predictability, perturbation cost, two-sided timing fitness and multi-stage buffering are all documented in the same ecological lineage. Barnacle goose remains the strongest tracking-based information-use candidate.
 
-However, PAYOFF-B should **not** promote that system to a direct theorem test unless D can be estimated independently of the cue-use outcome.
+However, PAYOFF-B should **not** promote that system to a direct theorem test unless natural (D_eff) is independently identified either as a faithful total causal waiting effect or through a complete causal decomposition.
 
 ## Next analysis gate for the barnacle-goose lineage
 
@@ -249,11 +316,11 @@ Before opening any new response model:
 
 1. reconstruct consecutive-stopover predictive connectivity from historical spring-onset series;
 2. define the decision event at each stopover without using the focal response;
-3. determine whether an independent fitness model can identify a marginal delay cost D for that decision;
+3. determine whether an independent fitness model can identify the effective marginal waiting cost D_eff after downstream compensation;
 4. verify that q spans enough range to bracket an actor-specific threshold;
 5. only then register a cue-use threshold analysis.
 
-If step 3 fails, retain barnacle goose as a strong information-use bridge, not a direct D -> q test.
+If step 3 fails, retain barnacle goose as a strong information-use bridge, not a direct D_eff -> q test.
 
 ## Claim ceiling after this screen
 
