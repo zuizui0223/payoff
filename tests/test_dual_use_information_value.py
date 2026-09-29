@@ -6,6 +6,9 @@ from src.dual_use_information_value import (
     balanced_dual_use_threshold_slope_in_compensation_loss,
     general_balanced_dual_use_pair_window,
     iso_threshold_direct_wait_cost,
+    multi_module_dual_use_wait_threshold,
+    multi_module_rescue_interval,
+    multi_module_waiting_margin,
     balanced_dual_use_wait_threshold,
     compensation_information_rescue_interval,
     dual_use_information_values,
@@ -423,3 +426,193 @@ def test_general_pairwise_width_is_absolute_headroom_difference(
     assert window.finite_window_width == pytest.approx(
         abs(window.actor_1_headroom - window.actor_2_headroom)
     )
+
+
+
+def test_multi_module_no_conditional_modules_reduces_to_original_threshold():
+    result = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.10,
+        conditional_modules=[],
+        **ACTION,
+    )
+    assert result.ever_waits
+    assert result.conditional_module_count == 0
+    assert result.wait_threshold == pytest.approx((1.20 + 0.10) / 1.60)
+
+
+def test_multi_module_perfect_information_feasibility_ignores_conditional_burden():
+    huge_modules = [
+        (0.5, 100.0, 100.0),
+        (0.3, 200.0, 50.0),
+        (0.7, 50.0, 200.0),
+    ]
+    below = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.39,
+        conditional_modules=huge_modules,
+        **ACTION,
+    )
+    at = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.40,
+        conditional_modules=huge_modules,
+        **ACTION,
+    )
+    assert below.ever_waits
+    assert below.wait_threshold is not None
+    assert not at.ever_waits
+    assert at.wait_threshold is None
+
+
+def test_two_balanced_modules_have_exact_high_q_headroom():
+    modules = [
+        (0.5, 1.0, 1.0),
+        (0.5, 1.0, 1.0),
+    ]
+    result = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.10,
+        conditional_modules=modules,
+        **ACTION,
+    )
+    # Target J + 2*0.5 = 1.1.
+    # In the all-active region:
+    # Va + V1 + V2 = (1.6q-1.2) + 2(q-0.5)
+    #                  = 3.6q - 2.2.
+    # 3.6q - 2.2 = 1.1 -> q = 3.3/3.6.
+    assert result.wait_threshold == pytest.approx(3.3 / 3.6)
+    assert result.all_modules_active_at_threshold
+    assert result.high_q_headroom == pytest.approx(
+        (0.40 - 0.10) / (1.60 + 1.0 + 1.0)
+    )
+    assert result.wait_threshold == pytest.approx(
+        1.0 - result.high_q_headroom
+    )
+
+
+def test_multi_module_rescue_interval_depends_on_total_conditional_prior_burden():
+    modules = [
+        (0.5, 0.20, 0.20),  # prior risk .10
+        (0.5, 0.40, 0.40),  # prior risk .20
+    ]
+    interval = multi_module_rescue_interval(
+        conditional_modules=modules,
+        **ACTION,
+    )
+    # R_A0=.40; total conditional prior burden=.30.
+    assert interval == pytest.approx((0.10, 0.40))
+
+    result = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.20,
+        conditional_modules=modules,
+        **ACTION,
+    )
+    assert result.ever_waits
+    assert result.wait_threshold is not None
+
+
+def test_conditional_information_alone_never_generates_positive_margin_before_action_q0():
+    modules = [
+        (0.5, 10.0, 10.0),
+        (0.5, 20.0, 20.0),
+    ]
+    for q in (0.50, 0.55, 0.60, 0.70, 0.749999):
+        assert multi_module_waiting_margin(
+            q,
+            direct_wait_cost=0.0,
+            conditional_modules=modules,
+            **ACTION,
+        ) <= 1e-10
+
+
+@pytest.mark.parametrize("direct", [0.0, 0.05, 0.20, 0.39])
+@pytest.mark.parametrize(
+    "modules",
+    [
+        [],
+        [(0.5, 1.0, 1.0)],
+        [(0.3, 0.5, 1.0), (0.7, 1.0, 0.5)],
+        [(0.2, 2.0, 1.0), (0.5, 0.2, 0.2), (0.8, 1.0, 2.0)],
+    ],
+)
+def test_multi_module_threshold_matches_margin_sign(direct, modules):
+    result = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=direct,
+        conditional_modules=modules,
+        **ACTION,
+    )
+    assert result.ever_waits
+    threshold = result.wait_threshold
+    assert threshold is not None
+
+    assert multi_module_waiting_margin(
+        threshold,
+        direct_wait_cost=direct,
+        conditional_modules=modules,
+        **ACTION,
+    ) == pytest.approx(0.0, abs=1e-8)
+
+    eps = 1e-7
+    assert multi_module_waiting_margin(
+        max(0.5, threshold - eps),
+        direct_wait_cost=direct,
+        conditional_modules=modules,
+        **ACTION,
+    ) <= 1e-7
+    assert multi_module_waiting_margin(
+        min(1.0, threshold + eps),
+        direct_wait_cost=direct,
+        conditional_modules=modules,
+        **ACTION,
+    ) >= -1e-7
+
+
+
+def test_wait_contingent_decision_complexity_cannot_lower_threshold_below_no_problem_world():
+    no_problem = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.10,
+        conditional_modules=[],
+        **ACTION,
+    )
+    one_problem = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.10,
+        conditional_modules=[(0.5, 0.20, 0.20)],
+        **ACTION,
+    )
+    two_problems = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.10,
+        conditional_modules=[
+            (0.5, 0.20, 0.20),
+            (0.5, 0.40, 0.40),
+        ],
+        **ACTION,
+    )
+
+    assert no_problem.wait_threshold is not None
+    assert one_problem.wait_threshold is not None
+    assert two_problems.wait_threshold is not None
+
+    assert one_problem.wait_threshold >= no_problem.wait_threshold
+    assert two_problems.wait_threshold >= no_problem.wait_threshold
+
+
+@pytest.mark.parametrize(
+    "modules",
+    [
+        [(0.5, 0.20, 0.20)],
+        [(0.3, 0.50, 1.00), (0.7, 1.00, 0.50)],
+        [(0.2, 2.0, 1.0), (0.5, 0.2, 0.2), (0.8, 1.0, 2.0)],
+    ],
+)
+def test_conditional_modules_never_improve_waiting_margin_relative_to_no_problem(modules):
+    for q in (0.50, 0.60, 0.75, 0.85, 0.95, 1.00):
+        no_problem = multi_module_waiting_margin(
+            q,
+            direct_wait_cost=0.10,
+            conditional_modules=[],
+            **ACTION,
+        )
+        with_problems = multi_module_waiting_margin(
+            q,
+            direct_wait_cost=0.10,
+            conditional_modules=modules,
+            **ACTION,
+        )
+        assert with_problems <= no_problem + 1e-10

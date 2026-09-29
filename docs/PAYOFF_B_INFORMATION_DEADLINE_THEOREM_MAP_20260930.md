@@ -180,6 +180,61 @@ R_0
 ).
 \]
 
+### Multiple conditional recovery decisions
+
+If waiting creates several cue-informed downstream decisions \(j\), then
+
+\[
+\boxed{
+\text{wait}
+\iff
+V_A(q)+\sum_j V_j(q)
+>
+J+\sum_j R_{j0}.
+}
+\]
+
+At perfect information every conditional module cancels its own prior burden:
+
+\[
+V_j(1)=R_{j0}.
+\]
+
+Therefore, regardless of the number or severity of conditional recovery
+decisions,
+
+\[
+\boxed{
+\exists q\le1\text{ with waiting optimal}
+\iff
+R_0>J.
+}
+\]
+
+When all binary modules are active at the threshold,
+
+\[
+q_{wait}
+=
+1-
+\frac{R_0-J}
+{S+\sum_j S_j}.
+\]
+
+Thus downstream decision complexity changes **how reliable** the cue must be,
+but not whether perfect information can overcome the direct cost of waiting.
+
+A further comparison is essential:
+
+- for a **fixed** downstream problem, informing its solution reduces waiting
+  cost relative to leaving that problem uninformed;
+- adding a new waiting-contingent problem cannot make waiting more attractive
+  than a world in which that problem does not exist, because its posterior risk
+  remains non-negative.
+
+So "the cue has more downstream uses" does not imply a lower information-use
+threshold.
+
 ---
 
 ## Step 4 — pairwise asynchronous information use
@@ -319,6 +374,7 @@ Exact in the declared models:
 - dual-use waiting rule;
 - no-self-rescue and irreducible-J corollaries;
 - dual-use rescue interval;
+- multi-module perfect-information condition and active-set threshold;
 - fixed-cost pairwise window;
 - balanced dual-use headroom window.
 

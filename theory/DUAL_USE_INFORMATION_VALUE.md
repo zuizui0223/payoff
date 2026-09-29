@@ -427,6 +427,195 @@ If (J_ige R_{A0}), actor (i) never waits even at perfect dual-use
 information. A pair with one finite threshold and one such actor therefore has
 persistent asymmetric uptake through (q=1).
 
+## Multi-module dual-use theorem
+
+The compensation decision need not be singular. Waiting may create several
+conditional downstream decisions: travel speed, stopover duration, route
+choice, post-arrival buffering, reproductive allocation, or others.
+
+Let the focal seasonal action have prior risk \(R_{A0}\) and information value
+\(V_A(q)\). Let conditional module \(j\) have prior loss \(R_{j0}\) if
+uninformed and cue-conditioned information value \(V_j(q)\). Let \(J\) be the
+direct nonrecoverable cost of waiting.
+
+Then
+
+\[
+\boxed{
+\text{wait}
+\iff
+V_A(q)+\sum_j V_j(q)
+>
+J+\sum_j R_{j0}.
+}
+\]
+
+### Universal perfect-information condition
+
+At perfect information,
+
+\[
+V_A(1)=R_{A0},
+\qquad
+V_j(1)=R_{j0}.
+\]
+
+All conditional-module terms cancel. Therefore
+
+\[
+\boxed{
+\exists q\le1\text{ with waiting optimal}
+\iff
+R_{A0}>J.
+}
+\]
+
+This result is independent of:
+
+- how many conditional recovery decisions exist;
+- how severe their uninformed losses are; or
+- how those conditional losses are partitioned among modules.
+
+Conditional information can determine **when** waiting becomes worthwhile, but
+not whether perfect information can overcome the direct cost of waiting.
+
+### Conditional-complexity penalty
+
+A cue-informed conditional decision can lower the cost of a **given**
+downstream problem relative to leaving that problem uninformed. But the
+existence of the waiting-contingent problem itself cannot make waiting more
+attractive than a world in which that problem does not exist.
+
+The multi-module condition can be rearranged as
+
+\[
+V_A(q)
+>
+J+\sum_j R_j(q).
+\]
+
+Because every posterior conditional risk satisfies
+
+\[
+R_j(q)\ge0,
+\]
+
+the waiting margin with conditional problems is never larger than
+
+\[
+V_A(q)-J,
+\]
+
+the margin in an otherwise identical no-problem world.
+
+Therefore
+
+\[
+\boxed{
+q_{\mathrm{wait}}^{\mathrm{with\ conditional\ problems}}
+\ge
+q_{\mathrm{wait}}^{\mathrm{no\ conditional\ problems}}
+}
+\]
+
+whenever both thresholds exist.
+
+This resolves an apparent paradox:
+
+- **information bonus:** for a fixed downstream problem, informing its solution
+  lowers the threshold relative to leaving it uninformed;
+- **conditional-complexity penalty:** adding a new problem that exists only
+  because the actor waited cannot lower the threshold relative to a world
+  without that problem.
+
+Thus "the cue has more uses" is not by itself evidence that organisms should
+wait for it at lower reliability.
+
+### Multi-module rescue interval
+
+If the conditional decisions remained uninformed, action information alone
+would never pay for waiting when
+
+\[
+J+\sum_j R_{j0}\ge R_{A0}.
+\]
+
+Yet fully informed conditional decisions allow waiting whenever \(J<R_{A0}\).
+Hence the exact rescue interval generalizes to
+
+\[
+\boxed{
+J\in
+\left[
+\max\left(0,R_{A0}-\sum_j R_{j0}\right),
+R_{A0}
+\right).
+}
+\]
+
+### Exact binary threshold
+
+For symmetric binary modules, every information-value function has the form
+
+\[
+V_m(q)=\max[0,S_mq-B_m].
+\]
+
+The exact threshold is therefore the first root of
+
+\[
+\sum_m \max[0,S_mq-B_m]
+=
+J+\sum_j R_{j0},
+\]
+
+where the sum on the left includes the focal seasonal-action module and all
+conditional modules.
+
+Because the active set changes only at finitely many actionability thresholds,
+the implementation solves this root exactly by scanning those breakpoints. No
+numerical grid search is required.
+
+### High-q headroom
+
+When all modules are active at the threshold,
+
+\[
+q_{\mathrm{wait}}
+=
+1-
+\frac{
+R_{A0}-J
+}{
+S_A+\sum_j S_j
+}.
+\]
+
+Thus
+
+\[
+\boxed{
+H
+=
+\frac{
+R_{A0}-J
+}{
+S_A+\sum_j S_j
+}
+}
+\]
+
+is the multi-module information-waiting headroom in the all-active regime.
+
+Adding conditional decision complexity increases the total information slope in
+the denominator. This can push the reliability threshold closer to one even
+though the same cue is useful for more downstream choices.
+
+This distinction prevents a misleading intuition: **more uses of information
+do not necessarily imply earlier information use** when those uses correspond
+to additional problems created by waiting.
+
+
 ## Relationship to effective deadline cost
 
 The theorem can also be written
