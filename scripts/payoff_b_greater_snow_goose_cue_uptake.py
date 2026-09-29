@@ -26,6 +26,7 @@ from pathlib import Path
 from src.greater_snow_goose_cue_uptake import (
     FROZEN_Q_GRID,
     adjudicate_threshold_folds,
+    dual_cluster_direction_supported,
     evaluate_estimability,
     gaussian_binary_q,
     preoutcome_training_valid,
@@ -276,10 +277,10 @@ def main():
         fit_context_year,
         n_context_year_clusters,
     )
-    supported = (
-        beta > 0.0
-        and individual_inference["ci_low_95"] > 0.0
-        and context_year_inference["ci_low_95"] > 0.0
+    supported = dual_cluster_direction_supported(
+        beta,
+        individual_inference["ci_low_95"],
+        context_year_inference["ci_low_95"],
     )
 
     result["primary"] = {
