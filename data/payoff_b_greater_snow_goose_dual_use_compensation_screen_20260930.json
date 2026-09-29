@@ -18,14 +18,15 @@
   "primary_formula": "log_transit_duration_days ~ local_temp_anom3 * z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(year)",
   "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
   "directional_prediction": "negative; warmer cues are followed by shorter transit when those cues historically contain more information about later Bylot conditions",
-  "uncertainty": "cluster-robust by individual",
+  "uncertainty": "cluster-robust by individual; support additionally requires leave-one-context-year-out sign stability across at least 12 origin-context x year cells",
   "estimability_gate": {
     "minimum_individuals": 30,
     "minimum_years": 4,
     "minimum_origin_contexts": 3,
     "minimum_transitions": 100,
     "predictive_connectivity_sd_at_least": 0.03,
-    "require_wait_days_variation": true
+    "require_wait_days_variation": true,
+    "minimum_context_year_cells": 12
   },
   "secondary": {
     "formula": "log_transit_duration_days ~ local_temp_anom3 * z_predictive_connectivity * z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(year)",
@@ -34,7 +35,7 @@
     "role": "diagnostic that cue-linked transit compression strengthens after longer waiting; not required for primary classification"
   },
   "classification": {
-    "supported": "DUAL_USE_BEHAVIORAL_SIGNAL_SUPPORTED if primary interaction <0 and its individual-clustered 95% CI is entirely below 0",
+    "supported": "DUAL_USE_BEHAVIORAL_SIGNAL_SUPPORTED only if primary interaction <0, its individual-clustered 95% CI is entirely below 0, and every leave-one-context-year-out refit retains a negative interaction estimate",
     "null_or_imprecise": "DUAL_USE_NOT_DEMONSTRATED_EXOGENEITY_UNRESOLVED",
     "not_estimable": "NOT_ESTIMABLE"
   },
@@ -64,5 +65,14 @@
     "resolution": "allow every forward transition among St_Lawrence, Nunavik, Baffin and Bylot; control primary transit-duration model by origin-destination route_segment; add route-skip secondary diagnostic",
     "outcome_data_opened": false,
     "result_dependent": false
-  }
+  },
+  "preoutcome_amendments": [
+    {
+      "date": "2026-09-30",
+      "issue": "predictive connectivity varies at the route-context x year level, so individual-clustered uncertainty alone could leave a supported interaction dependent on one context-year cell",
+      "resolution": "require at least 12 context-year cells and require the registered interaction estimate to remain negative in every leave-one-context-year-out refit before classifying dual-use behavioral support",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    }
+  ]
 }
