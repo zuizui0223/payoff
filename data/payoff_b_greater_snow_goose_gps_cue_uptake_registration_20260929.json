@@ -104,10 +104,11 @@
   "movement_preprocessing": {
     "implementation": "movepp R package workflow, fixed before outcome analysis",
     "raw_required_fields": [
-      "individual",
-      "time",
-      "lon",
-      "lat"
+      "individual_id",
+      "timestamp",
+      "location_long",
+      "location_lat",
+      "visible"
     ],
     "steps": [
       "compute_step_speed(direction='centered')",
@@ -124,7 +125,16 @@
     "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation",
     "repository": "EverTSZ/movepp",
     "commit": "220e953a2f1c8f29540cb74d0ec69599f24e1d14",
-    "pin_status": "FROZEN_BEFORE_OUTCOME"
+    "pin_status": "FROZEN_BEFORE_OUTCOME",
+    "raw_event_hygiene_contract": "data/payoff_b_greater_snow_goose_raw_gps_hygiene_contract_20260929.json",
+    "input_hygiene": {
+      "visibility": "primary retains only Movebank visible=true GPS fixes",
+      "timestamps": "UTC; no temporal resampling or interpolation before movepp",
+      "coordinates": "visible=true rows must have finite WGS84 lon/lat in valid ranges; otherwise fail closed",
+      "duplicates": "collapse exact duplicates; conflicting same individual_id+timestamp records fail closed",
+      "custom_outlier_filter": false,
+      "manual_speed_filter": false
+    }
   },
   "amendment_history": [
     {
@@ -172,6 +182,14 @@
       "stage": "PREOUTCOME_BEFORE_EVENT_DATA_ACCESS",
       "issue": "parent registration required separate detrending but did not specify the temporal model; source paper used ARIMA residuals while PAYOFF-B broad-bird predictive connectivity used deterministic linear detrending",
       "resolution": "freeze OLS linear detrending as the focal primary q definition; retain source ARIMA residual correlations as external calibration/sensitivity only",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EVENT_DATA_ACCESS",
+      "issue": "Movebank visible/outlier handling, coordinate validity, duplicate handling, and pre-movepp interpolation were not explicitly frozen",
+      "resolution": "retain only source-managed visible=true GPS fixes; require valid coordinates; collapse exact duplicates only; fail on conflicting same-individual timestamps; no custom speed filtering, smoothing, interpolation or resampling before movepp",
       "outcome_data_opened": false,
       "result_dependent": false
     }
