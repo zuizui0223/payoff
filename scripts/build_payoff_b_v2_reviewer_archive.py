@@ -301,7 +301,11 @@ Raw source datasets are not silently redistributed in this archive.
 - Burgess bird--caterpillar pairwise bridge: paper DOI
   10.1038/s41559-018-0543-1, Edinburgh DataShare DOI 10.7488/ds/2215 and the
   published major-axis values are recorded in the frozen bridge receipt. The
-  underlying BTO Nest Record Scheme bird records are not redistributed.
+  underlying BTO Nest Record Scheme bird records are not redistributed;
+- Samplonius resident--migrant interaction bridge: paper DOI
+  10.1111/gcb.14160. The 10-site temperature-sensitivity and 0.94 d/decade
+  divergence results are recorded as published source results in the same
+  bridge receipt; underlying multi-scheme nest records are not redistributed.
 
 Where source repositories require their own access terms, reviewers should use
 the cited source records; derived result receipts in this archive document the
