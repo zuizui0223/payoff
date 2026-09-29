@@ -3,8 +3,8 @@
 Raw waiting time is not necessarily the fitness cost that enters the
 information-deadline theorem. An actor may compensate after waiting (for
 example by faster migration or reduced stopover time). Under additive
-separability, the original theorem uses the optimally compensated downstream
-cost D_eff.
+separability, the original theorem uses the total effective waiting cost: a
+non-recoverable direct waiting cost plus optimally compensated downstream cost.
 
 For the linear specialization:
     raw delay = delta
@@ -16,7 +16,7 @@ the exact optimum is piecewise:
     c* = 0                     if kappa >= mu
     c* = min(C, delta)         if kappa < mu
 
-and D_eff = K(c*) + M(delta-c*).
+and D_eff = J(delta) + K(c*) + M(delta-c*).
 """
 
 from __future__ import annotations
@@ -156,14 +156,15 @@ def compensated_pair_window_width(
     false_early_cost: float,
     missed_early_cost: float,
     *,
-    actor_1: tuple[float, float, float, float],
-    actor_2: tuple[float, float, float, float],
+    actor_1: tuple[float, ...],
+    actor_2: tuple[float, ...],
 ) -> float | None:
     """Exact pairwise q-window width using actor-specific D_eff.
 
     Actor tuple order:
         (raw_delay, compensation_capacity,
-         compensation_cost_per_unit, residual_loss_per_unit)
+         compensation_cost_per_unit, residual_loss_per_unit
+         [, direct_wait_cost_per_unit])
 
     Returns None when at least one actor never waits even at perfect
     information.
@@ -219,9 +220,9 @@ def threshold_slope_with_raw_delay(
     """Piecewise dq_wait/d(delta) away from the capacity kink.
 
     When compensation is cheaper than residual timing loss, the threshold
-    initially rises with slope kappa/S while compensation capacity remains,
-    then with slope mu/S after capacity is exhausted. If compensation is not
-    worthwhile, the slope is mu/S throughout.
+    initially rises with slope (omega+kappa)/S while compensation capacity
+    remains, then with slope (omega+mu)/S after capacity is exhausted. If
+    compensation is not worthwhile, the slope is (omega+mu)/S throughout.
     """
 
     capacity = _nonnegative_finite(
