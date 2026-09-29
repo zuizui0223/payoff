@@ -24,8 +24,8 @@ The canonical V2 GEB package has passed all hard gates.
 
 ```text
 structured abstract = 244 words
-main body = 4,857 words
-references = 19
+main body = 4,829 words
+references = 20
 display pieces = 7
 keywords = 8
 running title = 38 characters
@@ -37,21 +37,21 @@ package files = 17
 Frozen package:
 
 ```text
-workflow run = 36472958953 (attempt 1)
-artifact = 10992297519
+workflow run = 36508668487 (attempt 1)
+artifact = 11007724762
 artifact digest =
-daa8ab9bd205eaa0cadedddae47b17cbf3e03ee08d7fa531bf7fb7a5ec79ac35
+c12b39a4d491c7325baafcdd427910c0b6759177007dc6fa27d3026e03630e99
 
 inner deterministic ZIP SHA256 =
-d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6
+f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848
 ```
 
 The declarations-inclusive package was rerun from the same frozen head in
-workflow run 36472958953 (attempt 2; artifact 10992333084). The deterministic
+workflow run 36508668487 (attempt 2; artifact 11008116842). The deterministic
 inner ZIP remained byte-identical:
 
 ```text
-d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6
+f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848
 ```
 
 The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
@@ -101,22 +101,22 @@ A deterministic PREOUTCOME reviewer archive has been built from the canonical
 claim-ceiling V2 source.
 
 ```text
-workflow run = 36473718901
-artifact = 10992188743
+workflow run = 36509120157
+artifact = 11008207196
 artifact digest =
-2fd421974f03051803bdab395d0b4a48d793f1104a55b5298fbef3288b797ec9
+871ef69042d279b2779ca35293d9ebef34f9926a422e8f08c2f1b83dfb9d8b65
 
 inner reviewer ZIP SHA256 =
-3bcfb8f4f4d13fc49ff8be58efedc56ab9ca233fd82680e6c9559218c6cec9bd
+6ca7a8a0a8f464b88694b1f78a0f01c1dddcd95842c1cfb5e176b528e24195f2
 
 files = 76
 Python source closure = 27
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
-reviewer archive reproduction run = 36473718901
-reviewer archive reproduction artifact = 10991859800
-reviewer archive deterministic inner SHA256 = 3bcfb8f4f4d13fc49ff8be58efedc56ab9ca233fd82680e6c9559218c6cec9bd
+reviewer archive reproduction run = 36509120157
+reviewer archive reproduction artifact = 11009060221
+reviewer archive deterministic inner SHA256 = 6ca7a8a0a8f464b88694b1f78a0f01c1dddcd95842c1cfb5e176b528e24195f2
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
@@ -130,9 +130,9 @@ submission-state receipt:
 
 ```text
 ACCESS_BLOCKED reviewer ZIP SHA256 =
-6ff24580b76e552d34294c1302b2afa0fe2d0013f51f7a9890038b7502d3581b
+e826d500310f2d884a62c3913fc3798ec2ec762cd776b6b89252ec26891327bd
 
-workflow run = 36473718861
+workflow run = 36509120020
 deterministic reproduction = PASS
 ```
 
@@ -171,22 +171,22 @@ original preregistration = remains binding
 ```
 
 The deterministic ACCESS_BLOCKED submission package was built in workflow
-`36473718861` from head `7bcaaef50407f06a0624ec7e6931decffbfc664d`.
+`36509120020` from head `7bcaaef50407f06a0624ec7e6931decffbfc664d`.
 
 ```text
-attempt 1 artifact = 10992513306
+attempt 1 artifact = 11008566336
 attempt 1 artifact digest =
-a5e0b401207ef0fe2b4db6ae3dacdbc3eef1816ea7a5396c305f356b98dd7cd8
+843ce1adaa63a9a325810829ac779236ef7fb88638d79c372834ad05accd0bd6
 
 GEB inner ZIP SHA256 =
-ed015112d749ec515c7576d5078afb03a7fb0511e7f5d4a47e2474890aaa6f40
+b10d00dc8252c8b7efafbeafffaf3c32480eb199236b529979e7a122ef0fe8ec
 
 outcome reviewer ZIP SHA256 =
-6ff24580b76e552d34294c1302b2afa0fe2d0013f51f7a9890038b7502d3581b
+e826d500310f2d884a62c3913fc3798ec2ec762cd776b6b89252ec26891327bd
 
-attempt 2 artifact = 10992014063
+attempt 2 artifact = 11009080342
 attempt 2 artifact digest =
-73cf4b44e5becfe88eab0853d1b48ec7199ce01b065a102f3930b47be36377e4
+311da212489396e127846424062b1c16093fd41f614b01feab1880e3a3fcaa7b
 
 deterministic inner archives = PASS
 ```
@@ -209,7 +209,7 @@ upload still requires:
 
 The current manuscript now explicitly states that photoperiodic/endogenous migration programmes are a non-exclusive alternative explanation for the E6 migration-distance gradient, and that the pairwise deadline-difference mechanism has not yet been directly tested in a natural interacting pair.
 
-The Burgess et al. pairwise bridge now adds published interaction-level evidence that consumer and resource phenology respond at different year-to-year rates and that this disparity generates mismatch. It does not measure D2-D1 or the q1<q<=q2 information-use window.
+The interaction-response bridge now has two independent published contexts. Burgess et al. show consumer–resource response asymmetry generating mismatch, while Samplonius et al. (2018) show stronger resident-tit temperature sensitivity than migratory flycatchers and a 0.94 d/decade widening of their laying-date interval. Neither measures D2-D1 or the q1<q<=q2 information-use window.
 
 ## Scientific ceiling
 

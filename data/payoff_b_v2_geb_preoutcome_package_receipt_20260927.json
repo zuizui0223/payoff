@@ -7,22 +7,22 @@
   "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "v1_status": "FROZEN_PROVENANCE_ONLY",
   "workflow": {
-    "run_id": 36472958953,
+    "run_id": 36508668487,
     "run_attempt": 1,
-    "head_sha": "24a2956e44bd19f5fef3719711c8086eb9b28d50",
+    "head_sha": "60cacad0702b4ce450ce1d829c14dc76f7bdb67e",
     "conclusion": "success",
-    "artifact_id": 10992297519,
+    "artifact_id": 11007724762,
     "artifact_name": "payoff-b-v2-geb-preoutcome-package",
-    "artifact_sha256": "daa8ab9bd205eaa0cadedddae47b17cbf3e03ee08d7fa531bf7fb7a5ec79ac35"
+    "artifact_sha256": "c12b39a4d491c7325baafcdd427910c0b6759177007dc6fa27d3026e03630e99"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip",
-    "sha256": "d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6"
+    "sha256": "f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848"
   },
   "audited_metrics": {
     "structured_abstract_words": 244,
-    "main_body_words": 4857,
-    "references": 19,
+    "main_body_words": 4829,
+    "references": 20,
     "display_pieces": 7,
     "keywords": 8,
     "running_title_chars": 38,
@@ -73,20 +73,19 @@
   ],
   "package_file_count": 17,
   "reproduction": {
-    "run_id": 36472958953,
+    "run_id": 36508668487,
     "run_attempt": 2,
-    "head_sha": "24a2956e44bd19f5fef3719711c8086eb9b28d50",
-    "artifact_id": 10992333084,
-    "artifact_sha256": "f056124ea455cf78f4c4486723f6557f3015478869ed09afd539a03351956143",
-    "inner_archive_sha256": "d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6",
+    "head_sha": "60cacad0702b4ce450ce1d829c14dc76f7bdb67e",
+    "artifact_id": 11008116842,
+    "artifact_sha256": "044b77b2d653338a43d59c1bf6923c6b16b58231fac608286061b8ca4c165c47",
+    "inner_archive_sha256": "f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848",
     "deterministic_inner_archive": true
   },
   "latest_audit_date": "2026-09-28",
   "science_update": {
-    "merged_pr": 204,
-    "merge_commit": "f008bc6e6d595eae7bebdbe584ba7ea79e0e1eea",
-    "role": "E6b interaction-level pairwise response-asymmetry bridge added; D2-D1 and q-window remain prospective",
-    "pairwise_bridge_source": "Burgess et al. 2018",
+    "merged_pr": 206,
+    "merge_commit": "15d3f5029827fc80c4def1cbac5ac3ed981544b0",
+    "role": "E6b strengthened to two independent interaction contexts: Burgess trophic response asymmetry plus Samplonius resident-migrant competitor interval divergence",
     "abstract_change": false,
     "figure_change": false
   }

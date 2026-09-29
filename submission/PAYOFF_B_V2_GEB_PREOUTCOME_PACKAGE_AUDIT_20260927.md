@@ -19,8 +19,8 @@ reuse the superseded temporal-buffering V1 GEB overlay.
 
 ```text
 structured_abstract_words = 244
-main_body_words = 4857
-references = 19
+main_body_words = 4829
+references = 20
 display_pieces = 7
 keywords = 8
 running_title_chars = 38
@@ -67,37 +67,37 @@ The deterministic package contains:
 
 Internal V1/V2 provenance documents are deliberately excluded from the journal-facing ZIP so package hashes do not depend on publication-state bookkeeping.
 
-Figure panels in the V2 renderer use lower-case journal-style panel labels. The Burgess pairwise bridge adds interaction-level response-asymmetry evidence without changing the seven-figure set; D2-D1 and the q1<q<=q2 information-use window remain prospective. Figure 5 integrates the E6 migration-distance and local benchmark evidence. The manuscript explicitly retains photoperiodic/endogenous timing as a non-exclusive alternative and states that pairwise deadline differences remain untested in nature.
+Figure panels in the V2 renderer use lower-case journal-style panel labels. The interaction-response bridge now uses two independent interaction contexts—Burgess bird–caterpillar trophic pairs and Samplonius resident–migrant cavity breeders—without changing the seven-figure set; D2-D1 and the q1<q<=q2 information-use window remain prospective. Figure 5 integrates the E6 migration-distance and local benchmark evidence. The manuscript explicitly retains photoperiodic/endogenous timing as a non-exclusive alternative and states that pairwise deadline differences remain untested in nature.
 
 ## Frozen build provenance
 
 ```text
-workflow_run = 36472958953
+workflow_run = 36508668487
 workflow_run_attempt = 1
 validated_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
 workflow_conclusion = success
 
-artifact_id = 10992297519
+artifact_id = 11007724762
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-daa8ab9bd205eaa0cadedddae47b17cbf3e03ee08d7fa531bf7fb7a5ec79ac35
+c12b39a4d491c7325baafcdd427910c0b6759177007dc6fa27d3026e03630e99
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6
+f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848
 ```
 
 Deterministic reproduction check:
 
 ```text
-reproduction_workflow_run = 36472958953
+reproduction_workflow_run = 36508668487
 reproduction_run_attempt = 2
 reproduction_head = 7bcaaef50407f06a0624ec7e6931decffbfc664d
-reproduction_artifact_id = 10992333084
+reproduction_artifact_id = 11008116842
 reproduction_artifact_sha256 =
-f056124ea455cf78f4c4486723f6557f3015478869ed09afd539a03351956143
+044b77b2d653338a43d59c1bf6923c6b16b58231fac608286061b8ca4c165c47
 reproduction_inner_zip_sha256 =
-d7b8227d65ef8968f06a49ebf7578bef3c647c7ad98e69dcab9d4593ee45c0b6
+f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848
 deterministic_inner_archive = PASS
 package_file_count = 17
 ```
