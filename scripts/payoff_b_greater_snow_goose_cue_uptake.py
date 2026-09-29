@@ -23,9 +23,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.cue_uptake_empirics import (
-    ThresholdCandidateScore,
     mean_standard_error,
-    select_threshold_one_se,
+    select_threshold_paired_one_se,
 )
 from src.greater_snow_goose_information_bridge import gaussian_binary_accuracy
 
@@ -387,22 +386,20 @@ def main():
                 row["log_loss"] for row in baseline_losses
             )
 
-            scores = []
+            candidate_fold_losses = {}
             for q in Q_GRID:
                 losses = _loio_losses(
                     data,
                     THRESHOLD_FORMULA,
                     threshold_q=q,
                 )
-                mean_loss, se_loss = mean_standard_error(
+                fold_values = [
                     row["log_loss"] for row in losses
+                ]
+                candidate_fold_losses[q] = fold_values
+                mean_loss, se_loss = mean_standard_error(
+                    fold_values
                 )
-                score = ThresholdCandidateScore(
-                    threshold_q=q,
-                    mean_loio_log_loss=mean_loss,
-                    se_loio_log_loss=se_loss,
-                )
-                scores.append(score)
                 threshold_rows.append(
                     {
                         "threshold_q": q,
@@ -413,9 +410,12 @@ def main():
                     }
                 )
 
-            selection = select_threshold_one_se(
-                scores,
-                no_threshold_mean_log_loss=baseline_mean,
+            selection = select_threshold_paired_one_se(
+                candidate_fold_losses,
+                no_threshold_fold_losses=[
+                    row["log_loss"] for row in baseline_losses
+                ],
+                frozen_grid=Q_GRID,
             )
             result["threshold_secondary"] = {
                 "status": selection.status,
@@ -428,9 +428,20 @@ def main():
                 ),
                 "grid": Q_GRID,
                 "one_se_definition": (
-                    "adjacent mean loss must exceed best mean loss + best "
-                    "candidate SE"
+                    "for each adjacent q, the paired held-out-individual "
+                    "loss difference (adjacent - selected) must exceed "
+                    "one SE of the paired differences"
                 ),
+                "lower_neighbor_q": selection.lower_neighbor_q,
+                "upper_neighbor_q": selection.upper_neighbor_q,
+                "lower_paired_mean_difference": (
+                    selection.lower_paired_mean_difference
+                ),
+                "upper_paired_mean_difference": (
+                    selection.upper_paired_mean_difference
+                ),
+                "lower_paired_se": selection.lower_paired_se,
+                "upper_paired_se": selection.upper_paired_se,
                 "interpretation": (
                     "behavioral/phenomenological threshold only; never q_wait(D)"
                 ),
