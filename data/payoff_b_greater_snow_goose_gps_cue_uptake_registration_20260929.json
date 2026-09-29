@@ -32,7 +32,9 @@
       "Nunavik": "10-31 May",
       "Baffin": "20 May-5 Jun",
       "Bylot_target": "30 May-15 Jun"
-    }
+    },
+    "primary_detrending": "OLS residuals after separate linear regressions of source and target annual window means on calendar year within each 20-year pre-focal training window",
+    "source_arima_boundary": "Resendiz-Infante & Gauthier 2024 used ARIMA-model residuals for the published 1979-2018 correlations; that source method is an external calibration/sensitivity, not the focal primary q definition"
   },
   "movement_decision": {
     "unit": "individual x staging-context x day at risk",
@@ -162,6 +164,14 @@
       "stage": "PREOUTCOME_BEFORE_EXECUTION",
       "issue": "movepp package version was not pinned",
       "resolution": "pin EverTSZ/movepp to commit 220e953a2f1c8f29540cb74d0ec69599f24e1d14",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EVENT_DATA_ACCESS",
+      "issue": "parent registration required separate detrending but did not specify the temporal model; source paper used ARIMA residuals while PAYOFF-B broad-bird predictive connectivity used deterministic linear detrending",
+      "resolution": "freeze OLS linear detrending as the focal primary q definition; retain source ARIMA residual correlations as external calibration/sensitivity only",
       "outcome_data_opened": false,
       "result_dependent": false
     }
