@@ -1,0 +1,35 @@
+name: PAYOFF-B direct deadline-threshold bridge
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-deadline-threshold-direct-test-20260929
+    paths:
+      - 'src/deadline_threshold_empirics.py'
+      - 'src/endogenous_information_timing.py'
+      - 'src/greater_snow_goose_information_bridge.py'
+      - 'src/state_dependent_information_deadline.py'
+      - 'tests/test_deadline_threshold_empirics.py'
+      - 'tests/test_endogenous_information_timing.py'
+      - 'tests/test_greater_snow_goose_information_bridge.py'
+      - 'tests/test_state_dependent_information_deadline.py'
+      - 'data/payoff_b_pairwise_deadline_threshold_contract_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_bridge_inputs_20260929.json'
+      - '.github/workflows/payoff-b-deadline-threshold-direct-test.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip pytest
+      - run: >
+          python -m pytest -q
+          tests/test_endogenous_information_timing.py
+          tests/test_deadline_threshold_empirics.py
+          tests/test_greater_snow_goose_information_bridge.py
+          tests/test_state_dependent_information_deadline.py

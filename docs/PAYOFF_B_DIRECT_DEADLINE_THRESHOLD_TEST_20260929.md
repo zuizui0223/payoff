@@ -1,0 +1,316 @@
+# PAYOFF-B direct empirical test of the information-deadline theorem
+
+Date: **2026-09-29**  
+Status: **prospective measurement contract; no current natural dataset qualifies as a direct test**
+
+## What is already verified
+
+The theoretical implication is already exact for the declared binary-cue model:
+
+[
+q_i = \frac{\max(A,L)+D_i}{A+L}
+]
+
+whenever (D_i<R_0). Therefore, for two otherwise identical actors,
+
+[
+D_1<D_2
+\Rightarrow
+q_1<q_2
+]
+
+and, when both eventually use the cue,
+
+[
+\Delta q=q_2-q_1
+=\frac{D_2-D_1}{A+L}.
+]
+
+The repository already checks this identity against the implemented decision
+rule and the canonical numerical witness. This is **not** an unverified
+theoretical arrow.
+
+The open question is natural instantiation:
+
+> Do measured differences in the opportunity cost of waiting predict measured
+> differences in the cue reliability at which interacting organisms begin to
+> use information?
+
+## What counts as a direct empirical test
+
+A qualifying dataset must measure, independently of the focal cue-use outcome:
+
+1. **Cue reliability (q)** before commitment: the probability that the cue
+   correctly classifies the later state relevant to fitness.
+2. **Delay/opportunity cost (D_i)**: the fitness-equivalent cost of postponing
+   commitment until the cue is available.
+3. **State-mismatch losses (C_F,C_M)** and the prior state probability
+   (pi), sufficient to construct
+   (A=(1-pi)C_F) and (L=pi C_M).
+4. **Cue use**: an observed choice or behavioural response that distinguishes
+   committing before the cue from waiting for/conditioning on the cue.
+
+Migration distance, source--target distance, temperature sensitivity, phase
+correction and predictive connectivity are informative auxiliary quantities,
+but none is (D) or cue-use status by definition.
+
+## Hidden-deadline rule
+
+If the realised cost of waiting depends on a future environmental state, the
+quantity entering the theorem is **not the cost reconstructed after that state
+is revealed**.
+
+At commitment, the relevant quantity is
+
+[
+\bar D_i(\mathcal I_i)
+=
+E[D_i(H)\mid\mathcal I_i],
+]
+
+where (\mathcal I_i) is the information actually available when the actor must
+decide whether to commit or wait.
+
+Under additive expected loss, the exact threshold becomes
+
+[
+q_{i,pred}
+=
+\frac{
+\max(A,L)+E[D_i(H)\mid\mathcal I_i]
+}{
+A+L
+}.
+]
+
+Therefore:
+
+- a harsh future year may produce a large realised delay cost without changing
+  the rational threshold if that harshness was not predictable at commitment;
+- a threshold may vary across individuals or years only when pre-commitment
+  information changes their conditional expected delay cost;
+- post-hoc breeding-ground conditions must not be substituted for
+  (E[D\mid\mathcal I]) in the threshold equation.
+
+This rule is implementation-tested in
+`src/state_dependent_information_deadline.py`.
+
+## Primary falsifiable predictions
+
+### P1. Actor-level threshold
+
+For actor (i), with fixed or commitment-time expected delay cost,
+
+[
+q_{i,pred}
+=
+\frac{\max(A,L)+D_i}{A+L}.
+]
+
+With the implemented tie rule, cue use occurs only for
+
+[
+q>q_{i,pred}.
+]
+
+Observed use/non-use decisions therefore bracket an empirical switch interval.
+A direct test asks whether the independently predicted (q_{i,pred}) lies
+inside that interval.
+
+### P2. Deadline ordering
+
+For actors sharing the same state-loss structure,
+
+[
+D_1<D_2
+\Rightarrow
+q_1<q_2.
+]
+
+For state-dependent deadlines, replace each (D_i) by the conditional expectation
+available to that actor at commitment.
+
+### P3. Window width
+
+When both actors eventually use the cue,
+
+[
+q_2-q_1
+=
+\frac{D_2-D_1}{A+L}.
+]
+
+With hidden deadline states this becomes
+
+[
+q_2-q_1
+=
+\frac{
+E[D_2\mid\mathcal I_2]-E[D_1\mid\mathcal I_1]
+}{
+A+L
+}.
+]
+
+The strongest test therefore compares an independently estimated
+commitment-time deadline gap with the observed width of the asynchronous
+cue-use region.
+
+### P4. Behaviour inside and outside the window
+
+For a shared cue:
+
+- (q\le q_1): both commit before the cue;
+- (q_1<q\le q_2): exactly one actor uses the cue;
+- (q>q_2): both use the cue.
+
+A direct natural or experimental test must observe the middle regime itself.
+Showing only different phenological slopes is insufficient.
+
+### P5. Ex-post reversal without irrationality
+
+If the actor waits because
+
+[
+V(q)>E[D\mid\mathcal I],
+]
+
+but a subsequently revealed harsh state has
+
+[
+D(H)>V(q),
+]
+
+then waiting is worse **ex post** even though it was optimal **ex ante**.
+
+Natural data should therefore distinguish an information failure from an
+apparently maladaptive outcome that arose because the cost state itself was
+unpredictable.
+
+## Inverse test — reveal D from an observed threshold
+
+The theorem is invertible. For an interior information-use threshold,
+
+[
+\boxed{
+D_{revealed}
+=
+q_{wait}(A+L)-\max(A,L)
+}
+]
+
+so an observed switch interval for (q_{wait}) maps directly to an interval for
+the deadline cost implied by the model.
+
+For the canonical example, an observed threshold bracket
+
+[
+0.81\le q_{wait}<0.82
+]
+
+implies
+
+[
+0.096\le D_{revealed}<0.112,
+]
+
+which contains the generating value (D=0.10).
+
+This creates a stronger empirical design than testing threshold ordering alone:
+estimate (q_{wait}) from behavior, infer (D_{revealed}) from the theorem,
+then compare it with an **independent** manipulation or fitness estimate of the
+cost of postponing commitment. Agreement is a quantitative out-of-sample test
+of the deadline mechanism. Using the same behavior to estimate both quantities
+would be circular and is not licensed.
+
+## Minimum experimental design
+
+The cleanest design manipulates cue reliability and delay cost orthogonally.
+
+For each actor or actor class:
+
+- estimate (D_i), or (E[D_i\mid\mathcal I_i]) when D is state-dependent, in
+  a separate payoff manipulation or independent fitness model;
+- record exactly which predictors of future delay cost were available before
+  the wait/commit decision;
+- expose decisions to at least five cue-reliability levels spanning below,
+  between and above the predicted thresholds;
+- replicate each level enough to estimate stochastic departures from the
+  deterministic rule;
+- record the commitment/use decision before revealing the later ecological
+  state;
+- estimate (C_F,C_M,pi) without using the focal threshold outcome.
+
+The deterministic theorem is the preregistered core. A hierarchical logistic
+soft-threshold model may be added for biological noise, but it must not replace
+the exact directional and window-width predictions after outcomes are seen.
+
+## Current PAYOFF-B datasets: why none is direct
+
+### Broad migratory birds
+
+The Amaral-derived lane estimates pre-outcome source--destination predictive
+connectivity and realized arrival--green-up mismatch. It supplies a natural
+information-quality coordinate, but it does not independently measure (D_i)
+or binary cue uptake.
+
+### Eurasian wigeon
+
+The wigeon lane supplies route-level predictive connectivity and phase
+correction across 224 transitions. The registered connectivity x phase-error
+interaction was not supported. Phase correction is not equivalent to the
+decision to wait for/use a cue, and route progress or migration distance must
+not be relabelled as (D).
+
+### Pied flycatcher manipulation
+
+The manipulation shows that heterospecific seasonal information can be
+unavailable to an earlier decision and relevant to a later one. It anchors
+decision-time information availability, but it does not sweep cue reliability
+or estimate a pair of information-use thresholds.
+
+### Greater snow goose
+
+The same ecological lineage now supplies a D-like perturbation axis and a
+q-like route-predictability axis. Captivity duration during spring migration
+had later reproductive consequences, and the strength of those consequences
+varied among years; independently, southern-route temperatures were weak
+predictors of later Arctic conditions.
+
+This makes greater snow goose the strongest current **hidden-deadline**
+candidate, but not a direct threshold test. Captivity duration combines elapsed
+time with handling/confinement stress, and the harsh breeding-ground state that
+amplified the carry-over effect was not necessarily known when the migration
+decision was made. The exact theorem therefore requires a pre-commitment
+estimate of (E[D\mid\mathcal I]), not the realised post-hoc cost.
+
+## Fail-closed promotion rule
+
+PAYOFF-B may claim a **direct natural information-deadline test** only if a
+single qualifying system supplies the four measured quantities above and the
+analysis was specified before the focal cue-use outcomes were examined.
+
+Until then the correct hierarchy is:
+
+[
+\text{exact theorem}
+\;>\;
+\text{natural evidence for separate links}
+\;>\;
+\text{prospective direct mechanism test}.
+]
+
+The pairwise arrow
+
+[
+D_2-D_1
+\rightarrow
+q_2-q_1
+\rightarrow
+q_1<q\le q_2
+\rightarrow
+\text{asynchronous cue use}
+]
+
+is therefore **theoretically verified but not yet directly instantiated in a
+natural system**.

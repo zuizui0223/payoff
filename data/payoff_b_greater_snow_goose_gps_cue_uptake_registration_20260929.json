@@ -1,0 +1,102 @@
+{
+  "registration_id": "payoff_b_greater_snow_goose_gps_cue_uptake_v1_20260929",
+  "frozen_date": "2026-09-29",
+  "status": "PREOUTCOME_REGISTERED_NOT_EXECUTED",
+  "source": {
+    "movement_study": "Greater snow goose migration",
+    "movebank_study_id": "1442516400",
+    "public_summary_years": [
+      2019,
+      2023
+    ],
+    "public_summary_animals": 75,
+    "sensor": "GPS",
+    "outcome_data_opened_for_this_analysis": false
+  },
+  "ecological_question": "Does departure behavior become more contingent on a local temperature cue when that cue has greater pre-existing predictive value for later Bylot conditions?",
+  "claim_role": "behavioral cue-uptake proxy; not a direct D-to-q theorem test",
+  "information_coordinate": {
+    "primary": "route-context predictive connectivity estimated only from climate years preceding each focal migration year",
+    "target_state": "Bylot arrival/pre-laying temperature, 30 May-15 Jun",
+    "cue_state": "temperature anomaly at the current staging context over its prespecified seasonal window",
+    "historical_window_years": 20,
+    "detrend_origin_and_target_separately": true,
+    "minimum_training_years": 15,
+    "signed_rho_primary": true,
+    "gaussian_q_bridge_secondary": "q = 0.5 + asin(rho)/pi",
+    "published_sanity_check": "Resendiz-Infante & Gauthier 2024 Table 2"
+  },
+  "movement_decision": {
+    "unit": "individual x staging-context x day at risk",
+    "primary_response": "depart_next_24h",
+    "departure_definition": "first movement leaving the staging context followed by no return for at least 48 h",
+    "current_cue": "local 3-day mean 2-m temperature anomaly ending on the decision day",
+    "immediate_weather_controls": [
+      "wind support along next-route bearing",
+      "precipitation",
+      "same-day temperature anomaly"
+    ]
+  },
+  "primary_model": {
+    "formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + C(context) + C(year)",
+    "uncertainty": "cluster by individual; if supported by software, two-way sensitivity by individual and year",
+    "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
+    "directional_prediction": "positive on logit departure hazard: warm cues promote departure more strongly where they historically predict later warm/early Bylot conditions"
+  },
+  "estimability_gate": {
+    "minimum_individuals": 30,
+    "minimum_years": 4,
+    "minimum_contexts": 3,
+    "minimum_departure_events": 100,
+    "require_nonzero_within_context_predictive_connectivity_variation": true,
+    "require_predictive_connectivity_sd_at_least": 0.03
+  },
+  "threshold_secondary": {
+    "opened_only_if_primary_estimable": true,
+    "role": "descriptive threshold-like behavioral uptake, not q_wait(D)",
+    "candidate_q_grid": [
+      0.5,
+      0.525,
+      0.55,
+      0.575,
+      0.6,
+      0.625,
+      0.65,
+      0.675,
+      0.7
+    ],
+    "selection": "leave-one-individual-out predictive log loss",
+    "support_gate": "interior candidate beats no-threshold model and adjacent grid points are not tied within 1 SE",
+    "failure_rule": "if gate fails, report THRESHOLD_NOT_IDENTIFIED"
+  },
+  "forbidden_reframings": [
+    "do not call local temperature sensitivity direct observation of cue cognition",
+    "do not treat captivity duration as identified PAYOFF-B D",
+    "do not infer q_wait(D) from the GPS model",
+    "do not use same-year future Bylot temperature to construct pre-commitment q",
+    "do not retune departure definition or q window after outcome inspection"
+  ],
+  "promotion_rule": "At most promote to natural behavioral cue-uptake support. Direct information-deadline confirmation remains forbidden without clean D and state-loss estimates.",
+  "movement_preprocessing": {
+    "implementation": "movepp R package workflow, fixed before outcome analysis",
+    "raw_required_fields": [
+      "individual",
+      "time",
+      "lon",
+      "lat"
+    ],
+    "steps": [
+      "compute_step_speed(direction='centered')",
+      "balm_segmentation(variable_col='step_speed')",
+      "retain LL and LH for temporary-habitat detection",
+      "detect_habitat_params() with data-derived eps and minPts",
+      "dbscan_habitats()",
+      "compute_mpi()",
+      "classify_phases(n_phases=3, fixed_stopover='LH', phase_names=['Wintering','staging_stopover','Breeding'])"
+    ],
+    "primary_manual_annotation": false,
+    "sensitivity_manual_annotation": "allowed only after primary automatic result and without access to climate q or model residuals",
+    "departure_event_from_habitat": "last day in an automatically delineated spring staging_stopover habitat followed by outward movement and no return for >=48 h",
+    "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation"
+  }
+}
