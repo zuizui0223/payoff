@@ -574,6 +574,8 @@ Greater heterogeneity in decision deadlines widens the range of cue qualities ov
 
 The prediction is deliberately not “information is bad.” At low cue quality both actors ignore the cue. At high enough cue quality both use it. The mismatch peak occurs during the transition between those conventions.
 
+The baseline theorem treats the opportunity cost of waiting as fixed, but this need not hold biologically. If the cost paid after waiting depends on an unobserved future state, with costs \(D_N\) and \(D_E\), the same expected-loss model gives \(\bar D=(1-\pi)D_N+\pi D_E\) and replaces \(D\) by \(\bar D\) in the information-use threshold. For two actors, the asynchronous-window width is therefore \(|\bar D_2-\bar D_1|/(A+L)\). Environmental change can consequently move, widen or narrow information-use windows through **deadline costs even when cue reliability itself is unchanged**. A greater-snow-goose spring-captivity experiment provides ecological motivation because reproductive consequences of the same pre-breeding perturbation differed strongly among breeding contexts (Legagneux et al., 2012; Grandmont et al., 2023). Captivity duration combines elapsed time with capture and confinement stress, however, so these studies do not estimate the model parameter \(D\); they motivate the state-dependent-deadline hypothesis rather than test it.
+
 ### 4.3 Environmental recovery can precede ecological recovery
 
 The shared-cue network produces a stronger path-dependent result.
@@ -725,6 +727,8 @@ The framework therefore predicts that climate adaptation can fail not only becau
 - Bauer S, McNamara JM, Barta Z (2020) Environmental variability, reliability of information and the timing of migration. *Proceedings of the Royal Society B* 287:20200622. DOI: 10.1098/rspb.2020.0622.
 - Burgess MD, Smith KW, Evans KL, Leech D, Pearce-Higgins JW, Branston CJ, Briggs K, Clark JR, du Feu CR, Lewthwaite K, Nager RG, Sheldon BC, Smith JA, Whytock RC, Willis SG, Phillimore AB (2018) Tritrophic phenological match–mismatch in space and time. *Nature Ecology & Evolution* 2:970–975. DOI: 10.1038/s41559-018-0543-1.
 - Freimuth J, Bossdorf O, Scheepens JF, Willems FM (2022) Climate warming changes synchrony of plants and pollinators. *Proceedings of the Royal Society B* 289:20212142. DOI: 10.1098/rspb.2021.2142.
+- Grandmont T, Fast P, Grentzmann I, Gauthier G, Bêty J, Legagneux P (2023) Should I breed or should I go? Manipulating individual state during migration influences breeding decisions in a long-lived bird species. *Functional Ecology* 37:602–613. DOI: 10.1111/1365-2435.14256.
+- Legagneux P, Fast PLF, Gauthier G, Bêty J (2012) Manipulating individual state during migration provides evidence for carry-over effects modulated by environmental conditions. *Proceedings of the Royal Society B* 279:876–883. DOI: 10.1098/rspb.2011.1351.
 - Helm B, Liedvogel M (2024) Avian migration clocks in a changing world. *Journal of Comparative Physiology A* 210:691–716. DOI: 10.1007/s00359-023-01688-w.
 - Johansson J, Jonzén N (2012) Game theory sheds new light on ecological responses to current climate change when phenology is historically mismatched. *Ecology Letters* 15:881–888. DOI: 10.1111/j.1461-0248.2012.01812.x.
 - Kharouba HM, Wolkovich EM (2020) Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. DOI: 10.1038/s41558-020-0752-x.
