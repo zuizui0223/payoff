@@ -638,7 +638,7 @@ The broad-bird result supports an association between predictive information and
 
 Two published interaction-level analyses narrow this gap further. In UK bird–caterpillar pairs, temporal tracking slopes are **0.510** for Blue Tit, **0.515** for Great Tit and **0.348** for Pied Flycatcher, all below perfect tracking, so earlier resource years increase consumer–resource mismatch (Burgess et al., 2018). Across 10 European nest-box schemes, resident tits were more temperature-sensitive than migratory flycatchers, and this differential response widened their laying-date interval by **0.94 d/decade**; tit phenology also explained flycatcher phenology after controlling for temperature (Samplonius et al., 2018).
 
-These studies support **interaction-level response asymmetry → changing relative timing**, but neither estimates \(D_2-D_1\) nor observes the predicted \(q_1<q\le q_2\) information-use window. The pairwise deadline-difference mechanism therefore remains prospective.
+These studies support **interaction-level response asymmetry → changing relative timing**. The mapping \(D_2-D_1 \rightarrow q_2-q_1 \rightarrow q_1<q\le q_2\) is already an exact, implementation-verified theoretical result in the declared binary-cue model. What remains prospective is its **direct natural instantiation**: neither study independently estimates \(D_2-D_1\) and actor-specific cue-use thresholds, nor observes the predicted asynchronous information-use window in the same system.
 
 The flycatcher manipulation anchors the idea that the availability of heterospecific phenology depends on when a decision is made.
 
