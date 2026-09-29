@@ -8,7 +8,7 @@ Status: **prospective measurement contract; no current natural dataset qualifies
 The theoretical implication is already exact for the declared binary-cue model:
 
 [
-q_i = \frac{\max(A,L)+D_i}{A+L}
+q_i = \frac{\max(A,L)+D_{eff,i}}{A+L}
 ]
 
 whenever (D_i<R_0). Therefore, for two otherwise identical actors,
@@ -42,17 +42,14 @@ A qualifying dataset must measure, independently of the focal cue-use outcome:
 
 1. **Cue reliability (q)** before commitment: the probability that the cue
    correctly classifies the later state relevant to fitness.
-2. **Delay/opportunity cost (D_i)**: the fitness-equivalent cost of postponing
-   commitment until the cue is available.
+2. **Effective delay/opportunity cost (D_eff,i)**: the fitness-equivalent cost of postponing commitment after optimal feasible downstream compensation. It may be measured directly or decomposed into raw delay, compensation capacity/cost and residual timing loss.
 3. **State-mismatch losses (C_F,C_M)** and the prior state probability
    (pi), sufficient to construct
    (A=(1-pi)C_F) and (L=pi C_M).
 4. **Cue use**: an observed choice or behavioural response that distinguishes
    committing before the cue from waiting for/conditioning on the cue.
 
-Migration distance, source--target distance, temperature sensitivity, phase
-correction and predictive connectivity are informative auxiliary quantities,
-but none is (D) or cue-use status by definition.
+Migration distance, raw waiting days, departure date, source--target distance, temperature sensitivity, phase correction and predictive connectivity are informative auxiliary quantities, but none is (D_eff) or cue-use status by definition.
 
 ## Hidden-deadline rule
 
@@ -95,16 +92,38 @@ Therefore:
 This rule is implementation-tested in
 `src/state_dependent_information_deadline.py`.
 
+## Compensated-deadline rule
+
+If waiting creates raw delay ((\delta)), the actor can recover ((c)) time
+units at compensation cost (K(c)), and residual delay carries fitness loss
+(M(\delta-c)), the theorem input is
+
+[
+D_{eff}
+=
+\min_{0\le c\le\min(C,\delta)}
+[K(c)+M(\delta-c)].
+]
+
+Thus raw delay is not itself the empirical (D) unless downstream compensation
+is impossible or already included in the loss estimate. With state-dependent
+conditions, the commitment-time object is the appropriate expectation of this
+**optimized effective cost**.
+
+This reduction is implementation-tested in
+`src/compensated_information_deadline.py`.
+
+
 ## Primary falsifiable predictions
 
 ### P1. Actor-level threshold
 
-For actor (i), with fixed or commitment-time expected delay cost,
+For actor (i), with fixed or commitment-time expected effective delay cost,
 
 [
 q_{i,pred}
 =
-\frac{\max(A,L)+D_i}{A+L}.
+\frac{\max(A,L)+D_{eff,i}}{A+L}.
 ]
 
 With the implemented tie rule, cue use occurs only for
@@ -122,13 +141,12 @@ inside that interval.
 For actors sharing the same state-loss structure,
 
 [
-D_1<D_2
+D_{eff,1}<D_{eff,2}
 \Rightarrow
 q_1<q_2.
 ]
 
-For state-dependent deadlines, replace each (D_i) by the conditional expectation
-available to that actor at commitment.
+For state-dependent deadlines, use the conditional expectation of each actor's optimized effective cost available at commitment.
 
 ### P3. Window width
 
@@ -137,7 +155,7 @@ When both actors eventually use the cue,
 [
 q_2-q_1
 =
-\frac{D_2-D_1}{A+L}.
+\frac{D_{eff,2}-D_{eff,1}}{A+L}.
 ]
 
 With hidden deadline states this becomes
@@ -146,7 +164,7 @@ With hidden deadline states this becomes
 q_2-q_1
 =
 \frac{
-E[D_2\mid\mathcal I_2]-E[D_1\mid\mathcal I_1]
+E[D_{eff,2}\mid\mathcal I_2]-E[D_{eff,1}\mid\mathcal I_1]
 }{
 A+L
 }.
@@ -193,7 +211,7 @@ The theorem is invertible. For an interior information-use threshold,
 
 [
 \boxed{
-D_{revealed}
+D^{eff}_{revealed}
 =
 q_{wait}(A+L)-\max(A,L)
 }
@@ -214,14 +232,12 @@ implies
 0.096\le D_{revealed}<0.112,
 ]
 
-which contains the generating value (D=0.10).
+which contains the generating effective cost (D_eff=0.10).
 
 This creates a stronger empirical design than testing threshold ordering alone:
-estimate (q_{wait}) from behavior, infer (D_{revealed}) from the theorem,
-then compare it with an **independent** manipulation or fitness estimate of the
-cost of postponing commitment. Agreement is a quantitative out-of-sample test
-of the deadline mechanism. Using the same behavior to estimate both quantities
-would be circular and is not licensed.
+estimate (q_{wait}) from behavior, infer (D^{eff}_{revealed}) from the theorem,
+then compare it with an **independent** estimate of the effective fitness cost of postponing commitment after feasible compensation. Agreement is a quantitative out-of-sample test
+of the deadline mechanism. Using the same behavior to estimate both quantities would be circular, and comparing this inferred fitness cost directly with raw days delayed is also not licensed.
 
 ## Minimum experimental design
 
@@ -229,8 +245,7 @@ The cleanest design manipulates cue reliability and delay cost orthogonally.
 
 For each actor or actor class:
 
-- estimate (D_i), or (E[D_i\mid\mathcal I_i]) when D is state-dependent, in
-  a separate payoff manipulation or independent fitness model;
+- estimate (D_eff,i), or its commitment-time expectation when state-dependent, using an independent fitness model or a preregistered decomposition of raw delay, downstream compensation and residual timing loss;
 - record exactly which predictors of future delay cost were available before
   the wait/commit decision;
 - expose decisions to at least five cue-reliability levels spanning below,
@@ -282,7 +297,7 @@ candidate, but not a direct threshold test. Captivity duration combines elapsed
 time with handling/confinement stress, and the harsh breeding-ground state that
 amplified the carry-over effect was not necessarily known when the migration
 decision was made. The exact theorem therefore requires a pre-commitment
-estimate of (E[D\mid\mathcal I]), not the realised post-hoc cost.
+estimate of effective (E[D_eff\mid\mathcal I]), not raw delay or the realised post-hoc cost.
 
 ## Fail-closed promotion rule
 
@@ -303,7 +318,7 @@ Until then the correct hierarchy is:
 The pairwise arrow
 
 [
-D_2-D_1
+D_{eff,2}-D_{eff,1}
 \rightarrow
 q_2-q_1
 \rightarrow
