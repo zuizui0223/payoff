@@ -159,3 +159,58 @@ def test_state_contingent_compensation_information_has_nonnegative_value():
     assert adaptive == pytest.approx(0.165)
     assert precommitted == pytest.approx(0.30)
     assert adaptive <= precommitted
+
+
+def test_direct_wait_cost_survives_full_free_timing_compensation():
+    result = linear_compensated_information_threshold(
+        0.4,
+        2.0,
+        1.0,
+        raw_delay=0.30,
+        compensation_capacity=0.30,
+        compensation_cost_per_unit=0.0,
+        residual_loss_per_unit=1.0,
+        direct_wait_cost_per_unit=0.40,
+    )
+    # All 0.30 units of timing delay are recovered for free, but direct
+    # waiting cost remains 0.40*0.30 = 0.12.
+    assert result.optimal_compensation == pytest.approx(0.30)
+    assert result.residual_delay == pytest.approx(0.0)
+    assert result.direct_wait_cost == pytest.approx(0.12)
+    assert result.effective_delay_cost == pytest.approx(0.12)
+    assert result.wait_threshold == pytest.approx((1.20 + 0.12) / 1.60)
+    assert result.wait_threshold > 0.75
+
+
+def test_direct_wait_cost_adds_to_both_sides_of_capacity_kink():
+    before = threshold_slope_with_raw_delay(
+        compensation_capacity=0.20,
+        compensation_cost_per_unit=0.20,
+        residual_loss_per_unit=1.0,
+        direct_wait_cost_per_unit=0.40,
+        total_prior_loss=1.60,
+        raw_delay=0.10,
+    )
+    after = threshold_slope_with_raw_delay(
+        compensation_capacity=0.20,
+        compensation_cost_per_unit=0.20,
+        residual_loss_per_unit=1.0,
+        direct_wait_cost_per_unit=0.40,
+        total_prior_loss=1.60,
+        raw_delay=0.30,
+    )
+    assert before == pytest.approx((0.40 + 0.20) / 1.60)
+    assert after == pytest.approx((0.40 + 1.00) / 1.60)
+
+
+def test_pair_window_can_be_created_by_direct_wait_cost_difference_only():
+    width = compensated_pair_window_width(
+        0.4,
+        2.0,
+        1.0,
+        actor_1=(0.20, 0.20, 0.0, 1.0, 0.10),
+        actor_2=(0.20, 0.20, 0.0, 1.0, 0.50),
+    )
+    # Timing delay fully recovered in both actors. D_eff is direct cost only:
+    # 0.02 vs 0.10, so Delta q = 0.08/1.60.
+    assert width == pytest.approx(0.05)
