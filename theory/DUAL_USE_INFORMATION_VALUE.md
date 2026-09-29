@@ -308,6 +308,125 @@ q_{\mathrm{wait}}^{dual}
 The same cue therefore converts a system in which waiting is impossible under
 action-only accounting into one with a finite information-use threshold.
 
+## Pairwise dual-use desynchronization
+
+Dual-use information creates a second source of actor-specific thresholds.
+
+Consider two actors with the **same** seasonal-action problem and the same
+direct waiting cost (J<R_{A0}). Let their only difference be the magnitude
+of a balanced downstream compensation problem, (G_i), with prior
+compensation risk (G_i/2). The same cue accuracy (q) informs both the
+seasonal action and compensation.
+
+For actor (i),
+
+[
+oxed{
+q_i
+=
+rac{B_A+J+G_i}{S_A+G_i}.
+}
+]
+
+Therefore, for (G_2>G_1),
+
+[
+oxed{
+q_2-q_1
+=
+rac{
+(G_2-G_1)(R_{A0}-J)
+}{
+(S_A+G_1)(S_A+G_2)
+}.
+}
+]
+
+This is a finite asynchronous information-use window generated with **no
+difference in raw waiting time and no difference in direct waiting cost**.
+Heterogeneity in the downstream problem that must be solved after waiting is
+sufficient.
+
+The comparative static is intentionally counterintuitive:
+
+[
+rac{partial q_i}{partial G_i}
+=
+rac{R_{A0}-J}{(S_A+G_i)^2}
+>0.
+]
+
+A larger compensation problem creates more potential compensation information
+value, but at any imperfect shared cue it also leaves more residual
+compensation loss. Thus actors with larger (G) require a more reliable cue
+before waiting becomes worthwhile.
+
+This does not contradict the compensation-information bonus. For a **fixed**
+(G), making compensation informed weakly lowers the threshold relative to
+leaving that same compensation problem uninformed. Across actors with different
+(G), however, the actor facing the larger compensation burden has the higher
+dual-use threshold.
+
+This yields a new empirical distinction:
+
+- **information-use breadth** — how many downstream decisions the cue informs;
+- **downstream problem severity** — how costly those decisions are when only
+  imperfectly informed.
+
+They should not be collapsed into one axis.
+
+### General pairwise headroom
+
+Allow the two actors to differ in both direct waiting cost (J_i) and
+compensation severity (G_i). Whenever (J_i<R_{A0}),
+
+[
+oxed{
+q_i
+=
+1-H_i,
+qquad
+H_i
+=
+rac{R_{A0}-J_i}{S_A+G_i}.
+}
+]
+
+The dimensionless quantity (H_i) is the actor's **information-waiting
+headroom**: residual direct fitness room before waiting becomes impossible,
+scaled by the total action-plus-compensation information problem.
+
+When both actors have finite thresholds,
+
+[
+oxed{
+Delta q
+=
+|H_1-H_2|.
+}
+]
+
+This unifies the two sources of threshold heterogeneity. Larger (J_i)
+shrinks headroom through the numerator; larger (G_i) shrinks it through the
+denominator.
+
+A useful consequence is an **iso-threshold contour**:
+
+[
+rac{R_{A0}-J_1}{S_A+G_1}
+=
+rac{R_{A0}-J_2}{S_A+G_2}.
+]
+
+Different direct waiting costs and different compensation problems can exactly
+offset, producing identical information-use thresholds. Conversely, one actor
+can have lower direct waiting cost yet a higher threshold if it faces a
+sufficiently larger downstream compensation problem.
+
+If (J_ige R_{A0}), actor (i) never waits even at perfect dual-use
+information. A pair with one finite threshold and one such actor therefore has
+persistent asymmetric uptake through (q=1).
+
 ## Relationship to effective deadline cost
 
 The theorem can also be written
