@@ -24,7 +24,17 @@
     "minimum_training_years": 15,
     "signed_rho_primary": true,
     "gaussian_q_bridge_secondary": "q = 0.5 + asin(rho)/pi",
-    "published_sanity_check": "Resendiz-Infante & Gauthier 2024 Table 2"
+    "published_sanity_check": "Resendiz-Infante & Gauthier 2024 Table 2",
+    "environmental_source": "NCEP NARR via NOAA PSL",
+    "context_windows": {
+      "St_Lawrence_primary": "1-15 May",
+      "St_Lawrence_sensitivity": "1 Apr-15 May",
+      "Nunavik": "10-31 May",
+      "Baffin": "20 May-5 Jun",
+      "Bylot_target": "30 May-15 Jun"
+    },
+    "primary_detrending": "OLS residuals after separate linear regressions of source and target annual window means on calendar year within each 20-year pre-focal training window",
+    "source_arima_boundary": "Resendiz-Infante & Gauthier 2024 used ARIMA-model residuals for the published 1979-2018 correlations; that source method is an external calibration/sensitivity, not the focal primary q definition"
   },
   "movement_decision": {
     "unit": "individual x staging-context x day at risk",
@@ -35,10 +45,23 @@
       "wind support along next-route bearing",
       "precipitation",
       "same-day temperature anomaly"
-    ]
+    ],
+    "context_definition": {
+      "allowed": [
+        "St_Lawrence",
+        "Nunavik",
+        "Baffin"
+      ],
+      "target_not_risk_context": "Bylot",
+      "movement_unit": "automatic movepp staging_stopover habitat",
+      "assignment": "habitat centroid must fall in exactly one source-backed stopover polygon",
+      "per_individual_cluster_id_as_context": false,
+      "source": "Resendiz-Infante & Gauthier 2024 stopover-area definitions",
+      "geometry_status": "SOURCE_POLYGONS_NOT_YET_MATERIALIZED"
+    }
   },
   "primary_model": {
-    "formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + C(context) + C(year)",
+    "formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(context) + C(year)",
     "uncertainty": "cluster by individual; if supported by software, two-way sensitivity by individual and year",
     "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
     "directional_prediction": "positive on logit departure hazard: warm cues promote departure more strongly where they historically predict later warm/early Bylot conditions"
@@ -67,7 +90,8 @@
     ],
     "selection": "leave-one-individual-out predictive log loss",
     "support_gate": "interior candidate beats no-threshold model and adjacent grid points are not tied within 1 SE",
-    "failure_rule": "if gate fails, report THRESHOLD_NOT_IDENTIFIED"
+    "failure_rule": "if gate fails, report THRESHOLD_NOT_IDENTIFIED",
+    "one_se_definition": "paired held-out-individual log-loss difference: each adjacent candidate must be worse than the selected threshold by more than one SE of the paired fold differences"
   },
   "forbidden_reframings": [
     "do not call local temperature sensitivity direct observation of cue cognition",
@@ -97,6 +121,60 @@
     "primary_manual_annotation": false,
     "sensitivity_manual_annotation": "allowed only after primary automatic result and without access to climate q or model residuals",
     "departure_event_from_habitat": "last day in an automatically delineated spring staging_stopover habitat followed by outward movement and no return for >=48 h",
-    "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation"
-  }
+    "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation",
+    "repository": "EverTSZ/movepp",
+    "commit": "220e953a2f1c8f29540cb74d0ec69599f24e1d14",
+    "pin_status": "FROZEN_BEFORE_OUTCOME"
+  },
+  "amendment_history": [
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "same-day temperature anomaly was listed under immediate_weather_controls but omitted from the literal primary_model formula",
+      "resolution": "added same_day_temp_anom as an additive control to the registered primary formula",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "context was named but its cross-individual ecological identity was underspecified; movepp cluster_id is individual-specific and cannot serve as the shared q context",
+      "resolution": "freeze exactly three shared staging contexts: St_Lawrence, Nunavik, Baffin; Bylot remains target only; require source-backed polygon assignment of automatic staging habitats",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "environmental data family, anomaly baseline, St. Lawrence primary window, precipitation quantity, and wind-bearing construction were conceptually specified but not operationally frozen",
+      "resolution": "freeze NARR as primary climate family; trailing 20-year pre-focal climate baselines; St_Lawrence 1-15 May primary and 1 Apr-15 May sensitivity; daily accumulated precipitation; fixed source-region-centroid route bearings",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "the phrase 'adjacent grid points are not tied within 1 SE' did not specify whether SE was marginal or paired across identical LOIO folds",
+      "resolution": "freeze paired individual-fold differences (adjacent minus selected); require paired mean difference > one paired SE for both immediate neighbors",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "movepp package version was not pinned",
+      "resolution": "pin EverTSZ/movepp to commit 220e953a2f1c8f29540cb74d0ec69599f24e1d14",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EVENT_DATA_ACCESS",
+      "issue": "parent registration required separate detrending but did not specify the temporal model; source paper used ARIMA residuals while PAYOFF-B broad-bird predictive connectivity used deterministic linear detrending",
+      "resolution": "freeze OLS linear detrending as the focal primary q definition; retain source ARIMA residual correlations as external calibration/sensitivity only",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    }
+  ],
+  "climate_contract": "data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json"
 }

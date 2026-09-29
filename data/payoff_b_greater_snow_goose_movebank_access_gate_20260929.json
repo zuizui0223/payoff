@@ -1,0 +1,64 @@
+{
+  "gate_id": "payoff_b_greater_snow_goose_movebank_access_gate_20260929",
+  "date": "2026-09-29",
+  "study": {
+    "name": "Greater snow goose migration",
+    "movebank_study_id": "1442516400",
+    "years": [
+      2019,
+      2023
+    ],
+    "animals": 75,
+    "valid_locations_public_summary": 5156264,
+    "sensor": "GPS"
+  },
+  "public_evidence": {
+    "movebank_mbi_collection": {
+      "visibility": "summary",
+      "source": "https://www.movebank.org/cms/movebank-content/audubon-mbi-collection",
+      "implication": "study metadata are public but the MBI table does not mark event data as public-data access"
+    },
+    "zenodo_reproducibility_archive": {
+      "doi": "10.5281/zenodo.20686134",
+      "source": "https://zenodo.org/records/20686134",
+      "statement": "Greater Snow Goose data are CC BY-NC, are not redistributed in the archive, and must be downloaded from Movebank to run the species pipeline"
+    },
+    "movebank_api_documentation": {
+      "source": "https://github.com/movebank/movebank-api-doc/blob/master/movebank-api.md",
+      "implication": "study downloads may require user authentication and prior license-term acceptance"
+    }
+  },
+  "current_execution_status": "AUTHENTICATION_AND_CONTEXT_GEOMETRY_BLOCKED_BEFORE_OUTCOME",
+  "current_blocker": "Unauthenticated Movebank study-metadata direct-read returned HTTP 401; focal event data remain unopened. An authenticated, terms-compliant Movebank session plus source-backed route geometry are required.",
+  "science_status": "PREOUTCOME_INTACT_ACCESS_PROBE_CONFIRMED_401",
+  "not_a_science_failure": true,
+  "next_permitted_step": "Materialize authorized Movebank event CSV and the source-backed three-region polygon geometry, then run the frozen movepp preprocessing and preregistered decision-day executor without changing model, context, q, or threshold definitions.",
+  "forbidden_workarounds": [
+    "do not reconstruct individual GPS tracks from Bird Migration Explorer visualizations",
+    "do not substitute another snow-goose population after seeing availability",
+    "do not weaken the estimability gate because access is blocked",
+    "do not infer cue-uptake outcome from published aggregate maps"
+  ],
+  "current_blockers": [
+    "Unauthenticated Movebank study-metadata direct-read returned HTTP 401; an authenticated/terms-compliant session is required before testing event download permission.",
+    "The exact three source stopover polygons used by Resendiz-Infante & Gauthier 2024 have not been materialized; per-individual movepp cluster IDs are forbidden as substitutes for shared route context."
+  ],
+  "resolved_implementation": [
+    "primary cue-uptake model and estimability gate implemented",
+    "secondary LOIO behavioral-threshold gate implemented",
+    "shared route-context semantics frozen as St_Lawrence, Nunavik, Baffin",
+    "Bylot frozen as future target only"
+  ],
+  "public_metadata_probe": {
+    "date": "2026-09-29",
+    "workflow_run_id": 36526114820,
+    "artifact_id": 11014752555,
+    "artifact_digest": "sha256:01b90451bb3964169d5e787ea9528f4eb4f5af0b98c16fef3d3396f9ba9fce67",
+    "request_scope": "Movebank direct-read entity_type=study only; no event rows requested",
+    "http_status": 401,
+    "network_error": null,
+    "raw_probe_classification": "STUDY_METADATA_HTTP_FAILURE",
+    "adjudicated_classification": "UNAUTHENTICATED_STUDY_METADATA_REQUEST_REJECTED",
+    "interpretation": "Latest successful executor CI independently reproduces HTTP 401 at study-metadata scope. Focal movement/event data remain unopened. Authentication/terms compliance is therefore an execution prerequisite, not a scientific failure."
+  }
+}

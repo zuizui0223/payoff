@@ -1,0 +1,33 @@
+{
+  "boundary_id": "payoff_b_snow_goose_novelty_boundary_v1_20260929",
+  "date": "2026-09-29",
+  "status": "PREOUTCOME_FROZEN",
+  "known_prior_results": [
+    {
+      "source": "Bauer et al. 2008 Ecology",
+      "doi": "10.1890/07-1101.1",
+      "already_known": "local environmental predictors of goose departure change in relevance along a migration route"
+    },
+    {
+      "source": "Bauer et al. 2020 Proceedings B",
+      "doi": "10.1098/rspb.2020.0622",
+      "already_known": "environmental variability and information reliability can alter optimal migration timing"
+    },
+    {
+      "source": "Resendiz-Infante & Gauthier 2024 Frontiers in Bird Science",
+      "doi": "10.3389/fbirs.2024.1307628",
+      "already_known": "temperature predictability varies along the greater-snow-goose route and is generally weak at long lead distances"
+    }
+  ],
+  "payoff_b_empirical_question": "whether the effect of a current local temperature cue on departure strengthens with independently precomputed pre-outcome predictive connectivity to the later Bylot state",
+  "primary_novel_estimand": "local_temp_anom3:z_predictive_connectivity",
+  "permitted_positive_claim": "local temperature is more strongly associated with next-day departure where historical source-to-future environmental connectivity is higher",
+  "forbidden_novelty_claims": [
+    "temperature affects goose departure",
+    "environmental cues change in importance en route",
+    "reliable information matters to migration timing",
+    "greater-snow-goose route predictability itself is newly discovered",
+    "a positive interaction is direct cognition or direct q_wait(D)"
+  ],
+  "null_interpretation": "registered natural behavioral cue-uptake bridge not supported; do not retune target state or cue definition post hoc"
+}

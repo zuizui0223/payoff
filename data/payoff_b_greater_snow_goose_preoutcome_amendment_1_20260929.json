@@ -1,0 +1,44 @@
+{
+  "amendment_id": "payoff_b_greater_snow_goose_preoutcome_amendment_1_20260929",
+  "date": "2026-09-29",
+  "stage": "PREOUTCOME_BEFORE_MOVEBANK_EVENT_DATA_ACCESS",
+  "previous_freeze": {
+    "receipt_path": "data/payoff_b_greater_snow_goose_preoutcome_freeze_20260929.json",
+    "receipt_commit": "c9c5835094c78361074fbfdcd1cc7257b690f0c9",
+    "freeze_branch": "freeze/payoff-b-snow-goose-preoutcome-20260929"
+  },
+  "reason": "Clarify a previously underspecified temporal preprocessing choice for predictive connectivity after checking the source paper's methods. The source paper used ARIMA residuals over 1979-2018, while PAYOFF-B's existing predictive-connectivity coordinate uses deterministic separate linear detrending. No focal movement event data or cue-uptake coefficient had been opened.",
+  "source_method": {
+    "citation": "Resendiz-Infante & Gauthier 2024, Frontiers in Bird Science",
+    "doi": "10.3389/fbirs.2024.1307628",
+    "published_processing": "fit ARIMA models to each site-period annual temperature series; correlate residuals from selected ARIMA models"
+  },
+  "frozen_resolution": {
+    "primary_focal_q": "within each 20-year pre-focal window, separately regress source and Bylot annual window-mean temperature on calendar year by OLS; predictive_connectivity_rho is Pearson correlation of the two residual series",
+    "source_arima_role": "external source calibration/sensitivity only",
+    "result_dependent": false
+  },
+  "changed_files": [
+    {
+      "path": "data/payoff_b_greater_snow_goose_gps_cue_uptake_registration_20260929.json",
+      "old_blob_sha": "6a1b21d235e75de555a72ffb47c93f4de0f0978d",
+      "new_blob_sha": "63b15b77d55a2d4aa7abe0ae19cba17c2f0bfc97"
+    },
+    {
+      "path": "data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json",
+      "old_blob_sha": "3debd12319a56fcfb467efb184db8c0325cdc9e2",
+      "new_blob_sha": "3473105e08c167d85f51e14e06841e5349ade9dc"
+    },
+    {
+      "path": "data/payoff_b_greater_snow_goose_cue_uptake_executor_contract_20260929.json",
+      "old_blob_sha": "96cd1787c6121fa584871ea0b080923e22da3caa",
+      "new_blob_sha": "845606defd65ffb3effb4e874bfdcbb5b2776d84"
+    }
+  ],
+  "outcome_boundary": {
+    "movebank_event_data_opened_for_focal_analysis": false,
+    "primary_cue_uptake_coefficient_seen": false,
+    "secondary_threshold_result_seen": false
+  },
+  "forbidden_posthoc_switch": "Do not choose OLS versus ARIMA based on the focal GPS cue-uptake result."
+}

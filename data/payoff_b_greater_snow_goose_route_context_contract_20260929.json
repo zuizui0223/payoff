@@ -1,0 +1,44 @@
+{
+  "contract_id": "payoff_b_greater_snow_goose_route_context_v1_20260929",
+  "date": "2026-09-29",
+  "status": "PREOUTCOME_CONTEXT_SEMANTICS_FROZEN_GEOMETRY_PENDING",
+  "source": {
+    "citation": "Resendiz-Infante & Gauthier 2024, Frontiers in Bird Science",
+    "doi": "10.3389/fbirs.2024.1307628",
+    "methods_basis": [
+      "St. Lawrence Valley treated as one spring stopover",
+      "Nunavik and Baffin Island are the two intermediate Arctic stopover regions",
+      "three stopover polygons were refined from tracking/survey/literature with vegetation and elevation layers",
+      "Bylot south plain is the breeding target rather than a staging risk context"
+    ]
+  },
+  "allowed_primary_contexts": [
+    "St_Lawrence",
+    "Nunavik",
+    "Baffin"
+  ],
+  "target_context": "Bylot",
+  "source_seasonal_windows": {
+    "St_Lawrence": "1 Apr-15 May; 1-15 May is the source-defined shorter sensitivity window",
+    "Nunavik": "10-31 May",
+    "Baffin": "20 May-5 Jun",
+    "Bylot": "30 May-15 Jun arrival/pre-laying target"
+  },
+  "mapping_rule": {
+    "movement_units": "automatic movepp staging_stopover habitats",
+    "spatial_assignment": "assign each habitat by its geometric centroid to exactly one source-region polygon",
+    "accepted_polygon_source": "the three stopover polygons used by Resendiz-Infante & Gauthier 2024, or an exact author/source release of those geometries",
+    "outside_all_polygons": "exclude from primary risk set and count in audit",
+    "intersects_multiple_polygons": "fail closed; do not choose nearest polygon",
+    "per_individual_cluster_id_as_context": false,
+    "data_driven_reclustering_into_three_route_contexts": false,
+    "climate_or_outcome_informed_context_assignment": false
+  },
+  "geometry_gate": {
+    "status": "SOURCE_POLYGONS_NOT_YET_MATERIALIZED",
+    "consequence": "do not execute focal GPS cue-uptake outcome until source-backed region geometry is available",
+    "figure_digitization_primary": false,
+    "hand_drawn_primary": false
+  },
+  "rationale": "q is defined at shared route-region scale, so behavioral context must be the same shared ecological coordinate rather than individual-specific DBSCAN habitat identity."
+}

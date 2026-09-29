@@ -1,0 +1,38 @@
+{
+  "contract_id": "payoff_b_greater_snow_goose_figure1_geometry_sensitivity_v1_20260929",
+  "date": "2026-09-29",
+  "status": "PREOUTCOME_SENSITIVITY_PROTOCOL_FROZEN_NO_GEOMETRY_YET",
+  "primary_geometry_rule": "unchanged: exact/source-released stopover polygons only",
+  "sensitivity_role": "figure-derived geometry may assess robustness but can never replace primary source geometry",
+  "source": {
+    "citation": "Resendiz-Infante & Gauthier 2024, Frontiers in Bird Science",
+    "doi": "10.3389/fbirs.2024.1307628",
+    "figure": "Figure 1 map of spring stopovers and breeding grounds"
+  },
+  "digitization_protocol": [
+    "use the highest-resolution original Figure 1 raster from the publisher",
+    "georeference only from map graticule / coastline control points visible in the published figure",
+    "digitize St_Lawrence, Nunavik, and Baffin boundaries without loading GPS outcomes, climate-q values, or model residuals",
+    "perform two independent traces before comparing them",
+    "rasterize both traces onto the native ~32 km NARR grid",
+    "compute grid-cell Jaccard agreement separately for each route region"
+  ],
+  "acceptance_gate": {
+    "minimum_jaccard_each_region": 0.9,
+    "if_failed": "FIGURE_GEOMETRY_SENSITIVITY_NOT_ESTIMABLE",
+    "if_passed": "retain both traces; do not average boundaries using GPS data"
+  },
+  "sensitivity_outputs": [
+    "trace_A result",
+    "trace_B result",
+    "intersection-core result",
+    "union-envelope result"
+  ],
+  "forbidden": [
+    "do not call digitized polygons the authors' exact polygons",
+    "do not use digitized geometry for the preregistered primary analysis",
+    "do not move vertices after seeing tracked goose locations",
+    "do not choose among traces based on model fit",
+    "do not use climate correlation strength to redraw boundaries"
+  ]
+}

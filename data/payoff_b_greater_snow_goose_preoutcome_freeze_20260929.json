@@ -1,0 +1,72 @@
+{
+  "receipt_id": "payoff_b_greater_snow_goose_preoutcome_freeze_v1_20260929",
+  "frozen_date": "2026-09-29",
+  "status": "PREOUTCOME_FROZEN_NO_FOCAL_MOVEMENT_RESULT_OPENED",
+  "branch": "analysis/payoff-b-greater-snow-goose-cue-uptake-executor-20260929",
+  "head_at_receipt_creation": "5df2ebecc33be467f408590bed4d34f365598b64",
+  "files": [
+    {
+      "path": "data/payoff_b_greater_snow_goose_gps_cue_uptake_registration_20260929.json",
+      "blob_sha": "6a1b21d235e75de555a72ffb47c93f4de0f0978d"
+    },
+    {
+      "path": "data/payoff_b_greater_snow_goose_cue_uptake_executor_contract_20260929.json",
+      "blob_sha": "96cd1787c6121fa584871ea0b080923e22da3caa"
+    },
+    {
+      "path": "data/payoff_b_greater_snow_goose_route_context_contract_20260929.json",
+      "blob_sha": "21f009f953cc08efab5d8cb4780e002c247c0e4a"
+    },
+    {
+      "path": "data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json",
+      "blob_sha": "3debd12319a56fcfb467efb184db8c0325cdc9e2"
+    },
+    {
+      "path": "data/payoff_b_greater_snow_goose_novelty_boundary_20260929.json",
+      "blob_sha": "2900213b777ee0ede86ae24999503923641cf72c"
+    },
+    {
+      "path": "data/payoff_b_greater_snow_goose_figure1_geometry_sensitivity_contract_20260929.json",
+      "blob_sha": "7b53d455b3a2f30241e7a657a52d78ca8c247266"
+    },
+    {
+      "path": "data/payoff_b_greater_snow_goose_movebank_access_gate_20260929.json",
+      "blob_sha": "eb372f3d4ecf0a059a368f009fb702b528df9f74"
+    },
+    {
+      "path": "scripts/payoff_b_greater_snow_goose_cue_uptake.py",
+      "blob_sha": "b70bceddf6aff6d50f284e7e20778f95069987c5"
+    },
+    {
+      "path": "scripts/payoff_b_greater_snow_goose_movebank_public_access_probe.py",
+      "blob_sha": "ecf459e6167360b2884a0f82e1b65730a6082e08"
+    },
+    {
+      "path": "src/cue_uptake_empirics.py",
+      "blob_sha": "8b52df2cc8cb84b61b127bacd41b6458f4364c92"
+    },
+    {
+      "path": "src/greater_snow_goose_information_bridge.py",
+      "blob_sha": "aec1c6e7164cd0c0294fc957510be77ee2b3e419"
+    },
+    {
+      "path": "tests/test_cue_uptake_empirics.py",
+      "blob_sha": "f5024ddee6ca56768e18bb431f5261fc1638d6f2"
+    },
+    {
+      "path": "tests/test_snow_goose_cue_uptake_executor.py",
+      "blob_sha": "5e637fbf93c52795f8e3d0d9e00111fbdb172685"
+    },
+    {
+      "path": ".github/workflows/payoff-b-greater-snow-goose-cue-uptake-executor.yml",
+      "blob_sha": "98d4edcbb668659fb62828bfa226b51322b8767a"
+    }
+  ],
+  "outcome_boundary": {
+    "movebank_event_data_opened_for_focal_analysis": false,
+    "primary_cue_uptake_coefficient_seen": false,
+    "secondary_threshold_result_seen": false
+  },
+  "mutation_rule": "Any post-freeze scientific change to a listed file requires a new amendment receipt before focal outcome execution; do not overwrite this receipt.",
+  "purpose": "bind future outcome interpretation to the exact preregistered science, implementation, data semantics, and claim boundary"
+}

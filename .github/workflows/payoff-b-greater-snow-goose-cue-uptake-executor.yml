@@ -1,0 +1,61 @@
+name: PAYOFF-B greater snow goose cue uptake executor
+
+concurrency:
+  group: payoff-b-greater-snow-goose-cue-uptake-${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-greater-snow-goose-cue-uptake-executor-20260929
+    paths:
+      - 'src/cue_uptake_empirics.py'
+      - 'scripts/payoff_b_greater_snow_goose_cue_uptake.py'
+      - 'scripts/payoff_b_greater_snow_goose_movebank_public_access_probe.py'
+      - 'tests/test_cue_uptake_empirics.py'
+      - 'tests/test_snow_goose_cue_uptake_executor.py'
+      - 'data/payoff_b_greater_snow_goose_cue_uptake_executor_contract_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_novelty_boundary_20260929.json'
+      - 'docs/PAYOFF_B_GREATER_SNOW_GOOSE_NOVELTY_BOUNDARY_20260929.md'
+      - 'docs/PAYOFF_B_GREATER_SNOW_GOOSE_FIGURE1_GEOMETRY_PROTOCOL_20260929.md'
+      - 'data/payoff_b_greater_snow_goose_figure1_geometry_sensitivity_contract_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_route_context_contract_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_movebank_access_gate_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json'
+      - '.github/workflows/payoff-b-greater-snow-goose-cue-uptake-executor.yml'
+  pull_request:
+    paths:
+      - 'src/cue_uptake_empirics.py'
+      - 'scripts/payoff_b_greater_snow_goose_cue_uptake.py'
+      - 'data/payoff_b_greater_snow_goose_figure1_geometry_sensitivity_contract_20260929.json'
+      - 'docs/PAYOFF_B_GREATER_SNOW_GOOSE_FIGURE1_GEOMETRY_PROTOCOL_20260929.md'
+      - 'scripts/payoff_b_greater_snow_goose_movebank_public_access_probe.py'
+      - 'tests/test_cue_uptake_empirics.py'
+      - 'tests/test_snow_goose_cue_uptake_executor.py'
+      - 'data/payoff_b_greater_snow_goose_cue_uptake_executor_contract_20260929.json'
+      - 'docs/PAYOFF_B_GREATER_SNOW_GOOSE_NOVELTY_BOUNDARY_20260929.md'
+      - 'data/payoff_b_greater_snow_goose_novelty_boundary_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_route_context_contract_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_movebank_access_gate_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json'
+      - '.github/workflows/payoff-b-greater-snow-goose-cue-uptake-executor.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[test,empirical]'
+      - run: python -m pytest -q tests/test_cue_uptake_empirics.py tests/test_snow_goose_cue_uptake_executor.py
+      - run: python scripts/payoff_b_greater_snow_goose_cue_uptake.py --help
+      - run: python scripts/payoff_b_greater_snow_goose_movebank_public_access_probe.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-greater-snow-goose-access-probe
+          path: outputs/payoff_b_greater_snow_goose_movebank_public_access_probe.json
+          if-no-files-found: error
