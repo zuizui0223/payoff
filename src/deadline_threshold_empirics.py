@@ -190,3 +190,108 @@ def predicted_pair_asynchrony(
         return q > window.lower_bound_open
 
     return False
+
+
+@dataclass(frozen=True)
+class RevealedDelayCostInterval:
+    """Delay-cost interval implied by a threshold bracket under the exact model."""
+
+    lower_inclusive: float | None
+    upper_exclusive: float | None
+    compatible_with_nonnegative_cost: bool
+
+
+def revealed_delay_cost(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    wait_threshold: float,
+) -> float:
+    """Invert the exact information-deadline theorem to recover D.
+
+    For an interior threshold q_wait,
+
+        D = q_wait (A + L) - max(A, L).
+
+    This is a revealed-model quantity.  It becomes an independent empirical
+    test only when compared with a separately estimated opportunity cost.
+    """
+
+    q = _validate_q(wait_threshold)
+    pi = float(prior_early)
+    cf = float(false_early_cost)
+    cm = float(missed_early_cost)
+    if not isfinite(pi) or not 0.0 < pi < 1.0:
+        raise ValueError("prior_early must lie strictly between 0 and 1")
+    if not all(isfinite(x) and x >= 0.0 for x in (cf, cm)):
+        raise ValueError("state-mismatch costs must be non-negative")
+    a = (1.0 - pi) * cf
+    l = pi * cm
+    total = a + l
+    if total <= 0.0:
+        raise ValueError("prior expected-loss scale must be positive")
+    actionable = max(a, l) / total
+    if q < actionable - 1e-12:
+        raise ValueError("wait threshold cannot lie below actionable cue threshold")
+    d = q * total - max(a, l)
+    if d < -1e-12:
+        raise AssertionError("revealed delay cost cannot be negative")
+    return max(0.0, d)
+
+
+def revealed_delay_cost_interval(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    threshold_interval: InferredThresholdInterval,
+) -> RevealedDelayCostInterval:
+    """Map an observed threshold bracket into a revealed-D bracket.
+
+    The transformation is monotone.  Bounds are clipped at D=0 because the
+    declared model excludes negative waiting costs.  A non-monotone threshold
+    observation is incompatible and fails closed.
+    """
+
+    if not threshold_interval.monotone:
+        return RevealedDelayCostInterval(
+            lower_inclusive=None,
+            upper_exclusive=None,
+            compatible_with_nonnegative_cost=False,
+        )
+
+    pi = float(prior_early)
+    cf = float(false_early_cost)
+    cm = float(missed_early_cost)
+    if not isfinite(pi) or not 0.0 < pi < 1.0:
+        raise ValueError("prior_early must lie strictly between 0 and 1")
+    if not all(isfinite(x) and x >= 0.0 for x in (cf, cm)):
+        raise ValueError("state-mismatch costs must be non-negative")
+    a = (1.0 - pi) * cf
+    l = pi * cm
+    total = a + l
+    if total <= 0.0:
+        raise ValueError("prior expected-loss scale must be positive")
+    other = max(a, l)
+    q0 = other / total
+
+    lower_q = threshold_interval.lower_inclusive
+    upper_q = threshold_interval.upper_exclusive
+    if upper_q is not None and upper_q <= q0:
+        return RevealedDelayCostInterval(
+            lower_inclusive=None,
+            upper_exclusive=None,
+            compatible_with_nonnegative_cost=False,
+        )
+
+    effective_lower_q = q0 if lower_q is None else max(q0, lower_q)
+    lower_d = max(0.0, effective_lower_q * total - other)
+    upper_d = (
+        None
+        if upper_q is None
+        else max(0.0, upper_q * total - other)
+    )
+    return RevealedDelayCostInterval(
+        lower_inclusive=lower_d,
+        upper_exclusive=upper_d,
+        compatible_with_nonnegative_cost=True,
+    )
