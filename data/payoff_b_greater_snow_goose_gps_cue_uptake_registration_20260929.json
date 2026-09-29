@@ -47,11 +47,14 @@
   },
   "primary_model": {
     "formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + C(context) + C(year)",
-    "uncertainty": "cluster by individual; if supported by software, two-way sensitivity by individual and year",
+    "uncertainty": "dual gate: cluster-robust uncertainty by individual and separately by context-year; support requires positive 95% CI lower bound under both; use Student-t critical values with df = clusters-1 for each clustering dimension",
     "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
     "directional_prediction": "positive on logit departure hazard: warm cues promote departure more strongly where they historically predict later warm/early Bylot conditions",
     "formula_authoritative": true,
-    "formula_resolution_note": "The explicit frozen formula is authoritative over the earlier prose list of controls; same-day temperature anomaly is not an additional primary covariate."
+    "formula_resolution_note": "The explicit frozen formula is authoritative over the earlier prose list of controls; same-day temperature anomaly is not an additional primary covariate.",
+    "support_rule": "estimate must be positive and both individual-clustered and context-year-clustered two-sided 95% confidence intervals must exclude zero on the positive side",
+    "context_year_definition": "paste(context, year)",
+    "two_way_sensitivity": "individual x context-year multiway cluster covariance may be reported as sensitivity if software returns a finite positive variance; it does not replace the dual primary gate"
   },
   "estimability_gate": {
     "minimum_individuals": 30,
@@ -59,7 +62,10 @@
     "minimum_contexts": 3,
     "minimum_departure_events": 100,
     "require_nonzero_within_context_predictive_connectivity_variation": true,
-    "require_predictive_connectivity_sd_at_least": 0.03
+    "require_predictive_connectivity_sd_at_least": 0.03,
+    "minimum_context_year_clusters": 12,
+    "require_each_context_predictive_connectivity_variation": true,
+    "within_context_variation_rule": "each of the three frozen route contexts must contain at least two distinct finite predictive-connectivity values across focal years and have positive population SD"
   },
   "threshold_secondary": {
     "opened_only_if_primary_estimable": true,
