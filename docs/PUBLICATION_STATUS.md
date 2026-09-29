@@ -128,13 +128,65 @@ Exact analytic spine:
 ```text
 T1  cue information has an action threshold
 -> T2  decision deadlines determine information uptake
--> T3  heterogeneous deadlines create a finite desynchronization window
+-> T3  heterogeneous effective deadlines create a finite desynchronization window
 -> T7  perfect information can support old and informed strict equilibria
 -> T8  temporary cue degradation can collapse information use without recovery
 ```
 
 T4–T6, T9 and the rescue/topology results remain important results and
 mechanistic extensions, but they do not share equal weight in the abstract.
+
+### Deadline-cost refinement — exact extension, not a new abstract spine
+
+The empirical deadline variable is now explicitly the **effective fitness cost
+of waiting**, not raw elapsed time:
+
+```text
+D_eff(delta)
+= J(delta)
+  + min_c [ K(c) + M(delta-c) ]
+```
+
+where `J` is direct nonrecoverable waiting cost, `K` is compensation cost,
+and `M` is the fitness loss from residual timing delay.
+
+Consequences already verified in code:
+
+- raw waiting duration, migration distance and departure date need not rank
+  `D_eff` and can even rank information thresholds in the wrong order;
+- greater downstream compensatory capacity can reduce the cue reliability
+  required for waiting to be worthwhile;
+- complete timing recovery does not imply zero waiting cost when `J>0`;
+- the direct natural target is
+  `D_eff,2-D_eff,1 -> q2-q1 -> asynchronous cue use`, not
+  `raw delay -> q`.
+
+A further exact **dual-use information** extension applies when the same focal
+cue also changes the downstream compensation decision. Then `D_eff` is
+cue-dependent and the fixed-cost threshold must not be used mechanically:
+
+```text
+wait
+iff
+V_action(q) + V_compensation(q) > J + R_compensation,prior
+```
+
+The exact direct-cost rescue interval is
+
+```text
+J in [ max(0, R_A0 - R_C0), R_A0 )
+```
+
+where action information alone can never justify waiting but the same cue can
+become worth waiting for because it also informs compensation.
+
+This result is a closed-form ecological specialization of established
+sequential value-of-information/recourse logic. Generic VOI, stopovers as
+information sources and en-route compensation are not claimed as novel.
+See `docs/PAYOFF_B_DUAL_USE_INFORMATION_NOVELTY_BOUNDARY_20260930.md`.
+
+These refinements are currently **theory extensions and empirical-validation
+guards**. They do not replace T1–T3/T7–T8 as the main manuscript spine.
 
 Natural evidence is deliberately modular:
 
@@ -158,7 +210,13 @@ Natural evidence is deliberately modular:
 - **prospective Hoge Veluwe cue–resource lane:** NO_CUE_RESOURCE_REVERSAL;
   the environmental prerequisite failed before resident–migrant timing history
   was opened, so Gate C was NOT_RUN and no natural information-recovery
-  hysteresis is claimed.
+  hysteresis is claimed;
+- **greater snow goose deadline-validation lane:** same-lineage evidence now
+  anchors route predictability, perturbation carry-over cost, two-sided timing
+  fitness and multi-stage buffering. A GPS departure cue-uptake lane and a
+  downstream dual-use compensation screen are preregistered, but no focal GPS
+  outcome has been opened. Natural `D_eff`, actor-level `q_wait`, and the
+  pairwise asynchronous window remain unidentified.
 
 The earlier temporal-buffering conclusion remains valid as the **capacity
 layer**, not the primary novelty claim.
@@ -180,6 +238,12 @@ FUTURE_AUTHENTICATED_EXECUTION = permitted under original preregistration
 RETUNING_AFTER_AIKENS = forbidden
 E6_CAUSAL_INFORMATION_DISTANCE = NOT_IDENTIFIED
 E6_PHOTOPERIOD_ENDOGENOUS_ALTERNATIVE = EXPLICIT
+DEADLINE_EMPIRICAL_TARGET = D_EFF_NOT_RAW_DELAY
+DUAL_USE_INFORMATION_THEOREM = EXACT_VERIFIED
+FIXED_D_EFF_EXOGENEITY_SCREEN = PREREGISTERED_UNOPENED
+GREATER_SNOW_GOOSE_SINGLE_ACTOR_DEADLINE_LANE = PREREGISTERED_UNOPENED
+GREATER_SNOW_GOOSE_D_EFF = NOT_IDENTIFIED
+GREATER_SNOW_GOOSE_Q_WAIT = NOT_IDENTIFIED
 PAIRWISE_DEADLINE_DIFFERENCE_NATURAL_TEST = NOT_YET_DIRECTLY_TESTED
 PAIRWISE_RESPONSE_ASYMMETRY_BRIDGE = SUPPORTED_PUBLISHED
 INTERACTION_RESPONSE_BRIDGE_V2 = TWO_INDEPENDENT_CONTEXTS
