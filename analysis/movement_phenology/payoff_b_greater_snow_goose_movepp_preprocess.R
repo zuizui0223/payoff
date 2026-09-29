@@ -123,6 +123,27 @@ phs <- classify_phases(
 if (!"staging_stopover" %in% as.character(unique(phs$phase))) {
   stop("automatic movepp classification did not resolve staging_stopover")
 }
+if (!"Breeding" %in% as.character(unique(phs$phase))) {
+  stop("automatic movepp classification did not resolve Breeding")
+}
+
+# Fixed Bylot target coordinate from movement geometry only: median location
+# of automatically classified Breeding points during 30 May-15 Jun.
+all_date <- as.Date(phs$time, tz = "UTC")
+all_year <- as.integer(format(all_date, "%Y"))
+breed_start <- as.Date(sprintf("%04d-05-30", all_year))
+breed_end <- as.Date(sprintf("%04d-06-15", all_year))
+breed_target <- (
+  as.character(phs$phase) == "Breeding" &
+  all_date >= breed_start & all_date <= breed_end
+)
+breed_pts <- phs[breed_target, ]
+if (nrow(breed_pts) < 20L) {
+  stop("too few automatic Breeding points in frozen Bylot target window")
+}
+breed_co <- st_coordinates(breed_pts)
+target_bylot_lon <- median(breed_co[, 1], na.rm = TRUE)
+target_bylot_lat <- median(breed_co[, 2], na.rm = TRUE)
 
 # Frozen spring window: 01 Apr through 15 Jun UTC.
 pdate <- as.Date(phs$time, tz = "UTC")
@@ -190,6 +211,8 @@ habitats$context <- label_by_cluster[km$cluster]
 if (length(unique(habitats$context)) != 3L) {
   stop("shared route-context mapping did not produce three contexts")
 }
+habitats$target_bylot_lon <- target_bylot_lon
+habitats$target_bylot_lat <- target_bylot_lat
 
 # Map habitat summaries back to point rows for occupancy-bout construction.
 map_key <- paste(
