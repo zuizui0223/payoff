@@ -39,15 +39,15 @@
     "broad_birds": "PARTIAL_INFORMATION_QUALITY_ONLY",
     "wigeon": "PARTIAL_INFORMATION_QUALITY_PLUS_PHASE_CORRECTION_NOT_CUE_USE",
     "pied_flycatcher_experiment": "PARTIAL_DECISION_TIME_AVAILABILITY_ONLY",
-    "greater_snow_goose": "SAME_SYSTEM_COMPOSITE_EXPERIMENTAL_DELAY_COST_PLUS_PREDICTABILITY_BUT_NO_ACTOR_LEVEL_THRESHOLD"
+    "greater_snow_goose": "SAME_SYSTEM_COMPOSITE_D_LIKE_PERTURBATION_COST_PLUS_PREDICTABILITY_BUT_D_NOT_IDENTIFIED_AND_NO_ACTOR_LEVEL_THRESHOLD"
   },
   "promotion_rule": "No direct natural mechanism claim without all four measured quantities in one qualifying system and a pre-outcome analysis contract.",
   "current_best_development_candidate": {
     "system": "greater snow goose: St. Lawrence spring staging -> Bylot Island breeding",
-    "delay_cost_anchor": "Grandmont et al. 2023 experimental captivity duration during spring migration",
+    "delay_cost_anchor": "Legagneux et al. 2012 / Grandmont et al. 2023 captivity-duration perturbation with reproductive consequences; D-like only because delay and stress are not separated",
     "information_quality_anchor": "Resendiz-Infante & Gauthier 2024 route-to-breeding temperature predictability",
-    "resolved_gap": "independent biological delay-cost anchor exists in same ecological lineage",
-    "remaining_bottleneck": "no actor-level cue-use switch measured across sufficient q variation on the same individuals",
+    "resolved_gap": "same ecological lineage contains an experimentally manipulated pre-breeding perturbation-cost axis plus independent route predictability",
+    "remaining_bottleneck": "clean opportunity-cost D identification plus actor-level cue-use switch across sufficient q variation",
     "promotion_status": "COMPOSITE_BRIDGE_ONLY_NOT_DIRECT_TEST"
   }
 }
