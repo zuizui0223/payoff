@@ -24,7 +24,15 @@
     "minimum_training_years": 15,
     "signed_rho_primary": true,
     "gaussian_q_bridge_secondary": "q = 0.5 + asin(rho)/pi",
-    "published_sanity_check": "Resendiz-Infante & Gauthier 2024 Table 2"
+    "published_sanity_check": "Resendiz-Infante & Gauthier 2024 Table 2",
+    "environmental_source": "NCEP NARR via NOAA PSL",
+    "context_windows": {
+      "St_Lawrence_primary": "1-15 May",
+      "St_Lawrence_sensitivity": "1 Apr-15 May",
+      "Nunavik": "10-31 May",
+      "Baffin": "20 May-5 Jun",
+      "Bylot_target": "30 May-15 Jun"
+    }
   },
   "movement_decision": {
     "unit": "individual x staging-context x day at risk",
@@ -128,6 +136,15 @@
       "resolution": "freeze exactly three shared staging contexts: St_Lawrence, Nunavik, Baffin; Bylot remains target only; require source-backed polygon assignment of automatic staging habitats",
       "outcome_data_opened": false,
       "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "environmental data family, anomaly baseline, St. Lawrence primary window, precipitation quantity, and wind-bearing construction were conceptually specified but not operationally frozen",
+      "resolution": "freeze NARR as primary climate family; trailing 20-year pre-focal climate baselines; St_Lawrence 1-15 May primary and 1 Apr-15 May sensitivity; daily accumulated precipitation; fixed source-region-centroid route bearings",
+      "outcome_data_opened": false,
+      "result_dependent": false
     }
-  ]
+  ],
+  "climate_contract": "data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json"
 }
