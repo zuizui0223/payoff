@@ -73,3 +73,62 @@ def test_adjacent_point_within_one_se_is_a_tie():
     )
     assert result.status == "THRESHOLD_NOT_IDENTIFIED"
     assert result.reason == "adjacent_grid_point_tied_within_one_se"
+
+
+from src.cue_uptake_empirics import (
+    paired_difference_standard_error,
+    select_threshold_paired_one_se,
+)
+
+
+def _paired_grid(base=0.60):
+    return {
+        0.50: [base, base, base, base],
+        0.525: [base, base, base, base],
+        0.55: [base, base, base, base],
+        0.575: [base, base, base, base],
+        0.60: [base, base, base, base],
+        0.625: [base, base, base, base],
+        0.65: [base, base, base, base],
+        0.675: [base, base, base, base],
+        0.70: [base, base, base, base],
+    }
+
+
+def test_paired_difference_standard_error_uses_fold_pairing():
+    mean, se = paired_difference_standard_error(
+        [0.50, 0.70, 0.40, 0.60],
+        [0.40, 0.60, 0.30, 0.50],
+    )
+    assert mean == pytest.approx(0.10)
+    assert se == pytest.approx(0.0, abs=1e-12)
+
+
+def test_paired_one_se_identifies_unique_interior_threshold():
+    candidates = _paired_grid()
+    candidates[0.575] = [0.40, 0.41, 0.39, 0.40]
+    candidates[0.55] = [0.46, 0.47, 0.45, 0.46]
+    candidates[0.60] = [0.47, 0.48, 0.46, 0.47]
+    result = select_threshold_paired_one_se(
+        candidates,
+        no_threshold_fold_losses=[0.55, 0.54, 0.56, 0.55],
+        frozen_grid=tuple(sorted(candidates)),
+    )
+    assert result.status == "BEHAVIORAL_THRESHOLD_IDENTIFIED"
+    assert result.selected_q == pytest.approx(0.575)
+    assert result.lower_paired_mean_difference > result.lower_paired_se
+    assert result.upper_paired_mean_difference > result.upper_paired_se
+
+
+def test_paired_one_se_rejects_noisy_adjacent_tie():
+    candidates = _paired_grid()
+    candidates[0.575] = [0.400, 0.410, 0.390, 0.400]
+    candidates[0.55] = [0.360, 0.470, 0.350, 0.460]
+    candidates[0.60] = [0.470, 0.480, 0.460, 0.470]
+    result = select_threshold_paired_one_se(
+        candidates,
+        no_threshold_fold_losses=[0.55, 0.54, 0.56, 0.55],
+        frozen_grid=tuple(sorted(candidates)),
+    )
+    assert result.status == "THRESHOLD_NOT_IDENTIFIED"
+    assert "paired_one_se" in result.reason
