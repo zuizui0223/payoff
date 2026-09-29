@@ -51,13 +51,14 @@
   ],
   "public_metadata_probe": {
     "date": "2026-09-29",
-    "workflow_run_id": 36525630741,
-    "artifact_id": 11014532790,
-    "artifact_sha256": "3884c84e126115c73acc3ad38454dbc902f1f6f5d26372fe2e6f1d130d490cc1",
+    "workflow_run_id": 36526114820,
+    "artifact_id": 11014752555,
+    "artifact_digest": "sha256:01b90451bb3964169d5e787ea9528f4eb4f5af0b98c16fef3d3396f9ba9fce67",
     "request_scope": "Movebank direct-read entity_type=study only; no event rows requested",
     "http_status": 401,
     "network_error": null,
-    "classification": "UNAUTHENTICATED_STUDY_METADATA_REQUEST_REJECTED",
-    "interpretation": "The public unauthenticated direct-read route cannot even return the frozen study metadata in this environment. This confirms an authentication/access step is required before any event-data execution can occur; it does not establish whether an authenticated user with accepted terms has event download permission."
+    "raw_probe_classification": "STUDY_METADATA_HTTP_FAILURE",
+    "adjudicated_classification": "UNAUTHENTICATED_STUDY_METADATA_REQUEST_REJECTED",
+    "interpretation": "Latest successful executor CI independently reproduces HTTP 401 at study-metadata scope. Focal movement/event data remain unopened. Authentication/terms compliance is therefore an execution prerequisite, not a scientific failure."
   }
 }
