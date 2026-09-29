@@ -13,10 +13,10 @@ The theoretical implication is already exact for the declared binary-cue model:
 q_i = \frac{\max(A,L)+D_{eff,i}}{A+L}
 ]
 
-whenever (D_i<R_0). Therefore, for two otherwise identical actors,
+whenever (D_{eff,i}<R_0). Therefore, for two otherwise identical actors,
 
 [
-D_1<D_2
+D_{eff,1}<D_{eff,2}
 \Rightarrow
 q_1<q_2
 ]
@@ -25,7 +25,7 @@ and, when both eventually use the cue,
 
 [
 \Delta q=q_2-q_1
-=\frac{D_2-D_1}{A+L}.
+=\frac{D_{eff,2}-D_{eff,1}}{A+L}.
 ]
 
 The repository already checks this identity against the implemented decision
@@ -44,7 +44,7 @@ A qualifying dataset must measure, independently of the focal cue-use outcome:
 
 1. **Cue reliability (q)** before commitment: the probability that the cue
    correctly classifies the later state relevant to fitness.
-2. **Effective delay/opportunity cost (D_eff,i)**: the fitness-equivalent cost of postponing commitment after optimal feasible downstream compensation. It may be measured directly or decomposed into raw delay, compensation capacity/cost and residual timing loss.
+2. **Effective delay/opportunity cost (D_eff,i)**: the total fitness-equivalent cost of postponing commitment, including any nonrecoverable direct waiting cost plus optimally compensated downstream timing cost. It may be estimated as a total causal effect or decomposed into direct cost, raw delay, compensation and residual timing loss.
 3. **State-mismatch losses (C_F,C_M)** and the prior state probability
    (pi), sufficient to construct
    (A=(1-pi)C_F) and (L=pi C_M).
@@ -62,9 +62,9 @@ is revealed**.
 At commitment, the relevant quantity is
 
 [
-\bar D_i(\mathcal I_i)
+\bar D_{eff,i}(\mathcal I_i)
 =
-E[D_i(H)\mid\mathcal I_i],
+E[D_{eff,i}(H)\mid\mathcal I_i],
 ]
 
 where (\mathcal I_i) is the information actually available when the actor must
@@ -76,7 +76,7 @@ Under additive expected loss, the exact threshold becomes
 q_{i,pred}
 =
 \frac{
-\max(A,L)+E[D_i(H)\mid\mathcal I_i]
+\max(A,L)+E[D_{eff,i}(H)\mid\mathcal I_i]
 }{
 A+L
 }.
@@ -87,34 +87,73 @@ Therefore:
 - a harsh future year may produce a large realised delay cost without changing
   the rational threshold if that harshness was not predictable at commitment;
 - a threshold may vary across individuals or years only when pre-commitment
-  information changes their conditional expected delay cost;
+  information changes their conditional expected effective waiting cost;
 - post-hoc breeding-ground conditions must not be substituted for
-  (E[D\mid\mathcal I]) in the threshold equation.
+  (E[D_{eff}\mid\mathcal I]) in the threshold equation.
 
 This rule is implementation-tested in
 `src/state_dependent_information_deadline.py`.
 
-## Compensated-deadline rule
+## Direct-plus-compensated deadline rule
 
-If waiting creates raw delay ((\delta)), the actor can recover ((c)) time
-units at compensation cost (K(c)), and residual delay carries fitness loss
-(M(\delta-c)), the theorem input is
+If waiting creates raw delay (\delta), let (J(\delta)) be a direct
+nonrecoverable waiting cost. The actor may then recover (c) time units at
+compensation cost (K(c)), while residual delay carries fitness loss
+(M(\delta-c)). The theorem input is
 
 [
 D_{eff}
 =
+J(\delta)
++
 \min_{0\le c\le\min(C,\delta)}
 [K(c)+M(\delta-c)].
 ]
 
-Thus raw delay is not itself the empirical (D) unless downstream compensation
-is impossible or already included in the loss estimate. With state-dependent
-conditions, the commitment-time object is the appropriate expectation of this
-**optimized effective cost**.
+The earlier compensation-only formula is the exact special case
+(J(\delta)=0). Raw delay is therefore not itself the empirical theorem cost,
+and even complete timing recovery does not imply (D_{eff}=0) if direct waiting
+cost remains.
+
+With state-dependent conditions, the commitment-time object is the appropriate
+expectation of this total effective cost.
 
 This reduction is implementation-tested in
 `src/compensated_information_deadline.py`.
 
+## Two valid empirical routes to D_eff
+
+### Route A — total causal effect
+
+Let (Y(0)) be expected fitness under immediate commitment and
+(Y(\delta,adapt)) expected fitness when waiting is imposed but ordinary
+downstream compensation is allowed. A biologically faithful waiting
+intervention identifies
+
+[
+D^{causal}_{eff}(\delta)
+=
+E[Y(0)]-E[Y(\delta,adapt)].
+]
+
+This route estimates the total cost directly and does not require separate
+identification of (J), (K) and (M).
+
+### Route B — mechanistic decomposition
+
+Alternatively, independently estimate:
+
+1. direct waiting cost (J(\delta));
+2. compensatory capacity (C);
+3. compensation cost (K(c));
+4. residual timing-loss function (M(\delta-c)).
+
+Then reconstruct the optimized total.
+
+Both routes require treatment fidelity. A manipulation that adds
+treatment-specific handling, confinement or other stress estimates the cost of
+that manipulation, not automatically the natural cost of waiting for
+information.
 
 ## Primary falsifiable predictions
 
@@ -192,13 +231,13 @@ Showing only different phenological slopes is insufficient.
 If the actor waits because
 
 [
-V(q)>E[D\mid\mathcal I],
+V(q)>E[D_{eff}\mid\mathcal I],
 ]
 
 but a subsequently revealed harsh state has
 
 [
-D(H)>V(q),
+D_{eff}(H)>V(q),
 ]
 
 then waiting is worse **ex post** even though it was optimal **ex ante**.
@@ -231,7 +270,7 @@ For the canonical example, an observed threshold bracket
 implies
 
 [
-0.096\le D_{revealed}<0.112,
+0.096\le D^{eff}_{revealed}<0.112,
 ]
 
 which contains the generating effective cost (D_eff=0.10).
@@ -247,7 +286,7 @@ The cleanest design manipulates cue reliability and delay cost orthogonally.
 
 For each actor or actor class:
 
-- estimate (D_eff,i), or its commitment-time expectation when state-dependent, using an independent fitness model or a preregistered decomposition of raw delay, downstream compensation and residual timing loss;
+- estimate (D_eff,i), or its commitment-time expectation when state-dependent, either from a biologically faithful total-effect waiting intervention or from a preregistered decomposition of direct waiting cost, raw delay, downstream compensation and residual timing loss;
 - record exactly which predictors of future delay cost were available before
   the wait/commit decision;
 - expose decisions to at least five cue-reliability levels spanning below,
@@ -268,7 +307,7 @@ the exact directional and window-width predictions after outcomes are seen.
 
 The Amaral-derived lane estimates pre-outcome source--destination predictive
 connectivity and realized arrival--green-up mismatch. It supplies a natural
-information-quality coordinate, but it does not independently measure (D_i)
+information-quality coordinate, but it does not independently measure (D_eff,i)
 or binary cue uptake.
 
 ### Eurasian wigeon
@@ -288,18 +327,20 @@ or estimate a pair of information-use thresholds.
 
 ### Greater snow goose
 
-The same ecological lineage now supplies a D-like perturbation axis and a
-q-like route-predictability axis. Captivity duration during spring migration
-had later reproductive consequences, and the strength of those consequences
-varied among years; independently, southern-route temperatures were weak
-predictors of later Arctic conditions.
+The same ecological lineage now supplies q-like route predictability,
+perturbation-cost evidence, two-sided timing-fitness loss and downstream
+buffering evidence. Historical tracking shows that some raw timing delay can be
+compressed during migration and after arrival. Captivity experiments show a
+different feature: reproductive or breeding costs can remain even when detected
+breeders show little corresponding shift in arrival or laying date.
 
-This makes greater snow goose the strongest current **hidden-deadline**
-candidate, but not a direct threshold test. Captivity duration combines elapsed
-time with handling/confinement stress, and the harsh breeding-ground state that
-amplified the carry-over effect was not necessarily known when the migration
-decision was made. The exact theorem therefore requires a pre-commitment
-estimate of effective (E[D_eff\mid\mathcal I]), not raw delay or the realised post-hoc cost.
+This combination motivates both the recoverable timing component and a possible
+direct nonrecoverable (J) component, but does not identify natural (D_eff).
+Captivity duration mixes elapsed time with handling/confinement stress, so it is
+not a biologically faithful information-waiting intervention. The exact theorem
+therefore requires either an independent total causal waiting effect or a
+pre-commitment estimate of the decomposed effective
+(E[D_eff\mid\mathcal I]).
 
 ## Fail-closed promotion rule
 
