@@ -377,47 +377,71 @@ A direct natural test must therefore distinguish:
 No current greater-snow-goose result is promoted to a dual-use information
 test.
 
-## Relation to prior value-of-information theory
+## Relation to prior information theory and migration ecology
 
-The generic **value of information** is not new. Decision-theoretic information
-value has a long history, including sequential-information problems in which
-one observation changes the value of later decisions (Miller 1975). In ecology,
-information value has been formalized for fitness consequences and adaptive
-management (Donaldson-Matasci et al. 2010; Williams et al. 2011; Canessa et al.
-2015).
+The generic **value of information** is not new. Decision analysis has long
+treated information as valuable when it changes downstream decisions, including
+sequential information acquisition (Miller 1975), information about multiple
+sources of uncertainty (Samson et al. 1989), and information used across
+multiple decision problems. Ecology likewise has an established value-of-
+information literature in evolutionary fitness and adaptive management
+(Donaldson-Matasci et al. 2010; Williams et al. 2011; Canessa et al. 2015).
 
-PAYOFF-B therefore does **not** claim novelty for additivity of information
-values or for the statement that better information can improve multiple
-decisions.
+Nor is the migration biology new in isolation. Stopover sites have explicitly
+been proposed as information sources that can improve arrival timing (Winkler
+et al. 2014); route predictability can change optimal migration progression
+(Bauer et al. 2020); and migrants can compensate en route for phenological
+error by changing speed and stopover use (Ortega et al. 2023).
 
-The narrower candidate contribution is the **deadline geometry created when
-waiting causes a compensation problem that the same later cue can partly
-solve**. In that construction:
+PAYOFF-B therefore does **not** claim novelty for:
 
-1. compensation uncertainty is a cost conditional on waiting;
-2. the focal cue can make its own effective waiting cost decline with quality;
-3. compensation information alone cannot rationally create a self-imposed
-   delay;
-4. direct waiting cost remains irreducible;
-5. an exact rescue interval exists in which action information alone gives
-   never-wait, while dual-use information gives a finite cue threshold.
+- information having value for more than one downstream choice;
+- sequential value of information;
+- stopover information;
+- behavioral compensation during migration; or
+- generic additivity of expected losses under risk neutrality.
 
-Those statements connect ordinary value-of-information logic specifically to
-the information-deadline mechanism and its ecological interpretation.
+The candidate contribution is narrower: embed a downstream compensation
+decision **inside the cost of waiting for the focal seasonal cue**, then solve
+the resulting information deadline exactly. In that construction:
+
+1. compensation uncertainty is incurred only conditional on waiting;
+2. the focal cue can lower its own effective deadline cost as cue quality rises;
+3. compensation information alone cannot rationally justify creating the delay
+   it would help repair;
+4. direct waiting cost remains irreducible even under perfect dual-use
+   information;
+5. an exact interval exists where action information alone yields never-wait
+   but dual-use information yields a finite reliability threshold.
+
+These are deadline-specific consequences of ordinary value-of-information
+logic, rather than a new general theory of information value.
 
 References for this boundary:
 
 - Miller AC (1975) The Value of Sequential Information. *Management Science*
-  22:1-11. DOI: 10.1287/mnsc.22.1.1.
+  22:1–11. DOI: 10.1287/mnsc.22.1.1.
+- Samson D, Wirth A, Rickard J (1989) The value of information from multiple
+  sources of uncertainty in decision analysis. *European Journal of
+  Operational Research* 39:254–260. DOI: 10.1016/0377-2217(89)90163-X.
 - Donaldson-Matasci MC, Bergstrom CT, Lachmann M (2010) The fitness value of
-  information. *Oikos* 119:219-230. DOI:
+  information. *Oikos* 119:219–230. DOI:
   10.1111/j.1600-0706.2009.17781.x.
 - Williams BK, Eaton MJ, Breininger DR (2011) Adaptive resource management and
-  the value of information. *Ecological Modelling* 222:3429-3436. DOI:
+  the value of information. *Ecological Modelling* 222:3429–3436. DOI:
   10.1016/j.ecolmodel.2011.07.003.
 - Canessa S et al. (2015) When do we need more data? A primer on calculating
   the value of information for applied ecologists. *Methods in Ecology and
-  Evolution*. DOI: 10.1111/2041-210X.12423.
+  Evolution* 6:1219–1228. DOI: 10.1111/2041-210X.12423.
+- Winkler DW et al. (2014) Cues, strategies, and outcomes: how migrating
+  vertebrates track environmental change. *Movement Ecology* 2:10.
+  DOI: 10.1186/2051-3933-2-10.
+- Bauer S, McNamara JM, Barta Z (2020) Environmental variability, reliability
+  of information and the timing of migration. *Proceedings of the Royal
+  Society B* 287:20200622. DOI: 10.1098/rspb.2020.0622.
+- Ortega AC et al. (2023) Migrating mule deer compensate en route for
+  phenological mismatches. *Nature Communications* 14:2008.
+  DOI: 10.1038/s41467-023-37750-z.
 
 ## Claim boundary
 
