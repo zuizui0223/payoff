@@ -23,7 +23,7 @@ Research Article
 The canonical V2 GEB package has passed all hard gates.
 
 ```text
-structured abstract = 244 words
+structured abstract = 246 words
 main body = 4,829 words
 references = 20
 display pieces = 7
@@ -37,13 +37,13 @@ package files = 17
 Frozen package:
 
 ```text
-workflow run = 36508668487 (attempt 1)
-artifact = 11007724762
+workflow run = 36518027323 (attempt 1)
+artifact = 11011469698
 artifact digest =
 c12b39a4d491c7325baafcdd427910c0b6759177007dc6fa27d3026e03630e99
 
 inner deterministic ZIP SHA256 =
-f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848
+d7c8f3ab4f2c4d3c32da4655e069b9b35b66cb356a44643fa9018288e759ae1a
 ```
 
 The declarations-inclusive package was rerun from the same frozen head in
@@ -51,7 +51,7 @@ workflow run 36508668487 (attempt 2; artifact 11008116842). The deterministic
 inner ZIP remained byte-identical:
 
 ```text
-f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848
+d7c8f3ab4f2c4d3c32da4655e069b9b35b66cb356a44643fa9018288e759ae1a
 ```
 
 The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
@@ -101,22 +101,22 @@ A deterministic PREOUTCOME reviewer archive has been built from the canonical
 claim-ceiling V2 source.
 
 ```text
-workflow run = 36509120157
-artifact = 11008207196
+workflow run = 36518027268
+artifact = 11012081041
 artifact digest =
 871ef69042d279b2779ca35293d9ebef34f9926a422e8f08c2f1b83dfb9d8b65
 
 inner reviewer ZIP SHA256 =
-6ca7a8a0a8f464b88694b1f78a0f01c1dddcd95842c1cfb5e176b528e24195f2
+b2de4fcfcdfff0236c5e18ee31073ca71b6bee635a54a1dd6276809fe2201339
 
 files = 76
 Python source closure = 27
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
-reviewer archive reproduction run = 36509120157
-reviewer archive reproduction artifact = 11009060221
-reviewer archive deterministic inner SHA256 = 6ca7a8a0a8f464b88694b1f78a0f01c1dddcd95842c1cfb5e176b528e24195f2
+reviewer archive reproduction run = 36518027268
+reviewer archive reproduction artifact = 11012355384
+reviewer archive deterministic inner SHA256 = b2de4fcfcdfff0236c5e18ee31073ca71b6bee635a54a1dd6276809fe2201339
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
@@ -130,9 +130,9 @@ submission-state receipt:
 
 ```text
 ACCESS_BLOCKED reviewer ZIP SHA256 =
-e826d500310f2d884a62c3913fc3798ec2ec762cd776b6b89252ec26891327bd
+8b5ba5d1a6d8c06f71bc6a8de9790ccbc1f702feb81a820790625d79d8c8ba51
 
-workflow run = 36509120020
+workflow run = 36518314363
 deterministic reproduction = PASS
 ```
 
@@ -174,17 +174,17 @@ The deterministic ACCESS_BLOCKED submission package was built in workflow
 `36509120020` from head `7bcaaef50407f06a0624ec7e6931decffbfc664d`.
 
 ```text
-attempt 1 artifact = 11008566336
+attempt 1 artifact = 11011073915
 attempt 1 artifact digest =
 843ce1adaa63a9a325810829ac779236ef7fb88638d79c372834ad05accd0bd6
 
 GEB inner ZIP SHA256 =
-b10d00dc8252c8b7efafbeafffaf3c32480eb199236b529979e7a122ef0fe8ec
+b74ae989a1048e0fcaa0577a2224b22fd2064ccc3b621fc8e7ce8058017a26a7
 
 outcome reviewer ZIP SHA256 =
-e826d500310f2d884a62c3913fc3798ec2ec762cd776b6b89252ec26891327bd
+8b5ba5d1a6d8c06f71bc6a8de9790ccbc1f702feb81a820790625d79d8c8ba51
 
-attempt 2 artifact = 11009080342
+attempt 2 artifact = 11011782314
 attempt 2 artifact digest =
 311da212489396e127846424062b1c16093fd41f614b01feab1880e3a3fcaa7b
 
@@ -210,6 +210,12 @@ upload still requires:
 The current manuscript now explicitly states that photoperiodic/endogenous migration programmes are a non-exclusive alternative explanation for the E6 migration-distance gradient, and that the pairwise deadline-difference mechanism has not yet been directly tested in a natural interacting pair.
 
 The interaction-response bridge now has two independent published contexts. Burgess et al. show consumer–resource response asymmetry generating mismatch, while Samplonius et al. (2018) show stronger resident-tit temperature sensitivity than migratory flycatchers and a 0.94 d/decade widening of their laying-date interval. Neither measures D2-D1 or the q1<q<=q2 information-use window.
+
+The structured abstract is now intentionally limited to three empirical layers:
+predictive connectivity, migration-distance responsiveness, and the
+Samplonius et al. 0.94 d/decade resident–migrant laying-date divergence. The
+wigeon null remains an important boundary test in Results/Figure 5 but is not
+listed in the abstract.
 
 ## Scientific ceiling
 
