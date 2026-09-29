@@ -15,7 +15,7 @@ A direct natural test of the pairwise information-deadline mechanism requires al
 | observed cue use | distinguishes commit-now from wait/use-cue |
 | repeated q support | must cross below, within and above the predicted asynchronous window |
 
-## Candidate 1 — Greater snow goose same-system D + q composite
+## Candidate 1 — Greater snow goose same-system perturbation-cost + q composite
 
 Grandmont et al. (2023), *Functional Ecology*  
 DOI: 10.1111/1365-2435.14256  
@@ -28,20 +28,21 @@ This is currently the closest located same-system route because both studies
 concern the greater snow goose migration from the St. Lawrence spring staging
 area toward the Bylot Island breeding system.
 
-### Independent delay-cost evidence
+### Independent perturbation-cost evidence
 
 Grandmont et al. experimentally held female greater snow geese during spring
 migration for up to 4 days before release. Increasing time in captivity reduced
 breeding propensity / reproductive output, with strong reductions in two of
-three study years. This is substantially closer to the theorem's delay-cost
-quantity than migration distance or route progress because delay itself was
-experimentally imposed before reproduction.
+three study years. This is substantially closer to the theorem's deadline-cost axis than migration
+distance or route progress because perturbation duration itself was experimentally
+manipulated before reproduction. However, captivity combines elapsed time with
+capture, handling and confinement stress, and the source authors interpret the
+carry-over effect as a stress-inducing perturbation.
 
-The experiment therefore provides an **independent perturbational calibration
-of the biological cost of delay**. It does not by itself put D on the exact
-PAYOFF-B utility scale; that would require translating the marginal effect of
-delay on expected reproductive value into the same units as the early/late
-state-loss terms.
+The experiment therefore provides an **independent D-like perturbation-cost
+anchor**, not a clean measurement of the PAYOFF-B opportunity cost D. It must
+not be inserted into the exact q_wait formula as if pure waiting time had been
+isolated.
 
 ### Independent q-like information evidence
 
@@ -68,29 +69,29 @@ threshold.
 Qualification:
 
 - same species and migration/breeding system: **YES**
-- independently manipulated delay: **YES**
-- fitness consequence of delay: **YES**
+- independently manipulated perturbation duration: **YES**
+- fitness consequence of perturbation duration: **YES**
 - q-like environmental predictability: **YES**
 - independent exact D in PAYOFF-B loss units: **NOT YET**
 - actor-level cue-use threshold: **NO**
 - repeated q support crossing q1 and q2: **NO**
 - direct asynchronous-use window: **NO**
 
-Classification: **STRONGEST_COMPOSITE_D_AND_Q_CANDIDATE_NOT_DIRECT_THRESHOLD**
+Classification: **STRONGEST_COMPOSITE_D_LIKE_AND_Q_CANDIDATE_NOT_DIRECT_THRESHOLD**
 
 This candidate upgrades the source screen materially: the earlier problem was
 that no promising q system had an independent delay-cost anchor. Greater snow
-goose supplies both ingredients in one ecological lineage. The remaining
-bottleneck is now narrower—**actor-level threshold identification**, not the
-mere existence of a biologically meaningful delay cost.
+goose supplies a D-like perturbation axis and q-like predictability in one
+ecological lineage. The remaining bottlenecks are **clean D identification**
+and **actor-level threshold identification**.
 
 ### Next gate for greater snow goose
 
 Before any threshold claim:
 
-1. recover the Grandmont individual-level captivity-duration / breeding table
-   from Dryad and estimate a prespecified marginal reproductive-value cost of
-   one day of delay;
+1. use the published and/or Dryad captivity-duration data only as a
+   perturbation-cost calibration, and explicitly test whether any available
+   design can separate elapsed-time cost from captivity/handling stress;
 2. reconstruct pre-outcome rolling temperature predictability q for the exact
    St. Lawrence -> Arctic decision contexts without using focal behavioural
    outcomes;
@@ -207,7 +208,7 @@ No screened source currently licenses the sentence:
 
 > measured D2-D1 predicts measured q2-q1, and the interval q1 < q <= q2 contains observed asynchronous cue use.
 
-The strongest development path is now the greater-snow-goose St. Lawrence -> Bylot lineage because an experimental delay manipulation and an independent route-predictability reconstruction exist in the same ecological system. Barnacle goose remains the strongest tracking-based information-use candidate.
+The strongest development path is now the greater-snow-goose St. Lawrence -> Bylot lineage because an experimental perturbation-duration manipulation and an independent route-predictability reconstruction exist in the same ecological system. Barnacle goose remains the strongest tracking-based information-use candidate.
 
 However, PAYOFF-B should **not** promote that system to a direct theorem test unless D can be estimated independently of the cue-use outcome.
 
