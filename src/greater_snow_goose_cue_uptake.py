@@ -20,7 +20,9 @@ class CueUptakeEstimability:
     years: int
     contexts: int
     departure_events: int
+    context_years: int
     predictive_connectivity_sd: float
+    minimum_within_context_connectivity_sd: float
 
 
 @dataclass(frozen=True)
@@ -44,13 +46,20 @@ def evaluate_estimability(
     years: int,
     contexts: int,
     departure_events: int,
+    context_years: int,
     predictive_connectivity_sd: float,
+    minimum_within_context_connectivity_sd: float,
 ) -> CueUptakeEstimability:
     """Apply the preregistered estimability gate exactly."""
 
     sd = float(predictive_connectivity_sd)
+    within_sd = float(minimum_within_context_connectivity_sd)
     if not isfinite(sd) or sd < 0.0:
         raise ValueError("predictive_connectivity_sd must be finite and non-negative")
+    if not isfinite(within_sd) or within_sd < 0.0:
+        raise ValueError(
+            "minimum_within_context_connectivity_sd must be finite and non-negative"
+        )
 
     reasons = []
     if int(individuals) < 30:
@@ -61,8 +70,12 @@ def evaluate_estimability(
         reasons.append("FEWER_THAN_3_CONTEXTS")
     if int(departure_events) < 100:
         reasons.append("FEWER_THAN_100_DEPARTURES")
+    if int(context_years) < 12:
+        reasons.append("FEWER_THAN_12_CONTEXT_YEAR_CLUSTERS")
     if sd < 0.03:
         reasons.append("PREDICTIVE_CONNECTIVITY_SD_BELOW_0_03")
+    if within_sd <= 0.0:
+        reasons.append("NO_WITHIN_CONTEXT_CONNECTIVITY_VARIATION")
 
     return CueUptakeEstimability(
         estimable=not reasons,
@@ -71,7 +84,9 @@ def evaluate_estimability(
         years=int(years),
         contexts=int(contexts),
         departure_events=int(departure_events),
+        context_years=int(context_years),
         predictive_connectivity_sd=sd,
+        minimum_within_context_connectivity_sd=within_sd,
     )
 
 
