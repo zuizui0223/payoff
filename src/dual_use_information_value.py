@@ -749,3 +749,251 @@ def iso_threshold_direct_wait_cost(
     return action.prior_risk - headroom * (
         action.total_prior_loss + g_target
     )
+
+
+
+@dataclass(frozen=True)
+class MultiModuleDualUseThreshold:
+    direct_wait_cost: float
+    action_prior_risk: float
+    conditional_prior_risk_total: float
+    conditional_module_count: int
+    wait_threshold: float | None
+    ever_waits: bool
+    max_actionability_q: float
+    all_modules_active_at_threshold: bool
+    high_q_headroom: float | None
+
+
+def _conditional_geometries(conditional_modules):
+    geometries = []
+    for index, module in enumerate(conditional_modules):
+        if len(module) != 3:
+            raise ValueError(
+                f"conditional module {index} must be (prior, false_cost, missed_cost)"
+            )
+        geometries.append(
+            binary_information_geometry(
+                module[0],
+                module[1],
+                module[2],
+            )
+        )
+    return geometries
+
+
+def multi_module_waiting_margin(
+    cue_accuracy: float,
+    *,
+    direct_wait_cost: float,
+    action_prior_early: float,
+    action_false_early_cost: float,
+    action_missed_early_cost: float,
+    conditional_modules,
+) -> float:
+    """Waiting margin with any number of cue-informed conditional decisions.
+
+    Each conditional module exists only if the actor waits. Its prior Bayes
+    risk is therefore part of the burden of waiting. The focal cue can reduce
+    that burden through the module's information value.
+    """
+
+    q = float(cue_accuracy)
+    if not isfinite(q) or not 0.5 <= q <= 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    direct = _nonnegative("direct_wait_cost", direct_wait_cost)
+
+    action_value = information_value(
+        action_prior_early,
+        q,
+        action_false_early_cost,
+        action_missed_early_cost,
+    )
+    conditional = _conditional_geometries(conditional_modules)
+
+    value = action_value
+    burden = direct
+    for module in conditional:
+        burden += module.prior_risk
+        value += information_value(
+            module.prior_early,
+            q,
+            module.false_early_cost,
+            module.missed_early_cost,
+        )
+    return value - burden
+
+
+def multi_module_dual_use_wait_threshold(
+    *,
+    direct_wait_cost: float,
+    action_prior_early: float,
+    action_false_early_cost: float,
+    action_missed_early_cost: float,
+    conditional_modules,
+    tolerance: float = 1e-12,
+) -> MultiModuleDualUseThreshold:
+    """Exact threshold for one action module plus many conditional modules.
+
+    Waiting is optimal iff
+
+        V_A(q) + sum_j V_j(q)
+        >
+        J + sum_j R_j0.
+
+    Under symmetric binary cues every V_j is continuous piecewise linear.
+    The threshold is found exactly by scanning the finite set of actionability
+    breakpoints and solving the linear equality on each active-set interval.
+
+    Perfect-information feasibility is universal:
+
+        wait can occur for some q <= 1
+        iff
+        R_A0 > J.
+
+    Conditional-module prior risks cancel at perfect information.
+    """
+
+    direct = _nonnegative("direct_wait_cost", direct_wait_cost)
+    if not isfinite(tolerance) or tolerance < 0.0:
+        raise ValueError("tolerance must be finite and non-negative")
+
+    action = binary_information_geometry(
+        action_prior_early,
+        action_false_early_cost,
+        action_missed_early_cost,
+    )
+    conditional = _conditional_geometries(conditional_modules)
+
+    cond_prior = sum(module.prior_risk for module in conditional)
+    ever = action.prior_risk > direct + tolerance
+    max_q0 = max(
+        [action.actionable_q]
+        + [module.actionable_q for module in conditional]
+    )
+
+    if not ever:
+        return MultiModuleDualUseThreshold(
+            direct_wait_cost=direct,
+            action_prior_risk=action.prior_risk,
+            conditional_prior_risk_total=cond_prior,
+            conditional_module_count=len(conditional),
+            wait_threshold=None,
+            ever_waits=False,
+            max_actionability_q=max_q0,
+            all_modules_active_at_threshold=False,
+            high_q_headroom=None,
+        )
+
+    modules = [action, *conditional]
+    target = direct + cond_prior
+
+    # No positive waiting margin is possible before the action module becomes
+    # informative. Start the exact active-set scan at q0,A.
+    breaks = sorted(
+        set(
+            [action.actionable_q, 1.0]
+            + [
+                module.actionable_q
+                for module in conditional
+                if module.actionable_q >= action.actionable_q - tolerance
+            ]
+        )
+    )
+
+    threshold = None
+    for left, right in zip(breaks[:-1], breaks[1:]):
+        active = [
+            module
+            for module in modules
+            if module.actionable_q <= left + tolerance
+        ]
+        slope = sum(module.total_prior_loss for module in active)
+        if slope <= 0.0:
+            continue
+        intercept = sum(module.other_prior_loss for module in active)
+        root = (target + intercept) / slope
+        if (
+            root >= left - tolerance
+            and root <= right + tolerance
+            and root < 1.0 - tolerance
+        ):
+            threshold = max(action.actionable_q, root)
+            break
+
+    if threshold is None:
+        # The strict perfect-information condition guarantees an interior
+        # crossing. Fail closed if the algebra and active-set scan disagree.
+        raise AssertionError(
+            "multi-module dual-use threshold crossing was expected but not located"
+        )
+
+    all_active = threshold >= max_q0 - tolerance
+    headroom = None
+    if all_active:
+        total_slope = sum(module.total_prior_loss for module in modules)
+        headroom = (
+            action.prior_risk - direct
+        ) / total_slope
+        if abs(threshold - (1.0 - headroom)) > 1e-9:
+            raise AssertionError("high-q headroom identity failed")
+
+    margin = multi_module_waiting_margin(
+        threshold,
+        direct_wait_cost=direct,
+        action_prior_early=action_prior_early,
+        action_false_early_cost=action_false_early_cost,
+        action_missed_early_cost=action_missed_early_cost,
+        conditional_modules=conditional_modules,
+    )
+    if abs(margin) > 1e-8:
+        raise AssertionError("multi-module threshold does not solve zero margin")
+
+    return MultiModuleDualUseThreshold(
+        direct_wait_cost=direct,
+        action_prior_risk=action.prior_risk,
+        conditional_prior_risk_total=cond_prior,
+        conditional_module_count=len(conditional),
+        wait_threshold=threshold,
+        ever_waits=True,
+        max_actionability_q=max_q0,
+        all_modules_active_at_threshold=all_active,
+        high_q_headroom=headroom,
+    )
+
+
+def multi_module_rescue_interval(
+    *,
+    action_prior_early: float,
+    action_false_early_cost: float,
+    action_missed_early_cost: float,
+    conditional_modules,
+) -> tuple[float, float] | None:
+    """Direct-cost interval where informing all conditional modules rescues wait.
+
+    If the conditional modules remain uninformed, action information alone can
+    never justify waiting when
+
+        J + sum R_j0 >= R_A0.
+
+    Perfect information across all modules permits waiting when
+
+        J < R_A0.
+
+    Therefore the exact rescue interval is
+
+        J in [max(0, R_A0-sum R_j0), R_A0).
+    """
+
+    action = binary_information_geometry(
+        action_prior_early,
+        action_false_early_cost,
+        action_missed_early_cost,
+    )
+    conditional = _conditional_geometries(conditional_modules)
+    burden = sum(module.prior_risk for module in conditional)
+    lower = max(0.0, action.prior_risk - burden)
+    upper = action.prior_risk
+    if upper <= lower + 1e-12:
+        return None
+    return lower, upper
