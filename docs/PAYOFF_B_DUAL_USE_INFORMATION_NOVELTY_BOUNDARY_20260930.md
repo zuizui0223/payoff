@@ -128,7 +128,79 @@ This is the strongest candidate novelty statement. It should be presented as a
 closed-form ecological specialization of sequential value-of-information
 logic, not as a new general theorem about information.
 
-### 4. Exogeneity gate for the fixed deadline theorem
+### 4. Pairwise dual-use asynchrony
+
+In the balanced shared-cue specialization, an actor's threshold can be written
+as
+
+[
+q_i
+=
+1-
+rac{R_{A0}-J_i}{S_A+G_i},
+]
+
+when (J_i<R_{A0}). Thus actors can differ in information-use thresholds even
+when raw waiting time is identical, purely because direct waiting cost or the
+downstream compensation problem differs.
+
+For two actors with finite thresholds, the asynchronous-window width is the
+absolute difference in their information headroom:
+
+[
+oxed{
+Delta q
+=
+left|
+rac{R_{A0}-J_1}{S_A+G_1}
+-
+rac{R_{A0}-J_2}{S_A+G_2}
+ight|.
+}
+]
+
+This is a candidate PAYOFF-B contribution only as a closed-form ecological
+deadline result. Heterogeneous recourse costs in sequential decision problems
+are not themselves new.
+
+### 5. Multi-module conditional information
+
+The dual-use result extends to one focal seasonal-action decision plus any
+number of cue-informed conditional decisions that exist only if the actor
+waits:
+
+[
+	ext{wait}
+iff
+V_A(q)+sum_jV_j(q)
+>
+J+sum_jR_{j0}.
+]
+
+For perfect information, all conditional prior risks cancel. Therefore the
+universal feasibility condition remains
+
+[
+R_{A0}>J.
+]
+
+The exact rescue interval becomes
+
+[
+oxed{
+Jin
+[
+max(0,R_{A0}-sum_jR_{j0}),
+R_{A0}
+)
+}.
+]
+
+Again, the candidate novelty is the closed-form information-deadline
+specialization and its ecological interpretation, not the generic fact that
+information can improve multiple later decisions.
+
+### 6. Exogeneity gate for the fixed deadline theorem
 
 The original fixed-(D_{mathrm{eff}}) threshold
 
