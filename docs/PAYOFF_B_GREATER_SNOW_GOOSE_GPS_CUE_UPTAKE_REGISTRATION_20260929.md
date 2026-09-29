@@ -35,6 +35,26 @@ be estimated using climate years strictly before the focal year.
 The 1979-2018 values published by Resendiz-Infante & Gauthier (2024) are a
 sanity check, not outcome-dependent tuning.
 
+## Frozen movement preprocessing
+
+The primary movement segmentation uses the public `movepp` pipeline rather
+than hand-drawn route polygons:
+
+1. recompute centered step speed from raw GPS coordinates and timestamps;
+2. classify movement states with BALM;
+3. retain stationary-core / transient-stop points;
+4. derive DBSCAN habitat parameters from the data;
+5. delineate temporary habitats;
+6. compute the Migration Phase Index;
+7. classify phases automatically as Wintering / staging_stopover / Breeding.
+
+The primary analysis does **not** use interactive manual phase annotation.
+A manual sensitivity may be run only after the automatic primary result and
+without access to climate-q values or model residuals.
+
+This fixes stopover detection independently of the information hypothesis and
+avoids choosing staging polygons because they produce a desired q gradient.
+
 ## Frozen behavioral response
 
 The risk set is individual × staging-context × day.
