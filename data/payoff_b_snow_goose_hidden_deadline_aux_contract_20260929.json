@@ -1,0 +1,20 @@
+{
+  "contract_id": "payoff_b_snow_goose_hidden_deadline_aux_v1_20260929",
+  "date": "2026-09-29",
+  "status": "PREOUTCOME_METADATA_PROBE_ONLY",
+  "source": {
+    "article_doi": "10.1016/j.biocon.2023.110240",
+    "dataset_doi": "10.17632/ycxxrg8497.1",
+    "population": "greater snow goose spring staging, St. Lawrence Valley",
+    "years": "2007-2009 and 2019-2022"
+  },
+  "purpose": "Assess whether independently measured body condition and anthropogenic disturbance can provide a natural auxiliary axis for heterogeneity in expected waiting/departure cost, without relabeling either variable as PAYOFF-B D.",
+  "primary_scientific_boundary": [
+    "body condition is a state variable, not opportunity cost D by definition",
+    "hunting/disturbance is an external context, not D by definition",
+    "no q_wait(D) threshold may be estimated from this dataset alone",
+    "no GPS cue-uptake outcome from PR #212 may be opened or joined in this branch"
+  ],
+  "current_gate": "Resolve public file manifest and README before specifying any response model.",
+  "promotion_ceiling": "At most support state/context dependence of a D-like deadline axis; exact information-deadline confirmation remains forbidden."
+}
