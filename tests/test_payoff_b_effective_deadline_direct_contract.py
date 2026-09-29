@@ -23,16 +23,28 @@ def test_effective_deadline_contract_supersedes_raw_delay_contract():
     assert contract["forbidden_substitutions"][
         "multiply_sequential_timing_slopes_into_D_eff_without_causal_model"
     ]
+    assert "J(delta)" in contract["theoretical_input"]["general_effective_cost"]
     assert "D_eff" in contract["theoretical_input"]["exact_threshold"]
+    assert "total_effect_route" in contract["empirical_identification_routes"]
+    assert "mechanistic_route" in contract["empirical_identification_routes"]
+    assert contract["forbidden_substitutions"][
+        "captivity_effect_for_natural_D_eff_without_treatment_fidelity"
+    ]
+    assert contract["forbidden_substitutions"][
+        "full_timing_recovery_for_zero_D_eff_when_direct_J_may_remain"
+    ]
     assert "D_eff_revealed" in contract["inverse_validation"]["identity"]
 
 
-def test_direct_test_document_defines_compensated_cost():
+def test_direct_test_document_defines_direct_plus_compensated_cost():
     text = DIRECT_DOC.read_text(encoding="utf-8")
 
-    assert "## Compensated-deadline rule" in text
+    assert "## Direct-plus-compensated deadline rule" in text
+    assert "J(\\delta)" in text
     assert "D_{eff}" in text
-    assert "raw delay is not itself the empirical" in text
+    assert "total causal effect" in text
+    assert "mechanistic decomposition" in text
+    assert "complete timing recovery does not imply" in text
     assert "src/compensated_information_deadline.py" in text
 
 
