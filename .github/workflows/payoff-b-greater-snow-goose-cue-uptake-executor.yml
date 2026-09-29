@@ -10,6 +10,7 @@ on:
       - 'tests/test_cue_uptake_empirics.py'
       - 'tests/test_snow_goose_cue_uptake_executor.py'
       - 'data/payoff_b_greater_snow_goose_cue_uptake_executor_contract_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_route_context_contract_20260929.json'
       - '.github/workflows/payoff-b-greater-snow-goose-cue-uptake-executor.yml'
   pull_request:
     paths:
@@ -18,6 +19,7 @@ on:
       - 'tests/test_cue_uptake_empirics.py'
       - 'tests/test_snow_goose_cue_uptake_executor.py'
       - 'data/payoff_b_greater_snow_goose_cue_uptake_executor_contract_20260929.json'
+      - 'data/payoff_b_greater_snow_goose_route_context_contract_20260929.json'
       - '.github/workflows/payoff-b-greater-snow-goose-cue-uptake-executor.yml'
   workflow_dispatch:
 
