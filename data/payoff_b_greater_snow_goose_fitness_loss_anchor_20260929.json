@@ -1,0 +1,51 @@
+{
+  "anchor_id": "payoff_b_greater_snow_goose_fitness_loss_anchor_20260929",
+  "date": "2026-09-29",
+  "status": "SOURCE_BACKED_PUBLISHED_MODEL_OUTPUT_NOT_DIRECT_THEOREM_ESTIMATE",
+  "source": {
+    "citation": "Resendiz-Infante C, Gauthier G (2020) Temporal changes in reproductive success and optimal breeding decisions in a long-distance migratory bird. Scientific Reports 10:22067.",
+    "doi": "10.1038/s41598-020-78565-y",
+    "population": "greater snow goose, Bylot Island",
+    "study_years": "1991-2015",
+    "source_data": "Nordicana D41, DOI 10.5885/45570CE-2D00DCA728074FA7"
+  },
+  "published_timing_loss": {
+    "beginning_of_study": {
+      "peak_relative_laying_day": -4,
+      "peak_reproductive_success_young_to_age1": 0.52,
+      "late_reference_relative_day": 10,
+      "late_reference_success_bound": "<0.01",
+      "average_post_peak_decline_young_per_day": 0.036,
+      "descriptive_decline_fraction_of_peak_per_day": 0.06923076923076922
+    },
+    "end_of_study": {
+      "peak_relative_laying_day": -6,
+      "peak_reproductive_success_young_to_age1": 0.74,
+      "late_reference_relative_day": 10,
+      "late_reference_success_young_to_age1": 0.01,
+      "average_post_peak_decline_young_per_day": 0.046,
+      "descriptive_decline_fraction_of_peak_per_day": 0.06216216216216216
+    },
+    "maximum_success_increase_over_25_years_fraction": 0.42,
+    "interpretation": "post-peak late breeding carries a large fitness cost measured in expected offspring reaching one year"
+  },
+  "published_waiting_tradeoff_example": {
+    "starting_state": "female able to lay 5 eggs on relative day -4 at beginning of study",
+    "approximate_maximum_delay_days_to_gain_nutrients_for_extra_egg": 1.6,
+    "text_boundary": "if feeding time needed to acquire nutrients for a sixth egg is >=2 days, expected reproductive success becomes lower than laying 5 eggs on day -4",
+    "role": "independent ecological example of a finite cost-of-waiting deadline"
+  },
+  "payoff_b_role": {
+    "timing_loss_scale": "C_M-like late-timing fitness-loss anchor",
+    "waiting_cost_role": "biological plausibility anchor for finite opportunity cost of delay",
+    "direct_D_estimate": false,
+    "direct_C_M_estimate": false,
+    "q_wait_estimate": false,
+    "reason_not_direct": [
+      "published reproductive-success curve is continuous in relative laying date rather than the declared binary seasonal-state/action model",
+      "waiting in the published example acquires nutrients, not information",
+      "clutch-size and post-hatch survival components are embedded in reproductive success",
+      "a theorem-scale C_M requires a prespecified early/late action contrast and common utility normalization"
+    ]
+  }
+}
