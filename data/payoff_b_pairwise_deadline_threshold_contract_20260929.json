@@ -27,7 +27,8 @@
     "source_target_distance_for_D": true,
     "phenological_temperature_sensitivity_for_D": true,
     "phase_correction_for_cue_use": true,
-    "predictive_connectivity_for_cue_use": true
+    "predictive_connectivity_for_cue_use": true,
+    "posthoc_realised_delay_cost_for_commitment_time_expected_D": true
   },
   "primary_predictions": [
     "q_i = (max(A,L)+D_i)/(A+L) when D_i < R0",
@@ -47,7 +48,13 @@
     "delay_cost_anchor": "Legagneux et al. 2012 / Grandmont et al. 2023 captivity-duration perturbation with reproductive consequences; D-like only because delay and stress are not separated",
     "information_quality_anchor": "Resendiz-Infante & Gauthier 2024 route-to-breeding temperature predictability",
     "resolved_gap": "same ecological lineage contains an experimentally manipulated pre-breeding perturbation-cost axis plus independent route predictability",
-    "remaining_bottleneck": "clean opportunity-cost D identification plus actor-level cue-use switch across sufficient q variation",
+    "remaining_bottleneck": "clean opportunity-cost D identification, pre-commitment prediction of E[D|I], and actor-level cue-use switch across sufficient q variation",
     "promotion_status": "COMPOSITE_BRIDGE_ONLY_NOT_DIRECT_TEST"
+  },
+  "hidden_deadline_rule": {
+    "theorem_input": "conditional expected delay cost E[D|I] at commitment, not post-hoc realised D",
+    "exact_threshold": "q_wait(I) = (max(A,L)+E[D|I])/(A+L) when E[D|I] < R0",
+    "posthoc_harshness_does_not_move_threshold_unless_predictable_before_commitment": true,
+    "ex_post_reversal_without_irrationality_is_allowed": true
   }
 }
