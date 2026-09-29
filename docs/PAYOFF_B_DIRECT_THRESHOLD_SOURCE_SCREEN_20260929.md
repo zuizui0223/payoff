@@ -107,7 +107,7 @@ direct threshold test.
 
 ---
 
-## Candidate 1 — Barnacle goose predictability system
+## Candidate 2 — Barnacle goose predictability system
 
 Kölzsch et al. (2015), *Journal of Animal Ecology*  
 DOI: 10.1111/1365-2656.12281
@@ -134,7 +134,7 @@ Classification: **NEAR_DIRECT_INFORMATION_USE_LANE**
 
 This is substantially closer to the theorem than the current wigeon post-error-correction lane because the response concerns timing relative to environmental predictability rather than correction after phase error.
 
-## Candidate 2 — Barnacle goose breeding / fitness extension
+## Candidate 3 — Barnacle goose breeding / fitness extension
 
 Boom et al. (2023), *Journal of Animal Ecology*  
 DOI: 10.1111/1365-2656.14020  
@@ -182,7 +182,7 @@ Barnacle goose remains valuable for the information-quality -> timing-response
 edge, but the direct D -> q threshold route is stopped unless an independent
 delay-cost experiment or fitness model is introduced.
 
-## Candidate 3 — American redstart delay-cost anchor
+## Candidate 4 — American redstart delay-cost anchor
 
 Dossman et al. (2023), *Ecology*  
 DOI: 10.1002/ecy.3938
