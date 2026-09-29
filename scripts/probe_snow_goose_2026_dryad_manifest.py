@@ -9,7 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urljoin
 
 import requests
 
@@ -81,37 +81,89 @@ def main():
     versions = request_json(session, dataset_url + "/versions")
     version_rows = embedded(versions["json"], "stash:versions")
 
-    candidates = [
-        row for row in version_rows
-        if isinstance(row, dict)
-        and str(row.get("versionStatus", "")).lower() == "published"
-    ]
-    if not candidates:
-        candidates = [row for row in version_rows if isinstance(row, dict)]
+    # Dryad's current public API exposes the canonical/latest version through
+    # the dataset HAL link even when rows returned by /versions omit a literal
+    # integer "id" field. Prefer the canonical HAL route.
+    dataset_payload = (
+        dataset.get("json")
+        if isinstance(dataset.get("json"), dict)
+        else {}
+    )
+    dataset_links = dataset_payload.get("_links") or {}
+    latest_link = dataset_links.get("stash:version") or {}
+    latest_href = latest_link.get("href")
 
     selected = None
-    if candidates:
-        selected = max(
-            candidates,
-            key=lambda row: (
-                row.get("versionNumber")
-                if isinstance(row.get("versionNumber"), int) else -1,
-                row.get("id") if isinstance(row.get("id"), int) else -1,
-            ),
-        )
+    version_detail = None
+    version_url = None
+
+    if latest_href:
+        version_url = urljoin("https://datadryad.org", str(latest_href))
+        version_detail = request_json(session, version_url)
+        if isinstance(version_detail.get("json"), dict):
+            selected = version_detail["json"]
+
+    if selected is None:
+        candidates = [
+            row for row in version_rows
+            if isinstance(row, dict)
+            and str(row.get("versionStatus", "")).lower() == "published"
+        ]
+        if not candidates:
+            candidates = [
+                row for row in version_rows
+                if isinstance(row, dict)
+            ]
+
+        if candidates:
+            selected = max(
+                candidates,
+                key=lambda row: (
+                    row.get("versionNumber")
+                    if isinstance(row.get("versionNumber"), int)
+                    else -1
+                ),
+            )
+            links = selected.get("_links") or {}
+            self_link = links.get("self") or {}
+            self_href = self_link.get("href")
+            if self_href:
+                version_url = urljoin(
+                    "https://datadryad.org",
+                    str(self_href),
+                )
+                version_detail = request_json(session, version_url)
+                if isinstance(version_detail.get("json"), dict):
+                    selected = version_detail["json"]
 
     files_result = None
     files = []
-    if selected and selected.get("id") is not None:
-        files_result = request_json(
-            session,
-            f"{BASE}/versions/{selected['id']}/files",
-        )
-        for row in embedded(files_result["json"], "stash:files"):
+    if isinstance(selected, dict):
+        selected_links = selected.get("_links") or {}
+        files_link = selected_links.get("stash:files") or {}
+        files_href = files_link.get("href")
+        if not files_href and version_url:
+            files_href = version_url.replace(
+                "https://datadryad.org",
+                "",
+            ).rstrip("/") + "/files"
+
+        if files_href:
+            files_url = urljoin(
+                "https://datadryad.org",
+                str(files_href),
+            )
+            files_result = request_json(session, files_url)
+
+        for row in embedded(
+            files_result["json"] if files_result else None,
+            "stash:files",
+        ):
             if not isinstance(row, dict):
                 continue
             links = row.get("_links") or {}
             download = links.get("stash:download") or {}
+            download_href = download.get("href")
             files.append({
                 "id": row.get("id"),
                 "path": row.get("path"),
@@ -119,7 +171,14 @@ def main():
                 "mimeType": row.get("mimeType"),
                 "digest": row.get("digest"),
                 "digestType": row.get("digestType"),
-                "download_href": download.get("href"),
+                "download_href": (
+                    urljoin(
+                        "https://datadryad.org",
+                        str(download_href),
+                    )
+                    if download_href
+                    else None
+                ),
             })
 
     names = {
@@ -142,6 +201,12 @@ def main():
             "id": selected.get("id"),
             "versionNumber": selected.get("versionNumber"),
             "versionStatus": selected.get("versionStatus"),
+            "version_url": version_url,
+            "detail_http_status": (
+                version_detail.get("status")
+                if version_detail
+                else None
+            ),
         } if selected else None,
         "file_count": len(files),
         "files": files,
