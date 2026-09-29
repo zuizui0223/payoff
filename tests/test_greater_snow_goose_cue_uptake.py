@@ -16,7 +16,9 @@ def test_estimability_gate_passes_registered_minima():
         years=4,
         contexts=3,
         departure_events=100,
+        context_years=12,
         predictive_connectivity_sd=0.03,
+        minimum_within_context_connectivity_sd=0.001,
     )
     assert result.estimable
     assert result.reasons == ()
@@ -28,10 +30,12 @@ def test_estimability_gate_fails_closed():
         years=3,
         contexts=2,
         departure_events=99,
+        context_years=11,
         predictive_connectivity_sd=0.029,
+        minimum_within_context_connectivity_sd=0.0,
     )
     assert not result.estimable
-    assert len(result.reasons) == 5
+    assert len(result.reasons) == 7
 
 
 def test_gaussian_q_bridge_matches_existing_contract():
@@ -135,3 +139,18 @@ def test_threshold_gate_requires_complete_frozen_grid():
     )
     assert result.status == "THRESHOLD_NOT_IDENTIFIED"
     assert "INCOMPLETE_FROZEN_Q_GRID" in result.reasons
+
+
+
+def test_estimability_requires_within_context_q_variation():
+    result = evaluate_estimability(
+        individuals=30,
+        years=4,
+        contexts=3,
+        departure_events=120,
+        context_years=12,
+        predictive_connectivity_sd=0.10,
+        minimum_within_context_connectivity_sd=0.0,
+    )
+    assert not result.estimable
+    assert "NO_WITHIN_CONTEXT_CONNECTIVITY_VARIATION" in result.reasons
