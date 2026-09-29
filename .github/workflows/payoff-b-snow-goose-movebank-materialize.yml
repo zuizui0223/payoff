@@ -6,7 +6,7 @@ on:
       - ops/payoff-b-snow-goose-movebank-materialize-20260929
     paths:
       - 'scripts/payoff_b_greater_snow_goose_movebank_materialize.py'
-      - 'tests/test_snow_goose_movebank_materialize.py'
+      - 'tests/test_snow_goose_movebank_materialize.py'\n      - 'scripts/validate_greater_snow_goose_movebank_manifest.py'
       - 'data/payoff_b_greater_snow_goose_movebank_materialization_contract_20260929.json'
       - 'docs/PAYOFF_B_SNOW_GOOSE_MOVEBANK_MATERIALIZATION_20260929.md'
       - '.github/workflows/payoff-b-snow-goose-movebank-materialize.yml'
@@ -33,4 +33,4 @@ jobs:
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -e '.[test,empirical]'
       - run: python -m pytest -q tests/test_snow_goose_movebank_materialize.py
-      - run: python scripts/payoff_b_greater_snow_goose_movebank_materialize.py --help
+      - run: python scripts/payoff_b_greater_snow_goose_movebank_materialize.py --help\n      - run: python scripts/validate_greater_snow_goose_movebank_manifest.py --help
