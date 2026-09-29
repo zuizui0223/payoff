@@ -191,7 +191,7 @@ We next consider a shared-cue interaction network at
 q=1.
 ]
 
-For player (i), let (R_i) be its prior mismatch risk under the old timing convention, (D_i) its information/waiting cost, (I_i) its interaction-mismatch strength, and (p) the probability of the state in which informed action differs from the old action.
+For player (i), let (R_i) be its prior mismatch risk under the old timing convention, (D_i) its effective waiting cost, (I_i) its interaction-mismatch strength, and (p) the probability of the state in which informed action differs from the old action.
 
 If all players retain the old action, player (i) receives
 
