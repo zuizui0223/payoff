@@ -30,13 +30,13 @@
   },
   "license": {
     "auto_accept_terms": false,
-    "required_user_state": "authorized account must have accepted any required terms in Movebank before workflow execution",
+    "required_user_state": "authorized account must have accepted any required terms in Movebank before local materialization",
     "terms_page_behavior": "fail closed and write BLOCKED manifest"
   },
   "raw_data_governance": {
     "git_commit": false,
     "github_actions_raw_artifact": false,
-    "storage": "protected local directory outside the Git repository",
+    "storage": "authorized protected local directory outside the Git repository only",
     "output_directory_must_be_explicit": true,
     "year_level_files": true,
     "manifest_safe_for_repository_or_nonraw_artifact": true,
