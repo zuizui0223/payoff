@@ -35,7 +35,17 @@ def synthetic_rows(n_individuals=32):
             for context_index, context in enumerate(contexts):
                 rho = RHO[(year, context)]
                 for day in range(5):
-                    temp = (day - 2) * 0.45 + (year - 2020.5) * 0.08
+                    # Include deterministic individual/context micro-variation
+                    # so local temperature is not an exact linear combination
+                    # of day and year fixed effects in this synthetic fixture.
+                    micro = (
+                        ((i * 3 + context_index * 2 + day) % 11) - 5
+                    ) * 0.017
+                    temp = (
+                        (day - 2) * 0.45
+                        + (year - 2020.5) * 0.08
+                        + micro
+                    )
                     wind = ((i + day + context_index) % 7 - 3) / 3
                     precip = ((i + year + day) % 4) * 0.2
                     outcome = int(
@@ -49,8 +59,11 @@ def synthetic_rows(n_individuals=32):
                             "decision_date": f"{year}-05-{day + 1:02d}-{context}",
                             "depart_next_24h": outcome,
                             "local_temp_anom3": temp,
-                            "same_day_temp_anom": temp * 0.55
-                            + context_index * 0.07,
+                            "same_day_temp_anom": (
+                                temp * 0.55
+                                + context_index * 0.07
+                                + ((i + 2 * day) % 9 - 4) * 0.013
+                            ),
                             "day_of_year_within_context": day,
                             "wind_support": wind,
                             "precipitation": precip,
