@@ -32,7 +32,10 @@
     "compensation_correlation_for_numeric_D_eff_without_cost_model": true,
     "multiply_sequential_timing_slopes_into_D_eff_without_causal_model": true,
     "captivity_effect_for_natural_D_eff_without_treatment_fidelity": true,
-    "full_timing_recovery_for_zero_D_eff_when_direct_J_may_remain": true
+    "full_timing_recovery_for_zero_D_eff_when_direct_J_may_remain": true,
+    "fixed_D_eff_closed_form_when_focal_cue_changes_compensation": true,
+    "constant_window_width_identity_when_D_eff_is_q_dependent": true,
+    "inverse_D_eff_as_constant_when_focal_cue_changes_compensation": true
   },
   "primary_predictions": [
     "q_i = (max(A,L)+D_eff_i)/(A+L) when D_eff_i < R0",
@@ -40,14 +43,18 @@
     "Delta q = |D_eff_2-D_eff_1|/(A+L) when both thresholds are finite",
     "actors with equal raw delay can have unequal q thresholds if compensatory capacity or compensation cost differs",
     "exactly one actor uses the shared cue for min(q_1,q_2) < q <= max(q_1,q_2)",
-    "complete timing compensation does not imply D_eff=0 when direct nonrecoverable waiting cost J(delta)>0"
+    "complete timing compensation does not imply D_eff=0 when direct nonrecoverable waiting cost J(delta)>0",
+    "the constant window-width identity Delta q=|Delta D_eff|/(A+L) is licensed only when actor-specific D_eff is fixed with respect to the focal cue",
+    "if the focal cue also informs compensation, actor-specific thresholds must be obtained from V_A(q)=D_eff_i(q), not by plugging a constant D_eff into the fixed-cost formula"
   ],
   "inverse_validation": {
     "identity": "D_eff_revealed = q_wait*(A+L) - max(A,L)",
     "role": "infer the effective fitness cost implied by an independently observed behavioral threshold",
     "strongest_test": "compare D_eff_revealed with an independently estimated total causal D_eff or independently reconstructed J+optimized(K+M)",
     "circularity_guard": "cue-use observations used to estimate q_wait may not also define the independent D_eff comparator",
-    "raw_delay_guard": "D_eff_revealed must not be compared directly with days delayed, arrival delay, or captivity duration unless the common fitness mapping and treatment fidelity are independently established"
+    "raw_delay_guard": "D_eff_revealed must not be compared directly with days delayed, arrival delay, or captivity duration unless the common fitness mapping and treatment fidelity are independently established",
+    "scope": "The identity D_eff_revealed=q_wait*(A+L)-max(A,L) identifies the effective cost evaluated at the observed threshold. It can be treated as a cue-independent D_eff only if the focal-cue exogeneity gate passes.",
+    "dual_use_guard": "If the focal cue also informs compensation, compare threshold behavior to the dual-use model V_A(q)=D_eff(q); do not interpret D_eff_revealed as a constant actor trait."
   },
   "greater_snow_goose_status": {
     "information_quality": "route-to-Bylot temperature predictability available",
@@ -75,5 +82,20 @@
       "advantage": "explains why D_eff has its observed value and supports transport across contexts",
       "guard": "sequential timing correlations alone do not identify causal stage-specific compensation"
     }
+  },
+  "focal_cue_exogeneity_gate": {
+    "question": "Does the focal cue used to decide whether to wait also change the downstream compensation policy or expected compensation loss conditional on waiting?",
+    "fixed_D_eff_allowed_when": [
+      "D_eff is causally independent of focal cue quality q over the tested range",
+      "or downstream compensation is chosen without using the focal cue",
+      "or a cue-independent total effective waiting cost has been identified for the relevant decision"
+    ],
+    "dual_use_required_when": [
+      "the focal cue changes which compensation action is chosen",
+      "the focal cue changes expected downstream compensation loss R_C(q)",
+      "or D_eff(q) otherwise changes with focal cue quality"
+    ],
+    "dual_use_decision_rule": "wait iff V_A(q) > D_eff(q); in the additive binary dual-use special case wait iff V_A(q)+V_C(q) > J+R_C0",
+    "implementation": "src/dual_use_information_value.py"
   }
 }
