@@ -1,0 +1,53 @@
+name: PAYOFF-B snow goose Movebank materialization
+
+on:
+  workflow_dispatch:
+    inputs:
+      acknowledge_terms_already_accepted:
+        description: "Confirm the authorized Movebank account has already accepted any required study license terms"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    if: ${{ inputs.acknowledge_terms_already_accepted == true }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: freeze/payoff-b-snow-goose-preoutcome-v2-20260929
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[test,empirical]'
+      - name: Verify materializer unit tests from ops branch
+        run: |
+          git fetch origin ops/payoff-b-snow-goose-movebank-materialize-20260929
+          git checkout origin/ops/payoff-b-snow-goose-movebank-materialize-20260929 -- scripts/payoff_b_greater_snow_goose_movebank_materialize.py tests/test_snow_goose_movebank_materialize.py
+          python -m pytest -q tests/test_snow_goose_movebank_materialize.py
+      - name: Materialize GPS events
+        env:
+          MOVEBANK_API_TOKEN: ${{ secrets.MOVEBANK_API_TOKEN }}
+        run: |
+          python scripts/payoff_b_greater_snow_goose_movebank_materialize.py
+      - name: Upload manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-snow-goose-movebank-manifest
+          path: outputs/payoff_b_greater_snow_goose_movebank_materialization_manifest.json
+          if-no-files-found: warn
+      - name: Upload raw authorized GPS events
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-snow-goose-movebank-raw
+          path: outputs/movebank_greater_snow_goose_raw/*.csv
+          if-no-files-found: error
+          retention-days: 30
