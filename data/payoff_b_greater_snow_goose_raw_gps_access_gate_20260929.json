@@ -1,0 +1,24 @@
+{
+  "gate_id": "payoff_b_greater_snow_goose_raw_gps_access_gate_20260929",
+  "date": "2026-09-29",
+  "status": "RAW_GPS_ACCESS_NOT_ESTABLISHED",
+  "study": {
+    "name": "Greater snow goose migration",
+    "movebank_study_id": "1442516400",
+    "public_summary": {
+      "years": "2019-2023",
+      "animals": 75,
+      "valid_locations": 5156264,
+      "sensor": "GPS",
+      "visibility_in_mbi_table": "summary"
+    }
+  },
+  "independent_reproducibility_archive": {
+    "doi": "10.5281/zenodo.20686134",
+    "status": "code_and_reproduction_material_available",
+    "snow_goose_raw_data_redistributed": false,
+    "archive_instruction": "download Greater Snow Goose data from Movebank to run the species pipeline"
+  },
+  "execution_consequence": "Do not open the preregistered GPS cue-uptake outcome until an authorized raw GPS export for study 1442516400 is available. Code, preprocessing, climate construction, and estimability rules may be prepared without that outcome.",
+  "claim_consequence": "No GPS cue-uptake result exists yet; access status is non-scientific and must not be interpreted as NOT_ESTIMABLE or NOT_SUPPORTED."
+}
