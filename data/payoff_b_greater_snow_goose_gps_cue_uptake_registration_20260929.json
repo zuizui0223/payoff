@@ -88,7 +88,8 @@
     ],
     "selection": "leave-one-individual-out predictive log loss",
     "support_gate": "interior candidate beats no-threshold model and adjacent grid points are not tied within 1 SE",
-    "failure_rule": "if gate fails, report THRESHOLD_NOT_IDENTIFIED"
+    "failure_rule": "if gate fails, report THRESHOLD_NOT_IDENTIFIED",
+    "one_se_definition": "paired held-out-individual log-loss difference: each adjacent candidate must be worse than the selected threshold by more than one SE of the paired fold differences"
   },
   "forbidden_reframings": [
     "do not call local temperature sensitivity direct observation of cue cognition",
@@ -118,7 +119,10 @@
     "primary_manual_annotation": false,
     "sensitivity_manual_annotation": "allowed only after primary automatic result and without access to climate q or model residuals",
     "departure_event_from_habitat": "last day in an automatically delineated spring staging_stopover habitat followed by outward movement and no return for >=48 h",
-    "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation"
+    "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation",
+    "repository": "EverTSZ/movepp",
+    "commit": "220e953a2f1c8f29540cb74d0ec69599f24e1d14",
+    "pin_status": "FROZEN_BEFORE_OUTCOME"
   },
   "amendment_history": [
     {
@@ -142,6 +146,22 @@
       "stage": "PREOUTCOME_BEFORE_EXECUTION",
       "issue": "environmental data family, anomaly baseline, St. Lawrence primary window, precipitation quantity, and wind-bearing construction were conceptually specified but not operationally frozen",
       "resolution": "freeze NARR as primary climate family; trailing 20-year pre-focal climate baselines; St_Lawrence 1-15 May primary and 1 Apr-15 May sensitivity; daily accumulated precipitation; fixed source-region-centroid route bearings",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "the phrase 'adjacent grid points are not tied within 1 SE' did not specify whether SE was marginal or paired across identical LOIO folds",
+      "resolution": "freeze paired individual-fold differences (adjacent minus selected); require paired mean difference > one paired SE for both immediate neighbors",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "movepp package version was not pinned",
+      "resolution": "pin EverTSZ/movepp to commit 220e953a2f1c8f29540cb74d0ec69599f24e1d14",
       "outcome_data_opened": false,
       "result_dependent": false
     }
