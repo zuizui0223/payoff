@@ -4,15 +4,16 @@
   "date": "2026-09-29",
   "status": "PROSPECTIVE_NO_QUALIFYING_NATURAL_DATA",
   "theoretical_input": {
-    "fixed_case": "D_eff = D when no downstream compensation is available",
-    "general_effective_cost": "D_eff(delta,C) = min_c [K(c)+M(delta-c)] over 0 <= c <= min(C,delta)",
-    "hidden_state_adaptive": "E[D_eff(H)|I] when compensation may adapt after H is learned",
-    "hidden_state_precommitted": "min_c E[K(c,H)+M(delta-c,H)|I] when compensation must be chosen before H",
-    "exact_threshold": "q_wait = (max(A,L)+D_eff)/(A+L) when D_eff < R0"
+    "fixed_case": "D_eff = J(delta) + downstream optimized loss; original fixed-D theorem is recovered when D_eff is supplied directly",
+    "general_effective_cost": "D_eff(delta,C) = J(delta) + min_c [K(c)+M(delta-c)] over 0 <= c <= min(C,delta)",
+    "hidden_state_adaptive": "E[J(delta,H)+min_c{K(c,H)+M(delta-c,H)} | I] when compensation may adapt after H is learned",
+    "hidden_state_precommitted": "E[J(delta,H)|I] + min_c E[K(c,H)+M(delta-c,H)|I] when one compensation plan must be chosen before H",
+    "exact_threshold": "q_wait = (max(A,L)+D_eff)/(A+L) when D_eff < R0",
+    "compensation_only_special_case": "previous expression min_c[K(c)+M(delta-c)] is the exact special case J(delta)=0"
   },
   "direct_empirical_requirements": [
     "pre-commitment cue reliability q",
-    "independently estimated effective waiting cost D_eff for each actor, either directly in fitness units or through a preregistered decomposition into raw delay delta, compensatory capacity C, compensation cost K, and residual timing-loss function M",
+    "independently estimated effective waiting cost D_eff for each actor, either as the total causal effect of a biologically faithful waiting intervention or through a preregistered decomposition into direct waiting cost J, raw delay delta, compensatory capacity C, compensation cost K, and residual timing-loss function M",
     "state-mismatch losses C_F and C_M plus prior pi on the same utility scale",
     "observed cue-use decision distinguishing commit-now from wait/use-cue",
     "repeated q support crossing the predicted threshold or pairwise asynchronous window",
@@ -29,32 +30,50 @@
     "predictive_connectivity_for_cue_use": true,
     "posthoc_realised_cost_for_commitment_time_expected_D_eff": true,
     "compensation_correlation_for_numeric_D_eff_without_cost_model": true,
-    "multiply_sequential_timing_slopes_into_D_eff_without_causal_model": true
+    "multiply_sequential_timing_slopes_into_D_eff_without_causal_model": true,
+    "captivity_effect_for_natural_D_eff_without_treatment_fidelity": true,
+    "full_timing_recovery_for_zero_D_eff_when_direct_J_may_remain": true
   },
   "primary_predictions": [
     "q_i = (max(A,L)+D_eff_i)/(A+L) when D_eff_i < R0",
     "D_eff_1 < D_eff_2 implies q_1 < q_2 under shared state-loss structure",
     "Delta q = |D_eff_2-D_eff_1|/(A+L) when both thresholds are finite",
     "actors with equal raw delay can have unequal q thresholds if compensatory capacity or compensation cost differs",
-    "exactly one actor uses the shared cue for min(q_1,q_2) < q <= max(q_1,q_2)"
+    "exactly one actor uses the shared cue for min(q_1,q_2) < q <= max(q_1,q_2)",
+    "complete timing compensation does not imply D_eff=0 when direct nonrecoverable waiting cost J(delta)>0"
   ],
   "inverse_validation": {
     "identity": "D_eff_revealed = q_wait*(A+L) - max(A,L)",
     "role": "infer the effective fitness cost implied by an independently observed behavioral threshold",
-    "strongest_test": "compare D_eff_revealed with an independently estimated D_eff from delay, compensation and residual fitness data",
+    "strongest_test": "compare D_eff_revealed with an independently estimated total causal D_eff or independently reconstructed J+optimized(K+M)",
     "circularity_guard": "cue-use observations used to estimate q_wait may not also define the independent D_eff comparator",
-    "raw_delay_guard": "D_eff_revealed must not be compared directly with days delayed unless the fitness mapping and downstream compensation model are independently specified"
+    "raw_delay_guard": "D_eff_revealed must not be compared directly with days delayed, arrival delay, or captivity duration unless the common fitness mapping and treatment fidelity are independently established"
   },
   "greater_snow_goose_status": {
     "information_quality": "route-to-Bylot temperature predictability available",
-    "perturbation_cost": "captivity-duration manipulation provides D-like perturbation but mixes delay with handling/confinement stress",
+    "perturbation_cost": "captivity-duration manipulation provides a D-like total perturbation cost but mixes natural waiting with handling/confinement stress; detected breeders showed no clear captivity-duration shift in arrival or laying date",
     "timing_loss": "Bylot long-term reproductive-success surface provides two-sided C_F-like/C_M-like anchors",
     "compensation": "1997-1999 tracking shows later departure associated with shorter migration duration and weak departure-arrival coupling",
     "behavioral_uptake": "prospective 2019-2023 GPS lane registered but event access requires authenticated Movebank session and exact route geometry",
-    "clean_D_eff": "NOT_IDENTIFIED",
+    "clean_D_eff": "NOT_IDENTIFIED: neither a biologically faithful waiting total-effect intervention nor a complete J/K/M decomposition is currently available",
     "actor_level_q_wait": "NOT_IDENTIFIED",
     "direct_pairwise_window": "NOT_OBSERVED",
-    "post_arrival_buffering": "Bety et al. 2003: lay-date coefficient on relative arrival date 0.45 +/- 0.09 after premigration body-condition control; prelaying duration slope versus arrival -0.53 (R2=0.55); retained as phenomenological buffering only because sequential-timing inference has a published critique"
+    "post_arrival_buffering": "Bety et al. 2003: lay-date coefficient on relative arrival date 0.45 +/- 0.09 after premigration body-condition control; prelaying duration slope versus arrival -0.53 (R2=0.55); retained as phenomenological buffering only because sequential-timing inference has a published critique",
+    "direct_waiting_cost": "carry-over fitness effects despite little detected timing shift motivate a nonrecoverable J(delta) pathway, but captivity does not identify natural J"
   },
-  "promotion_rule": "No direct natural D_eff-to-threshold claim until q, D_eff, the common loss scale, and cue-use switching are independently identified in one qualifying system under a pre-outcome contract."
+  "promotion_rule": "No direct natural D_eff-to-threshold claim until q, D_eff, the common loss scale, and cue-use switching are independently identified in one qualifying system under a pre-outcome contract.",
+  "empirical_identification_routes": {
+    "total_effect_route": {
+      "estimand": "D_eff_causal(delta) = E[Y(0)] - E[Y(delta, adapt)] on the common additive fitness-loss scale",
+      "design": "randomize or otherwise identify a biologically faithful information-waiting intervention while allowing ordinary downstream compensation",
+      "advantage": "directly estimates total effective waiting cost without separately identifying J, K and M",
+      "guard": "treatment-specific stress or constraint not intrinsic to natural information waiting identifies the manipulation cost, not natural D_eff"
+    },
+    "mechanistic_route": {
+      "estimand": "J(delta) + optimized downstream K(c)+M(delta-c)",
+      "design": "independently identify direct waiting cost, compensatory capacity, compensation cost and residual timing-loss function",
+      "advantage": "explains why D_eff has its observed value and supports transport across contexts",
+      "guard": "sequential timing correlations alone do not identify causal stage-specific compensation"
+    }
+  }
 }
