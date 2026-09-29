@@ -82,8 +82,39 @@ Classification: **STRONGEST_COMPOSITE_D_LIKE_AND_Q_CANDIDATE_NOT_DIRECT_THRESHOL
 This candidate upgrades the source screen materially: the earlier problem was
 that no promising q system had an independent delay-cost anchor. Greater snow
 goose supplies a D-like perturbation axis and q-like predictability in one
-ecological lineage. The remaining bottlenecks are **clean D identification**
-and **actor-level threshold identification**.
+ecological lineage. The remaining bottlenecks are **clean information-waiting D identification**, **a prespecified mapping of the continuous two-sided fitness surface to binary C_F/C_M**, and **actor-level threshold identification**.
+
+### Independent two-sided fitness-loss anchor
+
+Reséndiz-Infante & Gauthier (2020), *Scientific Reports*  
+DOI: 10.1038/s41598-020-78565-y
+
+The long-term Bylot reproductive-success surface adds a separate theorem-scale
+ingredient. At the beginning of the study, expected reproductive success was
+0.03 young reaching age one at relative Day -10, peaked at 0.52 on Day -4 and
+fell to <0.01 by Day +10 (published average post-peak decline 0.036
+young/day). By the end of the study, peak success was 0.74 on Day -6 and
+declined to 0.01 by Day +10 (0.046 young/day).
+
+The same paper gives a condition-dependent waiting example: a five-egg female
+on Day -4 could delay about 1.6 days to acquire nutrients for an additional
+egg, whereas a delay of >=2 days made waiting worse than laying the smaller
+clutch immediately.
+
+Qualification:
+
+- natural two-sided timing-loss surface: **YES**
+- independent finite waiting-deadline example: **YES**
+- exact binary PAYOFF-B C_F/C_M: **NO — requires a prespecified state/action mapping**
+- information-acquisition D: **NO — waiting acquires nutrients, not information**
+- actor-level cue-use threshold: **NO**
+
+Classification: **FITNESS_LOSS_AND_WAITING_DEADLINE_ANCHOR_NOT_DIRECT_INFORMATION_TEST**
+
+This means the greater-snow-goose route no longer lacks evidence that seasonal
+timing errors and waiting itself can carry large fitness costs. The remaining
+problem is identifying those quantities on the declared information-game scale
+and observing the cue-use switch.
 
 ### Next gate for greater snow goose
 
