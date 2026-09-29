@@ -196,11 +196,14 @@ def _fit_formula(formula, train):
     import statsmodels.api as sm
     import statsmodels.formula.api as smf
 
-    return smf.glm(
+    fit = smf.glm(
         formula,
         data=train,
         family=sm.families.Binomial(),
     ).fit()
+    if not getattr(fit, "converged", True):
+        raise ValueError("binomial model did not converge")
+    return fit
 
 
 def _loio_losses(data, formula, *, threshold_q=None):
@@ -231,6 +234,11 @@ def _loio_losses(data, formula, *, threshold_q=None):
             test["cue_active"] = (
                 test["predictive_q"].astype(float) >= threshold_q
             ).astype(int)
+            if train["cue_active"].nunique() < 2:
+                raise ValueError(
+                    f"threshold q={threshold_q} has no training variation "
+                    f"in LOIO fold for {individual}"
+                )
 
         fit = _fit_formula(formula, train)
         pred = fit.predict(test)
@@ -356,61 +364,74 @@ def main():
         result["status"] = "PRIMARY_ESTIMABLE"
         result["primary"] = _primary_fit(data)
 
-        baseline_losses = _loio_losses(
-            data,
-            NO_THRESHOLD_FORMULA,
-        )
-        baseline_mean, baseline_se = mean_standard_error(
-            row["log_loss"] for row in baseline_losses
-        )
-
-        scores = []
-        for q in Q_GRID:
-            losses = _loio_losses(
+        try:
+            baseline_losses = _loio_losses(
                 data,
-                THRESHOLD_FORMULA,
-                threshold_q=q,
+                NO_THRESHOLD_FORMULA,
             )
-            mean_loss, se_loss = mean_standard_error(
-                row["log_loss"] for row in losses
-            )
-            score = ThresholdCandidateScore(
-                threshold_q=q,
-                mean_loio_log_loss=mean_loss,
-                se_loio_log_loss=se_loss,
-            )
-            scores.append(score)
-            threshold_rows.append(
-                {
-                    "threshold_q": q,
-                    "mean_loio_log_loss": mean_loss,
-                    "se_loio_log_loss": se_loss,
-                    "individual_folds": len(losses),
-                }
+            baseline_mean, baseline_se = mean_standard_error(
+                row["log_loss"] for row in baseline_losses
             )
 
-        selection = select_threshold_one_se(
-            scores,
-            no_threshold_mean_log_loss=baseline_mean,
-        )
-        result["threshold_secondary"] = {
-            "status": selection.status,
-            "selected_q": selection.selected_q,
-            "reason": selection.reason,
-            "no_threshold_mean_loio_log_loss": baseline_mean,
-            "no_threshold_se_loio_log_loss": baseline_se,
-            "best_threshold_mean_loio_log_loss": (
-                selection.best_mean_log_loss
-            ),
-            "grid": Q_GRID,
-            "one_se_definition": (
-                "adjacent mean loss must exceed best mean loss + best "
-                "candidate SE"
-            ),
-            "interpretation": (
-                "behavioral/phenomenological threshold only; never q_wait(D)"
-            ),
-        }
+            scores = []
+            for q in Q_GRID:
+                losses = _loio_losses(
+                    data,
+                    THRESHOLD_FORMULA,
+                    threshold_q=q,
+                )
+                mean_loss, se_loss = mean_standard_error(
+                    row["log_loss"] for row in losses
+                )
+                score = ThresholdCandidateScore(
+                    threshold_q=q,
+                    mean_loio_log_loss=mean_loss,
+                    se_loio_log_loss=se_loss,
+                )
+                scores.append(score)
+                threshold_rows.append(
+                    {
+                        "threshold_q": q,
+                        "mean_loio_log_loss": mean_loss,
+                        "se_loio_log_loss": se_loss,
+                        "individual_folds": len(losses),
+                        "status": "ESTIMABLE",
+                    }
+                )
+
+            selection = select_threshold_one_se(
+                scores,
+                no_threshold_mean_log_loss=baseline_mean,
+            )
+            result["threshold_secondary"] = {
+                "status": selection.status,
+                "selected_q": selection.selected_q,
+                "reason": selection.reason,
+                "no_threshold_mean_loio_log_loss": baseline_mean,
+                "no_threshold_se_loio_log_loss": baseline_se,
+                "best_threshold_mean_loio_log_loss": (
+                    selection.best_mean_log_loss
+                ),
+                "grid": Q_GRID,
+                "one_se_definition": (
+                    "adjacent mean loss must exceed best mean loss + best "
+                    "candidate SE"
+                ),
+                "interpretation": (
+                    "behavioral/phenomenological threshold only; never q_wait(D)"
+                ),
+            }
+        except (ValueError, RuntimeError) as exc:
+            result["threshold_secondary"] = {
+                "status": "THRESHOLD_NOT_IDENTIFIED",
+                "selected_q": None,
+                "reason": "LOIO_NOT_ESTIMABLE",
+                "detail": str(exc),
+                "grid": Q_GRID,
+                "interpretation": (
+                    "behavioral/phenomenological threshold only; never q_wait(D)"
+                ),
+            }
 
     args.result_output.parent.mkdir(parents=True, exist_ok=True)
     args.result_output.write_text(
