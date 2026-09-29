@@ -1,0 +1,40 @@
+name: PAYOFF-B E2 decision-time source probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-e2-decision-time-reanalysis-20260929
+    paths:
+      - 'data/payoff_b_e2_decision_time_reanalysis_contract_20260929.json'
+      - 'scripts/payoff_b_e2_decision_time_source_probe.py'
+      - '.github/workflows/payoff-b-e2-decision-time-source-probe.yml'
+  pull_request:
+    paths:
+      - 'data/payoff_b_e2_decision_time_reanalysis_contract_20260929.json'
+      - 'scripts/payoff_b_e2_decision_time_source_probe.py'
+      - '.github/workflows/payoff-b-e2-decision-time-source-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check pandas requests
+      - name: Probe Dryad source bytes
+        run: |
+          python scripts/payoff_b_e2_decision_time_source_probe.py \
+            --output outputs/e2/source_probe.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-e2-decision-time-source-probe
+          path: outputs/e2/source_probe.json
+          if-no-files-found: error
