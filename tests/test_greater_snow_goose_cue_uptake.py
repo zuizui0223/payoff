@@ -2,6 +2,7 @@ import pytest
 
 from src.greater_snow_goose_cue_uptake import (
     FROZEN_Q_GRID,
+    adjudicate_threshold_folds,
     evaluate_estimability,
     gaussian_binary_q,
     preoutcome_training_valid,
@@ -65,3 +66,70 @@ def test_predictive_connectivity_must_be_preoutcome():
         training_end_year=2018,
         training_years=14,
     )
+
+
+
+def _flat_candidates(base=0.50):
+    return {q: [base, base, base, base] for q in FROZEN_Q_GRID}
+
+
+def test_threshold_gate_supports_unique_interior_candidate():
+    candidates = _flat_candidates(0.50)
+    candidates[0.575] = [0.40, 0.41, 0.39, 0.40]
+    candidates[0.550] = [0.46, 0.47, 0.45, 0.46]
+    candidates[0.600] = [0.47, 0.48, 0.46, 0.47]
+    result = adjudicate_threshold_folds(
+        no_threshold_losses=[0.55, 0.54, 0.56, 0.55],
+        candidate_losses=candidates,
+    )
+    assert result.status == "SUPPORTED_BEHAVIORAL_THRESHOLD_LIKE"
+    assert result.selected_threshold_q == pytest.approx(0.575)
+    assert result.reasons == ()
+
+
+def test_threshold_gate_rejects_adjacent_one_se_tie():
+    candidates = _flat_candidates(0.60)
+    candidates[0.575] = [0.400, 0.410, 0.390, 0.400]
+    candidates[0.550] = [0.401, 0.411, 0.391, 0.401]
+    candidates[0.600] = [0.470, 0.480, 0.460, 0.470]
+    result = adjudicate_threshold_folds(
+        no_threshold_losses=[0.55, 0.54, 0.56, 0.55],
+        candidate_losses=candidates,
+    )
+    assert result.status == "THRESHOLD_NOT_IDENTIFIED"
+    assert "LOWER_ADJACENT_TIED_WITHIN_1SE" in result.reasons
+
+
+def test_threshold_gate_rejects_grid_endpoint():
+    candidates = _flat_candidates(0.60)
+    candidates[0.500] = [0.40, 0.41, 0.39, 0.40]
+    result = adjudicate_threshold_folds(
+        no_threshold_losses=[0.55, 0.54, 0.56, 0.55],
+        candidate_losses=candidates,
+    )
+    assert result.status == "THRESHOLD_NOT_IDENTIFIED"
+    assert "BEST_THRESHOLD_IS_GRID_ENDPOINT" in result.reasons
+
+
+def test_threshold_gate_requires_beating_no_threshold():
+    candidates = _flat_candidates(0.60)
+    candidates[0.575] = [0.50, 0.51, 0.49, 0.50]
+    candidates[0.550] = [0.57, 0.58, 0.56, 0.57]
+    candidates[0.600] = [0.58, 0.59, 0.57, 0.58]
+    result = adjudicate_threshold_folds(
+        no_threshold_losses=[0.45, 0.44, 0.46, 0.45],
+        candidate_losses=candidates,
+    )
+    assert result.status == "THRESHOLD_NOT_IDENTIFIED"
+    assert "DOES_NOT_BEAT_NO_THRESHOLD" in result.reasons
+
+
+def test_threshold_gate_requires_complete_frozen_grid():
+    candidates = _flat_candidates(0.50)
+    candidates.pop(0.700)
+    result = adjudicate_threshold_folds(
+        no_threshold_losses=[0.55, 0.54, 0.56, 0.55],
+        candidate_losses=candidates,
+    )
+    assert result.status == "THRESHOLD_NOT_IDENTIFIED"
+    assert "INCOMPLETE_FROZEN_Q_GRID" in result.reasons
