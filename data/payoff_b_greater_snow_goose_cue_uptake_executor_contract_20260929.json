@@ -47,11 +47,11 @@
     "validation": "leave one individual out",
     "fold_metric": "mean binary log loss within held-out individual",
     "aggregate": "unweighted mean of individual fold log losses",
-    "se": "sample SD of individual fold losses divided by sqrt(number of individuals)",
+    "se": "paired SE of individual-level LOIO loss differences between each adjacent q candidate and the selected q",
     "support_rule": [
       "best grid point is interior",
       "best mean LOIO log loss is lower than continuous no-threshold model",
-      "both immediate adjacent grid points have mean loss > best mean + best candidate SE"
+      "for each immediate adjacent q, paired mean held-out-individual loss difference (adjacent - selected) exceeds one SE of those paired differences"
     ],
     "failure_status": "THRESHOLD_NOT_IDENTIFIED",
     "claim_ceiling": "behavioral/phenomenological threshold only; never q_wait(D)",
@@ -59,7 +59,8 @@
       "if any LOIO held-out context or year level is absent from its training fold, report THRESHOLD_NOT_IDENTIFIED",
       "if any candidate threshold yields no cue_active variation in a training fold, report THRESHOLD_NOT_IDENTIFIED",
       "if a binomial fit does not converge, report threshold secondary as not identified rather than retuning the grid or formula"
-    ]
+    ],
+    "pairing_unit": "held-out individual; identical folds across all q candidates and no-threshold comparator"
   },
   "amendment_to_parent_registration": {
     "issue": "same_day temperature anomaly was listed as an immediate-weather control but omitted from the literal primary formula",
@@ -88,5 +89,10 @@
     "local_temp_anom3 and same_day_temp_anom must use pre-focal 20-year NARR baselines",
     "wind_support must use fixed region-centroid next-route bearing",
     "precipitation must be NARR daily accumulated total precipitation"
-  ]
+  ],
+  "movement_preprocessing_dependency": {
+    "repository": "EverTSZ/movepp",
+    "commit": "220e953a2f1c8f29540cb74d0ec69599f24e1d14",
+    "pin_status": "FROZEN_BEFORE_OUTCOME"
+  }
 }
