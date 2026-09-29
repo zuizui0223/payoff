@@ -121,6 +121,72 @@ expectation of this total effective cost.
 This reduction is implementation-tested in
 `src/compensated_information_deadline.py`.
 
+## Focal-cue exogeneity gate
+
+The fixed effective-cost threshold
+
+[
+q_{wait}
+=
+\frac{\max(A,L)+D_{eff}}{A+L}
+]
+
+assumes that the focal cue changes the seasonal action but **does not itself
+change the effective cost of waiting**.
+
+Before using that closed form, ask whether the same cue also changes the
+downstream compensation policy or expected compensation loss conditional on
+waiting.
+
+If not, fixed (D_{eff}) is licensed.
+
+If yes, then
+
+[
+D_{eff}=D_{eff}(q)
+]
+
+and the correct threshold solves
+
+[
+V_A(q)=D_{eff}(q).
+]
+
+In the additive binary dual-use special case,
+
+[
+D_{eff}(q)=J+R_C(q)
+]
+
+and
+
+[
+\boxed{
+\text{wait}
+\iff
+V_A(q)+V_C(q)>J+R_{C0}.
+}
+]
+
+This case is implementation-tested in
+`src/dual_use_information_value.py`.
+
+Two consequences follow.
+
+1. The simple pairwise identity
+   (
+   \Delta q=|D_{eff,2}-D_{eff,1}|/(A+L)
+   )
+   is licensed only when the relevant actor-specific effective costs are fixed
+   with respect to the focal cue.
+2. The inverse identity
+   (
+   D^{eff}_{revealed}=q_{wait}(A+L)-\max(A,L)
+   )
+   still recovers the **effective cost at the observed threshold**, but it must
+   not be interpreted as a cue-independent actor trait when the cue itself
+   changes compensation.
+
 ## Two valid empirical routes to D_eff
 
 ### Route A — total causal effect
