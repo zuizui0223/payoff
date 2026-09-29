@@ -16,7 +16,7 @@ The script requires:
 - `MOVEBANK_USERNAME`
 - `MOVEBANK_PASSWORD`
 
-and a user-selected `--output-dir`.
+and a user-selected `--output-dir` **outside the PAYOFF-B repository**. The script rejects repository-internal output paths.
 
 Default execution is **metadata only**. GPS events are requested only when the
 operator explicitly supplies `--download-events`.
@@ -58,8 +58,7 @@ sensor type 653 with at least:
 Each CSV receives a SHA-256 receipt in
 `movebank_fetch_manifest.json`.
 
-Raw files remain outside the Git repository unless a human explicitly moves
-them. They must not be added to PAYOFF-B source control.
+Raw files are written only outside the Git repository; repository-internal output paths are rejected before any Movebank request. They must not be added to PAYOFF-B source control.
 
 ## Scientific boundary
 
