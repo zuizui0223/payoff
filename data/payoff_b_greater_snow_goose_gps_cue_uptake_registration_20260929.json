@@ -30,7 +30,9 @@
       "mid_arctic_staging": "10-31 May",
       "northern_arctic_staging": "20 May-05 Jun",
       "target_bylot": "30 May-15 Jun"
-    }
+    },
+    "context_coordinate_rule": "median lon/lat of automatically classified staging habitat centroids assigned to each frozen shared route context, pooled across individuals/years before climate outcomes",
+    "target_coordinate_rule": "median lon/lat of automatically classified Breeding points during 30 May-15 Jun, pooled across individuals/years before climate outcomes"
   },
   "movement_decision": {
     "unit": "individual x staging-context x day at risk",
@@ -81,7 +83,8 @@
     "do not infer q_wait(D) from the GPS model",
     "do not use same-year future Bylot temperature to construct pre-commitment q",
     "do not retune departure definition or q window after outcome inspection",
-    "do not redraw, merge, split, or relabel shared staging contexts after climate-q or departure outcomes are inspected"
+    "do not redraw, merge, split, or relabel shared staging contexts after climate-q or departure outcomes are inspected",
+    "do not use focal-year Bylot temperature in either predictive connectivity or local cue anomaly construction"
   ],
   "promotion_rule": "At most promote to natural behavioral cue-uptake support. Direct information-deadline confirmation remains forbidden without clean D and state-loss estimates.",
   "movement_preprocessing": {
@@ -119,5 +122,29 @@
     "movepp_repository": "EverTSZ/movepp",
     "movepp_commit": "220e953a2f1c8f29540cb74d0ec69599f24e1d14",
     "install_rule": "install and execute the pinned movepp commit; do not silently substitute a newer package revision"
+  },
+  "climate_source": {
+    "provider": "Open-Meteo Historical Weather API",
+    "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+    "reanalysis_model": "era5",
+    "spatial_resolution_note": "ERA5 approximately 0.25 degree; fixed for multidecadal consistency",
+    "timezone": "GMT",
+    "cell_selection": "nearest",
+    "hourly_variables": [
+      "temperature_2m",
+      "precipitation",
+      "wind_speed_10m",
+      "wind_direction_10m"
+    ],
+    "wind_speed_unit": "ms",
+    "temperature_unit": "celsius",
+    "precipitation_unit": "mm",
+    "query_window": "29 Mar through 15 Jun for route contexts; target Bylot needed only for historical training years",
+    "focal_daily_temperature_anomaly_baseline": "same calendar day mean over the 20 calendar years ending at focal_year-1, at the same fixed route-context coordinate",
+    "local_temp_anom3": "arithmetic mean of current-day and previous two daily temperature anomalies",
+    "same_day_temperature_anomaly": "current daily temperature minus its 20-year pre-outcome same-DOY mean",
+    "precipitation_control": "GMT daily sum of 24 hourly precipitation values",
+    "wind_support_control": "GMT daily mean of hourly 10-m wind projected onto fixed bearing from current route context to the next route context (northern context points to Bylot target)",
+    "no_focal_future_target_leakage": true
   }
 }
