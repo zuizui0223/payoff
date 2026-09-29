@@ -12,24 +12,24 @@ from scripts.payoff_b_greater_snow_goose_cue_uptake import (
 
 
 RHO = {
-    (2019, "A"): -0.25,
-    (2019, "B"): 0.05,
-    (2019, "C"): 0.30,
-    (2020, "A"): 0.10,
-    (2020, "B"): 0.35,
-    (2020, "C"): -0.10,
-    (2021, "A"): 0.40,
-    (2021, "B"): -0.20,
-    (2021, "C"): 0.15,
-    (2022, "A"): 0.00,
-    (2022, "B"): 0.25,
-    (2022, "C"): 0.50,
+    (2019, "St_Lawrence"): -0.25,
+    (2019, "Nunavik"): 0.05,
+    (2019, "Baffin"): 0.30,
+    (2020, "St_Lawrence"): 0.10,
+    (2020, "Nunavik"): 0.35,
+    (2020, "Baffin"): -0.10,
+    (2021, "St_Lawrence"): 0.40,
+    (2021, "Nunavik"): -0.20,
+    (2021, "Baffin"): 0.15,
+    (2022, "St_Lawrence"): 0.00,
+    (2022, "Nunavik"): 0.25,
+    (2022, "Baffin"): 0.50,
 }
 
 
 def synthetic_rows(n_individuals=32):
     rows = []
-    contexts = ["A", "B", "C"]
+    contexts = ["St_Lawrence", "Nunavik", "Baffin"]
     for i in range(n_individuals):
         for year in range(2019, 2023):
             for context_index, context in enumerate(contexts):
@@ -95,5 +95,16 @@ def test_connectivity_leakage_is_rejected_before_model_fit():
     with pytest.raises(
         ValueError,
         match="predictive connectivity leaks focal or future year",
+    ):
+        _prepare(data)
+
+
+def test_individual_specific_habitat_id_is_not_a_route_context():
+    data = synthetic_rows()
+    data.loc[data.index[0], "context"] = "cluster_17"
+
+    with pytest.raises(
+        ValueError,
+        match="context must use only frozen shared route regions",
     ):
         _prepare(data)
