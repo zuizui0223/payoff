@@ -54,11 +54,52 @@ Migration distance, source--target distance, temperature sensitivity, phase
 correction and predictive connectivity are informative auxiliary quantities,
 but none is (D) or cue-use status by definition.
 
+## Hidden-deadline rule
+
+If the realised cost of waiting depends on a future environmental state, the
+quantity entering the theorem is **not the cost reconstructed after that state
+is revealed**.
+
+At commitment, the relevant quantity is
+
+[
+\bar D_i(\mathcal I_i)
+=
+E[D_i(H)\mid\mathcal I_i],
+]
+
+where (\mathcal I_i) is the information actually available when the actor must
+decide whether to commit or wait.
+
+Under additive expected loss, the exact threshold becomes
+
+[
+q_{i,pred}
+=
+\frac{
+\max(A,L)+E[D_i(H)\mid\mathcal I_i]
+}{
+A+L
+}.
+]
+
+Therefore:
+
+- a harsh future year may produce a large realised delay cost without changing
+  the rational threshold if that harshness was not predictable at commitment;
+- a threshold may vary across individuals or years only when pre-commitment
+  information changes their conditional expected delay cost;
+- post-hoc breeding-ground conditions must not be substituted for
+  (E[D\mid\mathcal I]) in the threshold equation.
+
+This rule is implementation-tested in
+`src/state_dependent_information_deadline.py`.
+
 ## Primary falsifiable predictions
 
 ### P1. Actor-level threshold
 
-For actor (i),
+For actor (i), with fixed or commitment-time expected delay cost,
 
 [
 q_{i,pred}
@@ -86,8 +127,8 @@ D_1<D_2
 q_1<q_2.
 ]
 
-This is an ordering prediction, not merely a correlation between migration
-distance and phenological response.
+For state-dependent deadlines, replace each (D_i) by the conditional expectation
+available to that actor at commitment.
 
 ### P3. Window width
 
@@ -99,8 +140,21 @@ q_2-q_1
 \frac{D_2-D_1}{A+L}.
 ]
 
-The strongest test therefore compares an independently measured deadline gap
-with the observed width of the asynchronous cue-use region.
+With hidden deadline states this becomes
+
+[
+q_2-q_1
+=
+\frac{
+E[D_2\mid\mathcal I_2]-E[D_1\mid\mathcal I_1]
+}{
+A+L
+}.
+]
+
+The strongest test therefore compares an independently estimated
+commitment-time deadline gap with the observed width of the asynchronous
+cue-use region.
 
 ### P4. Behaviour inside and outside the window
 
@@ -113,14 +167,36 @@ For a shared cue:
 A direct natural or experimental test must observe the middle regime itself.
 Showing only different phenological slopes is insufficient.
 
+### P5. Ex-post reversal without irrationality
+
+If the actor waits because
+
+[
+V(q)>E[D\mid\mathcal I],
+]
+
+but a subsequently revealed harsh state has
+
+[
+D(H)>V(q),
+]
+
+then waiting is worse **ex post** even though it was optimal **ex ante**.
+
+Natural data should therefore distinguish an information failure from an
+apparently maladaptive outcome that arose because the cost state itself was
+unpredictable.
+
 ## Minimum experimental design
 
 The cleanest design manipulates cue reliability and delay cost orthogonally.
 
 For each actor or actor class:
 
-- estimate (D_i) in a separate payoff manipulation or independent fitness
-  model;
+- estimate (D_i), or (E[D_i\mid\mathcal I_i]) when D is state-dependent, in
+  a separate payoff manipulation or independent fitness model;
+- record exactly which predictors of future delay cost were available before
+  the wait/commit decision;
 - expose decisions to at least five cue-reliability levels spanning below,
   between and above the predicted thresholds;
 - replicate each level enough to estimate stochastic departures from the
@@ -156,6 +232,21 @@ The manipulation shows that heterospecific seasonal information can be
 unavailable to an earlier decision and relevant to a later one. It anchors
 decision-time information availability, but it does not sweep cue reliability
 or estimate a pair of information-use thresholds.
+
+### Greater snow goose
+
+The same ecological lineage now supplies a D-like perturbation axis and a
+q-like route-predictability axis. Captivity duration during spring migration
+had later reproductive consequences, and the strength of those consequences
+varied among years; independently, southern-route temperatures were weak
+predictors of later Arctic conditions.
+
+This makes greater snow goose the strongest current **hidden-deadline**
+candidate, but not a direct threshold test. Captivity duration combines elapsed
+time with handling/confinement stress, and the harsh breeding-ground state that
+amplified the carry-over effect was not necessarily known when the migration
+decision was made. The exact theorem therefore requires a pre-commitment
+estimate of (E[D\mid\mathcal I]), not the realised post-hoc cost.
 
 ## Fail-closed promotion rule
 
