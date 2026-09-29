@@ -148,3 +148,70 @@ def test_dual_use_information_never_raises_threshold_relative_to_action_only():
         result.dual_use_wait_threshold
         <= result.action_only_wait_threshold
     )
+
+
+@pytest.mark.parametrize("action_prior", [0.3, 0.4, 0.6])
+@pytest.mark.parametrize("action_costs", [(2.0, 1.0), (1.0, 2.0), (1.0, 1.0)])
+@pytest.mark.parametrize("comp_prior", [0.3, 0.5, 0.7])
+@pytest.mark.parametrize("comp_costs", [(1.0, 1.0), (0.5, 1.0), (1.0, 0.5)])
+@pytest.mark.parametrize("direct", [0.0, 0.05, 0.20, 0.50])
+def test_closed_form_threshold_matches_margin_sign_across_grid(
+    action_prior,
+    action_costs,
+    comp_prior,
+    comp_costs,
+    direct,
+):
+    params = dict(
+        action_prior_early=action_prior,
+        action_false_early_cost=action_costs[0],
+        action_missed_early_cost=action_costs[1],
+        compensation_prior_early=comp_prior,
+        compensation_false_early_cost=comp_costs[0],
+        compensation_missed_early_cost=comp_costs[1],
+    )
+    result = dual_use_wait_threshold(
+        direct_wait_cost=direct,
+        **params,
+    )
+
+    perfect_margin = dual_use_waiting_margin(
+        1.0,
+        direct_wait_cost=direct,
+        **params,
+    )
+
+    if not result.dual_use_ever_waits:
+        assert result.dual_use_wait_threshold is None
+        assert perfect_margin <= 1e-10
+        return
+
+    threshold = result.dual_use_wait_threshold
+    assert threshold is not None
+    assert threshold >= result.action_actionable_q - 1e-10
+
+    at_threshold = dual_use_waiting_margin(
+        threshold,
+        direct_wait_cost=direct,
+        **params,
+    )
+    assert at_threshold == pytest.approx(0.0, abs=1e-9)
+
+    epsilon = 1e-7
+    below = max(0.5, threshold - epsilon)
+    above = min(1.0, threshold + epsilon)
+
+    assert dual_use_waiting_margin(
+        below,
+        direct_wait_cost=direct,
+        **params,
+    ) <= 1e-8
+    assert dual_use_waiting_margin(
+        above,
+        direct_wait_cost=direct,
+        **params,
+    ) >= -1e-8
+
+    if result.action_only_ever_waits:
+        assert result.action_only_wait_threshold is not None
+        assert threshold <= result.action_only_wait_threshold + 1e-10
