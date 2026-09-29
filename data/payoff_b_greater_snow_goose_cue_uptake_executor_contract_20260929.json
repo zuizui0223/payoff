@@ -23,7 +23,8 @@
     "connectivity_training_n >= 15",
     "connectivity_window_end_year <= focal year - 1",
     "one row per individual x context x decision_date",
-    "movement context must come from frozen automatic movepp preprocessing"
+    "movement context must come from frozen automatic movepp preprocessing",
+    "context must be St_Lawrence, Nunavik, or Baffin and derive from source-backed region geometry"
   ],
   "primary_formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(context) + C(year)",
   "primary_uncertainty": "individual-clustered; two-way individual x year only as sensitivity when software permits",
@@ -69,5 +70,16 @@
   "validation": {
     "helper_unit_tests": "threshold boundary, no-threshold comparison, and one-SE adjacency logic",
     "synthetic_integration_tests": "registered estimability gate, primary formula fit, and climate-window leakage rejection"
+  },
+  "route_context_contract": "data/payoff_b_greater_snow_goose_route_context_contract_20260929.json",
+  "allowed_contexts": [
+    "St_Lawrence",
+    "Nunavik",
+    "Baffin"
+  ],
+  "context_gate": {
+    "rule": "input context must be one of the three frozen shared route regions",
+    "full_estimability_requires_all_three": true,
+    "forbidden": "per-individual movepp cluster_id or outcome-informed reclustering as context"
   }
 }
