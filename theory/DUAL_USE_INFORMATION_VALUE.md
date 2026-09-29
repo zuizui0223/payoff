@@ -479,6 +479,58 @@ This result is independent of:
 Conditional information can determine **when** waiting becomes worthwhile, but
 not whether perfect information can overcome the direct cost of waiting.
 
+### Conditional-complexity penalty
+
+A cue-informed conditional decision can lower the cost of a **given**
+downstream problem relative to leaving that problem uninformed. But the
+existence of the waiting-contingent problem itself cannot make waiting more
+attractive than a world in which that problem does not exist.
+
+The multi-module condition can be rearranged as
+
+\[
+V_A(q)
+>
+J+\sum_j R_j(q).
+\]
+
+Because every posterior conditional risk satisfies
+
+\[
+R_j(q)\ge0,
+\]
+
+the waiting margin with conditional problems is never larger than
+
+\[
+V_A(q)-J,
+\]
+
+the margin in an otherwise identical no-problem world.
+
+Therefore
+
+\[
+\boxed{
+q_{\mathrm{wait}}^{\mathrm{with\ conditional\ problems}}
+\ge
+q_{\mathrm{wait}}^{\mathrm{no\ conditional\ problems}}
+}
+\]
+
+whenever both thresholds exist.
+
+This resolves an apparent paradox:
+
+- **information bonus:** for a fixed downstream problem, informing its solution
+  lowers the threshold relative to leaving it uninformed;
+- **conditional-complexity penalty:** adding a new problem that exists only
+  because the actor waited cannot lower the threshold relative to a world
+  without that problem.
+
+Thus "the cue has more uses" is not by itself evidence that organisms should
+wait for it at lower reliability.
+
 ### Multi-module rescue interval
 
 If the conditional decisions remained uninformed, action information alone
