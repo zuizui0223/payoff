@@ -35,7 +35,20 @@
       "wind support along next-route bearing",
       "precipitation",
       "same-day temperature anomaly"
-    ]
+    ],
+    "context_definition": {
+      "allowed": [
+        "St_Lawrence",
+        "Nunavik",
+        "Baffin"
+      ],
+      "target_not_risk_context": "Bylot",
+      "movement_unit": "automatic movepp staging_stopover habitat",
+      "assignment": "habitat centroid must fall in exactly one source-backed stopover polygon",
+      "per_individual_cluster_id_as_context": false,
+      "source": "Resendiz-Infante & Gauthier 2024 stopover-area definitions",
+      "geometry_status": "SOURCE_POLYGONS_NOT_YET_MATERIALIZED"
+    }
   },
   "primary_model": {
     "formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(context) + C(year)",
@@ -105,6 +118,14 @@
       "stage": "PREOUTCOME_BEFORE_EXECUTION",
       "issue": "same-day temperature anomaly was listed under immediate_weather_controls but omitted from the literal primary_model formula",
       "resolution": "added same_day_temp_anom as an additive control to the registered primary formula",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "context was named but its cross-individual ecological identity was underspecified; movepp cluster_id is individual-specific and cannot serve as the shared q context",
+      "resolution": "freeze exactly three shared staging contexts: St_Lawrence, Nunavik, Baffin; Bylot remains target only; require source-backed polygon assignment of automatic staging habitats",
       "outcome_data_opened": false,
       "result_dependent": false
     }
