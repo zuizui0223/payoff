@@ -1,7 +1,7 @@
 name: PAYOFF-B greater snow goose cue uptake executor
 
 concurrency:
-  group: payoff-b-greater-snow-goose-cue-uptake-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: payoff-b-greater-snow-goose-cue-uptake-${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 on:
@@ -33,6 +33,8 @@ on:
       - 'tests/test_cue_uptake_empirics.py'
       - 'tests/test_snow_goose_cue_uptake_executor.py'
       - 'data/payoff_b_greater_snow_goose_cue_uptake_executor_contract_20260929.json'
+      - 'docs/PAYOFF_B_GREATER_SNOW_GOOSE_NOVELTY_BOUNDARY_20260929.md'
+      - 'data/payoff_b_greater_snow_goose_novelty_boundary_20260929.json'
       - 'data/payoff_b_greater_snow_goose_route_context_contract_20260929.json'
       - 'data/payoff_b_greater_snow_goose_movebank_access_gate_20260929.json'
       - 'data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json'
