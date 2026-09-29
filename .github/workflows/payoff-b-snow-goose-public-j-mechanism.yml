@@ -12,6 +12,7 @@ on:
       - 'scripts/materialize_snow_goose_2026_dryad.py'
       - 'tests/test_snow_goose_j_mechanism.py'
       - 'tests/test_snow_goose_2026_dryad_materializer.py'
+      - 'tests/test_snow_goose_j_mechanism_integration.py'
       - '.github/workflows/payoff-b-snow-goose-public-j-mechanism.yml'
   pull_request:
     paths:
@@ -37,11 +38,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install --upgrade pip pytest requests
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[test,empirical]' requests
       - run: >
           python -m pytest -q
           tests/test_snow_goose_j_mechanism.py
           tests/test_snow_goose_2026_dryad_materializer.py
+          tests/test_snow_goose_j_mechanism_integration.py
       - run: python scripts/payoff_b_snow_goose_j_mechanism.py --help
       - run: python scripts/materialize_snow_goose_2026_dryad.py --help
       - run: python scripts/probe_snow_goose_2026_dryad_manifest.py
