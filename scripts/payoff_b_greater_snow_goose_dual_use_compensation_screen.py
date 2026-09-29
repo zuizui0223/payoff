@@ -24,10 +24,18 @@ from src.snow_goose_dual_use_screen import (
 )
 
 
+ROUTE_ORDER = {
+    "St_Lawrence": 0,
+    "Nunavik": 1,
+    "Baffin": 2,
+    "Bylot": 3,
+}
+
 ALLOWED_SEGMENTS = {
-    ("St_Lawrence", "Nunavik"),
-    ("Nunavik", "Baffin"),
-    ("Baffin", "Bylot"),
+    (origin, destination)
+    for origin, origin_order in ROUTE_ORDER.items()
+    for destination, destination_order in ROUTE_ORDER.items()
+    if origin_order < destination_order and origin != "Bylot"
 }
 
 REQUIRED = {
@@ -53,7 +61,7 @@ PRIMARY_FORMULA = (
     "local_temp_anom3 * z_predictive_connectivity "
     "+ z_wait_days + day_of_year_within_context "
     "+ wind_support + precipitation + same_day_temp_anom "
-    "+ C(origin_context) + C(year)"
+    "+ C(route_segment) + C(year)"
 )
 
 SECONDARY_FORMULA = (
@@ -61,7 +69,7 @@ SECONDARY_FORMULA = (
     "local_temp_anom3 * z_predictive_connectivity * z_wait_days "
     "+ day_of_year_within_context "
     "+ wind_support + precipitation + same_day_temp_anom "
-    "+ C(origin_context) + C(year)"
+    "+ C(route_segment) + C(year)"
 )
 
 
@@ -117,6 +125,22 @@ def main():
         raise ValueError(f"unexpected route segments: {sorted(invalid)}")
 
     data["year"] = data["year"].astype(int)
+    data["route_segment"] = (
+        data["origin_context"].astype(str)
+        + "__"
+        + data["destination_context"].astype(str)
+    )
+    data["skip_next_context"] = [
+        int(
+            ROUTE_ORDER[str(destination)]
+            - ROUTE_ORDER[str(origin)]
+            > 1
+        )
+        for origin, destination in zip(
+            data["origin_context"],
+            data["destination_context"],
+        )
+    ]
     data["transit_duration_days"] = pd.to_numeric(
         data["transit_duration_days"], errors="raise"
     )
@@ -192,6 +216,7 @@ def main():
         },
         "primary": None,
         "secondary_wait_dependence": None,
+        "secondary_route_skip": None,
         "claim_boundary": [
             "behavioral compensation screen only",
             "supported signal blocks fixed-D_eff promotion but does not prove cue cognition",
@@ -259,6 +284,58 @@ def main():
             }
         except Exception as exc:
             result["secondary_wait_dependence"] = {
+                "status": "NOT_ESTIMABLE",
+                "reason": type(exc).__name__,
+            }
+
+        try:
+            eligible_skip = data[
+                data["origin_context"].isin(["St_Lawrence", "Nunavik"])
+            ].copy()
+            if (
+                len(eligible_skip) >= 50
+                and eligible_skip["skip_next_context"].nunique() == 2
+            ):
+                import statsmodels.api as sm
+                import statsmodels.formula.api as smf
+
+                skip_formula = (
+                    "skip_next_context ~ "
+                    "local_temp_anom3 * z_predictive_connectivity "
+                    "+ z_wait_days + day_of_year_within_context "
+                    "+ wind_support + precipitation + same_day_temp_anom "
+                    "+ C(origin_context) + C(year)"
+                )
+                skip_fit = smf.glm(
+                    skip_formula,
+                    data=eligible_skip,
+                    family=sm.families.Binomial(),
+                ).fit(
+                    cov_type="cluster",
+                    cov_kwds={
+                        "groups": eligible_skip["individual"].astype(str)
+                    },
+                )
+                skip_term = "local_temp_anom3:z_predictive_connectivity"
+                result["secondary_route_skip"] = {
+                    "formula": skip_formula,
+                    "term": skip_term,
+                    "estimate": float(skip_fit.params[skip_term]),
+                    "cluster_se": float(skip_fit.bse[skip_term]),
+                    "registered_direction": "positive",
+                    "role": (
+                        "secondary actuator diagnostic: warm predictive "
+                        "cues increase probability of skipping the next "
+                        "intermediate route context"
+                    ),
+                }
+            else:
+                result["secondary_route_skip"] = {
+                    "status": "NOT_ESTIMABLE",
+                    "reason": "INSUFFICIENT_SKIP_VARIATION_OR_ROWS",
+                }
+        except Exception as exc:
+            result["secondary_route_skip"] = {
                 "status": "NOT_ESTIMABLE",
                 "reason": type(exc).__name__,
             }
