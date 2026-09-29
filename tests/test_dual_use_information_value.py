@@ -562,3 +562,57 @@ def test_multi_module_threshold_matches_margin_sign(direct, modules):
         conditional_modules=modules,
         **ACTION,
     ) >= -1e-7
+
+
+
+def test_wait_contingent_decision_complexity_cannot_lower_threshold_below_no_problem_world():
+    no_problem = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.10,
+        conditional_modules=[],
+        **ACTION,
+    )
+    one_problem = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.10,
+        conditional_modules=[(0.5, 0.20, 0.20)],
+        **ACTION,
+    )
+    two_problems = multi_module_dual_use_wait_threshold(
+        direct_wait_cost=0.10,
+        conditional_modules=[
+            (0.5, 0.20, 0.20),
+            (0.5, 0.40, 0.40),
+        ],
+        **ACTION,
+    )
+
+    assert no_problem.wait_threshold is not None
+    assert one_problem.wait_threshold is not None
+    assert two_problems.wait_threshold is not None
+
+    assert one_problem.wait_threshold >= no_problem.wait_threshold
+    assert two_problems.wait_threshold >= no_problem.wait_threshold
+
+
+@pytest.mark.parametrize(
+    "modules",
+    [
+        [(0.5, 0.20, 0.20)],
+        [(0.3, 0.50, 1.00), (0.7, 1.00, 0.50)],
+        [(0.2, 2.0, 1.0), (0.5, 0.2, 0.2), (0.8, 1.0, 2.0)],
+    ],
+)
+def test_conditional_modules_never_improve_waiting_margin_relative_to_no_problem(modules):
+    for q in (0.50, 0.60, 0.75, 0.85, 0.95, 1.00):
+        no_problem = multi_module_waiting_margin(
+            q,
+            direct_wait_cost=0.10,
+            conditional_modules=[],
+            **ACTION,
+        )
+        with_problems = multi_module_waiting_margin(
+            q,
+            direct_wait_cost=0.10,
+            conditional_modules=modules,
+            **ACTION,
+        )
+        assert with_problems <= no_problem + 1e-10
