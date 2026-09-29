@@ -64,6 +64,7 @@ THRESHOLD_FORMULA = (
 )
 
 Q_GRID = [0.50, 0.525, 0.55, 0.575, 0.60, 0.625, 0.65, 0.675, 0.70]
+ALLOWED_CONTEXTS = {"St_Lawrence", "Nunavik", "Baffin"}
 
 
 def parse_args():
@@ -121,6 +122,14 @@ def _prepare(data):
     key = ["individual", "context", "decision_date"]
     if out.duplicated(key).any():
         raise ValueError("duplicate individual x context x decision_date rows")
+
+    contexts = set(out["context"].astype(str).unique())
+    unexpected = contexts - ALLOWED_CONTEXTS
+    if unexpected:
+        raise ValueError(
+            "context must use only frozen shared route regions; unexpected: "
+            f"{sorted(unexpected)}"
+        )
 
     if (out["connectivity_training_n"].astype(int) < 15).any():
         raise ValueError(
@@ -188,7 +197,7 @@ def _estimability(data, rho_sd):
     passes = (
         diagnostics["individuals"] >= 30
         and diagnostics["years"] >= 4
-        and diagnostics["contexts"] >= 3
+        and set(data["context"].astype(str).unique()) == ALLOWED_CONTEXTS
         and diagnostics["departure_events"] >= 100
         and diagnostics["predictive_connectivity_sd"] >= 0.03
         and diagnostics["within_context_predictive_connectivity_sd"] > 1e-12
