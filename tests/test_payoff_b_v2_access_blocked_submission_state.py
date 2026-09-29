@@ -48,12 +48,12 @@ def test_access_blocked_package_is_deterministic_and_lambda_remains_unopened():
     receipt = json.loads(RECEIPT.read_text(encoding="utf-8"))
 
     package = state["access_blocked_submission"]
-    assert package["workflow_run"] == 36473718861
-    assert package["primary"]["artifact_id"] == 10992513306
-    assert package["reproduction"]["artifact_id"] == 10992014063
+    assert package["workflow_run"] == 36509120020
+    assert package["primary"]["artifact_id"] == 11008566336
+    assert package["reproduction"]["artifact_id"] == 11009080342
 
-    geb_sha = "ed015112d749ec515c7576d5078afb03a7fb0511e7f5d4a47e2474890aaa6f40"
-    review_sha = "6ff24580b76e552d34294c1302b2afa0fe2d0013f51f7a9890038b7502d3581b"
+    geb_sha = "b10d00dc8252c8b7efafbeafffaf3c32480eb199236b529979e7a122ef0fe8ec"
+    review_sha = "e826d500310f2d884a62c3913fc3798ec2ec762cd776b6b89252ec26891327bd"
 
     assert package["primary"]["geb_inner_zip_sha256"] == geb_sha
     assert package["reproduction"]["geb_inner_zip_sha256"] == geb_sha
