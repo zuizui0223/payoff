@@ -323,27 +323,25 @@ desynchronization window. The pairwise deadline-difference mechanism remains a p
 
 ### E6b — interaction-level response-asymmetry bridge
 
-Burgess et al. (2018) provide published pairwise evidence from three real
-bird--caterpillar interactions. The temporal major-axis slopes of bird first-egg
-date on caterpillar-peak timing are:
+Two independent published interaction contexts support the ecological bridge
+from unequal phenological responsiveness to changing relative timing.
 
-- Blue Tit: **0.510** (95% CrI 0.236--0.770);
-- Great Tit: **0.515** (0.109--0.904);
-- Pied Flycatcher: **0.348** (0.210--0.490).
+1. **Burgess et al. (2018):** bird--caterpillar temporal tracking slopes are
+   0.510 (Blue Tit), 0.515 (Great Tit) and 0.348 (Pied Flycatcher), with all
+   95% credible intervals below the perfect-tracking value of one.
+2. **Samplonius et al. (2018):** across 10 European nest-box schemes, resident
+   tits are more temperature-sensitive than migratory flycatchers and their
+   laying-date interval diverges by an average **0.94 d/decade**.
 
-All three intervals are below the perfect-tracking value of one. In the source
-interpretation, a 10-day advance in the caterpillar peak corresponds to only
-about 5.1, 5.2 and 3.5 days of bird advance, respectively, so relative timing
-mismatch increases in early springs.
-
-Licensed wording: **actual interacting consumer--resource pairs show
-year-to-year phenological response asymmetry that translates into mismatch.**
+Licensed wording: **interacting partners can differ in climate-responsive
+phenology, and that response asymmetry changes their relative timing.**
 
 Not licensed: the theoretical delay-cost difference **D2-D1** has been
 measured, the exact **q1 < q <= q2** information-use window has been observed,
-or information distance is the causal mechanism for these pairwise deficits.
+statistical climate windows are decision deadlines, or information distance is
+the causal mechanism for these deficits.
 
-This is published bridge evidence, not a new PAYOFF-B discovery.
+These are published bridge results, not new PAYOFF-B discoveries.
 
 ## Prior-art firewall
 

@@ -48,6 +48,36 @@ Mean predicted peak-demand minus peak-resource timing is approximately:
 The source concludes that earlier, warmer springs increase bird-caterpillar
 asynchrony, and that Pied Flycatcher has the shallowest temporal tracking slope.
 
+## Independent bridge 2 — resident tits versus migratory flycatchers
+
+Samplonius et al. (2018; DOI 10.1111/gcb.14160) analysed mean laying dates
+from **10 European nest-box schemes (1991–2015)** that each contained at least
+one resident tit and one migratory flycatcher population.
+
+The species groups share breeding ecology and nest-site competition. Resident
+tits were substantially more temperature-sensitive than migratory flycatchers.
+Using Blue Tit as the model baseline, the temperature slope was **-3.37 ± 0.36
+d/°C**; Pied and Collared Flycatcher temperature interactions were **+1.85 ±
+0.38** and **+1.83 ± 0.43 d/°C**, respectively, indicating shallower migrant
+responses. These differential responses widened the laying-date interval
+between tits and flycatchers by an average **0.94 d/decade** over the study
+period. Tit laying date also explained additional variation in flycatcher
+laying date after controlling for temperature.
+
+This gives a second, independent interaction-level bridge:
+
+```text
+resident and migrant competitors
+        ↓
+different temperature sensitivities
+        ↓
+widening phenological interval
+```
+
+The source also found that statistical temperature-response windows differed
+between the groups, but those climate windows are **not** treated as
+information-decision deadlines.
+
 ## What this adds to PAYOFF-B
 
 This source closes part of the reviewer-identified gap:
@@ -66,9 +96,7 @@ different year-to-year response magnitude
 larger relative timing mismatch
 ```
 
-So the natural evidence is no longer restricted to **levels**. There is
-published interaction-level evidence that a **difference between partners'
-phenological responses** produces mismatch.
+So the natural evidence is no longer restricted to **levels**. Two independent interaction contexts now show that **differences between partners' phenological responses change relative timing**: trophic resource mismatch in Burgess et al. and resident–migrant breeding-interval divergence in Samplonius et al.
 
 ## What it still does not test
 
