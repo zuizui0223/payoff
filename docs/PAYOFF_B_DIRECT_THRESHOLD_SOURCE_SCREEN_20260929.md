@@ -15,6 +15,97 @@ A direct natural test of the pairwise information-deadline mechanism requires al
 | observed cue use | distinguishes commit-now from wait/use-cue |
 | repeated q support | must cross below, within and above the predicted asynchronous window |
 
+## Candidate 1 — Greater snow goose same-system D + q composite
+
+Grandmont et al. (2023), *Functional Ecology*  
+DOI: 10.1111/1365-2435.14256  
+Dryad: 10.5061/dryad.cjsxksn6t
+
+Reséndiz-Infante & Gauthier (2024), *Frontiers in Bird Science*  
+DOI: 10.3389/fbirs.2024.1307628
+
+This is currently the closest located same-system route because both studies
+concern the greater snow goose migration from the St. Lawrence spring staging
+area toward the Bylot Island breeding system.
+
+### Independent delay-cost evidence
+
+Grandmont et al. experimentally held female greater snow geese during spring
+migration for up to 4 days before release. Increasing time in captivity reduced
+breeding propensity / reproductive output, with strong reductions in two of
+three study years. This is substantially closer to the theorem's delay-cost
+quantity than migration distance or route progress because delay itself was
+experimentally imposed before reproduction.
+
+The experiment therefore provides an **independent perturbational calibration
+of the biological cost of delay**. It does not by itself put D on the exact
+PAYOFF-B utility scale; that would require translating the marginal effect of
+delay on expected reproductive value into the same units as the early/late
+state-loss terms.
+
+### Independent q-like information evidence
+
+Reséndiz-Infante & Gauthier reconstructed temperatures along the same migration
+system from the St. Lawrence Valley through Nunavik and Baffin Island to Bylot
+Island over 1979-2018. Temperature correlations between successive locations
+were generally weak at long distances and increased only near the breeding
+site. Temperature during the Bylot arrival/pre-laying period predicted laying
+date, whereas temperatures at southern stopovers did not provide a strong
+breeding-site predictor.
+
+This supplies a source-backed **pre-commitment information-quality gradient**
+along the same ecological system.
+
+### Why this still does not close the theorem empirically
+
+The 2024 study explicitly notes that individual migration chronology linked to
+subsequent reproductive performance exists only for few years and few
+individuals. The two source programmes therefore do not currently provide a
+dense actor-level series in which the same individuals experience measured q,
+an independently calibrated D, and repeated cue-use decisions spanning a switch
+threshold.
+
+Qualification:
+
+- same species and migration/breeding system: **YES**
+- independently manipulated delay: **YES**
+- fitness consequence of delay: **YES**
+- q-like environmental predictability: **YES**
+- independent exact D in PAYOFF-B loss units: **NOT YET**
+- actor-level cue-use threshold: **NO**
+- repeated q support crossing q1 and q2: **NO**
+- direct asynchronous-use window: **NO**
+
+Classification: **STRONGEST_COMPOSITE_D_AND_Q_CANDIDATE_NOT_DIRECT_THRESHOLD**
+
+This candidate upgrades the source screen materially: the earlier problem was
+that no promising q system had an independent delay-cost anchor. Greater snow
+goose supplies both ingredients in one ecological lineage. The remaining
+bottleneck is now narrower—**actor-level threshold identification**, not the
+mere existence of a biologically meaningful delay cost.
+
+### Next gate for greater snow goose
+
+Before any threshold claim:
+
+1. recover the Grandmont individual-level captivity-duration / breeding table
+   from Dryad and estimate a prespecified marginal reproductive-value cost of
+   one day of delay;
+2. reconstruct pre-outcome rolling temperature predictability q for the exact
+   St. Lawrence -> Arctic decision contexts without using focal behavioural
+   outcomes;
+3. identify an individual movement dataset in the same population with
+   departure/stopover decisions across enough years to expose q variation;
+4. define cue use before inspecting its relationship with q;
+5. estimate early and late state-loss terms independently;
+6. only if steps 1-5 succeed, test whether the observed switch interval contains
+   the predicted q_wait(D).
+
+If step 3 fails, retain this as a composite same-system bridge rather than a
+direct threshold test.
+
+---
+
 ## Candidate 1 — Barnacle goose predictability system
 
 Kölzsch et al. (2015), *Journal of Animal Ecology*  
@@ -116,7 +207,7 @@ No screened source currently licenses the sentence:
 
 > measured D2-D1 predicts measured q2-q1, and the interval q1 < q <= q2 contains observed asynchronous cue use.
 
-The most promising development path is the barnacle-goose lineage because predictability, migration timing, arrival, breeding state and reproductive outcomes exist in closely connected public datasets.
+The strongest development path is now the greater-snow-goose St. Lawrence -> Bylot lineage because an experimental delay manipulation and an independent route-predictability reconstruction exist in the same ecological system. Barnacle goose remains the strongest tracking-based information-use candidate.
 
 However, PAYOFF-B should **not** promote that system to a direct theorem test unless D can be estimated independently of the cue-use outcome.
 
