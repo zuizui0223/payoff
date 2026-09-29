@@ -1,0 +1,44 @@
+{
+  "contract_id": "payoff_b_pairwise_deadline_threshold_direct_test_v1_20260929",
+  "date": "2026-09-29",
+  "status": "PROSPECTIVE_NO_QUALIFYING_NATURAL_DATA",
+  "theoretical_status": {
+    "D_to_threshold": "EXACT_VERIFIED",
+    "threshold_to_asynchronous_window": "EXACT_VERIFIED",
+    "canonical_witness": {
+      "prior_early": 0.4,
+      "false_early_cost": 2,
+      "missed_early_cost": 1,
+      "D1": 0.1,
+      "D2": 0.3,
+      "q1": 0.8125,
+      "q2": 0.9375,
+      "delta_q": 0.125
+    }
+  },
+  "direct_empirical_requirements": [
+    "pre-commitment cue reliability q",
+    "independently estimated delay/opportunity cost D for each actor",
+    "state-mismatch losses C_F and C_M plus prior pi",
+    "observed cue-use decision distinguishing commit-now from wait/use-cue"
+  ],
+  "forbidden_substitutions": {
+    "migration_distance_for_D": true,
+    "source_target_distance_for_D": true,
+    "phenological_temperature_sensitivity_for_D": true,
+    "phase_correction_for_cue_use": true,
+    "predictive_connectivity_for_cue_use": true
+  },
+  "primary_predictions": [
+    "q_i = (max(A,L)+D_i)/(A+L) when D_i < R0",
+    "D1 < D2 implies q1 < q2 under shared loss structure",
+    "Delta q = (D2-D1)/(A+L) when both actors eventually use the cue",
+    "exactly one actor uses the shared cue for q1 < q <= q2"
+  ],
+  "current_dataset_classification": {
+    "broad_birds": "PARTIAL_INFORMATION_QUALITY_ONLY",
+    "wigeon": "PARTIAL_INFORMATION_QUALITY_PLUS_PHASE_CORRECTION_NOT_CUE_USE",
+    "pied_flycatcher_experiment": "PARTIAL_DECISION_TIME_AVAILABILITY_ONLY"
+  },
+  "promotion_rule": "No direct natural mechanism claim without all four measured quantities in one qualifying system and a pre-outcome analysis contract."
+}
