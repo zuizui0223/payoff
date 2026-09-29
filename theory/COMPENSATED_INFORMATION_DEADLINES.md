@@ -115,6 +115,38 @@ threshold heterogeneity.
 The reverse warning is equally important: rankings in raw delay need not equal
 rankings in effective deadline cost.
 
+### Raw-delay rank is not threshold rank
+
+For finite thresholds and a shared state-loss scale,
+
+[
+q_{wait,i}<q_{wait,j}
+\iff
+D_{eff,i}<D_{eff,j}.
+]
+
+No corresponding equivalence exists for raw delays \(\delta_i\) unless the
+compensation and direct-cost structures are sufficiently homogeneous.
+
+Two consequences follow.
+
+**Rank erasure.** Actor 1 can wait 0.20 time units with no compensation while
+actor 2 waits 0.40 but recovers 0.20 for free. Both then have
+\(D_{eff}=0.20\) and the same cue-use threshold.
+
+**Rank reversal.** Under the canonical loss scale, an actor with raw delay 0.20
+and no compensation has \(D_{eff}=0.20\) and \(q_{wait}=0.875\). A second
+actor with raw delay 0.40, full free timing compensation and direct waiting
+cost rate \(\omega=0.05\) has only \(D_{eff}=0.02\), hence
+\(q_{wait}=0.7625\). The actor that waits twice as long rationally uses
+information at *lower* cue reliability.
+
+Thus migration distance, travel duration or calendar delay can fail even as
+ordinal proxies for an information deadline when compensatory capacity differs
+among actors. A raw-delay gradient is interpretable as a deadline gradient only
+under an additional homogeneity assumption about \(J,K,M\) and \(C\).
+
+
 ## Linear closed form
 
 Let
