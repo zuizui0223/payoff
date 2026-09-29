@@ -53,12 +53,21 @@
       "both immediate adjacent grid points have mean loss > best mean + best candidate SE"
     ],
     "failure_status": "THRESHOLD_NOT_IDENTIFIED",
-    "claim_ceiling": "behavioral/phenomenological threshold only; never q_wait(D)"
+    "claim_ceiling": "behavioral/phenomenological threshold only; never q_wait(D)",
+    "fail_closed_estimability": [
+      "if any LOIO held-out context or year level is absent from its training fold, report THRESHOLD_NOT_IDENTIFIED",
+      "if any candidate threshold yields no cue_active variation in a training fold, report THRESHOLD_NOT_IDENTIFIED",
+      "if a binomial fit does not converge, report threshold secondary as not identified rather than retuning the grid or formula"
+    ]
   },
   "amendment_to_parent_registration": {
     "issue": "same_day temperature anomaly was listed as an immediate-weather control but omitted from the literal primary formula",
     "resolution": "include same_day_temp_anom as an additive control in primary and threshold formulas",
     "timing": "resolved before focal outcome execution",
     "result_dependent": false
+  },
+  "validation": {
+    "helper_unit_tests": "threshold boundary, no-threshold comparison, and one-SE adjacency logic",
+    "synthetic_integration_tests": "registered estimability gate, primary formula fit, and climate-window leakage rejection"
   }
 }
