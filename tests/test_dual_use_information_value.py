@@ -215,3 +215,25 @@ def test_closed_form_threshold_matches_margin_sign_across_grid(
     if result.action_only_ever_waits:
         assert result.action_only_wait_threshold is not None
         assert threshold <= result.action_only_wait_threshold + 1e-10
+
+
+def test_zero_value_compensation_module_recovers_original_threshold():
+    zero_value_comp = dict(
+        compensation_prior_early=0.5,
+        compensation_false_early_cost=0.0,
+        compensation_missed_early_cost=1.0,
+    )
+    result = dual_use_wait_threshold(
+        direct_wait_cost=0.10,
+        **ACTION,
+        **zero_value_comp,
+    )
+
+    # Compensation prior Bayes risk is zero, so the cue cannot improve that
+    # module and the theorem collapses to the original action-only threshold:
+    # (1.2 + 0.1)/1.6 = 0.8125.
+    assert result.compensation_prior_risk == pytest.approx(0.0)
+    assert result.action_only_ever_waits
+    assert result.dual_use_ever_waits
+    assert result.action_only_wait_threshold == pytest.approx(0.8125)
+    assert result.dual_use_wait_threshold == pytest.approx(0.8125)
