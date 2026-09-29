@@ -15,7 +15,8 @@
     "independently estimated effective waiting cost D_eff for each actor, either directly in fitness units or through a preregistered decomposition into raw delay delta, compensatory capacity C, compensation cost K, and residual timing-loss function M",
     "state-mismatch losses C_F and C_M plus prior pi on the same utility scale",
     "observed cue-use decision distinguishing commit-now from wait/use-cue",
-    "repeated q support crossing the predicted threshold or pairwise asynchronous window"
+    "repeated q support crossing the predicted threshold or pairwise asynchronous window",
+    "if compensation occurs in multiple stages, a preregistered causal model must map each stage's recoverable delay and cost into the common D_eff utility scale rather than multiplying observed timing correlations"
   ],
   "forbidden_substitutions": {
     "raw_waiting_days_for_D_eff": true,
@@ -27,7 +28,8 @@
     "phase_correction_for_cue_use": true,
     "predictive_connectivity_for_cue_use": true,
     "posthoc_realised_cost_for_commitment_time_expected_D_eff": true,
-    "compensation_correlation_for_numeric_D_eff_without_cost_model": true
+    "compensation_correlation_for_numeric_D_eff_without_cost_model": true,
+    "multiply_sequential_timing_slopes_into_D_eff_without_causal_model": true
   },
   "primary_predictions": [
     "q_i = (max(A,L)+D_eff_i)/(A+L) when D_eff_i < R0",
@@ -51,7 +53,8 @@
     "behavioral_uptake": "prospective 2019-2023 GPS lane registered but event access requires authenticated Movebank session and exact route geometry",
     "clean_D_eff": "NOT_IDENTIFIED",
     "actor_level_q_wait": "NOT_IDENTIFIED",
-    "direct_pairwise_window": "NOT_OBSERVED"
+    "direct_pairwise_window": "NOT_OBSERVED",
+    "post_arrival_buffering": "Bety et al. 2003: lay-date coefficient on relative arrival date 0.45 +/- 0.09 after premigration body-condition control; prelaying duration slope versus arrival -0.53 (R2=0.55); retained as phenomenological buffering only because sequential-timing inference has a published critique"
   },
   "promotion_rule": "No direct natural D_eff-to-threshold claim until q, D_eff, the common loss scale, and cue-use switching are independently identified in one qualifying system under a pre-outcome contract."
 }
