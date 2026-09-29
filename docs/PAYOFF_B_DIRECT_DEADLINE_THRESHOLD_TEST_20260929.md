@@ -187,6 +187,42 @@ Natural data should therefore distinguish an information failure from an
 apparently maladaptive outcome that arose because the cost state itself was
 unpredictable.
 
+## Inverse test — reveal D from an observed threshold
+
+The theorem is invertible. For an interior information-use threshold,
+
+[
+\boxed{
+D_{revealed}
+=
+q_{wait}(A+L)-\max(A,L)
+}
+]
+
+so an observed switch interval for (q_{wait}) maps directly to an interval for
+the deadline cost implied by the model.
+
+For the canonical example, an observed threshold bracket
+
+[
+0.81\le q_{wait}<0.82
+]
+
+implies
+
+[
+0.096\le D_{revealed}<0.112,
+]
+
+which contains the generating value (D=0.10).
+
+This creates a stronger empirical design than testing threshold ordering alone:
+estimate (q_{wait}) from behavior, infer (D_{revealed}) from the theorem,
+then compare it with an **independent** manipulation or fitness estimate of the
+cost of postponing commitment. Agreement is a quantitative out-of-sample test
+of the deadline mechanism. Using the same behavior to estimate both quantities
+would be circular and is not licensed.
+
 ## Minimum experimental design
 
 The cleanest design manipulates cue reliability and delay cost orthogonally.
