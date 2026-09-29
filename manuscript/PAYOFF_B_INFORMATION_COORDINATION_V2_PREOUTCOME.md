@@ -404,7 +404,7 @@ of its interaction weight already attached to informed neighbours. Its gain
 from adopting is
 
 [
-oxed{
+\boxed{
 H_i(S)
 =
 R_i-D_i+pI_i[2a_i(S)-1].
@@ -415,10 +415,10 @@ Thus actor (i) follows the informed state when
 
 [
 a_i(S)>
-rac12
+\frac12
 left[
-1-rac{R_i-D_i}{pI_i}
-ight].
+1-\frac{R_i-D_i}{pI_i}
+\right].
 ]
 
 Because non-negative network weights make (a_i(S)) non-decreasing as adoption
@@ -430,17 +430,17 @@ seeds,
 [
 H(k)=
 R-D+
-pIrac{2k-N+1}{N-1}.
+pI\frac{2k-N+1}{N-1}.
 ]
 
 The strict seed threshold is therefore the smallest integer satisfying
 
 [
 k>
-rac{N-1}{2}
+\frac{N-1}{2}
 left[
-1-rac{R-D}{pI}
-ight].
+1-\frac{R-D}{pI}
+\right].
 ]
 
 The canonical three-species example produces a sharp topology contrast.
