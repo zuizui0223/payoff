@@ -90,7 +90,9 @@ def test_threshold_gate_supports_unique_interior_candidate():
 def test_threshold_gate_rejects_adjacent_one_se_tie():
     candidates = _flat_candidates(0.60)
     candidates[0.575] = [0.400, 0.410, 0.390, 0.400]
-    candidates[0.550] = [0.401, 0.411, 0.391, 0.401]
+    # Mean loss is slightly worse than the selected candidate, but the
+    # paired individual-level difference is noisy enough to remain within 1 SE.
+    candidates[0.550] = [0.360, 0.470, 0.350, 0.460]
     candidates[0.600] = [0.470, 0.480, 0.460, 0.470]
     result = adjudicate_threshold_folds(
         no_threshold_losses=[0.55, 0.54, 0.56, 0.55],
