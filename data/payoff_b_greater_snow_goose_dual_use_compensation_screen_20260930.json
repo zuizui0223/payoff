@@ -8,11 +8,14 @@
   "unit": "individual x origin route context x completed transition to the next frozen route context",
   "frozen_segments": [
     "St_Lawrence -> Nunavik",
+    "St_Lawrence -> Baffin",
+    "St_Lawrence -> Bylot",
     "Nunavik -> Baffin",
+    "Nunavik -> Bylot",
     "Baffin -> Bylot"
   ],
-  "primary_response": "log transit_duration_days from departure of origin context to first entry into next frozen route context",
-  "primary_formula": "log_transit_duration_days ~ local_temp_anom3 * z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(origin_context) + C(year)",
+  "primary_response": "log transit_duration_days from departure of origin context to first entry into the next observed downstream frozen route context; skipped intermediate contexts remain valid compensation outcomes",
+  "primary_formula": "log_transit_duration_days ~ local_temp_anom3 * z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(year)",
   "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
   "directional_prediction": "negative; warmer cues are followed by shorter transit when those cues historically contain more information about later Bylot conditions",
   "uncertainty": "cluster-robust by individual",
@@ -25,7 +28,7 @@
     "require_wait_days_variation": true
   },
   "secondary": {
-    "formula": "log_transit_duration_days ~ local_temp_anom3 * z_predictive_connectivity * z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(origin_context) + C(year)",
+    "formula": "log_transit_duration_days ~ local_temp_anom3 * z_predictive_connectivity * z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(year)",
     "focal_term": "local_temp_anom3:z_predictive_connectivity:z_wait_days",
     "directional_prediction": "negative",
     "role": "diagnostic that cue-linked transit compression strengthens after longer waiting; not required for primary classification"
@@ -43,5 +46,23 @@
     "do not treat a null result as evidence that D_eff is cue-independent",
     "do not change route segments, transit definition, q construction, or direction after outcome inspection"
   ],
-  "outcome_data_opened": false
+  "outcome_data_opened": false,
+  "route_skip_secondary": {
+    "eligible_origins": [
+      "St_Lawrence",
+      "Nunavik"
+    ],
+    "response": "skip_next_context = 1 when the next observed downstream frozen context is more than one route rank ahead",
+    "formula": "skip_next_context ~ local_temp_anom3 * z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(origin_context) + C(year)",
+    "focal_term": "local_temp_anom3:z_predictive_connectivity",
+    "directional_prediction": "positive",
+    "role": "secondary actuator diagnostic; route skipping is retained rather than excluded from the transit-duration analysis"
+  },
+  "preoutcome_amendment": {
+    "date": "2026-09-30",
+    "issue": "initial draft admitted only consecutive route-context transitions, which would discard route skipping even though skipping is itself a plausible compensation action",
+    "resolution": "allow every forward transition among St_Lawrence, Nunavik, Baffin and Bylot; control primary transit-duration model by origin-destination route_segment; add route-skip secondary diagnostic",
+    "outcome_data_opened": false,
+    "result_dependent": false
+  }
 }
