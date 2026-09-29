@@ -25,6 +25,7 @@ from pathlib import Path
 
 from src.greater_snow_goose_cue_uptake import (
     FROZEN_Q_GRID,
+    adjudicate_threshold_folds,
     evaluate_estimability,
     gaussian_binary_q,
     preoutcome_training_valid,
@@ -42,8 +43,25 @@ def parse_args():
 
 def _log_loss(y, p):
     eps = 1e-12
-    p = p.clip(eps, 1.0 - eps)
-    return float(-(y * p.apply(math.log) + (1-y) * (1-p).apply(math.log)).mean())
+    ys = [float(v) for v in y]
+    ps = [min(1.0 - eps, max(eps, float(v))) for v in p]
+    if len(ys) != len(ps) or not ys:
+        raise ValueError("response and prediction vectors must align")
+    return -sum(
+        yy * math.log(pp) + (1.0 - yy) * math.log(1.0 - pp)
+        for yy, pp in zip(ys, ps)
+    ) / len(ys)
+
+
+def _mean_se(values):
+    values = [float(v) for v in values]
+    if not values:
+        return None, None
+    mean = sum(values) / len(values)
+    if len(values) < 2:
+        return mean, None
+    variance = sum((v - mean) ** 2 for v in values) / (len(values) - 1)
+    return mean, math.sqrt(variance / len(values))
 
 
 def main():
@@ -84,6 +102,32 @@ def main():
     )
     if data["connectivity_rho"].isna().any():
         raise ValueError("missing connectivity after context-year join")
+
+    expected_contexts = {
+        "southern_staging",
+        "mid_arctic_staging",
+        "northern_arctic_staging",
+    }
+    observed_contexts = set(data["context"].astype(str).unique())
+    if observed_contexts != expected_contexts:
+        raise ValueError(
+            "shared staging contexts do not match frozen south/mid/north mapping"
+        )
+
+    if not set(data["depart_next_24h"].dropna().unique()).issubset({0, 1}):
+        raise ValueError("depart_next_24h must be binary")
+    numeric_required = [
+        "local_temp_anom3",
+        "day_of_year_within_context",
+        "wind_support",
+        "precipitation",
+        "connectivity_rho",
+    ]
+    for column in numeric_required:
+        values = pd.to_numeric(data[column], errors="coerce")
+        if values.isna().any() or not np.isfinite(values.to_numpy()).all():
+            raise ValueError(f"{column} contains missing or non-finite values")
+        data[column] = values
 
     invalid_history = [
         not preoutcome_training_valid(
@@ -143,17 +187,29 @@ def main():
         "+ day_of_year_within_context + wind_support + precipitation "
         "+ C(context) + C(year)"
     )
-    fit = smf.logit(formula, data=data).fit(disp=False)
-    robust = fit.get_robustcov_results(
-        cov_type="cluster",
-        groups=data["individual_id"].astype(str),
-    )
-    names = list(fit.model.exog_names)
     term = "local_temp_anom3:z_predictive_connectivity"
-    idx = names.index(term)
-    beta = float(robust.params[idx])
-    se = float(robust.bse[idx])
-    p = float(robust.pvalues[idx])
+    try:
+        fit = smf.logit(formula, data=data).fit(
+            disp=False,
+            maxiter=200,
+            cov_type="cluster",
+            cov_kwds={"groups": data["individual_id"].astype(str)},
+        )
+    except Exception as exc:
+        result["status"] = "PRIMARY_MODEL_FIT_FAILED"
+        result["primary"] = {
+            "formula": formula,
+            "term": term,
+            "support_status": "NOT_ESTIMABLE",
+            "failure_type": type(exc).__name__,
+        }
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(result, indent=2) + "\n")
+        return
+
+    beta = float(fit.params[term])
+    se = float(fit.bse[term])
+    p = float(fit.pvalues[term])
     ci = [beta - 1.96 * se, beta + 1.96 * se]
 
     result["primary"] = {
@@ -174,7 +230,7 @@ def main():
     # comparator and score every frozen candidate with LOIO log loss.
     individuals = sorted(data["individual_id"].astype(str).unique())
     candidates = [None, *FROZEN_Q_GRID]
-    scores = []
+    fold_losses_by_candidate = {}
 
     for threshold in candidates:
         fold_losses = []
@@ -189,8 +245,12 @@ def main():
                     "+ C(context) + C(year)"
                 )
             else:
-                train["cue_active"] = (train["q_bridge"] >= threshold).astype(int)
-                test["cue_active"] = (test["q_bridge"] >= threshold).astype(int)
+                train["cue_active"] = (
+                    train["q_bridge"] >= threshold
+                ).astype(int)
+                test["cue_active"] = (
+                    test["q_bridge"] >= threshold
+                ).astype(int)
                 threshold_formula = (
                     "depart_next_24h ~ local_temp_anom3 * cue_active "
                     "+ day_of_year_within_context + wind_support + precipitation "
@@ -198,49 +258,66 @@ def main():
                 )
 
             try:
-                model = smf.logit(threshold_formula, data=train).fit(disp=False)
+                model = smf.logit(
+                    threshold_formula,
+                    data=train,
+                ).fit(disp=False, maxiter=200)
                 pred = model.predict(test)
-                fold_losses.append(_log_loss(test["depart_next_24h"], pred))
+                fold_losses.append(
+                    _log_loss(test["depart_next_24h"], pred)
+                )
             except Exception:
                 fold_losses = []
                 break
 
+        fold_losses_by_candidate[threshold] = fold_losses
+
+    no_threshold_losses = fold_losses_by_candidate.get(None, [])
+    candidate_losses = {
+        q: fold_losses_by_candidate.get(q, [])
+        for q in FROZEN_Q_GRID
+    }
+    adjudication = adjudicate_threshold_folds(
+        no_threshold_losses=no_threshold_losses,
+        candidate_losses=candidate_losses,
+    )
+
+    scores = []
+    for threshold in candidates:
+        losses = fold_losses_by_candidate[threshold]
+        mean_loss, se_loss = _mean_se(losses)
         scores.append({
             "threshold_q": threshold,
-            "mean_loio_log_loss": (
-                float(np.mean(fold_losses)) if fold_losses else None
-            ),
-            "individual_folds": len(fold_losses),
+            "mean_loio_log_loss": mean_loss,
+            "se_across_individual_folds": se_loss,
+            "individual_folds": len(losses),
+            "fold_losses": losses,
         })
-
-    valid = [row for row in scores if row["mean_loio_log_loss"] is not None]
-    threshold_rows = [row for row in valid if row["threshold_q"] is not None]
-    no_threshold = next(
-        (row for row in valid if row["threshold_q"] is None),
-        None,
-    )
-    selected = min(
-        threshold_rows,
-        key=lambda row: row["mean_loio_log_loss"],
-        default=None,
-    )
 
     result["threshold_secondary"] = {
         "candidate_scores": scores,
-        "selected_threshold_q": (
-            selected["threshold_q"] if selected is not None else None
+        "status": adjudication.status,
+        "selected_threshold_q": adjudication.selected_threshold_q,
+        "selected_mean_log_loss": adjudication.selected_mean_log_loss,
+        "no_threshold_mean_log_loss": adjudication.no_threshold_mean_log_loss,
+        "lower_neighbor_q": adjudication.lower_neighbor_q,
+        "upper_neighbor_q": adjudication.upper_neighbor_q,
+        "lower_paired_mean_difference": (
+            adjudication.lower_paired_mean_difference
         ),
-        "no_threshold_log_loss": (
-            no_threshold["mean_loio_log_loss"]
-            if no_threshold is not None else None
+        "upper_paired_mean_difference": (
+            adjudication.upper_paired_mean_difference
         ),
-        "status": (
-            "DESCRIPTIVE_CANDIDATE_ONLY"
-            if selected is not None else "THRESHOLD_NOT_IDENTIFIED"
+        "lower_paired_se": adjudication.lower_paired_se,
+        "upper_paired_se": adjudication.upper_paired_se,
+        "reasons": list(adjudication.reasons),
+        "support_rule": (
+            "selected threshold must be interior, beat no-threshold mean "
+            "LOIO log loss, and beat both adjacent q-grid points by more "
+            "than one SE of the paired individual-fold loss difference"
         ),
-        "note": (
-            "1-SE adjacency support gate requires fold-level SE and is "
-            "adjudicated only if all candidates fit; no q_wait(D) claim allowed."
+        "claim_boundary": (
+            "behavioral threshold-like candidate only; never q_wait(D)"
         ),
     }
 
