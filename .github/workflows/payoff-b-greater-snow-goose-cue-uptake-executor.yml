@@ -11,6 +11,8 @@ on:
       - 'tests/test_cue_uptake_empirics.py'
       - 'tests/test_snow_goose_cue_uptake_executor.py'
       - 'data/payoff_b_greater_snow_goose_cue_uptake_executor_contract_20260929.json'
+      - 'docs/PAYOFF_B_GREATER_SNOW_GOOSE_FIGURE1_GEOMETRY_PROTOCOL_20260929.md'
+      - 'data/payoff_b_greater_snow_goose_figure1_geometry_sensitivity_contract_20260929.json'
       - 'data/payoff_b_greater_snow_goose_route_context_contract_20260929.json'
       - 'data/payoff_b_greater_snow_goose_movebank_access_gate_20260929.json'
       - 'data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json'
