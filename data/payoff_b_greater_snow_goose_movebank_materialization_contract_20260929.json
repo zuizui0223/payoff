@@ -24,7 +24,7 @@
     "visible"
   ],
   "authentication": {
-    "method": "MOVEBANK_API_TOKEN environment variable / GitHub secret only",
+    "method": "MOVEBANK_API_TOKEN environment variable in a protected local execution environment",
     "command_line_credentials_forbidden": true,
     "credentials_committed_to_git": false
   },
@@ -35,8 +35,11 @@
   },
   "raw_data_governance": {
     "git_commit": false,
-    "github_actions_artifact_retention_days": 30,
+    "github_actions_raw_artifact": false,
+    "storage": "protected local directory outside the Git repository",
+    "output_directory_must_be_explicit": true,
     "year_level_files": true,
+    "manifest_safe_for_repository_or_nonraw_artifact": true,
     "manifest_fields": [
       "row count",
       "byte count",
@@ -47,5 +50,10 @@
   },
   "frozen_science_reference": "freeze/payoff-b-snow-goose-preoutcome-v2-20260929",
   "execution_boundary": "successful materialization opens raw movement events but does not open the preregistered cue-uptake coefficient or threshold result",
-  "next_gate": "run frozen movepp preprocessing only after exact/source-backed route geometry is materialized; do not analyze cue-uptake model before geometry gate"
-}\n
+  "next_gate": "After authorized local materialization, preserve raw files privately and copy only the nonraw manifest/receipt into the project. Run frozen movepp preprocessing only after exact/source-backed route geometry is materialized.",
+  "execution_environment": {
+    "primary": "authorized local environment",
+    "github_actions": "unit tests and safeguard validation only; never download or upload focal raw GPS events",
+    "reason": "study-specific Movebank terms may restrict redistribution and GitHub artifacts are not treated as an approved raw-data repository"
+  }
+}
