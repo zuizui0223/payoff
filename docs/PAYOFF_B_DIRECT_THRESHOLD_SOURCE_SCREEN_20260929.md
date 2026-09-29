@@ -11,7 +11,7 @@ A direct natural test of the pairwise information-deadline mechanism requires al
 |---|---|
 | pre-commitment cue reliability q | environmental information quality |
 | effective delay/opportunity cost D_eff,i | total fitness cost of postponing commitment: direct nonrecoverable waiting cost plus optimally compensated downstream timing cost |
-| C_F, C_M, pi or equivalent state-loss scale | converts D_i to predicted q_i |
+| C_F, C_M, pi or equivalent state-loss scale | converts D_eff,i to predicted q_i |
 | observed cue use | distinguishes commit-now from wait/use-cue |
 | repeated q support | must cross below, within and above the predicted asynchronous window |
 
@@ -277,7 +277,7 @@ opportunity cost D. In this source, D is therefore **not identified** under the
 current simple model.
 
 Barnacle goose remains valuable for the information-quality -> timing-response
-edge, but the direct D -> q threshold route is stopped unless an independent
+edge, but the direct D_eff -> q threshold route is stopped unless an independent
 delay-cost experiment or fitness model is introduced.
 
 ## Candidate 4 — American redstart delay-cost anchor
