@@ -314,6 +314,41 @@ compensation from post-arrival pre-breeding buffering. Observed correlations
 between sequential dates cannot simply be multiplied into a causal
 \(D_{\mathrm{eff}}\); the stagewise mapping must be specified independently.
 
+## Empirical identification: direct and decomposed routes
+
+The decomposition above is not the only way to estimate \(D_{\mathrm{eff}}\).
+
+Let \(Y(0)\) denote expected fitness when commitment is not postponed, and let
+\(Y(\delta,\mathrm{adapt})\) denote expected fitness when the actor is forced to
+wait by \(\delta\) but is then allowed to use its ordinary downstream
+compensatory responses. On a common additive fitness-loss scale, a randomized
+naturalistic waiting intervention identifies
+
+\[
+\boxed{
+D_{\mathrm{eff}}^{\mathrm{causal}}(\delta)
+=
+E[Y(0)]-
+E[Y(\delta,\mathrm{adapt})].
+}
+\]
+
+This total causal effect already includes direct waiting cost, compensation
+cost and residual timing loss. The \(J+K+M\) decomposition is needed only when
+the goal is to explain *why* the total effective cost has its observed value.
+
+Two empirical routes are therefore valid:
+
+1. **total-effect route** — randomize a biologically faithful waiting period,
+   allow downstream compensation, and measure final expected fitness;
+2. **mechanistic route** — independently estimate \(J\), \(K\), compensation
+   capacity and \(M\), then reconstruct the optimized total.
+
+Both routes require the waiting treatment to represent the ecological act of
+waiting for information. A manipulation that adds treatment-specific stress or
+constraint identifies the effective cost of that manipulation, not
+automatically the natural information-waiting cost.
+
 ## Greater snow goose boundary
 
 Three source-backed findings motivate the decomposition without identifying its
