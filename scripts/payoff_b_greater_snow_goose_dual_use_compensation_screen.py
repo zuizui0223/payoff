@@ -189,12 +189,18 @@ def main():
     data["log_transit_duration_days"] = np.log(
         data["transit_duration_days"].astype(float)
     )
+    data["context_year_cell"] = (
+        data["origin_context"].astype(str)
+        + "__"
+        + data["year"].astype(str)
+    )
 
     gate = evaluate_compensation_screen_estimability(
         individuals=int(data["individual"].astype(str).nunique()),
         years=int(data["year"].nunique()),
         origin_contexts=int(data["origin_context"].astype(str).nunique()),
         transitions=int(len(data)),
+        context_year_cells=int(data["context_year_cell"].nunique()),
         predictive_connectivity_sd=rho_sd,
         wait_days_sd=wait_sd,
     )
@@ -211,6 +217,7 @@ def main():
             "years": gate.years,
             "origin_contexts": gate.origin_contexts,
             "transitions": gate.transitions,
+            "context_year_cells": gate.context_year_cells,
             "predictive_connectivity_sd": gate.predictive_connectivity_sd,
             "wait_days_sd": gate.wait_days_sd,
         },
@@ -236,10 +243,29 @@ def main():
         estimate = float(fit.params[term])
         se = float(fit.bse[term])
 
+        loo_estimates = []
+        for cell in sorted(data["context_year_cell"].unique()):
+            reduced = data[data["context_year_cell"] != cell].copy()
+            reduced_fit = smf.ols(PRIMARY_FORMULA, data=reduced).fit()
+            if term not in reduced_fit.params.index:
+                raise RuntimeError(
+                    f"LOO primary interaction missing after dropping {cell}"
+                )
+            loo_estimates.append(
+                {
+                    "dropped_context_year": str(cell),
+                    "estimate": float(reduced_fit.params[term]),
+                }
+            )
+        loo_all_negative = all(
+            row["estimate"] < 0.0 for row in loo_estimates
+        )
+
         classification = classify_dual_use_compensation_signal(
             estimable=True,
             interaction_estimate=estimate,
             interaction_se=se,
+            loo_all_negative=loo_all_negative,
         )
         result["status"] = classification.status
         result["primary"] = {
@@ -250,6 +276,8 @@ def main():
             "ci_low_95": classification.ci_low_95,
             "ci_high_95": classification.ci_high_95,
             "registered_direction": "negative",
+            "loo_context_year_estimates": loo_estimates,
+            "loo_all_negative": loo_all_negative,
             "interpretation": classification.interpretation,
         }
 
