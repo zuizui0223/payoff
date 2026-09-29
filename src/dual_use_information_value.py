@@ -361,3 +361,194 @@ def compensation_information_rescue_interval(
     if upper <= lower + 1e-12:
         return None
     return lower, upper
+
+
+
+@dataclass(frozen=True)
+class BalancedDualUsePairWindow:
+    direct_wait_cost: float
+    actor_1_compensation_loss: float
+    actor_2_compensation_loss: float
+    actor_1_wait_threshold: float | None
+    actor_2_wait_threshold: float | None
+    lower_wait_threshold: float | None
+    upper_wait_threshold: float | None
+    finite_window_width: float | None
+    regime: str
+
+
+def balanced_dual_use_wait_threshold(
+    *,
+    direct_wait_cost: float,
+    compensation_loss: float,
+    action_prior_early: float,
+    action_false_early_cost: float,
+    action_missed_early_cost: float,
+) -> float | None:
+    """Exact shared-q threshold with a balanced compensation problem.
+
+    The compensation state has prior 1/2 and symmetric wrong-response cost G.
+    Hence R_C0=G/2 and V_C(q)=G(q-1/2).
+
+    When J < R_A0,
+
+        q_wait(G) = [B_A + J + G] / [S_A + G].
+
+    When J >= R_A0, even perfect dual-use information is not worth waiting for.
+    """
+
+    direct = _nonnegative("direct_wait_cost", direct_wait_cost)
+    g = _nonnegative("compensation_loss", compensation_loss)
+    action = binary_information_geometry(
+        action_prior_early,
+        action_false_early_cost,
+        action_missed_early_cost,
+    )
+    if direct >= action.prior_risk - 1e-12:
+        return None
+    q = (
+        action.other_prior_loss
+        + direct
+        + g
+    ) / (
+        action.total_prior_loss
+        + g
+    )
+    if q < action.actionable_q - 1e-12 or q >= 1.0:
+        raise AssertionError("balanced dual-use threshold outside valid region")
+    return q
+
+
+def balanced_dual_use_pair_window(
+    *,
+    direct_wait_cost: float,
+    actor_1_compensation_loss: float,
+    actor_2_compensation_loss: float,
+    action_prior_early: float,
+    action_false_early_cost: float,
+    action_missed_early_cost: float,
+) -> BalancedDualUsePairWindow:
+    """Exact asynchronous window created by compensation-problem heterogeneity.
+
+    The two actors share the seasonal-action problem, direct waiting cost J,
+    and cue accuracy q. They differ only in balanced compensation-loss scale G.
+
+    If J < R_A0, both eventually wait and unequal G values create a finite
+    threshold gap:
+
+        |q2-q1|
+        =
+        |G2-G1| (R_A0-J)
+        / [(S_A+G1)(S_A+G2)].
+
+    Thus raw waiting time and direct waiting cost can be identical while
+    asynchronous cue use arises purely from downstream compensation geometry.
+    """
+
+    direct = _nonnegative("direct_wait_cost", direct_wait_cost)
+    g1 = _nonnegative(
+        "actor_1_compensation_loss",
+        actor_1_compensation_loss,
+    )
+    g2 = _nonnegative(
+        "actor_2_compensation_loss",
+        actor_2_compensation_loss,
+    )
+    action = binary_information_geometry(
+        action_prior_early,
+        action_false_early_cost,
+        action_missed_early_cost,
+    )
+
+    q1 = balanced_dual_use_wait_threshold(
+        direct_wait_cost=direct,
+        compensation_loss=g1,
+        action_prior_early=action_prior_early,
+        action_false_early_cost=action_false_early_cost,
+        action_missed_early_cost=action_missed_early_cost,
+    )
+    q2 = balanced_dual_use_wait_threshold(
+        direct_wait_cost=direct,
+        compensation_loss=g2,
+        action_prior_early=action_prior_early,
+        action_false_early_cost=action_false_early_cost,
+        action_missed_early_cost=action_missed_early_cost,
+    )
+
+    if q1 is None or q2 is None:
+        return BalancedDualUsePairWindow(
+            direct_wait_cost=direct,
+            actor_1_compensation_loss=g1,
+            actor_2_compensation_loss=g2,
+            actor_1_wait_threshold=q1,
+            actor_2_wait_threshold=q2,
+            lower_wait_threshold=None,
+            upper_wait_threshold=None,
+            finite_window_width=0.0,
+            regime="NO_ONE_WAITS_DIRECT_COST_TOO_HIGH",
+        )
+
+    low = min(q1, q2)
+    high = max(q1, q2)
+    if abs(g1 - g2) <= 1e-15:
+        width = 0.0
+        regime = "NO_ASYNCHRONY_EQUAL_COMPENSATION_GEOMETRY"
+    else:
+        width = (
+            abs(g2 - g1)
+            * (action.prior_risk - direct)
+            / (
+                (action.total_prior_loss + g1)
+                * (action.total_prior_loss + g2)
+            )
+        )
+        if abs(width - (high - low)) > 1e-10:
+            raise AssertionError("pairwise width identity failed")
+        regime = "FINITE_DUAL_USE_ASYNCHRONY"
+
+    return BalancedDualUsePairWindow(
+        direct_wait_cost=direct,
+        actor_1_compensation_loss=g1,
+        actor_2_compensation_loss=g2,
+        actor_1_wait_threshold=q1,
+        actor_2_wait_threshold=q2,
+        lower_wait_threshold=low,
+        upper_wait_threshold=high,
+        finite_window_width=width,
+        regime=regime,
+    )
+
+
+def balanced_dual_use_threshold_slope_in_compensation_loss(
+    *,
+    direct_wait_cost: float,
+    compensation_loss: float,
+    action_prior_early: float,
+    action_false_early_cost: float,
+    action_missed_early_cost: float,
+) -> float | None:
+    """dq_wait/dG for the balanced shared-q special case.
+
+    For J < R_A0,
+
+        dq/dG = (R_A0-J)/(S_A+G)^2 > 0.
+
+    The positive sign is important: a larger compensation problem creates more
+    potential compensation information value, but also more residual
+    compensation loss at any imperfect shared cue accuracy.
+    """
+
+    direct = _nonnegative("direct_wait_cost", direct_wait_cost)
+    g = _nonnegative("compensation_loss", compensation_loss)
+    action = binary_information_geometry(
+        action_prior_early,
+        action_false_early_cost,
+        action_missed_early_cost,
+    )
+    if direct >= action.prior_risk - 1e-12:
+        return None
+    return (
+        action.prior_risk - direct
+    ) / (
+        action.total_prior_loss + g
+    ) ** 2
