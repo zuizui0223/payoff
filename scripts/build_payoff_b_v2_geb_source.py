@@ -20,24 +20,24 @@ thresholds.
 
 ### Location
 
-The theory is general. Empirical evidence comes from migratory-bird systems
-across multiple continents.
+The theory is general. Empirical evidence comes from migratory and resident
+bird systems across multiple continents.
 
 ### Time period
 
-The broad comparative bird analysis spans 2002–2017, and the wigeon outcome
-data span 2018–2020.
+The focal comparative analyses span 1991–2017.
 
 ### Major taxa studied
 
-Migratory birds.
+Migratory birds and resident passerines.
 
 ### Methods
 
 We derive exact information-deadline and coordination conditions, analyse
 shared-cue interaction networks, and compare these predictions with a
 preregistered predictive-connectivity analysis, a dependence-aware migration
-meta-regression and a registered phase-correction test.
+meta-regression and a published interaction-level resident–migrant phenology
+comparison.
 
 ### Results
 
@@ -48,10 +48,10 @@ an obsolete uninformed state and a better informed state can both be strict
 equilibria, so temporary information degradation can produce persistent
 coordination failure after cue quality recovers. Predictive connectivity is
 associated with smaller mismatch, long-distance migrants show weaker
-temperature responsiveness than short-distance migrants, and the registered
-wigeon controller does not support stronger post-error correction. Natural
-evidence therefore supports separate parts of the mechanism rather than the
-full hysteresis sequence.
+temperature responsiveness than short-distance migrants, and across 10
+European nest-box schemes differential climate sensitivity widened
+resident–migrant laying-date intervals by 0.94 d/decade. No current natural
+dataset demonstrates the full hysteresis sequence.
 
 ### Main conclusions
 
