@@ -1,0 +1,85 @@
+{
+  "registration_id": "payoff_b_greater_snow_goose_dual_use_compensation_screen_v1_20260930",
+  "date": "2026-09-30",
+  "status": "PREOUTCOME_REGISTERED_NOT_EXECUTED",
+  "parent_registration": "payoff_b_greater_snow_goose_gps_cue_uptake_v1_20260929",
+  "purpose": "one-way screen for violation of focal-cue exogeneity required by the fixed-D_eff theorem",
+  "ecological_question": "Does the same local temperature cue used in the departure model also predict downstream transit compression more strongly where that cue has greater historical predictive connectivity to Bylot conditions?",
+  "unit": "individual x origin route context x completed transition to the next frozen route context",
+  "frozen_segments": [
+    "St_Lawrence -> Nunavik",
+    "St_Lawrence -> Baffin",
+    "St_Lawrence -> Bylot",
+    "Nunavik -> Baffin",
+    "Nunavik -> Bylot",
+    "Baffin -> Bylot"
+  ],
+  "primary_response": "log transit_duration_days from departure of origin context to first entry into the next observed downstream frozen route context; skipped intermediate contexts remain valid compensation outcomes",
+  "primary_formula": "log_transit_duration_days ~ local_temp_anom3 + local_temp_anom3:z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(context_year_cell)",
+  "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
+  "directional_prediction": "negative; warmer cues are followed by shorter transit when those cues historically contain more information about later Bylot conditions",
+  "uncertainty": "cluster-robust by individual; context-year fixed intercepts absorb all origin-context x year level mean differences; support additionally requires leave-one-context-year-out sign stability across at least 12 origin-context x year cells",
+  "estimability_gate": {
+    "minimum_individuals": 30,
+    "minimum_years": 4,
+    "minimum_origin_contexts": 3,
+    "minimum_transitions": 100,
+    "predictive_connectivity_sd_at_least": 0.03,
+    "require_wait_days_variation": true,
+    "minimum_context_year_cells": 12
+  },
+  "secondary": {
+    "formula": "log_transit_duration_days ~ local_temp_anom3 * z_wait_days + local_temp_anom3:z_predictive_connectivity + z_wait_days:z_predictive_connectivity + local_temp_anom3:z_predictive_connectivity:z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(route_segment) + C(context_year_cell)",
+    "focal_term": "local_temp_anom3:z_predictive_connectivity:z_wait_days",
+    "directional_prediction": "negative",
+    "role": "diagnostic that cue-linked transit compression strengthens after longer waiting; not required for primary classification"
+  },
+  "classification": {
+    "supported": "DUAL_USE_BEHAVIORAL_SIGNAL_SUPPORTED only if primary interaction <0, its individual-clustered 95% CI is entirely below 0, and every leave-one-context-year-out refit retains a negative interaction estimate",
+    "null_or_imprecise": "DUAL_USE_NOT_DEMONSTRATED_EXOGENEITY_UNRESOLVED",
+    "not_estimable": "NOT_ESTIMABLE"
+  },
+  "asymmetric_inference_rule": "support blocks promotion of a cue-independent fixed-D_eff theorem for this focal cue; null does not establish exogeneity because no equivalence margin is prespecified",
+  "forbidden_reframings": [
+    "do not call the transit-duration association direct observation of cue cognition",
+    "do not claim causal compensation from the observational screen",
+    "do not estimate D_eff from this screen",
+    "do not treat a null result as evidence that D_eff is cue-independent",
+    "do not change route segments, transit definition, q construction, or direction after outcome inspection"
+  ],
+  "outcome_data_opened": false,
+  "route_skip_secondary": {
+    "eligible_origins": [
+      "St_Lawrence",
+      "Nunavik"
+    ],
+    "response": "skip_next_context = 1 when the next observed downstream frozen context is more than one route rank ahead",
+    "formula": "skip_next_context ~ local_temp_anom3 + local_temp_anom3:z_predictive_connectivity + z_wait_days + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(context_year_cell)",
+    "focal_term": "local_temp_anom3:z_predictive_connectivity",
+    "directional_prediction": "positive",
+    "role": "secondary actuator diagnostic; route skipping is retained rather than excluded from the transit-duration analysis"
+  },
+  "preoutcome_amendment": {
+    "date": "2026-09-30",
+    "issue": "initial draft admitted only consecutive route-context transitions, which would discard route skipping even though skipping is itself a plausible compensation action",
+    "resolution": "allow every forward transition among St_Lawrence, Nunavik, Baffin and Bylot; control primary transit-duration model by origin-destination route_segment; add route-skip secondary diagnostic",
+    "outcome_data_opened": false,
+    "result_dependent": false
+  },
+  "preoutcome_amendments": [
+    {
+      "date": "2026-09-30",
+      "issue": "predictive connectivity varies at the route-context x year level, so individual-clustered uncertainty alone could leave a supported interaction dependent on one context-year cell",
+      "resolution": "require at least 12 context-year cells and require the registered interaction estimate to remain negative in every leave-one-context-year-out refit before classifying dual-use behavioral support",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    },
+    {
+      "date": "2026-09-30",
+      "issue": "predictive connectivity is constant within origin-context x year cells; route-segment plus year fixed effects do not fully absorb arbitrary context-year mean differences that could correlate with q",
+      "resolution": "replace the q main-effect parameterization with context-year fixed intercepts and identify the focal local-temperature x q interaction from within-cell temperature variation and between-cell differences in temperature slopes; retain route-segment fixed effects for destination-distance heterogeneity",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    }
+  ]
+}
