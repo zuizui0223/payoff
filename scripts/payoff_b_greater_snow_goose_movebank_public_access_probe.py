@@ -68,14 +68,20 @@ def main():
         ),
     }
 
-    response = requests.get(
-        ENDPOINT,
-        params=params,
-        timeout=60,
-        headers={"User-Agent": "PAYOFF-B-preoutcome-access-probe/1.0"},
-    )
-    status_code = int(response.status_code)
-    text = response.text
+    try:
+        response = requests.get(
+            ENDPOINT,
+            params=params,
+            timeout=60,
+            headers={"User-Agent": "PAYOFF-B-preoutcome-access-probe/1.0"},
+        )
+        status_code = int(response.status_code)
+        text = response.text
+        network_error = None
+    except requests.RequestException as exc:
+        status_code = None
+        text = ""
+        network_error = type(exc).__name__
 
     result = {
         "probe_id": "payoff_b_greater_snow_goose_movebank_public_access_probe_v1",
@@ -83,6 +89,7 @@ def main():
         "entity_type_requested": "study",
         "event_data_requested": False,
         "http_status": status_code,
+        "network_error": network_error,
         "classification": "UNRESOLVED",
         "metadata": None,
         "claim_boundary": [
@@ -92,7 +99,9 @@ def main():
         ],
     }
 
-    if status_code != 200:
+    if network_error is not None:
+        result["classification"] = "MOVE_BANK_NETWORK_UNAVAILABLE"
+    elif status_code != 200:
         result["classification"] = "STUDY_METADATA_HTTP_FAILURE"
     elif "License Terms:" in text:
         # Unexpected for entity_type=study, but fail closed if Movebank returns
