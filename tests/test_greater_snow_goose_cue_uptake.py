@@ -3,6 +3,7 @@ import pytest
 from src.greater_snow_goose_cue_uptake import (
     FROZEN_Q_GRID,
     adjudicate_threshold_folds,
+    dual_cluster_direction_supported,
     evaluate_estimability,
     gaussian_binary_q,
     preoutcome_training_valid,
@@ -154,3 +155,11 @@ def test_estimability_requires_within_context_q_variation():
     )
     assert not result.estimable
     assert "NO_WITHIN_CONTEXT_CONNECTIVITY_VARIATION" in result.reasons
+
+
+
+def test_primary_support_requires_both_clustered_intervals():
+    assert dual_cluster_direction_supported(0.2, 0.01, 0.02)
+    assert not dual_cluster_direction_supported(0.2, -0.01, 0.02)
+    assert not dual_cluster_direction_supported(0.2, 0.01, -0.02)
+    assert not dual_cluster_direction_supported(-0.2, 0.01, 0.02)
