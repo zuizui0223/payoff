@@ -87,7 +87,9 @@
   },
   "climate_contract": "data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json",
   "required_precomputed_environment_semantics": [
-    "predictive_connectivity_rho must follow frozen NARR trailing-window contract",
+    "predictive_connectivity_rho must use the frozen NARR 20-year pre-focal trailing window",
+    "primary predictive_connectivity_rho must be Pearson correlation of source and Bylot OLS residuals after separate regressions of annual window-mean temperature on calendar year",
+    "Resendiz-Infante & Gauthier 2024 ARIMA-residual correlations are external source calibration/sensitivity only and may not replace primary q after outcome inspection",
     "local_temp_anom3 and same_day_temp_anom must use pre-focal 20-year NARR baselines",
     "wind_support must use fixed region-centroid next-route bearing",
     "precipitation must be NARR daily accumulated total precipitation"
@@ -96,5 +98,14 @@
     "repository": "EverTSZ/movepp",
     "commit": "220e953a2f1c8f29540cb74d0ec69599f24e1d14",
     "pin_status": "FROZEN_BEFORE_OUTCOME"
-  }
+  },
+  "preoutcome_amendments": [
+    {
+      "date": "2026-09-29",
+      "issue": "temporal detrending method for predictive_connectivity_rho was previously delegated to the climate contract without explicit executor-level wording",
+      "resolution": "explicitly bind executor input to separate OLS calendar-year detrending within each 20-year pre-focal window; source ARIMA correlations remain calibration only",
+      "focal_event_data_opened": false,
+      "result_dependent": false
+    }
+  ]
 }
