@@ -183,6 +183,14 @@
       "resolution": "add a separate one-way downstream transit-duration screen; supported cue-linked transit compression blocks fixed-D_eff promotion, while a null result leaves exogeneity unresolved",
       "outcome_data_opened": false,
       "result_dependent": false
+    },
+    {
+      "date": "2026-09-30",
+      "stage": "PREOUTCOME_BEFORE_EVENT_DATA_ACCESS",
+      "issue": "initial downstream-compensation screen admitted only consecutive route-context transitions, inadvertently excluding route skipping as a compensation behavior",
+      "resolution": "retain every forward transition; use route-segment fixed effects for transit duration and register route skipping as a secondary actuator",
+      "outcome_data_opened": false,
+      "result_dependent": false
     }
   ],
   "climate_contract": "data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json",
@@ -191,8 +199,9 @@
     "role": "one-way pre-outcome screen for whether the focal local-temperature cue may also alter downstream compensation",
     "positive_result": "blocks promotion of a cue-independent fixed-D_eff theorem and requires dual-use modeling for any theorem-level interpretation",
     "null_result": "does not establish focal-cue exogeneity; classify as unresolved because no equivalence margin is prespecified",
-    "response": "log transit duration to the next frozen route context",
+    "response": "log transit duration to the next observed downstream frozen route context, retaining skipped intermediate contexts",
     "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
-    "registered_direction": "negative"
+    "registered_direction": "negative",
+    "route_skip_secondary": "positive local_temp_anom3 x predictive_connectivity effect on probability of skipping the next intermediate context"
   }
 }
