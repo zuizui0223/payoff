@@ -47,10 +47,11 @@
     "validation": "leave one individual out",
     "fold_metric": "mean binary log loss within held-out individual",
     "aggregate": "unweighted mean of individual fold log losses",
-    "se": "paired SE of individual-level LOIO loss differences between each adjacent q candidate and the selected q",
+    "se": "paired one-SE rule uses sample SD of per-individual adjacent-minus-selected fold log-loss differences divided by sqrt(number of individuals)",
     "support_rule": [
+      "every frozen q-grid candidate is estimable on the same held-out individuals",
       "best grid point is interior",
-      "best mean LOIO log loss is lower than continuous no-threshold model",
+      "best mean LOIO log loss is lower than the continuous no-threshold model",
       "for each immediate adjacent q, paired mean held-out-individual loss difference (adjacent - selected) exceeds one SE of those paired differences"
     ],
     "failure_status": "THRESHOLD_NOT_IDENTIFIED",
@@ -60,7 +61,8 @@
       "if any candidate threshold yields no cue_active variation in a training fold, report THRESHOLD_NOT_IDENTIFIED",
       "if a binomial fit does not converge, report threshold secondary as not identified rather than retuning the grid or formula"
     ],
-    "pairing_unit": "held-out individual; identical folds across all q candidates and no-threshold comparator"
+    "pairing_unit": "held-out individual; identical folds across all q candidates and no-threshold comparator",
+    "adjudication": "paired across the same LOIO individual folds to remove between-individual prediction difficulty from the 1-SE comparison"
   },
   "amendment_to_parent_registration": {
     "issue": "same_day temperature anomaly was listed as an immediate-weather control but omitted from the literal primary formula",
@@ -69,7 +71,7 @@
     "result_dependent": false
   },
   "validation": {
-    "helper_unit_tests": "threshold boundary, no-threshold comparison, and one-SE adjacency logic",
+    "helper_unit_tests": "threshold boundary, no-threshold comparison, paired one-SE adjacency logic, and incomplete-grid failure",
     "synthetic_integration_tests": "registered estimability gate, primary formula fit, and climate-window leakage rejection"
   },
   "route_context_contract": "data/payoff_b_greater_snow_goose_route_context_contract_20260929.json",
