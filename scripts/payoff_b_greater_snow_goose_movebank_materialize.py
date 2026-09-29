@@ -195,6 +195,23 @@ def download_year(
         raise
 
 
+def validate_output_dir(output_dir: Path, *, repo_root: Path) -> Path:
+    """Require raw-event storage to live outside the Git checkout."""
+
+    resolved = output_dir.expanduser().resolve()
+    root = repo_root.resolve()
+    try:
+        resolved.relative_to(root)
+        inside_repo = True
+    except ValueError:
+        inside_repo = False
+    if inside_repo:
+        raise ValueError(
+            "raw Movebank output directory must be outside the Git repository"
+        )
+    return resolved
+
+
 def write_manifest(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -235,16 +252,13 @@ def main():
     args = parse_args()
     requested_years = tuple(sorted(set(int(y) for y in args.years)))
     repo_root = Path(__file__).resolve().parents[1]
-    output_dir = args.output_dir.expanduser().resolve()
     try:
-        output_dir.relative_to(repo_root)
-        inside_repo = True
-    except ValueError:
-        inside_repo = False
-    if inside_repo:
-        raise SystemExit(
-            "raw Movebank output directory must be outside the Git repository"
+        output_dir = validate_output_dir(
+            args.output_dir,
+            repo_root=repo_root,
         )
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
 
     invalid = [y for y in requested_years if y not in YEARS]
     if invalid:
