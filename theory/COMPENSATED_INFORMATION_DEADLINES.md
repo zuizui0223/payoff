@@ -297,6 +297,8 @@ tracking evidence is only an ecological anchor for compensation and cannot be
 used to assign numerical (C,kappa,mu) without an independently specified
 fitness model.
 
+In the downstream coordination game, the player-specific (D_i) should likewise be read as this effective cost whenever compensation is available; the strategic inequalities are otherwise unchanged.
+
 The natural direct-test target becomes
 
 [
