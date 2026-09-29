@@ -81,5 +81,12 @@
     "rule": "input context must be one of the three frozen shared route regions",
     "full_estimability_requires_all_three": true,
     "forbidden": "per-individual movepp cluster_id or outcome-informed reclustering as context"
-  }
+  },
+  "climate_contract": "data/payoff_b_greater_snow_goose_narr_climate_contract_20260929.json",
+  "required_precomputed_environment_semantics": [
+    "predictive_connectivity_rho must follow frozen NARR trailing-window contract",
+    "local_temp_anom3 and same_day_temp_anom must use pre-focal 20-year NARR baselines",
+    "wind_support must use fixed region-centroid next-route bearing",
+    "precipitation must be NARR daily accumulated total precipitation"
+  ]
 }
