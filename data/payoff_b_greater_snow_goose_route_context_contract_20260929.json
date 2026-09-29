@@ -35,10 +35,19 @@
     "climate_or_outcome_informed_context_assignment": false
   },
   "geometry_gate": {
-    "status": "SOURCE_POLYGONS_NOT_YET_MATERIALIZED",
+    "status": "PUBLIC_SOURCE_SCREEN_EXHAUSTED_EXACT_SOURCE_POLYGONS_NOT_RELEASED",
     "consequence": "do not execute focal GPS cue-uptake outcome until source-backed region geometry is available",
     "figure_digitization_primary": false,
-    "hand_drawn_primary": false
+    "hand_drawn_primary": false,
+    "public_source_screen_date": "2026-09-30",
+    "public_source_findings": [
+      "article Methods describe polygon construction/refinement but provide no GIS vertices",
+      "Supplementary Material documents migration timing and related analyses but no exact stopover polygon object was located",
+      "publisher Figure 1 is a raster visualization and remains sensitivity-only under the frozen protocol",
+      "article Data Availability directs further inquiries to the corresponding author"
+    ],
+    "next_primary_route": "exact author/source release or other exact source-backed geometry only",
+    "public_figure_sensitivity_ready": true
   },
   "rationale": "q is defined at shared route-region scale, so behavioral context must be the same shared ecological coordinate rather than individual-specific DBSCAN habitat identity."
 }
