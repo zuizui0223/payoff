@@ -14,6 +14,7 @@ class CompensationScreenGate:
     years: int
     origin_contexts: int
     transitions: int
+    context_year_cells: int
     predictive_connectivity_sd: float
     wait_days_sd: float
 
@@ -34,6 +35,7 @@ def evaluate_compensation_screen_estimability(
     years: int,
     origin_contexts: int,
     transitions: int,
+    context_year_cells: int,
     predictive_connectivity_sd: float,
     wait_days_sd: float,
 ) -> CompensationScreenGate:
@@ -53,6 +55,8 @@ def evaluate_compensation_screen_estimability(
         reasons.append("FEWER_THAN_3_ORIGIN_CONTEXTS")
     if int(transitions) < 100:
         reasons.append("FEWER_THAN_100_TRANSITIONS")
+    if int(context_year_cells) < 12:
+        reasons.append("FEWER_THAN_12_CONTEXT_YEAR_CELLS")
     if rho_sd < 0.03:
         reasons.append("PREDICTIVE_CONNECTIVITY_SD_BELOW_0_03")
     if wait_sd <= 1e-12:
@@ -65,6 +69,7 @@ def evaluate_compensation_screen_estimability(
         years=int(years),
         origin_contexts=int(origin_contexts),
         transitions=int(transitions),
+        context_year_cells=int(context_year_cells),
         predictive_connectivity_sd=rho_sd,
         wait_days_sd=wait_sd,
     )
@@ -75,6 +80,7 @@ def classify_dual_use_compensation_signal(
     estimable: bool,
     interaction_estimate: float | None,
     interaction_se: float | None,
+    loo_all_negative: bool | None = None,
 ) -> DualUseScreenClassification:
     """Classify the registered negative transit-duration interaction.
 
@@ -106,7 +112,12 @@ def classify_dual_use_compensation_signal(
     low = estimate - 1.96 * se
     high = estimate + 1.96 * se
 
-    if estimate < 0.0 and high < 0.0:
+    if loo_all_negative is None:
+        raise ValueError(
+            "loo_all_negative is required when estimable=True"
+        )
+
+    if estimate < 0.0 and high < 0.0 and loo_all_negative:
         return DualUseScreenClassification(
             status="DUAL_USE_BEHAVIORAL_SIGNAL_SUPPORTED",
             estimate=estimate,
@@ -117,7 +128,8 @@ def classify_dual_use_compensation_signal(
                 "Warmer locally predictive cues are associated with shorter "
                 "subsequent transit duration. Fixed-D_eff cue exogeneity is "
                 "not licensed for this focal cue; use a dual-use model for "
-                "any theorem-level promotion."
+                "any theorem-level promotion. The sign is also stable "
+                "under leave-one-context-year-out refits."
             ),
         )
 
@@ -129,7 +141,8 @@ def classify_dual_use_compensation_signal(
         ci_high_95=high,
         interpretation=(
             "Registered dual-use behavioral signal not supported, but a null "
-            "association is not an equivalence test. Fixed-D_eff cue "
-            "exogeneity remains unresolved."
+            "association is not an equivalence test and/or the registered "
+            "sign is not stable to leave-one-context-year-out deletion. "
+            "Fixed-D_eff cue exogeneity remains unresolved."
         ),
     )
