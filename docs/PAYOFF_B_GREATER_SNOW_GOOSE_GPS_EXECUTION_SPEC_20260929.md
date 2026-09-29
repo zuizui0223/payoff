@@ -80,8 +80,12 @@ The registered directional prediction is
 \beta_3>0.
 ]
 
-Uncertainty is clustered by individual. The result is promoted only when the
-estimability gate passes before coefficient interpretation.
+The point estimate is shared, but uncertainty is evaluated in **two separate
+primary clusterings**: by individual and by context-year. Student-t 95%
+intervals use df = number of clusters - 1. The directional result is supported
+only if the estimate is positive and the lower 95% confidence bound is above
+zero under **both** clustering schemes. A multiway individual × context-year
+covariance may be reported only as sensitivity.
 
 ## Estimability gate
 
@@ -91,7 +95,10 @@ All conditions are mandatory:
 - at least 4 years;
 - at least 3 staging contexts;
 - at least 100 departure events;
-- transition-row SD of predictive connectivity at least 0.03.
+- at least 12 distinct context-year clusters;
+- context-year SD of predictive connectivity at least 0.03;
+- positive predictive-connectivity variation within each of the three frozen
+  route contexts.
 
 Failure of any condition returns `NOT_ESTIMABLE`.
 
