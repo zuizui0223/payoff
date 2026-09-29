@@ -105,40 +105,21 @@ q_{wait}(D)=
 
 If (D\ge R_0), even perfect information is not worth waiting for.
 
-The same result extends exactly when the realised cost of waiting depends on a
-future **deadline state** (H) that is not fully known at commitment. Let
-(\mathcal I) denote the information available when the actor must decide whether
-to commit or wait, and define
+If waiting cost depends on an unresolved future **deadline state** (H), let
+(\mathcal I) be the information available at commitment. Under the same
+expected-loss assumptions, replace fixed (D) by
 
 [
-\bar D(\mathcal I)
-=
-E[D(H)\mid\mathcal I].
-]
-
-Under the same additive expected-loss assumptions, the waiting rule is simply
-
-[
-V(q)>\bar D(\mathcal I),
-]
-
-and, when (\bar D(\mathcal I)<R_0),
-
-[
+\bar D(\mathcal I)=E[D(H)\mid\mathcal I],
+\qquad
 q_{wait}(\mathcal I)
 =
-\frac{
-\max(A,L)+\bar D(\mathcal I)
-}{
-A+L
-}.
+\frac{\max(A,L)+\bar D(\mathcal I)}{A+L}.
 ]
 
-Thus realised harshness observed later cannot be used post hoc to explain a
-higher information-use threshold unless that harshness was at least partly
-predictable before commitment. A decision can be Bayes-optimal ex ante yet look
-wrong ex post if the subsequently realised delay cost exceeds the value of
-information.
+Thus later harshness changes the rational threshold only insofar as it was
+predictable at commitment; an ex-ante optimal decision can still look wrong
+ex post.
 
 ### 2.2 Better information can transiently increase mismatch
 
@@ -609,7 +590,7 @@ Greater heterogeneity in decision deadlines widens the range of cue qualities ov
 
 The prediction is deliberately not “information is bad.” At low cue quality both actors ignore the cue. At high enough cue quality both use it. The mismatch peak occurs during the transition between those conventions.
 
-Waiting costs may also depend on a future environmental state that is not yet known when commitment occurs. The relevant quantity is then not the realised cost reconstructed afterwards, but the conditional expectation available at the decision point, \(\bar D_i(\mathcal I_i)=E[D_i(H)\mid\mathcal I_i]\). For two actors with finite thresholds, the asynchronous-window width becomes \(|\bar D_2(\mathcal I_2)-\bar D_1(\mathcal I_1)|/(A+L)\). Environmental change can therefore alter coordination through a second predictability channel: not only by changing how well cues forecast the ecological state to be matched, but also by changing how well organisms can anticipate the future cost of waiting for more information. Greater-snow-goose experiments show that migration perturbations can have strongly context-dependent reproductive consequences, while southern-route temperatures poorly predict later Arctic conditions; together these motivate a hidden-deadline state but do not estimate \(E[D\mid\mathcal I]\) or an information-use threshold (Legagneux et al., 2012; Grandmont et al., 2023; Reséndiz-Infante & Gauthier, 2024).
+A second predictability channel arises when the future cost of waiting is itself uncertain. The relevant term is \(E[D_i(H)\mid\mathcal I_i]\), giving two-actor window width \(|E[D_2\mid\mathcal I_2]-E[D_1\mid\mathcal I_1]|/(A+L)\). Greater-snow-goose experiments motivate this hidden-deadline extension because perturbation costs vary among breeding contexts while southern conditions weakly predict later Arctic conditions; they do not estimate this conditional cost or an information-use threshold (Legagneux et al., 2012; Grandmont et al., 2023; Reséndiz-Infante & Gauthier, 2024).
 
 ### 4.3 Environmental recovery can precede ecological recovery
 
