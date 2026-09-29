@@ -78,6 +78,21 @@ The tracking study demonstrates the existence of compensation-like timing
 adjustment but does **not** identify (C), (K), (M), or numerical
 (D_{eff}).
 
+A second historical dataset from the same population adds a downstream
+buffering anchor (Bêty, Gauthier & Giroux 2003, *American Naturalist*,
+DOI 10.1086/375680). In radio-tracked females, lay date increased by only
+0.45 ± 0.09 days per one-day increase in relative arrival date after controlling
+for premigration body condition, while prelaying duration declined with later
+arrival (slope -0.53, R²=0.55). Thus residual arrival delay can be partly
+absorbed after reaching Bylot.
+
+This is retained as **phenomenological buffering evidence**, not a causal
+estimate of compensatory control. Correlations among sequential timing variables
+have a published methodological critique (Schroeder, Mitesser & Hinsch 2010,
+*American Naturalist*, DOI 10.1086/657275). The direct-test programme therefore
+does not multiply these slopes into a numerical (D_{eff}) without an
+independently specified causal fitness model.
+
 
 ### Why this still does not close the theorem empirically
 
