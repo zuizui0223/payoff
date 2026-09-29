@@ -20,6 +20,9 @@ def test_effective_deadline_contract_supersedes_raw_delay_contract():
     )
     assert contract["forbidden_substitutions"]["raw_waiting_days_for_D_eff"]
     assert contract["forbidden_substitutions"]["departure_date_for_D_eff"]
+    assert contract["forbidden_substitutions"][
+        "multiply_sequential_timing_slopes_into_D_eff_without_causal_model"
+    ]
     assert "D_eff" in contract["theoretical_input"]["exact_threshold"]
     assert "D_eff_revealed" in contract["inverse_validation"]["identity"]
 
