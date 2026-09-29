@@ -26,9 +26,23 @@ One row per individual × staging context × day at risk, with:
 - `wind_support`
 - `precipitation`
 
-Staging geometry must come from the frozen automatic `movepp` chain:
+Staging geometry must come from the frozen automatic `movepp` chain at
+commit `220e953a2f1c8f29540cb74d0ec69599f24e1d14`:
 centered step speed → BALM → data-derived DBSCAN → MPI phase classification.
 No climate-informed or hand-drawn primary stopover boundaries are allowed.
+
+The automatic per-individual staging habitats are mapped to exactly three
+shared route contexts before any climate or departure-model outcome is read.
+Habitat centroids from 1 April–15 June are clustered on **latitude only** by
+k-means (`k=3`, `nstart=100`, `set.seed(1)`). Cluster centres are ordered
+south to north and labelled `southern_staging`, `mid_arctic_staging`,
+`northern_arctic_staging`. These correspond only as ecological anchors to
+the published St. Lawrence, Nunavik and Baffin route regions; no manual
+boundary adjustment is permitted.
+
+`day_of_year_within_context` is calendar day-of-year centred on the pooled
+mean day-of-year within each of those three shared contexts. It is **not**
+days since arrival or visit duration.
 
 ### Historical connectivity table
 
@@ -109,8 +123,12 @@ no-threshold model is always retained as a comparator. An interior threshold
 may be described only as a **behavioral threshold-like candidate**; it is never
 the theorem's (q_{wait}(D)).
 
-The registered 1-SE adjacency gate remains authoritative. If fold-level
-uncertainty cannot establish it, report `THRESHOLD_NOT_IDENTIFIED`.
+The registered 1-SE adjacency gate is implemented on paired held-out-individual
+losses. A threshold is supported only when the minimum-loss candidate is an
+interior grid point, has lower mean LOIO log loss than the no-threshold model,
+and each adjacent grid point has a larger paired mean loss by **more than one
+standard error of the paired individual-fold loss difference**. Otherwise
+report `THRESHOLD_NOT_IDENTIFIED`.
 
 ## Interpretation ceiling
 
