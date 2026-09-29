@@ -308,6 +308,73 @@ q_{\mathrm{wait}}^{dual}
 The same cue therefore converts a system in which waiting is impossible under
 action-only accounting into one with a finite information-use threshold.
 
+## Pairwise dual-use desynchronization
+
+Dual-use information creates a second source of actor-specific thresholds.
+
+Consider two actors with the **same** seasonal-action problem and the same
+direct waiting cost (J<R_{A0}). Let their only difference be the magnitude
+of a balanced downstream compensation problem, (G_i), with prior
+compensation risk (G_i/2). The same cue accuracy (q) informs both the
+seasonal action and compensation.
+
+For actor (i),
+
+[
+oxed{
+q_i
+=
+rac{B_A+J+G_i}{S_A+G_i}.
+}
+]
+
+Therefore, for (G_2>G_1),
+
+[
+oxed{
+q_2-q_1
+=
+rac{
+(G_2-G_1)(R_{A0}-J)
+}{
+(S_A+G_1)(S_A+G_2)
+}.
+}
+]
+
+This is a finite asynchronous information-use window generated with **no
+difference in raw waiting time and no difference in direct waiting cost**.
+Heterogeneity in the downstream problem that must be solved after waiting is
+sufficient.
+
+The comparative static is intentionally counterintuitive:
+
+[
+rac{partial q_i}{partial G_i}
+=
+rac{R_{A0}-J}{(S_A+G_i)^2}
+>0.
+]
+
+A larger compensation problem creates more potential compensation information
+value, but at any imperfect shared cue it also leaves more residual
+compensation loss. Thus actors with larger (G) require a more reliable cue
+before waiting becomes worthwhile.
+
+This does not contradict the compensation-information bonus. For a **fixed**
+(G), making compensation informed weakly lowers the threshold relative to
+leaving that same compensation problem uninformed. Across actors with different
+(G), however, the actor facing the larger compensation burden has the higher
+dual-use threshold.
+
+This yields a new empirical distinction:
+
+- **information-use breadth** — how many downstream decisions the cue informs;
+- **downstream problem severity** — how costly those decisions are when only
+  imperfectly informed.
+
+They should not be collapsed into one axis.
+
 ## Relationship to effective deadline cost
 
 The theorem can also be written
