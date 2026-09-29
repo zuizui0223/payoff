@@ -208,7 +208,11 @@ def parse_args():
     p.add_argument(
         "--output-dir",
         type=Path,
-        default=Path("outputs/movebank_greater_snow_goose_raw"),
+        required=True,
+        help=(
+            "Protected local directory outside the Git repository. "
+            "Raw Movebank events must not be committed or uploaded as CI artifacts."
+        ),
     )
     p.add_argument(
         "--manifest",
@@ -230,6 +234,18 @@ def parse_args():
 def main():
     args = parse_args()
     requested_years = tuple(sorted(set(int(y) for y in args.years)))
+    repo_root = Path(__file__).resolve().parents[1]
+    output_dir = args.output_dir.expanduser().resolve()
+    try:
+        output_dir.relative_to(repo_root)
+        inside_repo = True
+    except ValueError:
+        inside_repo = False
+    if inside_repo:
+        raise SystemExit(
+            "raw Movebank output directory must be outside the Git repository"
+        )
+
     invalid = [y for y in requested_years if y not in YEARS]
     if invalid:
         raise SystemExit(
@@ -282,7 +298,7 @@ def main():
                 session,
                 api_token=token,
                 year=year,
-                output_dir=args.output_dir,
+                output_dir=output_dir,
             )
             result["files"].append(row)
             result["event_data_opened"] = True
