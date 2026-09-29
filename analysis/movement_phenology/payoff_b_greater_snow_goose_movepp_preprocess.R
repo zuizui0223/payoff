@@ -284,9 +284,7 @@ for (hk in unique(skey)) {
         sep = "::"
       ),
       date = as.character(days),
-      day_of_year_within_context = as.integer(
-        days - min(days)
-      ),
+      calendar_doy = as.integer(format(days, "%j")),
       depart_next_24h = as.integer(days == max(days)),
       centroid_lon = as.numeric(b$centroid_lon[[1]]),
       centroid_lat = as.numeric(b$centroid_lat[[1]]),
@@ -297,6 +295,13 @@ for (hk in unique(skey)) {
 
 if (!length(risk_rows)) stop("no uncensored spring staging bouts")
 risk <- do.call(rbind, risk_rows)
+
+# Seasonal progression control: calendar day-of-year centered within the
+# shared route context.  This is intentionally not "days since arrival".
+ctx_mean_doy <- tapply(risk$calendar_doy, risk$context, mean)
+risk$day_of_year_within_context <- (
+  risk$calendar_doy - unname(ctx_mean_doy[risk$context])
+)
 
 dir.create(dirname(contexts_path), recursive = TRUE, showWarnings = FALSE)
 dir.create(dirname(risk_path), recursive = TRUE, showWarnings = FALSE)
