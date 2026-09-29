@@ -685,11 +685,9 @@ D_{eff}
 \min_c[K(c)+M(\delta-c)],
 ]
 
-not raw delay. Greater compensatory capacity can therefore lower
-(q_{wait}) when recovery is cheaper than residual delay. Greater-snow-goose
-tracking illustrates why this distinction matters: later departure can coincide
-with shorter migration duration, so departure and arrival dates are only weakly
-coupled (Bêty et al., 2004).
+not raw delay. Greater compensatory capacity can therefore lower (q_{wait}).
+Greater-snow-goose tracking shows why: later departure can coincide with
+shorter migration, weakening departure–arrival coupling (Bêty et al., 2004).
 
 These mechanisms imply different interventions. Capacity restoration can lower
 (D_{eff}); better forecasts increase cue quality; neither necessarily resolves
