@@ -38,7 +38,7 @@
     ]
   },
   "primary_model": {
-    "formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + C(context) + C(year)",
+    "formula": "depart_next_24h ~ local_temp_anom3 * z_predictive_connectivity + day_of_year_within_context + wind_support + precipitation + same_day_temp_anom + C(context) + C(year)",
     "uncertainty": "cluster by individual; if supported by software, two-way sensitivity by individual and year",
     "primary_estimand": "local_temp_anom3:z_predictive_connectivity",
     "directional_prediction": "positive on logit departure hazard: warm cues promote departure more strongly where they historically predict later warm/early Bylot conditions"
@@ -98,5 +98,15 @@
     "sensitivity_manual_annotation": "allowed only after primary automatic result and without access to climate q or model residuals",
     "departure_event_from_habitat": "last day in an automatically delineated spring staging_stopover habitat followed by outward movement and no return for >=48 h",
     "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation"
-  }
+  },
+  "amendment_history": [
+    {
+      "date": "2026-09-29",
+      "stage": "PREOUTCOME_BEFORE_EXECUTION",
+      "issue": "same-day temperature anomaly was listed under immediate_weather_controls but omitted from the literal primary_model formula",
+      "resolution": "added same_day_temp_anom as an additive control to the registered primary formula",
+      "outcome_data_opened": false,
+      "result_dependent": false
+    }
+  ]
 }
