@@ -24,9 +24,7 @@ import io
 import json
 import os
 from pathlib import Path
-from typing import Iterable
-
-import requests
+from typing import Any, Iterable
 
 
 ENDPOINT = "https://www.movebank.org/movebank/service/direct-read"
@@ -135,11 +133,11 @@ def require_credentials() -> tuple[str, str]:
 
 
 def get_text(
-    session: requests.Session,
+    session: Any,
     *,
     params: dict[str, str],
     auth: tuple[str, str],
-) -> requests.Response:
+) -> Any:
     return session.get(
         ENDPOINT,
         params=params,
@@ -150,7 +148,7 @@ def get_text(
 
 
 def study_metadata(
-    session: requests.Session,
+    session: Any,
     *,
     study_id: str,
     auth: tuple[str, str],
@@ -177,7 +175,7 @@ def study_metadata(
 
 
 def individual_metadata(
-    session: requests.Session,
+    session: Any,
     *,
     study_id: str,
     auth: tuple[str, str],
@@ -231,6 +229,14 @@ def main():
     args = parse_args()
     if args.max_individuals is not None and args.max_individuals < 1:
         raise ValueError("--max-individuals must be >= 1")
+
+    try:
+        import requests
+    except ImportError as exc:
+        raise RuntimeError(
+            "Install the empirical dependency set before using Movebank fetch: "
+            "python -m pip install -e '.[empirical]'"
+        ) from exc
 
     auth = require_credentials()
     output_dir = ensure_output_outside_repository(args.output_dir)
