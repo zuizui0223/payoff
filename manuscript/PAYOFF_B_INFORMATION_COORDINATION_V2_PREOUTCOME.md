@@ -675,23 +675,22 @@ later state), **information timing** (whether it arrives before commitment),
 **network memory** (whether topology retains altered timing), and **recovery
 leverage** (which temporary informed seed restarts coordination).
 
-Capacity also changes the information threshold. If waiting creates raw delay
-(\delta), downstream compensation (c) costs (K(c)), and residual delay costs
-(M(\delta-c)), the theorem uses
+Capacity changes the information threshold. If raw delay is (\delta), direct
+waiting cost is (J(\delta)), compensation (c) costs (K(c)), and residual delay
+costs (M(\delta-c)), the theorem uses
 
 [
 D_{eff}
 =
-\min_c[K(c)+M(\delta-c)],
+J(\delta)+\min_c[K(c)+M(\delta-c)],
 ]
 
-not raw delay. Greater compensatory capacity can therefore lower (q_{wait}).
+not raw delay. Compensation can lower (q_{wait}) but cannot erase (J).
 Greater-snow-goose tracking shows why: later departure can coincide with
 shorter migration, weakening departure–arrival coupling (Bêty et al., 2004).
 
-These mechanisms imply different interventions. Capacity restoration can lower
-(D_{eff}); better forecasts increase cue quality; neither necessarily resolves
-a coordination trap.
+Interventions therefore differ: capacity can lower (D_{eff}) and forecasts
+increase cue quality, but neither necessarily resolves a coordination trap.
 
 ### 4.8 Relation to prior work
 
