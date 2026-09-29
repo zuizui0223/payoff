@@ -1,0 +1,57 @@
+{
+  "contract_id": "payoff_b_effective_deadline_threshold_direct_test_v2_20260929",
+  "supersedes": "payoff_b_pairwise_deadline_threshold_direct_test_v1_20260929",
+  "date": "2026-09-29",
+  "status": "PROSPECTIVE_NO_QUALIFYING_NATURAL_DATA",
+  "theoretical_input": {
+    "fixed_case": "D_eff = D when no downstream compensation is available",
+    "general_effective_cost": "D_eff(delta,C) = min_c [K(c)+M(delta-c)] over 0 <= c <= min(C,delta)",
+    "hidden_state_adaptive": "E[D_eff(H)|I] when compensation may adapt after H is learned",
+    "hidden_state_precommitted": "min_c E[K(c,H)+M(delta-c,H)|I] when compensation must be chosen before H",
+    "exact_threshold": "q_wait = (max(A,L)+D_eff)/(A+L) when D_eff < R0"
+  },
+  "direct_empirical_requirements": [
+    "pre-commitment cue reliability q",
+    "independently estimated effective waiting cost D_eff for each actor, either directly in fitness units or through a preregistered decomposition into raw delay delta, compensatory capacity C, compensation cost K, and residual timing-loss function M",
+    "state-mismatch losses C_F and C_M plus prior pi on the same utility scale",
+    "observed cue-use decision distinguishing commit-now from wait/use-cue",
+    "repeated q support crossing the predicted threshold or pairwise asynchronous window"
+  ],
+  "forbidden_substitutions": {
+    "raw_waiting_days_for_D_eff": true,
+    "migration_distance_for_D_eff": true,
+    "departure_date_for_D_eff": true,
+    "source_target_distance_for_D_eff": true,
+    "captivity_duration_for_D_eff": true,
+    "phenological_temperature_sensitivity_for_D_eff": true,
+    "phase_correction_for_cue_use": true,
+    "predictive_connectivity_for_cue_use": true,
+    "posthoc_realised_cost_for_commitment_time_expected_D_eff": true,
+    "compensation_correlation_for_numeric_D_eff_without_cost_model": true
+  },
+  "primary_predictions": [
+    "q_i = (max(A,L)+D_eff_i)/(A+L) when D_eff_i < R0",
+    "D_eff_1 < D_eff_2 implies q_1 < q_2 under shared state-loss structure",
+    "Delta q = |D_eff_2-D_eff_1|/(A+L) when both thresholds are finite",
+    "actors with equal raw delay can have unequal q thresholds if compensatory capacity or compensation cost differs",
+    "exactly one actor uses the shared cue for min(q_1,q_2) < q <= max(q_1,q_2)"
+  ],
+  "inverse_validation": {
+    "identity": "D_eff_revealed = q_wait*(A+L) - max(A,L)",
+    "role": "infer the effective fitness cost implied by an independently observed behavioral threshold",
+    "strongest_test": "compare D_eff_revealed with an independently estimated D_eff from delay, compensation and residual fitness data",
+    "circularity_guard": "cue-use observations used to estimate q_wait may not also define the independent D_eff comparator",
+    "raw_delay_guard": "D_eff_revealed must not be compared directly with days delayed unless the fitness mapping and downstream compensation model are independently specified"
+  },
+  "greater_snow_goose_status": {
+    "information_quality": "route-to-Bylot temperature predictability available",
+    "perturbation_cost": "captivity-duration manipulation provides D-like perturbation but mixes delay with handling/confinement stress",
+    "timing_loss": "Bylot long-term reproductive-success surface provides two-sided C_F-like/C_M-like anchors",
+    "compensation": "1997-1999 tracking shows later departure associated with shorter migration duration and weak departure-arrival coupling",
+    "behavioral_uptake": "prospective 2019-2023 GPS lane registered but event access requires authenticated Movebank session and exact route geometry",
+    "clean_D_eff": "NOT_IDENTIFIED",
+    "actor_level_q_wait": "NOT_IDENTIFIED",
+    "direct_pairwise_window": "NOT_OBSERVED"
+  },
+  "promotion_rule": "No direct natural D_eff-to-threshold claim until q, D_eff, the common loss scale, and cue-use switching are independently identified in one qualifying system under a pre-outcome contract."
+}
