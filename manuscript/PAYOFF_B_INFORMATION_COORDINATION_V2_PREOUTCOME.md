@@ -586,9 +586,9 @@ The exact desynchronization-width identity
 
 gives a direct comparative prediction.
 
-Greater heterogeneity in decision deadlines widens the range of cue qualities over which interacting species use information asymmetrically. For a fixed delay-cost difference, larger costs of making the wrong seasonal decision compress that interval because both actors begin valuing information at more similar cue reliabilities.
+Greater deadline heterogeneity widens asynchronous cue uptake. For a fixed delay-cost difference, larger timing-error costs compress that interval because both actors value information sooner.
 
-The prediction is deliberately not “information is bad.” At low cue quality both actors ignore the cue. At high enough cue quality both use it. The mismatch peak occurs during the transition between those conventions.
+The prediction is transitional, not that information is harmful: both actors ignore poor cues and use sufficiently reliable cues, with mismatch concentrated between those regimes.
 
 A second predictability channel arises when the future cost of waiting is itself uncertain. The relevant term is \(E[D_i(H)\mid\mathcal I_i]\), giving two-actor window width \(|E[D_2\mid\mathcal I_2]-E[D_1\mid\mathcal I_1]|/(A+L)\). Greater-snow-goose experiments motivate this hidden-deadline extension because perturbation costs vary among breeding contexts while southern conditions weakly predict later Arctic conditions; they do not estimate this conditional cost or an information-use threshold (Legagneux et al., 2012; Grandmont et al., 2023; Reséndiz-Infante & Gauthier, 2024).
 
