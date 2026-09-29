@@ -210,3 +210,75 @@ def threshold_slope_with_raw_delay(
     if abs(delta - capacity) <= 1e-12:
         raise ValueError("slope is not unique at the capacity kink")
     return (kappa if delta < capacity else mu) / scale
+
+
+def _validated_state_vectors(
+    probabilities,
+    compensation_costs_per_unit,
+    residual_losses_per_unit,
+):
+    probs = [float(x) for x in probabilities]
+    kappas = [float(x) for x in compensation_costs_per_unit]
+    mus = [float(x) for x in residual_losses_per_unit]
+    if not probs or not (len(probs) == len(kappas) == len(mus)):
+        raise ValueError("state vectors must be non-empty and aligned")
+    if any((not isfinite(p)) or p < 0.0 for p in probs):
+        raise ValueError("state probabilities must be finite and non-negative")
+    if abs(sum(probs) - 1.0) > 1e-10:
+        raise ValueError("state probabilities must sum to one")
+    if any((not isfinite(x)) or x < 0.0 for x in kappas + mus):
+        raise ValueError("state-specific cost rates must be finite and non-negative")
+    return probs, kappas, mus
+
+
+def adaptive_state_expected_effective_cost(
+    probabilities,
+    *,
+    raw_delay: float,
+    compensation_capacity: float,
+    compensation_costs_per_unit,
+    residual_losses_per_unit,
+) -> float:
+    """E[min_c L(c,H)] when compensation may adapt after H is known."""
+
+    probs, kappas, mus = _validated_state_vectors(
+        probabilities,
+        compensation_costs_per_unit,
+        residual_losses_per_unit,
+    )
+    total = 0.0
+    for p, kappa, mu in zip(probs, kappas, mus):
+        _, _, cost = linear_effective_deadline_cost(
+            raw_delay,
+            compensation_capacity=compensation_capacity,
+            compensation_cost_per_unit=kappa,
+            residual_loss_per_unit=mu,
+        )
+        total += p * cost
+    return total
+
+
+def precommitted_state_expected_effective_cost(
+    probabilities,
+    *,
+    raw_delay: float,
+    compensation_capacity: float,
+    compensation_costs_per_unit,
+    residual_losses_per_unit,
+) -> float:
+    """min_c E[L(c,H)] when one compensation plan must be chosen before H."""
+
+    probs, kappas, mus = _validated_state_vectors(
+        probabilities,
+        compensation_costs_per_unit,
+        residual_losses_per_unit,
+    )
+    mean_kappa = sum(p * k for p, k in zip(probs, kappas))
+    mean_mu = sum(p * mu for p, mu in zip(probs, mus))
+    _, _, cost = linear_effective_deadline_cost(
+        raw_delay,
+        compensation_capacity=compensation_capacity,
+        compensation_cost_per_unit=mean_kappa,
+        residual_loss_per_unit=mean_mu,
+    )
+    return cost
