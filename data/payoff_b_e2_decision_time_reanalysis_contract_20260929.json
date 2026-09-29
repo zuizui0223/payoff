@@ -1,0 +1,61 @@
+{
+  "contract_id": "payoff_b_e2_decision_time_reanalysis_probe_20260929",
+  "date": "2026-09-29",
+  "status": "SOURCE_PROBE_ONLY",
+  "source": {
+    "paper_doi": "10.1111/1365-2656.12640",
+    "data_doi": "10.5061/dryad.bs427",
+    "title": "Competitor phenology as a social cue in breeding site selection",
+    "files": [
+      {
+        "name": "arrival_early_late.R",
+        "id": 34678,
+        "type": "code"
+      },
+      {
+        "name": "arrival.csv",
+        "id": 34672,
+        "type": "data"
+      },
+      {
+        "name": "arrorder.csv",
+        "id": 34677,
+        "type": "data"
+      },
+      {
+        "name": "population.csv",
+        "id": 34676,
+        "type": "data"
+      },
+      {
+        "name": "replicates.csv",
+        "id": 34675,
+        "type": "data"
+      },
+      {
+        "name": "swaps14.csv",
+        "id": 34673,
+        "type": "data"
+      },
+      {
+        "name": "swaps15.csv",
+        "id": 34674,
+        "type": "data"
+      }
+    ]
+  },
+  "question": "Can the source data quantify how often/when earlier male versus later female settlement occurs before versus after manipulated tit phenology becomes informative?",
+  "promotion_gate": [
+    "all required source files acquired with stable byte hashes",
+    "original published male/female treatment results reproduced within source model contract",
+    "decision-time information availability metric defined without relabeling treatment phenology as a theoretical D parameter",
+    "derived timing quantity has a clear calendar-day interpretation and source-backed event definition",
+    "only then consider upgrading E2 from source-backed anchor to independent reanalysis"
+  ],
+  "forbidden": [
+    "call arrival time or climate window D2-D1",
+    "infer deliberate waiting by females",
+    "claim exact q1/q2 information thresholds from this experiment",
+    "retune Paper 2 if source reproduction fails"
+  ]
+}
