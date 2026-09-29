@@ -7,20 +7,20 @@
   "canonical_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
   "v1_status": "FROZEN_PROVENANCE_ONLY",
   "workflow": {
-    "run_id": 36508668487,
+    "run_id": 36518027323,
     "run_attempt": 1,
-    "head_sha": "60cacad0702b4ce450ce1d829c14dc76f7bdb67e",
+    "head_sha": "487207104b0d0986b3acd5a62b6a3b11196e8114",
     "conclusion": "success",
-    "artifact_id": 11007724762,
+    "artifact_id": 11011469698,
     "artifact_name": "payoff-b-v2-geb-preoutcome-package",
-    "artifact_sha256": "c12b39a4d491c7325baafcdd427910c0b6759177007dc6fa27d3026e03630e99"
+    "artifact_sha256": "51708a9befb1751cd60148bebe5f856190e9679245681208398d90b08e939b6c"
   },
   "inner_archive": {
     "file": "PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip",
-    "sha256": "f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848"
+    "sha256": "d7c8f3ab4f2c4d3c32da4655e069b9b35b66cb356a44643fa9018288e759ae1a"
   },
   "audited_metrics": {
-    "structured_abstract_words": 244,
+    "structured_abstract_words": 246,
     "main_body_words": 4829,
     "references": 20,
     "display_pieces": 7,
@@ -73,20 +73,20 @@
   ],
   "package_file_count": 17,
   "reproduction": {
-    "run_id": 36508668487,
+    "run_id": 36518027323,
     "run_attempt": 2,
-    "head_sha": "60cacad0702b4ce450ce1d829c14dc76f7bdb67e",
-    "artifact_id": 11008116842,
-    "artifact_sha256": "044b77b2d653338a43d59c1bf6923c6b16b58231fac608286061b8ca4c165c47",
-    "inner_archive_sha256": "f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848",
+    "head_sha": "487207104b0d0986b3acd5a62b6a3b11196e8114",
+    "artifact_id": 11012051730,
+    "artifact_sha256": "a2ae35335a8d14a0929c9f72e32033d4dbe46c3496a7ff4c58932f6eea4767e5",
+    "inner_archive_sha256": "d7c8f3ab4f2c4d3c32da4655e069b9b35b66cb356a44643fa9018288e759ae1a",
     "deterministic_inner_archive": true
   },
-  "latest_audit_date": "2026-09-28",
+  "latest_audit_date": "2026-09-29",
   "science_update": {
-    "merged_pr": 206,
-    "merge_commit": "15d3f5029827fc80c4def1cbac5ac3ed981544b0",
-    "role": "E6b strengthened to two independent interaction contexts: Burgess trophic response asymmetry plus Samplonius resident-migrant competitor interval divergence",
-    "abstract_change": false,
+    "merged_pr": 209,
+    "merge_commit": "cbd33e77502351604d5476831d1a6bd28a6d1808",
+    "role": "abstract refocused on predictive connectivity, migration-distance response and 0.94 d/decade resident-migrant interval divergence",
+    "abstract_change": true,
     "figure_change": false
   }
 }
