@@ -37,6 +37,16 @@
     "direct_compensation_cost_K_estimate": false,
     "direct_capacity_C_estimate": false,
     "direct_residual_loss_M_estimate": false,
-    "forbidden_reframing": "do not convert the observed departure-duration correlation directly into D_eff or q_wait"
+    "forbidden_reframing": "do not convert the observed departure-duration correlation directly into D_eff or q_wait",
+    "direct_waiting_cost_J_anchor": true,
+    "general_effective_cost": "D_eff = J(delta) + min_c [K(c)+M(delta-c)]"
+  },
+  "direct_waiting_cost_anchor": {
+    "source": "Legagneux et al. 2012 / Grandmont et al. 2023",
+    "finding": "captivity duration reduced later reproductive success or breeding propensity, whereas among detected breeders Grandmont et al. reported no detectable captivity-duration effect on arrival date or laying date",
+    "interpretation": "waiting/perturbation can impose a direct carry-over cost that is not equivalent to residual timing delay and is not necessarily erased by downstream timing compensation",
+    "role": "motivates J(delta) term",
+    "direct_J_estimate": false,
+    "boundary": "captivity combines elapsed time with capture, confinement and stress; do not numerically identify J from captivity duration alone"
   }
 }
