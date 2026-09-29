@@ -8,7 +8,7 @@
     "spatial_resolution": "~32 km native Lambert conformal grid",
     "temporal_input": "daily values derived from 3-hourly NARR",
     "start": "1979",
-    "rationale": "source-faithful to Resendiz-Infante & Gauthier 2024 and supplies all registered immediate-weather controls"
+    "rationale": "NARR and seasonal windows are source-faithful to Resendiz-Infante & Gauthier 2024; PAYOFF-B primary predictive-connectivity preprocessing uses its own preregistered linear-detrend definition, with the source ARIMA analysis retained as external calibration."
   },
   "variables": {
     "temperature": "2 m air temperature",
@@ -33,11 +33,23 @@
     "processing": [
       "compute annual context-window mean 2 m temperature",
       "compute annual Bylot target-window mean 2 m temperature",
-      "within each trailing training window detrend context and Bylot series separately on calendar year",
-      "signed Pearson correlation of residuals is primary predictive_connectivity_rho"
+      "within each trailing 20-year pre-focal window regress context and Bylot annual means separately on calendar year",
+      "signed Pearson correlation of the two OLS residual series is primary predictive_connectivity_rho"
     ],
     "leakage_rule": "no focal-year or future-year temperature may enter q",
-    "gaussian_bridge": "q = 0.5 + asin(rho)/pi is secondary/model-conditional only"
+    "gaussian_bridge": "q = 0.5 + asin(rho)/pi is secondary/model-conditional only",
+    "primary_temporal_processing": {
+      "method": "within each 20-year trailing pre-focal window, regress source and Bylot annual window-mean temperature separately on calendar year by ordinary least squares and correlate the two residual series",
+      "rationale": "deterministic PAYOFF-B predictive-connectivity coordinate; matches the existing broad-bird information-axis definition and avoids rolling ARIMA model-selection degrees of freedom",
+      "source_relation": "NOT identical to Resendiz-Infante & Gauthier 2024, which correlated residuals from ARIMA time-series models over 1979-2018"
+    },
+    "source_faithful_calibration": {
+      "role": "external calibration / sensitivity only, not primary focal q",
+      "published_method": "Resendiz-Infante & Gauthier 2024 fit ARIMA models to each site-period series and correlated selected-model residuals",
+      "calibration_period": "1979-2018",
+      "required_check": "using the reconstructed fixed source polygons and source windows, compare PAYOFF-B linear-detrended correlations with the published ARIMA-residual Table 2 pattern before interpreting focal GPS results",
+      "no_retuning_rule": "do not switch the focal primary q definition from linear detrending to ARIMA based on which gives a stronger movement result"
+    }
   },
   "decision_day_weather": {
     "spatial_rule": "nearest native NARR grid cell to the focal GPS decision location",
