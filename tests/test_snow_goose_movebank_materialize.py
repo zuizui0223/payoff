@@ -10,6 +10,7 @@ from scripts.payoff_b_greater_snow_goose_movebank_materialize import (
     movebank_timestamp_end,
     movebank_timestamp_start,
     validate_csv_header,
+    validate_output_dir,
 )
 
 
@@ -58,3 +59,14 @@ def test_csv_header_missing_visible_fails(tmp_path: Path):
     path.write_text(",".join(header) + "\n", encoding="utf-8")
     with pytest.raises(MaterializationBlocked, match="visible"):
         validate_csv_header(path)
+
+
+def test_raw_output_must_be_outside_repo(tmp_path: Path):
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    inside = repo / "raw"
+    with pytest.raises(ValueError, match="outside the Git repository"):
+        validate_output_dir(inside, repo_root=repo)
+
+    outside = tmp_path / "private_raw"
+    assert validate_output_dir(outside, repo_root=repo) == outside.resolve()
