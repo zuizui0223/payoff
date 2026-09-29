@@ -76,5 +76,27 @@
     "do not use same-year future Bylot temperature to construct pre-commitment q",
     "do not retune departure definition or q window after outcome inspection"
   ],
-  "promotion_rule": "At most promote to natural behavioral cue-uptake support. Direct information-deadline confirmation remains forbidden without clean D and state-loss estimates."
+  "promotion_rule": "At most promote to natural behavioral cue-uptake support. Direct information-deadline confirmation remains forbidden without clean D and state-loss estimates.",
+  "movement_preprocessing": {
+    "implementation": "movepp R package workflow, fixed before outcome analysis",
+    "raw_required_fields": [
+      "individual",
+      "time",
+      "lon",
+      "lat"
+    ],
+    "steps": [
+      "compute_step_speed(direction='centered')",
+      "balm_segmentation(variable_col='step_speed')",
+      "retain LL and LH for temporary-habitat detection",
+      "detect_habitat_params() with data-derived eps and minPts",
+      "dbscan_habitats()",
+      "compute_mpi()",
+      "classify_phases(n_phases=3, fixed_stopover='LH', phase_names=['Wintering','staging_stopover','Breeding'])"
+    ],
+    "primary_manual_annotation": false,
+    "sensitivity_manual_annotation": "allowed only after primary automatic result and without access to climate q or model residuals",
+    "departure_event_from_habitat": "last day in an automatically delineated spring staging_stopover habitat followed by outward movement and no return for >=48 h",
+    "rationale": "prevents hand-drawn stopover polygons or climate-informed movement segmentation"
+  }
 }
