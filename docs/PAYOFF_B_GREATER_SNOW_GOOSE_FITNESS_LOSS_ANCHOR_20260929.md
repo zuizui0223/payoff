@@ -17,10 +17,13 @@ through offspring survival to one year for the Bylot Island population over
 
 ## Published late-timing fitness gradient
 
-At the beginning of the study, predicted reproductive success peaked at
-**0.52 young reaching one year** for birds laying on relative Day −4. It then
-declined to **<0.01 young** by Day +10, an average post-peak reduction of
-**0.036 young/day**.
+At the beginning of the study, the fitness surface was explicitly two-sided.
+Very early nests at relative Day −10 produced only **0.03 young reaching one
+year**, success peaked at **0.52 young** on Day −4, and then declined to
+**<0.01 young** by Day +10. The published average post-peak reduction was
+**0.036 young/day**. Descriptively, the increase from Day −10 to the optimum
+was 0.49 young across six days (~0.082 young/day), showing that acting too early
+also carried a large cost.
 
 At the end of the study, peak reproductive success was **0.74 young** on
 relative Day −6 and fell to **0.01 young** by Day +10, an average reduction of
@@ -58,16 +61,17 @@ with a finite deadline determined by the seasonal fitness surface.
 
 This source strengthens two biological premises without closing the theorem.
 
-### 1. Late-timing loss is large and measurable
+### 1. Both early- and late-timing losses are measurable
 
-The published reproductive-success surface provides a natural **C_M-like
-timing-loss scale**. A delayed seasonal action can lose substantial expected
-fitness within days.
+The hump-shaped reproductive-success surface provides natural **C_F-like and
+C_M-like timing-loss anchors**: breeding far before the optimum and breeding
+after it both reduce expected fitness, for different ecological reasons.
 
-It is not an exact (C_M), because the PAYOFF-B theorem declares binary states
-and actions whereas the source estimates a continuous relative-laying-date
-fitness surface. A future direct test must prespecify the early/late contrast
-before mapping the source curve onto theorem utility units.
+They are not exact theorem (C_F) or (C_M). PAYOFF-B declares binary
+environmental states and actions, whereas the source estimates a continuous
+relative-laying-date fitness surface. A direct test must prespecify which
+calendar offsets constitute the early and late actions in each state before
+mapping this curve onto common utility units.
 
 ### 2. Waiting costs can create a real deadline
 
@@ -103,8 +107,8 @@ from the long-term Bylot reproductive-success surface.
 The remaining direct-theorem bottlenecks are therefore narrower:
 
 1. identify a clean opportunity cost (D) in the same utility scale;
-2. prespecify a binary early/late state-action contrast to obtain theorem-scale
-   (C_F,C_M);
+2. prespecify a binary early/late state-action contrast so the observed
+   two-sided fitness surface can be mapped to theorem-scale (C_F,C_M);
 3. observe actor-level cue-use switching across enough pre-outcome (q)
    variation;
 4. for the pairwise theorem, observe two interacting actors with distinct
