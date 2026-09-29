@@ -676,16 +676,16 @@ later state), **information timing** (whether it arrives before commitment),
 leverage** (which temporary informed seed restarts coordination).
 
 Capacity also changes the information threshold. If waiting creates raw delay
-(\delta), downstream compensation (c) costs (K(c)), and residual delay costs
-(M(\delta-c)), the theorem uses
+(\delta), direct waiting cost is (J(\delta)), compensation (c) costs (K(c)),
+and residual delay costs (M(\delta-c)), the theorem uses
 
 [
 D_{eff}
 =
-\min_c[K(c)+M(\delta-c)],
+J(\delta)+\min_c[K(c)+M(\delta-c)],
 ]
 
-not raw delay. Greater compensatory capacity can therefore lower (q_{wait}).
+not raw delay. Compensation can lower (q_{wait}) but cannot erase (J).
 Greater-snow-goose tracking shows why: later departure can coincide with
 shorter migration, weakening departure–arrival coupling (Bêty et al., 2004).
 
