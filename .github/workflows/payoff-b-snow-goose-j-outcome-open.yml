@@ -1,0 +1,52 @@
+name: PAYOFF-B snow goose J outcome open
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-snow-goose-j-open-20260930
+    paths:
+      - '.github/workflows/payoff-b-snow-goose-j-outcome-open.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: payoff-b-snow-goose-j-outcome-open
+  cancel-in-progress: true
+
+jobs:
+  open-frozen-outcome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[empirical]' requests
+      - name: Probe frozen public Dryad manifest
+        run: >
+          python scripts/probe_snow_goose_2026_dryad_manifest.py
+          --output outputs/payoff_b_snow_goose_2026_dryad_manifest.json
+      - name: Materialize preregistered files outside repository
+        run: >
+          python scripts/materialize_snow_goose_2026_dryad.py
+          --manifest outputs/payoff_b_snow_goose_2026_dryad_manifest.json
+          --output-dir /tmp/payoff_b_snow_goose_2026_dryad
+      - name: Run frozen fed-only J-mechanism analysis
+        run: >
+          python scripts/payoff_b_snow_goose_j_mechanism.py
+          --experiment /tmp/payoff_b_snow_goose_2026_dryad/data_exp_Feb2025.txt
+          --condition /tmp/payoff_b_snow_goose_2026_dryad/cond2009_July2024.txt
+          --output outputs/payoff_b_snow_goose_j_mechanism_result_20260930.json
+      - name: Verify raw Dryad bytes remain outside checkout
+        run: |
+          test ! -e data_exp_Feb2025.txt
+          test ! -e cond2009_July2024.txt
+          test -f /tmp/payoff_b_snow_goose_2026_dryad/data_exp_Feb2025.txt
+          test -f /tmp/payoff_b_snow_goose_2026_dryad/cond2009_July2024.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-snow-goose-j-result
+          path: |
+            outputs/payoff_b_snow_goose_j_mechanism_result_20260930.json
+            /tmp/payoff_b_snow_goose_2026_dryad/payoff_b_snow_goose_2026_dryad_receipt.json
+          if-no-files-found: error
