@@ -5,6 +5,7 @@
   "non_novel": [
     "generic value of information",
     "sequential information acquisition",
+    "information-quality thresholds in stopping problems",
     "information affecting multiple downstream decisions",
     "fitness value of information in ecology",
     "adaptive-management value of information",
@@ -14,7 +15,8 @@
   ],
   "critical_prior_boundary": {
     "multiple_uncertainties": "Samson et al. 1989: VOI across multiple uncertainty sources is generally non-additive",
-    "implication": "PAYOFF-B V_A+V_C decomposition is licensed only under declared additive separability"
+    "implication": "PAYOFF-B V_A+V_C decomposition is licensed only under declared additive separability",
+    "stopping_problems": "Bhattacharjya & Deleris 2014 and Lehrer & Wang 2024: threshold waiting/stop decisions under imperfect or more accurate information are established; PAYOFF-B novelty cannot rest on threshold waiting alone"
   },
   "candidate_contributions": [
     "waiting-contingent compensation problem embedded inside the cost of acquiring a focal seasonal cue",
@@ -27,5 +29,5 @@
     "multi-module conditional-complexity penalty"
   ],
   "claim_strength": "candidate novelty after targeted literature screen; not proof of global priority",
-  "manuscript_language_guard": "claim exact deadline geometry and ecological coupling, not invention of VOI or multi-decision information"
+  "manuscript_language_guard": "claim waiting-contingent compensation inside ecological information-deadline geometry and actor asynchrony, not invention of VOI, stopping thresholds, or multi-decision information"
 }
