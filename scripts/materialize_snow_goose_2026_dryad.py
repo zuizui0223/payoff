@@ -2,8 +2,13 @@
 """Materialize only preregistered 2026 Dryad snow-goose files.
 
 The script consumes the metadata-only manifest probe. It downloads only the
-three frozen source files needed for the fed-only J-mechanism lane and writes
+two frozen table inputs needed for the fed-only J-mechanism lane and writes
 them outside the PAYOFF-B git checkout. It does not parse table rows.
+
+Dryad's API download route may require OAuth even for public datasets. If an
+API file request returns 401/403, the script may use Dryad's public
+stash/downloads/file_stream endpoint for the same file id, but only if the
+downloaded bytes match the SHA-256 digest frozen in the API manifest.
 """
 
 from __future__ import annotations
@@ -18,6 +23,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {
     "data_exp_Feb2025.txt",
     "cond2009_July2024.txt",
+}
+OPTIONAL_DOCUMENTATION = {
     "CortFitness_April2025_clean2.R",
 }
 
@@ -90,17 +97,43 @@ def main():
     })
 
     for row in selected:
-        response = session.get(row["download_href"], timeout=120)
+        api_url = str(row["download_href"])
+        response = session.get(api_url, timeout=120)
+        source_url = api_url
+        if response.status_code in {401, 403}:
+            # Dryad API file downloads now require OAuth even for public data.
+            # The public dataset front-end still exposes the deposited file
+            # stream. This fallback changes access route only, not source bytes.
+            file_id = api_url.rstrip("/").split("/")[-2]
+            source_url = (
+                "https://datadryad.org/stash/downloads/file_stream/"
+                + file_id
+            )
+            response = session.get(source_url, timeout=120)
         response.raise_for_status()
         data = response.content
+        digest = sha256_bytes(data)
+        expected = row.get("digest")
+        if row.get("digestType") == "sha-256" and expected:
+            if digest.lower() != str(expected).lower():
+                raise ValueError(
+                    f"Dryad SHA-256 mismatch for {row.get('path')}: "
+                    f"{digest} != {expected}"
+                )
         path = output / Path(str(row["path"])).name
         path.write_bytes(data)
         receipt["files"].append({
             "name": path.name,
             "bytes": len(data),
-            "sha256": sha256_bytes(data),
-            "dryad_digest": row.get("digest"),
+            "sha256": digest,
+            "dryad_digest": expected,
             "dryad_digest_type": row.get("digestType"),
+            "source_url": source_url,
+            "api_download_status": (
+                response.status_code
+                if source_url == api_url
+                else "API_AUTH_FALLBACK"
+            ),
         })
 
     receipt_path = output / "payoff_b_snow_goose_2026_dryad_receipt.json"
