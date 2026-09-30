@@ -9,6 +9,8 @@ from src.dual_use_information_value import (
     multi_module_dual_use_wait_threshold,
     multi_module_rescue_interval,
     multi_module_waiting_margin,
+    identical_balanced_module_complexity_scaling,
+    identical_balanced_module_count_window,
     balanced_dual_use_wait_threshold,
     compensation_information_rescue_interval,
     dual_use_information_values,
@@ -616,3 +618,145 @@ def test_conditional_modules_never_improve_waiting_margin_relative_to_no_problem
             **ACTION,
         )
         assert with_problems <= no_problem + 1e-10
+
+
+
+def test_identical_module_complexity_closed_form():
+    result = identical_balanced_module_complexity_scaling(
+        direct_wait_cost=0.10,
+        conditional_module_count=3,
+        conditional_loss=0.50,
+        **ACTION,
+    )
+    expected_headroom = (0.40 - 0.10) / (1.60 + 3 * 0.50)
+    assert result.headroom == pytest.approx(expected_headroom)
+    assert result.wait_threshold == pytest.approx(
+        1.0 - expected_headroom
+    )
+
+
+def test_more_identical_conditional_decisions_push_threshold_toward_one():
+    thresholds = []
+    for n in (0, 1, 2, 5, 10, 100):
+        result = identical_balanced_module_complexity_scaling(
+            direct_wait_cost=0.10,
+            conditional_module_count=n,
+            conditional_loss=0.50,
+            **ACTION,
+        )
+        assert result.wait_threshold is not None
+        thresholds.append(result.wait_threshold)
+
+    assert thresholds == sorted(thresholds)
+    assert thresholds[0] == pytest.approx((1.20 + 0.10) / 1.60)
+    assert thresholds[-1] > 0.99
+
+
+def test_complexity_penalty_has_positive_first_and_negative_second_derivative():
+    result = identical_balanced_module_complexity_scaling(
+        direct_wait_cost=0.10,
+        conditional_module_count=4,
+        conditional_loss=0.50,
+        **ACTION,
+    )
+    assert result.first_derivative_continuous_n is not None
+    assert result.second_derivative_continuous_n is not None
+    assert result.first_derivative_continuous_n > 0.0
+    assert result.second_derivative_continuous_n < 0.0
+
+
+def test_zero_severity_modules_do_not_change_threshold():
+    baseline = identical_balanced_module_complexity_scaling(
+        direct_wait_cost=0.10,
+        conditional_module_count=0,
+        conditional_loss=0.0,
+        **ACTION,
+    )
+    many = identical_balanced_module_complexity_scaling(
+        direct_wait_cost=0.10,
+        conditional_module_count=100,
+        conditional_loss=0.0,
+        **ACTION,
+    )
+    assert baseline.wait_threshold == pytest.approx(many.wait_threshold)
+    assert many.first_derivative_continuous_n == pytest.approx(0.0)
+    assert many.second_derivative_continuous_n == pytest.approx(0.0)
+
+
+def test_module_count_heterogeneity_alone_creates_asynchronous_window():
+    width = identical_balanced_module_count_window(
+        direct_wait_cost=0.10,
+        actor_1_module_count=1,
+        actor_2_module_count=4,
+        conditional_loss=0.50,
+        **ACTION,
+    )
+    expected = (
+        (0.40 - 0.10)
+        * 0.50
+        * 3
+        / ((1.60 + 1 * 0.50) * (1.60 + 4 * 0.50))
+    )
+    assert width == pytest.approx(expected)
+    assert width > 0.0
+
+
+def test_direct_cost_limit_blocks_waiting_for_any_number_of_modules():
+    for n in (0, 1, 10, 1000):
+        result = identical_balanced_module_complexity_scaling(
+            direct_wait_cost=0.40,
+            conditional_module_count=n,
+            conditional_loss=1.0,
+            **ACTION,
+        )
+        assert result.wait_threshold is None
+        assert result.headroom is None
+
+
+
+def test_fixed_module_count_gap_has_shrinking_asynchrony_at_high_complexity():
+    widths = []
+    lower_thresholds = []
+    for baseline_n in (0, 1, 5, 20, 100):
+        width = identical_balanced_module_count_window(
+            direct_wait_cost=0.10,
+            actor_1_module_count=baseline_n,
+            actor_2_module_count=baseline_n + 2,
+            conditional_loss=0.50,
+            **ACTION,
+        )
+        one = identical_balanced_module_complexity_scaling(
+            direct_wait_cost=0.10,
+            conditional_module_count=baseline_n,
+            conditional_loss=0.50,
+            **ACTION,
+        )
+        assert width is not None
+        assert one.wait_threshold is not None
+        widths.append(width)
+        lower_thresholds.append(one.wait_threshold)
+
+    assert widths == sorted(widths, reverse=True)
+    assert lower_thresholds == sorted(lower_thresholds)
+    assert lower_thresholds[-1] > 0.99
+    assert widths[-1] < widths[0] / 100
+
+
+def test_module_count_window_has_exact_fixed_gap_formula():
+    n = 7
+    k = 3
+    g = 0.4
+    width = identical_balanced_module_count_window(
+        direct_wait_cost=0.10,
+        actor_1_module_count=n,
+        actor_2_module_count=n + k,
+        conditional_loss=g,
+        **ACTION,
+    )
+    expected = (
+        (0.40 - 0.10)
+        * g
+        * k
+        / ((1.60 + n * g) * (1.60 + (n + k) * g))
+    )
+    assert width == pytest.approx(expected)
