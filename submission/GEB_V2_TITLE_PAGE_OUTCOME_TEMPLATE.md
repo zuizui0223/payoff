@@ -5,7 +5,7 @@
 
 ## Title
 
-Effective information deadlines can desynchronize seasonal interactions under environmental change
+Information deadlines can desynchronize seasonal interactions under environmental change
 
 ## Running title
 
