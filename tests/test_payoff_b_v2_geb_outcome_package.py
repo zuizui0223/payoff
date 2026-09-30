@@ -167,6 +167,8 @@ def test_four_scientific_results_plus_access_blocked_build_v2_packages(tmp_path:
         )
 
         assert result_class not in main
+        assert "Raw waiting time therefore does not generally rank effective deadlines" in main
+        assert "Environmental information can recover before ecological coordination does." in main
         assert result_class in si
         assert claim["scientific_result"] == result_class
         assert claim["retuning_permitted"] is False
