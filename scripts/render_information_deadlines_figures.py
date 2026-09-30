@@ -251,14 +251,14 @@ def figure2():
     out += [
         circle(px, py, 7, "#eeeeee"),
         text(px + 12, py - 10, f"peak={peak['peak_mismatch_probability']:.3f}", 13, "bold"),
-        text(170, 575, "shared ignorance", 14, "bold", "middle"),
-        text(430, 575, "asynchronous uptake", 14, "bold", "middle"),
-        text(700, 575, "shared informed", 14, "bold", "middle"),
+        text(170, 610, "shared ignorance", 14, "bold", "middle"),
+        text(430, 610, "asynchronous uptake", 14, "bold", "middle"),
+        text(700, 610, "shared informed", 14, "bold", "middle"),
     ]
 
     bx, by, bw, bh = 825, 150, 305, 405
     out += [
-        text(825, 120, "(b) Raw waiting time can rank thresholds backwards", 19, "bold"),
+        text(825, 120, "(b) Raw delay can reverse threshold rank", 18, "bold"),
         rect(bx, by, bw, bh, "#fafafa"),
         text(bx + 18, by + 40, "Exact rank-reversal witness", 15, "bold"),
         text(bx + 18, by + 78, "Actor A", 15, "bold"),
@@ -272,7 +272,7 @@ def figure2():
         text(bx + 18, by + 301, f"D_eff = {long_compensated.effective_delay_cost:.2f}", 14),
         text(bx + 18, by + 328, f"q_wait = {long_compensated.wait_threshold:.4f}", 14),
         text(bx + bw / 2, by + 370, "2× longer raw wait → lower threshold", 14, "bold", "middle"),
-        text(72, 650, "Effective deadline cost—not elapsed waiting time—determines when information becomes worth using.", 17, "bold"),
+        text(72, 675, "Effective deadline cost—not elapsed waiting time—determines when information becomes worth using.", 17, "bold"),
     ]
     return svg_page(
         "Figure 2. Improving information can transiently worsen coordination",
