@@ -1,0 +1,31 @@
+{
+  "audit_id": "payoff_b_dual_use_information_novelty_boundary_20260930",
+  "date": "2026-09-30",
+  "status": "LITERATURE_SCREEN_COMPLETE_NONEXHAUSTIVE",
+  "non_novel": [
+    "generic value of information",
+    "sequential information acquisition",
+    "information affecting multiple downstream decisions",
+    "fitness value of information in ecology",
+    "adaptive-management value of information",
+    "stopover sites as information sources",
+    "environmental predictability affecting migration progression",
+    "behavioral compensation for phenological mismatch"
+  ],
+  "critical_prior_boundary": {
+    "multiple_uncertainties": "Samson et al. 1989: VOI across multiple uncertainty sources is generally non-additive",
+    "implication": "PAYOFF-B V_A+V_C decomposition is licensed only under declared additive separability"
+  },
+  "candidate_contributions": [
+    "waiting-contingent compensation problem embedded inside the cost of acquiring a focal seasonal cue",
+    "cue-dependent effective deadline cost D_eff(q)",
+    "no-pure-self-rescue corollary",
+    "irreducible direct waiting cost under perfect dual-use information",
+    "exact direct-cost rescue interval",
+    "pairwise threshold heterogeneity from compensation-problem severity despite equal raw delay and direct waiting cost",
+    "information-waiting headroom coordinate",
+    "multi-module conditional-complexity penalty"
+  ],
+  "claim_strength": "candidate novelty after targeted literature screen; not proof of global priority",
+  "manuscript_language_guard": "claim exact deadline geometry and ecological coupling, not invention of VOI or multi-decision information"
+}
