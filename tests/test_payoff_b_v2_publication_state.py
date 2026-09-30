@@ -30,9 +30,9 @@ def test_v2_is_the_only_active_paper2_source():
     assert "CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md" in status
     assert "V1_STATUS = FROZEN_PROVENANCE_ONLY" in status
     assert "CURRENT_V2_PREOUTCOME_PACKAGE = READY" in status
-    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36518027323" in status
-    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 11011469698" in status
-    assert "CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = d7c8f3ab4f2c4d3c32da4655e069b9b35b66cb356a44643fa9018288e759ae1a" in status
+    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36743782397" in status
+    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 11112176156" in status
+    assert "CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = bc16f4b6e66af0e1936636b3f9fcb801b071ec5a8335ff1363565eef6504eea9" in status
     assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED" in status
     assert "CURRENT_V2_ACCESS_BLOCKED_PACKAGE = READY" in status
     assert "AIKENS_LAMBDA_OUTCOME_OPENED = false" in status
@@ -44,9 +44,9 @@ def test_v2_is_the_only_active_paper2_source():
 
     package_audit = PACKAGE_AUDIT.read_text(encoding="utf-8")
     assert "PASS — canonical V2 PREOUTCOME working package ready" in package_audit
-    assert "structured_abstract_words = 246" in package_audit
-    assert "main_body_words = 4829" in package_audit
-    assert "references = 20" in package_audit
+    assert "structured_abstract_words = 283" in package_audit
+    assert "main_body_words = 4783" in package_audit
+    assert "references = 24" in package_audit
     assert "display_pieces = 7" in package_audit
     assert "package_file_count = 17" in package_audit
     assert "FINAL_SUBMISSION_ELIGIBLE = false" in package_audit
@@ -57,14 +57,23 @@ def test_v2_abstract_keeps_only_the_core_deadline_and_recovery_story():
     abstract = _abstract(text)
     words = _word_count(abstract)
 
-    assert 150 <= words <= 210
-    assert "information deadlines" in abstract
-    assert "different delay costs" in abstract
-    assert "better information increases" in abstract
-    assert "strict Nash equilibria" in abstract
-    assert "perfect cue accuracy does not recover" in abstract
-    assert "Theory predicts that environmental information can recover before ecological coordination does." in abstract
-    assert "Natural evidence supports successive links rather than the full hysteresis process" in abstract
+    assert 200 <= words <= 300
+    for heading in (
+        "**Aim:**",
+        "**Location:**",
+        "**Time period:**",
+        "**Major taxa studied:**",
+        "**Methods:**",
+        "**Results:**",
+        "**Main conclusions:**",
+    ):
+        assert heading in abstract
+    assert "effective deadline cost" in abstract
+    assert "Raw waiting time therefore does not generally rank effective deadlines" in abstract
+    assert "strict equilibria" in abstract
+    assert "perfect cue accuracy" in abstract
+    assert "Environmental information can recover before ecological coordination does." in abstract
+    assert "Natural evidence supports successive links rather than the full hysteresis sequence" in abstract
     assert "0.94 d/decade" in abstract
 
     # Important secondary results stay in Results/Discussion rather than

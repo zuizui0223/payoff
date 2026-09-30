@@ -1,6 +1,6 @@
 # PAYOFF-B two-paper publication architecture — current state
 
-Status: **adopted two-paper publication architecture; canonical publication state updated 2026-09-27**
+Status: **adopted two-paper publication architecture; canonical publication state updated 2026-10-01**
 
 > **2026-09-27 canonical amendment:** Paper 2 is
 > `manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md`.
@@ -100,7 +100,7 @@ equilibria.
 **T8.** Temporary cue degradation can collapse coordinated information use, and
 restoration to perfect cue accuracy need not restore the informed state.
 
-These two layers carry the abstract.
+These two layers carry the abstract. One direct methodological consequence of T2–T3 is also surfaced there: **raw waiting time does not generally rank effective deadlines and can therefore mis-rank information-use thresholds**. This is an implication of the core deadline theorem, not a separate third abstract spine.
 
 ### Secondary theory retained in Results / Discussion
 
@@ -111,7 +111,7 @@ weight in the abstract:
 - **T5:** deadline placement on the interaction network changes disruption;
 - **T6:** private and joint value of waiting can diverge;
 - **T9:** acquisition memory and topology-dependent memory are distinct;
-- compensated/hidden-deadline refinements that define `D_eff`;
+- hidden-state refinements in which the decision-relevant cost is conditional expected `D_eff`;
 - dual-use information, where the focal cue can also inform downstream
   compensation and make `D_eff(q)` cue-dependent;
 - exact decision-complexity/headroom scaling and threshold crowding near
@@ -122,6 +122,10 @@ weight in the abstract:
 
 This ordering is deliberate. Paper 2 should not read as a catalogue of
 theorems.
+
+### GEB-facing length and abstract rule
+
+As of the 2026-10-01 author-guideline check, a GEB Research Article is typically about **5,000 words in the main body**, with a **structured abstract of at most 300 words**. The canonical V2 branch therefore uses the required headings (Aim, Location, Time period, Major taxa studied, Methods, Results, Main conclusions), keeps the effective-deadline methodological warning in Results, and compresses secondary theorem material rather than removing the T1–T3 / T7–T8 spine.
 
 ## Natural evidence hierarchy
 
@@ -275,12 +279,15 @@ Current state:
 PAPER_2_CANONICAL_SOURCE = PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md
 V1_STATUS = FROZEN_PROVENANCE_ONLY
 CURRENT_V2_PREOUTCOME_PACKAGE = READY
-CURRENT_V2_PREOUTCOME_BUILD_RUN = 36508668487
-CURRENT_V2_PREOUTCOME_ARTIFACT = 11007724762
-CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = f0d006e1015d76b13ba059dcc21ef5ff9c9b6b7b314cf37df8c04ea522da5848
+CURRENT_V2_PREOUTCOME_BUILD_RUN = 36743782397
+CURRENT_V2_PREOUTCOME_ARTIFACT = 11112176156
+CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = bc16f4b6e66af0e1936636b3f9fcb801b071ec5a8335ff1363565eef6504eea9
+CURRENT_V2_PREOUTCOME_VALIDATED_HEAD = 41138e7856b4619c8e741da8b54fdef65ba2a2c7
 CURRENT_V2_FINAL_SUBMISSION_PACKAGE = ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_BLOCKED
-CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = b10d00dc8252c8b7efafbeafffaf3c32480eb199236b529979e7a122ef0fe8ec
-CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = e826d500310f2d884a62c3913fc3798ec2ec762cd776b6b89252ec26891327bd
+CURRENT_V2_ACCESS_BLOCKED_BUILD_RUN = 36743782371
+CURRENT_V2_ACCESS_BLOCKED_ARTIFACT = 11111033416
+CURRENT_V2_ACCESS_BLOCKED_GEB_SHA256 = 31838962865f698d944293f4b30765c4a7d0a903c7aeaad9f10a30f6150656f9
+CURRENT_V2_ACCESS_BLOCKED_REVIEW_SHA256 = 91217d5fd55cfe4116164ad379d40f5be4e6a0319cfcf0a7be78ac98290f8a43
 OLD_V1_GEB_PACKAGE = PROVENANCE_ONLY
 ```
 

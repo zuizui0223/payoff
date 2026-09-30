@@ -13,52 +13,56 @@ RUNNING_TITLE = "Information deadlines and coordination"
 
 STRUCTURED_ABSTRACT = """### Aim
 
-To determine whether seasonal coordination can fail even when organisms have
-adequate response capacity and environmental information improves, because
-interacting organisms begin using that information at different decision
-thresholds.
+To determine when improving environmental information can desynchronize
+interacting seasonal organisms and why restored information may fail to restore
+coordination.
 
 ### Location
 
-The theory is general. Empirical evidence comes from migratory and resident
-bird systems across multiple continents.
+General theory, with empirical modules from eastern North America and European
+bird interaction systems.
 
 ### Time period
 
-The focal comparative analyses span 1991–2017.
+Dataset-specific; principal reconstructed phenology records span approximately
+1980–2020.
 
 ### Major taxa studied
 
-Migratory birds and resident passerines.
+Migratory birds, with plants and insect pollinators as an independent benchmark.
 
 ### Methods
 
-We derive exact information-deadline and coordination conditions, analyse
-shared-cue interaction networks, and compare these predictions with a
-preregistered predictive-connectivity analysis, a dependence-aware migration
-meta-regression and a published interaction-level resident–migrant phenology
-comparison.
+We combine exact Bayesian decision theory and finite coordination games with
+preregistered comparative analyses, source-table reconstructions, published
+experiments and interaction-level phenology studies.
 
 ### Results
 
-Cue reliability and cue use are distinct state variables. Different waiting
-costs create an exact interval in which improving the same cue causes
-asynchronous information use and increased mismatch. Under perfect information,
-an obsolete uninformed state and a better informed state can both be strict
-equilibria, so temporary information degradation can produce persistent
-coordination failure after cue quality recovers. Predictive connectivity is
-associated with smaller mismatch, long-distance migrants show weaker
-temperature responsiveness than short-distance migrants, and across 10
-European nest-box schemes differential climate sensitivity widened
-resident–migrant laying-date intervals by 0.94 d/decade. No current natural
-dataset demonstrates the full hysteresis sequence.
+Information becomes actionable only above an exact reliability threshold, but
+waiting is governed by an effective deadline cost: direct waiting loss plus the
+minimum cost of downstream compensation and residual delay. Raw waiting time
+therefore does not generally rank effective deadlines and can even reverse the
+predicted order of information-use thresholds. Heterogeneous effective
+deadlines create a finite asynchronous-uptake window, so better information
+increases mismatch during part of the uptake transition. Perfect information
+can also support obsolete uninformed and better informed strict equilibria;
+after cue degradation collapses coordinated information use, restoring perfect
+cue accuracy does not recover the informed state. Natural evidence supports
+successive links rather than the full hysteresis process: stronger predictive
+connectivity is associated with smaller mismatch across 37 bird species, a
+944-effect reconstruction shows weaker temperature responses in long- than
+short-distance migrants, and differential climate sensitivity across 10
+European nest-box schemes widened resident–migrant laying-date intervals by
+0.94 d/decade.
 
 ### Main conclusions
 
-Theory predicts that environmental information can recover before ecological coordination does.
-Seasonal mismatch therefore depends not only on response capacity and
-information quality, but also on when interacting organisms can afford to use
-that information and on the strategic accessibility of coordinated change.
+Seasonal mismatch cannot be interpreted from cue quality or raw waiting time
+alone. Effective deadline costs determine when information is worth using,
+while strategic coordination can determine whether use recovers at all.
+Theory predicts that environmental information can recover before ecological
+coordination does.
 """
 
 KEYWORDS = (
