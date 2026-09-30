@@ -16,14 +16,16 @@ environmental information actually become behaviourally usable by interacting
 organisms?
 
 We derive an exact information-deadline result showing that cue quality and cue
-use are distinct ecological state variables. Interactors facing the same
-improving cue but different costs of delaying action begin using that cue at
-different thresholds, creating a finite range in which better information
-increases rather than decreases phenological mismatch. We then show a stronger
-network result: under perfect environmental information, an obsolete
-uninformed timing convention and a better informed convention can both be
-strict equilibria. Temporary information degradation can therefore leave a
-system in a lower-payoff timing state even after cue quality fully recovers.
+use are distinct ecological state variables. The relevant deadline is a
+fitness-equivalent **effective waiting cost**, not elapsed time: downstream
+compensation can even reverse the ordering of information-use thresholds implied
+by raw waiting duration. Heterogeneous effective costs therefore create a
+finite range in which improving the same cue increases rather than decreases
+phenological mismatch. We then show a stronger network result: under perfect
+environmental information, an obsolete uninformed timing convention and a
+better informed convention can both be strict equilibria. Temporary information
+degradation can therefore leave a system in a lower-payoff timing state even
+after cue quality fully recovers.
 
 Natural analyses deliberately test separate links rather than claiming a
 complete observed hysteresis event. Across migratory birds, stronger
