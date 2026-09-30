@@ -120,10 +120,10 @@ If \(D_{eff}\ge R_0\), even perfect information is not worth waiting for.
 
 This distinction is empirically consequential. Two actors can experience the same raw delay, or one can wait longer, yet the actor with greater downstream compensatory capacity can have the lower \(D_{eff}\) and therefore begin using information sooner. Raw waiting duration, migration distance and departure date therefore need not preserve the ordering of information-use thresholds.
 
-If effective waiting cost depends on an unresolved future **deadline state** \(H\), let \(\mathcal I\) be the information available at commitment and use
+If effective waiting cost depends on an unresolved future **deadline state** \(H\), let \(\mathcal I\) be the information available at commitment and write \(D(H)\equiv D_{eff}(H)\) for the state-specific effective cost. The decision-relevant quantity is
 
 [
-\bar D_{eff}(\mathcal I)=E[D_{eff}(H)\mid\mathcal I].
+\bar D_{eff}(\mathcal I)=E[D(H)\mid\mathcal I].
 ]
 
 Thus later harshness changes the rational threshold only insofar as it is predictable at commitment; an ex-ante optimal decision can still look wrong ex post.
