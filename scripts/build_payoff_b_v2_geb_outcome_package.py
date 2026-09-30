@@ -96,8 +96,8 @@ def outcome_cover_letter(result_json: Path) -> str:
 
 Dear Editors,
 
-Please consider our Research Article, **“Better information can fail to restore
-seasonal coordination under environmental change,”** for *Global Ecology and
+Please consider our Research Article, **“Effective information deadlines can desynchronize seasonal interactions
+under environmental change,”** for *Global Ecology and
 Biogeography*.
 
 Species tracking seasonal environments are usually evaluated by how accurately
