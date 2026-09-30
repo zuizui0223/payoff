@@ -689,8 +689,10 @@ test.
 
 The generic **value of information** is not new. Decision analysis has long
 treated information as valuable when it changes downstream decisions, including
-sequential information acquisition (Miller 1975) and information about multiple
-sources of uncertainty (Samson et al. 1989). Importantly, Samson et al. show that
+sequential information acquisition (Miller 1975), information about multiple
+sources of uncertainty (Samson et al. 1989), and stopping problems in which an
+actor chooses between irreversible action and waiting for more accurate
+information (Bhattacharjya & Deleris 2014; Lehrer & Wang 2024). Importantly, Samson et al. show that
 information values across multiple uncertainties are generally **non-additive**.
 The additive decomposition used here is therefore not a generic property of
 value of information: it follows from the explicitly declared additive
@@ -709,6 +711,7 @@ PAYOFF-B therefore does **not** claim novelty for:
 
 - information having value for more than one downstream choice;
 - sequential value of information;
+- threshold policies for waiting versus irreversible action under uncertainty;
 - stopover information;
 - behavioral compensation during migration; or
 - generic value-of-information additivity; the present sum is licensed only
@@ -740,6 +743,11 @@ References for this boundary:
 - Samson D, Wirth A, Rickard J (1989) The value of information from multiple
   sources of uncertainty in decision analysis. *European Journal of
   Operational Research* 39:254–260. DOI: 10.1016/0377-2217(89)90163-X.
+- Bhattacharjya D, Deleris LA (2014) The Value of Information in Some
+  Variations of the Stopping Problem. *Decision Analysis* 11:189–203.
+  DOI: 10.1287/deca.2014.0298.
+- Lehrer E, Wang T (2024) The value of information in stopping problems.
+  *Economic Theory* 78:619–648. DOI: 10.1007/s00199-023-01543-8.
 - Donaldson-Matasci MC, Bergstrom CT, Lachmann M (2010) The fitness value of
   information. *Oikos* 119:219–230. DOI:
   10.1111/j.1600-0706.2009.17781.x.
