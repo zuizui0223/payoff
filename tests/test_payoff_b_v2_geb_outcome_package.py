@@ -149,6 +149,10 @@ def test_four_scientific_results_plus_access_blocked_build_v2_packages(tmp_path:
         assert "anonymous reviewer archive delivery channel" in manifest["remaining_portal_blockers"]
         cover = (out / "GEB_V2_COVER_LETTER_OUTCOME.md").read_text(encoding="utf-8")
         assert "The theory predicts that **environmental information can recover before" in cover
+        assert cover.startswith("# Cover letter")
+        assert "V2 cover-letter template" not in cover
+        if result_class == "ACCESS_BLOCKED":
+            assert "ACCESS_BLOCKED" not in cover
         assert zip_path.exists()
 
         main = (out / "GEB_V2_BLINDED_OUTCOME.md").read_text(encoding="utf-8")
@@ -286,10 +290,26 @@ def test_activated_access_blocked_clears_author_decision_science_blocker(tmp_pat
     assert (out / "GEB_V2_PORTAL_HANDOFF_ACCESS_BLOCKED.md").exists()
     assert not (out / "GEB_V2_TITLE_PAGE_OUTCOME_TEMPLATE.md").exists()
 
+    access_title = (out / "GEB_V2_TITLE_PAGE_ACCESS_BLOCKED_TEMPLATE.md").read_text(
+        encoding="utf-8"
+    )
+    assert access_title.startswith("# Global Ecology and Biogeography — Title page")
+    assert "ACCESS_BLOCKED package state" not in access_title
+    assert "V2 title-page template" not in access_title
+
+    declarations = (out / "GEB_V2_DECLARATIONS_TEMPLATE.md").read_text(
+        encoding="utf-8"
+    )
+    assert declarations.startswith("# Global Ecology and Biogeography — Declarations")
+    assert "V2 declarations template" not in declarations
+
     access_data = (out / "GEB_V2_DATA_CODE_ACCESS_BLOCKED.md").read_text(
         encoding="utf-8"
     )
+    assert access_data.startswith("# Data and Code Availability Statement")
     normalized_access_data = " ".join(access_data.split())
+    assert "ACCESS_BLOCKED submission state" not in normalized_access_data
+    assert "ACCESS_BLOCKED is an external-access state" not in normalized_access_data
     assert "was not executed" in normalized_access_data
     assert "not evidence for or against" in normalized_access_data
     assert "future authenticated execution remains permissible" in normalized_access_data
