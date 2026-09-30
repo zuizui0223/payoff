@@ -136,7 +136,7 @@ T1  cue information has an action threshold
 T4–T6, T9 and the rescue/topology results remain important results and
 mechanistic extensions, but they do not share equal weight in the abstract.
 
-### Deadline-cost refinement — exact extension, not a new abstract spine
+### Effective deadline cost — core T2/T3 interpretation, not a separate abstract spine
 
 The empirical deadline variable is now explicitly the **effective fitness cost
 of waiting**, not raw elapsed time:
@@ -185,8 +185,17 @@ sequential value-of-information/recourse logic. Generic VOI, stopovers as
 information sources and en-route compensation are not claimed as novel.
 See `docs/PAYOFF_B_DUAL_USE_INFORMATION_NOVELTY_BOUNDARY_20260930.md`.
 
-These refinements are currently **theory extensions and empirical-validation
-guards**. They do not replace T1–T3/T7–T8 as the main manuscript spine.
+The fixed-`D_eff` definition and its ordering consequence are now part of the core T2–T3 interpretation and are stated in the abstract: **raw waiting time need not rank effective deadlines and can mis-rank information-use thresholds**. Hidden-state and dual-use refinements remain theory extensions and empirical-validation guards. None of these replace T1–T3/T7–T8 as the main manuscript spine.
+
+GEB-facing preflight on the 2026-10-01 branch:
+
+```text
+STRUCTURED_ABSTRACT = YES
+ABSTRACT_WORDS_APPROX = 280
+MAIN_BODY_WORDS_APPROX = 4818
+CURRENT_GEB_TYPICAL_MAIN_BODY_GUIDE = ~5000 words
+CURRENT_GEB_ABSTRACT_LIMIT = 300 words
+```
 
 Natural evidence is deliberately modular:
 
