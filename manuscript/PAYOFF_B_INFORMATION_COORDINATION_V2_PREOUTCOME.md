@@ -6,9 +6,21 @@
 
 ## Abstract
 
-Seasonal adaptation can fail even when organisms can respond and useful environmental information exists. We develop a theory of **information deadlines** in which cue quality and cue use are distinct ecological state variables. In a binary seasonal decision, information becomes actionable only above an exact reliability threshold, and each actor begins waiting for that information at a threshold set by its timing-error losses and opportunity cost of delay. Interactors facing the same improving cue but different delay costs therefore use it asynchronously, creating a finite range in which better information increases phenological mismatch. We then show that perfect information need not restore coordination. Obsolete uninformed and better informed profiles can coexist as strict Nash equilibria; after cue degradation collapses coordinated information use, restoring perfect cue accuracy does not recover the informed state. Natural evidence supports successive links rather than the full hysteresis process: predictive connectivity is associated with smaller mismatch across 37 bird species; a 944-effect reconstruction shows weaker temperature responses in long- than short-distance migrants; and across 10 European nest-box schemes, differential climate sensitivity widened resident–migrant laying-date intervals by **0.94 d/decade**. No current natural dataset demonstrates the full degradation–recovery sequence. **Theory predicts that environmental information can recover before ecological coordination does.**
+**Aim:** We ask when improving environmental information can desynchronize interacting seasonal organisms and why restored information may fail to restore coordination.
 
-**Keywords:** phenological mismatch; migration; information ecology; Bayesian games; seasonal timing; predictive connectivity; ecological hysteresis; climate change
+**Location:** General theory, with empirical modules from eastern North America and European bird interaction systems.
+
+**Time period:** Dataset-specific; principal reconstructed phenology records span approximately 1980–2020.
+
+**Major taxa studied:** Migratory birds, with plants and insect pollinators as an independent benchmark.
+
+**Methods:** We combine exact Bayesian decision theory and finite coordination games with preregistered comparative analyses, source-table reconstructions, published experiments and interaction-level phenology studies.
+
+**Results:** Information becomes actionable only above an exact reliability threshold, but waiting is governed by an **effective deadline cost**: direct waiting loss plus the minimum cost of downstream compensation and residual delay. Raw waiting time therefore does not generally rank effective deadlines and can even reverse the predicted order of information-use thresholds. Heterogeneous effective deadlines create a finite asynchronous-uptake window, so improving the same cue can transiently increase mismatch. Perfect information can also support both obsolete uninformed and better informed strict equilibria; after cue degradation collapses coordinated information use, restoring perfect cue accuracy need not recover the informed state. Natural evidence supports successive links rather than the full hysteresis sequence: stronger predictive connectivity is associated with smaller mismatch across 37 bird species, a 944-effect reconstruction shows weaker temperature responses in long- than short-distance migrants, and differential climate sensitivity across 10 European nest-box schemes widened resident–migrant laying-date intervals by **0.94 d/decade**.
+
+**Main conclusions:** Seasonal mismatch cannot be interpreted from cue quality or raw waiting time alone. Effective deadline costs determine when information is worth using, while strategic coordination can determine whether information use recovers at all. **Environmental information can recover before ecological coordination does.**
+
+**Keywords:****Keywords:** phenological mismatch; migration; information ecology; Bayesian games; seasonal timing; predictive connectivity; ecological hysteresis; climate change
 
 ---
 
@@ -64,23 +76,29 @@ as the prior expected loss of committing early and
 L=\pi C_M
 ]
 
-as the prior expected loss of committing late.
-
-Before observing a cue, the Bayes-optimal action has risk
+as the prior expected loss of committing late. Before observing a cue, the Bayes-optimal action has risk
 
 [
 R_0=\min(A,L).
 ]
 
-A later binary cue has state-classification accuracy (q\ge 1/2). Waiting for that cue has opportunity cost (D\).
+A later binary cue has state-classification accuracy \(q\ge 1/2\). Waiting for it creates raw temporal delay \(\delta\), but elapsed delay is not itself the theorem input. Let \(J(\delta)\) be direct nonrecoverable waiting loss, let compensation \(c\) cost \(K(c)\), and let residual delay cost \(M(\delta-c)\). The relevant **effective deadline cost** is
 
-The cue first becomes capable of changing the Bayes-optimal action at
+[
+D_{eff}(\delta)
+=
+J(\delta)+\min_c\{K(c)+M(\delta-c)\}.
+]
+
+The original fixed-cost theorem is recovered by setting \(D=D_{eff}\).
+
+The cue becomes capable of changing the Bayes-optimal action at
 
 [
 q_0=\frac{\max(A,L)}{A+L}.
 ]
 
-The exact value of waiting for the cue is
+Its exact value is
 
 [
 V(q)=
@@ -90,52 +108,35 @@ q(A+L)-\max(A,L)
 \right].
 ]
 
-The actor waits only when
+The actor waits only when \(V(q)>D_{eff}\). If \(D_{eff}<R_0\),
 
 [
-V(q)>D.
-]
-
-If (D<R_0), the actor-specific information-use threshold is
-
-[
-q_{wait}(D)=
-\frac{\max(A,L)+D}{A+L}.
-]
-
-If (D\ge R_0), even perfect information is not worth waiting for.
-
-If waiting cost depends on an unresolved future **deadline state** (H), let
-(\mathcal I) be the information available at commitment. Under the same
-expected-loss assumptions, replace fixed (D) by
-
-[
-\bar D(\mathcal I)=E[D(H)\mid\mathcal I],
-\qquad
-q_{wait}(\mathcal I)
+q_{wait}
 =
-\frac{\max(A,L)+\bar D(\mathcal I)}{A+L}.
+\frac{\max(A,L)+D_{eff}}{A+L}.
 ]
 
-Thus later harshness changes the rational threshold only insofar as it was
-predictable at commitment; an ex-ante optimal decision can still look wrong
-ex post.
+If \(D_{eff}\ge R_0\), even perfect information is not worth waiting for.
 
-### 2.2 Better information can transiently increase mismatch
+This distinction is empirically consequential. Two actors can experience the same raw delay, or one can wait longer, yet the actor with greater downstream compensatory capacity can have the lower \(D_{eff}\) and therefore begin using information sooner. Raw waiting duration, migration distance and departure date therefore need not preserve the ordering of information-use thresholds.
 
-Consider two actors facing the same future cue and the same state-dependent losses but different waiting costs
+If effective waiting cost depends on an unresolved future **deadline state** \(H\), let \(\mathcal I\) be the information available at commitment and use
 
 [
-D_1<D_2.
+\bar D_{eff}(\mathcal I)=E[D_{eff}(H)\mid\mathcal I].
 ]
 
-When both costs are below (R_0), their information-use thresholds satisfy
+Thus later harshness changes the rational threshold only insofar as it is predictable at commitment; an ex-ante optimal decision can still look wrong ex post.
+
+### 2.2 Better information can transiently increase mismatch### 2.2 Better information can transiently increase mismatch
+
+Consider two actors facing the same future cue and state-dependent losses but different effective waiting costs,
 
 [
-q_1<q_2.
+D_{eff,1}<D_{eff,2}.
 ]
 
-Three regimes follow:
+When both are below \(R_0\), their information-use thresholds satisfy \(q_1<q_2\). Three regimes follow:
 
 [
 q\le q_1:
@@ -161,11 +162,11 @@ The exact width of the asynchronous information-use interval is
 \boxed{
 \Delta q
 =
-\frac{D_2-D_1}{A+L}.
+\frac{D_{eff,2}-D_{eff,1}}{A+L}.
 }
 ]
 
-Thus cue quality can improve monotonically while ecological mismatch follows a zero–positive–zero trajectory.
+Thus cue quality can improve monotonically while ecological mismatch follows a zero–positive–zero trajectory. Crucially, this ordering is an ordering of effective costs, not waiting times: compensation can make \(\delta_1>\delta_2\) coexist with \(D_{eff,1}<D_{eff,2}\), reversing any threshold ranking inferred from raw delay.
 
 In the transparent PAYOFF-B witness,
 
@@ -173,17 +174,15 @@ In the transparent PAYOFF-B witness,
 \pi=0.4,\quad C_F=2,\quad C_M=1,
 ]
 
-with delay costs (0.10) and (0.30). The exact thresholds are
+with effective costs \(0.10\) and \(0.30\), the exact thresholds are
 
 [
-q_1=0.8125,qquad q_2=0.9375.
+q_1=0.8125,\qquad q_2=0.9375.
 ]
 
-On a 0.01 grid this appears as a mismatch window from (q=0.82) to (0.93), with expected action mismatch 0.436 at the first sampled asynchronous point.
+On a 0.01 grid this appears as a mismatch window from \(q=0.82\) to \(0.93\). If the higher effective cost exceeds \(R_0\), that actor never waits even at \(q=1\), so information asymmetry persists under perfect cue reliability.
 
-If the higher delay cost exceeds (R_0), the higher-cost actor never waits, even at (q=1). In this regime information asymmetry persists under perfect cue reliability.
-
-### 2.3 Perfect information does not guarantee information use
+### 2.3 Perfect information does not guarantee information use### 2.3 Perfect information does not guarantee information use
 
 We next consider a shared-cue interaction network at
 
@@ -291,98 +290,35 @@ When cue quality is restored stepwise to (q=1), the network remains in the all-l
 
 ### 2.5 In communities, asynchronous information use is a network cut
 
-The two-actor result generalizes directly to an interaction network. At cue
-quality q, let S(q) be the set of actors whose waiting cost is below the current
-value of information. These actors use the cue; all others retain the old
-timing convention.
-
-For symmetric edge weights w_ij, define C(q) as the total interaction weight
-joining an information user to a non-user, and W as total interaction weight.
-If M(q) is the probability that the cue-contingent action differs from the old
-action, expected interaction mismatch is exactly
+At cue quality \(q\), let \(S(q)\) be the actors using the cue, \(C(q)\) the interaction weight crossing from users to non-users, \(W\) total interaction weight, and \(M(q)\) the probability that cue-contingent action differs from the old action. Expected interaction mismatch is
 
     E(q) = M(q) C(q) / W.
 
-Thus environmental information acts through a moving **uptake frontier** in the
-ecological network.
+In an unweighted complete network with \(N\) actors and \(k\) users,
 
-In an unweighted complete network with N actors and k information users,
+    C/W = 2 k (N-k) / [N(N-1)],
 
-    C/W = 2 k (N-k) / [N(N-1)].
-
-The informed--uninformed edge boundary is therefore maximized when uptake is
-split as evenly as possible. In the large randomly mixed limit, with informed
-fraction f,
-
-    P(asynchronous pair) = 2 f (1-f),
-
-which peaks at f=1/2.
-
-This does not imply that total ecological mismatch must peak at exactly 50%
-uptake, because M(q) can change with cue reliability. It does imply that
-exposure of interaction edges to asynchronous information use is greatest near
-the middle of the adoption transition.
-
-Topology matters because crossing an information threshold can either create or
-repair mismatch edges. If actor i is the next adopter, the exact change in cut
-weight is
+so exposure to asynchronous uptake is greatest near the middle of adoption. Topology enters because the next adopter can create or repair mismatch edges:
 
     Delta C_i
       = weight(i, still-uninformed neighbours)
       - weight(i, already-informed neighbours).
 
-An early adopter with many uninformed neighbours increases the coordination
-boundary, whereas a later adopter surrounded by informed neighbours repairs it.
-The same distribution of decision deadlines can therefore produce different
-mismatch trajectories depending on where those deadlines sit in the network.
+The same effective-deadline distribution can therefore generate different mismatch trajectories depending on where those deadlines sit in the network.
 
-### 2.6 Private and joint value of waiting can diverge
+### 2.6 Private and joint value of waiting can diverge### 2.6 Private and joint value of waiting can diverge
 
-If a timing error also imposes costs on interaction partners, the joint value of waiting can exceed the focal actor’s private value.
-
-Let (V_P(q)) be the private value of information and (V_J(q)) the joint value when partner losses are included. Whenever
-
-[
-V_J(q)>V_P(q),
-]
-
-there is a delay-cost interval
+Let \(V_P(q)\) be the focal actor's private value of information and \(V_J(q)\) the joint value including partner losses. Whenever \(V_J(q)>V_P(q)\), the interval
 
 [
 D\in[V_P(q),V_J(q))
 ]
 
-in which the focal actor rationally commits under uncertainty while the interacting system would gain if the decision were delayed.
+contains decisions for which the actor rationally commits under uncertainty although the interacting system would gain from waiting. Coordination failure can therefore begin as under-investment in information acquisition, before seasonal actions themselves diverge.
 
-Coordination failure can therefore begin before the actors choose their seasonal actions: selection can under-invest in information acquisition itself.
+### 2.7 Recovery can be nucleated by a small informed seed### 2.7 Recovery can be nucleated by a small informed seed
 
-### 2.7 Recovery can be nucleated by a small informed seed
-
-Failure of spontaneous recovery does not imply that all actors must be shifted
-simultaneously.
-
-At perfect information, let a set (K) adopt the informed convention while
-actors outside (K) remain old. For coalition member (i), let (b_i(K)) be
-the fraction of its interaction weight that still points outside the coalition.
-Its gain relative to the all-old state is
-
-[
-G_i(K)=R_i-D_i-pI_i b_i(K).
-]
-
-A simultaneous voluntary coalition is therefore self-financing exactly when
-
-[
-R_i-D_ige pI_i b_i(K)
-]
-
-for every coalition member.
-
-A different quantity governs a temporary rescue intervention. Suppose an
-informed seed (S) is temporarily maintained while the remaining actors are
-free to best respond. For uninformed actor (i), let (a_i(S)) be the fraction
-of its interaction weight already attached to informed neighbours. Its gain
-from adopting is
+Failure of spontaneous recovery does not imply that all actors must shift simultaneously. Suppose a temporary informed seed \(S\) is maintained while other actors best respond. For uninformed actor \(i\), let \(a_i(S)\) be the fraction of its interaction weight attached to informed neighbours. Its gain from adopting is
 
 [
 \boxed{
@@ -392,66 +328,29 @@ R_i-D_i+pI_i[2a_i(S)-1].
 }
 ]
 
-Thus actor (i) follows the informed state when
+Actor \(i\) follows the informed state when
 
 [
 a_i(S)>
 \frac12
-left[
+\left[
 1-\frac{R_i-D_i}{pI_i}
 \right].
 ]
 
-Because non-negative network weights make (a_i(S)) non-decreasing as adoption
-spreads, information-use recovery is a progressive threshold cascade.
-
-For a homogeneous complete graph with (N) actors and (k) temporary informed
-seeds,
-
-[
-H(k)=
-R-D+
-pI\frac{2k-N+1}{N-1}.
-]
-
-The strict seed threshold is therefore the smallest integer satisfying
-
-[
-k>
-\frac{N-1}{2}
-left[
-1-\frac{R-D}{pI}
-\right].
-]
-
-The canonical three-species example produces a sharp topology contrast.
-Spontaneous recovery fails in all three tested connected networks. Yet a
-temporary one-species seed can restore the fully informed equilibrium.
-
-In the complete graph and migrant-star, any single actor can nucleate recovery.
-In the chain
+Because \(a_i(S)\) cannot decrease as adoption spreads on non-negative networks, recovery is a progressive threshold cascade. In the canonical three-species example spontaneous recovery fails in all tested connected networks, yet a temporary one-species seed can restore the informed equilibrium. Any single actor works in the complete graph and migrant-star; in the chain
 
 [
 flower-local pollinator-migrant,
 ]
 
-only the central local pollinator is a one-species rescue seed. Temporarily
-restoring cue use at either peripheral node does not cause full recovery.
+only the central local pollinator is a singleton rescue seed. Thus trap existence and rescue leverage are different network properties, and the species best placed to **maintain** a timing convention need not be the species best placed to **rescue** it.
 
-After the central seed triggers the other actors to adopt, the intervention can
-be removed and the informed equilibrium persists.
-
-Thus trap existence and rescue leverage are different network properties.
-
-> **A network can be unable to recover spontaneously yet remain recoverable
-> through a small, strategically placed temporary information seed.**
-
-Threshold cascades and seed effects are established in network science (Watts, 2002). The
-ecological content here is that the node threshold is derived from seasonal
-mismatch risk, information/deadline cost and interaction mismatch rather than
-introduced as a free adoption parameter.
+Threshold cascades are established in network science (Watts, 2002); here the node threshold is derived from seasonal mismatch risk, effective information cost and interaction mismatch rather than introduced as a free adoption parameter.
 
 ---
+
+## 3. Empirical evidence hierarchy---
 
 ## 3. Empirical evidence hierarchy
 
@@ -581,18 +480,18 @@ The exact desynchronization-width identity
 
 [
 \Delta q=
-\frac{|D_2-D_1|}{A+L}
+\frac{|D_{eff,2}-D_{eff,1}|}{A+L}
 ]
 
-gives a direct comparative prediction.
+gives a direct comparative prediction: greater heterogeneity in effective deadline costs widens asynchronous cue uptake, whereas larger timing-error losses compress that interval because both actors value information sooner.
 
-Greater deadline heterogeneity widens asynchronous cue uptake. For a fixed delay-cost difference, larger timing-error costs compress that interval because both actors value information sooner.
+The key empirical warning is that **elapsed waiting time does not generally order this quantity**. An organism can wait longer yet face a lower \(D_{eff}\) if it can compress migration or compensate later; conversely, complete recovery of downstream timing can leave a positive direct cost \(J\). Migration distance, departure date and waiting duration are therefore unsafe proxies for information-use thresholds unless a cost-and-compensation model links them to \(D_{eff}\). In principle they can rank two actors in the wrong order.
 
 The prediction is transitional, not that information is harmful: both actors ignore poor cues and use sufficiently reliable cues, with mismatch concentrated between those regimes.
 
-A second predictability channel arises when the future cost of waiting is itself uncertain. The relevant term is \(E[D_i(H)\mid\mathcal I_i]\), giving two-actor window width \(|E[D_2\mid\mathcal I_2]-E[D_1\mid\mathcal I_1]|/(A+L)\). Greater-snow-goose experiments motivate this hidden-deadline extension because perturbation costs vary among breeding contexts while southern conditions weakly predict later Arctic conditions; they do not estimate this conditional cost or an information-use threshold (Legagneux et al., 2012; Grandmont et al., 2023; Reséndiz-Infante & Gauthier, 2024).
+A second predictability channel arises when the future effective cost of waiting is itself uncertain. The relevant term is \(E[D_{eff,i}(H)\mid\mathcal I_i]\), giving two-actor window width \(|E[D_{eff,2}\mid\mathcal I_2]-E[D_{eff,1}\mid\mathcal I_1]|/(A+L)\). Greater-snow-goose experiments motivate this hidden-deadline extension because perturbation costs vary among breeding contexts while southern conditions weakly predict later Arctic conditions; they do not estimate this conditional cost or an information-use threshold (Legagneux et al., 2012; Grandmont et al., 2023; Reséndiz-Infante & Gauthier, 2024).
 
-### 4.3 Environmental recovery can precede ecological recovery
+### 4.3 Environmental recovery can precede ecological recovery### 4.3 Environmental recovery can precede ecological recovery
 
 The shared-cue network produces a stronger path-dependent result.
 
@@ -675,22 +574,7 @@ later state), **information timing** (whether it arrives before commitment),
 **network memory** (whether topology retains altered timing), and **recovery
 leverage** (which temporary informed seed restarts coordination).
 
-Capacity changes the information threshold. If raw delay is (\delta), direct
-waiting cost is (J(\delta)), compensation (c) costs (K(c)), and residual delay
-costs (M(\delta-c)), the theorem uses
-
-[
-D_{eff}
-=
-J(\delta)+\min_c[K(c)+M(\delta-c)],
-]
-
-not raw delay. Compensation can lower (q_{wait}) but cannot erase (J).
-Greater-snow-goose tracking shows why: later departure can coincide with
-shorter migration, weakening departure–arrival coupling (Bêty et al., 2004).
-
-Interventions therefore differ: capacity can lower (D_{eff}) and forecasts
-increase cue quality, but neither necessarily resolves a coordination trap.
+Capacity can lower \(D_{eff}\), while forecasts increase cue quality. Greater-snow-goose tracking illustrates the distinction because later departure can coincide with shorter migration, weakening departure–arrival coupling (Bêty et al., 2004). Neither mechanism necessarily resolves a coordination trap.
 
 ### 4.8 Relation to prior work
 
