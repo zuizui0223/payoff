@@ -6,6 +6,10 @@ on:
       - analysis/payoff-b-snow-goose-j-open-20260930
     paths:
       - '.github/workflows/payoff-b-snow-goose-j-outcome-open.yml'
+      - 'scripts/materialize_snow_goose_2026_dryad.py'
+      - 'scripts/payoff_b_snow_goose_j_mechanism.py'
+      - 'scripts/probe_snow_goose_2026_dryad_manifest.py'
+      - 'src/snow_goose_j_mechanism.py'
   workflow_dispatch:
 
 concurrency:
