@@ -1,4 +1,4 @@
-# Better information can fail to restore seasonal coordination under environmental change
+# Effective information deadlines can desynchronize seasonal interactions under environmental change
 
 **Status:** PAYOFF-B Paper 2 canonical manuscript, V2 PREOUTCOME  
 **Lineage:** absorbs the Paper 2 publication role from `PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`; V1 is frozen as temporal-buffering provenance/rollback and is not a separate submission candidate while V2 is active.  
