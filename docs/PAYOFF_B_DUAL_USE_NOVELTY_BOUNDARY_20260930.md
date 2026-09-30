@@ -28,6 +28,7 @@ that all mathematical or ecological literature has been exhaustively searched.
 |---|---|---|
 | Information has decision-theoretic value | established | classical VOI |
 | Information can be acquired sequentially and affect later choices | established | Miller 1975 |
+| Waiting versus irreversible action can have information-quality thresholds | established | Bhattacharjya & Deleris 2014; Lehrer & Wang 2024 |
 | Information about multiple uncertainties can interact | established | Samson et al. 1989; generally non-additive |
 | Information can be assigned a fitness value in biology | established | Donaldson-Matasci et al. 2010 |
 | VOI can be embedded in dynamic ecological management | established | Williams et al. 2011; Canessa et al. 2015 |
@@ -90,12 +91,22 @@ Avoid:
 
 Avoid:
 
+> We introduce threshold waiting for information as a general decision-theory
+> result.
+
+Avoid:
+
 > Information values from different uncertainties are generally additive.
 
 ## Sources screened
 
 - Miller AC (1975) *The Value of Sequential Information*. Management Science
   22:1-11. DOI 10.1287/mnsc.22.1.1.
+- Bhattacharjya D, Deleris LA (2014) *The Value of Information in Some
+  Variations of the Stopping Problem*. Decision Analysis 11:189-203. DOI
+  10.1287/deca.2014.0298.
+- Lehrer E, Wang T (2024) *The value of information in stopping problems*.
+  Economic Theory 78:619-648. DOI 10.1007/s00199-023-01543-8.
 - Samson D, Wirth A, Rickard J (1989) *The value of information from multiple
   sources of uncertainty in decision analysis*. European Journal of Operational
   Research 39:254-260. DOI 10.1016/0377-2217(89)90163-X.
