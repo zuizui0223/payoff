@@ -696,7 +696,7 @@ information (Bhattacharjya & Deleris 2014; Lehrer & Wang 2024). Importantly, Sam
 information values across multiple uncertainties are generally **non-additive**.
 The additive decomposition used here is therefore not a generic property of
 value of information: it follows from the explicitly declared additive
-separability of the seasonal-action and compensation loss modules. Ecology
+declared additive separability of the seasonal-action and compensation loss modules. Ecology
 likewise has an established value-of-information literature in evolutionary
 fitness and adaptive management (Donaldson-Matasci et al. 2010; Williams et al.
 2011; Canessa et al. 2015).
@@ -715,7 +715,7 @@ PAYOFF-B therefore does **not** claim novelty for:
 - stopover information;
 - behavioral compensation during migration; or
 - generic value-of-information additivity; the present sum is licensed only
-  by the declared separable loss structure.
+  by the declared additive separability of the loss structure.
 
 The candidate contribution is narrower: embed a downstream compensation
 decision **inside the cost of waiting for the focal seasonal cue**, then solve
