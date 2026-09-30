@@ -4,8 +4,8 @@
 
 Dear Editors,
 
-Please consider our Research Article, **“Better information can fail to restore
-seasonal coordination under environmental change,”** for *Global Ecology and
+Please consider our Research Article, **“Effective information deadlines can desynchronize seasonal interactions
+under environmental change,”** for *Global Ecology and
 Biogeography*.
 
 ### Why this paper is of interest to GEB readers
