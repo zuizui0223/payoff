@@ -69,17 +69,28 @@ two-step theory.
 
 **T1.** Information has an action threshold.
 
-**T2.** Decision deadlines determine the cue reliability at which each actor
-begins using information.
+**T2.** Effective decision deadlines determine the cue reliability at which
+each actor begins using information.
 
-**T3.** Heterogeneous deadlines create a finite range in which improving the
-same cue increases mismatch because uptake is asynchronous.
+The relevant empirical cost is not raw elapsed delay but
+
+`D_eff(delta)=J(delta)+min_c[K(c)+M(delta-c)]`,
+
+or its total causal equivalent under a biologically faithful waiting
+intervention.
+
+**T3.** Heterogeneous effective deadlines create a finite range in which
+improving the same cue increases mismatch because uptake is asynchronous.
 
 The exact two-actor desynchronization width is
 
-`Delta q = (D2-D1)/(A+L)`
+`Delta q = |D_eff,2-D_eff,1|/(A+L)`
 
-for the declared binary model when both actors eventually use the cue.
+for the fixed-cost declared binary model when both actors eventually use the
+cue.
+
+Raw waiting duration does not generally rank `D_eff` and can even rank
+information-use thresholds in the wrong order.
 
 ### Core layer B — recovery failure
 
@@ -101,6 +112,11 @@ weight in the abstract:
 - **T5:** deadline placement on the interaction network changes disruption;
 - **T6:** private and joint value of waiting can diverge;
 - **T9:** acquisition memory and topology-dependent memory are distinct;
+- compensated/hidden-deadline refinements that define `D_eff`;
+- dual-use information, where the focal cue can also inform downstream
+  compensation and make `D_eff(q)` cue-dependent;
+- exact decision-complexity/headroom scaling and threshold crowding near
+  perfect information;
 - rescue-coalition and temporary-seed results;
 - topology-dependent rescue leverage;
 - the older movement/phenology capacity programme.
@@ -174,7 +190,7 @@ Not licensed: a causal bird-versus-pollinator coefficient, a universal
 taxonomic ranking, or a claim that these two sources constitute a new
 cross-taxon meta-analysis.
 
-E6 interpretation is explicitly non-causal: photoperiodic/endogenous control is retained as a non-exclusive alternative explanation for the migration-distance gradient, and no current natural dataset estimates the pairwise theoretical deadline difference D2-D1 or observes the predicted desynchronization window directly.
+E6 interpretation is explicitly non-causal: photoperiodic/endogenous control is retained as a non-exclusive alternative explanation for the migration-distance gradient, and no current natural dataset estimates the pairwise theoretical effective-deadline difference `D_eff,2-D_eff,1` or observes the predicted desynchronization window directly.
 
 Figure 5 carries the migration-distance reconstruction and independent local plant–pollinator benchmark with an explicit no-causal-taxon-contrast boundary.
 
@@ -187,8 +203,43 @@ temporal major-axis slopes of bird first-egg date on caterpillar peak are
 
 Licensed role: **actual interacting partners show response asymmetry that changes relative timing.** Burgess et al. provide the trophic resource bridge; Samplonius et al. (2018) provide an independent resident-tit versus migratory-flycatcher bridge in which differential temperature sensitivity widened the laying-date interval by 0.94 d/decade.
 
-Not licensed: D2-D1 has been measured, q1 < q <= q2 has been observed, or
-information distance is the causal mechanism for the deficits.
+Not licensed: `D_eff,2-D_eff,1` has been measured, `q1 < q <= q2` has been
+observed, or information distance is the causal mechanism for the deficits.
+
+
+### E7 — greater snow goose effective-deadline bridge
+
+The St. Lawrence -> Bylot lineage now supplies separate source-backed anchors
+for:
+
+- route-to-breeding predictability;
+- captivity carry-over cost;
+- a two-sided laying-date fitness surface;
+- migration-stage timing compensation;
+- post-arrival buffering.
+
+These pieces motivate the decomposition
+
+`D_eff = J + optimized downstream compensation/residual loss`
+
+but do not identify natural `D_eff`.
+
+A FED-only physiological J-mechanism lane is frozen on public 2009 Dryad data.
+The metadata/file schema are resolved, but row-level bytes remain unavailable
+in the current automated environment (API 401; public file-stream 403).
+Therefore no registered coefficient has been opened and the state is
+`SOURCE_ACCESS_BLOCKED`, not an ecological null.
+
+Published evidence already shows that no single mediator should be equated
+with J: FED energetic deterioration is modest on average, release CORT is not
+monotonically ordered by captivity duration, while duration-dependent breeding
+suppression has been reported.
+
+Licensed role: **mechanistic bridge showing why effective waiting cost can have
+recoverable timing and nonrecoverable carry-over components.**
+
+Not licensed: natural information-waiting `J`, natural `D_eff`,
+actor-specific `q_wait`, or a pairwise asynchronous window.
 
 ## Capacity layer inherited from V1
 
