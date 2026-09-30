@@ -20,7 +20,7 @@
 
 **Main conclusions:** Seasonal mismatch cannot be interpreted from cue quality or raw waiting time alone. Effective deadline costs determine when information is worth using, while strategic coordination can determine whether information use recovers at all. **Environmental information can recover before ecological coordination does.**
 
-**Keywords:****Keywords:** phenological mismatch; migration; information ecology; Bayesian games; seasonal timing; predictive connectivity; ecological hysteresis; climate change
+**Keywords:** phenological mismatch; migration; information ecology; Bayesian games; seasonal timing; predictive connectivity; ecological hysteresis; climate change
 
 ---
 
@@ -128,7 +128,7 @@ If effective waiting cost depends on an unresolved future **deadline state** \(H
 
 Thus later harshness changes the rational threshold only insofar as it is predictable at commitment; an ex-ante optimal decision can still look wrong ex post.
 
-### 2.2 Better information can transiently increase mismatch### 2.2 Better information can transiently increase mismatch
+### 2.2 Better information can transiently increase mismatch
 
 Consider two actors facing the same future cue and state-dependent losses but different effective waiting costs,
 
@@ -182,7 +182,7 @@ q_1=0.8125,\qquad q_2=0.9375.
 
 On a 0.01 grid this appears as a mismatch window from \(q=0.82\) to \(0.93\). If the higher effective cost exceeds \(R_0\), that actor never waits even at \(q=1\), so information asymmetry persists under perfect cue reliability.
 
-### 2.3 Perfect information does not guarantee information use### 2.3 Perfect information does not guarantee information use
+### 2.3 Perfect information does not guarantee information use
 
 We next consider a shared-cue interaction network at
 
@@ -306,7 +306,7 @@ so exposure to asynchronous uptake is greatest near the middle of adoption. Topo
 
 The same effective-deadline distribution can therefore generate different mismatch trajectories depending on where those deadlines sit in the network.
 
-### 2.6 Private and joint value of waiting can diverge### 2.6 Private and joint value of waiting can diverge
+### 2.6 Private and joint value of waiting can diverge
 
 Let \(V_P(q)\) be the focal actor's private value of information and \(V_J(q)\) the joint value including partner losses. Whenever \(V_J(q)>V_P(q)\), the interval
 
@@ -316,7 +316,7 @@ D\in[V_P(q),V_J(q))
 
 contains decisions for which the actor rationally commits under uncertainty although the interacting system would gain from waiting. Coordination failure can therefore begin as under-investment in information acquisition, before seasonal actions themselves diverge.
 
-### 2.7 Recovery can be nucleated by a small informed seed### 2.7 Recovery can be nucleated by a small informed seed
+### 2.7 Recovery can be nucleated by a small informed seed
 
 Failure of spontaneous recovery does not imply that all actors must shift simultaneously. Suppose a temporary informed seed \(S\) is maintained while other actors best respond. For uninformed actor \(i\), let \(a_i(S)\) be the fraction of its interaction weight attached to informed neighbours. Its gain from adopting is
 
@@ -349,8 +349,6 @@ only the central local pollinator is a singleton rescue seed. Thus trap existenc
 Threshold cascades are established in network science (Watts, 2002); here the node threshold is derived from seasonal mismatch risk, effective information cost and interaction mismatch rather than introduced as a free adoption parameter.
 
 ---
-
-## 3. Empirical evidence hierarchy---
 
 ## 3. Empirical evidence hierarchy
 
@@ -491,7 +489,7 @@ The prediction is transitional, not that information is harmful: both actors ign
 
 A second predictability channel arises when the future effective cost of waiting is itself uncertain. The relevant term is \(E[D_{eff,i}(H)\mid\mathcal I_i]\), giving two-actor window width \(|E[D_{eff,2}\mid\mathcal I_2]-E[D_{eff,1}\mid\mathcal I_1]|/(A+L)\). Greater-snow-goose experiments motivate this hidden-deadline extension because perturbation costs vary among breeding contexts while southern conditions weakly predict later Arctic conditions; they do not estimate this conditional cost or an information-use threshold (Legagneux et al., 2012; Grandmont et al., 2023; Reséndiz-Infante & Gauthier, 2024).
 
-### 4.3 Environmental recovery can precede ecological recovery### 4.3 Environmental recovery can precede ecological recovery
+### 4.3 Environmental recovery can precede ecological recovery
 
 The shared-cue network produces a stronger path-dependent result.
 
