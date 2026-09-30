@@ -173,12 +173,24 @@ def _remove_pending_aikens_section(text: str) -> str:
 
 def _deinternalize(text: str) -> str:
     replacements = {
-        "PAYOFF-B therefore": "We therefore",
+        "PAYOFF-B therefore does not treat": "We therefore do not treat",
+        "PAYOFF-B therefore does not claim": "We therefore do not claim",
+        "PAYOFF-B therefore distinguishes": "We therefore distinguish",
+        "PAYOFF-B therefore begins one step later.": (
+            "Our analysis therefore begins one step later."
+        ),
         "PAYOFF-B distinguishes": "We distinguish",
         "PAYOFF-B does not claim": "We do not claim",
         "PAYOFF-B does not infer": "We do not infer",
         "A central result of PAYOFF-B": "A central result of this study",
-        "The earlier PAYOFF-B temporal-buffering result": "The earlier temporal-buffering result",
+        "the earlier PAYOFF-B temporal-buffering result": (
+            "the earlier temporal-buffering result"
+        ),
+        "The earlier PAYOFF-B temporal-buffering result": (
+            "The earlier temporal-buffering result"
+        ),
+        "the transparent PAYOFF-B witness": "the transparent model witness",
+        "not a new PAYOFF-B discovery": "not a new discovery of this study",
         "The current PAYOFF-B story": "The current framework",
         "PAYOFF-B's": "the framework's",
         "PAYOFF-B": "this framework",
