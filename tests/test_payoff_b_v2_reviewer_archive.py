@@ -86,6 +86,7 @@ def test_preoutcome_reviewer_archive_is_anonymous_and_complete(tmp_path: Path):
         "data/payoff_b_cross_system_information_result_20260928.json",
         "data/payoff_b_pairwise_tracking_bridge_20260929.json",
         "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
+        "docs/PAYOFF_B_REDSTART_EFFECTIVE_DEADLINE_BRIDGE_20261001.md",
         "scripts/payoff_b_cross_system_information.py",
         "analysis/movement_phenology/payoff_b_predictive_connectivity_amaral.R",
     }
@@ -98,6 +99,8 @@ def test_preoutcome_reviewer_archive_is_anonymous_and_complete(tmp_path: Path):
     assert "10.7488/ds/2215" in readme
     assert "10.1038/s41559-018-0543-1" in readme
     assert "10.1111/gcb.14160" in readme
+    assert "10.1002/ecy.3938" in readme
+    assert "natural D_eff or q_wait" in readme
     assert 'python -m pip install -e ".[test,empirical]"' in readme
     assert "statsmodels>=0.14" in readme
     assert "fails if any are skipped" in readme
