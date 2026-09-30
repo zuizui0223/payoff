@@ -44,6 +44,14 @@ def test_v2_geb_blinded_source_passes_hard_gates():
     assert 'python -m pip install -e ".[test,empirical]"' in text
     assert "statsmodels>=0.14" in text
     assert "fails if any of those tests are skipped" in text
+    assert "We therefore do not treat cue–driver decoupling itself as a new idea." in text
+    assert "the earlier temporal-buffering result" in text
+    assert "the transparent model witness" in text
+    assert "not a new discovery of this study" in text
+    assert "We therefore do not claim a natural information-recovery hysteresis event." in text
+    assert "We therefore distinguish:" in text
+    assert "Our analysis therefore begins one step later." in text
+    assert result["metrics"]["deinternalization_artifact_hits"] == []
     assert result["all_preoutcome_hard_gates_pass"]
     assert result["metrics"]["abstract_words"] <= 300
     assert result["metrics"]["main_body_words"] <= 5000
