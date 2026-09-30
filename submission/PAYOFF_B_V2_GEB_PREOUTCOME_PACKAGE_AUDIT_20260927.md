@@ -1,6 +1,6 @@
 # PAYOFF-B V2 GEB PREOUTCOME package audit
 
-Audited: **2026-09-28**
+Audited: **2026-10-01**
 
 Status: **PASS — canonical V2 PREOUTCOME working package ready**
 
@@ -18,9 +18,9 @@ reuse the superseded temporal-buffering V1 GEB overlay.
 ## Verified GEB-facing metrics
 
 ```text
-structured_abstract_words = 246
-main_body_words = 4829
-references = 20
+structured_abstract_words = 283
+main_body_words = 4783
+references = 24
 display_pieces = 7
 keywords = 8
 running_title_chars = 38
@@ -77,33 +77,27 @@ Results/Figure 5 rather than competing in the abstract.
 ## Frozen build provenance
 
 ```text
-workflow_run = 36518027323
+workflow_run = 36743782397
 workflow_run_attempt = 1
-validated_head = 487207104b0d0986b3acd5a62b6a3b11196e8114
+validated_head = 41138e7856b4619c8e741da8b54fdef65ba2a2c7
 workflow_conclusion = success
 
-artifact_id = 11011469698
+artifact_id = 11112176156
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-51708a9befb1751cd60148bebe5f856190e9679245681208398d90b08e939b6c
+70ac0aa54819ca60b0ad2de2eec9b318ffd42e253ea6cf43b4b43a7d15a6c1be
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-d7c8f3ab4f2c4d3c32da4655e069b9b35b66cb356a44643fa9018288e759ae1a
+bc16f4b6e66af0e1936636b3f9fcb801b071ec5a8335ff1363565eef6504eea9
 ```
 
-Deterministic reproduction check:
+Deterministic reproduction is checked inside the successful workflow by
+`test_v2_geb_package_zip_is_deterministic`, which builds the package twice and
+requires identical inner ZIP hashes.
 
 ```text
-reproduction_workflow_run = 36518027323
-reproduction_run_attempt = 2
-reproduction_head = 487207104b0d0986b3acd5a62b6a3b11196e8114
-reproduction_artifact_id = 11012051730
-reproduction_artifact_sha256 =
-a2ae35335a8d14a0929c9f72e32033d4dbe46c3496a7ff4c58932f6eea4767e5
-reproduction_inner_zip_sha256 =
-d7c8f3ab4f2c4d3c32da4655e069b9b35b66cb356a44643fa9018288e759ae1a
-deterministic_inner_archive = PASS
+deterministic_inner_archive = PASS_IN_WORKFLOW_TEST
 package_file_count = 17
 ```
 
