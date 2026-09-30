@@ -997,3 +997,163 @@ def multi_module_rescue_interval(
     if upper <= lower + 1e-12:
         return None
     return lower, upper
+
+
+
+@dataclass(frozen=True)
+class IdenticalModuleComplexityScaling:
+    direct_wait_cost: float
+    conditional_module_count: int
+    conditional_loss: float
+    action_prior_risk: float
+    action_total_loss: float
+    wait_threshold: float | None
+    headroom: float | None
+    first_derivative_continuous_n: float | None
+    second_derivative_continuous_n: float | None
+
+
+def identical_balanced_module_complexity_scaling(
+    *,
+    direct_wait_cost: float,
+    conditional_module_count: int,
+    conditional_loss: float,
+    action_prior_early: float,
+    action_false_early_cost: float,
+    action_missed_early_cost: float,
+) -> IdenticalModuleComplexityScaling:
+    """Exact q_wait scaling for n identical balanced conditional modules.
+
+    Each conditional module has prior 1/2 and symmetric wrong-response cost G.
+    For J < R_A0,
+
+        q_wait(n) = 1 - (R_A0-J)/(S_A+nG).
+
+    Treating n as continuous for comparative statics,
+
+        dq/dn   = (R_A0-J)G/(S_A+nG)^2 > 0
+        d2q/dn2 = -2(R_A0-J)G^2/(S_A+nG)^3 <= 0.
+
+    Thus decision complexity raises the reliability threshold toward one, but
+    the marginal penalty of each additional identical module diminishes.
+    """
+
+    direct = _nonnegative("direct_wait_cost", direct_wait_cost)
+    g = _nonnegative("conditional_loss", conditional_loss)
+    if (
+        isinstance(conditional_module_count, bool)
+        or int(conditional_module_count) != conditional_module_count
+        or conditional_module_count < 0
+    ):
+        raise ValueError(
+            "conditional_module_count must be a non-negative integer"
+        )
+    n = int(conditional_module_count)
+
+    action = binary_information_geometry(
+        action_prior_early,
+        action_false_early_cost,
+        action_missed_early_cost,
+    )
+
+    if direct >= action.prior_risk - 1e-12:
+        return IdenticalModuleComplexityScaling(
+            direct_wait_cost=direct,
+            conditional_module_count=n,
+            conditional_loss=g,
+            action_prior_risk=action.prior_risk,
+            action_total_loss=action.total_prior_loss,
+            wait_threshold=None,
+            headroom=None,
+            first_derivative_continuous_n=None,
+            second_derivative_continuous_n=None,
+        )
+
+    denominator = action.total_prior_loss + n * g
+    headroom = (action.prior_risk - direct) / denominator
+    threshold = 1.0 - headroom
+
+    first = (
+        (action.prior_risk - direct) * g / denominator**2
+    )
+    second = (
+        -2.0
+        * (action.prior_risk - direct)
+        * g**2
+        / denominator**3
+    )
+
+    return IdenticalModuleComplexityScaling(
+        direct_wait_cost=direct,
+        conditional_module_count=n,
+        conditional_loss=g,
+        action_prior_risk=action.prior_risk,
+        action_total_loss=action.total_prior_loss,
+        wait_threshold=threshold,
+        headroom=headroom,
+        first_derivative_continuous_n=first,
+        second_derivative_continuous_n=second,
+    )
+
+
+def identical_balanced_module_count_window(
+    *,
+    direct_wait_cost: float,
+    actor_1_module_count: int,
+    actor_2_module_count: int,
+    conditional_loss: float,
+    action_prior_early: float,
+    action_false_early_cost: float,
+    action_missed_early_cost: float,
+) -> float | None:
+    """Exact pairwise q-window generated only by module-count heterogeneity.
+
+    For finite thresholds and common J,G,
+
+        |q2-q1|
+        =
+        (R_A0-J) G |n2-n1|
+        / [(S_A+n1G)(S_A+n2G)].
+
+    Returns None when J >= R_A0 and neither actor can ever wait.
+    """
+
+    one = identical_balanced_module_complexity_scaling(
+        direct_wait_cost=direct_wait_cost,
+        conditional_module_count=actor_1_module_count,
+        conditional_loss=conditional_loss,
+        action_prior_early=action_prior_early,
+        action_false_early_cost=action_false_early_cost,
+        action_missed_early_cost=action_missed_early_cost,
+    )
+    two = identical_balanced_module_complexity_scaling(
+        direct_wait_cost=direct_wait_cost,
+        conditional_module_count=actor_2_module_count,
+        conditional_loss=conditional_loss,
+        action_prior_early=action_prior_early,
+        action_false_early_cost=action_false_early_cost,
+        action_missed_early_cost=action_missed_early_cost,
+    )
+
+    if one.wait_threshold is None or two.wait_threshold is None:
+        return None
+
+    n1 = one.conditional_module_count
+    n2 = two.conditional_module_count
+    g = one.conditional_loss
+    r_minus_j = one.action_prior_risk - one.direct_wait_cost
+    s = one.action_total_loss
+
+    width = (
+        r_minus_j
+        * g
+        * abs(n2 - n1)
+        / ((s + n1 * g) * (s + n2 * g))
+    )
+    if abs(
+        width - abs(two.wait_threshold - one.wait_threshold)
+    ) > 1e-10:
+        raise AssertionError(
+            "module-count asynchronous-window identity failed"
+        )
+    return width

@@ -615,6 +615,138 @@ This distinction prevents a misleading intuition: **more uses of information
 do not necessarily imply earlier information use** when those uses correspond
 to additional problems created by waiting.
 
+### Exact decision-complexity scaling
+
+Suppose the actor has \(n\) identical balanced conditional decisions, each
+with symmetric wrong-response loss \(G\). Every such module has prior risk
+\(G/2\) and is active for all \(q>1/2\). Since waiting cannot become optimal
+below the focal actionability boundary, all conditional modules are active at
+the waiting threshold.
+
+The exact threshold is therefore
+
+\[
+\boxed{
+q_{\mathrm{wait}}(n)
+=
+1-
+\frac{
+R_{A0}-J
+}{
+S_A+nG
+}.
+}
+\]
+
+For \(J<R_{A0}\) and \(G>0\),
+
+\[
+\frac{\partial q_{\mathrm{wait}}}{\partial n}
+=
+\frac{
+(R_{A0}-J)G
+}{
+(S_A+nG)^2
+}
+>0,
+\]
+
+while
+
+\[
+\frac{\partial^2 q_{\mathrm{wait}}}{\partial n^2}
+=
+-
+\frac{
+2(R_{A0}-J)G^2
+}{
+(S_A+nG)^3
+}
+<0.
+\]
+
+Thus each additional waiting-contingent decision raises the required cue
+reliability, but the marginal penalty diminishes. For fixed \(G>0\),
+
+\[
+\lim_{n\to\infty}q_{\mathrm{wait}}(n)=1.
+\]
+
+A system can therefore approach a **near-perfect-information requirement**
+solely because waiting opens many downstream decisions, even though the same
+cue informs all of them.
+
+For two otherwise identical actors differing only in module count,
+
+\[
+\boxed{
+\Delta q
+=
+\frac{
+(R_{A0}-J)G|n_2-n_1|
+}{
+(S_A+n_1G)(S_A+n_2G)
+}.
+}
+\]
+
+So heterogeneity in the **number of waiting-contingent decisions** is itself a
+source of asynchronous information use.
+
+### Threshold crowding at high conditional complexity
+
+More conditional decisions raise each actor's absolute threshold, but they do
+not necessarily widen the gap between actors.
+
+Let actor 1 have \(n\) identical modules and actor 2 have \(n+k\), with a
+fixed count difference \(k>0\). Then
+
+\[
+\boxed{
+\Delta q(n,k)
+=
+\frac{
+(R_{A0}-J)Gk
+}{
+(S_A+nG)(S_A+(n+k)G)
+}.
+}
+\]
+
+For fixed \(k\) and \(G>0\),
+
+\[
+\frac{\partial \Delta q}{\partial n}<0,
+\qquad
+\lim_{n\to\infty}\Delta q=0,
+\]
+
+while simultaneously
+
+\[
+q_{\mathrm{wait}}(n)\to1
+\quad\text{and}\quad
+q_{\mathrm{wait}}(n+k)\to1.
+\]
+
+Thus high conditional complexity produces **threshold crowding near perfect
+information**: actors remain jointly uninformed over most of the cue-quality
+range and then switch at very similar, very high reliabilities.
+
+This distinguishes two effects of complexity:
+
+- **absolute delay in information uptake** grows with module count;
+- **pairwise asynchronous-window width** can shrink when both actors are already
+  highly complex.
+
+A narrow asynchronous window therefore does not imply similar ecological
+decision structure; it can also arise because both actors are pushed against
+the same perfect-information ceiling.
+
+This scaling result is deliberately not framed as a general cognitive
+complexity theorem. Here \(n\) counts declared additive loss modules that exist
+only conditional on waiting.
+
 
 ## Relationship to effective deadline cost
 
@@ -690,10 +822,16 @@ test.
 The generic **value of information** is not new. Decision analysis has long
 treated information as valuable when it changes downstream decisions, including
 sequential information acquisition (Miller 1975), information about multiple
-sources of uncertainty (Samson et al. 1989), and information used across
-multiple decision problems. Ecology likewise has an established value-of-
-information literature in evolutionary fitness and adaptive management
-(Donaldson-Matasci et al. 2010; Williams et al. 2011; Canessa et al. 2015).
+sources of uncertainty (Samson et al. 1989), and stopping problems in which an
+actor chooses between irreversible action and waiting for more accurate
+information (Bhattacharjya & Deleris 2014; Lehrer & Wang 2024). Importantly, Samson et al. show that
+information values across multiple uncertainties are generally **non-additive**.
+The additive decomposition used here is therefore not a generic property of
+value of information: it follows from the explicitly declared additive
+declared additive separability of the seasonal-action and compensation loss modules. Ecology
+likewise has an established value-of-information literature in evolutionary
+fitness and adaptive management (Donaldson-Matasci et al. 2010; Williams et al.
+2011; Canessa et al. 2015).
 
 Nor is the migration biology new in isolation. Stopover sites have explicitly
 been proposed as information sources that can improve arrival timing (Winkler
@@ -705,9 +843,11 @@ PAYOFF-B therefore does **not** claim novelty for:
 
 - information having value for more than one downstream choice;
 - sequential value of information;
+- threshold policies for waiting versus irreversible action under uncertainty;
 - stopover information;
 - behavioral compensation during migration; or
-- generic additivity of expected losses under risk neutrality.
+- generic value-of-information additivity; the present sum is licensed only
+  by the declared additive separability of the loss structure.
 
 The candidate contribution is narrower: embed a downstream compensation
 decision **inside the cost of waiting for the focal seasonal cue**, then solve
@@ -723,7 +863,10 @@ the resulting information deadline exactly. In that construction:
    but dual-use information yields a finite reliability threshold.
 
 These are deadline-specific consequences of ordinary value-of-information
-logic, rather than a new general theory of information value.
+logic under a special separable ecology, rather than a new general theory of
+information value. The novelty claim should therefore be attached to the
+**information-deadline geometry and its ecological interpretation**, not to
+value-of-information theory itself.
 
 References for this boundary:
 
@@ -732,6 +875,11 @@ References for this boundary:
 - Samson D, Wirth A, Rickard J (1989) The value of information from multiple
   sources of uncertainty in decision analysis. *European Journal of
   Operational Research* 39:254–260. DOI: 10.1016/0377-2217(89)90163-X.
+- Bhattacharjya D, Deleris LA (2014) The Value of Information in Some
+  Variations of the Stopping Problem. *Decision Analysis* 11:189–203.
+  DOI: 10.1287/deca.2014.0298.
+- Lehrer E, Wang T (2024) The value of information in stopping problems.
+  *Economic Theory* 78:619–648. DOI: 10.1007/s00199-023-01543-8.
 - Donaldson-Matasci MC, Bergstrom CT, Lachmann M (2010) The fitness value of
   information. *Oikos* 119:219–230. DOI:
   10.1111/j.1600-0706.2009.17781.x.
