@@ -59,6 +59,14 @@ def test_information_figures_include_core_headlines(tmp_path):
     )
 
     assert "transiently worsen coordination" in fig2
+    assert "Raw waiting time can rank thresholds backwards" in fig2
+    assert "raw delay δ = 0.20" in fig2
+    assert "raw delay δ = 0.40" in fig2
+    assert "D_eff = 0.20" in fig2
+    assert "D_eff = 0.02" in fig2
+    assert "q_wait = 0.875" in fig2
+    assert "q_wait = 0.7625" in fig2
+    assert "2× longer raw wait → lower threshold" in fig2
     assert "52 / 364 strict-memory cells" in fig3
     assert "0 / 404 strict-memory cells" in fig3
     assert "Information distance within migratory birds" in fig5
