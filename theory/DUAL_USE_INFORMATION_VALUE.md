@@ -828,7 +828,7 @@ information (Bhattacharjya & Deleris 2014; Lehrer & Wang 2024). Importantly, Sam
 information values across multiple uncertainties are generally **non-additive**.
 The additive decomposition used here is therefore not a generic property of
 value of information: it follows from the explicitly declared additive
-declared additive separability of the seasonal-action and compensation loss modules. Ecology
+separability of the seasonal-action and compensation loss modules. Ecology
 likewise has an established value-of-information literature in evolutionary
 fitness and adaptive management (Donaldson-Matasci et al. 2010; Williams et al.
 2011; Canessa et al. 2015).
@@ -839,11 +839,19 @@ et al. 2014); route predictability can change optimal migration progression
 (Bauer et al. 2020); and migrants can compensate en route for phenological
 error by changing speed and stopover use (Ortega et al. 2023).
 
+Nor is **information acquisition in a coordination game** new in itself. Liao
+& Szkup (2026) study a global game in which heterogeneous agents can acquire
+additional private information before acting, and use the framework to analyze
+coordination failure. More generally, value of information in multi-decision
+influence diagrams has an established formal literature (van Merwijk, Carey &
+Everitt 2022).
+
 PAYOFF-B therefore does **not** claim novelty for:
 
 - information having value for more than one downstream choice;
 - sequential value of information;
 - threshold policies for waiting versus irreversible action under uncertainty;
+- information acquisition interacting with strategic coordination in general;
 - stopover information;
 - behavioral compensation during migration; or
 - generic value-of-information additivity; the present sum is licensed only
@@ -880,6 +888,12 @@ References for this boundary:
   DOI: 10.1287/deca.2014.0298.
 - Lehrer E, Wang T (2024) The value of information in stopping problems.
   *Economic Theory* 78:619–648. DOI: 10.1007/s00199-023-01543-8.
+- van Merwijk C, Carey R, Everitt T (2022) A Complete Criterion for Value of
+  Information in Soluble Influence Diagrams. *Proceedings of the AAAI
+  Conference on Artificial Intelligence* 36:10034–10041.
+  DOI: 10.1609/aaai.v36i9.21242.
+- Liao X, Szkup M (2026) Coordination with sequential information acquisition.
+  *Theoretical Economics* 21:132–166. DOI: 10.3982/TE5938.
 - Donaldson-Matasci MC, Bergstrom CT, Lachmann M (2010) The fitness value of
   information. *Oikos* 119:219–230. DOI:
   10.1111/j.1600-0706.2009.17781.x.
