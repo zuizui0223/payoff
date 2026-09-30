@@ -279,6 +279,15 @@ Detected non-standard Python import roots:
 {chr(10).join("- " + dep for dep in python_deps) if python_deps else "- none"}
 
 The declared empirical Python environment is also recorded in `pyproject.toml`.
+For full empirical Python reproduction run:
+
+`python -m pip install -e ".[test,empirical]"`
+
+This installs `statsmodels>=0.14` together with the declared numerical and
+data dependencies. The repository's `empirical-extras` CI job runs the
+lambda-estimator tests under that environment and fails if any are skipped.
+A minimal environment without optional empirical dependencies may intentionally
+skip those estimator tests.
 
 R: the broad-bird scripts use base R plus `mgcv`.
 
