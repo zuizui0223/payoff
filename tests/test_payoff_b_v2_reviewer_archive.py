@@ -98,6 +98,9 @@ def test_preoutcome_reviewer_archive_is_anonymous_and_complete(tmp_path: Path):
     assert "10.7488/ds/2215" in readme
     assert "10.1038/s41559-018-0543-1" in readme
     assert "10.1111/gcb.14160" in readme
+    assert 'python -m pip install -e ".[test,empirical]"' in readme
+    assert "statsmodels>=0.14" in readme
+    assert "fails if any are skipped" in readme
 
     for path in out.rglob("*"):
         if path.is_file():
