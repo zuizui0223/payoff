@@ -96,7 +96,7 @@ def outcome_cover_letter(result_json: Path) -> str:
 
 Dear Editors,
 
-Please consider our Research Article, **“Effective information deadlines can desynchronize seasonal interactions
+Please consider our Research Article, **“Information deadlines can desynchronize seasonal interactions
 under environmental change,”** for *Global Ecology and
 Biogeography*.
 
