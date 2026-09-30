@@ -1,4 +1,4 @@
-# Better information can fail to restore seasonal coordination under environmental change
+# Information deadlines can desynchronize seasonal interactions under environmental change
 
 **Status:** PAYOFF-B Paper 2 canonical manuscript, V2 PREOUTCOME  
 **Lineage:** absorbs the Paper 2 publication role from `PAYOFF_B_INTEGRATED_TRACKING_ECOLOGY_V1_PREOUTCOME.md`; V1 is frozen as temporal-buffering provenance/rollback and is not a separate submission candidate while V2 is active.  
@@ -32,7 +32,7 @@ Mismatch is important, but it compresses several different ecological problems. 
 
 Migration makes the information problem especially clear. A resident organism can often sample local spring directly. A long-distance migrant must make some decisions before the destination state is observed. Environmental conditions at wintering or stopover sites can provide predictive information, but that information need not remain reliable under climate change. This general problem is established in migration theory and empirical work: migrants use remote environmental cues, environmental predictability changes optimal migration timing, and climate change can decouple cues from the later conditions that determine fitness (Kölzsch et al., 2015; Bauer et al., 2020; Tomotani et al., 2021). PAYOFF-B therefore does not treat cue–driver decoupling itself as a new idea.
 
-The unresolved problem is what happens **after cue quality is allowed to vary among decision contexts**. Interacting species do not necessarily face the same cost of delaying action. Early arrival can affect rank, mating opportunities or territory acquisition; later decisions can use richer local information. Thus two species, or two demographic classes within a species, can observe the same future cue but rationally begin using it at different reliability thresholds.
+The unresolved problem is what happens **after cue quality is allowed to vary among decision contexts**. Interacting species do not necessarily face the same cost of delaying action. Crucially, that cost is not the number of days delayed: organisms can compress migration or compensate later, and compensation can itself carry fitness costs. We therefore distinguish raw waiting time from an **effective deadline cost** that combines nonrecoverable waiting loss with the least costly feasible downstream compensation. Early arrival can affect rank, mating opportunities or territory acquisition; later decisions can use richer local information. Thus two species, or two demographic classes within a species, can observe the same future cue but rationally begin using it at different reliability thresholds.
 
 Game-theoretic phenology already shows that individually selected timing can differ from a simple system-level optimum under climate change (Johansson & Jonzén, 2012). This immediately produces a counterintuitive possibility: better information need not improve ecological coordination monotonically. If one actor begins waiting for a cue before another, the first becomes informed while its partner remains committed to the previous timing convention. Coordination can worsen during the transition from shared ignorance to shared information.
 
@@ -40,7 +40,7 @@ Interaction adds a second problem. Once a seasonal network has coordinated on on
 
 We develop this argument in four layers.
 
-First, we derive an exact **information-deadline theorem** for a binary seasonal decision. It gives the cue reliability at which information becomes actionable, the actor-specific threshold at which waiting for that information becomes worthwhile, and the exact width of the information-induced desynchronization window between two actors with different delay costs.
+First, we derive an exact **information-deadline theorem** for a binary seasonal decision. It gives the cue reliability at which information becomes actionable, the actor-specific threshold at which waiting for that information becomes worthwhile, and the exact width of the information-induced desynchronization window between two actors with different effective deadline costs. Those costs need not preserve the ordering of raw waiting durations.
 
 Second, we embed information acquisition in an interaction game. We show conditions under which an obsolete uninformed profile and a fully informed profile are both strict equilibria under perfect environmental information, even though the informed profile has higher joint payoff. We then perturb cue quality down and back up to ask whether environmental recovery restores information use, and derive the minimum voluntary coalition and temporary informed seed needed to restart recovery.
 
@@ -50,7 +50,7 @@ Fourth, we retain the earlier PAYOFF-B temporal-buffering result as a capacity l
 
 Our central theoretical conclusion is:
 
-> **Seasonal adaptation can fail even when an adequate response exists and environmental information later becomes perfect, because interacting organisms can face different decision deadlines and information use can itself become a coordination state.**
+> **Seasonal adaptation can fail even when an adequate response exists and environmental information later becomes perfect, because interacting organisms can face different effective decision deadlines and information use can itself become a coordination state.**
 
 ---
 
@@ -483,7 +483,7 @@ The exact desynchronization-width identity
 
 gives a direct comparative prediction: greater heterogeneity in effective deadline costs widens asynchronous cue uptake, whereas larger timing-error losses compress that interval because both actors value information sooner.
 
-The key empirical warning is that **elapsed waiting time does not generally order this quantity**. An organism can wait longer yet face a lower \(D_{eff}\) if it can compress migration or compensate later; conversely, complete recovery of downstream timing can leave a positive direct cost \(J\). Migration distance, departure date and waiting duration are therefore unsafe proxies for information-use thresholds unless a cost-and-compensation model links them to \(D_{eff}\). In principle they can rank two actors in the wrong order.
+The key empirical warning is that **elapsed waiting time does not generally order this quantity**. An organism can wait longer yet face a lower \(D_{eff}\) if it can compress migration or compensate later; conversely, complete recovery of downstream timing can leave a positive direct cost \(J\). Migration distance, departure date and waiting duration are therefore unsafe proxies for information-use thresholds unless a cost-and-compensation model links them to \(D_{eff}\). In principle they can rank two actors in the wrong order. American redstarts give a concrete natural example of the underlying mechanism: birds departing about 10 days late migrated 43% faster, yet this compensatory pattern was associated with a reported 6.3% decrease in annual survival (Dossman et al., 2023). This supports compensation-with-cost, not an estimate of \(D_{eff}\) or cue-use thresholds.
 
 The prediction is transitional, not that information is harmful: both actors ignore poor cues and use sufficiently reliable cues, with mismatch concentrated between those regimes.
 
@@ -604,7 +604,7 @@ The exact threshold and bistability conditions make that conjunction testable ra
 
 Seasonal adaptation is not limited only by how fast organisms can move or how far they can shift phenology.
 
-An organism may possess an adequate response but face a decision before useful information becomes available. Interacting organisms can face different costs of waiting, causing them to begin using the same improving cue at different reliability thresholds. Better information can therefore transiently worsen coordination.
+An organism may possess an adequate response but face a decision before useful information becomes available. Interacting organisms can face different effective costs of waiting, even when raw delays suggest the opposite ordering, causing them to begin using the same improving cue at different reliability thresholds. Better information can therefore transiently worsen coordination.
 
 The stronger result is historical. Once an information-using convention collapses, restoring environmental information can be insufficient. Under perfect cue accuracy, an obsolete timing convention and a better informed convention can both be strict equilibria. The informed state can have higher joint payoff while no actor benefits from adopting it first. But the trap need not require network-wide intervention: a temporary informed seed can change neighbour incentives and nucleate recovery, with the minimum rescue set determined by network position.
 
@@ -631,6 +631,7 @@ The framework therefore predicts that climate adaptation can fail not only becau
 - Bauer S, McNamara JM, Barta Z (2020) Environmental variability, reliability of information and the timing of migration. *Proceedings of the Royal Society B* 287:20200622. DOI: 10.1098/rspb.2020.0622.
 - Bêty J, Giroux J-F, Gauthier G (2004) Individual variation in timing of migration: causes and reproductive consequences in greater snow geese (*Anser caerulescens atlanticus*). *Behavioral Ecology and Sociobiology* 57:1–8. DOI: 10.1007/s00265-004-0840-3.
 - Burgess MD, Smith KW, Evans KL, Leech D, Pearce-Higgins JW, Branston CJ, Briggs K, Clark JR, du Feu CR, Lewthwaite K, Nager RG, Sheldon BC, Smith JA, Whytock RC, Willis SG, Phillimore AB (2018) Tritrophic phenological match–mismatch in space and time. *Nature Ecology & Evolution* 2:970–975. DOI: 10.1038/s41559-018-0543-1.
+- Dossman BC, Rodewald AD, Studds CE, Marra PP (2023) Migratory birds with delayed spring departure migrate faster but pay the costs. *Ecology* 104:e3938. DOI: 10.1002/ecy.3938.
 - Freimuth J, Bossdorf O, Scheepens JF, Willems FM (2022) Climate warming changes synchrony of plants and pollinators. *Proceedings of the Royal Society B* 289:20212142. DOI: 10.1098/rspb.2021.2142.
 - Grandmont T, Fast P, Grentzmann I, Gauthier G, Bêty J, Legagneux P (2023) Should I breed or should I go? Manipulating individual state during migration influences breeding decisions in a long-lived bird species. *Functional Ecology* 37:602–613. DOI: 10.1111/1365-2435.14256.
 - Legagneux P, Fast PLF, Gauthier G, Bêty J (2012) Manipulating individual state during migration provides evidence for carry-over effects modulated by environmental conditions. *Proceedings of the Royal Society B* 279:876–883. DOI: 10.1098/rspb.2011.1351.

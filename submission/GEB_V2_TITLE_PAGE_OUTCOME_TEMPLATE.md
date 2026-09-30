@@ -5,7 +5,7 @@
 
 ## Title
 
-Better information can fail to restore seasonal coordination under environmental change
+Information deadlines can desynchronize seasonal interactions under environmental change
 
 ## Running title
 
