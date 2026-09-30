@@ -19,8 +19,49 @@
       "do not select years based on effect significance",
       "do not use 2009 only as primary because it has the strongest published effect",
       "do not call captivity hours natural waiting cost D",
-      "do not combine with GPS q_wait outcome before a separate joint preregistration"
+      "do not combine with GPS q_wait outcome before a separate joint preregistration",
+      "do not use the 2009-only public Dryad as a substitute primary duration-fitness test because 2009 is already known to be a strong published effect year"
     ]
   },
-  "gate": "Inspect public file manifest and documentation before freezing exact columns, endpoint, random effects, and uncertainty estimator."
+  "gate": "Inspect public file manifest and documentation before freezing exact columns, endpoint, random effects, and uncertainty estimator.",
+  "public_2026_same_experiment_source": {
+    "dryad_doi": "10.5061/dryad.c2fqz61jr",
+    "associated_article": "Grentzmann et al. 2025/2026 Ecology and Evolution, DOI 10.1002/ece3.71812",
+    "status": "PUBLIC_SCHEMA_RESOLVED_2009_ONLY",
+    "relevant_files": [
+      "data_exp_Feb2025.txt",
+      "cond2009_July2024.txt",
+      "cortformat_April2025.txt",
+      "hist_capt_headed_corttps_cond_days_corrdate_Feb2025_2.txt",
+      "CaptureHistoryData_April2025.txt",
+      "CortFitness_April2025_clean2.R"
+    ],
+    "key_fields": [
+      "UNIKCAPT capture-group identifier",
+      "DaysInCap",
+      "FoodTreatment control/fed/unfed",
+      "pre/post mass and body condition",
+      "CORT samples/timing",
+      "Young autumn young-presence with NA for females not reobserved",
+      "capture histories and E-SURGE treatment/day covariates"
+    ],
+    "assignment_unit": "capture group, not individual; treatment groups were assigned in a randomly predefined order",
+    "primary_delay_fitness_substitution": "FORBIDDEN",
+    "reason": "the public source covers 2009 only, already known from the published 3-year analysis to be a strong carry-over-effect year; promoting a 2009-only duration-fitness analysis would violate the frozen rule against choosing the strongest published year"
+  },
+  "public_2026_mechanistic_use": {
+    "role": "J-like mechanism decomposition only, not natural D_eff calibration",
+    "permitted_primary": "within fed captive birds, test whether longer captivity changes post-treatment body-condition loss while deliberate fasting is absent",
+    "exposure": "DaysInCap, 2-4 days, assigned at capture-group level",
+    "response": "body-condition change from cond2009_July2024 joined to treatment/duration through Collar and UNIKCAPT",
+    "uncertainty": "capture-group clustered; individual n must not be treated as treatment-level replication",
+    "minimum_gate": [
+      "at least 6 fed capture groups",
+      "at least 2 distinct nonzero captivity durations and preferably all 2/3/4-day levels",
+      "at least 30 fed females with pre/post body-condition measurements",
+      "no outcome-based exclusion of capture groups"
+    ],
+    "secondary": "CORT-at-release versus DaysInCap within fed birds may be descriptive only",
+    "claim_ceiling": "physiological/energetic direct-cost mechanism consistent with a J(delta) component; not fitness-equivalent J, not D_eff, not q_wait"
+  }
 }

@@ -1,0 +1,55 @@
+name: PAYOFF-B snow goose public J mechanism
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-snow-goose-public-j-mechanism-20260930
+    paths:
+      - 'data/payoff_b_snow_goose_dryad_delay_cost_contract_20260929.json'
+      - 'src/snow_goose_j_mechanism.py'
+      - 'scripts/payoff_b_snow_goose_j_mechanism.py'
+      - 'scripts/probe_snow_goose_2026_dryad_manifest.py'
+      - 'scripts/materialize_snow_goose_2026_dryad.py'
+      - 'tests/test_snow_goose_j_mechanism.py'
+      - 'tests/test_snow_goose_2026_dryad_materializer.py'
+      - 'tests/test_snow_goose_j_mechanism_integration.py'
+      - '.github/workflows/payoff-b-snow-goose-public-j-mechanism.yml'
+  pull_request:
+    paths:
+      - 'data/payoff_b_snow_goose_dryad_delay_cost_contract_20260929.json'
+      - 'src/snow_goose_j_mechanism.py'
+      - 'scripts/payoff_b_snow_goose_j_mechanism.py'
+      - 'scripts/probe_snow_goose_2026_dryad_manifest.py'
+      - 'scripts/materialize_snow_goose_2026_dryad.py'
+      - 'tests/test_snow_goose_j_mechanism.py'
+      - 'tests/test_snow_goose_2026_dryad_materializer.py'
+      - '.github/workflows/payoff-b-snow-goose-public-j-mechanism.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: payoff-b-snow-goose-j-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[test,empirical]' requests
+      - run: >
+          python -m pytest -q
+          tests/test_snow_goose_j_mechanism.py
+          tests/test_snow_goose_2026_dryad_materializer.py
+          tests/test_snow_goose_j_mechanism_integration.py
+      - run: python scripts/payoff_b_snow_goose_j_mechanism.py --help
+      - run: python scripts/materialize_snow_goose_2026_dryad.py --help
+      - run: python scripts/probe_snow_goose_2026_dryad_manifest.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-snow-goose-2026-dryad-manifest
+          path: outputs/payoff_b_snow_goose_2026_dryad_manifest.json
+          if-no-files-found: error
