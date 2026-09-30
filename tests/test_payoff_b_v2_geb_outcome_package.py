@@ -168,8 +168,17 @@ def test_four_scientific_results_plus_access_blocked_build_v2_packages(tmp_path:
 
         assert result_class not in main
         normalized_main = " ".join(main.split())
+        assert normalized_main.startswith(
+            "# Information deadlines can desynchronize seasonal interactions "
+            "under environmental change"
+        )
+        assert "Dossman et al., 2023" in normalized_main
         assert "Raw waiting time therefore does not generally rank effective deadlines" in normalized_main
         assert "Theory predicts that environmental information can recover before ecological coordination does." in normalized_main
+
+        normalized_cover = " ".join(cover.split())
+        assert "effective waiting cost" in normalized_cover
+        assert "raw waiting duration" in normalized_cover
         assert result_class in si
         assert claim["scientific_result"] == result_class
         assert claim["retuning_permitted"] is False
