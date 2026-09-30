@@ -615,6 +615,88 @@ This distinction prevents a misleading intuition: **more uses of information
 do not necessarily imply earlier information use** when those uses correspond
 to additional problems created by waiting.
 
+### Exact decision-complexity scaling
+
+Suppose the actor has \(n\) identical balanced conditional decisions, each
+with symmetric wrong-response loss \(G\). Every such module has prior risk
+\(G/2\) and is active for all \(q>1/2\). Since waiting cannot become optimal
+below the focal actionability boundary, all conditional modules are active at
+the waiting threshold.
+
+The exact threshold is therefore
+
+\[
+\boxed{
+q_{\mathrm{wait}}(n)
+=
+1-
+\frac{
+R_{A0}-J
+}{
+S_A+nG
+}.
+}
+\]
+
+For \(J<R_{A0}\) and \(G>0\),
+
+\[
+\frac{\partial q_{\mathrm{wait}}}{\partial n}
+=
+\frac{
+(R_{A0}-J)G
+}{
+(S_A+nG)^2
+}
+>0,
+\]
+
+while
+
+\[
+\frac{\partial^2 q_{\mathrm{wait}}}{\partial n^2}
+=
+-
+\frac{
+2(R_{A0}-J)G^2
+}{
+(S_A+nG)^3
+}
+<0.
+\]
+
+Thus each additional waiting-contingent decision raises the required cue
+reliability, but the marginal penalty diminishes. For fixed \(G>0\),
+
+\[
+\lim_{n\to\infty}q_{\mathrm{wait}}(n)=1.
+\]
+
+A system can therefore approach a **near-perfect-information requirement**
+solely because waiting opens many downstream decisions, even though the same
+cue informs all of them.
+
+For two otherwise identical actors differing only in module count,
+
+\[
+\boxed{
+\Delta q
+=
+\frac{
+(R_{A0}-J)G|n_2-n_1|
+}{
+(S_A+n_1G)(S_A+n_2G)
+}.
+}
+\]
+
+So heterogeneity in the **number of waiting-contingent decisions** is itself a
+source of asynchronous information use.
+
+This scaling result is deliberately not framed as a general cognitive
+complexity theorem. Here \(n\) counts declared additive loss modules that exist
+only conditional on waiting.
+
 
 ## Relationship to effective deadline cost
 
