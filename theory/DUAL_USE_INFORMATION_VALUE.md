@@ -693,6 +693,56 @@ For two otherwise identical actors differing only in module count,
 So heterogeneity in the **number of waiting-contingent decisions** is itself a
 source of asynchronous information use.
 
+### Threshold crowding at high conditional complexity
+
+More conditional decisions raise each actor's absolute threshold, but they do
+not necessarily widen the gap between actors.
+
+Let actor 1 have \(n\) identical modules and actor 2 have \(n+k\), with a
+fixed count difference \(k>0\). Then
+
+\[
+\boxed{
+\Delta q(n,k)
+=
+\frac{
+(R_{A0}-J)Gk
+}{
+(S_A+nG)(S_A+(n+k)G)
+}.
+}
+\]
+
+For fixed \(k\) and \(G>0\),
+
+\[
+\frac{\partial \Delta q}{\partial n}<0,
+\qquad
+\lim_{n\to\infty}\Delta q=0,
+\]
+
+while simultaneously
+
+\[
+q_{\mathrm{wait}}(n)\to1
+\quad\text{and}\quad
+q_{\mathrm{wait}}(n+k)\to1.
+\]
+
+Thus high conditional complexity produces **threshold crowding near perfect
+information**: actors remain jointly uninformed over most of the cue-quality
+range and then switch at very similar, very high reliabilities.
+
+This distinguishes two effects of complexity:
+
+- **absolute delay in information uptake** grows with module count;
+- **pairwise asynchronous-window width** can shrink when both actors are already
+  highly complex.
+
+A narrow asynchronous window therefore does not imply similar ecological
+decision structure; it can also arise because both actors are pushed against
+the same perfect-information ceiling.
+
 This scaling result is deliberately not framed as a general cognitive
 complexity theorem. Here \(n\) counts declared additive loss modules that exist
 only conditional on waiting.
