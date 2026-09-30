@@ -57,6 +57,7 @@ DIRECT_FILES = (
     "data/payoff_b_cross_system_information_result_20260928.json",
     "data/payoff_b_pairwise_tracking_bridge_20260929.json",
     "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
+    "docs/PAYOFF_B_REDSTART_EFFECTIVE_DEADLINE_BRIDGE_20261001.md",
     "data/payoff_b_cv24c_cue_driver_result_20260927.json",
     "data/payoff_b_hoge_veluwe_network_hysteresis_contract_20260927.json",
     "data/payoff_b_hoge_veluwe_source_gate_a_result_20260928.json",
@@ -279,6 +280,15 @@ Detected non-standard Python import roots:
 {chr(10).join("- " + dep for dep in python_deps) if python_deps else "- none"}
 
 The declared empirical Python environment is also recorded in `pyproject.toml`.
+For full empirical Python reproduction run:
+
+`python -m pip install -e ".[test,empirical]"`
+
+This installs `statsmodels>=0.14` together with the declared numerical and
+data dependencies. The repository's `empirical-extras` CI job runs the
+lambda-estimator tests under that environment and fails if any are skipped.
+A minimal environment without optional empirical dependencies may intentionally
+skip those estimator tests.
 
 R: the broad-bird scripts use base R plus `mgcv`.
 
@@ -306,6 +316,10 @@ Raw source datasets are not silently redistributed in this archive.
   10.1111/gcb.14160. The 10-site temperature-sensitivity and 0.94 d/decade
   divergence results are recorded as published source results in the same
   bridge receipt; underlying multi-scheme nest records are not redistributed.
+- American redstart compensation-with-cost bridge: Dossman et al. (2023),
+  Ecology 104:e3938, DOI 10.1002/ecy.3938. The archive includes a source-boundary
+  memo recording the published delayed-departure, faster-migration and survival
+  pattern and explicitly forbidding reinterpretation as natural D_eff or q_wait.
 
 Where source repositories require their own access terms, reviewers should use
 the cited source records; derived result receipts in this archive document the

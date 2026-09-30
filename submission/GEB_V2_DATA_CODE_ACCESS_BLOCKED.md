@@ -25,6 +25,13 @@ and uses exact and synthetic model analyses. Original empirical source datasets
 remain available from their cited publications and repository records. Raw
 third-party datasets are not silently redistributed in the reviewer archive.
 
+For full empirical Python reproduction, install the declared optional
+environment with `python -m pip install -e ".[test,empirical]"`. This includes
+`statsmodels>=0.14`. The repository's empirical-environment CI explicitly
+fails if the lambda-estimator tests are skipped; skips in a minimal environment
+without optional empirical dependencies are therefore not treated as evidence
+that the estimators were validated there.
+
 ## Publication archive
 
 Before acceptance/publication, replace the blinded reviewer delivery route with

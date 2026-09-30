@@ -35,6 +35,15 @@ def test_v2_geb_blinded_source_passes_hard_gates():
     text = source.build_source()
     result = audit.audit(text)
 
+    assert text.startswith(
+        "# Information deadlines can desynchronize seasonal interactions "
+        "under environmental change"
+    )
+    assert "Dossman et al., 2023" in text
+    assert "Raw waiting time therefore does not generally rank effective deadlines" in text
+    assert 'python -m pip install -e ".[test,empirical]"' in text
+    assert "statsmodels>=0.14" in text
+    assert "fails if any of those tests are skipped" in text
     assert result["all_preoutcome_hard_gates_pass"]
     assert result["metrics"]["abstract_words"] <= 300
     assert result["metrics"]["main_body_words"] <= 5000
