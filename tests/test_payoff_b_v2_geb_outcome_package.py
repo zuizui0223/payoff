@@ -293,6 +293,9 @@ def test_activated_access_blocked_clears_author_decision_science_blocker(tmp_pat
     assert "was not executed" in normalized_access_data
     assert "not evidence for or against" in normalized_access_data
     assert "future authenticated execution remains permissible" in normalized_access_data
+    assert 'python -m pip install -e ".[test,empirical]"' in normalized_access_data
+    assert "statsmodels>=0.14" in normalized_access_data
+    assert "lambda-estimator tests are skipped" in normalized_access_data
 
     claim = json.loads(
         (out / "GEB_V2_AIKENS_CLAIM_STATE.json").read_text(encoding="utf-8")
