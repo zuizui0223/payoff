@@ -1,6 +1,6 @@
 # PAYOFF-B two-paper publication architecture — current state
 
-Status: **adopted two-paper publication architecture; canonical publication state updated 2026-09-27**
+Status: **adopted two-paper publication architecture; canonical publication state updated 2026-10-01**
 
 > **2026-09-27 canonical amendment:** Paper 2 is
 > `manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md`.
@@ -100,7 +100,7 @@ equilibria.
 **T8.** Temporary cue degradation can collapse coordinated information use, and
 restoration to perfect cue accuracy need not restore the informed state.
 
-These two layers carry the abstract.
+These two layers carry the abstract. One direct methodological consequence of T2–T3 is also surfaced there: **raw waiting time does not generally rank effective deadlines and can therefore mis-rank information-use thresholds**. This is an implication of the core deadline theorem, not a separate third abstract spine.
 
 ### Secondary theory retained in Results / Discussion
 
@@ -111,7 +111,7 @@ weight in the abstract:
 - **T5:** deadline placement on the interaction network changes disruption;
 - **T6:** private and joint value of waiting can diverge;
 - **T9:** acquisition memory and topology-dependent memory are distinct;
-- compensated/hidden-deadline refinements that define `D_eff`;
+- hidden-state refinements in which the decision-relevant cost is conditional expected `D_eff`;
 - dual-use information, where the focal cue can also inform downstream
   compensation and make `D_eff(q)` cue-dependent;
 - exact decision-complexity/headroom scaling and threshold crowding near
@@ -122,6 +122,10 @@ weight in the abstract:
 
 This ordering is deliberate. Paper 2 should not read as a catalogue of
 theorems.
+
+### GEB-facing length and abstract rule
+
+As of the 2026-10-01 author-guideline check, a GEB Research Article is typically about **5,000 words in the main body**, with a **structured abstract of at most 300 words**. The canonical V2 branch therefore uses the required headings (Aim, Location, Time period, Major taxa studied, Methods, Results, Main conclusions), keeps the effective-deadline methodological warning in Results, and compresses secondary theorem material rather than removing the T1–T3 / T7–T8 spine.
 
 ## Natural evidence hierarchy
 
