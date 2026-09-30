@@ -24,6 +24,8 @@ def test_novelty_receipt_limits_claim_to_deadline_geometry():
 
     assert receipt["status"] == "LITERATURE_SCREEN_COMPLETE_NONEXHAUSTIVE"
     assert "generic value of information" in receipt["non_novel"]
+    assert "information-quality thresholds in stopping problems" in receipt["non_novel"]
+    assert "stopping_problems" in receipt["critical_prior_boundary"]
     assert (
         "PAYOFF-B V_A+V_C decomposition is licensed only under declared additive separability"
         == receipt["critical_prior_boundary"]["implication"]
