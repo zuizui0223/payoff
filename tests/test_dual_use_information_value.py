@@ -711,3 +711,52 @@ def test_direct_cost_limit_blocks_waiting_for_any_number_of_modules():
         )
         assert result.wait_threshold is None
         assert result.headroom is None
+
+
+
+def test_fixed_module_count_gap_has_shrinking_asynchrony_at_high_complexity():
+    widths = []
+    lower_thresholds = []
+    for baseline_n in (0, 1, 5, 20, 100):
+        width = identical_balanced_module_count_window(
+            direct_wait_cost=0.10,
+            actor_1_module_count=baseline_n,
+            actor_2_module_count=baseline_n + 2,
+            conditional_loss=0.50,
+            **ACTION,
+        )
+        one = identical_balanced_module_complexity_scaling(
+            direct_wait_cost=0.10,
+            conditional_module_count=baseline_n,
+            conditional_loss=0.50,
+            **ACTION,
+        )
+        assert width is not None
+        assert one.wait_threshold is not None
+        widths.append(width)
+        lower_thresholds.append(one.wait_threshold)
+
+    assert widths == sorted(widths, reverse=True)
+    assert lower_thresholds == sorted(lower_thresholds)
+    assert lower_thresholds[-1] > 0.99
+    assert widths[-1] < widths[0] / 100
+
+
+def test_module_count_window_has_exact_fixed_gap_formula():
+    n = 7
+    k = 3
+    g = 0.4
+    width = identical_balanced_module_count_window(
+        direct_wait_cost=0.10,
+        actor_1_module_count=n,
+        actor_2_module_count=n + k,
+        conditional_loss=g,
+        **ACTION,
+    )
+    expected = (
+        (0.40 - 0.10)
+        * g
+        * k
+        / ((1.60 + n * g) * (1.60 + (n + k) * g))
+    )
+    assert width == pytest.approx(expected)
