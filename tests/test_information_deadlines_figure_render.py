@@ -59,7 +59,7 @@ def test_information_figures_include_core_headlines(tmp_path):
     )
 
     assert "transiently worsen coordination" in fig2
-    assert "Raw waiting time can rank thresholds backwards" in fig2
+    assert "Raw delay can reverse threshold rank" in fig2
     assert "raw delay δ = 0.20" in fig2
     assert "raw delay δ = 0.40" in fig2
     assert "D_eff = 0.20" in fig2
