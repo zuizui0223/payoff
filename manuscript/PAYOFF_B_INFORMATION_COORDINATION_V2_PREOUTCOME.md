@@ -32,7 +32,7 @@ Mismatch is important, but it compresses several different ecological problems. 
 
 Migration makes the information problem especially clear. A resident organism can often sample local spring directly. A long-distance migrant must make some decisions before the destination state is observed. Environmental conditions at wintering or stopover sites can provide predictive information, but that information need not remain reliable under climate change. This general problem is established in migration theory and empirical work: migrants use remote environmental cues, environmental predictability changes optimal migration timing, and climate change can decouple cues from the later conditions that determine fitness (Kölzsch et al., 2015; Bauer et al., 2020; Tomotani et al., 2021). PAYOFF-B therefore does not treat cue–driver decoupling itself as a new idea.
 
-The unresolved problem is what happens **after cue quality is allowed to vary among decision contexts**. Interacting species do not necessarily face the same cost of delaying action. Early arrival can affect rank, mating opportunities or territory acquisition; later decisions can use richer local information. Thus two species, or two demographic classes within a species, can observe the same future cue but rationally begin using it at different reliability thresholds.
+The unresolved problem is what happens **after cue quality is allowed to vary among decision contexts**. Interacting species do not necessarily face the same cost of delaying action. Crucially, that cost is not the number of days delayed: organisms can compress migration or compensate later, and compensation can itself carry fitness costs. We therefore distinguish raw waiting time from an **effective deadline cost** that combines nonrecoverable waiting loss with the least costly feasible downstream compensation. Early arrival can affect rank, mating opportunities or territory acquisition; later decisions can use richer local information. Thus two species, or two demographic classes within a species, can observe the same future cue but rationally begin using it at different reliability thresholds.
 
 Game-theoretic phenology already shows that individually selected timing can differ from a simple system-level optimum under climate change (Johansson & Jonzén, 2012). This immediately produces a counterintuitive possibility: better information need not improve ecological coordination monotonically. If one actor begins waiting for a cue before another, the first becomes informed while its partner remains committed to the previous timing convention. Coordination can worsen during the transition from shared ignorance to shared information.
 
@@ -40,7 +40,7 @@ Interaction adds a second problem. Once a seasonal network has coordinated on on
 
 We develop this argument in four layers.
 
-First, we derive an exact **information-deadline theorem** for a binary seasonal decision. It gives the cue reliability at which information becomes actionable, the actor-specific threshold at which waiting for that information becomes worthwhile, and the exact width of the information-induced desynchronization window between two actors with different delay costs.
+First, we derive an exact **information-deadline theorem** for a binary seasonal decision. It gives the cue reliability at which information becomes actionable, the actor-specific threshold at which waiting for that information becomes worthwhile, and the exact width of the information-induced desynchronization window between two actors with different effective deadline costs. Those costs need not preserve the ordering of raw waiting durations.
 
 Second, we embed information acquisition in an interaction game. We show conditions under which an obsolete uninformed profile and a fully informed profile are both strict equilibria under perfect environmental information, even though the informed profile has higher joint payoff. We then perturb cue quality down and back up to ask whether environmental recovery restores information use, and derive the minimum voluntary coalition and temporary informed seed needed to restart recovery.
 
@@ -50,7 +50,7 @@ Fourth, we retain the earlier PAYOFF-B temporal-buffering result as a capacity l
 
 Our central theoretical conclusion is:
 
-> **Seasonal adaptation can fail even when an adequate response exists and environmental information later becomes perfect, because interacting organisms can face different decision deadlines and information use can itself become a coordination state.**
+> **Seasonal adaptation can fail even when an adequate response exists and environmental information later becomes perfect, because interacting organisms can face different effective decision deadlines and information use can itself become a coordination state.**
 
 ---
 
@@ -604,7 +604,7 @@ The exact threshold and bistability conditions make that conjunction testable ra
 
 Seasonal adaptation is not limited only by how fast organisms can move or how far they can shift phenology.
 
-An organism may possess an adequate response but face a decision before useful information becomes available. Interacting organisms can face different costs of waiting, causing them to begin using the same improving cue at different reliability thresholds. Better information can therefore transiently worsen coordination.
+An organism may possess an adequate response but face a decision before useful information becomes available. Interacting organisms can face different effective costs of waiting, even when raw delays suggest the opposite ordering, causing them to begin using the same improving cue at different reliability thresholds. Better information can therefore transiently worsen coordination.
 
 The stronger result is historical. Once an information-using convention collapses, restoring environmental information can be insufficient. Under perfect cue accuracy, an obsolete timing convention and a better informed convention can both be strict equilibria. The informed state can have higher joint payoff while no actor benefits from adopting it first. But the trap need not require network-wide intervention: a temporary informed seed can change neighbour incentives and nucleate recovery, with the minimum rescue set determined by network position.
 
