@@ -26,6 +26,9 @@ from src.endogenous_information_timing import (  # noqa: E402
     evaluate_information_timing,
     expected_shared_cue_action_mismatch,
 )
+from src.compensated_information_deadline import (  # noqa: E402
+    linear_compensated_information_threshold,
+)
 from src.information_rescue_coalition import (  # noqa: E402
     minimum_pinned_rescue_coalitions,
     minimum_self_financing_coalitions,
@@ -198,15 +201,38 @@ def figure2():
             )
         )
 
-    out = [text(72, 125, "Expected mismatch under one monotonically improving shared cue", 19, "bold")]
-    x0, x1, y0, y1 = 105, 1115, 170, 555
+    # Separate exact rank-reversal witness from the compensated-deadline theorem:
+    # the actor with twice the raw delay can have the lower D_eff and q_wait.
+    short_raw = linear_compensated_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        raw_delay=0.20,
+        compensation_capacity=0.0,
+        compensation_cost_per_unit=0.0,
+        residual_loss_per_unit=1.0,
+        direct_wait_cost_per_unit=0.0,
+    )
+    long_compensated = linear_compensated_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        raw_delay=0.40,
+        compensation_capacity=0.40,
+        compensation_cost_per_unit=0.0,
+        residual_loss_per_unit=1.0,
+        direct_wait_cost_per_unit=0.05,
+    )
+
+    out = [text(72, 120, "(a) Improving the same cue can transiently increase mismatch", 19, "bold")]
+    x0, x1, y0, y1 = 92, 770, 165, 520
     out.append(axes(x0, y0, x1, y1, "cue accuracy q", "expected action mismatch"))
     for tick in [0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
         x = scale(tick, 0.5, 1.0, x0, x1)
-        out += [line(x, y1, x, y1 + 7), text(x, y1 + 29, f"{tick:.1f}", 14, anchor="middle")]
+        out += [line(x, y1, x, y1 + 7), text(x, y1 + 27, f"{tick:.1f}", 13, anchor="middle")]
     for tick in [0.0, 0.1, 0.2, 0.3, 0.4]:
         y = scale(tick, 0.0, 0.46, y1, y0)
-        out += [line(x0 - 7, y, x0, y), text(x0 - 12, y + 5, f"{tick:.1f}", 14, anchor="end")]
+        out += [line(x0 - 7, y, x0, y), text(x0 - 12, y + 5, f"{tick:.1f}", 13, anchor="end")]
     pts = [
         (
             scale(q, 0.5, 1.0, x0, x1),
@@ -218,21 +244,39 @@ def figure2():
     for q in [0.82, 0.94]:
         x = scale(q, 0.5, 1.0, x0, x1)
         out.append(line(x, y0, x, y1, 2, "5 5"))
-        out.append(text(x, y0 - 12, f"q={q:.2f}", 14, "bold", "middle"))
+        out.append(text(x, y0 - 12, f"q={q:.2f}", 13, "bold", "middle"))
     peak = result["information_induced_desynchronization"]
     px = scale(peak["peak_mismatch_accuracy"], 0.5, 1.0, x0, x1)
     py = scale(peak["peak_mismatch_probability"], 0.0, 0.46, y1, y0)
     out += [
         circle(px, py, 7, "#eeeeee"),
-        text(px + 14, py - 12, f"peak={peak['peak_mismatch_probability']:.3f}", 14, "bold"),
-        text(175, 615, "shared ignorance", 16, "bold", "middle"),
-        text(600, 615, "asymmetric cue use", 16, "bold", "middle"),
-        text(1010, 615, "shared informed response", 16, "bold", "middle"),
-        text(72, 665, "Better information is not monotonically better coordination when partners cross waiting thresholds asynchronously.", 16, "bold"),
+        text(px + 12, py - 10, f"peak={peak['peak_mismatch_probability']:.3f}", 13, "bold"),
+        text(170, 610, "shared ignorance", 14, "bold", "middle"),
+        text(430, 610, "asynchronous uptake", 14, "bold", "middle"),
+        text(700, 610, "shared informed", 14, "bold", "middle"),
+    ]
+
+    bx, by, bw, bh = 825, 150, 305, 405
+    out += [
+        text(825, 120, "(b) Raw delay can reverse threshold rank", 18, "bold"),
+        rect(bx, by, bw, bh, "#fafafa"),
+        text(bx + 18, by + 40, "Exact rank-reversal witness", 15, "bold"),
+        text(bx + 18, by + 78, "Actor A", 15, "bold"),
+        text(bx + 18, by + 105, f"raw delay δ = {short_raw.raw_delay:.2f}", 14),
+        text(bx + 18, by + 132, f"D_eff = {short_raw.effective_delay_cost:.2f}", 14),
+        text(bx + 18, by + 159, f"q_wait = {short_raw.wait_threshold:.3f}", 14),
+        line(bx + 16, by + 181, bx + bw - 16, by + 181, 1),
+        text(bx + 18, by + 220, "Actor B", 15, "bold"),
+        text(bx + 18, by + 247, f"raw delay δ = {long_compensated.raw_delay:.2f}", 14),
+        text(bx + 18, by + 274, "full free timing compensation", 13),
+        text(bx + 18, by + 301, f"D_eff = {long_compensated.effective_delay_cost:.2f}", 14),
+        text(bx + 18, by + 328, f"q_wait = {long_compensated.wait_threshold:.4f}", 14),
+        text(bx + bw / 2, by + 370, "2× longer raw wait → lower threshold", 14, "bold", "middle"),
+        text(72, 675, "Effective deadline cost—not elapsed waiting time—determines when information becomes worth using.", 17, "bold"),
     ]
     return svg_page(
         "Figure 2. Improving information can transiently worsen coordination",
-        "Same cue, unequal waiting costs: D_A=0.30 and D_B=0.10",
+        "Asynchronous uptake follows effective deadline costs; compensation can reverse the ranking implied by raw delay",
         "".join(out),
     )
 

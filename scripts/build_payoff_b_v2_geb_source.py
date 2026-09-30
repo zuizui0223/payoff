@@ -93,8 +93,11 @@ earlier settlement decision but relevant to a later one.
 
 **Figure 2. Improving information can transiently worsen coordination.**
 Expected timing mismatch under one monotonically improving shared cue when two
-actors face different costs of waiting. The exact uptake thresholds delimit the
-asynchronous information-use interval.
+actors face different effective deadline costs. The exact uptake thresholds
+delimit the asynchronous information-use interval. A separate exact witness
+shows that downstream compensation can reverse the ordering implied by raw
+waiting time: an actor waiting twice as long can have a lower effective deadline
+cost and begin using information at lower cue reliability.
 
 **Figure 3. Interaction topology determines whether information shocks are
 stored.** Strict synthetic phase-diagram results separate temporary shock
