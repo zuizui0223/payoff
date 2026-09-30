@@ -1,0 +1,51 @@
+{
+  "audit_id": "payoff_b_snow_goose_published_j_mechanism_audit_20260930",
+  "date": "2026-09-30",
+  "status": "SOURCE_BACKED_PUBLISHED_MECHANISM_AUDIT",
+  "population": "greater snow goose spring-staging captivity experiment, 2007-2009 plus 2009 physiological follow-up",
+  "energetic_pathway": {
+    "source": "Legagneux et al. 2012, Proc R Soc B, DOI 10.1098/rspb.2011.1351",
+    "fed_daily_corrected_mass_change_g_per_day": -9.56,
+    "fed_daily_corrected_mass_change_se": 8.79,
+    "fed_2009_mean_change_g": -15.4,
+    "fed_2009_mean_change_se": 6.9,
+    "interpretation": "fed captivity produced little average body-mass deterioration relative to fasting; strong energetic depletion is not required for captivity carry-over effects"
+  },
+  "endocrine_pathway": {
+    "source": "Grentzmann et al. 2025, Ecology and Evolution, DOI 10.1002/ece3.71812",
+    "release_CORT_day3_vs_day2_beta": 4.97,
+    "release_CORT_day3_vs_day2_ci95": [
+      -9.79,
+      19.72
+    ],
+    "release_CORT_day4_vs_day2_beta": -4.85,
+    "release_CORT_day4_vs_day2_ci95": [
+      -19.6,
+      9.91
+    ],
+    "interpretation": "release CORT was not detectably ordered by captivity duration in the published model"
+  },
+  "fitness_pathway": {
+    "breeding_detection_source": "Grandmont et al. 2023, Functional Ecology, DOI 10.1111/1365-2435.14256",
+    "breeding_detection_days_beta": -0.049,
+    "breeding_detection_days_ci95": [
+      -0.096,
+      -0.001
+    ],
+    "survival_source": "Grentzmann et al. 2025, Ecology and Evolution, DOI 10.1002/ece3.71812",
+    "fed_vs_control_first_year_survival_beta": -0.24,
+    "fed_vs_control_first_year_survival_ci95": [
+      -1.06,
+      0.57
+    ],
+    "interpretation": "captivity duration has a published breeding-suppression signal, while fed treatment does not show a clear first-year survival penalty"
+  },
+  "payoff_b_interpretation": {
+    "supported": "a nonrecoverable waiting-cost term J may have multiple physiological/behavioral pathways rather than a single body-condition mediator",
+    "not_supported": "do not identify natural information-waiting J from captivity duration or from one mediator",
+    "energetic_J_signal": "WEAK_OR_UNRESOLVED_FROM_PUBLISHED_FED_BODY_MASS_RESULT",
+    "endocrine_duration_signal": "NOT_SUPPORTED_IN_PUBLISHED_RELEASE_CORT_MODEL",
+    "breeding_suppression_duration_signal": "SUPPORTED_IN_PUBLISHED_2023_ANALYSIS",
+    "natural_D_eff": "NOT_IDENTIFIED"
+  }
+}

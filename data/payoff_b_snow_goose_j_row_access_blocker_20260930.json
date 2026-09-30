@@ -1,0 +1,39 @@
+{
+  "receipt_id": "payoff_b_snow_goose_j_row_access_blocker_20260930",
+  "date": "2026-09-30",
+  "status": "SOURCE_BYTES_BLOCKED_ROW_VALUES_UNOPENED",
+  "source": {
+    "doi": "10.5061/dryad.c2fqz61jr",
+    "metadata_status": "PUBLIC_J_MECHANISM_SOURCE_READY",
+    "file_count": 13,
+    "required_analysis_files": [
+      {
+        "path": "data_exp_Feb2025.txt",
+        "dryad_file_id": 4844033,
+        "sha256": "87ba7dc9da5a01cad985c8cc45834f5865e80e193e8f6ef89c4db6191a6eafd0"
+      },
+      {
+        "path": "cond2009_July2024.txt",
+        "dryad_file_id": 4844031,
+        "sha256": "c06ea42c27c9bf6b769301031002a47e6f2b3eb5c7337d93674d59fc880c2b7a"
+      }
+    ]
+  },
+  "access_attempts": [
+    {
+      "route": "Dryad API /api/v2/files/<id>/download",
+      "result": "HTTP_401_UNAUTHORIZED"
+    },
+    {
+      "route": "Dryad public front-end /stash/downloads/file_stream/<id> -> /downloads/file_stream/<id>",
+      "result": "HTTP_403_FORBIDDEN"
+    }
+  ],
+  "outcome_open_status": {
+    "table_rows_opened": false,
+    "registered_model_fitted": false,
+    "coefficient_seen": false,
+    "result_classification": "NOT_RUN_SOURCE_ACCESS_BLOCKED"
+  },
+  "scientific_rule": "source-access failure is not evidence for or against a J-like mechanism; no model or subset may be retuned in response"
+}
