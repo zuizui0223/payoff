@@ -57,14 +57,23 @@ def test_v2_abstract_keeps_only_the_core_deadline_and_recovery_story():
     abstract = _abstract(text)
     words = _word_count(abstract)
 
-    assert 150 <= words <= 210
-    assert "information deadlines" in abstract
-    assert "different delay costs" in abstract
-    assert "better information increases" in abstract
-    assert "strict Nash equilibria" in abstract
-    assert "perfect cue accuracy does not recover" in abstract
-    assert "Theory predicts that environmental information can recover before ecological coordination does." in abstract
-    assert "Natural evidence supports successive links rather than the full hysteresis process" in abstract
+    assert 200 <= words <= 300
+    for heading in (
+        "**Aim:**",
+        "**Location:**",
+        "**Time period:**",
+        "**Major taxa studied:**",
+        "**Methods:**",
+        "**Results:**",
+        "**Main conclusions:**",
+    ):
+        assert heading in abstract
+    assert "effective deadline cost" in abstract
+    assert "Raw waiting time therefore does not generally rank effective deadlines" in abstract
+    assert "strict equilibria" in abstract
+    assert "perfect cue accuracy" in abstract
+    assert "Environmental information can recover before ecological coordination does." in abstract
+    assert "Natural evidence supports successive links rather than the full hysteresis sequence" in abstract
     assert "0.94 d/decade" in abstract
 
     # Important secondary results stay in Results/Discussion rather than
