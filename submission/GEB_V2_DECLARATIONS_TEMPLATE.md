@@ -1,4 +1,4 @@
-# Global Ecology and Biogeography — V2 declarations template
+# Global Ecology and Biogeography — Declarations
 
 **Article:** Information deadlines can desynchronize seasonal interactions under environmental change
 
