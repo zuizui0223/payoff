@@ -66,6 +66,15 @@ def test_preoutcome_reviewer_archive_is_anonymous_and_complete(tmp_path: Path):
     assert manifest["python_source_count"] > 10
     assert zip_path.exists()
 
+    main = (out / "manuscript" / "GEB_V2_BLINDED_MAIN.md").read_text(
+        encoding="utf-8"
+    )
+    assert main.startswith(
+        "# Information deadlines can desynchronize seasonal interactions "
+        "under environmental change"
+    )
+    assert "Dossman et al., 2023" in main
+
     required = {
         "manuscript/GEB_V2_BLINDED_MAIN.md",
         "supporting_information/GEB_V2_SUPPORTING_INFORMATION.md",
