@@ -92,7 +92,7 @@ def outcome_cover_letter(result_json: Path) -> str:
         ),
     }
 
-    return f"""# Global Ecology and Biogeography — V2 cover-letter template
+    return f"""# Cover letter
 
 Dear Editors,
 
@@ -125,8 +125,8 @@ registered wigeon analysis does not support a universal effect of predictive
 connectivity on post-error correction; and a preregistered Hoge Veluwe
 cue–resource recovery gate failed before resident–migrant history was opened.
 
-Registered Supplementary test: **{result_class}**. {summaries[result_class]}
-This registered result does not alter the manuscript's title, abstract,
+Registered Supplementary analysis: {summaries[result_class]}
+This registered analysis does not alter the manuscript's title, abstract,
 information-deadline theorem, perfect-information recovery-failure result or
 main figures.
 
