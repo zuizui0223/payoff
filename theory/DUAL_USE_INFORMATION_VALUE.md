@@ -689,11 +689,15 @@ test.
 
 The generic **value of information** is not new. Decision analysis has long
 treated information as valuable when it changes downstream decisions, including
-sequential information acquisition (Miller 1975), information about multiple
-sources of uncertainty (Samson et al. 1989), and information used across
-multiple decision problems. Ecology likewise has an established value-of-
-information literature in evolutionary fitness and adaptive management
-(Donaldson-Matasci et al. 2010; Williams et al. 2011; Canessa et al. 2015).
+sequential information acquisition (Miller 1975) and information about multiple
+sources of uncertainty (Samson et al. 1989). Importantly, Samson et al. show that
+information values across multiple uncertainties are generally **non-additive**.
+The additive decomposition used here is therefore not a generic property of
+value of information: it follows from the explicitly declared additive
+separability of the seasonal-action and compensation loss modules. Ecology
+likewise has an established value-of-information literature in evolutionary
+fitness and adaptive management (Donaldson-Matasci et al. 2010; Williams et al.
+2011; Canessa et al. 2015).
 
 Nor is the migration biology new in isolation. Stopover sites have explicitly
 been proposed as information sources that can improve arrival timing (Winkler
@@ -707,7 +711,8 @@ PAYOFF-B therefore does **not** claim novelty for:
 - sequential value of information;
 - stopover information;
 - behavioral compensation during migration; or
-- generic additivity of expected losses under risk neutrality.
+- generic value-of-information additivity; the present sum is licensed only
+  by the declared separable loss structure.
 
 The candidate contribution is narrower: embed a downstream compensation
 decision **inside the cost of waiting for the focal seasonal cue**, then solve
@@ -723,7 +728,10 @@ the resulting information deadline exactly. In that construction:
    but dual-use information yields a finite reliability threshold.
 
 These are deadline-specific consequences of ordinary value-of-information
-logic, rather than a new general theory of information value.
+logic under a special separable ecology, rather than a new general theory of
+information value. The novelty claim should therefore be attached to the
+**information-deadline geometry and its ecological interpretation**, not to
+value-of-information theory itself.
 
 References for this boundary:
 
