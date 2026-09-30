@@ -79,6 +79,13 @@ figure builders and non-sensitive derived outputs will be supplied to editors
 and reviewers through an anonymized stable repository link. A public persistent
 archive will replace the blinded reviewer link at publication.
 
+The repository declares two Python test environments. The minimal test
+environment may intentionally skip tests whose estimators require optional
+statistical dependencies. Full empirical reproduction uses
+`python -m pip install -e ".[test,empirical]"`; the corresponding CI job
+executes the lambda-estimator tests with `statsmodels>=0.14` installed and
+fails if any of those tests are skipped.
+
 The preregistered industrial-development phase-retention analysis remains
 unopened in this working package and is not used by the main-text theory,
 empirical results or figures.
