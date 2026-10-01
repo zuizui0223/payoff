@@ -29,6 +29,13 @@ def test_mule_deer_bridge_supports_both_signed_recourse_directions():
     assert evidence["behind_mechanism"] == "accelerating movement"
     assert evidence["late_vs_early_speed_ratio"] == 2.5
     assert evidence["late_vs_early_stopover_reduction_percent"] == 72
+    assert evidence["early_movement_rate_km_per_day"] == 2.9
+    assert evidence["late_movement_rate_km_per_day"] == 7.1
+    assert evidence["early_stopover_days"] == 36
+    assert evidence["late_stopover_days"] == 10
+    assert evidence["early_migration_duration_days"] == 72
+    assert evidence["late_migration_duration_days"] == 31
+    assert evidence["average_completion_window_days"] == 6
     assert "published summaries identify natural D_eff" in mule["prohibited_claims"]
 
 
