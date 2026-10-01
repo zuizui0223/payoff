@@ -45,7 +45,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc libreoffice-writer poppler-utils librsvg2-bin
-          python -m pip install --disable-pip-version-check pytest python-docx
+          python -m pip install --disable-pip-version-check -e ".[test,submission]"
 
       - name: Run portal-source tests
         run: |
