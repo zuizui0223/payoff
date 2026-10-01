@@ -121,15 +121,36 @@
         "the study identifies D_eff, q_wait, or r",
         "this single system licenses a migrant-versus-pollinator taxon ranking"
       ]
+    },
+    {
+      "system": "eastern US Viola-bee phenology network",
+      "citation": "Climate change intensifies plant-pollinator mismatch and increases secondary extinction risk for plants in northern latitudes, PNAS 2025",
+      "doi": "10.1073/pnas.2506265122",
+      "evidence": {
+        "approximate_specimen_records": 15000,
+        "time_span_years": 120,
+        "flowering_duration_used_in_mismatch_metric": true,
+        "longer_flowering_duration_identified_as_buffer_candidate": true
+      },
+      "licensed_claims": [
+        "phenological window duration is a plausible local interaction buffer",
+        "plant-pollinator systems cannot be assumed to have negligible temporal recourse"
+      ],
+      "prohibited_claims": [
+        "flowering duration is equivalent to migratory speed or stopover recourse",
+        "the study estimates recourse fraction r on the PAYOFF-B binary scale",
+        "longer flowering duration always evolves or plastically changes in response to mismatch"
+      ]
     }
   ],
   "cross_system_ceiling": {
-    "supported": "migration systems directly demonstrate post-commitment timing recourse and en-route cue updating; local plant-butterfly interactions directly demonstrate unequal phenological sensitivity despite shared regional environmental exposure",
+    "supported": "migration systems directly demonstrate post-commitment timing recourse and en-route cue updating; local plant-butterfly interactions directly demonstrate unequal phenological sensitivity despite shared regional environmental exposure; local interaction systems can also possess temporal-window buffering, so recourse must be measured rather than assigned by taxon",
     "not_supported": [
       "migrants universally have greater recourse than pollinators",
       "pollinators universally have greater irreversibility",
       "a pooled migrant-versus-pollinator q or r coefficient",
-      "natural validation of V(q,r)=r*W*(q-0.5)"
+      "natural validation of V(q,r)=r*W*(q-0.5)",
+      "plants or pollinators can be assigned uniformly low recourse from taxon identity alone"
     ],
     "prospective_prediction": "mismatch risk should be greatest when useful pre-commitment information is weak and remaining post-commitment recourse is narrow"
   }
