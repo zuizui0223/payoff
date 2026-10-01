@@ -371,6 +371,20 @@ DOI 10.1002/ecy.3938:
 This remains a compensation-with-cost bridge, not a direct information-waiting
 test.
 
+## 5.5 Source-level mule-deer reanalysis access status
+
+A prospective attempt to re-download the public Ortega et al. Dryad CSV from a
+GitHub Actions runner was repeated on 2026-10-01 (workflow run
+`36886070483`). The public `file_stream` endpoint returned HTTP 403 on all
+five attempts before any rows were read.
+
+This reproduces the earlier transport-level blocker. It is **not** an
+inferential failure and does not weaken the published signed-recourse evidence.
+It does mean that this branch does not claim a new row-level estimate of a
+mule-deer recourse parameter. Public article/source summaries remain the current
+evidence ceiling until the source bytes are available through an authenticated
+or otherwise functioning download route.
+
 ## 6. Plant-pollinator comparison: what is and is not supported
 
 The existing E7 source screen identifies multiple local interaction systems
