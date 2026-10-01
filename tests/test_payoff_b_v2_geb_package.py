@@ -33,6 +33,7 @@ package = load(
 
 def test_v2_geb_blinded_source_passes_hard_gates():
     text = source.build_source()
+    normalized = " ".join(text.split())
     result = audit.audit(text)
 
     assert text.startswith(
@@ -40,20 +41,20 @@ def test_v2_geb_blinded_source_passes_hard_gates():
         "under environmental change"
     )
     assert "Dossman et al., 2023" in text
-    assert "Raw waiting time therefore does not generally rank effective deadlines" in text
+    assert "Raw waiting time therefore does not generally rank effective deadlines" in normalized
     assert 'python -m pip install -e ".[test,empirical]"' in text
     assert "statsmodels>=0.14" in text
     assert "fails if any of those tests are skipped" in text
-    assert "We therefore do not treat cue–driver decoupling itself as a new idea." in text
-    assert "the earlier temporal-buffering result" in text
-    assert "the transparent model witness" in text
-    assert "not a new discovery of this study" in text
-    assert "We therefore do not claim a natural information-recovery hysteresis event." in text
-    assert "We therefore distinguish:" in text
-    assert "Our analysis therefore begins one step later." in text
+    assert "We therefore do not treat cue–driver decoupling itself as a new idea." in normalized
+    assert "the earlier temporal-buffering result" in normalized
+    assert "the transparent model witness" in normalized
+    assert "not a new discovery of this study" in normalized
+    assert "We therefore do not claim a natural information-recovery hysteresis event." in normalized
+    assert "We therefore distinguish:" in normalized
+    assert "Our analysis therefore begins one step later." in normalized
     assert "remains unopened in this working package" not in text
-    assert "handled only in Supporting Information under" in text
-    assert "does not retune the" in text
+    assert "handled only in Supporting Information under" in normalized
+    assert "does not retune the" in normalized
     assert result["metrics"]["deinternalization_artifact_hits"] == []
     assert result["all_preoutcome_hard_gates_pass"]
     assert result["metrics"]["abstract_words"] <= 300
