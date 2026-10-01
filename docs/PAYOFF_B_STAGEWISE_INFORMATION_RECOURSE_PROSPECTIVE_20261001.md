@@ -18,8 +18,11 @@ The current Paper 2 does **not** yet contain a full model in which:
 3. repeated route stages progressively reveal the seasonal state while the
    feasible action set shrinks.
 
-This prospective branch implements (1) and a one-signal version of (2). A full
-multi-stage Bellman recursion remains unimplemented.
+This prospective branch implements (1), a one-signal version of (2), and a
+finite-horizon binary Bellman realization of (3). What remains unimplemented is
+a continuous real-valued route/pace controller in which phase error, movement
+speed, stopover duration and recourse capacity are all explicit state/action
+variables.
 
 ## 1. Existing implementation that already supports the new framing
 
@@ -218,6 +221,63 @@ This is the stagewise analogue of the existing Paper-2 asynchronous uptake
 result. It remains a declared binary reduced-form consequence, not an empirical
 claim that any current taxon pair has measured q and r on this scale.
 
+## 4.58 Bridge back to the canonical Paper-2 deadline
+
+The reduced actionability idea can be connected exactly to the asymmetric
+binary model already used in Paper 2.
+
+Let
+
+    A = (1-pi) C_F,
+    L = pi C_M,
+    S = A + L,
+    B = max(A,L),
+    R0 = min(A,L).
+
+The existing fully actionable value of information is
+
+    V_A(q) = max(0, S q - B).
+
+Now let r in [0,1] be a **declared reduced-form retained-actionability
+weight**. It means that later information retains only weight r of its original
+ability to change the focal action. It is not automatically a physical fraction
+of route distance, stopover time or flowering duration.
+
+Then
+
+    V(q,r) = r V_A(q).
+
+With effective deadline cost D, waiting is worthwhile iff
+
+    r V_A(q) > D.
+
+Therefore, for r>0 and D < r R0,
+
+    q_wait(r) = [B + D/r] / S.
+
+So declining actionability is mathematically equivalent, in this reduced
+model, to inflating the deadline cost from D to D/r.
+
+Immediate consequences:
+
+1. r=1 exactly recovers the frozen Paper-2 threshold.
+2. r=0 makes later information behaviorally worthless even when q=1.
+3. if D >= r R0, the actor never waits even for perfect information.
+4. two actors with the same raw/effective waiting cost D but different r can
+   enter information use at different cue reliabilities.
+5. when both thresholds are finite,
+
+       Delta q
+       = |D_1/r_1 - D_2/r_2| / S.
+
+Thus asynchronous information uptake can arise from **different rates of lost
+optionality**, even with equal waiting cost and a shared cue trajectory.
+
+This is the cleanest mathematical bridge between the existing
+effective-deadline result and the new stagewise framing. The biological mapping
+from a measured actuator/window to r remains an empirical identification
+problem.
+
 ## 4.6 Finite-horizon commitment result
 
 The prospective implementation now also solves an exact binary finite-horizon
@@ -401,24 +461,41 @@ assigning it from "migrant" versus "plant/pollinator" labels.
 
 ## 9. Next exact extension if pursued
 
-The next mathematically honest model is a finite-horizon dynamic programme with
+The discrete finite-horizon binary recursion is now implemented. The next
+mathematically honest extension is **continuous real-valued stagewise control**.
 
-    B_t(b_t,A_t)
-      = min_{a_t in A_t}
-        { C_t(a_t,b_t)
-          + E[B_{t+1}(b_{t+1},A_{t+1})] },
+A useful state would include at least
+
+    (b_t, e_t, A_t),
 
 where:
 
 - b_t is the belief about the latent seasonal state;
-- environmental observations update b_t;
-- A_t is the recourse set still feasible at stage t;
-- A_{t+1} can shrink as commitment becomes irreversible.
+- e_t is signed phenological phase error;
+- A_t is the set/range of movement, stopover and timing corrections still
+  feasible at stage t.
 
-That recursion would connect the current one-shot deadline theorem to genuine
-migration stages:
+A continuous controller would solve a recursion of the form
 
-departure -> stopover -> route/pace update -> final approach -> settlement.
+    B_t(b_t,e_t,A_t)
+      = min_{a_t in A_t}
+        { C_t(a_t,e_t,b_t)
+          + E[B_{t+1}(b_{t+1},e_{t+1},A_{t+1})] },
 
-Do not add this to the frozen GEB manuscript unless it produces a genuinely new
-ecological prediction not already implied by classical sequential VOI.
+with environmental observations updating b_t, movement/stopover actions
+changing e_t, and commitment shrinking A_t.
+
+That model could distinguish quantitatively between:
+
+- early departure followed by slower progression / longer stopovers;
+- late departure followed by faster progression / shorter stopovers;
+- waiting in place versus moving while acquiring information;
+- actionability lost through route geometry versus through life-history
+  commitment.
+
+The key requirement is not another generic Bellman equation. It is a biological
+mapping that makes a new, measurable prediction about route-stage cue quality,
+signed phase correction and remaining recourse.
+
+Do not add this to the frozen GEB manuscript unless it produces such a new
+ecological prediction and an empirical identification route.
