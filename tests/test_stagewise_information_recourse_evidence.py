@@ -89,3 +89,19 @@ def test_cross_system_ceiling_keeps_q_r_natural_validation_unidentified():
     assert "unequal phenological sensitivity" in ceiling["supported"]
     assert "natural validation of V(q,r)=r*W*(q-0.5)" in ceiling["not_supported"]
     assert "pre-commitment information is weak" in ceiling["prospective_prediction"]
+
+
+
+def test_local_interaction_systems_are_not_assigned_zero_recourse_by_taxon():
+    payload = load()
+    viola = next(
+        row for row in payload["sources"]
+        if row["system"] == "eastern US Viola-bee phenology network"
+    )
+    assert viola["evidence"]["flowering_duration_used_in_mismatch_metric"] is True
+    assert viola["evidence"]["longer_flowering_duration_identified_as_buffer_candidate"] is True
+    ceiling = payload["cross_system_ceiling"]
+    assert any(
+        "uniformly low recourse" in claim
+        for claim in ceiling["not_supported"]
+    )
