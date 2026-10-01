@@ -71,11 +71,18 @@ def _set_line_numbers(section, enabled: bool) -> None:
     sect_pr.append(ln)
 
 
-def _style_document(doc: Document, *, line_numbers: bool, page_numbers: bool) -> None:
+def _style_document(
+    doc: Document,
+    *,
+    line_numbers: bool,
+    page_numbers: bool,
+    compact: bool,
+) -> None:
+    line_spacing = 1.15 if compact else 1.5
     normal = doc.styles["Normal"]
     normal.font.name = "Times New Roman"
     normal.font.size = Pt(11)
-    normal.paragraph_format.line_spacing = 1.5
+    normal.paragraph_format.line_spacing = line_spacing
     normal.paragraph_format.space_after = Pt(0)
 
     style_sizes = {
@@ -94,11 +101,11 @@ def _style_document(doc: Document, *, line_numbers: bool, page_numbers: bool) ->
         style.font.bold = True
         style.font.color.rgb = None
         style.font.color.theme_color = MSO_THEME_COLOR_INDEX.TEXT_1
-        style.paragraph_format.line_spacing = 1.5
+        style.paragraph_format.line_spacing = line_spacing
         style.paragraph_format.space_after = Pt(0)
 
     for paragraph in doc.paragraphs:
-        paragraph.paragraph_format.line_spacing = 1.5
+        paragraph.paragraph_format.line_spacing = line_spacing
         paragraph.paragraph_format.space_after = Pt(0)
         text_value = paragraph.text.strip()
         if line_numbers and text_value == "Figure legends":
@@ -160,6 +167,7 @@ def main() -> None:
     parser.add_argument("output_docx", type=Path)
     parser.add_argument("--line-numbers", action="store_true")
     parser.add_argument("--no-page-numbers", action="store_true")
+    parser.add_argument("--compact", action="store_true")
     args = parser.parse_args()
 
     doc = Document(args.input_docx)
@@ -167,6 +175,7 @@ def main() -> None:
         doc,
         line_numbers=args.line_numbers,
         page_numbers=not args.no_page_numbers,
+        compact=args.compact,
     )
     args.output_docx.parent.mkdir(parents=True, exist_ok=True)
     doc.save(args.output_docx)
