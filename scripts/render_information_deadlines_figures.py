@@ -324,7 +324,7 @@ def figure3():
             text(x + 25, ys - 8, f"{strict:.2f}", 12, "bold", "middle"),
         ]
     out += [
-        text(385, 175, "light = cascade   dark = strict memory", 13, anchor="middle"),
+        text(385, 175, "light = cascade; dark = strict memory", 13, anchor="middle"),
     ]
 
     out += [text(710, 125, "(b) Same edge count, different memory", 19, "bold")]
