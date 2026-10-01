@@ -95,9 +95,9 @@ jobs:
 
           python scripts/format_geb_v2_docx.py             "$GEN/GEB_SI_RAW.docx"             "$GEN/GEB_SUPPORTING_INFORMATION.docx"
 
-          python scripts/format_geb_v2_docx.py             "$GEN/GEB_TITLE_RAW.docx"             "$GEN/GEB_TITLE_PAGE.docx"             --no-page-numbers
+          python scripts/format_geb_v2_docx.py             "$GEN/GEB_TITLE_RAW.docx"             "$GEN/GEB_TITLE_PAGE.docx"             --no-page-numbers --compact
 
-          python scripts/format_geb_v2_docx.py             "$GEN/GEB_COVER_RAW.docx"             "$GEN/GEB_COVER_LETTER.docx"             --no-page-numbers
+          python scripts/format_geb_v2_docx.py             "$GEN/GEB_COVER_RAW.docx"             "$GEN/GEB_COVER_LETTER.docx"             --no-page-numbers --compact
 
           rm -f "$GEN"/*_RAW.docx
 
@@ -207,7 +207,11 @@ jobs:
           done
 
           PAGES="$(pdfinfo "$MAIN_PDF" | awk '/^Pages:/ {print $2}')"
+          COVER_PAGES="$(pdfinfo "$COVER_PDF" | awk '/^Pages:/ {print $2}')"
+          TITLE_PAGES="$(pdfinfo "$GEN/rendered/GEB_TITLE_PAGE.pdf" | awk '/^Pages:/ {print $2}')"
           test "$PAGES" -gt 0
+          test "$COVER_PAGES" -eq 1
+          test "$TITLE_PAGES" -le 2
           if [ "$PAGES" -gt 45 ]; then
             echo "Main manuscript unexpectedly long: $PAGES pages" >&2
             exit 1
@@ -233,12 +237,18 @@ jobs:
                       h.update(chunk)
               return h.hexdigest()
 
+          def pages(path: Path) -> int:
+              return int(
+                  subprocess.check_output(
+                      ["pdfinfo", str(path)], text=True
+                  ).split("Pages:")[1].splitlines()[0].strip()
+              )
+
           main_pdf = gen / "GEB_MAIN_MANUSCRIPT_REVIEW.pdf"
-          page_count = int(
-              subprocess.check_output(
-                  ["pdfinfo", str(main_pdf)], text=True
-              ).split("Pages:")[1].splitlines()[0].strip()
-          )
+          page_count = pages(main_pdf)
+          cover_page_count = pages(gen / "GEB_COVER_LETTER.pdf")
+          title_page_count = pages(gen / "rendered" / "GEB_TITLE_PAGE.pdf")
+          si_page_count = pages(gen / "rendered" / "GEB_SUPPORTING_INFORMATION.pdf")
           files = [
               gen / "GEB_MAIN_MANUSCRIPT.docx",
               gen / "GEB_MAIN_MANUSCRIPT_REVIEW.pdf",
@@ -254,6 +264,9 @@ jobs:
               "embedded_figures": 7,
               "main_review_pdf_pages": page_count,
               "cover_letter_pdf": True,
+              "cover_letter_pages": cover_page_count,
+              "title_page_pages": title_page_count,
+              "supporting_information_pages": si_page_count,
               "submission_python_extra": ".[test,submission]",
               "system_toolchain": [
                   "pandoc",
