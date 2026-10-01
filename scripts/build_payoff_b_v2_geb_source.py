@@ -86,9 +86,10 @@ statistical dependencies. Full empirical reproduction uses
 executes the lambda-estimator tests with `statsmodels>=0.14` installed and
 fails if any of those tests are skipped.
 
-The preregistered industrial-development phase-retention analysis remains
-unopened in this working package and is not used by the main-text theory,
-empirical results or figures.
+The preregistered industrial-development phase-retention analysis is kept
+outside the main-text evidence and handled only in Supporting Information under
+its frozen analysis contract. Its execution or result status does not retune the
+main text or figures.
 """
 
 FIGURE_LEGENDS = """## Figure legends
