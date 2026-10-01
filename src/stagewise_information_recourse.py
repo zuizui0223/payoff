@@ -343,6 +343,87 @@ def binary_actionability_value(
     )
 
 
+
+@dataclass(frozen=True)
+class StageScore:
+    """Reduced-form net value of committing at one seasonal-information stage."""
+
+    stage: int
+    cue_accuracy: float
+    recourse_fraction: float
+    normalized_actionable_information: float
+    gross_information_value: float
+    cumulative_wait_cost: float
+    net_information_value: float
+
+
+def normalized_actionable_information(
+    cue_accuracy: float,
+    recourse_fraction: float,
+) -> float:
+    """Return A = r(2q-1) in the declared symmetric binary model."""
+
+    q = float(cue_accuracy)
+    r = float(recourse_fraction)
+    if not isfinite(q) or q < 0.5 or q > 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    if not isfinite(r) or r < 0.0 or r > 1.0:
+        raise ValueError("recourse_fraction must lie in [0, 1]")
+    return r * (2.0 * q - 1.0)
+
+
+def best_reduced_commitment_stage(
+    cue_accuracies: Sequence[float],
+    recourse_fractions: Sequence[float],
+    *,
+    cumulative_wait_costs: Sequence[float] | None = None,
+    wrong_state_loss: float = 1.0,
+) -> tuple[StageScore, tuple[StageScore, ...]]:
+    """Choose the stage maximizing actionable information net of waiting cost.
+
+    This is the preposterior reduced form associated with
+
+        V_t = (W/2) r_t (2 q_t - 1).
+
+    It is not a replacement for binary_stagewise_bellman because it does
+    not condition later stop/commit decisions on realized signal histories.
+    It is useful as a compact ecological coordinate and exact witness.
+    """
+
+    qs = tuple(float(x) for x in cue_accuracies)
+    rs = tuple(float(x) for x in recourse_fractions)
+    if len(qs) != len(rs) or not qs:
+        raise ValueError("cue_accuracies and recourse_fractions must align")
+
+    if cumulative_wait_costs is None:
+        costs = (0.0,) * len(qs)
+    else:
+        costs = tuple(float(x) for x in cumulative_wait_costs)
+        if len(costs) != len(qs):
+            raise ValueError("cumulative_wait_costs must align with stages")
+        if any((not isfinite(x)) or x < 0.0 for x in costs):
+            raise ValueError("cumulative wait costs must be finite and non-negative")
+
+    wrong = _finite_nonnegative("wrong_state_loss", wrong_state_loss)
+    rows = []
+    for stage, (q, r, cost) in enumerate(zip(qs, rs, costs)):
+        actionable = normalized_actionable_information(q, r)
+        gross = 0.5 * wrong * actionable
+        rows.append(
+            StageScore(
+                stage=stage,
+                cue_accuracy=q,
+                recourse_fraction=r,
+                normalized_actionable_information=actionable,
+                gross_information_value=gross,
+                cumulative_wait_cost=cost,
+                net_information_value=gross - cost,
+            )
+        )
+
+    best = max(rows, key=lambda row: (row.net_information_value, -row.stage))
+    return best, tuple(rows)
+
 def actionability_profile(
     cue_accuracies: Sequence[float],
     recourse_fractions: Sequence[float],
