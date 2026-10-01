@@ -185,6 +185,35 @@ prospective model. It is still classical value-of-information logic; the
 ecological question is whether real migration and phenological systems occupy
 different trajectories through the (q,r) plane.
 
+## 4.6 Finite-horizon commitment result
+
+The prospective implementation now also solves an exact binary finite-horizon
+route problem:
+
+1. at stage t the actor observes a cue with reliability q_t;
+2. Bayes-updates the probability of EARLY versus LATE destination spring;
+3. either commits using an action still feasible at stage t or pays a waiting
+   cost and proceeds;
+4. the feasible action set can shrink at later stages.
+
+The Bellman recursion is evaluated exactly over all reachable cue histories.
+
+Two limiting cases are recovered:
+
+- with full recourse at every stage and zero waiting cost, the actor waits for
+  the most informative future cue;
+- if later stages lose state-contingent actions, an earlier imperfect cue can
+  be optimal even when a later cue is perfect.
+
+Therefore "wait until you know the state best" is not a general ecological
+rule. The relevant quantity is the joint path of information quality, direct
+waiting cost and remaining actionability.
+
+This result is a dynamic-programming realization of the one-shot
+information-deadline logic. Generic Bayesian optimal stopping is established
+prior art; the prospective ecological contribution would have to come from a
+distinctive prediction about biological trajectories through this state space.
+
 ## 5. What is now supported naturally
 
 ### 5.1 Both directions of migratory recourse — strong support
@@ -318,8 +347,9 @@ pre-commitment information is poor **and** post-commitment recourse is narrow.
 | one noisy en-route signal | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | irreversibility -> zero behavioral value after one action remains | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | continuous information-actionability envelope V=rW(q-1/2) | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
-| repeated route signals / shrinking action sets | NOT_IMPLEMENTED |
-| Bellman recursion over departure-stopover-arrival stages | NOT_IMPLEMENTED |
+| repeated route signals / shrinking binary action sets | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
+| finite-horizon Bayesian Bellman recursion | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
+| continuous real-valued route/pace Bellman control | NOT_IMPLEMENTED |
 | empirical natural D_eff | NOT_IDENTIFIED |
 | empirical q_wait | NOT_IDENTIFIED |
 | direct migrant-vs-pollinator recourse comparison | NOT_IDENTIFIED |
