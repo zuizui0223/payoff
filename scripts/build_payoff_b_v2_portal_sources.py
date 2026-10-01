@@ -32,6 +32,7 @@ FIGURE_FILES = {
 INTERNAL_EDITOR_TOKENS = (
     "PAYOFF-B",
     "PREOUTCOME",
+    "V2",
     "V2 cover-letter template",
     "V2 title-page template",
     "ACCESS_BLOCKED package state",
