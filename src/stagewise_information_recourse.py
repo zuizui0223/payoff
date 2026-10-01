@@ -27,6 +27,11 @@ from dataclasses import dataclass
 from math import isfinite
 from typing import Iterable, Sequence
 
+from src.endogenous_information_timing import (
+    closed_form_information_threshold,
+    information_value as canonical_information_value,
+)
+
 
 _TOL = 1e-12
 
@@ -342,6 +347,189 @@ def binary_actionability_value(
         information_value=max(0.0, value),
     )
 
+
+
+@dataclass(frozen=True)
+class RecourseAdjustedInformationThreshold:
+    """Canonical Paper-2 cue threshold after retained actionability discounting."""
+
+    retained_actionability: float
+    delay_cost: float
+    prior_bayes_risk: float
+    actionable_cue_accuracy: float
+    maximum_actionable_information_value: float
+    actionability_adjusted_delay_cost: float | None
+    wait_cue_accuracy: float | None
+    ever_waits: bool
+
+
+def recourse_discounted_information_value(
+    prior_early: float,
+    cue_accuracy: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    retained_actionability: float,
+) -> float:
+    """Return r times the canonical Paper-2 value of information.
+
+    retained_actionability r is a declared reduced-form weight in [0, 1].
+    It represents the fraction/weight of cases in which the later cue can still
+    alter the focal action. It is not automatically a physical fraction of
+    remaining migration distance, stopover time, flowering duration, or any
+    other biological capacity.
+
+    With canonical Paper-2 information value V_A(q), the reduced form is
+
+        V(q, r) = r V_A(q).
+
+    This nests the fully actionable model at r=1 and complete irreversibility
+    at r=0.
+    """
+
+    r = float(retained_actionability)
+    if not isfinite(r) or r < 0.0 or r > 1.0:
+        raise ValueError("retained_actionability must lie in [0, 1]")
+    return r * canonical_information_value(
+        prior_early,
+        cue_accuracy,
+        false_early_cost,
+        missed_early_cost,
+    )
+
+
+def recourse_adjusted_information_threshold(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    delay_cost: float,
+    retained_actionability: float,
+) -> RecourseAdjustedInformationThreshold:
+    """Exact cue threshold after partial retained actionability.
+
+    Let the canonical Paper-2 binary model define
+
+        A = (1-pi) C_F
+        L = pi C_M
+        S = A + L
+        B = max(A, L)
+        R0 = min(A, L).
+
+    Its fully actionable information value is
+
+        V_A(q) = max(0, S q - B).
+
+    Under the declared reduced-form actionability discount r,
+
+        V(q,r) = r V_A(q).
+
+    Waiting is optimal only when V(q,r) > D. For r>0 and D < r R0,
+
+        q_wait(r) = (B + D/r) / S.
+
+    Thus loss of actionability is exactly equivalent, for this reduced model,
+    to inflating the effective deadline cost from D to D/r. When r=0, or when
+    D >= r R0, even perfect information is not worth waiting for.
+    """
+
+    delay = _finite_nonnegative("delay_cost", delay_cost)
+    r = float(retained_actionability)
+    if not isfinite(r) or r < 0.0 or r > 1.0:
+        raise ValueError("retained_actionability must lie in [0, 1]")
+
+    base = closed_form_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=0.0,
+    )
+    total = base.early_action_prior_loss + base.late_action_prior_loss
+    other = max(
+        base.early_action_prior_loss,
+        base.late_action_prior_loss,
+    )
+    max_value = r * base.prior_bayes_risk
+
+    if r <= _TOL:
+        adjusted_delay = None
+        ever_waits = False
+        threshold = None
+    else:
+        adjusted_delay = delay / r
+        ever_waits = delay < max_value
+        threshold = (
+            (other + adjusted_delay) / total
+            if ever_waits
+            else None
+        )
+
+    return RecourseAdjustedInformationThreshold(
+        retained_actionability=r,
+        delay_cost=delay,
+        prior_bayes_risk=base.prior_bayes_risk,
+        actionable_cue_accuracy=base.actionable_cue_accuracy,
+        maximum_actionable_information_value=max_value,
+        actionability_adjusted_delay_cost=adjusted_delay,
+        wait_cue_accuracy=threshold,
+        ever_waits=ever_waits,
+    )
+
+
+def recourse_adjusted_pair_window_width(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    actor_a_delay_cost: float,
+    actor_a_actionability: float,
+    actor_b_delay_cost: float,
+    actor_b_actionability: float,
+) -> float | None:
+    """Exact finite q-window width for two reduced-form actionability states.
+
+    When both actors have finite thresholds,
+
+        Delta q = |D_A/r_A - D_B/r_B| / S.
+
+    None is returned when at least one actor never waits even at perfect
+    information, because the asynchronous regime can then persist to q=1
+    instead of forming a finite bounded window.
+    """
+
+    one = recourse_adjusted_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=actor_a_delay_cost,
+        retained_actionability=actor_a_actionability,
+    )
+    two = recourse_adjusted_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=actor_b_delay_cost,
+        retained_actionability=actor_b_actionability,
+    )
+    if (
+        not one.ever_waits
+        or not two.ever_waits
+        or one.actionability_adjusted_delay_cost is None
+        or two.actionability_adjusted_delay_cost is None
+    ):
+        return None
+
+    base = closed_form_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=0.0,
+    )
+    total = base.early_action_prior_loss + base.late_action_prior_loss
+    return abs(
+        two.actionability_adjusted_delay_cost
+        - one.actionability_adjusted_delay_cost
+    ) / total
 
 
 @dataclass(frozen=True)
