@@ -4,6 +4,7 @@ from src.stagewise_information_recourse import (
     actionability_profile,
     binary_actionability_value,
     binary_schrodinger_spring,
+    binary_stagewise_bellman,
     finite_signal_recourse,
     signed_linear_phase_recourse,
 )
@@ -226,3 +227,90 @@ def test_full_recourse_recovers_standard_binary_information_value():
         assert actionability.post_signal_risk == pytest.approx(
             standard.post_signal_risk
         )
+
+
+
+def test_one_stage_bellman_recovers_standard_binary_signal_risk():
+    result = binary_stagewise_bellman(
+        0.5,
+        [0.8],
+        [[0, 1]],
+    )
+    standard = binary_schrodinger_spring(0.8)
+    assert result.optimal_expected_loss == pytest.approx(
+        standard.post_signal_risk
+    )
+    assert result.forced_stage0_commit_loss == pytest.approx(
+        standard.post_signal_risk
+    )
+    assert result.wait_value == pytest.approx(0.0)
+
+
+def test_with_full_future_recourse_zero_cost_waits_for_perfect_information():
+    result = binary_stagewise_bellman(
+        0.5,
+        [0.6, 0.8, 1.0],
+        [[0, 1], [0, 1], [0, 1]],
+        waiting_costs=[0.0, 0.0],
+    )
+    assert result.optimal_expected_loss == pytest.approx(0.0)
+    assert result.wait_value == pytest.approx(0.4)
+    stage0 = [row for row in result.policy if row.stage == 0]
+    assert stage0
+    assert all(row.decision == "wait" for row in stage0)
+
+
+def test_shrinking_action_set_makes_intermediate_imperfect_information_optimal():
+    result = binary_stagewise_bellman(
+        0.5,
+        [0.6, 0.9, 1.0],
+        [[0, 1], [0, 1], [0]],
+        waiting_costs=[0.0, 0.0],
+    )
+
+    # Waiting from stage 0 is valuable because stage 1 has a much better cue.
+    stage0 = [row for row in result.policy if row.stage == 0]
+    assert stage0
+    assert all(row.decision == "wait" for row in stage0)
+
+    # At stage 1, the actor commits under the imperfect cue rather than waiting
+    # for the perfect stage-2 cue, because stage 2 has lost one of the two
+    # state-contingent actions.
+    stage1 = [row for row in result.policy if row.stage == 1]
+    assert stage1
+    assert all(row.decision == "commit" for row in stage1)
+
+    assert result.optimal_expected_loss < result.forced_stage0_commit_loss
+    assert result.optimal_expected_loss > 0.0
+
+
+def test_waiting_cost_can_make_earlier_less_accurate_cue_optimal():
+    free = binary_stagewise_bellman(
+        0.5,
+        [0.7, 0.95],
+        [[0, 1], [0, 1]],
+        waiting_costs=[0.0],
+    )
+    costly = binary_stagewise_bellman(
+        0.5,
+        [0.7, 0.95],
+        [[0, 1], [0, 1]],
+        waiting_costs=[0.30],
+    )
+    assert free.optimal_expected_loss == pytest.approx(0.05)
+    assert costly.optimal_expected_loss == pytest.approx(0.30)
+    assert costly.wait_value == pytest.approx(0.0)
+    stage0 = [row for row in costly.policy if row.stage == 0]
+    assert all(row.decision == "commit" for row in stage0)
+
+
+def test_bellman_loss_cannot_exceed_forced_immediate_commitment():
+    result = binary_stagewise_bellman(
+        0.4,
+        [0.55, 0.75, 0.9],
+        [[0, 1], [0, 1], [0, 1]],
+        waiting_costs=[0.05, 0.05],
+        wrong_state_loss=2.0,
+    )
+    assert result.optimal_expected_loss <= result.forced_stage0_commit_loss
+    assert result.wait_value >= 0.0
