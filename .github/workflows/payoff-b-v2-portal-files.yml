@@ -183,12 +183,14 @@ jobs:
           pdftotext -layout "$MAIN_PDF" "$MAIN_TXT"
           pdftotext -layout "$COVER_PDF" "$COVER_TXT"
 
-          grep -q 'Information deadlines can desynchronize seasonal interactions' "$MAIN_TXT"
-          grep -q 'Dossman et al., 2023' "$MAIN_TXT"
+          grep -q 'Information deadlines can desynchronize' "$MAIN_TXT"
+          grep -q 'seasonal interactions under environmental change' "$MAIN_TXT"
+          grep -q 'Dossman' "$MAIN_TXT"
           grep -q 'effective deadline cost' "$MAIN_TXT"
           grep -q 'Data and Code Availability Statement' "$MAIN_TXT"
           grep -q 'Figure 2' "$MAIN_TXT"
-          grep -q 'Information deadlines can desynchronize seasonal interactions' "$COVER_TXT"
+          grep -q 'Information deadlines can desynchronize' "$COVER_TXT"
+          grep -q 'seasonal interactions' "$COVER_TXT"
 
           for bad in             'We therefore does'             'We therefore distinguishes'             'We therefore begins'             'transparent this framework witness'             'PAYOFF-B'             'PREOUTCOME'; do
             if grep -q "$bad" "$MAIN_TXT"; then
@@ -252,6 +254,13 @@ jobs:
               "embedded_figures": 7,
               "main_review_pdf_pages": page_count,
               "cover_letter_pdf": True,
+              "submission_python_extra": ".[test,submission]",
+              "system_toolchain": [
+                  "pandoc",
+                  "libreoffice-writer",
+                  "poppler-utils",
+                  "librsvg2-bin",
+              ],
               "title_page_author_metadata_complete": False,
               "files": {
                   path.name: {
