@@ -44,6 +44,8 @@ def test_portal_main_source_is_final_facing_and_embeds_seven_figures():
     assert "Raw waiting time" in main
     assert 'python -m pip install -e ".[test,empirical]"' in main
     assert "statsmodels>=0.14" in main
+    assert "remains unopened in this working package" not in main
+    assert "handled only in Supporting Information under" in main
 
     for token in INTERNAL_EDITOR_TOKENS:
         assert token not in main
