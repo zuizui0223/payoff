@@ -3,9 +3,11 @@ import pytest
 from src.stagewise_information_recourse import (
     actionability_profile,
     binary_actionability_value,
+    best_reduced_commitment_stage,
     binary_schrodinger_spring,
     binary_stagewise_bellman,
     finite_signal_recourse,
+    normalized_actionable_information,
     signed_linear_phase_recourse,
 )
 
@@ -314,3 +316,57 @@ def test_bellman_loss_cannot_exceed_forced_immediate_commitment():
     )
     assert result.optimal_expected_loss <= result.forced_stage0_commit_loss
     assert result.wait_value >= 0.0
+
+
+
+def test_normalized_actionable_information_has_expected_endpoints():
+    assert normalized_actionable_information(0.5, 1.0) == pytest.approx(0.0)
+    assert normalized_actionable_information(1.0, 1.0) == pytest.approx(1.0)
+    assert normalized_actionable_information(1.0, 0.0) == pytest.approx(0.0)
+    assert normalized_actionable_information(0.75, 0.5) == pytest.approx(0.25)
+
+
+def test_shared_improving_cue_can_produce_different_optimal_commitment_stages():
+    q = [0.60, 0.80, 0.95]
+
+    constrained_best, constrained_rows = best_reduced_commitment_stage(
+        q,
+        [1.0, 0.70, 0.20],
+    )
+    flexible_best, flexible_rows = best_reduced_commitment_stage(
+        q,
+        [1.0, 0.90, 0.80],
+    )
+
+    # Same cue trajectory, different remaining recourse trajectories.
+    assert constrained_best.stage == 1
+    assert flexible_best.stage == 2
+    assert constrained_rows[2].cue_accuracy == flexible_rows[2].cue_accuracy
+    assert (
+        constrained_rows[2].normalized_actionable_information
+        < flexible_rows[2].normalized_actionable_information
+    )
+
+
+def test_wait_cost_can_shift_best_reduced_stage_earlier():
+    q = [0.60, 0.80, 0.95]
+    r = [1.0, 0.90, 0.80]
+    no_cost_best, _ = best_reduced_commitment_stage(q, r)
+    costly_best, _ = best_reduced_commitment_stage(
+        q,
+        r,
+        cumulative_wait_costs=[0.0, 0.15, 0.35],
+    )
+    assert no_cost_best.stage == 2
+    assert costly_best.stage == 0
+
+
+def test_stage_score_uses_half_wrong_loss_times_normalized_actionability():
+    best, rows = best_reduced_commitment_stage(
+        [0.75],
+        [0.50],
+        wrong_state_loss=4.0,
+    )
+    assert best.stage == 0
+    assert rows[0].normalized_actionable_information == pytest.approx(0.25)
+    assert rows[0].gross_information_value == pytest.approx(0.50)
