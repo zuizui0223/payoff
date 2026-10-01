@@ -362,6 +362,220 @@ def actionability_profile(
         for q, r in zip(cue_accuracies, recourse_fractions)
     )
 
+
+@dataclass(frozen=True)
+class StagePolicyDecision:
+    """One reachable post-signal decision in the binary route Bellman problem."""
+
+    stage: int
+    prior_early: float
+    signal: int
+    posterior_early: float
+    decision: str
+    chosen_action: int | None
+    commit_loss: float
+    wait_loss: float | None
+
+
+@dataclass(frozen=True)
+class StagewiseBellmanResult:
+    """Finite-horizon binary seasonal-information stopping result."""
+
+    optimal_expected_loss: float
+    forced_stage0_commit_loss: float
+    wait_value: float
+    policy: tuple[StagePolicyDecision, ...]
+
+
+def _binary_signal_update(
+    prior_early: float,
+    cue_accuracy: float,
+    signal: int,
+) -> tuple[float, float]:
+    """Return P(signal) and posterior P(EARLY | signal).
+
+    signal=0 denotes an EARLY signal; signal=1 denotes a LATE signal.
+    """
+
+    p = float(prior_early)
+    q = float(cue_accuracy)
+    if not isfinite(p) or p < 0.0 or p > 1.0:
+        raise ValueError("prior_early must lie in [0, 1]")
+    if not isfinite(q) or q < 0.5 or q > 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    if signal not in (0, 1):
+        raise ValueError("signal must be 0 (EARLY) or 1 (LATE)")
+
+    if signal == 0:
+        likelihood_early = q
+        likelihood_late = 1.0 - q
+    else:
+        likelihood_early = 1.0 - q
+        likelihood_late = q
+
+    probability = p * likelihood_early + (1.0 - p) * likelihood_late
+    if probability <= _TOL:
+        # Zero-probability signal. The posterior is irrelevant because the
+        # branch receives zero preposterior weight. Return a bounded sentinel.
+        return 0.0, p
+    posterior = p * likelihood_early / probability
+    return probability, posterior
+
+
+def _best_binary_commitment(
+    posterior_early: float,
+    allowed_actions: Sequence[int],
+    wrong_state_loss: float,
+) -> tuple[float, int]:
+    """Return minimum posterior loss and deterministic best action."""
+
+    p = float(posterior_early)
+    wrong = float(wrong_state_loss)
+    risks = []
+    for action in allowed_actions:
+        if action == 0:  # act for EARLY spring
+            risk = (1.0 - p) * wrong
+        elif action == 1:  # act for LATE spring
+            risk = p * wrong
+        else:
+            raise ValueError("binary action indices must be 0 or 1")
+        risks.append((risk, int(action)))
+    return min(risks, key=lambda x: (x[0], x[1]))
+
+
+def binary_stagewise_bellman(
+    prior_early: float,
+    cue_accuracies: Sequence[float],
+    allowed_actions_by_stage: Sequence[Sequence[int]],
+    *,
+    waiting_costs: Sequence[float] | None = None,
+    wrong_state_loss: float = 1.0,
+) -> StagewiseBellmanResult:
+    """Solve a finite-horizon departure-stopover commitment problem exactly.
+
+    At each stage t the actor:
+      1. receives a symmetric binary cue with accuracy q_t;
+      2. updates the belief about EARLY versus LATE destination spring;
+      3. either commits using an action still available at stage t, or
+         pays the declared waiting cost and proceeds to stage t+1.
+
+    The available action set may shrink with t. This represents biological
+    irreversibility: route choices, pace changes, stopover options or breeding
+    decisions that cease to be feasible after commitment progresses.
+
+    This is a small exact dynamic-programming bridge, not a novelty claim for
+    generic Bayesian stopping theory.
+    """
+
+    p0 = float(prior_early)
+    if not isfinite(p0) or p0 < 0.0 or p0 > 1.0:
+        raise ValueError("prior_early must lie in [0, 1]")
+
+    qs = tuple(float(q) for q in cue_accuracies)
+    if not qs:
+        raise ValueError("cue_accuracies must be non-empty")
+    if any((not isfinite(q)) or q < 0.5 or q > 1.0 for q in qs):
+        raise ValueError("all cue accuracies must lie in [0.5, 1]")
+
+    actions = tuple(
+        tuple(sorted(set(int(a) for a in stage_actions)))
+        for stage_actions in allowed_actions_by_stage
+    )
+    if len(actions) != len(qs):
+        raise ValueError("allowed_actions_by_stage must align with cue_accuracies")
+    if any(not stage_actions for stage_actions in actions):
+        raise ValueError("every stage must retain at least one action")
+    if any(a not in (0, 1) for stage_actions in actions for a in stage_actions):
+        raise ValueError("binary action indices must be 0 or 1")
+
+    if waiting_costs is None:
+        waits = (0.0,) * (len(qs) - 1)
+    else:
+        waits = tuple(float(x) for x in waiting_costs)
+        if len(waits) != len(qs) - 1:
+            raise ValueError("waiting_costs must have one value between stages")
+        if any((not isfinite(x)) or x < 0.0 for x in waits):
+            raise ValueError("waiting costs must be finite and non-negative")
+
+    wrong = _finite_nonnegative("wrong_state_loss", wrong_state_loss)
+    policy_rows: dict[tuple[int, float, int], StagePolicyDecision] = {}
+    memo: dict[tuple[int, float], float] = {}
+
+    def pre_signal(stage: int, prior: float) -> float:
+        key = (stage, round(prior, 14))
+        if key in memo:
+            return memo[key]
+
+        expected = 0.0
+        for signal_value in (0, 1):
+            signal_probability, posterior = _binary_signal_update(
+                prior,
+                qs[stage],
+                signal_value,
+            )
+            if signal_probability <= _TOL:
+                continue
+
+            commit_loss, action = _best_binary_commitment(
+                posterior,
+                actions[stage],
+                wrong,
+            )
+
+            if stage == len(qs) - 1:
+                wait_loss = None
+                decision = "commit"
+                chosen_action = action
+                optimal = commit_loss
+            else:
+                wait_loss = waits[stage] + pre_signal(stage + 1, posterior)
+                if commit_loss <= wait_loss + _TOL:
+                    decision = "commit"
+                    chosen_action = action
+                    optimal = commit_loss
+                else:
+                    decision = "wait"
+                    chosen_action = None
+                    optimal = wait_loss
+
+            policy_rows[
+                (stage, round(prior, 14), signal_value)
+            ] = StagePolicyDecision(
+                stage=stage,
+                prior_early=prior,
+                signal=signal_value,
+                posterior_early=posterior,
+                decision=decision,
+                chosen_action=chosen_action,
+                commit_loss=commit_loss,
+                wait_loss=wait_loss,
+            )
+            expected += signal_probability * optimal
+
+        memo[key] = expected
+        return expected
+
+    optimal = pre_signal(0, p0)
+
+    forced_stage0 = 0.0
+    for signal_value in (0, 1):
+        probability, posterior = _binary_signal_update(p0, qs[0], signal_value)
+        if probability <= _TOL:
+            continue
+        risk, _ = _best_binary_commitment(posterior, actions[0], wrong)
+        forced_stage0 += probability * risk
+
+    ordered_policy = tuple(
+        policy_rows[key]
+        for key in sorted(policy_rows)
+    )
+    return StagewiseBellmanResult(
+        optimal_expected_loss=optimal,
+        forced_stage0_commit_loss=forced_stage0,
+        wait_value=max(0.0, forced_stage0 - optimal),
+        policy=ordered_policy,
+    )
+
 def binary_schrodinger_spring(
     cue_accuracy: float,
     *,
