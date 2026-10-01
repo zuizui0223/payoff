@@ -324,8 +324,7 @@ def figure3():
             text(x + 25, ys - 8, f"{strict:.2f}", 12, "bold", "middle"),
         ]
     out += [
-        text(115, 175, "left bar = resident cascade", 13),
-        text(350, 175, "right bar = strict lower-payoff hysteresis", 13),
+        text(385, 175, "light = cascade   dark = strict memory", 13, anchor="middle"),
     ]
 
     out += [text(710, 125, "(b) Same edge count, different memory", 19, "bold")]
@@ -549,7 +548,7 @@ def figure6():
     )
     svg = svg.replace(
         "A  Finite phenological capacity extends the persistence frontier",
-        "(a) Finite phenological capacity extends the persistence frontier",
+        "(a) Phenology extends the persistence frontier",
         1,
     )
     svg = svg.replace(
