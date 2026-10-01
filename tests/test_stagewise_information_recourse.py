@@ -8,6 +8,9 @@ from src.stagewise_information_recourse import (
     binary_stagewise_bellman,
     finite_signal_recourse,
     normalized_actionable_information,
+    recourse_adjusted_information_threshold,
+    recourse_adjusted_pair_window_width,
+    recourse_discounted_information_value,
     signed_linear_phase_recourse,
 )
 
@@ -371,3 +374,140 @@ def test_stage_score_uses_half_wrong_loss_times_normalized_actionability():
     assert best.stage == 0
     assert rows[0].normalized_actionable_information == pytest.approx(0.25)
     assert rows[0].gross_information_value == pytest.approx(0.50)
+
+
+
+def test_recourse_adjusted_threshold_recovers_canonical_at_full_actionability():
+    result = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.10,
+        retained_actionability=1.0,
+    )
+    assert result.ever_waits
+    assert result.actionable_cue_accuracy == pytest.approx(0.75)
+    assert result.actionability_adjusted_delay_cost == pytest.approx(0.10)
+    assert result.wait_cue_accuracy == pytest.approx(0.8125)
+
+
+def test_half_actionability_inflates_same_deadline_cost_and_raises_threshold():
+    full = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.10,
+        retained_actionability=1.0,
+    )
+    half = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.10,
+        retained_actionability=0.5,
+    )
+    assert half.ever_waits
+    assert half.actionability_adjusted_delay_cost == pytest.approx(0.20)
+    assert half.wait_cue_accuracy == pytest.approx(0.875)
+    assert half.wait_cue_accuracy > full.wait_cue_accuracy
+
+
+def test_quarter_actionability_makes_canonical_delay_never_worth_waiting():
+    result = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.10,
+        retained_actionability=0.25,
+    )
+    # R0=0.40, so r*R0=0.10. Ties commit now.
+    assert result.maximum_actionable_information_value == pytest.approx(0.10)
+    assert not result.ever_waits
+    assert result.wait_cue_accuracy is None
+
+
+def test_zero_actionability_makes_perfect_information_behaviorally_worthless():
+    value = recourse_discounted_information_value(
+        0.40,
+        1.0,
+        2.0,
+        1.0,
+        retained_actionability=0.0,
+    )
+    result = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.0,
+        retained_actionability=0.0,
+    )
+    assert value == pytest.approx(0.0)
+    assert not result.ever_waits
+    assert result.wait_cue_accuracy is None
+
+
+def test_equal_raw_deadline_cost_can_create_window_from_actionability_difference():
+    width = recourse_adjusted_pair_window_width(
+        0.40,
+        2.0,
+        1.0,
+        actor_a_delay_cost=0.08,
+        actor_a_actionability=1.0,
+        actor_b_delay_cost=0.08,
+        actor_b_actionability=0.5,
+    )
+    # Adjusted costs are 0.08 and 0.16; S=1.60.
+    assert width == pytest.approx(0.05)
+
+
+@pytest.mark.parametrize("prior", [0.25, 0.40, 0.60, 0.80])
+@pytest.mark.parametrize("false_cost", [0.5, 1.0, 2.0])
+@pytest.mark.parametrize("missed_cost", [0.5, 1.0, 2.0])
+@pytest.mark.parametrize("r", [0.25, 0.5, 0.8, 1.0])
+def test_recourse_adjusted_closed_form_matches_bruteforce_grid(
+    prior,
+    false_cost,
+    missed_cost,
+    r,
+):
+    early_loss = (1.0 - prior) * false_cost
+    late_loss = prior * missed_cost
+    r0 = min(early_loss, late_loss)
+    delay = 0.6 * r * r0
+
+    threshold = recourse_adjusted_information_threshold(
+        prior,
+        false_cost,
+        missed_cost,
+        delay_cost=delay,
+        retained_actionability=r,
+    )
+    assert threshold.ever_waits
+    assert threshold.wait_cue_accuracy is not None
+
+    for step in range(51):
+        q = 0.5 + 0.01 * step
+        value = recourse_discounted_information_value(
+            prior,
+            q,
+            false_cost,
+            missed_cost,
+            retained_actionability=r,
+        )
+        brute_wait = value > delay + 1e-12
+        closed_wait = q > threshold.wait_cue_accuracy + 1e-12
+        assert brute_wait == closed_wait
+
+
+def test_actionability_fraction_is_not_claimed_as_physical_capacity():
+    result = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.05,
+        retained_actionability=0.5,
+    )
+    assert result.retained_actionability == pytest.approx(0.5)
+    # This scalar is a reduced-form attenuation weight; biological mapping
+    # requires an external model rather than interpreting 0.5 as "half a route".
+    assert result.actionability_adjusted_delay_cost == pytest.approx(0.10)
