@@ -193,7 +193,8 @@ def test_access_blocked_reviewer_archive_is_explicit_and_noninferential(
             encoding="utf-8"
         )
     )
-    assert "Registered result class: ACCESS_BLOCKED" in si
+    assert "Registered analysis status: not executed because authenticated source access was unavailable." in si
+    assert "Registered result class: ACCESS_BLOCKED" not in si
     assert "not executed" in si
     assert claim["scientific_result"] == "ACCESS_BLOCKED"
     assert claim["executed"] is False
