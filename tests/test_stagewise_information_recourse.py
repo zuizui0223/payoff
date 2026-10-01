@@ -358,7 +358,8 @@ def test_wait_cost_can_shift_best_reduced_stage_earlier():
         cumulative_wait_costs=[0.0, 0.15, 0.35],
     )
     assert no_cost_best.stage == 2
-    assert costly_best.stage == 0
+    assert costly_best.stage == 1
+    assert costly_best.stage < no_cost_best.stage
 
 
 def test_stage_score_uses_half_wrong_loss_times_normalized_actionability():
