@@ -27,8 +27,8 @@ def test_readiness_and_publication_status_reference_package_audit() -> None:
     assert "LEGACY_V1_PREOUTCOME_ARTIFACT = 10856440257" in pub
     assert "LEGACY_V1_PREOUTCOME_BUILD_RUN = 36118090547" in pub
     assert "zero identity leaks" in pub
-    assert "CURRENT_V2_PREOUTCOME_PACKAGE = READY" in pub
-    assert "CURRENT_V2_PREOUTCOME_BUILD_RUN = 36743782397" in pub
-    assert "CURRENT_V2_PREOUTCOME_ARTIFACT = 11112176156" in pub
-    assert "CURRENT_V2_PREOUTCOME_ARCHIVE_SHA256 = bc16f4b6e66af0e1936636b3f9fcb801b071ec5a8335ff1363565eef6504eea9" in pub
+    assert "CURRENT_V2_PREOUTCOME_PACKAGE = REFRESH_PENDING_AFTER_SCIENCE_UPDATE" in pub
+    assert "LAST_VERIFIED_V2_PREOUTCOME_BUILD_RUN = 36743782397" in pub
+    assert "LAST_VERIFIED_V2_PREOUTCOME_ARTIFACT = 11112176156" in pub
+    assert "LAST_VERIFIED_V2_PREOUTCOME_ARCHIVE_SHA256 = bc16f4b6e66af0e1936636b3f9fcb801b071ec5a8335ff1363565eef6504eea9" in pub
     assert "Aikens fixed-24 h" in pub and "adjudication" in pub
