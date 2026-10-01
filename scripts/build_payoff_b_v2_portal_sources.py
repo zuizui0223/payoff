@@ -83,7 +83,7 @@ def build_main_portal_source() -> str:
                 "",
                 legend,
                 "",
-                f"![Figure {number}](figures_png/{filename}){{width=6.2in}}",
+                f"![](figures_png/{filename}){{width=6.2in}}",
             ]
         )
     text = body + "\n\n" + "\n".join(figure_blocks).rstrip() + "\n"
