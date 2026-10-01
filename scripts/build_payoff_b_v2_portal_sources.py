@@ -140,7 +140,7 @@ def audit_portal_sources(
     bare_math_open = sum(1 for line in main.splitlines() if line.strip() == "[")
     bare_math_close = sum(1 for line in main.splitlines() if line.strip() == "]")
     embedded_figures = len(
-        re.findall(r"!\[Figure\s+\d+\]\(figures_png/[^)]+\.png\)", main)
+        re.findall(r"!\[\]\(figures_png/FIGURE_\d+\.png\)", main)
     )
     internal_hits = {
         name: [token for token in INTERNAL_EDITOR_TOKENS if token in text]
