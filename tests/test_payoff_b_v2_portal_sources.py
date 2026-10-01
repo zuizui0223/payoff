@@ -1,6 +1,11 @@
 from pathlib import Path
+import sys
 
-from scripts.build_payoff_b_v2_portal_sources import (
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPTS = ROOT / "scripts"
+sys.path.insert(0, str(SCRIPTS))
+
+from build_payoff_b_v2_portal_sources import (
     INTERNAL_EDITOR_TOKENS,
     audit_portal_sources,
     build_cover_letter_source,
@@ -11,7 +16,6 @@ from scripts.build_payoff_b_v2_portal_sources import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[1]
 RESULT = ROOT / "data" / "aikens2022_access_blocked_submission_state_20260928.json"
 
 
