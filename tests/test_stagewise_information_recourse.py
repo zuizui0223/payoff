@@ -511,3 +511,38 @@ def test_actionability_fraction_is_not_claimed_as_physical_capacity():
     # This scalar is a reduced-form attenuation weight; biological mapping
     # requires an external model rather than interpreting 0.5 as "half a route".
     assert result.actionability_adjusted_delay_cost == pytest.approx(0.10)
+
+
+
+def test_information_value_is_not_generically_monotone_in_action_set_size():
+    # Adding action 2 lowers both prior and post-signal Bayes risk, but it is a
+    # robust action that makes the signal itself worthless. Therefore generic
+    # action-set expansion does NOT imply larger value of information.
+    prior = [0.5, 0.5]
+    signal = [
+        [0.8, 0.2],
+        [0.2, 0.8],
+    ]
+    losses = [
+        [10.0, 9.0],
+        [7.0, 10.0],
+        [6.0, 1.0],
+    ]
+    restricted = finite_signal_recourse(
+        prior,
+        signal,
+        losses,
+        allowed_actions=[0, 1],
+    )
+    expanded = finite_signal_recourse(
+        prior,
+        signal,
+        losses,
+        allowed_actions=[0, 1, 2],
+    )
+
+    assert restricted.signal_value == pytest.approx(0.10)
+    assert expanded.signal_value == pytest.approx(0.0)
+    assert expanded.no_signal_risk < restricted.no_signal_risk
+    assert expanded.post_signal_risk < restricted.post_signal_risk
+    assert restricted.signal_value > expanded.signal_value
