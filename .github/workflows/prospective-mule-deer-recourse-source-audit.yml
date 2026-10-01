@@ -1,0 +1,106 @@
+name: prospective mule deer recourse source audit
+
+on:
+  push:
+    branches:
+      - paper2/prospective-stagewise-information-recourse-20261001
+    paths:
+      - .github/workflows/prospective-mule-deer-recourse-source-audit.yml
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download public Dryad source transiently
+        run: |
+          mkdir -p /tmp/mule_deer_source outputs/prospective_mule_deer_audit
+          curl -L --fail --retry 4 --retry-all-errors -A "Mozilla/5.0" \
+            https://datadryad.org/downloads/file_stream/2189257 \
+            -o /tmp/mule_deer_source/Ortega_et_al_2023_Data.csv
+          curl -L --fail --retry 4 --retry-all-errors -A "Mozilla/5.0" \
+            https://datadryad.org/downloads/file_stream/2189258 \
+            -o /tmp/mule_deer_source/README.md
+      - name: Audit schema and numeric support without redistributing raw rows
+        run: |
+          python - <<'PY'
+          import csv, json, math, statistics
+          from pathlib import Path
+
+          src = Path("/tmp/mule_deer_source/Ortega_et_al_2023_Data.csv")
+          out = Path("outputs/prospective_mule_deer_audit")
+          with src.open(newline="", encoding="utf-8-sig") as h:
+              rows = list(csv.DictReader(h))
+          columns = list(rows[0]) if rows else []
+
+          def numeric_summary(name):
+              vals = []
+              for row in rows:
+                  raw = (row.get(name) or "").strip()
+                  try:
+                      x = float(raw)
+                  except ValueError:
+                      continue
+                  if math.isfinite(x):
+                      vals.append(x)
+              if not vals:
+                  return None
+              return {
+                  "n": len(vals),
+                  "min": min(vals),
+                  "max": max(vals),
+                  "mean": statistics.fmean(vals),
+                  "median": statistics.median(vals),
+              }
+
+          summaries = {
+              c: numeric_summary(c)
+              for c in columns
+          }
+          summaries = {k:v for k,v in summaries.items() if v is not None}
+
+          lower = {c: c.lower() for c in columns}
+          candidate_columns = {
+              "phase_or_greenup": [
+                  c for c in columns
+                  if any(k in lower[c] for k in ("peak", "irg", "green", "mismatch", "surf"))
+              ],
+              "movement": [
+                  c for c in columns
+                  if any(k in lower[c] for k in ("move", "rate", "speed", "distance"))
+              ],
+              "stopover": [
+                  c for c in columns
+                  if any(k in lower[c] for k in ("stop", "duration"))
+              ],
+              "timing": [
+                  c for c in columns
+                  if any(k in lower[c] for k in ("start", "end", "depart", "arriv", "date", "day"))
+              ],
+              "identity": [
+                  c for c in columns
+                  if any(k in lower[c] for k in ("id", "animal", "year"))
+              ],
+          }
+
+          audit = {
+              "source_doi": "10.5061/dryad.8kprr4xsj",
+              "raw_rows_redistributed": False,
+              "rows": len(rows),
+              "columns": columns,
+              "column_count": len(columns),
+              "candidate_columns": candidate_columns,
+              "numeric_summaries": summaries,
+          }
+          (out / "schema_audit.json").write_text(
+              json.dumps(audit, indent=2) + "\n", encoding="utf-8"
+          )
+          print(json.dumps(audit, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prospective-mule-deer-recourse-source-audit
+          path: outputs/prospective_mule_deer_audit/schema_audit.json
