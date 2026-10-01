@@ -75,7 +75,7 @@ def test_portal_title_cover_and_si_have_correct_boundaries():
 
     assert "PREOUTCOME" not in si
     assert "remains unopened" not in si
-    assert "Registered result class: ACCESS_BLOCKED" in si
+    assert "Registered analysis status: not executed because authenticated source access was unavailable." in si\n    assert "Registered result class: ACCESS_BLOCKED" not in si
 
 
 def test_portal_source_audit_passes_current_access_blocked_route():
