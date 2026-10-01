@@ -32,8 +32,8 @@ def test_publication_status_routes_v2_to_geb_without_inheriting_v1_pipeline_read
     assert "ACCESS_BLOCKED" in text
     assert "not a scientific result" in text
     assert "ACCESS_BLOCKED_AUTHOR_DECISION = FROZEN_SUBMIT_WITH_ACCESS_BLOCKED" in text
-    assert "CURRENT_V2_ACCESS_BLOCKED_PACKAGE = READY" in text
-    assert "CURRENT_V2_ACCESS_BLOCKED_BUILD_RUN = 36743782371" in text
+    assert "CURRENT_V2_ACCESS_BLOCKED_PACKAGE = REFRESH_PENDING_AFTER_SCIENCE_UPDATE" in text
+    assert "LAST_VERIFIED_V2_ACCESS_BLOCKED_BUILD_RUN = 36743782371" in text
     assert "AIKENS_LAMBDA_OUTCOME_OPENED = false" in text
     assert "FUTURE_AUTHENTICATED_EXECUTION = permitted under original preregistration" in text
 
