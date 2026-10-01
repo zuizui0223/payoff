@@ -6,7 +6,8 @@
     "signed_recourse": "phase error sign predicts correction direction when recourse is cheaper than residual mismatch",
     "noisy_information": "en-route signal can reduce Bayes risk while recourse remains available",
     "actionability_envelope": "V(q,r)=r*W*(q-0.5) in the declared symmetric binary reduced model",
-    "stagewise_commitment": "best commitment stage need not be the stage with highest cue accuracy when later actionability is lost"
+    "stagewise_commitment": "best commitment stage need not be the stage with highest cue accuracy when later actionability is lost",
+    "canonical_deadline_bridge": "V(q,r)=r*V_A(q); if r>0 and D<r*R0 then q_wait(r)=(B+D/r)/S, so lost actionability inflates the effective deadline from D to D/r in the declared reduced model"
   },
   "sources": [
     {
@@ -172,7 +173,8 @@
       "pollinators universally have greater irreversibility",
       "a pooled migrant-versus-pollinator q or r coefficient",
       "natural validation of V(q,r)=r*W*(q-0.5)",
-      "plants or pollinators can be assigned uniformly low recourse from taxon identity alone"
+      "plants or pollinators can be assigned uniformly low recourse from taxon identity alone",
+      "direct biological interpretation of reduced-form r as a physical percentage of route, stopover or flowering-duration capacity without an external mapping"
     ],
     "prospective_prediction": "mismatch risk should be greatest when useful pre-commitment information is weak and remaining post-commitment recourse is narrow"
   }
