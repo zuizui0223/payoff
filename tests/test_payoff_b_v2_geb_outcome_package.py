@@ -183,7 +183,15 @@ def test_four_scientific_results_plus_access_blocked_build_v2_packages(tmp_path:
         normalized_cover = " ".join(cover.split())
         assert "effective waiting cost" in normalized_cover
         assert "raw waiting duration" in normalized_cover
-        assert result_class in si
+        if result_class == "ACCESS_BLOCKED":
+            assert (
+                "Registered analysis status: not executed because authenticated "
+                "source access was unavailable."
+                in si
+            )
+            assert "Registered result class: ACCESS_BLOCKED" not in si
+        else:
+            assert result_class in si
         assert claim["scientific_result"] == result_class
         assert claim["retuning_permitted"] is False
         if result_class == "ACCESS_BLOCKED":
