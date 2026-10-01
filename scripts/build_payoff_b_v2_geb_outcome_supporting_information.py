@@ -35,9 +35,16 @@ def build_supporting_information(result_json: Path) -> tuple[str, dict]:
     if end < 0:
         raise ValueError("V2 PREOUTCOME SI source boundary not found")
 
+    status_line = (
+        "**Registered analysis status: not executed because authenticated source "
+        "access was unavailable.**"
+        if result_class == "ACCESS_BLOCKED"
+        else f"**Registered result class: {result_class}.**"
+    )
+
     appendix = f"""{appendix_prefix}. Registered industrial-development phase-retention result
 
-**Registered result class: {result_class}.**
+{status_line}
 
 {results}
 

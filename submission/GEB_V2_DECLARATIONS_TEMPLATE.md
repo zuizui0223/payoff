@@ -1,4 +1,4 @@
-# Global Ecology and Biogeography — V2 declarations template
+# Global Ecology and Biogeography — Declarations
 
 **Article:** Information deadlines can desynchronize seasonal interactions under environmental change
 
@@ -24,7 +24,7 @@ all authors approved the submitted version.]
 
 ## Data and code availability
 
-A deterministic anonymous reviewer archive has been built for the canonical V2
+A deterministic anonymous reviewer archive has been built for the submitted
 analysis. It contains the blinded manuscript, Supporting Information, exact
 theory sources, frozen derived result receipts, analysis code closure and seven
 main figures. Raw empirical datasets governed by their original repositories or

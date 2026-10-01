@@ -19,6 +19,15 @@ ABSTRACT_HEADINGS = (
     "Main conclusions",
 )
 
+DEINTERNALIZATION_ARTIFACTS = (
+    "We therefore does",
+    "We therefore distinguishes",
+    "We therefore begins",
+    "earlier this framework temporal-buffering",
+    "transparent this framework witness",
+    "new this framework discovery",
+)
+
 INTERNAL_TOKENS = (
     "PAYOFF-B",
     "PREOUTCOME",
@@ -103,6 +112,10 @@ def audit(text: str | None = None) -> dict:
         text,
     )
 
+    deinternalization_artifact_hits = [
+        token for token in DEINTERNALIZATION_ARTIFACTS if token in text
+    ]
+
     expected_citations = (
         ("Aikens", "2017"),
         ("Aikens", "2022"),
@@ -144,6 +157,7 @@ def audit(text: str | None = None) -> dict:
         "figure_numbers": figure_numbers,
         "internal_token_hits": internal_hits,
         "email_hits": email_hits,
+        "deinternalization_artifact_hits": deinternalization_artifact_hits,
         "citation_presence": citation_presence,
     }
 
@@ -158,6 +172,7 @@ def audit(text: str | None = None) -> dict:
         "seven_display_pieces": figure_numbers == list(range(1, 8)),
         "anonymous_internal_tokens_zero": not internal_hits,
         "email_hits_zero": not email_hits,
+        "deinternalization_artifacts_zero": not deinternalization_artifact_hits,
         "expected_citations_present": all(citation_presence.values()),
         "aikens_placeholder_absent": "Aikens lambda result pending" not in text,
     }

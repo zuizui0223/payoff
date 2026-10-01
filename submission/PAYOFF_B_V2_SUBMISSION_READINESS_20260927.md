@@ -1,7 +1,7 @@
 # PAYOFF-B V2 submission readiness
 
 Frozen: **2026-09-27**  
-Updated: **2026-09-28**
+Updated: **2026-10-01**
 
 ## Current state
 
@@ -23,9 +23,9 @@ Research Article
 The canonical V2 GEB package has passed all hard gates.
 
 ```text
-structured abstract = 246 words
-main body = 4,829 words
-references = 20
+structured abstract = 283 words
+main body = 4,902 words
+references = 25
 display pieces = 7
 keywords = 8
 running title = 38 characters
@@ -37,24 +37,22 @@ package files = 17
 Frozen package:
 
 ```text
-workflow run = 36518027323 (attempt 1)
-artifact = 11011469698
+workflow run = 36807276298 (attempt 1)
+artifact = 11138366353
 artifact digest =
-51708a9befb1751cd60148bebe5f856190e9679245681208398d90b08e939b6c
+5ad4ca0b5be5c9b888d71385d2a7e05f079a09026b45f50c55cfbf1fc5d4e3c3
+
+validated head =
+fb03cec738558b2fd8800a60c5d80c3ae609c237
 
 inner deterministic ZIP SHA256 =
-d7c8f3ab4f2c4d3c32da4655e069b9b35b66cb356a44643fa9018288e759ae1a
+048e234b69363800d17de98401d288d78913bc994d130024ad9310d1db6557a1
 ```
 
-The declarations-inclusive package was rerun from the same frozen head in
-workflow run 36518027323 (attempt 2; artifact 11012051730). The deterministic
-inner ZIP remained byte-identical:
-
-```text
-d7c8f3ab4f2c4d3c32da4655e069b9b35b66cb356a44643fa9018288e759ae1a
-```
-
-The inner archive remained byte-identical, confirming deterministic reproduction of the claim-ceiling package.
+Deterministic reproduction is enforced inside the successful workflow by
+building the package twice and requiring identical inner ZIP hashes. The final
+claim-ceiling package therefore passed the deterministic archive gate on the
+same validated head.
 
 ## 2. Postoutcome V2 pipeline — ACCESS_BLOCKED submission state frozen
 
@@ -101,22 +99,23 @@ A deterministic PREOUTCOME reviewer archive has been built from the canonical
 claim-ceiling V2 source.
 
 ```text
-workflow run = 36518027268
-artifact = 11012081041
+workflow run = 36807276290
+artifact = 11137374088
 artifact digest =
-0d238d11125a766f72529eb771e7839fb2b46002c8dbd553b646fdf5cb24b1c5
+4b27f0502913bf3dd665303cc8b3b3821852912c15ffba09b5917f61b3af6c66
+
+validated head =
+fb03cec738558b2fd8800a60c5d80c3ae609c237
 
 inner reviewer ZIP SHA256 =
-b2de4fcfcdfff0236c5e18ee31073ca71b6bee635a54a1dd6276809fe2201339
+95b815a62b024b3a0a3210552bc1e61f0eb3523dc6702bc567037553b797b294
 
-files = 76
-Python source closure = 27
+files = 78
+Python source closure = 28
 figures = 7
 identity scan = PASS
 raw empirical data redistributed = false
-reviewer archive reproduction run = 36518027268
-reviewer archive reproduction artifact = 11012355384
-reviewer archive deterministic inner SHA256 = b2de4fcfcdfff0236c5e18ee31073ca71b6bee635a54a1dd6276809fe2201339
+deterministic reproduction = PASS_IN_WORKFLOW_TEST
 ```
 
 The archive contains the blinded manuscript, Supporting Information, exact
@@ -129,10 +128,14 @@ current ACCESS_BLOCKED outcome archive was generated from the same frozen
 submission-state receipt:
 
 ```text
-ACCESS_BLOCKED reviewer ZIP SHA256 =
-8b5ba5d1a6d8c06f71bc6a8de9790ccbc1f702feb81a820790625d79d8c8ba51
+source-access-limited reviewer ZIP SHA256 =
+15678fd57b3865fb099e80c265e03ef67315afb7a12eea14018b9f76e157062c
 
-workflow run = 36518314363
+workflow run = 36807276328
+artifact = 11138336737
+artifact digest =
+ebefd85ebd8ef38288e3bad093f33d7235f9022ca1fbffdd8a468efdf9c174b4
+
 deterministic reproduction = PASS
 ```
 
@@ -170,23 +173,20 @@ future authenticated execution = permitted
 original preregistration = remains binding
 ```
 
-The deterministic ACCESS_BLOCKED submission package was built in workflow
-`36518314363` from head `7a4cee269f5dac9524e4517b034f3a0d967675c8`.
+The deterministic source-access-limited submission package was built in
+workflow `36807276328` from head
+`fb03cec738558b2fd8800a60c5d80c3ae609c237`.
 
 ```text
-attempt 1 artifact = 11011073915
-attempt 1 artifact digest =
-a74b6afccb735c8f2d39c6a1f14d88df1e277e46f9620b283ce4bccff4e66356
+artifact = 11138336737
+artifact digest =
+ebefd85ebd8ef38288e3bad093f33d7235f9022ca1fbffdd8a468efdf9c174b4
 
 GEB inner ZIP SHA256 =
-b74ae989a1048e0fcaa0577a2224b22fd2064ccc3b621fc8e7ce8058017a26a7
+3b0690ea7e2b914454f1aca132835bdb800c659b2e12918ec1c5faee4ca560f0
 
 outcome reviewer ZIP SHA256 =
-8b5ba5d1a6d8c06f71bc6a8de9790ccbc1f702feb81a820790625d79d8c8ba51
-
-attempt 2 artifact = 11011782314
-attempt 2 artifact digest =
-0cb98c94ad2dc6581c21353ec4a529db5cb63c8ed5236ef6d5ffc1f3db5297c5
+15678fd57b3865fb099e80c265e03ef67315afb7a12eea14018b9f76e157062c
 
 deterministic inner archives = PASS
 ```
@@ -196,16 +196,61 @@ V061 / fixed-24 h workflow may still be executed and classified into one of the
 four scientific result classes. That future execution is no longer required
 for the present submission route.
 
+## 3.5 Journal portal files — READY FOR AUTHOR METADATA
+
+The journal-facing editable files were rendered and QA-checked from the same
+frozen science state.
+
+```text
+workflow run = 36807276327
+artifact = 11138137692
+artifact digest =
+b76da056019b77827722f5cd0295cfced7cb711837f16364a72442ef62bce428
+
+validated head =
+fb03cec738558b2fd8800a60c5d80c3ae609c237
+
+main manuscript DOCX SHA256 =
+84fe857e8f03d6306f3d6cc0292aa09c7effbc54621648e138e1d98e502a0fb5
+
+main review PDF SHA256 =
+b461d5cd4df7e9be76af75e15dc363b2d13a8eb5925d0da02820f42b216204c6
+
+Supporting Information DOCX SHA256 =
+b3648cfd8877501212cab7c10e68a505efc4932b7f78322b210051b709a8d97c
+
+title-page DOCX SHA256 =
+0dde8cd6751f038095f93ab463ef61d16f3b004923d92f52d5a0c38dc7396a4b
+
+cover-letter PDF SHA256 =
+0cfdb5d79a30b0c1ed90e1323db64b55b8c6fcf1b83454a4292ee35962d4b8da
+
+main manuscript pages = 28
+cover letter pages = 1
+title page pages = 2
+Supporting Information pages = 4
+embedded main figures = 7
+line numbers = true
+internal editor-token scan = PASS
+rendered visual QA = PASS
+```
+
+The portal artifact contains the editable blinded main manuscript, editable
+Supporting Information, editable title page, one-page cover-letter PDF and
+seven separate vector figure PDFs. Author-controlled metadata remain
+placeholders by design.
+
 ## 4. Final journal upload — SCIENCE-CLOSED, PORTAL INPUTS REMAIN
 
-The current ACCESS_BLOCKED science state is closed for submission. Portal
-upload still requires:
+The current science state is closed for submission and the generated portal
+files have passed machine and visual QA. External submission still requires:
 
-1. delivery of the already-built anonymous reviewer archive through the journal portal or a stable anonymous link;
+1. delivery of the anonymous reviewer archive through the journal portal or a
+   stable anonymous link;
 2. author list, affiliations, ORCID and corresponding-author metadata;
-3. funding, conflict-of-interest, acknowledgements and contribution
-   declarations;
-4. final human review of the generated outcome package.
+3. funding, conflict-of-interest, acknowledgements, contribution and required
+   AI-use declarations;
+4. upload of the validated files and completion of the journal form.
 
 The current manuscript now explicitly states that photoperiodic/endogenous migration programmes are a non-exclusive alternative explanation for the E6 migration-distance gradient, and that the pairwise deadline-difference mechanism has not yet been directly tested in a natural interacting pair.
 

@@ -92,7 +92,7 @@ def outcome_cover_letter(result_json: Path) -> str:
         ),
     }
 
-    return f"""# Global Ecology and Biogeography — V2 cover-letter template
+    return f"""# Cover letter
 
 Dear Editors,
 
@@ -124,11 +124,6 @@ pied-flycatcher manipulation anchors timing-dependent cue availability; the
 registered wigeon analysis does not support a universal effect of predictive
 connectivity on post-error correction; and a preregistered Hoge Veluwe
 cue–resource recovery gate failed before resident–migrant history was opened.
-
-Registered Supplementary test: **{result_class}**. {summaries[result_class]}
-This registered result does not alter the manuscript's title, abstract,
-information-deadline theorem, perfect-information recovery-failure result or
-main figures.
 
 The theory predicts that **environmental information can recover before
 ecological coordination does**.
@@ -168,7 +163,15 @@ def audit_outcome(
             "AIKENS_LAMBDA" not in main_text
             and "Aikens lambda result pending" not in main_text
         ),
-        "si_has_result_class": result_class in si_text,
+        "si_has_result_class": (
+            (
+                "Registered analysis status: not executed because authenticated "
+                "source access was unavailable."
+                in si_text
+            )
+            if result_class == "ACCESS_BLOCKED"
+            else result_class in si_text
+        ),
         "si_has_no_preoutcome_language": not si_hits,
         "claim_state_matches_result": (
             claim_state.get("scientific_result") == result_class

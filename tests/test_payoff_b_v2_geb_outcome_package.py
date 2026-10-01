@@ -149,6 +149,10 @@ def test_four_scientific_results_plus_access_blocked_build_v2_packages(tmp_path:
         assert "anonymous reviewer archive delivery channel" in manifest["remaining_portal_blockers"]
         cover = (out / "GEB_V2_COVER_LETTER_OUTCOME.md").read_text(encoding="utf-8")
         assert "The theory predicts that **environmental information can recover before" in cover
+        assert cover.startswith("# Cover letter")
+        assert "V2 cover-letter template" not in cover
+        if result_class == "ACCESS_BLOCKED":
+            assert "ACCESS_BLOCKED" not in cover
         assert zip_path.exists()
 
         main = (out / "GEB_V2_BLINDED_OUTCOME.md").read_text(encoding="utf-8")
@@ -168,9 +172,26 @@ def test_four_scientific_results_plus_access_blocked_build_v2_packages(tmp_path:
 
         assert result_class not in main
         normalized_main = " ".join(main.split())
+        assert normalized_main.startswith(
+            "# Information deadlines can desynchronize seasonal interactions "
+            "under environmental change"
+        )
+        assert "Dossman et al., 2023" in normalized_main
         assert "Raw waiting time therefore does not generally rank effective deadlines" in normalized_main
         assert "Theory predicts that environmental information can recover before ecological coordination does." in normalized_main
-        assert result_class in si
+
+        normalized_cover = " ".join(cover.split())
+        assert "effective waiting cost" in normalized_cover
+        assert "raw waiting duration" in normalized_cover
+        if result_class == "ACCESS_BLOCKED":
+            assert (
+                "Registered analysis status: not executed because authenticated "
+                "source access was unavailable."
+                in si
+            )
+            assert "Registered result class: ACCESS_BLOCKED" not in si
+        else:
+            assert result_class in si
         assert claim["scientific_result"] == result_class
         assert claim["retuning_permitted"] is False
         if result_class == "ACCESS_BLOCKED":
@@ -277,13 +298,32 @@ def test_activated_access_blocked_clears_author_decision_science_blocker(tmp_pat
     assert (out / "GEB_V2_PORTAL_HANDOFF_ACCESS_BLOCKED.md").exists()
     assert not (out / "GEB_V2_TITLE_PAGE_OUTCOME_TEMPLATE.md").exists()
 
+    access_title = (out / "GEB_V2_TITLE_PAGE_ACCESS_BLOCKED_TEMPLATE.md").read_text(
+        encoding="utf-8"
+    )
+    assert access_title.startswith("# Global Ecology and Biogeography — Title page")
+    assert "ACCESS_BLOCKED package state" not in access_title
+    assert "V2 title-page template" not in access_title
+
+    declarations = (out / "GEB_V2_DECLARATIONS_TEMPLATE.md").read_text(
+        encoding="utf-8"
+    )
+    assert declarations.startswith("# Global Ecology and Biogeography — Declarations")
+    assert "V2 declarations template" not in declarations
+
     access_data = (out / "GEB_V2_DATA_CODE_ACCESS_BLOCKED.md").read_text(
         encoding="utf-8"
     )
+    assert access_data.startswith("# Data and Code Availability Statement")
     normalized_access_data = " ".join(access_data.split())
+    assert "ACCESS_BLOCKED submission state" not in normalized_access_data
+    assert "ACCESS_BLOCKED is an external-access state" not in normalized_access_data
     assert "was not executed" in normalized_access_data
     assert "not evidence for or against" in normalized_access_data
     assert "future authenticated execution remains permissible" in normalized_access_data
+    assert 'python -m pip install -e ".[test,empirical]"' in normalized_access_data
+    assert "statsmodels>=0.14" in normalized_access_data
+    assert "lambda-estimator tests are skipped" in normalized_access_data
 
     claim = json.loads(
         (out / "GEB_V2_AIKENS_CLAIM_STATE.json").read_text(encoding="utf-8")
