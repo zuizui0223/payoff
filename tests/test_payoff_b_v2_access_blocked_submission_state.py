@@ -22,7 +22,10 @@ def test_access_blocked_submission_state_is_explicitly_frozen():
     assert "AIKENS_SCIENTIFIC_RESULT = unavailable" in status
     assert "AIKENS_LAMBDA_OUTCOME_OPENED = false" in status
     assert "ACCESS_BLOCKED_AUTHOR_DECISION = FROZEN_SUBMIT_WITH_ACCESS_BLOCKED" in status
-    assert "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = REFRESH_PENDING_SCIENCE_CLOSED_PORTAL_BLOCKED" in status
+    assert (
+        "CURRENT_V2_FINAL_SUBMISSION_PACKAGE = "
+        "ACCESS_BLOCKED_SCIENCE_CLOSED_PORTAL_READY_FOR_AUTHOR_METADATA"
+    ) in status
 
     assert "ACCESS_BLOCKED submission state frozen" in readiness
     assert "author decision = SUBMIT_WITH_ACCESS_BLOCKED" in readiness
