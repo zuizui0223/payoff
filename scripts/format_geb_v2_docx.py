@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 from pathlib import Path
 
 from docx import Document
@@ -103,7 +104,7 @@ def _style_document(doc: Document, *, line_numbers: bool, page_numbers: bool) ->
         if line_numbers and text_value == "Figure legends":
             paragraph.paragraph_format.page_break_before = True
         if line_numbers and text_value.startswith("Figure "):
-            match = __import__("re").match(r"Figure\\s+(\\d+)\\.", text_value)
+            match = re.match(r"Figure\\s+(\\d+)\\.", text_value)
             if match:
                 number = int(match.group(1))
                 if number >= 2:
