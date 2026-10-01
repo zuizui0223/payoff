@@ -284,6 +284,84 @@ def finite_signal_recourse(
     )
 
 
+
+@dataclass(frozen=True)
+class BinaryActionability:
+    """Information value when only a fraction of full recourse remains."""
+
+    cue_accuracy: float
+    recourse_fraction: float
+    wrong_state_loss: float
+    no_signal_risk: float
+    post_signal_risk: float
+    information_value: float
+
+
+def binary_actionability_value(
+    cue_accuracy: float,
+    recourse_fraction: float,
+    *,
+    wrong_state_loss: float = 1.0,
+) -> BinaryActionability:
+    """Exact binary information value with partial retained optionality.
+
+    Consider the canonical symmetric two-state problem with prior 1/2.
+
+    With probability/weight r, the actor can still implement the cue-matched
+    action. With the remaining 1-r, the earlier commitment is effectively
+    irreversible and the cue cannot alter behavior.
+
+    Mixing those two regimes gives
+
+        R0 = W/2
+        R(q,r) = (1-r) W/2 + r W(1-q)
+        V(q,r) = r W (q - 1/2).
+
+    Thus information quality and retained actionability enter multiplicatively
+    in this declared reduced model. Better information can have declining
+    behavioral value if optionality disappears faster than q improves.
+    """
+
+    q = float(cue_accuracy)
+    r = float(recourse_fraction)
+    if not isfinite(q) or q < 0.5 or q > 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    if not isfinite(r) or r < 0.0 or r > 1.0:
+        raise ValueError("recourse_fraction must lie in [0, 1]")
+    wrong = _finite_nonnegative("wrong_state_loss", wrong_state_loss)
+
+    no_signal = 0.5 * wrong
+    post = (1.0 - r) * no_signal + r * wrong * (1.0 - q)
+    value = no_signal - post
+    return BinaryActionability(
+        cue_accuracy=q,
+        recourse_fraction=r,
+        wrong_state_loss=wrong,
+        no_signal_risk=no_signal,
+        post_signal_risk=post,
+        information_value=max(0.0, value),
+    )
+
+
+def actionability_profile(
+    cue_accuracies: Sequence[float],
+    recourse_fractions: Sequence[float],
+    *,
+    wrong_state_loss: float = 1.0,
+) -> tuple[BinaryActionability, ...]:
+    """Evaluate a route/stage profile of improving information and shrinking recourse."""
+
+    if len(cue_accuracies) != len(recourse_fractions) or not cue_accuracies:
+        raise ValueError("cue_accuracies and recourse_fractions must align and be non-empty")
+    return tuple(
+        binary_actionability_value(
+            q,
+            r,
+            wrong_state_loss=wrong_state_loss,
+        )
+        for q, r in zip(cue_accuracies, recourse_fractions)
+    )
+
 def binary_schrodinger_spring(
     cue_accuracy: float,
     *,
