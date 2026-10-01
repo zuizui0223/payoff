@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-01",
+  "status": "PROSPECTIVE_SOURCE_BACKED_BRIDGE_NOT_DIRECT_D_EFF_TEST",
+  "frozen_submission_affected": false,
+  "theory_objects": {
+    "signed_recourse": "phase error sign predicts correction direction when recourse is cheaper than residual mismatch",
+    "noisy_information": "en-route signal can reduce Bayes risk while recourse remains available",
+    "actionability_envelope": "V(q,r)=r*W*(q-0.5) in the declared symmetric binary reduced model",
+    "stagewise_commitment": "best commitment stage need not be the stage with highest cue accuracy when later actionability is lost"
+  },
+  "sources": [
+    {
+      "system": "Red Desert long-distance migratory mule deer",
+      "citation": "Ortega et al. 2023 Nature Communications 14:2008",
+      "doi": "10.1038/s41467-023-37750-z",
+      "evidence": {
+        "adult_females": 72,
+        "study_years": "2011-2020",
+        "migration_distance_km": [
+          134,
+          293
+        ],
+        "start_mismatch_days_range": [
+          -70,
+          52
+        ],
+        "late_vs_early_speed_ratio": 2.5,
+        "late_vs_early_stopover_reduction_percent": 72,
+        "ahead_compensated_percent": 93,
+        "ahead_full_percent": 70,
+        "ahead_partial_percent": 23,
+        "ahead_mechanism": "decelerating movement",
+        "behind_compensated_percent": 90,
+        "behind_full_percent": 54,
+        "behind_partial_percent": 36,
+        "behind_mechanism": "accelerating movement",
+        "noncompensators_percent": 15,
+        "full_compensation_odds_ratio_per_extra_mismatch_day": 1.21
+      },
+      "licensed_claims": [
+        "both signs of initial phenological mismatch can induce opposite movement-rate recourse",
+        "early/ahead animals can slow relative progression",
+        "late/behind animals can accelerate relative progression",
+        "movement speed and stopover use are downstream timing actuators"
+      ],
+      "prohibited_claims": [
+        "published summaries identify PAYOFF-B kappa or mu",
+        "published summaries identify natural D_eff",
+        "published summaries identify cue-use threshold q_wait",
+        "all migrants compensate"
+      ]
+    },
+    {
+      "system": "bar-tailed godwit New Zealand-Yellow Sea-Alaska migration",
+      "citation": "Conklin, Lisovski & Battley 2021 Nature Communications 12:4780",
+      "doi": "10.1038/s41467-021-25022-7",
+      "evidence": {
+        "population_departure_advance_days_2008_2020": 6,
+        "complete_tracks": 50,
+        "individuals": 36,
+        "nz_departure_trend_days_per_year": -0.845,
+        "yellow_sea_arrival_trend_days_per_year": -0.885,
+        "yellow_sea_departure_trend_days_per_year": -0.333,
+        "alaska_arrival_trend_days_per_year": -0.205,
+        "yellow_sea_stopover_duration_trend_days_per_year": 0.693,
+        "yellow_sea_stopover_duration_p": 0.026,
+        "alaska_departure_arrival_trends_supported": false
+      },
+      "licensed_claims": [
+        "earlier initial departure can be absorbed by longer later stopover",
+        "departure flexibility need not propagate to destination arrival",
+        "different migration stages can transform an initial timing shift"
+      ],
+      "prohibited_claims": [
+        "godwits intentionally depart early in order to wait for later information",
+        "the longer stopover is uniquely adaptive rather than a constraint",
+        "the study identifies information quality q or D_eff"
+      ]
+    },
+    {
+      "system": "pink-footed goose multi-site spring migration",
+      "citation": "Bauer, Gienapp & Madsen 2008 Ecology 89:1953-1960",
+      "doi": "10.1890/07-1101.1",
+      "evidence": {
+        "route": "Denmark via Norway to Svalbard",
+        "cue_relevance_changes_en_route": true,
+        "stopover_accumulated_temperature_used": true,
+        "northward_progression_adjusted": true
+      },
+      "licensed_claims": [
+        "environmental cue relevance can change along a migration route",
+        "local stopover conditions can provide information used to adjust progression"
+      ],
+      "prohibited_claims": [
+        "the paper estimates a common cue accuracy q on the PAYOFF-B scale",
+        "the paper estimates remaining recourse fraction r",
+        "the paper demonstrates the exact product V(q,r)"
+      ]
+    },
+    {
+      "system": "British Columbia butterfly-nectar plant associations",
+      "citation": "Kharouba & Vellend 2015 Journal of Animal Ecology 84:1311-1321",
+      "doi": "10.1111/1365-2656.12373",
+      "evidence": {
+        "associations": 166,
+        "butterfly_species_same_spring_comparison": 61,
+        "plant_species_same_spring_comparison": 54,
+        "plant_more_temperature_sensitive_spring_days_per_C": 5.7,
+        "standard_error_days_per_C": 1.03,
+        "associations_with_plants_more_sensitive_percent": 87,
+        "spring_raw_sensitivity_correlation_r": -0.04,
+        "spring_raw_sensitivity_correlation_p": 0.76
+      },
+      "licensed_claims": [
+        "shared local seasonal exposure does not guarantee matched partner temperature sensitivity",
+        "interacting plant and butterfly phenologies can respond at different rates"
+      ],
+      "prohibited_claims": [
+        "plants have lower recourse than butterflies",
+        "local systems have shorter information distance on a quantified common scale",
+        "the study identifies D_eff, q_wait, or r",
+        "this single system licenses a migrant-versus-pollinator taxon ranking"
+      ]
+    }
+  ],
+  "cross_system_ceiling": {
+    "supported": "migration systems directly demonstrate post-commitment timing recourse and en-route cue updating; local plant-butterfly interactions directly demonstrate unequal phenological sensitivity despite shared regional environmental exposure",
+    "not_supported": [
+      "migrants universally have greater recourse than pollinators",
+      "pollinators universally have greater irreversibility",
+      "a pooled migrant-versus-pollinator q or r coefficient",
+      "natural validation of V(q,r)=r*W*(q-0.5)"
+    ],
+    "prospective_prediction": "mismatch risk should be greatest when useful pre-commitment information is weak and remaining post-commitment recourse is narrow"
+  }
+}
