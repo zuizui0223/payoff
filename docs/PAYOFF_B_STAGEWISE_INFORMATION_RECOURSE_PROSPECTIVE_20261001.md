@@ -145,6 +145,50 @@ If only one action remains feasible,
 This is established generic value-of-information / recourse logic, not a claim
 of generic mathematical novelty.
 
+## 4.2 General Bayes-envelope principle and its limit
+
+For an arbitrary finite feasible action set A and belief vector p over hidden
+seasonal states, define the Bayes-risk envelope
+
+    g_A(p) = min_{a in A} p . L_a.
+
+Because it is the pointwise minimum of linear functions, g_A is concave.
+For a signal Z that updates p to p_Z,
+
+    V_A(Z)
+      = g_A(p) - E[g_A(p_Z)]
+      >= 0
+
+by Jensen's inequality.
+
+This gives the general mathematical core of the "Schroedinger's spring"
+analogy:
+
+> later information has behavioral value only through the curvature/kinks of
+> the remaining action-value envelope.
+
+If commitment has reduced the feasible set to a single action, g_A is linear
+and the information value is exactly zero.
+
+However, **information value is not generically monotone in the size of the
+action set**. Adding a robust action can lower both prior and post-signal risk
+while making the signal less useful. A frozen regression witness in
+`tests/test_stagewise_information_recourse.py` gives a three-action example
+where the restricted two-action set has signal value 0.10 but the expanded
+three-action set has signal value 0.
+
+Therefore the continuous product
+
+    V(q,r) = r W(q-1/2)
+
+below is a declared reduced-form mixture model, not a universal theorem that
+"more recourse always means more information value." What is universal is:
+
+1. information cannot raise Bayes risk when the action set is fixed;
+2. complete irreversibility makes action-changing information worthless;
+3. intermediate recourse must be defined biologically rather than inferred
+   from action-set size alone.
+
 ## 4.5 Information-actionability envelope
 
 A continuous reduced form makes the information/irreversibility tradeoff
