@@ -185,6 +185,39 @@ prospective model. It is still classical value-of-information logic; the
 ecological question is whether real migration and phenological systems occupy
 different trajectories through the (q,r) plane.
 
+## 4.55 Actionable-information coordinate and pairwise stage divergence
+
+The binary reduced model admits a compact normalized coordinate
+
+    A = r (2q - 1),
+
+with A in [0,1]. The gross information value is
+
+    V = (W/2) A.
+
+This is useful because q and r can move in opposite directions.
+
+For two actors exposed to the same improving cue sequence
+
+    q = [0.60, 0.80, 0.95],
+
+consider different remaining-recourse trajectories:
+
+    actor 1: r = [1.00, 0.70, 0.20]
+    actor 2: r = [1.00, 0.90, 0.80].
+
+With zero additional waiting cost, the reduced-form best commitment stages are
+
+    actor 1 -> stage 2
+    actor 2 -> stage 3.
+
+Thus a shared environmental-information trajectory can generate different
+optimal commitment stages solely because recourse is lost at different rates.
+
+This is the stagewise analogue of the existing Paper-2 asynchronous uptake
+result. It remains a declared binary reduced-form consequence, not an empirical
+claim that any current taxon pair has measured q and r on this scale.
+
 ## 4.6 Finite-horizon commitment result
 
 The prospective implementation now also solves an exact binary finite-horizon
@@ -347,6 +380,8 @@ pre-commitment information is poor **and** post-commitment recourse is narrow.
 | one noisy en-route signal | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | irreversibility -> zero behavioral value after one action remains | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | continuous information-actionability envelope V=rW(q-1/2) | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
+| normalized actionable-information coordinate A=r(2q-1) | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
+| shared-cue / different-recourse commitment-stage divergence | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | repeated route signals / shrinking binary action sets | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | finite-horizon Bayesian Bellman recursion | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | continuous real-valued route/pace Bellman control | NOT_IMPLEMENTED |
