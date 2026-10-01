@@ -125,11 +125,6 @@ registered wigeon analysis does not support a universal effect of predictive
 connectivity on post-error correction; and a preregistered Hoge Veluwe
 cue–resource recovery gate failed before resident–migrant history was opened.
 
-Registered Supplementary analysis: {summaries[result_class]}
-This registered analysis does not alter the manuscript's title, abstract,
-information-deadline theorem, perfect-information recovery-failure result or
-main figures.
-
 The theory predicts that **environmental information can recover before
 ecological coordination does**.
 
