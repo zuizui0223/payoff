@@ -142,6 +142,49 @@ If only one action remains feasible,
 This is established generic value-of-information / recourse logic, not a claim
 of generic mathematical novelty.
 
+## 4.5 Information-actionability envelope
+
+A continuous reduced form makes the information/irreversibility tradeoff
+explicit.
+
+Let r in [0,1] be the fraction of full state-contingent recourse still
+available when the signal is observed. In the symmetric binary problem,
+
+    R0 = W/2,
+
+and mixing the fully actionable cue-following regime with the irreversible
+regime gives
+
+    R(q,r)
+      = (1-r) W/2 + r W(1-q),
+
+so
+
+    V(q,r)
+      = r W (q - 1/2).
+
+Therefore:
+
+- increasing q raises information value when r is fixed;
+- increasing r raises information value when q is fixed;
+- perfect information has zero behavioral value when r=0;
+- if q rises while r falls, V can peak at an intermediate stage.
+
+Exact witness:
+
+    stage:                  1      2      3      4
+    cue accuracy q:       0.55   0.75   0.95   1.00
+    recourse r:           1.00   0.80   0.30   0.00
+    V/W:                  0.05   0.20   0.135  0.00
+
+The state is known most accurately at the final stage, but the information is
+then behaviorally worthless because no optionality remains.
+
+This is the cleanest exact form of the "Schroedinger's spring" idea in this
+prospective model. It is still classical value-of-information logic; the
+ecological question is whether real migration and phenological systems occupy
+different trajectories through the (q,r) plane.
+
 ## 5. What is now supported naturally
 
 ### 5.1 Both directions of migratory recourse — strong support
@@ -274,6 +317,7 @@ pre-commitment information is poor **and** post-commitment recourse is narrow.
 | signed early/late recourse | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | one noisy en-route signal | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | irreversibility -> zero behavioral value after one action remains | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
+| continuous information-actionability envelope V=rW(q-1/2) | PROSPECTIVE_IMPLEMENTED_THIS_BRANCH |
 | repeated route signals / shrinking action sets | NOT_IMPLEMENTED |
 | Bellman recursion over departure-stopover-arrival stages | NOT_IMPLEMENTED |
 | empirical natural D_eff | NOT_IDENTIFIED |
