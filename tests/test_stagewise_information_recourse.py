@@ -1,0 +1,548 @@
+import pytest
+
+from src.stagewise_information_recourse import (
+    actionability_profile,
+    binary_actionability_value,
+    best_reduced_commitment_stage,
+    binary_schrodinger_spring,
+    binary_stagewise_bellman,
+    finite_signal_recourse,
+    normalized_actionable_information,
+    recourse_adjusted_information_threshold,
+    recourse_adjusted_pair_window_width,
+    recourse_discounted_information_value,
+    signed_linear_phase_recourse,
+)
+
+
+def test_late_actor_speeds_up_when_correction_is_cheaper_than_residual_loss():
+    result = signed_linear_phase_recourse(
+        20.0,
+        advance_capacity=15.0,
+        delay_capacity=15.0,
+        correction_cost_per_unit=0.2,
+        residual_loss_per_unit=1.0,
+    )
+    assert result.mode == "speed_up_or_compress"
+    assert result.optimal_correction == pytest.approx(15.0)
+    assert result.residual_phase_error == pytest.approx(5.0)
+    assert result.effective_cost == pytest.approx(8.0)
+
+
+def test_early_actor_slows_or_waits_under_same_recourse_rule():
+    result = signed_linear_phase_recourse(
+        -30.0,
+        advance_capacity=20.0,
+        delay_capacity=20.0,
+        correction_cost_per_unit=0.2,
+        residual_loss_per_unit=1.0,
+    )
+    assert result.mode == "slow_or_wait"
+    assert result.optimal_correction == pytest.approx(-20.0)
+    assert result.residual_phase_error == pytest.approx(-10.0)
+    assert result.effective_cost == pytest.approx(14.0)
+
+
+def test_expensive_recourse_is_not_used_in_either_direction():
+    late = signed_linear_phase_recourse(
+        10.0,
+        advance_capacity=10.0,
+        delay_capacity=10.0,
+        correction_cost_per_unit=1.2,
+        residual_loss_per_unit=1.0,
+    )
+    early = signed_linear_phase_recourse(
+        -10.0,
+        advance_capacity=10.0,
+        delay_capacity=10.0,
+        correction_cost_per_unit=1.2,
+        residual_loss_per_unit=1.0,
+    )
+    assert late.mode == "none"
+    assert early.mode == "none"
+    assert late.optimal_correction == pytest.approx(0.0)
+    assert early.optimal_correction == pytest.approx(0.0)
+
+
+def test_more_signed_recourse_capacity_cannot_raise_effective_cost():
+    early_small = signed_linear_phase_recourse(
+        -20.0,
+        advance_capacity=0.0,
+        delay_capacity=5.0,
+        correction_cost_per_unit=0.2,
+        residual_loss_per_unit=1.0,
+    )
+    early_large = signed_linear_phase_recourse(
+        -20.0,
+        advance_capacity=0.0,
+        delay_capacity=15.0,
+        correction_cost_per_unit=0.2,
+        residual_loss_per_unit=1.0,
+    )
+    late_small = signed_linear_phase_recourse(
+        20.0,
+        advance_capacity=5.0,
+        delay_capacity=0.0,
+        correction_cost_per_unit=0.2,
+        residual_loss_per_unit=1.0,
+    )
+    late_large = signed_linear_phase_recourse(
+        20.0,
+        advance_capacity=15.0,
+        delay_capacity=0.0,
+        correction_cost_per_unit=0.2,
+        residual_loss_per_unit=1.0,
+    )
+    assert early_large.effective_cost < early_small.effective_cost
+    assert late_large.effective_cost < late_small.effective_cost
+
+
+@pytest.mark.parametrize(
+    ("q", "expected_risk", "expected_value"),
+    [
+        (0.5, 0.5, 0.0),
+        (0.75, 0.25, 0.25),
+        (1.0, 0.0, 0.5),
+    ],
+)
+def test_schrodinger_spring_exact_binary_value(q, expected_risk, expected_value):
+    result = binary_schrodinger_spring(q)
+    assert result.no_signal_risk == pytest.approx(0.5)
+    assert result.post_signal_risk == pytest.approx(expected_risk)
+    assert result.signal_value == pytest.approx(expected_value)
+
+
+def test_information_has_zero_behavioral_value_after_complete_irreversibility():
+    result = binary_schrodinger_spring(
+        1.0,
+        allowed_actions=[0],
+    )
+    assert result.no_signal_risk == pytest.approx(0.5)
+    assert result.post_signal_risk == pytest.approx(0.5)
+    assert result.perfect_information_risk == pytest.approx(0.5)
+    assert result.signal_value == pytest.approx(0.0)
+    assert result.perfect_information_value == pytest.approx(0.0)
+
+
+def test_more_recourse_actions_cannot_increase_post_signal_risk():
+    # Three states, two noisy signals, and three possible recourse actions.
+    prior = [0.2, 0.5, 0.3]
+    signal = [
+        [0.8, 0.2],
+        [0.5, 0.5],
+        [0.2, 0.8],
+    ]
+    losses = [
+        [0.0, 1.0, 2.0],
+        [1.0, 0.0, 1.0],
+        [2.0, 1.0, 0.0],
+    ]
+    restricted = finite_signal_recourse(
+        prior,
+        signal,
+        losses,
+        allowed_actions=[1],
+    )
+    expanded = finite_signal_recourse(
+        prior,
+        signal,
+        losses,
+        allowed_actions=[0, 1, 2],
+    )
+    assert expanded.post_signal_risk <= restricted.post_signal_risk
+    assert expanded.perfect_information_risk <= restricted.perfect_information_risk
+
+
+def test_noisy_route_information_is_bounded_by_no_information_and_perfect_information():
+    result = binary_schrodinger_spring(0.7)
+    assert (
+        result.perfect_information_risk
+        <= result.post_signal_risk
+        <= result.no_signal_risk
+    )
+
+
+def test_direct_cost_does_not_change_direction_of_optimal_recourse():
+    late = signed_linear_phase_recourse(
+        10.0,
+        advance_capacity=10.0,
+        delay_capacity=10.0,
+        correction_cost_per_unit=0.1,
+        residual_loss_per_unit=1.0,
+        direct_commit_cost=5.0,
+    )
+    early = signed_linear_phase_recourse(
+        -10.0,
+        advance_capacity=10.0,
+        delay_capacity=10.0,
+        correction_cost_per_unit=0.1,
+        residual_loss_per_unit=1.0,
+        direct_commit_cost=5.0,
+    )
+    assert late.mode == "speed_up_or_compress"
+    assert early.mode == "slow_or_wait"
+    assert late.effective_cost == pytest.approx(6.0)
+    assert early.effective_cost == pytest.approx(6.0)
+
+
+
+def test_binary_actionability_exact_product_formula():
+    result = binary_actionability_value(
+        0.8,
+        0.4,
+        wrong_state_loss=2.0,
+    )
+    # V = r * W * (q - 1/2) = 0.4 * 2 * 0.3 = 0.24.
+    assert result.no_signal_risk == pytest.approx(1.0)
+    assert result.information_value == pytest.approx(0.24)
+    assert result.post_signal_risk == pytest.approx(0.76)
+
+
+def test_perfect_information_has_zero_value_after_optionality_is_gone():
+    result = binary_actionability_value(
+        1.0,
+        0.0,
+        wrong_state_loss=3.0,
+    )
+    assert result.no_signal_risk == pytest.approx(1.5)
+    assert result.post_signal_risk == pytest.approx(1.5)
+    assert result.information_value == pytest.approx(0.0)
+
+
+def test_information_value_can_peak_before_information_quality_peaks():
+    profile = actionability_profile(
+        cue_accuracies=[0.55, 0.75, 0.95, 1.0],
+        recourse_fractions=[1.0, 0.8, 0.3, 0.0],
+    )
+    values = [row.information_value for row in profile]
+    assert values == pytest.approx([0.05, 0.20, 0.135, 0.0])
+    assert profile[1].cue_accuracy < profile[2].cue_accuracy
+    assert profile[1].information_value > profile[2].information_value
+    assert profile[-1].cue_accuracy == pytest.approx(1.0)
+    assert profile[-1].information_value == pytest.approx(0.0)
+
+
+def test_full_recourse_recovers_standard_binary_information_value():
+    for q in (0.5, 0.6, 0.8, 1.0):
+        actionability = binary_actionability_value(q, 1.0)
+        standard = binary_schrodinger_spring(q)
+        assert actionability.information_value == pytest.approx(
+            standard.signal_value
+        )
+        assert actionability.post_signal_risk == pytest.approx(
+            standard.post_signal_risk
+        )
+
+
+
+def test_one_stage_bellman_recovers_standard_binary_signal_risk():
+    result = binary_stagewise_bellman(
+        0.5,
+        [0.8],
+        [[0, 1]],
+    )
+    standard = binary_schrodinger_spring(0.8)
+    assert result.optimal_expected_loss == pytest.approx(
+        standard.post_signal_risk
+    )
+    assert result.forced_stage0_commit_loss == pytest.approx(
+        standard.post_signal_risk
+    )
+    assert result.wait_value == pytest.approx(0.0)
+
+
+def test_with_full_future_recourse_zero_cost_waits_for_perfect_information():
+    result = binary_stagewise_bellman(
+        0.5,
+        [0.6, 0.8, 1.0],
+        [[0, 1], [0, 1], [0, 1]],
+        waiting_costs=[0.0, 0.0],
+    )
+    assert result.optimal_expected_loss == pytest.approx(0.0)
+    assert result.wait_value == pytest.approx(0.4)
+    stage0 = [row for row in result.policy if row.stage == 0]
+    assert stage0
+    assert all(row.decision == "wait" for row in stage0)
+
+
+def test_shrinking_action_set_makes_intermediate_imperfect_information_optimal():
+    result = binary_stagewise_bellman(
+        0.5,
+        [0.6, 0.9, 1.0],
+        [[0, 1], [0, 1], [0]],
+        waiting_costs=[0.0, 0.0],
+    )
+
+    # Waiting from stage 0 is valuable because stage 1 has a much better cue.
+    stage0 = [row for row in result.policy if row.stage == 0]
+    assert stage0
+    assert all(row.decision == "wait" for row in stage0)
+
+    # At stage 1, the actor commits under the imperfect cue rather than waiting
+    # for the perfect stage-2 cue, because stage 2 has lost one of the two
+    # state-contingent actions.
+    stage1 = [row for row in result.policy if row.stage == 1]
+    assert stage1
+    assert all(row.decision == "commit" for row in stage1)
+
+    assert result.optimal_expected_loss < result.forced_stage0_commit_loss
+    assert result.optimal_expected_loss > 0.0
+
+
+def test_waiting_cost_can_make_earlier_less_accurate_cue_optimal():
+    free = binary_stagewise_bellman(
+        0.5,
+        [0.7, 0.95],
+        [[0, 1], [0, 1]],
+        waiting_costs=[0.0],
+    )
+    costly = binary_stagewise_bellman(
+        0.5,
+        [0.7, 0.95],
+        [[0, 1], [0, 1]],
+        waiting_costs=[0.30],
+    )
+    assert free.optimal_expected_loss == pytest.approx(0.05)
+    assert costly.optimal_expected_loss == pytest.approx(0.30)
+    assert costly.wait_value == pytest.approx(0.0)
+    stage0 = [row for row in costly.policy if row.stage == 0]
+    assert all(row.decision == "commit" for row in stage0)
+
+
+def test_bellman_loss_cannot_exceed_forced_immediate_commitment():
+    result = binary_stagewise_bellman(
+        0.4,
+        [0.55, 0.75, 0.9],
+        [[0, 1], [0, 1], [0, 1]],
+        waiting_costs=[0.05, 0.05],
+        wrong_state_loss=2.0,
+    )
+    assert result.optimal_expected_loss <= result.forced_stage0_commit_loss
+    assert result.wait_value >= 0.0
+
+
+
+def test_normalized_actionable_information_has_expected_endpoints():
+    assert normalized_actionable_information(0.5, 1.0) == pytest.approx(0.0)
+    assert normalized_actionable_information(1.0, 1.0) == pytest.approx(1.0)
+    assert normalized_actionable_information(1.0, 0.0) == pytest.approx(0.0)
+    assert normalized_actionable_information(0.75, 0.5) == pytest.approx(0.25)
+
+
+def test_shared_improving_cue_can_produce_different_optimal_commitment_stages():
+    q = [0.60, 0.80, 0.95]
+
+    constrained_best, constrained_rows = best_reduced_commitment_stage(
+        q,
+        [1.0, 0.70, 0.20],
+    )
+    flexible_best, flexible_rows = best_reduced_commitment_stage(
+        q,
+        [1.0, 0.90, 0.80],
+    )
+
+    # Same cue trajectory, different remaining recourse trajectories.
+    assert constrained_best.stage == 1
+    assert flexible_best.stage == 2
+    assert constrained_rows[2].cue_accuracy == flexible_rows[2].cue_accuracy
+    assert (
+        constrained_rows[2].normalized_actionable_information
+        < flexible_rows[2].normalized_actionable_information
+    )
+
+
+def test_wait_cost_can_shift_best_reduced_stage_earlier():
+    q = [0.60, 0.80, 0.95]
+    r = [1.0, 0.90, 0.80]
+    no_cost_best, _ = best_reduced_commitment_stage(q, r)
+    costly_best, _ = best_reduced_commitment_stage(
+        q,
+        r,
+        cumulative_wait_costs=[0.0, 0.15, 0.35],
+    )
+    assert no_cost_best.stage == 2
+    assert costly_best.stage == 1
+    assert costly_best.stage < no_cost_best.stage
+
+
+def test_stage_score_uses_half_wrong_loss_times_normalized_actionability():
+    best, rows = best_reduced_commitment_stage(
+        [0.75],
+        [0.50],
+        wrong_state_loss=4.0,
+    )
+    assert best.stage == 0
+    assert rows[0].normalized_actionable_information == pytest.approx(0.25)
+    assert rows[0].gross_information_value == pytest.approx(0.50)
+
+
+
+def test_recourse_adjusted_threshold_recovers_canonical_at_full_actionability():
+    result = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.10,
+        retained_actionability=1.0,
+    )
+    assert result.ever_waits
+    assert result.actionable_cue_accuracy == pytest.approx(0.75)
+    assert result.actionability_adjusted_delay_cost == pytest.approx(0.10)
+    assert result.wait_cue_accuracy == pytest.approx(0.8125)
+
+
+def test_half_actionability_inflates_same_deadline_cost_and_raises_threshold():
+    full = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.10,
+        retained_actionability=1.0,
+    )
+    half = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.10,
+        retained_actionability=0.5,
+    )
+    assert half.ever_waits
+    assert half.actionability_adjusted_delay_cost == pytest.approx(0.20)
+    assert half.wait_cue_accuracy == pytest.approx(0.875)
+    assert half.wait_cue_accuracy > full.wait_cue_accuracy
+
+
+def test_quarter_actionability_makes_canonical_delay_never_worth_waiting():
+    result = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.10,
+        retained_actionability=0.25,
+    )
+    # R0=0.40, so r*R0=0.10. Ties commit now.
+    assert result.maximum_actionable_information_value == pytest.approx(0.10)
+    assert not result.ever_waits
+    assert result.wait_cue_accuracy is None
+
+
+def test_zero_actionability_makes_perfect_information_behaviorally_worthless():
+    value = recourse_discounted_information_value(
+        0.40,
+        1.0,
+        2.0,
+        1.0,
+        retained_actionability=0.0,
+    )
+    result = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.0,
+        retained_actionability=0.0,
+    )
+    assert value == pytest.approx(0.0)
+    assert not result.ever_waits
+    assert result.wait_cue_accuracy is None
+
+
+def test_equal_raw_deadline_cost_can_create_window_from_actionability_difference():
+    width = recourse_adjusted_pair_window_width(
+        0.40,
+        2.0,
+        1.0,
+        actor_a_delay_cost=0.08,
+        actor_a_actionability=1.0,
+        actor_b_delay_cost=0.08,
+        actor_b_actionability=0.5,
+    )
+    # Adjusted costs are 0.08 and 0.16; S=1.60.
+    assert width == pytest.approx(0.05)
+
+
+@pytest.mark.parametrize("prior", [0.25, 0.40, 0.60, 0.80])
+@pytest.mark.parametrize("false_cost", [0.5, 1.0, 2.0])
+@pytest.mark.parametrize("missed_cost", [0.5, 1.0, 2.0])
+@pytest.mark.parametrize("r", [0.25, 0.5, 0.8, 1.0])
+def test_recourse_adjusted_closed_form_matches_bruteforce_grid(
+    prior,
+    false_cost,
+    missed_cost,
+    r,
+):
+    early_loss = (1.0 - prior) * false_cost
+    late_loss = prior * missed_cost
+    r0 = min(early_loss, late_loss)
+    delay = 0.6 * r * r0
+
+    threshold = recourse_adjusted_information_threshold(
+        prior,
+        false_cost,
+        missed_cost,
+        delay_cost=delay,
+        retained_actionability=r,
+    )
+    assert threshold.ever_waits
+    assert threshold.wait_cue_accuracy is not None
+
+    for step in range(51):
+        q = 0.5 + 0.01 * step
+        value = recourse_discounted_information_value(
+            prior,
+            q,
+            false_cost,
+            missed_cost,
+            retained_actionability=r,
+        )
+        brute_wait = value > delay + 1e-12
+        closed_wait = q > threshold.wait_cue_accuracy + 1e-12
+        assert brute_wait == closed_wait
+
+
+def test_actionability_fraction_is_not_claimed_as_physical_capacity():
+    result = recourse_adjusted_information_threshold(
+        0.40,
+        2.0,
+        1.0,
+        delay_cost=0.05,
+        retained_actionability=0.5,
+    )
+    assert result.retained_actionability == pytest.approx(0.5)
+    # This scalar is a reduced-form attenuation weight; biological mapping
+    # requires an external model rather than interpreting 0.5 as "half a route".
+    assert result.actionability_adjusted_delay_cost == pytest.approx(0.10)
+
+
+
+def test_information_value_is_not_generically_monotone_in_action_set_size():
+    # Adding action 2 lowers both prior and post-signal Bayes risk, but it is a
+    # robust action that makes the signal itself worthless. Therefore generic
+    # action-set expansion does NOT imply larger value of information.
+    prior = [0.5, 0.5]
+    signal = [
+        [0.8, 0.2],
+        [0.2, 0.8],
+    ]
+    losses = [
+        [10.0, 9.0],
+        [7.0, 10.0],
+        [6.0, 1.0],
+    ]
+    restricted = finite_signal_recourse(
+        prior,
+        signal,
+        losses,
+        allowed_actions=[0, 1],
+    )
+    expanded = finite_signal_recourse(
+        prior,
+        signal,
+        losses,
+        allowed_actions=[0, 1, 2],
+    )
+
+    assert restricted.signal_value == pytest.approx(0.10)
+    assert expanded.signal_value == pytest.approx(0.0)
+    assert expanded.no_signal_risk < restricted.no_signal_risk
+    assert expanded.post_signal_risk < restricted.post_signal_risk
+    assert restricted.signal_value > expanded.signal_value

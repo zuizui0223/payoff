@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-01",
+  "status": "PROSPECTIVE_SOURCE_BACKED_BRIDGE_NOT_DIRECT_D_EFF_TEST",
+  "frozen_submission_affected": false,
+  "theory_objects": {
+    "signed_recourse": "phase error sign predicts correction direction when recourse is cheaper than residual mismatch",
+    "noisy_information": "en-route signal can reduce Bayes risk while recourse remains available",
+    "actionability_envelope": "V(q,r)=r*W*(q-0.5) in the declared symmetric binary reduced model",
+    "stagewise_commitment": "best commitment stage need not be the stage with highest cue accuracy when later actionability is lost",
+    "canonical_deadline_bridge": "V(q,r)=r*V_A(q); if r>0 and D<r*R0 then q_wait(r)=(B+D/r)/S, so lost actionability inflates the effective deadline from D to D/r in the declared reduced model"
+  },
+  "sources": [
+    {
+      "system": "Red Desert long-distance migratory mule deer",
+      "citation": "Ortega et al. 2023 Nature Communications 14:2008",
+      "doi": "10.1038/s41467-023-37750-z",
+      "evidence": {
+        "adult_females": 72,
+        "study_years": "2011-2020",
+        "migration_distance_km": [
+          134,
+          293
+        ],
+        "start_mismatch_days_range": [
+          -70,
+          52
+        ],
+        "late_vs_early_speed_ratio": 2.5,
+        "late_vs_early_stopover_reduction_percent": 72,
+        "ahead_compensated_percent": 93,
+        "ahead_full_percent": 70,
+        "ahead_partial_percent": 23,
+        "ahead_mechanism": "decelerating movement",
+        "behind_compensated_percent": 90,
+        "behind_full_percent": 54,
+        "behind_partial_percent": 36,
+        "behind_mechanism": "accelerating movement",
+        "noncompensators_percent": 15,
+        "full_compensation_odds_ratio_per_extra_mismatch_day": 1.21,
+        "early_start_days_from_peak_IRG": -30,
+        "early_start_ci95_half_width_days": 5,
+        "early_end_days_from_peak_IRG": 4,
+        "early_end_ci95_half_width_days": 3,
+        "late_start_days_from_peak_IRG": 20,
+        "late_start_ci95_half_width_days": 5,
+        "late_end_days_from_peak_IRG": 11,
+        "late_end_ci95_half_width_days": 4,
+        "early_movement_rate_km_per_day": 2.9,
+        "early_movement_rate_ci95_half_width": 0.3,
+        "late_movement_rate_km_per_day": 7.1,
+        "late_movement_rate_ci95_half_width": 0.7,
+        "early_stopover_days": 36,
+        "early_stopover_ci95_half_width": 5,
+        "late_stopover_days": 10,
+        "late_stopover_ci95_half_width": 5,
+        "early_migration_duration_days": 72,
+        "mid_migration_duration_days": 48,
+        "late_migration_duration_days": 31,
+        "average_completion_window_days": 6,
+        "foraging_penalty_last_vs_first_quarter_percent_higher": 11
+      },
+      "licensed_claims": [
+        "both signs of initial phenological mismatch can induce opposite movement-rate recourse",
+        "early/ahead animals can slow relative progression",
+        "late/behind animals can accelerate relative progression",
+        "movement speed and stopover use are downstream timing actuators",
+        "a roughly 45-day early-versus-late start contrast was strongly compressed by movement-rate and stopover differences before summer-range arrival"
+      ],
+      "prohibited_claims": [
+        "published summaries identify PAYOFF-B kappa or mu",
+        "published summaries identify natural D_eff",
+        "published summaries identify cue-use threshold q_wait",
+        "all migrants compensate"
+      ]
+    },
+    {
+      "system": "bar-tailed godwit New Zealand-Yellow Sea-Alaska migration",
+      "citation": "Conklin, Lisovski & Battley 2021 Nature Communications 12:4780",
+      "doi": "10.1038/s41467-021-25022-7",
+      "evidence": {
+        "population_departure_advance_days_2008_2020": 6,
+        "complete_tracks": 50,
+        "individuals": 36,
+        "nz_departure_trend_days_per_year": -0.845,
+        "yellow_sea_arrival_trend_days_per_year": -0.885,
+        "yellow_sea_departure_trend_days_per_year": -0.333,
+        "alaska_arrival_trend_days_per_year": -0.205,
+        "yellow_sea_stopover_duration_trend_days_per_year": 0.693,
+        "yellow_sea_stopover_duration_p": 0.026,
+        "alaska_departure_arrival_trends_supported": false
+      },
+      "licensed_claims": [
+        "earlier initial departure can be absorbed by longer later stopover",
+        "departure flexibility need not propagate to destination arrival",
+        "different migration stages can transform an initial timing shift"
+      ],
+      "prohibited_claims": [
+        "godwits intentionally depart early in order to wait for later information",
+        "the longer stopover is uniquely adaptive rather than a constraint",
+        "the study identifies information quality q or D_eff"
+      ]
+    },
+    {
+      "system": "pink-footed goose multi-site spring migration",
+      "citation": "Bauer, Gienapp & Madsen 2008 Ecology 89:1953-1960",
+      "doi": "10.1890/07-1101.1",
+      "evidence": {
+        "route": "Denmark via Norway to Svalbard",
+        "cue_relevance_changes_en_route": true,
+        "stopover_accumulated_temperature_used": true,
+        "northward_progression_adjusted": true
+      },
+      "licensed_claims": [
+        "environmental cue relevance can change along a migration route",
+        "local stopover conditions can provide information used to adjust progression"
+      ],
+      "prohibited_claims": [
+        "the paper estimates a common cue accuracy q on the PAYOFF-B scale",
+        "the paper estimates remaining recourse fraction r",
+        "the paper demonstrates the exact product V(q,r)"
+      ]
+    },
+    {
+      "system": "British Columbia butterfly-nectar plant associations",
+      "citation": "Kharouba & Vellend 2015 Journal of Animal Ecology 84:1311-1321",
+      "doi": "10.1111/1365-2656.12373",
+      "evidence": {
+        "associations": 166,
+        "butterfly_species_same_spring_comparison": 61,
+        "plant_species_same_spring_comparison": 54,
+        "plant_more_temperature_sensitive_spring_days_per_C": 5.7,
+        "standard_error_days_per_C": 1.03,
+        "associations_with_plants_more_sensitive_percent": 87,
+        "spring_raw_sensitivity_correlation_r": -0.04,
+        "spring_raw_sensitivity_correlation_p": 0.76
+      },
+      "licensed_claims": [
+        "shared local seasonal exposure does not guarantee matched partner temperature sensitivity",
+        "interacting plant and butterfly phenologies can respond at different rates"
+      ],
+      "prohibited_claims": [
+        "plants have lower recourse than butterflies",
+        "local systems have shorter information distance on a quantified common scale",
+        "the study identifies D_eff, q_wait, or r",
+        "this single system licenses a migrant-versus-pollinator taxon ranking"
+      ]
+    },
+    {
+      "system": "eastern US Viola-bee phenology network",
+      "citation": "Climate change intensifies plant-pollinator mismatch and increases secondary extinction risk for plants in northern latitudes, PNAS 2025",
+      "doi": "10.1073/pnas.2506265122",
+      "evidence": {
+        "approximate_specimen_records": 15000,
+        "time_span_years": 120,
+        "flowering_duration_used_in_mismatch_metric": true,
+        "longer_flowering_duration_identified_as_buffer_candidate": true
+      },
+      "licensed_claims": [
+        "phenological window duration is a plausible local interaction buffer",
+        "plant-pollinator systems cannot be assumed to have negligible temporal recourse"
+      ],
+      "prohibited_claims": [
+        "flowering duration is equivalent to migratory speed or stopover recourse",
+        "the study estimates recourse fraction r on the PAYOFF-B binary scale",
+        "longer flowering duration always evolves or plastically changes in response to mismatch"
+      ]
+    }
+  ],
+  "cross_system_ceiling": {
+    "supported": "migration systems directly demonstrate post-commitment timing recourse and en-route cue updating; local plant-butterfly interactions directly demonstrate unequal phenological sensitivity despite shared regional environmental exposure; local interaction systems can also possess temporal-window buffering, so recourse must be measured rather than assigned by taxon",
+    "not_supported": [
+      "migrants universally have greater recourse than pollinators",
+      "pollinators universally have greater irreversibility",
+      "a pooled migrant-versus-pollinator q or r coefficient",
+      "natural validation of V(q,r)=r*W*(q-0.5)",
+      "plants or pollinators can be assigned uniformly low recourse from taxon identity alone",
+      "direct biological interpretation of reduced-form r as a physical percentage of route, stopover or flowering-duration capacity without an external mapping"
+    ],
+    "prospective_prediction": "mismatch risk should be greatest when useful pre-commitment information is weak and remaining post-commitment recourse is narrow"
+  }
+}

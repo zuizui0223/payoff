@@ -1,0 +1,884 @@
+"""Stagewise information and signed recourse for seasonal tracking.
+
+This module is a prospective PAYOFF-B extension. It does not alter the frozen
+Paper 2 submission model.
+
+Two gaps are addressed explicitly:
+
+1. The existing compensated-deadline model only corrects positive raw delay.
+   Here phase error is signed. Positive error means late and can be corrected
+   by speeding up / compressing stopovers; negative error means early and can
+   be corrected by slowing down / extending stopovers.
+
+2. The existing hidden-state deadline functions compare no state information
+   with perfect state revelation before compensation. Here a noisy en-route
+   signal interpolates between those endpoints.
+
+The finite-signal result is standard Bayesian value-of-information / recourse
+mathematics. PAYOFF-B should not claim generic novelty for that theorem. Its
+role is to make the ecological "Schroedinger's spring" analogy precise:
+the future seasonal state can remain latent while the feasible recourse set
+shrinks as commitment proceeds.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from math import isfinite
+from typing import Iterable, Sequence
+
+from src.endogenous_information_timing import (
+    closed_form_information_threshold,
+    information_value as canonical_information_value,
+)
+
+
+_TOL = 1e-12
+
+
+@dataclass(frozen=True)
+class SignedRecourseResult:
+    """Optimal one-stage timing correction for a signed phase error."""
+
+    phase_error: float
+    advance_capacity: float
+    delay_capacity: float
+    correction_cost_per_unit: float
+    residual_loss_per_unit: float
+    direct_commit_cost: float
+    optimal_correction: float
+    residual_phase_error: float
+    effective_cost: float
+    mode: str
+
+
+@dataclass(frozen=True)
+class FiniteSignalRecourse:
+    """Bayes risks before and after a noisy en-route signal."""
+
+    no_signal_risk: float
+    post_signal_risk: float
+    perfect_information_risk: float
+    signal_value: float
+    perfect_information_value: float
+    signal_action_indices: tuple[int, ...]
+    no_signal_action_index: int
+    allowed_actions: tuple[int, ...]
+
+
+def _finite_nonnegative(name: str, value: float) -> float:
+    x = float(value)
+    if not isfinite(x) or x < 0.0:
+        raise ValueError(f"{name} must be finite and non-negative")
+    return x
+
+
+def signed_linear_phase_recourse(
+    phase_error: float,
+    *,
+    advance_capacity: float,
+    delay_capacity: float,
+    correction_cost_per_unit: float,
+    residual_loss_per_unit: float,
+    direct_commit_cost: float = 0.0,
+) -> SignedRecourseResult:
+    """Return the optimal signed temporal correction.
+
+    Sign convention
+    ---------------
+    phase_error > 0
+        The actor is late. Positive correction advances progress, e.g. faster
+        migration or shorter stopovers.
+
+    phase_error < 0
+        The actor is early. Negative correction delays progress, e.g. slower
+        migration or longer stopovers.
+
+    The feasible correction interval is
+        [-delay_capacity, +advance_capacity].
+
+    Loss is
+        direct_commit_cost
+        + kappa * |correction|
+        + mu * |phase_error - correction|.
+
+    With kappa < mu, correction is the projection of the phase error onto the
+    feasible interval. With kappa >= mu, correction is not worth buying and
+    the deterministic tie rule chooses zero.
+    """
+
+    error = float(phase_error)
+    if not isfinite(error):
+        raise ValueError("phase_error must be finite")
+
+    advance = _finite_nonnegative("advance_capacity", advance_capacity)
+    delay = _finite_nonnegative("delay_capacity", delay_capacity)
+    kappa = _finite_nonnegative(
+        "correction_cost_per_unit", correction_cost_per_unit
+    )
+    mu = _finite_nonnegative("residual_loss_per_unit", residual_loss_per_unit)
+    direct = _finite_nonnegative("direct_commit_cost", direct_commit_cost)
+
+    if kappa < mu:
+        correction = min(max(error, -delay), advance)
+    else:
+        correction = 0.0
+
+    residual = error - correction
+    effective = direct + kappa * abs(correction) + mu * abs(residual)
+
+    if correction > _TOL:
+        mode = "speed_up_or_compress"
+    elif correction < -_TOL:
+        mode = "slow_or_wait"
+    else:
+        mode = "none"
+
+    return SignedRecourseResult(
+        phase_error=error,
+        advance_capacity=advance,
+        delay_capacity=delay,
+        correction_cost_per_unit=kappa,
+        residual_loss_per_unit=mu,
+        direct_commit_cost=direct,
+        optimal_correction=correction,
+        residual_phase_error=residual,
+        effective_cost=effective,
+        mode=mode,
+    )
+
+
+def _validate_prior(prior: Sequence[float]) -> tuple[float, ...]:
+    probs = tuple(float(x) for x in prior)
+    if not probs:
+        raise ValueError("prior must be non-empty")
+    if any((not isfinite(x)) or x < 0.0 for x in probs):
+        raise ValueError("prior probabilities must be finite and non-negative")
+    if abs(sum(probs) - 1.0) > 1e-10:
+        raise ValueError("prior probabilities must sum to one")
+    return probs
+
+
+def _validate_signal(
+    signal_likelihoods: Sequence[Sequence[float]],
+    n_states: int,
+) -> tuple[tuple[float, ...], ...]:
+    rows = tuple(tuple(float(x) for x in row) for row in signal_likelihoods)
+    if len(rows) != n_states:
+        raise ValueError("signal_likelihoods must have one row per state")
+    if not rows or not rows[0]:
+        raise ValueError("signal_likelihoods must be non-empty")
+    n_signals = len(rows[0])
+    if any(len(row) != n_signals for row in rows):
+        raise ValueError("signal_likelihood rows must have equal length")
+    for row in rows:
+        if any((not isfinite(x)) or x < 0.0 for x in row):
+            raise ValueError("signal probabilities must be finite and non-negative")
+        if abs(sum(row) - 1.0) > 1e-10:
+            raise ValueError("each state-specific signal row must sum to one")
+    return rows
+
+
+def _validate_losses(
+    loss_matrix: Sequence[Sequence[float]],
+    n_states: int,
+) -> tuple[tuple[float, ...], ...]:
+    losses = tuple(tuple(float(x) for x in row) for row in loss_matrix)
+    if not losses:
+        raise ValueError("loss_matrix must contain at least one action")
+    if any(len(row) != n_states for row in losses):
+        raise ValueError("each action loss row must have one value per state")
+    if any((not isfinite(x)) for row in losses for x in row):
+        raise ValueError("loss values must be finite")
+    return losses
+
+
+def finite_signal_recourse(
+    prior: Sequence[float],
+    signal_likelihoods: Sequence[Sequence[float]],
+    loss_matrix: Sequence[Sequence[float]],
+    *,
+    allowed_actions: Iterable[int] | None = None,
+) -> FiniteSignalRecourse:
+    """Compute exact Bayes risk with noisy en-route information.
+
+    Parameters
+    ----------
+    prior
+        P(H=h) over latent seasonal states.
+    signal_likelihoods
+        Matrix P(Z=z | H=h), indexed [state][signal].
+    loss_matrix
+        Loss L(a,h), indexed [action][state].
+    allowed_actions
+        Recourse actions still feasible after the signal. Restricting this set
+        represents increasing irreversibility.
+
+    Returns
+    -------
+    The no-signal Bayes risk, post-signal Bayes risk, perfect-information risk,
+    and the corresponding values of information.
+
+    Notes
+    -----
+    post_signal_risk is evaluated as
+        sum_z min_a sum_h P(h)P(z|h)L(a,h),
+    so posterior normalization is unnecessary.
+
+    With a singleton allowed action set, signal_value is exactly zero: learning
+    the state cannot improve behavior after all recourse has been lost.
+    """
+
+    probs = _validate_prior(prior)
+    signal = _validate_signal(signal_likelihoods, len(probs))
+    losses = _validate_losses(loss_matrix, len(probs))
+
+    if allowed_actions is None:
+        actions = tuple(range(len(losses)))
+    else:
+        actions = tuple(sorted(set(int(i) for i in allowed_actions)))
+        if not actions:
+            raise ValueError("allowed_actions must be non-empty")
+        if any(i < 0 or i >= len(losses) for i in actions):
+            raise ValueError("allowed action index out of bounds")
+
+    action_prior_risks = tuple(
+        sum(p * losses[a][h] for h, p in enumerate(probs))
+        for a in actions
+    )
+    no_pos = min(range(len(actions)), key=lambda i: action_prior_risks[i])
+    no_action = actions[no_pos]
+    no_signal = action_prior_risks[no_pos]
+
+    n_signals = len(signal[0])
+    chosen = []
+    post_signal = 0.0
+    for z in range(n_signals):
+        risks = tuple(
+            sum(
+                probs[h] * signal[h][z] * losses[a][h]
+                for h in range(len(probs))
+            )
+            for a in actions
+        )
+        pos = min(range(len(actions)), key=lambda i: risks[i])
+        chosen.append(actions[pos])
+        post_signal += risks[pos]
+
+    perfect = sum(
+        probs[h] * min(losses[a][h] for a in actions)
+        for h in range(len(probs))
+    )
+
+    signal_value = no_signal - post_signal
+    perfect_value = no_signal - perfect
+    if signal_value < -1e-10:
+        raise AssertionError("post-signal optimization increased Bayes risk")
+    if perfect_value < -1e-10:
+        raise AssertionError("perfect information increased Bayes risk")
+
+    return FiniteSignalRecourse(
+        no_signal_risk=no_signal,
+        post_signal_risk=post_signal,
+        perfect_information_risk=perfect,
+        signal_value=max(0.0, signal_value),
+        perfect_information_value=max(0.0, perfect_value),
+        signal_action_indices=tuple(chosen),
+        no_signal_action_index=no_action,
+        allowed_actions=actions,
+    )
+
+
+
+@dataclass(frozen=True)
+class BinaryActionability:
+    """Information value when only a fraction of full recourse remains."""
+
+    cue_accuracy: float
+    recourse_fraction: float
+    wrong_state_loss: float
+    no_signal_risk: float
+    post_signal_risk: float
+    information_value: float
+
+
+def binary_actionability_value(
+    cue_accuracy: float,
+    recourse_fraction: float,
+    *,
+    wrong_state_loss: float = 1.0,
+) -> BinaryActionability:
+    """Exact binary information value with partial retained optionality.
+
+    Consider the canonical symmetric two-state problem with prior 1/2.
+
+    With probability/weight r, the actor can still implement the cue-matched
+    action. With the remaining 1-r, the earlier commitment is effectively
+    irreversible and the cue cannot alter behavior.
+
+    Mixing those two regimes gives
+
+        R0 = W/2
+        R(q,r) = (1-r) W/2 + r W(1-q)
+        V(q,r) = r W (q - 1/2).
+
+    Thus information quality and retained actionability enter multiplicatively
+    in this declared reduced model. Better information can have declining
+    behavioral value if optionality disappears faster than q improves.
+    """
+
+    q = float(cue_accuracy)
+    r = float(recourse_fraction)
+    if not isfinite(q) or q < 0.5 or q > 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    if not isfinite(r) or r < 0.0 or r > 1.0:
+        raise ValueError("recourse_fraction must lie in [0, 1]")
+    wrong = _finite_nonnegative("wrong_state_loss", wrong_state_loss)
+
+    no_signal = 0.5 * wrong
+    post = (1.0 - r) * no_signal + r * wrong * (1.0 - q)
+    value = no_signal - post
+    return BinaryActionability(
+        cue_accuracy=q,
+        recourse_fraction=r,
+        wrong_state_loss=wrong,
+        no_signal_risk=no_signal,
+        post_signal_risk=post,
+        information_value=max(0.0, value),
+    )
+
+
+
+@dataclass(frozen=True)
+class RecourseAdjustedInformationThreshold:
+    """Canonical Paper-2 cue threshold after retained actionability discounting."""
+
+    retained_actionability: float
+    delay_cost: float
+    prior_bayes_risk: float
+    actionable_cue_accuracy: float
+    maximum_actionable_information_value: float
+    actionability_adjusted_delay_cost: float | None
+    wait_cue_accuracy: float | None
+    ever_waits: bool
+
+
+def recourse_discounted_information_value(
+    prior_early: float,
+    cue_accuracy: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    retained_actionability: float,
+) -> float:
+    """Return r times the canonical Paper-2 value of information.
+
+    retained_actionability r is a declared reduced-form weight in [0, 1].
+    It represents the fraction/weight of cases in which the later cue can still
+    alter the focal action. It is not automatically a physical fraction of
+    remaining migration distance, stopover time, flowering duration, or any
+    other biological capacity.
+
+    With canonical Paper-2 information value V_A(q), the reduced form is
+
+        V(q, r) = r V_A(q).
+
+    This nests the fully actionable model at r=1 and complete irreversibility
+    at r=0.
+    """
+
+    r = float(retained_actionability)
+    if not isfinite(r) or r < 0.0 or r > 1.0:
+        raise ValueError("retained_actionability must lie in [0, 1]")
+    return r * canonical_information_value(
+        prior_early,
+        cue_accuracy,
+        false_early_cost,
+        missed_early_cost,
+    )
+
+
+def recourse_adjusted_information_threshold(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    delay_cost: float,
+    retained_actionability: float,
+) -> RecourseAdjustedInformationThreshold:
+    """Exact cue threshold after partial retained actionability.
+
+    Let the canonical Paper-2 binary model define
+
+        A = (1-pi) C_F
+        L = pi C_M
+        S = A + L
+        B = max(A, L)
+        R0 = min(A, L).
+
+    Its fully actionable information value is
+
+        V_A(q) = max(0, S q - B).
+
+    Under the declared reduced-form actionability discount r,
+
+        V(q,r) = r V_A(q).
+
+    Waiting is optimal only when V(q,r) > D. For r>0 and D < r R0,
+
+        q_wait(r) = (B + D/r) / S.
+
+    Thus loss of actionability is exactly equivalent, for this reduced model,
+    to inflating the effective deadline cost from D to D/r. When r=0, or when
+    D >= r R0, even perfect information is not worth waiting for.
+    """
+
+    delay = _finite_nonnegative("delay_cost", delay_cost)
+    r = float(retained_actionability)
+    if not isfinite(r) or r < 0.0 or r > 1.0:
+        raise ValueError("retained_actionability must lie in [0, 1]")
+
+    base = closed_form_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=0.0,
+    )
+    total = base.early_action_prior_loss + base.late_action_prior_loss
+    other = max(
+        base.early_action_prior_loss,
+        base.late_action_prior_loss,
+    )
+    max_value = r * base.prior_bayes_risk
+
+    if r <= _TOL:
+        adjusted_delay = None
+        ever_waits = False
+        threshold = None
+    else:
+        adjusted_delay = delay / r
+        ever_waits = delay < max_value
+        threshold = (
+            (other + adjusted_delay) / total
+            if ever_waits
+            else None
+        )
+
+    return RecourseAdjustedInformationThreshold(
+        retained_actionability=r,
+        delay_cost=delay,
+        prior_bayes_risk=base.prior_bayes_risk,
+        actionable_cue_accuracy=base.actionable_cue_accuracy,
+        maximum_actionable_information_value=max_value,
+        actionability_adjusted_delay_cost=adjusted_delay,
+        wait_cue_accuracy=threshold,
+        ever_waits=ever_waits,
+    )
+
+
+def recourse_adjusted_pair_window_width(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    actor_a_delay_cost: float,
+    actor_a_actionability: float,
+    actor_b_delay_cost: float,
+    actor_b_actionability: float,
+) -> float | None:
+    """Exact finite q-window width for two reduced-form actionability states.
+
+    When both actors have finite thresholds,
+
+        Delta q = |D_A/r_A - D_B/r_B| / S.
+
+    None is returned when at least one actor never waits even at perfect
+    information, because the asynchronous regime can then persist to q=1
+    instead of forming a finite bounded window.
+    """
+
+    one = recourse_adjusted_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=actor_a_delay_cost,
+        retained_actionability=actor_a_actionability,
+    )
+    two = recourse_adjusted_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=actor_b_delay_cost,
+        retained_actionability=actor_b_actionability,
+    )
+    if (
+        not one.ever_waits
+        or not two.ever_waits
+        or one.actionability_adjusted_delay_cost is None
+        or two.actionability_adjusted_delay_cost is None
+    ):
+        return None
+
+    base = closed_form_information_threshold(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        delay_cost=0.0,
+    )
+    total = base.early_action_prior_loss + base.late_action_prior_loss
+    return abs(
+        two.actionability_adjusted_delay_cost
+        - one.actionability_adjusted_delay_cost
+    ) / total
+
+
+@dataclass(frozen=True)
+class StageScore:
+    """Reduced-form net value of committing at one seasonal-information stage."""
+
+    stage: int
+    cue_accuracy: float
+    recourse_fraction: float
+    normalized_actionable_information: float
+    gross_information_value: float
+    cumulative_wait_cost: float
+    net_information_value: float
+
+
+def normalized_actionable_information(
+    cue_accuracy: float,
+    recourse_fraction: float,
+) -> float:
+    """Return A = r(2q-1) in the declared symmetric binary model."""
+
+    q = float(cue_accuracy)
+    r = float(recourse_fraction)
+    if not isfinite(q) or q < 0.5 or q > 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    if not isfinite(r) or r < 0.0 or r > 1.0:
+        raise ValueError("recourse_fraction must lie in [0, 1]")
+    return r * (2.0 * q - 1.0)
+
+
+def best_reduced_commitment_stage(
+    cue_accuracies: Sequence[float],
+    recourse_fractions: Sequence[float],
+    *,
+    cumulative_wait_costs: Sequence[float] | None = None,
+    wrong_state_loss: float = 1.0,
+) -> tuple[StageScore, tuple[StageScore, ...]]:
+    """Choose the stage maximizing actionable information net of waiting cost.
+
+    This is the preposterior reduced form associated with
+
+        V_t = (W/2) r_t (2 q_t - 1).
+
+    It is not a replacement for binary_stagewise_bellman because it does
+    not condition later stop/commit decisions on realized signal histories.
+    It is useful as a compact ecological coordinate and exact witness.
+    """
+
+    qs = tuple(float(x) for x in cue_accuracies)
+    rs = tuple(float(x) for x in recourse_fractions)
+    if len(qs) != len(rs) or not qs:
+        raise ValueError("cue_accuracies and recourse_fractions must align")
+
+    if cumulative_wait_costs is None:
+        costs = (0.0,) * len(qs)
+    else:
+        costs = tuple(float(x) for x in cumulative_wait_costs)
+        if len(costs) != len(qs):
+            raise ValueError("cumulative_wait_costs must align with stages")
+        if any((not isfinite(x)) or x < 0.0 for x in costs):
+            raise ValueError("cumulative wait costs must be finite and non-negative")
+
+    wrong = _finite_nonnegative("wrong_state_loss", wrong_state_loss)
+    rows = []
+    for stage, (q, r, cost) in enumerate(zip(qs, rs, costs)):
+        actionable = normalized_actionable_information(q, r)
+        gross = 0.5 * wrong * actionable
+        rows.append(
+            StageScore(
+                stage=stage,
+                cue_accuracy=q,
+                recourse_fraction=r,
+                normalized_actionable_information=actionable,
+                gross_information_value=gross,
+                cumulative_wait_cost=cost,
+                net_information_value=gross - cost,
+            )
+        )
+
+    best = max(rows, key=lambda row: (row.net_information_value, -row.stage))
+    return best, tuple(rows)
+
+def actionability_profile(
+    cue_accuracies: Sequence[float],
+    recourse_fractions: Sequence[float],
+    *,
+    wrong_state_loss: float = 1.0,
+) -> tuple[BinaryActionability, ...]:
+    """Evaluate a route/stage profile of improving information and shrinking recourse."""
+
+    if len(cue_accuracies) != len(recourse_fractions) or not cue_accuracies:
+        raise ValueError("cue_accuracies and recourse_fractions must align and be non-empty")
+    return tuple(
+        binary_actionability_value(
+            q,
+            r,
+            wrong_state_loss=wrong_state_loss,
+        )
+        for q, r in zip(cue_accuracies, recourse_fractions)
+    )
+
+
+@dataclass(frozen=True)
+class StagePolicyDecision:
+    """One reachable post-signal decision in the binary route Bellman problem."""
+
+    stage: int
+    prior_early: float
+    signal: int
+    posterior_early: float
+    decision: str
+    chosen_action: int | None
+    commit_loss: float
+    wait_loss: float | None
+
+
+@dataclass(frozen=True)
+class StagewiseBellmanResult:
+    """Finite-horizon binary seasonal-information stopping result."""
+
+    optimal_expected_loss: float
+    forced_stage0_commit_loss: float
+    wait_value: float
+    policy: tuple[StagePolicyDecision, ...]
+
+
+def _binary_signal_update(
+    prior_early: float,
+    cue_accuracy: float,
+    signal: int,
+) -> tuple[float, float]:
+    """Return P(signal) and posterior P(EARLY | signal).
+
+    signal=0 denotes an EARLY signal; signal=1 denotes a LATE signal.
+    """
+
+    p = float(prior_early)
+    q = float(cue_accuracy)
+    if not isfinite(p) or p < 0.0 or p > 1.0:
+        raise ValueError("prior_early must lie in [0, 1]")
+    if not isfinite(q) or q < 0.5 or q > 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    if signal not in (0, 1):
+        raise ValueError("signal must be 0 (EARLY) or 1 (LATE)")
+
+    if signal == 0:
+        likelihood_early = q
+        likelihood_late = 1.0 - q
+    else:
+        likelihood_early = 1.0 - q
+        likelihood_late = q
+
+    probability = p * likelihood_early + (1.0 - p) * likelihood_late
+    if probability <= _TOL:
+        # Zero-probability signal. The posterior is irrelevant because the
+        # branch receives zero preposterior weight. Return a bounded sentinel.
+        return 0.0, p
+    posterior = p * likelihood_early / probability
+    return probability, posterior
+
+
+def _best_binary_commitment(
+    posterior_early: float,
+    allowed_actions: Sequence[int],
+    wrong_state_loss: float,
+) -> tuple[float, int]:
+    """Return minimum posterior loss and deterministic best action."""
+
+    p = float(posterior_early)
+    wrong = float(wrong_state_loss)
+    risks = []
+    for action in allowed_actions:
+        if action == 0:  # act for EARLY spring
+            risk = (1.0 - p) * wrong
+        elif action == 1:  # act for LATE spring
+            risk = p * wrong
+        else:
+            raise ValueError("binary action indices must be 0 or 1")
+        risks.append((risk, int(action)))
+    return min(risks, key=lambda x: (x[0], x[1]))
+
+
+def binary_stagewise_bellman(
+    prior_early: float,
+    cue_accuracies: Sequence[float],
+    allowed_actions_by_stage: Sequence[Sequence[int]],
+    *,
+    waiting_costs: Sequence[float] | None = None,
+    wrong_state_loss: float = 1.0,
+) -> StagewiseBellmanResult:
+    """Solve a finite-horizon departure-stopover commitment problem exactly.
+
+    At each stage t the actor:
+      1. receives a symmetric binary cue with accuracy q_t;
+      2. updates the belief about EARLY versus LATE destination spring;
+      3. either commits using an action still available at stage t, or
+         pays the declared waiting cost and proceeds to stage t+1.
+
+    The available action set may shrink with t. This represents biological
+    irreversibility: route choices, pace changes, stopover options or breeding
+    decisions that cease to be feasible after commitment progresses.
+
+    This is a small exact dynamic-programming bridge, not a novelty claim for
+    generic Bayesian stopping theory.
+    """
+
+    p0 = float(prior_early)
+    if not isfinite(p0) or p0 < 0.0 or p0 > 1.0:
+        raise ValueError("prior_early must lie in [0, 1]")
+
+    qs = tuple(float(q) for q in cue_accuracies)
+    if not qs:
+        raise ValueError("cue_accuracies must be non-empty")
+    if any((not isfinite(q)) or q < 0.5 or q > 1.0 for q in qs):
+        raise ValueError("all cue accuracies must lie in [0.5, 1]")
+
+    actions = tuple(
+        tuple(sorted(set(int(a) for a in stage_actions)))
+        for stage_actions in allowed_actions_by_stage
+    )
+    if len(actions) != len(qs):
+        raise ValueError("allowed_actions_by_stage must align with cue_accuracies")
+    if any(not stage_actions for stage_actions in actions):
+        raise ValueError("every stage must retain at least one action")
+    if any(a not in (0, 1) for stage_actions in actions for a in stage_actions):
+        raise ValueError("binary action indices must be 0 or 1")
+
+    if waiting_costs is None:
+        waits = (0.0,) * (len(qs) - 1)
+    else:
+        waits = tuple(float(x) for x in waiting_costs)
+        if len(waits) != len(qs) - 1:
+            raise ValueError("waiting_costs must have one value between stages")
+        if any((not isfinite(x)) or x < 0.0 for x in waits):
+            raise ValueError("waiting costs must be finite and non-negative")
+
+    wrong = _finite_nonnegative("wrong_state_loss", wrong_state_loss)
+    policy_rows: dict[tuple[int, float, int], StagePolicyDecision] = {}
+    memo: dict[tuple[int, float], float] = {}
+
+    def pre_signal(stage: int, prior: float) -> float:
+        key = (stage, round(prior, 14))
+        if key in memo:
+            return memo[key]
+
+        expected = 0.0
+        for signal_value in (0, 1):
+            signal_probability, posterior = _binary_signal_update(
+                prior,
+                qs[stage],
+                signal_value,
+            )
+            if signal_probability <= _TOL:
+                continue
+
+            commit_loss, action = _best_binary_commitment(
+                posterior,
+                actions[stage],
+                wrong,
+            )
+
+            if stage == len(qs) - 1:
+                wait_loss = None
+                decision = "commit"
+                chosen_action = action
+                optimal = commit_loss
+            else:
+                wait_loss = waits[stage] + pre_signal(stage + 1, posterior)
+                if commit_loss <= wait_loss + _TOL:
+                    decision = "commit"
+                    chosen_action = action
+                    optimal = commit_loss
+                else:
+                    decision = "wait"
+                    chosen_action = None
+                    optimal = wait_loss
+
+            policy_rows[
+                (stage, round(prior, 14), signal_value)
+            ] = StagePolicyDecision(
+                stage=stage,
+                prior_early=prior,
+                signal=signal_value,
+                posterior_early=posterior,
+                decision=decision,
+                chosen_action=chosen_action,
+                commit_loss=commit_loss,
+                wait_loss=wait_loss,
+            )
+            expected += signal_probability * optimal
+
+        memo[key] = expected
+        return expected
+
+    optimal = pre_signal(0, p0)
+
+    forced_stage0 = 0.0
+    for signal_value in (0, 1):
+        probability, posterior = _binary_signal_update(p0, qs[0], signal_value)
+        if probability <= _TOL:
+            continue
+        risk, _ = _best_binary_commitment(posterior, actions[0], wrong)
+        forced_stage0 += probability * risk
+
+    ordered_policy = tuple(
+        policy_rows[key]
+        for key in sorted(policy_rows)
+    )
+    return StagewiseBellmanResult(
+        optimal_expected_loss=optimal,
+        forced_stage0_commit_loss=forced_stage0,
+        wait_value=max(0.0, forced_stage0 - optimal),
+        policy=ordered_policy,
+    )
+
+def binary_schrodinger_spring(
+    cue_accuracy: float,
+    *,
+    wrong_state_loss: float = 1.0,
+    allowed_actions: Iterable[int] | None = None,
+) -> FiniteSignalRecourse:
+    """Canonical two-state 'Schroedinger's spring' signal problem.
+
+    States are EARLY and LATE spring with prior 1/2. Signals report EARLY or
+    LATE with symmetric accuracy q >= 1/2. Two actions are matched responses to
+    the two states.
+
+    With both actions feasible:
+        no-signal risk = W/2
+        post-signal risk = W(1-q)
+        signal value = W(q-1/2).
+
+    With only one action feasible, the signal value is zero regardless of q.
+    """
+
+    q = float(cue_accuracy)
+    if not isfinite(q) or q < 0.5 or q > 1.0:
+        raise ValueError("cue_accuracy must lie in [0.5, 1]")
+    wrong = _finite_nonnegative("wrong_state_loss", wrong_state_loss)
+
+    return finite_signal_recourse(
+        [0.5, 0.5],
+        [
+            [q, 1.0 - q],
+            [1.0 - q, q],
+        ],
+        [
+            [0.0, wrong],
+            [wrong, 0.0],
+        ],
+        allowed_actions=allowed_actions,
+    )
