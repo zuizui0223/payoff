@@ -34,10 +34,11 @@ def test_portal_main_source_is_final_facing_and_embeds_seven_figures():
     )
     assert sum(1 for line in main.splitlines() if line.strip() == "[") == 0
     assert sum(1 for line in main.splitlines() if line.strip() == "]") == 0
-    assert main.count("![Figure ") == 7
+    assert main.count("![](figures_png/FIGURE_") == 7
     for number in range(1, 8):
-        assert f"![Figure {number}]" in main
+        assert f"![](figures_png/FIGURE_{number}.png)" in main
         assert "{width=6.2in}" in main
+    assert "![Figure " not in main
 
     assert "Dossman et al., 2023" in main
     assert "Raw waiting time" in main
