@@ -51,6 +51,9 @@ def test_v2_geb_blinded_source_passes_hard_gates():
     assert "We therefore do not claim a natural information-recovery hysteresis event." in text
     assert "We therefore distinguish:" in text
     assert "Our analysis therefore begins one step later." in text
+    assert "remains unopened in this working package" not in text
+    assert "handled only in Supporting Information under" in text
+    assert "does not retune the" in text
     assert result["metrics"]["deinternalization_artifact_hits"] == []
     assert result["all_preoutcome_hard_gates_pass"]
     assert result["metrics"]["abstract_words"] <= 300
