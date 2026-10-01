@@ -365,6 +365,15 @@ environmental exposure does not guarantee matched phenological sensitivity.
 The untested prediction is that mismatch risk should be highest where
 pre-commitment information is poor **and** post-commitment recourse is narrow.
 
+A further literature check makes one simplification explicitly unsafe:
+**plant/pollinator taxon identity is not a recourse proxy.** A recent
+Viola--bee analysis (PNAS 2025; DOI 10.1073/pnas.2506265122) treats flowering
+duration and bee activity duration as overlap windows and notes that longer
+flowering duration can buffer mismatch. Thus local interaction systems can also
+possess temporal-window buffering. The cross-system question should therefore
+estimate recourse/actionability from biological windows or actuators rather than
+assigning it from "migrant" versus "plant/pollinator" labels.
+
 ## 8. Full current implementation gap
 
 | component | status |
