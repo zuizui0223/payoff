@@ -63,13 +63,14 @@ jobs:
           GEN=submission/geb_v2/generated
           mkdir -p "$GEN/figures_svg" "$GEN/figures_png" "$GEN/figures_pdf"
           python scripts/render_information_deadlines_figures.py             --output-dir "$GEN/figures_svg"
-          for svg in "$GEN"/figures_svg/PAYOFF_B_INFO_V2_FIG*.svg; do
-            stem="$(basename "$svg" .svg)"
-            rsvg-convert -w 2400 "$svg" -o "$GEN/figures_png/$stem.png"
-            rsvg-convert -f pdf "$svg" -o "$GEN/figures_pdf/$stem.pdf"
+          for number in 1 2 3 4 5 6 7; do
+            svg="$(find "$GEN/figures_svg" -maxdepth 1 -name "PAYOFF_B_INFO_V2_FIG${number}_*.svg" -print -quit)"
+            test -n "$svg"
+            rsvg-convert -w 2400 "$svg" -o "$GEN/figures_png/FIGURE_${number}.png"
+            rsvg-convert -f pdf "$svg" -o "$GEN/figures_pdf/FIGURE_${number}.pdf"
           done
-          test "$(find "$GEN/figures_png" -name 'PAYOFF_B_INFO_V2_FIG*.png' | wc -l)" -eq 7
-          test "$(find "$GEN/figures_pdf" -name 'PAYOFF_B_INFO_V2_FIG*.pdf' | wc -l)" -eq 7
+          test "$(find "$GEN/figures_png" -name 'FIGURE_*.png' | wc -l)" -eq 7
+          test "$(find "$GEN/figures_pdf" -name 'FIGURE_*.pdf' | wc -l)" -eq 7
 
       - name: Build editable DOCX files
         run: |
