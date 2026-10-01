@@ -112,3 +112,16 @@ def test_local_interaction_systems_are_not_assigned_zero_recourse_by_taxon():
         "uniformly low recourse" in claim
         for claim in ceiling["not_supported"]
     )
+
+
+
+def test_receipt_records_canonical_actionability_deadline_bridge():
+    payload = load()
+    bridge = payload["theory_objects"]["canonical_deadline_bridge"]
+    assert "V(q,r)=r*V_A(q)" in bridge
+    assert "q_wait(r)=(B+D/r)/S" in bridge
+    assert "D/r" in bridge
+    assert any(
+        "physical percentage of route" in claim
+        for claim in payload["cross_system_ceiling"]["not_supported"]
+    )
