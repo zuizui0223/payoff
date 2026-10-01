@@ -19,13 +19,14 @@ reuse the superseded temporal-buffering V1 GEB overlay.
 
 ```text
 structured_abstract_words = 283
-main_body_words = 4783
-references = 24
+main_body_words = 4902
+references = 25
 display_pieces = 7
 keywords = 8
 running_title_chars = 38
 internal_token_hits = 0
 email_hits = 0
+deinternalization_artifact_hits = 0
 expected_citations_present = PASS
 ```
 
@@ -41,6 +42,7 @@ main body <= 5000 = PASS
 references 1..50 = PASS
 display pieces = 7 = PASS
 anonymous/internal-token scan = PASS
+deinternalization prose audit = PASS
 citation/reference presence = PASS
 Aikens placeholder absent from blinded main text = PASS
 ```
@@ -77,19 +79,19 @@ Results/Figure 5 rather than competing in the abstract.
 ## Frozen build provenance
 
 ```text
-workflow_run = 36743782397
+workflow_run = 36807276298
 workflow_run_attempt = 1
-validated_head = 41138e7856b4619c8e741da8b54fdef65ba2a2c7
+validated_head = fb03cec738558b2fd8800a60c5d80c3ae609c237
 workflow_conclusion = success
 
-artifact_id = 11112176156
+artifact_id = 11138366353
 artifact_name = payoff-b-v2-geb-preoutcome-package
 artifact_sha256 =
-70ac0aa54819ca60b0ad2de2eec9b318ffd42e253ea6cf43b4b43a7d15a6c1be
+5ad4ca0b5be5c9b888d71385d2a7e05f079a09026b45f50c55cfbf1fc5d4e3c3
 
 inner_zip = PAYOFF_B_V2_GEB_PREOUTCOME_PACKAGE.zip
 inner_zip_sha256 =
-bc16f4b6e66af0e1936636b3f9fcb801b071ec5a8335ff1363565eef6504eea9
+048e234b69363800d17de98401d288d78913bc994d130024ad9310d1db6557a1
 ```
 
 Deterministic reproduction is checked inside the successful workflow by
@@ -130,16 +132,16 @@ CURRENT_V2_PREOUTCOME_PACKAGE = READY
 FINAL_SUBMISSION_ELIGIBLE = false
 ```
 
-The current submission route is the frozen non-scientific `ACCESS_BLOCKED`
-render; authenticated Aikens execution remains permitted later under the
-original preregistration but is not a present submission blocker.
+The current submission route is the frozen non-scientific source-access
+limitation render; authenticated Aikens execution remains permitted later under
+the original preregistration but is not a present submission blocker.
 
-Remaining blockers:
+Remaining external inputs:
 
-1. deliver the already-built anonymous reviewer archive through the journal
-   portal or a stable anonymous review link;
+1. deliver the anonymous reviewer archive through the journal portal or a stable
+   anonymous review link;
 2. populate author-controlled title-page and declaration metadata;
-3. perform final human review of the outcome-rendered package and portal metadata.
+3. upload the validated portal files and complete the journal form.
 
 The package is therefore scientifically closed for the current submission
 route, with only portal-facing inputs remaining.
