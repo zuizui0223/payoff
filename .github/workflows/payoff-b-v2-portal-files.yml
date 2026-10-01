@@ -24,10 +24,12 @@ on:
     paths:
       - "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"
       - "scripts/build_payoff_b_v2_geb_*"
+      - "scripts/audit_payoff_b_v2_geb_source.py"
       - "scripts/build_payoff_b_v2_portal_sources.py"
       - "scripts/format_geb_v2_docx.py"
       - "scripts/render_information_deadlines_figures.py"
       - "submission/GEB_V2_*"
+      - "pyproject.toml"
       - "data/aikens2022_access_blocked_submission_state_20260928.json"
       - "tests/test_payoff_b_v2_portal_sources.py"
       - ".github/workflows/payoff-b-v2-portal-files.yml"
@@ -128,16 +130,43 @@ jobs:
           assert "PAYOFF-B" not in cover
           PY
 
-      - name: Render main manuscript and cover letter PDFs
+      - name: Render all submission DOCX files for QA
         run: |
           GEN=submission/geb_v2/generated
-          mkdir -p "$GEN/rendered/main_pages" "$GEN/rendered/cover_pages"
-          libreoffice --headless --convert-to pdf --outdir "$GEN/rendered"             "$GEN/GEB_MAIN_MANUSCRIPT.docx"
-          libreoffice --headless --convert-to pdf --outdir "$GEN/rendered"             "$GEN/GEB_COVER_LETTER.docx"
+          mkdir -p \
+            "$GEN/rendered/main_pages" \
+            "$GEN/rendered/si_pages" \
+            "$GEN/rendered/title_pages" \
+            "$GEN/rendered/cover_pages"
+
+          for docx in \
+            GEB_MAIN_MANUSCRIPT.docx \
+            GEB_SUPPORTING_INFORMATION.docx \
+            GEB_TITLE_PAGE.docx \
+            GEB_COVER_LETTER.docx; do
+            libreoffice --headless --convert-to pdf --outdir "$GEN/rendered" "$GEN/$docx"
+          done
+
           mv "$GEN/rendered/GEB_MAIN_MANUSCRIPT.pdf" "$GEN/GEB_MAIN_MANUSCRIPT_REVIEW.pdf"
           mv "$GEN/rendered/GEB_COVER_LETTER.pdf" "$GEN/GEB_COVER_LETTER.pdf"
-          pdftoppm -png -r 120             "$GEN/GEB_MAIN_MANUSCRIPT_REVIEW.pdf"             "$GEN/rendered/main_pages/page" >/dev/null 2>&1
-          pdftoppm -png -r 120             "$GEN/GEB_COVER_LETTER.pdf"             "$GEN/rendered/cover_pages/page" >/dev/null 2>&1
+
+          pdftoppm -png -r 120 \
+            "$GEN/GEB_MAIN_MANUSCRIPT_REVIEW.pdf" \
+            "$GEN/rendered/main_pages/page" >/dev/null 2>&1
+          pdftoppm -png -r 120 \
+            "$GEN/rendered/GEB_SUPPORTING_INFORMATION.pdf" \
+            "$GEN/rendered/si_pages/page" >/dev/null 2>&1
+          pdftoppm -png -r 120 \
+            "$GEN/rendered/GEB_TITLE_PAGE.pdf" \
+            "$GEN/rendered/title_pages/page" >/dev/null 2>&1
+          pdftoppm -png -r 120 \
+            "$GEN/GEB_COVER_LETTER.pdf" \
+            "$GEN/rendered/cover_pages/page" >/dev/null 2>&1
+
+          test "$(find "$GEN/rendered/main_pages" -name 'page-*.png' | wc -l)" -gt 0
+          test "$(find "$GEN/rendered/si_pages" -name 'page-*.png' | wc -l)" -gt 0
+          test "$(find "$GEN/rendered/title_pages" -name 'page-*.png' | wc -l)" -gt 0
+          test "$(find "$GEN/rendered/cover_pages" -name 'page-*.png' | wc -l)" -gt 0
 
       - name: Validate rendered PDF text and page geometry
         shell: bash
@@ -253,5 +282,7 @@ jobs:
             submission/geb_v2/generated/GEB_PORTAL_SOURCE_AUDIT.json
             submission/geb_v2/generated/GEB_PORTAL_QA_RECEIPT.json
             submission/geb_v2/generated/rendered/main_pages/*.png
+            submission/geb_v2/generated/rendered/si_pages/*.png
+            submission/geb_v2/generated/rendered/title_pages/*.png
             submission/geb_v2/generated/rendered/cover_pages/*.png
           if-no-files-found: error
