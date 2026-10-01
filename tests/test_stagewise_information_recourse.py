@@ -1,6 +1,8 @@
 import pytest
 
 from src.stagewise_information_recourse import (
+    actionability_profile,
+    binary_actionability_value,
     binary_schrodinger_spring,
     finite_signal_recourse,
     signed_linear_phase_recourse,
@@ -175,3 +177,52 @@ def test_direct_cost_does_not_change_direction_of_optimal_recourse():
     assert early.mode == "slow_or_wait"
     assert late.effective_cost == pytest.approx(6.0)
     assert early.effective_cost == pytest.approx(6.0)
+
+
+
+def test_binary_actionability_exact_product_formula():
+    result = binary_actionability_value(
+        0.8,
+        0.4,
+        wrong_state_loss=2.0,
+    )
+    # V = r * W * (q - 1/2) = 0.4 * 2 * 0.3 = 0.24.
+    assert result.no_signal_risk == pytest.approx(1.0)
+    assert result.information_value == pytest.approx(0.24)
+    assert result.post_signal_risk == pytest.approx(0.76)
+
+
+def test_perfect_information_has_zero_value_after_optionality_is_gone():
+    result = binary_actionability_value(
+        1.0,
+        0.0,
+        wrong_state_loss=3.0,
+    )
+    assert result.no_signal_risk == pytest.approx(1.5)
+    assert result.post_signal_risk == pytest.approx(1.5)
+    assert result.information_value == pytest.approx(0.0)
+
+
+def test_information_value_can_peak_before_information_quality_peaks():
+    profile = actionability_profile(
+        cue_accuracies=[0.55, 0.75, 0.95, 1.0],
+        recourse_fractions=[1.0, 0.8, 0.3, 0.0],
+    )
+    values = [row.information_value for row in profile]
+    assert values == pytest.approx([0.05, 0.20, 0.135, 0.0])
+    assert profile[1].cue_accuracy < profile[2].cue_accuracy
+    assert profile[1].information_value > profile[2].information_value
+    assert profile[-1].cue_accuracy == pytest.approx(1.0)
+    assert profile[-1].information_value == pytest.approx(0.0)
+
+
+def test_full_recourse_recovers_standard_binary_information_value():
+    for q in (0.5, 0.6, 0.8, 1.0):
+        actionability = binary_actionability_value(q, 1.0)
+        standard = binary_schrodinger_spring(q)
+        assert actionability.information_value == pytest.approx(
+            standard.signal_value
+        )
+        assert actionability.post_signal_risk == pytest.approx(
+            standard.post_signal_risk
+        )
