@@ -1,0 +1,254 @@
+name: PAYOFF-B V2 GEB portal files
+
+concurrency:
+  group: payoff-b-v2-portal-files-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"
+      - "scripts/build_payoff_b_v2_geb_*"
+      - "scripts/build_payoff_b_v2_portal_sources.py"
+      - "scripts/format_geb_v2_docx.py"
+      - "scripts/render_information_deadlines_figures.py"
+      - "submission/GEB_V2_*"
+      - "data/aikens2022_access_blocked_submission_state_20260928.json"
+      - "tests/test_payoff_b_v2_portal_sources.py"
+      - ".github/workflows/payoff-b-v2-portal-files.yml"
+  pull_request:
+    paths:
+      - "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md"
+      - "scripts/build_payoff_b_v2_geb_*"
+      - "scripts/build_payoff_b_v2_portal_sources.py"
+      - "scripts/format_geb_v2_docx.py"
+      - "scripts/render_information_deadlines_figures.py"
+      - "submission/GEB_V2_*"
+      - "data/aikens2022_access_blocked_submission_state_20260928.json"
+      - "tests/test_payoff_b_v2_portal_sources.py"
+      - ".github/workflows/payoff-b-v2-portal-files.yml"
+
+jobs:
+  build-portal-files:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install portal toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice-writer poppler-utils librsvg2-bin
+          python -m pip install --disable-pip-version-check pytest python-docx
+
+      - name: Run portal-source tests
+        run: |
+          pytest -q             tests/test_payoff_b_v2_portal_sources.py             tests/test_payoff_b_v2_geb_package.py             tests/test_payoff_b_v2_geb_outcome_package.py
+
+      - name: Build journal-facing Markdown sources
+        run: |
+          GEN=submission/geb_v2/generated
+          rm -rf "$GEN"
+          mkdir -p "$GEN"
+          python scripts/build_payoff_b_v2_portal_sources.py             --output-dir "$GEN"             --result-json data/aikens2022_access_blocked_submission_state_20260928.json
+
+      - name: Render seven figures to high-resolution PNG and vector PDF
+        run: |
+          GEN=submission/geb_v2/generated
+          mkdir -p "$GEN/figures_svg" "$GEN/figures_png" "$GEN/figures_pdf"
+          python scripts/render_information_deadlines_figures.py             --output-dir "$GEN/figures_svg"
+          for svg in "$GEN"/figures_svg/PAYOFF_B_INFO_V2_FIG*.svg; do
+            stem="$(basename "$svg" .svg)"
+            rsvg-convert -w 2400 "$svg" -o "$GEN/figures_png/$stem.png"
+            rsvg-convert -f pdf "$svg" -o "$GEN/figures_pdf/$stem.pdf"
+          done
+          test "$(find "$GEN/figures_png" -name 'PAYOFF_B_INFO_V2_FIG*.png' | wc -l)" -eq 7
+          test "$(find "$GEN/figures_pdf" -name 'PAYOFF_B_INFO_V2_FIG*.pdf' | wc -l)" -eq 7
+
+      - name: Build editable DOCX files
+        run: |
+          GEN=submission/geb_v2/generated
+          cd "$GEN"
+
+          pandoc GEB_MAIN_REVIEW_SOURCE.md             --from=markdown+tex_math_single_backslash+link_attributes             --to=docx             --output=GEB_MAIN_RAW.docx
+
+          pandoc GEB_SUPPORTING_INFORMATION_SOURCE.md             --from=markdown+tex_math_single_backslash             --to=docx             --output=GEB_SI_RAW.docx
+
+          pandoc GEB_TITLE_PAGE_SOURCE.md             --from=markdown             --to=docx             --output=GEB_TITLE_RAW.docx
+
+          pandoc GEB_COVER_LETTER_SOURCE.md             --from=markdown             --to=docx             --output=GEB_COVER_RAW.docx
+
+          cd "$GITHUB_WORKSPACE"
+
+          python scripts/format_geb_v2_docx.py             "$GEN/GEB_MAIN_RAW.docx"             "$GEN/GEB_MAIN_MANUSCRIPT.docx"             --line-numbers
+
+          python scripts/format_geb_v2_docx.py             "$GEN/GEB_SI_RAW.docx"             "$GEN/GEB_SUPPORTING_INFORMATION.docx"
+
+          python scripts/format_geb_v2_docx.py             "$GEN/GEB_TITLE_RAW.docx"             "$GEN/GEB_TITLE_PAGE.docx"             --no-page-numbers
+
+          python scripts/format_geb_v2_docx.py             "$GEN/GEB_COVER_RAW.docx"             "$GEN/GEB_COVER_LETTER.docx"             --no-page-numbers
+
+          rm -f "$GEN"/*_RAW.docx
+
+      - name: Validate DOCX structure and anonymity
+        shell: bash
+        run: |
+          set -euo pipefail
+          GEN=submission/geb_v2/generated
+          unzip -p "$GEN/GEB_MAIN_MANUSCRIPT.docx" word/document.xml | grep -q 'w:lnNumType'
+          MEDIA_COUNT="$(unzip -l "$GEN/GEB_MAIN_MANUSCRIPT.docx" | grep -c 'word/media/' || true)"
+          test "$MEDIA_COUNT" -ge 7
+          python - <<'PY'
+          from pathlib import Path
+          from docx import Document
+
+          gen = Path("submission/geb_v2/generated")
+          main = Document(gen / "GEB_MAIN_MANUSCRIPT.docx")
+          assert not (main.core_properties.author or "").strip()
+          assert not (main.core_properties.last_modified_by or "").strip()
+
+          title = "\n".join(p.text for p in Document(gen / "GEB_TITLE_PAGE.docx").paragraphs)
+          assert "Information deadlines can desynchronize seasonal interactions" in title
+          assert "V2 title-page template" not in title
+          assert "ACCESS_BLOCKED package state" not in title
+
+          cover = "\n".join(p.text for p in Document(gen / "GEB_COVER_LETTER.docx").paragraphs)
+          assert "Information deadlines can desynchronize seasonal interactions" in cover
+          assert "V2 cover-letter template" not in cover
+          assert "ACCESS_BLOCKED" not in cover
+          assert "PAYOFF-B" not in cover
+          PY
+
+      - name: Render main manuscript and cover letter PDFs
+        run: |
+          GEN=submission/geb_v2/generated
+          mkdir -p "$GEN/rendered/main_pages" "$GEN/rendered/cover_pages"
+          libreoffice --headless --convert-to pdf --outdir "$GEN/rendered"             "$GEN/GEB_MAIN_MANUSCRIPT.docx"
+          libreoffice --headless --convert-to pdf --outdir "$GEN/rendered"             "$GEN/GEB_COVER_LETTER.docx"
+          mv "$GEN/rendered/GEB_MAIN_MANUSCRIPT.pdf" "$GEN/GEB_MAIN_MANUSCRIPT_REVIEW.pdf"
+          mv "$GEN/rendered/GEB_COVER_LETTER.pdf" "$GEN/GEB_COVER_LETTER.pdf"
+          pdftoppm -png -r 120             "$GEN/GEB_MAIN_MANUSCRIPT_REVIEW.pdf"             "$GEN/rendered/main_pages/page" >/dev/null 2>&1
+          pdftoppm -png -r 120             "$GEN/GEB_COVER_LETTER.pdf"             "$GEN/rendered/cover_pages/page" >/dev/null 2>&1
+
+      - name: Validate rendered PDF text and page geometry
+        shell: bash
+        run: |
+          set -euo pipefail
+          GEN=submission/geb_v2/generated
+          MAIN_PDF="$GEN/GEB_MAIN_MANUSCRIPT_REVIEW.pdf"
+          COVER_PDF="$GEN/GEB_COVER_LETTER.pdf"
+          MAIN_TXT="$RUNNER_TEMP/geb-main.txt"
+          COVER_TXT="$RUNNER_TEMP/geb-cover.txt"
+
+          test -s "$MAIN_PDF"
+          test -s "$COVER_PDF"
+          pdftotext -layout "$MAIN_PDF" "$MAIN_TXT"
+          pdftotext -layout "$COVER_PDF" "$COVER_TXT"
+
+          grep -q 'Information deadlines can desynchronize seasonal interactions' "$MAIN_TXT"
+          grep -q 'Dossman et al., 2023' "$MAIN_TXT"
+          grep -q 'effective deadline cost' "$MAIN_TXT"
+          grep -q 'Data and Code Availability Statement' "$MAIN_TXT"
+          grep -q 'Figure 2' "$MAIN_TXT"
+          grep -q 'Information deadlines can desynchronize seasonal interactions' "$COVER_TXT"
+
+          for bad in             'We therefore does'             'We therefore distinguishes'             'We therefore begins'             'transparent this framework witness'             'PAYOFF-B'             'PREOUTCOME'; do
+            if grep -q "$bad" "$MAIN_TXT"; then
+              echo "Internal/invalid prose leaked into main PDF: $bad" >&2
+              exit 1
+            fi
+          done
+
+          for bad in 'ACCESS_BLOCKED' 'V2 cover-letter template' 'PAYOFF-B'; do
+            if grep -q "$bad" "$COVER_TXT"; then
+              echo "Internal label leaked into cover letter PDF: $bad" >&2
+              exit 1
+            fi
+          done
+
+          PAGES="$(pdfinfo "$MAIN_PDF" | awk '/^Pages:/ {print $2}')"
+          test "$PAGES" -gt 0
+          if [ "$PAGES" -gt 45 ]; then
+            echo "Main manuscript unexpectedly long: $PAGES pages" >&2
+            exit 1
+          fi
+
+      - name: Record portal QA receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          GEN=submission/geb_v2/generated
+          python - <<'PY'
+          from hashlib import sha256
+          from pathlib import Path
+          import json
+          import subprocess
+
+          gen = Path("submission/geb_v2/generated")
+
+          def digest(path: Path) -> str:
+              h = sha256()
+              with path.open("rb") as handle:
+                  for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                      h.update(chunk)
+              return h.hexdigest()
+
+          main_pdf = gen / "GEB_MAIN_MANUSCRIPT_REVIEW.pdf"
+          page_count = int(
+              subprocess.check_output(
+                  ["pdfinfo", str(main_pdf)], text=True
+              ).split("Pages:")[1].splitlines()[0].strip()
+          )
+          files = [
+              gen / "GEB_MAIN_MANUSCRIPT.docx",
+              gen / "GEB_MAIN_MANUSCRIPT_REVIEW.pdf",
+              gen / "GEB_SUPPORTING_INFORMATION.docx",
+              gen / "GEB_TITLE_PAGE.docx",
+              gen / "GEB_COVER_LETTER.pdf",
+          ]
+          receipt = {
+              "status": "PORTAL_FILES_READY_FOR_AUTHOR_METADATA",
+              "science_source": "manuscript/PAYOFF_B_INFORMATION_COORDINATION_V2_PREOUTCOME.md",
+              "submission_route": "ACCESS_BLOCKED_SCIENCE_CLOSED",
+              "main_docx_line_numbers": True,
+              "embedded_figures": 7,
+              "main_review_pdf_pages": page_count,
+              "cover_letter_pdf": True,
+              "title_page_author_metadata_complete": False,
+              "files": {
+                  path.name: {
+                      "bytes": path.stat().st_size,
+                      "sha256": digest(path),
+                  }
+                  for path in files
+              },
+          }
+          (gen / "GEB_PORTAL_QA_RECEIPT.json").write_text(
+              json.dumps(receipt, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(receipt, indent=2))
+          PY
+
+      - name: Upload GEB portal-ready files
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v2-geb-portal-files
+          path: |
+            submission/geb_v2/generated/GEB_MAIN_MANUSCRIPT.docx
+            submission/geb_v2/generated/GEB_MAIN_MANUSCRIPT_REVIEW.pdf
+            submission/geb_v2/generated/GEB_SUPPORTING_INFORMATION.docx
+            submission/geb_v2/generated/GEB_TITLE_PAGE.docx
+            submission/geb_v2/generated/GEB_COVER_LETTER.pdf
+            submission/geb_v2/generated/figures_pdf/*.pdf
+            submission/geb_v2/generated/GEB_PORTAL_SOURCE_AUDIT.json
+            submission/geb_v2/generated/GEB_PORTAL_QA_RECEIPT.json
+            submission/geb_v2/generated/rendered/main_pages/*.png
+            submission/geb_v2/generated/rendered/cover_pages/*.png
+          if-no-files-found: error
