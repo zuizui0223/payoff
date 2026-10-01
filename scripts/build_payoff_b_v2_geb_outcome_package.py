@@ -168,7 +168,15 @@ def audit_outcome(
             "AIKENS_LAMBDA" not in main_text
             and "Aikens lambda result pending" not in main_text
         ),
-        "si_has_result_class": result_class in si_text,
+        "si_has_result_class": (
+            (
+                "Registered analysis status: not executed because authenticated "
+                "source access was unavailable."
+                in si_text
+            )
+            if result_class == "ACCESS_BLOCKED"
+            else result_class in si_text
+        ),
         "si_has_no_preoutcome_language": not si_hits,
         "claim_state_matches_result": (
             claim_state.get("scientific_result") == result_class
