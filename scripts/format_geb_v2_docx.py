@@ -99,6 +99,16 @@ def _style_document(doc: Document, *, line_numbers: bool, page_numbers: bool) ->
     for paragraph in doc.paragraphs:
         paragraph.paragraph_format.line_spacing = 1.5
         paragraph.paragraph_format.space_after = Pt(0)
+        text_value = paragraph.text.strip()
+        if line_numbers and text_value == "Figure legends":
+            paragraph.paragraph_format.page_break_before = True
+        if line_numbers and text_value.startswith("Figure "):
+            match = __import__("re").match(r"Figure\\s+(\\d+)\\.", text_value)
+            if match:
+                number = int(match.group(1))
+                if number >= 2:
+                    paragraph.paragraph_format.page_break_before = True
+                paragraph.paragraph_format.keep_with_next = True
         for run in paragraph.runs:
             _set_font(run)
 
