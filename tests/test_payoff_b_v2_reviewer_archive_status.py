@@ -14,9 +14,9 @@ def test_reviewer_archive_is_ready_but_delivery_remains_external():
     state = json.loads(STATE.read_text(encoding="utf-8"))
     receipt = json.loads(RECEIPT.read_text(encoding="utf-8"))
 
-    assert "CURRENT_V2_REVIEWER_ARCHIVE = READY_PREOUTCOME" in status
-    assert "CURRENT_V2_REVIEWER_ARCHIVE_ARTIFACT = 11111193281" in status
-    assert "CURRENT_V2_REVIEWER_ARCHIVE_IDENTITY_SCAN = PASS" in status
+    assert "CURRENT_V2_REVIEWER_ARCHIVE = REFRESH_PENDING_AFTER_SCIENCE_UPDATE" in status
+    assert "LAST_VERIFIED_V2_REVIEWER_ARCHIVE_ARTIFACT = 11111193281" in status
+    assert "LAST_VERIFIED_V2_REVIEWER_ARCHIVE_IDENTITY_SCAN = PASS" in status
     assert "remaining reviewer-archive task is therefore **delivery**, not construction" in readiness
 
     archive = state["reviewer_archive"]
