@@ -401,6 +401,70 @@ trajectories**. Heterogeneity in the rate of losing optionality is sufficient.
 This is the continuous-time analogue of the frozen Paper-2 result that
 heterogeneous effective deadlines create a finite asynchronous-uptake window.
 
+## 6.6 Same phenological advance, opposite informational mechanism
+
+The exponential optimum also creates an identifiability warning for climate
+responses.
+
+Recall
+
+    t*
+      =
+      log(1+alpha/beta)/alpha,
+
+and
+
+    q*
+      =
+      q0+(1-q0) alpha/(alpha+beta).
+
+The exact local derivatives are
+
+    dt*/d alpha
+      =
+      [alpha/(alpha+beta)-log(1+alpha/beta)]
+      / alpha^2
+      <
+      0,
+
+    dt*/d beta
+      =
+      -1/[beta(alpha+beta)]
+      <
+      0.
+
+So either of two changes advances commitment in calendar time:
+
+1. information becomes useful faster (alpha increases);
+2. biological recourse disappears faster (beta increases).
+
+But the cue-quality signatures are opposite:
+
+    dq*/d alpha
+      =
+      (1-q0) beta/(alpha+beta)^2
+      >
+      0,
+
+    dq*/d beta
+      =
+      -(1-q0) alpha/(alpha+beta)^2
+      <
+      0.
+
+Therefore:
+
+> an earlier phenological decision can mean either **better early information**
+> or **a tighter deadline that forces commitment on worse information**.
+
+Calendar advance alone cannot distinguish these mechanisms.
+
+This is especially relevant under environmental change. A system can move
+earlier because predictive cues become informative earlier, or because warming
+compresses the remaining adjustment window. Those mechanisms can produce the
+same directional date shift while having opposite implications for information
+quality at commitment and future resilience.
+
 ## 6.8 Information-rate dependence of pairwise desynchronization
 
 For two actors with beta_1 != beta_2 and one shared information-improvement
