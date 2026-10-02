@@ -9,6 +9,7 @@ from src.continuous_information_actionability import (
     dimensionless_scaled_time_derivative,
     exponential_actionability_value,
     exponential_information_actionability_optimum,
+    exponential_mechanism_sensitivity,
     exponential_pair_desynchronization,
     normalized_pairwise_cue_gap,
     pairwise_commitment_time_gap,
@@ -422,3 +423,100 @@ def test_equal_recourse_rates_have_zero_pairwise_geometry():
     assert geometry.slow_information_time_gap_limit == pytest.approx(0.0)
     assert pairwise_commitment_time_gap(1.2, 0.7, 0.7) == pytest.approx(0.0)
     assert normalized_pairwise_cue_gap(1.2, 0.7, 0.7) == pytest.approx(0.0)
+
+
+
+@pytest.mark.parametrize(
+    ("alpha", "beta"),
+    [(0.2, 0.5), (0.5, 0.5), (1.0, 0.2), (2.0, 1.5)],
+)
+def test_mechanism_sensitivities_have_expected_signs(alpha, beta):
+    result = exponential_mechanism_sensitivity(
+        0.40,
+        2.0,
+        1.0,
+        information_rate=alpha,
+        recourse_decay_rate=beta,
+    )
+    assert result.dt_d_information_rate < 0.0
+    assert result.dt_d_recourse_decay_rate < 0.0
+    assert result.dq_d_information_rate > 0.0
+    assert result.dq_d_recourse_decay_rate < 0.0
+
+
+def test_faster_information_and_faster_deadline_both_advance_but_change_q_oppositely():
+    base = exponential_information_actionability_optimum(
+        0.40,
+        2.0,
+        1.0,
+        information_rate=0.5,
+        recourse_decay_rate=0.5,
+    )
+    faster_info = exponential_information_actionability_optimum(
+        0.40,
+        2.0,
+        1.0,
+        information_rate=1.0,
+        recourse_decay_rate=0.5,
+    )
+    faster_deadline = exponential_information_actionability_optimum(
+        0.40,
+        2.0,
+        1.0,
+        information_rate=0.5,
+        recourse_decay_rate=1.0,
+    )
+
+    assert faster_info.optimal_time < base.optimal_time
+    assert faster_deadline.optimal_time < base.optimal_time
+
+    assert faster_info.optimal_cue_accuracy > base.optimal_cue_accuracy
+    assert faster_deadline.optimal_cue_accuracy < base.optimal_cue_accuracy
+
+
+def test_mechanism_derivatives_match_finite_differences():
+    alpha = 0.7
+    beta = 0.4
+    eps = 1e-6
+    exact = exponential_mechanism_sensitivity(
+        0.40,
+        2.0,
+        1.0,
+        information_rate=alpha,
+        recourse_decay_rate=beta,
+    )
+
+    a_left = exponential_information_actionability_optimum(
+        0.40, 2.0, 1.0,
+        information_rate=alpha - eps,
+        recourse_decay_rate=beta,
+    )
+    a_right = exponential_information_actionability_optimum(
+        0.40, 2.0, 1.0,
+        information_rate=alpha + eps,
+        recourse_decay_rate=beta,
+    )
+    b_left = exponential_information_actionability_optimum(
+        0.40, 2.0, 1.0,
+        information_rate=alpha,
+        recourse_decay_rate=beta - eps,
+    )
+    b_right = exponential_information_actionability_optimum(
+        0.40, 2.0, 1.0,
+        information_rate=alpha,
+        recourse_decay_rate=beta + eps,
+    )
+
+    dt_da = (a_right.optimal_time - a_left.optimal_time) / (2 * eps)
+    dq_da = (
+        a_right.optimal_cue_accuracy - a_left.optimal_cue_accuracy
+    ) / (2 * eps)
+    dt_db = (b_right.optimal_time - b_left.optimal_time) / (2 * eps)
+    dq_db = (
+        b_right.optimal_cue_accuracy - b_left.optimal_cue_accuracy
+    ) / (2 * eps)
+
+    assert dt_da == pytest.approx(exact.dt_d_information_rate, rel=1e-6)
+    assert dq_da == pytest.approx(exact.dq_d_information_rate, rel=1e-6)
+    assert dt_db == pytest.approx(exact.dt_d_recourse_decay_rate, rel=1e-6)
+    assert dq_db == pytest.approx(exact.dq_d_recourse_decay_rate, rel=1e-6)
