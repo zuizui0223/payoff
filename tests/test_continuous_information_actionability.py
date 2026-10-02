@@ -10,6 +10,9 @@ from src.continuous_information_actionability import (
     exponential_actionability_value,
     exponential_information_actionability_optimum,
     exponential_pair_desynchronization,
+    normalized_pairwise_cue_gap,
+    pairwise_commitment_time_gap,
+    pairwise_information_rate_geometry,
 )
 
 
@@ -353,3 +356,69 @@ def test_dimensionless_derivatives_match_finite_differences():
         dimensionless_scaled_time_derivative(chi),
         rel=1e-6,
     )
+
+
+
+def test_pairwise_time_gap_shrinks_with_faster_information():
+    beta1 = 0.2
+    beta2 = 1.0
+    gaps = [
+        pairwise_commitment_time_gap(alpha, beta1, beta2)
+        for alpha in (0.05, 0.2, 1.0, 5.0, 20.0)
+    ]
+    assert gaps == sorted(gaps, reverse=True)
+
+
+def test_pairwise_time_gap_has_correct_slow_information_limit():
+    beta1 = 0.2
+    beta2 = 1.0
+    geometry = pairwise_information_rate_geometry(beta1, beta2)
+    tiny = pairwise_commitment_time_gap(1e-7, beta1, beta2)
+    assert tiny == pytest.approx(
+        geometry.slow_information_time_gap_limit,
+        rel=1e-6,
+    )
+
+
+def test_pairwise_time_gap_tends_to_zero_for_fast_information():
+    gap = pairwise_commitment_time_gap(
+        1e8,
+        0.2,
+        1.0,
+    )
+    assert gap < 1e-6
+
+
+def test_pairwise_cue_gap_peaks_at_geometric_mean_information_rate():
+    beta1 = 0.25
+    beta2 = 4.0
+    geometry = pairwise_information_rate_geometry(beta1, beta2)
+    alpha_peak = geometry.cue_gap_peak_information_rate
+    assert alpha_peak == pytest.approx(1.0)
+
+    center = normalized_pairwise_cue_gap(alpha_peak, beta1, beta2)
+    left = normalized_pairwise_cue_gap(alpha_peak * 0.5, beta1, beta2)
+    right = normalized_pairwise_cue_gap(alpha_peak * 2.0, beta1, beta2)
+
+    assert center > left
+    assert center > right
+    assert center == pytest.approx(
+        geometry.maximum_cue_accuracy_gap_fraction
+    )
+
+
+def test_pairwise_cue_gap_peak_has_closed_form_square_root_ratio():
+    beta1 = 1.0
+    beta2 = 9.0
+    geometry = pairwise_information_rate_geometry(beta1, beta2)
+    # |3-1|/(3+1)=0.5.
+    assert geometry.maximum_cue_accuracy_gap_fraction == pytest.approx(0.5)
+    assert geometry.cue_gap_peak_information_rate == pytest.approx(3.0)
+
+
+def test_equal_recourse_rates_have_zero_pairwise_geometry():
+    geometry = pairwise_information_rate_geometry(0.7, 0.7)
+    assert geometry.maximum_cue_accuracy_gap_fraction == pytest.approx(0.0)
+    assert geometry.slow_information_time_gap_limit == pytest.approx(0.0)
+    assert pairwise_commitment_time_gap(1.2, 0.7, 0.7) == pytest.approx(0.0)
+    assert normalized_pairwise_cue_gap(1.2, 0.7, 0.7) == pytest.approx(0.0)
