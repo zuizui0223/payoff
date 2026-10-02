@@ -393,6 +393,183 @@ def _exponential_gross_derivative(
     )
 
 
+
+@dataclass(frozen=True)
+class ExponentialInformationUseWindow:
+    """Time interval where actionable information exceeds a fixed deadline cost."""
+
+    alpha_information_rate: float
+    beta_actionability_decay: float
+    gross_scale: float
+    deadline_cost: float
+    peak_time: float
+    maximum_gross_value: float
+    status: str
+    start_time: float | None
+    end_time: float | None
+
+
+def exponential_information_use_window(
+    *,
+    gross_scale: float,
+    alpha_information_rate: float,
+    beta_actionability_decay: float,
+    deadline_cost: float,
+) -> ExponentialInformationUseWindow:
+    """Return the exact qualitative time window where G(t)>D.
+
+    Let
+
+        G(t)=K exp(-beta t)[1-exp(-alpha t)],
+
+    with K, alpha, beta > 0 and D >= 0.
+
+    G(0)=0, G(infinity)=0, and G has one strict interior maximum. Therefore:
+
+    - D > G_max: information is never worth using;
+    - D = G_max: there is one tangency/indifference time;
+    - 0 < D < G_max: there are exactly two crossings and information is worth
+      using only on the finite interval (t_start, t_end);
+    - D = 0: every finite t>0 has positive gross value, so the positive-value
+      interval is (0, infinity).
+
+    Roots are computed by deterministic bisection. The theorem itself follows
+    from strict unimodality of G.
+    """
+
+    scale = _positive_finite("gross_scale", gross_scale)
+    alpha = _positive_finite("alpha_information_rate", alpha_information_rate)
+    beta = _positive_finite(
+        "beta_actionability_decay", beta_actionability_decay
+    )
+    deadline = _nonnegative_finite("deadline_cost", deadline_cost)
+
+    peak = log(1.0 + alpha / beta) / alpha
+    gmax = _exponential_gross_value(
+        peak,
+        gross_scale=scale,
+        alpha=alpha,
+        beta=beta,
+    )
+
+    if deadline <= _TOL:
+        return ExponentialInformationUseWindow(
+            alpha_information_rate=alpha,
+            beta_actionability_decay=beta,
+            gross_scale=scale,
+            deadline_cost=deadline,
+            peak_time=peak,
+            maximum_gross_value=gmax,
+            status="POSITIVE_FOR_ALL_FINITE_T_AFTER_ZERO",
+            start_time=0.0,
+            end_time=None,
+        )
+
+    if deadline > gmax + _TOL:
+        return ExponentialInformationUseWindow(
+            alpha_information_rate=alpha,
+            beta_actionability_decay=beta,
+            gross_scale=scale,
+            deadline_cost=deadline,
+            peak_time=peak,
+            maximum_gross_value=gmax,
+            status="NEVER_USE",
+            start_time=None,
+            end_time=None,
+        )
+
+    if abs(deadline - gmax) <= _TOL:
+        return ExponentialInformationUseWindow(
+            alpha_information_rate=alpha,
+            beta_actionability_decay=beta,
+            gross_scale=scale,
+            deadline_cost=deadline,
+            peak_time=peak,
+            maximum_gross_value=gmax,
+            status="TANGENT_AT_PEAK",
+            start_time=peak,
+            end_time=peak,
+        )
+
+    def excess(t: float) -> float:
+        return _exponential_gross_value(
+            t,
+            gross_scale=scale,
+            alpha=alpha,
+            beta=beta,
+        ) - deadline
+
+    lo, hi = 0.0, peak
+    for _ in range(120):
+        mid = 0.5 * (lo + hi)
+        if excess(mid) > 0.0:
+            hi = mid
+        else:
+            lo = mid
+    start = 0.5 * (lo + hi)
+
+    lo = peak
+    hi = max(2.0 * peak, peak + 1.0 / min(alpha, beta))
+    while excess(hi) > 0.0:
+        hi *= 2.0
+    for _ in range(120):
+        mid = 0.5 * (lo + hi)
+        if excess(mid) > 0.0:
+            lo = mid
+        else:
+            hi = mid
+    end = 0.5 * (lo + hi)
+
+    return ExponentialInformationUseWindow(
+        alpha_information_rate=alpha,
+        beta_actionability_decay=beta,
+        gross_scale=scale,
+        deadline_cost=deadline,
+        peak_time=peak,
+        maximum_gross_value=gmax,
+        status="FINITE_USE_WINDOW",
+        start_time=start,
+        end_time=end,
+    )
+
+
+def equal_rate_information_use_window_closed_form(
+    *,
+    gross_scale: float,
+    common_rate: float,
+    deadline_cost: float,
+) -> tuple[float, float] | None:
+    """Closed-form finite use window for alpha=beta=lambda.
+
+    For x=exp(-lambda t),
+
+        G/K=x(1-x).
+
+    A finite strict-use window exists iff 0 < D/K < 1/4. The two crossings are
+
+        x_early=(1+sqrt(1-4D/K))/2,
+        x_late =(1-sqrt(1-4D/K))/2,
+
+    with t=-log(x)/lambda.
+    """
+
+    from math import sqrt
+
+    scale = _positive_finite("gross_scale", gross_scale)
+    rate = _positive_finite("common_rate", common_rate)
+    deadline = _nonnegative_finite("deadline_cost", deadline_cost)
+    ratio = deadline / scale
+    if ratio <= 0.0 or ratio >= 0.25:
+        return None
+
+    disc = sqrt(1.0 - 4.0 * ratio)
+    x_early = 0.5 * (1.0 + disc)
+    x_late = 0.5 * (1.0 - disc)
+    return (
+        -log(x_early) / rate,
+        -log(x_late) / rate,
+    )
+
 def exponential_peak_with_linear_wait_cost(
     *,
     gross_scale: float,
