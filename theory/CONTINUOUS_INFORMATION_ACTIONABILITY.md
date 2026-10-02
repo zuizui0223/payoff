@@ -257,6 +257,43 @@ actors receive the same information trajectory.
 This is the continuous-time analogue of the current Paper-2 asynchronous cue
 uptake window.
 
+## 6.5 Exact pairwise desynchronization under one shared cue trajectory
+
+Let two interacting actors experience the same information-improvement rate
+alpha but lose recourse at rates beta_1 and beta_2.
+
+Then
+
+    t_i*
+      = log(1+alpha/beta_i) / alpha,
+
+and therefore
+
+    Delta t*
+      =
+      | log[(1+alpha/beta_1)/(1+alpha/beta_2)] |
+      / alpha.
+
+Their cue accuracies at commitment are
+
+    q_i*
+      =
+      q0 + (1-q0) alpha/(alpha+beta_i).
+
+Hence beta_1 != beta_2 gives both:
+
+1. different optimal commitment times;
+2. different cue accuracies at commitment.
+
+The actor losing recourse faster commits earlier and accepts a less accurate
+cue.
+
+This produces stagewise seasonal desynchronization **without different cue
+trajectories**. Heterogeneity in the rate of losing optionality is sufficient.
+
+This is the continuous-time analogue of the frozen Paper-2 result that
+heterogeneous effective deadlines create a finite asynchronous-uptake window.
+
 ## 7. Empirical identification boundary
 
 The theorem does not license interpreting arbitrary biological measurements as
