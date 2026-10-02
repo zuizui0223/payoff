@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-02",
+  "status": "NO_CURRENT_NATURAL_CHI_ESTIMATE_QUALIFIED",
+  "target": {
+    "coordinate": "chi = alpha / beta",
+    "alpha": "rate of improvement in useful pre-commitment information under a declared q(t) model",
+    "beta": "rate of decay in independently calibrated retained actionability under a declared r(t) model",
+    "theorem_role": "dimensionless exponential-witness coordinate, not a universal natural parameter"
+  },
+  "qualification_rules": [
+    "q(t) must be calibrated independently of focal action outcomes",
+    "r(t) must have a biological mapping to retained action-changing capacity; route distance, stopover count, lambda, or window duration alone are insufficient",
+    "the functional forms used to estimate alpha and beta must be prespecified or validated independently",
+    "q and r must refer to the same decision stages and biological action",
+    "waiting cost D(t) must be negligible or separately modeled before interpreting chi as sufficient"
+  ],
+  "candidates": [
+    {
+      "system": "greater snow goose",
+      "q_status": "STRONG_STAGEWISE_INFORMATION_SOURCE",
+      "published_static_gaussian_q_bridge": {
+        "St_Lawrence_long": 0.51,
+        "St_Lawrence_short": 0.58,
+        "Nunavik": 0.535,
+        "Baffin": 0.614
+      },
+      "primary_q_note": "focal analysis uses rolling pre-focal NARR predictive connectivity, not these static published values",
+      "monotone_exponential_q_licensed": false,
+      "reason_q": "the source-backed static short-window sequence is non-monotone and focal rolling q remains unexecuted",
+      "r_status": "NOT_IDENTIFIED",
+      "reason_r": "transit compression, route skipping, remaining route distance and stopover structure are recourse evidence/proxies but no declared mapping identifies reduced-form r",
+      "chi_status": "NOT_QUALIFIED"
+    },
+    {
+      "system": "barnacle goose",
+      "q_status": "ROUTE_PREDICTABILITY_MEASURED",
+      "evidence": "three flyways, 16 stopover regions; predictability varies strongly with ecological barriers",
+      "monotone_exponential_q_licensed": false,
+      "reason_q": "predictability is route-pair specific and can rise or fall across barriers rather than following one exponential information-gain curve",
+      "r_status": "PHASE_CORRECTION_MEASURED_BUT_NOT_R",
+      "reason_r": "phase-retention lambda and stopover slopes quantify realized correction, not the probability/weight that a later cue can still change the focal action",
+      "chi_status": "NOT_QUALIFIED"
+    },
+    {
+      "system": "Eurasian wigeon",
+      "q_status": "17_ROUTE_PAIR_PREDICTIVE_CONNECTIVITY_VALUES",
+      "r_status": "PHASE_RETENTION_AND_STOPOVER_RESPONSE_AVAILABLE",
+      "reason": "registered connectivity x phase-correction interaction was not supported; neither quantity supplies a direct r mapping",
+      "chi_status": "NOT_QUALIFIED"
+    },
+    {
+      "system": "mule deer",
+      "q_status": "NO_INDEPENDENT_STAGEWISE_CUE_RELIABILITY_ON_THEOREM_SCALE",
+      "r_status": "STRONG_SIGNED_RECOURSE_BEHAVIOR",
+      "chi_status": "NOT_QUALIFIED"
+    },
+    {
+      "system": "plant-pollinator",
+      "q_status": "LOCAL_THERMAL_RESPONSE_NOT_EQUAL_TO_CUE_RELIABILITY",
+      "r_status": "PHENOLOGICAL_WINDOW_BUFFERING_EXISTS_BUT_NOT_REDUCED_FORM_R",
+      "chi_status": "NOT_QUALIFIED"
+    }
+  ],
+  "valid_next_steps": [
+    "retain alpha/beta exponential model as exact theoretical witness and comparative coordinate",
+    "for natural systems use the general q(t), r(t), D(t) first-order condition unless functional forms are independently justified",
+    "execute the frozen greater-snow-goose q and compensation lanes without back-solving r",
+    "develop an independent actionability calibration before estimating natural beta"
+  ],
+  "forbidden": [
+    "fit alpha to three or four source-published q points after inspecting their shape and call it natural information rate",
+    "set r equal to fraction of route remaining",
+    "set r equal to 1-lambda",
+    "set beta equal to phase-correction rate k_eq",
+    "compare taxa by chi until both alpha and beta are independently qualified"
+  ]
+}
