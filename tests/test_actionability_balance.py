@@ -1,4 +1,4 @@
-from math import log
+from math import exp, log
 
 import pytest
 
@@ -195,7 +195,7 @@ def test_wait_cost_peak_root_satisfies_first_order_condition():
     t = out.optimal_time
     gross_slope = (
         1.7
-        * pytest.importorskip("math").exp(-0.3 * t)
-        * ((0.8 + 0.3) * pytest.importorskip("math").exp(-0.8 * t) - 0.3)
+        * exp(-0.3 * t)
+        * ((0.8 + 0.3) * exp(-0.8 * t) - 0.3)
     )
     assert gross_slope == pytest.approx(0.2, abs=1e-10)
