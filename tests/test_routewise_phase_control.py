@@ -149,3 +149,27 @@ def test_route_target_shift_can_recreate_error_after_successful_correction():
     )
     assert step.residual_before_propagation == pytest.approx(0.0)
     assert step.next_phase_error == pytest.approx(3.0)
+
+
+def test_routewise_step_recovers_existing_closed_loop_tracking_recurrence():
+    existing = simulate_closed_loop_tracking(
+        residual_forcing=0.2,
+        movement_feedback_gain=0.4,
+        phenology_feedback_gain=0.0,
+        initial_mismatch=1.5,
+        steps=1,
+        burn_in=0,
+    )
+    step = proportional_phase_step(
+        1.5,
+        1.5,
+        control_gain=0.4,
+        passive_retention=1.0,
+        route_shift=0.2,
+        advance_capacity=100.0,
+        delay_capacity=100.0,
+    )
+    assert step.next_phase_error == pytest.approx(existing.final_mismatch)
+    assert step.unclipped_closed_loop_lambda == pytest.approx(
+        existing.phase_retention_lambda
+    )
