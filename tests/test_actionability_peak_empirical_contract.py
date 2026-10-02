@@ -67,3 +67,15 @@ def test_claim_boundary_blocks_existing_natural_validation():
     assert "existing natural data already validate t*" in blocked
     assert "stage number itself is r" in blocked
     assert "generic optimal stopping or value of information is novel" in blocked
+
+
+
+def test_contract_includes_bounded_information_use_prediction():
+    x = load()
+    assert "enter and later exit" in x["theory"]["finite_use_window"]
+    sig = x["primary_empirical_signature"]
+    assert "entry-peak-exit" in sig["secondary_prediction"]
+    assert any(
+        "retained recourse approaches zero" in row
+        for row in sig["falsifiers"]
+    )
