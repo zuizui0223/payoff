@@ -324,6 +324,42 @@ Therefore the relevant cross-system comparison is not raw migration distance,
 calendar date or even cue accuracy at one snapshot. It is the **relative speed
 of learning versus losing options**.
 
+The maximum normalized actionable information is strictly ordered by chi. Since
+
+    g*(chi)
+      =
+      chi(1+chi)^(-1-1/chi),
+
+we obtain
+
+    d log g* / d chi
+      =
+      log(1+chi)/chi^2
+      >
+      0.
+
+Meanwhile
+
+    tau*(chi)
+      =
+      log(1+chi)/chi
+
+has derivative
+
+    d tau*/d chi
+      =
+      [chi/(1+chi)-log(1+chi)]/chi^2
+      <
+      0.
+
+Thus larger chi simultaneously gives:
+
+1. more exploitable information;
+2. a later position along the cue-improvement trajectory;
+3. more retained actionability at commitment;
+4. an earlier commitment time when measured in units of the recourse-loss
+   timescale.
+
 This ratio is a prospective theoretical coordinate. No current natural dataset
 in the repository has an independently calibrated alpha and beta on this exact
 scale.
