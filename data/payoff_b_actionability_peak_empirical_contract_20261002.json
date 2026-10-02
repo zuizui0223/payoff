@@ -8,7 +8,8 @@
     "zero_cost_balance": "S*q_dot/(S*q-B) = -r_dot/r above q0",
     "exponential_peak": "t*=log(1+alpha/beta)/alpha",
     "pairwise_prediction": "under the same q(t), larger beta implies earlier optimal commitment",
-    "qualitative_signature": "cue quality may improve monotonically while behavioral cue responsiveness peaks at an intermediate stage"
+    "qualitative_signature": "cue quality may improve monotonically while behavioral cue responsiveness peaks at an intermediate stage",
+    "finite_use_window": "for fixed D with hump-shaped r(t)V_A(q(t)), information use can enter and later exit while q(t) continues to improve"
   },
   "primary_empirical_signature": {
     "name": "INTERMEDIATE_STAGE_CUE_RESPONSE_PEAK",
@@ -21,8 +22,10 @@
     "falsifiers": [
       "cue-response strength increases monotonically through the terminal stage despite strongly declining independently measured recourse",
       "cue-response strength is unrelated to independently estimated cue quality and recourse across stages",
-      "a q-only model predicts held-out behavior as well as or better than every prespecified q-plus-recourse model"
-    ]
+      "a q-only model predicts held-out behavior as well as or better than every prespecified q-plus-recourse model",
+      "after independent evidence that retained recourse approaches zero, cue-linked behavior remains equally strong or stronger at terminal stages"
+    ],
+    "secondary_prediction": "if enough ordered stages exist, cue-linked behavior should show an entry-peak-exit pattern rather than monotone strengthening toward the terminal stage"
   },
   "candidate_systems": [
     {
@@ -97,7 +100,7 @@
       "stage only",
       "remaining recourse proxy only"
     ],
-    "focal_model": "cue quality plus recourse/actionability interaction specified before outcome inspection",
+    "focal_model": "prespecified cue-quality x recourse/actionability model allowing an intermediate response peak and, when stage density permits, a bounded information-use window",
     "strongest_test": "held-out prediction of stage-specific behavior or commitment under a preregistered common response scale"
   },
   "claim_boundary": {
