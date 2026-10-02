@@ -284,3 +284,85 @@ def exponential_actionability_value(
     q = q0 + (1.0 - q0) * (1.0 - exp(-alpha * t))
     r = exp(-beta * t)
     return r * S * max(0.0, q - q0)
+
+
+
+@dataclass(frozen=True)
+class ExponentialPairDesynchronization:
+    """Exact pairwise commitment divergence under shared information gain."""
+
+    information_rate: float
+    actor_1_recourse_decay_rate: float
+    actor_2_recourse_decay_rate: float
+    actor_1_optimal_time: float
+    actor_2_optimal_time: float
+    commitment_time_gap: float
+    actor_1_optimal_cue_accuracy: float
+    actor_2_optimal_cue_accuracy: float
+    cue_accuracy_gap: float
+
+
+def exponential_pair_desynchronization(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    information_rate: float,
+    actor_1_recourse_decay_rate: float,
+    actor_2_recourse_decay_rate: float,
+) -> ExponentialPairDesynchronization:
+    """Exact two-actor stagewise desynchronization under one shared q(t).
+
+    Both actors see the same exponentially improving cue trajectory but lose
+    retained actionability at actor-specific rates beta_i.
+
+    Their optimal commitment times are
+
+        t_i* = log(1 + alpha/beta_i) / alpha,
+
+    so
+
+        Delta t*
+          = |log[(1+alpha/beta_1)/(1+alpha/beta_2)]| / alpha.
+
+    Faster recourse decay implies earlier commitment at lower cue accuracy.
+    """
+
+    alpha = _positive_finite("information_rate", information_rate)
+    beta1 = _positive_finite(
+        "actor_1_recourse_decay_rate",
+        actor_1_recourse_decay_rate,
+    )
+    beta2 = _positive_finite(
+        "actor_2_recourse_decay_rate",
+        actor_2_recourse_decay_rate,
+    )
+
+    one = exponential_information_actionability_optimum(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        information_rate=alpha,
+        recourse_decay_rate=beta1,
+    )
+    two = exponential_information_actionability_optimum(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        information_rate=alpha,
+        recourse_decay_rate=beta2,
+    )
+
+    return ExponentialPairDesynchronization(
+        information_rate=alpha,
+        actor_1_recourse_decay_rate=beta1,
+        actor_2_recourse_decay_rate=beta2,
+        actor_1_optimal_time=one.optimal_time,
+        actor_2_optimal_time=two.optimal_time,
+        commitment_time_gap=abs(one.optimal_time - two.optimal_time),
+        actor_1_optimal_cue_accuracy=one.optimal_cue_accuracy,
+        actor_2_optimal_cue_accuracy=two.optimal_cue_accuracy,
+        cue_accuracy_gap=abs(
+            one.optimal_cue_accuracy - two.optimal_cue_accuracy
+        ),
+    )
