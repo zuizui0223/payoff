@@ -257,6 +257,77 @@ actors receive the same information trajectory.
 This is the continuous-time analogue of the current Paper-2 asynchronous cue
 uptake window.
 
+## 6.2 Dimensionless information-actionability ratio
+
+The exponential witness collapses to one dimensionless control ratio
+
+    chi = alpha / beta,
+
+where:
+
+- alpha = rate at which useful environmental information improves;
+- beta = rate at which retained actionability decays.
+
+With scaled time
+
+    tau = beta t,
+
+normalized actionable information is
+
+    g(tau;chi)
+      =
+      exp(-tau)
+      [1-exp(-chi tau)].
+
+Its unique optimum is
+
+    tau*
+      =
+      log(1+chi)/chi.
+
+The fraction of the possible cue improvement achieved at commitment is
+
+    (q*-q0)/(1-q0)
+      =
+      chi/(1+chi).
+
+Retained actionability at commitment is
+
+    r*
+      =
+      (1+chi)^(-1/chi),
+
+and maximum actionable information normalized by S(1-q0) is
+
+    g*
+      =
+      chi
+      (1+chi)^(-1-1/chi).
+
+### Interpretation
+
+If chi << 1:
+
+- information improves slowly relative to recourse loss;
+- the actor commits while the cue is still only slightly above the minimum
+  actionable quality;
+- the maximum exploitable information is approximately chi/e of the full
+  theoretical amount.
+
+If chi >> 1:
+
+- information improves before much recourse is lost;
+- the actor can approach perfect information before committing;
+- normalized exploitable information approaches one.
+
+Therefore the relevant cross-system comparison is not raw migration distance,
+calendar date or even cue accuracy at one snapshot. It is the **relative speed
+of learning versus losing options**.
+
+This ratio is a prospective theoretical coordinate. No current natural dataset
+in the repository has an independently calibrated alpha and beta on this exact
+scale.
+
 ## 6.5 Exact pairwise desynchronization under one shared cue trajectory
 
 Let two interacting actors experience the same information-improvement rate
