@@ -1,0 +1,115 @@
+{
+  "contract_id": "payoff_b_actionability_peak_empirical_test_v1_20261002",
+  "date": "2026-10-02",
+  "status": "PROSPECTIVE_NO_OUTCOME_OPENED",
+  "frozen_geb_submission_affected": false,
+  "theory": {
+    "canonical_net_value": "N(t)=r(t)*V_A(q(t))-C(t)",
+    "zero_cost_balance": "S*q_dot/(S*q-B) = -r_dot/r above q0",
+    "exponential_peak": "t*=log(1+alpha/beta)/alpha",
+    "pairwise_prediction": "under the same q(t), larger beta implies earlier optimal commitment",
+    "qualitative_signature": "cue quality may improve monotonically while behavioral cue responsiveness peaks at an intermediate stage",
+    "finite_use_window": "for fixed D with hump-shaped r(t)V_A(q(t)), information use can enter and later exit while q(t) continues to improve"
+  },
+  "primary_empirical_signature": {
+    "name": "INTERMEDIATE_STAGE_CUE_RESPONSE_PEAK",
+    "required_ordering": [
+      "cue quality/predictive accuracy must be estimated independently by stage",
+      "remaining response opportunity must decline or be independently bounded by stage",
+      "behavioral response to the cue must be measured on a common scale across at least three ordered stages"
+    ],
+    "prediction": "behavioral cue responsiveness is not maximized at the stage of maximal cue accuracy; it peaks earlier when information gain and remaining actionability are jointly high",
+    "falsifiers": [
+      "cue-response strength increases monotonically through the terminal stage despite strongly declining independently measured recourse",
+      "cue-response strength is unrelated to independently estimated cue quality and recourse across stages",
+      "a q-only model predicts held-out behavior as well as or better than every prespecified q-plus-recourse model",
+      "after independent evidence that retained recourse approaches zero, cue-linked behavior remains equally strong or stronger at terminal stages"
+    ],
+    "secondary_prediction": "if enough ordered stages exist, cue-linked behavior should show an entry-peak-exit pattern rather than monotone strengthening toward the terminal stage"
+  },
+  "candidate_systems": [
+    {
+      "system": "pink-footed goose Denmark-Trondelag-Vesteralen-Svalbard",
+      "source": "Bauer, Gienapp & Madsen 2008 Ecology 89:1953-1960",
+      "doi": "10.1890/07-1101.1",
+      "strengths": [
+        "multiple ordered spring-migration sites",
+        "departure decisions modeled at multiple sites",
+        "day length and accumulated temperature relevance changes en route",
+        "local accumulated temperatures at stopovers are used to adjust northward progression"
+      ],
+      "required_new_work": [
+        "recover or reconstruct stage-level departure data/model coefficients on one common scale",
+        "estimate stage-specific predictive accuracy of each cue for the declared later spring state",
+        "define recourse independently of the fitted cue-response outcome"
+      ],
+      "current_ceiling": "BIOLOGICAL_PREMISE_SUPPORTED_DIRECT_QR_TEST_NOT_IDENTIFIED"
+    },
+    {
+      "system": "greater snow goose St Lawrence-Nunavik-Bylot",
+      "source": "existing PAYOFF-B registered GPS cue-uptake lane",
+      "strengths": [
+        "75 GPS-tracked birds in 2019-2023 in the registered Movebank study",
+        "frozen route contexts",
+        "historical route-to-Bylot predictive-connectivity machinery already specified",
+        "downstream transit-compression screen already preregistered"
+      ],
+      "required_new_work": [
+        "authorized Movebank event access",
+        "source-backed route geometry",
+        "prespecify an independent remaining-recourse proxy before opening focal outcomes",
+        "retain the existing no-retuning rule for cue definitions and route contexts"
+      ],
+      "current_ceiling": "BEST_PROSPECTIVE_SAME_SYSTEM_ROUTE_ACCESS_BLOCKED"
+    },
+    {
+      "system": "Red Desert mule deer",
+      "source": "Ortega et al. 2023 Nature Communications 14:2008",
+      "doi": "10.1038/s41467-023-37750-z",
+      "strengths": [
+        "signed phase errors span early and late starts",
+        "early animals decelerate/use longer stopovers and late animals accelerate/use shorter stopovers",
+        "strong route-level phase compression is published"
+      ],
+      "required_new_work": [
+        "independent route-stage cue-quality trajectory",
+        "source-row access for a stagewise reanalysis",
+        "do not infer q from the same phase-correction outcome used as response"
+      ],
+      "current_ceiling": "SIGNED_RECOURSE_STRONG_INFORMATION_TRAJECTORY_NOT_JOINTLY_IDENTIFIED"
+    }
+  ],
+  "recourse_identification": {
+    "prohibited_direct_substitutions": [
+      "remaining migration distance == theoretical r",
+      "remaining stopover days == theoretical r",
+      "flowering duration == theoretical r",
+      "1-|lambda| == theoretical r without a prespecified loss/action mapping"
+    ],
+    "licensed_proxies_for_directional_tests": [
+      "remaining route length or number of decision stages as geometry-only proxies",
+      "remaining feasible timing window from independently measured biological constraints",
+      "experimentally imposed remaining adjustment window",
+      "ratio of restricted-action to full-action information value when both loss surfaces are measured"
+    ],
+    "preferred_direct_definition": "r_t = V_restricted(q_ref,t) / V_full(q_ref) at a prespecified reference cue quality q_ref on a common loss scale"
+  },
+  "model_comparison": {
+    "null_models": [
+      "cue quality only",
+      "stage only",
+      "remaining recourse proxy only"
+    ],
+    "focal_model": "prespecified cue-quality x recourse/actionability model allowing an intermediate response peak and, when stage density permits, a bounded information-use window",
+    "strongest_test": "held-out prediction of stage-specific behavior or commitment under a preregistered common response scale"
+  },
+  "claim_boundary": {
+    "allowed": "the actionability-balance model makes a falsifiable intermediate-stage response prediction and identifies data requirements for a direct natural test",
+    "not_allowed": [
+      "existing natural data already validate t*",
+      "stage number itself is r",
+      "migrants universally have higher r than plants or pollinators",
+      "generic optimal stopping or value of information is novel"
+    ]
+  }
+}
