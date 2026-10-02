@@ -5,6 +5,8 @@ import pytest
 from src.continuous_information_actionability import (
     continuous_actionability_balance,
     dimensionless_information_actionability,
+    dimensionless_maximum_log_derivative,
+    dimensionless_scaled_time_derivative,
     exponential_actionability_value,
     exponential_information_actionability_optimum,
     exponential_pair_desynchronization,
@@ -315,3 +317,39 @@ def test_fast_information_limit_approaches_full_information_before_recourse_loss
     assert result.cue_progress_fraction > 0.999999 - 1e-9
     assert result.optimal_recourse > 0.99998
     assert result.normalized_maximum_value > 0.99998
+
+
+
+@pytest.mark.parametrize("chi", [0.01, 0.1, 1.0, 10.0, 100.0])
+def test_dimensionless_maximum_is_strictly_increasing(chi):
+    assert dimensionless_maximum_log_derivative(chi) > 0.0
+
+
+@pytest.mark.parametrize("chi", [0.01, 0.1, 1.0, 10.0, 100.0])
+def test_scaled_optimal_time_is_strictly_decreasing(chi):
+    assert dimensionless_scaled_time_derivative(chi) < 0.0
+
+
+def test_dimensionless_derivatives_match_finite_differences():
+    chi = 2.5
+    eps = 1e-6
+    left = dimensionless_information_actionability(chi - eps)
+    right = dimensionless_information_actionability(chi + eps)
+
+    finite_log_g = (
+        math.log(right.normalized_maximum_value)
+        - math.log(left.normalized_maximum_value)
+    ) / (2.0 * eps)
+    finite_tau = (
+        right.scaled_optimal_time_beta_t
+        - left.scaled_optimal_time_beta_t
+    ) / (2.0 * eps)
+
+    assert finite_log_g == pytest.approx(
+        dimensionless_maximum_log_derivative(chi),
+        rel=1e-6,
+    )
+    assert finite_tau == pytest.approx(
+        dimensionless_scaled_time_derivative(chi),
+        rel=1e-6,
+    )
