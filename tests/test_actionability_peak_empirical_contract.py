@@ -57,7 +57,9 @@ def test_model_comparison_includes_q_only_and_q_by_recourse_focal_model():
     x = load()
     mc = x["model_comparison"]
     assert "cue quality only" in mc["null_models"]
-    assert "cue quality plus recourse/actionability interaction" in mc["focal_model"]
+    assert "cue-quality x recourse/actionability model" in mc["focal_model"]
+    assert "intermediate response peak" in mc["focal_model"]
+    assert "bounded information-use window" in mc["focal_model"]
     assert "held-out prediction" in mc["strongest_test"]
 
 
