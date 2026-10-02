@@ -5,7 +5,9 @@ import pytest
 from src.actionability_balance import (
     canonical_actionability_geometry,
     continuous_balance_derivative,
+    equal_rate_information_use_window_closed_form,
     exponential_actionability_peak,
+    exponential_information_use_window,
     exponential_peak_with_linear_wait_cost,
     pairwise_exponential_commitment_gap,
 )
@@ -199,3 +201,82 @@ def test_wait_cost_peak_root_satisfies_first_order_condition():
         * ((0.8 + 0.3) * exp(-0.8 * t) - 0.3)
     )
     assert gross_slope == pytest.approx(0.2, abs=1e-10)
+
+
+
+def test_positive_deadline_cost_creates_finite_information_use_window():
+    out = exponential_information_use_window(
+        gross_scale=1.0,
+        alpha_information_rate=1.0,
+        beta_actionability_decay=1.0,
+        deadline_cost=0.10,
+    )
+    assert out.status == "FINITE_USE_WINDOW"
+    assert out.start_time is not None
+    assert out.end_time is not None
+    assert 0.0 < out.start_time < out.peak_time < out.end_time
+    assert out.maximum_gross_value == pytest.approx(0.25)
+
+
+def test_equal_rate_window_matches_closed_form_crossings():
+    numeric = exponential_information_use_window(
+        gross_scale=1.0,
+        alpha_information_rate=1.0,
+        beta_actionability_decay=1.0,
+        deadline_cost=0.10,
+    )
+    closed = equal_rate_information_use_window_closed_form(
+        gross_scale=1.0,
+        common_rate=1.0,
+        deadline_cost=0.10,
+    )
+    assert closed is not None
+    assert numeric.start_time == pytest.approx(closed[0], abs=1e-10)
+    assert numeric.end_time == pytest.approx(closed[1], abs=1e-10)
+
+
+def test_deadline_at_or_above_peak_removes_strict_use_window():
+    tangent = exponential_information_use_window(
+        gross_scale=1.0,
+        alpha_information_rate=1.0,
+        beta_actionability_decay=1.0,
+        deadline_cost=0.25,
+    )
+    never = exponential_information_use_window(
+        gross_scale=1.0,
+        alpha_information_rate=1.0,
+        beta_actionability_decay=1.0,
+        deadline_cost=0.30,
+    )
+    assert tangent.status == "TANGENT_AT_PEAK"
+    assert tangent.start_time == pytest.approx(log(2.0))
+    assert tangent.end_time == pytest.approx(log(2.0))
+    assert never.status == "NEVER_USE"
+    assert never.start_time is None
+    assert never.end_time is None
+
+
+def test_zero_deadline_cost_stays_positive_for_every_finite_time_after_zero():
+    out = exponential_information_use_window(
+        gross_scale=1.0,
+        alpha_information_rate=1.0,
+        beta_actionability_decay=0.5,
+        deadline_cost=0.0,
+    )
+    assert out.status == "POSITIVE_FOR_ALL_FINITE_T_AFTER_ZERO"
+    assert out.start_time == pytest.approx(0.0)
+    assert out.end_time is None
+
+
+def test_information_use_can_end_while_cue_quality_is_still_improving():
+    out = exponential_information_use_window(
+        gross_scale=1.0,
+        alpha_information_rate=1.0,
+        beta_actionability_decay=1.0,
+        deadline_cost=0.10,
+    )
+    assert out.end_time is not None
+    # q(t)=q0+Delta_q(1-e^-t) is strictly increasing for all finite t,
+    # yet actionable information falls below the deadline after end_time.
+    qdot_at_end = exp(-out.end_time)
+    assert qdot_at_end > 0.0
