@@ -471,3 +471,115 @@ def dimensionless_scaled_time_derivative(
     return (
         chi / (1.0 + chi) - log1p(chi)
     ) / (chi * chi)
+
+
+
+@dataclass(frozen=True)
+class PairwiseInformationRateGeometry:
+    """Exact information-rate geometry for two recourse-decay rates."""
+
+    actor_1_recourse_decay_rate: float
+    actor_2_recourse_decay_rate: float
+    cue_gap_peak_information_rate: float
+    maximum_cue_accuracy_gap_fraction: float
+    slow_information_time_gap_limit: float
+
+
+def pairwise_information_rate_geometry(
+    actor_1_recourse_decay_rate: float,
+    actor_2_recourse_decay_rate: float,
+) -> PairwiseInformationRateGeometry:
+    """Return exact comparative-statics landmarks for a two-actor pair.
+
+    For beta1,beta2>0 under the shared exponential cue trajectory,
+
+        Delta t*(alpha)
+          = |log(1+alpha/beta1)-log(1+alpha/beta2)|/alpha,
+
+    which strictly decreases with alpha when beta1 != beta2, with limits
+
+        alpha -> 0: |1/beta1 - 1/beta2|
+        alpha -> inf: 0.
+
+    The normalized cue-accuracy gap at commitment is
+
+        Delta q*/(1-q0)
+          = alpha |beta2-beta1|
+            / [(alpha+beta1)(alpha+beta2)].
+
+    This is maximized at
+
+        alpha_peak = sqrt(beta1 beta2),
+
+    with maximum normalized gap
+
+        |sqrt(beta2)-sqrt(beta1)|
+        / [sqrt(beta1)+sqrt(beta2)].
+    """
+
+    from math import sqrt
+
+    beta1 = _positive_finite(
+        "actor_1_recourse_decay_rate",
+        actor_1_recourse_decay_rate,
+    )
+    beta2 = _positive_finite(
+        "actor_2_recourse_decay_rate",
+        actor_2_recourse_decay_rate,
+    )
+    x = sqrt(beta1)
+    y = sqrt(beta2)
+    peak_alpha = sqrt(beta1 * beta2)
+    max_q_fraction = abs(y - x) / (x + y)
+    slow_gap = abs(1.0 / beta1 - 1.0 / beta2)
+
+    return PairwiseInformationRateGeometry(
+        actor_1_recourse_decay_rate=beta1,
+        actor_2_recourse_decay_rate=beta2,
+        cue_gap_peak_information_rate=peak_alpha,
+        maximum_cue_accuracy_gap_fraction=max_q_fraction,
+        slow_information_time_gap_limit=slow_gap,
+    )
+
+
+def pairwise_commitment_time_gap(
+    information_rate: float,
+    actor_1_recourse_decay_rate: float,
+    actor_2_recourse_decay_rate: float,
+) -> float:
+    """Return exact Delta t* for shared exponential cue improvement."""
+
+    alpha = _positive_finite("information_rate", information_rate)
+    beta1 = _positive_finite(
+        "actor_1_recourse_decay_rate",
+        actor_1_recourse_decay_rate,
+    )
+    beta2 = _positive_finite(
+        "actor_2_recourse_decay_rate",
+        actor_2_recourse_decay_rate,
+    )
+    return abs(
+        log1p(alpha / beta1) - log1p(alpha / beta2)
+    ) / alpha
+
+
+def normalized_pairwise_cue_gap(
+    information_rate: float,
+    actor_1_recourse_decay_rate: float,
+    actor_2_recourse_decay_rate: float,
+) -> float:
+    """Return Delta q*/(1-q0) for the shared exponential cue trajectory."""
+
+    alpha = _positive_finite("information_rate", information_rate)
+    beta1 = _positive_finite(
+        "actor_1_recourse_decay_rate",
+        actor_1_recourse_decay_rate,
+    )
+    beta2 = _positive_finite(
+        "actor_2_recourse_decay_rate",
+        actor_2_recourse_decay_rate,
+    )
+    return (
+        alpha * abs(beta2 - beta1)
+        / ((alpha + beta1) * (alpha + beta2))
+    )
