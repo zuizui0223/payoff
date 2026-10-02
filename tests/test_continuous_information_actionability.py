@@ -6,6 +6,7 @@ from src.continuous_information_actionability import (
     continuous_actionability_balance,
     exponential_actionability_value,
     exponential_information_actionability_optimum,
+    exponential_pair_desynchronization,
 )
 
 
@@ -183,3 +184,53 @@ def test_equal_information_and_recourse_rates_have_simple_optimum():
     assert result.optimal_recourse == pytest.approx(0.5)
     # Canonical q0=0.75, S=1.6 => max = 0.5*1.6*(0.875-0.75)=0.1.
     assert result.maximum_actionable_information_value == pytest.approx(0.1)
+
+
+
+def test_pairwise_shared_information_different_recourse_rates_desynchronize():
+    result = exponential_pair_desynchronization(
+        0.40,
+        2.0,
+        1.0,
+        information_rate=1.0,
+        actor_1_recourse_decay_rate=0.25,
+        actor_2_recourse_decay_rate=1.0,
+    )
+    expected_gap = abs(
+        math.log(1.0 + 1.0 / 0.25)
+        - math.log(1.0 + 1.0 / 1.0)
+    )
+    assert result.commitment_time_gap == pytest.approx(expected_gap)
+    assert result.actor_2_optimal_time < result.actor_1_optimal_time
+    assert (
+        result.actor_2_optimal_cue_accuracy
+        < result.actor_1_optimal_cue_accuracy
+    )
+
+
+def test_pairwise_equal_recourse_decay_has_zero_desynchronization():
+    result = exponential_pair_desynchronization(
+        0.40,
+        2.0,
+        1.0,
+        information_rate=0.8,
+        actor_1_recourse_decay_rate=0.4,
+        actor_2_recourse_decay_rate=0.4,
+    )
+    assert result.commitment_time_gap == pytest.approx(0.0)
+    assert result.cue_accuracy_gap == pytest.approx(0.0)
+
+
+def test_faster_recourse_loss_commits_with_less_accurate_information():
+    result = exponential_pair_desynchronization(
+        0.40,
+        2.0,
+        1.0,
+        information_rate=0.5,
+        actor_1_recourse_decay_rate=0.1,
+        actor_2_recourse_decay_rate=2.0,
+    )
+    assert result.actor_2_optimal_time < result.actor_1_optimal_time
+    assert result.actor_2_optimal_cue_accuracy < result.actor_1_optimal_cue_accuracy
+    assert result.commitment_time_gap > 0.0
+    assert result.cue_accuracy_gap > 0.0
