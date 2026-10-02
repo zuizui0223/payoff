@@ -1,0 +1,83 @@
+{
+  "contract_id": "payoff_b_snow_goose_prediction_compensation_classification_v1_20261002",
+  "frozen_date": "2026-10-02",
+  "status": "PREOUTCOME_CLASSIFICATION_FROZEN",
+  "outcome_data_opened": false,
+  "parent_tests": {
+    "cue_uptake": {
+      "registration": "data/payoff_b_greater_snow_goose_gps_cue_uptake_registration_20260929.json",
+      "primary_term": "local_temp_anom3:z_predictive_connectivity",
+      "registered_direction": "positive",
+      "supported_label": "SUPPORTED",
+      "role": "pre-commitment behavioral cue-uptake signal"
+    },
+    "downstream_compensation": {
+      "registration": "data/payoff_b_greater_snow_goose_dual_use_compensation_screen_20260930.json",
+      "primary_term": "local_temp_anom3:z_predictive_connectivity",
+      "registered_direction": "negative on log transit duration",
+      "supported_label": "DUAL_USE_BEHAVIORAL_SIGNAL_SUPPORTED",
+      "null_label": "DUAL_USE_NOT_DEMONSTRATED_EXOGENEITY_UNRESOLVED",
+      "role": "cue-linked downstream transit-compression signal"
+    }
+  },
+  "classification_matrix": [
+    {
+      "cue_uptake": "SUPPORTED",
+      "compensation": "DUAL_USE_BEHAVIORAL_SIGNAL_SUPPORTED",
+      "classification": "BOTH_PRECOMMITMENT_AND_DOWNSTREAM_INFORMATION_CHANNELS_SUPPORTED",
+      "interpretation": "same ecological cue architecture has separate evidence at commitment and downstream compensation stages",
+      "ceiling": "does not identify reduced-form r, D_eff, or prediction-correction substitution"
+    },
+    {
+      "cue_uptake": "SUPPORTED",
+      "compensation": "DUAL_USE_NOT_DEMONSTRATED_EXOGENEITY_UNRESOLVED",
+      "classification": "PRECOMMITMENT_INFORMATION_SIGNAL_COMPENSATION_UNRESOLVED",
+      "interpretation": "behavioral cue uptake supported; downstream cue-informed compensation not demonstrated and exogeneity remains unresolved",
+      "ceiling": "do not call compensation absent"
+    },
+    {
+      "cue_uptake": "SUPPORTED",
+      "compensation": "NOT_ESTIMABLE",
+      "classification": "PRECOMMITMENT_INFORMATION_SIGNAL_DOWNSTREAM_NOT_ESTIMABLE",
+      "interpretation": "cue-uptake result stands independently; no downstream classification"
+    },
+    {
+      "cue_uptake": "NOT_SUPPORTED",
+      "compensation": "DUAL_USE_BEHAVIORAL_SIGNAL_SUPPORTED",
+      "classification": "DOWNSTREAM_INFORMATION_SIGNAL_WITHOUT_PRIMARY_CUE_UPTAKE_SUPPORT",
+      "interpretation": "downstream association exists without registered departure-stage support; retain as stage-specific behavioral pattern",
+      "ceiling": "do not infer hidden cue uptake"
+    },
+    {
+      "cue_uptake": "NOT_SUPPORTED",
+      "compensation": "DUAL_USE_NOT_DEMONSTRATED_EXOGENEITY_UNRESOLVED",
+      "classification": "NO_PROMOTABLE_JOINT_INFORMATION_SIGNAL",
+      "interpretation": "neither registered lane supplies positive joint-stage support",
+      "ceiling": "does not prove information irrelevant"
+    },
+    {
+      "cue_uptake": "NOT_ESTIMABLE",
+      "compensation": "ANY",
+      "classification": "JOINT_CLASSIFICATION_NOT_ESTIMABLE",
+      "interpretation": "primary decision-stage gate failed; downstream result cannot rescue the joint claim"
+    }
+  ],
+  "substitution_theory_boundary": {
+    "model": "src/prediction_correction_substitution.py",
+    "direct_test_from_existing_two_parent_tests": false,
+    "reason": "the parent compensation screen does not independently estimate pre-correction mismatch risk R(q) or correction-cost curvature c(q)",
+    "required_future_quantities": [
+      "pre-correction mismatch risk R(q) on a prespecified scale",
+      "realized correction gain conditional on incoming mismatch",
+      "cue effect on correction cost/effectiveness or an independently justified proxy"
+    ],
+    "allowed_after_outcome": "use parent results only in the frozen classification matrix above; do not classify prediction-substitution dominance from transit-duration sign alone"
+  },
+  "forbidden": [
+    "change either parent model, direction, q construction, route segments or thresholds after seeing event outcomes",
+    "reinterpret a null compensation screen as proof of cue-independent D_eff",
+    "reinterpret a positive compensation screen as direct r calibration",
+    "reinterpret an opposite-sign compensation coefficient as confirmation of substitution without R(q)",
+    "combine parent p-values into an unregistered omnibus significance test"
+  ]
+}
