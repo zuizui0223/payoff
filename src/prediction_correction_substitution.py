@@ -195,3 +195,100 @@ def actionable_phase_retention_slope(
     )
     S = base.early_action_prior_loss + base.late_action_prior_loss
     return 2.0 * c * S / (c + 2.0 * risk) ** 2
+
+
+
+@dataclass(frozen=True)
+class PredictionCorrectionBalance:
+    """Local balance between prediction benefit and cue-informed correction."""
+
+    pre_correction_risk: float
+    risk_derivative: float
+    correction_cost_curvature: float
+    correction_cost_derivative: float
+    correction_gain: float
+    phase_retention: float
+    risk_log_derivative: float
+    correction_cost_log_derivative: float
+    correction_gain_logit_derivative: float
+    correction_gain_derivative: float
+    regime: str
+
+
+def prediction_correction_balance(
+    pre_correction_risk: float,
+    risk_derivative: float,
+    correction_cost_curvature: float,
+    correction_cost_derivative: float,
+    *,
+    tolerance: float = 1e-12,
+) -> PredictionCorrectionBalance:
+    """Classify whether better information strengthens or weakens correction.
+
+    Let both mismatch risk R(q)>0 and correction-cost curvature c(q)>0 vary with
+    cue quality q. The optimal correction gain is
+
+        g* = 2R/(c+2R).
+
+    Exact differentiation gives
+
+        dg*/dq
+          = 2[c R' - R c']/(c+2R)^2,
+
+    and, more transparently,
+
+        d/dq log[g*/(1-g*)]
+          = R'/R - c'/c.
+
+    Therefore:
+      - if R'/R < c'/c, prediction-risk reduction dominates and g falls;
+      - if R'/R > c'/c, cue-informed cost reduction dominates and g rises;
+      - equality is the local balance boundary.
+
+    Note that both log derivatives may be negative.
+    """
+
+    R = float(pre_correction_risk)
+    Rp = float(risk_derivative)
+    c = float(correction_cost_curvature)
+    cp = float(correction_cost_derivative)
+    tol = float(tolerance)
+
+    if not isfinite(R) or R <= 0.0:
+        raise ValueError("pre_correction_risk must be finite and positive")
+    if not isfinite(Rp):
+        raise ValueError("risk_derivative must be finite")
+    if not isfinite(c) or c <= 0.0:
+        raise ValueError("correction_cost_curvature must be finite and positive")
+    if not isfinite(cp):
+        raise ValueError("correction_cost_derivative must be finite")
+    if not isfinite(tol) or tol < 0.0:
+        raise ValueError("tolerance must be finite and non-negative")
+
+    gain = 2.0 * R / (c + 2.0 * R)
+    retention = c / (c + 2.0 * R)
+    risk_log = Rp / R
+    cost_log = cp / c
+    logit_derivative = risk_log - cost_log
+    gain_derivative = gain * retention * logit_derivative
+
+    if gain_derivative > tol:
+        regime = "CUE_INFORMED_CORRECTION_DOMINANT"
+    elif gain_derivative < -tol:
+        regime = "PREDICTION_SUBSTITUTION_DOMINANT"
+    else:
+        regime = "LOCAL_BALANCE"
+
+    return PredictionCorrectionBalance(
+        pre_correction_risk=R,
+        risk_derivative=Rp,
+        correction_cost_curvature=c,
+        correction_cost_derivative=cp,
+        correction_gain=gain,
+        phase_retention=retention,
+        risk_log_derivative=risk_log,
+        correction_cost_log_derivative=cost_log,
+        correction_gain_logit_derivative=logit_derivative,
+        correction_gain_derivative=gain_derivative,
+        regime=regime,
+    )
