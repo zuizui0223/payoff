@@ -4,6 +4,7 @@ import pytest
 
 from src.continuous_information_actionability import (
     continuous_actionability_balance,
+    dimensionless_information_actionability,
     exponential_actionability_value,
     exponential_information_actionability_optimum,
     exponential_pair_desynchronization,
@@ -234,3 +235,83 @@ def test_faster_recourse_loss_commits_with_less_accurate_information():
     assert result.actor_2_optimal_cue_accuracy < result.actor_1_optimal_cue_accuracy
     assert result.commitment_time_gap > 0.0
     assert result.cue_accuracy_gap > 0.0
+
+
+
+def test_dimensionless_ratio_matches_dimensional_solution():
+    alpha = 0.6
+    beta = 0.2
+    chi = alpha / beta
+    dimless = dimensionless_information_actionability(chi)
+    dimensional = exponential_information_actionability_optimum(
+        0.40,
+        2.0,
+        1.0,
+        information_rate=alpha,
+        recourse_decay_rate=beta,
+    )
+    assert beta * dimensional.optimal_time == pytest.approx(
+        dimless.scaled_optimal_time_beta_t
+    )
+    assert (
+        (dimensional.optimal_cue_accuracy - dimensional.actionable_cue_accuracy)
+        / (1.0 - dimensional.actionable_cue_accuracy)
+        == pytest.approx(dimless.cue_progress_fraction)
+    )
+    assert dimensional.optimal_recourse == pytest.approx(
+        dimless.optimal_recourse
+    )
+
+
+def test_information_actionability_ratio_orders_exploitable_information():
+    slow_info = dimensionless_information_actionability(0.1)
+    balanced = dimensionless_information_actionability(1.0)
+    fast_info = dimensionless_information_actionability(10.0)
+
+    assert (
+        slow_info.normalized_maximum_value
+        < balanced.normalized_maximum_value
+        < fast_info.normalized_maximum_value
+    )
+    assert (
+        slow_info.cue_progress_fraction
+        < balanced.cue_progress_fraction
+        < fast_info.cue_progress_fraction
+    )
+    assert (
+        slow_info.optimal_recourse
+        < balanced.optimal_recourse
+        < fast_info.optimal_recourse
+    )
+    assert (
+        slow_info.scaled_optimal_time_beta_t
+        > balanced.scaled_optimal_time_beta_t
+        > fast_info.scaled_optimal_time_beta_t
+    )
+
+
+def test_balanced_information_actionability_ratio_has_simple_values():
+    result = dimensionless_information_actionability(1.0)
+    assert result.scaled_optimal_time_beta_t == pytest.approx(math.log(2.0))
+    assert result.cue_progress_fraction == pytest.approx(0.5)
+    assert result.optimal_recourse == pytest.approx(0.5)
+    assert result.normalized_maximum_value == pytest.approx(0.25)
+
+
+def test_slow_information_limit_is_close_to_chi_over_e():
+    chi = 1e-5
+    result = dimensionless_information_actionability(chi)
+    assert result.scaled_optimal_time_beta_t == pytest.approx(1.0, rel=1e-5)
+    assert result.optimal_recourse == pytest.approx(math.exp(-1.0), rel=1e-5)
+    assert result.normalized_maximum_value == pytest.approx(
+        chi / math.e,
+        rel=2e-5,
+    )
+
+
+def test_fast_information_limit_approaches_full_information_before_recourse_loss():
+    result = dimensionless_information_actionability(1e6)
+    assert result.scaled_optimal_time_beta_t < 2e-5
+    assert result.cue_progress_fraction > 0.999999 - 1e-9
+    assert result.optimal_recourse > 0.99998
+    assert result.normalized_maximum_value > 0.99998
