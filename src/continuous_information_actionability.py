@@ -426,3 +426,48 @@ def dimensionless_information_actionability(
         optimal_recourse=optimal_recourse,
         normalized_maximum_value=normalized_maximum,
     )
+
+
+
+def dimensionless_maximum_log_derivative(
+    information_to_recourse_rate_ratio: float,
+) -> float:
+    """Return d log(g*) / d chi for the dimensionless optimum.
+
+    For
+
+        g*(chi) = chi (1+chi)^(-1-1/chi),
+
+    exact simplification gives
+
+        d log(g*)/d chi = log(1+chi)/chi^2 > 0.
+
+    Therefore the maximum exploitable actionable information is strictly
+    increasing in chi=alpha/beta.
+    """
+
+    chi = _positive_finite(
+        "information_to_recourse_rate_ratio",
+        information_to_recourse_rate_ratio,
+    )
+    return log1p(chi) / (chi * chi)
+
+
+def dimensionless_scaled_time_derivative(
+    information_to_recourse_rate_ratio: float,
+) -> float:
+    """Return d[tau*]/d chi, which is strictly negative.
+
+    tau*=log(1+chi)/chi, so
+
+        d tau*/d chi
+          = [chi/(1+chi)-log(1+chi)]/chi^2 < 0.
+    """
+
+    chi = _positive_finite(
+        "information_to_recourse_rate_ratio",
+        information_to_recourse_rate_ratio,
+    )
+    return (
+        chi / (1.0 + chi) - log1p(chi)
+    ) / (chi * chi)
