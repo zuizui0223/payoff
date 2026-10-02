@@ -188,6 +188,86 @@ For actors 1 and 2,
 This is the continuous-time analogue of the frozen Paper-2 asynchronous
 information-use window.
 
+## 4.5 Finite information-use window
+
+Now compare the hump-shaped actionable-information value with a fixed positive
+effective deadline cost D:
+
+    use information iff
+    K exp(-beta t)[1-exp(-alpha t)] > D,
+
+where
+
+    K=S Delta_q.
+
+Because the left-hand side is zero at t=0, strictly positive at intermediate
+times, and returns to zero as t -> infinity, the timing geometry is
+non-monotone even though q(t) itself is monotone increasing.
+
+Let G_max be the unique peak value.
+
+Then:
+
+- if D > G_max: information is never worth using;
+- if D = G_max: there is one tangency time;
+- if 0 < D < G_max: there are exactly two crossings
+
+      t_- < t* < t_+,
+
+  and information is worth using only for
+
+      t_- < t < t_+.
+
+Thus information can become worth using and later cease to be worth using
+**while cue accuracy is still improving**.
+
+For the equal-rate special case
+
+    alpha=beta=lambda,
+
+write
+
+    x=exp(-lambda t).
+
+Then
+
+    G/K=x(1-x),
+
+whose maximum is 1/4. If
+
+    0 < D/K < 1/4,
+
+the two crossings are
+
+    x_early
+      =
+    [1+sqrt(1-4D/K)]/2,
+
+    x_late
+      =
+    [1-sqrt(1-4D/K)]/2,
+
+so
+
+    t_-
+      =
+    -log(x_early)/lambda,
+
+    t_+
+      =
+    -log(x_late)/lambda.
+
+This is the strongest "Schroedinger's spring" consequence of the declared
+reduced model:
+
+> early in the journey, the box is too opaque; late in the journey, the box is
+> clear but there is too little action left. Information matters only in the
+> intermediate actionability window.
+
+This is not a claim that generic non-monotone stopping regions are new. The
+specific ecological contribution would be the mapping from seasonal cue
+predictability and biological recourse loss into a testable finite-use window.
+
 ## 5. Linear direct waiting cost
 
 Now let
