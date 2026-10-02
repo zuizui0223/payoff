@@ -583,3 +583,86 @@ def normalized_pairwise_cue_gap(
         alpha * abs(beta2 - beta1)
         / ((alpha + beta1) * (alpha + beta2))
     )
+
+
+
+@dataclass(frozen=True)
+class ExponentialMechanismSensitivity:
+    """Local comparative statics for information gain versus recourse loss."""
+
+    information_rate: float
+    recourse_decay_rate: float
+    actionable_cue_accuracy: float
+    optimal_time: float
+    optimal_cue_accuracy: float
+    dt_d_information_rate: float
+    dt_d_recourse_decay_rate: float
+    dq_d_information_rate: float
+    dq_d_recourse_decay_rate: float
+
+
+def exponential_mechanism_sensitivity(
+    prior_early: float,
+    false_early_cost: float,
+    missed_early_cost: float,
+    *,
+    information_rate: float,
+    recourse_decay_rate: float,
+) -> ExponentialMechanismSensitivity:
+    """Return exact local sensitivities of t* and q* to alpha and beta.
+
+    With alpha=information_rate and beta=recourse_decay_rate,
+
+        t* = log(1+alpha/beta)/alpha
+
+        q* = q0 + (1-q0) alpha/(alpha+beta).
+
+    Exact derivatives:
+
+        dt*/dalpha
+          = [alpha/(alpha+beta)-log(1+alpha/beta)]/alpha^2 < 0
+
+        dt*/dbeta
+          = -1/[beta(alpha+beta)] < 0
+
+        dq*/dalpha
+          = (1-q0) beta/(alpha+beta)^2 > 0
+
+        dq*/dbeta
+          = -(1-q0) alpha/(alpha+beta)^2 < 0.
+
+    Thus both faster information gain and faster recourse loss advance
+    commitment in clock time, but they have opposite effects on cue quality at
+    commitment.
+    """
+
+    alpha = _positive_finite("information_rate", information_rate)
+    beta = _positive_finite("recourse_decay_rate", recourse_decay_rate)
+
+    optimum = exponential_information_actionability_optimum(
+        prior_early,
+        false_early_cost,
+        missed_early_cost,
+        information_rate=alpha,
+        recourse_decay_rate=beta,
+    )
+    q0 = optimum.actionable_cue_accuracy
+
+    dt_da = (
+        alpha / (alpha + beta) - log1p(alpha / beta)
+    ) / (alpha * alpha)
+    dt_db = -1.0 / (beta * (alpha + beta))
+    dq_da = (1.0 - q0) * beta / (alpha + beta) ** 2
+    dq_db = -(1.0 - q0) * alpha / (alpha + beta) ** 2
+
+    return ExponentialMechanismSensitivity(
+        information_rate=alpha,
+        recourse_decay_rate=beta,
+        actionable_cue_accuracy=q0,
+        optimal_time=optimum.optimal_time,
+        optimal_cue_accuracy=optimum.optimal_cue_accuracy,
+        dt_d_information_rate=dt_da,
+        dt_d_recourse_decay_rate=dt_db,
+        dq_d_information_rate=dq_da,
+        dq_d_recourse_decay_rate=dq_db,
+    )
