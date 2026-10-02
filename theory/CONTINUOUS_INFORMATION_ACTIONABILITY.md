@@ -401,6 +401,74 @@ trajectories**. Heterogeneity in the rate of losing optionality is sufficient.
 This is the continuous-time analogue of the frozen Paper-2 result that
 heterogeneous effective deadlines create a finite asynchronous-uptake window.
 
+## 6.8 Information-rate dependence of pairwise desynchronization
+
+For two actors with beta_1 != beta_2 and one shared information-improvement
+rate alpha,
+
+    Delta t*(alpha)
+      =
+      |log(1+alpha/beta_1)
+       -log(1+alpha/beta_2)|
+      / alpha.
+
+This time gap strictly decreases with alpha.
+
+If beta_1<beta_2, the numerator can be written as the integral of
+
+    (beta_2-beta_1)
+    / [(x+beta_1)(x+beta_2)]
+
+from 0 to alpha. The integrand is positive and decreasing, so its average over
+[0,alpha] exceeds its endpoint. Therefore d Delta t*/d alpha < 0.
+
+The limits are
+
+    alpha -> 0:
+      Delta t*
+        ->
+      |1/beta_1 - 1/beta_2|,
+
+    alpha -> infinity:
+      Delta t*
+        ->
+      0.
+
+Thus slow information acquisition exposes differences in recourse-loss
+timescales as large absolute timing gaps, whereas sufficiently rapid
+information acquisition synchronizes commitment times even when recourse
+decay differs.
+
+The cue-accuracy gap at commitment behaves differently:
+
+    Delta q*/(1-q0)
+      =
+      alpha |beta_2-beta_1|
+      / [(alpha+beta_1)(alpha+beta_2)].
+
+It is zero as alpha -> 0 and as alpha -> infinity, and is maximized at
+
+    alpha
+      =
+      sqrt(beta_1 beta_2).
+
+The maximum normalized cue gap is
+
+    |sqrt(beta_2)-sqrt(beta_1)|
+    / [sqrt(beta_1)+sqrt(beta_2)].
+
+Therefore **temporal desynchronization and information-threshold
+desynchronization peak in different regimes**:
+
+- very slow information -> potentially large timing separation but both actors
+  commit on relatively poor cues;
+- intermediate information speed -> largest difference in cue accuracy at
+  commitment;
+- very fast information -> both timing and cue-threshold differences collapse.
+
+This is an exact property of the declared exponential witness, not a generic
+theorem for arbitrary q(t) and r(t).
+
 ## 7. Empirical identification boundary
 
 The theorem does not license interpreting arbitrary biological measurements as
