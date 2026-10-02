@@ -197,6 +197,108 @@ This reinforces the two-axis interpretation:
 
 must be measured separately.
 
+## 5.5 Unified prediction-versus-compensation-information balance
+
+The fixed-c model above captures only one pathway: better information lowers
+pre-correction mismatch risk.
+
+The existing PAYOFF-B dual-use theory adds a second pathway: the same cue may
+also make downstream compensation cheaper or more targeted.
+
+Let both objects depend on q:
+
+    R = R(q) > 0,
+    c = c(q) > 0.
+
+The optimal correction gain remains
+
+    g*
+      =
+      2R/(c+2R).
+
+Differentiating,
+
+    dg*/dq
+      =
+      2[c R' - R c']
+      / (c+2R)^2.
+
+The clearest form is the correction-odds derivative:
+
+    d/dq log[g*/(1-g*)]
+      =
+      R'/R
+      -
+      c'/c.
+
+This creates an exact mechanism boundary.
+
+### Prediction-substitution dominant
+
+If
+
+    R'/R < c'/c,
+
+then
+
+    dg*/dq < 0.
+
+Mismatch risk is falling proportionally faster than correction cost. Better
+prediction reduces the need for downstream feedback.
+
+### Cue-informed-correction dominant
+
+If
+
+    R'/R > c'/c,
+
+then
+
+    dg*/dq > 0.
+
+Correction cost/effective difficulty is falling proportionally faster than
+pre-correction risk. Better information makes downstream correction more
+attractive.
+
+### Local balance
+
+If
+
+    R'/R = c'/c,
+
+then
+
+    dg*/dq = 0.
+
+Improved prediction and improved compensation exactly offset locally.
+
+This resolves an apparent tension between two PAYOFF-B mechanisms:
+
+- information can prevent error before commitment;
+- information can also help repair error after commitment.
+
+Those two effects have opposite consequences for observed feedback strength.
+
+## 5.6 Empirical consequence
+
+A q-by-correction association does not have one universal expected sign.
+
+A positive association between q and correction can arise when cue-informed
+compensation dominates.
+
+A negative association can arise when predictive error prevention dominates.
+
+A null association can arise when the pathways approximately balance, when
+neither pathway is strong, or when measurement error is large.
+
+Therefore future tests should estimate, where possible:
+
+1. q -> pre-correction mismatch risk R;
+2. q -> correction cost/effectiveness c;
+3. R/c -> realized correction gain.
+
+This is stronger than testing one marginal q -> correction slope.
+
 ## 6. Existing natural evidence: motivation, not confirmation
 
 ### Eurasian wigeon
