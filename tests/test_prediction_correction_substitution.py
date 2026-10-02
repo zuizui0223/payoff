@@ -5,6 +5,7 @@ from src.prediction_correction_substitution import (
     canonical_optimal_correction,
     canonical_pre_correction_risk,
     optimal_quadratic_correction,
+    prediction_correction_balance,
 )
 
 
@@ -143,3 +144,68 @@ def test_cheaper_correction_produces_stronger_feedback_at_same_risk():
     )
     assert cheap.correction_gain > expensive.correction_gain
     assert cheap.phase_retention < expensive.phase_retention
+
+
+
+def test_fixed_correction_cost_gives_prediction_substitution():
+    result = prediction_correction_balance(
+        pre_correction_risk=0.4,
+        risk_derivative=-0.2,
+        correction_cost_curvature=0.5,
+        correction_cost_derivative=0.0,
+    )
+    assert result.risk_log_derivative < 0.0
+    assert result.correction_cost_log_derivative == pytest.approx(0.0)
+    assert result.correction_gain_derivative < 0.0
+    assert result.regime == "PREDICTION_SUBSTITUTION_DOMINANT"
+
+
+def test_fast_cue_informed_cost_reduction_reverses_sign():
+    result = prediction_correction_balance(
+        pre_correction_risk=0.4,
+        risk_derivative=-0.2,  # d log R / dq = -0.5
+        correction_cost_curvature=0.5,
+        correction_cost_derivative=-0.5,  # d log c / dq = -1.0
+    )
+    assert result.risk_log_derivative == pytest.approx(-0.5)
+    assert result.correction_cost_log_derivative == pytest.approx(-1.0)
+    assert result.correction_gain_logit_derivative == pytest.approx(0.5)
+    assert result.correction_gain_derivative > 0.0
+    assert result.regime == "CUE_INFORMED_CORRECTION_DOMINANT"
+
+
+def test_equal_proportional_rates_define_exact_balance_boundary():
+    result = prediction_correction_balance(
+        pre_correction_risk=0.4,
+        risk_derivative=-0.2,  # -0.5 proportional rate
+        correction_cost_curvature=0.8,
+        correction_cost_derivative=-0.4,  # -0.5 proportional rate
+    )
+    assert result.correction_gain_logit_derivative == pytest.approx(0.0)
+    assert result.correction_gain_derivative == pytest.approx(0.0)
+    assert result.regime == "LOCAL_BALANCE"
+
+
+def test_logit_identity_matches_finite_difference():
+    # R(q)=0.4*exp(-0.6q), c(q)=0.5*exp(-1.1q).
+    import math
+
+    q = 0.7
+    eps = 1e-6
+
+    def gain(x):
+        R = 0.4 * math.exp(-0.6 * x)
+        c = 0.5 * math.exp(-1.1 * x)
+        return 2.0 * R / (c + 2.0 * R)
+
+    R = 0.4 * math.exp(-0.6 * q)
+    c = 0.5 * math.exp(-1.1 * q)
+    result = prediction_correction_balance(
+        pre_correction_risk=R,
+        risk_derivative=-0.6 * R,
+        correction_cost_curvature=c,
+        correction_cost_derivative=-1.1 * c,
+    )
+    finite = (gain(q + eps) - gain(q - eps)) / (2.0 * eps)
+    assert finite == pytest.approx(result.correction_gain_derivative, rel=1e-6)
+    assert result.correction_gain_logit_derivative == pytest.approx(0.5)
