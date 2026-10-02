@@ -366,3 +366,63 @@ def exponential_pair_desynchronization(
             one.optimal_cue_accuracy - two.optimal_cue_accuracy
         ),
     )
+
+
+
+@dataclass(frozen=True)
+class DimensionlessInformationActionability:
+    """Dimensionless exponential-witness optimum governed by chi=alpha/beta."""
+
+    information_to_recourse_rate_ratio: float
+    scaled_optimal_time_beta_t: float
+    cue_progress_fraction: float
+    optimal_recourse: float
+    normalized_maximum_value: float
+
+
+def dimensionless_information_actionability(
+    information_to_recourse_rate_ratio: float,
+) -> DimensionlessInformationActionability:
+    """Return the exact dimensionless optimum for chi=alpha/beta.
+
+    With tau=beta*t and chi=alpha/beta,
+
+        g(tau;chi) = exp(-tau) [1-exp(-chi*tau)]
+
+    is actionable information normalized by S(1-q0). Its unique maximizer is
+
+        tau* = log(1+chi)/chi.
+
+    At the optimum,
+
+        cue progress fraction
+            = (q*-q0)/(1-q0)
+            = chi/(1+chi),
+
+        r*
+            = (1+chi)^(-1/chi),
+
+        g*
+            = chi (1+chi)^(-1-1/chi).
+
+    Limits:
+        chi -> 0: tau* -> 1, r* -> exp(-1), g* ~ chi/e
+        chi -> inf: tau* -> 0, r* -> 1, g* -> 1.
+    """
+
+    chi = _positive_finite(
+        "information_to_recourse_rate_ratio",
+        information_to_recourse_rate_ratio,
+    )
+    tau = log1p(chi) / chi
+    cue_progress = chi / (1.0 + chi)
+    optimal_recourse = (1.0 + chi) ** (-1.0 / chi)
+    normalized_maximum = cue_progress * optimal_recourse
+
+    return DimensionlessInformationActionability(
+        information_to_recourse_rate_ratio=chi,
+        scaled_optimal_time_beta_t=tau,
+        cue_progress_fraction=cue_progress,
+        optimal_recourse=optimal_recourse,
+        normalized_maximum_value=normalized_maximum,
+    )
