@@ -551,6 +551,16 @@ This supplies the opposite sign of recourse: being early can be corrected by del
 
 Together with mule deer, the two examples show why departure timing alone is not a sufficient measure of downstream seasonal phase.
 
+The serial principle also extends beyond movement. In greater snow geese,
+prelaying duration declines by 0.53 d for each day of later arrival, implying a
+same-sample simple stage-retention coefficient of \(1-0.53=0.47\) from arrival
+to laying. Because correlations among sequential timing variables need not
+imply strategic control, we treat this as **descriptive buffering**, not a
+feedback-gain estimate. In the pied-flycatcher tit-phenology experiment, the
+manipulation did not alter arrival timing, whereas later female settlement
+responded after the cue became observable. Together these systems show that
+different mechanisms can govern successive seasonal stages.
+
 ### 3.5 Pink-footed geese update environmental information en route
 
 In pink-footed geese, the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers informs northward progression.
