@@ -611,32 +611,23 @@ These results quantify the published convergence in continuous animal-year
 data and reproduce the signed actuator geometry required by the route-wise
 model.
 
-A second post-freeze analysis uses the same verified Source Data to test the
-readiness layer.  The source study measured nutritional condition as March
-scaled IFBFat.  Of 93 animal-years with joinable IFBFat and migration timing,
-62 animal-years from 40 deer began migration strictly after March 31, so any
-March measurement necessarily preceded departure. In this temporally
-conservative subset,
+Using the same verified Source Data, we tested both readiness and channel
+separation. Of 93 animal-years with IFBFat and migration timing, 62
+animal-years from 40 deer began after March 31, guaranteeing that March IFBFat
+preceded departure. IFBFat predicted standardized migration start
+(\(-3.97\) d/unit; animal-cluster 95% CI \(-6.31\) to \(-0.69\)); the
+year-fixed-effect sensitivity crossed zero. In that same safe subset, models
+including both IFBFat and signed starting phase showed that phase retained
+associations with movement rate (\(+0.0742\), 95% CI \(+0.0387\) to
+\(+0.1028\)) and stopover (\(-0.234\), \(-0.429\) to \(-0.0095\)), whereas
+IFBFat intervals spanned zero in both downstream models.
 
-\[
-\frac{d\,\text{standardized start}}
-{d\,\text{scaled IFBFat}}
-=
--3.97\ \mathrm{d/unit},
-\]
-
-with animal-cluster bootstrap 95% CI \(-6.31\) to \(-0.69\). All 40
-leave-one-animal-out slopes remained negative. The year-fixed-effect
-sensitivity was weaker (\(-2.14\), 95% bootstrap CI \(-6.89\) to \(+1.58\)),
-and the rank-based interval nearly included zero.
-
-Under the frozen evidence grades, this licenses
-**T3_CANDIDATE + D2 -> H1_CANDIDATE** for mule deer: a predeparture
-physiological state predicts migration-start timing in the same population that
-shows signed en-route correction. It does **not** show that IFBFat is a
-molecular clock, that it equals the readiness gate \(G\), or that readiness
-gates the downstream phase-feedback response. H2 and the primitive
-\(G,O,K,g,\phi,Q\) decomposition remain unidentified.
+This licenses **T3_CANDIDATE + D2 -> H1_CANDIDATE** and supports channel
+dissociation: physiological condition is associated with when migration
+begins, whereas ecological phase is associated with how migration is
+subsequently paced. It does not establish causal independence, identify
+IFBFat with the readiness gate \(G\), or demonstrate H2 readiness-gated
+feedback. The primitive \(G,O,K,g,\phi,Q\) decomposition remains unresolved.
 
 ### 3.4 Bar-tailed godwits absorb early departure later in the route
 
