@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_SERIAL_HANDOFF_RESULT",
+  "frozen_submission_affected": false,
+  "source_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+  "sample": {
+    "n": 62,
+    "animals": 40
+  },
+  "fit": {
+    "raw": {
+      "beta_DFP_Start": 0.21495470084877116,
+      "beta_scaledIFBFat": -2.5197385558379444
+    },
+    "year_fe": {
+      "beta_DFP_Start": 0.25936496529605424,
+      "beta_scaledIFBFat": -2.2898880430059316
+    },
+    "total_IFBFat_to_DFP_End": -3.257318821366146,
+    "total_DFP_Start_to_DFP_End": 0.2568564888062638
+  },
+  "bootstrap": {
+    "raw_DFP_Start_ci95": [
+      -0.007685683056532271,
+      0.42200283369249414
+    ],
+    "raw_scaledIFBFat_ci95": [
+      -5.807286821293347,
+      -0.44902103497355234
+    ],
+    "year_fe_DFP_Start_ci95": [
+      -0.062070886219176204,
+      0.5154465010132282
+    ],
+    "year_fe_scaledIFBFat_ci95": [
+      -5.585105394966157,
+      0.8480424005706236
+    ],
+    "total_IFBFat_to_DFP_End_ci95": [
+      -7.216314568389022,
+      -0.9005347296032777
+    ]
+  },
+  "leave_one_animal_out": {
+    "DFP_Start_range": [
+      0.15335400463862278,
+      0.25809023290410643
+    ],
+    "scaledIFBFat_range": [
+      -3.107241261497529,
+      -1.655250507767384
+    ]
+  },
+  "decision_rule": {
+    "phase_pass": false,
+    "fat_conditional_null": false,
+    "outcome": "NOT_COMPATIBLE"
+  },
+  "interpretation": {
+    "licensed": "the frozen simple Markov handoff signature is not supported in the primary clustered analysis",
+    "important_boundary": "conditional IFBFat association persists in the raw model while both coefficients become unresolved after within-year residualization",
+    "not_licensed": [
+      "causal mediation",
+      "proof that physiological state persists downstream",
+      "rejection of all serial two-clock architectures",
+      "identification of a direct physiological carryover mechanism"
+    ]
+  }
+}
