@@ -800,45 +800,40 @@ can therefore remain strategically inaccessible.
 
 ### 4.10 Direct natural validation remains prospective
 
-The evidence is no longer purely cross-system. Mule deer now provide a
-candidate same-population hybrid: a temporally prior physiological condition
-predicts migration-start timing, while signed phase error predicts later
-speed/stopover correction and phase convergence.
+The evidence is no longer purely cross-system. Mule deer provide a candidate
+same-population serial hybrid: March physiological condition predicts
+migration-start timing, while signed phase predicts later speed/stopover
+correction and phase convergence. The prespecified IFBFat moderation test does
+not support concurrent readiness-gated feedback, and the readiness association
+is not invariant to every sensitivity analysis.
 
-However, no natural PAYOFF-B dataset jointly identifies
-
-\[
-G,\quad O,\quad K,\quad g,\quad \phi,\quad Q
-\]
-
-for the same focal transition, and the prespecified mule-deer IFBFat moderation test did not support H2
-readiness-gated signed feedback. The mule-deer readiness association is also
-not invariant to every sensitivity analysis.
-
-The full prospective sequence is therefore
+The direct serial test should therefore measure:
 
 \[
-\text{physiological readiness }G
+\text{physiological state}
 \rightarrow
-\text{checkpoint information }K
+\tau
 \rightarrow
-\text{decision gain }g
+e_0
 \rightarrow
-\text{signed correction}
+(\text{checkpoint information, action})
 \rightarrow
-\text{downstream phase}.
+\lambda
+\rightarrow
+e_n.
 \]
 
-Mean and variance phase trajectories can identify \(K\) and effective
-correction \(h=GOg\) under the declared Gaussian controller when \(\phi\) and
-\(Q\) are independently known. They cannot separate \(G\) from \(g\) without
-an additional physiological measure, readiness manipulation or independent
-decision-gain calibration.
+For the post-entry controller, mean and variance trajectories can identify
+information weight \(K\) and effective correction \(h\) when passive retention
+and process innovation are independently known. In the serial architecture
+\(h=Og\) after entry. Separating opportunity \(O\) from decision gain \(g\)
+still requires additional data; a concurrent physiological gate \(G\) should
+only be introduced when readiness is measured at the same decision stage.
 
-The strongest future test should therefore combine a readiness measurement with
-checkpoint environmental information and movement decisions, and compare a
-shared timing-programme model against a two-clock feedback model on held-out
-downstream phase.
+The strongest future test is therefore to measure entry readiness and entry
+phase, then estimate repeated downstream phase retention in the same
+individuals and interacting partners.
+
 
 ---
 
