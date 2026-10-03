@@ -329,7 +329,45 @@ Persistent state adds a third pathway:
 It can therefore create covariance between entry-clock investment and
 downstream timing even when feedback gain itself is unchanged.
 
-## 12. Claim boundary
+## 12. Independent natural carry-over anchor
+
+Greater snow geese provide an independent published example that physiological
+state can remain associated with a later seasonal event after an intermediate
+timing variable is controlled.
+
+Bêty, Gauthier & Giroux (2003), *American Naturalist* 162:110–121,
+DOI 10.1086/375680, tracked radio-marked females from spring staging to the
+Bylot Island breeding grounds.  Their multiple lay-date model reported:
+
+\[
+\hat\beta_{\mathrm{arrival}}
+=
+0.45\pm0.09\ \mathrm{d/d},
+\]
+
+and, after controlling for arrival date,
+
+\[
+\hat\beta_{\mathrm{premigration\ condition}}
+=
+-1.18\pm0.56,
+\qquad
+P=0.04.
+\]
+
+Thus premigration condition retained an association with downstream lay date
+beyond arrival timing.
+
+This is qualitatively consistent with a persistent-state pathway, but it does
+not estimate the PAYOFF-B parameters \(\rho\) or \(\beta\), and sequential
+timing correlations do not prove strategic control or causal mediation.
+
+Its licensed role is narrower:
+
+> physiological state can plausibly cross a life-history stage boundary even
+> when the timing decisions at the two stages are mechanistically distinct.
+
+## 13. Claim boundary
 
 Because this model was formulated after the mule-deer handoff result was known,
 those data cannot confirm the persistent-state extension.
@@ -340,7 +378,7 @@ pre-entry physiology can persist downstream.
 A direct test requires new or previously unopened repeated physiological
 measurements across checkpoints.
 
-## 13. Ecological statement
+## 14. Ecological statement
 
 The most general serial-clock principle is therefore not:
 
