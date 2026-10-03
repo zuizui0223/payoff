@@ -58,7 +58,7 @@ V_A(q)=Sq-B,
 
 where (S) is the total state-dependent loss scale and (B) is the larger prior action loss.
 
-Let (r(t)in[0,1]) represent retained actionability: the fraction of the full state-contingent response that remains usable at time or route stage (t). Let (C(t)) be cumulative direct cost of waiting. The reduced net value of using information at time (t) is
+Let \(r(t)\in[0,1]\) represent retained actionability: the fraction of the full state-contingent response that remains usable at time or route stage (t). Let (C(t)) be cumulative direct cost of waiting. The reduced net value of using information at time (t) is
 
 \[
 N(t)=r(t)[Sq(t)-B]-C(t).
@@ -83,24 +83,24 @@ Thus the optimum occurs when the relative gain in information value is exactly b
 For exponential learning and exponential actionability loss,
 
 \[
-q(t)=q_0+Delta q[1-exp(-alpha t)]
+q(t)=q_0+\Delta q[1-\exp(-\alpha t)]
 \]
 
 and
 
 \[
-r(t)=exp(-\beta t),
+r(t)=\exp(-\beta t),
 \]
 
 the unique zero-cost optimum is
 
 \[
-t^*=\frac{log(1+alpha/\beta)}{alpha}.
+t^*=\frac{\log(1+\alpha/\beta)}{\alpha}.
 \]
 
 The optimum moves earlier as (\beta) increases. Two actors observing the same environmental-information trajectory can therefore commit at different stages solely because their remaining response options disappear at different rates.
 
-A particularly important consequence is that perfect information can be too late. With (alpha=\beta=1), the optimum is (t^*=log 2), where cue accuracy is only (q=0.75) in the symmetric witness even though (q\to1) later. Better information is not automatically more useful.
+A particularly important consequence is that perfect information can be too late. With \(\alpha=\beta=1\), the optimum is \(t^*=\log 2\), where cue accuracy is only \(q=0.75\) in the symmetric witness even though \(q\to1\) later. Better information is not automatically more useful.
 
 ### 2.2 Route-wise phase state
 
@@ -137,11 +137,11 @@ The realized phase state then evolves as
 
 \[
 \boxed{
-e_{t+1}=phi_t(e_t-u_t)+w_t
+e_{t+1}=\phi_t(e_t-u_t)+w_t
 }
 \]
 
-where (phi_t) is passive phase retention in the absence of active correction and (w_t) is change in the local seasonal target between checkpoints.
+where \(\phi_t\) is passive phase retention in the absence of active correction and \(w_t\) is change in the local seasonal target between checkpoints.
 
 This matters because even a perfect correction at one checkpoint need not eliminate later mismatch. The resource wave itself can move.
 
@@ -184,7 +184,7 @@ This filtering result is established control theory, not a claim of mathematical
 Let correction cost be quadratic and residual phase mismatch costly:
 
 \[
-L(u)=kappa u^2+mu(e-u)^2.
+L(u)=\\kappa u^2+\mu(e-u)^2.
 \]
 
 Conditional on the posterior phase belief,
@@ -192,9 +192,9 @@ Conditional on the posterior phase belief,
 \[
 E[L(u)mid I_t]
 =
-kappa u^2
+\kappa u^2
 +
-mu[(m_t^+-u)^2+P_t^+].
+\mu[(m_t^+-u)^2+P_t^+].
 \]
 
 Without actuator bounds, the optimal one-step correction is
@@ -208,7 +208,7 @@ g^*m_t^+,
 where
 
 \[
-g^*=\frac{mu}{kappa+mu}.
+g^*=\frac{\mu}{\kappa+\mu}.
 \]
 
 Thus the sign of correction follows the sign of the estimated phase error. Late actors advance; early actors delay. Stronger residual mismatch costs increase the correction gain, whereas more expensive movement or stopover adjustment reduces it.
@@ -228,26 +228,26 @@ no actuator clipping and no target shift,
 \[
 e_{t+1}
 =
-phi_t(1-g_t)e_t.
+\phi_t(1-g_t)e_t.
 \]
 
 Therefore
 
 \[
 \boxed{
-lambda_t=phi_t(1-g_t).
+\lambda_t=\phi_t(1-g_t).
 }
 \]
 
 This gives an exact decomposition of segment-scale phase retention.
 
-If (g_t=0), the observed phase coefficient is passive carry-over (lambda_t=phi_t).
+If \(g_t=0\), the observed phase coefficient is passive carry-over \(\lambda_t=\phi_t\).
 
 If (0<g_t<1), active correction reduces retained phase error.
 
 If (g_t=1), the current phase error is reset at that checkpoint when the target does not move.
 
-If (g_t>1), the controller overshoots and (lambda_t) can become negative.
+If \(g_t>1\), the controller overshoots and \(\lambda_t\) can become negative.
 
 The existing PAYOFF-B closed-loop model
 
@@ -255,9 +255,9 @@ The existing PAYOFF-B closed-loop model
 e_{t+1}=(1-K)e_t+r
 \]
 
-is recovered exactly by setting (phi_t=1), (g_t=K), (hat e_t=e_t) and (w_t=r). The route-wise model is therefore an extension of the existing phase controller rather than a separate theory.
+is recovered exactly by setting \(\phi_t=1\), \(g_t=K\), \(\hat e_t=e_t\) and \(w_t=r\). The route-wise model is therefore an extension of the existing phase controller rather than a separate theory.
 
-The decomposition also establishes an important identification boundary: neither (1-|lambda|) nor (lambda) itself is a direct estimate of recourse, actionability or control gain without an independent estimate of passive retention and an explicit actuator model.
+The decomposition also establishes an important identification boundary: neither \(1-|\lambda|\) nor \(\lambda\) itself is a direct estimate of recourse, actionability or control gain without an independent estimate of passive retention and an explicit actuator model.
 
 ### 2.6 Migration as repeated infer–correct–propagate control
 
@@ -266,7 +266,7 @@ The route-wise model changes the interpretation of migration.
 Rather than
 
 \[
-\text{departure decision}ightarrow\text{arrival},
+\text{departure decision}\rightarrow\text{arrival},
 \]
 
 the ecological sequence becomes
@@ -274,13 +274,13 @@ the ecological sequence becomes
 \[
 \boxed{
 \text{move}
-ightarrow
+\rightarrow
 \text{observe}
-ightarrow
+\rightarrow
 \text{update phase belief}
-ightarrow
+\rightarrow
 \text{correct}
-ightarrow
+\rightarrow
 \text{move again}.
 }
 \]
@@ -294,7 +294,7 @@ This generates a distinction between two forms of tracking capacity:
 
 ### 2.7 Different controllers create interaction mismatch
 
-For interacting actors (i), each can have its own information trajectory (q_i(t)), retained actionability (r_i(t)), phase-estimation reliability and correction gain (g_i(t)).
+For interacting actors \(i\), each can have its own information trajectory \(q_i(t)\), retained actionability \(r_i(t)\), phase-estimation reliability and correction gain \(g_i(t)\).
 
 Even if two species experience the same external environmental change, they need not act on it at the same stage. Faster actionability loss shifts optimal commitment earlier. Greater correction cost reduces feedback gain. Poorer remote information weakens the phase estimate.
 
@@ -306,7 +306,7 @@ The result is a mechanistic route to seasonal mismatch:
 \text{different remaining recourse}
 +
 \text{different correction gain}
-ightarrow
+\rightarrow
 \text{different phase trajectories}.
 \]
 
@@ -335,7 +335,7 @@ The preregistered broad-bird analysis retains 3,311 observations from 37 migrato
 The pooled registered GAM gives
 
 \[
-hat\beta_ho=-0.0462,
+\hat\beta_\rho=-0.0462,
 \]
 
 with 95% CI ([-0.0870,-0.0054]) and (p=0.0265). Stronger pre-existing predictive connectivity is therefore associated with smaller arrival–green-up mismatch in the declared pooled analysis.
@@ -349,7 +349,7 @@ A separate reconstruction of the Usui et al. source table retains 944 temperatur
 The adjusted long-minus-short contrast is
 
 \[
-+0.421 mathrm{d}/^circmathrm C
++0.421\,\mathrm{d}/{}^\circ\mathrm{C}
 \]
 
 with 95% CI (+0.121) to (+0.722) and (p=0.0077). Because negative slopes denote earlier timing in warmer years, long-distance migrants are less temperature-responsive than short-distance migrants in this reconstruction.
@@ -384,8 +384,7 @@ Thus temporal recovery and fitness recovery are not equivalent:
 
 \[
 \text{phase recovery}
-
-eq
+\neq
 \text{zero biological cost}.
 \]
 
@@ -444,11 +443,11 @@ If repeated positive feedback gains reduce phase error, large departure-date var
 The strongest direct empirical design is consequently transition-based:
 
 \[
-e_{mathrm{in}}
-ightarrow
+e_{\mathrm{in}}
+\rightarrow
 \text{actuator response}
-ightarrow
-e_{mathrm{out}}.
+\rightarrow
+e_{\mathrm{out}}.
 \]
 
 A route-wise analysis should estimate signed incoming error, the information available at the checkpoint, the subsequent speed/stopover/route response and the outgoing error at the next checkpoint.
@@ -582,7 +581,7 @@ The unique optimum is
 \[
 g^*(q)=\frac{2R(q)}{c+2R(q)},
 qquad
-lambda^*(q)=\frac{c}{c+2R(q)}.
+\lambda^*(q)=\frac{c}{c+2R(q)}.
 \]
 
 If better prediction lowers the mismatch reaching the feedback stage while
@@ -634,11 +633,11 @@ The current evidence supports pieces of the mechanism across different systems. 
 
 \[
 \text{checkpoint cue}
-ightarrow
+\rightarrow
 \text{updated phase estimate}
-ightarrow
+\rightarrow
 \text{signed correction}
-ightarrow
+\rightarrow
 \text{reduced next-stage phase error}.
 \]
 
@@ -659,9 +658,9 @@ The resulting ecological problem has three coupled components:
 \[
 \boxed{
 \text{infer the seasonal target}
-ightarrow
+\rightarrow
 \text{correct current phase}
-ightarrow
+\rightarrow
 \text{retain enough options to correct again}.
 }
 \]
