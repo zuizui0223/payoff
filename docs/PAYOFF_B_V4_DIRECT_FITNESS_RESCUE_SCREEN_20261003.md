@@ -229,6 +229,41 @@ gaps that are narrower than V4's general fitness-rescue question:
 
 These are empirical decision-and-consequence gaps.
 
+## Comparative timing-retention follow-up
+
+A subsequent literature audit also closed the idea that species-specific
+departure→arrival retention is itself novel. Schmaljohann (2019) already
+estimated random species slopes for the effect of migration start on arrival
+timing in 17 spring and 21 autumn songbird species, showed substantial
+between-species variation, and found most species-specific effects between zero
+and one.
+
+The only comparative route retained for screening is therefore:
+
+> **Does migration distance explain how much of a departure-time deviation is
+> retained to arrival?**
+
+This is biologically motivated rather than mathematically generated. Ralston et
+al. (2025) explicitly note that individual migration distance may affect the
+ability to compensate delayed spring departure en route. Existing stopover
+comparisons further show that long-distance migrants face stronger time
+constraints and different stopover departure rules.
+
+The sign is genuinely uncertain:
+- longer routes may provide more recourse stages and therefore **weaker**
+  timing retention;
+- longer routes may impose stronger time pressure and therefore **stronger**
+  retention.
+
+Wang et al. (2024) provide a candidate global dataset, but their pooled
+departure→arrival carry-over effect is prior art. A PAYOFF-B analysis can only
+remain novel if it explains retention heterogeneity with the predeclared
+migration-distance test.
+
+If that test is unresolved, the comparative lane closes. Neither a larger
+sample nor a re-estimation of Schmaljohann's species slopes is sufficient
+novelty.
+
 ## PAYOFF-B stop rule
 
 Do not promote V4 as a new general theory or conceptual discovery.
