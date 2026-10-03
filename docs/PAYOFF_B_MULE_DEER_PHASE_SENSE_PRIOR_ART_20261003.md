@@ -57,12 +57,16 @@ remaining correction opportunities are disappearing.
 
 ### 2. Mean-retention decomposition
 
-Under the declared route controller,
+Under perfect phase information, the declared route controller gives
 
-    lambda = phi (1-g),
+    lambda = phi (1-g).
 
-separating passive carry-over from active feedback only when the necessary
-components are independently identified.
+With noisy checkpoint information the observed regression-scale retention is
+
+    lambda = phi (1-gK),
+
+so passive carry-over, information quality and active feedback are confounded
+unless additional quantities are independently identified.
 
 ### 3. Variance-funnel fingerprint
 
@@ -81,18 +85,24 @@ and individualized state-dependent feedback.
 
 ### 4. Phase-sense inverse
 
-Combining mean and variance retention gives
+With noisy checkpoint information define
 
-    rho_V
-      = (1-K) phi^2 + K lambda^2,
+    d = 1 - lambda/phi
 
-and, with an independent passive baseline,
+and
 
-    K
-      = [phi^2-rho_V] / [phi^2-lambda^2].
+    v = (P_next-Q)/(phi^2 P).
 
-This is a prospective way to infer an effective information weight from
-population moments; Ortega et al. did not frame their analysis this way.
+Then the declared Gaussian controller gives
+
+    K = d^2 / (v - 1 + 2d),
+
+    g = d/K.
+
+Thus, with independent passive-retention and process-innovation references,
+mean plus variance retention can prospectively separate an effective
+information weight from a feedback gain. Ortega et al. did not frame their
+analysis this way.
 
 ### 5. Cross-species coordination
 
