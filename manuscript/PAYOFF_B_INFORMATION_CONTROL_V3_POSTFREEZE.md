@@ -123,7 +123,7 @@ for an actor that is early.
 At route stage (t), the actor forms an estimate
 
 \[
-hat e_t=E[e_tmid I_t],
+\hat e_t=E[e_t\mid I_t],
 \]
 
 where (I_t) is the information accumulated by that stage.
@@ -150,15 +150,13 @@ This matters because even a perfect correction at one checkpoint need not elimin
 For a transparent stochastic representation, suppose
 
 \[
-e_tsim N(m_t,P_t)
+e_t\sim N(m_t,P_t)
 \]
 
 and an intermediate environmental cue obeys
 
 \[
-z_t=e_t+
-u_t,qquad 
-u_tsim N(0,R_t).
+z_t=e_t+\nu_t,\\qquad \nu_t\sim N(0,R_t).
 \]
 
 The posterior phase estimate is
@@ -184,13 +182,13 @@ This filtering result is established control theory, not a claim of mathematical
 Let correction cost be quadratic and residual phase mismatch costly:
 
 \[
-L(u)=\\kappa u^2+\mu(e-u)^2.
+L(u)=\kappa u^2+\mu(e-u)^2.
 \]
 
 Conditional on the posterior phase belief,
 
 \[
-E[L(u)mid I_t]
+E[L(u)\mid I_t]
 =
 \kappa u^2
 +
@@ -570,7 +568,7 @@ Then the declared Gaussian controller gives
 \[
 K_t=
 \frac{d_t^2}{v_t-1+2d_t},
-\qquad
+\\qquad
 g_t=\frac{d_t}{K_t}.
 \]
 
@@ -625,7 +623,7 @@ The unique optimum is
 
 \[
 g^*(q)=\frac{2R(q)}{c+2R(q)},
-qquad
+\qquad
 \lambda^*(q)=\frac{c}{c+2R(q)}.
 \]
 
@@ -639,7 +637,7 @@ More generally, if cue quality also changes the effective cost of correction,
 the sign is determined by
 
 \[
-\frac{d}{dq}log\frac{g^*}{1-g^*}
+\frac{d}{dq}\log\frac{g^*}{1-g^*}
 =
 \frac{R'}{R}-\frac{c'}{c}.
 \]
