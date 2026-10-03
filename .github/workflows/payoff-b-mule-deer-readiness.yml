@@ -1,0 +1,26 @@
+name: PAYOFF-B mule-deer readiness source-data audit
+
+on:
+  push:
+    paths:
+      - "scripts/payoff_b_mule_deer_readiness_source_data.py"
+      - "data/payoff_b_mule_deer_readiness_source_data_contract_20261003.json"
+      - ".github/workflows/payoff-b-mule-deer-readiness.yml"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python scripts/payoff_b_mule_deer_readiness_source_data.py \
+            --bootstrap-replicates 10000 \
+            --output outputs/payoff_b_mule_deer_readiness_result.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-mule-deer-readiness
+          path: outputs/payoff_b_mule_deer_readiness_result.json
