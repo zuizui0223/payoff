@@ -272,9 +272,77 @@ PUBLISHED ANCHOR, POST-HOC THEORY, and PROSPECTIVE.
 This prevents the new theoretical synthesis from making old data look
 prospectively selected.
 
-## Figure 3 — Pairwise controller phase diagram
+## Figure 3 — Clock portfolio, fragility and interaction mismatch
 
-A compact theoretical comparison can show stationary mismatch
+### Panel A — Optimal clock portfolio versus checkpoint number
+
+Plot
+
+\[
+s_{\mathrm{feedback}}
+=
+\frac{4n^2a}{b+4n^2a}
+\]
+
+and
+
+\[
+s_{\mathrm{timer}}
+=
+1-s_{\mathrm{feedback}}
+\]
+
+against checkpoint number \(n\).
+
+Mark the crossover
+
+\[
+\boxed{
+n_c=\frac12\sqrt{\frac ba}.
+}
+\]
+
+Visual message:
+
+> one-shot events are forced upstream; staged trajectories increasingly favor
+> downstream feedback.
+
+### Panel B — Flexibility-dependence tradeoff
+
+Show two curves against \(n\):
+
+- intact minimum precision cost
+
+\[
+C^*(n)
+=
+\frac{abP^2}{2(b+4an^2)},
+\]
+
+which decreases;
+
+- variance inflation after a fixed proportional opportunity loss
+
+\[
+F(n)
+=
+\exp[(1-\omega)s_{\mathrm{feedback}}(n)P],
+\]
+
+which increases.
+
+Annotation:
+
+> More checkpoints make precision cheaper while making the architecture more
+> dependent on retaining those checkpoints.
+
+Use industrial-development mule deer only as a small **natural anchor** icon:
+route disturbance can attenuate movement control and green-wave surfing, but it
+does not estimate \(F\), \(\omega\) or \(s_{\mathrm{feedback}}\).
+
+### Panel C — Controller differences become interaction mismatch
+
+Retain the pairwise stable-controller phase diagram
 
 \[
 \Delta^*
@@ -284,13 +352,14 @@ w\,
 {(1-\lambda_1)(1-\lambda_2)}
 \]
 
-over \((\lambda_1,\lambda_2)\) inside the stable square
-\((-1,1)^2\).
+over \((\lambda_1,\lambda_2)\).
 
 Key visual:
 - diagonal \(\lambda_1=\lambda_2\): zero mismatch under shared forcing;
-- divergence away from diagonal;
-- amplification near weak-restoring boundaries \(\lambda_i\to1\).
+- divergence away from the diagonal;
+- amplification near weak-restoring boundaries.
 
-This figure makes the general ecological prediction independent of any one
-taxon.
+This final panel connects the clock portfolio back to the paper's interaction
+question: different partners can enter climate change with different mixtures
+of upstream precision and downstream correction, and therefore different
+effective \(\lambda\).
