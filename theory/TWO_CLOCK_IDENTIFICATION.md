@@ -116,7 +116,7 @@ separate information quality from **effective** correction strength.
 Because
 
 \[
-h=Gg,
+h=GOg,
 \]
 
 every pair
@@ -137,7 +137,7 @@ Therefore:
 This is the central two-clock identification boundary.
 
 The earlier phase-sense inverse should consequently be interpreted as
-identifying \(K\) and \(h=Gg\) unless \(G=1\) is independently justified.
+identifying \(K\) and \(h=GOg\) unless \(G=O=1\) is independently justified.
 
 ## 4. Readiness, opportunity, information and decision gain are multiplicative complements
 
