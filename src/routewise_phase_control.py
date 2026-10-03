@@ -83,6 +83,50 @@ class RouteCheckpoint:
     next_prior_variance: float
 
 
+@dataclass(frozen=True)
+class PopulationVarianceStep:
+    """Across-individual phase-variance propagation for one checkpoint."""
+
+    prior_variance: float
+    observation_variance: float
+    kalman_gain: float
+    control_gain: float
+    passive_retention: float
+    process_variance: float
+    posterior_error_variance: float
+    posterior_mean_variance: float
+    prepropagation_residual_variance: float
+    closed_loop_variance_multiplier: float
+    next_variance: float
+
+
+@dataclass(frozen=True)
+class StationaryPhaseVariance:
+    """Positive stationary variance of the homogeneous Gaussian controller."""
+
+    observation_variance: float
+    control_gain: float
+    passive_retention: float
+    process_variance: float
+    quadratic_a: float
+    quadratic_b: float
+    stationary_variance: float
+
+
+
+@dataclass(frozen=True)
+class PhaseSenseInverse:
+    """Information weight inferred from mean and variance phase retention."""
+
+    prior_variance: float
+    next_variance: float
+    process_variance: float
+    passive_retention: float
+    mean_phase_retention: float
+    innovation_adjusted_variance_ratio: float
+    inferred_information_weight: float
+    inferred_observation_variance: float | None
+
 def _finite(name: str, value: float) -> float:
     x = float(value)
     if not isfinite(x):
@@ -359,3 +403,263 @@ def routewise_gaussian_phase_control(
         prior_var = next_var
 
     return tuple(rows)
+
+
+def population_phase_variance_step(
+    prior_variance: float,
+    *,
+    observation_variance: float,
+    control_gain: float,
+    passive_retention: float = 1.0,
+    process_variance: float = 0.0,
+) -> PopulationVarianceStep:
+    """Propagate across-individual phase variance under individual feedback.
+
+    Let latent incoming phase error have variance P and checkpoint observation
+
+        Z = E + noise,   Var(noise)=R.
+
+    The posterior mean is used for proportional correction
+
+        u = g E[E | Z].
+
+    For the scalar Gaussian model,
+
+        K = P/(P+R),
+        Var(E | Z) = (1-K)P,
+        Var(E[E|Z]) = K P.
+
+    The unconditional residual variance after individualized correction is
+
+        P_res
+          = (1-K)P + (1-g)^2 K P
+          = P [1 - K g(2-g)].
+
+    After passive propagation and independent process innovation Q,
+
+        P_next
+          = phi^2 P [1 - K g(2-g)] + Q.
+
+    A common open-loop correction that does not depend on individual phase has
+    no corresponding K*g(2-g) term, so its across-individual variance is simply
+    phi^2 P + Q.  This makes excess variance contraction a functional
+    fingerprint of individual state-dependent feedback.
+
+    The formula assumes unclipped proportional control.  It is standard
+    Gaussian feedback algebra, not a generic ecological theorem.
+    """
+
+    p = _nonnegative("prior_variance", prior_variance)
+    r = _nonnegative("observation_variance", observation_variance)
+    g = _nonnegative("control_gain", control_gain)
+    phi = _finite("passive_retention", passive_retention)
+    qvar = _nonnegative("process_variance", process_variance)
+
+    if p <= _TOL:
+        k = 0.0
+        post_error = 0.0
+        estimate_var = 0.0
+        residual = 0.0
+        multiplier = phi**2
+        next_var = qvar
+    else:
+        k = 1.0 if r <= _TOL else p / (p + r)
+        post_error = (1.0 - k) * p
+        estimate_var = k * p
+        residual = post_error + (1.0 - g) ** 2 * estimate_var
+        multiplier = phi**2 * (1.0 - k * g * (2.0 - g))
+        next_var = phi**2 * residual + qvar
+
+    return PopulationVarianceStep(
+        prior_variance=p,
+        observation_variance=r,
+        kalman_gain=k,
+        control_gain=g,
+        passive_retention=phi,
+        process_variance=qvar,
+        posterior_error_variance=post_error,
+        posterior_mean_variance=estimate_var,
+        prepropagation_residual_variance=residual,
+        closed_loop_variance_multiplier=multiplier,
+        next_variance=next_var,
+    )
+
+
+def open_loop_phase_variance_step(
+    prior_variance: float,
+    *,
+    passive_retention: float = 1.0,
+    process_variance: float = 0.0,
+) -> float:
+    """Across-individual variance after a common phase-independent correction."""
+
+    p = _nonnegative("prior_variance", prior_variance)
+    phi = _finite("passive_retention", passive_retention)
+    qvar = _nonnegative("process_variance", process_variance)
+    return phi**2 * p + qvar
+
+
+def stationary_gaussian_phase_variance(
+    *,
+    observation_variance: float,
+    control_gain: float,
+    passive_retention: float = 1.0,
+    process_variance: float,
+) -> StationaryPhaseVariance:
+    """Closed-form positive stationary variance for homogeneous checkpoints.
+
+    With constant observation variance R, process innovation Q, passive
+    retention phi and control gain g, the variance recursion is
+
+        P_next
+          = phi^2 [P - g(2-g) P^2/(P+R)] + Q.
+
+    A finite positive stationary variance exists under the asymptotic
+    closed-loop stability condition
+
+        |phi(1-g)| < 1.
+
+    The fixed point solves
+
+        A P^2 + B P - Q R = 0,
+
+    where
+
+        A = 1 - phi^2(1-g)^2,
+        B = R(1-phi^2) - Q.
+
+    The returned root is the non-negative solution.
+    """
+
+    r = _nonnegative("observation_variance", observation_variance)
+    g = _nonnegative("control_gain", control_gain)
+    phi = _finite("passive_retention", passive_retention)
+    qvar = _nonnegative("process_variance", process_variance)
+
+    a = 1.0 - phi**2 * (1.0 - g) ** 2
+    if a <= _TOL:
+        raise ValueError(
+            "finite stationary variance requires |passive_retention * "
+            "(1-control_gain)| < 1"
+        )
+    b = r * (1.0 - phi**2) - qvar
+    disc = b * b + 4.0 * a * qvar * r
+    pstar = (-b + disc**0.5) / (2.0 * a)
+    if pstar < 0.0 and pstar > -1e-10:
+        pstar = 0.0
+
+    return StationaryPhaseVariance(
+        observation_variance=r,
+        control_gain=g,
+        passive_retention=phi,
+        process_variance=qvar,
+        quadratic_a=a,
+        quadratic_b=b,
+        stationary_variance=pstar,
+    )
+
+
+def variance_retention_from_mean_phase(
+    *,
+    passive_retention: float,
+    mean_phase_retention: float,
+    information_weight: float,
+) -> float:
+    """Return innovation-free population variance retention.
+
+    Combining
+
+        lambda = phi(1-g)
+
+    with the variance-funnel recursion gives
+
+        (P_next-Q)/P
+          = phi^2 [1-K g(2-g)]
+          = (1-K) phi^2 + K lambda^2.
+
+    Thus variance retention is a convex combination of the passive squared
+    retention and the squared closed-loop mean retention, weighted by the
+    effective information weight K.
+    """
+
+    phi = _finite("passive_retention", passive_retention)
+    lam = _finite("mean_phase_retention", mean_phase_retention)
+    k = _finite("information_weight", information_weight)
+    if not 0.0 <= k <= 1.0:
+        raise ValueError("information_weight must lie in [0,1]")
+    return (1.0 - k) * phi**2 + k * lam**2
+
+
+def infer_phase_information_weight(
+    prior_variance: float,
+    next_variance: float,
+    *,
+    process_variance: float,
+    passive_retention: float,
+    mean_phase_retention: float,
+    tolerance: float = 1e-10,
+) -> PhaseSenseInverse:
+    """Infer effective checkpoint information weight from a variance funnel.
+
+    Under the unclipped Gaussian controller,
+
+        rho_V = (P_next-Q)/P
+              = (1-K) phi^2 + K lambda^2.
+
+    If phi^2 != lambda^2,
+
+        K = [phi^2-rho_V] / [phi^2-lambda^2].
+
+    With K=P/(P+R), the equivalent observation variance is
+
+        R = P(1-K)/K.
+
+    The inverse requires an independently justified passive retention phi and
+    process variance Q.  It must not be used by setting phi from the same
+    closed-loop transition being explained.
+
+    If the inferred K lies outside [0,1] beyond tolerance, the declared
+    Gaussian feedback model is incompatible with the supplied moments.
+    """
+
+    p = _nonnegative("prior_variance", prior_variance)
+    pnext = _nonnegative("next_variance", next_variance)
+    qvar = _nonnegative("process_variance", process_variance)
+    phi = _finite("passive_retention", passive_retention)
+    lam = _finite("mean_phase_retention", mean_phase_retention)
+    tol = _nonnegative("tolerance", tolerance)
+
+    if p <= _TOL:
+        raise ValueError("prior_variance must be positive for the inverse")
+
+    rho = (pnext - qvar) / p
+    denom = phi**2 - lam**2
+    if abs(denom) <= tol:
+        raise ValueError(
+            "information weight is not identified when passive and mean "
+            "squared retention are equal"
+        )
+
+    k = (phi**2 - rho) / denom
+    if k < -tol or k > 1.0 + tol:
+        raise ValueError(
+            "supplied mean/variance moments imply information weight outside "
+            "[0,1] under the declared model"
+        )
+    k = min(max(k, 0.0), 1.0)
+
+    if k <= tol:
+        obs_var = None
+    else:
+        obs_var = p * (1.0 - k) / k
+
+    return PhaseSenseInverse(
+        prior_variance=p,
+        next_variance=pnext,
+        process_variance=qvar,
+        passive_retention=phi,
+        mean_phase_retention=lam,
+        innovation_adjusted_variance_ratio=rho,
+        inferred_information_weight=k,
+        inferred_observation_variance=obs_var,
+    )

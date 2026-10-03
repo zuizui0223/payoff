@@ -3,6 +3,11 @@ import pytest
 from src.closed_loop_tracking import simulate_closed_loop_tracking
 from src.routewise_phase_control import (
     gaussian_phase_update,
+    infer_phase_information_weight,
+    open_loop_phase_variance_step,
+    population_phase_variance_step,
+    stationary_gaussian_phase_variance,
+    variance_retention_from_mean_phase,
     optimal_quadratic_phase_correction,
     proportional_phase_step,
     routewise_gaussian_phase_control,
@@ -174,3 +179,169 @@ def test_routewise_step_recovers_existing_closed_loop_tracking_recurrence():
     assert step.unclipped_closed_loop_lambda == pytest.approx(
         existing.phase_retention_lambda
     )
+
+
+def test_individual_feedback_contracts_population_variance_beyond_open_loop():
+    closed = population_phase_variance_step(
+        100.0,
+        observation_variance=25.0,
+        control_gain=0.6,
+        passive_retention=1.0,
+        process_variance=0.0,
+    )
+    opened = open_loop_phase_variance_step(
+        100.0,
+        passive_retention=1.0,
+        process_variance=0.0,
+    )
+    assert closed.kalman_gain == pytest.approx(0.8)
+    assert closed.closed_loop_variance_multiplier == pytest.approx(
+        1.0 - 0.8 * 0.6 * 1.4
+    )
+    assert closed.next_variance < opened
+
+
+def test_uninformative_checkpoint_cannot_create_individual_variance_contraction():
+    result = population_phase_variance_step(
+        100.0,
+        observation_variance=1e30,
+        control_gain=1.0,
+        passive_retention=0.9,
+        process_variance=2.0,
+    )
+    opened = open_loop_phase_variance_step(
+        100.0,
+        passive_retention=0.9,
+        process_variance=2.0,
+    )
+    assert result.kalman_gain == pytest.approx(0.0, abs=1e-12)
+    assert result.next_variance == pytest.approx(opened)
+
+
+def test_perfect_checkpoint_information_with_deadbeat_gain_removes_incoming_variance():
+    result = population_phase_variance_step(
+        100.0,
+        observation_variance=0.0,
+        control_gain=1.0,
+        passive_retention=1.0,
+        process_variance=3.0,
+    )
+    assert result.kalman_gain == pytest.approx(1.0)
+    assert result.prepropagation_residual_variance == pytest.approx(0.0)
+    assert result.next_variance == pytest.approx(3.0)
+
+
+def test_same_mean_phase_retention_can_have_different_variance_funnels():
+    # Mean phase retention lambda=phi(1-g)=0.5 in both cases.
+    informative = population_phase_variance_step(
+        100.0,
+        observation_variance=4.0,
+        control_gain=0.5,
+        passive_retention=1.0,
+        process_variance=0.0,
+    )
+    noisy = population_phase_variance_step(
+        100.0,
+        observation_variance=400.0,
+        control_gain=0.5,
+        passive_retention=1.0,
+        process_variance=0.0,
+    )
+    assert informative.next_variance < noisy.next_variance
+
+
+def test_feedback_gain_above_two_expands_variance_under_informative_cues():
+    result = population_phase_variance_step(
+        100.0,
+        observation_variance=0.0,
+        control_gain=2.5,
+        passive_retention=1.0,
+        process_variance=0.0,
+    )
+    assert result.closed_loop_variance_multiplier > 1.0
+    assert result.next_variance > result.prior_variance
+
+
+def test_stationary_variance_solves_homogeneous_variance_recursion():
+    fixed = stationary_gaussian_phase_variance(
+        observation_variance=25.0,
+        control_gain=0.6,
+        passive_retention=1.0,
+        process_variance=4.0,
+    )
+    step = population_phase_variance_step(
+        fixed.stationary_variance,
+        observation_variance=25.0,
+        control_gain=0.6,
+        passive_retention=1.0,
+        process_variance=4.0,
+    )
+    assert step.next_variance == pytest.approx(
+        fixed.stationary_variance,
+        rel=1e-10,
+        abs=1e-10,
+    )
+
+
+def test_stationary_variance_rejects_asymptotically_unstable_feedback():
+    with pytest.raises(ValueError, match="finite stationary variance"):
+        stationary_gaussian_phase_variance(
+            observation_variance=25.0,
+            control_gain=3.0,
+            passive_retention=1.0,
+            process_variance=4.0,
+        )
+
+
+def test_variance_retention_is_convex_bridge_between_passive_and_closed_loop_mean():
+    rho = variance_retention_from_mean_phase(
+        passive_retention=1.0,
+        mean_phase_retention=0.5,
+        information_weight=0.8,
+    )
+    assert rho == pytest.approx(0.2 * 1.0 + 0.8 * 0.25)
+
+
+def test_phase_sense_inverse_recovers_information_weight_and_observation_variance():
+    p = 100.0
+    phi = 1.0
+    lam = 0.5
+    k = 0.8
+    qvar = 4.0
+    rho = variance_retention_from_mean_phase(
+        passive_retention=phi,
+        mean_phase_retention=lam,
+        information_weight=k,
+    )
+    pnext = rho * p + qvar
+    inv = infer_phase_information_weight(
+        p,
+        pnext,
+        process_variance=qvar,
+        passive_retention=phi,
+        mean_phase_retention=lam,
+    )
+    assert inv.inferred_information_weight == pytest.approx(k)
+    assert inv.inferred_observation_variance == pytest.approx(25.0)
+
+
+def test_phase_sense_inverse_rejects_moments_outside_declared_feedback_envelope():
+    with pytest.raises(ValueError, match="outside"):
+        infer_phase_information_weight(
+            100.0,
+            120.0,
+            process_variance=0.0,
+            passive_retention=1.0,
+            mean_phase_retention=0.5,
+        )
+
+
+def test_phase_sense_inverse_requires_passive_closed_loop_separation():
+    with pytest.raises(ValueError, match="not identified"):
+        infer_phase_information_weight(
+            100.0,
+            100.0,
+            process_variance=0.0,
+            passive_retention=1.0,
+            mean_phase_retention=1.0,
+        )

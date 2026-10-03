@@ -50,6 +50,23 @@ and decision-theory results.
 The equations used by PAYOFF-B are ecological specializations and bridges, not
 generic mathematical inventions.
 
+
+### Mule-deer temporal phase sense and bidirectional compensation
+
+Ortega et al. (2023) already show that Red Desert mule deer can begin migration
+far ahead or behind peak green-up, alter speed and stopover use in opposite
+directions, and substantially resynchronize by the end of migration. The paper
+explicitly discusses the possibility that deer recognize their position in
+space and time relative to the green wave and gather information en route.
+
+PAYOFF-B therefore must not claim discovery of:
+- a temporal phase sense in mule deer;
+- bidirectional en-route compensation;
+- convergence from asynchronous departure toward synchronized arrival.
+
+The separate source boundary is recorded in
+\`docs/PAYOFF_B_MULE_DEER_PHASE_SENSE_PRIOR_ART_20261003.md\`.
+
 ## Candidate contribution that remains after the audit
 
 The strongest contribution is the **specific ecological conjunction**, not any
@@ -75,7 +92,10 @@ one generic control ingredient:
 
    while explicitly refusing to identify lambda with actionability or control
    gain without additional information;
-7. these within-actor information/control differences are then connected to
+7. mean and variance retention can be combined, with an independent passive
+   reference, to identify an effective checkpoint-information weight under the
+   declared Gaussian controller;
+8. these within-actor information/control differences are then connected to
    **between-actor seasonal mismatch and coordination recovery**, including the
    exact Paper-2 result that restored information need not restore coordinated
    information use.
