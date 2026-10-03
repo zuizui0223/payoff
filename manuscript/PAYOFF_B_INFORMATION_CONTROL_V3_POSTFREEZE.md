@@ -401,6 +401,26 @@ These negative results sharpen the distinction between information available bef
 
 ---
 
+## 3.9 Relation to migration-control prior art
+
+Stagewise migration decisions, dynamic programming, stopover optimization and
+en-route timing adjustment are established ideas. Taylor (2016) explicitly
+linked phenological change to en-route migration-speed adjustment and stopover
+frequency, and Chu et al. (2026) formulated migration as a stochastic optimal
+switching problem with destination information under both perfect and partial
+information. PAYOFF-B therefore does not claim novelty for sequential migration
+control, stopover updating, destination information or generic partial-
+information optimal control.
+
+The candidate contribution is narrower: an exact ecological
+information-actionability balance, its actor-specific desynchronization
+consequence, a signed phase-retention bridge to route correction, and the
+connection from within-actor control to between-actor seasonal coordination.
+The route-wise controller is used to make those predictions operational rather
+than to claim a new control-theory class.
+
+---
+
 ## 4. Discussion
 
 ### 4.1 Seasonal tracking is a control problem, not only a response-rate problem
