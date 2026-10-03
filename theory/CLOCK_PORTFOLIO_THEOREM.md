@@ -244,7 +244,71 @@ Expected when both forms of precision are useful and costly.
 The model therefore predicts **strategic diversity in clock architecture**
 rather than one universally optimal phenological clock.
 
-## 8. Why this matters for climate change
+## 8. Process noise limits substitution
+
+The timer-feedback trade-off is exact only for error already present at entry.
+
+If new independent phase innovation with variance \(Q\) is added after each
+checkpoint,
+
+\[
+V_{k+1}
+=
+\lambda^2V_k+Q.
+\]
+
+After \(n\) checkpoints,
+
+\[
+\boxed{
+V_n
+=
+\lambda^{2n}V_0
++
+Q
+\sum_{j=0}^{n-1}\lambda^{2j}.
+}
+\]
+
+For \(|\lambda|\ne1\),
+
+\[
+V_n
+=
+\lambda^{2n}V_0
++
+Q
+\frac{1-\lambda^{2n}}
+{1-\lambda^2}.
+\]
+
+The second term is a **post-entry noise floor** that cannot be reduced by making
+the entry timer more precise.
+
+For \(|\lambda|<1\), the infinite-horizon floor is
+
+\[
+\boxed{
+V_\infty
+=
+\frac{Q}{1-\lambda^2}.
+}
+\]
+
+Thus timer precision and downstream feedback are only partially substitutable.
+
+> **Entry clocks can prevent initial error; only downstream feedback can remove
+> error generated after entry.**
+
+This provides a direct control interpretation of “Schrödinger's spring.” Even
+perfect knowledge at departure cannot eliminate environmental innovations that
+occur later along the route.
+
+It also gives a stronger reason for feedback-heavy strategies in long,
+stochastic journeys: they do not merely repair a noisy start; they respond to
+new errors that did not exist when the journey began.
+
+## 9. Why this matters for climate change
 
 Climate change can alter different terms separately.
 
@@ -262,7 +326,7 @@ Conversely, a species with a precise but rigid entry clock can become
 vulnerable when cue–driver relationships deteriorate because it has little
 downstream recourse.
 
-## 9. Interaction mismatch
+## 10. Interaction mismatch
 
 Two partners can achieve similar historical final synchrony using different
 portfolios.
@@ -279,7 +343,7 @@ This gives a maintenance mechanism for apparently redundant clock strategies:
 > conditions but diverge when climate change alters the relative costs or
 > availability of anticipation and correction.**
 
-## 10. Natural interpretation
+## 11. Natural interpretation
 
 Mule deer illustrate the feedback-heavy possibility: migration begins over a
 wide range of phase errors, yet downstream speed/stopover adjustment strongly
@@ -294,7 +358,7 @@ focal event itself can be much less reversible.
 These are motivating anchors, not parameter estimates of \(a\), \(b\) or the
 optimal portfolio.
 
-## 11. Novelty boundary
+## 12. Novelty boundary
 
 Precision allocation, convex optimization and control-effort trade-offs are
 standard mathematical ideas.
