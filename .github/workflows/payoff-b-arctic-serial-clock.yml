@@ -1,0 +1,26 @@
+name: PAYOFF-B Arctic serial-clock cross-taxon audit
+
+on:
+  push:
+    paths:
+      - "scripts/payoff_b_arctic_serial_clock.py"
+      - "data/payoff_b_arctic_serial_clock_contract_20261003.json"
+      - ".github/workflows/payoff-b-arctic-serial-clock.yml"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python scripts/payoff_b_arctic_serial_clock.py \
+            --bootstrap-replicates 10000 \
+            --output outputs/payoff_b_arctic_serial_clock_result.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-arctic-serial-clock
+          path: outputs/payoff_b_arctic_serial_clock_result.json
