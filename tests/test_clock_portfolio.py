@@ -4,7 +4,9 @@ import pytest
 
 from src.clock_portfolio import (
     clock_portfolio_precision_shares,
+    clock_portfolio_minimum_cost_closed_form,
     final_variance_from_portfolio,
+    flexibility_dependence_tradeoff,
     final_variance_with_process_noise,
     feedback_majority_checkpoint_threshold,
     fragility_from_feedback_share,
@@ -315,3 +317,53 @@ def test_precision_share_flips_across_feedback_majority_threshold():
     assert feed1 == pytest.approx(0.5)
     assert feed2 > 0.5
     assert timer2 < 0.5
+
+
+def test_minimum_cost_decreases_with_checkpoint_number():
+    P=3.0
+    costs=[
+        clock_portfolio_minimum_cost_closed_form(
+            P,
+            checkpoints=n,
+            timer_cost_curvature=1.0,
+            feedback_cost_curvature=1.0,
+        )
+        for n in [0.0,1.0,2.0,4.0]
+    ]
+    assert costs[0] > costs[1] > costs[2] > costs[3]
+
+
+def test_opportunity_loss_fragility_increases_with_checkpoint_number():
+    P=3.0
+    rows=[
+        flexibility_dependence_tradeoff(
+            P,
+            checkpoints=n,
+            retained_opportunity_fraction=0.5,
+            timer_cost_curvature=1.0,
+            feedback_cost_curvature=1.0,
+        )
+        for n in [0.0,1.0,2.0,4.0]
+    ]
+    infl=[r.opportunity_loss_variance_inflation for r in rows]
+    assert infl[0] < infl[1] < infl[2] < infl[3]
+
+
+def test_flexibility_dependence_tradeoff_moves_in_opposite_directions():
+    low=flexibility_dependence_tradeoff(
+        2.5,
+        checkpoints=1.0,
+        retained_opportunity_fraction=0.4,
+        timer_cost_curvature=1.0,
+        feedback_cost_curvature=2.0,
+    )
+    high=flexibility_dependence_tradeoff(
+        2.5,
+        checkpoints=5.0,
+        retained_opportunity_fraction=0.4,
+        timer_cost_curvature=1.0,
+        feedback_cost_curvature=2.0,
+    )
+    assert high.minimum_intact_cost < low.minimum_intact_cost
+    assert high.feedback_precision_share > low.feedback_precision_share
+    assert high.opportunity_loss_variance_inflation > low.opportunity_loss_variance_inflation
