@@ -1,0 +1,145 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_DESCRIPTIVE_VARIANCE_GEOMETRY_AUDIT",
+  "frozen_submission_affected": false,
+  "contract": "data/payoff_b_barnacle_variance_geometry_contract_20261003.json",
+  "source_rows": "data/payoff_b_barnacle_variance_geometry_rows_20261003.csv",
+  "routes": [
+    {
+      "flyway": "svalbard",
+      "route": "R2->R4",
+      "n": 16,
+      "n_individuals": 15,
+      "origin_mean": 7.560473164643777,
+      "destination_mean": -19.312711823200544,
+      "origin_variance": 82.2897597882492,
+      "destination_variance": 166.17152715806318,
+      "variance_ratio": 2.0193463632128883,
+      "sd_ratio": 1.4210370731310595,
+      "lambda_hat": -0.10632090683602252,
+      "lambda_squared": 0.01130413523043418,
+      "normalized_residual_variance": 2.0080422279824544,
+      "inherited_destination_variance_fraction": 0.0055979179383811575,
+      "ols_variance_identity_error": -4.440892098500626e-16,
+      "variance_class": "EXPANSION",
+      "bootstrap": {
+        "cluster_unit": "individual_id",
+        "unique_individuals": 15,
+        "replicates_requested": 10000,
+        "replicates_completed": 10000,
+        "seed": 20261003,
+        "variance_ratio_ci95": [
+          0.31111911698008043,
+          9.292124527330692
+        ],
+        "lambda_ci95": [
+          -0.8905848217438176,
+          0.3118141165909559
+        ],
+        "normalized_residual_variance_ci95": [
+          0.26747671266679107,
+          8.61821540902406
+        ],
+        "inherited_destination_variance_fraction_ci95": [
+          0.00003306607231398188,
+          0.2364762967709248
+        ]
+      }
+    },
+    {
+      "flyway": "greenland",
+      "route": "R2->R3",
+      "n": 6,
+      "n_individuals": 6,
+      "origin_mean": 122.83201535370874,
+      "destination_mean": 138.6799901097242,
+      "origin_variance": 155.93900334811752,
+      "destination_variance": 10.113123851772327,
+      "variance_ratio": 0.06485307482179963,
+      "sd_ratio": 0.2546626686850659,
+      "lambda_hat": 0.1307308834757551,
+      "lambda_squared": 0.017090563894351457,
+      "normalized_residual_variance": 0.04776251092744843,
+      "inherited_destination_variance_fraction": 0.26352742628336656,
+      "ols_variance_identity_error": -2.636779683484747e-16,
+      "variance_class": "CONTRACTION",
+      "bootstrap": {
+        "cluster_unit": "individual_id",
+        "unique_individuals": 6,
+        "replicates_requested": 10000,
+        "replicates_completed": 9999,
+        "seed": 20261004,
+        "variance_ratio_ci95": [
+          0.006545372995095637,
+          0.5094709694834543
+        ],
+        "lambda_ci95": [
+          -0.01685299174698997,
+          0.6319904976198761
+        ],
+        "normalized_residual_variance_ci95": [
+          0.00036884264933884027,
+          0.17536127738773102
+        ],
+        "inherited_destination_variance_fraction_ci95": [
+          0.009278372307706449,
+          0.9959696199337549
+        ]
+      }
+    },
+    {
+      "flyway": "barents",
+      "route": "R1->R2",
+      "n": 12,
+      "n_individuals": 8,
+      "origin_mean": 96.38311835203179,
+      "destination_mean": 130.6528095683646,
+      "origin_variance": 771.1708572718588,
+      "destination_variance": 445.90328699031346,
+      "variance_ratio": 0.5782159462920684,
+      "sd_ratio": 0.7604051198486689,
+      "lambda_hat": 0.4941139415235437,
+      "lambda_squared": 0.24414858720793198,
+      "normalized_residual_variance": 0.33406735908413654,
+      "inherited_destination_variance_fraction": 0.4222446454020963,
+      "ols_variance_identity_error": -1.1102230246251565e-16,
+      "variance_class": "CONTRACTION",
+      "bootstrap": {
+        "cluster_unit": "individual_id",
+        "unique_individuals": 8,
+        "replicates_requested": 10000,
+        "replicates_completed": 10000,
+        "seed": 20261005,
+        "variance_ratio_ci95": [
+          0.29444397672188655,
+          1.4094090557063124
+        ],
+        "lambda_ci95": [
+          0.050625775477792075,
+          0.7527561158276339
+        ],
+        "normalized_residual_variance_ci95": [
+          0.060405057301042245,
+          1.2369011089689406
+        ],
+        "inherited_destination_variance_fraction_ci95": [
+          0.0099147074024149,
+          0.8617279338108164
+        ]
+      }
+    }
+  ],
+  "synthesis": {
+    "all_lambda_abs_below_one": true,
+    "all_variance_ratios_below_one": false,
+    "key_result": "mean phase memory and population phase dispersion are different response coordinates",
+    "no_pooled_goose_variance_ratio": true
+  },
+  "boundaries": [
+    "do not claim variance contraction proves individualized feedback",
+    "do not claim barnacle geese validate the phase-sense inverse",
+    "do not treat the three routes as independent species-level replicates",
+    "do not interpret normalized residual variance as environmental process innovation",
+    "do not retune frozen lambda gates or GEB V2 from post-freeze variance results"
+  ]
+}
