@@ -204,6 +204,69 @@ This supplies two observable axes:
 2. **variance retention** — the population spread remaining after
    individualized information and correction.
 
+## 4.5 Mean memory and population dispersion have an exact descriptive decomposition
+
+The distinction between regression-scale phase memory and population spread
+does not depend on the Gaussian controller.
+
+For any ordinary least-squares regression with an intercept,
+
+\[
+E_{t+1}=a+\lambda E_t+\varepsilon_t,
+\]
+
+the fitted residual is orthogonal to the predictor. Therefore
+
+\[
+\operatorname{Var}(E_{t+1})
+=
+\lambda^2\operatorname{Var}(E_t)
++
+\operatorname{Var}(\varepsilon_t),
+\]
+
+and hence
+
+\[
+\boxed{
+\rho_V
+\equiv
+\frac{\operatorname{Var}(E_{t+1})}
+{\operatorname{Var}(E_t)}
+=
+\lambda^2+\omega,
+}
+\]
+
+where
+
+\[
+\omega
+=
+\frac{\operatorname{Var}(\varepsilon_t)}
+{\operatorname{Var}(E_t)}
+\ge 0.
+\]
+
+This is a regression identity, not a mechanistic theorem. It separates two
+observable quantities:
+
+1. \(\lambda^2\): variance transmitted linearly from incoming phase;
+2. \(\omega\): destination variance not linearly inherited from incoming phase.
+
+The residual coordinate \(\omega\) can contain environmental innovation,
+measurement error, individual heterogeneity, nonlinear control, omitted
+variables or other sources. It must **not** be renamed process innovation
+\(Q\) without an independent model.
+
+A route can therefore have very small \(|\lambda|\)—little memory of incoming
+phase—while still having \(\rho_V>1\) if new/unexplained variation introduced
+downstream is sufficiently large. Conversely, low \(\rho_V\) requires both
+weak inherited variation and limited downstream residual variation.
+
+This gives a model-agnostic reason to report mean phase retention and variance
+retention separately.
+
 ## 5. Mean + variance retention can identify both information weight and feedback gain
 
 Define
