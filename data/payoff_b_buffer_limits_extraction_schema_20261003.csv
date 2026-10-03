@@ -1,0 +1,1 @@
+study_id,effect_id,species,population_or_cohort,transition_A,transition_B,transition_class,year_handling,individual_level,n,beta_AB,se_beta,lcl_beta,ucl_beta,units,source_type,source_location,available_interval_days,fitness_outcome,quality_adjustment,primary_eligible,exclusion_reason,notes
