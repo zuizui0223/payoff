@@ -5,6 +5,9 @@ import pytest
 from src.clock_portfolio import (
     clock_portfolio_precision_shares,
     final_variance_from_portfolio,
+    final_variance_with_process_noise,
+    infinite_horizon_noise_floor,
+    post_entry_noise_floor,
     optimal_clock_portfolio,
 )
 
@@ -125,3 +128,79 @@ def test_same_target_can_be_reached_by_different_portfolios():
     assert timer_heavy.achieved_variance == pytest.approx(vt)
     assert feedback_heavy.achieved_variance == pytest.approx(vt)
     assert timer_heavy.timer_precision_share > feedback_heavy.timer_precision_share
+
+
+def test_process_noise_creates_timer_irreducible_floor():
+    floor = post_entry_noise_floor(
+        absolute_phase_retention=0.5,
+        process_variance=4.0,
+        checkpoints=3,
+    )
+    expected = 4.0 * (1.0 + 0.25 + 0.25**2)
+    assert floor == pytest.approx(expected)
+
+    # Making the entry timer arbitrarily precise cannot remove this component.
+    final = final_variance_with_process_noise(
+        1e-12,
+        absolute_phase_retention=0.5,
+        process_variance=4.0,
+        checkpoints=3,
+    )
+    assert final == pytest.approx(floor, rel=1e-10, abs=1e-10)
+
+
+def test_without_feedback_each_new_shock_accumulates():
+    final = final_variance_with_process_noise(
+        10.0,
+        absolute_phase_retention=1.0,
+        process_variance=3.0,
+        checkpoints=4,
+    )
+    assert final == pytest.approx(22.0)
+    assert post_entry_noise_floor(
+        absolute_phase_retention=1.0,
+        process_variance=3.0,
+        checkpoints=4,
+    ) == pytest.approx(12.0)
+
+
+def test_stronger_feedback_reduces_post_entry_noise_floor():
+    weak = post_entry_noise_floor(
+        absolute_phase_retention=0.9,
+        process_variance=2.0,
+        checkpoints=5,
+    )
+    strong = post_entry_noise_floor(
+        absolute_phase_retention=0.3,
+        process_variance=2.0,
+        checkpoints=5,
+    )
+    assert strong < weak
+
+
+def test_stationary_noise_floor():
+    assert infinite_horizon_noise_floor(
+        absolute_phase_retention=0.5,
+        process_variance=3.0,
+    ) == pytest.approx(4.0)
+
+
+def test_entry_precision_does_not_change_post_entry_noise_floor():
+    floor = post_entry_noise_floor(
+        absolute_phase_retention=0.6,
+        process_variance=1.5,
+        checkpoints=4,
+    )
+    a = final_variance_with_process_noise(
+        100.0,
+        absolute_phase_retention=0.6,
+        process_variance=1.5,
+        checkpoints=4,
+    )
+    b = final_variance_with_process_noise(
+        10.0,
+        absolute_phase_retention=0.6,
+        process_variance=1.5,
+        checkpoints=4,
+    )
+    assert (a - floor) / (b - floor) == pytest.approx(10.0)
