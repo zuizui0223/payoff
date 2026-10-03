@@ -10,10 +10,11 @@
 
 **Aim:** Migratory birds experience annual cycles in which delays can either
 propagate across successive stages or be absorbed before reaching
-fitness-sensitive events. Individual studies have documented both domino
-effects and temporal reset, but the field still lacks a quantitative map of
-where annual-cycle delays persist and where they disappear. We ask where
-temporal buffering occurs and what predicts its limits.
+fitness-sensitive events. Individual and multi-species studies already quantify
+domino effects, temporal reset and departure-to-arrival carry-over. We ask a
+narrower comparative question: whether day-for-day timing propagation differs
+systematically among annual-cycle transition types, and what predicts the
+limits of buffering.
 
 **Methods:** We synthesize sequential timing relationships from studies that
 measure two annual-cycle events in the same individuals or cohorts. The primary
@@ -67,12 +68,16 @@ buffers and, especially, the limits of those buffers.
 
 Migration ecology provides a tractable case because annual-cycle events are
 ordered and often measured in the same time units. A one-day departure delay
-can be followed through stopover, arrival and breeding. Yet comparative
-syntheses have mostly asked different questions. Meta-analysis has quantified
-the repeatability of migration dates across years, while macroecological
-tracking compilations have examined mean annual-cycle timing and broad
-carry-over paths. Neither quantity is the same as the day-for-day transmission
-of a timing deviation from one annual-cycle stage to the next.
+can be followed through stopover, arrival and breeding. Comparative work has already moved partway toward this question. Schmaljohann
+(2019) estimated departure-to-arrival timing slopes across multiple migratory
+bird species, showing that later starts generally remained later at arrival but
+with partial compression. Van Bemmelen et al. (2024) explicitly used
+stage-to-stage slopes to quantify compensation and carry-over in Arctic skuas.
+Meta-analysis has separately quantified the repeatability of migration dates
+across years, while global tracking compilations have examined mean annual-cycle
+timing and broad carry-over paths. What we did not find is a synthesis that
+places **different annual-cycle transition classes** on the same unstandardized
+day-for-day propagation scale.
 
 Our question is therefore deliberately simple:
 
@@ -239,15 +244,20 @@ This study does not ask whether annual-cycle buffering exists. That question
 has already been answered in multiple species.
 
 It also does not ask whether migration timing is repeatable; a formal
-meta-analysis already addresses that problem.
+meta-analysis already addresses that problem. Nor does it introduce the
+stage-to-stage timing slope itself: departure-to-arrival slopes have already
+been estimated across species, and carry-over strength has been expressed as a
+day-for-day slope within annual-cycle studies.
 
-The contribution is comparative and transition-based:
+The candidate contribution is narrower, comparative and transition-based:
 
 > **How much of a temporal deviation survives each kind of annual-cycle
 > transition?**
 
-A quantitative buffer map would make two forms of existing evidence directly
-comparable: studies reporting domino effects and studies reporting resets.
+If the eligible corpus is large enough, a quantitative buffer map would make
+existing evidence directly comparable across **biologically different
+transitions**: active migration, stopover/staging, stationary non-breeding
+periods and arrival-to-breeding intervals.
 It would also provide a way to identify transitions where disturbances are
 most likely to be transmitted into breeding or another fitness-sensitive
 stage.
@@ -301,8 +311,9 @@ result of V5.
 Migratory schedules do not simply shift as rigid blocks. A delay can persist
 through one stage and disappear in the next.
 
-The unresolved comparative question is where those resets occur reliably and
-where they fail.
+The unresolved comparative question is whether the strength of propagation
+shows a reproducible pattern across transition classes once studies are placed
+on the same day-for-day scale.
 
 PAYOFF-B V5 therefore treats each annual-cycle transition as a potential
 buffer and asks how many days of an earlier timing deviation survive it.
