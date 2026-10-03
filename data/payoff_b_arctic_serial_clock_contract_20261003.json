@@ -6,8 +6,12 @@
     "study": "Migratory birds advance spring arrival and egg-laying in the Arctic, mostly by travelling faster",
     "dryad_doi": "10.5061/dryad.w0vt4b93d",
     "migration_file": "2.migration_data.csv",
-    "direct_url": "https://datadryad.org/downloads/file_stream/4015617",
-    "metadata_claim": "519 spring migrations, 274 individuals, 12 populations, 9 species"
+    "direct_url": "https://datadryad.org/api/v2/files/4015617/download",
+    "metadata_claim": "519 spring migrations, 274 individuals, 12 populations, 9 species",
+    "file_id": 4015617,
+    "dryad_version_id": 357931,
+    "expected_sha256": "3845a83384c56cb106cd4c8f19b50f0e17ba1a3229165bdd291e86e7cf3118bb",
+    "transport_amendment": "browser file_stream endpoint returned 403 to GitHub Actions; public Dryad API download endpoint substituted before any numerical outcome was observed"
   },
   "question": "Across independent Arctic-breeding migratory bird populations, does individual timing dispersion and rank at departure persist, contract, or amplify by Arctic-circle arrival and breeding arrival?",
   "serial_stages": [
