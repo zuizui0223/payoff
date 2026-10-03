@@ -479,69 +479,32 @@ This pattern is not uniquely diagnostic of information distance; endogenous timi
 
 ### 3.3 Mule deer show a continuous phase funnel with signed route compensation
 
-Ortega et al. (2023) already established that Red Desert mule deer can begin
-migration far ahead of or behind peak green-up and resynchronize en route by
-changing movement speed and stopover use. PAYOFF-B does not claim that
-phenomenon as new.
+Ortega et al. (2023) already established bidirectional en-route compensation in
+Red Desert mule deer; PAYOFF-B does not claim that phenomenon as new.
 
-A post-freeze descriptive reanalysis of the public Source Data file uses all
-152 animal-years from 72 adult females. Signed Days-From-Peak phase had an
-across-animal-year standard deviation of 26.41 d at migration start and 13.17 d
-at migration end. The end/start variance ratio was
+In the public Source Data, 152 animal-years from 72 females show strong phase
+compression: Days-From-Peak SD declines from 26.41 d at migration start to
+13.17 d at migration end. The end/start variance ratio is \(0.249\) (95%
+animal-cluster bootstrap 0.167–0.362), or \(0.294\) after year centering. The
+whole-route phase-retention slope is \(\lambda=0.107\) (0.013–0.209), and
+70.4% of animal-years end closer to peak green-up than they start.
 
-\[
-0.249,
-\]
+Signed actuator responses point in the expected directions. Each additional
+day of positive start-phase error is associated with \(+0.0683\) km
+d\(^{-1}\) movement rate and \(-0.492\) d stopover use, with both clustered
+intervals excluding zero.
 
-with a 95% animal-cluster bootstrap interval of 0.167–0.362. After removing
-year-specific start and end means, the variance ratio remained
+A conservative readiness analysis retains 62 animal-years from 40 deer whose
+March IFBFat measurement necessarily precedes migration start. Higher IFBFat
+predicts earlier standardized start (\(-3.97\) d/unit; 95% CI
+\(-6.31\) to \(-0.69\)). In the same subset, signed start phase retains
+associations with speed (\(+0.0742\), CI \(+0.0387\) to \(+0.1028\)) and
+stopover (\(-0.234\), CI \(-0.429\) to \(-0.0095\)) after accounting for
+IFBFat, while downstream IFBFat intervals span zero.
 
-\[
-0.294
-\quad
-(95\%\ \mathrm{CI}: 0.206\text{--}0.405).
-\]
-
-The whole-route continuous phase-retention slope was
-
-\[
-\lambda=0.107
-\quad
-(95\%\ \mathrm{cluster\ bootstrap}: 0.013\text{--}0.209),
-\]
-
-and 107 of 152 animal-years (70.4%) ended closer to peak green-up than they
-started. Mean absolute phase error declined from 21.91 d to 11.12 d.
-
-The same individual-level source table gives the expected signed actuator
-directions. Each additional day of positive start-phase error was associated
-descriptively with \(+0.0683\) km d\(^{-1}\) higher movement rate
-(95% animal-cluster bootstrap 0.0554–0.0800) and \(-0.492\) d of stopover use
-(95% interval \(-0.569\) to \(-0.412\)). After year centering, the corresponding
-slopes remained \(+0.0852\) and \(-0.614\), with both bootstrap intervals
-excluding zero.
-
-These results quantify the published convergence in continuous animal-year
-data and reproduce the signed actuator geometry required by the route-wise
-model.
-
-Using the same verified Source Data, we tested both readiness and channel
-separation. Of 93 animal-years with IFBFat and migration timing, 62
-animal-years from 40 deer began after March 31, guaranteeing that March IFBFat
-preceded departure. IFBFat predicted standardized migration start
-(\(-3.97\) d/unit; animal-cluster 95% CI \(-6.31\) to \(-0.69\)); the
-year-fixed-effect sensitivity crossed zero. In that same safe subset, models
-including both IFBFat and signed starting phase showed that phase retained
-associations with movement rate (\(+0.0742\), 95% CI \(+0.0387\) to
-\(+0.1028\)) and stopover (\(-0.234\), \(-0.429\) to \(-0.0095\)), whereas
-IFBFat intervals spanned zero in both downstream models.
-
-This licenses **T3_CANDIDATE + D2 -> H1_CANDIDATE** and supports channel
-dissociation: physiological condition is associated with when migration
-begins, whereas ecological phase is associated with how migration is
-subsequently paced. It does not establish causal independence, identify
-IFBFat with the readiness gate \(G\), or demonstrate H2 readiness-gated
-feedback. The primitive \(G,O,K,g,\phi,Q\) decomposition remains unresolved.
+These results support a **T3_CANDIDATE + D2 -> H1_CANDIDATE** two-layer
+interpretation. They do not identify IFBFat with a readiness gate, establish
+causal independence, or support H2 readiness-gated feedback.
 
 ### 3.4 Bar-tailed godwits absorb early departure later in the route
 
@@ -645,43 +608,18 @@ A route-wise analysis should estimate signed incoming error, the information ava
 
 ### 4.3 The two clocks leave different empirical signatures
 
-A developmental or physiological timer should primarily predict **entry
-timing**: emergence, flowering, migratory readiness or another threshold
-event. Temperature, photoperiod, endocrine state and molecular clock pathways
-can contribute, but PAYOFF-B does not treat all bee emergence as one molecular
-oscillator.
+A developmental/physiological timer primarily predicts **entry timing**,
+whereas a decision controller predicts **signed post-entry correction**.
+Mule deer show both signatures in one population: March physiological
+condition predicts departure timing, while phase error predicts subsequent
+speed and stopover.
 
-A decision controller predicts **signed post-entry correction**: late actors
-advance, early actors delay, and repeated correction can narrow the phase
-distribution.
-
-Mule deer now provide both signatures in one population. March scaled IFBFat
-predicts later migration-start timing in a conservative predeparture subset,
-whereas signed starting phase predicts speed and stopover after departure. A
-prespecified DFP × IFBFat moderation test did not support stronger signed
-feedback at higher IFBFat.
-
-A second frozen downstream-phase test also rejected the **pure entry-only
-Markov handoff** as a complete description: in
-\(DFP_{end}\sim DFP_{start}+IFBFat\), the clustered interval for
-\(DFP_{start}\) crossed zero while IFBFat retained a raw conditional
-association; after within-year residualization both became unresolved.
-
-The appropriate distinction is therefore mechanistic rather than temporally
-absolute. The entry clock and the decision controller can remain different
-mechanisms even if physiological or energetic state persists after entry. A
-post-hoc nested model writes
-
-\[
-s_{k+1}=\rho s_k,
-\qquad
-e_{k+1}=\lambda e_k+\beta s_k+w_k.
-\]
-
-This possibility is motivated, not confirmed, by the mule-deer result. Greater
-snow geese provide an independent natural anchor: premigration condition
-predicts lay date after arrival is controlled, and an unplanned reduction in
-prebreeding condition delayed laying.
+The stronger claims fail closed. IFBFat does not detectably moderate the signed
+feedback slopes, and a frozen downstream-phase test does not support a pure
+entry-only Markov handoff. The two mechanisms can therefore remain distinct
+while physiological or energetic state persists beyond entry. A post-hoc
+persistent-state extension is retained in Supporting theory, not treated as a
+confirmed mule-deer pathway.
 
 ### 4.4 A variance funnel identifies effective feedback, not clock primitives
 
@@ -803,109 +741,50 @@ value in long, stochastic journeys even when departure timing is precise.
 
 ### 4.8 Clock portfolios explain why different timing strategies can persist
 
-The serial model converts the two clocks into an allocation problem. Let
-entry-clock investment \(x\) reduce initial variance as
+The serial model also permits a precision-allocation interpretation. If
+entry-clock investment \(x\) and per-checkpoint feedback investment \(y\) give
 
 \[
-V_0=V_{\mathrm{ref}}e^{-x},
+V_n=V_{\rm ref}e^{-(x+2ny)},
 \]
 
-and let per-checkpoint feedback investment \(y\) reduce
-\(|\lambda|=e^{-y}\). With \(n\) post-entry checkpoints and no new innovation,
+then under the declared quadratic cost witness the precision shares are
 
 \[
-V_n
-=
-V_{\mathrm{ref}}
-e^{-(x+2ny)}.
+s_{\rm timer}=\frac{b}{b+4n^2a},
+\qquad
+s_{\rm feedback}=\frac{4n^2a}{b+4n^2a}.
 \]
 
-Under the transparent quadratic cost witness
-
-\[
-C
-=
-\frac a2x^2+\frac b2y^2,
-\]
-
-the minimum-cost shares of required log-precision are
-
-\[
-\boxed{
-s_{\mathrm{timer}}
-=
-\frac{b}{b+4n^2a}
-}
-\]
-
-and
-
-\[
-\boxed{
-s_{\mathrm{feedback}}
-=
-\frac{4n^2a}{b+4n^2a}.
-}
-\]
-
-Hence more correction checkpoints shift the optimal portfolio toward feedback.
-At \(n=0\), all precision must be supplied upstream.
-
-This distinguishes one-shot from checkpoint-rich timing architectures. The
-displayed (n^2) scaling assumes a fixed feedback-capacity cost; if operating
-cost accumulates per checkpoint, it becomes (n), but the shift toward
-feedback with increasing (n) remains.
+Thus checkpoint-rich life histories can achieve the same final precision with
+greater reliance on feedback, whereas a one-shot event (\(n=0\)) must obtain
+precision upstream. If feedback operating cost accumulates per checkpoint the
+exact scaling becomes \(n\), not \(n^2\), but the directional shift remains.
 
 ### 4.9 Opportunity loss makes feedback-heavy portfolios fragile
 
-Climate change and land-use change can reduce predictive connectivity before
-entry, remove stopovers, compress resource windows or make route adjustment
-costly after entry.  The clock portfolio therefore creates a hidden
-dependency.
-
-Let \(\omega\in[0,1]\) be the fraction of historically usable downstream
-correction opportunity that remains after change.  If the organism retains the
-historical optimal portfolio, inherited-error variance is inflated relative to
-its historical target by
+The same flexibility creates dependence on the opportunities that make
+correction possible. If fraction \(\omega\) of historically usable downstream
+opportunity remains, immediate inherited-error inflation is
 
 \[
 \boxed{
-\frac{V_{\mathrm{disrupted}}}{V^*}
+\frac{V_{\rm disrupted}}{V^*}
 =
-\exp[(1-\omega)s_{\mathrm{feedback}}P],
+\exp[(1-\omega)s_{\rm feedback}P].
 }
 \]
 
-where \(P\) is required log-precision and \(s_{\mathrm{feedback}}\) is the
-historical fraction of that precision supplied by downstream feedback.
+Hence feedback-heavy strategies are more sensitive to sudden loss of stopovers,
+resource windows or route flexibility. Industrial-development mule deer are an
+opportunity-loss anchor, not a test: current data do not identify
+\(\omega\) or \(s_{\rm feedback}\).
 
-Thus the same architecture that makes repeated movement efficient in an intact
-route can make it vulnerable when correction opportunities disappear. Under
-the quadratic witness, minimum intact cost falls with checkpoint number while
-opportunity-loss fragility rises: a **flexibility-dependence tradeoff**.
-One-shot timer-only systems are insensitive to this particular perturbation.
-
-Industrial-development mule deer provide a relevant natural anchor, not a test
-of this equation. Energy development altered migration behaviour and reduced
-route-scale green-wave surfing, while the registered PAYOFF-B reanalysis found
-attenuated near-boundary movement-control permeability in the
-large-development population. Those data do not identify
-\(\omega\) or \(s_{\mathrm{feedback}}\).
-
-
-Synchronized partners can hide different portfolios. With equal
-historical target variance and precision budget,
-
-\[
-\boxed{
-\log\frac{V_1'}{V_2'}
-=
-(1-\omega)P(s_1-s_2).
-}
-\]
-
-Opportunity loss can expose hidden timer-versus-feedback reliance as differential variance and partner mismatch. This **cryptic clock-portfolio** prediction is prospective.
-
+Historically synchronized partners can therefore hide different clock
+portfolios and diverge after the same disruption. This cryptic-portfolio
+prediction remains prospective; the natural direct-test lane is fail-closed
+until opportunity loss, within-individual timing change and
+selection/reweighting are independently identified.
 
 ### 4.10 Interactions convert controller differences into ecological mismatch
 
@@ -930,20 +809,15 @@ can therefore remain strategically inaccessible.
 
 ### 4.11 Direct natural validation remains prospective
 
-The evidence is no longer purely cross-system. Mule deer provide a candidate
-same-population two-layer hybrid: March physiological condition predicts
-migration-start timing, while signed phase predicts later speed/stopover
-correction and phase convergence. The prespecified IFBFat moderation test does
-not support concurrent readiness-gated feedback. A separate frozen handoff test
-does not support the stronger claim that physiological state acts only at entry.
-The readiness association is also not invariant to every sensitivity analysis.
+Mule deer are the strongest current same-system two-layer candidate, but no
+natural PAYOFF-B dataset jointly identifies entry physiology, checkpoint
+information, remaining opportunity, feedback gain, passive retention and
+process innovation on one transition.
 
-The direct serial test should therefore measure:
+The direct test should measure
 
 \[
-\text{physiological state}
-\rightarrow
-\tau
+\text{entry physiology}
 \rightarrow
 e_0
 \rightarrow
@@ -951,19 +825,13 @@ e_0
 \rightarrow
 \lambda
 \rightarrow
-e_n.
+e_n,
 \]
 
-For the post-entry controller, mean and variance trajectories can identify
-information weight \(K\) and effective correction \(h\) when passive retention
-and process innovation are independently known. In the serial architecture
-\(h=Og\) after entry. Separating opportunity \(O\) from decision gain \(g\)
-still requires additional data; a concurrent physiological gate \(G\) should
-only be introduced when readiness is measured at the same decision stage.
-
-The strongest future test is therefore to measure entry readiness and entry
-phase, then estimate repeated downstream phase retention in the same
-individuals and interacting partners.
+with repeated individuals and explicit survival/observation tracking when a
+perturbation is involved. Mean and variance trajectories can identify effective
+information and correction under declared assumptions, but separating their
+biological primitives requires independent measurements or manipulations.
 
 
 ---
