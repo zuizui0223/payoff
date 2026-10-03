@@ -3,6 +3,23 @@
 Date: **2026-10-03**  
 Status: **prospective post-freeze Paper-2 extension; frozen GEB V2 unchanged**
 
+## Compatibility with the two-clock architecture
+
+This theorem was first written for a single enacted feedback gain \(g\). After
+the explicit two-clock split, its \(g\) should be interpreted as **effective
+correction**
+
+\[
+h=Gg_{\mathrm{decision}},
+\]
+
+unless full readiness \(G=1\) is independently known.
+
+Accordingly, the mean/variance inverse in this file identifies information
+weight \(K\) and effective correction \(h\). It does not separate
+physiological readiness from decision gain without an additional measurement
+or intervention.
+
 ## 1. Why variance matters
 
 The route-wise controller already predicts how the **mean signed phase error**
@@ -204,7 +221,7 @@ This supplies two observable axes:
 2. **variance retention** — the population spread remaining after
    individualized information and correction.
 
-## 5. Mean + variance retention can identify both information weight and feedback gain
+## 5. Mean + variance retention can identify information weight and effective feedback
 
 Define
 
