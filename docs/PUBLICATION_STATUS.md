@@ -115,6 +115,84 @@ Authoritative V1/V2 publication relation:
 
 `docs/PAYOFF_B_V1_V2_PUBLICATION_RELATION_20260927.md`
 
+### Post-freeze Paper-2 development line
+
+The frozen journal-facing V2 remains the submission/audit source above. It is
+**not** silently replaced by later theory.
+
+A post-freeze integrated development manuscript now exists at:
+
+`manuscript/PAYOFF_B_INFORMATION_CONTROL_V3_POSTFREEZE.md`
+
+Merged development lineage:
+
+```text
+PR 255  stagewise information + signed recourse
+PR 257  continuous information-actionability balance
+PR 258  route-wise Bayesian phase control + V3 integration
+```
+
+The post-freeze ecological spine is:
+
+```text
+partly latent future seasonal state
+-> checkpoint information acquisition
+-> signed phase-error estimation
+-> speed / stopover / route correction
+-> residual error propagated to the next checkpoint
+-> actionability declines while information can improve
+-> interacting actors can follow different phase trajectories
+-> physical or strategic recovery failure
+```
+
+Exact route-wise state representation:
+
+```text
+e_(t+1) = phi_t [e_t - u_t] + w_t
+```
+
+and, under perfect estimation, proportional feedback, no clipping and zero
+target shift,
+
+```text
+lambda_t = phi_t (1 - g_t).
+```
+
+This is an identification bridge, not permission to relabel empirical
+`lambda` as actionability `r` or feedback gain `g`.
+
+The post-freeze actionability theorem additionally gives
+
+```text
+N(t) = r(t)[S q(t)-B] - C(t)
+```
+
+and the declared exponential reduced model has
+
+```text
+t* = log(1 + alpha/beta) / alpha.
+```
+
+Generic dynamic programming, optimal migration, partial-information optimal
+control, Bayesian filtering and feedback control are prior art. The novelty
+boundary is recorded in
+`docs/PAYOFF_B_ROUTEWISE_INFORMATION_CONTROL_NOVELTY_BOUNDARY_20261003.md`.
+
+The evidence/claim boundary is recorded in
+`docs/PAYOFF_B_V3_POSTFREEZE_CLAIM_AUDIT_20261003.md`.
+
+The direct natural route-wise controller remains prospective: no existing
+dataset is claimed to identify checkpoint cue quality, internal phase estimate,
+feedback gain, passive retention and remaining actionability simultaneously.
+
+```text
+V2_SUBMISSION_STATUS = FROZEN_ACCESS_BLOCKED
+V3_POSTFREEZE_STATUS = DEVELOPMENT_INTEGRATED
+V3_SUBMISSION_STATUS = NOT_FROZEN_NOT_JOURNAL_FACING
+V3_CORE_METAPHOR = SHINKANSEN_TO_SCHROEDINGERS_SPRING
+V3_FORMAL_OBJECT = SEQUENTIAL_INFORMATION_AND_PHASE_CONTROL
+```
+
 Primary ecological conclusion:
 
 **Information use is an ecological coordination state. Interacting organisms can
