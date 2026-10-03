@@ -7,9 +7,9 @@
 ## Abstract
 
 **Aim:** Interacting species can experience the same seasonal environmental
-change yet become phenologically asynchronous. We ask whether this divergence
-can arise from differences in **seasonal clock architecture** rather than from
-different forcing alone.
+change yet become asynchronous. We ask whether mismatch can arise because
+different biological clocks govern **when a seasonal trajectory starts** and
+**how its error is corrected afterward**.
 
 **Location:** General theory, with empirical modules from migratory birds and
 ungulates in North America and Europe.
@@ -20,29 +20,32 @@ span approximately 1980–2020.
 **Major taxa studied:** Migratory birds and mule deer, with plant–pollinator
 and resident–migrant interactions as benchmarks.
 
-**Methods:** We separate physiological readiness \(G\), remaining ecological
-opportunity \(O\), phase-information weight \(K\) and decision gain \(g\).
-We combine this architecture with stagewise value-of-information theory,
-pairwise/network phase-control models and preregistered or source-backed
-ecological analyses.
+**Methods:** We separate a developmental/physiological entry clock from a
+post-entry information-dependent controller. We combine this serial
+architecture with stagewise value-of-information theory, pairwise/network
+phase models and preregistered or source-backed ecological analyses.
 
-**Results:** Effective phase retention is
-\(\lambda_i=\phi_i(1-G_iO_i g_iK_i)\). Two synchronized actors sharing
-seasonal error \(m_t\) diverge by
-\(\Delta_{t+1}=(\lambda_1-\lambda_2)m_t\), and network mismatch depends on
-controller discordance across interaction edges. Information can become more
-accurate while opportunities to use it disappear. In mule deer, a post-freeze
-Source Data analysis combines signed en-route compensation with a temporally
-prior March nutritional-condition association with migration start, making
-this the strongest current same-system two-clock candidate; a prespecified
-IFBFat moderation test did not support readiness-gated feedback.
+**Results:** For two actors, mismatch after \(n\) checkpoints decomposes
+exactly into controller-generated and timer-propagated components,
 
-**Main conclusions:** Shared climate forcing need not produce shared timing.
-Species can diverge because they differ in readiness, remaining opportunity,
-information and correction. Mean and variance trajectories identify
-information weight and effective correction, but the primitive readiness,
-opportunity and decision components require additional measurements or
-manipulations.
+\[
+\Delta_n
+=
+(\lambda_1^n-\lambda_2^n)m_0
++
+\frac{\lambda_1^n+\lambda_2^n}{2}\Delta_0.
+\]
+
+Information can become more accurate while opportunities to use it disappear.
+In mule deer, March nutritional condition predicts migration-start timing,
+while signed start phase predicts downstream speed and stopover; a prespecified
+IFBFat moderation test does not support concurrent readiness-gated feedback.
+
+**Main conclusions:** Shared forcing need not produce shared timing. Entry
+clocks determine initial seasonal error, whereas decision controllers determine
+whether that error is erased, retained or converted into new mismatch. Strong
+downstream feedback can partly substitute for precise initial timing, so final
+synchrony alone does not reveal the mechanism that produced it.
 
 **Keywords:** phenological mismatch; biological clocks; migration; information
 ecology; feedback control; recourse; climate change
