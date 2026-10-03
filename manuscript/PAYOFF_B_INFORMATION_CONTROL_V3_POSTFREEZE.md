@@ -895,6 +895,29 @@ large-development population. Those data do not identify
 \(\omega\) or \(s_{\mathrm{feedback}}\).
 
 
+A stronger interaction consequence follows when historically synchronized
+partners use different hidden portfolios. If they have the same historical
+target variance and precision budget but feedback shares \(s_1\) and \(s_2\),
+the same opportunity retention \(\omega\) gives
+
+\[
+\boxed{
+\log\frac{V_1'}{V_2'}
+=
+(1-\omega)P(s_1-s_2).
+}
+\]
+
+Thus equal historical timing precision does not imply equal robustness. Climate
+change can reveal a previously invisible difference in **how** partners
+achieved synchrony. Under a transparent correlated-error witness, unequal
+variance inflation also adds a positive asymmetry penalty to pairwise mismatch.
+
+This is the **cryptic clock-portfolio** prediction. It is prospective: no
+current PAYOFF-B natural dataset independently estimates both historical
+feedback share and opportunity loss.
+
+
 ### 4.10 Interactions convert controller differences into ecological mismatch
 
 The pairwise mode decomposition clarifies why interaction mismatch need not
