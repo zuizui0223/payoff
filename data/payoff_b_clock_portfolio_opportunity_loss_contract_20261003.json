@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_CLOCK_PORTFOLIO_OPPORTUNITY_LOSS_EMPIRICAL_CONTRACT",
+  "frozen_submission_affected": false,
+  "target_claim": "Historical feedback reliance predicts immediate phase-error inflation when usable downstream correction opportunity is lost.",
+  "required_design": {
+    "preferred": "within taxon / within population / matched route comparison",
+    "required_variables": [
+      "entry phase error or entry-phase variance before the opportunity perturbation",
+      "historically available correction opportunity count or predeclared weighted opportunity amount",
+      "perturbed usable opportunity amount",
+      "downstream phase error or final phase variance on the same coordinate",
+      "independent perturbation definition that does not use the downstream phase outcome"
+    ],
+    "preferred_perturbations": [
+      "stopover loss or closure",
+      "route barrier / corridor disturbance",
+      "compressed resource window",
+      "experimental removal or blocking of an otherwise available correction action"
+    ]
+  },
+  "primary_prediction": {
+    "model": "V_disrupted/V_target = exp[(1-omega) s_feedback P]",
+    "qualitative": "for comparable opportunity loss, systems or individuals with higher pre-perturbation feedback reliance should show greater phase-error inflation",
+    "strongest_test": "interaction between independently estimated historical feedback reliance and opportunity loss on downstream error inflation"
+  },
+  "forbidden_designs": [
+    "cross-taxon correlation between migration distance and mismatch used as the primary test",
+    "using number of stopovers as both the perturbation and the outcome",
+    "estimating historical feedback reliance from the same post-perturbation phase error used to test fragility",
+    "treating a published route-scale surfing decline alone as an estimate of omega",
+    "treating the Aikens industrial mule-deer system as a confirmation without a direct phase-retention/opportunity decomposition",
+    "retuning frozen GEB V2 or preregistered outcomes"
+  ],
+  "current_anchor": {
+    "system": "Aikens et al. 2022 industrial mule deer",
+    "licensed": "landscape development altered migration behavior and reduced route-scale green-wave surfing; PAYOFF-B reanalysis found lower near-boundary movement-control permeability in large-development population",
+    "not_licensed": "direct clock-portfolio fragility test; omega, s_feedback and target-relative variance inflation are not identified"
+  },
+  "decision_rule": "No natural system is promoted as a portfolio-fragility confirmation until historical feedback reliance and opportunity loss are independently identified before the downstream mismatch outcome is evaluated."
+}
