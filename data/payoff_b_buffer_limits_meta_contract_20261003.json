@@ -1,6 +1,6 @@
 {
   "date": "2026-10-03",
-  "status": "PREOUTCOME_COMPARATIVE_CONTRACT",
+  "status": "PREOUTCOME_COMPARATIVE_CONTRACT_IDENTIFICATION_LOCKED",
   "project": "PAYOFF-B V5 buffer limits",
   "primary_question": "Where in the annual cycle do migratory birds absorb temporal delays, and what predicts when those delays persist to fitness-relevant stages?",
   "corpus_rule": {
@@ -22,7 +22,17 @@
       "correlation only from the primary raw-slope synthesis",
       "studies selected because they reported successful buffering",
       "non-migratory taxa from primary synthesis"
-    ]
+    ],
+    "evidence_tiers": {
+      "A": "experimental perturbation or repeated-individual within-individual timing anomaly with individual identity controlled",
+      "B": "same-cycle individual A/B timing observations, within-year centered or year-adjusted, raw individual data or unstandardized individual-level slope available",
+      "C": "paired cohort/population aggregate timing effect without individual A/B observations"
+    },
+    "primary_h1_tiers": [
+      "A",
+      "B"
+    ],
+    "tier_c_role": "secondary descriptive synthesis only"
   },
   "primary_estimand": {
     "name": "timing_propagation_coefficient",
@@ -40,18 +50,48 @@
       "year-adjusted raw dates",
       "raw dates only when year effects are absent or controlled"
     ],
-    "forbidden": "Do not convert repeatability or correlation coefficients into beta_AB."
+    "forbidden": "Do not convert repeatability or correlation coefficients into beta_AB.",
+    "interpretation_boundary": [
+      "beta_AB is a descriptive conditional timing-propagation slope in days/day",
+      "observational beta_AB does not identify a causal fraction of imposed delay retained",
+      "1-beta_AB must not be labeled causal buffering capacity without Tier A evidence",
+      "persistent individual schedules, shared drivers, selection and measurement error can contribute to beta_AB"
+    ],
+    "allowed_language": [
+      "timing propagation",
+      "attenuation",
+      "association",
+      "statistical reset",
+      "buffering as transition-level ecological interpretation"
+    ],
+    "forbidden_language": [
+      "causal fraction of delay retained from observational slope",
+      "controller gain inferred from beta_AB",
+      "1-beta_AB as natural causal buffering capacity"
+    ]
   },
   "primary_hypotheses": [
     {
       "id": "H1",
       "label": "stationary-period buffering",
-      "prediction": "beta_stationary < beta_active_migration"
+      "prediction": "beta_stationary < beta_active_migration",
+      "licensed_interpretation": "Supported H1 means timing associations are attenuated more strongly across stationary than active transitions in the eligible corpus; causal delay absorption requires Tier A support or convergence."
     },
     {
       "id": "H2",
       "label": "available-time hypothesis",
-      "prediction": "within stationary transitions, beta decreases as reported/derivable available interval duration increases"
+      "prediction": "within stationary transitions, beta decreases as reported/derivable available interval duration increases",
+      "moderator_definition": {
+        "primary_priority": [
+          "source-reported typical or mean stationary-period duration",
+          "independently reported population/year mean duration"
+        ],
+        "sensitivity_only": [
+          "same-sample cohort mean B-A duration",
+          "leave-one-individual-out mean B-A duration"
+        ],
+        "forbidden": "focal individual's own B-A interval as predictor of the same effect, or unrelated species-average duration added after outcome inspection"
+      }
     }
   ],
   "secondary_hypotheses": [
@@ -97,7 +137,8 @@
     "random_effects": [
       "study_id",
       "species_id",
-      "population_or_cohort_id"
+      "population_or_cohort_id",
+      "source_sample_or_individual_panel_id"
     ],
     "phylogeny": "include if species count and taxonomic coverage support stable estimation",
     "primary_moderator": "stationary_vs_active transition class",
@@ -110,12 +151,47 @@
     "leave-one-study-out",
     "leave-one-species-out",
     "exclude MIXED transitions",
-    "exclude slopes reconstructed from figures"
+    "exclude slopes reconstructed from figures",
+    "Tier A effects only where estimable",
+    "Tier A+B primary observational/causal-compatible corpus",
+    "directly observed or high-resolution dates only",
+    "exclude SAME_SAMPLE_DERIVED duration moderator from H2",
+    "measurement-error sensitivity when timing uncertainty is available"
   ],
   "novelty_boundary": [
     "No claim that buffering, reset points, carry-over effects, en-route compensation, or fitness costs are new.",
     "No claim of first meta-analysis until systematic novelty search is complete.",
     "V5 novelty is prospective quantitative synthesis of stage-to-stage day-for-day timing propagation and its moderators."
   ],
-  "outcome_access_state": "UNOPENED"
+  "outcome_access_state": "UNOPENED",
+  "identification_audit": "docs/PAYOFF_B_V5_IDENTIFICATION_AUDIT_20261003.md",
+  "measurement_error_plan": {
+    "risk": "measurement error in event A attenuates beta_AB toward zero and can mimic stronger buffering",
+    "code_before_outcomes": [
+      "tracking_or_observation_method",
+      "nominal_timing_resolution_if_reported",
+      "directly_observed_vs_model_or_geolocator_derived",
+      "event_date_uncertainty_reported"
+    ],
+    "sensitivities": [
+      "directly observed or high-resolution dates only",
+      "exclude preclassified low-information upstream dates where classification is possible without beta_AB",
+      "errors-in-variables or SIMEX-style sensitivity when event-date uncertainty is supplied"
+    ],
+    "baseline_unchanged": true
+  },
+  "dependence_plan": {
+    "shared_source_sample_group": "required when multiple transitions use the same tracked individuals or source panel",
+    "do_not_treat_multiple_transitions_as_independent": true
+  },
+  "failure_state": {
+    "code": "INSUFFICIENT_IDENTIFIABLE_CORPUS",
+    "triggers": [
+      "too few Tier A/B effects in ACTIVE or STATIONARY classes for the declared comparison",
+      "transition class requires outcome inspection",
+      "primary corpus requires converting correlations, standardized coefficients or repeatabilities into beta_AB",
+      "effect uncertainty is unavailable for enough effects to support the declared multilevel synthesis"
+    ],
+    "no_estimator_switch_after_failure": true
+  }
 }
