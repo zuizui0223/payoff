@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-03",
+  "status": "SCHEMA_OPEN_NUMERICAL_SUMMARY_NOT_YET_COMPUTED_POSTFREEZE_DESCRIPTIVE_AUDIT",
+  "frozen_submission_affected": false,
+  "source": {
+    "article": "Ortega et al. 2023, Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "source_data_file": "41467_2023_37750_MOESM4_ESM.xlsx",
+    "source_data_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364"
+  },
+  "schema_seen": {
+    "phase_sheet": "Fig1a,b;Fig3;SFig2;STables1,6",
+    "phase_columns": [
+      "id_yr",
+      "year",
+      "timing",
+      "DOY_Start",
+      "DFP_Start",
+      "DOY_End",
+      "DFP_End"
+    ],
+    "actuator_sheet": "Fig4d,4e;SFig4",
+    "actuator_columns": [
+      "id_yr",
+      "timing",
+      "compensation",
+      "departure.rel.greenup",
+      "standardized_DOY_Start",
+      "rate.km.day",
+      "stopover.day"
+    ]
+  },
+  "primary_estimand": {
+    "name": "whole_route_phase_variance_ratio",
+    "formula": "sample_var(DFP_End) / sample_var(DFP_Start)",
+    "expected_direction": "<1",
+    "role": "descriptive reproduction/extension of published convergence, not independent confirmation"
+  },
+  "robustness": [
+    {
+      "name": "within_year_centered_variance_ratio",
+      "formula": "sample_var(DFP_End-year_mean_end) / sample_var(DFP_Start-year_mean_start)"
+    },
+    {
+      "name": "animal_cluster_bootstrap",
+      "clusters": "animal id parsed from id_yr",
+      "replicates": 10000,
+      "interval": "2.5 and 97.5 percentiles"
+    },
+    {
+      "name": "whole_route_phase_retention",
+      "formula": "OLS slope DFP_End ~ 1 + DFP_Start"
+    },
+    {
+      "name": "within_year_phase_retention",
+      "formula": "OLS slope year-centered DFP_End ~ year-centered DFP_Start"
+    },
+    {
+      "name": "individual_closer_to_peak_fraction",
+      "formula": "mean(abs(DFP_End) < abs(DFP_Start))"
+    }
+  ],
+  "actuator_bridge": {
+    "movement_rate_prediction": "slope(rate.km.day ~ DFP_Start) > 0",
+    "stopover_prediction": "slope(stopover.day ~ DFP_Start) < 0",
+    "role": "source-data reproduction of signed compensation, not new mechanism discovery"
+  },
+  "forbidden_claims": [
+    "variance contraction alone proves individualized feedback",
+    "estimate K, g, phi, r or D_eff without independent identification",
+    "claim PAYOFF-B discovered mule-deer temporal phase sense or bidirectional compensation",
+    "treat early/mid/late group summaries as independent evidence for the continuous individual-level funnel",
+    "retune frozen GEB V2 or any preregistered result"
+  ],
+  "interpretation_rule": "The audit can establish the magnitude and robustness of the published start-to-end phase funnel in continuous animal-year data and connect it descriptively to signed actuators. It cannot by itself distinguish feedback from measurement error, selection, passive retention, or other open-loop mechanisms."
+}
