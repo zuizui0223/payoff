@@ -8,7 +8,7 @@ Status: **prospective post-freeze Paper-2 extension; frozen GEB V2 unchanged**
 For actor \(i\), let effective mean phase retention be
 
 \[
-\lambda_i=\phi_i(1-g_iK_i).
+\lambda_i=\phi_i(1-G_i g_iK_i).
 \]
 
 Suppose all actors are initially synchronized at the same signed seasonal error
@@ -273,7 +273,7 @@ standard mathematics.
 
 PAYOFF-B should claim only the ecological synthesis:
 
-> **heterogeneous information/control becomes community phenological mismatch
+> **heterogeneous readiness/information/control becomes community phenological mismatch
 > according to the network Dirichlet energy of the controller field, with the
 > earlier binary network-cut result as a special case.**
 

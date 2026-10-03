@@ -24,9 +24,22 @@ Annotation:
 The “Schrödinger's spring” intuition can appear only in the caption or graphical
 motif: the future target becomes clearer as the route progresses.
 
-### Panel B — Route-wise infer–correct–propagate controller
+### Panel B — Two clock layers
 
-One checkpoint block:
+Split the panel vertically.
+
+**B1. Developmental / physiological timer**
+
+\[
+\dot z=v(E_t,z),
+\qquad
+z\rightarrow\Theta\rightarrow\text{readiness/event}.
+\]
+
+Use emergence/diapause as the visual example. Label this as a
+**rate-to-threshold clock**, not universally as a molecular clock.
+
+**B2. Inferential decision controller**
 
 \[
 e_t
@@ -37,10 +50,10 @@ I_t
 \rightarrow
 u_t
 \rightarrow
-e_{t+1}.
+e_{t+1},
 \]
 
-Formal state update:
+with
 
 \[
 e_{t+1}=\phi_t(e_t-u_t)+w_t.
@@ -50,7 +63,9 @@ Use two miniature paths:
 - late \(e_t>0\) -> speed up / shorter stopover;
 - early \(e_t<0\) -> slow down / longer stopover.
 
-This is the formal replacement for the “Shinkansen” intuition.
+A migratory bird can contain both panels: an endogenous readiness programme
+opens the decision window, then repeated route checkpoints provide
+state-dependent control. The informal “Mikawa-Anjo clock” refers only to B2.
 
 ### Panel C — Natural mule-deer phase funnel
 
