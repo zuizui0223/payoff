@@ -217,7 +217,54 @@ It is **not** generally:
 If all checkpoints are equivalent, those simpler fractions can coincide with
 \(\omega_{\rm eff}\).  Otherwise they need not.
 
-## 6. Weighted fragility identity
+## 6. Cost-independent share representation
+
+The \(c_j^2/b_j\) weights arise from the declared quadratic optimum.  The
+effective-opportunity idea itself is more general.
+
+Let \(s_j\ge0\) denote checkpoint \(j\)'s **realized historical contribution to
+the total required log-precision**.  The total downstream feedback share is
+
+\[
+s_F=\sum_j s_j.
+\]
+
+If perturbation retains fraction \(o_j\) of each checkpoint's usable
+contribution, then
+
+\[
+\boxed{
+\omega_{\rm eff}
+=
+\frac{\sum_j o_j s_j}{\sum_j s_j}.
+}
+\]
+
+This identity does not depend on the quadratic cost model.  It only requires
+that historical downstream precision can be decomposed additively across
+checkpoints.
+
+At the heterogeneous quadratic optimum,
+
+\[
+s_j
+\propto
+\frac{c_j^2}{b_j},
+\]
+
+so the earlier leverage-weighted formula is recovered exactly.
+
+This representation is empirically useful because a future study may be able
+to estimate checkpoint-specific historical phase-correction contributions
+without separately identifying \(c_j\) and \(b_j\).
+
+It also sharpens the claim boundary:
+
+> \(c_j^2/b_j\) is the optimal-model representation of checkpoint importance;
+> the more general biological object is the checkpoint's realized historical
+> share of downstream precision.
+
+## 7. Weighted fragility identity
 
 Let historical feedback share be \(s_F\).  Holding the historical allocation
 fixed immediately after disruption,
@@ -236,7 +283,7 @@ Thus all previous opportunity-loss results remain exact after replacing the
 raw opportunity fraction by the contribution-weighted quantity
 \(\omega_{\rm eff}\).
 
-## 7. Checkpoint importance
+## 8. Checkpoint importance
 
 If one checkpoint \(j\) is completely lost and all others remain intact, its
 fraction of historical feedback contribution is
@@ -276,7 +323,7 @@ This defines a **correction-opportunity importance weight**.
 Removing one high-\(w_j\) checkpoint can therefore be more damaging than
 removing several low-\(w_j\) checkpoints.
 
-## 8. Substitution and rerouting
+## 9. Substitution and rerouting
 
 The Filsø pink-footed-goose case illustrates why named-site loss cannot be
 mapped directly to \(\omega\).  Birds shifted to alternative staging areas.
@@ -299,7 +346,7 @@ The theorem does not prescribe one universal field measure of \(c_j\). It
 specifies what that measure must represent: **marginal contribution to usable
 phase correction**.
 
-## 9. Ecological prediction
+## 10. Ecological prediction
 
 Two routes with the same number of stopovers can have very different clock
 portfolios if their checkpoint leverage distributions differ.
@@ -315,7 +362,7 @@ The strongest prediction is therefore:
 This sharpens the opportunity-loss theorem and converts the qualitative
 substitution warning into an exact route-level quantity.
 
-## 10. Empirical boundary
+## 11. Empirical boundary
 
 No current PAYOFF-B natural dataset identifies \(c_j\) from an independent
 phase-correction function for every checkpoint and then observes a subsequent
@@ -329,7 +376,7 @@ Accordingly:
 
 The weighted theorem is prospective.
 
-## 11. Novelty boundary
+## 12. Novelty boundary
 
 Heterogeneous resource quality, weighted habitat networks and quadratic
 allocation models are standard ideas.
