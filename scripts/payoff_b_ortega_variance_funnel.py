@@ -250,6 +250,8 @@ def cluster_bootstrap(
     closer_frac = []
     rate_slope = []
     stop_slope = []
+    rate_within_year_slope = []
+    stop_within_year_slope = []
 
     for _ in range(replicates):
         sampled = [rng.choice(ids) for _ in ids]
@@ -274,8 +276,12 @@ def cluster_bootstrap(
         am = actuator_metrics(actuator_sample)
         if "movement_rate_slope_per_DFP_day" in am:
             rate_slope.append(am["movement_rate_slope_per_DFP_day"])
+        if "movement_rate_within_year_slope" in am:
+            rate_within_year_slope.append(am["movement_rate_within_year_slope"])
         if "stopover_slope_days_per_DFP_day" in am:
             stop_slope.append(am["stopover_slope_days_per_DFP_day"])
+        if "stopover_within_year_slope" in am:
+            stop_within_year_slope.append(am["stopover_within_year_slope"])
 
     return {
         "cluster_unit": "animal",
@@ -289,7 +295,13 @@ def cluster_bootstrap(
         "within_year_lambda_ci95": ci95(year_lambda),
         "closer_to_peak_fraction_ci95": ci95(closer_frac),
         "movement_rate_slope_ci95": ci95(rate_slope) if rate_slope else None,
+        "movement_rate_within_year_slope_ci95": (
+            ci95(rate_within_year_slope) if rate_within_year_slope else None
+        ),
         "stopover_slope_ci95": ci95(stop_slope) if stop_slope else None,
+        "stopover_within_year_slope_ci95": (
+            ci95(stop_within_year_slope) if stop_within_year_slope else None
+        ),
     }
 
 
