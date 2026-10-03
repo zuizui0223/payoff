@@ -32,6 +32,7 @@ Otherwise it belongs in theory/, Supporting Information, or a future paper.
 - opportunity-loss fragility: Discussion-level prospective prediction;
 - cryptic portfolio divergence: Discussion/SI prospective theory;
 - loss/substitution/selection identification triangle: empirical-method guard / SI;
+- weighted correction opportunity: theory/SI refinement of omega, not a new main-text layer;
 - generic control-theory derivations: prior-art implementation details / SI.
 
 ## Natural-data rule

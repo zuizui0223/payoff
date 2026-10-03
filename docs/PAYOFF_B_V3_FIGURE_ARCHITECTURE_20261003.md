@@ -356,13 +356,26 @@ different hidden precision portfolios:
 
 Before perturbation, their final distributions overlap.
 
-After the same opportunity loss \(\omega\), separate them according to
+Add a small route inset defining effective opportunity retention,
+
+\[
+\omega_{\rm eff}
+=
+\frac{\sum_j o_js_j}{\sum_j s_j},
+\]
+
+where \(s_j\) is checkpoint \(j\)'s historical downstream precision
+contribution. Under the declared heterogeneous quadratic optimum,
+\(s_j\propto c_j^2/b_j\).
+
+After the same **effective** opportunity loss, separate the historically
+overlapping partners according to
 
 \[
 \boxed{
 \log\frac{V_1'}{V_2'}
 =
-(1-\omega)P(s_1-s_2).
+(1-\omega_{\rm eff})P(s_1-s_2).
 }
 \]
 

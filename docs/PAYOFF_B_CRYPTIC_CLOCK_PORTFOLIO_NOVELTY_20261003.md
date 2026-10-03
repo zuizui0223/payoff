@@ -7,6 +7,40 @@ Status: **post-freeze literature boundary; frozen GEB V2 unchanged**
 Ecology and evolution already contain broad versions of the idea that similar
 phenotypes can conceal different mechanisms.
 
+### Terminology: this is not the ecological portfolio effect
+
+"Portfolio effect" already has an established ecological meaning: diversity
+among populations, life histories or migratory strategies can stabilize
+aggregate population performance through asynchronous dynamics.  That usage is
+common in salmon and migration ecology.
+
+PAYOFF-B's **clock portfolio** is different.  It is an allocation within one
+seasonal timing architecture between:
+
+- upstream entry-clock precision; and
+- downstream error-correction precision.
+
+Accordingly, the manuscript should always use the qualified term **clock
+portfolio** (or **timing-control portfolio**) and should not imply that the
+general ecological portfolio-effect concept is new.
+
+Recent examples of the established ecological usage include Baker et al.
+(2025, *Ecology Letters*, DOI 10.1111/ele.70081) on migration-phenology
+diversity and population stability, alongside the broader portfolio-effect
+literature derived from diversity-stability theory.
+
+### Anticipatory versus responsive plasticity is also prior art
+
+Plasticity literature already distinguishes responses based on advance
+prediction of future conditions from later responsive/behavioral adjustment.
+Likewise, migration literature recognizes endogenous seasonal programmes
+together with flexible state- and cue-dependent decisions.
+
+PAYOFF-B therefore should not claim novelty for the verbal distinction between
+"anticipatory" and "responsive" timing.  Its narrower contribution is the
+explicit precision-allocation, retention and opportunity-loss mapping that
+connects these mechanisms to phenological mismatch.
+
 ### Genetic compensation / cryptic variation
 
 Countergradient and genetic-compensation theory explicitly allows populations
@@ -30,6 +64,23 @@ under climate change.
 
 PAYOFF-B must not claim that different phenological mechanisms across taxa are
 new.
+
+### Migration-network critical-node theory
+
+Migration-network ecology already recognizes that stopover sites are not
+interchangeable.  Node-removal, betweenness and functional-connectivity
+approaches identify critical sites whose loss has disproportionate effects on
+migration-network integrity (e.g. Xu et al. 2019, *Conservation Biology*,
+DOI 10.1111/cobi.13383; DOI 10.1186/s40462-025-00599-6 for later shorebird
+critical-node work).
+
+PAYOFF-B therefore must not claim novelty for the generic statement that one
+stopover can matter more than another.
+
+Its narrower object is **phase-correction leverage**: the historical
+contribution of a checkpoint to seasonal timing precision.  Generic network
+centrality and phase-correction leverage may correlate, but they are not
+identical by definition.
 
 ### Behavioral flexibility and habitat-loss dependence
 
