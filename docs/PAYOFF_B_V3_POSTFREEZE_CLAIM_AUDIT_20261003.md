@@ -29,6 +29,8 @@ source-backed motivation, and what remains prospective in
 | phase-variance funnel beyond common open-loop timing | exact post-freeze reduced model + prospective empirical test | exact under Gaussian individualized feedback; natural test prospective | claim that any start/end convergence proves feedback |
 | noisy-cue phase inverse K and g from mean + variance retention | exact post-freeze inverse under identified phi and Q | exact under stated Gaussian assumptions with independent passive/process baseline; lambda=phi(1-gK) | back-solve K or g from the same transition used to define phi or Q |
 | mule-deer temporal phase sense / bidirectional compensation | published prior art (Ortega et al. 2023) | natural anchor for signed compensation and resynchronization | claim PAYOFF-B discovered temporal phase sense in mule deer |
+| controller asymmetry converts common error to mismatch | exact post-freeze linear pair theorem | under declared mean controller, Δ_next = δλ m + λ_bar Δ + δw; synchronized actors diverge when δλ m != 0 | generic claim that all natural mismatch is caused by controller asymmetry |
+| persistent mismatch under shared forcing | exact post-freeze stable-controller result | Δ* = w(λ1-λ2)/[(1-λ1)(1-λ2)] when both |λ_i|<1 | natural parameter estimate without matched actor-specific λ on a common scale |
 
 ## Canonical V3 evidence ordering
 
