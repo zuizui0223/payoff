@@ -18,7 +18,7 @@
 
 **Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is \(r(t)[Sq(t)-B]-C(t)\); with exponential learning and recourse loss the unique zero-cost optimum is \(t^*=\log(1+\alpha/\beta)/\alpha\), generally before maximal cue accuracy. Route-wise phase dynamics obey \(e_{t+1}=\phi_t(e_t-u_t)+w_t\). A post-freeze source-data reanalysis of 152 mule-deer animal-years shows that end-of-migration phase variance was 0.249 of start variance (95% animal-cluster bootstrap 0.167–0.362; 0.294 after year centering), while movement speed increased and stopover use decreased continuously with later starting phase. These observations quantify a natural phase funnel with signed compensation but do not identify the latent controller.
 
-**Main conclusions:** Seasonal tracking is a sequential inference-and-control problem. Mismatch can arise because interacting organisms differ in when they can infer a future seasonal state, how long that information remains actionable and how strongly they can correct phase error after learning it. Restored information need not restore coordination after response options or coordinated conventions have been lost.
+**Main conclusions:** Seasonal tracking is a sequential inference-and-control problem. Controller asymmetry can convert a shared seasonal error directly into interaction mismatch: organisms exposed to the same forcing can diverge because they differ in information, remaining actionability or phase correction. Restored information need not restore coordination after response options or coordinated conventions have been lost.
 
 **Keywords:** phenological mismatch; migration; information ecology; feedback control; recourse; phase error; climate change
 
@@ -290,25 +290,107 @@ This generates a distinction between two forms of tracking capacity:
 1. **prediction capacity** — how accurately the organism can estimate the relevant future seasonal state;
 2. **control capacity** — how strongly it can alter phase after that estimate changes.
 
-### 2.7 Different controllers create interaction mismatch
+### 2.7 Controller asymmetry converts shared seasonal error into interaction mismatch
 
-For interacting actors \(i\), each can have its own information trajectory \(q_i(t)\), retained actionability \(r_i(t)\), phase-estimation reliability and correction gain \(g_i(t)\).
-
-Even if two species experience the same external environmental change, they need not act on it at the same stage. Faster actionability loss shifts optimal commitment earlier. Greater correction cost reduces feedback gain. Poorer remote information weakens the phase estimate.
-
-The result is a mechanistic route to seasonal mismatch:
+For actor \(i\), the noisy-feedback representation gives effective
+regression-scale mean phase retention
 
 \[
-\text{different inference}
-+
-\text{different remaining recourse}
-+
-\text{different correction gain}
-\rightarrow
-\text{different phase trajectories}.
+\lambda_i=\phi_i(1-g_iK_i).
 \]
 
-This is more specific than saying that two species differ in phenological sensitivity.
+Let
+
+\[
+m_t=\frac{e_{1,t}+e_{2,t}}{2}
+\]
+
+be the common seasonal-error mode and
+
+\[
+\Delta_t=e_{1,t}-e_{2,t}
+\]
+
+the interaction mismatch. With
+\(\bar\lambda=(\lambda_1+\lambda_2)/2\) and
+\(\delta\lambda=\lambda_1-\lambda_2\),
+
+\[
+m_{t+1}
+=
+\bar\lambda m_t
++
+\frac{\delta\lambda}{4}\Delta_t
++
+\bar w_t,
+\]
+
+whereas
+
+\[
+\boxed{
+\Delta_{t+1}
+=
+\delta\lambda\,m_t
++
+\bar\lambda\Delta_t
++
+\delta w_t.
+}
+\]
+
+This directly links individual tracking control to interaction mismatch.
+
+If the two actors are currently synchronized
+\(\Delta_t=0\) and experience the same environmental innovation
+\(\delta w_t=0\), then
+
+\[
+\boxed{
+\Delta_{t+1}
+=
+(\lambda_1-\lambda_2)m_t.
+}
+\]
+
+A shared seasonal error is therefore converted into mismatch whenever the two
+actors retain or correct that error differently. No difference in external
+climate exposure and no initial interaction mismatch are required.
+
+With equal passive retention, information asymmetry alone is sufficient:
+
+\[
+\Delta_{t+1}
+=
+-\phi g(K_1-K_2)m_t,
+\]
+
+and with equal information weight, control-gain asymmetry alone is sufficient:
+
+\[
+\Delta_{t+1}
+=
+-\phi K(g_1-g_2)m_t.
+\]
+
+Under constant shared forcing \(w\) and stable controllers
+\(|\lambda_i|<1\), persistent mismatch is
+
+\[
+\boxed{
+\Delta^*
+=
+w\,
+\frac{\lambda_1-\lambda_2}
+{(1-\lambda_1)(1-\lambda_2)}.
+}
+\]
+
+Controller differences are therefore amplified when either actor approaches
+weak restoring control \(\lambda\to1\). This is more specific than saying that
+two species have different phenological sensitivities: the theory identifies
+the information/control asymmetry that converts common environmental error
+into differential ecological timing.
 
 ### 2.8 Information recovery can still fail to restore coordination
 
@@ -662,13 +744,26 @@ It can also change the window over which correction remains possible—for examp
 
 A species can therefore become more mismatched without losing its intrinsic ability to move or shift phenology. The problem can instead be that the forecast becomes reliable too late relative to the remaining control window.
 
-### 4.9 Interactions add a second layer of irreversibility
+### 4.9 Interactions convert controller differences into ecological mismatch
 
-Physical correction and strategic coordination should be separated.
+The pairwise mode decomposition clarifies why interaction mismatch need not
+require different climate exposure. A common environmental displacement enters
+both actors as a shared phase error, but differences in effective retention
+\(\lambda_i=\phi_i(1-g_iK_i)\) convert part of that common mode into a
+differential mode.
 
-A migrant may still be capable of changing timing but face a partner that is not changing. A plant may have local environmental information but little developmental recourse after flowering begins. A consumer may have behavioral flexibility yet gain little from moving first if the resource or competitor remains on the previous schedule.
+This distinction changes comparative interpretation. A resident and a migrant,
+or a plant and a pollinator, can experience the same regional warming yet
+diverge because one has more informative cues, more remaining recourse or a
+different feedback gain. The relevant comparative quantity is therefore not
+taxonomic identity itself but the difference in the controllers through which
+environmental information becomes timing correction.
 
-The Paper-2 game theory is most useful after the control theory, not before it: it explains why a physically feasible correction may remain strategically inaccessible.
+Physical correction and strategic coordination should then be separated. The
+controller theorem explains how mismatch is generated. The Paper-2 game theory
+explains why a mismatched or obsolete timing configuration can remain difficult
+to escape even after information improves. A physically feasible correction
+can therefore remain strategically inaccessible.
 
 ### 4.10 Direct natural validation remains prospective
 
