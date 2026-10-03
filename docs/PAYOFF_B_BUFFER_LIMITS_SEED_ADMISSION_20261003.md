@@ -137,24 +137,209 @@ This study can enter the separately declared secondary standardized-correlation
 or fitness layer, but not the primary `beta_AB` synthesis unless a public
 individual dataset or reported unstandardized slope is independently located.
 
-## Current seed-screen tally
+## BRIEDIS2018 — collared flycatcher
 
-```text
-SCREENED = 4
-PRIMARY_ADMIT_REESTIMATE = 2
-PRIMARY_CONDITIONAL = 1
-PRIMARY_EXCLUDE_CORRELATION_ONLY = 1
+Source:
+Briedis M et al. 2018. *Behavioral Ecology and Sociobiology* 72:93.
+DOI 10.1007/s00265-018-2509-3.
+
+Design audit:
+- individual-based full annual-cycle tracking was combined with breeding and
+  stable-isotope data;
+- a brood-size manipulation was used to separate treatment effects from
+  intrinsic quality;
+- the paper explicitly identifies the non-breeding period as a buffer.
+
+Admission status:
+
+\`\`\`text
+PRIMARY_STATUS = CONDITIONAL_REPORTED_OR_RAW_DATA
+INDIVIDUAL_TRACKING = YES
+SEQUENTIAL_TIMING = YES
+PUBLIC_EVENT_LEVEL_DATA = NOT_LOCATED_IN_CURRENT_SCREEN
+REPORTED_RAW_BETA = NOT_YET_VERIFIED
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+\`\`\`
+
+The biological result is relevant, but "buffering" in the title is not an
+admission criterion. A primary V5 effect requires either an unstandardized
+event-to-event slope or recoverable individual event dates.
+
+## LOPEZCALDERON2024 — barn swallow
+
+Source:
+López-Calderón C et al. 2024. *Ornithology* 141:ukae024.
+Dryad 10.5061/dryad.ghx3ffbxj.
+
+Design audit:
+- 35 individuals (22 females, 13 males);
+- public individual-level file contains departure from breeding colony, onset
+  of autumn migration, winter arrival, spring migration onset and breeding
+  arrival;
+- the same individuals are linked to clutch number, total eggs and total
+  fledglings where breeding data are available;
+- dates are chronological event dates on a common scale.
+
+Admission status:
+
+\`\`\`text
+PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLIC_INDIVIDUAL_DATA
+INDIVIDUAL_LEVEL_DESIGN = YES
+COMMON_DATE_SCALE = YES
+PUBLIC_RAW_DATA = YES
+TRANSITIONS = MULTIPLE
+FITNESS_LAYER = YES
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+\`\`\`
+
+The published PLS path coefficients are not substituted for \`beta_AB\`; V5
+will re-estimate the frozen raw day-for-day transition slopes from the public
+event dates.
+
+## ARCTIC_SKUA2024 — Arctic skua
+
+Source:
+Movement Ecology 2024, DOI 10.1186/s40462-024-00459-9.
+
+Design audit:
+- 276 migration cycles from 155 individuals across multiple breeding and
+  wintering areas;
+- six annual-cycle events are defined explicitly;
+- processed analyses include timing and duration models with individual random
+  effects;
+- geolocator data are publicly listed by Movebank study ID;
+- the article directly reports at least one day-for-day relationship:
+  spring-arrival delay to clutch initiation.
+
+Admission status:
+
+\`\`\`text
+PRIMARY_STATUS = CONDITIONAL_REPORTED_SLOPE
+INDIVIDUAL_LEVEL_DESIGN = YES
+MULTIPLE_POPULATIONS = YES
+PUBLIC_GEOLOCATOR_DATA = YES
+PROCESSED_EVENT_TABLE_PUBLIC = NOT_CONFIRMED
+DIRECT_EVENT_TO_EVENT_BETA = AT_LEAST_ONE_REPORTED
+DURATION_ONSET_SLOPES = DO_NOT_ALGEBRAICALLY_CONVERT_POST_HOC
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+\`\`\`
+
+Only coefficients already parameterized as event-B timing versus event-A
+timing are eligible under the frozen primary definition. Duration-versus-onset
+coefficients are not converted to \`beta_AB\` after seeing their results.
+
+## BLACKTAILED2011 — Black-tailed godwit
+
+Source:
+Lourenço PM et al. 2011. *Journal of Ornithology* 152:1023–1032.
+DOI 10.1007/s10336-011-0692-3.
+
+Design audit:
+- staging departure, breeding arrival and laying date were measured for the
+  same colour-marked individuals;
+- GLMs tested each timing event as a predictor of later timing events with year
+  as a factor;
+- repeatability was analysed separately and is not a V5 primary effect.
+
+Admission status:
+
+\`\`\`text
+PRIMARY_STATUS = CONDITIONAL_REPORTED_SLOPE
+INDIVIDUAL_LEVEL_DESIGN = YES
+SEQUENTIAL_GLM = YES
+REPEATABILITY_EFFECTS = EXCLUDE_PRIMARY
+TABLE_2_RAW_BETA_AND_SE = VERIFY_BEFORE_ADMISSION
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+\`\`\`
+
+The paper's "no domino effects" conclusion is not coded as beta=0. Only the
+reported GLM coefficient and its uncertainty, if recoverable on the day/day
+scale, can enter the primary synthesis.
+
+## CATRY2013 — Cory's shearwater experiment
+
+Source:
+Catry P et al. 2013. *Ecology* 94:1230–1235.
+DOI 10.1890/12-2177.1.
+
+Design audit:
+- parental investment was experimentally reduced;
+- treatment shifted the timing and destination of later migration stages;
+- the design is strong causal evidence for carry-over effects;
+- the focal published contrast is treatment versus control rather than a
+  day-for-day transition coefficient.
+
+Admission status:
+
+\`\`\`text
+PRIMARY_STATUS = EXCLUDE_PRIMARY_INTERVENTION_CONTRAST
+CAUSAL_CARRYOVER_ANCHOR = YES
+SEQUENTIAL_TIMING = YES
+RAW_EVENT_TO_EVENT_BETA = NOT_CONFIRMED
+SECONDARY_MECHANISTIC_LAYER = ELIGIBLE
+NUMERICAL_PRIMARY_EXTRACTION = PROHIBITED_UNLESS_RAW_DATES_LOCATED
+\`\`\`
+
+Experimental strength does not override the frozen estimand definition.
+
+## CONKLIN2012 — bar-tailed godwit
+
+Source:
+Conklin JR & Battley PF 2012. *Journal of Avian Biology* 43:252–263.
+DOI 10.1111/j.1600-048X.2012.05606.x.
+
+Design audit:
+- 77 individually colour-banded birds were followed across three non-breeding
+  seasons;
+- late arrival delayed wing moult;
+- birds partially compensated by faster moult and shorter moult duration;
+- delays of more than a month did not propagate to spring departure;
+- subsequent return was also considered.
+
+Admission status:
+
+\`\`\`text
+PRIMARY_STATUS = CONDITIONAL_REPORTED_SLOPE
+INDIVIDUAL_LEVEL_DESIGN = YES
+SEQUENTIAL_TIMING = YES
+COMPENSATION_STAGE = MOULT_AND_NONBREEDING
+PUBLIC_RAW_EVENT_DATA = NOT_LOCATED_IN_CURRENT_SCREEN
+RAW_BETA_AND_UNCERTAINTY = VERIFY_FULL_TABLES
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+\`\`\`
+
+This is biologically central to V5, but qualitative correction to the normal
+departure schedule cannot be encoded as beta=0 without the admissible slope.
+
+## Updated seed-screen tally
+
+\`\`\`text
+SCREENED = 10
+PRIMARY_ADMIT_REESTIMATE = 3
+PRIMARY_CONDITIONAL = 5
+PRIMARY_EXCLUDE = 2
 FOCAL_BETA_VALUES_OPENED = 0
-```
+\`\`\`
 
-## Next screen
+Admitted for re-estimation:
+- GOW2019
+- CARNEIRO2023
+- LOPEZCALDERON2024
 
-Before primary modelling, continue the same eligibility audit for:
-- BRIEDIS2018;
-- LOPEZCALDERON2024;
-- ARCTIC_SKUA2024;
-- BLACKTAILED2011;
-- CATRY2013;
-- CONKLIN2013.
+Conditional pending coefficient/data verification:
+- SENNER2014
+- BRIEDIS2018
+- ARCTIC_SKUA2024
+- BLACKTAILED2011
+- CONKLIN2012
 
-The screen must record exclusions as actively as admissions.
+Excluded from the primary beta synthesis under the current evidence state:
+- SAINO2017 — accessible result is correlation, not raw propagation;
+- CATRY2013 — experimental treatment contrast, not raw propagation.
+
+## Remaining seed screen
+
+Before primary modelling, complete the same audit for any unreviewed seed or
+newly discovered study. The screen must record exclusions as actively as
+admissions, and no study is promoted because its verbal conclusion agrees with
+V5.
