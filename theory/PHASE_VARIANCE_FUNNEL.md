@@ -191,7 +191,64 @@ This supplies a second observable axis:
 The same \(\lambda\) therefore need not imply the same information-control
 architecture.
 
-## 5. Deadbeat correction does not remove uncertainty when cues are noisy
+## 5. Mean retention + variance retention can identify an effective phase-sense weight
+
+Combining
+
+\[
+\lambda=\phi(1-g)
+\]
+
+with the variance recursion yields
+
+\[
+\boxed{
+\rho_V
+=
+\frac{P_{t+1}-Q_t}{P_t}
+=
+(1-K_t)\phi_t^2+K_t\lambda_t^2.
+}
+\]
+
+Thus innovation-adjusted variance retention is a convex combination of the
+passive squared retention and the squared closed-loop mean retention.
+
+If \(\phi_t^2\ne\lambda_t^2\), then
+
+\[
+\boxed{
+K_t
+=
+\frac{\phi_t^2-\rho_V}
+{\phi_t^2-\lambda_t^2}.
+}
+\]
+
+And, under the scalar Gaussian observation model,
+
+\[
+R_t
+=
+P_t\frac{1-K_t}{K_t}.
+\]
+
+This creates a prospective **phase-sense inverse**: if passive retention
+\(\phi_t\), process innovation \(Q_t\), mean phase retention \(\lambda_t\), and
+incoming/outgoing phase variances are independently identified, the effective
+checkpoint information weight can be recovered.
+
+The identification condition is strict. One may not estimate \(\phi\) from
+the same closed-loop transition and then claim that the resulting \(K\) is an
+independent measure of information use. A valid design needs an external or
+experimental passive-retention reference, an actuator contrast, or another
+source of identification.
+
+This inverse is attractive because it links the animal's functional "phase
+sense" to observable population moments without claiming that the animal
+neurally computes a Kalman gain.
+
+## 6. Deadbeat correction does not remove uncertainty when cues are noisy
 
 At \(g_t=1\),
 
@@ -210,7 +267,7 @@ new process innovation \(Q_t\).
 This is the population-level form of Schrödinger's spring: perfect willingness
 to correct cannot compensate for information the animal does not yet possess.
 
-## 6. Overshoot boundary
+## 7. Overshoot boundary
 
 Because
 
@@ -228,7 +285,7 @@ is positive only for \(0<g<2\),
 
 Thus very strong gain is not automatically better.
 
-## 7. Homogeneous stationary variance
+## 8. Homogeneous stationary variance
 
 For constant \(R,Q,\phi,g\),
 
@@ -278,7 +335,7 @@ P_*=
 This gives the irreducible phase-dispersion floor generated jointly by noisy
 checkpoint information and new environmental innovation.
 
-## 8. Direct ecological predictions
+## 9. Direct ecological predictions
 
 ### Prediction 1 — variance funnel
 
@@ -313,7 +370,7 @@ of the downstream phase distribution.
 
 This is the clearest functional test of the proposed "Mikawa-Anjo clock."
 
-## 9. Current evidence boundary
+## 10. Current evidence boundary
 
 The existing natural anchors show compensation, route-stage updating and phase
 retention, but the repository does not currently contain an independent
