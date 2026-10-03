@@ -65,6 +65,23 @@ under climate change.
 PAYOFF-B must not claim that different phenological mechanisms across taxa are
 new.
 
+### Migration-network critical-node theory
+
+Migration-network ecology already recognizes that stopover sites are not
+interchangeable.  Node-removal, betweenness and functional-connectivity
+approaches identify critical sites whose loss has disproportionate effects on
+migration-network integrity (e.g. Xu et al. 2019, *Conservation Biology*,
+DOI 10.1111/cobi.13383; DOI 10.1186/s40462-025-00599-6 for later shorebird
+critical-node work).
+
+PAYOFF-B therefore must not claim novelty for the generic statement that one
+stopover can matter more than another.
+
+Its narrower object is **phase-correction leverage**: the historical
+contribution of a checkpoint to seasonal timing precision.  Generic network
+centrality and phase-correction leverage may correlate, but they are not
+identical by definition.
+
 ### Behavioral flexibility and habitat-loss dependence
 
 Migration literature already shows that the consequences of staging-area or
