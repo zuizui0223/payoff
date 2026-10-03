@@ -355,8 +355,13 @@ Its reduced post-entry retention is
 where \(K_i\) is effective phase information and \(h_i\) is enacted correction.
 For a serial entry gate, \(h_i=O_i g_i\): readiness has already been crossed,
 while remaining opportunity \(O_i\) and decision gain \(g_i\) govern later
-correction. A concurrent physiological gate can instead enter \(h_i\) when
-readiness is independently measured at the same decision stage.
+correction. Here \(O_i\) is the actuator-specific realization of the retained
+actionability \(r(t)\) introduced in Section 2.1. The quantity \(r(t)\)
+summarizes the fraction of the full state-contingent response still usable,
+whereas \(O_i\) is the opportunity factor entering a particular phase-control
+channel; they coincide only in the scalar one-opportunity case. A concurrent
+physiological gate can instead enter \(h_i\) when readiness is independently
+measured at the same decision stage.
 
 Thus the ecological sequence is
 
