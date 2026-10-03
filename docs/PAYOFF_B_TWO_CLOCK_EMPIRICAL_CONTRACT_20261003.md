@@ -40,7 +40,7 @@ P_{next}
 \phi^2P[1-K(Gg)(2-Gg)]+Q.
 \]
 
-Mean and variance moments identify \(K\) and \(h=Gg\) only when \(\phi,Q\)
+Mean and variance moments identify \(K\) and \(h=GOg\) only when \(\phi,Q\)
 are independently supported.
 
 ## Required extra identification
