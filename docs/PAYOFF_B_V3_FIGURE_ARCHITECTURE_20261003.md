@@ -62,6 +62,19 @@ Label the hand-off:
 
 > **entry clock sets the initial error; decision clock sets its retention.**
 
+Add a **dashed carry-over arrow** from physiological state \(s_0\) across the
+handoff into later phase:
+
+\[
+s_{k+1}=\rho s_k,
+\qquad
+e_{k+1}=\lambda e_k+\beta s_k+w_k.
+\]
+
+The dashed arrow means that mechanism control has shifted but physiological
+state can persist. It is explicitly post-hoc and should not be drawn as a
+confirmed mule-deer pathway.
+
 A concurrent readiness gate is an optional extension, not the default
 post-entry assumption.
 
