@@ -40,6 +40,57 @@ Classification: **OPPORTUNITY_LOSS_ANCHOR**.
 
 Do not promote to a portfolio-fragility confirmation.
 
+
+## Tier A — sudden site-loss natural experiment, but not a timing-variance test
+
+### Pink-footed goose / Filsø restoration
+
+Clausen & Madsen (2016), *Journal of Ornithology* 157:229–237,
+DOI 10.1007/s10336-015-1271-9, analysed the sudden 2012 flooding of the former
+Filsø agricultural staging area in Denmark.
+
+Useful properties:
+- abrupt externally imposed loss of a major staging area;
+- individually marked geese with repeated resightings;
+- site-faithful return to Filsø fell from about 88.3% before restoration to
+  9.3% after restoration;
+- former Filsø birds increased use of alternative nearby staging areas,
+  especially Ringkøbing Fjord and Limfjorden;
+- subsequent spring body condition did not differ detectably from birds that
+  had not used Filsø.
+
+This is an important **opportunity-substitution anchor**.
+
+It shows why the portfolio parameter \(\omega\) must not be defined as the
+fraction of named sites physically retained.  Loss of one site can be
+functionally compensated if alternative correction opportunities remain.
+
+Thus
+
+\[
+\text{named-site loss}
+\neq
+\text{effective opportunity loss}.
+\]
+
+For PAYOFF-B, \(\omega\) should represent retained **usable correction
+capacity after rerouting/substitution**, not raw habitat count.
+
+Missing for a direct theorem test:
+- a historical feedback-precision share \(s_{\rm feedback}\);
+- individual entry-phase error on the same coordinate;
+- before/after final phase variance or another declared timing-error endpoint.
+
+The published analysis uses site occupancy and body condition, not a
+same-coordinate timing-variance outcome.  Although the underlying neck-band
+programme contains dated resightings, current public access does not provide a
+frozen analysis-ready individual timing table in the PAYOFF-B repository.
+
+Classification: **OPPORTUNITY_SUBSTITUTION_ANCHOR**.
+
+Do not equate the roughly 80–90% decline in Filsø use with
+\(1-\omega\).
+
 ## Tier B — historical feedback architecture candidate
 
 ### Eurasian curlew long-term GPS tracks
