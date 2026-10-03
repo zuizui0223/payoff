@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_READINESS_MODULATION_CONTRACT_PREOUTCOME",
+  "frozen_submission_affected": false,
+  "source": {
+    "article": "Ortega et al. 2023 Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "source_data_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364"
+  },
+  "sample": {
+    "rule": "reuse the previously frozen temporally safe subset: March scaledIFBFat nonmissing and raw migration start strictly after March 31",
+    "expected_n": 62,
+    "expected_animals": 40
+  },
+  "primary_models": {
+    "movement_rate": "rate.km.day ~ centered_DFP_Start + centered_scaledIFBFat + centered_DFP_Start:centered_scaledIFBFat",
+    "stopover": "stopover.day ~ centered_DFP_Start + centered_scaledIFBFat + centered_DFP_Start:centered_scaledIFBFat",
+    "centering": "global centering within the safe analysis sample before forming the interaction",
+    "uncertainty": "animal-cluster bootstrap, 10000 replicates"
+  },
+  "sensitivity": {
+    "model": "within-year centered response, DFP_Start and scaledIFBFat; interaction formed from the within-year centered predictors",
+    "uncertainty": "animal-cluster bootstrap, 10000 replicates"
+  },
+  "outcome_rule": {
+    "if_interaction_ci_excludes_zero": "label READINESS_MODULATION_SUPPORTED for that actuator only; still not H2 because the dataset does not span a closed versus open readiness gate",
+    "if_interaction_ci_includes_zero": "label READINESS_MODULATION_UNRESOLVED; retain H1_CANDIDATE and channel dissociation",
+    "H2": "never promoted by this audit"
+  },
+  "boundaries": [
+    "interaction is observational moderation, not causal gating",
+    "IFBFat is a readiness proxy/candidate, not direct G",
+    "all analyzed actuator responses occur after migration start",
+    "do not relabel a significant interaction as H2",
+    "frozen GEB V2 unchanged"
+  ]
+}
