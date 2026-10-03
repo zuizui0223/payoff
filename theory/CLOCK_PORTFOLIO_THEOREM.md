@@ -419,3 +419,77 @@ The threshold depends on relative cost curvature.  If feedback is expensive
 (\(b/a\) large), more checkpoints are required before it dominates.  If entry
 precision is expensive (\(a\) large relative to \(b\)), even a small number of
 correction stages can favor feedback.
+
+
+## Robustness to cumulative operating cost
+
+The canonical witness uses
+
+\[
+C_{\rm cap}
+=
+\frac a2x^2+\frac b2y^2,
+\]
+
+so increasing the number of checkpoints increases the precision leverage of one
+feedback-capacity investment. This yields
+
+\[
+s_F^{\rm cap}
+=
+\frac{4an^2}{b+4an^2}.
+\]
+
+If instead feedback has an operating cost paid at every checkpoint,
+
+\[
+C_{\rm use}
+=
+\frac a2x^2+n\frac b2y^2,
+\]
+
+the same precision constraint
+
+\[
+x+2ny=P
+\]
+
+gives
+
+\[
+\boxed{
+s_F^{\rm use}
+=
+\frac{4an}{b+4an}
+}
+\]
+
+and
+
+\[
+\boxed{
+C_{\rm use}^*
+=
+\frac{abP^2}
+{2(b+4an)}.
+}
+\]
+
+Thus the exact exponent of checkpoint number depends on how feedback cost
+accumulates:
+
+- fixed capacity cost -> \(n^2\);
+- additive per-use cost -> \(n\).
+
+But the qualitative checkpoint-number prediction survives in both declared
+cost architectures:
+
+\[
+n\uparrow
+\quad\Rightarrow\quad
+s_F\uparrow.
+\]
+
+Accordingly, PAYOFF-B should not interpret the \(n^2\) term itself as a
+universal biological scaling law. The licensed ecological claim is the
+directional allocation result across these two explicit cost models.
