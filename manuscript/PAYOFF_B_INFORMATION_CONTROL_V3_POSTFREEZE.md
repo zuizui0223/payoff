@@ -1,4 +1,4 @@
-# Seasonal tracking is a sequential information-and-control problem
+# Seasonal mismatch emerges from asymmetric readiness and feedback control
 
 **PAYOFF-B Paper 2 — V3 post-freeze development draft**  
 **Date:** 2026-10-03  
@@ -6,7 +6,7 @@
 
 ## Abstract
 
-**Aim:** We ask when seasonal information becomes useful, how timing error can be corrected after movement begins, and why interacting species can still desynchronize despite substantial adaptive capacity.
+**Aim:** We ask how a shared seasonal change becomes ecological mismatch when interacting organisms differ in physiological readiness, environmental information and feedback correction.
 
 **Location:** General theory, with empirical modules from migratory birds and ungulates in North America and Europe.
 
@@ -14,11 +14,11 @@
 
 **Major taxa studied:** Migratory birds and mule deer, with plant–pollinator and resident–migrant interaction studies as independent benchmarks.
 
-**Methods:** We combine Bayesian decision models, stagewise value-of-information theory, a route-wise signed phase controller, finite coordination games, preregistered macroecological analyses and source-backed natural systems.
+**Methods:** We combine a developmental-readiness gate, Bayesian information timing, route-wise signed phase control, pairwise and network mismatch algebra, finite coordination games, preregistered macroecological analyses and source-backed natural systems.
 
 **Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is \(r(t)[Sq(t)-B]-C(t)\); with exponential learning and recourse loss the unique zero-cost optimum is \(t^*=\log(1+\alpha/\beta)/\alpha\), generally before maximal cue accuracy. Route-wise phase dynamics obey \(e_{t+1}=\phi_t(e_t-u_t)+w_t\). A post-freeze source-data reanalysis of 152 mule-deer animal-years shows that end-of-migration phase variance was 0.249 of start variance (95% animal-cluster bootstrap 0.167–0.362; 0.294 after year centering), while movement speed increased and stopover use decreased continuously with later starting phase. These observations quantify a natural phase funnel with signed compensation but do not identify the latent controller.
 
-**Main conclusions:** Seasonal tracking combines physiological readiness timers with information-dependent decision control. Controller asymmetry can convert a shared seasonal error directly into interaction mismatch: organisms exposed to the same forcing can diverge because they differ in readiness, information, remaining actionability or phase correction. Restored information need not restore coordination after response options or coordinated conventions have been lost.
+**Main conclusions:** Shared climate forcing need not produce shared phenological responses. Mismatch can emerge because interacting organisms differ in when they become ready to act and how they convert imperfect information into correction. Developmental timing, decision feedback and strategic recovery are therefore distinct layers of seasonal adaptation.
 
 **Keywords:** phenological mismatch; migration; information ecology; feedback control; recourse; phase error; climate change
 
@@ -36,13 +36,13 @@ The central difficulty is that information and control change in opposite direct
 
 The intuition can be stated without metaphor: an organism may know the future best only after it has become too late to act on that knowledge. In the motivating analogy used during model development, the migrant is a train travelling toward a destination whose seasonal timetable is not yet fully known—a “Shinkansen to Schrödinger's spring.” The formal theory, however, is standard sequential inference and feedback control applied to an ecological timing problem.
 
-We develop the argument in four linked steps. First, we derive when improving information should be acted upon while response options are disappearing. Second, we introduce a signed route-wise phase controller that allows both late and early individuals to correct error at repeated checkpoints. Third, we show how actors exposed to the same improving information can desynchronize if their correction opportunities decay at different rates. Fourth, we retain the earlier coordination-game result showing that environmental information can recover before coordinated information use recovers.
+We develop the argument in four linked steps. First, we distinguish a developmental/physiological readiness timer from an information-dependent decision controller. Second, we derive when improving information should be acted upon while response options are disappearing and how signed phase error is corrected at repeated checkpoints. Third, we show exactly how differences in readiness, information and feedback convert a shared seasonal error into pairwise and network mismatch. Fourth, we retain the earlier coordination-game result showing why environmental information can recover before coordinated information use recovers.
 
 The empirical evidence is deliberately layered rather than treated as one direct validation. Existing natural data support predictive connectivity, route-stage cue use, bidirectional timing compensation and compensation costs, but do not yet identify the complete latent-state controller in a single system. The direct route-wise test is therefore prospective.
 
 Our revised ecological claim is:
 
-> **Seasonal tracking depends not only on how accurately organisms can infer a future state, but on whether they can still correct their seasonal phase when that information becomes available.**
+> **Shared seasonal change becomes ecological mismatch when interacting organisms differ in when they become ready to respond and in how they convert information into phase correction.**
 
 ---
 
