@@ -117,5 +117,39 @@
     "No claim of first meta-analysis until systematic novelty search is complete.",
     "V5 novelty is prospective quantitative synthesis of stage-to-stage day-for-day timing propagation and its moderators."
   ],
-  "outcome_access_state": "UNOPENED"
+  "outcome_access_state": "UNOPENED",
+  "corpus_admission_gate": {
+    "minimum_total_primary_effects": 20,
+    "minimum_unique_underlying_datasets_total": 10,
+    "minimum_unique_underlying_datasets_per_primary_class": 5,
+    "primary_classes": [
+      "STATIONARY",
+      "ACTIVE_MIGRATION"
+    ],
+    "h2_available_time_gate": {
+      "minimum_stationary_effects": 10,
+      "minimum_unique_underlying_datasets": 5
+    },
+    "failure_rule": "If any primary H1 class gate fails, do not fit or interpret the stationary-versus-active primary meta-regression. If the H2 gate fails, do not fit or interpret the available-time moderator. Thresholds may not be lowered after effect sizes are opened."
+  },
+  "effect_source_priority": [
+    "raw individual-level data re-estimated under the V5 definition",
+    "directly reported unstandardized stage-to-stage slope with uncertainty",
+    "figure-reconstructed unstandardized slope for sensitivity only"
+  ],
+  "duplicate_data_rule": {
+    "unit": "underlying tracked individuals or paired cohort, not publication",
+    "rule": "Do not count the same underlying individuals/cohort twice for the same transition when reused across publications or syntheses.",
+    "secondary_synthesis": "Effects reported in a synthesis are not additionally counted when their primary underlying dataset is already included."
+  },
+  "forbidden_transformations": [
+    "correlation_to_beta",
+    "repeatability_to_beta",
+    "standardized_path_coefficient_to_day_for_day_beta"
+  ],
+  "prior_art_update": [
+    "Schmaljohann 2019 already estimated multi-species departure-to-arrival day-for-day slopes.",
+    "van Bemmelen et al. 2024 already used stage-to-stage timing slopes as carry-over/compensation strength.",
+    "V5 novelty, if any, is cross-transition-class synthesis rather than the slope concept itself."
+  ]
 }
