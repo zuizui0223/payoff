@@ -30,12 +30,38 @@
     "estimating historical feedback reliance from the same post-perturbation phase error used to test fragility",
     "treating a published route-scale surfing decline alone as an estimate of omega",
     "treating the Aikens industrial mule-deer system as a confirmation without a direct phase-retention/opportunity decomposition",
-    "retuning frozen GEB V2 or preregistered outcomes"
+    "retuning frozen GEB V2 or preregistered outcomes",
+    "interpreting a population-level before/after timing-variance change as within-individual fragility without accounting for survival/observation reweighting"
   ],
   "current_anchor": {
     "system": "Aikens et al. 2022 industrial mule deer",
     "licensed": "landscape development altered migration behavior and reduced route-scale green-wave surfing; PAYOFF-B reanalysis found lower near-boundary movement-control permeability in large-development population",
     "not_licensed": "direct clock-portfolio fragility test; omega, s_feedback and target-relative variance inflation are not identified"
   },
-  "decision_rule": "No natural system is promoted as a portfolio-fragility confirmation until historical feedback reliance and opportunity loss are independently identified before the downstream mismatch outcome is evaluated."
+  "decision_rule": "No natural system is promoted as a portfolio-fragility confirmation until historical feedback reliance and opportunity loss are independently identified before the downstream mismatch outcome is evaluated.",
+  "identification_guards": {
+    "effective_opportunity": "omega must represent retained usable correction capacity after substitution/rerouting, not raw named-site or habitat-area retention",
+    "within_individual": "before/after population timing change is insufficient unless repeated individuals/matched counterfactuals identify within-individual response",
+    "selection": "survival/observation reweighting of timing phenotypes must be measured or modelled; selection-driven composition change is not clock fragility"
+  },
+  "current_additional_anchors": [
+    {
+      "system": "Sweeney et al. 2026 piping plover / Hurricane Dorian",
+      "role": "OPPORTUNITY_LOSS_BEHAVIOR_ANCHOR",
+      "licensed": "external storm-driven habitat loss with public repeated-individual encounter data and reported shorter stopover duration",
+      "not_licensed": "portfolio-fragility confirmation because no downstream destination-phase endpoint or historical feedback share is identified"
+    },
+    {
+      "system": "Peng et al. 2023 great knot / Yellow Sea",
+      "role": "SELECTION_REWEIGHTING_ANCHOR",
+      "licensed": "late/lean phenotypes had lower apparent survival during habitat loss/deterioration, showing composition can shift under perturbation",
+      "not_licensed": "within-individual timing fragility or feedback-share inference"
+    },
+    {
+      "system": "Clausen & Madsen 2016 pink-footed goose / Filso",
+      "role": "OPPORTUNITY_SUBSTITUTION_ANCHOR",
+      "licensed": "birds shifted to alternative staging areas after loss of a focal site",
+      "not_licensed": "raw site-use decline as effective opportunity loss 1-omega"
+    }
+  ]
 }
