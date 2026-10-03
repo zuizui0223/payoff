@@ -185,6 +185,28 @@ The direct natural route-wise controller remains prospective: no existing
 dataset is claimed to identify checkpoint cue quality, internal phase estimate,
 feedback gain, passive retention and remaining actionability simultaneously.
 
+
+A post-freeze public Source Data audit of Ortega et al. (2023) now quantifies
+the strongest current natural route-control anchor:
+
+\`\`\`text
+MULE_DEER_ANIMAL_YEARS = 152
+MULE_DEER_INDIVIDUALS = 72
+START_PHASE_SD_DAYS = 26.406
+END_PHASE_SD_DAYS = 13.173
+END_START_VARIANCE_RATIO = 0.2489
+ANIMAL_CLUSTER_BOOTSTRAP_95 = [0.1667, 0.3617]
+WITHIN_YEAR_VARIANCE_RATIO = 0.2940
+WHOLE_ROUTE_LAMBDA = 0.10734
+MOVEMENT_RATE_VS_START_PHASE = +0.06834 km d^-1 per phase day
+STOPOVER_VS_START_PHASE = -0.4919 d per phase day
+\`\`\`
+
+These values quantify the published resynchronization and signed compensation
+in continuous animal-year data. They do not identify latent \(K\), \(g\),
+\(\phi\), \(r\) or \(D_{eff}\), and they do not change the frozen V2
+submission state.
+
 ```text
 V2_SUBMISSION_STATUS = FROZEN_ACCESS_BLOCKED
 V3_POSTFREEZE_STATUS = DEVELOPMENT_INTEGRATED
