@@ -116,7 +116,12 @@ class StationaryPhaseVariance:
 
 @dataclass(frozen=True)
 class PhaseSenseInverse:
-    """Information weight and feedback gain inferred from phase moments."""
+    """Legacy one-clock inverse.
+
+    In the two-clock architecture, inferred_control_gain should be interpreted
+    as effective enacted gain h=G*g_decision unless full readiness G=1 is
+    independently justified.  The field name is retained for API compatibility.
+    """
 
     prior_variance: float
     next_variance: float
@@ -647,7 +652,13 @@ def infer_phase_information_weight(
     mean_phase_retention: float,
     tolerance: float = 1e-10,
 ) -> PhaseSenseInverse:
-    """Infer checkpoint information weight and feedback gain from phase moments.
+    """Infer checkpoint information weight and effective enacted gain.
+
+    Compatibility note:
+      this function predates the explicit two-clock split.  Its symbol g and
+      returned inferred_control_gain are the enacted/effective gain h.  When
+      readiness is independently known to be G=1, h equals decision gain.
+      Otherwise use src.two_clock_identification to separate the layers.
 
     For the noisy individualized Gaussian controller,
 
@@ -671,9 +682,11 @@ def infer_phase_information_weight(
         K = d^2 / (v - 1 + 2d),
         g = d / K.
 
-    Both an effective checkpoint information weight K and feedback gain g are
+    Both an effective checkpoint information weight K and enacted gain h are
     therefore recoverable from mean and variance retention, provided passive
     retention phi and process innovation Q are identified independently.
+    Physiological readiness G and decision gain g_decision are not separately
+    recovered without one additional independent quantity.
 
     The inverse is not identified when lambda=phi because only the product gK
     is then known to be zero. It must not be used by estimating phi or Q from
