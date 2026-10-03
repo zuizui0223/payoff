@@ -1,6 +1,6 @@
 {
   "date": "2026-10-03",
-  "status": "PREOUTCOME_REVISED_AFTER_PRIOR_ART_AUDIT",
+  "status": "PREOUTCOME_FINAL_AFTER_FIELD_PRIOR_ART_AUDIT",
   "source": {
     "citation": "Wang et al. 2024 Nature Communications 15:4111",
     "doi": "10.1038/s41467-024-48248-7",
@@ -64,12 +64,36 @@
     "no_outlier_trimming": "No outcome-based trimming; only impossible dates or documented source errors may be excluded."
   },
   "primary_analysis": {
-    "stage_1": "Estimate beta_s separately by species and season using arrival_anomaly ~ 0 + departure_anomaly, solely as an intermediate prior-art coordinate.",
-    "uncertainty": "Cluster/bootstrap at study-year stratum when at least 3 strata exist; otherwise HC3 robust SE and flag limited clustering.",
-    "stage_2": "Test beta_s ~ log species-mean migration distance using uncertainty-weighted meta-regression; report the slope and residual heterogeneity.",
-    "primary_test": "Does migration distance predict species-specific departure-to-arrival retention in spring?",
-    "paired_season_test": "Among species eligible in both seasons, estimate mean beta_spring - beta_autumn with species-paired bootstrap as a secondary test of stronger spring time selection.",
-    "interpretation": "Do not claim novelty for species-specific beta_s or its heterogeneity. Novelty, if any, is restricted to an ecological explanation of that heterogeneity."
+    "model": "One-stage multilevel moderation model on eligible individual-level spring records.",
+    "response": "arrival_anomaly centered within species x paper/study x tracking_year.",
+    "focal_predictor": "departure_anomaly centered in the same stratum.",
+    "distance_decomposition": [
+      "between-species log migration distance = species mean log spring migration distance, standardized",
+      "within-species log migration distance = individual log spring migration distance minus species mean, standardized when informative"
+    ],
+    "fixed_effects": [
+      "departure_anomaly",
+      "between-species log migration distance",
+      "departure_anomaly x between-species log migration distance [PRIMARY]",
+      "within-species log migration distance when sufficiently variable",
+      "departure_anomaly x within-species log migration distance [SECONDARY]"
+    ],
+    "random_effects": [
+      "species random intercept",
+      "species random slope for departure_anomaly",
+      "paper/study random intercept where identifiable"
+    ],
+    "primary_test": "The coefficient of departure_anomaly x between-species log migration distance. This tests whether migration distance explains interspecific variation in the amount of departure timing retained to arrival.",
+    "competing_predictions": {
+      "recourse_opportunity": "negative interaction: longer-distance species compress a given departure deviation more strongly before arrival",
+      "time_constraint": "positive interaction: longer-distance species preserve/amplify a given departure deviation more strongly because schedules are tighter"
+    },
+    "secondary_outputs": [
+      "species-specific shrunken retention slopes beta_s for visualization only; prior art, not novelty",
+      "spring-autumn contrast if the autumn eligibility gate independently passes",
+      "body-mass moderation as context only"
+    ],
+    "interpretation": "A null primary interaction closes the comparative route. Species-specific beta_s heterogeneity cannot rescue the paper because it is prior art."
   },
   "moderator_analysis": {
     "status": "PRIMARY_DISTANCE_PLUS_SECONDARY_BODY_MASS_PREDECLARED_BEFORE_OUTCOMES",
@@ -83,15 +107,17 @@
     "direction": "two-sided because the two ecological mechanisms make opposing predictions."
   },
   "admission_rule": {
-    "comparative_route_supported": "At least 20 eligible species and species-level beta_s estimable.",
-    "novel_route_supported": "The predeclared migration-distance meta-regression is estimable in at least 20 species and its declared uncertainty interval excludes zero.",
-    "secondary_support": "Spring-autumn paired contrast or body-mass moderator may contextualize the result but cannot rescue a null migration-distance test.",
-    "null_route": "If the migration-distance effect is unresolved, close the comparative PAYOFF-B lane; do not promote beta_s heterogeneity itself because Schmaljohann 2019 already established it."
+    "data_gate": "At least 20 species with >=8 informative paired individual records in spring after declared centering and nonzero departure variation.",
+    "distance_gate": "At least 20 eligible species with nonmissing migration distance and sufficient between-species distance variation.",
+    "primary_success": "The declared uncertainty interval for departure_anomaly x between-species log migration distance excludes zero.",
+    "secondary_only": "Within-species distance interaction, spring-autumn contrast, and body mass cannot rescue a null primary distance interaction.",
+    "fail_closed": "If any gate fails or the primary interaction is unresolved, close the comparative PAYOFF-B route without subgroup searches or threshold relaxation."
   },
   "transparency": [
     "The Wang dataset has been used previously for pooled SEM; PAYOFF-B cannot claim discovery that departure predicts arrival.",
     "No numerical timing values may be inspected before this contract is committed.",
     "Schema probing may inspect file names, sheet names, headers and row counts only.",
-    "The contract was revised before Wang timing values were inspected because Schmaljohann 2019 was discovered to have already estimated species-specific start-to-arrival slopes. The revision narrows candidate novelty to ecological drivers of retention heterogeneity, principally migration distance."
+    "The contract was revised before Wang timing values were inspected because Schmaljohann 2019 was discovered to have already estimated species-specific start-to-arrival slopes. The revision narrows candidate novelty to ecological drivers of retention heterogeneity, principally migration distance.",
+    "After Ralston et al. 2025 was identified as explicitly proposing migration distance as a determinant of compensation after delayed departure, the final preoutcome model was changed from a two-stage beta_s meta-regression to the equivalent but more direct cross-level interaction departure_anomaly x migration_distance. No Wang timing outcomes had been inspected."
   ]
 }
