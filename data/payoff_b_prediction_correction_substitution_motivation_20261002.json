@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-02",
+  "status": "POSTHOC_MOTIVATION_ONLY_NOT_CONFIRMATORY",
+  "frozen_submission_affected": false,
+  "theory_timing": "prediction-correction substitution model derived after these barnacle and wigeon outcomes were available",
+  "stable_barnacle_registry_subset": [
+    {
+      "flyway": "Greenland",
+      "transition": "R2 -> R3",
+      "predictability_r": 0.169,
+      "abs_lambda": 0.130730883,
+      "correction_fraction": 0.869269117
+    },
+    {
+      "flyway": "Barents",
+      "transition": "R1 -> R2",
+      "predictability_r": 0.892,
+      "abs_lambda": 0.494113942,
+      "correction_fraction": 0.505886058
+    },
+    {
+      "flyway": "Barents",
+      "transition": "R1 -> R5",
+      "predictability_r": -0.002,
+      "abs_lambda": 0.0086,
+      "correction_fraction": 0.9914
+    },
+    {
+      "flyway": "Barents",
+      "transition": "R2 -> R3",
+      "predictability_r": 0.95,
+      "abs_lambda": 0.538,
+      "correction_fraction": 0.462
+    },
+    {
+      "flyway": "Barents",
+      "transition": "R3 -> R5",
+      "predictability_r": 0.283,
+      "abs_lambda": 0.225,
+      "correction_fraction": 0.775
+    }
+  ],
+  "subset_description": {
+    "n": 5,
+    "stable_phase_map_only": true,
+    "predictability_and_abs_lambda_rank_same_direction": true,
+    "predictability_and_correction_fraction_rank_opposite_direction": true,
+    "inferential_p_value_reported": false,
+    "reason": "post hoc stable-row subset within one species/flyway panel; rank pattern is descriptive only"
+  },
+  "broader_existing_screen": {
+    "source": "manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md",
+    "matched_pairs": 7,
+    "prediction": "higher phenological predictability should imply stronger behavioral correction",
+    "spearman_rho": -0.464,
+    "p": 0.294,
+    "status": "NOT_SUPPORTED",
+    "interpretation": "do not replace this broader screen with the cleaner five-row descriptive subset"
+  },
+  "wigeon_registered_result": {
+    "source": "docs/PAYOFF_B_WIGEON_PREDICTIVE_CONNECTIVITY_RESULT_20260926.md",
+    "transitions": 224,
+    "individuals": 28,
+    "estimate": 0.0202,
+    "ci95": [
+      -0.1058,
+      0.1461
+    ],
+    "p": 0.756,
+    "registered_prediction": "higher predictive connectivity -> stronger correction",
+    "status": "NOT_SUPPORTED"
+  },
+  "allowed_use": [
+    "motivate prospective theory in which prediction and correction can substitute",
+    "illustrate why predictability and feedback correction should remain separate axes",
+    "design a new independent test"
+  ],
+  "forbidden_use": [
+    "claim barnacle geese confirm prediction-correction substitution",
+    "claim the five-row rank pattern is a preregistered test",
+    "report a post hoc significance test on the five-row subset as confirmatory",
+    "reinterpret the wigeon registered null as support for the new model",
+    "drop the broader seven-pair screen because the five stable rows look cleaner"
+  ]
+}
