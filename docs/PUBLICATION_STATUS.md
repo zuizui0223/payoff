@@ -210,27 +210,28 @@ Exact route-wise state representation:
 e_(t+1) = phi_t [e_t - u_t] + w_t
 ```
 
-and, under perfect estimation, proportional feedback, no clipping and zero
-target shift,
+In the explicit readiness-opportunity architecture define
+
+\[
+h_t=G_tO_tg_t.
+\]
+
+Under perfect phase information, no clipping and zero target shift,
 
 ```text
-lambda_t = phi_t (1 - g_t).
+lambda_t = phi_t (1 - h_t).
 ```
 
-This is an identification bridge, not permission to relabel empirical
-`lambda` as actionability `r` or feedback gain `g`.
-
-
-The post-freeze population-variance extension gives
+The post-freeze population-variance extension is
 
 \[
 P_{t+1}
 =
-\phi_t^2P_t[1-K_tg_t(2-g_t)]+Q_t,
+\phi_t^2P_t[1-K_th_t(2-h_t)]+Q_t,
 \]
 
-where \(K_t\) is the effective checkpoint-information weight and \(Q_t\) is
-new process innovation. A common open-loop timing correction has no
+where \(K_t\) is effective checkpoint-information weight and \(Q_t\) is new
+process innovation. A common open-loop timing correction has no
 state-dependent contraction term:
 
 \[
@@ -239,47 +240,37 @@ P_{t+1}^{open}
 \phi_t^2P_t+Q_t.
 \]
 
-Thus individualized feedback has a prospective **phase-variance funnel**
-signature beyond a shared timing programme.
-
-Under noisy individualized phase estimation, regression-scale mean retention is
+Under noisy phase estimation,
 
 \[
 \lambda_t
 =
-\phi_t(1-g_tK_t),
+\phi_t(1-h_tK_t).
 \]
 
-with \(\lambda_t=\phi_t(1-g_t)\) only as the perfect-information special case.
 Define
 
 \[
-d_t=1-\frac{\lambda_t}{\phi_t}
-\]
-
-and
-
-\[
+d_t=1-\frac{\lambda_t}{\phi_t},
+\qquad
 v_t=
-\frac{P_{t+1}-Q_t}
-{\phi_t^2P_t}.
+\frac{P_{t+1}-Q_t}{\phi_t^2P_t}.
 \]
 
-When \(d_t\neq0\), the declared Gaussian controller gives
+When \(d_t\neq0\),
 
 \[
 K_t=
-\frac{d_t^2}
-{v_t-1+2d_t},
+\frac{d_t^2}{v_t-1+2d_t},
 \qquad
-g_t=
+h_t=
 \frac{d_t}{K_t}.
 \]
 
-This phase-sense inverse is exact only under the declared Gaussian controller
-and requires independent passive-retention and process-innovation references.
-It must not be back-solved from the same transition used to define
-\(\phi_t\) or \(Q_t\).
+Thus mean plus variance identify \(K_t\) and effective enacted correction
+\(h_t=G_tO_tg_t\), not the primitive readiness, opportunity and decision-gain
+components separately.  The inverse requires independent \(\phi_t,Q_t\) and
+must not be back-solved from the same transition used to define them.
 
 Mule-deer prior art is explicit. Ortega et al. (2023) already document large
 initial phenological mismatch, bidirectional speed/stopover compensation and
