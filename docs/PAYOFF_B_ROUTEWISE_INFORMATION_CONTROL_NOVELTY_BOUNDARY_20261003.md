@@ -88,13 +88,16 @@ one generic control ingredient:
 6. the existing empirical phase-retention coordinate can be related to a
    simple feedback representation through
 
-       lambda = phi (1-g),
+       lambda = phi (1-g)  [perfect-information special case],
 
    while explicitly refusing to identify lambda with actionability or control
    gain without additional information;
-7. mean and variance retention can be combined, with an independent passive
-   reference, to identify an effective checkpoint-information weight under the
-   declared Gaussian controller;
+7. under noisy checkpoint information, mean retention becomes
+       lambda = phi (1-gK),
+   and mean plus variance retention can, with independent passive-retention
+   and process-innovation references, separate an effective checkpoint-
+   information weight K from feedback gain g under the declared Gaussian
+   controller;
 8. these within-actor information/control differences are then connected to
    **between-actor seasonal mismatch and coordination recovery**, including the
    exact Paper-2 result that restored information need not restore coordinated
