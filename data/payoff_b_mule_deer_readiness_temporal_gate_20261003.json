@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_READINESS_TEMPORAL_ORDER_CONTRACT_PREOUTCOME",
+  "frozen_submission_affected": false,
+  "source": {
+    "article": "Ortega et al. 2023 Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "dryad": "10.5061/dryad.8kprr4xsj",
+    "csv": "Ortega_et_al_2023_Data.csv"
+  },
+  "question": "Can March scaledIFBFat serve as a temporally prior physiological-readiness variable in the same mule-deer animal-years that show signed migration feedback?",
+  "primary_temporal_gate": {
+    "rule": "retain only animal-years with non-missing scaledIFBFat and DOY.migration.start strictly after the last day of March",
+    "non_leap_year_last_march_doy": 90,
+    "leap_year_last_march_doy": 91,
+    "rationale": "the source paper states nutritional condition is % scaled IFBFat in March but the public CSV lacks exact capture date; starts after March 31 guarantee that any March measurement preceded migration start"
+  },
+  "evidence_updates": {
+    "if_safe_rows_exist": "mule deer timer evidence may move from T0 to T3_CANDIDATE because a physiological state was measured before the event and the source GLMM reports a weak start-timing association; hybrid may move to H1_CANDIDATE because D2 signed feedback is already present in the same system",
+    "if_no_safe_rows": "retain T0/D2; no readiness upgrade",
+    "H2_requirement": "requires a preregistered IFBFat/readiness × signed-phase interaction on downstream actuator response; coexistence of IFBFat and D2 is insufficient"
+  },
+  "forbidden": [
+    "treat March IFBFat as pre-departure when the migration start occurred during or before March without exact capture date",
+    "claim nutritional condition is a molecular clock",
+    "claim H2 readiness-gated feedback from the source paper's separate main effects",
+    "retune frozen GEB V2 or preregistered results"
+  ]
+}
