@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_READINESS_SOURCE_DATA_ANALYSIS_FROZEN_PREOUTCOME",
+  "frozen_submission_affected": false,
+  "source": {
+    "article": "Ortega et al. 2023 Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "source_data_file": "41467_2023_37750_MOESM4_ESM.xlsx",
+    "sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+    "readiness_sheet": "SFig1",
+    "phase_sheet": "Fig1a,b;Fig3;SFig2;STables1,6"
+  },
+  "source_semantics": {
+    "readiness_variable": "scaledIFBFat",
+    "event_variable": "standardized_DOY_Start",
+    "raw_start_variable": "DOY_Start",
+    "join_key": "id_yr",
+    "article_model_statement": "% scaled IFBFat in March was included as nutritional condition in the spring-migration-start GLMM; nutritional condition weakly influenced departure timing"
+  },
+  "temporal_order_gate": {
+    "rule": "retain joined rows only if raw DOY_Start is strictly after March 31 for that year",
+    "march31_doy_nonleap": 90,
+    "march31_doy_leap": 91,
+    "rationale": "any measurement made in March necessarily precedes a spring-migration start after March 31; exact capture date is not required for this subset"
+  },
+  "primary": {
+    "estimand": "OLS slope of standardized_DOY_Start on scaledIFBFat in temporally safe rows",
+    "direction": "report two-sided; do not impose sign after seeing source result",
+    "uncertainty": "animal-cluster bootstrap 10000 replicates using animal ID parsed from id_yr",
+    "covariates": "none in primary because standardized_DOY_Start is already centered relative to annual median; report year fixed-effect OLS as sensitivity"
+  },
+  "sensitivities": [
+    "all source SFig1 rows, labeled source-figure reproduction without guaranteed temporal order",
+    "safe rows with year fixed effects",
+    "Spearman rank correlation in safe rows",
+    "leave-one-animal-out slope range"
+  ],
+  "classification_rule": {
+    "if_safe_n_at_least": 20,
+    "and_bootstrap_interval_excludes_zero": "upgrade mule-deer timer evidence from T0 to T3_CANDIDATE and hybrid evidence to H1_CANDIDATE, because a physiological state measured before migration predicts readiness timing while D2 signed feedback is independently present",
+    "otherwise": "retain T0/D2 or mark T3_UNRESOLVED; do not force upgrade",
+    "H2": "never upgraded by this analysis; H2 requires readiness-gated phase-to-actuator feedback in a separate registered test"
+  },
+  "forbidden": [
+    "call IFBFat a molecular clock",
+    "use rows starting on/before March 31 as temporally ordered readiness evidence without exact capture dates",
+    "interpret a readiness main effect as H2 gating",
+    "retune frozen GEB V2 or preregistered outcomes"
+  ]
+}
