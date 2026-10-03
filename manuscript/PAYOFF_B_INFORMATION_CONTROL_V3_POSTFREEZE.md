@@ -16,7 +16,7 @@
 
 **Methods:** We combine Bayesian decision models, stagewise value-of-information theory, a route-wise signed phase controller, finite coordination games, preregistered macroecological analyses and source-backed natural systems.
 
-**Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is (r(t)[Sq(t)-B]-C(t)); with exponential learning and recourse loss the unique zero-cost optimum is (t^*=\log(1+\alpha/\beta)/\alpha), generally before maximal cue accuracy. Route-wise phase dynamics obey (e_{t+1}=\phi_t(e_t-u_t)+w_t); under perfect estimation and proportional feedback, phase retention decomposes as (\lambda_t=\phi_t(1-g_t)). Thus early and late errors can be corrected in opposite directions and departure error need not equal arrival error. Natural evidence independently supports predictive connectivity, heterogeneous temperature responsiveness, route-stage compensation and compensation costs. The model additionally predicts a phase-variance funnel under individualized feedback, but the full controller is not yet identified in one system.
+**Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is \(r(t)[Sq(t)-B]-C(t)\); with exponential learning and recourse loss the unique zero-cost optimum is \(t^*=\log(1+\alpha/\beta)/\alpha\), generally before maximal cue accuracy. Route-wise phase dynamics obey \(e_{t+1}=\phi_t(e_t-u_t)+w_t\). A post-freeze source-data reanalysis of 152 mule-deer animal-years shows that end-of-migration phase variance was 0.249 of start variance (95% animal-cluster bootstrap 0.167–0.362; 0.294 after year centering), while movement speed increased and stopover use decreased continuously with later starting phase. These observations quantify a natural phase funnel with signed compensation but do not identify the latent controller.
 
 **Main conclusions:** Seasonal tracking is a sequential inference-and-control problem. Mismatch can arise because interacting organisms differ in when they can infer a future seasonal state, how long that information remains actionable and how strongly they can correct phase error after learning it. Restored information need not restore coordination after response options or coordinated conventions have been lost.
 
@@ -356,11 +356,56 @@ with 95% CI (+0.121) to (+0.722) and (p=0.0077). Because negative slopes denote 
 
 This pattern is not uniquely diagnostic of information distance; endogenous timing and photoperiodic control remain alternative explanations.
 
-### 3.3 Mule deer show signed route compensation
+### 3.3 Mule deer show a continuous phase funnel with signed route compensation
 
-Published tracking of 72 adult female mule deer over 152 animal-years provides a natural example of phase correction during movement. Early migrants began about 30 days ahead of peak instantaneous rate of green-up, whereas late migrants began about 20 days behind. Late migrants moved about 2.5 times faster and spent about 72% less time on stopovers than early migrants.
+Ortega et al. (2023) already established that Red Desert mule deer can begin
+migration far ahead of or behind peak green-up and resynchronize en route by
+changing movement speed and stopover use. PAYOFF-B does not claim that
+phenomenon as new.
 
-This is consistent with signed correction: late phase error is followed by advancement through speed and stopover compression. The source summaries do not identify the internal phase estimate, passive retention or feedback gain.
+A post-freeze descriptive reanalysis of the public Source Data file uses all
+152 animal-years from 72 adult females. Signed Days-From-Peak phase had an
+across-animal-year standard deviation of 26.41 d at migration start and 13.17 d
+at migration end. The end/start variance ratio was
+
+\[
+0.249,
+\]
+
+with a 95% animal-cluster bootstrap interval of 0.167–0.362. After removing
+year-specific start and end means, the variance ratio remained
+
+\[
+0.294
+\quad
+(95\%\ \mathrm{CI}: 0.206\text{--}0.405).
+\]
+
+The whole-route continuous phase-retention slope was
+
+\[
+\lambda=0.107
+\quad
+(95\%\ \mathrm{cluster\ bootstrap}: 0.013\text{--}0.209),
+\]
+
+and 107 of 152 animal-years (70.4%) ended closer to peak green-up than they
+started. Mean absolute phase error declined from 21.91 d to 11.12 d.
+
+The same individual-level source table gives the expected signed actuator
+directions. Each additional day of positive start-phase error was associated
+descriptively with \(+0.0683\) km d\(^{-1}\) higher movement rate
+(95% animal-cluster bootstrap 0.0554–0.0800) and \(-0.492\) d of stopover use
+(95% interval \(-0.569\) to \(-0.412\)). After year centering, the corresponding
+slopes remained \(+0.0852\) and \(-0.614\), with both bootstrap intervals
+excluding zero.
+
+These results quantify the published convergence in continuous animal-year
+data and reproduce the signed actuator geometry required by the route-wise
+model. They do **not** identify the internal phase estimate, passive retention,
+information weight or feedback gain. Measurement error, passive dynamics,
+selection and changing environmental variance remain alternative contributors
+to the observed variance funnel.
 
 ### 3.4 Bar-tailed godwits absorb early departure later in the route
 
