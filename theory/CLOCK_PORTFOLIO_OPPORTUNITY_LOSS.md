@@ -165,7 +165,68 @@ This does **not** mean more checkpoints are harmful in intact environments.
 They lower the cost of achieving precision.  The vulnerability appears only
 when the historically available architecture is suddenly removed.
 
-## 6. Climate-change and land-use interpretation
+## 6. Flexibility-dependence tradeoff
+
+The same checkpoint number \(n\) that increases feedback reliance also reduces
+the minimum cost of hitting the target precision in the intact environment.
+
+At the quadratic optimum,
+
+\[
+\boxed{
+C^*(n)
+=
+\frac{abP^2}
+{2(b+4an^2)}.
+}
+\]
+
+For \(n>0\),
+
+\[
+\frac{dC^*}{dn}<0.
+\]
+
+Meanwhile, for any fixed opportunity-loss fraction
+\(\omega<1\),
+
+\[
+\log F(n)
+=
+(1-\omega)P
+\frac{4an^2}{b+4an^2},
+\]
+
+and
+
+\[
+\frac{d\log F}{dn}>0.
+\]
+
+Therefore:
+
+\[
+\boxed{
+n\uparrow
+\quad\Rightarrow\quad
+\text{intact precision becomes cheaper}
+\quad\text{but}\quad
+\text{opportunity-loss fragility increases}.
+}
+\]
+
+This is a **flexibility-dependence tradeoff**.
+
+Repeated correction opportunities are beneficial when the route architecture is
+intact.  Because the historical optimum then shifts precision investment toward
+feedback, the same architecture becomes more dependent on retaining those
+opportunities.
+
+The result explains how high behavioral flexibility can coexist with high
+environmental sensitivity: flexibility is robust to timing error but vulnerable
+to removal of the conditions that make correction possible.
+
+## 7. Climate-change and land-use interpretation
 
 The opportunity-loss parameter \(\omega\) can represent different mechanisms:
 
@@ -178,7 +239,7 @@ The opportunity-loss parameter \(\omega\) can represent different mechanisms:
 The theorem is intentionally agnostic about which physical mechanism reduces
 \(\omega\).
 
-## 7. Industrial mule deer as an anchor, not a validation
+## 8. Industrial mule deer as an anchor, not a validation
 
 Aikens et al. (2022) provide a relevant natural boundary case.  Industrial
 energy development in a mule-deer migration corridor altered migration
@@ -203,7 +264,7 @@ or the clock-portfolio fragility factor.
 The industrial system is therefore an **opportunity-loss anchor**, not a test
 of the theorem.
 
-## 8. Strong prospective test
+## 9. Strong prospective test
 
 A direct test should use the same taxon or population under different
 opportunity regimes.
@@ -231,7 +292,7 @@ mismatch. It is:
 Systems historically relying more on downstream correction should be more
 sensitive to the same proportional loss of correction opportunity.
 
-## 9. Evolutionary rescue
+## 10. Evolutionary rescue
 
 If the new opportunity regime persists, selection can in principle reallocate
 investment toward the entry timer.
@@ -247,7 +308,7 @@ This generates a temporal prediction:
 3. if upstream precision is physiologically constrained, chronic mismatch can
    remain.
 
-## 10. Boundary
+## 11. Boundary
 
 The exponential precision functions and quadratic costs are a transparent
 mathematical witness, not a universal cost law.
