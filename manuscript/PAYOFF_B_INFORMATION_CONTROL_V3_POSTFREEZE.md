@@ -816,7 +816,7 @@ A species can therefore become more mismatched without losing its intrinsic abil
 The pairwise mode decomposition clarifies why interaction mismatch need not
 require different climate exposure. A common environmental displacement enters
 both actors as a shared phase error, but differences in effective retention
-\(\lambda_i=\phi_i(1-g_iK_i)\) convert part of that common mode into a
+\(\lambda_i=\phi_i(1-G_i g_iK_i)\) convert part of that common mode into a
 differential mode.
 
 This distinction changes comparative interpretation. A resident and a migrant,
