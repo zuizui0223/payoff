@@ -3,6 +3,7 @@ import pytest
 from src.weighted_correction_opportunity import (
     disrupted_weighted_portfolio,
     effective_opportunity_retention,
+    effective_opportunity_retention_from_feedback_shares,
     optimal_weighted_clock_portfolio,
     shared_capacity_clock_portfolio,
     weighted_route_leverage,
@@ -129,3 +130,41 @@ def test_invalid_retention_length_rejected():
             p,
             checkpoint_retention=[1.0],
         )
+
+
+def test_share_based_effective_retention_matches_optimum_weighting():
+    p = optimal_weighted_clock_portfolio(
+        100.0,
+        10.0,
+        timer_cost_curvature=1.0,
+        checkpoint_leverages=[1.0, 3.0],
+        checkpoint_cost_curvatures=[1.0, 1.0],
+    )
+    o = [1.0, 0.0]
+    from_shares = effective_opportunity_retention_from_feedback_shares(
+        p.checkpoint_feedback_shares,
+        o,
+    )
+    from_model = effective_opportunity_retention(
+        p.checkpoint_leverages,
+        p.checkpoint_cost_curvatures,
+        o,
+    )
+    assert from_shares == pytest.approx(from_model)
+
+
+def test_share_based_retention_is_cost_independent():
+    # Historical checkpoint shares are already the sufficient weights.
+    omega = effective_opportunity_retention_from_feedback_shares(
+        [0.05, 0.15, 0.30],
+        [1.0, 0.0, 0.5],
+    )
+    assert omega == pytest.approx((0.05 + 0.15) / 0.50)
+
+
+def test_zero_feedback_share_makes_opportunity_loss_irrelevant():
+    omega = effective_opportunity_retention_from_feedback_shares(
+        [0.0, 0.0],
+        [0.0, 0.0],
+    )
+    assert omega == pytest.approx(1.0)
