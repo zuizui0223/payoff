@@ -225,3 +225,38 @@ def test_separating_readiness_requires_known_opportunity_gate():
         opportunity_gate=0.5,
     )
     assert result.decision_gain == pytest.approx(1.2)
+
+
+def test_readiness_opportunity_and_gain_are_jointly_confounded_by_same_h():
+    a = two_clock_forward(
+        passive_retention=0.9,
+        readiness_gate=1.0,
+        opportunity_gate=0.5,
+        decision_gain=0.8,
+        information_weight=0.7,
+    )
+    b = two_clock_forward(
+        passive_retention=0.9,
+        readiness_gate=0.5,
+        opportunity_gate=1.0,
+        decision_gain=0.8,
+        information_weight=0.7,
+    )
+    c = two_clock_forward(
+        passive_retention=0.9,
+        readiness_gate=0.8,
+        opportunity_gate=0.5,
+        decision_gain=1.0,
+        information_weight=0.7,
+    )
+    assert a.effective_gain == pytest.approx(0.4)
+    assert b.effective_gain == pytest.approx(0.4)
+    assert c.effective_gain == pytest.approx(0.4)
+    assert a.mean_phase_retention == pytest.approx(b.mean_phase_retention)
+    assert a.mean_phase_retention == pytest.approx(c.mean_phase_retention)
+    assert a.innovation_free_variance_retention == pytest.approx(
+        b.innovation_free_variance_retention
+    )
+    assert a.innovation_free_variance_retention == pytest.approx(
+        c.innovation_free_variance_retention
+    )
