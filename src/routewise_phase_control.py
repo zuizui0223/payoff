@@ -113,6 +113,20 @@ class StationaryPhaseVariance:
     stationary_variance: float
 
 
+
+@dataclass(frozen=True)
+class PhaseSenseInverse:
+    """Information weight inferred from mean and variance phase retention."""
+
+    prior_variance: float
+    next_variance: float
+    process_variance: float
+    passive_retention: float
+    mean_phase_retention: float
+    innovation_adjusted_variance_ratio: float
+    inferred_information_weight: float
+    inferred_observation_variance: float | None
+
 def _finite(name: str, value: float) -> float:
     x = float(value)
     if not isfinite(x):
@@ -542,4 +556,110 @@ def stationary_gaussian_phase_variance(
         quadratic_a=a,
         quadratic_b=b,
         stationary_variance=pstar,
+    )
+
+
+def variance_retention_from_mean_phase(
+    *,
+    passive_retention: float,
+    mean_phase_retention: float,
+    information_weight: float,
+) -> float:
+    """Return innovation-free population variance retention.
+
+    Combining
+
+        lambda = phi(1-g)
+
+    with the variance-funnel recursion gives
+
+        (P_next-Q)/P
+          = phi^2 [1-K g(2-g)]
+          = (1-K) phi^2 + K lambda^2.
+
+    Thus variance retention is a convex combination of the passive squared
+    retention and the squared closed-loop mean retention, weighted by the
+    effective information weight K.
+    """
+
+    phi = _finite("passive_retention", passive_retention)
+    lam = _finite("mean_phase_retention", mean_phase_retention)
+    k = _finite("information_weight", information_weight)
+    if not 0.0 <= k <= 1.0:
+        raise ValueError("information_weight must lie in [0,1]")
+    return (1.0 - k) * phi**2 + k * lam**2
+
+
+def infer_phase_information_weight(
+    prior_variance: float,
+    next_variance: float,
+    *,
+    process_variance: float,
+    passive_retention: float,
+    mean_phase_retention: float,
+    tolerance: float = 1e-10,
+) -> PhaseSenseInverse:
+    """Infer effective checkpoint information weight from a variance funnel.
+
+    Under the unclipped Gaussian controller,
+
+        rho_V = (P_next-Q)/P
+              = (1-K) phi^2 + K lambda^2.
+
+    If phi^2 != lambda^2,
+
+        K = [phi^2-rho_V] / [phi^2-lambda^2].
+
+    With K=P/(P+R), the equivalent observation variance is
+
+        R = P(1-K)/K.
+
+    The inverse requires an independently justified passive retention phi and
+    process variance Q.  It must not be used by setting phi from the same
+    closed-loop transition being explained.
+
+    If the inferred K lies outside [0,1] beyond tolerance, the declared
+    Gaussian feedback model is incompatible with the supplied moments.
+    """
+
+    p = _nonnegative("prior_variance", prior_variance)
+    pnext = _nonnegative("next_variance", next_variance)
+    qvar = _nonnegative("process_variance", process_variance)
+    phi = _finite("passive_retention", passive_retention)
+    lam = _finite("mean_phase_retention", mean_phase_retention)
+    tol = _nonnegative("tolerance", tolerance)
+
+    if p <= _TOL:
+        raise ValueError("prior_variance must be positive for the inverse")
+
+    rho = (pnext - qvar) / p
+    denom = phi**2 - lam**2
+    if abs(denom) <= tol:
+        raise ValueError(
+            "information weight is not identified when passive and mean "
+            "squared retention are equal"
+        )
+
+    k = (phi**2 - rho) / denom
+    if k < -tol or k > 1.0 + tol:
+        raise ValueError(
+            "supplied mean/variance moments imply information weight outside "
+            "[0,1] under the declared model"
+        )
+    k = min(max(k, 0.0), 1.0)
+
+    if k <= tol:
+        obs_var = None
+    else:
+        obs_var = p * (1.0 - k) / k
+
+    return PhaseSenseInverse(
+        prior_variance=p,
+        next_variance=pnext,
+        process_variance=qvar,
+        passive_retention=phi,
+        mean_phase_retention=lam,
+        innovation_adjusted_variance_ratio=rho,
+        inferred_information_weight=k,
+        inferred_observation_variance=obs_var,
     )
