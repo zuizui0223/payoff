@@ -56,6 +56,22 @@ class ClockPortfolio:
     absolute_phase_retention: float
 
 
+
+@dataclass(frozen=True)
+class OpportunityLossFragility:
+    """Tracking loss when a historically optimized feedback portfolio loses opportunities."""
+
+    historical_checkpoints: int
+    retained_opportunity_fraction: float
+    historical_feedback_precision_share: float
+    required_log_precision: float
+    historical_timer_effort: float
+    historical_feedback_effort_per_checkpoint: float
+    target_variance: float
+    disrupted_variance: float
+    variance_inflation_factor: float
+    excess_log_variance: float
+
 def _finite_positive(name: str, value: float) -> float:
     x = float(value)
     if not isfinite(x) or x <= 0.0:
@@ -279,3 +295,114 @@ def infinite_horizon_noise_floor(
     if not isfinite(q) or q < 0.0:
         raise ValueError("process_variance must be finite and non-negative")
     return q / (1.0 - lam * lam)
+
+
+def opportunity_loss_fragility(
+    baseline_variance: float,
+    target_variance: float,
+    *,
+    historical_checkpoints: int,
+    retained_opportunity_fraction: float,
+    timer_cost_curvature: float,
+    feedback_cost_curvature: float,
+) -> OpportunityLossFragility:
+    """Return error inflation after sudden loss of usable correction opportunity.
+
+    First compute the historical minimum-cost portfolio for n checkpoints.
+    Suppose the organism keeps that allocation while only fraction omega of the
+    historically available post-entry correction opportunity remains usable.
+
+    The inherited-error component becomes
+
+        V_disrupted
+          = V_ref exp[-x* - 2 omega n y*].
+
+    Because the historical target satisfies
+
+        P = x* + 2 n y*
+          = log(V_ref/V_target),
+
+    the target-relative inflation is exactly
+
+        V_disrupted / V_target
+          = exp[2 n (1-omega) y*]
+          = exp[(1-omega) s_feedback P].
+
+    Thus the historical feedback share is also a fragility coordinate for
+    sudden opportunity loss.
+
+    This witness does not include new process innovation during disruption.
+    """
+
+    vref = _finite_positive("baseline_variance", baseline_variance)
+    vt = _finite_positive("target_variance", target_variance)
+    if vt > vref:
+        raise ValueError("target_variance must not exceed baseline_variance")
+    n = _nonnegative_int("historical_checkpoints", historical_checkpoints)
+    omega = float(retained_opportunity_fraction)
+    if not isfinite(omega) or omega < 0.0 or omega > 1.0:
+        raise ValueError("retained_opportunity_fraction must lie in [0,1]")
+
+    portfolio = optimal_clock_portfolio(
+        vref,
+        vt,
+        checkpoints=n,
+        timer_cost_curvature=timer_cost_curvature,
+        feedback_cost_curvature=feedback_cost_curvature,
+    )
+
+    effective_n = omega * n
+    disrupted = vref * exp(
+        -(
+            portfolio.timer_effort
+            + 2.0 * effective_n * portfolio.feedback_effort_per_checkpoint
+        )
+    )
+    factor = disrupted / vt
+    excess = log(factor)
+
+    closed_excess = (
+        (1.0 - omega)
+        * portfolio.feedback_precision_share
+        * portfolio.required_log_precision
+    )
+    if abs(excess - closed_excess) > 1e-10:
+        raise AssertionError("opportunity-loss fragility identity failed")
+
+    return OpportunityLossFragility(
+        historical_checkpoints=n,
+        retained_opportunity_fraction=omega,
+        historical_feedback_precision_share=portfolio.feedback_precision_share,
+        required_log_precision=portfolio.required_log_precision,
+        historical_timer_effort=portfolio.timer_effort,
+        historical_feedback_effort_per_checkpoint=portfolio.feedback_effort_per_checkpoint,
+        target_variance=vt,
+        disrupted_variance=disrupted,
+        variance_inflation_factor=factor,
+        excess_log_variance=excess,
+    )
+
+
+def fragility_from_feedback_share(
+    required_log_precision: float,
+    feedback_precision_share: float,
+    *,
+    retained_opportunity_fraction: float,
+) -> float:
+    """Closed-form variance inflation from historical feedback reliance.
+
+    Returns
+
+        exp[(1-omega) s_feedback P].
+    """
+
+    P = float(required_log_precision)
+    s = float(feedback_precision_share)
+    omega = float(retained_opportunity_fraction)
+    if not isfinite(P) or P < 0.0:
+        raise ValueError("required_log_precision must be finite and non-negative")
+    if not isfinite(s) or s < 0.0 or s > 1.0:
+        raise ValueError("feedback_precision_share must lie in [0,1]")
+    if not isfinite(omega) or omega < 0.0 or omega > 1.0:
+        raise ValueError("retained_opportunity_fraction must lie in [0,1]")
+    return exp((1.0 - omega) * s * P)
