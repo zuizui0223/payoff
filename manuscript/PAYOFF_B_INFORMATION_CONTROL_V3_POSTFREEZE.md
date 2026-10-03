@@ -894,7 +894,7 @@ large-development population. Those data do not identify
 \(\omega\) or \(s_{\mathrm{feedback}}\).
 
 
-Historically synchronized partners can hide different portfolios. With equal
+Synchronized partners can hide different portfolios. With equal
 historical target variance and precision budget,
 
 \[
