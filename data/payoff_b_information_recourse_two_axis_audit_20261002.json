@@ -1,0 +1,173 @@
+{
+  "date": "2026-10-02",
+  "status": "TWO_AXIS_EVIDENCE_AUDIT_COMPLETE_FULL_Q_R_TEST_NOT_IDENTIFIED",
+  "frozen_submission_affected": false,
+  "theoretical_axes": {
+    "information_axis": "pre-commitment cue reliability / predictive connectivity / environmental predictability",
+    "recourse_axis": "post-commitment ability to alter timing, pace, stopover use, route, or later phenological schedule",
+    "key_boundary": "predictability before error and correction after error are distinct quantities; neither may be substituted for the other"
+  },
+  "evidence": {
+    "information_axis": [
+      {
+        "system": "broad migratory birds",
+        "source": "data/payoff_b_broad_predictive_connectivity_result_20260926.json",
+        "sample": {
+          "rows": 3311,
+          "species": 37,
+          "years": 8,
+          "source_target_pairs": 358
+        },
+        "result": {
+          "preregistered_coefficient": -0.0461786180645446,
+          "ci95": [
+            -0.0869604585115145,
+            -0.00539677761757466
+          ],
+          "p": 0.0265362141016171,
+          "interpretation": "stronger detrended pre-outcome predictive connectivity associated with smaller arrival-greenup mismatch"
+        },
+        "boundary": "pooled directional support; dependence-aware intervals prevent universal species-independent claim"
+      },
+      {
+        "system": "migratory-bird temperature-response meta-regression",
+        "source": "data/payoff_b_cross_system_information_result_20260928.json",
+        "sample": {
+          "effects": 944,
+          "studies": 28,
+          "species": 279
+        },
+        "result": {
+          "adjusted_long_minus_short_days_per_C": 0.4214763799092083,
+          "ci95": [
+            0.12132570573851081,
+            0.7216270540799057
+          ],
+          "p": 0.00767185267253349
+        },
+        "interpretation": "long-distance migrants are less temperature-responsive than short-distance migrants",
+        "boundary": "migration distance is not identical to information distance and is not D_eff"
+      },
+      {
+        "system": "barnacle goose three-flyway source study",
+        "source": "Kölzsch et al. 2015 J Anim Ecol 84:272-283",
+        "sample": {
+          "individuals": 40,
+          "stopover_regions": 16,
+          "flyways": 3
+        },
+        "result": "arrival timing was closer to local spring onset where consecutive-stopover phenology predictability was higher",
+        "boundary": "published predictability is route-level information; not retained actionability r"
+      }
+    ],
+    "recourse_axis": [
+      {
+        "system": "mule deer",
+        "source": "data/payoff_b_stagewise_information_recourse_evidence_20261001.json",
+        "sample": {
+          "adult_females": 72,
+          "animal_years": 152
+        },
+        "result": {
+          "ahead_compensated_percent": 93,
+          "behind_compensated_percent": 90,
+          "early_movement_km_per_day": 2.9,
+          "late_movement_km_per_day": 7.1,
+          "early_stopover_days": 36,
+          "late_stopover_days": 10,
+          "early_migration_duration_days": 72,
+          "late_migration_duration_days": 31
+        },
+        "interpretation": "signed recourse: ahead animals decelerate / wait more; behind animals accelerate / shorten stopovers",
+        "boundary": "does not identify natural D_eff or reduced-form r"
+      },
+      {
+        "system": "barnacle goose phase-retention transitions",
+        "source": "data/payoff_b_three_taxon_phase_retention_receipt_20260922.json",
+        "result": {
+          "svalbard_lambda": -0.106320907,
+          "greenland_lambda": 0.130730883,
+          "barents_lambda": 0.494113942
+        },
+        "interpretation": "incoming phase error is transformed across route stages; actuator architecture includes stopover and overtaking",
+        "boundary": "lambda is a phase-retention response coordinate, not actionability r"
+      },
+      {
+        "system": "bar-tailed godwit",
+        "source": "data/payoff_b_stagewise_information_recourse_evidence_20261001.json",
+        "result": {
+          "departure_advance_days_2008_2020": 6,
+          "yellow_sea_stopover_duration_trend_days_per_year": 0.693,
+          "alaska_arrival_trend_supported": false
+        },
+        "interpretation": "earlier initial departure can be absorbed by longer later stopover",
+        "boundary": "does not demonstrate information-seeking intent"
+      },
+      {
+        "system": "plant-pollinator temporal windows",
+        "source": "data/payoff_b_stagewise_information_recourse_evidence_20261001.json",
+        "result": "flowering/activity duration can buffer overlap loss in local systems",
+        "boundary": "taxon identity cannot be used as a recourse proxy"
+      }
+    ],
+    "cross_axis_tests": [
+      {
+        "system": "Eurasian wigeon",
+        "source": "docs/PAYOFF_B_WIGEON_PREDICTIVE_CONNECTIVITY_RESULT_20260926.md",
+        "design": "preregistered historical predictive-connectivity x incoming-phase interaction",
+        "sample": {
+          "transitions": 224,
+          "individuals": 28,
+          "unique_segment_pairs": 17
+        },
+        "prediction": "higher predictive connectivity -> stronger phase correction -> lower retention",
+        "estimate": 0.0202,
+        "cluster_se": 0.0643,
+        "ci95": [
+          -0.1058,
+          0.1461
+        ],
+        "p": 0.756,
+        "status": "NOT_SUPPORTED",
+        "interpretation": "pre-commitment information is not a portable amplifier of post-error correction"
+      },
+      {
+        "system": "barnacle goose matched transition screen",
+        "source": "manuscript/PAYOFF_B_MOVEMENT_PHENOLOGY_GEB_V3_PREOUTCOME.md",
+        "design": "small non-independent transition screen",
+        "matched_pairs": 7,
+        "spearman_rho": -0.464,
+        "p": 0.294,
+        "status": "NOT_SUPPORTED",
+        "interpretation": "higher environmental predictability did not imply stronger realized correction",
+        "boundary": "small and non-independent; descriptive boundary evidence, not a general negative relationship"
+      },
+      {
+        "system": "greater snow goose",
+        "source": "data/payoff_b_greater_snow_goose_dual_use_compensation_screen_20260930.json",
+        "design": "preregistered preoutcome cue-linked downstream transit-compression screen",
+        "status": "PREOUTCOME_REGISTERED_NOT_EXECUTED",
+        "prediction": "warmer local cues should predict shorter downstream transit more strongly where historical predictive connectivity to Bylot is higher",
+        "role": "closest prospective same-system bridge between information and downstream compensation"
+      }
+    ]
+  },
+  "synthesis": {
+    "supported": [
+      "information availability and post-commitment correction are both empirically measurable in natural systems",
+      "the two axes are not interchangeable",
+      "better pre-commitment predictability does not imply universally stronger post-error correction",
+      "seasonal timing can be stabilized through different mixtures of prediction and downstream correction"
+    ],
+    "not_supported": [
+      "a universal one-dimensional information-to-recourse gradient",
+      "predictive connectivity is equivalent to phase-correction gain",
+      "phase-retention lambda is equivalent to reduced-form actionability r",
+      "migration distance is equivalent to information quality q",
+      "a natural validation of V(q,r)=r*V_A(q)",
+      "a natural estimate of the continuous-time optimal commitment condition"
+    ],
+    "current_best_general_statement": "seasonal tracking has at least two separable control channels: prediction before commitment and correction after mismatch; their relative contributions vary among routes and systems",
+    "current_direct_test_bottleneck": "one system must independently calibrate q(t), biological actionability/recourse, waiting cost, and commitment behavior on a common scale"
+  }
+}
