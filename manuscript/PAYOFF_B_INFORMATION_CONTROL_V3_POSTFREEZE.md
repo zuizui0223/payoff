@@ -855,8 +855,7 @@ This gives a mechanistic reason that one-shot events and long movement
 trajectories need not evolve the same timing architecture. Emergence or an
 irreversible flowering transition can favor upstream precision; a long
 migration with many stopovers can tolerate a noisier start because error can be
-corrected repeatedly. The cost functions are a mathematical witness, not a
-universal law.
+corrected repeatedly. The cost functions are a transparent witness.
 
 ### 4.9 Opportunity loss makes feedback-heavy portfolios fragile
 
