@@ -673,15 +673,22 @@ individualized correction. If every individual receives the same open-loop
 timing shift, that common shift changes the mean but does not selectively
 reduce between-individual phase variance.
 
-Under the Gaussian route-wise controller, incoming phase variance \(P_t\),
+Under the two-clock Gaussian controller, let
+
+\[
+h_t=G_tg_t
+\]
+
+be **effective correction gain**: physiological/readiness availability
+\(G_t\) multiplied by decision gain \(g_t\). Incoming phase variance \(P_t\),
 checkpoint observation variance \(R_t\), posterior weight
-\(K_t=P_t/(P_t+R_t)\), feedback gain \(g_t\), passive retention \(\phi_t\) and
-new process variance \(Q_t\) give
+\(K_t=P_t/(P_t+R_t)\), passive retention \(\phi_t\), and new process variance
+\(Q_t\) then give
 
 \[
 P_{t+1}
 =
-\phi_t^2P_t[1-K_tg_t(2-g_t)]+Q_t.
+\phi_t^2P_t[1-K_th_t(2-h_t)]+Q_t.
 \]
 
 The corresponding common open-loop correction gives
@@ -707,13 +714,15 @@ independently.
 
 
 The mean and variance signatures can also be combined. With noisy checkpoint
-information, the observed regression-scale phase retention is
+information and two clock layers, observed regression-scale phase retention is
 
 \[
-\lambda_t=\phi_t(1-g_tK_t),
+\lambda_t=\phi_t(1-h_tK_t),
+\qquad
+h_t=G_tg_t.
 \]
 
-not \(\phi_t(1-g_t)\) unless phase information is perfect. Define
+Define
 
 \[
 d_t=1-\frac{\lambda_t}{\phi_t}
@@ -731,15 +740,17 @@ Then the declared Gaussian controller gives
 \[
 K_t=
 \frac{d_t^2}{v_t-1+2d_t},
-\\qquad
-g_t=\frac{d_t}{K_t}.
+\qquad
+h_t=\frac{d_t}{K_t}.
 \]
 
 Thus, if passive retention \(\phi_t\) and process innovation \(Q_t\) are
-identified independently, mean retention plus the variance funnel can
-separate an effective checkpoint-information weight \(K_t\) from a feedback
-gain \(g_t\). This is a prospective functional inverse, not evidence that
-animals explicitly compute Bayesian weights.
+identified independently, mean retention plus the variance funnel separates
+an effective checkpoint-information weight \(K_t\) from **effective
+correction** \(h_t=G_tg_t\). It does **not** separate physiological readiness
+\(G_t\) from decision gain \(g_t\) unless one of those layers is independently
+measured or manipulated. This is a prospective functional inverse, not
+evidence that animals explicitly compute Bayesian weights.
 
 ### 4.5 The most informative checkpoint need not be the most important checkpoint
 
@@ -753,16 +764,18 @@ This prediction differs from a simple “closer cues are better” model.
 
 The empirical phase-retention coefficient \(\lambda\) is valuable because it
 quantifies how strongly incoming seasonal error persists to a later stage.
-Under perfect phase information,
+Under perfect phase information and full readiness \(G=1\),
 
 \[
-\lambda=\phi(1-g),
+\lambda=\phi(1-g).
 \]
 
-whereas with noisy individualized phase estimation,
+With partial readiness and noisy individualized phase estimation,
 
 \[
-\lambda=\phi(1-gK).
+\lambda=\phi(1-GgK)
+=
+\phi(1-hK).
 \]
 
 Thus the same \(\lambda\) can arise from different combinations of passive
@@ -774,9 +787,10 @@ information in addition to \(\lambda\).
 ### 4.7 Prediction and reactive correction can be substitute control channels
 
 The controller also changes how cross-route comparisons should be interpreted.
-Let (R(q)) be mismatch risk remaining after the actor has used available
-pre-commitment information, and let downstream reactive gain (g) reduce that
-error at quadratic cost (c g^2/2):
+Conditional on the relevant actuator being available, let (R(q)) be mismatch
+risk remaining after the actor has used available pre-commitment information,
+and let downstream reactive gain (g) reduce that error at quadratic cost
+(c g^2/2):
 
 \[
 L(g;q)=(1-g)^2R(q)+\frac{c}{2}g^2.
