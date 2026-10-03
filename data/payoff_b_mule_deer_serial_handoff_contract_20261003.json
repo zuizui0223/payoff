@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_SERIAL_HANDOFF_CONTRACT_PREOUTCOME",
+  "frozen_submission_affected": false,
+  "source": {
+    "article": "Ortega et al. 2023 Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "source_data_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364"
+  },
+  "sample": {
+    "rule": "same temporally safe March-IFBFat subset used in readiness/channel audits: migration start strictly after March 31",
+    "join_key": "id_yr",
+    "variables": [
+      "scaledIFBFat",
+      "DFP_Start",
+      "DFP_End",
+      "year"
+    ]
+  },
+  "models": {
+    "total_downstream": "DFP_End ~ scaledIFBFat",
+    "serial_handoff": "DFP_End ~ DFP_Start + scaledIFBFat",
+    "primary_uncertainty": "10000-replicate animal-cluster bootstrap",
+    "sensitivities": [
+      "within-year residualization of response and predictors",
+      "leave-one-animal-out coefficient ranges"
+    ]
+  },
+  "decision_rule": {
+    "handoff_compatible": "in serial_handoff model, DFP_Start coefficient >0 with 95% cluster CI excluding zero AND scaledIFBFat 95% cluster CI includes zero",
+    "mixed": "only one of the two conditions passes",
+    "not_compatible": "DFP_Start does not retain positive interval-excluding-zero association and IFBFat retains a nonzero direct downstream association"
+  },
+  "interpretation": {
+    "licensed": "observational serial-handoff signature: physiological state is associated with entry timing, while downstream phase is conditionally associated with entry phase rather than an additional IFBFat term",
+    "not_licensed": [
+      "causal mediation",
+      "proof that IFBFat is the readiness gate G",
+      "proof of H2 concurrent readiness gating",
+      "identification of O,K,g,phi,Q"
+    ]
+  }
+}
