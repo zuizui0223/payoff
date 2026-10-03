@@ -147,6 +147,55 @@ def inspect_sheet(zf,path,strings,max_rows=8,max_cols=80):
     }
 
 
+
+def api_file_metadata(file_id:int)->dict:
+    """Anonymous Dryad REST metadata request; no download."""
+    url=f"https://datadryad.org/api/v2/files/{file_id}"
+    req=urllib.request.Request(
+        url,
+        headers={
+            "User-Agent":"PAYOFF-B schema probe",
+            "Accept":"application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req,timeout=60) as res:
+            body=res.read().decode("utf-8")
+            data=json.loads(body)
+            return {"status":getattr(res,"status",None),"url":url,"json":data}
+    except Exception as exc:
+        return {"url":url,"error":f"{type(exc).__name__}: {exc}"}
+
+
+def anonymous_api_download_probe(file_id:int)->dict:
+    """Check published file download route without credentials.
+
+    Do not retry with credentials. Read at most one byte if successful.
+    """
+    url=f"https://datadryad.org/api/v2/files/{file_id}/download"
+    req=urllib.request.Request(
+        url,
+        headers={
+            "User-Agent":"PAYOFF-B schema probe",
+            "Range":"bytes=0-0",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req,timeout=60) as res:
+            b=res.read(1)
+            return {
+                "status":getattr(res,"status",None),
+                "url":url,
+                "resolved_url":res.geturl(),
+                "content_type":res.headers.get("Content-Type"),
+                "content_range":res.headers.get("Content-Range"),
+                "one_byte_received":len(b)==1,
+            }
+    except Exception as exc:
+        status=getattr(exc,"code",None)
+        return {"status":status,"url":url,"error":f"{type(exc).__name__}: {exc}"}
+
+
 def main():
     receipt={
         "date":"2026-10-03",
@@ -154,7 +203,15 @@ def main():
         "dataset_doi":"10.5061/dryad.nk98sf7w6",
         "outcomes_opened":False,
         "files":[],
+        "api_metadata":[],
+        "anonymous_api_download_probes":[],
     }
+
+    for fid in FILE_IDS:
+        receipt["api_metadata"].append(api_file_metadata(fid))
+        receipt["anonymous_api_download_probes"].append(
+            anonymous_api_download_probe(fid)
+        )
 
     # HEAD only: identify file names/sizes without opening workbook outcomes.
     for fid in FILE_IDS:
