@@ -16,7 +16,7 @@
 
 **Methods:** We combine Bayesian decision models, stagewise value-of-information theory, a route-wise signed phase controller, finite coordination games, preregistered macroecological analyses and source-backed natural systems.
 
-**Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is (r(t)[Sq(t)-B]-C(t)); with exponential learning and recourse loss the unique zero-cost optimum is (t^*=\log(1+\alpha/\beta)/\alpha), generally before maximal cue accuracy. Route-wise phase dynamics obey (e_{t+1}=\phi_t(e_t-u_t)+w_t); under perfect estimation and proportional feedback, phase retention decomposes as (\lambda_t=\phi_t(1-g_t)). Thus early and late errors can be corrected in opposite directions and departure error need not equal arrival error. Natural evidence independently supports predictive connectivity, heterogeneous temperature responsiveness, route-stage compensation and compensation costs, but does not yet identify the full controller in one system.
+**Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is (r(t)[Sq(t)-B]-C(t)); with exponential learning and recourse loss the unique zero-cost optimum is (t^*=\log(1+\alpha/\beta)/\alpha), generally before maximal cue accuracy. Route-wise phase dynamics obey (e_{t+1}=\phi_t(e_t-u_t)+w_t); under perfect estimation and proportional feedback, phase retention decomposes as (\lambda_t=\phi_t(1-g_t)). Thus early and late errors can be corrected in opposite directions and departure error need not equal arrival error. Natural evidence independently supports predictive connectivity, heterogeneous temperature responsiveness, route-stage compensation and compensation costs. The model additionally predicts a phase-variance funnel under individualized feedback, but the full controller is not yet identified in one system.
 
 **Main conclusions:** Seasonal tracking is a sequential inference-and-control problem. Mismatch can arise because interacting organisms differ in when they can infer a future seasonal state, how long that information remains actionable and how strongly they can correct phase error after learning it. Restored information need not restore coordination after response options or coordinated conventions have been lost.
 
@@ -461,7 +461,46 @@ The model does not require animals to compute probabilities, Kalman gains or exp
 
 This can be falsified. If independently estimated incoming phase error does not predict correction direction despite unused actuator capacity, the feedback interpretation is weakened.
 
-### 4.4 The most informative checkpoint need not be the most important checkpoint
+### 4.4 A variance funnel distinguishes individualized feedback from a common schedule
+
+Mean timing alone cannot distinguish a common timing programme from
+individualized correction. If every individual receives the same open-loop
+timing shift, that common shift changes the mean but does not selectively
+reduce between-individual phase variance.
+
+Under the Gaussian route-wise controller, incoming phase variance \(P_t\),
+checkpoint observation variance \(R_t\), posterior weight
+\(K_t=P_t/(P_t+R_t)\), feedback gain \(g_t\), passive retention \(\phi_t\) and
+new process variance \(Q_t\) give
+
+\[
+P_{t+1}
+=
+\phi_t^2P_t[1-K_tg_t(2-g_t)]+Q_t.
+\]
+
+The corresponding common open-loop correction gives
+
+\[
+P_{t+1}^{\mathrm{open}}
+=
+\phi_t^2P_t+Q_t.
+\]
+
+Thus, for informative cues and \(0<g_t<2\), individualized phase feedback
+predicts additional downstream variance contraction. This creates a functional
+signature of the proposed internal phase estimate: early and late individuals
+are not merely shifted by the same calendar rule but are pulled toward the
+seasonal target according to their own estimated error.
+
+The prediction does not make synchronization itself novel. Mule deer already
+provide a striking natural example of wide departure mismatch followed by
+narrower arrival timing. The prospective test is stricter: compare a common
+schedule model and an individualized feedback model on held-out downstream
+phase, using checkpoint information and actuator responses measured
+independently.
+
+### 4.5 The most informative checkpoint need not be the most important checkpoint
 
 The actionability theorem predicts an intermediate-stage peak in behavioral cue responsiveness. Early in the route, the signal can be too poor to guide correction. Late in the route, the signal can be excellent but response options can be exhausted.
 
@@ -469,7 +508,7 @@ The ecologically important checkpoint is therefore where information gain and re
 
 This prediction differs from a simple “closer cues are better” model.
 
-### 4.5 Phase retention is a useful coordinate but not a mechanism by itself
+### 4.6 Phase retention is a useful coordinate but not a mechanism by itself
 
 The empirical phase-retention coefficient (lambda) is valuable because it quantifies how strongly incoming seasonal error persists to a later stage. But the decomposition
 
@@ -481,7 +520,7 @@ shows why the same (lambda) can arise from different mechanisms.
 
 Low retention can reflect strong active feedback, low passive persistence, or both. Negative retention can arise from overshoot, anticipation, target movement or coordinate changes. Direct mechanistic inference therefore requires actuator and environmental information in addition to (lambda).
 
-### 4.6 Prediction and reactive correction can be substitute control channels
+### 4.7 Prediction and reactive correction can be substitute control channels
 
 The controller also changes how cross-route comparisons should be interpreted.
 Let (R(q)) be mismatch risk remaining after the actor has used available
@@ -525,7 +564,7 @@ not confirmation. The ecological consequence is nevertheless important:
 **prediction before error and correction after error are separate control
 channels and should be estimated separately.**
 
-### 4.7 Climate change can damage both prediction and control
+### 4.8 Climate change can damage both prediction and control
 
 Climate change can affect the framework through at least two distinct routes.
 
@@ -535,7 +574,7 @@ It can also change the window over which correction remains possible—for examp
 
 A species can therefore become more mismatched without losing its intrinsic ability to move or shift phenology. The problem can instead be that the forecast becomes reliable too late relative to the remaining control window.
 
-### 4.8 Interactions add a second layer of irreversibility
+### 4.9 Interactions add a second layer of irreversibility
 
 Physical correction and strategic coordination should be separated.
 
@@ -543,7 +582,7 @@ A migrant may still be capable of changing timing but face a partner that is not
 
 The Paper-2 game theory is most useful after the control theory, not before it: it explains why a physically feasible correction may remain strategically inaccessible.
 
-### 4.9 Direct natural validation remains prospective
+### 4.10 Direct natural validation remains prospective
 
 The current evidence supports pieces of the mechanism across different systems. It does not yet demonstrate, in one natural population, the full sequence
 
