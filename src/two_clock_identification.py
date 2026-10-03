@@ -4,7 +4,7 @@ Post-freeze PAYOFF-B extension.
 
 The architecture separates:
 - G in [0,1]: physiological/developmental readiness (an opening gate);
-- A in [0,1]: remaining ecological opportunity/actuator availability (a closing gate);
+- O in [0,1]: remaining ecological opportunity/actuator availability (a closing gate);
 - K in [0,1]: effective information weight for signed phase;
 - g >= 0: decision/controller gain when correction is usable.
 
@@ -80,7 +80,7 @@ class TwoClockSensitivity:
     mean_phase_retention: float
     d_lambda_d_phi: float
     d_lambda_d_G: float
-    d_lambda_d_A: float
+    d_lambda_d_O: float
     d_lambda_d_g: float
     d_lambda_d_K: float
 
@@ -146,7 +146,7 @@ def infer_information_and_effective_gain(
     mean_phase_retention: float,
     tolerance: float = 1e-10,
 ) -> TwoClockInverse:
-    """Infer K and h=G*A*g from mean and variance phase moments.
+    """Infer K and h=G*O*g from mean and variance phase moments.
 
     Let
 
@@ -230,9 +230,9 @@ def separate_readiness_and_decision_gain(
 ) -> ClockSeparation:
     """Separate h=G*A*g conditional on an independently known opportunity A.
 
-    This legacy helper treats opportunity_gate as known (default A=1). Exactly
+    This legacy helper treats opportunity_gate as known (default O=1). Exactly
     one of readiness_gate or decision_gain should normally be supplied. If both
-    are supplied, the function verifies G*A*g=h.
+    are supplied, the function verifies G*O*g=h.
     """
 
     h = _nonnegative("effective_gain", effective_gain)
@@ -307,10 +307,10 @@ def reduced_actionability_from_gates(
 ) -> float:
     """Return a declared weighted reduced usable-action summary.
 
-    A readiness gate G opens an actuator; an opportunity gate A records whether
+    A readiness gate G opens an actuator; an opportunity gate O records whether
     that actuator remains ecologically usable. A convenient reduction is
 
-        r = sum_a omega_a G_a A_a / sum_a omega_a.
+        r = sum_a omega_a G_a O_a / sum_a omega_a.
 
     This is not a universal definition of Paper-2 actionability.
     """
@@ -341,7 +341,7 @@ def reduced_actionability_from_gates(
     if total <= _TOL:
         raise ValueError("positive total weight is required")
     return sum(
-        w * G * A for w, G, A in zip(ws, gates, opportunities)
+        w * G * O for w, G, O in zip(ws, gates, opportunities)
     ) / total
 
 
@@ -368,7 +368,7 @@ def two_clock_retention_sensitivity(
 
     phi = _finite("passive_retention", passive_retention)
     G = _unit("readiness_gate", readiness_gate)
-    A = _unit("opportunity_gate", opportunity_gate)
+    O = _unit("opportunity_gate", opportunity_gate)
     g = _nonnegative("decision_gain", decision_gain)
     K = _unit("information_weight", information_weight)
 
@@ -382,7 +382,7 @@ def two_clock_retention_sensitivity(
         mean_phase_retention=lam,
         d_lambda_d_phi=1.0 - G * O * g * K,
         d_lambda_d_G=-phi * A * g * K,
-        d_lambda_d_A=-phi * G * g * K,
+        d_lambda_d_O=-phi * G * g * K,
         d_lambda_d_g=-phi * G * A * K,
         d_lambda_d_K=-phi * G * O * g,
     )
@@ -426,7 +426,7 @@ def first_order_controller_difference(
     return (
         s.d_lambda_d_phi * _finite("delta_phi", delta_phi)
         + s.d_lambda_d_G * _finite("delta_G", delta_G)
-        + s.d_lambda_d_A * _finite("delta_A", delta_A)
+        + s.d_lambda_d_O * _finite("delta_A", delta_A)
         + s.d_lambda_d_g * _finite("delta_g", delta_g)
         + s.d_lambda_d_K * _finite("delta_K", delta_K)
     )
