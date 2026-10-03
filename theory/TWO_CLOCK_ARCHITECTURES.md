@@ -179,8 +179,30 @@ The two clocks map onto different model objects.
 | feasible action set \(A_t\) | mechanistic basis of actionability \(r_t\) |
 | phase retention \(\lambda_t\) | realized carry-over of timing error |
 
-Thus \(r_t\) is not itself a molecular/developmental clock.  It summarizes how
+Thus \(r_t\) is not itself a molecular/developmental clock. It summarizes how
 the physiological and ecological state constrains the actions that remain.
+
+If actuator \(a\) has a readiness/availability gate \(G_{a,t}\in[0,1]\), then
+the feasible action set is generated mechanistically by those gates,
+
+\[
+A_t=\{a:G_{a,t}>0\}.
+\]
+
+A simple reduced-form actionability coordinate can be written, when the
+actuators have declared weights \(\omega_a\), as
+
+\[
+r_t
+=
+\frac{\sum_a \omega_a G_{a,t}}
+{\sum_a\omega_a}.
+\]
+
+This weighted average is only one possible reduction, not a universal
+definition of actionability. Its purpose is to show how developmental/
+physiological clocks can generate the shrinking action space represented by
+\(r_t\).
 
 Similarly, \(K_t\) and \(g_t\) belong to the decision-controller layer, not to
 the developmental timer.
