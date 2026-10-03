@@ -184,42 +184,78 @@ P_{t+1}^{open}
 Thus individualized feedback has a prospective **phase-variance funnel**
 signature beyond a shared timing programme.
 
-Combining mean and variance retention gives
+Under noisy individualized phase estimation, regression-scale mean retention is
 
 \[
-\rho_V
+\lambda_t
 =
-\frac{P_{t+1}-Q_t}{P_t}
-=
-(1-K_t)\phi_t^2+K_t\lambda_t^2,
+\phi_t(1-g_tK_t),
 \]
 
-and, when \(\phi_t\) and \(Q_t\) are independently identified,
+with \(\lambda_t=\phi_t(1-g_t)\) only as the perfect-information special case.
+Define
 
 \[
-K_t
-=
-\frac{\phi_t^2-\rho_V}
-{\phi_t^2-\lambda_t^2}.
+d_t=1-\frac{\lambda_t}{\phi_t}
 \]
 
-This phase-sense inverse is exact only under the declared Gaussian controller;
-it must not be back-solved from the same transition used to define the passive
-baseline.
+and
 
-Mule-deer prior art is now explicit. Ortega et al. (2023) already document
-large initial phenological mismatch, bidirectional speed/stopover compensation,
-and resynchronization toward summer-range arrival, and explicitly discuss a
+\[
+v_t=
+\frac{P_{t+1}-Q_t}
+{\phi_t^2P_t}.
+\]
+
+When \(d_t\neq0\), the declared Gaussian controller gives
+
+\[
+K_t=
+\frac{d_t^2}
+{v_t-1+2d_t},
+\qquad
+g_t=
+\frac{d_t}{K_t}.
+\]
+
+This phase-sense inverse is exact only under the declared Gaussian controller
+and requires independent passive-retention and process-innovation references.
+It must not be back-solved from the same transition used to define
+\(\phi_t\) or \(Q_t\).
+
+Mule-deer prior art is explicit. Ortega et al. (2023) already document large
+initial phenological mismatch, bidirectional speed/stopover compensation and
+resynchronization toward summer-range arrival, and explicitly discuss a
 temporal cognitive/phase-sense interpretation. PAYOFF-B does not claim
-discovery of that phenomenon. Its prospective contribution is the general
-information-actionability-control framework and the mean-plus-variance
-identification problem.
+discovery of that phenomenon.
 
 The public Ortega Source Data workbook
-\`41467_2023_37750_MOESM4_ESM.xlsx\` was confirmed reachable over HTTP, but the
-current browser-to-analysis handoff could not expose its internal sheets or
-columns. Individual-level variance-funnel reanalysis is therefore **not yet
-opened**; this is a file-handoff limitation, not a source-availability failure.
+\`41467_2023_37750_MOESM4_ESM.xlsx\` was downloaded and parsed in GitHub Actions
+(HTTP 200; SHA256
+\`2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364\`).
+Its paired animal-year phase sheet contains 152 rows with \`DFP_Start\` and
+\`DFP_End\`, and its actuator sheet contains matched movement-rate and stopover
+summaries.
+
+A schema-frozen post-freeze descriptive audit gives:
+
+\`\`\`text
+MULE_DEER_ANIMAL_YEARS = 152
+MULE_DEER_INDIVIDUALS = 72
+START_PHASE_SD_DAYS = 26.406
+END_PHASE_SD_DAYS = 13.173
+END_START_VARIANCE_RATIO = 0.2489
+ANIMAL_CLUSTER_BOOTSTRAP_95 = [0.1667, 0.3617]
+WITHIN_YEAR_VARIANCE_RATIO = 0.2940
+WHOLE_ROUTE_LAMBDA = 0.10734
+MOVEMENT_RATE_VS_START_PHASE = +0.06834 km d^-1 per phase day
+STOPOVER_VS_START_PHASE = -0.4919 d per phase day
+\`\`\`
+
+These values quantify the published resynchronization and signed compensation
+in continuous animal-year data. They do not identify latent \(K\), \(g\),
+\(\phi\), \(r\) or \(D_{eff}\), and they do not alter the frozen V2 submission
+or any preregistered result.
 
 The post-freeze actionability theorem additionally gives
 
@@ -252,9 +288,10 @@ V3_SUBMISSION_STATUS = NOT_FROZEN_NOT_JOURNAL_FACING
 V3_CORE_METAPHOR = SHINKANSEN_TO_SCHROEDINGERS_SPRING
 V3_FORMAL_OBJECT = SEQUENTIAL_INFORMATION_AND_PHASE_CONTROL
 V3_VARIANCE_FUNNEL = EXACT_REDUCED_MODEL
-V3_PHASE_SENSE_INVERSE = EXACT_CONDITIONAL_ON_INDEPENDENT_PHI_Q
+V3_PHASE_SENSE_INVERSE = NOISY_CUE_EXACT_CONDITIONAL_ON_INDEPENDENT_PHI_Q
 MULE_DEER_PHASE_SENSE = PRIOR_ART_NOT_PAYOFF_NOVELTY
-ORTEGA_SOURCE_XLSX = PUBLIC_HTTP200_INTERNAL_STRUCTURE_NOT_YET_OPENED
+ORTEGA_VARIANCE_FUNNEL = POSTFREEZE_DESCRIPTIVE_SOURCE_DATA_AUDIT
+ORTEGA_SOURCE_XLSX = PUBLIC_HTTP200_PARSED_SHA256_FROZEN
 ```
 
 Primary ecological conclusion:

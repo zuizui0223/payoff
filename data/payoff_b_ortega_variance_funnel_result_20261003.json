@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_DESCRIPTIVE_SOURCE_DATA_AUDIT",
+  "frozen_submission_affected": false,
+  "source": {
+    "article": "Ortega et al. 2023 Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "source_data_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+    "phase_sheet": "Fig1a,b;Fig3;SFig2;STables1,6",
+    "actuator_sheet": "Fig4d,4e;SFig4"
+  },
+  "phase": {
+    "n": 152,
+    "start_mean": -3.7004855344736844,
+    "end_mean": 6.997250819736842,
+    "start_sd": 26.40595330244822,
+    "end_sd": 13.173249211728749,
+    "start_variance": 697.2743698110761,
+    "end_variance": 173.53449479431208,
+    "variance_ratio_end_over_start": 0.2488754818871811,
+    "sd_ratio_end_over_start": 0.49887421449417596,
+    "start_min": -69.8830243,
+    "start_max": 52.40569395,
+    "end_min": -18.9171598,
+    "end_max": 72.9782609,
+    "whole_route_lambda": 0.10734051982279666,
+    "whole_route_r": 0.21516550004820864,
+    "within_year_start_variance": 478.74181643493125,
+    "within_year_end_variance": 140.77164688297282,
+    "within_year_variance_ratio": 0.2940450197796874,
+    "within_year_lambda": 0.09315900926110347,
+    "within_year_r": 0.17179793807418756,
+    "closer_to_peak_n": 107,
+    "closer_to_peak_fraction": 0.7039473684210527,
+    "equal_abs_phase_n": 0,
+    "mean_abs_start": 21.909767809342107,
+    "mean_abs_end": 11.123035277631578
+  },
+  "actuators": {
+    "movement_rate_n": 152,
+    "stopover_n": 127,
+    "movement_rate_slope_per_DFP_day": 0.06833740909799925,
+    "movement_rate_r": 0.7299422118124992,
+    "movement_rate_within_year_slope": 0.08517046472003797,
+    "stopover_slope_days_per_DFP_day": -0.4918930045836826,
+    "stopover_r": -0.6835282873955948,
+    "stopover_within_year_slope": -0.6137320951603451
+  },
+  "bootstrap": {
+    "cluster_unit": "animal",
+    "unique_animals": 72,
+    "replicates_requested": 10000,
+    "replicates_completed": 10000,
+    "seed": 20261003,
+    "variance_ratio_ci95": [
+      0.16667205840161592,
+      0.3617472299762108
+    ],
+    "within_year_variance_ratio_ci95": [
+      0.20603184437911937,
+      0.4048957037586416
+    ],
+    "whole_route_lambda_ci95": [
+      0.012572879985858616,
+      0.2085404739637454
+    ],
+    "within_year_lambda_ci95": [
+      -0.011537137986475834,
+      0.19941631712615052
+    ],
+    "closer_to_peak_fraction_ci95": [
+      0.6231884057971014,
+      0.7777777777777778
+    ],
+    "movement_rate_slope_ci95": [
+      0.055411463045454204,
+      0.07998975744118154
+    ],
+    "movement_rate_within_year_slope_ci95": [
+      0.07107412745016717,
+      0.09852348829115223
+    ],
+    "stopover_slope_ci95": [
+      -0.5693610779718522,
+      -0.41171614075821494
+    ],
+    "stopover_within_year_slope_ci95": [
+      -0.7002277234552159,
+      -0.5215131536739591
+    ]
+  },
+  "boundaries": [
+    "published convergence and signed compensation are prior art, not a new PAYOFF-B discovery",
+    "variance contraction alone does not identify individualized feedback",
+    "no K, g, phi, r or D_eff is estimated",
+    "measurement error, passive retention, selection and changing environmental variance remain alternative contributors",
+    "the result does not retune frozen GEB V2 or any preregistered gate"
+  ]
+}

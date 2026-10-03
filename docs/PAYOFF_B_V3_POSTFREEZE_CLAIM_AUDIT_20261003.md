@@ -19,6 +19,7 @@ source-backed motivation, and what remains prospective in
 | broad-bird predictive connectivity is negatively associated with mismatch | preregistered empirical pooled result | pooled directional association in 3,311 observations / 37 species | universal species-level causal coefficient |
 | long-distance migrants are less temperature-responsive in reconstructed Usui table | source-table reconstruction; dependence-aware sensitivity | reconstructed long-minus-short contrast in 944 effects / 28 studies / 279 species | unique causal evidence for information distance |
 | mule deer show signed speed/stopover compensation | published natural anchor | ahead and behind animals use opposite pace/stopover adjustments | direct estimate of internal phase belief, g, phi, r or D_eff |
+| Ortega continuous phase-variance funnel | post-freeze public Source Data reanalysis, schema-frozen before numerical summary | variance ratio 0.249 (cluster-bootstrap 0.167–0.362), 0.294 after year centering; signed continuous actuator slopes reproduced | controller identification, novel discovery of compensation, or direct K/g/phi estimates |
 | bar-tailed godwit earlier departure can be absorbed later | published natural anchor | route stages can transform departure timing before arrival | information-seeking intent or direct q estimate |
 | pink-footed geese change cue use across route stages | published natural anchor | local cue relevance changes en route | direct validation of Bayesian filter |
 | delayed American redstarts compensate by faster migration with survival cost | published natural anchor | timing compensation can coexist with fitness cost | estimated PAYOFF-B D_eff |
@@ -26,7 +27,7 @@ source-backed motivation, and what remains prospective in
 | natural degradation→recovery hysteresis | preregistered gates failed before history test | no natural hysteresis claim | any natural T7/T8 validation |
 | full route-wise internal controller | prospective | direct next empirical target | established natural mechanism |
 | phase-variance funnel beyond common open-loop timing | exact post-freeze reduced model + prospective empirical test | exact under Gaussian individualized feedback; natural test prospective | claim that any start/end convergence proves feedback |
-| phase-sense inverse K from mean + variance retention | exact post-freeze inverse under identified phi and Q | exact under stated Gaussian assumptions with independent passive baseline | back-solve K from the same transition used to define phi or Q |
+| noisy-cue phase inverse K and g from mean + variance retention | exact post-freeze inverse under identified phi and Q | exact under stated Gaussian assumptions with independent passive/process baseline; lambda=phi(1-gK) | back-solve K or g from the same transition used to define phi or Q |
 | mule-deer temporal phase sense / bidirectional compensation | published prior art (Ortega et al. 2023) | natural anchor for signed compensation and resynchronization | claim PAYOFF-B discovered temporal phase sense in mule deer |
 
 ## Canonical V3 evidence ordering
