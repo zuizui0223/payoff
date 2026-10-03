@@ -855,8 +855,7 @@ This gives a mechanistic reason that one-shot events and long movement
 trajectories need not evolve the same timing architecture. Emergence or an
 irreversible flowering transition can favor upstream precision; a long
 migration with many stopovers can tolerate a noisier start because error can be
-corrected repeatedly. The cost functions are a mathematical witness, not a
-universal law.
+corrected repeatedly. The cost functions are a transparent witness.
 
 ### 4.9 Opportunity loss makes feedback-heavy portfolios fragile
 
@@ -893,6 +892,20 @@ route-scale green-wave surfing, while the registered PAYOFF-B reanalysis found
 attenuated near-boundary movement-control permeability in the
 large-development population. Those data do not identify
 \(\omega\) or \(s_{\mathrm{feedback}}\).
+
+
+Synchronized partners can hide different portfolios. With equal
+historical target variance and precision budget,
+
+\[
+\boxed{
+\log\frac{V_1'}{V_2'}
+=
+(1-\omega)P(s_1-s_2).
+}
+\]
+
+Opportunity loss can expose hidden timer-versus-feedback reliance as differential variance and partner mismatch. This **cryptic clock-portfolio** prediction is prospective.
 
 
 ### 4.10 Interactions convert controller differences into ecological mismatch

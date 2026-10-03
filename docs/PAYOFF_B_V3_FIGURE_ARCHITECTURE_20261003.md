@@ -340,9 +340,48 @@ Use industrial-development mule deer only as a small **natural anchor** icon:
 route disturbance can attenuate movement control and green-wave surfing, but it
 does not estimate \(F\), \(\omega\) or \(s_{\mathrm{feedback}}\).
 
-### Panel C — Controller differences become interaction mismatch
+### Panel C — Cryptic portfolio divergence
 
-Retain the pairwise stable-controller phase diagram
+Show two partners with the **same historical final timing variance** but
+different hidden precision portfolios:
+
+- timer-heavy partner;
+- feedback-heavy partner.
+
+Before perturbation, their final distributions overlap.
+
+After the same opportunity loss \(\omega\), separate them according to
+
+\[
+\boxed{
+\log\frac{V_1'}{V_2'}
+=
+(1-\omega)P(s_1-s_2).
+}
+\]
+
+Annotation:
+
+> Historical synchrony can conceal different mechanisms and different
+> fragilities.
+
+### Panel D — Hidden fragility becomes interaction mismatch
+
+For historically equal partner variance \(V^*\), retained timing-error
+correlation \(r<1\), and post-change inflation factors \(F_1,F_2\), show
+
+\[
+\frac{M'}{M^*}
+=
+\frac{F_1+F_2}{2}
++
+\frac{r}{2(1-r)}
+(\sqrt{F_1}-\sqrt{F_2})^2.
+\]
+
+Label the second term **asymmetry penalty**.
+
+A small inset can retain the mean-controller phase diagram
 
 \[
 \Delta^*
@@ -352,14 +391,10 @@ w\,
 {(1-\lambda_1)(1-\lambda_2)}
 \]
 
-over \((\lambda_1,\lambda_2)\).
+to emphasize that mean timing and timing variance are distinct routes to
+interaction mismatch.
 
-Key visual:
-- diagonal \(\lambda_1=\lambda_2\): zero mismatch under shared forcing;
-- divergence away from the diagonal;
-- amplification near weak-restoring boundaries.
+Visual message:
 
-This final panel connects the clock portfolio back to the paper's interaction
-question: different partners can enter climate change with different mixtures
-of upstream precision and downstream correction, and therefore different
-effective \(\lambda\).
+> Climate change can expose hidden differences in how partners historically
+> achieved the same synchrony.

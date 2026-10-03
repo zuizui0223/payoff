@@ -48,6 +48,8 @@ source-backed motivation, and what remains prospective in
 | persistent mismatch under shared forcing | exact post-freeze stable-controller result | Δ* = w(λ1-λ2)/[(1-λ1)(1-λ2)] when both |λ_i|<1 | natural parameter estimate without matched actor-specific λ on a common scale |
 | network Dirichlet controller mismatch | exact post-freeze weighted-network identity | M = m^2 lambda^T L lambda / W; binary controller states recover the prior network-cut result | claim that current natural communities validate this controller-network mechanism |
 
+| cryptic clock-portfolio divergence | exact post-freeze portfolio identity | historically equal timing precision can diverge after opportunity loss according to log(V1'/V2')=(1-omega)P(s1-s2) under equal P and omega | claim generic hidden-mechanism variation is novel, or claim a current natural system estimates hidden feedback share and opportunity loss jointly |
+
 ## Canonical V3 evidence ordering
 
 The manuscript should present evidence in this order:
