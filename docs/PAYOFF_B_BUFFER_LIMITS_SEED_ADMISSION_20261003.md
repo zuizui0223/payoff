@@ -15,6 +15,24 @@ uncertainty or estimable from individual-level data.
 Correlation, repeatability and qualitative statements about "reset" are not
 converted into `beta_AB`.
 
+## Prior-art correction after the first six effects were opened
+
+A subsequent novelty audit identified two papers that narrow the V5 claim
+without changing the six already extracted effects:
+
+- Schmaljohann (2019) already reports species-specific departure-to-arrival
+  day-for-day relationships across 17 spring and 21 autumn migrant species.
+- van Bemmelen et al. (2024) already treats stage-to-stage timing relationships
+  as compensation/carry-over strength across the annual cycle of Arctic skuas.
+
+Therefore the slope concept, partial compression, and species variation in a
+departure-to-arrival slope are prior art. The remaining candidate contribution
+is a **cross-transition-class synthesis**.
+
+This correction was made after the first six V5 effects were visible. It is a
+novelty-boundary correction, not a new outcome hypothesis.
+
+
 ## SENNER2014 — Hudsonian godwit
 
 Source:
@@ -130,17 +148,19 @@ Design audit:
 Admission status:
 
 ```text
-PRIMARY_STATUS = EXCLUDE_PRIMARY_CORRELATION_ONLY
+PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLIC_INDIVIDUAL_DATA
 INDIVIDUAL_LEVEL_BIOLOGY = YES
+PUBLIC_RAW_DATA = YES
+DRYAD_DOI = 10.5061/dryad.12n6v
 REPORTED_RAW_BETA = NO_CONFIRMED
-SECONDARY_CORRELATION_SYNTHESIS = ELIGIBLE
 FITNESS_LAYER = ELIGIBLE
-NUMERICAL_PRIMARY_EXTRACTION = PROHIBITED
+NUMERICAL_PRIMARY_EXTRACTION = NOT_YET_OPENED
 ```
 
-This study can enter the separately declared secondary standardized-correlation
-or fitness layer, but not the primary `beta_AB` synthesis unless a public
-individual dataset or reported unstandardized slope is independently located.
+The published correlation and path coefficients remain ineligible as primary
+effects. The admission is instead based on the public individual-level Dryad
+dataset, from which only directly observed day-scale event transitions may be
+re-estimated under the frozen V5 definition.
 
 ## BRIEDIS2018 — collared flycatcher
 
@@ -364,15 +384,16 @@ primary timing-propagation effects.
 
 \`\`\`text
 SCREENED = 11
-PRIMARY_ADMIT_REESTIMATE = 3
+PRIMARY_ADMIT_REESTIMATE = 4
 PRIMARY_ADMIT_REPORTED = 3
 PRIMARY_CONDITIONAL = 1
-PRIMARY_EXCLUDE = 4
+PRIMARY_EXCLUDE = 3
 FOCAL_BETA_VALUES_OPENED = 6
 \`\`\`
 
 Admitted for re-estimation:
 - GOW2019
+- SAINO2017
 - CARNEIRO2023
 - LOPEZCALDERON2024
 
@@ -385,7 +406,6 @@ Conditional pending coefficient/data verification:
 - BRIEDIS2018
 
 Excluded from the primary beta synthesis under the current evidence state:
-- SAINO2017 — accessible result is correlation, not raw propagation;
 - CATRY2013 — experimental treatment contrast, not raw propagation;
 - ARCTIC_SKUA2024 — no directly reported event-to-event beta with admissible uncertainty confirmed;
 - BLACKTAILED2011 — Table 2 lacks raw beta and SE.
