@@ -481,7 +481,51 @@ shows why the same (lambda) can arise from different mechanisms.
 
 Low retention can reflect strong active feedback, low passive persistence, or both. Negative retention can arise from overshoot, anticipation, target movement or coordinate changes. Direct mechanistic inference therefore requires actuator and environmental information in addition to (lambda).
 
-### 4.6 Climate change can damage both prediction and control
+### 4.6 Prediction and reactive correction can be substitute control channels
+
+The controller also changes how cross-route comparisons should be interpreted.
+Let (R(q)) be mismatch risk remaining after the actor has used available
+pre-commitment information, and let downstream reactive gain (g) reduce that
+error at quadratic cost (c g^2/2):
+
+[
+L(g;q)=(1-g)^2R(q)+rac{c}{2}g^2.
+]
+
+The unique optimum is
+
+[
+g^*(q)=rac{2R(q)}{c+2R(q)},
+qquad
+lambda^*(q)=rac{c}{c+2R(q)}.
+]
+
+If better prediction lowers the mismatch reaching the feedback stage while
+correction cost is fixed, optimal downstream correction becomes weaker. Strong
+pre-commitment prediction and strong post-error correction are therefore
+substitutes in this reduced model, not necessarily positively correlated
+traits.
+
+More generally, if cue quality also changes the effective cost of correction,
+the sign is determined by
+
+[
+rac{d}{dq}lograc{g^*}{1-g^*}
+=
+rac{R'}{R}-rac{c'}{c}.
+]
+
+Prediction dominates when mismatch risk falls proportionally faster than
+correction cost; cue-informed correction dominates when correction becomes
+cheap or targeted faster than pre-correction risk falls.
+
+This result was derived after the barnacle-goose descriptive screen and the
+registered wigeon null were known. Those outcomes are therefore motivation,
+not confirmation. The ecological consequence is nevertheless important:
+**prediction before error and correction after error are separate control
+channels and should be estimated separately.**
+
+### 4.7 Climate change can damage both prediction and control
 
 Climate change can affect the framework through at least two distinct routes.
 
@@ -491,7 +535,7 @@ It can also change the window over which correction remains possible—for examp
 
 A species can therefore become more mismatched without losing its intrinsic ability to move or shift phenology. The problem can instead be that the forecast becomes reliable too late relative to the remaining control window.
 
-### 4.7 Interactions add a second layer of irreversibility
+### 4.8 Interactions add a second layer of irreversibility
 
 Physical correction and strategic coordination should be separated.
 
@@ -499,7 +543,7 @@ A migrant may still be capable of changing timing but face a partner that is not
 
 The Paper-2 game theory is most useful after the control theory, not before it: it explains why a physically feasible correction may remain strategically inaccessible.
 
-### 4.8 Direct natural validation remains prospective
+### 4.9 Direct natural validation remains prospective
 
 The current evidence supports pieces of the mechanism across different systems. It does not yet demonstrate, in one natural population, the full sequence
 
