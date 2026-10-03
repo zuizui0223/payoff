@@ -116,7 +116,7 @@ class StationaryPhaseVariance:
 
 @dataclass(frozen=True)
 class PhaseSenseInverse:
-    """Information weight inferred from mean and variance phase retention."""
+    """Information weight and feedback gain inferred from phase moments."""
 
     prior_variance: float
     next_variance: float
@@ -124,7 +124,9 @@ class PhaseSenseInverse:
     passive_retention: float
     mean_phase_retention: float
     innovation_adjusted_variance_ratio: float
+    normalized_mean_retention: float
     inferred_information_weight: float
+    inferred_control_gain: float
     inferred_observation_variance: float | None
 
 def _finite(name: str, value: float) -> float:
@@ -559,35 +561,81 @@ def stationary_gaussian_phase_variance(
     )
 
 
+
+def variance_retention_from_phase_moments(
+    *,
+    passive_retention: float,
+    control_gain: float,
+    information_weight: float,
+) -> tuple[float, float]:
+    """Return mean and variance retention for noisy individualized feedback.
+
+    For centered incoming phase error X with variance P, checkpoint information
+    weight K, proportional correction u=g*E[X|Z], passive retention phi, and no
+    process innovation,
+
+        lambda = Cov(X_next, X) / Var(X)
+               = phi * (1 - g K),
+
+    while
+
+        rho_V = Var(X_next) / Var(X)
+              = phi^2 * [1 - K g(2-g)].
+
+    Thus noisy information affects both the mean regression slope and the
+    variance funnel. The special identity lambda=phi(1-g) is licensed only
+    under perfect phase information K=1.
+    """
+
+    phi = _finite("passive_retention", passive_retention)
+    g = _nonnegative("control_gain", control_gain)
+    k = _finite("information_weight", information_weight)
+    if not 0.0 <= k <= 1.0:
+        raise ValueError("information_weight must lie in [0,1]")
+
+    lam = phi * (1.0 - g * k)
+    rho = phi**2 * (1.0 - k * g * (2.0 - g))
+    return lam, rho
+
+
 def variance_retention_from_mean_phase(
     *,
     passive_retention: float,
     mean_phase_retention: float,
     information_weight: float,
 ) -> float:
-    """Return innovation-free population variance retention.
+    """Return innovation-free variance retention given lambda, phi and K.
 
-    Combining
+    Under noisy individualized Gaussian feedback,
 
-        lambda = phi(1-g)
+        lambda / phi = 1 - g K.
 
-    with the variance-funnel recursion gives
+    Writing d = 1 - lambda/phi = g K gives
 
-        (P_next-Q)/P
-          = phi^2 [1-K g(2-g)]
-          = (1-K) phi^2 + K lambda^2.
+        rho_V / phi^2
+          = 1 - 2d + d^2/K.
 
-    Thus variance retention is a convex combination of the passive squared
-    retention and the squared closed-loop mean retention, weighted by the
-    effective information weight K.
+    This bridge differs from the perfect-information identity
+    rho_V=lambda^2 whenever K<1.
     """
 
     phi = _finite("passive_retention", passive_retention)
     lam = _finite("mean_phase_retention", mean_phase_retention)
     k = _finite("information_weight", information_weight)
+    if abs(phi) <= _TOL:
+        raise ValueError("passive_retention must be nonzero")
     if not 0.0 <= k <= 1.0:
         raise ValueError("information_weight must lie in [0,1]")
-    return (1.0 - k) * phi**2 + k * lam**2
+
+    d = 1.0 - lam / phi
+    if k <= _TOL:
+        if abs(d) > 1e-10:
+            raise ValueError(
+                "nonzero mean feedback is incompatible with zero "
+                "information weight"
+            )
+        return phi**2
+    return phi**2 * (1.0 - 2.0 * d + d * d / k)
 
 
 def infer_phase_information_weight(
@@ -599,27 +647,37 @@ def infer_phase_information_weight(
     mean_phase_retention: float,
     tolerance: float = 1e-10,
 ) -> PhaseSenseInverse:
-    """Infer effective checkpoint information weight from a variance funnel.
+    """Infer checkpoint information weight and feedback gain from phase moments.
 
-    Under the unclipped Gaussian controller,
+    For the noisy individualized Gaussian controller,
 
-        rho_V = (P_next-Q)/P
-              = (1-K) phi^2 + K lambda^2.
+        lambda = phi (1-g K)
 
-    If phi^2 != lambda^2,
+    and
 
-        K = [phi^2-rho_V] / [phi^2-lambda^2].
+        v = (P_next-Q)/(phi^2 P)
+          = 1 - K g(2-g).
 
-    With K=P/(P+R), the equivalent observation variance is
+    Define
 
-        R = P(1-K)/K.
+        d = 1 - lambda/phi = g K.
 
-    The inverse requires an independently justified passive retention phi and
-    process variance Q.  It must not be used by setting phi from the same
-    closed-loop transition being explained.
+    Then
 
-    If the inferred K lies outside [0,1] beyond tolerance, the declared
-    Gaussian feedback model is incompatible with the supplied moments.
+        v = 1 - 2d + d^2/K,
+
+    so, when d != 0,
+
+        K = d^2 / (v - 1 + 2d),
+        g = d / K.
+
+    Both an effective checkpoint information weight K and feedback gain g are
+    therefore recoverable from mean and variance retention, provided passive
+    retention phi and process innovation Q are identified independently.
+
+    The inverse is not identified when lambda=phi because only the product gK
+    is then known to be zero. It must not be used by estimating phi or Q from
+    the same closed-loop transition being explained.
     """
 
     p = _nonnegative("prior_variance", prior_variance)
@@ -631,27 +689,45 @@ def infer_phase_information_weight(
 
     if p <= _TOL:
         raise ValueError("prior_variance must be positive for the inverse")
+    if abs(phi) <= tol:
+        raise ValueError("passive_retention must be nonzero for the inverse")
 
-    rho = (pnext - qvar) / p
-    denom = phi**2 - lam**2
-    if abs(denom) <= tol:
+    normalized_lambda = lam / phi
+    d = 1.0 - normalized_lambda
+    if abs(d) <= tol:
         raise ValueError(
-            "information weight is not identified when passive and mean "
-            "squared retention are equal"
+            "information weight and control gain are not separately identified "
+            "when mean phase retention equals passive retention"
         )
 
-    k = (phi**2 - rho) / denom
+    v = (pnext - qvar) / (phi**2 * p)
+    denom = v - 1.0 + 2.0 * d
+    if denom <= tol:
+        raise ValueError(
+            "supplied mean/variance moments are incompatible with a positive "
+            "information weight under the declared model"
+        )
+
+    k = d * d / denom
     if k < -tol or k > 1.0 + tol:
         raise ValueError(
             "supplied mean/variance moments imply information weight outside "
             "[0,1] under the declared model"
         )
     k = min(max(k, 0.0), 1.0)
-
     if k <= tol:
-        obs_var = None
-    else:
-        obs_var = p * (1.0 - k) / k
+        raise ValueError(
+            "information weight and control gain are not separately identified "
+            "at zero effective information"
+        )
+
+    g = d / k
+    if g < -tol:
+        raise ValueError(
+            "supplied moments imply negative feedback gain under the declared model"
+        )
+    g = max(g, 0.0)
+    obs_var = p * (1.0 - k) / k
 
     return PhaseSenseInverse(
         prior_variance=p,
@@ -659,7 +735,9 @@ def infer_phase_information_weight(
         process_variance=qvar,
         passive_retention=phi,
         mean_phase_retention=lam,
-        innovation_adjusted_variance_ratio=rho,
+        innovation_adjusted_variance_ratio=v,
+        normalized_mean_retention=normalized_lambda,
         inferred_information_weight=k,
+        inferred_control_gain=g,
         inferred_observation_variance=obs_var,
     )
