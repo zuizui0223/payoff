@@ -193,5 +193,39 @@
       "effect uncertainty is unavailable for enough effects to support the declared multilevel synthesis"
     ],
     "no_estimator_switch_after_failure": true
+  },
+  "global_lane_contract": "docs/PAYOFF_B_V5_GLOBAL_HARMONIZED_LANE_CONTRACT_20261003.md",
+  "corpus_viability_gate": "docs/PAYOFF_B_V5_CORPUS_VIABILITY_GATE_20261003.md",
+  "preoutcome_eligibility_ledger": "data/payoff_b_v5_preoutcome_eligibility_ledger_20261003.csv",
+  "analysis_lanes": {
+    "G": {
+      "label": "global_harmonized_reanalysis",
+      "role": "primary_comparative_lane",
+      "source": "Wang et al. 2024 Figshare 10.6084/m9.figshare.24613599.v1",
+      "individual_records_only": true,
+      "population_proxy_rows_excluded": true,
+      "four_transitions": [
+        "SPRING_ACTIVE",
+        "BREEDING_STATIONARY",
+        "AUTUMN_ACTIVE",
+        "NONBREEDING_STATIONARY"
+      ]
+    },
+    "L": {
+      "label": "literature_transition_synthesis",
+      "role": "external_replication_generality_lane",
+      "primary_tiers": [
+        "A",
+        "B"
+      ]
+    }
+  },
+  "cross_lane_adjudication": {
+    "G_PASS_L_PASS": "CONVERGENT_COMPARATIVE_SUPPORT",
+    "G_PASS_L_FAIL_OR_NULL": "GLOBAL_DATASET_SUPPORT_ONLY",
+    "G_FAIL_OR_NULL_L_PASS": "LITERATURE_SYNTHESIS_SUPPORT_ONLY",
+    "G_FAIL_OR_NULL_L_FAIL_OR_NULL": "NO_SUPPORT",
+    "L_INSUFFICIENT": "GLOBAL_RESULT_WITH_EXTERNAL_VALIDATION_UNRESOLVED",
+    "G_INSUFFICIENT": "LITERATURE_RESULT_ONLY_IF_LANE_L_GATE_PASSES"
   }
 }
