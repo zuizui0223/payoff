@@ -144,7 +144,7 @@ h=\frac dK.
 Visual message:
 
 > The same mean phase retention can hide different information × effective
-> correction architectures. Mean + variance identify (K) and (h=Gg), not
+> correction architectures. Mean + variance identify (K) and (h=GOg), not
 > readiness (G) and decision gain (g) separately.
 
 This panel is prospective identification theory, not a current natural
