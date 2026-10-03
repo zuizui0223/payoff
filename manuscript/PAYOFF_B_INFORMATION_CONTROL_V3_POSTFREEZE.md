@@ -905,8 +905,7 @@ historical target variance and precision budget,
 }
 \]
 
-Opportunity loss can expose hidden timer-versus-feedback reliance as differential variance and partner mismatch. This **cryptic clock-portfolio**
-prediction remains prospective.
+Opportunity loss can expose hidden timer-versus-feedback reliance as differential variance and partner mismatch. This **cryptic clock-portfolio** prediction is prospective.
 
 
 ### 4.10 Interactions convert controller differences into ecological mismatch
