@@ -370,3 +370,52 @@ PAYOFF-B should claim the ecological synthesis:
 > opportunities determine which clock architecture is favored.**
 
 The cost functions used here are a transparent witness, not a universal law.
+
+
+## Feedback-majority threshold
+
+The precision shares imply an exact architectural crossover.
+
+Feedback supplies more than half of required log-precision when
+
+\[
+s_{\mathrm{feedback}}
+=
+\frac{4n^2a}{b+4n^2a}
+>
+\frac12.
+\]
+
+Equivalently,
+
+\[
+4n^2a>b.
+\]
+
+The continuous threshold is therefore
+
+\[
+\boxed{
+n_c
+=
+\frac12
+\sqrt{\frac ba}.
+}
+\]
+
+For integer checkpoint architectures:
+
+- \(n<n_c\): timer-heavy precision portfolio;
+- \(n=n_c\): equal timer/feedback precision when the threshold is exactly
+  integer;
+- \(n>n_c\): feedback-heavy precision portfolio.
+
+Thus the number of correction opportunities has a direct life-history
+interpretation.  Systems with few or no meaningful post-entry decisions are
+predicted to concentrate precision upstream, whereas sufficiently staged
+trajectories cross into a feedback-dominated architecture.
+
+The threshold depends on relative cost curvature.  If feedback is expensive
+(\(b/a\) large), more checkpoints are required before it dominates.  If entry
+precision is expensive (\(a\) large relative to \(b\)), even a small number of
+correction stages can favor feedback.

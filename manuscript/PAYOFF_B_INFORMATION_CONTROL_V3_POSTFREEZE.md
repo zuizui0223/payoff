@@ -858,9 +858,42 @@ migration with many stopovers can tolerate a noisier start because error can be
 corrected repeatedly. The cost functions are a mathematical witness, not a
 universal law.
 
-### 4.9 Climate change can reweight the clock portfolio
+### 4.9 Opportunity loss makes feedback-heavy portfolios fragile
 
-Climate change can reduce predictive connectivity before entry, remove stopovers or compress resource windows after entry, and change the energetic cost of speed, waiting or route adjustment. A historically successful timer-heavy or feedback-heavy strategy can therefore become mismatched without any single clock 'failing' in isolation.
+Climate change and land-use change can reduce predictive connectivity before
+entry, remove stopovers, compress resource windows or make route adjustment
+costly after entry.  The clock portfolio therefore creates a hidden
+dependency.
+
+Let \(\omega\in[0,1]\) be the fraction of historically usable downstream
+correction opportunity that remains after change.  If the organism retains the
+historical optimal portfolio, inherited-error variance is inflated relative to
+its historical target by
+
+\[
+\boxed{
+\frac{V_{\mathrm{disrupted}}}{V^*}
+=
+\exp[(1-\omega)s_{\mathrm{feedback}}P],
+}
+\]
+
+where \(P\) is required log-precision and \(s_{\mathrm{feedback}}\) is the
+historical fraction of that precision supplied by downstream feedback.
+
+Thus the same architecture that makes repeated movement efficient in an intact
+route can make it vulnerable when correction opportunities disappear. Under
+the quadratic witness, minimum intact cost falls with checkpoint number while
+opportunity-loss fragility rises: a **flexibility-dependence tradeoff**.
+One-shot timer-only systems are insensitive to this particular perturbation.
+
+Industrial-development mule deer provide a relevant natural anchor, not a test
+of this equation. Energy development altered migration behaviour and reduced
+route-scale green-wave surfing, while the registered PAYOFF-B reanalysis found
+attenuated near-boundary movement-control permeability in the
+large-development population. Those data do not identify
+\(\omega\) or \(s_{\mathrm{feedback}}\).
+
 
 ### 4.10 Interactions convert controller differences into ecological mismatch
 

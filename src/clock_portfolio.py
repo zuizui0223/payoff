@@ -56,6 +56,36 @@ class ClockPortfolio:
     absolute_phase_retention: float
 
 
+
+@dataclass(frozen=True)
+class OpportunityLossFragility:
+    """Tracking loss when a historically optimized feedback portfolio loses opportunities."""
+
+    historical_checkpoints: int
+    retained_opportunity_fraction: float
+    historical_feedback_precision_share: float
+    required_log_precision: float
+    historical_timer_effort: float
+    historical_feedback_effort_per_checkpoint: float
+    target_variance: float
+    disrupted_variance: float
+    variance_inflation_factor: float
+    excess_log_variance: float
+
+
+@dataclass(frozen=True)
+class FlexibilityDependenceTradeoff:
+    """Intact efficiency versus fragility of a checkpoint-rich architecture."""
+
+    checkpoints: float
+    timer_cost_curvature: float
+    feedback_cost_curvature: float
+    required_log_precision: float
+    retained_opportunity_fraction: float
+    minimum_intact_cost: float
+    feedback_precision_share: float
+    opportunity_loss_variance_inflation: float
+
 def _finite_positive(name: str, value: float) -> float:
     x = float(value)
     if not isfinite(x) or x <= 0.0:
@@ -279,3 +309,287 @@ def infinite_horizon_noise_floor(
     if not isfinite(q) or q < 0.0:
         raise ValueError("process_variance must be finite and non-negative")
     return q / (1.0 - lam * lam)
+
+
+def opportunity_loss_fragility(
+    baseline_variance: float,
+    target_variance: float,
+    *,
+    historical_checkpoints: int,
+    retained_opportunity_fraction: float,
+    timer_cost_curvature: float,
+    feedback_cost_curvature: float,
+) -> OpportunityLossFragility:
+    """Return error inflation after sudden loss of usable correction opportunity.
+
+    First compute the historical minimum-cost portfolio for n checkpoints.
+    Suppose the organism keeps that allocation while only fraction omega of the
+    historically available post-entry correction opportunity remains usable.
+
+    The inherited-error component becomes
+
+        V_disrupted
+          = V_ref exp[-x* - 2 omega n y*].
+
+    Because the historical target satisfies
+
+        P = x* + 2 n y*
+          = log(V_ref/V_target),
+
+    the target-relative inflation is exactly
+
+        V_disrupted / V_target
+          = exp[2 n (1-omega) y*]
+          = exp[(1-omega) s_feedback P].
+
+    Thus the historical feedback share is also a fragility coordinate for
+    sudden opportunity loss.
+
+    This witness does not include new process innovation during disruption.
+    """
+
+    vref = _finite_positive("baseline_variance", baseline_variance)
+    vt = _finite_positive("target_variance", target_variance)
+    if vt > vref:
+        raise ValueError("target_variance must not exceed baseline_variance")
+    n = _nonnegative_int("historical_checkpoints", historical_checkpoints)
+    omega = float(retained_opportunity_fraction)
+    if not isfinite(omega) or omega < 0.0 or omega > 1.0:
+        raise ValueError("retained_opportunity_fraction must lie in [0,1]")
+
+    portfolio = optimal_clock_portfolio(
+        vref,
+        vt,
+        checkpoints=n,
+        timer_cost_curvature=timer_cost_curvature,
+        feedback_cost_curvature=feedback_cost_curvature,
+    )
+
+    effective_n = omega * n
+    disrupted = vref * exp(
+        -(
+            portfolio.timer_effort
+            + 2.0 * effective_n * portfolio.feedback_effort_per_checkpoint
+        )
+    )
+    factor = disrupted / vt
+    excess = log(factor)
+
+    closed_excess = (
+        (1.0 - omega)
+        * portfolio.feedback_precision_share
+        * portfolio.required_log_precision
+    )
+    if abs(excess - closed_excess) > 1e-10:
+        raise AssertionError("opportunity-loss fragility identity failed")
+
+    return OpportunityLossFragility(
+        historical_checkpoints=n,
+        retained_opportunity_fraction=omega,
+        historical_feedback_precision_share=portfolio.feedback_precision_share,
+        required_log_precision=portfolio.required_log_precision,
+        historical_timer_effort=portfolio.timer_effort,
+        historical_feedback_effort_per_checkpoint=portfolio.feedback_effort_per_checkpoint,
+        target_variance=vt,
+        disrupted_variance=disrupted,
+        variance_inflation_factor=factor,
+        excess_log_variance=excess,
+    )
+
+
+def fragility_from_feedback_share(
+    required_log_precision: float,
+    feedback_precision_share: float,
+    *,
+    retained_opportunity_fraction: float,
+) -> float:
+    """Closed-form variance inflation from historical feedback reliance.
+
+    Returns
+
+        exp[(1-omega) s_feedback P].
+    """
+
+    P = float(required_log_precision)
+    s = float(feedback_precision_share)
+    omega = float(retained_opportunity_fraction)
+    if not isfinite(P) or P < 0.0:
+        raise ValueError("required_log_precision must be finite and non-negative")
+    if not isfinite(s) or s < 0.0 or s > 1.0:
+        raise ValueError("feedback_precision_share must lie in [0,1]")
+    if not isfinite(omega) or omega < 0.0 or omega > 1.0:
+        raise ValueError("retained_opportunity_fraction must lie in [0,1]")
+    return exp((1.0 - omega) * s * P)
+
+
+def feedback_majority_checkpoint_threshold(
+    *,
+    timer_cost_curvature: float,
+    feedback_cost_curvature: float,
+) -> float:
+    """Return the continuous checkpoint threshold for feedback-majority precision.
+
+    Under the quadratic witness,
+
+        s_feedback = 4 n^2 a / (b + 4 n^2 a).
+
+    Feedback supplies more than half of required log-precision iff
+
+        4 n^2 a > b,
+
+    so the continuous threshold is
+
+        n_c = 0.5 * sqrt(b/a).
+
+    Integer checkpoint architectures are feedback-majority when n > n_c.
+    """
+
+    a = _finite_positive("timer_cost_curvature", timer_cost_curvature)
+    b = _finite_positive("feedback_cost_curvature", feedback_cost_curvature)
+    return 0.5 * (b / a) ** 0.5
+
+
+def clock_portfolio_minimum_cost_closed_form(
+    required_log_precision: float,
+    *,
+    checkpoints: float,
+    timer_cost_curvature: float,
+    feedback_cost_curvature: float,
+) -> float:
+    """Return C* = a b P^2 / [2(b + 4 a n^2)] for continuous n>=0."""
+
+    P=float(required_log_precision)
+    n=float(checkpoints)
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_cost_curvature",feedback_cost_curvature)
+    if not isfinite(P) or P<0.0:
+        raise ValueError("required_log_precision must be finite and non-negative")
+    if not isfinite(n) or n<0.0:
+        raise ValueError("checkpoints must be finite and non-negative")
+    return a*b*P*P/(2.0*(b+4.0*a*n*n))
+
+
+def flexibility_dependence_tradeoff(
+    required_log_precision: float,
+    *,
+    checkpoints: float,
+    retained_opportunity_fraction: float,
+    timer_cost_curvature: float,
+    feedback_cost_curvature: float,
+) -> FlexibilityDependenceTradeoff:
+    """Return intact optimum cost and fragility under proportional opportunity loss.
+
+    For the quadratic witness,
+
+        C*(n) = a b P^2 / [2(b + 4 a n^2)]
+
+    decreases with n, while for any omega<1,
+
+        log F(n)
+          = (1-omega) P * 4 a n^2/(b+4 a n^2)
+
+    increases with n.
+
+    Thus checkpoint-rich architectures are cheaper in intact environments but
+    more dependent on retaining those opportunities.
+    """
+
+    P=float(required_log_precision)
+    n=float(checkpoints)
+    omega=float(retained_opportunity_fraction)
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_cost_curvature",feedback_cost_curvature)
+    if not isfinite(P) or P<0.0:
+        raise ValueError("required_log_precision must be finite and non-negative")
+    if not isfinite(n) or n<0.0:
+        raise ValueError("checkpoints must be finite and non-negative")
+    if not isfinite(omega) or omega<0.0 or omega>1.0:
+        raise ValueError("retained_opportunity_fraction must lie in [0,1]")
+
+    denom=b+4.0*a*n*n
+    s_feedback=0.0 if P==0.0 else 4.0*a*n*n/denom
+    cost=a*b*P*P/(2.0*denom)
+    inflation=exp((1.0-omega)*s_feedback*P)
+    return FlexibilityDependenceTradeoff(
+        checkpoints=n,
+        timer_cost_curvature=a,
+        feedback_cost_curvature=b,
+        required_log_precision=P,
+        retained_opportunity_fraction=omega,
+        minimum_intact_cost=cost,
+        feedback_precision_share=s_feedback,
+        opportunity_loss_variance_inflation=inflation,
+    )
+
+
+def per_use_cost_precision_shares(
+    *,
+    checkpoints: int,
+    timer_cost_curvature: float,
+    feedback_use_cost_curvature: float,
+) -> tuple[float, float]:
+    """Robustness case where feedback operating cost accumulates across checkpoints.
+
+    Use
+
+        C = (a/2)x^2 + n(b/2)y^2
+
+    with the same precision constraint
+
+        x + 2 n y = P.
+
+    For n>0 the exact shares are
+
+        s_timer = b / (b + 4 a n)
+        s_feedback = 4 a n / (b + 4 a n).
+
+    Thus the shift toward feedback is linear rather than quadratic in n, but
+    the qualitative checkpoint and opportunity-loss results are unchanged.
+    """
+
+    n=_nonnegative_int("checkpoints",checkpoints)
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_use_cost_curvature",feedback_use_cost_curvature)
+    if n==0:
+        return 1.0,0.0
+    denom=b+4.0*a*n
+    return b/denom,4.0*a*n/denom
+
+
+def per_use_cost_feedback_majority_threshold(
+    *,
+    timer_cost_curvature: float,
+    feedback_use_cost_curvature: float,
+) -> float:
+    """Continuous n threshold for feedback-majority under cumulative use cost.
+
+    Feedback supplies more than half of precision iff
+
+        4 a n > b,
+
+    hence n_c = b/(4a).
+    """
+
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_use_cost_curvature",feedback_use_cost_curvature)
+    return b/(4.0*a)
+
+
+def per_use_cost_minimum_cost(
+    required_log_precision: float,
+    *,
+    checkpoints: int,
+    timer_cost_curvature: float,
+    feedback_use_cost_curvature: float,
+) -> float:
+    """Return exact minimum cost under cumulative feedback-use cost."""
+
+    P=float(required_log_precision)
+    if not isfinite(P) or P<0.0:
+        raise ValueError("required_log_precision must be finite and non-negative")
+    n=_nonnegative_int("checkpoints",checkpoints)
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_use_cost_curvature",feedback_use_cost_curvature)
+    if n==0:
+        return 0.5*a*P*P
+    return a*b*P*P/(2.0*(b+4.0*a*n))
