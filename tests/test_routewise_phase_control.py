@@ -8,6 +8,7 @@ from src.routewise_phase_control import (
     population_phase_variance_step,
     stationary_gaussian_phase_variance,
     variance_retention_from_mean_phase,
+    variance_retention_from_phase_moments,
     optimal_quadratic_phase_correction,
     proportional_phase_step,
     routewise_gaussian_phase_control,
@@ -232,21 +233,35 @@ def test_perfect_checkpoint_information_with_deadbeat_gain_removes_incoming_vari
 
 
 def test_same_mean_phase_retention_can_have_different_variance_funnels():
-    # Mean phase retention lambda=phi(1-g)=0.5 in both cases.
+    # Hold observed mean lambda=phi(1-gK)=0.6 fixed while changing K.
     informative = population_phase_variance_step(
         100.0,
-        observation_variance=4.0,
-        control_gain=0.5,
+        observation_variance=25.0,  # K=0.8
+        control_gain=0.5,           # gK=0.4
         passive_retention=1.0,
         process_variance=0.0,
     )
     noisy = population_phase_variance_step(
         100.0,
-        observation_variance=400.0,
-        control_gain=0.5,
+        observation_variance=100.0, # K=0.5
+        control_gain=0.8,            # gK=0.4
         passive_retention=1.0,
         process_variance=0.0,
     )
+    lam_a, rho_a = variance_retention_from_phase_moments(
+        passive_retention=1.0,
+        control_gain=0.5,
+        information_weight=0.8,
+    )
+    lam_b, rho_b = variance_retention_from_phase_moments(
+        passive_retention=1.0,
+        control_gain=0.8,
+        information_weight=0.5,
+    )
+    assert lam_a == pytest.approx(0.6)
+    assert lam_b == pytest.approx(0.6)
+    assert informative.next_variance / 100.0 == pytest.approx(rho_a)
+    assert noisy.next_variance / 100.0 == pytest.approx(rho_b)
     assert informative.next_variance < noisy.next_variance
 
 
@@ -293,24 +308,31 @@ def test_stationary_variance_rejects_asymptotically_unstable_feedback():
         )
 
 
-def test_variance_retention_is_convex_bridge_between_passive_and_closed_loop_mean():
-    rho = variance_retention_from_mean_phase(
+def test_noisy_mean_and_variance_retention_bridge_is_exact():
+    lam, rho = variance_retention_from_phase_moments(
         passive_retention=1.0,
-        mean_phase_retention=0.5,
+        control_gain=0.5,
         information_weight=0.8,
     )
-    assert rho == pytest.approx(0.2 * 1.0 + 0.8 * 0.25)
+    bridged = variance_retention_from_mean_phase(
+        passive_retention=1.0,
+        mean_phase_retention=lam,
+        information_weight=0.8,
+    )
+    assert lam == pytest.approx(0.6)
+    assert rho == pytest.approx(0.4)
+    assert bridged == pytest.approx(rho)
 
 
-def test_phase_sense_inverse_recovers_information_weight_and_observation_variance():
+def test_phase_sense_inverse_recovers_information_gain_and_observation_variance():
     p = 100.0
     phi = 1.0
-    lam = 0.5
+    g = 0.5
     k = 0.8
     qvar = 4.0
-    rho = variance_retention_from_mean_phase(
+    lam, rho = variance_retention_from_phase_moments(
         passive_retention=phi,
-        mean_phase_retention=lam,
+        control_gain=g,
         information_weight=k,
     )
     pnext = rho * p + qvar
@@ -321,23 +343,25 @@ def test_phase_sense_inverse_recovers_information_weight_and_observation_varianc
         passive_retention=phi,
         mean_phase_retention=lam,
     )
+    assert lam == pytest.approx(0.6)
     assert inv.inferred_information_weight == pytest.approx(k)
+    assert inv.inferred_control_gain == pytest.approx(g)
     assert inv.inferred_observation_variance == pytest.approx(25.0)
 
 
 def test_phase_sense_inverse_rejects_moments_outside_declared_feedback_envelope():
-    with pytest.raises(ValueError, match="outside"):
+    with pytest.raises(ValueError, match="outside|incompatible"):
         infer_phase_information_weight(
             100.0,
-            120.0,
+            150.0,
             process_variance=0.0,
             passive_retention=1.0,
-            mean_phase_retention=0.5,
+            mean_phase_retention=0.6,
         )
 
 
-def test_phase_sense_inverse_requires_passive_closed_loop_separation():
-    with pytest.raises(ValueError, match="not identified"):
+def test_phase_sense_inverse_requires_nonzero_observable_feedback_product():
+    with pytest.raises(ValueError, match="not separately identified"):
         infer_phase_information_weight(
             100.0,
             100.0,
