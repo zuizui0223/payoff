@@ -305,27 +305,70 @@ Design audit:
 Admission status:
 
 \`\`\`text
-PRIMARY_STATUS = CONDITIONAL_REPORTED_SLOPE
+PRIMARY_STATUS = ADMIT_REPORTED_SLOPE
 INDIVIDUAL_LEVEL_DESIGN = YES
 SEQUENTIAL_TIMING = YES
 COMPENSATION_STAGE = MOULT_AND_NONBREEDING
 PUBLIC_RAW_EVENT_DATA = NOT_LOCATED_IN_CURRENT_SCREEN
-RAW_BETA_AND_UNCERTAINTY = VERIFY_FULL_TABLES
-NUMERICAL_EXTRACTION = NOT_YET_OPENED
+RAW_BETA_AND_UNCERTAINTY = PASSED_FOR_TWO_WITHIN_SUBJECT_TRANSITIONS
+NUMERICAL_EXTRACTION = OPENED
 \`\`\`
 
-This is biologically central to V5, but qualitative correction to the normal
-departure schedule cannot be encoded as beta=0 without the admissible slope.
+Table 3 supplies two admissible within-subject timing-to-timing effects:
+
+- New Zealand arrival -> start of primary moult:
+  beta_AB = 1.00, SE = 0.10;
+- end of pre-basic moult -> start of primary moult:
+  beta_AB = 0.23, SE = 0.10.
+
+Both are coded NONBREEDING_STATIONARY. The reported non-significant
+arrival -> spring-departure result is **not** coded as beta=0 because the
+unstandardized coefficient was not reported. Duration responses are likewise
+kept out of the primary timing-to-timing synthesis.
+
+## BRIEDIS_SPRINT2018 — collared flycatcher sprint migration
+
+Source:
+Briedis M et al. 2018. *Ecology and Evolution* 8:11179–11191.
+DOI 10.1002/ece3.4206.
+Dryad 10.5061/dryad.v51p331.
+
+Design audit:
+- individually tracked collared flycatchers were followed across complete
+  autumn and spring migration;
+- departure and arrival dates were analysed directly on the same day scale;
+- the authors also measured migration speed and documented stronger catch-up
+  in spring.
+
+Admission status:
+
+\`\`\`text
+PRIMARY_STATUS = ADMIT_REPORTED_SLOPE
+INDIVIDUAL_LEVEL_DESIGN = YES
+COMMON_DAY_UNITS = YES
+DIRECT_EVENT_TO_EVENT_BETA = YES
+NUMERICAL_EXTRACTION = OPENED
+\`\`\`
+
+Two direct departure-to-arrival effects are admissible:
+
+- autumn departure -> autumn arrival:
+  beta_AB = 0.49, SE = 0.13;
+- spring departure -> spring arrival:
+  beta_AB = 0.20, SE = 0.12.
+
+The migration-speed regressions are mechanistic anchors but are not themselves
+primary timing-propagation effects.
 
 ## Updated seed-screen tally
 
 \`\`\`text
-SCREENED = 10
+SCREENED = 11
 PRIMARY_ADMIT_REESTIMATE = 3
-PRIMARY_ADMIT_REPORTED = 1
-PRIMARY_CONDITIONAL = 2
+PRIMARY_ADMIT_REPORTED = 3
+PRIMARY_CONDITIONAL = 1
 PRIMARY_EXCLUDE = 4
-FOCAL_BETA_VALUES_OPENED = 2
+FOCAL_BETA_VALUES_OPENED = 6
 \`\`\`
 
 Admitted for re-estimation:
@@ -334,11 +377,12 @@ Admitted for re-estimation:
 - LOPEZCALDERON2024
 
 Admitted from reported coefficients:
-- SENNER2014 — two clean primary transitions opened.
+- SENNER2014 — two clean primary transitions opened;
+- CONKLIN2012 — two clean within-subject stationary transitions opened;
+- BRIEDIS_SPRINT2018 — autumn and spring departure-to-arrival slopes opened.
 
 Conditional pending coefficient/data verification:
 - BRIEDIS2018
-- CONKLIN2012
 
 Excluded from the primary beta synthesis under the current evidence state:
 - SAINO2017 — accessible result is correlation, not raw propagation;
