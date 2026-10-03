@@ -307,6 +307,12 @@ Visual message:
 > one-shot events are forced upstream; staged trajectories increasingly favor
 > downstream feedback.
 
+Small annotation:
+- fixed feedback-capacity cost: (s_F=4an^2/(b+4an^2));
+- additive per-use cost: feedback share = 4an/(b+4an).
+
+The checkpoint exponent is model-specific; the directional shift is shared.
+
 ### Panel B — Flexibility-dependence tradeoff
 
 Show two curves against \(n\):
