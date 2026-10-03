@@ -1,0 +1,38 @@
+name: PAYOFF-B Wang comparative retention schema probe
+
+concurrency:
+  group: payoff-b-wang-retention-probe-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-v4-direct-screen-20261003
+    paths:
+      - 'scripts/probe_payoff_b_wang_figshare.py'
+      - 'data/payoff_b_wang_species_retention_contract_20261003.json'
+      - 'docs/PAYOFF_B_WANG_RETENTION_PREANALYSIS_20261003.md'
+      - '.github/workflows/payoff-b-wang-species-retention-probe.yml'
+  pull_request:
+    paths:
+      - 'scripts/probe_payoff_b_wang_figshare.py'
+      - 'data/payoff_b_wang_species_retention_contract_20261003.json'
+      - 'docs/PAYOFF_B_WANG_RETENTION_PREANALYSIS_20261003.md'
+      - '.github/workflows/payoff-b-wang-species-retention-probe.yml'
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests openpyxl
+      - run: python scripts/probe_payoff_b_wang_figshare.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-wang-retention-schema-probe
+          path: outputs/payoff_b_wang_figshare_schema_probe.json
+          if-no-files-found: error
