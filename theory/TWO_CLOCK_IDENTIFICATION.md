@@ -16,14 +16,14 @@ The correction is
 \[
 u_t
 =
-G_tg_t\hat e_t.
+G_tO_tg_t\hat e_t.
 \]
 
 Define effective correction gain
 
 \[
 \boxed{
-h_t=G_tg_t.
+h_t=G_tO_tg_t.
 }
 \]
 
@@ -35,8 +35,8 @@ e_{t+1}
 \phi_t(e_t-h_t\hat e_t)+w_t.
 \]
 
-This already establishes an identification issue: readiness and decision gain
-enter the observed trajectory as a product.
+This establishes an identification issue: readiness, remaining opportunity and
+decision gain enter the observed trajectory as a product.
 
 ## 2. Mean and variance signatures identify information and effective correction
 
@@ -139,28 +139,34 @@ This is the central two-clock identification boundary.
 The earlier phase-sense inverse should consequently be interpreted as
 identifying \(K\) and \(h=Gg\) unless \(G=1\) is independently justified.
 
-## 4. Readiness, information and decision gain are multiplicative complements
+## 4. Readiness, opportunity, information and decision gain are multiplicative complements
 
 Because
 
 \[
-\lambda=\phi(1-GgK),
+\lambda=\phi(1-GOgK),
 \]
 
-the active correction term is the product \(GgK\), not a sum.
+the active correction term is the product \(GOgK\), not a sum.
 
 The exact local sensitivities are
 
 \[
 \frac{\partial\lambda}{\partial G}
 =
--\phi gK,
+-\phi OgK,
+\]
+
+\[
+\frac{\partial\lambda}{\partial O}
+=
+-\phi GgK,
 \]
 
 \[
 \frac{\partial\lambda}{\partial K}
 =
--\phi Gg,
+-\phi GOg,
 \]
 
 and
@@ -168,39 +174,32 @@ and
 \[
 \frac{\partial\lambda}{\partial g}
 =
--\phi GK.
+-\phi GOK.
 \]
 
-Therefore:
+Therefore better information has no phase-control effect if the organism is not
+ready (\(G=0\)) or if the opportunity has already expired (\(O=0\)). Likewise,
+readiness does not help when no ecologically useful action remains.
 
-- better information has no phase-control effect when readiness is closed
-  (\(G=0\));
-- stronger decision gain has no phase-control effect when usable information is
-  absent (\(K=0\));
-- greater readiness has no active correction effect when the controller does
-  not respond (\(g=0\)).
-
-The mechanisms are **complements**. Improving one layer is valuable only to the
-extent that the other required layers are functioning.
+The mechanisms are **multiplicative complements**.
 
 For small actor differences around a common baseline,
 
 \[
 \delta\lambda
 \approx
-(1-GgK)\,\delta\phi
+(1-GOgK)\delta\phi
 -
-\phi gK\,\delta G
+\phi OgK\,\delta G
 -
-\phi GK\,\delta g
+\phi GgK\,\delta O
 -
-\phi Gg\,\delta K.
+\phi GOK\,\delta g
+-
+\phi GOg\,\delta K.
 \]
 
-This gives a local attribution of controller asymmetry into passive,
-readiness, decision-gain and information components. It is a differential
-approximation, not an exact decomposition for large cross-species differences.
-
+This is a local attribution, not an exact finite-change decomposition.
 ## 5. What separates the two clocks
 
 One additional independent quantity is sufficient in the reduced model.
@@ -249,7 +248,23 @@ Primary target:
 G.
 \]
 
-### B. Information perturbation
+### B. Opportunity perturbation
+
+Change whether an otherwise possible action remains ecologically useful,
+without changing readiness or cue reliability.
+
+Examples:
+- experimentally alter stopover availability;
+- impose/remove a route barrier;
+- alter the duration of a resource window.
+
+Primary target:
+
+[
+O.
+]
+
+### C. Information perturbation
 
 Change the reliability or availability of the phase cue without changing
 physical actuator capacity.
@@ -260,7 +275,7 @@ Primary target:
 K.
 \]
 
-### C. Actuator perturbation
+### D. Actuator perturbation
 
 Change the cost or availability of speed, stopover, route or timing correction
 after readiness.
@@ -311,7 +326,7 @@ If actuator \(a\) has gate \(G_a\) and declared ecological importance
 r
 =
 \frac{
-\sum_a\omega_aG_a
+\sum_a\omega_aG_aO_a
 }{
 \sum_a\omega_a
 }.
@@ -331,7 +346,7 @@ Actor \(i\) has
 \[
 \lambda_i
 =
-\phi_i(1-G_ig_iK_i).
+\phi_i(1-G_iO_i g_iK_i).
 \]
 
 For a synchronized interacting pair under shared seasonal error \(m_t\),
