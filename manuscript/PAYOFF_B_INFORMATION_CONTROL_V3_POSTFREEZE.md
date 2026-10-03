@@ -881,11 +881,11 @@ its historical target by
 where \(P\) is required log-precision and \(s_{\mathrm{feedback}}\) is the
 historical fraction of that precision supplied by downstream feedback.
 
-Thus the same architecture that makes repeated movement robust in an intact
-route can make it vulnerable when correction opportunities disappear.
-Feedback-heavy systems are more sensitive to the same proportional opportunity
-loss; one-shot timer-only systems are insensitive to this particular
-perturbation.
+Thus the same architecture that makes repeated movement efficient in an intact
+route can make it vulnerable when correction opportunities disappear. Under
+the quadratic witness, minimum intact cost falls with checkpoint number while
+opportunity-loss fragility rises: a **flexibility-dependence tradeoff**.
+One-shot timer-only systems are insensitive to this particular perturbation.
 
 Industrial-development mule deer provide a relevant natural anchor, not a test
 of this equation. Energy development altered migration behaviour and reduced
