@@ -1,0 +1,24 @@
+name: PAYOFF-B Ortega Dryad biometrics probe
+
+on:
+  push:
+    paths:
+      - "scripts/payoff_b_ortega_dryad_biometrics_probe.py"
+      - ".github/workflows/payoff-b-ortega-dryad-biometrics-probe.yml"
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python scripts/payoff_b_ortega_dryad_biometrics_probe.py \
+            --output outputs/payoff_b_ortega_dryad_biometrics_probe.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-ortega-dryad-biometrics-probe
+          path: outputs/payoff_b_ortega_dryad_biometrics_probe.json
