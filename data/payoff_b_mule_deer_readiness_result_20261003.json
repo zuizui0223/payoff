@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_READINESS_SOURCE_DATA_RESULT",
+  "frozen_submission_affected": false,
+  "source": {
+    "article": "Ortega et al. 2023 Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "source_data_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+    "readiness_sheet": "SFig1",
+    "phase_sheet": "Fig1a,b;Fig3;SFig2;STables1,6"
+  },
+  "schema": {
+    "readiness_rows_with_joinable_fat_and_timing": 93,
+    "temporally_safe_rows": 62,
+    "unsafe_or_ambiguous_rows": 31
+  },
+  "all_joined_descriptive": {
+    "n": 93,
+    "animals": 50,
+    "slope_std_start_per_scaledIFBFat": -3.644119818412681,
+    "pearson_r": -0.21829470617324714,
+    "spearman_rho": -0.21673678418329884,
+    "year_fe_slope": -2.0709194694838393
+  },
+  "safe_primary": {
+    "n": 62,
+    "animals": 40,
+    "years": [
+      2014,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "fat_min": 2.964435,
+    "fat_max": 9.8028925,
+    "start_doy_min": 91,
+    "start_doy_max": 152,
+    "slope_std_start_per_scaledIFBFat": -3.970569908141254,
+    "pearson_r": -0.33665030017164177,
+    "spearman_rho": -0.27439387134853904,
+    "year_fe_slope": -2.1379092529302173
+  },
+  "safe_cluster_bootstrap": {
+    "cluster_unit": "animal",
+    "unique_animals": 40,
+    "replicates_requested": 10000,
+    "replicates_completed": 10000,
+    "slope_ci95": [
+      -6.305361378183289,
+      -0.6863309352158383
+    ],
+    "year_fe_slope_ci95": [
+      -6.89383581063983,
+      1.5785487412423094
+    ],
+    "spearman_ci95": [
+      -0.5208828477112146,
+      0.001019164922489147
+    ]
+  },
+  "safe_leave_one_animal_out": {
+    "n_fits": 40,
+    "min_slope": -4.797270167527569,
+    "max_slope": -3.4277653797844336
+  },
+  "classification": {
+    "timer_upgrade_rule": "T3_CANDIDATE only if safe n>=20 and animal-cluster slope CI excludes zero",
+    "timer_upgrade_passes": true,
+    "licensed_timer_label": "T3_CANDIDATE",
+    "licensed_decision_label": "D2",
+    "licensed_hybrid_label": "H1_CANDIDATE",
+    "H2_rule": "NO; requires a separate readiness-gated signed-feedback test"
+  },
+  "boundaries": [
+    "scaledIFBFat is a nutritional/physiological readiness proxy, not a molecular clock",
+    "the safe subset guarantees that a March measurement preceded migration start, but exact capture day is not observed",
+    "the year-fixed-effect sensitivity interval crosses zero",
+    "association with departure timing does not prove a threshold gate",
+    "no readiness-gated feedback H2 claim is licensed",
+    "frozen GEB V2 and preregistered outcomes are unchanged"
+  ]
+}
