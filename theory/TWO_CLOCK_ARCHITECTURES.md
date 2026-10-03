@@ -151,7 +151,9 @@ The full architecture is therefore
 \boxed{
 \text{physiological state}
 \rightarrow
-\text{readiness / feasible actions}
+G_t\;(\text{ready})
+\rightarrow
+O_t\;(\text{opportunity remains})
 \rightarrow
 \text{information-dependent decision}
 \rightarrow
