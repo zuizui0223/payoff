@@ -2,14 +2,15 @@
 
 Post-freeze PAYOFF-B extension.
 
-The two-clock architecture separates:
-- G in [0,1]: physiological/developmental readiness or actuator availability;
+The architecture separates:
+- G in [0,1]: physiological/developmental readiness (an opening gate);
+- A in [0,1]: remaining ecological opportunity/actuator availability (a closing gate);
 - K in [0,1]: effective information weight for signed phase;
-- g >= 0: decision/controller gain once the action is available.
+- g >= 0: decision/controller gain when correction is usable.
 
 Observed correction is governed by the product
 
-    h = G g,
+    h = G A g,
 
 so the mean phase-retention coefficient is
 
@@ -21,7 +22,7 @@ and the innovation-free variance-retention ratio is
 
 Mean + variance moments can identify K and h when passive retention phi and
 process innovation Q are independently known. They cannot, by themselves,
-separate G from g.
+separate G, A and g.
 """
 
 from __future__ import annotations
@@ -38,6 +39,7 @@ _TOL = 1e-12
 class TwoClockForward:
     passive_retention: float
     readiness_gate: float
+    opportunity_gate: float
     decision_gain: float
     information_weight: float
     effective_gain: float
@@ -72,11 +74,13 @@ class TwoClockSensitivity:
 
     passive_retention: float
     readiness_gate: float
+    opportunity_gate: float
     decision_gain: float
     information_weight: float
     mean_phase_retention: float
     d_lambda_d_phi: float
     d_lambda_d_G: float
+    d_lambda_d_A: float
     d_lambda_d_g: float
     d_lambda_d_K: float
 
@@ -105,6 +109,7 @@ def two_clock_forward(
     *,
     passive_retention: float,
     readiness_gate: float,
+    opportunity_gate: float = 1.0,
     decision_gain: float,
     information_weight: float,
 ) -> TwoClockForward:
@@ -112,16 +117,18 @@ def two_clock_forward(
 
     phi = _finite("passive_retention", passive_retention)
     G = _unit("readiness_gate", readiness_gate)
+    A = _unit("opportunity_gate", opportunity_gate)
     g = _nonnegative("decision_gain", decision_gain)
     K = _unit("information_weight", information_weight)
 
-    h = G * g
+    h = G * A * g
     lam = phi * (1.0 - h * K)
     rho = phi**2 * (1.0 - K * h * (2.0 - h))
 
     return TwoClockForward(
         passive_retention=phi,
         readiness_gate=G,
+        opportunity_gate=A,
         decision_gain=g,
         information_weight=K,
         effective_gain=h,
@@ -139,7 +146,7 @@ def infer_information_and_effective_gain(
     mean_phase_retention: float,
     tolerance: float = 1e-10,
 ) -> TwoClockInverse:
-    """Infer K and h=Gg from mean and variance phase moments.
+    """Infer K and h=G*A*g from mean and variance phase moments.
 
     Let
 
@@ -159,7 +166,7 @@ def infer_information_and_effective_gain(
         K = d^2 / (v - 1 + 2d),
         h = d / K.
 
-    G and g are not separately identified without another constraint.
+    G, A and g are not separately identified without additional constraints.
     """
 
     P = _nonnegative("prior_variance", prior_variance)
@@ -217,13 +224,15 @@ def separate_readiness_and_decision_gain(
     effective_gain: float,
     *,
     readiness_gate: float | None = None,
+    opportunity_gate: float = 1.0,
     decision_gain: float | None = None,
     tolerance: float = 1e-10,
 ) -> ClockSeparation:
-    """Separate h=Gg only when G or g is independently known.
+    """Separate h=G*A*g conditional on an independently known opportunity A.
 
-    Exactly one of readiness_gate or decision_gain should normally be supplied.
-    If both are supplied, the function only verifies their product.
+    This legacy helper treats opportunity_gate as known (default A=1). Exactly
+    one of readiness_gate or decision_gain should normally be supplied. If both
+    are supplied, the function verifies G*A*g=h.
     """
 
     h = _nonnegative("effective_gain", effective_gain)
@@ -233,6 +242,8 @@ def separate_readiness_and_decision_gain(
         raise ValueError(
             "G and g are not separately identified from effective_gain alone"
         )
+
+    A = _unit("opportunity_gate", opportunity_gate)
 
     if readiness_gate is not None:
         G = _unit("readiness_gate", readiness_gate)
@@ -245,7 +256,7 @@ def separate_readiness_and_decision_gain(
         g = None
 
     if G is not None and g is not None:
-        if abs(G * g - h) > tol:
+        if abs(G * A * g - h) > tol:
             raise ValueError("supplied readiness_gate and decision_gain do not match h")
         return ClockSeparation(
             effective_gain=h,
@@ -259,7 +270,9 @@ def separate_readiness_and_decision_gain(
             if h > tol:
                 raise ValueError("positive effective_gain is impossible at G=0")
             raise ValueError("decision_gain is not identified when G=0 and h=0")
-        g = h / G
+        if A <= tol:
+            raise ValueError("decision_gain is not identified when opportunity_gate=0")
+        g = h / (G * A)
         return ClockSeparation(
             effective_gain=h,
             readiness_gate=G,
@@ -272,7 +285,9 @@ def separate_readiness_and_decision_gain(
         if h > tol:
             raise ValueError("positive effective_gain is impossible at g=0")
         raise ValueError("readiness_gate is not identified when g=0 and h=0")
-    G = h / g
+    if A <= tol:
+        raise ValueError("readiness_gate is not identified when opportunity_gate=0")
+    G = h / (A * g)
     if G > 1.0 + tol:
         raise ValueError("inferred readiness_gate exceeds 1")
     G = min(max(G, 0.0), 1.0)
@@ -287,20 +302,33 @@ def separate_readiness_and_decision_gain(
 def reduced_actionability_from_gates(
     readiness_gates: Sequence[float],
     *,
+    opportunity_gates: Sequence[float] | None = None,
     weights: Sequence[float] | None = None,
 ) -> float:
-    """Return a declared weighted reduced actionability summary.
+    """Return a declared weighted reduced usable-action summary.
 
-    This is a convenient reduction,
+    A readiness gate G opens an actuator; an opportunity gate A records whether
+    that actuator remains ecologically usable. A convenient reduction is
 
-        r = sum_a omega_a G_a / sum_a omega_a,
+        r = sum_a omega_a G_a A_a / sum_a omega_a.
 
-    not a universal definition of Paper-2 actionability.
+    This is not a universal definition of Paper-2 actionability.
     """
 
     gates = tuple(_unit("readiness_gate", x) for x in readiness_gates)
     if not gates:
         raise ValueError("at least one readiness gate is required")
+
+    if opportunity_gates is None:
+        opportunities = (1.0,) * len(gates)
+    else:
+        opportunities = tuple(
+            _unit("opportunity_gate", x) for x in opportunity_gates
+        )
+        if len(opportunities) != len(gates):
+            raise ValueError(
+                "opportunity_gates and readiness_gates must have equal length"
+            )
 
     if weights is None:
         ws = (1.0,) * len(gates)
@@ -312,23 +340,27 @@ def reduced_actionability_from_gates(
     total = sum(ws)
     if total <= _TOL:
         raise ValueError("positive total weight is required")
-    return sum(w * g for w, g in zip(ws, gates)) / total
+    return sum(
+        w * G * A for w, G, A in zip(ws, gates, opportunities)
+    ) / total
 
 
 def two_clock_retention_sensitivity(
     *,
     passive_retention: float,
     readiness_gate: float,
+    opportunity_gate: float = 1.0,
     decision_gain: float,
     information_weight: float,
 ) -> TwoClockSensitivity:
-    """Return exact local derivatives of lambda=phi(1-GgK).
+    """Return exact local derivatives of lambda=phi(1-G*A*g*K).
 
     The active-correction layers are multiplicative complements:
 
-        d lambda / dG = -phi g K
-        d lambda / dg = -phi G K
-        d lambda / dK = -phi G g.
+        d lambda / dG = -phi A g K
+        d lambda / dA = -phi G g K
+        d lambda / dg = -phi G A K
+        d lambda / dK = -phi G A g.
 
     Therefore the marginal effect of improving any one layer vanishes when a
     required partner layer is zero.
@@ -336,20 +368,23 @@ def two_clock_retention_sensitivity(
 
     phi = _finite("passive_retention", passive_retention)
     G = _unit("readiness_gate", readiness_gate)
+    A = _unit("opportunity_gate", opportunity_gate)
     g = _nonnegative("decision_gain", decision_gain)
     K = _unit("information_weight", information_weight)
 
-    lam = phi * (1.0 - G * g * K)
+    lam = phi * (1.0 - G * A * g * K)
     return TwoClockSensitivity(
         passive_retention=phi,
         readiness_gate=G,
+        opportunity_gate=A,
         decision_gain=g,
         information_weight=K,
         mean_phase_retention=lam,
-        d_lambda_d_phi=1.0 - G * g * K,
-        d_lambda_d_G=-phi * g * K,
-        d_lambda_d_g=-phi * G * K,
-        d_lambda_d_K=-phi * G * g,
+        d_lambda_d_phi=1.0 - G * A * g * K,
+        d_lambda_d_G=-phi * A * g * K,
+        d_lambda_d_A=-phi * G * g * K,
+        d_lambda_d_g=-phi * G * A * K,
+        d_lambda_d_K=-phi * G * A * g,
     )
 
 
@@ -357,10 +392,12 @@ def first_order_controller_difference(
     *,
     passive_retention: float,
     readiness_gate: float,
+    opportunity_gate: float = 1.0,
     decision_gain: float,
     information_weight: float,
     delta_phi: float = 0.0,
     delta_G: float = 0.0,
+    delta_A: float = 0.0,
     delta_g: float = 0.0,
     delta_K: float = 0.0,
 ) -> float:
@@ -369,10 +406,11 @@ def first_order_controller_difference(
     Around a declared baseline,
 
         delta_lambda ≈
-            (1-GgK) delta_phi
-          - phi gK delta_G
-          - phi GK delta_g
-          - phi Gg delta_K.
+            (1-GAgK) delta_phi
+          - phi AgK delta_G
+          - phi GgK delta_A
+          - phi GAK delta_g
+          - phi GAg delta_K.
 
     This is a local attribution device, not an exact finite-change
     decomposition for large differences.
@@ -381,12 +419,14 @@ def first_order_controller_difference(
     s = two_clock_retention_sensitivity(
         passive_retention=passive_retention,
         readiness_gate=readiness_gate,
+        opportunity_gate=opportunity_gate,
         decision_gain=decision_gain,
         information_weight=information_weight,
     )
     return (
         s.d_lambda_d_phi * _finite("delta_phi", delta_phi)
         + s.d_lambda_d_G * _finite("delta_G", delta_G)
+        + s.d_lambda_d_A * _finite("delta_A", delta_A)
         + s.d_lambda_d_g * _finite("delta_g", delta_g)
         + s.d_lambda_d_K * _finite("delta_K", delta_K)
     )
