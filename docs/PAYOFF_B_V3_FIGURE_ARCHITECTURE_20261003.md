@@ -124,7 +124,7 @@ and
 \[
 P_{t+1}
 =
-\phi^2P_t[1-Kg(2-g)]+Q.
+\phi^2P_t[1-Kh(2-h)]+Q.
 \]
 
 With independently identified \(\phi,Q\),
@@ -145,7 +145,7 @@ Visual message:
 
 > The same mean phase retention can hide different information × effective
 > correction architectures. Mean + variance identify (K) and (h=GOg), not
-> readiness (G) and decision gain (g) separately.
+> readiness (G), opportunity (O), and decision gain (g) separately.
 
 This panel is prospective identification theory, not a current natural
 parameter estimate.
@@ -239,7 +239,7 @@ Keep empirical modules visually separated by inferential status:
 
 - preregistered broad-bird predictive-connectivity result;
 - reconstructed migration-distance response contrast;
-- Ortega continuous source-data anchor;
+- Ortega continuous source-data phase funnel plus T3_CANDIDATE/D2 H1_CANDIDATE readiness-feedback channel anchor;
 - wigeon preregistered null;
 - negative natural reversal gates.
 
