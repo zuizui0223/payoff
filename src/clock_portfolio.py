@@ -197,3 +197,85 @@ def clock_portfolio_precision_shares(
         return 1.0, 0.0
     denom = b + 4.0 * n * n * a
     return b / denom, 4.0 * n * n * a / denom
+
+
+def final_variance_with_process_noise(
+    initial_variance: float,
+    *,
+    absolute_phase_retention: float,
+    process_variance: float,
+    checkpoints: int,
+) -> float:
+    """Return final variance with independent innovation after each checkpoint.
+
+    Recursion:
+
+        V_(k+1) = lambda^2 V_k + Q.
+
+    Hence for n checkpoints,
+
+        V_n
+          = lambda^(2n) V_0
+            + Q * sum_{j=0}^{n-1} lambda^(2j).
+
+    The entry clock affects only the first term.  Innovations generated after
+    entry cannot be removed by improving V_0.
+    """
+
+    v0 = _finite_positive("initial_variance", initial_variance)
+    lam = float(absolute_phase_retention)
+    q = float(process_variance)
+    if not isfinite(lam) or lam < 0.0:
+        raise ValueError("absolute_phase_retention must be finite and non-negative")
+    if not isfinite(q) or q < 0.0:
+        raise ValueError("process_variance must be finite and non-negative")
+    n = _nonnegative_int("checkpoints", checkpoints)
+
+    if n == 0:
+        return v0
+    lam2 = lam * lam
+    if abs(lam2 - 1.0) < 1e-12:
+        innovation = n * q
+    else:
+        innovation = q * (1.0 - lam2**n) / (1.0 - lam2)
+    return lam2**n * v0 + innovation
+
+
+def post_entry_noise_floor(
+    *,
+    absolute_phase_retention: float,
+    process_variance: float,
+    checkpoints: int,
+) -> float:
+    """Variance contribution that no entry-clock precision can eliminate."""
+
+    lam = float(absolute_phase_retention)
+    q = float(process_variance)
+    if not isfinite(lam) or lam < 0.0:
+        raise ValueError("absolute_phase_retention must be finite and non-negative")
+    if not isfinite(q) or q < 0.0:
+        raise ValueError("process_variance must be finite and non-negative")
+    n = _nonnegative_int("checkpoints", checkpoints)
+
+    if n == 0 or q == 0.0:
+        return 0.0
+    lam2 = lam * lam
+    if abs(lam2 - 1.0) < 1e-12:
+        return n * q
+    return q * (1.0 - lam2**n) / (1.0 - lam2)
+
+
+def infinite_horizon_noise_floor(
+    *,
+    absolute_phase_retention: float,
+    process_variance: float,
+) -> float:
+    """Stationary innovation floor Q/(1-lambda^2) for |lambda|<1."""
+
+    lam = float(absolute_phase_retention)
+    q = float(process_variance)
+    if not isfinite(lam) or lam < 0.0 or lam >= 1.0:
+        raise ValueError("absolute_phase_retention must lie in [0,1)")
+    if not isfinite(q) or q < 0.0:
+        raise ValueError("process_variance must be finite and non-negative")
+    return q / (1.0 - lam * lam)
