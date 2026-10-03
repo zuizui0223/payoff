@@ -353,7 +353,7 @@ def test_phase_sense_inverse_rejects_moments_outside_declared_feedback_envelope(
     with pytest.raises(ValueError, match="outside|incompatible"):
         infer_phase_information_weight(
             100.0,
-            150.0,
+            30.0,
             process_variance=0.0,
             passive_retention=1.0,
             mean_phase_retention=0.6,
