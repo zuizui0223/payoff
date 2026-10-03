@@ -30,7 +30,8 @@ from collections import defaultdict
 from pathlib import Path
 
 
-DEFAULT_URL="https://datadryad.org/downloads/file_stream/4015617"
+DEFAULT_URL="https://datadryad.org/api/v2/files/4015617/download"
+EXPECTED_SHA256="3845a83384c56cb106cd4c8f19b50f0e17ba1a3229165bdd291e86e7cf3118bb"
 
 EXPECTED_COLUMNS={
     "species","individual_id","site","year","depart","AC","arrival",
@@ -304,6 +305,8 @@ def main():
 
     raw=download(args.url)
     sha=hashlib.sha256(raw).hexdigest()
+    if sha != EXPECTED_SHA256:
+        raise SystemExit(f'source SHA mismatch: {sha}')
     rows,header=prepare_rows(raw)
 
     eligible=eligible_group_keys(rows,"depart","AC",3)
