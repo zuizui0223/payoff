@@ -22,16 +22,20 @@ full-annual-cycle records from 186 species. The candidate contribution is the
 ## Prior-art boundary
 
 - Wang et al. 2024: pooled global departure→arrival carry-over is already known.
+- Schmaljohann 2019: species-specific departure→arrival slopes and their
+  heterogeneity are already known in 17 spring and 21 autumn songbird species.
 - Franklin et al. 2022: within-stage timing repeatability varies across annual
   cycle stages in 47 species; this measures across-year consistency, not
   within-migration propagation of a departure anomaly.
-- Morbey & Schmaljohann 2020: comparative spring migration speed and departure
-  traits for 25 songbirds; no species-specific departure→arrival retention.
-- Linssen et al. 2025: fuelling-time flexibility across five Arctic-breeding
-  waterfowl; a related but narrower metric.
+- Ralston et al. 2025: explicitly identify individual migration distance as a
+  candidate determinant of the ability to compensate delayed spring departure
+  en route.
+- Stopover studies show stronger time constraints and different departure
+  decisions in long-distance migrants, but do not establish the sign of the
+  distance effect on whole-journey departure→arrival retention.
 
-Thus PAYOFF-B must not call "carry-over", "flexibility", or "departure affects
-arrival" new.
+Thus PAYOFF-B must not call "carry-over", "flexibility", "departure affects
+arrival", or species-specific retention heterogeneity new.
 
 ## Primary estimand
 
@@ -84,13 +88,32 @@ retention, or impose stronger time constraints, increasing retention.
 
 ## Novelty decision
 
-A publishable comparative result requires more than a pooled carry-over effect.
+The primary candidate novelty is now restricted to the **migration-distance
+moderation of timing retention**.
 
-The route is biologically informative if:
-- species-level heterogeneity is estimable in >=20 species; and
-- either the paired seasonal contrast or a predeclared ecological moderator is
-  supported with its declared uncertainty.
+The route remains open only if:
+- species-level retention is estimable in >=20 species; and
+- the predeclared relationship between log migration distance and spring
+  retention is estimable and its declared uncertainty interval excludes zero.
 
-Otherwise the result remains a bounded comparative null.
+Two competing biological predictions are retained:
+- **recourse-opportunity:** longer routes provide more stages for acceleration,
+  stopover shortening or route adjustment, so retention should be lower;
+- **time-constraint:** longer routes impose tighter schedules, so departure
+  deviations should be retained more strongly.
+
+The spring–autumn contrast and body mass are secondary context only and cannot
+rescue a null distance result. Species-level heterogeneity by itself is not
+publishable PAYOFF-B novelty because Schmaljohann (2019) already established it.
 
 No post-result taxonomic subgroup search is allowed to rescue this lane.
+
+
+## Transparent revision note
+
+This preanalysis document was narrowed on 2026-10-03 **before numerical Wang
+migration-timing values were inspected**. The trigger was a literature result,
+not an outcome: Schmaljohann (2019) already estimated the species-specific
+start-to-arrival slopes that the first version proposed as a candidate novelty.
+The revised route therefore tests only a proposed ecological driver of those
+slopes, principally migration distance.
