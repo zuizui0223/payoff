@@ -321,3 +321,70 @@ The ecological synthesis is:
 > achieved timing accuracy through repeated downstream correction are
 > especially vulnerable when environmental change removes those correction
 > opportunities.**
+
+
+## Robustness to per-checkpoint operating costs
+
+The canonical quadratic witness treats \(y\) as an investment in feedback
+capacity, with cost \(by^2/2\) that does not itself multiply by the number of
+checkpoints.
+
+A stricter operating-cost alternative is
+
+\[
+C
+=
+\frac a2x^2
++
+n\frac b2y^2.
+\]
+
+The same precision constraint holds,
+
+\[
+x+2ny=P.
+\]
+
+The optimum precision shares become
+
+\[
+\boxed{
+s_{\mathrm{timer}}
+=
+\frac{b}{b+4an},
+\qquad
+s_{\mathrm{feedback}}
+=
+\frac{4an}{b+4an}.
+}
+\]
+
+The feedback-majority threshold is now
+
+\[
+\boxed{
+n_c=\frac{b}{4a},
+}
+\]
+
+and the minimum intact cost is
+
+\[
+\boxed{
+C^*_{\rm use}
+=
+\frac{abP^2}{2(b+4an)}.
+}
+\]
+
+Thus cumulative per-checkpoint operating cost weakens the rate at which the
+portfolio shifts toward feedback—from an \(n^2\) effect to an \(n\) effect—but
+does not change the qualitative results:
+
+1. more correction checkpoints lower the minimum intact precision cost;
+2. more checkpoints increase the optimal feedback share;
+3. loss of a fixed fraction of usable opportunity harms more
+   feedback-dependent portfolios.
+
+The flexibility-dependence tradeoff is therefore not an artifact of assuming
+that feedback capacity has zero per-use cost.
