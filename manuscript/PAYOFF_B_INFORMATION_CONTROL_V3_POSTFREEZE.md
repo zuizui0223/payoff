@@ -2,7 +2,7 @@
 
 **PAYOFF-B Paper 2 — V3 post-freeze development draft**  
 **Date:** 2026-10-03  
-**Status:** post-freeze integration draft; the frozen GEB V2 manuscript and its registered empirical outcomes are unchanged.
+**Status:** V3 science frozen on 2026-10-03; journal-facing package not yet built. The frozen GEB V2 manuscript and its registered empirical outcomes are unchanged.
 
 ## Abstract
 
@@ -922,4 +922,4 @@ the same individuals and interacting partners.
 
 ## Post-freeze transparency statement
 
-The stagewise recourse, continuous information-actionability balance and route-wise Bayesian phase-control extensions were formalized after the registered empirical gates and frozen GEB V2 package. They do not alter, reopen or retune any preregistered empirical outcome. The frozen V2 manuscript remains the audit and rollback source. This V3 document is a prospective integration draft for a later Paper-2 revision.
+The stagewise recourse, continuous information-actionability balance and route-wise Bayesian phase-control extensions were formalized after the registered empirical gates and frozen GEB V2 package. They do not alter, reopen or retune any preregistered empirical outcome. The frozen V2 manuscript remains the audit and rollback source. This V3 document is the science-frozen integration manuscript for the next Paper-2 submission package.
