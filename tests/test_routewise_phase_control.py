@@ -1,5 +1,6 @@
 import pytest
 
+from src.closed_loop_tracking import simulate_closed_loop_tracking
 from src.routewise_phase_control import (
     gaussian_phase_update,
     optimal_quadratic_phase_correction,
