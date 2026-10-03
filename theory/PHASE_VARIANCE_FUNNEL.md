@@ -152,80 +152,109 @@ individual.
 This does **not** prove cognition or explicit Bayesian calculation. It is a
 functional statistical signature of state-dependent individualized correction.
 
-## 4. Information and control are separately identifiable in the variance law
+## 4. Noisy information affects both mean retention and the variance funnel
 
 Under perfect phase observation \(K_t=1\),
-
-\[
-P_{t+1}
-=
-\phi_t^2(1-g_t)^2P_t+Q_t.
-\]
-
-The squared mean phase-retention multiplier is recovered.
-
-With noisy information,
-
-\[
-K_t<1,
-\]
-
-the population variance contracts less even when the mean controller has the
-same nominal gain \(g_t\).
-
-Consequently, two routes can have the same mean phase-retention coefficient
 
 \[
 \lambda_t=\phi_t(1-g_t)
 \]
 
-yet different variance funnels because their checkpoint information quality
-differs.
-
-This supplies a second observable axis:
-
-1. **mean retention** — how strongly signed phase error carries through;
-2. **variance contraction** — how strongly individualized information and
-   correction pull the population together.
-
-The same \(\lambda\) therefore need not imply the same information-control
-architecture.
-
-## 5. Mean retention + variance retention can identify an effective phase-sense weight
-
-Combining
+and
 
 \[
-\lambda=\phi(1-g)
+P_{t+1}
+=
+\lambda_t^2P_t+Q_t.
 \]
 
-with the variance recursion yields
+With noisy information, however, the correction is based on a posterior
+estimate rather than the true incoming phase. The regression of outgoing on
+incoming phase becomes
 
 \[
 \boxed{
-\rho_V
+\lambda_t
 =
-\frac{P_{t+1}-Q_t}{P_t}
-=
-(1-K_t)\phi_t^2+K_t\lambda_t^2.
+\phi_t(1-g_tK_t).
 }
 \]
 
-Thus innovation-adjusted variance retention is a convex combination of the
-passive squared retention and the squared closed-loop mean retention.
+The population variance still obeys
 
-If \(\phi_t^2\ne\lambda_t^2\), then
+\[
+P_{t+1}
+=
+\phi_t^2P_t[1-K_tg_t(2-g_t)]+Q_t.
+\]
+
+Thus cue quality enters **both** observable signatures. The
+perfect-information identity \(\lambda=\phi(1-g)\) is not licensed when
+\(K<1\).
+
+Two routes can nevertheless have the same observed mean \(\lambda\) and
+different variance funnels because the product \(gK\) can be the same while
+\(g\) and \(K\) differ. Mean retention alone therefore cannot identify whether
+weak phase carry-over reflects accurate information with modest correction or
+noisier information with stronger correction.
+
+This supplies two observable axes:
+
+1. **mean retention** — the regression-scale persistence of signed phase error;
+2. **variance retention** — the population spread remaining after
+   individualized information and correction.
+
+## 5. Mean + variance retention can identify both information weight and feedback gain
+
+Define
+
+\[
+d_t
+=
+1-\frac{\lambda_t}{\phi_t}
+=
+g_tK_t
+\]
+
+and the innovation-adjusted normalized variance retention
+
+\[
+v_t
+=
+\frac{P_{t+1}-Q_t}
+{\phi_t^2P_t}.
+\]
+
+The variance recursion gives
+
+\[
+v_t
+=
+1-2d_t+\frac{d_t^2}{K_t}.
+\]
+
+Therefore, whenever \(d_t\ne0\),
 
 \[
 \boxed{
 K_t
 =
-\frac{\phi_t^2-\rho_V}
-{\phi_t^2-\lambda_t^2}.
+\frac{d_t^2}
+{v_t-1+2d_t}
 }
 \]
 
-And, under the scalar Gaussian observation model,
+and
+
+\[
+\boxed{
+g_t
+=
+\frac{d_t}{K_t}.
+}
+\]
+
+Under the scalar Gaussian observation model,
 
 \[
 R_t
@@ -233,20 +262,22 @@ R_t
 P_t\frac{1-K_t}{K_t}.
 \]
 
-This creates a prospective **phase-sense inverse**: if passive retention
-\(\phi_t\), process innovation \(Q_t\), mean phase retention \(\lambda_t\), and
-incoming/outgoing phase variances are independently identified, the effective
-checkpoint information weight can be recovered.
+This creates a stronger prospective **phase-sense inverse**: if passive
+retention \(\phi_t\), process innovation \(Q_t\), mean phase retention
+\(\lambda_t\), and incoming/outgoing phase variances are independently
+identified, the declared Gaussian model separates an effective checkpoint
+information weight \(K_t\) from a feedback gain \(g_t\).
 
-The identification condition is strict. One may not estimate \(\phi\) from
-the same closed-loop transition and then claim that the resulting \(K\) is an
-independent measure of information use. A valid design needs an external or
-experimental passive-retention reference, an actuator contrast, or another
-source of identification.
+The inverse is not identified when \(\lambda_t=\phi_t\), because only the
+product \(g_tK_t=0\) is then observed. More importantly, one may not estimate
+\(\phi\) or \(Q\) from the same closed-loop transition and then claim that the
+resulting \(K\) and \(g\) are independent biological estimates. A valid design
+needs an external or experimental passive-retention reference, an actuator
+contrast, or another source of identification.
 
-This inverse is attractive because it links the animal's functional "phase
-sense" to observable population moments without claiming that the animal
-neurally computes a Kalman gain.
+This inverse links the animal's functional "phase sense" to observable
+population moments without claiming that the animal neurally computes a
+Bayesian weight.
 
 ## 6. Deadbeat correction does not remove uncertainty when cues are noisy
 
