@@ -143,7 +143,34 @@ No initial interaction mismatch is required.
 This is stronger and more mechanistic than saying that species have different
 temperature sensitivities.
 
-## 5. Information asymmetry alone is sufficient
+## 5. Readiness asymmetry alone is sufficient
+
+If passive retention, information and feedback gain are the same but the
+physiological/readiness gates differ,
+
+[
+phi_1=phi_2=phi,
+qquad
+K_1=K_2=K,
+qquad
+g_1=g_2=g,
+]
+
+then
+
+[
+oxed{
+Delta_{t+1}
+=
+-phi gK(G_1-G_2)m_t.
+}
+]
+
+Thus a developmental-clock difference can generate mismatch even when the two
+actors would make identical information-dependent decisions once both are
+ready.
+
+## 6. Information asymmetry alone is sufficient
 
 If passive retention and control gain are the same but information weights
 differ,
@@ -175,7 +202,7 @@ Hence
 Different information about the same seasonal future can therefore generate
 mismatch even when the actors have identical physical correction gain.
 
-## 6. Control asymmetry alone is sufficient
+## 7. Control asymmetry alone is sufficient
 
 If passive retention and information weight are the same,
 
@@ -198,7 +225,7 @@ then
 Thus two species can receive equally informative cues and still desynchronize
 because one can translate that information into stronger phase correction.
 
-## 7. Persistent mismatch under constant shared forcing
+## 8. Persistent mismatch under constant shared forcing
 
 Now let both actors experience the same constant seasonal forcing \(w\):
 
@@ -241,7 +268,7 @@ The denominator shows an amplification effect: controller differences become
 especially consequential as either actor approaches weak restoring control
 \(\lambda\to1\).
 
-## 8. Relation to the information-actionability theorem
+## 9. Relation to the information-actionability theorem
 
 The actionability theorem predicts that actors can optimally act on the same
 improving environmental information at different stages because their remaining
@@ -260,7 +287,7 @@ The controller-asymmetry theorem describes the next step:
 This closes the mechanistic chain from information timing to interaction
 mismatch.
 
-## 9. Relation to coordination games
+## 10. Relation to coordination games
 
 The controller theorem explains how mismatch is **generated**.
 
@@ -273,7 +300,7 @@ The two mechanisms are therefore sequential rather than competing:
 1. asymmetric information/control generates differential phase;
 2. interaction payoffs can stabilize or retain that differential state.
 
-## 10. Natural interpretation
+## 11. Natural interpretation
 
 The existing PAYOFF-B evidence already supplies separate empirical pieces:
 
@@ -288,7 +315,7 @@ single interacting pair together with independent \(K_i,g_i,\phi_i\).
 
 The direct pairwise controller test therefore remains prospective.
 
-## 11. Falsifiable pairwise prediction
+## 12. Falsifiable pairwise prediction
 
 For an interacting pair observed before and after a shared seasonal anomaly,
 estimate actor-specific incoming phase retention on the same time scale.
@@ -309,7 +336,7 @@ A strong test would ask whether the observed increase or decrease in pairwise
 mismatch is predicted by the **difference in actor-level controller retention**
 rather than only by taxon identity or raw temperature sensitivity.
 
-## 12. Novelty boundary
+## 13. Novelty boundary
 
 The common/differential-mode algebra is standard linear-systems mathematics.
 
