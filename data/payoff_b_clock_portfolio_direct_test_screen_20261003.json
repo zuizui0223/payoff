@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_CLOCK_PORTFOLIO_DIRECT_TEST_SCREEN_CLOSED_NO_ADMISSION",
+  "frozen_submission_affected": false,
+  "admission_requirements": [
+    "same taxon/population or tightly matched biological architecture",
+    "signed entry phase measured before perturbation",
+    "historical feedback reliance estimated independently of perturbed downstream outcome",
+    "effective opportunity loss independently defined before downstream timing outcome",
+    "post-perturbation final phase error/variance on the same coordinate",
+    "selection/observation reweighting measured, controlled, or avoided with repeated-individual design"
+  ],
+  "screened_systems": [
+    {
+      "system": "Aikens et al. 2022 industrial mule deer",
+      "classification": "OPPORTUNITY_LOSS_ANCHOR",
+      "passes": [
+        "same taxon / contrasting development regimes",
+        "external route disturbance",
+        "behavioral control attenuation"
+      ],
+      "missing": [
+        "independent historical feedback share",
+        "direct effective opportunity-retention omega",
+        "matched final phase-variance endpoint on the theorem coordinate"
+      ],
+      "admitted": false
+    },
+    {
+      "system": "Sweeney et al. 2026 piping plover / Hurricane Dorian",
+      "source": "Dryad 10.5061/dryad.0zpc867d2",
+      "classification": "OPPORTUNITY_LOSS_BEHAVIOR_ANCHOR",
+      "passes": [
+        "external abrupt habitat loss",
+        "2016-2023 before/after data",
+        "individual IDs and repeated encounter histories",
+        "reported stopover-duration reduction"
+      ],
+      "missing": [
+        "downstream destination/breeding phase endpoint",
+        "independent historical feedback share"
+      ],
+      "admitted": false
+    },
+    {
+      "system": "Clausen & Madsen 2016 pink-footed goose / Filso",
+      "classification": "OPPORTUNITY_SUBSTITUTION_ANCHOR",
+      "passes": [
+        "abrupt loss of focal staging use",
+        "individual marking / alternative-site use"
+      ],
+      "missing": [
+        "effective omega cannot be equated with named-site loss because rerouting occurred",
+        "same-coordinate downstream phase error",
+        "historical feedback share"
+      ],
+      "admitted": false
+    },
+    {
+      "system": "Peng et al. 2023 great knot / Yellow Sea",
+      "source": "Dryad 10.5061/dryad.4xgxd25g8",
+      "classification": "SELECTION_REWEIGHTING_ANCHOR",
+      "passes": [
+        "long-term timing/fuel phenotype data",
+        "habitat deterioration period",
+        "phenotype-dependent survival"
+      ],
+      "missing": [
+        "within-individual perturbation response on final phase",
+        "independent opportunity-retention omega",
+        "historical feedback share"
+      ],
+      "admitted": false,
+      "warning": "population timing change is confounded by selective disappearance of late/lean phenotypes"
+    },
+    {
+      "system": "Eurasian curlew repeated annual GPS",
+      "classification": "HISTORICAL_ARCHITECTURE_CANDIDATE",
+      "passes": [
+        "repeated individual migrations",
+        "stopover architecture and timing"
+      ],
+      "missing": [
+        "external opportunity-loss perturbation",
+        "matched seasonal target phase",
+        "post-perturbation final phase inflation"
+      ],
+      "admitted": false
+    },
+    {
+      "system": "bar-tailed godwit",
+      "classification": "STAGEWISE_COMPENSATION_ANCHOR",
+      "passes": [
+        "full-route stagewise timing transformation",
+        "stopover compensation"
+      ],
+      "missing": [
+        "exogenous opportunity-loss contrast",
+        "historical feedback-share estimate"
+      ],
+      "admitted": false
+    }
+  ],
+  "decision": {
+    "admitted_count": 0,
+    "outcome": "NO_DIRECT_NATURAL_PORTFOLIO_FRAGILITY_TEST_ADMITTED",
+    "rule": "do not replace the missing within-system perturbation with cross-taxon regressions or raw before/after population variance"
+  },
+  "next_preferred_design": "repeated-individual before/after natural experiment with independently quantified usable opportunity loss, pre-perturbation feedback architecture, same-coordinate final phase, and explicit survival/observation tracking"
+}
