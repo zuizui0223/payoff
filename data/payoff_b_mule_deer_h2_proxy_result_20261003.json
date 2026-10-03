@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_H2_PROXY_MODERATION_RESULT",
+  "frozen_submission_affected": false,
+  "source_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+  "safe_joined_rows": 62,
+  "safe_animals": 40,
+  "movement_rate": {
+    "n": 62,
+    "beta_DFP_x_IFBFat": -0.01516675313116596,
+    "ci95": [
+      -0.054247864147216704,
+      0.021896784543057986
+    ],
+    "year_centered_beta": -0.017279307180674303,
+    "year_centered_ci95": [
+      -0.06245272347555796,
+      0.015112907436966232
+    ]
+  },
+  "stopover": {
+    "n": 54,
+    "animals": 38,
+    "beta_DFP_x_IFBFat": 0.04812349439600803,
+    "ci95": [
+      -0.15392105098346281,
+      0.23648244076567576
+    ],
+    "year_centered_beta": 0.041438565096964655,
+    "year_centered_ci95": [
+      -0.1504726119203322,
+      0.25406761996325977
+    ]
+  },
+  "decision_rule": {
+    "rate_pass": false,
+    "stopover_pass": false,
+    "outcome": "NO_PROXY_SUPPORT",
+    "H2_status": "NOT_SUPPORTED_BY_THIS_PROXY_TEST"
+  },
+  "licensed_interpretation": "Mule deer remain an H1 same-system two-clock candidate with channel dissociation, but March IFBFat does not detectably moderate signed phase-to-speed or phase-to-stopover feedback in the prespecified proxy test.",
+  "boundaries": [
+    "IFBFat is a readiness proxy, not direct G",
+    "absence of moderation does not prove readiness never gates feedback through another physiological state or at another route stage",
+    "all actuator observations occur after migration onset",
+    "frozen GEB V2 and preregistered outcomes are unchanged"
+  ]
+}
