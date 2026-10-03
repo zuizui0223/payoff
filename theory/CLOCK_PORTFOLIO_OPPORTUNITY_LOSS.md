@@ -121,6 +121,48 @@ Equivalently,
 }
 \]
 
+## Cost-independent fragility identity
+
+The opportunity-loss equation does **not** require the historical allocation to
+be the quadratic-cost optimum.
+
+For any portfolio satisfying the historical precision budget
+
+\[
+P=x+2ny,
+\]
+
+define its realized feedback share
+
+\[
+s_f=\frac{2ny}{P}.
+\]
+
+After a fraction \(\omega\) of the historically usable downstream opportunity
+remains,
+
+\[
+\frac{V_{\rm disrupted}}{V^*}
+=
+\exp[2n(1-\omega)y]
+=
+\boxed{
+\exp[(1-\omega)s_fP].
+}
+\]
+
+Thus the fragility identity depends only on the multiplicative precision
+architecture and the historical precision share.  The cost model is needed
+only to predict **which feedback share should evolve or be optimal** as a
+function of checkpoint number and relative costs.
+
+This separates two claims:
+
+1. **allocation identity:** more historical feedback reliance means greater
+   sensitivity to lost opportunity;
+2. **optimal-portfolio prediction:** checkpoint-rich systems should evolve or
+   adopt greater feedback reliance under the declared cost model.
+
 ## 4. Ecological interpretation
 
 The historical fraction of precision supplied by downstream feedback is also a
