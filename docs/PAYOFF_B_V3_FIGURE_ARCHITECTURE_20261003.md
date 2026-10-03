@@ -64,8 +64,16 @@ Use two miniature paths:
 - early \(e_t<0\) -> slow down / longer stopover.
 
 A migratory bird can contain both panels: an endogenous readiness programme
-opens the decision window, then repeated route checkpoints provide
-state-dependent control. The informal “Mikawa-Anjo clock” refers only to B2.
+opens the decision window, ecological deadlines later close it, and repeated
+route checkpoints provide state-dependent control. The informal “Mikawa-Anjo
+clock” refers only to B2.
+
+Add two gate arrows before the controller:
+- (G): readiness opens;
+- (O): ecological opportunity remains open.
+
+Then annotate **active correction = G × O × g × K**. If any required layer is
+effectively zero, signed correction cannot occur.
 
 ### Panel C — Natural mule-deer phase funnel
 
@@ -106,7 +114,9 @@ Caption boundary:
 Show:
 
 \[
-\lambda=\phi(1-gK)
+\lambda=\phi(1-hK),
+\qquad
+h=GOg
 \]
 
 and
@@ -114,7 +124,7 @@ and
 \[
 P_{t+1}
 =
-\phi^2P_t[1-Kg(2-g)]+Q.
+\phi^2P_t[1-Kh(2-h)]+Q.
 \]
 
 With independently identified \(\phi,Q\),
@@ -128,13 +138,14 @@ v=(P_{t+1}-Q)/(\phi^2P_t),
 \[
 K=\frac{d^2}{v-1+2d},
 \qquad
-g=\frac dK.
+h=\frac dK.
 \]
 
 Visual message:
 
-> The same mean phase retention can hide different information × control
-> architectures.
+> The same mean phase retention can hide different information × effective
+> correction architectures. Mean + variance identify (K) and (h=GOg), not
+> readiness (G), opportunity (O), and decision gain (g) separately.
 
 This panel is prospective identification theory, not a current natural
 parameter estimate.
@@ -228,7 +239,7 @@ Keep empirical modules visually separated by inferential status:
 
 - preregistered broad-bird predictive-connectivity result;
 - reconstructed migration-distance response contrast;
-- Ortega continuous source-data anchor;
+- Ortega continuous source-data phase funnel plus T3_CANDIDATE/D2 H1_CANDIDATE readiness-feedback channel anchor;
 - wigeon preregistered null;
 - negative natural reversal gates.
 

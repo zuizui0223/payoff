@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_TWO_CLOCK_CHANNEL_DISSOCIATION_RESULT",
+  "frozen_submission_affected": false,
+  "source_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+  "safe_joined_rows": 62,
+  "safe_animals": 40,
+  "parser_guard": {
+    "actuator_rows_parsed": 152,
+    "expected_movement_rate_rows": 152,
+    "parser_matches_validated_variance_funnel_layout": true
+  },
+  "movement_rate": {
+    "n": 62,
+    "raw": {
+      "beta_DFP_Start": 0.07422953508046698,
+      "beta_scaledIFBFat": 0.32186064780721224
+    },
+    "raw_ci95": {
+      "beta_DFP_Start": [
+        0.038687285800669595,
+        0.10282420016136645
+      ],
+      "beta_scaledIFBFat": [
+        -0.04902111164648609,
+        0.7394717784430734
+      ]
+    },
+    "year_fe": {
+      "beta_DFP_Start": 0.10488024493357284,
+      "beta_scaledIFBFat": 0.1591605359139243
+    },
+    "year_fe_ci95": {
+      "beta_DFP_Start": [
+        0.062192209681442616,
+        0.14413999866205338
+      ],
+      "beta_scaledIFBFat": [
+        -0.44782375128766516,
+        0.6641095561164192
+      ]
+    }
+  },
+  "stopover": {
+    "n": 54,
+    "animals": 38,
+    "raw": {
+      "beta_DFP_Start": -0.2344571852261764,
+      "beta_scaledIFBFat": -1.582185086069336
+    },
+    "raw_ci95": {
+      "beta_DFP_Start": [
+        -0.42860633867343884,
+        -0.009511126861334743
+      ],
+      "beta_scaledIFBFat": [
+        -3.323562054839514,
+        0.24737412534543984
+      ]
+    },
+    "year_fe": {
+      "beta_DFP_Start": -0.3572996480825489,
+      "beta_scaledIFBFat": -0.8783088382634098
+    },
+    "year_fe_ci95": {
+      "beta_DFP_Start": [
+        -0.5959001476151206,
+        -0.11094640983513766
+      ],
+      "beta_scaledIFBFat": [
+        -3.38547451175686,
+        2.4064032223622234
+      ]
+    }
+  },
+  "interpretation": {
+    "channel_dissociation_supported": true,
+    "licensed": "in the temporally safe subset, ecological phase error retains signed associations with downstream movement rate and stopover use after accounting for March IFBFat, whereas IFBFat intervals include zero; this supports functional separation of readiness timing and post-departure correction channels",
+    "H2": "not licensed because all downstream actuator observations occur after migration readiness has already opened and no readiness x phase gating transition is observed"
+  },
+  "boundaries": [
+    "source paper already reports nutritional condition did not influence migration speed/stopover; this is a continuous source-data reproduction",
+    "observational coefficient dissociation is not causal independence",
+    "the result strengthens H1_CANDIDATE but does not establish H2",
+    "frozen GEB V2 unchanged"
+  ]
+}

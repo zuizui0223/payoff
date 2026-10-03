@@ -228,7 +228,9 @@ The observed funnel does **not** by itself identify:
 
 - the animal's internal phase estimate;
 - checkpoint information weight \(K\);
-- active feedback gain \(g\);
+- developmental/readiness gate \(G\);
+- decision gain \(g\);
+- effective correction gain \(h=Gg\);
 - passive phase retention \(\phi\);
 - process innovation \(Q\);
 - Paper-2 actionability \(r\);

@@ -1,4 +1,4 @@
-# Seasonal tracking is a sequential information-and-control problem
+# Seasonal clock architecture can convert shared environmental change into phenological mismatch
 
 **PAYOFF-B Paper 2 — V3 post-freeze development draft**  
 **Date:** 2026-10-03  
@@ -6,45 +6,93 @@
 
 ## Abstract
 
-**Aim:** We ask when seasonal information becomes useful, how timing error can be corrected after movement begins, and why interacting species can still desynchronize despite substantial adaptive capacity.
+**Aim:** Interacting species can experience the same seasonal environmental
+change yet become phenologically asynchronous. We ask whether this divergence
+can arise from differences in **seasonal clock architecture** rather than from
+different forcing alone.
 
-**Location:** General theory, with empirical modules from migratory birds and ungulates in North America and Europe.
+**Location:** General theory, with empirical modules from migratory birds and
+ungulates in North America and Europe.
 
-**Time period:** Dataset-specific; principal reconstructed phenology records span approximately 1980–2020.
+**Time period:** Dataset-specific; principal reconstructed phenology records
+span approximately 1980–2020.
 
-**Major taxa studied:** Migratory birds and mule deer, with plant–pollinator and resident–migrant interaction studies as independent benchmarks.
+**Major taxa studied:** Migratory birds and mule deer, with plant–pollinator
+and resident–migrant interactions as benchmarks.
 
-**Methods:** We combine Bayesian decision models, stagewise value-of-information theory, a route-wise signed phase controller, finite coordination games, preregistered macroecological analyses and source-backed natural systems.
+**Methods:** We separate physiological readiness \(G\), remaining ecological
+opportunity \(O\), phase-information weight \(K\) and decision gain \(g\).
+We combine this architecture with stagewise value-of-information theory,
+pairwise/network phase-control models and preregistered or source-backed
+ecological analyses.
 
-**Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is \(r(t)[Sq(t)-B]-C(t)\); with exponential learning and recourse loss the unique zero-cost optimum is \(t^*=\log(1+\alpha/\beta)/\alpha\), generally before maximal cue accuracy. Route-wise phase dynamics obey \(e_{t+1}=\phi_t(e_t-u_t)+w_t\). A post-freeze source-data reanalysis of 152 mule-deer animal-years shows that end-of-migration phase variance was 0.249 of start variance (95% animal-cluster bootstrap 0.167–0.362; 0.294 after year centering), while movement speed increased and stopover use decreased continuously with later starting phase. These observations quantify a natural phase funnel with signed compensation but do not identify the latent controller.
+**Results:** Effective phase retention is
+\(\lambda_i=\phi_i(1-G_iO_i g_iK_i)\). Two synchronized actors sharing
+seasonal error \(m_t\) diverge by
+\(\Delta_{t+1}=(\lambda_1-\lambda_2)m_t\), and network mismatch depends on
+controller discordance across interaction edges. Information can become more
+accurate while opportunities to use it disappear. In mule deer, a post-freeze
+Source Data analysis combines signed en-route compensation with a temporally
+prior March nutritional-condition association with migration start, making
+this the strongest current same-system two-clock candidate; readiness-gated
+feedback itself remains untested.
 
-**Main conclusions:** Seasonal tracking combines physiological readiness timers with information-dependent decision control. Controller asymmetry can convert a shared seasonal error directly into interaction mismatch: organisms exposed to the same forcing can diverge because they differ in readiness, information, remaining actionability or phase correction. Restored information need not restore coordination after response options or coordinated conventions have been lost.
+**Main conclusions:** Shared climate forcing need not produce shared timing.
+Species can diverge because they differ in readiness, remaining opportunity,
+information and correction. Mean and variance trajectories identify
+information weight and effective correction, but the primitive readiness,
+opportunity and decision components require additional measurements or
+manipulations.
 
-**Keywords:** phenological mismatch; migration; information ecology; feedback control; recourse; phase error; climate change
+**Keywords:** phenological mismatch; biological clocks; migration; information
+ecology; feedback control; recourse; climate change
 
 ---
 
 ## 1. Introduction
 
-Phenological mismatch is commonly summarized as a difference between the timing of consumers and resources, plants and pollinators, or migrants and the seasonal conditions they exploit. That description is useful but mechanistically incomplete. The same observed mismatch can arise because an organism cannot respond far enough, because it cannot predict the relevant future state, because useful information arrives only after important actions have been committed, because an earlier timing error can no longer be repaired, or because unilateral adjustment creates a temporary mismatch with interaction partners.
+Phenological mismatch is usually described as a difference between the timing
+of consumers and resources, plants and pollinators, or migrants and seasonal
+conditions. The same observed mismatch, however, can arise from distinct
+mechanisms: poor prediction of a future state, physiological commitment before
+that state is known, limited ability to repair an earlier timing error, or
+interaction costs that discourage unilateral adjustment.
 
-Long-distance migration makes these distinctions unusually visible. A migrant may have to leave a wintering site before it can directly observe spring conditions at the destination. Yet departure is not the only decision. Individuals can change travel speed, alter stopover duration, skip sites, choose routes and alter post-arrival timing. Migration is therefore neither a single irreversible departure decision nor a purely open-loop response to a distant cue. It can be a sequence of decisions in which new environmental information is acquired while the animal is already moving.
+Long-distance migration makes these mechanisms visible. A migrant may leave a
+wintering site before directly observing destination spring, yet departure is
+not the only decision. Speed, stopover duration, route and post-arrival timing
+can be altered while new information is acquired. Seasonal migration is
+therefore naturally represented as repeated inference and correction rather
+than a single departure-date response.
 
-This suggests a control problem. Let (e_t) denote the signed difference between an animal's current seasonal phase and the locally relevant seasonal optimum at route stage (t). The animal does not necessarily know (e_t) exactly. Instead, it forms an internal estimate from the information available by that stage. It then chooses a correction through the actuators that remain available. The residual error is carried into the next stage, where it can be re-estimated and corrected again.
+We distinguish two timing layers. A developmental or physiological timer
+determines when actions become available; an information-dependent controller
+then estimates signed seasonal phase and chooses among those available actions.
+This distinction matters because information and actionability can change in
+opposite directions. Conditions nearer the destination may improve prediction
+while the remaining opportunities to change timing disappear.
 
-The central difficulty is that information and control change in opposite directions. Later in a journey, conditions nearer the destination may provide better information about the coming spring. At the same time, fewer opportunities remain to change speed, stopover allocation, route or breeding timing. Waiting can therefore increase cue accuracy while reducing the value of that accuracy.
+The intuition is simple: an organism may know the future best only after it has
+become too late to act on that knowledge. In the motivating analogy, a migrant
+is a train travelling toward a seasonal timetable that is not yet fully known—
+a “Shinkansen to Schrödinger's spring.” The formal model is sequential
+inference and feedback control, not a railway analogy.
 
-The intuition can be stated without metaphor: an organism may know the future best only after it has become too late to act on that knowledge. In the motivating analogy used during model development, the migrant is a train travelling toward a destination whose seasonal timetable is not yet fully known—a “Shinkansen to Schrödinger's spring.” The formal theory, however, is standard sequential inference and feedback control applied to an ecological timing problem.
+We first derive when improving information should be used while actionability
+declines. We then model readiness, signed phase estimation and repeated
+correction, and show exactly how differences between actor-level controllers
+convert a shared seasonal error into interaction mismatch. Finally, we retain
+the coordination-game result showing why mismatch can persist even after
+environmental information improves.
 
-We develop the argument in four linked steps. First, we derive when improving information should be acted upon while response options are disappearing. Second, we introduce a signed route-wise phase controller that allows both late and early individuals to correct error at repeated checkpoints. Third, we show how actors exposed to the same improving information can desynchronize if their correction opportunities decay at different rates. Fourth, we retain the earlier coordination-game result showing that environmental information can recover before coordinated information use recovers.
+Natural evidence is deliberately layered. Existing data support predictive
+connectivity, route-stage updating, bidirectional compensation and
+interaction-level response asymmetry, but no current system jointly identifies
+all latent readiness, information and control parameters. Our central claim is:
 
-The empirical evidence is deliberately layered rather than treated as one direct validation. Existing natural data support predictive connectivity, route-stage cue use, bidirectional timing compensation and compensation costs, but do not yet identify the complete latent-state controller in a single system. The direct route-wise test is therefore prospective.
-
-Our revised ecological claim is:
-
-> **Seasonal tracking depends not only on how accurately organisms can infer a future state, but on whether they can still correct their seasonal phase when that information becomes available.**
-
----
+> **Shared environmental change can generate phenological mismatch because
+> interacting organisms differ in when they become able to act, what they can
+> infer about seasonal phase and how strongly they can correct error.**
 
 ## 2. Theory
 
@@ -338,7 +386,7 @@ mean phase retention
 \[
 \lambda_i
 =
-\phi_i(1-G_i g_iK_i),
+\phi_i(1-G_iO_i g_iK_i),
 \]
 
 where \(G_i\in[0,1]\) is the readiness/availability gate generated by the
@@ -401,29 +449,39 @@ A shared seasonal error is therefore converted into mismatch whenever the two
 clock architectures retain or correct that error differently. No difference in
 external climate exposure and no initial interaction mismatch are required.
 
-With equal readiness, passive retention and feedback gain, information
+With equal readiness, opportunity, passive retention and feedback gain,
+information asymmetry alone gives
+
+\[
+\Delta_{t+1}
+=
+-\phi GOg(K_1-K_2)m_t.
+\]
+
+With equal opportunity, information and feedback gain, readiness-clock
 asymmetry alone gives
 
 \[
 \Delta_{t+1}
 =
--\phi Gg(K_1-K_2)m_t.
+-\phi OgK(G_1-G_2)m_t.
 \]
 
-With equal information and feedback gain, readiness-clock asymmetry alone gives
+Opportunity-loss asymmetry alone gives
+
+[
+Delta_{t+1}
+=
+-phi GgK(O_1-O_2)m_t.
+]
+
+With equal readiness, opportunity and information weight, control-gain
+asymmetry alone gives
 
 \[
 \Delta_{t+1}
 =
--\phi gK(G_1-G_2)m_t.
-\]
-
-With equal readiness and information weight, control-gain asymmetry alone gives
-
-\[
-\Delta_{t+1}
-=
--\phi GK(g_1-g_2)m_t.
+-\phi GOK(g_1-g_2)m_t.
 \]
 
 Under constant shared forcing \(w\) and stable controllers
@@ -551,10 +609,34 @@ excluding zero.
 
 These results quantify the published convergence in continuous animal-year
 data and reproduce the signed actuator geometry required by the route-wise
-model. They do **not** identify the internal phase estimate, passive retention,
-information weight or feedback gain. Measurement error, passive dynamics,
-selection and changing environmental variance remain alternative contributors
-to the observed variance funnel.
+model.
+
+A second post-freeze analysis uses the same verified Source Data to test the
+readiness layer.  The source study measured nutritional condition as March
+scaled IFBFat.  Of 93 animal-years with joinable IFBFat and migration timing,
+62 animal-years from 40 deer began migration strictly after March 31, so any
+March measurement necessarily preceded departure. In this temporally
+conservative subset,
+
+\[
+\frac{d\,\text{standardized start}}
+{d\,\text{scaled IFBFat}}
+=
+-3.97\ \mathrm{d/unit},
+\]
+
+with animal-cluster bootstrap 95% CI \(-6.31\) to \(-0.69\). All 40
+leave-one-animal-out slopes remained negative. The year-fixed-effect
+sensitivity was weaker (\(-2.14\), 95% bootstrap CI \(-6.89\) to \(+1.58\)),
+and the rank-based interval nearly included zero.
+
+Under the frozen evidence grades, this licenses
+**T3_CANDIDATE + D2 -> H1_CANDIDATE** for mule deer: a predeparture
+physiological state predicts migration-start timing in the same population that
+shows signed en-route correction. It does **not** show that IFBFat is a
+molecular clock, that it equals the readiness gate \(G\), or that readiness
+gates the downstream phase-feedback response. H2 and the primitive
+\(G,O,K,g,\phi,Q\) decomposition remain unidentified.
 
 ### 3.4 Bar-tailed godwits absorb early departure later in the route
 
@@ -673,15 +755,22 @@ individualized correction. If every individual receives the same open-loop
 timing shift, that common shift changes the mean but does not selectively
 reduce between-individual phase variance.
 
-Under the Gaussian route-wise controller, incoming phase variance \(P_t\),
+Under the two-clock Gaussian controller, let
+
+\[
+h_t=G_tO_tg_t
+\]
+
+be **effective correction gain**: physiological/readiness availability
+\(G_t\) multiplied by decision gain \(g_t\). Incoming phase variance \(P_t\),
 checkpoint observation variance \(R_t\), posterior weight
-\(K_t=P_t/(P_t+R_t)\), feedback gain \(g_t\), passive retention \(\phi_t\) and
-new process variance \(Q_t\) give
+\(K_t=P_t/(P_t+R_t)\), passive retention \(\phi_t\), and new process variance
+\(Q_t\) then give
 
 \[
 P_{t+1}
 =
-\phi_t^2P_t[1-K_tg_t(2-g_t)]+Q_t.
+\phi_t^2P_t[1-K_th_t(2-h_t)]+Q_t.
 \]
 
 The corresponding common open-loop correction gives
@@ -692,7 +781,7 @@ P_{t+1}^{\mathrm{open}}
 \phi_t^2P_t+Q_t.
 \]
 
-Thus, for informative cues and \(0<g_t<2\), individualized phase feedback
+Thus, for informative cues and \(0<h_t<2\), individualized phase feedback
 predicts additional downstream variance contraction. This creates a functional
 signature of the proposed internal phase estimate: early and late individuals
 are not merely shifted by the same calendar rule but are pulled toward the
@@ -707,13 +796,15 @@ independently.
 
 
 The mean and variance signatures can also be combined. With noisy checkpoint
-information, the observed regression-scale phase retention is
+information and two clock layers, observed regression-scale phase retention is
 
 \[
-\lambda_t=\phi_t(1-g_tK_t),
+\lambda_t=\phi_t(1-h_tK_t),
+\qquad
+h_t=G_tO_tg_t.
 \]
 
-not \(\phi_t(1-g_t)\) unless phase information is perfect. Define
+Define
 
 \[
 d_t=1-\frac{\lambda_t}{\phi_t}
@@ -731,15 +822,17 @@ Then the declared Gaussian controller gives
 \[
 K_t=
 \frac{d_t^2}{v_t-1+2d_t},
-\\qquad
-g_t=\frac{d_t}{K_t}.
+\qquad
+h_t=\frac{d_t}{K_t}.
 \]
 
 Thus, if passive retention \(\phi_t\) and process innovation \(Q_t\) are
-identified independently, mean retention plus the variance funnel can
-separate an effective checkpoint-information weight \(K_t\) from a feedback
-gain \(g_t\). This is a prospective functional inverse, not evidence that
-animals explicitly compute Bayesian weights.
+identified independently, mean retention plus the variance funnel separates
+an effective checkpoint-information weight \(K_t\) from **effective
+correction** \(h_t=G_tO_tg_t\). It does **not** separate physiological readiness
+\(G_t\) from decision gain \(g_t\) unless one of those layers is independently
+measured or manipulated. This is a prospective functional inverse, not
+evidence that animals explicitly compute Bayesian weights.
 
 ### 4.5 The most informative checkpoint need not be the most important checkpoint
 
@@ -753,16 +846,18 @@ This prediction differs from a simple “closer cues are better” model.
 
 The empirical phase-retention coefficient \(\lambda\) is valuable because it
 quantifies how strongly incoming seasonal error persists to a later stage.
-Under perfect phase information,
+Under perfect phase information and full readiness \(G=1\),
 
 \[
-\lambda=\phi(1-g),
+\lambda=\phi(1-g).
 \]
 
-whereas with noisy individualized phase estimation,
+With partial readiness and noisy individualized phase estimation,
 
 \[
-\lambda=\phi(1-gK).
+\lambda=\phi(1-GOgK)
+=
+\phi(1-hK).
 \]
 
 Thus the same \(\lambda\) can arise from different combinations of passive
@@ -774,9 +869,10 @@ information in addition to \(\lambda\).
 ### 4.7 Prediction and reactive correction can be substitute control channels
 
 The controller also changes how cross-route comparisons should be interpreted.
-Let (R(q)) be mismatch risk remaining after the actor has used available
-pre-commitment information, and let downstream reactive gain (g) reduce that
-error at quadratic cost (c g^2/2):
+Conditional on the relevant actuator being available, let (R(q)) be mismatch
+risk remaining after the actor has used available pre-commitment information,
+and let downstream reactive gain (g) reduce that error at quadratic cost
+(c g^2/2):
 
 \[
 L(g;q)=(1-g)^2R(q)+\frac{c}{2}g^2.
@@ -830,7 +926,7 @@ A species can therefore become more mismatched without losing its intrinsic abil
 The pairwise mode decomposition clarifies why interaction mismatch need not
 require different climate exposure. A common environmental displacement enters
 both actors as a shared phase error, but differences in effective retention
-\(\lambda_i=\phi_i(1-G_i g_iK_i)\) convert part of that common mode into a
+\(\lambda_i=\phi_i(1-G_iO_i g_iK_i)\) convert part of that common mode into a
 differential mode.
 
 This distinction changes comparative interpretation. A resident and a migrant,
@@ -848,21 +944,45 @@ can therefore remain strategically inaccessible.
 
 ### 4.10 Direct natural validation remains prospective
 
-The current evidence supports pieces of the mechanism across different systems. It does not yet demonstrate, in one natural population, the full sequence
+The evidence is no longer purely cross-system. Mule deer now provide a
+candidate same-population hybrid: a temporally prior physiological condition
+predicts migration-start timing, while signed phase error predicts later
+speed/stopover correction and phase convergence.
+
+However, no natural PAYOFF-B dataset jointly identifies
 
 \[
-\text{checkpoint cue}
+G,\quad O,\quad K,\quad g,\quad \phi,\quad Q
+\]
+
+for the same focal transition, and no current system demonstrates H2
+readiness-gated signed feedback. The mule-deer readiness association is also
+not invariant to every sensitivity analysis.
+
+The full prospective sequence is therefore
+
+\[
+\text{physiological readiness }G
 \rightarrow
-\text{updated phase estimate}
+\text{checkpoint information }K
+\rightarrow
+\text{decision gain }g
 \rightarrow
 \text{signed correction}
 \rightarrow
-\text{reduced next-stage phase error}.
+\text{downstream phase}.
 \]
 
-That is now the clearest empirical target.
+Mean and variance phase trajectories can identify \(K\) and effective
+correction \(h=GOg\) under the declared Gaussian controller when \(\phi\) and
+\(Q\) are independently known. They cannot separate \(G\) from \(g\) without
+an additional physiological measure, readiness manipulation or independent
+decision-gain calibration.
 
-The strongest future test would compare a departure-only model with a checkpoint-updating model on held-out downstream phase. It would separately measure cue quality and actuator availability, avoiding circular estimation of information from the same behavior being predicted.
+The strongest future test should therefore combine a readiness measurement with
+checkpoint environmental information and movement decisions, and compare a
+shared timing-programme model against a two-clock feedback model on held-out
+downstream phase.
 
 ---
 
