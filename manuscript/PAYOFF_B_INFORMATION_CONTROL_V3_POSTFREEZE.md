@@ -28,7 +28,7 @@ models, finite coordination games, preregistered macroecological analyses and
 source-backed natural systems.
 
 **Results:** Effective mean phase retention is
-\(\lambda_i=\phi_i(1-G_i g_iK_i)\). For two initially synchronized actors
+\(\lambda_i=\phi_i(1-G_iO_i g_iK_i)\). For two initially synchronized actors
 sharing seasonal error \(m_t\), controller asymmetry generates
 \(\Delta_{t+1}=(\lambda_1-\lambda_2)m_t\); across an interaction network,
 one-step mismatch scales with the graph Dirichlet energy of the controller
@@ -457,7 +457,7 @@ information asymmetry alone gives
 \[
 \Delta_{t+1}
 =
--\phi Gg(K_1-K_2)m_t.
+-\phi GOg(K_1-K_2)m_t.
 \]
 
 With equal opportunity, information and feedback gain, readiness-clock
@@ -466,15 +466,24 @@ asymmetry alone gives
 \[
 \Delta_{t+1}
 =
--\phi gK(G_1-G_2)m_t.
+-\phi OgK(G_1-G_2)m_t.
 \]
 
-With equal readiness and information weight, control-gain asymmetry alone gives
+Opportunity-loss asymmetry alone gives
+
+[
+Delta_{t+1}
+=
+-phi GgK(O_1-O_2)m_t.
+]
+
+With equal readiness, opportunity and information weight, control-gain
+asymmetry alone gives
 
 \[
 \Delta_{t+1}
 =
--\phi GK(g_1-g_2)m_t.
+-\phi GOK(g_1-g_2)m_t.
 \]
 
 Under constant shared forcing \(w\) and stable controllers
@@ -770,7 +779,7 @@ information and two clock layers, observed regression-scale phase retention is
 \[
 \lambda_t=\phi_t(1-h_tK_t),
 \qquad
-h_t=G_tg_t.
+h_t=G_tO_tg_t.
 \]
 
 Define
@@ -798,7 +807,7 @@ h_t=\frac{d_t}{K_t}.
 Thus, if passive retention \(\phi_t\) and process innovation \(Q_t\) are
 identified independently, mean retention plus the variance funnel separates
 an effective checkpoint-information weight \(K_t\) from **effective
-correction** \(h_t=G_tg_t\). It does **not** separate physiological readiness
+correction** \(h_t=G_tO_tg_t\). It does **not** separate physiological readiness
 \(G_t\) from decision gain \(g_t\) unless one of those layers is independently
 measured or manipulated. This is a prospective functional inverse, not
 evidence that animals explicitly compute Bayesian weights.
@@ -824,7 +833,7 @@ Under perfect phase information and full readiness \(G=1\),
 With partial readiness and noisy individualized phase estimation,
 
 \[
-\lambda=\phi(1-GgK)
+\lambda=\phi(1-GOgK)
 =
 \phi(1-hK).
 \]
@@ -943,7 +952,7 @@ The full prospective sequence is therefore
 \]
 
 Mean and variance phase trajectories can identify \(K\) and effective
-correction \(h=Gg\) under the declared Gaussian controller when \(\phi\) and
+correction \(h=GOg\) under the declared Gaussian controller when \(\phi\) and
 \(Q\) are independently known. They cannot separate \(G\) from \(g\) without
 an additional physiological measure, readiness manipulation or independent
 decision-gain calibration.
