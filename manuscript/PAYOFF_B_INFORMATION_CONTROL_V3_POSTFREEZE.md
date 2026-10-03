@@ -1,4 +1,4 @@
-# Seasonal clock architecture converts shared environmental change into phenological mismatch
+# Seasonal clock architecture can convert shared environmental change into phenological mismatch
 
 **PAYOFF-B Paper 2 — V3 post-freeze development draft**  
 **Date:** 2026-10-03  
