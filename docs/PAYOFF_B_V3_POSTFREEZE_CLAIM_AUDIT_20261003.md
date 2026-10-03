@@ -31,6 +31,7 @@ source-backed motivation, and what remains prospective in
 | mule-deer temporal phase sense / bidirectional compensation | published prior art (Ortega et al. 2023) | natural anchor for signed compensation and resynchronization | claim PAYOFF-B discovered temporal phase sense in mule deer |
 | controller asymmetry converts common error to mismatch | exact post-freeze linear pair theorem | under declared mean controller, Δ_next = δλ m + λ_bar Δ + δw; synchronized actors diverge when δλ m != 0 | generic claim that all natural mismatch is caused by controller asymmetry |
 | persistent mismatch under shared forcing | exact post-freeze stable-controller result | Δ* = w(λ1-λ2)/[(1-λ1)(1-λ2)] when both |λ_i|<1 | natural parameter estimate without matched actor-specific λ on a common scale |
+| network Dirichlet controller mismatch | exact post-freeze weighted-network identity | M = m^2 lambda^T L lambda / W; binary controller states recover the prior network-cut result | claim that current natural communities validate this controller-network mechanism |
 
 ## Canonical V3 evidence ordering
 
