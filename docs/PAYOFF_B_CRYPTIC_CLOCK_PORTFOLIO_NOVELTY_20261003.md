@@ -7,6 +7,40 @@ Status: **post-freeze literature boundary; frozen GEB V2 unchanged**
 Ecology and evolution already contain broad versions of the idea that similar
 phenotypes can conceal different mechanisms.
 
+### Terminology: this is not the ecological portfolio effect
+
+"Portfolio effect" already has an established ecological meaning: diversity
+among populations, life histories or migratory strategies can stabilize
+aggregate population performance through asynchronous dynamics.  That usage is
+common in salmon and migration ecology.
+
+PAYOFF-B's **clock portfolio** is different.  It is an allocation within one
+seasonal timing architecture between:
+
+- upstream entry-clock precision; and
+- downstream error-correction precision.
+
+Accordingly, the manuscript should always use the qualified term **clock
+portfolio** (or **timing-control portfolio**) and should not imply that the
+general ecological portfolio-effect concept is new.
+
+Recent examples of the established ecological usage include Baker et al.
+(2025, *Ecology Letters*, DOI 10.1111/ele.70081) on migration-phenology
+diversity and population stability, alongside the broader portfolio-effect
+literature derived from diversity-stability theory.
+
+### Anticipatory versus responsive plasticity is also prior art
+
+Plasticity literature already distinguishes responses based on advance
+prediction of future conditions from later responsive/behavioral adjustment.
+Likewise, migration literature recognizes endogenous seasonal programmes
+together with flexible state- and cue-dependent decisions.
+
+PAYOFF-B therefore should not claim novelty for the verbal distinction between
+"anticipatory" and "responsive" timing.  Its narrower contribution is the
+explicit precision-allocation, retention and opportunity-loss mapping that
+connects these mechanisms to phenological mismatch.
+
 ### Genetic compensation / cryptic variation
 
 Countergradient and genetic-compensation theory explicitly allows populations
