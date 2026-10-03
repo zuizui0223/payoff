@@ -67,6 +67,8 @@ A migratory bird can contain both panels: an endogenous readiness programme
 opens the decision window, then repeated route checkpoints provide
 state-dependent control. The informal “Mikawa-Anjo clock” refers only to B2.
 
+Add a small AND-gate annotation: **active correction = G × g × K**. If any one layer is effectively zero, the other two cannot generate signed correction.
+
 ### Panel C — Natural mule-deer phase funnel
 
 Use the post-freeze Ortega Source Data audit:
