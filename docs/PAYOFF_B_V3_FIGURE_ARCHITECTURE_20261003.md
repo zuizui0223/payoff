@@ -106,7 +106,9 @@ Caption boundary:
 Show:
 
 \[
-\lambda=\phi(1-gK)
+\lambda=\phi(1-hK),
+\qquad
+h=Gg
 \]
 
 and
@@ -128,13 +130,14 @@ v=(P_{t+1}-Q)/(\phi^2P_t),
 \[
 K=\frac{d^2}{v-1+2d},
 \qquad
-g=\frac dK.
+h=\frac dK.
 \]
 
 Visual message:
 
-> The same mean phase retention can hide different information × control
-> architectures.
+> The same mean phase retention can hide different information × effective
+> correction architectures. Mean + variance identify (K) and (h=Gg), not
+> readiness (G) and decision gain (g) separately.
 
 This panel is prospective identification theory, not a current natural
 parameter estimate.
