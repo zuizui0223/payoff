@@ -169,6 +169,35 @@ produce diverging timing trajectories.
 
 This is the main ecological result of the post-freeze integration.
 
+### Clock-portfolio inset
+
+Add one compact inset between the serial decomposition and recovery panels.
+
+Show the two precision shares
+
+\[
+s_{\mathrm{timer}}
+=
+\frac{b}{b+4n^2a},
+\qquad
+s_{\mathrm{feedback}}
+=
+\frac{4n^2a}{b+4n^2a}.
+\]
+
+Use a horizontal gradient from:
+
+**one-shot event** -> timer-heavy
+
+to
+
+**many correction checkpoints** -> feedback-heavy.
+
+Add the boundary:
+
+> New errors generated after entry cannot be removed by improving the entry
+> clock; they create a unique value for feedback.
+
 ### Panel F — Recovery can fail in two distinct ways
 
 Branch the final mismatch state into:
