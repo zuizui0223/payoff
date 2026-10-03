@@ -171,6 +171,9 @@ parameterization remains prospective.
 
 \`\`\`text
 TWO_CLOCK_ARCHITECTURE = DEVELOPMENTAL_PLUS_DECISION
+SERIAL_TWO_CLOCK_DECOMPOSITION = EXACT_POSTFREEZE
+DEFAULT_POST_ENTRY_READINESS = ENTRY_GATE_ALREADY_CROSSED
+CONCURRENT_READINESS_GATING = OPTIONAL_REQUIRES_STAGE_SPECIFIC_MEASUREMENT
 MIKAWA_ANJO_CLOCK = DECISION_CONTROLLER_ONLY
 TWO_CLOCK_IDENTIFICATION = K_AND_H_IDENTIFIED_PRIMITIVE_G_O_g_REQUIRE_EXTRA_DATA
 TWO_CLOCK_COMPLEMENTARITY = MULTIPLICATIVE_G_TIMES_O_TIMES_g_TIMES_K
@@ -195,13 +198,12 @@ DIRECT_NETWORK_CONTROLLER_TEST = PROSPECTIVE
 The post-freeze ecological spine is:
 
 ```text
-partly latent future seasonal state
--> checkpoint information acquisition
--> signed phase-error estimation
--> speed / stopover / route correction
--> residual error propagated to the next checkpoint
+physiological/developmental clock -> entry time and initial phase error
+-> movement exposes new information
+-> Mikawa-Anjo decision controller -> signed phase correction
+-> residual error propagated across checkpoints
+-> timer-generated + controller-generated mismatch
 -> actionability declines while information can improve
--> interacting actors can follow different phase trajectories
 -> physical or strategic recovery failure
 ```
 

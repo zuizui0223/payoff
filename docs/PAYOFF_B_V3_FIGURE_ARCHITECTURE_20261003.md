@@ -24,56 +24,46 @@ Annotation:
 The “Schrödinger's spring” intuition can appear only in the caption or graphical
 motif: the future target becomes clearer as the route progresses.
 
-### Panel B — Two clock layers
+### Panel B — Two clocks hand off control
 
-Split the panel vertically.
-
-**B1. Developmental / physiological timer**
+**B1. Entry/readiness clock**
 
 \[
 \dot z=v(E_t,z),
 \qquad
-z\rightarrow\Theta\rightarrow\text{readiness/event}.
+\tau=\inf\{t:z(t)\ge\Theta\}.
 \]
 
-Use emergence/diapause as the visual example. Label this as a
-**rate-to-threshold clock**, not universally as a molecular clock.
+The physiological/developmental clock determines **when the trajectory starts**
+and therefore the entry phase \(e_0\).  Across partners it can create
+\(\Delta_0\).
 
-**B2. Inferential decision controller**
+**B2. Mikawa-Anjo decision clock**
+
+After entry,
 
 \[
-e_t
+e_k
 \rightarrow
-I_t
+I_k
 \rightarrow
-\hat e_t
+\hat e_k
 \rightarrow
-u_t
+u_k
 \rightarrow
-e_{t+1},
+e_{k+1}.
 \]
 
-with
+Use early/late arrows:
+- late -> speed up / shorter stopover;
+- early -> slow down / longer stopover.
 
-\[
-e_{t+1}=\phi_t(e_t-u_t)+w_t.
-\]
+Label the hand-off:
 
-Use two miniature paths:
-- late \(e_t>0\) -> speed up / shorter stopover;
-- early \(e_t<0\) -> slow down / longer stopover.
+> **entry clock sets the initial error; decision clock sets its retention.**
 
-A migratory bird can contain both panels: an endogenous readiness programme
-opens the decision window, ecological deadlines later close it, and repeated
-route checkpoints provide state-dependent control. The informal “Mikawa-Anjo
-clock” refers only to B2.
-
-Add two gate arrows before the controller:
-- (G): readiness opens;
-- (O): ecological opportunity remains open.
-
-Then annotate **active correction = G × O × g × K**. If any required layer is
-effectively zero, signed correction cannot occur.
+A concurrent readiness gate is an optional extension, not the default
+post-entry assumption.
 
 ### Panel C — Natural mule-deer phase funnel
 
@@ -109,46 +99,37 @@ Caption boundary:
 > prior art; PAYOFF-B uses the continuous source data as a quantitative anchor,
 > not as an independent confirmation of the new controller theory.
 
-### Panel D — Mean and variance signatures separate information from gain
+### Panel D — Exact two-clock mismatch decomposition
 
-Show:
-
-\[
-\lambda=\phi(1-hK),
-\qquad
-h=GOg
-\]
-
-and
+For two actors after \(n\) checkpoints show
 
 \[
-P_{t+1}
+\boxed{
+\Delta_n
 =
-\phi^2P_t[1-Kh(2-h)]+Q.
+(\lambda_1^n-\lambda_2^n)m_0
++
+\frac{\lambda_1^n+\lambda_2^n}{2}\Delta_0.
+}
 \]
 
-With independently identified \(\phi,Q\),
+Color the two terms separately:
+
+- **controller-generated mismatch**:
+  \((\lambda_1^n-\lambda_2^n)m_0\);
+- **timer-propagated mismatch**:
+  \(\frac{\lambda_1^n+\lambda_2^n}{2}\Delta_0\).
+
+Add the precision corollary:
 
 \[
-d=1-\lambda/\phi,
-\qquad
-v=(P_{t+1}-Q)/(\phi^2P_t),
-\]
-
-\[
-K=\frac{d^2}{v-1+2d},
-\qquad
-h=\frac dK.
+V_n=\lambda^{2n}V_0.
 \]
 
 Visual message:
 
-> The same mean phase retention can hide different information × effective
-> correction architectures. Mean + variance identify (K) and (h=GOg), not
-> readiness (G), opportunity (O), and decision gain (g) separately.
-
-This panel is prospective identification theory, not a current natural
-parameter estimate.
+> A noisy entry clock can be rescued by strong downstream feedback, whereas
+> weak feedback makes precise initial timing much more valuable.
 
 ### Panel E — Controller asymmetry converts common error into mismatch
 
@@ -218,16 +199,16 @@ The visual reading order should be:
 \text{fail to recover}.
 \]
 
-The formal labels are:
+The formal reading order is:
 
 \[
-(q,r)
+(z,\tau)
 \rightarrow
-(e,\hat e,u)
+(e_0,\Delta_0)
 \rightarrow
-\lambda
+(\hat e,u,\lambda)
 \rightarrow
-\Delta.
+\Delta_n.
 \]
 
 “Schrödinger's spring” and “Shinkansen” belong in the caption / talk version,
