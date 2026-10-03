@@ -1,4 +1,4 @@
-# Seasonal clock architecture can convert shared environmental change into phenological mismatch
+# A seasonal timer–controller architecture can convert shared environmental change into phenological mismatch
 
 **PAYOFF-B Paper 2 — V3 post-freeze development draft**  
 **Date:** 2026-10-03  
@@ -8,7 +8,7 @@
 
 **Aim:** Interacting species can experience the same seasonal environmental
 change yet become asynchronous. We ask whether mismatch can arise because
-different biological clocks govern **when a seasonal trajectory starts** and
+different mechanisms govern **when a seasonal trajectory starts** and
 **how its error is corrected afterward**.
 
 **Location:** General theory, with empirical modules from migratory birds and
@@ -20,7 +20,7 @@ span approximately 1980–2020.
 **Major taxa studied:** Migratory birds and mule deer, with plant–pollinator
 and resident–migrant interactions as benchmarks.
 
-**Methods:** We separate a developmental/physiological entry clock from a
+**Methods:** We separate a developmental/physiological entry timer from a
 post-entry information-dependent controller. We combine this serial
 architecture with stagewise value-of-information theory, pairwise/network
 phase models and preregistered or source-backed ecological analyses.
@@ -42,12 +42,12 @@ while signed start phase predicts downstream speed and stopover; a prespecified
 IFBFat moderation test does not support concurrent readiness-gated feedback.
 
 **Main conclusions:** Shared forcing need not produce shared timing. Entry
-clocks determine initial seasonal error, whereas decision controllers determine
+timers determine initial seasonal error, whereas decision controllers determine
 whether that error is erased, retained or converted into new mismatch. Strong
 downstream feedback can partly substitute for precise initial timing, so final
 synchrony alone does not reveal the mechanism that produced it.
 
-**Keywords:** phenological mismatch; biological clocks; migration; information
+**Keywords:** phenological mismatch; seasonal timing; migration; information
 ecology; feedback control; recourse; climate change
 
 ---
@@ -76,10 +76,9 @@ opposite directions. Conditions nearer the destination may improve prediction
 while the remaining opportunities to change timing disappear.
 
 The intuition is simple: an organism may know the future best only after it has
-become too late to act on that knowledge. In the motivating analogy, a migrant
-is a train travelling toward a seasonal timetable that is not yet fully known—
-a “Shinkansen to Schrödinger's spring.” The formal model is sequential
-inference and feedback control, not a railway analogy.
+become too late to act on that knowledge. Formally, this is a sequential
+inference-and-control problem in which information quality and remaining
+actionability can move in opposite directions.
 
 We first derive when improving information should be used while actionability
 declines. We then model readiness, signed phase estimation and repeated
@@ -152,6 +151,17 @@ t^*=\frac{\log(1+\alpha/\beta)}{\alpha}.
 The optimum moves earlier as (\beta) increases. Two actors observing the same environmental-information trajectory can therefore commit at different stages solely because their remaining response options disappear at different rates.
 
 A particularly important consequence is that perfect information can be too late. With \(\alpha=\beta=1\), the optimum is \(t^*=\log 2\), where cue accuracy is only \(q=0.75\) in the symmetric witness even though \(q\to1\) later. Better information is not automatically more useful.
+
+In the single-commitment limit, the downstream consequences of waiting can be
+compressed into an effective deadline cost,
+\[
+D_{\rm eff}(\delta)
+=
+J(\delta)+\min_c\{K(c)+M(\delta-c)\}.
+\]
+This reduced bridge explains why raw elapsed delay need not rank deadline
+severity. V3 does not infer natural \(D_{\rm eff}\) values from observed phase
+retention or compensation.
 
 ### 2.2 Route-wise phase state
 
@@ -308,11 +318,11 @@ is recovered exactly by setting \(\phi_t=1\), \(g_t=K\), \(\hat e_t=e_t\) and \(
 
 The decomposition also establishes an important identification boundary: neither \(1-|\lambda|\) nor \(\lambda\) itself is a direct estimate of recourse, actionability or control gain without an independent estimate of passive retention and an explicit actuator model.
 
-### 2.6 Two clocks operate sequentially by default
+### 2.6 An entry timer and a decision controller operate sequentially by default
 
-Seasonal timing can involve two mechanistically different clocks.
+Seasonal timing can involve two mechanistically different control layers.
 
-A **developmental/physiological timer** carries an internal state \(z_i(t)\)
+A **developmental/physiological entry timer** carries an internal state \(z_i(t)\)
 and determines when the focal behavioral mode becomes available:
 
 \[
@@ -364,10 +374,10 @@ Thus the ecological sequence is
 }
 \]
 
-The informal “Mikawa-Anjo clock” refers to the post-entry decision controller,
-not to the physiological timer.
+The post-entry decision controller is mechanistically distinct from the
+physiological entry timer even when physiological state persists after entry.
 
-### 2.7 The two clocks contribute separately to interaction mismatch
+### 2.7 The entry timer and decision controller contribute separately to interaction mismatch
 
 For two actors, define entry-state mean error and mismatch
 
@@ -398,7 +408,7 @@ Therefore mismatch after \(n\) checkpoints is exactly
 The first term is **controller-generated mismatch**: different downstream
 controllers convert a shared entry error into differential timing. The second
 is **timer-propagated mismatch**: a phase difference already created by the
-readiness clocks survives downstream.
+readiness timers survives downstream.
 
 Two limiting cases separate the mechanisms. If both actors share the same
 post-entry controller,
@@ -536,10 +546,10 @@ associations with movement rate (\(+0.0742\), 95% CI \(+0.0387\) to
 \(+0.1028\)) and stopover (\(-0.234\), \(-0.429\) to \(-0.0095\)), whereas
 IFBFat intervals spanned zero in both downstream models.
 
-This licenses **T3_CANDIDATE + D2 -> H1_CANDIDATE** and supports channel
-dissociation: physiological condition is associated with when migration
-begins, whereas ecological phase is associated with how migration is
-subsequently paced. It does not establish causal independence, identify
+Taken together, these results provide a candidate same-population
+timer–controller anchor and support channel dissociation: physiological
+condition is associated with when migration begins, whereas ecological phase
+is associated with how migration is subsequently paced. It does not establish causal independence, identify
 IFBFat with the readiness gate \(G\), or demonstrate H2 readiness-gated
 feedback. The primitive \(G,O,K,g,\phi,Q\) decomposition remains unresolved.
 
@@ -643,7 +653,7 @@ e_{\mathrm{out}}.
 
 A route-wise analysis should estimate signed incoming error, the information available at the checkpoint, the subsequent speed/stopover/route response and the outgoing error at the next checkpoint.
 
-### 4.3 The two clocks leave different empirical signatures
+### 4.3 Entry timing and downstream control leave different empirical signatures
 
 A developmental or physiological timer should primarily predict **entry
 timing**: emergence, flowering, migratory readiness or another threshold
@@ -668,7 +678,7 @@ Markov handoff** as a complete description: in
 association; after within-year residualization both became unresolved.
 
 The appropriate distinction is therefore mechanistic rather than temporally
-absolute. The entry clock and the decision controller can remain different
+absolute. The entry timer and the decision controller can remain different
 mechanisms even if physiological or energetic state persists after entry. A
 post-hoc nested model writes
 
@@ -683,7 +693,7 @@ snow geese provide an independent natural anchor: premigration condition
 predicts lay date after arrival is controlled, and an unplanned reduction in
 prebreeding condition delayed laying.
 
-### 4.4 A variance funnel identifies effective feedback, not clock primitives
+### 4.4 A variance funnel identifies effective feedback, not controller primitives
 
 Individualized post-entry feedback predicts more phase-variance contraction
 than a common open-loop schedule. With incoming variance \(P_t\), information
@@ -717,7 +727,7 @@ innovation,
 V_n=\lambda^{2n}V_0,
 \]
 
-so a noisier entry clock can be offset by stronger downstream correction.
+so a noisier entry timer can be offset by stronger downstream correction.
 Arrival precision alone therefore does not identify how that precision was
 achieved.
 
@@ -752,7 +762,7 @@ Negative retention can arise from overshoot, anticipation, target movement or
 coordinate changes. Direct mechanistic inference therefore requires actuator
 and environmental information in addition to \(\lambda\).
 
-### 4.7 Prediction and reactive correction can substitute before new error appears
+### 4.7 Prediction and downstream correction can substitute before new error appears
 
 Let \(R(q)\) be mismatch risk remaining after pre-entry information of quality
 \(q\), and let post-entry correction gain \(g\) reduce that inherited error at
@@ -797,117 +807,19 @@ V_n
 Q\sum_{j=0}^{n-1}\lambda^{2j}.
 \]
 
-Improving the entry clock reduces only the first term. Post-entry innovations
+Improving the entry timer reduces only the first term. Post-entry innovations
 can only be suppressed by downstream control. Thus feedback has a distinct
 value in long, stochastic journeys even when departure timing is precise.
 
-### 4.8 Clock portfolios explain why different timing strategies can persist
-
-The serial model converts the two clocks into an allocation problem. Let
-entry-clock investment \(x\) reduce initial variance as
-
-\[
-V_0=V_{\mathrm{ref}}e^{-x},
-\]
-
-and let per-checkpoint feedback investment \(y\) reduce
-\(|\lambda|=e^{-y}\). With \(n\) post-entry checkpoints and no new innovation,
-
-\[
-V_n
-=
-V_{\mathrm{ref}}
-e^{-(x+2ny)}.
-\]
-
-Under the transparent quadratic cost witness
-
-\[
-C
-=
-\frac a2x^2+\frac b2y^2,
-\]
-
-the minimum-cost shares of required log-precision are
-
-\[
-\boxed{
-s_{\mathrm{timer}}
-=
-\frac{b}{b+4n^2a}
-}
-\]
-
-and
-
-\[
-\boxed{
-s_{\mathrm{feedback}}
-=
-\frac{4n^2a}{b+4n^2a}.
-}
-\]
-
-Hence more correction checkpoints shift the optimal portfolio toward feedback.
-At \(n=0\), all precision must be supplied upstream.
-
-This distinguishes one-shot from checkpoint-rich timing architectures. The
-displayed (n^2) scaling assumes a fixed feedback-capacity cost; if operating
-cost accumulates per checkpoint, it becomes (n), but the shift toward
-feedback with increasing (n) remains.
-
-### 4.9 Opportunity loss makes feedback-heavy portfolios fragile
-
-Climate change and land-use change can reduce predictive connectivity before
-entry, remove stopovers, compress resource windows or make route adjustment
-costly after entry.  The clock portfolio therefore creates a hidden
-dependency.
-
-Let \(\omega\in[0,1]\) be the fraction of historically usable downstream
-correction opportunity that remains after change.  If the organism retains the
-historical optimal portfolio, inherited-error variance is inflated relative to
-its historical target by
-
-\[
-\boxed{
-\frac{V_{\mathrm{disrupted}}}{V^*}
-=
-\exp[(1-\omega)s_{\mathrm{feedback}}P],
-}
-\]
-
-where \(P\) is required log-precision and \(s_{\mathrm{feedback}}\) is the
-historical fraction of that precision supplied by downstream feedback.
-
-Thus the same architecture that makes repeated movement efficient in an intact
-route can make it vulnerable when correction opportunities disappear. Under
-the quadratic witness, minimum intact cost falls with checkpoint number while
-opportunity-loss fragility rises: a **flexibility-dependence tradeoff**.
-One-shot timer-only systems are insensitive to this particular perturbation.
-
-Industrial-development mule deer provide a relevant natural anchor, not a test
-of this equation. Energy development altered migration behaviour and reduced
-route-scale green-wave surfing, while the registered PAYOFF-B reanalysis found
-attenuated near-boundary movement-control permeability in the
-large-development population. Those data do not identify
-\(\omega\) or \(s_{\mathrm{feedback}}\).
+The serial architecture also permits formal allocation models in which entry
+precision and downstream correction substitute under historical conditions.
+Timer–feedback portfolio optimization and opportunity-loss fragility are retained as
+prospective supporting theory rather than as a co-equal main-text claim because
+no current natural dataset directly identifies the required allocation and
+opportunity-loss parameters.
 
 
-Synchronized partners can hide different portfolios. With equal
-historical target variance and precision budget,
-
-\[
-\boxed{
-\log\frac{V_1'}{V_2'}
-=
-(1-\omega)P(s_1-s_2).
-}
-\]
-
-Opportunity loss can expose hidden timer-versus-feedback reliance as differential variance and partner mismatch. This **cryptic clock-portfolio** prediction is prospective.
-
-
-### 4.10 Interactions convert controller differences into ecological mismatch
+### 4.8 Interactions convert controller differences into ecological mismatch
 
 The pairwise mode decomposition clarifies why interaction mismatch need not
 require different climate exposure. A common environmental displacement enters
@@ -928,7 +840,7 @@ explains why a mismatched or obsolete timing configuration can remain difficult
 to escape even after information improves. A physically feasible correction
 can therefore remain strategically inaccessible.
 
-### 4.11 Direct natural validation remains prospective
+### 4.9 Direct natural validation remains prospective
 
 The evidence is no longer purely cross-system. Mule deer provide a candidate
 same-population two-layer hybrid: March physiological condition predicts
@@ -970,16 +882,17 @@ individuals and interacting partners.
 
 ## 5. Conclusion
 
-Seasonal adaptation can involve a hand-off between two clocks. A
-developmental/physiological clock determines when an organism enters a seasonal
-behavior with some initial phase error; an information-dependent controller
-then determines whether that error is erased, retained or amplified.
+Seasonal adaptation can involve a hand-off between an entry timer and a
+downstream decision controller. A developmental/physiological timer determines
+when an organism enters a seasonal behavior with some initial phase error; an
+information-dependent controller then determines whether that error is erased,
+retained or amplified.
 
 For interacting species, later mismatch therefore has two separable sources:
 
 \[
 \boxed{
-\text{entry-clock mismatch}
+\text{entry-timer mismatch}
 +
 \text{controller-generated mismatch}.
 }
@@ -992,8 +905,8 @@ informed start.
 
 Information adds a second constraint: destination conditions can become easier
 to infer while opportunities for useful correction disappear. The ecologically
-important question is therefore not only whether an organism has a clock, but
-**which clock acts when, what information it has, and what can still be
+important question is therefore not only whether an organism shifts timing, but
+**which mechanism acts when, what information it has, and what can still be
 changed after it acts**.
 
 The strongest prospective test is to measure physiological readiness at entry,
