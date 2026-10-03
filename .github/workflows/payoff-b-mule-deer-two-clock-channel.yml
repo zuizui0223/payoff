@@ -1,0 +1,26 @@
+name: PAYOFF-B mule-deer two-clock channel audit
+
+on:
+  push:
+    paths:
+      - "scripts/payoff_b_mule_deer_two_clock_channel.py"
+      - "data/payoff_b_mule_deer_two_clock_channel_contract_20261003.json"
+      - ".github/workflows/payoff-b-mule-deer-two-clock-channel.yml"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python scripts/payoff_b_mule_deer_two_clock_channel.py \
+            --bootstrap-replicates 10000 \
+            --output outputs/payoff_b_mule_deer_two_clock_channel_result.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-mule-deer-two-clock-channel
+          path: outputs/payoff_b_mule_deer_two_clock_channel_result.json
