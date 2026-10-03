@@ -112,6 +112,93 @@ prospective confirmation:
 - American redstart: compensation after delayed departure can carry survival
   cost.
 
+
+## Phase-variance funnel addendum
+
+A second prospective signature distinguishes individualized feedback from a
+common timing programme.
+
+For incoming across-individual phase variance \(P_t\), cue variance \(R_t\),
+Kalman weight \(K_t=P_t/(P_t+R_t)\), control gain \(g_t\), passive retention
+\(\phi_t\) and process innovation \(Q_t\), the reduced Gaussian feedback model
+predicts
+
+\[
+P_{t+1}^{\mathrm{feedback}}
+=
+\phi_t^2P_t[1-K_tg_t(2-g_t)]+Q_t.
+\]
+
+A common open-loop correction that is the same for all individuals predicts
+
+\[
+P_{t+1}^{\mathrm{open}}
+=
+\phi_t^2P_t+Q_t.
+\]
+
+The extra contraction
+
+\[
+\phi_t^2P_tK_tg_t(2-g_t)
+\]
+
+is positive for informative cues and \(0<g_t<2\).
+
+### Primary variance-funnel test
+
+Use continuous individual-level signed phase values, not early/mid/late groups.
+Compare held-out prediction of downstream phase under:
+
+1. **common-schedule model** — route stage, year, photoperiod and other
+   prespecified shared timing predictors, but no individual incoming phase
+   feedback;
+2. **individual-feedback model** — the same predictors plus incoming signed
+   phase, checkpoint cue information and prespecified actuator response.
+
+Evidence for the variance-funnel mechanism requires both:
+
+- the individual-feedback model to improve held-out downstream-phase
+  prediction; and
+- downstream residual phase variance to be lower than the open-loop model
+  predicts after accounting for observation and process error.
+
+### Confounds that do not count as feedback evidence
+
+The following can narrow an observed phase distribution without individualized
+correction and must be handled explicitly:
+
+- defining early/mid/late groups from the same incoming variable later used to
+  claim convergence;
+- selective dropout, mortality or route censoring of extreme individuals;
+- regression to the mean from noisy phase reconstruction;
+- changing environmental variance between origin and destination;
+- conditioning on arrival or breeding success;
+- pooling route stages with different observation intervals;
+- using the same environmental reconstruction both to define phase and to
+  estimate its measurement error.
+
+A raw start-variance / end-variance ratio alone is therefore descriptive, not a
+direct test of the controller.
+
+### Strong functional fingerprint
+
+The cleanest support would be the joint pattern
+
+\[
+e_{\mathrm{in}}
+\rightarrow
+\text{signed individual actuator response}
+\rightarrow
+e_{\mathrm{out}}
+\]
+
+plus excess downstream variance contraction relative to the common-schedule
+null.
+
+This combination is more diagnostic than either mean phase retention or
+population synchronization alone.
+
 ## Claim boundary
 
 A successful future test would support a route-wise ecological feedback
