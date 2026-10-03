@@ -53,25 +53,48 @@ ecology; feedback control; recourse; climate change
 
 ## 1. Introduction
 
-Phenological mismatch is commonly summarized as a difference between the timing of consumers and resources, plants and pollinators, or migrants and the seasonal conditions they exploit. That description is useful but mechanistically incomplete. The same observed mismatch can arise because an organism cannot respond far enough, because it cannot predict the relevant future state, because useful information arrives only after important actions have been committed, because an earlier timing error can no longer be repaired, or because unilateral adjustment creates a temporary mismatch with interaction partners.
+Phenological mismatch is usually described as a difference between the timing
+of consumers and resources, plants and pollinators, or migrants and seasonal
+conditions. The same observed mismatch, however, can arise from distinct
+mechanisms: poor prediction of a future state, physiological commitment before
+that state is known, limited ability to repair an earlier timing error, or
+interaction costs that discourage unilateral adjustment.
 
-Long-distance migration makes these distinctions unusually visible. A migrant may have to leave a wintering site before it can directly observe spring conditions at the destination. Yet departure is not the only decision. Individuals can change travel speed, alter stopover duration, skip sites, choose routes and alter post-arrival timing. Migration is therefore neither a single irreversible departure decision nor a purely open-loop response to a distant cue. It can be a sequence of decisions in which new environmental information is acquired while the animal is already moving.
+Long-distance migration makes these mechanisms visible. A migrant may leave a
+wintering site before directly observing destination spring, yet departure is
+not the only decision. Speed, stopover duration, route and post-arrival timing
+can be altered while new information is acquired. Seasonal migration is
+therefore naturally represented as repeated inference and correction rather
+than a single departure-date response.
 
-This suggests a control problem. Let (e_t) denote the signed difference between an animal's current seasonal phase and the locally relevant seasonal optimum at route stage (t). The animal does not necessarily know (e_t) exactly. Instead, it forms an internal estimate from the information available by that stage. It then chooses a correction through the actuators that remain available. The residual error is carried into the next stage, where it can be re-estimated and corrected again.
+We distinguish two timing layers. A developmental or physiological timer
+determines when actions become available; an information-dependent controller
+then estimates signed seasonal phase and chooses among those available actions.
+This distinction matters because information and actionability can change in
+opposite directions. Conditions nearer the destination may improve prediction
+while the remaining opportunities to change timing disappear.
 
-The central difficulty is that information and control change in opposite directions. Later in a journey, conditions nearer the destination may provide better information about the coming spring. At the same time, fewer opportunities remain to change speed, stopover allocation, route or breeding timing. Waiting can therefore increase cue accuracy while reducing the value of that accuracy.
+The intuition is simple: an organism may know the future best only after it has
+become too late to act on that knowledge. In the motivating analogy, a migrant
+is a train travelling toward a seasonal timetable that is not yet fully known—
+a “Shinkansen to Schrödinger's spring.” The formal model is sequential
+inference and feedback control, not a railway analogy.
 
-The intuition can be stated without metaphor: an organism may know the future best only after it has become too late to act on that knowledge. In the motivating analogy used during model development, the migrant is a train travelling toward a destination whose seasonal timetable is not yet fully known—a “Shinkansen to Schrödinger's spring.” The formal theory, however, is standard sequential inference and feedback control applied to an ecological timing problem.
+We first derive when improving information should be used while actionability
+declines. We then model readiness, signed phase estimation and repeated
+correction, and show exactly how differences between actor-level controllers
+convert a shared seasonal error into interaction mismatch. Finally, we retain
+the coordination-game result showing why mismatch can persist even after
+environmental information improves.
 
-We develop the argument in four linked steps. First, we derive when improving information should be acted upon while response options are disappearing. Second, we introduce a signed route-wise phase controller that allows both late and early individuals to correct error at repeated checkpoints. Third, we show how actors exposed to the same improving information can desynchronize if their correction opportunities decay at different rates. Fourth, we retain the earlier coordination-game result showing that environmental information can recover before coordinated information use recovers.
+Natural evidence is deliberately layered. Existing data support predictive
+connectivity, route-stage updating, bidirectional compensation and
+interaction-level response asymmetry, but no current system jointly identifies
+all latent readiness, information and control parameters. Our central claim is:
 
-The empirical evidence is deliberately layered rather than treated as one direct validation. Existing natural data support predictive connectivity, route-stage cue use, bidirectional timing compensation and compensation costs, but do not yet identify the complete latent-state controller in a single system. The direct route-wise test is therefore prospective.
-
-Our revised ecological claim is:
-
-> **Seasonal tracking depends not only on how accurately organisms can infer a future state, but on whether they can still correct their seasonal phase when that information becomes available.**
-
----
+> **Shared environmental change can generate phenological mismatch because
+> interacting organisms differ in when they become able to act, what they can
+> infer about seasonal phase and how strongly they can correct error.**
 
 ## 2. Theory
 
