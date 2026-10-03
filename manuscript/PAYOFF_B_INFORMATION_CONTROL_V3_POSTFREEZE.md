@@ -42,9 +42,9 @@ parameters.
 **Main conclusions:** Shared climate forcing need not produce shared timing.
 Species can diverge because they differ in when actions become physiologically
 available, how long ecological opportunities remain open, what they can infer
-about seasonal phase and how strongly they can correct error. Mean and variance trajectories can identify information weight
-and effective correction, but readiness and decision gain require independent
-measurement or manipulation.
+about seasonal phase and how strongly they can correct error. Mean and variance trajectories can identify information weight and effective
+correction, but readiness, opportunity retention and decision gain require
+additional independent measurement or manipulation.
 
 **Keywords:** phenological mismatch; biological clocks; migration; information
 ecology; feedback control; recourse; climate change
