@@ -10,6 +10,10 @@ Within the temporally safe March-IFBFat subset, does signed ecological phase
 while IFBFat itself contributes little to those downstream actuators?
 
 This is a source-data reproduction / mechanism-separation audit, not H2.
+
+Parser invariant: the actuator table must reproduce the validated 152-row
+first block used by the Ortega variance-funnel audit before any coefficient is
+accepted.
 """
 
 from __future__ import annotations
