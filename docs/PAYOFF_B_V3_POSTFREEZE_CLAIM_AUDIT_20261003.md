@@ -33,6 +33,8 @@ source-backed motivation, and what remains prospective in
 | noisy-cue phase inverse K and effective gain h=GOg from mean + variance retention | exact post-freeze inverse under identified phi and Q | exact under stated Gaussian assumptions with independent passive/process baseline; lambda=phi(1-hK) | claim readiness G and decision gain g are separately identified without an independent readiness or gain measure |
 | mule-deer temporal phase sense / bidirectional compensation | published prior art (Ortega et al. 2023) | natural anchor for signed compensation and resynchronization | claim PAYOFF-B discovered temporal phase sense in mule deer |
 | two-clock architecture | post-freeze mechanistic synthesis | distinguish developmental/physiological threshold timers from information-dependent decision controllers; hybrids allowed | claim bee emergence is universally a molecular oscillator or bird migration is purely decision-based |
+| serial two-clock mismatch decomposition | exact post-hoc theorem, formulated after mule-deer H2 proxy result | Δ_n=(λ1^n-λ2^n)m0 + 0.5(λ1^n+λ2^n)Δ0 separates controller-generated from timer-propagated mismatch | claim mule deer prospectively confirmed the serial theorem |
+| serial timer-feedback precision substitution | exact post-hoc corollary | with no new innovation, V_n=λ^(2n)V0; final precision can be achieved by different timer/feedback combinations | claim timer precision and feedback have equal fitness costs or are universally interchangeable |
 | clock-window non-identifiability | exact post-freeze reduced-model result | observed phase moments identify K and h=GOg; readiness G, opportunity O and decision gain g require additional independent measurements/manipulations | report separate readiness, expiry and decision gain from phase trajectory alone |
 | controller asymmetry converts common error to mismatch | exact post-freeze linear pair theorem | under declared mean controller, Δ_next = δλ m + λ_bar Δ + δw; synchronized actors diverge when δλ m != 0 | generic claim that all natural mismatch is caused by controller asymmetry |
 | persistent mismatch under shared forcing | exact post-freeze stable-controller result | Δ* = w(λ1-λ2)/[(1-λ1)(1-λ2)] when both |λ_i|<1 | natural parameter estimate without matched actor-specific λ on a common scale |
@@ -53,11 +55,10 @@ The manuscript should present evidence in this order:
 
 ## Core claim that survives every boundary
 
-> **Seasonal tracking has separable prediction and correction components, and
-> information can become more accurate while its behavioral usefulness falls
-> because correction opportunities are being lost. Individualized feedback can
-> additionally be distinguished from a common timing programme by its joint
-> mean-retention and variance-contraction signatures.**
+> **Seasonal timing has separable entry and correction mechanisms:
+> developmental/physiological clocks set the initial phase state, while
+> information-dependent controllers determine what happens to that error
+> afterward. Information can improve even as opportunities to use it disappear.**
 
 ## Stronger claim that remains prospective in nature
 
