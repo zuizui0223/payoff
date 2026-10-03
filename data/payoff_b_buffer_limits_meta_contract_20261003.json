@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-03",
+  "status": "PREOUTCOME_COMPARATIVE_CONTRACT",
+  "project": "PAYOFF-B V5 buffer limits",
+  "primary_question": "Where in the annual cycle do migratory birds absorb temporal delays, and what predicts when those delays persist to fitness-relevant stages?",
+  "corpus_rule": {
+    "taxa": "migratory birds for primary synthesis",
+    "study_unit": "population/cohort transition between two sequential annual-cycle timing events",
+    "eligible_designs": [
+      "same individuals measured at both timing events",
+      "population/cohort data with a reported transition slope and explicit paired annual-cycle events"
+    ],
+    "primary_effect_requires": [
+      "both timing variables expressed in the same temporal units or convertible to days",
+      "unstandardized slope beta_AB with uncertainty OR individual-level data permitting estimation",
+      "clear temporal ordering A before B",
+      "transition biological class assignable without inspecting the slope"
+    ],
+    "exclude": [
+      "repeatability/ICC without stage-to-stage transition estimate",
+      "cross-sectional mean dates without within-study transition relationship",
+      "correlation only from the primary raw-slope synthesis",
+      "studies selected because they reported successful buffering",
+      "non-migratory taxa from primary synthesis"
+    ]
+  },
+  "primary_estimand": {
+    "name": "timing_propagation_coefficient",
+    "symbol": "beta_AB",
+    "model": "d_B = a + beta_AB * d_A + error",
+    "interpretation": {
+      "0": "statistical reset",
+      "1": "one-for-one propagation",
+      "0_to_1": "partial buffering",
+      "negative": "reversal/over-correction",
+      "greater_than_1": "amplification"
+    },
+    "centering_priority": [
+      "within-year population-centered timing deviations",
+      "year-adjusted raw dates",
+      "raw dates only when year effects are absent or controlled"
+    ],
+    "forbidden": "Do not convert repeatability or correlation coefficients into beta_AB."
+  },
+  "primary_hypotheses": [
+    {
+      "id": "H1",
+      "label": "stationary-period buffering",
+      "prediction": "beta_stationary < beta_active_migration"
+    },
+    {
+      "id": "H2",
+      "label": "available-time hypothesis",
+      "prediction": "within stationary transitions, beta decreases as reported/derivable available interval duration increases"
+    }
+  ],
+  "secondary_hypotheses": [
+    {
+      "id": "H3",
+      "label": "fitness-relevant persistence",
+      "prediction": "persistent delay reaching the last pre-breeding transition is associated with stronger reproductive timing or vital-rate consequences where those outcomes are reported",
+      "status": "secondary_due_expected_sparse_vital_rate_data"
+    }
+  ],
+  "transition_classes": [
+    "ACTIVE_SPRING_MIGRATION",
+    "SPRING_STOPOVER_STAGING",
+    "NONBREEDING_STATIONARY",
+    "ARRIVAL_TO_BREEDING_PRELAYING",
+    "BREEDING_POSTBREEDING",
+    "ACTIVE_AUTUMN_MIGRATION",
+    "AUTUMN_STOPOVER_STAGING",
+    "OTHER_STATIONARY",
+    "MIXED"
+  ],
+  "fitness_layer": {
+    "outcomes": [
+      "survival_or_return",
+      "breeding_probability",
+      "lay_or_nest_initiation",
+      "hatching_success",
+      "fledging_success",
+      "seasonal_fecundity",
+      "population_growth_or_abundance_if_explicitly_linked"
+    ],
+    "end_to_end_requires": [
+      "incoming_timing_deviation",
+      "measured_correction_or_buffering_interval_or_action",
+      "outgoing_timing_deviation",
+      "subsequent_survival_or_reproduction",
+      "same_individuals"
+    ],
+    "quality_adjustment_coded": true
+  },
+  "primary_model_plan": {
+    "effect_model": "multilevel meta-regression of beta_AB",
+    "random_effects": [
+      "study_id",
+      "species_id",
+      "population_or_cohort_id"
+    ],
+    "phylogeny": "include if species count and taxonomic coverage support stable estimation",
+    "primary_moderator": "stationary_vs_active transition class",
+    "secondary_moderator": "available interval duration",
+    "no_outcome_driven_moderator_addition": true
+  },
+  "sensitivity": [
+    "within-year centered estimates only",
+    "individual-level estimates only",
+    "leave-one-study-out",
+    "leave-one-species-out",
+    "exclude MIXED transitions",
+    "exclude slopes reconstructed from figures"
+  ],
+  "novelty_boundary": [
+    "No claim that buffering, reset points, carry-over effects, en-route compensation, or fitness costs are new.",
+    "No claim of first meta-analysis until systematic novelty search is complete.",
+    "V5 novelty is prospective quantitative synthesis of stage-to-stage day-for-day timing propagation and its moderators."
+  ],
+  "outcome_access_state": "UNOPENED"
+}
