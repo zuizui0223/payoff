@@ -356,21 +356,24 @@ different hidden precision portfolios:
 
 Before perturbation, their final distributions overlap.
 
-After the same **effective** opportunity loss, separate them according to. Add a small route inset defining
+Add a small route inset defining effective opportunity retention,
 
 \[
-\omega_{\rm eff}=\frac{\sum_j o_j c_j^2/b_j}{\sum_j c_j^2/b_j},
+\omega_{\rm eff}
+=
+\frac{\sum_j o_j c_j^2/b_j}{\sum_j c_j^2/b_j},
 \]
 
 so named-site loss is visibly distinct from lost correction leverage.
 
-For the cryptic-portfolio comparison, separate them according to
+After the same **effective** opportunity loss, separate the historically
+overlapping partners according to
 
 \[
 \boxed{
 \log\frac{V_1'}{V_2'}
 =
-(1-\omega)P(s_1-s_2).
+(1-\omega_{\rm eff})P(s_1-s_2).
 }
 \]
 
