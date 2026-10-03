@@ -4,7 +4,7 @@ Prospective PAYOFF-B post-freeze extension.
 
 The route-wise controller defines an effective mean phase-retention coefficient
 
-    lambda_i = phi_i (1 - g_i K_i)
+    lambda_i = phi_i (1 - G_i g_i K_i)
 
 for actor i under the declared noisy Gaussian feedback representation.
 
@@ -13,8 +13,8 @@ shared seasonal error into between-actor mismatch.
 
 The algebra is elementary linear-systems theory. PAYOFF-B should not claim the
 matrix identities themselves as generic mathematical novelty. The ecological
-contribution is the explicit bridge from information/control asymmetry to
-interaction mismatch.
+contribution is the explicit bridge from readiness/information/control
+asymmetry to interaction mismatch.
 """
 
 from __future__ import annotations
