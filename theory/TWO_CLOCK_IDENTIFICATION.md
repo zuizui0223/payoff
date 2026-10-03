@@ -139,7 +139,69 @@ This is the central two-clock identification boundary.
 The earlier phase-sense inverse should consequently be interpreted as
 identifying \(K\) and \(h=Gg\) unless \(G=1\) is independently justified.
 
-## 4. What separates the two clocks
+## 4. Readiness, information and decision gain are multiplicative complements
+
+Because
+
+\[
+\lambda=\phi(1-GgK),
+\]
+
+the active correction term is the product \(GgK\), not a sum.
+
+The exact local sensitivities are
+
+\[
+\frac{\partial\lambda}{\partial G}
+=
+-\phi gK,
+\]
+
+\[
+\frac{\partial\lambda}{\partial K}
+=
+-\phi Gg,
+\]
+
+and
+
+\[
+\frac{\partial\lambda}{\partial g}
+=
+-\phi GK.
+\]
+
+Therefore:
+
+- better information has no phase-control effect when readiness is closed
+  (\(G=0\));
+- stronger decision gain has no phase-control effect when usable information is
+  absent (\(K=0\));
+- greater readiness has no active correction effect when the controller does
+  not respond (\(g=0\)).
+
+The mechanisms are **complements**. Improving one layer is valuable only to the
+extent that the other required layers are functioning.
+
+For small actor differences around a common baseline,
+
+\[
+\delta\lambda
+\approx
+(1-GgK)\,\delta\phi
+-
+\phi gK\,\delta G
+-
+\phi GK\,\delta g
+-
+\phi Gg\,\delta K.
+\]
+
+This gives a local attribution of controller asymmetry into passive,
+readiness, decision-gain and information components. It is a differential
+approximation, not an exact decomposition for large cross-species differences.
+
+## 5. What separates the two clocks
 
 One additional independent quantity is sufficient in the reduced model.
 
@@ -167,7 +229,7 @@ G=\frac{h}{g}.
 
 Without such information, reporting separate \(G\) and \(g\) is not licensed.
 
-## 5. Three perturbations target three different mechanisms
+## 6. Three perturbations target three different mechanisms
 
 The cleanest empirical programme uses conceptually distinct perturbations.
 
@@ -213,7 +275,7 @@ g
 The three effects should not be inferred from one response variable by
 relabeling coefficients.
 
-## 6. Developmental timer versus decision controller: predicted signatures
+## 7. Developmental timer versus decision controller: predicted signatures
 
 ### Developmental/physiological timer
 
@@ -240,7 +302,7 @@ A migrant can therefore have:
 1. a circannual/photoperiodic readiness gate;
 2. repeated information-dependent stopover and pacing decisions.
 
-## 7. Actionability as a reduction of multiple gates
+## 8. Actionability as a reduction of multiple gates
 
 If actuator \(a\) has gate \(G_a\) and declared ecological importance
 \(\omega_a\), one possible reduced actionability coordinate is
@@ -262,7 +324,7 @@ actionability object used by the information theorem.
 Different reductions are appropriate when actions have nonlinear values or
 substitutability.
 
-## 8. Interaction consequence
+## 9. Interaction consequence
 
 Actor \(i\) has
 
@@ -295,7 +357,7 @@ g_1\ne g_2.
 
 The same observed interaction mismatch does not reveal which layer differs.
 
-## 9. Empirical claim boundary
+## 10. Empirical claim boundary
 
 The current natural evidence does not jointly estimate \(G,K,g,\phi,Q\) in one
 system.
@@ -310,7 +372,7 @@ controller for the emergence event.
 
 The full two-clock decomposition is therefore prospective.
 
-## 10. Novelty boundary
+## 11. Novelty boundary
 
 Developmental thresholds, diapause physiology, photoperiodic clocks,
 state-dependent decisions, Bayesian filtering and feedback control all have
