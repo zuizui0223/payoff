@@ -1,4 +1,4 @@
-# Seasonal tracking is a sequential information-and-control problem
+# Seasonal clock architecture converts shared environmental change into phenological mismatch
 
 **PAYOFF-B Paper 2 — V3 post-freeze development draft**  
 **Date:** 2026-10-03  
@@ -6,21 +6,48 @@
 
 ## Abstract
 
-**Aim:** We ask when seasonal information becomes useful, how timing error can be corrected after movement begins, and why interacting species can still desynchronize despite substantial adaptive capacity.
+**Aim:** Interacting species can experience the same seasonal environmental
+change yet become phenologically asynchronous. We ask whether that divergence
+can arise from differences in **seasonal clock architecture** rather than from
+different external forcing alone.
 
-**Location:** General theory, with empirical modules from migratory birds and ungulates in North America and Europe.
+**Location:** General theory, with empirical modules from migratory birds and
+ungulates in North America and Europe.
 
-**Time period:** Dataset-specific; principal reconstructed phenology records span approximately 1980–2020.
+**Time period:** Dataset-specific; principal reconstructed phenology records
+span approximately 1980–2020.
 
-**Major taxa studied:** Migratory birds and mule deer, with plant–pollinator and resident–migrant interaction studies as independent benchmarks.
+**Major taxa studied:** Migratory birds and mule deer, with plant–pollinator
+and resident–migrant interaction studies as independent benchmarks.
 
-**Methods:** We combine Bayesian decision models, stagewise value-of-information theory, a route-wise signed phase controller, finite coordination games, preregistered macroecological analyses and source-backed natural systems.
+**Methods:** We separate a developmental/physiological readiness clock
+\(G\) from an information-dependent decision controller with phase-information
+weight \(K\) and correction gain \(g\). We combine this two-clock model with
+stagewise value-of-information theory, pairwise and network phase-control
+models, finite coordination games, preregistered macroecological analyses and
+source-backed natural systems.
 
-**Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is \(r(t)[Sq(t)-B]-C(t)\); with exponential learning and recourse loss the unique zero-cost optimum is \(t^*=\log(1+\alpha/\beta)/\alpha\), generally before maximal cue accuracy. Route-wise phase dynamics obey \(e_{t+1}=\phi_t(e_t-u_t)+w_t\). A post-freeze source-data reanalysis of 152 mule-deer animal-years shows that end-of-migration phase variance was 0.249 of start variance (95% animal-cluster bootstrap 0.167–0.362; 0.294 after year centering), while movement speed increased and stopover use decreased continuously with later starting phase. These observations quantify a natural phase funnel with signed compensation but do not identify the latent controller.
+**Results:** Effective mean phase retention is
+\(\lambda_i=\phi_i(1-G_i g_iK_i)\). For two initially synchronized actors
+sharing seasonal error \(m_t\), controller asymmetry generates
+\(\Delta_{t+1}=(\lambda_1-\lambda_2)m_t\); across an interaction network,
+one-step mismatch scales with the graph Dirichlet energy of the controller
+field. Information can simultaneously become more accurate and less actionable,
+so optimal information use can precede maximal cue accuracy. A post-freeze
+reanalysis of 152 mule-deer animal-years shows a start-to-end phase-variance
+ratio of 0.249 (95% animal-cluster bootstrap 0.167–0.362) together with signed
+speed and stopover compensation, but does not identify the latent two-clock
+parameters.
 
-**Main conclusions:** Seasonal tracking combines physiological readiness timers with information-dependent decision control. Controller asymmetry can convert a shared seasonal error directly into interaction mismatch: organisms exposed to the same forcing can diverge because they differ in readiness, information, remaining actionability or phase correction. Restored information need not restore coordination after response options or coordinated conventions have been lost.
+**Main conclusions:** Shared climate forcing need not produce shared timing.
+Species can diverge because they differ in when actions become physiologically
+available, what they can infer about seasonal phase and how strongly they can
+correct error. Mean and variance trajectories can identify information weight
+and effective correction, but readiness and decision gain require independent
+measurement or manipulation.
 
-**Keywords:** phenological mismatch; migration; information ecology; feedback control; recourse; phase error; climate change
+**Keywords:** phenological mismatch; biological clocks; migration; information
+ecology; feedback control; recourse; climate change
 
 ---
 
