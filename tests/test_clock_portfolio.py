@@ -6,6 +6,8 @@ from src.clock_portfolio import (
     clock_portfolio_precision_shares,
     final_variance_from_portfolio,
     final_variance_with_process_noise,
+    fragility_from_feedback_share,
+    opportunity_loss_fragility,
     infinite_horizon_noise_floor,
     post_entry_noise_floor,
     optimal_clock_portfolio,
@@ -204,3 +206,80 @@ def test_entry_precision_does_not_change_post_entry_noise_floor():
         checkpoints=4,
     )
     assert (a - floor) / (b - floor) == pytest.approx(10.0)
+
+
+def test_no_opportunity_loss_preserves_target_variance():
+    r=opportunity_loss_fragility(
+        100.0,
+        4.0,
+        historical_checkpoints=5,
+        retained_opportunity_fraction=1.0,
+        timer_cost_curvature=1.0,
+        feedback_cost_curvature=1.0,
+    )
+    assert r.disrupted_variance == pytest.approx(4.0)
+    assert r.variance_inflation_factor == pytest.approx(1.0)
+    assert r.excess_log_variance == pytest.approx(0.0)
+
+
+def test_full_opportunity_loss_inflates_by_feedback_precision_share():
+    r=opportunity_loss_fragility(
+        100.0,
+        4.0,
+        historical_checkpoints=5,
+        retained_opportunity_fraction=0.0,
+        timer_cost_curvature=1.0,
+        feedback_cost_curvature=1.0,
+    )
+    closed=fragility_from_feedback_share(
+        r.required_log_precision,
+        r.historical_feedback_precision_share,
+        retained_opportunity_fraction=0.0,
+    )
+    assert r.variance_inflation_factor == pytest.approx(closed)
+    assert r.variance_inflation_factor > 1.0
+
+
+def test_feedback_heavy_portfolio_is_more_fragile_to_same_opportunity_loss():
+    # More historical checkpoints produce a higher feedback precision share.
+    short=opportunity_loss_fragility(
+        100.0,
+        4.0,
+        historical_checkpoints=1,
+        retained_opportunity_fraction=0.5,
+        timer_cost_curvature=1.0,
+        feedback_cost_curvature=1.0,
+    )
+    long=opportunity_loss_fragility(
+        100.0,
+        4.0,
+        historical_checkpoints=6,
+        retained_opportunity_fraction=0.5,
+        timer_cost_curvature=1.0,
+        feedback_cost_curvature=1.0,
+    )
+    assert long.historical_feedback_precision_share > short.historical_feedback_precision_share
+    assert long.variance_inflation_factor > short.variance_inflation_factor
+
+
+def test_one_shot_timer_only_system_is_not_fragile_to_feedback_opportunity_loss():
+    r=opportunity_loss_fragility(
+        100.0,
+        4.0,
+        historical_checkpoints=0,
+        retained_opportunity_fraction=0.0,
+        timer_cost_curvature=1.0,
+        feedback_cost_curvature=1.0,
+    )
+    assert r.historical_feedback_precision_share == pytest.approx(0.0)
+    assert r.variance_inflation_factor == pytest.approx(1.0)
+
+
+def test_closed_form_fragility_monotone_in_opportunity_loss():
+    P=3.0
+    s=0.8
+    full=fragility_from_feedback_share(P,s,retained_opportunity_fraction=1.0)
+    half=fragility_from_feedback_share(P,s,retained_opportunity_fraction=0.5)
+    none=fragility_from_feedback_share(P,s,retained_opportunity_fraction=0.0)
+    assert full == pytest.approx(1.0)
+    assert full < half < none
