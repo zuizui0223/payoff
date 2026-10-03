@@ -663,11 +663,25 @@ feedback at higher IFBFat.
 
 A second frozen downstream-phase test also rejected the **pure entry-only
 Markov handoff** as a complete description: in
-(DFP_{end}sim DFP_{start}+IFBFat), the clustered interval for
-(DFP_{start}) crossed zero while IFBFat retained a raw conditional
-association; after within-year residualization both became unresolved. Thus the
-data support an H1 two-layer hybrid, but do not show that physiological state
-ceases to matter after entry.
+\(DFP_{end}\sim DFP_{start}+IFBFat\), the clustered interval for
+\(DFP_{start}\) crossed zero while IFBFat retained a raw conditional
+association; after within-year residualization both became unresolved.
+
+The appropriate distinction is therefore mechanistic rather than temporally
+absolute. The entry clock and the decision controller can remain different
+mechanisms even if physiological or energetic state persists after entry. A
+post-hoc nested model writes
+
+\[
+s_{k+1}=\rho s_k,
+\qquad
+e_{k+1}=\lambda e_k+\beta s_k+w_k.
+\]
+
+This possibility is motivated, not confirmed, by the mule-deer result. Greater
+snow geese provide an independent natural anchor: premigration condition
+predicts lay date after arrival is controlled, and an unplanned reduction in
+prebreeding condition delayed laying.
 
 ### 4.4 A variance funnel identifies effective feedback, not clock primitives
 
