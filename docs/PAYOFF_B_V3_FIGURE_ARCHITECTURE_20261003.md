@@ -222,23 +222,59 @@ The formal labels are:
 “Schrödinger's spring” and “Shinkansen” belong in the caption / talk version,
 not as formal variable names.
 
-## Figure 2 — Empirical evidence hierarchy
+## Figure 2 — Empirical map of the two clock layers
 
-Keep empirical modules visually separated by inferential status:
+Use a 2D evidence map rather than a taxonomic comparison.
 
-- preregistered broad-bird predictive-connectivity result;
-- reconstructed migration-distance response contrast;
-- Ortega continuous source-data anchor;
-- wigeon preregistered null;
-- negative natural reversal gates.
+Horizontal axis:
 
-Use explicit labels such as PREREGISTERED, SOURCE-DATA REANALYSIS,
-PUBLISHED ANCHOR, POST-HOC THEORY, and PROSPECTIVE.
+\[
+T0 \rightarrow T1 \rightarrow T2 \rightarrow T3
+\]
 
-This prevents the new theoretical synthesis from making old data look
-prospectively selected.
+for developmental/physiological timer evidence.
 
-## Figure 3 — Pairwise controller phase diagram
+Vertical axis:
+
+\[
+D0 \rightarrow D1 \rightarrow D2 \rightarrow D3
+\]
+
+for information-dependent decision-control evidence.
+
+Plot current systems with explicit evidence-status labels:
+
+- **Ortega mule deer:** T0 / D2 — strongest signed feedback geometry;
+- **Eurasian wigeon:** T0 / D2-compatible — correction present, registered
+  information-link null;
+- **pink-footed goose:** T1 / D1 — route-stage cue-dependent departure;
+- **greater snow goose:** T1 / prospective decision lane;
+- **bar-tailed godwit:** T0 / D1-compatible;
+- **American redstart:** T0 / D1-compatible;
+- **Osmia lignaria greenhouse:** T1 / D0;
+- **Pulsatilla–Osmia grasslands:** T1 / D0;
+- **Corydalis–bumblebee:** T2-candidate / D0;
+- **European tit–flycatcher laying dates:** T1 / decision unidentifed;
+- **pied-flycatcher settlement manipulation:** timer unidentifed / D1.
+
+The upper-right corner, **T3 + D3 with H2 readiness-gated feedback**, is empty.
+
+Main visual message:
+
+> Existing systems identify either readiness/event timing or signed decision
+> feedback well, but no current PAYOFF-B natural system identifies both clock
+> layers and their gating interaction in the same individuals.
+
+Use shape or border style to distinguish:
+- PREREGISTERED;
+- SOURCE-DATA REANALYSIS;
+- PUBLISHED ANCHOR;
+- PROSPECTIVE.
+
+This figure prevents “bee = timer, bird = decision” from becoming a taxonomic
+claim. Clock architecture is an evidence classification, not a species label.
+
+## Figure 3 —## Figure 3 — Pairwise controller phase diagram
 
 A compact theoretical comparison can show stationary mismatch
 
