@@ -377,3 +377,40 @@ PAYOFF-B should claim only the synthesis:
 > species.**
 
 The "Mikawa-Anjo clock" is a communication label for the second layer only.
+
+
+## 12. Literature anchors
+
+The two-clock distinction is a synthesis across established literatures rather
+than a claim that either mechanism is new.
+
+### Developmental / physiological timing
+
+Saunders (2020), *Annual Review of Entomology* 65:373–389,
+DOI 10.1146/annurev-ento-011019-025116, reviews insect diapause,
+photoperiodic time measurement and evidence that circadian clock genes can
+contribute to photoperiodism, while emphasizing that multiple mechanisms and
+peripheral oscillators are involved.
+
+This supports the manuscript boundary:
+
+> insect emergence/diapause can involve molecular/circadian clock pathways, but
+> "molecular clock" should not be used as a universal label for bee emergence.
+
+### Migration readiness and decisions
+
+Chapman, Åkesson and collaborators' migration decision-rule synthesis
+(*Animal Migration: A Synthesis*, 2011, Oxford University Press) distinguishes
+external environmental cues from internal physiological cues and notes the
+widespread role of photoperiod in migratory preparation.
+
+The stopover literature additionally treats route stages as decision points.
+For example, *When to depart from a stopover site? Time since arrival matters
+more than current weather conditions* (2022, *Ornithology* 139:ukab057)
+quantifies stopover departure as a state-dependent decision, while the review
+*Beyond refueling: Investigating the diversity of functions of migratory
+stopover events* (2021, *Ornithological Applications* 123:duaa074) explicitly
+discusses information gathering and pacing adjustment at stopovers.
+
+These sources support a hybrid architecture in which endogenous readiness and
+repeated decision control coexist within the same migrant.
