@@ -1,6 +1,6 @@
 {
   "date": "2026-10-03",
-  "status": "PREOUTCOME_COMPARATIVE_RETENTION_CONTRACT",
+  "status": "PREOUTCOME_REVISED_AFTER_PRIOR_ART_AUDIT",
   "source": {
     "citation": "Wang et al. 2024 Nature Communications 15:4111",
     "doi": "10.1038/s41467-024-48248-7",
@@ -15,14 +15,15 @@
   },
   "prior_art_boundary": [
     "Wang et al. 2024 already establish a pooled departure-to-arrival carry-over path in spring and autumn.",
+    "Schmaljohann 2019 already estimated species-specific random slopes linking migration start to arrival for 17 spring and 21 autumn songbird species and showed substantial among-species variation. PAYOFF-B therefore cannot claim novelty for beta_s itself or for heterogeneity in beta_s.",
     "Franklin et al. 2022 meta-analyze within-stage repeatability across 47 species; that is not the same estimand as within-migration departure-to-arrival retention.",
-    "Morbey and Schmaljohann 2020 compare migration speed/departure traits across 25 songbird species; they do not estimate species-specific departure-to-arrival retention.",
-    "Linssen et al. 2025 quantify fuelling-time flexibility in five Arctic-breeding waterfowl; this is a narrower taxonomic and different flexibility metric."
+    "Ralston et al. 2025 explicitly identify individual migration distance as a candidate determinant of the ability to compensate delayed spring departure en route.",
+    "Comparative stopover studies show that long-distance migrants face stronger time constraints and make different departure decisions, but do not resolve whether migration distance strengthens or weakens departure-to-arrival timing retention at macroecological scale."
   ],
   "candidate_novel_estimand": {
-    "name": "species_specific_within_migration_timing_retention",
+    "name": "migration_distance_modulation_of_timing_retention",
     "symbol": "beta_s",
-    "definition": "Within a species, beta_s is the slope linking individual departure-date anomaly to arrival-date anomaly during one migration season after removing study-year mean timing. beta_s=1 denotes complete carry-over, beta_s=0 complete reset, beta_s<0 over-correction.",
+    "definition": "beta_s remains the descriptive species-specific departure-to-arrival retention coordinate, but it is prior art. The candidate new test is whether species mean migration distance systematically predicts beta_s, i.e. whether longer journeys provide more opportunity to erase departure-time deviations or instead impose stronger time constraints that preserve them.",
     "seasons": [
       "spring",
       "autumn"
@@ -63,30 +64,34 @@
     "no_outlier_trimming": "No outcome-based trimming; only impossible dates or documented source errors may be excluded."
   },
   "primary_analysis": {
-    "stage_1": "Estimate beta_s separately by species and season using arrival_anomaly ~ 0 + departure_anomaly.",
+    "stage_1": "Estimate beta_s separately by species and season using arrival_anomaly ~ 0 + departure_anomaly, solely as an intermediate prior-art coordinate.",
     "uncertainty": "Cluster/bootstrap at study-year stratum when at least 3 strata exist; otherwise HC3 robust SE and flag limited clustering.",
-    "stage_2": "Random-effects meta-analysis of beta_s across species; report tau^2 and I^2.",
-    "primary_test": "Is between-species heterogeneity in beta_s greater than sampling error?",
-    "paired_season_test": "Among species eligible in both seasons, estimate mean beta_spring - beta_autumn with species-paired bootstrap.",
-    "interpretation": "Do not equate beta_s with internal feedback gain; it is a descriptive timing-retention coordinate."
+    "stage_2": "Test beta_s ~ log species-mean migration distance using uncertainty-weighted meta-regression; report the slope and residual heterogeneity.",
+    "primary_test": "Does migration distance predict species-specific departure-to-arrival retention in spring?",
+    "paired_season_test": "Among species eligible in both seasons, estimate mean beta_spring - beta_autumn with species-paired bootstrap as a secondary test of stronger spring time selection.",
+    "interpretation": "Do not claim novelty for species-specific beta_s or its heterogeneity. Novelty, if any, is restricted to an ecological explanation of that heterogeneity."
   },
   "moderator_analysis": {
-    "status": "SECONDARY_PREDECLARED",
-    "moderators": [
-      "log_spring_migration_distance",
-      "log_body_mass"
+    "status": "PRIMARY_DISTANCE_PLUS_SECONDARY_BODY_MASS_PREDECLARED_BEFORE_OUTCOMES",
+    "primary_moderator": "log_spring_migration_distance",
+    "secondary_moderator": "log_body_mass",
+    "primary_question": "Does migration distance alter how strongly departure timing is retained to arrival?",
+    "competing_predictions": [
+      "recourse-opportunity: longer routes offer more stages over which late individuals can accelerate or shorten stopovers, predicting lower beta_s",
+      "time-constraint: longer routes impose tighter schedules and less ability to absorb deviations, predicting higher beta_s"
     ],
-    "purpose": "Test whether migration geometry and body size explain heterogeneity in spring beta_s.",
-    "direction": "two-sided because recourse-opportunity and time-constraint mechanisms make opposing predictions."
+    "direction": "two-sided because the two ecological mechanisms make opposing predictions."
   },
   "admission_rule": {
-    "comparative_route_supported": "At least 20 eligible species and heterogeneity test estimable.",
-    "stronger_ecological_result": "At least one preregistered moderator or spring-autumn contrast has interval excluding zero after declared uncertainty treatment.",
-    "null_route": "If heterogeneity is small or moderators/season contrast are unresolved, report as a bounded comparative null; do not invent new subgroup cuts."
+    "comparative_route_supported": "At least 20 eligible species and species-level beta_s estimable.",
+    "novel_route_supported": "The predeclared migration-distance meta-regression is estimable in at least 20 species and its declared uncertainty interval excludes zero.",
+    "secondary_support": "Spring-autumn paired contrast or body-mass moderator may contextualize the result but cannot rescue a null migration-distance test.",
+    "null_route": "If the migration-distance effect is unresolved, close the comparative PAYOFF-B lane; do not promote beta_s heterogeneity itself because Schmaljohann 2019 already established it."
   },
   "transparency": [
     "The Wang dataset has been used previously for pooled SEM; PAYOFF-B cannot claim discovery that departure predicts arrival.",
     "No numerical timing values may be inspected before this contract is committed.",
-    "Schema probing may inspect file names, sheet names, headers and row counts only."
+    "Schema probing may inspect file names, sheet names, headers and row counts only.",
+    "The contract was revised before Wang timing values were inspected because Schmaljohann 2019 was discovered to have already estimated species-specific start-to-arrival slopes. The revision narrows candidate novelty to ecological drivers of retention heterogeneity, principally migration distance."
   ]
 }
