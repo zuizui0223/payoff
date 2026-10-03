@@ -377,15 +377,23 @@ The same observed interaction mismatch does not reveal which layer differs.
 The current natural evidence does not jointly estimate \(G,K,g,\phi,Q\) in one
 system.
 
-Mule deer provide strong information about signed actuator correction and a
-phase funnel, but no independent physiological readiness gate for the same
-transition.
+Mule deer now provide the strongest same-system natural bridge. In a
+predeclared temporally conservative Source Data analysis, March scaled IFBFat
+precedes migration start in 62 animal-years and predicts standardized
+migration-start timing in the primary animal-clustered analysis. The same
+population independently supplies D2 signed speed/stopover correction and a
+whole-route phase funnel.
 
-Insect emergence systems can provide developmental/readiness information, but
-the current PAYOFF-B data stack does not estimate a matched signed decision
-controller for the emergence event.
+This licenses **T3_CANDIDATE + D2 -> H1_CANDIDATE**, not H2. The year-fixed-
+effect and rank-based readiness sensitivities are weaker, exact March capture
+dates are unavailable, and the analysis does not show that readiness gates the
+signed feedback slope.
 
-The full two-clock decomposition is therefore prospective.
+Insect emergence systems still provide complementary developmental/readiness
+evidence, but no current natural PAYOFF-B system jointly identifies
+(G,O,K,g,phi,Q) or directly demonstrates H2 readiness-gated feedback.
+
+The full primitive decomposition is therefore prospective.
 
 ## 11. Novelty boundary
 
