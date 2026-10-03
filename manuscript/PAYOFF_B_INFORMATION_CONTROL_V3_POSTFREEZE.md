@@ -7,9 +7,9 @@
 ## Abstract
 
 **Aim:** Interacting species can experience the same seasonal environmental
-change yet become phenologically asynchronous. We ask whether that divergence
+change yet become phenologically asynchronous. We ask whether this divergence
 can arise from differences in **seasonal clock architecture** rather than from
-different external forcing alone.
+different forcing alone.
 
 **Location:** General theory, with empirical modules from migratory birds and
 ungulates in North America and Europe.
@@ -18,35 +18,31 @@ ungulates in North America and Europe.
 span approximately 1980–2020.
 
 **Major taxa studied:** Migratory birds and mule deer, with plant–pollinator
-and resident–migrant interaction studies as independent benchmarks.
+and resident–migrant interactions as benchmarks.
 
-**Methods:** We separate a developmental/physiological readiness clock
-\(G\) from an information-dependent decision controller with phase-information
-weight \(K\) and correction gain \(g\). We combine this two-clock model with
-stagewise value-of-information theory, pairwise and network phase-control
-models, finite coordination games, preregistered macroecological analyses and
-source-backed natural systems.
+**Methods:** We separate physiological readiness \(G\), remaining ecological
+opportunity \(O\), phase-information weight \(K\) and decision gain \(g\).
+We combine this architecture with stagewise value-of-information theory,
+pairwise/network phase-control models and preregistered or source-backed
+ecological analyses.
 
-**Results:** Effective mean phase retention is
-\(\lambda_i=\phi_i(1-G_iO_i g_iK_i)\). For two initially synchronized actors
-sharing seasonal error \(m_t\), controller asymmetry generates
-\(\Delta_{t+1}=(\lambda_1-\lambda_2)m_t\); across an interaction network,
-one-step mismatch scales with the graph Dirichlet energy of the controller
-field. Information can simultaneously become more accurate and less actionable,
-so optimal information use can precede maximal cue accuracy. Post-freeze mule-deer Source Data analyses show both layers in the same
-population: a start-to-end phase-variance ratio of 0.249 across 152
-animal-years with signed speed/stopover compensation, and a temporally prior
-March IFBFat association with migration-start timing in 62 conservative
-animal-years ((-3.97) d per unit; cluster-bootstrap 95% CI
-(-6.31) to (-0.69)). The latter is a T3 candidate readiness proxy, not a
-direct gate estimate.
+**Results:** Effective phase retention is
+\(\lambda_i=\phi_i(1-G_iO_i g_iK_i)\). Two synchronized actors sharing
+seasonal error \(m_t\) diverge by
+\(\Delta_{t+1}=(\lambda_1-\lambda_2)m_t\), and network mismatch depends on
+controller discordance across interaction edges. Information can become more
+accurate while opportunities to use it disappear. In mule deer, a post-freeze
+Source Data analysis combines signed en-route compensation with a temporally
+prior March nutritional-condition association with migration start, making
+this the strongest current same-system two-clock candidate; readiness-gated
+feedback itself remains untested.
 
 **Main conclusions:** Shared climate forcing need not produce shared timing.
-Species can diverge because they differ in when actions become physiologically
-available, how long ecological opportunities remain open, what they can infer
-about seasonal phase and how strongly they can correct error. Mean and variance trajectories can identify information weight and effective
-correction, but readiness, opportunity retention and decision gain require
-additional independent measurement or manipulation.
+Species can diverge because they differ in readiness, remaining opportunity,
+information and correction. Mean and variance trajectories identify
+information weight and effective correction, but the primitive readiness,
+opportunity and decision components require additional measurements or
+manipulations.
 
 **Keywords:** phenological mismatch; biological clocks; migration; information
 ecology; feedback control; recourse; climate change
