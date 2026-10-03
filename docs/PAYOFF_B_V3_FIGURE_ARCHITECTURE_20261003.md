@@ -64,10 +64,16 @@ Use two miniature paths:
 - early \(e_t<0\) -> slow down / longer stopover.
 
 A migratory bird can contain both panels: an endogenous readiness programme
-opens the decision window, then repeated route checkpoints provide
-state-dependent control. The informal “Mikawa-Anjo clock” refers only to B2.
+opens the decision window, ecological deadlines later close it, and repeated
+route checkpoints provide state-dependent control. The informal “Mikawa-Anjo
+clock” refers only to B2.
 
-Add a small AND-gate annotation: **active correction = G × g × K**. If any one layer is effectively zero, the other two cannot generate signed correction.
+Add two gate arrows before the controller:
+- (G): readiness opens;
+- (O): ecological opportunity remains open.
+
+Then annotate **active correction = G × O × g × K**. If any required layer is
+effectively zero, signed correction cannot occur.
 
 ### Panel C — Natural mule-deer phase funnel
 
@@ -110,7 +116,7 @@ Show:
 \[
 \lambda=\phi(1-hK),
 \qquad
-h=Gg
+h=GOg
 \]
 
 and
