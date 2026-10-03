@@ -16,20 +16,23 @@ The answer is exact in the declared linear mean controller.
 
 ## 2. Actor-level effective mean retention
 
-Under noisy individualized feedback, actor \(i\) has regression-scale phase
+Under the two-clock architecture, actor \(i\) has regression-scale phase
 retention
 
 \[
 \lambda_i
 =
-\phi_i(1-g_iK_i),
+\phi_i(1-G_i g_iK_i),
 \]
 
 where
 
 - \(\phi_i\) = passive phase carry-over;
+- \(G_i\) = physiological/developmental readiness gate;
 - \(K_i\) = effective checkpoint-information weight;
 - \(g_i\) = feedback gain.
+
+The previous decision-only controller is the special case \(G_i=1\).
 
 The route-level mean phase state is
 
@@ -148,23 +151,23 @@ temperature sensitivities.
 If passive retention, information and feedback gain are the same but the
 physiological/readiness gates differ,
 
-[
-phi_1=phi_2=phi,
-qquad
+\[
+\phi_1=\phi_2=\phi,
+\qquad
 K_1=K_2=K,
-qquad
+\qquad
 g_1=g_2=g,
-]
+\]
 
 then
 
-[
-oxed{
-Delta_{t+1}
+\[
+\boxed{
+\Delta_{t+1}
 =
--phi gK(G_1-G_2)m_t.
+-\phi gK(G_1-G_2)m_t.
 }
-]
+\]
 
 Thus a developmental-clock difference can generate mismatch even when the two
 actors would make identical information-dependent decisions once both are
@@ -172,11 +175,13 @@ ready.
 
 ## 6. Information asymmetry alone is sufficient
 
-If passive retention and control gain are the same but information weights
-differ,
+If passive retention, readiness and control gain are the same but information
+weights differ,
 
 \[
 \phi_1=\phi_2=\phi,
+\qquad
+G_1=G_2=G,
 \qquad
 g_1=g_2=g,
 \]
@@ -184,30 +189,25 @@ g_1=g_2=g,
 then
 
 \[
-\lambda_1-\lambda_2
-=
--\phi g(K_1-K_2).
-\]
-
-Hence
-
-\[
 \boxed{
 \Delta_{t+1}
 =
--\phi g(K_1-K_2)m_t.
+-\phi Gg(K_1-K_2)m_t.
 }
 \]
 
 Different information about the same seasonal future can therefore generate
-mismatch even when the actors have identical physical correction gain.
+mismatch even when the actors have identical physiological readiness and
+physical correction gain.
 
 ## 7. Control asymmetry alone is sufficient
 
-If passive retention and information weight are the same,
+If passive retention, readiness and information weight are the same,
 
 \[
 \phi_1=\phi_2=\phi,
+\qquad
+G_1=G_2=G,
 \qquad
 K_1=K_2=K,
 \]
@@ -218,12 +218,13 @@ then
 \boxed{
 \Delta_{t+1}
 =
--\phi K(g_1-g_2)m_t.
+-\phi GK(g_1-g_2)m_t.
 }
 \]
 
-Thus two species can receive equally informative cues and still desynchronize
-because one can translate that information into stronger phase correction.
+Thus two species can become asynchronous even after receiving equally useful
+information at the same readiness state because they differ in how strongly
+they translate estimated phase error into correction.
 
 ## 8. Persistent mismatch under constant shared forcing
 
