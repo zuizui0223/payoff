@@ -4,7 +4,7 @@ Prospective PAYOFF-B post-freeze extension.
 
 The route-wise controller defines an effective mean phase-retention coefficient
 
-    lambda_i = phi_i (1 - G_i g_i K_i)
+    lambda_i = phi_i (1 - G_i A_i g_i K_i)
 
 for actor i under the declared noisy Gaussian feedback representation.
 
@@ -71,15 +71,17 @@ def effective_noisy_phase_retention(
     control_gain: float,
     information_weight: float,
     readiness_gate: float = 1.0,
+    opportunity_gate: float = 1.0,
 ) -> float:
     """Return regression-scale mean retention for the noisy controller.
 
     Under the scalar Gaussian phase estimator,
 
-        lambda = phi (1 - G g K),
+        lambda = phi (1 - G A g K),
 
-    where phi is passive carry-over, G is the physiological/readiness gate,
-    g is feedback gain and K is the effective checkpoint information weight.
+    where phi is passive carry-over, G is the physiological/readiness opening
+    gate, A is remaining ecological opportunity, g is feedback gain and K is
+    the effective checkpoint information weight.
     G=1 recovers the existing decision-controller model; perfect information
     K=1 then gives lambda=phi(1-g).
     """
@@ -88,13 +90,16 @@ def effective_noisy_phase_retention(
     g = _finite("control_gain", control_gain)
     k = _finite("information_weight", information_weight)
     gate = _finite("readiness_gate", readiness_gate)
+    opportunity = _finite("opportunity_gate", opportunity_gate)
     if g < 0.0:
         raise ValueError("control_gain must be non-negative")
     if not 0.0 <= k <= 1.0:
         raise ValueError("information_weight must lie in [0,1]")
     if not 0.0 <= gate <= 1.0:
         raise ValueError("readiness_gate must lie in [0,1]")
-    return phi * (1.0 - gate * g * k)
+    if not 0.0 <= opportunity <= 1.0:
+        raise ValueError("opportunity_gate must lie in [0,1]")
+    return phi * (1.0 - gate * opportunity * g * k)
 
 
 def pairwise_phase_step(
@@ -307,20 +312,23 @@ def shared_passive_mismatch_from_readiness_information_control(
     readiness_gate_2: float,
     control_gain_2: float,
     information_weight_2: float,
+    opportunity_gate_1: float = 1.0,
+    opportunity_gate_2: float = 1.0,
 ) -> float:
     """Mismatch from the full two-clock architecture.
 
     With common passive retention phi,
 
-        lambda_i = phi (1 - G_i g_i K_i),
+        lambda_i = phi (1 - G_i A_i g_i K_i),
 
     so an initially synchronized pair develops
 
         Delta_next
           = -phi [G_1 g_1 K_1 - G_2 g_2 K_2] m.
 
-    The developmental/physiological layer enters through G_i; the inferential
-    decision layer enters through K_i and g_i.
+    The developmental/physiological layer enters through G_i; remaining
+    ecological opportunity enters through A_i; the inferential decision layer
+    enters through K_i and g_i.
     """
 
     m = _finite("common_phase_error", common_phase_error)
@@ -328,12 +336,14 @@ def shared_passive_mismatch_from_readiness_information_control(
     lam1 = effective_noisy_phase_retention(
         passive_retention=phi,
         readiness_gate=readiness_gate_1,
+        opportunity_gate=opportunity_gate_1,
         control_gain=control_gain_1,
         information_weight=information_weight_1,
     )
     lam2 = effective_noisy_phase_retention(
         passive_retention=phi,
         readiness_gate=readiness_gate_2,
+        opportunity_gate=opportunity_gate_2,
         control_gain=control_gain_2,
         information_weight=information_weight_2,
     )
