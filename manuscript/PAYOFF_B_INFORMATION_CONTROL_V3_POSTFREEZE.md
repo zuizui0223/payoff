@@ -602,7 +602,7 @@ excluding zero.
 These results quantify the published convergence in continuous animal-year
 data and reproduce the signed actuator geometry required by the route-wise
 model. They do **not** identify the internal phase estimate, passive retention,
-information weight or feedback gain. Measurement error, passive dynamics,
+information weight, readiness gate or decision gain. Measurement error, passive dynamics,
 selection and changing environmental variance remain alternative contributors
 to the observed variance funnel.
 
@@ -749,7 +749,7 @@ P_{t+1}^{\mathrm{open}}
 \phi_t^2P_t+Q_t.
 \]
 
-Thus, for informative cues and \(0<g_t<2\), individualized phase feedback
+Thus, for informative cues and \(0<h_t<2\), individualized phase feedback
 predicts additional downstream variance contraction. This creates a functional
 signature of the proposed internal phase estimate: early and late individuals
 are not merely shifted by the same calendar rule but are pulled toward the
