@@ -848,53 +848,88 @@ can therefore remain strategically inaccessible.
 
 ### 4.10 Direct natural validation remains prospective
 
-The current evidence supports pieces of the mechanism across different systems. It does not yet demonstrate, in one natural population, the full sequence
+Current natural systems occupy different parts of the two-clock evidence space.
+Mule deer provide strong signed decision-feedback geometry (D2) but no
+independent physiological readiness state. In contrast, bee emergence,
+flowering and other threshold-event datasets provide developmental/event-timing
+evidence but little signed post-event decision feedback. Pink-footed geese
+provide cue-linked route-stage decisions, but physiological readiness and
+decision weighting are not independently separated.
+
+No current PAYOFF-B natural system therefore identifies, in the same
+individuals, an internal readiness mechanism (T3), repeated
+infer–correct–propagate feedback (D3), and readiness-gated feedback (H2).
+
+The strongest future test should jointly measure
 
 \[
-\text{checkpoint cue}
-\rightarrow
-\text{updated phase estimate}
-\rightarrow
-\text{signed correction}
-\rightarrow
-\text{reduced next-stage phase error}.
+z_t,\;G_t,\;e_t,\;I_t,\;u_t,\;e_{t+1}
 \]
 
-That is now the clearest empirical target.
-
-The strongest future test would compare a departure-only model with a checkpoint-updating model on held-out downstream phase. It would separately measure cue quality and actuator availability, avoiding circular estimation of information from the same behavior being predicted.
+and ask whether the signed phase-to-action slope appears or strengthens after
+the readiness gate opens. This would distinguish **when correction becomes
+possible** from **which correction is chosen**, while avoiding circular
+estimation of information from the behavior being predicted.
 
 ---
 
 ## 5. Conclusion
 
-Seasonal migration should not be treated as a single departure date that determines a later arrival date.
+Seasonal timing should not be treated as one clock or one response rate.
 
-Animals can move while learning. They can arrive at successive route stages with positive or negative seasonal phase error, update their estimate of the changing environment, and use speed, stopover duration, route and subsequent timing to reduce that error.
-
-The resulting ecological problem has three coupled components:
+The post-freeze PAYOFF-B synthesis separates two layers:
 
 \[
 \boxed{
-\text{infer the seasonal target}
+\text{developmental readiness}
 \rightarrow
-\text{correct current phase}
+\text{information-dependent decision}
 \rightarrow
-\text{retain enough options to correct again}.
+\text{phase correction}.
 }
 \]
 
-Information generally becomes more accurate as the organism approaches the relevant future environment, but correction opportunities can disappear at the same time. The optimal information-use stage can therefore precede the stage of maximal cue accuracy.
+The first layer determines when actions become available. The second determines
+which available action is taken after imperfect information is observed.
 
-For interacting species, differences in information, correction cost and remaining actionability create different phase trajectories even under the same external climate forcing. Seasonal mismatch can thus arise without a simple failure of adaptive capacity.
+For interacting species, these layers combine into effective phase retention
 
-The strongest current interpretation is:
+\[
+\lambda_i=\phi_i(1-G_i g_iK_i).
+\]
 
-> **Climate adaptation can fail because organisms must control their seasonal phase toward a future target that becomes easier to infer only as the opportunities to correct toward it are disappearing.**
+A shared seasonal error can therefore create mismatch even when partners
+experience the same environmental forcing:
 
-And the clearest prospective natural test is:
+\[
+\boxed{
+\Delta_{t+1}
+=
+(\lambda_1-\lambda_2)m_t.
+}
+\]
 
-> **Do animals repeatedly re-estimate whether they are early or late at route checkpoints, and do those estimates predict the direction and magnitude of the correction made before the next checkpoint?**
+Across interaction networks, the same principle becomes controller discordance
+on the graph, so topology determines which clock differences are exposed
+across ecological interactions.
+
+Natural evidence currently identifies different pieces of this architecture:
+mule deer provide strong signed corrective behavior and a phase-variance
+funnel, whereas emergence and flowering systems provide threshold-event timing
+without equivalent signed decision feedback. No current system identifies the
+full readiness–information–correction chain in the same individuals.
+
+The resulting ecological interpretation is:
+
+> **Shared climate change can generate ecological mismatch because interacting
+> organisms differ not only in when their seasonal clocks advance, but in when
+> they become able to act and how they use information to correct timing after
+> that point.**
+
+The clearest prospective test is therefore no longer simply whether organisms
+"track spring." It is whether independently measured readiness gates determine
+when signed phase feedback turns on, and whether differences in that gated
+controller predict pairwise and network mismatch.
 
 ---
 
