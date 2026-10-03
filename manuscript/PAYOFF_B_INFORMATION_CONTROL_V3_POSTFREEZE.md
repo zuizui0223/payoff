@@ -6,15 +6,21 @@
 
 ## Abstract
 
-**Aim:** Seasonal mismatch is usually described as a difference in the timing responses of interacting species. We ask a more mechanistic question: when organisms move through a changing seasonal environment, when does environmental information become useful, how can timing error be corrected after a decision has already been made, and why can interacting species still desynchronize even when all possess substantial adaptive capacity?
+**Aim:** We ask when seasonal information becomes useful, how timing error can be corrected after movement begins, and why interacting species can still desynchronize despite substantial adaptive capacity.
 
-**Approach:** We combine exact Bayesian decision models, stagewise value-of-information theory, a route-wise signed phase controller, finite coordination games, preregistered macroecological analyses and source-backed natural systems. The post-freeze extension treats migration as repeated inference and correction toward a partly latent seasonal target. At route stage (t), an organism carries a signed phase error (e_t), updates an internal estimate from local information, chooses a bounded correction through speed, stopover or route change, and propagates the remaining error to the next stage.
+**Location:** General theory, with empirical modules from migratory birds and ungulates in North America and Europe.
 
-**Results:** Information quality can improve while the set of useful responses shrinks. In the reduced model, usable information value is (r(t)[Sq(t)-B]-C(t)), so maximal information value generally occurs before cue accuracy is maximal. With exponential learning and recourse loss, the unique zero-cost optimum is (t^*=log(1+alpha/eta)/alpha). A route-wise controller gives (e_{t+1}=phi_t(e_t-u_t)+w_t); under perfect estimation and proportional feedback, segment-scale phase retention decomposes exactly as (lambda_t=phi_t(1-g_t)). Thus late individuals can accelerate or shorten stopovers, early individuals can slow or wait, and departure error need not equal arrival error. Natural studies independently document each component: stronger predictive connectivity is associated with smaller mismatch across 37 migratory bird species in the preregistered pooled analysis; long-distance migrants show weaker temperature responses in a 944-effect reconstruction; mule deer, bar-tailed godwits and pink-footed geese show route-stage compensation or cue updating; and delayed American redstarts compensate by migrating faster but incur a survival cost. Full natural identification of the route-wise controller remains prospective.
+**Time period:** Dataset-specific; principal reconstructed phenology records span approximately 1980–2020.
 
-**Conclusion:** Seasonal adaptation is not only a problem of moving or shifting phenology fast enough. It is a problem of estimating a moving target while useful corrections remain available. Interacting species can therefore desynchronize because they differ in when they can infer the future, how long correction remains possible, and how costly correction is. Restored information need not restore coordination once response options or coordinated conventions have been lost.
+**Major taxa studied:** Migratory birds and mule deer, with plant–pollinator and resident–migrant interaction studies as independent benchmarks.
 
-**Keywords:** phenological mismatch; migration; information ecology; feedback control; recourse; seasonal timing; phase error; climate change
+**Methods:** We combine Bayesian decision models, stagewise value-of-information theory, a route-wise signed phase controller, finite coordination games, preregistered macroecological analyses and source-backed natural systems.
+
+**Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is (r(t)[Sq(t)-B]-C(t)); with exponential learning and recourse loss the unique zero-cost optimum is (t^*=\log(1+\alpha/\beta)/\alpha), generally before maximal cue accuracy. Route-wise phase dynamics obey (e_{t+1}=\phi_t(e_t-u_t)+w_t); under perfect estimation and proportional feedback, phase retention decomposes as (\lambda_t=\phi_t(1-g_t)). Thus early and late errors can be corrected in opposite directions and departure error need not equal arrival error. Natural evidence independently supports predictive connectivity, heterogeneous temperature responsiveness, route-stage compensation and compensation costs, but does not yet identify the full controller in one system.
+
+**Main conclusions:** Seasonal tracking is a sequential inference-and-control problem. Mismatch can arise because interacting organisms differ in when they can infer a future seasonal state, how long that information remains actionable and how strongly they can correct phase error after learning it. Restored information need not restore coordination after response options or coordinated conventions have been lost.
+
+**Keywords:** phenological mismatch; migration; information ecology; feedback control; recourse; phase error; climate change
 
 ---
 
