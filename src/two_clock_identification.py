@@ -65,6 +65,21 @@ class ClockSeparation:
     identified_from: str
 
 
+
+@dataclass(frozen=True)
+class TwoClockSensitivity:
+    """Local sensitivities of mean phase retention."""
+
+    passive_retention: float
+    readiness_gate: float
+    decision_gain: float
+    information_weight: float
+    mean_phase_retention: float
+    d_lambda_d_phi: float
+    d_lambda_d_G: float
+    d_lambda_d_g: float
+    d_lambda_d_K: float
+
 def _finite(name: str, value: float) -> float:
     x = float(value)
     if not isfinite(x):
@@ -298,3 +313,80 @@ def reduced_actionability_from_gates(
     if total <= _TOL:
         raise ValueError("positive total weight is required")
     return sum(w * g for w, g in zip(ws, gates)) / total
+
+
+def two_clock_retention_sensitivity(
+    *,
+    passive_retention: float,
+    readiness_gate: float,
+    decision_gain: float,
+    information_weight: float,
+) -> TwoClockSensitivity:
+    """Return exact local derivatives of lambda=phi(1-GgK).
+
+    The active-correction layers are multiplicative complements:
+
+        d lambda / dG = -phi g K
+        d lambda / dg = -phi G K
+        d lambda / dK = -phi G g.
+
+    Therefore the marginal effect of improving any one layer vanishes when a
+    required partner layer is zero.
+    """
+
+    phi = _finite("passive_retention", passive_retention)
+    G = _unit("readiness_gate", readiness_gate)
+    g = _nonnegative("decision_gain", decision_gain)
+    K = _unit("information_weight", information_weight)
+
+    lam = phi * (1.0 - G * g * K)
+    return TwoClockSensitivity(
+        passive_retention=phi,
+        readiness_gate=G,
+        decision_gain=g,
+        information_weight=K,
+        mean_phase_retention=lam,
+        d_lambda_d_phi=1.0 - G * g * K,
+        d_lambda_d_G=-phi * g * K,
+        d_lambda_d_g=-phi * G * K,
+        d_lambda_d_K=-phi * G * g,
+    )
+
+
+def first_order_controller_difference(
+    *,
+    passive_retention: float,
+    readiness_gate: float,
+    decision_gain: float,
+    information_weight: float,
+    delta_phi: float = 0.0,
+    delta_G: float = 0.0,
+    delta_g: float = 0.0,
+    delta_K: float = 0.0,
+) -> float:
+    """First-order attribution of actor-to-actor retention difference.
+
+    Around a declared baseline,
+
+        delta_lambda ≈
+            (1-GgK) delta_phi
+          - phi gK delta_G
+          - phi GK delta_g
+          - phi Gg delta_K.
+
+    This is a local attribution device, not an exact finite-change
+    decomposition for large differences.
+    """
+
+    s = two_clock_retention_sensitivity(
+        passive_retention=passive_retention,
+        readiness_gate=readiness_gate,
+        decision_gain=decision_gain,
+        information_weight=information_weight,
+    )
+    return (
+        s.d_lambda_d_phi * _finite("delta_phi", delta_phi)
+        + s.d_lambda_d_G * _finite("delta_G", delta_G)
+        + s.d_lambda_d_g * _finite("delta_g", delta_g)
+        + s.d_lambda_d_K * _finite("delta_K", delta_K)
+    )
