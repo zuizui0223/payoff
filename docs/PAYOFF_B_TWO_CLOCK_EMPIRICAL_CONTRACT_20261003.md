@@ -31,7 +31,7 @@ u=Gg\hat e,
 \]
 
 \[
-\lambda=\phi(1-GgK),
+\lambda=\phi(1-GOgK),
 \]
 
 \[
@@ -48,10 +48,11 @@ are independently supported.
 To split \(G\) from \(g\), require at least one:
 
 - direct physiological readiness measure;
-- experimental readiness manipulation;
-- independent calibration of decision gain under full readiness;
-- within-individual contrast across known readiness states with the same
-  actuator.
+- independent measure/manipulation of whether an ecological opportunity is
+  still open;
+- independent calibration of decision gain under full readiness and
+  opportunity;
+- within-individual contrasts across known readiness/opportunity states.
 
 ## Strong falsifiers
 
