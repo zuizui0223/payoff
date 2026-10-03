@@ -3,6 +3,8 @@ import pytest
 from src.serial_two_clock import (
     common_controller_timer_decay,
     controller_generated_mismatch,
+    final_phase_variance_no_innovation,
+    required_initial_variance_for_target,
     post_entry_phase_retention,
     serial_mismatch_decomposition,
 )
@@ -92,3 +94,25 @@ def test_invalid_opportunity_gate_is_rejected():
             information_weight=0.5,
             decision_gain=0.5,
         )
+
+
+def test_serial_feedback_discounts_timer_variance():
+    assert final_phase_variance_no_innovation(
+        100.0, phase_retention=0.5, steps=2
+    ) == pytest.approx(6.25)
+
+
+def test_same_final_precision_allows_noisier_timer_with_stronger_feedback():
+    weak = required_initial_variance_for_target(
+        4.0, phase_retention=0.8, steps=2
+    )
+    strong = required_initial_variance_for_target(
+        4.0, phase_retention=0.4, steps=2
+    )
+    assert strong > weak
+    assert final_phase_variance_no_innovation(
+        weak, phase_retention=0.8, steps=2
+    ) == pytest.approx(4.0)
+    assert final_phase_variance_no_innovation(
+        strong, phase_retention=0.4, steps=2
+    ) == pytest.approx(4.0)
