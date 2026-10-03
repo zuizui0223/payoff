@@ -362,11 +362,12 @@ feedback gain, passive retention and remaining actionability simultaneously.
 
 ```text
 V2_SUBMISSION_STATUS = FROZEN_ACCESS_BLOCKED
-V3_POSTFREEZE_STATUS = DEVELOPMENT_INTEGRATED_SCOPE_LOCKED
-V3_SUBMISSION_STATUS = NOT_FROZEN_NOT_JOURNAL_FACING
+V2_ROLE = JOURNAL_FACING_ROLLBACK_AND_PROVENANCE
+V3_POSTFREEZE_STATUS = STORY_COMPLETE_SCOPE_LOCKED
+V3_SUBMISSION_STATUS = SCIENCE_LOCKED_PACKAGE_NOT_YET_BUILT
 V3_MAIN_SPINE = SERIAL_TIMER_CONTROLLER_ARCHITECTURE
-V3_CORE_METAPHOR = INTERNAL_TALK_ONLY_NOT_MAIN_TEXT
 V3_FORMAL_OBJECT = SEQUENTIAL_INFORMATION_AND_PHASE_CONTROL
+V3_ACTIONABILITY_TO_OPPORTUNITY_BRIDGE = R_SUMMARY_TO_O_ACTUATOR_SPECIFIC
 V3_MAIN_TEXT_PORTFOLIO_THEORY = MOVED_TO_SUPPORTING_FUTURE
 V3_VARIANCE_FUNNEL = EXACT_REDUCED_MODEL
 V3_PHASE_SENSE_INVERSE = NOISY_CUE_EXACT_CONDITIONAL_ON_INDEPENDENT_PHI_Q
@@ -375,27 +376,40 @@ ORTEGA_VARIANCE_FUNNEL = POSTFREEZE_DESCRIPTIVE_SOURCE_DATA_AUDIT
 ORTEGA_SOURCE_XLSX = PUBLIC_HTTP200_PARSED_SHA256_FROZEN
 ```
 
-Primary ecological conclusion:
+### V3 primary ecological conclusion
 
-**Information use is an ecological coordination state. Interacting organisms can
-begin using the same improving environmental information at different decision
-thresholds, so better information can transiently worsen phenological
-coordination; after coordinated information use collapses, even perfect
-environmental information need not restore the informed state.**
+**Shared environmental change need not produce shared timing. A developmental
+or physiological entry timer sets the phase error with which an organism enters
+a seasonal trajectory, whereas an information-dependent downstream controller
+determines how that error is retained, corrected or amplified. Differences
+between interacting actors can therefore convert a common environmental
+displacement into phenological mismatch even when their initial responses are
+the same.**
 
-Exact analytic spine:
+Exact V3 analytic spine:
 
 ```text
-T1  cue information has an action threshold
--> T2  decision deadlines determine information uptake
--> T3  heterogeneous effective deadlines create a finite desynchronization window
--> T7  perfect information can support old and informed strict equilibria
--> T8  temporary cue degradation can collapse information use without recovery
+V3-1  information quality can improve while retained actionability declines
+-> V3-2  the entry timer sets e0 and any initial partner difference Delta0
+-> V3-3  the downstream controller maps phase information and opportunity into retention lambda
+-> V3-4  partner mismatch decomposes exactly into timer-propagated and controller-generated terms
+-> V3-5  physical irreversibility or strategic coordination can prevent recovery
 ```
 
-T4–T6, T9 and the rescue/topology results remain important results and
-mechanistic extensions, but they do not share equal weight in the abstract.
+The key pairwise identity is
 
+```text
+Delta_n
+= (lambda_1^n - lambda_2^n) m_0
+  + 0.5 (lambda_1^n + lambda_2^n) Delta_0
+```
+
+so controller asymmetry can create mismatch from a shared initial error even
+when `Delta_0 = 0`.
+
+The frozen V2 information-deadline/coordination spine remains valid as the
+rollback and provenance source. It is not the V3 headline after the
+timer-controller integration.
 ### Effective deadline cost — core T2/T3 interpretation, not a separate abstract spine
 
 The empirical deadline variable is now explicitly the **effective fitness cost
