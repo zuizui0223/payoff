@@ -234,7 +234,50 @@ then
 The physiological clocks can be perfectly synchronized and interaction mismatch
 still emerges because the decision controllers differ.
 
-## 6. Biological meaning
+## 6. Timer precision and downstream feedback are partially substitutable
+
+For one actor with no new process innovation,
+
+\[
+e_n=\lambda^n e_0.
+\]
+
+Therefore entry-phase variance satisfies
+
+\[
+\boxed{
+V_n
+=
+\lambda^{2n}V_0.
+}
+\]
+
+For a target final variance \(V^*\),
+
+\[
+\boxed{
+V_0
+=
+\frac{V^*}{\lambda^{2n}}.
+}
+\]
+
+A stronger downstream controller (smaller \(|\lambda|\)) can therefore tolerate
+a less precise entry timer while achieving the same final tracking precision.
+
+This gives an exact serial-clock version of prediction–correction substitution:
+
+> **precision before entry and correction after entry are partly substitutable
+> routes to the same final seasonal alignment.**
+
+The result does not imply that the two mechanisms have equal fitness costs.
+Timer plasticity, energetic costs of correction and process innovation can
+break the simple equivalence.
+
+It does imply that observing only final arrival or event synchrony can hide
+very different biological strategies.
+
+## 7. Biological meaning
 
 The two clocks have different jobs:
 
@@ -264,7 +307,7 @@ programme can primarily determine entry timing.
 A route-wise migrant controller can subsequently accelerate, wait, change
 stopover duration or otherwise alter the retained phase error.
 
-## 7. Mule-deer interpretation
+## 8. Mule-deer interpretation
 
 The current mule-deer results are consistent with this serial decomposition:
 
@@ -283,7 +326,7 @@ Their licensed role is narrower: they show why an entry-clock interpretation
 is plausible and why readiness need not be assumed to multiply every
 post-entry feedback decision.
 
-## 8. Relation to H1 and H2
+## 9. Relation to H1 and H2
 
 Under the evidence grades:
 
@@ -297,7 +340,7 @@ Mule deer currently support an H1 candidate.
 The IFBFat moderation proxy does not support H2, but it cannot rule out a
 different stage-specific readiness variable.
 
-## 9. Direct empirical prediction
+## 10. Direct empirical prediction
 
 A clean serial test needs:
 
@@ -318,7 +361,7 @@ For interacting species this suggests estimating both the phase difference at
 entry and the downstream retention of each partner rather than treating one
 phenological slope as the whole mechanism.
 
-## 10. Novelty boundary
+## 11. Novelty boundary
 
 Hybrid systems, switching dynamics and feedback control are established
 mathematical ideas.
