@@ -33,20 +33,25 @@ Design audit:
 Admission status:
 
 ```text
-PRIMARY_STATUS = CONDITIONAL_REPORTED_SLOPE
+PRIMARY_STATUS = ADMIT_REPORTED_SLOPE
 INDIVIDUAL_LEVEL_DESIGN = YES
 COMMON_DAY_UNITS = YES
 YEAR_ADJUSTMENT = YES
 REPORTED_SEQUENTIAL_MODELS = YES
-RAW_BETA_COMPATIBILITY = VERIFY_TABLE_2_3_PARAMETERIZATION
-NUMERICAL_EXTRACTION = NOT_YET_OPENED
+RAW_BETA_COMPATIBILITY = PASSED_FOR_TWO_CLEAN_TRANSITIONS
+NUMERICAL_EXTRACTION = OPENED
 ```
 
-Reason for conditional status:
-the published models are clearly sequential and use timing deviations in days,
-but V5 must verify that the specific table coefficient used as `beta_AB`
-represents a one-day A -> B propagation slope rather than a coefficient on the
-authors' derived "rate of change" state.
+Table 3 verification passed for two clean immediate transitions:
+
+- Buenos Aires departure -> Chiloé arrival, active autumn migration:
+  beta_AB = 0.97, SE = 0.07;
+- Chiloé arrival -> Chiloé departure, non-breeding stationary period:
+  beta_AB = 0.05, SE = 0.09.
+
+The latter stationary interval averaged 192 +/- 2 d. Other Senner coefficients
+that span multiple biological processes or use the authors' derived
+rate-of-change response are not promoted automatically.
 
 ## GOW2019 — tree swallow
 
@@ -214,14 +219,14 @@ Design audit:
 Admission status:
 
 \`\`\`text
-PRIMARY_STATUS = CONDITIONAL_REPORTED_SLOPE
+PRIMARY_STATUS = EXCLUDE_PRIMARY_CURRENT_EVIDENCE
 INDIVIDUAL_LEVEL_DESIGN = YES
 MULTIPLE_POPULATIONS = YES
 PUBLIC_GEOLOCATOR_DATA = YES
 PROCESSED_EVENT_TABLE_PUBLIC = NOT_CONFIRMED
-DIRECT_EVENT_TO_EVENT_BETA = AT_LEAST_ONE_REPORTED
+DIRECT_EVENT_TO_EVENT_BETA_WITH_UNCERTAINTY = NOT_CONFIRMED
 DURATION_ONSET_SLOPES = DO_NOT_ALGEBRAICALLY_CONVERT_POST_HOC
-NUMERICAL_EXTRACTION = NOT_YET_OPENED
+NUMERICAL_PRIMARY_EXTRACTION = PROHIBITED_CURRENT_EVIDENCE
 \`\`\`
 
 Only coefficients already parameterized as event-B timing versus event-A
@@ -244,17 +249,18 @@ Design audit:
 Admission status:
 
 \`\`\`text
-PRIMARY_STATUS = CONDITIONAL_REPORTED_SLOPE
+PRIMARY_STATUS = EXCLUDE_PRIMARY_INSUFFICIENT_EFFECT_REPORTING
 INDIVIDUAL_LEVEL_DESIGN = YES
 SEQUENTIAL_GLM = YES
 REPEATABILITY_EFFECTS = EXCLUDE_PRIMARY
-TABLE_2_RAW_BETA_AND_SE = VERIFY_BEFORE_ADMISSION
-NUMERICAL_EXTRACTION = NOT_YET_OPENED
+TABLE_2_REPORTS = F_P_R2_POWER_WITHOUT_RAW_BETA_SE
+NUMERICAL_PRIMARY_EXTRACTION = PROHIBITED_CURRENT_EVIDENCE
 \`\`\`
 
-The paper's "no domino effects" conclusion is not coded as beta=0. Only the
-reported GLM coefficient and its uncertainty, if recoverable on the day/day
-scale, can enter the primary synthesis.
+The paper's "no domino effects" conclusion is not coded as beta=0. Table 2
+reports F statistics, P values, R-squared and power but not the unstandardized
+day/day coefficient and its uncertainty. Unless individual-level data are
+independently located, this study remains outside the primary beta synthesis.
 
 ## CATRY2013 — Cory's shearwater experiment
 
@@ -316,9 +322,10 @@ departure schedule cannot be encoded as beta=0 without the admissible slope.
 \`\`\`text
 SCREENED = 10
 PRIMARY_ADMIT_REESTIMATE = 3
-PRIMARY_CONDITIONAL = 5
-PRIMARY_EXCLUDE = 2
-FOCAL_BETA_VALUES_OPENED = 0
+PRIMARY_ADMIT_REPORTED = 1
+PRIMARY_CONDITIONAL = 2
+PRIMARY_EXCLUDE = 4
+FOCAL_BETA_VALUES_OPENED = 2
 \`\`\`
 
 Admitted for re-estimation:
@@ -326,16 +333,18 @@ Admitted for re-estimation:
 - CARNEIRO2023
 - LOPEZCALDERON2024
 
+Admitted from reported coefficients:
+- SENNER2014 — two clean primary transitions opened.
+
 Conditional pending coefficient/data verification:
-- SENNER2014
 - BRIEDIS2018
-- ARCTIC_SKUA2024
-- BLACKTAILED2011
 - CONKLIN2012
 
 Excluded from the primary beta synthesis under the current evidence state:
 - SAINO2017 — accessible result is correlation, not raw propagation;
-- CATRY2013 — experimental treatment contrast, not raw propagation.
+- CATRY2013 — experimental treatment contrast, not raw propagation;
+- ARCTIC_SKUA2024 — no directly reported event-to-event beta with admissible uncertainty confirmed;
+- BLACKTAILED2011 — Table 2 lacks raw beta and SE.
 
 ## Remaining seed screen
 
