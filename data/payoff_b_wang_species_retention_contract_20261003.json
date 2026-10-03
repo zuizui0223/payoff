@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-03",
+  "status": "PREOUTCOME_COMPARATIVE_RETENTION_CONTRACT",
+  "source": {
+    "citation": "Wang et al. 2024 Nature Communications 15:4111",
+    "doi": "10.1038/s41467-024-48248-7",
+    "figshare_article_id": 24613599,
+    "known_scope": {
+      "total_tracking_records": 1708,
+      "individual_records": 1531,
+      "population_records": 177,
+      "species": 186,
+      "studies": 306
+    }
+  },
+  "prior_art_boundary": [
+    "Wang et al. 2024 already establish a pooled departure-to-arrival carry-over path in spring and autumn.",
+    "Franklin et al. 2022 meta-analyze within-stage repeatability across 47 species; that is not the same estimand as within-migration departure-to-arrival retention.",
+    "Morbey and Schmaljohann 2020 compare migration speed/departure traits across 25 songbird species; they do not estimate species-specific departure-to-arrival retention.",
+    "Linssen et al. 2025 quantify fuelling-time flexibility in five Arctic-breeding waterfowl; this is a narrower taxonomic and different flexibility metric."
+  ],
+  "candidate_novel_estimand": {
+    "name": "species_specific_within_migration_timing_retention",
+    "symbol": "beta_s",
+    "definition": "Within a species, beta_s is the slope linking individual departure-date anomaly to arrival-date anomaly during one migration season after removing study-year mean timing. beta_s=1 denotes complete carry-over, beta_s=0 complete reset, beta_s<0 over-correction.",
+    "seasons": [
+      "spring",
+      "autumn"
+    ]
+  },
+  "eligibility_gate": {
+    "individual_level_only": true,
+    "required_fields": [
+      "species_or_subspecies",
+      "individual_id",
+      "study_or_paper_id",
+      "tracking_year",
+      "spring_departure_date",
+      "spring_arrival_date",
+      "autumn_departure_date",
+      "autumn_arrival_date"
+    ],
+    "optional_fields": [
+      "sex",
+      "spring_migration_distance",
+      "autumn_migration_distance",
+      "body_mass",
+      "flight_mode"
+    ],
+    "minimum_comparative_species": 20,
+    "minimum_informative_rows_per_species_season": 8,
+    "informative_stratum": "species x study/paper x year",
+    "minimum_rows_per_centering_stratum": 2,
+    "fail_if": "Fewer than 20 species have >=8 individual-level paired records with nonzero within-stratum departure variation in at least one season."
+  },
+  "preprocessing": {
+    "exclude_population_level_rows": true,
+    "date_coordinate": "day-of-year on source migration year; no circular transformation unless source schema requires it",
+    "center_within": "species x study/paper x year",
+    "departure_anomaly": "departure minus stratum mean departure",
+    "arrival_anomaly": "arrival minus stratum mean arrival",
+    "sex_handling": "If sex is available, report sensitivity after subtracting sex-specific mean within eligible strata; do not select between versions by outcome.",
+    "no_outlier_trimming": "No outcome-based trimming; only impossible dates or documented source errors may be excluded."
+  },
+  "primary_analysis": {
+    "stage_1": "Estimate beta_s separately by species and season using arrival_anomaly ~ 0 + departure_anomaly.",
+    "uncertainty": "Cluster/bootstrap at study-year stratum when at least 3 strata exist; otherwise HC3 robust SE and flag limited clustering.",
+    "stage_2": "Random-effects meta-analysis of beta_s across species; report tau^2 and I^2.",
+    "primary_test": "Is between-species heterogeneity in beta_s greater than sampling error?",
+    "paired_season_test": "Among species eligible in both seasons, estimate mean beta_spring - beta_autumn with species-paired bootstrap.",
+    "interpretation": "Do not equate beta_s with internal feedback gain; it is a descriptive timing-retention coordinate."
+  },
+  "moderator_analysis": {
+    "status": "SECONDARY_PREDECLARED",
+    "moderators": [
+      "log_spring_migration_distance",
+      "log_body_mass"
+    ],
+    "purpose": "Test whether migration geometry and body size explain heterogeneity in spring beta_s.",
+    "direction": "two-sided because recourse-opportunity and time-constraint mechanisms make opposing predictions."
+  },
+  "admission_rule": {
+    "comparative_route_supported": "At least 20 eligible species and heterogeneity test estimable.",
+    "stronger_ecological_result": "At least one preregistered moderator or spring-autumn contrast has interval excluding zero after declared uncertainty treatment.",
+    "null_route": "If heterogeneity is small or moderators/season contrast are unresolved, report as a bounded comparative null; do not invent new subgroup cuts."
+  },
+  "transparency": [
+    "The Wang dataset has been used previously for pooled SEM; PAYOFF-B cannot claim discovery that departure predicts arrival.",
+    "No numerical timing values may be inspected before this contract is committed.",
+    "Schema probing may inspect file names, sheet names, headers and row counts only."
+  ]
+}
