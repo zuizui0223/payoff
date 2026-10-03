@@ -40,6 +40,35 @@ habitat.
 PAYOFF-B must not claim that flexible migrants can nevertheless be vulnerable
 to habitat loss as a new verbal idea.
 
+### Recent phenology and migration work that narrows the claim
+
+Recent literature makes several adjacent ideas explicit.
+
+- Torstenson & Shaw (2025, *Oikos*, DOI 10.1111/oik.10862) distinguish
+  migratory cue accuracy from cue efficacy and show that the fitness value of
+  temporal versus environmental cues depends on seasonal context. PAYOFF-B
+  therefore must not claim that cue type, cue quality or their fitness
+  consequences are new concepts.
+
+- Ketterson et al. (2025, *Journal of Avian Biology*) compare photoperiodic,
+  endocrine and gene-expression mechanisms among seasonally sympatric migrant
+  and resident populations. PAYOFF-B must not claim novelty for the existence
+  of multiple physiological timing architectures.
+
+- Adams et al. (2025, *Ecology*, DOI 10.1002/ecy.70110) show that long-term
+  shifts in avian migration phenology do not necessarily compensate for
+  changing conditions encountered en route. PAYOFF-B must not claim that a
+  shift in calendar timing guarantees ecological compensation.
+
+- A 2025 *Trends in Ecology & Evolution* synthesis, "Reimagining species on the
+  move across space and time" (DOI 10.1016/j.tree.2025.03.015), explicitly
+  argues that organisms can respond along multiple spatiotemporal dimensions
+  simultaneously. PAYOFF-B must not claim the generic value of multi-axis
+  climate tracking as new.
+
+These works strengthen the boundary: the candidate novelty is not "multiple
+mechanisms", "behavioral flexibility", "different cues", or "compensation".
+
 ## Candidate contribution that remains
 
 The specific PAYOFF-B result is narrower and quantitative.
