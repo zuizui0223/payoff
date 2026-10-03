@@ -66,6 +66,17 @@ class PersistentStateClosedForm:
     final_phase_error: float
 
 
+
+@dataclass(frozen=True)
+class PersistentPairMismatch:
+    """Three-component pairwise mismatch decomposition."""
+
+    steps: int
+    controller_generated_component: float
+    entry_timer_component: float
+    persistent_state_component: float
+    final_mismatch: float
+
 def _finite(name:str,value:float)->float:
     x=float(value)
     if not isfinite(x):
