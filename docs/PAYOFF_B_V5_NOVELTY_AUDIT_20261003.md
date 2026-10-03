@@ -13,10 +13,10 @@ The common estimand is the unstandardized stage-to-stage timing propagation
 coefficient
 
 [
-d_B = a + eta_{AB} d_A + arepsilon,
+d_B = a + \beta_{AB} d_A + \varepsilon,
 ]
 
-where (eta_{AB}) is interpreted in days of downstream timing deviation per
+where (\beta_{AB}) is interpreted in days of downstream timing deviation per
 one day of upstream timing deviation.
 
 The novelty claim is **not** that temporal buffering, domino effects, annual
@@ -231,7 +231,7 @@ comparison without changing the estimand.
 
 Do not rescue sample size by:
 
-- converting correlations or repeatabilities into (eta_{AB});
+- converting correlations or repeatabilities into (\beta_{AB});
 - treating standardized path coefficients as day-for-day slopes;
 - adding non-migratory taxa to the primary analysis;
 - reclassifying MIXED transitions after seeing effect sizes;
