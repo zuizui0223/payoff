@@ -182,3 +182,46 @@ def test_first_order_difference_matches_small_exact_actor_difference():
         ).mean_phase_retention
     )
     assert approx == pytest.approx(exact, rel=1e-4, abs=1e-10)
+
+
+def test_closed_opportunity_gate_blocks_active_correction():
+    result = two_clock_forward(
+        passive_retention=1.0,
+        readiness_gate=1.0,
+        opportunity_gate=0.0,
+        decision_gain=1.0,
+        information_weight=1.0,
+    )
+    assert result.effective_gain == pytest.approx(0.0)
+    assert result.mean_phase_retention == pytest.approx(1.0)
+
+
+def test_information_has_no_effect_after_opportunity_closes():
+    s = two_clock_retention_sensitivity(
+        passive_retention=1.0,
+        readiness_gate=1.0,
+        opportunity_gate=0.0,
+        decision_gain=1.0,
+        information_weight=0.8,
+    )
+    assert s.d_lambda_d_K == pytest.approx(0.0)
+    assert s.d_lambda_d_g == pytest.approx(0.0)
+
+
+def test_reduced_actionability_requires_readiness_and_opportunity_overlap():
+    r = reduced_actionability_from_gates(
+        [1.0, 0.5, 1.0],
+        opportunity_gates=[0.0, 1.0, 0.5],
+        weights=[1.0, 1.0, 2.0],
+    )
+    # weighted usable gates: 1*0 + .5*1 + 2*1*.5 = 1.5; total weight=4
+    assert r == pytest.approx(0.375)
+
+
+def test_separating_readiness_requires_known_opportunity_gate():
+    result = separate_readiness_and_decision_gain(
+        0.3,
+        readiness_gate=0.5,
+        opportunity_gate=0.5,
+    )
+    assert result.decision_gain == pytest.approx(1.2)
