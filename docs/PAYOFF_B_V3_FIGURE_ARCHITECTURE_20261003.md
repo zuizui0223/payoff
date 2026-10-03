@@ -210,14 +210,19 @@ The visual reading order should be:
 The formal labels are:
 
 \[
-(q,r)
+(z,G)
 \rightarrow
-(e,\hat e,u)
+(q,K,r)
+\rightarrow
+(e,\hat e,g,u)
 \rightarrow
 \lambda
 \rightarrow
 \Delta.
 \]
+
+Here \(z,G\) belong to the developmental/readiness layer, while \(K,g,u\)
+belong to the decision-controller layer.
 
 “Schrödinger's spring” and “Shinkansen” belong in the caption / talk version,
 not as formal variable names.
@@ -274,9 +279,9 @@ Use shape or border style to distinguish:
 This figure prevents “bee = timer, bird = decision” from becoming a taxonomic
 claim. Clock architecture is an evidence classification, not a species label.
 
-## Figure 3 —## Figure 3 — Pairwise controller phase diagram
+## Figure 3 — Controller discordance across interaction networks
 
-A compact theoretical comparison can show stationary mismatch
+Left panel: stationary pairwise mismatch
 
 \[
 \Delta^*
@@ -286,13 +291,23 @@ w\,
 {(1-\lambda_1)(1-\lambda_2)}
 \]
 
-over \((\lambda_1,\lambda_2)\) inside the stable square
-\((-1,1)^2\).
+over \((\lambda_1,\lambda_2)\) inside the stable square.
 
-Key visual:
-- diagonal \(\lambda_1=\lambda_2\): zero mismatch under shared forcing;
-- divergence away from diagonal;
-- amplification near weak-restoring boundaries \(\lambda_i\to1\).
+Right panel: two small networks with the same controller-value multiset but
+different placement. Show
 
-This figure makes the general ecological prediction independent of any one
-taxon.
+\[
+\mathcal M
+=
+m^2
+\frac{\boldsymbol\lambda^\top L\boldsymbol\lambda}{W}.
+\]
+
+Use the four-node path witness:
+- clustered \(0-0-1-1\): one discordant edge;
+- alternating \(0-1-0-1\): three discordant edges.
+
+The same species-level clock/controller heterogeneity can therefore generate
+different community mismatch because topology determines which unlike timing
+architectures actually interact. Binary controller states recover the earlier
+network-cut result.
