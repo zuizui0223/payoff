@@ -242,8 +242,8 @@ the decision controller then determines how remaining error is corrected.
 
 A climate anomaly can therefore alter:
 - readiness timing;
+- ecological opportunity expiry;
 - information quality;
-- available recourse;
 - feedback gain;
 
 independently.
