@@ -72,6 +72,20 @@ class OpportunityLossFragility:
     variance_inflation_factor: float
     excess_log_variance: float
 
+
+@dataclass(frozen=True)
+class FlexibilityDependenceTradeoff:
+    """Intact efficiency versus fragility of a checkpoint-rich architecture."""
+
+    checkpoints: float
+    timer_cost_curvature: float
+    feedback_cost_curvature: float
+    required_log_precision: float
+    retained_opportunity_fraction: float
+    minimum_intact_cost: float
+    feedback_precision_share: float
+    opportunity_loss_variance_inflation: float
+
 def _finite_positive(name: str, value: float) -> float:
     x = float(value)
     if not isfinite(x) or x <= 0.0:
@@ -433,3 +447,76 @@ def feedback_majority_checkpoint_threshold(
     a = _finite_positive("timer_cost_curvature", timer_cost_curvature)
     b = _finite_positive("feedback_cost_curvature", feedback_cost_curvature)
     return 0.5 * (b / a) ** 0.5
+
+
+def clock_portfolio_minimum_cost_closed_form(
+    required_log_precision: float,
+    *,
+    checkpoints: float,
+    timer_cost_curvature: float,
+    feedback_cost_curvature: float,
+) -> float:
+    """Return C* = a b P^2 / [2(b + 4 a n^2)] for continuous n>=0."""
+
+    P=float(required_log_precision)
+    n=float(checkpoints)
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_cost_curvature",feedback_cost_curvature)
+    if not isfinite(P) or P<0.0:
+        raise ValueError("required_log_precision must be finite and non-negative")
+    if not isfinite(n) or n<0.0:
+        raise ValueError("checkpoints must be finite and non-negative")
+    return a*b*P*P/(2.0*(b+4.0*a*n*n))
+
+
+def flexibility_dependence_tradeoff(
+    required_log_precision: float,
+    *,
+    checkpoints: float,
+    retained_opportunity_fraction: float,
+    timer_cost_curvature: float,
+    feedback_cost_curvature: float,
+) -> FlexibilityDependenceTradeoff:
+    """Return intact optimum cost and fragility under proportional opportunity loss.
+
+    For the quadratic witness,
+
+        C*(n) = a b P^2 / [2(b + 4 a n^2)]
+
+    decreases with n, while for any omega<1,
+
+        log F(n)
+          = (1-omega) P * 4 a n^2/(b+4 a n^2)
+
+    increases with n.
+
+    Thus checkpoint-rich architectures are cheaper in intact environments but
+    more dependent on retaining those opportunities.
+    """
+
+    P=float(required_log_precision)
+    n=float(checkpoints)
+    omega=float(retained_opportunity_fraction)
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_cost_curvature",feedback_cost_curvature)
+    if not isfinite(P) or P<0.0:
+        raise ValueError("required_log_precision must be finite and non-negative")
+    if not isfinite(n) or n<0.0:
+        raise ValueError("checkpoints must be finite and non-negative")
+    if not isfinite(omega) or omega<0.0 or omega>1.0:
+        raise ValueError("retained_opportunity_fraction must lie in [0,1]")
+
+    denom=b+4.0*a*n*n
+    s_feedback=0.0 if P==0.0 else 4.0*a*n*n/denom
+    cost=a*b*P*P/(2.0*denom)
+    inflation=exp((1.0-omega)*s_feedback*P)
+    return FlexibilityDependenceTradeoff(
+        checkpoints=n,
+        timer_cost_curvature=a,
+        feedback_cost_curvature=b,
+        required_log_precision=P,
+        retained_opportunity_fraction=omega,
+        minimum_intact_cost=cost,
+        feedback_precision_share=s_feedback,
+        opportunity_loss_variance_inflation=inflation,
+    )
