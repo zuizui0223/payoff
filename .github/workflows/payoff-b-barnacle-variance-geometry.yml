@@ -1,0 +1,27 @@
+name: PAYOFF-B barnacle variance geometry
+
+on:
+  push:
+    paths:
+      - "data/payoff_b_barnacle_variance_geometry_contract_20261003.json"
+      - "data/payoff_b_barnacle_variance_geometry_rows_20261003.csv"
+      - "scripts/payoff_b_barnacle_variance_geometry.py"
+      - ".github/workflows/payoff-b-barnacle-variance-geometry.yml"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python scripts/payoff_b_barnacle_variance_geometry.py \
+            --bootstrap-replicates 10000 \
+            --output outputs/payoff_b_barnacle_variance_geometry_result.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-barnacle-variance-geometry
+          path: outputs/payoff_b_barnacle_variance_geometry_result.json
