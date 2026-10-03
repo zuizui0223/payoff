@@ -24,9 +24,9 @@ Annotation:
 The “Schrödinger's spring” intuition can appear only in the caption or graphical
 motif: the future target becomes clearer as the route progresses.
 
-### Panel B — Two clocks hand off control
+### Panel B — Entry timer and decision controller hand off control
 
-**B1. Entry/readiness clock**
+**B1. Entry/readiness timer**
 
 \[
 \dot z=v(E_t,z),
@@ -34,11 +34,11 @@ motif: the future target becomes clearer as the route progresses.
 \tau=\inf\{t:z(t)\ge\Theta\}.
 \]
 
-The physiological/developmental clock determines **when the trajectory starts**
+The physiological/developmental timer determines **when the trajectory starts**
 and therefore the entry phase \(e_0\).  Across partners it can create
 \(\Delta_0\).
 
-**B2. Mikawa-Anjo decision clock**
+**B2. Post-entry decision controller**
 
 After entry,
 
@@ -60,7 +60,7 @@ Use early/late arrows:
 
 Label the hand-off:
 
-> **entry clock sets the initial error; decision clock sets its retention.**
+> **entry timer sets the initial error; decision controller sets its retention.**
 
 Add a **dashed carry-over arrow** from physiological state \(s_0\) across the
 handoff into later phase:
@@ -112,7 +112,7 @@ Caption boundary:
 > prior art; PAYOFF-B uses the continuous source data as a quantitative anchor,
 > not as an independent confirmation of the new controller theory.
 
-### Panel D — Exact two-clock mismatch decomposition
+### Panel D — Exact timer–controller mismatch decomposition
 
 For two actors after \(n\) checkpoints show
 
@@ -141,7 +141,7 @@ V_n=\lambda^{2n}V_0.
 
 Visual message:
 
-> A noisy entry clock can be rescued by strong downstream feedback, whereas
+> A noisy entry timer can be rescued by strong downstream feedback, whereas
 > weak feedback makes precise initial timing much more valuable.
 
 ### Panel E — Controller asymmetry converts common error into mismatch
@@ -181,35 +181,6 @@ one shared climate arrow enters both actors; two different controller boxes
 produce diverging timing trajectories.
 
 This is the main ecological result of the post-freeze integration.
-
-### Clock-portfolio inset
-
-Add one compact inset between the serial decomposition and recovery panels.
-
-Show the two precision shares
-
-\[
-s_{\mathrm{timer}}
-=
-\frac{b}{b+4n^2a},
-\qquad
-s_{\mathrm{feedback}}
-=
-\frac{4n^2a}{b+4n^2a}.
-\]
-
-Use a horizontal gradient from:
-
-**one-shot event** -> timer-heavy
-
-to
-
-**many correction checkpoints** -> feedback-heavy.
-
-Add the boundary:
-
-> New errors generated after entry cannot be removed by improving the entry
-> clock; they create a unique value for feedback.
 
 ### Panel F — Recovery can fail in two distinct ways
 
@@ -262,7 +233,7 @@ Keep empirical modules visually separated by inferential status:
 
 - preregistered broad-bird predictive-connectivity result;
 - reconstructed migration-distance response contrast;
-- Ortega continuous source-data phase funnel plus T3_CANDIDATE/D2 H1_CANDIDATE readiness-feedback channel anchor;
+- Ortega continuous source-data phase funnel plus the same-population timer–controller channel-dissociation anchor;
 - wigeon preregistered null;
 - negative natural reversal gates.
 
@@ -272,135 +243,9 @@ PUBLISHED ANCHOR, POST-HOC THEORY, and PROSPECTIVE.
 This prevents the new theoretical synthesis from making old data look
 prospectively selected.
 
-## Figure 3 — Clock portfolio, fragility and interaction mismatch
+## Supporting-theory placement
 
-### Panel A — Optimal clock portfolio versus checkpoint number
-
-Plot
-
-\[
-s_{\mathrm{feedback}}
-=
-\frac{4n^2a}{b+4n^2a}
-\]
-
-and
-
-\[
-s_{\mathrm{timer}}
-=
-1-s_{\mathrm{feedback}}
-\]
-
-against checkpoint number \(n\).
-
-Mark the crossover
-
-\[
-\boxed{
-n_c=\frac12\sqrt{\frac ba}.
-}
-\]
-
-Visual message:
-
-> one-shot events are forced upstream; staged trajectories increasingly favor
-> downstream feedback.
-
-Small annotation:
-- fixed feedback-capacity cost: (s_F=4an^2/(b+4an^2));
-- additive per-use cost: feedback share = 4an/(b+4an).
-
-The checkpoint exponent is model-specific; the directional shift is shared.
-
-### Panel B — Flexibility-dependence tradeoff
-
-Show two curves against \(n\):
-
-- intact minimum precision cost
-
-\[
-C^*(n)
-=
-\frac{abP^2}{2(b+4an^2)},
-\]
-
-which decreases;
-
-- variance inflation after a fixed proportional opportunity loss
-
-\[
-F(n)
-=
-\exp[(1-\omega)s_{\mathrm{feedback}}(n)P],
-\]
-
-which increases.
-
-Annotation:
-
-> More checkpoints make precision cheaper while making the architecture more
-> dependent on retaining those checkpoints.
-
-Use industrial-development mule deer only as a small **natural anchor** icon:
-route disturbance can attenuate movement control and green-wave surfing, but it
-does not estimate \(F\), \(\omega\) or \(s_{\mathrm{feedback}}\).
-
-### Panel C — Cryptic portfolio divergence
-
-Show two partners with the **same historical final timing variance** but
-different hidden precision portfolios:
-
-- timer-heavy partner;
-- feedback-heavy partner.
-
-Before perturbation, their final distributions overlap.
-
-After the same opportunity loss \(\omega\), separate them according to
-
-\[
-\boxed{
-\log\frac{V_1'}{V_2'}
-=
-(1-\omega)P(s_1-s_2).
-}
-\]
-
-Annotation:
-
-> Historical synchrony can conceal different mechanisms and different
-> fragilities.
-
-### Panel D — Hidden fragility becomes interaction mismatch
-
-For historically equal partner variance \(V^*\), retained timing-error
-correlation \(r<1\), and post-change inflation factors \(F_1,F_2\), show
-
-\[
-\frac{M'}{M^*}
-=
-\frac{F_1+F_2}{2}
-+
-\frac{r}{2(1-r)}
-(\sqrt{F_1}-\sqrt{F_2})^2.
-\]
-
-Label the second term **asymmetry penalty**.
-
-A small inset can retain the mean-controller phase diagram
-
-\[
-\Delta^*
-=
-w\,
-\frac{\lambda_1-\lambda_2}
-{(1-\lambda_1)(1-\lambda_2)}
-\]
-
-to emphasize that mean timing and timing variance are distinct routes to
-interaction mismatch.
-
-Visual message:
-
-> Climate change can expose hidden differences in how partners historically
-> achieved the same synchrony.
+Clock-portfolio optimization, opportunity-loss fragility and cryptic portfolio
+divergence are no longer main-figure material for V3. They remain prospective
+supporting/future theory until a natural design independently identifies the
+required precision-allocation and opportunity-loss quantities.
