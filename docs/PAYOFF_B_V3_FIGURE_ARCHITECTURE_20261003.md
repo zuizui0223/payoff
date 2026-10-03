@@ -1,0 +1,247 @@
+# PAYOFF-B V3 main-figure architecture — 2026-10-03
+
+Status: **post-freeze manuscript design; frozen GEB V2 figures unchanged**
+
+## Figure 1 — From a latent spring to interaction mismatch
+
+The first figure should carry the entire Paper-2 mechanism without requiring
+the railway metaphor in the formal labels.
+
+### Panel A — Information improves while actionability declines
+
+Horizontal axis: route stage / decision time.
+
+Show:
+- cue quality \(q(t)\) increasing;
+- retained actionability \(r(t)\) decreasing;
+- actionable information value
+  \(N(t)=r(t)[Sq(t)-B]-C(t)\) peaking at an intermediate stage \(t^*\).
+
+Annotation:
+
+> Best information use can occur before best information.
+
+The “Schrödinger's spring” intuition can appear only in the caption or graphical
+motif: the future target becomes clearer as the route progresses.
+
+### Panel B — Route-wise infer–correct–propagate controller
+
+One checkpoint block:
+
+\[
+e_t
+\rightarrow
+I_t
+\rightarrow
+\hat e_t
+\rightarrow
+u_t
+\rightarrow
+e_{t+1}.
+\]
+
+Formal state update:
+
+\[
+e_{t+1}=\phi_t(e_t-u_t)+w_t.
+\]
+
+Use two miniature paths:
+- late \(e_t>0\) -> speed up / shorter stopover;
+- early \(e_t<0\) -> slow down / longer stopover.
+
+This is the formal replacement for the “Shinkansen” intuition.
+
+### Panel C — Natural mule-deer phase funnel
+
+Use the post-freeze Ortega Source Data audit:
+
+- \(n=152\) animal-years, 72 deer;
+- start SD \(=26.41\) d;
+- end SD \(=13.17\) d;
+- variance ratio \(=0.249\);
+- within-year ratio \(=0.294\);
+- whole-route \(\lambda=0.107\);
+- 70.4% ended closer to peak green-up.
+
+Add signed actuator arrows:
+
+\[
+DFP_{start}\uparrow
+\Rightarrow
+speed\uparrow
+\]
+
+and
+
+\[
+DFP_{start}\uparrow
+\Rightarrow
+stopover\downarrow.
+\]
+
+Caption boundary:
+
+> The natural convergence and bidirectional compensation are Ortega et al.
+> prior art; PAYOFF-B uses the continuous source data as a quantitative anchor,
+> not as an independent confirmation of the new controller theory.
+
+### Panel D — Mean and variance signatures separate information from gain
+
+Show:
+
+\[
+\lambda=\phi(1-gK)
+\]
+
+and
+
+\[
+P_{t+1}
+=
+\phi^2P_t[1-Kg(2-g)]+Q.
+\]
+
+With independently identified \(\phi,Q\),
+
+\[
+d=1-\lambda/\phi,
+\qquad
+v=(P_{t+1}-Q)/(\phi^2P_t),
+\]
+
+\[
+K=\frac{d^2}{v-1+2d},
+\qquad
+g=\frac dK.
+\]
+
+Visual message:
+
+> The same mean phase retention can hide different information × control
+> architectures.
+
+This panel is prospective identification theory, not a current natural
+parameter estimate.
+
+### Panel E — Controller asymmetry converts common error into mismatch
+
+Two actors start synchronized:
+
+\[
+e_{1,t}=e_{2,t}=m_t.
+\]
+
+Give them different effective retentions \(\lambda_1,\lambda_2\).
+
+Then
+
+\[
+\boxed{
+\Delta_{t+1}
+=
+(\lambda_1-\lambda_2)m_t.
+}
+\]
+
+For general states:
+
+\[
+\Delta_{t+1}
+=
+(\lambda_1-\lambda_2)m_t
++
+\frac{\lambda_1+\lambda_2}{2}\Delta_t
++
+\delta w_t.
+\]
+
+Graphically:
+one shared climate arrow enters both actors; two different controller boxes
+produce diverging timing trajectories.
+
+This is the main ecological result of the post-freeze integration.
+
+### Panel F — Recovery can fail in two distinct ways
+
+Branch the final mismatch state into:
+
+1. **physical/actionability loss**
+   - accurate information arrives after useful actions disappear;
+2. **strategic coordination trap**
+   - correction remains physically possible but unilateral change is costly.
+
+Caption:
+
+> Controller asymmetry explains mismatch generation; irreversibility and
+> coordination explain failure of recovery.
+
+## Main-figure rule
+
+Do not put every theorem into Figure 1.
+
+The visual reading order should be:
+
+\[
+\text{learn}
+\rightarrow
+\text{correct}
+\rightarrow
+\text{diverge}
+\rightarrow
+\text{fail to recover}.
+\]
+
+The formal labels are:
+
+\[
+(q,r)
+\rightarrow
+(e,\hat e,u)
+\rightarrow
+\lambda
+\rightarrow
+\Delta.
+\]
+
+“Schrödinger's spring” and “Shinkansen” belong in the caption / talk version,
+not as formal variable names.
+
+## Figure 2 — Empirical evidence hierarchy
+
+Keep empirical modules visually separated by inferential status:
+
+- preregistered broad-bird predictive-connectivity result;
+- reconstructed migration-distance response contrast;
+- Ortega continuous source-data anchor;
+- wigeon preregistered null;
+- negative natural reversal gates.
+
+Use explicit labels such as PREREGISTERED, SOURCE-DATA REANALYSIS,
+PUBLISHED ANCHOR, POST-HOC THEORY, and PROSPECTIVE.
+
+This prevents the new theoretical synthesis from making old data look
+prospectively selected.
+
+## Figure 3 — Pairwise controller phase diagram
+
+A compact theoretical comparison can show stationary mismatch
+
+\[
+\Delta^*
+=
+w\,
+\frac{\lambda_1-\lambda_2}
+{(1-\lambda_1)(1-\lambda_2)}
+\]
+
+over \((\lambda_1,\lambda_2)\) inside the stable square
+\((-1,1)^2\).
+
+Key visual:
+- diagonal \(\lambda_1=\lambda_2\): zero mismatch under shared forcing;
+- divergence away from diagonal;
+- amplification near weak-restoring boundaries \(\lambda_i\to1\).
+
+This figure makes the general ecological prediction independent of any one
+taxon.
