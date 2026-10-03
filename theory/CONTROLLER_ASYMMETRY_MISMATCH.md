@@ -22,7 +22,7 @@ retention
 \[
 \lambda_i
 =
-\phi_i(1-G_i g_iK_i),
+\phi_i(1-G_iO_i g_iK_i),
 \]
 
 where
@@ -148,8 +148,8 @@ temperature sensitivities.
 
 ## 5. Readiness asymmetry alone is sufficient
 
-If passive retention, information and feedback gain are the same but the
-physiological/readiness gates differ,
+If passive retention, opportunity, information and feedback gain are the same
+but the physiological/readiness gates differ,
 
 \[
 \phi_1=\phi_2=\phi,
@@ -165,7 +165,7 @@ then
 \boxed{
 \Delta_{t+1}
 =
--\phi gK(G_1-G_2)m_t.
+-\phi OgK(G_1-G_2)m_t.
 }
 \]
 
@@ -175,8 +175,8 @@ ready.
 
 ## 6. Information asymmetry alone is sufficient
 
-If passive retention, readiness and control gain are the same but information
-weights differ,
+If passive retention, readiness, opportunity and control gain are the same but
+information weights differ,
 
 \[
 \phi_1=\phi_2=\phi,
@@ -192,7 +192,7 @@ then
 \boxed{
 \Delta_{t+1}
 =
--\phi Gg(K_1-K_2)m_t.
+-\phi GOg(K_1-K_2)m_t.
 }
 \]
 
@@ -200,9 +200,38 @@ Different information about the same seasonal future can therefore generate
 mismatch even when the actors have identical physiological readiness and
 physical correction gain.
 
-## 7. Control asymmetry alone is sufficient
+## 7. Opportunity asymmetry alone is sufficient
 
-If passive retention, readiness and information weight are the same,
+If passive retention, readiness, information and decision gain are the same but
+remaining opportunities differ,
+
+\[
+\phi_1=\phi_2=\phi,
+\qquad
+G_1=G_2=G,
+\qquad
+K_1=K_2=K,
+\qquad
+g_1=g_2=g,
+\]
+
+then
+
+\[
+\boxed{
+\Delta_{t+1}
+=
+-\phi GgK(O_1-O_2)m_t.
+}
+\]
+
+Thus deadline or opportunity-loss asymmetry can create mismatch even when both
+actors are equally ready and equally informed.
+
+## 8. Control asymmetry alone is sufficient
+
+If passive retention, readiness, opportunity and information weight are the
+same,
 
 \[
 \phi_1=\phi_2=\phi,
@@ -218,7 +247,7 @@ then
 \boxed{
 \Delta_{t+1}
 =
--\phi GK(g_1-g_2)m_t.
+-\phi GOK(g_1-g_2)m_t.
 }
 \]
 
@@ -226,7 +255,7 @@ Thus two species can become asynchronous even after receiving equally useful
 information at the same readiness state because they differ in how strongly
 they translate estimated phase error into correction.
 
-## 8. Persistent mismatch under constant shared forcing
+## 9. Persistent mismatch under constant shared forcing
 
 Now let both actors experience the same constant seasonal forcing \(w\):
 
@@ -269,7 +298,7 @@ The denominator shows an amplification effect: controller differences become
 especially consequential as either actor approaches weak restoring control
 \(\lambda\to1\).
 
-## 9. Relation to the information-actionability theorem
+## 10. Relation to the information-actionability theorem
 
 The actionability theorem predicts that actors can optimally act on the same
 improving environmental information at different stages because their remaining
@@ -288,7 +317,7 @@ The controller-asymmetry theorem describes the next step:
 This closes the mechanistic chain from information timing to interaction
 mismatch.
 
-## 10. Relation to coordination games
+## 11. Relation to coordination games
 
 The controller theorem explains how mismatch is **generated**.
 
@@ -301,7 +330,7 @@ The two mechanisms are therefore sequential rather than competing:
 1. asymmetric information/control generates differential phase;
 2. interaction payoffs can stabilize or retain that differential state.
 
-## 11. Natural interpretation
+## 12. Natural interpretation
 
 The existing PAYOFF-B evidence already supplies separate empirical pieces:
 
@@ -316,7 +345,7 @@ single interacting pair together with independent \(K_i,g_i,\phi_i\).
 
 The direct pairwise controller test therefore remains prospective.
 
-## 12. Falsifiable pairwise prediction
+## 13. Falsifiable pairwise prediction
 
 For an interacting pair observed before and after a shared seasonal anomaly,
 estimate actor-specific incoming phase retention on the same time scale.
@@ -337,7 +366,7 @@ A strong test would ask whether the observed increase or decrease in pairwise
 mismatch is predicted by the **difference in actor-level controller retention**
 rather than only by taxon identity or raw temperature sensitivity.
 
-## 13. Novelty boundary
+## 14. Novelty boundary
 
 The common/differential-mode algebra is standard linear-systems mathematics.
 
