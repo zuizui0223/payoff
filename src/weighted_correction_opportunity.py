@@ -406,3 +406,36 @@ def shared_capacity_clock_portfolio(
         shared_feedback_effort=y,
         minimum_cost=cost,
     )
+
+
+def effective_opportunity_retention_from_feedback_shares(
+    checkpoint_feedback_shares: Sequence[float],
+    checkpoint_retention: Sequence[float],
+) -> float:
+    """Return effective retention from realized historical precision shares.
+
+    Let s_j >= 0 be checkpoint j's historical contribution to total required
+    log-precision P.  Only the relative weights within the downstream feedback
+    component matter:
+
+        omega_eff
+          = sum_j o_j s_j / sum_j s_j.
+
+    This identity is cost-independent.  It applies to any historical allocation
+    with additive downstream log-precision contributions, not only the
+    quadratic optimum.
+
+    If total downstream share is zero, opportunity loss is irrelevant and
+    effective retention is defined as one.
+    """
+
+    s = tuple(_nonnegative("checkpoint_feedback_share", x) for x in checkpoint_feedback_shares)
+    o = tuple(_unit("checkpoint_retention", x) for x in checkpoint_retention)
+    if len(s) != len(o):
+        raise ValueError("share and retention vectors must have equal length")
+    if not s:
+        raise ValueError("at least one checkpoint is required")
+    total = sum(s)
+    if total <= _TOL:
+        return 1.0
+    return sum(oj * sj for oj, sj in zip(o, s)) / total
