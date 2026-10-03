@@ -905,9 +905,7 @@ historical target variance and precision budget,
 }
 \]
 
-Thus equal historical timing precision does not imply equal robustness:
-opportunity loss can expose hidden timer-versus-feedback reliance as
-differential variance and partner mismatch. This **cryptic clock-portfolio**
+Opportunity loss can expose hidden timer-versus-feedback reliance as differential variance and partner mismatch. This **cryptic clock-portfolio**
 prediction remains prospective.
 
 
