@@ -79,8 +79,10 @@ Clock architecture must be assigned from measured mechanism, not taxonomy.
 
 - insect diapause/emergence literature: supports developmental/physiological
   timing mechanisms, but no current PAYOFF-B matched controller decomposition;
-- mule deer: supports signed decision correction and phase funnel, but no
-  independent readiness decomposition;
+- mule deer: March scaled IFBFat predicts migration-start timing in a
+  temporally conservative subset and signed phase predicts downstream
+  speed/stopover correction; this supports H1_CANDIDATE channel separation,
+  but no opportunity measurement or H2 gate test;
 - migratory birds: endogenous/photoperiodic readiness is an established
   alternative/parallel timing mechanism, while stopover departure and pacing
   provide decision-control opportunities.
