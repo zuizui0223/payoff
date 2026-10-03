@@ -130,7 +130,6 @@ Merged development lineage:
 PR 255  stagewise information + signed recourse
 PR 257  continuous information-actionability balance
 PR 258  route-wise Bayesian phase control + V3 integration
-PR 260  phase-variance funnel + phase-sense inverse
 ```
 
 The post-freeze ecological spine is:
@@ -162,65 +161,6 @@ lambda_t = phi_t (1 - g_t).
 This is an identification bridge, not permission to relabel empirical
 `lambda` as actionability `r` or feedback gain `g`.
 
-
-The post-freeze population-variance extension gives
-
-\[
-P_{t+1}
-=
-\phi_t^2P_t[1-K_tg_t(2-g_t)]+Q_t,
-\]
-
-where \(K_t\) is the effective checkpoint-information weight and \(Q_t\) is
-new process innovation. A common open-loop timing correction has no
-state-dependent contraction term:
-
-\[
-P_{t+1}^{open}
-=
-\phi_t^2P_t+Q_t.
-\]
-
-Thus individualized feedback has a prospective **phase-variance funnel**
-signature beyond a shared timing programme.
-
-Combining mean and variance retention gives
-
-\[
-\rho_V
-=
-\frac{P_{t+1}-Q_t}{P_t}
-=
-(1-K_t)\phi_t^2+K_t\lambda_t^2,
-\]
-
-and, when \(\phi_t\) and \(Q_t\) are independently identified,
-
-\[
-K_t
-=
-\frac{\phi_t^2-\rho_V}
-{\phi_t^2-\lambda_t^2}.
-\]
-
-This phase-sense inverse is exact only under the declared Gaussian controller;
-it must not be back-solved from the same transition used to define the passive
-baseline.
-
-Mule-deer prior art is now explicit. Ortega et al. (2023) already document
-large initial phenological mismatch, bidirectional speed/stopover compensation,
-and resynchronization toward summer-range arrival, and explicitly discuss a
-temporal cognitive/phase-sense interpretation. PAYOFF-B does not claim
-discovery of that phenomenon. Its prospective contribution is the general
-information-actionability-control framework and the mean-plus-variance
-identification problem.
-
-The public Ortega Source Data workbook
-\`41467_2023_37750_MOESM4_ESM.xlsx\` was confirmed reachable over HTTP, but the
-current browser-to-analysis handoff could not expose its internal sheets or
-columns. Individual-level variance-funnel reanalysis is therefore **not yet
-opened**; this is a file-handoff limitation, not a source-availability failure.
-
 The post-freeze actionability theorem additionally gives
 
 ```text
@@ -245,16 +185,34 @@ The direct natural route-wise controller remains prospective: no existing
 dataset is claimed to identify checkpoint cue quality, internal phase estimate,
 feedback gain, passive retention and remaining actionability simultaneously.
 
+
+A post-freeze public Source Data audit of Ortega et al. (2023) now quantifies
+the strongest current natural route-control anchor:
+
+\`\`\`text
+MULE_DEER_ANIMAL_YEARS = 152
+MULE_DEER_INDIVIDUALS = 72
+START_PHASE_SD_DAYS = 26.406
+END_PHASE_SD_DAYS = 13.173
+END_START_VARIANCE_RATIO = 0.2489
+ANIMAL_CLUSTER_BOOTSTRAP_95 = [0.1667, 0.3617]
+WITHIN_YEAR_VARIANCE_RATIO = 0.2940
+WHOLE_ROUTE_LAMBDA = 0.10734
+MOVEMENT_RATE_VS_START_PHASE = +0.06834 km d^-1 per phase day
+STOPOVER_VS_START_PHASE = -0.4919 d per phase day
+\`\`\`
+
+These values quantify the published resynchronization and signed compensation
+in continuous animal-year data. They do not identify latent \(K\), \(g\),
+\(\phi\), \(r\) or \(D_{eff}\), and they do not change the frozen V2
+submission state.
+
 ```text
 V2_SUBMISSION_STATUS = FROZEN_ACCESS_BLOCKED
 V3_POSTFREEZE_STATUS = DEVELOPMENT_INTEGRATED
 V3_SUBMISSION_STATUS = NOT_FROZEN_NOT_JOURNAL_FACING
 V3_CORE_METAPHOR = SHINKANSEN_TO_SCHROEDINGERS_SPRING
 V3_FORMAL_OBJECT = SEQUENTIAL_INFORMATION_AND_PHASE_CONTROL
-V3_VARIANCE_FUNNEL = EXACT_REDUCED_MODEL
-V3_PHASE_SENSE_INVERSE = EXACT_CONDITIONAL_ON_INDEPENDENT_PHI_Q
-MULE_DEER_PHASE_SENSE = PRIOR_ART_NOT_PAYOFF_NOVELTY
-ORTEGA_SOURCE_XLSX = PUBLIC_HTTP200_INTERNAL_STRUCTURE_NOT_YET_OPENED
 ```
 
 Primary ecological conclusion:
