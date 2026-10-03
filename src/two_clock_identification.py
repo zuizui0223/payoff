@@ -10,7 +10,7 @@ The architecture separates:
 
 Observed correction is governed by the product
 
-    h = G A g,
+    h = G O g,
 
 so the mean phase-retention coefficient is
 
@@ -22,7 +22,7 @@ and the innovation-free variance-retention ratio is
 
 Mean + variance moments can identify K and h when passive retention phi and
 process innovation Q are independently known. They cannot, by themselves,
-separate G, A and g.
+separate G, O and g.
 """
 
 from __future__ import annotations
@@ -117,18 +117,18 @@ def two_clock_forward(
 
     phi = _finite("passive_retention", passive_retention)
     G = _unit("readiness_gate", readiness_gate)
-    A = _unit("opportunity_gate", opportunity_gate)
+    O = _unit("opportunity_gate", opportunity_gate)
     g = _nonnegative("decision_gain", decision_gain)
     K = _unit("information_weight", information_weight)
 
-    h = G * A * g
+    h = G * O * g
     lam = phi * (1.0 - h * K)
     rho = phi**2 * (1.0 - K * h * (2.0 - h))
 
     return TwoClockForward(
         passive_retention=phi,
         readiness_gate=G,
-        opportunity_gate=A,
+        opportunity_gate=O,
         decision_gain=g,
         information_weight=K,
         effective_gain=h,
@@ -166,7 +166,7 @@ def infer_information_and_effective_gain(
         K = d^2 / (v - 1 + 2d),
         h = d / K.
 
-    G, A and g are not separately identified without additional constraints.
+    G, O and g are not separately identified without additional constraints.
     """
 
     P = _nonnegative("prior_variance", prior_variance)
@@ -243,7 +243,7 @@ def separate_readiness_and_decision_gain(
             "G and g are not separately identified from effective_gain alone"
         )
 
-    A = _unit("opportunity_gate", opportunity_gate)
+    O = _unit("opportunity_gate", opportunity_gate)
 
     if readiness_gate is not None:
         G = _unit("readiness_gate", readiness_gate)
@@ -256,7 +256,7 @@ def separate_readiness_and_decision_gain(
         g = None
 
     if G is not None and g is not None:
-        if abs(G * A * g - h) > tol:
+        if abs(G * O * g - h) > tol:
             raise ValueError("supplied readiness_gate and decision_gain do not match h")
         return ClockSeparation(
             effective_gain=h,
@@ -270,9 +270,9 @@ def separate_readiness_and_decision_gain(
             if h > tol:
                 raise ValueError("positive effective_gain is impossible at G=0")
             raise ValueError("decision_gain is not identified when G=0 and h=0")
-        if A <= tol:
+        if O <= tol:
             raise ValueError("decision_gain is not identified when opportunity_gate=0")
-        g = h / (G * A)
+        g = h / (G * O)
         return ClockSeparation(
             effective_gain=h,
             readiness_gate=G,
@@ -285,9 +285,9 @@ def separate_readiness_and_decision_gain(
         if h > tol:
             raise ValueError("positive effective_gain is impossible at g=0")
         raise ValueError("readiness_gate is not identified when g=0 and h=0")
-    if A <= tol:
+    if O <= tol:
         raise ValueError("readiness_gate is not identified when opportunity_gate=0")
-    G = h / (A * g)
+    G = h / (O * g)
     if G > 1.0 + tol:
         raise ValueError("inferred readiness_gate exceeds 1")
     G = min(max(G, 0.0), 1.0)
@@ -353,14 +353,14 @@ def two_clock_retention_sensitivity(
     decision_gain: float,
     information_weight: float,
 ) -> TwoClockSensitivity:
-    """Return exact local derivatives of lambda=phi(1-G*A*g*K).
+    """Return exact local derivatives of lambda=phi(1-G*O*g*K).
 
     The active-correction layers are multiplicative complements:
 
-        d lambda / dG = -phi A g K
-        d lambda / dA = -phi G g K
-        d lambda / dg = -phi G A K
-        d lambda / dK = -phi G A g.
+        d lambda / dG = -phi O g K
+        d lambda / dO = -phi G g K
+        d lambda / dg = -phi G O K
+        d lambda / dK = -phi G O g.
 
     Therefore the marginal effect of improving any one layer vanishes when a
     required partner layer is zero.
@@ -372,19 +372,19 @@ def two_clock_retention_sensitivity(
     g = _nonnegative("decision_gain", decision_gain)
     K = _unit("information_weight", information_weight)
 
-    lam = phi * (1.0 - G * A * g * K)
+    lam = phi * (1.0 - G * O * g * K)
     return TwoClockSensitivity(
         passive_retention=phi,
         readiness_gate=G,
-        opportunity_gate=A,
+        opportunity_gate=O,
         decision_gain=g,
         information_weight=K,
         mean_phase_retention=lam,
-        d_lambda_d_phi=1.0 - G * A * g * K,
+        d_lambda_d_phi=1.0 - G * O * g * K,
         d_lambda_d_G=-phi * A * g * K,
         d_lambda_d_A=-phi * G * g * K,
         d_lambda_d_g=-phi * G * A * K,
-        d_lambda_d_K=-phi * G * A * g,
+        d_lambda_d_K=-phi * G * O * g,
     )
 
 
@@ -406,11 +406,11 @@ def first_order_controller_difference(
     Around a declared baseline,
 
         delta_lambda ≈
-            (1-GAgK) delta_phi
-          - phi AgK delta_G
-          - phi GgK delta_A
-          - phi GAK delta_g
-          - phi GAg delta_K.
+            (1-GOgK) delta_phi
+          - phi OgK delta_G
+          - phi GgK delta_O
+          - phi GOK delta_g
+          - phi GOg delta_K.
 
     This is a local attribution device, not an exact finite-change
     decomposition for large differences.
