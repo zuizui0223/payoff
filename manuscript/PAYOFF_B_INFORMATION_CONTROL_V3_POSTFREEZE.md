@@ -649,8 +649,15 @@ Mule deer now provide both signatures in one population. March scaled IFBFat
 predicts later migration-start timing in a conservative predeparture subset,
 whereas signed starting phase predicts speed and stopover after departure. A
 prespecified DFP × IFBFat moderation test did not support stronger signed
-feedback at higher IFBFat. This supports an H1 serial-hybrid interpretation,
-not H2 concurrent readiness gating.
+feedback at higher IFBFat.
+
+A second frozen downstream-phase test also rejected the **pure entry-only
+Markov handoff** as a complete description: in
+(DFP_{end}sim DFP_{start}+IFBFat), the clustered interval for
+(DFP_{start}) crossed zero while IFBFat retained a raw conditional
+association; after within-year residualization both became unresolved. Thus the
+data support an H1 two-layer hybrid, but do not show that physiological state
+ceases to matter after entry.
 
 ### 4.4 A variance funnel identifies effective feedback, not clock primitives
 
@@ -801,11 +808,12 @@ can therefore remain strategically inaccessible.
 ### 4.10 Direct natural validation remains prospective
 
 The evidence is no longer purely cross-system. Mule deer provide a candidate
-same-population serial hybrid: March physiological condition predicts
+same-population two-layer hybrid: March physiological condition predicts
 migration-start timing, while signed phase predicts later speed/stopover
 correction and phase convergence. The prespecified IFBFat moderation test does
-not support concurrent readiness-gated feedback, and the readiness association
-is not invariant to every sensitivity analysis.
+not support concurrent readiness-gated feedback. A separate frozen handoff test
+does not support the stronger claim that physiological state acts only at entry.
+The readiness association is also not invariant to every sensitivity analysis.
 
 The direct serial test should therefore measure:
 
