@@ -520,3 +520,76 @@ def flexibility_dependence_tradeoff(
         feedback_precision_share=s_feedback,
         opportunity_loss_variance_inflation=inflation,
     )
+
+
+def per_use_cost_precision_shares(
+    *,
+    checkpoints: int,
+    timer_cost_curvature: float,
+    feedback_use_cost_curvature: float,
+) -> tuple[float, float]:
+    """Robustness case where feedback operating cost accumulates across checkpoints.
+
+    Use
+
+        C = (a/2)x^2 + n(b/2)y^2
+
+    with the same precision constraint
+
+        x + 2 n y = P.
+
+    For n>0 the exact shares are
+
+        s_timer = b / (b + 4 a n)
+        s_feedback = 4 a n / (b + 4 a n).
+
+    Thus the shift toward feedback is linear rather than quadratic in n, but
+    the qualitative checkpoint and opportunity-loss results are unchanged.
+    """
+
+    n=_nonnegative_int("checkpoints",checkpoints)
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_use_cost_curvature",feedback_use_cost_curvature)
+    if n==0:
+        return 1.0,0.0
+    denom=b+4.0*a*n
+    return b/denom,4.0*a*n/denom
+
+
+def per_use_cost_feedback_majority_threshold(
+    *,
+    timer_cost_curvature: float,
+    feedback_use_cost_curvature: float,
+) -> float:
+    """Continuous n threshold for feedback-majority under cumulative use cost.
+
+    Feedback supplies more than half of precision iff
+
+        4 a n > b,
+
+    hence n_c = b/(4a).
+    """
+
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_use_cost_curvature",feedback_use_cost_curvature)
+    return b/(4.0*a)
+
+
+def per_use_cost_minimum_cost(
+    required_log_precision: float,
+    *,
+    checkpoints: int,
+    timer_cost_curvature: float,
+    feedback_use_cost_curvature: float,
+) -> float:
+    """Return exact minimum cost under cumulative feedback-use cost."""
+
+    P=float(required_log_precision)
+    if not isfinite(P) or P<0.0:
+        raise ValueError("required_log_precision must be finite and non-negative")
+    n=_nonnegative_int("checkpoints",checkpoints)
+    a=_finite_positive("timer_cost_curvature",timer_cost_curvature)
+    b=_finite_positive("feedback_use_cost_curvature",feedback_use_cost_curvature)
+    if n==0:
+        return 0.5*a*P*P
+    return a*b*P*P/(2.0*(b+4.0*a*n))
