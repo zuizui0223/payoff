@@ -717,89 +717,143 @@ This prediction differs from a simple “closer cues are better” model.
 
 ### 4.6 Phase retention is a useful coordinate but not a mechanism by itself
 
-The empirical phase-retention coefficient \(\lambda\) is valuable because it
-quantifies how strongly incoming seasonal error persists to a later stage.
-Under perfect phase information and full readiness \(G=1\),
+The empirical phase-retention coefficient \(\lambda\) quantifies how strongly
+incoming seasonal error persists to a later stage. For a serial post-entry
+controller,
 
 \[
-\lambda=\phi(1-g).
-\]
-
-With partial readiness and noisy individualized phase estimation,
-
-\[
-\lambda=\phi(1-GOgK)
+\lambda=\phi(1-OgK)
 =
-\phi(1-hK).
-\]
-
-Thus the same \(\lambda\) can arise from different combinations of passive
-persistence, information quality and active feedback. Negative retention can
-arise from overshoot, anticipation, target movement or coordinate changes.
-Direct mechanistic inference therefore requires actuator and environmental
-information in addition to \(\lambda\).
-
-### 4.7 Prediction and reactive correction can be substitute control channels
-
-The controller also changes how cross-route comparisons should be interpreted.
-Conditional on the relevant actuator being available, let (R(q)) be mismatch
-risk remaining after the actor has used available pre-commitment information,
-and let downstream reactive gain (g) reduce that error at quadratic cost
-(c g^2/2):
-
-\[
-L(g;q)=(1-g)^2R(q)+\frac{c}{2}g^2.
-\]
-
-The unique optimum is
-
-\[
-g^*(q)=\frac{2R(q)}{c+2R(q)},
+\phi(1-hK),
 \qquad
-\lambda^*(q)=\frac{c}{c+2R(q)}.
+h=Og.
 \]
 
-If better prediction lowers the mismatch reaching the feedback stage while
-correction cost is fixed, optimal downstream correction becomes weaker. Strong
-pre-commitment prediction and strong post-error correction are therefore
-substitutes in this reduced model, not necessarily positively correlated
-traits.
+The same \(\lambda\) can therefore arise from different combinations of
+passive persistence, information quality, remaining opportunity and active
+decision gain. A physiological readiness term should be reintroduced only when
+readiness is independently measured at the same downstream decision stage.
 
-More generally, if cue quality also changes the effective cost of correction,
-the sign is determined by
+Negative retention can arise from overshoot, anticipation, target movement or
+coordinate changes. Direct mechanistic inference therefore requires actuator
+and environmental information in addition to \(\lambda\).
+
+### 4.7 Prediction and reactive correction can substitute before new error appears
+
+Let \(R(q)\) be mismatch risk remaining after pre-entry information of quality
+\(q\), and let post-entry correction gain \(g\) reduce that inherited error at
+quadratic cost \(cg^2/2\):
 
 \[
-\frac{d}{dq}\log\frac{g^*}{1-g^*}
+L(g;q)
 =
-\frac{R'}{R}-\frac{c'}{c}.
+(1-g)^2R(q)
++
+\frac{c}{2}g^2.
 \]
 
-Prediction dominates when mismatch risk falls proportionally faster than
-correction cost; cue-informed correction dominates when correction becomes
-cheap or targeted faster than pre-correction risk falls.
+The optimum is
 
-This result was derived after the barnacle-goose descriptive screen and the
-registered wigeon null were known. Those outcomes are therefore motivation,
-not confirmation. The ecological consequence is nevertheless important:
-**prediction before error and correction after error are separate control
-channels and should be estimated separately.**
+\[
+g^*(q)
+=
+\frac{2R(q)}
+{c+2R(q)}.
+\]
 
-### 4.8 Climate change can damage both prediction and control
+If better prediction lowers inherited mismatch while correction cost is fixed,
+optimal downstream correction becomes weaker. Accurate entry timing and strong
+post-entry correction are therefore partially substitutable.
 
-Climate change can affect the framework through at least two distinct routes.
+That substitution is limited. Once new phase noise is generated after entry,
 
-It can reduce predictive connectivity between distant locations, degrading the quality of information available before a migrant reaches its destination.
+\[
+V_{k+1}
+=
+\lambda^2V_k+Q,
+\]
 
-It can also change the window over which correction remains possible—for example by compressing resource peaks, changing stopover conditions or altering the cost of speed and delay.
+so
 
-A species can therefore become more mismatched without losing its intrinsic ability to move or shift phenology. The problem can instead be that the forecast becomes reliable too late relative to the remaining control window.
+\[
+V_n
+=
+\lambda^{2n}V_0
++
+Q\sum_{j=0}^{n-1}\lambda^{2j}.
+\]
 
-### 4.9 Interactions convert controller differences into ecological mismatch
+Improving the entry clock reduces only the first term. Post-entry innovations
+can only be suppressed by downstream control. Thus feedback has a distinct
+value in long, stochastic journeys even when departure timing is precise.
+
+### 4.8 Clock portfolios explain why different timing strategies can persist
+
+The serial model converts the two clocks into an allocation problem. Let
+entry-clock investment \(x\) reduce initial variance as
+
+\[
+V_0=V_{\mathrm{ref}}e^{-x},
+\]
+
+and let per-checkpoint feedback investment \(y\) reduce
+\(|\lambda|=e^{-y}\). With \(n\) post-entry checkpoints and no new innovation,
+
+\[
+V_n
+=
+V_{\mathrm{ref}}
+e^{-(x+2ny)}.
+\]
+
+Under the transparent quadratic cost witness
+
+\[
+C
+=
+\frac a2x^2+\frac b2y^2,
+\]
+
+the minimum-cost shares of required log-precision are
+
+\[
+\boxed{
+s_{\mathrm{timer}}
+=
+\frac{b}{b+4n^2a}
+}
+\]
+
+and
+
+\[
+\boxed{
+s_{\mathrm{feedback}}
+=
+\frac{4n^2a}{b+4n^2a}.
+}
+\]
+
+Hence more correction checkpoints shift the optimal portfolio toward feedback.
+At \(n=0\), all precision must be supplied upstream.
+
+This gives a mechanistic reason that one-shot events and long movement
+trajectories need not evolve the same timing architecture. Emergence or an
+irreversible flowering transition can favor upstream precision; a long
+migration with many stopovers can tolerate a noisier start because error can be
+corrected repeatedly. The cost functions are a mathematical witness, not a
+universal law.
+
+### 4.9 Climate change can reweight the clock portfolio
+
+Climate change can reduce predictive connectivity before entry, remove stopovers or compress resource windows after entry, and change the energetic cost of speed, waiting or route adjustment. A historically successful timer-heavy or feedback-heavy strategy can therefore become mismatched without any single clock 'failing' in isolation.
+
+### 4.10 Interactions convert controller differences into ecological mismatch
 
 The pairwise mode decomposition clarifies why interaction mismatch need not
 require different climate exposure. A common environmental displacement enters
 both actors as a shared phase error, but differences in effective retention
-\(\lambda_i=\phi_i(1-G_iO_i g_iK_i)\) convert part of that common mode into a
+\(\lambda_i=\phi_i(1-O_i g_iK_i)\) convert part of that common mode into a
 differential mode.
 
 This distinction changes comparative interpretation. A resident and a migrant,
@@ -815,7 +869,7 @@ explains why a mismatched or obsolete timing configuration can remain difficult
 to escape even after information improves. A physically feasible correction
 can therefore remain strategically inaccessible.
 
-### 4.10 Direct natural validation remains prospective
+### 4.11 Direct natural validation remains prospective
 
 The evidence is no longer purely cross-system. Mule deer provide a candidate
 same-population two-layer hybrid: March physiological condition predicts
