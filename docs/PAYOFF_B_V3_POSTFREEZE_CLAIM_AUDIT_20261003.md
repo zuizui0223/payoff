@@ -26,7 +26,7 @@ source-backed motivation, and what remains prospective in
 | natural degradation→recovery hysteresis | preregistered gates failed before history test | no natural hysteresis claim | any natural T7/T8 validation |
 | full route-wise internal controller | prospective | direct next empirical target | established natural mechanism |
 | phase-variance funnel beyond common open-loop timing | exact post-freeze reduced model + prospective empirical test | exact under Gaussian individualized feedback; natural test prospective | claim that any start/end convergence proves feedback |
-| phase-sense inverse K from mean + variance retention | exact post-freeze inverse under identified phi and Q | exact under stated Gaussian assumptions with independent passive baseline | back-solve K from the same transition used to define phi or Q |
+| noisy-cue phase inverse K and g from mean + variance retention | exact post-freeze inverse under identified phi and Q | exact under stated Gaussian assumptions with independent passive/process baseline; lambda=phi(1-gK) | back-solve K or g from the same transition used to define phi or Q |
 | mule-deer temporal phase sense / bidirectional compensation | published prior art (Ortega et al. 2023) | natural anchor for signed compensation and resynchronization | claim PAYOFF-B discovered temporal phase sense in mule deer |
 
 ## Canonical V3 evidence ordering
