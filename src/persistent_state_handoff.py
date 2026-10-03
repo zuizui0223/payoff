@@ -216,3 +216,93 @@ def pure_entry_only_special_case(
     lam=_finite("phase_retention",phase_retention)
     n=_nonnegative_int("steps",steps)
     return (lam**n)*e0
+
+
+def persistent_pair_mismatch_decomposition(
+    *,
+    initial_mean_error: float,
+    initial_mismatch: float,
+    lambda_1: float,
+    lambda_2: float,
+    state_1: float,
+    state_2: float,
+    state_persistence_1: float,
+    state_persistence_2: float,
+    state_to_phase_effect_1: float,
+    state_to_phase_effect_2: float,
+    steps: int,
+) -> PersistentPairMismatch:
+    """Decompose mismatch into controller, entry-timer and carry-over terms.
+
+    Actor i has zero-innovation solution
+
+        e_i,n
+          = lambda_i^n e_i,0
+            + beta_i s_i,0 H_n(lambda_i,rho_i).
+
+    Therefore
+
+        Delta_n
+          = (lambda_1^n-lambda_2^n)m_0
+            + 0.5(lambda_1^n+lambda_2^n)Delta_0
+            + beta_1 s_1,0 H_1
+            - beta_2 s_2,0 H_2.
+    """
+
+    m0=_finite("initial_mean_error",initial_mean_error)
+    d0=_finite("initial_mismatch",initial_mismatch)
+    l1=_finite("lambda_1",lambda_1)
+    l2=_finite("lambda_2",lambda_2)
+    s1=_finite("state_1",state_1)
+    s2=_finite("state_2",state_2)
+    r1=_finite("state_persistence_1",state_persistence_1)
+    r2=_finite("state_persistence_2",state_persistence_2)
+    b1=_finite("state_to_phase_effect_1",state_to_phase_effect_1)
+    b2=_finite("state_to_phase_effect_2",state_to_phase_effect_2)
+    n=_nonnegative_int("steps",steps)
+
+    p1=l1**n
+    p2=l2**n
+    controller=(p1-p2)*m0
+    entry=0.5*(p1+p2)*d0
+
+    h1=handoff_kernel(
+        phase_retention=l1,
+        state_persistence=r1,
+        steps=n,
+    )
+    h2=handoff_kernel(
+        phase_retention=l2,
+        state_persistence=r2,
+        steps=n,
+    )
+    persistent=b1*s1*h1-b2*s2*h2
+
+    e10=m0+0.5*d0
+    e20=m0-0.5*d0
+    e1=persistent_state_closed_form(
+        e10,s1,
+        phase_retention=l1,
+        state_persistence=r1,
+        state_to_phase_effect=b1,
+        steps=n,
+    ).final_phase_error
+    e2=persistent_state_closed_form(
+        e20,s2,
+        phase_retention=l2,
+        state_persistence=r2,
+        state_to_phase_effect=b2,
+        steps=n,
+    ).final_phase_error
+    final=e1-e2
+
+    if abs(final-(controller+entry+persistent))>1e-10:
+        raise AssertionError("persistent pairwise decomposition failed")
+
+    return PersistentPairMismatch(
+        steps=n,
+        controller_generated_component=controller,
+        entry_timer_component=entry,
+        persistent_state_component=persistent,
+        final_mismatch=final,
+    )
