@@ -27,7 +27,8 @@
       "timer": "T3_CANDIDATE",
       "decision": "D2",
       "hybrid": "H1_CANDIDATE",
-      "boundary": "March scaled IFBFat precedes migration start in 62 temporally safe animal-years and predicts standardized start in the frozen primary slope; year-FE and rank sensitivities are weaker. Signed en-route compensation is independently established. H2 readiness gating, opportunity O, K, g, phi and Q are not jointly identified."
+      "boundary": "March scaled IFBFat precedes migration start in 62 temporally safe animal-years and predicts standardized start in the frozen primary slope. In the same subset, DFP_Start retains signed associations with movement speed and stopover after accounting for IFBFat, while IFBFat intervals include zero in both downstream actuator models. This supports T3_CANDIDATE + D2 -> H1_CANDIDATE with channel dissociation, but not H2 gating; year-FE/rank readiness sensitivities are weaker and G/O/K/g/phi/Q remain unidentified.",
+      "channel_dissociation": "SUPPORTED"
     },
     {
       "system": "Eurasian wigeon",
@@ -100,5 +101,5 @@
       "boundary": "heterospecific information affects later but not earlier settlement; physiological gate not measured"
     }
   ],
-  "global_boundary": "Mule deer are now the strongest same-system H1 candidate (T3_CANDIDATE + D2), but no current PAYOFF-B natural system identifies H2 readiness-gated feedback or a full G/O/K/g/phi/Q decomposition in the same individuals."
+  "global_boundary": "Mule deer are the strongest same-system H1 candidate (T3_CANDIDATE + D2) and show source-backed channel dissociation between predeparture physiological condition and postdeparture signed phase correction, but no current PAYOFF-B natural system identifies H2 readiness-gated feedback or a full G/O/K/g/phi/Q decomposition."
 }
