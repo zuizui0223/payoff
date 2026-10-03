@@ -406,3 +406,30 @@ def fragility_from_feedback_share(
     if not isfinite(omega) or omega < 0.0 or omega > 1.0:
         raise ValueError("retained_opportunity_fraction must lie in [0,1]")
     return exp((1.0 - omega) * s * P)
+
+
+def feedback_majority_checkpoint_threshold(
+    *,
+    timer_cost_curvature: float,
+    feedback_cost_curvature: float,
+) -> float:
+    """Return the continuous checkpoint threshold for feedback-majority precision.
+
+    Under the quadratic witness,
+
+        s_feedback = 4 n^2 a / (b + 4 n^2 a).
+
+    Feedback supplies more than half of required log-precision iff
+
+        4 n^2 a > b,
+
+    so the continuous threshold is
+
+        n_c = 0.5 * sqrt(b/a).
+
+    Integer checkpoint architectures are feedback-majority when n > n_c.
+    """
+
+    a = _finite_positive("timer_cost_curvature", timer_cost_curvature)
+    b = _finite_positive("feedback_cost_curvature", feedback_cost_curvature)
+    return 0.5 * (b / a) ** 0.5
