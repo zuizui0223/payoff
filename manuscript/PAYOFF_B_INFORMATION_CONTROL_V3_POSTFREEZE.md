@@ -862,21 +862,45 @@ can therefore remain strategically inaccessible.
 
 ### 4.10 Direct natural validation remains prospective
 
-The current evidence supports pieces of the mechanism across different systems. It does not yet demonstrate, in one natural population, the full sequence
+The current evidence supports complementary pieces of the mechanism across
+different systems, but no natural PAYOFF-B dataset jointly identifies
 
 \[
-\text{checkpoint cue}
+G,\quad K,\quad g,\quad \phi,\quad Q
+\]
+
+for the same focal transition.
+
+Developmental and emergence systems provide strong prior support for
+physiological/readiness timing. Mule deer provide unusually strong
+individual-level evidence for signed downstream correction and a phase-variance
+funnel. Migratory birds are the most natural hybrid target because endogenous
+readiness and repeated route decisions can coexist within one individual.
+
+The full prospective sequence is therefore
+
+\[
+\text{physiological readiness }G
 \rightarrow
-\text{updated phase estimate}
+\text{checkpoint information }K
+\rightarrow
+\text{decision gain }g
 \rightarrow
 \text{signed correction}
 \rightarrow
-\text{reduced next-stage phase error}.
+\text{downstream phase}.
 \]
 
-That is now the clearest empirical target.
+Mean and variance phase trajectories can identify \(K\) and effective
+correction \(h=Gg\) under the declared Gaussian controller when \(\phi\) and
+\(Q\) are independently known. They cannot separate \(G\) from \(g\) without
+an additional physiological measure, readiness manipulation or independent
+decision-gain calibration.
 
-The strongest future test would compare a departure-only model with a checkpoint-updating model on held-out downstream phase. It would separately measure cue quality and actuator availability, avoiding circular estimation of information from the same behavior being predicted.
+The strongest future test should therefore combine a readiness measurement with
+checkpoint environmental information and movement decisions, and compare a
+shared timing-programme model against a two-clock feedback model on held-out
+downstream phase.
 
 ---
 
