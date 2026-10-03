@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_DESCRIPTIVE_VARIANCE_GEOMETRY_CONTRACT",
+  "frozen_submission_affected": false,
+  "theory_timing": "defined after highlighted route lambda estimates were known; variance outcomes not yet computed",
+  "source_artifacts": {
+    "multiflyway": {
+      "artifact_id": 10700391090,
+      "artifact_name": "movement-phenology-barnacle-multiflyway",
+      "greenland_file": "stage3_greenland_goose_anomaly_phase_transitions.csv",
+      "greenland_sha256": "033d244ef1321d19055b77b3c71fd2a81249044394026634e4f186289896d0d2",
+      "barents_file": "stage3_barents_goose_anomaly_phase_transitions.csv",
+      "barents_sha256": "2838b14dd41481301ae0e7053aaab08d502cce3374198fbed21c16e1cd6e632d"
+    },
+    "svalbard": {
+      "artifact_id": 10699871077,
+      "artifact_name": "movement-phenology-stage3-svalbard-goose-source",
+      "file": "stage3_svalbard_goose_transitions.csv",
+      "sha256": "e1302c5d74f32ffb07af8123b89591ce24927a47e146e791493cc57a0b82ba3b"
+    }
+  },
+  "routes": [
+    {
+      "flyway": "svalbard",
+      "origin": "R2",
+      "destination": "R4",
+      "origin_phase_column": "origin_arrival_phase_days",
+      "destination_phase_column": "destination_arrival_phase_days",
+      "known_lambda": -0.10632090683602258,
+      "minimum_n": 16,
+      "minimum_individuals": 15
+    },
+    {
+      "flyway": "greenland",
+      "origin": "R2",
+      "destination": "R3",
+      "origin_phase_column": "origin_arrival_phase_anom",
+      "destination_phase_column": "destination_arrival_phase_anom",
+      "known_lambda": 0.130730883475755,
+      "minimum_n": 6,
+      "minimum_individuals": 6
+    },
+    {
+      "flyway": "barents",
+      "origin": "R1",
+      "destination": "R2",
+      "origin_phase_column": "origin_arrival_phase_anom",
+      "destination_phase_column": "destination_arrival_phase_anom",
+      "known_lambda": 0.49411394152354327,
+      "minimum_n": 12,
+      "minimum_individuals": 8
+    }
+  ],
+  "estimands": {
+    "variance_ratio": "sample_var(destination_phase)/sample_var(origin_phase)",
+    "sd_ratio": "sqrt(variance_ratio)",
+    "lambda_refit": "OLS slope destination_phase ~ 1 + origin_phase",
+    "normalized_residual_variance": "variance_ratio - lambda_refit^2",
+    "inherited_destination_variance_fraction": "lambda_refit^2 / variance_ratio",
+    "identity": "for OLS with intercept, variance_ratio = lambda^2 + residual_variance/origin_variance up to numerical precision"
+  },
+  "uncertainty": {
+    "method": "individual-cluster bootstrap",
+    "replicates": 10000,
+    "seed": 20261003,
+    "interval": "2.5th and 97.5th percentiles"
+  },
+  "reporting_rules": [
+    "report each fixed route separately",
+    "do not pool three flyways as independent taxa or fit a universal goose variance ratio",
+    "classify raw variance ratio <1 as contraction, >1 as expansion, without attributing cause",
+    "retain negative lambda signs; use lambda squared only in the variance identity",
+    "normalized residual variance is an OLS residual coordinate, not process innovation Q",
+    "no K, g, phi, r or D_eff is estimated from these rows"
+  ],
+  "forbidden_claims": [
+    "variance contraction proves individualized feedback",
+    "barnacle geese validate the phase-sense inverse",
+    "the three routes are independent species-level replicates",
+    "residual variance equals environmental process innovation",
+    "post-freeze variance results retune the frozen lambda gates or GEB V2"
+  ]
+}
