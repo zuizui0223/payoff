@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_ARCTIC_SERIAL_CLOCK_CROSS_TAXON_CONTRACT_PREOUTCOME",
+  "frozen_submission_affected": false,
+  "source": {
+    "study": "Migratory birds advance spring arrival and egg-laying in the Arctic, mostly by travelling faster",
+    "dryad_doi": "10.5061/dryad.w0vt4b93d",
+    "migration_file": "2.migration_data.csv",
+    "direct_url": "https://datadryad.org/downloads/file_stream/4015617",
+    "metadata_claim": "519 spring migrations, 274 individuals, 12 populations, 9 species"
+  },
+  "question": "Across independent Arctic-breeding migratory bird populations, does individual timing dispersion and rank at departure persist, contract, or amplify by Arctic-circle arrival and breeding arrival?",
+  "serial_stages": [
+    "depart",
+    "AC",
+    "arrival",
+    "nest.initiation"
+  ],
+  "primary_analysis": {
+    "transition": "depart -> AC",
+    "inclusion": "complete depart and AC; population-year groups with at least 3 complete migrations",
+    "coordinate": "within species_site_year centered day-of-year",
+    "estimator": "pooled within-group OLS slope AC_centered ~ depart_centered",
+    "symbol": "lambda_depart_AC",
+    "uncertainty": "10000-replicate cluster bootstrap by individual_id, resampling whole individual histories",
+    "frozen_prediction": "abs(lambda_depart_AC) < 1",
+    "pass_rule": "95% cluster-bootstrap interval entirely inside (-1,1)",
+    "interpretation": "individual departure timing differences are contracted rather than fully retained by Arctic-circle arrival"
+  },
+  "secondary_transitions": [
+    {
+      "transition": "AC -> arrival",
+      "inclusion": "complete AC and arrival; population-year groups n>=3",
+      "estimator": "within species_site_year centered OLS",
+      "status": "secondary descriptive"
+    },
+    {
+      "transition": "arrival -> nest.initiation",
+      "inclusion": "complete arrival and nest.initiation; population-year groups n>=3",
+      "estimator": "within species_site_year centered OLS",
+      "status": "secondary descriptive"
+    },
+    {
+      "transition": "depart -> arrival",
+      "inclusion": "complete depart and arrival; population-year groups n>=3",
+      "estimator": "within species_site_year centered OLS",
+      "status": "secondary descriptive"
+    }
+  ],
+  "variance_funnel": {
+    "primary": "pooled within-population-year variance ratio Var(AC_centered)/Var(depart_centered)",
+    "prediction": "<1",
+    "uncertainty": "animal-cluster bootstrap",
+    "role": "second serial signature; not sufficient alone to prove feedback"
+  },
+  "actuator_diagnostics": [
+    {
+      "model": "travel_speed ~ depart_centered",
+      "predicted_direction": ">0",
+      "caveat": "travel_speed is partly mechanically related to travel duration and is therefore a supportive actuator diagnostic, not an independent causal test"
+    },
+    {
+      "model": "stopovers.f ~ depart_centered",
+      "predicted_direction": "<0",
+      "caveat": "descriptive only; stopovers.f availability may vary among taxa"
+    }
+  ],
+  "population_heterogeneity": {
+    "rule": "estimate population-specific depart->AC lambda only when n_complete>=20, >=3 years, and within-group departure variance >0",
+    "role": "descriptive heterogeneity; no universal lambda and no ranking of taxa by biological correction strength"
+  },
+  "direct_serial_decomposition": {
+    "role": "prospective descriptive application of serial theorem",
+    "quantities": [
+      "population-year entry residual depart_centered",
+      "downstream residual AC_centered",
+      "population-specific retention lambda where eligible"
+    ],
+    "not_identified": [
+      "physiological readiness clock G",
+      "opportunity O",
+      "information weight K",
+      "decision gain g",
+      "passive retention phi"
+    ]
+  },
+  "forbidden": [
+    "call departure timing a physiological readiness measurement",
+    "infer molecular clocks from departure dates",
+    "treat travel_speed compensation as independent of the timing interval used to calculate travel_speed",
+    "claim all species share one biological lambda",
+    "use this dataset to confirm the post-hoc serial two-clock theorem without labeling it an independent post-theory test",
+    "retune frozen GEB V2 or preregistered outcomes"
+  ]
+}
