@@ -91,6 +91,57 @@ Classification: **OPPORTUNITY_SUBSTITUTION_ANCHOR**.
 Do not equate the roughly 80–90% decline in Filsø use with
 \(1-\omega\).
 
+## Tier A — direct opportunity-loss natural experiment, but no downstream phase
+
+### Piping plover / Hurricane Dorian
+
+Sweeney et al. (2026) examined fall-migrating piping plovers at Ocracoke
+Island, North Carolina, before and after Hurricane Dorian (September 2019).
+
+Useful properties:
+- abrupt external habitat perturbation;
+- remote-sensing habitat change;
+- 2016–2023 mark-resighting histories;
+- individual identifiers and repeated birds;
+- public Dryad data (DOI 10.5061/dryad.0zpc867d2);
+- the study reports reduced stopover duration after storm-driven habitat loss
+  while body condition did not show the same decline.
+
+This is currently the cleanest **OPPORTUNITY_LOSS_BEHAVIOR_ANCHOR** for the
+clock-portfolio framework: environmental disturbance reduced a downstream
+migration opportunity and changed stopover use.
+
+Missing for a direct portfolio-fragility test:
+- no downstream destination or breeding-arrival phase endpoint;
+- no independently reconstructed historical feedback-precision share;
+- stopover duration itself is part of the opportunity/behavioral response and
+  cannot also be used as the final timing-error endpoint.
+
+Classification: **OPPORTUNITY_LOSS_BEHAVIOR_ANCHOR**.
+
+Do not treat shorter stopover duration as direct phase-error inflation.
+
+## Tier A — selection confound natural experiment
+
+### Great knot / Yellow Sea habitat deterioration
+
+Peng et al. (2023) combine 13 years of great-knot body mass/size data at a
+Yellow Sea stopover with resighting-based survival estimates during a period of
+habitat loss/deterioration. Late-arriving birds with low fuel stores had the
+lowest apparent survival, while population mean arrival advanced and mean fuel
+load increased through time. Public data are archived under Dryad
+DOI 10.5061/dryad.4xgxd25g8.
+
+This is not a portfolio-fragility confirmation. It is a critical
+**SELECTION_REWEIGHTING_ANCHOR** showing that a disturbed population can change
+its timing distribution because some migration phenotypes disappear.
+
+Therefore a raw before/after change in population timing mean or variance
+cannot be attributed to within-individual clock fragility unless
+survival/observation reweighting is handled.
+
+Classification: **SELECTION_REWEIGHTING_ANCHOR**.
+
 ## Tier B — historical feedback architecture candidate
 
 ### Eurasian curlew long-term GPS tracks
