@@ -500,6 +500,28 @@ schedule model and an individualized feedback model on held-out downstream
 phase, using checkpoint information and actuator responses measured
 independently.
 
+
+The mean and variance signatures can also be combined. Under the same reduced
+model,
+
+\[
+\rho_V=\frac{P_{t+1}-Q_t}{P_t}
+=(1-K_t)\phi_t^2+K_t\lambda_t^2.
+\]
+
+If passive retention \(\phi_t\) and process innovation \(Q_t\) are identified
+independently, then mean retention \(\lambda_t\) together with the variance
+funnel identifies an effective checkpoint-information weight
+
+\[
+K_t=
+\frac{\phi_t^2-\rho_V}
+{\phi_t^2-\lambda_t^2}.
+\]
+
+This is a prospective functional estimate of phase information, not evidence
+that animals explicitly compute Bayesian weights.
+
 ### 4.5 The most informative checkpoint need not be the most important checkpoint
 
 The actionability theorem predicts an intermediate-stage peak in behavioral cue responsiveness. Early in the route, the signal can be too poor to guide correction. Late in the route, the signal can be excellent but response options can be exhausted.
