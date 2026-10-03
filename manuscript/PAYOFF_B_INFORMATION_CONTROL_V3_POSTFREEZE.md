@@ -392,6 +392,30 @@ two species have different phenological sensitivities: the theory identifies
 the information/control asymmetry that converts common environmental error
 into differential ecological timing.
 
+
+For a weighted interaction network with actor retentions
+\(\boldsymbol\lambda\), graph Laplacian \(L\), total edge weight \(W\), and a
+shared incoming error \(m_t\), the same result generalizes to mean squared
+edge mismatch
+
+\[
+\boxed{
+\mathcal M_{t+1}
+=
+m_t^2
+\frac{
+\boldsymbol\lambda^\top L\boldsymbol\lambda
+}{W}.
+}
+\]
+
+Thus community mismatch depends on where controller differences sit in the
+interaction network, not only on their marginal variance. If controller states
+are binary, the expression reduces exactly to the earlier network-cut geometry:
+only edges joining unlike controller states contribute. The discrete
+asynchronous-uptake result is therefore a special case of continuous
+controller discordance.
+
 ### 2.8 Information recovery can still fail to restore coordination
 
 The route-wise controller describes within-actor correction. The earlier coordination game remains relevant after actors interact.
