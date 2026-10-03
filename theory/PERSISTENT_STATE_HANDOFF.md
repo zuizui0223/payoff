@@ -218,7 +218,68 @@ Likewise, an observational conditional IFBFat coefficient does not establish
 that IFBFat itself is causal. Unmeasured annual or route conditions can create
 the same pattern.
 
-## 8. Falsifiable predictions
+## 8. Pairwise mismatch gains a third exact component
+
+For actor \(i\),
+
+\[
+e_{i,n}
+=
+\lambda_i^n e_{i,0}
++
+\beta_i s_{i,0}H_n(\lambda_i,\rho_i).
+\]
+
+Write the initial pair state as
+
+\[
+e_{1,0}
+=
+m_0+\frac{\Delta_0}{2},
+\qquad
+e_{2,0}
+=
+m_0-\frac{\Delta_0}{2}.
+\]
+
+Then
+
+\[
+\boxed{
+\Delta_n
+=
+(\lambda_1^n-\lambda_2^n)m_0
++
+\frac{\lambda_1^n+\lambda_2^n}{2}\Delta_0
++
+\beta_1s_{1,0}H_{1,n}
+-
+\beta_2s_{2,0}H_{2,n}.
+}
+\]
+
+The three terms are:
+
+1. **controller-generated mismatch** — different downstream phase retention;
+2. **entry-clock mismatch** — different phase at entry;
+3. **persistent-state mismatch** — physiological carry-over after entry.
+
+Thus even perfectly synchronized entry and identical controllers can later
+diverge if persistent physiological states differ.
+
+Conversely, when
+
+\[
+\beta_1=\beta_2=0,
+\]
+
+the result collapses exactly to the earlier serial two-clock theorem.
+
+This decomposition is especially useful conceptually because it prevents a
+conditional downstream effect of physiology from being mislabeled as a
+decision-feedback gain.
+
+## 9. Falsifiable predictions
 
 A genuine persistent-state mechanism predicts that:
 
@@ -233,7 +294,7 @@ A genuine persistent-state mechanism predicts that:
 A pure handoff predicts no such residual physiological association after entry
 phase is measured without error.
 
-## 9. Relation to the H2 null
+## 10. Relation to the H2 null
 
 The negative IFBFat × DFP moderation result is compatible with this extension.
 
@@ -250,7 +311,7 @@ can coexist naturally.
 This is a sharper distinction than treating every state effect as a feedback
 gate.
 
-## 10. Relation to clock portfolios
+## 11. Relation to clock portfolios
 
 The clock-portfolio theorem allocates precision between entry timing and
 post-entry feedback.
@@ -268,7 +329,7 @@ Persistent state adds a third pathway:
 It can therefore create covariance between entry-clock investment and
 downstream timing even when feedback gain itself is unchanged.
 
-## 11. Claim boundary
+## 12. Claim boundary
 
 Because this model was formulated after the mule-deer handoff result was known,
 those data cannot confirm the persistent-state extension.
@@ -279,7 +340,7 @@ pre-entry physiology can persist downstream.
 A direct test requires new or previously unopened repeated physiological
 measurements across checkpoints.
 
-## 12. Ecological statement
+## 13. Ecological statement
 
 The most general serial-clock principle is therefore not:
 
