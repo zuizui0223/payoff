@@ -851,11 +851,10 @@ s_{\mathrm{feedback}}
 Hence more correction checkpoints shift the optimal portfolio toward feedback.
 At \(n=0\), all precision must be supplied upstream.
 
-This gives a mechanistic reason that one-shot events and long movement
-trajectories need not evolve the same timing architecture. Emergence or an
-irreversible flowering transition can favor upstream precision; a long
-migration with many stopovers can tolerate a noisier start because error can be
-corrected repeatedly. The cost functions are a transparent witness.
+This distinguishes one-shot from checkpoint-rich timing architectures. The
+displayed (n^2) scaling assumes a fixed feedback-capacity cost; if operating
+cost accumulates per checkpoint, it becomes (n), but the shift toward
+feedback with increasing (n) remains.
 
 ### 4.9 Opportunity loss makes feedback-heavy portfolios fragile
 
