@@ -197,3 +197,56 @@ def controller_generated_mismatch(
     if n<0:
         raise ValueError("steps must be non-negative")
     return (l1**n-l2**n)*m0
+
+
+def final_phase_variance_no_innovation(
+    initial_variance: float,
+    *,
+    phase_retention: float,
+    steps: int,
+) -> float:
+    """Return final phase variance under a homogeneous serial controller.
+
+    With no new process innovation,
+
+        Var(e_n) = lambda^(2n) Var(e_0).
+
+    This makes timer precision and downstream correction partially substitutable
+    for final tracking precision.
+    """
+
+    v0=_nonnegative("initial_variance",initial_variance)
+    lam=_finite("phase_retention",phase_retention)
+    n=int(steps)
+    if n<0:
+        raise ValueError("steps must be non-negative")
+    return lam**(2*n)*v0
+
+
+def required_initial_variance_for_target(
+    target_final_variance: float,
+    *,
+    phase_retention: float,
+    steps: int,
+) -> float:
+    """Return entry-timer variance compatible with a target final variance.
+
+    For nonzero lambda,
+
+        V0 = V_target / lambda^(2n).
+
+    A strong downstream controller (small |lambda|) permits a much noisier
+    entry timer while achieving the same final precision.
+    """
+
+    vt=_nonnegative("target_final_variance",target_final_variance)
+    lam=_finite("phase_retention",phase_retention)
+    n=int(steps)
+    if n<0:
+        raise ValueError("steps must be non-negative")
+    factor=lam**(2*n)
+    if factor==0.0:
+        if vt==0.0:
+            return 0.0
+        raise ValueError("positive target variance is incompatible with zero retention under the no-innovation model")
+    return vt/factor
