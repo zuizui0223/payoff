@@ -111,7 +111,7 @@ h
 With independent \(\phi\) and \(Q\), mean plus variance retention can therefore
 separate information quality from **effective** correction strength.
 
-## 3. Readiness and decision gain are not separately identified
+## 3. Primitive readiness, opportunity and decision gain are not separately identified
 
 Because
 
@@ -119,25 +119,18 @@ Because
 h=GOg,
 \]
 
-every pair
-
-\[
-(G,g)
-=
-(G,h/G)
-\]
-
-with admissible \(G>0\) produces the same phase moments.
+any admissible triplet \((G,O,g)\) with the same product produces the same
+mean and variance phase moments.
 
 Therefore:
 
-> **Mean and variance phase tracking cannot, by themselves, distinguish a
-> weakly available strong controller from a fully available weak controller.**
-
-This is the central two-clock identification boundary.
+> **Phase tracking can identify effective enacted correction, but cannot by
+> itself tell whether weak correction reflects incomplete physiological
+> readiness, an ecological opportunity that is closing, or weak decision gain.**
 
 The earlier phase-sense inverse should consequently be interpreted as
-identifying \(K\) and \(h=GOg\) unless \(G=O=1\) is independently justified.
+identifying \(K\) and \(h=GOg\), unless the primitive gates are independently
+measured.
 
 ## 4. Readiness, opportunity, information and decision gain are multiplicative complements
 
@@ -200,35 +193,69 @@ For small actor differences around a common baseline,
 \]
 
 This is a local attribution, not an exact finite-change decomposition.
-## 5. What separates the two clocks
+## 5. What separates readiness, opportunity and decision gain
 
-One additional independent quantity is sufficient in the reduced model.
+Once \(h=GOg\) is identified, **two independent primitive quantities are
+generally required to recover all three of \(G,O,g\)**.
+
+One independent quantity is still useful, but it identifies only the product
+of the other two. For example:
 
 ### Independent readiness measure
 
-If \(G\) is measured from physiology, developmental stage, photoperiodic
-readiness, endocrine state, or experimental gating,
+If \(G\) is independently measured,
 
 \[
-\boxed{
-g=\frac{h}{G}.
-}
+Og=\frac{h}{G}.
+\]
+
+The remaining opportunity and decision gain are still confounded.
+
+### Independent opportunity measure
+
+If \(O\) is independently measured,
+
+\[
+Gg=\frac{h}{O}.
 \]
 
 ### Independent decision-gain calibration
 
-If \(g\) is estimated under a condition where the actuator is fully available
-or experimentally calibrated,
+If \(g\) is independently calibrated,
+
+\[
+GO=\frac{h}{g}.
+\]
+
+Full primitive separation follows when any two are independently known. For
+example, if \(G\) and \(O\) are measured,
 
 \[
 \boxed{
-G=\frac{h}{g}.
+g=\frac{h}{GO}.
 }
 \]
 
-Without such information, reporting separate \(G\) and \(g\) is not licensed.
+If \(G\) and \(g\) are known,
 
-## 6. Three perturbations target three different mechanisms
+\[
+\boxed{
+O=\frac{h}{Gg}.
+}
+\]
+
+If \(O\) and \(g\) are known,
+
+\[
+\boxed{
+G=\frac{h}{Og}.
+}
+\]
+
+Without this additional information, separate estimates of \(G,O,g\) are not
+licensed.
+
+## 6. Four perturbations target four different mechanisms
 
 The cleanest empirical programme uses conceptually distinct perturbations.
 
@@ -260,9 +287,9 @@ Examples:
 
 Primary target:
 
-[
+\[
 O.
-]
+\]
 
 ### C. Information perturbation
 
