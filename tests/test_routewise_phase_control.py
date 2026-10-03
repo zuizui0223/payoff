@@ -3,9 +3,11 @@ import pytest
 from src.closed_loop_tracking import simulate_closed_loop_tracking
 from src.routewise_phase_control import (
     gaussian_phase_update,
+    infer_phase_information_weight,
     open_loop_phase_variance_step,
     population_phase_variance_step,
     stationary_gaussian_phase_variance,
+    variance_retention_from_mean_phase,
     optimal_quadratic_phase_correction,
     proportional_phase_step,
     routewise_gaussian_phase_control,
@@ -288,4 +290,58 @@ def test_stationary_variance_rejects_asymptotically_unstable_feedback():
             control_gain=3.0,
             passive_retention=1.0,
             process_variance=4.0,
+        )
+
+
+def test_variance_retention_is_convex_bridge_between_passive_and_closed_loop_mean():
+    rho = variance_retention_from_mean_phase(
+        passive_retention=1.0,
+        mean_phase_retention=0.5,
+        information_weight=0.8,
+    )
+    assert rho == pytest.approx(0.2 * 1.0 + 0.8 * 0.25)
+
+
+def test_phase_sense_inverse_recovers_information_weight_and_observation_variance():
+    p = 100.0
+    phi = 1.0
+    lam = 0.5
+    k = 0.8
+    qvar = 4.0
+    rho = variance_retention_from_mean_phase(
+        passive_retention=phi,
+        mean_phase_retention=lam,
+        information_weight=k,
+    )
+    pnext = rho * p + qvar
+    inv = infer_phase_information_weight(
+        p,
+        pnext,
+        process_variance=qvar,
+        passive_retention=phi,
+        mean_phase_retention=lam,
+    )
+    assert inv.inferred_information_weight == pytest.approx(k)
+    assert inv.inferred_observation_variance == pytest.approx(25.0)
+
+
+def test_phase_sense_inverse_rejects_moments_outside_declared_feedback_envelope():
+    with pytest.raises(ValueError, match="outside"):
+        infer_phase_information_weight(
+            100.0,
+            120.0,
+            process_variance=0.0,
+            passive_retention=1.0,
+            mean_phase_retention=0.5,
+        )
+
+
+def test_phase_sense_inverse_requires_passive_closed_loop_separation():
+    with pytest.raises(ValueError, match="not identified"):
+        infer_phase_information_weight(
+            100.0,
+            100.0,
+            process_variance=0.0,
+            passive_retention=1.0,
+            mean_phase_retention=1.0,
         )
