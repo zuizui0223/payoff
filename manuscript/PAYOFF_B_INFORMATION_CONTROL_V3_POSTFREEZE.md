@@ -8,7 +8,7 @@
 
 **Aim:** Interacting species can experience the same seasonal environmental
 change yet become asynchronous. We ask whether mismatch can arise because
-different biological clocks govern **when a seasonal trajectory starts** and
+different mechanisms govern **when a seasonal trajectory starts** and
 **how its error is corrected afterward**.
 
 **Location:** General theory, with empirical modules from migratory birds and
@@ -47,7 +47,7 @@ whether that error is erased, retained or converted into new mismatch. Strong
 downstream feedback can partly substitute for precise initial timing, so final
 synchrony alone does not reveal the mechanism that produced it.
 
-**Keywords:** phenological mismatch; biological clocks; migration; information
+**Keywords:** phenological mismatch; seasonal timing; migration; information
 ecology; feedback control; recourse; climate change
 
 ---
@@ -408,7 +408,7 @@ Therefore mismatch after \(n\) checkpoints is exactly
 The first term is **controller-generated mismatch**: different downstream
 controllers convert a shared entry error into differential timing. The second
 is **timer-propagated mismatch**: a phase difference already created by the
-readiness clocks survives downstream.
+readiness timers survives downstream.
 
 Two limiting cases separate the mechanisms. If both actors share the same
 post-entry controller,
@@ -678,7 +678,7 @@ Markov handoff** as a complete description: in
 association; after within-year residualization both became unresolved.
 
 The appropriate distinction is therefore mechanistic rather than temporally
-absolute. The entry clock and the decision controller can remain different
+absolute. The entry timer and the decision controller can remain different
 mechanisms even if physiological or energetic state persists after entry. A
 post-hoc nested model writes
 
@@ -693,7 +693,7 @@ snow geese provide an independent natural anchor: premigration condition
 predicts lay date after arrival is controlled, and an unplanned reduction in
 prebreeding condition delayed laying.
 
-### 4.4 A variance funnel identifies effective feedback, not clock primitives
+### 4.4 A variance funnel identifies effective feedback, not controller primitives
 
 Individualized post-entry feedback predicts more phase-variance contraction
 than a common open-loop schedule. With incoming variance \(P_t\), information
@@ -727,7 +727,7 @@ innovation,
 V_n=\lambda^{2n}V_0,
 \]
 
-so a noisier entry clock can be offset by stronger downstream correction.
+so a noisier entry timer can be offset by stronger downstream correction.
 Arrival precision alone therefore does not identify how that precision was
 achieved.
 
@@ -807,13 +807,13 @@ V_n
 Q\sum_{j=0}^{n-1}\lambda^{2j}.
 \]
 
-Improving the entry clock reduces only the first term. Post-entry innovations
+Improving the entry timer reduces only the first term. Post-entry innovations
 can only be suppressed by downstream control. Thus feedback has a distinct
 value in long, stochastic journeys even when departure timing is precise.
 
 The serial architecture also permits formal allocation models in which entry
 precision and downstream correction substitute under historical conditions.
-Clock-portfolio optimization and opportunity-loss fragility are retained as
+Timer–feedback portfolio optimization and opportunity-loss fragility are retained as
 prospective supporting theory rather than as a co-equal main-text claim because
 no current natural dataset directly identifies the required allocation and
 opportunity-loss parameters.
@@ -892,7 +892,7 @@ For interacting species, later mismatch therefore has two separable sources:
 
 \[
 \boxed{
-\text{entry-clock mismatch}
+\text{entry-timer mismatch}
 +
 \text{controller-generated mismatch}.
 }
@@ -905,8 +905,8 @@ informed start.
 
 Information adds a second constraint: destination conditions can become easier
 to infer while opportunities for useful correction disappear. The ecologically
-important question is therefore not only whether an organism has a clock, but
-**which clock acts when, what information it has, and what can still be
+important question is therefore not only whether an organism shifts timing, but
+**which mechanism acts when, what information it has, and what can still be
 changed after it acts**.
 
 The strongest prospective test is to measure physiological readiness at entry,
