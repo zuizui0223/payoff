@@ -33,11 +33,13 @@ sharing seasonal error \(m_t\), controller asymmetry generates
 \(\Delta_{t+1}=(\lambda_1-\lambda_2)m_t\); across an interaction network,
 one-step mismatch scales with the graph Dirichlet energy of the controller
 field. Information can simultaneously become more accurate and less actionable,
-so optimal information use can precede maximal cue accuracy. A post-freeze
-reanalysis of 152 mule-deer animal-years shows a start-to-end phase-variance
-ratio of 0.249 (95% animal-cluster bootstrap 0.167–0.362) together with signed
-speed and stopover compensation, but does not identify the latent two-clock
-parameters.
+so optimal information use can precede maximal cue accuracy. Post-freeze mule-deer Source Data analyses show both layers in the same
+population: a start-to-end phase-variance ratio of 0.249 across 152
+animal-years with signed speed/stopover compensation, and a temporally prior
+March IFBFat association with migration-start timing in 62 conservative
+animal-years ((-3.97) d per unit; cluster-bootstrap 95% CI
+(-6.31) to (-0.69)). The latter is a T3 candidate readiness proxy, not a
+direct gate estimate.
 
 **Main conclusions:** Shared climate forcing need not produce shared timing.
 Species can diverge because they differ in when actions become physiologically
@@ -611,10 +613,34 @@ excluding zero.
 
 These results quantify the published convergence in continuous animal-year
 data and reproduce the signed actuator geometry required by the route-wise
-model. They do **not** identify the internal phase estimate, passive retention,
-information weight, readiness gate or decision gain. Measurement error, passive dynamics,
-selection and changing environmental variance remain alternative contributors
-to the observed variance funnel.
+model.
+
+A second post-freeze analysis uses the same verified Source Data to test the
+readiness layer.  The source study measured nutritional condition as March
+scaled IFBFat.  Of 93 animal-years with joinable IFBFat and migration timing,
+62 animal-years from 40 deer began migration strictly after March 31, so any
+March measurement necessarily preceded departure. In this temporally
+conservative subset,
+
+\[
+\frac{d\,\text{standardized start}}
+{d\,\text{scaled IFBFat}}
+=
+-3.97\ \mathrm{d/unit},
+\]
+
+with animal-cluster bootstrap 95% CI \(-6.31\) to \(-0.69\). All 40
+leave-one-animal-out slopes remained negative. The year-fixed-effect
+sensitivity was weaker (\(-2.14\), 95% bootstrap CI \(-6.89\) to \(+1.58\)),
+and the rank-based interval nearly included zero.
+
+Under the frozen evidence grades, this licenses
+**T3_CANDIDATE + D2 -> H1_CANDIDATE** for mule deer: a predeparture
+physiological state predicts migration-start timing in the same population that
+shows signed en-route correction. It does **not** show that IFBFat is a
+molecular clock, that it equals the readiness gate \(G\), or that readiness
+gates the downstream phase-feedback response. H2 and the primitive
+\(G,O,K,g,\phi,Q\) decomposition remain unidentified.
 
 ### 3.4 Bar-tailed godwits absorb early departure later in the route
 
@@ -922,20 +948,20 @@ can therefore remain strategically inaccessible.
 
 ### 4.10 Direct natural validation remains prospective
 
-The current evidence supports complementary pieces of the mechanism across
-different systems, but no natural PAYOFF-B dataset jointly identifies
+The evidence is no longer purely cross-system. Mule deer now provide a
+candidate same-population hybrid: a temporally prior physiological condition
+predicts migration-start timing, while signed phase error predicts later
+speed/stopover correction and phase convergence.
+
+However, no natural PAYOFF-B dataset jointly identifies
 
 \[
-G,\quad K,\quad g,\quad \phi,\quad Q
+G,\quad O,\quad K,\quad g,\quad \phi,\quad Q
 \]
 
-for the same focal transition.
-
-Developmental and emergence systems provide strong prior support for
-physiological/readiness timing. Mule deer provide unusually strong
-individual-level evidence for signed downstream correction and a phase-variance
-funnel. Migratory birds are the most natural hybrid target because endogenous
-readiness and repeated route decisions can coexist within one individual.
+for the same focal transition, and no current system demonstrates H2
+readiness-gated signed feedback. The mule-deer readiness association is also
+not invariant to every sensitivity analysis.
 
 The full prospective sequence is therefore
 
