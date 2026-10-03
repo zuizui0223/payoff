@@ -1,7 +1,7 @@
 # PAYOFF-B V3 scope-lock rule
 
 Date: **2026-10-03**  
-Status: **post-freeze development scope lock; frozen GEB V2 unchanged**
+Status: **superseded as the active change-control rule by `PAYOFF_B_V3_SCIENCE_FREEZE_20261003.md`; frozen GEB V2 unchanged**
 
 ## Main-text spine
 
