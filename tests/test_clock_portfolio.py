@@ -6,6 +6,7 @@ from src.clock_portfolio import (
     clock_portfolio_precision_shares,
     final_variance_from_portfolio,
     final_variance_with_process_noise,
+    feedback_majority_checkpoint_threshold,
     fragility_from_feedback_share,
     opportunity_loss_fragility,
     infinite_horizon_noise_floor,
@@ -283,3 +284,34 @@ def test_closed_form_fragility_monotone_in_opportunity_loss():
     none=fragility_from_feedback_share(P,s,retained_opportunity_fraction=0.0)
     assert full == pytest.approx(1.0)
     assert full < half < none
+
+
+def test_feedback_majority_threshold_equal_costs_is_half_checkpoint():
+    nc=feedback_majority_checkpoint_threshold(
+        timer_cost_curvature=1.0,
+        feedback_cost_curvature=1.0,
+    )
+    assert nc == pytest.approx(0.5)
+
+
+def test_precision_share_flips_across_feedback_majority_threshold():
+    a=1.0
+    b=16.0
+    nc=feedback_majority_checkpoint_threshold(
+        timer_cost_curvature=a,
+        feedback_cost_curvature=b,
+    )
+    assert nc == pytest.approx(2.0)
+    timer1,feed1=clock_portfolio_precision_shares(
+        checkpoints=2,
+        timer_cost_curvature=a,
+        feedback_cost_curvature=b,
+    )
+    timer2,feed2=clock_portfolio_precision_shares(
+        checkpoints=3,
+        timer_cost_curvature=a,
+        feedback_cost_curvature=b,
+    )
+    assert feed1 == pytest.approx(0.5)
+    assert feed2 > 0.5
+    assert timer2 < 0.5
