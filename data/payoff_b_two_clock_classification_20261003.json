@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_TWO_CLOCK_CLASSIFICATION_UPDATED_WITH_MULE_DEER_READINESS",
+  "frozen_submission_affected": false,
+  "grade_definitions": {
+    "timer": {
+      "T0": "no readiness/timer evidence",
+      "T1": "event timing compatible with developmental/physiological timing",
+      "T2": "declared pre-event driver experimentally or longitudinally shifts/predicts threshold timing",
+      "T3": "internal physiological/developmental readiness state measured before event and predicts event timing"
+    },
+    "decision": {
+      "D0": "no action-choice evidence",
+      "D1": "cue/state linked choice among available actions",
+      "D2": "signed phase-error-dependent correction",
+      "D3": "repeated infer-correct-propagate sequence with checkpoint information and downstream phase"
+    },
+    "hybrid": {
+      "H0": "not identified",
+      "H1": "T2+ and D1+ coexist in same system without direct gating evidence",
+      "H2": "readiness-gated signed feedback directly supported"
+    }
+  },
+  "systems": [
+    {
+      "system": "Ortega mule deer",
+      "timer": "T3_CANDIDATE",
+      "decision": "D2",
+      "hybrid": "H1_CANDIDATE",
+      "boundary": "March scaled IFBFat precedes migration start in 62 temporally safe animal-years and predicts standardized start in the frozen primary slope; year-FE and rank sensitivities are weaker. Signed en-route compensation is independently established. H2 readiness gating, opportunity O, K, g, phi and Q are not jointly identified."
+    },
+    {
+      "system": "Eurasian wigeon",
+      "timer": "T0",
+      "decision": "D2_COMPATIBLE",
+      "hybrid": "H0",
+      "boundary": "phase correction exists; registered predictive-connectivity modulation not supported"
+    },
+    {
+      "system": "pink-footed goose",
+      "timer": "T1",
+      "decision": "D1",
+      "hybrid": "H0_CANDIDATE",
+      "boundary": "day length and local accumulated temperature predict route-stage departure; physiological readiness not independently measured"
+    },
+    {
+      "system": "greater snow goose",
+      "timer": "T1",
+      "decision": "PROSPECTIVE",
+      "hybrid": "PROSPECTIVE",
+      "boundary": "registered GPS cue-uptake lane remains prospective"
+    },
+    {
+      "system": "bar-tailed godwit",
+      "timer": "T0",
+      "decision": "D1_COMPATIBLE",
+      "hybrid": "H0",
+      "boundary": "population-level early departure absorbed by later stopover; individual signed phase estimate not shown"
+    },
+    {
+      "system": "American redstart",
+      "timer": "T0",
+      "decision": "D1_COMPATIBLE",
+      "hybrid": "H0",
+      "boundary": "late departure followed by faster migration and survival cost; bidirectional feedback not established here"
+    },
+    {
+      "system": "Osmia lignaria greenhouse",
+      "timer": "T1",
+      "decision": "D0",
+      "hybrid": "H0",
+      "boundary": "emergence endpoint measured; warming response not detectable; no universal molecular-clock inference"
+    },
+    {
+      "system": "Pulsatilla-Osmia grasslands",
+      "timer": "T1",
+      "decision": "D0",
+      "hybrid": "H0",
+      "boundary": "temperature-linked event timing; physiological threshold and action choices not measured"
+    },
+    {
+      "system": "Corydalis-bumblebee Kudo-Cooper",
+      "timer": "T2_CANDIDATE",
+      "decision": "D0",
+      "hybrid": "H0",
+      "boundary": "snow-removal/degree-day event timing supports timer pathway; no direct internal readiness variable"
+    },
+    {
+      "system": "European tit-flycatcher laying dates",
+      "timer": "T1",
+      "decision": "UNIDENTIFIED",
+      "hybrid": "H0",
+      "boundary": "response asymmetry and widening timing gap supported; primitive G/O/K/g/phi not identified"
+    },
+    {
+      "system": "pied-flycatcher settlement manipulation",
+      "timer": "UNIDENTIFIED",
+      "decision": "D1",
+      "hybrid": "H0",
+      "boundary": "heterospecific information affects later but not earlier settlement; physiological gate not measured"
+    }
+  ],
+  "global_boundary": "Mule deer are now the strongest same-system H1 candidate (T3_CANDIDATE + D2), but no current PAYOFF-B natural system identifies H2 readiness-gated feedback or a full G/O/K/g/phi/Q decomposition in the same individuals."
+}
