@@ -133,6 +133,47 @@ PR 258  route-wise Bayesian phase control + V3 integration
 PR 260  phase-variance funnel + phase-sense inverse
 ```
 
+
+The actor-to-interaction bridge is now exact in the declared linear mean
+controller.  For two actors,
+
+\[
+\Delta_{t+1}
+=
+(\lambda_1-\lambda_2)m_t
++
+\frac{\lambda_1+\lambda_2}{2}\Delta_t
++
+\delta w_t.
+\]
+
+If the pair is currently synchronized and receives the same innovation,
+
+\[
+\Delta_{t+1}
+=
+(\lambda_1-\lambda_2)m_t.
+\]
+
+Under constant shared forcing \(w\) and stable controllers,
+
+\[
+\Delta^*
+=
+w\,
+\frac{\lambda_1-\lambda_2}
+{(1-\lambda_1)(1-\lambda_2)}.
+\]
+
+This closes the post-freeze mechanistic chain from information/control
+heterogeneity to interaction mismatch.  Direct natural pairwise
+parameterization remains prospective.
+
+\`\`\`text
+CONTROLLER_ASYMMETRY_MISMATCH = EXACT_POSTFREEZE
+DIRECT_PAIRWISE_NATURAL_TEST = PROSPECTIVE
+\`\`\`
+
 The post-freeze ecological spine is:
 
 ```text
