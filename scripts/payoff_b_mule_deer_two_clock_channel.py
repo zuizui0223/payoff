@@ -243,9 +243,30 @@ def main():
         paths=dict(workbook_sheet_paths(zf))
         rh,rd=find_table(sheet_rows(zf,paths[READINESS_SHEET],strings),{"id_yr","scaledIFBFat"})
         ph,pd=find_table(sheet_rows(zf,paths[PHASE_SHEET],strings),{"id_yr","year","DOY_Start","DFP_Start"})
-        ah,ad=find_table(sheet_rows(zf,paths[ACTUATOR_SHEET],strings),{"id_yr","rate.km.day","stopover.day"})
+        actuator_matrix=sheet_rows(zf,paths[ACTUATOR_SHEET],strings)
 
-    ready=records(rh,rd); phase=records(ph,pd); act=records(ah,ad)
+    ready=records(rh,rd); phase=records(ph,pd)
+
+    # Match the already validated Ortega variance-funnel parser: the first
+    # actuator block occupies A:G, with row 1 as a group title and row 2 as
+    # the actual header. Do not stop at internal blank rows.
+    actuator_header=[norm(x) for x in actuator_matrix[1][:7]]
+    actuator_idx={name:i for i,name in enumerate(actuator_header)}
+    act=[]
+    for row in actuator_matrix[2:]:
+        if not row:
+            continue
+        def get_a(name):
+            i=actuator_idx[name]
+            return row[i] if i<len(row) else ""
+        idyr=norm(get_a("id_yr"))
+        if not idyr:
+            continue
+        act.append({
+            "id_yr":idyr,
+            "rate.km.day":get_a("rate.km.day"),
+            "stopover.day":get_a("stopover.day"),
+        })
     fatmap={}
     for row in ready:
         i=norm(row.get("id_yr","")); fat=parse_float(row.get("scaledIFBFat",""))
@@ -283,6 +304,11 @@ def main():
         "source_sha256":sha,
         "safe_joined_rows":len(joined),
         "safe_animals":len({r["animal"] for r in joined}),
+        "parser_guard":{
+            "actuator_rows_parsed":len(act),
+            "expected_movement_rate_rows":152,
+            "parser_matches_validated_variance_funnel_layout":True
+        },
         "movement_rate":{
             "fit":fit(joined,"rate"),
             "bootstrap":bootstrap(joined,"rate",args.bootstrap_replicates,args.seed),
@@ -315,6 +341,11 @@ def main():
         and ex0(stop["raw_scaledIFBFat_ci95"])
     )
     result["interpretation_rule"]["dissociation_supported_boolean"]=supported
+
+    if len(act) != 152:
+        raise SystemExit(f"expected 152 actuator rows from validated first block, got {len(act)}")
+    if len(joined) < 20:
+        raise SystemExit(f"safe joined sample unexpectedly small: {len(joined)}")
 
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(result,indent=2)+"\n",encoding="utf-8")
