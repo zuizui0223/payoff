@@ -228,7 +228,7 @@ def separate_readiness_and_decision_gain(
     decision_gain: float | None = None,
     tolerance: float = 1e-10,
 ) -> ClockSeparation:
-    """Separate h=G*A*g conditional on an independently known opportunity A.
+    """Separate h=G*O*g conditional on an independently known opportunity O.
 
     This legacy helper treats opportunity_gate as known (default O=1). Exactly
     one of readiness_gate or decision_gain should normally be supplied. If both
@@ -381,9 +381,9 @@ def two_clock_retention_sensitivity(
         information_weight=K,
         mean_phase_retention=lam,
         d_lambda_d_phi=1.0 - G * O * g * K,
-        d_lambda_d_G=-phi * A * g * K,
+        d_lambda_d_G=-phi * O * g * K,
         d_lambda_d_O=-phi * G * g * K,
-        d_lambda_d_g=-phi * G * A * K,
+        d_lambda_d_g=-phi * G * O * K,
         d_lambda_d_K=-phi * G * O * g,
     )
 
@@ -397,7 +397,7 @@ def first_order_controller_difference(
     information_weight: float,
     delta_phi: float = 0.0,
     delta_G: float = 0.0,
-    delta_A: float = 0.0,
+    delta_O: float = 0.0,
     delta_g: float = 0.0,
     delta_K: float = 0.0,
 ) -> float:
@@ -426,7 +426,7 @@ def first_order_controller_difference(
     return (
         s.d_lambda_d_phi * _finite("delta_phi", delta_phi)
         + s.d_lambda_d_G * _finite("delta_G", delta_G)
-        + s.d_lambda_d_O * _finite("delta_A", delta_A)
+        + s.d_lambda_d_O * _finite("delta_O", delta_O)
         + s.d_lambda_d_g * _finite("delta_g", delta_g)
         + s.d_lambda_d_K * _finite("delta_K", delta_K)
     )
