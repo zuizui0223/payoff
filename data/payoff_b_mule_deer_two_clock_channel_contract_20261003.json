@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_TWO_CLOCK_CHANNEL_DISSOCIATION_CONTRACT_PREOUTCOME",
+  "frozen_submission_affected": false,
+  "source": {
+    "article": "Ortega et al. 2023 Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "source_data_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364"
+  },
+  "sample": {
+    "readiness_temporal_gate": "reuse the frozen temporally safe March-IFBFat subset: migration start strictly after March 31",
+    "expected_join": "join readiness SFig1, phase Fig1a,b;Fig3;SFig2;STables1,6, and actuator Fig4d,4e;SFig4 by id_yr"
+  },
+  "models": {
+    "movement_rate": {
+      "response": "rate.km.day",
+      "predictors": [
+        "DFP_Start",
+        "scaledIFBFat"
+      ],
+      "primary": "multiple OLS coefficients with animal-cluster bootstrap 10000"
+    },
+    "stopover": {
+      "response": "stopover.day",
+      "predictors": [
+        "DFP_Start",
+        "scaledIFBFat"
+      ],
+      "primary": "multiple OLS coefficients with animal-cluster bootstrap 10000"
+    },
+    "sensitivities": [
+      "add year fixed effects by within-year residualization of response and both predictors before multiple OLS",
+      "leave-one-animal-out coefficient ranges"
+    ]
+  },
+  "interpretation": {
+    "dissociation_pattern": "DFP_Start retains signed actuator coefficient while IFBFat interval contains zero in both downstream actuator models",
+    "if_supported": "supports H1 channel separation: physiological condition predicts readiness timing, while downstream pacing is associated with ecological phase error",
+    "if_not_supported": "retain H1_CANDIDATE from coexistence only; do not force channel separation"
+  },
+  "forbidden": [
+    "interpret IFBFat null downstream as proof of a molecular timer",
+    "interpret channel dissociation as H2 readiness-gated feedback",
+    "claim causal independence from observational coefficients",
+    "retune GEB V2 or preregistered results"
+  ]
+}
