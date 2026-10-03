@@ -380,13 +380,114 @@ Two direct departure-to-arrival effects are admissible:
 The migration-speed regressions are mechanistic anchors but are not themselves
 primary timing-propagation effects.
 
+## VANWIJK2017 — Eurasian hoopoe
+
+Source:
+van Wijk RE, Schaub M & Bauer S 2017. *Behavioral Ecology and Sociobiology*
+71:73. DOI 10.1007/s00265-017-2305-5.
+
+Design audit:
+- 57 unique full annual-cycle tracks were used;
+- six consecutive annual-cycle periods were defined from breeding through
+  autumn migration, non-breeding, spring migration and pre-breeding;
+- timing dependencies were fitted with Gaussian linear models;
+- explanatory and response variables were both in days;
+- the authors explicitly interpret coefficients near one as unabated
+  day-for-day carry-over and coefficients below one as attenuation;
+- reproductive output and territory quality were analysed as fitness outcomes;
+- a 2025 open Swiss Hoopoe geolocator data package now exists, but whether it
+  reproduces the exact processed event dates used in the 2017 analysis has not
+  yet been verified.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = CONDITIONAL_REPORTED_FIGURE_OR_RECONSTRUCTION
+INDIVIDUAL_LEVEL_DESIGN = YES
+FULL_ANNUAL_CYCLE = YES
+COMMON_DAY_UNITS = YES
+MODEL_AVERAGED_DAY_FOR_DAY_COEFFICIENTS = YES
+EXACT_BETA_SE_TABLE = NOT_YET_VERIFIED
+PUBLIC_GEOLOCATOR_PACKAGE = YES_2025
+NUMERICAL_PRIMARY_EXTRACTION = NOT_YET_OPENED
+```
+
+This paper is also high-priority prior art: it already asks where dependencies
+weaken across a full annual cycle in one species. V5 novelty cannot be framed
+as inventing that question.
+
+## OUWEHAND2017 — pied flycatcher
+
+Source:
+Ouwehand J & Both C 2017. *Journal of Animal Ecology* 86:88–97.
+DOI 10.1111/1365-2656.12599.
+Dryad DOI 10.5061/dryad.k6q68.
+
+Design audit:
+- annual-cycle timing was reconstructed from individual light-level
+  geolocators;
+- spring departure, spring arrival and multiple autumn events were measured;
+- spring migration duration was short and departure strongly predicted arrival;
+- Supporting Information Table S3 contains raw individual timing and duration
+  values for geolocator birds;
+- the Dryad archive contains the study's tracking/timing data package.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLISHED_INDIVIDUAL_TABLE
+INDIVIDUAL_LEVEL_DESIGN = YES
+COMMON_DAY_UNITS = YES
+MULTIPLE_TRANSITIONS = YES
+PUBLIC_DRYAD = YES
+SUPPLEMENT_RAW_EVENT_TABLE = YES
+NUMERICAL_PRIMARY_EXTRACTION = NOT_YET_OPENED
+```
+
+Only direct event-to-event day-scale transitions are eligible. Published
+correlations are not converted into beta_AB when the individual event dates can
+instead be re-estimated.
+
+## PEDERSEN2018 — red-backed shrike
+
+Source:
+Pedersen L, Jackson K, Thorup K & Tøttrup AP 2018. *Behavioral Ecology and
+Sociobiology* 72:139. DOI 10.1007/s00265-018-2553-z.
+Movebank Data Repository DOI 10.5441/001/1.7mf48770.
+
+Design audit:
+- 15 individuals supplied full annual-cycle timing for the population analysis;
+- seven individuals were tracked in consecutive years for repeatability;
+- the paper explicitly analysed dependencies between consecutive departure and
+  arrival events around the annual cycle;
+- all reported event correlations were positive and the paper concludes that
+  each event depended on the preceding event;
+- the underlying tracking data are publicly archived in Movebank.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = CONDITIONAL_REESTIMATE_FROM_PUBLIC_MOVEBANK
+INDIVIDUAL_LEVEL_DESIGN = YES
+FULL_ANNUAL_CYCLE = YES
+PUBLIC_MOVEBANK_ARCHIVE = YES
+PROCESSED_EVENT_DATE_TABLE = NOT_YET_VERIFIED
+REPORTED_DEPENDENCE = CORRELATION_BASED
+NUMERICAL_PRIMARY_EXTRACTION = NOT_YET_OPENED
+```
+
+The published bivariate correlations are not converted into beta_AB. This
+dataset enters the primary corpus only if the public archive or supplementary
+material supplies event dates that can be reconstructed without outcome-driven
+choices.
+
 ## Updated seed-screen tally
 
 \`\`\`text
-SCREENED = 11
-PRIMARY_ADMIT_REESTIMATE = 4
+SCREENED = 14
+PRIMARY_ADMIT_REESTIMATE = 5
 PRIMARY_ADMIT_REPORTED = 3
-PRIMARY_CONDITIONAL = 1
+PRIMARY_CONDITIONAL = 3
 PRIMARY_EXCLUDE = 3
 FOCAL_BETA_VALUES_OPENED = 6
 \`\`\`
@@ -396,6 +497,7 @@ Admitted for re-estimation:
 - SAINO2017
 - CARNEIRO2023
 - LOPEZCALDERON2024
+- OUWEHAND2017
 
 Admitted from reported coefficients:
 - SENNER2014 — two clean primary transitions opened;
@@ -404,6 +506,8 @@ Admitted from reported coefficients:
 
 Conditional pending coefficient/data verification:
 - BRIEDIS2018
+- VANWIJK2017
+- PEDERSEN2018
 
 Excluded from the primary beta synthesis under the current evidence state:
 - CATRY2013 — experimental treatment contrast, not raw propagation;
