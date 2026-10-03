@@ -34,8 +34,8 @@ controller discordance across interaction edges. Information can become more
 accurate while opportunities to use it disappear. In mule deer, a post-freeze
 Source Data analysis combines signed en-route compensation with a temporally
 prior March nutritional-condition association with migration start, making
-this the strongest current same-system two-clock candidate; readiness-gated
-feedback itself remains untested.
+this the strongest current same-system two-clock candidate; a prespecified
+IFBFat moderation test did not support readiness-gated feedback.
 
 **Main conclusions:** Shared climate forcing need not produce shared timing.
 Species can diverge because they differ in readiness, remaining opportunity,
@@ -946,7 +946,7 @@ However, no natural PAYOFF-B dataset jointly identifies
 G,\quad O,\quad K,\quad g,\quad \phi,\quad Q
 \]
 
-for the same focal transition, and no current system demonstrates H2
+for the same focal transition, and the prespecified mule-deer IFBFat moderation test did not support H2
 readiness-gated signed feedback. The mule-deer readiness association is also
 not invariant to every sensitivity analysis.
 

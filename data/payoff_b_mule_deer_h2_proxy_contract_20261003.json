@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-03",
+  "status": "POSTFREEZE_MULE_DEER_H2_PROXY_MODERATION_CONTRACT_PREOUTCOME",
+  "frozen_submission_affected": false,
+  "source": {
+    "article": "Ortega et al. 2023 Nature Communications 14:2008",
+    "doi": "10.1038/s41467-023-37750-z",
+    "source_data_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364"
+  },
+  "sample": {
+    "rule": "same temporally safe March-IFBFat subset used for readiness/channel audits: migration start strictly after March 31",
+    "rationale": "guarantees March IFBFat precedes migration start"
+  },
+  "predictors": {
+    "phase": "DFP_Start centered within analysis sample",
+    "readiness_proxy": "scaledIFBFat centered within analysis sample",
+    "interaction": "centered DFP_Start x centered scaledIFBFat"
+  },
+  "models": {
+    "movement_rate": "rate.km.day ~ phase_c + fat_c + phase_c:fat_c",
+    "stopover": "stopover.day ~ phase_c + fat_c + phase_c:fat_c"
+  },
+  "primary_uncertainty": "10000-replicate animal-cluster bootstrap",
+  "directional_prediction": {
+    "assumption": "higher March IFBFat is treated only as a readiness proxy because it predicts earlier migration start in the frozen readiness analysis",
+    "movement_rate_interaction": ">0",
+    "stopover_interaction": "<0"
+  },
+  "decision_rule": {
+    "strong_proxy_support": "both interaction coefficients have predicted sign and 95% animal-cluster bootstrap intervals exclude zero",
+    "mixed_proxy_support": "exactly one interaction passes predicted-sign interval criterion",
+    "no_proxy_support": "neither interaction passes",
+    "H2_status": "never promoted to established H2 from this observational proxy test alone"
+  },
+  "sensitivities": [
+    "within-year centered predictors and response, interaction formed from within-year centered phase and IFBFat",
+    "leave-one-animal-out interaction coefficient range"
+  ],
+  "boundaries": [
+    "IFBFat is a physiological/nutritional readiness proxy, not a molecular clock and not a direct measurement of G",
+    "interaction moderation is observational and may reflect energetic capacity or other state dependence rather than a readiness gate",
+    "all downstream actuator observations occur after migration onset",
+    "frozen GEB V2 and preregistered outcomes remain unchanged"
+  ]
+}
