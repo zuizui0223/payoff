@@ -18,7 +18,7 @@
 
 **Results:** Information quality can improve while useful response options disappear. In the reduced model, usable information value is \(r(t)[Sq(t)-B]-C(t)\); with exponential learning and recourse loss the unique zero-cost optimum is \(t^*=\log(1+\alpha/\beta)/\alpha\), generally before maximal cue accuracy. Route-wise phase dynamics obey \(e_{t+1}=\phi_t(e_t-u_t)+w_t\). A post-freeze source-data reanalysis of 152 mule-deer animal-years shows that end-of-migration phase variance was 0.249 of start variance (95% animal-cluster bootstrap 0.167–0.362; 0.294 after year centering), while movement speed increased and stopover use decreased continuously with later starting phase. These observations quantify a natural phase funnel with signed compensation but do not identify the latent controller.
 
-**Main conclusions:** Seasonal tracking is a sequential inference-and-control problem. Controller asymmetry can convert a shared seasonal error directly into interaction mismatch: organisms exposed to the same forcing can diverge because they differ in information, remaining actionability or phase correction. Restored information need not restore coordination after response options or coordinated conventions have been lost.
+**Main conclusions:** Seasonal tracking combines physiological readiness timers with information-dependent decision control. Controller asymmetry can convert a shared seasonal error directly into interaction mismatch: organisms exposed to the same forcing can diverge because they differ in readiness, information, remaining actionability or phase correction. Restored information need not restore coordination after response options or coordinated conventions have been lost.
 
 **Keywords:** phenological mismatch; migration; information ecology; feedback control; recourse; phase error; climate change
 
@@ -601,13 +601,51 @@ e_{\mathrm{out}}.
 
 A route-wise analysis should estimate signed incoming error, the information available at the checkpoint, the subsequent speed/stopover/route response and the outgoing error at the next checkpoint.
 
-### 4.3 A functional “phase sense” is testable without claiming neural calculation
+### 4.3 Seasonal timing contains two different clocks
 
-The model does not require animals to compute probabilities, Kalman gains or explicit dates. The testable biological claim is functional:
+The phrase “biological clock” can hide two distinct mechanisms.
 
-> animals behave as if they update an internal estimate of seasonal phase and alter movement according to the sign and magnitude of that estimate.
+A **developmental or physiological timer** progresses an internal state toward
+a seasonal threshold. Emergence, diapause termination, flowering readiness and
+circannual migratory disposition can be represented schematically as
 
-This can be falsified. If independently estimated incoming phase error does not predict correction direction despite unused actuator capacity, the feedback interpretation is weakened.
+\[
+\dot z=v(E_t,z),
+\qquad
+\tau=\inf\{t:z(t)\ge\Theta\}.
+\]
+
+Environmental conditions can change the timer rate or threshold crossing
+without requiring the organism to estimate whether it is currently early or
+late relative to an ecological target. In insects, photoperiodic and circadian
+clock pathways can contribute to this timer, but PAYOFF-B does not assume that
+all bee emergence is governed by one molecular oscillator.
+
+An **inferential decision clock** instead repeatedly estimates signed phase
+error and chooses a correction:
+
+\[
+\hat e_t=E[e_t\mid I_t],
+\qquad
+u_t=\pi_t(\hat e_t,A_t).
+\]
+
+This is the functional “Mikawa-Anjo clock”: a route checkpoint at which an
+animal behaves as if it assesses whether it is early or late and changes speed,
+stopover duration, route or departure accordingly.
+
+Migratory birds can contain **both layers**. Endogenous circannual and
+photoperiodic programmes can create migratory readiness or a broad departure
+window, while weather, fuel state and en-route information govern repeated
+decisions after that gate opens. The developmental layer therefore helps
+determine which actions are available; the decision layer determines which
+available action is taken.
+
+This distinction is empirically testable. A developmental timer predicts
+cue-dependent threshold timing with little signed post-event correction. A
+decision controller predicts opposite responses to early versus late phase
+error and can generate a downstream phase-variance funnel. The same observed
+phenological shift can therefore arise from different clock architectures.
 
 ### 4.4 A variance funnel distinguishes individualized feedback from a common schedule
 
