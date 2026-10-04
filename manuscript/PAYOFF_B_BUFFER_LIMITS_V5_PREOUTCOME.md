@@ -2,17 +2,19 @@
 
 ## A comparative synthesis of temporal buffering in migratory birds
 
-**PAYOFF-B Paper 2 — V5 PREOUTCOME comparative draft**  
+**PAYOFF-B Paper 2 — V5 stopped comparative provenance draft**  
 **Date:** 2026-10-03  
-**Status:** novelty hold as of 2026-10-04. Nine source-faithful effects from five biological cohorts are retained as provenance, but H1/H2 must not be run until the accepted 2026 Nature Ecology & Evolution paper `Temporal links in avian migration schedules across the annual cycle` is audited for overlap.
+**Status:** publication branch stopped on 2026-10-05 after prior-art collision resolution. Nine source-faithful effects from five biological cohorts remain provenance; H1/H2 were never run.
 
-> **Novelty hold.** A current-literature check identified an accepted/in-press
-> 2026 *Nature Ecology & Evolution* study, Brlík et al., *Temporal links in
-> avian migration schedules across the annual cycle*, plus an associated public
-> Zenodo dataset (10.5281/zenodo.18175801). Its title and indexed problem
-> statement overlap directly with the candidate V5 contribution. The present
-> draft is therefore not an active submission candidate until that collision is
-> resolved. See `docs/PAYOFF_B_V5_NEE_2026_COLLISION_HOLD_20261004.md`.
+> **Stopped novelty route.** A 2023 EOU congress abstract from Brlík,
+> Procházka, Hahn and Norris already reports a multi-species annual-cycle
+> analysis of more than 2,000 individuals from 62 passerine and near-passerine
+> species, with strong temporal links across migratory periods and weak links
+> across the stationary non-breeding period. The accepted/in-press 2026
+> *Nature Ecology & Evolution* paper, *Temporal links in avian migration
+> schedules across the annual cycle*, is the later publication lineage of that
+> question. This directly occupies the biological contrast underlying V5 H1.
+> See `docs/PAYOFF_B_V5_COLLISION_RESOLUTION_20261005.md`.
 
 ## Abstract
 
