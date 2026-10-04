@@ -4,7 +4,15 @@
 
 **PAYOFF-B Paper 2 — V5 PREOUTCOME comparative draft**  
 **Date:** 2026-10-03  
-**Status:** prospective comparative synthesis; extraction contract frozen before focal comparative outcomes.
+**Status:** novelty hold as of 2026-10-04. Nine source-faithful effects from five biological cohorts are retained as provenance, but H1/H2 must not be run until the accepted 2026 Nature Ecology & Evolution paper `Temporal links in avian migration schedules across the annual cycle` is audited for overlap.
+
+> **Novelty hold.** A current-literature check identified an accepted/in-press
+> 2026 *Nature Ecology & Evolution* study, Brlík et al., *Temporal links in
+> avian migration schedules across the annual cycle*, plus an associated public
+> Zenodo dataset (10.5281/zenodo.18175801). Its title and indexed problem
+> statement overlap directly with the candidate V5 contribution. The present
+> draft is therefore not an active submission candidate until that collision is
+> resolved. See `docs/PAYOFF_B_V5_NEE_2026_COLLISION_HOLD_20261004.md`.
 
 ## Abstract
 
@@ -32,9 +40,7 @@ opportunity to absorb delay. A secondary fitness layer asks whether delays that
 survive to the last pre-breeding transition are more likely to carry
 reproductive or survival consequences.
 
-**Status:** No comparative outcome has yet been opened. The study is
-prospectively defined in
-`data/payoff_b_buffer_limits_meta_contract_20261003.json`.
+**Status:** Nine individual transition effects have been opened under the frozen contract, but no H1/H2 comparative model has been run. Further corpus extraction and all comparative modelling are paused pending the 2026 Nature Ecology & Evolution novelty-collision audit.
 
 ---
 
