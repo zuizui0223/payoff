@@ -22,21 +22,27 @@ H2 remains closed unless there are:
 
 ## Current opened corpus
 
-Numerical outcomes remain exactly:
+Numerical outcomes currently are:
 
 ```text
-OPENED_EFFECTS = 6
-OPENED_UNIQUE_DATASETS = 3
-OPENED_ACTIVE_DATASETS = 2
+OPENED_EFFECTS = 9
+OPENED_STUDY_IDS = 4
+OPENED_BIOLOGICAL_DATASETS_OR_COHORTS = 5
+OPENED_ACTIVE_DATASETS = 4
 OPENED_STATIONARY_DATASETS = 2
 H1 = NOT_RUN
 H2 = NOT_RUN
 ```
 
-The three opened biological datasets are:
-- SENNER2014;
-- CONKLIN2012;
-- BRIEDIS_SPRINT2018.
+The opened biological datasets/cohorts are:
+- SENNER2014 Hudsonian godwit;
+- CONKLIN2012 bar-tailed godwit;
+- BRIEDIS_SPRINT2018 collared flycatcher;
+- JAHN2013 Western Kingbird;
+- JAHN2013 Scissor-tailed Flycatcher.
+
+Jahn 2013 contributes two species-specific biological cohorts but remains one
+study-level cluster in any future meta-regression.
 
 ## Admitted raw-data / individual-table candidates
 
@@ -83,9 +89,11 @@ These are **capacity candidates, not counted gate passes**.
 
 ## Effect-count capacity
 
-The current six opened effects plus the multiple sequential transitions
+The current nine opened effects plus the multiple sequential transitions
 available in GOW2019, CARNEIRO2023 and LOPEZCALDERON2024 make the 20-effect
-threshold plausible. However, no effect is counted until:
+threshold plausible. The active-migration independence gate is now one cohort
+short of its minimum, whereas the stationary side remains the principal
+constraint. However, no effect is counted until:
 
 1. the exact paired event dates are obtained;
 2. the transition class is fixed without looking at beta;
@@ -107,6 +115,10 @@ This is an access state, not evidence for or against H1/H2.
 
 ```text
 V5_H1_CAPACITY = PROVISIONALLY_FEASIBLE
+V5_H1_EFFECTS = 9_OF_20_MINIMUM
+V5_H1_UNIQUE_COHORTS = 5_OF_10_MINIMUM
+V5_H1_ACTIVE_COHORTS = 4_OF_5_MINIMUM
+V5_H1_STATIONARY_COHORTS = 2_OF_5_MINIMUM
 V5_H2_CAPACITY = PROVISIONALLY_FEASIBLE_BUT_STATIONARY_LIMITED
 V5_STABILITY_GATE = NOT_YET_PASSED
 V5_H1_MODEL = DO_NOT_RUN
