@@ -546,13 +546,110 @@ This cohort is an independent active-migration candidate, subject to the V5
 duplicate-data check against multi-species syntheses that later reused the same
 tracking records.
 
+## LEMKE2013 — great reed warbler
+
+Source:
+Lemke HW et al. 2013. *PLoS ONE* 8:e79209.
+DOI 10.1371/journal.pone.0079209.
+
+Design audit:
+- complete annual-cycle geolocator data were available for six males, with
+  additional partial autumn data;
+- spring departure from the final wintering site and breeding-ground arrival
+  were both measured for the same individuals;
+- the article reports only a Spearman correlation for the spring
+  departure-to-arrival relationship (r_s=0.94, n=6), which is ineligible as a
+  V5 primary effect;
+- public Supplementary Table S3 is an XLSX containing individual annual-cycle
+  geolocator event data, so the raw day-for-day slope can be re-estimated
+  without converting the correlation.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLIC_INDIVIDUAL_DATA
+TRANSITION_CLASS = ACTIVE_SPRING_MIGRATION
+INDIVIDUAL_LEVEL_DESIGN = YES
+COMMON_DAY_UNITS = YES
+PUBLIC_INDIVIDUAL_EVENT_TABLE = YES
+REPORTED_PRIMARY_EFFECT = CORRELATION_ONLY_INELIGIBLE
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+```
+
+The autumn breeding-departure to first-winter-arrival transition may also be
+estimable from Table S3 but must be screened separately for biological
+comparability and missingness.
+
+## CALLO2013 — red-eyed vireo
+
+Source:
+Callo PA, Morton ES & Stutchbury BJM. 2013. *The Auk* 130:240–246.
+DOI 10.1525/auk.2013.12213.
+
+Design audit:
+- ten males returned with usable geolocator data;
+- departure from South America and breeding-ground arrival were measured on the
+  same birds;
+- the paper reports a strong spring departure-to-arrival correlation
+  (r=0.81, p=0.002) despite long and variable stopovers;
+- no verified raw unstandardized beta with uncertainty or public individual
+  timing table was located in the current screen.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = CONDITIONAL_RAW_DATA_OR_COMPATIBLE_BETA_REQUIRED
+INDIVIDUAL_LEVEL_DESIGN = YES
+TRANSITION_CLASS = ACTIVE_SPRING_MIGRATION
+REPORTED_CORRELATION = YES_INELIGIBLE
+REPORTED_RAW_BETA_SE = NO_CONFIRMED
+PUBLIC_INDIVIDUAL_TABLE = NOT_CONFIRMED
+NUMERICAL_PRIMARY_EXTRACTION = PROHIBITED_CURRENT_EVIDENCE
+```
+
+Correlation is not converted into `beta_AB`.
+
+## JAHN2013 — Tyrannus flycatchers
+
+Source:
+Jahn AE et al. 2013. *The Auk* 130:247–257.
+DOI 10.1525/auk.2013.13010.
+
+Design audit:
+- the paper tracks Eastern Kingbirds, Western Kingbirds and Scissor-tailed
+  Flycatchers from distinct breeding cohorts;
+- published Table 1 lists individual fall departure, winter arrival, spring
+  departure and breeding arrival dates;
+- spring sample sizes include at least seven Eastern Kingbird records and six
+  Western Kingbird records with sufficient timing data;
+- the article reports only correlations for the spring relationships
+  (Eastern Kingbird r=0.55; Western Kingbird r=0.94), not the V5 raw slope;
+- because the individual dates are published, species-specific day-for-day
+  slopes can in principle be re-estimated directly from Table 1.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLISHED_INDIVIDUAL_TABLE
+TRANSITION_CLASS = ACTIVE_SPRING_MIGRATION
+MULTISPECIES = YES
+INDEPENDENCE_UNIT = SPECIES_BY_BREEDING_COHORT
+COMMON_DAY_UNITS = YES
+PUBLISHED_INDIVIDUAL_EVENT_DATES = YES
+REPORTED_PRIMARY_EFFECT = CORRELATION_ONLY_INELIGIBLE
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+```
+
+Each species/population must separately satisfy the final n/missingness rule
+before counting as an independent active dataset.
+
 ## Updated seed-screen tally
 
 ```text
-SCREENED = 16
-PRIMARY_ADMIT_REESTIMATE = 5
+SCREENED = 19
+PRIMARY_ADMIT_REESTIMATE = 7
 PRIMARY_ADMIT_REPORTED = 3
-PRIMARY_CONDITIONAL = 2
+PRIMARY_CONDITIONAL = 3
 PRIMARY_EXCLUDE = 5
 PRIOR_ART_NONINDEPENDENT = 1
 FOCAL_BETA_VALUES_OPENED = 6
@@ -560,6 +657,8 @@ FOCAL_BETA_VALUES_OPENED = 6
 
 Admitted for re-estimation:
 - GOW2019
+- LEMKE2013
+- JAHN2013
 - OUWEHAND2017
 - SAINO2017
 - CARNEIRO2023
@@ -572,6 +671,7 @@ Admitted from reported coefficients:
 
 Conditional pending coefficient/data verification:
 - BRIEDIS2018
+- CALLO2013
 - VANWIJK2017
 
 Excluded from the primary beta synthesis under the current evidence state:
