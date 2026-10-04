@@ -630,18 +630,31 @@ Design audit:
 Admission status:
 
 ```text
-PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLISHED_INDIVIDUAL_TABLE
-TRANSITION_CLASS = ACTIVE_SPRING_MIGRATION
+PRIMARY_STATUS = PARTIALLY_OPENED_FROM_PUBLISHED_INDIVIDUAL_TABLE
 MULTISPECIES = YES
 INDEPENDENCE_UNIT = SPECIES_BY_BREEDING_COHORT
 COMMON_DAY_UNITS = YES
 PUBLISHED_INDIVIDUAL_EVENT_DATES = YES
 REPORTED_PRIMARY_EFFECT = CORRELATION_ONLY_INELIGIBLE
-NUMERICAL_EXTRACTION = NOT_YET_OPENED
+WESTERN_KINGBIRD_SPRING = OPENED
+WESTERN_KINGBIRD_AUTUMN = OPENED
+SCISSOR_TAILED_AUTUMN = OPENED
+SCISSOR_TAILED_SPRING = INSUFFICIENT_COMPLETE_PAIRS
+EASTERN_KINGBIRD = HOLD_RECORD_STRUCTURE_AMBIGUITY
 ```
 
-Each species/population must separately satisfy the final n/missingness rule
-before counting as an independent active dataset.
+The opened effects are recorded in
+`docs/PAYOFF_B_V5_JAHN2013_EFFECT_RECEIPT_20261004.md` and the cumulative
+effect file `data/payoff_b_buffer_limits_effects_v0_2_20261004.csv`.
+
+Western Kingbird spring provides a source-faithfulness check: the six complete
+pairs reproduce the published departure-arrival correlation (r≈0.94) before
+the raw V5 slope is estimated.
+
+Eastern Kingbird is held because one bird contributes two years and the table
+also includes an Oklahoma individual among the primarily Nebraska cohort.
+No post-hoc choice of repeated year, averaging rule or population pooling is
+made.
 
 ## Updated seed-screen tally
 
@@ -652,7 +665,7 @@ PRIMARY_ADMIT_REPORTED = 3
 PRIMARY_CONDITIONAL = 3
 PRIMARY_EXCLUDE = 5
 PRIOR_ART_NONINDEPENDENT = 1
-FOCAL_BETA_VALUES_OPENED = 6
+FOCAL_BETA_VALUES_OPENED = 9
 ```
 
 Admitted for re-estimation:
