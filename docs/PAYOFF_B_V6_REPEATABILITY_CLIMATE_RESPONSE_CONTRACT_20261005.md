@@ -1,6 +1,6 @@
 # PAYOFF-B V6 prospective contract — 2026-10-05
 
-Status: **PREOUTCOME; NO FRANKLIN–LIU MATCH OR RESULT OPENED**
+Status: **CLOSED PREOUTCOME on construct-validity/data-availability grounds; no Franklin–Liu match or focal result was opened. See `PAYOFF_B_V6_CONSTRUCT_VALIDITY_AUDIT_20261005.md`.**
 
 ## 1. Field question
 
