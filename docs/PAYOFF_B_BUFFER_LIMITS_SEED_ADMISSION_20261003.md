@@ -380,19 +380,286 @@ Two direct departure-to-arrival effects are admissible:
 The migration-speed regressions are mechanistic anchors but are not themselves
 primary timing-propagation effects.
 
+## VANWIJK2017 — Eurasian hoopoe
+
+Source:
+van Wijk RE, Schaub M & Bauer S. 2017. *Behavioral Ecology and
+Sociobiology* 71:73.
+DOI 10.1007/s00265-017-2305-5.
+
+Design audit:
+- 57 unique first annual-cycle tracks were retained from a five-year hoopoe
+  study;
+- timing and duration of successive breeding, migration and non-breeding
+  activities were analyzed in days;
+- breeding phenology, territory quality and fledgling production were linked to
+  the tracked individuals;
+- the paper explicitly interprets timing coefficients below one as weakening
+  carry-over through the annual cycle;
+- the focal dependency analysis uses model-averaged coefficients conditional
+  on multiple preceding activities rather than the simple pairwise V5 slope by
+  default;
+- the 2025 public Swiss-hoopoe geolocator package
+  (Zenodo 10.5281/zenodo.15260024) provides tracks and tag data, but a matching
+  public table of all breeding-event dates needed for direct V5 re-estimation
+  was not confirmed in the present audit.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = CONDITIONAL_REPORTED_OR_RAW_DATA
+INDIVIDUAL_LEVEL_DESIGN = YES
+COMMON_DAY_UNITS = YES
+FITNESS_LAYER = YES
+PUBLISHED_COEFFICIENTS = MODEL_AVERAGED_CONDITIONAL
+PUBLIC_GEOLOCATOR_PACKAGE = YES
+PUBLIC_MATCHED_BREEDING_EVENT_TABLE = NOT_CONFIRMED
+NUMERICAL_PRIMARY_EXTRACTION = NOT_YET_OPENED
+```
+
+Do not treat the dependency matrix or a conditional model-averaged coefficient
+as the primary pairwise `beta_AB` without demonstrating that the estimand
+matches the frozen V5 definition.
+
+## MEIER2020 — alpine swift
+
+Source:
+Meier CM et al. 2020. *Journal of Avian Biology*.
+DOI 10.1111/jav.02515.
+
+Design audit:
+- 215 individuals from four populations were tracked with geolocators;
+- four major annual-cycle event dates were modeled;
+- previous-stage timing was included to test carry-over;
+- all variables were z-transformed before the reported models, so the published
+  previous-stage effects are standardized rather than day-for-day slopes.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = EXCLUDE_PRIMARY_CURRENT_EVIDENCE
+INDIVIDUAL_LEVEL_DESIGN = YES
+SEQUENTIAL_TIMING = YES
+REPORTED_PREVIOUS_STAGE_EFFECT = YES
+REPORTED_RAW_DAY_DAY_BETA = NO
+STANDARDIZED_EFFECT_ONLY = YES
+NUMERICAL_PRIMARY_EXTRACTION = PROHIBITED_CURRENT_EVIDENCE
+```
+
+The standardized carry-over coefficients must not be converted into raw
+propagation coefficients. This system can reopen only if individual event dates
+are independently located.
+
+## BRIEDIS_MULTI2019 — 14-species Afro-Palearctic synthesis
+
+Source:
+Briedis M et al. 2019. *Proceedings of the Royal Society B*
+286:20182821.
+DOI 10.1098/rspb.2018.2821.
+Dryad 10.5061/dryad.t78400r.
+
+Design audit:
+- more than 350 migration tracks across 14 long-distance migrant species;
+- departure and arrival timing were linked within autumn and spring;
+- the public database is a useful source map for underlying cohorts;
+- the dataset combines cohorts that also appear in primary species/population
+  papers and therefore is not an independent biological dataset for V5.
+
+Admission status:
+
+```text
+ROLE = HIGH_PRIORITY_PRIOR_ART_AND_SOURCE_MAP
+MULTISPECIES_CARRYOVER = YES
+PUBLIC_DATABASE = YES
+PRIMARY_INDEPENDENCE_UNIT = NO
+COUNT_AS_NEW_DATASET = NO
+DOUBLE_COUNT_WITH_PRIMARY_STUDIES = PROHIBITED
+```
+
+This study further closes any claim that multi-species departure-to-arrival
+carry-over is new. Its value for V5 is discovery and deduplication of source
+cohorts.
+
+## FAYET2016 — Manx shearwater experiment
+
+Source:
+Fayet AL et al. 2016. *Journal of Animal Ecology* 85:1516–1527.
+DOI 10.1111/1365-2656.12580.
+Dryad 10.5061/dryad.32kc7.
+
+Design audit:
+- reproductive effort was manipulated experimentally by cross-fostering chicks;
+- adults were followed through migration and wintering with geolocators;
+- later breeding phenology and breeding success were measured;
+- public Dryad data include full annual-cycle geolocator and metadata files;
+- the central causal estimand is treatment contrast / carry-over from
+  reproductive effort rather than an upstream-date to downstream-date
+  day-for-day slope.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = EXCLUDE_PRIMARY_INTERVENTION_CONTRAST
+EXPERIMENTAL_CARRYOVER = YES
+FULL_ANNUAL_CYCLE_TRACKING = YES
+FITNESS_LAYER = YES
+RAW_PAIRWISE_BETA = NOT_CONFIRMED
+SECONDARY_MECHANISTIC_LAYER = ELIGIBLE
+```
+
+The strong experimental design does not override the common-estimand rule.
+
+## OUWEHAND2017 — Dutch pied flycatcher
+
+Source:
+Ouwehand J & Both C. 2017. *Journal of Animal Ecology* 86:88–97.
+DOI 10.1111/1365-2656.12599.
+Dryad 10.5061/dryad.k6q68.
+
+Design audit:
+- individual light-level geolocators were used to infer wintering-ground
+  departure and breeding-ground arrival;
+- spring migration duration was available for the same tracked birds;
+- the paper reports a strong positive departure-to-arrival relationship and
+  concludes that variation in spring arrival was caused by variation in
+  African departure rather than migration speed;
+- the public Dryad repository contains the timing/geolocator data used in the
+  analysis;
+- the currently retrieved article text does not expose a verified
+  unstandardized pairwise slope with uncertainty, so no numerical V5 effect is
+  copied from prose or figure appearance.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLIC_INDIVIDUAL_DATA
+TRANSITION_CLASS = ACTIVE_SPRING_MIGRATION
+INDIVIDUAL_LEVEL_DESIGN = YES
+COMMON_DAY_UNITS = YES
+PUBLIC_RAW_DATA = YES
+DRYAD_DOI = 10.5061/dryad.k6q68
+REPORTED_RAW_BETA_SE = NOT_VERIFIED
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+```
+
+This cohort is an independent active-migration candidate, subject to the V5
+duplicate-data check against multi-species syntheses that later reused the same
+tracking records.
+
+## LEMKE2013 — great reed warbler
+
+Source:
+Lemke HW et al. 2013. *PLoS ONE* 8:e79209.
+DOI 10.1371/journal.pone.0079209.
+
+Design audit:
+- complete annual-cycle geolocator data were available for six males, with
+  additional partial autumn data;
+- spring departure from the final wintering site and breeding-ground arrival
+  were both measured for the same individuals;
+- the article reports only a Spearman correlation for the spring
+  departure-to-arrival relationship (r_s=0.94, n=6), which is ineligible as a
+  V5 primary effect;
+- public Supplementary Table S3 is an XLSX containing individual annual-cycle
+  geolocator event data, so the raw day-for-day slope can be re-estimated
+  without converting the correlation.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLIC_INDIVIDUAL_DATA
+TRANSITION_CLASS = ACTIVE_SPRING_MIGRATION
+INDIVIDUAL_LEVEL_DESIGN = YES
+COMMON_DAY_UNITS = YES
+PUBLIC_INDIVIDUAL_EVENT_TABLE = YES
+REPORTED_PRIMARY_EFFECT = CORRELATION_ONLY_INELIGIBLE
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+```
+
+The autumn breeding-departure to first-winter-arrival transition may also be
+estimable from Table S3 but must be screened separately for biological
+comparability and missingness.
+
+## CALLO2013 — red-eyed vireo
+
+Source:
+Callo PA, Morton ES & Stutchbury BJM. 2013. *The Auk* 130:240–246.
+DOI 10.1525/auk.2013.12213.
+
+Design audit:
+- ten males returned with usable geolocator data;
+- departure from South America and breeding-ground arrival were measured on the
+  same birds;
+- the paper reports a strong spring departure-to-arrival correlation
+  (r=0.81, p=0.002) despite long and variable stopovers;
+- no verified raw unstandardized beta with uncertainty or public individual
+  timing table was located in the current screen.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = CONDITIONAL_RAW_DATA_OR_COMPATIBLE_BETA_REQUIRED
+INDIVIDUAL_LEVEL_DESIGN = YES
+TRANSITION_CLASS = ACTIVE_SPRING_MIGRATION
+REPORTED_CORRELATION = YES_INELIGIBLE
+REPORTED_RAW_BETA_SE = NO_CONFIRMED
+PUBLIC_INDIVIDUAL_TABLE = NOT_CONFIRMED
+NUMERICAL_PRIMARY_EXTRACTION = PROHIBITED_CURRENT_EVIDENCE
+```
+
+Correlation is not converted into `beta_AB`.
+
+## JAHN2013 — Tyrannus flycatchers
+
+Source:
+Jahn AE et al. 2013. *The Auk* 130:247–257.
+DOI 10.1525/auk.2013.13010.
+
+Design audit:
+- the paper tracks Eastern Kingbirds, Western Kingbirds and Scissor-tailed
+  Flycatchers from distinct breeding cohorts;
+- published Table 1 lists individual fall departure, winter arrival, spring
+  departure and breeding arrival dates;
+- spring sample sizes include at least seven Eastern Kingbird records and six
+  Western Kingbird records with sufficient timing data;
+- the article reports only correlations for the spring relationships
+  (Eastern Kingbird r=0.55; Western Kingbird r=0.94), not the V5 raw slope;
+- because the individual dates are published, species-specific day-for-day
+  slopes can in principle be re-estimated directly from Table 1.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLISHED_INDIVIDUAL_TABLE
+TRANSITION_CLASS = ACTIVE_SPRING_MIGRATION
+MULTISPECIES = YES
+INDEPENDENCE_UNIT = SPECIES_BY_BREEDING_COHORT
+COMMON_DAY_UNITS = YES
+PUBLISHED_INDIVIDUAL_EVENT_DATES = YES
+REPORTED_PRIMARY_EFFECT = CORRELATION_ONLY_INELIGIBLE
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+```
+
+Each species/population must separately satisfy the final n/missingness rule
+before counting as an independent active dataset.
+
 ## Updated seed-screen tally
 
-\`\`\`text
-SCREENED = 11
-PRIMARY_ADMIT_REESTIMATE = 4
+```text
+SCREENED = 19
+PRIMARY_ADMIT_REESTIMATE = 7
 PRIMARY_ADMIT_REPORTED = 3
-PRIMARY_CONDITIONAL = 1
-PRIMARY_EXCLUDE = 3
+PRIMARY_CONDITIONAL = 3
+PRIMARY_EXCLUDE = 5
+PRIOR_ART_NONINDEPENDENT = 1
 FOCAL_BETA_VALUES_OPENED = 6
-\`\`\`
+```
 
 Admitted for re-estimation:
 - GOW2019
+- LEMKE2013
+- JAHN2013
+- OUWEHAND2017
 - SAINO2017
 - CARNEIRO2023
 - LOPEZCALDERON2024
@@ -404,11 +671,18 @@ Admitted from reported coefficients:
 
 Conditional pending coefficient/data verification:
 - BRIEDIS2018
+- CALLO2013
+- VANWIJK2017
 
 Excluded from the primary beta synthesis under the current evidence state:
 - CATRY2013 — experimental treatment contrast, not raw propagation;
 - ARCTIC_SKUA2024 — no directly reported event-to-event beta with admissible uncertainty confirmed;
-- BLACKTAILED2011 — Table 2 lacks raw beta and SE.
+- BLACKTAILED2011 — Table 2 lacks raw beta and SE;
+- MEIER2020 — reported previous-stage effects are standardized;
+- FAYET2016 — experimental treatment contrast rather than raw timing propagation.
+
+Prior-art/source-map only:
+- BRIEDIS_MULTI2019 — multi-species carry-over using overlapping source cohorts; do not count as an independent dataset.
 
 ## Remaining seed screen
 
