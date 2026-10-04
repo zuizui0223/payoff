@@ -1,6 +1,34 @@
 # PAYOFF-B V5 novelty audit — 2026-10-03
 
-Status: **PREOUTCOME NOVELTY BOUNDARY; focal comparative outcomes unopened**
+Status: **SUPERSEDED FOR ACTIVE NOVELTY DECISION BY 2026 NEE COLLISION HOLD; H1/H2 unopened**
+
+## 2026-10-04 collision update
+
+After this audit was written, a current-literature check identified the
+accepted/in-press *Nature Ecology & Evolution* paper **Brlík et al. 2026,
+"Temporal links in avian migration schedules across the annual cycle"**, with
+an associated public Zenodo dataset (10.5281/zenodo.18175801).
+
+Its title and publicly indexed problem statement overlap directly with the only
+remaining V5 novelty claim: comparative annual-cycle temporal linkage and
+schedule flexibility.
+
+The accepted manuscript / complete code-data package has not yet been fully
+inspectable in the current execution environment, so exact duplication is not
+asserted. Nevertheless, novelty is no longer provisionally defensible by
+absence-of-literature search alone.
+
+Active novelty decisions are governed by:
+
+`docs/PAYOFF_B_V5_NEE_2026_COLLISION_HOLD_20261004.md`
+
+Until that hold is resolved:
+
+```text
+V5_NOVELTY_STATUS = HOLD_2026_NEE_COLLISION
+V5_H1 = DO_NOT_RUN
+V5_H2 = DO_NOT_RUN
+```
 
 ## Question being audited
 

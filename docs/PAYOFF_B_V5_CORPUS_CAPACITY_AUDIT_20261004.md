@@ -1,6 +1,6 @@
 # PAYOFF-B V5 corpus-capacity audit — 2026-10-04
 
-Status: **PRE-MODEL CAPACITY AUDIT; H1/H2 UNOPENED**
+Status: **CAPACITY RESULT RETAINED, BUT ACTIVE NEXT STEP SUPERSEDED BY 2026 NEE NOVELTY-COLLISION HOLD; H1/H2 UNOPENED**
 
 This audit asks only whether the frozen V5 stability gate appears reachable
 without changing the estimand or relaxing admission rules.
@@ -126,5 +126,4 @@ V5_H2_MODEL = DO_NOT_RUN
 PRIMARY_BOTTLENECK = RAW_EFFECT_EXTRACTION_AND_DEDUPLICATION
 ```
 
-The correct next step is therefore continued corpus extraction and
-deduplication, not model fitting and not theory revision.
+The corpus-capacity conclusion remains valid, but continued extraction is now paused. The active next step is inspection of the accepted Brlík et al. 2026 Nature Ecology & Evolution study and associated Zenodo package to determine whether V5 has a biologically distinct publication contribution. See `docs/PAYOFF_B_V5_NEE_2026_COLLISION_HOLD_20261004.md`.
