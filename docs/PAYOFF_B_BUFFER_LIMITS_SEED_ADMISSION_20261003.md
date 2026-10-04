@@ -509,11 +509,48 @@ SECONDARY_MECHANISTIC_LAYER = ELIGIBLE
 
 The strong experimental design does not override the common-estimand rule.
 
+## OUWEHAND2017 — Dutch pied flycatcher
+
+Source:
+Ouwehand J & Both C. 2017. *Journal of Animal Ecology* 86:88–97.
+DOI 10.1111/1365-2656.12599.
+Dryad 10.5061/dryad.k6q68.
+
+Design audit:
+- individual light-level geolocators were used to infer wintering-ground
+  departure and breeding-ground arrival;
+- spring migration duration was available for the same tracked birds;
+- the paper reports a strong positive departure-to-arrival relationship and
+  concludes that variation in spring arrival was caused by variation in
+  African departure rather than migration speed;
+- the public Dryad repository contains the timing/geolocator data used in the
+  analysis;
+- the currently retrieved article text does not expose a verified
+  unstandardized pairwise slope with uncertainty, so no numerical V5 effect is
+  copied from prose or figure appearance.
+
+Admission status:
+
+```text
+PRIMARY_STATUS = ADMIT_REESTIMATE_FROM_PUBLIC_INDIVIDUAL_DATA
+TRANSITION_CLASS = ACTIVE_SPRING_MIGRATION
+INDIVIDUAL_LEVEL_DESIGN = YES
+COMMON_DAY_UNITS = YES
+PUBLIC_RAW_DATA = YES
+DRYAD_DOI = 10.5061/dryad.k6q68
+REPORTED_RAW_BETA_SE = NOT_VERIFIED
+NUMERICAL_EXTRACTION = NOT_YET_OPENED
+```
+
+This cohort is an independent active-migration candidate, subject to the V5
+duplicate-data check against multi-species syntheses that later reused the same
+tracking records.
+
 ## Updated seed-screen tally
 
 ```text
-SCREENED = 15
-PRIMARY_ADMIT_REESTIMATE = 4
+SCREENED = 16
+PRIMARY_ADMIT_REESTIMATE = 5
 PRIMARY_ADMIT_REPORTED = 3
 PRIMARY_CONDITIONAL = 2
 PRIMARY_EXCLUDE = 5
@@ -523,6 +560,7 @@ FOCAL_BETA_VALUES_OPENED = 6
 
 Admitted for re-estimation:
 - GOW2019
+- OUWEHAND2017
 - SAINO2017
 - CARNEIRO2023
 - LOPEZCALDERON2024
