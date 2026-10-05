@@ -22,9 +22,11 @@ cross-validation showed that destination variability simultaneously increased
 information changed from -16.1 to +16.0 d^2, an increase of +32.1 d^2. The
 increase was positive for 139/166 spatial pairs and 25/28 species and survived
 spatial dependence, complete-window, and calendar-year omission analyses.
-Bird arrival–green-up mismatch showed no corresponding deterioration.
-Independent mule-deer data showed strong phase convergence and signed
-downstream speed and stopover adjustments.
+Bird arrival–green-up mismatch showed no corresponding deterioration, but
+routes with larger gains in forecast value did not show bird-specific mismatch
+improvement beyond fixed-arrival and permutation structural nulls. Independent
+mule-deer data showed strong phase convergence and signed downstream speed and
+stopover adjustments.
 
 We formalize these results as a sequential architecture in which seasonal
 tracking depends first on the decision-scale value of environmental information
@@ -44,9 +46,9 @@ arrives.**
 ## Evidence-status note
 
 The source–destination correlation contrast is the preregistered primary
-environmental result. Destination variance, leave-one-year-out forecasting, and
-the squared-loss information-value decomposition are explicitly posthoc
-metric-scale diagnostics.
+environmental result. Destination variance, leave-one-year-out forecasting,
+squared-loss forecast value, alternative baseline sensitivity, and the
+forecast-value-to-mismatch transfer are explicitly posthoc diagnostics.
 The mule-deer analyses are independent source-data reanalyses anchored to a
 published compensation result.
 
@@ -57,9 +59,9 @@ Article type: **Major Article**
 Current manuscript:
 `manuscript/PAYOFF_B_INFORMATION_VALUE_ACTIONABILITY_V4_3_AMNAT.md`
 
-Current approximate main-text word count: **4,716**
+Current approximate main-text word count: **4,983**
 
-Abstract word count: **162**
+Abstract word count: **191**
 
 ## Journal-facing cleanup rule
 
