@@ -199,6 +199,24 @@ def main() -> None:
             q, n = pearson_complete(a, b)
             qs, ns = spearman_complete(a, b)
 
+        # Mandatory common pre-outcome window sensitivity. For PRISM, every
+        # Nemes focal migration occurs after 2015; for BEST the frozen fallback
+        # uses its common 1981-2013 window.
+        if args.source == "prism":
+            common_years = [y for y in years if 1981 <= y <= 2015]
+        else:
+            common_years = [y for y in years if 1981 <= y <= 2013]
+
+        try:
+            ac = wide.loc[common_years, r.site_id_r1].to_numpy(dtype=float)
+            bc = wide.loc[common_years, r.site_id_r2].to_numpy(dtype=float)
+        except KeyError:
+            qc, nc = math.nan, 0
+            qcs, ncs = math.nan, 0
+        else:
+            qc, nc = pearson_complete(ac, bc)
+            qcs, ncs = spearman_complete(ac, bc)
+
         result.append({
             "motusTagID": r.motusTagID,
             "species": r.species,
@@ -209,6 +227,9 @@ def main() -> None:
             "predictability_pearson": q,
             "predictability_spearman": qs,
             "historical_n": min(n, ns),
+            "predictability_common_pearson": qc,
+            "predictability_common_spearman": qcs,
+            "common_historical_n": min(nc, ncs),
             "source": args.source,
         })
 
