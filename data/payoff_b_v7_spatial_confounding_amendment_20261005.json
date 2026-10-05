@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-05",
+  "status": "PRE_PREDICTOR_PRE_OUTCOME_SPATIAL_CONFOUNDING_AMENDMENT",
+  "timing": "Written after the schema and PRISM source gates passed but before any historical predictability value, recovery summary or H1 coefficient was opened.",
+  "reason": "Historical phenological correlation is expected to decay with spatial separation and may vary by latitude/climate regime. The frozen primary already controls route distance; additional geometry checks are added as sensitivities rather than changing the primary model.",
+  "primary_model": "unchanged",
+  "mandatory_geometry_sensitivities": [
+    "add north receiver latitude",
+    "add mean route latitude",
+    "add absolute longitudinal displacement",
+    "report Pearson correlation between predictability and route distance before H1 interpretation",
+    "if absolute correlation between predictability and distance exceeds 0.8, label H1 interpretation high-collinearity regardless of coefficient significance"
+  ],
+  "claim_rule": "A predictability association that disappears after geometry controls is interpreted as spatial-geometry dependence, not evidence that environmental information reliability itself explains catch-up.",
+  "no_outcome_driven_choice": true
+}
