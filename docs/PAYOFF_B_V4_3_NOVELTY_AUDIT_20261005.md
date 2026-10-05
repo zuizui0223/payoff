@@ -78,6 +78,26 @@ a general ecological framework. V4.3 cannot claim to introduce decision-scale
 information value or the general idea that environmental variability changes
 the value of information.
 
+### Robertson et al. 2024
+
+Robertson et al. directly compared current-year versus climatological green-up
+synchrony for 150 Western Hemisphere migratory bird species and found that most
+migrations aligned more strongly with long-term average green-up than with
+current conditions.
+
+Therefore V4.3 cannot claim novelty for:
+- contrasting current environmental conditions with climatological information
+  as candidate timing channels;
+- proposing that birds may rely more on long-term averages than current green-up;
+- the broad idea that migration flexibility can be diagnosed from current
+  versus climatological synchrony.
+
+The V4.3 environmental result is different: it asks whether adding
+**contemporaneous nonlocal source information** improves held-out prediction of
+the destination environment relative to a target-history baseline, and how that
+marginal forecast value changes between periods. It does not identify which
+information channel birds actually use.
+
 ## Candidate contribution that survives
 
 The narrow empirical contribution is the joint temporal decomposition in the
