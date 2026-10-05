@@ -1,0 +1,66 @@
+name: PAYOFF-B V7 build route predictability
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-v7-route-predictability-20261005
+    paths:
+      - "scripts/payoff_b_v7_export_route_manifest.R"
+      - "scripts/payoff_b_v7_build_route_predictability.py"
+      - "data/payoff_b_v7_usapn_source_contract_20261005.json"
+      - "data/payoff_b_v7_source_fallback_amendment_20261005.json"
+      - "docs/PAYOFF_B_V7_USAPN_SOURCE_RECEIPT_20261005.md"
+      - ".github/workflows/payoff-b-v7-build-predictability.yml"
+  workflow_dispatch:
+
+jobs:
+  build-predictability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+
+      - name: Export outcome-blind route manifest
+        run: |
+          mkdir -p outputs/payoff_b_v7_predictability
+          Rscript scripts/payoff_b_v7_export_route_manifest.R             outputs/payoff_b_v7_predictability/route_manifest.csv
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install predictor-only dependencies
+        run: python -m pip install --upgrade pip numpy pandas requests scipy rasterio
+
+      - name: Build historical PRISM route predictability
+        run: |
+          python scripts/payoff_b_v7_build_route_predictability.py             --routes outputs/payoff_b_v7_predictability/route_manifest.csv             --source prism             --output-dir outputs/payoff_b_v7_predictability/prism
+
+      - name: Guard against outcome leakage
+        shell: bash
+        run: |
+          ! head -1 outputs/payoff_b_v7_predictability/route_manifest.csv | grep -Eiq 'lag|recovery|detDay|sos_best_act|gw_rate'
+          ! head -1 outputs/payoff_b_v7_predictability/prism/route_predictability.csv | grep -Eiq 'lag|recovery|detDay|sos_best_act|gw_rate'
+          test ! -e outputs/payoff_b_v7_predictability/model_results.csv
+          test ! -e outputs/payoff_b_v7_predictability/recovery.csv
+
+      - name: Hash predictor outputs
+        run: |
+          sha256sum outputs/payoff_b_v7_predictability/prism/route_predictability.csv > outputs/payoff_b_v7_predictability/predictor_sha256.txt
+          sha256sum outputs/payoff_b_v7_predictability/prism/site_year_first_leaf.csv >> outputs/payoff_b_v7_predictability/predictor_sha256.txt
+          sha256sum outputs/payoff_b_v7_predictability/prism/source_manifest.json >> outputs/payoff_b_v7_predictability/predictor_sha256.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v7-route-predictability
+          path: |
+            outputs/payoff_b_v7_predictability/route_manifest.csv
+            outputs/payoff_b_v7_predictability/prism/route_predictability.csv
+            outputs/payoff_b_v7_predictability/prism/site_year_first_leaf.csv
+            outputs/payoff_b_v7_predictability/prism/source_manifest.json
+            outputs/payoff_b_v7_predictability/predictor_sha256.txt
+          if-no-files-found: error
