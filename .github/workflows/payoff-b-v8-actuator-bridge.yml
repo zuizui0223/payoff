@@ -25,8 +25,5 @@ jobs:
         with:
           name: payoff-b-v8-actuator-bridge
           path: |
-            outputs/payoff_b_v8_actuator_bridge_summary.csv
-            outputs/payoff_b_v8_actuator_bridge_rows.csv
-            outputs/payoff_b_v8_actuator_bridge_loo.csv
-            outputs/payoff_b_v8_actuator_bridge_bootstrap.csv
+            outputs/payoff_b_v8_actuator_bridge_*.csv
           if-no-files-found: error
