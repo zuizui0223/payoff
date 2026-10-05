@@ -1,6 +1,14 @@
 # PAYOFF-B V4.2 editorial decision — 2026-10-05
 
-Status: CURRENT SUBMISSION STRATEGY
+Status: **SUPERSEDED BY V4.3 METRIC-SCALE REINTERPRETATION**
+
+Superseding decision:
+`docs/PAYOFF_B_V4_3_EDITORIAL_DECISION_20261006.md`
+
+Reason: the V4.2 headline treated increasing source-destination rho as improved
+environmental predictability. Posthoc day-scale and cross-validated diagnostics
+show that correlation, target variability, forecast value and residual
+uncertainty must be separated. This file is retained for provenance only.
 
 ## Decision
 
