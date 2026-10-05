@@ -447,8 +447,10 @@ squared error rose from **29.5% to 78.9%**.
 
 The environmental result therefore has a different interpretation from the
 original correlation-only reading: **destination spring became more variable,
-but cross-site information became sufficiently more valuable that
-source-informed out-of-sample forecast error did not worsen detectably.**
+while contemporaneous nonlocal source information gained substantial marginal
+predictive value under the declared out-of-sample forecast.** Source-informed
+forecast error consequently did not worsen detectably despite the increase in
+destination variability.
 
 Bird tracking did not show a corresponding deterioration. In the same 150
 species-target rows, 72 unique pairs and 22 species admitted to the frozen
@@ -702,9 +704,12 @@ quickly commitment removes later options.
 ### 4.5 Limits
 
 The bird source–destination links are range-based spatial proxies, not tracked
-individual routes. They quantify environmental information potentially
+individual routes. They quantify a statistical nonlocal signal potentially
 available along a migration corridor; they do not identify the cues perceived
-or learned by individual birds.
+or learned by individual birds. Likewise, G_CV is the marginal held-out
+predictive value of adding that signal to a declared linear forecast. It is an
+operational environmental analogue of decision-scale information value, not a
+direct estimate of the expected fitness value of information to an organism.
 
 The increase in standardized coupling is the preregistered result. The
 day-scale forecast decomposition and cross-validated information value were
