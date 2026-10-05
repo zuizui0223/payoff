@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-05",
+  "status": "PRE_PREDICTOR_SOURCE_CONTRACT",
+  "project": "PAYOFF-B V7 route predictability",
+  "depends_on": "docs/PAYOFF_B_V7_NEMES_SCHEMA_RECEIPT_20261005.md",
+  "source": {
+    "provider": "USA National Phenology Network",
+    "product": "Historical Annual Spring Indices, First Leaf, PRISM",
+    "doi": "10.5066/F7SN0723",
+    "workspace": "si-x",
+    "primary_layer": "average_leaf_prism",
+    "equivalent_anomaly_layer": "leaf_anomaly_prism",
+    "spatial_resolution": "4 km / 0.0416666667 degree grid",
+    "spatial_extent": {
+      "south": 24.0625,
+      "north": 49.9375,
+      "west": -125.0208333333,
+      "east": -66.4791666666
+    },
+    "temporal_resolution": "annual",
+    "temporal_start": 1981
+  },
+  "predictability_definition": {
+    "primary": "For focal bird-year y, Pearson correlation between annual First Leaf dates at the paired south and north receiver cells using 1981 through y-1.",
+    "equivalence_note": "Using annual date rather than anomaly gives exactly the same Pearson correlation because the anomaly transformation subtracts a site-specific constant.",
+    "minimum_historical_years": 20,
+    "focal_year_excluded": true,
+    "no_bird_outcome_used_in_predictor": true
+  },
+  "mandatory_sensitivity": {
+    "common_window": "1981-2015 for every bird, because 2016 is the earliest focal tracking year",
+    "rank_measure": "Spearman correlation on the same annual values"
+  },
+  "source_coverage_gate": {
+    "first_allowed_outputs": [
+      "HTTP/WCS availability",
+      "coverage metadata",
+      "number of individual bird routes whose two receiver coordinates fall inside the PRISM spatial extent",
+      "number of unique paired routes whose two receiver coordinates fall inside the PRISM spatial extent"
+    ],
+    "minimum_individual_routes_inside_extent": 50,
+    "minimum_unique_route_pairs_inside_extent": 10,
+    "forbidden_before_source_gate_freeze": [
+      "historical raster pixel values",
+      "route predictability correlations",
+      "catch-up/recovery summaries",
+      "predictability-response coefficients"
+    ]
+  },
+  "wcs_request_rule": {
+    "service": "WCS 2.0.1",
+    "format": "image/geotiff",
+    "time_axis": "http://www.opengis.net/def/axis/OGC/0/time",
+    "request_reference": "USGS Open-File Report 2017-1003 WCS request construction"
+  },
+  "stop_rule": "If source coverage or WCS access fails, close the PRISM-primary V7 route rather than replacing the environmental predictor after outcome access."
+}
