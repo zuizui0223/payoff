@@ -171,6 +171,51 @@ This diagnostic is posthoc. It is not a replacement primary endpoint; it
 quantifies why the late-period rho increase matters on an out-of-sample
 decision scale.
 
+## D5c — squared-loss information value increased robustly
+
+To align the empirical diagnostic with the theoretical expected-loss
+definition, define cross-validated information value as
+
+    G_CV = MSE(target-trend-only) - MSE(source-informed).
+
+Positive values mean that source green-up reduces held-out squared prediction
+loss.
+
+Across all 166 unique spatial pairs:
+
+- early mean G_CV = **-16.094 d^2**;
+- late mean G_CV = **+15.987 d^2**;
+- late-minus-early change = **+32.082 d^2**;
+- pair-bootstrap 95% CI = **+21.040 to +46.796 d^2**;
+- source-cell cluster CI = **+14.495 to +55.465 d^2**;
+- target-cell cluster CI = **+19.378 to +48.528 d^2**;
+- 5-degree block CI = **+16.277 to +53.348 d^2**;
+- 10-degree block CI = **+12.382 to +63.374 d^2**.
+
+The increase is not driven only by a few extreme pairs:
+- median delta G_CV = **+15.843 d^2**;
+- 10% trimmed-mean delta G_CV = **+20.871 d^2**;
+- **139/166 = 83.7%** of pairs have positive delta G_CV.
+
+The fraction of pairs for which source information has positive held-out value
+rose from **29.5%** early to **78.9%** late.
+
+Exact-complete sensitivity:
+
+Among the 58 pairs with all 8 years observed in both windows:
+
+- early mean G_CV = **-2.655 d^2**;
+- late mean G_CV = **+25.644 d^2**;
+- change = **+28.299 d^2**;
+- pair-bootstrap 95% CI = **+20.640 to +36.638 d^2**;
+- source-cell cluster CI = **+15.612 to +44.158 d^2**;
+- target-cell cluster CI = **+16.396 to +45.449 d^2**;
+- 5-degree block CI = **+14.865 to +46.949 d^2**;
+- 10-degree block CI = **+14.591 to +55.409 d^2**.
+
+Thus the increase in decision-scale source information value is robust to
+window completeness and the existing dependence structure.
+
 ## D6 — bird arrival-green-up mismatch did not worsen on the day scale
 
 Using exactly the 150 species-target rows / 72 unique pairs / 22 species
@@ -234,8 +279,10 @@ showing that signed downstream correction exists.
 
 ## Provenance
 
-Workflow run: 37305856291
-Job: 111749247801
-Artifact: 11343269670
-Artifact SHA256:
-4a12485c7653d8c904df53ccc50c049afb0dd3e607c704b221f616f0576b3a0d
+Primary scale-diagnostic workflow: run 37305856291; artifact 11343269670.
+
+Squared-loss / exact-complete extension:
+- workflow run: 37389432690
+- artifact: 11380965912
+- artifact SHA256:
+  18a8b34abd989f09d5fd98995bf43022b1efeccff2ab4cc744fa91f7d8970ed3
