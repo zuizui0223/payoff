@@ -218,9 +218,25 @@ pair_boot_mean <- function(x, B, seed) {
 
 summary_rows <- list()
 sr <- 0L
-# Out-of-sample source value on the same day scale.
-# Positive skill means the source-informed forecast has lower RMSE than a
-# target-trend-only forecast. This is explicitly post-hoc.
+# Out-of-sample source value on the same loss scale as the theory.
+# Under squared-error loss, information value is the reduction in held-out MSE:
+#
+#   G_CV = MSE(no source) - MSE(source informed).
+#
+# Positive values mean that the source cue reduces held-out prediction loss.
+# RMSE differences are retained only as an intuitive day-scale companion.
+diag_pairs$loo_mse_early <- diag_pairs$loo_rmse_early^2
+diag_pairs$loo_mse_late <- diag_pairs$loo_rmse_late^2
+diag_pairs$loo_null_mse_early <- diag_pairs$loo_null_rmse_early^2
+diag_pairs$loo_null_mse_late <- diag_pairs$loo_null_rmse_late^2
+
+diag_pairs$loo_value_mse_early <-
+  diag_pairs$loo_null_mse_early - diag_pairs$loo_mse_early
+diag_pairs$loo_value_mse_late <-
+  diag_pairs$loo_null_mse_late - diag_pairs$loo_mse_late
+diag_pairs$delta_loo_value_mse <-
+  diag_pairs$loo_value_mse_late - diag_pairs$loo_value_mse_early
+
 diag_pairs$loo_skill_rmse_early <-
   diag_pairs$loo_null_rmse_early - diag_pairs$loo_rmse_early
 diag_pairs$loo_skill_rmse_late <-
@@ -299,28 +315,71 @@ skill_block10_ci <- cluster_boot_mean(
   DIAG_BOOT_B, DIAG_SEED + 14L
 )
 
+# Primary post-hoc information-value summary on squared-loss scale.
+value_ok <- is.finite(diag_pairs$loo_value_mse_early) &
+  is.finite(diag_pairs$loo_value_mse_late) &
+  is.finite(diag_pairs$delta_loo_value_mse)
+
+value_pair_ci <- pair_boot_mean(
+  diag_pairs$delta_loo_value_mse[value_ok],
+  DIAG_BOOT_B,
+  DIAG_SEED + 20L
+)
+value_source_ci <- cluster_boot_mean(
+  diag_pairs[value_ok, ], "delta_loo_value_mse", "source_cell",
+  DIAG_BOOT_B, DIAG_SEED + 21L
+)
+value_target_ci <- cluster_boot_mean(
+  diag_pairs[value_ok, ], "delta_loo_value_mse", "target_cell",
+  DIAG_BOOT_B, DIAG_SEED + 22L
+)
+value_block5_ci <- cluster_boot_mean(
+  diag_pairs[value_ok, ], "delta_loo_value_mse", "block5",
+  DIAG_BOOT_B, DIAG_SEED + 23L
+)
+value_block10_ci <- cluster_boot_mean(
+  diag_pairs[value_ok, ], "delta_loo_value_mse", "block10",
+  DIAG_BOOT_B, DIAG_SEED + 24L
+)
+
 forecast_skill_summary <- data.frame(
   n_pairs = sum(skill_ok),
+  loo_value_mse_early_mean =
+    mean(diag_pairs$loo_value_mse_early[value_ok]),
+  loo_value_mse_late_mean =
+    mean(diag_pairs$loo_value_mse_late[value_ok]),
+  delta_loo_value_mse_mean =
+    mean(diag_pairs$delta_loo_value_mse[value_ok]),
+  value_pair_ci_low_95 = value_pair_ci[1],
+  value_pair_ci_high_95 = value_pair_ci[2],
+  value_source_cluster_ci_low_95 = value_source_ci[1],
+  value_source_cluster_ci_high_95 = value_source_ci[2],
+  value_target_cluster_ci_low_95 = value_target_ci[1],
+  value_target_cluster_ci_high_95 = value_target_ci[2],
+  value_block5_ci_low_95 = value_block5_ci[1],
+  value_block5_ci_high_95 = value_block5_ci[2],
+  value_block10_ci_low_95 = value_block10_ci[1],
+  value_block10_ci_high_95 = value_block10_ci[2],
   loo_skill_rmse_early_mean =
     mean(diag_pairs$loo_skill_rmse_early[skill_ok]),
   loo_skill_rmse_late_mean =
     mean(diag_pairs$loo_skill_rmse_late[skill_ok]),
   delta_loo_skill_rmse_mean =
     mean(diag_pairs$delta_loo_skill_rmse[skill_ok]),
-  pair_ci_low_95 = skill_pair_ci[1],
-  pair_ci_high_95 = skill_pair_ci[2],
-  source_cluster_ci_low_95 = skill_source_ci[1],
-  source_cluster_ci_high_95 = skill_source_ci[2],
-  target_cluster_ci_low_95 = skill_target_ci[1],
-  target_cluster_ci_high_95 = skill_target_ci[2],
-  block5_ci_low_95 = skill_block5_ci[1],
-  block5_ci_high_95 = skill_block5_ci[2],
-  block10_ci_low_95 = skill_block10_ci[1],
-  block10_ci_high_95 = skill_block10_ci[2],
+  rmse_pair_ci_low_95 = skill_pair_ci[1],
+  rmse_pair_ci_high_95 = skill_pair_ci[2],
+  rmse_source_cluster_ci_low_95 = skill_source_ci[1],
+  rmse_source_cluster_ci_high_95 = skill_source_ci[2],
+  rmse_target_cluster_ci_low_95 = skill_target_ci[1],
+  rmse_target_cluster_ci_high_95 = skill_target_ci[2],
+  rmse_block5_ci_low_95 = skill_block5_ci[1],
+  rmse_block5_ci_high_95 = skill_block5_ci[2],
+  rmse_block10_ci_low_95 = skill_block10_ci[1],
+  rmse_block10_ci_high_95 = skill_block10_ci[2],
   share_source_better_early =
-    mean(diag_pairs$loo_skill_rmse_early[skill_ok] > 0),
+    mean(diag_pairs$loo_value_mse_early[value_ok] > 0),
   share_source_better_late =
-    mean(diag_pairs$loo_skill_rmse_late[skill_ok] > 0)
+    mean(diag_pairs$loo_value_mse_late[value_ok] > 0)
 )
 
 rmse_ok <- is.finite(diag_pairs$delta_rmse_in)
