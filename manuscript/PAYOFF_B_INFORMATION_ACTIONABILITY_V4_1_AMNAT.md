@@ -4,38 +4,26 @@
 
 Seasonal tracking is often framed as an information problem: more predictable
 conditions should permit organisms to time seasonal events more accurately.
-But information can matter only while actions capable of changing timing remain.
+Yet information matters only while actions capable of changing timing remain.
 We separate cue reliability from retained actionability in a serial
-information–control model. When information quality improves while
-actionability declines, usable information value can peak at an intermediate
-stage; under exponential information gain and actionability loss, the optimum
-has the closed form
-[
-t^* = log(1 + α/β) / α,
-]
-so actors exposed to the same information trajectory can optimally commit at
-different times.
+information–control model. When information improves while actionability
+declines, usable information value peaks at an intermediate stage; under
+exponential information gain and actionability loss,
+t* = log(1 + α/β)/α.
 
-We then prospectively tested the simpler information-loss explanation in
-migratory birds. Across 166 source–destination spatial pairs used by 28 species,
-detrended spring connectivity increased from 2002–2009 to 2010–2017
-(mean (Δρ = +0.369), 95% pair-bootstrap CI +0.298 to +0.436; 26/28
-species means positive), with the direction robust to source/target clustering,
-5° and 10° spatial blocking, and leave-one-year-out analyses. Yet larger
-connectivity gains did not predict larger reductions in arrival–green-up
-mismatch ((β = +0.062), 95% CI -0.014 to +0.136), and structural nulls
-reproduced the apparent positive slope. Independent mule-deer analyses show
-strong phase convergence and signed downstream speed and stopover adjustments,
-while predeparture nutritional condition is associated with migration-start
-timing.
+We prospectively tested a simpler information-loss explanation in migratory
+birds. Across 166 source–destination pairs used by 28 species, detrended spring
+connectivity increased from 2002–2009 to 2010–2017 (mean Δρ = +0.369, 95% CI
++0.298 to +0.436; 26/28 species positive) and remained positive under
+source/target clustering, spatial blocking, and year omission. Yet larger gains
+did not predict larger reductions in arrival–green-up mismatch (β = +0.062,
+95% CI -0.014 to +0.136), and structural nulls reproduced the apparent positive
+slope. Independent mule-deer analyses showed strong phase convergence and
+signed speed and stopover adjustment.
 
-Thus broad degradation of environmental predictability is not a sufficient
-explanation for mismatch in the sampled bird system. We show theoretically how
-improving information can still fail to improve tracking when response
-opportunities disappear, while the mule-deer trajectories establish that
-downstream phase correction is biologically real and signed. Seasonal tracking
-should therefore be analysed as a sequence of inference, commitment and
-correction rather than as cue accuracy alone.
+Thus broad degradation of environmental predictability is insufficient to
+explain mismatch in this bird system. Seasonal tracking should instead be
+analysed as a sequence of inference, commitment, and correction.
 
 **Keywords:** environmental predictability; phenological mismatch; seasonal
 timing; migration; actionability; feedback control
