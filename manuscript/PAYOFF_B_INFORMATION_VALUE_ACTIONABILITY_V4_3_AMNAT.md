@@ -513,9 +513,16 @@ additional tests of the central mechanism.
 The bird analysis changes the interpretation of environmental predictability.
 Earlier migration studies already characterized spatial predictability with
 both correlation and proportionality and linked those quantities to tracking
-performance (Kölzsch et al. 2015). Our temporal comparison shows why the
-biological meaning of such coordinates depends on the scale of the prediction
-problem. The late period had stronger standardized coupling, larger regression
+performance (Kölzsch et al. 2015). Nor is increasing spatial synchrony itself a
+new phenomenon: spring vegetation phenology can become more spatially
+synchronous under warming, and increasing synchrony has been documented in
+North American environmental and population time series (Koenig and Liebhold
+2016; Liu et al. 2019). Our contribution is narrower. The same sampled
+source–destination network simultaneously experienced greater destination
+variability, stronger standardized coupling, and a large increase in the
+out-of-sample value of cross-site information. This combination shows why the
+biological meaning of a coupling coefficient depends on the scale of the
+prediction problem. The late period had stronger standardized coupling, larger regression
 slopes, and much greater explained variation, but it also had nearly twice the
 destination anomaly SD.
 
@@ -757,3 +764,13 @@ doi:10.1111/1365-2656.12281.
 Bernhardt, J. R., M. I. O'Connor, J. M. Sunday, and A. Gonzalez. 2020. Life in
 fluctuating environments. Philosophical Transactions of the Royal Society B
 375:20190454. doi:10.1098/rstb.2019.0454.
+
+
+Koenig, W. D., and A. M. Liebhold. 2016. Temporally increasing spatial
+synchrony of North American temperature and bird populations. Nature Climate
+Change 6:614–617. doi:10.1038/nclimate2933.
+
+Liu, Q., S. Piao, Y. H. Fu, M. Gao, J. Peñuelas, and I. A. Janssens. 2019.
+Climatic warming increases spatial synchrony in spring vegetation phenology
+across the Northern Hemisphere. Geophysical Research Letters 46:1641–1650.
+doi:10.1029/2018GL081370.
