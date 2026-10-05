@@ -30,10 +30,12 @@ while predeparture nutritional condition is associated with migration-start
 timing.
 
 Thus broad degradation of environmental predictability is not a sufficient
-explanation for mismatch in the sampled bird system. More generally, seasonal
-adaptation depends on **actionable information**: what can be inferred about a
-future seasonal state and what can still be changed when that information
-arrives.
+explanation for mismatch in the sampled bird system. We show theoretically how
+improving information can still fail to improve tracking when response
+opportunities disappear, while the mule-deer trajectories establish that
+downstream phase correction is biologically real and signed. Seasonal tracking
+should therefore be analysed as a sequence of inference, commitment and
+correction rather than as cue accuracy alone.
 
 **Keywords:** environmental predictability; phenological mismatch; seasonal
 timing; migration; actionability; feedback control
@@ -84,8 +86,12 @@ changed. Two interacting organisms exposed to the same environmental
 information can then optimally commit at different times solely because their
 response opportunities disappear at different rates.
 
-We develop that result in a reduced seasonal information–control model and
-connect it to a minimal downstream phase controller. We then stress-test the
+The resulting biological problem has three nested parts: forecasting a future
+seasonal state before it is directly observable, retaining options to alter a
+trajectory after commitment, and repeatedly estimating whether the trajectory
+is early or late at intermediate checkpoints. We develop those three parts in a
+reduced seasonal information–control model and connect them to a minimal
+downstream phase controller. We then stress-test the
 simpler alternative that contemporary mismatch is primarily caused by broad
 loss of environmental predictability. Using a prospectively specified
 multi-species migratory-bird analysis, we ask first whether source–destination
@@ -381,13 +387,10 @@ between-organism phenological mismatch. Shared climate forcing does not imply
 shared timing when interacting actors differ in information, retained
 actionability, correction gain or passive phase persistence.
 
-A separate strategic barrier can arise after physical correction remains
-possible. If an actor's payoff depends on matching a partner, unilateral
-movement to a newly informed timing state can be selected against even when
-that state would be best if both partners moved together. Physical
-irreversibility and coordination costs are therefore distinct reasons why
-better information may fail to restore synchrony. We retain that game-theory
-extension as a secondary consequence rather than a second headline.
+Coordination costs can create an additional barrier when interacting actors
+must change together, but that game-theoretic extension is secondary here. The
+core argument concerns the timing of information, commitment and post-entry
+correction within each actor.
 
 ---
 
@@ -562,38 +565,18 @@ identify nutritional condition with a unique physiological readiness variable,
 or separately estimate information weight, opportunity, behavioral gain,
 passive retention and process noise.
 
-### 3.3 Stagewise natural history supports recourse, but does not identify the full mechanism
+### 3.3 Supporting systems establish plausibility, not identification
 
-Several independent systems show why endpoint timing can hide substantial
-adjustment along a seasonal trajectory.
+Independent migration studies show that later stages can alter the timing
+consequences of earlier decisions. Stopover duration, movement speed, route
+choice and post-arrival delay can all buffer or amplify initial timing error,
+and cue relevance can change along a route. These observations establish the
+biological plausibility of sequential information use and recourse.
 
-Bar-tailed godwits can absorb earlier departure through longer later stopovers,
-illustrating that an early timing shift at one stage need not propagate
-unchanged to arrival. Pink-footed geese alter the relevance of day length,
-local accumulated temperature and other environmental information across
-successive migration stages, consistent with migration itself serving as an
-information-acquisition sequence. Greater snow geese show partial buffering
-between arrival and laying. American redstarts provide an example in which
-faster migration can compensate for delayed departure while still carrying a
-survival cost. Resident–migrant and consumer–resource systems further show
-that interacting partners can differ systematically in seasonal response even
-under shared regional forcing.
-
-These examples establish the biological availability of stagewise information,
-buffering and recourse. They do not estimate the theoretical actionability
-trajectory (r(t)), the information trajectory (q(t)), or the exact
-commitment optimum (t^*).
-
-Negative evidence is equally important. A prespecified Eurasian wigeon test did
-not support the prediction that stronger predictive connectivity amplifies
-post-error correction, so environmental predictability should not be treated as
-a universal feedback-gain multiplier. Two long-term environmental reversal
-gates also failed before any natural hysteresis analysis was opened. In the
-Amaral dataset, a repeated migration-speed change analysis was not estimable
-under its fixed admission rule: only 5 species-target rows, 4 unique spatial
-pairs and 4 species contained at least six finite speed years in both periods.
-We therefore do not use that dataset to claim a temporal actuator response to
-changing connectivity.
+They do not, however, jointly identify the theoretical trajectories q(t) and
+r(t), nor do they test the predicted intermediate maximum in actionable
+information. We therefore treat these systems as supporting context rather than
+additional tests of the central mechanism.
 
 ---
 
@@ -716,6 +699,14 @@ The focal comparison is then between a cue-quality-only model and a model that
 allows cue value to be discounted by remaining actionability. The strongest
 support would be a reproducible entry–peak–exit pattern in cue use while cue
 accuracy itself continues to rise.
+
+Recent GPS work on spring-departing Brent geese provides a useful boundary
+case: the effect of tailwind assistance on departure was strongest early in the
+season and weakened to near unity late in the departure window as migratory
+urgency increased (Theurich et al. 2026). That result is consistent with
+late-stage loss of cue selectivity, but it does not test the predicted hump
+because future-state information quality and retained actionability were not
+independently measured across the same stages.
 
 Migration is a particularly useful system because departure, route choice,
 stopover departure, speed, settlement and breeding provide repeated decisions.
