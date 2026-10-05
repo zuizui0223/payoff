@@ -131,11 +131,16 @@ G(t)=L0(t)-L1(t).
 
 Now let r(t) ∈ [0,1] denote retained actionability: the fraction of the fully
 informed state-contingent response that remains implementable. Let C(t) be the
-direct cost of waiting. Net actionable information value is
+direct cost of waiting. We use the reduced form
 
 [
 N(t)=r(t)G(t)-C(t).
 ]
+
+The multiplicative term r(t)G(t) is a transparent scalar specialization, not a
+general identity for arbitrary action sets. Its purpose is to expose the
+seasonal trade-off between gaining decision-relevant information and losing
+response options.
 
 An interior optimum satisfies
 
@@ -410,14 +415,16 @@ was essentially unchanged (**4.11 to 4.17 d**; change +0.055 d, 95% CI -0.59
 to +0.63). By contrast, a target-trend-only forecast worsened from **3.18 to
 5.86 d** (change +2.68 d, 95% CI +2.34 to +3.01).
 
-To match the theoretical loss function, we defined posthoc
-cross-validated information value as the reduction in held-out squared error,
+To place the environmental signal on the same loss scale as the reduced
+theory, we defined a posthoc **cross-validated forecast-value proxy** as the
+reduction in held-out squared error,
 
 [
 G_CV = MSE(no source) - MSE(source informed).
 ]
 
-Mean G_CV changed from **-16.1 d^2 to +16.0 d^2**, a late-minus-early increase
+This quantity is an environmental forecast value under squared-error loss, not
+a measured fitness value of information. Mean G_CV changed from **-16.1 d^2 to +16.0 d^2**, a late-minus-early increase
 of **+32.1 d^2**. Pair-bootstrap and source-cell, target-cell, 5-degree and
 10-degree cluster/block intervals for the increase were all positive. The
 increase was widespread rather than outlier-driven: median delta G_CV was
@@ -702,6 +709,8 @@ or learned by individual birds.
 The increase in standardized coupling is the preregistered result. The
 day-scale forecast decomposition and cross-validated information value were
 constructed after that outcome was known and are therefore explicitly posthoc.
+Moreover, G_CV is defined by squared prediction error in green-up date; it is a
+forecast-value proxy, not an organismal fitness value of information.
 They are useful because they reveal the scale structure hidden by rho, but they
 cannot be relabelled as confirmatory. The analysis also does not identify
 anthropogenic climate change as the cause of any two-window difference.
