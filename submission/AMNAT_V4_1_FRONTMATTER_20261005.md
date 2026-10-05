@@ -12,7 +12,7 @@ Article type: **Major Article**
 
 Short title: **Actionable seasonal information**
 
-Current main-text word count: **4,271** (repository count; excludes Literature Cited)
+Current main-text word count: **4,288** (repository count; excludes Literature Cited)
 
 Current abstract word count: **191**
 
