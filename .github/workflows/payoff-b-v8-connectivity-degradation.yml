@@ -34,7 +34,9 @@ jobs:
           sha256sum outputs/amaral_final_frozen.rds | tee outputs/amaral_final_frozen.sha256
 
       - name: Run frozen V8 analysis
+        shell: bash
         run: |
+          set -euo pipefail
           python analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.py \
             | tee outputs/payoff_b_v8_console.txt
 
