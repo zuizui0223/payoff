@@ -145,6 +145,32 @@ A concise interpretation is:
 This is descriptive and does not establish that birds perceived or used the
 specific fitted source signal.
 
+## D5b — direct out-of-sample source skill increased
+
+For a direct day-scale contrast, define posthoc source forecast skill as
+
+    RMSE(target-trend-only) - RMSE(source-informed).
+
+Positive values mean that adding source green-up improves held-out prediction.
+
+Derived from the frozen diagnostic pair table:
+
+- early mean skill: **-0.931 d**;
+- late mean skill: **+1.697 d**;
+- late-minus-early skill change: **+2.628 d**;
+- pair-bootstrap 95% CI for the change: **+2.134 to +3.202 d**;
+- source-cell cluster CI: **+1.593 to +3.826 d**;
+- target-cell cluster CI: **+2.039 to +3.293 d**;
+- 5-degree block CI: **+1.748 to +3.666 d**;
+- 10-degree block CI: **+1.511 to +4.158 d**.
+
+The proportion of pairs for which source-informed prediction beat the
+target-trend-only forecast increased from **29.5%** to **78.9%**.
+
+This diagnostic is posthoc. It is not a replacement primary endpoint; it
+quantifies why the late-period rho increase matters on an out-of-sample
+decision scale.
+
 ## D6 — bird arrival-green-up mismatch did not worsen on the day scale
 
 Using exactly the 150 species-target rows / 72 unique pairs / 22 species
