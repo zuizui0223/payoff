@@ -55,6 +55,29 @@ Sequential environmental information and the timing value of migration-stage
 cues are established. V4.3 cannot claim to introduce stagewise information
 acquisition.
 
+### McNamara et al. 2011
+
+McNamara, Barta, Klaassen & Bauer explicitly model environmental cues as
+forecasts of optimal seasonal timing and examine environmental changes in:
+- cue and optimal-time means;
+- cue-to-optimum slope;
+- cue-optimum correlation;
+- variance of the optimal timing target.
+
+They also quantify fitness loss from incomplete cue information.
+
+Therefore V4.3 cannot claim novelty for:
+- separating correlation from target variance;
+- converting cue information into timing loss;
+- recognizing that changes in target variance alter the consequences of cue use.
+
+### Usinowicz & O'Connor 2023
+
+The fitness value of ecological information in variable environments is already
+a general ecological framework. V4.3 cannot claim to introduce decision-scale
+information value or the general idea that environmental variability changes
+the value of information.
+
 ## Candidate contribution that survives
 
 The narrow empirical contribution is the joint temporal decomposition in the
@@ -71,8 +94,10 @@ same sampled source-destination network:
 This is not equivalent to "spring became more predictable." It is a change in
 the *value of nonlocal information under increasing local variability*.
 
-The narrow theoretical contribution is to put that forecast-value object into
-the existing seasonal actionability model:
+The theoretical contribution is therefore a synthesis/specialization rather
+than a new general value-of-information theorem: put an established
+decision-scale forecast-value object into the existing seasonal actionability
+and post-entry phase-control architecture:
 
     N(t) = r(t) G(t) - C(t),
 
