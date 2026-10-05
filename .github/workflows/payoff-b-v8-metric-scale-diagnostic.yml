@@ -26,6 +26,7 @@ jobs:
             outputs/payoff_b_v8_metric_scale_pairs.csv
             outputs/payoff_b_v8_metric_scale_summary.csv
             outputs/payoff_b_v8_metric_scale_forecast_skill_summary.csv
+            outputs/payoff_b_v8_metric_scale_forecast_value_exact_complete.csv
             outputs/payoff_b_v8_metric_scale_bird_rows.csv
             outputs/payoff_b_v8_metric_scale_bird_summary.csv
             outputs/payoff_b_v8_metric_scale_status.csv
