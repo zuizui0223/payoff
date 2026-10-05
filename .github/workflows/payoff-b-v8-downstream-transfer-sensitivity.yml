@@ -1,0 +1,32 @@
+name: payoff-b-v8-downstream-transfer-sensitivity
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-v8-transfer-20261005
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_downstream_transfer_sensitivity.R"
+      - "analysis/movement_phenology/payoff_b_v8_downstream_transfer_primary.R"
+      - "docs/PAYOFF_B_V8_TRANSFER_SENSITIVITY_LOCK_20261005.md"
+      - ".github/workflows/payoff-b-v8-downstream-transfer-sensitivity.yml"
+
+jobs:
+  v8-transfer-sensitivity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run V8 downstream transfer sensitivities
+        run: Rscript analysis/movement_phenology/payoff_b_v8_downstream_transfer_sensitivity.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-downstream-transfer-sensitivity
+          path: |
+            outputs/payoff_b_v8_transfer_sensitivity_summary.csv
+            outputs/payoff_b_v8_transfer_loo_species.csv
+            outputs/payoff_b_v8_transfer_complete_rows.csv
+            outputs/payoff_b_v8_transfer_sensitivity_bootstrap.csv
+          if-no-files-found: error
