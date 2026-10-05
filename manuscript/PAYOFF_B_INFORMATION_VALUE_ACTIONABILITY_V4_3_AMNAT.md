@@ -626,7 +626,7 @@ magnitude of its phenological shift. More mechanistically, systems differ along
 at least two axes:
 
 [
-information trajectory
+decision-scale information value
 ×
 actionability trajectory.
 ]
@@ -649,20 +649,22 @@ disadvantageous.
 
 The most distinctive empirical prediction is not simply that later cues are
 better or that constraints matter. It is that cue responsiveness should peak
-at an intermediate stage when independently measured information gain and
-remaining actionability move in opposite directions.
+at an intermediate stage when independently measured **decision-scale
+information value** and remaining actionability move in opposite directions.
 
 A direct test requires at least three ordered stages of the same decision
 problem. At each stage, investigators should estimate independently:
 
-1. the predictive accuracy of information available at that stage;
-2. the remaining set or value of feasible timing responses;
-3. the behavioral response to the cue on a common scale.
+1. loss without the focal information;
+2. loss with the focal information, and therefore G(t);
+3. the remaining set or value of feasible timing responses r(t);
+4. the behavioral response to the cue on a common scale.
 
-The focal comparison is then between a cue-quality-only model and a model that
-allows cue value to be discounted by remaining actionability. The strongest
-support would be a reproducible entry–peak–exit pattern in cue use while cue
-accuracy itself continues to rise.
+The focal comparison is then between models based on standardized coupling,
+forecast error or G(t) alone and a model that allows G(t) to be discounted by
+remaining actionability. The strongest support would be a reproducible
+entry–peak–exit pattern in cue use while raw cue accuracy or correlation
+continues to improve.
 
 Recent GPS work on spring-departing Brent geese provides a useful boundary
 case: the effect of tailwind assistance on departure was strongest early in the
@@ -681,29 +683,38 @@ quickly commitment removes later options.
 ### 4.5 Limits
 
 The bird source–destination links are range-based spatial proxies, not tracked
-individual routes. Predictive connectivity is therefore an environmental
-coordinate that could be available to migrants; it is not a direct measurement
-of the cues perceived by individuals.
+individual routes. They quantify environmental information potentially
+available along a migration corridor; they do not identify the cues perceived
+or learned by individual birds.
 
-The increase in connectivity is robust to exact source/target reuse, coarse
-spatial blocking, year omission and a basic `gr_ncell` support diagnostic,
-but the analysis does not identify anthropogenic climate change as the cause of
-that increase. Nor does lack of mismatch improvement prove that actionability
-declined.
+The increase in standardized coupling is the preregistered result. The
+day-scale forecast decomposition and cross-validated information value were
+constructed after that outcome was known and are therefore explicitly posthoc.
+They are useful because they reveal the scale structure hidden by rho, but they
+cannot be relabelled as confirmatory. The analysis also does not identify
+anthropogenic climate change as the cause of any two-window difference.
 
-The mule-deer analyses establish phase convergence and signed downstream
-adjustment, but they do not independently estimate the complete information and
-actionability trajectories. The association of predeparture nutritional
+Stable or slightly lower bird arrival–green-up mismatch does not show that
+birds used the reconstructed source cue, nor does it identify downstream
+correction as the buffering mechanism. Other cues, route changes, selection,
+changes in arrival variance, or unmeasured behavioral adjustments remain
+possible.
+
+The mule-deer analyses independently establish phase convergence and signed
+downstream adjustment, but they do not estimate the bird mechanism and do not
+jointly identify G(t) and r(t). The association of predeparture nutritional
 condition with migration start is also sensitive to a year-fixed-effect
 specification and should be treated as a candidate entry-timing signal rather
 than a fully identified physiological timer.
 
-The present evidence therefore closes one simple explanation more strongly
-than it proves its proposed replacement. That asymmetry is intentional. The
-bird analysis shows that improved environmental predictability is not
-sufficient for improved tracking in the sampled system. The theory then gives
-a testable mechanism by which this can occur, and the individual-level movement
-data establish that downstream signed correction is biologically real.
+The evidence is therefore layered rather than causal across systems. The bird
+analysis demonstrates that standardized coupling, absolute environmental
+variability and decision-scale information value can move differently through
+time. The theory separates that forecast-value problem from retained
+actionability. The mule-deer system establishes that signed post-entry
+correction is biologically real. A direct natural test of the full architecture
+still requires G(t), r(t) and behavior to be measured along the same seasonal
+trajectory.
 
 ---
 
