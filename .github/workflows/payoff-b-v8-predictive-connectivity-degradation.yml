@@ -8,6 +8,13 @@ on:
       - "analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.R"
       - "docs/PAYOFF_B_V8_PREDICTIVE_CONNECTIVITY_DEGRADATION_CONTRACT_20261005.md"
       - ".github/workflows/payoff-b-v8-predictive-connectivity-degradation.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.R"
+      - "docs/PAYOFF_B_V8_PREDICTIVE_CONNECTIVITY_DEGRADATION_CONTRACT_20261005.md"
+      - ".github/workflows/payoff-b-v8-predictive-connectivity-degradation.yml"
   workflow_dispatch:
 
 jobs:
