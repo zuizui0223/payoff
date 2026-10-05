@@ -5,7 +5,7 @@ on:
     branches:
       - feature/payoff-b-v8-connectivity-degradation-20261005
     paths:
-      - "analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.py"
+      - "analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.R"
       - ".github/workflows/payoff-b-v8-connectivity-degradation.yml"
   workflow_dispatch:
 
@@ -16,14 +16,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: r-lib/actions/setup-r@v2
         with:
-          python-version: "3.12"
+          r-version: "release"
+          use-public-rspm: true
 
-      - name: Install analysis dependencies
+      - name: Verify R analysis dependency
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install numpy pandas scipy statsmodels pyreadr
+          Rscript -e 'stopifnot(requireNamespace("nlme", quietly = TRUE))'
 
       - name: Download frozen Amaral source
         run: |
@@ -37,7 +37,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.py \
+          Rscript analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.R \
             | tee outputs/payoff_b_v8_console.txt
 
       - name: Upload V8 outputs
