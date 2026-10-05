@@ -1,0 +1,48 @@
+name: PAYOFF-B V7 Nemes schema gate
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-v7-route-predictability-20261005
+    paths:
+      - "scripts/payoff_b_v7_nemes_schema_probe.R"
+      - "data/payoff_b_v7_route_predictability_contract_20261005.json"
+      - "docs/PAYOFF_B_V7_ROUTE_PREDICTABILITY_NOVELTY_20261005.md"
+      - ".github/workflows/payoff-b-v7-nemes-schema.yml"
+  workflow_dispatch:
+
+jobs:
+  schema-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+
+      - name: Run schema-only public-data probe
+        run: Rscript scripts/payoff_b_v7_nemes_schema_probe.R
+
+      - name: Record source hashes
+        run: |
+          sha256sum outputs/payoff_b_v7_nemes_schema/nemes_wide_2023.rds > outputs/payoff_b_v7_nemes_schema/source_sha256.txt
+          sha256sum outputs/payoff_b_v7_nemes_schema/nemes_long_2023.rds >> outputs/payoff_b_v7_nemes_schema/source_sha256.txt
+
+      - name: Guard against accidental focal outputs
+        run: |
+          test ! -e outputs/payoff_b_v7_nemes_schema/model_results.csv
+          test ! -e outputs/payoff_b_v7_nemes_schema/predictability.csv
+          test ! -e outputs/payoff_b_v7_nemes_schema/recovery.csv
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v7-nemes-schema-gate
+          path: |
+            outputs/payoff_b_v7_nemes_schema/schema_summary.csv
+            outputs/payoff_b_v7_nemes_schema/schema_columns.csv
+            outputs/payoff_b_v7_nemes_schema/schema_candidate_columns.csv
+            outputs/payoff_b_v7_nemes_schema/schema_required_presence.csv
+            outputs/payoff_b_v7_nemes_schema/source_sha256.txt
+          if-no-files-found: error
