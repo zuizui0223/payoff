@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-05",
+  "status": "PRE_SOURCE_RESULT_AMENDMENT",
+  "timing": "Written before any PRISM source-coverage result, historical pixel value, predictability value, recovery summary or V7 model coefficient was opened.",
+  "reason": "USA-NPN PRISM historical Spring Index has CONUS-only spatial extent, while some Nemes northern Motus receivers may lie in Canada. This limitation is known from source metadata, not from the V7 source-gate outcome.",
+  "primary_rule": {
+    "source": "USA-NPN PRISM average_leaf_prism",
+    "window": "1981 through focal year minus one",
+    "retain_if_gate_passes": true
+  },
+  "predeclared_coverage_fallback": {
+    "source": "USA-NPN BEST average_leaf_best",
+    "coverage": "0 to 90 N, -180 to 0 E/W longitude representation; 1 degree grid",
+    "temporal_extent": "1880-2021",
+    "common_window": "1981-2013",
+    "why_2013": "The common BEST window ends before every Nemes focal migration year and before the PRISM/Nemes 2016-2019 outcomes.",
+    "use_only_if": "PRISM fails the frozen spatial-coverage gate because paired receiver coordinates fall outside the CONUS PRISM extent, while BEST passes the same >=50 individuals, >=10 route pairs, >=3 species gate.",
+    "not_allowed_if": "PRISM passes but gives an inconvenient or null focal result."
+  },
+  "if_both_sources_feasible": {
+    "primary": "PRISM",
+    "sensitivity": "BEST 1981-2013",
+    "interpretation": "agreement strengthens robustness; disagreement is reported as source dependence and is not resolved by choosing the favorable source"
+  },
+  "stop_rule": "If neither source passes its spatial/data-availability gate, close V7 without defining a third environmental predictor."
+}
