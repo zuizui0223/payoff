@@ -150,6 +150,24 @@ def main() -> None:
 
     routes["year"] = routes["year"].astype(int)
 
+    # Enforce the frozen source spatial extent before raster sampling.
+    west, south, east, north = cfg["bbox"]
+    inside = (
+        routes["lon_r1"].between(west, east, inclusive="both") &
+        routes["lat_r1"].between(south, north, inclusive="both") &
+        routes["lon_r2"].between(west, east, inclusive="both") &
+        routes["lat_r2"].between(south, north, inclusive="both")
+    )
+    total_routes = int(len(routes))
+    routes = routes.loc[inside].copy()
+    dropped_outside = total_routes - int(len(routes))
+    if len(routes) < 50:
+        raise SystemExit("source spatial coverage gate failed inside predictor builder: n<50")
+    if routes[["site_id_r1","site_id_r2"]].drop_duplicates().shape[0] < 10:
+        raise SystemExit("source spatial coverage gate failed inside predictor builder: <10 route pairs")
+    if routes["species"].nunique() < 3:
+        raise SystemExit("source spatial coverage gate failed inside predictor builder: <3 species")
+
     # Unique receiver coordinates.
     sites1 = routes[["site_id_r1", "lon_r1", "lat_r1"]].rename(
         columns={"site_id_r1": "site_id", "lon_r1": "lon", "lat_r1": "lat"}
@@ -240,7 +258,9 @@ def main() -> None:
         "source": args.source,
         "coverage": cfg["coverage"],
         "years_requested": years,
-        "route_rows": int(len(routes)),
+        "route_rows_input": total_routes,
+        "route_rows_inside_source_extent": int(len(routes)),
+        "route_rows_dropped_outside_source_extent": dropped_outside,
         "unique_sites": int(len(sites)),
         "predictability_nonmissing": int(pred["predictability_pearson"].notna().sum()),
         "predictability_n_ge_20": int((pred["historical_n"] >= 20).sum()),
