@@ -451,6 +451,81 @@ share_loo_improved <- if (any(loo_ok)) {
   NA_real_
 }
 
+# Equal-species sensitivity using the frozen pair-to-species incidence.
+value_incidence <- merge(
+  incidence,
+  diag_pairs[, c(
+    "pair_key",
+    "loo_value_mse_early",
+    "loo_value_mse_late",
+    "delta_loo_value_mse"
+  )],
+  by = "pair_key",
+  all = FALSE,
+  sort = FALSE
+)
+
+species_value <- aggregate(
+  cbind(
+    loo_value_mse_early,
+    loo_value_mse_late,
+    delta_loo_value_mse
+  ) ~ species,
+  data = value_incidence,
+  FUN = mean
+)
+
+pair_value <- setNames(
+  diag_pairs$delta_loo_value_mse,
+  diag_pairs$pair_key
+)
+incidence_by_pair <- split(incidence$species, incidence$pair_key)
+pair_keys_value <- diag_pairs$pair_key
+
+set.seed(DIAG_SEED + 40L)
+species_value_boot <- rep(NA_real_, DIAG_BOOT_B)
+for (b in seq_len(DIAG_BOOT_B)) {
+  sampled_keys <- sample(
+    pair_keys_value,
+    size = length(pair_keys_value),
+    replace = TRUE
+  )
+  species_lists <- list()
+  for (pk in sampled_keys) {
+    spp <- incidence_by_pair[[pk]]
+    val <- pair_value[[pk]]
+    for (sp in spp) {
+      species_lists[[sp]] <- c(species_lists[[sp]], val)
+    }
+  }
+  sp_means <- vapply(species_lists, mean, numeric(1))
+  species_value_boot[b] <- mean(sp_means)
+}
+
+species_value_ci <- as.numeric(quantile(
+  species_value_boot,
+  c(0.025, 0.975),
+  names = FALSE
+))
+
+equal_species_value_summary <- data.frame(
+  n_species = nrow(species_value),
+  early_equal_species_mean =
+    mean(species_value$loo_value_mse_early),
+  late_equal_species_mean =
+    mean(species_value$loo_value_mse_late),
+  delta_equal_species_mean =
+    mean(species_value$delta_loo_value_mse),
+  positive_species =
+    sum(species_value$delta_loo_value_mse > 0),
+  negative_species =
+    sum(species_value$delta_loo_value_mse < 0),
+  zero_species =
+    sum(species_value$delta_loo_value_mse == 0),
+  pair_incidence_boot_ci_low_95 = species_value_ci[1],
+  pair_incidence_boot_ci_high_95 = species_value_ci[2]
+)
+
 # Same bird eligibility as the frozen transfer lane, but report absolute mismatch
 # in days as a post-hoc scale diagnostic in addition to the frozen log metric.
 bird <- dat[, c("species", "year", "cell", "arr_GAM_mean", "gr_mn")]
@@ -610,6 +685,16 @@ write.csv(
   row.names = FALSE
 )
 write.csv(
+  species_value,
+  "outputs/payoff_b_v8_metric_scale_species_value.csv",
+  row.names = FALSE
+)
+write.csv(
+  equal_species_value_summary,
+  "outputs/payoff_b_v8_metric_scale_species_value_summary.csv",
+  row.names = FALSE
+)
+write.csv(
   bird_rows,
   "outputs/payoff_b_v8_metric_scale_bird_rows.csv",
   row.names = FALSE
@@ -633,5 +718,7 @@ cat("\nOut-of-sample source forecast skill:\n")
 print(forecast_skill_summary)
 cat("\nExact-complete source information value:\n")
 print(forecast_value_exact_complete_summary)
+cat("\nEqual-species information value:\n")
+print(equal_species_value_summary)
 cat("\nBird mismatch on day and frozen log scales:\n")
 print(bird_summary)
