@@ -1,0 +1,33 @@
+name: payoff-b-v8-transfer-structural-null
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-v8-transfer-20261005
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_transfer_structural_null_audit.R"
+      - "analysis/movement_phenology/payoff_b_v8_downstream_transfer_primary.R"
+      - "docs/PAYOFF_B_V8_TRANSFER_STRUCTURAL_NULL_CONTRACT_20261005.md"
+      - ".github/workflows/payoff-b-v8-transfer-structural-null.yml"
+
+jobs:
+  v8-transfer-structural-null:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run V8 transfer structural-null audit
+        run: Rscript analysis/movement_phenology/payoff_b_v8_transfer_structural_null_audit.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-transfer-structural-null
+          path: |
+            outputs/payoff_b_v8_transfer_structural_null_summary.csv
+            outputs/payoff_b_v8_transfer_structural_null_status.csv
+            outputs/payoff_b_v8_transfer_structural_null_bootstrap.csv
+            outputs/payoff_b_v8_transfer_arrival_permutation.csv
+            outputs/payoff_b_v8_transfer_structural_null_rows.csv
+          if-no-files-found: error
