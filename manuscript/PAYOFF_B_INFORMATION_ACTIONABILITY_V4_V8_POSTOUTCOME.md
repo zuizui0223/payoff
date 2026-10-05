@@ -1,8 +1,8 @@
 # Environmental predictability is not enough: seasonal matching also depends on actionability
 
-**Paper 2 — V4 V8-postoutcome integration draft**  
+**Paper 2 — integrated development draft**  
 **Date:** 2026-10-05  
-**Status:** V8 environmental primary, mandatory sensitivities and prospectively locked environment-to-bird transfer test opened; earlier frozen V2/V3 results remain unchanged and auditable.
+**Status:** Integrated theory and empirical development draft; analysis provenance is retained separately in the repository and Supplementary Information.
 
 ## Abstract
 
@@ -309,7 +309,7 @@ If (g_t=1), the current phase error is reset at that checkpoint when the target 
 
 If \(g_t>1\), the controller overshoots and \(\lambda_t\) can become negative.
 
-The existing PAYOFF-B closed-loop model
+The existing closed-loop model
 
 \[
 e_{t+1}=(1-K)e_t+r
@@ -467,7 +467,7 @@ The first route is a control constraint. The second is a coordination constraint
 
 ### 3.1 Environmental predictability increased without detectable improvement in migratory matching
 
-The preregistered V8 environmental test asked whether the signed interannual
+The preregistered longitudinal environmental test asked whether the signed interannual
 correlation between detrended source- and destination-site green-up anomalies
 weakened through time. It did not. Across 166 unique spatial source–target
 pairs used by 28 species, the mean change from 2002–2009 to 2010–2017 was
@@ -550,10 +550,10 @@ This pattern is not uniquely diagnostic of information distance; endogenous timi
 
 Ortega et al. (2023) already established that Red Desert mule deer can begin
 migration far ahead of or behind peak green-up and resynchronize en route by
-changing movement speed and stopover use. PAYOFF-B does not claim that
+changing movement speed and stopover use. We do not claim that
 phenomenon as new.
 
-A post-freeze descriptive reanalysis of the public Source Data file uses all
+A descriptive reanalysis of the public Source Data file uses all
 152 animal-years from 72 adult females. Signed Days-From-Peak phase had an
 across-animal-year standard deviation of 26.41 d at migration start and 13.17 d
 at migration end. The end/start variance ratio was
@@ -660,7 +660,7 @@ These systems support the ecological step from heterogeneous response rules to c
 
 The registered Eurasian wigeon test did not support the predicted negative interaction between incoming phase error and predictive connectivity. Predictive connectivity should therefore not be treated as a universal amplifier of post-error correction.
 
-Two preregistered long-term environmental reversal gates also failed before any natural hysteresis analysis was opened. PAYOFF-B consequently does not claim a natural degradation–recovery hysteresis sequence.
+Two preregistered long-term environmental reversal gates also failed before any natural hysteresis analysis was opened. We therefore do not claim a natural degradation–recovery hysteresis sequence.
 
 These negative results sharpen the distinction between information available before commitment, information acquired during movement, and control after an error has already appeared.
 
@@ -673,7 +673,7 @@ en-route timing adjustment are established ideas. Taylor (2016) explicitly
 linked phenological change to en-route migration-speed adjustment and stopover
 frequency, and Chu et al. (2026) formulated migration as a stochastic optimal
 switching problem with destination information under both perfect and partial
-information. PAYOFF-B therefore does not claim novelty for sequential migration
+information. We therefore do not claim novelty for sequential migration
 control, stopover updating, destination information or generic partial-
 information optimal control.
 
@@ -692,7 +692,7 @@ than to claim a new control-theory class.
 
 The main conceptual change is to replace a one-dimensional language of “fast” and “slow” phenological response with a sequence of inference and correction.
 
-The V8 result makes this distinction empirical rather than merely conceptual.
+The longitudinal environmental-to-bird result makes this distinction empirical rather than merely conceptual.
 Across the sampled migration mappings, the environment became substantially
 more predictable in the measured cross-site green-up coordinate, yet there was
 no detectable corresponding improvement in arrival–green-up matching. A
@@ -725,7 +725,7 @@ A route-wise analysis should estimate signed incoming error, the information ava
 A developmental or physiological timer should primarily predict **entry
 timing**: emergence, flowering, migratory readiness or another threshold
 event. Temperature, photoperiod, endocrine state and molecular clock pathways
-can contribute, but PAYOFF-B does not treat all bee emergence as one molecular
+can contribute, but We do not treat all bee emergence as one molecular
 oscillator.
 
 A decision controller predicts **signed post-entry correction**: late actors
@@ -982,6 +982,6 @@ the same individuals and interacting partners.
 
 ---
 
-## Post-freeze transparency statement
+## Analysis provenance and transparency
 
 The stagewise recourse, continuous information-actionability balance and route-wise Bayesian phase-control extensions were formalized after the registered empirical gates and frozen GEB V2 package. They do not alter, reopen or retune any preregistered empirical outcome. The frozen V2 manuscript remains the audit and rollback source. This V3 document is the science-frozen integration manuscript for the next Paper-2 submission package.
