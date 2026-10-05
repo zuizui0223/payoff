@@ -141,10 +141,16 @@ late <- t(mapply(
   MoreArgs = list(start_year = LATE_START, end_year = LATE_END)
 ))
 
-diag_pairs <- pairs[, c(
-  "pair_key", "source_cell", "target_cell",
-  "source_target_distance_km", "rho_early", "rho_late", "delta_rho"
-)]
+diag_pairs <- merge(
+  pairs[, c(
+    "pair_key", "source_cell", "target_cell",
+    "source_target_distance_km", "rho_early", "rho_late", "delta_rho"
+  )],
+  unique(eligible_map[, c("pair_key", "early_n_gate", "late_n_gate")]),
+  by = "pair_key",
+  all.x = TRUE,
+  sort = FALSE
+)
 
 metrics <- c(
   "target_sd", "target_rms", "slope", "r2", "rmse_in",
@@ -382,6 +388,60 @@ forecast_skill_summary <- data.frame(
     mean(diag_pairs$loo_value_mse_late[value_ok] > 0)
 )
 
+# Sensitivity restricted to pairs with all 8 years observed in both windows.
+exact_complete <- diag_pairs[
+  diag_pairs$early_n_gate == 8L &
+    diag_pairs$late_n_gate == 8L &
+    is.finite(diag_pairs$loo_value_mse_early) &
+    is.finite(diag_pairs$loo_value_mse_late) &
+    is.finite(diag_pairs$delta_loo_value_mse),
+  ,
+  drop = FALSE
+]
+
+exact_pair_ci <- pair_boot_mean(
+  exact_complete$delta_loo_value_mse,
+  DIAG_BOOT_B,
+  DIAG_SEED + 30L
+)
+exact_source_ci <- cluster_boot_mean(
+  exact_complete, "delta_loo_value_mse", "source_cell",
+  DIAG_BOOT_B, DIAG_SEED + 31L
+)
+exact_target_ci <- cluster_boot_mean(
+  exact_complete, "delta_loo_value_mse", "target_cell",
+  DIAG_BOOT_B, DIAG_SEED + 32L
+)
+exact_block5_ci <- cluster_boot_mean(
+  exact_complete, "delta_loo_value_mse", "block5",
+  DIAG_BOOT_B, DIAG_SEED + 33L
+)
+exact_block10_ci <- cluster_boot_mean(
+  exact_complete, "delta_loo_value_mse", "block10",
+  DIAG_BOOT_B, DIAG_SEED + 34L
+)
+
+forecast_value_exact_complete_summary <- data.frame(
+  n_pairs = nrow(exact_complete),
+  loo_value_mse_early_mean = mean(exact_complete$loo_value_mse_early),
+  loo_value_mse_late_mean = mean(exact_complete$loo_value_mse_late),
+  delta_loo_value_mse_mean = mean(exact_complete$delta_loo_value_mse),
+  pair_ci_low_95 = exact_pair_ci[1],
+  pair_ci_high_95 = exact_pair_ci[2],
+  source_cluster_ci_low_95 = exact_source_ci[1],
+  source_cluster_ci_high_95 = exact_source_ci[2],
+  target_cluster_ci_low_95 = exact_target_ci[1],
+  target_cluster_ci_high_95 = exact_target_ci[2],
+  block5_ci_low_95 = exact_block5_ci[1],
+  block5_ci_high_95 = exact_block5_ci[2],
+  block10_ci_low_95 = exact_block10_ci[1],
+  block10_ci_high_95 = exact_block10_ci[2],
+  share_source_better_early =
+    mean(exact_complete$loo_value_mse_early > 0),
+  share_source_better_late =
+    mean(exact_complete$loo_value_mse_late > 0)
+)
+
 rmse_ok <- is.finite(diag_pairs$delta_rmse_in)
 share_rmse_improved <- mean(diag_pairs$delta_rmse_in[rmse_ok] < 0)
 loo_ok <- is.finite(diag_pairs$delta_loo_rmse)
@@ -545,6 +605,11 @@ write.csv(
   row.names = FALSE
 )
 write.csv(
+  forecast_value_exact_complete_summary,
+  "outputs/payoff_b_v8_metric_scale_forecast_value_exact_complete.csv",
+  row.names = FALSE
+)
+write.csv(
   bird_rows,
   "outputs/payoff_b_v8_metric_scale_bird_rows.csv",
   row.names = FALSE
@@ -566,5 +631,7 @@ cat("\nEnvironmental metrics:\n")
 print(diag_summary)
 cat("\nOut-of-sample source forecast skill:\n")
 print(forecast_skill_summary)
+cat("\nExact-complete source information value:\n")
+print(forecast_value_exact_complete_summary)
 cat("\nBird mismatch on day and frozen log scales:\n")
 print(bird_summary)
