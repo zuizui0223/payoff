@@ -1,0 +1,40 @@
+name: payoff-b-v8-predictive-connectivity-degradation
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-v8-execute-20261005
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.R"
+      - "docs/PAYOFF_B_V8_PREDICTIVE_CONNECTIVITY_DEGRADATION_CONTRACT_20261005.md"
+      - ".github/workflows/payoff-b-v8-predictive-connectivity-degradation.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.R"
+      - "docs/PAYOFF_B_V8_PREDICTIVE_CONNECTIVITY_DEGRADATION_CONTRACT_20261005.md"
+      - ".github/workflows/payoff-b-v8-predictive-connectivity-degradation.yml"
+  workflow_dispatch:
+
+jobs:
+  v8-connectivity-degradation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run frozen V8 environmental analysis
+        run: Rscript analysis/movement_phenology/payoff_b_v8_predictive_connectivity_degradation.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-predictive-connectivity-degradation
+          path: |
+            outputs/payoff_b_v8_all_mapped_pairs.csv
+            outputs/payoff_b_v8_eligible_pairs.csv
+            outputs/payoff_b_v8_admission_gate.csv
+            outputs/payoff_b_v8_species_summary.csv
+            outputs/payoff_b_v8_primary_result.csv
+          if-no-files-found: error

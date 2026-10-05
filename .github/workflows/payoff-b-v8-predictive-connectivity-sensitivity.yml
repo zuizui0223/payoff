@@ -1,0 +1,37 @@
+name: payoff-b-v8-predictive-connectivity-sensitivity
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-v8-execute-20261005
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_predictive_connectivity_sensitivity.R"
+      - ".github/workflows/payoff-b-v8-predictive-connectivity-sensitivity.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_predictive_connectivity_sensitivity.R"
+      - ".github/workflows/payoff-b-v8-predictive-connectivity-sensitivity.yml"
+  workflow_dispatch:
+
+jobs:
+  v8-sensitivities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run frozen V8 post-primary sensitivities
+        run: Rscript analysis/movement_phenology/payoff_b_v8_predictive_connectivity_sensitivity.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-predictive-connectivity-sensitivity
+          path: |
+            outputs/payoff_b_v8_sensitivity_summary.csv
+            outputs/payoff_b_v8_exact8_pairs.csv
+            outputs/payoff_b_v8_alt7_pairs.csv
+            outputs/payoff_b_v8_leave_one_species_out.csv
+          if-no-files-found: error

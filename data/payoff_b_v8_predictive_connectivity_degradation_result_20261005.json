@@ -1,0 +1,48 @@
+{
+  "result_id": "payoff_b_v8_predictive_connectivity_degradation_20261005",
+  "date": "2026-10-05",
+  "status": "NOT_SUPPORTED_OPPOSITE_DIRECTION",
+  "contract": "docs/PAYOFF_B_V8_PREDICTIVE_CONNECTIVITY_DEGRADATION_CONTRACT_20261005.md",
+  "workflow_run_id": 37281018588,
+  "artifact_id": 11332196684,
+  "source_commit": "62c58d77c2028bd863dfe3697b0d9cf29ceaeab0",
+  "windows": {
+    "early": "2002-2009",
+    "late": "2010-2017"
+  },
+  "admission_gate": {
+    "eligible_pairs": 393,
+    "eligible_species": 28,
+    "species_with_at_least_3_pairs": 26,
+    "passed": true
+  },
+  "primary": {
+    "pair_mean_delta_rho": 0.352915092771417,
+    "species_cluster_bootstrap_95": [0.283175814497482, 0.414277004313808],
+    "mixed_intercept_delta_rho": 0.350608260215104,
+    "mixed_intercept_se": 0.0419587987565881,
+    "mixed_95": [0.268369014652191, 0.432847505778017],
+    "species_equal_weight_mean_delta_rho": 0.336354705682317,
+    "species_negative": 2,
+    "species_positive": 26,
+    "species_zero": 0,
+    "registered_negative_sign_test_p": 0.999999891966581,
+    "direction_consistent_for_registered_hypothesis": false
+  },
+  "descriptive": {
+    "pair_mean_early_rho": 0.4277079086661853,
+    "pair_mean_late_rho": 0.780623001437602,
+    "pair_median_early_rho": 0.584243188206959,
+    "pair_median_late_rho": 0.884040080250607,
+    "species_equal_weight_early_rho": 0.4049541575082847,
+    "species_equal_weight_late_rho": 0.7413088631906014
+  },
+  "licensed_conclusion": "The preregistered broad degradation hypothesis is not supported. In this Amaral-based route mapping, signed detrended source-destination green-up connectivity was substantially higher in 2010-2017 than in 2002-2009, with 26 of 28 species showing positive mean change.",
+  "not_licensed": [
+    "climate change caused stronger predictive connectivity",
+    "all migratory routes gained environmental information",
+    "birds perceived or used the increased correlation",
+    "fitness improved",
+    "the opposite-direction result validates a post hoc strengthening theory"
+  ]
+}
