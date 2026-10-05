@@ -6,6 +6,26 @@
 
 Article type: **Major Article**
 
+## Submission metadata
+
+Article type: **Major Article**
+
+Short title: **Actionable seasonal information**
+
+Current main-text word count: **4,271** (repository count; excludes Literature Cited)
+
+Current abstract word count: **191**
+
+Title length: **8 words**
+
+Current manuscript elements: title; abstract; keywords; Introduction; Theory;
+Natural evidence; Discussion; Conclusion; Literature Cited.
+
+A presubmission proposal is not required for the Major Article route under the
+current journal instructions. The manuscript should be converted to the
+journal's double-anonymous submission format only after the scientific text and
+figures are frozen.
+
 ## Abstract
 
 Seasonal tracking is often framed as an information problem: more predictable
