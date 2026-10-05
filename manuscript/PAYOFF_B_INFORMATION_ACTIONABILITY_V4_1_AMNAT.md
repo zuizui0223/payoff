@@ -43,7 +43,8 @@ available at departure should become less useful and mismatch should increase.
 That information-centered view has a strong theoretical and empirical basis.
 Environmental predictability can shape migration schedules, intermediate
 stopovers can provide new information about conditions ahead, and migrants
-often alter movement in response to local environmental cues. But these
+often alter movement in response to local environmental cues (Bauer et al.
+2020). But these
 arguments usually treat information as valuable whenever it becomes more
 accurate. They say less about a second quantity that changes at the same time:
 the set of biologically meaningful actions that remain available.
@@ -371,7 +372,7 @@ correction within each actor.
 ### 3.1 Spring predictive connectivity strengthened, but tracking did not improve accordingly
 
 We first tested the simpler information-loss explanation prospectively in the
-Amaral et al. eastern North American migratory-bird dataset. The environmental
+eastern North American migratory-bird dataset of Amaral et al. (2025). The environmental
 test uses annual forest mid-green-up from 2002–2017 and a range-based spatial
 mapping. Each breeding-range target cell is paired with the nearest
 lower-latitude migratory-range source cell for the same species. The original
@@ -568,7 +569,7 @@ does not describe what can still be changed when that inference becomes
 available.
 
 That distinction is close to, but not identical with, the distinction between
-cue accuracy and cue efficacy. Cue accuracy asks whether a cue produces timing
+cue accuracy and cue efficacy developed by Torstenson and Shaw (2025). Cue accuracy asks whether a cue produces timing
 near the environmental optimum, and cue efficacy asks about the resulting
 fitness. Actionability asks an earlier mechanistic question: **given the
 information available now, how much of the state-contingent response remains
@@ -748,3 +749,30 @@ interact.
 The central empirical question for future work is therefore not only whether
 organisms possess accurate cues, but **when those cues become informative
 relative to when the ability to act on them disappears**.
+
+
+---
+
+## Literature Cited
+
+Amaral, B. R., C. Youngflesh, M. W. Tingley, and D. A. W. Miller. 2025.
+Shifting gears in a shifting climate: birds adjust migration speed in response
+to spring vegetation green-up. Diversity and Distributions 31:e70033.
+doi:10.1111/ddi.70033.
+
+Bauer, S., J. M. McNamara, and Z. Barta. 2020. Environmental variability,
+reliability of information and the timing of migration. Proceedings of the
+Royal Society B 287:20200622. doi:10.1098/rspb.2020.0622.
+
+Ortega, A. C., E. O. Aikens, J. A. Merkle, K. L. Monteith, and M. J. Kauffman.
+2023. Migrating mule deer compensate en route for phenological mismatches.
+Nature Communications 14:2008. doi:10.1038/s41467-023-37750-z.
+
+Theurich, N., S. Garthe, F. Jiguet, P. Bocher, and P. Schwemmer. 2026.
+Departing with the wind: spring migration timing in Brent geese from their most
+important staging and wintering site, the Wadden Sea World Heritage Site.
+Ecology and Evolution 16:e74119. doi:10.1002/ece3.74119.
+
+Torstenson, M., and A. K. Shaw. 2025. Strength of seasonality and type of
+migratory cue determine the fitness consequences of changing phenology for
+migratory animals. Oikos 2025:e10862. doi:10.1111/oik.10862.
