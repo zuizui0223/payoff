@@ -84,9 +84,33 @@ analysis <- exposure_map[
   drop = FALSE
 ]
 
-if (nrow(analysis) < 20) stop("Too few eligible species-target rows")
-if (length(unique(analysis$pair_key)) < 20) stop("Too few unique spatial pairs")
-if (length(unique(analysis$species)) < 5) stop("Too few species")
+admission_rows <- nrow(analysis)
+admission_pairs <- length(unique(analysis$pair_key))
+admission_species <- length(unique(analysis$species))
+
+if (
+  admission_rows < 20 ||
+  admission_pairs < 20 ||
+  admission_species < 5
+) {
+  dir.create("outputs", showWarnings = FALSE, recursive = TRUE)
+  status_row <- data.frame(
+    eligible_species_target_rows = admission_rows,
+    eligible_unique_spatial_pairs = admission_pairs,
+    eligible_species = admission_species,
+    min_speed_years_per_window = MIN_SPEED_YEARS,
+    actuator_bridge_status = "NOT_ESTIMABLE"
+  )
+  write.csv(
+    status_row,
+    "outputs/payoff_b_v8_actuator_bridge_summary.csv",
+    row.names = FALSE
+  )
+  cat("\nPAYOFF-B V8 ACTUATOR BRIDGE\n")
+  print(status_row)
+  cat("\nFrozen admission thresholds were not relaxed; speed-change coefficients were not computed.\n")
+  quit(save = "no", status = 0)
+}
 
 analysis$delta_log_speed <- (
   analysis$mean_log_speed_late - analysis$mean_log_speed_early
