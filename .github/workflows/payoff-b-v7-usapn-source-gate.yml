@@ -1,0 +1,52 @@
+name: PAYOFF-B V7 USA-NPN source gate
+
+on:
+  push:
+    branches:
+      - feature/payoff-b-v7-route-predictability-20261005
+    paths:
+      - "scripts/payoff_b_v7_usapn_source_gate.R"
+      - "data/payoff_b_v7_usapn_source_contract_20261005.json"
+      - ".github/workflows/payoff-b-v7-usapn-source-gate.yml"
+  workflow_dispatch:
+
+jobs:
+  source-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+
+      - name: Check Nemes route coverage inside USA-NPN PRISM extent
+        run: Rscript scripts/payoff_b_v7_usapn_source_gate.R
+
+      - name: Probe one historical annual First Leaf WCS coverage without reading pixel values
+        shell: bash
+        run: |
+          mkdir -p outputs/payoff_b_v7_usapn_source_gate
+          curl -fL --retry 4 --retry-all-errors -G             'https://geoserver.usanpn.org/geoserver/si-x/wcs'             --data-urlencode 'service=WCS'             --data-urlencode 'version=2.0.1'             --data-urlencode 'request=GetCoverage'             --data-urlencode 'CoverageId=si-x:average_leaf_prism'             --data-urlencode 'srs=EPSG:4269'             --data-urlencode 'subset=http://www.opengis.net/def/axis/OGC/0/time("2015-01-01T07:00:00.000Z")'             --data-urlencode 'format=image/geotiff'             -o outputs/payoff_b_v7_usapn_source_gate/first_leaf_2015_probe.tif
+          test -s outputs/payoff_b_v7_usapn_source_gate/first_leaf_2015_probe.tif
+          file outputs/payoff_b_v7_usapn_source_gate/first_leaf_2015_probe.tif | tee outputs/payoff_b_v7_usapn_source_gate/wcs_file_type.txt
+          wc -c outputs/payoff_b_v7_usapn_source_gate/first_leaf_2015_probe.tif | tee outputs/payoff_b_v7_usapn_source_gate/wcs_byte_count.txt
+          sha256sum outputs/payoff_b_v7_usapn_source_gate/first_leaf_2015_probe.tif > outputs/payoff_b_v7_usapn_source_gate/wcs_probe_sha256.txt
+
+      - name: Guard against predictor or outcome outputs
+        run: |
+          test ! -e outputs/payoff_b_v7_usapn_source_gate/predictability.csv
+          test ! -e outputs/payoff_b_v7_usapn_source_gate/recovery.csv
+          test ! -e outputs/payoff_b_v7_usapn_source_gate/model_results.csv
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v7-usapn-source-gate
+          path: |
+            outputs/payoff_b_v7_usapn_source_gate/source_coverage_summary.csv
+            outputs/payoff_b_v7_usapn_source_gate/source_coverage_gate.csv
+            outputs/payoff_b_v7_usapn_source_gate/wcs_file_type.txt
+            outputs/payoff_b_v7_usapn_source_gate/wcs_byte_count.txt
+            outputs/payoff_b_v7_usapn_source_gate/wcs_probe_sha256.txt
+          if-no-files-found: error
