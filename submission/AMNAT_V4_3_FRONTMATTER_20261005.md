@@ -8,29 +8,26 @@ Article type: **Major Article**
 
 ## Abstract
 
-Seasonal tracking depends on both what organisms can infer before seasonal
-decisions and what they can still correct afterward. Yet standardized
-environmental coupling, absolute forecast risk, and biological response
-opportunity need not move together. We distinguish decision-scale information
-value from retained actionability and connect both to post-entry phase
-correction.
+Seasonal tracking is often framed as a cue-reliability problem, but organisms
+face two sequential challenges: reducing uncertainty about future seasonal
+conditions and correcting timing error after commitment. We distinguish
+standardized environmental coupling, decision-scale information value, and
+opportunities for downstream correction.
 
 In migratory birds, a preregistered source–destination analysis showed
-detrended spring correlation increasing from 0.284 to 0.653 across 166 spatial
-pairs used by 28 species. Posthoc diagnostics showed destination anomaly SD
-increasing from 2.41 to 4.66 d. Cross-validated information value, defined as
-the reduction in held-out squared prediction loss from adding the source site,
-shifted from -16.1 to +16.0 d^2 (change +32.1 d^2); all spatial-dependence
-intervals were positive and 25/28 species showed increases. Bird
-arrival–green-up mismatch showed no corresponding deterioration. Independent
-mule-deer analyses showed strong phase convergence and signed downstream speed
-and stopover adjustments.
+detrended spring correlation increasing from 0.284 to 0.653. Posthoc
+cross-validation showed that destination variability simultaneously increased
+(SD 2.41 to 4.66 d), yet the squared-loss value of adding nonlocal source
+information changed from -16.1 to +16.0 d^2, an increase of +32.1 d^2. The
+increase was positive for 139/166 spatial pairs and 25/28 species and survived
+spatial dependence, complete-window, and calendar-year omission analyses.
+Bird arrival–green-up mismatch showed no corresponding deterioration.
+Independent mule-deer data showed strong phase convergence and signed
+downstream speed and stopover adjustments.
 
-Thus environmental correlation is not itself biological information value,
-and information value is not itself realized adjustment. Seasonal tracking is
-better represented as a sequence of forecasting, commitment, phase
-re-estimation, and correction.
-
+We formalize these results as a sequential architecture in which seasonal
+tracking depends first on the decision-scale value of environmental information
+and then on the opportunity to correct residual phase error.
 
 ## Keywords
 
@@ -45,9 +42,10 @@ arrives.**
 
 ## Evidence-status note
 
-The source–destination correlation contrast is the preregistered V8 primary
-environmental result. The day-scale variance, leave-one-year-out forecast, and
-forecast-skill decomposition are explicitly posthoc metric-scale diagnostics.
+The source–destination correlation contrast is the preregistered primary
+environmental result. Destination variance, leave-one-year-out forecasting, and
+the squared-loss information-value decomposition are explicitly posthoc
+metric-scale diagnostics.
 The mule-deer analyses are independent source-data reanalyses anchored to a
 published compensation result.
 
@@ -58,9 +56,9 @@ Article type: **Major Article**
 Current manuscript:
 `manuscript/PAYOFF_B_INFORMATION_VALUE_ACTIONABILITY_V4_3_AMNAT.md`
 
-Current approximate main-text word count: **4,774**
+Current approximate main-text word count: **4,716**
 
-Abstract word count: **173**
+Abstract word count: **162**
 
 ## Journal-facing cleanup rule
 
