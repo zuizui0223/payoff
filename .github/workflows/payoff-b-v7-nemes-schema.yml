@@ -46,3 +46,5 @@ jobs:
             outputs/payoff_b_v7_nemes_schema/schema_required_presence.csv
             outputs/payoff_b_v7_nemes_schema/source_sha256.txt
           if-no-files-found: error
+
+# schema-gate trigger commit
