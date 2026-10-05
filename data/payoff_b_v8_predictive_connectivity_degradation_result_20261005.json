@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-05",
+  "contract": "docs/PAYOFF_B_V8_PREDICTIVE_CONNECTIVITY_DEGRADATION_CONTRACT_20261005.md",
+  "source_commit": "62c58d77c2028bd863dfe3697b0d9cf29ceaeab0",
+  "workflow_run": 37254852212,
+  "artifact_id": 11321853430,
+  "artifact_sha256": "31a496d0495180312b2521c4ef2315c86cb8922c817847a11103a8522dbcb42e",
+  "early_window": "2002-2009",
+  "late_window": "2010-2017",
+  "admission": {
+    "frozen_mappings": 842,
+    "eligible_pairs": 393,
+    "eligible_species": 28,
+    "species_with_at_least_3_pairs": 26,
+    "pass": true
+  },
+  "primary": {
+    "mixed_mean_delta_rho": 0.350608260215104,
+    "mixed_species_cluster_bootstrap_95": [0.26266552031368, 0.424120719768486],
+    "mixed_bootstrap_successes": 1000,
+    "species_mean_delta_rho": 0.336354705682317,
+    "species_bootstrap_95": [0.202332611133383, 0.447197618757776],
+    "negative_species": 2,
+    "positive_species": 26,
+    "zero_species": 0,
+    "sign_test_n": 28,
+    "sign_test_p_one_sided_for_negative_majority": 0.999999891966581,
+    "positive_to_nonpositive_pair_reversals": 8,
+    "support_status": "NOT_SUPPORTED"
+  },
+  "descriptive": {
+    "pair_mean_rho_early": 0.4277079086661853,
+    "pair_mean_rho_late": 0.780623001437602,
+    "pair_median_rho_early": 0.584243188206959,
+    "pair_median_rho_late": 0.884040080250607,
+    "pair_delta_negative": 43,
+    "pair_delta_positive": 350,
+    "pair_nonpositive_to_positive": 73,
+    "early_positive_fraction": 0.7964376590330788,
+    "late_positive_fraction": 0.9618320610687023
+  },
+  "negative_species": [
+    {"species": "Hirundo_rustica", "n_pairs": 1, "mean_delta_rho": -0.895765394773638},
+    {"species": "Vireo_flavifrons", "n_pairs": 13, "mean_delta_rho": -0.366088}
+  ],
+  "licensed_interpretation": "The preregistered broad degradation hypothesis is not supported. In this fixed 2002-2017 Amaral green-up mapping, signed detrended source-destination predictive connectivity increased strongly from the early to late non-overlapping window for most sampled species. This is an environmental association and does not establish improved bird information use, climate causality, fitness benefit, or universal strengthening of migration cues.",
+  "sensitivities_state": "UNOPENED_AFTER_PRIMARY_FREEZE"
+}
