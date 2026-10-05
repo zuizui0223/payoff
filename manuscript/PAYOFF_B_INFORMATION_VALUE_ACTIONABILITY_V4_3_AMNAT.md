@@ -398,12 +398,24 @@ was essentially unchanged (**4.11 to 4.17 d**; change +0.055 d, 95% CI -0.59
 to +0.63). By contrast, a target-trend-only forecast worsened from **3.18 to
 5.86 d** (change +2.68 d, 95% CI +2.34 to +3.01).
 
-Defining the posthoc day-scale value of source information as the reduction in
-held-out RMSE relative to that target-only baseline, mean source forecast skill
-changed from **-0.93 d to +1.70 d**, a gain of **+2.63 d**. The gain remained
-positive under source-cell, target-cell, 5-degree, and 10-degree cluster/block
-resampling. The fraction of spatial pairs for which source information improved
-held-out prediction rose from **29.5% to 78.9%**.
+To match the theoretical loss function, we defined posthoc
+cross-validated information value as the reduction in held-out squared error,
+
+[
+G_CV = MSE(no source) - MSE(source informed).
+]
+
+Mean G_CV changed from **-16.1 d^2 to +16.0 d^2**, a late-minus-early increase
+of **+32.1 d^2**. Pair-bootstrap and source-cell, target-cell, 5-degree and
+10-degree cluster/block intervals for the increase were all positive. The same
+result remained in the 58 source–destination pairs with all eight years
+observed in both windows: mean G_CV changed from **-2.66 d^2 to +25.64 d^2**
+(delta **+28.30 d^2**), again with all dependence-aware intervals positive.
+
+For intuition in days, the corresponding RMSE difference,
+RMSE(no source) - RMSE(source informed), changed from **-0.93 d to +1.70 d**.
+The fraction of spatial pairs for which source information reduced held-out
+squared error rose from **29.5% to 78.9%**.
 
 The environmental result therefore has a different interpretation from the
 original correlation-only reading: **destination spring became more variable,
