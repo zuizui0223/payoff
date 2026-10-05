@@ -57,12 +57,24 @@ Annotate clearly: preregistered primary result.
 B. Posthoc absolute environmental scale:
 destination anomaly SD 2.41 -> 4.66 d.
 
-C. Posthoc leave-one-year-out forecast comparison:
-- source-informed RMSE 4.11 -> 4.17 d;
-- target-trend-only RMSE 3.18 -> 5.86 d;
-- source forecast skill -0.93 -> +1.70 d.
+C. Posthoc cross-validated information value on the same squared-loss scale as
+the theory:
 
-Show dependence-aware interval for the +2.63-d skill gain.
+    G_CV = MSE(no source) - MSE(source informed).
+
+Show:
+- pair mean G_CV: -16.1 -> +16.0 d^2;
+- delta G_CV: +32.1 d^2;
+- 139/166 pairs positive;
+- equal-species delta: +20.87 d^2, with 25/28 species positive.
+
+Use a distribution/interval display rather than only two bars. Include the
+exact-complete sensitivity in a small inset or caption, not as a separate
+panel.
+
+For intuition, annotate the companion RMSE values:
+- source-informed 4.11 -> 4.17 d;
+- target-trend-only 3.18 -> 5.86 d.
 
 D. Bird tracking on the same day scale:
 absolute arrival-green-up mismatch
