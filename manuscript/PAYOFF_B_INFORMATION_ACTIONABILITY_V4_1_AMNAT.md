@@ -75,10 +75,11 @@ changed. Two interacting organisms exposed to the same environmental
 information can then optimally commit at different times solely because their
 response opportunities disappear at different rates.
 
-The resulting biological problem has three nested parts: forecasting a future
-seasonal state before it is directly observable, retaining options to alter a
-trajectory after commitment, and repeatedly estimating whether the trajectory
-is early or late at intermediate checkpoints. We develop those three parts in a
+This leads to one question: **why can better environmental predictability fail
+to produce better seasonal tracking?** The biological problem has three nested
+parts: forecasting a future seasonal state before it is directly observable,
+retaining options to alter a trajectory after commitment, and repeatedly
+estimating whether the trajectory is early or late at intermediate checkpoints. We develop those three parts in a
 reduced seasonal information–control model and connect them to a minimal
 downstream phase controller. We then stress-test the
 simpler alternative that contemporary mismatch is primarily caused by broad
@@ -102,7 +103,7 @@ into different realized timing.
 
 ## 2. Theory
 
-### 2.1 Information value can peak before information quality
+### 2.1 A better forecast can arrive too late to matter
 
 Let the future fitness-relevant seasonal state be uncertain and let
 (q(t)) denote the reliability of the information available at time or route
@@ -221,7 +222,7 @@ specialization here is the explicit coupling of an improving seasonal
 information trajectory to a declining biological actionability trajectory and
 the resulting finite information-use window.
 
-### 2.2 Commitment is followed by phase correction
+### 2.2 Departure error need not become arrival error
 
 Commitment does not necessarily end seasonal adjustment. A migrant can alter
 speed, stopover duration or route after departure; other organisms can retain
@@ -288,7 +289,7 @@ the same departure delay can therefore face very different effective
 deadlines, and a migrant that departs later can still suffer less residual
 timing loss if downstream recourse is larger.
 
-### 2.3 Entry timing and downstream control are distinct layers
+### 2.3 Intermediate checkpoints create a second timing layer
 
 Seasonal trajectories can contain at least two mechanistically different
 timing layers. A developmental or physiological entry process determines when
