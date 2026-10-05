@@ -424,10 +424,19 @@ G_CV = MSE(no source) - MSE(source informed).
 
 Mean G_CV changed from **-16.1 d^2 to +16.0 d^2**, a late-minus-early increase
 of **+32.1 d^2**. Pair-bootstrap and source-cell, target-cell, 5-degree and
-10-degree cluster/block intervals for the increase were all positive. The same
-result remained in the 58 source–destination pairs with all eight years
-observed in both windows: mean G_CV changed from **-2.66 d^2 to +25.64 d^2**
-(delta **+28.30 d^2**), again with all dependence-aware intervals positive.
+10-degree cluster/block intervals for the increase were all positive. The
+increase was widespread rather than outlier-driven: median delta G_CV was
+**+15.84 d^2**, the 10% trimmed mean was **+20.87 d^2**, and **139/166
+(83.7%)** spatial pairs were positive.
+
+The conclusion also survived alternative weighting. Giving every species equal
+weight produced mean G_CV values of **-6.06 d^2 early** and **+14.81 d^2
+late**, a change of **+20.87 d^2** (pair-incidence bootstrap 95% CI
+**+16.37 to +32.48**); **25/28 species** had positive changes. Among the 58
+source–destination pairs with all eight years observed in both windows, mean
+G_CV changed from **-2.66 d^2 to +25.64 d^2** (delta **+28.30 d^2**), again
+with all dependence-aware intervals positive and with the increase surviving
+omission of every calendar year.
 
 For intuition in days, the corresponding RMSE difference,
 RMSE(no source) - RMSE(source informed), changed from **-0.93 d to +1.70 d**.
