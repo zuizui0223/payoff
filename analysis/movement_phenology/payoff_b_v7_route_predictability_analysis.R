@@ -27,6 +27,7 @@ stopifnot(is.data.frame(d), is.data.frame(p))
 
 required_d <- c(
   "motusTagID","species","year","site_id_r1","site_id_r2",
+  "lon_r1","lat_r1","lon_r2","lat_r2",
   "lag_best_act_r1","lag_best_act_r2","dist_km","gw_rate_best_act"
 )
 required_p <- c(
@@ -60,6 +61,9 @@ m$site2_f <- factor(m$site_id_r2)
 z <- function(x) as.numeric(scale(x))
 m$dist_z <- z(m$dist_km)
 m$greenwave_z <- z(m$gw_rate_best_act)
+m$north_lat_z <- z(m$lat_r2)
+m$mean_lat_z <- z((m$lat_r1 + m$lat_r2)/2)
+m$abs_dlon_z <- z(abs(m$lon_r2 - m$lon_r1))
 
 complete_primary <- with(m,
   is.finite(recovery) &
@@ -111,6 +115,32 @@ if(nrow(b) >= 50) {
     f,"predictability_spearman","SENSITIVITY_SPEARMAN",nrow(b)
   )
 }
+
+# Pre-outcome spatial-geometry sensitivity. The primary model is unchanged.
+gdat <- a[
+  is.finite(a$north_lat_z) &
+  is.finite(a$mean_lat_z) &
+  is.finite(a$abs_dlon_z),
+  ,drop=FALSE
+]
+if(nrow(gdat) >= 50) {
+  gf <- lmer(
+    recovery ~ predictability_pearson + lag_best_act_r1 +
+      dist_z + greenwave_z + north_lat_z + mean_lat_z + abs_dlon_z +
+      species + year_f + (1|site1_f) + (1|site2_f),
+    data=gdat, REML=FALSE
+  )
+  results[[length(results)+1]] <- extract_term(
+    gf,"predictability_pearson","SENSITIVITY_SPATIAL_GEOMETRY",nrow(gdat)
+  )
+}
+
+q_dist_cor <- suppressWarnings(cor(
+  a$predictability_pearson,
+  a$dist_km,
+  use="complete.obs",
+  method="pearson"
+))
 
 # Mandatory common-window Pearson sensitivity.
 c <- m[
@@ -169,6 +199,8 @@ summary <- data.frame(
     "primary_lcl",
     "primary_ucl",
     "primary_singular",
+    "predictability_distance_correlation",
+    "high_collinearity_abs_r_gt_0_8",
     "classification"
   ),
   value=c(
@@ -181,6 +213,8 @@ summary <- data.frame(
     primary$lcl,
     primary$ucl,
     primary$singular,
+    q_dist_cor,
+    abs(q_dist_cor) > 0.8,
     classification
   ),
   stringsAsFactors=FALSE
