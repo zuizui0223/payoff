@@ -8,11 +8,12 @@ Article type: **Major Article**
 
 ## Abstract
 
-Seasonal tracking is often framed as a cue-reliability problem, but organisms
-face two sequential challenges: reducing uncertainty about future seasonal
-conditions and correcting timing error after commitment. We distinguish
-standardized environmental coupling, decision-scale information value, and
-opportunities for downstream correction.
+Forecasting future seasonal conditions and correcting timing error after
+commitment are both established components of seasonal tracking, but they are
+usually quantified on different scales. We distinguish standardized
+environmental coupling, decision-scale information value, and opportunities
+for downstream correction, asking how these components can maintain tracking
+as environmental variability increases.
 
 In migratory birds, a preregistered source–destination analysis showed
 detrended spring correlation increasing from 0.284 to 0.653. Posthoc
