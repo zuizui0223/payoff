@@ -69,6 +69,27 @@ Therefore V7 cannot claim novelty for:
 - time-varying cue selectivity;
 - urgency weakening willingness to wait for favorable conditions.
 
+### Bauer et al. 2020 — competing theoretical prediction
+
+Bauer et al. (2020), *Philosophical Transactions of the Royal Society B*,
+modeled migration through environments differing in predictability,
+variability and number of intermediate stopovers.
+
+Their model predicts:
+- higher environmental predictability improves migration timing;
+- intermediate stopovers can provide information;
+- information can be especially valuable in the **final migration step before
+  destination**.
+
+This creates a biologically meaningful competing expectation to the urgency
+route.
+
+Therefore V7 does not claim that "information becomes more valuable nearer the
+destination" or that "urgency reduces cue use" as new ideas.
+
+The empirical question is which tendency dominates when **predictability and
+route-stage urgency are measured simultaneously**.
+
 ## 4. Candidate contribution
 
 The only candidate biological contribution is the **joint test**:
