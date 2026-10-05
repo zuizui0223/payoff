@@ -194,9 +194,10 @@ diag_pairs$block10 <- paste(
 cluster_boot_mean <- function(df, value_col, cluster_col, B, seed) {
   keep <- is.finite(df[[value_col]]) & !is.na(df[[cluster_col]])
   dd <- df[keep, , drop = FALSE]
-  clusters <- unique(dd[[cluster_col]])
+  cluster_id <- as.character(dd[[cluster_col]])
+  clusters <- unique(cluster_id)
   if (length(clusters) < 2) return(c(low = NA_real_, high = NA_real_))
-  by_cluster <- split(dd[[value_col]], dd[[cluster_col]])
+  by_cluster <- split(dd[[value_col]], cluster_id)
 
   set.seed(seed)
   out <- rep(NA_real_, B)
