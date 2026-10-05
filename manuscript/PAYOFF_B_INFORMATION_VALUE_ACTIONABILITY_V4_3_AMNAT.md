@@ -437,13 +437,6 @@ RMSE(no source) - RMSE(source informed), changed from **-0.93 d to +1.70 d**.
 The fraction of spatial pairs for which source information reduced held-out
 squared error rose from **29.5% to 78.9%**.
 
-The increase was also broad across taxa. Equal weighting of the 28 species gave
-a mean increase of **+20.87 d^2** (pair-incidence bootstrap 95% CI +16.37 to
-+32.48), with **25 of 28 species** positive. In the exact-complete 58-pair
-subset, omitting each calendar year globally in turn left **16/16** mean
-increases positive and **16/16** pair-bootstrap intervals above zero; the
-smallest omitted-year mean increase was +23.02 d^2.
-
 The environmental result therefore has a different interpretation from the
 original correlation-only reading: **destination spring became more variable,
 but cross-site information became sufficiently more valuable that
