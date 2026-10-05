@@ -226,7 +226,7 @@ fit <- nlme::lme(
   control = nlme::lmeControl(returnObject = TRUE)
 )
 pair_mixed_estimate <- unname(nlme::fixef(fit)[1])
-pair_mixed_ci <- intervals(fit, which = "fixed")$fixed[1, c("lower", "upper")]
+pair_mixed_ci <- nlme::intervals(fit, which = "fixed")$fixed[1, c("lower", "upper")]
 
 set.seed(BOOT_SEED)
 species_levels <- levels(eligible$species)
