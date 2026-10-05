@@ -1,0 +1,32 @@
+{
+  "result_id": "payoff_b_v8_predictive_connectivity_sensitivity_20261005",
+  "date": "2026-10-05",
+  "status": "OPPOSITE_DIRECTION_ROBUST",
+  "workflow_run_id": 37281691204,
+  "artifact_id": 11332508224,
+  "primary_fisher_z_mean_change": 0.729057788766272,
+  "primary_fisher_z_se": 0.033909522414133,
+  "exact_complete_8year": {
+    "pairs": 178,
+    "mean_delta_rho": 0.39169155662745
+  },
+  "species_equal_weight_mean_delta_rho": 0.336354705682317,
+  "distance_moderator": {
+    "estimate_per_1sd_log_distance": 0.107981869157641,
+    "se": 0.02485065518911,
+    "p_value": 0.0000180710625893659
+  },
+  "raw_undetrended_negative_control_mean_change": 0.419293387450277,
+  "alternative_7year_windows": {
+    "windows": "2002-2008 vs 2011-2017",
+    "pairs": 260,
+    "mean_delta_rho": 0.332582428735665
+  },
+  "leave_one_species_out": {
+    "pair_mean_range": [0.341415735081295, 0.377512572578889],
+    "species_equal_weight_mean_range": [0.313819604004486, 0.381988783476982]
+  },
+  "migration_distance_class_available_in_frozen_source": false,
+  "interpretation": "All prespecified available sensitivities retain a positive early-to-late change in predictive connectivity. The registered degradation hypothesis remains not supported.",
+  "boundary": "The positive distance moderator is a prespecified sensitivity result, not a causal explanation for strengthening."
+}
