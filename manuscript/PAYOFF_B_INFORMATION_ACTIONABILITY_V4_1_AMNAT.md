@@ -11,7 +11,7 @@ actionability declines, usable information value can peak at an intermediate
 stage; under exponential information gain and actionability loss, the optimum
 has the closed form
 [
-t^*=rac{log(1+alpha/eta)}{alpha},
+t^*=frac{log(1+alpha/beta)}{alpha},
 ]
 so actors exposed to the same information trajectory can optimally commit at
 different times.
@@ -19,11 +19,11 @@ different times.
 We then prospectively tested the simpler information-loss explanation in
 migratory birds. Across 166 source–destination spatial pairs used by 28 species,
 detrended spring connectivity increased from 2002–2009 to 2010–2017
-(mean (Deltaho=+0.369), 95% pair-bootstrap CI +0.298 to +0.436; 26/28
+(mean (Deltarho=+0.369), 95% pair-bootstrap CI +0.298 to +0.436; 26/28
 species means positive), with the direction robust to source/target clustering,
 5° and 10° spatial blocking, and leave-one-year-out analyses. Yet larger
 connectivity gains did not predict larger reductions in arrival–green-up
-mismatch ((eta=+0.062), 95% CI -0.014 to +0.136), and structural nulls
+mismatch ((beta=+0.062), 95% CI -0.014 to +0.136), and structural nulls
 reproduced the apparent positive slope. Independent mule-deer analyses show
 strong phase convergence and signed downstream speed and stopover adjustments,
 while predeparture nutritional condition is associated with migration-start
@@ -122,7 +122,7 @@ where (S>0) is the total state-dependent loss scale and (B) is the larger
 loss associated with acting under the prior. The cue-action threshold is
 
 [
-q_0=rac{B}{S}.
+q_0=frac{B}{S}.
 ]
 
 Now introduce retained actionability
@@ -137,7 +137,7 @@ accumulated by delaying commitment. The net value of waiting until (t) and
 then using the available information is
 
 [
-oxed{
+boxed{
 N(t)=r(t)[Sq(t)-B]-C(t).
 }
 ]
@@ -153,10 +153,10 @@ on the right is the loss produced by shrinking actionability; the second is the
 direct marginal cost of waiting. With zero direct waiting cost,
 
 [
-oxed{
-rac{Sq'}{Sq-B}
+boxed{
+frac{Sq'}{Sq-B}
 =
--rac{r'}{r}.
+-frac{r'}{r}.
 }
 ]
 
@@ -173,16 +173,16 @@ q(t)=q_0+Delta q[1-exp(-alpha t)]
 and
 
 [
-r(t)=exp(-eta t),
+r(t)=exp(-beta t),
 ]
 
-with (alpha,eta>0) and no additional waiting cost. Then
+with (alpha,beta>0) and no additional waiting cost. Then
 
 [
 N(t)
 =
 SDelta q,
-exp(-eta t)
+exp(-beta t)
 [1-exp(-alpha t)].
 ]
 
@@ -191,14 +191,14 @@ intermediate stages, and returns toward zero as actionability disappears. It
 has a unique maximum at
 
 [
-oxed{
+boxed{
 t^*
 =
-rac{log(1+alpha/eta)}{alpha}.
+frac{log(1+alpha/beta)}{alpha}.
 }
 ]
 
-The optimum moves earlier as the rate of actionability loss (eta)
+The optimum moves earlier as the rate of actionability loss (beta)
 increases. Thus two actors observing exactly the same information trajectory
 can rationally commit at different times because one loses useful response
 options faster.
@@ -207,7 +207,7 @@ A fixed positive effective deadline cost produces an even sharper consequence.
 If the organism uses information only when
 
 [
-Kexp(-eta t)[1-exp(-alpha t)]>D,
+Kexp(-beta t)[1-exp(-alpha t)]>D,
 ]
 
 with (K=SDelta q) and (0<D<G_{max}), there are two crossing times
@@ -219,7 +219,7 @@ t_-<t^*<t_+.
 Information is worth using only in the finite interval
 
 [
-oxed{
+boxed{
 t_-<t<t_+,
 }
 ]
@@ -246,7 +246,7 @@ is early. Let (u_t) be the signed timing correction enacted at stage (t).
 A minimal phase equation is
 
 [
-oxed{
+boxed{
 e_{t+1}
 =
 phi_t(e_t-u_t)+w_t,
@@ -274,7 +274,7 @@ lambda_t e_t,
 with
 
 [
-oxed{
+boxed{
 lambda_t
 =
 phi_t(1-h_tK_t).
@@ -292,7 +292,7 @@ the biological severity of a deadline. If a delay (delta) can be partly
 recovered by a later correction (c), the effective cost can be written
 
 [
-D_{m eff}(delta)
+D_{rm eff}(delta)
 =
 J(delta)
 +
@@ -313,12 +313,12 @@ a focal behavioral or life-history mode becomes available. Represent an entry
 timer by an internal state (z_i(t)) and threshold (Theta_i):
 
 [
-	au_i
+tau_i
 =
 inf{t:z_i(t)geTheta_i}.
 ]
 
-The actor enters the trajectory at time (	au_i) with phase error
+The actor enters the trajectory at time (tau_i) with phase error
 (e_{i,0}).
 
 After entry, the organism repeatedly estimates ecological phase and uses the
@@ -326,16 +326,16 @@ remaining response set to choose corrections. In a serial architecture, the
 sequence is
 
 [
-oxed{
-	ext{become ready}
-ightarrow
-	ext{enter with }e_0
-ightarrow
-	ext{observe}
-ightarrow
-	ext{correct}
-ightarrow
-	ext{observe again}.
+boxed{
+text{become ready}
+rightarrow
+text{enter with }e_0
+rightarrow
+text{observe}
+rightarrow
+text{correct}
+rightarrow
+text{observe again}.
 }
 ]
 
@@ -348,7 +348,7 @@ For two interacting actors with constant post-entry retention
 (lambda_1,lambda_2), define their mean entry error and initial mismatch as
 
 [
-m_0=rac{e_{1,0}+e_{2,0}}{2},
+m_0=frac{e_{1,0}+e_{2,0}}{2},
 qquad
 Delta_0=e_{1,0}-e_{2,0}.
 ]
@@ -362,12 +362,12 @@ e_{i,n}=lambda_i^n e_{i,0},
 so interaction mismatch is exactly
 
 [
-oxed{
+boxed{
 Delta_n
 =
 (lambda_1^n-lambda_2^n)m_0
 +
-rac{lambda_1^n+lambda_2^n}{2}Delta_0.
+frac{lambda_1^n+lambda_2^n}{2}Delta_0.
 }
 ]
 
@@ -415,20 +415,20 @@ unique spatial pairs used by 28 species, mean predictive connectivity rose
 from
 
 [
-arho_{m early}=0.284
+barrho_{rm early}=0.284
 ]
 
 to
 
 [
-arho_{m late}=0.653.
+barrho_{rm late}=0.653.
 ]
 
 The mean change was
 
 [
-oxed{
-overline{Deltaho}=+0.369
+boxed{
+overline{Deltarho}=+0.369
 }
 ]
 
@@ -448,7 +448,7 @@ A basic remote-sensing support diagnostic also argues against a simple
 late-period data-support artefact. Mean log-transformed numbers of retained
 green-up pixels were essentially unchanged between periods at both source and
 target cells. Pairwise change in this support measure was negatively rather
-than positively correlated with (Deltaho) ((r=-0.279)); the largest
+than positively correlated with (Deltarho) ((r=-0.279)); the largest
 connectivity increases occurred in the lowest support-change quartile.
 
 We next asked whether routes with larger increases in environmental
@@ -456,7 +456,7 @@ predictability showed larger reductions in realized bird arrival–green-up
 mismatch over the same periods. Annual mismatch was defined as
 
 [
-log[1+|{m greenup}-{m arrival}|],
+log[1+|{rm greenup}-{rm arrival}|],
 ]
 
 and species-target cells required at least six finite bird observations in
@@ -467,7 +467,7 @@ weight.
 The predicted negative transfer was not detected:
 
 [
-hateta_{m transfer}=+0.0624,
+hatbeta_{rm transfer}=+0.0624,
 ]
 
 with 95% unique-pair bootstrap CI -0.0141 to +0.1363. The sample itself showed
@@ -642,14 +642,14 @@ when later stages substantially repair that error.
 The empirically useful unit is therefore a transition:
 
 [
-oxed{
-e_{m in}
-ightarrow
-	ext{available information}
-ightarrow
-	ext{actuator response}
-ightarrow
-e_{m out}.
+boxed{
+e_{rm in}
+rightarrow
+text{available information}
+rightarrow
+text{actuator response}
+rightarrow
+e_{rm out}.
 }
 ]
 
@@ -679,9 +679,9 @@ magnitude of its phenological shift. More mechanistically, systems differ along
 at least two axes:
 
 [
-	ext{information trajectory}
-	imes
-	ext{actionability trajectory}.
+text{information trajectory}
+times
+text{actionability trajectory}.
 ]
 
 A long-distance migrant can begin with remote, uncertain information but retain
@@ -777,14 +777,14 @@ The resulting view replaces a single phenological response rate with a
 sequence:
 
 [
-oxed{
-	ext{infer}
-ightarrow
-	ext{commit}
-ightarrow
-	ext{correct}
-ightarrow
-	ext{interact}.
+boxed{
+text{infer}
+rightarrow
+text{commit}
+rightarrow
+text{correct}
+rightarrow
+text{interact}.
 }
 ]
 
