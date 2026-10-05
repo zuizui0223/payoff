@@ -70,6 +70,37 @@ or sign reversal in route-level spring predictability.
 Schreven et al. are instead the strongest natural proof-of-concept motivating
 the broad test.
 
+### Tonelli et al. 2024, Ecology Letters
+
+Across 222 Nearctic bird species, arrival sensitivity to temperature, snowpack,
+precipitation and large-scale climate oscillations was spatially nonstationary.
+This establishes broad spatial heterogeneity in bird phenological responses to
+climate variability.
+
+It does not estimate temporal change in the **source-to-destination
+environmental correlation** available to a migrant before arrival.
+
+### Adams et al. 2025, Ecology
+
+Radar migration phenology across 53 Central Flyway stations shifted through
+time but did not fully compensate for changing temperature and vegetation
+phenology en route.
+
+This is important prior art for changing environmental exposure during
+migration, but it tests whether bird passage keeps pace with changing local
+conditions. It does not ask whether one route location has become a worse
+interannual predictor of a later location.
+
+### Bourski et al. 2026, Journal of Animal Ecology
+
+A 50-year Central Siberian first-arrival dataset showed that an environmental
+phenology index summarizing preceding temperature strongly predicts bird
+arrival and was interpreted as accumulated environmental information.
+
+This reinforces the biological importance of environmental information for
+migration timing but does not test temporal degradation of cross-site
+predictive relationships.
+
 ## Search boundary
 
 Targeted searches were run for:
