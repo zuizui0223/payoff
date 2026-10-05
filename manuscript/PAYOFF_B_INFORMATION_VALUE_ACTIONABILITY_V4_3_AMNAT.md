@@ -2,27 +2,28 @@
 
 ## Abstract
 
-Seasonal tracking is often reduced to cue reliability. Yet a cue can explain a
-larger fraction of environmental variation while absolute uncertainty remains
-high, and even valuable information matters only while actions capable of
-changing timing remain available. We distinguish standardized environmental
-coupling, decision-scale forecast value, and retained biological actionability.
-Under squared loss, source information can become more valuable as target
-variance rises even when residual uncertainty does not fall.
+Seasonal tracking depends on both what organisms can infer before seasonal
+decisions and what they can still correct afterward. Yet standardized
+environmental coupling, absolute forecast risk, and biological response
+opportunity need not move together. We distinguish decision-scale information
+value from retained actionability and connect both to post-entry phase
+correction.
 
 In migratory birds, a preregistered source–destination analysis showed
-detrended spring correlation increasing from 0.284 to 0.653. Posthoc
-diagnostics showed destination anomaly SD increasing from 2.41 to 4.66 d.
-Source-informed leave-one-year-out RMSE remained approximately unchanged
-(4.11 to 4.17 d), whereas target-only RMSE worsened from 3.18 to 5.86 d;
-source forecast skill therefore increased strongly. Bird arrival–green-up
-mismatch showed no corresponding deterioration. Independent mule-deer analyses
-showed strong phase convergence and signed downstream speed and stopover
-adjustment.
+detrended spring correlation increasing from 0.284 to 0.653 across 166 spatial
+pairs used by 28 species. Posthoc diagnostics showed destination anomaly SD
+increasing from 2.41 to 4.66 d. Cross-validated information value, defined as
+the reduction in held-out squared prediction loss from adding the source site,
+shifted from -16.1 to +16.0 d^2 (change +32.1 d^2); all spatial-dependence
+intervals were positive and 25/28 species showed increases. Bird
+arrival–green-up mismatch showed no corresponding deterioration. Independent
+mule-deer analyses showed strong phase convergence and signed downstream speed
+and stopover adjustments.
 
-Seasonal tracking therefore depends on two distinct questions: how much
-decision-relevant uncertainty environmental information removes, and how much
-opportunity remains to correct timing after that information becomes available.
+Thus environmental correlation is not itself biological information value,
+and information value is not itself realized adjustment. Seasonal tracking is
+better represented as a sequence of forecasting, commitment, phase
+re-estimation, and correction.
 
 **Keywords:** environmental predictability; phenological mismatch; seasonal
 timing; migration; actionability; feedback control
