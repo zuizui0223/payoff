@@ -465,12 +465,15 @@ equal-species weighting the posthoc day-scale change was -0.63 d (95% CI -1.15
 to -0.02). The preregistered log-mismatch change remained unresolved around
 zero.
 
-The previously registered change-on-change test using delta-rho did not support
-the predicted negative transfer to mismatch, and structural nulls showed that
-its positive point estimate could arise from shared green-up geometry.
-Following the metric-scale diagnostic, that test should not be interpreted as
-evidence that better information failed to improve tracking: delta-rho is not a
-complete decision-scale measure of forecast value.
+Neither environmental coordinate yielded a detected bird-specific
+route-level transfer. The preregistered change-on-change test using delta-rho
+did not support the predicted reduction in mismatch. A posthoc transfer test
+using delta G_CV likewise produced a raw positive day-scale slope, but a
+fixed-arrival environmental null was larger and the observed-minus-null bird
+increment was unresolved (-0.56 d, 95% CI -2.39 to +0.55). Within-window
+arrival permutations also reproduced the raw positive slope. We therefore do
+not interpret route-level changes in environmental forecast value as observed
+bird cue use.
 
 Replacing delta-rho with delta G_CV did not create the missing behavioral
 bridge. On the day scale, the raw equal-species coefficient was +2.43 d of
