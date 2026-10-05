@@ -16,9 +16,11 @@ cross-validation showed that destination variability simultaneously increased
 information changed from -16.1 to +16.0 d^2, an increase of +32.1 d^2. The
 increase was positive for 139/166 spatial pairs and 25/28 species and survived
 spatial dependence, complete-window, and calendar-year omission analyses.
-Bird arrival–green-up mismatch showed no corresponding deterioration.
-Independent mule-deer data showed strong phase convergence and signed
-downstream speed and stopover adjustments.
+Bird arrival–green-up mismatch showed no corresponding deterioration, but
+routes with larger gains in forecast value did not show bird-specific mismatch
+improvement beyond fixed-arrival and permutation structural nulls. Independent
+mule-deer data showed strong phase convergence and signed downstream speed and
+stopover adjustments.
 
 We formalize these results as a sequential architecture in which seasonal
 tracking depends first on the decision-scale value of environmental information
@@ -470,6 +472,15 @@ Following the metric-scale diagnostic, that test should not be interpreted as
 evidence that better information failed to improve tracking: delta-rho is not a
 complete decision-scale measure of forecast value.
 
+Replacing delta-rho with delta G_CV did not create the missing behavioral
+bridge. On the day scale, the raw equal-species coefficient was +2.43 d of
+mismatch change per 1 SD increase in delta G_CV, but a fixed-arrival
+environmental null produced +2.98 d. The observed-minus-null bird increment was
+-0.56 d (95% CI -2.39 to +0.55), and within-window arrival permutations
+reproduced the observed positive slope. Thus routes with larger increases in
+environmental forecast value did not show a detectable bird-specific
+improvement in realized mismatch.
+
 These analyses establish changing environmental information availability, not
 cue use by birds. The range-based source cells are environmental proxies, and
 the data do not show that individuals perceived the fitted source information
@@ -759,9 +770,12 @@ stable and the no-source forecast deteriorated sharply.
 
 This reveals a general distinction between **information value** and
 **residual uncertainty**. A more variable environment can make a cue more
-valuable even when absolute uncertainty remains substantial. Whether that
-information changes phenology is a separate biological question, because
-information must still arrive while consequential actions remain available.
+valuable even when absolute uncertainty remains substantial. In the bird data,
+larger route-level gains in forecast value did not translate into detectable
+bird-specific mismatch improvement beyond structural nulls. Whether valuable
+environmental information changes phenology is therefore a separate biological
+question: organisms must perceive it and still retain consequential actions
+capable of changing timing.
 
 Mule-deer trajectories illustrate the downstream side of that problem.
 Individuals entering migration at different signed phases alter movement speed
