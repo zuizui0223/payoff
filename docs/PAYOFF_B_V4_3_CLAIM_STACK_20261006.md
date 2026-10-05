@@ -94,8 +94,12 @@ Not licensed:
 - birds perceived or used this source signal;
 - source information caused realized tracking.
 
-Pending robustness:
-- alternative climatological-mean baseline.
+Additional robustness:
+- climatological-mean baseline delta G_CV = +22.37 d^2;
+- 136/166 pairs positive;
+- equal-species delta = +21.30 d^2;
+- 24/28 species positive;
+- all source/target/spatial-block intervals positive.
 
 ## Claim 4 — source-informed absolute forecast error did not deteriorate
 
@@ -139,8 +143,16 @@ Not licensed:
 - stable mismatch was caused by nonlocal information;
 - actionability or downstream correction buffered the birds.
 
-Pending diagnostic:
-- posthoc delta-G_CV to mismatch-change transfer with structural nulls.
+Posthoc transfer diagnostic:
+- log-scale beta = +0.245, CI -0.015 to +0.419;
+- day-scale beta = +2.43 d per SD delta G_CV, CI +0.35 to +3.65;
+- fixed-arrival null day-scale beta = +2.98 d;
+- observed-minus-null bird increment = -0.56 d, CI -2.39 to +0.55;
+- within-window arrival permutations reproduce the positive slope.
+
+Licensed conclusion:
+> Larger route-level gains in environmental forecast value did not produce a
+> detectable bird-specific improvement in mismatch after structural nulls.
 
 ## Claim 6 — downstream signed correction exists in a natural seasonal trajectory
 
