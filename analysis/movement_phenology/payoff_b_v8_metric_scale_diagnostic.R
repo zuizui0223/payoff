@@ -218,6 +218,16 @@ pair_boot_mean <- function(x, B, seed) {
 
 summary_rows <- list()
 sr <- 0L
+# Out-of-sample source value on the same day scale.
+# Positive skill means the source-informed forecast has lower RMSE than a
+# target-trend-only forecast. This is explicitly post-hoc.
+diag_pairs$loo_skill_rmse_early <-
+  diag_pairs$loo_null_rmse_early - diag_pairs$loo_rmse_early
+diag_pairs$loo_skill_rmse_late <-
+  diag_pairs$loo_null_rmse_late - diag_pairs$loo_rmse_late
+diag_pairs$delta_loo_skill_rmse <-
+  diag_pairs$loo_skill_rmse_late - diag_pairs$loo_skill_rmse_early
+
 for (m in metrics) {
   e <- diag_pairs[[paste0(m, "_early")]]
   l <- diag_pairs[[paste0(m, "_late")]]
@@ -262,6 +272,56 @@ for (m in metrics) {
   )
 }
 diag_summary <- do.call(rbind, summary_rows)
+
+skill_ok <- is.finite(diag_pairs$loo_skill_rmse_early) &
+  is.finite(diag_pairs$loo_skill_rmse_late) &
+  is.finite(diag_pairs$delta_loo_skill_rmse)
+
+skill_pair_ci <- pair_boot_mean(
+  diag_pairs$delta_loo_skill_rmse[skill_ok],
+  DIAG_BOOT_B,
+  DIAG_SEED + 10L
+)
+skill_source_ci <- cluster_boot_mean(
+  diag_pairs[skill_ok, ], "delta_loo_skill_rmse", "source_cell",
+  DIAG_BOOT_B, DIAG_SEED + 11L
+)
+skill_target_ci <- cluster_boot_mean(
+  diag_pairs[skill_ok, ], "delta_loo_skill_rmse", "target_cell",
+  DIAG_BOOT_B, DIAG_SEED + 12L
+)
+skill_block5_ci <- cluster_boot_mean(
+  diag_pairs[skill_ok, ], "delta_loo_skill_rmse", "block5",
+  DIAG_BOOT_B, DIAG_SEED + 13L
+)
+skill_block10_ci <- cluster_boot_mean(
+  diag_pairs[skill_ok, ], "delta_loo_skill_rmse", "block10",
+  DIAG_BOOT_B, DIAG_SEED + 14L
+)
+
+forecast_skill_summary <- data.frame(
+  n_pairs = sum(skill_ok),
+  loo_skill_rmse_early_mean =
+    mean(diag_pairs$loo_skill_rmse_early[skill_ok]),
+  loo_skill_rmse_late_mean =
+    mean(diag_pairs$loo_skill_rmse_late[skill_ok]),
+  delta_loo_skill_rmse_mean =
+    mean(diag_pairs$delta_loo_skill_rmse[skill_ok]),
+  pair_ci_low_95 = skill_pair_ci[1],
+  pair_ci_high_95 = skill_pair_ci[2],
+  source_cluster_ci_low_95 = skill_source_ci[1],
+  source_cluster_ci_high_95 = skill_source_ci[2],
+  target_cluster_ci_low_95 = skill_target_ci[1],
+  target_cluster_ci_high_95 = skill_target_ci[2],
+  block5_ci_low_95 = skill_block5_ci[1],
+  block5_ci_high_95 = skill_block5_ci[2],
+  block10_ci_low_95 = skill_block10_ci[1],
+  block10_ci_high_95 = skill_block10_ci[2],
+  share_source_better_early =
+    mean(diag_pairs$loo_skill_rmse_early[skill_ok] > 0),
+  share_source_better_late =
+    mean(diag_pairs$loo_skill_rmse_late[skill_ok] > 0)
+)
 
 rmse_ok <- is.finite(diag_pairs$delta_rmse_in)
 share_rmse_improved <- mean(diag_pairs$delta_rmse_in[rmse_ok] < 0)
@@ -421,6 +481,11 @@ write.csv(
   row.names = FALSE
 )
 write.csv(
+  forecast_skill_summary,
+  "outputs/payoff_b_v8_metric_scale_forecast_skill_summary.csv",
+  row.names = FALSE
+)
+write.csv(
   bird_rows,
   "outputs/payoff_b_v8_metric_scale_bird_rows.csv",
   row.names = FALSE
@@ -440,5 +505,7 @@ cat("\nV8 POST-HOC METRIC-SCALE DIAGNOSTIC\n")
 print(status)
 cat("\nEnvironmental metrics:\n")
 print(diag_summary)
+cat("\nOut-of-sample source forecast skill:\n")
+print(forecast_skill_summary)
 cat("\nBird mismatch on day and frozen log scales:\n")
 print(bird_summary)
