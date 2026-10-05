@@ -4,6 +4,12 @@ Date: **2026-10-05**
 
 Status: **PREOUTCOME; no broad connectivity-trend result opened**
 
+**Preoutcome dependency correction:** after the admission gate passed and before any
+focal correlation outcome was opened, exact reuse of spatial source-target
+pairs across species was identified. Sections 7–8 below supersede the original
+species-only clustering rule; see
+`docs/PAYOFF_B_V8_DEPENDENCY_CORRECTION_20261005.md`.
+
 ## 1. Biological question
 
 > **Has climate change degraded the spatial environmental relationships that
@@ -120,33 +126,66 @@ not a claim that every route pair degrades.
 
 ## 7. Primary inferential unit
 
-Source-target cell pairs within a species are not treated as independent
-species replicates.
+A preoutcome dependency audit after the outcome-blind admission gate showed
+that many species use the same exact environmental source-target cell pair.
+Because the environmental correlation is identical for a shared spatial pair,
+species-by-pair rows cannot be treated as independent environmental outcomes.
 
-Primary reporting therefore has two levels:
+The active dependence correction is recorded in:
 
-### Pair-level model
-A mixed intercept model for (Deltaho_{jp}) with species as a grouping
-factor.
+`docs/PAYOFF_B_V8_DEPENDENCY_CORRECTION_20261005.md`.
 
-### Species-level robustness
-For each species, calculate the mean (Deltaho) across eligible mapped
-pairs. Report:
-- number of species with negative versus positive species means;
-- one-sided sign test for a negative majority;
-- mean species-level (Deltaho) with a species bootstrap interval.
+The primary inferential unit is therefore the **unique spatial source-target
+pair**.
 
-The headline conclusion requires the direction to be consistent between the
-pair-level mixed estimate and the species-level summary.
+For each unique spatial pair, calculate exactly one signed correlation change:
+
+```text
+delta_rho_pair = rho_late - rho_early
+```
+
+Primary reporting has two complementary summaries.
+
+### Unique-spatial-pair summary
+
+Report the unweighted mean correlation change across unique spatial pairs. This
+weights each environmental relationship once.
+
+### Equal-species exposure summary
+
+For each species, calculate its mean correlation change across the unique
+spatial pairs in its frozen mapping, then average those species means. This
+prevents species represented by many breeding cells from dominating the
+biological summary.
+
+Species labels define ecological exposure; they do not duplicate the underlying
+environmental outcome.
+
+### Dependency-aware bootstrap
+
+Use exactly:
+
+```text
+BOOTSTRAP_UNIT = UNIQUE_SPATIAL_PAIR
+BOOTSTRAP_REPLICATES = 10000
+BOOTSTRAP_SEED = 20261005
+```
+
+A sampled spatial pair carries its complete frozen species-incidence set when
+the equal-species summary is recomputed.
+
+The number and fraction of species with negative species means are reported
+descriptively. The original binomial sign test is not used inferentially
+because species means can share the same spatial environmental pairs.
 
 ## 8. Primary support rule
 
 V8 supports broad degradation only if all are true:
 
-1. the pair-level mean change is negative;
-2. its species-cluster bootstrap 95% interval excludes zero;
-3. more than half of species have negative species-mean change;
-4. the one-sided species sign test is p < 0.05.
+1. the unique-spatial-pair mean change is negative;
+2. its 95% unique-spatial-pair bootstrap interval excludes zero;
+3. the equal-species exposure mean change is negative;
+4. its dependency-aware bootstrap interval excludes zero.
 
 If any condition fails:
 
@@ -154,7 +193,11 @@ If any condition fails:
 V8_BROAD_DEGRADATION = NOT_SUPPORTED
 ```
 
-No window, source mapping, detrending method or species threshold is changed.
+No window, source mapping, detrending method, directional hypothesis or
+admission threshold is changed.
+
+This support-rule correction was made before any V8 early/late correlation or
+correlation-change outcome was opened.
 
 ## 9. Admission gate
 
