@@ -46,6 +46,13 @@ acting without it. A cue can therefore become more informative in relative or
 decision-theoretic terms while the environment simultaneously becomes more
 variable in absolute units.
 
+This decision-scale framing has strong prior foundations. McNamara et al.
+(2011) explicitly showed that the consequences of seasonal cue use depend on
+changes in cue–optimum correlation, slope, and the variance of the optimal
+timing target, while Usinowicz and O'Connor (2023) developed a broader fitness
+value-of-information framework for ecology. We therefore do not treat
+decision-scale information value itself as new.
+
 A second distinction appears after information is acquired. Biological systems
 combine anticipatory and feedback processes in fluctuating environments
 (Bernhardt et al. 2020), and migration makes the separation especially visible.
@@ -197,10 +204,12 @@ t_- < t < t_+ even while q(t) continues to improve. Early in a seasonal
 trajectory, the future can be too poorly known; late in the trajectory, the
 future can be well known but too little remains changeable.
 
-Generic value of information, feedforward/feedback control, and optimal
-stopping are established ideas. The specific seasonal contribution here is the
-joint geometry of decision-scale forecast value and declining biological
-actionability, followed by explicit post-entry phase correction.
+Generic value of information, cue–timing loss models,
+feedforward/feedback control, and optimal stopping are established ideas. The
+specific contribution sought here is narrower: connect a time-varying
+decision-scale forecast value to declining biological actionability and then to
+explicit post-entry phase correction, while testing the environmental
+forecast-value component in a multi-species migration system.
 
 ### 2.2 Departure error need not become arrival error
 
@@ -786,3 +795,12 @@ Liu, Q., S. Piao, Y. H. Fu, M. Gao, J. Peñuelas, and I. A. Janssens. 2019.
 Climatic warming increases spatial synchrony in spring vegetation phenology
 across the Northern Hemisphere. Geophysical Research Letters 46:1641–1650.
 doi:10.1029/2018GL081370.
+
+
+McNamara, J. M., Z. Barta, M. Klaassen, and S. Bauer. 2011. Cues and the
+optimal timing of activities under environmental changes. Ecology Letters
+14:1183–1190. doi:10.1111/j.1461-0248.2011.01686.x.
+
+Usinowicz, J., and M. I. O'Connor. 2023. The fitness value of ecological
+information in a variable world. Ecology Letters 26:621–639.
+doi:10.1111/ele.14166.
