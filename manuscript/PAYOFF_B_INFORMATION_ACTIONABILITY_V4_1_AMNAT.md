@@ -14,7 +14,7 @@ has the closed form
 t^* = log(1 + α/β) / α,
 ]
 so actors exposed to the same information trajectory can optimally commit at
-different ×.
+different times.
 
 We then prospectively tested the simpler information-loss explanation in
 migratory birds. Across 166 source–destination spatial pairs used by 28 species,
@@ -83,7 +83,7 @@ information need not increase monotonically. It can be low early because the
 future is poorly known, peak at an intermediate stage, and decline again even
 while cue reliability continues to improve because too little can still be
 changed. Two interacting organisms exposed to the same environmental
-information can then optimally commit at different × solely because their
+information can then optimally commit at different times solely because their
 response opportunities disappear at different rates.
 
 The resulting biological problem has three nested parts: forecasting a future
@@ -200,17 +200,17 @@ log(1 + α/β) / α.
 
 The optimum moves earlier as the rate of actionability loss (β)
 increases. Thus two actors observing exactly the same information trajectory
-can rationally commit at different × because one loses useful response
+can rationally commit at different times because one loses useful response
 options faster.
 
 A fixed positive effective deadline cost produces an even sharper consequence.
 If the organism uses information only when
 
 [
-Kexp(-βt)[1 - exp(-αt)]>D,
+K exp(-βt)[1 - exp(-αt)] > D,
 ]
 
-with (K = SΔq) and (0<D<G_{max}), there are two crossing ×
+with (K = SΔq) and (0<D<G_{max}), there are two crossing times
 
 [
 t_-<t^*<t_+.
@@ -441,7 +441,7 @@ predictability showed larger reductions in realized bird arrival–green-up
 mismatch over the same periods. Annual mismatch was defined as
 
 [
-log[1+|{rm greenup}-{rm arrival}|],
+log[1 + |green-up - arrival|],
 ]
 
 and species-target cells required at least six finite bird observations in
@@ -607,13 +607,13 @@ when later stages substantially repair that error.
 The empirically useful unit is therefore a transition:
 
 [
-e_{rm in}
+e_in
 →
 available information
 →
 actuator response
 →
-e_{rm out}.
+e_out.
 ]
 
 Repeated transitions can estimate how much phase error is retained and where
@@ -736,7 +736,7 @@ information has value only while consequential actions remain available.
 Environmental predictability can improve while biological actionability
 declines, producing an intermediate window in which information is most useful
 and allowing different actors exposed to the same information trajectory to
-commit at different ×.
+commit at different times.
 
 After commitment, downstream control adds a second layer. Signed phase error can
 be corrected, retained or amplified depending on the information and response
