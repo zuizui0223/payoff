@@ -37,6 +37,13 @@ V7 is a direct follow-up to that declared limitation.
   connectivity and realized mismatch.
 - PAYOFF-B preregistered wigeon result: predictive-connectivity by incoming
   phase did **not** support stronger post-error correction.
+- Bobowski et al. (2025, Scientific Reports) used a Common Yellowthroat
+  genoscape to show that Gulf Coast passage timing differs among breeding
+  populations and is associated with breeding-ground spring onset, remaining
+  migration distance and sex when population structure is considered. That
+  study does not observe paired within-individual downstream catch-up and does
+  not estimate historical phenological predictability between sequential
+  route locations.
 
 Therefore V7 cannot claim:
 - environmental predictability is a new concept;
