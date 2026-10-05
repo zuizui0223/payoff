@@ -431,14 +431,17 @@ increase was widespread rather than outlier-driven: median delta G_CV was
 **+15.84 d^2**, the 10% trimmed mean was **+20.87 d^2**, and **139/166
 (83.7%)** spatial pairs were positive.
 
-The conclusion also survived alternative weighting. Giving every species equal
-weight produced mean G_CV values of **-6.06 d^2 early** and **+14.81 d^2
-late**, a change of **+20.87 d^2** (pair-incidence bootstrap 95% CI
-**+16.37 to +32.48**); **25/28 species** had positive changes. Among the 58
-source–destination pairs with all eight years observed in both windows, mean
-G_CV changed from **-2.66 d^2 to +25.64 d^2** (delta **+28.30 d^2**), again
-with all dependence-aware intervals positive and with the increase surviving
-omission of every calendar year.
+The conclusion also survived alternative weighting and baseline choice.
+Giving every species equal weight produced mean G_CV values of **-6.06 d^2
+early** and **+14.81 d^2 late**, a change of **+20.87 d^2** (pair-incidence
+bootstrap 95% CI **+16.37 to +32.48**); **25/28 species** had positive
+changes. Replacing the target-trend comparator with a target climatological
+mean still gave a pair-mean increase of **+22.37 d^2** (95% CI **+18.13 to
++26.78**) and **24/28 species** positive. Among the 58 source–destination pairs
+with all eight years observed in both windows, mean trend-baseline G_CV changed
+from **-2.66 d^2 to +25.64 d^2** (delta **+28.30 d^2**), again with all
+dependence-aware intervals positive and with the increase surviving omission of
+every calendar year.
 
 For intuition in days, the corresponding RMSE difference,
 RMSE(no source) - RMSE(source informed), changed from **-0.93 d to +1.70 d**.
