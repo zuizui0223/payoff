@@ -25,6 +25,7 @@ jobs:
           path: |
             outputs/payoff_b_v8_metric_scale_pairs.csv
             outputs/payoff_b_v8_metric_scale_summary.csv
+            outputs/payoff_b_v8_metric_scale_forecast_skill_summary.csv
             outputs/payoff_b_v8_metric_scale_bird_rows.csv
             outputs/payoff_b_v8_metric_scale_bird_summary.csv
             outputs/payoff_b_v8_metric_scale_status.csv
