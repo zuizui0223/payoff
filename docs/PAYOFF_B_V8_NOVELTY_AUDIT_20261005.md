@@ -118,6 +118,25 @@ multi-species migratory-bird sample.
 
 This is a search result, not proof of priority.
 
+## Explicit field call already present in the literature
+
+Bauer et al. (2020) did more than show that predictability can affect optimal
+migration. They explicitly argued that climatic connectivity should be
+quantified across major migration routes and that repeating such analyses over
+past decades could test whether uneven climate change has altered existing
+correlations.
+
+That proposal is extremely close to the environmental question in V8.
+
+Therefore V8 does **not** claim to invent the question of changing migration
+predictability. Its candidate contribution is empirical scale and execution:
+a frozen broad multi-species test of temporal change in the same
+source-to-destination interannual spring-correlation object.
+
+This is useful for field positioning because the question is an explicit
+migration-ecology research agenda rather than a control-theory inference added
+after the fact.
+
 ## Why this is biologically distinct
 
 A spatially heterogeneous trend can change the mean timing difference between
