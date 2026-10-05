@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-05",
+  "status": "PREOUTCOME_SCHEMA_GATE_ONLY",
+  "project": "PAYOFF-B V7 route predictability",
+  "primary_field": "migration ecology / information ecology / global-change phenology",
+  "primary_question": "Does historical phenological predictability along a migration segment determine how strongly individual songbirds catch up to spring en route?",
+  "source_data": {
+    "bird_dataset": {
+      "citation": "Nemes et al. 2024 Journal of Animal Ecology 93:294-306",
+      "doi": "10.1111/1365-2656.14025",
+      "zenodo": "10.5281/zenodo.10094686",
+      "wide_url": "https://zenodo.org/records/10094686/files/nemes_et_al_bird_pheno_wide_2023.RDS?download=1",
+      "long_url": "https://zenodo.org/records/10094686/files/nemes_et_al_bird_pheno_long_2023.RDS?download=1"
+    },
+    "phenology_predictability": {
+      "source": "USA National Phenology Network historical annual Spring Index First Leaf anomaly",
+      "period": "1981 through year before each focal migration year",
+      "doi_family": "10.5066/F7SN0723",
+      "primary_measure": "Pearson correlation of annual first-leaf anomalies between paired south and north receiver cells",
+      "secondary_measure": "prediction RMSE from north anomaly ~ south anomaly",
+      "outcome_year_excluded": true
+    }
+  },
+  "prior_art_boundary": [
+    "Kölzsch et al. 2015 showed that phenological predictability along goose routes can affect migration timing.",
+    "Bauer et al. 2020 developed theory linking environmental variability, information reliability and migration timing.",
+    "Nemes et al. 2024 showed that four songbird species catch up to spring during migration and explicitly stated that phenological predictability was not measured.",
+    "PAYOFF-B's preregistered Eurasian wigeon predictive-connectivity by incoming-phase correction interaction was not supported.",
+    "V7 does not claim that predictability, green-wave tracking, en-route adjustment or catch-up are new."
+  ],
+  "primary_estimands": {
+    "south_lag": "bird detection day at south receiver minus local actual spring-onset day",
+    "north_lag": "bird detection day at north receiver minus local actual spring-onset day",
+    "recovery": "south_lag - north_lag; positive values mean catch-up toward spring",
+    "predictability": "pre-outcome historical correlation of spring-onset anomalies between the individual's south and north receiver cells"
+  },
+  "schema_gate": {
+    "first_allowed_outputs": [
+      "column names",
+      "row counts",
+      "unique individual count",
+      "species count",
+      "tracking years",
+      "unique south-site count",
+      "unique north-site count",
+      "unique paired-route count",
+      "presence and missingness of coordinates and required timing columns"
+    ],
+    "forbidden_before_schema_freeze": [
+      "predictability values",
+      "recovery values or summaries",
+      "predictability-recovery association",
+      "species-specific effect signs",
+      "model coefficients"
+    ],
+    "minimum_for_primary_route": {
+      "individuals_with_pair_and_coordinates": 50,
+      "unique_route_pairs": 10,
+      "species": 3
+    }
+  },
+  "primary_hypothesis": {
+    "id": "H1",
+    "prediction": "Higher pre-outcome phenological predictability is associated with greater reduction of south phenological lag by the north receiver.",
+    "direction": "d(recovery)/d(predictability) > 0"
+  },
+  "primary_model": "recovery ~ predictability + south_lag + route_distance + actual_green_wave_rate + species + year + (1|south_site) + (1|north_site)",
+  "secondary_model": "north_lag ~ south_lag * predictability + route_distance + actual_green_wave_rate + species + year + site random effects; predicted south_lag:predictability interaction < 0",
+  "mandatory_sensitivities": [
+    "Spearman rather than Pearson historical predictability",
+    "fixed pre-outcome historical window common to all birds",
+    "exclude route pairs with fewer than 20 historical years",
+    "first-leaf only primary; NDVI-based historical predictability only if independently reconstructable",
+    "leave-one-species-out",
+    "US-only receiver pairs if USA-NPN historical raster coverage excludes Canadian northern receivers",
+    "control for migration distance and tracking year",
+    "cluster/route-pair robust uncertainty if mixed model is unstable"
+  ],
+  "claim_ceiling": {
+    "supported": "Historical predictability along tracked route segments is associated with the degree to which songbirds close their phenological lag while migrating through North America.",
+    "not_licensed": [
+      "proof that birds cognitively estimate correlation",
+      "causal effect of predictability",
+      "universal rule across migratory birds",
+      "fitness rescue",
+      "reinterpretation of the preregistered wigeon null as support"
+    ]
+  },
+  "outcome_access_state": "UNOPENED",
+  "reopen_or_stop_rule": "If the schema gate fails, close V7 without lowering thresholds. If a post-2023 prior study is found to have already tested the same route-predictability moderation in these or comparable individual songbird data, stop for prior-art collision before outcome modeling."
+}
