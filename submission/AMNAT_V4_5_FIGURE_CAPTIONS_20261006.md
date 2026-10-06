@@ -24,7 +24,7 @@ cue use by birds.
 
 ## Figure 3. Individual trajectories can correct signed phase after commitment
 
-Red Desert mule deer provide an independent individual-level correction anchor.
+Red Desert mule deer (Odocoileus hemionus) provide an independent individual-level correction anchor.
 Across 152 animal-years, signed Days-From-Peak SD declined from 26.41 to
 13.17 d (variance ratio 0.249), 70.4% ended closer to peak green-up, and mean
 absolute phase error declined from 21.91 to 11.12 d. More positive starting
