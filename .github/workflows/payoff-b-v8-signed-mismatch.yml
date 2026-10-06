@@ -1,0 +1,31 @@
+name: payoff-b-v8-signed-mismatch
+
+on:
+  push:
+    branches:
+      - audit/payoff-b-v8-dependence-quality-20261005
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_signed_mismatch_diagnostic.R"
+      - ".github/workflows/payoff-b-v8-signed-mismatch.yml"
+
+jobs:
+  signed-mismatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run signed arrival-greenup mismatch diagnostic
+        run: Rscript analysis/movement_phenology/payoff_b_v8_signed_mismatch_diagnostic.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-signed-mismatch
+          path: |
+            outputs/payoff_b_v8_signed_mismatch_rows.csv
+            outputs/payoff_b_v8_signed_mismatch_species.csv
+            outputs/payoff_b_v8_signed_mismatch_pairs.csv
+            outputs/payoff_b_v8_signed_mismatch_summary.csv
+            outputs/payoff_b_v8_signed_mismatch_bootstrap.csv
+          if-no-files-found: error
