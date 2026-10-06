@@ -1,0 +1,29 @@
+name: payoff-b-v8-temporal-order-audit
+
+on:
+  push:
+    branches:
+      - audit/payoff-b-v8-dependence-quality-20261005
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_temporal_order_audit.R"
+      - ".github/workflows/payoff-b-v8-temporal-order-audit.yml"
+
+jobs:
+  temporal-order:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run source-target temporal-order audit
+        run: Rscript analysis/movement_phenology/payoff_b_v8_temporal_order_audit.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-temporal-order-audit
+          path: |
+            outputs/payoff_b_v8_temporal_order_pairs.csv
+            outputs/payoff_b_v8_temporal_order_window_summary.csv
+            outputs/payoff_b_v8_temporal_order_joint_summary.csv
+          if-no-files-found: error
