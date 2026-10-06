@@ -42,9 +42,9 @@ def test_build_package_and_anonymous_boundaries(tmp_path):
 
     assert (out / "supporting_information.md").exists()
     assert (out / "figure_captions.md").exists()
-    assert (out / "figures" / "PAYOFF_B_V45_FIG1_FRAMEWORK.svg").exists()
-    assert (out / "figures" / "PAYOFF_B_V45_FIG2_BIRDS.svg").exists()
-    assert (out / "figures" / "PAYOFF_B_V45_FIG3_MULE_DEER.svg").exists()
+    assert (out / "figures" / "figure1.svg").exists()
+    assert (out / "figures" / "figure2.svg").exists()
+    assert (out / "figures" / "figure3.svg").exists()
     assert zip_path.exists()
 
 
