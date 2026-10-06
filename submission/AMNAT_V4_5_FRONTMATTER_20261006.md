@@ -6,6 +6,10 @@
 
 Article type: **Major Article**
 
+## Short title
+
+**Information access and correction**
+
 ## Abstract
 
 Environmental states can be forecastable to an analyst without providing
@@ -32,7 +36,7 @@ to accessible information, retained actionability, and correction.
 ## Keywords
 
 environmental forecastability; information access; phenological mismatch;
-migration; seasonal timing; actionability; feedback control
+migration; actionability; feedback control
 
 ## One-sentence contribution
 
