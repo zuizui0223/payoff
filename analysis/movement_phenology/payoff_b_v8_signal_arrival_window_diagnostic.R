@@ -13,9 +13,17 @@ options(stringsAsFactors = FALSE)
 # capacity. It is only a necessary temporal-order condition for the source
 # signal to inform arrival timing.
 
-PRIMARY_SCRIPT <- "analysis/movement_phenology/payoff_b_v8_primary.R"
-if (!file.exists(PRIMARY_SCRIPT)) stop("Missing V8 primary script")
-source(PRIMARY_SCRIPT, local = FALSE)
+GATE_SCRIPT <- "analysis/movement_phenology/payoff_b_v8_admission_gate.R"
+if (!file.exists(GATE_SCRIPT)) stop("Missing V8 admission-gate script")
+source(GATE_SCRIPT, local = FALSE)
+
+eligible_map <- eligible
+eligible_map$pair_key <- paste(
+  eligible_map$source_cell,
+  eligible_map$target_cell,
+  sep = "->"
+)
+primary_pair_keys <- unique(eligible_map$pair_key)
 
 B <- 10000L
 SEED <- 20261006L
@@ -25,7 +33,7 @@ MIN_YEARS <- 6L
 map <- unique(eligible_map[, c(
   "species", "target_cell", "source_cell", "pair_key"
 )])
-map <- map[map$pair_key %in% pairs$pair_key, , drop = FALSE]
+map <- map[map$pair_key %in% primary_pair_keys, , drop = FALSE]
 
 bird <- dat[, c("species", "year", "cell", "arr_GAM_mean", "gr_mn")]
 bird$year <- as.integer(bird$year)
