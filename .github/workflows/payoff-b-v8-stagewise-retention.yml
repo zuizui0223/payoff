@@ -1,0 +1,30 @@
+name: payoff-b-v8-stagewise-retention
+
+on:
+  push:
+    branches:
+      - audit/payoff-b-v8-dependence-quality-20261005
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_stagewise_phase_retention_null.R"
+      - ".github/workflows/payoff-b-v8-stagewise-retention.yml"
+
+jobs:
+  stagewise-retention:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run stagewise phase-retention structural null
+        run: Rscript analysis/movement_phenology/payoff_b_v8_stagewise_phase_retention_null.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-stagewise-retention
+          path: |
+            outputs/payoff_b_v8_stagewise_retention_rows.csv
+            outputs/payoff_b_v8_stagewise_retention_summary.csv
+            outputs/payoff_b_v8_stagewise_retention_bootstrap.csv
+            outputs/payoff_b_v8_stagewise_retention_permutation.csv
+          if-no-files-found: error
