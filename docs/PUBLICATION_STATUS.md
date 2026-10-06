@@ -207,6 +207,24 @@ Same-system stagewise support:
 The frozen journal-facing V2 remains a rollback/provenance source and is not
 silently rewritten by V4.5.
 
+### V4.5 submission-build state — 2026-10-06
+
+```text
+SCIENTIFIC_STOP_RULE = FROZEN
+MAIN_FIGURES = PASS
+ANONYMOUS_REVIEW_ZIP = PASS
+ANONYMOUS_REPRODUCIBILITY_ZIP = PASS
+AMNAT_STYLE_METADATA = PASS
+REVIEW_DOCX = WORDCOUNT_FIX_PENDING_FINAL_RENDER_QA
+```
+
+Submission-package receipt:
+
+`docs/PAYOFF_B_V4_5_SUBMISSION_PACKAGE_RECEIPT_20261006.md`
+
+Do not reopen biological analyses unless a main-figure validity, source-definition
+or measurement-error defect is identified.
+
 ### Post-freeze Paper-2 development line
 
 The frozen journal-facing V2 remains the submission/audit source above. It is
