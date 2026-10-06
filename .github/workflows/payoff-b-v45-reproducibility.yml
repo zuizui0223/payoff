@@ -1,5 +1,9 @@
 name: payoff-b-v45-reproducibility
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
