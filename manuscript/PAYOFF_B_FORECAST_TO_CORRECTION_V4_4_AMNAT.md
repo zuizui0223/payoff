@@ -650,13 +650,21 @@ operational environmental analogue of decision-scale information value, not a
 direct estimate of the expected fitness value of information to an organism.
 
 The increase in standardized coupling is the preregistered result. The
-day-scale forecast decomposition and cross-validated information value were
-constructed after that outcome was known and are therefore explicitly posthoc.
-Moreover, G_CV is defined by squared prediction error in green-up date; it is a
-forecast-value proxy, not an organismal fitness value of information.
-They are useful because they reveal the scale structure hidden by rho, but they
-cannot be relabelled as confirmatory. The analysis also does not identify
-anthropogenic climate change as the cause of any two-window difference.
+day-scale forecast decomposition, cross-validated forecast value, temporal-order
+audits, signed timing decomposition and stagewise analyses were constructed
+after that outcome was known and are therefore explicitly posthoc. They reveal
+structure hidden by rho but cannot be relabelled as confirmatory. The analysis
+also does not identify anthropogenic climate change as the cause of any
+two-window difference.
+
+The stagewise bird bridge is also restricted to 31 source–target pairs from
+14 species with sufficiently complete arrival estimates at both stages.
+Arrival posterior SD was substantially larger in the early period. Propagating
+the reported posterior uncertainty around the arrival means retained a negative
+late-minus-early phase-transformation change in all 5,000 simulations, but an
+inverse-variance weighted sensitivity retained a negative point estimate with a
+95% interval spanning zero. The stagewise result is therefore supporting
+population-level geometry, not a measurement-error-invariant causal estimate.
 
 The modest stability of absolute arrival–green-up distance should not be read
 as successful active tracking. Signed timing shows that target green-up
@@ -699,9 +707,14 @@ nulls.
 The bird result therefore identifies a missing conversion step rather than a
 simple shortage of environmental information. A signal can be statistically
 valuable and temporally available without being known to have been encountered,
-perceived, integrated or translated into a timing response.
+perceived, integrated or translated into a timing response. In the restricted
+same-species stage subset, population-level relative timing was nevertheless
+transformed between source and target rather than passively retained, providing
+a same-system bridge from environmental opportunity to downstream timing
+without identifying individual feedback.
 
-Mule-deer trajectories illustrate the downstream side of this problem.
+Mule-deer trajectories illustrate the individual-level downstream side of this
+problem.
 Individuals entering migration at different signed phases alter movement speed
 and stopover use in opposite directions and strongly compress phase variation
 before the end of migration. Forecasting future conditions and correcting
