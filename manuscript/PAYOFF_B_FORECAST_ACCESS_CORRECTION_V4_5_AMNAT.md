@@ -149,6 +149,10 @@ baseline and therefore produce a negative G_CV. We treat G_CV as an
 **operational forecast-value proxy** for a declared model comparison, not as a
 nonnegative theoretical value of information.
 
+Figure 1 summarizes the resulting hierarchy from external forecastability to
+organismal information access, retained actionability and downstream
+correction.
+
 Now let r(t) ∈ [0,1] denote retained actionability: the fraction of the fully
 informed state-contingent response that remains implementable. Let C(t) be the
 direct cost of waiting. We use the reduced form
@@ -699,7 +703,8 @@ whereas IFBFat intervals spanned zero in both downstream models.
 The mule-deer data therefore provide a candidate same-population
 timer–controller anchor: predeparture condition is associated with when
 migration begins, while ecological phase is associated with how migration is
-subsequently paced. The evidence does not establish causal independence,
+subsequently paced. Figure 3 summarizes the individual-level phase contraction and signed
+actuator responses. The evidence does not establish causal independence,
 identify nutritional condition with a unique physiological readiness variable,
 or separately estimate information weight, opportunity, behavioral gain,
 passive retention and process noise.
