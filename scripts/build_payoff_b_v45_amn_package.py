@@ -87,7 +87,7 @@ def validate_manuscript(text: str) -> dict:
         if required not in text:
             raise ValueError(f"missing required manuscript element: {required}")
 
-    abstract = extract_between(text, "## Abstract", "**Keywords:**")
+    abstract = extract_between(text, "## Abstract", "Keywords:")
     main = text[: text.index("## Literature Cited")]
     aw = word_count(abstract)
     mw = word_count(main)
