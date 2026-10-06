@@ -827,8 +827,8 @@ by remaining actionability. The strongest support would be a reproducible
 entry–peak–exit pattern in cue use while raw cue accuracy or correlation
 continues to improve.
 
-Recent GPS work on spring-departing Brent geese provides a useful boundary
-case: the effect of tailwind assistance on departure was strongest early in the
+Recent GPS work on spring-departing Brent geese (Branta bernicla) provides a
+useful boundary case: the effect of tailwind assistance on departure was strongest early in the
 season and weakened to near unity late in the departure window as migratory
 urgency increased (Theurich et al. 2026). That result is consistent with
 late-stage loss of cue selectivity, but it does not test the predicted hump
