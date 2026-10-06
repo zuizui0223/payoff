@@ -35,8 +35,8 @@ def clean(text: str) -> str:
 
 
 def word_count(text: str) -> int:
-    cleaned = re.sub(r"[\\[\\]{}()*#]", " ", text)
-    return len([x for x in re.split(r"\\s+", cleaned.strip()) if x])
+    cleaned = re.sub(r"[\[\]{}()*#]", " ", text)
+    return len(cleaned.split())
 
 
 def set_double(paragraph) -> None:
@@ -214,7 +214,7 @@ def build(output: Path) -> dict:
 
     add_body(doc, f"Short title: {short_title}", indent=False)
     add_body(doc, f"Keywords: {keywords}", indent=False)
-    add_body(doc, f"Text word count: {text_words}", indent=False)
+    add_body(doc, f"Word count excluding Literature Cited: {text_words}", indent=False)
     add_body(doc, "Article type: Major Article", indent=False)
     add_body(
         doc,
