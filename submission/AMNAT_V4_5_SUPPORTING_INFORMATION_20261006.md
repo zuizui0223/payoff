@@ -405,7 +405,7 @@ No bird controller gain is claimed.
 ## S8. Mule-deer source-data reanalysis
 
 Source:
-Ortega et al. (2023) public Source Data.
+Ortega et al. (2023) public Source Data for mule deer (Odocoileus hemionus).
 
 Sample:
 - 152 animal-years;
