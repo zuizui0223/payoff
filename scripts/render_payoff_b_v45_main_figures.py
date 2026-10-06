@@ -296,7 +296,7 @@ def figure2(data: dict) -> str:
             w=total_w*frac
             out.append(rect(x,y,w,38,fill=col,stroke="white",width=1))
             if w>44:
-                out.append(text(x+w/2,y+25,f"{100*frac:.0f}%",12,"700","middle","white"))
+                out.append(text(x+w/2,y+25,f"{100*frac:.1f}%",12,"700","middle","white"))
             x+=w
         out.append(text(1040,y-10,label,13,"700"))
     y=390
