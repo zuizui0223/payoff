@@ -29,6 +29,8 @@ def test_docx_build_and_structure(tmp_path):
 
     assert "Seasonal tracking depends on information access" in full
     assert "Short title: Information access and correction" in full
+    assert "Text word count:" in full
+    assert "Manuscript elements:" in full
     assert "Abstract" in full
     assert "1. Introduction" in full
     assert "3. Methods" in full
