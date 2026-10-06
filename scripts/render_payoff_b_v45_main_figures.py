@@ -410,11 +410,11 @@ def figure3(data: dict) -> str:
     for x,y,w,h,a,b,col in stages:
         out.append(rect(x,y,w,h,fill="white",stroke=col,width=2,rx=8))
         out.append(text(x+w/2,y+30,a,14,"700","middle",col))
-        out.append(text(x+w/2,y+57,b,13,"middle",fill=MUTED))
+        out.append(text(x+w/2,y+57,b,13,"normal","middle",MUTED))
     for (x1,x2) in [(330,400),(645,720),(965,1040)]:
         out.append(arrow(x1,665,x2,665,MUTED,2.5))
     out.append(text(705,760,"Published compensation phenomenon; reanalysis places it on the continuous phase scale.",13,"700","middle"))
-    out.append(text(705,788,"This does not identify the bird mechanism.",12,"middle",fill=RED))
+    out.append(text(705,788,"This does not identify the bird mechanism.",12,"normal","middle",RED))
 
     return svg_page(
         "Figure 3. Individual trajectories can correct signed phase after commitment",
