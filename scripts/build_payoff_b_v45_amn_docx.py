@@ -90,11 +90,37 @@ def add_body(doc, value: str, indent: bool = True) -> None:
     p.add_run(clean(value))
 
 
+def clean_equation_text(value: str) -> str:
+    out = value
+    replacements = (
+        ("\\Delta", "Δ"),
+        ("\\lambda", "λ"),
+        ("\\phi", "φ"),
+        ("\\rho", "ρ"),
+        ("\\sigma", "σ"),
+        ("\\alpha", "α"),
+        ("\\beta", "β"),
+        ("\\tau", "τ"),
+        ("\\Theta", "Θ"),
+        ("\\ge", "≥"),
+        ("\\le", "≤"),
+        ("\\in", "∈"),
+        ("\\!", ""),
+        ("\\text{-}", "-"),
+        ("\\ ", " "),
+    )
+    for old, new in replacements:
+        out = out.replace(old, new)
+    out = out.replace("^2", "²")
+    return out
+
+
 def add_equation(doc, lines: list[str]) -> None:
     p = doc.add_paragraph()
     set_double(p)
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.add_run(" ".join(x.strip() for x in lines if x.strip()))
+    raw = " ".join(x.strip() for x in lines if x.strip())
+    p.add_run(clean_equation_text(raw))
 
 
 def render_markdown(doc, text: str) -> None:
