@@ -144,54 +144,79 @@ pairs <- pairs[
   drop=FALSE
 ]
 
-# Stagewise availability subset.
-arr <- dat[,c("species","year","cell","arr_GAM_mean")]
+# Stagewise availability subset: reproduce the stagewise script exactly by
+# requiring same-year source and target rows with finite arrival AND green-up.
+arr <- dat[,c("species","year","cell","arr_GAM_mean","gr_mn")]
 arr$year <- as.integer(arr$year)
 arr$cell <- as.numeric(as.character(arr$cell))
 arr$arr_GAM_mean <- as.numeric(arr$arr_GAM_mean)
+arr$gr_mn <- as.numeric(arr$gr_mn)
 arr <- arr[
   is.finite(arr$year) &
     is.finite(arr$cell) &
-    is.finite(arr$arr_GAM_mean),
+    is.finite(arr$arr_GAM_mean) &
+    is.finite(arr$gr_mn),
   ,
   drop=FALSE
 ]
 arr <- unique(arr)
 
-count_arrival <- function(sp,cell,start_year,end_year){
-  length(unique(arr$year[
-    arr$species==sp &
-      arr$cell==cell &
-      arr$year>=start_year &
-      arr$year<=end_year
-  ]))
-}
-
 unit_map <- unique(eligible_map[,c(
   "species","pair_key","source_cell","target_cell"
 )])
-unit_map$src_e <- mapply(
-  count_arrival,unit_map$species,unit_map$source_cell,
-  MoreArgs=list(start_year=EARLY_START,end_year=EARLY_END)
-)
-unit_map$src_l <- mapply(
-  count_arrival,unit_map$species,unit_map$source_cell,
-  MoreArgs=list(start_year=LATE_START,end_year=LATE_END)
-)
-unit_map$tgt_e <- mapply(
-  count_arrival,unit_map$species,unit_map$target_cell,
-  MoreArgs=list(start_year=EARLY_START,end_year=EARLY_END)
-)
-unit_map$tgt_l <- mapply(
-  count_arrival,unit_map$species,unit_map$target_cell,
-  MoreArgs=list(start_year=LATE_START,end_year=LATE_END)
-)
 
-stage_units <- unit_map[
-  unit_map$src_e>=MIN_YEARS &
-    unit_map$src_l>=MIN_YEARS &
-    unit_map$tgt_e>=MIN_YEARS &
-    unit_map$tgt_l>=MIN_YEARS,
+src_arr <- arr
+names(src_arr)[names(src_arr)=="cell"] <- "source_cell"
+names(src_arr)[names(src_arr)=="arr_GAM_mean"] <- "source_arrival"
+names(src_arr)[names(src_arr)=="gr_mn"] <- "source_greenup"
+
+tgt_arr <- arr
+names(tgt_arr)[names(tgt_arr)=="cell"] <- "target_cell"
+names(tgt_arr)[names(tgt_arr)=="arr_GAM_mean"] <- "target_arrival"
+names(tgt_arr)[names(tgt_arr)=="gr_mn"] <- "target_greenup"
+
+stage_rows <- merge(
+  unit_map,
+  src_arr[,c("species","year","source_cell","source_arrival","source_greenup")],
+  by=c("species","source_cell"),
+  all=FALSE,
+  sort=FALSE
+)
+stage_rows <- merge(
+  stage_rows,
+  tgt_arr[,c("species","year","target_cell","target_arrival","target_greenup")],
+  by=c("species","target_cell","year"),
+  all=FALSE,
+  sort=FALSE
+)
+stage_rows <- stage_rows[
+  stage_rows$year>=EARLY_START &
+    stage_rows$year<=LATE_END,
+  ,
+  drop=FALSE
+]
+stage_rows$period <- ifelse(stage_rows$year<=EARLY_END,"early","late")
+
+stage_counts <- aggregate(
+  year ~ species + pair_key + source_cell + target_cell + period,
+  data=stage_rows,
+  FUN=function(x) length(unique(x))
+)
+se <- stage_counts[stage_counts$period=="early",]
+sl <- stage_counts[stage_counts$period=="late",]
+names(se)[names(se)=="year"] <- "early_n"
+names(sl)[names(sl)=="year"] <- "late_n"
+se$period <- NULL
+sl$period <- NULL
+
+stage_units <- merge(
+  se,sl,
+  by=c("species","pair_key","source_cell","target_cell"),
+  all=FALSE
+)
+stage_units <- stage_units[
+  stage_units$early_n>=MIN_YEARS &
+    stage_units$late_n>=MIN_YEARS,
   ,
   drop=FALSE
 ]
