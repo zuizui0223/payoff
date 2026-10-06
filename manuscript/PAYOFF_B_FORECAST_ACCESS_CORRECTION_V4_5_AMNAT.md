@@ -12,7 +12,7 @@ In migratory birds, a preregistered source–destination analysis showed
 detrended spring correlation increasing from 0.284 to 0.653. Posthoc
 cross-validation showed destination variability increasing from 2.41 to 4.66 d
 while the squared-loss forecast value of adding nonlocal environmental
-structure changed from -16.1 to +16.0 d^2. Yet in a restricted stage subset,
+structure changed from -16.1 to +16.0 d². Yet in a restricted stage subset,
 the realized source mid-green-up event occurred after the population front had
 already reached the source cell in most annual observations, so the predictor
 cannot be treated as an observed online cue. Target green-up advanced by 2.31 d
@@ -568,21 +568,21 @@ G_CV = MSE(no source) - MSE(source informed).
 ]
 
 This is an environmental forecast value, not an organismal fitness value of
-information. Mean G_CV changed from -16.1 d^2 to +16.0 d^2, a
-late-minus-early increase of +32.1 d^2. The increase was widespread:
-median delta G_CV was +15.84 d^2, the 10% trimmed mean was +20.87 d^2,
+information. Mean G_CV changed from -16.1 d² to +16.0 d², a
+late-minus-early increase of +32.1 d². The increase was widespread:
+median delta G_CV was +15.84 d², the 10% trimmed mean was +20.87 d²,
 and 139/166 (83.7%) spatial pairs were positive. Equal-species weighting
-gave a change of +20.87 d^2 with 25/28 species positive. A
+gave a change of +20.87 d² with 25/28 species positive. A
 climatological-mean no-source baseline still gave a pair-mean increase of
-+22.37 d^2, and the exact 8/8-year subset retained a +28.30 d^2
++22.37 d², and the exact 8/8-year subset retained a +28.30 d²
 increase. In that subset, omission of every calendar year left all 16 mean
 increases and all 16 bootstrap intervals positive.
 
 The forecast-value increase was not unique to the frozen nearest-source choice.
 On a common 223-row, 22-species sample, the first-, second- and third-nearest
 lower-latitude sources all showed positive mean increases in G_CV (+37.2,
-+33.5 and +29.1 d^2, respectively). The nearest-versus-third-nearest
-equal-species contrast was +10.68 d^2 (95% CI +2.46 to +18.96), whereas the
++33.5 and +29.1 d², respectively). The nearest-versus-third-nearest
+equal-species contrast was +10.68 d² (95% CI +2.46 to +18.96), whereas the
 nearest-versus-second contrast remained unresolved. We therefore interpret the
 result as regional nonlocal forecast structure, not a uniquely identified cue
 site.
@@ -696,7 +696,7 @@ error declined from 21.91 d to 11.12 d.
 
 The same source table shows the expected signed actuator geometry. Each
 additional day of positive start-phase error was associated descriptively with
-+0.0683 km d(^{-1}) higher movement rate (95% animal-cluster bootstrap
++0.0683 km d⁻¹ higher movement rate (95% animal-cluster bootstrap
 +0.0554 to +0.0800) and -0.492 d of stopover use (95% CI -0.569 to -0.412).
 After centering within year, the corresponding slopes remained +0.0852 and
 -0.614, with both intervals excluding zero. Late individuals therefore moved
