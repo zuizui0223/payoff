@@ -34,6 +34,11 @@ def clean(text: str) -> str:
     return text.replace("**", "").replace(chr(96), "")
 
 
+def word_count(text: str) -> int:
+    cleaned = re.sub(r"[\\[\\]{}()*#]", " ", text)
+    return len([x for x in re.split(r"\\s+", cleaned.strip()) if x])
+
+
 def set_double(paragraph) -> None:
     pf = paragraph.paragraph_format
     pf.line_spacing = 2.0
@@ -180,6 +185,8 @@ def build(output: Path) -> dict:
         raise ValueError("keyword count must be 1 to 6")
 
     main_text = manuscript[manuscript.index("## 1. Introduction"):]
+    main_before_refs = manuscript[:manuscript.index("## Literature Cited")]
+    text_words = word_count(main_before_refs)
 
     doc = Document()
     sec = doc.sections[0]
@@ -207,7 +214,15 @@ def build(output: Path) -> dict:
 
     add_body(doc, f"Short title: {short_title}", indent=False)
     add_body(doc, f"Keywords: {keywords}", indent=False)
+    add_body(doc, f"Text word count: {text_words}", indent=False)
     add_body(doc, "Article type: Major Article", indent=False)
+    add_body(
+        doc,
+        "Manuscript elements: Abstract; Introduction; Theory; Methods; Natural evidence; "
+        "Discussion; Conclusion; Literature Cited; Figure Legends; 3 main figures; "
+        "Supporting Information.",
+        indent=False,
+    )
 
     p = doc.add_paragraph()
     p.add_run().add_break(WD_BREAK.PAGE)
@@ -235,6 +250,7 @@ def build(output: Path) -> dict:
         "title": title,
         "short_title": short_title,
         "keywords": len(keyword_list),
+        "text_words": text_words,
     }
 
 
