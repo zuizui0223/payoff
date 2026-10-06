@@ -116,8 +116,9 @@ layer.
 Our central claim is that environmental forecastability, biological access
 to information, and realized adjustment are distinct stages of seasonal
 tracking. Standardized coupling
-alone cannot rank forecast value, and even a valuable, temporally leading
-environmental signal does not by itself establish cue use or correction.
+alone cannot rank forecast value, and even valuable target-predictive
+environmental structure does not by itself establish organismal access, cue use
+or correction.
 
 ---
 
