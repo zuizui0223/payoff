@@ -1,10 +1,8 @@
-# Cover letter draft — The American Naturalist
+# Editorial Manager Author Comments draft — The American Naturalist
 
-Dear Editors,
-
-Please consider our manuscript, **“Seasonal tracking depends on information
-access and opportunities for correction,”** as a Major Article in *The American
-Naturalist*.
+The journal does not expect a cover letter for initial submission. Use only the
+parts below that are genuinely needed in the Editorial Manager Comments field;
+avoid a sales pitch.
 
 Seasonal organisms face a problem that is often described with a single word,
 predictability, but that problem contains several distinct biological stages.
@@ -63,9 +61,3 @@ Information.
 [STATEMENT THAT THE MANUSCRIPT IS NOT UNDER CONSIDERATION ELSEWHERE]
 
 [AUTHOR / CORRESPONDING-AUTHOR INFORMATION]
-
-Thank you for your consideration.
-
-Sincerely,
-
-[CORRESPONDING AUTHOR]
