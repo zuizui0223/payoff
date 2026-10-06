@@ -167,7 +167,6 @@ scripts/render_payoff_b_v45_main_figures.py.
             }
             for p in sorted(copied)
         },
-        "identity_scan_terms": list(FORBIDDEN_IDENTIFIERS),
     }
     mp = output_dir / "MANIFEST.json"
     mp.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
