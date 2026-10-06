@@ -1,0 +1,188 @@
+{
+  "status": "frozen_v45_main_figure_data",
+  "date": "2026-10-06",
+  "manuscript": "manuscript/PAYOFF_B_FORECAST_ACCESS_CORRECTION_V4_5_AMNAT.md",
+  "evidence_policy": {
+    "figure_1": "conceptual/theoretical schematic; generic VOI/control theory not claimed as novel",
+    "figure_2": "bird preregistered rho result plus explicitly posthoc frozen diagnostics",
+    "figure_3": "Ortega et al. 2023 published phenomenon plus frozen public-source-data reanalysis"
+  },
+  "figure_1": {
+    "gaussian": {
+      "baseline_risk": "sigma_Y^2",
+      "ideal_observer_value": "sigma_Y^2 rho^2",
+      "residual_risk": "sigma_Y^2 (1-rho^2)"
+    },
+    "hierarchy": [
+      "environmental forecastability G_E",
+      "organismal information access G_O",
+      "retained actionability r",
+      "correction"
+    ],
+    "inequality": "0 <= G_O <= G_E",
+    "reduced_form": "N(t) = r(t) G_O(t) - C(t)",
+    "exponential_tstar": "t* = log(1 + alpha/beta) / alpha",
+    "phase_update": "e_(t+1) = phi_t [e_t - u_t] + w_t"
+  },
+  "figure_2": {
+    "preregistered": {
+      "rho_early": 0.2838,
+      "rho_late": 0.6528,
+      "delta_rho": 0.369,
+      "delta_rho_ci": [
+        0.2984,
+        0.4365
+      ],
+      "positive_species": [
+        26,
+        28
+      ]
+    },
+    "posthoc_environment": {
+      "target_sd_early_days": 2.412,
+      "target_sd_late_days": 4.662,
+      "target_sd_delta_days": 2.25,
+      "target_sd_delta_ci": [
+        1.946,
+        2.549
+      ],
+      "Gcv_early_d2": -16.094,
+      "Gcv_late_d2": 15.987,
+      "delta_Gcv_d2": 32.082,
+      "delta_Gcv_ci": [
+        21.04,
+        46.796
+      ],
+      "median_delta_Gcv_d2": 15.843,
+      "trimmed10_delta_Gcv_d2": 20.871,
+      "positive_pairs": [
+        139,
+        166
+      ],
+      "equal_species_delta_Gcv_d2": 20.87,
+      "equal_species_delta_Gcv_ci": [
+        16.37,
+        32.48
+      ],
+      "positive_species_Gcv": [
+        25,
+        28
+      ],
+      "climatology_delta_Gcv_d2": 22.37,
+      "source_rank_delta_Gcv_d2": [
+        37.23,
+        33.46,
+        29.13
+      ],
+      "source_rank_dist_km": [
+        469,
+        614,
+        732
+      ],
+      "rank1_minus_rank3_equal_species_d2": 10.68,
+      "rank1_minus_rank3_ci": [
+        2.46,
+        18.96
+      ]
+    },
+    "observability": {
+      "subset_pairs": 31,
+      "subset_species": 14,
+      "early": {
+        "before_source_arrival": 0.298,
+        "between_source_target": 0.296,
+        "after_target_arrival": 0.416,
+        "source_event_minus_source_arrival_days": 4.21,
+        "target_arrival_minus_source_event_days": 2.18
+      },
+      "late": {
+        "before_source_arrival": 0.458,
+        "between_source_target": 0.183,
+        "after_target_arrival": 0.361,
+        "source_event_minus_source_arrival_days": 0.7,
+        "target_arrival_minus_source_event_days": 3.83
+      }
+    },
+    "population_timing": {
+      "target_greenup_early_day": 130.98,
+      "target_greenup_late_day": 128.67,
+      "target_greenup_shift_day": -2.31,
+      "target_greenup_shift_ci": [
+        -2.58,
+        -2.08
+      ],
+      "arrival_early_day": 123.17,
+      "arrival_late_day": 122.98,
+      "arrival_shift_day": -0.19,
+      "arrival_shift_ci": [
+        -0.95,
+        0.52
+      ],
+      "signed_lag_early_day": -7.81,
+      "signed_lag_late_day": -5.69,
+      "signed_lag_shift_day": 2.12,
+      "signed_lag_shift_ci": [
+        1.41,
+        2.77
+      ]
+    },
+    "stagewise_support": {
+      "phase_transform_early_day": -3.57,
+      "phase_transform_late_day": -4.95,
+      "delta_phase_transform_day": -1.37,
+      "delta_phase_transform_ci": [
+        -2.36,
+        -0.36
+      ],
+      "attenuation_fraction": 0.392,
+      "attenuation_fraction_ci": [
+        0.101,
+        0.656
+      ],
+      "measurement_note": "posterior-normal propagation retained direction; inverse-variance interval crossed zero"
+    }
+  },
+  "figure_3": {
+    "animal_years": 152,
+    "individuals": 72,
+    "phase_sd_start_day": 26.41,
+    "phase_sd_end_day": 13.17,
+    "variance_ratio": 0.249,
+    "variance_ratio_ci": [
+      0.167,
+      0.362
+    ],
+    "within_year_variance_ratio": 0.294,
+    "lambda": 0.107,
+    "lambda_ci": [
+      0.013,
+      0.209
+    ],
+    "closer_fraction": 0.704,
+    "mean_abs_start_day": 21.91,
+    "mean_abs_end_day": 11.12,
+    "movement_slope_km_day_per_phase_day": 0.0683,
+    "movement_slope_ci": [
+      0.0554,
+      0.08
+    ],
+    "stopover_slope_day_per_phase_day": -0.4919,
+    "stopover_slope_ci": [
+      -0.569,
+      -0.412
+    ],
+    "movement_within_year_slope": 0.0852,
+    "stopover_within_year_slope": -0.614
+  },
+  "provenance": [
+    "docs/PAYOFF_B_V8_DEPENDENCE_QUALITY_AUDIT_RESULT_20261005.md",
+    "docs/PAYOFF_B_V8_METRIC_SCALE_DIAGNOSTIC_RESULT_20261005.md",
+    "docs/PAYOFF_B_V8_INFORMATION_VALUE_BASELINE_RESULT_20261006.md",
+    "docs/PAYOFF_B_V8_SOURCE_RANK_SENSITIVITY_RESULT_20261006.md",
+    "docs/PAYOFF_B_V8_SOURCE_EVENT_OBSERVABILITY_RESULT_20261006.md",
+    "docs/PAYOFF_B_V8_INFORMATION_VALUE_TRANSFER_RESULT_20261006.md",
+    "docs/PAYOFF_B_V8_STAGEWISE_PHASE_RESULT_20261006.md",
+    "docs/PAYOFF_B_V8_STAGEWISE_MEASUREMENT_UNCERTAINTY_RESULT_20261006.md",
+    "docs/PAYOFF_B_ORTEGA_VARIANCE_FUNNEL_RESULT_20261003.md"
+  ]
+}
