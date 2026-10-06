@@ -969,14 +969,13 @@ Bauer, S., J. M. McNamara, and Z. Barta. 2020. Environmental variability,
 reliability of information and the timing of migration. Proceedings of the
 Royal Society B 287:20200622. doi:10.1098/rspb.2020.0622.
 
-Ortega, A. C., E. O. Aikens, J. A. Merkle, K. L. Monteith, and M. J. Kauffman.
-2023. Migrating mule deer compensate en route for phenological mismatches.
-Nature Communications 14:2008. doi:10.1038/s41467-023-37750-z.
+Bernhardt, J. R., M. I. O'Connor, J. M. Sunday, and A. Gonzalez. 2020. Life in
+fluctuating environments. Philosophical Transactions of the Royal Society B
+375:20190454. doi:10.1098/rstb.2019.0454.
 
-Theurich, N., S. Garthe, F. Jiguet, P. Bocher, and P. Schwemmer. 2026.
-Departing with the wind: spring migration timing in Brent geese from their most
-important staging and wintering site, the Wadden Sea World Heritage Site.
-Ecology and Evolution 16:e74119. doi:10.1002/ece3.74119.
+Koenig, W. D., and A. M. Liebhold. 2016. Temporally increasing spatial
+synchrony of North American temperature and bird populations. Nature Climate
+Change 6:614–617. doi:10.1038/nclimate2933.
 
 Kölzsch, A., G. J. D. M. Müskens, H. Kruckenberg, P. Glazov, R. Weinzierl,
 B. A. Nolet, and M. Wikelski. 2015. Forecasting spring from afar? Timing of
@@ -984,29 +983,18 @@ migration and predictability of phenology along different migration routes of
 an avian herbivore. Journal of Animal Ecology 84:272–283.
 doi:10.1111/1365-2656.12281.
 
-Bernhardt, J. R., M. I. O'Connor, J. M. Sunday, and A. Gonzalez. 2020. Life in
-fluctuating environments. Philosophical Transactions of the Royal Society B
-375:20190454. doi:10.1098/rstb.2019.0454.
-
-
-Koenig, W. D., and A. M. Liebhold. 2016. Temporally increasing spatial
-synchrony of North American temperature and bird populations. Nature Climate
-Change 6:614–617. doi:10.1038/nclimate2933.
-
 Liu, Q., S. Piao, Y. H. Fu, M. Gao, J. Peñuelas, and I. A. Janssens. 2019.
 Climatic warming increases spatial synchrony in spring vegetation phenology
 across the Northern Hemisphere. Geophysical Research Letters 46:1641–1650.
 doi:10.1029/2018GL081370.
 
-
 McNamara, J. M., Z. Barta, M. Klaassen, and S. Bauer. 2011. Cues and the
 optimal timing of activities under environmental changes. Ecology Letters
 14:1183–1190. doi:10.1111/j.1461-0248.2011.01686.x.
 
-Usinowicz, J., and M. I. O'Connor. 2023. The fitness value of ecological
-information in a variable world. Ecology Letters 26:621–639.
-doi:10.1111/ele.14166.
-
+Ortega, A. C., E. O. Aikens, J. A. Merkle, K. L. Monteith, and M. J. Kauffman.
+2023. Migrating mule deer compensate en route for phenological mismatches.
+Nature Communications 14:2008. doi:10.1038/s41467-023-37750-z.
 
 Robertson, E. P., F. A. La Sorte, J. D. Mays, P. J. Taillie, O. J. Robinson,
 R. J. Ansley, T. J. O'Connell, C. A. Davis, and S. R. Loss. 2024. Decoupling
@@ -1014,7 +1002,15 @@ of bird migration from the changing phenology of spring green-up. Proceedings
 of the National Academy of Sciences USA 121:e2308433121.
 doi:10.1073/pnas.2308433121.
 
-
 Shaw, A. K., and I. D. Couzin. 2013. Migration or residency? The evolution of
 movement behavior and information usage in seasonal environments. The American
 Naturalist 181:114–124. doi:10.1086/668600.
+
+Theurich, N., S. Garthe, F. Jiguet, P. Bocher, and P. Schwemmer. 2026.
+Departing with the wind: spring migration timing in Brent geese from their most
+important staging and wintering site, the Wadden Sea World Heritage Site.
+Ecology and Evolution 16:e74119. doi:10.1002/ece3.74119.
+
+Usinowicz, J., and M. I. O'Connor. 2023. The fitness value of ecological
+information in a variable world. Ecology Letters 26:621–639.
+doi:10.1111/ele.14166.
