@@ -416,6 +416,23 @@ positive. Birds therefore became less early relative to mid-green-up because
 the environmental target advanced while the estimated arrival schedule changed
 little.
 
+A restricted same-system stage analysis provided a population-level bridge
+between environmental opportunity and downstream timing. Among **31
+source–target pairs from 14 species** with at least six annual arrival estimates
+at both mapped cells in both periods, the estimated migration front generally
+reached the source first. The source-to-target front interval shortened from
+**7.20 to 5.69 d** (change -1.51 d, 95% CI -2.32 to -0.70), whereas the
+source-to-target green-up interval changed little. Consequently the
+source-to-target phase transformation became more negative, from **-3.57 to
+-4.95 d** (change -1.37 d, 95% CI -2.36 to -0.36); 23/31 pairs and 12/14
+species changed in that direction. This shows that population-level relative
+timing was transformed across migration stages rather than passively copied
+from source to target. It does not identify individual feedback. The subset is
+restricted, arrival posterior precision was much poorer in the early period,
+and inverse-variance reweighting weakened the contrast to an interval spanning
+zero, although posterior-normal propagation of the reported arrival
+uncertainty retained a negative mean change in all 5,000 simulations.
+
 This signed decomposition also changes the interpretation of the absolute
 mismatch metric. Absolute arrival–green-up distance changed only modestly
 (8.42 to 8.07 d unweighted; 9.04 to 8.42 d under equal-species weighting), but
