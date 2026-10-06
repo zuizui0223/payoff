@@ -22,7 +22,7 @@ In migratory birds, a preregistered source–destination analysis showed
 detrended spring correlation increasing from 0.284 to 0.653. Posthoc
 cross-validation showed destination variability increasing from 2.41 to 4.66 d
 while the squared-loss forecast value of adding nonlocal environmental
-structure changed from -16.1 to +16.0 d^2. Yet in a restricted stage subset,
+structure changed from -16.1 to +16.0 d². Yet in a restricted stage subset,
 the realized source mid-green-up event occurred after the population front had
 already reached the source cell in most annual observations, so the predictor
 cannot be treated as an observed online cue. Target green-up advanced by 2.31 d
@@ -72,9 +72,9 @@ Article type: **Major Article**
 Current manuscript:
 `manuscript/PAYOFF_B_FORECAST_ACCESS_CORRECTION_V4_5_AMNAT.md`
 
-Current approximate main-text word count: **6,387**
+Current approximate main-text word count: **6,385**
 
-Abstract word count: **165**
+Abstract word count: **167**
 
 Title word count: **10**
 
