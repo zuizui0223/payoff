@@ -964,10 +964,6 @@ Departing with the wind: spring migration timing in Brent geese from their most
 important staging and wintering site, the Wadden Sea World Heritage Site.
 Ecology and Evolution 16:e74119. doi:10.1002/ece3.74119.
 
-Torstenson, M., and A. K. Shaw. 2025. Strength of seasonality and type of
-migratory cue determine the fitness consequences of changing phenology for
-migratory animals. Oikos 2025:e10862. doi:10.1111/oik.10862.
-
 Kölzsch, A., G. J. D. M. Müskens, H. Kruckenberg, P. Glazov, R. Weinzierl,
 B. A. Nolet, and M. Wikelski. 2015. Forecasting spring from afar? Timing of
 migration and predictability of phenology along different migration routes of
