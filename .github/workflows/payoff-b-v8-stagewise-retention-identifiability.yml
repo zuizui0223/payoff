@@ -1,0 +1,28 @@
+name: payoff-b-v8-stagewise-retention-identifiability
+
+on:
+  push:
+    branches:
+      - audit/payoff-b-v8-dependence-quality-20261005
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_stagewise_retention_identifiability.R"
+      - ".github/workflows/payoff-b-v8-stagewise-retention-identifiability.yml"
+
+jobs:
+  retention-identifiability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run stagewise retention identifiability audit
+        run: Rscript analysis/movement_phenology/payoff_b_v8_stagewise_retention_identifiability.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-stagewise-retention-identifiability
+          path: |
+            outputs/payoff_b_v8_stagewise_retention_identifiability_summary.csv
+            outputs/payoff_b_v8_stagewise_retention_identifiability_status.csv
+          if-no-files-found: error
