@@ -142,27 +142,11 @@ def build(output_dir: Path, zip_path: Path | None = None) -> dict:
         if bad:
             raise ValueError(f"internal labels in {key}: {bad}")
 
-    title_page = output_dir / "title_page_TEMPLATE_NOT_FOR_REVIEW.md"
-    title_page.write_text(
-        "# Title page template\n\n"
-        f"Title: {manuscript_stats['title']}\n\n"
-        "Authors: [AUTHOR LIST]\n\n"
-        "Affiliations: [AFFILIATIONS]\n\n"
-        "Corresponding author: [NAME / EMAIL]\n\n"
-        "Running title: [RUNNING TITLE]\n\n"
-        "Funding: [FUNDING]\n\n"
-        "Conflicts of interest: [COI]\n\n"
-        "Author contributions: [CONTRIBUTIONS]\n\n"
-        "Data/code availability: [FINAL STATEMENT]\n",
-        encoding="utf-8",
-    )
-
     package_files = [
         anon,
         supp,
         caps,
         figdata_out,
-        title_page,
         Path(rendered["figure_1"]),
         Path(rendered["figure_2"]),
         Path(rendered["figure_3"]),
@@ -182,9 +166,6 @@ def build(output_dir: Path, zip_path: Path | None = None) -> dict:
             "figures/PAYOFF_B_V45_FIG1_FRAMEWORK.svg",
             "figures/PAYOFF_B_V45_FIG2_BIRDS.svg",
             "figures/PAYOFF_B_V45_FIG3_MULE_DEER.svg",
-        ],
-        "not_for_anonymous_review": [
-            "title_page_TEMPLATE_NOT_FOR_REVIEW.md",
         ],
         "file_hashes": {
             path.relative_to(output_dir).as_posix(): sha256(path)
