@@ -85,7 +85,7 @@ def test_amnat_metadata_limits():
     short = short.replace("**", "").strip()
     assert len(short) <= 40
 
-    keyword_text = manuscript.split("**Keywords:**", 1)[1].split("---", 1)[0]
+    keyword_text = manuscript.split("Keywords:", 1)[1].split("---", 1)[0]
     keywords = [x.strip() for x in keyword_text.replace("\n", " ").split(";") if x.strip()]
     assert 1 <= len(keywords) <= 6
 
