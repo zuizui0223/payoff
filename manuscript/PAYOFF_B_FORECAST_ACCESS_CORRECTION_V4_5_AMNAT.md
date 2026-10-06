@@ -345,7 +345,155 @@ different times yet converge later.
 
 ---
 
-## 3. Natural evidence
+## 3. Methods
+
+### 5.1 Migratory-bird environmental analysis
+
+We used the public `final.rds` dataset from Amaral et al. (2025), fixed to
+repository commit `62c58d77c2028bd863dfe3697b0d9cf29ceaeab0`. The analysis
+period was divided prospectively into 2002–2009 and 2010–2017. For each
+breeding-range target cell, we selected the nearest lower-latitude
+migratory-range cell for the same species as the nonlocal environmental source,
+following the operational range-flag semantics used in the source analysis
+code. A source–target mapping was admitted when at least six years of finite
+green-up observations were shared in both periods.
+
+For the prospectively specified primary environmental analysis, source and
+target mid-green-up dates were detrended separately against year within each
+period. Pearson correlation was then calculated between the paired residual
+anomalies. The primary estimand was the late-minus-early change in correlation
+for each unique spatial source–target pair. The admitted primary sample
+contained 166 unique spatial pairs used by 28 species. Uncertainty was estimated
+with 10,000 bootstrap replicates over unique spatial pairs. Dependence
+sensitivities clustered or resampled source cells, target cells, two-way
+source–target structure, 5-degree and 10-degree spatial blocks, and global
+calendar-year omissions; equal-species weighting and alternative window
+definitions were also examined.
+
+### 5.2 Posthoc forecastability and observability diagnostics
+
+All analyses in this subsection were designed after the primary correlation
+outcome was known and are treated as posthoc diagnostics. We first quantified
+the day-scale target anomaly standard deviation, source-to-target regression
+slope, explained variance and fitted residual error within each period.
+
+We then evaluated held-out prediction with leave-one-year-out
+cross-validation. For each held-out year, source and target linear trends were
+estimated on the remaining years. A target-history-only forecast used the
+target trend. The source-informed forecast additionally regressed detrended
+target anomalies on detrended source anomalies in the training years and added
+the predicted anomaly to the held-out target trend. We summarized the marginal
+forecast value of the reconstructed source predictor as
+
+[
+G_CV
+=
+MSE(target-history only)
+-
+MSE(source-informed forecast).
+]
+
+Because these are estimated restricted forecasting models, G_CV can be
+negative and is not identified with a nonnegative theoretical value of
+information. We examined robustness to a target-climatology baseline, exact
+8/8-year windows, global calendar-year omission, equal-species weighting, and
+the first three nearest lower-latitude source ranks.
+
+We separately audited temporal ordering. In the broader bird sample we compared
+the reconstructed source mid-green-up date with target arrival. For a stricter
+stagewise analysis, we required at least six annual arrival estimates at both
+mapped source and target cells in both periods, yielding 56
+species-source-target units, 31 unique spatial pairs and 14 species. Within this
+subset we classified each annual source mid-green-up event as occurring before
+source-front arrival, between source- and target-front arrival, or after
+target-front arrival. This ordering analysis assesses whether the reconstructed
+environmental event could have been online at the mapped stage; it does not
+establish individual routes, perception or cue use.
+
+### 3.3 Bird timing and stagewise phase geometry
+
+To restore direction lost by absolute mismatch, we defined signed timing as
+
+[
+e = arrival - local\ mid\!\text{-}\!greenup.
+]
+
+Positive values indicate arrival after local mid-green-up and negative values
+arrival before it. In the transfer sample, period means were estimated for
+arrival date, target green-up, signed lag and absolute lag for 150
+species-target rows, 72 unique spatial pairs and 22 species. Unique-pair
+bootstraps preserved all species rows attached to each sampled environmental
+pair; equal-species summaries were reported as sensitivities.
+
+The same restricted 31-pair/14-species stage subset was used to describe
+population-front phase transformation between mapped source and target cells:
+
+[
+\Delta e_{route}
+=
+e_{target}
+-
+e_{source}.
+]
+
+We decomposed this quantity into the source-to-target population-front interval
+and the corresponding green-up interval. This is population-level geometry,
+not an individual feedback estimator. Because reported arrival posterior
+uncertainty differed strongly between periods, we propagated the published
+arrival posterior standard deviations through 5,000 independent-Normal Monte
+Carlo draws and also performed an inverse-variance weighted sensitivity. Raw
+source-to-target phase-retention regressions were excluded from mechanistic
+interpretation after an errors-in-variables audit showed that the early-period
+latent slope was not identifiable under the reported predictor uncertainty.
+
+To test whether environmental forecastability was associated with realized bird
+timing, we related change in G_CV to change in absolute and log-transformed
+arrival–green-up mismatch using equal total weight per species. A fixed-arrival
+structural null held each species-target arrival date at its 2002–2017 mean
+while allowing green-up to vary, and 2,000 within-period arrival permutations
+destroyed year-specific bird–environment alignment while preserving each
+period's arrival distribution.
+
+### 3.4 Mule-deer phase correction
+
+For the downstream-correction anchor, we reanalysed the public source-data
+workbook accompanying Ortega et al. (2023). The paired phase table contained
+152 animal-years from 72 adult female mule deer with signed Days-From-Peak at
+migration start and end. We summarized phase variance contraction, the
+whole-route start-to-end phase slope, the fraction of animal-years ending closer
+to peak green-up, and mean absolute phase error.
+
+A matched actuator table provided movement rate and stopover duration. We
+estimated descriptive linear associations of starting signed phase with each
+actuator and repeated the slopes after centering predictor and response within
+year. Uncertainty was obtained with 10,000 cluster-bootstrap resamples of
+individual animals. The phenomenon of bidirectional compensation and
+resynchronization is prior work from Ortega et al.; our reanalysis places it on
+the continuous signed-phase scale used by the present framework.
+
+As a secondary channel-separation analysis, we used the subset with March body
+fat information and migration beginning after 31 March so that the
+physiological measurement preceded departure. We examined migration-start
+timing versus standardized body fat and downstream actuator models containing
+both body fat and starting ecological phase. These analyses are descriptive and
+do not identify causal independence between physiological readiness and
+downstream control.
+
+### 3.5 Evidence status
+
+The source–destination correlation contrast and its outcome-opening rules were
+specified before the primary outcome was examined. The day-scale forecast
+decomposition, G_CV, source-rank and baseline sensitivities, observability
+audit, signed timing decomposition, forecast-value transfer analysis and
+stagewise population-front analyses are explicitly posthoc. The theoretical
+results are exact only for their declared reduced models. Throughout, we
+separate preregistered evidence, posthoc diagnostics, published prior phenomena
+and prospective predictions rather than reclassifying later analyses as
+confirmatory.
+
+---
+
+## 4. Natural evidence
 
 ### 3.1 Environmental forecastability increased while bird arrival changed little
 
@@ -558,7 +706,7 @@ passive retention and process noise.
 
 ---
 
-## 4. Discussion
+## 5. Discussion
 
 ### 4.1 Forecastability is not biological information
 
@@ -638,7 +786,7 @@ along the trajectory correction occurs. They can also distinguish a system
 with accurate entry and weak downstream recourse from one with imprecise entry
 but strong correction, even when both end at the same date.
 
-### 4.3 The strongest prediction is an intermediate information-use window
+### 5.3 The strongest prediction is an intermediate information-use window
 
 The most distinctive empirical prediction is not simply that later cues are
 better or that constraints matter. It is that cue responsiveness should peak
@@ -674,7 +822,7 @@ But the logic is broader. Flowering, emergence, reproduction, diapause and
 other seasonal transitions differ in how information accumulates and how
 quickly commitment removes later options.
 
-### 4.4 Limits
+### 5.4 Limits
 
 The bird source–destination links are range-based spatial proxies, not tracked
 individual routes. Although source green-up preceded target green-up by about 13 d on average, the
@@ -743,7 +891,7 @@ behavior to be measured along the same seasonal trajectory.
 
 ---
 
-## 5. Conclusion
+## 6. Conclusion
 
 Environmental forecastability and phenological adjustment are not the same
 thing. In the sampled eastern North American bird system, destination spring
