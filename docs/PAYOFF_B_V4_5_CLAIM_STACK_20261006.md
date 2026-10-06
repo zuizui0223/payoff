@@ -68,6 +68,10 @@ Operational proxy:
       -
     MSE(source-informed analyst forecast).
 
+G_CV is a finite-sample restricted-model forecast comparison and can be
+negative. It is **not** the same object as the nonnegative theoretical
+value-of-information quantity G_E.
+
 Primary trend-baseline result:
 - -16.1 -> +16.0 d^2;
 - delta +32.1 d^2;
@@ -275,11 +279,12 @@ Evidence class:
 Let G_E(t) be ideal-observer environmental forecastability and G_O(t)
 organismally accessible information value.
 
-For nested information sets:
+For nested information sets under the same loss/action problem:
 
-    G_O(t) <= G_E(t).
+    0 <= G_O(t) <= G_E(t).
 
-This is established value-of-information monotonicity.
+This is established value-of-information monotonicity. It does not imply that
+the empirical finite-sample G_CV proxy must be nonnegative.
 
 Reduced seasonal model:
 
