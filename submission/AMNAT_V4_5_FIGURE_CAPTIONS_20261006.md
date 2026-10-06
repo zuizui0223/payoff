@@ -1,4 +1,4 @@
-# American Naturalist V4.5 figure captions — 2026-10-06
+# Figure Legends
 
 ## Figure 1. Forecastability, access, actionability and correction are distinct
 
