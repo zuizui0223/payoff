@@ -126,35 +126,46 @@ def build(output_dir: Path, zip_path: Path | None = None) -> dict:
     anon = output_dir / "anonymous_manuscript.md"
     supp = output_dir / "supporting_information.md"
     caps = output_dir / "figure_captions.md"
-    figdata_out = output_dir / "figure_data_manifest.json"
 
     anon.write_text(manuscript_text, encoding="utf-8")
     shutil.copyfile(SI, supp)
     shutil.copyfile(CAPTIONS, caps)
-    shutil.copyfile(FIGDATA, figdata_out)
 
+    rendered_dir = output_dir / "_rendered"
+    rendered = render_all(rendered_dir)
     figure_dir = output_dir / "figures"
-    rendered = render_all(figure_dir)
+    figure_dir.mkdir(parents=True, exist_ok=True)
 
-    for key in ("figure_1", "figure_2", "figure_3"):
-        txt = Path(rendered[key]).read_text(encoding="utf-8")
+    generic_figures = {}
+    for index, key in enumerate(("figure_1", "figure_2", "figure_3"), start=1):
+        src = Path(rendered[key])
+        txt = src.read_text(encoding="utf-8")
         bad = [x for x in FORBIDDEN if x.lower() in txt.lower()]
         if bad:
             raise ValueError(f"internal labels in {key}: {bad}")
+        dst = figure_dir / f"figure{index}.svg"
+        shutil.copyfile(src, dst)
+        generic_figures[key] = dst
+
+    shutil.rmtree(rendered_dir)
+
+    for journal_file in (anon, supp, caps):
+        txt = journal_file.read_text(encoding="utf-8")
+        bad = [x for x in FORBIDDEN if x.lower() in txt.lower()]
+        if bad:
+            raise ValueError(f"internal labels in {journal_file.name}: {bad}")
 
     package_files = [
         anon,
         supp,
         caps,
-        figdata_out,
-        Path(rendered["figure_1"]),
-        Path(rendered["figure_2"]),
-        Path(rendered["figure_3"]),
-        Path(rendered["manifest"]),
+        generic_figures["figure_1"],
+        generic_figures["figure_2"],
+        generic_figures["figure_3"],
     ]
 
     manifest = {
-        "status": "payoff_b_v45_amn_anonymous_reviewer_package",
+        "status": "anonymous_reviewer_package",
         "date": "2026-10-06",
         "target": "The American Naturalist",
         "article_type": "Major Article",
@@ -163,9 +174,9 @@ def build(output_dir: Path, zip_path: Path | None = None) -> dict:
             "anonymous_manuscript.md",
             "supporting_information.md",
             "figure_captions.md",
-            "figures/PAYOFF_B_V45_FIG1_FRAMEWORK.svg",
-            "figures/PAYOFF_B_V45_FIG2_BIRDS.svg",
-            "figures/PAYOFF_B_V45_FIG3_MULE_DEER.svg",
+            "figures/figure1.svg",
+            "figures/figure2.svg",
+            "figures/figure3.svg",
         ],
         "file_hashes": {
             path.relative_to(output_dir).as_posix(): sha256(path)
