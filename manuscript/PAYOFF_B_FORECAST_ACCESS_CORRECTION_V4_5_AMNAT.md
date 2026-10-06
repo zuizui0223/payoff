@@ -502,7 +502,10 @@ stagewise population-front analyses are explicitly posthoc. The theoretical
 results are exact only for their declared reduced models. Throughout, we
 separate preregistered evidence, posthoc diagnostics, published prior phenomena
 and prospective predictions rather than reclassifying later analyses as
-confirmatory.
+confirmatory. Supporting Information sections S1–S4 document the environmental
+analysis and forecastability/observability sensitivities, S5–S7 the bird timing
+and stagewise diagnostics, S8 the mule-deer reanalysis, and S9–S10 the
+theoretical and claim boundaries.
 
 ---
 
