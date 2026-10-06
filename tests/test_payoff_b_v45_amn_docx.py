@@ -42,6 +42,12 @@ def test_docx_build_and_structure(tmp_path):
     for forbidden in module.FORBIDDEN:
         assert forbidden.lower() not in full.lower()
 
+    # raw LaTeX control sequences should not leak into the review document
+    assert "\\Delta" not in full
+    assert "\\text{" not in full
+    assert "\\!" not in full
+    assert "Δ e_{route}" in full
+
 
 def test_docx_has_line_and_page_number_fields(tmp_path):
     module = load_module()
