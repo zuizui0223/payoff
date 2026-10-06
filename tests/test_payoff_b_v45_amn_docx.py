@@ -22,7 +22,8 @@ def test_docx_build_and_structure(tmp_path):
     result = module.build(out)
     assert out.exists()
     assert result["keywords"] <= 6
-    assert len(result["short_title"]) <= 40\n    assert 1000 <= result["text_words"] <= 7500
+    assert len(result["short_title"]) <= 40
+    assert 1000 <= result["text_words"] <= 7500
 
     doc = Document(out)
     full = "\n".join(p.text for p in doc.paragraphs)
