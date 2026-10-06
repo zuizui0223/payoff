@@ -658,8 +658,12 @@ also does not identify anthropogenic climate change as the cause of any
 two-window difference.
 
 The stagewise bird bridge is also restricted to 31 source–target pairs from
-14 species with sufficiently complete arrival estimates at both stages.
-Arrival posterior SD was substantially larger in the early period. Propagating
+14 species with sufficiently complete arrival estimates at both stages. This
+subset is selected toward shorter source–target distances (mean 495 versus
+911 km outside the subset) and stronger late environmental coupling (mean rho
+0.847 versus 0.608), although its increase in cross-validated forecast value is
+similar to the excluded pairs. Arrival posterior SD was substantially larger in
+the early period. Propagating
 the reported posterior uncertainty around the arrival means retained a negative
 late-minus-early phase-transformation change in all 5,000 simulations, but an
 inverse-variance weighted sensitivity retained a negative point estimate with a
