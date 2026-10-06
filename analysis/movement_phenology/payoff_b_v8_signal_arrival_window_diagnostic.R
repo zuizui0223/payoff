@@ -13,9 +13,9 @@ options(stringsAsFactors = FALSE)
 # capacity. It is only a necessary temporal-order condition for the source
 # signal to inform arrival timing.
 
-SOURCE_SCRIPT <- "analysis/movement_phenology/payoff_b_v8_metric_scale_diagnostic.R"
-if (!file.exists(SOURCE_SCRIPT)) stop("Missing metric-scale diagnostic script")
-source(SOURCE_SCRIPT, local = FALSE)
+PRIMARY_SCRIPT <- "analysis/movement_phenology/payoff_b_v8_primary.R"
+if (!file.exists(PRIMARY_SCRIPT)) stop("Missing V8 primary script")
+source(PRIMARY_SCRIPT, local = FALSE)
 
 B <- 10000L
 SEED <- 20261006L
@@ -25,7 +25,7 @@ MIN_YEARS <- 6L
 map <- unique(eligible_map[, c(
   "species", "target_cell", "source_cell", "pair_key"
 )])
-map <- map[map$pair_key %in% diag_pairs$pair_key, , drop = FALSE]
+map <- map[map$pair_key %in% pairs$pair_key, , drop = FALSE]
 
 bird <- dat[, c("species", "year", "cell", "arr_GAM_mean", "gr_mn")]
 bird$year <- as.integer(bird$year)
@@ -129,14 +129,29 @@ if (nrow(analysis) < 20) stop("Too few eligible species-target rows")
 if (length(unique(analysis$pair_key)) < 20) stop("Too few unique pairs")
 if (length(unique(analysis$species)) < 5) stop("Too few species")
 
-# Add environmental delta G for descriptive association with temporal window.
-analysis <- merge(
-  analysis,
-  diag_pairs[, c("pair_key","delta_loo_value_mse")],
-  by="pair_key",
-  all.x=TRUE,
-  sort=FALSE
-)
+pair_boot_mean <- function(x, B, seed) {
+  x <- x[is.finite(x)]
+  set.seed(seed)
+  out <- replicate(B, mean(sample(x, length(x), replace = TRUE)))
+  as.numeric(quantile(out, c(0.025, 0.975), names = FALSE))
+}
+
+cluster_boot_mean <- function(df, value_col, cluster_col, B, seed) {
+  keep <- is.finite(df[[value_col]]) & !is.na(df[[cluster_col]])
+  dd <- df[keep, , drop = FALSE]
+  cluster_id <- as.character(dd[[cluster_col]])
+  clusters <- unique(cluster_id)
+  if (length(clusters) < 2) return(c(NA_real_, NA_real_))
+  by_cluster <- split(dd[[value_col]], cluster_id)
+  set.seed(seed)
+  out <- rep(NA_real_, B)
+  for (b in seq_len(B)) {
+    draw <- sample(clusters, length(clusters), replace = TRUE)
+    vals <- unlist(by_cluster[draw], use.names = FALSE)
+    out[b] <- mean(vals)
+  }
+  as.numeric(quantile(out, c(0.025, 0.975), na.rm = TRUE, names = FALSE))
+}
 
 # Pair-level collapse because multiple species may share environmental pairs.
 pair_lead <- aggregate(
@@ -151,14 +166,6 @@ pair_lead <- aggregate(
   data=analysis,
   FUN=mean
 )
-pair_lead <- merge(
-  pair_lead,
-  unique(analysis[, c("pair_key","delta_loo_value_mse")]),
-  by="pair_key",
-  all.x=TRUE,
-  sort=FALSE
-)
-
 # Add target cell representative only when unique within pair.
 pair_target <- aggregate(
   target_cell ~ pair_key,
@@ -255,12 +262,7 @@ summary_row <- data.frame(
   equal_species_lead_late=mean(sp$lead_late),
   equal_species_delta_lead=mean(sp$delta_lead),
   equal_species_ci_low_95=sp_ci[1],
-  equal_species_ci_high_95=sp_ci[2],
-  cor_delta_G_delta_lead=cor(
-    pair_lead$delta_loo_value_mse,
-    pair_lead$delta_lead,
-    use="complete.obs"
-  )
+  equal_species_ci_high_95=sp_ci[2]
 )
 
 # Also report row-year availability, which is directly interpretable as the
