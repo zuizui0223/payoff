@@ -275,7 +275,11 @@ Measurement boundary:
 - posterior-normal uncertainty propagation retained a negative mean change in
   all 5,000 simulations;
 - inverse-variance reweighting retained a negative point estimate but the
-  bootstrap interval crossed zero.
+  bootstrap interval crossed zero;
+- raw source-to-target phase-retention regressions are not mechanistically
+  licensed: early predictor variance is not identifiable after the reported
+  source-arrival uncertainty is accounted for, and the late EIV-corrected
+  retention slope (0.733) is approximately the fixed-arrival null (0.720).
 
 Licensed:
 
