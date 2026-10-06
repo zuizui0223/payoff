@@ -1,0 +1,31 @@
+name: payoff-b-v45-main-figures
+
+on:
+  push:
+    branches:
+      - audit/payoff-b-v8-dependence-quality-20261005
+    paths:
+      - "data/payoff_b_v45_figure_data_20261006.json"
+      - "scripts/render_payoff_b_v45_main_figures.py"
+      - "tests/test_payoff_b_v45_main_figures.py"
+      - ".github/workflows/payoff-b-v45-main-figures.yml"
+  workflow_dispatch:
+
+jobs:
+  render-v45-main-figures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test V4.5 figure renderer
+        run: pytest -q tests/test_payoff_b_v45_main_figures.py
+      - name: Render V4.5 main figures
+        run: python scripts/render_payoff_b_v45_main_figures.py --output-dir outputs/payoff_b_v45_main_figures
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v45-main-figures
+          path: outputs/payoff_b_v45_main_figures/
+          if-no-files-found: error
