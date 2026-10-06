@@ -756,7 +756,7 @@ little. This is consistent with the original Amaral et al. (2025) result that
 migration speed responds to green-up but does not fully compensate for
 phenological change.
 
-The missing step lies between environmental opportunity and realized
+The missing step lies between environmental forecastability and realized
 adjustment. Individuals must encounter or infer the relevant signal, integrate
 it with other cues and internal state, and retain an actuator capable of
 changing timing. In the reduced framework, the sequence is
