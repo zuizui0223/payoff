@@ -289,25 +289,22 @@ the same departure delay can therefore face very different effective
 deadlines, and a migrant that departs later can still suffer less residual
 timing loss if downstream recourse is larger.
 
-### 2.3 Intermediate checkpoints create a second timing layer
+### 2.3 Entry timing and downstream correction are separable
 
 Seasonal trajectories can contain at least two mechanistically different
-timing layers. A developmental or physiological entry process determines when
-a focal behavioral or life-history mode becomes available. Represent an entry
-timer by an internal state (z_i(t)) and threshold (Θ_i):
+timing layers. A developmental or physiological process can determine when a
+focal behavioral mode becomes available, whereas a later decision process can
+map signed ecological error onto movement, waiting or other timing adjustments.
+
+Represent entry by an internal state z_i(t) and threshold Theta_i,
 
 [
-τ_i
-=
-inf{t:z_i(t)geΘ_i}.
+tau_i = inf{t : z_i(t) >= Theta_i}.
 ]
 
-The actor enters the trajectory at time (τ_i) with phase error
-(e_{i,0}).
-
-After entry, the organism repeatedly estimates ecological phase and uses the
-remaining response set to choose corrections. In a serial architecture, the
-sequence is
+The actor enters the focal trajectory at time tau_i with phase error e_(i,0).
+After entry, it can repeatedly estimate ecological phase and use whatever
+response options remain:
 
 [
 become ready
@@ -321,50 +318,12 @@ correct
 observe again.
 ]
 
-This distinction does not imply that physiological state becomes irrelevant
-after entry. It says only that the process determining whether and when entry
-occurs need not be identical to the process mapping signed ecological error
-onto later movement or timing decisions.
-
-For two interacting actors with constant post-entry retention
-(λ_1, λ_2), define their mean entry error and initial mismatch as
-
-[
-m_0 = (e_{1,0}+e_{2,0})/2,
-    
-Δ_0=e_{1,0}-e_{2,0}.
-]
-
-After (n) checkpoints,
-
-[
-e_{i,n}=λ_i^n e_{i,0},
-]
-
-so interaction mismatch is exactly
-
-[
-Δ_n
-=
-(λ_1^n-λ_2^n)m_0
-+
-(λ_1^n+λ_2^n)/2Δ_0.
-]
-
-The second term propagates mismatch already present at entry. The first term is
-more surprising: if both actors begin with the same phase error
-((Δ_0=0)), differences in their downstream controllers can create
-mismatch from a shared environmental displacement.
-
-The result provides a direct bridge from within-organism control to
-between-organism phenological mismatch. Shared climate forcing does not imply
-shared timing when interacting actors differ in information, retained
-actionability, correction gain or passive phase persistence.
-
-Coordination costs can create an additional barrier when interacting actors
-must change together, but that game-theoretic extension is secondary here. The
-core argument concerns the timing of information, commitment and post-entry
-correction within each actor.
+The distinction does not require physiology to disappear after entry. It only
+requires that the process setting entry timing need not be identical to the
+process mapping later ecological error onto correction. This separation makes
+it possible for two organisms to have similar departure or onset dates but very
+different downstream ability to repair error, or conversely to start at
+different times yet converge later.
 
 ---
 
@@ -543,19 +502,6 @@ identify nutritional condition with a unique physiological readiness variable,
 or separately estimate information weight, opportunity, behavioral gain,
 passive retention and process noise.
 
-### 3.3 Supporting systems establish plausibility, not identification
-
-Independent migration studies show that later stages can alter the timing
-consequences of earlier decisions. Stopover duration, movement speed, route
-choice and post-arrival delay can all buffer or amplify initial timing error,
-and cue relevance can change along a route. These observations establish the
-biological plausibility of sequential information use and recourse.
-
-They do not, however, jointly identify the theoretical trajectories q(t) and
-r(t), nor do they test the predicted intermediate maximum in actionable
-information. We therefore treat these systems as supporting context rather than
-additional tests of the central mechanism.
-
 ---
 
 ## 4. Discussion
@@ -639,47 +585,7 @@ along the trajectory correction occurs. They can also distinguish a system
 with accurate entry and weak downstream recourse from one with imprecise entry
 but strong correction, even when both end at the same date.
 
-### 4.3 Interacting species can diverge under shared environmental change
-
-The two-actor decomposition shows why common forcing need not produce common
-timing. Suppose two interacting species enter a seasonal trajectory with the
-same phase error. If their downstream retention coefficients differ, then
-
-[
-Δ_n
-=
-(λ_1^n-λ_2^n)m_0
-]
-
-even when (Δ_0=0). Controller asymmetry alone can transform a shared
-environmental displacement into interaction mismatch.
-
-This changes the comparative question. Vulnerability should not be classified
-only by whether a taxon is a migrant, resident, plant or pollinator, or by the
-magnitude of its phenological shift. More mechanistically, systems differ along
-at least two axes:
-
-[
-decision-scale information value
-×
-actionability trajectory.
-]
-
-A long-distance migrant can begin with remote, uncertain information but retain
-several downstream actuators. A locally responding developmental event can
-have accurate environmental information yet little recourse after commitment.
-The most vulnerable configuration is not necessarily the one with the longest
-information distance, but one in which future conditions are uncertain while
-useful response options disappear rapidly.
-
-Strategic interaction can add another barrier. Even when a unilateral timing
-change remains physically possible, moving away from a partner's established
-timing can be costly. Thus lack of synchronization can reflect at least two
-different forms of irreversibility: actions that are no longer physically
-available and actions that remain feasible but are strategically
-disadvantageous.
-
-### 4.4 The strongest prediction is an intermediate information-use window
+### 4.3 The strongest prediction is an intermediate information-use window
 
 The most distinctive empirical prediction is not simply that later cues are
 better or that constraints matter. It is that cue responsiveness should peak
@@ -714,7 +620,7 @@ But the logic is broader. Flowering, emergence, reproduction, diapause and
 other seasonal transitions differ in how information accumulates and how
 quickly commitment removes later options.
 
-### 4.5 Limits
+### 4.4 Limits
 
 The bird source–destination links are range-based spatial proxies, not tracked
 individual routes. Although source green-up preceded target green-up by about
