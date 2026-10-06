@@ -249,7 +249,45 @@ Not licensed:
 - birds ignored the signal;
 - perception failure, actuator limitation or actionability loss is identified.
 
-## Claim 8 — downstream signed correction exists in a natural seasonal trajectory
+## Claim 8 — population timing is transformed across mapped migration stages
+
+Evidence class:
+**posthoc restricted-subset stagewise diagnostic**
+
+Restricted sample:
+- 31 unique source-target pairs;
+- 14 species;
+- source-target population-front lead: 7.20 -> 5.69 d;
+- change = -1.51 d, 95% CI -2.32 to -0.70 d;
+- source-target green-up interval changed little;
+- phase transformation: -3.57 -> -4.95 d;
+- change = -1.37 d, 95% CI -2.36 to -0.36 d;
+- 23/31 pairs and 12/14 species became more negative.
+
+Measurement boundary:
+- source arrival posterior SD: about 2.89 -> 0.91 d;
+- target arrival posterior SD: about 2.85 -> 0.93 d;
+- posterior-normal uncertainty propagation retained a negative mean change in
+  all 5,000 simulations;
+- inverse-variance reweighting retained a negative point estimate but the
+  bootstrap interval crossed zero.
+
+Licensed:
+
+> In the restricted same-species stage subset, population-level relative timing
+> changed between mapped source and target stages rather than being passively
+> retained, but the magnitude is sensitive to observation-precision weighting.
+
+Not licensed:
+- individual feedback correction;
+- controller gain or actionability;
+- full-network generalization;
+- measurement-error invariance.
+
+Role:
+**same-system supporting bridge**, not headline evidence.
+
+## Claim 9 — downstream signed correction exists in a natural seasonal trajectory
 
 Evidence class:
 **published prior art + source-data reanalysis in mule deer**
@@ -265,7 +303,7 @@ Not licensed:
 - direct identification of G(t), r(t), internal belief or control gain;
 - proof that the same mechanism explains the bird pattern.
 
-## Claim 9 — usable information depends on forecast value and correction opportunity
+## Claim 10 — usable information depends on forecast value and correction opportunity
 
 Evidence class:
 **exact reduced-model specialization**
