@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
       - name: Test V4.5 figure renderer
         run: pytest -q tests/test_payoff_b_v45_main_figures.py
       - name: Render V4.5 main figures
