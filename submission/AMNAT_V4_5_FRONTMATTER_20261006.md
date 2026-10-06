@@ -26,9 +26,9 @@ structure changed from -16.1 to +16.0 d^2. Yet in a restricted stage subset,
 the realized source mid-green-up event occurred after the population front had
 already reached the source cell in most annual observations, so the predictor
 cannot be treated as an observed online cue. Target green-up advanced by 2.31 d
-while estimated bird arrival shifted by only 0.19 d. Independent mule-deer data
-showed strong phase convergence and signed downstream speed and stopover
-adjustments.
+while estimated bird arrival shifted by only 0.19 d. Independent mule-deer
+(Odocoileus hemionus) data showed strong phase convergence and signed
+downstream speed and stopover adjustments.
 
 We formalize seasonal tracking as a sequence from environmental forecastability
 to accessible information, retained actionability, and correction.
@@ -72,7 +72,7 @@ Article type: **Major Article**
 Current manuscript:
 `manuscript/PAYOFF_B_FORECAST_ACCESS_CORRECTION_V4_5_AMNAT.md`
 
-Current approximate main-text word count: **6,385**
+Current approximate main-text word count: **6,387**
 
 Abstract word count: **165**
 
