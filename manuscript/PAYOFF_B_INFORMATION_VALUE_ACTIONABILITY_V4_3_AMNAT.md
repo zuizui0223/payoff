@@ -3,28 +3,25 @@
 ## Abstract
 
 Forecasting future seasonal conditions and correcting timing error after
-commitment are both established components of seasonal tracking, but they are
-usually quantified on different scales. We distinguish standardized
-environmental coupling, decision-scale information value, and opportunities
-for downstream correction, asking how these components can maintain tracking
-as environmental variability increases.
+commitment are established components of seasonal tracking, but environmental
+forecast opportunity need not become phenological adjustment. We distinguish
+standardized environmental coupling, cross-validated forecast value, temporal
+availability, and opportunities for downstream correction.
 
 In migratory birds, a preregistered source–destination analysis showed
 detrended spring correlation increasing from 0.284 to 0.653. Posthoc
-cross-validation showed that destination variability simultaneously increased
-(SD 2.41 to 4.66 d), yet the squared-loss value of adding nonlocal source
-information changed from -16.1 to +16.0 d^2, an increase of +32.1 d^2. The
-increase was positive for 139/166 spatial pairs and 25/28 species and survived
-spatial dependence, complete-window, and calendar-year omission analyses.
-Bird arrival–green-up mismatch showed no corresponding deterioration, but
-routes with larger gains in forecast value did not show bird-specific mismatch
-improvement beyond fixed-arrival and permutation structural nulls. Independent
-mule-deer data showed strong phase convergence and signed downstream speed and
-stopover adjustments.
+cross-validation showed destination variability increasing from 2.41 to 4.66 d
+while the squared-loss value of adding nonlocal source information changed from
+-16.1 to +16.0 d^2. The source-to-arrival lead widened by 2.48 d. Yet target
+green-up advanced by 2.31 d while estimated bird arrival shifted by only 0.19
+d, moving signed arrival relative to green-up by 2.12 d. Route-level gains in
+forecast value did not predict bird-specific mismatch improvement beyond
+structural nulls. Independent mule-deer data showed strong phase convergence
+and signed downstream speed and stopover adjustments.
 
 We formalize these results as a sequential architecture in which seasonal
-tracking depends first on the decision-scale value of environmental information
-and then on the opportunity to correct residual phase error.
+adjustment depends on environmental forecast value being converted into
+biological correction.
 
 **Keywords:** environmental predictability; phenological mismatch; seasonal
 timing; migration; actionability; feedback control
@@ -97,24 +94,25 @@ because too little can still be changed. Two interacting organisms exposed to th
 information can then optimally commit at different times solely because their
 response opportunities disappear at different rates.
 
-This leads to one ecological question: **how can seasonal tracking be
-maintained as the local seasonal environment becomes more variable?** We treat
-the problem as two sequential bottlenecks. Before commitment, organisms can
-reduce uncertainty by using information about conditions elsewhere or earlier
-in the season. After commitment, remaining error can be altered only through
-whatever corrective actions are still available.
+This leads to one ecological question: **what determines whether
+environmental forecast opportunity becomes phenological adjustment?** We treat
+the problem as a sequence. Before commitment, environmental signals can reduce
+uncertainty about a future seasonal target. Those signals must then be
+temporally available and biologically accessible, and remaining error can be
+altered only through whatever corrective actions are still available.
 
 We develop this sequence in a reduced information–control model. We then use a
 prospectively specified multi-species bird analysis to quantify temporal change
 in cross-site environmental coupling, followed by explicitly posthoc
-cross-validation to place that environmental information on a decision-loss
-scale. Finally, we use individual-level mule-deer data as an independent
-natural anchor for the downstream correction layer.
+cross-validation and temporal-order audits that place the environmental signal
+on decision-loss and calendar-time scales. Finally, we use individual-level
+mule-deer data as an independent natural anchor for the downstream correction
+layer.
 
-Our central claim is that **seasonal tracking depends on both forecast value and
-correction opportunity**. Standardized environmental coupling alone cannot rank
-either the absolute uncertainty organisms face or the amount of timing error
-that can still be repaired after a seasonal trajectory begins.
+Our central claim is that **environmental forecast opportunity and biological
+adjustment are distinct stages of seasonal tracking**. Standardized coupling
+alone cannot rank forecast value, and even a valuable, temporally leading
+environmental signal does not by itself establish cue use or correction.
 
 ---
 
@@ -369,7 +367,7 @@ correction within each actor.
 
 ## 3. Natural evidence
 
-### 3.1 Cross-site information became more valuable as destination spring became more variable
+### 3.1 Environmental forecast opportunity increased while bird arrival changed little
 
 We first tested a prespecified environmental hypothesis in the eastern North
 American migratory-bird dataset of Amaral et al. (2025). Each breeding-range
@@ -379,14 +377,15 @@ within 2002–2009 and 2010–2017, and the preregistered environmental coordina
 was the Pearson correlation of annual residual anomalies.
 
 A posthoc temporal-order audit confirmed that the environmental source was
-usually earlier in calendar time as well as lower in latitude: mean
+usually earlier in calendar time as well as lower in latitude. Mean
 source-to-target green-up lead was about **13.4 d**, and **158/166 (95.2%)**
-pairs had positive mean source lead in both windows. This licenses the source
-as a temporally leading environmental signal, not as a cue known to have been
-perceived by birds.
+pairs had positive mean source lead in both windows. The source can therefore
+be described as a temporally leading environmental signal, not as a cue known
+to have been perceived by birds.
 
 The registered degradation prediction was not supported. Across 166 unique
-source–destination pairs used by 28 species, mean correlation increased from
+source–destination pairs used by 28 species, mean detrended correlation
+increased from
 
 [
 rho_early=0.284
@@ -398,103 +397,87 @@ to
 rho_late=0.653,
 ]
 
-giving mean delta-rho = +0.369. The original pair-bootstrap 95% interval was
-+0.298 to +0.436, and 26 of 28 species means were positive. The direction also
-remained positive under source-cell and target-cell clustering, two-way
-source–target dependence, 5-degree and 10-degree spatial blocking, and global
+giving mean delta-rho = +0.369. The pair-bootstrap 95% interval was +0.298 to
++0.436, and 26 of 28 species means were positive. The direction remained
+positive under source-cell and target-cell clustering, two-way source–target
+dependence, 5-degree and 10-degree spatial blocking, and global
 leave-one-calendar-year-out analyses.
 
 Because correlation is scale invariant, we subsequently performed an explicitly
-posthoc metric-scale diagnostic rather than equating higher rho with lower
-forecast error. Destination green-up anomalies became much more variable:
-mean target residual SD increased from **2.41 d to 4.66 d** (change +2.25 d;
-pair-bootstrap 95% CI +1.95 to +2.55), with positive source-, target-, and
-spatial-block intervals.
+posthoc metric-scale diagnostic. Destination green-up anomalies became much
+more variable: mean target residual SD increased from **2.41 d to 4.66 d**
+(change +2.25 d; pair-bootstrap 95% CI +1.95 to +2.55), with positive source-,
+target-, and spatial-block intervals. Mean in-window R-squared increased from
+**0.290 to 0.572**, and mean source-to-target slope increased from **0.399 to
+0.640**.
 
-At the same time, the source signal strengthened. Mean in-window R-squared
-increased from **0.290 to 0.572**, and mean source-to-target slope increased
-from **0.399 to 0.640**. The absolute amount of target variation explained by
-source anomalies increased from **1.71 to 14.42 d^2**.
-
-A same-window fitted residual RMSE increased from **1.82 to 2.49 d**, showing
-that stronger standardized coupling did not imply smaller conditional error in
-days. However, this fitted quantity uses the same short windows for estimation
-and evaluation. In a stricter leave-one-year-out forecast, source-informed RMSE
+We then evaluated held-out prediction. Source-informed leave-one-year-out RMSE
 was essentially unchanged (**4.11 to 4.17 d**; change +0.055 d, 95% CI -0.59
-to +0.63). By contrast, a target-trend-only forecast worsened from **3.18 to
-5.86 d** (change +2.68 d, 95% CI +2.34 to +3.01).
+to +0.63), whereas a target-history-only forecast worsened from **3.18 to 5.86
+d** (change +2.68 d, 95% CI +2.34 to +3.01).
 
-To place the environmental signal on the same loss scale as the reduced
-theory, we defined a posthoc **cross-validated forecast-value proxy** as the
-reduction in held-out squared error,
+To place the environmental signal on the same squared-loss scale as the reduced
+theory, we defined a posthoc **cross-validated forecast-value proxy**,
 
 [
 G_CV = MSE(no source) - MSE(source informed).
 ]
 
-This quantity is an environmental forecast value under squared-error loss, not
-a measured fitness value of information. Mean G_CV changed from **-16.1 d^2 to +16.0 d^2**, a late-minus-early increase
-of **+32.1 d^2**. Pair-bootstrap and source-cell, target-cell, 5-degree and
-10-degree cluster/block intervals for the increase were all positive. The
-increase was widespread rather than outlier-driven: median delta G_CV was
-**+15.84 d^2**, the 10% trimmed mean was **+20.87 d^2**, and **139/166
-(83.7%)** spatial pairs were positive.
+This is an environmental forecast value, not an organismal fitness value of
+information. Mean G_CV changed from **-16.1 d^2 to +16.0 d^2**, a
+late-minus-early increase of **+32.1 d^2**. The increase was widespread:
+median delta G_CV was **+15.84 d^2**, the 10% trimmed mean was **+20.87 d^2**,
+and **139/166 (83.7%)** spatial pairs were positive. Equal-species weighting
+gave a change of **+20.87 d^2** with **25/28 species** positive. A
+climatological-mean no-source baseline still gave a pair-mean increase of
+**+22.37 d^2**, and the exact 8/8-year subset retained a **+28.30 d^2**
+increase. In that subset, omission of every calendar year left all 16 mean
+increases and all 16 bootstrap intervals positive.
 
-The conclusion also survived alternative weighting and baseline choice.
-Giving every species equal weight produced mean G_CV values of **-6.06 d^2
-early** and **+14.81 d^2 late**, a change of **+20.87 d^2** (pair-incidence
-bootstrap 95% CI **+16.37 to +32.48**); **25/28 species** had positive
-changes. Replacing the target-trend comparator with a target climatological
-mean still gave a pair-mean increase of **+22.37 d^2** (95% CI **+18.13 to
-+26.78**) and **24/28 species** positive. Among the 58 source–destination pairs
-with all eight years observed in both windows, mean trend-baseline G_CV changed
-from **-2.66 d^2 to +25.64 d^2** (delta **+28.30 d^2**), again with all
-dependence-aware intervals positive and with the increase surviving omission of
-every calendar year.
+The environmental opportunity was also not becoming later relative to bird
+arrival. In the admitted bird sample, mean source-to-arrival lead widened from
+**5.47 to 7.95 d** (change **+2.48 d**, 95% CI +1.91 to +3.05), with
+source-cell, target-cell, 5-degree and 10-degree intervals all positive. Equal
+species weighting gave a **+2.37 d** change, and 21 of 22 species showed a
+positive change. The wider lead arose primarily because source green-up
+advanced by about **2.86 d**, whereas estimated bird arrival advanced by only
+about **0.38 d** in that subset.
 
-For intuition in days, the corresponding RMSE difference,
-RMSE(no source) - RMSE(source informed), changed from **-0.93 d to +1.70 d**.
-The fraction of spatial pairs for which source information reduced held-out
-squared error rose from **29.5% to 78.9%**.
+Restoring the sign of arrival relative to the target green-up revealed the
+biological consequence more clearly. Across the 150 species-target rows of the
+transfer sample, target green-up advanced by **2.31 d** (95% CI 2.08 to 2.58 d
+earlier), whereas estimated bird arrival changed by only **0.19 d** (95% CI
+-0.95 to +0.52 d). Signed lag, defined as arrival minus target green-up, shifted
+from **-7.81 to -5.69 d**, a **+2.12 d** change (95% CI +1.41 to +2.77).
+Equal-species weighting gave a +2.14 d change, and 20 of 22 species were
+positive. Birds therefore became less early relative to mid-green-up because
+the environmental target advanced while the estimated arrival schedule changed
+little.
 
-The environmental result therefore has a different interpretation from the
-original correlation-only reading: **destination spring became more variable,
-while contemporaneous nonlocal source information gained substantial marginal
-predictive value under the declared out-of-sample forecast.** Source-informed
-forecast error consequently did not worsen detectably despite the increase in
-destination variability.
+This signed decomposition also changes the interpretation of the absolute
+mismatch metric. Absolute arrival–green-up distance changed only modestly
+(8.42 to 8.07 d unweighted; 9.04 to 8.42 d under equal-species weighting), but
+that stability is not evidence of active tracking. Because birds were several
+days earlier than mid-green-up in both periods, an advancing green-up moved
+toward the largely unchanged arrival schedule.
 
-Bird tracking did not show a corresponding deterioration. In the same 150
-species-target rows, 72 unique pairs and 22 species admitted to the frozen
-transfer analysis, mean absolute arrival–green-up mismatch changed from 8.42 to
-8.07 d under unweighted rows (change -0.35 d, 95% CI -0.89 to +0.20). Under
-equal-species weighting the posthoc day-scale change was -0.63 d (95% CI -1.15
-to -0.02). The preregistered log-mismatch change remained unresolved around
-zero.
+Finally, larger route-level gains in forecast value did not produce a detected
+bird-specific improvement. The posthoc delta-G_CV transfer had a raw positive
+day-scale coefficient of +2.43 d per SD, but a fixed-arrival environmental null
+produced +2.98 d. The observed-minus-null bird increment was -0.56 d (95% CI
+-2.39 to +0.55), and within-window arrival permutations reproduced the raw
+positive slope.
 
-Neither environmental coordinate yielded a detected bird-specific
-route-level transfer. The preregistered change-on-change test using delta-rho
-did not support the predicted reduction in mismatch. A posthoc transfer test
-using delta G_CV likewise produced a raw positive day-scale slope, but a
-fixed-arrival environmental null was larger and the observed-minus-null bird
-increment was unresolved (-0.56 d, 95% CI -2.39 to +0.55). Within-window
-arrival permutations also reproduced the raw positive slope. We therefore do
-not interpret route-level changes in environmental forecast value as observed
-bird cue use.
+The licensed conclusion is therefore asymmetric but clear:
 
-Replacing delta-rho with delta G_CV did not create the missing behavioral
-bridge. On the day scale, the raw equal-species coefficient was +2.43 d of
-mismatch change per 1 SD increase in delta G_CV, but a fixed-arrival
-environmental null produced +2.98 d. The observed-minus-null bird increment was
--0.56 d (95% CI -2.39 to +0.55), and within-window arrival permutations
-reproduced the observed positive slope. Thus routes with larger increases in
-environmental forecast value did not show a detectable bird-specific
-improvement in realized mismatch.
+> **The reconstructed environmental signal became more valuable for forecasting
+> and earlier relative to arrival, while the estimated population arrival
+> schedule remained comparatively rigid.**
 
-These analyses establish changing environmental information availability, not
-cue use by birds. The range-based source cells are environmental proxies, and
-the data do not show that individuals perceived the fitted source information
-or that stronger cross-site information caused the stability of bird mismatch.
+These analyses establish changing environmental forecast opportunity, not cue
+use by birds. The range-based source cells are environmental proxies, and the
+data do not show that individuals passed through, perceived, learned, or acted
+on the fitted source signal.
 
 ### 3.2 Mule deer provide an individual-level phase-correction anchor
 
@@ -574,51 +557,54 @@ additional tests of the central mechanism.
 
 ## 4. Discussion
 
-### 4.1 Seasonal information has both a scale and a deadline
+### 4.1 Forecast opportunity is not phenological adjustment
 
-The bird analysis changes the interpretation of environmental predictability.
-Earlier migration studies already characterized spatial predictability with
-both correlation and proportionality and linked those quantities to tracking
-performance (Kölzsch et al. 2015). Nor is increasing spatial synchrony itself a
-new phenomenon: spring vegetation phenology can become more spatially
-synchronous under warming, and increasing synchrony has been documented in
-North American environmental and population time series (Koenig and Liebhold
-2016; Liu et al. 2019). Our contribution is narrower. The same sampled
-source–destination network simultaneously experienced greater destination
-variability, stronger standardized coupling, and a large increase in the
-out-of-sample value of cross-site information. This combination shows why the
-biological meaning of a coupling coefficient depends on the scale of the
-prediction problem. The late period had stronger standardized coupling, larger regression
-slopes, and much greater explained variation, but it also had nearly twice the
-destination anomaly SD.
+The bird analysis separates quantities that are often compressed into the word
+predictability. Earlier migration studies already distinguished correlation,
+proportionality, environmental variability and cue use (Kölzsch et al. 2015;
+McNamara et al. 2011), and increasing spatial synchrony of spring phenology is
+itself established (Koenig and Liebhold 2016; Liu et al. 2019). Our
+contribution is narrower: within the same sampled source–destination network,
+destination variability increased, nonlocal forecast value increased, and the
+environmental signal became earlier relative to arrival, yet population arrival
+timing changed little.
 
-Consequently, two statements that sound contradictory were simultaneously
-true: more of the destination variation was predictable from the source, and
-the destination itself was more variable in days. The appropriate
-decision-scale question is therefore not simply whether rho increased, but how
-much expected prediction loss the source information removed relative to a
-no-source alternative. By that criterion, source information became markedly
-more valuable in the late period.
+The forecasting problem therefore contains at least three distinct quantities.
+Standardized coupling asks how strongly anomalies covary. Forecast value asks
+how much held-out prediction loss is removed by adding the nonlocal signal.
+Temporal availability asks whether the signal occurs before the focal outcome.
+None of these establishes biological use.
 
-This distinction precedes actionability. Even information with high expected
-decision value can affect realized timing only if an organism can detect it and
-still has a response capable of changing the outcome. The general sequence is
-therefore
+That distinction is visible here. The reconstructed source signal gained
+substantial marginal forecast value and its mean lead relative to arrival
+widened, so the absence of a route-level transfer cannot be attributed simply
+to weaker spatial information or to the environmental signal becoming later.
+Yet target green-up advanced by about 2.3 d while estimated arrival changed
+little. This is consistent with the original Amaral et al. (2025) result that
+migration speed responds to green-up but does not fully compensate for
+phenological change.
+
+The missing step lies between environmental opportunity and realized
+adjustment. Individuals must encounter or infer the relevant signal, integrate
+it with other cues and internal state, and retain an actuator capable of
+changing timing. In the reduced framework, the sequence is
 
 [
 environmental coupling
 →
-decision-scale information value
+forecast value
 →
-retained actionability
+temporal/biological access
 →
-realized correction.
+retained correction opportunity
+→
+realized adjustment.
 ]
 
-The first two quantities describe the forecasting problem. The latter two
-describe biological control. Collapsing all four into a single
-"predictability" coefficient obscures mechanisms that can move in opposite
-directions.
+The first two quantities describe the external forecasting problem. The latter
+stages describe organismal information use and control. The bird data identify
+the first two and a necessary temporal-order condition, but not the internal
+decision or correction mechanism.
 
 ### 4.2 Seasonal trajectories, not endpoint dates, reveal control
 
@@ -746,11 +732,14 @@ They are useful because they reveal the scale structure hidden by rho, but they
 cannot be relabelled as confirmatory. The analysis also does not identify
 anthropogenic climate change as the cause of any two-window difference.
 
-Stable or slightly lower bird arrival–green-up mismatch does not show that
-birds used the reconstructed source cue, nor does it identify downstream
-correction as the buffering mechanism. Other cues, route changes, selection,
-changes in arrival variance, or unmeasured behavioral adjustments remain
-possible.
+The modest stability of absolute arrival–green-up distance should not be read
+as successful active tracking. Signed timing shows that target green-up
+advanced by about 2.3 d while estimated arrival changed little, so the
+environmental target moved toward an arrival schedule that was already several
+days early relative to mid-green-up. The arrival estimates describe a
+population migration front rather than tracked individual decisions. Other
+cues, route changes, selection, population turnover and unmeasured behavioral
+adjustments remain possible.
 
 The mule-deer analyses independently establish phase convergence and signed
 downstream adjustment, but they do not estimate the bird mechanism and do not
@@ -772,48 +761,45 @@ trajectory.
 
 ## 5. Conclusion
 
-Seasonal tracking cannot be reduced to a correlation coefficient. In the
-sampled eastern North American bird system, destination spring became much more
-variable between the two study periods while source–destination coupling
-strengthened. The result was not simply "better predictability": the amount of
-environmental variation that could be predicted from the source increased
-strongly, while source-informed held-out forecast error remained approximately
-stable and the no-source forecast deteriorated sharply.
+Environmental information and phenological adjustment are not the same thing.
+In the sampled eastern North American bird system, destination spring became
+more variable while nonlocal source information gained substantial
+cross-validated forecast value. The environmental signal also became earlier
+relative to arrival. Yet target green-up advanced by about 2.3 d while
+estimated bird arrival changed little, and larger route-level gains in forecast
+value did not produce detectable bird-specific improvement beyond structural
+nulls.
 
-This reveals a general distinction between **information value** and
-**residual uncertainty**. A more variable environment can make a cue more
-valuable even when absolute uncertainty remains substantial. In the bird data,
-larger route-level gains in forecast value did not translate into detectable
-bird-specific mismatch improvement beyond structural nulls. Whether valuable
-environmental information changes phenology is therefore a separate biological
-question: organisms must perceive it and still retain consequential actions
-capable of changing timing.
+The bird result therefore identifies a missing conversion step rather than a
+simple shortage of environmental information. A signal can be statistically
+valuable and temporally available without being known to have been encountered,
+perceived, integrated or translated into a timing response.
 
-Mule-deer trajectories illustrate the downstream side of that problem.
+Mule-deer trajectories illustrate the downstream side of this problem.
 Individuals entering migration at different signed phases alter movement speed
 and stopover use in opposite directions and strongly compress phase variation
 before the end of migration. Forecasting future conditions and correcting
-error after commitment are therefore distinct routes through which seasonal
-accuracy can be produced.
+residual error after commitment are therefore distinct routes through which
+seasonal timing can change.
 
-The resulting framework replaces a single phenological-response coefficient
-with a sequence:
+The resulting framework replaces a single predictability or phenological
+response coefficient with a sequence:
 
 [
 forecast value
 →
-commitment
+access and commitment
 →
 phase re-estimation
 →
 correction
 →
-interaction.
+realized timing.
 ]
 
-The central comparative question is not simply which species possess more
-reliable cues, but **how much uncertainty their information removes, when that
-information becomes available, and what they can still change afterward**.
+The central comparative question is therefore **not only how informative the
+environment is, but whether organisms can access that information in time and
+still convert it into correction**.
 
 
 ---
