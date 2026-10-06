@@ -223,7 +223,7 @@ def build(output: Path) -> dict:
     add_heading(doc, "Figure Legends", 1)
     cap_body = "\n".join(
         line for line in captions.splitlines()
-        if not line.startswith("# American Naturalist")
+        if not line.startswith("# ")
     )
     render_markdown(doc, cap_body)
 
