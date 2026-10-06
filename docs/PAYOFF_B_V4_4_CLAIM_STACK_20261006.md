@@ -264,6 +264,11 @@ Restricted sample:
 - change = -1.37 d, 95% CI -2.36 to -0.36 d;
 - 23/31 pairs and 12/14 species became more negative.
 
+Generalization boundary:
+- stagewise subset mean source-target distance = 495 km versus 911 km outside;
+- late rho = 0.847 versus 0.608 outside;
+- delta G_CV = +26.61 d^2 versus +33.34 d^2 outside (SMD -0.08).
+
 Measurement boundary:
 - source arrival posterior SD: about 2.89 -> 0.91 d;
 - target arrival posterior SD: about 2.85 -> 0.93 d;
