@@ -59,7 +59,7 @@ Article type: **Major Article**
 Current manuscript:
 `manuscript/PAYOFF_B_FORECAST_TO_CORRECTION_V4_4_AMNAT.md`
 
-Current approximate main-text word count: **4,528**
+Current approximate main-text word count: **4,789**
 
 Abstract word count: **164**
 
