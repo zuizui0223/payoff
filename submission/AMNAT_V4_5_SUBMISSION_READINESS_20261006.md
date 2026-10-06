@@ -147,6 +147,35 @@ Supporting Information carries:
 - retention non-identifiability;
 - complete mule-deer reanalysis details.
 
+## Current journal-format requirements
+
+Checked against the current journal instructions:
+
+- Major Article usual main-text limit: 7,500 words excluding Literature Cited;
+- abstract limit: 200 words;
+- print figures/tables: no more than 6 total;
+- keywords: 1–6;
+- short title: no more than 40 characters including spaces;
+- double-anonymous review;
+- all manuscript elements double spaced;
+- line numbers required before review;
+- page numbers required before review;
+- figure legends generally no more than 100 words;
+- Methods before corresponding Results preferred;
+- data/code must be available to editors/reviewers at initial submission;
+- cover letters are not expected; required acknowledgments and contribution
+  information belong in Editorial Manager Comments;
+- generative-AI use for manuscript/code/figure assistance is disclosed in
+  Methods.
+
+Current V4.5:
+- main text about 6,401 words before final small edits;
+- abstract 165 words;
+- 3 main figures;
+- 6 keywords;
+- short title: "Information access and correction";
+- figure legends: 76 / 76 / 81 words.
+
 ## Remaining practical tasks
 
 1. Pass the deterministic main-figure CI.
