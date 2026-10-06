@@ -347,7 +347,7 @@ different times yet converge later.
 
 ## 3. Methods
 
-### 5.1 Migratory-bird environmental analysis
+### 3.1 Migratory-bird environmental analysis
 
 We used the public `final.rds` dataset from Amaral et al. (2025), fixed to
 repository commit `62c58d77c2028bd863dfe3697b0d9cf29ceaeab0`. The analysis
@@ -370,7 +370,7 @@ source–target structure, 5-degree and 10-degree spatial blocks, and global
 calendar-year omissions; equal-species weighting and alternative window
 definitions were also examined.
 
-### 5.2 Posthoc forecastability and observability diagnostics
+### 3.2 Posthoc forecastability and observability diagnostics
 
 All analyses in this subsection were designed after the primary correlation
 outcome was known and are treated as posthoc diagnostics. We first quantified
@@ -495,7 +495,7 @@ confirmatory.
 
 ## 4. Natural evidence
 
-### 3.1 Environmental forecastability increased while bird arrival changed little
+### 4.1 Environmental forecastability increased while bird arrival changed little
 
 We first tested a prespecified environmental hypothesis in the eastern North
 American migratory-bird dataset of Amaral et al. (2025). Each breeding-range
@@ -643,7 +643,7 @@ organismal information access or cue use. The range-based source cells are envir
 data do not show that individuals passed through, perceived, learned, or acted
 on the fitted source signal.
 
-### 3.2 Mule deer provide an individual-level phase-correction anchor
+### 4.2 Mule deer provide an individual-level phase-correction anchor
 
 Red Desert mule deer provide a complementary system because individuals begin
 migration with large signed differences relative to the local green wave and
@@ -708,7 +708,7 @@ passive retention and process noise.
 
 ## 5. Discussion
 
-### 4.1 Forecastability is not biological information
+### 5.1 Forecastability is not biological information
 
 The bird analysis separates quantities that are often compressed into the word
 predictability. Earlier migration studies already distinguished correlation,
@@ -756,7 +756,7 @@ stages describe organismal information access, use and control. The bird data id
 geometry, but not organismal information access, the internal decision process,
 or correction capacity.
 
-### 4.2 Seasonal trajectories, not endpoint dates, reveal control
+### 5.2 Seasonal trajectories, not endpoint dates, reveal control
 
 The mule-deer result illustrates why final timing alone is insufficient.
 Individuals begin migration across a broad signed range around peak green-up,
