@@ -52,13 +52,16 @@ timing target, while Usinowicz and O'Connor (2023) developed a broader fitness
 value-of-information framework for ecology. We therefore do not treat
 decision-scale information value itself as new.
 
-Empirical migration work likewise distinguishes current environmental
-conditions from climatological information. Robertson et al. (2024) found that
-many Western Hemisphere migratory birds align more strongly with long-term
-average green-up than with current green-up. Our environmental analysis does
-not infer which channel birds use; it instead asks how the marginal
-out-of-sample value of contemporaneous nonlocal information changes through
-time.
+Empirical and theoretical migration work also distinguishes information
+available in the environment from information actually used in movement
+decisions (Shaw and Couzin 2013), and current environmental conditions from
+climatological information. Robertson et al. (2024) found that many Western
+Hemisphere migratory birds align more strongly with long-term average green-up
+than with current green-up. We therefore do not treat environmental
+availability versus biological use as a new distinction. Our analysis asks a
+narrower temporal question: how the marginal out-of-sample value and calendar
+timing of one reconstructed nonlocal environmental signal changed, and whether
+population arrival changed with it.
 
 A second distinction appears after information is acquired. Biological systems
 combine anticipatory and feedback processes in fluctuating environments
@@ -561,13 +564,13 @@ additional tests of the central mechanism.
 
 The bird analysis separates quantities that are often compressed into the word
 predictability. Earlier migration studies already distinguished correlation,
-proportionality, environmental variability and cue use (Kölzsch et al. 2015;
-McNamara et al. 2011), and increasing spatial synchrony of spring phenology is
-itself established (Koenig and Liebhold 2016; Liu et al. 2019). Our
-contribution is narrower: within the same sampled source–destination network,
-destination variability increased, nonlocal forecast value increased, and the
-environmental signal became earlier relative to arrival, yet population arrival
-timing changed little.
+proportionality, environmental variability, information availability and cue
+use (McNamara et al. 2011; Shaw and Couzin 2013; Kölzsch et al. 2015), and
+increasing spatial synchrony of spring phenology is itself established (Koenig
+and Liebhold 2016; Liu et al. 2019). Our contribution is narrower: within the
+same sampled source–destination network, destination variability increased,
+nonlocal forecast value increased, and the environmental signal became earlier
+relative to arrival, yet population arrival timing changed little.
 
 The forecasting problem therefore contains at least three distinct quantities.
 Standardized coupling asks how strongly anomalies covary. Forecast value asks
@@ -863,3 +866,8 @@ R. J. Ansley, T. J. O'Connell, C. A. Davis, and S. R. Loss. 2024. Decoupling
 of bird migration from the changing phenology of spring green-up. Proceedings
 of the National Academy of Sciences USA 121:e2308433121.
 doi:10.1073/pnas.2308433121.
+
+
+Shaw, A. K., and I. D. Couzin. 2013. Migration or residency? The evolution of
+movement behavior and information usage in seasonal environments. The American
+Naturalist 181:114–124. doi:10.1086/668600.
