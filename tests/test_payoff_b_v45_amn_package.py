@@ -74,3 +74,27 @@ def test_anonymous_file_list_excludes_title_page(tmp_path):
     with zipfile.ZipFile(zip_path) as zf:
         names = set(zf.namelist())
     assert "title_page_TEMPLATE_NOT_FOR_REVIEW.md" in names
+
+
+def test_amnat_metadata_limits():
+    front = (ROOT / "submission" / "AMNAT_V4_5_FRONTMATTER_20261006.md").read_text(encoding="utf-8")
+    manuscript = (ROOT / "manuscript" / "PAYOFF_B_FORECAST_ACCESS_CORRECTION_V4_5_AMNAT.md").read_text(encoding="utf-8")
+    captions = (ROOT / "submission" / "AMNAT_V4_5_FIGURE_CAPTIONS_20261006.md").read_text(encoding="utf-8")
+
+    short = front.split("## Short title", 1)[1].split("## Abstract", 1)[0]
+    short = short.replace("**", "").strip()
+    assert len(short) <= 40
+
+    keyword_text = manuscript.split("**Keywords:**", 1)[1].split("---", 1)[0]
+    keywords = [x.strip() for x in keyword_text.replace("\n", " ").split(";") if x.strip()]
+    assert 1 <= len(keywords) <= 6
+
+    chunks = captions.split("## Figure ")[1:]
+    assert len(chunks) == 3
+    for chunk in chunks:
+        body = chunk.split("\n\n", 1)[1]
+        words = [w for w in body.replace("\n", " ").split() if w]
+        assert len(words) <= 100
+
+    for n in (1, 2, 3):
+        assert f"Figure {n}" in manuscript
