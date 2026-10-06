@@ -24,7 +24,7 @@ We formalize seasonal tracking as a sequence from environmental forecastability
 to accessible information, retained actionability, and correction.
 
 **Keywords:** environmental forecastability; information access; phenological
-mismatch; seasonal timing; migration; actionability; feedback control
+mismatch; migration; actionability; feedback control
 
 ---
 
