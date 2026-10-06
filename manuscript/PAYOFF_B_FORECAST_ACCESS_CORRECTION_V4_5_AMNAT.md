@@ -483,7 +483,16 @@ both body fat and starting ecological phase. These analyses are descriptive and
 do not identify causal independence between physiological readiness and
 downstream control.
 
-### 3.5 Evidence status
+### 3.5 AI-assisted development and evidence status
+
+Generative AI (ChatGPT, OpenAI) was used under author supervision to assist
+with manuscript drafting and editing, code drafting and troubleshooting, and
+the deterministic layout code used to render manuscript figures. Generative AI
+outputs were not treated as empirical observations or statistical results.
+Reported numerical results come from the executable analysis scripts and
+frozen result receipts described here and in the Supporting Information.
+Authors remain responsible for the scientific claims, code, and final
+manuscript.
 
 The source–destination correlation contrast and its outcome-opening rules were
 specified before the primary outcome was examined. The day-scale forecast
