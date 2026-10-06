@@ -596,9 +596,9 @@ realized adjustment.
 ]
 
 The first quantity describes the external forecasting problem. The remaining
-stages describe organismal information access, use and control. The bird data identify
-the first two and a necessary temporal-order condition, but not the internal
-decision or correction mechanism.
+stages describe organismal information access, use and control. The bird data identify external forecastability and population-level timing
+geometry, but not organismal information access, the internal decision process,
+or correction capacity.
 
 ### 4.2 Seasonal trajectories, not endpoint dates, reveal control
 
@@ -647,8 +647,8 @@ problem. At each stage, investigators should estimate independently:
 5. the behavioral response to the cue on a common scale.
 
 The focal comparison is then between models based on standardized coupling,
-forecast error or G(t) alone and a model that allows G(t) to be discounted by
-remaining actionability. The strongest support would be a reproducible
+forecast error or G_O(t) alone and a model that allows G_O(t) to be discounted
+by remaining actionability. The strongest support would be a reproducible
 entry–peak–exit pattern in cue use while raw cue accuracy or correlation
 continues to improve.
 
@@ -669,11 +669,14 @@ quickly commitment removes later options.
 ### 4.4 Limits
 
 The bird source–destination links are range-based spatial proxies, not tracked
-individual routes. Although source green-up preceded target green-up by about
-13 d on average and temporal ordering was positive in most pairs, the mapping
-still does not establish that individuals traversed those source cells at the
-relevant time. It therefore quantifies a temporally leading statistical
-nonlocal signal, not a cue demonstrated to be perceived or learned by birds. Likewise, G_CV is the marginal held-out predictive value of adding that
+individual routes. Although source green-up preceded target green-up by about 13 d on average, the
+realized source mid-green-up event was not consistently available before the
+population front reached the mapped cells. In the restricted stage subset,
+source mid-green-up occurred before source-front arrival in only 29.8% of
+annual observations early and 45.8% late, and after target-front arrival in
+41.6% and 36.1%, respectively. The mapping therefore quantifies retrospective
+environmental forecastability, not a cue demonstrated to be available,
+perceived or learned by birds. Likewise, G_CV is the marginal held-out predictive value of adding that
 reconstructed environmental variable to a declared analyst forecast. It
 estimates an ideal-observer environmental forecastability layer, not
 organismally accessible information and not the expected fitness value of
@@ -716,29 +719,27 @@ adjustments remain possible.
 
 The mule-deer analyses independently establish phase convergence and signed
 downstream adjustment, but they do not estimate the bird mechanism and do not
-jointly identify G(t) and r(t). The association of predeparture nutritional
+jointly identify G_O(t) and r(t). The association of predeparture nutritional
 condition with migration start is also sensitive to a year-fixed-effect
 specification and should be treated as a candidate entry-timing signal rather
 than a fully identified physiological timer.
 
-The evidence is therefore layered rather than causal across systems. The bird
-analysis demonstrates that standardized coupling, absolute environmental
-variability and decision-scale information value can move differently through
-time. The theory separates that forecast-value problem from retained
-actionability. The mule-deer system establishes that signed post-entry
-correction is biologically real. A direct natural test of the full architecture
-still requires G(t), r(t) and behavior to be measured along the same seasonal
-trajectory.
+The evidence is therefore layered rather than causal across systems. The bird analysis demonstrates that standardized coupling, absolute
+environmental variability and ideal-observer forecastability can move
+differently through time. The theory then inserts an organismal-access layer
+before retained actionability. The mule-deer system establishes that signed
+post-entry correction is biologically real. A direct natural test of the full
+architecture still requires accessible information value G_O(t), r(t) and
+behavior to be measured along the same seasonal trajectory.
 
 ---
 
 ## 5. Conclusion
 
-Environmental information and phenological adjustment are not the same thing.
-In the sampled eastern North American bird system, destination spring became
-more variable while nonlocal source information gained substantial
-cross-validated forecast value. The environmental signal also became earlier
-relative to arrival. Yet target green-up advanced by about 2.3 d while
+Environmental forecastability and phenological adjustment are not the same
+thing. In the sampled eastern North American bird system, destination spring
+became more variable while reconstructed nonlocal environmental structure
+gained substantial cross-validated forecast value. Yet target green-up advanced by about 2.3 d while
 estimated bird arrival changed little, and larger route-level gains in forecast
 value did not produce detectable bird-specific improvement beyond structural
 nulls.
@@ -746,11 +747,10 @@ nulls.
 The bird result therefore identifies an unresolved conversion chain rather
 than a simple shortage of environmental predictive structure. A predictor can be
 statistically valuable and target-preceding without being known to have been
-encountered, perceived, integrated or translated into a timing response. In the restricted
-same-species stage subset, population-level relative timing was nevertheless
-transformed between source and target rather than passively retained, providing
-a same-system bridge from environmental opportunity to downstream timing
-without identifying individual feedback.
+encountered, perceived, integrated or translated into a timing response. In the restricted same-species stage subset, population-level relative timing
+was nevertheless transformed between source and target rather than passively
+retained, providing a same-system bridge from external forecast structure to
+downstream timing without identifying individual feedback.
 
 Mule-deer trajectories illustrate the individual-level downstream side of this
 problem.
@@ -764,15 +764,15 @@ The resulting framework replaces a single predictability or phenological
 response coefficient with a sequence:
 
 [
-forecast value
+environmental forecastability
 →
-access and commitment
+organismal information access
+→
+retained actionability
 →
 phase re-estimation
 →
-correction
-→
-realized timing.
+correction.
 ]
 
 The central comparative question is therefore **not only how informative the
