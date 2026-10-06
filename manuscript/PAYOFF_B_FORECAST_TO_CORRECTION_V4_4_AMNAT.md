@@ -667,7 +667,12 @@ the early period. Propagating
 the reported posterior uncertainty around the arrival means retained a negative
 late-minus-early phase-transformation change in all 5,000 simulations, but an
 inverse-variance weighted sensitivity retained a negative point estimate with a
-95% interval spanning zero. The stagewise result is therefore supporting
+95% interval spanning zero. Exploratory source-to-target phase-retention
+regressions were not interpreted mechanistically: in the early period the
+reported source-arrival uncertainty exceeds the residual source-phase variance
+needed to identify a classical errors-in-variables corrected slope, and in the
+late period the corrected slope is approximately the fixed-arrival
+environmental null. The stagewise result is therefore supporting
 population-level geometry, not a measurement-error-invariant causal estimate.
 
 The modest stability of absolute arrival–green-up distance should not be read
