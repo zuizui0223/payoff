@@ -94,6 +94,20 @@ Not licensed:
 - birds perceived or used this source signal;
 - source information caused realized tracking.
 
+Temporal-order audit:
+- mean source lead = about 13.4 d;
+- 158/166 pairs have positive mean source lead in both windows;
+- 157/166 have source earlier in a majority of years in both windows;
+- 127/166 have source earlier in every observed paired year.
+
+Licensed wording:
+> The frozen source is a temporally leading nonlocal environmental signal in
+> most retained pairs.
+
+Not licensed:
+> birds were observed using or passing through the source signal at the relevant
+> time.
+
 Additional robustness:
 - climatological-mean baseline delta G_CV = +22.37 d^2;
 - 136/166 pairs positive;
