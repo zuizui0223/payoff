@@ -207,6 +207,33 @@ tp_ci <- pair_boot_mean(pair$delta_target_phase,B,SEED+2L)
 front_ci <- pair_boot_mean(pair$delta_front_lead,B,SEED+3L)
 wave_ci <- pair_boot_mean(pair$delta_greenup_lead,B,SEED+4L)
 
+# Descriptive downstream attenuation of the between-period source-stage phase
+# shift. For positive mean source shift:
+#
+#   A = 1 - delta_target_phase / delta_source_phase
+#     = - delta_phase_transform / delta_source_phase.
+#
+# A between 0 and 1 means that part of the source-stage shift is not retained at
+# the target stage. This is a descriptive transformation fraction, not a
+# fitness-optimal correction fraction.
+set.seed(SEED+5L)
+atten_boot <- rep(NA_real_,B)
+for(b in seq_len(B)){
+  ix <- sample(seq_len(nrow(pair)),nrow(pair),replace=TRUE)
+  ds <- mean(pair$delta_source_phase[ix])
+  dt <- mean(pair$delta_target_phase[ix])
+  if(is.finite(ds) && abs(ds)>1e-9){
+    atten_boot[b] <- 1-dt/ds
+  }
+}
+attenuation_fraction <-
+  1-mean(pair$delta_target_phase)/mean(pair$delta_source_phase)
+attenuation_ci <- as.numeric(quantile(
+  atten_boot[is.finite(atten_boot)],
+  c(.025,.975),
+  names=FALSE
+))
+
 # Equal-species bootstrap via pair incidence.
 pair_delta <- setNames(pair$delta_phase_transform,pair$pair_key)
 inc <- unique(analysis[,c("species","pair_key")])
@@ -288,6 +315,10 @@ summary_row <- data.frame(
   delta_greenup_lead=mean(pair$delta_greenup_lead),
   delta_greenup_lead_ci_low_95=wave_ci[1],
   delta_greenup_lead_ci_high_95=wave_ci[2],
+
+  source_shift_attenuation_fraction=attenuation_fraction,
+  source_shift_attenuation_ci_low_95=attenuation_ci[1],
+  source_shift_attenuation_ci_high_95=attenuation_ci[2],
 
   phase_retention_slope_early=ret_early,
   phase_retention_slope_late=ret_late,
