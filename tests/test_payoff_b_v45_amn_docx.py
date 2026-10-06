@@ -22,14 +22,14 @@ def test_docx_build_and_structure(tmp_path):
     result = module.build(out)
     assert out.exists()
     assert result["keywords"] <= 6
-    assert len(result["short_title"]) <= 40
+    assert len(result["short_title"]) <= 40\n    assert 1000 <= result["text_words"] <= 7500
 
     doc = Document(out)
     full = "\n".join(p.text for p in doc.paragraphs)
 
     assert "Seasonal tracking depends on information access" in full
     assert "Short title: Information access and correction" in full
-    assert "Text word count:" in full
+    assert "Word count excluding Literature Cited:" in full
     assert "Manuscript elements:" in full
     assert "Abstract" in full
     assert "1. Introduction" in full
