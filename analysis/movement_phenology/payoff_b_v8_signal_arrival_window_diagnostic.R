@@ -97,7 +97,9 @@ window_summary <- function(sp, target_cell, period_name) {
     n = nrow(z),
     mean_lead = if (nrow(z)>0) mean(z$source_to_arrival_lead_days) else NA_real_,
     median_lead = if (nrow(z)>0) median(z$source_to_arrival_lead_days) else NA_real_,
-    share_before = if (nrow(z)>0) mean(z$source_before_arrival) else NA_real_
+    share_before = if (nrow(z)>0) mean(z$source_before_arrival) else NA_real_,
+    arrival_mean = if (nrow(z)>0) mean(z$arr_GAM_mean) else NA_real_,
+    source_greenup_mean = if (nrow(z)>0) mean(z$source_greenup) else NA_real_
   )
 }
 
@@ -123,6 +125,12 @@ units$delta_lead <- units$lead_late - units$lead_early
 units$share_before_early <- as.numeric(early[,"share_before"])
 units$share_before_late <- as.numeric(late[,"share_before"])
 units$delta_share_before <- units$share_before_late - units$share_before_early
+units$arrival_early <- as.numeric(early[,"arrival_mean"])
+units$arrival_late <- as.numeric(late[,"arrival_mean"])
+units$delta_arrival <- units$arrival_late - units$arrival_early
+units$source_greenup_early <- as.numeric(early[,"source_greenup_mean"])
+units$source_greenup_late <- as.numeric(late[,"source_greenup_mean"])
+units$delta_source_greenup <- units$source_greenup_late - units$source_greenup_early
 
 analysis <- units[
   units$early_n >= MIN_YEARS &
@@ -169,7 +177,13 @@ pair_lead <- aggregate(
     delta_lead,
     share_before_early,
     share_before_late,
-    delta_share_before
+    delta_share_before,
+    arrival_early,
+    arrival_late,
+    delta_arrival,
+    source_greenup_early,
+    source_greenup_late,
+    delta_source_greenup
   ) ~ pair_key + source_cell,
   data=analysis,
   FUN=mean
@@ -216,7 +230,13 @@ sp <- aggregate(
     delta_lead,
     share_before_early,
     share_before_late,
-    delta_share_before
+    delta_share_before,
+    arrival_early,
+    arrival_late,
+    delta_arrival,
+    source_greenup_early,
+    source_greenup_late,
+    delta_source_greenup
   ) ~ species,
   data=analysis,
   FUN=mean
@@ -270,7 +290,15 @@ summary_row <- data.frame(
   equal_species_lead_late=mean(sp$lead_late),
   equal_species_delta_lead=mean(sp$delta_lead),
   equal_species_ci_low_95=sp_ci[1],
-  equal_species_ci_high_95=sp_ci[2]
+  equal_species_ci_high_95=sp_ci[2],
+  pair_mean_arrival_early=mean(pair_lead$arrival_early),
+  pair_mean_arrival_late=mean(pair_lead$arrival_late),
+  pair_mean_delta_arrival=mean(pair_lead$delta_arrival),
+  pair_mean_source_greenup_early=mean(pair_lead$source_greenup_early),
+  pair_mean_source_greenup_late=mean(pair_lead$source_greenup_late),
+  pair_mean_delta_source_greenup=mean(pair_lead$delta_source_greenup),
+  equal_species_delta_arrival=mean(sp$delta_arrival),
+  equal_species_delta_source_greenup=mean(sp$delta_source_greenup)
 )
 
 # Also report row-year availability, which is directly interpretable as the
