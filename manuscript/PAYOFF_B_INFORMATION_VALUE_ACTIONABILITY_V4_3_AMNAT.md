@@ -378,6 +378,13 @@ cell for the same species. Source and target green-up were detrended separately
 within 2002–2009 and 2010–2017, and the preregistered environmental coordinate
 was the Pearson correlation of annual residual anomalies.
 
+A posthoc temporal-order audit confirmed that the environmental source was
+usually earlier in calendar time as well as lower in latitude: mean
+source-to-target green-up lead was about **13.4 d**, and **158/166 (95.2%)**
+pairs had positive mean source lead in both windows. This licenses the source
+as a temporally leading environmental signal, not as a cue known to have been
+perceived by birds.
+
 The registered degradation prediction was not supported. Across 166 unique
 source–destination pairs used by 28 species, mean correlation increased from
 
@@ -721,9 +728,11 @@ quickly commitment removes later options.
 ### 4.5 Limits
 
 The bird source–destination links are range-based spatial proxies, not tracked
-individual routes. They quantify a statistical nonlocal signal potentially
-available along a migration corridor; they do not identify the cues perceived
-or learned by individual birds. Likewise, G_CV is the marginal held-out
+individual routes. Although source green-up preceded target green-up by about
+13 d on average and temporal ordering was positive in most pairs, the mapping
+still does not establish that individuals traversed those source cells at the
+relevant time. It therefore quantifies a temporally leading statistical
+nonlocal signal, not a cue demonstrated to be perceived or learned by birds. Likewise, G_CV is the marginal held-out
 predictive value of adding that signal to a declared linear forecast. It is an
 operational environmental analogue of decision-scale information value, not a
 direct estimate of the expected fitness value of information to an organism.
