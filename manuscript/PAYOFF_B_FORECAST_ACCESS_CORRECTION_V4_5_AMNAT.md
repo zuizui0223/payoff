@@ -606,7 +606,7 @@ the environmental target advanced while the estimated arrival schedule changed
 little.
 
 A restricted same-system stage analysis provided a population-level bridge
-between environmental opportunity and downstream timing. Among **31
+between environmental forecastability and downstream timing. Among **31
 source–target pairs from 14 species** with at least six annual arrival estimates
 at both mapped cells in both periods, the estimated migration front generally
 reached the source first. The source-to-target front interval shortened from
@@ -646,6 +646,9 @@ These analyses establish changing environmental forecastability, not
 organismal information access or cue use. The range-based source cells are environmental proxies, and the
 data do not show that individuals passed through, perceived, learned, or acted
 on the fitted source signal.
+
+Figure 2 summarizes the preregistered coupling result, the posthoc
+forecastability and observability diagnostics, and signed population timing.
 
 ### 4.2 Mule deer provide an individual-level phase-correction anchor
 
