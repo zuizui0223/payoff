@@ -814,13 +814,12 @@ at an intermediate stage when independently measured **organismally accessible
 information value** and remaining actionability move in opposite directions.
 
 A direct test requires at least three ordered stages of the same decision
-problem. At each stage, investigators should estimate independently:
-
-1. the external environmental variables that are forecastable at that stage;
-2. which of those variables the organism can actually encounter or infer;
-3. loss with and without that accessible information, and therefore G_O(t);
-4. the remaining set or value of feasible timing responses r(t);
-5. the behavioral response to the cue on a common scale.
+problem. At each stage, investigators should independently estimate the
+external environmental variables that are forecastable, determine which of
+those variables the organism can actually encounter or infer, quantify loss
+with and without that accessible information and therefore G_O(t), measure the
+remaining set or value of feasible timing responses r(t), and place the
+behavioral response to the cue on a common scale.
 
 The focal comparison is then between models based on standardized coupling,
 forecast error or G_O(t) alone and a model that allows G_O(t) to be discounted
