@@ -1,0 +1,37 @@
+name: payoff-b-v45-amn-docx
+
+on:
+  push:
+    branches:
+      - audit/payoff-b-v8-dependence-quality-20261005
+    paths:
+      - "manuscript/PAYOFF_B_FORECAST_ACCESS_CORRECTION_V4_5_AMNAT.md"
+      - "submission/AMNAT_V4_5_FRONTMATTER_20261006.md"
+      - "submission/AMNAT_V4_5_FIGURE_CAPTIONS_20261006.md"
+      - "scripts/build_payoff_b_v45_amn_docx.py"
+      - "tests/test_payoff_b_v45_amn_docx.py"
+      - ".github/workflows/payoff-b-v45-amn-docx.yml"
+  workflow_dispatch:
+
+jobs:
+  build-docx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check pytest python-docx
+      - name: Test DOCX builder
+        run: pytest -q tests/test_payoff_b_v45_amn_docx.py
+      - name: Build anonymous DOCX
+        run: |
+          python scripts/build_payoff_b_v45_amn_docx.py \
+            --output outputs/payoff_b_v45_amn_anonymous_manuscript.docx
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v45-amn-docx
+          path: outputs/payoff_b_v45_amn_anonymous_manuscript.docx
+          if-no-files-found: error
