@@ -61,7 +61,7 @@ def test_package_zip_is_deterministic_at_fixed_output_path(tmp_path):
     assert first == second
 
 
-def test_anonymous_file_list_excludes_title_page(tmp_path):
+def test_anonymous_bundle_contains_no_title_page(tmp_path):
     module = load_module()
     out = tmp_path / "pkg"
     zip_path = tmp_path / "pkg.zip"
@@ -69,11 +69,11 @@ def test_anonymous_file_list_excludes_title_page(tmp_path):
 
     manifest = json.loads((out / "PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))
     anon = set(manifest["anonymous_reviewer_files"])
-    assert "title_page_TEMPLATE_NOT_FOR_REVIEW.md" not in anon
+    assert all("title_page" not in name.lower() for name in anon)
 
     with zipfile.ZipFile(zip_path) as zf:
         names = set(zf.namelist())
-    assert "title_page_TEMPLATE_NOT_FOR_REVIEW.md" in names
+    assert all("title_page" not in name.lower() for name in names)
 
 
 def test_amnat_metadata_limits():
