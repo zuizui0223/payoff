@@ -87,6 +87,33 @@ Equal-species:
 Therefore the larger late-period improvement in source local phase was not fully
 retained at the target stage.
 
+## Descriptive attenuation of the between-period source-stage shift
+
+At the pair-mean level, the source-stage signed phase changed by **+3.50 d**
+between periods, whereas the target-stage phase changed by **+2.13 d**.
+
+Define the descriptive attenuation fraction:
+
+    A
+      =
+    1 - delta_target_phase / delta_source_phase
+      =
+    - delta_phase_transform / delta_source_phase.
+
+The estimate is:
+
+- **A = 0.392**;
+- pair-bootstrap 95% CI **0.101 to 0.656**.
+
+Thus, on this aggregate scale, about 39% of the source-stage between-period
+relative-timing shift was not retained at the target stage.
+
+This is a descriptive stage-transformation fraction. It is **not**:
+- an individual correction fraction;
+- controller gain;
+- evidence that zero phase is optimal;
+- a fitness benefit estimate.
+
 ## Geometric decomposition
 
 Population-front source-to-target interval:
@@ -175,10 +202,10 @@ correction exists in nature.
 ## Provenance
 
 Workflow:
-- run: 37394526064
-- artifact: 11382676509
+- run: 37402488851
+- artifact: 11385472835
 - artifact SHA256:
-  5cd83e72dc3e9f61e860961ab5d8cb5dbe86e42de9939094c08008388c4e9624
+  6bf859f01d2b3d0c0416693d87e685b4122e2b7c8b07d7a9cfa6e987de5f2dfe
 
 Script:
 analysis/movement_phenology/payoff_b_v8_stagewise_phase_transition.R
