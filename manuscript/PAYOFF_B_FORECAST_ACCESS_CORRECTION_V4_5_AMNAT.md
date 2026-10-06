@@ -134,12 +134,20 @@ If the organism's information set is a subset of the ideal observer's set,
 standard value-of-information monotonicity implies
 
 [
-G_O(t) <= G_E(t).
+0 <= G_O(t) <= G_E(t).
 ]
 
-This inequality is established decision theory, not a new theorem. Its
-ecological role is to prevent analyst forecastability from being silently
-relabelled as biological information.
+This inequality is established decision theory, not a new theorem, and assumes
+the same loss function and that a decision maker receiving extra information is
+free to ignore it. Its ecological role is to prevent analyst forecastability
+from being silently relabelled as biological information.
+
+The empirical cross-validation quantity used below is deliberately not
+identified with this population value-of-information object. A finite-sample,
+restricted source-informed forecasting model can predict worse than the
+baseline and therefore produce a negative G_CV. We treat G_CV as an
+**operational forecast-value proxy** for a declared model comparison, not as a
+nonnegative theoretical value of information.
 
 Now let r(t) ∈ [0,1] denote retained actionability: the fraction of the fully
 informed state-contingent response that remains implementable. Let C(t) be the
@@ -677,10 +685,11 @@ annual observations early and 45.8% late, and after target-front arrival in
 41.6% and 36.1%, respectively. The mapping therefore quantifies retrospective
 environmental forecastability, not a cue demonstrated to be available,
 perceived or learned by birds. Likewise, G_CV is the marginal held-out predictive value of adding that
-reconstructed environmental variable to a declared analyst forecast. It
-estimates an ideal-observer environmental forecastability layer, not
-organismally accessible information and not the expected fitness value of
-information to an organism.
+reconstructed environmental variable to a declared analyst forecast. Because
+it compares estimated, restricted forecasting models, G_CV can be negative and
+is not identical to the nonnegative population value of information G_E. It is
+an operational forecastability proxy, not organismally accessible information
+and not the expected fitness value of information to an organism.
 
 The increase in standardized coupling is the preregistered result. The
 day-scale forecast decomposition, cross-validated forecast value, temporal-order
