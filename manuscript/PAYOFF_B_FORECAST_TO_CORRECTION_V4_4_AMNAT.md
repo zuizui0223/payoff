@@ -3,18 +3,18 @@
 ## Abstract
 
 Forecasting future seasonal conditions and correcting timing error after
-commitment are established components of seasonal tracking, but environmental
-forecast opportunity need not become phenological adjustment. We distinguish
-standardized environmental coupling, cross-validated forecast value, temporal
-availability, and opportunities for downstream correction.
+commitment are established components of seasonal tracking, but statistical
+forecast value need not become phenological adjustment. We distinguish
+standardized environmental coupling, cross-validated forecast value,
+target-preceding environmental structure, and opportunities for downstream
+correction.
 
 In migratory birds, a preregistered source–destination analysis showed
 detrended spring correlation increasing from 0.284 to 0.653. Posthoc
 cross-validation showed destination variability increasing from 2.41 to 4.66 d
 while the squared-loss value of adding nonlocal source information changed from
--16.1 to +16.0 d^2. The source-to-arrival lead widened by 2.48 d. Yet target
-green-up advanced by 2.31 d while estimated bird arrival shifted by only 0.19
-d, moving signed arrival relative to green-up by 2.12 d. Route-level gains in
+-16.1 to +16.0 d^2. Target green-up advanced by 2.31 d while estimated bird arrival shifted by
+only 0.19 d, moving signed arrival relative to green-up by 2.12 d. Route-level gains in
 forecast value did not predict bird-specific mismatch improvement beyond
 structural nulls. Independent mule-deer data showed strong phase convergence
 and signed downstream speed and stopover adjustments.
@@ -98,11 +98,11 @@ information can then optimally commit at different times solely because their
 response opportunities disappear at different rates.
 
 This leads to one ecological question: **what determines whether
-environmental forecast opportunity becomes phenological adjustment?** We treat
-the problem as a sequence. Before commitment, environmental signals can reduce
-uncertainty about a future seasonal target. Those signals must then be
-temporally available and biologically accessible, and remaining error can be
-altered only through whatever corrective actions are still available.
+environmental forecast value is converted into phenological adjustment?** We
+treat the problem as a sequence. Before commitment, environmental structure can
+reduce uncertainty about a future seasonal target. For that statistical value
+to matter biologically, organisms must encounter or infer relevant information
+and retain actions capable of altering residual timing error.
 
 We develop this sequence in a reduced information–control model. We then use a
 prospectively specified multi-species bird analysis to quantify temporal change
@@ -112,7 +112,7 @@ on decision-loss and calendar-time scales. Finally, we use individual-level
 mule-deer data as an independent natural anchor for the downstream correction
 layer.
 
-Our central claim is that **environmental forecast opportunity and biological
+Our central claim is that **environmental forecast value and biological
 adjustment are distinct stages of seasonal tracking**. Standardized coupling
 alone cannot rank forecast value, and even a valuable, temporally leading
 environmental signal does not by itself establish cue use or correction.
@@ -329,7 +329,7 @@ different times yet converge later.
 
 ## 3. Natural evidence
 
-### 3.1 Environmental forecast opportunity increased while bird arrival changed little
+### 3.1 Nonlocal forecast value increased while bird arrival changed little
 
 We first tested a prespecified environmental hypothesis in the eastern North
 American migratory-bird dataset of Amaral et al. (2025). Each breeding-range
@@ -341,9 +341,8 @@ was the Pearson correlation of annual residual anomalies.
 A posthoc temporal-order audit confirmed that the environmental source was
 usually earlier in calendar time as well as lower in latitude. Mean
 source-to-target green-up lead was about **13.4 d**, and **158/166 (95.2%)**
-pairs had positive mean source lead in both windows. The source can therefore
-be described as a temporally leading environmental signal, not as a cue known
-to have been perceived by birds.
+pairs had positive mean source lead in both windows. The source can therefore be described as a target-preceding environmental
+predictor, not as a cue known to have been encountered or perceived by birds.
 
 The registered degradation prediction was not supported. Across 166 unique
 source–destination pairs used by 28 species, mean detrended correlation
@@ -396,8 +395,17 @@ climatological-mean no-source baseline still gave a pair-mean increase of
 increase. In that subset, omission of every calendar year left all 16 mean
 increases and all 16 bootstrap intervals positive.
 
-The environmental opportunity was also not becoming later relative to bird
-arrival. In the admitted bird sample, mean source-to-arrival lead widened from
+The forecast-value increase was not unique to the frozen nearest-source choice.
+On a common 223-row, 22-species sample, the first-, second- and third-nearest
+lower-latitude sources all showed positive mean increases in G_CV (+37.2,
++33.5 and +29.1 d^2, respectively). The nearest-versus-third-nearest
+equal-species contrast was +10.68 d^2 (95% CI +2.46 to +18.96), whereas the
+nearest-versus-second contrast remained unresolved. We therefore interpret the
+result as regional nonlocal forecast structure, not a uniquely identified cue
+site.
+
+The realized source event also occurred earlier relative to target arrival. In
+the admitted bird sample, mean source-mid-green-up-to-arrival lead widened from
 **5.47 to 7.95 d** (change **+2.48 d**, 95% CI +1.91 to +3.05), with
 source-cell, target-cell, 5-degree and 10-degree intervals all positive. Equal
 species weighting gave a **+2.37 d** change, and 21 of 22 species showed a
@@ -449,11 +457,10 @@ positive slope.
 
 The licensed conclusion is therefore asymmetric but clear:
 
-> **The reconstructed environmental signal became more valuable for forecasting
-> and earlier relative to arrival, while the estimated population arrival
-> schedule remained comparatively rigid.**
+> **The reconstructed nonlocal predictor gained forecast value while the
+> estimated population arrival schedule remained comparatively rigid.**
 
-These analyses establish changing environmental forecast opportunity, not cue
+These analyses establish changing environmental forecast structure, not cue
 use by birds. The range-based source cells are environmental proxies, and the
 data do not show that individuals passed through, perceived, learned, or acted
 on the fitted source signal.
@@ -523,7 +530,7 @@ passive retention and process noise.
 
 ## 4. Discussion
 
-### 4.1 Forecast opportunity is not phenological adjustment
+### 4.1 Forecast value is not phenological adjustment
 
 The bird analysis separates quantities that are often compressed into the word
 predictability. Earlier migration studies already distinguished correlation,
@@ -536,15 +543,16 @@ nonlocal forecast value increased, and the environmental signal became earlier
 relative to arrival, yet population arrival timing changed little.
 
 The forecasting problem therefore contains at least three distinct quantities.
-Standardized coupling asks how strongly anomalies covary. Forecast value asks
-how much held-out prediction loss is removed by adding the nonlocal signal.
-Temporal availability asks whether the signal occurs before the focal outcome.
-None of these establishes biological use.
+Standardized coupling asks how strongly anomalies covary. Forecast value asks how much held-out prediction loss is removed by adding the
+nonlocal predictor. Temporal ordering asks whether the reconstructed
+environmental event precedes the focal outcome. Neither temporal ordering nor
+forecast value establishes that an organism actually encountered or inferred
+that information.
 
-That distinction is visible here. The reconstructed source signal gained
-substantial marginal forecast value and its mean lead relative to arrival
-widened, so the absence of a route-level transfer cannot be attributed simply
-to weaker spatial information or to the environmental signal becoming later.
+That distinction is visible here. The reconstructed source predictor gained substantial marginal forecast value
+and its realized event moved earlier relative to target arrival, so the absence
+of a route-level transfer cannot be attributed simply to weaker spatial
+predictive structure.
 Yet target green-up advanced by about 2.3 d while estimated arrival changed
 little. This is consistent with the original Amaral et al. (2025) result that
 migration speed responds to green-up but does not fully compensate for
@@ -714,9 +722,9 @@ value did not produce detectable bird-specific improvement beyond structural
 nulls.
 
 The bird result therefore identifies a missing conversion step rather than a
-simple shortage of environmental information. A signal can be statistically
-valuable and temporally available without being known to have been encountered,
-perceived, integrated or translated into a timing response. In the restricted
+simple shortage of environmental predictive structure. A predictor can be
+statistically valuable and target-preceding without being known to have been
+encountered, perceived, integrated or translated into a timing response. In the restricted
 same-species stage subset, population-level relative timing was nevertheless
 transformed between source and target rather than passively retained, providing
 a same-system bridge from environmental opportunity to downstream timing
