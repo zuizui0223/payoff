@@ -23,7 +23,7 @@ adjustments.
 We formalize seasonal tracking as a sequence from environmental forecastability
 to accessible information, retained actionability, and correction.
 
-**Keywords:** environmental forecastability; information access; phenological
+Keywords: environmental forecastability; information access; phenological
 mismatch; migration; actionability; feedback control
 
 ---
@@ -81,11 +81,11 @@ information yet retain several opportunities to compensate later. Information
 quality and response opportunity can therefore move independently and even in
 opposite directions.
 
-We therefore separate three quantities. **Environmental forecastability**
+We therefore separate three quantities. Environmental forecastability
 describes how much an ideal observer can reduce prediction loss using external
-environmental structure. **Organismal information value** describes the
+environmental structure. Organismal information value describes the
 decision loss an organism can reduce using information it can actually
-encounter or infer at that stage. **Actionability** is the fraction of the
+encounter or infer at that stage. Actionability is the fraction of the
 state-contingent response that remains biologically implementable. None is
 equivalent to correlation, elapsed time or distance.
 
@@ -98,8 +98,8 @@ because too little can still be changed. Two interacting organisms exposed to th
 information can then optimally commit at different times solely because their
 response opportunities disappear at different rates.
 
-This leads to one ecological question: **what determines whether a
-forecastable seasonal environment is converted into phenological adjustment?** We
+This leads to one ecological question: what determines whether a
+forecastable seasonal environment is converted into phenological adjustment? We
 treat the problem as a sequence. Before commitment, environmental structure can
 reduce uncertainty about a future seasonal target. For that statistical value
 to matter biologically, organisms must encounter or infer relevant information
@@ -113,9 +113,9 @@ on decision-loss and calendar-time scales. Finally, we use individual-level
 mule-deer data as an independent natural anchor for the downstream correction
 layer.
 
-Our central claim is that **environmental forecastability, biological access
+Our central claim is that environmental forecastability, biological access
 to information, and realized adjustment are distinct stages of seasonal
-tracking**. Standardized coupling
+tracking. Standardized coupling
 alone cannot rank forecast value, and even a valuable, temporally leading
 environmental signal does not by itself establish cue use or correction.
 
@@ -146,7 +146,7 @@ The empirical cross-validation quantity used below is deliberately not
 identified with this population value-of-information object. A finite-sample,
 restricted source-informed forecasting model can predict worse than the
 baseline and therefore produce a negative G_CV. We treat G_CV as an
-**operational forecast-value proxy** for a declared model comparison, not as a
+operational forecast-value proxy for a declared model comparison, not as a
 nonnegative theoretical value of information.
 
 Figure 1 summarizes the resulting hierarchy from external forecastability to
@@ -522,7 +522,7 @@ was the Pearson correlation of annual residual anomalies.
 
 A posthoc temporal-order audit confirmed that the environmental source was
 usually earlier in calendar time as well as lower in latitude. Mean
-source-to-target green-up lead was about **13.4 d**, and **158/166 (95.2%)**
+source-to-target green-up lead was about 13.4 d, and 158/166 (95.2%)
 pairs had positive mean source lead in both windows. The source can therefore be described as a target-preceding environmental
 predictor, not as a cue known to have been encountered or perceived by birds.
 
@@ -548,32 +548,32 @@ leave-one-calendar-year-out analyses.
 
 Because correlation is scale invariant, we subsequently performed an explicitly
 posthoc metric-scale diagnostic. Destination green-up anomalies became much
-more variable: mean target residual SD increased from **2.41 d to 4.66 d**
+more variable: mean target residual SD increased from 2.41 d to 4.66 d
 (change +2.25 d; pair-bootstrap 95% CI +1.95 to +2.55), with positive source-,
 target-, and spatial-block intervals. Mean in-window R-squared increased from
-**0.290 to 0.572**, and mean source-to-target slope increased from **0.399 to
-0.640**.
+0.290 to 0.572, and mean source-to-target slope increased from 0.399 to
+0.640.
 
 We then evaluated held-out prediction. Source-informed leave-one-year-out RMSE
-was essentially unchanged (**4.11 to 4.17 d**; change +0.055 d, 95% CI -0.59
-to +0.63), whereas a target-history-only forecast worsened from **3.18 to 5.86
-d** (change +2.68 d, 95% CI +2.34 to +3.01).
+was essentially unchanged (4.11 to 4.17 d; change +0.055 d, 95% CI -0.59
+to +0.63), whereas a target-history-only forecast worsened from 3.18 to 5.86
+d (change +2.68 d, 95% CI +2.34 to +3.01).
 
 To place the environmental signal on the same squared-loss scale as the reduced
-theory, we defined a posthoc **cross-validated forecast-value proxy**,
+theory, we defined a posthoc cross-validated forecast-value proxy,
 
 [
 G_CV = MSE(no source) - MSE(source informed).
 ]
 
 This is an environmental forecast value, not an organismal fitness value of
-information. Mean G_CV changed from **-16.1 d^2 to +16.0 d^2**, a
-late-minus-early increase of **+32.1 d^2**. The increase was widespread:
-median delta G_CV was **+15.84 d^2**, the 10% trimmed mean was **+20.87 d^2**,
-and **139/166 (83.7%)** spatial pairs were positive. Equal-species weighting
-gave a change of **+20.87 d^2** with **25/28 species** positive. A
+information. Mean G_CV changed from -16.1 d^2 to +16.0 d^2, a
+late-minus-early increase of +32.1 d^2. The increase was widespread:
+median delta G_CV was +15.84 d^2, the 10% trimmed mean was +20.87 d^2,
+and 139/166 (83.7%) spatial pairs were positive. Equal-species weighting
+gave a change of +20.87 d^2 with 25/28 species positive. A
 climatological-mean no-source baseline still gave a pair-mean increase of
-**+22.37 d^2**, and the exact 8/8-year subset retained a **+28.30 d^2**
++22.37 d^2, and the exact 8/8-year subset retained a +28.30 d^2
 increase. In that subset, omission of every calendar year left all 16 mean
 increases and all 16 bootstrap intervals positive.
 
@@ -588,9 +588,9 @@ site.
 
 That distinction matters because the predictor is reconstructed retrospectively.
 In the restricted 31-pair/14-species stage subset, source mid-green-up occurred
-before the population front reached the source cell in only **29.8%** of annual
-observations in the early window and **45.8%** in the late window. It occurred
-after target-front arrival in **41.6%** and **36.1%** of annual observations,
+before the population front reached the source cell in only 29.8% of annual
+observations in the early window and 45.8% in the late window. It occurred
+after target-front arrival in 41.6% and 36.1% of annual observations,
 respectively. On average, source mid-green-up fell 4.21 d after source-front
 arrival and 2.18 d before target-front arrival early, and 0.70 d after source
 arrival and 3.83 d before target arrival late. Thus G_CV quantifies
@@ -599,33 +599,33 @@ known to have been available to the birds.
 
 The realized source event also occurred earlier relative to target arrival. In
 the admitted bird sample, mean source-mid-green-up-to-arrival lead widened from
-**5.47 to 7.95 d** (change **+2.48 d**, 95% CI +1.91 to +3.05), with
+5.47 to 7.95 d (change +2.48 d, 95% CI +1.91 to +3.05), with
 source-cell, target-cell, 5-degree and 10-degree intervals all positive. Equal
-species weighting gave a **+2.37 d** change, and 21 of 22 species showed a
+species weighting gave a +2.37 d change, and 21 of 22 species showed a
 positive change. The wider lead arose primarily because source green-up
-advanced by about **2.86 d**, whereas estimated bird arrival advanced by only
-about **0.38 d** in that subset.
+advanced by about 2.86 d, whereas estimated bird arrival advanced by only
+about 0.38 d in that subset.
 
 Restoring the sign of arrival relative to the target green-up revealed the
 biological consequence more clearly. Across the 150 species-target rows of the
-transfer sample, target green-up advanced by **2.31 d** (95% CI 2.08 to 2.58 d
-earlier), whereas estimated bird arrival changed by only **0.19 d** (95% CI
+transfer sample, target green-up advanced by 2.31 d (95% CI 2.08 to 2.58 d
+earlier), whereas estimated bird arrival changed by only 0.19 d (95% CI
 -0.95 to +0.52 d). Signed lag, defined as arrival minus target green-up, shifted
-from **-7.81 to -5.69 d**, a **+2.12 d** change (95% CI +1.41 to +2.77).
+from -7.81 to -5.69 d, a +2.12 d change (95% CI +1.41 to +2.77).
 Equal-species weighting gave a +2.14 d change, and 20 of 22 species were
 positive. Birds therefore became less early relative to mid-green-up because
 the environmental target advanced while the estimated arrival schedule changed
 little.
 
 A restricted same-system stage analysis provided a population-level bridge
-between environmental forecastability and downstream timing. Among **31
-source–target pairs from 14 species** with at least six annual arrival estimates
+between environmental forecastability and downstream timing. Among 31
+source–target pairs from 14 species with at least six annual arrival estimates
 at both mapped cells in both periods, the estimated migration front generally
 reached the source first. The source-to-target front interval shortened from
-**7.20 to 5.69 d** (change -1.51 d, 95% CI -2.32 to -0.70), whereas the
+7.20 to 5.69 d (change -1.51 d, 95% CI -2.32 to -0.70), whereas the
 source-to-target green-up interval changed little. Consequently the
-source-to-target phase transformation became more negative, from **-3.57 to
--4.95 d** (change -1.37 d, 95% CI -2.36 to -0.36); 23/31 pairs and 12/14
+source-to-target phase transformation became more negative, from -3.57 to
+-4.95 d (change -1.37 d, 95% CI -2.36 to -0.36); 23/31 pairs and 12/14
 species changed in that direction. This shows that population-level relative
 timing was transformed across migration stages rather than passively copied
 from source to target. It does not identify individual feedback. The subset is
@@ -650,9 +650,9 @@ positive slope.
 
 The licensed conclusion is therefore asymmetric but clear:
 
-> **The reconstructed environment became more forecastable to an ideal
+> The reconstructed environment became more forecastable to an ideal
 > observer while the estimated population arrival schedule remained
-> comparatively rigid.**
+> comparatively rigid.
 
 These analyses establish changing environmental forecastability, not
 organismal information access or cue use. The range-based source cells are environmental proxies, and the
@@ -810,8 +810,8 @@ but strong correction, even when both end at the same date.
 
 The most distinctive empirical prediction is not simply that later cues are
 better or that constraints matter. It is that cue responsiveness should peak
-at an intermediate stage when independently measured **organismally accessible
-information value** and remaining actionability move in opposite directions.
+at an intermediate stage when independently measured organismally accessible
+information value and remaining actionability move in opposite directions.
 
 A direct test requires at least three ordered stages of the same decision
 problem. At each stage, investigators should independently estimate the
@@ -951,9 +951,9 @@ phase re-estimation
 correction.
 ]
 
-The central comparative question is therefore **not only how informative the
+The central comparative question is therefore not only how informative the
 environment is, but whether organisms can access that information in time and
-still convert it into correction**.
+still convert it into correction.
 
 
 ---
