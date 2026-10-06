@@ -1,0 +1,32 @@
+name: payoff-b-v8-signal-arrival-window
+
+on:
+  push:
+    branches:
+      - audit/payoff-b-v8-dependence-quality-20261005
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_signal_arrival_window_diagnostic.R"
+      - ".github/workflows/payoff-b-v8-signal-arrival-window.yml"
+
+jobs:
+  signal-arrival-window:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Run source-signal to arrival temporal-window diagnostic
+        run: Rscript analysis/movement_phenology/payoff_b_v8_signal_arrival_window_diagnostic.R
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-signal-arrival-window
+          path: |
+            outputs/payoff_b_v8_signal_arrival_window_year_rows.csv
+            outputs/payoff_b_v8_signal_arrival_window_units.csv
+            outputs/payoff_b_v8_signal_arrival_window_pairs.csv
+            outputs/payoff_b_v8_signal_arrival_window_species.csv
+            outputs/payoff_b_v8_signal_arrival_window_summary.csv
+            outputs/payoff_b_v8_signal_arrival_window_year_summary.csv
+          if-no-files-found: error
