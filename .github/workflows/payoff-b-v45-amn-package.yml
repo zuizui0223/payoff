@@ -1,0 +1,45 @@
+name: payoff-b-v45-amn-package
+
+on:
+  push:
+    branches:
+      - audit/payoff-b-v8-dependence-quality-20261005
+    paths:
+      - "manuscript/PAYOFF_B_FORECAST_ACCESS_CORRECTION_V4_5_AMNAT.md"
+      - "submission/AMNAT_V4_5_SUPPORTING_INFORMATION_20261006.md"
+      - "submission/AMNAT_V4_5_FIGURE_CAPTIONS_20261006.md"
+      - "data/payoff_b_v45_figure_data_20261006.json"
+      - "scripts/render_payoff_b_v45_main_figures.py"
+      - "scripts/build_payoff_b_v45_amn_package.py"
+      - "tests/test_payoff_b_v45_main_figures.py"
+      - "tests/test_payoff_b_v45_amn_package.py"
+      - ".github/workflows/payoff-b-v45-amn-package.yml"
+  workflow_dispatch:
+
+jobs:
+  build-anonymous-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Test figures and package
+        run: |
+          pytest -q tests/test_payoff_b_v45_main_figures.py
+          pytest -q tests/test_payoff_b_v45_amn_package.py
+      - name: Build anonymous reviewer package
+        run: |
+          python scripts/build_payoff_b_v45_amn_package.py \
+            --output-dir outputs/payoff_b_v45_amn_package \
+            --zip outputs/payoff_b_v45_amn_reviewer_package.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v45-amn-package
+          path: |
+            outputs/payoff_b_v45_amn_package/
+            outputs/payoff_b_v45_amn_reviewer_package.zip
+          if-no-files-found: error
