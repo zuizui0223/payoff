@@ -251,7 +251,7 @@ def figure2(data: dict) -> str:
     out = []
 
     # A
-    out.append(panel_label(60, 120, "A", "Preregistered environmental coordinate"))
+    out.append(panel_label(60, 120, "A", "Preregistered coupling"))
     out.append(rect(70, 150, 300, 270, fill=LIGHT_GRAY, stroke=GRID, rx=8))
     maxrho = 0.8
     for i,(lab,val,col) in enumerate([
@@ -268,7 +268,7 @@ def figure2(data: dict) -> str:
     out.append(text(220, 242, "preregistered", 12, "700", "middle", GREEN))
 
     # B
-    out.append(panel_label(420, 120, "B", "Forecastability rose as target variability increased"))
+    out.append(panel_label(420, 120, "B", "Forecast value rose with variability"))
     out.append(rect(430,150,520,270,fill=LIGHT_GRAY,stroke=GRID,rx=8))
     out.append(text(460,185,"Target green-up anomaly SD",14,"700"))
     out.append(text(460,214,f"{e['target_sd_early_days']:.2f} → {e['target_sd_late_days']:.2f} d",17,"700",fill=ORANGE))
@@ -280,7 +280,7 @@ def figure2(data: dict) -> str:
     out.append(text(460,400,"nearest / 2nd / 3rd source gains: +37.2 / +33.5 / +29.1 d²",12,fill=MUTED))
 
     # C stacked observability
-    out.append(panel_label(1000, 120, "C", "The predictor was not consistently an online cue"))
+    out.append(panel_label(1000, 120, "C", "Predictor not consistently online"))
     out.append(rect(1010,150,330,270,fill=LIGHT_GRAY,stroke=GRID,rx=8))
     categories=[
         ("before source front","before_source_arrival",GREEN),
@@ -307,7 +307,7 @@ def figure2(data: dict) -> str:
         out.append(text(x+18,yy,cat,10,fill=MUTED))
 
     # D timing shifts
-    out.append(panel_label(60, 500, "D", "Population arrival changed little while target green-up advanced"))
+    out.append(panel_label(60, 500, "D", "Target advanced; population arrival changed little"))
     out.append(rect(70,535,1270,290,fill=LIGHT_GRAY,stroke=GRID,rx=8))
     # timeline
     x0,x1=130,1280
@@ -333,7 +333,7 @@ def figure2(data: dict) -> str:
         out.append(circle(xl,y,7,fill=col,stroke=col,width=3))
         out.append(arrow(xe-8,y-24,xl+8,y-24,col,2.5))
         out.append(text(xe,y+29,f"{early:.2f}",11,"700","middle",col))
-        out.append(text(xl,y+29,f"{late:.2f}",11,"700","middle",col))
+        out.append(text(xl,y+47,f"{late:.2f}",11,"700","middle",col))
     out.append(text(1070,565,"open = 2002–09   filled = 2010–17",12,fill=MUTED))
     out.append(text(940,690,f"signed lag: {t['signed_lag_early_day']:.2f} → {t['signed_lag_late_day']:.2f} d",15,"700"))
     out.append(text(940,716,f"shift = {t['signed_lag_shift_day']:+.2f} d",15,"700",fill=PURPLE))
@@ -351,7 +351,7 @@ def figure3(data: dict) -> str:
     out=[]
 
     # A phase SD
-    out.append(panel_label(60,120,"A","Phase variance contracts across migration"))
+    out.append(panel_label(60,120,"A","Phase variance contracts"))
     out.append(rect(70,150,370,285,fill=LIGHT_GRAY,stroke=GRID,rx=8))
     maxv=30
     for i,(lab,val,col) in enumerate([
@@ -363,11 +363,11 @@ def figure3(data: dict) -> str:
         out.append(rect(x,390-h,85,h,fill=col,stroke=col,rx=3))
         out.append(text(x+42,412,lab,14,"700","middle"))
         out.append(text(x+42,380-h,f"{val:.2f} d",14,"700","middle",col))
-    out.append(text(255,195,f"variance ratio = {d['variance_ratio']:.3f}",15,"700","middle"))
-    out.append(text(255,220,f"95% CI {d['variance_ratio_ci'][0]:.3f}–{d['variance_ratio_ci'][1]:.3f}",12,anchor="middle",fill=MUTED))
+    out.append(text(255,175,f"variance ratio = {d['variance_ratio']:.3f}",15,"700","middle"))
+    out.append(text(255,198,f"95% CI {d['variance_ratio_ci'][0]:.3f}–{d['variance_ratio_ci'][1]:.3f}",12,anchor="middle",fill=MUTED))
 
     # B abs phase
-    out.append(panel_label(510,120,"B","Most animal-years move closer to the green wave"))
+    out.append(panel_label(510,120,"B","Phase error contracts"))
     out.append(rect(520,150,370,285,fill=LIGHT_GRAY,stroke=GRID,rx=8))
     out.append(text(705,205,f"{100*d['closer_fraction']:.1f}% ended closer to peak",18,"700","middle",GREEN))
     out.append(text(705,260,"mean |phase error|",14,"700","middle"))
@@ -377,7 +377,7 @@ def figure3(data: dict) -> str:
     out.append(text(705,410,f"{d['animal_years']} animal-years / {d['individuals']} females",12,anchor="middle",fill=MUTED))
 
     # C signed actuators
-    out.append(panel_label(960,120,"C","Signed phase predicts opposite actuator changes"))
+    out.append(panel_label(960,120,"C","Signed actuator responses"))
     out.append(rect(970,150,370,285,fill=LIGHT_GRAY,stroke=GRID,rx=8))
     out.append(text(1005,205,"movement rate",14,"700"))
     out.append(line(1005,245,1290,245,1.5,GRID))
