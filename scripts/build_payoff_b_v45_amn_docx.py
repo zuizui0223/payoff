@@ -169,8 +169,8 @@ def build(output: Path) -> dict:
 
     title = manuscript.splitlines()[0].lstrip("# ").strip()
     short_title = clean(between(front, "## Short title", "## Abstract"))
-    abstract = between(manuscript, "## Abstract", "**Keywords:**")
-    keyword_block = manuscript.split("**Keywords:**", 1)[1].split("---", 1)[0]
+    abstract = between(manuscript, "## Abstract", "Keywords:")
+    keyword_block = manuscript.split("Keywords:", 1)[1].split("---", 1)[0]
     keywords = clean(keyword_block).replace("\n", " ").strip()
     keyword_list = [x.strip() for x in keywords.split(";") if x.strip()]
 
