@@ -115,6 +115,98 @@ Authoritative V1/V2 publication relation:
 
 `docs/PAYOFF_B_V1_V2_PUBLICATION_RELATION_20260927.md`
 
+### Current Paper-2 development route — American Naturalist V4.5
+
+As of **2026-10-06**, the current scientific development route is:
+
+`manuscript/PAYOFF_B_FORECAST_ACCESS_CORRECTION_V4_5_AMNAT.md`
+
+Current front matter:
+
+`submission/AMNAT_V4_5_FRONTMATTER_20261006.md`
+
+Current claim stack:
+
+`docs/PAYOFF_B_V4_5_CLAIM_STACK_20261006.md`
+
+Current figure plan:
+
+`docs/PAYOFF_B_V4_5_MAIN_FIGURE_PLAN_20261006.md`
+
+Current novelty audit:
+
+`docs/PAYOFF_B_V4_5_NOVELTY_AUDIT_20261006.md`
+
+Preferred target:
+**The American Naturalist — Major Article**
+
+Current ecological question:
+
+> **What determines whether a forecastable seasonal environment becomes
+> phenological adjustment?**
+
+Current four-layer architecture:
+
+```text
+environmental forecastability
+-> organismal information access
+-> retained actionability
+-> correction
+```
+
+Critical empirical distinction:
+
+```text
+V8_GCV = IDEAL_OBSERVER_ENVIRONMENTAL_FORECASTABILITY_PROXY
+V8_GCV_NOT = ORGANISMAL_INFORMATION_VALUE
+SOURCE_EVENT_OBSERVABILITY = NOT_CONSISTENTLY_ONLINE_AT_MAPPED_SOURCE
+BIRD_ARRIVAL_RESPONSE = LIMITED_RELATIVE_TO_TARGET_GREENUP_SHIFT
+BIRD_GCV_TRANSFER = NO_BIRD_SPECIFIC_TRANSFER_AFTER_STRUCTURAL_NULLS
+BIRD_STAGEWISE_BRIDGE = SUPPORTING_POPULATION_GEOMETRY_ONLY
+MULE_DEER_ROLE = INDIVIDUAL_SIGNED_CORRECTION_ANCHOR
+```
+
+Key environmental result:
+
+- detrended source-target rho: **0.284 -> 0.653** (preregistered);
+- target green-up SD: **2.41 -> 4.66 d** (posthoc);
+- cross-validated forecast-value proxy G_CV: **-16.1 -> +16.0 d^2**;
+- delta G_CV: **+32.1 d^2**;
+- 139/166 pairs positive;
+- 25/28 species positive;
+- result survives alternative baseline, exact-complete, year-leverage and
+  source-rank sensitivities.
+
+Observability boundary in the restricted stage subset:
+
+- source mid-green-up before source-front arrival:
+  **29.8% early / 45.8% late**;
+- source mid-green-up after target-front arrival:
+  **41.6% early / 36.1% late**.
+
+Therefore the reconstructed source variable is a **retrospective environmental
+predictor**, not a demonstrated online cue.
+
+Bird timing:
+
+- target green-up shift: **-2.31 d**;
+- estimated arrival shift: **-0.19 d**;
+- signed arrival-minus-green-up shift: **+2.12 d**;
+- route-level G_CV gain does not produce bird-specific mismatch improvement
+  beyond fixed-arrival/permutation structural nulls.
+
+Same-system stagewise support:
+
+- restricted to 31 pairs / 14 species;
+- phase transformation change **-1.37 d**;
+- posterior-normal propagation preserves direction;
+- inverse-variance weighting interval crosses zero;
+- retention slopes are not mechanistically identifiable;
+- role = supporting population-stage geometry, not individual feedback.
+
+The frozen journal-facing V2 remains a rollback/provenance source and is not
+silently rewritten by V4.5.
+
 ### Post-freeze Paper-2 development line
 
 The frozen journal-facing V2 remains the submission/audit source above. It is
