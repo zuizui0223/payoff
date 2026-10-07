@@ -653,7 +653,7 @@ The licensed conclusion is therefore asymmetric but clear:
 
 > The reconstructed environment became more forecastable to an ideal
 > observer while the estimated population arrival schedule remained
-> comparatively rigid.
+> comparatively limited.
 
 These analyses establish changing environmental forecastability, not
 organismal information access or cue use. The range-based source cells are environmental proxies, and the
