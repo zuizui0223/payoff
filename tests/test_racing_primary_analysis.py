@@ -113,3 +113,15 @@ def test_end_to_end_excludes_selected_runner_set_change():
     out = analyze_normalized_handoff(races, results, tm, odds)
     assert out.exclusions["selected_snapshot_runner_set_mismatch"] == 1
     assert out.split["eligible_train_races"] == 3
+
+
+def test_end_to_end_excludes_dead_heat_without_aborting_other_races():
+    races, results, tm, odds = _synthetic_tables()
+    # Make the first training race a two-winner dead heat.
+    for row in results:
+        if row["race_id"] == "r1" and row["horse_id"] == "B":
+            row["winner"] = "1"
+    out = analyze_normalized_handoff(races, results, tm, odds)
+    assert out.exclusions["non_single_winner"] == 1
+    assert out.split["eligible_train_races"] == 3
+    assert out.split["eligible_test_races"] == 2
