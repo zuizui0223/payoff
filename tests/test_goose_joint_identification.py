@@ -4,6 +4,7 @@ from src.goose_joint_identification import (
     climate_link_predictability,
     joint_predictability_recourse_coordinate,
     observed_recourse_envelope,
+    remaining_duration_recourse,
 )
 
 
@@ -92,3 +93,39 @@ def test_joint_coordinate_does_not_accept_negative_raw_skill():
             predictive_skills=[0.5, -0.1],
             recourse_fractions=[1.0, 0.5],
         )
+
+
+
+def test_remaining_duration_recourse_uses_elapsed_time_not_absolute_arrival_date():
+    rows = remaining_duration_recourse(
+        [
+            [8, 10, 12, 14, 16],
+            [4, 5, 6, 7, 8],
+            [1, 2, 2, 3, 4],
+        ],
+        lower_quantile=0.0,
+        reference_quantile=0.5,
+        upper_quantile=1.0,
+    )
+    assert rows[0].advance_capacity == pytest.approx(4.0)
+    assert rows[1].advance_capacity == pytest.approx(2.0)
+    assert rows[2].advance_capacity == pytest.approx(1.0)
+    assert [x.advance_fraction for x in rows] == pytest.approx(
+        [1.0, 0.5, 0.25]
+    )
+
+
+def test_remaining_duration_recourse_does_not_force_monotone_capacity():
+    rows = remaining_duration_recourse(
+        [
+            [8, 10, 12],
+            [5, 6, 20],
+            [1, 2, 3],
+        ],
+        lower_quantile=0.0,
+        reference_quantile=0.5,
+        upper_quantile=1.0,
+    )
+    # Stage 1 can have more observed delay slack than stage 0; empirical
+    # non-monotonicity is retained rather than repaired away.
+    assert rows[1].delay_capacity > rows[0].delay_capacity
