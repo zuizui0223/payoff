@@ -73,7 +73,7 @@ def test_complete_primary_panel_requires_every_target():
         max_staleness_minutes=10,
     )
     assert out is not None
-    assert set(out) == {"T-60", "T-30", "T-15", "T-10", "T-5", "LAST"}
+    assert set(out) == {"T-30", "T-15", "T-10", "T-5", "LAST"}
 
 
 def test_timezone_awareness_mismatch_fails_closed():
