@@ -3,418 +3,438 @@
 Date: **2026-10-07**  
 Status: **prospective reduced-form extension; frozen PAYOFF-B manuscripts unchanged**
 
-## 1. Why this extension exists
+## 1. Purpose
 
-The current PAYOFF-B actionability theorem already separates:
+The current PAYOFF-B actionability model writes usable later information as
 
-- improving information quality through time;
-- declining ability to act on that information;
-- direct waiting cost.
-
-That gives
-
-[
+\[
 N(t)=r(t)V_A(q(t))-C(t),
-]
+\]
 
-where (q(t)) is cue quality, (r(t)) is retained actionability and, above the canonical actionability boundary,
+where:
 
-[
-V_A(q)=S q-B.
-]
+- \(q(t)\) is cue quality;
+- \(r(t)\) is retained actionability / recourse;
+- \(C(t)\) is direct waiting cost;
+- above the canonical actionability boundary \(q_0=B/S\),
 
-A horse-racing / prediction-market analogy exposes a second way in which useful information can disappear even when the focal actor remains fully able to act:
+\[
+V_A(q)=Sq-B.
+\]
 
-> the information can become progressively incorporated into the choices or prices of other actors.
+A competitive prediction system exposes a distinct reason that information can
+lose value even when the focal actor remains physically able to act:
 
-This is mechanistically different from irreversibility, but in a declared reduced form it enters the usable-value equation multiplicatively.
+> other actors may learn the same information, so the focal actor loses its
+> **relative** informational advantage.
 
-## 2. Competitive-information reduced form
+This extension is a mechanism-separation device. It is not claimed to be a new
+theorem of market microstructure.
+
+## 2. Reduced form
 
 Let
 
-[
-e(t)in[0,1]
-]
+\[
+e(t)\in[0,1]
+\]
 
-be **retained information exclusivity**: the fraction of the focal information advantage that has not yet been absorbed by competitors or a market.
-
-This is not claimed to be a universal market-efficiency parameter. It is a reduced-form weight for the part of focal information value that remains relatively exploitable.
+be a declared **retained differential-information weight**. In a competitive
+prediction system, it can represent the fraction of focal information value
+that remains unabsorbed by other actors or a market.
 
 Define
 
-[
-oxed{
-N(t)=r(t)e(t)[S q(t)-B]-C(t)
+\[
+\boxed{
+N(t)=r(t)e(t)[Sq(t)-B]-C(t)
 }
-]
+\]
 
-whenever (q(t)>q_0=B/S).
+whenever \(q(t)>q_0\).
 
-Interpretation:
+The previous PAYOFF-B actionability model is recovered exactly by \(e(t)=1\).
 
-- (q(t)): how accurately the focal actor can infer the hidden state;
-- (r(t)): how much state-contingent response capacity remains;
-- (e(t)): how much of the focal informational advantage remains unabsorbed by others;
-- (C(t)): direct cost of waiting.
+A pure competitive-information limit is obtained by \(r(t)=1\).
 
-The previous PAYOFF-B actionability model is recovered exactly by (e(t)=1).
+The product
 
-A pure competitive-information case is obtained by (r(t)=1).
+\[
+u(t)=r(t)e(t)
+\]
 
-## 3. Competitive actionability-balance theorem
+will be called **retained usable-information weight**.
+
+## 3. Balance condition
 
 For differentiable paths,
 
-[
-rac{dN}{dt}
+\[
+\frac{dN}{dt}
 =
-r e S q'
-+
-r' e [S q-B]
-+
-r e'[S q-B]
--
-C'.
-]
+reSq'
++r'e[Sq-B]
++re'[Sq-B]
+-C'.
+\]
 
-Any interior stationary point therefore satisfies
+Any interior stationary point satisfies
 
-[
-r e S q'
+\[
+reSq'
 =
--r'e[S q-B]
--r e'[S q-B]
+-r'e[Sq-B]
+-re'[Sq-B]
 +C'.
-]
+\]
 
-With zero marginal waiting cost and positive (r,e,V_A),
+With zero marginal waiting cost and positive \(r,e,V_A\),
 
-[
-oxed{
-rac{S q'}{S q-B}
+\[
+\boxed{
+\frac{Sq'}{Sq-B}
 =
--rac{r'}{r}
--rac{e'}{e}
+-\frac{r'}{r}
+-\frac{e'}{e}
 }
-]
+\]
 
-so the relative gain in focal information value is balanced by the **sum** of:
+so the relative gain in focal information value balances the sum of:
 
-1. the relative rate of lost actionability;
-2. the relative rate of lost information exclusivity.
+1. relative actionability loss;
+2. relative loss of differential information value.
 
-This is the central bridge between the ecological and racing interpretations.
+## 4. General product-identification result
 
-## 4. Exponential learning, irreversibility and diffusion
+The observable reduced form depends on \(r(t)\) and \(e(t)\) only through
 
-Let cue quality improve from the canonical actionability boundary as
+\[
+u(t)=r(t)e(t).
+\]
 
-[
+Therefore
+
+\[
+\boxed{
+N(t)=u(t)V_A(q(t))-C(t).
+}
+\]
+
+If \(q(t)\), \(C(t)\), and net usable value \(N(t)\) were known exactly, then
+above the actionability boundary one could at most recover
+
+\[
+u(t)
+=
+\frac{N(t)+C(t)}{V_A(q(t))}.
+\]
+
+One cannot recover \(r(t)\) and \(e(t)\) separately without additional
+information.
+
+More generally, any two admissible pairs
+
+\[
+(r_1(t),e_1(t))
+\quad\text{and}\quad
+(r_2(t),e_2(t))
+\]
+
+that satisfy
+
+\[
+r_1(t)e_1(t)=r_2(t)e_2(t)
+\]
+
+for every \(t\) generate exactly the same \(N(t)\) under the same \(q(t)\) and
+\(C(t)\).
+
+This is **complete mechanism aliasing in the declared multiplicative reduced
+form**.
+
+It is simple algebra, not a claimed generic identification theorem. Its
+importance for PAYOFF-B is interpretive:
+
+> a hump-shaped information-value trajectory does not by itself identify
+> biological irreversibility.
+
+Independent measurement of biological actionability is required if the
+ecological claim is specifically about recourse loss.
+
+## 5. Exponential special case
+
+Let information improve from the canonical actionability boundary:
+
+\[
 q(t)
 =
-q_0+Delta_q[1-exp(-alpha t)],
-]
+q_0+\Delta_q[1-\exp(-\alpha t)],
+\]
 
-with (alpha>0), and let
+with \(\alpha>0\).
 
-[
-r(t)=exp(-eta t),
-qquad
-e(t)=exp(-gamma t),
-]
+Let
 
-with (eta,gammage0) and (eta+gamma>0).
+\[
+r(t)=\exp(-\beta t),
+\qquad
+e(t)=\exp(-\gamma t),
+\]
 
-Then, for (K=SDelta_q),
+with \(\beta,\gamma\ge0\) and \(\beta+\gamma>0\).
 
-[
+With zero direct waiting cost,
+
+\[
 N(t)
 =
-Kexp[-(eta+gamma)t]
-[1-exp(-alpha t)]
-]
-
-when (C(t)=0).
+S\Delta_q
+\exp[-(\beta+\gamma)t]
+[1-\exp(-\alpha t)].
+\]
 
 The unique interior maximum is
 
-[
-oxed{
+\[
+\boxed{
 t^*
 =
-rac{logleft(1+alpha/(eta+gamma)ight)}{alpha}.
+\frac{\log\left(1+\alpha/(\beta+\gamma)\right)}{\alpha}.
 }
-]
+\]
 
 ### Corollary 1 — hazards add
 
-Only the sum
+Only
 
-[
-eta+gamma
-]
+\[
+\beta+\gamma
+\]
 
-enters the closed-form optimum.
+enters the optimum.
 
-Faster biological irreversibility and faster competitive information diffusion therefore move the optimum earlier in exactly the same mathematical direction.
+Thus the exponential version of the general product-identification problem is:
+
+\[
+\boxed{
+\text{peak timing identifies total usable-value decay, not its mechanism.}
+}
+\]
 
 ### Corollary 2 — ecological limit
 
-If
+If \(\gamma=0\),
 
-[
-gamma=0,
-]
-
-then
-
-[
+\[
 t^*
 =
-rac{log(1+alpha/eta)}{alpha},
-]
+\frac{\log(1+\alpha/\beta)}{\alpha},
+\]
 
-which is exactly the existing PAYOFF-B actionability result.
+which recovers the existing PAYOFF-B actionability result.
 
 ### Corollary 3 — competitive-information limit
 
-If
+If \(\beta=0\) and \(\gamma>0\), an interior optimum still exists:
 
-[
-eta=0,qquad gamma>0,
-]
-
-then an interior optimum still exists:
-
-[
+\[
 t^*
 =
-rac{log(1+alpha/gamma)}{alpha}.
-]
+\frac{\log(1+\alpha/\gamma)}{\alpha}.
+\]
 
-Thus useful information can peak before predictive accuracy peaks even when the focal actor loses no physical ability to act.
+Useful information can therefore peak before predictive accuracy peaks even
+when the actor loses no physical ability to act.
 
-### Corollary 4 — identification alias
+## 6. Horse racing as a boundary case
 
-Timing of the value peak alone identifies only
+Pari-mutuel racing is useful because, until the wagering cutoff, the focal
+action set can remain approximately available while collective forecasts
+change rapidly.
 
-[
-eta+gamma,
-]
+The clean object is **not**:
 
-not the separate mechanisms.
+> buy early to lock the displayed odds.
 
-Therefore a natural dataset cannot infer “lost recourse” versus “information absorbed by others” from the timing optimum alone. Independent measurements of actionability and competitive information diffusion are required.
+In a pari-mutuel pool, an early displayed price is not generally the final
+settlement price.
 
-This is an important claim boundary for cross-system comparisons.
+The useful object is instead:
 
-## 5. Why pari-mutuel horse racing is a useful boundary case
+> how much incremental predictive value does a fixed forecast retain over the
+> contemporaneous collective forecast?
 
-In a pari-mutuel system, an early displayed price is not generally a fixed price locked in by an early wager. The final pool determines the eventual payout.
+For race \(r\), horse \(i\), and pre-race time \(t\), let
 
-Therefore the clean PAYOFF object is **not**:
+\[
+f_{ir}
+\]
 
-> bet early to capture the early displayed odds.
+be a fixed public/form forecast and
 
-With unchanged action sets, no transaction cost and the same final-pool settlement, waiting for weakly more information until the last feasible decision point is weakly preferred in the ordinary Bayes-decision sense.
+\[
+m_{irt}
+\]
 
-The useful empirical object is instead the time path of **incremental predictive information relative to the market**.
+the normalized contemporaneous market-implied probability.
 
-Horse racing is therefore valuable because it separates:
+A deliberately simple forecast-combination device is
 
-- improving focal prediction;
-- collective market learning;
-- a sharp final action deadline.
+\[
+h_{irt}(w_t)
+\propto
+f_{ir}^{\,w_t}
+m_{irt}^{\,1-w_t}.
+\]
 
-## 6. Empirical estimands for racing
+Choose \(w_t\) on training races only by minimizing multinomial log loss.
 
-For race (r), horse (i), and pre-race time (t), define
+Interpretation:
 
-[
-p_{irt}
+- \(w_t=0\): the market encompasses the fixed forecast under this combination;
+- \(w_t>0\): the fixed forecast retains incremental predictive content;
+- a decline in \(w_t\) is descriptive evidence that the fixed forecast is
+  becoming less complementary to the market.
+
+Crucially,
+
+\[
+w_t\neq e(t)
+\]
+
+as a structural identity. \(w_t\) is only an empirical proxy / forecast
+encompassing weight.
+
+## 7. Retrospective JRA test
+
+The current retrospective design uses:
+
+- JRA-VAN accumulated TM category 7 as the fixed final pre-race forecast;
+- time-series win odds;
+- T-30, T-15, T-10, T-5, and LAST;
+- a 10-minute maximum staleness rule;
+- an outcome-blind chronological 70/30 date split;
+- training-only calibration of the TM score;
+- training-only fitting of \(w_t\);
+- held-out log loss and paired race-level bootstrap contrasts.
+
+The primary held-out endpoints are:
+
+\[
+\Delta_{\rm form}(t)
 =
-P(i	ext{ wins}mid I_t)
-]
+L_{\rm market}(t)-L_{\rm hybrid}(t),
+\]
 
-from a model restricted to information available by (t).
+plus the training-estimated \(w_t\) trajectory and the market's own log loss.
 
-Let normalized market-implied win probability be
+The strongest descriptive PAYOFF pattern would be:
 
-[
-m_{irt}.
-]
+\[
+L_{\rm market}(t)\downarrow
+\]
 
-For each time slice, evaluate both distributions with the same proper scoring rule.
+while
 
-For multinomial log loss:
+\[
+\Delta_{\rm form}(t)\downarrow.
+\]
 
-[
-L_{m model}(t)
-=
--rac{1}{R}
-sum_r log p_{w_r r t},
-]
+That would mean the collective forecast improves while the fixed forecast's
+incremental value disappears.
 
-[
-L_{m market}(t)
-=
--rac{1}{R}
-sum_r log m_{w_r r t},
-]
+## 8. Prior-art boundary
 
-where (w_r) is the winner.
+The racing mechanisms and forecast-combination architecture are established
+prior art.
 
-Define incremental predictive value over the contemporaneous market as
+In particular:
 
-[
-oxed{
-Delta_{m market}(t)
-=
-L_{m market}(t)-L_{m model}(t).
-}
-]
+- Benter-style systems already combine a fundamental model with public
+  implied probabilities;
+- Figlewski and subsequent betting-market research examine whether focal
+  forecasts contain information beyond market odds;
+- Johnson, Jones & Tang analyze information in price paths;
+- Green et al. (2019) directly show that useful horse-racing forecasting
+  information can diffuse through a market and lose economic value over time;
+- Hanyu et al. (2026) analyze last-minute information dynamics in Japanese
+  pari-mutuel racing.
 
-Positive (Delta_{m market}) means the focal model predicts outcomes better than the contemporaneous market at that time.
-
-The primary decoupling hypothesis is:
-
-[
-L_{m model}(t)
-downarrow
-]
-
-as race time approaches, while
-
-[
-Delta_{m market}(t)
-]
-
-need not increase and may peak earlier or shrink toward zero.
-
-In words:
-
-> **a forecast can keep getting better while its incremental value over the collective forecast gets worse.**
-
-This is the racing analogue of PAYOFF-B’s “information improves while actionability disappears.”
-
-## 7. Prospective first test
-
-Use fixed predeclared time slices, for example:
-
-- 60 min before scheduled post;
-- 30 min;
-- 15 min;
-- 10 min;
-- 5 min;
-- last available snapshot before close.
-
-At every time slice:
-
-1. use only covariates available by that time;
-2. generate horse-level win probabilities that sum to one within race;
-3. normalize contemporaneous win-market implied probabilities;
-4. score model and market on the same held-out races;
-5. estimate (L_{m model}(t)), (L_{m market}(t)), and (Delta_{m market}(t));
-6. bootstrap by race, not by horse.
-
-The primary test is **not betting profit**. It is the shape of predictive accuracy and incremental information value through time.
-
-A later profitability analysis would require explicit treatment of takeout, final settlement odds, stake sizing, pool impact and transaction constraints.
-
-## 8. Data feasibility boundary
-
-JRA-VAN Data Lab publicly documents:
-
-- real-time odds provision during wagering;
-- time-series odds recorded at roughly 5–10 minute intervals;
-- time-series support for win/place, bracket quinella and quinella records.
-
-This is sufficient in principle for a prospective time-sliced prediction-versus-market test, subject to obtaining the Data Lab records and respecting its access conditions.
-
-No racing outcome has been inspected or used to choose a preferred time window in this branch.
-
-
-## 8.5 Prior-art collision and novelty boundary
-
-The racing mechanism itself is **not** new.
-
-Closest prior art identified before any racing outcome analysis:
-
-- **Figlewski (1979, Journal of Political Economy)** tested whether professional handicapper information was already discounted by racetrack odds and found that the betting market absorbed almost all of that published information.
-- **Bird & McCrae (1987, Management Science)** used price paths in racetrack betting and reported strong informational efficiency for public odds movements, while leaving room for private information.
-- **Johnson, Jones & Tang (2006, Management Science)** showed that closing prices did not fully subsume information contained in the preceding odds trajectory.
-- **Brown, Reade & Vaughan Williams (2019, International Journal of Forecasting)** showed that prediction-market accuracy can temporarily worsen after an information release because inexperienced traders enter before more experienced traders correct prices.
-- **Hanyu, Ishii, Otani & Teramoto (UTMD-149, revised 2026; Japanese central horse racing)** is the closest direct collision. Using interim parimutuel odds, they show that final-five-minute odds declines contain return information conditional on final odds and interpret those movements through late informed wagers based on private signals.
-
-Therefore PAYOFF-B must **not** claim novelty for:
+Therefore PAYOFF-B does **not** claim novelty for:
 
 - information aggregation in betting markets;
+- forecast combination with odds;
 - time-varying market efficiency;
-- predictive content of odds trajectories;
-- late informed betting;
-- the idea that final odds can be insufficient.
+- information-value decay through market diffusion;
+- predictive content of odds paths;
+- late informed wagering.
 
-The only role licensed here is narrower:
+The racing route is retained only as a known-mechanism contrast for the PAYOFF
+identification problem.
 
-> use the racing system as a mechanism-separation boundary case showing that information value can decay without physical loss of actionability.
+## 9. What racing changes in PAYOFF-B
 
-The cross-system reduced form may be useful for PAYOFF-B theory, but the additive-hazard algebra is itself a direct consequence of the chosen multiplicative specification and should not be marketed as a new theorem of economics.
+Before this comparison, a hump in usable information could be narrated too
+quickly as:
 
-A standalone racing paper would require a distinct preregistered question not already answered by the literature above.
+\[
+q(t)\uparrow,\quad r(t)\downarrow.
+\]
 
-## 9. Relation back to PAYOFF-B
+The competitive boundary case shows that the same qualitative trajectory can
+instead occur under
 
-The general distinction is now:
+\[
+q(t)\uparrow,\quad r(t)\approx1,\quad e(t)\downarrow.
+\]
 
-[
-	ext{information becomes unusable because}
-]
+Therefore the safe general statement is:
 
-[
-oxed{
-	ext{the actor can no longer respond}
-}
-]
+> **Information is useful only while it remains usable; loss of usability can
+> arise from different mechanisms that must be measured separately.**
 
-or
+For the ecological paper, the empirical burden becomes stronger:
 
-[
-oxed{
-	ext{others have already absorbed the same information}.
-}
-]
-
-Both can occur while raw predictive accuracy is still improving.
-
-The strongest general headline licensed by the reduced model is:
-
-> **Information is valuable only while it remains both actionable and differentially informative.**
-
-The racing analogy therefore strengthens PAYOFF-B only if it is used as a mechanism-separation case, not as evidence that biological systems literally behave like betting markets.
+1. estimate cue/predictive quality \(q(t)\);
+2. independently measure biological recourse/actionability \(r(t)\);
+3. do not infer \(r(t)\) merely from the observed timing of information use.
 
 ## 10. Claim boundary
 
 Safe:
 
-> In the declared multiplicative reduced form, biological actionability loss and competitive information diffusion enter the timing optimum through additive relative hazards. Under exponential learning and exponential decay, only the sum of those hazards determines the closed-form optimum.
+> In the declared multiplicative reduced form, only the product of retained
+> actionability and retained differential-information value enters net usable
+> information. Their separate mechanisms are not identified by the value
+> trajectory alone.
 
 Safe:
 
-> Pari-mutuel racing supplies a prospective empirical system in which prediction accuracy and incremental value over a collective forecast can be measured repeatedly before a sharp decision deadline.
+> In the exponential special case, only the sum of the two decay rates enters
+> the closed-form optimum.
+
+Safe:
+
+> Horse racing supplies an established competitive-information boundary case
+> in which information value can decay through market absorption without a
+> matching loss of physical actionability.
 
 Not licensed:
 
-> The multiplicative exclusivity factor is a universal theorem of market microstructure.
+> This is a new theorem of optimal stopping or market microstructure.
 
 Not licensed:
 
-> Early betting in a pari-mutuel pool captures early displayed odds.
+> The horse-racing forecast combination is novel.
 
 Not licensed:
 
-> Better horse-race prediction implies positive betting returns.
+> A fitted \(w_t\) is numerically equal to the structural \(e(t)\).
 
 Not licensed:
 
-> A peak in empirical predictive advantage alone identifies the mechanism as market absorption rather than model misspecification, covariate timing or selection.
+> Better probabilistic prediction guarantees positive betting returns.
+
+Not licensed:
+
+> An ecological information-value hump proves loss of biological recourse.
