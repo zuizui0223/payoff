@@ -69,6 +69,38 @@ Collision:
 - prediction accuracy need not improve monotonically with more raw information;
 - information diffusion and trader composition matter dynamically.
 
+### Benter / two-stage forecast-combination tradition — hybrid predictor collision
+
+William Benter's computerized handicapping work explicitly combines a
+fundamental handicapping probability with the public's implied probability in a
+second logit stage.  Later horse-racing forecasting work likewise combines
+model-based forecasts with market odds and develops forecast-combination
+methods for competitive events.
+
+This collides directly with the implementation
+
+    h_i(t)
+      proportional to
+    f_i ^ w_t * m_i(t) ^ (1-w_t).
+
+The PAYOFF implementation is therefore **not a novel horse-racing prediction
+architecture**.  It is a deliberately simple forecast-encompassing device used
+to measure whether a fixed forecast retains incremental proper-score value over
+a contemporaneous market forecast.
+
+Directly occupied territory:
+
+- combining a fundamental model with public implied probabilities;
+- interpreting relative forecast weights;
+- evaluating whether model forecasts add information beyond betting odds.
+
+PAYOFF-specific use:
+
+- fit the same combination at declared pre-race time slices;
+- treat the time path of incremental forecast value as a descriptive proxy for
+  competitive information absorption;
+- compare that mechanism with ecological loss of actionability.
+
 ### Green, Sung, Ma & Johnson 2019 — direct diffusion-of-forecast-value collision
 
 Lawrence Green, Ming-Chien Sung, Tiejun Ma & Johnnie E. V. Johnson,
