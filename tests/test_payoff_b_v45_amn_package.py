@@ -1,5 +1,6 @@
 import hashlib
 import importlib.util
+import sys
 import json
 import zipfile
 from pathlib import Path
@@ -11,6 +12,7 @@ SCRIPT = ROOT / "scripts" / "build_payoff_b_v45_amn_package.py"
 def load_module():
     spec = importlib.util.spec_from_file_location("v45package", SCRIPT)
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     assert spec.loader is not None
     spec.loader.exec_module(module)
     return module
