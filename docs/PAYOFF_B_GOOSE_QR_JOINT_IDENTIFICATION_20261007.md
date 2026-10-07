@@ -196,70 +196,99 @@ Do **not** infer recourse from:
 - mismatch residuals;
 - the observed attenuation of timing error.
 
-Those are downstream timing outcomes and would recreate the mechanism-aliasing
-problem.
+Those are timing responses and would recreate the mechanism-aliasing problem.
 
-Estimate recourse from the **remaining behavioral actuators themselves**.
+### 5.2 Primary empirical R: remaining-schedule envelope
 
-### 5.2 Route components
-
-After reproducing stopovers, represent each flyway as an ordered sequence of:
-
-- transit / flight components;
-- stopover components.
-
-For each component k, collect observed duration across eligible spring
-trajectories.
-
-Primary empirical envelope:
+For each retained stopover region \(j\), and each eligible track that visits it,
+measure
 
 \[
-T_k^{fast}=P_{10}(T_k),
-\]
-
-\[
-T_k^{typ}=P_{50}(T_k),
-\]
-
-\[
-T_k^{slow}=P_{90}(T_k).
-\]
-
-Advance capacity:
-
-\[
-C_{k}^{adv}
+T^{remain}_{ij}
 =
-T_k^{typ}-T_k^{fast}.
+\text{elapsed time from departure at region }j
+\text{ to arrival at the declared breeding stage}.
 \]
 
-Delay capacity:
+Use elapsed duration, not the absolute calendar date of breeding arrival.
+
+Across tracks:
 
 \[
-C_{k}^{delay}
-=
-T_k^{slow}-T_k^{typ}.
-\]
-
-At route stage j:
-
-\[
-R_j^{adv}
-=
-\sum_{k\ge j}C_k^{adv},
+T_j^{fast}=P_{10}(T_j^{remain}),
 \]
 
 \[
-R_j^{delay}
-=
-\sum_{k\ge j}C_k^{delay}.
+T_j^{typ}=P_{50}(T_j^{remain}),
+\]
+
+\[
+T_j^{slow}=P_{90}(T_j^{remain}).
+\]
+
+Advance recourse:
+
+\[
+C_j^{adv}=T_j^{typ}-T_j^{fast}.
+\]
+
+Delay recourse:
+
+\[
+C_j^{delay}=T_j^{slow}-T_j^{typ}.
 \]
 
 Normalize each direction by its value at the first retained stage.
 
-This keeps early-arrival and late-arrival recourse separate.
+This definition automatically includes realized combinations of:
 
-### 5.3 Movement speed
+- migration-speed changes;
+- shorter or longer stopovers;
+- skipped stopovers;
+- alternative downstream route schedules.
+
+Unlike a component-sum construction, empirical \(R_j\) is **not forced to be
+monotone**. A downstream bottleneck or route alternative can create local
+increases in observed timing flexibility.
+
+Implementation:
+
+    src/goose_joint_identification.py
+    remaining_duration_recourse()
+
+### 5.3 Secondary mechanistic decomposition
+
+After reproducing stopovers, decompose the route into:
+
+- transit / flight components;
+- stopover components.
+
+For component k:
+
+\[
+C_k^{adv}
+=
+P_{50}(T_k)-P_{10}(T_k),
+\]
+
+\[
+C_k^{delay}
+=
+P_{90}(T_k)-P_{50}(T_k).
+\]
+
+Summing remaining component capacities gives a mechanistic secondary estimate
+of where timing flexibility resides.
+
+This component-sum version is useful for attributing recourse to flight versus
+stopover control, but it is secondary because skipped-route architectures make
+strict component alignment less natural.
+
+Implementation:
+
+    observed_recourse_envelope()
+
+### 5.4 Movement speed
 
 For Barents Sea the archive contains a ground-speed field, but the cross-flyway
 primary analysis must use one common definition.
