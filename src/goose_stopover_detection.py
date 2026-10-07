@@ -1,19 +1,21 @@
 """Deterministic stopover detection for the public barnacle-goose reanalysis.
 
-The detector operationalizes the Kölzsch et al. stopover definition:
+This implementation follows the procedure described by van Wijk et al. (2012),
+which is the method cited by Kölzsch et al. (2015):
 
-- residence within a 30-km radius;
-- longer than 48 h;
-- maximally one outlier position.
+- identify clusters of successive positions whose pairwise displacement does
+  not exceed 30 km;
+- retain clusters occupied for at least 48 h;
+- allow one >30-km detour if the bird returns to the preceding cluster within
+  a short interval;
+- a second detour ends the site.
 
-The original paper did not publish a software implementation.  This module is a
-frozen, conservative reconstruction for the PAYOFF-B public-data reanalysis.
+van Wijk et al. describe an 8-h return window; the closely related De Boer et
+al. analysis of these barnacle-goose tracks describes 6 h.  The primary
+PAYOFF reconstruction uses the original 8-h van-Wijk value and keeps the
+window explicit for sensitivity analysis.
 
-To avoid splitting one 30-km-radius stay solely because different observed
-anchor points are selected, temporally adjacent candidate stays are merged when
-their centers are no more than 2 * radius apart.  The 60-km default is thus
-geometrically derived from the declared 30-km site radius rather than tuned to
-match published stop counts.
+No flyway-specific threshold is permitted.
 """
 
 from __future__ import annotations
@@ -38,6 +40,7 @@ class Stopover:
     center_latitude: float
     center_longitude: float
     inlier_points: int
+    detour_points: int = 0
 
     @property
     def duration_hours(self) -> float:
@@ -92,128 +95,116 @@ def detect_stopovers(
     *,
     radius_km: float = 30.0,
     minimum_duration_hours: float = 48.0,
-    maximum_outliers: int = 1,
-    merge_gap_hours: float = 48.0,
+    maximum_detours: int = 1,
+    maximum_detour_hours: float = 8.0,
 ) -> tuple[Stopover, ...]:
-    """Detect stopovers with a frozen observed-anchor reconstruction.
+    """Detect stopovers from successive-position displacement clusters.
 
-    Candidate search
-    ----------------
-    At each unused track position, use that observed location as a conservative
-    candidate site anchor. Extend forward until more than maximum_outliers
-    positions fall outside radius_km. The candidate qualifies only when the
-    first-to-last inlier interval reaches minimum_duration_hours.
+    Normal cluster continuation requires displacement <= radius_km from the
+    previous in-cluster position.
 
-    Adjacent-candidate merge
-    ------------------------
-    Two consecutive candidates are merged when:
+    A detour is one position more than radius_km away.  It is absorbed into the
+    same stopover only if:
 
-    - the temporal gap is <= merge_gap_hours; and
-    - candidate centers are <= 2 * radius_km apart.
+    - the maximum_detours allowance has not already been used;
+    - the following position returns within radius_km of the last in-cluster
+      position; and
+    - elapsed time from the last in-cluster position to that return is no more
+      than maximum_detour_hours.
 
-    If both candidates can arise from one true 30-km-radius site, their centers
-    can be at most 60 km apart. This merge prevents artificial subdivision
-    caused by choosing a different observed anchor within the same site.
+    The detour position itself is excluded from the site-center calculation.
 
-    This is an approximation to the published site determination, not a claim
-    that it reproduces unpublished manual decisions exactly.
+    After a qualifying cluster is emitted, scanning resumes after its final
+    returned/in-cluster point.  Clusters are not post-hoc merged.
     """
 
     radius = float(radius_km)
     minimum = float(minimum_duration_hours)
-    merge_gap = float(merge_gap_hours)
-    outlier_limit = int(maximum_outliers)
+    detour_hours = float(maximum_detour_hours)
+    detour_limit = int(maximum_detours)
 
     if not isfinite(radius) or radius <= 0.0:
         raise ValueError("radius_km must be finite and positive")
     if not isfinite(minimum) or minimum <= 0.0:
         raise ValueError("minimum_duration_hours must be finite and positive")
-    if not isfinite(merge_gap) or merge_gap < 0.0:
-        raise ValueError("merge_gap_hours must be finite and non-negative")
-    if outlier_limit < 0:
-        raise ValueError("maximum_outliers must be non-negative")
+    if not isfinite(detour_hours) or detour_hours < 0.0:
+        raise ValueError("maximum_detour_hours must be finite and non-negative")
+    if detour_limit < 0:
+        raise ValueError("maximum_detours must be non-negative")
 
     ordered = _validate_points(points)
     if len(ordered) < 2:
         return ()
 
-    candidates: list[Stopover] = []
+    stops: list[Stopover] = []
     i = 0
-    while i < len(ordered) - 1:
-        anchor = ordered[i]
-        outliers = 0
-        last_inlier_index = i
-        inliers = [anchor]
 
-        for j in range(i + 1, len(ordered)):
-            point = ordered[j]
-            distance = haversine_km(
-                anchor.latitude,
-                anchor.longitude,
-                point.latitude,
-                point.longitude,
-            )
-            if distance > radius:
-                outliers += 1
-                if outliers > outlier_limit:
-                    break
-            else:
-                last_inlier_index = j
-                inliers.append(point)
+    while i < len(ordered) - 1:
+        inliers = [ordered[i]]
+        detours_used = 0
+        j = i + 1
+        last_consumed = i
+
+        while j < len(ordered):
+            previous = inliers[-1]
+            current = ordered[j]
+            if (
+                haversine_km(
+                    previous.latitude,
+                    previous.longitude,
+                    current.latitude,
+                    current.longitude,
+                )
+                <= radius
+            ):
+                inliers.append(current)
+                last_consumed = j
+                j += 1
+                continue
+
+            # Candidate single-position detour.
+            if detours_used < detour_limit and j + 1 < len(ordered):
+                returned = ordered[j + 1]
+                elapsed = (
+                    returned.timestamp - previous.timestamp
+                ).total_seconds() / 3600.0
+                returned_to_cluster = (
+                    haversine_km(
+                        previous.latitude,
+                        previous.longitude,
+                        returned.latitude,
+                        returned.longitude,
+                    )
+                    <= radius
+                )
+                if returned_to_cluster and elapsed <= detour_hours:
+                    detours_used += 1
+                    inliers.append(returned)
+                    last_consumed = j + 1
+                    j += 2
+                    continue
+
+            break
 
         duration = (
-            ordered[last_inlier_index].timestamp - anchor.timestamp
+            inliers[-1].timestamp - inliers[0].timestamp
         ).total_seconds() / 3600.0
 
-        if last_inlier_index > i and duration >= minimum:
+        if len(inliers) >= 2 and duration >= minimum:
             center_lat = sum(x.latitude for x in inliers) / len(inliers)
             center_lon = sum(x.longitude for x in inliers) / len(inliers)
-            candidates.append(
+            stops.append(
                 Stopover(
-                    start=anchor.timestamp,
-                    end=ordered[last_inlier_index].timestamp,
+                    start=inliers[0].timestamp,
+                    end=inliers[-1].timestamp,
                     center_latitude=center_lat,
                     center_longitude=center_lon,
                     inlier_points=len(inliers),
+                    detour_points=detours_used,
                 )
             )
-            i = last_inlier_index + 1
+            i = last_consumed + 1
         else:
             i += 1
 
-    merged: list[Stopover] = []
-    for current in candidates:
-        if not merged:
-            merged.append(current)
-            continue
-
-        previous = merged[-1]
-        gap = (current.start - previous.end).total_seconds() / 3600.0
-        center_distance = haversine_km(
-            previous.center_latitude,
-            previous.center_longitude,
-            current.center_latitude,
-            current.center_longitude,
-        )
-
-        if gap <= merge_gap and center_distance <= 2.0 * radius:
-            total_points = previous.inlier_points + current.inlier_points
-            center_lat = (
-                previous.center_latitude * previous.inlier_points
-                + current.center_latitude * current.inlier_points
-            ) / total_points
-            center_lon = (
-                previous.center_longitude * previous.inlier_points
-                + current.center_longitude * current.inlier_points
-            ) / total_points
-            merged[-1] = Stopover(
-                start=previous.start,
-                end=max(previous.end, current.end),
-                center_latitude=center_lat,
-                center_longitude=center_lon,
-                inlier_points=total_points,
-            )
-        else:
-            merged.append(current)
-
-    return tuple(merged)
+    return tuple(stops)
