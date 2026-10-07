@@ -228,6 +228,10 @@ Final review-DOCX receipt:
 
 `docs/PAYOFF_B_V4_5_FINAL_DOCX_RECEIPT_20261007.md`
 
+Portal handoff:
+
+`submission/AMNAT_V4_5_PORTAL_HANDOFF_20261007.md`
+
 Do not reopen biological analyses unless a main-figure validity, source-definition
 or measurement-error defect is identified.
 
