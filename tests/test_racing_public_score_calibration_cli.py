@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def test_public_score_calibration_cli_fits_train_only_and_writes_probabilities(tmp_path):
-    source = Path("examples/racing/previous_day_tm_scores_synthetic.csv")
+    source = Path("examples/racing/final_tm_scores_synthetic.csv")
     out_csv = tmp_path / "calibrated.csv"
     receipt = tmp_path / "receipt.json"
     subprocess.run(
