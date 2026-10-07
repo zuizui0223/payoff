@@ -98,16 +98,29 @@ def select_last_preclose_slice(
     *,
     post_time: datetime,
     snapshots: Sequence[OddsSnapshot],
-) -> SelectedTimeSlice:
-    """Select the latest available snapshot strictly before post."""
+    max_staleness_minutes: float | None = None,
+) -> SelectedTimeSlice | None:
+    """Select the latest available snapshot strictly before post.
+
+    When max_staleness_minutes is supplied, the latest snapshot must also lie
+    within that many minutes of post.  This prevents a nominal LAST slice from
+    representing a stale market state.
+    """
 
     ordered = _validate_snapshots(post_time, snapshots)
     chosen = ordered[-1]
+    staleness = (post_time - chosen.observed_at).total_seconds() / 60.0
+    if max_staleness_minutes is not None:
+        stale_max = float(max_staleness_minutes)
+        if not isfinite(stale_max) or stale_max < 0.0:
+            raise ValueError("max_staleness_minutes must be finite and non-negative")
+        if staleness > stale_max:
+            return None
     return SelectedTimeSlice(
         label="LAST",
         target_at=None,
         observed_at=chosen.observed_at,
-        staleness_minutes=None,
+        staleness_minutes=staleness,
         decimal_odds=chosen.decimal_odds,
     )
 
@@ -138,6 +151,12 @@ def select_primary_time_slices(
         if out is None:
             return None
         selected[out.label] = out
-    last = select_last_preclose_slice(post_time=post_time, snapshots=snapshots)
+    last = select_last_preclose_slice(
+        post_time=post_time,
+        snapshots=snapshots,
+        max_staleness_minutes=max_staleness_minutes,
+    )
+    if last is None:
+        return None
     selected[last.label] = last
     return selected
