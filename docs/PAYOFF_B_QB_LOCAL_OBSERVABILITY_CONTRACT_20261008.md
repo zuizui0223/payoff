@@ -107,10 +107,19 @@ At each composite date, compute the median NDVI across valid lattice points.
 
 Primary validity requires at least 5 of 9 lattice points at that date.
 
-Quality filtering rules must be implemented from MOD09Q1 QC/state fields and
-frozen before downloading the full panel. If the existing PAYOFF MOD09Q1
-parser already supplies stricter valid-reflectance filtering, use that rule
-without outcome-dependent relaxation.
+Quality filtering is frozen to the existing PAYOFF MOD09Q1.061 rule:
+
+- MODLAND QA = ideal;
+- band-1 and band-2 quality = highest;
+- atmospheric correction performed;
+- State QA cloud state = clear;
+- no cloud shadow;
+- aerosol category not high;
+- internal cloud flag clear;
+- not adjacent to cloud.
+
+Snow is **not** separately filtered in the primary q_B coordinate; snow-driven
+vegetation contrast is part of the local seasonal signal being quantified.
 
 ### 4.4 Independent phase anchor
 
@@ -146,7 +155,18 @@ a_{jy}+b_j\tau_{jyt}+\epsilon_{jyt},
 
 with year-specific intercepts and one region-specific local slope \(b_j\).
 
-Let residual SD be \(\sigma_j\).
+Let residual SD be
+
+\[
+\sigma_j
+=
+\sqrt{
+\frac{\sum \hat\epsilon_{jyt}^2}
+{n_j-Y_j-1}
+},
+\]
+
+where \(Y_j\) is the number of admitted year intercepts.
 
 Define
 
@@ -164,7 +184,8 @@ Q_{B,j}
 z\{\log J_{B,j}\}
 \]
 
-across the nine frozen origin regions.
+across the nine frozen origin regions, using the ordinary sample standard
+deviation (denominator 8).
 
 ### 4.6 q_B admission gates
 
