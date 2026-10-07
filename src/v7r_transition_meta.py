@@ -152,9 +152,11 @@ def fit_meta(rows: Iterable[TransitionMetaRow], *, weighted: bool = False) -> Me
 
 def exact_within_flyway_q_permutation(
     rows: Iterable[TransitionMetaRow],
+    *,
+    weighted: bool = False,
 ) -> ExactPermutationResult:
     data = list(rows)
-    observed = fit_meta(data, weighted=False)
+    observed = fit_meta(data, weighted=weighted)
 
     groups: dict[str, list[int]] = {}
     for index, row in enumerate(data):
@@ -188,7 +190,7 @@ def exact_within_flyway_q_permutation(
             for i, row in enumerate(data)
         ]
         try:
-            betas.append(fit_meta(permuted, weighted=False).beta_qr)
+            betas.append(fit_meta(permuted, weighted=weighted).beta_qr)
         except ValueError:
             continue
 
