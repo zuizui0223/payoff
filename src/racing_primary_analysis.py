@@ -17,6 +17,7 @@ from src.racing_information_absorption import (
     RaceForecast,
     evaluate_time_slice,
     market_probabilities_from_decimal_odds,
+    paired_test_bootstrap,
 )
 from src.racing_jvlink_contract import validate_normalized_handoff
 from src.racing_public_score_calibration import (
@@ -35,6 +36,7 @@ class RacingPrimaryAnalysis:
     exclusions: dict[str, int]
     time_slices: tuple[dict[str, float | int | str], ...]
     primary_contrasts: dict[str, float | bool]
+    paired_test_bootstrap: dict[str, float | int]
 
 
 def _as_rows(values: Iterable[Mapping[str, object]]) -> list[dict[str, object]]:
@@ -53,6 +55,8 @@ def analyze_normalized_handoff(
     score_max_scale: float = 5.0,
     score_grid_points: int = 501,
     pool_grid_points: int = 101,
+    bootstrap_replicates: int = 2000,
+    bootstrap_seed: int = 20261007,
 ) -> RacingPrimaryAnalysis:
     """Run the frozen retrospective category-7 mechanism-separation analysis."""
 
@@ -249,6 +253,15 @@ def analyze_normalized_handoff(
         }
     )
 
+    paired = paired_test_bootstrap(
+        rows_by_time_split[first]["test"],
+        rows_by_time_split[last]["test"],
+        first_form_weight=float(by_label[first]["fitted_form_weight"]),
+        last_form_weight=float(by_label[last]["fitted_form_weight"]),
+        replicates=bootstrap_replicates,
+        seed=bootstrap_seed,
+    )
+
     return RacingPrimaryAnalysis(
         source_audit=asdict(audit),
         split={
@@ -267,4 +280,5 @@ def analyze_normalized_handoff(
         exclusions=exclusions,
         time_slices=tuple(evaluations),
         primary_contrasts=contrasts,
+        paired_test_bootstrap=asdict(paired),
     )
