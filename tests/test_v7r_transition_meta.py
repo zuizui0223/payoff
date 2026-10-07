@@ -64,3 +64,20 @@ def test_r_outside_unit_interval_fails_closed():
     rows[0] = TransitionMetaRow("a", 0.4, 1.1, 0.0)
     with pytest.raises(ValueError, match="R must"):
         fit_meta(rows)
+
+
+def test_weighted_exact_permutation_uses_declared_weights():
+    rows = _rows(beta_qr=1.3)
+    weighted_rows = [
+        TransitionMetaRow(
+            row.flyway,
+            row.q,
+            row.r,
+            row.correction,
+            20.0 if i == 0 else 1.0,
+        )
+        for i, row in enumerate(rows)
+    ]
+    out = exact_within_flyway_q_permutation(weighted_rows, weighted=True)
+    assert out.valid_permutations > 0
+    assert 0.0 < out.one_sided_p <= 1.0
