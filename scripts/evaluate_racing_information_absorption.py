@@ -63,6 +63,96 @@ def load_rows(path: Path) -> list[dict[str, str]]:
     return rows
 
 
+def audit_primary_invariants(rows: list[dict[str, str]]) -> dict[str, int]:
+    """Fail closed on leakage/confounding in the primary mechanism test.
+
+    Primary analysis requires:
+    - race ids are disjoint between train and test;
+    - runner set is unchanged across time slices within race;
+    - frozen form probability is unchanged across time slices;
+    - winner flag is unchanged across time slices;
+    - every race within a split has the same set of time slices.
+    """
+
+    split_races: dict[str, set[str]] = {"train": set(), "test": set()}
+    by_race_time: dict[
+        tuple[str, str], dict[str, dict[str, tuple[float, int]]]
+    ] = defaultdict(dict)
+
+    for row in rows:
+        split = row["split"].strip().lower()
+        if split not in {"train", "test"}:
+            raise ValueError("split must be train or test")
+        race = str(row["race_id"])
+        horse = str(row["horse_id"])
+        time_slice = str(row["time_slice"])
+        split_races[split].add(race)
+
+        per_time = by_race_time[(split, race)].setdefault(time_slice, {})
+        if horse in per_time:
+            raise ValueError(
+                f"duplicate horse row for split={split}, time={time_slice}, "
+                f"race={race}, horse={horse}"
+            )
+        winner = int(row["winner"])
+        if winner not in {0, 1}:
+            raise ValueError("winner must be 0 or 1")
+        per_time[horse] = (float(row["form_probability"]), winner)
+
+    overlap = split_races["train"] & split_races["test"]
+    if overlap:
+        raise ValueError(
+            "train/test race_id overlap is not allowed: "
+            + ",".join(sorted(overlap)[:5])
+        )
+
+    split_time_sets: dict[str, set[str] | None] = {"train": None, "test": None}
+    for (split, race), time_map in by_race_time.items():
+        times = set(time_map)
+        expected = split_time_sets[split]
+        if expected is None:
+            split_time_sets[split] = times
+        elif times != expected:
+            raise ValueError(
+                f"incomplete time-slice panel within {split}: race {race}"
+            )
+
+        first_time = sorted(time_map)[0]
+        baseline = time_map[first_time]
+        baseline_runners = set(baseline)
+        for time_slice, values in time_map.items():
+            if set(values) != baseline_runners:
+                raise ValueError(
+                    f"runner set changed across time slices for race {race}"
+                )
+            for horse in baseline_runners:
+                base_form, base_winner = baseline[horse]
+                form, winner = values[horse]
+                if abs(form - base_form) > 1e-12:
+                    raise ValueError(
+                        f"form_probability changed across time slices for "
+                        f"race {race}, horse {horse}"
+                    )
+                if winner != base_winner:
+                    raise ValueError(
+                        f"winner flag changed across time slices for "
+                        f"race {race}, horse {horse}"
+                    )
+
+    train_times = split_time_sets["train"] or set()
+    test_times = split_time_sets["test"] or set()
+    if train_times != test_times:
+        raise ValueError(
+            "train and test must contain the same time-slice set in primary analysis"
+        )
+
+    return {
+        "train_races": len(split_races["train"]),
+        "test_races": len(split_races["test"]),
+        "time_slices": len(train_times),
+    }
+
+
 def build_forecasts(
     rows: list[dict[str, str]],
 ) -> dict[str, dict[str, list[RaceForecast]]]:
@@ -120,6 +210,7 @@ def build_forecasts(
 def main() -> int:
     args = parse_args()
     rows = load_rows(Path(args.csv_path))
+    audit = audit_primary_invariants(rows)
     forecasts = build_forecasts(rows)
 
     train_times = set(forecasts["train"])
@@ -154,6 +245,7 @@ def main() -> int:
     payload = {
         "schema": "payoff_b_racing_information_absorption_v1",
         "grid_points": args.grid_points,
+        "primary_invariant_audit": audit,
         "time_slices": results,
         "notes": [
             "Proper-score analysis only; no betting strategy is evaluated.",
