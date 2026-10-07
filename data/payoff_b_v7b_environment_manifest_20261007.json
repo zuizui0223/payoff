@@ -1,0 +1,115 @@
+{
+  "schema": "payoff_b_v7b_feedback_environment_manifest_v1",
+  "date": "2026-10-07",
+  "status": "PRE_ENVIRONMENT_VALUE",
+  "source_provenance": {
+    "multiflyway_artifact_id": 10700391090,
+    "multiflyway_sha256": "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f",
+    "svalbard_artifact_id": 10699871077,
+    "svalbard_sha256": "29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856"
+  },
+  "environmental_lane": {
+    "provider": "NASA AppEEARS / LP DAAC",
+    "products": [
+      [
+        "MOD09Q1.061",
+        "sur_refl_b01"
+      ],
+      [
+        "MOD09Q1.061",
+        "sur_refl_b02"
+      ],
+      [
+        "MOD09Q1.061",
+        "sur_refl_qc_250m"
+      ],
+      [
+        "MOD09Q1.061",
+        "sur_refl_state_250m"
+      ],
+      [
+        "MOD10A2.061",
+        "Maximum_Snow_Extent"
+      ],
+      [
+        "MOD10A2.061",
+        "Eight_Day_Snow_Cover"
+      ]
+    ],
+    "role": "V7B current-product environmental measurement; not study-faithful MOD13A2 reconstruction"
+  },
+  "years": [
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011
+  ],
+  "regions": [
+    {
+      "flyway": "greenland",
+      "region_id": "R1",
+      "latitude": 54.126991,
+      "longitude": -10.2083
+    },
+    {
+      "flyway": "greenland",
+      "region_id": "R2",
+      "latitude": 65.026829,
+      "longitude": -20.139766
+    },
+    {
+      "flyway": "svalbard",
+      "region_id": "R1",
+      "latitude": 54.95122,
+      "longitude": -3.329146
+    },
+    {
+      "flyway": "svalbard",
+      "region_id": "R2",
+      "latitude": 66.328372,
+      "longitude": 12.214592
+    },
+    {
+      "flyway": "barents",
+      "region_id": "R1",
+      "latitude": 53.473599,
+      "longitude": 6.758965
+    },
+    {
+      "flyway": "barents",
+      "region_id": "R2",
+      "latitude": 57.054929,
+      "longitude": 17.967106
+    },
+    {
+      "flyway": "barents",
+      "region_id": "R3",
+      "latitude": 58.654457,
+      "longitude": 23.051045
+    },
+    {
+      "flyway": "barents",
+      "region_id": "R4",
+      "latitude": 64.086881,
+      "longitude": 36.080949
+    },
+    {
+      "flyway": "barents",
+      "region_id": "R5",
+      "latitude": 67.638819,
+      "longitude": 46.017508
+    }
+  ],
+  "expected_region_years": 54,
+  "primary_sampling": "single fixed MODIS cell containing each frozen region coordinate",
+  "primary_metric": "peak_irg_value",
+  "sensitivities": [
+    "inverse_spring_scale",
+    "peak_irg_over_rmse",
+    "region_median_peak_irg"
+  ],
+  "no_behavioral_inputs": true,
+  "outcome_access_boundary": "No V7B stopover response is joined until environmental coverage gate passes."
+}
