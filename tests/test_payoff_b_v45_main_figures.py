@@ -1,4 +1,5 @@
 import importlib.util
+import sys
 import json
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -11,6 +12,7 @@ DATA = ROOT / "data" / "payoff_b_v45_figure_data_20261006.json"
 def load_module():
     spec = importlib.util.spec_from_file_location("v45figs", SCRIPT)
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     assert spec.loader is not None
     spec.loader.exec_module(module)
     return module
