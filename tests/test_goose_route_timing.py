@@ -100,3 +100,28 @@ def test_breeding_stop_itself_is_not_a_remaining_schedule_stage():
     breeding = select_breeding_endpoint([breeding_stop], year=2020)
     assert breeding is not None
     assert remaining_schedule_from_stopovers([breeding_stop], breeding) == ()
+
+
+
+def test_does_not_fall_back_to_earlier_staging_site_when_last_site_is_too_long():
+    earlier = Stopover(
+        start=datetime(2020, 5, 1, tzinfo=UTC),
+        end=datetime(2020, 5, 16, tzinfo=UTC),
+        center_latitude=65.5,
+        center_longitude=-20.0,
+        inlier_points=20,
+    )
+    arctic_long_stay = Stopover(
+        start=datetime(2020, 5, 25, tzinfo=UTC),
+        end=datetime(2020, 7, 20, tzinfo=UTC),
+        center_latitude=74.0,
+        center_longitude=-24.0,
+        inlier_points=100,
+    )
+    assert (
+        select_breeding_endpoint(
+            [earlier, arctic_long_stay],
+            year=2020,
+        )
+        is None
+    )
