@@ -50,6 +50,7 @@ def test_last_is_latest_strictly_pre_post_snapshot():
     post = datetime(2026, 10, 4, 15, 40)
     snaps = [_snapshot(post, 10), _snapshot(post, 3), _snapshot(post, 6)]
     out = select_last_preclose_slice(post_time=post, snapshots=snaps)
+    assert out is not None
     assert out.label == "LAST"
     assert out.observed_at == post - timedelta(minutes=3)
 
@@ -87,3 +88,14 @@ def test_timezone_awareness_mismatch_fails_closed():
             post_time=aware_post,
             snapshots=[naive_snap],
         )
+
+
+def test_last_can_fail_when_latest_snapshot_is_too_stale():
+    post = datetime(2026, 10, 4, 15, 40)
+    snaps = [_snapshot(post, 25), _snapshot(post, 15)]
+    out = select_last_preclose_slice(
+        post_time=post,
+        snapshots=snaps,
+        max_staleness_minutes=10,
+    )
+    assert out is None
