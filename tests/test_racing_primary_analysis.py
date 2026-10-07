@@ -22,8 +22,14 @@ def _synthetic_tables():
             }
         )
 
-        # Winner alternates.  TM is strongly informative and fixed.
+        # Winner alternates.  TM is informative but not perfect: one training
+        # race (idx=3) deliberately ranks the wrong horse higher.  This avoids
+        # a degenerate synthetic world where the calibrated form forecast
+        # dominates the market at every time slice.
         winner = "A" if idx % 2 == 0 else "B"
+        tm_favored = winner
+        if idx == 3:
+            tm_favored = "A" if winner == "B" else "B"
         for horse, number in (("A", "01"), ("B", "02")):
             results.append(
                 {
@@ -34,7 +40,7 @@ def _synthetic_tables():
                     "valid_starter": "1",
                 }
             )
-            tm_score = 80.0 if horse == winner else 20.0
+            tm_score = 80.0 if horse == tm_favored else 20.0
             tm.append(
                 {
                     "race_id": race_id,
