@@ -68,7 +68,11 @@ def select_breeding_endpoint(
     site is reached before the end of June while allowing a 7--26 day stay to
     continue into July.
 
-    The last qualifying stopover by arrival time is selected.
+    The last pre-cutoff stopover is examined. If that final stopover does not
+    satisfy the 7--26 day residence range, the function returns None rather
+    than falling back to an earlier site. This fail-closed behavior prevents a
+    long Arctic breeding/moulting complex from causing an earlier Icelandic or
+    Norwegian staging site to be mislabeled as the breeding endpoint.
 
     This function does not use breeding status, spring anomaly, or final timing
     mismatch to choose the endpoint.
@@ -95,16 +99,21 @@ def select_breeding_endpoint(
         ),
     )
 
-    candidates: list[tuple[int, Stopover, float]] = []
-    for index, stop in enumerate(stopovers):
-        days = stop.duration_hours / 24.0
-        if stop.start <= cutoff and lower <= days <= upper:
-            candidates.append((index, stop, days))
-
-    if not candidates:
+    before_cutoff = [
+        (index, stop, stop.duration_hours / 24.0)
+        for index, stop in enumerate(stopovers)
+        if stop.start <= cutoff
+    ]
+    if not before_cutoff:
         return None
 
-    index, stop, days = max(candidates, key=lambda row: row[1].start)
+    # Fail closed: the source wording describes the breeding endpoint as the
+    # *last* stopover before end-June and additionally gives a 7--26 d
+    # residence range. We must not skip a later non-qualifying Arctic stay and
+    # silently select an earlier staging site.
+    index, stop, days = max(before_cutoff, key=lambda row: row[1].start)
+    if not (lower <= days <= upper):
+        return None
     return BreedingEndpoint(
         stopover_index=index,
         arrival=stop.start,
