@@ -118,3 +118,11 @@ def test_no_valid_starter_is_explicit_exclusion():
     out = validate_normalized_handoff(races, results, tm, odds)
     assert out.candidate_races == 0
     assert out.excluded_no_valid_starters == 1
+
+
+def test_one_point_zero_odds_are_valid_in_handoff():
+    races, results, tm, odds = _tables()
+    odds = deepcopy(odds)
+    odds[0]["decimal_odds"] = "1.0"
+    out = validate_normalized_handoff(races, results, tm, odds)
+    assert out.candidate_races == 1
