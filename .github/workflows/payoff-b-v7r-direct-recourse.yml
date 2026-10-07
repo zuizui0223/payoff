@@ -1,0 +1,98 @@
+name: payoff-b V7R direct recourse result
+
+concurrency:
+  group: payoff-b-v7r-direct-recourse-${{ github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/route_recourse_capacity.py'
+      - 'src/v7r_transition_meta.py'
+      - 'scripts/run_v7r_direct_recourse_analysis.py'
+      - 'data/payoff_b_v7r_source_precheck_20261007.json'
+      - 'docs/PAYOFF_B_V7R_DIRECT_RECOURSE_CONTRACT_20261007.md'
+      - '.github/workflows/payoff-b-v7r-direct-recourse.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install analysis dependencies
+        run: python -m pip install --disable-pip-version-check pandas numpy pytest
+
+      - name: Run V7R helper tests
+        run: >
+          pytest -q
+          tests/test_route_recourse_capacity.py
+          tests/test_v7r_transition_meta.py
+
+      - name: Download frozen Stage-3 artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/source/multi outputs/source/sval
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10700391090/zip" \
+            -o outputs/multi.zip
+          echo "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f  outputs/multi.zip" | sha256sum -c -
+          unzip -q outputs/multi.zip -d outputs/source/multi
+
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10699871077/zip" \
+            -o outputs/sval.zip
+          echo "29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856  outputs/sval.zip" | sha256sum -c -
+          unzip -q outputs/sval.zip -d outputs/source/sval
+
+      - name: Download frozen ERA5 reliability artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/era5_multi outputs/era5_sval
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10797665905/zip" \
+            -o outputs/era5_multi.zip
+          unzip -q outputs/era5_multi.zip -d outputs/era5_multi
+
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10796909675/zip" \
+            -o outputs/era5_sval.zip
+          unzip -q outputs/era5_sval.zip -d outputs/era5_sval
+
+      - name: Run frozen V7R analysis
+        run: >
+          python scripts/run_v7r_direct_recourse_analysis.py
+          --multiflyway-dir outputs/source/multi
+          --svalbard-dir outputs/source/sval
+          --era5-multiflyway-dir outputs/era5_multi/outputs/barnacle_era5
+          --era5-svalbard-dir outputs/era5_sval/outputs/svalbard_era5
+          --output-json outputs/payoff_b_v7r_direct_recourse_result.json
+          --transition-output outputs/payoff_b_v7r_transition_table.csv
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v7r-direct-recourse-result
+          path: |
+            outputs/payoff_b_v7r_direct_recourse_result.json
+            outputs/payoff_b_v7r_transition_table.csv
+            data/payoff_b_v7r_source_precheck_20261007.json
+            docs/PAYOFF_B_V7R_DIRECT_RECOURSE_CONTRACT_20261007.md
