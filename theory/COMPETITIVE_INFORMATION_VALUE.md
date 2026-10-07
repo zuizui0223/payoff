@@ -334,6 +334,35 @@ This is sufficient in principle for a prospective time-sliced prediction-versus-
 
 No racing outcome has been inspected or used to choose a preferred time window in this branch.
 
+
+## 8.5 Prior-art collision and novelty boundary
+
+The racing mechanism itself is **not** new.
+
+Closest prior art identified before any racing outcome analysis:
+
+- **Figlewski (1979, Journal of Political Economy)** tested whether professional handicapper information was already discounted by racetrack odds and found that the betting market absorbed almost all of that published information.
+- **Bird & McCrae (1987, Management Science)** used price paths in racetrack betting and reported strong informational efficiency for public odds movements, while leaving room for private information.
+- **Johnson, Jones & Tang (2006, Management Science)** showed that closing prices did not fully subsume information contained in the preceding odds trajectory.
+- **Brown, Reade & Vaughan Williams (2019, International Journal of Forecasting)** showed that prediction-market accuracy can temporarily worsen after an information release because inexperienced traders enter before more experienced traders correct prices.
+- **Hanyu, Ishii, Otani & Teramoto (UTMD-149, revised 2026; Japanese central horse racing)** is the closest direct collision. Using interim parimutuel odds, they show that final-five-minute odds declines contain return information conditional on final odds and interpret those movements through late informed wagers based on private signals.
+
+Therefore PAYOFF-B must **not** claim novelty for:
+
+- information aggregation in betting markets;
+- time-varying market efficiency;
+- predictive content of odds trajectories;
+- late informed betting;
+- the idea that final odds can be insufficient.
+
+The only role licensed here is narrower:
+
+> use the racing system as a mechanism-separation boundary case showing that information value can decay without physical loss of actionability.
+
+The cross-system reduced form may be useful for PAYOFF-B theory, but the additive-hazard algebra is itself a direct consequence of the chosen multiplicative specification and should not be marketed as a new theorem of economics.
+
+A standalone racing paper would require a distinct preregistered question not already answered by the literature above.
+
 ## 9. Relation back to PAYOFF-B
 
 The general distinction is now:
