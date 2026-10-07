@@ -157,3 +157,43 @@ def remaining_schedule_from_stopovers(
             )
         )
     return tuple(rows)
+
+
+
+def remaining_schedule_to_curated_arrival(
+    stopovers: Sequence[Stopover],
+    *,
+    breeding_arrival: datetime,
+) -> tuple[RemainingSchedule, ...]:
+    """Return remaining elapsed time to an externally curated breeding arrival.
+
+    This is the preferred primary route when a source publication provides an
+    individual breeding-arrival date independently of our stopover detector.
+
+    Every detected stopover whose departure is strictly before breeding_arrival
+    contributes one stage.  Later detected clusters are ignored rather than
+    being used to redefine the published endpoint.
+
+    This separation is useful for identification:
+
+    - stopover departure comes from reconstructed movement behavior;
+    - destination arrival comes from an independent curated source table.
+    """
+
+    rows = []
+    for index, stop in enumerate(stopovers):
+        if stop.end >= breeding_arrival:
+            continue
+        hours = (breeding_arrival - stop.end).total_seconds() / 3600.0
+        if hours < 0.0:
+            continue
+        rows.append(
+            RemainingSchedule(
+                stage_stopover_index=index,
+                stage_departure=stop.end,
+                breeding_arrival=breeding_arrival,
+                remaining_hours=hours,
+                remaining_days=hours / 24.0,
+            )
+        )
+    return tuple(rows)
