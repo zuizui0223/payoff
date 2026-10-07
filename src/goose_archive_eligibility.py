@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Mapping, Sequence
 
 
@@ -14,6 +15,7 @@ class GooseEligibilityAudit:
     eligible_animal_ids: tuple[str, ...]
     excluded_animal_ids: tuple[str, ...]
     exclusion_reasons: tuple[str, ...]
+    eligible_deployment_years: tuple[tuple[str, int], ...]
 
 
 def audit_reference_eligibility(
@@ -43,6 +45,7 @@ def audit_reference_eligibility(
     eligible = []
     excluded = []
     reasons = []
+    deployment_years = []
 
     seen = set()
     for row in reference_rows:
@@ -60,7 +63,20 @@ def audit_reference_eligibility(
             excluded.append(animal)
             reasons.append(f"{animal}: deployment-id={deployment}")
         else:
+            if "deploy-on-date" not in row:
+                raise ValueError(
+                    "eligible reference rows require deploy-on-date to freeze "
+                    "the one-spring analytic year"
+                )
+            raw_date = str(row["deploy-on-date"]).strip()
+            try:
+                year = datetime.fromisoformat(raw_date).year
+            except ValueError as exc:
+                raise ValueError(
+                    f"invalid deploy-on-date for {animal}: {raw_date}"
+                ) from exc
             eligible.append(animal)
+            deployment_years.append((animal, year))
 
     return GooseEligibilityAudit(
         archived_rows=len(reference_rows),
@@ -69,4 +85,5 @@ def audit_reference_eligibility(
         eligible_animal_ids=tuple(sorted(eligible)),
         excluded_animal_ids=tuple(sorted(excluded)),
         exclusion_reasons=tuple(sorted(reasons)),
+        eligible_deployment_years=tuple(sorted(deployment_years)),
     )
