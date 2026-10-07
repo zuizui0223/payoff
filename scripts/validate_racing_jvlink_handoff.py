@@ -60,6 +60,8 @@ def main() -> int:
         "tm_rows": audit.tm_rows,
         "odds_rows": audit.odds_rows,
         "candidate_races": audit.candidate_races,
+        "excluded_no_valid_starters": audit.excluded_no_valid_starters,
+        "excluded_non_single_winner": audit.excluded_non_single_winner,
         "status": "PASS",
         "primary_tm_category": 7,
     }
