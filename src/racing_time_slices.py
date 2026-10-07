@@ -116,10 +116,16 @@ def select_primary_time_slices(
     *,
     post_time: datetime,
     snapshots: Sequence[OddsSnapshot],
-    targets_minutes: Sequence[float] = (60, 30, 15, 10, 5),
+    targets_minutes: Sequence[float] = (30, 15, 10, 5),
     max_staleness_minutes: float = 10.0,
 ) -> dict[str, SelectedTimeSlice] | None:
-    """Return a complete primary panel, or None if any declared target is missing."""
+    """Return the retrospective primary panel, or None if any target is missing.
+
+    The default starts at T-30 because the historical accumulated TM category-7
+    score corresponds to the final pre-race forecast but does not preserve the
+    original realtime release timestamp.  Earlier slices can be supplied
+    explicitly for prospectively archived forecasts.
+    """
 
     selected: dict[str, SelectedTimeSlice] = {}
     for minutes in targets_minutes:
