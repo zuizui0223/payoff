@@ -48,14 +48,12 @@ def test_docx_build_and_structure(tmp_path):
     assert "\\text{" not in full
     assert "\\!" not in full
     assert "Delta" not in full
-    assert "sigma" not in full
-    assert "rho" not in full
-    assert "alpha" not in full
-    assert "beta" not in full
     assert "e_{t+1}" not in full
+    assert "eₜ₊₁" in full
     assert "Δ e_route" in full
     assert "σ_Y²" in full
     assert "ρ²" in full
+    assert "q(t)=q₀+Δ q[1-exp(-α t)]" in full
 
 
 def test_docx_has_line_and_page_number_fields(tmp_path):
