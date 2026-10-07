@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Calibrate fixed previous-day public racing scores into win probabilities.
+"""Calibrate fixed public racing TM scores into win probabilities.
 
 Expected long-format CSV columns:
     split          train or test
     race_id
     horse_id
-    tm_score       fixed previous-day public score; higher is better
+    tm_score       fixed public TM score; higher is better
     winner         1 for winner, 0 otherwise
 
 The softmax scale is fitted on training races only.  Test winner labels are
@@ -157,7 +157,13 @@ def main() -> int:
         "max_scale": args.max_scale,
         "grid_points": args.grid_points,
         "fit_scope": "train_only",
-        "intended_source": "JRA-VAN TM data category 1 previous-day score",
+        "intended_source": (
+            "retrospective primary: JRA-VAN TM category 7 accumulated score "
+            "corresponding to final pre-race forecast"
+        ),
+        "prospective_extension": (
+            "archive realtime TM category 1 previous-day score before overwrite"
+        ),
     }
     receipt_path = Path(args.receipt_json)
     receipt_path.parent.mkdir(parents=True, exist_ok=True)
