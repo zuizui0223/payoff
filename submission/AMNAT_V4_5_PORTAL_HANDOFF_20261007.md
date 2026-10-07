@@ -2,6 +2,12 @@
 
 Status: **PORTAL READY — AUTHOR METADATA / UPLOAD ONLY**
 
+Final green-build receipt:
+`docs/PAYOFF_B_V4_5_FINAL_GREEN_BUILD_RECEIPT_20261007.md`
+
+Repository-wide `test` and `test-environments` both passed on the canonical
+science SHA **6d826796099941af65d16487b86511151005442d**.
+
 ## Article
 
 Journal:
@@ -36,10 +42,10 @@ Current anonymous-manuscript statistics:
 
 Use the final anonymous DOCX artifact:
 
-- workflow run: **37559117694**
-- artifact id: **11456151706**
+- workflow run: **37562979913**
+- artifact id: **11457418624**
 - artifact digest:
-  **sha256:422a963907a36715536f170bcad647bce4b7546786dd2dfdf38920da4c4b0f21**
+  **sha256:29d51b8a0d6038190de76603cf7ccf55261b23d19da3ebb6c74d4a49a4ae5f9a**
 
 Contents / formatting:
 - no author names or affiliations;
@@ -104,10 +110,10 @@ from the main-text narrative:
 
 Use the anonymous reproducibility artifact:
 
-- workflow run: **37469126486**
-- artifact id: **11416773256**
+- workflow run: **37562808347**
+- artifact id: **11456844175**
 - digest:
-  **sha256:fe51583e370644fdd1bd067977fbf2e8e31b8125f180691151790474a75c37b2**
+  **sha256:b190078595ee4ba4f026f600a1b8d26b068c7e21edb5a6f8f3924ee8e618975d**
 
 The archive contains manuscript-specific code/contracts/tests and an anonymous
 README. Identity scan passed.
@@ -120,11 +126,11 @@ Data/code statement:
 The current anonymous reviewer ZIP was rebuilt from the current science
 manuscript:
 
-- workflow run: **37559105648**
-- manuscript head: **d92c6135f58c2330a6b3476600d57b7a8b515abe**
-- artifact id: **11454879755**
+- workflow run: **37562980001**
+- manuscript head: **6d826796099941af65d16487b86511151005442d**
+- artifact id: **11456869372**
 - digest:
-  **sha256:c6418b663deb70f832addb573b2a06ff81b7d6d224602ecce59fe07e79612349**
+  **sha256:4e790b88d90955a6318f291e8b67c9a6fcb4ce15aaecbce876b4f4f6f356823e**
 
 Manifest statistics:
 - Abstract: **167 words**
