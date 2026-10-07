@@ -156,8 +156,10 @@ def validate_normalized_handoff(
         if snap >= post:
             raise ValueError(f"odds snapshot is not strictly pre-post: {race_id}")
         value = float(row["decimal_odds"])
-        if not isfinite(value) or value <= 1.0:
-            raise ValueError(f"decimal_odds must be finite and > 1: {race_id}/{horse_id}")
+        if not isfinite(value) or value < 1.0:
+            raise ValueError(
+                f"decimal_odds must be finite and >= 1: {race_id}/{horse_id}"
+            )
         snap_key = snap.isoformat()
         key = (race_id, snap_key, horse_id)
         if key in odds_keys:
