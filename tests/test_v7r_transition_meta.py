@@ -45,8 +45,22 @@ def test_exact_permutation_reports_positive_signal():
     assert out.permutation_min <= out.permutation_median <= out.permutation_max
 
 
-def test_q_and_r_outside_unit_interval_fail_closed():
+def test_q_outside_signed_unit_interval_fails_closed():
     rows = _rows()
     rows[0] = TransitionMetaRow("a", 1.1, 0.5, 0.0)
-    with pytest.raises(ValueError, match="lie in"):
+    with pytest.raises(ValueError, match="Q must"):
+        fit_meta(rows)
+
+
+def test_signed_q_is_allowed_for_frozen_sensitivity():
+    rows = _rows()
+    rows[0] = TransitionMetaRow("a", -0.4, 0.5, 0.0)
+    out = fit_meta(rows)
+    assert out.n == len(rows)
+
+
+def test_r_outside_unit_interval_fails_closed():
+    rows = _rows()
+    rows[0] = TransitionMetaRow("a", 0.4, 1.1, 0.0)
+    with pytest.raises(ValueError, match="R must"):
         fit_meta(rows)
