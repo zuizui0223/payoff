@@ -35,6 +35,11 @@ Public JRA-VAN documentation states that time-series odds are recorded at
 roughly 5–10 minute intervals and that win/place, bracket quinella and quinella
 time series are supported.
 
+The current JV-Data specification guarantees a **one-year provision window**
+for time-series odds. The primary analysis therefore uses only the records
+returned inside that officially guaranteed window. Older records, even if
+technically retrievable, are secondary and cannot redefine the primary sample.
+
 Primary analysis uses **win odds only**.
 
 No claim is made here that the present branch has downloaded or inspected the
@@ -73,9 +78,17 @@ Use the last available odds snapshot at or before each target time:
 
 Never use a snapshot after the target time to fill an earlier slice.
 
-If the feed cadence prevents a required slice from being reconstructed under
-the predeclared tolerance, the race is excluded from the complete-case primary
-analysis and retained for a secondary available-case analysis.
+For every target T-k, choose the latest snapshot at or before T-k. Never borrow
+a later snapshot.
+
+The primary maximum staleness tolerance is **10 minutes**. If the previous
+snapshot is more than 10 minutes older than the target, the race is excluded
+from the complete-case primary analysis and retained for a secondary
+available-case analysis.
+
+Implementation:
+
+    src/racing_time_slices.py
 
 ## 5. Market probability
 
@@ -276,17 +289,30 @@ test until:
 
 ## 12. Split and leakage control
 
-Use chronological splits.
+Use an outcome-blind chronological date split.
 
-The exact calendar boundaries must be fixed immediately after confirming which
-historical JRA-VAN time-series period is actually retrievable, and before
-opening the corresponding outcome table.
+After retrieving the complete officially guaranteed time-series window, list
+the distinct race dates **without reading winners or returns**. Sort those
+dates and assign:
 
-Minimum structure:
+    earliest 70% of distinct race dates -> training
+    latest   30% of distinct race dates -> untouched test
 
-- training period: fit the previous-day-score softmax scale lambda and the
-  time-specific log-pool weights w_t;
-- untouched test period: all reported primary endpoints.
+Whole race dates stay in one split. The split boundary is therefore determined
+only by calendar position, not predictive results.
+
+Training period:
+
+- fit the previous-day-score softmax scale lambda;
+- fit the time-specific log-pool weights w_t.
+
+Untouched test period:
+
+- all reported primary endpoints.
+
+Implementation:
+
+    src/racing_chronological_split.py
 
 The public-score calibration and market-combination weights are therefore both
 estimated without using the test outcomes.
