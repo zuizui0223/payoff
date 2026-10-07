@@ -15,7 +15,7 @@ Required columns:
 | horse_id | stable runner identifier within race |
 | time_slice | frozen slice label such as `T-60` or `LAST` |
 | decimal_odds | contemporaneous displayed win odds |
-| form_probability | frozen public win probability; primary source is training-calibrated JRA-VAN previous-day TM score |
+| form_probability | frozen public win probability; retrospective primary uses training-calibrated accumulated JRA-VAN TM score (category 7, corresponding to final pre-race forecast) |
 | winner | 1 for official winner, 0 otherwise |
 
 Primary analysis fails closed unless all of the following hold:
@@ -49,10 +49,15 @@ or future odds, result, or post-cutoff covariate entered that model.
 
 ## Primary upstream provenance
 
-For the primary route, `form_probability` must be derived from the JRA-VAN
-head-to-head data-mining record (TM) with:
+### Retrospective primary
 
-    data category = 1  (previous-day forecast)
+For the immediately executable retrospective route, `form_probability` is
+derived from accumulated JRA-VAN head-to-head data-mining record TM, data
+category 7. JRA-VAN support states that its forecast value should be the same as
+the final pre-race category-3 forecast.
+
+Because the original realtime category-3 release timestamp is not preserved in
+this accumulated route, the primary comparison starts at **T-30**, not T-60.
 
 The raw 0--100 predicted score is converted to a probability by:
 
@@ -64,6 +69,10 @@ Implementation:
 
     src/racing_public_score_calibration.py
 
-A TM record with data category 2 (same-day forecast) or 3 (pre-race forecast)
-must not be substituted for the primary fixed forecast because doing so moves
-the information cutoff and contaminates the market-absorption time comparison.
+### Prospective forward route
+
+Category 1 (previous-day), 2 (same-day), and 3 (pre-race) records may be
+archived prospectively at release time. Earlier realtime mining versions must
+be persisted before later releases overwrite them.
+
+Category 7 must never be relabelled as category 1.
