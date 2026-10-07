@@ -1,0 +1,254 @@
+{
+  "schema": "payoff_b_v7r_opened_result_v1",
+  "date": "2026-10-07",
+  "branch": "analysis/payoff-b-v7-direct-recourse-20261007",
+  "status": "OPENED_PRIMARY_NULL",
+  "primary_model": "correction = flyway fixed effects + Q + R + QxR",
+  "correction_definition": "1 - abs(lambda)",
+  "primary_Q": "abs historical spring-onset Pearson r",
+  "primary_R": "Q10-Q90 remaining-route temporal window normalized within flyway",
+  "transition_rows": [
+    {
+      "flyway": "greenland",
+      "origin": "R1",
+      "destination": "R2",
+      "n": 7,
+      "n_individuals": 7,
+      "Q": 0.00027926200572468696,
+      "R": 1,
+      "lambda": -1.0798801750077844,
+      "correction": -0.0798801750077844,
+      "lambda_identity": "EXACT_EXISTING"
+    },
+    {
+      "flyway": "greenland",
+      "origin": "R2",
+      "destination": "R3",
+      "n": 6,
+      "n_individuals": 6,
+      "Q": 0.16913003336807828,
+      "R": 0.6310762651461159,
+      "lambda": 0.1307308834757547,
+      "correction": 0.8692691165242453,
+      "lambda_identity": "EXACT_EXISTING"
+    },
+    {
+      "flyway": "svalbard",
+      "origin": "R1",
+      "destination": "R2",
+      "n": 18,
+      "n_individuals": 17,
+      "Q": 0.5620206070374474,
+      "R": 1,
+      "lambda": 0.07036039604877976,
+      "correction": 0.9296396039512203,
+      "lambda_identity": "EXACT_EXISTING"
+    },
+    {
+      "flyway": "svalbard",
+      "origin": "R2",
+      "destination": "R4",
+      "n": 16,
+      "n_individuals": 15,
+      "Q": 0.0014789956295216016,
+      "R": 0.17455138662316455,
+      "lambda": -0.10632090683602252,
+      "correction": 0.8936790931639775,
+      "lambda_identity": "EXACT_EXISTING"
+    },
+    {
+      "flyway": "barents",
+      "origin": "R1",
+      "destination": "R2",
+      "n": 12,
+      "n_individuals": 8,
+      "Q": 0.8924446652892631,
+      "R": 1,
+      "lambda": 0.4941139415235438,
+      "correction": 0.5058860584764562,
+      "lambda_identity": "EXACT_EXISTING"
+    },
+    {
+      "flyway": "barents",
+      "origin": "R1",
+      "destination": "R5",
+      "n": 10,
+      "n_individuals": 6,
+      "Q": 0.002382912596154002,
+      "R": 1,
+      "lambda": -0.008570814221537621,
+      "correction": 0.9914291857784624,
+      "lambda_identity": "EXACT_EXISTING"
+    },
+    {
+      "flyway": "barents",
+      "origin": "R2",
+      "destination": "R3",
+      "n": 6,
+      "n_individuals": 4,
+      "Q": 0.9497854068368787,
+      "R": 0.43980850976022456,
+      "lambda": 0.538429357495534,
+      "correction": 0.461570642504466,
+      "lambda_identity": "EXACT_EXISTING"
+    },
+    {
+      "flyway": "barents",
+      "origin": "R3",
+      "destination": "R5",
+      "n": 6,
+      "n_individuals": 4,
+      "Q": 0.2828321635600981,
+      "R": 0.28719409021501374,
+      "lambda": 0.22454587332334466,
+      "correction": 0.7754541266766554,
+      "lambda_identity": "EXACT_EXISTING"
+    },
+    {
+      "flyway": "barents",
+      "origin": "R4",
+      "destination": "R5",
+      "n": 7,
+      "n_individuals": 6,
+      "Q": 0.6624464889654946,
+      "R": 0.1437002187280756,
+      "lambda": 1.2492423107271917,
+      "correction": -0.24924231072719172,
+      "lambda_identity": "EXACT_EXISTING"
+    },
+    {
+      "flyway": "barents",
+      "origin": "R5",
+      "destination": "R7",
+      "n": 7,
+      "n_individuals": 3,
+      "Q": 0.6971603502273429,
+      "R": 0.12190995006396746,
+      "lambda": 0.8328581286430919,
+      "correction": 0.16714187135690806,
+      "lambda_identity": "NEW_SAME_OLS_DEFINITION",
+      "flag": "LOW_INDIVIDUAL_SUPPORT"
+    }
+  ],
+  "lambda_reconstruction_audit": {
+    "existing_transition_count": 9,
+    "max_abs_difference_from_existing_controller": 5.551115123125783e-17,
+    "new_transition": "barents R5->R7",
+    "new_transition_lambda": 0.8328581286430919
+  },
+  "source_gate": {
+    "focal_transitions": 10,
+    "flyways": 3,
+    "correlation_Q_R": -0.15405515228202862,
+    "pass": true
+  },
+  "primary_fit": {
+    "intercept": 1.01380804389654,
+    "flyway_greenland": -0.3836525319873417,
+    "flyway_svalbard": 0.04409992680225517,
+    "beta_Q": -1.4037165530435962,
+    "beta_R": -0.2330269470872753,
+    "beta_QR": 1.3733376461853317,
+    "rss": 0.8866834990615194,
+    "classical_beta_QR_se": 1.448189792545123,
+    "design_condition_number": 17.42915065425841
+  },
+  "exact_permutation": {
+    "scheme": "permute Q labels within flyway; C and R fixed",
+    "total": 2880,
+    "valid": 2880,
+    "count_beta_QR_at_least_observed": 1641,
+    "one_sided_p": 0.5699409927108643,
+    "distribution_min": -1.6687398125159254,
+    "distribution_median": 1.6330111181643716,
+    "distribution_max": 10.424237294697699
+  },
+  "diagnostics": {
+    "overall_correlation_QxR_correction": 0.11098263429815906,
+    "barents_correlation_QxR_correction": 0.00580499462868318,
+    "correlation_Q_R": -0.15405515228202862,
+    "correlation_Q_QxR": 0.71293987,
+    "correlation_R_QxR": 0.42848848
+  },
+  "prespecified_sensitivities": {
+    "weighted_by_transition_n": {
+      "beta_QR": 0.9061626133365537,
+      "permutation_p": 0.6556751128080528
+    },
+    "signed_phenology_r": {
+      "beta_QR": 1.3712337436368922,
+      "permutation_p": 0.5702880944116626
+    },
+    "phenology_r_squared": {
+      "beta_QR": 1.0880685219352841,
+      "permutation_p": 0.6074279763970843
+    },
+    "exclude_low_individual_support_R5_R7": {
+      "beta_QR": 1.435964799594419,
+      "permutation_p": 0.5488565488565489,
+      "permutations": 480
+    },
+    "recourse_Q20_Q80": {
+      "beta_QR": 1.1510282647695183,
+      "permutation_p": 0.5300242971190559
+    },
+    "lambda_endpoint_descriptive": {
+      "beta_QR": 0.008363100677740673,
+      "permutation_p": 0.5675112808052759
+    }
+  },
+  "leave_one_transition_out": [
+    {
+      "removed": "greenland R1->R2",
+      "beta_QR": 0.5394792947282642,
+      "p": 0.5301873698820264
+    },
+    {
+      "removed": "greenland R2->R3",
+      "beta_QR": 0.5394792947282605,
+      "p": 0.5301873698820264
+    },
+    {
+      "removed": "svalbard R1->R2",
+      "beta_QR": 1.8651589786234084,
+      "p": 0.5024288688410826
+    },
+    {
+      "removed": "svalbard R2->R4",
+      "beta_QR": 1.8651589786233747,
+      "p": 0.5024288688410826
+    },
+    {
+      "removed": "barents R1->R2",
+      "beta_QR": 4.894809570570187,
+      "p": 0.12058212058212059
+    },
+    {
+      "removed": "barents R1->R5",
+      "beta_QR": 2.5056293173629625,
+      "p": 0.4490644490644491
+    },
+    {
+      "removed": "barents R2->R3",
+      "beta_QR": 1.6982575367860557,
+      "p": 0.498960498960499
+    },
+    {
+      "removed": "barents R3->R5",
+      "beta_QR": 1.162875441185821,
+      "p": 0.8523908523908524
+    },
+    {
+      "removed": "barents R4->R5",
+      "beta_QR": 0.9567754182127358,
+      "p": 0.5987525987525988
+    },
+    {
+      "removed": "barents R5->R7",
+      "beta_QR": 1.435964799594419,
+      "p": 0.5488565488565489
+    }
+  ],
+  "conclusion": "Primary directional interaction is positive but not permutation-supported; null is robust across executed prespecified sensitivities.",
+  "claim_boundary": "This is a transition-level observational test of a population-envelope recourse proxy, not a causal manipulation or direct physiological measurement."
+}
