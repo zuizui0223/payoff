@@ -1,0 +1,140 @@
+name: payoff-b QB environment-only observability
+
+concurrency:
+  group: payoff-b-qb-environment-${{ github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-feedback-information-20261008
+    paths:
+      - ".github/workflows/payoff-b-qb-environment.yml"
+      - "data/payoff_b_qb_origin_regions_20261008.json"
+      - "src/qb_local_observability.py"
+      - "scripts/build_qb_appeears_manifest.py"
+      - "scripts/build_qb_era5_onsets.py"
+      - "scripts/fit_qb_from_appeears.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  qb-environment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install environmental dependencies
+        run: python -m pip install --disable-pip-version-check -e ".[test,earthdata,irg,empirical]"
+
+      - name: Build frozen 9-region x 9-point manifest
+        run: |
+          mkdir -p outputs
+          python scripts/build_qb_appeears_manifest.py \
+            --output outputs/qb_appeears_manifest.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path("outputs/qb_appeears_manifest.json").read_text())
+          assert p["environment_only"] is True
+          assert p["region_count"] == 9
+          assert p["points_per_region"] == 9
+          assert p["total_points"] == 81
+          assert p["task_count"] == 11
+          assert p["years"] == list(range(2001, 2012))
+          print("QB_MANIFEST_GATE_PASS")
+          PY
+
+      - name: Build independent ERA5 phase anchors
+        run: |
+          python scripts/build_qb_era5_onsets.py \
+            --output outputs/qb_era5_onsets.csv \
+            --receipt outputs/qb_era5_onsets_receipt.json
+
+      - name: Check AppEEARS credential availability
+        id: creds
+        env:
+          APPEEARS_TOKEN: ${{ secrets.APPEEARS_TOKEN }}
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: |
+          if [ -n "${APPEEARS_TOKEN}" ]; then
+            echo "configured=true" >> "${GITHUB_OUTPUT}"
+            echo "source=APPEEARS_TOKEN" >> "${GITHUB_OUTPUT}"
+          elif [ -n "${EARTHDATA_USERNAME}" ] && [ -n "${EARTHDATA_PASSWORD}" ]; then
+            echo "configured=true" >> "${GITHUB_OUTPUT}"
+            echo "source=EARTHDATA_USERNAME_PASSWORD" >> "${GITHUB_OUTPUT}"
+          else
+            echo "configured=false" >> "${GITHUB_OUTPUT}"
+            echo "source=none" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Submit frozen AppEEARS environmental tasks
+        if: steps.creds.outputs.configured == 'true'
+        env:
+          APPEEARS_TOKEN: ${{ secrets.APPEEARS_TOKEN }}
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+        run: |
+          python scripts/run_appeears_manifest.py \
+            outputs/qb_appeears_manifest.json \
+            --submit \
+            --submit-all \
+            --wait \
+            --poll-seconds 20 \
+            --max-polls 360 \
+            --download-dir outputs/qb_appeears_downloads \
+            --output outputs/qb_appeears_submission_receipt.json
+
+      - name: Fit frozen local q_B
+        if: steps.creds.outputs.configured == 'true'
+        run: |
+          python scripts/fit_qb_from_appeears.py \
+            --manifest outputs/qb_appeears_manifest.json \
+            --appeears-dir outputs/qb_appeears_downloads \
+            --era5-onsets outputs/qb_era5_onsets.csv \
+            --output outputs/qb_local_observability.csv \
+            --composites-output outputs/qb_region_date_composites.csv \
+            --receipt outputs/qb_environment_source_gate.json
+
+      - name: Write safe skip receipt when AppEEARS credentials are absent
+        if: steps.creds.outputs.configured != 'true'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          payload = {
+              "schema": "payoff_b_qb_environment_source_gate_v1",
+              "status": "SKIPPED_NO_APPEEARS_CREDENTIALS",
+              "environment_only": True,
+              "behavior_outcome_opened": False,
+              "network_submission_performed": False,
+              "credential_values_recorded": False,
+              "next_action": "configure AppEEARS/Earthdata credentials; do not substitute behavioral information",
+          }
+          Path("outputs/qb_environment_source_gate.json").write_text(
+              json.dumps(payload, indent=2) + "\n"
+          )
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-qb-environment-only
+          path: |
+            outputs/qb_appeears_manifest.json
+            outputs/qb_era5_onsets.csv
+            outputs/qb_era5_onsets_receipt.json
+            outputs/qb_appeears_submission_receipt.json
+            outputs/qb_environment_source_gate.json
+            outputs/qb_local_observability.csv
+            outputs/qb_region_date_composites.csv
