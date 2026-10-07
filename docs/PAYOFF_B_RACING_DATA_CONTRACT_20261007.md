@@ -15,7 +15,7 @@ Required columns:
 | horse_id | stable runner identifier within race |
 | time_slice | frozen slice label such as `T-60` or `LAST` |
 | decimal_odds | contemporaneous displayed win odds |
-| form_probability | frozen non-market win probability |
+| form_probability | frozen public win probability; primary source is training-calibrated JRA-VAN previous-day TM score |
 | winner | 1 for official winner, 0 otherwise |
 
 Primary analysis fails closed unless all of the following hold:
@@ -45,3 +45,25 @@ invariants pass.
 This contract does **not** establish the provenance of `form_probability`.
 The upstream form-model pipeline must separately prove that no contemporaneous
 or future odds, result, or post-cutoff covariate entered that model.
+
+
+## Primary upstream provenance
+
+For the primary route, `form_probability` must be derived from the JRA-VAN
+head-to-head data-mining record (TM) with:
+
+    data category = 1  (previous-day forecast)
+
+The raw 0--100 predicted score is converted to a probability by:
+
+1. within-race standardization;
+2. a single global softmax scale fitted on training races only;
+3. freezing the resulting transformation before test evaluation.
+
+Implementation:
+
+    src/racing_public_score_calibration.py
+
+A TM record with data category 2 (same-day forecast) or 3 (pre-race forecast)
+must not be substituted for the primary fixed forecast because doing so moves
+the information cutoff and contaminates the market-absorption time comparison.
