@@ -4,6 +4,7 @@ import pytest
 
 from src.goose_route_timing import (
     remaining_schedule_from_stopovers,
+    remaining_schedule_to_curated_arrival,
     select_breeding_endpoint,
 )
 from src.goose_stopover_detection import Stopover
@@ -125,3 +126,36 @@ def test_does_not_fall_back_to_earlier_staging_site_when_last_site_is_too_long()
         )
         is None
     )
+
+
+
+def test_curated_arrival_is_independent_of_later_detected_long_cluster():
+    first = Stopover(
+        start=datetime(2020, 5, 1, tzinfo=UTC),
+        end=datetime(2020, 5, 10, tzinfo=UTC),
+        center_latitude=65,
+        center_longitude=10,
+        inlier_points=20,
+    )
+    last_staging = Stopover(
+        start=datetime(2020, 5, 15, tzinfo=UTC),
+        end=datetime(2020, 5, 20, tzinfo=UTC),
+        center_latitude=68,
+        center_longitude=20,
+        inlier_points=20,
+    )
+    broad_arctic_cluster = Stopover(
+        start=datetime(2020, 5, 25, tzinfo=UTC),
+        end=datetime(2020, 7, 20, tzinfo=UTC),
+        center_latitude=75,
+        center_longitude=25,
+        inlier_points=100,
+    )
+    curated = datetime(2020, 5, 25, tzinfo=UTC)
+    rows = remaining_schedule_to_curated_arrival(
+        [first, last_staging, broad_arctic_cluster],
+        breeding_arrival=curated,
+    )
+    assert len(rows) == 2
+    assert rows[-1].remaining_days == pytest.approx(5.0)
+    assert all(row.breeding_arrival == curated for row in rows)
