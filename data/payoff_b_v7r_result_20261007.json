@@ -1,71 +1,220 @@
 {
-  "schema": "payoff_b_v7r_direct_recourse_result_v1",
-  "status": "PRIMARY_NOT_SUPPORTED",
+  "schema": "payoff_b_v7r_result_v2",
+  "date": "2026-10-07",
+  "status": {
+    "primary_numeric_test": "NULL",
+    "primary_active_correction_interpretation": "NOT_LICENSED",
+    "direct_actuator_qforecast_x_recourse": "NULL",
+    "conceptual_update": "SEPARATE_FORECAST_AND_FEEDBACK_INFORMATION"
+  },
+  "provenance": {
+    "multiflyway_stage3": {
+      "workflow_run": 35742152966,
+      "artifact_id": 10700391090,
+      "sha256": "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f"
+    },
+    "svalbard_stage3": {
+      "workflow_run": 35741445012,
+      "artifact_id": 10699871077,
+      "sha256": "29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856"
+    },
+    "era5_multiflyway": {
+      "workflow_run": 35974167089,
+      "artifact_id": 10797665905,
+      "sha256": "c37502b116f4170760e0fbf5029fe1804999def4de3f702cdb5bf61e61b8606f"
+    },
+    "era5_svalbard": {
+      "workflow_run": 35975472359,
+      "artifact_id": 10796909675,
+      "sha256": "6155a9efe854167883190db7410ce60c151721e4569d564f23bc01a555013825"
+    }
+  },
+  "source_gate": {
+    "focal_transitions": 10,
+    "flyways": 3,
+    "corr_Qabs_R": -0.15405515228202837,
+    "pass": true
+  },
+  "identity_checks": {
+    "lambda_existing_transitions": 9,
+    "lambda_max_abs_difference": 5.551115123125783e-16,
+    "stopover_gain_existing_transitions": 9,
+    "stopover_gain_max_abs_difference": 5.412337245047638e-16,
+    "new_barents_R5_R7": {
+      "n": 7,
+      "n_individuals": 3,
+      "lambda": 0.8328581286430917,
+      "stopover_gain": 0.5104824802452765
+    }
+  },
   "primary": {
-    "fit": {
-      "coefficient_names": [
-        "intercept",
-        "flyway[greenland]",
-        "flyway[svalbard]",
-        "Q",
-        "R",
-        "QxR"
-      ],
-      "coefficients": [
-        1.0138080438965449,
-        -0.3836525319873433,
-        0.04409992680225257,
-        -1.4037165530436049,
-        -0.2330269470872803,
-        1.3733376461853433
-      ],
-      "beta_QR": 1.3733376461853433,
-      "rss": 0.886683499061519,
-      "n": 10
+    "response": "C=1-abs(lambda)",
+    "Q": "abs POWER spring-onset correlation",
+    "R": "Q10-Q90 remaining-route temporal-window recourse",
+    "beta_QR": 1.3733376461853535,
+    "permutations": 2880,
+    "one_sided_p": 0.5699409927108643,
+    "permutation_median": 1.6330111181643598,
+    "permutation_min": -1.6687398125159667,
+    "permutation_max": 10.424237294697969
+  },
+  "primary_sensitivities": [
+    {
+      "name": "weighted_by_transition_n",
+      "beta_QR": 0.9061626133365349,
+      "p_perm": 0.6556751128080528
     },
-    "permutation": {
-      "observed_beta_QR": 1.3733376461853433,
-      "total_permutations": 2880,
-      "valid_permutations": 2880,
-      "count_at_least_observed": 1641,
-      "one_sided_p": 0.5699409927108643,
-      "permutation_min": -1.6687398125159179,
-      "permutation_median": 1.6330111181643718,
-      "permutation_max": 10.424237294697496
+    {
+      "name": "Q20_Q80_remaining_recourse",
+      "beta_QR": 1.1510282647695134,
+      "p_perm": 0.5300242971190559
+    },
+    {
+      "name": "local_one_step_width",
+      "beta_QR": 0.02449773059951386,
+      "p_perm": 0.4647691773689691
+    },
+    {
+      "name": "signed_POWER_r",
+      "beta_QR": 1.3712337436369046,
+      "p_perm": 0.5702880944116626
+    },
+    {
+      "name": "POWER_r2",
+      "beta_QR": 1.0880685219352904,
+      "p_perm": 0.6074279763970843
+    },
+    {
+      "name": "POWER_anomaly_slope",
+      "beta_QR": 1.2519756870746654,
+      "p_perm": 0.6108989934050677
+    },
+    {
+      "name": "exclude_low_individual_support",
+      "beta_QR": 1.435964799594413,
+      "p_perm": 0.5488565488565489,
+      "permutations": 480
+    },
+    {
+      "name": "ERA5_abs_r",
+      "beta_QR": 1.5621337151559027,
+      "p_perm": 0.4970496355432142
+    },
+    {
+      "name": "ERA5_signed_r",
+      "beta_QR": 1.376861321086359,
+      "p_perm": 0.5296771954182575
+    },
+    {
+      "name": "ERA5_r2",
+      "beta_QR": 0.9051931329038388,
+      "p_perm": 0.602915654286706
+    }
+  ],
+  "leave_one_transition_out": [
+    {
+      "removed": "barents R1->R2",
+      "beta_QR": 4.89481,
+      "p_perm": 0.120582
+    },
+    {
+      "removed": "barents R1->R5",
+      "beta_QR": 2.505629,
+      "p_perm": 0.449064
+    },
+    {
+      "removed": "barents R2->R3",
+      "beta_QR": 1.698258,
+      "p_perm": 0.49896
+    },
+    {
+      "removed": "barents R3->R5",
+      "beta_QR": 1.162875,
+      "p_perm": 0.852391
+    },
+    {
+      "removed": "barents R4->R5",
+      "beta_QR": 0.956775,
+      "p_perm": 0.598753
+    },
+    {
+      "removed": "barents R5->R7",
+      "beta_QR": 1.435965,
+      "p_perm": 0.548857
+    },
+    {
+      "removed": "greenland R1->R2",
+      "beta_QR": 0.539479,
+      "p_perm": 0.530187
+    },
+    {
+      "removed": "greenland R2->R3",
+      "beta_QR": 0.539479,
+      "p_perm": 0.530187
+    },
+    {
+      "removed": "svalbard R1->R2",
+      "beta_QR": 1.865159,
+      "p_perm": 0.502429
+    },
+    {
+      "removed": "svalbard R2->R4",
+      "beta_QR": 1.865159,
+      "p_perm": 0.502429
+    }
+  ],
+  "raw_lambda_secondary": {
+    "beta_QR": 0.00836310067772807,
+    "two_sided_perm_p": 0.9909753557792433
+  },
+  "estimand_audit": {
+    "identity": "lambda = phi * (1-g)",
+    "issue": "1-abs(lambda) is not active feedback gain unless passive phase carry-over phi is independently identified.",
+    "consequence": "The primary numerical null is retained, but it cannot by itself license a statement that active correction is independent of Q and R."
+  },
+  "direct_actuator_exploratory": {
+    "response": "stopover_gain = - slope(stopover_days ~ incoming_phase_error)",
+    "transition_level": {
+      "beta_QR": 0.4418571608806544,
+      "p_perm": 0.7500867754251996
+    },
+    "weighted_transition_level": {
+      "beta_QR": 0.23219592910861547,
+      "p_perm": 0.7677889621659146
+    },
+    "ERA5_Q": {
+      "beta_QR": 0.7741620904072,
+      "p_perm": 0.5938910100659494
+    },
+    "row_level": {
+      "rows": 95,
+      "transitions": 10,
+      "focal_coefficient": "incoming_phase_error x Q_forecast x R",
+      "expected_direction": "negative",
+      "estimate": -0.2776589182880673,
+      "p_perm": 0.4297119055883374,
+      "permutations": 2880
     }
   },
-  "sensitivities": {
-    "weighted_by_transition_n": {
-      "beta_QR": 0.9061626133365481
+  "low_forecast_predictability_counterexamples": [
+    {
+      "transition": "barents R1->R5",
+      "Q_abs": 0.002382912596154002,
+      "R": 1,
+      "lambda": -0.008570814221537715,
+      "stopover_gain": 0.7869573684165069
     },
-    "R_q20_q80": {
-      "beta_QR": 1.1510282647695014
-    },
-    "R_local_edge_width": {
-      "beta_QR": 0.024497730599506037
-    },
-    "Q_signed_r": {
-      "beta_QR": 1.3712337436368935
-    },
-    "Q_r2": {
-      "beta_QR": 1.0880685219352886
-    },
-    "exclude_low_individual_support": {
-      "beta_QR": 1.4359647995944227
-    },
-    "raw_lambda": {
-      "beta_QR": 0.008363100677734991
+    {
+      "transition": "svalbard R2->R4",
+      "Q_abs": 0.0014789,
+      "R": 0.174551,
+      "lambda": -0.10632090683602258,
+      "stopover_gain": 0.5889955061287793
     }
-  },
-  "leave_one_transition_out_beta_QR": {
-    "min": 0.5394792947282637,
-    "max": 4.894809570570178,
-    "all_positive": true
-  },
-  "identity_check": {
-    "existing_stage3_lambdas_reproduced": 9,
-    "max_abs_difference": 1.1102230246251565e-15,
-    "newly_recomputed_transition": "barents:R5->R7",
-    "new_lambda": 0.8328581286430923
+  ],
+  "conclusion": {
+    "closed_route": "Q_forecast x generic remaining-route recourse as a driver of correction strength",
+    "retained_result": "Forecast/feedforward information and feedback/state-estimation information are distinct coordinates.",
+    "next_requirement": "Any q_feedback test requires an independent local cue-reliability coordinate not derived from the focal behavioral response."
   }
 }
