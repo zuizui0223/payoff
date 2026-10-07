@@ -108,10 +108,27 @@ def clean_equation_text(value: str) -> str:
         ("\\!", ""),
         ("\\text{-}", "-"),
         ("\\ ", " "),
+        ("Delta", "Δ"),
+        ("sigma", "σ"),
+        ("rho", "ρ"),
+        ("alpha", "α"),
+        ("beta", "β"),
+        ("Theta", "Θ"),
+        ("tau", "τ"),
     )
     for old, new in replacements:
         out = out.replace(old, new)
+
     out = out.replace("^2", "²")
+    out = out.replace("^*", "*")
+    out = out.replace(">=", "≥").replace("<=", "≤")
+    out = out.replace("_{t+1}", "(t+1)")
+    out = out.replace("_{i,0}", "(i,0)")
+    out = out.replace("_{route}", "_route")
+    out = out.replace("_{target}", "_target")
+    out = out.replace("_{source}", "_source")
+    out = out.replace("{t : ", "{t: ")
+    out = out.replace("}", "")
     return out
 
 
@@ -259,8 +276,6 @@ def build(output: Path) -> dict:
     p.add_run().add_break(WD_BREAK.PAGE)
     render_markdown(doc, main_text)
 
-    p = doc.add_paragraph()
-    p.add_run().add_break(WD_BREAK.PAGE)
     add_heading(doc, "Figure Legends", 1)
     cap_body = "\n".join(
         line for line in captions.splitlines()
