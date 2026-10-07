@@ -5,14 +5,14 @@ Status: **ANONYMOUS REVIEW PACKAGE + REPRODUCIBILITY PACKAGE PASS**
 ## Anonymous reviewer package
 
 Workflow:
-- run **37470823411**
-- head **492432324d3bc4ef797a45ab896e16f7c445da68**
+- run **37559105648**
+- head **d92c6135f58c2330a6b3476600d57b7a8b515abe**
 
 Artifact:
-- id **11418146845**
+- id **11454879755**
 - name **payoff-b-v45-amn-package**
 - artifact digest
-  **sha256:df1d8dfb35263d459d273a1674f268106ecc59a3438a5a3861deb1ffd0ea7940**
+  **sha256:c6418b663deb70f832addb573b2a06ff81b7d6d224602ecce59fe07e79612349**
 
 The final inner reviewer ZIP contains only:
 - anonymous manuscript;
@@ -33,7 +33,7 @@ Local artifact inspection confirmed:
 - figures use generic reviewer-facing filenames.
 
 Package-manifest manuscript statistics:
-- abstract: **165 words**
+- abstract: **167 words**
 - main text before Literature Cited: **6385 words**
 - title: **Seasonal tracking depends on information access and opportunities for correction**
 
@@ -76,19 +76,35 @@ Main-figure workflow:
 
 ## DOCX
 
-A prior review DOCX build passed, but visual QA found an incorrect title-page
-word count caused by an escaped-whitespace regex in the DOCX builder.
+Final anonymous review DOCX:
 
-That artifact is **superseded and must not be submitted**.
+Workflow:
+- run **37559117694**
+- head **2f2726a157c83eb0bfcf979bbfcdb6b149796989**
 
-The builder was fixed in commit:
-**ae94d01e488a9fafff14a964c342aece98cd5e93**
+Artifact:
+- id **11456151706**
+- name **payoff-b-v45-amn-docx**
+- digest
+  **sha256:422a963907a36715536f170bcad647bce4b7546786dd2dfdf38920da4c4b0f21**
 
-A new DOCX build is pending final CI/render/visual QA.
+Final visual QA:
+- **30 pages**
+- all pages inspected individually;
+- title/Abstract/main-text pagination correct;
+- continuous line numbers present;
+- page numbers present;
+- no clipping or overlap;
+- equations readable;
+- Figure Legends complete with no orphan final page.
+
+Full receipt:
+`docs/PAYOFF_B_V4_5_FINAL_DOCX_RECEIPT_20261007.md`
 
 ## Submission decision
 
 Scientific analysis is frozen under the V4.5 stop rule.
 
-The only open deliverable gate is:
-**corrected anonymous review DOCX render-and-visual-QA.**
+All scientific and reviewer-package build gates are closed.
+
+Remaining actions are author metadata and Editorial Manager upload only.
