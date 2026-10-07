@@ -4,7 +4,9 @@ import pytest
 
 from src.competitive_information_value import (
     competitive_balance_derivative,
+    composite_usable_information,
     exponential_competitive_information_peak,
+    recover_composite_usability,
 )
 
 
@@ -121,4 +123,46 @@ def test_no_value_loss_hazard_has_no_finite_peak():
             alpha_information_rate=1.0,
             beta_actionability_decay=0.0,
             gamma_exclusivity_decay=0.0,
+        )
+
+
+def test_observational_equivalence_depends_only_on_actionability_exclusivity_product():
+    one = composite_usable_information(
+        retained_actionability=0.8,
+        retained_exclusivity=0.5,
+        fully_actionable_information_value=2.0,
+        direct_wait_cost=0.1,
+    )
+    two = composite_usable_information(
+        retained_actionability=0.5,
+        retained_exclusivity=0.8,
+        fully_actionable_information_value=2.0,
+        direct_wait_cost=0.1,
+    )
+    assert one.retained_usable_information == pytest.approx(0.4)
+    assert two.retained_usable_information == pytest.approx(0.4)
+    assert one.net_usable_value == pytest.approx(two.net_usable_value)
+
+
+def test_composite_usability_can_be_recovered_but_not_factorized():
+    out = composite_usable_information(
+        retained_actionability=0.75,
+        retained_exclusivity=0.40,
+        fully_actionable_information_value=1.5,
+        direct_wait_cost=0.05,
+    )
+    recovered = recover_composite_usability(
+        net_usable_value=out.net_usable_value,
+        fully_actionable_information_value=1.5,
+        direct_wait_cost=0.05,
+    )
+    assert recovered == pytest.approx(0.30)
+
+
+def test_recovered_composite_usability_fails_if_implied_weight_is_impossible():
+    with pytest.raises(ValueError, match="outside"):
+        recover_composite_usability(
+            net_usable_value=2.0,
+            fully_actionable_information_value=1.0,
+            direct_wait_cost=0.0,
         )
