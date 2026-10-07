@@ -122,13 +122,16 @@ def clean_equation_text(value: str) -> str:
     out = out.replace("^2", "²")
     out = out.replace("^*", "*")
     out = out.replace(">=", "≥").replace("<=", "≤")
-    out = out.replace("_{t+1}", "(t+1)")
-    out = out.replace("_{i,0}", "(i,0)")
-    out = out.replace("_{route}", "_route")
-    out = out.replace("_{target}", "_target")
-    out = out.replace("_{source}", "_source")
-    out = out.replace("{t : ", "{t: ")
-    out = out.replace("}", "")
+    out = out.replace("e_{t+1}", "eₜ₊₁")
+    out = out.replace("e_{i,0}", "eᵢ,₀")
+    out = out.replace("e_{route}", "e_route")
+    out = out.replace("e_{target}", "e_target")
+    out = out.replace("e_{source}", "e_source")
+    out = out.replace("_0", "₀")
+    out = out.replace("_t", "ₜ")
+    out = out.replace("_i", "ᵢ")
+    out = out.replace("{t : ", "(t: ")
+    out = out.replace("{", "(").replace("}", ")")
     return out
 
 
