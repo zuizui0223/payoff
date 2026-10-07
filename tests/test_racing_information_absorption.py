@@ -124,3 +124,48 @@ def test_runner_set_mismatch_fails_closed():
             {"A": 0.4, "C": 0.6},
             0.5,
         )
+
+
+
+def test_paired_bootstrap_recovers_positive_absorption_contrasts():
+    from src.racing_information_absorption import paired_test_bootstrap
+
+    first = [
+        _race("te1", "A", {"A": 0.72, "B": 0.28}, {"A": 0.51, "B": 0.49}),
+        _race("te2", "B", {"A": 0.28, "B": 0.72}, {"A": 0.49, "B": 0.51}),
+    ]
+    last = [
+        _race("te1", "A", {"A": 0.72, "B": 0.28}, {"A": 0.71, "B": 0.29}),
+        _race("te2", "B", {"A": 0.28, "B": 0.72}, {"A": 0.29, "B": 0.71}),
+    ]
+    out = paired_test_bootstrap(
+        first,
+        last,
+        first_form_weight=0.9,
+        last_form_weight=0.0,
+        replicates=200,
+        seed=7,
+    )
+    assert out.market_improvement_mean > 0.0
+    assert out.incremental_value_decline_mean > 0.0
+    assert out.market_improvement_positive_fraction == pytest.approx(1.0)
+    assert out.incremental_value_decline_positive_fraction == pytest.approx(1.0)
+
+
+def test_paired_bootstrap_requires_identical_race_ids():
+    from src.racing_information_absorption import paired_test_bootstrap
+
+    first = [
+        _race("te1", "A", {"A": 0.7, "B": 0.3}, {"A": 0.5, "B": 0.5}),
+    ]
+    last = [
+        _race("other", "A", {"A": 0.7, "B": 0.3}, {"A": 0.6, "B": 0.4}),
+    ]
+    with pytest.raises(ValueError, match="identical race ids"):
+        paired_test_bootstrap(
+            first,
+            last,
+            first_form_weight=0.5,
+            last_form_weight=0.5,
+            replicates=10,
+        )
