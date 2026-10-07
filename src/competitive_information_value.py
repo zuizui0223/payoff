@@ -270,3 +270,77 @@ def exponential_competitive_information_peak(
         retained_exclusivity_at_optimum=e_star,
         maximum_gross_information_value=max_value,
     )
+
+
+@dataclass(frozen=True)
+class CompositeUsability:
+    """Composite retained usability u=r*e and implied net information value."""
+
+    retained_actionability: float
+    retained_exclusivity: float
+    retained_usable_information: float
+    fully_actionable_information_value: float
+    direct_wait_cost: float
+    net_usable_value: float
+
+
+def composite_usable_information(
+    *,
+    retained_actionability: float,
+    retained_exclusivity: float,
+    fully_actionable_information_value: float,
+    direct_wait_cost: float = 0.0,
+) -> CompositeUsability:
+    """Evaluate N=u*V-C with u=r*e.
+
+    This helper makes the declared model's identification structure explicit:
+    downstream value depends on r and e only through their product u.
+    """
+
+    r = float(retained_actionability)
+    e = float(retained_exclusivity)
+    value = _nonnegative_finite(
+        "fully_actionable_information_value",
+        fully_actionable_information_value,
+    )
+    cost = _nonnegative_finite("direct_wait_cost", direct_wait_cost)
+    if not 0.0 <= r <= 1.0:
+        raise ValueError("retained_actionability must lie in [0, 1]")
+    if not 0.0 <= e <= 1.0:
+        raise ValueError("retained_exclusivity must lie in [0, 1]")
+
+    usable = r * e
+    return CompositeUsability(
+        retained_actionability=r,
+        retained_exclusivity=e,
+        retained_usable_information=usable,
+        fully_actionable_information_value=value,
+        direct_wait_cost=cost,
+        net_usable_value=usable * value - cost,
+    )
+
+
+def recover_composite_usability(
+    *,
+    net_usable_value: float,
+    fully_actionable_information_value: float,
+    direct_wait_cost: float = 0.0,
+) -> float:
+    """Recover u=(N+C)/V when V>0.
+
+    The result is the composite usability weight only.  No decomposition into
+    retained actionability and retained exclusivity is identified.
+    """
+
+    net = float(net_usable_value)
+    if not isfinite(net):
+        raise ValueError("net_usable_value must be finite")
+    value = _positive_finite(
+        "fully_actionable_information_value",
+        fully_actionable_information_value,
+    )
+    cost = _nonnegative_finite("direct_wait_cost", direct_wait_cost)
+    usable = (net + cost) / value
+    if usable < -_TOL or usable > 1.0 + _TOL:
+        raise ValueError("implied composite usability lies outside [0, 1]")
+    return min(1.0, max(0.0, usable))
