@@ -155,39 +155,101 @@ Implementation:
 
     src/goose_archive_eligibility.py
 
-## Fixed stopover reconstruction
+## Corrected stopover reconstruction
 
-Published stopover criterion:
+The first reconstruction used a 30-km anchor-radius interpretation. That was
+rejected after checking the cited source method.
 
-- within 30-km radius;
-- >48 h;
-- at most one outlier position.
+van Wijk et al. (2012) instead describe:
 
-A frozen observed-anchor reconstruction was implemented before the joint Q–R
-analysis.
+- clusters of **successive positions** whose pairwise displacement is <=30 km;
+- minimum residence 48 h;
+- one >30-km detour can remain part of the stopover if the bird returns to the
+  preceding cluster within 8 h;
+- a second detour ends the stopover.
 
-To prevent artificial subdivision of one 30-km site caused by choosing
-different observed anchors, temporally adjacent candidates are merged when
-their centers are <=60 km apart. The 60-km limit is exactly twice the published
-site radius and was set before cross-flyway comparison.
-
-No flyway-specific thresholds were used.
-
-Fixed-rule machine result:
-
-| Flyway | Machine mean stops | Published mean stops |
-|---|---:|---:|
-| Greenland | 5.00 | 5.3 ± 0.2 SE |
-| Svalbard | 3.90 | 4.2 ± 0.3 SE |
-| Barents Sea | 6.08 | 5.7 ± 0.5 SE |
-
-The reconstruction is not identical to unpublished/manual site decisions, but
-it reproduces the reported aggregate architecture without route-specific
-retuning.
+The related De Boer et al. analysis of these barnacle-goose data reports a 6-h
+detour-return variant. The prospective primary reconstruction uses the original
+8-h van-Wijk window and keeps 6 h as sensitivity.
 
 Implementation:
 
     src/goose_stopover_detection.py
+
+Machine audit with the corrected 8-h detector and the frozen one-spring sample:
+
+| Flyway | Machine mean detected stops | Published Kölzsch mean |
+|---|---:|---:|
+| Greenland | 5.43 | 5.3 ± 0.2 SE |
+| Svalbard | 4.19 | 4.2 ± 0.3 SE |
+| Barents Sea | 6.75 | 5.7 ± 0.5 SE |
+
+Greenland and Svalbard reproduce the aggregate architecture closely. Barents is
+somewhat over-segmented and therefore requires region-level mapping or a
+sensitivity analysis before component-specific claims.
+
+No flyway-specific thresholds are permitted.
+
+## Breeding endpoint audit
+
+A naive literal automation of the Kölzsch rule
+
+    last stopover before end June with a 7--26 d residence
+
+does **not** safely recover breeding arrival from the archived tracks.
+
+With the corrected detector, long Arctic clusters frequently continue for much
+longer than 26 d:
+
+- Greenland: 0/7 final pre-July clusters satisfy the literal 7--26 d range;
+- Svalbard: 4/21;
+- Barents Sea: 1/12.
+
+Selecting the last *qualifying* 7--26 d cluster would therefore mislabel an
+earlier Icelandic/Norwegian/continental staging site as the breeding endpoint
+for many birds.
+
+The code now fails closed instead of falling back to an earlier site:
+
+    src/goose_route_timing.py
+    select_breeding_endpoint()
+
+### Independent curated endpoint source
+
+Shariati's thesis provides Appendix Tables A1 and A2 with:
+
+- bird ID;
+- tracking year;
+- last staging site;
+- departure date from the last staging site;
+- breeding site;
+- breeding-site arrival date.
+
+These tables cover:
+
+- Russian/Barents Sea tracks: 12 individuals across 2008--2010;
+- Svalbard tracks: 17 individuals across 2006--2010.
+
+For the one-spring PAYOFF sample, the first deployment-year rows give an
+independent curated endpoint for:
+
+- all 12 Barents individuals;
+- 17 of the 21 Svalbard individuals.
+
+The four 2011 Svalbard individuals and all seven Greenland individuals are not
+covered by those Appendix tables.
+
+Primary remaining-duration recourse should therefore begin with the curated
+29-individual Svalbard+Barents subset rather than infer breeding arrival from
+our own stopover segmentation.
+
+Implementation accepts an external curated arrival without redefining it:
+
+    remaining_schedule_to_curated_arrival()
+
+No full Appendix table has been copied into this repository; it remains an
+external source that must be materialized with provenance if this route is
+executed.
 
 ## Environmental Q source
 
