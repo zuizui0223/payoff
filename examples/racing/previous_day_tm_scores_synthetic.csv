@@ -1,0 +1,13 @@
+split,race_id,horse_id,tm_score,winner
+train,tr1,A,90.0,1
+train,tr1,B,40.0,0
+train,tr2,A,30.0,0
+train,tr2,B,85.0,1
+train,tr3,A,75.0,1
+train,tr3,B,50.0,0
+train,tr4,A,45.0,0
+train,tr4,B,80.0,1
+test,te1,A,78.0,1
+test,te1,B,52.0,0
+test,te2,A,48.0,0
+test,te2,B,82.0,1
