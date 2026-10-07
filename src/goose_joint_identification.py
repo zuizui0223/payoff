@@ -326,3 +326,108 @@ def joint_predictability_recourse_coordinate(
             )
         )
     return tuple(rows)
+
+
+
+@dataclass(frozen=True)
+class RemainingDurationRecourse:
+    """Observed recourse envelope from stage-to-destination elapsed durations."""
+
+    stage_index: int
+    observations: int
+    fast_remaining_duration: float
+    typical_remaining_duration: float
+    slow_remaining_duration: float
+    advance_capacity: float
+    delay_capacity: float
+    advance_fraction: float
+    delay_fraction: float
+
+
+def remaining_duration_recourse(
+    stage_remaining_duration_samples: Sequence[Sequence[float]],
+    *,
+    lower_quantile: float = 0.10,
+    reference_quantile: float = 0.50,
+    upper_quantile: float = 0.90,
+) -> tuple[RemainingDurationRecourse, ...]:
+    """Estimate stagewise recourse from remaining elapsed-time envelopes.
+
+    At stage j, each sample is the elapsed time from departure at that stage to
+    arrival at the declared destination/breeding stage for one eligible track.
+
+    This automatically includes realized downstream combinations of:
+
+    - flight/transit duration;
+    - stopover compression/extension;
+    - stopover skipping;
+    - route-specific downstream timing.
+
+    The primary quantities are
+
+        C_adv(j)   = P50(T_remaining,j) - P10(T_remaining,j)
+        C_delay(j) = P90(T_remaining,j) - P50(T_remaining,j).
+
+    Fractions are normalized to stage zero.
+
+    Unlike the component-sum construction, the empirical stage capacities are
+    not forced to decrease monotonically. Composition, route alternatives or a
+    downstream bottleneck may produce local increases. This makes the function
+    suitable as a direct empirical test rather than a built-in monotonicity
+    assumption.
+
+    Absolute arrival dates or phenological mismatch are not used; only elapsed
+    downstream schedule duration enters the capacity estimate.
+    """
+
+    lo = float(lower_quantile)
+    mid = float(reference_quantile)
+    hi = float(upper_quantile)
+    if not (0.0 <= lo <= mid <= hi <= 1.0):
+        raise ValueError(
+            "quantiles must satisfy 0 <= lower <= reference <= upper <= 1"
+        )
+    if not stage_remaining_duration_samples:
+        raise ValueError("at least one stage is required")
+
+    raw_rows = []
+    for stage, raw in enumerate(stage_remaining_duration_samples):
+        values = _finite_sequence(f"stage remaining durations {stage}", raw)
+        if any(x < 0.0 for x in values):
+            raise ValueError("remaining durations must be non-negative")
+        fast = _quantile(values, lo)
+        typical = _quantile(values, mid)
+        slow = _quantile(values, hi)
+        raw_rows.append(
+            (
+                stage,
+                len(values),
+                fast,
+                typical,
+                slow,
+                max(0.0, typical - fast),
+                max(0.0, slow - typical),
+            )
+        )
+
+    base_advance = raw_rows[0][5]
+    base_delay = raw_rows[0][6]
+
+    return tuple(
+        RemainingDurationRecourse(
+            stage_index=stage,
+            observations=n,
+            fast_remaining_duration=fast,
+            typical_remaining_duration=typical,
+            slow_remaining_duration=slow,
+            advance_capacity=advance,
+            delay_capacity=delay,
+            advance_fraction=(
+                advance / base_advance if base_advance > _TOL else 0.0
+            ),
+            delay_fraction=(
+                delay / base_delay if base_delay > _TOL else 0.0
+            ),
+        )
+        for stage, n, fast, typical, slow, advance, delay in raw_rows
+    )
