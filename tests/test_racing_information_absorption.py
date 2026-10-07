@@ -169,3 +169,18 @@ def test_paired_bootstrap_requires_identical_race_ids():
             last_form_weight=0.5,
             replicates=10,
         )
+
+
+def test_one_point_zero_decimal_odds_are_valid_before_normalization():
+    out = market_probabilities_from_decimal_odds(
+        {"A": 1.0, "B": 4.0}
+    )
+    assert sum(out.values()) == pytest.approx(1.0)
+    assert out["A"] > out["B"]
+
+
+def test_subunit_decimal_odds_fail_closed():
+    with pytest.raises(ValueError, match="at least one"):
+        market_probabilities_from_decimal_odds(
+            {"A": 0.9, "B": 4.0}
+        )
