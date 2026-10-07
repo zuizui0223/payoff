@@ -110,8 +110,10 @@ def fit_meta(rows: Iterable[TransitionMetaRow], *, weighted: bool = False) -> Me
         w = float(row.weight)
         if not all(isfinite(v) for v in (q, r, c, w)):
             raise ValueError("all meta-model values must be finite")
-        if not 0.0 <= q <= 1.0 or not 0.0 <= r <= 1.0:
-            raise ValueError("Q and R must lie in [0, 1]")
+        if not -1.0 <= q <= 1.0:
+            raise ValueError("Q must lie in [-1, 1]")
+        if not 0.0 <= r <= 1.0:
+            raise ValueError("R must lie in [0, 1]")
         if w <= 0.0:
             raise ValueError("weights must be positive")
         vector = [1.0]
