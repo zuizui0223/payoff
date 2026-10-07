@@ -1,9 +1,13 @@
 """Calibration of a fixed public racing score into within-race probabilities.
 
-The intended first PAYOFF-B racing use is the JRA-VAN *previous-day*
-head-to-head data-mining score (TM record, data category 1).  The public score
-is fixed before the within-day odds path evaluated by the mechanism-separation
-test.
+For the retrospective PAYOFF-B racing test, the fixed public score is the
+accumulated JRA-VAN head-to-head data-mining score (TM data category 7), which
+corresponds to the final pre-race forecast.  A cleaner prospective extension
+may instead archive realtime category-1 previous-day forecasts before later
+updates overwrite them.
+
+In either route the score is frozen before the market time slices assigned to
+that route are evaluated.
 
 Scores are standardized within race, then mapped through one global softmax
 scale lambda:
