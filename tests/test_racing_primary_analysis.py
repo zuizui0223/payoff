@@ -91,6 +91,9 @@ def test_end_to_end_primary_detects_synthetic_absorption_pattern():
     assert out.primary_contrasts["P2_form_weight_declines"] is True
     assert out.primary_contrasts["P3_incremental_form_value_declines"] is True
     assert out.calibration["tm_data_category"] == 7
+    assert out.paired_test_bootstrap["market_improvement_mean"] > 0.0
+    assert out.paired_test_bootstrap["incremental_value_decline_mean"] > 0.0
+    assert out.paired_test_bootstrap["replicates"] == 2000
 
 
 def test_end_to_end_excludes_selected_runner_set_change():
