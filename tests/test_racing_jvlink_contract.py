@@ -98,3 +98,23 @@ def test_missing_tm_runner_removes_race_from_candidate_set_without_fabrication()
     races, results, tm, odds = _tables()
     out = validate_normalized_handoff(races, results, tm[:1], odds)
     assert out.candidate_races == 0
+
+
+def test_dead_heat_is_explicit_exclusion_not_whole_file_failure():
+    races, results, tm, odds = _tables()
+    results = deepcopy(results)
+    results[1]["winner"] = "1"
+    out = validate_normalized_handoff(races, results, tm, odds)
+    assert out.candidate_races == 0
+    assert out.excluded_non_single_winner == 1
+
+
+def test_no_valid_starter_is_explicit_exclusion():
+    races, results, tm, odds = _tables()
+    results = deepcopy(results)
+    for row in results:
+        row["winner"] = "0"
+        row["valid_starter"] = "0"
+    out = validate_normalized_handoff(races, results, tm, odds)
+    assert out.candidate_races == 0
+    assert out.excluded_no_valid_starters == 1
