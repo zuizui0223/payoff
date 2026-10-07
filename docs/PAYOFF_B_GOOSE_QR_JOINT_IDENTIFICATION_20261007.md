@@ -240,12 +240,21 @@ C_j^{delay}=T_j^{slow}-T_j^{typ}.
 
 Normalize each direction by its value at the first retained stage.
 
-This definition automatically includes realized combinations of:
+This definition automatically includes realized downstream combinations of:
 
 - migration-speed changes;
 - shorter or longer stopovers;
 - skipped stopovers;
 - alternative downstream route schedules.
+
+The first primary subset is:
+
+- all 12 Barents/Russian individuals from the Kölzsch one-spring sample;
+- 17 Svalbard individuals from 2006--2010 with curated arrival dates.
+
+The four 2011 Svalbard individuals and seven Greenland individuals remain
+external-validation/sensitivity candidates until equally independent breeding
+arrival endpoints are found.
 
 Unlike a component-sum construction, empirical \(R_j\) is **not forced to be
 monotone**. A downstream bottleneck or route alternative can create local
