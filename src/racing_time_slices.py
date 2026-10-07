@@ -52,8 +52,8 @@ def _validate_snapshots(
             raise ValueError("snapshot odds must not be empty")
         for value in snap.decimal_odds.values():
             odds = float(value)
-            if not isfinite(odds) or odds <= 1.0:
-                raise ValueError("decimal odds must be finite and greater than one")
+            if not isfinite(odds) or odds < 1.0:
+                raise ValueError("decimal odds must be finite and at least one")
     return out
 
 
