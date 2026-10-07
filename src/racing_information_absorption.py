@@ -243,3 +243,150 @@ def evaluate_time_slice(
         incremental_form_value_over_market=market_loss - hybrid_loss,
         test_races=len(test_races),
     )
+
+
+
+@dataclass(frozen=True)
+class PairedTestBootstrap:
+    """Paired race-level bootstrap for first-to-last held-out contrasts."""
+
+    replicates: int
+    seed: int
+    races: int
+    market_improvement_mean: float
+    market_improvement_ci_low: float
+    market_improvement_ci_high: float
+    market_improvement_positive_fraction: float
+    incremental_value_decline_mean: float
+    incremental_value_decline_ci_low: float
+    incremental_value_decline_ci_high: float
+    incremental_value_decline_positive_fraction: float
+
+
+def _percentile(sorted_values: Sequence[float], probability: float) -> float:
+    if not sorted_values:
+        raise ValueError("percentile requires at least one value")
+    if probability <= 0.0:
+        return float(sorted_values[0])
+    if probability >= 1.0:
+        return float(sorted_values[-1])
+    position = probability * (len(sorted_values) - 1)
+    lo = int(position)
+    hi = min(lo + 1, len(sorted_values) - 1)
+    weight = position - lo
+    return float(
+        sorted_values[lo] * (1.0 - weight)
+        + sorted_values[hi] * weight
+    )
+
+
+def paired_test_bootstrap(
+    first_test_races: Sequence[RaceForecast],
+    last_test_races: Sequence[RaceForecast],
+    *,
+    first_form_weight: float,
+    last_form_weight: float,
+    replicates: int = 2000,
+    seed: int = 20261007,
+) -> PairedTestBootstrap:
+    """Bootstrap P1/P3 by race, preserving within-race time pairing.
+
+    The train-fitted form weights are held fixed.  This therefore quantifies
+    held-out test-race uncertainty in:
+
+    P1:
+        L_market(first) - L_market(last)
+
+    P3:
+        [L_market(first)-L_hybrid(first)]
+        -
+        [L_market(last)-L_hybrid(last)].
+
+    It does not claim to quantify uncertainty in the training-estimated
+    weights themselves.
+    """
+
+    from random import Random
+
+    n_rep = int(replicates)
+    if n_rep < 1:
+        raise ValueError("replicates must be positive")
+
+    first = {str(r.race_id): r.validated() for r in first_test_races}
+    last = {str(r.race_id): r.validated() for r in last_test_races}
+    if set(first) != set(last):
+        raise ValueError("first and last test slices must contain identical race ids")
+    race_ids = sorted(first)
+    if not race_ids:
+        raise ValueError("at least one paired test race is required")
+
+    market_contrib: list[float] = []
+    value_contrib: list[float] = []
+
+    for race_id in race_ids:
+        one = first[race_id]
+        two = last[race_id]
+
+        market_first = race_log_loss(
+            one.market_probabilities,
+            one.winner_id,
+        )
+        market_last = race_log_loss(
+            two.market_probabilities,
+            two.winner_id,
+        )
+
+        hybrid_first = logarithmic_opinion_pool(
+            one.form_probabilities,
+            one.market_probabilities,
+            first_form_weight,
+        )
+        hybrid_last = logarithmic_opinion_pool(
+            two.form_probabilities,
+            two.market_probabilities,
+            last_form_weight,
+        )
+        hybrid_first_loss = race_log_loss(hybrid_first, one.winner_id)
+        hybrid_last_loss = race_log_loss(hybrid_last, two.winner_id)
+
+        market_contrib.append(market_first - market_last)
+        value_contrib.append(
+            (market_first - hybrid_first_loss)
+            - (market_last - hybrid_last_loss)
+        )
+
+    market_mean = sum(market_contrib) / len(market_contrib)
+    value_mean = sum(value_contrib) / len(value_contrib)
+
+    rng = Random(int(seed))
+    market_draws: list[float] = []
+    value_draws: list[float] = []
+    n = len(race_ids)
+    for _ in range(n_rep):
+        indexes = [rng.randrange(n) for _ in range(n)]
+        market_draws.append(
+            sum(market_contrib[i] for i in indexes) / n
+        )
+        value_draws.append(
+            sum(value_contrib[i] for i in indexes) / n
+        )
+
+    market_draws.sort()
+    value_draws.sort()
+    return PairedTestBootstrap(
+        replicates=n_rep,
+        seed=int(seed),
+        races=n,
+        market_improvement_mean=market_mean,
+        market_improvement_ci_low=_percentile(market_draws, 0.025),
+        market_improvement_ci_high=_percentile(market_draws, 0.975),
+        market_improvement_positive_fraction=(
+            sum(value > 0.0 for value in market_draws) / n_rep
+        ),
+        incremental_value_decline_mean=value_mean,
+        incremental_value_decline_ci_low=_percentile(value_draws, 0.025),
+        incremental_value_decline_ci_high=_percentile(value_draws, 0.975),
+        incremental_value_decline_positive_fraction=(
+            sum(value > 0.0 for value in value_draws) / n_rep
+        ),
+    )
