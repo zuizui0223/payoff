@@ -27,9 +27,13 @@ repeatedly.
 Planned source:
 
 - JRA-VAN Data Lab time-series win odds and race/result records;
-- JRA-VAN head-to-head data-mining forecast records (TM), using
-  **data category 1 = previous-day forecast** as the primary fixed public
-  information source.
+- JRA-VAN head-to-head data-mining forecast records (TM).
+
+For the retrospective primary route, use the accumulated TM result record
+(data category 7), which JRA-VAN support states should retain the same forecast
+value as the final pre-race forecast (data category 3). The previous-day
+category-1 record is a prospective-only extension because realtime mining
+records are overwritten by later forecast releases.
 
 Public JRA-VAN documentation states that time-series odds are recorded at
 roughly 5–10 minute intervals and that win/place, bracket quinella and quinella
@@ -69,12 +73,18 @@ case after the primary test is frozen.
 
 Use the last available odds snapshot at or before each target time:
 
-- T-60 min
 - T-30 min
 - T-15 min
 - T-10 min
 - T-5 min
 - LAST = final available pre-close snapshot
+
+The retrospective primary deliberately starts at T-30 rather than T-60. The
+final JRA-VAN mining forecast is released around the body-weight update
+approximately one hour before post, but the accumulated category-7 record does
+not preserve the original realtime release timestamp. Starting at T-30 creates
+a conservative buffer so the fixed forecast is not compared to market states
+that may predate its release.
 
 Never use a snapshot after the target time to fill an earlier slice.
 
@@ -110,20 +120,26 @@ fair probability.
 
 ## 6. Frozen public forecast
 
-The **primary** fixed information source is not a newly trained horse model.
+### 6.1 Retrospective primary
 
-Use the JRA-VAN head-to-head data-mining forecast record:
+Use the accumulated JRA-VAN head-to-head data-mining forecast record:
 
     record type: TM
-    data category: 1 = previous-day forecast
+    accumulated data category: 7 = result/Monday
+    substantive forecast represented: final pre-race forecast
+    realtime counterpart: data category 3 = pre-race forecast after body weight
     field: predicted score, 000.0--100.0
+
+JRA-VAN support has stated that the forecast value is not supposed to change
+when the record moves from category 3 to accumulated category 7; documented
+historical mismatches were treated as data errors.
 
 JRA-VAN describes the head-to-head model as predicting pairwise win/loss and
 constructing a per-horse score such that higher scores correspond to stronger
 predicted performance.
 
-For each race, standardize the previous-day scores within race and convert them
-to probabilities with one global training-only softmax scale lambda:
+For each race, standardize the fixed score within race and convert it to
+probabilities with one global training-only softmax scale lambda:
 
     z_ir
       =
@@ -135,16 +151,25 @@ to probabilities with one global training-only softmax scale lambda:
 
 Fit lambda on training races only by multinomial log loss, then freeze it.
 
-This gives a probability vector from a **public forecast released before the
-within-day odds path** without building a bespoke predictor whose feature
-engineering could itself create leakage or post hoc flexibility.
+The same f_ir is used at every retained market time slice from T-30 through
+LAST.
 
-The same f_ir is used at every within-race time slice.
+### 6.2 Prospective cleaner extension
 
-If the previous-day TM record cannot be recovered historically with its data
-category intact, the primary route is blocked. A self-built pre-market form
-model may then be developed only as a separately frozen secondary route; it is
-not silently substituted into the primary analysis.
+Realtime TM records distinguish:
+
+    1 = previous-day forecast
+    2 = same-day forecast after weather/track information
+    3 = final pre-race forecast after body-weight information
+
+but the realtime feed overwrites earlier forecast releases.
+
+Therefore a cleaner future test can start archiving category 1 as it arrives
+and preserve it before categories 2 and 3 overwrite it. That forward-collected
+previous-day score can then be compared against a much longer within-day market
+trajectory.
+
+The category-1 route is **not** silently backfilled from category 7.
 
 ## 7. Market-absorption combiner
 
@@ -303,7 +328,7 @@ only by calendar position, not predictive results.
 
 Training period:
 
-- fit the previous-day-score softmax scale lambda;
+- fit the fixed TM-score softmax scale lambda;
 - fit the time-specific log-pool weights w_t.
 
 Untouched test period:
