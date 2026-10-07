@@ -57,8 +57,8 @@ def market_probabilities_from_decimal_odds(
     reciprocal: dict[str, float] = {}
     for runner, value in odds.items():
         o = float(value)
-        if not isfinite(o) or o <= 1.0:
-            raise ValueError("decimal odds must be finite and greater than one")
+        if not isfinite(o) or o < 1.0:
+            raise ValueError("decimal odds must be finite and at least one")
         reciprocal[str(runner)] = 1.0 / o
     total = sum(reciprocal.values())
     return {runner: value / total for runner, value in reciprocal.items()}
