@@ -255,15 +255,20 @@ def perm_payload(rows, *, weighted=False):
 
 
 def meta_rows(frame, *, q, r, response, weighted=False):
+    """Build transition rows by column name, including Python keywords.
+
+    pandas.itertuples() renames invalid Python identifiers such as 'lambda';
+    dictionary access preserves the original source-column names.
+    """
     return [
         TransitionMetaRow(
-            flyway=str(row.flyway),
-            q=float(getattr(row, q)),
-            r=float(getattr(row, r)),
-            correction=float(getattr(row, response)),
-            weight=float(row.n if weighted else 1.0),
+            flyway=str(row["flyway"]),
+            q=float(row[q]),
+            r=float(row[r]),
+            correction=float(row[response]),
+            weight=float(row["n"] if weighted else 1.0),
         )
-        for row in frame.itertuples(index=False)
+        for row in frame.to_dict(orient="records")
     ]
 
 
