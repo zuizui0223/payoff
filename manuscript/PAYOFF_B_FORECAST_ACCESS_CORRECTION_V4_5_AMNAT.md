@@ -182,23 +182,23 @@ scale. For a Gaussian timing target Y and an analyst-observed environmental
 predictor X under optimal linear prediction and squared loss,
 
 [
-R0=sigma_Y^2,
+R0=σ_Y²,
 ]
 
 [
-R1=sigma_Y^2(1-rho^2),
+R1=σ_Y²(1-rho^2),
 ]
 
 and
 
 [
-G=sigma_Y^2 rho^2.
+G=σ_Y² rho^2.
 ]
 
 Here R0 is baseline variance without the predictor, R1 is residual prediction
 risk, and G_E is the variance reduction attributable to the predictor.
-Increasing rho can therefore increase ideal-observer forecast value while
-residual absolute uncertainty also increases if sigma_Y^2 grows sufficiently. Correlation,
+Increasing ρ can therefore increase ideal-observer forecast value while
+residual absolute uncertainty also increases if σ_Y² grows sufficiently. Correlation,
 forecast error, and information value need not have the same ordering.
 
 The earlier binary seasonal-decision model is a special case for organismally
@@ -532,16 +532,16 @@ source–destination pairs used by 28 species, mean detrended correlation
 increased from
 
 [
-rho_early=0.284
+ρ_early=0.284
 ]
 
 to
 
 [
-rho_late=0.653,
+ρ_late=0.653,
 ]
 
-giving mean delta-rho = +0.369. The pair-bootstrap 95% interval was +0.298 to
+giving mean Δρ = +0.369. The pair-bootstrap 95% interval was +0.298 to
 +0.436, and 26 of 28 species means were positive. The direction remained
 positive under source-cell and target-cell clustering, two-way source–target
 dependence, 5-degree and 10-degree spatial blocking, and global
@@ -863,7 +863,7 @@ The increase in standardized coupling is the preregistered result. The
 day-scale forecast decomposition, cross-validated forecast value, temporal-order
 audits, signed timing decomposition and stagewise analyses were constructed
 after that outcome was known and are therefore explicitly posthoc. They reveal
-structure hidden by rho but cannot be relabelled as confirmatory. The analysis
+structure hidden by ρ but cannot be relabelled as confirmatory. The analysis
 also does not identify anthropogenic climate change as the cause of any
 two-window difference.
 
