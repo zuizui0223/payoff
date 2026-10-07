@@ -1,0 +1,91 @@
+{
+  "schema": "payoff_b_qb_origin_regions_v1",
+  "frozen_date": "2026-10-08",
+  "role": "ENVIRONMENT_ONLY_ORIGIN_REGION_GEOMETRY",
+  "source": "Frozen Stage-3 barnacle-goose region centroids used by PAYOFF-B V7R",
+  "regions": [
+    {
+      "flyway": "greenland",
+      "region": "R1",
+      "latitude": 54.12699052,
+      "longitude": -10.20830001
+    },
+    {
+      "flyway": "greenland",
+      "region": "R2",
+      "latitude": 65.02682934,
+      "longitude": -20.13976642
+    },
+    {
+      "flyway": "svalbard",
+      "region": "R1",
+      "latitude": 54.95121976,
+      "longitude": -3.32914589
+    },
+    {
+      "flyway": "svalbard",
+      "region": "R2",
+      "latitude": 66.32837243,
+      "longitude": 12.21459239
+    },
+    {
+      "flyway": "barents",
+      "region": "R1",
+      "latitude": 53.47359936,
+      "longitude": 6.75896464
+    },
+    {
+      "flyway": "barents",
+      "region": "R2",
+      "latitude": 57.05492906,
+      "longitude": 17.96710635
+    },
+    {
+      "flyway": "barents",
+      "region": "R3",
+      "latitude": 58.6544569,
+      "longitude": 23.05104488
+    },
+    {
+      "flyway": "barents",
+      "region": "R4",
+      "latitude": 64.08688114,
+      "longitude": 36.08094909
+    },
+    {
+      "flyway": "barents",
+      "region": "R5",
+      "latitude": 67.63881918,
+      "longitude": 46.01750849
+    }
+  ],
+  "spatial_lattice": {
+    "center": true,
+    "radial_distance_km": 4,
+    "bearings_degrees": [
+      0,
+      45,
+      90,
+      135,
+      180,
+      225,
+      270,
+      315
+    ],
+    "total_points_per_region": 9
+  },
+  "historical_years": [
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011
+  ],
+  "claim_boundary": "No goose phase, stopover duration, lambda, or actuator outcome is used in this geometry file."
+}
