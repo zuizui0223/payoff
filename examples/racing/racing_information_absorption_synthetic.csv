@@ -1,0 +1,17 @@
+split,race_id,horse_id,time_slice,decimal_odds,form_probability,winner
+train,tr1,A,T-60,2.00,0.75,1
+train,tr1,B,T-60,2.00,0.25,0
+train,tr2,A,T-60,2.00,0.60,0
+train,tr2,B,T-60,2.00,0.40,1
+train,tr1,A,LAST,1.37,0.75,1
+train,tr1,B,LAST,3.70,0.25,0
+train,tr2,A,LAST,3.70,0.60,0
+train,tr2,B,LAST,1.37,0.40,1
+test,te1,A,T-60,1.96,0.72,1
+test,te1,B,T-60,2.04,0.28,0
+test,te2,A,T-60,2.04,0.28,0
+test,te2,B,T-60,1.96,0.72,1
+test,te1,A,LAST,1.41,0.72,1
+test,te1,B,LAST,3.45,0.28,0
+test,te2,A,LAST,3.45,0.28,0
+test,te2,B,LAST,1.41,0.72,1
