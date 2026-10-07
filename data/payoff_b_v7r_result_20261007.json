@@ -1,0 +1,71 @@
+{
+  "schema": "payoff_b_v7r_direct_recourse_result_v1",
+  "status": "PRIMARY_NOT_SUPPORTED",
+  "primary": {
+    "fit": {
+      "coefficient_names": [
+        "intercept",
+        "flyway[greenland]",
+        "flyway[svalbard]",
+        "Q",
+        "R",
+        "QxR"
+      ],
+      "coefficients": [
+        1.0138080438965449,
+        -0.3836525319873433,
+        0.04409992680225257,
+        -1.4037165530436049,
+        -0.2330269470872803,
+        1.3733376461853433
+      ],
+      "beta_QR": 1.3733376461853433,
+      "rss": 0.886683499061519,
+      "n": 10
+    },
+    "permutation": {
+      "observed_beta_QR": 1.3733376461853433,
+      "total_permutations": 2880,
+      "valid_permutations": 2880,
+      "count_at_least_observed": 1641,
+      "one_sided_p": 0.5699409927108643,
+      "permutation_min": -1.6687398125159179,
+      "permutation_median": 1.6330111181643718,
+      "permutation_max": 10.424237294697496
+    }
+  },
+  "sensitivities": {
+    "weighted_by_transition_n": {
+      "beta_QR": 0.9061626133365481
+    },
+    "R_q20_q80": {
+      "beta_QR": 1.1510282647695014
+    },
+    "R_local_edge_width": {
+      "beta_QR": 0.024497730599506037
+    },
+    "Q_signed_r": {
+      "beta_QR": 1.3712337436368935
+    },
+    "Q_r2": {
+      "beta_QR": 1.0880685219352886
+    },
+    "exclude_low_individual_support": {
+      "beta_QR": 1.4359647995944227
+    },
+    "raw_lambda": {
+      "beta_QR": 0.008363100677734991
+    }
+  },
+  "leave_one_transition_out_beta_QR": {
+    "min": 0.5394792947282637,
+    "max": 4.894809570570178,
+    "all_positive": true
+  },
+  "identity_check": {
+    "existing_stage3_lambdas_reproduced": 9,
+    "max_abs_difference": 1.1102230246251565e-15,
+    "newly_recomputed_transition": "barents:R5->R7",
+    "new_lambda": 0.8328581286430923
+  }
+}
