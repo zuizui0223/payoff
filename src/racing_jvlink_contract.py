@@ -20,6 +20,8 @@ class RacingHandoffAudit:
     tm_rows: int
     odds_rows: int
     candidate_races: int
+    excluded_no_valid_starters: int
+    excluded_non_single_winner: int
 
 
 def _parse_bool01(value: object, *, field: str) -> int:
@@ -103,14 +105,6 @@ def validate_normalized_handoff(
         if winner:
             winners_by_race.setdefault(race_id, []).append(horse_id)
 
-    for race_id in race_meta:
-        valid = valid_by_race.get(race_id, set())
-        if not valid:
-            raise ValueError(f"race has no valid starters: {race_id}")
-        winners = winners_by_race.get(race_id, [])
-        if len(winners) != 1:
-            raise ValueError(f"race must have exactly one winner: {race_id}")
-
     tm_keys: set[tuple[str, str]] = set()
     tm_by_race: dict[str, set[str]] = {}
     for row in tm_rows:
@@ -175,8 +169,16 @@ def validate_normalized_handoff(
         snapshots_by_race.setdefault(race_id, set()).add(snap_key)
 
     candidate = 0
+    excluded_no_valid_starters = 0
+    excluded_non_single_winner = 0
     for race_id in race_meta:
-        valid = valid_by_race[race_id]
+        valid = valid_by_race.get(race_id, set())
+        if not valid:
+            excluded_no_valid_starters += 1
+            continue
+        if len(winners_by_race.get(race_id, [])) != 1:
+            excluded_non_single_winner += 1
+            continue
         if tm_by_race.get(race_id, set()) != valid:
             continue
         if not valid.issubset(odds_by_race.get(race_id, set())):
@@ -191,4 +193,6 @@ def validate_normalized_handoff(
         tm_rows=len(tm_rows),
         odds_rows=len(odds_rows),
         candidate_races=candidate,
+        excluded_no_valid_starters=excluded_no_valid_starters,
+        excluded_non_single_winner=excluded_non_single_winner,
     )
