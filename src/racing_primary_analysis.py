@@ -87,14 +87,14 @@ def analyze_normalized_handoff(
     )
 
     valid_starters: dict[str, set[str]] = defaultdict(set)
-    winner_by_race: dict[str, str] = {}
+    winners_by_race: dict[str, list[str]] = defaultdict(list)
     for row in result_rows:
         race_id = str(row["race_id"])
         horse_id = str(row["horse_id"])
         if int(str(row["valid_starter"])) == 1:
             valid_starters[race_id].add(horse_id)
         if int(str(row["winner"])) == 1:
-            winner_by_race[race_id] = horse_id
+            winners_by_race[race_id].append(horse_id)
 
     scores_by_race: dict[str, dict[str, float]] = defaultdict(dict)
     for row in tm_rows:
@@ -112,14 +112,26 @@ def analyze_normalized_handoff(
         odds_by_race_time[race_id][when][horse_id] = float(row["decimal_odds"])
 
     exclusions = {
+        "no_valid_starters": 0,
+        "non_single_winner": 0,
         "tm_runner_set_mismatch": 0,
         "incomplete_time_panel": 0,
         "selected_snapshot_runner_set_mismatch": 0,
     }
     selected_by_race: dict[str, dict[str, object]] = {}
+    single_winner_by_race: dict[str, str] = {}
 
     for race_id, (race_day, post) in race_meta.items():
-        valid = valid_starters[race_id]
+        valid = valid_starters.get(race_id, set())
+        if not valid:
+            exclusions["no_valid_starters"] += 1
+            continue
+        winners = winners_by_race.get(race_id, [])
+        if len(winners) != 1:
+            exclusions["non_single_winner"] += 1
+            continue
+        single_winner_by_race[race_id] = winners[0]
+
         if set(scores_by_race.get(race_id, {})) != valid:
             exclusions["tm_runner_set_mismatch"] += 1
             continue
@@ -167,7 +179,7 @@ def analyze_normalized_handoff(
     training_scores = [
         PublicScoreRace(
             race_id=race_id,
-            winner_id=winner_by_race[race_id],
+            winner_id=single_winner_by_race[race_id],
             scores=scores_by_race[race_id],
         )
         for race_id in train_race_ids
@@ -196,7 +208,7 @@ def analyze_normalized_handoff(
 
     for race_id in eligible:
         split_name = split.assignment[race_meta[race_id][0]]
-        winner = winner_by_race[race_id]
+        winner = single_winner_by_race[race_id]
         form = form_by_race[race_id]
         for label in labels:
             selected = selected_by_race[race_id][label]
