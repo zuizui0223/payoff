@@ -105,7 +105,7 @@ EXTERNAL_ACTIONS = author metadata + funding/COI/contributions + AI disclosure a
 
 The paper should not carry the full PAYOFF hierarchy. In particular, do not make continuous architecture, general topology, generic spatial spectral theory, or rare-mutation occupancy co-equal storylines.
 
-## Paper 2: information coordination in seasonal tracking — ACCESS_BLOCKED submission state
+## Paper 2: information coordination in seasonal tracking — PORTAL_READY submission state
 
 Canonical PREOUTCOME source:
 
