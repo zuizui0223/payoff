@@ -1,185 +1,303 @@
-# PAYOFF-B V7R result — direct recourse × predictability
+# PAYOFF-B V7R result — forecast predictability is not the feedback-information coordinate
 
-Date: **2026-10-07**  
-Status: **PRIMARY OPENED — NULL**
+Date: **2026-10-07**
 
-## Primary result
+Status: **PRIMARY NUMERIC NULL; ACTIVE-CORRECTION INTERPRETATION NOT LICENSED**
+
+## 1. Frozen test opened
+
+The source-only gate admitted ten transition types across all three barnacle-goose flyways.
 
 The frozen model was
 
-[
+\[
 C_e
 =
-alpha_{m flyway}
+\alpha_{\rm flyway}
 +
-eta_Q Q_e
+\beta_Q Q_e
 +
-eta_R R_e
+\beta_R R_e
 +
-eta_{QR} Q_eR_e
+\beta_{QR}Q_eR_e
 +
-epsilon_e,
-]
+\epsilon_e,
+\]
 
 with
 
-[
-C_e=1-|lambda_e|.
-]
+\[
+C_e=1-|\lambda_e|.
+\]
 
 The directional prediction was
 
-[
-eta_{QR}>0.
-]
+\[
+\beta_{QR}>0.
+\]
 
-Observed:
+Nine previously reported transition lambdas reproduced from row-level transition pairs to machine precision:
 
-[
-hateta_{QR}=1.37334.
-]
+\[
+\max |\Delta\lambda|=5.55\times10^{-16}.
+\]
 
-The sign is positive, but the exact within-flyway permutation result is
+The tenth transition was opened with the same estimator:
 
-[
-p_{m perm}=0.56994
-]
+- Barents R5→R7
+- \(n=7\)
+- 3 individuals
+- \(\lambda=0.8328581286\).
 
-from all **2880/2880 valid permutations**.
+## 2. Primary result
+
+Observed interaction:
+
+\[
+\hat\beta_{QR}=1.3733376462.
+\]
+
+Exact within-flyway Q-label permutation:
+
+- 2880/2880 valid permutations
+- one-sided \(p_{\rm perm}=0.569940993\)
+- permutation median = 1.6330.
+
+The observed positive coefficient is below the permutation median.
 
 Therefore:
 
-[
-oxed{	ext{V7R primary prediction not supported.}}
-]
-
-## Outcome audit
-
-Nine of the ten focal transitions already had Stage-3 controller lambda values.
-Recomputing the same within-transition OLS slope from row-level phase pairs
-reproduced all nine to machine precision.
-
-Maximum absolute discrepancy:
-
-[
-5.6	imes10^{-17}.
-]
-
-The tenth transition, Barents R5→R7, had no prior controller row and was opened
-with the same slope definition:
-
-[
-lambda_{R5	o R7}=0.832858.
-]
-
-## Why the positive coefficient is not suggestive evidence
-
-The permutation distribution of (eta_{QR}) had:
-
-- minimum: −1.669
-- median: **1.633**
-- maximum: 10.424
-
-The observed coefficient, 1.373, is actually below the permutation median.
-
-Thus a positive interaction coefficient is common under within-flyway
-relabeling of environmental predictability.
-
-The direct descriptive association is also weak:
-
-[
-mathrm{corr}(Q_eR_e,C_e)=0.111
-]
-
-across all ten transitions, and only
-
-[
-0.006
-]
-
-within the six Barents transitions.
+\[
+\boxed{\text{V7R primary numerical prediction not supported.}}
+\]
 
 This is not an “almost significant” pattern.
 
-## Prespecified sensitivities completed
+## 3. Prespecified sensitivities
 
-| Analysis | beta_QR | exact permutation p |
+No prespecified sensitivity rescued the interaction.
+
+| Analysis | \(\beta_{QR}\) | exact permutation \(p\) |
 |---|---:|---:|
-| Primary | 1.373 | 0.570 |
-| weighted by transition n | 0.906 | 0.656 |
-| signed phenology r | 1.371 | 0.570 |
-| phenology r² | 1.088 | 0.607 |
-| exclude Barents R5→R7 low-individual-support row | 1.436 | 0.549 |
-| recourse envelope Q20–Q80 | 1.151 | 0.530 |
-| lambda endpoint, descriptive | 0.008 | 0.568 |
+| Primary Q10–Q90 remaining recourse | 1.373 | 0.570 |
+| weighted by transition \(n\) | 0.906 | 0.656 |
+| Q20–Q80 remaining recourse | 1.151 | 0.530 |
+| local one-step temporal width | 0.024 | 0.465 |
+| signed POWER phenology \(r\) | 1.371 | 0.570 |
+| POWER \(r^2\) | 1.088 | 0.607 |
+| POWER anomaly slope | 1.252 | 0.611 |
+| exclude low-individual-support R5→R7 | 1.436 | 0.549 |
+| ERA5 \(|r|\) | 1.562 | 0.497 |
+| ERA5 signed \(r\) | 1.377 | 0.530 |
+| ERA5 \(r^2\) | 0.905 | 0.603 |
 
-Leave-one-transition-out inference also remained unsupported. The smallest LOO
-permutation p was 0.121 after removing Barents R1→R2.
+Leave-one-transition-out estimates stayed positive, but none produced permutation support.
 
-## Interpretation
+The closest deletion was Barents R1→R2:
 
-The current data do **not** support the simple transition-level prediction:
+\[
+\beta_{QR}=4.895,\qquad p_{\rm perm}=0.121.
+\]
 
-> independently high environmental predictability and a broad remaining
-> temporal route window jointly produce stronger phase correction.
+Raw \(\lambda\) as a descriptive endpoint gave essentially no interaction:
 
-This does not refute PAYOFF-B's general information/actionability distinction.
+\[
+\beta_{QR}=0.00836,
+\qquad
+p_{\rm two-sided}=0.991.
+\]
 
-It does reject one concrete operationalization:
+The null is therefore not an environmental-product artifact or a single-transition artifact.
 
-- (Q): historical spring-onset predictability;
-- (R): population-envelope remaining arrival-time window;
-- response: transition-level phase-retention correction.
+## 4. Critical estimand audit
 
-## Biological implication
+The frozen response is not a clean measure of active correction.
 
-A broad remaining route-time window is apparently not enough to identify the
-recourse that animals actually use.
+The already existing PAYOFF route-wise identity is
 
-That is informative because the competitive-information audit had already shown
-that usable information cannot be decomposed from timing trajectories alone.
-V7R attempted an independent movement-based recourse proxy, but the proxy does
-not explain cross-transition phase correction in the predicted way.
+\[
+\lambda_t=\phi_t(1-g_t),
+\]
 
-The next useful move should therefore be **actuator-specific**, not another
-generic route-position proxy.
+where
 
-Candidate direct actionability quantities are:
+- \(\phi_t\) = passive phase carry-over / target-state persistence;
+- \(g_t\) = active feedback gain.
 
-- capacity to shorten the *current* stopover if late;
-- capacity to extend the current stopover if early;
-- attainable movement-speed increase on the immediately following segment;
-- route alternatives that are actually available from the current state.
+Therefore
 
-These are direction-specific. A symmetric remaining-window (R) may average
-together biologically different “speed up” and “slow down” capacities.
+\[
+1-|\lambda|
+\]
 
-## Claim boundary
+cannot be identified with active correction unless \(\phi\) is independently identified.
 
-Safe:
+This matters here because \(Q\) is itself cross-region environmental predictability. Changing environmental persistence can change \(\lambda\) even without a change in behavioral feedback.
 
-> A preregistered transition-level test using independently reconstructed
-> environmental predictability and a population-envelope route-time recourse
-> proxy did not detect the predicted interaction across ten barnacle-goose
-> transitions.
+So both statements must be kept simultaneously:
 
-Safe:
+1. **the preregistered numerical Q×R test is null**;
+2. **that response cannot cleanly answer whether active correction is Q×R-dependent**.
 
-> The null was stable to transition weighting, alternative predictability
-> coordinates, removal of the lowest-individual-support transition, and a
-> narrower recourse envelope.
+## 5. Direct behavioral actuator check
 
-Not licensed:
+The Stage-3 data contain a more direct actuator:
 
-- recourse does not matter;
-- environmental information does not matter;
-- the PAYOFF information/actionability idea is false;
-- the route-window proxy is direct physiological actionability.
+\[
+G_e
+=
+-\operatorname{slope}
+(\text{origin stopover duration}
+\sim
+\text{incoming phase error}).
+\]
 
-## Stop rule
+Positive \(G\) means a late bird shortens its stopover.
 
-Do not tune the remaining-window definition further to rescue V7R.
+The nine existing gain values reproduced to machine precision. The new Barents R5→R7 gain was
 
-Any next analysis must change the biological estimand from **symmetric route
-window** to a separately motivated **direction-specific actuator capacity**,
-and it must be labeled as a new route rather than a sensitivity of V7R.
+\[
+G=0.51048248.
+\]
+
+### Transition-level test
+
+\[
+\beta_{QR}=0.441857,
+\qquad
+p_{\rm perm}=0.750087.
+\]
+
+Weighted by transition \(n\):
+
+\[
+\beta_{QR}=0.232196,
+\qquad
+p_{\rm perm}=0.767789.
+\]
+
+Replacing POWER Q with ERA5 Q:
+
+\[
+\beta_{QR}=0.774162,
+\qquad
+p_{\rm perm}=0.593891.
+\]
+
+### Row-level actuator test
+
+All 95 individual transition rows were retained with transition-specific intercepts.
+
+The focal term was
+
+\[
+\text{incoming phase error}\times Q_{\rm forecast}\times R.
+\]
+
+Stronger corrective shortening predicts a negative coefficient.
+
+Observed:
+
+\[
+\hat\beta_{EQR}=-0.277659,
+\qquad
+p_{\rm perm}=0.429712.
+\]
+
+Thus the direct stopover actuator also does not support the original \(Q_{\rm forecast}\times R\) prediction.
+
+## 6. The informative counterexamples
+
+The strongest clue is not a marginal p value. It is that strong stopover feedback occurs on transitions with almost no endpoint spring predictability.
+
+### Barents R1→R5
+
+- \(|r_{\rm phenology}|=0.00238\)
+- \(R=1.00\)
+- \(\lambda=-0.00857\)
+- stopover gain \(=0.78696\).
+
+### Svalbard R2→R4
+
+- \(|r_{\rm phenology}|\approx0.00148\)
+- \(R\approx0.175\)
+- \(\lambda=-0.10632\)
+- stopover gain \(=0.588996\).
+
+Therefore high cross-site climatic predictability is not a necessary condition for strong stopover response to incoming phase error in these data.
+
+## 7. The information coordinate was too coarse
+
+The attempted Q combined two different biological information problems.
+
+### Forecast / feedforward information
+
+\[
+q_F(t)
+=
+\text{how well current conditions predict future-region conditions}.
+\]
+
+The Kölzsch consecutive-region 30-year spring correlations measure this type of information.
+
+### Feedback / state-estimation information
+
+\[
+q_B(t)
+=
+\text{how accurately the migrant can infer its current phase error locally}.
+\]
+
+This is the information required by the route-wise feedback controller.
+
+They are not equivalent:
+
+\[
+\boxed{q_F(t)\neq q_B(t)}.
+\]
+
+A migrant can have poor long-range forecasting information and still make strong closed-loop corrections after observing local conditions.
+
+This interpretation is consistent with the migration literature: Kölzsch et al. explicitly discuss different cue types at different migration stages, while migration-network theory emphasizes repeated updating at intermediate stopovers.
+
+## 8. Consequence for PAYOFF-B
+
+The competitive-information audit forced separation of different reasons information value can disappear.
+
+V7R now forces a second separation:
+
+\[
+\text{information about the future state}
+\neq
+\text{information about current mismatch}.
+\]
+
+A one-dimensional \(q(t)\) is therefore too coarse for the sequential migration controller.
+
+The next theory version should distinguish at least:
+
+\[
+q_F(t)=\text{forecast/feedforward information},
+\]
+
+\[
+q_B(t)=\text{feedback/state-estimation information},
+\]
+
+and
+
+\[
+r(t)=\text{retained actionability}.
+\]
+
+## 9. Stop rule
+
+Do not tune thresholds, add transitions, or add taxa to rescue the failed interaction.
+
+Close:
+
+\[
+\boxed{\text{V7R }q_F\times r\text{ route = NOT SUPPORTED}.}
+\]
+
+Any \(q_B\) test must begin under a new prospective contract with an independent local cue-reliability coordinate that is not constructed from the focal stopover or phase-correction response.
