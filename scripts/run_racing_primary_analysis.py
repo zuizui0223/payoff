@@ -32,6 +32,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--score-max-scale", type=float, default=5.0)
     p.add_argument("--score-grid-points", type=int, default=501)
     p.add_argument("--pool-grid-points", type=int, default=101)
+    p.add_argument("--bootstrap-replicates", type=int, default=2000)
+    p.add_argument("--bootstrap-seed", type=int, default=20261007)
     return p.parse_args()
 
 
@@ -56,6 +58,8 @@ def main() -> int:
         score_max_scale=args.score_max_scale,
         score_grid_points=args.score_grid_points,
         pool_grid_points=args.pool_grid_points,
+        bootstrap_replicates=args.bootstrap_replicates,
+        bootstrap_seed=args.bootstrap_seed,
     )
     payload = {
         "schema": "payoff_b_racing_retrospective_primary_v1",
