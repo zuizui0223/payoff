@@ -26,7 +26,10 @@ repeatedly.
 
 Planned source:
 
-- JRA-VAN Data Lab time-series win odds and race/result records.
+- JRA-VAN Data Lab time-series win odds and race/result records;
+- JRA-VAN head-to-head data-mining forecast records (TM), using
+  **data category 1 = previous-day forecast** as the primary fixed public
+  information source.
 
 Public JRA-VAN documentation states that time-series odds are recorded at
 roughly 5–10 minute intervals and that win/place, bracket quinella and quinella
@@ -92,37 +95,43 @@ for proper-score comparison.
 The market probability is treated as a collective forecast, not as a guaranteed
 fair probability.
 
-## 6. Frozen non-market form model
+## 6. Frozen public forecast
 
-Construct one **pre-market form model** using information fixed before the
-within-day odds trajectory being evaluated.
+The **primary** fixed information source is not a newly trained horse model.
 
-Candidate feature families may include:
+Use the JRA-VAN head-to-head data-mining forecast record:
 
-- horse prior-race performance;
-- distance / surface / course;
-- age / sex / carried weight;
-- draw;
-- jockey and trainer historical summaries;
-- class / race conditions;
-- prior rest interval.
+    record type: TM
+    data category: 1 = previous-day forecast
+    field: predicted score, 000.0--100.0
 
-The exact feature list must be frozen before the held-out test outcomes are
-opened.
+JRA-VAN describes the head-to-head model as predicting pairwise win/loss and
+constructing a per-horse score such that higher scores correspond to stronger
+predicted performance.
 
-Crucially, this form model must not use:
+For each race, standardize the previous-day scores within race and convert them
+to probabilities with one global training-only softmax scale lambda:
 
-- contemporaneous odds;
-- future odds;
-- final odds;
-- same-race outcome information;
-- any variable released only after the declared form-model information cutoff.
+    z_ir
+      =
+    (score_ir - race_mean_r) / race_sd_r
 
-Let its within-race win probability be
+    f_ir(lambda)
+      proportional to
+    exp(lambda z_ir).
 
-    f_ir.
+Fit lambda on training races only by multinomial log loss, then freeze it.
+
+This gives a probability vector from a **public forecast released before the
+within-day odds path** without building a bespoke predictor whose feature
+engineering could itself create leakage or post hoc flexibility.
 
 The same f_ir is used at every within-race time slice.
+
+If the previous-day TM record cannot be recovered historically with its data
+category intact, the primary route is blocked. A self-built pre-market form
+model may then be developed only as a separately frozen secondary route; it is
+not silently substituted into the primary analysis.
 
 ## 7. Market-absorption combiner
 
@@ -275,9 +284,12 @@ opening the corresponding outcome table.
 
 Minimum structure:
 
-- training period: fit the form model and w_t values;
-- calibration period: probability calibration only;
+- training period: fit the previous-day-score softmax scale lambda and the
+  time-specific log-pool weights w_t;
 - untouched test period: all reported primary endpoints.
+
+The public-score calibration and market-combination weights are therefore both
+estimated without using the test outcomes.
 
 No random horse-level split is allowed because horses recur across races and
 would leak identity/history across folds.
