@@ -21,7 +21,7 @@ The useful PAYOFF-B role is narrower:
 4. unlike migration or phenology, physical actionability can be approximately held fixed until the wagering cutoff;
 5. therefore racing can help separate **loss of actionability** from **loss of relative information advantage**.
 
-This makes racing a useful negative-control / mechanism-separation system, not yet a standalone novelty route.
+This makes racing a useful negative-control / mechanism-separation system, **not a standalone novelty route**. The Green et al. (2019) diffusion result closes the broad standalone route.
 
 ## Closest prior art
 
@@ -68,6 +68,45 @@ Collision:
 
 - prediction accuracy need not improve monotonically with more raw information;
 - information diffusion and trader composition matter dynamically.
+
+### Green, Sung, Ma & Johnson 2019 — direct diffusion-of-forecast-value collision
+
+Lawrence Green, Ming-Chien Sung, Tiejun Ma & Johnnie E. V. Johnson,
+*To what extent can new web-based technology improve forecasts? Assessing the
+economic value of information derived from Virtual Globes and its rate of
+diffusion in a financial market*, European Journal of Operational Research
+278(1):226–239.
+
+This is a stronger collision than the earlier audit recorded. Using a
+horse-race betting market over an eighteen-year period, the paper asks whether
+new geospatial information improves winning-probability forecasts, whether the
+information creates temporary economic value, and how quickly that value
+disappears as the market learns to use the same information.
+
+The paper reports exactly the broad competitive-information pattern that a
+standalone PAYOFF racing paper might otherwise try to claim:
+
+    novel forecast information has value
+        ->
+    market participants learn / information diffuses
+        ->
+    market odds increasingly discount it
+        ->
+    the incremental opportunity disappears.
+
+Directly occupied territory:
+
+- forecast information with value beyond market prices;
+- changing incremental value as information diffuses;
+- rate of information diffusion through a horse-racing betting market;
+- longitudinal disappearance of an informational edge.
+
+Therefore **information-value decay through market diffusion is established
+prior art**, not a PAYOFF-B empirical novelty.
+
+The remaining PAYOFF use is mechanism contrast: Green et al. supply an
+empirical example of value decay through diffusion while PAYOFF-B ecology asks
+about value decay through lost biological actionability.
 
 ### Hanyu, Ishii, Otani & Teramoto 2026 — direct Japanese parimutuel collision
 
@@ -135,9 +174,17 @@ Keep this route on an exploratory branch.
 
 Do not merge it into a frozen PAYOFF-B manuscript as a new empirical result.
 
-Promotion would require one of two things:
+Promotion is now limited to one route:
 
-1. **PAYOFF validation route:** preregister racing as an external mechanism-separation test of the general information-value geometry; or
-2. **prediction route:** define a genuinely distinct forecasting problem, such as whether a model’s standalone proper score keeps improving while its incremental proper-score advantage over the contemporaneous market peaks earlier, and demonstrate that this estimand is not already answered by the interim-odds literature.
+1. **PAYOFF validation / teaching route:** use racing as an external
+   mechanism-separation or negative-control system for the general
+   information-value geometry.
 
-No racing outcome should be opened to choose the time windows or the preferred direction before that distinction is frozen.
+The broad **standalone racing novelty route is CLOSED** unless a later,
+independently motivated question survives a new prior-art audit. The present
+proper-score design may still be useful as a clean demonstration, but success
+must not be described as discovering that markets absorb useful public
+information.
+
+No racing outcome should be opened to choose the time windows or the preferred
+direction before the validation role is frozen.
