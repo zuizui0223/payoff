@@ -24,3 +24,13 @@ Above-null same-individual stage5 schedule residual would reject only a **fully 
 A stage5-versus-stage3 comparison cannot be read as within-individual adaptation because the two event processes have different biological stages and measurement errors. There is no observed stage-specific resource cue or independent feasible action set. Breeding success is intentionally absent from this identity-only audit.
 
 This route remains a mechanistic *negative control* on claims that timing variance contraction and stopover duration are proof of active ecological feedback. Do not start another independent manuscript based on this source-only consistency statistic.
+
+## Independent prior-art search (performed after preliminary correlations were already viewed)
+
+- Franklin et al. (2022), Journal of Animal Ecology 91:1416–1430, DOI 10.1111/1365-2656.13697, meta-analysed 177 timing-repeatability effect sizes from 47 bird species. Individual repeatability of avian migration timing averaged ~0.414. Individual migration timing persistence is therefore broadly established, NOT a novel goose trait.
+- Birds use individually consistent temperature cues to time their migration departure (2021), https://pmc.ncbi.nlm.nih.gov/articles/PMC8285904/, followed 48 Asian houbara across years, linking individually consistent departure cues to spring responsiveness. Repeatability is compatible with use of environmental information, NOT sufficient to label decisions as fixed internal clocks.
+- A 2025 greylag goose departure-order study, DOI 10.1007/s00265-025-03637-w, also demonstrates repeatable individual/group departure behavior. Social structure is an important unmeasured alternative.
+
+The apparent same-individual persistence in this Greenland white-fronted goose source must thus be read as a **source-specific stratified calendar diagnostic and a negative control on feedback inference**, not a new species-general mechanism.
+
+Additional caveat: the stage-5 departure SD varies across the five calendar years; standardizing within each year is necessary. The 2021 source study demonstrates that stable individual *temperature thresholds* can generate stable seasonal order while dates still change between years, further invalidating the facile inference of innate fixed annual departure timing from repeatability alone.
