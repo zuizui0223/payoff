@@ -28,6 +28,7 @@ jobs:
       - name: Read exactly published houbara workbook events and source code
         run: python scripts/payoff_b_houbara_event_time_recourse_gate.py
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: payoff-b-houbara-event-time-and-recourse-source-audit
           path: outputs/payoff_b_houbara_event_time_recourse_gate_20261008.json
