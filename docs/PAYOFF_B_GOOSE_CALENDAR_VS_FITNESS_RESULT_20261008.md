@@ -155,10 +155,28 @@ and −0.048707**. This result is thus not directionally uniform
 across years: deterioration in the final held-out year outweighs
 small apparent gains in the first four.
 
-This remains a provisional independent cross-check while the repaired
-dedicated GitHub workflow is queued. Do NOT cite a GitHub CI success for
-the *fitness* comparison until the repaired run succeeds and the
-bird-cluster resampling receipt has been read.
+**Verified against the repaired GitHub workflow**:
+- GitHub Actions run **37770592060**, job **113288924463**: all synthetic
+  identity checks, source validation, retrospective and as-of-stage5
+  cross-validation, and artifact upload **PASS**.
+- Artifact **11548035498** (SHA256
+  5be659e601dd0cb03b7c369700a870dfa433af01a4f8d636daf46b5b62f9c466)
+  contains all three JSON outputs.
+- Source Python logistic analysis independently reproduces the exact
+  separate JavaScript results in the table above.
+- A0→A1 mean held-year log-loss improvement +0.016495; 4,000 bird-cluster
+  validation-only 95% interval **[−0.018465, +0.051306]**.
+- A1→A2 mean improvement **−0.003492**, 4,000 bird-cluster validation-only
+  95% interval **[−0.016315, +0.009070]**, which crosses zero.
+- These intervals resample precomputed held-year prediction errors by bird
+  but **do not refit the model** in each bootstrap draw and do not account
+  for only five independent calendar-year regimes. They are descriptive
+  uncertainty bounds, not causal selection tests or formal equivalence
+  intervals.
+
+The corrected stage5-safe comparison was therefore **completed and
+independently checked**, with no strong support for additional staging-duration
+predictive information in this prespecified covariate contrast.
 
 A1→A2 comparison is also a **calendar-geometry test**, not a unique
 independent staging effect: when stage3 start is known, adding its difference
