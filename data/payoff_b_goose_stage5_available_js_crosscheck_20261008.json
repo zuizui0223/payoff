@@ -1,6 +1,6 @@
 {
   "date": "2026-10-08",
-  "status": "INDEPENDENT_JS_STAGE5_SAFE_CROSSCHECK__PYTHON_CI_REPLICATION_PENDING",
+  "status": "INDEPENDENT_JS_STAGE5_SAFE_CROSSCHECK_REPLICATED_BY_GITHUB_PYTHON_CI_SUCCESS",
   "source_commit": "2171bcd36bf37022c8716e15c0f75412103b0f3f",
   "dryad_crlf_sha256": "9ef98e6b5e979e93476ed076a018db13bdf03aab6dcc5ca728b5fd866e79c1bd",
   "birds": 49,
@@ -50,7 +50,15 @@
       "3": 0.005237571648732636,
       "4": 0.0037485559300433403,
       "5": -0.04870728039932584
-    }
+    },
+    "A0_minus_A1_bird_cluster_validation_only_95": [
+      -0.01846529616116505,
+      0.05130636272944271
+    ],
+    "A1_minus_A2_bird_cluster_validation_only_95": [
+      -0.016314897109797378,
+      0.009070464605349734
+    ]
   },
   "previous_retrospective": {
     "M0_loss": 0.5972936753989692,
@@ -59,10 +67,14 @@
     "warning": "stage6 begins after stage5; models not available at staging departure"
   },
   "CI_gate": {
-    "first_workflow_run": 37767663115,
-    "status": "FAILED_ON_SYNTHETIC_TOY_HARDCODED_SAMPLE_LENGTH",
-    "fix": "assert heldout coverage equals input sample size (125 toy, 107 source), plus guard no stage6 in as-of exit feature set",
-    "current_repaired_workflow_status": "pending, check before claiming validated uncertainty"
+    "failed_workflow_run": 37767663115,
+    "failure": "original 125-row synthetic fixture rejected by a hardcoded 107-row input assertion, no real fitness model run on that failed job",
+    "fix": "Check heldout predictions equal actual input sample and disallow stage6 features at exit; both retrospective and exit-safe models tested",
+    "passing_workflow_run": 37770592060,
+    "passing_job": 113288924463,
+    "archived_artifact_id": 11548035498,
+    "artifact_sha256": "5be659e601dd0cb03b7c369700a870dfa433af01a4f8d636daf46b5b62f9c466",
+    "outcome": "PASS; source Python output exactly matches independent JS for all model logloss and gains"
   },
   "interpretation": [
     "No incremental held-year predictive benefit of realized staging duration in this fixed feature comparison; not an equivalence test.",
@@ -70,5 +82,13 @@
     "Stage5 duration with stage3 start is equivalent to stage5 exit date, so structural alias blocks causal timing interpretation.",
     "No independent belief/cue, recourse maximum or causal fitness mechanism identified.",
     "The source study already modeled arrival, feeding, energetics and breeding; not new main-effect ecology."
+  ],
+  "limitations": [
+    "Bird-cluster 4,000 resamples treat fitted held-year predicted losses as fixed; model training uncertainty and only five source years are not included",
+    "Neither added feeding/activity proxies nor actual staging duration has a reliably nonzero incremental log-loss gain under these descriptive 95% intervals",
+    "The A0/A1/A2 models exclude stage6, but proxy feeding fractions do not establish an animal's own information state",
+    "Staging duration plus stage3 start is algebraically equivalent to stage5 exit day; association cannot identify active control",
+    "Source 107 bird-years vs original 108 breeding attempts differs by one published failure; unresolved",
+    "Known published main effects from Schindler 2024 are not independent discoveries"
   ]
 }
