@@ -58,6 +58,39 @@ model with observed future W1 to a baseline without forecast access is
 not sufficient because W1 may be postdecision or a direct weather
 hazard correlated with the environment at departure.
 
+## Identifiability warning: weather contingency is not re-planning
+
+A fixed conditional rule decided before departure,
+
+    if headwind encountered later exceeds a threshold, land;
+
+and a process of dynamically revising a prior intended non-stop
+flight after new headwind information can generate the **same**
+observed wind–landing response. An immediate physical constraint
+(e.g. insufficient remaining flight range under headwind) can do so
+as well. This is a basic observational equivalence in sequential
+decision theory, NOT a novel theorem.
+
+Merely adding contemporaneous W1 after origin W0 to a flight-level
+landing regression can show that **later weather has incremental
+predictive information**. It does not show a new *policy* was learned
+or that animals made accurate subjective predictions. To establish
+policy revision, one would additionally need at least one of:
+- a separately recorded plan or probability forecast before departure
+  and a different updated plan before landing;
+- experimental access to equivalent observed weather under different
+  predeparture information sets with independent feasible actions;
+- repeated policy choices under matched weather, varying verified
+  forecast histories while accounting for birds' habits and route
+  social structure.
+
+The Rüppel original source has one observed flight per tracked bird
+(178/178), **no archived departure-issued forecast of its later flight
+weather**, and no flight-in-progress land/continue risk intervals.
+The authors already included northward wind change during flight in
+their landing model. Thus current case is a **source-gated
+observational benchmark**, not a new learned-controller test.
+
 ## Required diagnostic negative controls
 
 1. **Temporal gate**: all covariates for B2 are measured strictly before
