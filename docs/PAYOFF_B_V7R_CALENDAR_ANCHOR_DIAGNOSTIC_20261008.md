@@ -227,6 +227,35 @@ The original V7R result remains \(\beta_{QR}=1.3733\), \(p=0.56994\).
 Do not interpret this as either a causal disproof or confirmation of
 biological recourse loss.
 
+## 5.7 Shared behavioral data between recourse proxy and phase response
+
+The registered \(R\) proxy is independent of the **numerical phase errors**
+used to fit \(\lambda\), but it is **not measured independently of the
+behavioral-duration data that enter the phase-transfer response**.
+
+In the registered construction:
+
+- \(R\) is a Q10–Q90 envelope of observed origin stopover duration plus
+  transit time, accumulated over the route graph;
+- \(\lambda\) is the regression slope of destination phase on origin phase;
+- but the identity in Section 2 shows that destination phase itself includes
+  those same realized stopover and transit durations.
+
+Thus \(R\) and \(C=1-|\lambda|\) share upstream behavioral data. The overlap
+does not force a non-zero regression interaction algebraically, but it defeats
+any claim that \(R\) was a truly independent, externally determined
+physiological capacity or feasible-action-set measurement.
+
+**Consequence:** a well-supported \(Q\times R\) association, had it appeared,
+would still have required a more stringent causal design. The observed null
+does not overcome this limitation either.
+
+A stronger test requires direct recourse constraints measured separately from
+focal realized behavior — such as externally imposed habitat access, speed
+limits, measured fuel budgets, or a prospectively defined physical movement
+envelope. This exploratory note does not re-engineer V7R after outcome
+exposure.
+
 ## 6. Ecological interpretation and stop rule
 
 **Observed:** Some individuals reached the last wintering-region local stop
