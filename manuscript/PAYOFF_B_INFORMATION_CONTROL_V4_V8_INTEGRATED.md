@@ -11,8 +11,10 @@ information: if seasonal conditions become harder to predict, migrants and
 their resources should decouple. We ask a more general question: **is better
 environmental predictability sufficient for better realized tracking?**
 
-**Location:** General theory, with empirical tests in migratory birds and
-individual-level mechanism evidence from mule deer in North America.
+**Location:** General theory, with tests of environmental timing
+proxies in migratory birds and observational movement correlates in
+mule deer in North America. The underlying individual feedback controller
+and its energetic fitness payoff have not been causally identified.
 
 **Time period:** The principal bird analysis compares 2002–2009 with
 2010–2017; supporting natural systems are dataset-specific.
@@ -753,11 +755,21 @@ These original studies bar promotion of a new causal correction
 mechanism merely because our goose records show staging
 duration inversely correlated with staging entry timing.
 
-### 3.5 Pink-footed geese update environmental information en route
+### 3.5 Pink-footed goose environmental associations vary among migration stages
 
-In pink-footed geese, the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers informs northward progression.
+Published pink-footed goose studies report that relationships with day length,
+local accumulated temperature and other environmental variables differ among
+successive migration stages. Temperature measured near stopovers is associated
+with later northward progression. These results establish **stage-specific
+weather–behavior associations**, not a measurement of each bird's
+subjective forecast before departure or a comparison of the bird's prior
+prediction with information newly obtained along the route.
 
-This is consistent with the route-wise premise that migration itself can expose animals to information unavailable at the origin.
+Such stage dependence is compatible with the route-wise PAYOFF-B controller,
+but also with a precommitted schedule, locally responsive weather hazards,
+physiological readiness and differences in available stopover habitat.
+The source associations alone do **not** identify sequential Bayesian
+belief updating or a corrective policy.
 
 ### 3.5a Calendar anchoring is a structural alternative to active feedback
 
@@ -1149,11 +1161,14 @@ A decision controller predicts **signed post-entry correction**: late actors
 advance, early actors delay, and repeated correction can narrow the phase
 distribution.
 
-Mule deer now provide both signatures in one population. March scaled IFBFat
-predicts later migration-start timing in a conservative predeparture subset,
-whereas signed starting phase predicts speed and stopover after departure. A
-prespecified DFP × IFBFat moderation test did not support stronger signed
-feedback at higher IFBFat.
+In mule deer, March scaled IFBFat is associated with subsequent
+migration-start timing in a conservative predeparture subset, while
+observed starting resource-relative phase is associated with later
+speed and stopover measures. These are *different observational
+correlates* in a single population, not independent measurements of an
+animal's private readiness timer and its feedback-control policy.
+Importantly, the prespecified DFP × IFBFat moderation test failed to
+support stronger signed adjustment among better-conditioned deer.
 
 A second frozen downstream-phase test also rejected the **pure entry-only
 Markov handoff** as a complete description: in
