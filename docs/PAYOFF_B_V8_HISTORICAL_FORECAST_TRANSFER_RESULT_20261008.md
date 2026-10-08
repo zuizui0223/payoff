@@ -55,7 +55,7 @@ Thus neither bird ignorance, inability to correct, nor rational costly undertrac
 
 ## Next warranted diagnostic / decisive ecological extension
 
-1. Before using the negative-to-positive group as biology, quantify year-within-early sign stability and historical leave-one-year-out predictive value; a trained inverse relationship that was never predictive even in the earlier period cannot be called "formerly useful learning."
+1. **COMPLETED (post-result):** early-period leave-one-year-out testing and sign-stability audit. Only 25/44 negative-to-positive pairs are eligible for historical out-of-fold testing; 2/25 have positive historical forecast gains, and both share destination cell 45 with trivial earlier gains. The proposed broadly formerly-useful learned inverse relationship is **not supported** as ecological evidence; see the dated audit below.
 2. For an actual ecological payoff claim, obtain time-stamped cue availability on tracked migration paths, independently measured correction options, actual behavioral revision and downstream resource/fitness effects.
 3. Do not tune or alter the frozen V8 environmental or bird analysis, report the source-only result as exploratory supplementary material only if interpretation survives basic dependence and prior-art checks.
 
@@ -75,3 +75,45 @@ The held-out ZIP contains 1,328 unique environmental pair-year rows (166 spatial
 This is a **descriptive temporal-opportunity proxy**. Mid-greenup is a retrospective seasonal outcome, not automatically a timestamped predecision cue. A bird might respond to temperatures, partial snowmelt or earlier greenness well before the completed mid-greenup date. Also, a south-to-north spatial-pair mapping does not identify actual migratory paths, arrival times, flight durations or the remaining physiological action set. Therefore neither +11 days nor any threshold comparison is an effective decision deadline or measured recourse. It is a concrete reason not to interpret improved environmental forecast skill as observed bird information availability.
 
 Calculated independently from the four immutable CSVs in the workflow artifact; no V8 bird outcomes were accessed.
+
+
+## Post-result historical sign-stability audit (supersedes the pending item above)
+
+After observing the environmental transfer outcome, a separate source-only
+historical leave-one-year-out diagnostic ran successfully as workflow run
+37742794844 / job 113197192529. Archived ZIP: artifact 11534442191, SHA256
+a4f3517787d850cd2078236c9ceef9dc4d73b73eebd3e43a60fd2e03577a5d39.
+Its three output CSVs are alongside the original four climate forecasting CSVs.
+
+- All 166 original spatial pairs remain in the source table.
+- Only **96/166** have at least 7 early paired years, permitting
+  leave-one-year-out training with at least 6 observations. The other
+  70 cannot supply this diagnostic without relaxing its design.
+- Among 44 apparent early-negative / late-positive pairs, only 25 are
+  eligible for the leave-one-year-out analysis.
+- Among those 25, **19** retain negative early correlation in at least
+  75% of the leave-one-year-out recalculations; **22** have harmful
+  historical-rule performance in the later era.
+- Crucially, only **2/25** exhibited even **positive** earlier
+  out-of-year forecast improvement; these are the only two satisfying
+  all three descriptive gates.
+- Those two pairs are **66->45** and **79->45**, both with the same target
+  cell 45. Their earlier cross-validated improvements were only
+  **+0.0184** and **+0.0025**, respectively: negligible in scale.
+- In the 25 negative-to-positive eligible pairs, the median historical
+  cross-validated improvement is **-0.6449**. A negative early fitted
+  correlation therefore very often **was not historically predictive**.
+
+This is **negative evidence for promoting an experience-value reversal story**
+from this particular spatial climate panel. Even two weak positive earlier
+contrasts are not independent because they share an environmental target, and
+neither is a known signal learned by a tagged migrant.
+
+The hypothesis that genuine historical experience can someday become harmful
+remains mathematically possible. The present data do not establish that
+mechanism; further fitting to these 44 source pairs should not be treated as
+a prospective discovery. A valid ecological test requires behaviorally
+observed cue use and independent individual action/fitness outcomes.
+
+The fixed V8 environmental result (+0.369 signed mean correlation change)
+and its unsupported registered bird-mismatch transfer remain untouched.
