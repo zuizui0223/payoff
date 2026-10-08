@@ -34,6 +34,29 @@ FEATURESETS = {
     "M2_duration": ("year", "stage3", "stage6", "staging_feeding",
                     "staging_odba", "staging_duration"),
 }
+
+# Stage6 is later than exit at stage5. The legacy FEATURESETS are only a
+# retrospective post-arrival outcome description, not available at exit.
+# This independent forecast contrast uses only measurements completed by
+# stage5 and was locked in the source contract before its outcomes were read.
+AS_OF_STAGE5_FEATURESETS = {
+    "A0_calendar_at_exit": ("year", "stage3"),
+    "A1_resource_at_exit": (
+        "year", "stage3", "staging_feeding", "staging_odba"
+    ),
+    "A2_duration_at_exit": (
+        "year", "stage3", "staging_feeding", "staging_odba", "staging_duration"
+    ),
+}
+RETROSPECTIVE_COMPARISONS = (
+    ("M0_calendar", "M1_energy", "energy_given_calendar"),
+    ("M1_energy", "M2_duration", "duration_given_energy"),
+)
+AS_OF_EXIT_COMPARISONS = (
+    ("A0_calendar_at_exit", "A1_resource_at_exit", "resource_given_calendar"),
+    ("A1_resource_at_exit", "A2_duration_at_exit", "duration_given_resource"),
+)
+
 RIDGE = 2.0
 BOOT = 4000
 SEED = 20261008
@@ -195,8 +218,9 @@ def _percentile(xs,p):
     return arr[j]*(1-(pos-j))+arr[k]*(pos-j)
 
 
-def calculate(rows):
-    preds=defaultdict(list)
+def calculate(rows, feature_sets=FEATURESETS,
+              comparisons=RETROSPECTIVE_COMPARISONS,
+              prediction_epoch="retrospective_after_stage6"):
     all_rows=[]
     for heldyear in range(1,6):
         train=[r for r in rows if r["year"]!=heldyear]
@@ -204,14 +228,14 @@ def calculate(rows):
         if len(train)<50 or len(test)<7 or len(set(r["response"] for r in train))!=2:
             raise ValueError("year-fold outcome support insufficient")
         fitted={}
-        for name,features in FEATURESETS.items():
+        for name,features in feature_sets.items():
             xtrain,xtest=_design(train,test,features)
             beta=_ridge_logistic(xtrain,[r["response"] for r in train])
             fitted[name]=[_sigmoid(sum(b*v for b,v in zip(beta,x)))
                           for x in xtest]
         for i,row in enumerate(test):
             x={"bird":row["bird"],"year":heldyear,"y":row["response"]}
-            for name in FEATURESETS:
+            for name in feature_sets:
                 prob=fitted[name][i]
                 x[name+"_loss"]=_loss(row["response"],prob)
                 x[name+"_brier"]=(prob-row["response"])**2
@@ -220,10 +244,7 @@ def calculate(rows):
     if len(all_rows)!=len(rows):
         raise ValueError("held-year predictions did not cover all supplied bird-years")
     compare={}
-    for baseline,new,tag in [
-        ("M0_calendar","M1_energy","energy_given_calendar"),
-        ("M1_energy","M2_duration","duration_given_energy"),
-    ]:
+    for baseline,new,tag in comparisons:
         diffs=[r[baseline+"_loss"]-r[new+"_loss"] for r in all_rows]
         briers=[r[baseline+"_brier"]-r[new+"_brier"] for r in all_rows]
         bybird=defaultdict(list)
@@ -259,6 +280,7 @@ def calculate(rows):
         categories[str(r["category"])]+=1
     return {
         "status":"POST_PUBLISHED_OUTCOME_EXPLORATORY_PREDICTION_NOT_CAUSAL",
+        "prediction_epoch":prediction_epoch,
         "source_commit":COMMIT,
         "verified_dryad_sha256":DRYAD_SHA,
         "bird_years":len(rows),
@@ -272,17 +294,17 @@ def calculate(rows):
                                   for i in range(1,6)},
         "ridge_penalty":RIDGE,
         "year_blocked_outcome_predictions":True,
-        "features":{k:list(v) for k,v in FEATURESETS.items()},
+        "features":{k:list(v) for k,v in feature_sets.items()},
         "oof_model_logloss":{
             model:_mean([r[model+"_loss"] for r in all_rows])
-            for model in FEATURESETS},
+            for model in feature_sets},
         "oof_model_brier":{
             model:_mean([r[model+"_brier"] for r in all_rows])
-            for model in FEATURESETS},
+            for model in feature_sets},
         "probability_range":{
             model:[min(r[model+"_prob"] for r in all_rows),
                    max(r[model+"_prob"] for r in all_rows)]
-            for model in FEATURESETS},
+            for model in feature_sets},
         "paired_comparisons":compare,
         "claim_limit":"No action feasibility, cue perception, individual resource optimum or causal cost identified",
         "published_source_author_model_already_includes_arrival_and_energy":True
@@ -326,10 +348,27 @@ if __name__=="__main__":
         req=Request(URL,headers={"User-Agent":"PAYOFF-B/outcome-audit","Accept":"text/csv"})
         with urlopen(req,timeout=30) as response:
             data=response.read(200000)
-        result=calculate(_csv_rows(data))
+        rows = _csv_rows(data)
+        result = calculate(rows)
+        as_of_stage5 = calculate(
+            rows,
+            feature_sets=AS_OF_STAGE5_FEATURESETS,
+            comparisons=AS_OF_EXIT_COMPARISONS,
+            prediction_epoch="as_of_stage5_pre_stage6",
+        )
         dest=Path(args.output)
         dest.parent.mkdir(parents=True,exist_ok=True)
         dest.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        stage5_dest = dest.with_name(
+            "payoff_b_goose_stage5_safe_breeding_prediction.json"
+        )
+        stage5_dest.write_text(
+            json.dumps(as_of_stage5, indent=2, sort_keys=True)+"\n",
+            encoding="utf-8",
+        )
         print("PAYOFF_B_GOOSE_STAGING_ENERGY_FITNESS_EXPLORATORY_RESULT")
         print(json.dumps(result,sort_keys=True))
+        print("PAYOFF_B_GOOSE_AS_OF_STAGE5_EXPLORATORY_RESULT")
+        print(json.dumps(as_of_stage5,sort_keys=True))
+        print("PREVIOUS MODEL IS RETROSPECTIVE; STAGE5 MODEL EXCLUDES STAGE6")
         print("NOT A DEMONSTRATION OF OPTIMAL CONTROL OR FITNESS CAUSATION")
