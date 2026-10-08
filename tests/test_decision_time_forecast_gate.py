@@ -182,3 +182,34 @@ def test_reversal_threshold_rejects_negative_or_weaker_connectivity():
     with pytest.raises(ValueError):
         positive_connectivity_reversal_threshold(
             earlier_correlation=.9, later_correlation=.8)
+
+
+def test_costly_optimally_calibrated_actor_can_undertrack_shifted_spring():
+    from src.decision_time_forecast_gate import (
+        fully_calibrated_costly_actor_mismatch,
+        calibrated_cost_reversal_threshold,
+    )
+    threshold = calibrated_cost_reversal_threshold(
+        earlier_correlation=.3, later_correlation=.8, effort_penalty=1)
+    assert threshold == pytest.approx((1.65)**.5)
+    before = fully_calibrated_costly_actor_mismatch(
+        cue_target_correlation=.3, seasonal_mean_shift=0, effort_penalty=1)
+    after = fully_calibrated_costly_actor_mismatch(
+        cue_target_correlation=.8, seasonal_mean_shift=1.5, effort_penalty=1)
+    assert before == pytest.approx(.9325)
+    assert after == pytest.approx(1.0825)
+    assert after > before
+
+
+def test_zero_adjustment_cost_never_creates_a_false_reversal():
+    from src.decision_time_forecast_gate import (
+        fully_calibrated_costly_actor_mismatch,
+        calibrated_cost_reversal_threshold,
+    )
+    assert fully_calibrated_costly_actor_mismatch(
+        cue_target_correlation=.8, seasonal_mean_shift=2,
+        effort_penalty=0) == pytest.approx(.36)
+    with pytest.raises(ValueError):
+        calibrated_cost_reversal_threshold(
+            earlier_correlation=.3, later_correlation=.8,
+            effort_penalty=0)
