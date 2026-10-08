@@ -88,6 +88,56 @@ jobs:
           --output-json outputs/payoff_b_v7r_direct_recourse_result.json
           --transition-output outputs/payoff_b_v7r_transition_table.csv
 
+      - name: Verify opened V7R result is reproduced without claim changes
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          current = json.loads(Path(
+              "outputs/payoff_b_v7r_direct_recourse_result.json"
+          ).read_text())
+          frozen = json.loads(Path(
+              "data/payoff_b_v7r_result_20261007.json"
+          ).read_text())
+
+          assert current["status"] == "PRIMARY_NOT_SUPPORTED"
+          assert current["source_gate"]["focal_transitions"] == 10
+          assert current["source_gate"]["flyways"] == 3
+          assert current["lambda_identity"]["existing_transitions_checked"] == 9
+          assert current["lambda_identity"]["max_abs_lambda_difference"] < 1e-9
+
+          coeff = current["primary"]["coefficients"]["QxR"]
+          pval = current["primary"]["permutation"]["one_sided_p"]
+          assert abs(coeff - frozen["primary"]["beta_QR"]) < 1e-8
+          assert abs(pval - frozen["primary"]["one_sided_p"]) < 1e-10
+          assert current["primary"]["permutation"]["valid_permutations"] == 2880
+
+          checks = {
+              "weighted_by_transition_n": "weighted_by_transition_n",
+              "recourse_q20_q80": "Q20_Q80_remaining_recourse",
+              "local_one_step_recourse": "local_one_step_width",
+              "signed_phenology_r": "signed_POWER_r",
+              "phenology_r2": "POWER_r2",
+              "abs_anomaly_slope": "POWER_anomaly_slope",
+              "era5_abs_r": "ERA5_abs_r",
+          }
+          reference = {
+              x["name"]: x for x in frozen["primary_sensitivities"]
+          }
+          for current_name, frozen_name in checks.items():
+              current_item = current["mandatory_sensitivities"][current_name]
+              frozen_item = reference[frozen_name]
+              assert abs(
+                  current_item["observed_beta_qr"] - frozen_item["beta_QR"]
+              ) < 1e-8, current_name
+              assert abs(
+                  current_item["one_sided_p"] - frozen_item["p_perm"]
+              ) < 1e-10, current_name
+
+          print("V7R frozen result reproduced: primary + seven sensitivities")
+          PY
+
       - uses: actions/upload-artifact@v4
         with:
           name: payoff-b-v7r-direct-recourse-result
