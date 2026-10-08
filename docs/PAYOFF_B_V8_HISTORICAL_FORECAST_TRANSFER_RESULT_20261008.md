@@ -60,3 +60,18 @@ Thus neither bird ignorance, inability to correct, nor rational costly undertrac
 3. Do not tune or alter the frozen V8 environmental or bird analysis, report the source-only result as exploratory supplementary material only if interpretation survives basic dependence and prior-art checks.
 
 **Interpretation ceiling:** Historical source-cell green-up information helped predict later target-cell spring on average under this fixed model contrast. No claim is made about individual cue uptake, fitness, social learning, cognitive updating, physical recourse, or interspecific coordination.
+
+
+## Decision-time geometry audit from archived later pair-year file (post-result)
+
+The held-out ZIP contains 1,328 unique environmental pair-year rows (166 spatial pairs times 8 later years). Comparing the modeled source-cell versus target-cell **mid-greenup dates**, not migration dates:
+
+- Source mid-greenup occurred **strictly before** target mid-greenup in 1,260/1,328 (94.88%) rows.
+- 2 rows had exactly the same nominal mid-greenup date and 66 had **source later than target**. Thus 68 rows (5.12%) do not even satisfy strict temporal ordering if the completed source mid-greenup date is treated as the signal.
+- Median source-to-target mid-greenup lead = +11.13 days, mean = +13.43 days.
+- Source led target by **more than 7 days** in only 885/1,328 (66.64%) rows, by **more than 14 days** in 552/1,328 (41.57%) and by **more than 21 days** in 313/1,328 (23.57%).
+- 129/166 pairs had source greenup before target greenup in all eight holdout years; the remaining pairs include near-synchronous or temporally reversed observations.
+
+This is a **descriptive temporal-opportunity proxy**. Mid-greenup is a retrospective seasonal outcome, not automatically a timestamped predecision cue. A bird might respond to temperatures, partial snowmelt or earlier greenness well before the completed mid-greenup date. Also, a south-to-north spatial-pair mapping does not identify actual migratory paths, arrival times, flight durations or the remaining physiological action set. Therefore neither +11 days nor any threshold comparison is an effective decision deadline or measured recourse. It is a concrete reason not to interpret improved environmental forecast skill as observed bird information availability.
+
+Calculated independently from the four immutable CSVs in the workflow artifact; no V8 bird outcomes were accessed.
