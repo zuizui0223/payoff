@@ -183,6 +183,50 @@ The 2008–2010 climate-onset comparison in Section 4 must also be read as
 a **broader archive diagnostic**, not as a result reported for the original
 2008–2009 complete-migration subset.
 
+## 5.6 Initial-region exclusion destroys primary model support
+
+An additional source-structure diagnostic uses the ten transition types in
+the **unchanged, pre-existing** V7R transition input table.
+
+Four transitions start in R1 (wintering/initial staging):
+
+- Barents R1→R2 and R1→R5;
+- Greenland R1→R2;
+- Svalbard R1→R2.
+
+Removing those leaves six transition types:
+
+- four Barents;
+- one Greenland;
+- one Svalbard.
+
+The registered flyway-fixed-effects meta-model contains six coefficients:
+
+\[
+1\text{ intercept}+2\text{ flyway dummies}
++\beta_Q+\beta_R+\beta_{QR}=6.
+\]
+
+Thus a same-model fit after removing initial-region origins would have
+
+\[
+n-p=6-6=0
+\]
+
+residual degrees of freedom, and the small within-flyway permutation design
+would cease to be a useful replication.
+
+**Classification:** \`R1_EXCLUSION_V7R_PRIMARY_NOT_ESTIMABLE\`.
+
+This is **not** a newly significant or non-significant sensitivity result.
+It is a source-support limitation: the V7R null is conditional on retaining
+initial-region transitions, whose arrival-time meaning must be treated with
+particular caution.
+
+The original V7R result remains \(\beta_{QR}=1.3733\), \(p=0.56994\).
+Do not interpret this as either a causal disproof or confirmation of
+biological recourse loss.
+
 ## 6. Ecological interpretation and stop rule
 
 **Observed:** Some individuals reached the last wintering-region local stop
