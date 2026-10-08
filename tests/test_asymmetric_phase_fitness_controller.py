@@ -146,3 +146,29 @@ def test_input_validation_fails_closed():
         calculate(max_advance=-1)
     with pytest.raises(ValueError):
         resource_to_fitness_phase(0, float("nan"))
+
+
+def test_posterior_uncertainty_changes_optimal_timing_under_asymmetric_cost():
+    # Existing decision-theoretic identity; the general ecological
+    # phenomenon was already treated by Lof et al. (2012).
+    r1 = calculate(phase_mean=0, phase_sd=1, max_delay=10, max_advance=10)
+    r2 = calculate(phase_mean=0, phase_sd=2, max_delay=10, max_advance=10)
+    r0 = calculate(phase_mean=0, phase_sd=0, max_delay=10, max_advance=10)
+    assert r1.correction == pytest.approx(NormalDist().inv_cdf(.3))
+    assert r2.correction == pytest.approx(2 * r1.correction)
+    assert r0.correction == pytest.approx(0)
+    # Under otherwise identical *symmetric* loss no uncertainty bias remains.
+    symmetric = calculate(phase_mean=0, phase_sd=2,
+                          early_cost=.1, late_cost=.1)
+    assert symmetric.correction == pytest.approx(0)
+
+
+def test_identical_forecast_mean_different_loss_shapes_can_desynchronize():
+    a = calculate(phase_mean=0, phase_sd=1,
+                  early_cost=.14, late_cost=.06, max_delay=5, max_advance=5)
+    b = calculate(phase_mean=0, phase_sd=1,
+                  early_cost=.1, late_cost=.1, max_delay=5, max_advance=5)
+    assert a.correction < b.correction
+    assert abs(a.correction - b.correction) == pytest.approx(.524400512708, abs=1e-9)
+    # This numerical timing difference does not prove a cross-species
+    # coordination trap or any demographic fitness consequence.
