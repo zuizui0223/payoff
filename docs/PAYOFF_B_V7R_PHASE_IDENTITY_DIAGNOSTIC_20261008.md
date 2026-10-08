@@ -79,9 +79,9 @@ slopes.
 The audit uses exactly the two frozen Stage-3 tracking archives:
 
 - Greenland+Barents: SHA256
-  \`8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f\`
+  `8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f`
 - Svalbard: SHA256
-  \`29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856\`
+  `29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856`
 
 There are ten admitted edges under the pre-existing V7R criterion of at least
 five observed transition rows. None has been added, dropped or relabelled to
@@ -173,9 +173,9 @@ Safe:
 
 Implementation:
 
-- \`src/v7r_phase_identity.py\`
-- \`scripts/audit_v7r_phase_identity.py\`
-- \`tests/test_v7r_phase_identity.py\`
+- `src/v7r_phase_identity.py`
+- `scripts/audit_v7r_phase_identity.py`
+- `tests/test_v7r_phase_identity.py`
 
 Run the script on the two source archives and retain its CSV and JSON
 diagnostics separately from the frozen V7R primary result.
@@ -187,25 +187,26 @@ V7R panel must not be repurposed as a fresh confirmation of forecast–correctio
 substitution.
 
 
+
 ## Constructive nonfeedback counterexample
 
 Suppose spring onset is day 100 at both regions. Individuals arrive at the
-first region on day (100+x), where (x) varies, but depart every year on
-calendar day 110 regardless of (x), and require a fixed five-day transit.
+first region on day \(100+x\), where \(x\) varies, but depart every year on
+calendar day 110 regardless of \(x\), and require a fixed five-day transit.
 
 Then:
 
-- incoming phase: (e_j=x)
-- origin stopover: (d_{stop}=10-x)
-- transit: (d_{transit}=5)
-- destination arrival: day 115, hence (e_k=15) for every (x)
+- incoming phase: \(e_j=x\)
+- origin stopover: \(d_{\mathrm{stop}}=10-x\)
+- transit: \(d_{\mathrm{transit}}=5\)
+- destination arrival: day 115, hence \(e_k=15\) for every \(x\)
 
 The exact regression components are:
 
-[
-b_{m stop}=-1,qquad b_{m transit}=0,qquad
-b_{m season}=0,qquad lambda=0.
-]
+\[
+b_{\mathrm{stop}}=-1,\qquad b_{\mathrm{transit}}=0,\qquad
+b_{\mathrm{season}}=0,\qquad \lambda=0.
+\]
 
 Yet no checkpoint cue or feedback adjustment occurs: departure is fixed by
 the calendar. This demonstrates constructively that negative stopover slope
@@ -213,7 +214,7 @@ and zero phase retention are **not sufficient evidence of responsive
 correction**.
 
 A regression test of this counterexample is included in
-`tests/test_v7r_phase_identity.py`.
+tests/test_v7r_phase_identity.py.
 
 This is a hypothetical identifiability witness, not an additional
 empirical finding in the barnacle-goose records.
