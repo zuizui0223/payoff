@@ -1116,12 +1116,13 @@ the preregistered improvement in arrival–green-up mismatch. The analysis does
 not identify why, but it rejects a simple broad information-degradation
 explanation for this sampled system.
 
-The timer–controller model supplies the missing mechanistic decomposition.
-A developmental or physiological timer determines when an organism enters a
+The timer–controller model supplies a **candidate** mechanistic decomposition,
+not an empirically established explanation for the V8 null. Under its declared
+assumptions, a developmental or physiological timer determines when an organism enters a
 seasonal trajectory with some initial phase error. An information-dependent
 controller then determines whether that error is erased, retained or
-amplified. For interacting species, later mismatch therefore has two separable
-sources:
+amplified. For interacting species, the model writes later phase mismatch as two
+components, conditional on a correctly defined target and observed state:
 
 \[
 \boxed{
@@ -1131,8 +1132,9 @@ sources:
 }
 \]
 
-This architecture explains why improved environmental information need not
-translate automatically into improved realized timing. Information can become
+This architecture provides a possible account of why more precise information
+need not translate into improved realized timing; the empirical data do not
+identify the proposed control channels as its cause. Information can become
 more accurate while response options disappear; conversely, strong downstream
 feedback can rescue a poorly timed start.
 
