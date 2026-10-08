@@ -259,4 +259,17 @@ if __name__ == "__main__":
     if args.self_test:
         _self_test()
     else:
-        main(args.output)
+        report = main(args.output)
+        if (report.get("overall_source_status") !=
+                "SCHEMA_ONLY_PASS_PENDING_TEMPORAL_FIELDS"):
+            raise SystemExit(
+                "SOURCE_GATE_FAILURE: pinned original Zenodo workbook "
+                "was not retrieved with exact checksum and parsed "
+                "in this execution. Failure receipt has been saved."
+            )
+        if (report.get("reproducibility_script", {}).get("status") !=
+                "PUBLISHER_MD5_VERIFIED"):
+            raise SystemExit(
+                "SOURCE_GATE_FAILURE: matching original R-script MD5 "
+                "was not verified during this execution."
+            )
