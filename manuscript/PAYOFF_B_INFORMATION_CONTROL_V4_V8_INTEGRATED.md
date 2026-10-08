@@ -67,8 +67,9 @@ environmental states at two geographical points is not automatically a
 predictive signal available to an animal at its decision time. In particular,
 stronger within-period correlation can coexist with a changing cue-to-target
 mean or slope, an outdated learned forecast, or no cue perception at all.
-Better information has value only while useful actions remain available. A migrant can acquire more accurate
-information as it approaches a breeding destination, yet simultaneously lose
+Better information has value only while useful actions remain available.
+A migrant can acquire more accurate information as it approaches a breeding
+destination, yet simultaneously lose
 the ability to undo earlier departure, fuelling, route or stopover decisions.
 Plants and developmentally committed insects represent the opposite extreme:
 local information can be accurate, but the focal event can become difficult to
@@ -1010,9 +1011,8 @@ individuals and interacting partners.
 Environmental correlation, calibrated forecast skill, cue perception,
 phenological matching and demographic fitness are five different quantities.
 The current V8 evidence directly measures the first and a spatial proxy for
-the fourth, not the other three. Environmental predictability is not
-synonymous with adaptive tracking. In the
-prospective bird stress test, source–destination spring predictive
+the fourth, not the other three. Environmental predictability is therefore
+not synonymous with adaptive tracking. In the prospective bird stress test, source–destination spring predictive
 connectivity strengthens broadly, yet larger connectivity gains do not yield
 the preregistered improvement in arrival–green-up mismatch. The analysis does
 not identify why, but it rejects a simple broad information-degradation
