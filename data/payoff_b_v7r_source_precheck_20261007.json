@@ -1,0 +1,141 @@
+{
+  "schema": "payoff_b_v7r_source_precheck_v1",
+  "date": "2026-10-07",
+  "status": "PREOUTCOME_QR_SOURCE_ONLY",
+  "terminal_by_flyway": {
+    "greenland": "R4",
+    "svalbard": "R4",
+    "barents": "R7"
+  },
+  "graph_rule": {
+    "min_edge_rows": 3,
+    "lower_quantile": 0.1,
+    "upper_quantile": 0.9
+  },
+  "focal_rule": {
+    "min_transition_rows": 5
+  },
+  "focal_transitions": [
+    {
+      "flyway": "barents",
+      "origin": "R1",
+      "destination": "R2",
+      "n": 12,
+      "n_individuals": 8,
+      "Q_abs_r": 0.8924446652892631,
+      "R": 1
+    },
+    {
+      "flyway": "barents",
+      "origin": "R1",
+      "destination": "R5",
+      "n": 10,
+      "n_individuals": 6,
+      "Q_abs_r": 0.002382912596154002,
+      "R": 1
+    },
+    {
+      "flyway": "barents",
+      "origin": "R2",
+      "destination": "R3",
+      "n": 6,
+      "n_individuals": 4,
+      "Q_abs_r": 0.9497854068368787,
+      "R": 0.439809
+    },
+    {
+      "flyway": "barents",
+      "origin": "R3",
+      "destination": "R5",
+      "n": 6,
+      "n_individuals": 4,
+      "Q_abs_r": 0.282832,
+      "R": 0.287194
+    },
+    {
+      "flyway": "barents",
+      "origin": "R4",
+      "destination": "R5",
+      "n": 7,
+      "n_individuals": 6,
+      "Q_abs_r": 0.662446,
+      "R": 0.1437
+    },
+    {
+      "flyway": "barents",
+      "origin": "R5",
+      "destination": "R7",
+      "n": 7,
+      "n_individuals": 3,
+      "Q_abs_r": 0.69716,
+      "R": 0.12191,
+      "flag": "LOW_INDIVIDUAL_SUPPORT"
+    },
+    {
+      "flyway": "greenland",
+      "origin": "R1",
+      "destination": "R2",
+      "n": 7,
+      "n_individuals": 7,
+      "Q_abs_r": 0.00027926200572468696,
+      "R": 1
+    },
+    {
+      "flyway": "greenland",
+      "origin": "R2",
+      "destination": "R3",
+      "n": 6,
+      "n_individuals": 6,
+      "Q_abs_r": 0.16913003336807828,
+      "R": 0.631076
+    },
+    {
+      "flyway": "svalbard",
+      "origin": "R1",
+      "destination": "R2",
+      "n": 18,
+      "n_individuals": 17,
+      "Q_abs_r": 0.5620206070374475,
+      "R": 1
+    },
+    {
+      "flyway": "svalbard",
+      "origin": "R2",
+      "destination": "R4",
+      "n": 16,
+      "n_individuals": 15,
+      "Q_abs_r": 0.0014789,
+      "R": 0.174551
+    }
+  ],
+  "recourse_by_region": {
+    "greenland": {
+      "R1": 1,
+      "R2": 0.631076,
+      "R3": 0.107199,
+      "R4": 0
+    },
+    "svalbard": {
+      "R1": 1,
+      "R2": 0.174551,
+      "R3": 0.144426,
+      "R4": 0
+    },
+    "barents": {
+      "R1": 1,
+      "R2": 0.439809,
+      "R3": 0.287194,
+      "R4": 0.1437,
+      "R5": 0.12191,
+      "R7": 0
+    }
+  },
+  "gates": {
+    "focal_transition_count": 10,
+    "flyway_count": 3,
+    "primary_Q_R_correlation": -0.15405515228202865,
+    "max_abs_Q_R_correlation_allowed": 0.9,
+    "pass": true
+  },
+  "claim_boundary": "No phase-transfer lambda or correction score was joined to construct this receipt."
+}

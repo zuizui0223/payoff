@@ -1,0 +1,58 @@
+{
+  "schema": "payoff_b_v7r_reproducibility_audit_v1",
+  "created_at": "2026-10-08",
+  "status": "POST_OUTCOME_REPRODUCIBILITY_AUDIT_NOT_NEW_CONFIRMATION",
+  "preserve_original_receipt": "data/payoff_b_v7r_result_20261007.json",
+  "source_artifacts": {
+    "multiflyway_stage3_sha256": "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f",
+    "svalbard_stage3_sha256": "29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856",
+    "barnacle_era5_sha256": "c37502b116f4170760e0fb5029fe1804999def4de3f702cdb5bf61e61b8606f",
+    "svalbard_era5_sha256": "6155a9efe854167883190db7410ce60c151721e4569d564f23bc01a555013825"
+  },
+  "originally_failed_workflow_run": 37642090124,
+  "failure_reason": "pandas.itertuples renames reserved Python keyword column 'lambda'; getattr(row,'lambda') caused AttributeError",
+  "correction": "meta_rows consumes named dict records, including lambda; new unit regression test",
+  "invariant_primary": {
+    "beta_qr": 1.3733376461853535,
+    "one_sided_permutation_p": 0.5699409927108643,
+    "permutations": 2880,
+    "transition_count": 10,
+    "flyway_count": 3,
+    "existing_lambda_identity_count": 9,
+    "max_identity_difference_tolerance": 1e-9
+  },
+  "archived_local_sensitivity": {
+    "definition": "edge Q10-Q90 duration width / flyway maximum single-edge Q10-Q90 duration width",
+    "beta_qr": 0.02449773059951386,
+    "one_sided_p": 0.4647691773689691,
+    "status": "ARCHIVED_DIAGNOSTIC"
+  },
+  "source_contract_local_sensitivity": {
+    "definition": "edge Q10-Q90 duration width / initial-route remaining-route Q10-Q90 duration width",
+    "beta_qr": -0.012190381431,
+    "one_sided_p": 0.585213467546,
+    "status": "POST_OUTCOME_NORMALIZATION_CORRECTION"
+  },
+  "archived_abs_anomaly_slope_sensitivity": {
+    "beta_qr": 1.2519756870746654,
+    "one_sided_p": 0.6108989934050677
+  },
+  "reproduced_abs_anomaly_slope_sensitivity": {
+    "beta_qr": 1.252008894682,
+    "one_sided_p": 0.611940298507,
+    "status": "SMALL_UNRESOLVED_ARCHIVED_NUMERIC_DISCREPANCY_NON_INFERENTIAL"
+  },
+  "same_other_sensitivities": [
+    "weighted_by_transition_n",
+    "recourse_q20_q80",
+    "signed_phenology_r",
+    "phenology_r2",
+    "era5_abs_r"
+  ],
+  "claim_boundary": [
+    "Do not rewrite the original post-outcome receipt",
+    "The null primary inference is unchanged",
+    "The apparent interaction in local one-step recourse is not supported under either normalization",
+    "Neither lambda contraction nor observed stopover shortening by itself identifies causal active phase feedback"
+  ]
+}

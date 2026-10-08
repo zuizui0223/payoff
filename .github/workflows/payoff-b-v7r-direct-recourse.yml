@@ -1,0 +1,187 @@
+name: payoff-b V7R direct recourse result
+
+concurrency:
+  group: payoff-b-v7r-direct-recourse-${{ github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/route_recourse_capacity.py'
+      - 'src/v7r_transition_meta.py'
+      - 'scripts/run_v7r_direct_recourse_analysis.py'
+      - 'data/payoff_b_v7r_source_precheck_20261007.json'
+      - 'docs/PAYOFF_B_V7R_DIRECT_RECOURSE_CONTRACT_20261007.md'
+      - '.github/workflows/payoff-b-v7r-direct-recourse.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install analysis dependencies
+        run: python -m pip install --disable-pip-version-check pandas numpy pytest
+
+      - name: Run V7R helper tests
+        run: >
+          pytest -q
+          tests/test_route_recourse_capacity.py
+          tests/test_v7r_transition_meta.py
+
+      - name: Download frozen Stage-3 artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/source/multi outputs/source/sval
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10700391090/zip" \
+            -o outputs/multi.zip
+          echo "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f  outputs/multi.zip" | sha256sum -c -
+          unzip -q outputs/multi.zip -d outputs/source/multi
+
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10699871077/zip" \
+            -o outputs/sval.zip
+          echo "29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856  outputs/sval.zip" | sha256sum -c -
+          unzip -q outputs/sval.zip -d outputs/source/sval
+
+      - name: Download frozen ERA5 reliability artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/era5_multi outputs/era5_sval
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10797665905/zip" \
+            -o outputs/era5_multi.zip
+          echo "c37502b116f4170760e0fbf5029fe1804999def4de3f702cdb5bf61e61b8606f  outputs/era5_multi.zip" | sha256sum -c -
+          unzip -q outputs/era5_multi.zip -d outputs/era5_multi
+
+          curl -fL \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10796909675/zip" \
+            -o outputs/era5_sval.zip
+          echo "6155a9efe854167883190db7410ce60c151721e4569d564f23bc01a555013825  outputs/era5_sval.zip" | sha256sum -c -
+          unzip -q outputs/era5_sval.zip -d outputs/era5_sval
+
+      - name: Run frozen V7R analysis
+        run: >
+          python scripts/run_v7r_direct_recourse_analysis.py
+          --multiflyway-dir outputs/source/multi
+          --svalbard-dir outputs/source/sval
+          --era5-multiflyway-dir outputs/era5_multi/outputs/barnacle_era5
+          --era5-svalbard-dir outputs/era5_sval/outputs/svalbard_era5
+          --output-json outputs/payoff_b_v7r_direct_recourse_result.json
+          --transition-output outputs/payoff_b_v7r_transition_table.csv
+
+      - name: Verify opened V7R result is reproduced without claim changes
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          current = json.loads(Path(
+              "outputs/payoff_b_v7r_direct_recourse_result.json"
+          ).read_text())
+          frozen = json.loads(Path(
+              "data/payoff_b_v7r_result_20261007.json"
+          ).read_text())
+
+          assert current["status"] == "PRIMARY_NOT_SUPPORTED"
+          assert current["source_gate"]["focal_transitions"] == 10
+          assert current["source_gate"]["flyways"] == 3
+          assert current["lambda_identity"]["existing_transitions_checked"] == 9
+          assert current["lambda_identity"]["max_abs_lambda_difference"] < 1e-9
+
+          coeff = current["primary"]["coefficients"]["QxR"]
+          pval = current["primary"]["permutation"]["one_sided_p"]
+          assert abs(coeff - frozen["primary"]["beta_QR"]) < 1e-8
+          assert abs(pval - frozen["primary"]["one_sided_p"]) < 1e-10
+          assert current["primary"]["permutation"]["valid_permutations"] == 2880
+
+          audit = json.loads(Path(
+              "data/payoff_b_v7r_reproducibility_audit_20261008.json"
+          ).read_text())
+          checks = {
+              "weighted_by_transition_n": "weighted_by_transition_n",
+              "recourse_q20_q80": "Q20_Q80_remaining_recourse",
+              "local_one_step_legacy_flyway_max": "local_one_step_width",
+              "signed_phenology_r": "signed_POWER_r",
+              "phenology_r2": "POWER_r2",
+              "era5_abs_r": "ERA5_abs_r",
+          }
+          reference = {
+              x["name"]: x for x in frozen["primary_sensitivities"]
+          }
+          mismatches = []
+          for current_name, frozen_name in checks.items():
+              current_item = current["mandatory_sensitivities"][current_name]
+              frozen_item = reference[frozen_name]
+              delta_beta = (
+                  current_item["observed_beta_qr"] - frozen_item["beta_QR"]
+              )
+              delta_p = current_item["one_sided_p"] - frozen_item["p_perm"]
+              print(
+                  f"{current_name}: current_beta="
+                  f"{current_item['observed_beta_qr']:.12f}, "
+                  f"frozen_beta={frozen_item['beta_QR']:.12f}; "
+                  f"current_p={current_item['one_sided_p']:.12f}, "
+                  f"frozen_p={frozen_item['p_perm']:.12f}",
+                  flush=True,
+              )
+              if abs(delta_beta) >= 1e-8 or abs(delta_p) >= 1e-10:
+                  mismatches.append(current_name)
+
+          corrections = {
+              "local_one_step_recourse": (
+                  audit["source_contract_local_sensitivity"]
+              ),
+              "abs_anomaly_slope": (
+                  audit["reproduced_abs_anomaly_slope_sensitivity"]
+              ),
+          }
+          for name, expected in corrections.items():
+              got = current["mandatory_sensitivities"][name]
+              print(
+                  f"POST_OUTCOME_AUDIT {name}: "
+                  f"beta={got['observed_beta_qr']:.12f}, "
+                  f"p={got['one_sided_p']:.12f}",
+                  flush=True,
+              )
+              if abs(got["observed_beta_qr"] - expected["beta_qr"]) >= 1e-8:
+                  mismatches.append(name + ":beta")
+              if abs(got["one_sided_p"] - expected["one_sided_p"]) >= 1e-10:
+                  mismatches.append(name + ":p")
+
+          assert not mismatches, f"V7R audit mismatch: {mismatches}"
+          print(
+              "V7R reproduced: primary + six archived sensitivities "
+              "+ two documented post-outcome audit corrections"
+          )
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-v7r-direct-recourse-result
+          path: |
+            outputs/payoff_b_v7r_direct_recourse_result.json
+            outputs/payoff_b_v7r_transition_table.csv
+            data/payoff_b_v7r_source_precheck_20261007.json
+            docs/PAYOFF_B_V7R_DIRECT_RECOURSE_CONTRACT_20261007.md
