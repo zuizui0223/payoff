@@ -27,6 +27,7 @@ jobs:
       - name: Verify public immutable Zenodo source MD5 and sheet header metadata
         run: python scripts/payoff_b_houbara_zenodo_metadata_gate.py
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: payoff-b-houbara-zenodo-schema-only
           path: outputs/payoff_b_houbara_source_gate_20261008.json
