@@ -185,3 +185,35 @@ with pre-commitment information, perceived incoming phase, actual local cues,
 observable feasible action and downstream consequences. The already exposed
 V7R panel must not be repurposed as a fresh confirmation of forecast–correction
 substitution.
+
+
+## Constructive nonfeedback counterexample
+
+Suppose spring onset is day 100 at both regions. Individuals arrive at the
+first region on day (100+x), where (x) varies, but depart every year on
+calendar day 110 regardless of (x), and require a fixed five-day transit.
+
+Then:
+
+- incoming phase: (e_j=x)
+- origin stopover: (d_{stop}=10-x)
+- transit: (d_{transit}=5)
+- destination arrival: day 115, hence (e_k=15) for every (x)
+
+The exact regression components are:
+
+[
+b_{m stop}=-1,qquad b_{m transit}=0,qquad
+b_{m season}=0,qquad lambda=0.
+]
+
+Yet no checkpoint cue or feedback adjustment occurs: departure is fixed by
+the calendar. This demonstrates constructively that negative stopover slope
+and zero phase retention are **not sufficient evidence of responsive
+correction**.
+
+A regression test of this counterexample is included in
+`tests/test_v7r_phase_identity.py`.
+
+This is a hypothetical identifiability witness, not an additional
+empirical finding in the barnacle-goose records.
