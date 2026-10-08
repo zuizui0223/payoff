@@ -167,12 +167,21 @@ def inspect_listing(collection, articles, *, allow_files=True):
         x["status"] in ("ACTUAL_SOURCE_MD5_AND_SCHEMA_PASS", "SOURCE_BYTES_SCHEMA_PASS_NO_PUBLISHED_MD5")
         for a in out["article_items"] for x in a["files"]
     )
+    out["candidate_raw_data_files_inspected"] = sum(
+        x["status"] in (
+            "ACTUAL_SOURCE_MD5_AND_SCHEMA_PASS",
+            "SOURCE_BYTES_SCHEMA_PASS_NO_PUBLISHED_MD5",
+        ) and x["format"] in ("DELIMITED", "ZIP", "SPREADSHEET")
+        for article in out["article_items"] for x in article["files"]
+    )
     if out["files_listed"] == 0:
         out["status"] = "COLLECTION_METADATA_PASS_NO_FILES_LISTED"
-    elif out["files_actual_inspected"] > 0:
-        out["status"] = "SOURCE_METADATA_AND_FILE_SCHEMA_PARTIAL_PASS"
-    else:
+    elif out["files_actual_inspected"] == 0:
         out["status"] = "SOURCE_METADATA_PASS_FILE_CONTENT_HOLD"
+    elif out["candidate_raw_data_files_inspected"] == 0:
+        out["status"] = "DOCUMENT_OR_CODE_ONLY_NO_RAW_EVENT_CANDIDATE"
+    else:
+        out["status"] = "SOURCE_METADATA_AND_FILE_SCHEMA_PARTIAL_PASS"
     return out
 
 
