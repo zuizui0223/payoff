@@ -1,0 +1,135 @@
+{
+  "schema": "payoff_b_v7r_recourse_leave_animal_out_source_audit_v1",
+  "created_at": "2026-10-08",
+  "status": "POST_OUTCOME_SOURCE_ONLY_PROXY_STABILITY_NOT_CONFIRMATORY",
+  "source_sha256": {
+    "multiflyway": "8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f",
+    "svalbard": "29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856"
+  },
+  "frozen_graph": {
+    "min_edge_rows": 3,
+    "quantile_lower": 0.1,
+    "quantile_upper": 0.9,
+    "terminal_by_flyway": {
+      "greenland": "R4",
+      "svalbard": "R4",
+      "barents": "R7"
+    }
+  },
+  "overview": {
+    "focal_transition_types": 10,
+    "total_leave_one_animal_out_trials": 76,
+    "estimable": 70,
+    "not_estimable": 6,
+    "max_abs_R_change": 0.1204388863690361
+  },
+  "edges": [
+    {
+      "flyway": "barents",
+      "origin": "R1",
+      "destination": "R2",
+      "n_individuals": 8,
+      "estimable": 8,
+      "not_estimable": 0,
+      "R_full": 1,
+      "max_abs_change": 0
+    },
+    {
+      "flyway": "barents",
+      "origin": "R1",
+      "destination": "R5",
+      "n_individuals": 6,
+      "estimable": 6,
+      "not_estimable": 0,
+      "R_full": 1,
+      "max_abs_change": 0
+    },
+    {
+      "flyway": "barents",
+      "origin": "R2",
+      "destination": "R3",
+      "n_individuals": 4,
+      "estimable": 4,
+      "not_estimable": 0,
+      "R_full": 0.43980850976022456,
+      "max_abs_change": 0.0994115397726898
+    },
+    {
+      "flyway": "barents",
+      "origin": "R3",
+      "destination": "R5",
+      "n_individuals": 4,
+      "estimable": 4,
+      "not_estimable": 0,
+      "R_full": 0.28719409021501374,
+      "max_abs_change": 0.05301050236470331
+    },
+    {
+      "flyway": "barents",
+      "origin": "R4",
+      "destination": "R5",
+      "n_individuals": 6,
+      "estimable": 6,
+      "not_estimable": 0,
+      "R_full": 0.14370021872807567,
+      "max_abs_change": 0.026690039206529792
+    },
+    {
+      "flyway": "barents",
+      "origin": "R5",
+      "destination": "R7",
+      "n_individuals": 3,
+      "estimable": 3,
+      "not_estimable": 0,
+      "R_full": 0.12190995006396751,
+      "max_abs_change": 0.041527335531327925
+    },
+    {
+      "flyway": "greenland",
+      "origin": "R1",
+      "destination": "R2",
+      "n_individuals": 7,
+      "estimable": 4,
+      "not_estimable": 3,
+      "R_full": 1,
+      "max_abs_change": 0
+    },
+    {
+      "flyway": "greenland",
+      "origin": "R2",
+      "destination": "R3",
+      "n_individuals": 6,
+      "estimable": 3,
+      "not_estimable": 3,
+      "R_full": 0.6310762651461159,
+      "max_abs_change": 0.1204388863690361
+    },
+    {
+      "flyway": "svalbard",
+      "origin": "R1",
+      "destination": "R2",
+      "n_individuals": 17,
+      "estimable": 17,
+      "not_estimable": 0,
+      "R_full": 1,
+      "max_abs_change": 0
+    },
+    {
+      "flyway": "svalbard",
+      "origin": "R2",
+      "destination": "R4",
+      "n_individuals": 15,
+      "estimable": 15,
+      "not_estimable": 0,
+      "R_full": 0.1745513866231648,
+      "max_abs_change": 0.08592532314471188
+    }
+  ],
+  "blocked_graph_note": "All six non-estimable exclusions occur on Greenland focal transitions. Excluding one of the individuals removes the only >=3-row support for a terminal-reaching edge.",
+  "claim_boundary": [
+    "This audit uses stopover/transit duration only, not Q, phase error, lambda, or fitness.",
+    "R=1 at the first route node by normalization, so zero observed change there is tautological.",
+    "A leave-one-individual-out empirical recourse envelope is still not an exogenous physiological actionability measure.",
+    "The V7R primary p=0.5699409927108643 remains unchanged and unsupported."
+  ]
+}
