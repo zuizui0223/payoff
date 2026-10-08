@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_JS_STAGE5_SAFE_CROSSCHECK__PYTHON_CI_REPLICATION_PENDING",
+  "source_commit": "2171bcd36bf37022c8716e15c0f75412103b0f3f",
+  "dryad_crlf_sha256": "9ef98e6b5e979e93476ed076a018db13bdf03aab6dcc5ca728b5fd866e79c1bd",
+  "birds": 49,
+  "bird_years": 107,
+  "source_years": 5,
+  "early_breeding_after_ico_departure": true,
+  "prediction_epoch": "after stage4, when stage5 departure begins; no stage6 first-day predictor",
+  "models": {
+    "A0_calendar_at_exit": {
+      "features": [
+        "year",
+        "stage3"
+      ],
+      "oof_logloss": 0.5844645518618392,
+      "oof_brier": 0.19694335138273703
+    },
+    "A1_resource_at_exit": {
+      "features": [
+        "year",
+        "stage3",
+        "staging_feeding",
+        "staging_odba"
+      ],
+      "oof_logloss": 0.5679697881125382,
+      "oof_brier": 0.18953601834369632
+    },
+    "A2_duration_at_exit": {
+      "features": [
+        "year",
+        "stage3",
+        "staging_feeding",
+        "staging_odba",
+        "staging_duration"
+      ],
+      "oof_logloss": 0.5714622108188563,
+      "oof_brier": 0.1898373612512025
+    }
+  },
+  "paired_gains": {
+    "A0_minus_A1_logloss": 0.01649476374930105,
+    "A0_minus_A1_brier": 0.0074073330390407345,
+    "A1_minus_A2_logloss": -0.0034924227063180676,
+    "A1_minus_A2_brier": -0.00030134290750627734,
+    "A1_minus_A2_by_year": {
+      "1": 0.01023819733080543,
+      "2": 0.004157682312676903,
+      "3": 0.005237571648732636,
+      "4": 0.0037485559300433403,
+      "5": -0.04870728039932584
+    }
+  },
+  "previous_retrospective": {
+    "M0_loss": 0.5972936753989692,
+    "M1_loss": 0.5790742918277471,
+    "M2_loss": 0.5809859061825022,
+    "warning": "stage6 begins after stage5; models not available at staging departure"
+  },
+  "CI_gate": {
+    "first_workflow_run": 37767663115,
+    "status": "FAILED_ON_SYNTHETIC_TOY_HARDCODED_SAMPLE_LENGTH",
+    "fix": "assert heldout coverage equals input sample size (125 toy, 107 source), plus guard no stage6 in as-of exit feature set",
+    "current_repaired_workflow_status": "pending, check before claiming validated uncertainty"
+  },
+  "interpretation": [
+    "No incremental held-year predictive benefit of realized staging duration in this fixed feature comparison; not an equivalence test.",
+    "Year 5 is strongly negative, four earlier years mildly positive; year heterogeneity important.",
+    "Stage5 duration with stage3 start is equivalent to stage5 exit date, so structural alias blocks causal timing interpretation.",
+    "No independent belief/cue, recourse maximum or causal fitness mechanism identified.",
+    "The source study already modeled arrival, feeding, energetics and breeding; not new main-effect ecology."
+  ]
+}
