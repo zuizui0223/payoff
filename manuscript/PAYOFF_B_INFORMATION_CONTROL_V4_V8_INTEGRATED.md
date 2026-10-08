@@ -742,6 +742,38 @@ can coexist with a common calendar-like exit date. They do **not** establish
 that departure is genetically fixed, that animals ignore local cues, or
 that a particular energetic adjustment has a fitness benefit.
 
+An additional **post-exposure** audit found that calendar-like
+population timing need not mean complete interchangeability of individuals.
+Thirty of the 49 source geese were observed over multiple spring seasons
+(97 non-independent within-bird between-year date pairs). After subtracting
+each year's mean stage-5 departure time, within-individual departure
+residuals were correlated across years (descriptive pair \(r\approx0.69\)).
+An independent within-year bird-identity permutation audit, in which each
+bird was given equal weight and the five-stage seasonal vector was shuffled
+as a unit, suggested that this identity-associated signal exceeded random
+year-specific assignment. However, the directly compared strength of
+stage-5 versus stage-3 consistency was unresolved in the exploratory
+permutation (\(p\approx0.065\)); the five stages were inspected before
+the formal audit. A timing model with an annual calendar component and
+persistent individual offsets,
+\(D_{i,y}=\gamma_y+\alpha_i+\varepsilon_{i,y}\), can produce both a
+near-zero exit-on-arrival coefficient and persistent departure order
+without requiring active error-based feedback. The individual offset can
+equally represent stable migration routes, habitats or social groups;
+it must not be labelled a heritable internal clock.
+
+Individual migration-timing repeatability is substantial prior art:
+Franklin et al. (2022, *Journal of Animal Ecology*,
+doi:10.1111/1365-2656.13697) analysed 177 effects from 47 avian species,
+and a satellite-tracked houbara study showed individually consistent
+*environmental temperature* cues (2021,
+https://pmc.ncbi.nlm.nih.gov/articles/PMC8285904/).
+Thus neither persistent individual timing nor cue consistency is a new
+PAYOFF-B biological discovery. The useful inference is the stronger
+**null comparator**: population departure-date convergence and individual
+rank persistence can coexist without demonstrating the posited feedback
+controller.
+
 An additional exploratory held-out-year prediction comparison on the same
 source tested whether staging duration adds breeding-success forecast
 information beyond calendar and energetic summaries. A critical
