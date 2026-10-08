@@ -37,4 +37,5 @@ jobs:
           path: |
             outputs/payoff_b_goose_staging_calendar_null_result.json
             outputs/payoff_b_goose_staging_energy_fitness_prediction.json
+            outputs/payoff_b_goose_stage5_safe_breeding_prediction.json
           if-no-files-found: error
