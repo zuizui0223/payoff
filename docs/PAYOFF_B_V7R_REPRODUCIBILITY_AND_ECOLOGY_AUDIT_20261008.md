@@ -107,3 +107,31 @@ The next prospective biological test must distinguish independently:
 Use genuinely untouched observations for this new test. The current archive
 remains a non-confirmatory motivation, not evidence for a new substitution
 mechanism.
+
+
+## 2026-10-08 artifact-checksum erratum (post-outcome)
+
+The original audit JSON accidentally transcribed one SHA256 with 63 rather than
+64 hexadecimal digits. It is not a valid SHA256 checksum and caused the
+dedicated V7R GitHub Actions analysis workflow to fail in the artifact
+verification step **before it ran the statistical analysis**.
+
+The failed transcription in the historical audit receipt is:
+
+`c37502b116f4170760e0fb5029fe1804999def4de3f702cdb5bf61e61b8606f`
+
+The SHA256 computed from the recovered actual Barnacle ERA5 archive is:
+
+`c37502b116f4170760e0fbf5029fe1804999def4de3f702cdb5bf61e61b8606f`
+
+The Stage-3 multiflyway, Stage-3 Svalbard, and ERA5 Svalbard archive checksums
+match their originally recorded 64-digit values.
+
+The exact source ZIP was retained and no data rows, the original V7R
+pre-outcome contract, original opened primary receipt, transition list, or
+statistical thresholds were changed for this repair.
+
+The canonical executable checksum in
+`.github/workflows/payoff-b-v7r-direct-recourse.yml` has been corrected.
+Retain the old audit JSON for historical traceability; do not silently
+represent its malformed value as an actual source checksum.
