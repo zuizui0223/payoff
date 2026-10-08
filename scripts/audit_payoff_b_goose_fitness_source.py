@@ -26,6 +26,15 @@ from zipfile import ZipFile, BadZipFile
 
 DOI = "10.5061/dryad.2547d7wzn"
 API_BASE = "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.2547d7wzn"
+AUTHOR_REPO_COMMIT = "2171bcd36bf37022c8716e15c0f75412103b0f3f"
+AUTHOR_SOURCE_BASE = (
+    "https://raw.githubusercontent.com/aschindler23/"
+    "Schindler_etal_2024_ProcB/" + AUTHOR_REPO_COMMIT + "/"
+)
+DRYAD_MANIFEST_SHA256 = {
+    "spring_data.csv": "9ef98e6b5e979e93476ed076a018db13bdf03aab6dcc5ca728b5fd866e79c1bd",
+    "autumn_data.csv": "4dc6fe4e91b2130596bb5d5a2c3620fc183ce5e4809ab4c7d80cf2e2d9f34288",
+}
 EXPECTED_FIELDS = (
     "id", "year", "sub_season", "breeding_outcome", "breeding_success",
     "first_day", "log_ODBA", "num_feed_fixes", "num_ACC_fixes",
@@ -222,6 +231,55 @@ def run(output: str) -> dict:
         receipt["status"] = "SOURCE_ARCHIVE_ACCESS_HOLD"
         receipt["access_error"] = type(exc).__name__ + ": " + str(exc)[:200]
 
+    # A public, independently maintained AUTHOR repository hosts plaintext
+    # spring and autumn tables. Query its pinned historical commit, never an
+    # unspecified moving branch. Read values for source/schema validation only:
+    # do not fit fertility/survival or transfer hypotheses at this stage.
+    mirror = {
+        "repository": "aschindler23/Schindler_etal_2024_ProcB",
+        "commit": AUTHOR_REPO_COMMIT,
+    }
+    for filename in ("spring_data.csv", "autumn_data.csv"):
+        try:
+            tab, _ = retrieve(AUTHOR_SOURCE_BASE + filename, "text/csv")
+            meta = audit_spring_csv(tab)
+            checksum_lf = hashlib.sha256(tab).hexdigest()
+            normalized_crlf = tab.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+            checksum_crlf = hashlib.sha256(normalized_crlf).hexdigest()
+            target = DRYAD_MANIFEST_SHA256[filename]
+            mirror[filename] = {
+                "source_url": AUTHOR_SOURCE_BASE + filename,
+                "size_bytes": len(tab),
+                "sha256_author_bytes": checksum_lf,
+                "sha256_normalized_crlf": checksum_crlf,
+                "sha256_published_dryad_manifest": target,
+                "exact_bytes_match_dryad": checksum_lf == target,
+                "crlf_normalized_bytes_match_dryad": checksum_crlf == target,
+                "admission": meta,
+            }
+            if meta["status"] != "SOURCE_SCHEMA_PASS":
+                mirror[filename]["status"] = "AUTHOR_SOURCE_SCHEMA_HOLD"
+            elif checksum_lf == target or checksum_crlf == target:
+                mirror[filename]["status"] = "AUTHOR_SOURCE_DRYAD_DIGEST_VERIFIED"
+            else:
+                mirror[filename]["status"] = "AUTHOR_SOURCE_SCHEMA_PASS_VERSION_IDENTITY_HOLD"
+        except (HTTPError, URLError, ValueError, TimeoutError, UnicodeDecodeError) as author_exc:
+            mirror[filename] = {
+                "status": "AUTHOR_SOURCE_ACCESS_HOLD",
+                "error": type(author_exc).__name__ + ": " + str(author_exc)[:200],
+            }
+    receipt["author_repository_source_gate"] = mirror
+    spring_status = mirror.get("spring_data.csv", {}).get("status")
+    autumn_status = mirror.get("autumn_data.csv", {}).get("status")
+    if (spring_status == "AUTHOR_SOURCE_DRYAD_DIGEST_VERIFIED" and
+            autumn_status == "AUTHOR_SOURCE_DRYAD_DIGEST_VERIFIED"):
+        receipt["fitness_raw_source_status"] = (
+            "AUTHOR_SOURCE_VALIDATED_VS_DRYAD_CHECKSUMS; "
+            "OUTCOME_UNOPENED_IN_PAYOFF"
+        )
+    else:
+        receipt["fitness_raw_source_status"] = "AUTHOR_SOURCE_INCOMPLETE_OR_UNMATCHED"
+
     p = Path(output)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(receipt, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -230,7 +288,7 @@ def run(output: str) -> dict:
         + json.dumps({
             k: receipt.get(k)
             for k in ("status", "metadata_access", "version_number",
-                      "file_manifest_access", "public_manifest", "row_count", "distinct_birds", "distinct_bird_years",
+                      "file_manifest_access", "public_manifest", "fitness_raw_source_status", "row_count", "distinct_birds", "distinct_bird_years",
                       "full_six_subseason_bird_years", "required_fields_absent",
                       "duplicate_id_year_subseason", "archive_sha256",
                       "access_error")
