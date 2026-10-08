@@ -1,0 +1,304 @@
+# PAYOFF-B V7R post-outcome calendar-anchoring diagnostic
+
+Date: **2026-10-08**  
+Status: **POST-OUTCOME EXPLORATORY; NOT A NEW CONFIRMATION**
+
+This note **does not** modify the frozen V7R source precheck, primary
+\(\beta_{QR}\) result, or preregistered sensitivity endpoints.
+
+## 1. Motivation and preserved primary result
+
+The V7R source-registered meta-analysis tested whether historical
+cross-stopover spring-onset predictability \(Q\) and a route-duration-envelope
+proxy for remaining temporal recourse \(R\) jointly predicted phase retention.
+
+Frozen primary:
+
+- 10 transition types in three flyways;
+- \(\beta_{QR}=+1.373337646\);
+- exact within-flyway permutation \(p=0.569941\);
+- **not supported**.
+
+The independently archived sensitivity receipt also remains null across the
+prespecified definitions.
+
+A post-outcome observation motivated this diagnostic: the Barents R1→R5
+transition has near-zero cross-site spring predictability but near-zero phase
+retention. This does **not** by itself prove successful active correction.
+
+## 2. Exact accounting decomposition
+
+For each tracked transition, let:
+
+- \(A_0\): arrival date at the origin local stop;
+- \(D_s\): duration at that local stop;
+- \(D_t\): transit time to destination;
+- \(A_1=A_0+D_s+D_t\): arrival date at destination;
+- \(S_0,S_1\): region-year environmental-onset coordinates used in Stage-3;
+- \(E_0=A_0-S_0\), \(E_1=A_1-S_1\): phase coordinates.
+
+The row-wise identity is:
+
+\[
+E_1=E_0+D_s+D_t+S_0-S_1.
+\]
+
+Regress every component on \(E_0\) within the same transition, with an
+intercept. By linearity,
+
+\[
+\boxed{\lambda
+=1+\beta_{\mathrm{stay}}+\beta_{\mathrm{transit}}
++\beta_{\mathrm{spring}}}.
+\]
+
+This is **an arithmetic / covariance identity**, not an identified structural
+partition of causal active feedback versus passive forcing.
+
+Across all 10 registered transition types, the decomposition reproduces the
+Stage-3 phase transfer within floating-point precision.
+
+## 3. Barents R1→R5: striking but observational
+
+The data contain 10 transitions from six tagged individuals across 2008–2010.
+
+Historical cross-stopover spring-onset predictability:
+
+\[
+Q=|\rho_{\rm spring}|=0.0023829.
+\]
+
+Phase-retention decomposition:
+
+| component | observed slope |
+|---|---:|
+| baseline carry-over | +1.000000 |
+| local stopover duration | −0.786957 |
+| transit duration | +0.019389 |
+| origin minus destination spring | −0.241003 |
+| **net phase-retention \(\lambda\)** | **−0.008571** |
+
+A bookkeeping operation that sets the covariance contribution of local stay to
+zero would change the resulting slope to \(+0.778387\). **Do not interpret
+this as an intervention counterfactual.**
+
+Cluster resampling of the six individuals (4,000 draws) for the stopover slope:
+
+- point estimate −0.786957;
+- percentile 95% interval approximately −0.956 to −0.568;
+- 99.8% of resamples have a negative slope.
+
+This supports a **descriptive timing association**, not its causal origin.
+
+## 4. Calendar departure synchronization
+
+Because \(D_s=T_{\rm departure}-A_0\),
+
+\[
+\beta(D_s\sim A_0)
+=
+\beta(T_{\rm departure}\sim A_0)-1.
+\]
+
+In Barents R1→R5:
+
+- departure date on last-local-stop arrival date slope = **+0.0353**;
+- within-year departure-on-arrival slope = **+0.0319**;
+- within-year departure/arrival spread ratio = **0.138**;
+- bootstrap 95% interval of departure-on-arrival slope ≈ −0.150 to +0.147.
+
+Within-year ranges:
+
+| year | transition rows | last local stop arrival range | departure range |
+|---|---:|---:|---:|
+| 2009 | 6 | 69.67 days | 10 days |
+| 2010 | 3 | 39.96 days | 5 days |
+
+Estimated local spring-onset date at origin R1 (POWER reconstruction):
+
+| year | reconstructed spring onset, DOY | mean departure, DOY |
+|---|---:|---:|
+| 2008 (n=1) | 77.70 | 139.67 |
+| 2009 (n=6) | 92.90 | 136.50 |
+| 2010 (n=3) | 108.56 | 139.00 |
+
+Descriptively, the local spring reconstruction shifts by about **30.9 days**
+while the departures stay in a much narrower annual calendar window.
+Three years are **not enough** to infer a reliable environmental-cue effect.
+
+## 5. Important origin-definition audit
+
+Barents R1 is centred near \(53.47^\circ\) N, \(6.76^\circ\) E — a
+Netherlands wintering / initial-staging region.
+
+All ten focal transitions originate at a **second or later observed local
+stopover within R1**:
+
+- stop index 2: 4 transitions;
+- index 3: 4;
+- index 4: 1;
+- index 5: 1.
+
+None of the ten focal origin-arrival timestamps is the first observed
+stopover arrival within the wintering region.
+
+Consequently, the extreme spread of the "origin arrival" dates partly measures
+**how the last local stop was selected**, not how far apart the animals first
+arrived at a migration-stage region. This can induce apparently strong
+stay-versus-arrival compensation even without cue-responsive correction.
+
+Kölzsch et al. (2015) also warned that initial stopover arrival times may be
+uncertain because tagging occurred after animals arrived, and discussed
+partially fixed migration schedules / photoperiod-based cues as an explanation
+when predictive connectivity is poor.
+
+Primary paper: https://doi.org/10.1111/1365-2656.12281
+
+## 5.5 Published-complete-track versus archive scope
+
+**Post-outcome source-provenance qualification.** Kölzsch et al. (2015)
+describe the Barents Sea complete spring migrations used in their focal
+published study as 6 in 2008 and 6 in 2009. The larger public Movebank
+archive and the derived PAYOFF Stage-3 transition table also include 2010.
+
+Therefore the full 2008–2010 diagnostic is **not** a reproduction restricted
+to the published 40-complete-migration study population.
+
+For the selected Barents R1→R5 transition, rerunning the same descriptive
+slopes under calendar-year restrictions gives:
+
+| Included years | n | \(\lambda\) | stopover term | spring term | departure-on-arrival calendar slope |
+|---|---:|---:|---:|---:|---:|
+| 2008–2009 | 7 | +0.073 | −0.862 | −0.099 | +0.033 |
+| 2009 only | 6 | +0.045 | −0.982 | approximately 0 | +0.018 |
+| 2008–2010 | 10 | −0.009 | −0.787 | −0.241 | +0.035 |
+
+The descriptive calendar synchronization remains under these year
+restrictions. **This is not a registered sensitivity** and cannot substitute
+for the original fixed V7R test. Restricting calendar years alone does not
+reproduce the original paper's animal/inclusion filters or prove that each
+archive track is a complete spring migration.
+
+The 2008–2010 climate-onset comparison in Section 4 must also be read as
+a **broader archive diagnostic**, not as a result reported for the original
+2008–2009 complete-migration subset.
+
+## 5.6 Initial-region exclusion destroys primary model support
+
+An additional source-structure diagnostic uses the ten transition types in
+the **unchanged, pre-existing** V7R transition input table.
+
+Four transitions start in R1 (wintering/initial staging):
+
+- Barents R1→R2 and R1→R5;
+- Greenland R1→R2;
+- Svalbard R1→R2.
+
+Removing those leaves six transition types:
+
+- four Barents;
+- one Greenland;
+- one Svalbard.
+
+The registered flyway-fixed-effects meta-model contains six coefficients:
+
+\[
+1\text{ intercept}+2\text{ flyway dummies}
++\beta_Q+\beta_R+\beta_{QR}=6.
+\]
+
+Thus a same-model fit after removing initial-region origins would have
+
+\[
+n-p=6-6=0
+\]
+
+residual degrees of freedom, and the small within-flyway permutation design
+would cease to be a useful replication.
+
+**Classification:** \`R1_EXCLUSION_V7R_PRIMARY_NOT_ESTIMABLE\`.
+
+This is **not** a newly significant or non-significant sensitivity result.
+It is a source-support limitation: the V7R null is conditional on retaining
+initial-region transitions, whose arrival-time meaning must be treated with
+particular caution.
+
+The original V7R result remains \(\beta_{QR}=1.3733\), \(p=0.56994\).
+Do not interpret this as either a causal disproof or confirmation of
+biological recourse loss.
+
+## 5.7 Shared behavioral data between recourse proxy and phase response
+
+The registered \(R\) proxy is independent of the **numerical phase errors**
+used to fit \(\lambda\), but it is **not measured independently of the
+behavioral-duration data that enter the phase-transfer response**.
+
+In the registered construction:
+
+- \(R\) is a Q10–Q90 envelope of observed origin stopover duration plus
+  transit time, accumulated over the route graph;
+- \(\lambda\) is the regression slope of destination phase on origin phase;
+- but the identity in Section 2 shows that destination phase itself includes
+  those same realized stopover and transit durations.
+
+Thus \(R\) and \(C=1-|\lambda|\) share upstream behavioral data. The overlap
+does not force a non-zero regression interaction algebraically, but it defeats
+any claim that \(R\) was a truly independent, externally determined
+physiological capacity or feasible-action-set measurement.
+
+**Consequence:** a well-supported \(Q\times R\) association, had it appeared,
+would still have required a more stringent causal design. The observed null
+does not overcome this limitation either.
+
+A stronger test requires direct recourse constraints measured separately from
+focal realized behavior — such as externally imposed habitat access, speed
+limits, measured fuel budgets, or a prospectively defined physical movement
+envelope. This exploratory note does not re-engineer V7R after outcome
+exposure.
+
+## 6. Ecological interpretation and stop rule
+
+**Observed:** Some individuals reached the last wintering-region local stop
+at very different dates but departed the larger region in a much narrower
+calendar window. The phase slope near zero has contributions from both
+stay-time covariance and environmental-coordinate covariance.
+
+**Compatible hypotheses:**
+
+1. fixed/photoperiod-linked departure schedule;
+2. energetic readiness and synchronization before an ecological barrier;
+3. active stagewise timing feedback;
+4. source-data construction / within-region last-stop selection effects.
+
+The current data and decomposition **cannot distinguish these mechanisms
+causally**.
+
+It is especially important that a near-zero cross-site climate correlation
+\(Q_{\mathrm{forecast}}\) does not imply there were no locally accessible cues
+\(Q_{\mathrm{feedback}}\).
+
+This observation is **not** a successful rescue of the registered
+\(Q_{\mathrm{forecast}}\times R\) interaction.
+
+The useful next research distinction is:
+
+- a fixed calendar/photoperiod schedule;
+- local environmentally responsive feedback;
+- energetic constraints before a barrier.
+
+A confirmation route needs a separately specified dataset with direct,
+time-stamped cue and physiological/behavioral measurements or an exogenous
+perturbation. Do not select another V7R transition after seeing these results
+and call it independent verification.
+
+## 7. Provenance
+
+Unchanged Stage-3 workflow archives:
+
+- multiflyway SHA256
+  \`8e720be44e0ef2e3e497786c9241c6625b4b14c46506fbb30ea027dcdf36749f\`
+- Svalbard SHA256
+  \`29558f9b8b43a7375b3922118a77b74464558f4869a7722472570a32745f2856\`
+
+This is separate from the existing V7R post-outcome sensitivity/reproducibility
+audit. The original V7R receipt and its noted numerical drift are preserved.
