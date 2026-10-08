@@ -1,7 +1,7 @@
 # PAYOFF-B: Asian houbara decision-time climate-cue source eligibility
 
 Date: 2026-10-08
-Status: **EXTERNAL SOURCE AUDIT PLANNED, DO NOT OPEN BIOLOGICAL OUTCOMES BEFORE SOURCE ADMISSION**.
+Status: **ORIGINAL ZENODO FILES MD5-VERIFIED; FIVE-SHEET OOXML SCHEMA PASSED; FULL SOURCE-ROW / CHRONOLOGY AND ACTIONABILITY AUDIT PENDING**.
 This is a candidate for a missing construct, NOT a new empirical claim and NOT another paper.
 
 ## Why it is a materially different source
@@ -44,3 +44,38 @@ The source cannot be combined at the individual level with the 2018–2022 Green
 - Unavailable raw data or incomplete schema: **ACCESS_OR_SCHEMA_HOLD**. Do not substitute paper aggregate numbers as source rows.
 
 No preliminary ecological state, null tests or old theory theorem are reclassified by this screening.
+
+
+## Actual first source gate outcome, no biological data fitted
+
+Dedicated GitHub Actions **37773797850** completed successfully:
+- MigrationData.xlsx 13,365,399 bytes, exact advertised MD5
+  183edf4bc6b3ba9946e4145589ff1c2d, SHA256
+  5aebe52763d2a72ba5b05f6ffa434fc216c885305322eecc194d0e06ee961729.
+- PNAS_code.R 23,948 bytes, MD5
+  73050bfb758fd8d7a290913d80315ce7.
+- OOXML workbook exactly five sheets:
+  Explanations (A1:K34),
+  spring_migration_data (A1:O133),
+  autumn_migration_data (A1:N153),
+  repeatable_comparisons (A1:D43),
+  null_spring_dataset (A1:N132001).
+- Spring header specifically lists departure/arrival dates, latitude, wind,
+  day length, departure/arrival temperature and annual breeding-ground
+  reference temperature. It does NOT list waypoint decision times, actual
+  physiological route recourse, survival or individual reproduction.
+- Null spring sheet has 132,000 declared data rows under one header,
+  consistent with 1,000 shuffles of 132 observations, but that is a
+  **schema implication only**, not proof of original numeric support.
+- In the paper, Figure 2 explicitly reports 133 spring departure events
+  from 45 birds; the Excel spring dimension includes just 133 rows
+  *including a text header*. The full row count and reason for any mismatch
+  require independent checking. Do not silently reconcile the counts.
+
+No new temperature or arrival regression was fitted; the direct departure
+temperature cue findings are Burnside et al.'s original discovery.
+
+The more discriminating second source-only plan was registered separately
+in docs/PAYOFF_B_HOUBARA_EVENT_TIME_AND_RECOURSE_SOURCE_CONTRACT_20261008.md,
+with the parser and CI on this PR. Its dedicated run must be completed
+before interpreting event support.
