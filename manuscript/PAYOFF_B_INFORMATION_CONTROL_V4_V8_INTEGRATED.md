@@ -717,6 +717,49 @@ In pink-footed geese, the importance of day length, local accumulated temperatur
 
 This is consistent with the route-wise premise that migration itself can expose animals to information unavailable at the origin.
 
+### 3.5a Calendar anchoring is a structural alternative to active feedback
+
+A separate, **post-publication exploratory** source reanalysis offers a direct
+negative control against interpreting stopover duration–arrival correlations
+as evidence that migrants used information to actively correct their phase.
+We examined the publicly deposited Schindler et al. (2024) Greenland
+white-fronted goose records: 107 complete bird-years from 49 individuals
+across 2018–2022, with stage 3 the beginning of spring staging in Iceland
+and stage 5 the beginning of the second migration flight.
+
+After removing year-specific means, each additional day of later staging
+arrival was associated with only **−0.013 days** change in exit date
+(4,000-draw bird-cluster bootstrap 95% interval −0.153 to +0.120 days).
+The corresponding staging-duration coefficient was **−1.013 days** per
+arrival day. The latter is the exact identity
+\(\beta_{\mathrm{stay}}=\beta_{\mathrm{exit}}-1\):
+even an entirely calendar-fixed exit date would generate a −1
+staging-duration coefficient without any active feedback. Leave-one-year-out
+estimates for exit-on-arrival all remained near zero.
+
+These results indicate that strong apparent stopover timing compensation
+can coexist with a common calendar-like exit date. They do **not** establish
+that departure is genetically fixed, that animals ignore local cues, or
+that a particular energetic adjustment has a fitness benefit.
+
+An additional exploratory held-out-year prediction comparison on the same
+source examined whether realized staging duration forecast breeding success
+beyond calendar dates, staging feeding fraction and an activity proxy.
+The mean cross-validated log loss was 0.5791 without staging duration and
+0.5810 with it (five held-year folds), showing **no incremental predictive
+improvement under that fixed comparison**. The original authors already
+analysed arrival timing and energetic correlates of breeding; this extension
+is not new evidence for a causal relationship between adaptive correction
+and reproductive fitness. The public source has 107 bird-years (28 successes,
+72 failures, 7 deferrals), one fewer failure than the 108 cases in the
+published summary; its provenance difference remains unresolved.
+
+Consequently a negative stopover-duration slope is never sufficient as a
+stand-alone diagnosis of learned or cue-based control. This external natural
+example motivates independent decision-time cue and actionability
+measurements, rather than being treated as an empirical confirmation of the
+controller model.
+
 ### 3.6 Compensation can restore timing without restoring fitness
 
 American redstarts departing roughly 10 days late migrated about 43% faster, yet the compensatory pattern was associated with a reported 6.3% decrease in annual survival.
