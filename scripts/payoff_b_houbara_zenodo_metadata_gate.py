@@ -141,8 +141,10 @@ def _sheet_meta(raw):
                         sheet_info["first_row"] = cells
                         element.clear()
                         break
-                    if event == "end" and tag in ("c", "row"):
-                        element.clear()
+                    # Do not clear cell nodes before reading the enclosing
+                    # first row; it would erase shared-string index values.
+                    # We terminate after the first row and never load the
+                    # potentially enormous randomized-null worksheet body.
             sections.append(sheet_info)
 
         if needed_shared_indices:
