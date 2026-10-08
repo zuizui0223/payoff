@@ -33,3 +33,23 @@ First verified read-only R run 37791673297:
 - Stop short of causal actionability/fitness claims without independently observed feasible alternatives, energy expenditure, breeding/survival and stage-specific resource target.
 
 The relevant new candidate is *conditional forecast innovation over an origin-issued forecast*, not just present weather. If source lacks that forecast and the flight-in-progress risk set, classification is **WEATHER-RESPONSIVE_POLICY_PRIOR_ART_ONLY** or **SOURCE_NEEDS_EXTERNAL_FORECAST_AND_RISK_SET**, not a new PAYOFF result.
+
+
+## One additional source-structure discriminator registered after basic counts
+
+The verified source shows exactly 24 flights coded landing=1 and exactly
+24 flights labelled sea-crossing (154 in their complementary categories).
+Before attributing these to separate decisions, calculate the explicit
+2-by-2 route-category × landing cross-tab directly from the original source
+and inspect the author Rmd's actual route and landing model sections.
+
+Equal marginal counts DO NOT imply identical records. If these outcomes
+are perfectly dependent or defined by overlapping tracking-detector criteria,
+they cannot constitute two independent biological decisions. If not,
+quantify source support and keep both decisions separate. Either way,
+cross-tabulation is a source-ontology check, not a new weather association.
+
+The original author Rmd is 708 lines long. The first automated source
+snippet limit of 155 context lines stopped during the departure model;
+the follow-up will read later script sections and their explicit use
+of flight-start versus flight-end weather without running models.
