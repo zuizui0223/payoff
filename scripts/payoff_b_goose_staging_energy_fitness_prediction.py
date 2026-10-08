@@ -330,6 +330,19 @@ def synthetic_test():
                 "staging_feeding":f,"staging_odba":o
             })
     result=calculate(rows)
+    assert all(
+        "stage6" not in features
+        for features in AS_OF_STAGE5_FEATURESETS.values()
+    ), "post-exit stage6 leakage in as-of-stage5 predictors"
+    safe=calculate(
+        rows,
+        feature_sets=AS_OF_STAGE5_FEATURESETS,
+        comparisons=AS_OF_EXIT_COMPARISONS,
+        prediction_epoch="as_of_stage5_pre_stage6",
+    )
+    assert safe["bird_years"]==125
+    assert len(safe["paired_comparisons"]["duration_given_resource"]["year_score_detail"])==5
+    assert all(math.isfinite(v) for v in safe["oof_model_logloss"].values())
     assert result["bird_years"]==125
     assert len(result["paired_comparisons"]["duration_given_energy"]["year_score_detail"])==5
     assert all(math.isfinite(x) for x in result["oof_model_logloss"].values())
