@@ -748,13 +748,16 @@ Thirty of the 49 source geese were observed over multiple spring seasons
 (97 non-independent within-bird between-year date pairs). After subtracting
 each year's mean stage-5 departure time, within-individual departure
 residuals were correlated across years (descriptive pair \(r\approx0.69\)).
-An independent within-year bird-identity permutation audit, in which each
-bird was given equal weight and the five-stage seasonal vector was shuffled
-as a unit, suggested that this identity-associated signal exceeded random
-year-specific assignment. However, the directly compared strength of
-stage-5 versus stage-3 consistency was unresolved in the exploratory
-permutation (\(p\approx0.065\)); the five stages were inspected before
-the formal audit. A timing model with an annual calendar component and
+A successful GitHub-archived 10,000-replicate within-year bird-identity
+permutation test, averaging standardized residual products equally over
+the 30 repeated birds and shuffling entire five-stage seasonal vectors,
+found persistent identity-associated stage-5 timing relative to
+exchangeable bird IDs (post-selection max-over-five-stage exploratory
+\(p=0.00030\); equal-bird product 0.539, 95% bird-resampled
+interval 0.229–0.912). However, the directly compared strength
+of stage-5 versus stage-3 persistence was **not established**
+(exploratory \(p=0.065\)); all five stage patterns had been inspected
+before formal testing. A timing model with an annual calendar component and
 persistent individual offsets,
 \(D_{i,y}=\gamma_y+\alpha_i+\varepsilon_{i,y}\), can produce both a
 near-zero exit-on-arrival coefficient and persistent departure order
