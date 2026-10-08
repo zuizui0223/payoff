@@ -38,4 +38,5 @@ jobs:
           path: |
             outputs/payoff_b_ruppel_stage3_event_time_support.csv
             outputs/payoff_b_ruppel_stage3_author_models_excerpt.txt
+            outputs/payoff_b_ruppel_stage3_route_landing_Rmd_excerpt.txt
           if-no-files-found: warn
