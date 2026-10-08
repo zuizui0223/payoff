@@ -189,6 +189,61 @@ def script_keyword_audit(raw):
     }
 
 
+
+# Field meanings are checked against the original author's Explanations
+# sheet. These patterns are narrow provenance assertions, not inferences.
+FIELD_DESCRIPTION_PATTERNS = {
+    "departure.date": ("last fix", "departure site"),
+    "arrival.date": ("first fix", "arrival site"),
+    "departure.temperature.C": ("modis", "8 days prior"),
+    "arrival.temperature.C": ("modis", "8 days after"),
+    "annual.ref.temperature.breeding": ("breeding site", "mean population departure date"),
+    "departure.date.shuffled": ("shuffled",),
+    "temperature.rand": ("shuffled",),
+}
+
+
+def check_author_temporal_semantics(explanation_rows):
+    definitions = {}
+    for r in explanation_rows:
+        name = safe_normalize(r.get("A"))
+        desc = safe_normalize(r.get("B"))
+        if name in FIELD_DESCRIPTION_PATTERNS and isinstance(desc, str):
+            if name in definitions:
+                raise ValueError("duplicated author field definition: " + name)
+            definitions[name] = desc
+    missing = sorted(set(FIELD_DESCRIPTION_PATTERNS) - definitions.keys())
+    if missing:
+        raise ValueError("source author field explanations absent: " + repr(missing))
+    for col, fragments in FIELD_DESCRIPTION_PATTERNS.items():
+        val = definitions[col].lower()
+        for fragment in fragments:
+            if fragment not in val:
+                raise ValueError("source author semantics changed at " + col)
+    return {
+        "status": "PUBLISHER_EXPLANATIONS_SOURCE_TEXT_VERIFIED",
+        "field_definitions": definitions,
+        "temporal_admission": {
+            "departure.date": "LAST_FIX_AT_DEPARTURE_SITE_NOT_INSTANTANEOUS_DECISION",
+            "arrival.date": "FIRST_FIX_AT_ARRIVAL_SITE_POST_MIGRATION",
+            "departure.temperature.C": "MODIS_8DAY_PRIOR_TO_LAST_DEPARTURE_FIX_PROXY_NOT_DIRECT_BIRD_BELIEF",
+            "arrival.temperature.C": "MODIS_8DAY_AFTER_ARRIVAL_POST_OUTCOME_NEVER_PREDEPARTURE_CUE",
+            "annual.ref.temperature.breeding": "REMOTE_BREEDING_SITE_REFERENCE_AT_POPULATION_MEAN_DEPARTURE_DATE_NOT_INDIVIDUAL_KNOWLEDGE",
+            "departure.date.shuffled": "AUTHOR_SHUFFLED_DEPARTURE_DATE_NOT_OBSERVED_NONDEPARTURE_RISK_SET",
+            "temperature.rand": "AUTHOR_SHUFFLED_NULL_TEMPERATURE_NOT_OBSERVED_CUE_CHRONOLOGY",
+        },
+        "invalid_predeparture_model_features": [
+            "arrival.date", "arrival.temperature.C",
+            "annual.ref.temperature.breeding",
+        ],
+        "fit_interpretation_ceiling": (
+            "Event-indexed prior temperature associations may be replicated, "
+            "but direct perception, route-stage updating and causal "
+            "departure hazard require independent data."
+        ),
+    }
+
+
 def source_audit():
     raw,meta=gate._download_verified("MigrationData.xlsx")
     code,code_meta=gate._download_verified("PNAS_code.R")
@@ -208,6 +263,7 @@ def source_audit():
             for row in known[:36]
         ]
     }
+    info["author_temporal_semantics"] = check_author_temporal_semantics(known)
     info["null_spring_dataset"]={
         "xlsx_declared_dimension":"A1:N132001",
         "year_shuffled_rows_not_used":True,
@@ -256,6 +312,24 @@ def self_test():
         {"A":1,"B":2018,"C":43000,"D":43010,"E":11,"F":14},
         {"A":2,"B":2018,"C":43000,"D":43015,"E":9,"F":17},
     ]}
+    semantic_rows = [
+        {"A": k, "B": " | ".join(v)} for k, v in
+        FIELD_DESCRIPTION_PATTERNS.items()
+    ]
+    x = check_author_temporal_semantics(semantic_rows)
+    assert x["status"] == "PUBLISHER_EXPLANATIONS_SOURCE_TEXT_VERIFIED"
+    assert "arrival.temperature.C" in x["invalid_predeparture_model_features"]
+    assert "departure.temperature.C" not in x["invalid_predeparture_model_features"]
+    bad = [dict(z) for z in semantic_rows]
+    for z in bad:
+        if z["A"] == "arrival.temperature.C":
+            z["B"] = "MODIS surface temperature 8 days prior"
+    try:
+        check_author_temporal_semantics(bad)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("future arrival temperature relabel failed closed")
     result=inspect_event_sheet(fake,"spring_migration_data")
     assert result["data_records"]==2
     assert result["paired_departure_arrival_count"]==2
