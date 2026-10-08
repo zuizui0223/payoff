@@ -21,7 +21,7 @@ Missing any component defines the corresponding **claim ceiling**.
 
 | Priority and system | Already published findings (not PAYOFF-B discoveries) | Data availability as explicitly stated by source | Partial gate satisfied | Missing for complete causal test |
 |---|---|---|---|---|
-| **0. Rüppel et al. 2023 coast-crossing songbirds**, Royal Society Open Science, doi:10.1098/rsos.221420 | Original authors already jointly observed departure, offshore/coastal route and in-flight landing choices and reported weather effects on each. No novelty for simple landing ~ headwind, routing ~ wind, or departure ~ weather. | Public Figshare collection doi:10.6084/m9.figshare.c.6403996, source format/row gate initiated through GitHub; **actual record-level fields not yet admitted** | Potentially temporally ordered route/landing decisions in a single tracking system if deposited individual event records allow reconstruction | Origin-time forecast and NEW en-route cue (innovation), true alternatives still available, independent energy/fecundity; first test against initial-plan and calendar/ID/social-group/hazard null |
+| **0. Rüppel et al. 2023 coast-crossing songbirds**, Royal Society Open Science, doi:10.1098/rsos.221420 | Original authors **already fitted departure hazards, wind-linked routing, and a landing response to flight wind change v_end−v_start**. Weather-responsive decisions NOT PAYOFF novelty. | **Full deposited Figshare RData ADMITTED**: 1,783 nightly risk rows and 178 flights by 178 birds (only 1 flight per bird). Source exactly MD5/SHA256 verified, authors Rmd audited | Actual departure risk and flight event with start/end time+weather, route and landing; 175/178 ID×day matches | **No origin-issued forecast for end wind, no repeated in-flight hazard windows, feasible alternatives, demographic fitness or repeated flights**. Label information-innovation and fitness gate HOLD; do not refit original weather landing model |
 | **1. Icelandic whimbrel** — Carneiro, Gunnarsson & Alves (2020), *Frontiers in Ecology and Evolution*, doi:10.3389/fevo.2020.00145 | **57 migrations / 36 birds** (9 direct, 48 stopover), **13 repeatedly tracked birds, only 3 switched** strategy. En-route wind and temperature were not significantly different between strategies. Later departure was associated with direct migration in population GLMs, but **not statistically detected** in the reduced bird-random-effect sensitivity. The authors explicitly could not determine whether timing caused strategy or the reverse. | **Underlying event/tracking dataset available only on author request** according to original Data Availability Statement; no authorized raw sample in PAYOFF | Actual direct-versus-stopover route strategy (already published) and stage-conditioned weather, with NCEP environment reconstruction | Exogenous action availability, new information timing before the strategy choice, individual breeding/survival or physiological costs; without these, another regression is prior-art replication |
 | **2. Wild vs captive-bred Asian houbara** — Burnside et al. (2017) *Ibis*, doi:10.1111/ibi.12462 | GPS/satellite trajectories permit stopover duration and frequency, movement efficiency, survival to return; compare 29 captive-bred juveniles, 10 wild juveniles, 39 wild adults in published summary. Stopover extraction and routes already analysed. | Article/supplement available; exact independently retrievable raw telemetry **NOT VERIFIED** | Real on-route stopover dates possible in original raw full-resolution telemetry | No verified common individual IDs with Burnside 2021 temperature-cue workbook. Cohort overlap MUST NOT be assumed; fitness/cost still not matched |
 | **3. Little bustard microclimate** — *Movement Ecology* (2023), doi:10.1186/s40462-023-00437-7 | 47 birds, 67 breeding events; 30-m microclimate along GPS routes, vegetation greenness and time at breeding site. Source authors already reported microclimate/refugia phenology associations. | **Datasets available from corresponding author on request**, not automatically accessible from article | Individual-experienced temperature, spatial microclimate and GPS behavior | No independent access to animal subjective cue, feasible correction options, or demographic fitness endpoints described in public abstract |
@@ -45,12 +45,16 @@ promising raw-data-on-request route-strategy source. The original 2023
 publication is an exceptionally strong **prior-art collision** for the
 claim that PAYOFF-B newly discovers weather-linked route decisions.
 
-A reproducible Figshare v2 collection/files source-only auditor on PR #320
-checks deposited metadata, checksums and headers without evaluating
-behavioral outcomes. If only supplementary tables or figures are publicly
-archived, stop and retain the conditional request for actual radio-telemetry
-event records. No complete behavioral/fitness fit should be run from
-article-level summaries.
+That Figshare source gate **completed successfully**: original
+RData contains real nightly departure risk rows and individual flight
+events, not merely figure tables. The deeper audited source (GitHub runs
+37791673297 and 37792277616) showed one flight per individual and
+no dated origin-issued future-weather forecast or risk windows within
+flights. The original Rmd already fitted **landing against in-flight
+northward-wind change**. Therefore the route-temperature feedback idea
+is a **prior-art overlap and an unidentifiable forecast-innovation
+construct** in this archive. Stop this lane rather than fit an
+unlicensed new effect.
 
 ## Ranked-source disposition after original-article verification
 
@@ -108,3 +112,7 @@ an opportunity.
 - https://doi.org/10.1186/s40462-023-00397-y
 - https://doi.org/10.1073/pnas.2026378118
 - https://doi.org/10.5281/zenodo.4917565
+
+## Final decision, as of October 8 2026
+
+Rüppel source is VERIFIED (not missing), but does not clear the unique PAYOFF-B information-update/fitness target. The next dataset search must require a real time-stamped forecast issued before route decisions, on-flight alternative/continuation risk sets, and independent fitness to claim a new mechanism. The conditional whimbrel-on-request source is NOT automatically eligible because it too lacks measured alternate action sets and reproduction. Do not create a new empirical paper from the source audit alone.
