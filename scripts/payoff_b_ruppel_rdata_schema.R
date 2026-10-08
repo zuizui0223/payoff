@@ -21,7 +21,6 @@ if (!file.exists(zip_path)) stop("exact MD5/SHA256 verified Figshare archive abs
 filenames <- c("data.Event.RData","flights.RData","Rcode.Rmd")
 temp <- tempfile("ruppel_schema_")
 dir.create(temp)
-on.exit(unlink(temp,recursive=TRUE),add=TRUE)
 unzip(zip_path, files=filenames, exdir=temp, overwrite=FALSE)
 for (f in filenames) {
   if (!file.exists(file.path(temp,f))) stop(paste("missing source archive component",f))
@@ -106,3 +105,4 @@ print(columns[,c("source_file","object_name","column_name",
                  "column_class","missing_count","nonmissing_count")],row.names=FALSE)
 cat("Original Rmd total lines",length(code),"matched",length(matched),"\n")
 cat("SCHEMA_ONLY_NO_BIOLOGICAL_EFFECTS_OR_FITNESS_ESTIMATED\n")
+unlink(temp,recursive=TRUE)
