@@ -188,3 +188,70 @@ def compare_commitment_times(
     )
     net = late - early - delay
     return CommitmentComparison(early, late, delay, net, net > 0.0)
+
+
+@dataclass(frozen=True)
+class CheckpointUpdate:
+    """A checkpoint forecast innovation and two *counterfactual* timing plans."""
+
+    origin_prediction: float
+    checkpoint_innovation: float
+    innovation_sensitivity: float
+    refreshed_prediction: float
+    origin_plan: float
+    refreshed_plan: float
+
+
+def checkpoint_plan_update(
+    rhos: Sequence[float],
+    checkpoint: int,
+    *,
+    observed_origin: float,
+    observed_checkpoint: float,
+    origin_noise_variance: float = 0.0,
+    checkpoint_noise_variance: float = 0.0,
+    timing_adjustment_limit: float,
+    effort_penalty: float = 0.0,
+) -> CheckpointUpdate:
+    """Posterior mean update from the *unexpected* part of a new cue.
+
+    The two plans use the SAME feasible timing action set to isolate the cue
+    update. They are not evidence that a wild bird actually changes course.
+    Timing plan revisions require biological reversibility, to be evaluated
+    independently at the checkpoint.
+    """
+    vals = _numbers(rhos)
+    info = conditional_cue_information(
+        vals, checkpoint,
+        origin_noise_variance=origin_noise_variance,
+        checkpoint_noise_variance=checkpoint_noise_variance,
+    )
+    z0 = float(observed_origin)
+    zm = float(observed_checkpoint)
+    if not isfinite(z0) or not isfinite(zm):
+        raise ValueError("observed cues must be finite")
+    limit = _nonnegative_finite("timing_adjustment_limit", timing_adjustment_limit)
+    penalty = _nonnegative_finite("effort_penalty", effort_penalty)
+    a, b = 1.0, 1.0
+    for v in vals[:checkpoint]:
+        a *= v
+    for v in vals[checkpoint:]:
+        b *= v
+    v0 = 1.0 + origin_noise_variance
+    vm = 1.0 + checkpoint_noise_variance
+    innovation = zm - (a / v0) * z0
+    residual_var = vm - a * a / v0
+    cov = b * (1.0 - a * a / v0)
+    if residual_var <= 1e-14:
+        if abs(innovation) > 1e-10:
+            raise ValueError("impossible innovation for identical perfect cues")
+        slope = 0.0
+    else:
+        slope = cov / residual_var
+    before = (a * b / v0) * z0
+    after = before + slope * innovation
+    if residual_var > 1e-14 and abs(slope * slope * residual_var - info.incremental_r2) > 1e-10:
+        raise ArithmeticError("innovation variance does not match R² increment")
+    def plan(mean: float) -> float:
+        return min(limit, max(-limit, mean / (1.0 + penalty)))
+    return CheckpointUpdate(before, innovation, slope, after, plan(before), plan(after))
