@@ -40,11 +40,13 @@ theory, information can become more accurate while opportunities to use it
 decline. In mule deer, nutritional condition predicts migration-start timing,
 whereas signed phase predicts downstream speed and stopover use.
 
-**Main conclusions:** Environmental predictability alone does not determine
-realized seasonal tracking. Timing also depends on when organisms become able
-to act and how much downstream correction remains possible. A serial
-timer–controller architecture therefore provides a mechanistic alternative to
-treating phenological response as a single adjustment rate.
+**Main conclusions:** The range-based environmental correlation proxy does
+not, by itself, predict the registered change in seasonal matching. That proxy
+does not measure what birds perceived or how accurately their forecasts were
+calibrated. A serial timer–controller model distinguishes readiness from
+post-entry correction and clarifies how information, action constraints and
+costs could jointly determine realized tracking. The empirical analyses do
+not identify a single missing causal mechanism or reproductive fitness gain.
 
 **Keywords:** phenological mismatch; seasonal timing; migration; information
 ecology; environmental predictability; feedback control; recourse; climate
@@ -60,14 +62,27 @@ loss of environmental predictability: an earlier location becomes a poorer
 guide to conditions that will be encountered later, so departure and movement
 decisions are made from degraded information.
 
-That explanation is plausible but incomplete. Better information has value only
-while useful actions remain available. A migrant can acquire more accurate
+That explanation is plausible but incomplete. The observed correlation of
+environmental states at two geographical points is not automatically a
+predictive signal available to an animal at its decision time. In particular,
+stronger within-period correlation can coexist with a changing cue-to-target
+mean or slope, an outdated learned forecast, or no cue perception at all.
+Better information has value only while useful actions remain available. A migrant can acquire more accurate
 information as it approaches a breeding destination, yet simultaneously lose
 the ability to undo earlier departure, fuelling, route or stopover decisions.
 Plants and developmentally committed insects represent the opposite extreme:
 local information can be accurate, but the focal event can become difficult to
 reverse once initiated. Environmental information quality and biological
 actionability are therefore distinct axes.
+
+An additional distinction is essential: a better match to a seasonal target
+need not imply greater fitness once the costs of early arrival, travel,
+competition or adjustment are considered. Torstenson and Shaw (2025, *Oikos*,
+doi:10.1111/oik.10862) explicitly separate cue timing accuracy from cue
+fitness efficacy and show that the relative benefit of temporal and
+environmental migration cues can reverse across habitat-seasonality regimes.
+Consequently PAYOFF-B does **not** claim novelty for cue-type reversal or the
+general proposition that phenological matching differs from fitness.
 
 Long-distance migration makes the distinction especially visible. Departure is
 not the only decision. Speed, stopover duration, route, skipping behaviour and
@@ -611,6 +626,14 @@ associations with movement rate (\(+0.0742\), 95% CI \(+0.0387\) to
 \(+0.1028\)) and stopover (\(-0.234\), \(-0.429\) to \(-0.0095\)), whereas
 IFBFat intervals spanned zero in both downstream models.
 
+The prespecified post-freeze proxy moderation analysis also failed to show
+that March IFBFat gates the phase-to-actuator response. The starting-phase
+by IFBFat interaction for movement rate was -0.0152 (animal-cluster 95% CI
+-0.0542 to +0.0219), and the stopover interaction was +0.0481 (95% CI
+-0.1539 to +0.2365). Neither was supported in the year-centred sensitivity
+either. These negative results are retained as a **limit on H2**, not as
+evidence that a different readiness state could never gate correction.
+
 Taken together, these results provide a candidate same-population
 timer–controller anchor and support channel dissociation: physiological
 condition is associated with when migration begins, whereas ecological phase
@@ -720,11 +743,13 @@ than to claim a new control-theory class.
 
 The main conceptual change is to separate the quality of the environmental
 signal from the organism's capacity to act on it. In the V8 stress test,
-source–destination spring predictability becomes stronger rather than weaker,
-yet the preregistered improvement in bird mismatch is not detected. This does
-not prove a biological actionability bottleneck, but it shows why
-environmental predictability cannot be treated as a sufficient description of
-realized tracking.
+detrended source–destination spring *correlation* becomes stronger rather than
+weaker, yet the preregistered improvement in bird mismatch is not detected.
+This does not show that birds received more useful information: cue
+availability, belief calibration, individual routes and actionability were not
+observed in V8. It therefore fails the registered correlation-to-matching
+transfer hypothesis without establishing a biological actionability
+bottleneck.
 
 Two organisms can also reach the same observed arrival shift for very
 different reasons. One may predict the future accurately and require little
@@ -982,7 +1007,11 @@ individuals and interacting partners.
 
 ## 5. Conclusion
 
-Environmental predictability is not synonymous with adaptive tracking. In the
+Environmental correlation, calibrated forecast skill, cue perception,
+phenological matching and demographic fitness are five different quantities.
+The current V8 evidence directly measures the first and a spatial proxy for
+the fourth, not the other three. Environmental predictability is not
+synonymous with adaptive tracking. In the
 prospective bird stress test, source–destination spring predictive
 connectivity strengthens broadly, yet larger connectivity gains do not yield
 the preregistered improvement in arrival–green-up mismatch. The analysis does
