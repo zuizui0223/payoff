@@ -339,6 +339,14 @@ def main():
         ): row
         for row in env10.itertuples(index=False)
     }
+    # Reproduce the originally archived local-width sensitivity separately.
+    # That diagnostic normalized by the largest single-edge duration window
+    # per flyway rather than the start region's remaining-route window.
+    # Neither definition alters the registered primary Q10-Q90 route R.
+    local_max_width_by_flyway = {
+        str(flyway): float(group["local_window_days"].max())
+        for flyway, group in env10.groupby("flyway")
+    }
     q_lookup = {
         (
             str(row.flyway),
@@ -428,6 +436,9 @@ def main():
                 "r_local_start_normalized": float(
                     edge.local_window_days / start_window
                 ),
+                "r_local_flyway_max_normalized": float(
+                    edge.local_window_days / local_max_width_by_flyway[key[0]]
+                ),
                 "lambda": lam,
                 "correction_score": 1.0 - abs(lam),
                 "stopover_slope": stop,
@@ -489,6 +500,21 @@ def main():
                     result,
                     q="q_abs_r",
                     r="r_local_start_normalized",
+                    response="correction_score",
+                )
+            ),
+        },
+        "local_one_step_legacy_flyway_max": {
+            "status": "ARCHIVED_DIAGNOSTIC_ONLY_NOT_PRIMARY",
+            "normalization": (
+                "edge Q10-Q90 window / largest single-edge Q10-Q90 window "
+                "within flyway"
+            ),
+            **perm_payload(
+                meta_rows(
+                    result,
+                    q="q_abs_r",
+                    r="r_local_flyway_max_normalized",
                     response="correction_score",
                 )
             ),
