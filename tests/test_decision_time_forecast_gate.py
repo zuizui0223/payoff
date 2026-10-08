@@ -157,3 +157,28 @@ def test_environmental_gate_cannot_claim_behavior_or_fitness():
     )
     assert not hasattr(result, "behavioral_gain")
     assert not hasattr(result, "fitness_effect")
+
+
+def test_exact_mean_shift_boundary_reverses_stronger_connectivity_benefit():
+    from src.decision_time_forecast_gate import positive_connectivity_reversal_threshold
+
+    boundary = positive_connectivity_reversal_threshold(
+        earlier_correlation=0.3, later_correlation=0.8)
+    assert boundary == pytest.approx((0.3)**0.5)
+    for delta, direction in [(boundary - .01, -1), (boundary, 0), (boundary + .01, 1)]:
+        earlier, transferred, _ = gaussian_historical_policy_transfer(
+            earlier_correlation=.3, later_correlation=.8,
+            later_mean_shift=delta)
+        assert (transferred - earlier) * direction >= -1e-12
+        if direction == 0:
+            assert transferred == pytest.approx(earlier)
+
+
+def test_reversal_threshold_rejects_negative_or_weaker_connectivity():
+    from src.decision_time_forecast_gate import positive_connectivity_reversal_threshold
+    with pytest.raises(ValueError):
+        positive_connectivity_reversal_threshold(
+            earlier_correlation=-.2, later_correlation=.8)
+    with pytest.raises(ValueError):
+        positive_connectivity_reversal_threshold(
+            earlier_correlation=.9, later_correlation=.8)
