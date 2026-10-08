@@ -33,6 +33,34 @@ constant selection coefficients, nor measurements transferable from winter
 moths to deer or geese. The inferred experimental optimum may differ under
 natural host-switching, competition and predation in the wild.
 
+## Decisive prior-art overlap (confirmed during review)
+
+**Not a new ecological phenomenon.** Lof, Reed, McNamara & Visser
+(2012), *Proceedings of the Royal Society B*, DOI
+10.1098/rspb.2012.0431, specifically modelled *avian* reproduction under
+environmental variance and asymmetric fitness curves. They already showed
+that the optimal breeding reaction norm can shift away from the steeper side
+of the fitness curve, causing an **adaptively mismatched** event despite
+available environmental information. Visser & Gienapp (2019),
+*Nature Ecology & Evolution*, DOI 10.1038/s41559-019-0880-8,
+explicitly review optimal phenological mismatches arising from multiple
+fitness components, skewed costs and early-season survival trade-offs.
+Bauer et al. (2020) further reviewed uncertainty and information use in
+migration decisions.
+
+Accordingly PAYOFF-B MUST NOT claim priority for:
+- timing that is optimal despite apparent resource mismatch;
+- shifts of mean seasonal timing with forecast uncertainty under asymmetric
+  selection;
+- asymmetric early-versus-late losses changing timing decisions;
+- treating total fitness as different from resource synchrony.
+
+The current implementation is a **robustness and construct-validity check**
+against an unjustified symmetric loss assumption in an existing PAYOFF-B
+timer-controller, rather than a new independent theoretical mechanism.
+Existing asymmetry literature is more ecologically developed than the
+simple piecewise-linear toy used here.
+
 ## Existing mathematics, ecologically reinterpreted
 
 Define fitness phase e=event date minus fitness-optimal event date (positive =
@@ -68,6 +96,21 @@ well established in statistics and inventory theory; PAYOFF-B claims **no
 new mathematical theorem** here. With no observation uncertainty (s=0) and
 kappa>0, the optimizer is the known-phase timing correction clipped to the
 interval [-c_early/kappa, +c_late/kappa] and the physical response limits.
+
+In the unconstrained zero-effort **Gaussian** special case,
+
+    u* = posterior_mean + posterior_sd * Phi_inverse(q),
+    q = c_late/(c_early+c_late).
+
+For fixed q and mean, the change in optimal timing with posterior
+uncertainty is exactly d u*/d posterior_sd = Phi_inverse(q). This
+uncertainty-dependent timing bias can otherwise look like a shift in the
+fitness target itself. With only one uncertainty level, changing the
+target offset and changing asymmetric loss can be observationally aliased.
+Comparing prespecified information-precision conditions while independently
+measuring the fitness curve could distinguish them under the declared
+model. This is a standard quantile result, and **the general ecological
+phenomenon is already explicitly modelled by Lof et al. (2012)**.
 
 If c_early>c_late, the optimal posterior percentile is below 0.5. Thus a
 posterior with mean zero and symmetric uncertainty need not induce action
