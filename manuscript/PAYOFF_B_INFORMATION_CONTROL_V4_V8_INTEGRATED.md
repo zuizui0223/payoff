@@ -743,15 +743,36 @@ that departure is genetically fixed, that animals ignore local cues, or
 that a particular energetic adjustment has a fitness benefit.
 
 An additional exploratory held-out-year prediction comparison on the same
-source examined whether realized staging duration forecast breeding success
-beyond calendar dates, staging feeding fraction and an activity proxy.
-The mean cross-validated log loss was 0.5791 without staging duration and
-0.5810 with it (five held-year folds), showing **no incremental predictive
-improvement under that fixed comparison**. The original authors already
-analysed arrival timing and energetic correlates of breeding; this extension
-is not new evidence for a causal relationship between adaptive correction
-and reproductive fitness. The public source has 107 bird-years (28 successes,
-72 failures, 7 deferrals), one fewer failure than the 108 cases in the
+source tested whether staging duration adds breeding-success forecast
+information beyond calendar and energetic summaries. A critical
+**time-of-availability correction** was required: our initial models
+contained the beginning of early breeding (stage 6), which occurs
+*after* Iceland staging exit and cannot be information available at that
+decision. Those models are retained as retrospective descriptions.
+
+The corrected, separately defined **as-of-stage-5** analysis used
+only the calendar year and start of staging, followed by stage-3/4
+feeding fraction and mean activity, and then observed staging duration.
+The mean five-fold held-calendar-year log losses were **0.5845,
+0.5680 and 0.5715**, respectively; thus the extra duration
+variable did not improve prediction beyond the pre-exit
+feeding/activity proxies (mean paired log-loss improvement
+**−0.00349**, 4,000 bird-cluster resamples of heldout errors,
+95% descriptive interval **−0.0163 to +0.0091**). The
+incremental energy-proxy forecast gain was **+0.01649**
+(interval **−0.0185 to +0.0513**). Both intervals span zero
+and include only validation resampling, not model-refit and calendar-year
+uncertainty. The negative duration mean was influenced by the final
+held-out year.
+
+These descriptive results do **not** identify adaptive
+stopover control or its energetic cost. Given staging arrival date,
+staging duration is algebraically equivalent to staging exit date,
+so the predictive term cannot distinguish waiting from a shared
+calendar. The original authors already analysed breeding-start
+timing and energetics as predictors of breeding success. The
+public source has 107 bird-years (28 successes, 72 failures,
+7 deferrals), one fewer failure than the 108 cases in the
 published summary; its provenance difference remains unresolved.
 
 Consequently a negative stopover-duration slope is never sufficient as a
