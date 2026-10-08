@@ -234,27 +234,36 @@ where \(\phi_t\) is passive phase retention in the absence of active correction 
 
 This matters because even a perfect correction at one checkpoint need not eliminate later mismatch. The resource wave itself can move.
 
-**Ecological phase-coordinate boundary.** The model's (e_t) is defined
+**Ecological phase-coordinate boundary.** The model's \(e_t\) is defined
 relative to its assumed *fitness-relevant target*, whereas GPS or remote
 sensing often supplies only a resource-centred proxy. Define
-(r_t = t_{mathrm{event},t}-t_{mathrm{resource},t}) and let
-(delta_t=t_{mathrm{fitness optimum},t}-t_{mathrm{resource},t}).
+
+\[
+r_t=t_{\mathrm{event},t}-t_{\mathrm{resource},t},
+\qquad
+\delta_t=t_{\mathrm{fitness\ optimum},t}-t_{\mathrm{resource},t}.
+\]
+
 Then the fitness-centred phase is exactly
-[
-e_t = r_t-delta_t.
-]
-The offset (delta_t) need not be zero: it may depend on energetic reserves,
+
+\[
+e_t=r_t-\delta_t.
+\]
+
+The offset \(\delta_t\) need not be zero: it may depend on energetic reserves,
 offspring developmental time, mortality risk, or subsequent life-history
 events. If the measured forage-centred process obeys
-(r_{t+1}=phi_t(r_t-u_t)+w_t), the same process expressed in fitness-centred
+\(r_{t+1}=\phi_t(r_t-u_t)+w_t\), the same process expressed in fitness-centred
 coordinates obeys
-[
-e_{t+1}=phi_t(e_t-u_t)
-+left[w_t+phi_tdelta_t-delta_{t+1}ight].
-]
+
+\[
+e_{t+1}=\phi_t(e_t-u_t)+
+\left[w_t+\phi_t\delta_t-\delta_{t+1}\right].
+\]
+
 This is a coordinate identity, not a new theorem or a measured selection
-gradient. Until (delta_t) is estimated from independent fitness
-observations, a reduction in (|r_t|) establishes closer alignment with
+gradient. Until \(\delta_t\) is estimated from independent fitness
+observations, a reduction in \(|r_t|\) establishes closer alignment with
 the resource marker, **not** a measured increase in fitness.
 
 ### 2.3 The animal's internal phase estimate
@@ -298,7 +307,7 @@ mismatch costly:
 L(u)=\kappa u^2+\mu(e-u)^2.
 \]
 
-Here (mu(e-u)^2) is an assumed local loss approximation; it is not a
+Here \(\mu(e-u)^2\) is an assumed local loss approximation; it is not a
 regression-derived survival or reproductive cost. The resulting optimal
 control direction is valid for this declared loss and a correctly defined
 target, but need not hold if a field study substitutes the vegetation
