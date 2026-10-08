@@ -258,19 +258,28 @@ over the 30 repeated birds, yielded the following post-result diagnostics:
 | 5 | **+0.5387** | **0.00010** |
 | 6 | +0.2662 | 0.02440 |
 
-The maximum-of-five-stage permutation threshold for the stage-5 statistic
-also gave ~0.00010; a direct **stage5-minus-stage3** contrast produced
-p~0.0648. This does **not** establish that exit repeatability is stronger
-than staging-arrival repeatability. These exploratory p-values test only
-assignment of bird identity within years; they do not demonstrate a
+An independently implemented Python/GitHub Actions run **37771712261**
+confirmed the exact individual-equal cross-year-product values in the table.
+With 10,000 independently seeded Python within-year identity permutations,
+the stage-5 within-stage positive-tail p was **0.00010** and the
+**max-over-five-stage post-selection p was 0.00030**. The direct
+**stage5-minus-stage3** comparison was **p=0.06499**, so an especially
+high stage-5 relative to stage-3 effect was not established.
+The stage-5 product statistic was **0.5387**, with a 10,000-resample
+equal-bird bootstrap 95% descriptive interval **[0.2289,0.9121]**.
+All are post-selection exploratory and do **not** demonstrate a
 fitness benefit, internal chronotype, clock gene, cue use, or adaptive
 behavioral compensation.
 
-The new Python GitHub Actions implementation of the same full procedure,
-with a 10,000-draw bird-level confidence bound, was **queued** when
-this source note was updated. Exact final CI and numerical status are to
-be filled only after that independent workflow succeeds; this JS receipt
-is not represented as CI-verified.
+**Reproduction:** GitHub Actions run **37771712261** / job
+**113292639943** completed successfully; the synthetic identity test,
+source-verified full permutation, bootstrap and artifact upload all passed.
+Machine-readable record: artifact **11547973222**, ZIP SHA256
+3c3ca227e2eb6dfa756c90afc7e6e370d44fc496ac8fbc9c4f0398356c08fd5d.
+Separate independently computed JavaScript estimates matched Python's
+descriptive products exactly, while seeded Monte Carlo p-values differ
+slightly as expected between RNG implementations. Exact Python receipt:
+data/payoff_b_goose_individual_exit_repeatability_ci_receipt_20261008.json.
 
 **A more realistic open-loop comparator** for the data is therefore
 
