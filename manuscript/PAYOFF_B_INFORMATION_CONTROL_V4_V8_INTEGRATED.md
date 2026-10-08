@@ -711,6 +711,48 @@ manipulation did not alter arrival timing, whereas later female settlement
 responded after the cue became observable. Together these systems show that
 different mechanisms can govern successive seasonal stages.
 
+### 3.4a Strong departure–arrival decoupling predates PAYOFF-B
+
+Gurarie et al. (2019, *Ecosphere*, doi:10.1002/ecs2.2971)
+studied GPS/Argos migrations of **1,048 adult female caribou**
+in **seven Arctic herds** from 1995 to 2017. They already reported
+continentally synchronous spring departures, strongly variable migration
+duration (later departures associated with shorter movement periods),
+and arrival dates largely decoupled from departure dates. They found
+less than 14% of arrival-timing variability explained by departure
+date; weather in the previous summer was a more prominent correlate
+of arrival timing. Their proposed mechanism linking that prior summer
+to maternal condition and parturition was interpretive, not a direct
+experimental manipulation of condition or a PAYOFF-B feedback
+controller.
+
+Thus **timing compensation, departure–arrival decoupling and changing
+environmental correlates across seasonal stages are empirical prior art**,
+not discoveries of this manuscript. The open identification question
+is whether an apparent temporal correction arises from actively
+updated future-resource information, a common departure/arrival
+deadline, enduring individual differences, physiological condition,
+or social/group scheduling. Even richly tracked herd-level
+movement convergence cannot, by itself, partition those processes.
+
+A related original test of the *direct-versus-stopover decision* is
+Carneiro, Gunnarsson & Alves (2020, *Frontiers in Ecology and Evolution*,
+doi:10.3389/fevo.2020.00145): **57 spring whimbrel migrations
+(9 direct, 48 stopover) by 36 individuals**. Only **three**
+individuals changed migration strategy across years. The authors
+compared wind support and temperatures encountered up to a
+potential route-choice latitude; those environmental contrasts
+did not explain direct-versus-stopover routing, and the observed
+departure-date association was not robust to their repeated-individual
+sensitivity. They explicitly left the causal direction between
+departure timing and route strategy unresolved. The underlying
+individual records are available on request, not a public
+source already verified by PAYOFF-B.
+
+These original studies bar promotion of a new causal correction
+mechanism merely because our goose records show staging
+duration inversely correlated with staging entry timing.
+
 ### 3.5 Pink-footed geese update environmental information en route
 
 In pink-footed geese, the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers informs northward progression.
@@ -1007,11 +1049,25 @@ similar. The relevant object is therefore a sequence of inference,
 commitment and correction rather than a single fast-versus-slow phenological
 response rate.
 
-### 4.2 Arrival convergence can hide substantial control
+### 4.2 Arrival convergence is not diagnostic of active feedback
 
-If repeated positive feedback gains reduce phase error, large departure-date variation can converge toward a narrow arrival window. Observing only arrival dates can therefore underestimate the amount of behavioral control used along the route.
+In the specified PAYOFF-B model, repeated positive feedback gains can reduce
+incoming phase error and narrow the arrival-date distribution. However,
+the same calendar convergence can arise from a shared departure or arrival
+date, stable individual offsets, stage-duration arithmetic or
+state-dependent physiological urgency, **without any cue-driven
+feedback**. Gurarie et al. (2019) already observed striking
+departure–arrival decoupling in caribou, and our source-verified
+Schindler goose calendar diagnostic illustrates one alternative
+data-generating process. Arrival timing alone therefore cannot tell
+whether information-dependent control was present, strong, absent
+or unsuccessful.
 
-The strongest direct empirical design is consequently transition-based:
+The decisive design must observe the transition, cue chronology and
+an independently available alternative action rather than infer a
+controller from the departure/arrival slope:
+
+
 
 \[
 e_{\mathrm{in}}
