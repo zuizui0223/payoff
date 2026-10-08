@@ -366,7 +366,11 @@ Therefore
 }
 \]
 
-This gives an exact decomposition of segment-scale phase retention.
+This gives an exact decomposition of segment-scale phase retention **for the
+declared fitness-centred state under perfect phase estimation and no target
+shift**. Its coefficient is not identified by fitting observed resource-centred
+Days-From-Peak phase unless the resource-to-fitness offset in Section 2.2
+has also been identified or appropriately constrained.
 
 If \(g_t=0\), the observed phase coefficient is passive carry-over \(\lambda_t=\phi_t\).
 
@@ -513,8 +517,12 @@ where \(L\) is the interaction-network Laplacian and \(W\) total edge weight.
 Thus community mismatch depends on where unlike controllers interact, with the
 earlier binary network-cut result recovered as a special case.
 
-This serial decomposition separates **where a seasonal trajectory starts** from
-**what happens to its error afterward**.
+This serial decomposition separates **where a seasonal trajectory starts**
+from **what happens to its error afterward** *within the declared model*.
+Empirical pairwise interactions need independently defined biological timing
+targets, because different species can have different resource-to-fitness
+offsets, and a pairwise calendar overlap is not itself a pairwise fitness
+measure.
 
 ### 2.8 Information recovery can still fail to restore coordination
 
