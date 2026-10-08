@@ -899,40 +899,63 @@ forecast information, available correction, realized action and fitness
 on the same individuals rather than transferring a physiological or
 Bayesian mechanism across unrelated cohorts.
 
-### 3.5c Sequential departure, routing and in-flight landing responses are prior art
+### 3.5c Origin departure risk and in-flight weather changes are both prior art
 
-A more direct natural system for considering **multiple migration decisions**
-is the radio-telemetry study of Rüppel et al. (2023, *Royal Society
-Open Science*, doi:10.1098/rsos.221420). The original authors monitored
-individual long-distance migrant songbirds departing a coastal stopover
-area and measured three linked choices: whether to depart under local
-weather, whether to route offshore or along the coastline, and whether
-to interrupt a flight by landing. They already reported more offshore
-routing under favorable wind support and more interrupted flights under
-headwinds or cloudy conditions. **The observation that distinct migration
-stages respond to different current weather conditions is therefore not
-new to PAYOFF-B.**
+The radio-telemetry study of Rüppel et al. (2023, *Royal Society Open
+Science*, doi:10.1098/rsos.221420) directly monitored individual
+songbirds' **departure, coastal versus sea-crossing route choice, and
+in-flight landing** under weather. The original authors already
+reported wind-linked routing and more interrupted flights with
+adverse weather. These stage-specific weather responses are therefore
+prior art, not an independent PAYOFF-B discovery.
 
-The original paper deposits supplementary data in Figshare
-(doi:10.6084/m9.figshare.c.6403996). That archive is subject to a
-separate source admission gate; we do not assume that a published
-multi-decision analysis exposes individual flight-by-flight cue sequences,
-available alternative actions or reproductive fitness fields in its
-public deposit. Nor does a contemporaneous landing–headwind association
-establish that the animal observed a *new forecast innovation* after its
-departure choice, as opposed to following an initial route policy or
-encountering unpredictable conditions.
+We inspected their original MD5- and SHA256-verified public Figshare
+source (doi:10.6084/m9.figshare.c.6403996) with two independent
+read-only audits. The **data.Event** table contains **1,783
+individual-night observations for 178 birds**, of which 1,605 are
+non-departure records and 178 are observed departures. The author
+Rcode.Rmd already models departure with
+\(Surv(start,stop,status)\) and weather. The companion **flights**
+table contains 178 flights by 178 distinct birds—**one flight per
+individual**—with start/end timestamps, flight-route and landing
+codes, and weather at both recorded endpoints. Within the provided
+source, 175/178 observed flights can be matched directly to an
+individual's departure-risk row on the same calendar date; three
+remain unmatched under this simple day-level key.
 
-The stricter distinction that matters for the PAYOFF-B model is between
-an open-loop policy using origin information and a policy **revised after
-new route-stage information becomes available**. To identify that
-difference, the analysis would need departure-time forecasts of the
-later conditions, temporally valid local updates before the landing
-or routing decision, an independently feasible action set, and
-out-of-sample comparison with fixed-calendar, individual-history and
-weather-hazard baselines. Such an analysis has **not been performed** in
-the currently verified PAYOFF-B natural evidence, and no demographic
-fitness coefficient is inferred from the Rüppel study.
+The source records 154 coastal and 24 sea-crossing flights, alongside
+24 coded landings and 154 non-landings/non-observations. These
+variables are **not identical**: there are 21 coastal flights
+coded landing, 3 sea-crossing flights coded landing, and 21
+sea-crossing flights coded otherwise. The authors' code explicitly
+models route choice with starting eastward wind. More importantly,
+the original landing model already uses **change in northward wind
+during a flight**, \(v_{\mathrm{end}}-v_{\mathrm{start}}\),
+and cloudiness. Even an end-minus-start wind/landing association
+is thus published prior art, not newly identified information
+updating by PAYOFF-B. The source Rmd describes the landing comparison
+as *landing versus not seen*, so receiver coverage and censoring
+require careful treatment.
+
+The difference between **observed changing weather** and
+**new information that changes an individual's policy** remains
+unidentified. Flight-end weather is indexed to the observed
+termination time, no departure-issued forecast for that future
+weather is available in the deposited table, and each bird
+contributes only one observed flight. Neither an independently
+feasible set of continuing-versus-landing actions nor subsequent
+individual breeding/survival fitness is measured. Thus this
+source cannot discriminate forecast innovation from a direct
+weather hazard or event-time selection without new data.
+
+The PAYOFF-B-specific test would require origin-time forecasts
+of later conditions, in-flight *predecision* updated observations,
+a correctly constructed continue/land risk set and comparison
+with an open-loop weather-hazard and calendar/individual-history
+policy. No such novel test has been run. The ecological value of
+this source here is to establish what direct weather-responsive
+migration data can and cannot identify, not to claim an observed
+rational fitness-optimal refusal to adjust.
 
 ### 3.6 Compensation can restore timing without restoring fitness
 
