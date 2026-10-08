@@ -116,3 +116,46 @@ def test_invalid_correlations_variance_and_cost_fail_closed():
         defaults.update(kwargs)
         with pytest.raises(ValueError):
             compare_learning_sources(**defaults)
+
+
+def test_adult_memory_can_update_and_avoid_a_false_trap():
+    from src.learning_source_reversal import compare_recalibrating_memory
+    p = dict(
+        historical_correlation=.3, current_correlation=.8,
+        seasonal_mean_drift=1., fresh_source_error_variance=.25,
+        fresh_source_acquisition_cost=.1)
+    old = compare_recalibrating_memory(**p, recalibration_fraction=0)
+    halfway = compare_recalibrating_memory(**p, recalibration_fraction=.5)
+    refreshed = compare_recalibrating_memory(**p, recalibration_fraction=1)
+    assert old.fresh_source_preferred
+    assert halfway.recalibrated_memory_loss < old.recalibrated_memory_loss
+    assert halfway.recalibrated_memory_loss == pytest.approx(.36 + .25 * 1.25)
+    assert not refreshed.fresh_source_preferred
+    assert refreshed.recalibrated_memory_loss == pytest.approx(.36)
+
+
+def test_learning_update_threshold_reverses_source_ranking():
+    from src.learning_source_reversal import compare_recalibrating_memory
+    p=dict(
+        historical_correlation=.3, current_correlation=.8,
+        seasonal_mean_drift=1., fresh_source_error_variance=.25,
+        fresh_source_acquisition_cost=.1)
+    # D=1.25 and source overhead=.35. Critical w=1-sqrt(.35/1.25)
+    threshold=1-(.35/1.25)**.5
+    less = compare_recalibrating_memory(**p, recalibration_fraction=threshold-.01)
+    more = compare_recalibrating_memory(**p, recalibration_fraction=threshold+.01)
+    assert less.fresh_source_preferred
+    assert not more.fresh_source_preferred
+
+
+def test_no_fresh_advantage_if_social_signal_merely_repeats_updated_memory():
+    from src.learning_source_reversal import compare_recalibrating_memory
+    p=dict(
+        historical_correlation=.3, current_correlation=.8,
+        seasonal_mean_drift=1., fresh_source_error_variance=0.,
+        fresh_source_acquisition_cost=0.)
+    fully = compare_recalibrating_memory(**p, recalibration_fraction=1)
+    assert fully.fresh_advantage == pytest.approx(0)
+    assert not fully.fresh_source_preferred
+    with pytest.raises(ValueError):
+        compare_recalibrating_memory(**p, recalibration_fraction=1.2)
