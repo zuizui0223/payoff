@@ -47,6 +47,27 @@ route_landing_text <- paste(
 )
 a_key <- paste(a$motusTagID, a_times)
 f_key <- paste(f$motusTagID, f_dates)
+
+# Source event status=1 is the recorded departure event. Do not silently
+# count a nondeparture bird-night as a matching flight origin decision.
+# Each of the 178 source individuals should have exactly one such event.
+event_rows <- a[!is.na(a$status) & a$status == 1, , drop=FALSE]
+event_counts <- table(event_rows$motusTagID)
+if(nrow(event_rows)!=178L || length(event_counts)!=178L ||
+   any(event_counts!=1L))
+  stop("risk table contains unexpected departure event grain")
+event_index <- match(f$motusTagID, event_rows$motusTagID)
+if(anyNA(event_index))
+  stop("observed flight missing departure event for its individual")
+event_dates <- as.Date(event_rows$time_abs[event_index])
+flight_minus_event_days <- as.integer(f_dates - event_dates)
+if(anyNA(flight_minus_event_days))
+  stop("missing date offset between matched bird departure and flight")
+date_offset_frequencies <- table(flight_minus_event_days)
+date_offsets <- paste(names(date_offset_frequencies),
+                      as.integer(date_offset_frequencies),sep=":",
+                      collapse=";")
+
 data <- list(
   source="Ruppel_2023_figshare_MD5_verified",
   dataset_nightly_rows=nrow(a),
@@ -57,6 +78,10 @@ data <- list(
   nightly_unique_id_day=length(unique(a_key)),
   nightly_duplicate_id_day=nrow(a)-length(unique(a_key)),
   flights_with_samebird_sameday_risk_record=sum(f_key%in%a_key),
+  flights_with_samebird_sameday_departure_event=sum(flight_minus_event_days==0L),
+  flight_start_minus_status1_event_day_distribution=date_offsets,
+  flights_with_departure_event_within_one_calendar_day=sum(abs(flight_minus_event_days)<=1L),
+  flights_with_departure_event_beyond_one_calendar_day=sum(abs(flight_minus_event_days)>1L),
   flight_start_date_complete=sum(!is.na(f$flightStart)),
   flight_end_date_complete=sum(!is.na(f$flightEnd)),
   flight_positive_duration_hours=sum(fl_sec>0,na.rm=TRUE),
