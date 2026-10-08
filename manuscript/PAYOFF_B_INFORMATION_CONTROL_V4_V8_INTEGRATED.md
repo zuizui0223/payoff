@@ -680,6 +680,29 @@ Thus temporal recovery and fitness recovery are not equivalent:
 
 This supports the effective-deadline concept: a correction can remove downstream timing error while still carrying a cost.
 
+A complementary reproductive anchor comes from Greenland white-fronted
+geese (Schindler et al. 2024, *Proceedings of the Royal Society B*,
+doi:10.1098/rspb.2023.2016). Across 108 observed breeding seasons
+(28 successes, 73 failures and 7 deferrals), females spending more time
+feeding and less energy during spring migration were more likely to breed
+successfully. High energy expenditure coupled with little feeding was most
+associated with breeding deferral; the authors did not find that the particular
+spring sub-season in which feeding or expenditure occurred altered these
+breeding associations. These are **published source-study results**, not new
+PAYOFF-B estimates, and the associations are observational rather than causal.
+They establish a different ecological margin from phenological matching:
+migration may end at an apparently suitable time while the energetic state
+carried into breeding remains unfavorable.
+
+The state needed to interpret a timing correction is consequently not only
+the residual phase error but also the energetic cost of reaching that phase.
+For a conceptual augmented controller, let energetic reserve evolve through
+intake minus movement and maintenance costs, while subsequent breeding payoff
+depends jointly on residual phase and reserve. This **does not** identify a
+fitness cost function from the existing V8 birds or the mule-deer source table:
+the Greenland study lacks the same individual's registered incoming
+phase-error-and-independent-recourse contrast required for that inference.
+
 ### 3.7 Interaction-level asymmetry changes relative timing
 
 Across 10 European nest-box schemes, resident tits were more temperature-sensitive than migratory flycatchers, and this differential response widened their laying-date interval by 0.94 days per decade. Published UK bird–caterpillar analyses likewise show incomplete temporal tracking by consumers.
