@@ -816,6 +816,47 @@ example motivates independent decision-time cue and actionability
 measurements, rather than being treated as an empirical confirmation of the
 controller model.
 
+### 3.5b An environmental cue before migration is not a measured en-route correction
+
+Burnside et al. (2021, *PNAS*, doi:10.1073/pnas.2026378118)
+already showed that satellite-tracked Asian houbara tend to start spring
+migration under individually repeatable local temperature conditions.
+Those results are **prior art** for cue-linked departure decisions, not
+independent PAYOFF-B confirmation of an information controller.
+
+We audited the authors' original Zenodo release
+(doi:10.5281/zenodo.4917565) with exact publisher MD5 verification.
+The v1 workbook contains **132 complete spring departure–arrival events
+from 44 birds**, whereas the original article's Figure 2 reports
+**133 events from 45 birds**; the discrepancy is unresolved.
+Its author-supplied field definitions are important for decision-time
+interpretation: departure.date is the **last satellite fix at the
+departure site** before migration, not the exact instant of a decision.
+Departure.temperature.C is the MODIS surface-temperature mean for
+the **eight days before that recorded departure date**, whereas
+arrival.temperature.C is the mean of the **eight days after arrival**.
+The latter cannot constitute knowledge available before departure,
+nor is it a demographic fitness endpoint. The population-level
+breeding-site temperature reference also is not an individual-level
+future forecast or a measured subjective belief.
+
+The workbook includes an authors' shuffled-departure null, but neither
+intermediate on-route cue checkpoints, stage-specific corrections,
+observed daily decisions *not* to depart, independently measured
+physical recourse, nor individual breeding/survival outcomes. The
+original code reproduces the published temperature-cue analysis; fitting
+another arrival-date association would not distinguish route-wise
+feedback from a date-dependent departure rule.
+
+This source therefore establishes a **verified event-level origin-cue
+comparator** while explicitly **failing admission for novel
+postcommitment actionability or reproductive-fitness inference**.
+Taken together with the Greenland white-fronted goose calendar and
+individual-offset diagnostic, it reinforces the necessity to measure
+forecast information, available correction, realized action and fitness
+on the same individuals rather than transferring a physiological or
+Bayesian mechanism across unrelated cohorts.
+
 ### 3.6 Compensation can restore timing without restoring fitness
 
 American redstarts departing roughly 10 days late migrated about 43% faster, yet the compensatory pattern was associated with a reported 6.3% decrease in annual survival.
