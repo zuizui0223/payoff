@@ -93,7 +93,7 @@ def compare_learning_sources(
         historical_rule_loss=historic,
         fresh_rule_loss=fresh,
         net_fresh_advantage=advantage,
-        fresh_source_preferred=(advantage > 0),
+        fresh_source_preferred=(drift * drift + (new - old) ** 2 > variance + cost),
         historical_rule_was_better_before_shift=(previous_advantage > 0),
     )
 
