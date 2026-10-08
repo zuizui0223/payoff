@@ -172,3 +172,69 @@ assumptions. Gaussian calibration drift and covariate shift are established
 statistics, not a newly discovered ecological law. Any real result must
 demonstrate that migrants actually used old cue rules and that timing mismatch
 (or fitness) changed as predicted.
+
+
+## Competing ecology-first mechanism: optimal under-tracking despite correct information
+
+The calibration-drift hypothesis is **not uniquely identified** by stronger
+connectivity coexisting with worse seasonal matching. Prior evolutionary
+ecology has already shown that costs of early arrival (including mortality
+and territorial competition) can make partial tracking an optimum even when
+climatic information is not limited: Jonzén et al. (2007), *Climate change
+and the optimal arrival of migratory birds*, Proceedings of the Royal
+Society B, https://pmc.ncbi.nlm.nih.gov/articles/PMC1685845/.
+
+A transparent rival null is a fully calibrated actor that knows the
+**current** expected onset m=delta+rho*X, but pays kappa*u^2 for shifting
+timing u. With unlimited response amplitude it minimizes
+
+    E[(H-u)^2 | X] + kappa*u^2
+
+by setting
+
+    u* = (delta+rho*X)/(1+kappa).
+
+Its actual phase mismatch (not total fitness loss) is exactly
+
+    E[(H-u*)^2] =
+      1-rho^2 + [kappa/(1+kappa)]^2 * (delta^2+rho^2).
+
+Even with perfect contemporary forecast calibration and stronger r,
+unavoidable timing costs can create worse phenological matching when
+
+    |delta| > sqrt( (1-h^2)/h^2 * (rho_1^2-rho_0^2) ),
+    h = kappa/(1+kappa),
+
+for 0<rho_0<rho_1<=1 and the same kappa>0 in both eras.
+
+For rho 0.3 -> 0.8, kappa=1, critical drift is ~1.285 SD:
+at delta=1.5, expected mismatch worsens from 0.9325 to 1.0825
+**despite the actor knowing the correct current relationship**.
+This is a synthetic cost-only rival, not an explanation established for V8.
+
+A chronologically available cue plus high forecast skill is therefore
+insufficient to diagnose an *information* obstacle. Competing live hypotheses:
+
+| Ecological explanation | Conditional forecast skill | Behavioral evidence to seek | Distinct predicted constraint |
+|---|---|---|---|
+| Outdated cue calibration | poor historic-to-new-era calibration despite contemporary stronger correlations | persistent directional forecasting errors, corrected by within-individual/age-cohort updating | historical-learning / cue mapping |
+| Lost biological recourse | new checkpoint cue accurately forecasts destination | evidence of sensed cue but response limited only when independently measured action set closes | route/energy/physiology |
+| Optimal costly under-tracking | strong calibrated prediction | conservative partial change even when physically feasible, varying with mortality/territory/effort context | fitness tradeoff |
+| Fixed calendar | cue quality may be strong or weak | near-calendar departure independently of conditioned cue innovation | photoperiod / rigid scheduling |
+| Direct local forcing | environmental information is forecast-relevant or not | immediate physiological/food/wind response matching raw local conditions even where destination predictive innovation is absent | local forcing, not forecasting |
+
+These explanations can coexist; this table is an **observational
+discrimination plan**, not a causal-unique identification theorem.
+
+Learning itself is prior art, not the PAYOFF-B novelty claim: among whooping
+cranes, social and experiential learning have been shown to influence timing
+and shift with age (Nature Communications 2022,
+https://www.nature.com/articles/s41467-021-27626-5). Proposed novelty
+requires an additional, independently verified ecological result linking
+**historically calibrated cue models, checkpoint innovation, actual
+actionability and interaction timing/fitness**.
+
+In practical terms: before attributing poor synchronization to a lack of
+information, estimate whether **fully informed adaptation would have been
+worth its ecological cost**. Without that comparison, a lagging bird could
+be optimizing, not failing.
