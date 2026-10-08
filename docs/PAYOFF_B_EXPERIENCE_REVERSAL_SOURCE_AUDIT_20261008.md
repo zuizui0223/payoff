@@ -59,3 +59,24 @@ Freeze a historical window and later untouched seasons without reading behaviora
 Test competing nulls: no calibration drift, no conditional new cue, stale socially copied information, revised adult memory, zero recourse, fixed calendar, direct temperature/wind/forage forcing, and optimally costly undertracking. Failure to distinguish any decisive alternative caps interpretation. Merely observing an age interaction is not identifying evidence.
 
 Novelty claim ceiling: a future real-data result could show WHEN experience-based timing cues reverse value under environmental change, with independent cue uptake and behavioral/fitness outcomes. This note does not yet demonstrate it and does not create another submission manuscript.
+
+
+## Critical biological correction: experience can also update
+
+Teitelbaum et al. (2016) found the OPPOSITE of a simple experienced-adult rigidity story: older and more experienced whooping cranes were disproportionately important for innovative new, more northerly overwintering routes; changes spread socially to younger cranes. This is direct source-specific evidence AGAINST assuming that the experienced birds in this system necessarily retain stale policies. The 2021 learning paper likewise does not say experience is immutable.
+
+Let w in [0,1] be a hypothetical memory-recalibration fraction after an environmental shift, where w=0 means keeping the historical relation and w=1 means fully adopting the correct contemporaneous relation. Assume the updated timing plan is a convex combination of the two forecasts, with no additional update cost. The memory policy's incremental error becomes:
+
+    (1-w)^2 * [delta^2+(rho_1-rho_0)^2].
+
+The fresh source beats partially recalibrated experience iff:
+
+    (1-w)^2 * [delta^2+(rho_1-rho_0)^2] > sigma^2+c.
+
+For the synthetic witness D=1.25 and sigma^2+c=.35, fresh information is better only below the hypothetical recalibration threshold
+
+    w < 1-sqrt(.35/1.25) = about .471.
+
+At w=1, updating memory perfectly is at least as good as a noisy, costly fresh source. This extension demonstrates a conditional *learning-speed* hypothesis, NOT adult rigidity in whooping cranes. The update fraction is not identified by age, group size or published correlations. Empirical work must estimate actual updating within individuals and years or fail closed.
+
+In this system, the known older-bird innovation finding is a mandatory **challenge to the proposed mechanism**, not an inconvenient result to omit. A useful negative finding would be that the proposed experience liability does not occur because older birds update effectively.
