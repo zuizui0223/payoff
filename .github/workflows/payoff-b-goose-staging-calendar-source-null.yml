@@ -6,10 +6,12 @@ on:
       - analysis/payoff-b-goose-staging-calendar-null-20261008
     paths:
       - 'scripts/payoff_b_goose_staging_calendar_null.py'
+      - 'scripts/payoff_b_goose_staging_energy_fitness_prediction.py'
       - '.github/workflows/payoff-b-goose-staging-calendar-source-null.yml'
   pull_request:
     paths:
       - 'scripts/payoff_b_goose_staging_calendar_null.py'
+      - 'scripts/payoff_b_goose_staging_energy_fitness_prediction.py'
       - '.github/workflows/payoff-b-goose-staging-calendar-source-null.yml'
 
 jobs:
@@ -25,8 +27,14 @@ jobs:
         run: python scripts/payoff_b_goose_staging_calendar_null.py --self-test
       - name: Source-verified original goose stage timing audit without fitness
         run: python scripts/payoff_b_goose_staging_calendar_null.py
+      - name: Cross-year logistic contrast synthetic check
+        run: python scripts/payoff_b_goose_staging_energy_fitness_prediction.py --self-test
+      - name: Exploratory energy-conditional breeding prediction (published outcomes)
+        run: python scripts/payoff_b_goose_staging_energy_fitness_prediction.py
       - uses: actions/upload-artifact@v4
         with:
           name: payoff-b-goose-stage-calendar-source-only
-          path: outputs/payoff_b_goose_staging_calendar_null_result.json
+          path: |
+            outputs/payoff_b_goose_staging_calendar_null_result.json
+            outputs/payoff_b_goose_staging_energy_fitness_prediction.json
           if-no-files-found: error
