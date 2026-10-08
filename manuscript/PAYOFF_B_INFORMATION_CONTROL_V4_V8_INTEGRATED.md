@@ -949,16 +949,28 @@ updating by PAYOFF-B. The source Rmd describes the landing comparison
 as *landing versus not seen*, so receiver coverage and censoring
 require careful treatment.
 
-The difference between **observed changing weather** and
-**new information that changes an individual's policy** remains
-unidentified. Flight-end weather is indexed to the observed
-termination time, no departure-issued forecast for that future
-weather is available in the deposited table, and each bird
-contributes only one observed flight. Neither an independently
-feasible set of continuing-versus-landing actions nor subsequent
-individual breeding/survival fitness is measured. Thus this
-source cannot discriminate forecast innovation from a direct
-weather hazard or event-time selection without new data.
+The difference between **observed changing weather**, **responding
+to newly encountered weather under a precommitted contingency plan**
+and **revising an earlier action policy after a forecast update**
+remains unidentified. For example, an animal could depart with
+the fixed contingent rule *land if the encountered headwind is
+sufficiently strong*, or could decide to land only after updating
+its forecast while aloft. If both policies map the same realized
+wind conditions into the same landing actions, their observed
+flight-level data are identical. Nor does a headwind-induced
+physical inability to continue imply a cognitive revision.
+This is elementary observational equivalence, not a newly
+proved ecological theorem.
+
+Flight-end weather is indexed to the observed termination
+time; no departure-issued forecast for that future weather
+is available in the deposited table, and each bird contributes
+only one observed flight. Neither an independently feasible set
+of continuing-versus-landing actions nor subsequent individual
+breeding/survival fitness is measured. Thus this source cannot
+discriminate forecast innovation, a preplanned weather-contingent
+rule, a physical weather hazard or event-time selection without
+independent decision-time measurements.
 
 The PAYOFF-B-specific test would require origin-time forecasts
 of later conditions, in-flight *predecision* updated observations,
