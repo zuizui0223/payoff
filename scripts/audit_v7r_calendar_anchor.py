@@ -70,6 +70,7 @@ def main():
     with zipfile.ZipFile(paths["multiflyway"]) as multiflyway,zipfile.ZipFile(paths["svalbard"]) as svalbard:
         zips={"multiflyway":multiflyway,"svalbard":svalbard}
         edge_results=[]
+        barents_r1_r5_rows=[]
         for flyway,(source,member,first_phase,next_phase) in SOURCES.items():
             grouped={}
             for r in read_csv(zips[source],member):
@@ -83,6 +84,8 @@ def main():
                     "year":int(r["year"]),
                     "individual_id":str(r["individual_id"]),
                 })
+            if flyway=="barents":
+                barents_r1_r5_rows=grouped.get(("R1","R5"),[])
             for (origin,destination),observations in sorted(grouped.items()):
                 if len(observations)<5:
                     continue
@@ -123,12 +126,31 @@ def main():
                 for year in edge["annual_arrival_departure"]:
                     year["origin_spring_onset_doy_power"]=onset[year["year"]]
 
+        year_scope_checks=[]
+        for admitted_years in ((2008,2009),(2009,),(2008,2009,2010)):
+            subset=[
+                row for row in barents_r1_r5_rows
+                if int(row["year"]) in admitted_years
+            ]
+            check=summarize_edge(subset,draws=min(args.bootstrap_draws,400))
+            year_scope_checks.append({
+                "included_years":list(admitted_years),
+                "n":check["n"],
+                "lambda":check["lambda"],
+                "beta_stopover":check["beta_stopover"],
+                "beta_spring_shift":check["beta_spring_shift"],
+                "departure_on_arrival_calendar_slope":(
+                    check["departure_on_arrival_calendar_slope"]
+                ),
+            })
+
         receipt={
             "schema":"payoff_b_v7r_calendar_anchor_postoutcome_v1",
             "status":"POST_OUTCOME_EXPLORATORY_ACCOUNTING_NOT_CONFIRMATION",
             "source_sha256":EXPECTED_SHA256,
             "identity":"lambda = 1 + slope(stopover_days on origin phase) + slope(transit_days on origin phase) + slope(origin-minus-destination spring on origin phase)",
             "edge_results":edge_results,
+            "barents_R1_R5_year_scope_exploration":year_scope_checks,
             "barents_R1_R5_origin_definition":{
                 "focal_rows":len(focus),
                 "final_local_stop_index_counts":{
