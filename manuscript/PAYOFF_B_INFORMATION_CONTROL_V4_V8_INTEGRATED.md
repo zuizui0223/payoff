@@ -345,7 +345,16 @@ Finite speed, stopover or route flexibility clips this correction to the feasibl
 ### 2.4a Early and late seasonal errors can have different fitness costs
 
 The symmetric quadratic assumption is not an empirical property of
-phenological selection. In a split-brood winter moth–oak experiment, van Dis
+phenological selection. Importantly, this is **established prior art**:
+Lof et al. (2012, *Proceedings B*, doi:10.1098/rspb.2012.0431) already
+showed that environmental uncertainty interacting with asymmetric fitness
+curves can make apparently mismatched bird reproduction adaptive, while
+Visser and Gienapp (2019, *Nature Ecology & Evolution*,
+doi:10.1038/s41559-019-0880-8) reviewed how multiple fitness components
+create optimal resource–consumer timing offsets. PAYOFF-B does not claim
+to discover optimal mismatch or risk-sensitive phenological decisions.
+
+In a split-brood winter moth–oak experiment, van Dis
 et al. (2023, *Proceedings B*, doi:10.1098/rspb.2023.0414) estimated a
 survival–pupation-weight composite that peaked around two days **after** oak
 budburst. Relative fitness declined asymmetrically, by reported average
@@ -386,7 +395,11 @@ with the **same unbiased posterior mean and the same available actions** may
 choose to delay rather than move to that mean. In a deliberately synthetic
 normal-error witness with a 14:6 illustrative slope ratio, the selected
 posterior quantile is 0.30; the corresponding correction is negative
-(delay). These averaged empirical percentages are only an illustrative
+(delay). When the belief is Gaussian with posterior mean (m) and standard
+deviation (s), the unconstrained zero-effort rule is
+(u^*=m+sPhi^{-1}(0.30)). Consequently uncertainty can bias the
+chosen time toward the safer side even when mean spring timing does not
+change; **this general effect was already predicted by Lof et al. (2012)**. These averaged empirical percentages are only an illustrative
 asymmetry ratio, *not a calibrated fitness-loss function for winter moths*.
 
 Therefore **lack of apparent correction toward a resource peak is not
