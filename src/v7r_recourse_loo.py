@@ -70,15 +70,16 @@ def audit_individual_exclusion(
     """
 
     rows = list(transitions)
+    focal = sorted(set(focal_edges))
+    if any(flyway not in terminal_by_flyway for flyway, _, _ in focal):
+        raise ValueError("focal flyway lacks a declared terminal")
     original = recourse_map(
         rows, terminal_by_flyway=terminal_by_flyway,
         minimum_edge_rows=minimum_edge_rows
     )
     result: list[EdgeLeaveAnimalOut] = []
 
-    for flyway, origin, destination in sorted(set(focal_edges)):
-        if flyway not in terminal_by_flyway:
-            raise ValueError("focal flyway lacks a declared terminal")
+    for flyway, origin, destination in focal:
         key = (flyway, origin)
         if key not in original:
             raise ValueError("focal origin has no full-sample recourse")
