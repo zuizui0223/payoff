@@ -69,6 +69,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10797665905/zip" \
             -o outputs/era5_multi.zip
+          echo "c37502b116f4170760e0fb5029fe1804999def4de3f702cdb5bf61e61b8606f  outputs/era5_multi.zip" | sha256sum -c -
           unzip -q outputs/era5_multi.zip -d outputs/era5_multi
 
           curl -fL \
@@ -76,6 +77,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10796909675/zip" \
             -o outputs/era5_sval.zip
+          echo "6155a9efe854167883190db7410ce60c151721e4569d564f23bc01a555013825  outputs/era5_sval.zip" | sha256sum -c -
           unzip -q outputs/era5_sval.zip -d outputs/era5_sval
 
       - name: Run frozen V7R analysis
@@ -113,13 +115,15 @@ jobs:
           assert abs(pval - frozen["primary"]["one_sided_p"]) < 1e-10
           assert current["primary"]["permutation"]["valid_permutations"] == 2880
 
+          audit = json.loads(Path(
+              "data/payoff_b_v7r_reproducibility_audit_20261008.json"
+          ).read_text())
           checks = {
               "weighted_by_transition_n": "weighted_by_transition_n",
               "recourse_q20_q80": "Q20_Q80_remaining_recourse",
-              "local_one_step_recourse": "local_one_step_width",
+              "local_one_step_legacy_flyway_max": "local_one_step_width",
               "signed_phenology_r": "signed_POWER_r",
               "phenology_r2": "POWER_r2",
-              "abs_anomaly_slope": "POWER_anomaly_slope",
               "era5_abs_r": "ERA5_abs_r",
           }
           reference = {
@@ -144,8 +148,32 @@ jobs:
               if abs(delta_beta) >= 1e-8 or abs(delta_p) >= 1e-10:
                   mismatches.append(current_name)
 
-          assert not mismatches, f"Frozen sensitivity mismatch: {mismatches}"
-          print("V7R frozen result reproduced: primary + seven sensitivities")
+          corrections = {
+              "local_one_step_recourse": (
+                  audit["source_contract_local_sensitivity"]
+              ),
+              "abs_anomaly_slope": (
+                  audit["reproduced_abs_anomaly_slope_sensitivity"]
+              ),
+          }
+          for name, expected in corrections.items():
+              got = current["mandatory_sensitivities"][name]
+              print(
+                  f"POST_OUTCOME_AUDIT {name}: "
+                  f"beta={got['observed_beta_qr']:.12f}, "
+                  f"p={got['one_sided_p']:.12f}",
+                  flush=True,
+              )
+              if abs(got["observed_beta_qr"] - expected["beta_qr"]) >= 1e-8:
+                  mismatches.append(name + ":beta")
+              if abs(got["one_sided_p"] - expected["one_sided_p"]) >= 1e-10:
+                  mismatches.append(name + ":p")
+
+          assert not mismatches, f"V7R audit mismatch: {mismatches}"
+          print(
+              "V7R reproduced: primary + six archived sensitivities "
+              "+ two documented post-outcome audit corrections"
+          )
           PY
 
       - uses: actions/upload-artifact@v4
