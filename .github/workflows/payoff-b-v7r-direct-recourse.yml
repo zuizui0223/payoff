@@ -125,20 +125,31 @@ jobs:
           reference = {
               x["name"]: x for x in frozen["primary_sensitivities"]
           }
+          mismatches = []
           for current_name, frozen_name in checks.items():
               current_item = current["mandatory_sensitivities"][current_name]
               frozen_item = reference[frozen_name]
-              assert abs(
+              delta_beta = (
                   current_item["observed_beta_qr"] - frozen_item["beta_QR"]
-              ) < 1e-8, current_name
-              assert abs(
-                  current_item["one_sided_p"] - frozen_item["p_perm"]
-              ) < 1e-10, current_name
+              )
+              delta_p = current_item["one_sided_p"] - frozen_item["p_perm"]
+              print(
+                  f"{current_name}: current_beta="
+                  f"{current_item['observed_beta_qr']:.12f}, "
+                  f"frozen_beta={frozen_item['beta_QR']:.12f}; "
+                  f"current_p={current_item['one_sided_p']:.12f}, "
+                  f"frozen_p={frozen_item['p_perm']:.12f}",
+                  flush=True,
+              )
+              if abs(delta_beta) >= 1e-8 or abs(delta_p) >= 1e-10:
+                  mismatches.append(current_name)
 
+          assert not mismatches, f"Frozen sensitivity mismatch: {mismatches}"
           print("V7R frozen result reproduced: primary + seven sensitivities")
           PY
 
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: payoff-b-v7r-direct-recourse-result
           path: |
