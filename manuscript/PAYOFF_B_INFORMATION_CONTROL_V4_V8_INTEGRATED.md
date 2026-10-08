@@ -899,6 +899,41 @@ forecast information, available correction, realized action and fitness
 on the same individuals rather than transferring a physiological or
 Bayesian mechanism across unrelated cohorts.
 
+### 3.5c Sequential departure, routing and in-flight landing responses are prior art
+
+A more direct natural system for considering **multiple migration decisions**
+is the radio-telemetry study of Rüppel et al. (2023, *Royal Society
+Open Science*, doi:10.1098/rsos.221420). The original authors monitored
+individual long-distance migrant songbirds departing a coastal stopover
+area and measured three linked choices: whether to depart under local
+weather, whether to route offshore or along the coastline, and whether
+to interrupt a flight by landing. They already reported more offshore
+routing under favorable wind support and more interrupted flights under
+headwinds or cloudy conditions. **The observation that distinct migration
+stages respond to different current weather conditions is therefore not
+new to PAYOFF-B.**
+
+The original paper deposits supplementary data in Figshare
+(doi:10.6084/m9.figshare.c.6403996). That archive is subject to a
+separate source admission gate; we do not assume that a published
+multi-decision analysis exposes individual flight-by-flight cue sequences,
+available alternative actions or reproductive fitness fields in its
+public deposit. Nor does a contemporaneous landing–headwind association
+establish that the animal observed a *new forecast innovation* after its
+departure choice, as opposed to following an initial route policy or
+encountering unpredictable conditions.
+
+The stricter distinction that matters for the PAYOFF-B model is between
+an open-loop policy using origin information and a policy **revised after
+new route-stage information becomes available**. To identify that
+difference, the analysis would need departure-time forecasts of the
+later conditions, temporally valid local updates before the landing
+or routing decision, an independently feasible action set, and
+out-of-sample comparison with fixed-calendar, individual-history and
+weather-hazard baselines. Such an analysis has **not been performed** in
+the currently verified PAYOFF-B natural evidence, and no demographic
+fitness coefficient is inferred from the Rüppel study.
+
 ### 3.6 Compensation can restore timing without restoring fitness
 
 American redstarts departing roughly 10 days late migrated about 43% faster, yet the compensatory pattern was associated with a reported 6.3% decrease in annual survival.
