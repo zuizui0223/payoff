@@ -114,3 +114,40 @@ def test_fail_closed_bad_noise_link_and_recourse():
         compare_commitment_times(conditional_cue_information([0.9], 1),
                                  initial_timing_adjustment_limit=1,
                                  later_timing_adjustment_limit=1, direct_delay_cost=-0.1)
+
+
+def test_same_warm_checkpoint_cue_can_reverse_update_direction():
+    from src.conditional_checkpoint_value import checkpoint_plan_update
+    # Both pathways receive a +1 checkpoint signal, but the prior expectation
+    # is higher in one animal and lower in the other.
+    surprising_cold = checkpoint_plan_update(
+        [0.8, 0.9], 1, observed_origin=2.0, observed_checkpoint=1.0,
+        timing_adjustment_limit=3.0,
+    )
+    surprising_warm = checkpoint_plan_update(
+        [0.8, 0.9], 1, observed_origin=0.0, observed_checkpoint=1.0,
+        timing_adjustment_limit=3.0,
+    )
+    assert surprising_cold.checkpoint_innovation < 0 < surprising_warm.checkpoint_innovation
+    assert surprising_cold.refreshed_plan < surprising_cold.origin_plan
+    assert surprising_warm.refreshed_plan > surprising_warm.origin_plan
+    assert surprising_cold.innovation_sensitivity == pytest.approx(0.9)
+
+
+def test_checkpoint_innovation_identity_and_singular_consistency():
+    from src.conditional_checkpoint_value import checkpoint_plan_update
+    rhos = [0.2, 0.8]
+    info = conditional_cue_information(rhos, 1, origin_noise_variance=0.5,
+                                       checkpoint_noise_variance=0.1)
+    update = checkpoint_plan_update(rhos, 1, observed_origin=1.1,
+                                    observed_checkpoint=0.3, origin_noise_variance=0.5,
+                                    checkpoint_noise_variance=0.1,
+                                    timing_adjustment_limit=1.0)
+    cue_residual_variance = 1.1 - 0.2**2 / 1.5
+    assert update.innovation_sensitivity**2 * cue_residual_variance == pytest.approx(info.incremental_r2)
+    same = checkpoint_plan_update([1, 0.9], 1, observed_origin=1,
+                                  observed_checkpoint=1, timing_adjustment_limit=1)
+    assert same.checkpoint_innovation == 0
+    with pytest.raises(ValueError):
+        checkpoint_plan_update([1, 0.9], 1, observed_origin=1,
+                               observed_checkpoint=2, timing_adjustment_limit=1)
