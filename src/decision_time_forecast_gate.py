@@ -236,3 +236,47 @@ def positive_connectivity_reversal_threshold(
     if any(not isfinite(x) for x in (old, new)) or not (0 < old < new <= 1):
         raise ValueError('requires 0 < earlier rho < later rho <= 1')
     return sqrt(2 * old * (new - old))
+
+
+def fully_calibrated_costly_actor_mismatch(
+    *, cue_target_correlation: float, seasonal_mean_shift: float,
+    effort_penalty: float
+) -> float:
+    """Expected squared timing mismatch with CORRECT contemporary beliefs.
+
+    Target H=delta+rho*X+sqrt(1-rho**2)*eps, X,eps independent N(0,1).
+    The agent knows current rho and delta, and minimizes E[(H-u)**2]
+    + kappa*u**2 subject to no timing bound. Thus u*=(delta+rho*X)/(1+kappa).
+
+    This returns matching MSE only, not total minimized ecological loss:
+    the fitness-effort term must be accounted separately.
+    """
+    rho, delta, kappa = map(float, (
+        cue_target_correlation, seasonal_mean_shift, effort_penalty))
+    if not all(isfinite(x) for x in (rho, delta, kappa)) or abs(rho) > 1 or kappa < 0:
+        raise ValueError('finite rho, shift and nonnegative effort cost required')
+    shrinkage = kappa / (1.0 + kappa)
+    return 1.0 - rho * rho + shrinkage**2 * (delta**2 + rho**2)
+
+
+def calibrated_cost_reversal_threshold(
+    *, earlier_correlation: float, later_correlation: float,
+    effort_penalty: float
+) -> float:
+    """Threshold for worse matching under fully calibrated costly control.
+
+    For the same positive effort penalty in both eras and 0<rho0<rho1<=1,
+    matching MSE gets worse iff
+
+      abs(delta) > sqrt((1-h*h)/(h*h) * (rho1**2-rho0**2)),
+
+    h=effort_penalty/(1+effort_penalty). At zero effort penalty,
+    fully informed unconstrained action absorbs the mean shift; no finite
+    threshold is defined.
+    """
+    rho0, rho1, k = map(float, (
+        earlier_correlation, later_correlation, effort_penalty))
+    if not all(isfinite(x) for x in (rho0, rho1, k)) or not (0 < rho0 < rho1 <= 1) or k <= 0:
+        raise ValueError('requires 0 < old rho < new rho <= 1 and positive penalty')
+    h = k / (1 + k)
+    return sqrt((1 - h*h) / (h*h) * (rho1*rho1 - rho0*rho0))
