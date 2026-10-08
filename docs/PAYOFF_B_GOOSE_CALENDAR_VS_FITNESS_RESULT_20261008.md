@@ -110,6 +110,70 @@ This cannot prove that longer/shorter staging has no biological effect;
 the predictor overlaps with dates in M0/M1, the source includes only five
 years and 49 repeated individuals, and actionability is not independent.
 
+## Audit correction: stage6 is a later-stage predictor (2026-10-08)
+
+The original M0/M1/M2 comparison above included the day that early breeding
+starts (stage6). That variable occurs **after the stage5 Iceland exit**.
+Therefore the original models can only be read as *retrospective
+post-arrival prediction of breeding outcome*, not as a model of information
+available when choosing to leave the Iceland staging area. They are preserved
+here without reclassification or numerical retuning.
+
+The dedicated GitHub workflow initially FAILED because its synthetic toy
+contained 125 bird-years while the function asserted exactly 107 output
+rows. The source-only stage-calendar test passed, but the *fitness forecast
+did not execute* in that failed workflow. The source-code test was repaired
+to compare output coverage with the input row count, and a time-of-availability
+guard was added. The repair is explicit, not a null or a successful biological
+replication.
+
+A separate earlier-available information set was fixed in
+docs/PAYOFF_B_GOOSE_AS_OF_STAGE5_TIME_GATE_20261008.md
+*before seeing the new as-of-stage5 numerical result*:
+
+- A0: known year code + Iceland staging start (stage3).
+- A1: A0 + stage3–4 feeding-fix fraction and stage3–4 mean log_ODBA,
+  both stage summaries ending before stage5 departure (these are proxies
+  available to an analyst, not measured beliefs of the bird).
+- A2: A1 + stage5 departure minus stage3 arrival (realized staging duration).
+- **No stage6 arrival/breeding-start variable** appears in any A model.
+
+An independent JavaScript re-implementation of the locked training-only
+standardization and five-year blocked ridge logistic model yielded:
+
+| Source-available-at-stage5 model | Mean held-year log loss | Mean held-year Brier |
+|---|---:|---:|
+| A0 calendar at staging exit | **0.584465** | 0.196943 |
+| A1 plus stage3–4 feeding/activity | **0.567970** | 0.189536 |
+| A2 plus actual staging duration | **0.571462** | 0.189837 |
+
+Matched A0→A1 log-loss improvement is **+0.016495**. A1→A2 is
+**−0.003492**, meaning the extra duration variable makes held-year
+predictions marginally worse, on average. The five source-year A1→A2 gains
+were **+0.010238, +0.004158, +0.005238, +0.003749,
+and −0.048707**. This result is thus not directionally uniform
+across years: deterioration in the final held-out year outweighs
+small apparent gains in the first four.
+
+This remains a provisional independent cross-check while the repaired
+dedicated GitHub workflow is queued. Do NOT cite a GitHub CI success for
+the *fitness* comparison until the repaired run succeeds and the
+bird-cluster resampling receipt has been read.
+
+A1→A2 comparison is also a **calendar-geometry test**, not a unique
+independent staging effect: when stage3 start is known, adding its difference
+from stage5 exit is algebraically equivalent to adding stage5 exit.
+Therefore any predictive gain or loss cannot decide whether a goose waited,
+was physically constrained, or followed a socially or photoperiodically
+anchored departure day.
+
+Even a time-safe positive outcome would not establish an energetic or
+demographic *causal* cost of timing correction, or an actual perception of
+future Greenland spring. The authors already included breeding arrival,
+feeding and ODBA predictors in their published model. These are
+post-publication exploratory descriptive comparisons, not a new species-
+general ecological mechanism.
+
 ## Ecological claim boundary
 
 **Supported descriptive finding:** near-fixed year-conditioned Iceland exit
