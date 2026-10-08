@@ -397,7 +397,7 @@ analogue, not an observed larval controller. The original source already
 discovered the fitness asymmetry. PAYOFF-B uses it to challenge the current
 controller's symmetric loss assumption, not as a new empirical finding.
 Details, exact expected Gaussian loss and negative controls are recorded in
-\`theory/ASYMMETRIC_FITNESS_LOSS_ECOLOGICAL_BOUNDARY_20261008.md\`.
+`theory/ASYMMETRIC_FITNESS_LOSS_ECOLOGICAL_BOUNDARY_20261008.md`.
 
 ### 2.5 Phase retention decomposes into passive carry-over and active feedback
 
