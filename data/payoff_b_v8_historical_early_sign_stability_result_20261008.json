@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-08",
+  "classification": "POST_RESULT_EXPLORATORY_SIGN_STABILITY",
+  "workflow_run_id": 37742794844,
+  "workflow_job_id": 113197192529,
+  "workflow_conclusion": "success",
+  "artifact_id": 11534442191,
+  "artifact_sha256": "a4f3517787d850cd2078236c9ceef9dc4d73b73eebd3e43a60fd2e03577a5d39",
+  "fixed_environment_pairs": 166,
+  "historical_leave_one_year_out_estimable_pairs": 96,
+  "historical_leave_one_year_out_not_estimable": 70,
+  "observed_early_negative_late_positive_pairs": 44,
+  "early_negative_late_positive_loyo_estimable": 25,
+  "flip_pairs_with_positive_earlier_loyo_value": 2,
+  "flip_pairs_negative_in_at_least_three_quarters_early_loyo_folds": 19,
+  "flip_pairs_historic_cue_worse_in_later_era": 22,
+  "flip_pairs_meeting_all_three_conditions": 2,
+  "surviving_screen_pairs": [
+    {
+      "pair_key": "66->45",
+      "training_years": 8,
+      "rho_early": -0.268524,
+      "rho_late": 0.873438,
+      "earlier_loyo_gain": 0.018432,
+      "later_forecast_gain": -0.751365,
+      "negative_loyo_fraction": 1
+    },
+    {
+      "pair_key": "79->45",
+      "training_years": 8,
+      "rho_early": -0.447472,
+      "rho_late": 0.570819,
+      "earlier_loyo_gain": 0.002475,
+      "later_forecast_gain": -3.149142,
+      "negative_loyo_fraction": 0.875
+    }
+  ],
+  "shared_destination_cell": "45",
+  "interpretation": "Two weak historically positive but later negative environmental predictive contrasts share a single destination time series; no independent replicates of biologically useful inverse learned cues or individual cognitive failure established.",
+  "source_gate": "Only pairs with >=7 of original early years can be left-one-year-out cross-validated with >=6 training observations; 70/166 were not estimable.",
+  "caveats": [
+    "Previous environmental outcomes had been opened before designing the sign-stability diagnostic.",
+    "Leave-one-year-out folds share six or seven years and are not independent experimental replications.",
+    "Signs of detrended correlations estimated from 6-8 annual records are especially unstable.",
+    "Source and target cells are range-proxy geography, not tracked migration routes.",
+    "The real cue available at the individual decision time is not observed.",
+    "Only a squared timing prediction proxy is measured, not ecological payoff, reproduction or survival."
+  ],
+  "scientific_decision": "NO EVIDENCE SUFFICIENT TO PROMOTE LEARNED-EXPERIENCE REVERSAL AS AN ECOLOGICAL DISCOVERY"
+}
