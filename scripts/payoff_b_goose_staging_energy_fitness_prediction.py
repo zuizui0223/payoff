@@ -217,8 +217,8 @@ def calculate(rows):
                 x[name+"_brier"]=(prob-row["response"])**2
                 x[name+"_prob"]=prob
             all_rows.append(x)
-    if len(all_rows)!=107:
-        raise ValueError("held-year predictions did not cover all bird-years")
+    if len(all_rows)!=len(rows):
+        raise ValueError("held-year predictions did not cover all supplied bird-years")
     compare={}
     for baseline,new,tag in [
         ("M0_calendar","M1_energy","energy_given_calendar"),
