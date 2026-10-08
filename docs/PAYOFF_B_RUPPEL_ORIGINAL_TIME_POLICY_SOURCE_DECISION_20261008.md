@@ -25,7 +25,7 @@ SHA256 0ef08e19104aaceff5ef2700c324a094c49cbe2cd24ca198e3853b656d7744c6.
 |---|---|---|
 | Nights at risk for a departure event | data.Event: **1,783 rows**, 178 individuals, unique individual-day key; status=0 for **1,605**, status=1 for **178** | **OBSERVED AND ALREADY PUBLISHED BY AUTHORS** |
 | Observed individual flights | flights: **178 flights, 178 individuals, exactly one observed flight per bird**, complete start and end time; all durations positive | VERIFIED one flight per bird; not a repeated within-individual flight policy panel |
-| Risk/flight linkage | 178 shared bird IDs, **175/178** same individual and calendar date at departure; 3 non-matches require midnight/timezone/event-date checks | DATA GRAIN PARTIALLY LINKED, do not silently force |
+| Risk/flight linkage | 178 shared bird IDs; **175/178** flights match the individual status=1 departure event on the **same calendar day**, and **3/178** match exactly **one day later**. All 178 status=1 events uniquely match a flight by bird ID and within one calendar day; source chronology was left unchanged. | VERIFIED BIRD-LEVEL EVENT ASSOCIATION; THREE +1-DAY TIMESTAMP OFFSETS REMAIN, NOT RECODED |
 | Routing | flightCat: **154 coasting, 24 sea-crossing** | Original authors' logistic route choice |
 | Interrupted flight / observed landing | landing=1 in **24**, landing=0 in **154** | Original authors' event endpoint; value 0 includes non-observation phrasing in Rmd, so detectability/censoring is a rival |
 | Route × landing overlap | coast/no landing **133**, coast/landing **21**, sea/no landing **21**, sea/landing **3** | Not perfectly aliased; 3 observations in sea/landing joint cell limit interaction support |
@@ -35,6 +35,29 @@ SHA256 0ef08e19104aaceff5ef2700c324a094c49cbe2cd24ca198e3853b656d7744c6.
 | Behavioral learned forecast changes | No departure-issued probability forecast for later wind field or subjective expectation; one flight per bird | NOT IDENTIFIED |
 
 The observed flight duration ranged from **0.389 to 10.920 hours** with median **2.454 hours**; this is a source range, not a fitness effect.
+
+## Final stage-to-flight date reconciliation (independent successful CI)
+
+Following the initial 175/178 same-day matching result, a tightened
+source-only check matched each individual to the **original status=1**
+departure-risk record—not simply to any at-risk day. The original source
+contains precisely one status=1 record per bird and one observed flight
+per bird (178/178).
+
+**GitHub Actions 37794718637 PASSED** with:
+- Flight start minus its bird's status=1 departure event day:
+  **0 days in 175 flights**, **+1 calendar day in 3 flights**.
+- Consequently **178/178** individual event–flight combinations match
+  within one calendar day, with no cases more than a day apart.
+- These three offsets have not been assigned a cause; time-zone
+  conventions, overnight flights and event semantics are possible
+  explanations requiring original methods, not retroactive recoding.
+- This confirms that the 1,783 rows are the at-risk calendar history
+  for **178 birds making a single observed departure each**, not 1,783
+  separate flight decisions or a set of within-bird repeated flights.
+
+This is a **source integrity result**, not a test of weather responsiveness,
+forecast updating or any demographic fitness.
 
 ## Direct original-code prior-art collision
 
