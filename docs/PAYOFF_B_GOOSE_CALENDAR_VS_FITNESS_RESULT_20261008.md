@@ -220,3 +220,91 @@ Sources:
 - Original study: https://doi.org/10.1098/rspb.2023.2016
 - Author data/code: https://github.com/aschindler23/Schindler_etal_2024_ProcB
 - Source calendar workflow: https://github.com/zuizui0223/payoff/actions/runs/37766775585
+
+
+## Post-result audit: common calendar and individual-specific departures can coexist
+
+The initial annual-calendar structural null showed nearly invariant staging exit
+conditional on arrival, but a common annual departure average does **not**
+require all individuals to have zero persistent offsets from that average.
+We therefore examined the 30 repeat-tracked individuals (97 non-independent
+same-bird interannual observation pairs among 49 source birds), without opening
+their energy or breeding outcomes.
+
+The **preliminary source-only exploratory correlations**, after subtracting
+each year's group mean, were
+
+    stage 2 first flight start       r = +0.5062
+    stage 3 Iceland staging start    r = +0.3814
+    stage 4 later staging start     r = +0.2908
+    stage 5 Iceland flight exit     r = +0.6874
+    stage 6 early breeding start    r = +0.3160.
+
+These Pearson correlations reuse some birds across multiple pairs and are
+*not 97 independent samples*. The stage-5 estimate looked unusually high,
+but all stages had been inspected before formal resampling. It was therefore
+labelled **POST-EXPOSURE EXPLORATORY**, not a preregistered stage-5 result.
+
+An independent JS implementation of 10,000 year-restricted shuffles of each
+bird's full five-stage standardized seasonal vector, retaining the original
+bird-year observation pattern and equally averaging within-bird pair products
+over the 30 repeated birds, yielded the following post-result diagnostics:
+
+| Stage | Equal-bird average standard-score cross-year product | Year-specific bird-label permutation, positive-tail p |
+|---|---:|---:|
+| 2 | +0.3354 | 0.00470 |
+| 3 | +0.2604 | 0.02490 |
+| 4 | +0.2724 | 0.02090 |
+| 5 | **+0.5387** | **0.00010** |
+| 6 | +0.2662 | 0.02440 |
+
+The maximum-of-five-stage permutation threshold for the stage-5 statistic
+also gave ~0.00010; a direct **stage5-minus-stage3** contrast produced
+p~0.0648. This does **not** establish that exit repeatability is stronger
+than staging-arrival repeatability. These exploratory p-values test only
+assignment of bird identity within years; they do not demonstrate a
+fitness benefit, internal chronotype, clock gene, cue use, or adaptive
+behavioral compensation.
+
+The new Python GitHub Actions implementation of the same full procedure,
+with a 10,000-draw bird-level confidence bound, was **queued** when
+this source note was updated. Exact final CI and numerical status are to
+be filled only after that independent workflow succeeds; this JS receipt
+is not represented as CI-verified.
+
+**A more realistic open-loop comparator** for the data is therefore
+
+    departure_{i,y} = annual departure calendar_y
+                       + stable bird-specific offset_i
+                       + unmeasured noise_{i,y}.
+
+This model can produce calendar-like departure concentration,
+near-zero departure-on-arrival slope, apparent -1 stay-duration slope,
+and persistent individual departure rank, *without requiring*
+feedback from a newly observed destination spring phase.
+The bird offset could reflect social family membership, consistent habitat
+or route, individual state or other stable unmeasured factors.
+It does not prove physiological calendar rigidity.
+
+**Prior-art restriction:** individual migration-timing repeatability is already
+established in Franklin et al. (2022, J Anim Ecol,
+doi:10.1111/1365-2656.13697; 177 repeatability effects from 47 avian species).
+Individually consistent departure-temperature cues had already been directly
+shown in satellite-tracked Asian houbara (2021,
+https://pmc.ncbi.nlm.nih.gov/articles/PMC8285904/).
+Therefore this result is a source-specific **mechanism-aliasing negative
+control**, not novel natural evidence that individual schedules or
+information-informed timing first exist in geese.
+
+Original experimental/causal driver remains unidentified because local
+temperature, route coordinates, full social-group membership and predecision
+cues are not in the released summarized source used in this audit.
+
+Source-only code:
+scripts/payoff_b_goose_individual_exit_repeatability.py
+
+Post-exposure exploratory contract:
+docs/PAYOFF_B_GOOSE_INDIVIDUAL_EXIT_REPEATABILITY_POSTRESULT_CONTRACT_20261008.md
+
+Independent computation ledger:
+data/payoff_b_goose_individual_exit_repeatability_js_crosscheck_20261008.json
