@@ -117,3 +117,58 @@ The original V7R Q×R effect was **not supported**: 10 transitions; one-sided wi
 Novelty boundary: Bayesian filtering, signal innovation, decision theory, climate forecast verification, and blocked-year evaluation are known tools. A potentially new ecological result requires actual evidence that *information acquired after departure changes a future, still-reversible ecological decision and thereby alters interaction synchrony or fitness*, beyond fixed-schedule and direct local forcing mechanisms.
 
 References: Kölzsch et al. (2015), doi:10.1111/1365-2656.12281; PAYOFF-B PRs #306, #313 and #314.
+
+
+## Exact cross-era reversal boundary — the ecological alternative
+
+Suppose a locally cue-tracking resident is approximately aligned to the
+current destination seasonal target, whereas the migrant still uses its
+historically calibrated prediction rule. In a standardized Gaussian toy model:
+
+    H_early = rho_0 X + sqrt(1-rho_0^2) epsilon
+    migrant_plan = rho_0 X
+    H_late = delta + rho_1 X + sqrt(1-rho_1^2) epsilon
+
+For 0 < rho_0 < rho_1 <= 1 (the *signed, stronger-positive-correlation*
+case), early matching loss is
+
+    MSE_early = 1-rho_0^2.
+
+After the environmental correlation strengthens, historical-policy matching
+loss becomes
+
+    MSE_late = delta^2 + (rho_1-rho_0)^2 + 1-rho_1^2.
+
+Subtracting gives the **exact inequality**
+
+    MSE_late - MSE_early
+      = delta^2 - 2*rho_0*(rho_1-rho_0).
+
+Thus seasonal synchrony deteriorates despite stronger connectivity precisely
+when
+
+    |delta| > sqrt(2*rho_0*(rho_1-rho_0)).
+
+At rho_0=0.3, rho_1=0.8 the threshold is about 0.548 standard deviations.
+With mean drift delta=1, the expected losses are 0.91 earlier and 1.61 later.
+The later-era fully recalibrated forecast would yield 0.36.
+
+**Ecological hypothesis, not a conclusion:** under temporally shifted
+breeding-ground phenology, a long-distance migrant maintaining a formerly
+useful remote-cue rule can lose seasonal synchrony even if environmental
+cross-site correlations become stronger. A resident reacting to locally
+observable conditions may avoid the same calibration burden; real resident
+and migrant species have their own observation noise and biological costs.
+
+This is not an inference that climate correlation gains caused the V8
+mismatch results. It is an explicit mechanism to test with *untouched*
+geographic routes and later years: quantify predecisional cue history,
+environmental calibration drift and the sign of predictive innovation, then
+check whether migrants' observed actions match transported old policies,
+recalibrated policies, or fixed-calendar schedules.
+
+The threshold is only valid for its stated standardized linear-Gaussian
+assumptions. Gaussian calibration drift and covariate shift are established
+statistics, not a newly discovered ecological law. Any real result must
+demonstrate that migrants actually used old cue rules and that timing mismatch
+(or fitness) changed as predicted.
