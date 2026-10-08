@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-08",
+  "classification": "POST_OUTCOME_EXPLORATORY_ENVIRONMENT_ONLY",
+  "source_dataset": "br-amaral/BirdMigrationSpeed data/final.rds",
+  "frozen_source_commit": "62c58d77c2028bd863dfe3697b0d9cf29ceaeab0",
+  "workflow_run_id": 37742082525,
+  "workflow_job_id": 113194878578,
+  "workflow_conclusion": "success",
+  "output_artifact_id": 11534400991,
+  "output_artifact_sha256": "e2b8420d7cff1a3940134baee45e06a7056e75261ccbaa9d74a338638b2c82dd",
+  "training_years": "2002-2009",
+  "holdout_years": "2010-2017",
+  "unit": "unique environmental source-target spatial pair",
+  "n_pairs": 166,
+  "n_species_exposure": 28,
+  "n_holdout_years": 8,
+  "penalty": 1,
+  "estimand": "mean paired holdout MSE(time-only)-MSE(time-plus-origin), divided by earlier training target SD squared, averaged across unique pairs",
+  "result": {
+    "mean": 2.22099196475014,
+    "median": 0.510725616713931,
+    "share_positive": 0.626506024096386,
+    "bootstrap_95_pair": [
+      1.33612705958992,
+      3.14929219314375
+    ],
+    "bootstrap_95_spatial_5deg": [
+      0.905326921551861,
+      3.88728746784277
+    ],
+    "spatial_5deg_blocks": 15,
+    "bootstrap_95_spatial_10deg": [
+      0.732141836257085,
+      5.16917375264728
+    ],
+    "spatial_10deg_blocks": 8,
+    "correlation_with_delta_rho": -0.374820590354181,
+    "eight_calendar_year_means_positive": true
+  },
+  "limitations": [
+    "Frozen V8 environmental data have already been exposed; this is exploratory and not an independent confirmatory hypothesis test.",
+    "The source-cell mid-greenup date is not proven perceptible or temporally available before an animal's decision.",
+    "The chosen source cell is a range-based lower-latitude proxy, not a tracked individual's actual migration route.",
+    "Positive climate forecast-transfer does not identify bird cue use, biological actionability, demographic fitness or causal coordination.",
+    "Pair-level values are geographically and annually dependent; descriptive spatial bootstraps do not remove every dependence.",
+    "Large positive means are partly concentrated in 2010 and 2012; pair median and early-era sign stability require audit.",
+    "The standardized mean-squared-error improvement is NOT a probability, R2 change, or percentage, and is not bounded by one."
+  ]
+}
