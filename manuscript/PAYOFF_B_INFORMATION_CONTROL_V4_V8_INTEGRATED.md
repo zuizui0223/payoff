@@ -300,8 +300,8 @@ This filtering result is established control theory, not a claim of mathematical
 
 ### 2.4 Signed correction follows estimated phase error
 
-Let correction cost be quadratic and residual *fitness-centred phase*
-mismatch costly:
+As a transparent special case, let correction cost be quadratic and
+residual *fitness-centred phase* mismatch loss be symmetric:
 
 \[
 L(u)=\kappa u^2+\mu(e-u)^2.
@@ -341,6 +341,76 @@ g^*=\frac{\mu}{\kappa+\mu}.
 Thus the sign of correction follows the sign of the estimated phase error. Late actors advance; early actors delay. Stronger residual mismatch costs increase the correction gain, whereas more expensive movement or stopover adjustment reduces it.
 
 Finite speed, stopover or route flexibility clips this correction to the feasible interval. The organism can therefore remain mismatched even when it knows the direction of the required correction.
+
+### 2.4a Early and late seasonal errors can have different fitness costs
+
+The symmetric quadratic assumption is not an empirical property of
+phenological selection. Importantly, this is **established prior art**:
+Lof et al. (2012, *Proceedings B*, doi:10.1098/rspb.2012.0431) already
+showed that environmental uncertainty interacting with asymmetric fitness
+curves can make apparently mismatched bird reproduction adaptive, while
+Visser and Gienapp (2019, *Nature Ecology & Evolution*,
+doi:10.1038/s41559-019-0880-8) reviewed how multiple fitness components
+create optimal resource–consumer timing offsets. PAYOFF-B does not claim
+to discover optimal mismatch or risk-sensitive phenological decisions.
+
+In a split-brood winter moth–oak experiment, van Dis
+et al. (2023, *Proceedings B*, doi:10.1098/rspb.2023.0414) estimated a
+survival–pupation-weight composite that peaked around two days **after** oak
+budburst. Relative fitness declined asymmetrically, by reported average
+rates of approximately 14% per day on the earlier side of that experimental
+peak and 6% per day on the later side. These **published average declines**
+are not globally constant fitness gradients, nor direct estimates for other
+taxa or natural field conditions.
+
+For an ecological sensitivity, let \(e\) be phase relative to the actual
+fitness target and \(u>0\) be timing advance. Replace the symmetric quadratic
+penalty by an asymmetric piecewise-linear loss:
+
+\[
+\mathcal{R}(u)=
+c_{\mathrm{early}}E[(u-e)_+\mid I]
++c_{\mathrm{late}}E[(e-u)_+\mid I]
++\frac{\kappa}{2}u^2,
+\]
+
+subject to independently defined physiological/behavioral correction bounds.
+For posterior fitness-phase CDF \(F_{e\mid I}\), its interior optimum obeys
+
+\[
+(c_{\mathrm{early}}+c_{\mathrm{late}})F_{e\mid I}(u^*)
++\kappa u^*-c_{\mathrm{late}}=0.
+\]
+
+Without adjustment cost, this is the *standard asymmetric-quantile decision
+rule*, not a new theorem:
+
+\[
+F_{e\mid I}(u^*)=
+\frac{c_{\mathrm{late}}}{c_{\mathrm{early}}+c_{\mathrm{late}}}.
+\]
+
+When being too early is much more costly than being late, a risk-aware actor
+with the **same unbiased posterior mean and the same available actions** may
+choose to delay rather than move to that mean. In a deliberately synthetic
+normal-error witness with a 14:6 illustrative slope ratio, the selected
+posterior quantile is 0.30; the corresponding correction is negative
+(delay). When the belief is Gaussian with posterior mean \(m\) and standard
+deviation \(s\), the unconstrained zero-effort rule is
+\(u^*=m+s\Phi^{-1}(0.30)\). Consequently uncertainty can bias the
+chosen time toward the safer side even when mean spring timing does not
+change; **this general effect was already predicted by Lof et al. (2012)**. These averaged empirical percentages are only an illustrative
+asymmetry ratio, *not a calibrated fitness-loss function for winter moths*.
+
+Therefore **lack of apparent correction toward a resource peak is not
+necessarily a lack of information or actuator capacity**. It may also be
+optimal risk avoidance. Conversely, the experiment does not show that moths
+recompute such a correction after hatching; this is a precommitment decision
+analogue, not an observed larval controller. The original source already
+discovered the fitness asymmetry. PAYOFF-B uses it to challenge the current
+controller's symmetric loss assumption, not as a new empirical finding.
+Details, exact expected Gaussian loss and negative controls are recorded in
+`theory/ASYMMETRIC_FITNESS_LOSS_ECOLOGICAL_BOUNDARY_20261008.md`.
 
 ### 2.5 Phase retention decomposes into passive carry-over and active feedback
 
@@ -891,9 +961,13 @@ event. Temperature, photoperiod, endocrine state and molecular clock pathways
 can contribute, but PAYOFF-B does not treat all bee emergence as one molecular
 oscillator.
 
-A decision controller predicts **signed post-entry correction**: late actors
-advance, early actors delay, and repeated correction can narrow the phase
-distribution.
+A decision controller with the **symmetric quadratic fitness loss**
+of Section 2.4 predicts signed post-entry correction: late actors advance,
+early actors delay, and repeated correction can narrow the phase distribution.
+Under unequal early/late fitness losses (Section 2.4a), the optimal response
+instead depends on a posterior **quantile** and can be biased toward avoiding
+the more damaging side. Signed resource-centred DFP slopes alone do not
+identify which loss shape an animal is optimizing.
 
 Mule deer now provide both signatures in one population. March scaled IFBFat
 predicts later migration-start timing in a conservative predeparture subset,
