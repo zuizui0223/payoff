@@ -395,9 +395,9 @@ with the **same unbiased posterior mean and the same available actions** may
 choose to delay rather than move to that mean. In a deliberately synthetic
 normal-error witness with a 14:6 illustrative slope ratio, the selected
 posterior quantile is 0.30; the corresponding correction is negative
-(delay). When the belief is Gaussian with posterior mean (m) and standard
-deviation (s), the unconstrained zero-effort rule is
-(u^*=m+sPhi^{-1}(0.30)). Consequently uncertainty can bias the
+(delay). When the belief is Gaussian with posterior mean \(m\) and standard
+deviation \(s\), the unconstrained zero-effort rule is
+\(u^*=m+s\Phi^{-1}(0.30)\). Consequently uncertainty can bias the
 chosen time toward the safer side even when mean spring timing does not
 change; **this general effect was already predicted by Lof et al. (2012)**. These averaged empirical percentages are only an illustrative
 asymmetry ratio, *not a calibrated fitness-loss function for winter moths*.
