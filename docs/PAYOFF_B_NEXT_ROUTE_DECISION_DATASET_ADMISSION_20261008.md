@@ -21,6 +21,7 @@ Missing any component defines the corresponding **claim ceiling**.
 
 | Priority and system | Already published findings (not PAYOFF-B discoveries) | Data availability as explicitly stated by source | Partial gate satisfied | Missing for complete causal test |
 |---|---|---|---|---|
+| **0. Rüppel et al. 2023 coast-crossing songbirds**, Royal Society Open Science, doi:10.1098/rsos.221420 | Original authors already jointly observed departure, offshore/coastal route and in-flight landing choices and reported weather effects on each. No novelty for simple landing ~ headwind, routing ~ wind, or departure ~ weather. | Public Figshare collection doi:10.6084/m9.figshare.c.6403996, source format/row gate initiated through GitHub; **actual record-level fields not yet admitted** | Potentially temporally ordered route/landing decisions in a single tracking system if deposited individual event records allow reconstruction | Origin-time forecast and NEW en-route cue (innovation), true alternatives still available, independent energy/fecundity; first test against initial-plan and calendar/ID/social-group/hazard null |
 | **1. Icelandic whimbrel** — Carneiro, Gunnarsson & Alves (2020), *Frontiers in Ecology and Evolution*, doi:10.3389/fevo.2020.00145 | **57 migrations / 36 birds** (9 direct, 48 stopover), **13 repeatedly tracked birds, only 3 switched** strategy. En-route wind and temperature were not significantly different between strategies. Later departure was associated with direct migration in population GLMs, but **not statistically detected** in the reduced bird-random-effect sensitivity. The authors explicitly could not determine whether timing caused strategy or the reverse. | **Underlying event/tracking dataset available only on author request** according to original Data Availability Statement; no authorized raw sample in PAYOFF | Actual direct-versus-stopover route strategy (already published) and stage-conditioned weather, with NCEP environment reconstruction | Exogenous action availability, new information timing before the strategy choice, individual breeding/survival or physiological costs; without these, another regression is prior-art replication |
 | **2. Wild vs captive-bred Asian houbara** — Burnside et al. (2017) *Ibis*, doi:10.1111/ibi.12462 | GPS/satellite trajectories permit stopover duration and frequency, movement efficiency, survival to return; compare 29 captive-bred juveniles, 10 wild juveniles, 39 wild adults in published summary. Stopover extraction and routes already analysed. | Article/supplement available; exact independently retrievable raw telemetry **NOT VERIFIED** | Real on-route stopover dates possible in original raw full-resolution telemetry | No verified common individual IDs with Burnside 2021 temperature-cue workbook. Cohort overlap MUST NOT be assumed; fitness/cost still not matched |
 | **3. Little bustard microclimate** — *Movement Ecology* (2023), doi:10.1186/s40462-023-00437-7 | 47 birds, 67 breeding events; 30-m microclimate along GPS routes, vegetation greenness and time at breeding site. Source authors already reported microclimate/refugia phenology associations. | **Datasets available from corresponding author on request**, not automatically accessible from article | Individual-experienced temperature, spatial microclimate and GPS behavior | No independent access to animal subjective cue, feasible correction options, or demographic fitness endpoints described in public abstract |
@@ -35,6 +36,21 @@ repeated-individual mixed model did not detect a significant departure-date
 association given its small direct-migrant sample. Any reanalysis MUST
 preserve that negative sensitivity and can only claim a new mechanism with
 independently observed additional cue/fitness constructs.
+
+### New source gate before any fitting
+
+Rüppel et al. (2023) is now the highest *public-data* candidate **because it
+studied the three choices together**, while whimbrel remains the most
+promising raw-data-on-request route-strategy source. The original 2023
+publication is an exceptionally strong **prior-art collision** for the
+claim that PAYOFF-B newly discovers weather-linked route decisions.
+
+A reproducible Figshare v2 collection/files source-only auditor on PR #320
+checks deposited metadata, checksums and headers without evaluating
+behavioral outcomes. If only supplementary tables or figures are publicly
+archived, stop and retain the conditional request for actual radio-telemetry
+event records. No complete behavioral/fitness fit should be run from
+article-level summaries.
 
 ## Ranked-source disposition after original-article verification
 
@@ -82,6 +98,8 @@ an opportunity.
 
 ## Primary source links
 
+- https://doi.org/10.1098/rsos.221420
+- https://doi.org/10.6084/m9.figshare.c.6403996
 - https://doi.org/10.1002/ecs2.2971
 
 - https://doi.org/10.3389/fevo.2020.00145
