@@ -132,3 +132,57 @@ Bayesian filtering, partial-correlation increments and bounded quadratic optimal
 - tests/test_conditional_checkpoint_value.py includes redundancy, weak-link refresh, noisy cue, zero recourse, delay-cost, effort-cost, and 50,000-sample seeded Monte Carlo checks.
 - The registered V7R Q×R interaction (10 transitions; permutation p about 0.570) remains unsupported and unchanged.
 - This branch is **stacked on** analysis/payoff-b-sequential-information-refresh-20261007, not a modification to any frozen manuscript, pre-registration or outcome receipt.
+
+
+## 7. Sharper behavioral fingerprint: respond to surprise, not raw warmth
+
+Define the origin-conditioned **checkpoint innovation**:
+
+    eta_m = Z_m - (a/v_0)*Z_0.
+
+The posterior mean destination forecast update is
+
+    E[H|Z_0,Z_m] - E[H|Z_0] = K_m * eta_m,
+    K_m = b*(1-a^2/v_0) / (v_m-a^2/v_0).
+
+The variance identity is
+
+    Delta R^2 = K_m^2 * Var(eta_m).
+
+When the remaining action set is nonbinding and reversible, the change in the
+optimal timing plan is proportional to K_m*eta_m/(1+kappa), **not** to raw
+checkpoint warming alone.
+
+**Same-cue, opposite-action witness.** With links (0.8, 0.9), the same
+positive checkpoint anomaly Z_m=+1 gives *negative* innovation eta=-0.6 when
+origin anomaly Z_0=+2, but *positive* innovation eta=+1 when Z_0=0.
+With equal nonsaturating recourse, optimal conditional timing plans shift in
+opposite directions. This is a synthetic testable prediction, not a report
+of migratory behavior.
+
+Prospective behavioral test: pre-specify the observed cue, its destination
+forecast coefficient and **which downstream decision remains reversible**.
+Regress the next action change on the residual checkpoint innovation, while
+including photoperiod, wind, direct local food/weather effects, and a fixed
+departure-calendar negative control. A conditional association is not by
+itself causal evidence of cognitive updating.
+
+## 8. V8 falsification context and calibration caveat
+
+The separate preregistered PAYOFF-B V8 environmental analysis (PR #306)
+showed **stronger**, not degraded, signed detrended spring-onset connectivity:
+166 unique spatial pairs, 28 species, mean change in rho +0.3690 (95%
+pair-bootstrap CI +0.2984 to +0.4365). But the registered environmental
+connectivity gain -> bird mismatch improvement transfer was **not supported**
+(beta +0.06244; 95% pair-bootstrap CI -0.01411 to +0.13635).
+
+This is a motivation to distinguish prediction, observation, forecast
+calibration and actionability, **not support for any new mechanism**.
+Increasing within-window correlation need not imply better prospective
+out-of-sample forecast *calibration*, especially if mean cue-target offsets
+have changed. An animal may also fail to observe an available predictor.
+The new design therefore must check held-out temporal transfer and
+calibration, as well as checkpoint-specific incremental prediction and
+independently estimated individual feasible action.
+
+No V8 outcome is reopened or remodeled here.
