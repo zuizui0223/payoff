@@ -1,0 +1,33 @@
+name: payoff-b-goose-energetic-fitness-source-gate
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-goose-energetic-fitness-source-gate-20261008
+    paths:
+      - "scripts/audit_payoff_b_goose_fitness_source.py"
+      - ".github/workflows/payoff-b-goose-energetic-fitness-source-gate.yml"
+  pull_request:
+    paths:
+      - "scripts/audit_payoff_b_goose_fitness_source.py"
+      - ".github/workflows/payoff-b-goose-energetic-fitness-source-gate.yml"
+  workflow_dispatch:
+
+jobs:
+  source-only-schema:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check synthetic source admissibility
+        run: python scripts/audit_payoff_b_goose_fitness_source.py --self-test
+      - name: Fetch original public Dryad source and inspect schema only
+        run: python scripts/audit_payoff_b_goose_fitness_source.py --output outputs/payoff_b_goose_fitness_source_gate.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-goose-energetic-fitness-source-only
+          path: outputs/payoff_b_goose_fitness_source_gate.json
+          if-no-files-found: error

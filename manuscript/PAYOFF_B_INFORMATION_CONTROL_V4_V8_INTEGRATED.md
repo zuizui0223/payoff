@@ -234,6 +234,38 @@ where \(\phi_t\) is passive phase retention in the absence of active correction 
 
 This matters because even a perfect correction at one checkpoint need not eliminate later mismatch. The resource wave itself can move.
 
+**Ecological phase-coordinate boundary.** The model's \(e_t\) is defined
+relative to its assumed *fitness-relevant target*, whereas GPS or remote
+sensing often supplies only a resource-centred proxy. Define
+
+\[
+r_t=t_{\mathrm{event},t}-t_{\mathrm{resource},t},
+\qquad
+\delta_t=t_{\mathrm{fitness\ optimum},t}-t_{\mathrm{resource},t}.
+\]
+
+Then the fitness-centred phase is exactly
+
+\[
+e_t=r_t-\delta_t.
+\]
+
+The offset \(\delta_t\) need not be zero: it may depend on energetic reserves,
+offspring developmental time, mortality risk, or subsequent life-history
+events. If the measured forage-centred process obeys
+\(r_{t+1}=\phi_t(r_t-u_t)+w_t\), the same process expressed in fitness-centred
+coordinates obeys
+
+\[
+e_{t+1}=\phi_t(e_t-u_t)+
+\left[w_t+\phi_t\delta_t-\delta_{t+1}\right].
+\]
+
+This is a coordinate identity, not a new theorem or a measured selection
+gradient. Until \(\delta_t\) is estimated from independent fitness
+observations, a reduction in \(|r_t|\) establishes closer alignment with
+the resource marker, **not** a measured increase in fitness.
+
 ### 2.3 The animal's internal phase estimate
 
 For a transparent stochastic representation, suppose
@@ -268,11 +300,19 @@ This filtering result is established control theory, not a claim of mathematical
 
 ### 2.4 Signed correction follows estimated phase error
 
-Let correction cost be quadratic and residual phase mismatch costly:
+Let correction cost be quadratic and residual *fitness-centred phase*
+mismatch costly:
 
 \[
 L(u)=\kappa u^2+\mu(e-u)^2.
 \]
+
+Here \(\mu(e-u)^2\) is an assumed local loss approximation; it is not a
+regression-derived survival or reproductive cost. The resulting optimal
+control direction is valid for this declared loss and a correctly defined
+target, but need not hold if a field study substitutes the vegetation
+green-up peak for the actual fitness optimum without estimating their
+offset.
 
 Conditional on the posterior phase belief,
 
@@ -326,7 +366,11 @@ Therefore
 }
 \]
 
-This gives an exact decomposition of segment-scale phase retention.
+This gives an exact decomposition of segment-scale phase retention **for the
+declared fitness-centred state under perfect phase estimation and no target
+shift**. Its coefficient is not identified by fitting observed resource-centred
+Days-From-Peak phase unless the resource-to-fitness offset in Section 2.2
+has also been identified or appropriately constrained.
 
 If \(g_t=0\), the observed phase coefficient is passive carry-over \(\lambda_t=\phi_t\).
 
@@ -473,8 +517,12 @@ where \(L\) is the interaction-network Laplacian and \(W\) total edge weight.
 Thus community mismatch depends on where unlike controllers interact, with the
 earlier binary network-cut result recovered as a special case.
 
-This serial decomposition separates **where a seasonal trajectory starts** from
-**what happens to its error afterward**.
+This serial decomposition separates **where a seasonal trajectory starts**
+from **what happens to its error afterward** *within the declared model*.
+Empirical pairwise interactions need independently defined biological timing
+targets, because different species can have different resource-to-fitness
+offsets, and a pairwise calendar overlap is not itself a pairwise fitness
+measure.
 
 ### 2.8 Information recovery can still fail to restore coordination
 
@@ -614,7 +662,10 @@ excluding zero.
 
 These results quantify the published convergence in continuous animal-year
 data and reproduce the signed actuator geometry required by the route-wise
-model.
+model. Crucially, the measured Days-From-Peak is a **forage-centred** timing
+coordinate, not an observed individual fitness optimum. The signed
+coefficients support a behavioral phase-tracking interpretation but do not
+identify the fitness-gradient coefficient (mu) in Section 2.4.
 
 Using the same verified Source Data, we tested both readiness and channel
 separation. Of 93 animal-years with IFBFat and migration timing, 62
@@ -679,6 +730,59 @@ Thus temporal recovery and fitness recovery are not equivalent:
 \]
 
 This supports the effective-deadline concept: a correction can remove downstream timing error while still carrying a cost.
+
+A complementary reproductive anchor comes from Greenland white-fronted
+geese (Schindler et al. 2024, *Proceedings of the Royal Society B*,
+doi:10.1098/rspb.2023.2016). Across 108 observed breeding seasons
+(28 successes, 73 failures and 7 deferrals), females spending more time
+feeding and less energy during spring migration were more likely to breed
+successfully. High energy expenditure coupled with little feeding was most
+associated with breeding deferral; the authors did not find that the particular
+spring sub-season in which feeding or expenditure occurred altered these
+breeding associations. These are **published source-study results**, not new
+PAYOFF-B estimates, and the associations are observational rather than causal.
+They establish a different ecological margin from phenological matching:
+migration may end at an apparently suitable time while the energetic state
+carried into breeding remains unfavorable.
+
+The state needed to interpret a timing correction is consequently not only
+the residual phase error but also the energetic cost of reaching that phase.
+For a conceptual augmented controller, let energetic reserve evolve through
+intake minus movement and maintenance costs, while subsequent breeding payoff
+depends jointly on residual phase and reserve. This **does not** identify a
+fitness cost function from the existing V8 birds or the mule-deer source table:
+the Greenland study lacks the same individual's registered incoming
+phase-error-and-independent-recourse contrast required for that inference.
+
+Two additional natural systems show why even the *direction* of the
+fitness-optimal seasonal offset can differ. Aikens et al. (2021,
+*Ecology*, doi:10.1002/ecy.3334) found that short-distance migratory
+mule deer in western Wyoming generally gave birth earlier than
+long-distance migrants and less closely matched summer green-up.
+The authors proposed an ecological trade-off between immediate forage
+availability and additional offspring growth time before winter.
+They measured birth timing, fetal development and birth mass, **not a
+causally identified lifetime survival advantage of that early-birth
+strategy**. This is independent published prior art, not a newly
+demonstrated PAYOFF-B strategy, and is not assumed to involve the
+same individual sample as the Red Desert Ortega analysis.
+
+The contrasting split-brood winter moth–oak experiment of van Dis et al.
+(2023, *Proceedings B*, doi:10.1098/rspb.2023.0414) directly estimated
+survival and a fecundity proxy under manipulated relative hatching times.
+Its reported composite-fitness optimum was around **2 days after**
+oak budburst; hatching before leaves were available sharply reduced
+caterpillar survival. This demonstrates a nonzero, asymmetric
+resource-to-fitness timing offset in a local consumer–resource
+interaction. It is not evidence that migrants use this same offset.
+
+Together with the goose energy–breeding results, these studies impose a
+strict boundary on PAYOFF-B: phenological matching, a physiological
+compensation cost, and later fitness are distinct ecological endpoints.
+Their published findings already establish that boundary in individual
+systems. What PAYOFF-B has *not* established is a new cross-system
+causal rule predicting the sign or size of (delta_t) from information
+and actionability alone.
 
 ### 3.7 Interaction-level asymmetry changes relative timing
 
@@ -1011,19 +1115,22 @@ individuals and interacting partners.
 Environmental correlation, calibrated forecast skill, cue perception,
 phenological matching and demographic fitness are five different quantities.
 The current V8 evidence directly measures the first and a spatial proxy for
-the fourth, not the other three. Environmental predictability is therefore
+the fourth, not the other three. Moreover, closeness to a green-up marker
+is not equivalent to closeness to a life-history-specific fitness optimum.
+Environmental predictability is therefore
 not synonymous with adaptive tracking. In the prospective bird stress test, source–destination spring predictive
 connectivity strengthens broadly, yet larger connectivity gains do not yield
 the preregistered improvement in arrival–green-up mismatch. The analysis does
 not identify why, but it rejects a simple broad information-degradation
 explanation for this sampled system.
 
-The timer–controller model supplies the missing mechanistic decomposition.
-A developmental or physiological timer determines when an organism enters a
+The timer–controller model supplies a **candidate** mechanistic decomposition,
+not an empirically established explanation for the V8 null. Under its declared
+assumptions, a developmental or physiological timer determines when an organism enters a
 seasonal trajectory with some initial phase error. An information-dependent
 controller then determines whether that error is erased, retained or
-amplified. For interacting species, later mismatch therefore has two separable
-sources:
+amplified. For interacting species, the model writes later phase mismatch as two
+components, conditional on a correctly defined target and observed state:
 
 \[
 \boxed{
@@ -1033,8 +1140,9 @@ sources:
 }
 \]
 
-This architecture explains why improved environmental information need not
-translate automatically into improved realized timing. Information can become
+This architecture provides a possible account of why more precise information
+need not translate into improved realized timing; the empirical data do not
+identify the proposed control channels as its cause. Information can become
 more accurate while response options disappear; conversely, strong downstream
 feedback can rescue a poorly timed start.
 
