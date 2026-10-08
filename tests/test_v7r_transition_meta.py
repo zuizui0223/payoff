@@ -81,3 +81,32 @@ def test_weighted_exact_permutation_uses_declared_weights():
     out = exact_within_flyway_q_permutation(weighted_rows, weighted=True)
     assert out.valid_permutations > 0
     assert 0.0 < out.one_sided_p <= 1.0
+
+
+def test_runner_meta_rows_preserves_keyword_named_lambda_column():
+    """Regression: pandas.itertuples() renames the 'lambda' column."""
+    from scripts.run_v7r_direct_recourse_analysis import meta_rows
+
+    class _Frame:
+        def to_dict(self, orient):
+            assert orient == "records"
+            return [
+                {
+                    "flyway": "barents",
+                    "n": 7,
+                    "q_abs_r": 0.7,
+                    "r_remaining_q10_q90": 0.2,
+                    "lambda": -0.3,
+                }
+            ]
+
+    rows = meta_rows(
+        _Frame(),
+        q="q_abs_r",
+        r="r_remaining_q10_q90",
+        response="lambda",
+        weighted=True,
+    )
+    assert len(rows) == 1
+    assert rows[0].correction == pytest.approx(-0.3)
+    assert rows[0].weight == pytest.approx(7.0)
