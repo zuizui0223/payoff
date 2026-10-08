@@ -154,6 +154,35 @@ when predictive connectivity is poor.
 
 Primary paper: https://doi.org/10.1111/1365-2656.12281
 
+## 5.5 Published-complete-track versus archive scope
+
+**Post-outcome source-provenance qualification.** Kölzsch et al. (2015)
+describe the Barents Sea complete spring migrations used in their focal
+published study as 6 in 2008 and 6 in 2009. The larger public Movebank
+archive and the derived PAYOFF Stage-3 transition table also include 2010.
+
+Therefore the full 2008–2010 diagnostic is **not** a reproduction restricted
+to the published 40-complete-migration study population.
+
+For the selected Barents R1→R5 transition, rerunning the same descriptive
+slopes under calendar-year restrictions gives:
+
+| Included years | n | \(\lambda\) | stopover term | spring term | departure-on-arrival calendar slope |
+|---|---:|---:|---:|---:|---:|
+| 2008–2009 | 7 | +0.073 | −0.862 | −0.099 | +0.033 |
+| 2009 only | 6 | +0.045 | −0.982 | approximately 0 | +0.018 |
+| 2008–2010 | 10 | −0.009 | −0.787 | −0.241 | +0.035 |
+
+The descriptive calendar synchronization remains under these year
+restrictions. **This is not a registered sensitivity** and cannot substitute
+for the original fixed V7R test. Restricting calendar years alone does not
+reproduce the original paper's animal/inclusion filters or prove that each
+archive track is a complete spring migration.
+
+The 2008–2010 climate-onset comparison in Section 4 must also be read as
+a **broader archive diagnostic**, not as a result reported for the original
+2008–2009 complete-migration subset.
+
 ## 6. Ecological interpretation and stop rule
 
 **Observed:** Some individuals reached the last wintering-region local stop
