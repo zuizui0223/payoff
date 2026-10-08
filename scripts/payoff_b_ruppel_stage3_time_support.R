@@ -37,6 +37,14 @@ fl_sec[!is.finite(fl_sec)] <- NA_real_
 status_levels <- table(a$status,useNA="ifany")
 landing_levels <- table(f$landing,useNA="ifany")
 flightcat_levels <- table(f$flightCat,useNA="ifany")
+route_landing <- table(f$flightCat, f$landing, useNA="ifany")
+route_landing_text <- paste(
+  apply(as.data.frame(route_landing),1,function(row) {
+    paste(as.character(row[1]),as.character(row[2]),
+          as.integer(row[3]),sep=":")
+  }),
+  collapse=";"
+)
 a_key <- paste(a$motusTagID, a_times)
 f_key <- paste(f$motusTagID, f_dates)
 data <- list(
@@ -57,6 +65,7 @@ data <- list(
   source_event_status_counts=paste(paste(names(status_levels),as.integer(status_levels),sep=":"),collapse=";"),
   flight_landing_value_counts=paste(paste(names(landing_levels),as.integer(landing_levels),sep=":"),collapse=";"),
   route_category_counts=paste(paste(names(flightcat_levels),as.integer(flightcat_levels),sep=":"),collapse=";"),
+  route_and_landing_cross_tab=route_landing_text,
   event_rows_per_bird_quantiles=paste(q(a_by_id),collapse=","),
   flight_rows_per_bird_quantiles=paste(q(f_by_id),collapse=","),
   end_wind_u_missing=sum(is.na(f$u_end)),
@@ -92,6 +101,23 @@ writeLines(c("AUTHOR_SOURCE_CODE_READ_ONLY_NOT_EXECUTED",
              paste("Distinct context lines included:",length(selected)),
              snippets),
            file.path(out,"payoff_b_ruppel_stage3_author_models_excerpt.txt"))
+# Focused later source-author models: role of departure, route and landing
+# and whether weather input is flight-start versus flight-end. Source lines
+# printed are code only, no animal events or modeled coefficients.
+late_source <- seq.int(330L,length(rmd))
+later_matches <- late_source[
+  grepl("landing|route|weather|u_end|v_end|t_end|u_start|v_start|t_start|flightCat|fit[234]|brm\\(|glm\\(|flightEnd|detect",
+        rmd[late_source],ignore.case=TRUE,perl=TRUE)
+]
+later_lines <- unique(unlist(lapply(later_matches, function(i)
+  seq.int(max(330L,i-2L),min(length(rmd),i+2L)))))
+later_lines <- later_lines[seq_len(min(length(later_lines),175L))]
+writeLines(c("AUTHOR_ORIGINAL_LATE_STAGE_CODE_ONLY_NOT_EXECUTED",
+             paste("Full Rmd lines:",length(rmd)),
+             paste("Late stage relevant matches:",length(later_matches)),
+             paste0("L",later_lines,": ",
+                    substr(trimws(rmd[later_lines]),1,200))),
+           file.path(out,"payoff_b_ruppel_stage3_route_landing_Rmd_excerpt.txt"))
 cat("RUPPEL_REAL_SOURCE_TIMING_AND_LINKAGE_GATE_PASSED\n")
 print(receipt,row.names=FALSE)
 cat("NO NEW WEATHER_RESPONSE_COEFFICIENTS_OR_FITNESS_INFERRED\n")
