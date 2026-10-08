@@ -117,3 +117,65 @@ def minimum_mean_drift_for_fresh_advantage(
     if abs(old) > 1 or abs(new) > 1 or v < 0 or cost < 0:
         raise ValueError("invalid correlations, source uncertainty or cost")
     return sqrt(max(0.0, v + cost - (new-old)**2))
+
+
+@dataclass(frozen=True)
+class RecalibrationComparison:
+    """Partial seasonal policy recalibration; fraction=1 is the current optimum."""
+
+    recalibration_fraction: float
+    retained_historical_error_fraction: float
+    recalibrated_memory_loss: float
+    fresh_rule_loss: float
+    fresh_advantage: float
+    fresh_source_preferred: bool
+
+
+def compare_recalibrating_memory(
+    *,
+    historical_correlation: float,
+    current_correlation: float,
+    seasonal_mean_drift: float,
+    recalibration_fraction: float,
+    fresh_source_error_variance: float,
+    fresh_source_acquisition_cost: float = 0.0,
+) -> RecalibrationComparison:
+    """A stored cue model can be updated; old age does not imply stale knowledge.
+
+    An actor's policy is a declared convex blend of old and *correct current*
+    forecasts.  Its updated action is
+      u_w=(1-w)*rho_old*X + w*(delta+rho_new*X).
+    This is a hypothetical updating fraction, not a measured bird-learning
+    rate, and knowing the current forecast may itself cost information.
+    Fresh source shares the current climate but adds independent forecast
+    noise and fixed cost.
+    """
+    w = _valid_float("recalibration_fraction", recalibration_fraction)
+    if not 0 <= w <= 1:
+        raise ValueError("recalibration fraction must be within [0,1]")
+    frozen = compare_learning_sources(
+        historical_correlation=historical_correlation,
+        current_correlation=current_correlation,
+        seasonal_mean_drift=seasonal_mean_drift,
+        fresh_source_error_variance=fresh_source_error_variance,
+        fresh_source_acquisition_cost=fresh_source_acquisition_cost,
+    )
+    retained = (1 - w) ** 2
+    mismatch = (
+        frozen.seasonal_mean_drift ** 2
+        + (frozen.current_correlation - frozen.historical_correlation) ** 2
+    )
+    old_loss = frozen.baseline_environmental_variance + retained * mismatch
+    fresh_loss = frozen.fresh_rule_loss
+    advantage = old_loss - fresh_loss
+    return RecalibrationComparison(
+        recalibration_fraction=w,
+        retained_historical_error_fraction=retained,
+        recalibrated_memory_loss=old_loss,
+        fresh_rule_loss=fresh_loss,
+        fresh_advantage=advantage,
+        fresh_source_preferred=(
+            retained * mismatch
+            > frozen.fresh_source_error_variance + frozen.fresh_source_acquisition_cost
+        ),
+    )
