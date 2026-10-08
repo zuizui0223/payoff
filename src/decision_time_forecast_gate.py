@@ -217,3 +217,22 @@ def gaussian_historical_policy_transfer(
     historical_transferred = shift * shift + (new - old) ** 2 + (1 - new * new)
     new_opt = 1 - new * new
     return early_opt, historical_transferred, new_opt
+
+
+def positive_connectivity_reversal_threshold(
+    *, earlier_correlation: float, later_correlation: float
+) -> float:
+    """Critical |mean drift| for worse timing despite stronger connectivity.
+
+    Only for 0 < rho_old < rho_new <= 1 and unit-variance Gaussian targets,
+    with a historically calibrated forecast rho_old*X used without updating.
+    Later-minus-earlier expected squared mismatch equals
+
+        delta**2 - 2*rho_old*(rho_new - rho_old).
+
+    It is strictly positive iff |delta| exceeds the returned threshold.
+    """
+    old, new = float(earlier_correlation), float(later_correlation)
+    if any(not isfinite(x) for x in (old, new)) or not (0 < old < new <= 1):
+        raise ValueError('requires 0 < earlier rho < later rho <= 1')
+    return sqrt(2 * old * (new - old))
