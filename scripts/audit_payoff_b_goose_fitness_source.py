@@ -185,6 +185,28 @@ def run(output: str) -> dict:
         receipt["version_number"] = meta_json.get("versionNumber")
         receipt["data_license"] = meta_json.get("license")
         receipt["metadata_access"] = "PASS"
+        # Public read-only metadata lists the exact version's file entries
+        # even when bulk download requires authorization. This is not a
+        # substitute for having the bytes to audit.
+        try:
+            from urllib.parse import urljoin
+            v = (meta_json.get("_links", {}).get("stash:version") or
+                 meta_json.get("_links", {}).get("version") or {})
+            version_url = urljoin("https://datadryad.org", v.get("href", ""))
+            if version_url.endswith("/") or not version_url.startswith("https://datadryad.org/api/v2/versions/"):
+                raise ValueError("published version ID was not available")
+            data, _ = retrieve(version_url + "/files", "application/json")
+            listing = json.loads(data)
+            files = listing.get("_embedded", {})
+            enumerated = [v for val in files.values() if isinstance(val, list) for v in val if isinstance(v, dict)]
+            receipt["public_manifest"] = [
+                {k: x.get(k) for k in ("path", "size", "mimeType", "digest", "digestType", "id")}
+                for x in enumerated
+            ]
+            receipt["file_manifest_access"] = "PASS"
+        except (HTTPError, URLError, ValueError, TimeoutError, json.JSONDecodeError) as manifest_exc:
+            receipt["file_manifest_access"] = "UNAVAILABLE"
+            receipt["manifest_error"] = type(manifest_exc).__name__ + ": " + str(manifest_exc)[:200]
     except (HTTPError, URLError, ValueError, TimeoutError, json.JSONDecodeError) as exc:
         receipt["metadata_access"] = "UNAVAILABLE"
         receipt["metadata_error"] = type(exc).__name__ + ": " + str(exc)[:200]
@@ -208,7 +230,7 @@ def run(output: str) -> dict:
         + json.dumps({
             k: receipt.get(k)
             for k in ("status", "metadata_access", "version_number",
-                      "row_count", "distinct_birds", "distinct_bird_years",
+                      "file_manifest_access", "public_manifest", "row_count", "distinct_birds", "distinct_bird_years",
                       "full_six_subseason_bird_years", "required_fields_absent",
                       "duplicate_id_year_subseason", "archive_sha256",
                       "access_error")
