@@ -354,3 +354,15 @@ if __name__=="__main__":
         out={k:v for k,v in report.items() if k not in ("explanations","original_script_keyword_audit")}
         print(json.dumps(out,ensure_ascii=False))
         print("NO NEW CLIMATE CUE EFFECT, ACTIVE CONTROL OR FITNESS ESTIMATED")
+        if report.get("source_status") != "VERIFIED_EVENT_LEVEL_PREDEPARTURE_CUE_ONLY":
+            raise SystemExit(
+                "SOURCE_GATE_FAILURE: event-level source was not actually "
+                "read and verified in this execution. Receipt saved; "
+                "archive timeouts cannot count as a green source audit."
+            )
+        if (report.get("author_temporal_semantics", {}).get("status") !=
+                "PUBLISHER_EXPLANATIONS_SOURCE_TEXT_VERIFIED"):
+            raise SystemExit(
+                "SOURCE_GATE_FAILURE: author timestamp/cue definitions "
+                "were not verified on this execution."
+            )
