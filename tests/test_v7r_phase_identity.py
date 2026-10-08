@@ -56,3 +56,25 @@ def test_inconsistent_chronology_fails_closed():
 def test_constant_origin_phase_does_not_have_an_estimable_lambda():
     with pytest.raises(ValueError,match="lacks variation"):
         decompose_phase_transfer([_make(0.) for _ in range(5)])
+
+
+def test_fixed_calendar_departure_mimics_perfect_correction_without_feedback():
+    # All animals depart at day 110 and transit for 5 days, regardless of
+    # incoming phase. Early arrivers simply wait longer by arithmetic.
+    # The spring onset is day 100 at both regions.
+    rows=[
+        PhaseTransition(
+            origin_arrival_doy=100.0+x,
+            destination_arrival_doy=115.0,
+            origin_phase=x,
+            destination_phase=15.0,
+            origin_stopover_days=10.0-x,
+            transit_days=5.0,
+        )
+        for x in (-2.,-1.,0.,1.,2.)
+    ]
+    out=decompose_phase_transfer(rows)
+    assert out.b_stopover==pytest.approx(-1.0)
+    assert out.b_transit==pytest.approx(0.0)
+    assert out.b_interregional_season==pytest.approx(0.0)
+    assert out.lambda_observed==pytest.approx(0.0,abs=1e-12)
