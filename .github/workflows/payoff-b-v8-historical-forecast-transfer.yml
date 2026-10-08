@@ -6,10 +6,12 @@ on:
       - analysis/payoff-b-v8-historical-forecast-transfer-20261008
     paths:
       - "analysis/movement_phenology/payoff_b_v8_historical_forecast_transfer_exploratory.R"
+      - "analysis/movement_phenology/payoff_b_v8_historical_sign_stability_postresult.R"
       - ".github/workflows/payoff-b-v8-historical-forecast-transfer.yml"
   pull_request:
     paths:
       - "analysis/movement_phenology/payoff_b_v8_historical_forecast_transfer_exploratory.R"
+      - "analysis/movement_phenology/payoff_b_v8_historical_sign_stability_postresult.R"
       - ".github/workflows/payoff-b-v8-historical-forecast-transfer.yml"
   workflow_dispatch:
 
@@ -26,6 +28,10 @@ jobs:
         run: Rscript analysis/movement_phenology/payoff_b_v8_historical_forecast_transfer_exploratory.R --self-test
       - name: Run exploratory historical-to-future climate forecast audit
         run: Rscript analysis/movement_phenology/payoff_b_v8_historical_forecast_transfer_exploratory.R
+      - name: Post-result historical-rule sign-stability synthetic test
+        run: Rscript analysis/movement_phenology/payoff_b_v8_historical_sign_stability_postresult.R --self-test
+      - name: Post-result early-period LOYO sign and forecast stability audit
+        run: Rscript analysis/movement_phenology/payoff_b_v8_historical_sign_stability_postresult.R
       - uses: actions/upload-artifact@v4
         with:
           name: payoff-b-v8-exploratory-environmental-forecast-transfer
@@ -34,4 +40,7 @@ jobs:
             outputs/payoff_b_v8_exploratory_forecast_transfer_pair_years.csv
             outputs/payoff_b_v8_exploratory_forecast_transfer_years.csv
             outputs/payoff_b_v8_exploratory_forecast_transfer_summary.csv
+            outputs/payoff_b_v8_exploratory_early_loyo_pairs.csv
+            outputs/payoff_b_v8_exploratory_early_loyo_summary.csv
+            outputs/payoff_b_v8_exploratory_early_loyo_sign_groups.csv
           if-no-files-found: error
