@@ -1,0 +1,41 @@
+{
+  "status": "COMPLETED_EXTERNAL_GOOSE_CALENDAR_ALIAS_EXPLORATORY_NOT_CAUSAL",
+  "source": "Schindler et al. 2024 author repository spring_data.csv",
+  "source_commit": "2171bcd36bf37022c8716e15c0f75412103b0f3f",
+  "dryad_spring_checksum": "9ef98e6b5e979e93476ed076a018db13bdf03aab6dcc5ca728b5fd866e79c1bd",
+  "workflow_id": 37766775585,
+  "workflow_job_id": 113276251276,
+  "workflow_artifact_id": 11545555455,
+  "workflow_conclusion": "success",
+  "n_birdyears": 107,
+  "n_birds": 49,
+  "n_calendar_years": 5,
+  "unit": "one individual-year; within-year centering",
+  "stage3": "first day of Iceland spring staging",
+  "stage5": "first day of second migratory flight",
+  "stage6": "first day of early breeding",
+  "slope_exit_on_arrival": -0.013372131428609598,
+  "slope_stay_on_arrival": -1.0133721314286097,
+  "accounting_identity": "beta_staging_duration_on_arrival = beta_exit_on_arrival - 1, exact",
+  "bird_cluster_bootstrap_95_exit_on_arrival": [
+    -0.1529967693774515,
+    0.1199295697848175
+  ],
+  "bird_cluster_bootstrap_replicates": 4000,
+  "pooled_within_year_sd_exit_over_arrival": 0.4405091317737811,
+  "within_year_permutation_p_descriptive": 0.7928017995501124,
+  "leave_one_year_out_exit_slopes": [
+    -0.010786042968248042,
+    -0.011334513461386033,
+    -0.04355892966569075,
+    -0.0010320413026072537,
+    -0.009365480340618548
+  ],
+  "staging_duration_days_range_observed": [
+    5,
+    41
+  ],
+  "published_outcome_opened": false,
+  "biological_interpretation": "Tight common exit schedule and near -1 arrival/stay slope are compatible with a fixed-year calendar. This is not proof of no cue use, phenological compensation, adaptive control or reproductive fitness cost.",
+  "original_paper": "Schindler et al. 2024 already studied energy/feeding and breeding success; exploratory stage analysis cannot claim these effects as new"
+}

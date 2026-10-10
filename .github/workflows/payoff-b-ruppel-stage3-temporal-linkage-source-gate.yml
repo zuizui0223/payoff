@@ -1,0 +1,42 @@
+name: payoff-b-ruppel-stage3-temporal-linkage-source-gate
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-goose-staging-calendar-null-20261008
+    paths:
+      - 'scripts/payoff_b_ruppel_stage3_time_support.R'
+      - '.github/workflows/payoff-b-ruppel-stage3-temporal-linkage-source-gate.yml'
+  pull_request:
+    paths:
+      - 'scripts/payoff_b_ruppel_stage3_time_support.R'
+      - '.github/workflows/payoff-b-ruppel-stage3-temporal-linkage-source-gate.yml'
+
+jobs:
+  night-by-flight-event-schema:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: false
+      - name: Test synthetic risk/flight table schema
+        run: Rscript scripts/payoff_b_ruppel_stage3_time_support.R --self-test
+      - name: Verify original deposited ZIP checksum and source
+        run: python scripts/payoff_b_ruppel_fetch_verified_zip.py
+      - name: Audit actual event-flight ID/time linkage and prior authored model code
+        run: Rscript scripts/payoff_b_ruppel_stage3_time_support.R
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-ruppel-stage3-risk-set-temporal-audit
+          path: |
+            outputs/payoff_b_ruppel_stage3_event_time_support.csv
+            outputs/payoff_b_ruppel_stage3_author_models_excerpt.txt
+            outputs/payoff_b_ruppel_stage3_route_landing_Rmd_excerpt.txt
+          if-no-files-found: warn

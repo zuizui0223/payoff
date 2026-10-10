@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-08",
+  "status": "POST_EXPOSURE_EXPLORATORY_INDEPENDENT_JS_PERMUTATION_CROSSCHECK; DEDICATED_PYTHON_CI_PENDING",
+  "source": "Schindler et al. 2024 author-hosted spring_data.csv",
+  "source_commit": "2171bcd36bf37022c8716e15c0f75412103b0f3f",
+  "dryad_normalized_sha256": "9ef98e6b5e979e93476ed076a018db13bdf03aab6dcc5ca728b5fd866e79c1bd",
+  "source_grain": {
+    "bird_years": 107,
+    "birds": 49,
+    "repeated_birds": 30,
+    "nonindependent_same_bird_crossyear_pairs": 97,
+    "year_codes": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "method": "Within-year z-score for stage2-6 date; equal average of same-bird crossyear standardized residual pair-products across 30 repeated birds. Shuffle entire five-stage date vector among fixed bird-year identity slots within each year, 10k independent Monte Carlo draws, keeping within-year data and missingness. This is a post-result exploratory test.",
+  "stats_by_stage": {
+    "2": {
+      "T": 0.3353894147530818,
+      "nonindependent_pair_Pearson": 0.5062242800398938,
+      "positive_one_sided_id_permutation_p": 0.0046995300469953
+    },
+    "3": {
+      "T": 0.26042350419752025,
+      "nonindependent_pair_Pearson": 0.38143454679415273,
+      "positive_one_sided_id_permutation_p": 0.024897510248975102
+    },
+    "4": {
+      "T": 0.2723621559718488,
+      "nonindependent_pair_Pearson": 0.29079107470042187,
+      "positive_one_sided_id_permutation_p": 0.020897910208979104
+    },
+    "5": {
+      "T": 0.5387240769500092,
+      "nonindependent_pair_Pearson": 0.68738523037457,
+      "positive_one_sided_id_permutation_p": 0.00009999000099990002
+    },
+    "6": {
+      "T": 0.2661770088133956,
+      "nonindependent_pair_Pearson": 0.31598713294801944,
+      "positive_one_sided_id_permutation_p": 0.024397560243975602
+    }
+  },
+  "stage5_max_of_five_stages_postselection_permutation_p": 0.00009999000099990002,
+  "stage5_minus_stage3_equal_bird_T_contrast_permutation_p": 0.06479352064793521,
+  "randomization": "Independent JS LCG seeded 20261008; cross-validation via GitHub Python random.Random in dedicated CI still pending",
+  "limitations": [
+    "Spring departure timing repeatability already well known: Franklin et al 2022 meta-analysis 47 species mean 0.414; Asian houbara environmental cue repeatability demonstrated 2021.",
+    "Bird ID signature may reflect site/route/social group/sex/condition etc, not a fixed individual timing mechanism.",
+    "Stage5 within-year residual persistence is distinct from active environmental feedback, direct cue use or adaptive fitness.",
+    "Pairwise Pearson uses 97 nonindependent same-bird pairs; individual-equal standardized product and permutation use 30 independent bird-level repeated units but share annual weather.",
+    "Stage5 vs stage3 superiority is not established by this exploratory paired contrast.",
+    "5 stages inspected before permutation audit; p values are postselection exploratory and not a new preregistered claim.",
+    "No behavioral manipulation, source cue, route-specific climate, physical actuator capacity, or breeding outcome used."
+  ]
+}

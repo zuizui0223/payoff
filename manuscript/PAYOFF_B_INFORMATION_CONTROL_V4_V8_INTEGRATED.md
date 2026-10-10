@@ -11,8 +11,10 @@ information: if seasonal conditions become harder to predict, migrants and
 their resources should decouple. We ask a more general question: **is better
 environmental predictability sufficient for better realized tracking?**
 
-**Location:** General theory, with empirical tests in migratory birds and
-individual-level mechanism evidence from mule deer in North America.
+**Location:** General theory, with tests of environmental timing
+proxies in migratory birds and observational movement correlates in
+mule deer in North America. The underlying individual feedback controller
+and its energetic fitness payoff have not been causally identified.
 
 **Time period:** The principal bird analysis compares 2002–2009 with
 2010–2017; supporting natural systems are dataset-specific.
@@ -158,27 +160,88 @@ When direct marginal waiting cost is zero,
 
 Thus the optimum occurs when the relative gain in information value is exactly balanced by the relative loss of remaining actionability.
 
-For exponential learning and exponential actionability loss,
+For exponential learning and exponential actionability loss, write
 
 \[
-q(t)=q_0+\Delta q[1-\exp(-\alpha t)]
-\]
-
-and
-
-\[
+q(t)=q_{\mathrm{start}}+
+\Delta q[1-\exp(-\alpha t)],
+\qquad
 r(t)=\exp(-\beta t),
 \]
 
-the unique zero-cost optimum is
+with \(\alpha,\beta>0\), \(0<\Delta q\leq1-q_{\mathrm{start}}\).
+For the canonical symmetric binary cue, restrict
+\(q_{\mathrm{start}}\geq1/2\): a cue whose accuracy is below
+one-half can instead be inverted, so it is not automatically
+uninformative. The canonical cue-use threshold obeys
+\(q_c\geq1/2\).
+Define the **cue-use threshold** \(q_c=B/S\) and let
+\(A=S(q_{\mathrm{start}}+\Delta q)-B\) denote the limiting gross
+information value and \(H=S\Delta q>0\) its rising component.
+Above the threshold, the usable value without direct waiting costs is
 
 \[
-t^*=\frac{\log(1+\alpha/\beta)}{\alpha}.
+N(t)=\exp(-\beta t)[A-H\exp(-\alpha t)].
 \]
 
-The optimum moves earlier as (\beta) increases. Two actors observing the same environmental-information trajectory can therefore commit at different stages solely because their remaining response options disappear at different rates.
+The stationary candidate is therefore
 
-A particularly important consequence is that perfect information can be too late. With \(\alpha=\beta=1\), the optimum is \(t^*=\log 2\), where cue accuracy is only \(q=0.75\) in the symmetric witness even though \(q\to1\) later. Better information is not automatically more useful.
+\[
+t_{\mathrm{candidate}}
+=\frac{1}{\alpha}
+\log\left[
+\frac{(\alpha+\beta)H}{\beta A}
+\right],
+\qquad A>0.
+\]
+
+This is **not generally** \(\log(1+\alpha/\beta)/\alpha\).
+If \(A\leq0\), the cue never reaches strictly positive use value and
+the animal should not pay to use it under this reduced loss.
+If \(A>0\), the optimal time over \(t\geq0\), allowing immediate
+action but not paying for a negative cue value, is
+
+\[
+t^*=\max\{0,t_{\mathrm{candidate}}\}.
+\]
+
+The previously frozen *canonical* result is the special case in which
+the cue **starts exactly at the use threshold**,
+\(q_{\mathrm{start}}=q_c=B/S\), so \(A=H\):
+
+\[
+\boxed{
+t^*_{\mathrm{canonical}}
+=\frac{\log(1+\alpha/\beta)}{\alpha}.
+}
+\]
+
+If the cue starts **below** the threshold but eventually becomes
+useful, its first useful time is
+\(t_c=\log(H/A)/\alpha>0\) and
+
+\[
+t^*=t_c+\frac{\log(1+\alpha/\beta)}{\alpha}.
+\]
+
+The actor must first reach the informativeness threshold and then
+balance additional information against disappearing options.
+If a cue starts well **above** the threshold, optimal action can
+instead occur immediately, despite future improvement in accuracy.
+At fixed cue trajectory the positive interior optimum moves earlier
+as \(\beta\) increases, possibly until immediate commitment is
+optimal. These results belong to this declared reduced decision
+model, not a newly established generic optimal-stopping theorem.
+
+For the symmetric canonical witness
+\(q_{\mathrm{start}}=q_c=0.5\),
+\(\Delta q=0.5\), and \(\alpha=\beta=1\),
+the optimum remains \(t^*=\log2\), at cue accuracy
+\(q(t^*)=0.75\), even though \(q(t)\to1\) later.
+The ecological distinction is **initial information quality relative
+to the action threshold**, not simply that the cue improves with time.
+No examined natural data yet identify \(q(t)\), remaining
+actionability and their threshold for the same animal.
 
 In the single-commitment limit, the downstream consequences of waiting can be
 compressed into an effective deadline cost,
@@ -711,11 +774,274 @@ manipulation did not alter arrival timing, whereas later female settlement
 responded after the cue became observable. Together these systems show that
 different mechanisms can govern successive seasonal stages.
 
-### 3.5 Pink-footed geese update environmental information en route
+### 3.4a Strong departure–arrival decoupling predates PAYOFF-B
 
-In pink-footed geese, the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers informs northward progression.
+Gurarie et al. (2019, *Ecosphere*, doi:10.1002/ecs2.2971)
+studied GPS/Argos migrations of **1,048 adult female caribou**
+in **seven Arctic herds** from 1995 to 2017. They already reported
+continentally synchronous spring departures, strongly variable migration
+duration (later departures associated with shorter movement periods),
+and arrival dates largely decoupled from departure dates. They found
+less than 14% of arrival-timing variability explained by departure
+date; weather in the previous summer was a more prominent correlate
+of arrival timing. Their proposed mechanism linking that prior summer
+to maternal condition and parturition was interpretive, not a direct
+experimental manipulation of condition or a PAYOFF-B feedback
+controller.
 
-This is consistent with the route-wise premise that migration itself can expose animals to information unavailable at the origin.
+Thus **timing compensation, departure–arrival decoupling and changing
+environmental correlates across seasonal stages are empirical prior art**,
+not discoveries of this manuscript. The open identification question
+is whether an apparent temporal correction arises from actively
+updated future-resource information, a common departure/arrival
+deadline, enduring individual differences, physiological condition,
+or social/group scheduling. Even richly tracked herd-level
+movement convergence cannot, by itself, partition those processes.
+
+A related original test of the *direct-versus-stopover decision* is
+Carneiro, Gunnarsson & Alves (2020, *Frontiers in Ecology and Evolution*,
+doi:10.3389/fevo.2020.00145): **57 spring whimbrel migrations
+(9 direct, 48 stopover) by 36 individuals**. Only **three**
+individuals changed migration strategy across years. The authors
+compared wind support and temperatures encountered up to a
+potential route-choice latitude; those environmental contrasts
+did not explain direct-versus-stopover routing, and the observed
+departure-date association was not robust to their repeated-individual
+sensitivity. They explicitly left the causal direction between
+departure timing and route strategy unresolved. The underlying
+individual records are available on request, not a public
+source already verified by PAYOFF-B.
+
+These original studies bar promotion of a new causal correction
+mechanism merely because our goose records show staging
+duration inversely correlated with staging entry timing.
+
+### 3.5 Pink-footed goose environmental associations vary among migration stages
+
+Published pink-footed goose studies report that relationships with day length,
+local accumulated temperature and other environmental variables differ among
+successive migration stages. Temperature measured near stopovers is associated
+with later northward progression. These results establish **stage-specific
+weather–behavior associations**, not a measurement of each bird's
+subjective forecast before departure or a comparison of the bird's prior
+prediction with information newly obtained along the route.
+
+Such stage dependence is compatible with the route-wise PAYOFF-B controller,
+but also with a precommitted schedule, locally responsive weather hazards,
+physiological readiness and differences in available stopover habitat.
+The source associations alone do **not** identify sequential Bayesian
+belief updating or a corrective policy.
+
+### 3.5a Calendar anchoring is a structural alternative to active feedback
+
+A separate, **post-publication exploratory** source reanalysis offers a direct
+negative control against interpreting stopover duration–arrival correlations
+as evidence that migrants used information to actively correct their phase.
+We examined the publicly deposited Schindler et al. (2024) Greenland
+white-fronted goose records: 107 complete bird-years from 49 individuals
+across 2018–2022, with stage 3 the beginning of spring staging in Iceland
+and stage 5 the beginning of the second migration flight.
+
+After removing year-specific means, each additional day of later staging
+arrival was associated with only **−0.013 days** change in exit date
+(4,000-draw bird-cluster bootstrap 95% interval −0.153 to +0.120 days).
+The corresponding staging-duration coefficient was **−1.013 days** per
+arrival day. The latter is the exact identity
+\(\beta_{\mathrm{stay}}=\beta_{\mathrm{exit}}-1\):
+even an entirely calendar-fixed exit date would generate a −1
+staging-duration coefficient without any active feedback. Leave-one-year-out
+estimates for exit-on-arrival all remained near zero.
+
+These results indicate that strong apparent stopover timing compensation
+can coexist with a common calendar-like exit date. They do **not** establish
+that departure is genetically fixed, that animals ignore local cues, or
+that a particular energetic adjustment has a fitness benefit.
+
+An additional **post-exposure** audit found that calendar-like
+population timing need not mean complete interchangeability of individuals.
+Thirty of the 49 source geese were observed over multiple spring seasons
+(97 non-independent within-bird between-year date pairs). After subtracting
+each year's mean stage-5 departure time, within-individual departure
+residuals were correlated across years (descriptive pair \(r\approx0.69\)).
+A successful GitHub-archived 10,000-replicate within-year bird-identity
+permutation test, averaging standardized residual products equally over
+the 30 repeated birds and shuffling entire five-stage seasonal vectors,
+found persistent identity-associated stage-5 timing relative to
+exchangeable bird IDs (post-selection max-over-five-stage exploratory
+\(p=0.00030\); equal-bird product 0.539, 95% bird-resampled
+interval 0.229–0.912). However, the directly compared strength
+of stage-5 versus stage-3 persistence was **not established**
+(exploratory \(p=0.065\)); all five stage patterns had been inspected
+before formal testing. A timing model with an annual calendar component and
+persistent individual offsets,
+\(D_{i,y}=\gamma_y+\alpha_i+\varepsilon_{i,y}\), can produce both a
+near-zero exit-on-arrival coefficient and persistent departure order
+without requiring active error-based feedback. The individual offset can
+equally represent stable migration routes, habitats or social groups;
+it must not be labelled a heritable internal clock.
+
+Individual migration-timing repeatability is substantial prior art:
+Franklin et al. (2022, *Journal of Animal Ecology*,
+doi:10.1111/1365-2656.13697) analysed 177 effects from 47 avian species,
+and a satellite-tracked houbara study showed individually consistent
+*environmental temperature* cues (2021,
+https://pmc.ncbi.nlm.nih.gov/articles/PMC8285904/).
+Thus neither persistent individual timing nor cue consistency is a new
+PAYOFF-B biological discovery. The useful inference is the stronger
+**null comparator**: population departure-date convergence and individual
+rank persistence can coexist without demonstrating the posited feedback
+controller.
+
+An additional exploratory held-out-year prediction comparison on the same
+source tested whether staging duration adds breeding-success forecast
+information beyond calendar and energetic summaries. A critical
+**time-of-availability correction** was required: our initial models
+contained the beginning of early breeding (stage 6), which occurs
+*after* Iceland staging exit and cannot be information available at that
+decision. Those models are retained as retrospective descriptions.
+
+The corrected, separately defined **as-of-stage-5** analysis used
+only the calendar year and start of staging, followed by stage-3/4
+feeding fraction and mean activity, and then observed staging duration.
+The mean five-fold held-calendar-year log losses were **0.5845,
+0.5680 and 0.5715**, respectively; thus the extra duration
+variable did not improve prediction beyond the pre-exit
+feeding/activity proxies (mean paired log-loss improvement
+**−0.00349**, 4,000 bird-cluster resamples of heldout errors,
+95% descriptive interval **−0.0163 to +0.0091**). The
+incremental energy-proxy forecast gain was **+0.01649**
+(interval **−0.0185 to +0.0513**). Both intervals span zero
+and include only validation resampling, not model-refit and calendar-year
+uncertainty. The negative duration mean was influenced by the final
+held-out year.
+
+These descriptive results do **not** identify adaptive
+stopover control or its energetic cost. Given staging arrival date,
+staging duration is algebraically equivalent to staging exit date,
+so the predictive term cannot distinguish waiting from a shared
+calendar. The original authors already analysed breeding-start
+timing and energetics as predictors of breeding success. The
+public source has 107 bird-years (28 successes, 72 failures,
+7 deferrals), one fewer failure than the 108 cases in the
+published summary; its provenance difference remains unresolved.
+
+Consequently a negative stopover-duration slope is never sufficient as a
+stand-alone diagnosis of learned or cue-based control. This external natural
+example motivates independent decision-time cue and actionability
+measurements, rather than being treated as an empirical confirmation of the
+controller model.
+
+### 3.5b An environmental cue before migration is not a measured en-route correction
+
+Burnside et al. (2021, *PNAS*, doi:10.1073/pnas.2026378118)
+already showed that satellite-tracked Asian houbara tend to start spring
+migration under individually repeatable local temperature conditions.
+Those results are **prior art** for cue-linked departure decisions, not
+independent PAYOFF-B confirmation of an information controller.
+
+We audited the authors' original Zenodo release
+(doi:10.5281/zenodo.4917565) with exact publisher MD5 verification.
+The v1 workbook contains **132 complete spring departure–arrival events
+from 44 birds**, whereas the original article's Figure 2 reports
+**133 events from 45 birds**; the discrepancy is unresolved.
+Its author-supplied field definitions are important for decision-time
+interpretation: departure.date is the **last satellite fix at the
+departure site** before migration, not the exact instant of a decision.
+Departure.temperature.C is the MODIS surface-temperature mean for
+the **eight days before that recorded departure date**, whereas
+arrival.temperature.C is the mean of the **eight days after arrival**.
+The latter cannot constitute knowledge available before departure,
+nor is it a demographic fitness endpoint. The population-level
+breeding-site temperature reference also is not an individual-level
+future forecast or a measured subjective belief.
+
+The workbook includes an authors' shuffled-departure null, but neither
+intermediate on-route cue checkpoints, stage-specific corrections,
+observed daily decisions *not* to depart, independently measured
+physical recourse, nor individual breeding/survival outcomes. The
+original code reproduces the published temperature-cue analysis; fitting
+another arrival-date association would not distinguish route-wise
+feedback from a date-dependent departure rule.
+
+This source therefore establishes a **verified event-level origin-cue
+comparator** while explicitly **failing admission for novel
+postcommitment actionability or reproductive-fitness inference**.
+Taken together with the Greenland white-fronted goose calendar and
+individual-offset diagnostic, it reinforces the necessity to measure
+forecast information, available correction, realized action and fitness
+on the same individuals rather than transferring a physiological or
+Bayesian mechanism across unrelated cohorts.
+
+### 3.5c Origin departure risk and in-flight weather changes are both prior art
+
+The radio-telemetry study of Rüppel et al. (2023, *Royal Society Open
+Science*, doi:10.1098/rsos.221420) directly monitored individual
+songbirds' **departure, coastal versus sea-crossing route choice, and
+in-flight landing** under weather. The original authors already
+reported wind-linked routing and more interrupted flights with
+adverse weather. These stage-specific weather responses are therefore
+prior art, not an independent PAYOFF-B discovery.
+
+We inspected their original MD5- and SHA256-verified public Figshare
+source (doi:10.6084/m9.figshare.c.6403996) with two independent
+read-only audits. The **data.Event** table contains **1,783
+individual-night observations for 178 birds**, of which 1,605 are
+non-departure records and 178 are observed departures. The author
+Rcode.Rmd already models departure with
+\(Surv(start,stop,status)\) and weather. The companion **flights**
+table contains 178 flights by 178 distinct birds—**one flight per
+individual**—with start/end timestamps, flight-route and landing
+codes, and weather at both recorded endpoints. Each bird has exactly one status=1 departure-risk record and one observed
+flight. All **178/178** source departures pair uniquely with that bird's
+flight within one calendar day: **175 same-day**, **3 flight dates one
+calendar day later**. The three offsets remain unreconciled; none was
+dropped or silently converted into an additional departure.
+
+The source records 154 coastal and 24 sea-crossing flights, alongside
+24 coded landings and 154 non-landings/non-observations. These
+variables are **not identical**: there are 21 coastal flights
+coded landing, 3 sea-crossing flights coded landing, and 21
+sea-crossing flights coded otherwise. The authors' code explicitly
+models route choice with starting eastward wind. More importantly,
+the original landing model already uses **change in northward wind
+during a flight**, \(v_{\mathrm{end}}-v_{\mathrm{start}}\),
+and cloudiness. Even an end-minus-start wind/landing association
+is thus published prior art, not newly identified information
+updating by PAYOFF-B. The source Rmd describes the landing comparison
+as *landing versus not seen*, so receiver coverage and censoring
+require careful treatment.
+
+The difference between **observed changing weather**, **responding
+to newly encountered weather under a precommitted contingency plan**
+and **revising an earlier action policy after a forecast update**
+remains unidentified. For example, an animal could depart with
+the fixed contingent rule *land if the encountered headwind is
+sufficiently strong*, or could decide to land only after updating
+its forecast while aloft. If both policies map the same realized
+wind conditions into the same landing actions, their observed
+flight-level data are identical. Nor does a headwind-induced
+physical inability to continue imply a cognitive revision.
+This is elementary observational equivalence, not a newly
+proved ecological theorem.
+
+Flight-end weather is indexed to the observed termination
+time; no departure-issued forecast for that future weather
+is available in the deposited table, and each bird contributes
+only one observed flight. Neither an independently feasible set
+of continuing-versus-landing actions nor subsequent individual
+breeding/survival fitness is measured. Thus this source cannot
+discriminate forecast innovation, a preplanned weather-contingent
+rule, a physical weather hazard or event-time selection without
+independent decision-time measurements.
+
+The PAYOFF-B-specific test would require origin-time forecasts
+of later conditions, in-flight *predecision* updated observations,
+a correctly constructed continue/land risk set and comparison
+with an open-loop weather-hazard and calendar/individual-history
+policy. No such novel test has been run. The ecological value of
+this source here is to establish what direct weather-responsive
+migration data can and cannot identify, not to claim an observed
+rational fitness-optimal refusal to adjust.
 
 ### 3.6 Compensation can restore timing without restoring fitness
 
@@ -867,11 +1193,25 @@ similar. The relevant object is therefore a sequence of inference,
 commitment and correction rather than a single fast-versus-slow phenological
 response rate.
 
-### 4.2 Arrival convergence can hide substantial control
+### 4.2 Arrival convergence is not diagnostic of active feedback
 
-If repeated positive feedback gains reduce phase error, large departure-date variation can converge toward a narrow arrival window. Observing only arrival dates can therefore underestimate the amount of behavioral control used along the route.
+In the specified PAYOFF-B model, repeated positive feedback gains can reduce
+incoming phase error and narrow the arrival-date distribution. However,
+the same calendar convergence can arise from a shared departure or arrival
+date, stable individual offsets, stage-duration arithmetic or
+state-dependent physiological urgency, **without any cue-driven
+feedback**. Gurarie et al. (2019) already observed striking
+departure–arrival decoupling in caribou, and our source-verified
+Schindler goose calendar diagnostic illustrates one alternative
+data-generating process. Arrival timing alone therefore cannot tell
+whether information-dependent control was present, strong, absent
+or unsuccessful.
 
-The strongest direct empirical design is consequently transition-based:
+The decisive design must observe the transition, cue chronology and
+an independently available alternative action rather than infer a
+controller from the departure/arrival slope:
+
+
 
 \[
 e_{\mathrm{in}}
@@ -895,11 +1235,14 @@ A decision controller predicts **signed post-entry correction**: late actors
 advance, early actors delay, and repeated correction can narrow the phase
 distribution.
 
-Mule deer now provide both signatures in one population. March scaled IFBFat
-predicts later migration-start timing in a conservative predeparture subset,
-whereas signed starting phase predicts speed and stopover after departure. A
-prespecified DFP × IFBFat moderation test did not support stronger signed
-feedback at higher IFBFat.
+In mule deer, March scaled IFBFat is associated with subsequent
+migration-start timing in a conservative predeparture subset, while
+observed starting resource-relative phase is associated with later
+speed and stopover measures. These are *different observational
+correlates* in a single population, not independent measurements of an
+animal's private readiness timer and its feedback-control policy.
+Importantly, the prespecified DFP × IFBFat moderation test failed to
+support stronger signed adjustment among better-conditioned deer.
 
 A second frozen downstream-phase test also rejected the **pure entry-only
 Markov handoff** as a complete description: in
@@ -923,10 +1266,13 @@ snow geese provide an independent natural anchor: premigration condition
 predicts lay date after arrival is controlled, and an unplanned reduction in
 prebreeding condition delayed laying.
 
-### 4.4 A variance funnel identifies effective feedback, not controller primitives
+### 4.4 A variance funnel constrains candidate feedback under explicit assumptions
 
-Individualized post-entry feedback predicts more phase-variance contraction
-than a common open-loop schedule. With incoming variance \(P_t\), information
+Under the declared Bayesian measurement and proportional-action model,
+individualized post-entry feedback may contract phase variance. But
+**calendar locking, shared annual schedules, stable individual timing
+offsets and observation selection can also contract observed dispersion**.
+Variance contraction alone cannot identify an information-using controller. With incoming variance \(P_t\), information
 weight \(K_t\), effective correction \(h_t\), passive retention \(\phi_t\) and
 new process variance \(Q_t\),
 
@@ -942,9 +1288,14 @@ Mean retention is
 \lambda_t=\phi_t(1-h_tK_t).
 \]
 
-If \(\phi_t\) and \(Q_t\) are independently known, mean and variance retention
-can separate \(K_t\) from \(h_t\). They cannot, by themselves, separate the
-primitive biological sources of \(h_t\).
+If \(\phi_t\) and \(Q_t\) are independently known **and** the Gaussian
+measurement, independent cue noise and proportional-controller assumptions
+are valid, mean and variance equations can algebraically separate
+\(K_t\) from \(h_t\) when \(h_tK_t\ne0\). When the product is zero,
+no such separation is possible. Even when the algebra is identified,
+calendar/group-level and observation-process rivals must be excluded
+before interpreting it as biological feedback. The two moments do not
+separate the primitive biological sources of \(h_t\).
 
 For a serial entry-gate system after entry, \(h_t=O_tg_t\). If physiological
 readiness is concurrently active at the same decision, \(h_t=G_tO_tg_t\).

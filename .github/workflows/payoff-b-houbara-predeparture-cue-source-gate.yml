@@ -1,0 +1,34 @@
+name: payoff-b-houbara-predeparture-cue-source-gate
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-goose-staging-calendar-null-20261008
+    paths:
+      - 'scripts/payoff_b_houbara_zenodo_metadata_gate.py'
+      - '.github/workflows/payoff-b-houbara-predeparture-cue-source-gate.yml'
+  pull_request:
+    paths:
+      - 'scripts/payoff_b_houbara_zenodo_metadata_gate.py'
+      - '.github/workflows/payoff-b-houbara-predeparture-cue-source-gate.yml'
+  workflow_dispatch:
+
+jobs:
+  original-source-manifest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test XLSX schema parser on synthetic archive
+        run: python scripts/payoff_b_houbara_zenodo_metadata_gate.py --self-test
+      - name: Verify public immutable Zenodo source MD5 and sheet header metadata
+        run: python scripts/payoff_b_houbara_zenodo_metadata_gate.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-houbara-zenodo-schema-only
+          path: outputs/payoff_b_houbara_source_gate_20261008.json
+          if-no-files-found: error

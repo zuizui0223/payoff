@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-08",
+  "classification": "POST_PUBLISHED_OUTCOME_EXPLORATORY; INDEPENDENT_JS_CROSS_CHECK; CI_REPEAT_PENDING",
+  "source_repo": "aschindler23/Schindler_etal_2024_ProcB",
+  "source_commit": "2171bcd36bf37022c8716e15c0f75412103b0f3f",
+  "dryad_source_sha256_crlf": "9ef98e6b5e979e93476ed076a018db13bdf03aab6dcc5ca728b5fd866e79c1bd",
+  "sample": {
+    "source_stage_rows": 642,
+    "bird_years": 107,
+    "birds": 49,
+    "year_codes": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "outcome_categories": {
+      "1_success": 28,
+      "2_failure": 72,
+      "3_deferral": 7
+    },
+    "source_vs_published_missing_one_failure": true,
+    "missing_reason_known": false
+  },
+  "models": {
+    "M0_calendar": {
+      "features": [
+        "numeric year",
+        "stage3 start day",
+        "stage6 early breeding start day"
+      ],
+      "held_year_mean_logloss": 0.5972936753989692
+    },
+    "M1_energy": {
+      "features": [
+        "M0",
+        "stage3-4 feeding fraction",
+        "stage3-4 mean log_ODBA"
+      ],
+      "held_year_mean_logloss": 0.5790742918277471
+    },
+    "M2_duration": {
+      "features": [
+        "M1",
+        "stage5 first day minus stage3 first day"
+      ],
+      "held_year_mean_logloss": 0.5809859061825022
+    }
+  },
+  "contrasts": {
+    "M0_minus_M1_logloss_gain": 0.018219383571222412,
+    "M0_minus_M1_brier_gain": 0.00742708483273501,
+    "M1_minus_M2_logloss_gain": -0.0019116143547552517,
+    "M1_minus_M2_brier_gain": -0.00003743590801284818,
+    "M1_minus_M2_by_holdout_year": {
+      "1": 0.009925070947260237,
+      "2": 0.0022669397091243724,
+      "3": 0.0023039521618098617,
+      "4": -0.0020114732736456176,
+      "5": -0.02255682628219956
+    }
+  },
+  "limitations": [
+    "Outcome relation already published by source authors for timing and energetics; no independent new mechanism demonstrated",
+    "Year-blocked cross validation uses only five years and cannot identify contemporary cue use",
+    "Staging duration is an observed schedule interval, not an exogenous feasible action set",
+    "Additional duration gains are descriptive and do not identify energetic causation or optimality",
+    "Bird and yearly dependence remains; validation-only bird cluster interval to be confirmed by workflow",
+    "107 source bird years differs by one failure from 108 published cases; reason unknown"
+  ]
+}

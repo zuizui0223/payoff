@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-08",
+  "status": "GH_CI_PASSED_POST_EXPOSURE_IDENTITY_PERMUTATION_NOT_CAUSAL",
+  "source_commit": "2171bcd36bf37022c8716e15c0f75412103b0f3f",
+  "source_dryad_crlf_sha256": "9ef98e6b5e979e93476ed076a018db13bdf03aab6dcc5ca728b5fd866e79c1bd",
+  "github_workflow_run": 37771712261,
+  "github_job": 113292639943,
+  "workflow_conclusion": "success",
+  "artifact_id": 11547973222,
+  "artifact_zip_sha256": "3c3ca227e2eb6dfa756c90afc7e6e370d44fc496ac8fbc9c4f0398356c08fd5d",
+  "source_rows": 107,
+  "source_birds": 49,
+  "repeated_birds": 30,
+  "pairs_nonindependent": 97,
+  "sampled_year_count_per_bird": {
+    "1": 19,
+    "2": 12,
+    "3": 9,
+    "4": 8,
+    "5": 1
+  },
+  "bird_equal_standardized_crossyear_product": {
+    "2": 0.3353894147530818,
+    "3": 0.2604235041975202,
+    "4": 0.27236215597184876,
+    "5": 0.5387240769500092,
+    "6": 0.2661770088133956
+  },
+  "descriptive_year_demeaned_pair_pearson": {
+    "2": 0.5062242800398936,
+    "3": 0.38143454679415273,
+    "4": 0.2907910747004219,
+    "5": 0.6873852303745702,
+    "6": 0.3159871329480193
+  },
+  "exploratory_identity_assignment_positive_permutation_p": {
+    "2": 0.0057994200579942,
+    "3": 0.0221977802219778,
+    "4": 0.017998200179982,
+    "5": 0.00009999000099990002,
+    "6": 0.0254974502549745
+  },
+  "exploratory_max_of_all_five_stage_p_stage5": 0.00029997000299970003,
+  "exploratory_stage5_minus_stage3_contrast_p": 0.064993500649935,
+  "stage5_individual_cluster_equalweight_bootstrap_95": [
+    0.22890263889155835,
+    0.9121027123322211
+  ],
+  "permutations": 10000,
+  "bootstrap_birds": 10000,
+  "seed": 20261008,
+  "comparative_prior_art": [
+    "Franklin et al. 2022 J Anim Ecol 10.1111/1365-2656.13697: timing repeatability known across 47 species",
+    "Asian houbara 2021 PMC8285904: individual temperature cue consistency already demonstrated"
+  ],
+  "interpretation": "Within-year year-normalized departure deviations retain repeatable bird-ID signatures. This rejects a fully bird-ID exchangeable yearly calendar null, but is compatible with annual scheduling plus persistent individual offsets, routes or social grouping; does not identify climate cue feedback or demographic fitness. Stage5 stronger than stage3 not established by direct contrast.",
+  "status_bounds": "POST_EXPOSURE_EXPLORATORY: five stages and correlations examined before this formal test; no preregistration or biological causal claim.",
+  "original_V7R_V8_frozen_unchanged": true
+}

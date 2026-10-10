@@ -1,0 +1,33 @@
+name: payoff-b-goose-individual-calendar-offset
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-goose-staging-calendar-null-20261008
+    paths:
+      - 'scripts/payoff_b_goose_individual_exit_repeatability.py'
+      - '.github/workflows/payoff-b-goose-individual-calendar-offset.yml'
+  pull_request:
+    paths:
+      - 'scripts/payoff_b_goose_individual_exit_repeatability.py'
+      - '.github/workflows/payoff-b-goose-individual-calendar-offset.yml'
+  workflow_dispatch:
+
+jobs:
+  bird-identity-calendar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Synthetic individual identity persistence control
+        run: python scripts/payoff_b_goose_individual_exit_repeatability.py --self-test
+      - name: Evaluate 5 stage within-year bird-ID permutations from original source
+        run: python scripts/payoff_b_goose_individual_exit_repeatability.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-goose-individual-calendar-offset
+          path: outputs/payoff_b_goose_individual_exit_repeatability.json
+          if-no-files-found: error

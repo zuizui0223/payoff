@@ -1,0 +1,33 @@
+name: payoff-b-ruppel-original-figshare-source-gate
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-goose-staging-calendar-null-20261008
+    paths:
+      - 'scripts/payoff_b_ruppel_figshare_source_gate.py'
+      - '.github/workflows/payoff-b-ruppel-original-figshare-source-gate.yml'
+  pull_request:
+    paths:
+      - 'scripts/payoff_b_ruppel_figshare_source_gate.py'
+      - '.github/workflows/payoff-b-ruppel-original-figshare-source-gate.yml'
+
+jobs:
+  original-radio-telemetry-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run synthetic parser and metadata checks
+        run: python scripts/payoff_b_ruppel_figshare_source_gate.py --self-test
+      - name: Verify actual Figshare archive and source file schemas
+        run: python scripts/payoff_b_ruppel_figshare_source_gate.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-ruppel-figshare-source-receipt
+          path: outputs/payoff_b_ruppel_original_source_gate.json
+          if-no-files-found: error
