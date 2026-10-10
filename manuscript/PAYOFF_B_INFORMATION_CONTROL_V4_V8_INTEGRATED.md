@@ -160,27 +160,83 @@ When direct marginal waiting cost is zero,
 
 Thus the optimum occurs when the relative gain in information value is exactly balanced by the relative loss of remaining actionability.
 
-For exponential learning and exponential actionability loss,
+For exponential learning and exponential actionability loss, write
 
 \[
-q(t)=q_0+\Delta q[1-\exp(-\alpha t)]
-\]
-
-and
-
-\[
+q(t)=q_{\mathrm{start}}+
+\Delta q[1-\exp(-\alpha t)],
+\qquad
 r(t)=\exp(-\beta t),
 \]
 
-the unique zero-cost optimum is
+with \(\alpha,\beta>0\), \(0<\Delta q\leq1-q_{\mathrm{start}}\).
+Define the **cue-use threshold** \(q_c=B/S\) and let
+\(A=S(q_{\mathrm{start}}+\Delta q)-B\) denote the limiting gross
+information value and \(H=S\Delta q>0\) its rising component.
+Above the threshold, the usable value without direct waiting costs is
 
 \[
-t^*=\frac{\log(1+\alpha/\beta)}{\alpha}.
+N(t)=\exp(-\beta t)[A-H\exp(-\alpha t)].
 \]
 
-The optimum moves earlier as (\beta) increases. Two actors observing the same environmental-information trajectory can therefore commit at different stages solely because their remaining response options disappear at different rates.
+The stationary candidate is therefore
 
-A particularly important consequence is that perfect information can be too late. With \(\alpha=\beta=1\), the optimum is \(t^*=\log 2\), where cue accuracy is only \(q=0.75\) in the symmetric witness even though \(q\to1\) later. Better information is not automatically more useful.
+\[
+t_{\mathrm{candidate}}
+=\frac{1}{\alpha}
+\log\left[
+\frac{(\alpha+\beta)H}{\beta A}
+\right],
+\qquad A>0.
+\]
+
+This is **not generally** \(\log(1+\alpha/\beta)/\alpha\).
+If \(A\leq0\), the cue never reaches strictly positive use value and
+the animal should not pay to use it under this reduced loss.
+If \(A>0\), the optimal time over \(t\geq0\), allowing immediate
+action but not paying for a negative cue value, is
+
+\[
+t^*=\max\{0,t_{\mathrm{candidate}}\}.
+\]
+
+The previously frozen *canonical* result is the special case in which
+the cue **starts exactly at the use threshold**,
+\(q_{\mathrm{start}}=q_c=B/S\), so \(A=H\):
+
+\[
+\boxed{
+t^*_{\mathrm{canonical}}
+=\frac{\log(1+\alpha/\beta)}{\alpha}.
+}
+\]
+
+If the cue starts **below** the threshold but eventually becomes
+useful, its first useful time is
+\(t_c=\log(H/A)/\alpha>0\) and
+
+\[
+t^*=t_c+\frac{\log(1+\alpha/\beta)}{\alpha}.
+\]
+
+The actor must first reach the informativeness threshold and then
+balance additional information against disappearing options.
+If a cue starts well **above** the threshold, optimal action can
+instead occur immediately, despite future improvement in accuracy.
+At fixed cue trajectory the positive interior optimum moves earlier
+as \(\beta\) increases, possibly until immediate commitment is
+optimal. These results belong to this declared reduced decision
+model, not a newly established generic optimal-stopping theorem.
+
+For the symmetric canonical witness
+\(q_{\mathrm{start}}=q_c=0.5\),
+\(\Delta q=0.5\), and \(\alpha=\beta=1\),
+the optimum remains \(t^*=\log2\), at cue accuracy
+\(q(t^*)=0.75\), even though \(q(t)\to1\) later.
+The ecological distinction is **initial information quality relative
+to the action threshold**, not simply that the cue improves with time.
+No examined natural data yet identify \(q(t)\), remaining
+actionability and their threshold for the same animal.
 
 In the single-commitment limit, the downstream consequences of waiting can be
 compressed into an effective deadline cost,
