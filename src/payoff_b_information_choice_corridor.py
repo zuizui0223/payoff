@@ -125,6 +125,34 @@ def density_sweep(*, accuracy: float = 0.8) -> list[dict]:
     ]
 
 
+def route_stage_sweep() -> list[dict]:
+    """Constructive comparison: ecological crowding versus decision deadline.
+
+    The focal settlement action remains reversible through stage 4 inclusive.
+    Signal accuracy increases monotonically, while competitor density rises.
+    Stage 5's signal arrives after commitment.
+    Synthetic assumptions are illustrative, not empirical estimates.
+    """
+    stages = (
+        (0, .60, 0.0, True),
+        (1, .70, 0.5, True),
+        (2, .80, 1.0, True),
+        (3, .85, 2.0, True),
+        (4, .90, 3.5, True),
+        (5, .95, 4.0, False),
+    )
+    return [
+        {
+            "stage": stage, "accuracy": q, "density": d,
+            "settlement_still_reversible": reversible,
+            **evaluate(CueCompetition(
+                accuracy=q, competitor_density=d, cue_before_choice=reversible
+            )),
+        }
+        for stage, q, d, reversible in stages
+    ]
+
+
 if __name__ == "__main__":
     import json
-    print(json.dumps({"sweep": density_sweep()}, indent=2))
+    print(json.dumps({"sweep": density_sweep(), "stages": route_stage_sweep()}, indent=2))
