@@ -17,7 +17,11 @@ as though the optimal time were independent of *q0*, Delta_q, loss scale S and t
 ## Correct general zero-direct-cost derivation
 
 Assume t >= 0, alpha,beta,S,Delta_q > 0,
-0<=q_start, q_start+Delta_q<=1, 0<=B<=S.
+0.5<=q_start, q_start+Delta_q<=1, S/2<=B<=S.
+Here q is the accuracy of an invertible symmetric binary cue; q<0.5
+would be better handled by flipping cue labels, NOT automatically
+called low information value. In the Paper-2 canonical loss,
+B=max(A,L) and S=A+L, which guarantees B/S>=0.5.
 Let q_c=B/S, and let nonnegative incremental information value
 be [S*q(t)-B]_+ (zero if that signal is unusable).
 
@@ -66,19 +70,22 @@ choose different commitment times even under the same alpha/beta.
 
 ## Deterministic illustrative witnesses, not fitted biological parameters
 
-All examples set S=2, B=1, alpha=beta=1 and are exact zero-cost
+All examples set S=1.6, B=1.2 (q_c=0.75), alpha=beta=1 and are exact zero-cost
 source-free toy calculations.
 
 | Initial q | Delta q | Limiting q | Expected result |
 |---:|---:|---:|---|
-| 0.50 | 0.40 | 0.90 | canonical t*=ln2=0.6931 |
-| 0.20 | 0.70 | 0.90 | threshold t_c=ln1.75=0.5596; optimum t*=ln3.5=1.2528 |
-| 0.60 | 0.30 | 0.90 | cue already usable: t*=ln1.5=0.4055 |
-| 0.90 | 0.05 | 0.95 | t*=0 (immediate use), rather than ln2 |
-| 0.35 | 0.10 | 0.45 | never useful, despite cue improvement |
+| 0.75 | 0.20 | 0.95 | canonical t*=ln2=0.6931 |
+| 0.60 | 0.35 | 0.95 | threshold t_c=ln1.75=0.5596; optimum t*=ln3.5=1.2528 |
+| 0.80 | 0.15 | 0.95 | cue already useful: t*=ln1.5=0.4055 |
+| 0.95 | 0.025 | 0.975 | t*=0 (immediate use), rather than ln2 |
+| 0.55 | 0.15 | 0.70 | never useful, despite cue improvement |
 
-The original symmetric special case q_start=0.5, Delta_q=0.5 gives
-q(tstar)=0.75 at tstar=ln2, unchanged.
+The original symmetric special case q_start=q_c=0.5,
+Delta_q=0.5, S=2, B=1 gives q(tstar)=0.75 at tstar=ln2,
+unchanged; the non-symmetric-prior table instead uses q_c=0.75.
+This explicit separation prevents labeling an accuracy below 50%
+(which is invertible) as insufficient environmental information.
 
 ## Source code and tests
 
