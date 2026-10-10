@@ -4,7 +4,7 @@ from dataclasses import replace
 import pytest
 
 from src.payoff_b_information_choice_corridor import (
-    CueCompetition, density_sweep, evaluate,
+    CueCompetition, density_sweep, evaluate, route_stage_sweep,
 )
 
 
@@ -77,3 +77,21 @@ def test_bad_input_rejected_and_no_demographic_inference():
         with pytest.raises(ValueError):
             evaluate(replace(CueCompetition(), **altered))
     assert evaluate(CueCompetition())["general_equilibrium_or_social_welfare"] == "NOT_IDENTIFIED"
+
+
+
+def test_better_later_information_loses_choice_value_before_deadline():
+    stages = route_stage_sweep()
+    assert [round(s["incremental_information_value"], 2) for s in stages] == [
+        0.0, 0.35, 0.9, 0.55, 0.0, 0.0,
+    ]
+    assert all(
+        stages[i]["accuracy"] < stages[i+1]["accuracy"]
+        for i in range(len(stages)-1)
+    )
+    assert stages[4]["settlement_still_reversible"] is True
+    assert stages[4]["incremental_information_value"] == pytest.approx(0)
+    assert stages[5]["settlement_still_reversible"] is False
+    assert stages[2]["incremental_information_value"] > stages[3][
+        "incremental_information_value"
+    ]
