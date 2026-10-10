@@ -67,6 +67,23 @@ Script: \`src/payoff_b_information_choice_corridor.py\` (Python standard library
 Guard tests: \`tests/test_payoff_b_information_choice_corridor.py\`.
 Tests check exact numeric example, nonnegativity over 245 q/p/d configurations, q=0.5, post-choice signal, q=1, and input-domain invariants.
 
+### Route-stage counterexample: the ecological opportunity can close before the clock does
+
+Let cue accuracy increase across a **six-stage synthetic journey** (0.60 → 0.95) while density at a prospective breeding patch increases (0 → 4). The individual can still revise its *focal patch choice* through stage 4, and is committed only at stage 5. The binary-choice calculation yields:
+
+| Stage | q (accuracy) | d (competitor density) | Patch choice reversible? | Marginal VOI |
+|---|---:|---:|---|---:|
+| 0 | 0.60 | 0.0 | yes | 0.00 |
+| 1 | 0.70 | 0.5 | yes | 0.35 |
+| 2 | 0.80 | 1.0 | yes | **0.90** |
+| 3 | 0.85 | 2.0 | yes | 0.55 |
+| 4 | 0.90 | 3.5 | **yes** | **0.00** |
+| 5 | 0.95 | 4.0 | no | 0.00 |
+
+**Nontrivial discrimination:** between stage 2 and stage 4, physical ability to select the patch is assumed constant and q increases, but *the improved information stops changing the optimal choice* because competition makes avoidance optimal under both cue states. This is **ecological crowding of the action incentive**, not information degradation or a missed physiological deadline. It offers a competing explanation for a hump in realized information-use value that should be tested against the earlier PAYOFF-B recourse-loss mechanism.
+
+This example is an arbitrary parameter construction, not an estimated phenological process or a generic theorem: q, d and the payoff schedule must be independently estimated or manipulated before inferring this mechanism in a natural system. Settlement choice need not be the last action; later breeding or movement could still use late cues.
+
 ## 4. Distinctive ecological test is the timing × density × cue interaction
 
 A new result would need evidence that, when seasonal cue changes **before** an actually reversible decision:
