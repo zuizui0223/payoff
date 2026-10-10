@@ -1,0 +1,37 @@
+name: PAYOFF-B BTBW annual source gate
+
+on:
+  pull_request:
+    paths:
+      - "data/external/btbw_lany_2015_annual_Dryad_mirror.csv"
+      - "scripts/payoff_b_btbw_annual_reanalysis.py"
+      - "tests/test_payoff_b_btbw_annual_reanalysis.py"
+      - ".github/workflows/payoff-b-btbw-annual-gate.yml"
+  workflow_dispatch:
+
+jobs:
+  source-gate-and-descriptive-reanalysis:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install registered empirical and test tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ".[empirical,test]"
+      - name: Check schema and inference guard tests
+        run: python -m pytest -q tests/test_payoff_b_btbw_annual_reanalysis.py
+      - name: Generate noncausal annual readout
+        run: |
+          python scripts/payoff_b_btbw_annual_reanalysis.py \
+            --input data/external/btbw_lany_2015_annual_Dryad_mirror.csv \
+            --output "$RUNNER_TEMP/btbw_annual_descriptive_receipt.json"
+      - name: Upload inspected annual readout
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-btbw-annual-descriptive-receipt
+          path: ${{ runner.temp }}/btbw_annual_descriptive_receipt.json
