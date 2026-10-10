@@ -986,10 +986,11 @@ Rcode.Rmd already models departure with
 \(Surv(start,stop,status)\) and weather. The companion **flights**
 table contains 178 flights by 178 distinct birds—**one flight per
 individual**—with start/end timestamps, flight-route and landing
-codes, and weather at both recorded endpoints. Within the provided
-source, 175/178 observed flights can be matched directly to an
-individual's departure-risk row on the same calendar date; three
-remain unmatched under this simple day-level key.
+codes, and weather at both recorded endpoints. Each bird has exactly one status=1 departure-risk record and one observed
+flight. All **178/178** source departures pair uniquely with that bird's
+flight within one calendar day: **175 same-day**, **3 flight dates one
+calendar day later**. The three offsets remain unreconciled; none was
+dropped or silently converted into an additional departure.
 
 The source records 154 coastal and 24 sea-crossing flights, alongside
 24 coded landings and 154 non-landings/non-observations. These
@@ -1260,10 +1261,13 @@ snow geese provide an independent natural anchor: premigration condition
 predicts lay date after arrival is controlled, and an unplanned reduction in
 prebreeding condition delayed laying.
 
-### 4.4 A variance funnel identifies effective feedback, not controller primitives
+### 4.4 A variance funnel constrains candidate feedback under explicit assumptions
 
-Individualized post-entry feedback predicts more phase-variance contraction
-than a common open-loop schedule. With incoming variance \(P_t\), information
+Under the declared Bayesian measurement and proportional-action model,
+individualized post-entry feedback may contract phase variance. But
+**calendar locking, shared annual schedules, stable individual timing
+offsets and observation selection can also contract observed dispersion**.
+Variance contraction alone cannot identify an information-using controller. With incoming variance \(P_t\), information
 weight \(K_t\), effective correction \(h_t\), passive retention \(\phi_t\) and
 new process variance \(Q_t\),
 
@@ -1279,9 +1283,14 @@ Mean retention is
 \lambda_t=\phi_t(1-h_tK_t).
 \]
 
-If \(\phi_t\) and \(Q_t\) are independently known, mean and variance retention
-can separate \(K_t\) from \(h_t\). They cannot, by themselves, separate the
-primitive biological sources of \(h_t\).
+If \(\phi_t\) and \(Q_t\) are independently known **and** the Gaussian
+measurement, independent cue noise and proportional-controller assumptions
+are valid, mean and variance equations can algebraically separate
+\(K_t\) from \(h_t\) when \(h_tK_t\ne0\). When the product is zero,
+no such separation is possible. Even when the algebra is identified,
+calendar/group-level and observation-process rivals must be excluded
+before interpreting it as biological feedback. The two moments do not
+separate the primitive biological sources of \(h_t\).
 
 For a serial entry-gate system after entry, \(h_t=O_tg_t\). If physiological
 readiness is concurrently active at the same decision, \(h_t=G_tO_tg_t\).
