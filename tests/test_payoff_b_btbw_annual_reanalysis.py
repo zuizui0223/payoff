@@ -4,6 +4,12 @@ import math
 
 import pytest
 
+# The general PAYOFF test job intentionally installs only pytest.
+# The dedicated BTBW empirical workflow installs numpy/scipy/statsmodels.
+pytest.importorskip("numpy")
+pytest.importorskip("scipy")
+pytest.importorskip("statsmodels")
+
 from scripts.payoff_b_btbw_annual_reanalysis import read_annual, run, temporal_mse
 
 SOURCE = Path(__file__).resolve().parents[1] / "data" / "external" / "btbw_lany_2015_annual_Dryad_mirror.csv"
