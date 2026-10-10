@@ -170,6 +170,11 @@ r(t)=\exp(-\beta t),
 \]
 
 with \(\alpha,\beta>0\), \(0<\Delta q\leq1-q_{\mathrm{start}}\).
+For the canonical symmetric binary cue, restrict
+\(q_{\mathrm{start}}\geq1/2\): a cue whose accuracy is below
+one-half can instead be inverted, so it is not automatically
+uninformative. The canonical cue-use threshold obeys
+\(q_c\geq1/2\).
 Define the **cue-use threshold** \(q_c=B/S\) and let
 \(A=S(q_{\mathrm{start}}+\Delta q)-B\) denote the limiting gross
 information value and \(H=S\Delta q>0\) its rising component.
