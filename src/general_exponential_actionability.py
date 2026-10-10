@@ -7,8 +7,9 @@ REMAINS valid for the deliberately specified q(0)=B/S case. It is NOT
 general across different initial cue accuracy. No new theorem or field result
 is claimed: this is elementary optimal timing calculus and an audit guard.
 
-Assumptions: 0<=q_start<1, cue_gain>0, q_start+cue_gain<=1,
-alpha,beta>0, value scale S>0, threshold B/S in [0,1],
+Assumptions: 0.5<=q_start<1 (invertible symmetric binary cue),
+cue_gain>0, q_start+cue_gain<=1,
+alpha,beta>0, value scale S>0, threshold B/S in [0.5,1],
 retained actionability exp(-beta*t), zero direct waiting cost,
 actor may opt out if information never becomes usable.
 """
@@ -78,9 +79,9 @@ def general_exponential_timing(
     b = _finite("beta", beta)
     s = _finite("scale", scale)
     base = _finite("base_loss", base_loss)
-    if not (0 <= q0 < 1 and 0 < gain <= 1-q0 and
-            a > 0 and b > 0 and s > 0 and 0 <= base <= s):
-        raise ValueError("invalid cue range, rates or payoff threshold")
+    if not (0.5 <= q0 < 1 and 0 < gain <= 1-q0 and
+            a > 0 and b > 0 and s > 0 and 0.5*s <= base <= s):
+        raise ValueError("invalid invertible binary cue reliability, rates or threshold")
 
     qmax = q0 + gain
     threshold = base/s
