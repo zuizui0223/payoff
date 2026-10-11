@@ -44,12 +44,15 @@ def validate_manifest(manifest: dict) -> list[dict]:
 def _csv_shape(blob: bytes) -> dict:
     """Structural metadata only: headers + count. Do not expose row values."""
     txt = blob.decode("utf-8-sig").replace("\r\n", "\n").replace("\r", "\n")
-    reader = csv.reader(io.StringIO(txt))
+    # Published original R code explicitly reads all six data files with
+    # read.table(..., sep=";", dec=","). A comma CSV parser would collapse
+    # entire original records to a single field and falsely reject the data.
+    reader = csv.reader(io.StringIO(txt), delimiter=";", quotechar='"')
     try:
         header = next(reader)
     except StopIteration as exc:
         raise ValueError("CSV empty") from exc
-    if not header or not all(h.strip() for h in header):
+    if len(header) < 2 or not all(h.strip() for h in header):
         raise ValueError("Unusable column header")
     if len(set(header)) != len(header):
         raise ValueError("Duplicate column headers")
@@ -62,7 +65,9 @@ def _csv_shape(blob: bytes) -> dict:
         n += 1
     if n == 0:
         raise ValueError("CSV has no observations")
-    return {"n_rows": n, "n_columns": len(header), "columns": header}
+    return {"n_rows": n, "n_columns": len(header), "columns": header,
+            "delimiter": ";", "decimal_mark": ",",
+            "published_reader": "read.table(sep=\";\", dec=\",\")"}
 
 
 def source_receipt(metadata: dict, blob: bytes, transport_url: str) -> dict:
