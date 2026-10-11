@@ -6,51 +6,29 @@
 
 ## Abstract
 
-**Aim:** Phenological mismatch is often attributed to inadequate environmental
-information: if seasonal conditions become harder to predict, migrants and
-their resources should decouple. We ask a more general question: **is better
-environmental predictability sufficient for better realized tracking?**
+Seasonal organisms must align their activities with changing environmental
+conditions, but stronger environmental correlations do not necessarily
+produce closer phenological matching. We distinguish an entry timer that
+initiates seasonal activity from a downstream controller that can adjust
+signed timing error. In a prospectively specified analysis of migratory
+birds, signed detrended source–destination green-up correlation increased
+from 2002–2009 to 2010–2017 across 166 unique spatial pairs used by 28
+species (mean change +0.369; 95% pair-bootstrap confidence interval +0.298
+to +0.436). Larger connectivity increases did not predict the
+prespecified reduction in arrival–green-up mismatch (coefficient +0.062;
+95% interval -0.014 to +0.136), and structural nulls reproduced the
+apparent positive slope. An independent descriptive reconstruction of
+mule-deer data found phase convergence through migration and signed
+associations between initial timing error, speed, and stopover use.
+Neither dataset establishes which information animals perceived or why
+timing gaps persisted. Our serial timer–controller model separates
+environmental prediction, decision timing, feasible correction, and
+fitness incentives. This framework identifies the measurements needed to
+distinguish insufficient information, lost action opportunities, and
+fitness-optimal incomplete seasonal tracking.
 
-**Location:** General theory, with empirical tests in migratory birds and
-individual-level mechanism evidence from mule deer in North America.
-
-**Time period:** The principal bird analysis compares 2002–2009 with
-2010–2017; supporting natural systems are dataset-specific.
-
-**Major taxa studied:** Migratory birds and mule deer, with other seasonal
-interactions used as mechanistic benchmarks.
-
-**Methods:** We separate environmental information quality from biological
-actionability in a serial timer–controller model. A developmental or
-physiological timer determines entry into a seasonal trajectory; a downstream
-information-dependent controller determines whether phase error is corrected.
-We combine the theory with a prospectively specified multi-species test of
-source–destination spring predictive connectivity, a registered
-connectivity-change to mismatch-change test, structural nulls, and
-individual-level movement analyses.
-
-**Results:** Across 166 unique source–destination spatial pairs used by 28
-migratory bird species, detrended spring predictive connectivity increased
-between periods (mean \(\Delta\rho=+0.369\), 95% pair-bootstrap CI
-+0.298 to +0.436; 26/28 species means positive). Yet larger connectivity gains
-did not predict larger reductions in arrival–green-up mismatch
-(\(\beta=+0.062\), 95% CI -0.014 to +0.136); the apparent positive slope
-was reproduced by fixed-arrival and within-window permutation nulls. In the
-theory, information can become more accurate while opportunities to use it
-decline. In mule deer, nutritional condition predicts migration-start timing,
-whereas signed phase predicts downstream speed and stopover use.
-
-**Main conclusions:** The range-based environmental correlation proxy does
-not, by itself, predict the registered change in seasonal matching. That proxy
-does not measure what birds perceived or how accurately their forecasts were
-calibrated. A serial timer–controller model distinguishes readiness from
-post-entry correction and clarifies how information, action constraints and
-costs could jointly determine realized tracking. The empirical analyses do
-not identify a single missing causal mechanism or reproductive fitness gain.
-
-**Keywords:** phenological mismatch; seasonal timing; migration; information
-ecology; environmental predictability; feedback control; recourse; climate
-change
+**Keywords:** phenological mismatch; environmental predictability;
+seasonal timing; migration; feedback control; information ecology
 
 ---
 
