@@ -1083,16 +1083,25 @@ The timer–controller model supplies the missing mechanistic decomposition.
 A developmental or physiological timer determines when an organism enters a
 seasonal trajectory with some initial phase error. An information-dependent
 controller then determines whether that error is erased, retained or
-amplified. For interacting species, later mismatch therefore has two separable
-sources:
+amplified. For interacting species, entry timing and downstream control have distinct
+contributions to subsequent mismatch. In the specified linear,
+no-innovation, two-actor model, the exact decomposition is
 
 \[
-\boxed{
-\text{entry-timer mismatch}
+\Delta_n
+=
+\underbrace{\frac{\lambda_1^n+\lambda_2^n}{2}\Delta_0}_{
+\text{timer-propagated entry difference}}
 +
-\text{controller-generated mismatch}.
-}
+\underbrace{(\lambda_1^n-\lambda_2^n)m_0}_{
+\text{differential controller response}}.
 \]
+
+This identity is not a universal additive decomposition of
+fitness or adaptive deficits. In stochastic or cost-bearing systems,
+interaction terms and subsequent seasonal innovations can prevent
+independent attribution to information, physical capacity and strategic
+coordination.
 
 This architecture explains why improved environmental information need not
 translate automatically into improved realized timing. Information can become
