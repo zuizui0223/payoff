@@ -112,7 +112,7 @@ def download(metadata: dict, timeout: int = 30) -> tuple[bytes, str]:
                 continue
             return data, used
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
-            problems.append(f"{url}: {type(exc).__name__}")
+            problems.append(f"{url}: {type(exc).__name__}: {str(exc)[:160]}")
     raise RuntimeError(
         f"SOURCE_ACCESS_BLOCKED: cannot retrieve registered {metadata['name']}: "
         + "; ".join(problems)
@@ -175,6 +175,11 @@ def main() -> None:
         "files": result["file_success_n"],
         "expected": result["file_expected_n"],
         "outcomes_opened": result["outcome_opened"],
+        "diagnostics": [
+            {"name": item["name"], "status": item["status"],
+             "reason": item.get("reason", "")[:220]}
+            for item in result["files"] if not item.get("metadata_only")
+        ],
     }))
     # Fail-closed: partial files are audit artifacts but not admitted inputs.
     if result["status"] != "SOURCE_SCHEMA_PASS_MECHANISM_NOT_IDENTIFIED":
