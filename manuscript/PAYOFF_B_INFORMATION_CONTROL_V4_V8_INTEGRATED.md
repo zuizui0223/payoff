@@ -728,13 +728,13 @@ manipulation did not alter arrival timing, whereas later female settlement
 responded after the cue became observable. Together these systems show that
 different mechanisms can govern successive seasonal stages.
 
-### 4.5 Pink-footed geese update environmental information en route
+### 4.5 Environmental cue associations vary along pink-footed goose routes
 
-In pink-footed geese, the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers informs northward progression.
+In pink-footed geese, the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers is associated with northward progression.
 
-This is consistent with the route-wise premise that migration itself can expose animals to information unavailable at the origin.
+This is compatible with the route-wise premise that migration can expose animals to local information unavailable at the origin, but it does not independently identify cognitive forecast updates.
 
-### 4.6 Compensation can restore timing without restoring fitness
+### 4.6 Timing correction can incur costs not apparent in arrival dates
 
 In American redstarts, the published movement analysis reported that individuals
 departing roughly 10 days late migrated about 43% faster. A separate
