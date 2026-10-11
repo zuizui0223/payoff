@@ -966,7 +966,68 @@ explains why a mismatched or obsolete timing configuration can remain difficult
 to escape even after information improves. A physically feasible correction
 can therefore remain strategically inaccessible.
 
-### 4.9 Direct natural validation remains prospective
+### 4.9 When an observed mismatch does not imply maladaptation
+
+Three ecological mechanisms must be distinguished before interpreting imperfect
+seasonal tracking as a failure to adapt. First, an animal may lack a calibrated,
+decision-time forecast of the state it will encounter. Second, it may receive
+usable information after a relevant action has become irreversible. Third,
+it may have both information and flexibility, yet rationally avoid complete
+phenological matching because early arrival, travel, predation or
+interspecific competition imposes a greater fitness cost. A fixed calendar,
+direct local thermal response, or other nonforecasting process is an additional
+rival. These possibilities can generate similar arrival–green-up residuals;
+the V8 correlations do not distinguish them.
+
+A descriptive phase difference, such as arrival minus remotely sensed
+green-up, is not a demographic fitness regret. The fitness-maximizing
+reference can occur away from peak resources, and is not identified by an
+environmental matching coefficient alone. Earlier evolutionary models have
+explicitly considered the costs of early migrant arrival (Jonzén et al.,
+2007), while Torstenson and Shaw (2025) established that fitness efficacy
+cannot be equated to cue timing accuracy. The present manuscript does not
+claim novelty for that general distinction.
+
+There is a related information-theoretic constraint. When a cue is free,
+optional, and available before a fixed choice among unchanged feasible actions,
+its optimal expected value cannot be negative: the decision maker can ignore
+the cue and use its prior policy. Interacting competitors can nevertheless
+change whether entering a patch is attractive, and can make additional
+information irrelevant to that decision. This **cue-conditioned reversal of
+entry versus avoidance** is different from a negative value of information.
+Competitor-as-informant and competition-dependent social-information theory
+are established prior art, not new PAYOFF-B theorems.
+
+For a decisive natural test, four coordinates must be sourced independently:
+the signal actually available before a focal choice; the feasible action
+set and its direct ecological costs; the individual's signed next action;
+and its actual survival or reproductive outcome. A real competitor state
+and the information received *about* that state must not be treated as
+separately identified if a manipulation always changes both together.
+A time-valid signal can affect choice without necessarily predicting
+fitness; a spatial cross-correlation can exist without ever reaching the
+organism. Neither condition may be inferred from the observed green-up
+correlations alone.
+
+Published experiments already show that resident tit reproductive phenology
+can influence later-arriving female pied-flycatcher settlement (Samplonius
+and Both, 2017), while separate work links actual tit density and timing
+overlap to harmful interspecific encounters (Samplonius and Both, 2019).
+Experiments using independent heterospecific song presentation also precede
+this study (Morinay et al., 2020). These studies motivate, but do not
+jointly identify, an information-by-competition-by-deadline mechanism in the
+same individuals. A new claim requires those discriminating measurements;
+replicating a published playback or settlement result is insufficient.
+
+The additional source-admission screen conducted after the present V8
+integration found that the seven registered Dryad files for the 2017
+settlement experiment were not obtainable through the unauthenticated API
+used by the audit (HTTP 401), despite publicly visible metadata and
+independently inspected published R code. No new behavioural or demographic
+coefficient was generated from that dataset. This access result is a
+methodological gate, **not** evidence for or against the focal mechanism.
+
+### 4.10 Direct natural validation remains prospective
 
 The evidence is no longer purely cross-system. Mule deer provide a candidate
 same-population two-layer hybrid: March physiological condition predicts
@@ -1040,8 +1101,11 @@ feedback can rescue a poorly timed start.
 
 The ecological question is therefore not only whether the environment is
 predictable or whether phenology shifts, but **when relevant information
-becomes available, when the organism becomes able to act, and what can still be
-changed after commitment**.
+becomes available, when the organism becomes able to act, what remains
+feasible after commitment, and whether further tracking would actually
+increase realized fitness**. A measurable timing gap is not by itself a
+positive fitness regret. Those competing ecological explanations remain
+unresolved by the current natural evidence.
 
 The strongest prospective validation remains to measure physiological
 readiness, signed phase information, available actuators and downstream phase
