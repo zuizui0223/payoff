@@ -1,0 +1,73 @@
+{
+  "gate_id": "payoff_b_social_cue_bs427_metadata_v1_20261011",
+  "date": "2026-10-11",
+  "dataset_doi": "10.5061/dryad.bs427",
+  "publication_doi": "10.1111/1365-2656.12640",
+  "status": "SOURCE_ONLY_PREOUTCOME",
+  "metadata_source": "https://github.com/Lakens/cooper-bes-validation-manuscript/blob/main/code/data/manifests/10_1111_1365_2656_12640.manifest.json",
+  "primary_source": "https://datadryad.org/dataset/doi%3A10.5061/dryad.bs427",
+  "files": [
+    {
+      "name": "arrival_early_late.R",
+      "file_id": 34678,
+      "size": 23454,
+      "role": "published_original_analysis_code"
+    },
+    {
+      "name": "arrival.csv",
+      "file_id": 34672,
+      "size": 14207,
+      "role": "arrival"
+    },
+    {
+      "name": "arrorder.csv",
+      "file_id": 34677,
+      "size": 13139,
+      "role": "arrival_order"
+    },
+    {
+      "name": "population.csv",
+      "file_id": 34676,
+      "size": 133039,
+      "role": "population_breeding"
+    },
+    {
+      "name": "replicates.csv",
+      "file_id": 34675,
+      "size": 21593,
+      "role": "nestbox_subplots"
+    },
+    {
+      "name": "swaps14.csv",
+      "file_id": 34673,
+      "size": 3789,
+      "role": "manipulations_2014"
+    },
+    {
+      "name": "swaps15.csv",
+      "file_id": 34674,
+      "size": 4270,
+      "role": "manipulations_2015"
+    }
+  ],
+  "allowed_extractions": [
+    "exact_file_bytes",
+    "sha256",
+    "file_id",
+    "field_names",
+    "row_counts",
+    "transport_url",
+    "source_format"
+  ],
+  "forbidden_extractions": [
+    "predictor_outcome_join",
+    "effect_estimates",
+    "subgroup_outcomes",
+    "arrival_effect",
+    "fitness_effect",
+    "density_reversal",
+    "breakpoint_search"
+  ],
+  "population_outcome_frozen": true,
+  "outcome_status": "UNOPENED"
+}
