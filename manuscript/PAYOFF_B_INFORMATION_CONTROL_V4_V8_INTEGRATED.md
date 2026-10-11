@@ -492,7 +492,7 @@ The first route is a control constraint. The second is a coordination constraint
 
 ## 3. Empirical methods and scope of inference
 
-### 5.1 Range-based environmental connectivity in migratory birds
+### 3.1 Range-based environmental connectivity in migratory birds
 
 The broad-bird analysis follows a prospectively fixed spatial mapping based on
 the Amaral et al. migration dataset (Dryad DOI
@@ -520,7 +520,7 @@ analyses were sensitivities. This design assesses change in an
 environmental relationship; it cannot establish any individual's
 information use.
 
-### 5.2 From environmental correlation to observed arrival–green-up mismatch
+### 3.2 From environmental correlation to observed arrival–green-up mismatch
 
 The registered secondary transfer analysis used the frozen environmental
 pairs and required at least six finite annual bird mismatches in each
@@ -551,7 +551,7 @@ They do not independently establish alternative causal mechanisms.
 The speed-response bridge remained unestimable under its prespecified
 minimum-data rule.
 
-### 5.3 Independent natural systems and mechanistic interpretation
+### 3.3 Independent natural systems and mechanistic interpretation
 
 The individual-level mule-deer analysis reconstructs publicly released
 Ortega et al. (2023) Source Data (supplementary workbook
@@ -582,7 +582,7 @@ fitness in the same actors.
 
 ## 4. Natural evidence
 
-### 5.1 Predictive connectivity strengthened without the predicted improvement in mismatch
+### 4.1 Predictive connectivity strengthened without the predicted improvement in mismatch
 
 We first tested the simplest information-loss explanation prospectively. The
 V8 environmental analysis used a frozen range-based source–target mapping in
@@ -644,7 +644,7 @@ tracked individual routes, and because the analysis does not identify cue
 perception or causality, this result is a sufficiency stress test rather than a
 mechanistic estimate.
 
-### 5.2 Long-distance migrants show weaker temperature responsiveness
+### 4.2 Long-distance migrants show weaker temperature responsiveness
 
 A separate reconstruction of the Usui et al. source table retains 944 temperature-response effects from 28 studies and 279 species after restricting migration distance to short and long classes.
 
@@ -658,7 +658,7 @@ with 95% CI (+0.121) to (+0.722) and (p=0.0077). Because negative slopes denote 
 
 This pattern is not uniquely diagnostic of information distance; endogenous timing and photoperiodic control remain alternative explanations.
 
-### 5.3 Mule deer show a continuous phase funnel with signed route compensation
+### 4.3 Mule deer show a continuous phase funnel with signed route compensation
 
 Ortega et al. (2023) already established that Red Desert mule deer can begin
 migration far ahead of or behind peak green-up and resynchronize en route by
@@ -732,7 +732,7 @@ is associated with how migration is subsequently paced. It does not establish ca
 IFBFat with the readiness gate \(G\), or demonstrate H2 readiness-gated
 feedback. The primitive \(G,O,K,g,\phi,Q\) decomposition remains unresolved.
 
-### 5.4 Bar-tailed godwits absorb early departure later in the route
+### 4.4 Bar-tailed godwits absorb early departure later in the route
 
 In bar-tailed godwits migrating from New Zealand through the Yellow Sea to Alaska, departure advanced by about six days over 2008–2020, but Alaska arrival and breeding did not advance correspondingly. Longer later stopovers absorbed the earlier departure.
 
@@ -750,13 +750,13 @@ manipulation did not alter arrival timing, whereas later female settlement
 responded after the cue became observable. Together these systems show that
 different mechanisms can govern successive seasonal stages.
 
-### 5.5 Pink-footed geese update environmental information en route
+### 4.5 Pink-footed geese update environmental information en route
 
 In pink-footed geese, the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers informs northward progression.
 
 This is consistent with the route-wise premise that migration itself can expose animals to information unavailable at the origin.
 
-### 5.6 Compensation can restore timing without restoring fitness
+### 4.6 Compensation can restore timing without restoring fitness
 
 In American redstarts, the published movement analysis reported that individuals
 departing roughly 10 days late migrated about 43% faster. A separate
@@ -778,13 +778,13 @@ Thus temporal recovery and fitness recovery are not equivalent in theory:
 The effective-deadline framework must therefore include the cost of correction,
 but the redstart dataset does not identify that cost causally.
 
-### 5.7 Interaction-level asymmetry changes relative timing
+### 4.7 Interaction-level asymmetry changes relative timing
 
 Across 10 European nest-box schemes, resident tits were more temperature-sensitive than migratory flycatchers, and this differential response widened their laying-date interval by 0.94 days per decade. Published UK bird–caterpillar analyses likewise show incomplete temporal tracking by consumers.
 
 These systems support the ecological step from heterogeneous response rules to changing interaction timing. They do not directly estimate the route-wise phase controller.
 
-### 5.8 Negative evidence defines the boundary
+### 4.8 Negative evidence defines the boundary
 
 Several prospective tests fail, and those failures delimit the claim rather
 than being reinterpreted as confirmation.
@@ -816,7 +816,7 @@ separate individual-level evidence.
 
 ---
 
-### 5.9 Relation to migration-control prior art
+### 4.9 Relation to migration-control prior art
 
 Stagewise migration decisions, dynamic programming, stopover optimization and
 en-route timing adjustment are established ideas. Taylor (2016) explicitly
