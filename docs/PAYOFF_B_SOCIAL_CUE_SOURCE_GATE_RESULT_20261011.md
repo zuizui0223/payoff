@@ -38,6 +38,16 @@ Freeze model specification, primary outcome, density measurement time, effect-mo
 
 Morinay, Forsman & Doligez (2020), Animal Behaviour 161:103–113, DOI https://doi.org/10.1016/j.anbehav.2020.01.002, already separated heterospecific song playback from real great tit pair presence and tested aggressiveness-dependent settlement in *collared flycatchers*. The 2017 manipulation concerns *pied flycatchers*. No unverified cross-paper joins or pooled effect sizes.
 
+## Independent public download / parser audit
+
+On 2026-10-11 the official Dryad documentation and independent R package documentation were also checked. Published *metadata* can be browsed anonymously, but contemporary REST file/archive downloads use authenticated bearer-token requests. The runner's 401 response is therefore a documented authentication obstacle, not evidence that the publicly listed dataset vanished. The landing page still identifies the same seven named data/code files.
+
+No alternative public mirror with all six raw CSV files and verifiable matching identifiers was found in the focused source search; a secondary GitHub mirror has the R analysis script only. This is a **search-limited observation**, not proof that none exists.
+
+**Critical parser repair before any legitimate source import:** The published R script reads the six raw tables using `read.table(..., sep=";", dec=",")`, whereas the original Python source audit had incorrectly assumed comma-separated CSV. The source-only parser now explicitly accepts semicolon columns and preserves decimal commas as raw text. Its network-free tests cover the expected dialect and reject accidental comma-delimited schemas. This is a readiness fix only; the raw data remain inaccessible and no outcome has been opened.
+
+**Safe access requirement:** An authorised Dryad OAuth application/token may be used by the owner when available through secrets-backed CI; do not put credentials in a source file or URL, and do not bypass authentication. The current branch does not request or store any credentials.
+
 ## Decision
 
 Do not replace inaccessible source data by model assumptions. PR #325 is a source-readiness and prior-art gate only. The main V7R and V8 falsifications and V4 manuscript remain frozen; there is no new independently demonstrated fitness or information-control mechanism. The next valid step is an authorized exact source import, not a claim upgrade.
