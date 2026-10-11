@@ -490,9 +490,99 @@ The first route is a control constraint. The second is a coordination constraint
 
 ---
 
-## 3. Natural evidence
+## 3. Empirical methods and scope of inference
 
-### 3.1 Predictive connectivity strengthened without the predicted improvement in mismatch
+### 5.1 Range-based environmental connectivity in migratory birds
+
+The broad-bird analysis follows a prospectively fixed spatial mapping based on
+the Amaral et al. migration dataset (Dryad DOI
+10.5061/dryad.ttdz08m6w). Each breeding-range target cell was paired to
+the geographically nearest migratory-range cell of the same species at
+strictly lower latitude; ties were broken using numeric cell identifiers.
+Mapping was based on range geometry, not bird-arrival or mismatch outcomes.
+These links are geographical proxies, not reconstructed individual migratory
+tracks, and annual green-up dates are environmental variables rather than
+demonstrably perceived cues.
+
+We compared two nonoverlapping windows, 2002–2009 and 2010–2017. Each
+admissible source–target pair needed at least six matched annual green-up
+values per window. Within each window, source and target green-up were
+separately linearly detrended against year, and the signed Pearson
+correlation of their residuals was calculated. The environmental estimand
+was late-minus-early correlation change. Because different species can
+share identical environmental pairs, the primary uncertainty unit was the
+unique spatial source–target pair, not a species–cell observation. The
+analysis used 10,000 pair-bootstrap resamples under the outcome-blind
+dependence correction, with an equal-species exposure summary as a
+complement. Fisher-transformed correlations, alternate prespecified
+windows, complete-case pairs, raw correlations, and leave-one-species-out
+analyses were sensitivities. This design assesses change in an
+environmental relationship; it cannot establish any individual's
+information use.
+
+### 5.2 From environmental correlation to observed arrival–green-up mismatch
+
+The registered secondary transfer analysis used the frozen environmental
+pairs and required at least six finite annual bird mismatches in each
+window. Following the source-specific definition, annual mismatch was
+
+\[
+M_{jpy}=\log\{1+|gr_{mn,jpy}-arr_{GAM,jpy}|\},
+\]
+
+the log-transformed absolute difference between green-up and an
+estimated bird-arrival date. For each eligible species–target cell, the
+outcome was the late-minus-early mean of this metric. Pairwise correlation
+change was standardized over eligible unique environmental pairs. The
+prespecified model regressed mismatch change on that standardized
+exposure, weighting each row by the inverse of its species' number of
+eligible rows so species contributed equally. Bootstrap resampling of
+10,000 unique spatial pairs retained all species rows linked to each
+resampled pair. The registered directional prediction was a negative
+slope: larger increases in environmental connectivity should accompany
+larger decreases in mismatch.
+
+We additionally compared the observed transfer to a fixed-bird-arrival
+structural null, a within-window bird-arrival permutation null, and
+a stricter matched between–within decomposition. These checks distinguish
+patterns mechanically induced by shared target green-up and the absolute
+mismatch transformation from evidence of biological timing responses.
+They do not independently establish alternative causal mechanisms.
+The speed-response bridge remained unestimable under its prespecified
+minimum-data rule.
+
+### 5.3 Independent natural systems and mechanistic interpretation
+
+The individual-level mule-deer analysis reconstructs publicly released
+Ortega et al. (2023) Source Data (supplementary workbook
+\`41467_2023_37750_MOESM4_ESM.xlsx\`) and joins stage-specific signed
+Days-From-Peak, movement rate, stopover duration and individual-year
+identifiers. Phase variance ratios, start-to-end retention and actuator
+associations are descriptive; uncertainty is resampled by individual
+deer (not by independent animal-year rows), with within-year-centred
+analyses used as sensitivities. The March physiological-condition
+analysis excludes migrations beginning before April, so that March
+IFBFat temporally precedes departure; the resulting conservative subset
+contains 62 animal-years from 40 individuals. Condition-by-starting-phase
+interaction coefficients are reported whether or not their intervals
+exclude zero.
+
+The Usui source-table contrast is a separate published-effect
+reconstruction and not an individual-level inference. Other taxa and
+migration studies discussed below are literature-based ecological
+comparators unless specifically identified as independent source-data
+reanalyses. In particular, reported movement compensation and survival
+associations from distinct individual samples are never treated as a
+same-individual causal effect. These independent evidence layers are
+used to interrogate predictions of the theory; none jointly measures
+predecision belief, a verified feasible action set and demographic
+fitness in the same actors.
+
+---
+
+## 4. Natural evidence
+
+### 5.1 Predictive connectivity strengthened without the predicted improvement in mismatch
 
 We first tested the simplest information-loss explanation prospectively. The
 V8 environmental analysis used a frozen range-based source–target mapping in
@@ -554,7 +644,7 @@ tracked individual routes, and because the analysis does not identify cue
 perception or causality, this result is a sufficiency stress test rather than a
 mechanistic estimate.
 
-### 3.2 Long-distance migrants show weaker temperature responsiveness
+### 5.2 Long-distance migrants show weaker temperature responsiveness
 
 A separate reconstruction of the Usui et al. source table retains 944 temperature-response effects from 28 studies and 279 species after restricting migration distance to short and long classes.
 
@@ -568,7 +658,7 @@ with 95% CI (+0.121) to (+0.722) and (p=0.0077). Because negative slopes denote 
 
 This pattern is not uniquely diagnostic of information distance; endogenous timing and photoperiodic control remain alternative explanations.
 
-### 3.3 Mule deer show a continuous phase funnel with signed route compensation
+### 5.3 Mule deer show a continuous phase funnel with signed route compensation
 
 Ortega et al. (2023) already established that Red Desert mule deer can begin
 migration far ahead of or behind peak green-up and resynchronize en route by
@@ -642,7 +732,7 @@ is associated with how migration is subsequently paced. It does not establish ca
 IFBFat with the readiness gate \(G\), or demonstrate H2 readiness-gated
 feedback. The primitive \(G,O,K,g,\phi,Q\) decomposition remains unresolved.
 
-### 3.4 Bar-tailed godwits absorb early departure later in the route
+### 5.4 Bar-tailed godwits absorb early departure later in the route
 
 In bar-tailed godwits migrating from New Zealand through the Yellow Sea to Alaska, departure advanced by about six days over 2008–2020, but Alaska arrival and breeding did not advance correspondingly. Longer later stopovers absorbed the earlier departure.
 
@@ -660,17 +750,24 @@ manipulation did not alter arrival timing, whereas later female settlement
 responded after the cue became observable. Together these systems show that
 different mechanisms can govern successive seasonal stages.
 
-### 3.5 Pink-footed geese update environmental information en route
+### 5.5 Pink-footed geese update environmental information en route
 
 In pink-footed geese, the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers informs northward progression.
 
 This is consistent with the route-wise premise that migration itself can expose animals to information unavailable at the origin.
 
-### 3.6 Compensation can restore timing without restoring fitness
+### 5.6 Compensation can restore timing without restoring fitness
 
-American redstarts departing roughly 10 days late migrated about 43% faster, yet the compensatory pattern was associated with a reported 6.3% decrease in annual survival.
+In American redstarts, the published movement analysis reported that individuals
+departing roughly 10 days late migrated about 43% faster. A separate
+mark–resight survival analysis associated relative departure timing with
+an estimated decline in apparent annual survival. Critically, the number
+of radio-tagged individuals was insufficient to test directly whether the
+same individuals' migration speed caused their survival outcomes.
+Consequently, this study motivates a possible cost of seasonal compensation
+but does not directly establish a compensatory speed–survival trade-off.
 
-Thus temporal recovery and fitness recovery are not equivalent:
+Thus temporal recovery and fitness recovery are not equivalent in theory:
 
 \[
 \text{phase recovery}
@@ -678,15 +775,16 @@ Thus temporal recovery and fitness recovery are not equivalent:
 \text{zero biological cost}.
 \]
 
-This supports the effective-deadline concept: a correction can remove downstream timing error while still carrying a cost.
+The effective-deadline framework must therefore include the cost of correction,
+but the redstart dataset does not identify that cost causally.
 
-### 3.7 Interaction-level asymmetry changes relative timing
+### 5.7 Interaction-level asymmetry changes relative timing
 
 Across 10 European nest-box schemes, resident tits were more temperature-sensitive than migratory flycatchers, and this differential response widened their laying-date interval by 0.94 days per decade. Published UK bird–caterpillar analyses likewise show incomplete temporal tracking by consumers.
 
 These systems support the ecological step from heterogeneous response rules to changing interaction timing. They do not directly estimate the route-wise phase controller.
 
-### 3.8 Negative evidence defines the boundary
+### 5.8 Negative evidence defines the boundary
 
 Several prospective tests fail, and those failures delimit the claim rather
 than being reinterpreted as confirmation.
@@ -718,7 +816,7 @@ separate individual-level evidence.
 
 ---
 
-## 3.9 Relation to migration-control prior art
+### 5.9 Relation to migration-control prior art
 
 Stagewise migration decisions, dynamic programming, stopover optimization and
 en-route timing adjustment are established ideas. Taylor (2016) explicitly
@@ -738,9 +836,9 @@ than to claim a new control-theory class.
 
 ---
 
-## 4. Discussion
+## 5. Discussion
 
-### 4.1 Seasonal tracking is a control problem, not only a response-rate problem
+### 5.1 Seasonal tracking is a control problem, not only a response-rate problem
 
 The main conceptual change is to separate the quality of the environmental
 signal from the organism's capacity to act on it. In the V8 stress test,
@@ -763,7 +861,7 @@ similar. The relevant object is therefore a sequence of inference,
 commitment and correction rather than a single fast-versus-slow phenological
 response rate.
 
-### 4.2 Arrival convergence can hide substantial control
+### 5.2 Arrival convergence can hide substantial control
 
 If repeated positive feedback gains reduce phase error, large departure-date variation can converge toward a narrow arrival window. Observing only arrival dates can therefore underestimate the amount of behavioral control used along the route.
 
@@ -779,7 +877,7 @@ e_{\mathrm{out}}.
 
 A route-wise analysis should estimate signed incoming error, the information available at the checkpoint, the subsequent speed/stopover/route response and the outgoing error at the next checkpoint.
 
-### 4.3 Entry timing and downstream control leave different empirical signatures
+### 5.3 Entry timing and downstream control leave different empirical signatures
 
 A developmental or physiological timer should primarily predict **entry
 timing**: emergence, flowering, migratory readiness or another threshold
@@ -819,7 +917,7 @@ snow geese provide an independent natural anchor: premigration condition
 predicts lay date after arrival is controlled, and an unplanned reduction in
 prebreeding condition delayed laying.
 
-### 4.4 A variance funnel identifies effective feedback, not controller primitives
+### 5.4 A variance funnel identifies effective feedback, not controller primitives
 
 Individualized post-entry feedback predicts more phase-variance contraction
 than a common open-loop schedule. With incoming variance \(P_t\), information
@@ -857,7 +955,7 @@ so a noisier entry timer can be offset by stronger downstream correction.
 Arrival precision alone therefore does not identify how that precision was
 achieved.
 
-### 4.5 The most informative checkpoint need not be the most important checkpoint
+### 5.5 The most informative checkpoint need not be the most important checkpoint
 
 The actionability theorem predicts an intermediate-stage peak in behavioral cue responsiveness. Early in the route, the signal can be too poor to guide correction. Late in the route, the signal can be excellent but response options can be exhausted.
 
@@ -865,7 +963,7 @@ The ecologically important checkpoint is therefore where information gain and re
 
 This prediction differs from a simple “closer cues are better” model.
 
-### 4.6 Phase retention is a useful coordinate but not a mechanism by itself
+### 5.6 Phase retention is a useful coordinate but not a mechanism by itself
 
 The empirical phase-retention coefficient \(\lambda\) quantifies how strongly
 incoming seasonal error persists to a later stage. For a serial post-entry
@@ -888,7 +986,7 @@ Negative retention can arise from overshoot, anticipation, target movement or
 coordinate changes. Direct mechanistic inference therefore requires actuator
 and environmental information in addition to \(\lambda\).
 
-### 4.7 Prediction and downstream correction can substitute before new error appears
+### 5.7 Prediction and downstream correction can substitute before new error appears
 
 Let \(R(q)\) be mismatch risk remaining after pre-entry information of quality
 \(q\), and let post-entry correction gain \(g\) reduce that inherited error at
@@ -945,7 +1043,7 @@ no current natural dataset directly identifies the required allocation and
 opportunity-loss parameters.
 
 
-### 4.8 Interactions convert controller differences into ecological mismatch
+### 5.8 Interactions convert controller differences into ecological mismatch
 
 The pairwise mode decomposition clarifies why interaction mismatch need not
 require different climate exposure. A common environmental displacement enters
@@ -966,7 +1064,7 @@ explains why a mismatched or obsolete timing configuration can remain difficult
 to escape even after information improves. A physically feasible correction
 can therefore remain strategically inaccessible.
 
-### 4.9 When an observed mismatch does not imply maladaptation
+### 5.9 When an observed mismatch does not imply maladaptation
 
 Three ecological mechanisms must be distinguished before interpreting imperfect
 seasonal tracking as a failure to adapt. First, an animal may lack a calibrated,
@@ -1027,7 +1125,7 @@ independently inspected published R code. No new behavioural or demographic
 coefficient was generated from that dataset. This access result is a
 methodological gate, **not** evidence for or against the focal mechanism.
 
-### 4.10 Direct natural validation remains prospective
+### 5.10 Direct natural validation remains prospective
 
 The evidence is no longer purely cross-system. Mule deer provide a candidate
 same-population two-layer hybrid: March physiological condition predicts
@@ -1067,7 +1165,7 @@ individuals and interacting partners.
 
 ---
 
-## 5. Conclusion
+## 6. Conclusion
 
 Environmental correlation, calibrated forecast skill, cue perception,
 phenological matching and demographic fitness are five different quantities.
