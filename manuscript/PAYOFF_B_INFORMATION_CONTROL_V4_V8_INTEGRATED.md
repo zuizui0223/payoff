@@ -1,4 +1,4 @@
-# Environmental predictability is not enough for seasonal tracking: a timer–controller architecture for phenological mismatch
+# Environmental predictability alone does not determine seasonal tracking
 
 **PAYOFF-B Paper 2 — V4 post-V8 integration candidate**  
 **Date:** 2026-10-05  
