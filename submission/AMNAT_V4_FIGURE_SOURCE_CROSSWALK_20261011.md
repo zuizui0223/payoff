@@ -32,7 +32,7 @@ Display registered earlier/later signed detrended green-up correlations and pair
 - 26/28 species mean signs positive.
 
 **Sources:** 
-- data/payoff_b_v8_primary_result_20261005.json (verify exact repository path before compiling renderer);
+- Frozen primary/sensitivity outcome receipts are documented in the linked result file; no checked-in JSON matching the former example filename exists on this branch. Recover exact numeric plotting inputs from the verified CI artifact and registered analysis, not an invented repository path;
 - docs/PAYOFF_B_V8_PRIMARY_AND_SENSITIVITY_RESULT_20261005.md;
 - docs/PAYOFF_B_V8_DEPENDENCY_CORRECTION_20261005.md;
 - analysis/movement_phenology/payoff_b_v8_primary.R.
