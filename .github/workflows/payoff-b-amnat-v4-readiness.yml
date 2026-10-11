@@ -1,0 +1,37 @@
+name: PAYOFF-B AmNat V4 reviewer readiness
+
+on:
+  pull_request:
+    paths:
+      - "manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md"
+      - "submission/AMNAT_V4_FRONTMATTER_REVISED_20261011.md"
+      - "scripts/audit_amnat_v4_review_readiness.py"
+      - "tests/test_amnat_v4_review_readiness.py"
+      - ".github/workflows/payoff-b-amnat-v4-readiness.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reviewer-manuscript-editorial-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test runner
+        run: python -m pip install "pytest>=8,<10"
+      - name: Run invariant tests
+        run: python -m pytest -q tests/test_amnat_v4_review_readiness.py
+      - name: Create explicit submission-HOLD receipt
+        run: |
+          python scripts/audit_amnat_v4_review_readiness.py \
+            --output "$RUNNER_TEMP/amnat_v4_review_readiness.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-amnat-v4-editorial-hold-audit
+          path: ${{ runner.temp }}/amnat_v4_review_readiness.json
+          if-no-files-found: error
