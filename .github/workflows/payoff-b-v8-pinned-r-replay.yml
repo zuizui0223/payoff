@@ -71,7 +71,7 @@ jobs:
             outputs/v8_replay_verified/ || true
       - name: Independently compare source-rerun rows, weighted slopes, cluster-bootstrap and permutation intervals
         run: |
-          python scripts/audit_payoff_b_v8_pinned_r_replay.py \
+          python -m scripts.audit_payoff_b_v8_pinned_r_replay \
             --original outputs/v8_verified_original_artifact/original_20261005_outputs \
             --replay outputs/v8_new_replay \
             --receipt outputs/v8_replay_verified/pinned_source_replay_comparison.json
