@@ -26,12 +26,12 @@ def test_path_and_label_anonymization_preserves_scientific_identifiers():
 
 
 def test_forbid_identity_and_email_in_reviewed_source():
-    check_anonymous("Source DOI 10.5061/dryad.ttdz08m6w","citation")
+    safe("Source DOI 10.5061/dryad.ttdz08m6w","citation")
     for token in ("zuizui0223", "PAYOFF-B", "payoff_b", "rachelzhang0223"):
         with pytest.raises(ValueError,match="Identifying"):
-            check_anonymous("comment "+token,"science.txt")
+            safe("comment "+token,"science.txt")
     with pytest.raises(ValueError,match="Email"):
-        check_anonymous("sender private@identifying.test","memo.md")
+        safe("sender private@identifying.test","memo.md")
 
 
 def test_git_blob_hash_uses_real_git_object_envelope():
