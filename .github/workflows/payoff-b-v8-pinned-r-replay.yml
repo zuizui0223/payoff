@@ -1,0 +1,101 @@
+name: PAYOFF-B V8 pinned upstream independent R replay
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/payoff-b-v8-pinned-r-replay.yml"
+      - "scripts/audit_payoff_b_v8_pinned_r_replay.py"
+      - "tests/test_payoff_b_v8_pinned_r_replay.py"
+      - "scripts/audit_payoff_b_v8_restored_rows.py"
+      - "data/payoff_b_v8_row_archive_provenance_20261013.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  replay-the-original-frozen-r-scripts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Network-free replay identity tests
+        run: |
+          python -m pip install "pytest>=8,<10"
+          python -m pytest -q \
+            tests/test_payoff_b_v8_restored_rows.py \
+            tests/test_payoff_b_v8_pinned_r_replay.py
+      - name: Restore immutable audited original 2026-10-05 outputs for independent comparison
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38404051747
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-v8-20261005-original-row-archive-internal-NOT-ANONYMOUS
+          path: outputs/v8_verified_original_artifact
+      - name: Fetch and byte-pin the exact public 2026-10-05 upstream source
+        run: |
+          mkdir -p outputs
+          curl --fail --location --retry 3 --max-time 180 \
+            "https://raw.githubusercontent.com/br-amaral/BirdMigrationSpeed/62c58d77c2028bd863dfe3697b0d9cf29ceaeab0/data/final.rds" \
+            -o outputs/amaral_final_frozen.rds
+          test "$(git hash-object outputs/amaral_final_frozen.rds)" = \
+            "f1c9e63a377bb96152c573081e7c482cfe49ebc3"
+      - name: Re-run ORIGINAL frozen 2026-10-05 V8 R models without changing them
+        run: |
+          Rscript --version
+          Rscript analysis/movement_phenology/payoff_b_v8_transfer_structural_null_audit.R
+      - name: Organize original-source rerun outputs without overwriting original artifact
+        run: |
+          mkdir -p \
+            outputs/v8_new_replay/environment \
+            outputs/v8_new_replay/transfer \
+            outputs/v8_new_replay/structural \
+            outputs/v8_replay_verified
+          cp outputs/payoff_b_v8_primary_{unique_pairs,species_means,pair_species_incidence,bootstrap}.csv \
+            outputs/v8_new_replay/environment/
+          cp outputs/payoff_b_v8_transfer_primary_{rows,bootstrap}.csv \
+            outputs/v8_new_replay/transfer/
+          cp outputs/payoff_b_v8_transfer_structural_null_{rows,bootstrap,status,summary}.csv \
+            outputs/v8_new_replay/structural/
+          cp outputs/payoff_b_v8_transfer_arrival_permutation.csv \
+            outputs/v8_new_replay/structural/
+          cp outputs/payoff_b_v8_{primary_summary,transfer_primary_summary,transfer_structural_null_summary}.csv \
+            outputs/v8_replay_verified/ || true
+      - name: Independently compare source-rerun rows, weighted slopes, cluster-bootstrap and permutation intervals
+        run: |
+          python scripts/audit_payoff_b_v8_pinned_r_replay.py \
+            --original outputs/v8_verified_original_artifact/original_20261005_outputs \
+            --replay outputs/v8_new_replay \
+            --receipt outputs/v8_replay_verified/pinned_source_replay_comparison.json
+      - name: Stop inflated natural biological/fitness or reviewer-ready inference
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("outputs/v8_replay_verified/pinned_source_replay_comparison.json")
+          report=json.loads(p.read_text())
+          assert report["status"]=="FROZEN_V8_PINNED_SOURCE_INDEPENDENT_R_REPLAY_MATCHED"
+          assert report["original_R_scripts_modified"] is False
+          assert report["independently_ran_original_frozen_R_scripts_from_pinned_source"] is True
+          assert report["anonymous_reviewer_archive_approved"] is False
+          assert report["causal_information_use_or_fitness_identified"] is False
+          assert report["submission_ready"] is False
+          print("PINNED SOURCE R REPLAY PASS; CAUSAL MECHANISM AND SUBMISSION HOLD")
+          PY
+      - name: Upload audit receipt and replayed row-level results internally
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-independent-raw-source-R-replay-INTERNAL-NONANON
+          path: |
+            outputs/v8_replay_verified/
+            outputs/v8_new_replay/
+          if-no-files-found: warn
