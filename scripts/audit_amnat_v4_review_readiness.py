@@ -106,9 +106,10 @@ def audit(source: str, front: str) -> dict:
         f"necessary claim guard missing: {key}"
         for key, result in required_claims.items() if not result
     ]
+    # The journal main-text limit excludes Literature Cited.
     estimated_body = _words(source.split("## 1. Introduction", 1)[-1].split(
-        "## Post-freeze transparency statement", 1
-    )[0])
+        "## Literature Cited", 1
+    )[0].split("## Post-freeze transparency statement", 1)[0])
     if estimated_body + _words(abstract) > USUAL_MAX_WORDS:
         science_errors.append(
             "approximate text length exceeds usual Major Article maximum"
@@ -119,6 +120,11 @@ def audit(source: str, front: str) -> dict:
     submission_blockers = []
     if "## Literature Cited" not in source:
         submission_blockers.append("complete Literature Cited absent")
+    else:
+        submission_blockers.append(
+            "20 DOI-checked core references present, but final bibliography "
+            "style, source-by-source textual coverage and anonymous preview pending"
+        )
     if "**PAYOFF-B Paper 2" in source or "post-freeze" in source.lower():
         submission_blockers.append("internal provenance remains in source")
     # A remote GitHub repo alone is not a compliant anonymous archived

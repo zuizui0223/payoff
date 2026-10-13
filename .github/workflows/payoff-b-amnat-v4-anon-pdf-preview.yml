@@ -1,0 +1,76 @@
+name: PAYOFF-B AmNat Paper 2 anonymous editorial PDF preview
+
+on:
+  pull_request:
+    paths:
+      - "manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md"
+      - "submission/AMNAT_V4_REFERENCE_CATALOGUE_20261013.json"
+      - "submission/AMNAT_V4_ANON_PREVIEW_HEADER_20261013.tex"
+      - "scripts/build_amnat_v4_anonymous_preview.py"
+      - "scripts/audit_amnat_v4_anonymous_pdf_preview.py"
+      - "tests/test_amnat_v4_anonymous_preview.py"
+      - "scripts/build_payoff_b_amnat_v4_summary_figures.py"
+      - ".github/workflows/payoff-b-amnat-v4-anon-pdf-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  editorial-anon-pdf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install preview graphics + PDF inspection dependencies
+        run: python -m pip install "pytest>=8,<10" "CairoSVG>=2.7" "PyMuPDF>=1.24"
+      - name: Check non-submission, manuscript identity and scientific claim preservation
+        run: |
+          python -m pytest -q \
+            tests/test_amnat_v4_anonymous_preview.py \
+            tests/test_amnat_v4_literature_cited.py \
+            tests/test_payoff_b_amnat_v4_summary_figures.py
+      - name: Install TeX/Pandoc review typesetting tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            pandoc lmodern texlive-xetex texlive-latex-recommended \
+            texlive-latex-extra texlive-fonts-recommended
+      - name: Build frozen-summary source figures
+        run: |
+          python scripts/build_payoff_b_amnat_v4_summary_figures.py \
+            --out outputs/amnat_v4_summary_for_pdf
+      - name: Build anonymous Markdown with figure PNG previews and audit receipt
+        run: |
+          python scripts/build_amnat_v4_anonymous_preview.py \
+            --out outputs/amnat_v4_anon_editorial/manuscript_anonymous_preview.md \
+            --figures-dir outputs/amnat_v4_summary_for_pdf \
+            --receipt outputs/amnat_v4_anon_editorial/source_preview_receipt.json
+      - name: Typeset mathematical manuscript as double-spaced line-numbered PDF
+        run: |
+          pandoc -s \
+            -f 'markdown+tex_math_single_backslash+tex_math_double_backslash+tex_math_dollars' \
+            outputs/amnat_v4_anon_editorial/manuscript_anonymous_preview.md \
+            --pdf-engine=xelatex \
+            --resource-path=outputs/amnat_v4_anon_editorial \
+            -V geometry:margin=1in \
+            -V fontsize=12pt \
+            -H submission/AMNAT_V4_ANON_PREVIEW_HEADER_20261013.tex \
+            -o outputs/amnat_v4_anon_editorial/Paper2_anonymous_editorial_preview.pdf
+      - name: Preflight PDF, export visual-inspection page previews
+        run: |
+          python scripts/audit_amnat_v4_anonymous_pdf_preview.py \
+            --pdf outputs/amnat_v4_anon_editorial/Paper2_anonymous_editorial_preview.pdf \
+            --out outputs/amnat_v4_anon_editorial/pdf_preflight_receipt.json \
+            --png-dir outputs/amnat_v4_anon_editorial/visual_page_samples
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-amnat-v4-anonymous-EDITORIAL-preview-submission-HOLD
+          path: |
+            outputs/amnat_v4_anon_editorial/
+            outputs/amnat_v4_summary_for_pdf/
+          if-no-files-found: warn

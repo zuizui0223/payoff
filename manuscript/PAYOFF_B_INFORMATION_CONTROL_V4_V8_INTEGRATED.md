@@ -35,14 +35,14 @@ seasonal timing; migration; feedback control; information ecology
 ## 1. Introduction
 
 Phenological mismatch is commonly explained as a failure to keep pace with a
-moving seasonal target. For migrants, one particularly intuitive mechanism is
+moving seasonal target (Visser and Gienapp 2019; Kharouba and Wolkovich 2020). For migrants, one particularly intuitive mechanism is
 loss of environmental predictability: an earlier location becomes a poorer
 guide to conditions that will be encountered later, so departure and movement
 decisions are made from degraded information.
 
 That explanation is plausible but incomplete. The observed correlation of
 environmental states at two geographical points is not automatically a
-predictive signal available to an animal at its decision time. In particular,
+predictive signal available to an animal at its decision time (Kölzsch et al. 2015). In particular,
 stronger within-period correlation can coexist with a changing cue-to-target
 mean or slope, an outdated learned forecast, or no cue perception at all.
 Better information has value only while useful actions remain available.
@@ -56,11 +56,10 @@ actionability are therefore distinct axes.
 
 An additional distinction is essential: a better match to a seasonal target
 need not imply greater fitness once the costs of early arrival, travel,
-competition or adjustment are considered. Torstenson and Shaw (2025, *Oikos*,
-doi:10.1111/oik.10862) explicitly separate cue timing accuracy from cue
+competition or adjustment are considered. Torstenson and Shaw (2025) explicitly separate cue timing accuracy from cue
 fitness efficacy and show that the relative benefit of temporal and
 environmental migration cues can reverse across habitat-seasonality regimes.
-Consequently PAYOFF-B does **not** claim novelty for cue-type reversal or the
+Consequently, we do **not** claim novelty for cue-type reversal or the
 general proposition that phenological matching differs from fitness.
 
 Long-distance migration makes the distinction especially visible. Departure is
@@ -473,7 +472,7 @@ The first route is a control constraint. The second is a coordination constraint
 ### 3.1 Range-based environmental connectivity in migratory birds
 
 The broad-bird analysis follows a prospectively fixed spatial mapping based on
-the Amaral et al. migration dataset (Dryad DOI
+the Amaral et al. (2025) migration dataset (Dryad DOI
 10.5061/dryad.ttdz08m6w). Each breeding-range target cell was paired to
 the geographically nearest migratory-range cell of the same species at
 strictly lower latitude; ties were broken using numeric cell identifiers.
@@ -545,7 +544,7 @@ contains 62 animal-years from 40 individuals. Condition-by-starting-phase
 interaction coefficients are reported whether or not their intervals
 exclude zero.
 
-The Usui source-table contrast is a separate published-effect
+The Usui et al. (2017) source-table contrast is a separate published-effect
 reconstruction and not an individual-level inference. Other taxa and
 migration studies discussed below are literature-based ecological
 comparators unless specifically identified as independent source-data
@@ -624,7 +623,7 @@ mechanistic estimate.
 
 ### 4.2 Long-distance migrants show weaker temperature responsiveness
 
-A separate reconstruction of the Usui et al. source table retains 944 temperature-response effects from 28 studies and 279 species after restricting migration distance to short and long classes.
+A separate reconstruction of the Usui et al. (2017) source table retains 944 temperature-response effects from 28 studies and 279 species after restricting migration distance to short and long classes.
 
 The adjusted long-minus-short contrast is
 
@@ -712,31 +711,31 @@ feedback. The primitive \(G,O,K,g,\phi,Q\) decomposition remains unresolved.
 
 ### 4.4 Bar-tailed godwits absorb early departure later in the route
 
-In bar-tailed godwits migrating from New Zealand through the Yellow Sea to Alaska, departure advanced by about six days over 2008–2020, but Alaska arrival and breeding did not advance correspondingly. Longer later stopovers absorbed the earlier departure.
+In bar-tailed godwits migrating from New Zealand through the Yellow Sea to Alaska (Conklin et al. 2021), departure advanced by about six days over 2008–2020, but Alaska arrival and breeding did not advance correspondingly. Longer later stopovers absorbed the earlier departure.
 
 This supplies the opposite sign of recourse: being early can be corrected by delaying progress later in the route.
 
 Together with mule deer, the two examples show why departure timing alone is not a sufficient measure of downstream seasonal phase.
 
-The serial principle also extends beyond movement. In greater snow geese,
+The serial principle also extends beyond movement. In greater snow geese (Bêty et al. 2003),
 prelaying duration declines by 0.53 d for each day of later arrival, implying a
 same-sample simple stage-retention coefficient of \(1-0.53=0.47\) from arrival
 to laying. Because correlations among sequential timing variables need not
 imply strategic control, we treat this as **descriptive buffering**, not a
-feedback-gain estimate. In the pied-flycatcher tit-phenology experiment, the
+feedback-gain estimate. In the pied-flycatcher tit-phenology experiment (Samplonius and Both 2017), the
 manipulation did not alter arrival timing, whereas later female settlement
 responded after the cue became observable. Together these systems show that
 different mechanisms can govern successive seasonal stages.
 
 ### 4.5 Environmental cue associations vary along pink-footed goose routes
 
-In pink-footed geese, the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers is associated with northward progression.
+In pink-footed geese (Bauer et al. 2008), the importance of day length, local accumulated temperature and other environmental information changes among successive migration stages. Local accumulated temperature at stopovers is associated with northward progression.
 
 This is compatible with the route-wise premise that migration can expose animals to local information unavailable at the origin, but it does not independently identify cognitive forecast updates.
 
 ### 4.6 Timing correction can incur costs not apparent in arrival dates
 
-In American redstarts, the published movement analysis reported that individuals
+In American redstarts, the published movement analysis (Dossman et al. 2023) reported that individuals
 departing roughly 10 days late migrated about 43% faster. A separate
 mark–resight survival analysis associated relative departure timing with
 an estimated decline in apparent annual survival. Critically, the number
@@ -756,9 +755,13 @@ Thus temporal recovery and fitness recovery are not equivalent in theory:
 The effective-deadline framework must therefore include the cost of correction,
 but the redstart dataset does not identify that cost causally.
 
+Longitudinal godwit observations also show that timing deviations need not
+accumulate or consistently predict later reproduction and survival
+(Senner et al. 2014). This is prior art, not evidence that compensation is free.
+
 ### 4.7 Interaction-level asymmetry changes relative timing
 
-Across 10 European nest-box schemes, resident tits were more temperature-sensitive than migratory flycatchers, and this differential response widened their laying-date interval by 0.94 days per decade. Published UK bird–caterpillar analyses likewise show incomplete temporal tracking by consumers.
+Across 10 European nest-box schemes (Samplonius et al. 2018), resident tits were more temperature-sensitive than migratory flycatchers, and this differential response widened their laying-date interval by 0.94 days per decade. Published UK bird–caterpillar analyses (Burgess et al. 2018) likewise show incomplete temporal tracking by consumers.
 
 These systems support the ecological step from heterogeneous response rules to changing interaction timing. They do not directly estimate the route-wise phase controller.
 
@@ -797,7 +800,7 @@ separate individual-level evidence.
 ### 4.9 Relation to migration-control prior art
 
 Stagewise migration decisions, dynamic programming, stopover optimization and
-en-route timing adjustment are established ideas. Taylor (2016) explicitly
+en-route timing adjustment are established ideas. Taylor et al. (2016) explicitly
 linked phenological change to en-route migration-speed adjustment and stopover
 frequency, and Chu et al. (2026) formulated migration as a stochastic optimal
 switching problem with destination information under both perfect and partial
@@ -1059,8 +1062,7 @@ A descriptive phase difference, such as arrival minus remotely sensed
 green-up, is not a demographic fitness regret. The fitness-maximizing
 reference can occur away from peak resources, and is not identified by an
 environmental matching coefficient alone. Earlier evolutionary models have
-explicitly considered the costs of early migrant arrival (Jonzén et al.,
-2007), while Torstenson and Shaw (2025) established that fitness efficacy
+explicitly considered the costs of early migrant arrival (Jonzén et al. 2007), while Torstenson and Shaw (2025) established that fitness efficacy
 cannot be equated to cue timing accuracy. The present manuscript does not
 claim novelty for that general distinction.
 
@@ -1086,11 +1088,10 @@ organism. Neither condition may be inferred from the observed green-up
 correlations alone.
 
 Published experiments already show that resident tit reproductive phenology
-can influence later-arriving female pied-flycatcher settlement (Samplonius
-and Both, 2017), while separate work links actual tit density and timing
-overlap to harmful interspecific encounters (Samplonius and Both, 2019).
+can influence later-arriving female pied-flycatcher settlement (Samplonius and Both 2017), while separate work links actual tit density and timing
+overlap to harmful interspecific encounters (Samplonius and Both 2019).
 Experiments using independent heterospecific song presentation also precede
-this study (Morinay et al., 2020). These studies motivate, but do not
+this study (Morinay et al. 2020). These studies motivate, but do not
 jointly identify, an information-by-competition-by-deadline mechanism in the
 same individuals. A new claim requires those discriminating measurements;
 replicating a published playback or settlement result is insufficient.
@@ -1195,6 +1196,50 @@ unresolved by the current natural evidence.
 The strongest prospective validation remains to measure physiological
 readiness, signed phase information, available actuators and downstream phase
 retention in the same individuals and interacting partners.
+
+---
+
+## Literature Cited
+
+Amaral, B. R., C. Youngflesh, M. W. Tingley, and D. A. W. Miller. 2025. Shifting gears in a shifting climate: birds adjust migration speed in response to spring vegetation green-up. *Diversity and Distributions* https://doi.org/10.1111/ddi.70033.
+
+Bauer, S., P. Gienapp, and J. Madsen. 2008. The relevance of environmental conditions for departure decision changes en route in migrating geese. *Ecology* 89:1953–1960. https://doi.org/10.1890/07-1101.1.
+
+Bêty, J., G. Gauthier, and J.-F. Giroux. 2003. Body condition, migration, and timing of reproduction in snow geese: a test of the condition-dependent model of optimal clutch size. *The American Naturalist* 162:110–121. https://doi.org/10.1086/375680.
+
+Burgess, M. D., K. W. Smith, K. L. Evans, D. Leech, J. W. Pearce-Higgins, C. J. Branston, K. Briggs, J. R. Clark, C. R. du Feu, K. Lewthwaite, R. G. Nager, B. C. Sheldon, J. A. Smith, R. C. Whytock, S. G. Willis, and A. B. Phillimore. 2018. Tritrophic phenological match–mismatch in space and time. *Nature Ecology & Evolution* 2:970–975. https://doi.org/10.1038/s41559-018-0543-1.
+
+Chu, J., K.-Y. Lam, B. Wang, and T. Wang. 2026. An optimal switching approach for bird migration. *Numerical Algebra, Control and Optimization* 18:146–175. https://doi.org/10.3934/naco.2025026.
+
+Conklin, J. R., S. Lisovski, and P. F. Battley. 2021. Advancement in long-distance bird migration through individual plasticity in departure. *Nature Communications* 12:4780. https://doi.org/10.1038/s41467-021-25022-7.
+
+Dossman, B. C., A. D. Rodewald, C. E. Studds, and P. P. Marra. 2023. Migratory birds with delayed spring departure migrate faster but pay the costs. *Ecology* 104:e3938. https://doi.org/10.1002/ecy.3938.
+
+Jonzén, N., A. Hedenström, and P. Lundberg. 2007. Climate change and the optimal arrival of migratory birds. *Proceedings of the Royal Society B* 274:269–274. https://doi.org/10.1098/rspb.2006.3719.
+
+Kharouba, H. M., and E. M. Wolkovich. 2020. Disconnects between ecological theory and data in phenological mismatch research. *Nature Climate Change* 10:406–415. https://doi.org/10.1038/s41558-020-0752-x.
+
+Kölzsch, A., S. Bauer, R. de Boer, L. Griffin, D. Cabot, K.-M. Exo, H. P. van der Jeugd, and B. A. Nolet. 2015. Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore. *Journal of Animal Ecology* 84:272–283. https://doi.org/10.1111/1365-2656.12281.
+
+Morinay, J., J. T. Forsman, and B. Doligez. 2020. Heterospecific song quality as social information for settlement decisions: an experimental approach in a wild bird. *Animal Behaviour* 161:103–113. https://doi.org/10.1016/j.anbehav.2020.01.002.
+
+Ortega, A. C., E. O. Aikens, J. A. Merkle, K. L. Monteith, and M. J. Kauffman. 2023. Migrating mule deer compensate en route for phenological mismatches. *Nature Communications* 14:2008. https://doi.org/10.1038/s41467-023-37750-z.
+
+Samplonius, J. M., and C. Both. 2017. Competitor phenology as a social cue in breeding site selection. *Journal of Animal Ecology* 86:615–623. https://doi.org/10.1111/1365-2656.12640.
+
+Samplonius, J. M., L. Bartošová, M. D. Burgess, A. V. Bushuev, T. Eeva, E. V. Ivankina, A. B. Kerimov, I. Krams, T. Laaksonen, M. Mägi, R. Mänd, J. Potti, J. Török, M. Trnka, M. E. Visser, H. Zang, and C. Both. 2018. Phenological sensitivity to climate change is higher in resident than in migrant bird populations among European cavity breeders. *Global Change Biology* 24:3780–3790. https://doi.org/10.1111/gcb.14160.
+
+Samplonius, J. M., and C. Both. 2019. Climate change may affect fatal competition between two bird species. *Current Biology* 29:327–331.e2. https://doi.org/10.1016/j.cub.2018.11.063.
+
+Senner, N. R., W. M. Hochachka, J. W. Fox, and V. Afanasyev. 2014. An exception to the rule: carry-over effects do not accumulate in a long-distance migratory bird. *PLOS ONE* 9:e86588. https://doi.org/10.1371/journal.pone.0086588.
+
+Taylor, C. M., A. J. Laughlin, and R. J. Hall. 2016. The response of migratory populations to phenological change: a Migratory Flow Network modelling approach. *Journal of Animal Ecology* 85:648–659. https://doi.org/10.1111/1365-2656.12494.
+
+Torstenson, M., and A. K. Shaw. 2025. Strength of seasonality and type of migratory cue determine the fitness consequences of changing phenology for migratory animals. *Oikos* 2025:e10862. https://doi.org/10.1111/oik.10862.
+
+Usui, T., S. H. M. Butchart, and A. B. Phillimore. 2017. Temporal shifts and temperature sensitivity of avian spring migratory phenology: a phylogenetic meta-analysis. *Journal of Animal Ecology* 86:250–261. https://doi.org/10.1111/1365-2656.12612.
+
+Visser, M. E., and P. Gienapp. 2019. Evolutionary and demographic consequences of phenological mismatches. *Nature Ecology & Evolution* 3:879–885. https://doi.org/10.1038/s41559-019-0880-8.
 
 ---
 
