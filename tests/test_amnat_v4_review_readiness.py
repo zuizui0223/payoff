@@ -24,7 +24,9 @@ def test_agreed_main_text_keeps_review_restrictions_explicit():
     assert result["keyword_count"] == 6
     assert result["estimated_main_plus_abstract_words"] <= 7500
     assert all(result["claim_guards"].values())
-    assert "complete Literature Cited absent" in result["submission_blockers"]
+    assert "complete Literature Cited absent" not in result["submission_blockers"]
+    assert any("20 DOI-checked core references" in item
+               for item in result["submission_blockers"])
     assert "internal provenance remains in source" in result["submission_blockers"]
 
 
