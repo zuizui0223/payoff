@@ -6,8 +6,8 @@ import zipfile
 import pytest
 
 from scripts.build_amnat_v4_blind_repro_archive import (
-    FORBIDDEN, SOURCE_BLOB, SOURCE_SIZE, SOURCE_R, SOURCE_CONTRACTS,
-    ORIGINAL_DATA, gitblob, neutral, safe, fixed_zip, readme, replay_script, build
+    FORBIDDEN, SOURCE_SHA, SOURCE_SIZE, R_ORIG, CONTRACT_ORIG,
+    ORIGINAL_DATA, git_blob, neutral, safe, fixed_zip, readme, replay_script, build
 )
 
 
@@ -21,31 +21,31 @@ def test_path_and_label_anonymization_preserves_scientific_identifiers():
     assert neutral("SOURCE_COMMIT <- '62c58d77c2028bd863dfe3697b0d9cf29ceaeab0'").endswith(
         "'62c58d77c2028bd863dfe3697b0d9cf29ceaeab0'"
     )
-    assert all("payoff_b" not in neutral(s) for s in SOURCE_R)
-    assert all("PAYOFF_B" not in neutral(s) for s in SOURCE_CONTRACTS)
+    assert all("payoff_b" not in neutral(s) for s in R_ORIG)
+    assert all("PAYOFF_B" not in neutral(s) for s in CONTRACT_ORIG)
 
 
 def test_forbid_identity_and_email_in_reviewed_source():
-    safe("Source DOI 10.5061/dryad.ttdz08m6w","citation")
+    check_anonymous("Source DOI 10.5061/dryad.ttdz08m6w","citation")
     for token in ("zuizui0223", "PAYOFF-B", "payoff_b", "rachelzhang0223"):
         with pytest.raises(ValueError,match="Identifying"):
-            safe("comment "+token,"science.txt")
+            check_anonymous("comment "+token,"science.txt")
     with pytest.raises(ValueError,match="Email"):
-        safe("sender private@identifying.test","memo.md")
+        check_anonymous("sender private@identifying.test","memo.md")
 
 
 def test_git_blob_hash_uses_real_git_object_envelope():
     data=b"hello\n"
     expected=hashlib.sha1(b"blob 6\0"+data).hexdigest()
-    assert gitblob(data)==expected
-    assert SOURCE_SIZE==7250107 and len(SOURCE_BLOB)==40
+    assert git_blob(data)==expected
+    assert SOURCE_SIZE==7250107 and len(SOURCE_SHA)==40
 
 
 def test_source_data_archive_has_all_three_original_frozen_modules():
-    assert len(SOURCE_R)==3
-    assert len(SOURCE_CONTRACTS)==2
+    assert len(R_ORIG)==3
+    assert len(CONTRACT_ORIG)==2
     assert sum(len(x) for x in ORIGINAL_DATA.values())==13
-    assert all(Path(k).suffix==".R" for k in SOURCE_R)
+    assert all(Path(k).suffix==".R" for k in R_ORIG)
     assert "Rscript analysis/seasonal_v8_transfer_structural_null_audit.R" in replay_script()
 
 
