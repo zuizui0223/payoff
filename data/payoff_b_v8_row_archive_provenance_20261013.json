@@ -1,0 +1,99 @@
+{
+  "contract_id": "PAYOFF_B_V8_POSTFREEZE_ROW_RESTORATION_20261013",
+  "status": "PRE_RECOVERY_MANIFEST_LOCKED_NO_NEW_OUTCOMES",
+  "date": "2026-10-13",
+  "source": {
+    "repository": "br-amaral/BirdMigrationSpeed",
+    "commit": "62c58d77c2028bd863dfe3697b0d9cf29ceaeab0",
+    "path": "data/final.rds",
+    "blob_sha1_git": "f1c9e63a377bb96152c573081e7c482cfe49ebc3",
+    "source_size_bytes": 7250107,
+    "data_doi": "10.5061/dryad.ttdz08m6w",
+    "upstream_landing": "https://github.com/br-amaral/BirdMigrationSpeed/tree/62c58d77c2028bd863dfe3697b0d9cf29ceaeab0"
+  },
+  "immutable_analysis_script_paths": [
+    "analysis/movement_phenology/payoff_b_v8_primary.R",
+    "analysis/movement_phenology/payoff_b_v8_downstream_transfer_primary.R",
+    "analysis/movement_phenology/payoff_b_v8_transfer_structural_null_audit.R"
+  ],
+  "historical_artifacts": [
+    {
+      "role": "environment",
+      "run_id": 37285260343,
+      "name": "payoff-b-v8-primary",
+      "artifact_id": 11334053847,
+      "sha256_archive": "e54a2c835a33f6b99fad1de13add2cace7d7f6973d2c2355c46b0fed6a832ec0",
+      "status": "UNEXPIRED_AT_CONTRACT_LOCK"
+    },
+    {
+      "role": "transfer",
+      "run_id": 37289801143,
+      "name": "payoff-b-v8-downstream-transfer-primary",
+      "artifact_id": 11336345852,
+      "sha256_archive": "046b3221feef75f77be63fcf37ef887101f801c8b1f62e32b41d6bc454466327",
+      "status": "UNEXPIRED_AT_CONTRACT_LOCK"
+    },
+    {
+      "role": "structural",
+      "run_id": 37291407274,
+      "name": "payoff-b-v8-transfer-structural-null",
+      "artifact_id": 11337415962,
+      "sha256_archive": "54b260d19383aa7fee862ef3023e0a1080f218ef1dd3ed7257a52318019af360",
+      "status": "UNEXPIRED_AT_CONTRACT_LOCK"
+    }
+  ],
+  "registered_result_contract": {
+    "environment": {
+      "unique_pairs": 166,
+      "species": 28,
+      "pair_mean_delta_rho": 0.369,
+      "pair_ci95": [
+        0.2984,
+        0.4365
+      ],
+      "equal_species_mean_delta_rho": 0.3364,
+      "equal_species_ci95": [
+        0.2628,
+        0.4312
+      ],
+      "bootstrap_replicates": 10000,
+      "registered_hypothesis": "DEGRADATION_NOT_SUPPORTED"
+    },
+    "transfer": {
+      "species_target_rows": 150,
+      "unique_pairs": 72,
+      "species": 22,
+      "beta": 0.06243969,
+      "ci95": [
+        -0.01411178,
+        0.1363489
+      ],
+      "bootstrap_replicates": 10000,
+      "registered_hypothesis": "NEGATIVE_TRANSFER_NOT_SUPPORTED"
+    },
+    "structural": {
+      "fixed_arrival_beta": 0.04742,
+      "bird_increment_beta": 0.01502,
+      "bird_increment_ci95": [
+        -0.05212,
+        0.10273
+      ],
+      "permutation_median": 0.04677,
+      "permutation_95_interval": [
+        0.01312,
+        0.08188
+      ],
+      "permutation_replicates": 2000,
+      "bird_increment_detected": false
+    }
+  },
+  "disallowed_reinterpretations": [
+    "replace the frozen V8 negative degradation/transfer predictions after outcome access",
+    "treat positive transfer as harmful bird causal response",
+    "treat spatial environmental correlation as measured individual cue forecast",
+    "treat restored row-level results as independently resampled raw data unless R source scripts actually rerun",
+    "claim animal survival or reproductive fitness",
+    "call an author-identifying raw archive anonymous reviewer ready"
+  ],
+  "recovery_gate": "NOT_ATTEMPTED_YET"
+}
