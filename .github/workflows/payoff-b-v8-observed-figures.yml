@@ -1,0 +1,75 @@
+name: PAYOFF-B V8 observed original spatial pair figures
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/payoff-b-v8-observed-figures.yml"
+      - "scripts/render_payoff_b_v8_original_observed_figures.py"
+      - "tests/test_payoff_b_v8_observed_figures.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  verified-original-166-and-150-data-points:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install figure-test and raster preview dependencies
+        run: python -m pip install "pytest>=8,<10" "CairoSVG>=2.7"
+      - name: Verify original-point source and output honesty
+        run: |
+          python -m pytest -q \
+            tests/test_payoff_b_v8_observed_figures.py \
+            tests/test_payoff_b_v8_restored_rows.py
+      - name: Restore VERIFIED 2026-10-05 V8 original row-level source archive
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38404051747
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-v8-20261005-original-row-archive-internal-NOT-ANONYMOUS
+          path: outputs/v8_original_verified
+      - name: Plot actual 166 distinct environmental pairs and 150 species-target observations
+        run: |
+          python -m scripts.render_payoff_b_v8_original_observed_figures \
+            --original outputs/v8_original_verified/original_20261005_outputs \
+            --verification outputs/v8_original_verified/independent_restoration_receipt.json \
+            --out outputs/v8_observed_row_figures
+      - name: Render exact SVG figures to visual-preview PNG files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import cairosvg
+          for s in sorted(Path("outputs/v8_observed_row_figures").glob("*.svg")):
+              cairosvg.svg2png(url=str(s),write_to=str(s.with_suffix(".png")),scale=1.5)
+          PY
+      - name: Verify source identity, exact point counts, and explicit SUBMISSION_HOLD
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("outputs/v8_observed_row_figures")
+          receipt=json.loads((root/"observed_figures_receipt.json").read_text())
+          assert receipt["status"]=="ORIGINAL_V8_OBSERVED_ROW_SVG_PREVIEW_SUBMISSION_HOLD"
+          assert receipt["verified_actual_spatial_pair_points"]==166
+          assert receipt["verified_actual_species_target_points"]==150
+          assert receipt["distinct_environmental_pairs_in_transfer"]==72
+          assert receipt["no_synthetic_points"] is True
+          assert receipt["visual_quality_approved"] is False
+          assert receipt["submission_ready"] is False
+          assert len(list(root.glob("*.svg")))==2
+          assert len(list(root.glob("*.png")))==2
+          print("ORIGINAL OBSERVATION SVG FIGURES VALIDATED; PUBLISHING/ANON REVIEW HOLD")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-original-166-pair-150-target-figures-NONANON-PREVIEW
+          path: outputs/v8_observed_row_figures/
+          if-no-files-found: error

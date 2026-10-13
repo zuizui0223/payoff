@@ -1,0 +1,99 @@
+name: PAYOFF-B V8 certify completed frozen-source R replay outputs
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/payoff-b-v8-replay-certify-20261013.yml"
+      - "scripts/audit_payoff_b_v8_pinned_r_replay.py"
+      - "scripts/audit_payoff_b_v8_restored_rows.py"
+      - "data/payoff_b_v8_row_archive_provenance_20261013.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  certify-source-rerun-that-had-python-import-failure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify original R source input/replay steps completed successfully in immutable historical CI
+        env:
+          AUDIT_GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json,os
+          from urllib.request import urlopen,Request
+          job_run=38404684023
+          url=f"https://api.github.com/repos/zuizui0223/payoff/actions/runs/{job_run}/jobs"
+          req=Request(url,headers={"Authorization":"Bearer "+os.environ["AUDIT_GITHUB_TOKEN"],
+                "Accept":"application/vnd.github+json"})
+          with urlopen(req,timeout=60) as stream: data=json.load(stream)
+          jobs=data.get("jobs",[])
+          if len(jobs)!=1: raise SystemExit("Unverified replay job cardinality")
+          checks={x["name"]:x["conclusion"] for x in jobs[0].get("steps",[])}
+          required=[
+            "Fetch and byte-pin the exact public 2026-10-05 upstream source",
+            "Re-run ORIGINAL frozen 2026-10-05 V8 R models without changing them",
+            "Organize original-source rerun outputs without overwriting original artifact",
+          ]
+          if any(checks.get(key)!="success" for key in required):
+              raise SystemExit("The original frozen-source R replay did NOT finish")
+          if checks.get("Independently compare source-rerun rows, weighted slopes, cluster-bootstrap and permutation intervals")!="failure":
+              raise SystemExit("Unexpected status; this audit only repairs the known validator-launch failure")
+          print("ORIGINAL THREE R MODELS AND SOURCE SHA VALIDATION SUCCEEDED; ONLY PYTHON LAUNCH FAILED")
+          PY
+      - name: Restore and cross-check original previously verified 2026-10-05 row-level outputs
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38404051747
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-v8-20261005-original-row-archive-internal-NOT-ANONYMOUS
+          path: outputs/v8_restored_original
+      - name: Restore exact R replay files from completed original R computation
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38404684023
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-v8-independent-raw-source-R-replay-INTERNAL-NONANON
+          path: outputs/v8_restored_fresh_replay
+      - name: Test registered frozen arithmetic and source-join invariants
+        run: |
+          python -m pip install "pytest>=8,<10"
+          python -m pytest -q \
+            tests/test_payoff_b_v8_restored_rows.py \
+            tests/test_payoff_b_v8_pinned_r_replay.py
+      - name: Independently validate fresh raw-source R rerun against original frozen rows and confidence intervals
+        run: |
+          mkdir -p outputs/v8_certified_replay
+          python -m scripts.audit_payoff_b_v8_pinned_r_replay \
+            --original outputs/v8_restored_original/original_20261005_outputs \
+            --replay outputs/v8_restored_fresh_replay/v8_new_replay \
+            --receipt outputs/v8_certified_replay/pinned_source_R_replay_verified.json
+      - name: Confirm full source R replay but not ecological mechanism or reviewer submission
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("outputs/v8_certified_replay/pinned_source_R_replay_verified.json")
+          x=json.loads(p.read_text())
+          assert x["status"]=="FROZEN_V8_PINNED_SOURCE_INDEPENDENT_R_REPLAY_MATCHED"
+          assert x["independently_ran_original_frozen_R_scripts_from_pinned_source"] is True
+          assert x["causal_information_use_or_fitness_identified"] is False
+          assert x["submission_ready"] is False
+          print("INDEPENDENT R SOURCE REPLAY CONFIRMED / BIOLOGICAL CAUSAL CLAIM HOLD")
+          PY
+      - name: Upload independently certified raw-data R replay compare receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v8-CERTIFIED-independent-frozen-R-replay-INTERNAL
+          path: outputs/v8_certified_replay/
+          if-no-files-found: warn

@@ -1,0 +1,105 @@
+name: PAYOFF-B AmNat original-observation PDF editorial preview
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/payoff-b-amnat-v4-verified-point-pdf.yml"
+      - "scripts/assemble_amnat_v4_original_observed_figures.py"
+      - "tests/test_assemble_amnat_v4_original_observed_figures.py"
+      - "scripts/build_amnat_v4_anonymous_preview.py"
+      - "scripts/build_payoff_b_amnat_v4_summary_figures.py"
+      - "submission/AMNAT_V4_ANON_PREVIEW_HEADER_20261013.tex"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  independent-source-point-figures-and-anonymous-editorial-pdf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test, vector/raster graphics, and PDF preflight libraries
+        run: python -m pip install "pytest>=8,<10" "CairoSVG>=2.7" "PyMuPDF>=1.24"
+      - name: Verify figure-source mixing cannot counterfeit raw point counts or alter hashes
+        run: |
+          python -m pytest -q \
+            tests/test_assemble_amnat_v4_original_observed_figures.py \
+            tests/test_amnat_v4_anonymous_preview.py \
+            tests/test_payoff_b_v8_observed_figures.py
+      - name: Generate schema-verified theory/mule-deer summary figures 1 and 4
+        run: |
+          python scripts/build_payoff_b_amnat_v4_summary_figures.py \
+            --out outputs/v4_summary_source
+      - name: Restore verified ORIGINAL OBSERVATION 166-pair and 150-target V8 SVG files
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38405925813
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-v8-original-166-pair-150-target-figures-NONANON-PREVIEW
+          path: outputs/v8_verified_real_observations
+      - name: Build four figures with exact original source data for figures 2 and 3
+        run: |
+          python -m scripts.assemble_amnat_v4_original_observed_figures \
+            --summary outputs/v4_summary_source \
+            --observed outputs/v8_verified_real_observations \
+            --out outputs/amnat_v4_data_grounded_figures
+      - name: Install verified TeX/Pandoc editorial review environment
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            pandoc lmodern texlive-xetex texlive-latex-recommended \
+            texlive-latex-extra texlive-fonts-recommended
+      - name: Generate anonymous mathematical manuscript with real F2 and F3 source-data PNG previews
+        run: |
+          python scripts/build_amnat_v4_anonymous_preview.py \
+            --out outputs/amnat_v4_true_point_pdf/manuscript_anonymous_data_figures.md \
+            --figures-dir outputs/amnat_v4_data_grounded_figures \
+            --receipt outputs/amnat_v4_true_point_pdf/source_and_anonymity_receipt.json
+      - name: Produce reviewer-oriented double-spaced line-numbered mathematical PDF
+        run: |
+          pandoc -s \
+            -f 'markdown+tex_math_single_backslash+tex_math_double_backslash+tex_math_dollars' \
+            outputs/amnat_v4_true_point_pdf/manuscript_anonymous_data_figures.md \
+            --pdf-engine=xelatex \
+            --resource-path=outputs/amnat_v4_true_point_pdf \
+            -V geometry:margin=1in \
+            -V fontsize=12pt \
+            -H submission/AMNAT_V4_ANON_PREVIEW_HEADER_20261013.tex \
+            -o outputs/amnat_v4_true_point_pdf/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf
+      - name: Audit original data-figure counts, anonymous scientific claims, PDF figures and typeset pages
+        run: |
+          python scripts/audit_amnat_v4_anonymous_pdf_preview.py \
+            --pdf outputs/amnat_v4_true_point_pdf/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf \
+            --out outputs/amnat_v4_true_point_pdf/PDF_SOURCE_PREFLIGHT_HOLD.json \
+            --png-dir outputs/amnat_v4_true_point_pdf/selected_visual_pages
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          a=json.loads(Path("outputs/amnat_v4_data_grounded_figures/combined_figure_source_receipt.json").read_text())
+          b=json.loads(Path("outputs/amnat_v4_true_point_pdf/PDF_SOURCE_PREFLIGHT_HOLD.json").read_text())
+          assert a["status"]=="REAL_POINT_F2_F3_AND_FROZEN_F1_F4_EDITORIAL_PREVIEW_PASS"
+          assert a["f2_observed_unique_spatial_pairs"]==166
+          assert a["f3_observed_species_target_rows"]==150
+          assert a["f3_independent_environment_pairs"]==72
+          assert a["synthetic_observations_generated"] is False
+          assert b["embedded_image_count"]==4
+          assert b["status"]=="ANONYMOUS_EDITORIAL_PDF_PREFLIGHT_PASS_SUBMISSION_HOLD"
+          assert b["submission_ready"] is False
+          assert a["submission_ready"] is False
+          print("ANONYMOUS MANUSCRIPT + ORIGINAL OBSERVATION FIGURES: EDITORIAL PREFLIGHT PASS / SUBMISSION HOLD")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-amnat-v4-REAL-PAIR-OBSERVATION-anonymous-EDITORIAL-PDF-HOLD
+          path: |
+            outputs/amnat_v4_true_point_pdf/
+            outputs/amnat_v4_data_grounded_figures/
+          if-no-files-found: warn
