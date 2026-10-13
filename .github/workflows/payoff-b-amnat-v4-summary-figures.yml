@@ -1,0 +1,58 @@
+name: PAYOFF-B AmNat V4 frozen-summary figure preview
+
+on:
+  pull_request:
+    paths:
+      - "scripts/build_payoff_b_amnat_v4_summary_figures.py"
+      - "tests/test_payoff_b_amnat_v4_summary_figures.py"
+      - "submission/AMNAT_V4_SUMMARY_FIGURE_README_20261013.md"
+      - "submission/AMNAT_V4_FIGURE_SOURCE_CROSSWALK_20261011.md"
+      - ".github/workflows/payoff-b-amnat-v4-summary-figures.yml"
+      - "docs/PAYOFF_B_V8_PRIMARY_AND_SENSITIVITY_RESULT_20261005.md"
+      - "docs/PAYOFF_B_V8_DOWNSTREAM_TRANSFER_PRIMARY_RESULT_20261005.md"
+      - "docs/PAYOFF_B_V8_TRANSFER_STRUCTURAL_NULL_RESULT_20261005.md"
+      - "data/payoff_b_ortega_variance_funnel_result_20261003.json"
+      - "data/payoff_b_mule_deer_two_clock_channel_result_20261003.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  figures-from-frozen-summary-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install unit runner only (figure code is standard library)
+        run: python -m pip install "pytest>=8,<10"
+      - name: Verify receipt parsing, identity, confidence intervals and deterministic zip
+        run: python -m pytest -q tests/test_payoff_b_amnat_v4_summary_figures.py
+      - name: Render four source-bounded SVG previews
+        run: |
+          python scripts/build_payoff_b_amnat_v4_summary_figures.py \
+            --out outputs/amnat_v4_summary_preview \
+            --zip outputs/amnat_v4_summary_preview.zip
+      - name: Fail if pipeline pretends to be submission ready
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          m = json.loads(Path('outputs/amnat_v4_summary_preview/figure_manifest.json').read_text())
+          assert m['status'] == 'VERIFIED_SUMMARY_FIGURE_PREVIEW_SUBMISSION_HOLD'
+          assert m['submission_ready'] is False
+          assert m['anonymous_review_archive_complete'] is False
+          assert m['underlying_observation_data_included'] is False
+          assert len([x for x in m['figures'] if x.endswith('.svg')]) == 4
+          print('SOURCE-VERIFIED FIGURES / REVIEWER-SUBMISSION HOLD')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-amnat-v4-summary-figure-preview-not-anonymous
+          path: |
+            outputs/amnat_v4_summary_preview/
+            outputs/amnat_v4_summary_preview.zip
+          if-no-files-found: error
