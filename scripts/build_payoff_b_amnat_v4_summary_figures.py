@@ -120,11 +120,15 @@ def extract_inputs(contents: dict) -> dict:
             "estimate": actuator["movement_rate_slope_per_DFP_day"],
             "ci95": boot["movement_rate_slope_ci95"],
             "n": actuator["movement_rate_n"],
+            "within_year_estimate": actuator["movement_rate_within_year_slope"],
+            "within_year_ci95": boot["movement_rate_within_year_slope_ci95"],
         },
         "stopover": {
             "estimate": actuator["stopover_slope_days_per_DFP_day"],
             "ci95": boot["stopover_slope_ci95"],
             "n": actuator["stopover_n"],
+            "within_year_estimate": actuator["stopover_within_year_slope"],
+            "within_year_ci95": boot["stopover_within_year_slope_ci95"],
         },
         "safe_subset": {
             "animal_years": two["safe_joined_rows"],
@@ -338,6 +342,31 @@ def build(output_dir: Path, root: Path = ROOT, archive: Path | None = None) -> d
     )+"\n"
     files["LEGENDS.md"]={"sha256":write(output_dir/"LEGENDS.md",legend_text),
                          "kind":"EDITORIAL_LEGENDS"}
+    # Signed actuator slopes are available in a **separate** numerical
+    # companion table; never draw raw deer trajectories without raw data.
+    mule = inputs["mule_deer"]
+    def fmt(est, ci):
+        return f'{est:+.4f} [{ci[0]:+.4f}, {ci[1]:+.4f}]'
+    table = (
+        "# Table S1 — source-frozen mule-deer signed actuator summary\n\n"
+        "Published-source descriptive associations only; not causal adjustment gains.\n\n"
+        "| Response (units per starting DFP day) | n animal-years | Raw slope [95% animal-cluster CI] | Within-year-centred slope [95% CI] |\n"
+        "|---|---:|---:|---:|\n"
+        f"| Movement rate (km/day) | {mule['movement_rate']['n']} | "
+        f"{fmt(mule['movement_rate']['estimate'],mule['movement_rate']['ci95'])} | "
+        f"{fmt(mule['movement_rate']['within_year_estimate'],mule['movement_rate']['within_year_ci95'])} |\n"
+        f"| Stopover duration (days) | {mule['stopover']['n']} | "
+        f"{fmt(mule['stopover']['estimate'],mule['stopover']['ci95'])} | "
+        f"{fmt(mule['stopover']['within_year_estimate'],mule['stopover']['within_year_ci95'])} |\n\n"
+        "Source: data/payoff_b_ortega_variance_funnel_result_20261003.json; "
+        "the published Ortega et al. findings are prior art. "
+        "The separate 62-animal-year IFBFat readiness analysis is NOT included "
+        "in these raw phase–actuator slopes; it did not support readiness-gated feedback.\n"
+    )
+    files["TABLE_S1_ACTUATORS.md"]={
+        "sha256":write(output_dir/"TABLE_S1_ACTUATORS.md",table),
+        "kind":"SOURCE_FROZEN_DESCRIPTIVE_COMPANION_TABLE"}
+
     manifest = {
         "status": "VERIFIED_SUMMARY_FIGURE_PREVIEW_SUBMISSION_HOLD",
         "individual_or_pair_level_points_generated": False,
