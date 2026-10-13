@@ -1,0 +1,117 @@
+name: AmNat Paper 2 complete anonymous source archive candidate
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/payoff-b-amnat-v4-blind-repro-archive.yml"
+      - "scripts/build_amnat_v4_blind_repro_archive.py"
+      - "tests/test_amnat_v4_blind_repro_archive.py"
+      - "scripts/audit_payoff_b_v8_restored_rows.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  blind-reviewer-reproducibility-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install minimal PDF and source integrity dependencies
+        run: python -m pip install "pytest>=8,<10" "PyMuPDF>=1.24"
+      - name: Test source pin and anonymous reproducibility ZIP rules
+        run: python -m pytest -q tests/test_amnat_v4_blind_repro_archive.py
+      - name: Restore exact original V8 environmental bird and null rows
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38404051747
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-v8-20261005-original-row-archive-internal-NOT-ANONYMOUS
+          path: inputs/frozen
+      - name: Restore anonymous manuscript and four source-traced figures
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38407915414
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-amnat-v4-REAL-PAIR-OBSERVATION-anonymous-EDITORIAL-PDF-HOLD
+          path: inputs/paper
+      - name: Fetch and byte-verify exactly pinned upstream CC0 source
+        run: |
+          mkdir -p inputs/source
+          curl --fail --location --retry 3 --max-time 180 \
+            "https://raw.githubusercontent.com/br-amaral/BirdMigrationSpeed/62c58d77c2028bd863dfe3697b0d9cf29ceaeab0/data/final.rds" \
+            -o inputs/source/final.rds
+          test "$(git hash-object inputs/source/final.rds)" = \
+            "f1c9e63a377bb96152c573081e7c482cfe49ebc3"
+      - name: Build deterministic anonymous source data code and editorial PDF ZIP
+        run: |
+          python -m scripts.build_amnat_v4_blind_repro_archive \
+            --original inputs/frozen/original_20261005_outputs \
+            --source-rds inputs/source/final.rds \
+            --paper-root inputs/paper \
+            --out outputs/anon_paper2_data_code \
+            --zip outputs/Paper2_anonymous_source_REVIEW_CANDIDATE.zip \
+            --receipt outputs/INTERNAL_archive_provenance.json
+      - name: Re-run anonymized original scientific R analyses from bundled raw RDS
+        run: |
+          cd outputs/anon_paper2_data_code
+          bash scripts/reproduce.sh
+      - name: Verify independent science results and strict double-anonymous ZIP limits
+        run: |
+          python - <<'PY'
+          import json,zipfile,hashlib
+          from pathlib import Path
+          archive=Path("outputs/Paper2_anonymous_source_REVIEW_CANDIDATE.zip")
+          root=Path("outputs/anon_paper2_data_code")
+          final=json.loads((root/"outputs/verified/result.json").read_text())
+          manifest=json.loads((root/"MANIFEST.json").read_text())
+          assert final["status"]=="FROZEN_V8_ROW_LEVEL_ARTIFACTS_RESTORED_AND_ARITHMETIC_VERIFIED"
+          assert final["environment"]["unique_spatial_pairs"]==166
+          assert final["transfer"]["species_target_rows"]==150
+          assert final["transfer"]["unique_pairs"]==72
+          assert final["individual_perception_or_demographic_fitness_identified"] is False
+          assert manifest["raw_source_repackaged"] is True
+          assert manifest["journal_submission_ready"] is False
+          with zipfile.ZipFile(archive) as z:
+            names=z.namelist()
+            assert len(names)>=25
+            assert "data/source_input.rds" in names
+            assert "manuscript/editorial_preview.pdf" in names
+            for name in names:
+              for bad in ("zuizui0223","payoff_b","PAYOFF-B","ZHANG RUIQI"):
+                assert bad.casefold() not in name.casefold()
+              if name.lower().endswith((".py",".r",".md",".csv",".json",".sh")):
+                data=z.read(name).decode("utf-8")
+                for bad in ("zuizui0223","payoff_b","PAYOFF-B","ZHANG RUIQI"):
+                  assert bad.casefold() not in data.casefold(),(name,bad)
+          print("ANONYMOUS SOURCE ZIP + FULL RAW-SOURCE SCIENTIFIC REPLAY PASS")
+          print("ZIP SHA256",hashlib.sha256(archive.read_bytes()).hexdigest())
+          print("NOT YET DEPOSITED TO ANONYMOUS REVIEWER DELIVERY")
+          PY
+      - name: Collect internal and anonymous receipt separately
+        if: always()
+        run: |
+          mkdir -p outputs/review_audit
+          cp outputs/anon_paper2_data_code/outputs/verified/result.json \
+            outputs/review_audit/reproduced_science.json || true
+          cp outputs/anon_paper2_data_code/MANIFEST.json \
+            outputs/review_audit/content_manifest.json || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AmNat-Paper2-ANONYMOUS-DATA-CODE-PDF-ZIP-INTERNAL-NOT-DEPOSITED
+          path: |
+            outputs/Paper2_anonymous_source_REVIEW_CANDIDATE.zip
+            outputs/review_audit/
+            outputs/INTERNAL_archive_provenance.json
+          if-no-files-found: warn
