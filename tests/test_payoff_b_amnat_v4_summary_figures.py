@@ -73,7 +73,12 @@ def test_four_svg_preview_manifest_and_zip_determinism(tmp_path):
     assert a["underlying_observation_data_included"] is False
     figs = sorted(o1.glob("*.svg"))
     assert len(figs) == 4
-    assert len(a["figures"]) == 5
+    assert len(a["figures"]) == 6
+    table=(o1/"TABLE_S1_ACTUATORS.md").read_text(encoding="utf-8")
+    assert "152" in table and "127" in table
+    assert "+0.0683 [+0.0554, +0.0800]" in table
+    assert "-0.4919 [-0.5694, -0.4117]" in table
+    assert "NOT included" in table
     for fig in figs:
         xml = ET.fromstring(fig.read_text(encoding="utf-8"))
         assert xml.tag.endswith("svg")
