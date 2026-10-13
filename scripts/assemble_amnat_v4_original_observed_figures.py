@@ -53,6 +53,8 @@ def assemble(summary:Path, observed:Path, out:Path) -> dict:
                   if kind=="summary" else observed_receipt["svg_sha256"][original])
         if sha(contents)!=expected:
             raise ValueError("Source figure SHA256 changed: "+original)
+        if b"PAYOFF-B" in contents or b"zuizui0223" in contents:
+            raise ValueError("Identifying project/repository text inside reviewed figure")
         image=ET.fromstring(contents)
         if not image.tag.endswith("svg"):
             raise ValueError("Unexpected figure file")
