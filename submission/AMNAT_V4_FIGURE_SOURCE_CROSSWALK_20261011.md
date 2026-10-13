@@ -1,7 +1,7 @@
 # The American Naturalist — Paper 2 main-figure evidence and provenance lock
 
 **Date:** 2026-10-11
-**Status:** proposed four-figure editorial plan only. No publication figures are asserted generated, validated or deposited by this file.
+**Status:** four deterministic, *summary-only* SVG previews implemented on the 2026-10-13 analysis branch; dedicated CI required for verification. **Not** complete publication figures, anonymous reviewer archive, or a full microdata reconstruction.
 **Source:** manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md on PR #326.
 **Journal:** The American Naturalist, Major Article; at most six combined figures/tables in main text. Figure legends generally <=100 words.
 
@@ -18,11 +18,11 @@ Show a biological entry/readiness threshold, the signed phase-error state, route
 
 **What the figure may NOT imply:** direct measurement of an animal's posterior cue belief, true physiological readiness gate, or experimentally identified information value. All q/r routes are schematic or synthetic. In particular, free optional information cannot have negative optimal individual value under unchanged options.
 
-**Renderer state:** no verified final publication file or full legend available on this PR.
+**Renderer:** scripts/build_payoff_b_amnat_v4_summary_figures.py generates a schematic SVG and explicit legend. Preview requires CI verification; no original cue-belief observations.
 
 ## Proposed Figure 2 — Environmental connectivity moved opposite to the registered hypothesis
 
-Display registered earlier/later signed detrended green-up correlations and pair-level change, not a fictitious species-independent sample. Source-range mapping is geographical, not an observed individual's path.
+**Summary-preview rendering:** Show only the frozen mean *change* in signed detrended green-up correlation with its pair-bootstrap interval, separately for unique spatial pairs and equal-species exposure. No early/late raw pair values are reproduced, and no pair-level points or density are invented. Source-range mapping is geographical, not observed individual routes.
 
 **Frozen outcomes:**
 - 166 unique spatial source–target pairs from 28 bird species;
@@ -41,11 +41,11 @@ Display registered earlier/later signed detrended green-up correlations and pair
 
 **Forbidden:** climate change was uniquely responsible for the change; individual birds received better information; cross-site correlation is demonstrated cue calibration.
 
-**Renderer state:** result/analysis source paths established; final figure/checksum unverified.
+**Renderer:** summary-only forest SVG reads the frozen markdown receipt; output checksum must be verified by dedicated CI. Full pair-level figure remains outstanding.
 
 ## Proposed Figure 3 — Transfer to bird matching was unsupported and subject to a structural null
 
-Panels: pair-/species-aware scatter and CI of the registered transfer estimate; overlay fixed-bird-arrival null and the within-window permutation distribution as separate representations.
+**Summary-preview rendering:** Forest plot of the registered transfer coefficient, fixed-arrival null and observed-minus-null increment with separate confidence intervals. The within-window permutation *median and central range* are labelled as a null distribution, not conflated with confidence intervals. No observed pair-level scatter is synthesized.
 
 **Frozen outcomes:**
 - 150 species–target rows, 72 unique environmental pairs, 22 species;
@@ -63,11 +63,11 @@ Panels: pair-/species-aware scatter and CI of the registered transfer estimate; 
 
 **Forbidden:** the positive observed slope establishes worse bird tracking caused by improving predictability, a decline in individual fitness, or failure to perceive better information.
 
-**Renderer state:** final figure/checksum unverified.
+**Renderer:** summary-only forest SVG from two frozen prose receipts; final point-level figure and independent bootstrap reconstruction remain outstanding.
 
 ## Proposed Figure 4 — Same-population mule-deer phase changes and mechanism ceiling
 
-Panels: full 152-animal-year paired start/end signed Days-From-Peak distribution; signed speed and stopover associations; a separate **conservative** predeparture-condition subset (not treated as all 152 records).
+**Summary-preview rendering:** only reported mean absolute start/end phases and two end/start variance-ratio estimates with animal-cluster bootstrap confidence intervals. No paired trajectories, signed scatter, or source-independent uncertainty is manufactured. Original movement/stopover associations and the conservative 62-animal-year readiness subset remain reported numerically in the main text and receipt.
 
 **Frozen descriptive results:**
 - 152 animal-years / 72 adult female deer; variance ratio 0.2489, CI 0.1667 to 0.3617;
@@ -88,7 +88,7 @@ Panels: full 152-animal-year paired start/end signed Days-From-Peak distribution
 
 **Forbidden:** distinct latent cue/response gains separately estimated; IFBFat causally gates reactive phase control; compensation necessarily improved survival/reproduction; original Ortega discovery credited to PAYOFF-B.
 
-**Renderer state:** final figure/checksum unverified.
+**Renderer:** summary-only SVG from the two frozen Ortega JSON receipts, pending dedicated CI. Full individual-level data figure not yet admitted.
 
 ## Prior-art and negative evidence for text/supplement only
 
