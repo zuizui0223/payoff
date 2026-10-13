@@ -19,6 +19,7 @@ No external dependencies are needed for figure rendering. Each output is determi
 - figure3_summary.svg — **registered transfer, fixed-arrival structural null, bird-increment summary estimates, confidence intervals and permutation-interval label**; no pair-level scatter
 - figure4_summary.svg — **means of absolute phase and variance-ratio summaries** in Ortega mule deer; no reconstructed individual tracks
 - LEGENDS.md — figure captions
+- TABLE_S1_ACTUATORS.md — independently sourced numerical descriptive speed/stopover effects with animal-cluster confidence intervals, not a new causal test
 - figure_manifest.json — exact SHA256 of every used repository receipt and generated SVG, as well as negative flags for raw-data inclusion and submission readiness.
 
 These source-bounded views make the paper's numerical logic inspectable without inventing any raw observations.
