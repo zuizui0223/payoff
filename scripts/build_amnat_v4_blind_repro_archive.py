@@ -137,8 +137,8 @@ software permissions, human author approval and a separate anonymous
 data/code sharing endpoint remain outside this package.
 """
 def replay_script():
-    return """#!/bin/sh
-set -eu
+    return """#!/usr/bin/env bash
+set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p outputs/verified/environment outputs/verified/transfer outputs/verified/structural
 cp data/source_input.rds outputs/amaral_final_frozen.rds
