@@ -79,5 +79,5 @@ def test_missing_real_raw_source_fails_before_creating_any_archive(tmp_path):
     orig=tmp_path/"original";orig.mkdir()
     rds=tmp_path/"bad.rds";rds.write_bytes(b"not original data")
     paper=tmp_path/"paper";paper.mkdir()
-    with pytest.raises(ValueError,match="size/Git blob"):
+    with pytest.raises(ValueError,match="SHA or size"):
         build(orig,rds,paper,tmp_path/"new",tmp_path/"new.zip")
