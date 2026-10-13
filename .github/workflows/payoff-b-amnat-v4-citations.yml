@@ -1,0 +1,46 @@
+name: PAYOFF-B AmNat Paper 2 core-citation integrity
+
+on:
+  pull_request:
+    paths:
+      - "manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md"
+      - "submission/AMNAT_V4_REFERENCE_CATALOGUE_20261013.json"
+      - "submission/AMNAT_V4_VERIFIED_LITERATURE_CITED_20261013.md"
+      - "scripts/audit_amnat_v4_literature_cited.py"
+      - "scripts/audit_amnat_v4_review_readiness.py"
+      - "tests/test_amnat_v4_literature_cited.py"
+      - "tests/test_amnat_v4_review_readiness.py"
+      - ".github/workflows/payoff-b-amnat-v4-citations.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core-citation-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install minimal test runner
+        run: python -m pip install "pytest>=8,<10"
+      - name: Check DOI and source-to-body crosswalk
+        run: |
+          python -m pytest -q \
+            tests/test_amnat_v4_literature_cited.py \
+            tests/test_amnat_v4_review_readiness.py
+      - name: Generate audited literature readout
+        run: |
+          mkdir -p outputs/amnat_v4_citation_gate
+          python scripts/audit_amnat_v4_literature_cited.py \
+            --out outputs/amnat_v4_citation_gate/citation_audit.json
+          python scripts/audit_amnat_v4_review_readiness.py \
+            --output outputs/amnat_v4_citation_gate/editorial_hold.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-amnat-v4-20core-citation-receipts-HOLD
+          path: outputs/amnat_v4_citation_gate/
+          if-no-files-found: error
