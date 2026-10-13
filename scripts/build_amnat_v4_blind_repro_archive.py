@@ -67,7 +67,7 @@ def pdf_blind(path):
         safe(text,"PDF rendered text")
         if len(d)<10 or "0.369" not in text or "0.062" not in text:
             raise ValueError("Incomplete scientific manuscript PDF")
-        if len([p for p in d if p.get_images()])<4:
+        if len({img[0] for p in d for img in p.get_images(full=True)})<4:
             raise ValueError("Four images not embedded")
         for p in d:
             for link in p.get_links():
