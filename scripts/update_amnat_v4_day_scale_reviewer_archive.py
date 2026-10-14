@@ -107,7 +107,7 @@ def assemble(base:Path,pdf_artifact:Path,day_outputs:Path,out:Path)->dict:
     add(out,"scripts/reproduce_day_scale.sh",reproduction_command().encode("utf-8"))
 
     for file in DAY_FILES:
-        p=day_outputs/file
+        p=single(day_outputs,file)
         raw=p.read_bytes()
         expected=receipt["original_vs_new_file_checksums"][file]["rerun_sha256"]
         if sha(raw)!=expected:
