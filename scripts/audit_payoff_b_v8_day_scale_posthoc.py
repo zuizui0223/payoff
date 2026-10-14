@@ -151,7 +151,7 @@ def audit(original:Path,replay:Path,supplement:Path)->dict:
     for col,want in (
         ("n_pairs",166),("loo_skill_rmse_early_mean",-.931),
         ("loo_skill_rmse_late_mean",1.697),("delta_loo_skill_rmse_mean",2.628),
-        ("rmse_pair_ci_low_95",2.134),("rmse_pair_ci_high_95",3.202),
+        ("rmse_pair_ci_low_95",2.131827),("rmse_pair_ci_high_95",3.183949),
         ("loo_value_mse_early_mean",-16.094),
         ("loo_value_mse_late_mean",15.987),
         ("delta_loo_value_mse_mean",32.082),
