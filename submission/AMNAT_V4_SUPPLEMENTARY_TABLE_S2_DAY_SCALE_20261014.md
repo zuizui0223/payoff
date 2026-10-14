@@ -13,7 +13,7 @@
 | Fitted in-window residual RMSE (days) | 1.821 | 2.494 | +0.673 | +0.460 to +0.891 |
 | Source-informed leave-one-year-out RMSE (days) | 4.113 | 4.168 | +0.055 | −0.591 to +0.632 |
 | Target-trend-only leave-one-year-out RMSE (days) | 3.182 | 5.865 | +2.683 | +2.342 to +3.013 |
-| Incremental source skill: LOYO no-source RMSE minus source RMSE (days) | −0.931 | +1.697 | +2.628 | +2.134 to +3.202 |
+| Incremental source skill: LOYO no-source RMSE minus source RMSE (days) | −0.931 | +1.697 | +2.628 | +2.132 to +3.184 |
 | Source squared-loss value: LOYO MSE reduction from source (days²) | −16.094 | +15.987 | +32.082 | +21.040 to +46.796 |
 | Bird absolute arrival–green-up mismatch (days; 150 rows, unweighted) | 8.418 | 8.066 | −0.352 | −0.890 to +0.200 |
 
