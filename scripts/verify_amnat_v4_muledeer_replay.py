@@ -50,6 +50,20 @@ CHECKS={
     ],
 }
 
+# The archived interpretation receipt flattens the original raw-source
+# nested fit/bootstrap output for readability. These are equivalent
+# named quantities from the same fixed source, not a model refit.
+REPLAY_CHANNEL_PATHS={
+    "movement_rate.n":"movement_rate.fit.n",
+    "movement_rate.raw.beta_DFP_Start":"movement_rate.fit.raw.beta_DFP_Start",
+    "movement_rate.raw.beta_scaledIFBFat":"movement_rate.fit.raw.beta_scaledIFBFat",
+    "movement_rate.raw_ci95.beta_DFP_Start":"movement_rate.bootstrap.raw_DFP_Start_ci95",
+    "stopover.n":"stopover.fit.n",
+    "stopover.animals":"stopover.bootstrap.unique_animals",
+    "stopover.raw.beta_DFP_Start":"stopover.fit.raw.beta_DFP_Start",
+    "stopover.raw_ci95.beta_DFP_Start":"stopover.bootstrap.raw_DFP_Start_ci95",
+}
+
 
 def path_value(obj:dict,path:str):
     for segment in path.split("."):
@@ -87,7 +101,7 @@ def audit(source:Path,freeze:Path,replayed:Path)->dict:
         a=json.loads((freeze/baseline_name).read_text(encoding="utf-8"))
         b=json.loads((replayed/new_name).read_text(encoding="utf-8"))
         for path in CHECKS[group]:
-            close_value(path_value(a,path),path_value(b,path),group+"."+path)
+            close_value(path_value(a,path),path_value(b,REPLAY_CHANNEL_PATHS.get(path,path) if group=="channels" else path),group+"."+path)
         result["checks"][group]=len(CHECKS[group])
     # A temporary-safe March body-fat measure is NOT a molecular clock.
     channels=json.loads((replayed/FILES["channels"][1]).read_text(encoding="utf-8"))
