@@ -142,14 +142,13 @@ def assemble(base:Path,pdf_artifact:Path,day_outputs:Path,out:Path)->dict:
     old=out/"qc/PDF_39_PAGE_MECHANICAL_QC.json"
     if old.exists():
         old.unlink()
-    add(out,"qc/NEW_DAY_SCALE_PDF_PREFLIGHT.json",(
-      json.dumps({
-       "status":"REVISED_SOURCE_PDF_PREFLIGHT_PASS_HUMAN_REVIEW_HOLD",
-       "revised_pdf_sha256":sha(cleaned),
-       "page_count":pdf_n,
-       "four_original_data_and_summary_figures":True,
-       "full_page_human_visual_approved":False,
-       "manuscript_submission_ready":False},indent=2)+"\n"
+    from scripts.audit_amnat_v4_all_pdf_pages import audit_pdf
+    page_qc=audit_pdf(out/"manuscript/editorial_preview.pdf",out.parent/"page_by_page_visual_previews")
+    if (page_qc["status"]!="PDF_ALL_PAGE_MECHANICAL_PASS_HUMAN_VISUAL_HOLD"
+        or page_qc["pages"]!=pdf_n):
+        raise ValueError("New manuscript does not pass independent all-page PDF QC")
+    add(out,"qc/PDF_ALL_PAGE_SOURCE_QC.json",(
+      json.dumps(page_qc,indent=2,ensure_ascii=False)+"\n"
     ).encode())
 
     original_readme=(out/"README.md").read_text(encoding="utf-8")
@@ -189,6 +188,7 @@ clarification. It is NOT an author-approved journal submission.
        "day_scale_metric_to_bird_matching_direct_transfer_tested":False,
        "supplement_S2_included":True,
        "revised_pdf_sha256":sha(cleaned),
+       "new_pdf_pages_mechanically_verified":pdf_n,
        "full_page_human_visual_approved":False,
        "anonymous_delivery_link_exists":False,
        "journal_submission_ready":False,
