@@ -90,7 +90,8 @@ def audit(source:Path,freeze:Path,replayed:Path)->dict:
             close_value(path_value(a,path),path_value(b,path),group+"."+path)
         result["checks"][group]=len(CHECKS[group])
     # A temporary-safe March body-fat measure is NOT a molecular clock.
-    if int(path_value(a if group=="channels" else b,"safe_joined_rows"))!=62:
+    channels=json.loads((replayed/FILES["channels"][1]).read_text(encoding="utf-8"))
+    if int(channels["safe_joined_rows"])!=62:
         raise ValueError("Unsafe March-migration sample drift")
     return result
 
