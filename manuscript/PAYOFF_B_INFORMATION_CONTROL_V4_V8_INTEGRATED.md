@@ -624,7 +624,7 @@ Yet source-informed leave-one-year-out RMSE did **not** clearly change:
 increased from 3.182 to 5.865 days. Relative held-out source-forecast
 skill, measured as RMSE without source minus RMSE with source, rose
 from -0.931 to +1.697 days (change +2.628 days; pair-bootstrap
-interval +2.134 to +3.202). Therefore stronger standardized coupling
+interval +2.132 to +3.184). Therefore stronger standardized coupling
 coexisted with larger in-window residual error and a substantial
 increase in the *relative* predictive value of the source against a
 more volatile destination baseline. These are statistical source-cue
