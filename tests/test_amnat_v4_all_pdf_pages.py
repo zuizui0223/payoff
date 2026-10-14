@@ -23,7 +23,7 @@ def make_pdf(dest, pages=31, blank_page=None, identity=False, images=4):
                     "for independent quality checking.\n"
                 ) if i==0 else ("Unrelated section "+str(i)+": scientific discussion text "*3)
                 if identity and i==4:
-                    text+=" PAYOFF-B"
+                    text="PAYOFF-B "+text
                 page.insert_text((80,100),text[:150],fontsize=11)
             if 1<=i<=images:
                 im=Image.new("RGB",(12,12),(30*i,10*i,50*i))
