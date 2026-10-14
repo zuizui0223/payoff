@@ -14,8 +14,10 @@ signed timing error. In a prospectively specified analysis of migratory
 birds, signed detrended source–destination green-up correlation increased
 from 2002–2009 to 2010–2017 across 166 unique spatial pairs used by 28
 species (mean change +0.369; 95% pair-bootstrap confidence interval +0.298
-to +0.436). Larger connectivity increases did not predict the
-prespecified reduction in arrival–green-up mismatch (coefficient +0.062;
+to +0.436). Post hoc checks found higher day-scale in-window
+errors but no clear change in leave-one-year-out source-forecast RMSE
+despite nearly doubled destination variability. Larger connectivity
+increases did not predict the prespecified reduction in arrival–green-up mismatch (coefficient +0.062;
 95% interval -0.014 to +0.136), and structural nulls reproduced the
 apparent positive slope. An independent descriptive reconstruction of
 mule-deer data found phase convergence through migration and signed
@@ -497,6 +499,31 @@ analyses were sensitivities. This design assesses change in an
 environmental relationship; it cannot establish any individual's
 information use.
 
+After the preregistered correlation outcome was known, we conducted a
+**post hoc, outcome-informed metric-scale diagnostic** using exactly the
+same 166 unique spatial pairs and two fixed windows (Supplementary Table
+S2). Within each window, source and target green-up dates were separately
+detrended against calendar year; their residual anomalies were used to
+estimate destination residual SD (days), source-to-target anomaly slope,
+(R^2), and in-window regression residual RMSE (days). Because fitting
+and evaluating in the same six-to-eight-year window is optimistic, a
+separate leave-one-year-out (LOYO) check refitted *both* temporal trends
+and the source-to-target anomaly regression without the held-out
+calendar year. We compared the held-out source-informed RMSE with the
+held-out destination-trend-only baseline, reporting both absolute
+error and the incremental reduction in RMSE or mean squared error from
+adding source information. Summaries are means of pair-specific
+diagnostics, not RMSE pooled across all individual observations.
+Intervals were recalculated by 10,000 spatial-pair bootstrap
+resamples, with source/target-cluster and 5-/10-degree spatial-block
+checks. A post hoc day-scale arrival–green-up-mismatch summary used the
+same 150 species–target rows admitted to the registered downstream
+transfer; its scale-specific results were not promoted to a new
+preregistered hypothesis. LOYO is retrospective statistical
+cross-validation using contemporaneous source observations; it does
+**not** show that those source observations or fitted regression
+parameters were available to birds before departure.
+
 ### 3.2 From environmental correlation to observed arrival–green-up mismatch
 
 The registered secondary transfer analysis used the frozen environmental
@@ -583,6 +610,29 @@ leave-one-species-out sensitivities all retained the positive direction.
 Thus broad degradation of this environmental predictive coordinate is not
 supported in the sampled system.
 
+The **post hoc day-scale diagnostic** reveals why the direction of the
+correlation result cannot be equated with an improvement in absolute
+forecast accuracy (Supplementary Table S2). Mean destination
+green-up anomaly SD increased from 2.412 to 4.662 days, while the
+mean fitted source-to-target slope rose from 0.399 to 0.640.
+In-window residual RMSE also increased, from 1.821 to 2.494 days
+(mean pairwise change +0.673 days; 95% pair-bootstrap interval
++0.460 to +0.891; the 10-degree spatial-block interval included zero).
+Yet source-informed leave-one-year-out RMSE did **not** clearly change:
+4.113 versus 4.168 days (change +0.055 days; 95% pair interval
+-0.591 to +0.632). In contrast, the target-trend-only held-out RMSE
+increased from 3.182 to 5.865 days. Relative held-out source-forecast
+skill, measured as RMSE without source minus RMSE with source, rose
+from -0.931 to +1.697 days (change +2.628 days; pair-bootstrap
+interval +2.134 to +3.202). Therefore stronger standardized coupling
+coexisted with larger in-window residual error and a substantial
+increase in the *relative* predictive value of the source against a
+more volatile destination baseline. These are statistical source-cue
+diagnostics, not animal-perceived forecasts. The destination SD
+increase did not *cause* the correlation increase, because correlation
+is scale invariant. All day-scale analyses were defined after
+the V8 primary result was opened and remain exploratory.
+
 We then tested whether larger gains in predictive connectivity were associated
 with larger reductions in realized arrival–green-up mismatch over the same
 period. The frozen transfer analysis retained 150 species-target rows, 72
@@ -595,7 +645,14 @@ direction, the equal-species-weighted coefficient was
 
 with 95% unique-pair bootstrap CI (-0.0141, +0.1363). The sample also showed no
 clear overall change in log mismatch: the equal-species mean late-minus-early
-change was -0.0203 (95% CI -0.0900 to +0.0512).
+change was -0.0203 (95% CI -0.0900 to +0.0512). On the separate
+**post hoc absolute-day scale**, the unweighted mean arrival–green-up
+difference was 8.418 versus 8.066 days (late-minus-early change
+-0.352 days, 95% pair interval -0.890 to +0.200). Although one
+equal-species day-scale summary was slightly negative, its support was
+scale-dependent and was not part of the frozen analysis. Thus the
+descriptive data do not establish a consistent deterioration in bird
+timing despite the greater variance of spring green-up.
 
 The positive transfer point estimate is not interpreted as a biological
 worsening response. Holding each species-target bird arrival date fixed while
@@ -825,6 +882,16 @@ The main conceptual change is to separate the quality of the environmental
 signal from the organism's capacity to act on it. In the V8 stress test,
 detrended source–destination spring *correlation* becomes stronger rather than
 weaker, yet the preregistered improvement in bird mismatch is not detected.
+Day-scale post hoc diagnostics make the distinction sharper:
+in-window residual errors increased while leave-one-year-out
+source-informed error changed little, and the relative advantage of
+including the source rose against a strongly worsening no-source
+baseline. Thus standardized correlation, absolute error and
+incremental forecast skill are not interchangeable measures of
+predictability. Importantly, the registered correlation-to-mismatch
+test is **not** a separate direct test that changes in day-scale
+LOYO RMSE or squared-error skill predict bird matching; such a claim
+would require a distinct, explicitly exploratory transfer model.
 This does not show that birds received more useful information: cue
 availability, belief calibration, individual routes and actionability were not
 observed in V8. It therefore fails the registered correlation-to-matching
