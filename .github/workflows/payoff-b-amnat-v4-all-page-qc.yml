@@ -1,0 +1,74 @@
+name: AmNat Paper 2 every-page PDF mechanical and visual-contact-sheet QC
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-amnat-v4-deer-pdf-review-gates-20261014
+    paths:
+      - "scripts/audit_amnat_v4_all_pdf_pages.py"
+      - "tests/test_amnat_v4_all_pdf_pages.py"
+      - ".github/workflows/payoff-b-amnat-v4-all-page-qc.yml"
+  pull_request:
+    paths:
+      - "scripts/audit_amnat_v4_all_pdf_pages.py"
+      - "tests/test_amnat_v4_all_pdf_pages.py"
+      - ".github/workflows/payoff-b-amnat-v4-all-page-qc.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  inspect-all-39-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install PDF and thumbnail auditing dependencies
+        run: |
+          python -m pip install "pytest>=8,<10" "PyMuPDF>=1.24" "Pillow>=11"
+      - name: Exercise page, figure, identity and blank-page guards on test PDFs
+        run: python -m pytest -q tests/test_amnat_v4_all_pdf_pages.py
+      - name: Obtain previously certified original-data anonymous PDF candidate ZIP
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38418850789
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: AmNat-Paper2-ANONYMOUS-DATA-CODE-PDF-ZIP-INTERNAL-NOT-DEPOSITED
+          path: inputs/verified_archive
+      - name: Verify exact original author-anonymous inner ZIP identity
+        run: |
+          echo "1f1e6036871a75c60ff9f9a21df401409ac3b3f6e69b3e91bc4d05859874ec53  inputs/verified_archive/Paper2_anonymous_source_REVIEW_CANDIDATE.zip" | sha256sum --check
+          mkdir -p outputs/source_contents
+          unzip -q inputs/verified_archive/Paper2_anonymous_source_REVIEW_CANDIDATE.zip -d outputs/source_contents
+      - name: Raster EVERY PDF page, create ordered contact sheets and test layout/identity
+        run: |
+          python scripts/audit_amnat_v4_all_pdf_pages.py \
+            --pdf outputs/source_contents/manuscript/editorial_preview.pdf \
+            --output outputs/amnat_v4_full_pdf_page_qc
+      - name: Assert preview-only status and exactly 39 rendered pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          p=Path("outputs/amnat_v4_full_pdf_page_qc")
+          r=json.loads((p/"PDF_ALL_PAGE_AUDIT.json").read_text())
+          assert r["status"]=="PDF_ALL_PAGE_MECHANICAL_PASS_HUMAN_VISUAL_HOLD"
+          assert r["pages"]==39
+          assert r["embedded_image_xrefs"]==4
+          assert len(list(p.glob("page_*.png")))==39
+          assert len(list(p.glob("contact_sheet_*.png")))==4
+          assert r["human_visual_approval"] is False
+          assert r["journal_submission_ready"] is False
+          print("39/39 PDF PAGES MECHANICALLY REVIEWED / HUMAN VISUAL QA STILL REQUIRED")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AmNat-Paper2-39-PAGES-contact-sheets-ALL-PAGE-QC-PREVIEW
+          path: outputs/amnat_v4_full_pdf_page_qc/
+          if-no-files-found: error
