@@ -1,0 +1,113 @@
+name: Paper 2 reviewer source archive with published mule-deer input and source replay
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-amnat-v4-deer-pdf-review-gates-20261014
+    paths:
+      - ".github/workflows/payoff-b-amnat-v4-deer-source-archive.yml"
+      - "scripts/build_amnat_v4_deer_source_addendum.py"
+      - "scripts/verify_amnat_v4_muledeer_replay.py"
+      - "tests/test_amnat_v4_deer_source_addendum.py"
+  pull_request:
+    paths:
+      - ".github/workflows/payoff-b-amnat-v4-deer-source-archive.yml"
+      - "scripts/build_amnat_v4_deer_source_addendum.py"
+      - "scripts/verify_amnat_v4_muledeer_replay.py"
+      - "tests/test_amnat_v4_deer_source_addendum.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  deer-source-and-frozen-science-reproduction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install reproducibility test runner
+        run: python -m pip install "pytest>=8,<10"
+      - name: Test source licensing / original-script anonymization / science outcome gates
+        run: python -m pytest -q tests/test_amnat_v4_deer_source_addendum.py
+      - name: Restore EXACT V8 full source/code/PDF anonymous candidate
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38418850789
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: AmNat-Paper2-ANONYMOUS-DATA-CODE-PDF-ZIP-INTERNAL-NOT-DEPOSITED
+          path: inputs/v8_anonymous
+      - name: Restore all-page mechanical manuscript QC receipt
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38565866858
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: AmNat-Paper2-39-PAGES-contact-sheets-ALL-PAGE-QC-PREVIEW
+          path: inputs/pdf_qc
+      - name: Download only the public Nature Communications source workbook with SHA256 gate
+        run: |
+          mkdir -p inputs/published_deer
+          curl --fail --location --retry 3 --max-time 180 \
+            "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-023-37750-z/MediaObjects/41467_2023_37750_MOESM4_ESM.xlsx" \
+            -o inputs/published_deer/mule_deer_source.xlsx
+          echo "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364  inputs/published_deer/mule_deer_source.xlsx" | sha256sum --check
+      - name: Attach published deer source and original neutralized Python analyses to anonymous V8 archive
+        run: |
+          python -m scripts.build_amnat_v4_deer_source_addendum prepare \
+            --base-zip inputs/v8_anonymous/Paper2_anonymous_source_REVIEW_CANDIDATE.zip \
+            --source-xlsx inputs/published_deer/mule_deer_source.xlsx \
+            --pdf-qc inputs/pdf_qc/PDF_ALL_PAGE_AUDIT.json \
+            --output outputs/review_with_deer
+      - name: Reproduce three archived Ortega source-data outcomes with unchanged numerical analysis
+        run: |
+          cd outputs/review_with_deer
+          bash scripts/reproduce_mule_deer.sh
+      - name: Promote the new ZIP only after reproduced results and PDF integrity pass
+        run: |
+          python -m scripts.build_amnat_v4_deer_source_addendum finish \
+            --input outputs/review_with_deer \
+            --zip outputs/Paper2_ANONYMOUS_V8_DEER_SCIENCE_REVIEW_CANDIDATE.zip \
+            --receipt outputs/INTERNAL_deer_plus_v8_source_receipt.json
+      - name: Confirm reference data, true numerical replication, author anonymity and editorial HOLD
+        run: |
+          python - <<'PY'
+          import json,zipfile,hashlib
+          from pathlib import Path
+          archive=Path("outputs/Paper2_ANONYMOUS_V8_DEER_SCIENCE_REVIEW_CANDIDATE.zip")
+          receipt=json.loads(Path("outputs/INTERNAL_deer_plus_v8_source_receipt.json").read_text())
+          assert receipt["status"]=="SOURCE_VERIFIED_V8_AND_DEER_ANONYMOUS_CANDIDATE_EDITORIAL_HOLD"
+          assert receipt["mule_deer_original_source_analysis_reproduced"]
+          assert not receipt["journal_submission_ready"]
+          with zipfile.ZipFile(archive) as z:
+            names=z.namelist()
+            assert "data/mule_deer_source_data.xlsx" in names
+            assert "scripts/source_workbook_reader.py" in names
+            assert "scripts/animal_phase_variance.py" in names
+            assert "scripts/animal_readiness.py" in names
+            assert "scripts/animal_phase_channels.py" in names
+            assert "scripts/reproduce_mule_deer.sh" in names
+            assert "qc/PDF_39_PAGE_MECHANICAL_QC.json" in names
+            assert "qc/MULE_DEER_SOURCE_REPRODUCTION.json" in names
+            manifest=json.loads(z.read("MANIFEST.json"))
+            assert manifest["mule_deer_replay_verified"]
+            assert manifest["status"]=="V8_AND_MULE_DEER_SCIENTIFIC_REPLAY_VERIFIED_EDITORIAL_HOLD"
+            assert manifest["journal_submission_ready"] is False
+            assert hashlib.sha256(z.read("data/mule_deer_source_data.xlsx")).hexdigest()=="2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364"
+          print("V8 + PUBLISHED MULE DEER SOURCE / ANONYMOUS REPLAY: PASS")
+          print("NO HUMAN ALL-PAGE VISUAL APPROVAL OR JOURNAL SUBMISSION")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Paper2-ANONYMOUS-V8-DEER-SOURCE-SCIENCE-REPRO-CANDIDATE-HOLD
+          path: |
+            outputs/Paper2_ANONYMOUS_V8_DEER_SCIENCE_REVIEW_CANDIDATE.zip
+            outputs/INTERNAL_deer_plus_v8_source_receipt.json
+            outputs/review_with_deer/outputs/deer/verified_deer.json
+          if-no-files-found: warn
