@@ -146,7 +146,7 @@ def prepare(base_zip:Path,six:Path,spatial:Path,pdf_root:Path,dest:Path,
     import pymupdf
     with pymupdf.open(stream=cleaned,filetype="pdf") as paper:
         page_count=len(paper)
-        extracted=" ".join(p.get_text() for p in paper)
+        extracted=re.sub(r"\s+"," "," ".join(p.get_text() for p in paper))
         for needle in ("Supplementary Table S3", "0.1504", "bird-specific",
                        "2.412","4.662"):
             if needle not in extracted:
