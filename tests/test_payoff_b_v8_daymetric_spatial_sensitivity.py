@@ -20,7 +20,7 @@ def test_fixed_four_groupings_and_all_six_fixed_slopes():
     assert "nrow(pairs)!=166L" in s
     assert "length(unique(bird$pair_key))!=72L" in s
     assert "original all-sample slope" in s.lower() or "original opened six-slope result" in s
-    assert "after the six first-stage slopes became known" in c.lower()
+    assert "six exploratory point coefficients" in c.lower() and "were already opened" in c.lower()
     assert "Post-outcome" in c
 
 
@@ -32,7 +32,6 @@ def test_no_silent_significance_fishing_or_structural_null_removal():
     assert "ci_low_95" in s
     assert "n_original_environment_pairs=72L" in s
     assert '"bird_increment"' in s
-    assert "original registered" not in s or "original registered" in s
     assert "all_sensitivity" in s
     assert "leave_one_unit_out_all_564_slopes.csv" in s
     assert "stop(" in s
