@@ -39,6 +39,8 @@ However, it is **not valid** to equate this with proof that neither metric affec
 
 The one nominally nonzero slope among six belongs to the **fixed-arrival null**, which supports the warning that apparently significant environment-to-mismatch correlations can arise without any bird timing adjustment. Because multiple exploratory contrasts were examined, the interval excluding zero must not be treated as independent confirmatory discovery.
 
+There is also no contradiction between the earlier period's negative observed LOYO source-forecast skill and the standard theorem that **free, optional information cannot reduce optimal expected decision payoff** when feasible actions and other agents' strategies are fixed. The negative LOYO value evaluates a finite-sample fitted regression as a **specified forecasting procedure**; it does not give the actor the costless choice to disregard an unreliable added cue and revert optimally to the baseline. Model estimation, overfitting and forecast calibration can therefore make a particular held-out predictor worse while ideal optional information retains nonnegative value.
+
 Critically, the predictors are based on retrospective leave-one-year-out forecasting using environmental data, **not demonstrated cues observed by a bird before departure**. The response is a phenological timing difference, **not survival, fecundity or fitness regret**. A fixed-arrival structural null controls one form of shared target-green-up geometry but not every unmeasured environmental or behavioral confounder.
 
 ## Publication decision
