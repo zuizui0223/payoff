@@ -86,6 +86,10 @@ def s3_supplement() -> str:
     if "**Source and provenance:**" not in source:
         raise ValueError("S3 editorial statement missing source/analysis distinction")
     science=source.split("**Source and provenance:**",1)[0].strip()
+    science=science.replace(
+        "`docs/PAYOFF_B_V8_DAYMETRIC_BIRD_TRANSFER_EXPLORATORY_LOCK_20261015.md`",
+        "the prespecified-within-exploration analysis contract"
+    )
     if ("−0.064456" not in science or "−0.055101" not in science
             or "POST-OUTCOME" not in science):
         raise ValueError("Complete registered S3 scientific cells absent")
