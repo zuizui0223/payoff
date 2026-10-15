@@ -1,0 +1,192 @@
+name: PAYOFF-B Paper 2 S3 source-replayed anonymous PDF and archive
+
+on:
+  push:
+    branches: [analysis/payoff-b-v8-daymetric-to-bird-exploratory-20261015]
+    paths:
+      - manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md
+      - submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S3_DAY_TRANSFER_20261015.md
+      - docs/PAYOFF_B_V8_DAYMETRIC_SPATIAL_SENSITIVITY_RESULT_20261015.md
+      - scripts/build_amnat_v4_s3_anon_review_archive.py
+      - scripts/verify_amnat_s3_exploratory_replay.py
+      - tests/test_build_amnat_v4_s3_anon_review_archive.py
+      - .github/workflows/payoff-b-amnat-v4-s3-review-packet.yml
+  pull_request:
+    paths:
+      - manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md
+      - submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S3_DAY_TRANSFER_20261015.md
+      - docs/PAYOFF_B_V8_DAYMETRIC_SPATIAL_SENSITIVITY_RESULT_20261015.md
+      - scripts/build_amnat_v4_s3_anon_review_archive.py
+      - scripts/verify_amnat_s3_exploratory_replay.py
+      - tests/test_build_amnat_v4_s3_anon_review_archive.py
+      - .github/workflows/payoff-b-amnat-v4-s3-review-packet.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: payoff-b-s3-archive-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  source-replayed-blinded-editorial-pdf-and-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install minimal scientific archive, plotting and PDF checks
+        run: python -m pip install "pytest>=8,<10" "CairoSVG>=2.7" "PyMuPDF>=1.24" "Pillow>=11"
+      - name: Ensure all revised scientific/citation/S3 identity gates pass
+        run: |
+          python -m pytest -q \
+            tests/test_build_amnat_v4_s3_anon_review_archive.py \
+            tests/test_amnat_v4_review_readiness.py \
+            tests/test_amnat_v4_anonymous_preview.py \
+            tests/test_payoff_b_amnat_v4_summary_figures.py
+          python scripts/audit_amnat_v4_review_readiness.py \
+            --output outputs/reviewer_readiness_HOLD.json
+      - name: Regenerate frozen theory and deer summaries
+        run: python scripts/build_payoff_b_amnat_v4_summary_figures.py --out outputs/summary_source
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 38405925813
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-v8-original-166-pair-150-target-figures-NONANON-PREVIEW
+          path: inputs/real_figures
+      - name: Assemble Figure 2 and Figure 3 from real, verified observation rows
+        run: |
+          python -m scripts.assemble_amnat_v4_original_observed_figures \
+            --summary outputs/summary_source --observed inputs/real_figures \
+            --out outputs/real_four_figures
+      - name: Install the previously verified mathematical manuscript TeX stack
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            pandoc lmodern texlive-xetex texlive-latex-recommended \
+            texlive-latex-extra texlive-fonts-recommended
+      - name: Build the LATEST anonymous manuscript with S3 and exact real-point figures
+        run: |
+          python scripts/build_amnat_v4_anonymous_preview.py \
+            --out outputs/new_paper/manuscript_anonymous.md \
+            --figures-dir outputs/real_four_figures \
+            --receipt outputs/new_paper/source_identity_receipt.json
+          pandoc -s \
+            -f 'markdown+tex_math_single_backslash+tex_math_double_backslash+tex_math_dollars' \
+            outputs/new_paper/manuscript_anonymous.md \
+            --pdf-engine=xelatex \
+            --resource-path=outputs/new_paper \
+            -V geometry:margin=1in -V fontsize=12pt \
+            -H submission/AMNAT_V4_ANON_PREVIEW_HEADER_20261013.tex \
+            -o outputs/new_paper/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf
+          python scripts/audit_amnat_v4_anonymous_pdf_preview.py \
+            --pdf outputs/new_paper/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf \
+            --out outputs/new_paper/PDF_SOURCE_PREFLIGHT_HOLD.json \
+            --png-dir outputs/new_paper/selected_page_previews
+      - name: Authenticate the exact three previous science artifacts and their GitHub ZIP digests
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json,os
+          from urllib.request import Request,urlopen
+          sources=(
+            (38673786503,11945412800,"Paper2-ANONYMOUS-V8-DEER-DAY-S2-41PAGE-REPRO-EDITORIAL-HOLD","e6374368542c914d972258ff1beab46d9552d4ac7c68d19989bbecc5e2ea8a89"),
+            (38672782848,11945021036,"PAYOFF-B-V8-POSTHOC-day-metric-bird-transfer-6-SLOPES-NONCONFIRMATORY","7c088320768fd89b4ee3853467cb75ae2dc521fe5df418e495916cb22885e3e8"),
+            (38697479092,11954737468,"PAYOFF-B-V8-daymetric-4-SPATIAL-dependence-sensitivities-AFTER-OUTCOME","fd14cb580a7fb4e952747663e56d1158a2f7917f9e18f175fb2e3ce292d9bfbb"),
+          )
+          for run,artifact_id,name,digest in sources:
+            url=f"https://api.github.com/repos/zuizui0223/payoff/actions/runs/{run}/artifacts"
+            request=Request(url,headers={"Authorization":"Bearer "+os.environ["GH_READ_TOKEN"],
+                            "Accept":"application/vnd.github+json"})
+            with urlopen(request,timeout=60) as response:
+              artifacts=json.load(response)["artifacts"]
+            found=[a for a in artifacts if a["id"]==artifact_id and a["name"]==name
+                   and not a["expired"] and a.get("digest")=="sha256:"+digest]
+            if len(found)!=1:raise SystemExit("FROZEN_ORIGINAL_SCIENTIFIC_ARTIFACT_CHANGED")
+            print("VERIFIED_ORIGINAL",run,artifact_id)
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 38673786503
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: Paper2-ANONYMOUS-V8-DEER-DAY-S2-41PAGE-REPRO-EDITORIAL-HOLD
+          path: inputs/base_60_file_review
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 38672782848
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: PAYOFF-B-V8-POSTHOC-day-metric-bird-transfer-6-SLOPES-NONCONFIRMATORY
+          path: inputs/original_six_model
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 38697479092
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: PAYOFF-B-V8-daymetric-4-SPATIAL-dependence-sensitivities-AFTER-OUTCOME
+          path: inputs/original_spatial
+      - name: Assemble scientific raw-source, S2/S3, 6+24 exploratory contrasts and updated anonymous PDF
+        run: |
+          count=$(find inputs/base_60_file_review -type f -name 'Paper2_Anonymous_V8_Deer_DayScale_REVIEW_CANDIDATE.zip' | wc -l)
+          test "$count" -eq 1
+          base=$(find inputs/base_60_file_review -type f -name 'Paper2_Anonymous_V8_Deer_DayScale_REVIEW_CANDIDATE.zip')
+          python -m scripts.build_amnat_v4_s3_anon_review_archive prepare \
+            --base-zip "$base" \
+            --six inputs/original_six_model \
+            --spatial inputs/original_spatial \
+            --pdf outputs/new_paper \
+            --out outputs/anon_science_s3 \
+            --page-previews outputs/latest_all_pdf_pages
+      - name: Independently replay the anonymized S3 scientific R code and compare ALL original draws
+        run: |
+          cd outputs/anon_science_s3
+          bash scripts/reproduce_s3.sh
+      - name: Final source-blinded package ONLY after exact six and spatial model replay
+        run: |
+          python -m scripts.build_amnat_v4_s3_anon_review_archive finish \
+            --root outputs/anon_science_s3 \
+            --zip outputs/Paper2_Anonymous_V8_Deer_S2_S3_REVIEW_CANDIDATE.zip \
+            --receipt outputs/INTERNAL_S3_review_receipt.json
+          python - <<'PY'
+          import json,zipfile
+          from pathlib import Path
+          r=json.loads(Path("outputs/INTERNAL_S3_review_receipt.json").read_text())
+          assert r["status"]=="VERIFIED_S3_SCIENTIFIC_REPLAY_AND_ANONYMOUS_PDF_EDITORIAL_HOLD"
+          assert r["six_slopes_original_and_replay_matched"]
+          assert r["spatial_sensitivity_and_564_leave_one_out_matched"]
+          assert not r["full_page_human_visual_approved"]
+          assert not r["journal_submitted"]
+          with zipfile.ZipFile("outputs/Paper2_Anonymous_V8_Deer_S2_S3_REVIEW_CANDIDATE.zip") as f:
+            names=set(f.namelist())
+            for required in (
+              "data/source_input.rds","data/mule_deer_source_data.xlsx",
+              "supplementary/Table_S2_day_scale.md",
+              "supplementary/Table_S3_day_metric_bird_transfer.md",
+              "analysis/seasonal_v8_daymetric_bird_transfer_exploratory.R",
+              "analysis/seasonal_v8_daymetric_spatial_sensitivity_posthoc.R",
+              "scripts/reproduce_s3.sh","qc/S3_EXPLORATORY_SOURCE_REPLAY.json",
+              "qc/PDF_ALL_PAGE_SOURCE_QC.json","manuscript/editorial_preview.pdf"):
+              assert required in names,required
+            assert len(names)>=75,len(names)
+          print("S3 SOURCE REPLAY + ANONYMOUS REVISED PDF PASS; JOURNAL SUBMISSION HOLD")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Paper2-S3-ANON-SOURCE-REPLAYED-PDF-and-SPATIAL-SUPPLEMENT-HOLD
+          path: |
+            outputs/Paper2_Anonymous_V8_Deer_S2_S3_REVIEW_CANDIDATE.zip
+            outputs/INTERNAL_S3_review_receipt.json
+            outputs/new_paper/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf
+            outputs/latest_all_pdf_pages/contact_sheet_*.png
+          if-no-files-found: warn
