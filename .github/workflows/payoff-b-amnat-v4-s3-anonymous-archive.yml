@@ -1,0 +1,194 @@
+name: Paper 2 S3 source-verified anonymous editorial PDF and reproduction
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-v8-daymetric-to-bird-exploratory-20261015
+    paths:
+      - ".github/workflows/payoff-b-amnat-v4-s3-anonymous-archive.yml"
+      - "manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md"
+      - "submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S3_DAY_TRANSFER_20261015.md"
+      - "scripts/build_amnat_v4_s3_blinded_repro_archive.py"
+      - "tests/test_amnat_v4_s3_blinded_repro_archive.py"
+  pull_request:
+    paths:
+      - ".github/workflows/payoff-b-amnat-v4-s3-anonymous-archive.yml"
+      - "manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md"
+      - "submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S3_DAY_TRANSFER_20261015.md"
+      - "scripts/build_amnat_v4_s3_blinded_repro_archive.py"
+      - "tests/test_amnat_v4_s3_blinded_repro_archive.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  independently-anonymize-and-replay-postoutcome-s3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test, PDF, raster and anonymous figure dependencies
+        run: |
+          python -m pip install "pytest>=8,<10" "CairoSVG>=2.7" "PyMuPDF>=1.24" "Pillow>=11"
+      - name: Check all six posthoc contrasts, independent spatial units and anonymization contract
+        run: |
+          python -m pytest -q \
+            tests/test_amnat_v4_s3_blinded_repro_archive.py \
+            tests/test_amnat_v4_review_readiness.py \
+            tests/test_amnat_v4_literature_cited.py \
+            tests/test_payoff_b_v8_daymetric_bird_transfer_exploratory.py \
+            tests/test_payoff_b_v8_daymetric_spatial_sensitivity.py
+      - name: Verify source ZIPs are original and unexpired with their original GitHub archive digest
+        env:
+          GH_AUDIT_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json,os
+          from urllib.request import urlopen,Request
+          cases=(
+            (38672109932,11944444853,
+             "Paper2-ANONYMOUS-V8-DEER-DAY-S2-41PAGE-REPRO-EDITORIAL-HOLD",
+             "dab67540987b070f6830d9b5cc2fb7db9f15e88ea9bf547fa82fbd0e1bc84b04"),
+            (38697912433,11954773282,
+             "PAYOFF-B-V8-POSTHOC-day-metric-bird-transfer-6-SLOPES-NONCONFIRMATORY",
+             "348e0b3a695bdf9bb83d863424ea7cb231ff8c29f014d0ff4ad1230bfddcc5b6"),
+            (38697912354,11954397598,
+             "PAYOFF-B-V8-daymetric-4-SPATIAL-dependence-sensitivities-AFTER-OUTCOME",
+             "bf8fc31545687374abd0f2f38e3f3ea0c6dc3492eaff37f1045fa0eab141837a"),
+          )
+          for run,id_,name,h in cases:
+            uri=f"https://api.github.com/repos/zuizui0223/payoff/actions/runs/{run}/artifacts"
+            request=Request(uri,headers={
+              "Authorization":"Bearer "+os.environ["GH_AUDIT_TOKEN"],
+              "Accept":"application/vnd.github+json",
+            })
+            with urlopen(request,timeout=60) as fp: rec=json.load(fp)
+            matched=[a for a in rec["artifacts"] if
+                     a["id"]==id_ and a["name"]==name and
+                     a.get("digest")=="sha256:"+h and not a["expired"]]
+            if len(matched)!=1: raise SystemExit("S3 original source mismatch: "+str(run))
+            print("S3_FROZEN_ORIGINAL_ARCHIVE",run,id_)
+          PY
+      - name: Restore immutable 58-file V8/deer/day-scale S2 archive
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38672109932
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: Paper2-ANONYMOUS-V8-DEER-DAY-S2-41PAGE-REPRO-EDITORIAL-HOLD
+          path: inputs/reviewer_base
+      - name: Restore all original six postoutcome regressions and 10k unique-pair bootstrap
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38697912433
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: PAYOFF-B-V8-POSTHOC-day-metric-bird-transfer-6-SLOPES-NONCONFIRMATORY
+          path: inputs/six
+      - name: Restore all spatial sensitivity bootstraps, 10-degree nonestimability and 564 deletion fits
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38697912354
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: PAYOFF-B-V8-daymetric-4-SPATIAL-dependence-sensitivities-AFTER-OUTCOME
+          path: inputs/spatial
+      - name: Produce four source-bounded paper figures from preregistered V8 and deer receipts
+        run: |
+          python scripts/build_payoff_b_amnat_v4_summary_figures.py \
+            --out outputs/summary_figure_source
+      - name: Restore 166 actual geographic pairs / 150 actual bird-target observed points
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38405925813
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-v8-original-166-pair-150-target-figures-NONANON-PREVIEW
+          path: inputs/verified_data_figures
+      - name: Assemble figure 1 and 4 plus true original-point 2 and 3 with source SHA checks
+        run: |
+          python -m scripts.assemble_amnat_v4_original_observed_figures \
+            --summary outputs/summary_figure_source \
+            --observed inputs/verified_data_figures \
+            --out outputs/four_source_figures
+      - name: Install double-spaced page/line-numbered anonymous PDF typesetting
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            pandoc lmodern texlive-xetex texlive-latex-recommended \
+            texlive-latex-extra texlive-fonts-recommended
+      - name: Author current anonymous manuscript preview with all four authenticated SVGs
+        run: |
+          python scripts/build_amnat_v4_anonymous_preview.py \
+            --out outputs/fresh_paper/manuscript_anonymous_S3.md \
+            --figures-dir outputs/four_source_figures \
+            --receipt outputs/fresh_paper/source_preview_receipt.json
+          pandoc -s \
+            -f 'markdown+tex_math_single_backslash+tex_math_double_backslash+tex_math_dollars' \
+            outputs/fresh_paper/manuscript_anonymous_S3.md \
+            --pdf-engine=xelatex \
+            --resource-path=outputs/fresh_paper \
+            -V geometry:margin=1in \
+            -V fontsize=12pt \
+            -H submission/AMNAT_V4_ANON_PREVIEW_HEADER_20261013.tex \
+            -o outputs/fresh_paper/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf
+          python scripts/audit_amnat_v4_anonymous_pdf_preview.py \
+            --pdf outputs/fresh_paper/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf \
+            --out outputs/fresh_paper/PDF_SOURCE_PREFLIGHT_HOLD.json \
+            --png-dir outputs/fresh_paper/page_samples
+      - name: Build NEW blinded source archive with S3 but no unverified causal promotion
+        run: |
+          python -m scripts.build_amnat_v4_s3_blinded_repro_archive prepare \
+            --base-zip inputs/reviewer_base/Paper2_Anonymous_V8_Deer_DayScale_REVIEW_CANDIDATE.zip \
+            --six-original inputs/six \
+            --spatial-original inputs/spatial \
+            --paper outputs/fresh_paper \
+            --output outputs/blinded_candidate
+      - name: Independently rerun BOTH anonymized S3 R models and compare 6+24+564 original results
+        run: |
+          cd outputs/blinded_candidate
+          bash scripts/reproduce_s3_exploratory.sh
+      - name: Certify complete S3 output identity and deterministic source archive
+        run: |
+          python -m scripts.build_amnat_v4_s3_blinded_repro_archive finalize \
+            --input outputs/blinded_candidate \
+            --zip outputs/Paper2_V8_Deer_S2_S3_ANONYMOUS_EDITORIAL_CANDIDATE.zip \
+            --receipt outputs/INTERNAL_s3_replay_reviewer_archive_receipt.json
+          python - <<'PY'
+          import json,zipfile
+          from pathlib import Path
+          receipt=json.loads(Path("outputs/INTERNAL_s3_replay_reviewer_archive_receipt.json").read_text())
+          assert receipt["status"]=="V8_DEER_S2_S3_ANONYMOUS_REPRODUCIBILITY_CANDIDATE_EDITORIAL_HOLD"
+          assert receipt["postoutcome_six_models_reproduced"]
+          assert receipt["spatial_four_schemes_reproduced"]
+          assert receipt["new_manuscript_S3_referenced"]
+          assert receipt["underlying_causal_bird_mechanism_identified"] is False
+          assert receipt["anonymous_external_review_link"] is False
+          with zipfile.ZipFile("outputs/Paper2_V8_Deer_S2_S3_ANONYMOUS_EDITORIAL_CANDIDATE.zip") as z:
+            names=z.namelist()
+            assert "supplementary/Table_S3_day_metric_bird_transfer.md" in names
+            assert "scripts/reproduce_s3_exploratory.sh" in names
+            assert "qc/S3_source_science_reproduction.json" in names
+            assert "data/mule_deer_source_data.xlsx" in names
+            assert "data/source_input.rds" in names
+            assert len(names)>=65
+          print("V8 + DEER + S2 + S3 ORIGINAL SOURCE SCIENCE REPRODUCED; JOURNAL HOLD")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Paper2-41plus-PAGES-V8-Deer-S2-S3-POSTHOC-ANON-REPRO-EDITORIAL-HOLD
+          path: |
+            outputs/Paper2_V8_Deer_S2_S3_ANONYMOUS_EDITORIAL_CANDIDATE.zip
+            outputs/INTERNAL_s3_replay_reviewer_archive_receipt.json
+            outputs/blinded_candidate/outputs/s3/S3_reproduction_verified.json
+            outputs/S3_full_page_visual_contact_sheets/contact_sheet_*.png
+          if-no-files-found: warn
