@@ -137,27 +137,79 @@ When direct marginal waiting cost is zero,
 
 Thus the optimum occurs when the relative gain in information value is exactly balanced by the relative loss of remaining actionability.
 
-For exponential learning and exponential actionability loss,
+For exponential learning and exponential actionability loss, let
+\(\alpha>0\), \(\beta>0\), \(\Delta q\geq0\), and
 
 \[
-q(t)=q_0+\Delta q[1-\exp(-\alpha t)]
+q(t)=q_0+\Delta q[1-\exp(-\alpha t)],
+\qquad
+r(t)=\exp(-\beta t).
 \]
 
-and
+The general zero-direct-cost objective is
 
 \[
-r(t)=\exp(-\beta t),
+N(t)=e^{-\beta t}
+\left[A_\infty-D\exp(-\alpha t)\right],
+\quad
+A_\infty=S(q_0+\Delta q)-B,
+\quad
+D=S\Delta q.
 \]
 
-the unique zero-cost optimum is
+When \(A_\infty>0\) and \(\Delta q>0\), maximizing over
+nonnegative waiting times yields
 
 \[
-t^*=\frac{\log(1+\alpha/\beta)}{\alpha}.
+\boxed{
+t^*
+=
+\max\left\{
+0,\,
+\frac{1}{\alpha}
+\log\left[
+\frac{(\alpha+\beta)S\Delta q}
+{\beta[S(q_0+\Delta q)-B]}
+\right]
+\right\}.
+}
 \]
 
-The optimum moves earlier as (\beta) increases. Two actors observing the same environmental-information trajectory can therefore commit at different stages solely because their remaining response options disappear at different rates.
+If \(A_\infty>0\) but \(\Delta q=0\), the optimum is immediate
+commitment (\(t^*=0\)). If \(A_\infty\leq0\), no finite waiting
+time provides a positive gross information return; a zero-payoff
+outside option is preferable. A nonzero direct waiting cost \(C(t)\)
+returns the more general first-order condition above, and the
+closed-form zero-cost expression no longer applies.
 
-A particularly important consequence is that perfect information can be too late. With \(\alpha=\beta=1\), the optimum is \(t^*=\log 2\), where cue accuracy is only \(q=0.75\) in the symmetric witness even though \(q\to1\) later. Better information is not automatically more useful.
+In the **threshold-normalized special case** \(Sq_0=B\)
+(and \(\Delta q>0\)), \(A_\infty=D\), so the interior optimum
+simplifies to
+
+\[
+\boxed{
+t^*_{\rm threshold}
+=
+\frac{\log(1+\alpha/\beta)}{\alpha}.
+}
+\]
+
+Thus the simple optimum depends only on the learning and actionability
+rates **when initial cue value is exactly at the decision threshold**.
+Outside this case, the baseline cue accuracy, final cue improvement and
+relative losses also affect the optimal waiting time. Within the
+positive-return interior regime, faster opportunity decay (larger
+\(\beta\)) shifts the optimum earlier. Actors facing the same cue
+trajectory can therefore commit at different stages if their
+opportunities decay at different rates.
+
+A particularly important consequence is that perfect information can
+arrive too late to be worth using for the focal decision. In the
+symmetric threshold witness \(q_0=1/2\), \(\Delta q=1/2\),
+\(B=S/2\), and \(\alpha=\beta=1\), the optimal waiting time is
+\(\log 2\) and cue accuracy is \(0.75\), although it approaches
+one later. This is an illustration of the specified decision model,
+not a claim that animals' true forecast accuracy has been measured.
 
 In the single-commitment limit, the downstream consequences of waiting can be
 compressed into an effective deadline cost,
@@ -359,7 +411,26 @@ Its reduced post-entry retention is
 \phi_i(1-h_iK_i),
 \]
 
-where \(K_i\) is effective phase information and \(h_i\) is enacted correction.
+Here \(K_i\) is an **effective linear cue-response coefficient**,
+not an observed animal information state, and \(h_i\) is the realized
+correction fraction. The expression is a conditional-mean phase
+**slope**, requiring an unbiased linear observation, a fixed prior mean
+and a mean innovation independent of incoming phase. More generally, if
+a posterior estimate is \(m+K_i(z-m)\), and enacted correction is
+\(u=h_i[m+K_i(z-m)]\), then
+
+\[
+E[e_{i,k+1}\mid e_{i,k}]
+=
+\phi_i(1-h_iK_i)e_{i,k}
+-
+\phi_i h_i(1-K_i)m
++
+E[w_{i,k}\mid e_{i,k}].
+\]
+
+The additive intercept need not vanish, so \(\lambda_i\) alone cannot
+identify \(K_i\) or \(h_i\).
 For a serial entry gate, \(h_i=O_i g_i\): readiness has already been crossed,
 while remaining opportunity \(O_i\) and decision gain \(g_i\) govern later
 correction. Here \(O_i\) is the actuator-specific realization of the retained
