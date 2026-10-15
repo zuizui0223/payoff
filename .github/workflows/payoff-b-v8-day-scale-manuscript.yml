@@ -1,0 +1,98 @@
+name: PAYOFF-B V8 posthoc day-scale manuscript audit
+
+on:
+  pull_request:
+    paths:
+      - "analysis/movement_phenology/payoff_b_v8_metric_scale_diagnostic.R"
+      - "scripts/audit_payoff_b_v8_day_scale_posthoc.py"
+      - "tests/test_payoff_b_v8_day_scale_posthoc.py"
+      - "submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S2_DAY_SCALE_20261014.md"
+      - "manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md"
+      - "submission/AMNAT_V4_FRONTMATTER_REVISED_20261011.md"
+      - ".github/workflows/payoff-b-v8-day-scale-manuscript.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  original-posthoc-diagnostic-and-paper-source-crosswalk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test predeclared exploratory scale/identifier guard
+        run: |
+          python -m pip install "pytest>=8,<10"
+          python -m pytest -q \
+            tests/test_payoff_b_v8_day_scale_posthoc.py \
+            tests/test_amnat_v4_review_readiness.py
+      - name: Verify restored 2026-10-05 exploratory R script is byte-identical
+        run: |
+          test "$(git hash-object analysis/movement_phenology/payoff_b_v8_metric_scale_diagnostic.R)" = \
+            "a42b4d9f1a1792d647d6091e980754c428009ce1"
+          test "$(git hash-object analysis/movement_phenology/payoff_b_v8_primary.R)" = \
+            "fe142e7202980a854a2968bc73cf50b270b0ab91"
+          echo "ORIGINAL POSTHOC R SCRIPT AND PREREGISTERED PRIMARY SCIENCE UNCHANGED"
+      - name: Verify old original archive ID/digest before downloading
+        env:
+          GH_AUDIT_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json,os
+          from urllib.request import urlopen,Request
+          url="https://api.github.com/repos/zuizui0223/payoff/actions/runs/37389432690/artifacts"
+          req=Request(url,headers={"Accept":"application/vnd.github+json",
+                    "Authorization":"Bearer "+os.environ["GH_AUDIT_TOKEN"]})
+          with urlopen(req,timeout=60) as f:data=json.load(f)
+          found=[a for a in data["artifacts"] if (
+            a["id"]==11380965912
+            and a["name"]=="payoff-b-v8-metric-scale-diagnostic"
+            and not a["expired"]
+            and a["digest"]=="sha256:18a8b34abd989f09d5fd98995bf43022b1efeccff2ab4cc744fa91f7d8970ed3"
+          )]
+          if len(found)!=1:raise SystemExit("ORIGINAL_POSTHOC_ARTIFACT_NOT_VERIFIED")
+          print("ORIGINAL_RESEARCH_DIAGNOSTIC_ARTIFACT_VERIFIED; CLASSIFICATION POSTHOC")
+          PY
+      - name: Restore the immutable original diagnostic outputs
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 37389432690
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-v8-metric-scale-diagnostic
+          path: inputs/original_day_scale
+      - name: Restore exactly pinned public Amaral source before running original science
+        run: |
+          mkdir -p outputs
+          curl --fail --location --retry 3 --max-time 180 \
+            "https://raw.githubusercontent.com/br-amaral/BirdMigrationSpeed/62c58d77c2028bd863dfe3697b0d9cf29ceaeab0/data/final.rds" \
+            -o outputs/amaral_final_frozen.rds
+          test "$(git hash-object outputs/amaral_final_frozen.rds)" = \
+            "f1c9e63a377bb96152c573081e7c482cfe49ebc3"
+      - name: Re-run the historical posthoc R diagnostic on the same environmental source
+        run: Rscript analysis/movement_phenology/payoff_b_v8_metric_scale_diagnostic.R
+      - name: Verify each old output, all 166 pair rows, 150 bird rows, RMSE/skill, and table
+        run: |
+          python -m scripts.audit_payoff_b_v8_day_scale_posthoc \
+            --historical inputs/original_day_scale \
+            --rerun outputs \
+            --supplement submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S2_DAY_SCALE_20261014.md \
+            --receipt outputs/amnat_v4_posthoc_daily_evidence_receipt.json
+      - name: Upload source-faithful POSTHOC outputs and explicit nonconfirmatory receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-paper2-20261014-day-scale-posthoc-source-verified-NONANON
+          path: |
+            outputs/payoff_b_v8_metric_scale_*.csv
+            outputs/amnat_v4_posthoc_daily_evidence_receipt.json
+            submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S2_DAY_SCALE_20261014.md
+          if-no-files-found: warn

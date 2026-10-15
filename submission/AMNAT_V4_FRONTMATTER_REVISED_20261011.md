@@ -20,8 +20,10 @@ signed timing error. In a prospectively specified analysis of migratory
 birds, signed detrended source–destination green-up correlation increased
 from 2002–2009 to 2010–2017 across 166 unique spatial pairs used by 28
 species (mean change +0.369; 95% pair-bootstrap confidence interval +0.298
-to +0.436). Larger connectivity increases did not predict the
-prespecified reduction in arrival–green-up mismatch (coefficient +0.062;
+to +0.436). Post hoc checks found higher day-scale in-window
+errors but no clear change in leave-one-year-out source-forecast RMSE
+despite nearly doubled destination variability. Larger connectivity
+increases did not predict the prespecified reduction in arrival–green-up mismatch (coefficient +0.062;
 95% interval -0.014 to +0.136), and structural nulls reproduced the
 apparent positive slope. An independent descriptive reconstruction of
 mule-deer data found phase convergence through migration and signed
@@ -33,7 +35,7 @@ fitness incentives. This framework identifies the measurements needed to
 distinguish insufficient information, lost action opportunities, and
 fitness-optimal incomplete seasonal tracking.
 
-**Abstract word count (whitespace-based):** 171; journal maximum 200.
+**Abstract word count (whitespace-based):** 192; journal maximum 200.
 
 ## Keywords
 

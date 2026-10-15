@@ -14,8 +14,10 @@ signed timing error. In a prospectively specified analysis of migratory
 birds, signed detrended source–destination green-up correlation increased
 from 2002–2009 to 2010–2017 across 166 unique spatial pairs used by 28
 species (mean change +0.369; 95% pair-bootstrap confidence interval +0.298
-to +0.436). Larger connectivity increases did not predict the
-prespecified reduction in arrival–green-up mismatch (coefficient +0.062;
+to +0.436). Post hoc checks found higher day-scale in-window
+errors but no clear change in leave-one-year-out source-forecast RMSE
+despite nearly doubled destination variability. Larger connectivity
+increases did not predict the prespecified reduction in arrival–green-up mismatch (coefficient +0.062;
 95% interval -0.014 to +0.136), and structural nulls reproduced the
 apparent positive slope. An independent descriptive reconstruction of
 mule-deer data found phase convergence through migration and signed
@@ -40,19 +42,16 @@ loss of environmental predictability: an earlier location becomes a poorer
 guide to conditions that will be encountered later, so departure and movement
 decisions are made from degraded information.
 
-That explanation is plausible but incomplete. The observed correlation of
-environmental states at two geographical points is not automatically a
-predictive signal available to an animal at its decision time (Kölzsch et al. 2015). In particular,
-stronger within-period correlation can coexist with a changing cue-to-target
-mean or slope, an outdated learned forecast, or no cue perception at all.
-Better information has value only while useful actions remain available.
-A migrant can acquire more accurate information as it approaches a breeding
-destination, yet simultaneously lose
-the ability to undo earlier departure, fuelling, route or stopover decisions.
-Plants and developmentally committed insects represent the opposite extreme:
-local information can be accurate, but the focal event can become difficult to
-reverse once initiated. Environmental information quality and biological
-actionability are therefore distinct axes.
+That explanation is plausible but incomplete. Correlation between
+geographic locations is not necessarily a cue available when an animal
+decides (Kölzsch et al. 2015). Stronger within-period association can
+coexist with changed means or slopes, outdated forecasts, or absent
+cue perception. Even usable information cannot undo irreversible
+actions. Migrants may learn about destination spring while losing
+options for departure, refuelling, routes or stopovers; similarly,
+flowering or insect development may become difficult to reverse.
+Information quality and remaining biological actionability are
+therefore distinct axes.
 
 An additional distinction is essential: a better match to a seasonal target
 need not imply greater fitness once the costs of early arrival, travel,
@@ -135,27 +134,79 @@ When direct marginal waiting cost is zero,
 
 Thus the optimum occurs when the relative gain in information value is exactly balanced by the relative loss of remaining actionability.
 
-For exponential learning and exponential actionability loss,
+For exponential learning and exponential actionability loss, let
+\(\alpha>0\), \(\beta>0\), \(\Delta q\geq0\), and
 
 \[
-q(t)=q_0+\Delta q[1-\exp(-\alpha t)]
+q(t)=q_0+\Delta q[1-\exp(-\alpha t)],
+\qquad
+r(t)=\exp(-\beta t).
 \]
 
-and
+The general zero-direct-cost objective is
 
 \[
-r(t)=\exp(-\beta t),
+N(t)=e^{-\beta t}
+\left[A_\infty-D\exp(-\alpha t)\right],
+\quad
+A_\infty=S(q_0+\Delta q)-B,
+\quad
+D=S\Delta q.
 \]
 
-the unique zero-cost optimum is
+When \(A_\infty>0\) and \(\Delta q>0\), maximizing over
+nonnegative waiting times yields
 
 \[
-t^*=\frac{\log(1+\alpha/\beta)}{\alpha}.
+\boxed{
+t^*
+=
+\max\left\{
+0,\,
+\frac{1}{\alpha}
+\log\left[
+\frac{(\alpha+\beta)S\Delta q}
+{\beta[S(q_0+\Delta q)-B]}
+\right]
+\right\}.
+}
 \]
 
-The optimum moves earlier as (\beta) increases. Two actors observing the same environmental-information trajectory can therefore commit at different stages solely because their remaining response options disappear at different rates.
+If \(A_\infty>0\) but \(\Delta q=0\), the optimum is immediate
+commitment (\(t^*=0\)). If \(A_\infty\leq0\), no finite waiting
+time provides a positive gross information return; a zero-payoff
+outside option is preferable. A nonzero direct waiting cost \(C(t)\)
+returns the more general first-order condition above, and the
+closed-form zero-cost expression no longer applies.
 
-A particularly important consequence is that perfect information can be too late. With \(\alpha=\beta=1\), the optimum is \(t^*=\log 2\), where cue accuracy is only \(q=0.75\) in the symmetric witness even though \(q\to1\) later. Better information is not automatically more useful.
+In the **threshold-normalized special case** \(Sq_0=B\)
+(and \(\Delta q>0\)), \(A_\infty=D\), so the interior optimum
+simplifies to
+
+\[
+\boxed{
+t^*_{\rm threshold}
+=
+\frac{\log(1+\alpha/\beta)}{\alpha}.
+}
+\]
+
+Thus the simple optimum depends only on the learning and actionability
+rates **when initial cue value is exactly at the decision threshold**.
+Outside this case, the baseline cue accuracy, final cue improvement and
+relative losses also affect the optimal waiting time. Within the
+positive-return interior regime, faster opportunity decay (larger
+\(\beta\)) shifts the optimum earlier. Actors facing the same cue
+trajectory can therefore commit at different stages if their
+opportunities decay at different rates.
+
+A particularly important consequence is that perfect information can
+arrive too late to be worth using for the focal decision. In the
+symmetric threshold witness \(q_0=1/2\), \(\Delta q=1/2\),
+\(B=S/2\), and \(\alpha=\beta=1\), the optimal waiting time is
+\(\log 2\) and cue accuracy is \(0.75\), although it approaches
+one later. This is an illustration of the specified decision model,
+not a claim that animals' true forecast accuracy has been measured.
 
 In the single-commitment limit, the downstream consequences of waiting can be
 compressed into an effective deadline cost,
@@ -357,7 +408,26 @@ Its reduced post-entry retention is
 \phi_i(1-h_iK_i),
 \]
 
-where \(K_i\) is effective phase information and \(h_i\) is enacted correction.
+Here \(K_i\) is an **effective linear cue-response coefficient**,
+not an observed animal information state, and \(h_i\) is the realized
+correction fraction. The expression is a conditional-mean phase
+**slope**, requiring an unbiased linear observation, a fixed prior mean
+and a mean innovation independent of incoming phase. More generally, if
+a posterior estimate is \(m+K_i(z-m)\), and enacted correction is
+\(u=h_i[m+K_i(z-m)]\), then
+
+\[
+E[e_{i,k+1}\mid e_{i,k}]
+=
+\phi_i(1-h_iK_i)e_{i,k}
+-
+\phi_i h_i(1-K_i)m
++
+E[w_{i,k}\mid e_{i,k}].
+\]
+
+The additive intercept need not vanish, so \(\lambda_i\) alone cannot
+identify \(K_i\) or \(h_i\).
 For a serial entry gate, \(h_i=O_i g_i\): readiness has already been crossed,
 while remaining opportunity \(O_i\) and decision gain \(g_i\) govern later
 correction. Here \(O_i\) is the actuator-specific realization of the retained
@@ -497,6 +567,22 @@ analyses were sensitivities. This design assesses change in an
 environmental relationship; it cannot establish any individual's
 information use.
 
+After the registered correlation outcome was opened, we conducted an
+**outcome-informed post hoc** diagnostic of the same 166 pairs and
+two windows (Supplementary Table S2). We separately detrended
+source and destination green-up by year, estimating target anomaly
+SD, source-to-target slope, R² and fitted residual RMSE. Because
+in-window RMSE is optimistic, each leave-one-year-out (LOYO) fold
+refitted both trends and the anomaly regression without its held-out
+year. For the same held-out observations, we compared source-informed
+predictions against a destination-trend-only baseline using RMSE
+and mean squared loss. Summaries average pair-specific diagnostics;
+uncertainty uses 10,000 unique-pair bootstrap resamples and
+source/target-cell and 5°/10° spatial-block sensitivities. A separate
+post hoc bird mismatch summary reused the 150 registered target rows.
+These statistical forecasts do not establish decision-time cue
+availability or calibration in migrating birds.
+
 ### 3.2 From environmental correlation to observed arrival–green-up mismatch
 
 The registered secondary transfer analysis used the frozen environmental
@@ -583,6 +669,26 @@ leave-one-species-out sensitivities all retained the positive direction.
 Thus broad degradation of this environmental predictive coordinate is not
 supported in the sampled system.
 
+The **post hoc** day-scale diagnostic (Supplementary Table S2)
+distinguished standardized coupling from absolute forecast error.
+Destination anomaly SD increased from 2.412 to 4.662 days, and
+the source–target slope increased from 0.399 to 0.640. Fitted
+in-window residual RMSE rose from 1.821 to 2.494 days
+(change +0.673; 95% pair CI +0.460 to +0.891 days), although
+the 10° spatial-block interval included zero. Source-informed
+LOYO RMSE showed no clear change, at 4.113 versus 4.168 days
+(change +0.055; CI −0.591 to +0.632). In contrast,
+destination-trend-only LOYO RMSE rose from 3.182 to 5.865
+days. The incremental LOYO source advantage (no-source minus
+source RMSE) increased from −0.931 to +1.697 days
+(change +2.628; CI +2.132 to +3.184). Thus environmental
+correlations strengthened, but absolute held-out source forecast
+error did not clearly decline; the **relative** predictive
+advantage of adding source observations rose markedly. These
+outcome-informed comparisons are not bird-perceived forecasts.
+Increasing destination SD does not itself cause Pearson correlation
+to rise, which is scale invariant.
+
 We then tested whether larger gains in predictive connectivity were associated
 with larger reductions in realized arrival–green-up mismatch over the same
 period. The frozen transfer analysis retained 150 species-target rows, 72
@@ -595,7 +701,14 @@ direction, the equal-species-weighted coefficient was
 
 with 95% unique-pair bootstrap CI (-0.0141, +0.1363). The sample also showed no
 clear overall change in log mismatch: the equal-species mean late-minus-early
-change was -0.0203 (95% CI -0.0900 to +0.0512).
+change was -0.0203 (95% CI -0.0900 to +0.0512). On the separate
+**post hoc absolute-day scale**, the unweighted mean arrival–green-up
+difference was 8.418 versus 8.066 days (late-minus-early change
+-0.352 days, 95% pair interval -0.890 to +0.200). Although one
+equal-species day-scale summary was slightly negative, its support was
+scale-dependent and was not part of the frozen analysis. Thus the
+descriptive data do not establish a consistent deterioration in bird
+timing despite the greater variance of spring green-up.
 
 The positive transfer point estimate is not interpreted as a biological
 worsening response. Holding each species-target bird arrival date fixed while
@@ -821,15 +934,18 @@ than to claim a new control-theory class.
 
 ### 5.1 Seasonal tracking is a control problem, not only a response-rate problem
 
-The main conceptual change is to separate the quality of the environmental
-signal from the organism's capacity to act on it. In the V8 stress test,
-detrended source–destination spring *correlation* becomes stronger rather than
-weaker, yet the preregistered improvement in bird mismatch is not detected.
-This does not show that birds received more useful information: cue
-availability, belief calibration, individual routes and actionability were not
-observed in V8. It therefore fails the registered correlation-to-matching
-transfer hypothesis without establishing a biological actionability
-bottleneck.
+The distinction is between environmental information and the ability
+to act on it. In V8, source–destination correlation strengthened, but
+the registered improvement in bird mismatch was not detected.
+Post hoc analyses found higher fitted error but little change in
+source-informed LOYO error, even as the no-source baseline worsened.
+Correlation, absolute error and incremental forecast skill are
+therefore different measures. Crucially, the registered transfer
+tested *correlation changes*, not a separate direct LOYO-RMSE or
+squared-loss-value predictor. Neither cue perception, individual
+route choice nor actionability was observed, so these ecological
+mechanisms remain unidentified. Day-metric-to-bird transfer requires
+a distinct and explicitly exploratory analysis.
 
 Two organisms can also reach the same observed arrival shift for very
 different reasons. One may predict the future accurately and require little

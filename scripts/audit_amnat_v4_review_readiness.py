@@ -86,6 +86,11 @@ def audit(source: str, front: str) -> dict:
             and "same individuals' migration speed" in source,
         "theory_scope_limit": "no-innovation" in source
             and "not a universal additive" in source,
+        "waiting_optimum_boundary": "threshold-normalized special case" in source
+            and r"t^*_{\rm threshold}" in source
+            and r"A_\infty" in source,
+        "controller_intercept_unidentified": "The additive intercept need not vanish" in source
+            and "cannot" in source,
     }
     science_errors = []
     if title != "Environmental predictability alone does not determine seasonal tracking":

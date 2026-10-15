@@ -7,6 +7,8 @@ on:
       - "scripts/assemble_amnat_v4_original_observed_figures.py"
       - "tests/test_assemble_amnat_v4_original_observed_figures.py"
       - "scripts/build_amnat_v4_anonymous_preview.py"
+      - "manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md"
+      - "submission/AMNAT_V4_FRONTMATTER_REVISED_20261011.md"
       - "scripts/build_payoff_b_amnat_v4_summary_figures.py"
       - "submission/AMNAT_V4_ANON_PREVIEW_HEADER_20261013.tex"
   workflow_dispatch:
@@ -93,6 +95,14 @@ jobs:
           assert b["status"]=="ANONYMOUS_EDITORIAL_PDF_PREFLIGHT_PASS_SUBMISSION_HOLD"
           assert b["submission_ready"] is False
           assert a["submission_ready"] is False
+          import fitz
+          manuscript=Path("outputs/amnat_v4_true_point_pdf/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf")
+          with fitz.open(manuscript) as pdf:
+              paper_text=" ".join(page.get_text() for page in pdf)
+          for phrase in ("2.412", "4.662", "1.821", "2.494",
+                         "4.113", "4.168", "2.628", "Supplementary Table"):
+              assert phrase in paper_text, "Day-scale diagnostic missing from PDF: "+phrase
+          assert "post hoc" in paper_text.lower()
           print("ANONYMOUS MANUSCRIPT + ORIGINAL OBSERVATION FIGURES: EDITORIAL PREFLIGHT PASS / SUBMISSION HOLD")
           PY
       - uses: actions/upload-artifact@v4
