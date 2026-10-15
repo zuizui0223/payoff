@@ -9,8 +9,10 @@ def test_exploratory_definition_does_not_change_frozen_primary():
     script=S.read_text(encoding="utf-8")
     contract=C.read_text(encoding="utf-8")
     for x in ("delta_loo_rmse","delta_loo_value_mse",
-              "delta_log","delta_pseudo_mismatch","bird_increment"):
+              "delta_log","delta_pseudo_mismatch"):
         assert x in script and x in contract
+    assert "bird_increment" in script
+    assert "Bird-specific increment" in contract
     assert "POST_OUTCOME_EXPLORATORY_SIX_SLOPES_COMPLETE" in script
     assert "B <- 10000L" in script
     assert "seed <- 20261015L" in script
