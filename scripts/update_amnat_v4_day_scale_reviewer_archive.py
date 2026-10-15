@@ -105,6 +105,18 @@ def assemble(base:Path,pdf_artifact:Path,day_outputs:Path,out:Path)->dict:
     old_audit=(ROOT/"scripts/audit_payoff_b_v8_day_scale_posthoc.py").read_text(encoding="utf-8")
     add(out,"scripts/audit_day_scale.py",neutral(old_audit).encode("utf-8"))
     add(out,"scripts/reproduce_day_scale.sh",reproduction_command().encode("utf-8"))
+    # Record a source-reproducible *theoretical* derivation and deterministic
+    # counterexamples as well as the published biological input data.
+    # This code identifies no individual cue/perception or demographic fitness.
+    theory=ROOT/"src/paper2_actionability_peak.py"
+    theory_tests=ROOT/"tests/test_paper2_actionability_peak.py"
+    for origin,target in (
+        (theory,"src/paper2_actionability_peak.py"),
+        (theory_tests,"tests/test_paper2_actionability_peak.py")
+    ):
+        if not origin.is_file():
+            raise ValueError("Paper 2 mathematical source missing from reviewer archive")
+        add(out,target,origin.read_bytes())
 
     for file in DAY_FILES:
         p=single(day_outputs,file)
@@ -174,7 +186,13 @@ relative forecast skill, and realized biological timing. The cue
 used here is statistical; bird access before departure was not observed.
 
 The editorial manuscript PDF was rebuilt after this scientific
-clarification. It is NOT an author-approved journal submission.
+clarification. The general zero-cost actionability optimum (valid for
+arbitrary initial cue values) and its threshold-only special case are
+checked in src/paper2_actionability_peak.py and
+tests/test_paper2_actionability_peak.py. The general formula must NOT
+be replaced with the threshold-only logarithm. Run the mathematical
+guards with Python pytest when preparing the reviewer submission.
+This is NOT an author-approved journal submission.
 """
     add(out,"README.md",(original_readme+"\n"+note).encode())
 
