@@ -1,0 +1,114 @@
+name: PAYOFF-B day-metric exploratory spatial dependence sensitivity
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-v8-daymetric-to-bird-exploratory-20261015
+    paths:
+      - ".github/workflows/payoff-b-v8-daymetric-spatial-sensitivity.yml"
+      - "analysis/movement_phenology/payoff_b_v8_daymetric_spatial_sensitivity_posthoc.R"
+      - "tests/test_payoff_b_v8_daymetric_spatial_sensitivity.py"
+      - "docs/PAYOFF_B_V8_DAYMETRIC_SPATIAL_SENSITIVITY_LOCK_20261015.md"
+  pull_request:
+    paths:
+      - ".github/workflows/payoff-b-v8-daymetric-spatial-sensitivity.yml"
+      - "analysis/movement_phenology/payoff_b_v8_daymetric_spatial_sensitivity_posthoc.R"
+      - "tests/test_payoff_b_v8_daymetric_spatial_sensitivity.py"
+      - "docs/PAYOFF_B_V8_DAYMETRIC_SPATIAL_SENSITIVITY_LOCK_20261015.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  independent-spatial-and-species-dependence-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Lock four groupings and all previously opened six slopes
+        run: |
+          python -m pip install "pytest>=8,<10"
+          python -m pytest -q tests/test_payoff_b_v8_daymetric_spatial_sensitivity.py
+          Rscript -e 'parse(file="analysis/movement_phenology/payoff_b_v8_daymetric_spatial_sensitivity_posthoc.R"); cat("EXPLORATORY FOUR-SCHEME SENSITIVITY PARSE PASS\n")' >/dev/null
+      - name: Restore EXACT six-model original source rows, their published coefficient checks and bootstrap
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38672782848
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: PAYOFF-B-V8-POSTHOC-day-metric-bird-transfer-6-SLOPES-NONCONFIRMATORY
+          path: inputs/six
+      - name: Restore authenticated environmental source/target latitude and longitude from frozen day-scale run
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38585167565
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-paper2-20261014-day-scale-posthoc-source-verified-NONANON
+          path: inputs/day
+      - name: Identify unambiguous original files
+        run: |
+          mkdir -p inputs/verified
+          for name in \
+            day_metric_to_bird_exploratory_joined_rows.csv \
+            day_metric_to_bird_exploratory_slopes.csv; do
+            count=$(find inputs/six -type f -name "$name" | wc -l)
+            test "$count" -eq 1 || { echo "Original six-model row identity missing: $name"; exit 2; }
+            cp "$(find inputs/six -type f -name "$name")" inputs/verified/
+          done
+          file=payoff_b_v8_metric_scale_pairs.csv
+          count=$(find inputs/day -type f -name "$file" | wc -l)
+          test "$count" -eq 1 || { echo "Original geo pair ID missing"; exit 2; }
+          cp "$(find inputs/day -type f -name "$file")" inputs/verified/
+      - name: Compute all four geographic/source-target dependence CIs plus 22+72 transparent omission sweeps
+        run: |
+          Rscript analysis/movement_phenology/payoff_b_v8_daymetric_spatial_sensitivity_posthoc.R \
+            --original-joined inputs/verified/day_metric_to_bird_exploratory_joined_rows.csv \
+            --original-slopes inputs/verified/day_metric_to_bird_exploratory_slopes.csv \
+            --day-pairs inputs/verified/payoff_b_v8_metric_scale_pairs.csv \
+            --output outputs/second_stage_exploratory_dependence
+      - name: Verify complete and nonselective 24 CIs, all 40k bootstrap draws, all 564 removal slopes
+        run: |
+          python - <<'PY'
+          import csv,math
+          from pathlib import Path
+          d=Path("outputs/second_stage_exploratory_dependence")
+          def load(name):
+              with (d/name).open(newline="") as f:return list(csv.DictReader(f))
+          a=load("spatial_sensitivity_all_24_intervals.csv")
+          b=load("spatial_sensitivity_scheme_status.csv")
+          c=load("leave_one_unit_out_all_564_slopes.csv")
+          e=load("leave_one_unit_out_summary.csv")
+          assert len(a)==24 and len(b)==4 and len(c)==564 and len(e)==12
+          scheme={z["scheme"] for z in b}
+          assert scheme=={"source_cell","target_cell","target_grid_5deg","target_grid_10deg"}
+          assert all(int(z["draws"])==10000 for z in b)
+          assert all(z["status"] in ("ESTIMABLE","NOT_ESTIMABLE") for z in b)
+          assert {(z["predictor"],z["response"]) for z in a}=={
+              (x,y) for x in ("delta_loo_rmse","delta_loo_value_mse")
+              for y in ("observed","fixed_arrival","bird_increment")}
+          assert all(int(z["n_original_environment_pairs"])==72 for z in a)
+          assert all(int(z["n_original_species_target"])==150 for z in a)
+          for name in scheme:
+              path=d/("bootstrap_"+name+"_10000.csv")
+              with path.open() as f:
+                  assert sum(1 for _ in f)==10001
+          for tag in ("species","pair_key"):
+              expected=22 if tag=="species" else 72
+              assert len({z["omitted_unit"] for z in c if z["omission_type"]==tag})==expected
+          print("SECOND-STAGE POST-OUTCOME SENSITIVITIES ALL REPORTED; CONFIRMATORY STATUS FALSE")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: PAYOFF-B-V8-daymetric-4-SPATIAL-dependence-sensitivities-AFTER-OUTCOME
+          path: outputs/second_stage_exploratory_dependence/
+          if-no-files-found: warn
