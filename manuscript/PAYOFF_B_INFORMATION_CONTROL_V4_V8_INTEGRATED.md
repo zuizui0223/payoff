@@ -553,7 +553,10 @@ patterns mechanically induced by shared target green-up and the absolute
 mismatch transformation from evidence of biological timing responses.
 They do not independently establish alternative causal mechanisms.
 The speed-response bridge remained unestimable under its prespecified
-minimum-data rule.
+minimum-data rule. A **post-outcome exploratory** comparison examined
+day-unit forecast RMSE and source-skill changes against observed,
+fixed-arrival and bird-specific mismatch, using 72-pair bootstrap and
+spatial sensitivities (Supplementary Table S3).
 
 ### 3.3 Independent natural systems and mechanistic interpretation
 
@@ -662,6 +665,11 @@ the observed-minus-fixed-arrival increment was only +0.0150 (95% CI -0.0521 to
 coefficients, with the observed value lying well inside the permutation
 distribution. The apparent positive slope can therefore arise from shared
 target-green-up geometry and the nonlinear mismatch transformation.
+
+An additional **post hoc** analysis found no detected bird-specific
+increment for either day-unit predictor; source forecast value was
+positively associated with the fixed-arrival null (+0.1504; pair CI
++0.0941 to +0.2316; Supplementary Table S3).
 
 A stricter matched between–within decomposition also failed to recover a
 negative information effect: the persistent between-route coefficient was
@@ -888,10 +896,10 @@ source-informed error changed little, and the relative advantage of
 including the source rose against a strongly worsening no-source
 baseline. Thus standardized correlation, absolute error and
 incremental forecast skill are not interchangeable measures of
-predictability. Importantly, the registered correlation-to-mismatch
-test is **not** a separate direct test that changes in day-scale
-LOYO RMSE or squared-error skill predict bird matching; such a claim
-would require a distinct, explicitly exploratory transfer model.
+predictability. The direct day-scale comparisons remain exploratory: neither
+bird-specific increment was detected using the estimable spatial
+cluster schemes (Supplementary Table S3). This does not prove that
+no bird adjusted its timing.
 This does not show that birds received more useful information: cue
 availability, belief calibration, individual routes and actionability were not
 observed in V8. It therefore fails the registered correlation-to-matching
