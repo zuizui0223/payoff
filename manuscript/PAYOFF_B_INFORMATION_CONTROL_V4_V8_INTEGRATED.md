@@ -42,19 +42,16 @@ loss of environmental predictability: an earlier location becomes a poorer
 guide to conditions that will be encountered later, so departure and movement
 decisions are made from degraded information.
 
-That explanation is plausible but incomplete. The observed correlation of
-environmental states at two geographical points is not automatically a
-predictive signal available to an animal at its decision time (Kölzsch et al. 2015). In particular,
-stronger within-period correlation can coexist with a changing cue-to-target
-mean or slope, an outdated learned forecast, or no cue perception at all.
-Better information has value only while useful actions remain available.
-A migrant can acquire more accurate information as it approaches a breeding
-destination, yet simultaneously lose
-the ability to undo earlier departure, fuelling, route or stopover decisions.
-Plants and developmentally committed insects represent the opposite extreme:
-local information can be accurate, but the focal event can become difficult to
-reverse once initiated. Environmental information quality and biological
-actionability are therefore distinct axes.
+That explanation is plausible but incomplete. Correlation between
+geographic locations is not necessarily a cue available when an animal
+decides (Kölzsch et al. 2015). Stronger within-period association can
+coexist with changed means or slopes, outdated forecasts, or absent
+cue perception. Even usable information cannot undo irreversible
+actions. Migrants may learn about destination spring while losing
+options for departure, refuelling, routes or stopovers; similarly,
+flowering or insect development may become difficult to reverse.
+Information quality and remaining biological actionability are
+therefore distinct axes.
 
 An additional distinction is essential: a better match to a seasonal target
 need not imply greater fitness once the costs of early arrival, travel,
@@ -570,30 +567,21 @@ analyses were sensitivities. This design assesses change in an
 environmental relationship; it cannot establish any individual's
 information use.
 
-After the preregistered correlation outcome was known, we conducted a
-**post hoc, outcome-informed metric-scale diagnostic** using exactly the
-same 166 unique spatial pairs and two fixed windows (Supplementary Table
-S2). Within each window, source and target green-up dates were separately
-detrended against calendar year; their residual anomalies were used to
-estimate destination residual SD (days), source-to-target anomaly slope,
-(R^2), and in-window regression residual RMSE (days). Because fitting
-and evaluating in the same six-to-eight-year window is optimistic, a
-separate leave-one-year-out (LOYO) check refitted *both* temporal trends
-and the source-to-target anomaly regression without the held-out
-calendar year. We compared the held-out source-informed RMSE with the
-held-out destination-trend-only baseline, reporting both absolute
-error and the incremental reduction in RMSE or mean squared error from
-adding source information. Summaries are means of pair-specific
-diagnostics, not RMSE pooled across all individual observations.
-Intervals were recalculated by 10,000 spatial-pair bootstrap
-resamples, with source/target-cluster and 5-/10-degree spatial-block
-checks. A post hoc day-scale arrival–green-up-mismatch summary used the
-same 150 species–target rows admitted to the registered downstream
-transfer; its scale-specific results were not promoted to a new
-preregistered hypothesis. LOYO is retrospective statistical
-cross-validation using contemporaneous source observations; it does
-**not** show that those source observations or fitted regression
-parameters were available to birds before departure.
+After the registered correlation outcome was opened, we conducted an
+**outcome-informed post hoc** diagnostic of the same 166 pairs and
+two windows (Supplementary Table S2). We separately detrended
+source and destination green-up by year, estimating target anomaly
+SD, source-to-target slope, R² and fitted residual RMSE. Because
+in-window RMSE is optimistic, each leave-one-year-out (LOYO) fold
+refitted both trends and the anomaly regression without its held-out
+year. For the same held-out observations, we compared source-informed
+predictions against a destination-trend-only baseline using RMSE
+and mean squared loss. Summaries average pair-specific diagnostics;
+uncertainty uses 10,000 unique-pair bootstrap resamples and
+source/target-cell and 5°/10° spatial-block sensitivities. A separate
+post hoc bird mismatch summary reused the 150 registered target rows.
+These statistical forecasts do not establish decision-time cue
+availability or calibration in migrating birds.
 
 ### 3.2 From environmental correlation to observed arrival–green-up mismatch
 
@@ -681,28 +669,25 @@ leave-one-species-out sensitivities all retained the positive direction.
 Thus broad degradation of this environmental predictive coordinate is not
 supported in the sampled system.
 
-The **post hoc day-scale diagnostic** reveals why the direction of the
-correlation result cannot be equated with an improvement in absolute
-forecast accuracy (Supplementary Table S2). Mean destination
-green-up anomaly SD increased from 2.412 to 4.662 days, while the
-mean fitted source-to-target slope rose from 0.399 to 0.640.
-In-window residual RMSE also increased, from 1.821 to 2.494 days
-(mean pairwise change +0.673 days; 95% pair-bootstrap interval
-+0.460 to +0.891; the 10-degree spatial-block interval included zero).
-Yet source-informed leave-one-year-out RMSE did **not** clearly change:
-4.113 versus 4.168 days (change +0.055 days; 95% pair interval
--0.591 to +0.632). In contrast, the target-trend-only held-out RMSE
-increased from 3.182 to 5.865 days. Relative held-out source-forecast
-skill, measured as RMSE without source minus RMSE with source, rose
-from -0.931 to +1.697 days (change +2.628 days; pair-bootstrap
-interval +2.132 to +3.184). Therefore stronger standardized coupling
-coexisted with larger in-window residual error and a substantial
-increase in the *relative* predictive value of the source against a
-more volatile destination baseline. These are statistical source-cue
-diagnostics, not animal-perceived forecasts. The destination SD
-increase did not *cause* the correlation increase, because correlation
-is scale invariant. All day-scale analyses were defined after
-the V8 primary result was opened and remain exploratory.
+The **post hoc** day-scale diagnostic (Supplementary Table S2)
+distinguished standardized coupling from absolute forecast error.
+Destination anomaly SD increased from 2.412 to 4.662 days, and
+the source–target slope increased from 0.399 to 0.640. Fitted
+in-window residual RMSE rose from 1.821 to 2.494 days
+(change +0.673; 95% pair CI +0.460 to +0.891 days), although
+the 10° spatial-block interval included zero. Source-informed
+LOYO RMSE showed no clear change, at 4.113 versus 4.168 days
+(change +0.055; CI −0.591 to +0.632). In contrast,
+destination-trend-only LOYO RMSE rose from 3.182 to 5.865
+days. The incremental LOYO source advantage (no-source minus
+source RMSE) increased from −0.931 to +1.697 days
+(change +2.628; CI +2.132 to +3.184). Thus environmental
+correlations strengthened, but absolute held-out source forecast
+error did not clearly decline; the **relative** predictive
+advantage of adding source observations rose markedly. These
+outcome-informed comparisons are not bird-perceived forecasts.
+Increasing destination SD does not itself cause Pearson correlation
+to rise, which is scale invariant.
 
 We then tested whether larger gains in predictive connectivity were associated
 with larger reductions in realized arrival–green-up mismatch over the same
@@ -949,25 +934,18 @@ than to claim a new control-theory class.
 
 ### 5.1 Seasonal tracking is a control problem, not only a response-rate problem
 
-The main conceptual change is to separate the quality of the environmental
-signal from the organism's capacity to act on it. In the V8 stress test,
-detrended source–destination spring *correlation* becomes stronger rather than
-weaker, yet the preregistered improvement in bird mismatch is not detected.
-Day-scale post hoc diagnostics make the distinction sharper:
-in-window residual errors increased while leave-one-year-out
-source-informed error changed little, and the relative advantage of
-including the source rose against a strongly worsening no-source
-baseline. Thus standardized correlation, absolute error and
-incremental forecast skill are not interchangeable measures of
-predictability. Importantly, the registered correlation-to-mismatch
-test is **not** a separate direct test that changes in day-scale
-LOYO RMSE or squared-error skill predict bird matching; such a claim
-would require a distinct, explicitly exploratory transfer model.
-This does not show that birds received more useful information: cue
-availability, belief calibration, individual routes and actionability were not
-observed in V8. It therefore fails the registered correlation-to-matching
-transfer hypothesis without establishing a biological actionability
-bottleneck.
+The distinction is between environmental information and the ability
+to act on it. In V8, source–destination correlation strengthened, but
+the registered improvement in bird mismatch was not detected.
+Post hoc analyses found higher fitted error but little change in
+source-informed LOYO error, even as the no-source baseline worsened.
+Correlation, absolute error and incremental forecast skill are
+therefore different measures. Crucially, the registered transfer
+tested *correlation changes*, not a separate direct LOYO-RMSE or
+squared-loss-value predictor. Neither cue perception, individual
+route choice nor actionability was observed, so these ecological
+mechanisms remain unidentified. Day-metric-to-bird transfer requires
+a distinct and explicitly exploratory analysis.
 
 Two organisms can also reach the same observed arrival shift for very
 different reasons. One may predict the future accurately and require little
