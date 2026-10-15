@@ -1,0 +1,153 @@
+name: PAYOFF-B Paper 2 day-scale 41-page PDF and anonymous archive
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-amnat-v4-day-scale-diagnostic-20261014
+    paths:
+      - ".github/workflows/payoff-b-amnat-v4-day-scale-archive.yml"
+      - "scripts/update_amnat_v4_day_scale_reviewer_archive.py"
+      - "tests/test_update_amnat_v4_day_scale_reviewer_archive.py"
+  pull_request:
+    paths:
+      - ".github/workflows/payoff-b-amnat-v4-day-scale-archive.yml"
+      - "scripts/update_amnat_v4_day_scale_reviewer_archive.py"
+      - "tests/test_update_amnat_v4_day_scale_reviewer_archive.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  repackage-the-verified-posthoc-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install minimal tests, source-PDF inspection and all-page visual preview
+        run: |
+          python -m pip install "pytest>=8,<10" "PyMuPDF>=1.24" "Pillow>=11"
+      - name: Check locked source identities, nonconfirmatory classification, and ZIP source integrity
+        run: |
+          python -m pytest -q \
+            tests/test_update_amnat_v4_day_scale_reviewer_archive.py \
+            tests/test_payoff_b_v8_day_scale_posthoc.py
+      - name: Verify exact original three upstream run artifacts before restoring
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json,os
+          from urllib.request import Request,urlopen
+          cases=(
+            (38566808136,11896306320,"Paper2-ANONYMOUS-V8-DEER-SOURCE-SCIENCE-REPRO-CANDIDATE-HOLD","43f1464eb0e25b4812101438dd89d1644febc0b33f82ab0ab60d6c097e84c196"),
+            (38585167565,11904967069,"payoff-b-paper2-20261014-day-scale-posthoc-source-verified-NONANON","012fea58b40f8a8c38191bf4ec7bff1ac5ecf1727e05ad1e62cc9d2493b18b09"),
+            (38585167586,11905840317,"payoff-b-amnat-v4-REAL-PAIR-OBSERVATION-anonymous-EDITORIAL-PDF-HOLD","de8bd0185e6dde78e5cddaaf2e173fad77814cc506cf349ac4be92d0228ada4c"),
+          )
+          for run,aid,name,hashstr in cases:
+            url=f"https://api.github.com/repos/zuizui0223/payoff/actions/runs/{run}/artifacts"
+            request=Request(url,headers={
+              "Authorization":"Bearer "+os.environ["GH_READ_TOKEN"],
+              "Accept":"application/vnd.github+json",
+            })
+            with urlopen(request,timeout=60) as response:
+              artifact=json.load(response).get("artifacts",[])
+            ok=[a for a in artifact if
+                a["id"]==aid and a["name"]==name and not a["expired"] and
+                a.get("digest")=="sha256:"+hashstr]
+            if len(ok)!=1:
+              raise SystemExit("ORIGINAL VERIFIED ARTIFACT CHANGED:"+str(run))
+            print("LOCKED_GITHUB_ORIGINAL",run,aid,name)
+          PY
+      - name: Restore source-checked V8 + deer prior editorial review candidate
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38566808136
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: Paper2-ANONYMOUS-V8-DEER-SOURCE-SCIENCE-REPRO-CANDIDATE-HOLD
+          path: inputs/v8_deer
+      - name: Restore byte-verified original R day-scale output and its posthoc audit receipt
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38585167565
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-paper2-20261014-day-scale-posthoc-source-verified-NONANON
+          path: inputs/day
+      - name: Restore NEW actual-observation anonymous Paper 2 with day-scale results
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 38585167586
+          repository: zuizui0223/payoff
+          github-token: ${{ github.token }}
+          name: payoff-b-amnat-v4-REAL-PAIR-OBSERVATION-anonymous-EDITORIAL-PDF-HOLD
+          path: inputs/paper
+      - name: Assemble reproducible source/data/code/day-scale S2 and 41-page PDF candidate
+        run: |
+          python -m scripts.update_amnat_v4_day_scale_reviewer_archive \
+            --base-zip inputs/v8_deer/Paper2_ANONYMOUS_V8_DEER_SCIENCE_REVIEW_CANDIDATE.zip \
+            --day-scale inputs/day \
+            --paper inputs/paper \
+            --out outputs/anonymous_v8_deer_day \
+            --zip outputs/Paper2_Anonymous_V8_Deer_DayScale_REVIEW_CANDIDATE.zip \
+            --receipt outputs/Paper2_Anonymous_DayScale_Source_Receipt_INTERNAL.json
+      - name: Independently re-execute the anonymized posthoc day-scale R science
+        run: |
+          cd outputs/anonymous_v8_deer_day
+          bash scripts/reproduce_day_scale.sh
+      - name: Verify reproduced sample units and make no adverse causal or submission claims
+        run: |
+          python - <<'PY'
+          import json,zipfile
+          from pathlib import Path
+          base=Path("outputs/anonymous_v8_deer_day")
+          pub=json.loads((base/"MANIFEST.json").read_text())
+          audit=json.loads((base/"outputs/day_scale_reproduction_receipt.json").read_text())
+          p=json.loads(Path("outputs/Paper2_Anonymous_DayScale_Source_Receipt_INTERNAL.json").read_text())
+          assert audit["status"]=="ORIGINAL_V8_DAY_SCALE_POSTHOC_REEXECUTED_AND_SOURCE_MATCHED"
+          assert audit["pairs"]==166
+          assert audit["bird_rows"]==150
+          assert audit["bird_unique_pairs"]==72
+          assert audit["rmse_change_to_bird_mismatch_direct_transfer_tested"] is False
+          assert pub["day_scale_status"]=="HISTORICAL_POSTHOC_AND_HISTORICAL_OUTPUT_RERUN_MATCH"
+          assert pub["day_scale_metric_to_bird_matching_direct_transfer_tested"] is False
+          assert pub["supplement_S2_included"] is True
+          assert pub["full_page_human_visual_approved"] is False
+          assert pub["journal_submission_ready"] is False
+          assert 40 <= p["paper_pages"] <= 45
+          assert p["new_day_results_count"]==7
+          z=Path("outputs/Paper2_Anonymous_V8_Deer_DayScale_REVIEW_CANDIDATE.zip")
+          with zipfile.ZipFile(z) as package:
+            names=package.namelist()
+            for required in (
+              "manuscript/editorial_preview.pdf",
+              "data/source_input.rds",
+              "data/mule_deer_source_data.xlsx",
+              "supplementary/Table_S2_day_scale.md",
+              "scripts/reproduce_day_scale.sh",
+              "analysis/seasonal_v8_metric_scale_diagnostic.R",
+              "qc/PDF_ALL_PAGE_SOURCE_QC.json"
+            ):
+              assert required in names,required
+            assert len(names)>=55,len(names)
+          print("PASS: ANONYMOUS SCIENCE + SOURCE-DATA + EXPLORE-ONLY DAY SCALE; SUBMISSION HOLD")
+          print("INNER_ZIP_SHA256",p["inner_archive_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Paper2-ANONYMOUS-V8-DEER-DAY-S2-41PAGE-REPRO-EDITORIAL-HOLD
+          path: |
+            outputs/Paper2_Anonymous_V8_Deer_DayScale_REVIEW_CANDIDATE.zip
+            outputs/Paper2_Anonymous_DayScale_Source_Receipt_INTERNAL.json
+            outputs/anonymous_v8_deer_day/outputs/day_scale_reproduction_receipt.json
+            outputs/page_by_page_visual_previews/contact_sheet_*.png
+          if-no-files-found: warn
