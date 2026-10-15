@@ -147,6 +147,9 @@ def assemble(base:Path,pdf_artifact:Path,day_outputs:Path,out:Path)->dict:
                 raise ValueError("New daily forecast result absent in revised PDF: "+required)
         if len({x[0] for page in pdf for x in page.get_images(full=True)})!=4:
             raise ValueError("Four original source-grounded figure images missing")
+        math_prose=" ".join(text.lower().split())
+        if "threshold" not in math_prose or "additive intercept" not in math_prose:
+            raise ValueError("Corrected general actionability optimum/phase-controller caveat absent in PDF")
         pdf_n=len(pdf)
     add(out,"manuscript/editorial_preview.pdf",cleaned,check_text=False)
 
