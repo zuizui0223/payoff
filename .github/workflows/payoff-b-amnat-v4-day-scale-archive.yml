@@ -49,7 +49,7 @@ jobs:
           cases=(
             (38566808136,11896306320,"Paper2-ANONYMOUS-V8-DEER-SOURCE-SCIENCE-REPRO-CANDIDATE-HOLD","43f1464eb0e25b4812101438dd89d1644febc0b33f82ab0ab60d6c097e84c196"),
             (38585167565,11904967069,"payoff-b-paper2-20261014-day-scale-posthoc-source-verified-NONANON","012fea58b40f8a8c38191bf4ec7bff1ac5ecf1727e05ad1e62cc9d2493b18b09"),
-            (38585167586,11905840317,"payoff-b-amnat-v4-REAL-PAIR-OBSERVATION-anonymous-EDITORIAL-PDF-HOLD","de8bd0185e6dde78e5cddaaf2e173fad77814cc506cf349ac4be92d0228ada4c"),
+            (38673401597,11944987354,"payoff-b-amnat-v4-REAL-PAIR-OBSERVATION-anonymous-EDITORIAL-PDF-HOLD","39ffa3c8d2b9f5e37386762fe1d1af66749d23602fedb7cae00c0a1c456cabae"),
           )
           for run,aid,name,hashstr in cases:
             url=f"https://api.github.com/repos/zuizui0223/payoff/actions/runs/{run}/artifacts"
@@ -82,10 +82,10 @@ jobs:
           github-token: ${{ github.token }}
           name: payoff-b-paper2-20261014-day-scale-posthoc-source-verified-NONANON
           path: inputs/day
-      - name: Restore NEW actual-observation anonymous Paper 2 with day-scale results
+      - name: Restore NEW actual-observation anonymous Paper 2 with corrected general theory and day-scale results
         uses: actions/download-artifact@v4
         with:
-          run-id: 38585167586
+          run-id: 38673401597
           repository: zuizui0223/payoff
           github-token: ${{ github.token }}
           name: payoff-b-amnat-v4-REAL-PAIR-OBSERVATION-anonymous-EDITORIAL-PDF-HOLD
@@ -99,6 +99,10 @@ jobs:
             --out outputs/anonymous_v8_deer_day \
             --zip outputs/Paper2_Anonymous_V8_Deer_DayScale_REVIEW_CANDIDATE.zip \
             --receipt outputs/Paper2_Anonymous_DayScale_Source_Receipt_INTERNAL.json
+      - name: Rerun the actual mathematical source inside the blinded ZIP extraction
+        run: |
+          cd outputs/anonymous_v8_deer_day
+          python -m pytest -q tests/test_paper2_actionability_peak.py
       - name: Independently re-execute the anonymized posthoc day-scale R science
         run: |
           cd outputs/anonymous_v8_deer_day
@@ -120,6 +124,8 @@ jobs:
           assert pub["day_scale_status"]=="HISTORICAL_POSTHOC_AND_HISTORICAL_OUTPUT_RERUN_MATCH"
           assert pub["day_scale_metric_to_bird_matching_direct_transfer_tested"] is False
           assert pub["supplement_S2_included"] is True
+          assert "src/paper2_actionability_peak.py" in pub["file_hashes"]
+          assert "tests/test_paper2_actionability_peak.py" in pub["file_hashes"]
           assert pub["full_page_human_visual_approved"] is False
           assert pub["journal_submission_ready"] is False
           assert 40 <= p["paper_pages"] <= 45
