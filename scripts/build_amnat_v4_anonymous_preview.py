@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """Build an anonymized MARKDOWN+PNG editorial PREVIEW of AmNat Paper 2.
 
-No scientific estimates are recalculated, no raw individual/pair observations
-are embedded, and output is NOT a submission-ready reviewer archive. A
+No scientific estimates are recalculated. The passed-in, independently
+source-verified figures may include authentic observed spatial pairs and
+species-target rows; no points are synthesized here. The output is NOT an
+approved or deposited reviewer archive. A
 separate workflow may typeset this preview with Pandoc + XeLaTeX.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -16,6 +19,68 @@ SOURCE=Path("manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md")
 FIGURES=("figure1_summary.svg","figure2_summary.svg",
          "figure3_summary.svg","figure4_summary.svg")
 TITLE="Environmental predictability alone does not determine seasonal tracking"
+
+# One page per figure. Captions describe the scientific evidence units and
+# MUST NOT recast genuine archived V8 observations as summary-only figures.
+FIGURE_CAPTIONS=(
+    "Serial timing and control architecture. Schematic theory and a "
+    "conditional linear, innovation-free two-actor identity; neither "
+    "animal belief nor fitness is observed.",
+    "Early versus late signed green-up correlations for 166 distinct "
+    "original source-target environmental spatial pairs used by 28 bird "
+    "species. These are environmental relationships, not tracked animals.",
+    "Original 150 bird species-target mismatch observations associated "
+    "with 72 distinct environmental spatial pairs (22 species), with "
+    "the fixed-arrival structural-null comparison. The 150 rows are "
+    "not 150 independent environmental relationships.",
+    "Original published-source descriptive mule-deer summaries from "
+    "152 animal-years (72 individuals). No fabricated individual "
+    "trajectories, direct cue estimates, or demographic fitness effects.",
+)
+
+
+SUMMARY_FIGURE_CAPTIONS=(
+    FIGURE_CAPTIONS[0],
+    "Frozen mean changes in environmental signed green-up correlation "
+    "and 95% unique-pair bootstrap intervals from 166 spatial pairs "
+    "used by 28 species. This summary DOES NOT plot original pair rows.",
+    "Frozen registered transfer coefficient, fixed-bird-arrival structural "
+    "null and 95% dependent-pair intervals for 150 bird observations "
+    "using 72 environment pairs. This summary DOES NOT plot original points.",
+    FIGURE_CAPTIONS[3],
+)
+
+
+def figure_appendix(images:list[str],evidence_kind:str="observed")->str:
+    if evidence_kind not in ("observed","summary"):
+        raise ValueError("Unknown source/figure evidence level")
+    captions=FIGURE_CAPTIONS if evidence_kind=="observed" else SUMMARY_FIGURE_CAPTIONS
+    if len(images)!=4 or len(captions)!=4:
+        raise ValueError("Exactly four source-bounded figure inputs required")
+    text="\\clearpage\n\n## Figures (source-verified editorial previews)\n\n"
+    for i,(image,caption) in enumerate(zip(images,captions),1):
+        if i>1:
+            text+="\\clearpage\n\n"
+        # Raw LaTeX includes do not pass through Pandoc's --resource-path
+        # rewriting: use the actual generated PNG path for XeLaTeX, not
+        # only its basename (which produced "Unable to load picture").
+        name=Path(image).resolve().as_posix()
+        # Non-floating LaTeX image makes it impossible to leave an orphaned
+        # heading on the preceding page or pack two unreadably small
+        # science figures on one page.
+        text+=f"\\begin{{center}}\n\\includegraphics[width=0.94\\textwidth]{{{name}}}\n\\end{{center}}\n\n"
+        text+=f"**Figure {i}.** {caption}\n\n"
+    if evidence_kind=="observed":
+        text+=("Figures 2 and 3 plot the original, source-verified environmental "
+               "pair and bird species-target observations. ")
+    else:
+        text+=("Figures 2 and 3 are source-frozen numerical summaries, "
+               "not scatterplots of original environmental pairs or bird rows. ")
+    text+=("Figures 1 and 4 are respectively conceptual and descriptive. "
+           "No panel establishes individual information use, "
+           "behavioural causality, or demographic fitness.\n")
+    return text
+
 
 
 def anonymize(source:str)->str:
@@ -37,6 +102,8 @@ def anonymize(source:str)->str:
         ("PAYOFF-B therefore","We therefore"),
         ("PAYOFF-B consequently","We consequently"),
         ("PAYOFF-B","this study"),
+        ("The\nV8 environmental analysis","The\nprospectively specified environmental analysis"),
+        ("the V8 primary result","the registered environmental-correlation result"),
         ("The V8 environmental analysis","The prospectively specified environmental analysis"),
         ("the V8 environmental analysis","the prospectively specified environmental analysis"),
         ("The current V8 evidence","The current bird-data evidence"),
@@ -56,6 +123,11 @@ def anonymize(source:str)->str:
     for old,new in replacements:
         s=s.replace(old,new)
     s=s.strip()+"\n"
+    # A mechanical identifier replacement must not corrupt ordinary prose.
+    # The earlier manuscript rendered "The the bird-data test ..." because
+    # its generic V8 alias matched across a manually wrapped line.
+    if re.search(r"\b[Tt]he\s+the\b",s):
+        raise ValueError("Duplicate determiner introduced by anonymization")
     forbidden=[
         "PAYOFF-B","V8","V7R","V3","V4","rollback",
         "zuizui0223","github.com/zuizui",
@@ -75,7 +147,28 @@ def anonymize(source:str)->str:
 def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
     s=anonymize(source)
     fig_entries=[]
+    evidence_kind=None
     if figures_dir is not None:
+        # This builder is used by both the summary-only archival diagnostics
+        # and the canonical source-observation manuscript. Never let one
+        # workflow mislabel summary means as observed 166/150 data points.
+        observed_receipt=figures_dir/"combined_figure_source_receipt.json"
+        summary_receipt=figures_dir/"figure_manifest.json"
+        if observed_receipt.is_file():
+            metadata=json.loads(observed_receipt.read_text(encoding="utf-8"))
+            if (metadata.get("status")!="REAL_POINT_F2_F3_AND_FROZEN_F1_F4_EDITORIAL_PREVIEW_PASS"
+                or metadata.get("f2_observed_unique_spatial_pairs")!=166
+                or metadata.get("f3_observed_species_target_rows")!=150
+                or metadata.get("f3_independent_environment_pairs")!=72):
+                raise ValueError("Observed figure source receipt not independently validated")
+            evidence_kind="observed"
+        elif summary_receipt.is_file():
+            metadata=json.loads(summary_receipt.read_text(encoding="utf-8"))
+            if metadata.get("status")!="VERIFIED_SUMMARY_FIGURE_PREVIEW_SUBMISSION_HOLD":
+                raise ValueError("Summary figure receipt not independently validated")
+            evidence_kind="summary"
+        else:
+            raise ValueError("Figure source provenance receipt is required")
         try:
             import cairosvg
         except ImportError as exc:
@@ -84,16 +177,19 @@ def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
             path=figures_dir/name
             if not path.is_file():
                 raise FileNotFoundError(path)
+            expected_hash=(
+                metadata["figure_sha256"].get(name)
+                if evidence_kind=="observed"
+                else metadata["figures"].get(name,{}).get("sha256")
+            )
+            if (not expected_hash or
+                hashlib.sha256(path.read_bytes()).hexdigest()!=expected_hash):
+                raise ValueError("Frozen source-figure SHA256 mismatch: "+name)
             target=out.parent/f"figure{i}_preview.png"
             target.parent.mkdir(parents=True,exist_ok=True)
             cairosvg.svg2png(url=str(path),write_to=str(target),scale=2)
             fig_entries.append(str(target))
-        s+="\n\\newpage\n\n## Source-bounded figure previews\n\n"
-        for i,path in enumerate(fig_entries,1):
-            filename=Path(path).name
-            s+=f"### Figure {i}\n\n![Source-frozen Figure {i} summary preview]({filename})\n\n"
-        s+="These are frozen summary-level previews, not plots of independently "
-        s+="retrieved individual trajectories or unique source–target pairs.\n"
+        s+='\n'+figure_appendix(fig_entries,evidence_kind=evidence_kind)
     out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(s,encoding="utf-8")
     return {
@@ -102,13 +198,14 @@ def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
         "scientific_data_modified":False,
         "math_display_count":s.count(r"\["),
         "figure_count":len(fig_entries),
+        "figure_evidence_kind":evidence_kind,
         "figure_images":fig_entries,
         "full_underlying_data_included":False,
         "approved_for_journal_submission":False,
         "important_limitations":[
             "All references need final journal style verification",
             "PDF output needs page-by-page visual inspection",
-            "Reviewer-accessible full raw data/code archive not yet assembled",
+            "A PDF by itself is not an anonymous data/code reviewer archive",
             "Bibliographic and manuscript science still require human author approval",
         ],
     }

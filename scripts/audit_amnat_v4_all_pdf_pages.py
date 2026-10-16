@@ -63,7 +63,10 @@ def audit_pdf(pdf:Path,output:Path,render_all:bool=True) -> dict:
                 overflow_all.append({"page":page_number,"spans":overflow[:12],"n":len(overflow)})
             images=page.get_images(full=True)
             figure_xrefs.update(x[0] for x in images)
-            chars=len(content.strip())
+            # PyMuPDF sort=True can insert many synthetic spaces/newlines
+            # for geometric text reconstruction. A DOI-tail-only page may
+            # otherwise look like a 70-character page and evade QC.
+            chars=len("".join(content.split()))
             if chars<35 and not images:
                 blank_pages.append(page_number)
             entries={

@@ -164,6 +164,15 @@ def prepare(base_zip:Path,six:Path,spatial:Path,pdf_root:Path,dest:Path,
         raise ValueError("New complete manuscript all-page mechanical audit failed")
     add(dest,"qc/PDF_ALL_PAGE_SOURCE_QC.json",
         (json.dumps(page_qc,indent=2,ensure_ascii=False)+"\n").encode("utf-8"))
+    figure_qc=json.loads(only(pdf_root,"FIGURE_CAPTION_LAYOUT_QC.json").read_text(encoding="utf-8"))
+    if (figure_qc.get("status")!="FOUR_SINGLE_PAGE_SOURCE_CORRECT_FIGURES_MECHANICALLY_VERIFIED_HUMAN_HOLD"
+        or figure_qc.get("pdf_sha256")!=sha(latest.read_bytes())
+        or len(figure_qc.get("figure_image_pages",[]))!=4
+        or not all(figure_qc.get("checks",{}).values())):
+        raise ValueError("Source-verified single-page figure layout and caption QC failed")
+    add(dest,"qc/PDF_FIGURE_CAPTION_LAYOUT_QC.json",
+        (json.dumps(figure_qc,indent=2,ensure_ascii=False)+"\n").encode("utf-8"))
+
 
     readme=(dest/"README.md").read_text(encoding="utf-8")
     outdated="A *separate* RMSE-change-to-bird-mismatch transfer was NOT conducted; do not claim both transfer exposures fail from this table."
@@ -209,6 +218,7 @@ rows with: bash scripts/reproduce_s3.sh
         "revised_manuscript_pdf_pages":page_count,
         "revised_manuscript_sha256":sha(cleaned),
         "full_page_human_visual_approved":False,
+        "four_figures_single_page_and_correctly_captioned":True,
         "anonymous_delivery_link_exists":False,
         "journal_submission_ready":False,
     })

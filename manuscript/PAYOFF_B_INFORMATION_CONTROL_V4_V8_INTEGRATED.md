@@ -1171,14 +1171,6 @@ jointly identify, an information-by-competition-by-deadline mechanism in the
 same individuals. A new claim requires those discriminating measurements;
 replicating a published playback or settlement result is insufficient.
 
-The additional source-admission screen conducted after the present V8
-integration found that the seven registered Dryad files for the 2017
-settlement experiment were not obtainable through the unauthenticated API
-used by the audit (HTTP 401), despite publicly visible metadata and
-independently inspected published R code. No new behavioural or demographic
-coefficient was generated from that dataset. This access result is a
-methodological gate, **not** evidence for or against the focal mechanism.
-
 ### 5.10 Direct natural validation remains prospective
 
 The evidence is no longer purely cross-system. Mule deer provide a candidate

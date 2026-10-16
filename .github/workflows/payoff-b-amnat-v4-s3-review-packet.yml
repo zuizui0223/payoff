@@ -8,6 +8,11 @@ on:
       - submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S3_DAY_TRANSFER_20261015.md
       - docs/PAYOFF_B_V8_DAYMETRIC_SPATIAL_SENSITIVITY_RESULT_20261015.md
       - scripts/build_amnat_v4_s3_anon_review_archive.py
+      - scripts/build_amnat_v4_anonymous_preview.py
+      - scripts/audit_amnat_v4_figure_page_and_caption_qc.py
+      - scripts/audit_amnat_v4_all_pdf_pages.py
+      - tests/test_amnat_v4_all_pdf_pages.py
+      - tests/test_amnat_v4_figure_page_and_caption_qc.py
       - scripts/verify_amnat_s3_exploratory_replay.py
       - tests/test_build_amnat_v4_s3_anon_review_archive.py
       - .github/workflows/payoff-b-amnat-v4-s3-review-packet.yml
@@ -17,6 +22,11 @@ on:
       - submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S3_DAY_TRANSFER_20261015.md
       - docs/PAYOFF_B_V8_DAYMETRIC_SPATIAL_SENSITIVITY_RESULT_20261015.md
       - scripts/build_amnat_v4_s3_anon_review_archive.py
+      - scripts/build_amnat_v4_anonymous_preview.py
+      - scripts/audit_amnat_v4_figure_page_and_caption_qc.py
+      - scripts/audit_amnat_v4_all_pdf_pages.py
+      - tests/test_amnat_v4_all_pdf_pages.py
+      - tests/test_amnat_v4_figure_page_and_caption_qc.py
       - scripts/verify_amnat_s3_exploratory_replay.py
       - tests/test_build_amnat_v4_s3_anon_review_archive.py
       - .github/workflows/payoff-b-amnat-v4-s3-review-packet.yml
@@ -50,6 +60,8 @@ jobs:
             tests/test_build_amnat_v4_s3_anon_review_archive.py \
             tests/test_amnat_v4_review_readiness.py \
             tests/test_amnat_v4_anonymous_preview.py \
+            tests/test_amnat_v4_figure_page_and_caption_qc.py \
+            tests/test_amnat_v4_all_pdf_pages.py \
             tests/test_payoff_b_amnat_v4_summary_figures.py
           python scripts/audit_amnat_v4_review_readiness.py \
             --output outputs/reviewer_readiness_HOLD.json
@@ -91,6 +103,9 @@ jobs:
             --pdf outputs/new_paper/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf \
             --out outputs/new_paper/PDF_SOURCE_PREFLIGHT_HOLD.json \
             --png-dir outputs/new_paper/selected_page_previews
+          python scripts/audit_amnat_v4_figure_page_and_caption_qc.py \
+            --pdf outputs/new_paper/Paper2_anonymous_real_observation_EDITORIAL_preview.pdf \
+            --receipt outputs/new_paper/FIGURE_CAPTION_LAYOUT_QC.json
       - name: Authenticate the exact three previous science artifacts and their GitHub ZIP digests
         env:
           GH_READ_TOKEN: ${{ github.token }}
@@ -175,9 +190,16 @@ jobs:
               "analysis/seasonal_v8_daymetric_bird_transfer_exploratory.R",
               "analysis/seasonal_v8_daymetric_spatial_sensitivity_posthoc.R",
               "scripts/reproduce_s3.sh","qc/S3_EXPLORATORY_SOURCE_REPLAY.json",
-              "qc/PDF_ALL_PAGE_SOURCE_QC.json","manuscript/editorial_preview.pdf"):
+              "qc/PDF_ALL_PAGE_SOURCE_QC.json",
+              "qc/PDF_FIGURE_CAPTION_LAYOUT_QC.json",
+              "manuscript/editorial_preview.pdf"):
               assert required in names,required
-            assert len(names)>=75,len(names)
+            assert len(names)>=76,len(names)
+            layout=json.loads(f.read("qc/PDF_FIGURE_CAPTION_LAYOUT_QC.json"))
+            assert layout["status"]=="FOUR_SINGLE_PAGE_SOURCE_CORRECT_FIGURES_MECHANICALLY_VERIFIED_HUMAN_HOLD"
+            assert len(set(layout["figure_image_pages"]))==4
+            assert all(layout["checks"].values())
+            assert layout["human_full_page_visual_approval"] is False
           print("S3 SOURCE REPLAY + ANONYMOUS REVISED PDF PASS; JOURNAL SUBMISSION HOLD")
           PY
       - uses: actions/upload-artifact@v4
