@@ -185,9 +185,16 @@ jobs:
               "analysis/seasonal_v8_daymetric_bird_transfer_exploratory.R",
               "analysis/seasonal_v8_daymetric_spatial_sensitivity_posthoc.R",
               "scripts/reproduce_s3.sh","qc/S3_EXPLORATORY_SOURCE_REPLAY.json",
-              "qc/PDF_ALL_PAGE_SOURCE_QC.json","manuscript/editorial_preview.pdf"):
+              "qc/PDF_ALL_PAGE_SOURCE_QC.json",
+              "qc/PDF_FIGURE_CAPTION_LAYOUT_QC.json",
+              "manuscript/editorial_preview.pdf"):
               assert required in names,required
-            assert len(names)>=75,len(names)
+            assert len(names)>=76,len(names)
+            layout=json.loads(f.read("qc/PDF_FIGURE_CAPTION_LAYOUT_QC.json"))
+            assert layout["status"]=="FOUR_SINGLE_PAGE_SOURCE_CORRECT_FIGURES_MECHANICALLY_VERIFIED_HUMAN_HOLD"
+            assert len(set(layout["figure_image_pages"]))==4
+            assert all(layout["checks"].values())
+            assert layout["human_full_page_visual_approval"] is False
           print("S3 SOURCE REPLAY + ANONYMOUS REVISED PDF PASS; JOURNAL SUBMISSION HOLD")
           PY
       - uses: actions/upload-artifact@v4
