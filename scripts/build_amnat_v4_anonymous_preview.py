@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Build an anonymized MARKDOWN+PNG editorial PREVIEW of AmNat Paper 2.
 
-No scientific estimates are recalculated, no raw individual/pair observations
-are embedded, and output is NOT a submission-ready reviewer archive. A
+No scientific estimates are recalculated. The passed-in, independently
+source-verified figures may include authentic observed spatial pairs and
+species-target rows; no points are synthesized here. The output is NOT an
+approved or deposited reviewer archive. A
 separate workflow may typeset this preview with Pandoc + XeLaTeX.
 """
 from __future__ import annotations
@@ -16,6 +18,46 @@ SOURCE=Path("manuscript/PAYOFF_B_INFORMATION_CONTROL_V4_V8_INTEGRATED.md")
 FIGURES=("figure1_summary.svg","figure2_summary.svg",
          "figure3_summary.svg","figure4_summary.svg")
 TITLE="Environmental predictability alone does not determine seasonal tracking"
+
+# One page per figure. Captions describe the scientific evidence units and
+# MUST NOT recast genuine archived V8 observations as summary-only figures.
+FIGURE_CAPTIONS=(
+    "Serial timing and control architecture. Schematic theory and a "
+    "conditional linear, innovation-free two-actor identity; neither "
+    "animal belief nor fitness is observed.",
+    "Early versus late signed green-up correlations for 166 distinct "
+    "original source-target environmental spatial pairs used by 28 bird "
+    "species. These are environmental relationships, not tracked animals.",
+    "Original 150 bird species-target mismatch observations associated "
+    "with 72 distinct environmental spatial pairs (22 species), with "
+    "the fixed-arrival structural-null comparison. The 150 rows are "
+    "not 150 independent environmental relationships.",
+    "Original published-source descriptive mule-deer summaries from "
+    "152 animal-years (72 individuals). No fabricated individual "
+    "trajectories, direct cue estimates, or demographic fitness effects.",
+)
+
+
+def figure_appendix(images:list[str])->str:
+    if len(images)!=4 or len(FIGURE_CAPTIONS)!=4:
+        raise ValueError("Exactly four source-bounded figure inputs required")
+    text="\\clearpage\n\n## Figures (source-verified editorial previews)\n\n"
+    for i,(image,caption) in enumerate(zip(images,FIGURE_CAPTIONS),1):
+        if i>1:
+            text+="\\clearpage\n\n"
+        name=Path(image).name
+        # Non-floating LaTeX image makes it impossible to leave an orphaned
+        # heading on the preceding page or pack two unreadably small
+        # science figures on one page.
+        text+=f"\\begin{{center}}\n\\includegraphics[width=0.94\\textwidth]{{{name}}}\n\\end{{center}}\n\n"
+        text+=f"**Figure {i}.** {caption}\n\n"
+    text+=("Figures 2 and 3 plot the original, source-verified environmental "
+           "pair and bird species-target observations; Figures 1 and 4 "
+           "are respectively conceptual and descriptive summaries. "
+           "The panels do not establish individual information use, "
+           "behavioural causality, or fitness effects.\n")
+    return text
+
 
 
 def anonymize(source:str)->str:
@@ -88,12 +130,7 @@ def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
             target.parent.mkdir(parents=True,exist_ok=True)
             cairosvg.svg2png(url=str(path),write_to=str(target),scale=2)
             fig_entries.append(str(target))
-        s+="\n\\newpage\n\n## Source-bounded figure previews\n\n"
-        for i,path in enumerate(fig_entries,1):
-            filename=Path(path).name
-            s+=f"### Figure {i}\n\n![Source-frozen Figure {i} summary preview]({filename})\n\n"
-        s+="These are frozen summary-level previews, not plots of independently "
-        s+="retrieved individual trajectories or unique source–target pairs.\n"
+        s+='\n'+figure_appendix(fig_entries)
     out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(s,encoding="utf-8")
     return {
@@ -108,7 +145,7 @@ def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
         "important_limitations":[
             "All references need final journal style verification",
             "PDF output needs page-by-page visual inspection",
-            "Reviewer-accessible full raw data/code archive not yet assembled",
+            "A PDF by itself is not an anonymous data/code reviewer archive",
             "Bibliographic and manuscript science still require human author approval",
         ],
     }
