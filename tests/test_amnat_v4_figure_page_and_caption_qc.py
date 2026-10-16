@@ -71,6 +71,10 @@ def test_manuscript_contains_no_internal_dryad_download_failure():
     assert "HTTP 401" not in raw
     anon=anonymize(raw)
     assert "the present the bird-data test" not in anon
+    assert "The\nprospectively specified environmental analysis" in anon
+    assert "after\nthe registered environmental-correlation result" in anon
+    assert "The the bird-data test" not in anon
+    assert "after\nthe the bird-data test" not in anon
     assert "published playback or settlement result is insufficient" in anon
 
 
