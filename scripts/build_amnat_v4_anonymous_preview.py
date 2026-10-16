@@ -10,6 +10,7 @@ separate workflow may typeset this preview with Pandoc + XeLaTeX.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -173,6 +174,14 @@ def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
             path=figures_dir/name
             if not path.is_file():
                 raise FileNotFoundError(path)
+            expected_hash=(
+                metadata["figure_sha256"].get(name)
+                if evidence_kind=="observed"
+                else metadata["figures"].get(name,{}).get("sha256")
+            )
+            if (not expected_hash or
+                hashlib.sha256(path.read_bytes()).hexdigest()!=expected_hash):
+                raise ValueError("Frozen source-figure SHA256 mismatch: "+name)
             target=out.parent/f"figure{i}_preview.png"
             target.parent.mkdir(parents=True,exist_ok=True)
             cairosvg.svg2png(url=str(path),write_to=str(target),scale=2)
