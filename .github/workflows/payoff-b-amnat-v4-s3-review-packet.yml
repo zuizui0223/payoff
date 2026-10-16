@@ -10,6 +10,8 @@ on:
       - scripts/build_amnat_v4_s3_anon_review_archive.py
       - scripts/build_amnat_v4_anonymous_preview.py
       - scripts/audit_amnat_v4_figure_page_and_caption_qc.py
+      - scripts/audit_amnat_v4_all_pdf_pages.py
+      - tests/test_amnat_v4_all_pdf_pages.py
       - tests/test_amnat_v4_figure_page_and_caption_qc.py
       - scripts/verify_amnat_s3_exploratory_replay.py
       - tests/test_build_amnat_v4_s3_anon_review_archive.py
@@ -22,6 +24,8 @@ on:
       - scripts/build_amnat_v4_s3_anon_review_archive.py
       - scripts/build_amnat_v4_anonymous_preview.py
       - scripts/audit_amnat_v4_figure_page_and_caption_qc.py
+      - scripts/audit_amnat_v4_all_pdf_pages.py
+      - tests/test_amnat_v4_all_pdf_pages.py
       - tests/test_amnat_v4_figure_page_and_caption_qc.py
       - scripts/verify_amnat_s3_exploratory_replay.py
       - tests/test_build_amnat_v4_s3_anon_review_archive.py
@@ -57,6 +61,7 @@ jobs:
             tests/test_amnat_v4_review_readiness.py \
             tests/test_amnat_v4_anonymous_preview.py \
             tests/test_amnat_v4_figure_page_and_caption_qc.py \
+            tests/test_amnat_v4_all_pdf_pages.py \
             tests/test_payoff_b_amnat_v4_summary_figures.py
           python scripts/audit_amnat_v4_review_readiness.py \
             --output outputs/reviewer_readiness_HOLD.json
