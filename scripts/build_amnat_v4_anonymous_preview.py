@@ -38,11 +38,26 @@ FIGURE_CAPTIONS=(
 )
 
 
-def figure_appendix(images:list[str])->str:
-    if len(images)!=4 or len(FIGURE_CAPTIONS)!=4:
+SUMMARY_FIGURE_CAPTIONS=(
+    FIGURE_CAPTIONS[0],
+    "Frozen mean changes in environmental signed green-up correlation "
+    "and 95% unique-pair bootstrap intervals from 166 spatial pairs "
+    "used by 28 species. This summary DOES NOT plot original pair rows.",
+    "Frozen registered transfer coefficient, fixed-bird-arrival structural "
+    "null and 95% dependent-pair intervals for 150 bird observations "
+    "using 72 environment pairs. This summary DOES NOT plot original points.",
+    FIGURE_CAPTIONS[3],
+)
+
+
+def figure_appendix(images:list[str],evidence_kind:str="observed")->str:
+    if evidence_kind not in ("observed","summary"):
+        raise ValueError("Unknown source/figure evidence level")
+    captions=FIGURE_CAPTIONS if evidence_kind=="observed" else SUMMARY_FIGURE_CAPTIONS
+    if len(images)!=4 or len(captions)!=4:
         raise ValueError("Exactly four source-bounded figure inputs required")
     text="\\clearpage\n\n## Figures (source-verified editorial previews)\n\n"
-    for i,(image,caption) in enumerate(zip(images,FIGURE_CAPTIONS),1):
+    for i,(image,caption) in enumerate(zip(images,captions),1):
         if i>1:
             text+="\\clearpage\n\n"
         name=Path(image).name
@@ -51,11 +66,15 @@ def figure_appendix(images:list[str])->str:
         # science figures on one page.
         text+=f"\\begin{{center}}\n\\includegraphics[width=0.94\\textwidth]{{{name}}}\n\\end{{center}}\n\n"
         text+=f"**Figure {i}.** {caption}\n\n"
-    text+=("Figures 2 and 3 plot the original, source-verified environmental "
-           "pair and bird species-target observations; Figures 1 and 4 "
-           "are respectively conceptual and descriptive summaries. "
-           "The panels do not establish individual information use, "
-           "behavioural causality, or fitness effects.\n")
+    if evidence_kind=="observed":
+        text+=("Figures 2 and 3 plot the original, source-verified environmental "
+               "pair and bird species-target observations. ")
+    else:
+        text+=("Figures 2 and 3 are source-frozen numerical summaries, "
+               "not scatterplots of original environmental pairs or bird rows. ")
+    text+=("Figures 1 and 4 are respectively conceptual and descriptive. "
+           "No panel establishes individual information use, "
+           "behavioural causality, or demographic fitness.\n")
     return text
 
 
@@ -124,7 +143,28 @@ def anonymize(source:str)->str:
 def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
     s=anonymize(source)
     fig_entries=[]
+    evidence_kind=None
     if figures_dir is not None:
+        # This builder is used by both the summary-only archival diagnostics
+        # and the canonical source-observation manuscript. Never let one
+        # workflow mislabel summary means as observed 166/150 data points.
+        observed_receipt=figures_dir/"combined_figure_source_receipt.json"
+        summary_receipt=figures_dir/"figure_manifest.json"
+        if observed_receipt.is_file():
+            metadata=json.loads(observed_receipt.read_text(encoding="utf-8"))
+            if (metadata.get("status")!="REAL_POINT_F2_F3_AND_FROZEN_F1_F4_EDITORIAL_PREVIEW_PASS"
+                or metadata.get("f2_observed_unique_spatial_pairs")!=166
+                or metadata.get("f3_observed_species_target_rows")!=150
+                or metadata.get("f3_independent_environment_pairs")!=72):
+                raise ValueError("Observed figure source receipt not independently validated")
+            evidence_kind="observed"
+        elif summary_receipt.is_file():
+            metadata=json.loads(summary_receipt.read_text(encoding="utf-8"))
+            if metadata.get("status")!="VERIFIED_SUMMARY_FIGURE_PREVIEW_SUBMISSION_HOLD":
+                raise ValueError("Summary figure receipt not independently validated")
+            evidence_kind="summary"
+        else:
+            raise ValueError("Figure source provenance receipt is required")
         try:
             import cairosvg
         except ImportError as exc:
@@ -137,7 +177,7 @@ def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
             target.parent.mkdir(parents=True,exist_ok=True)
             cairosvg.svg2png(url=str(path),write_to=str(target),scale=2)
             fig_entries.append(str(target))
-        s+='\n'+figure_appendix(fig_entries)
+        s+='\n'+figure_appendix(fig_entries,evidence_kind=evidence_kind)
     out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(s,encoding="utf-8")
     return {
@@ -146,6 +186,7 @@ def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
         "scientific_data_modified":False,
         "math_display_count":s.count(r"\["),
         "figure_count":len(fig_entries),
+        "figure_evidence_kind":evidence_kind,
         "figure_images":fig_entries,
         "full_underlying_data_included":False,
         "approved_for_journal_submission":False,
