@@ -79,6 +79,8 @@ def anonymize(source:str)->str:
         ("PAYOFF-B therefore","We therefore"),
         ("PAYOFF-B consequently","We consequently"),
         ("PAYOFF-B","this study"),
+        ("The\nV8 environmental analysis","The\nprospectively specified environmental analysis"),
+        ("the V8 primary result","the registered environmental-correlation result"),
         ("The V8 environmental analysis","The prospectively specified environmental analysis"),
         ("the V8 environmental analysis","the prospectively specified environmental analysis"),
         ("The current V8 evidence","The current bird-data evidence"),
@@ -98,6 +100,11 @@ def anonymize(source:str)->str:
     for old,new in replacements:
         s=s.replace(old,new)
     s=s.strip()+"\n"
+    # A mechanical identifier replacement must not corrupt ordinary prose.
+    # The earlier manuscript rendered "The the bird-data test ..." because
+    # its generic V8 alias matched across a manually wrapped line.
+    if re.search(r"\b[Tt]he\s+the\b",s):
+        raise ValueError("Duplicate determiner introduced by anonymization")
     forbidden=[
         "PAYOFF-B","V8","V7R","V3","V4","rollback",
         "zuizui0223","github.com/zuizui",
