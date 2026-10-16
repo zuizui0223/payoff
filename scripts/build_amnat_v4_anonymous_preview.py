@@ -61,7 +61,10 @@ def figure_appendix(images:list[str],evidence_kind:str="observed")->str:
     for i,(image,caption) in enumerate(zip(images,captions),1):
         if i>1:
             text+="\\clearpage\n\n"
-        name=Path(image).name
+        # Raw LaTeX includes do not pass through Pandoc's --resource-path
+        # rewriting: use the actual generated PNG path for XeLaTeX, not
+        # only its basename (which produced "Unable to load picture").
+        name=Path(image).resolve().as_posix()
         # Non-floating LaTeX image makes it impossible to leave an orphaned
         # heading on the preceding page or pack two unreadably small
         # science figures on one page.
