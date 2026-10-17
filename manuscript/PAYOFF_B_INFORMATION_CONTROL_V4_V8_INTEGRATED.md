@@ -997,10 +997,11 @@ prebreeding condition delayed laying.
 
 ### 5.4 A variance funnel identifies effective feedback, not controller primitives
 
-Individualized post-entry feedback predicts more phase-variance contraction
-than a common open-loop schedule. With incoming variance \(P_t\), information
-weight \(K_t\), effective correction \(h_t\), passive retention \(\phi_t\) and
-new process variance \(Q_t\),
+Under a linear Gaussian cue with independent mean-zero
+observation noise, feedback can contract phase variance. With incoming
+variance \(P_t\), posterior information fraction \(K_t\), enacted
+correction \(h_t\), passive retention \(\phi_t\), and independent
+process-innovation variance \(Q_t\),
 
 \[
 P_{t+1}
@@ -1022,16 +1023,11 @@ For a serial entry-gate system after entry, \(h_t=O_tg_t\). If physiological
 readiness is concurrently active at the same decision, \(h_t=G_tO_tg_t\).
 The latter must be measured rather than assumed.
 
-This matters because final synchrony can hide different strategies. With no new
-innovation,
-
-\[
-V_n=\lambda^{2n}V_0,
-\]
-
-so a noisier entry timer can be offset by stronger downstream correction.
-Arrival precision alone therefore does not identify how that precision was
-achieved.
+Only in a **deterministic, observation-noise-free** scalar recurrence
+does \(V_n=\lambda^{2n}V_0\). Noisy cue estimates retain additional
+variance even if \(Q_t=0\); use the variance recursion above instead.
+Arrival precision alone cannot identify its underlying strategy
+(Supplementary Mathematical Note S4).
 
 ### 5.5 The most informative checkpoint need not be the most important checkpoint
 
