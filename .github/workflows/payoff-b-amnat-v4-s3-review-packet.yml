@@ -9,6 +9,7 @@ on:
       - src/paper2_actionability_peak.py
       - tests/test_paper2_actionability_peak.py
       - tests/test_paper2_theory_claim_alignment.py
+      - scripts/verify_amnat_v4_theory_source.py
       - submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S3_DAY_TRANSFER_20261015.md
       - docs/PAYOFF_B_V8_DAYMETRIC_SPATIAL_SENSITIVITY_RESULT_20261015.md
       - scripts/build_amnat_v4_s3_anon_review_archive.py
@@ -22,6 +23,7 @@ on:
       - src/paper2_actionability_peak.py
       - tests/test_paper2_actionability_peak.py
       - tests/test_paper2_theory_claim_alignment.py
+      - scripts/verify_amnat_v4_theory_source.py
       - submission/AMNAT_V4_SUPPLEMENTARY_TABLE_S3_DAY_TRANSFER_20261015.md
       - docs/PAYOFF_B_V8_DAYMETRIC_SPATIAL_SENSITIVITY_RESULT_20261015.md
       - scripts/build_amnat_v4_s3_anon_review_archive.py
@@ -165,6 +167,7 @@ jobs:
         run: |
           cd outputs/anon_science_s3
           python -m pytest -q tests/test_paper2_actionability_peak.py
+          python -m scripts.verify_theory_math --out qc/S4_THEORY_MATH_GUARD.json
           python - <<'PY'
           from pathlib import Path
           s=Path("supplementary/Mathematical_Note_S4.md").read_text()
@@ -195,6 +198,8 @@ jobs:
               "supplementary/Mathematical_Note_S4.md",
               "src/paper2_actionability_peak.py",
               "tests/test_paper2_actionability_peak.py",
+              "scripts/verify_theory_math.py",
+              "qc/S4_THEORY_MATH_GUARD.json",
               "data/source_input.rds","data/mule_deer_source_data.xlsx",
               "supplementary/Table_S2_day_scale.md",
               "supplementary/Table_S3_day_metric_bird_transfer.md",
