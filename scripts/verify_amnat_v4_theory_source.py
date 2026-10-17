@@ -33,7 +33,7 @@ def audit(model_path:Path=MODEL,proof_path:Path=PROOF)->dict:
     proof=proof_path.read_bytes()
     readable=proof.decode("utf-8")
     for needed in ("threshold-normalized", "A_\\infty", "posterior",
-                   "noisy cue", "variance", "no finite waiting time"):
+                   "noisy cue", "variance", "no positive opportunity payoff"):
         if needed.casefold() not in readable.casefold():
             raise ValueError("Incomplete S4 mathematical proof: "+needed)
     witness=ActionabilityPeak(.5,.5,1,1,2,1)
