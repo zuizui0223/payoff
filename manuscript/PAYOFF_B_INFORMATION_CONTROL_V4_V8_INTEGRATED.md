@@ -107,15 +107,15 @@ Our central claim is:
 
 ### 2.1 Information becomes more accurate while actionability can decline
 
-Let the future seasonal state be early or normal. Above the canonical Paper-2 actionability boundary, let the gross value of a cue with reliability (q) be
+Let the future seasonal state be early or normal. Above the canonical Paper-2 actionability boundary, let the gross value of a cue with reliability \(q\) be
 
 \[
 V_A(q)=Sq-B,
 \]
 
-where (S) is the total state-dependent loss scale and (B) is the larger prior action loss.
+where \(S\) is the total state-dependent loss scale and \(B\) is the larger prior action loss.
 
-Let \(r(t)\in[0,1]\) represent retained actionability: the fraction of the full state-contingent response that remains usable at time or route stage (t). Let (C(t)) be cumulative direct cost of waiting. The reduced net value of using information at time (t) is
+Let \(r(t)\in[0,1]\) represent retained actionability: the fraction of the full state-contingent response that remains usable at time or route stage \(t\). Let \(C\(t\)\) be cumulative direct cost of waiting. The reduced net value of using information at time \(t\) is
 
 \[
 N(t)=r(t)[Sq(t)-B]-C(t).
@@ -137,27 +137,42 @@ When direct marginal waiting cost is zero,
 
 Thus the optimum occurs when the relative gain in information value is exactly balanced by the relative loss of remaining actionability.
 
-For exponential learning and exponential actionability loss,
+For exponential cue learning and loss of opportunities,
 
 \[
-q(t)=q_0+\Delta q[1-\exp(-\alpha t)]
+q(t)=q_0+\Delta q[1-e^{-\alpha t}],
+\qquad
+r(t)=e^{-\beta t},
+\quad \alpha,\beta>0,\quad\Delta q\geq0.
 \]
 
-and
+Let \(A_\infty=S(q_0+\Delta q)-B\) and \(D=S\Delta q\).
+With zero direct waiting cost, \(N(t)=e^{-\beta t}
+[A_\infty-De^{-\alpha t}]\).
+When \(A_\infty\leq0\), no finite waiting time has positive
+net benefit, and a zero-payoff outside option is preferable.
+When \(A_\infty>0\), the optimum is immediate if \(D=0\);
+otherwise
 
 \[
-r(t)=\exp(-\beta t),
+\boxed{
+t^*=\max\left\{0,\frac{1}{\alpha}
+\log\left[\frac{(\alpha+\beta)D}{\beta A_\infty}\right]\right\}.
+}
 \]
 
-the unique zero-cost optimum is
-
-\[
-t^*=\frac{\log(1+\alpha/\beta)}{\alpha}.
-\]
-
-The optimum moves earlier as (\beta) increases. Two actors observing the same environmental-information trajectory can therefore commit at different stages solely because their remaining response options disappear at different rates.
-
-A particularly important consequence is that perfect information can be too late. With \(\alpha=\beta=1\), the optimum is \(t^*=\log 2\), where cue accuracy is only \(q=0.75\) in the symmetric witness even though \(q\to1\) later. Better information is not automatically more useful.
+Only in the **threshold-normalized case**
+\(Sq_0=B\), with \(\Delta q>0\), does this simplify to
+\(t^*=\log(1+\alpha/\beta)/\alpha\).
+Thus optimal waiting depends on initial cue value and action
+losses as well as learning and opportunity-decay rates.
+For the symmetric example \(q_0=\Delta q=0.5\),
+\(B=S/2\), and \(\alpha=\beta=1\),
+\(t^*=\log 2\) and cue reliability is only \(q(t^*)=0.75\).
+With direct waiting costs, one must compare the appropriate
+stationary points and boundary options (Supplementary
+Mathematical Note S4). These are properties of a reduced
+decision model, **not estimates of birds' perceived cues**.
 
 In the single-commitment limit, the downstream consequences of waiting can be
 compressed into an effective deadline cost,
@@ -188,18 +203,18 @@ e_t<0
 
 for an actor that is early.
 
-At route stage (t), the actor forms an estimate
+At route stage \(t\), the actor forms an estimate
 
 \[
 \hat e_t=E[e_t\mid I_t],
 \]
 
-where (I_t) is the information accumulated by that stage.
+where \(I_t\) is the information accumulated by that stage.
 
-A signed correction (u_t) represents the combined timing effect of available actuators:
+A signed correction \(u_t\) represents the combined timing effect of available actuators:
 
-- (u_t>0): speed up, shorten stopover, skip delay or otherwise advance progress;
-- (u_t<0): slow down, lengthen stopover, wait or otherwise delay progress.
+- \(u_t>0\): speed up, shorten stopover, skip delay or otherwise advance progress;
+- \(u_t<0\): slow down, lengthen stopover, wait or otherwise delay progress.
 
 The realized phase state then evolves as
 
@@ -309,9 +324,9 @@ This gives an exact decomposition of segment-scale phase retention.
 
 If \(g_t=0\), the observed phase coefficient is passive carry-over \(\lambda_t=\phi_t\).
 
-If (0<g_t<1), active correction reduces retained phase error.
+If \(0<g_t<1\), active correction reduces retained phase error.
 
-If (g_t=1), the current phase error is reset at that checkpoint when the target does not move.
+If \(g_t=1\), the current phase error is reset at that checkpoint when the target does not move.
 
 If \(g_t>1\), the controller overshoots and \(\lambda_t\) can become negative.
 
@@ -359,7 +374,14 @@ Its reduced post-entry retention is
 \phi_i(1-h_iK_i),
 \]
 
-where \(K_i\) is effective phase information and \(h_i\) is enacted correction.
+Here \(K_i\) is a *linear cue-response coefficient*,
+not directly observed information, and \(h_i\) is enacted
+correction. This \(\lambda_i\) is the conditional-mean
+phase **slope**, assuming an unbiased linear cue, fixed
+prior mean, and phase-independent mean innovation; an
+additive intercept may remain. Neither \(K_i\) nor \(h_i\)
+is separately identified by \(\lambda_i\)
+(Supplementary Mathematical Note S4).
 For a serial entry gate, \(h_i=O_i g_i\): readiness has already been crossed,
 while remaining opportunity \(O_i\) and decision gain \(g_i\) govern later
 correction. Here \(O_i\) is the actuator-specific realization of the retained
@@ -399,7 +421,7 @@ m_0=\frac{e_{1,0}+e_{2,0}}{2},
 \Delta_0=e_{1,0}-e_{2,0}.
 \]
 
-In the no-innovation witness,
+In the centered, deterministic, noise-free witness,
 
 \[
 e_{i,n}=\lambda_i^n e_{i,0}.
@@ -975,10 +997,11 @@ prebreeding condition delayed laying.
 
 ### 5.4 A variance funnel identifies effective feedback, not controller primitives
 
-Individualized post-entry feedback predicts more phase-variance contraction
-than a common open-loop schedule. With incoming variance \(P_t\), information
-weight \(K_t\), effective correction \(h_t\), passive retention \(\phi_t\) and
-new process variance \(Q_t\),
+Under a linear Gaussian cue with independent mean-zero
+observation noise, feedback can contract phase variance. With incoming
+variance \(P_t\), posterior information fraction \(K_t\), enacted
+correction \(h_t\), passive retention \(\phi_t\), and independent
+process-innovation variance \(Q_t\),
 
 \[
 P_{t+1}
@@ -1000,24 +1023,19 @@ For a serial entry-gate system after entry, \(h_t=O_tg_t\). If physiological
 readiness is concurrently active at the same decision, \(h_t=G_tO_tg_t\).
 The latter must be measured rather than assumed.
 
-This matters because final synchrony can hide different strategies. With no new
-innovation,
-
-\[
-V_n=\lambda^{2n}V_0,
-\]
-
-so a noisier entry timer can be offset by stronger downstream correction.
-Arrival precision alone therefore does not identify how that precision was
-achieved.
+Only in a **deterministic, observation-noise-free** scalar recurrence
+does \(V_n=\lambda^{2n}V_0\). Noisy cue estimates retain additional
+variance even if \(Q_t=0\); use the variance recursion above instead.
+Arrival precision alone cannot identify its underlying strategy
+(Supplementary Mathematical Note S4).
 
 ### 5.5 The most informative checkpoint need not be the most important checkpoint
 
-The actionability theorem predicts an intermediate-stage peak in behavioral cue responsiveness. Early in the route, the signal can be too poor to guide correction. Late in the route, the signal can be excellent but response options can be exhausted.
-
-The ecologically important checkpoint is therefore where information gain and remaining correction capacity jointly make information most valuable.
-
-This prediction differs from a simple “closer cues are better” model.
+The threshold-normalized decision model gives an interior peak in
+the value of using a cue: at first the signal is poor, but later
+opportunities to act may vanish. In other parameter regimes the optimum
+is immediate, or no action has positive net value. Information quality
+alone therefore does not rank ecological checkpoints.
 
 ### 5.6 Phase retention is a useful coordinate but not a mechanism by itself
 
@@ -1170,14 +1188,6 @@ this study (Morinay et al. 2020). These studies motivate, but do not
 jointly identify, an information-by-competition-by-deadline mechanism in the
 same individuals. A new claim requires those discriminating measurements;
 replicating a published playback or settlement result is insufficient.
-
-The additional source-admission screen conducted after the present V8
-integration found that the seven registered Dryad files for the 2017
-settlement experiment were not obtainable through the unauthenticated API
-used by the audit (HTTP 401), despite publicly visible metadata and
-independently inspected published R code. No new behavioural or demographic
-coefficient was generated from that dataset. This access result is a
-methodological gate, **not** evidence for or against the focal mechanism.
 
 ### 5.10 Direct natural validation remains prospective
 
