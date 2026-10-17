@@ -1,0 +1,130 @@
+"""Exact zero-wait-cost information/actionability optimum for Paper 2.
+
+For future cue accuracy q(t)=q0 + dq*(1-exp(-alpha*t)), retained
+actionability r(t)=exp(-beta*t), state loss scale S and prior choice
+cost B, maximize optional positive net opportunity
+
+    N(t) = r(t) * (S*q(t)-B)
+
+over t >= 0, also allowing the actor to take a zero-payoff outside action.
+
+The popular t*=log(1+alpha/beta)/alpha is only obtained in the
+threshold-normalized case S*q0=B. Results in this module are elementary
+calculus, not new ecological theorems or estimated fitness.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+from math import exp, isfinite, log
+
+
+@dataclass(frozen=True)
+class ActionabilityPeak:
+    q0: float
+    dq: float
+    alpha: float
+    beta: float
+    loss_scale: float
+    baseline_loss: float
+
+    def __post_init__(self):
+        vals=(self.q0,self.dq,self.alpha,self.beta,self.loss_scale,self.baseline_loss)
+        if not all(isfinite(v) for v in vals):
+            raise ValueError("Parameters must be finite")
+        if not (0.5 <= self.q0 <= 1 and 0 <= self.dq <= 1-self.q0+1e-15):
+            raise ValueError("Cue reliability must start in [0.5,1] and not exceed 1")
+        if self.alpha<=0 or self.beta<=0 or self.loss_scale<=0 or self.baseline_loss<0:
+            raise ValueError("Positive learning/decay rates, positive scale, nonnegative loss required")
+
+    @property
+    def asymptotic_gross(self)->float:
+        return self.loss_scale*(self.q0+self.dq)-self.baseline_loss
+
+    @property
+    def learning_amplitude(self)->float:
+        return self.loss_scale*self.dq
+
+    def cue_accuracy(self,t:float)->float:
+        if not isfinite(t) or t<0:
+            raise ValueError("time must be finite and >=0")
+        return self.q0+self.dq*(1-exp(-self.alpha*t))
+
+    def net(self,t:float)->float:
+        return exp(-self.beta*t)*(self.loss_scale*self.cue_accuracy(t)-self.baseline_loss)
+
+    def derivative(self,t:float)->float:
+        if not isfinite(t) or t<0:
+            raise ValueError("time must be finite and >=0")
+        return exp(-self.beta*t)*(
+            (self.alpha+self.beta)*self.learning_amplitude*exp(-self.alpha*t)
+            -self.beta*self.asymptotic_gross
+        )
+
+    def optimum(self)->dict:
+        """Global nonnegative optimum for free/optional informational action.
+
+        If asymptotic gross gain <=0, every finite t has nonpositive gain,
+        and the zero-payoff action is optimal. If positive, derivative
+        changes sign at most once and the optimum is at t=0 or the
+        positive stationary point.
+        """
+        a=self.asymptotic_gross
+        d=self.learning_amplitude
+        if a<=0:
+            return {"regime":"NO_POSITIVE_INFORMATION_RETURN",
+                    "optimal_wait_time":None,"optimal_net_value":0.0,
+                    "interior_stationary_point":None}
+        ratio=(self.alpha+self.beta)*d/(self.beta*a)
+        stationary=log(ratio)/self.alpha if ratio>0 else None
+        if ratio<=1.0:
+            best=0.0
+            regime="COMMIT_IMMEDIATELY"
+        else:
+            best=stationary
+            regime="INTERIOR_CHECKPOINT"
+        payoff=max(self.net(best),0.0)
+        if payoff<=0:
+            raise ArithmeticError("Positive asymptotic gain must give positive attainable net benefit")
+        return {"regime":regime,"optimal_wait_time":best,
+                "optimal_net_value":payoff,
+                "interior_stationary_point":stationary,
+                "threshold_normalization":abs(self.loss_scale*self.q0-self.baseline_loss)<1e-11}
+
+
+def symmetric_threshold_peak(alpha:float,beta:float)->float:
+    """The special, and ONLY threshold-normalized log(1+a/b)/a formula."""
+    if not isfinite(alpha) or not isfinite(beta) or alpha<=0 or beta<=0:
+        raise ValueError("alpha,beta must be finite and positive")
+    return log(1+alpha/beta)/alpha
+
+
+def explicit_nonzero_wait_cost_stationarity(t:float,model:ActionabilityPeak,
+                                            marginal_waiting_cost:float)->float:
+    """Exact first-order residual N'(t) for cumulative C(t) cost.
+
+    An interior optimum solves:
+    r*S*q' + r'*(S*q-B) - C' = 0.
+    Merely solving stationarity does not ensure a global optimum.
+    """
+    if not isfinite(marginal_waiting_cost) or marginal_waiting_cost<0:
+        raise ValueError("Nonnegative finite direct waiting marginal cost required")
+    return model.derivative(t)-marginal_waiting_cost
+
+
+def two_actor_mismatch(
+    e1_initial:float,e2_initial:float,lambda1:float,lambda2:float,steps:int
+)->dict:
+    """Exact no-innovation two-actor scalar retention identity."""
+    if type(steps) is not int or steps<0:
+        raise ValueError("nonnegative integral checkpoint count required")
+    if not all(isfinite(x) for x in (e1_initial,e2_initial,lambda1,lambda2)):
+        raise ValueError("finite initial phases/retentions required")
+    x1=lambda1**steps *e1_initial
+    x2=lambda2**steps *e2_initial
+    d0=e1_initial-e2_initial
+    m0=(e1_initial+e2_initial)/2
+    inherited=(lambda1**steps+lambda2**steps)*d0/2
+    controller=(lambda1**steps-lambda2**steps)*m0
+    return {"direct":x1-x2,"inherited":inherited,
+            "controller_asymmetry":controller,"decomposed":inherited+controller,
+            "innovation_free":True,"ecological_fitness":None}
