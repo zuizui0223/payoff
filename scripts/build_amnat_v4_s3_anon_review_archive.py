@@ -158,6 +158,19 @@ def prepare(base_zip:Path,six:Path,spatial:Path,pdf_root:Path,dest:Path,
 
 
     latest=only(pdf_root,PDF_NAME)
+    layout_receipt=json.loads(only(pdf_root,"source_identity_receipt.json").read_text(encoding="utf-8"))
+    if (layout_receipt.get("figure_source_types")!=[
+            "schematic","observed_rows","observed_rows","source_summary"]
+        or layout_receipt.get("figure2_real_pair_points")!=166
+        or layout_receipt.get("figure3_real_species_target_points")!=150):
+        raise ValueError("Anonymous manuscript source incorrectly labels true raw-point figures")
+    manuscript_md=only(pdf_root,"manuscript_anonymous.md").read_text(encoding="utf-8")
+    if ("Source-frozen Figure 2 summary preview" in manuscript_md
+        or "These are frozen summary-level previews" in manuscript_md
+        or "The 166 original, distinct geographic" not in manuscript_md
+        or "The 150 original bird species-target" not in manuscript_md
+        or manuscript_md.count(r"\clearpage")!=4):
+        raise ValueError("Orphan figure headings or inaccurate raw-data figure provenance")
     pdf_qc=only(pdf_root,"PDF_SOURCE_PREFLIGHT_HOLD.json")
     pre=json.loads(pdf_qc.read_text(encoding="utf-8"))
     if pre.get("status")!="ANONYMOUS_EDITORIAL_PDF_PREFLIGHT_PASS_SUBMISSION_HOLD":
@@ -248,6 +261,9 @@ animal information-use or fitness conclusion.
         "day_scale_metric_to_bird_matching_direct_transfer_tested":True,
         "registered_day_scale_to_bird_transfer_tested":False,
         "s3_anonymized_R_code_replay_verified":False,
+        "figure2_true_observation_points":166,
+        "figure3_true_observation_points":150,
+        "main_pdf_figure_heading_orphans_prevented":True,
         "s4_piecewise_actionability_derivation_archived":True,
         "s4_noisy_observation_variance_caveat_archived":True,
         "s4_math_test_verified_before_final_package":False,
