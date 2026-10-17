@@ -206,8 +206,8 @@ def figure1() -> str:
         ss.extend(arrow(a+246, 196, b-8, 196))
     ss += [t(52, 319, "B  Interaction mismatch with two controllers", 19, "bold"),
            rect(48, 346, 1080, 100, "#f7f9fa", GREY),
-           t(67, 390, "Delta_n = [(lambda_1^n + lambda_2^n)/2] Delta_0  +  (lambda_1^n - lambda_2^n) m_0", 20, "bold"),
-           t(67, 423, "Exact only for the stated linear, no-new-innovation two-actor model", 14, color=GREY),
+           t(67, 390, "Propagated initial mismatch   +   unequal response to shared phase", 19, "bold"),
+           t(67, 423, "Exact identity in main text and S4; centered, deterministic model only", 14, color=GREY),
            t(52, 506, "C  Three distinct reasons for a remaining seasonal gap", 19, "bold")]
     for i, label in enumerate(("Insufficient forecast", "Lost feasible options", "Costly optimal restraint")):
         xx = 50 + i * 370
