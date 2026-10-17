@@ -107,15 +107,15 @@ Our central claim is:
 
 ### 2.1 Information becomes more accurate while actionability can decline
 
-Let the future seasonal state be early or normal. Above the canonical Paper-2 actionability boundary, let the gross value of a cue with reliability (q) be
+Let the future seasonal state be early or normal. Above the canonical Paper-2 actionability boundary, let the gross value of a cue with reliability \(q\) be
 
 \[
 V_A(q)=Sq-B,
 \]
 
-where (S) is the total state-dependent loss scale and (B) is the larger prior action loss.
+where \(S\) is the total state-dependent loss scale and \(B\) is the larger prior action loss.
 
-Let \(r(t)\in[0,1]\) represent retained actionability: the fraction of the full state-contingent response that remains usable at time or route stage (t). Let (C(t)) be cumulative direct cost of waiting. The reduced net value of using information at time (t) is
+Let \(r(t)\in[0,1]\) represent retained actionability: the fraction of the full state-contingent response that remains usable at time or route stage \(t\). Let \(C\(t\)\) be cumulative direct cost of waiting. The reduced net value of using information at time \(t\) is
 
 \[
 N(t)=r(t)[Sq(t)-B]-C(t).
@@ -203,18 +203,18 @@ e_t<0
 
 for an actor that is early.
 
-At route stage (t), the actor forms an estimate
+At route stage \(t\), the actor forms an estimate
 
 \[
 \hat e_t=E[e_t\mid I_t],
 \]
 
-where (I_t) is the information accumulated by that stage.
+where \(I_t\) is the information accumulated by that stage.
 
-A signed correction (u_t) represents the combined timing effect of available actuators:
+A signed correction \(u_t\) represents the combined timing effect of available actuators:
 
-- (u_t>0): speed up, shorten stopover, skip delay or otherwise advance progress;
-- (u_t<0): slow down, lengthen stopover, wait or otherwise delay progress.
+- \(u_t>0\): speed up, shorten stopover, skip delay or otherwise advance progress;
+- \(u_t<0\): slow down, lengthen stopover, wait or otherwise delay progress.
 
 The realized phase state then evolves as
 
@@ -324,9 +324,9 @@ This gives an exact decomposition of segment-scale phase retention.
 
 If \(g_t=0\), the observed phase coefficient is passive carry-over \(\lambda_t=\phi_t\).
 
-If (0<g_t<1), active correction reduces retained phase error.
+If \(0<g_t<1\), active correction reduces retained phase error.
 
-If (g_t=1), the current phase error is reset at that checkpoint when the target does not move.
+If \(g_t=1\), the current phase error is reset at that checkpoint when the target does not move.
 
 If \(g_t>1\), the controller overshoots and \(\lambda_t\) can become negative.
 
