@@ -421,7 +421,7 @@ m_0=\frac{e_{1,0}+e_{2,0}}{2},
 \Delta_0=e_{1,0}-e_{2,0}.
 \]
 
-In the no-innovation witness,
+In the centered, deterministic, noise-free witness,
 
 \[
 e_{i,n}=\lambda_i^n e_{i,0}.
