@@ -111,6 +111,59 @@ def explicit_nonzero_wait_cost_stationarity(t:float,model:ActionabilityPeak,
     return model.derivative(t)-marginal_waiting_cost
 
 
+def linear_phase_expectation(
+    e: float, prior_mean: float, phi: float, h: float,
+    k: float, innovation_mean: float = 0.0
+) -> dict:
+    """Conditional phase expectation, including the nonzero prior intercept."""
+    vals=(e, prior_mean, phi, h, k, innovation_mean)
+    if not all(isfinite(z) for z in vals):
+        raise ValueError("All phase parameters must be finite")
+    if not 0 <= k <= 1 or not 0 <= h <= 1:
+        raise ValueError("Cue fraction and correction fraction must lie in [0,1]")
+    estimated=prior_mean+k*(e-prior_mean)
+    direct=phi*(e-h*estimated)+innovation_mean
+    slope=phi*(1-h*k)
+    intercept=-phi*h*(1-k)*prior_mean+innovation_mean
+    return {
+        "direct":direct,
+        "slope":slope,
+        "intercept":intercept,
+        "decomposed":slope*e+intercept,
+        "identifies_h_and_k_separately":False,
+    }
+
+
+def noisy_cue_phase_variance(
+    p: float, measurement_variance: float, phi: float,
+    h: float, innovation_variance: float
+) -> dict:
+    """Linear-Gaussian variance, not incorrectly lambda^2*P.
+
+    Prior phase P, independent observation variance R, Kalman gain
+    K=P/(P+R), correction fraction h and independent process Q.
+    """
+    values=(p,measurement_variance,phi,h,innovation_variance)
+    if not all(isfinite(z) for z in values):
+        raise ValueError("Nonfinite Gaussian model parameter")
+    if p<=0 or measurement_variance<0 or not 0<=h<=1 or innovation_variance<0:
+        raise ValueError("P>0, R>=0, h in [0,1] and Q>=0 required")
+    k=p/(p+measurement_variance)
+    retention=phi*(1-h*k)
+    actual=(phi**2)*p*(1-k*h*(2-h))+innovation_variance
+    naive=(retention**2)*p
+    extra=(phi**2)*(h**2)*k*(1-k)*p+innovation_variance
+    return {
+        "kalman_fraction":k,
+        "conditional_mean_slope":retention,
+        "actual_p_next":actual,
+        "retention_squared_times_p":naive,
+        "noise_and_estimation_gap":extra,
+        "difference":actual-naive,
+        "new_data_estimated":False,
+    }
+
+
 def two_actor_mismatch(
     e1_initial:float,e2_initial:float,lambda1:float,lambda2:float,steps:int
 )->dict:
