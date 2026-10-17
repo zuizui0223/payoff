@@ -137,27 +137,42 @@ When direct marginal waiting cost is zero,
 
 Thus the optimum occurs when the relative gain in information value is exactly balanced by the relative loss of remaining actionability.
 
-For exponential learning and exponential actionability loss,
+For exponential cue learning and loss of opportunities,
 
 \[
-q(t)=q_0+\Delta q[1-\exp(-\alpha t)]
+q(t)=q_0+\Delta q[1-e^{-\alpha t}],
+\qquad
+r(t)=e^{-\beta t},
+\quad \alpha,\beta>0,\quad\Delta q\geq0.
 \]
 
-and
+Let \(A_\infty=S(q_0+\Delta q)-B\) and \(D=S\Delta q\).
+With zero direct waiting cost, \(N(t)=e^{-\beta t}
+[A_\infty-De^{-\alpha t}]\).
+When \(A_\infty\leq0\), no finite waiting time has positive
+net benefit, and a zero-payoff outside option is preferable.
+When \(A_\infty>0\), the optimum is immediate if \(D=0\);
+otherwise
 
 \[
-r(t)=\exp(-\beta t),
+\boxed{
+t^*=\max\left\{0,\frac{1}{\alpha}
+\log\left[\frac{(\alpha+\beta)D}{\beta A_\infty}\right]\right\}.
+}
 \]
 
-the unique zero-cost optimum is
-
-\[
-t^*=\frac{\log(1+\alpha/\beta)}{\alpha}.
-\]
-
-The optimum moves earlier as (\beta) increases. Two actors observing the same environmental-information trajectory can therefore commit at different stages solely because their remaining response options disappear at different rates.
-
-A particularly important consequence is that perfect information can be too late. With \(\alpha=\beta=1\), the optimum is \(t^*=\log 2\), where cue accuracy is only \(q=0.75\) in the symmetric witness even though \(q\to1\) later. Better information is not automatically more useful.
+Only in the **threshold-normalized case**
+\(Sq_0=B\), with \(\Delta q>0\), does this simplify to
+\(t^*=\log(1+\alpha/\beta)/\alpha\).
+Thus optimal waiting depends on initial cue value and action
+losses as well as learning and opportunity-decay rates.
+For the symmetric example \(q_0=\Delta q=0.5\),
+\(B=S/2\), and \(\alpha=\beta=1\),
+\(t^*=\log 2\) and cue reliability is only \(q(t^*)=0.75\).
+With direct waiting costs, one must compare the appropriate
+stationary points and boundary options (Supplementary
+Mathematical Note S4). These are properties of a reduced
+decision model, **not estimates of birds' perceived cues**.
 
 In the single-commitment limit, the downstream consequences of waiting can be
 compressed into an effective deadline cost,
@@ -359,7 +374,14 @@ Its reduced post-entry retention is
 \phi_i(1-h_iK_i),
 \]
 
-where \(K_i\) is effective phase information and \(h_i\) is enacted correction.
+Here \(K_i\) is a *linear cue-response coefficient*,
+not directly observed information, and \(h_i\) is enacted
+correction. This \(\lambda_i\) is the conditional-mean
+phase **slope**, assuming an unbiased linear cue, fixed
+prior mean, and phase-independent mean innovation; an
+additive intercept may remain. Neither \(K_i\) nor \(h_i\)
+is separately identified by \(\lambda_i\)
+(Supplementary Mathematical Note S4).
 For a serial entry gate, \(h_i=O_i g_i\): readiness has already been crossed,
 while remaining opportunity \(O_i\) and decision gain \(g_i\) govern later
 correction. Here \(O_i\) is the actuator-specific realization of the retained
