@@ -75,25 +75,84 @@ def anonymize(source:str)->str:
 def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
     s=anonymize(source)
     fig_entries=[]
+    figure_source_types=[]
     if figures_dir is not None:
         try:
             import cairosvg
         except ImportError as exc:
             raise RuntimeError("Install CairoSVG to include image previews") from exc
+
+        # Captions must identify the actual level of source evidence. The
+        # prior PDF mislabeled real 166/150 observation scatters as summary
+        # panels. This is an evidence-labeling error, not just styling.
+        captions={
+            1: "Conceptual timer-controller architecture and the exact"
+               " centered, deterministic two-actor mismatch identity."
+               " No animal cognition, developmental gate or fitness"
+               " effect is measured by this schematic.",
+            4: "Mule-deer phase contraction reproduced from the published"
+               " source: 152 animal-years, 72 deer. Start/end means and"
+               " variance ratios are summaries, not individual paths"
+               " or causal fitness effects.",
+        }
+        original_caps={
+            2: "The 166 original, distinct geographic source-target"
+               " green-up pairs, showing earlier versus later"
+               " detrended correlation. The points are environmental"
+               " pairs, not tracked individual migration routes.",
+            3: "The 150 original bird species-target observations"
+               " sharing 72 environmental pairs across 22 species."
+               " The dashed fixed-arrival structural comparator can"
+               " produce a positive association without bird"
+               " timing adjustment. Points are not independent pairs.",
+        }
+        summary_caps={
+            2: "Frozen summary estimates of the change in"
+               " source-target environmental green-up correlations,"
+               " with pair-bootstrap intervals. Individual pairs"
+               " are not plotted in this summary version.",
+            3: "Frozen correlation-to-bird-mismatch transfer, fixed-arrival"
+               " structural null and observed-minus-null estimates"
+               " with confidence intervals. Individual species-target"
+               " observations are not plotted in this summary version.",
+        }
         for i,name in enumerate(FIGURES,1):
             path=figures_dir/name
             if not path.is_file():
                 raise FileNotFoundError(path)
+            svg=path.read_text(encoding="utf-8")
+            if i in (2,3):
+                token=('class="observed-spatial-pair"' if i==2
+                       else 'class="observed-species-target"')
+                expected=(166 if i==2 else 150)
+                count=svg.count(token)
+                if count not in (0,expected):
+                    raise ValueError(
+                        f"Partial/inaccurate Figure {i} original-row plot count: {count}"
+                    )
+                source_type="observed_rows" if count==expected else "summary_only"
+            else:
+                source_type="schematic" if i==1 else "source_summary"
             target=out.parent/f"figure{i}_preview.png"
             target.parent.mkdir(parents=True,exist_ok=True)
             cairosvg.svg2png(url=str(path),write_to=str(target),scale=2)
             fig_entries.append(str(target))
-        s+="\n\\newpage\n\n## Source-bounded figure previews\n\n"
-        for i,path in enumerate(fig_entries,1):
-            filename=Path(path).name
-            s+=f"### Figure {i}\n\n![Source-frozen Figure {i} summary preview]({filename})\n\n"
-        s+="These are frozen summary-level previews, not plots of independently "
-        s+="retrieved individual trajectories or unique source–target pairs.\n"
+            figure_source_types.append(source_type)
+
+        s+="\n\\clearpage\n\n## Source-grounded main figures\n\n"
+        for i,image_file in enumerate(fig_entries,1):
+            if i>1:
+                # Flush the preceding LaTeX figure float BEFORE authoring the
+                # next block. This prevents detached headings / captions on
+                # the previous page (confirmed in the original PDF).
+                s+="\n\\clearpage\n\n"
+            caption=(captions[i] if i in captions else
+                     original_caps[i] if figure_source_types[i-1]=="observed_rows"
+                     else summary_caps[i])
+            filename=Path(image_file).name
+            s+=f"![{caption}]({filename})\n\n"
+        # No generic disclaimer that all figures are summary estimates:
+        # Figures 2 and 3 can be actual archived observed rows.
     out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(s,encoding="utf-8")
     return {
@@ -103,12 +162,15 @@ def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
         "math_display_count":s.count(r"\["),
         "figure_count":len(fig_entries),
         "figure_images":fig_entries,
+        "figure_source_types":figure_source_types,
+        "figure2_real_pair_points":166 if figure_source_types and figure_source_types[1]=="observed_rows" else 0,
+        "figure3_real_species_target_points":150 if figure_source_types and figure_source_types[2]=="observed_rows" else 0,
         "full_underlying_data_included":False,
         "approved_for_journal_submission":False,
         "important_limitations":[
             "All references need final journal style verification",
             "PDF output needs page-by-page visual inspection",
-            "Reviewer-accessible full raw data/code archive not yet assembled",
+            "Source-backed data/code archive exists internally; anonymous external reviewer deposit unverified",
             "Bibliographic and manuscript science still require human author approval",
         ],
     }
