@@ -137,6 +137,24 @@ def prepare(base_zip:Path,six:Path,spatial:Path,pdf_root:Path,dest:Path,
     add(dest,"supplementary/Table_S3_day_metric_bird_transfer.md",
         original_s3_supplement().encode("utf-8"))
 
+    # The main text and Appendix S4 must use the same EXACT piecewise
+    # optimum and the same assumptions behind lambda and phase variance.
+    # No fitting of natural effects occurs in this self-contained model.
+    source_model=ROOT/"src/paper2_actionability_peak.py"
+    source_tests=ROOT/"tests/test_paper2_actionability_peak.py"
+    proof=ROOT/"submission/AMNAT_V4_SUPPLEMENTARY_MATHEMATICAL_NOTE_S4_20261017.md"
+    model_text=neutral(source_model.read_text(encoding="utf-8"))
+    tests_text=neutral(source_tests.read_text(encoding="utf-8"))
+    proof_text=neutral(proof.read_text(encoding="utf-8"))
+    for text_required in ("A_\\infty","threshold-normalized","conditional-mean",
+                          "observation","innovation"):
+        if text_required not in proof_text:
+            raise ValueError("Mathematical S4 derivation missing: "+text_required)
+    add(dest,"src/paper2_actionability_peak.py",model_text.encode("utf-8"))
+    add(dest,"tests/test_paper2_actionability_peak.py",tests_text.encode("utf-8"))
+    add(dest,"supplementary/Mathematical_Note_S4.md",proof_text.encode("utf-8"))
+
+
     latest=only(pdf_root,PDF_NAME)
     pdf_qc=only(pdf_root,"PDF_SOURCE_PREFLIGHT_HOLD.json")
     pre=json.loads(pdf_qc.read_text(encoding="utf-8"))
@@ -148,7 +166,8 @@ def prepare(base_zip:Path,six:Path,spatial:Path,pdf_root:Path,dest:Path,
         page_count=len(paper)
         extracted=re.sub(r"\s+"," "," ".join(p.get_text() for p in paper))
         for needle in ("Supplementary Table S3", "0.1504", "bird-specific",
-                       "2.412","4.662"):
+                       "2.412","4.662","threshold-normalized",
+                       "Supplementary Mathematical Note S4"):
             if needle not in extracted:
                 raise ValueError("S3 ecological finding missing from newer PDF: "+needle)
         if len({img[0] for p in paper for img in p.get_images(full=True)})!=4:
@@ -189,6 +208,28 @@ not prospective confirmatory tests or demonstrated effects on fitness.
 Replay the six comparisons and geographic sensitivity from actual archived
 rows with: bash scripts/reproduce_s3.sh
 """
+    readme+="""\n\n## S4: exact decision-time optimum and noisy observation caveat
+
+The information/actionability optimum is piecewise: the short formula
+log(1+alpha/beta)/alpha applies only in the threshold-normalized case
+S*q0=B with increasing cue accuracy, not for arbitrary cue baselines.
+With no positive gross opportunity, decline action; another regime
+has an immediate optimum. The phase-retention lambda is a conditional
+mean slope under specified linear noise assumptions; noisy cue
+estimation generally prevents variance from equalling lambda squared
+times prior variance.
+
+The complete derivation and scope conditions are in
+supplementary/Mathematical_Note_S4.md. Executable pure-Python
+mathematics are in src/paper2_actionability_peak.py and tests in
+tests/test_paper2_actionability_peak.py.
+
+To verify the mathematical identities (requires pytest):
+    python3 -m pytest -q tests/test_paper2_actionability_peak.py
+
+These checks support algebraic internal consistency, not an empirical
+animal information-use or fitness conclusion.
+"""
     if outdated in readme:
         raise ValueError("Outdated claim that S3 was not executed remains in archive")
     add(dest,"README.md",readme.encode("utf-8"))
@@ -205,6 +246,9 @@ rows with: bash scripts/reproduce_s3.sh
         "day_scale_metric_to_bird_matching_direct_transfer_tested":True,
         "registered_day_scale_to_bird_transfer_tested":False,
         "s3_anonymized_R_code_replay_verified":False,
+        "s4_piecewise_actionability_derivation_archived":True,
+        "s4_noisy_observation_variance_caveat_archived":True,
+        "s4_math_test_verified_before_final_package":False,
         "s3_original_output_files":original_count,
         "revised_manuscript_pdf_pages":page_count,
         "revised_manuscript_sha256":sha(cleaned),
@@ -246,6 +290,12 @@ def finish(root:Path,archive:Path,receipt:Path)->dict:
         raise ValueError("Unexpected reviewer package lifecycle")
     manifest["status"]="ANONYMOUS_V8_DEER_S2_S3_SOURCE_REPRODUCED_EDITORIAL_HOLD"
     manifest["s3_anonymized_R_code_replay_verified"]=True
+    required_math=("supplementary/Mathematical_Note_S4.md",
+                   "src/paper2_actionability_peak.py",
+                   "tests/test_paper2_actionability_peak.py")
+    if any(not (root/name).is_file() for name in required_math):
+        raise ValueError("S4 proof or executable math validation missing")
+    manifest["s4_math_test_verified_before_final_package"]=True
     manifest["full_page_human_visual_approved"]=False
     manifest["anonymous_delivery_link_exists"]=False
     manifest["journal_submission_ready"]=False
