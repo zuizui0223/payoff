@@ -1035,11 +1035,11 @@ achieved.
 
 ### 5.5 The most informative checkpoint need not be the most important checkpoint
 
-The actionability theorem predicts an intermediate-stage peak in behavioral cue responsiveness. Early in the route, the signal can be too poor to guide correction. Late in the route, the signal can be excellent but response options can be exhausted.
-
-The ecologically important checkpoint is therefore where information gain and remaining correction capacity jointly make information most valuable.
-
-This prediction differs from a simple “closer cues are better” model.
+The threshold-normalized decision model gives an interior peak in
+the value of using a cue: at first the signal is poor, but later
+opportunities to act may vanish. In other parameter regimes the optimum
+is immediate, or no action has positive net value. Information quality
+alone therefore does not rank ecological checkpoints.
 
 ### 5.6 Phase retention is a useful coordinate but not a mechanism by itself
 
@@ -1192,14 +1192,6 @@ this study (Morinay et al. 2020). These studies motivate, but do not
 jointly identify, an information-by-competition-by-deadline mechanism in the
 same individuals. A new claim requires those discriminating measurements;
 replicating a published playback or settlement result is insufficient.
-
-The additional source-admission screen conducted after the present V8
-integration found that the seven registered Dryad files for the 2017
-settlement experiment were not obtainable through the unauthenticated API
-used by the audit (HTTP 401), despite publicly visible metadata and
-independently inspected published R code. No new behavioural or demographic
-coefficient was generated from that dataset. This access result is a
-methodological gate, **not** evidence for or against the focal mechanism.
 
 ### 5.10 Direct natural validation remains prospective
 
