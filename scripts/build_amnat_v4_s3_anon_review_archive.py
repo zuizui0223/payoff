@@ -153,6 +153,8 @@ def prepare(base_zip:Path,six:Path,spatial:Path,pdf_root:Path,dest:Path,
     add(dest,"src/paper2_actionability_peak.py",model_text.encode("utf-8"))
     add(dest,"tests/test_paper2_actionability_peak.py",tests_text.encode("utf-8"))
     add(dest,"supplementary/Mathematical_Note_S4.md",proof_text.encode("utf-8"))
+    math_verifier=neutral((ROOT/"scripts/verify_amnat_v4_theory_source.py").read_text(encoding="utf-8"))
+    add(dest,"scripts/verify_theory_math.py",math_verifier.encode("utf-8"))
 
 
     latest=only(pdf_root,PDF_NAME)
@@ -292,9 +294,17 @@ def finish(root:Path,archive:Path,receipt:Path)->dict:
     manifest["s3_anonymized_R_code_replay_verified"]=True
     required_math=("supplementary/Mathematical_Note_S4.md",
                    "src/paper2_actionability_peak.py",
-                   "tests/test_paper2_actionability_peak.py")
+                   "tests/test_paper2_actionability_peak.py",
+                   "scripts/verify_theory_math.py",
+                   "qc/S4_THEORY_MATH_GUARD.json")
     if any(not (root/name).is_file() for name in required_math):
-        raise ValueError("S4 proof or executable math validation missing")
+        raise ValueError("S4 proof or executable mathematical replay receipt missing")
+    math_audit=json.loads((root/"qc/S4_THEORY_MATH_GUARD.json").read_text(encoding="utf-8"))
+    if math_audit.get("status")!="PAPER2_S4_PIECEWISE_AND_NOISY_CONTROLLER_SOURCE_PROOF_PASS":
+        raise ValueError("S4 mathematics numerical/source validation not passed")
+    if (math_audit.get("source_model_sha256")!=sha((root/"src/paper2_actionability_peak.py").read_bytes())
+        or math_audit.get("supplement_S4_sha256")!=sha((root/"supplementary/Mathematical_Note_S4.md").read_bytes())):
+        raise ValueError("S4 derivation or model differs from independently checked bytes")
     manifest["s4_math_test_verified_before_final_package"]=True
     manifest["full_page_human_visual_approved"]=False
     manifest["anonymous_delivery_link_exists"]=False
