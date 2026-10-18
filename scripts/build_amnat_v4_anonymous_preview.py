@@ -18,6 +18,40 @@ FIGURES=("figure1_summary.svg","figure2_summary.svg",
 TITLE="Environmental predictability alone does not determine seasonal tracking"
 
 
+def validate_math_delimiters(markdown:str)->None:
+    """Reject nested/unmatched Pandoc TeX delimiters before XeLaTeX runs.
+
+    Equal delimiter counts cannot detect nested forms such as the failed
+    C-of-t example, even if the number of open/close tokens matches.
+    """
+    state=None
+    in_fence=False
+    for line_no,line in enumerate(markdown.splitlines(),1):
+        if line.lstrip().startswith(chr(96)*3):
+            in_fence=not in_fence
+            continue
+        if in_fence:
+            continue
+        for m in re.finditer(r"\\[\(\)\[\]]",line):
+            token=m.group()
+            if token in (r"\(",r"\["):
+                desired="inline" if token==r"\(" else "display"
+                if state is not None:
+                    raise ValueError(
+                        f"Nested or unbalanced TeX math delimiter on line {line_no}"
+                    )
+                state=desired
+            else:
+                desired="inline" if token==r"\)" else "display"
+                if state!=desired:
+                    raise ValueError(
+                        f"Nested or unbalanced TeX math delimiter on line {line_no}"
+                    )
+                state=None
+    if state is not None:
+        raise ValueError("Unclosed TeX math delimiter at manuscript end")
+
+
 def anonymize(source:str)->str:
     if not source.startswith("# "+TITLE+"\n"):
         raise ValueError("Unexpected agreed manuscript title")
@@ -68,6 +102,7 @@ def anonymize(source:str)->str:
         raise ValueError("Major numeric claims or bibliography were lost")
     if s.count(r"\[")!=before_admin[start:].count(r"\["):
         raise ValueError("Display math delimiters changed")
+    validate_math_delimiters(s)
     # Bracket math has to remain unaltered; Pandoc must render it as TeX.
     return s
 
