@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from scripts.build_amnat_v4_anonymous_preview import (
-    TITLE, anonymize, build_preview,
+    TITLE, anonymize, build_preview, validate_math_delimiters,
 )
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -64,3 +64,79 @@ def test_missing_data_claim_fails_closed():
     text=source().replace("+0.369","0.999")
     with pytest.raises(ValueError,match="Major numeric"):
         anonymize(text)
+
+
+
+def _figure_fixtures(folder, bad_pair_n=None):
+    folder.mkdir()
+    def svg(points=""):
+        return ('<svg xmlns="http://www.w3.org/2000/svg" '
+                'width="240" height="150" viewBox="0 0 240 150">'
+                '<rect width="240" height="150" fill="white"/>'
+                +points+"</svg>")
+    for i in (1,4):
+        (folder/f"figure{i}_summary.svg").write_text(svg(),encoding="utf-8")
+    n=166 if bad_pair_n is None else bad_pair_n
+    pair="".join(f'<circle class="observed-spatial-pair" cx="{j%230}" cy="45" r="1"/>'
+                 for j in range(n))
+    bird="".join(f'<circle class="observed-species-target" cx="{j%230}" cy="70" r="1"/>'
+                 for j in range(150))
+    (folder/"figure2_summary.svg").write_text(svg(pair),encoding="utf-8")
+    (folder/"figure3_summary.svg").write_text(svg(bird),encoding="utf-8")
+
+
+def test_true_166_and_150_observations_are_not_mislabeled_as_summary_figures(tmp_path):
+    pytest.importorskip("cairosvg")
+    folder=tmp_path/"sourcefigs"
+    _figure_fixtures(folder)
+    result=build_preview(source(),tmp_path/"manuscript.md",folder)
+    text=(tmp_path/"manuscript.md").read_text(encoding="utf-8")
+    assert result["figure_count"]==4
+    assert result["figure_source_types"]==[
+        "schematic","observed_rows","observed_rows","source_summary"
+    ]
+    assert result["figure2_real_pair_points"]==166
+    assert result["figure3_real_species_target_points"]==150
+    assert "The 166 original, distinct geographic" in text
+    assert "The 150 original bird species-target" in text
+    assert "Source-frozen Figure 2 summary preview" not in text
+    assert "These are frozen summary-level previews" not in text
+    assert "### Figure 2" not in text
+    assert text.count(r"\clearpage")==4
+    assert text.count(r"\includegraphics[width=0.94\textwidth]")==4
+    assert text.count(r"\begin{center}")==4
+    assert "![The 166 original" not in text
+    assert "![The 150 original" not in text
+    assert result["approved_for_journal_submission"] is False
+
+
+def test_counterfeit_partial_observation_panel_fails_closed(tmp_path):
+    pytest.importorskip("cairosvg")
+    folder=tmp_path/"sourcefigs"
+    _figure_fixtures(folder,bad_pair_n=165)
+    with pytest.raises(ValueError,match="original-row plot count"):
+        build_preview(source(),tmp_path/"manuscript.md",folder)
+
+
+
+def test_tex_inline_display_delimiters_are_balanced_and_never_nested():
+    src=source()
+    validate_math_delimiters(src)
+    validate_math_delimiters(anonymize(src))
+    assert r"Let \(C(t)\)" in src
+
+
+def test_nested_delimiters_fail_even_if_total_counts_match():
+    bad=source().replace(r"Let \(C(t)\)",r"Let \(C\(t\)\)",1)
+    assert bad!=source()
+    # The total count of opens/closes can stay equal while LaTeX breaks.
+    assert bad.count(r"\(")==bad.count(r"\)")
+    with pytest.raises(ValueError,match="Nested or unbalanced TeX"):
+        validate_math_delimiters(bad)
+    with pytest.raises(ValueError,match="Nested or unbalanced TeX"):
+        anonymize(bad)
+
+
+def test_unclosed_display_math_rejected_before_pdf_build():
+    with pytest.raises(ValueError,match="Unclosed TeX math delimiter"):
+        validate_math_delimiters(r"\[ x^2 + y^2")
