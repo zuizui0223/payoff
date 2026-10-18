@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from scripts.build_amnat_v4_anonymous_preview import (
-    TITLE, anonymize, build_preview,
+    TITLE, anonymize, build_preview, validate_math_delimiters,
 )
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -112,3 +112,27 @@ def test_counterfeit_partial_observation_panel_fails_closed(tmp_path):
     _figure_fixtures(folder,bad_pair_n=165)
     with pytest.raises(ValueError,match="original-row plot count"):
         build_preview(source(),tmp_path/"manuscript.md",folder)
+
+
+
+def test_tex_inline_display_delimiters_are_balanced_and_never_nested():
+    src=source()
+    validate_math_delimiters(src)
+    validate_math_delimiters(anonymize(src))
+    assert r"Let \(C(t)\)" in src
+
+
+def test_nested_delimiters_fail_even_if_total_counts_match():
+    bad=source().replace(r"Let \(C(t)\)",r"Let \(C\(t\)\)",1)
+    assert bad!=source()
+    # The total count of opens/closes can stay equal while LaTeX breaks.
+    assert bad.count(r"\(")==bad.count(r"\)")
+    with pytest.raises(ValueError,match="Nested or unbalanced TeX"):
+        validate_math_delimiters(bad)
+    with pytest.raises(ValueError,match="Nested or unbalanced TeX"):
+        anonymize(bad)
+
+
+def test_unclosed_display_math_rejected_before_pdf_build():
+    with pytest.raises(ValueError,match="Unclosed TeX math delimiter"):
+        validate_math_delimiters(r"\[ x^2 + y^2")
