@@ -115,7 +115,7 @@ V_A(q)=Sq-B,
 
 where \(S\) is the total state-dependent loss scale and \(B\) is the larger prior action loss.
 
-Let \(r(t)\in[0,1]\) represent retained actionability: the fraction of the full state-contingent response that remains usable at time or route stage \(t\). Let \(C\(t\)\) be cumulative direct cost of waiting. The reduced net value of using information at time \(t\) is
+Let \(r(t)\in[0,1]\) represent retained actionability: the fraction of the full state-contingent response that remains usable at time or route stage \(t\). Let \(C(t)\) be cumulative direct cost of waiting. The reduced net value of using information at time \(t\) is
 
 \[
 N(t)=r(t)[Sq(t)-B]-C(t).
