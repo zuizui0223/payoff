@@ -184,8 +184,16 @@ def build_preview(source:str, out:Path, figures_dir:Path|None=None)->dict:
             caption=(captions[i] if i in captions else
                      original_caps[i] if figure_source_types[i-1]=="observed_rows"
                      else summary_caps[i])
-            filename=Path(image_file).name
-            s+=f"![{caption}]({filename})\n\n"
+            # Nonfloating LaTeX avoids detached figure headings and
+            # manuscript figures crowded two onto one page. Use absolute
+            # raster paths; Pandoc's figure float path rewriting is not used.
+            filename=Path(image_file).resolve().as_posix()
+            s+=(
+                "\\begin{center}\n"
+                f"\\includegraphics[width=0.94\\textwidth]{{{filename}}}\n"
+                "\\end{center}\n\n"
+                f"**Figure {i}.** {caption}\n\n"
+            )
         # No generic disclaimer that all figures are summary estimates:
         # Figures 2 and 3 can be actual archived observed rows.
     out.parent.mkdir(parents=True,exist_ok=True)
