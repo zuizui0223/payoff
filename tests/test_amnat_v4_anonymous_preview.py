@@ -103,6 +103,10 @@ def test_true_166_and_150_observations_are_not_mislabeled_as_summary_figures(tmp
     assert "These are frozen summary-level previews" not in text
     assert "### Figure 2" not in text
     assert text.count(r"\clearpage")==4
+    assert text.count(r"\includegraphics[width=0.94\textwidth]")==4
+    assert text.count(r"\begin{center}")==4
+    assert "![The 166 original" not in text
+    assert "![The 150 original" not in text
     assert result["approved_for_journal_submission"] is False
 
 
