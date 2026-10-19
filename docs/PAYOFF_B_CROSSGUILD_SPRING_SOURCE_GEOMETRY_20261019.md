@@ -34,3 +34,21 @@ or species-common ecological effect may be inferred from this gate.
 Earlier source-specific stork January-April 53-season audit uses a DIFFERENT
 winter-referenced definition and must NOT be pooled with these normalized
 within-February-May proxies as if interchangeable.
+
+## Additional source-only test using the identical locked gate
+
+The first run showed adequate observed northward checkpoint windows in
+storks and woodcock, but very limited coverage in curlews and zero in
+the duck archive. A geographically distinct waterfowl comparison was added
+**after observing these source coverage results**, so it is a prospective
+implementation check of the same fixed filter but NOT a previously
+registered confirmatory sample-selection decision.
+
+Greater white-fronted goose (Anser albifrons), Kölzsch et al. 2016,
+Movebank 10.5441/001/1.31c2v92f, original publicly archived CC0 GPS
+16,806,763 bytes, MD5 0e0abd1126c53f4924907c3fb6a72d02.
+Published-source sample contains 65 identity labels over six observation
+years; original source integrity was verified in an earlier workflow.
+The EXACT February-May thresholds above apply unchanged. The selected
+sample may overlap prior PAYOFF goose evidence and must NOT be described
+as independent empirical validation until animal/study identity is audited.

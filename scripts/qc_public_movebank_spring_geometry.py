@@ -17,7 +17,8 @@ from scripts.qc_public_movebank_crossguild import (
 from scripts.qc_public_movebank_crossguild_v2 import SOURCE as V2
 
 SYSTEMS={"curlew":"curlew","woodcock_argos":"woodcock_argos",
-         "dabbling_ducks":"dabbling_ducks","stork":"stork"}
+         "dabbling_ducks":"dabbling_ducks","stork":"stork",
+         "white_fronted_goose":"white_fronted_goose"}
 MONTHS={2,3,4,5}
 MIN_UNIQUE_SPRING_DAYS=12
 MIN_LAT_RANGE=10.0
@@ -71,6 +72,12 @@ def origin_source(system,tmpfile):
         from scripts.qc_public_movebank_stork_breeding_2018 import DOI
         data=download_gps(tmpfile)
         return DOI,"Ciconia ciconia","GPS",data
+    if system=="white_fronted_goose":
+        from scripts.qc_public_movebank_geese_2016 import (
+            DOI as goose_doi,download_public_bitstream
+        )
+        source = download_public_bitstream("gps",tmpfile)
+        return goose_doi,"Anser albifrons","GPS",source
     record=(SOURCES[system] if system in SOURCES else V2[system])
     return (record["doi"],record["taxon"],
             record.get("original_sensor","GPS"),download_verified(record,tmpfile))

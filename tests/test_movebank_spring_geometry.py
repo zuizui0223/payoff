@@ -31,3 +31,10 @@ def test_all_exclusions_are_reported_no_identity_output():
     assert r["complete_two_checkpoint_identity_years"]==1
     assert "secretid" not in str(r)
     assert not r["cue_or_actionability_measured"]
+
+
+def test_white_fronted_goose_source_registered_without_filter_tuning():
+    from scripts.qc_public_movebank_spring_geometry import SYSTEMS
+    assert "white_fronted_goose" in SYSTEMS
+    from scripts.qc_public_movebank_geese_2016 import FILES
+    assert FILES["gps"][1] == "0e0abd1126c53f4924907c3fb6a72d02"

@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        system: [curlew, woodcock_argos, dabbling_ducks, stork]
+        system: [curlew, woodcock_argos, dabbling_ducks, stork, white_fronted_goose]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
