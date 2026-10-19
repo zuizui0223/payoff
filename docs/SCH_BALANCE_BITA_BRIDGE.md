@@ -1,6 +1,6 @@
-# SCH -> BALANCE -> BITA -> PAYOFF
+# SCH -> BALANCE -> SLK/PAYOFF, with BITA as an orthogonal mechanism layer
 
-This note freezes the cross-repository interface.
+This note updates the cross-repository interface to the current scientific ownership. The filename retains its historical BITA label for existing links; it must not be read as granting BITA ownership of the `Phi=R-K` value boundary. This handoff distinguishes **architecture value**, **ecological mechanism**, **evolutionary realization**, and **historical evolutionary origin**.
 
 ## 1. Ownership of quantities
 
@@ -42,9 +42,11 @@ on the static common fitness scale.
 
 Frequency-dependent persistence or invasion beyond that static domain must be labeled as PAYOFF game dynamics rather than silently back-projected into BALANCE.
 
-### BITA
+### SLK/PAYOFF architecture-value handoff; BITA ecological-mechanism handoff
 
-BITA owns the differentiated-coordinate world and mechanism identification after multiple axes exist.
+SLK owns recovery `R`, added architecture cost `K`, and architecture-value difference `Phi=R-K`. PAYOFF supplies mathematical realizations and transports the admissible value contrasts to population dynamics. BITA instead owns mechanism identification for an `A x D` trait interaction after multiple axes exist. It does **not** own the `Phi=0` architecture-value boundary.
+
+A trait interaction on reproductive fitness cannot be equated with the architecture benefit `R-K`. The former may admit several ecological-channel decompositions; the latter requires matched optimized **alternative architectures** on a common fitness scale.
 
 For the residual-coupling loss
 
@@ -71,13 +73,13 @@ Therefore
 phi = WD*-WS* = R-K = sL-K.
 ```
 
-This is the exact algebraic bridge from SCH's one-coordinate conflict loss to the BALANCE/BITA architecture comparison.
+This is the exact algebraic bridge from SCH's one-coordinate conflict loss to the BALANCE/SLK architecture-value comparison, under this quadratic model. It is not a universal identity or a BITA mechanism-allocation estimand.
 
 ---
 
-## 2. PAYOFF adds a population level rather than replacing the three chapters
+## 2. PAYOFF adds a population level without overriding scientific ownership
 
-The sister repositories stop at optimized fitness geometry, architecture comparison, persistence, and mechanism identification. PAYOFF adds population-frequency dependence:
+SCH qualifies conflict, BALANCE quantifies persistent compromise, and SLK owns architecture value and realization. PAYOFF develops explicit continuous and population-frequency models; BITA remains a separate causal-channel identification layer. For the two-architecture game:
 
 ```text
 p = frequency of differentiated architecture D
@@ -85,24 +87,22 @@ Delta(p)=pi_D(p)-pi_S(p)=phi+eta(2p-1)
 dp/dt=p(1-p)Delta(p).
 ```
 
-The full hierarchy is
+The architecture-value and population hierarchy is
 
 ```text
-SCH
-Does one shared coordinate create conflict, and where is its compromise?
+SCH: identify genuine shared-coordinate functional conflict (L, if admissible)
         |
         v
-BALANCE
-Does shared architecture still outrank differentiated-accessible architecture?
+BALANCE: shared world still outranks the differentiated-accessible world?
         |
         v
-BITA
-How much conflict loss can extra dimensionality recover, at what cost, and by which mechanism?
+SLK: architecture recovery R, construction cost K, static Phi=R-K
         |
         v
-PAYOFF
-Given those architecture payoffs, can an alternative invade, coexist, cross a coordination barrier, or remain history dependent when payoff depends on architecture frequency?
+PAYOFF: accessibility, topology, invasion, coexistence, fixation, occupancy
 ```
+
+The orthogonal BITA question is whether an observed joint trait effect can be causally allocated to pollination, antagonism, and independently measured remaining channels. These allocations must not be substituted for `R`, `K`, or the history of new structure formation.
 
 ---
 
@@ -114,7 +114,7 @@ For `L>0`:
                     phi = sL-K
 
 shared favored <--------- 0 ---------> differentiated favored
-   BALANCE                                  BITA
+   BALANCE                                  SLK/PAYOFF
 ```
 
 The static architecture boundary is
@@ -200,7 +200,7 @@ The width of the game-generated middle region on the architecture-cost axis is
 This distinction is essential:
 
 ```text
-BALANCE/BITA boundary = static optimized worldline comparison
+BALANCE/SLK boundary  = static optimized worldline comparison
 PAYOFF boundaries     = reciprocal population invasion conditions.
 ```
 
@@ -234,7 +234,7 @@ phi=0 -> p*=1/2
 phi>0 -> D majority.
 ```
 
-So the static BALANCE/BITA crossing becomes a coexistence-composition boundary.
+So the static architecture-value crossing becomes a coexistence-composition boundary.
 
 ### `eta>0`
 
@@ -365,11 +365,17 @@ SCH receipt
 - z_P*, z_G*, z_C* or stricter component optima when justified
 - conflict budget L
 
-BALANCE/BITA receipt
-- matched optimized shared and differentiated-accessible worldlines
-- dimensional separation s or direct recovery R
-- architecture cost K when structurally identified
-- direct gap WD*-WS*
+BALANCE/SLK value receipt
+- matched and optimized shared versus differentiated-accessible worldlines
+- common reproductive-fitness scale, matching ecological context and joint uncertainty
+- dimensional separation s or recovery R only when legitimately identified
+- independently measured structural cost K, not an unallocated statistical residual
+- direct gap WD*-WS* and decomposed R-K, with mismatch retained as an audit result
+
+BITA mechanism receipt (orthogonal)
+- factorial trait x trait interaction and selective consumer intervention, if available
+- explicit mutualist, antagonist and independently supported remaining channels
+- no conversion of unidentified interaction residual into architecture construction cost
 
 PAYOFF-specific receipt
 - architecture frequency p manipulated or naturally replicated
@@ -383,7 +389,7 @@ PAYOFF-specific receipt
 A particularly strong test is
 
 ```text
-SCH/BITA/BALANCE estimate phi
+SCH/BALANCE/SLK estimate an admissible phi
 +
 reciprocal invasion estimate eta
         |
@@ -402,7 +408,7 @@ and then test that population prediction out of sample.
 3. **Residual integration has a critical value.** For `0<K<L`, `c_crit=ab(L-K)/[K(a+b)]` separates shared and differentiated static optima.
 4. **One static crossing becomes two invasion surfaces.** Their signed separation is `2eta` and absolute width is `2|eta|`.
 5. **Static BALANCE can admit rare D invasion.** Negative frequency dependence can stabilize D at low frequency despite `phi<0`.
-6. **Static BITA advantage can face a coordination barrier.** Positive `phi` need not permit D invasion from rarity when `eta>0`.
+6. **Static differentiated-architecture advantage can face a coordination barrier.** Positive `phi` need not permit D invasion from rarity when `eta>0`.
 7. **The static crossing changes role rather than disappearing.** It becomes a 50:50 composition boundary under `eta<0` and a risk-dominance boundary under `eta>0`.
 8. **Architecture polymorphism is possible without environmental heterogeneity.** Negative frequency dependence can stabilize `0<p*<1` in one environment.
 9. **Environmental transition width is quantitative.** Under a linear path it is `2|eta|/|alpha|`.
