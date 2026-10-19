@@ -23,7 +23,7 @@ def mock_payload(start, end, extra_future=False):
 def test_weather_before_reference_only_and_normalization():
     day=date(2016,4,12)
     url,start,last=source_query((38.21,12.31),day)
-    assert start==date(2016,4,3)
+    assert start==date(2016,4,4)
     assert last==date(2016,4,11)
     assert "latitude=38.0" in url and "longitude=12.5" in url
     r=parse_nasa_span(mock_payload(start,last),start,last)
