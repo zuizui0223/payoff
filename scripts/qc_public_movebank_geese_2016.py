@@ -18,7 +18,7 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 
-ROOT = "https://datarepository.movebank.org/bitstreams/"
+ROOT = "https://datarepository.movebank.org/server/api/core/bitstreams/"
 DOI = "10.5441/001/1.31c2v92f"
 FILES = {
     "gps": ("0a262590-49e2-4e47-a290-dbfd6649579f",
@@ -33,7 +33,7 @@ MAX_EXTRA_BYTES = 512 * 1024
 
 def download_public_bitstream(name, dest):
     uuid, expected_md5, expected_size = FILES[name]
-    url = ROOT + uuid + "/download"
+    url = ROOT + uuid + "/content"
     request = urllib.request.Request(url, headers={
         "User-Agent": "PAYOFF-B-public-source-QC/0.1",
         "Accept": "text/plain,text/csv,application/octet-stream",
@@ -53,7 +53,11 @@ def download_public_bitstream(name, dest):
             checksum.update(chunk)
             f.write(chunk)
     if count != expected_size or checksum.hexdigest() != expected_md5:
-        raise ValueError(f"{name}: pinned MD5/size mismatch")
+        raise ValueError(
+            f"{name}: pinned MD5/size mismatch; "
+            f"actual_bytes={count} expected_bytes={expected_size}; "
+            f"actual_md5={checksum.hexdigest()} expected_md5={expected_md5}"
+        )
     return {"size_bytes": count, "md5": checksum.hexdigest(),
             "bitstream_uuid": uuid, "bitstream_url": url}
 

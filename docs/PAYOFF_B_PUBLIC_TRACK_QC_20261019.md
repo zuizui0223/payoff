@@ -37,3 +37,7 @@ References:
 - https://www.movebank.org/cms/movebank-content/data-policy
 - https://www.movebank.org/cms/movebank-content/data-repository
 - https://doi.org/10.5441/001/1.31c2v92f
+
+## 2026-10-19 source-access diagnostic
+
+The initial public-file attempt failed a strict published bitstream checksum check for the GPS file. This is a **source integrity failure**, not a biological result. The next attempt uses the official DSpace `/server/api/core/bitstreams/{id}/content` link advertised by the same immutable repository bitstream record, while retaining the exact original MD5 and byte count. No unexpected bytes are admitted and no individual locations are uploaded.
