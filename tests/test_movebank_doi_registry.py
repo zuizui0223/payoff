@@ -121,3 +121,32 @@ def test_output_is_explicitly_metadata_only(tmp_path: Path):
     assert "animal_taxon_verified" in (
         tmp_path / "movebank_doi_registry.csv"
     ).read_text("utf-8")
+
+
+def test_parent_child_and_unrelated_publisher_are_not_independent_studies():
+    parent = parse_doi_record(fixture())
+    child = parse_doi_record(fixture(
+        doi="10.5441/001/1.abcdef12/3",
+        title="Migration timing in barnacle geese - gps"
+    ))
+    unrelated = fixture(title="Migration of birds in a database")
+    unrelated["attributes"]["publisher"] = "OpenProceedings.org"
+    other = parse_doi_record(unrelated)
+
+    assert parent["is_movebank_parent"]
+    assert parent["candidate_package_record"]
+    assert parent["parent_package_doi"] == "10.5441/001/1.abcdef12"
+    assert child["is_movebank_component_file"]
+    assert not child["candidate_package_record"]
+    assert child["parent_package_doi"] == parent["doi"]
+    assert not other["candidate_package_record"]
+    assert not other["is_movebank_parent"]
+
+
+def test_moveapps_workflow_is_not_a_tracking_package_candidate():
+    workflow = parse_doi_record(fixture(
+        title="MoveApps Workflow: daily movement visualization"
+    ))
+    assert workflow["is_movebank_parent"]
+    assert workflow["moveapps_workflow_record"]
+    assert not workflow["candidate_package_record"]

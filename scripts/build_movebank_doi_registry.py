@@ -26,6 +26,11 @@ PREFIX = "10.5441"
 PER_PAGE = 1000
 MAX_RECORDS = 5000
 MAX_PAGES = 25
+# The 10.5441 DOI prefix is shared with OpenProceedings.org. A Movebank
+# dataset *package* has a top-level DOI; /1, /2, ... are child files.
+MOVEBANK_PARENT_RE = re.compile(r"^10\.5441/001/1\.[^/]+$")
+MOVEBANK_CHILD_RE = re.compile(r"^(10\.5441/001/1\.[^/]+)/[0-9]+$")
+
 HEADERS = {
     "Accept": "application/vnd.api+json",
     "User-Agent": "PAYOFF-independent-movement-inventory/0.1 "
@@ -33,7 +38,9 @@ HEADERS = {
 }
 
 COLUMNS = (
-    "doi", "title", "publisher", "publication_year", "resource_type",
+    "doi", "parent_package_doi", "title", "publisher", "publication_year", "resource_type",
+    "is_movebank_parent", "is_movebank_component_file",
+    "candidate_package_record", "moveapps_workflow_record",
     "rights_identifiers", "license_metadata_present", "bird_keyword_hint",
     "migration_keyword_hint", "tracking_keyword_hint",
     "dataset_record", "raw_event_permission_verified",
@@ -100,12 +107,29 @@ def parse_doi_record(item):
     )
     year = a.get("publicationYear")
     title = titles[0] if titles else "UNTITLED"
+    publisher = str(a.get("publisher") or "UNKNOWN")
+    movebank = publisher.strip().casefold() == "movebank data repository"
+    is_parent = bool(movebank and MOVEBANK_PARENT_RE.fullmatch(doi))
+    child_match = MOVEBANK_CHILD_RE.fullmatch(doi) if movebank else None
+    is_child = child_match is not None
+    parent_package_doi = doi if is_parent else (
+        child_match.group(1) if child_match else ""
+    )
+    is_workflow = bool(
+        is_parent and title.casefold().startswith("moveapps workflow:")
+    )
+    package_candidate = is_parent and not is_workflow
     # Hints aid *manual data discovery*, never automatic taxon exclusions.
     search_text = " ".join([title, *subjects, *descriptions])
     return {
         "doi": doi,
         "title": title,
-        "publisher": str(a.get("publisher") or "UNKNOWN"),
+        "publisher": publisher,
+        "parent_package_doi": parent_package_doi,
+        "is_movebank_parent": is_parent,
+        "is_movebank_component_file": is_child,
+        "candidate_package_record": package_candidate,
+        "moveapps_workflow_record": is_workflow,
         "publication_year": str(year) if year is not None else "",
         "resource_type": resource_type,
         "rights_identifiers": "; ".join(sorted(set(rights))) or "NOT_RECORDED",
@@ -191,6 +215,15 @@ def write_registry(rows, pages, output_dir):
         writer.writeheader()
         writer.writerows(rows)
 
+    package_rows = [r for r in rows if r["candidate_package_record"]]
+    with (dest / "movebank_parent_package_candidates.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as handle:
+        writer = csv.DictWriter(handle, fieldnames=COLUMNS)
+        writer.writeheader()
+        writer.writerows(package_rows)
+
+    publisher_counts = dict(sorted(Counter(r["publisher"] for r in rows).items()))
     summary = {
         "schema": "payoff_b_independent_movebank_doi_inventory_v1",
         "classification": "OUTCOME_BLIND_PUBLIC_METADATA_ONLY",
@@ -198,6 +231,25 @@ def write_registry(rows, pages, output_dir):
         "prefix": PREFIX,
         "pages": pages,
         "doi_records": len(rows),
+        "publisher_doi_records": publisher_counts,
+        "movebank_parent_dois": sum(r["is_movebank_parent"] for r in rows),
+        "movebank_component_file_dois": sum(
+            r["is_movebank_component_file"] for r in rows
+        ),
+        "moveapps_workflow_parent_dois": sum(
+            r["moveapps_workflow_record"] for r in rows
+        ),
+        "movebank_parent_package_candidates": len(package_rows),
+        "candidate_package_bird_keyword_hints": sum(
+            r["bird_keyword_hint"] for r in package_rows
+        ),
+        "candidate_package_migration_keyword_hints": sum(
+            r["migration_keyword_hint"] for r in package_rows
+        ),
+        "candidate_package_bird_migration_keyword_overlap": sum(
+            r["bird_keyword_hint"] and r["migration_keyword_hint"]
+            for r in package_rows
+        ),
         "dataset_records": sum(r["dataset_record"] for r in rows),
         "migration_keyword_hints": sum(r["migration_keyword_hint"] for r in rows),
         "bird_keyword_hints": sum(r["bird_keyword_hint"] for r in rows),
@@ -213,6 +265,11 @@ def write_registry(rows, pages, output_dir):
         "route_validated": 0,
         "biological_outcomes_measured": 0,
         "limitations": [
+            "10.5441 is shared by Movebank, OpenProceedings and other publishers; "
+            "the prefix is not a repository-specific inclusion criterion.",
+            "Movebank package parent DOIs and child file DOIs are not independent "
+            "datasets; component files are excluded from package candidates.",
+            "Even one parent DOI need not mean one independent biological cohort.",
             "DOI counts and keyword hints are not biological study sample sizes.",
             "A DOI can reference multiple files, animals, species or analyses.",
             "The DataCite publication year is not a tracking-data collection year.",

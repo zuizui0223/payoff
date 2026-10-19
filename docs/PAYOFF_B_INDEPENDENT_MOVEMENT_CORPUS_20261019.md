@@ -112,3 +112,27 @@ Source documentation:
 This iteration is complete only when the independent DOI registry workflow
 runs successfully and reports counts. Do not report a number of biologically
 eligible tracks before actual route-level inspection.
+
+
+## Discovery-corpus normalization audit
+
+**Added after the first full metadata crawl, before raw movement data access.**
+The first complete prefix crawl returned **2,080 DOI metadata records**, but
+this is neither 2,080 Movebank studies nor independent tracking samples.
+
+The 10.5441 prefix also contains OpenProceedings.org (and other publishers),
+and Movebank registers parent dataset DOIs **plus component file DOIs**.
+The executable census now preserves the full DOI ledger for transparency
+*while separately outputting one record per parent package DOI*.
+
+Only records with publisher exactly "Movebank Data Repository" and a
+top-level 10.5441/001/1.* DOI count as parent-package records. A title
+beginning "MoveApps Workflow:" is not considered a tracking dataset even
+if its DataCite resource type happens to say Dataset. No Latin-name
+species or keyword filter excludes a package. The file
+"movebank_parent_package_candidates.csv" is the relevant first-stage
+candidate registry, NOT the raw DOI record count.
+
+No part of this correction uses animal timing, migration action, arrival
+phase, climate mismatch, or fitness outcomes. The initial metadata-crawl
+artifact is preserved and must not be silently represented as package counts.

@@ -33,5 +33,6 @@ jobs:
           name: payoff-b-independent-movebank-doi-census
           path: |
             outputs/payoff_b_independent_movebank/movebank_doi_registry.csv
+            outputs/payoff_b_independent_movebank/movebank_parent_package_candidates.csv
             outputs/payoff_b_independent_movebank/movebank_registry_summary.json
           if-no-files-found: error
