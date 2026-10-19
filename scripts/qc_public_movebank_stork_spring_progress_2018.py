@@ -169,9 +169,9 @@ def summarise_progress(classified,counters,choice,numeric_pairs):
             x["northing_deg"] for x in success.values()
         ]),
         "gps_identity_join_method":choice["identity_method"],
-        "raw_events_JanApr":counters["matched_gps_events_JanApr"],
-        "source_bad_datetime_or_geo":counters["bad_time_or_coordinates"],
-        "source_unjoined_identity":counters["identity_not_joined"],
+        "raw_events_JanApr":counters.get("matched_gps_events_JanApr",0),
+        "source_bad_datetime_or_geo":counters.get("bad_time_or_coordinates",0),
+        "source_unjoined_identity":counters.get("identity_not_joined",0),
         "parameter_lock":{
             "winter_months":"January-February",
             "spring_months":"March-April",
