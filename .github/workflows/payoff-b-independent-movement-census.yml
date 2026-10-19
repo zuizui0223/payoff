@@ -1,0 +1,37 @@
+name: payoff-b-independent-movement-census
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/build_movebank_doi_registry.py"
+      - "tests/test_movebank_doi_registry.py"
+      - "docs/PAYOFF_B_INDEPENDENT_MOVEMENT_CORPUS_20261019.md"
+      - ".github/workflows/payoff-b-independent-movement-census.yml"
+
+jobs:
+  movebank-public-metadata-census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify metadata-only contract offline
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_movebank_doi_registry.py
+      - name: Enumerate public DOI metadata without touching tracking events
+        run: |
+          python scripts/build_movebank_doi_registry.py \
+            --output-dir outputs/payoff_b_independent_movebank
+      - name: Save the complete discovery receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-independent-movebank-doi-census
+          path: |
+            outputs/payoff_b_independent_movebank/movebank_doi_registry.csv
+            outputs/payoff_b_independent_movebank/movebank_registry_summary.json
+          if-no-files-found: error
