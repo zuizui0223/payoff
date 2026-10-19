@@ -9,12 +9,12 @@ def test_observable_synthetic_northing():
     assert r["interval_days"]>0
 
 def test_left_censor_when_track_starts_after_progress():
-    data=[(date(2020,3,i),25.0) for i in range(1,7)]
-    data += [(date(2020,3,i),5.0+2*i) for i in range(7,21)]
+    # First fix is already far north; next observations reveal the
+    # lower portion and progression, so the first crossing is censored.
+    data=[(date(2020,3,1),30.0)]
+    data += [(date(2020,3,i),5.0+2*i) for i in range(2,21)]
     result=analyze_one(data)
-    assert result["status"] in (
-        "LEFT_CENSORED_AT_FIRST_SPRING_OBSERVATION",
-        "NET_NORTHWARD_CHANGE_UNRESOLVED")
+    assert result["status"] == "LEFT_CENSORED_AT_FIRST_SPRING_OBSERVATION"
 
 def test_northing_not_inferred_from_wide_but_round_trip_track():
     data=[(date(2020,3,i),5.0+2*(11-abs(i-11))) for i in range(1,21)]
