@@ -1,0 +1,46 @@
+name: payoff-b-independent-movement-stage2
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/screen_movebank_package_metadata.py"
+      - "tests/test_movebank_package_screen.py"
+      - "docs/PAYOFF_B_INDEPENDENT_MOVEMENT_SOURCE_SCREEN_20261019.md"
+      - ".github/workflows/payoff-b-independent-movement-stage2.yml"
+  workflow_dispatch:
+
+jobs:
+  stage2-public-metadata-screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run offline invariants without outcome access
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_movebank_doi_registry.py tests/test_movebank_package_screen.py
+      - name: Regenerate the complete DOI parent census
+        run: |
+          python scripts/build_movebank_doi_registry.py \
+            --output-dir outputs/payoff_b_independent_movebank
+      - name: Screen all public parent-package metadata and child-file DOI records
+        run: |
+          python -m scripts.screen_movebank_package_metadata \
+            --stage1-candidates outputs/payoff_b_independent_movebank/movebank_parent_package_candidates.csv \
+            --output-dir outputs/payoff_b_independent_stage2
+      - name: Archive complete provenance and review queue
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-movebank-full-stage2-metadata
+          path: |
+            outputs/payoff_b_independent_movebank/movebank_registry_summary.json
+            outputs/payoff_b_independent_stage2/movebank_package_metadata_screen.csv
+            outputs/payoff_b_independent_stage2/movebank_child_file_metadata.csv
+            outputs/payoff_b_independent_stage2/movebank_review_queue_first40.csv
+            outputs/payoff_b_independent_stage2/movebank_stage2_screen_summary.json
+          if-no-files-found: error
