@@ -47,4 +47,4 @@ def test_paired_output_carries_no_animal_data():
     ],"stork")
     assert r["paired_seven_day_anomaly_difference_temp_c"]["n_pairs"]==2
     assert not r["actual_bird_cue_use_unmeasured"]==False
-    assert r["animal_ids_date_or_positions_exported"] is False
+    assert r["animal_IDs_date_or_positions_exported"] is False
