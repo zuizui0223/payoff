@@ -1,10 +1,15 @@
 # PAYOFF — from ecological compromise to evolving architecture and population dynamics
 
-PAYOFF is the mathematical bridge across three sister repositories:
+PAYOFF extends the architecture-value and evolutionary-realization spine without redefining upstream scientific ownership:
 
-- [SCH](https://github.com/zuizui0223/sch): reconstructs conflict when multiple functions share one phenotypic coordinate.
-- [BALANCE](https://github.com/zuizui0223/balance): identifies when that real conflict is still cheaper than changing architecture.
-- [BITA](https://github.com/zuizui0223/bita): measures how much extra dimensionality recovers and when recovery can outweigh architecture cost.
+- [SCH](https://github.com/zuizui0223/sch): identifies opposing functional demands on the **same trait coordinate**, with an admissible conflict load `L` only when supported.
+- [BALANCE](https://github.com/zuizui0223/balance): identifies the middle regime where conflict exists but the shared architecture still wins, and compares matched optimized fitness worldlines.
+- [SLK](https://github.com/zuizui0223/slk): owns architecture recovery `R`, cost `K`, static margin `Phi=R-K`, and the evolutionary-realization hierarchy.
+- [BITA](https://github.com/zuizui0223/bita): independently identifies ecological mechanisms behind **measured interactions among trait coordinates**; trait interaction alone does not identify its channel.
+
+PAYOFF carries these admissible architecture payoffs into continuous topology, frequency dependence, invasion, fixation, occupancy, and spatiotemporal growth. Neither BITA's trait-interaction decomposition nor PAYOFF's architecture-value difference by itself establishes that a trade-off historically caused a new structure to evolve.
+
+The current cross-repository causal question, evidential ceilings, and testable no-transition counterexamples are recorded in [the updated bridge](docs/SCH_BALANCE_BITA_BRIDGE.md).
 
 PAYOFF asks what happens next:
 
