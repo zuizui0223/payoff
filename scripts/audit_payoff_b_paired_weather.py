@@ -29,7 +29,7 @@ from scripts.qc_payoff_b_predecision_candidates import (
     SYSTEMS,daily_source_positions,
 )
 from scripts.qc_payoff_b_stationary_case_controls import (
-    matched_source_pairs,brackets,EXPECTED,
+    match_opportunities,brackets,EXPECTED,
 )
 from scripts.run_payoff_b_stork_stage_handoff_pilot import percentile
 
@@ -195,7 +195,7 @@ def run_system(system,fetch=fetch_weather):
         gps=Path(d)/"source.csv"
         doi,taxon,sensor,original=origin_source(system,gps)
         groups,counters,idcol=daily_source_positions(gps,taxon)
-        selected,gates=matched_source_pairs(groups)
+        selected,gates=match_opportunities(groups)
         if gates["original_case_candidates"]!=EXPECTED[system]:
             raise ValueError("Frozen original case count changed")
         stats,widths,internal=brackets(gps,selected,taxon,return_internal=True)
