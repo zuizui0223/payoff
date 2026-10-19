@@ -21,9 +21,10 @@ from pathlib import Path
 
 HOST="datarepository.movebank.org"
 ITEM_PREFIX=f"https://{HOST}/server/api/core/items/"
+PID_ROOT=f"https://{HOST}/server/api/pid/find?id="
 UUID=re.compile(r"/entities/datapackage/([0-9a-fA-F-]{36})(?:/|$)")
 RETRIES=3
-WORKERS=3
+WORKERS=4
 MAX_PACKAGES=1000
 
 def _request(url):
@@ -129,12 +130,44 @@ def parse_item(attrs,item):
         "source_error":"",
     }
 
+def public_pid_url(landing):
+    parsed=urllib.parse.urlsplit(landing)
+    if not parsed.path.startswith("/handle/10255/"):
+        raise ValueError("PID handle URI must use the validated Movebank handle path")
+    handle=parsed.path[len("/handle/"):]
+    return PID_ROOT+urllib.parse.quote("hdl:"+handle,safe="")
+
+
+def resolve_public_item(url):
+    """Resolve registered handles to the item JSON with one official PID request.
+
+    DSpace /server/api/pid/find?id=hdl:... redirects to /core/items/{UUID}.
+    For legacy items where the PID endpoint is unavailable, fall back to the
+    already tested landing redirect + UUID endpoint, preserving source checks.
+    """
+    direct=UUID.search(urllib.parse.urlsplit(url).path)
+    if direct:
+        uid=direct.group(1).lower()
+        _,item=attempt(lambda:_request(ITEM_PREFIX+uid))
+        return uid,item
+    try:
+        final,item=attempt(lambda:_request(public_pid_url(url)))
+        m=re.search(r"/core/items/([0-9a-fA-F-]{36})(?:/|$)",
+                    urllib.parse.urlsplit(final).path)
+        if not m or not isinstance(item,dict):
+            raise ValueError("PID resolver did not return an official DSpace item")
+        return m.group(1).lower(),item
+    except RuntimeError:
+        uid=attempt(lambda:final_uuid(url))
+        _,item=attempt(lambda:_request(ITEM_PREFIX+uid))
+        return uid,item
+
+
 def process_parent(row):
-    time.sleep(0.12) # modest per-request courtesy spacing
+    time.sleep(0.15) # modest per-request courtesy spacing
     try:
         url=canonical_landing(row["metadata_landing_url"])
-        uuid=attempt(lambda:final_uuid(url))
-        _,obj=attempt(lambda:_request(ITEM_PREFIX+uuid))
+        uuid,obj=resolve_public_item(url)
         result=parse_item(row,obj)
         if result["dspace_item_uuid"] and result["dspace_item_uuid"].lower()!=uuid:
             raise ValueError("DSpace item UUID identity mismatch")
