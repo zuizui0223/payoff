@@ -1,0 +1,37 @@
+name: payoff-b-movebank-crossguild-v2-source-qc
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/qc_public_movebank_crossguild_v2.py"
+      - "tests/test_movebank_crossguild_v2.py"
+      - "docs/PAYOFF_B_CROSSGUILD_V2_SOURCE_QC_20261019.md"
+      - ".github/workflows/payoff-b-movebank-crossguild-v2-source-qc.yml"
+jobs:
+  source-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [dabbling_ducks, woodcock_gps, woodcock_argos]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run source and duplicate-stream tests
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_movebank_crossguild_source_qc.py tests/test_movebank_crossguild_v2.py
+      - name: Verify public original file and measure calendar coverage
+        run: |
+          python -m scripts.qc_public_movebank_crossguild_v2 --system ${{ matrix.system }} --out outputs/payoff_b_crossguild_v2
+      - name: Archive counts only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-crossguild-v2-${{ matrix.system }}
+          path: outputs/payoff_b_crossguild_v2/
+          if-no-files-found: warn
