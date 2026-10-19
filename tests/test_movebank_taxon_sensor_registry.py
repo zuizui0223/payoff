@@ -61,3 +61,11 @@ def test_source_metadata_not_misread_as_independent_cohorts():
     assert o["study_id_shared_by_multiple_parent_dois"]==1
     assert o["independent_biological_studies_count"]=="NOT_ESTIMABLE"
     assert o["reported_location_count_distribution"]["count"]==2
+
+
+def test_dspace_pid_endpoint_uses_exact_handle_without_html_inference():
+    from scripts.build_movebank_taxon_sensor_registry import public_pid_url
+    addr=public_pid_url("https://datarepository.movebank.org/handle/10255/move.791")
+    assert addr=="https://datarepository.movebank.org/server/api/pid/find?id=hdl%3A10255%2Fmove.791"
+    with pytest.raises(ValueError,match="validated Movebank handle"):
+        public_pid_url("https://datarepository.movebank.org/entities/datapackage/abc")
