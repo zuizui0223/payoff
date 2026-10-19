@@ -71,7 +71,7 @@ def utc(t):
     dt=datetime.fromisoformat(t.replace("Z","+00:00"))
     return dt.astimezone(timezone.utc).replace(tzinfo=None) if dt.tzinfo else dt
 
-def brackets(gps,selected,source_taxon):
+def brackets(gps,selected,source_taxon,return_internal=False):
     """Bracket by last day-3 fix inside 30 km and first day-4 fix outside."""
     indexed={}
     for k,(day,center,control_day,control_site) in selected.items():
@@ -100,28 +100,36 @@ def brackets(gps,selected,source_taxon):
             if tax!=key[0]:continue
             if dt.date()==day:events[key][0].append((dt,lat,lon))
             if dt.date()==day+timedelta(days=1):events[key][1].append((dt,lat,lon))
-    statuses=Counter();widths=[]
+    statuses=Counter();widths=[];internal={}
     for key,(day,center,_,_) in selected.items():
         first,second=events[key]
         if not first or not second:
             statuses["SOURCE_OR_NEXT_FIX_MISSING"]+=1
+            internal[key]={"status":"SOURCE_OR_NEXT_FIX_MISSING"}
             continue
         last=max(first)
         if haversine(*center,last[1],last[2])>RADIUS_KM:
             statuses["LAST_SOURCE_FIX_OUTSIDE"]+=1
+            internal[key]={"status":"LAST_SOURCE_FIX_OUTSIDE"}
             continue
         out=min((p for p in second if haversine(*center,p[1],p[2])>=RADIUS_KM),
                 default=None)
         if out is None:
             statuses["NO_OUTBOUND_NEXT_DAY_FIX"]+=1
+            internal[key]={"status":"NO_OUTBOUND_NEXT_DAY_FIX"}
             continue
         hours=(out[0]-last[0]).total_seconds()/3600
-        if hours<=0:statuses["INVALID_TIME_ORDER"]+=1
-        elif hours>BRACKET_MAX_HOURS:statuses["BRACKET_OVER_24H"]+=1
+        if hours<=0:
+            statuses["INVALID_TIME_ORDER"]+=1
+            internal[key]={"status":"INVALID_TIME_ORDER"}
+        elif hours>BRACKET_MAX_HOURS:
+            statuses["BRACKET_OVER_24H"]+=1
+            internal[key]={"status":"BRACKET_OVER_24H"}
         else:
             statuses["BRACKET_WITHIN_24H"]+=1
             widths.append(hours)
-    return statuses,widths
+            internal[key]={"status":"BRACKET_WITHIN_24H","hours":hours}
+    return (statuses,widths,internal) if return_internal else (statuses,widths)
 
 def percentile(a,q):
     if not a:return None
