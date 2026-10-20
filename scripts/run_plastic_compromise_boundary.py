@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.plastic_compromise_architecture import (
     PlasticCompromise,
     analytic_turnover_crossover,
+    analytic_overlap_crossover_perfect_cue,
 )
 
 REGISTERED_PARAMETERS = {
@@ -38,6 +39,18 @@ def run() -> dict:
     cutoff = analytic_turnover_crossover(
         PlasticCompromise(rho=0.5, **REGISTERED_PARAMETERS)
     )
+    overlap_inputs = {
+        "a": 3.0, "delta": 2.0, "q": 1.0, "rho": 0.2,
+        "plastic_running_cost": 0.0, "plastic_switch_cost": 0.0,
+        "module_cost": 1.0,
+    }
+    overlap = [
+        PlasticCompromise(b=weaker, **overlap_inputs).result()
+        for weaker in (0.1, 3.0/11.0, 0.6)
+    ]
+    overlap_cutoff = analytic_overlap_crossover_perfect_cue(
+        PlasticCompromise(b=0.1, **overlap_inputs)
+    )
     return {
         "schema": "PAYOFF_PLASTICITY_VS_MODULES_SYNTHETIC_WITNESS_V1",
         "status": "EXACT_MODEL_WITNESS_NOT_REAL_BIOLOGICAL_DATA",
@@ -45,6 +58,13 @@ def run() -> dict:
         "environment_flip_probability_grid": SWITCHING_GRID,
         "outcomes": outcomes,
         "analytic_crossover": cutoff,
+        "perfect_cue_overlap_boundary": {
+            "parameters_except_weaker_weight": overlap_inputs,
+            "weaker_function_weight_grid": (0.1,3.0/11.0,0.6),
+            "outcomes": overlap,
+            "analytic_crossover": overlap_cutoff,
+            "not_empirical": True,
+        },
         "sister_repo_roles": {
             "SCH": "same-coordinate causal conflict L, not supplied by this witness",
             "BALANCE": "empirical shared/plastic versus alternative worldlines, not supplied",
