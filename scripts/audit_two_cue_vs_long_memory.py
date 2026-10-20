@@ -65,7 +65,14 @@ def run():
             ),
             "all_history_lower_bound":bounds["nonmodule_lower_bound"],
             "all_history_feasible_upper_bound":bounds["nonmodule_upper_bound"],
-            "all_history_certificate":bounds["classification"],
+            "all_history_certificate_from_existing_posterior_class_only":bounds["classification"],
+            "combined_identified_value_ordering": (
+                "CONSTRUCTIVE_SIX_CUE_NONMODULE_BEATS_FIXED"
+                if longest < fixed
+                else "MODULE_BEATS_EVERY_SHARED_COORDINATE_POLICY"
+                if bounds["nonmodule_lower_bound"] > fixed
+                else "UNRESOLVED"
+            ),
             "never_claims_global_optimality_from_six_cues":True,
         })
     # A second, explicitly different module-cost slice provides a real
