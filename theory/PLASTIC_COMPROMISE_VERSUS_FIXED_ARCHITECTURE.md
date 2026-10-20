@@ -112,6 +112,45 @@ K < min(LOSS_SHARED, LOSS_PLASTIC*).
 
 This is a model-specific static fitness statement; it is **not** evidence that a new genetic architecture is accessible or can invade when rare. The full SLK architecture-value, topology, frequency-penalty and heritability checks still follow.
 
+## Separate prediction: simultaneous functional overlap defeats even perfect plasticity
+
+The turnover boundary is not the only way permanent structural separation can become advantageous. A second, mathematically distinct scenario follows by setting **perfect cue information** `q=1`, **zero switching cost** `c=0`, and **zero plastic machinery cost** `B=0`. The best reversible shared-coordinate allocation still has loss
+
+```text
+LOSS_PLASTIC*=C=ab/(a+b)*Delta².
+```
+
+For fixed `a>0`, fixed trait-optimum separation `Delta>0`, and fixed two-axis cost `K>0`, strengthening the weaker *simultaneously active* function (increasing `b` toward `a`) raises this irreducible plastic loss:
+
+```text
+dC/db = a²*Delta²/(a+b)² > 0.
+```
+
+The perfect-cue plastic versus permanent-module boundary occurs when `C(b)=K`. In the strict interior of the allowed `0<b<a` model this yields
+
+```text
+b* = K*a/(a*Delta²-K).
+```
+
+This requires `0<K<a*Delta²/2` and no other hidden costs. It is not present for every admissible parameter set.
+
+A second normalized **model-only** counterexample holds cue quality, environmental turnover, all architectural costs and both function optima fixed:
+
+```text
+a=3, Delta=2, q=1, c=0, B=0, K=1, rho=0.2
+b*=3/11 = 0.2727272727...
+```
+
+| Weaker co-occurring function weight b | Unavoidable loss with optimal plasticity C | Fixed-module loss K | Intrinsically favored option |
+| --- | ---: | ---: | --- |
+| **0.10** | **0.3870968** | 1.0 | PLASTIC |
+| **3/11** | 1.0 | 1.0 | PLASTIC = FIXED |
+| **0.60** | 2.0 | **1.0** | FIXED |
+
+Thus **simultaneous overlap of conflicting function demands**, rather than just contrasting selection gradients across seasons, can create a selective incentive for different coordinates. Temporal switching with perfect feedback cannot eliminate `C`; true structural separation could do so at `K`. As `b->0`, the simultaneous conflict floor approaches zero and nearly perfect plasticity can suffice.
+
+This ecological interpretation is restricted to the declared co-active two-function model. It does not demonstrate that sex-separated individuals simultaneously deliver both female and male payoffs, and does not tell us the actual overlap parameter `b` in Wurmbea or any plant. The two thresholds (`rho*` for turnover and `b*` for overlap) concern **different controlled parameter slices** and are not interchangeable empirical results.
+
 ## Proposition: sufficiently rapid ecological turnover can change the favored architecture
 
 For `T>0, q>1/2, c>0`, `h` increases with the true flip probability `rho` as
