@@ -6,6 +6,8 @@ on:
       - "src/plastic_compromise_memory.py"
       - "tests/test_plastic_compromise_memory.py"
       - "scripts/run_plastic_compromise_memory.py"
+      - "scripts/audit_two_cue_vs_long_memory.py"
+      - "src/history_aware_compromise.py"
       - "theory/TWO_CUE_MEMORY_AND_IRREDUCIBLE_CONFLICT.md"
       - ".github/workflows/plastic-compromise-two-cue-memory.yml"
   workflow_dispatch:
@@ -23,7 +25,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install testing dependency
-        run: python -m pip install "pytest>=8,<10"
+        run: python -m pip install "pytest>=8,<10" numpy scipy
       - name: Verify analytical two-cue model against 64 independent environment/cue paths
         run: python -m pytest -q tests/test_plastic_compromise_memory.py
       - name: Reproduce original and re-entrant memory/structure comparison
@@ -51,10 +53,29 @@ jobs:
           print("Two memory-policy crossings:",[x["rho"] for x in br])
           print("Original payoff and biological Wurmbea causation are not re-estimated.")
           PY
+      - name: Compare exact two-cue optimum with independent 1-to-6-cue optimizations
+        run: |
+          python scripts/audit_two_cue_vs_long_memory.py --out /tmp/payoff-two-vs-long-memory.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          results=json.loads(Path("/tmp/payoff-two-vs-long-memory.json").read_text())
+          assert results["status"]=="POST_OPEN_SYNTHETIC_NESTED_POLICY_COMPARISON_NOT_EMPIRICAL"
+          assert results["biological_causal_origin_established"] is False
+          for item in results["results"]:
+              print("rho",item["rho"],"2 cue",item["exact_two_cue_loss"],
+                    "6 cue",item["nested_optimal_window_losses"]["6"]["primal_loss"],
+                    "6-cue status",item["finite_window_status"],
+                    "all-history status",item["all_history_certificate"])
+              assert abs(item["nested_optimal_window_losses"]["2"]["primal_loss"]-
+                         item["exact_two_cue_loss"])<1e-6
+          PY
       - name: Archive model-only receipt
         uses: actions/upload-artifact@v4
         with:
           name: payoff-memory-robustness-only-${{ github.run_id }}
-          path: /tmp/payoff-two-cue-memory.json
+          path: |
+            /tmp/payoff-two-cue-memory.json
+            /tmp/payoff-two-vs-long-memory.json
           if-no-files-found: error
           retention-days: 30
