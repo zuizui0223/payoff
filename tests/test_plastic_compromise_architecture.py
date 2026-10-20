@@ -7,6 +7,7 @@ import pytest
 from src.plastic_compromise_architecture import (
     PlasticCompromise,
     analytic_turnover_crossover,
+    analytic_overlap_crossover_perfect_cue,
 )
 
 
@@ -186,3 +187,46 @@ def test_response_amplitude_and_coordination_are_finite_nonnegative():
         m.plastic_loss(1.2)
     with pytest.raises(ValueError):
         m.result(coordination_penalty=-1)
+
+
+
+def test_perfect_cue_background_function_overlap_can_flip_optimal_architecture():
+    """Turning up the weaker simultaneously active function can make modules win.
+
+    This prediction remains after temporal turnover/cue error/switching cost
+    are removed; it is not a species-level causal proof.
+    """
+    def make(b):
+        return PlasticCompromise(
+            a=3., b=b, delta=2., q=1., rho=0.2,
+            plastic_running_cost=0., plastic_switch_cost=0., module_cost=1.,
+        )
+    early=make(.1)
+    late=make(.6)
+    assert early.result()["loss_minimizers"] == ["PLASTIC"]
+    assert late.result()["loss_minimizers"] == ["FIXED_MODULES"]
+    assert isclose(early.optimized_plastic_loss,12*.1/(3+.1))
+    assert isclose(late.optimized_plastic_loss,2.0)
+    assert early.unavoidable_simultaneous_conflict < 1.
+    assert late.unavoidable_simultaneous_conflict > 1.
+    crossing=analytic_overlap_crossover_perfect_cue(make(.1))
+    assert crossing["status"]=="STRICT_INTERIOR_SIMULTANEOUS_OVERLAP_CROSSOVER"
+    assert isclose(crossing["weaker_function_weight_crossing"], 3/11)
+    neutral=make(crossing["weaker_function_weight_crossing"]).result()
+    assert isclose(neutral["losses"]["PLASTIC"],neutral["losses"]["FIXED_MODULES"],abs_tol=1e-10)
+    assert set(neutral["loss_minimizers"])=={"PLASTIC","FIXED_MODULES"}
+
+
+def test_overlap_threshold_requires_a_real_interior_perfect_cue_slice():
+    base=witness(.2)
+    assert analytic_overlap_crossover_perfect_cue(base)["weaker_function_weight_crossing"] is None
+    no_contrast=PlasticCompromise(
+        a=3., b=.1,delta=0.,q=1.,rho=.5,plastic_running_cost=0.,
+        plastic_switch_cost=0.,module_cost=1.
+    )
+    assert analytic_overlap_crossover_perfect_cue(no_contrast)["weaker_function_weight_crossing"] is None
+    too_costly=PlasticCompromise(
+        a=3.,b=.1,delta=2.,q=1.,rho=.5,plastic_running_cost=0.,
+        plastic_switch_cost=0.,module_cost=6.1
+    )
+    assert analytic_overlap_crossover_perfect_cue(too_costly)["weaker_function_weight_crossing"] is None
