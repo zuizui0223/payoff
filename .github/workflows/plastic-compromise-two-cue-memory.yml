@@ -1,0 +1,90 @@
+name: PAYOFF two-cue memory robustness
+
+on:
+  pull_request:
+    paths:
+      - "src/plastic_compromise_memory.py"
+      - "tests/test_plastic_compromise_memory.py"
+      - "scripts/run_plastic_compromise_memory.py"
+      - "scripts/audit_two_cue_vs_long_memory.py"
+      - "src/history_aware_compromise.py"
+      - "theory/TWO_CUE_MEMORY_AND_IRREDUCIBLE_CONFLICT.md"
+      - ".github/workflows/plastic-compromise-two-cue-memory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-math:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install testing dependency
+        run: python -m pip install "pytest>=8,<10" numpy scipy
+      - name: Verify analytical two-cue model against 64 independent environment/cue paths
+        run: python -m pytest -q tests/test_plastic_compromise_memory.py
+      - name: Reproduce original and re-entrant memory/structure comparison
+        run: |
+          python scripts/run_plastic_compromise_memory.py \
+            --out /tmp/payoff-two-cue-memory.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result=json.loads(Path("/tmp/payoff-two-cue-memory.json").read_text())
+          assert result["status"]=="SYNTHETIC_THEORY_NOT_EMPIRICAL_OR_HISTORICAL_EVOLUTION"
+          k=result["exploratory_K3_87_reentry"]
+          assert [x["parameters"]["rho"] for x in k]==[0.9,0.95,0.99]
+          assert [x["best_strategy"] for x in k]==[
+              "PLASTIC_MEMORY","FIXED_MODULES","PLASTIC_MEMORY"
+          ]
+          assert abs(k[2]["two_cue_loss_without_extra_memory_cost"]-3.867283201033081)<1e-9
+          br=result["two_cue_K3_87_crossing_brackets"]
+          assert abs(br[0]["rho"]-0.90662093830735)<1e-9
+          assert abs(br[1]["rho"]-0.97654038180607)<1e-9
+          assert all(x["historical_evolution_verified"] is False for x in k)
+          assert result["history_independent_witness"]["modules_below_all_history_lower_bound"] is True
+          print("31 original tests are separate from 37 new memory-model tests.")
+          print("Memory reentrance:",[(x["parameters"]["rho"],x["best_strategy"]) for x in k])
+          print("Two memory-policy crossings:",[x["rho"] for x in br])
+          print("Original payoff and biological Wurmbea causation are not re-estimated.")
+          PY
+      - name: Compare exact two-cue optimum with independent 1-to-6-cue optimizations
+        run: |
+          python scripts/audit_two_cue_vs_long_memory.py --out /tmp/payoff-two-vs-long-memory.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          results=json.loads(Path("/tmp/payoff-two-vs-long-memory.json").read_text())
+          assert results["status"]=="POST_OPEN_SYNTHETIC_NESTED_POLICY_COMPARISON_NOT_EMPIRICAL"
+          assert results["biological_causal_origin_established"] is False
+          certified=results["all_history_certification_different_K3_6"]
+          assert [c["classification"] for c in certified]==[
+              "NONMODULE_FEASIBLE_POLICY_BEATS_MODULE",
+              "MODULE_BEATS_ALL_SHARED_COORDINATE_POLICIES"
+          ]
+          assert certified[1]["all_history_nonmodule_lower_bound"]>3.6
+          assert abs(results["sufficient_fast_turnover_rho_strictly_above_when_K3_6"] - 11/15)<1e-12
+          print("Model-only all-history K3.6 certificate:",certified)
+          for item in results["results"]:
+              print("rho",item["rho"],"2 cue",item["exact_two_cue_loss"],
+                    "6 cue",item["nested_optimal_window_losses"]["6"]["primal_loss"],
+                    "6-cue status",item["finite_window_status"],
+                    "identified comparison",item["combined_identified_value_ordering"])
+              assert abs(item["nested_optimal_window_losses"]["2"]["primal_loss"]-
+                         item["exact_two_cue_loss"])<1e-6
+              assert item["combined_identified_value_ordering"]=="CONSTRUCTIVE_SIX_CUE_NONMODULE_BEATS_FIXED"
+          PY
+      - name: Archive model-only receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-memory-robustness-only-${{ github.run_id }}
+          path: |
+            /tmp/payoff-two-cue-memory.json
+            /tmp/payoff-two-vs-long-memory.json
+          if-no-files-found: error
+          retention-days: 30

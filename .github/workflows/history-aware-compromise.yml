@@ -1,0 +1,33 @@
+name: History-aware compromise robustness
+on:
+  pull_request:
+    paths:
+      - 'src/history_aware_compromise.py'
+      - 'tests/test_history_aware_compromise.py'
+      - 'scripts/audit_history_aware_compromise.py'
+      - 'theory/HISTORY_AWARE_COMPROMISE_ROBUSTNESS_V1.md'
+      - '.github/workflows/history-aware-compromise.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-and-convex-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install numerical test dependencies
+        run: python -m pip install pytest numpy scipy
+      - name: Check original and extended models together
+        run: python -m pytest -q tests/test_plastic_compromise_architecture.py tests/test_history_aware_compromise.py
+      - name: Generate synthetic bounds and finite-window results
+        run: python scripts/audit_history_aware_compromise.py --out /tmp/payoff_history_robustness.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-history-robustness-${{ github.run_id }}
+          path: /tmp/payoff_history_robustness.json
+          if-no-files-found: error
+          retention-days: 30

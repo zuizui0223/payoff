@@ -1,0 +1,79 @@
+name: Plastic compromise vs permanent modules exact model
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/plastic-compromise-modules.yml"
+      - "src/plastic_compromise_architecture.py"
+      - "tests/test_plastic_compromise_architecture.py"
+      - "scripts/run_plastic_compromise_boundary.py"
+      - "theory/PLASTIC_COMPROMISE_VERSUS_FIXED_ARCHITECTURE.md"
+  push:
+    branches:
+      - theory/plastic-compromise-to-modules-20261020
+    paths:
+      - ".github/workflows/plastic-compromise-modules.yml"
+      - "src/plastic_compromise_architecture.py"
+      - "tests/test_plastic_compromise_architecture.py"
+      - "scripts/run_plastic_compromise_boundary.py"
+      - "theory/PLASTIC_COMPROMISE_VERSUS_FIXED_ARCHITECTURE.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-math:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test exact formulas against independent 16-state joint enumeration
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_plastic_compromise_architecture.py
+      - name: Generate preregistered synthetic witness and assert boundary
+        run: |
+          python scripts/run_plastic_compromise_boundary.py \
+            --out /tmp/plastic-compromise-modules.json > /tmp/plastic-compromise-stdout.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          v = json.loads(Path("/tmp/plastic-compromise-modules.json").read_text())
+          c = v["analytic_crossover"]
+          assert v["status"] == "EXACT_MODEL_WITNESS_NOT_REAL_BIOLOGICAL_DATA"
+          assert c["status"] == "STRICT_INTERIOR_PLASTIC_TO_MODULE_CROSSOVER"
+          assert abs(c["rho_crossing"] - 0.65625) < 1e-10
+          overlap = v["perfect_cue_overlap_boundary"]
+          assert overlap["not_empirical"] is True
+          assert abs(overlap["analytic_crossover"]["weaker_function_weight_crossing"] - 3/11) < 1e-10
+          assert overlap["outcomes"][0]["loss_minimizers"] == ["PLASTIC"]
+          assert overlap["outcomes"][2]["loss_minimizers"] == ["FIXED_MODULES"]
+          states = {
+              x["stationary_environment_flip_probability"]: x
+              for x in v["outcomes"]
+          }
+          assert states[0.1]["loss_minimizers"] == ["PLASTIC"]
+          assert states[0.9]["loss_minimizers"] == ["FIXED_MODULES"]
+          assert set(states[0.65625]["loss_minimizers"]) == {"PLASTIC","FIXED_MODULES"}
+          assert all(
+              x["not_a_historical_structural_origin_or_Wurmbea_fit"]
+              for x in v["outcomes"]
+          )
+          print("Model-only turnover threshold rho*: ",c["rho_crossing"])
+          print("Model-only perfect-cue simultaneous-overlap threshold b*: ",
+                overlap["analytic_crossover"]["weaker_function_weight_crossing"])
+          print("Low turnover: ",states[0.1])
+          print("High turnover: ",states[0.9])
+          print("No biological origin claim or Wurmbea parameter fit.")
+          PY
+      - name: Archive model-only phase receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-plastic-compromise-module-exact-witness-${{ github.run_id }}
+          path: /tmp/plastic-compromise-modules.json
+          if-no-files-found: error
+          retention-days: 30
