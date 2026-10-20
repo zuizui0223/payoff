@@ -211,3 +211,47 @@ def analytic_turnover_crossover(params: PlasticCompromise) -> dict[str, Any]:
         "three_strategies_assessed": True,
         "source_status": "MATHEMATICAL_COUNTERFACTUAL_NOT_EMPIRICAL_TRANSITION",
     }
+
+
+
+def analytic_overlap_crossover_perfect_cue(params: PlasticCompromise) -> dict[str, Any]:
+    """Perfect-cue threshold in simultaneous weaker-function demand b.
+
+    This is a *different parameter slice* from the turnover result:
+    q=1, switching cost=0 and plastic running cost=0, so the memoryless
+    response eliminates only T and retains C=ab/(a+b)*Delta^2.
+    For fixed a, Delta and module cost K, unique b* solves C(b*)=K.
+    Since the declared weights satisfy 0<b<=a, a strict interior switch
+    requires 0<K<a*Delta^2/2.
+    """
+    exact_slice = (
+        params.q == 1.0
+        and params.plastic_running_cost == 0.0
+        and params.plastic_switch_cost == 0.0
+    )
+    ceiling = params.a * params.delta**2 / 2.0
+    if (
+        not exact_slice
+        or params.delta <= 0.0
+        or params.module_cost <= 0.0
+        or params.module_cost >= ceiling
+    ):
+        return {
+            "status": "NO_QUALIFYING_PERFECT_CUE_INTERIOR_OVERLAP_CROSSOVER",
+            "weaker_function_weight_crossing": None,
+            "source_status": "MODEL_ONLY",
+        }
+    denom = params.a * params.delta**2 - params.module_cost
+    b_star = params.module_cost * params.a / denom
+    if not 0.0 < b_star < params.a:
+        raise ValueError("Perfect-cue overlap threshold escaped positive b<a")
+    return {
+        "status": "STRICT_INTERIOR_SIMULTANEOUS_OVERLAP_CROSSOVER",
+        "weaker_function_weight_crossing": b_star,
+        "ecological_interpretation": (
+            "Below b_star the plastic single coordinate is intrinsically "
+            "best with perfect cues; above it separate coordinates beat "
+            "the unavoidable simultaneous shared-coordinate conflict."
+        ),
+        "not_observed_evolutionary_structural_transition": True,
+    }
