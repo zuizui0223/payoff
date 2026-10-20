@@ -4,6 +4,7 @@ from math import isclose
 import importlib.util
 from pathlib import Path
 import random
+import sys
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,9 @@ def api():
     assert MODULE.exists(), "two-cue optimizer has not been implemented"
     spec = importlib.util.spec_from_file_location("memory_audit", MODULE)
     module = importlib.util.module_from_spec(spec)
+    # PAYOFF's repository-wide loader contract requires registration before
+    # exec_module for dataclass and Python 3.12+ module-name lookup.
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
