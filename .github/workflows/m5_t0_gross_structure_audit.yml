@@ -1,0 +1,135 @@
+name: m5-t0-gross-structure-audit
+
+on:
+  push:
+    branches:
+      - m5-gross-structure-audit-v1
+
+jobs:
+  gross-structure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq minimap2 samtools
+          python -m pip install --quiet sniffles
+      - name: Recover reference and exact public PacBio runs
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_gross_structure
+          mkdir -p "$root/m5" "$root/wt"
+          curl -L --fail --retry 3 \
+            'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NC_003888.3&rettype=fasta&retmode=text' \
+            -o "$root/NC_003888.3.fa"
+          samtools faidx "$root/NC_003888.3.fa"
+
+          for spec in 'm5 SRR16954720' 'wt SRR16954715'; do
+            set -- $spec
+            label=$1
+            run=$2
+            meta_url="https://www.ebi.ac.uk/ena/portal/api/filereport?accession=${run}&result=read_run&fields=run_accession,fastq_ftp&format=tsv"
+            curl -L --fail --retry 3 "$meta_url" -o "$root/$label/meta.tsv"
+            python - "$root/$label/meta.tsv" "$root/$label/urls.txt" <<'PY'
+          import csv, pathlib, sys
+          rows=list(csv.DictReader(open(sys.argv[1]), delimiter='\t'))
+          if len(rows) != 1:
+              raise SystemExit(f'unexpected ENA metadata row count: {len(rows)}')
+          urls=[x.strip() for x in rows[0]['fastq_ftp'].split(';') if x.strip()]
+          if not urls:
+              raise SystemExit('no FASTQ URL')
+          pathlib.Path(sys.argv[2]).write_text('\n'.join(urls)+'\n')
+          PY
+            while read -r u; do
+              [ -z "$u" ] || curl -L --fail --retry 3 "https://$u" -o "$root/$label/$(basename "$u")"
+            done < "$root/$label/urls.txt"
+          done
+      - name: Map M5 and WT through identical long-read pipeline
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_gross_structure
+          ref="$root/NC_003888.3.fa"
+          minimap2 -t 4 -ax map-pb "$ref" "$root"/m5/*.fastq.gz | samtools sort -@ 4 -o "$root/m5.bam"
+          samtools index "$root/m5.bam"
+          minimap2 -t 4 -ax map-pb "$ref" "$root"/wt/*.fastq.gz | samtools sort -@ 4 -o "$root/wt.bam"
+          samtools index "$root/wt.bam"
+      - name: Build 10-kb coverage segmentation
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_gross_structure
+          python - "$root/NC_003888.3.fa.fai" "$root/bins.bed" <<'PY'
+          import pathlib, sys
+          row=pathlib.Path(sys.argv[1]).read_text().splitlines()[0].split('\t')
+          chrom=row[0]; length=int(row[1]); step=10000
+          with open(sys.argv[2],'w') as h:
+              for start in range(0,length,step):
+                  h.write(f'{chrom}\t{start}\t{min(start+step,length)}\n')
+          PY
+          samtools bedcov "$root/bins.bed" "$root/m5.bam" > "$root/m5.bedcov.tsv"
+          samtools bedcov "$root/bins.bed" "$root/wt.bam" > "$root/wt.bedcov.tsv"
+          python - "$root/m5.bedcov.tsv" "$root/wt.bedcov.tsv" "$root/coverage_bins.tsv" <<'PY'
+          import csv, sys
+          def load(path):
+              out=[]
+              for line in open(path):
+                  c,s,e,total=line.rstrip().split('\t')[:4]
+                  s=int(s); e=int(e); total=float(total)
+                  out.append((c,s,e,total/(e-s)))
+              return out
+          m5=load(sys.argv[1]); wt=load(sys.argv[2])
+          if len(m5)!=len(wt): raise SystemExit('M5/WT bin mismatch')
+          with open(sys.argv[3],'w',newline='') as h:
+              w=csv.writer(h,delimiter='\t',lineterminator='\n')
+              w.writerow(['chrom','start','end','m5_mean_depth','wt_mean_depth'])
+              for a,b in zip(m5,wt):
+                  if a[:3]!=b[:3]: raise SystemExit('coordinate mismatch')
+                  w.writerow([a[0],a[1],a[2],f'{a[3]:.12g}',f'{b[3]:.12g}'])
+          PY
+          samtools coverage -r NC_003888.3:2500000-6000000 "$root/m5.bam" > "$root/m5.central.coverage.tsv"
+          samtools coverage -r NC_003888.3:2500000-6000000 "$root/wt.bam" > "$root/wt.central.coverage.tsv"
+          python - "$root/m5.central.coverage.tsv" "$root/wt.central.coverage.tsv" "$root/central_depth.json" <<'PY'
+          import json,sys
+          def depth(path):
+              rows=[x for x in open(path) if x.strip() and not x.startswith('#')]
+              if len(rows)!=1: raise SystemExit(f'unexpected central coverage output: {path}')
+              return float(rows[0].split('\t')[6])
+          json.dump({'m5':depth(sys.argv[1]),'wt':depth(sys.argv[2])},open(sys.argv[3],'w'),indent=2)
+          PY
+      - name: Call gross long-read structural variants
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_gross_structure
+          sniffles --input "$root/m5.bam" --vcf "$root/m5.gross.vcf" --minsvlen 50000 --threads 4
+          sniffles --input "$root/wt.bam" --vcf "$root/wt.gross.vcf" --minsvlen 50000 --threads 4
+      - name: Adjudicate gross-structure gate
+        shell: bash
+        run: |
+          set -euxo pipefail
+          root=outputs/m5_gross_structure
+          m5_depth=$(python -c "import json; print(json.load(open('$root/central_depth.json'))['m5'])")
+          wt_depth=$(python -c "import json; print(json.load(open('$root/central_depth.json'))['wt'])")
+          python scripts/adjudicate_m5_gross_structure.py \
+            --bins "$root/coverage_bins.tsv" \
+            --m5-vcf "$root/m5.gross.vcf" \
+            --wt-vcf "$root/wt.gross.vcf" \
+            --m5-central-depth "$m5_depth" \
+            --wt-central-depth "$wt_depth" \
+            --output "$root/gross_structure_result.json"
+          sha256sum "$root/coverage_bins.tsv" "$root/m5.gross.vcf" "$root/wt.gross.vcf" "$root/gross_structure_result.json" > "$root/checksums.sha256"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m5-t0-gross-structure-audit
+          path: |
+            outputs/m5_gross_structure/coverage_bins.tsv
+            outputs/m5_gross_structure/central_depth.json
+            outputs/m5_gross_structure/m5.gross.vcf
+            outputs/m5_gross_structure/wt.gross.vcf
+            outputs/m5_gross_structure/gross_structure_result.json
+            outputs/m5_gross_structure/checksums.sha256
