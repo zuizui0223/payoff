@@ -68,12 +68,39 @@ def run():
             "all_history_certificate":bounds["classification"],
             "never_claims_global_optimality_from_six_cues":True,
         })
+    # A second, explicitly different module-cost slice provides a real
+    # all-history policy-independent certification rather than a restricted
+    # two-cue phase diagram. This result is imported from the existing
+    # history_aware_compromise pairwise switching-floor theorem.
+    certified=[]
+    for rho in (.1,.9):
+        p=Parameters(a=3.,b=1.,delta=2.,q=.9,rho=rho,
+                     running_cost=.05,switch_cost=1.,module_cost=3.6)
+        bounds=strategy_bounds(p,memories=(1,2,4,8,12))
+        if rho==.1 and bounds["classification"]!="NONMODULE_FEASIBLE_POLICY_BEATS_MODULE":
+            raise ArithmeticError("Slow turnover feasible-policy comparison changed")
+        if rho==.9 and bounds["classification"]!="MODULE_BEATS_ALL_SHARED_COORDINATE_POLICIES":
+            raise ArithmeticError("History-independent module certification changed")
+        certified.append({
+            "rho":rho,
+            "module_cost":p.module_cost,
+            "unavoidable_simultaneous_conflict_C":p.conflict_floor,
+            "clairvoyant_switch_penalty_psi":bounds["pair_switch_penalty_floor"],
+            "all_history_nonmodule_lower_bound":bounds["nonmodule_lower_bound"],
+            "constructive_feasible_upper_bound":bounds["nonmodule_upper_bound"],
+            "classification":bounds["classification"],
+            "stronger_than_two_cue_only":True,
+        })
+    threshold_sufficient=(3.6-3.0-.05)/.75
     return{
         "schema":"PAYOFF_TWO_CUE_VS_LONGER_CUE_HISTORY_V1",
         "status":"POST_OPEN_SYNTHETIC_NESTED_POLICY_COMPARISON_NOT_EMPIRICAL",
         "source_relative_scope":"all models in payoff PR 338; no biological evidence or historical transition",
         "params_shared":parameters,
         "results":reports,
+        "all_history_certification_different_K3_6":certified,
+        "sufficient_fast_turnover_rho_strictly_above_when_K3_6":threshold_sufficient,
+        "sufficient_condition_not_exact_transition":True,
         "reentrant_two_cue_cost_K3_87_was_exploratory":True,
         "not_fitted_to_wurmbea_or_any_species":True,
         "memory_cost_assumed_zero_for_nested_comparison":True,
