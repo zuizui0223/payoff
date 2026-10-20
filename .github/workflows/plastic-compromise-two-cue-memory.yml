@@ -74,9 +74,10 @@ jobs:
               print("rho",item["rho"],"2 cue",item["exact_two_cue_loss"],
                     "6 cue",item["nested_optimal_window_losses"]["6"]["primal_loss"],
                     "6-cue status",item["finite_window_status"],
-                    "all-history status",item["all_history_certificate"])
+                    "identified comparison",item["combined_identified_value_ordering"])
               assert abs(item["nested_optimal_window_losses"]["2"]["primal_loss"]-
                          item["exact_two_cue_loss"])<1e-6
+              assert item["combined_identified_value_ordering"]=="CONSTRUCTIVE_SIX_CUE_NONMODULE_BEATS_FIXED"
           PY
       - name: Archive model-only receipt
         uses: actions/upload-artifact@v4
