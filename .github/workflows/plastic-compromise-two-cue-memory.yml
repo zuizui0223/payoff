@@ -62,6 +62,14 @@ jobs:
           results=json.loads(Path("/tmp/payoff-two-vs-long-memory.json").read_text())
           assert results["status"]=="POST_OPEN_SYNTHETIC_NESTED_POLICY_COMPARISON_NOT_EMPIRICAL"
           assert results["biological_causal_origin_established"] is False
+          certified=results["all_history_certification_different_K3_6"]
+          assert [c["classification"] for c in certified]==[
+              "NONMODULE_FEASIBLE_POLICY_BEATS_MODULE",
+              "MODULE_BEATS_ALL_SHARED_COORDINATE_POLICIES"
+          ]
+          assert certified[1]["all_history_nonmodule_lower_bound"]>3.6
+          assert abs(results["sufficient_fast_turnover_rho_strictly_above_when_K3_6"] - 11/15)<1e-12
+          print("Model-only all-history K3.6 certificate:",certified)
           for item in results["results"]:
               print("rho",item["rho"],"2 cue",item["exact_two_cue_loss"],
                     "6 cue",item["nested_optimal_window_losses"]["6"]["primal_loss"],
