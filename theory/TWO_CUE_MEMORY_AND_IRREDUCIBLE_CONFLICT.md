@@ -72,6 +72,27 @@ At rho=0.99 the optimal two-cue response discounts agreeing cues (u about 0.0429
 
 **New mechanism:** high turnover rate cannot be substituted for environmental unpredictability. The original fixed-architecture advantage at high turnover is an exact result for a *memoryless* controller but is not universal over cue-history-based reversible phenotypes.
 
+### Nested-window audit: the K=3.87 module-winning middle point is NOT robust to longer cue memory
+
+The repository also contains an independently implemented and more general [history-aware compromise optimization](HISTORY_AWARE_COMPROMISE_ROBUSTNESS_V1.md), which minimizes over **every deterministic mapping of 1–6 cues** using a convex graph total-variation formulation with reported primal/dual bounds. The new [side-by-side audit](../scripts/audit_two_cue_vs_long_memory.py) evaluates that separate model under exactly the same parameters as the two-cue calculation. Its 1-cue output agrees with the original memoryless optimum and its 2-cue output agrees with the closed-form two-cue optimum (numerical tolerance 1e-6), so these are nested strategy sets on the **same cost scale**, not unrelated benchmarks.
+
+| rho (K=3.87) | Exact 2-cue plastic loss | Optimized 6-cue plastic loss | Fixed-module loss | Correct broad inference from an exhibited policy |
+| --- | ---: | ---: | ---: | --- |
+| 0.90 | 3.869056206 | **3.867408639** | 3.870 | A feasible plastic policy beats modules |
+| 0.95 | 3.872457906 | **3.862357129** | 3.870 | A feasible plastic policy beats modules |
+| 0.99 | 3.867283201 | **3.828761657** | 3.870 | A feasible plastic policy beats modules |
+
+**Scientific correction:** the two-cue-only plastic -> module -> plastic value re-entry at K=3.87 **does not survive the inclusion of 6-cue policies at the three tested points**. In particular, the previous middle-point module advantage at rho=.95 was an artifact of restricting the action policy to two observations. Because the six-cue policy is a constructively feasible member of the unrestricted-history class, its value below K **already refutes module global optimality at each tested point**, without any need to claim six cues are sufficient for the global plastic optimum. No claim is made about every intermediate rho or every possible module cost.
+
+The sister history-aware module already provides a different, **stronger policy-independent** theorem that incorporates irreversible physical phenotype-change costs. With c*d=1 and T=1, the clairvoyant relaxed per-switch loss is psi=0.75. For the same functional and cue parameters but a separately specified **K=3.6**, its all-shared-controller lower bound is
+
+    L(rho) = min(C+T, C+B+rho*psi)
+           = min(4, 3.05+0.75*rho).
+
+At rho=.1, original memoryless plastic loss 3.590316 is <K=3.6, providing a feasible plastic winner. At rho=.9, every single-coordinate shared/plastic policy—including one supplied with **perfect future knowledge**—has long-run loss at least **3.725 >K=3.6**. Thus **modules are certified intrinsically superior even to arbitrary history-dependent shared-coordinate controllers** for this declared K=3.6 case. The sufficient bound K<L holds for rho strictly greater than **11/15 approximately 0.73333** in this slice, but this is a sufficient bound, **not** an exact evolutionary-value crossing. As before, genetic accessibility/invasion and real biological K remain unmeasured.
+
+This cross-model audit strengthens the main question: fixed differentiation must be compared with the **best adequately feasible memory-assisted plasticity**, not with an arbitrarily bounded memory class. The broad pathwise simultaneous-conflict floor C remains valid, and the stronger cue-history-independent switching lower bound L is an additional certified condition under the more specific cost model. Both are conditional mathematical arguments, not field-measured structural origins.
+
 ## 5. The strong result that survives unlimited memory
 
 For every environmental state and every scalar shared phenotype,
