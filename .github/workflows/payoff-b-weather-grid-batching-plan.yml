@@ -1,0 +1,37 @@
+name: payoff-b-source-weather-grid-batching-plan
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/plan_payoff_b_batch_weather_requests.py"
+      - "tests/test_payoff_b_batch_weather_requests.py"
+      - "docs/PAYOFF_B_BATCH_WEATHER_REQUEST_PLAN_20261022.md"
+      - ".github/workflows/payoff-b-weather-grid-batching-plan.yml"
+jobs:
+  source-cost:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [stork, white_fronted_goose, curlew]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify source grid batching without coordinate export
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_batch_weather_requests.py
+      - name: Plan NASA request cost from all CC0 GPS riskdates
+        run: |
+          python -m scripts.plan_payoff_b_batch_weather_requests --system ${{ matrix.system }} --out outputs/payoff_b_batch_plan
+      - name: Export aggregate cost and overlap only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-fullrisk-weather-cost-${{ matrix.system }}
+          path: outputs/payoff_b_batch_plan/
+          if-no-files-found: warn
