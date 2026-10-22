@@ -1,0 +1,386 @@
+{
+  "schema": "payoff_b_all_source_riskday_daily_weather_ecological_readout_v1",
+  "date": "2026-10-22",
+  "source_run": "https://github.com/zuizui0223/payoff/actions/runs/39725093549",
+  "experimental_control": false,
+  "inferential_class": "EXPLORATORY_FULL_SOURCE_WITHIN_GRID_YEAR_MONTH_DESCRIPTIVE",
+  "public_source_nasa": "POWER UTC daily T2M/WS10M/V10M/ALLSKY_SFC_SW_DWN, prior day - previous 7 daily values",
+  "data_origin": "original MD5-verified 3-species CC0 GPS stationary-day riskset",
+  "full_source_results": {
+    "stork": {
+      "schema": "payoff_b_all_stationary_riskday_daily_weather_v1",
+      "system": "stork",
+      "source_class": "POST_V7V8_EXPLORATORY_GRID_MONTH_DESCRIPTIVES_ONLY",
+      "NASA_source": "POWER daily UTC T2M,WS10M,V10M,ALLSKY_SFC_SW_DWN",
+      "predictor_window": "day-1 minus days-2 to -8",
+      "result": {
+        "status": "ALL_RISKDAY_SOURCE_WEATHER_ASSOCIATION_DESCRIPTIVE_COMPLETE",
+        "source_doi": "10.5441/001/1.v8d24552",
+        "source_taxon": "Ciconia ciconia",
+        "original_source_checksum": {
+          "verified": true,
+          "bytes": 273153305,
+          "md5": "bda2ebd2441316b2e2fd9e9578d7d0b4",
+          "bitstream_uuid": "ed3529e6-ce20-4237-8875-9d35fdbf9a0f"
+        },
+        "API_batches_requested": 343,
+        "API_batches_failed": 0,
+        "API_failure_types": {},
+        "source_total_riskdays": 1633,
+        "weather_complete_source_days": 1633,
+        "weather_complete_source_counts": {
+          "CENSORED": 184,
+          "NORTHWARD_CANDIDATE": 156,
+          "OTHER_MOVEMENT": 352,
+          "STAYED_TWO_DAYS": 941
+        },
+        "weather_missing_by_source_label": {},
+        "riskset_original_counts": {
+          "CENSORED": 184,
+          "NORTHWARD_CANDIDATE": 156,
+          "OTHER_MOVEMENT": 352,
+          "STAYED_TWO_DAYS": 941,
+          "all_at_risk_stationary_days": 1633,
+          "animal_years_with_any_departure_proxy": 80,
+          "animal_years_with_any_stay_proxy": 91,
+          "animal_years_with_risk_opportunities": 91,
+          "deduplicated_frozen_cases": 145,
+          "frozen_cases_reconstructed": 145,
+          "raw_unthinned_departure_labels": 156
+        },
+        "batch_cost_and_overlap_source_only": {
+          "at_risk_source_days": 1633,
+          "individual_source_calendar_years": 91,
+          "grid_resolution_degrees": 0.5,
+          "unique_grid_years": 296,
+          "unique_grid_calendar_months": 343,
+          "estimated_monthly_hourly_NASA_requests": 343,
+          "prior_weather_context_days": 8,
+          "raw_one_query_per_riskday_request_count": 1633,
+          "best_case_batched_vs_daily_query_reduction_fraction": 0.7899571341090018,
+          "riskdays_per_gridmonth_summary": {
+            "min": 1,
+            "median": 3,
+            "max": 49
+          },
+          "grid_months_with_both_northward_and_stay_observations": 61,
+          "northward_case_days_in_overlap_gridmonths": 75,
+          "fraction_case_days_in_within_gridmonth_overlap": 0.4807692307692308,
+          "independence_of_weather_grid_months": false,
+          "grid_month_weather_is_climatological_forecast": false,
+          "GPS_source_coordinates_or_batch_cells_exported": false,
+          "batch_cost_under_predeclared_500_query_gate": true
+        },
+        "descriptive_weather_contrast": {
+          "complete_case_source_days": 156,
+          "complete_stay_source_days": 941,
+          "source_group_mean_case_minus_stay": {
+            "T2M_anomaly": -1.0359685452698204,
+            "WS10M_anomaly": 0.2503185762165571,
+            "V10M_anomaly": -0.9586818733869743,
+            "ALLSKY_SFC_SW_DWN_anomaly": -22.33714976663436,
+            "T2M_last": -1.9762120902476887,
+            "WS10M_last": 0.2978050491839017,
+            "V10M_last": -0.6937176081092129,
+            "ALLSKY_SFC_SW_DWN_last": -29.682791220469227
+          },
+          "grid_year_month_adjusted_case_weighted_descriptive_difference": {
+            "T2M_anomaly": -0.514316058201058,
+            "WS10M_anomaly": 0.2535933938019652,
+            "V10M_anomaly": -0.26131610355253215,
+            "ALLSKY_SFC_SW_DWN_anomaly": -17.098786065759636,
+            "T2M_last": 0.015564947089947012,
+            "WS10M_last": 0.20305142857142852,
+            "V10M_last": -0.16620383597883592,
+            "ALLSKY_SFC_SW_DWN_last": -14.209772619047623
+          },
+          "overlap_strata_grid_year_month": 61,
+          "case_days_inside_strata_with_both_labels": 75,
+          "grid_year_month_clusters_are_statistically_independent": false,
+          "site_year_month_adjusted_difference_is_causal": false
+        },
+        "modelled_true_departure_hazard": false,
+        "predictor_uses_future_day_location_or_meteorology": false,
+        "animal_perceived_cue_or_recourse_measured": false,
+        "fitness_effect_tested": false,
+        "GPS_coordinates_ID_dates_exported": false
+      }
+    },
+    "white_fronted_goose": {
+      "schema": "payoff_b_all_stationary_riskday_daily_weather_v1",
+      "system": "white_fronted_goose",
+      "source_class": "POST_V7V8_EXPLORATORY_GRID_MONTH_DESCRIPTIVES_ONLY",
+      "NASA_source": "POWER daily UTC T2M,WS10M,V10M,ALLSKY_SFC_SW_DWN",
+      "predictor_window": "day-1 minus days-2 to -8",
+      "result": {
+        "status": "ALL_RISKDAY_SOURCE_WEATHER_ASSOCIATION_DESCRIPTIVE_COMPLETE",
+        "source_doi": "10.5441/001/1.31c2v92f",
+        "source_taxon": "Anser albifrons",
+        "original_source_checksum": {
+          "size_bytes": 16806763,
+          "md5": "0e0abd1126c53f4924907c3fb6a72d02",
+          "bitstream_uuid": "0a262590-49e2-4e47-a290-dbfd6649579f",
+          "bitstream_url": "https://datarepository.movebank.org/server/api/core/bitstreams/0a262590-49e2-4e47-a290-dbfd6649579f/content"
+        },
+        "API_batches_requested": 334,
+        "API_batches_failed": 0,
+        "API_failure_types": {},
+        "source_total_riskdays": 2008,
+        "weather_complete_source_days": 2008,
+        "weather_complete_source_counts": {
+          "CENSORED": 156,
+          "NORTHWARD_CANDIDATE": 111,
+          "OTHER_MOVEMENT": 285,
+          "STAYED_TWO_DAYS": 1456
+        },
+        "weather_missing_by_source_label": {},
+        "riskset_original_counts": {
+          "CENSORED": 156,
+          "NORTHWARD_CANDIDATE": 111,
+          "OTHER_MOVEMENT": 285,
+          "STAYED_TWO_DAYS": 1456,
+          "all_at_risk_stationary_days": 2008,
+          "animal_years_with_any_departure_proxy": 46,
+          "animal_years_with_any_stay_proxy": 49,
+          "animal_years_with_risk_opportunities": 51,
+          "deduplicated_frozen_cases": 106,
+          "frozen_cases_reconstructed": 106,
+          "raw_unthinned_departure_labels": 111
+        },
+        "batch_cost_and_overlap_source_only": {
+          "at_risk_source_days": 2008,
+          "individual_source_calendar_years": 51,
+          "grid_resolution_degrees": 0.5,
+          "unique_grid_years": 279,
+          "unique_grid_calendar_months": 334,
+          "estimated_monthly_hourly_NASA_requests": 334,
+          "prior_weather_context_days": 8,
+          "raw_one_query_per_riskday_request_count": 2008,
+          "best_case_batched_vs_daily_query_reduction_fraction": 0.8336653386454184,
+          "riskdays_per_gridmonth_summary": {
+            "min": 1,
+            "median": 4,
+            "max": 51
+          },
+          "grid_months_with_both_northward_and_stay_observations": 84,
+          "northward_case_days_in_overlap_gridmonths": 89,
+          "fraction_case_days_in_within_gridmonth_overlap": 0.8018018018018018,
+          "independence_of_weather_grid_months": false,
+          "grid_month_weather_is_climatological_forecast": false,
+          "GPS_source_coordinates_or_batch_cells_exported": false,
+          "batch_cost_under_predeclared_500_query_gate": true
+        },
+        "descriptive_weather_contrast": {
+          "complete_case_source_days": 111,
+          "complete_stay_source_days": 1456,
+          "source_group_mean_case_minus_stay": {
+            "T2M_anomaly": 0.6565408127908129,
+            "WS10M_anomaly": -0.04541963666963665,
+            "V10M_anomaly": -0.01887576548290834,
+            "ALLSKY_SFC_SW_DWN_anomaly": 0.3857327421613119,
+            "T2M_last": 2.022654130779131,
+            "WS10M_last": -0.116410875160875,
+            "V10M_last": -0.13223950598950598,
+            "ALLSKY_SFC_SW_DWN_last": 5.024096438471446
+          },
+          "grid_year_month_adjusted_case_weighted_descriptive_difference": {
+            "T2M_anomaly": 1.0368454527682056,
+            "WS10M_anomaly": -0.4695160792702928,
+            "V10M_anomaly": 0.07405198723457153,
+            "ALLSKY_SFC_SW_DWN_anomaly": 2.2702517030098472,
+            "T2M_last": 1.7571641050377005,
+            "WS10M_last": -0.3877865210008469,
+            "V10M_last": 0.02392448738319525,
+            "ALLSKY_SFC_SW_DWN_last": 5.016173756726004
+          },
+          "overlap_strata_grid_year_month": 84,
+          "case_days_inside_strata_with_both_labels": 89,
+          "grid_year_month_clusters_are_statistically_independent": false,
+          "site_year_month_adjusted_difference_is_causal": false
+        },
+        "modelled_true_departure_hazard": false,
+        "predictor_uses_future_day_location_or_meteorology": false,
+        "animal_perceived_cue_or_recourse_measured": false,
+        "fitness_effect_tested": false,
+        "GPS_coordinates_ID_dates_exported": false
+      }
+    },
+    "curlew": {
+      "schema": "payoff_b_all_stationary_riskday_daily_weather_v1",
+      "system": "curlew",
+      "source_class": "POST_V7V8_EXPLORATORY_GRID_MONTH_DESCRIPTIVES_ONLY",
+      "NASA_source": "POWER daily UTC T2M,WS10M,V10M,ALLSKY_SFC_SW_DWN",
+      "predictor_window": "day-1 minus days-2 to -8",
+      "result": {
+        "status": "ALL_RISKDAY_SOURCE_WEATHER_ASSOCIATION_DESCRIPTIVE_COMPLETE",
+        "source_doi": "10.5441/001/1.715k46g2",
+        "source_taxon": "Numenius arquata",
+        "original_source_checksum": {
+          "bytes": 159155287,
+          "md5": "b847a97e4ebaedd3e2fd46e920c4f08e",
+          "original_source_verified": true
+        },
+        "API_batches_requested": 132,
+        "API_batches_failed": 0,
+        "API_failure_types": {},
+        "source_total_riskdays": 1868,
+        "weather_complete_source_days": 1868,
+        "weather_complete_source_counts": {
+          "CENSORED": 80,
+          "NORTHWARD_CANDIDATE": 66,
+          "OTHER_MOVEMENT": 90,
+          "STAYED_TWO_DAYS": 1632
+        },
+        "weather_missing_by_source_label": {},
+        "riskset_original_counts": {
+          "CENSORED": 80,
+          "NORTHWARD_CANDIDATE": 66,
+          "OTHER_MOVEMENT": 90,
+          "STAYED_TWO_DAYS": 1632,
+          "all_at_risk_stationary_days": 1868,
+          "animal_years_with_any_departure_proxy": 41,
+          "animal_years_with_any_stay_proxy": 42,
+          "animal_years_with_risk_opportunities": 42,
+          "deduplicated_frozen_cases": 59,
+          "frozen_cases_reconstructed": 59,
+          "raw_unthinned_departure_labels": 66
+        },
+        "batch_cost_and_overlap_source_only": {
+          "at_risk_source_days": 1868,
+          "individual_source_calendar_years": 42,
+          "grid_resolution_degrees": 0.5,
+          "unique_grid_years": 107,
+          "unique_grid_calendar_months": 132,
+          "estimated_monthly_hourly_NASA_requests": 132,
+          "prior_weather_context_days": 8,
+          "raw_one_query_per_riskday_request_count": 1868,
+          "best_case_batched_vs_daily_query_reduction_fraction": 0.9293361884368309,
+          "riskdays_per_gridmonth_summary": {
+            "min": 1,
+            "median": 6,
+            "max": 138
+          },
+          "grid_months_with_both_northward_and_stay_observations": 31,
+          "northward_case_days_in_overlap_gridmonths": 51,
+          "fraction_case_days_in_within_gridmonth_overlap": 0.7727272727272727,
+          "independence_of_weather_grid_months": false,
+          "grid_month_weather_is_climatological_forecast": false,
+          "GPS_source_coordinates_or_batch_cells_exported": false,
+          "batch_cost_under_predeclared_500_query_gate": true
+        },
+        "descriptive_weather_contrast": {
+          "complete_case_source_days": 66,
+          "complete_stay_source_days": 1632,
+          "source_group_mean_case_minus_stay": {
+            "T2M_anomaly": 0.1611883276037689,
+            "WS10M_anomaly": -0.052981920040743584,
+            "V10M_anomaly": -0.18215065571683225,
+            "ALLSKY_SFC_SW_DWN_anomaly": 2.8230674656226142,
+            "T2M_last": -0.4609246880570401,
+            "WS10M_last": 1.113757798573975,
+            "V10M_last": -0.6353409090909091,
+            "ALLSKY_SFC_SW_DWN_last": -0.3613329991087255
+          },
+          "grid_year_month_adjusted_case_weighted_descriptive_difference": {
+            "T2M_anomaly": 0.3396254867969589,
+            "WS10M_anomaly": -0.06770424262505921,
+            "V10M_anomaly": -0.6146530154115233,
+            "ALLSKY_SFC_SW_DWN_anomaly": -0.974608786395278,
+            "T2M_last": 1.040401632110044,
+            "WS10M_last": 0.3156455516595251,
+            "V10M_last": -0.8372279534135317,
+            "ALLSKY_SFC_SW_DWN_last": 14.219251999758969
+          },
+          "overlap_strata_grid_year_month": 31,
+          "case_days_inside_strata_with_both_labels": 51,
+          "grid_year_month_clusters_are_statistically_independent": false,
+          "site_year_month_adjusted_difference_is_causal": false
+        },
+        "modelled_true_departure_hazard": false,
+        "predictor_uses_future_day_location_or_meteorology": false,
+        "animal_perceived_cue_or_recourse_measured": false,
+        "fitness_effect_tested": false,
+        "GPS_coordinates_ID_dates_exported": false
+      }
+    }
+  },
+  "summarized": {
+    "stork": {
+      "n_risk_days": 1633,
+      "n_complete_weather": 1633,
+      "n_cases": 156,
+      "n_stays": 941,
+      "n_matching_gridyearmonth_strata": 61,
+      "n_case_days_with_gridyearmonth_stay": 75,
+      "batch_queries": 343,
+      "failed_requests": 0,
+      "temperature_anomaly_mean_diff_c": -1.0359685452698204,
+      "gridyearmonth_temperature_anomaly_diff_c": -0.514316058201058,
+      "gridyearmonth_north_wind_10m_anomaly_diff_m_s": -0.26131610355253215,
+      "gridyearmonth_shortwave_anomaly_diff_w_m2": -17.098786065759636
+    },
+    "white_fronted_goose": {
+      "n_risk_days": 2008,
+      "n_complete_weather": 2008,
+      "n_cases": 111,
+      "n_stays": 1456,
+      "n_matching_gridyearmonth_strata": 84,
+      "n_case_days_with_gridyearmonth_stay": 89,
+      "batch_queries": 334,
+      "failed_requests": 0,
+      "temperature_anomaly_mean_diff_c": 0.6565408127908129,
+      "gridyearmonth_temperature_anomaly_diff_c": 1.0368454527682056,
+      "gridyearmonth_north_wind_10m_anomaly_diff_m_s": 0.07405198723457153,
+      "gridyearmonth_shortwave_anomaly_diff_w_m2": 2.2702517030098472
+    },
+    "curlew": {
+      "n_risk_days": 1868,
+      "n_complete_weather": 1868,
+      "n_cases": 66,
+      "n_stays": 1632,
+      "n_matching_gridyearmonth_strata": 31,
+      "n_case_days_with_gridyearmonth_stay": 51,
+      "batch_queries": 132,
+      "failed_requests": 0,
+      "temperature_anomaly_mean_diff_c": 0.1611883276037689,
+      "gridyearmonth_temperature_anomaly_diff_c": 0.3396254867969589,
+      "gridyearmonth_north_wind_10m_anomaly_diff_m_s": -0.6146530154115233,
+      "gridyearmonth_shortwave_anomaly_diff_w_m2": -0.974608786395278
+    }
+  },
+  "totals": {
+    "n_risk_days": 5509,
+    "n_complete_weather": 5509,
+    "n_cases": 333,
+    "n_stays": 4029,
+    "n_matching_gridyearmonth_strata": 176,
+    "n_case_days_with_gridyearmonth_stay": 215,
+    "batch_queries": 809,
+    "failed_requests": 0
+  },
+  "previous_small_sample_V10M_anomaly_case_minus_stay": {
+    "stork": -2.296287202380952,
+    "white_fronted_goose": 2.0213392857142853,
+    "curlew": 0.48564732142857125
+  },
+  "cross_species_common_wind_sign_supported": false,
+  "cross_species_common_positive_warming_signal_supported": false,
+  "true_animal_departure_hazard_estimated": false,
+  "causal_effects_or_confirmatory_pvalues_estimated": false,
+  "individual_cluster_ci_estimated": false,
+  "learned_cue_forecast_used_by_animal_unobserved": true,
+  "route_relative_flight_altitude_wind_unobserved": true,
+  "fitness_rescue_unobserved": true,
+  "source_overlap_and_prior_V7V8_nulls_preserved": true,
+  "limitations": [
+    "The sample includes complete at-risk source 3-day stationary opportunities, NOT independent animal-years; repeated windows overlap.",
+    "No causal weather response is identified from the observational location and date associations.",
+    "The adjusted descriptive contrasts compare only grid-year-month cells with both outcomes, excluding unmatched source cases.",
+    "Weather is NASA physical reanalysis, not a historical forecast or signal demonstrably perceived by the bird.",
+    "Source site grid cells can be visited at different times within a month; local season and weather autocorrelation remain confounders.",
+    "The movement outcome is a two-day northward position proxy and is not verified stopover exit or reproductive arrival.",
+    "GPS uses distinct known source cohorts but white-fronted-goose individual overlap with prior PAYOFF results is unresolved.",
+    "Northward 10m wind is not track-aligned tailwind at bird flight altitude; solar radiation is not thermal lift.",
+    "No cross-species pooled effect, independent migratory cohort causal replication, fitness association or information deadline is supported."
+  ]
+}
