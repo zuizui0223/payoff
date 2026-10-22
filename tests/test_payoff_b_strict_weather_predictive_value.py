@@ -41,8 +41,13 @@ def test_true_year_holdout_has_proper_score_and_no_prediction_export():
     assert "anonymous-" not in str(out)
 
 def test_heldout_animal_cv_is_not_same_random_rows():
-    out=fold_score(synthetic(),None,scheme="whole_animal")
+    # Ensure each synthetic animal carries both outcome classes, so no
+    # fold can fail the *original* locked minimum-positive admission gate
+    # solely because GroupKFold assigns all synthetic cases to other folds.
+    base=synthetic()
+    augmented=base+[dict(r,y=1-r["y"]) for r in base]
+    out=fold_score(augmented,None,scheme="whole_animal")
     assert out["status"]=="OUT_OF_FOLD_OBSERVATIONAL_PREDICTION_ESTIMABLE"
-    assert out["heldout_original_source_days"]==400
+    assert out["heldout_original_source_days"]==800
     assert out["n_folds_admitted"]==5
     assert out["no_individual_predictions_or_animal_ids_exported"] is True
