@@ -51,3 +51,23 @@ def test_heldout_animal_cv_is_not_same_random_rows():
     assert out["heldout_original_source_days"]==800
     assert out["n_folds_admitted"]==5
     assert out["no_individual_predictions_or_animal_ids_exported"] is True
+
+
+
+def test_changing_future_class_of_prior_day_does_not_change_current_risk_age():
+    from datetime import date,timedelta
+    t=date(2018,4,1)
+    k=("Bird","private",2018)
+    source=[
+        (k,t,(31,12),STAY),
+        (k,t+timedelta(days=1),(31,12),"OTHER_MOVEMENT"),
+        (k,t+timedelta(days=2),(31,12),CASE),
+    ]
+    a=make_risk_features(source,(True,True,True))
+    changed=list(source)
+    changed[1]=(k,t+timedelta(days=1),(31,12),"CENSORED")
+    b=make_risk_features(changed,(True,True,True))
+    # On day 3, original predecision strict source history is identical;
+    # the future labels assigned to day 2 cannot change its input.
+    assert a[-1]["base"] == b[-1]["base"]
+    assert a[-1]["base"][-1] == __import__("math").log1p(3)

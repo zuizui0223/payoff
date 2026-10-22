@@ -68,50 +68,37 @@ def site_time_features(date,site,run_length):
     ]
 
 
-def strict_source_rows(risk,mask):
-    """Whole past stationary run length, reset after source observation gaps."""
-    if len(risk)!=len(mask):raise ValueError("Original strict mask length changed")
-    last={}
-    counter=defaultdict(int)
-    selected=[]
-    for (tax,animal,year),day,site,label in sorted(risk,key=lambda r:(r[0],r[1])):
-        k=(tax,animal,year)
-        # The run counter derives only from observed prior stationary states.
-        previous=last.get(k)
-        from datetime import timedelta
-        if previous is not None and (day-previous)==timedelta(days=1):
-            counter[k]+=1
-        else:
-            counter[k]=1
-        last[k]=day
-        idx=None
-        # Exact identity/day key lookup from mask by original source row.
-        # Assigned below in make_risk_features; this function remains reusable.
-        selected.append((k,day,site,label,counter[k]))
-    return selected
-
-
 def make_risk_features(risk,mask):
+    """Run-age must not depend on which earlier days later became cases/stays.
+
+    First traverse every GPS-defined source opportunity, even OTHER/CENSORED,
+    with original strict fix flags. Count consecutive strict source days
+    using only the observation history through each anchor day; ONLY THEN
+    decide which rows have the two observed future GPS outcome classes.
+    """
     from datetime import timedelta
-    if len(risk)!=len(mask):raise ValueError("Source and GPS mask disagree")
-    values=[]
-    for r,strict in zip(risk,mask):
-        if not strict or r[3] not in (CASE,STAY):continue
-        values.append(r)
-    values.sort(key=lambda r:(r[0],r[1]))
+    if len(risk)!=len(mask):
+        raise ValueError("Source and GPS mask disagree")
+    originals=sorted(zip(risk,mask),key=lambda pair:(pair[0][0],pair[0][1]))
     last={}
     run=defaultdict(int)
     result=[]
-    for (tax,animal,year),day,site,label in values:
+    for ((tax,animal,year),day,site,label),strict in originals:
         group=(tax,animal,year)
+        if not strict:
+            run[group]=0
+            last.pop(group,None)
+            continue
         old=last.get(group)
-        run[group]=(run[group]+1 if old is not None
-                    and day-old==timedelta(days=1) else 1)
+        run[group]=(run[group]+1 if old is not None and
+                    day-old==timedelta(days=1) else 1)
         last[group]=day
+        if label not in (CASE,STAY):
+            continue
         result.append({
-           "source_group":group,"animal":animal,"year":year,
-           "source_day":day,"site":site,"label":label,
-           "base":site_time_features(day,site,run[group])
+            "source_group":group,"animal":animal,"year":year,
+            "source_day":day,"site":site,"label":label,
+            "base":site_time_features(day,site,run[group]),
         })
     return result
 
