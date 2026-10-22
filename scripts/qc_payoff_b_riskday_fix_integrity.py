@@ -69,7 +69,7 @@ def assemble_private_anchor_index(risk):
     return idx,windows
 
 
-def audit_fixes(gps,risk,source_taxon):
+def audit_fixes(gps,risk,source_taxon,return_private_mask=False):
     index,windows=assemble_private_anchor_index(risk)
     parse=Counter()
     with Path(gps).open(newline="",encoding="utf-8-sig",errors="replace") as h:
@@ -131,7 +131,7 @@ def audit_fixes(gps,risk,source_taxon):
         )
         stats["any_anchor_day_fix_farther_than_120km"]+=int(any(r["far"]))
         overall["original_fix_assignments_across_riskdays"]+=sum(counts)
-    return {
+    summary = {
         "per_prior_riskday_outcome_fix_level_integrity":{
             k:dict(sorted(v.items())) for k,v in sorted(statuses.items())
         },
@@ -143,6 +143,11 @@ def audit_fixes(gps,risk,source_taxon):
         "study_wide_animal_independence_proven":False,
         "GPS_identity_time_and_coordinate_exported":False,
     }
+    # Only downstream calls within the same CI process may access these
+    # booleans. They are not serialized in the public aggregate receipt.
+    if return_private_mask:
+        return summary, tuple(not any(record["outside"]) for record in windows)
+    return summary
 
 
 def read_source(system):
