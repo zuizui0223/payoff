@@ -1,0 +1,39 @@
+name: payoff-b-strict-weather-incremental-heldout-year
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/audit_payoff_b_strict_weather_predictive_value.py"
+      - "tests/test_payoff_b_strict_weather_predictive_value.py"
+      - "docs/PAYOFF_B_STRICT_WEATHER_CV_PROTOCOL_20261022.md"
+      - ".github/workflows/payoff-b-strict-weather-predictive-value.yml"
+jobs:
+  physical-weather-predictive-value:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [stork, white_fronted_goose, curlew]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Synthetic model holdout and source chronology tests
+        run: |
+          python -m pip install --disable-pip-version-check pytest scikit-learn==1.6.1
+          python -m pytest -q tests/test_payoff_b_strict_weather_predictive_value.py
+      - name: Compare site-season only vs added prior weather in held-out whole years
+        run: |
+          python -m scripts.audit_payoff_b_strict_weather_predictive_value \
+            --system ${{ matrix.system }} \
+            --out outputs/payoff_b_strict_weather_cv
+      - name: Preserve aggregate CV scores and no original animal locations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-strict-weather-yearCV-${{ matrix.system }}
+          path: outputs/payoff_b_strict_weather_cv/
+          if-no-files-found: warn
