@@ -27,7 +27,7 @@ def test_bracket_counts_never_forge_gps_departure_or_relax_fixed_n():
     assert s["fixed_future_hourly_meteorology_source_gate"]["passed"]
     assert not s["true_behavioral_commitment_instant_identified"]
     assert s["brackets_narrower_than_h"]["3"]==4
-    with pytest.raises(ValueError,match="original"):
+    with pytest.raises(ValueError,match="Original"):
         report_brackets(Counter({"BRACKET_WITHIN_24H":13,
                                  "NO_OUTBOUND_NEXT_DAY_FIX":5}),
                         [1]*13,17,30)
