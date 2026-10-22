@@ -53,7 +53,7 @@ def decide(g,a,b,opened_studies,opened_papers):
     why=[]
     if doi in PREVIOUS or g.get("previous_payoff_use")!="UNREVIEWED":
         why.append("PREVIOUSLY_OPENED_SOURCE_DOI")
-    if study & opened_studies:why.append("SHARED_PRIOR_MOVEbank_STUDY_ID")
+    if study & opened_studies:why.append("SHARED_PRIOR_MOVEBANK_STUDY_ID")
     if paper & opened_papers:why.append("SHARED_PRIOR_PUBLICATION_DOI")
     if not study:why.append("NO_RECORDED_STUDY_ID")
     if not paper:why.append("NO_RECORDED_PUBLICATION_DOI")
