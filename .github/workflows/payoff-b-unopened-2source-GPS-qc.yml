@@ -1,0 +1,39 @@
+name: payoff-b-unopened-two-bird-GPS-source-admission
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/qc_payoff_b_unopened_gps_source.py"
+      - "tests/test_payoff_b_unopened_gps_source.py"
+      - "docs/PAYOFF_B_UNOPENED_GPS_SOURCE_GATE_20261022.md"
+      - ".github/workflows/payoff-b-unopened-2source-GPS-qc.yml"
+jobs:
+  unopened-original-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [pinkfoot_goose, egyptian_vulture]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check source selection and eligibility with synthetic test
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_unopened_gps_source.py
+      - name: Verify original CC0 MD5 and evaluate February-May source coverage
+        run: |
+          python -m scripts.qc_payoff_b_unopened_gps_source \
+            --system ${{ matrix.system }} \
+            --out outputs/payoff_b_unopened_two_sources
+      - name: Archive only taxon-level year/season sampling metrics, never source tracks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-unopened-GPS-source-${{ matrix.system }}
+          path: outputs/payoff_b_unopened_two_sources/
+          if-no-files-found: warn
