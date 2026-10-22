@@ -37,10 +37,12 @@ jobs:
             --name payoff-b-movebank-complete-taxonomic-source-metadata --dir outputs/frozen_stage3
       - name: Screen all 446 sources for unopened bird-GPS CC0 packages
         run: |
+          GBIF="$(find outputs/frozen_gbif -type f -name movebank_446_taxon_sensor_source_candidates.csv -print -quit)"
+          STAGE2="$(find outputs/frozen_stage2 -type f -name movebank_package_metadata_screen.csv -print -quit)"
+          STAGE3="$(find outputs/frozen_stage3 -type f -name movebank_taxon_sensor_source_registry.csv -print -quit)"
+          test -n "$GBIF" && test -n "$STAGE2" && test -n "$STAGE3"
           python -m scripts.shortlist_payoff_b_independent_movebank \
-            --gbif outputs/frozen_gbif/payoff_b_gbif_taxon/movebank_446_taxon_sensor_source_candidates.csv \
-            --stage2 outputs/frozen_stage2/payoff_b_independent_stage2/movebank_package_metadata_screen.csv \
-            --stage3 outputs/frozen_stage3/payoff_b_movebank_taxon_census/movebank_taxon_sensor_source_registry.csv \
+            --gbif "$GBIF" --stage2 "$STAGE2" --stage3 "$STAGE3" \
             --out outputs/payoff_b_unopened_source
       - name: Archive complete candidate and rejection receipts, not tracks
         if: always()
