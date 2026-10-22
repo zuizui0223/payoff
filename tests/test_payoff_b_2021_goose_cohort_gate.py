@@ -29,3 +29,14 @@ two_part-reference-data.csv"""
     assert a["readme_reference_files_exceed_manifest"]
     assert a["readme_GPS_files"]==2
     assert not a["single_study_source"]
+
+
+def test_older_reference_missing_ring_and_deployment_remains_uncomparable():
+    new=[{"animal-id":"bird-1","tag-id":"tag-1","deployment-id":"d1",
+          "animal-ring-id":"r1","tag-serial-no":"serial-1"}]
+    old=[{"animal-id":"bird-2","tag-id":"tag-2"}]
+    report=subject_overlap(new,old)
+    assert report["per_field"]["deployment-id"]["status"]=="UNCOMPARABLE_MISSING_PUBLISHER_FIELD"
+    assert report["per_field"]["animal-ring-id"]["status"]=="UNCOMPARABLE_MISSING_PUBLISHER_FIELD"
+    assert report["per_field"]["animal-id"]["status"]=="EXACT_PUBLISHED_ID_COMPARISON"
+    assert report["true_biological_independence_established"] is False

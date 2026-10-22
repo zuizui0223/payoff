@@ -25,7 +25,7 @@ MISSING={"","na","n/a","null","none","unknown","not available","no data","nan"}
 def rows(path):
     with Path(path).open(newline="",encoding="utf-8-sig",errors="replace") as h:
         r=csv.DictReader(h)
-        if not {"animal-id","tag-id","deployment-id"}.issubset(set(r.fieldnames or [])):
+        if not {"animal-id","tag-id"}.issubset(set(r.fieldnames or [])):
             raise ValueError("Published reference lacks essential ID columns")
         return list(r)
 
