@@ -1,0 +1,364 @@
+{
+  "schema": "payoff_b_four_taxon_source_fix_stationarity_integrity_v1",
+  "source": "https://github.com/zuizui0223/payoff/actions/runs/39783087833",
+  "classification": "POST_OUTCOME_SOURCE_MEASUREMENT_QC_NO_CUE_TEST",
+  "all_original_source_aggregates": {
+    "stork": {
+      "schema": "payoff_b_original_4guild_source_daily_centroid_fix_integrity_20261022",
+      "system": "stork",
+      "status": "SOURCE_DAILY_FIX_INTEGRITY_AUDITED",
+      "purpose": "POST_OUTCOME_MEASUREMENT_BIAS_SENSITIVITY",
+      "result": {
+        "status": "ORIGINAL_STATIONARY_SOURCE_FIX_LEVEL_INTEGRITY_COMPLETE",
+        "source_system": "stork",
+        "source_doi": "10.5441/001/1.v8d24552",
+        "original_CC0_checksum": {
+          "verified": true,
+          "bytes": 273153305,
+          "md5": "bda2ebd2441316b2e2fd9e9578d7d0b4",
+          "bitstream_uuid": "ed3529e6-ce20-4237-8875-9d35fdbf9a0f"
+        },
+        "source_label_counts": {
+          "CENSORED": 184,
+          "NORTHWARD_CANDIDATE": 156,
+          "OTHER_MOVEMENT": 352,
+          "STAYED_TWO_DAYS": 941,
+          "all_at_risk_stationary_days": 1633,
+          "animal_years_with_any_departure_proxy": 80,
+          "animal_years_with_any_stay_proxy": 91,
+          "animal_years_with_risk_opportunities": 91,
+          "deduplicated_frozen_cases": 145,
+          "frozen_cases_reconstructed": 145,
+          "raw_unthinned_departure_labels": 156
+        },
+        "source_fix_level_integrity": {
+          "per_prior_riskday_outcome_fix_level_integrity": {
+            "CENSORED": {
+              "all_3days_every_fix_inside_30km": 181,
+              "any_anchor_day_fix_farther_than_120km": 0,
+              "any_fix_outside_in_3day_anchor": 3,
+              "final_anchor_day_any_fix_outside": 1,
+              "final_anchor_day_last_fix_outside": 0,
+              "final_anchor_day_more_than_half_fixes_outside": 0,
+              "original_admitted_3day_windows": 184,
+              "prior_first_or_second_day_any_fix_outside": 2
+            },
+            "NORTHWARD_CANDIDATE": {
+              "all_3days_every_fix_inside_30km": 85,
+              "any_anchor_day_fix_farther_than_120km": 0,
+              "any_fix_outside_in_3day_anchor": 71,
+              "final_anchor_day_any_fix_outside": 43,
+              "final_anchor_day_last_fix_outside": 29,
+              "final_anchor_day_more_than_half_fixes_outside": 13,
+              "original_admitted_3day_windows": 156,
+              "prior_first_or_second_day_any_fix_outside": 41
+            },
+            "OTHER_MOVEMENT": {
+              "all_3days_every_fix_inside_30km": 128,
+              "any_anchor_day_fix_farther_than_120km": 0,
+              "any_fix_outside_in_3day_anchor": 224,
+              "final_anchor_day_any_fix_outside": 159,
+              "final_anchor_day_last_fix_outside": 88,
+              "final_anchor_day_more_than_half_fixes_outside": 38,
+              "original_admitted_3day_windows": 352,
+              "prior_first_or_second_day_any_fix_outside": 170
+            },
+            "STAYED_TWO_DAYS": {
+              "all_3days_every_fix_inside_30km": 716,
+              "any_anchor_day_fix_farther_than_120km": 2,
+              "any_fix_outside_in_3day_anchor": 225,
+              "final_anchor_day_any_fix_outside": 97,
+              "final_anchor_day_last_fix_outside": 26,
+              "final_anchor_day_more_than_half_fixes_outside": 16,
+              "original_admitted_3day_windows": 941,
+              "prior_first_or_second_day_any_fix_outside": 199
+            }
+          },
+          "all_outcomes_including_censoring_preserved": true,
+          "all_source_riskdays": 1633,
+          "source_original_parse_errors": {
+            "fixes_used_across_overlapping_anchors": 821826
+          },
+          "absolute_30km_day_centroid_stationarity_can_hide_excursions": true,
+          "anchor_fix_level_stable_is_verified_true_stopover": false,
+          "study_wide_animal_independence_proven": false,
+          "GPS_identity_time_and_coordinate_exported": false
+        },
+        "original_physical_cue_effect_reestimated": false,
+        "source_stage_decision_independently_validated": false,
+        "sensitive_animal_location_or_event_date_exported": false
+      }
+    },
+    "white_fronted_goose": {
+      "schema": "payoff_b_original_4guild_source_daily_centroid_fix_integrity_20261022",
+      "system": "white_fronted_goose",
+      "status": "SOURCE_DAILY_FIX_INTEGRITY_AUDITED",
+      "purpose": "POST_OUTCOME_MEASUREMENT_BIAS_SENSITIVITY",
+      "result": {
+        "status": "ORIGINAL_STATIONARY_SOURCE_FIX_LEVEL_INTEGRITY_COMPLETE",
+        "source_system": "white_fronted_goose",
+        "source_doi": "10.5441/001/1.31c2v92f",
+        "original_CC0_checksum": {
+          "size_bytes": 16806763,
+          "md5": "0e0abd1126c53f4924907c3fb6a72d02",
+          "bitstream_uuid": "0a262590-49e2-4e47-a290-dbfd6649579f",
+          "bitstream_url": "https://datarepository.movebank.org/server/api/core/bitstreams/0a262590-49e2-4e47-a290-dbfd6649579f/content"
+        },
+        "source_label_counts": {
+          "CENSORED": 156,
+          "NORTHWARD_CANDIDATE": 111,
+          "OTHER_MOVEMENT": 285,
+          "STAYED_TWO_DAYS": 1456,
+          "all_at_risk_stationary_days": 2008,
+          "animal_years_with_any_departure_proxy": 46,
+          "animal_years_with_any_stay_proxy": 49,
+          "animal_years_with_risk_opportunities": 51,
+          "deduplicated_frozen_cases": 106,
+          "frozen_cases_reconstructed": 106,
+          "raw_unthinned_departure_labels": 111
+        },
+        "source_fix_level_integrity": {
+          "per_prior_riskday_outcome_fix_level_integrity": {
+            "CENSORED": {
+              "all_3days_every_fix_inside_30km": 141,
+              "any_anchor_day_fix_farther_than_120km": 1,
+              "any_fix_outside_in_3day_anchor": 15,
+              "final_anchor_day_any_fix_outside": 7,
+              "final_anchor_day_last_fix_outside": 7,
+              "final_anchor_day_more_than_half_fixes_outside": 0,
+              "original_admitted_3day_windows": 156,
+              "prior_first_or_second_day_any_fix_outside": 8
+            },
+            "NORTHWARD_CANDIDATE": {
+              "all_3days_every_fix_inside_30km": 93,
+              "any_anchor_day_fix_farther_than_120km": 5,
+              "any_fix_outside_in_3day_anchor": 18,
+              "final_anchor_day_any_fix_outside": 14,
+              "final_anchor_day_last_fix_outside": 12,
+              "final_anchor_day_more_than_half_fixes_outside": 1,
+              "original_admitted_3day_windows": 111,
+              "prior_first_or_second_day_any_fix_outside": 5
+            },
+            "OTHER_MOVEMENT": {
+              "all_3days_every_fix_inside_30km": 232,
+              "any_anchor_day_fix_farther_than_120km": 5,
+              "any_fix_outside_in_3day_anchor": 53,
+              "final_anchor_day_any_fix_outside": 35,
+              "final_anchor_day_last_fix_outside": 28,
+              "final_anchor_day_more_than_half_fixes_outside": 8,
+              "original_admitted_3day_windows": 285,
+              "prior_first_or_second_day_any_fix_outside": 25
+            },
+            "STAYED_TWO_DAYS": {
+              "all_3days_every_fix_inside_30km": 1324,
+              "any_anchor_day_fix_farther_than_120km": 10,
+              "any_fix_outside_in_3day_anchor": 132,
+              "final_anchor_day_any_fix_outside": 28,
+              "final_anchor_day_last_fix_outside": 7,
+              "final_anchor_day_more_than_half_fixes_outside": 4,
+              "original_admitted_3day_windows": 1456,
+              "prior_first_or_second_day_any_fix_outside": 111
+            }
+          },
+          "all_outcomes_including_censoring_preserved": true,
+          "all_source_riskdays": 2008,
+          "source_original_parse_errors": {
+            "fixes_used_across_overlapping_anchors": 98332
+          },
+          "absolute_30km_day_centroid_stationarity_can_hide_excursions": true,
+          "anchor_fix_level_stable_is_verified_true_stopover": false,
+          "study_wide_animal_independence_proven": false,
+          "GPS_identity_time_and_coordinate_exported": false
+        },
+        "original_physical_cue_effect_reestimated": false,
+        "source_stage_decision_independently_validated": false,
+        "sensitive_animal_location_or_event_date_exported": false
+      }
+    },
+    "curlew": {
+      "schema": "payoff_b_original_4guild_source_daily_centroid_fix_integrity_20261022",
+      "system": "curlew",
+      "status": "SOURCE_DAILY_FIX_INTEGRITY_AUDITED",
+      "purpose": "POST_OUTCOME_MEASUREMENT_BIAS_SENSITIVITY",
+      "result": {
+        "status": "ORIGINAL_STATIONARY_SOURCE_FIX_LEVEL_INTEGRITY_COMPLETE",
+        "source_system": "curlew",
+        "source_doi": "10.5441/001/1.715k46g2",
+        "original_CC0_checksum": {
+          "bytes": 159155287,
+          "md5": "b847a97e4ebaedd3e2fd46e920c4f08e",
+          "original_source_verified": true
+        },
+        "source_label_counts": {
+          "CENSORED": 80,
+          "NORTHWARD_CANDIDATE": 66,
+          "OTHER_MOVEMENT": 90,
+          "STAYED_TWO_DAYS": 1632,
+          "all_at_risk_stationary_days": 1868,
+          "animal_years_with_any_departure_proxy": 41,
+          "animal_years_with_any_stay_proxy": 42,
+          "animal_years_with_risk_opportunities": 42,
+          "deduplicated_frozen_cases": 59,
+          "frozen_cases_reconstructed": 59,
+          "raw_unthinned_departure_labels": 66
+        },
+        "source_fix_level_integrity": {
+          "per_prior_riskday_outcome_fix_level_integrity": {
+            "CENSORED": {
+              "all_3days_every_fix_inside_30km": 74,
+              "any_anchor_day_fix_farther_than_120km": 1,
+              "any_fix_outside_in_3day_anchor": 6,
+              "final_anchor_day_any_fix_outside": 1,
+              "final_anchor_day_last_fix_outside": 1,
+              "final_anchor_day_more_than_half_fixes_outside": 0,
+              "original_admitted_3day_windows": 80,
+              "prior_first_or_second_day_any_fix_outside": 5
+            },
+            "NORTHWARD_CANDIDATE": {
+              "all_3days_every_fix_inside_30km": 42,
+              "any_anchor_day_fix_farther_than_120km": 17,
+              "any_fix_outside_in_3day_anchor": 24,
+              "final_anchor_day_any_fix_outside": 23,
+              "final_anchor_day_last_fix_outside": 22,
+              "final_anchor_day_more_than_half_fixes_outside": 1,
+              "original_admitted_3day_windows": 66,
+              "prior_first_or_second_day_any_fix_outside": 2
+            },
+            "OTHER_MOVEMENT": {
+              "all_3days_every_fix_inside_30km": 77,
+              "any_anchor_day_fix_farther_than_120km": 3,
+              "any_fix_outside_in_3day_anchor": 13,
+              "final_anchor_day_any_fix_outside": 6,
+              "final_anchor_day_last_fix_outside": 5,
+              "final_anchor_day_more_than_half_fixes_outside": 0,
+              "original_admitted_3day_windows": 90,
+              "prior_first_or_second_day_any_fix_outside": 8
+            },
+            "STAYED_TWO_DAYS": {
+              "all_3days_every_fix_inside_30km": 1585,
+              "any_anchor_day_fix_farther_than_120km": 7,
+              "any_fix_outside_in_3day_anchor": 47,
+              "final_anchor_day_any_fix_outside": 3,
+              "final_anchor_day_last_fix_outside": 0,
+              "final_anchor_day_more_than_half_fixes_outside": 0,
+              "original_admitted_3day_windows": 1632,
+              "prior_first_or_second_day_any_fix_outside": 44
+            }
+          },
+          "all_outcomes_including_censoring_preserved": true,
+          "all_source_riskdays": 1868,
+          "source_original_parse_errors": {
+            "fixes_used_across_overlapping_anchors": 808742
+          },
+          "absolute_30km_day_centroid_stationarity_can_hide_excursions": true,
+          "anchor_fix_level_stable_is_verified_true_stopover": false,
+          "study_wide_animal_independence_proven": false,
+          "GPS_identity_time_and_coordinate_exported": false
+        },
+        "original_physical_cue_effect_reestimated": false,
+        "source_stage_decision_independently_validated": false,
+        "sensitive_animal_location_or_event_date_exported": false
+      }
+    },
+    "egyptian_vulture": {
+      "schema": "payoff_b_original_4guild_source_daily_centroid_fix_integrity_20261022",
+      "system": "egyptian_vulture",
+      "status": "SOURCE_DAILY_FIX_INTEGRITY_AUDITED",
+      "purpose": "POST_OUTCOME_MEASUREMENT_BIAS_SENSITIVITY",
+      "result": {
+        "status": "ORIGINAL_STATIONARY_SOURCE_FIX_LEVEL_INTEGRITY_COMPLETE",
+        "source_system": "egyptian_vulture",
+        "source_doi": "10.5441/001/1.385gk270",
+        "original_CC0_checksum": {
+          "bytes": 122069657,
+          "md5": "578c45678d402d055000ea14e754b6da",
+          "original_source_verified": true
+        },
+        "source_label_counts": {
+          "CENSORED": 140,
+          "NORTHWARD_CANDIDATE": 33,
+          "OTHER_MOVEMENT": 232,
+          "STAYED_TWO_DAYS": 1454,
+          "all_at_risk_stationary_days": 1859,
+          "animal_years_with_any_departure_proxy": 18,
+          "animal_years_with_any_stay_proxy": 28,
+          "animal_years_with_risk_opportunities": 29,
+          "deduplicated_frozen_cases": 30,
+          "frozen_cases_reconstructed": 30,
+          "raw_unthinned_departure_labels": 33
+        },
+        "source_fix_level_integrity": {
+          "per_prior_riskday_outcome_fix_level_integrity": {
+            "CENSORED": {
+              "all_3days_every_fix_inside_30km": 114,
+              "any_anchor_day_fix_farther_than_120km": 8,
+              "any_fix_outside_in_3day_anchor": 26,
+              "final_anchor_day_any_fix_outside": 17,
+              "final_anchor_day_last_fix_outside": 5,
+              "final_anchor_day_more_than_half_fixes_outside": 2,
+              "original_admitted_3day_windows": 140,
+              "prior_first_or_second_day_any_fix_outside": 15
+            },
+            "NORTHWARD_CANDIDATE": {
+              "all_3days_every_fix_inside_30km": 13,
+              "any_anchor_day_fix_farther_than_120km": 6,
+              "any_fix_outside_in_3day_anchor": 20,
+              "final_anchor_day_any_fix_outside": 14,
+              "final_anchor_day_last_fix_outside": 3,
+              "final_anchor_day_more_than_half_fixes_outside": 1,
+              "original_admitted_3day_windows": 33,
+              "prior_first_or_second_day_any_fix_outside": 13
+            },
+            "OTHER_MOVEMENT": {
+              "all_3days_every_fix_inside_30km": 101,
+              "any_anchor_day_fix_farther_than_120km": 14,
+              "any_fix_outside_in_3day_anchor": 131,
+              "final_anchor_day_any_fix_outside": 88,
+              "final_anchor_day_last_fix_outside": 52,
+              "final_anchor_day_more_than_half_fixes_outside": 23,
+              "original_admitted_3day_windows": 232,
+              "prior_first_or_second_day_any_fix_outside": 87
+            },
+            "STAYED_TWO_DAYS": {
+              "all_3days_every_fix_inside_30km": 1029,
+              "any_anchor_day_fix_farther_than_120km": 137,
+              "any_fix_outside_in_3day_anchor": 425,
+              "final_anchor_day_any_fix_outside": 211,
+              "final_anchor_day_last_fix_outside": 30,
+              "final_anchor_day_more_than_half_fixes_outside": 8,
+              "original_admitted_3day_windows": 1454,
+              "prior_first_or_second_day_any_fix_outside": 338
+            }
+          },
+          "all_outcomes_including_censoring_preserved": true,
+          "all_source_riskdays": 1859,
+          "source_original_parse_errors": {
+            "fixes_used_across_overlapping_anchors": 275995,
+            "source_invalid_fix": 137
+          },
+          "absolute_30km_day_centroid_stationarity_can_hide_excursions": true,
+          "anchor_fix_level_stable_is_verified_true_stopover": false,
+          "study_wide_animal_independence_proven": false,
+          "GPS_identity_time_and_coordinate_exported": false
+        },
+        "original_physical_cue_effect_reestimated": false,
+        "source_stage_decision_independently_validated": false,
+        "sensitive_animal_location_or_event_date_exported": false
+      }
+    }
+  },
+  "totals": {
+    "riskdays": 7368,
+    "cases": 366,
+    "stays": 5483,
+    "case_any3_out": 133,
+    "stay_any3_out": 829,
+    "case_anchor_out": 94,
+    "stay_anchor_out": 339
+  },
+  "move_candidate_three_anchor_days_any_outside_fraction": 0.3633879781420765,
+  "continuing_stay_three_anchor_days_any_outside_fraction": 0.15119460149553166,
+  "original_3day_labels_do_not_prove_true_stationarity": true,
+  "weather_effect_not_reestimated_in_this_QC": true,
+  "raw_animal_data_exported": false
+}

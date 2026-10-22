@@ -32,7 +32,7 @@ The fixed prior source gate demanded at least 10 case-days with a stay in the sa
 
 Across this specific within-source observational sensitivity, **stork lower solar shortwave** and **goose reduced 10m wind speed** remained in the same direction when coarse daily-centroid stationary misclassification was reduced. The curlew thermal contrast **reversed sign**, and the goose temperature descriptive interval still crossed zero when resampling entire shared year-month weather episodes. **These are not independent species-level confirmation results** and not confidence intervals for a causal effect.
 
-The original stork sunlight observation still did NOT transfer to the held-out Egyptian vulture; the newly stringent vulture sample was **not estimable** under the prespecified matched-case count. Even the stork/gull/curlew source contrasts can reflect readiness, actual migration/foraging state, year/month selection and shared weather fields; a 30km GPS fixed circle does not identify the time of a biologically irreversible migratory decision.
+The original stork sunlight observation still did NOT transfer to the held-out Egyptian vulture; the newly stringent vulture sample was **not estimable** under the prespecified matched-case count. Even the stork/goose/curlew source contrasts can reflect readiness, actual migration/foraging state, year/month selection and shared weather fields; a 30km GPS fixed circle does not identify the time of a biologically irreversible migratory decision.
 
 ## Ecological scope and next legitimate hypothesis
 
