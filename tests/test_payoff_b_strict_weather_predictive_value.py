@@ -1,5 +1,6 @@
 """Synthetic pure-logic and model-leakage CV controls (no real GPS)."""
 from datetime import date,timedelta
+import pytest
 from scripts.audit_payoff_b_strict_weather_predictive_value import (
     site_time_features, make_risk_features, fold_score, CASE, STAY,
 )
@@ -33,6 +34,8 @@ def synthetic():
     return data
 
 def test_true_year_holdout_has_proper_score_and_no_prediction_export():
+    # Full repository CI is dependency-light; specialist workflow installs sklearn.
+    pytest.importorskip("sklearn")
     out=fold_score(synthetic(),None,scheme="calendar_year")
     assert out["status"]=="OUT_OF_FOLD_OBSERVATIONAL_PREDICTION_ESTIMABLE"
     assert out["n_folds_admitted"]==5
@@ -41,6 +44,7 @@ def test_true_year_holdout_has_proper_score_and_no_prediction_export():
     assert "anonymous-" not in str(out)
 
 def test_heldout_animal_cv_is_not_same_random_rows():
+    pytest.importorskip("sklearn")
     # Ensure each synthetic animal carries both outcome classes, so no
     # fold can fail the *original* locked minimum-positive admission gate
     # solely because GroupKFold assigns all synthetic cases to other folds.
