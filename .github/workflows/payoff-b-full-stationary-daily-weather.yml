@@ -1,0 +1,37 @@
+name: payoff-b-full-stationary-daily-weather
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/run_payoff_b_full_riskday_daily_weather.py"
+      - "tests/test_payoff_b_full_riskday_daily_weather.py"
+      - "docs/PAYOFF_B_FULL_RISKDAY_DAILY_WEATHER_PROTOCOL_20261022.md"
+      - ".github/workflows/payoff-b-full-stationary-daily-weather.yml"
+jobs:
+  full-riskday:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [stork, white_fronted_goose, curlew]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify synthetic daily chronology and grid-month contrasts
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_full_riskday_daily_weather.py
+      - name: Fetch NASA UTC daily meteorology for every frozen stationary riskday batch
+        run: |
+          python -m scripts.run_payoff_b_full_riskday_daily_weather --system ${{ matrix.system }} --out outputs/payoff_b_all_riskday_daily
+      - name: Archive source coverage and source-stratified summaries only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-full-risksource-daily-weather-${{ matrix.system }}
+          path: outputs/payoff_b_all_riskday_daily/
+          if-no-files-found: warn
