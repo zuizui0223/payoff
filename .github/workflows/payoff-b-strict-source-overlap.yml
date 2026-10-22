@@ -1,0 +1,39 @@
+name: payoff-b-strict-original-fix-source-overlap
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/qc_payoff_b_strict_fix_source_overlap.py"
+      - "tests/test_payoff_b_strict_fix_source_overlap.py"
+      - "docs/PAYOFF_B_STRICT_FIX_SOURCE_OVERLAP_GATE_20261022.md"
+      - ".github/workflows/payoff-b-strict-source-overlap.yml"
+jobs:
+  strict-original-GPS:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [stork, white_fronted_goose, curlew, egyptian_vulture]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test complete source inclusion and strict no-weather comparison
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pytest -q tests/test_payoff_b_strict_fix_source_overlap.py
+      - name: Recalculate strict original GPS source case/stay overlap and weather call cost
+        run: |
+          python -m scripts.qc_payoff_b_strict_fix_source_overlap \
+            --system ${{ matrix.system }} \
+            --out outputs/payoff_b_strict_source_overlap
+      - name: Archive only nonlocatable source-cohort aggregate
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-strict-fix-overlap-${{ matrix.system }}
+          path: outputs/payoff_b_strict_source_overlap/
+          if-no-files-found: warn
