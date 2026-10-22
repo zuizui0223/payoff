@@ -1,0 +1,51 @@
+name: payoff-b-unopened-cc0-bird-gps-admission
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/shortlist_payoff_b_independent_movebank.py"
+      - "tests/test_payoff_b_unopened_movebank_admission.py"
+      - "docs/PAYOFF_B_UNOPENED_CC0_GPS_SOURCE_ADMISSION_20261022.md"
+      - ".github/workflows/payoff-b-unopened-cc0-bird-admission.yml"
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unopened-source-meta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test exact-source exclusion and metadata rights without GPS outcomes
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_unopened_movebank_admission.py
+      - name: Reuse immutable public-archive source ledgers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/frozen_gbif outputs/frozen_stage2 outputs/frozen_stage3
+          gh run download 39212703373 --repo "$GITHUB_REPOSITORY" \
+            --name payoff-b-movebank-gbif-class-source --dir outputs/frozen_gbif
+          gh run download 39204043835 --repo "$GITHUB_REPOSITORY" \
+            --name payoff-b-movebank-full-stage2-metadata --dir outputs/frozen_stage2
+          gh run download 39211112610 --repo "$GITHUB_REPOSITORY" \
+            --name payoff-b-movebank-complete-taxonomic-source-metadata --dir outputs/frozen_stage3
+      - name: Screen all 446 sources for unopened bird-GPS CC0 packages
+        run: |
+          python -m scripts.shortlist_payoff_b_independent_movebank \
+            --gbif outputs/frozen_gbif/payoff_b_gbif_taxon/movebank_446_taxon_sensor_source_candidates.csv \
+            --stage2 outputs/frozen_stage2/payoff_b_independent_stage2/movebank_package_metadata_screen.csv \
+            --stage3 outputs/frozen_stage3/payoff_b_movebank_taxon_census/movebank_taxon_sensor_source_registry.csv \
+            --out outputs/payoff_b_unopened_source
+      - name: Archive complete candidate and rejection receipts, not tracks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-all-446-unopened-bird-GPS-review
+          path: outputs/payoff_b_unopened_source/
+          if-no-files-found: warn
