@@ -308,13 +308,12 @@ def run_system(system, fetch=download_batch):
         doi, taxon, sensor, checksum = origin_source(system, path)
         groups, source_quality, idcol = daily_source_positions(path, taxon)
         risk, source_counts, _, _ = collect(groups)
-        labels = (
-            "all_at_risk_stationary_days", CASE, STAY,
-            "OTHER_MOVEMENT", "CENSORED",
-        )
-        if (
+        labels = (CASE, STAY, "OTHER_MOVEMENT", "CENSORED")
+        # The overall total is the number of source opportunities, not
+        # a separate GPS outcome label. Never compare it to a label Counter.
+        if len(risk) != EXPECTED[system][0] or (
             tuple(source_counts[k] for k in labels)
-            != EXPECTED[system][:5]
+            != EXPECTED[system][1:5]
         ):
             raise ValueError("Original 5,509-source riskday panel changed")
         requests = sorted({
