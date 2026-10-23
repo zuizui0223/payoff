@@ -1,0 +1,98 @@
+{
+  "schema": "payoff_b_source_stops_and_predated_weather_20261019",
+  "date": "2026-10-19",
+  "source_class": "POST_V7_V8_OUTCOME_EXPLORATORY_DATA_AVAILABILITY_ONLY",
+  "time_standard": "UTC",
+  "stop_detector": {
+    "stationary_days": 3,
+    "followup_days": 2,
+    "radius_km": 30,
+    "first_outbound_km": 30,
+    "second_outbound_km": 120,
+    "second_outbound_northing_min_deg": 0.8,
+    "minimum_independent_hour_bins_per_day": 2,
+    "minimum_between_candidates_days": 7,
+    "claim": "STATIONARY_TO_NORTHWARD_GPS_CANDIDATES_ONLY",
+    "source_run": "https://github.com/zuizui0223/payoff/actions/runs/39225406150"
+  },
+  "source_transition_counts": [
+    {
+      "taxon": "Ciconia ciconia",
+      "source_doi": "10.5441/001/1.v8d24552",
+      "n_candidates": 145,
+      "unique_animal_years_with_candidates": 80,
+      "unique_animals_with_candidates": 33,
+      "total_five_day_windows": 5848,
+      "original_source_spring_fixes": 1179132
+    },
+    {
+      "taxon": "Anser albifrons",
+      "source_doi": "10.5441/001/1.31c2v92f",
+      "n_candidates": 106,
+      "unique_animal_years_with_candidates": 46,
+      "unique_animals_with_candidates": 46,
+      "total_five_day_windows": 2496,
+      "original_source_spring_fixes": 47851,
+      "cohort_overlap_unresolved": true
+    },
+    {
+      "taxon": "Numenius arquata",
+      "source_doi": "10.5441/001/1.715k46g2",
+      "n_candidates": 59,
+      "unique_animal_years_with_candidates": 41,
+      "unique_animals_with_candidates": 23,
+      "total_five_day_windows": 2156,
+      "original_source_spring_fixes": 381145
+    }
+  ],
+  "weather_bridge": {
+    "source": "NASA POWER hourly point API",
+    "source_run": "https://github.com/zuizui0223/payoff/actions/runs/39226252405",
+    "parameters": [
+      "T2M",
+      "WS10M"
+    ],
+    "sampling": "SHA256 of source animal/year/event, max 1 event per animal-year; 12 per taxon",
+    "weather_date": "calendar day before last stationary day",
+    "external_query_location_resolution_degrees": 0.5,
+    "minimum_valid_hourly_values_per_variable": 18,
+    "observed_valid_hours_all_events": 24,
+    "selected_distinct_animal_years": 36,
+    "events_with_complete_pre_move_reanalysis_weather": 36,
+    "source_weather_missing": 0,
+    "taxon_weather_means": [
+      {
+        "taxon": "Ciconia ciconia",
+        "n": 12,
+        "mean_temperature_c": 12.087534722222223,
+        "mean_wind_speed_10m_m_s": 4.619131944444445
+      },
+      {
+        "taxon": "Anser albifrons",
+        "n": 12,
+        "mean_temperature_c": 5.865208333333333,
+        "mean_wind_speed_10m_m_s": 4.334270833333333
+      },
+      {
+        "taxon": "Numenius arquata",
+        "n": 12,
+        "mean_temperature_c": 5.204722222222222,
+        "mean_wind_speed_10m_m_s": 4.4861458333333335
+      }
+    ],
+    "weather_represents_animals_actual_forecast": false,
+    "weather_predates_next_observed_movement": true,
+    "weather_variables_observed_directly_by_animals": false,
+    "raw_event_ids_location_date_exported": false
+  },
+  "scientific_verdict": {
+    "true_stopover_identity_verified": false,
+    "exact_commitment_instant_verified": false,
+    "independent_recourselike_feasible_options_measured": false,
+    "effect_of_weather_on_departure_or_followup_measured": false,
+    "fitness_or_population_benefit_measured": false,
+    "new_confirmatory_ecological_discovery": false,
+    "next_gate": "Validate real stopover and individual bracketing fixes; independent physical weather cues before decision and route-feasible alternatives; study/taxon/year cluster-respecting heldout behavior test",
+    "reason": "Only source availability, not causal signal or actionability, was established"
+  }
+}

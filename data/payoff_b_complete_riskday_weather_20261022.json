@@ -1,0 +1,540 @@
+{
+  "schema": "payoff_b_fullrisk_source_weather_source_results_20261022",
+  "date": "2026-10-22",
+  "source_riskday_run": "https://github.com/zuizui0223/payoff/actions/runs/39721821673",
+  "source_weather_run": "https://github.com/zuizui0223/payoff/actions/runs/39722927455",
+  "protocol": "docs/PAYOFF_B_RISKDAY_WEATHER_LOCK_20261022.md",
+  "source_design": "fixed 16 future northward case days +32 following two-day stationary days per taxon from full 3-day stationary riskset, one per identity-year per label, month round-robin",
+  "source_group_weather_counts": "144/144 valid, 48/48 each system",
+  "strict_predecision_weather_window": "NASA POWER UTC day before third stationary day, compared with previous 7 days",
+  "source_statistics": {
+    "stork": {
+      "n_cases": 16,
+      "n_stays": 32,
+      "temperature_anomaly_case_mean_c": -1.3275446428571427,
+      "temperature_anomaly_stay_mean_c": 0.6902269345238095,
+      "case_minus_stay_temperature_anomaly_c": -2.017771577380952,
+      "case_minus_stay_wind_anomaly_m_s": 0.7596000744047618,
+      "n_weather_queries": 48,
+      "no_missing_source_weather": true
+    },
+    "white_fronted_goose": {
+      "n_cases": 16,
+      "n_stays": 32,
+      "temperature_anomaly_case_mean_c": 1.7944754464285713,
+      "temperature_anomaly_stay_mean_c": 1.2357142857142858,
+      "case_minus_stay_temperature_anomaly_c": 0.5587611607142855,
+      "case_minus_stay_wind_anomaly_m_s": 0.3191945684523808,
+      "n_weather_queries": 48,
+      "no_missing_source_weather": true
+    },
+    "curlew": {
+      "n_cases": 16,
+      "n_stays": 32,
+      "temperature_anomaly_case_mean_c": 0.4569047619047621,
+      "temperature_anomaly_stay_mean_c": -0.25183965773809525,
+      "case_minus_stay_temperature_anomaly_c": 0.7087444196428574,
+      "case_minus_stay_wind_anomaly_m_s": 0.016536458333333393,
+      "n_weather_queries": 48,
+      "no_missing_source_weather": true
+    }
+  },
+  "all_source_group_receipts": {
+    "stork": {
+      "schema": "payoff_b_riskday_weather_source_pilot_20261022",
+      "system": "stork",
+      "analysis": "SAMPLED_RISKSET_DESCRIPTIVE_NOT_CAUSAL",
+      "physical_input_timing": "UTC reference day minus one, vs 7 prior days",
+      "selection_limit": "16 cases/32 stays per source, independent month-round-robin hash",
+      "result": {
+        "status": "WEATHER_DESCRIPTIVE_SOURCE_COMPLETE",
+        "source_doi": "10.5441/001/1.v8d24552",
+        "source_taxon": "Ciconia ciconia",
+        "original_pinned_source": {
+          "verified": true,
+          "bytes": 273153305,
+          "md5": "bda2ebd2441316b2e2fd9e9578d7d0b4",
+          "bitstream_uuid": "ed3529e6-ce20-4237-8875-9d35fdbf9a0f"
+        },
+        "source_counts": {
+          "CENSORED": 184,
+          "NORTHWARD_CANDIDATE": 156,
+          "OTHER_MOVEMENT": 352,
+          "STAYED_TWO_DAYS": 941,
+          "all_at_risk_stationary_days": 1633,
+          "animal_years_with_any_departure_proxy": 80,
+          "animal_years_with_any_stay_proxy": 91,
+          "animal_years_with_risk_opportunities": 91,
+          "deduplicated_frozen_cases": 145,
+          "frozen_cases_reconstructed": 145,
+          "raw_unthinned_departure_labels": 156
+        },
+        "selection": {
+          "selected_riskday_outcomes": {
+            "NORTHWARD_CANDIDATE": 16,
+            "STAYED_TWO_DAYS": 32
+          },
+          "selected_month_distribution": {
+            "NORTHWARD_CANDIDATE": {
+              "2": 5,
+              "3": 5,
+              "4": 5,
+              "5": 1
+            },
+            "STAYED_TWO_DAYS": {
+              "2": 9,
+              "3": 9,
+              "4": 9,
+              "5": 5
+            }
+          },
+          "at_most_one_sample_day_per_animal_year_and_status": true,
+          "selection_uses_weather": false,
+          "sample_is_outcome_stratified": true,
+          "sampled_case_fraction_is_population_probability": false
+        },
+        "unique_public_weather_queries": 48,
+        "aggregate_weather": {
+          "complete_weather_by_outcome": {
+            "NORTHWARD_CANDIDATE": {
+              "n_valid_riskdays": 16,
+              "temperature_anomaly_c": {
+                "mean": -1.3275446428571427,
+                "median": -0.5114285714285721,
+                "bootstrap_95pct_descriptive": [
+                  -2.959277064732143,
+                  0.10856659226190196
+                ]
+              },
+              "wind_speed_anomaly_m_s": {
+                "mean": 0.6210379464285715,
+                "median": 0.7825595238095242,
+                "bootstrap_95pct_descriptive": [
+                  0.05756994047619051,
+                  1.2001593191964286
+                ]
+              },
+              "temperature_prior_day_c": {
+                "mean": 15.61765625,
+                "median": 15.835416666666667,
+                "bootstrap_95pct_descriptive": [
+                  11.134239583333333,
+                  20.246179687499996
+                ]
+              },
+              "wind_speed_prior_day_m_s": {
+                "mean": 4.559479166666667,
+                "median": 4.742708333333333,
+                "bootstrap_95pct_descriptive": [
+                  3.854122395833333,
+                  5.281020833333333
+                ]
+              }
+            },
+            "STAYED_TWO_DAYS": {
+              "n_valid_riskdays": 32,
+              "temperature_anomaly_c": {
+                "mean": 0.6902269345238095,
+                "median": 0.7280952380952392,
+                "bootstrap_95pct_descriptive": [
+                  -0.4442989676339286,
+                  1.6447148437499997
+                ]
+              },
+              "wind_speed_anomaly_m_s": {
+                "mean": -0.1385621279761904,
+                "median": 0.04270833333333379,
+                "bootstrap_95pct_descriptive": [
+                  -0.6494362444196429,
+                  0.3788179873511892
+                ]
+              },
+              "temperature_prior_day_c": {
+                "mean": 17.338606770833334,
+                "median": 14.705416666666666,
+                "bootstrap_95pct_descriptive": [
+                  14.713431315104167,
+                  20.259768554687497
+                ]
+              },
+              "wind_speed_prior_day_m_s": {
+                "mean": 3.908333333333333,
+                "median": 3.758958333333333,
+                "bootstrap_95pct_descriptive": [
+                  3.454927734375,
+                  4.389870768229167
+                ]
+              }
+            }
+          },
+          "weather_missing_reasons": {},
+          "descriptive_month_moderated_contrasts": [
+            {
+              "month": 2,
+              "case_days": 5,
+              "stay_days": 9,
+              "case_minus_stay_temperature_anomaly_c": 0.20872089947090086,
+              "case_minus_stay_wind_speed_anomaly_m_s": -0.018373015873015708
+            },
+            {
+              "month": 3,
+              "case_days": 5,
+              "stay_days": 9,
+              "case_minus_stay_temperature_anomaly_c": -2.654465608465609,
+              "case_minus_stay_wind_speed_anomaly_m_s": 0.8250529100529101
+            },
+            {
+              "month": 4,
+              "case_days": 5,
+              "stay_days": 9,
+              "case_minus_stay_temperature_anomaly_c": -4.119816137566137,
+              "case_minus_stay_wind_speed_anomaly_m_s": 1.0201693121693118
+            }
+          ],
+          "modelled_true_migration_hazard": false,
+          "observational_causal_weather_use": false,
+          "weather_reanalysis_is_observed_forecast": false,
+          "sources_not_independent_per_bird_day": true,
+          "individual_gps_date_or_weather_exported": false
+        },
+        "meteorology_is_retrospective_not_perceived_by_bird": true,
+        "no_record_level_outputs": true
+      }
+    },
+    "white_fronted_goose": {
+      "schema": "payoff_b_riskday_weather_source_pilot_20261022",
+      "system": "white_fronted_goose",
+      "analysis": "SAMPLED_RISKSET_DESCRIPTIVE_NOT_CAUSAL",
+      "physical_input_timing": "UTC reference day minus one, vs 7 prior days",
+      "selection_limit": "16 cases/32 stays per source, independent month-round-robin hash",
+      "result": {
+        "status": "WEATHER_DESCRIPTIVE_SOURCE_COMPLETE",
+        "source_doi": "10.5441/001/1.31c2v92f",
+        "source_taxon": "Anser albifrons",
+        "original_pinned_source": {
+          "size_bytes": 16806763,
+          "md5": "0e0abd1126c53f4924907c3fb6a72d02",
+          "bitstream_uuid": "0a262590-49e2-4e47-a290-dbfd6649579f",
+          "bitstream_url": "https://datarepository.movebank.org/server/api/core/bitstreams/0a262590-49e2-4e47-a290-dbfd6649579f/content"
+        },
+        "source_counts": {
+          "CENSORED": 156,
+          "NORTHWARD_CANDIDATE": 111,
+          "OTHER_MOVEMENT": 285,
+          "STAYED_TWO_DAYS": 1456,
+          "all_at_risk_stationary_days": 2008,
+          "animal_years_with_any_departure_proxy": 46,
+          "animal_years_with_any_stay_proxy": 49,
+          "animal_years_with_risk_opportunities": 51,
+          "deduplicated_frozen_cases": 106,
+          "frozen_cases_reconstructed": 106,
+          "raw_unthinned_departure_labels": 111
+        },
+        "selection": {
+          "selected_riskday_outcomes": {
+            "NORTHWARD_CANDIDATE": 16,
+            "STAYED_TWO_DAYS": 32
+          },
+          "selected_month_distribution": {
+            "NORTHWARD_CANDIDATE": {
+              "2": 1,
+              "3": 5,
+              "4": 5,
+              "5": 5
+            },
+            "STAYED_TWO_DAYS": {
+              "2": 3,
+              "3": 10,
+              "4": 10,
+              "5": 9
+            }
+          },
+          "at_most_one_sample_day_per_animal_year_and_status": true,
+          "selection_uses_weather": false,
+          "sample_is_outcome_stratified": true,
+          "sampled_case_fraction_is_population_probability": false
+        },
+        "unique_public_weather_queries": 48,
+        "aggregate_weather": {
+          "complete_weather_by_outcome": {
+            "NORTHWARD_CANDIDATE": {
+              "n_valid_riskdays": 16,
+              "temperature_anomaly_c": {
+                "mean": 1.7944754464285713,
+                "median": 1.2025892857142857,
+                "bootstrap_95pct_descriptive": [
+                  0.30745182291666656,
+                  3.414304780505952
+                ]
+              },
+              "wind_speed_anomaly_m_s": {
+                "mean": -0.14288318452380955,
+                "median": -0.372827380952381,
+                "bootstrap_95pct_descriptive": [
+                  -0.7831999627976189,
+                  0.5340699404761899
+                ]
+              },
+              "temperature_prior_day_c": {
+                "mean": 6.953984375,
+                "median": 6.852916666666667,
+                "bootstrap_95pct_descriptive": [
+                  5.706590494791667,
+                  8.245736979166665
+                ]
+              },
+              "wind_speed_prior_day_m_s": {
+                "mean": 4.036901041666667,
+                "median": 2.987916666666667,
+                "bootstrap_95pct_descriptive": [
+                  3.0117141927083333,
+                  5.205649088541666
+                ]
+              }
+            },
+            "STAYED_TWO_DAYS": {
+              "n_valid_riskdays": 32,
+              "temperature_anomaly_c": {
+                "mean": 1.2357142857142858,
+                "median": 0.8653273809523809,
+                "bootstrap_95pct_descriptive": [
+                  0.3995390159970237,
+                  2.030249720982143
+                ]
+              },
+              "wind_speed_anomaly_m_s": {
+                "mean": -0.46207775297619036,
+                "median": -0.49470238095238106,
+                "bootstrap_95pct_descriptive": [
+                  -0.9681975911458331,
+                  0.04947009858630838
+                ]
+              },
+              "temperature_prior_day_c": {
+                "mean": 6.2820833333333335,
+                "median": 6.380833333333333,
+                "bootstrap_95pct_descriptive": [
+                  4.967817057291667,
+                  7.566913085937499
+                ]
+              },
+              "wind_speed_prior_day_m_s": {
+                "mean": 4.024947916666667,
+                "median": 4.152708333333333,
+                "bootstrap_95pct_descriptive": [
+                  3.427183919270833,
+                  4.653996093749999
+                ]
+              }
+            }
+          },
+          "weather_missing_reasons": {},
+          "descriptive_month_moderated_contrasts": [
+            {
+              "month": 3,
+              "case_days": 5,
+              "stay_days": 10,
+              "case_minus_stay_temperature_anomaly_c": 1.1753809523809524,
+              "case_minus_stay_wind_speed_anomaly_m_s": 1.1054821428571429
+            },
+            {
+              "month": 4,
+              "case_days": 5,
+              "stay_days": 10,
+              "case_minus_stay_temperature_anomaly_c": -1.1556607142857143,
+              "case_minus_stay_wind_speed_anomaly_m_s": 0.11913690476190453
+            },
+            {
+              "month": 5,
+              "case_days": 5,
+              "stay_days": 9,
+              "case_minus_stay_temperature_anomaly_c": 1.5913306878306877,
+              "case_minus_stay_wind_speed_anomaly_m_s": -0.1921111111111114
+            }
+          ],
+          "modelled_true_migration_hazard": false,
+          "observational_causal_weather_use": false,
+          "weather_reanalysis_is_observed_forecast": false,
+          "sources_not_independent_per_bird_day": true,
+          "individual_gps_date_or_weather_exported": false
+        },
+        "meteorology_is_retrospective_not_perceived_by_bird": true,
+        "no_record_level_outputs": true
+      }
+    },
+    "curlew": {
+      "schema": "payoff_b_riskday_weather_source_pilot_20261022",
+      "system": "curlew",
+      "analysis": "SAMPLED_RISKSET_DESCRIPTIVE_NOT_CAUSAL",
+      "physical_input_timing": "UTC reference day minus one, vs 7 prior days",
+      "selection_limit": "16 cases/32 stays per source, independent month-round-robin hash",
+      "result": {
+        "status": "WEATHER_DESCRIPTIVE_SOURCE_COMPLETE",
+        "source_doi": "10.5441/001/1.715k46g2",
+        "source_taxon": "Numenius arquata",
+        "original_pinned_source": {
+          "bytes": 159155287,
+          "md5": "b847a97e4ebaedd3e2fd46e920c4f08e",
+          "original_source_verified": true
+        },
+        "source_counts": {
+          "CENSORED": 80,
+          "NORTHWARD_CANDIDATE": 66,
+          "OTHER_MOVEMENT": 90,
+          "STAYED_TWO_DAYS": 1632,
+          "all_at_risk_stationary_days": 1868,
+          "animal_years_with_any_departure_proxy": 41,
+          "animal_years_with_any_stay_proxy": 42,
+          "animal_years_with_risk_opportunities": 42,
+          "deduplicated_frozen_cases": 59,
+          "frozen_cases_reconstructed": 59,
+          "raw_unthinned_departure_labels": 66
+        },
+        "selection": {
+          "selected_riskday_outcomes": {
+            "NORTHWARD_CANDIDATE": 16,
+            "STAYED_TWO_DAYS": 32
+          },
+          "selected_month_distribution": {
+            "NORTHWARD_CANDIDATE": {
+              "4": 8,
+              "5": 8
+            },
+            "STAYED_TWO_DAYS": {
+              "4": 16,
+              "5": 16
+            }
+          },
+          "at_most_one_sample_day_per_animal_year_and_status": true,
+          "selection_uses_weather": false,
+          "sample_is_outcome_stratified": true,
+          "sampled_case_fraction_is_population_probability": false
+        },
+        "unique_public_weather_queries": 48,
+        "aggregate_weather": {
+          "complete_weather_by_outcome": {
+            "NORTHWARD_CANDIDATE": {
+              "n_valid_riskdays": 16,
+              "temperature_anomaly_c": {
+                "mean": 0.4569047619047621,
+                "median": 0.3847023809523814,
+                "bootstrap_95pct_descriptive": [
+                  -1.1546680617559524,
+                  1.8860331101190475
+                ]
+              },
+              "wind_speed_anomaly_m_s": {
+                "mean": 0.3087686011904762,
+                "median": -0.4258928571428573,
+                "bootstrap_95pct_descriptive": [
+                  -0.5906295572916667,
+                  1.3572243303571385
+                ]
+              },
+              "temperature_prior_day_c": {
+                "mean": 6.727552083333333,
+                "median": 6.859583333333333,
+                "bootstrap_95pct_descriptive": [
+                  4.986649739583333,
+                  8.735938151041662
+                ]
+              },
+              "wind_speed_prior_day_m_s": {
+                "mean": 4.840885416666667,
+                "median": 4.166458333333333,
+                "bootstrap_95pct_descriptive": [
+                  3.433446614583333,
+                  6.389751953125
+                ]
+              }
+            },
+            "STAYED_TWO_DAYS": {
+              "n_valid_riskdays": 32,
+              "temperature_anomaly_c": {
+                "mean": -0.25183965773809525,
+                "median": -0.2117261904761909,
+                "bootstrap_95pct_descriptive": [
+                  -1.387998279389881,
+                  0.8936418340773791
+                ]
+              },
+              "wind_speed_anomaly_m_s": {
+                "mean": 0.29223214285714283,
+                "median": 0.29101190476190464,
+                "bootstrap_95pct_descriptive": [
+                  -0.12480040922619051,
+                  0.6990703125
+                ]
+              },
+              "temperature_prior_day_c": {
+                "mean": 6.677708333333333,
+                "median": 6.798541666666667,
+                "bootstrap_95pct_descriptive": [
+                  5.623627929687499,
+                  7.683458984374999
+                ]
+              },
+              "wind_speed_prior_day_m_s": {
+                "mean": 4.111640625,
+                "median": 3.2285416666666666,
+                "bootstrap_95pct_descriptive": [
+                  3.4939694010416664,
+                  4.806966471354167
+                ]
+              }
+            }
+          },
+          "weather_missing_reasons": {},
+          "descriptive_month_moderated_contrasts": [
+            {
+              "month": 4,
+              "case_days": 8,
+              "stay_days": 16,
+              "case_minus_stay_temperature_anomaly_c": 1.2251116071428574,
+              "case_minus_stay_wind_speed_anomaly_m_s": 0.06891369047619048
+            },
+            {
+              "month": 5,
+              "case_days": 8,
+              "stay_days": 16,
+              "case_minus_stay_temperature_anomaly_c": 0.19237723214285712,
+              "case_minus_stay_wind_speed_anomaly_m_s": -0.035840773809523774
+            }
+          ],
+          "modelled_true_migration_hazard": false,
+          "observational_causal_weather_use": false,
+          "weather_reanalysis_is_observed_forecast": false,
+          "sources_not_independent_per_bird_day": true,
+          "individual_gps_date_or_weather_exported": false
+        },
+        "meteorology_is_retrospective_not_perceived_by_bird": true,
+        "no_record_level_outputs": true
+      }
+    }
+  },
+  "inference_ceiling": "EXPLORATORY_SOURCE_WEATHER_DESCRIPTIVES_NO_CAUSAL_EFFECT",
+  "no_hazard_model_fitted": true,
+  "not_corrected_for_source_site_or_individual_or_year_heterogeneity": true,
+  "significant_cross_species_effect_claimed": false,
+  "complete_annual_cycle_status": "NOT_VERIFIED",
+  "route_relative_wind_measured": false,
+  "birds_true_perceived_cues_measured": false,
+  "counterfactual_recourse_measured": false,
+  "fitness_benefit_tested": false,
+  "source_case_control_labels_depend_on_next_two_observed_days": true,
+  "limitations": [
+    "Original GPS stationary windows are repeated and heavily overlapping within individual trajectories.",
+    "Case/stay sample deliberately outcome-stratified, so 16/48 cases is not the source movement frequency.",
+    "Each taxon has 16 move days, 32 stay days; no shared taxon-general effect or true zero is established.",
+    "Monthly round-robin sampling does not fully control spatial, individual, temporal and annual differences.",
+    "Physical reanalysis is a lagged environmental proxy, not a forecast actually available to the bird.",
+    "NASA 10-m wind speed is not a route-relative tailwind or flight-height wind.",
+    "Source goose cohort overlap with previously opened PAYOFF data unresolved.",
+    "No movement hazard logistic coefficient, clustering-aware interval, info×recourse interaction, arrival mismatch or fitness is estimated."
+  ],
+  "prior_not_supported_outcomes_preserved": [
+    "V7R information×remaining-route recourse",
+    "V8 predicted degradation of source-destination environmental correlation",
+    "original preregistered stork 53-season timing compression"
+  ]
+}

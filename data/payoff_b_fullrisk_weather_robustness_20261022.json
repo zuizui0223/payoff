@@ -1,0 +1,564 @@
+{
+  "schema": "payoff_b_full_stationary_source_weather_cluster_robustness_summary_20261022",
+  "date": "2026-10-22",
+  "run": "https://github.com/zuizui0223/payoff/actions/runs/39725832808",
+  "source_run": "https://github.com/zuizui0223/payoff/actions/runs/39725093549",
+  "status": "POST_OUTCOME_EXPLORATORY_ROBUSTNESS_NOT_CONFIRMATORY",
+  "per_system": {
+    "stork": {
+      "original_gridyearmonth_overlap_strata": 61,
+      "original_case_day_weights_in_overlap": 75,
+      "distinct_animal_clusters": 36,
+      "bootstrap_requested": 1000,
+      "bootstrap_valid": 1000,
+      "cluster_bootstrap_status": "DESCRIPTIVE_CLUSTER_BOOTSTRAP_ESTIMABLE",
+      "effects": {
+        "T2M_anomaly": -0.5143160582010581,
+        "WS10M_anomaly": 0.2535933938019652,
+        "V10M_anomaly": -0.2613161035525321,
+        "ALLSKY_SFC_SW_DWN_anomaly": -17.098786065759636
+      },
+      "cluster_95pct_descriptive_intervals": {
+        "T2M_anomaly": [
+          -1.1011962237269755,
+          0.08732555643464236
+        ],
+        "WS10M_anomaly": [
+          -0.08795526384064746,
+          0.6578359563966785
+        ],
+        "V10M_anomaly": [
+          -0.9420587142784467,
+          0.5388493036059586
+        ],
+        "ALLSKY_SFC_SW_DWN_anomaly": [
+          -27.62597856936825,
+          -2.057621768806577
+        ]
+      },
+      "year_omission_sign_stability": {
+        "T2M_anomaly": {
+          "min_leave_one_year_estimate": -0.7617368635332921,
+          "max_leave_one_year_estimate": -0.31244666005290983,
+          "all_leave_one_years_same_nonzero_sign": true
+        },
+        "WS10M_anomaly": {
+          "min_leave_one_year_estimate": 0.08439743008314432,
+          "max_leave_one_year_estimate": 0.4734864512471655,
+          "all_leave_one_years_same_nonzero_sign": true
+        },
+        "V10M_anomaly": {
+          "min_leave_one_year_estimate": -0.5980807101628529,
+          "max_leave_one_year_estimate": 0.2830687594482237,
+          "all_leave_one_years_same_nonzero_sign": false
+        },
+        "ALLSKY_SFC_SW_DWN_anomaly": {
+          "min_leave_one_year_estimate": -19.778964665532882,
+          "max_leave_one_year_estimate": -15.014697000188965,
+          "all_leave_one_years_same_nonzero_sign": true
+        }
+      }
+    },
+    "white_fronted_goose": {
+      "original_gridyearmonth_overlap_strata": 84,
+      "original_case_day_weights_in_overlap": 89,
+      "distinct_animal_clusters": 49,
+      "bootstrap_requested": 1000,
+      "bootstrap_valid": 1000,
+      "cluster_bootstrap_status": "DESCRIPTIVE_CLUSTER_BOOTSTRAP_ESTIMABLE",
+      "effects": {
+        "T2M_anomaly": 1.0368454527682056,
+        "WS10M_anomaly": -0.4695160792702925,
+        "V10M_anomaly": 0.07405198723457149,
+        "ALLSKY_SFC_SW_DWN_anomaly": 2.270251703009847
+      },
+      "cluster_95pct_descriptive_intervals": {
+        "T2M_anomaly": [
+          0.22162964652820902,
+          2.000958353345729
+        ],
+        "WS10M_anomaly": [
+          -0.8907802317706387,
+          -0.1573181776522357
+        ],
+        "V10M_anomaly": [
+          -0.6099394912950805,
+          0.8225321462993889
+        ],
+        "ALLSKY_SFC_SW_DWN_anomaly": [
+          -11.574055607911712,
+          18.724607893744967
+        ]
+      },
+      "year_omission_sign_stability": {
+        "T2M_anomaly": {
+          "min_leave_one_year_estimate": 0.74468902775968,
+          "max_leave_one_year_estimate": 1.1779895426303655,
+          "all_leave_one_years_same_nonzero_sign": true
+        },
+        "WS10M_anomaly": {
+          "min_leave_one_year_estimate": -0.6694675275925279,
+          "max_leave_one_year_estimate": -0.35901083497822633,
+          "all_leave_one_years_same_nonzero_sign": true
+        },
+        "V10M_anomaly": {
+          "min_leave_one_year_estimate": -0.08321095446095439,
+          "max_leave_one_year_estimate": 0.19509605719026016,
+          "all_leave_one_years_same_nonzero_sign": false
+        },
+        "ALLSKY_SFC_SW_DWN_anomaly": {
+          "min_leave_one_year_estimate": -0.6346760218847176,
+          "max_leave_one_year_estimate": 8.508282482157476,
+          "all_leave_one_years_same_nonzero_sign": false
+        }
+      }
+    },
+    "curlew": {
+      "original_gridyearmonth_overlap_strata": 31,
+      "original_case_day_weights_in_overlap": 51,
+      "distinct_animal_clusters": 23,
+      "bootstrap_requested": 1000,
+      "bootstrap_valid": 1000,
+      "cluster_bootstrap_status": "DESCRIPTIVE_CLUSTER_BOOTSTRAP_ESTIMABLE",
+      "effects": {
+        "T2M_anomaly": 0.339625486796959,
+        "WS10M_anomaly": -0.06770424262505909,
+        "V10M_anomaly": -0.6146530154115234,
+        "ALLSKY_SFC_SW_DWN_anomaly": -0.9746087863952799
+      },
+      "cluster_95pct_descriptive_intervals": {
+        "T2M_anomaly": [
+          -0.36181342514998965,
+          0.9177013246950176
+        ],
+        "WS10M_anomaly": [
+          -0.5727525483723503,
+          0.5619033057346189
+        ],
+        "V10M_anomaly": [
+          -1.5839238513089582,
+          0.23044697379362733
+        ],
+        "ALLSKY_SFC_SW_DWN_anomaly": [
+          -23.243523959169917,
+          18.403303678062407
+        ]
+      },
+      "year_omission_sign_stability": {
+        "T2M_anomaly": {
+          "min_leave_one_year_estimate": -0.2542954520890554,
+          "max_leave_one_year_estimate": 0.7496856812913125,
+          "all_leave_one_years_same_nonzero_sign": false
+        },
+        "WS10M_anomaly": {
+          "min_leave_one_year_estimate": -0.4258668732579471,
+          "max_leave_one_year_estimate": 0.10961180760720671,
+          "all_leave_one_years_same_nonzero_sign": false
+        },
+        "V10M_anomaly": {
+          "min_leave_one_year_estimate": -1.1156727633841705,
+          "max_leave_one_year_estimate": -0.1362940772222913,
+          "all_leave_one_years_same_nonzero_sign": true
+        },
+        "ALLSKY_SFC_SW_DWN_anomaly": {
+          "min_leave_one_year_estimate": -7.812535552342319,
+          "max_leave_one_year_estimate": 2.884441821777354,
+          "all_leave_one_years_same_nonzero_sign": false
+        }
+      }
+    }
+  },
+  "full_aggregate_source_receipts": {
+    "stork": {
+      "schema": "payoff_b_fullrisk_postoutcome_animal_cluster_robustness_20261022",
+      "system": "stork",
+      "classification": "POST_OUTCOME_SENSITIVITY_NOT_CONFIRMATORY",
+      "result": {
+        "status": "SOURCE_SOURCE_YEAR_ROBUSTNESS_DESCRIPTIVES_COMPLETE",
+        "source_doi": "10.5441/001/1.v8d24552",
+        "source_taxon": "Ciconia ciconia",
+        "original_source_checksum": {
+          "verified": true,
+          "bytes": 273153305,
+          "md5": "bda2ebd2441316b2e2fd9e9578d7d0b4",
+          "bitstream_uuid": "ed3529e6-ce20-4237-8875-9d35fdbf9a0f"
+        },
+        "source_riskday_observations": 1633,
+        "weather_complete_classes": {
+          "CENSORED": 184,
+          "NORTHWARD_CANDIDATE": 156,
+          "OTHER_MOVEMENT": 352,
+          "STAYED_TWO_DAYS": 941
+        },
+        "retrieved_month_grid_year_batches": 343,
+        "failed_batches": {},
+        "sensitivity": {
+          "status": "DESCRIPTIVE_CLUSTER_BOOTSTRAP_ESTIMABLE",
+          "original_effect": {
+            "n_gridmonth_strata_with_both_labels": 61,
+            "n_original_case_day_weights_in_overlap": 75,
+            "source_case_weighted_contrasts": {
+              "T2M_anomaly": -0.5143160582010581,
+              "WS10M_anomaly": 0.2535933938019652,
+              "V10M_anomaly": -0.2613161035525321,
+              "ALLSKY_SFC_SW_DWN_anomaly": -17.098786065759636
+            }
+          },
+          "animal_cluster_units": 36,
+          "animal_history_resampled_across_all_years": true,
+          "bootstrap_replicates_requested": 1000,
+          "bootstrap_valid": 1000,
+          "bootstrap_lost_or_underrepresented_source_overlap": 0,
+          "cluster_bootstrap_95pct_descriptive_intervals": {
+            "T2M_anomaly": [
+              -1.1011962237269755,
+              0.08732555643464236
+            ],
+            "WS10M_anomaly": [
+              -0.08795526384064746,
+              0.6578359563966785
+            ],
+            "V10M_anomaly": [
+              -0.9420587142784467,
+              0.5388493036059586
+            ],
+            "ALLSKY_SFC_SW_DWN_anomaly": [
+              -27.62597856936825,
+              -2.057621768806577
+            ]
+          },
+          "leave_one_source_year_out_descriptive": {
+            "2012": {
+              "remaining_gridmonth_overlap": 58,
+              "remaining_case_weight_in_overlap": 72,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": -0.5305367339065254,
+                "WS10M_anomaly": 0.27890928917863433,
+                "V10M_anomaly": -0.3072538777084908,
+                "ALLSKY_SFC_SW_DWN_anomaly": -16.25175797193878
+              }
+            },
+            "2013": {
+              "remaining_gridmonth_overlap": 51,
+              "remaining_case_weight_in_overlap": 60,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": -0.31244666005290983,
+                "WS10M_anomaly": 0.08439743008314432,
+                "V10M_anomaly": 0.2830687594482237,
+                "ALLSKY_SFC_SW_DWN_anomaly": -15.014697000188965
+              }
+            },
+            "2014": {
+              "remaining_gridmonth_overlap": 39,
+              "remaining_case_weight_in_overlap": 50,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": -0.5041233503401359,
+                "WS10M_anomaly": 0.4734864512471655,
+                "V10M_anomaly": -0.503452738095238,
+                "ALLSKY_SFC_SW_DWN_anomaly": -19.778964665532882
+              }
+            },
+            "2015": {
+              "remaining_gridmonth_overlap": 45,
+              "remaining_case_weight_in_overlap": 55,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": -0.7617368635332921,
+                "WS10M_anomaly": 0.27814504225932796,
+                "V10M_anomaly": -0.5980807101628529,
+                "ALLSKY_SFC_SW_DWN_anomaly": -15.099254839208411
+              }
+            },
+            "2016": {
+              "remaining_gridmonth_overlap": 51,
+              "remaining_case_weight_in_overlap": 63,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": -0.4801218730878591,
+                "WS10M_anomaly": 0.18984767663679228,
+                "V10M_anomaly": -0.24110478530036347,
+                "ALLSKY_SFC_SW_DWN_anomaly": -19.670161528632622
+              }
+            }
+          },
+          "bootstrap_accounts_for_shared_weather_grid_between_animals": false,
+          "bootstrap_estimates_biological_causal_effect": false
+        },
+        "pvalue_or_causal_claim": false,
+        "raw_individual_date_grid_exported": false
+      }
+    },
+    "white_fronted_goose": {
+      "schema": "payoff_b_fullrisk_postoutcome_animal_cluster_robustness_20261022",
+      "system": "white_fronted_goose",
+      "classification": "POST_OUTCOME_SENSITIVITY_NOT_CONFIRMATORY",
+      "result": {
+        "status": "SOURCE_SOURCE_YEAR_ROBUSTNESS_DESCRIPTIVES_COMPLETE",
+        "source_doi": "10.5441/001/1.31c2v92f",
+        "source_taxon": "Anser albifrons",
+        "original_source_checksum": {
+          "size_bytes": 16806763,
+          "md5": "0e0abd1126c53f4924907c3fb6a72d02",
+          "bitstream_uuid": "0a262590-49e2-4e47-a290-dbfd6649579f",
+          "bitstream_url": "https://datarepository.movebank.org/server/api/core/bitstreams/0a262590-49e2-4e47-a290-dbfd6649579f/content"
+        },
+        "source_riskday_observations": 2008,
+        "weather_complete_classes": {
+          "CENSORED": 156,
+          "NORTHWARD_CANDIDATE": 111,
+          "OTHER_MOVEMENT": 285,
+          "STAYED_TWO_DAYS": 1456
+        },
+        "retrieved_month_grid_year_batches": 334,
+        "failed_batches": {},
+        "sensitivity": {
+          "status": "DESCRIPTIVE_CLUSTER_BOOTSTRAP_ESTIMABLE",
+          "original_effect": {
+            "n_gridmonth_strata_with_both_labels": 84,
+            "n_original_case_day_weights_in_overlap": 89,
+            "source_case_weighted_contrasts": {
+              "T2M_anomaly": 1.0368454527682056,
+              "WS10M_anomaly": -0.4695160792702925,
+              "V10M_anomaly": 0.07405198723457149,
+              "ALLSKY_SFC_SW_DWN_anomaly": 2.270251703009847
+            }
+          },
+          "animal_cluster_units": 49,
+          "animal_history_resampled_across_all_years": true,
+          "bootstrap_replicates_requested": 1000,
+          "bootstrap_valid": 1000,
+          "bootstrap_lost_or_underrepresented_source_overlap": 0,
+          "cluster_bootstrap_95pct_descriptive_intervals": {
+            "T2M_anomaly": [
+              0.22162964652820902,
+              2.000958353345729
+            ],
+            "WS10M_anomaly": [
+              -0.8907802317706387,
+              -0.1573181776522357
+            ],
+            "V10M_anomaly": [
+              -0.6099394912950805,
+              0.8225321462993889
+            ],
+            "ALLSKY_SFC_SW_DWN_anomaly": [
+              -11.574055607911712,
+              18.724607893744967
+            ]
+          },
+          "leave_one_source_year_out_descriptive": {
+            "2006": {
+              "remaining_gridmonth_overlap": 79,
+              "remaining_case_weight_in_overlap": 84,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 1.152932837995338,
+                "WS10M_anomaly": -0.4403907608595106,
+                "V10M_anomaly": 0.1328036644792597,
+                "ALLSKY_SFC_SW_DWN_anomaly": -0.4145887568450069
+              }
+            },
+            "2007": {
+              "remaining_gridmonth_overlap": 64,
+              "remaining_case_weight_in_overlap": 69,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 0.74468902775968,
+                "WS10M_anomaly": -0.35901083497822633,
+                "V10M_anomaly": 0.19509605719026016,
+                "ALLSKY_SFC_SW_DWN_anomaly": -0.6346760218847176
+              }
+            },
+            "2008": {
+              "remaining_gridmonth_overlap": 74,
+              "remaining_case_weight_in_overlap": 79,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 1.1779895426303655,
+                "WS10M_anomaly": -0.48552404188638343,
+                "V10M_anomaly": -0.050391067090434186,
+                "ALLSKY_SFC_SW_DWN_anomaly": 3.6675201524565417
+              }
+            },
+            "2009": {
+              "remaining_gridmonth_overlap": 82,
+              "remaining_case_weight_in_overlap": 87,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 1.053569139513105,
+                "WS10M_anomaly": -0.4857063777537912,
+                "V10M_anomaly": 0.10120771618760122,
+                "ALLSKY_SFC_SW_DWN_anomaly": 3.2446800399153823
+              }
+            },
+            "2014": {
+              "remaining_gridmonth_overlap": 37,
+              "remaining_case_weight_in_overlap": 37,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 0.9774429965679966,
+                "WS10M_anomaly": -0.6694675275925279,
+                "V10M_anomaly": -0.08321095446095439,
+                "ALLSKY_SFC_SW_DWN_anomaly": 8.508282482157476
+              }
+            }
+          },
+          "bootstrap_accounts_for_shared_weather_grid_between_animals": false,
+          "bootstrap_estimates_biological_causal_effect": false
+        },
+        "pvalue_or_causal_claim": false,
+        "raw_individual_date_grid_exported": false
+      }
+    },
+    "curlew": {
+      "schema": "payoff_b_fullrisk_postoutcome_animal_cluster_robustness_20261022",
+      "system": "curlew",
+      "classification": "POST_OUTCOME_SENSITIVITY_NOT_CONFIRMATORY",
+      "result": {
+        "status": "SOURCE_SOURCE_YEAR_ROBUSTNESS_DESCRIPTIVES_COMPLETE",
+        "source_doi": "10.5441/001/1.715k46g2",
+        "source_taxon": "Numenius arquata",
+        "original_source_checksum": {
+          "bytes": 159155287,
+          "md5": "b847a97e4ebaedd3e2fd46e920c4f08e",
+          "original_source_verified": true
+        },
+        "source_riskday_observations": 1868,
+        "weather_complete_classes": {
+          "CENSORED": 80,
+          "NORTHWARD_CANDIDATE": 66,
+          "OTHER_MOVEMENT": 90,
+          "STAYED_TWO_DAYS": 1632
+        },
+        "retrieved_month_grid_year_batches": 132,
+        "failed_batches": {},
+        "sensitivity": {
+          "status": "DESCRIPTIVE_CLUSTER_BOOTSTRAP_ESTIMABLE",
+          "original_effect": {
+            "n_gridmonth_strata_with_both_labels": 31,
+            "n_original_case_day_weights_in_overlap": 51,
+            "source_case_weighted_contrasts": {
+              "T2M_anomaly": 0.339625486796959,
+              "WS10M_anomaly": -0.06770424262505909,
+              "V10M_anomaly": -0.6146530154115234,
+              "ALLSKY_SFC_SW_DWN_anomaly": -0.9746087863952799
+            }
+          },
+          "animal_cluster_units": 23,
+          "animal_history_resampled_across_all_years": true,
+          "bootstrap_replicates_requested": 1000,
+          "bootstrap_valid": 1000,
+          "bootstrap_lost_or_underrepresented_source_overlap": 0,
+          "cluster_bootstrap_95pct_descriptive_intervals": {
+            "T2M_anomaly": [
+              -0.36181342514998965,
+              0.9177013246950176
+            ],
+            "WS10M_anomaly": [
+              -0.5727525483723503,
+              0.5619033057346189
+            ],
+            "V10M_anomaly": [
+              -1.5839238513089582,
+              0.23044697379362733
+            ],
+            "ALLSKY_SFC_SW_DWN_anomaly": [
+              -23.243523959169917,
+              18.403303678062407
+            ]
+          },
+          "leave_one_source_year_out_descriptive": {
+            "2014": {
+              "remaining_gridmonth_overlap": 29,
+              "remaining_case_weight_in_overlap": 49,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 0.3828609294067474,
+                "WS10M_anomaly": -0.03639576661947355,
+                "V10M_anomaly": -0.5693837507344427,
+                "ALLSKY_SFC_SW_DWN_anomaly": -0.5028872791344456
+              }
+            },
+            "2015": {
+              "remaining_gridmonth_overlap": 30,
+              "remaining_case_weight_in_overlap": 50,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 0.3810850772782397,
+                "WS10M_anomaly": -0.07034031505520003,
+                "V10M_anomaly": -0.5926529080178905,
+                "ALLSKY_SFC_SW_DWN_anomaly": 1.6272207770072498
+              }
+            },
+            "2016": {
+              "remaining_gridmonth_overlap": 25,
+              "remaining_case_weight_in_overlap": 44,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 0.5715289574885598,
+                "WS10M_anomaly": -0.10685257632474898,
+                "V10M_anomaly": -0.5746227268448676,
+                "ALLSKY_SFC_SW_DWN_anomaly": 1.5535084870431144
+              }
+            },
+            "2017": {
+              "remaining_gridmonth_overlap": 25,
+              "remaining_case_weight_in_overlap": 42,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 0.36424699377851816,
+                "WS10M_anomaly": 0.09936449909974833,
+                "V10M_anomaly": -0.38291750290245813,
+                "ALLSKY_SFC_SW_DWN_anomaly": -5.649408843924021
+              }
+            },
+            "2018": {
+              "remaining_gridmonth_overlap": 28,
+              "remaining_case_weight_in_overlap": 46,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 0.14317798967516523,
+                "WS10M_anomaly": 0.10961180760720671,
+                "V10M_anomaly": -0.9288341575283728,
+                "ALLSKY_SFC_SW_DWN_anomaly": -7.812535552342319
+              }
+            },
+            "2019": {
+              "remaining_gridmonth_overlap": 26,
+              "remaining_case_weight_in_overlap": 37,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": -0.2542954520890554,
+                "WS10M_anomaly": -0.10129966205902381,
+                "V10M_anomaly": -1.1156727633841705,
+                "ALLSKY_SFC_SW_DWN_anomaly": 2.884441821777354
+              }
+            },
+            "2020": {
+              "remaining_gridmonth_overlap": 23,
+              "remaining_case_weight_in_overlap": 38,
+              "case_weighted_contrasts": {
+                "T2M_anomaly": 0.7496856812913125,
+                "WS10M_anomaly": -0.4258668732579471,
+                "V10M_anomaly": -0.1362940772222913,
+                "ALLSKY_SFC_SW_DWN_anomaly": 1.7532430317675303
+              }
+            }
+          },
+          "bootstrap_accounts_for_shared_weather_grid_between_animals": false,
+          "bootstrap_estimates_biological_causal_effect": false
+        },
+        "pvalue_or_causal_claim": false,
+        "raw_individual_date_grid_exported": false
+      }
+    }
+  },
+  "inferential_ceiling": {
+    "statistically_preregistered_primary_claim": false,
+    "individual_history_resampling": true,
+    "shared_spatial_weather_dependence_controlled": false,
+    "causal_migration_effect_identified": false,
+    "true_route_and_wind_relative_bearing_identified": false,
+    "biological_fitness_measured": false,
+    "independent_migration_cohort_replication_confirmed": false
+  },
+  "interpretation": [
+    "Stork solar shortwave anomaly contrast is negative in full within-grid-month source data, with a whole-animal descriptive percentile interval below zero and year-omission signs consistent. This does not establish suppressed irradiance causes departure or characterize soaring thermal lift.",
+    "White-fronted goose prior physical temperature anomaly is higher and wind-speed anomaly lower on northward-labelled source days compared with continuing-stay windows in the same coarse grid/year/month; descriptive animal bootstrap intervals exclude zero, but spatial and readiness confounding and historical cohort overlap remain.",
+    "Curlew temperature and directional wind contrasts have intervals across zero; dropping 2019 changes the temperature contrast sign.",
+    "The source-specific physical cue patterns and differences between small-sample and full source analysis invalidate a simple universal warming/tailwind rule; these are exploratory observations rather than evolutionary mechanism confirmation."
+  ],
+  "governance": [
+    "Existing preregistered V7R and V8 non-support remains unchanged.",
+    "Original 53-season stork timing-compression study remains NOT_SUPPORTED.",
+    "The bootstrap procedure was added after observing full source weather contrasts and is not presented as prospective evidence.",
+    "No GPS coordinates, original animal IDs, site grid IDs, exact event dates or individual meteorology are exported."
+  ]
+}

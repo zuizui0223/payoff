@@ -1,0 +1,37 @@
+name: payoff-b-fullrisk-whole-animal-robustness
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/audit_payoff_b_fullrisk_cluster_robustness.py"
+      - "tests/test_payoff_b_fullrisk_cluster_robustness.py"
+      - "docs/PAYOFF_B_FULLRISK_CLUSTER_ROBUSTNESS_LOCK_20261022.md"
+      - ".github/workflows/payoff-b-fullrisk-cluster-robustness.yml"
+jobs:
+  robustness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [stork, white_fronted_goose, curlew]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test synthetic original animal-cluster bootstrap and leave-year-out
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_fullrisk_cluster_robustness.py
+      - name: Verify original NOAA-independent NASA daily source and run whole-animal robustness
+        run: |
+          python -m scripts.audit_payoff_b_fullrisk_cluster_robustness --system ${{ matrix.system }} --out outputs/payoff_b_fullrisk_robustness
+      - name: Archive only aggregate cluster/year sensitivity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-whole-animal-year-robustness-${{ matrix.system }}
+          path: outputs/payoff_b_fullrisk_robustness/
+          if-no-files-found: warn

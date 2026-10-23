@@ -1,0 +1,37 @@
+name: payoff-b-complete-riskday-weather
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/audit_payoff_b_riskday_weather.py"
+      - "tests/test_payoff_b_riskday_weather.py"
+      - "docs/PAYOFF_B_RISKDAY_WEATHER_LOCK_20261022.md"
+      - ".github/workflows/payoff-b-complete-riskday-weather.yml"
+jobs:
+  weather:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [stork, white_fronted_goose, curlew]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Synthetic sampling and weather chronology controls
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_riskday_weather.py
+      - name: Read all-risk-day source and NASA predecision weather
+        run: |
+          python -m scripts.audit_payoff_b_riskday_weather --system ${{ matrix.system }} --out outputs/payoff_b_riskday_weather
+      - name: Archive descriptive aggregates only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-riskday-weather-${{ matrix.system }}
+          path: outputs/payoff_b_riskday_weather/
+          if-no-files-found: warn

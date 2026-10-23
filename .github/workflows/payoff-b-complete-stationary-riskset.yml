@@ -1,0 +1,37 @@
+name: payoff-b-complete-stationary-source-riskset
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/qc_payoff_b_complete_stationary_riskset.py"
+      - "tests/test_payoff_b_complete_stationary_riskset.py"
+      - "docs/PAYOFF_B_COMPLETE_STATIONARY_RISKSET_20261022.md"
+      - ".github/workflows/payoff-b-complete-stationary-riskset.yml"
+jobs:
+  source-qc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [stork, white_fronted_goose, curlew]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test no-future-leakage and censoring controls
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_complete_stationary_riskset.py
+      - name: Verify all risk-days in original checksum-pinned CC0 GPS
+        run: |
+          python -m scripts.qc_payoff_b_complete_stationary_riskset --system ${{ matrix.system }} --out outputs/payoff_b_complete_riskset
+      - name: Archive aggregate risk-day counts only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-all-riskdays-${{ matrix.system }}
+          path: outputs/payoff_b_complete_riskset/
+          if-no-files-found: warn

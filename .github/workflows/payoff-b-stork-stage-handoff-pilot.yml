@@ -1,0 +1,37 @@
+name: payoff-b-stork-53-season-stage-handoff-pilot
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/run_payoff_b_stork_stage_handoff_pilot.py"
+      - "tests/test_stork_stage_handoff_pilot.py"
+      - "docs/PAYOFF_B_STORK_STAGE_PROPAGATION_PILOT_LOCK_20261019.md"
+      - ".github/workflows/payoff-b-stork-stage-handoff-pilot.yml"
+  workflow_dispatch:
+
+jobs:
+  original-53-stork-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test source gate, leap-year and cluster inference on synthetic rows
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_stork_stage_handoff_pilot.py
+      - name: Re-run originally frozen Jan-Apr 53-season pilot from CC0 GPS
+        run: |
+          python -m scripts.run_payoff_b_stork_stage_handoff_pilot \
+            --out outputs/payoff_b_stork_stage_handoff_pilot.json
+      - name: Archive aggregate inference but no bird identities, GPS or vital rates
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-53-season-stage-handoff-pilot
+          path: outputs/payoff_b_stork_stage_handoff_pilot.json
+          if-no-files-found: warn

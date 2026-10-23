@@ -1,0 +1,41 @@
+name: payoff-b-predecision-gps-source-admission
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/qc_payoff_b_predecision_candidates.py"
+      - "tests/test_payoff_b_predecision_candidates.py"
+      - "docs/PAYOFF_B_PREDECISION_GPS_SOURCE_ADMISSION_20261019.md"
+      - ".github/workflows/payoff-b-predecision-gps-source.yml"
+
+jobs:
+  stationary-to-movement-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [stork, curlew, white_fronted_goose]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test exact synthetic stationary→northward detection
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_predecision_candidates.py
+      - name: Verify source file and screen predecision transfer candidates
+        run: |
+          python -m scripts.qc_payoff_b_predecision_candidates \
+            --system ${{ matrix.system }} \
+            --out outputs/payoff_b_predecision
+      - name: Publish only aggregate candidate counts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-predecision-source-${{ matrix.system }}
+          path: outputs/payoff_b_predecision/
+          if-no-files-found: warn

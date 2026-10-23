@@ -1,0 +1,53 @@
+{
+  "schema": "payoff_b_shearwater_assignment_adjusted_GPS_capture_v1",
+  "original_source_doi": "10.5441/001/1.tc76g560",
+  "original_reference_subjects": 32,
+  "GPS_equipped_by_original_publication": {
+    "control": 9,
+    "magnetic_disruption": 9,
+    "olfactory_deprivation": 9
+  },
+  "GPS_valid_by_archived_source": {
+    "control": 8,
+    "magnetic_disruption": 9,
+    "olfactory_deprivation": 6
+  },
+  "Argos_assigned_by_original_publication": {
+    "control": 0,
+    "magnetic_disruption": 0,
+    "olfactory_deprivation": 5
+  },
+  "GPS_capture_fraction_among_GPS_equipped": {
+    "control": 0.8888888888888888,
+    "magnetic_disruption": 1,
+    "olfactory_deprivation": 0.6666666666666666
+  },
+  "GPS_capture_fraction_among_all_treated": {
+    "control": 0.8888888888888888,
+    "magnetic_disruption": 1,
+    "olfactory_deprivation": 0.42857142857142855
+  },
+  "GPS_equipped_only_three_arm_exact": {
+    "two_sided_conditional_probability": 0.28,
+    "feasible_tables": 15
+  },
+  "olfactory_vs_other_GPS_equipped_Fisher_two_sided": 0.09333333333333334,
+  "all_treated_GPS_yes_no_three_arm_exact_but_design_confounding": {
+    "two_sided_conditional_probability": 0.004297937879695388,
+    "feasible_tables": 55
+  },
+  "missing_binary_GPS_outcome_arm_mean_bound_width": {
+    "control": 0.1111111111111111,
+    "magnetic_disruption": 0,
+    "olfactory_deprivation": 0.5714285714285714
+  },
+  "olfactory_minus_control_GPS_outcome_difference_bound_width": 0.6825396825396826,
+  "experimental_effect_on_navigation_identified": false,
+  "assignment_randomization_verified_here": false,
+  "Argos_and_GPS_are_comparable_hourly_traces": false,
+  "original_animal_identifiers_or_locations_exported": false,
+  "classification": "POST_SOURCE_SENSOR_ALLOCATION_DIAGNOSTIC_NOT_CAUSAL",
+  "source_verification_run": "https://github.com/zuizui0223/payoff/actions/runs/39917725473",
+  "source_original_paper": "https://www.nature.com/articles/srep16486",
+  "source_readout_date": "2026-10-23"
+}

@@ -1,0 +1,48 @@
+name: payoff-b-movebank-taxon-source-census
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/build_movebank_taxon_sensor_registry.py"
+      - "tests/test_movebank_taxon_sensor_registry.py"
+      - "docs/PAYOFF_B_TAXON_SOURCE_CENSUS_20261019.md"
+      - ".github/workflows/payoff-b-movebank-taxon-source-census.yml"
+  workflow_dispatch:
+
+jobs:
+  complete-publisher-metadata-census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check complete-corpus source/DOI consistency rules offline
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pytest -q tests/test_movebank_taxon_sensor_registry.py
+      - name: Rebuild exhaustive parent DOI source table
+        run: |
+          python scripts/build_movebank_doi_registry.py \
+            --output-dir outputs/payoff_b_independent_movebank
+          python -m scripts.screen_movebank_package_metadata \
+            --stage1-candidates outputs/payoff_b_independent_movebank/movebank_parent_package_candidates.csv \
+            --output-dir outputs/payoff_b_independent_stage2
+      - name: Read only public DSpace item taxonomy, sensors, source counts and Movebank study IDs
+        run: |
+          python -m scripts.build_movebank_taxon_sensor_registry \
+            --input outputs/payoff_b_independent_stage2/movebank_package_metadata_screen.csv \
+            --output-dir outputs/payoff_b_movebank_taxon_census
+      - name: Archive complete publisher metadata census
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-movebank-complete-taxonomic-source-metadata
+          path: |
+            outputs/payoff_b_independent_stage2/movebank_stage2_screen_summary.json
+            outputs/payoff_b_movebank_taxon_census/movebank_taxon_sensor_source_registry.csv
+            outputs/payoff_b_movebank_taxon_census/movebank_taxon_sensor_census_receipt.json
+          if-no-files-found: warn

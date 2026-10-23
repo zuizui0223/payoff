@@ -1,0 +1,34 @@
+name: payoff-b-2021-goose-cohort-source-gate
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/qc_payoff_b_2021_goose_cohort_gate.py"
+      - "tests/test_payoff_b_2021_goose_cohort_gate.py"
+      - "docs/PAYOFF_B_2021_GOOSE_COHORT_GATE_20261023.md"
+      - ".github/workflows/payoff-b-2021-goose-cohort-gate.yml"
+jobs:
+  published-reference-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify synthetic multi-study, source-ID and missing-reference cases
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pytest -q tests/test_payoff_b_2021_goose_cohort_gate.py
+      - name: Verify original publisher MD5 references, exclude non-independent source
+        run: |
+          python -m scripts.qc_payoff_b_2021_goose_cohort_gate \
+            --out outputs/payoff_b_2021_goose_reference
+      - name: Save aggregate source completeness and overlap only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-2021-goose-publisher-reference-gate
+          path: outputs/payoff_b_2021_goose_reference/
+          if-no-files-found: warn

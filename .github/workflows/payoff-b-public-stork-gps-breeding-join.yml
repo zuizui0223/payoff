@@ -1,0 +1,37 @@
+name: payoff-b-public-stork-gps-breeding-join
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/qc_public_movebank_stork_gps_join_2018.py"
+      - "tests/test_public_movebank_stork_gps_join.py"
+      - "docs/PAYOFF_B_STORK_GPS_BREEDING_ADMISSION_20261019.md"
+      - ".github/workflows/payoff-b-public-stork-gps-breeding-join.yml"
+  workflow_dispatch:
+
+jobs:
+  published-stork-gps-breeding-join:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run deterministic synthetic source-link tests
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pytest -q tests/test_public_movebank_stork_gps_join.py
+      - name: Check original CC0 GPS checksum and summarize linkage to breeding metadata
+        run: |
+          python -m scripts.qc_public_movebank_stork_gps_join_2018 \
+            --output outputs/payoff_b_stork_gps_breeding_join_qc.json
+      - name: Archive only aggregate counts; never archive raw GPS
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-gps-breeding-source-admission
+          path: outputs/payoff_b_stork_gps_breeding_join_qc.json
+          if-no-files-found: warn
