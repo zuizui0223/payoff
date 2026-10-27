@@ -1,0 +1,324 @@
+{
+  "schema": "payoff_b_full_at_risk_stationary_day_source_population_20261022",
+  "date": "2026-10-22",
+  "run": "https://github.com/zuizui0223/payoff/actions/runs/39721821673",
+  "classification": "SOURCE_OBSERVATIONAL_OPPORTUNITIES_NO_CUE_EFFECT",
+  "three_species_source_systems": {
+    "stork": {
+      "source_system": "stork",
+      "status": "COMPLETE_STATIONARY_RISKSET_VERIFIED",
+      "analysis": "SOURCE_ONLY_COMPLETE_RISKSET",
+      "source_doi": "10.5441/001/1.v8d24552",
+      "source_taxon": "Ciconia ciconia",
+      "original_file_integrity": {
+        "verified": true,
+        "bytes": 273153305,
+        "md5": "bda2ebd2441316b2e2fd9e9578d7d0b4",
+        "bitstream_uuid": "ed3529e6-ce20-4237-8875-9d35fdbf9a0f"
+      },
+      "coverage": {
+        "schema": "payoff_b_complete_source_risk_days_v1",
+        "source_system": "stork",
+        "eligibility": "all 3-day stationary original GPS windows before day4/5",
+        "counts": {
+          "CENSORED": 184,
+          "NORTHWARD_CANDIDATE": 156,
+          "OTHER_MOVEMENT": 352,
+          "STAYED_TWO_DAYS": 941,
+          "all_at_risk_stationary_days": 1633,
+          "animal_years_with_any_departure_proxy": 80,
+          "animal_years_with_any_stay_proxy": 91,
+          "animal_years_with_risk_opportunities": 91,
+          "deduplicated_frozen_cases": 145,
+          "frozen_cases_reconstructed": 145,
+          "raw_unthinned_departure_labels": 156
+        },
+        "source_month_counts": {
+          "Ciconia ciconia|02": {
+            "CENSORED": 1,
+            "NORTHWARD_CANDIDATE": 37,
+            "OTHER_MOVEMENT": 226,
+            "STAYED_TWO_DAYS": 399
+          },
+          "Ciconia ciconia|03": {
+            "CENSORED": 5,
+            "NORTHWARD_CANDIDATE": 72,
+            "OTHER_MOVEMENT": 82,
+            "STAYED_TWO_DAYS": 208
+          },
+          "Ciconia ciconia|04": {
+            "CENSORED": 156,
+            "NORTHWARD_CANDIDATE": 45,
+            "OTHER_MOVEMENT": 43,
+            "STAYED_TWO_DAYS": 309
+          },
+          "Ciconia ciconia|05": {
+            "CENSORED": 22,
+            "NORTHWARD_CANDIDATE": 2,
+            "OTHER_MOVEMENT": 1,
+            "STAYED_TWO_DAYS": 25
+          }
+        },
+        "source_year_counts": {
+          "Ciconia ciconia|2012": {
+            "CENSORED": 13,
+            "NORTHWARD_CANDIDATE": 11,
+            "OTHER_MOVEMENT": 20,
+            "STAYED_TWO_DAYS": 49
+          },
+          "Ciconia ciconia|2013": {
+            "CENSORED": 50,
+            "NORTHWARD_CANDIDATE": 40,
+            "OTHER_MOVEMENT": 108,
+            "STAYED_TWO_DAYS": 256
+          },
+          "Ciconia ciconia|2014": {
+            "CENSORED": 60,
+            "NORTHWARD_CANDIDATE": 41,
+            "OTHER_MOVEMENT": 99,
+            "STAYED_TWO_DAYS": 319
+          },
+          "Ciconia ciconia|2015": {
+            "CENSORED": 38,
+            "NORTHWARD_CANDIDATE": 40,
+            "OTHER_MOVEMENT": 86,
+            "STAYED_TWO_DAYS": 181
+          },
+          "Ciconia ciconia|2016": {
+            "CENSORED": 23,
+            "NORTHWARD_CANDIDATE": 24,
+            "OTHER_MOVEMENT": 39,
+            "STAYED_TWO_DAYS": 136
+          }
+        },
+        "candidate_fraction_among_resolved_move_or_stay": 0.1422060164083865,
+        "candidate_fraction_is_true_departure_hazard": false,
+        "risk_entry_uses_future_information": false,
+        "labels_only_use_observed_day4_and_day5": true,
+        "censored_cases_labeled_stay": false,
+        "other_movements_labeled_stay": false,
+        "daily_risk_records_independent_samples": false,
+        "weather_analyzed": false,
+        "bird_cue_use_estimated": false,
+        "physical_recourse_or_fitness_estimated": false,
+        "original_IDs_event_dates_or_positions_exported": false
+      }
+    },
+    "white_fronted_goose": {
+      "source_system": "white_fronted_goose",
+      "status": "COMPLETE_STATIONARY_RISKSET_VERIFIED",
+      "analysis": "SOURCE_ONLY_COMPLETE_RISKSET",
+      "source_doi": "10.5441/001/1.31c2v92f",
+      "source_taxon": "Anser albifrons",
+      "original_file_integrity": {
+        "size_bytes": 16806763,
+        "md5": "0e0abd1126c53f4924907c3fb6a72d02",
+        "bitstream_uuid": "0a262590-49e2-4e47-a290-dbfd6649579f",
+        "bitstream_url": "https://datarepository.movebank.org/server/api/core/bitstreams/0a262590-49e2-4e47-a290-dbfd6649579f/content"
+      },
+      "coverage": {
+        "schema": "payoff_b_complete_source_risk_days_v1",
+        "source_system": "white_fronted_goose",
+        "eligibility": "all 3-day stationary original GPS windows before day4/5",
+        "counts": {
+          "CENSORED": 156,
+          "NORTHWARD_CANDIDATE": 111,
+          "OTHER_MOVEMENT": 285,
+          "STAYED_TWO_DAYS": 1456,
+          "all_at_risk_stationary_days": 2008,
+          "animal_years_with_any_departure_proxy": 46,
+          "animal_years_with_any_stay_proxy": 49,
+          "animal_years_with_risk_opportunities": 51,
+          "deduplicated_frozen_cases": 106,
+          "frozen_cases_reconstructed": 106,
+          "raw_unthinned_departure_labels": 111
+        },
+        "source_month_counts": {
+          "Anser albifrons|02": {
+            "NORTHWARD_CANDIDATE": 1,
+            "OTHER_MOVEMENT": 3,
+            "STAYED_TWO_DAYS": 27
+          },
+          "Anser albifrons|03": {
+            "CENSORED": 23,
+            "NORTHWARD_CANDIDATE": 19,
+            "OTHER_MOVEMENT": 78,
+            "STAYED_TWO_DAYS": 208
+          },
+          "Anser albifrons|04": {
+            "CENSORED": 71,
+            "NORTHWARD_CANDIDATE": 35,
+            "OTHER_MOVEMENT": 95,
+            "STAYED_TWO_DAYS": 720
+          },
+          "Anser albifrons|05": {
+            "CENSORED": 62,
+            "NORTHWARD_CANDIDATE": 56,
+            "OTHER_MOVEMENT": 109,
+            "STAYED_TWO_DAYS": 501
+          }
+        },
+        "source_year_counts": {
+          "Anser albifrons|2006": {
+            "CENSORED": 5,
+            "NORTHWARD_CANDIDATE": 6,
+            "OTHER_MOVEMENT": 13,
+            "STAYED_TWO_DAYS": 60
+          },
+          "Anser albifrons|2007": {
+            "CENSORED": 38,
+            "NORTHWARD_CANDIDATE": 25,
+            "OTHER_MOVEMENT": 62,
+            "STAYED_TWO_DAYS": 232
+          },
+          "Anser albifrons|2008": {
+            "CENSORED": 36,
+            "NORTHWARD_CANDIDATE": 16,
+            "OTHER_MOVEMENT": 30,
+            "STAYED_TWO_DAYS": 126
+          },
+          "Anser albifrons|2009": {
+            "CENSORED": 5,
+            "NORTHWARD_CANDIDATE": 2,
+            "OTHER_MOVEMENT": 4,
+            "STAYED_TWO_DAYS": 12
+          },
+          "Anser albifrons|2014": {
+            "CENSORED": 72,
+            "NORTHWARD_CANDIDATE": 62,
+            "OTHER_MOVEMENT": 176,
+            "STAYED_TWO_DAYS": 1026
+          }
+        },
+        "candidate_fraction_among_resolved_move_or_stay": 0.07083599234205488,
+        "candidate_fraction_is_true_departure_hazard": false,
+        "risk_entry_uses_future_information": false,
+        "labels_only_use_observed_day4_and_day5": true,
+        "censored_cases_labeled_stay": false,
+        "other_movements_labeled_stay": false,
+        "daily_risk_records_independent_samples": false,
+        "weather_analyzed": false,
+        "bird_cue_use_estimated": false,
+        "physical_recourse_or_fitness_estimated": false,
+        "original_IDs_event_dates_or_positions_exported": false
+      }
+    },
+    "curlew": {
+      "source_system": "curlew",
+      "status": "COMPLETE_STATIONARY_RISKSET_VERIFIED",
+      "analysis": "SOURCE_ONLY_COMPLETE_RISKSET",
+      "source_doi": "10.5441/001/1.715k46g2",
+      "source_taxon": "Numenius arquata",
+      "original_file_integrity": {
+        "bytes": 159155287,
+        "md5": "b847a97e4ebaedd3e2fd46e920c4f08e",
+        "original_source_verified": true
+      },
+      "coverage": {
+        "schema": "payoff_b_complete_source_risk_days_v1",
+        "source_system": "curlew",
+        "eligibility": "all 3-day stationary original GPS windows before day4/5",
+        "counts": {
+          "CENSORED": 80,
+          "NORTHWARD_CANDIDATE": 66,
+          "OTHER_MOVEMENT": 90,
+          "STAYED_TWO_DAYS": 1632,
+          "all_at_risk_stationary_days": 1868,
+          "animal_years_with_any_departure_proxy": 41,
+          "animal_years_with_any_stay_proxy": 42,
+          "animal_years_with_risk_opportunities": 42,
+          "deduplicated_frozen_cases": 59,
+          "frozen_cases_reconstructed": 59,
+          "raw_unthinned_departure_labels": 66
+        },
+        "source_month_counts": {
+          "Numenius arquata|04": {
+            "CENSORED": 2,
+            "NORTHWARD_CANDIDATE": 49,
+            "OTHER_MOVEMENT": 58,
+            "STAYED_TWO_DAYS": 780
+          },
+          "Numenius arquata|05": {
+            "CENSORED": 78,
+            "NORTHWARD_CANDIDATE": 17,
+            "OTHER_MOVEMENT": 32,
+            "STAYED_TWO_DAYS": 852
+          }
+        },
+        "source_year_counts": {
+          "Numenius arquata|2014": {
+            "CENSORED": 4,
+            "NORTHWARD_CANDIDATE": 2,
+            "OTHER_MOVEMENT": 2,
+            "STAYED_TWO_DAYS": 100
+          },
+          "Numenius arquata|2015": {
+            "CENSORED": 2,
+            "NORTHWARD_CANDIDATE": 1,
+            "OTHER_MOVEMENT": 1,
+            "STAYED_TWO_DAYS": 50
+          },
+          "Numenius arquata|2016": {
+            "CENSORED": 10,
+            "NORTHWARD_CANDIDATE": 8,
+            "OTHER_MOVEMENT": 15,
+            "STAYED_TWO_DAYS": 251
+          },
+          "Numenius arquata|2017": {
+            "CENSORED": 14,
+            "NORTHWARD_CANDIDATE": 13,
+            "OTHER_MOVEMENT": 15,
+            "STAYED_TWO_DAYS": 228
+          },
+          "Numenius arquata|2018": {
+            "CENSORED": 6,
+            "NORTHWARD_CANDIDATE": 7,
+            "OTHER_MOVEMENT": 6,
+            "STAYED_TWO_DAYS": 121
+          },
+          "Numenius arquata|2019": {
+            "CENSORED": 24,
+            "NORTHWARD_CANDIDATE": 19,
+            "OTHER_MOVEMENT": 30,
+            "STAYED_TWO_DAYS": 481
+          },
+          "Numenius arquata|2020": {
+            "CENSORED": 20,
+            "NORTHWARD_CANDIDATE": 16,
+            "OTHER_MOVEMENT": 21,
+            "STAYED_TWO_DAYS": 401
+          }
+        },
+        "candidate_fraction_among_resolved_move_or_stay": 0.038869257950530034,
+        "candidate_fraction_is_true_departure_hazard": false,
+        "risk_entry_uses_future_information": false,
+        "labels_only_use_observed_day4_and_day5": true,
+        "censored_cases_labeled_stay": false,
+        "other_movements_labeled_stay": false,
+        "daily_risk_records_independent_samples": false,
+        "weather_analyzed": false,
+        "bird_cue_use_estimated": false,
+        "physical_recourse_or_fitness_estimated": false,
+        "original_IDs_event_dates_or_positions_exported": false
+      }
+    }
+  },
+  "totals": {
+    "stationary_anchor_risk_days": 5509,
+    "raw_northward_candidate_days": 333,
+    "staying_two_followup_days": 4029,
+    "other_movement": 727,
+    "missing_two_day_followup_censored": 420,
+    "frozen_seven_day_deduplicated_case_events": 310,
+    "source_animal_years_with_eligible_anchor": 184
+  },
+  "caveats": [
+    "Repeated overlapping stationary windows in the same individual are not independent observations.",
+    "Cases require future two-day movement evidence as a response but eligibility requires only past 3 stationary days.",
+    "Censored followups and other movement are NOT treated as nondeparture.",
+    "The observed candidate fraction is neither calibrated departure probability nor causal weather effect.",
+    "Original GPS cohorts may overlap earlier PAYOFF studies.",
+    "No weather, destination phenology, usable future signal, recourse or reproductive fitness was estimated."
+  ],
+  "inferential_state": "NOT_TESTED"
+}

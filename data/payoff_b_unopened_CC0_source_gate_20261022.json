@@ -1,0 +1,252 @@
+{
+  "schema": "payoff_b_opened_new_source_GPS_admission_verdict_20261022",
+  "source_run": "https://github.com/zuizui0223/payoff/actions/runs/39776661562",
+  "doi_screen": "https://github.com/zuizui0223/payoff/actions/runs/39776088830",
+  "status": "SOURCE_QC_ONLY_NO_BIOLOGICAL_EFFECT_OPENED",
+  "systems": {
+    "pinkfoot_goose": {
+      "schema": "payoff_b_unopened_public_CC0_spring_source_qc_v1",
+      "reporting": "AGGREGATE_ORIGINAL_SOURCE_COVERAGE_ONLY",
+      "system": "pinkfoot_goose",
+      "result": {
+        "system": "pinkfoot_goose",
+        "original_doi": "10.5441/001/1.s9s86319",
+        "publication_doi": "10.1111/jav.00899",
+        "published_study_id": "49535504",
+        "expected_taxon": "Anser brachyrhynchus",
+        "license_metadata": "CC0 1.0 Universal",
+        "original_movement_context": "spring_stopover_fuel_accumulation_prior_art",
+        "original_checksum_and_bytes": {
+          "bytes": 2102567,
+          "md5": "fe4fe726c7d4c31aadedbe9f067c41f2",
+          "original_source_verified": true
+        },
+        "all_years_and_seasons_source_coverage": {
+          "original_rows": 9890,
+          "valid_identified_georeferenced_fixes": 9890,
+          "missing_identity_rows": 0,
+          "invalid_timestamp_rows": 0,
+          "invalid_position_rows": 0,
+          "id_column": "individual-local-identifier",
+          "id_is_animal_not_tag": true,
+          "unique_identity_labels": 11,
+          "labels_observed_in_multiple_years": 6,
+          "identity_calendar_years": 19,
+          "source_calendar_year_counts": {
+            "2011": 5394,
+            "2012": 3721,
+            "2013": 775
+          },
+          "years_covered": 3,
+          "ten_day_calendar_season_identity_years": {
+            "autumn": 2,
+            "spring": 13,
+            "summer": 12
+          },
+          "same_year_spring_and_autumn": 2,
+          "same_year_spring_and_winter": 0,
+          "observed_sensor_type_counts": {
+            "gps": 9890
+          },
+          "season_threshold_days": 10,
+          "season_months_are_migration_stages": false,
+          "actual_route_stage_or_stopover": false,
+          "decision_time_environmental_information_measured": false,
+          "correction_opportunity_measured": false,
+          "biological_fitness_response_measured": false,
+          "raw_ids_and_coordinates_exported": false
+        },
+        "fixed_feb_may_3day_stationary_then_2day_north_source_gate": {
+          "schema": "payoff_b_stationary_to_northward_candidate_source_qc_v1",
+          "source_identity_field": "individual-local-identifier",
+          "classified_source_taxa": {
+            "Anser brachyrhynchus": {
+              "animal_years_with_geovalid_days": 17,
+              "animal_years_with_one_or_more_candidates": 6,
+              "calendar_consecutive_five_day_windows": 259,
+              "candidate_stationary_to_northward_events": 10,
+              "distinct_animal_IDs_with_candidate_events": 5
+            }
+          },
+          "candidate_events_by_calendar_year": {
+            "2011": 6,
+            "2012": 4,
+            "2013": 0
+          },
+          "total_candidate_events": 10,
+          "total_consecutive_five_day_windows": 259,
+          "animal_years_with_multiple_candidate_events": 3,
+          "original_source_quality": {
+            "days_with_too_few_independent_hour_bins": 13,
+            "outside_original_spring_months": 3269,
+            "valid_spring_fixes": 6621
+          },
+          "time_standard": "UTC calendar-day aggregate; no inferred precise departure instant",
+          "frozen_gate": {
+            "calendar_months": "February-May",
+            "independent_hour_bins_per_day_min": 2,
+            "consecutive_preposition_days": 3,
+            "observed_followup_days": 2,
+            "stationary_radius_max_km": 30,
+            "first_outbound_day_min_distance_km": 30,
+            "two_day_outbound_min_distance_km": 120,
+            "two_day_northward_latitude_min_degrees": 0.8,
+            "candidate_min_separation_days": 7
+          },
+          "published_source_stopovers_validated": false,
+          "actual_decision_timestamp_known": false,
+          "predecision_weather_joined": false,
+          "cue_information_causally_used": false,
+          "remaining_feasible_recourse_measured": false,
+          "bird_response_or_fitness_effect_tested": false,
+          "individual_identifiers_or_track_points_exported": false
+        },
+        "biological_source_readiness": "NOT_ADMITTED_INSUFFICIENT_FIXED_DEPARTURE_OPPORTUNITIES",
+        "source_gate_thresholds": {
+          "min_geovalid_spring_animal_years": 8,
+          "min_fixed_northward_source_events": 10,
+          "min_animal_years_with_source_events": 10
+        },
+        "actual_bird_departure_timestamp_verified": false,
+        "actual_cue_available_before_decision": false,
+        "independent_animal_cohort_overlap_verified": false,
+        "downstream_timing_fitness_endpoint_measured": false,
+        "individual_IDs_or_GPS_locations_exported": false,
+        "status": "PUBLIC_SOURCE_GPS_QC_COMPLETE"
+      }
+    },
+    "egyptian_vulture": {
+      "schema": "payoff_b_unopened_public_CC0_spring_source_qc_v1",
+      "reporting": "AGGREGATE_ORIGINAL_SOURCE_COVERAGE_ONLY",
+      "system": "egyptian_vulture",
+      "result": {
+        "system": "egyptian_vulture",
+        "original_doi": "10.5441/001/1.385gk270",
+        "publication_doi": "10.1007/s10531-018-1538-6",
+        "published_study_id": "9651291",
+        "expected_taxon": "Neophron percnopterus",
+        "license_metadata": "CC0 1.0 Universal",
+        "original_movement_context": "long_distance_summer_winter_range_and_conservation_prior_art",
+        "original_checksum_and_bytes": {
+          "bytes": 122069657,
+          "md5": "578c45678d402d055000ea14e754b6da",
+          "original_source_verified": true
+        },
+        "all_years_and_seasons_source_coverage": {
+          "original_rows": 577466,
+          "valid_identified_georeferenced_fixes": 577329,
+          "missing_identity_rows": 0,
+          "invalid_timestamp_rows": 0,
+          "invalid_position_rows": 137,
+          "id_column": "individual-local-identifier",
+          "id_is_animal_not_tag": true,
+          "unique_identity_labels": 16,
+          "labels_observed_in_multiple_years": 12,
+          "identity_calendar_years": 44,
+          "source_calendar_year_counts": {
+            "2012": 3219,
+            "2013": 145376,
+            "2014": 222612,
+            "2015": 108843,
+            "2016": 84171,
+            "2017": 5635,
+            "2018": 5028,
+            "2019": 2445
+          },
+          "years_covered": 8,
+          "ten_day_calendar_season_identity_years": {
+            "autumn": 33,
+            "spring": 26,
+            "summer": 36,
+            "winter": 40
+          },
+          "same_year_spring_and_autumn": 20,
+          "same_year_spring_and_winter": 26,
+          "observed_sensor_type_counts": {
+            "gps": 577329
+          },
+          "season_threshold_days": 10,
+          "season_months_are_migration_stages": false,
+          "actual_route_stage_or_stopover": false,
+          "decision_time_environmental_information_measured": false,
+          "correction_opportunity_measured": false,
+          "biological_fitness_response_measured": false,
+          "raw_ids_and_coordinates_exported": false
+        },
+        "fixed_feb_may_3day_stationary_then_2day_north_source_gate": {
+          "schema": "payoff_b_stationary_to_northward_candidate_source_qc_v1",
+          "source_identity_field": "individual-local-identifier",
+          "classified_source_taxa": {
+            "Neophron percnopterus": {
+              "animal_years_with_geovalid_days": 29,
+              "animal_years_with_one_or_more_candidates": 18,
+              "calendar_consecutive_five_day_windows": 2372,
+              "candidate_stationary_to_northward_events": 30,
+              "distinct_animal_IDs_with_candidate_events": 9
+            }
+          },
+          "candidate_events_by_calendar_year": {
+            "2013": 1,
+            "2014": 9,
+            "2015": 12,
+            "2016": 5,
+            "2017": 1,
+            "2018": 0,
+            "2019": 2
+          },
+          "total_candidate_events": 30,
+          "total_consecutive_five_day_windows": 2372,
+          "animal_years_with_multiple_candidate_events": 6,
+          "original_source_quality": {
+            "days_with_too_few_independent_hour_bins": 46,
+            "invalid_timestamp_or_position": 137,
+            "outside_original_spring_months": 422671,
+            "valid_spring_fixes": 154658
+          },
+          "time_standard": "UTC calendar-day aggregate; no inferred precise departure instant",
+          "frozen_gate": {
+            "calendar_months": "February-May",
+            "independent_hour_bins_per_day_min": 2,
+            "consecutive_preposition_days": 3,
+            "observed_followup_days": 2,
+            "stationary_radius_max_km": 30,
+            "first_outbound_day_min_distance_km": 30,
+            "two_day_outbound_min_distance_km": 120,
+            "two_day_northward_latitude_min_degrees": 0.8,
+            "candidate_min_separation_days": 7
+          },
+          "published_source_stopovers_validated": false,
+          "actual_decision_timestamp_known": false,
+          "predecision_weather_joined": false,
+          "cue_information_causally_used": false,
+          "remaining_feasible_recourse_measured": false,
+          "bird_response_or_fitness_effect_tested": false,
+          "individual_identifiers_or_track_points_exported": false
+        },
+        "biological_source_readiness": "CANDIDATE_STAGEWISE_MIGRATION_SOURCE_GEOMETRY",
+        "source_gate_thresholds": {
+          "min_geovalid_spring_animal_years": 8,
+          "min_fixed_northward_source_events": 10,
+          "min_animal_years_with_source_events": 10
+        },
+        "actual_bird_departure_timestamp_verified": false,
+        "actual_cue_available_before_decision": false,
+        "independent_animal_cohort_overlap_verified": false,
+        "downstream_timing_fitness_endpoint_measured": false,
+        "individual_IDs_or_GPS_locations_exported": false,
+        "status": "PUBLIC_SOURCE_GPS_QC_COMPLETE"
+      }
+    }
+  },
+  "admission": {
+    "pinkfoot_goose": "SOURCE_THRESHOLD_FAILED_6_ANIMAL_YEARS_WITH_EVENTS",
+    "egyptian_vulture": "GEOMETRY_ELIGIBLE_18_ANIMAL_YEARS_WITH_EVENTS"
+  },
+  "science_boundaries": [
+    "GPS source geometry is not verified true departure or observed cue receipt",
+    "Pinkfoot remains excluded without relaxing at-least-ten-identity-years gate",
+    "Egyptian vulture may be a distinct taxon and Movebank study, but animal and route cohort independence still requires checking original deployments",
+    "Sensitive endangered-bird positions and animal identities were not exported",
+    "No information usage, recourse, seasonal mismatch or fitness effect inferred"
+  ]
+}

@@ -1,0 +1,41 @@
+name: payoff-b-predecision-nasa-weather-source
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/audit_payoff_b_predecision_weather.py"
+      - "tests/test_payoff_b_predecision_weather.py"
+      - "docs/PAYOFF_B_PREDECISION_WEATHER_SOURCE_GATE_20261019.md"
+      - ".github/workflows/payoff-b-predecision-weather-source.yml"
+
+jobs:
+  predecision-meteorology-availability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        system: [stork, curlew, white_fronted_goose]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify synthetic causal-chronology guards
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_predecision_weather.py
+      - name: Join only one day of past physical hourly weather in sample of 12 original GPS candidate event-years
+        run: |
+          python -m scripts.audit_payoff_b_predecision_weather \
+            --system ${{ matrix.system }} \
+            --out outputs/payoff_b_predecision_weather
+      - name: Archive aggregate weather availability; no locations, animal IDs or event timestamps
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-weather-source-${{ matrix.system }}
+          path: outputs/payoff_b_predecision_weather/
+          if-no-files-found: warn

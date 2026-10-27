@@ -1,0 +1,137 @@
+{
+  "schema": "payoff_b_stork_primary_and_crossguild_timing_readout_20261019",
+  "created": "2026-10-19",
+  "original_primary_stork": {
+    "source": "https://doi.org/10.5441/001/1.v8d24552",
+    "preregistration": "docs/PAYOFF_B_STORK_STAGE_PROPAGATION_PILOT_LOCK_20261019.md",
+    "run": "https://github.com/zuizui0223/payoff/actions/runs/39222907002",
+    "definition": "winter referenced Jan-Apr relative northing, year fixed-effects",
+    "n_identity_years": 53,
+    "n_animal_identities": 27,
+    "years": [
+      2012,
+      2013,
+      2014,
+      2015,
+      2016
+    ],
+    "beta_t20_to_t80": 0.8243598566365273,
+    "cluster_95pct_ci": [
+      0.5505948099671104,
+      1.1530644274575685
+    ],
+    "status": "NOT_SUPPORTED",
+    "within_individual_slope_descriptive": 0.48278945015645963,
+    "within_individual_distinct_repeats": 15,
+    "cluster_bootstrap_draws": 2500,
+    "bootstrap_invalid": 0,
+    "leave_one_animal_out_beta_range": [
+      0.7503561144299761,
+      0.9290023767444697
+    ],
+    "interpretation_ceiling": "observed-stage timing retention only; no identified feedback, cue or fitness"
+  },
+  "source_geometry_exploratory": {
+    "registration": "docs/PAYOFF_B_CROSSGUILD_TIMING_HANDOFF_CONTRACT_20261019.md",
+    "run": "https://github.com/zuizui0223/payoff/actions/runs/39224044652",
+    "definition": "Feb-May within-sample latitude-relative first20/first80 checkpoint; year FE; animal-cluster bootstrap 2000",
+    "systems": [
+      {
+        "taxon": "Ciconia ciconia",
+        "sensor": "GPS",
+        "doi": "10.5441/001/1.v8d24552",
+        "n_identity_years": 91,
+        "n_animal_identities": 36,
+        "n_observation_years": 5,
+        "beta": 0.8424047575414888,
+        "ci95": [
+          0.7313731250318612,
+          0.9262253950290167
+        ],
+        "within_animal_beta_descriptive": 0.7725574532211478,
+        "repeated_animals": 26,
+        "status": "EXPLORATORY_ESTIMATE"
+      },
+      {
+        "taxon": "Scolopax minor",
+        "sensor": "Argos Doppler Shift",
+        "doi": "10.5441/001/1.8764q39q",
+        "n_identity_years": 37,
+        "n_animal_identities": 28,
+        "n_observation_years": 4,
+        "beta": 0.347227087499612,
+        "ci95": [
+          -0.06218375189750808,
+          0.7816480555479722
+        ],
+        "within_animal_beta_descriptive": null,
+        "repeated_animals": 7,
+        "status": "EXPLORATORY_ESTIMATE"
+      },
+      {
+        "taxon": "Anser albifrons",
+        "sensor": "GPS",
+        "doi": "10.5441/001/1.31c2v92f",
+        "n_identity_years": 23,
+        "n_animal_identities": 23,
+        "n_observation_years": 4,
+        "beta": 0.03540857977125227,
+        "ci95": [
+          -0.01959809448862703,
+          0.08156130112770929
+        ],
+        "within_animal_beta_descriptive": null,
+        "repeated_animals": 0,
+        "status": "EXPLORATORY_ESTIMATE",
+        "previous_cohort_overlap_excluded": false
+      },
+      {
+        "taxon": "Numenius arquata",
+        "sensor": "GPS",
+        "doi": "10.5441/001/1.715k46g2",
+        "n_identity_years": 7,
+        "n_animal_identities": 5,
+        "n_observation_years": 2,
+        "beta": null,
+        "ci95": null,
+        "status": "NOT_ESTIMABLE_FROZEN_SAMPLE_GATE"
+      },
+      {
+        "taxon": "Anas acuta / Anas platyrhynchos",
+        "sensor": "GPS",
+        "doi": "10.5441/001/1.3fv21n7m",
+        "n_identity_years": 0,
+        "n_animal_identities": 0,
+        "n_observation_years": 0,
+        "beta": null,
+        "ci95": null,
+        "status": "NOT_ESTIMABLE_NO_STAGE_PAIRS"
+      }
+    ],
+    "exploratory_only": true,
+    "not_species_pooled": true,
+    "no_confirmatory_claim_from_posthoc_sample": true
+  },
+  "illustrative_censoring_null": {
+    "run": "https://github.com/zuizui0223/payoff/actions/runs/39223641740",
+    "type": "SYNTHETIC_NOT_FIT_TO_BIRD_DATA",
+    "n_simulated": 250000,
+    "no_behavioral_adjustment": true,
+    "unrestricted_beta": 0.9999843698783826,
+    "observed_if_t80_at_or_before_day120_beta": 0.657013400035555,
+    "observation_window_artifact_possible": true
+  },
+  "scientific_verdict": {
+    "original_primary_supported": false,
+    "cross_taxon_causal_information_actionability_supported": false,
+    "existing_V7_V8_nulls_changed": false,
+    "allowed": "observed among-study heterogeneity in year-adjusted latitude-checkpoint timing association under sampling and sensor confounding",
+    "disallowed": [
+      "observed active timing control",
+      "proof of learned route forecast uptake",
+      "environmental deadline fitness effects",
+      "general evolutionary law"
+    ],
+    "next_independent_gate": "real route-stage boundaries and independent predecision meteorological/environmental cues; sensor-specific positional uncertainty; untouched migration cohorts"
+  }
+}

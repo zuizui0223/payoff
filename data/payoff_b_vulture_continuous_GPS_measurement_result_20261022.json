@@ -1,0 +1,104 @@
+{
+  "schema": "payoff_b_continuous_fix_level_vulture_measurement_verdict_20261022",
+  "source": "https://github.com/zuizui0223/payoff/actions/runs/39781380783",
+  "date": "2026-10-22",
+  "status": "SOURCE_SAMPLING_RESOLUTION_IMPROVED_BUT_TRUE_DECISION_NOT_OBSERVED",
+  "source_protocol": "docs/PAYOFF_B_VULTURE_CONTINUOUS_EXIT_PRELOCK_20261022.md",
+  "original_source_receipt": {
+    "schema": "payoff_b_new_vulture_fix_level_source_bracket_audit_20261022",
+    "method_status": "POST_SOURCE_GEOMETRY_MEASUREMENT_DIAGNOSTIC_NOT_HYPOTHESIS_TEST",
+    "result": {
+      "status": "CONTINUOUS_FIX_LEVEL_SOURCE_RESOLUTION_AUDITED",
+      "original_source_doi": "10.5441/001/1.385gk270",
+      "source_taxon": "Neophron percnopterus",
+      "original_MD5_and_bytes": {
+        "bytes": 122069657,
+        "md5": "578c45678d402d055000ea14e754b6da",
+        "original_source_verified": true
+      },
+      "source_original_animal_years": 18,
+      "source_scanned_valid_fixes_in_locked_windows": 6240,
+      "source_parse_errors_in_timing_scan": 137,
+      "source_event_sampling_diagnostic": {
+        "original_candidate_animal_years": 18,
+        "all_predeclared_raw_C30_threshold_status_counts": {
+          "AT_LEAST_ONE_SOURCE_GPS_THRESHOLD_CROSSING": 18
+        },
+        "old_UTC_day_boundary_original_source_bracket_status_counts": {
+          "BRACKET_WITHIN_24H": 15,
+          "LAST_SOURCE_FIX_OUTSIDE": 3
+        },
+        "old_bracket_under24h_width_summary": {
+          "min": 7.24,
+          "q25": 9.752500000000001,
+          "median": 15.999722222222223,
+          "q75": 16.009305555555557,
+          "max": 18
+        },
+        "new_fix_to_fix_first_source_crossing_width_summary": {
+          "min": 0.01638888888888889,
+          "q25": 1,
+          "median": 2,
+          "q75": 3.5029861111111114,
+          "max": 7
+        },
+        "first_sustained_12h_sampled_outside_width_summary": {
+          "min": 0.01638888888888889,
+          "q25": 0.02763888888888889,
+          "median": 1.9929166666666667,
+          "q75": 2.006180555555556,
+          "max": 7
+        },
+        "raw_first_crossings_on_original_anchor_day": 9,
+        "all_raw_threshold_crossings_in_windows": 24,
+        "first_crossing_has_sampled_return_within12h": 6,
+        "first_crossing_radial_speed_lower_bound_over160kmh": 2,
+        "original_distinct_animal_years_with_sustained_12h_outside_evidence": 12,
+        "new_raw_fix_to_fix_brackets_under_hours": {
+          "1": 6,
+          "3": 13,
+          "6": 17,
+          "12": 18,
+          "24": 18
+        },
+        "new_sustained_outside_brackets_under_hours": {
+          "1": 5,
+          "3": 10,
+          "6": 11,
+          "12": 12,
+          "24": 12
+        },
+        "GPS_position_crossing_equals_true_behavioral_departure": false,
+        "12h_no_observed_return_equals_biological_site_departure_proven": false,
+        "cue_reception_and_future_route_info_measured": false,
+        "fixed_source_case_gate_modified": false,
+        "original_animal_identifiers_event_times_positions_exported": false
+      },
+      "GPS_fix_location_is_exact_behavioral_commitment": false,
+      "source_hourly_weather_reanalysis_tested": false,
+      "fitness_or_recourse_tested": false,
+      "raw_sensitive_tracking_data_exported": false
+    }
+  },
+  "old_dayboundary_median_hours": 15.999722222222223,
+  "new_first_crossing_median_hours": 2,
+  "new_raw_crossings_under_6h": 17,
+  "first_12h_sampled_outside_evidence_animalyears": 12,
+  "sampled_sustained_6h_animalyears": 11,
+  "raw_first_crossings_on_original_anchor_day": 9,
+  "return_excursions_first_12h": 6,
+  "implausible_radial_speed_first_crossings": 2,
+  "source_methodology_relevant": true,
+  "cue_effects_tested": false,
+  "actual_behavioral_departure_observed": false,
+  "cohort_confirmatory_independence_verified": false,
+  "limits": [
+    "The new fix-to-fix window is a threshold-crossing measurement, not behavioral commitment; some crossings are short nonmigration excursions.",
+    "Twelve source animal-years show sampled outward persistence, but animal IDs can repeat across years and are fewer independent units.",
+    "A 160 km/h radial-lower-bound flag marks two first crossing candidates for possible GPS/speed anomalies, not necessarily physical impossibility.",
+    "The earlier median 16h UTC boundary comparison was a measurement algorithm artifact; the source GPS has useful sub-day fixes.",
+    "No negative solar anomaly transferred from stork to this independent bird; new monitoring capability cannot repair that null replication.",
+    "Species-threatened locations, exact GPS points and event times were kept internal."
+  ],
+  "prior_original_vulture_solar_transfer_not_supported": true
+}

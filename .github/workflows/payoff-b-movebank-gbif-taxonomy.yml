@@ -1,0 +1,46 @@
+name: payoff-b-movebank-gbif-taxonomy
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/classify_movebank_taxa_gbif.py"
+      - "tests/test_movebank_taxa_gbif.py"
+      - "docs/PAYOFF_B_MOVEBANK_GBIF_SOURCE_GATE_20261019.md"
+      - ".github/workflows/payoff-b-movebank-gbif-taxonomy.yml"
+permissions:
+  contents: read
+  actions: read
+jobs:
+  all-source-taxonomic-class:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run offline classification tests
+        run: |
+          python -m pip install pytest
+          pytest -q tests/test_movebank_taxa_gbif.py
+      - name: Restore original pinned metadata archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs/stage3 outputs/stage2
+          gh run download 39211112610 --repo "$GITHUB_REPOSITORY" --name payoff-b-movebank-complete-taxonomic-source-metadata --dir outputs/stage3
+          gh run download 39204043835 --repo "$GITHUB_REPOSITORY" --name payoff-b-movebank-full-stage2-metadata --dir outputs/stage2
+      - name: Resolve all 268 original publisher names against GBIF Backbone
+        run: |
+          python -m scripts.classify_movebank_taxa_gbif \
+            --parents outputs/stage3/payoff_b_movebank_taxon_census/movebank_taxon_sensor_source_registry.csv \
+            --children outputs/stage2/payoff_b_independent_stage2/movebank_child_file_metadata.csv \
+            --out outputs/payoff_b_gbif_taxon
+      - name: Save complete parent taxonomy and sensor-hint results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-movebank-gbif-class-source
+          path: outputs/payoff_b_gbif_taxon/
+          if-no-files-found: warn

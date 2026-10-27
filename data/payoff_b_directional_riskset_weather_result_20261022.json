@@ -1,0 +1,476 @@
+{
+  "schema": "payoff_b_source_specific_predecision_northwind_solar_v1",
+  "date": "2026-10-22",
+  "source": "https://github.com/zuizui0223/payoff/actions/runs/39723853513",
+  "prereading_protocol": "docs/PAYOFF_B_DIRECTIONAL_WEATHER_LOCK_20261022.md",
+  "classification": "POST_TEMPERATURE_EXPLORATORY_NO_CUE_USE_CAUSAL_IDENTIFICATION",
+  "source_sample": "exact same 16 case/32 stay from fixed all-stationary riskset for each source; original GPS/MD5 revalidated",
+  "completed_weather_days": 144,
+  "variables": {
+    "V10M": "northward component of 10m surface wind, positive north",
+    "ALLSKY_SFC_SW_DWN": "all sky downwelling shortwave irradiance W/m²"
+  },
+  "by_system": {
+    "stork": {
+      "selected_case_days": 16,
+      "selected_stay_days": 32,
+      "northwind_10m_prior_day_case_minus_stay_m_s": -2.0152473958333332,
+      "northwind_10m_anomaly_case_minus_stay_m_s": -2.296287202380952,
+      "incoming_shortwave_prior_day_case_minus_stay_w_m2": -5.5702473958333485,
+      "incoming_shortwave_anomaly_case_minus_stay_w_m2": -0.7782273065476142,
+      "monthly_northwind_anomaly_signs": [
+        {
+          "month": 2,
+          "difference": -1.589021164021164
+        },
+        {
+          "month": 3,
+          "difference": -3.1818068783068783
+        },
+        {
+          "month": 4,
+          "difference": -2.4431706349206346
+        }
+      ],
+      "weather_missing": 0
+    },
+    "white_fronted_goose": {
+      "selected_case_days": 16,
+      "selected_stay_days": 32,
+      "northwind_10m_prior_day_case_minus_stay_m_s": 1.0267838541666667,
+      "northwind_10m_anomaly_case_minus_stay_m_s": 2.0213392857142853,
+      "incoming_shortwave_prior_day_case_minus_stay_w_m2": -8.396796875000007,
+      "incoming_shortwave_anomaly_case_minus_stay_w_m2": 1.4018656994047678,
+      "monthly_northwind_anomaly_signs": [
+        {
+          "month": 3,
+          "difference": 2.5160238095238094
+        },
+        {
+          "month": 4,
+          "difference": 1.6458095238095238
+        },
+        {
+          "month": 5,
+          "difference": 1.9499325396825395
+        }
+      ],
+      "weather_missing": 0
+    },
+    "curlew": {
+      "selected_case_days": 16,
+      "selected_stay_days": 32,
+      "northwind_10m_prior_day_case_minus_stay_m_s": 0.4963671875,
+      "northwind_10m_anomaly_case_minus_stay_m_s": 0.48564732142857125,
+      "incoming_shortwave_prior_day_case_minus_stay_w_m2": 17.055976562500007,
+      "incoming_shortwave_anomaly_case_minus_stay_w_m2": 8.544017857142862,
+      "monthly_northwind_anomaly_signs": [
+        {
+          "month": 4,
+          "difference": 0.34726190476190455
+        },
+        {
+          "month": 5,
+          "difference": 0.624032738095238
+        }
+      ],
+      "weather_missing": 0
+    }
+  },
+  "original_source_receipts": {
+    "stork": {
+      "schema": "payoff_b_riskset_northwind_solar_source_v1",
+      "source": "stork",
+      "interpretation": "POST_TEMPERATURE_EXPLORATORY_PHYSICAL_CUE_PROXIES_ONLY",
+      "meteorological_predictors": [
+        "V10M",
+        "ALLSKY_SFC_SW_DWN"
+      ],
+      "weather_time": "UTC day before source anchor, previous 7-day baseline",
+      "result": {
+        "status": "SOURCE_NORTHWIND_SOLAR_DESCRIPTIVE_COMPLETE",
+        "source_doi": "10.5441/001/1.v8d24552",
+        "taxon": "Ciconia ciconia",
+        "sensor": "GPS",
+        "original_checksum": {
+          "verified": true,
+          "bytes": 273153305,
+          "md5": "bda2ebd2441316b2e2fd9e9578d7d0b4",
+          "bitstream_uuid": "ed3529e6-ce20-4237-8875-9d35fdbf9a0f"
+        },
+        "sample": {
+          "selected_riskday_outcomes": {
+            "NORTHWARD_CANDIDATE": 16,
+            "STAYED_TWO_DAYS": 32
+          },
+          "selected_month_distribution": {
+            "NORTHWARD_CANDIDATE": {
+              "2": 5,
+              "3": 5,
+              "4": 5,
+              "5": 1
+            },
+            "STAYED_TWO_DAYS": {
+              "2": 9,
+              "3": 9,
+              "4": 9,
+              "5": 5
+            }
+          },
+          "at_most_one_sample_day_per_animal_year_and_status": true,
+          "selection_uses_weather": false,
+          "sample_is_outcome_stratified": true,
+          "sampled_case_fraction_is_population_probability": false
+        },
+        "unique_weather_queries": 48,
+        "summary": {
+          "group_means": {
+            "NORTHWARD_CANDIDATE": {
+              "n_weather_complete_days": 16,
+              "northwind_prior_day": {
+                "mean": -2.227265625,
+                "median": -2.734583333333333
+              },
+              "northwind_anomaly": {
+                "mean": -2.0327269345238093,
+                "median": -1.3727976190476192
+              },
+              "shortwave_prior_day": {
+                "mean": 211.67361979166665,
+                "median": 225.42833333333334
+              },
+              "shortwave_anomaly": {
+                "mean": 0.05223958333333423,
+                "median": 5.653869047619054
+              }
+            },
+            "STAYED_TWO_DAYS": {
+              "n_weather_complete_days": 32,
+              "northwind_prior_day": {
+                "mean": -0.2120182291666667,
+                "median": -0.001041666666666656
+              },
+              "northwind_anomaly": {
+                "mean": 0.26356026785714276,
+                "median": 0.21238095238095245
+              },
+              "shortwave_prior_day": {
+                "mean": 217.2438671875,
+                "median": 230.19104166666665
+              },
+              "shortwave_anomaly": {
+                "mean": 0.8304668898809484,
+                "median": 15.046160714285705
+              }
+            }
+          },
+          "case_minus_stay_group_mean_differences": {
+            "northwind_prior_day": -2.0152473958333332,
+            "northwind_anomaly": -2.296287202380952,
+            "shortwave_prior_day": -5.5702473958333485,
+            "shortwave_anomaly": -0.7782273065476142
+          },
+          "within_month_descriptive_differences": [
+            {
+              "month": 2,
+              "cases": 5,
+              "stays": 9,
+              "northwind_prior_day_case_minus_stay": -0.764888888888889,
+              "northwind_anomaly_case_minus_stay": -1.589021164021164,
+              "shortwave_prior_day_case_minus_stay": 24.355138888888888,
+              "shortwave_anomaly_case_minus_stay": 42.225158730158725
+            },
+            {
+              "month": 3,
+              "cases": 5,
+              "stays": 9,
+              "northwind_prior_day_case_minus_stay": -2.9472314814814817,
+              "northwind_anomaly_case_minus_stay": -3.1818068783068783,
+              "shortwave_prior_day_case_minus_stay": -76.12229629629627,
+              "shortwave_anomaly_case_minus_stay": -35.495907407407394
+            },
+            {
+              "month": 4,
+              "cases": 5,
+              "stays": 9,
+              "northwind_prior_day_case_minus_stay": -2.3553796296296294,
+              "northwind_anomaly_case_minus_stay": -2.4431706349206346,
+              "shortwave_prior_day_case_minus_stay": 14.366527777777804,
+              "shortwave_anomaly_case_minus_stay": -13.33110978835979
+            }
+          ],
+          "weather_missing": {},
+          "northward_wind_10m_is_route_specific_tailwind": false,
+          "solar_radiation_is_observed_updraft": false,
+          "actual_animal_environmental_forecast_measured": false,
+          "individual_observations_exported": false
+        },
+        "true_direction_of_intended_route_not_observed": true,
+        "physiological_fitness_effect_not_tested": true
+      }
+    },
+    "white_fronted_goose": {
+      "schema": "payoff_b_riskset_northwind_solar_source_v1",
+      "source": "white_fronted_goose",
+      "interpretation": "POST_TEMPERATURE_EXPLORATORY_PHYSICAL_CUE_PROXIES_ONLY",
+      "meteorological_predictors": [
+        "V10M",
+        "ALLSKY_SFC_SW_DWN"
+      ],
+      "weather_time": "UTC day before source anchor, previous 7-day baseline",
+      "result": {
+        "status": "SOURCE_NORTHWIND_SOLAR_DESCRIPTIVE_COMPLETE",
+        "source_doi": "10.5441/001/1.31c2v92f",
+        "taxon": "Anser albifrons",
+        "sensor": "GPS",
+        "original_checksum": {
+          "size_bytes": 16806763,
+          "md5": "0e0abd1126c53f4924907c3fb6a72d02",
+          "bitstream_uuid": "0a262590-49e2-4e47-a290-dbfd6649579f",
+          "bitstream_url": "https://datarepository.movebank.org/server/api/core/bitstreams/0a262590-49e2-4e47-a290-dbfd6649579f/content"
+        },
+        "sample": {
+          "selected_riskday_outcomes": {
+            "NORTHWARD_CANDIDATE": 16,
+            "STAYED_TWO_DAYS": 32
+          },
+          "selected_month_distribution": {
+            "NORTHWARD_CANDIDATE": {
+              "2": 1,
+              "3": 5,
+              "4": 5,
+              "5": 5
+            },
+            "STAYED_TWO_DAYS": {
+              "2": 3,
+              "3": 10,
+              "4": 10,
+              "5": 9
+            }
+          },
+          "at_most_one_sample_day_per_animal_year_and_status": true,
+          "selection_uses_weather": false,
+          "sample_is_outcome_stratified": true,
+          "sampled_case_fraction_is_population_probability": false
+        },
+        "unique_weather_queries": 48,
+        "summary": {
+          "group_means": {
+            "NORTHWARD_CANDIDATE": {
+              "n_weather_complete_days": 16,
+              "northwind_prior_day": {
+                "mean": 1.142578125,
+                "median": -0.13270833333333332
+              },
+              "northwind_anomaly": {
+                "mean": 1.1506547619047618,
+                "median": 0.27991071428571423
+              },
+              "shortwave_prior_day": {
+                "mean": 156.99255208333332,
+                "median": 163.74916666666667
+              },
+              "shortwave_anomaly": {
+                "mean": 9.514066220238101,
+                "median": 2.765178571428585
+              }
+            },
+            "STAYED_TWO_DAYS": {
+              "n_weather_complete_days": 32,
+              "northwind_prior_day": {
+                "mean": 0.11579427083333337,
+                "median": 0.5864583333333333
+              },
+              "northwind_anomaly": {
+                "mean": -0.8706845238095238,
+                "median": -0.6005059523809524
+              },
+              "shortwave_prior_day": {
+                "mean": 165.38934895833333,
+                "median": 164.62104166666666
+              },
+              "shortwave_anomaly": {
+                "mean": 8.112200520833333,
+                "median": -2.2755654761904793
+              }
+            }
+          },
+          "case_minus_stay_group_mean_differences": {
+            "northwind_prior_day": 1.0267838541666667,
+            "northwind_anomaly": 2.0213392857142853,
+            "shortwave_prior_day": -8.396796875000007,
+            "shortwave_anomaly": 1.4018656994047678
+          },
+          "within_month_descriptive_differences": [
+            {
+              "month": 3,
+              "cases": 5,
+              "stays": 10,
+              "northwind_prior_day_case_minus_stay": 1.6688333333333332,
+              "northwind_anomaly_case_minus_stay": 2.5160238095238094,
+              "shortwave_prior_day_case_minus_stay": 11.784375000000011,
+              "shortwave_anomaly_case_minus_stay": 24.194083333333335
+            },
+            {
+              "month": 4,
+              "cases": 5,
+              "stays": 10,
+              "northwind_prior_day_case_minus_stay": 1.8403333333333332,
+              "northwind_anomaly_case_minus_stay": 1.6458095238095238,
+              "shortwave_prior_day_case_minus_stay": -62.22854166666667,
+              "shortwave_anomaly_case_minus_stay": -26.505595238095232
+            },
+            {
+              "month": 5,
+              "cases": 5,
+              "stays": 9,
+              "northwind_prior_day_case_minus_stay": 0.15852777777777774,
+              "northwind_anomaly_case_minus_stay": 1.9499325396825395,
+              "shortwave_prior_day_case_minus_stay": 11.849342592592592,
+              "shortwave_anomaly_case_minus_stay": 9.95937698412699
+            }
+          ],
+          "weather_missing": {},
+          "northward_wind_10m_is_route_specific_tailwind": false,
+          "solar_radiation_is_observed_updraft": false,
+          "actual_animal_environmental_forecast_measured": false,
+          "individual_observations_exported": false
+        },
+        "true_direction_of_intended_route_not_observed": true,
+        "physiological_fitness_effect_not_tested": true
+      }
+    },
+    "curlew": {
+      "schema": "payoff_b_riskset_northwind_solar_source_v1",
+      "source": "curlew",
+      "interpretation": "POST_TEMPERATURE_EXPLORATORY_PHYSICAL_CUE_PROXIES_ONLY",
+      "meteorological_predictors": [
+        "V10M",
+        "ALLSKY_SFC_SW_DWN"
+      ],
+      "weather_time": "UTC day before source anchor, previous 7-day baseline",
+      "result": {
+        "status": "SOURCE_NORTHWIND_SOLAR_DESCRIPTIVE_COMPLETE",
+        "source_doi": "10.5441/001/1.715k46g2",
+        "taxon": "Numenius arquata",
+        "sensor": "GPS",
+        "original_checksum": {
+          "bytes": 159155287,
+          "md5": "b847a97e4ebaedd3e2fd46e920c4f08e",
+          "original_source_verified": true
+        },
+        "sample": {
+          "selected_riskday_outcomes": {
+            "NORTHWARD_CANDIDATE": 16,
+            "STAYED_TWO_DAYS": 32
+          },
+          "selected_month_distribution": {
+            "NORTHWARD_CANDIDATE": {
+              "4": 8,
+              "5": 8
+            },
+            "STAYED_TWO_DAYS": {
+              "4": 16,
+              "5": 16
+            }
+          },
+          "at_most_one_sample_day_per_animal_year_and_status": true,
+          "selection_uses_weather": false,
+          "sample_is_outcome_stratified": true,
+          "sampled_case_fraction_is_population_probability": false
+        },
+        "unique_weather_queries": 48,
+        "summary": {
+          "group_means": {
+            "NORTHWARD_CANDIDATE": {
+              "n_weather_complete_days": 16,
+              "northwind_prior_day": {
+                "mean": -0.6238020833333333,
+                "median": -0.3641666666666667
+              },
+              "northwind_anomaly": {
+                "mean": -0.3155245535714287,
+                "median": 0.16541666666666655
+              },
+              "shortwave_prior_day": {
+                "mean": 178.30888020833333,
+                "median": 171.929375
+              },
+              "shortwave_anomaly": {
+                "mean": -15.751618303571426,
+                "median": -25.092678571428564
+              }
+            },
+            "STAYED_TWO_DAYS": {
+              "n_weather_complete_days": 32,
+              "northwind_prior_day": {
+                "mean": -1.1201692708333333,
+                "median": -1.5879166666666666
+              },
+              "northwind_anomaly": {
+                "mean": -0.801171875,
+                "median": -1.004047619047619
+              },
+              "shortwave_prior_day": {
+                "mean": 161.25290364583333,
+                "median": 160.81166666666667
+              },
+              "shortwave_anomaly": {
+                "mean": -24.295636160714288,
+                "median": -23.2389880952381
+              }
+            }
+          },
+          "case_minus_stay_group_mean_differences": {
+            "northwind_prior_day": 0.4963671875,
+            "northwind_anomaly": 0.48564732142857125,
+            "shortwave_prior_day": 17.055976562500007,
+            "shortwave_anomaly": 8.544017857142862
+          },
+          "within_month_descriptive_differences": [
+            {
+              "month": 4,
+              "cases": 8,
+              "stays": 16,
+              "northwind_prior_day_case_minus_stay": 0.04226562499999975,
+              "northwind_anomaly_case_minus_stay": 0.34726190476190455,
+              "shortwave_prior_day_case_minus_stay": 14.052890625000003,
+              "shortwave_anomaly_case_minus_stay": 8.052801339285713
+            },
+            {
+              "month": 5,
+              "cases": 8,
+              "stays": 16,
+              "northwind_prior_day_case_minus_stay": 0.95046875,
+              "northwind_anomaly_case_minus_stay": 0.624032738095238,
+              "shortwave_prior_day_case_minus_stay": 20.05906250000001,
+              "shortwave_anomaly_case_minus_stay": 9.035234375000009
+            }
+          ],
+          "weather_missing": {},
+          "northward_wind_10m_is_route_specific_tailwind": false,
+          "solar_radiation_is_observed_updraft": false,
+          "actual_animal_environmental_forecast_measured": false,
+          "individual_observations_exported": false
+        },
+        "true_direction_of_intended_route_not_observed": true,
+        "physiological_fitness_effect_not_tested": true
+      }
+    }
+  },
+  "no_species_pooled_model": true,
+  "actual_altitude_adjusted_wind": false,
+  "true_route_relative_tailwind": false,
+  "thermal_updraft_measured": false,
+  "cue_reliability_or_learning_measured": false,
+  "prospective_independent_cohorts_verified": false,
+  "signed_timing_action_or_fitness_tested": false,
+  "notes": [
+    "The selected 144 weather records come from outcome-stratified historical GPS riskday samples, not an independent random prospective decision study.",
+    "Northward 10m wind component is physically signed but not track-bearing-aligned flight-altitude wind.",
+    "Between-day meteorology is not a forecast known to the bird and bird cognition cannot be inferred from the atmospheric field.",
+    "Within-month descriptive signs can persist while site, year, individual readiness and cohort reuse remain uncontrolled.",
+    "Solar radiation is not a measurement of thermal lift and its contrast has no universal direction in this sample.",
+    "After previous nulls and source descriptions were opened, no novel PAYOFF-B causal adaptation effect is registered or confirmed."
+  ]
+}

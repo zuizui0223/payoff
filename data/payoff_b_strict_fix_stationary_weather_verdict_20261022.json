@@ -1,0 +1,990 @@
+{
+  "schema": "payoff_b_all_fixed_GPS_strict_stationary_weather_measurement_sensitivity_20261022",
+  "status": "SOURCE_REANALYSIS_COMPLETE_THREE_TAXA_VULTURE_NOT_ESTIMABLE",
+  "source_run": "https://github.com/zuizui0223/payoff/actions/runs/39784335141",
+  "source_mask_run": "https://github.com/zuizui0223/payoff/actions/runs/39783671804",
+  "fix_integrity_run": "https://github.com/zuizui0223/payoff/actions/runs/39783087833",
+  "classification": "POST_OUTCOME_OBSERVATIONAL_MEASUREMENT_SENSITIVITY_ONLY",
+  "original_before_clean_climate": {
+    "stork_solar_wm2": -17.098786065759636,
+    "goose_temp_c": 1.0368454527682056,
+    "goose_wind10m_mps": -0.4695,
+    "curlew_temp_c": 0.339625486796959,
+    "vulture_solar_wm2": 2.911051640187413
+  },
+  "original_source_rechecks": {
+    "stork": {
+      "schema": "payoff_b_4guild_strict_fix_source_weather_sensitivity_v1",
+      "system": "stork",
+      "science": "POST_OUTCOME_MEASUREMENT_SENSITIVITY_NOT_CONFIRMATORY",
+      "result": {
+        "status": "STRICT_SOURCE_WEATHER_SENSITIVITY_COMPLETE",
+        "source_doi": "10.5441/001/1.v8d24552",
+        "source_taxon": "Ciconia ciconia",
+        "original_CC0_checksum": {
+          "verified": true,
+          "bytes": 273153305,
+          "md5": "bda2ebd2441316b2e2fd9e9578d7d0b4",
+          "bitstream_uuid": "ed3529e6-ce20-4237-8875-9d35fdbf9a0f"
+        },
+        "original_source_riskday_n": 1633,
+        "strict_all_fix_stable_riskday_n": 1110,
+        "strict_source_case_stay_counts": {
+          "CENSORED": 181,
+          "NORTHWARD_CANDIDATE": 85,
+          "OTHER_MOVEMENT": 128,
+          "STAYED_TWO_DAYS": 716
+        },
+        "weather_complete_by_class": {
+          "NORTHWARD_CANDIDATE": 85,
+          "STAYED_TWO_DAYS": 716
+        },
+        "public_weather_batch_n": 190,
+        "public_weather_errors": {},
+        "matched_source_strata": {
+          "matched_strata_count": 36,
+          "case_risk_days_in_matched_strata": 47,
+          "distinct_case_animals_with_instrumental_overlap": 24,
+          "private_grid_ids_or_individual_ids_exported": false
+        },
+        "strict_fix_source_case_weighted_weather_contrasts": {
+          "T2M_anomaly": -0.47432163478995965,
+          "WS10M_anomaly": 0.14056790088189058,
+          "V10M_anomaly": -0.1917927704461058,
+          "ALLSKY_SFC_SW_DWN_anomaly": -19.643112836451664
+        },
+        "post_outcome_weather_block_sensitivity": {
+          "grid_half_degree": {
+            "weather_resampling_unit": "grid_half_degree",
+            "n_distinct_weather_blocks": 36,
+            "weather_block_effective_case_weight_n": 27.962025316455698,
+            "largest_single_block_case_weight_fraction": 0.0851063829787234,
+            "case_weight_total": 47,
+            "original_case_weighted_contrast": {
+              "T2M_anomaly": -0.47432163478995965,
+              "WS10M_anomaly": 0.14056790088189058,
+              "V10M_anomaly": -0.1917927704461058,
+              "ALLSKY_SFC_SW_DWN_anomaly": -19.643112836451664
+            },
+            "bootstrap_requested": 3000,
+            "sample_validity": "EXPLORATORY_NOT_CONFIRMATORY",
+            "resampling_accounts_for_between_block_weather_dependence": false,
+            "resampling_keeps_birds_within_same_block_together": true,
+            "source_weather_blocks_independent_in_nature": false,
+            "private_block_locations_exported": false,
+            "status": "DESCRIPTIVE_BLOCK_SENSITIVITY_ESTIMABLE",
+            "bootstrap_completed": 3000,
+            "bootstrap_interval_95pct_descriptive": {
+              "T2M_anomaly": [
+                -1.323618889880952,
+                0.3712133524289417
+              ],
+              "WS10M_anomaly": [
+                -0.25857322286058887,
+                0.5717214557795984
+              ],
+              "V10M_anomaly": [
+                -1.1819397881979907,
+                0.8470331863029241
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -35.29743749933508,
+                -1.7977541316783274
+              ]
+            },
+            "leave_one_weather_block_out_range": {
+              "T2M_anomaly": [
+                -0.6719539540451192,
+                -0.25364945020785185
+              ],
+              "WS10M_anomaly": [
+                0.08242807264019256,
+                0.25658064737059094
+              ],
+              "V10M_anomaly": [
+                -0.4455838359635351,
+                0.059635144595452494
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -23.981936899024113,
+                -16.51903936101493
+              ]
+            },
+            "leave_one_weather_block_sign_consistent": {
+              "T2M_anomaly": true,
+              "WS10M_anomaly": true,
+              "V10M_anomaly": false,
+              "ALLSKY_SFC_SW_DWN_anomaly": true
+            }
+          },
+          "weather_block_2_degree": {
+            "weather_resampling_unit": "weather_block_2_degree",
+            "n_distinct_weather_blocks": 36,
+            "weather_block_effective_case_weight_n": 27.962025316455698,
+            "largest_single_block_case_weight_fraction": 0.0851063829787234,
+            "case_weight_total": 47,
+            "original_case_weighted_contrast": {
+              "T2M_anomaly": -0.47432163478995965,
+              "WS10M_anomaly": 0.14056790088189058,
+              "V10M_anomaly": -0.1917927704461058,
+              "ALLSKY_SFC_SW_DWN_anomaly": -19.643112836451664
+            },
+            "bootstrap_requested": 3000,
+            "sample_validity": "EXPLORATORY_NOT_CONFIRMATORY",
+            "resampling_accounts_for_between_block_weather_dependence": false,
+            "resampling_keeps_birds_within_same_block_together": true,
+            "source_weather_blocks_independent_in_nature": false,
+            "private_block_locations_exported": false,
+            "status": "DESCRIPTIVE_BLOCK_SENSITIVITY_ESTIMABLE",
+            "bootstrap_completed": 3000,
+            "bootstrap_interval_95pct_descriptive": {
+              "T2M_anomaly": [
+                -1.294249955680878,
+                0.3847717733626848
+              ],
+              "WS10M_anomaly": [
+                -0.26237947709558634,
+                0.5585097743252467
+              ],
+              "V10M_anomaly": [
+                -1.2245127478967248,
+                0.808362434179475
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -36.32947813477275,
+                -1.8924378727669602
+              ]
+            },
+            "leave_one_weather_block_out_range": {
+              "T2M_anomaly": [
+                -0.6719539540451192,
+                -0.25364945020785185
+              ],
+              "WS10M_anomaly": [
+                0.08242807264019256,
+                0.25658064737059094
+              ],
+              "V10M_anomaly": [
+                -0.4455838359635351,
+                0.059635144595452494
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -23.981936899024113,
+                -16.51903936101493
+              ]
+            },
+            "leave_one_weather_block_sign_consistent": {
+              "T2M_anomaly": true,
+              "WS10M_anomaly": true,
+              "V10M_anomaly": false,
+              "ALLSKY_SFC_SW_DWN_anomaly": true
+            }
+          },
+          "weather_episode_year_month": {
+            "weather_resampling_unit": "weather_episode_year_month",
+            "n_distinct_weather_blocks": 13,
+            "weather_block_effective_case_weight_n": 7.750877192982456,
+            "largest_single_block_case_weight_fraction": 0.2127659574468085,
+            "case_weight_total": 47,
+            "original_case_weighted_contrast": {
+              "T2M_anomaly": -0.47432163478995965,
+              "WS10M_anomaly": 0.14056790088189058,
+              "V10M_anomaly": -0.1917927704461058,
+              "ALLSKY_SFC_SW_DWN_anomaly": -19.643112836451664
+            },
+            "bootstrap_requested": 3000,
+            "sample_validity": "EXPLORATORY_NOT_CONFIRMATORY",
+            "resampling_accounts_for_between_block_weather_dependence": false,
+            "resampling_keeps_birds_within_same_block_together": true,
+            "source_weather_blocks_independent_in_nature": false,
+            "private_block_locations_exported": false,
+            "status": "DESCRIPTIVE_BLOCK_SENSITIVITY_ESTIMABLE",
+            "bootstrap_completed": 3000,
+            "bootstrap_interval_95pct_descriptive": {
+              "T2M_anomaly": [
+                -1.4677364615616648,
+                0.3880279534269991
+              ],
+              "WS10M_anomaly": [
+                -0.16566548576688298,
+                0.6836152042247187
+              ],
+              "V10M_anomaly": [
+                -1.301548999382035,
+                0.6241280947219913
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -35.05261108468138,
+                -3.496374386608617
+              ]
+            },
+            "leave_one_weather_block_out_range": {
+              "T2M_anomaly": [
+                -0.9617766454796526,
+                -0.24223030183058364
+              ],
+              "WS10M_anomaly": [
+                0.05277373958017748,
+                0.30008432196966034
+              ],
+              "V10M_anomaly": [
+                -0.5739825797043842,
+                0.029714923297254316
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -22.196997216484434,
+                -11.372995327641947
+              ]
+            },
+            "leave_one_weather_block_sign_consistent": {
+              "T2M_anomaly": true,
+              "WS10M_anomaly": true,
+              "V10M_anomaly": false,
+              "ALLSKY_SFC_SW_DWN_anomaly": true
+            }
+          }
+        },
+        "selection_policy": "All original prior-3day GPS fixes <=30km; no source outcome reclassification",
+        "individual_perceived_weather_or_fitness_observed": false,
+        "causal_migration_effect_estimated": false,
+        "raw_animal_dates_sites_or_IDs_exported": false
+      }
+    },
+    "white_fronted_goose": {
+      "schema": "payoff_b_4guild_strict_fix_source_weather_sensitivity_v1",
+      "system": "white_fronted_goose",
+      "science": "POST_OUTCOME_MEASUREMENT_SENSITIVITY_NOT_CONFIRMATORY",
+      "result": {
+        "status": "STRICT_SOURCE_WEATHER_SENSITIVITY_COMPLETE",
+        "source_doi": "10.5441/001/1.31c2v92f",
+        "source_taxon": "Anser albifrons",
+        "original_CC0_checksum": {
+          "size_bytes": 16806763,
+          "md5": "0e0abd1126c53f4924907c3fb6a72d02",
+          "bitstream_uuid": "0a262590-49e2-4e47-a290-dbfd6649579f",
+          "bitstream_url": "https://datarepository.movebank.org/server/api/core/bitstreams/0a262590-49e2-4e47-a290-dbfd6649579f/content"
+        },
+        "original_source_riskday_n": 2008,
+        "strict_all_fix_stable_riskday_n": 1790,
+        "strict_source_case_stay_counts": {
+          "CENSORED": 141,
+          "NORTHWARD_CANDIDATE": 93,
+          "OTHER_MOVEMENT": 232,
+          "STAYED_TWO_DAYS": 1324
+        },
+        "weather_complete_by_class": {
+          "NORTHWARD_CANDIDATE": 93,
+          "STAYED_TWO_DAYS": 1324
+        },
+        "public_weather_batch_n": 246,
+        "public_weather_errors": {},
+        "matched_source_strata": {
+          "matched_strata_count": 69,
+          "case_risk_days_in_matched_strata": 73,
+          "distinct_case_animals_with_instrumental_overlap": 41,
+          "private_grid_ids_or_individual_ids_exported": false
+        },
+        "strict_fix_source_case_weighted_weather_contrasts": {
+          "T2M_anomaly": 1.5408414184985917,
+          "WS10M_anomaly": -0.6494699442584982,
+          "V10M_anomaly": 0.08530377670156879,
+          "ALLSKY_SFC_SW_DWN_anomaly": 1.6076689345909847
+        },
+        "post_outcome_weather_block_sensitivity": {
+          "grid_half_degree": {
+            "weather_resampling_unit": "grid_half_degree",
+            "n_distinct_weather_blocks": 69,
+            "weather_block_effective_case_weight_n": 65.79012345679013,
+            "largest_single_block_case_weight_fraction": 0.0273972602739726,
+            "case_weight_total": 73,
+            "original_case_weighted_contrast": {
+              "T2M_anomaly": 1.5408414184985917,
+              "WS10M_anomaly": -0.6494699442584982,
+              "V10M_anomaly": 0.08530377670156879,
+              "ALLSKY_SFC_SW_DWN_anomaly": 1.6076689345909847
+            },
+            "bootstrap_requested": 3000,
+            "sample_validity": "EXPLORATORY_NOT_CONFIRMATORY",
+            "resampling_accounts_for_between_block_weather_dependence": false,
+            "resampling_keeps_birds_within_same_block_together": true,
+            "source_weather_blocks_independent_in_nature": false,
+            "private_block_locations_exported": false,
+            "status": "DESCRIPTIVE_BLOCK_SENSITIVITY_ESTIMABLE",
+            "bootstrap_completed": 3000,
+            "bootstrap_interval_95pct_descriptive": {
+              "T2M_anomaly": [
+                0.5067744719172482,
+                2.5422708138601977
+              ],
+              "WS10M_anomaly": [
+                -1.0444719272755925,
+                -0.25372961821808315
+              ],
+              "V10M_anomaly": [
+                -0.772518928953948,
+                0.9412676202615944
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -14.807577857916213,
+                18.61120151283571
+              ]
+            },
+            "leave_one_weather_block_out_range": {
+              "T2M_anomaly": [
+                1.4067261207396438,
+                1.758048219019679
+              ],
+              "WS10M_anomaly": [
+                -0.7253554395160567,
+                -0.5883713125319298
+              ],
+              "V10M_anomaly": [
+                -0.05041621052678244,
+                0.20061553550496358
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -0.5389176741217062,
+                4.467636558682527
+              ]
+            },
+            "leave_one_weather_block_sign_consistent": {
+              "T2M_anomaly": true,
+              "WS10M_anomaly": true,
+              "V10M_anomaly": false,
+              "ALLSKY_SFC_SW_DWN_anomaly": false
+            }
+          },
+          "weather_block_2_degree": {
+            "weather_resampling_unit": "weather_block_2_degree",
+            "n_distinct_weather_blocks": 60,
+            "weather_block_effective_case_weight_n": 50.75238095238095,
+            "largest_single_block_case_weight_fraction": 0.0410958904109589,
+            "case_weight_total": 73,
+            "original_case_weighted_contrast": {
+              "T2M_anomaly": 1.5408414184985917,
+              "WS10M_anomaly": -0.6494699442584982,
+              "V10M_anomaly": 0.08530377670156879,
+              "ALLSKY_SFC_SW_DWN_anomaly": 1.6076689345909847
+            },
+            "bootstrap_requested": 3000,
+            "sample_validity": "EXPLORATORY_NOT_CONFIRMATORY",
+            "resampling_accounts_for_between_block_weather_dependence": false,
+            "resampling_keeps_birds_within_same_block_together": true,
+            "source_weather_blocks_independent_in_nature": false,
+            "private_block_locations_exported": false,
+            "status": "DESCRIPTIVE_BLOCK_SENSITIVITY_ESTIMABLE",
+            "bootstrap_completed": 3000,
+            "bootstrap_interval_95pct_descriptive": {
+              "T2M_anomaly": [
+                0.5743405075823816,
+                2.602656740486531
+              ],
+              "WS10M_anomaly": [
+                -1.0521694820478926,
+                -0.24428901013812473
+              ],
+              "V10M_anomaly": [
+                -0.7716670343820055,
+                0.9522309302997416
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -14.17849104502434,
+                16.456457089645042
+              ]
+            },
+            "leave_one_weather_block_out_range": {
+              "T2M_anomaly": [
+                1.3858349393416103,
+                1.758048219019679
+              ],
+              "WS10M_anomaly": [
+                -0.7253554395160567,
+                -0.5529560191470676
+              ],
+              "V10M_anomaly": [
+                -0.057994428786731306,
+                0.20061553550496358
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -1.1549357131267741,
+                4.467636558682527
+              ]
+            },
+            "leave_one_weather_block_sign_consistent": {
+              "T2M_anomaly": true,
+              "WS10M_anomaly": true,
+              "V10M_anomaly": false,
+              "ALLSKY_SFC_SW_DWN_anomaly": false
+            }
+          },
+          "weather_episode_year_month": {
+            "weather_resampling_unit": "weather_episode_year_month",
+            "n_distinct_weather_blocks": 13,
+            "weather_block_effective_case_weight_n": 7.191632928475034,
+            "largest_single_block_case_weight_fraction": 0.2465753424657534,
+            "case_weight_total": 73,
+            "original_case_weighted_contrast": {
+              "T2M_anomaly": 1.5408414184985917,
+              "WS10M_anomaly": -0.6494699442584982,
+              "V10M_anomaly": 0.08530377670156879,
+              "ALLSKY_SFC_SW_DWN_anomaly": 1.6076689345909847
+            },
+            "bootstrap_requested": 3000,
+            "sample_validity": "EXPLORATORY_NOT_CONFIRMATORY",
+            "resampling_accounts_for_between_block_weather_dependence": false,
+            "resampling_keeps_birds_within_same_block_together": true,
+            "source_weather_blocks_independent_in_nature": false,
+            "private_block_locations_exported": false,
+            "status": "DESCRIPTIVE_BLOCK_SENSITIVITY_ESTIMABLE",
+            "bootstrap_completed": 3000,
+            "bootstrap_interval_95pct_descriptive": {
+              "T2M_anomaly": [
+                -0.3960096871568533,
+                3.301967901997845
+              ],
+              "WS10M_anomaly": [
+                -1.019648724516558,
+                -0.20284404518488974
+              ],
+              "V10M_anomaly": [
+                -1.0305734711488452,
+                0.964641914894496
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -10.496135713523032,
+                22.48256081859397
+              ]
+            },
+            "leave_one_weather_block_out_range": {
+              "T2M_anomaly": [
+                0.42023212984706554,
+                2.0034765722906633
+              ],
+              "WS10M_anomaly": [
+                -0.8082492823148377,
+                -0.5562289070899434
+              ],
+              "V10M_anomaly": [
+                -0.42031050428647826,
+                0.3127955885946019
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -4.104430356722377,
+                5.502995840775385
+              ]
+            },
+            "leave_one_weather_block_sign_consistent": {
+              "T2M_anomaly": true,
+              "WS10M_anomaly": true,
+              "V10M_anomaly": false,
+              "ALLSKY_SFC_SW_DWN_anomaly": false
+            }
+          }
+        },
+        "selection_policy": "All original prior-3day GPS fixes <=30km; no source outcome reclassification",
+        "individual_perceived_weather_or_fitness_observed": false,
+        "causal_migration_effect_estimated": false,
+        "raw_animal_dates_sites_or_IDs_exported": false
+      }
+    },
+    "curlew": {
+      "schema": "payoff_b_4guild_strict_fix_source_weather_sensitivity_v1",
+      "system": "curlew",
+      "science": "POST_OUTCOME_MEASUREMENT_SENSITIVITY_NOT_CONFIRMATORY",
+      "result": {
+        "status": "STRICT_SOURCE_WEATHER_SENSITIVITY_COMPLETE",
+        "source_doi": "10.5441/001/1.715k46g2",
+        "source_taxon": "Numenius arquata",
+        "original_CC0_checksum": {
+          "bytes": 159155287,
+          "md5": "b847a97e4ebaedd3e2fd46e920c4f08e",
+          "original_source_verified": true
+        },
+        "original_source_riskday_n": 1868,
+        "strict_all_fix_stable_riskday_n": 1778,
+        "strict_source_case_stay_counts": {
+          "CENSORED": 74,
+          "NORTHWARD_CANDIDATE": 42,
+          "OTHER_MOVEMENT": 77,
+          "STAYED_TWO_DAYS": 1585
+        },
+        "weather_complete_by_class": {
+          "NORTHWARD_CANDIDATE": 42,
+          "STAYED_TWO_DAYS": 1585
+        },
+        "public_weather_batch_n": 103,
+        "public_weather_errors": {},
+        "matched_source_strata": {
+          "matched_strata_count": 22,
+          "case_risk_days_in_matched_strata": 30,
+          "distinct_case_animals_with_instrumental_overlap": 19,
+          "private_grid_ids_or_individual_ids_exported": false
+        },
+        "strict_fix_source_case_weighted_weather_contrasts": {
+          "T2M_anomaly": -0.2780609657345997,
+          "WS10M_anomaly": 0.2033267807268734,
+          "V10M_anomaly": -1.15824805007563,
+          "ALLSKY_SFC_SW_DWN_anomaly": -16.88036768988105
+        },
+        "post_outcome_weather_block_sensitivity": {
+          "grid_half_degree": {
+            "weather_resampling_unit": "grid_half_degree",
+            "n_distinct_weather_blocks": 22,
+            "weather_block_effective_case_weight_n": 14.0625,
+            "largest_single_block_case_weight_fraction": 0.16666666666666666,
+            "case_weight_total": 30,
+            "original_case_weighted_contrast": {
+              "T2M_anomaly": -0.2780609657345997,
+              "WS10M_anomaly": 0.2033267807268734,
+              "V10M_anomaly": -1.15824805007563,
+              "ALLSKY_SFC_SW_DWN_anomaly": -16.88036768988105
+            },
+            "bootstrap_requested": 3000,
+            "sample_validity": "EXPLORATORY_NOT_CONFIRMATORY",
+            "resampling_accounts_for_between_block_weather_dependence": false,
+            "resampling_keeps_birds_within_same_block_together": true,
+            "source_weather_blocks_independent_in_nature": false,
+            "private_block_locations_exported": false,
+            "status": "DESCRIPTIVE_BLOCK_SENSITIVITY_ESTIMABLE",
+            "bootstrap_completed": 3000,
+            "bootstrap_interval_95pct_descriptive": {
+              "T2M_anomaly": [
+                -1.514604204785063,
+                0.7781024638844412
+              ],
+              "WS10M_anomaly": [
+                -0.5438867470413514,
+                1.1411098310769645
+              ],
+              "V10M_anomaly": [
+                -2.3792080416929924,
+                0.027341680068361306
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -53.172251740808505,
+                11.353886044431636
+              ]
+            },
+            "leave_one_weather_block_out_range": {
+              "T2M_anomaly": [
+                -0.7520372141810588,
+                0.0046205242684891346
+              ],
+              "WS10M_anomaly": [
+                0.016239526860312412,
+                0.4242007715580138
+              ],
+              "V10M_anomaly": [
+                -1.4231630978787744,
+                -0.8737006543258837
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -28.673680859193663,
+                -9.483336033867097
+              ]
+            },
+            "leave_one_weather_block_sign_consistent": {
+              "T2M_anomaly": false,
+              "WS10M_anomaly": true,
+              "V10M_anomaly": true,
+              "ALLSKY_SFC_SW_DWN_anomaly": true
+            }
+          },
+          "weather_block_2_degree": {
+            "weather_resampling_unit": "weather_block_2_degree",
+            "n_distinct_weather_blocks": 19,
+            "weather_block_effective_case_weight_n": 10.714285714285714,
+            "largest_single_block_case_weight_fraction": 0.2,
+            "case_weight_total": 30,
+            "original_case_weighted_contrast": {
+              "T2M_anomaly": -0.2780609657345997,
+              "WS10M_anomaly": 0.2033267807268734,
+              "V10M_anomaly": -1.15824805007563,
+              "ALLSKY_SFC_SW_DWN_anomaly": -16.88036768988105
+            },
+            "bootstrap_requested": 3000,
+            "sample_validity": "EXPLORATORY_NOT_CONFIRMATORY",
+            "resampling_accounts_for_between_block_weather_dependence": false,
+            "resampling_keeps_birds_within_same_block_together": true,
+            "source_weather_blocks_independent_in_nature": false,
+            "private_block_locations_exported": false,
+            "status": "DESCRIPTIVE_BLOCK_SENSITIVITY_ESTIMABLE",
+            "bootstrap_completed": 3000,
+            "bootstrap_interval_95pct_descriptive": {
+              "T2M_anomaly": [
+                -1.5644307049698187,
+                0.8678068937653245
+              ],
+              "WS10M_anomaly": [
+                -0.6517148894931869,
+                0.9508528570730316
+              ],
+              "V10M_anomaly": [
+                -2.5559923693174804,
+                0.1754052538680684
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -54.123145491223234,
+                11.50435232720033
+              ]
+            },
+            "leave_one_weather_block_out_range": {
+              "T2M_anomaly": [
+                -0.8960421661324806,
+                0.0046205242684891346
+              ],
+              "WS10M_anomaly": [
+                0.01982242541436146,
+                0.4242007715580138
+              ],
+              "V10M_anomaly": [
+                -1.5417829888618186,
+                -0.798105823356062
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -29.76019137118388,
+                -9.483336033867097
+              ]
+            },
+            "leave_one_weather_block_sign_consistent": {
+              "T2M_anomaly": false,
+              "WS10M_anomaly": true,
+              "V10M_anomaly": true,
+              "ALLSKY_SFC_SW_DWN_anomaly": true
+            }
+          },
+          "weather_episode_year_month": {
+            "weather_resampling_unit": "weather_episode_year_month",
+            "n_distinct_weather_blocks": 10,
+            "weather_block_effective_case_weight_n": 5.555555555555555,
+            "largest_single_block_case_weight_fraction": 0.26666666666666666,
+            "case_weight_total": 30,
+            "original_case_weighted_contrast": {
+              "T2M_anomaly": -0.2780609657345997,
+              "WS10M_anomaly": 0.2033267807268734,
+              "V10M_anomaly": -1.15824805007563,
+              "ALLSKY_SFC_SW_DWN_anomaly": -16.88036768988105
+            },
+            "bootstrap_requested": 3000,
+            "sample_validity": "EXPLORATORY_NOT_CONFIRMATORY",
+            "resampling_accounts_for_between_block_weather_dependence": false,
+            "resampling_keeps_birds_within_same_block_together": true,
+            "source_weather_blocks_independent_in_nature": false,
+            "private_block_locations_exported": false,
+            "status": "DESCRIPTIVE_BLOCK_SENSITIVITY_ESTIMABLE",
+            "bootstrap_completed": 3000,
+            "bootstrap_interval_95pct_descriptive": {
+              "T2M_anomaly": [
+                -1.555531833148644,
+                0.9011739964173859
+              ],
+              "WS10M_anomaly": [
+                -0.8068446612431242,
+                1.0780929949795257
+              ],
+              "V10M_anomaly": [
+                -2.3634064210769763,
+                0.6227723666173774
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -53.31971255098436,
+                4.9798779699186975
+              ]
+            },
+            "leave_one_weather_block_out_range": {
+              "T2M_anomaly": [
+                -0.8289999810790993,
+                0.20838932661932155
+              ],
+              "WS10M_anomaly": [
+                -0.22279577738197645,
+                0.5612615935511832
+              ],
+              "V10M_anomaly": [
+                -1.5111529756851383,
+                -0.4399795793621079
+              ],
+              "ALLSKY_SFC_SW_DWN_anomaly": [
+                -26.9461862142095,
+                -9.89830211670929
+              ]
+            },
+            "leave_one_weather_block_sign_consistent": {
+              "T2M_anomaly": false,
+              "WS10M_anomaly": false,
+              "V10M_anomaly": true,
+              "ALLSKY_SFC_SW_DWN_anomaly": true
+            }
+          }
+        },
+        "selection_policy": "All original prior-3day GPS fixes <=30km; no source outcome reclassification",
+        "individual_perceived_weather_or_fitness_observed": false,
+        "causal_migration_effect_estimated": false,
+        "raw_animal_dates_sites_or_IDs_exported": false
+      }
+    },
+    "egyptian_vulture": {
+      "schema": "payoff_b_4guild_strict_fix_source_weather_sensitivity_v1",
+      "system": "egyptian_vulture",
+      "science": "POST_OUTCOME_MEASUREMENT_SENSITIVITY_NOT_CONFIRMATORY",
+      "result": {
+        "status": "NOT_ESTIMABLE_STRICT_SOURCE_OVERLAP",
+        "source_doi": "10.5441/001/1.385gk270",
+        "original_source_checksum": {
+          "bytes": 122069657,
+          "md5": "578c45678d402d055000ea14e754b6da",
+          "original_source_verified": true
+        },
+        "source_gate": {
+          "original_all_source_stationary_anchor_days": 1859,
+          "strict_all_3days_fix_within_30km_source_riskdays": 1257,
+          "strict_all_3days_source_label_counts": {
+            "CENSORED": 114,
+            "NORTHWARD_CANDIDATE": 13,
+            "OTHER_MOVEMENT": 101,
+            "STAYED_TWO_DAYS": 1029
+          },
+          "original_daily_centroid_source_label_counts": {
+            "CENSORED": 140,
+            "NORTHWARD_CANDIDATE": 33,
+            "OTHER_MOVEMENT": 232,
+            "STAYED_TWO_DAYS": 1454
+          },
+          "strict_risk_days_case_or_stay": 1042,
+          "strict_case_and_stay_weather_source_query_plan": {
+            "at_risk_source_days": 1042,
+            "individual_source_calendar_years": 27,
+            "grid_resolution_degrees": 0.5,
+            "unique_grid_years": 74,
+            "unique_grid_calendar_months": 126,
+            "estimated_monthly_hourly_NASA_requests": 126,
+            "prior_weather_context_days": 8,
+            "raw_one_query_per_riskday_request_count": 1042,
+            "best_case_batched_vs_daily_query_reduction_fraction": 0.8790786948176583,
+            "riskdays_per_gridmonth_summary": {
+              "min": 1,
+              "median": 6,
+              "max": 29
+            },
+            "grid_months_with_both_northward_and_stay_observations": 8,
+            "northward_case_days_in_overlap_gridmonths": 9,
+            "fraction_case_days_in_within_gridmonth_overlap": 0.6923076923076923,
+            "independence_of_weather_grid_months": false,
+            "grid_month_weather_is_climatological_forecast": false,
+            "GPS_source_coordinates_or_batch_cells_exported": false,
+            "batch_cost_under_predeclared_500_query_gate": true
+          },
+          "source_overlap_preweather_admission": {
+            "min_case_days_with_matching_stay_grid_year_month": 10,
+            "min_distinct_same_grid_year_month_strata": 5,
+            "max_distinct_public_NASA_requests": 500,
+            "passed": false
+          },
+          "original_weather_association_refitted": false,
+          "direct_perceived_migratory_cue_or_fitness_tested": false,
+          "all_fixes_inside_circle_proves_biological_stationary": false,
+          "GPS_source_IDs_locations_and_grid_cells_exported": false
+        },
+        "public_meteorology_queries_made": 0,
+        "environmental_effect_fitted": false
+      }
+    }
+  },
+  "interpretive_statistics": {
+    "stork": {
+      "status": "STRICT_SOURCE_WEATHER_SENSITIVITY_COMPLETE",
+      "source_doi": "10.5441/001/1.v8d24552",
+      "strict_3day_original_case_count": 85,
+      "strict_3day_original_stay_count": 716,
+      "within_gridyearmonth_overlap_cases": 47,
+      "within_gridyearmonth_overlap_strata": 36,
+      "source_observed_individuals_in_matched_case_strata": 24,
+      "NASA_daily_source_batches": 190,
+      "original_batched_requests_failed": 0,
+      "physical_weather_case_minus_stay": {
+        "T2M_anomaly": -0.47432163478995965,
+        "WS10M_anomaly": 0.14056790088189058,
+        "V10M_anomaly": -0.1917927704461058,
+        "ALLSKY_SFC_SW_DWN_anomaly": -19.643112836451664
+      },
+      "entire_yearmonth_bootstrap_95pct_descriptive": {
+        "T2M_anomaly": [
+          -1.4677364615616648,
+          0.3880279534269991
+        ],
+        "WS10M_anomaly": [
+          -0.16566548576688298,
+          0.6836152042247187
+        ],
+        "V10M_anomaly": [
+          -1.301548999382035,
+          0.6241280947219913
+        ],
+        "ALLSKY_SFC_SW_DWN_anomaly": [
+          -35.05261108468138,
+          -3.496374386608617
+        ]
+      },
+      "weather_month_block_count": 13,
+      "effective_weather_month_block_n": 7.750877192982456,
+      "fine_weather_block_CIs": {
+        "T2M_anomaly": [
+          -1.323618889880952,
+          0.3712133524289417
+        ],
+        "WS10M_anomaly": [
+          -0.25857322286058887,
+          0.5717214557795984
+        ],
+        "V10M_anomaly": [
+          -1.1819397881979907,
+          0.8470331863029241
+        ],
+        "ALLSKY_SFC_SW_DWN_anomaly": [
+          -35.29743749933508,
+          -1.7977541316783274
+        ]
+      }
+    },
+    "white_fronted_goose": {
+      "status": "STRICT_SOURCE_WEATHER_SENSITIVITY_COMPLETE",
+      "source_doi": "10.5441/001/1.31c2v92f",
+      "strict_3day_original_case_count": 93,
+      "strict_3day_original_stay_count": 1324,
+      "within_gridyearmonth_overlap_cases": 73,
+      "within_gridyearmonth_overlap_strata": 69,
+      "source_observed_individuals_in_matched_case_strata": 41,
+      "NASA_daily_source_batches": 246,
+      "original_batched_requests_failed": 0,
+      "physical_weather_case_minus_stay": {
+        "T2M_anomaly": 1.5408414184985917,
+        "WS10M_anomaly": -0.6494699442584982,
+        "V10M_anomaly": 0.08530377670156879,
+        "ALLSKY_SFC_SW_DWN_anomaly": 1.6076689345909847
+      },
+      "entire_yearmonth_bootstrap_95pct_descriptive": {
+        "T2M_anomaly": [
+          -0.3960096871568533,
+          3.301967901997845
+        ],
+        "WS10M_anomaly": [
+          -1.019648724516558,
+          -0.20284404518488974
+        ],
+        "V10M_anomaly": [
+          -1.0305734711488452,
+          0.964641914894496
+        ],
+        "ALLSKY_SFC_SW_DWN_anomaly": [
+          -10.496135713523032,
+          22.48256081859397
+        ]
+      },
+      "weather_month_block_count": 13,
+      "effective_weather_month_block_n": 7.191632928475034,
+      "fine_weather_block_CIs": {
+        "T2M_anomaly": [
+          0.5067744719172482,
+          2.5422708138601977
+        ],
+        "WS10M_anomaly": [
+          -1.0444719272755925,
+          -0.25372961821808315
+        ],
+        "V10M_anomaly": [
+          -0.772518928953948,
+          0.9412676202615944
+        ],
+        "ALLSKY_SFC_SW_DWN_anomaly": [
+          -14.807577857916213,
+          18.61120151283571
+        ]
+      }
+    },
+    "curlew": {
+      "status": "STRICT_SOURCE_WEATHER_SENSITIVITY_COMPLETE",
+      "source_doi": "10.5441/001/1.715k46g2",
+      "strict_3day_original_case_count": 42,
+      "strict_3day_original_stay_count": 1585,
+      "within_gridyearmonth_overlap_cases": 30,
+      "within_gridyearmonth_overlap_strata": 22,
+      "source_observed_individuals_in_matched_case_strata": 19,
+      "NASA_daily_source_batches": 103,
+      "original_batched_requests_failed": 0,
+      "physical_weather_case_minus_stay": {
+        "T2M_anomaly": -0.2780609657345997,
+        "WS10M_anomaly": 0.2033267807268734,
+        "V10M_anomaly": -1.15824805007563,
+        "ALLSKY_SFC_SW_DWN_anomaly": -16.88036768988105
+      },
+      "entire_yearmonth_bootstrap_95pct_descriptive": {
+        "T2M_anomaly": [
+          -1.555531833148644,
+          0.9011739964173859
+        ],
+        "WS10M_anomaly": [
+          -0.8068446612431242,
+          1.0780929949795257
+        ],
+        "V10M_anomaly": [
+          -2.3634064210769763,
+          0.6227723666173774
+        ],
+        "ALLSKY_SFC_SW_DWN_anomaly": [
+          -53.31971255098436,
+          4.9798779699186975
+        ]
+      },
+      "weather_month_block_count": 10,
+      "effective_weather_month_block_n": 5.555555555555555,
+      "fine_weather_block_CIs": {
+        "T2M_anomaly": [
+          -1.514604204785063,
+          0.7781024638844412
+        ],
+        "WS10M_anomaly": [
+          -0.5438867470413514,
+          1.1411098310769645
+        ],
+        "V10M_anomaly": [
+          -2.3792080416929924,
+          0.027341680068361306
+        ],
+        "ALLSKY_SFC_SW_DWN_anomaly": [
+          -53.172251740808505,
+          11.353886044431636
+        ]
+      }
+    },
+    "egyptian_vulture": {
+      "status": "NOT_ESTIMABLE_STRICT_SOURCE_OVERLAP",
+      "weather_queries": 0,
+      "original_3day_strict_cases": 13,
+      "original_3day_strict_stays": 1029,
+      "within_gridyearmonth_overlap_cases": 9,
+      "weather_comparison_estimated": false
+    }
+  },
+  "claim_boundaries": {
+    "source_Biological_independence_for_vulture_confirmed": false,
+    "stork_shortwave_association_remains_negative": true,
+    "goose_wind_speed_source_association_remains_negative": true,
+    "curlew_temp_source_difference_changes_sign": true,
+    "vulture_fine_source_9_overlap_cases_not_admitted": true,
+    "no_new_confirmatory_Payoff_B_information_x_actionability": true,
+    "true_departure_vs_foraging_separated": false,
+    "signed_route_relative_flight_height_wind_measured": false,
+    "environmental_forecast_received_by_birds_measured": false,
+    "reproduction_survival_fitness_measured": false,
+    "prior_V7R_V8_and_stork53_non_support_unchanged": true
+  },
+  "caveats": [
+    "All methods introduced after earlier source effects were observed, hence post-selection sensitivity, not external independent validation.",
+    "The strict all-fix-inside-30km rule can wrongly exclude genuine temporary foraging excursions.",
+    "Overlapping stationary-day source windows and shared synoptic weather remain correlated beyond calendar month weather blocks.",
+    "The shorebird source temperature difference reverses sign under stricter GPS stationarity, but neither sign is causal or cross-taxon confirmation.",
+    "Stork shortwave and goose wind-speed patterns are within their original cohorts only; flight altitude, turbulence, actual site-departure decisions, energy costs and fitness are unobserved.",
+    "Vulture has too few clean case days with within-grid-year-month stayed source records; no new meteorology or effect fit was made for vulture.",
+    "2016 versus 2018 stork studies have shared tag IDs, so cohort-level independence cannot be inferred solely from differing paper or Study IDs."
+  ]
+}

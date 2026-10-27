@@ -1,0 +1,48 @@
+{
+  "schema": "payoff_b_two_white_stork_published_cohort_id_chronology_v1",
+  "reference_source": "https://github.com/zuizui0223/payoff/actions/runs/39782136182",
+  "timeline_source": "https://github.com/zuizui0223/payoff/actions/runs/39782552112",
+  "original_timeline": {
+    "schema": "payoff_b_shared_stork_tag_timeline_20261022",
+    "old_doi": "10.5441/001/1.v8d24552",
+    "new_doi": "10.5441/001/1.hn1bd23k",
+    "checksum_new": {
+      "bytes": 43098,
+      "md5": "b38407ed744cf2bd4806afce929f604a",
+      "original_source_verified": true
+    },
+    "checksum_prior": {
+      "bitstream_uuid": "7011637a-dc59-4c24-86e3-5ff0d46fb320",
+      "md5": "1c9f7c976ebb094e8b1b9c37965c5717",
+      "size_bytes": 14115
+    },
+    "aggregate_tag_timeline": {
+      "original_published_shared_tag_ids": 35,
+      "tag_timeline_status_counts": {
+        "new_source_tags_reused_in_multiple_deployments": 1,
+        "prior_source_tags_reused_in_multiple_deployments": 1,
+        "shared_tag_identifiers": 35,
+        "tag_ids_missing_comparable_on_off_dates": 33,
+        "tag_ids_with_any_simultaneous_deployment_interval": 2,
+        "tag_ids_with_finite_deployment_periods": 2
+      },
+      "observed_sequential_gap_days_aggregate": {
+        "min": null,
+        "max": null,
+        "count_pairs": 0
+      },
+      "same_tag_id_is_definitive_same_bird": false,
+      "no_animal_ID_collision_is_definitive_independence": false,
+      "same_tag_source_identifier_may_represent_hardware_reuse_or_an_identifier_policy": true,
+      "source_bird_IDs_original_dates_or_sensitive_locations_exported": false
+    },
+    "status": "SHARED_TAG_DEPLOYMENT_CHRONOLOGY_QC_COMPLETE"
+  },
+  "shared_tag_IDs": 35,
+  "identical_animal_ring_or_deployment_ID_values": 0,
+  "shared_tags_with_finite_deployment_time": 2,
+  "shared_tags_with_overlapping_intervals": 2,
+  "tags_without_comparable_time": 33,
+  "independent_biological_cohorts_confirmed": false,
+  "raw_animal_ids_ring_ids_date_or_location_exported": false
+}

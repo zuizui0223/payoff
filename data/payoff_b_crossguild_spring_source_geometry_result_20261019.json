@@ -1,0 +1,124 @@
+{
+  "result_id": "payoff_b_migrant_crossguild_spring_source_geometry_20261019",
+  "date": "2026-10-19",
+  "status": "SOURCE_GEOMETRY_REPRODUCED_NO_BIOLOGICAL_MECHANISM_TEST",
+  "classification": "EXPLORATORY_SOURCE_ELIGIBILITY_AFTER_PRIOR_V7_V8_OUTCOME",
+  "fixed_geometry": {
+    "months": "February–May",
+    "min_unique_daily_observations": 12,
+    "minimum_daily_latitude_p90_minus_p10_degrees": 10,
+    "minimum_last_five_minus_first_five_median_latitude_degrees": 7,
+    "relative_progress_first_crossing_fraction": [
+      0.2,
+      0.8
+    ],
+    "common_definition_published_breeding_arrival": false
+  },
+  "sources": [
+    {
+      "system": "stork",
+      "taxon": "Ciconia ciconia",
+      "doi": "10.5441/001/1.v8d24552",
+      "sensor": "GPS",
+      "identity_years_with_spring_fixes": 91,
+      "two_northward_checkpoints": 91,
+      "median_intercheckpoint_days": 24,
+      "interquartile_days": [
+        20.5,
+        28
+      ],
+      "left_censored": 0,
+      "other_exclusions": 0,
+      "source_workflow_run": 39218597305,
+      "source_artifact_run": 39218597305
+    },
+    {
+      "system": "american_woodcock",
+      "taxon": "Scolopax minor",
+      "doi": "10.5441/001/1.8764q39q",
+      "sensor": "Argos Doppler Shift",
+      "identity_years_with_spring_fixes": 80,
+      "two_northward_checkpoints": 37,
+      "median_intercheckpoint_days": 28,
+      "interquartile_days": [
+        20,
+        43
+      ],
+      "left_censored": 0,
+      "other_exclusions": 43,
+      "source_workflow_run": 39218597305,
+      "argos_not_equivalent_to_gps": true
+    },
+    {
+      "system": "greater_white_fronted_goose",
+      "taxon": "Anser albifrons",
+      "doi": "10.5441/001/1.31c2v92f",
+      "sensor": "GPS",
+      "identity_years_with_spring_fixes": 53,
+      "two_northward_checkpoints": 23,
+      "median_intercheckpoint_days": 27,
+      "interquartile_days": [
+        10.5,
+        40.5
+      ],
+      "left_censored": 1,
+      "other_exclusions": 29,
+      "source_workflow_run": 39218954353,
+      "overlap_with_prior_payoff_goose_populations": "NOT_EXCLUDED"
+    },
+    {
+      "system": "eurasian_curlew",
+      "taxon": "Numenius arquata",
+      "doi": "10.5441/001/1.715k46g2",
+      "sensor": "GPS",
+      "identity_years_with_spring_fixes": 42,
+      "two_northward_checkpoints": 7,
+      "median_intercheckpoint_days": 8,
+      "interquartile_days": [
+        6,
+        14
+      ],
+      "left_censored": 0,
+      "other_exclusions": 35,
+      "source_workflow_run": 39218597305,
+      "route_scope": "SOURCE_RECORDS_ONLY_FIRST_PART_OF_SPRING"
+    },
+    {
+      "system": "mixed_dabbling_ducks",
+      "taxon": "Anas acuta; Anas platyrhynchos",
+      "doi": "10.5441/001/1.3fv21n7m",
+      "sensor": "GPS",
+      "identity_years_with_spring_fixes": 18,
+      "two_northward_checkpoints": 0,
+      "median_intercheckpoint_days": null,
+      "interquartile_days": null,
+      "left_censored": 0,
+      "other_exclusions": 18,
+      "source_workflow_run": 39218597305,
+      "source_taxon_species_composition_requires_separation": true
+    }
+  ],
+  "data_gate": {
+    "systems_with_at_least_20_track_years_passing_northward_geometry": 3,
+    "included_taxa": [
+      "Ciconia ciconia",
+      "Scolopax minor",
+      "Anser albifrons"
+    ],
+    "no_claim_of_independent_confirmatory_studies": true,
+    "no_new_seasonal_information_actionability_slope": true,
+    "same_definition_used_in_all_source_checks": true,
+    "gaussian_information_forecast_value_or_fitness": "NOT_ESTIMATED",
+    "independent_migration_cohorts": "NOT_CONFIRMED"
+  },
+  "caveats": [
+    "All numbers are source eligibility estimates on latitude trajectories, not actionability or correction effects.",
+    "The original stork winter-referenced 53-season result uses a different definition and is not exchangeable with these February–May values.",
+    "Argos tracks have different observation accuracy from GPS tracks, and absolute clock times also depend on species geography.",
+    "Some eligible northward pairs may be partial routes; the 80-percent crossing is not known to be breeding arrival.",
+    "Greater white-fronted goose sample may overlap historical PAYOFF goose cohorts.",
+    "Prior published bird timing and route-behavior effects are not claimed as novel ecological discoveries.",
+    "Dabbling-duck published source contains two taxa and must not be pooled as a single species.",
+    "This is exploratory source screening following prior PAYOFF-B empirical results; future mechanistic tests require untouched outcomes."
+  ]
+}

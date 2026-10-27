@@ -1,0 +1,33 @@
+name: payoff-b-unopened-vulture-shortwave-transfer
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/run_payoff_b_new_vulture_weather_transfer.py"
+      - "tests/test_payoff_b_new_vulture_weather_transfer.py"
+      - "docs/PAYOFF_B_NEW_VULTURE_SOLAR_TRANSFER_LOCK_20261022.md"
+      - ".github/workflows/payoff-b-vulture-solar-weather-transfer.yml"
+jobs:
+  new-taxon-transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test future source transfer sign and original source invariants
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_payoff_b_new_vulture_weather_transfer.py
+      - name: Fetch original vulture GPS and newly unopened NASA daily reanalysis
+        run: |
+          python -m scripts.run_payoff_b_new_vulture_weather_transfer --out outputs/payoff_b_new_vulture_transfer
+      - name: Archive only aggregate source transfer and block sensitivity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-new-vulture-shortwave-transfer
+          path: outputs/payoff_b_new_vulture_transfer/
+          if-no-files-found: warn

@@ -1,0 +1,96 @@
+{
+  "schema": "payoff_b_2015_shearwater_early_late_GPS_quality_verdict_20261028",
+  "source_run": "https://github.com/zuizui0223/payoff/actions/runs/40533907417",
+  "source_data_original": {
+    "scientific_scope": "SOURCE_OBSERVATION_ELIGIBILITY_NOT_BEHAVIORAL_EFFECT",
+    "method_predeclared_after_original_prior_art_review": true,
+    "result": {
+      "schema": "payoff_b_shearwater_first_vs_second_12h_source_observation_v1",
+      "source_doi": "10.5441/001/1.tc76g560",
+      "original_subjects": 32,
+      "original_GPS_equipped": 27,
+      "valid_GPS_animals": 23,
+      "original_Argos_assigned_separately": 5,
+      "by_sensory_intervention": {
+        "control": {
+          "Argos_assigned_by_design": 0,
+          "BOTH_12H_WINDOWS_GPS_SOURCE_ADMITTED": 8,
+          "GPS_equipped_but_no_original_fixes": 1,
+          "GPS_originally_equipped": 9,
+          "observed_GPS_subjects": 8,
+          "original_reference_subjects": 9
+        },
+        "magnetic_disruption": {
+          "Argos_assigned_by_design": 0,
+          "BOTH_12H_WINDOWS_GPS_SOURCE_ADMITTED": 8,
+          "GPS_equipped_but_no_original_fixes": 0,
+          "GPS_originally_equipped": 9,
+          "INCOMPLETE_24H_BOUNDARY_COVERAGE": 1,
+          "observed_GPS_subjects": 9,
+          "original_reference_subjects": 9
+        },
+        "olfactory_deprivation": {
+          "Argos_assigned_by_design": 5,
+          "BOTH_12H_WINDOWS_GPS_SOURCE_ADMITTED": 6,
+          "GPS_equipped_but_no_original_fixes": 3,
+          "GPS_originally_equipped": 9,
+          "observed_GPS_subjects": 6,
+          "original_reference_subjects": 14
+        }
+      },
+      "two_observed_windows_total_valid_GPS_subjects": 22,
+      "source_gate": {
+        "minimum_GPS_animals_with_two_12h_windows_per_treatment": 5,
+        "passed": true
+      },
+      "source_invalid_or_unmapped_fix_counts": {
+        "valid_original_fix_rows": 23014
+      },
+      "source_sampling_window_origin": "first valid published GPS fix, not certified release time",
+      "source_cue_information_effect_estimated": false,
+      "source_coastal_information_encounter_verified": false,
+      "source_route_correction_or_fitness_effect_fitted": false,
+      "sensitive_individual_observations_exported": false,
+      "original_CC0_file_checksums": {
+        "gps": {
+          "bytes": 4420051,
+          "md5": "35679733d880e26a17ddd7c51b5637eb",
+          "original_source_verified": true
+        },
+        "reference": {
+          "bytes": 9867,
+          "md5": "20a038104c926229690a8bcd11c365db",
+          "original_source_verified": true
+        }
+      }
+    },
+    "status": "ORIGINAL_SHEARWATER_TWO_WINDOW_SOURCE_QC_COMPLETE"
+  },
+  "verified_at": "2026-10-28",
+  "scientific_class": "CC0_SOURCE_SAMPLING_ONLY_PUBLISHED_EXPERIMENT_PRIOR_ART",
+  "original_GPS_equipped_per_arm": {
+    "control": 9,
+    "magnetic_disruption": 9,
+    "olfactory_deprivation": 9
+  },
+  "original_ARGOS_allocated_to_olfactory_by_design": 5,
+  "eligible_GPS_0to12_and_12to24h": {
+    "control": 8,
+    "magnetic_disruption": 8,
+    "olfactory_deprivation": 6
+  },
+  "total_eligible": 22,
+  "worst_case_binary_group_mean_bound_width": {
+    "control": 0.1111111111111111,
+    "magnetic_disruption": 0.1111111111111111,
+    "olfactory_deprivation": 0.5714285714285714
+  },
+  "olfactory_minus_control_maximum_missing_outcome_bound_width": 0.6825396825396826,
+  "early_late_directional_outcome_not_yet_observed_in_this_receipt": true,
+  "perceived_olfactory_signal_measured": false,
+  "coast_landmark_encounter_measured": false,
+  "behavioral_feedback_actionability_measured": false,
+  "fitness_measured": false,
+  "novel_PayoffB_theory_supported": false,
+  "note": "Original experiment already established treatment-associated navigational phenomena. This source gate only verifies comparable early and later observation segments and the partial-identification uncertainty from treatment-dependent sensor allocation and unobserved birds."
+}

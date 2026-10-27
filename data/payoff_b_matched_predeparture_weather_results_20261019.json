@@ -1,0 +1,322 @@
+{
+  "schema": "payoff_b_matched_predeparture_weather_source_results_v1",
+  "source_date": "2026-10-19",
+  "workflow": "https://github.com/zuizui0223/payoff/actions/runs/39233227157",
+  "evidence_status": "EXPLORATORY_NOT_CONFIRMATORY",
+  "matched_individual_years_before_weather": {
+    "stork": 38,
+    "white_fronted_goose": 41,
+    "curlew": 36
+  },
+  "cases_with_24h_departure_bracket": {
+    "stork": 32,
+    "white_fronted_goose": 32,
+    "curlew": 25
+  },
+  "weather_sample_total_pairs": 36,
+  "records": {
+    "stork": {
+      "schema": "payoff_b_exploratory_matched_predeparture_weather_20261019",
+      "source_system": "stork",
+      "analysis_scope": "PRIOR_DAY_MINUS_PREVIOUS_7_DAYS_MATCHED_CASE_STAY",
+      "predecision_weather_reference_offset_days": -1,
+      "previous_weather_baseline_days": 7,
+      "at_least_hourly_values_per_day": 18,
+      "pairs_sampled_by_source_only_hash": 12,
+      "min_complete_pairs_for_descriptive_result": 10,
+      "source_only_not_causal": true,
+      "result": {
+        "source_doi": "10.5441/001/1.v8d24552",
+        "source_name": "Ciconia ciconia",
+        "sensor": "GPS",
+        "original_source_checksum": {
+          "verified": true,
+          "bytes": 273153305,
+          "md5": "bda2ebd2441316b2e2fd9e9578d7d0b4",
+          "bitstream_uuid": "ed3529e6-ce20-4237-8875-9d35fdbf9a0f"
+        },
+        "matched_source_candidate_count": 38,
+        "matched_brackets_24h": 32,
+        "selected_one_per_identity_year": 12,
+        "unique_weather_spans": 24,
+        "pair_weather_failures": 0,
+        "failure_types": {},
+        "status": "MATCHED_WEATHER_EXPLORATORY_DESCRIPTIVES",
+        "summary": {
+          "source": "stork",
+          "complete_matched_pairs": 12,
+          "difference_case_minus_stay_temperature_c": {
+            "n_pairs": 12,
+            "mean": 0.01236111111111097,
+            "median": 0.3722916666666656,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -1.2119626736111122,
+              1.1831076388888895
+            ],
+            "n_positive_differences": 7,
+            "n_negative_differences": 5
+          },
+          "difference_case_minus_stay_wind10m_m_s": {
+            "n_pairs": 12,
+            "mean": 0.08625000000000003,
+            "median": 0.25208333333333344,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -0.9933923611111111,
+              0.8676979166666672
+            ],
+            "n_positive_differences": 8,
+            "n_negative_differences": 4
+          },
+          "paired_seven_day_anomaly_difference_temp_c": {
+            "n_pairs": 12,
+            "mean": -0.905525793650794,
+            "median": -0.43440476190476396,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -2.3142398313492074,
+              0.31527467757936445
+            ],
+            "n_positive_differences": 5,
+            "n_negative_differences": 7
+          },
+          "paired_seven_day_anomaly_difference_wind_m_s": {
+            "n_pairs": 12,
+            "mean": 0.1475992063492064,
+            "median": 0.6137202380952378,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -1.0173385416666665,
+              1.0969852430555558
+            ],
+            "n_positive_differences": 8,
+            "n_negative_differences": 4
+          },
+          "case_minus_prior_control_days": {
+            "n_pairs": 12,
+            "mean": 5,
+            "median": 5,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              5,
+              5
+            ],
+            "n_positive_differences": 12,
+            "n_negative_differences": 0
+          },
+          "source_effect_classification": "DESCRIPTIVE_POSTOUTCOME_EXPLORATORY_NOT_CAUSAL",
+          "source_pairs_are_not_randomized": true,
+          "weather_predictive_accuracy_unmeasured": true,
+          "actual_bird_cue_use_unmeasured": true,
+          "species_crosspooling_prohibited": true,
+          "reanalysis_weather_is_not_historical_forecast": true,
+          "animal_IDs_date_or_positions_exported": false
+        },
+        "no_raw_event_or_site_export": true
+      }
+    },
+    "white_fronted_goose": {
+      "schema": "payoff_b_exploratory_matched_predeparture_weather_20261019",
+      "source_system": "white_fronted_goose",
+      "analysis_scope": "PRIOR_DAY_MINUS_PREVIOUS_7_DAYS_MATCHED_CASE_STAY",
+      "predecision_weather_reference_offset_days": -1,
+      "previous_weather_baseline_days": 7,
+      "at_least_hourly_values_per_day": 18,
+      "pairs_sampled_by_source_only_hash": 12,
+      "min_complete_pairs_for_descriptive_result": 10,
+      "source_only_not_causal": true,
+      "result": {
+        "source_doi": "10.5441/001/1.31c2v92f",
+        "source_name": "Anser albifrons",
+        "sensor": "GPS",
+        "original_source_checksum": {
+          "size_bytes": 16806763,
+          "md5": "0e0abd1126c53f4924907c3fb6a72d02",
+          "bitstream_uuid": "0a262590-49e2-4e47-a290-dbfd6649579f",
+          "bitstream_url": "https://datarepository.movebank.org/server/api/core/bitstreams/0a262590-49e2-4e47-a290-dbfd6649579f/content"
+        },
+        "matched_source_candidate_count": 41,
+        "matched_brackets_24h": 32,
+        "selected_one_per_identity_year": 12,
+        "unique_weather_spans": 24,
+        "pair_weather_failures": 0,
+        "failure_types": {},
+        "status": "MATCHED_WEATHER_EXPLORATORY_DESCRIPTIVES",
+        "summary": {
+          "source": "white_fronted_goose",
+          "complete_matched_pairs": 12,
+          "difference_case_minus_stay_temperature_c": {
+            "n_pairs": 12,
+            "mean": 0.11329861111111152,
+            "median": 0.798958333333334,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -2.076459201388888,
+              2.1551423611111122
+            ],
+            "n_positive_differences": 7,
+            "n_negative_differences": 5
+          },
+          "difference_case_minus_stay_wind10m_m_s": {
+            "n_pairs": 12,
+            "mean": -0.1799305555555556,
+            "median": -0.1479166666666667,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -1.1537847222222222,
+              0.7705703125000001
+            ],
+            "n_positive_differences": 6,
+            "n_negative_differences": 6
+          },
+          "paired_seven_day_anomaly_difference_temp_c": {
+            "n_pairs": 12,
+            "mean": -0.42510416666666645,
+            "median": 0.6660119047619051,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -2.9648936011904765,
+              1.9768928571428575
+            ],
+            "n_positive_differences": 9,
+            "n_negative_differences": 3
+          },
+          "paired_seven_day_anomaly_difference_wind_m_s": {
+            "n_pairs": 12,
+            "mean": -0.2115525793650794,
+            "median": -0.21699404761904773,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -1.361147445436508,
+              0.8919696180555561
+            ],
+            "n_positive_differences": 6,
+            "n_negative_differences": 6
+          },
+          "case_minus_prior_control_days": {
+            "n_pairs": 12,
+            "mean": 5,
+            "median": 5,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              5,
+              5
+            ],
+            "n_positive_differences": 12,
+            "n_negative_differences": 0
+          },
+          "source_effect_classification": "DESCRIPTIVE_POSTOUTCOME_EXPLORATORY_NOT_CAUSAL",
+          "source_pairs_are_not_randomized": true,
+          "weather_predictive_accuracy_unmeasured": true,
+          "actual_bird_cue_use_unmeasured": true,
+          "species_crosspooling_prohibited": true,
+          "reanalysis_weather_is_not_historical_forecast": true,
+          "animal_IDs_date_or_positions_exported": false
+        },
+        "no_raw_event_or_site_export": true
+      }
+    },
+    "curlew": {
+      "schema": "payoff_b_exploratory_matched_predeparture_weather_20261019",
+      "source_system": "curlew",
+      "analysis_scope": "PRIOR_DAY_MINUS_PREVIOUS_7_DAYS_MATCHED_CASE_STAY",
+      "predecision_weather_reference_offset_days": -1,
+      "previous_weather_baseline_days": 7,
+      "at_least_hourly_values_per_day": 18,
+      "pairs_sampled_by_source_only_hash": 12,
+      "min_complete_pairs_for_descriptive_result": 10,
+      "source_only_not_causal": true,
+      "result": {
+        "source_doi": "10.5441/001/1.715k46g2",
+        "source_name": "Numenius arquata",
+        "sensor": "GPS",
+        "original_source_checksum": {
+          "bytes": 159155287,
+          "md5": "b847a97e4ebaedd3e2fd46e920c4f08e",
+          "original_source_verified": true
+        },
+        "matched_source_candidate_count": 36,
+        "matched_brackets_24h": 25,
+        "selected_one_per_identity_year": 12,
+        "unique_weather_spans": 22,
+        "pair_weather_failures": 0,
+        "failure_types": {},
+        "status": "MATCHED_WEATHER_EXPLORATORY_DESCRIPTIVES",
+        "summary": {
+          "source": "curlew",
+          "complete_matched_pairs": 12,
+          "difference_case_minus_stay_temperature_c": {
+            "n_pairs": 12,
+            "mean": -0.03270833333333334,
+            "median": 0.2595833333333335,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -2.145114583333333,
+              2.0944262152777835
+            ],
+            "n_positive_differences": 6,
+            "n_negative_differences": 6
+          },
+          "difference_case_minus_stay_wind10m_m_s": {
+            "n_pairs": 12,
+            "mean": -0.10524305555555552,
+            "median": -0.4239583333333333,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -1.265151909722222,
+              1.012677951388889
+            ],
+            "n_positive_differences": 5,
+            "n_negative_differences": 7
+          },
+          "paired_seven_day_anomaly_difference_temp_c": {
+            "n_pairs": 12,
+            "mean": -0.11106150793650771,
+            "median": -1.4151488095238094,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -2.7542616567460314,
+              2.494819444444446
+            ],
+            "n_positive_differences": 5,
+            "n_negative_differences": 7
+          },
+          "paired_seven_day_anomaly_difference_wind_m_s": {
+            "n_pairs": 12,
+            "mean": -0.45243551587301567,
+            "median": -0.44773809523809505,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              -1.8365338541666663,
+              1.043739335317461
+            ],
+            "n_positive_differences": 6,
+            "n_negative_differences": 6
+          },
+          "case_minus_prior_control_days": {
+            "n_pairs": 12,
+            "mean": 5,
+            "median": 5,
+            "bootstrap_mean_95pct_CI_descriptive": [
+              5,
+              5
+            ],
+            "n_positive_differences": 12,
+            "n_negative_differences": 0
+          },
+          "source_effect_classification": "DESCRIPTIVE_POSTOUTCOME_EXPLORATORY_NOT_CAUSAL",
+          "source_pairs_are_not_randomized": true,
+          "weather_predictive_accuracy_unmeasured": true,
+          "actual_bird_cue_use_unmeasured": true,
+          "species_crosspooling_prohibited": true,
+          "reanalysis_weather_is_not_historical_forecast": true,
+          "animal_IDs_date_or_positions_exported": false
+        },
+        "no_raw_event_or_site_export": true
+      }
+    }
+  },
+  "cross_taxon_shared_positive_temperature_signal": false,
+  "intervals_all_include_zero": true,
+  "five_day_prior_control_for_all_selected_pairs": true,
+  "pooled_species_effect_estimated": false,
+  "causal_weather_cue_use_tested": false,
+  "independent_feasible_recourse_measured": false,
+  "timing_rescue_or_fitness_tested": false,
+  "source_observation": "Each of three species has 12 complete source matches to NASA POWER last predecision-day vs preceding seven-day weather. No common direction of temperature increase or wind-speed anomaly is established.",
+  "caveats": [
+    "Controls were selected retrospectively based on future staying, and cases on future moving; no risk-set randomization.",
+    "Every chosen stay control is five days earlier than movement, inducing seasonal/meteorological autocorrelation.",
+    "NASA POWER is retrospective reanalysis and is not evidence birds perceived a forecast.",
+    "Wind speed without direction does not measure tailwind support.",
+    "n=12 matched pairs per species; bootstrap intervals are descriptive, not causal treatment-effect intervals.",
+    "Goose cohort overlap with previous PAYOFF data remains unresolved."
+  ]
+}

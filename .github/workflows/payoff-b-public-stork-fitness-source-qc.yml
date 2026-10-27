@@ -1,0 +1,36 @@
+name: payoff-b-public-stork-fitness-source-qc
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/qc_public_movebank_stork_breeding_2018.py"
+      - "tests/test_public_movebank_stork_breeding.py"
+      - "docs/PAYOFF_B_PUBLIC_STORK_BREEDING_SOURCE_QC_20261019.md"
+      - ".github/workflows/payoff-b-public-stork-fitness-source-qc.yml"
+
+jobs:
+  stork-fitness-metadata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test reproducible ID-join/coverage without real data
+        run: |
+          python -m pip install pytest
+          python -m pytest -q tests/test_public_movebank_stork_breeding.py
+      - name: Download only CC0 reference, README and reproduction metadata
+        run: |
+          python -m scripts.qc_public_movebank_stork_breeding_2018 \
+            --output outputs/payoff_b_white_stork_breeding_qc.json
+      - name: Preserve aggregate source-QC receipt, not individual observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-breeding-source-qc
+          path: outputs/payoff_b_white_stork_breeding_qc.json
+          if-no-files-found: warn

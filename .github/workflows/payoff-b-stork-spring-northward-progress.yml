@@ -1,0 +1,36 @@
+name: payoff-b-stork-spring-northward-progress
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-independent-tracking-registry-20261019
+    paths:
+      - "scripts/qc_public_movebank_stork_spring_progress_2018.py"
+      - "tests/test_stork_spring_progress_2018.py"
+      - "docs/PAYOFF_B_STORK_SPRING_PROGRESS_GATE_20261019.md"
+      - ".github/workflows/payoff-b-stork-spring-northward-progress.yml"
+
+jobs:
+  stork-spring-source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify fixed synthetic northward progression examples
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pytest -q tests/test_stork_spring_progress_2018.py
+      - name: Replay CC0 checksum and derive only aggregated northward-progress admission
+        run: |
+          python -m scripts.qc_public_movebank_stork_spring_progress_2018 \
+            --output outputs/payoff_b_stork_northward_progress_qc.json
+      - name: Archive only aggregate gate counts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-northward-progress-source-qc
+          path: outputs/payoff_b_stork_northward_progress_qc.json
+          if-no-files-found: warn

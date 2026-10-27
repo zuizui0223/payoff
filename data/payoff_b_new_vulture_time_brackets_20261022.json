@@ -1,0 +1,71 @@
+{
+  "schema": "payoff_b_new_vulture_GPS_event_time_bracket_verdict_20261022",
+  "source_run": "https://github.com/zuizui0223/payoff/actions/runs/39778447233",
+  "date": "2026-10-22",
+  "status": "SOURCE_TIMING_REPRODUCED_NEITHER_CUE_USE_NOR_DEPARTURE_INSTANT_OBSERVED",
+  "original_source_receipt": {
+    "schema": "payoff_b_new_vulture_original_GPS_hour_bracket_source_20261022",
+    "analysis_type": "SOURCE_ONLY_TIMING_RESOLUTION_NOT_CUE_EFFECT",
+    "result": {
+      "status": "INDEPENDENT_TAXON_SOURCE_TIME_BRACKETS_COMPLETE",
+      "source_doi": "10.5441/001/1.385gk270",
+      "original_checksum": {
+        "bytes": 122069657,
+        "md5": "578c45678d402d055000ea14e754b6da",
+        "original_source_verified": true
+      },
+      "source_taxon": "Neophron percnopterus",
+      "original_spring_geovalid_fix_counts": {
+        "days_with_too_few_independent_hour_bins": 46,
+        "invalid_timestamp_or_position": 137,
+        "outside_original_spring_months": 422671,
+        "valid_spring_fixes": 154658
+      },
+      "hour_bracket_source_admission": {
+        "original_stationary_then_northward_candidate_events": 30,
+        "first_event_per_original_bird_calendar_year": 18,
+        "source_hour_bracket_outcome_counts": {
+          "BRACKET_WITHIN_24H": 15,
+          "LAST_SOURCE_FIX_OUTSIDE": 3
+        },
+        "bracket_width_hours_quantiles_if_24h_or_narrower": {
+          "min": 7.24,
+          "q25": 9.752500000000001,
+          "median": 15.999722222222223,
+          "q75": 16.009305555555557,
+          "max": 18
+        },
+        "brackets_narrower_than_h": {
+          "3": 0,
+          "6": 0,
+          "12": 5,
+          "24": 15
+        },
+        "fixed_future_hourly_meteorology_source_gate": {
+          "at_least_10_distinct_animal_year_brackets_under_24h": 10,
+          "passed": true
+        },
+        "single_animal_year_counted_only_once": true,
+        "true_behavioral_commitment_instant_identified": false,
+        "no_raw_positions_source_identity_or_calendar_dates_exported": true
+      },
+      "actual_stopover_exit_observed": false,
+      "predecision_hourly_weather_joined": false,
+      "future_remaining_migration_recourse_measured": false,
+      "reproduction_survival_or_fitness_tested": false
+    }
+  },
+  "independent_taxon_weather_source_run": "https://github.com/zuizui0223/payoff/actions/runs/39777612815",
+  "interpretation": [
+    "Among exactly 18 first-observed northward GPS candidates in distinct source animal-years, 15 are bracketed within 24 hours between last in-site fix and first out-site fix; 3 have a last source-day fix already outside the presumed 30km site.",
+    "No candidate has a gap less than or equal to 6 hours; five <=12 hours; among the fifteen <=24h, median bracket width is about 16 hours.",
+    "The predefined minimum 10 animal-years <=24h source-timing feasibility threshold passes, but a 16-hour bracket is not the instant of bird decision or the timing of an external cue actually perceived.",
+    "The previously specified vulture negative solar contrast did not generalize from storks. A precise hourly cue-effect model is not justified merely by source timing coverage.",
+    "The source is an endangered species, so exact fixes, dates, locations and identifiers are not released."
+  ],
+  "original_V7R_V8_and_stork53_nulls_preserved": true,
+  "cue_signal_perception_measured": false,
+  "actual_migration_choice_observed": false,
+  "corrective_action_and_recourse_measured": false,
+  "reproductive_fitness_measured": false
+}
