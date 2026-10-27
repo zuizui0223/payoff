@@ -1,0 +1,148 @@
+{
+  "schema": "payoff_b_2015_shearwater_stagewise_secondary_result_20261028",
+  "date": "2026-10-28",
+  "run": "https://github.com/zuizui0223/payoff/actions/runs/40534864044",
+  "previous_observation_gate": "https://github.com/zuizui0223/payoff/actions/runs/40533907417",
+  "original_published_paper": "https://doi.org/10.1038/srep16486",
+  "source": "https://doi.org/10.5441/001/1.tc76g560",
+  "classification": "EXPLORATORY_SECONDARY_SOURCE_METRIC_KNOWN_NAVIGATION_PRIOR_ART",
+  "original_output": {
+    "schema": "payoff_b_shearwater_two_stage_source_proxy_20261028",
+    "result": {
+      "source": "10.5441/001/1.tc76g560",
+      "classification": "EXPLORATORY_PRIOR_ART_SECONDARY_BEHAVIOR_PROXY",
+      "source_reference_subjects": 32,
+      "source_GPS_equipped": 27,
+      "source_GPS_observed": 23,
+      "original_arm_results": {
+        "control": {
+          "original_treated_subjects": 9,
+          "GPS_equipped_subjects": 9,
+          "GPS_observed_subjects": 8,
+          "two_window_progress_eligible": 8,
+          "observed_progress_improvement_binary": 3,
+          "source_status_counts": {
+            "BOTH_STAGE_PROGRESS_ESTIMABLE": 8,
+            "TWO_WINDOW_GPS_NOT_ADMITTED": 1
+          },
+          "median_early_progress": 0.6578741083741295,
+          "median_late_progress": 0.6061262266359071,
+          "median_late_minus_early_progress": -0.04600316481460673,
+          "sharp_outcome_rate_bound_among_all_assigned": [
+            0.3333333333333333,
+            0.4444444444444444
+          ],
+          "sharp_outcome_rate_bound_among_GPS_equipped": [
+            0.3333333333333333,
+            0.4444444444444444
+          ]
+        },
+        "magnetic_disruption": {
+          "original_treated_subjects": 9,
+          "GPS_equipped_subjects": 9,
+          "GPS_observed_subjects": 9,
+          "two_window_progress_eligible": 8,
+          "observed_progress_improvement_binary": 1,
+          "source_status_counts": {
+            "BOTH_STAGE_PROGRESS_ESTIMABLE": 8,
+            "TWO_WINDOW_GPS_NOT_ADMITTED": 1
+          },
+          "median_early_progress": 0.6065358781209088,
+          "median_late_progress": 0.4420028256297764,
+          "median_late_minus_early_progress": -0.13949669694232397,
+          "sharp_outcome_rate_bound_among_all_assigned": [
+            0.1111111111111111,
+            0.2222222222222222
+          ],
+          "sharp_outcome_rate_bound_among_GPS_equipped": [
+            0.1111111111111111,
+            0.2222222222222222
+          ]
+        },
+        "olfactory_deprivation": {
+          "original_treated_subjects": 14,
+          "GPS_equipped_subjects": 9,
+          "GPS_observed_subjects": 6,
+          "two_window_progress_eligible": 6,
+          "observed_progress_improvement_binary": 2,
+          "source_status_counts": {
+            "BOTH_STAGE_PROGRESS_ESTIMABLE": 6,
+            "TWO_WINDOW_GPS_NOT_ADMITTED": 8
+          },
+          "median_early_progress": 0.07655965149155405,
+          "median_late_progress": -0.19435473700560302,
+          "median_late_minus_early_progress": -0.24105931738478514,
+          "sharp_outcome_rate_bound_among_all_assigned": [
+            0.14285714285714285,
+            0.7142857142857143
+          ],
+          "sharp_outcome_rate_bound_among_GPS_equipped": [
+            0.2222222222222222,
+            0.5555555555555556
+          ]
+        }
+      },
+      "overall_progress_eligible": 22,
+      "olfactory_vs_control_sharp_full_arm_improvement_difference_bound": [
+        -0.30158730158730157,
+        0.380952380952381
+      ],
+      "magnetic_vs_control_sharp_full_arm_improvement_difference_bound": [
+        -0.3333333333333333,
+        -0.1111111111111111
+      ],
+      "true_signal_access_measured": false,
+      "coast_encounter_measured": false,
+      "phenological_recourse_or_fitness_measured": false,
+      "causal_treatment_effect_identified": false,
+      "first_original_GPS_fix_is_release_time": false,
+      "GPS_coordinates_IDs_dates_exported": false,
+      "source_pinned_MD5_and_bytes": {
+        "gps": {
+          "bytes": 4420051,
+          "md5": "35679733d880e26a17ddd7c51b5637eb",
+          "original_source_verified": true
+        },
+        "reference": {
+          "bytes": 9867,
+          "md5": "20a038104c926229690a8bcd11c365db",
+          "original_source_verified": true
+        }
+      },
+      "GPS_fix_integrity_counts": {
+        "valid_fix_row": 23014
+      }
+    },
+    "status": "STAGEWISE_SOURCE_DESCRIPTIVE_AND_BOUNDS_COMPLETE"
+  },
+  "outcome_interpretation": {
+    "eligible_subjects": 22,
+    "improvement_counts": {
+      "control": 3,
+      "magnetic_disruption": 1,
+      "olfactory_deprivation": 2
+    },
+    "median_within_subject_stage_change": {
+      "control": -0.04600316481460673,
+      "magnetic_disruption": -0.13949669694232397,
+      "olfactory_deprivation": -0.24105931738478514
+    },
+    "olfactory_minus_control_binary_outcome_full_arm_sharp_bound": [
+      -0.30158730158730157,
+      0.380952380952381
+    ],
+    "actual_cue_encounter_chronology_identified": false,
+    "experimental_causal_effect_identified": false,
+    "coastal_information_rescue_tested": false,
+    "phenological_mismatch_fitness_benefit_measured": false,
+    "previously_published_coastal_reorientation_result_is_prior_art": true
+  },
+  "mandatory_boundaries": [
+    "A clock-based 12h early/late split cannot identify access to coast/olfaction or other alternative information channels.",
+    "Earliest GPS fix is not independently certified to be the experimental release time.",
+    "Homeward index relative to public midpoint of two colonies measures net directional displacement per path distance, not a feedback or route-optimization decision.",
+    "Treatment arms have unequal by-design GPS versus Argos assignments and different tracking missingness.",
+    "Missing original GPS/Argos outcomes are not treated as non-improvers; full arm bounded treatment contrasts can include opposite signs.",
+    "No independent experimental replication or evolutionary game theory claim follows from already published Pollonara source data."
+  ]
+}
