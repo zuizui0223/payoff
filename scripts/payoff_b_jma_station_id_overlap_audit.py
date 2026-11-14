@@ -13,6 +13,8 @@ import urllib.request
 import zipfile
 from collections import Counter
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.payoff_b_japan_phenology_source_census import URL as PHENO_URL
 from scripts.payoff_b_jma_station_metadata_source_probe import URL as META_URL
 
