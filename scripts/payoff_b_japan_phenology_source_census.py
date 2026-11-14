@@ -19,6 +19,8 @@ import zipfile
 from collections import Counter
 from pathlib import Path
 
+from src.japan_phenology_panel import parse_wide_jma_csv
+
 URL = "https://www.data.jma.go.jp/sakura/data/ruinenchi/ruinenchi_all.zip"
 MAX_BYTES = 8_000_000
 INDEX_URL = "https://www.data.jma.go.jp/sakura/data/download_ruinenchi.html"
@@ -166,6 +168,13 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
                     })
             basename = member.filename.rsplit("/", 1)[-1]
             label = (labels or {}).get(basename)
+            panel, panel_receipt = parse_wide_jma_csv(
+                payload, source_file=basename, event_label=label or basename
+            )
+            if annual_coverage is None:
+                raise ValueError(f"Unrecognized annual schema for {basename}")
+            if len(panel) != annual_coverage["valid_mmdd_cells"]:
+                raise ValueError(f"Independent panel count mismatch for {basename}")
             results.append({
                 "filename": member.filename,
                 "official_event_label": label,
@@ -173,6 +182,7 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
                 "sha256": hashlib.sha256(payload).hexdigest(),
                 "encoding": encoding,
                 "annual_coverage": annual_coverage,
+                "panel_receipt": panel_receipt,
                 "header_candidates": header_candidates,
                 "row_count_including_headers": len(rows),
                 "first_three_rows_first_12_cells": [r[:12] for r in first],
@@ -186,6 +196,7 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
         "csv_file_count": len(results),
         "files_with_official_event_labels": sum(bool(x["official_event_label"]) for x in results),
         "files_with_wide_year_rm_schema": sum(x["annual_coverage"] is not None for x in results),
+        "independent_panel_event_count": sum(x["panel_receipt"]["event_rows_calendar_valid_not_rm_screened"] for x in results),
         "valid_mmdd_cells_total_not_unique_observations": sum(x["annual_coverage"]["valid_mmdd_cells"] for x in results if x["annual_coverage"]),
         "source_taxon_filename_class_counts": dict(Counter(x["source_taxon_guess"] for x in results)),
         "unrecognized_files": [{
@@ -195,6 +206,7 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
             "first_three_rows_first_12_cells": x["first_three_rows_first_12_cells"],
             "header_candidates": x["header_candidates"],
         } for x in results if x["annual_coverage"] is None],
+        "rm_codes_on_valid_event_dates": dict(sum((Counter(x["panel_receipt"]["valid_event_rm_codes"]) for x in results), Counter())),
         "rm_code_frequencies_all_wide_tables": dict(sum(
             (Counter(x["annual_coverage"]["rm_code_frequencies_all_station_year_cells"])
              for x in results if x["annual_coverage"] is not None), Counter())),
@@ -229,7 +241,7 @@ def main() -> None:
     result = summarize_zip(raw, labels=labels)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"csv_file_count": result["csv_file_count"], "files_with_official_event_labels": result["files_with_official_event_labels"], "files_with_wide_year_rm_schema": result["files_with_wide_year_rm_schema"], "valid_mmdd_cells_total_not_unique_observations": result["valid_mmdd_cells_total_not_unique_observations"], "first_file_schema": result["files"][0]["first_three_rows_first_12_cells"] if result["files"] else [], "archive_sha256": result["archive_sha256"], "source_taxon_filename_class_counts": result["source_taxon_filename_class_counts"], "by_taxon_provisional": result["by_taxon_provisional"], "unrecognized_files": result["unrecognized_files"]}, ensure_ascii=False))
+    print(json.dumps({"csv_file_count": result["csv_file_count"], "files_with_official_event_labels": result["files_with_official_event_labels"], "files_with_wide_year_rm_schema": result["files_with_wide_year_rm_schema"], "valid_mmdd_cells_total_not_unique_observations": result["valid_mmdd_cells_total_not_unique_observations"], "independent_panel_event_count": result["independent_panel_event_count"], "rm_codes_on_valid_event_dates": result["rm_codes_on_valid_event_dates"], "first_file_schema": result["files"][0]["first_three_rows_first_12_cells"] if result["files"] else [], "archive_sha256": result["archive_sha256"], "source_taxon_filename_class_counts": result["source_taxon_filename_class_counts"], "by_taxon_provisional": result["by_taxon_provisional"], "unrecognized_files": result["unrecognized_files"]}, ensure_ascii=False))
 
 
 if __name__ == "__main__":
