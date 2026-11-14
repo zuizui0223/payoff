@@ -12,6 +12,8 @@ on:
       - "src/japan_phenology_panel.py"
       - "src/japan_phenology_environment_gate.py"
       - "src/japan_phenology_biomass_bridge.py"
+      - "src/japan_phenology_jma_multivariate.py"
+      - "tests/test_japan_phenology_jma_multivariate.py"
       - "tests/test_japan_phenology_biomass_bridge.py"
       - "tests/test_japan_phenology_environment_gate.py"
       - "scripts/payoff_b_jma_station_metadata_source_probe.py"
@@ -25,6 +27,8 @@ on:
       - "src/japan_phenology_panel.py"
       - "src/japan_phenology_environment_gate.py"
       - "src/japan_phenology_biomass_bridge.py"
+      - "src/japan_phenology_jma_multivariate.py"
+      - "tests/test_japan_phenology_jma_multivariate.py"
       - "tests/test_japan_phenology_biomass_bridge.py"
       - "tests/test_japan_phenology_environment_gate.py"
       - "scripts/payoff_b_jma_station_metadata_source_probe.py"
@@ -50,7 +54,7 @@ jobs:
       - name: Install audit test dependency
         run: python -m pip install --disable-pip-version-check pytest
       - name: Verify offline source-census invariants
-        run: python -m pytest -q tests/test_payoff_b_japan_phenology_source_census.py tests/test_japan_phenology_panel.py tests/test_japan_phenology_environment_gate.py tests/test_payoff_b_jma_station_metadata_source_probe.py tests/test_japan_phenology_biomass_bridge.py
+        run: python -m pytest -q tests/test_payoff_b_japan_phenology_source_census.py tests/test_japan_phenology_panel.py tests/test_japan_phenology_environment_gate.py tests/test_payoff_b_jma_station_metadata_source_probe.py tests/test_japan_phenology_biomass_bridge.py tests/test_japan_phenology_jma_multivariate.py
       - name: Read JMA public all-species archive and publish schema receipt only
         run: python scripts/payoff_b_japan_phenology_source_census.py --output outputs/japan_phenology/jma_archive_inventory.json
       - name: Audit official JMA station metadata history ZIP
