@@ -131,6 +131,24 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
                         "rm_flags_retained_not_interpreted": True,
                         "valid_mmdd_is_not_validated_biological_record": True,
                     }
+            # Diagnose every rejected file without guessing its schema.
+            # Distinguish no year header from a different header position.
+            header_candidates = []
+            for header_idx, candidate in enumerate(nonempty[:12]):
+                years = [(i, int(v)) for i, v in enumerate(candidate)
+                         if re.fullmatch(r"(?:19|20)\\d{2}", v.strip())]
+                if years:
+                    header_candidates.append({
+                        "row_index": header_idx,
+                        "year_column_count": len(years),
+                        "first_year": years[0][1],
+                        "last_year": years[-1][1],
+                        "next_column_is_rm_for_all": all(
+                            i + 1 < len(candidate) and
+                            candidate[i + 1].strip().lower() == "rm"
+                            for i, _ in years),
+                        "header_first_8_cells": candidate[:8],
+                    })
             basename = member.filename.rsplit("/", 1)[-1]
             label = (labels or {}).get(basename)
             results.append({
@@ -140,6 +158,7 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
                 "sha256": hashlib.sha256(payload).hexdigest(),
                 "encoding": encoding,
                 "annual_coverage": annual_coverage,
+                "header_candidates": header_candidates,
                 "row_count_including_headers": len(rows),
                 "first_three_rows_first_12_cells": [r[:12] for r in first],
                 "source_taxon_guess": classify(label or member.filename),
@@ -154,6 +173,23 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
         "files_with_wide_year_rm_schema": sum(x["annual_coverage"] is not None for x in results),
         "valid_mmdd_cells_total_not_unique_observations": sum(x["annual_coverage"]["valid_mmdd_cells"] for x in results if x["annual_coverage"]),
         "source_taxon_filename_class_counts": dict(Counter(x["source_taxon_guess"] for x in results)),
+        "unrecognized_files": [{
+            "filename": x["filename"],
+            "official_event_label": x["official_event_label"],
+            "row_count": x["row_count_including_headers"],
+            "first_three_rows_first_12_cells": x["first_three_rows_first_12_cells"],
+            "header_candidates": x["header_candidates"],
+        } for x in results if x["annual_coverage"] is None],
+        "by_taxon_provisional": {
+            taxon: {
+                "files": sum(x["source_taxon_guess"] == taxon for x in results),
+                "wide_year_files": sum(x["source_taxon_guess"] == taxon and x["annual_coverage"] is not None for x in results),
+                "calendar_valid_cells_not_quality_screened": sum(
+                    x["annual_coverage"]["valid_mmdd_cells"]
+                    for x in results if x["source_taxon_guess"] == taxon and x["annual_coverage"] is not None),
+            }
+            for taxon in ("amphibian", "bird", "insect", "plant_or_unclassified")
+        },
         "files": results,
         "note": "Counts are source-file inventory, not number of biological observations. Filename taxonomy is provisional. 2021 JMA animal observation cessation must be modelled as an observation-protocol change.",
     }
@@ -175,7 +211,7 @@ def main() -> None:
     result = summarize_zip(raw, labels=labels)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"csv_file_count": result["csv_file_count"], "files_with_official_event_labels": result["files_with_official_event_labels"], "files_with_wide_year_rm_schema": result["files_with_wide_year_rm_schema"], "valid_mmdd_cells_total_not_unique_observations": result["valid_mmdd_cells_total_not_unique_observations"], "first_file_schema": result["files"][0]["first_three_rows_first_12_cells"] if result["files"] else [], "archive_sha256": result["archive_sha256"], "source_taxon_filename_class_counts": result["source_taxon_filename_class_counts"]}, ensure_ascii=False))
+    print(json.dumps({"csv_file_count": result["csv_file_count"], "files_with_official_event_labels": result["files_with_official_event_labels"], "files_with_wide_year_rm_schema": result["files_with_wide_year_rm_schema"], "valid_mmdd_cells_total_not_unique_observations": result["valid_mmdd_cells_total_not_unique_observations"], "first_file_schema": result["files"][0]["first_three_rows_first_12_cells"] if result["files"] else [], "archive_sha256": result["archive_sha256"], "source_taxon_filename_class_counts": result["source_taxon_filename_class_counts"], "by_taxon_provisional": result["by_taxon_provisional"], "unrecognized_files": result["unrecognized_files"]}, ensure_ascii=False))
 
 
 if __name__ == "__main__":
