@@ -4,7 +4,7 @@ import zipfile
 
 import pytest
 
-from scripts.payoff_b_japan_phenology_source_census import classify, summarize_zip
+from scripts.payoff_b_japan_phenology_source_census import classify, summarize_zip, parse_index_labels
 
 
 def fixture_zip():
@@ -45,3 +45,13 @@ def test_reject_invalid_archive():
 def test_reject_archive_over_limit():
     with pytest.raises(ValueError):
         summarize_zip(b"x" * 8_000_001)
+
+
+def test_official_html_labels_recover_numeric_csv_taxa():
+    html = '<a href="ruinenchi/114.csv">にほんあまがえる初鳴</a><a href="ruinenchi/201.csv">★さくら開花</a>'
+    labels = parse_index_labels(html)
+    assert labels["114.csv"] == "にほんあまがえる初鳴"
+    assert labels["201.csv"] == "さくら開花"
+    with_labels = summarize_zip(fixture_zip(), labels={"bird.csv": "うぐいす初鳴", "frog.csv": "にほんあまがえる初鳴"})
+    assert with_labels["files_with_official_event_labels"] == 2
+    assert with_labels["source_taxon_filename_class_counts"] == {"bird": 1, "amphibian": 1}
