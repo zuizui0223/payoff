@@ -33,6 +33,9 @@ def test_pre1961_event_is_not_silently_matched():
         "no_metadata_valid_on_event_date":1,
         "unique_temporal_metadata_record":1,
     }
+    assert result["unmatched_before_1961"] == 1
+    assert result["unmatched_1961_onward"] == 0
+    assert result["unmatched_by_decade"] == {"1950": 1}
     assert result["environmental_join_admitted"] is False
 
 def test_overlapping_distinct_locations_are_ambiguous():
