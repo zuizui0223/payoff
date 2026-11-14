@@ -67,6 +67,6 @@ def test_actual_jma_wide_station_year_rm_schema_and_calendar_filter():
     assert cov["year_min"] == 1953
     assert cov["year_max"] == 1954
     assert cov["station_count"] == 3
-    assert cov["valid_mmdd_cells"] == 3  # 1953: Apr5, Feb29 invalid; 1954: Mar5
+    assert cov["valid_mmdd_cells"] == 2  # Apr5 1953, Mar5 1954; Feb29/30 invalid
     assert receipt["files_with_wide_year_rm_schema"] == 1
     assert cov["rm_flags_retained_not_interpreted"]
