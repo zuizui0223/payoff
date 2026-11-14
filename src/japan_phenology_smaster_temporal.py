@@ -1,7 +1,7 @@
 """Official JMA smaster.index fixed-width temporal station-location parser.
 
 Specification: https://www.data.jma.go.jp/stats/data/mdrr/man/smasterindex_format.pdf
-Bytes 1-3 station ID, 37-42 latitude DDMMm, 43-49 longitude DDDMMm,
+Bytes 1-3 station ID, 37-42 latitude DDMMm0, 43-49 longitude DDDMMm0,
 65-72 valid-from YYYYMMDD, 73-80 valid-through YYYYMMDD.
 The official coordinate fields are degree + minute to 0.1 minute, NOT
 decimal degrees or WGS84-datum-certified coordinates.
@@ -15,13 +15,13 @@ from collections import Counter, defaultdict
 
 def _dms_tenth_minute(raw: bytes, degree_digits: int) -> float:
     token = raw.decode("ascii").strip()
-    if len(token) != degree_digits + 3 or not token.isdigit():
+    if len(token) != degree_digits + 4 or not token.isdigit():
         raise ValueError(f"Unexpected JMA degree-minute field: {token!r}")
     degree = int(token[:degree_digits])
     minutes_tenths = int(token[degree_digits:])
-    if minutes_tenths >= 600:
+    if minutes_tenths >= 6000 or minutes_tenths % 10 != 0:
         raise ValueError("Invalid minutes")
-    return round(degree + minutes_tenths / 600, 7)
+    return round(degree + minutes_tenths / 6000, 7)
 
 
 def _period(raw: bytes, *, end: bool = False):
