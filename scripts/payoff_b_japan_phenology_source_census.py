@@ -91,6 +91,45 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
             rows = list(csv.reader(io.StringIO(decoded)))
             nonempty = [r for r in rows if any(v.strip() for v in r)]
             first = nonempty[:3]
+            # JMA historical tables are wide: event-title row, station/year
+            # header with year,rm pairs, then one station per row.
+            # Retain rm flags without interpreting their code semantics.
+            annual_coverage = None
+            if len(nonempty) >= 3 and len(nonempty[1]) >= 4 and nonempty[1][0] == "番号":
+                header = nonempty[1]
+                yearcols = [(i, int(v)) for i, v in enumerate(header)
+                            if re.fullmatch(r"(?:19|20)\\d{2}", v.strip())]
+                if yearcols and all(i + 1 < len(header) and header[i + 1].strip().lower() == "rm" for i, _ in yearcols):
+                    per_year = {}
+                    station_ids = set()
+                    for row in nonempty[2:]:
+                        if not row or not row[0].strip().isdigit():
+                            continue
+                        station_ids.add(row[0].strip())
+                        for i, year in yearcols:
+                            value = row[i].strip() if i < len(row) else ""
+                            # No biological event is inferred from 0, blanks,
+                            # or unknown special codes; valid MMDD only.
+                            if not value.isdigit() or not (1 <= int(value) <= 1231):
+                                continue
+                            mmdd = value.zfill(4)
+                            month, day = int(mmdd[:2]), int(mmdd[2:])
+                            import datetime
+                            try:
+                                datetime.date(year, month, day)
+                            except ValueError:
+                                continue
+                            per_year[year] = per_year.get(year, 0) + 1
+                    annual_coverage = {
+                        "year_min": min(y for _, y in yearcols),
+                        "year_max": max(y for _, y in yearcols),
+                        "year_column_count": len(yearcols),
+                        "station_count": len(station_ids),
+                        "valid_mmdd_cells": sum(per_year.values()),
+                        "valid_mmdd_by_year": {str(y): per_year.get(y, 0) for _, y in yearcols},
+                        "rm_flags_retained_not_interpreted": True,
+                        "valid_mmdd_is_not_validated_biological_record": True,
+                    }
             basename = member.filename.rsplit("/", 1)[-1]
             label = (labels or {}).get(basename)
             results.append({
@@ -99,6 +138,7 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
                 "bytes": len(payload),
                 "sha256": hashlib.sha256(payload).hexdigest(),
                 "encoding": encoding,
+                "annual_coverage": annual_coverage,
                 "row_count_including_headers": len(rows),
                 "first_three_rows_first_12_cells": [r[:12] for r in first],
                 "source_taxon_guess": classify(label or member.filename),
@@ -110,6 +150,8 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
         "archive_bytes": len(raw),
         "csv_file_count": len(results),
         "files_with_official_event_labels": sum(bool(x["official_event_label"]) for x in results),
+        "files_with_wide_year_rm_schema": sum(x["annual_coverage"] is not None for x in results),
+        "valid_mmdd_cells_total_not_unique_observations": sum(x["annual_coverage"]["valid_mmdd_cells"] for x in results if x["annual_coverage"]),
         "source_taxon_filename_class_counts": dict(Counter(x["source_taxon_guess"] for x in results)),
         "files": results,
         "note": "Counts are source-file inventory, not number of biological observations. Filename taxonomy is provisional. 2021 JMA animal observation cessation must be modelled as an observation-protocol change.",
@@ -132,7 +174,7 @@ def main() -> None:
     result = summarize_zip(raw, labels=labels)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"csv_file_count": result["csv_file_count"], "files_with_official_event_labels": result["files_with_official_event_labels"], "first_file_schema": result["files"][0]["first_three_rows_first_12_cells"] if result["files"] else [], "archive_sha256": result["archive_sha256"], "source_taxon_filename_class_counts": result["source_taxon_filename_class_counts"]}, ensure_ascii=False))
+    print(json.dumps({"csv_file_count": result["csv_file_count"], "files_with_official_event_labels": result["files_with_official_event_labels"], "files_with_wide_year_rm_schema": result["files_with_wide_year_rm_schema"], "valid_mmdd_cells_total_not_unique_observations": result["valid_mmdd_cells_total_not_unique_observations"], "first_file_schema": result["files"][0]["first_three_rows_first_12_cells"] if result["files"] else [], "archive_sha256": result["archive_sha256"], "source_taxon_filename_class_counts": result["source_taxon_filename_class_counts"]}, ensure_ascii=False))
 
 
 if __name__ == "__main__":
