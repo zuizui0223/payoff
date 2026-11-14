@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.payoff_b_japan_phenology_source_census import URL, INDEX_URL, parse_index_labels, classify
 from src.japan_phenology_panel import parse_wide_jma_csv
 from src.japan_phenology_cross_taxon import paired_station_year_anomaly_correlation
+from src.japan_phenology_coupling_robustness import station_balanced_coupling
 
 def compute(raw: bytes, labels: dict) -> dict:
     events = []
@@ -27,6 +28,7 @@ def compute(raw: bytes, labels: dict) -> dict:
                 r["source_taxon_guess"] = group
             events.extend(rows)
     pairs = []
+    balanced = []
     for a,b in (("amphibian","plant_or_unclassified"),
                 ("bird","plant_or_unclassified"),
                 ("insect","plant_or_unclassified"),
@@ -34,13 +36,14 @@ def compute(raw: bytes, labels: dict) -> dict:
                 ("bird","insect"),
                 ("amphibian","insect")):
         pairs.append(paired_station_year_anomaly_correlation(events, group_a=a,group_b=b))
+        balanced.append(station_balanced_coupling(events,a,b))
     return {"source":"JMA official cumulative biological season archive",
             "source_event_date_cells":len(events),
             "analysis":"exploratory cross-taxon within-station event-year anomaly correlation",
             "provisional_taxon_classification":True,
             "rm_code_quality_screened":False,
             "weather_ndvi_biomass_fitted":False,
-            "pair_results":pairs}
+            "pair_results":pairs,"station_balanced_robustness":balanced}
 
 def main():
     p=argparse.ArgumentParser()
