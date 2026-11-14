@@ -68,6 +68,8 @@ def audit_event_coverage(events: list[dict], metadata: list[dict]) -> dict:
     for m in metadata:
         byid[m["station_id"]].append(m)
     status = Counter()
+    unmatched_by_decade = Counter()
+    unmatched_before_1961 = 0
     relocation = Counter()
     examples = []
     for sid, records in byid.items():
@@ -82,6 +84,9 @@ def audit_event_coverage(events: list[dict], metadata: list[dict]) -> dict:
                    (m["valid_to"] is None or date <= m["valid_to"])]
         if not matches:
             status["no_metadata_valid_on_event_date"] += 1
+            unmatched_by_decade[(date.year // 10) * 10] += 1
+            if date.year < 1961:
+                unmatched_before_1961 += 1
         elif len(matches) > 1:
             coords = {(m["lat_degrees"], m["lon_degrees"]) for m in matches}
             if len(coords) == 1:
@@ -100,6 +105,9 @@ def audit_event_coverage(events: list[dict], metadata: list[dict]) -> dict:
         "stations_with_multiple_coordinates": len(relocation),
         "event_match_status": dict(status),
         "ambiguous_examples": examples,
+        "unmatched_before_1961": unmatched_before_1961,
+        "unmatched_1961_onward": status["no_metadata_valid_on_event_date"] - unmatched_before_1961,
+        "unmatched_by_decade": {str(k): v for k, v in sorted(unmatched_by_decade.items())},
         "coordinate_degree_minute_decoding_verified_against_format": True,
         "coordinate_datum_certified_wgs84": False,
         "environmental_join_admitted": False,
