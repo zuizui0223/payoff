@@ -1,0 +1,75 @@
+{
+  "schema": "payoff_b_wytham_resource_fitness_source_admission_v1",
+  "date": "2026-11-14",
+  "status": "PUBLIC_METADATA_SCREEN_ONLY_NOT_RAW_DATA_ADMITTED",
+  "study": "Wytham Woods, Oxfordshire, UK",
+  "sources": [
+    {
+      "id": "wytham_breeding_2020_2021",
+      "doi": "10.5285/ae6f821a-35a1-4a37-af4d-ca7cb1c83a10",
+      "publisher": "NERC EDS Environmental Information Data Centre",
+      "metadata_url": "https://catalogue.ceh.ac.uk/documents/ae6f821a-35a1-4a37-af4d-ca7cb1c83a10",
+      "source_years": [2020, 2021],
+      "taxa": ["Parus major", "Cyanistes caeruleus", "Poecile palustris", "Periparus ater"],
+      "reported_fields": ["breeding pair identity", "first egg date", "egg count", "hatch date", "fledgling count", "fledgling condition"],
+      "resource_biomass_magnitude_measured": false,
+      "migrant_bird_study": false,
+      "raw_file_checksum_verified": false,
+      "raw_schema_verified": false,
+      "licence_on_primary_publisher": "Open Government Licence",
+      "admission": "BREEDING_OUTCOME_METADATA_PRESENT_RESOURCE_AMOUNT_ABSENT"
+    },
+    {
+      "id": "wytham_ringing_2020_2021",
+      "doi": "10.5285/af4c9b5a-fba9-4133-b782-2a2cbc927280",
+      "publisher": "NERC EDS Environmental Information Data Centre",
+      "metadata_url": "https://catalogue.ceh.ac.uk/documents/af4c9b5a-fba9-4133-b782-2a2cbc927280",
+      "source_years": [2020, 2021],
+      "reported_fields": ["bird ringing records", "bird identity"],
+      "resource_biomass_magnitude_measured": false,
+      "migrant_bird_study": false,
+      "raw_file_checksum_verified": false,
+      "raw_schema_verified": false,
+      "admission": "INDIVIDUAL_PROVENANCE_POTENTIAL_UNJOINED"
+    },
+    {
+      "id": "wytham_frass_peak_longterm",
+      "doi": null,
+      "publisher": "Oxford long-term Wytham phenology source described in research publication",
+      "metadata_url": "https://ora.ox.ac.uk/objects/uuid%3A7b0c37bb-ab3d-4133-9934-c7c3be13f028/files/s2v23vv22p",
+      "reported_fields": ["annual caterpillar half-fall date"],
+      "resource_biomass_magnitude_measured": false,
+      "raw_file_checksum_verified": false,
+      "raw_schema_verified": false,
+      "admission": "PEAK_TIMING_ONLY_IN_INSPECTED_SOURCE"
+    },
+    {
+      "id": "wytham_nestling_mass_2026",
+      "doi": "10.5061/dryad.79cnp5jcc",
+      "publisher": "Dryad",
+      "metadata_url": "https://datadryad.org/dataset/doi:10.5061/dryad.79cnp5jcc",
+      "reported_fields": ["adult and nestling body mass", "temperature", "breeding density", "mismatch with peak food availability"],
+      "resource_biomass_magnitude_measured": false,
+      "raw_file_checksum_verified": false,
+      "raw_schema_verified": false,
+      "migrant_bird_study": false,
+      "admission": "PROMISING_BODY_MASS_OUTCOME_BUT_NOT_RESOURCE_BIOMASS"
+    },
+    {
+      "id": "wytham_vegetation_2023",
+      "doi": "10.5285/371f7553-42db-4da0-a062-76b5526ecaa7",
+      "publisher": "NERC EDS Environmental Information Data Centre",
+      "metadata_url": "https://catalogue.ceh.ac.uk/documents/371f7553-42db-4da0-a062-76b5526ecaa7",
+      "source_years": [2023],
+      "reported_fields": ["understory plant species", "canopy cover"],
+      "resource_biomass_magnitude_measured": false,
+      "raw_file_checksum_verified": false,
+      "raw_schema_verified": false,
+      "admission": "HABITAT_COVARIATES_ONLY_NONOVERLAPPING_WITH_2020_2021_BREEDING"
+    }
+  ],
+  "predeclared_primary_model_requires": ["direct measured resource biomass time series", "same site and season as bird breeding", "standardized sample effort and units", "bird brood demand window", "reproductive output", "site and year dependence"],
+  "no_resource_biomass_source_admitted": true,
+  "no_new_biomass_fitness_effect_fitted": true,
+  "no_migrant_mechanism_inference": true
+}
