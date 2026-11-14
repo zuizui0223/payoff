@@ -50,13 +50,14 @@ def parse_smaster(raw: bytes) -> list[dict]:
             raise ValueError(f"line {n}: inverted station-history period")
         lat = _dms_tenth_minute(line[36:42], 2)
         lon = _dms_tenth_minute(line[42:49], 3)
-        if not (20 <= lat <= 46.5 and 120 <= lon <= 155):
-            raise ValueError(f"line {n}: unexpected Japan station coordinates")
+        if not (0 <= lat <= 90 and 0 <= lon <= 180):
+            raise ValueError(f"line {n}: invalid coordinate field")
         result.append({
             "station_id": sid, "valid_from": start, "valid_to": end,
             "lat_degrees": lat, "lon_degrees": lon,
             "coordinate_precision_minutes": 0.1,
             "coordinate_datum_certified_wgs84": False,
+            "within_japan_numeric_bbox": (20 <= lat <= 46.5 and 120 <= lon <= 155),
             "metadata_source_line": n,
         })
     return result
