@@ -1,0 +1,196 @@
+{
+  "schema": "payoff_b_jma_meteorological_covariate_registry_v1",
+  "source": "https://www.data.jma.go.jp/risk/obsdl/",
+  "source_help": "https://www.data.jma.go.jp/risk/obsdl/top/help1.html",
+  "source_update": "https://www.data.jma.go.jp/risk/obsdl/top/whatsnew.html",
+  "availability_rule": "station_element_year_specific_not_assumed",
+  "variables": [
+    {
+      "id": "tmean",
+      "group": "temperature",
+      "jma_label": "日平均気温",
+      "unit": "degC",
+      "mechanism": "thermal development",
+      "priority": "primary"
+    },
+    {
+      "id": "tmax",
+      "group": "temperature",
+      "jma_label": "日最高気温",
+      "unit": "degC",
+      "mechanism": "heat extremes",
+      "priority": "primary"
+    },
+    {
+      "id": "tmin",
+      "group": "temperature",
+      "jma_label": "日最低気温",
+      "unit": "degC",
+      "mechanism": "frost and night temperature",
+      "priority": "primary"
+    },
+    {
+      "id": "precip",
+      "group": "precipitation",
+      "jma_label": "降水量の日合計",
+      "unit": "mm/day",
+      "mechanism": "moisture and breeding water",
+      "priority": "primary"
+    },
+    {
+      "id": "sunshine",
+      "group": "radiation",
+      "jma_label": "日照時間",
+      "unit": "hour/day",
+      "mechanism": "plant phenology and activity",
+      "priority": "primary",
+      "break": "AMeDAS 2021-03-02 switch from sunshine-meter observations to satellite-derived estimates"
+    },
+    {
+      "id": "global_radiation",
+      "group": "radiation",
+      "jma_label": "日合計全天日射量",
+      "unit": "MJ/m2/day",
+      "mechanism": "photosynthetic energy",
+      "priority": "secondary",
+      "coverage": "meteorological offices only"
+    },
+    {
+      "id": "snow_depth",
+      "group": "snow",
+      "jma_label": "日最深積雪",
+      "unit": "cm",
+      "mechanism": "snowmelt gate",
+      "priority": "primary"
+    },
+    {
+      "id": "snowfall",
+      "group": "snow",
+      "jma_label": "降雪量の日合計",
+      "unit": "cm/day",
+      "mechanism": "snowpack accumulation",
+      "priority": "secondary"
+    },
+    {
+      "id": "wind_mean",
+      "group": "wind",
+      "jma_label": "日平均風速",
+      "unit": "m/s",
+      "mechanism": "dispersal and activity",
+      "priority": "secondary"
+    },
+    {
+      "id": "wind_gust",
+      "group": "wind",
+      "jma_label": "日最大瞬間風速",
+      "unit": "m/s",
+      "mechanism": "storm disturbance",
+      "priority": "secondary"
+    },
+    {
+      "id": "relative_humidity",
+      "group": "humidity",
+      "jma_label": "日平均相対湿度",
+      "unit": "percent",
+      "mechanism": "desiccation and calling activity",
+      "priority": "primary",
+      "coverage": "meteorological offices or station-year with measured humidity"
+    },
+    {
+      "id": "vapour_pressure",
+      "group": "humidity",
+      "jma_label": "日平均蒸気圧",
+      "unit": "hPa",
+      "mechanism": "VPD derivation",
+      "priority": "primary",
+      "coverage": "meteorological offices or verified station-year"
+    },
+    {
+      "id": "pressure",
+      "group": "pressure",
+      "jma_label": "日平均現地気圧",
+      "unit": "hPa",
+      "mechanism": "weather-system variability",
+      "priority": "exploratory",
+      "coverage": "meteorological offices only"
+    },
+    {
+      "id": "cloud",
+      "group": "cloud",
+      "jma_label": "日平均雲量",
+      "unit": "tenths",
+      "mechanism": "radiation proxy",
+      "priority": "exploratory",
+      "coverage": "meteorological offices only"
+    },
+    {
+      "id": "weather",
+      "group": "weather",
+      "jma_label": "天気概況（昼：06時～18時）",
+      "unit": "category",
+      "mechanism": "detection and activity",
+      "priority": "exploratory",
+      "coverage": "meteorological offices only"
+    }
+  ],
+  "derived": [
+    {
+      "id": "gdd",
+      "requires": [
+        "tmean"
+      ],
+      "definition": "sum(max(tmean-base_temperature,0)) before event"
+    },
+    {
+      "id": "frost_days",
+      "requires": [
+        "tmin"
+      ],
+      "definition": "count(tmin<0) before event"
+    },
+    {
+      "id": "heat_days",
+      "requires": [
+        "tmax"
+      ],
+      "definition": "count(tmax>=threshold) before event"
+    },
+    {
+      "id": "rain_frequency",
+      "requires": [
+        "precip"
+      ],
+      "definition": "count(precip>=1mm) before event"
+    },
+    {
+      "id": "dry_spell",
+      "requires": [
+        "precip"
+      ],
+      "definition": "longest consecutive run(precip<1mm) before event"
+    },
+    {
+      "id": "vpd",
+      "requires": [
+        "tmean",
+        "vapour_pressure"
+      ],
+      "definition": "saturation vapour pressure(tmean)-measured vapour pressure; only if both measured and physically consistent"
+    },
+    {
+      "id": "snow_free_days",
+      "requires": [
+        "snow_depth"
+      ],
+      "definition": "days with snow_depth=0 before event"
+    }
+  ],
+  "warnings": [
+    "not all variables are available at all stations and years",
+    "JMA quality and homogeneity flags must be preserved",
+    "2021-03-02 sunshine method discontinuity",
+    "meteorological source not direct plant or prey biomass",
+    "NDVI independent non-JMA satellite product",
+    "do not use post-event values for prospective forecasting"
+  ]
+}
