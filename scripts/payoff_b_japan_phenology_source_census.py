@@ -98,9 +98,16 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
             annual_coverage = None
             if len(nonempty) >= 3 and len(nonempty[1]) >= 4 and nonempty[1][0] == "番号":
                 header = nonempty[1]
-                yearcols = [(i, int(v)) for i, v in enumerate(header)
-                            if re.fullmatch(r"(?:19|20)\d{2}", v.strip())]
-                if yearcols and all(i + 1 < len(header) and header[i + 1].strip().lower() == "rm" for i, _ in yearcols):
+                # Read contiguous YEAR,rm pairs from column 2 only.
+                # Trailing summary columns may also contain four-digit years.
+                yearcols = []
+                i = 2
+                while (i + 1 < len(header)
+                       and re.fullmatch(r"(?:19|20)\d{2}", header[i].strip())
+                       and header[i + 1].strip().lower() == "rm"):
+                    yearcols.append((i, int(header[i])))
+                    i += 2
+                if yearcols:
                     per_year = {}
                     station_ids = set()
                     rm_counts = Counter()
