@@ -13,6 +13,7 @@ from scripts.payoff_b_japan_phenology_source_census import URL, INDEX_URL, parse
 from src.japan_phenology_panel import parse_wide_jma_csv
 from src.japan_phenology_cross_taxon import paired_station_year_anomaly_correlation
 from src.japan_phenology_coupling_robustness import station_balanced_coupling
+from src.japan_phenology_rm_sensitivity import rm_sensitivity
 
 def compute(raw: bytes, labels: dict) -> dict:
     events = []
@@ -43,7 +44,8 @@ def compute(raw: bytes, labels: dict) -> dict:
             "provisional_taxon_classification":True,
             "rm_code_quality_screened":False,
             "weather_ndvi_biomass_fitted":False,
-            "pair_results":pairs,"station_balanced_robustness":balanced}
+            "pair_results":pairs,"station_balanced_robustness":balanced,
+            "rm_and_leap_sensitivity":rm_sensitivity(events)}
 
 def main():
     p=argparse.ArgumentParser()
