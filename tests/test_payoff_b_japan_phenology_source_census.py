@@ -55,3 +55,18 @@ def test_official_html_labels_recover_numeric_csv_taxa():
     with_labels = summarize_zip(fixture_zip(), labels={"bird.csv": "うぐいす初鳴", "frog.csv": "にほんあまがえる初鳴"})
     assert with_labels["files_with_official_event_labels"] == 2
     assert with_labels["source_taxon_filename_class_counts"] == {"bird": 1, "amphibian": 1}
+
+
+def test_actual_jma_wide_station_year_rm_schema_and_calendar_filter():
+    data = "1,うめの開花,,,,\n番号,地点名,1953,rm,1954,rm\n401,稚内,405,0,0,0\n402,札幌,229,0,230,0\n403,旭川,229,0,305,0\n".encode("cp932")
+    out = io.BytesIO()
+    with zipfile.ZipFile(out, "w") as z:
+        z.writestr("1.csv", data)
+    receipt = summarize_zip(out.getvalue(), labels={"1.csv": "うめ開花"})
+    cov = receipt["files"][0]["annual_coverage"]
+    assert cov["year_min"] == 1953
+    assert cov["year_max"] == 1954
+    assert cov["station_count"] == 3
+    assert cov["valid_mmdd_cells"] == 3  # 1953: Apr5, Feb29 invalid; 1954: Mar5
+    assert receipt["files_with_wide_year_rm_schema"] == 1
+    assert cov["rm_flags_retained_not_interpreted"]
