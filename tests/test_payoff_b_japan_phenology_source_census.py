@@ -70,3 +70,16 @@ def test_actual_jma_wide_station_year_rm_schema_and_calendar_filter():
     assert cov["valid_mmdd_cells"] == 2  # Apr5 1953, Mar5 1954; Feb29/30 invalid
     assert receipt["files_with_wide_year_rm_schema"] == 1
     assert cov["rm_flags_retained_not_interpreted"]
+
+
+def test_trailing_year_like_summary_column_not_treated_as_event_year():
+    data = "1,うめの開花,,,,\n番号,地点名,1953,rm,1954,rm,統計,2032\n401,稚内,405,6,0,0,その他,2024\n".encode("cp932")
+    out = io.BytesIO()
+    with zipfile.ZipFile(out, "w") as z:
+        z.writestr("1.csv", data)
+    receipt = summarize_zip(out.getvalue(), labels={"1.csv": "うめ開花"})
+    cov = receipt["files"][0]["annual_coverage"]
+    assert cov["year_column_count"] == 2
+    assert cov["year_max"] == 1954
+    assert cov["valid_mmdd_cells"] == 1
+    assert cov["rm_code_frequencies_all_station_year_cells"] == {"6": 1, "0": 1}
