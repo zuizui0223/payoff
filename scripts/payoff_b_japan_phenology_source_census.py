@@ -99,7 +99,7 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
             if len(nonempty) >= 3 and len(nonempty[1]) >= 4 and nonempty[1][0] == "番号":
                 header = nonempty[1]
                 yearcols = [(i, int(v)) for i, v in enumerate(header)
-                            if re.fullmatch(r"(?:19|20)\\d{2}", v.strip())]
+                            if re.fullmatch(r"(?:19|20)\d{2}", v.strip())]
                 if yearcols and all(i + 1 < len(header) and header[i + 1].strip().lower() == "rm" for i, _ in yearcols):
                     per_year = {}
                     station_ids = set()
