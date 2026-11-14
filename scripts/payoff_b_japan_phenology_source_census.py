@@ -18,6 +18,8 @@ import urllib.request
 import zipfile
 from collections import Counter
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.japan_phenology_panel import parse_wide_jma_csv
 
