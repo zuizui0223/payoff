@@ -21,7 +21,7 @@ GitHub Actions run https://github.com/zuizui0223/payoff/actions/runs/43599848876
 - Official byte positions: ID 1–3; latitude 37–42; longitude 43–49; observation valid-from 65–72; valid-through 73–80. End sentinel `99999999` means ongoing.
 - Example official `452490` = 45°24.9′ = 45.415° latitude; longitude `1414070` = 141°40.7′ = 141.678333...°.
 - The original source includes a non-Japan meteorological station; parsing the whole source must not assume all station coordinates lie within Japan. Coordinate datum is not independently certified WGS84 by the station-history format alone.
-- The **18,805** unmatched event rows have not been decomposed into pre-1961 observations, gaps, or other temporal mismatches. The historical metadata file explicitly starts in 1961; older phenology events are therefore expected to be partially unmatched, but this explanation has not been quantified.
+- The **18,805** unmatched event rows were decomposed in a subsequent original-data rerun: **18,774 pre-1961** and **31 from 1961 onward**. Source receipt by decade: 1950s=16,436; 1960s=2,357 (including pre-1961 and post-1961); 1970s=12. Thus 99.84% of unmatched rows are before the metadata history begins. The 31 later unmatched rows remain unadmitted and require station-specific review. Source: https://github.com/zuizui0223/payoff/actions/runs/43599925079 (61 tests passed).
 - The join establishes source-temporal station location eligibility, **not** successful daily temperature/rainfall/humidity/wind/NDVI/biomass retrieval or validated `rm` biological quality codes.
 - No ecological effect estimates or heldout predictions have been fitted.
 
