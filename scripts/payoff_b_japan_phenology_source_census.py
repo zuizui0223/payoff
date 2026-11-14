@@ -136,7 +136,7 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
             header_candidates = []
             for header_idx, candidate in enumerate(nonempty[:12]):
                 years = [(i, int(v)) for i, v in enumerate(candidate)
-                         if re.fullmatch(r"(?:19|20)\\d{2}", v.strip())]
+                         if re.fullmatch(r"(?:19|20)\d{2}", v.strip())]
                 if years:
                     header_candidates.append({
                         "row_index": header_idx,
