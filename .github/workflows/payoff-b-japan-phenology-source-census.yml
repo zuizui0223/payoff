@@ -23,6 +23,7 @@ on:
       - "src/japan_phenology_cross_taxon.py"
       - "src/japan_phenology_coupling_robustness.py"
       - "tests/test_japan_phenology_coupling_robustness.py"
+      - "docs/PAYOFF_B_JAPAN_CROSS_TAXON_BALANCED_RESULT_20261114.md"
       - "scripts/payoff_b_jma_cross_taxon_original_data.py"
       - "tests/test_japan_phenology_cross_taxon.py"
       - "scripts/payoff_b_jma_temporal_station_join_audit.py"
