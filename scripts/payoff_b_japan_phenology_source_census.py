@@ -11,6 +11,7 @@ import csv
 import hashlib
 import io
 import json
+import re
 from html.parser import HTMLParser
 from urllib.parse import urljoin, urlparse
 import urllib.request
