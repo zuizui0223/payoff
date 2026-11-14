@@ -36,6 +36,7 @@ def audit_station_zip(raw: bytes) -> dict:
                 "sha256": hashlib.sha256(payload).hexdigest(),
                 "first_600_byte_decoding_candidates": samples,
                 "format_admitted": False,
+                "first_three_decoded_lines": (samples.get("cp932", "") or samples.get("utf-8-sig", "")).splitlines()[:3],
                 "phenology_station_id_crosswalk_admitted": False,
             })
     return {
@@ -57,7 +58,7 @@ def main():
     receipt = audit_station_zip(raw)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"member_count": receipt["member_count"], "archive_sha256": receipt["archive_sha256"], "file_summaries": [{"filename": x["filename"], "size": x["size"], "encoding_candidates": list(x["first_600_byte_decoding_candidates"])} for x in receipt["files"]]}, ensure_ascii=False))
+    print(json.dumps({"member_count": receipt["member_count"], "archive_sha256": receipt["archive_sha256"], "file_summaries": [{"filename": x["filename"], "size": x["size"], "encoding_candidates": list(x["first_600_byte_decoding_candidates"]), "first_three_lines": x["first_three_decoded_lines"]} for x in receipt["files"]]}, ensure_ascii=False))
 
 
 if __name__ == "__main__":
