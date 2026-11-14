@@ -103,15 +103,20 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
                 if yearcols and all(i + 1 < len(header) and header[i + 1].strip().lower() == "rm" for i, _ in yearcols):
                     per_year = {}
                     station_ids = set()
+                    rm_counts = Counter()
+                    nondate_value_counts = Counter()
                     for row in nonempty[2:]:
                         if not row or not row[0].strip().isdigit():
                             continue
                         station_ids.add(row[0].strip())
                         for i, year in yearcols:
                             value = row[i].strip() if i < len(row) else ""
+                            rm = row[i + 1].strip() if i + 1 < len(row) else ""
+                            rm_counts[rm] += 1
                             # No biological event is inferred from 0, blanks,
                             # or unknown special codes; valid MMDD only.
                             if not value.isdigit() or not (1 <= int(value) <= 1231):
+                                nondate_value_counts[value] += 1
                                 continue
                             mmdd = value.zfill(4)
                             month, day = int(mmdd[:2]), int(mmdd[2:])
@@ -119,6 +124,7 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
                             try:
                                 datetime.date(year, month, day)
                             except ValueError:
+                                nondate_value_counts["INVALID_CALENDAR_DATE"] += 1
                                 continue
                             per_year[year] = per_year.get(year, 0) + 1
                     annual_coverage = {
@@ -129,6 +135,8 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
                         "valid_mmdd_cells": sum(per_year.values()),
                         "valid_mmdd_by_year": {str(y): per_year.get(y, 0) for _, y in yearcols},
                         "rm_flags_retained_not_interpreted": True,
+                        "rm_code_frequencies_all_station_year_cells": dict(rm_counts),
+                        "nondate_value_frequencies": dict(nondate_value_counts.most_common(20)),
                         "valid_mmdd_is_not_validated_biological_record": True,
                     }
             # Diagnose every rejected file without guessing its schema.
@@ -180,6 +188,9 @@ def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:
             "first_three_rows_first_12_cells": x["first_three_rows_first_12_cells"],
             "header_candidates": x["header_candidates"],
         } for x in results if x["annual_coverage"] is None],
+        "rm_code_frequencies_all_wide_tables": dict(sum(
+            (Counter(x["annual_coverage"]["rm_code_frequencies_all_station_year_cells"])
+             for x in results if x["annual_coverage"] is not None), Counter())),
         "by_taxon_provisional": {
             taxon: {
                 "files": sum(x["source_taxon_guess"] == taxon for x in results),
