@@ -10,8 +10,8 @@ from scripts.payoff_b_japan_phenology_source_census import classify, summarize_z
 def fixture_zip():
     out = io.BytesIO()
     with zipfile.ZipFile(out, "w") as z:
-        z.writestr("bird.csv", "地点,年,日付\n東京,2000,20000405\n".encode("cp932"))
-        z.writestr("frog.csv", "地点,年,日付\n京都,2001,20010312\n".encode("cp932"))
+        z.writestr("bird.csv", "1,うぐいす初鳴\n番号,地点名,2000,rm\n401,東京,405,6\n".encode("cp932"))
+        z.writestr("frog.csv", "2,あまがえる初鳴\n番号,地点名,2001,rm\n402,京都,312,6\n".encode("cp932"))
         z.writestr("notes.txt", "not a CSV")
     return out.getvalue()
 
@@ -21,8 +21,8 @@ def test_census_is_schema_only():
     assert x["csv_file_count"] == 2
     assert len(x["archive_sha256"]) == 64
     assert all(y["header_only_no_biological_fit"] for y in x["files"])
-    assert all(y["row_count_including_headers"] == 2 for y in x["files"])
-    assert x["files"][0]["first_three_rows_first_12_cells"][0] == ["地点", "年", "日付"]
+    assert all(y["row_count_including_headers"] == 3 for y in x["files"])
+    assert x["files"][0]["first_three_rows_first_12_cells"][1] == ["番号", "地点名", "2000", "rm"]
 
 
 @pytest.mark.parametrize("filename,expected", [
