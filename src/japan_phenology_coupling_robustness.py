@@ -9,6 +9,7 @@ from __future__ import annotations
 from collections import defaultdict
 from statistics import median
 import math
+import random
 
 
 def _pearson(a, b):
@@ -27,7 +28,7 @@ def _detrend(years, values):
     return [v-mv-slope*(y-my) for y,v in zip(years,values)]
 
 
-def station_balanced_coupling(events, group_a, group_b, *, min_shared_years=10):
+def station_balanced_coupling(events, group_a, group_b, *, min_shared_years=10, bootstrap_reps=1000, bootstrap_seed=20261114):
     if group_a == group_b:
         raise ValueError("Different source groups required")
     series = defaultdict(dict)
@@ -67,6 +68,15 @@ def station_balanced_coupling(events, group_a, group_b, *, min_shared_years=10):
                                                       if detrended_pairs else None),
                              "event_pairs":len(raw_pairs)})
     raw=[s["raw_station_mean_r"] for s in stations]
+    # Resample stations, never individual event-pair-years. This describes
+    # sampling uncertainty conditional on the observed station network.
+    bootstrap_interval = None
+    if len(raw) >= 10 and bootstrap_reps >= 100:
+        rng = random.Random(bootstrap_seed)
+        means = sorted(sum(raw[rng.randrange(len(raw))] for _ in raw)/len(raw)
+                       for _ in range(bootstrap_reps))
+        bootstrap_interval = [round(means[int(0.025*(bootstrap_reps-1))],6),
+                              round(means[int(0.975*(bootstrap_reps-1))],6)]
     detr=[s["detrended_station_mean_r"] for s in stations if s["detrended_station_mean_r"] is not None]
     return {
         "status":"STATION_BALANCED_DESCRIPTIVE_ONLY" if raw else "NO_ADMISSIBLE_PAIRS",
@@ -79,6 +89,10 @@ def station_balanced_coupling(events, group_a, group_b, *, min_shared_years=10):
         "mean_station_equal_weight_detrended_r":round(sum(detr)/len(detr),6) if detr else None,
         "stations_with_detrended_r":len(detr),
         "min_shared_years":min_shared_years,
+        "station_resample_percentile_95_interval":bootstrap_interval,
+        "bootstrap_station_resamples":bootstrap_reps,
+        "bootstrap_seed":bootstrap_seed,
+        "interval_is_not_causal_or_quality_adjusted":True,
         "rm_codes_screened":False,"statistical_significance_estimated":False,
         "biomass_or_weather_causal_effect_identified":False,
     }
