@@ -17,16 +17,20 @@ class JmaDailySourceError(ValueError):
 def admit_normalized_daily_export(raw_csv: str, *, station_metadata_id: str,
                                   source_id: str, variable_columns: dict,
                                   quality_columns: dict,
-                                  allowed_quality_codes: dict) -> dict:
+                                  allowed_quality_codes: dict,
+                                  homogeneity_columns: dict | None = None) -> dict:
     if not source_id or not station_metadata_id or not variable_columns:
         raise JmaDailySourceError("Missing source, station, or variable provenance")
     if set(variable_columns) != set(quality_columns):
         raise JmaDailySourceError("Each variable requires its own original quality column")
     if set(variable_columns) - set(allowed_quality_codes):
         raise JmaDailySourceError("No independent quality-code admission for variable")
+    homogeneity_columns = homogeneity_columns or {}
+    if set(homogeneity_columns) - set(variable_columns):
+        raise JmaDailySourceError("Homogeneity mapping for unknown variable")
     reader=csv.DictReader(io.StringIO(raw_csv))
     headers=set(reader.fieldnames or [])
-    needed={"date"} | set(variable_columns.values()) | set(quality_columns.values())
+    needed={"date"} | set(variable_columns.values()) | set(quality_columns.values()) | set(homogeneity_columns.values())
     if needed-headers:
         raise JmaDailySourceError("Missing original mapped source columns")
     seen=set()
@@ -42,8 +46,10 @@ def admit_normalized_daily_export(raw_csv: str, *, station_metadata_id: str,
         seen.add(date)
         vals={}
         flags={}
+        regimes={}
         for var,col in variable_columns.items():
             flag=str(row[quality_columns[var]]).strip()
+            regimes[var] = str(row[homogeneity_columns[var]]).strip() if var in homogeneity_columns else None
             flags[var]=flag
             token=str(row[col]).strip()
             if token in ("","///","--"):
@@ -64,10 +70,12 @@ def admit_normalized_daily_export(raw_csv: str, *, station_metadata_id: str,
                      "station_metadata_id":station_metadata_id,
                      "station_valid_for_date":False,
                      "source_id":source_id,
-                     "values":vals,"quality_flags":flags})
+                     "values":vals,"quality_flags":flags,
+                     "homogeneity_numbers":regimes})
     return {"status":"SOURCE_DAILY_VALUES_PARSED_NOT_STATION_HISTORY_ADMITTED",
             "daily_rows":rows,"rejected_by_variable":dict(rejected),
             "station_history_validated":False,
+            "homogeneity_columns_mapped":sorted(homogeneity_columns),
             "source_id":source_id,
             "no_environmental_effect_fitted":True}
 
