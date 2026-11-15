@@ -70,3 +70,32 @@ def admit_normalized_daily_export(raw_csv: str, *, station_metadata_id: str,
             "station_history_validated":False,
             "source_id":source_id,
             "no_environmental_effect_fitted":True}
+
+
+def attach_verified_station_history(import_receipt: dict, station_history: list[dict]) -> dict:
+    """Attach unique date-valid source station history, never modern fallback.
+
+    Does not certify weather station ID correspondence to a particular JMA
+    download column; this must be documented separately by source provenance.
+    """
+    import copy
+    out=copy.deepcopy(import_receipt)
+    counts=Counter()
+    for row in out["daily_rows"]:
+        day=dt.date.fromisoformat(row["date"])
+        matches=[h for h in station_history if h["station_id"]==row["station_metadata_id"]
+                 and h["valid_from"]<=day
+                 and (h["valid_to"] is None or day<=h["valid_to"])]
+        if len(matches)==1:
+            row["station_valid_for_date"]=True
+            row["historical_station_lat"]=matches[0]["lat_degrees"]
+            row["historical_station_lon"]=matches[0]["lon_degrees"]
+            counts["unique_temporal_history"]+=1
+        elif len(matches)>1:
+            counts["ambiguous_history"]+=1
+        else:
+            counts["missing_history"]+=1
+    out["historical_station_match_counts"]=dict(counts)
+    out["station_history_validated"]=counts["unique_temporal_history"]==len(out["daily_rows"])
+    out["status"]="STATION_HISTORY_ATTACHED_SOURCE_ID_PROOF_STILL_REQUIRED"
+    return out
