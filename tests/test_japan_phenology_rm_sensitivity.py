@@ -15,7 +15,7 @@ def test_rm_code_strata_preserve_unknown_semantics():
     for year in range(2000,2012):
         for group,src,day,rm in [
             ("bird","bird.csv",100+year-2000,"8"),
-            ("plant_or_unclassified","plant.csv",110+year-2000,"9"),
+            ("plant","plant.csv",110+year-2000,"9"),
         ]:
             d=dt.date(year,1,1)+dt.timedelta(days=day-1)
             rows.append({"station_id":"401","source_file":src,

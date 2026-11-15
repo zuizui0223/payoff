@@ -31,7 +31,12 @@ def test_census_is_schema_only():
     ("うぐいす初鳴.csv", "bird"),
     ("つばめ初見.csv", "bird"),
     ("あぶらぜみ初鳴.csv", "insect"),
-    ("さくら開花.csv", "plant_or_unclassified"),
+    ("さくら開花.csv", "plant"),
+    ("いちょう発芽.csv", "plant"),
+    ("いちょう黄葉.csv", "plant"),
+    ("ひぐらし初鳴.csv", "insect"),
+    ("つくつくほうし初鳴.csv", "insect"),
+    ("とかげ初見.csv", "reptile"),
 ])
 def test_filename_classification_is_explicitly_provisional(filename, expected):
     assert classify(filename) == expected

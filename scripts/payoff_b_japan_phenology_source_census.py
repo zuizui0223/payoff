@@ -55,17 +55,28 @@ def parse_index_labels(html: str) -> dict:
 
 
 def classify(name: str) -> str:
-    # Source event labels, not species traits inferred from dates.
-    amphibians = ("あまがえる", "アマガエル", "とのさまがえる", "トノサマガエル")
-    birds = ("うぐいす", "かっこう", "さしば", "つばめ", "ひばり", "もず")
-    insects = ("せみ", "ぜみ", "セミ", "ゼミ", "こおろぎ", "とんぼ", "ほたる", "ちょう", "チョウ", "あきあかね", "きあげは", "アブラ", "あぶら")
-    if any(s in name for s in amphibians):
-        return "amphibian"
-    if any(s in name for s in birds):
-        return "bird"
-    if any(s in name for s in insects):
-        return "insect"
-    return "plant_or_unclassified"
+    """Exact source event-name prefix taxonomy; avoid いちょう/ちょう collision.
+
+    All 65 official event labels are audited; unmatched labels remain
+    unclassified, never silently assigned to plants.
+    """
+    name = name.removesuffix(".csv")
+    animal = {
+        "amphibian": ("とのさまがえる", "にほんあまがえる"),
+        "bird": ("ひばり", "うぐいす", "つばめ", "もず", "かっこう", "さしば"),
+        "insect": ("もんしろちょう", "きあげは", "しおからとんぼ",
+                   "ほたる", "あぶらぜみ", "ひぐらし", "あきあかね",
+                   "えんまこおろぎ", "くさぜみ", "くまぜみ",
+                   "つくつくほうし", "にいにいぜみ", "はるぜみ", "みんみんぜみ"),
+        "reptile": ("とかげ",),
+    }
+    for group, prefixes in animal.items():
+        if name.startswith(prefixes):
+            return group
+    plant_stages = ("開花", "満開", "発芽", "紅葉", "黄葉", "落葉")
+    if any(name.endswith(stage) for stage in plant_stages):
+        return "plant"
+    return "unclassified"
 
 
 def summarize_zip(raw: bytes, labels: dict | None = None) -> dict:

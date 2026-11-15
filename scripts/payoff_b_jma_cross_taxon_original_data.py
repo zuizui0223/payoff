@@ -14,6 +14,7 @@ from src.japan_phenology_panel import parse_wide_jma_csv
 from src.japan_phenology_cross_taxon import paired_station_year_anomaly_correlation
 from src.japan_phenology_coupling_robustness import station_balanced_coupling
 from src.japan_phenology_rm_sensitivity import rm_sensitivity
+from src.japan_phenology_event_definition_audit import source_event_inventory
 
 def compute(raw: bytes, labels: dict) -> dict:
     events = []
@@ -30,9 +31,9 @@ def compute(raw: bytes, labels: dict) -> dict:
             events.extend(rows)
     pairs = []
     balanced = []
-    for a,b in (("amphibian","plant_or_unclassified"),
-                ("bird","plant_or_unclassified"),
-                ("insect","plant_or_unclassified"),
+    for a,b in (("amphibian","plant"),
+                ("bird","plant"),
+                ("insect","plant"),
                 ("amphibian","bird"),
                 ("bird","insect"),
                 ("amphibian","insect")):
@@ -45,7 +46,8 @@ def compute(raw: bytes, labels: dict) -> dict:
             "rm_code_quality_screened":False,
             "weather_ndvi_biomass_fitted":False,
             "pair_results":pairs,"station_balanced_robustness":balanced,
-            "rm_and_leap_sensitivity":rm_sensitivity(events)}
+            "rm_and_leap_sensitivity":rm_sensitivity(events),
+            "source_event_definition_inventory":source_event_inventory(events)}
 
 def main():
     p=argparse.ArgumentParser()
