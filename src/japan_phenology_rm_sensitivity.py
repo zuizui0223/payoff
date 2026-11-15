@@ -10,9 +10,9 @@ from collections import Counter
 from src.japan_phenology_coupling_robustness import station_balanced_coupling
 
 PAIRS = [
-    ("amphibian","plant_or_unclassified"),
-    ("bird","plant_or_unclassified"),
-    ("insect","plant_or_unclassified"),
+    ("amphibian","plant"),
+    ("bird","plant"),
+    ("insect","plant"),
     ("amphibian","bird"),
     ("bird","insect"),
     ("amphibian","insect"),
