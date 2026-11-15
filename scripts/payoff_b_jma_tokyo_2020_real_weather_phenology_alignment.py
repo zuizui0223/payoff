@@ -51,7 +51,8 @@ def align_original_sources(weather_html:bytes,phenology_zip:bytes,labels:dict):
                      "april_weather_days_strictly_before_event":len(before),
                      "april_weather_days_on_or_after_event":len(after),
                      "april_tmean_pre_event_display_only_c":round(sum(v["tmean_c"] for v in before)/len(before),3) if before else None,
-                     "full_30day_pre_event_window_covered_by_april_source":all(\n                         d-dt.timedelta(days=offset) in weather_days for offset in range(1,31))})
+                     "full_30day_pre_event_window_covered_by_april_source":all(
+                         d-dt.timedelta(days=offset) in weather_days for offset in range(1,31))})
     return {"status":"ORIGINAL_SOURCE_TEMPORAL_ALIGNMENT_NOT_QUALITY_ADMITTED",
             "weather_source":WEATHER_URL,
             "weather_source_receipt":{k:v for k,v in probe(weather_html).items() if k in ("source_sha256","source_daily_rows","daily_weather_unqualified_source_summary")},
