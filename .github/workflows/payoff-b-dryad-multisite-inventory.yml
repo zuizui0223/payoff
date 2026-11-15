@@ -1,0 +1,28 @@
+name: PAYOFF-B Dryad anonymous phenology source inventory
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-dryad-multisite-phenology-20261115
+    paths:
+      - "scripts/payoff_b_dryad_multisite_inventory.py"
+      - ".github/workflows/payoff-b-dryad-multisite-inventory.yml"
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify anonymous original Dryad API sources
+        run: python scripts/payoff_b_dryad_multisite_inventory.py --output outputs/dryad/multisite_source_inventory.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-dryad-anonymous-inventory
+          path: outputs/dryad/multisite_source_inventory.json
+          if-no-files-found: warn
