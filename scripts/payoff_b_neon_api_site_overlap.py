@@ -25,7 +25,7 @@ def fetch_product(product_id):
     return payload["data"],hashlib.sha256(raw).hexdigest()
 def availability_rows(data):
     result=set()
-    for item in data.get("siteCodes",[]):
+    for item in (data.get("siteCodes") or []):
         site=item.get("siteCode")
         if not site:continue
         for month in item.get("availableMonths",[]):
@@ -44,12 +44,13 @@ def summarize(sources):
             "phenology_shared_site_months":len(shared),
             "phenology_shared_sites":len(sites),
             "phenology_shared_years":years,
-            "phenology_shared_site_codes":sites}
+            "phenology_shared_site_codes":sites,
+            "availability_metadata_present":data.get("siteCodes") is not None}
     return {"status":"ORIGINAL_NEON_API_PRODUCT_METADATA_ONLY",
         "site_months_not_raw_observation_days":True,
         "product_receipts":{name:{"product_id":PRODUCTS[name],"api_sha256":digest,
             "api_product_name":data.get("productName"),
-            "site_codes_count":len(data.get("siteCodes",[]))}
+            "site_codes_count":len(data.get("siteCodes") or [])}
             for name,(data,digest) in sources.items()},
         "availability":results,
         "raw_neon_observations_downloaded":False,
