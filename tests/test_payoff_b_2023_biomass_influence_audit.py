@@ -1,12 +1,24 @@
-"""Only synthetic arrays used in the posthoc influence-check tests."""
+"""Synthetic year-level influence checks; no original outcomes opened by tests."""
+import numpy as np
 from scripts.payoff_b_2023_biomass_influence_audit import check
-from scripts.payoff_b_2023_biomass_selection_gate import prepare
-from tests.test_payoff_b_2023_biomass_selection_gate import fake_data
 
 
-def test_leave_one_year_deletes_one_real_year_not_one_brood():
-    panel, _ = prepare(fake_data(years=14, n_broods=12))
-    out = check(panel)["results"]["Hoge Veluwe|Great Tit"]
+def panel():
+    rows = []
+    for j in range(14):
+        mass = 1.0 + (j % 4) * 0.3
+        rows.append({
+            "year": 2000 + j, "n_broods": 12,
+            "differential": -0.15 + 0.01 * j + (0.02 if j % 2 else -0.02),
+            "mismatch_days": -5.0 + j * 1.1,
+            "log_peak_biomass": float(np.log1p(mass)),
+            "peak_biomass_g_per_day_m2": mass,
+        })
+    return {("Hoge Veluwe", "Great Tit"): rows}
+
+
+def test_leave_one_year_deletes_one_year_not_one_brood():
+    out = check(panel())["results"]["Hoge Veluwe|Great Tit"]
     assert out["years"] == 14
     assert out["n_drop_one_year_checks"] == 14
     assert len({r["dropped_year"] for r in
@@ -15,10 +27,9 @@ def test_leave_one_year_deletes_one_real_year_not_one_brood():
 
 
 def test_extreme_mismatch_is_flagged_not_deleted():
-    data = fake_data(years=14, n_broods=12)
-    data["resource"][0]["MidDate"] = 100
-    panel, _ = prepare(data)
-    out = check(panel)["results"]["Hoge Veluwe|Great Tit"]
+    data = panel()
+    data[("Hoge Veluwe", "Great Tit")][0]["mismatch_days"] = -45
+    out = check(data)["results"]["Hoge Veluwe|Great Tit"]
     assert out["years"] == 14
-    assert len(out["unexcluded_extreme_abs_mismatch_gt_30_days"]) >= 1
+    assert len(out["unexcluded_extreme_abs_mismatch_gt_30_days"]) == 1
     assert out["n_drop_one_year_checks"] == 14
