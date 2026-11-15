@@ -15,6 +15,7 @@ on:
       - "src/japan_phenology_jma_multivariate.py"
       - "src/japan_phenology_jma_daily_import.py"
       - "src/japan_phenology_jma_homogeneity.py"
+      - "scripts/payoff_b_jma_single_month_real_weather_probe.py"
       - "tests/test_japan_phenology_jma_homogeneity.py"
       - "tests/test_japan_phenology_jma_daily_import.py"
       - "tests/test_japan_phenology_jma_multivariate.py"
@@ -52,6 +53,7 @@ on:
       - "src/japan_phenology_jma_multivariate.py"
       - "src/japan_phenology_jma_daily_import.py"
       - "src/japan_phenology_jma_homogeneity.py"
+      - "scripts/payoff_b_jma_single_month_real_weather_probe.py"
       - "tests/test_japan_phenology_jma_homogeneity.py"
       - "tests/test_japan_phenology_jma_daily_import.py"
       - "tests/test_japan_phenology_jma_multivariate.py"
@@ -107,6 +109,8 @@ jobs:
         run: python scripts/payoff_b_jma_temporal_station_join_audit.py --output outputs/japan_phenology/jma_temporal_station_join_receipt.json
       - name: Analyze original JMA cross-taxon event anomalies
         run: python scripts/payoff_b_jma_cross_taxon_original_data.py --output outputs/japan_phenology/jma_cross_taxon_anomaly_receipt.json
+      - name: Probe one original JMA daily weather month (no bulk scraping)
+        run: python scripts/payoff_b_jma_single_month_real_weather_probe.py --output outputs/japan_phenology/jma_one_month_real_weather_source_probe.json
       - name: Upload schema-only audit receipt
         if: always()
         uses: actions/upload-artifact@v4
@@ -118,4 +122,5 @@ jobs:
             outputs/japan_phenology/jma_station_id_overlap_receipt.json
             outputs/japan_phenology/jma_temporal_station_join_receipt.json
             outputs/japan_phenology/jma_cross_taxon_anomaly_receipt.json
+            outputs/japan_phenology/jma_one_month_real_weather_source_probe.json
           if-no-files-found: warn
