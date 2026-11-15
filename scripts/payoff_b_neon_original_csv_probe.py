@@ -1,5 +1,5 @@
 """Bounded original NEON data manifest and CSV sample, no ecological inference."""
-import argparse,csv,hashlib,io,json,urllib.request
+import argparse,csv,hashlib,io,json,urllib.request,urllib.error
 from pathlib import Path
 PRODUCTS={"phenology":"DP1.10055.001","temperature":"DP1.00002.001"}
 API="https://data.neonscience.org/api/v0/data/"
@@ -41,7 +41,11 @@ def run(site="ABBY",month="2020-05"):
             "site_plot_crosswalk_verified":False,"measurement_quality_verified":False,
             "phenology_weather_effect_fitted":False,"products":{}}
     for name,product in PRODUCTS.items():
-        m=manifest(product,site,month)
+        try:
+            m=manifest(product,site,month)
+        except urllib.error.HTTPError as exc:
+            result["products"][name]={"product_id":product,"status":"ORIGINAL_DATA_ENDPOINT_HTTP_BLOCKED","http_status":exc.code,"source_data_downloaded":False}
+            continue
         chosen=select_csv(m["files"],name)
         out={"product_id":product,"manifest_sha256":m["sha256"],
              "manifest_files":len(m["files"]),"csv_candidates":len(chosen),
