@@ -45,7 +45,7 @@ def summarize(sources):
             "phenology_shared_sites":len(sites),
             "phenology_shared_years":years,
             "phenology_shared_site_codes":sites,
-            "availability_metadata_present":data.get("siteCodes") is not None}
+            "availability_metadata_present":sources[name][0].get("siteCodes") is not None}
     return {"status":"ORIGINAL_NEON_API_PRODUCT_METADATA_ONLY",
         "site_months_not_raw_observation_days":True,
         "product_receipts":{name:{"product_id":PRODUCTS[name],"api_sha256":digest,
