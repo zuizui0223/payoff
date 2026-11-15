@@ -41,7 +41,35 @@ def probe(html:bytes):
                           "header_rows":rows[:5],
                           "first_data_rows":rows[5:8],
                           "rows_with_day_1_to_31":sum(bool(r and r[0].isdigit() and 1<=int(r[0])<=31) for r in rows)})
-    return {"source_url":URL,"source_sha256":hashlib.sha256(html).hexdigest(),
+    daily = next((t for t in reader.tables if len(t)>=30 and any(r and r[0]=="1" for r in t)), [])
+    fields={"precip_mm":3,"tmean_c":6,"tmax_c":7,"tmin_c":8,
+            "relative_humidity_pct":9,"wind_mean_mps":11,"sunshine_hours":16}
+    observed={field:[] for field in fields}
+    missing={field:0 for field in fields}
+    parsed_days=[]
+    for row in daily:
+        if not row or not row[0].isdigit() or not 1<=int(row[0])<=30:
+            continue
+        day=int(row[0])
+        if day in parsed_days:
+            raise ValueError("Duplicate day in original weather table")
+        parsed_days.append(day)
+        for field,col in fields.items():
+            token=row[col].strip() if len(row)>col else ""
+            try:
+                value=float(token)
+            except ValueError:
+                missing[field]+=1
+                continue
+            observed[field].append(value)
+    stats={field:{"observed_days":len(values),"missing_or_nonnumeric_days":missing[field],
+                  "mean":round(sum(values)/len(values),3) if values else None,
+                  "sum":round(sum(values),3) if values else None}
+           for field,values in observed.items()}
+    return {"source_url":URL,
+            "source_daily_rows":len(parsed_days),
+            "unique_days":len(set(parsed_days)),
+            "daily_weather_unqualified_source_summary":stats,"source_sha256":hashlib.sha256(html).hexdigest(),
             "bytes":len(html),"html_table_count":len(reader.tables),
             "table_summaries":summaries,
             "weather_csv_quality_codes_present_and_verified":False,
