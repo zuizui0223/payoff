@@ -12,12 +12,10 @@ def data():
 
 def test_multivariate_features_not_promoted_without_qa_certification():
     result = build_pre_event_features(data(), "2020-05-01")
-    assert result["features"]["gdd_5.0"] == 150
-    assert result["features"]["precip_total"] == 60
-    assert result["features"]["rain_days_ge1mm"] == 30
-    assert result["features"]["sunshine_mean"] == 4
+    assert result["features"] == {}
     assert result["ready_for_model"] is False
     assert result["quality_codes_certified"] is False
+    assert result["valid_day_counts"]["tmean"] == 0
 
 @pytest.mark.parametrize("change", [
     lambda x: x[0].update(date="2020-05-01"),
@@ -39,6 +37,26 @@ def test_missingness_is_variable_specific():
     x = data()
     for r in x[:4]:
         r["values"]["precip"] = None
-    result = build_pre_event_features(x, "2020-05-01")
+    result = build_pre_event_features(x, "2020-05-01", admitted_quality_codes={k:{"SYNTHETIC"} for k in ("tmean","tmin","precip","sunshine")})
     assert "precip_total" not in result["features"]
     assert "tmean_mean" in result["features"]
+
+
+def test_explicitly_admitted_synthetic_quality_code_only():
+    result = build_pre_event_features(data(), "2020-05-01",
+        admitted_quality_codes={k: {"SYNTHETIC"} for k in ("tmean","tmin","precip","sunshine")})
+    assert result["features"]["gdd_5.0"] == 150
+    assert result["features"]["precip_total"] == 60
+    assert result["features"]["rain_days_ge1mm"] == 30
+    assert result["features"]["sunshine_mean"] == 4
+    assert result["ready_for_model"] is True
+
+
+def test_mixed_uncertified_quality_flags_fail_closed():
+    x = data()
+    for r in x[:5]:
+        r["quality_flags"]["tmean"] = "UNVERIFIED"
+    result = build_pre_event_features(x, "2020-05-01",
+        admitted_quality_codes={"tmean":{"SYNTHETIC"}, "precip":{"SYNTHETIC"}})
+    assert "tmean_mean" not in result["features"]
+    assert "precip_total" in result["features"]
