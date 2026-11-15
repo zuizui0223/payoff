@@ -41,7 +41,7 @@ def probe(html:bytes):
                           "header_rows":rows[:5],
                           "first_data_rows":rows[5:8],
                           "rows_with_day_1_to_31":sum(bool(r and r[0].isdigit() and 1<=int(r[0])<=31) for r in rows)})
-    daily = next((t for t in reader.tables if len(t)>=30 and any(r and r[0]=="1" for r in t)), [])
+    daily = next((t for t in reader.tables if any(r and len(r)>=21 and r[0]=="1" for r in t)), [])
     fields={"precip_mm":3,"tmean_c":6,"tmax_c":7,"tmin_c":8,
             "relative_humidity_pct":9,"wind_mean_mps":11,"sunshine_hours":16}
     observed={field:[] for field in fields}
