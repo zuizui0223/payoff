@@ -60,6 +60,7 @@ def classify(name: str) -> str:
     All 65 official event labels are audited; unmatched labels remain
     unclassified, never silently assigned to plants.
     """
+    name = name.removesuffix(".csv")
     animal = {
         "amphibian": ("とのさまがえる", "にほんあまがえる"),
         "bird": ("ひばり", "うぐいす", "つばめ", "もず", "かっこう", "さしば"),
