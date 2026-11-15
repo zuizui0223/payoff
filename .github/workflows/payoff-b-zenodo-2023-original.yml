@@ -1,0 +1,28 @@
+name: PAYOFF-B Zenodo 2023 original SHA256 audit
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-zenodo-original-verified-20261115
+    paths:
+      - "scripts/payoff_b_zenodo_2023_original_sha_audit.py"
+      - ".github/workflows/payoff-b-zenodo-2023-original.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install openpyxl
+      - run: python scripts/payoff_b_zenodo_2023_original_sha_audit.py --output outputs/dryad/zenodo_2023_original_sha.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-zenodo-2023-sha-audit
+          path: outputs/dryad/zenodo_2023_original_sha.json
+          if-no-files-found: warn
