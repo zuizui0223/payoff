@@ -1,0 +1,28 @@
+name: PAYOFF-B original Dryad 2023 resource-fitness LOYO
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-2023-resource-fitness-first-fit-20261115
+    paths:
+      - "scripts/payoff_b_2023_resource_fitness_loyo.py"
+      - ".github/workflows/payoff-b-dryad-2023-loyo.yml"
+permissions:
+  contents: read
+jobs:
+  fit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install openpyxl numpy
+      - run: python -m scripts.payoff_b_2023_resource_fitness_loyo --output outputs/dryad/2023_resource_fitness_loyo.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-dryad-2023-resource-fitness-loyo
+          path: outputs/dryad/2023_resource_fitness_loyo.json
+          if-no-files-found: warn
