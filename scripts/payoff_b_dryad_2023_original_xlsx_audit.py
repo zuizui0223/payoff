@@ -2,7 +2,7 @@
 
 Only source column names and date/site coverage; no outcome modeling.
 """
-import argparse,hashlib,io,json,urllib.request
+import argparse,hashlib,io,json,urllib.request,urllib.error
 from collections import Counter
 from pathlib import Path
 from openpyxl import load_workbook
@@ -36,10 +36,15 @@ def inspect(name,file_id,expected,size):
 def main():
     p=argparse.ArgumentParser();p.add_argument("--output",type=Path,required=True)
     args=p.parse_args()
-    result={"status":"DRYAD_2023_ORIGINAL_XLSX_SCHEMA_VERIFIED_NO_FIT",
+    result={"status":"DRYAD_2023_ORIGINAL_XLSX_ACCESS_AUDIT_NO_FIT",
             "files":{},"ecological_effect_fitted":False}
     for name,(fid,digest,size) in FILES.items():
-        result["files"][name]=inspect(name,fid,digest,size)
+        try:
+            result["files"][name]=inspect(name,fid,digest,size)
+        except urllib.error.HTTPError as exc:
+            result["files"][name]={"file_id":fid,"expected_sha256":digest,
+                "status":"DRYAD_DIRECT_DOWNLOAD_ACCESS_BLOCKED","http_status":exc.code,
+                "raw_source_downloaded":False}
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n")
     print(json.dumps(result,ensure_ascii=False))
