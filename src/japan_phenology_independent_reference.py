@@ -51,6 +51,29 @@ def independent_reference_controls(events, *, min_stations=10):
                 if rows:
                     values[ref]=[mean(v[i] for v in rows) for i in range(len(years))]
             station_year[station]=values
+        # Disjoint-reference lag comparison: (B-Pa) vs (I-Pb).
+        # Require all four groups at the same stations and years.
+        common=sorted(s for s,v in station_year.items()
+                      if all(g in v for g in ("bird","insect","plant_a","plant_b")))
+        if len(common)>=min_stations:
+            lag_a=[mean(station_year[s]["bird"][i]-station_year[s]["plant_a"][i]
+                        for s in common) for i in range(len(years))]
+            lag_b=[mean(station_year[s]["insect"][i]-station_year[s]["plant_b"][i]
+                        for s in common) for i in range(len(years))]
+            raw=_pearson(lag_a,lag_b)
+            detr=_pearson(_detrend(years,lag_a),_detrend(years,lag_b))
+            outputs.append({"window":[start,end],
+                "comparison":"bird_minus_plant_a__insect_minus_plant_b",
+                "stations":len(common),"years":len(years),
+                "annual_phenology_anomaly_correlation_r":round(raw,6) if raw is not None else None,
+                "detrended_annual_anomaly_r":round(detr,6) if detr is not None else None,
+                "same_sign_years":sum((x>0)==(y>0) for x,y in zip(lag_a,lag_b)),
+                "status":"DISJOINT_PLANT_REFERENCE_SAME_STATION_YEARS",
+                "shared_reference_in_difference_scores":False})
+        else:
+            outputs.append({"window":[start,end],
+                "comparison":"bird_minus_plant_a__insect_minus_plant_b",
+                "stations":len(common),"status":"INSUFFICIENT_MATCHED_STATIONS"})
         for a,b in (("bird","insect"),("bird","plant_a"),("insect","plant_b"),
                     ("plant_a","plant_b")):
             eligible=sorted(station for station,v in station_year.items() if a in v and b in v)
