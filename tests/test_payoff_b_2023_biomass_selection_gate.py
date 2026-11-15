@@ -1,7 +1,9 @@
 """Synthetic fixtures only; do not confuse these assertions with empirical support."""
 import math
-import numpy as np
 import pytest
+pytest.importorskip("numpy")
+pytest.importorskip("openpyxl")
+import numpy as np
 
 from scripts.payoff_b_2023_biomass_selection_gate import (
     MIN_BROODS, OFFSET_DAYS, audit, evaluate_stratum, prepare,
