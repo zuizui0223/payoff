@@ -20,6 +20,7 @@ from src.japan_phenology_interannual_mismatch import interannual_mismatch
 from src.japan_phenology_fixed_interannual import fixed_panel_interannual
 from src.japan_phenology_fixed_cross_contrast import fixed_panel_cross_contrast_synchrony
 from src.japan_phenology_independent_reference import independent_reference_controls
+from src.japan_phenology_plant_split_randomization import plant_reference_randomization
 
 def compute(raw: bytes, labels: dict) -> dict:
     events = []
@@ -58,7 +59,8 @@ def compute(raw: bytes, labels: dict) -> dict:
             "interannual_mismatch_synchrony":interannual_mismatch(events),
             "fixed_composition_interannual":fixed,
             "fixed_cross_contrast_synchrony":fixed_panel_cross_contrast_synchrony(fixed),
-            "independent_reference_controls":independent_reference_controls(events)}
+            "independent_reference_controls":independent_reference_controls(events),
+            "plant_reference_randomization":plant_reference_randomization(events)}
 
 def main():
     p=argparse.ArgumentParser()
