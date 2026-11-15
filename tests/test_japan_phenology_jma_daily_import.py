@@ -1,5 +1,6 @@
+import datetime as dt
 import pytest
-from src.japan_phenology_jma_daily_import import admit_normalized_daily_export, JmaDailySourceError
+from src.japan_phenology_jma_daily_import import admit_normalized_daily_export, attach_verified_station_history, JmaDailySourceError
 
 def sample():
     return "date,Tmean,quality_Tmean,Precip,quality_Precip\n2020-04-01,12.0,8,3.0,8\n2020-04-02,13.0,9,4.0,8\n"
@@ -27,3 +28,14 @@ def test_source_quality_is_not_guessed():
 def test_bad_source_rejected(raw):
     with pytest.raises(JmaDailySourceError):
         ingest(raw)
+
+
+def test_temporal_station_history_attached_without_modern_backfill():
+    raw=ingest()
+    hist=[{"station_id":"SYNTHETIC","valid_from":dt.date(2020,4,2),
+           "valid_to":None,"lat_degrees":35.0,"lon_degrees":139.0}]
+    result=attach_verified_station_history(raw,hist)
+    assert result["historical_station_match_counts"]=={"missing_history":1,"unique_temporal_history":1}
+    assert result["station_history_validated"] is False
+    assert result["daily_rows"][0]["station_valid_for_date"] is False
+    assert result["daily_rows"][1]["station_valid_for_date"] is True
