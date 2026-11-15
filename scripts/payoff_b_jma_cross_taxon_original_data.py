@@ -15,6 +15,7 @@ from src.japan_phenology_cross_taxon import paired_station_year_anomaly_correlat
 from src.japan_phenology_coupling_robustness import station_balanced_coupling
 from src.japan_phenology_rm_sensitivity import rm_sensitivity
 from src.japan_phenology_event_definition_audit import source_event_inventory
+from src.japan_phenology_spring_stage_matched import spring_stage_contrasts
 
 def compute(raw: bytes, labels: dict) -> dict:
     events = []
@@ -47,7 +48,8 @@ def compute(raw: bytes, labels: dict) -> dict:
             "weather_ndvi_biomass_fitted":False,
             "pair_results":pairs,"station_balanced_robustness":balanced,
             "rm_and_leap_sensitivity":rm_sensitivity(events),
-            "source_event_definition_inventory":source_event_inventory(events)}
+            "source_event_definition_inventory":source_event_inventory(events),
+            "spring_stage_matched":spring_stage_contrasts(events)}
 
 def main():
     p=argparse.ArgumentParser()
