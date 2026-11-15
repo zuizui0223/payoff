@@ -1,0 +1,28 @@
+name: PAYOFF-B 2023 temperature slope gap
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-2023-temperature-slope-gap-20261115
+    paths:
+      - "scripts/payoff_b_2023_temperature_slope_gap.py"
+      - ".github/workflows/payoff-b-2023-temperature-gap.yml"
+permissions:
+  contents: read
+jobs:
+  fit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install openpyxl numpy
+      - run: python -m scripts.payoff_b_2023_temperature_slope_gap --output outputs/dryad/2023_temperature_slope_gap.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-2023-temperature-slope-gap
+          path: outputs/dryad/2023_temperature_slope_gap.json
+          if-no-files-found: warn
