@@ -10,6 +10,8 @@ import hashlib
 import json
 from pathlib import Path
 import urllib.request
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from scripts.payoff_b_jma_single_month_real_weather_probe import TableReader
 
 URL="https://www.data.jma.go.jp/stats/etrn/view/daily_s1.php?prec_no=44&block_no=47662&year={year}&month={month}&day=&view="
