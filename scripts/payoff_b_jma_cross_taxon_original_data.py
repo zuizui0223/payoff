@@ -31,9 +31,9 @@ def compute(raw: bytes, labels: dict) -> dict:
             events.extend(rows)
     pairs = []
     balanced = []
-    for a,b in (("amphibian","plant_or_unclassified"),
-                ("bird","plant_or_unclassified"),
-                ("insect","plant_or_unclassified"),
+    for a,b in (("amphibian","plant"),
+                ("bird","plant"),
+                ("insect","plant"),
                 ("amphibian","bird"),
                 ("bird","insect"),
                 ("amphibian","insect")):
