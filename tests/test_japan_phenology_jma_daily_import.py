@@ -42,7 +42,7 @@ def test_temporal_station_history_attached_without_modern_backfill():
 
 
 def test_daily_import_preserves_source_homogeneity_number():
-    raw="date,Tmean,quality_Tmean,hom_Tmean,Precip,quality_Precip,hom_Precip\\n2020-04-01,12,8,1,3,8,2\\n"
+    raw="date,Tmean,quality_Tmean,hom_Tmean,Precip,quality_Precip,hom_Precip\n2020-04-01,12,8,1,3,8,2\n"
     out=admit_normalized_daily_export(raw,station_metadata_id="401",source_id="SYNTHETIC",
         variable_columns={"tmean":"Tmean","precip":"Precip"},
         quality_columns={"tmean":"quality_Tmean","precip":"quality_Precip"},
