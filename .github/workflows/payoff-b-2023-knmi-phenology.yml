@@ -1,0 +1,28 @@
+name: PAYOFF-B Dryad 2023 original KNMI temperature phenology
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-2023-temperature-window-audit-20261115
+    paths:
+      - "scripts/payoff_b_2023_knmi_temperature_phenology.py"
+      - ".github/workflows/payoff-b-2023-knmi-phenology.yml"
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install openpyxl numpy
+      - run: python -m scripts.payoff_b_2023_knmi_temperature_phenology --output outputs/dryad/2023_knmi_temperature_phenology.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-2023-knmi-temperature-phenology
+          path: outputs/dryad/2023_knmi_temperature_phenology.json
+          if-no-files-found: warn
