@@ -11,7 +11,14 @@ from collections import Counter
 class MeteorologyNotAdmitted(ValueError):
     pass
 
-def build_pre_event_features(rows, event_date, *, days=30, base_temperature_c=5.0):
+def build_pre_event_features(rows, event_date, *, days=30, base_temperature_c=5.0,
+                             admitted_quality_codes=None):
+    """Calculate only source-certified daily values.
+
+    admitted_quality_codes must be an explicit mapping from variable name to
+    independently verified acceptable JMA quality flags. Unknown flags never
+    silently enter a predictive model.
+    """
     event = dt.date.fromisoformat(event_date)
     if days not in (7, 30, 60, 90):
         raise MeteorologyNotAdmitted("Unregistered temporal window")
@@ -20,6 +27,7 @@ def build_pre_event_features(rows, event_date, *, days=30, base_temperature_c=5.
                "snow_depth", "snowfall", "wind_mean", "wind_gust", "relative_humidity",
                "vapour_pressure", "pressure", "cloud"}
     bydate = {}
+    admitted_quality_codes = admitted_quality_codes or {}
     for row in rows:
         date = dt.date.fromisoformat(row["date"])
         if not (start <= date < event):
@@ -54,7 +62,7 @@ def build_pre_event_features(rows, event_date, *, days=30, base_temperature_c=5.
                 continue
             code = str(row["quality_flags"][field])
             codes[code] += 1
-            if row["values"][field] is not None:
+            if row["values"][field] is not None and code in admitted_quality_codes.get(field, set()):
                 valid.append(row["values"][field])
         result["valid_day_counts"][field] = len(valid)
         result["quality_codes"][field] = dict(codes)
@@ -69,6 +77,9 @@ def build_pre_event_features(rows, event_date, *, days=30, base_temperature_c=5.
             if field == "precip":
                 result["features"]["precip_total"] = sum(valid)
                 result["features"]["rain_days_ge1mm"] = sum(v >= 1 for v in valid)
-    result["quality_codes_certified"] = False
-    result["ready_for_model"] = False
+    result["quality_codes_certified"] = bool(admitted_quality_codes)
+    result["ready_for_model"] = bool(admitted_quality_codes and result["features"])
+    result["admitted_quality_codes_by_variable"] = {
+        field: sorted(map(str, codes)) for field, codes in admitted_quality_codes.items()
+    }
     return result
