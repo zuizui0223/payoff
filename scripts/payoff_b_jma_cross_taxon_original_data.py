@@ -18,6 +18,7 @@ from src.japan_phenology_event_definition_audit import source_event_inventory
 from src.japan_phenology_spring_stage_matched import spring_stage_contrasts
 from src.japan_phenology_interannual_mismatch import interannual_mismatch
 from src.japan_phenology_fixed_interannual import fixed_panel_interannual
+from src.japan_phenology_fixed_cross_contrast import fixed_panel_cross_contrast_synchrony
 
 def compute(raw: bytes, labels: dict) -> dict:
     events = []
@@ -42,6 +43,7 @@ def compute(raw: bytes, labels: dict) -> dict:
                 ("amphibian","insect")):
         pairs.append(paired_station_year_anomaly_correlation(events, group_a=a,group_b=b))
         balanced.append(station_balanced_coupling(events,a,b))
+    fixed = fixed_panel_interannual(events)
     return {"source":"JMA official cumulative biological season archive",
             "source_event_date_cells":len(events),
             "analysis":"exploratory cross-taxon within-station event-year anomaly correlation",
@@ -53,7 +55,8 @@ def compute(raw: bytes, labels: dict) -> dict:
             "source_event_definition_inventory":source_event_inventory(events),
             "spring_stage_matched":spring_stage_contrasts(events),
             "interannual_mismatch_synchrony":interannual_mismatch(events),
-            "fixed_composition_interannual":fixed_panel_interannual(events)}
+            "fixed_composition_interannual":fixed,
+            "fixed_cross_contrast_synchrony":fixed_panel_cross_contrast_synchrony(fixed)}
 
 def main():
     p=argparse.ArgumentParser()
