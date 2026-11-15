@@ -1,0 +1,27 @@
+name: PAYOFF-B Dryad 2023 public mirror discovery
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-dryad-zenodo-fallback-20261115
+    paths:
+      - "scripts/payoff_b_dryad_2023_zenodo_mirror_search.py"
+      - ".github/workflows/payoff-b-dryad-2023-mirror.yml"
+permissions:
+  contents: read
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/payoff_b_dryad_2023_zenodo_mirror_search.py --output outputs/dryad/2023_zenodo_mirror_search.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-dryad-2023-public-mirror-search
+          path: outputs/dryad/2023_zenodo_mirror_search.json
+          if-no-files-found: warn
