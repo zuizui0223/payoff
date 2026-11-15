@@ -1,0 +1,33 @@
+name: PAYOFF-B 2023 peak biomass x within-year fledging selection gate
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-2023-biomass-selection-gate-20261115
+    paths:
+      - "scripts/payoff_b_2023_biomass_selection_gate.py"
+      - "tests/test_payoff_b_2023_biomass_selection_gate.py"
+      - ".github/workflows/payoff-b-2023-biomass-selection-gate.yml"
+permissions:
+  contents: read
+jobs:
+  validate-and-fit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install prerequisites
+        run: python -m pip install numpy openpyxl pytest
+      - name: Synthetic-only unit tests
+        run: python -m pytest -q tests/test_payoff_b_2023_biomass_selection_gate.py
+      - name: Fit original-data year-held-out annual differential models
+        run: python -m scripts.payoff_b_2023_biomass_selection_gate --output outputs/dryad/2023_biomass_selection_gate.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-2023-biomass-selection-gate
+          path: outputs/dryad/2023_biomass_selection_gate.json
+          if-no-files-found: warn
