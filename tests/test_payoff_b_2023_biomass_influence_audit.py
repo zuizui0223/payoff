@@ -1,4 +1,7 @@
 """Synthetic year-level influence checks; no original outcomes opened by tests."""
+import pytest
+pytest.importorskip("numpy")
+pytest.importorskip("openpyxl")
 import numpy as np
 from scripts.payoff_b_2023_biomass_influence_audit import check
 
