@@ -22,7 +22,7 @@ def test_june_event_does_not_misclassify_april_as_immediate_30day_window():
     html=("<html><table>"+"".join(row(i) for i in range(1,31))+"</table></html>").encode()
     z=io.BytesIO()
     with zipfile.ZipFile(z,"w") as out:
-        out.writestr("009.csv","9,あじさい開花\\n番号,地点名,2020,rm\\n662,東京,608,9\\n".encode("cp932"))
+        out.writestr("009.csv","9,あじさい開花\n番号,地点名,2020,rm\n662,東京,608,9\n".encode("cp932"))
     result=align_original_sources(html,z.getvalue(),{"009.csv":"あじさい開花"})
     assert result["events"][0]["april_weather_days_strictly_before_event"]==30
     assert result["events"][0]["full_30day_pre_event_window_covered_by_april_source"] is False
