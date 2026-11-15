@@ -39,3 +39,13 @@ def test_temporal_station_history_attached_without_modern_backfill():
     assert result["station_history_validated"] is False
     assert result["daily_rows"][0]["station_valid_for_date"] is False
     assert result["daily_rows"][1]["station_valid_for_date"] is True
+
+
+def test_daily_import_preserves_source_homogeneity_number():
+    raw="date,Tmean,quality_Tmean,hom_Tmean,Precip,quality_Precip,hom_Precip\n2020-04-01,12,8,1,3,8,2\n"
+    out=admit_normalized_daily_export(raw,station_metadata_id="401",source_id="SYNTHETIC",
+        variable_columns={"tmean":"Tmean","precip":"Precip"},
+        quality_columns={"tmean":"quality_Tmean","precip":"quality_Precip"},
+        homogeneity_columns={"tmean":"hom_Tmean","precip":"hom_Precip"},
+        allowed_quality_codes={"tmean":{"8"},"precip":{"8"}})
+    assert out["daily_rows"][0]["homogeneity_numbers"]=={"tmean":"1","precip":"2"}
