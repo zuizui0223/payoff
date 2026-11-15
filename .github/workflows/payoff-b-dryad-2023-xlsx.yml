@@ -1,0 +1,29 @@
+name: PAYOFF-B Dryad 2023 original Excel audit
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-dryad-2023-original-xlsx-20261115
+    paths:
+      - "scripts/payoff_b_dryad_2023_original_xlsx_audit.py"
+      - ".github/workflows/payoff-b-dryad-2023-xlsx.yml"
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install openpyxl
+      - name: Download digest-verified original Excel and inspect column schemas
+        run: python scripts/payoff_b_dryad_2023_original_xlsx_audit.py --output outputs/dryad/2023_original_xlsx_schema.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-dryad-2023-original-xlsx-schema
+          path: outputs/dryad/2023_original_xlsx_schema.json
+          if-no-files-found: warn
