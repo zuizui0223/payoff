@@ -1,0 +1,36 @@
+name: PAYOFF-B NEON public API original site-month overlap
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-neon-api-site-overlap-20261115
+    paths:
+      - "scripts/payoff_b_neon_api_site_overlap.py"
+      - "tests/test_payoff_b_neon_api_site_overlap.py"
+      - ".github/workflows/payoff-b-neon-site-overlap.yml"
+  pull_request:
+    paths:
+      - "scripts/payoff_b_neon_api_site_overlap.py"
+      - "tests/test_payoff_b_neon_api_site_overlap.py"
+      - ".github/workflows/payoff-b-neon-site-overlap.yml"
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pytest
+      - run: python -m pytest -q tests/test_payoff_b_neon_api_site_overlap.py
+      - name: Read original public NEON API metadata
+        run: python scripts/payoff_b_neon_api_site_overlap.py --output outputs/neon/site_month_overlap.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-neon-original-api-site-month-receipt
+          path: outputs/neon/site_month_overlap.json
+          if-no-files-found: warn
