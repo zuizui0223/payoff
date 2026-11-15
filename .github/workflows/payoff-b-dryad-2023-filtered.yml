@@ -1,0 +1,28 @@
+name: PAYOFF-B Dryad 2023 admitted bird resource panel
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-2023-admitted-phenology-resource-20261115
+    paths:
+      - "scripts/payoff_b_2023_filtered_descriptive_join.py"
+      - ".github/workflows/payoff-b-dryad-2023-filtered.yml"
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install openpyxl
+      - run: python -m scripts.payoff_b_2023_filtered_descriptive_join --output outputs/dryad/2023_filtered_descriptive_join.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-dryad-2023-filtered-descriptive
+          path: outputs/dryad/2023_filtered_descriptive_join.json
+          if-no-files-found: warn
