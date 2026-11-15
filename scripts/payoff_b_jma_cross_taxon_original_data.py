@@ -22,6 +22,7 @@ from src.japan_phenology_fixed_cross_contrast import fixed_panel_cross_contrast_
 from src.japan_phenology_independent_reference import independent_reference_controls
 from src.japan_phenology_plant_split_randomization import plant_reference_randomization
 from src.japan_phenology_plant_common_support import fixed_common_support_plant_splits
+from src.japan_phenology_reference_site_factorial import factorial_reference_station_sensitivity
 
 def compute(raw: bytes, labels: dict) -> dict:
     events = []
@@ -62,7 +63,8 @@ def compute(raw: bytes, labels: dict) -> dict:
             "fixed_cross_contrast_synchrony":fixed_panel_cross_contrast_synchrony(fixed),
             "independent_reference_controls":independent_reference_controls(events),
             "plant_reference_randomization":plant_reference_randomization(events),
-            "fixed_common_support_plant_splits":fixed_common_support_plant_splits(events)}
+            "fixed_common_support_plant_splits":fixed_common_support_plant_splits(events),
+            "reference_site_factorial":factorial_reference_station_sensitivity(events)}
 
 def main():
     p=argparse.ArgumentParser()
