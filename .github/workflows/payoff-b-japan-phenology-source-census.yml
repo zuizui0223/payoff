@@ -24,6 +24,7 @@ on:
       - "src/japan_phenology_coupling_robustness.py"
       - "src/japan_phenology_rm_sensitivity.py"
       - "src/japan_phenology_event_definition_audit.py"
+      - "docs/PAYOFF_B_JAPAN_CROSS_TAXON_FIRST_EMPIRICAL_SCREEN_20261114.md"
       - "tests/test_japan_phenology_event_definition_audit.py"
       - "tests/test_japan_phenology_rm_sensitivity.py"
       - "tests/test_japan_phenology_coupling_robustness.py"
