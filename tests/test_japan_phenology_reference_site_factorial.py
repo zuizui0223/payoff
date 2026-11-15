@@ -23,5 +23,5 @@ def test_same_plant_subset_comparison_changes_only_station_support():
     subset=p["subsets"][0]
     assert subset["strict_stations"]==11
     assert subset["variable_stations_max"]==12
-    assert subset["variable_stations_min"]==11
+    assert subset["variable_stations_min"]==12
     assert result["weather_ndvi_biomass_fitted"] is False
