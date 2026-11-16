@@ -59,8 +59,15 @@ def version_ids_from_listing(payload):
     vals=[]
     if isinstance(payload,list):
         options=payload
-    else:
+    elif isinstance(payload,dict):
         options=embedded_nodes(payload,"stash:versions")
+        # Dryad may return a single version object rather than a HAL page.
+        if not options and payload.get("versionNumber") is not None and payload.get("id") is not None:
+            options=[payload]
+        if not options and isinstance(payload.get("versions"),list):
+            options=payload["versions"]
+    else:
+        options=[]
     for obj in options:
         value=obj.get("id")
         if isinstance(value,int):
@@ -132,6 +139,16 @@ def probe():
     result["dataset_metadata_keys"]=sorted(dataset)
     listing,lrec=json_source(ROOT+"/versions")
     result["version_list_status"]=lrec
+    if isinstance(listing,dict):
+        result["version_response_shape"]={
+            "top_level_keys":sorted(listing),
+            "embedded_keys":sorted(listing.get("_embedded",{})) if isinstance(listing.get("_embedded"),dict) else [],
+            "link_keys":sorted(listing.get("_links",{})) if isinstance(listing.get("_links"),dict) else [],
+            "has_direct_id":listing.get("id") is not None,
+            "has_version_number":listing.get("versionNumber") is not None,
+        }
+    elif isinstance(listing,list):
+        result["version_response_shape"]={"array_length":len(listing)}
     ids=version_ids_from_listing(listing)
     result["published_version_ids"]=[{"id":i,"number":n} for i,n,o in ids]
     if not ids:
