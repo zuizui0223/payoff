@@ -21,7 +21,12 @@ from src.payoff_b_resource_contact import (
 )
 
 SOURCE_URL=f"https://data-package.ceh.ac.uk/data/{EIDC_ID}.zip"
-ORIGINAL_ZIP_SHA256="e5e7fa4f2fe60420c11675a1d21fdc69b7b8d8fa5565f67b268e1ae070cd0d7d"
+ORIGINAL_MEMBER_SHA256={
+    "data/bird_phenology.csv":"eb3f8d9faaa30ee3363f515f97873f287a918bb8a3ad31d180e2ac3a81d89257",
+    "data/branch_beating.csv":"38f5c34cf656bab33c5d5b3516648306549049deebfbe693e4b4cad09ac4004c",
+    "data/site_details.csv":"f2a65cd96b2241ae6ff9d1207888d1453fef2738545c52a6ace1222fb56e2165",
+    "data/temperatures.csv":"4686a544858e707b3844eee8bcd2ce26f1bf5d8daf3c3a0166843524734aa33b",
+}
 FILE_NAMES=("data/bird_phenology.csv","data/branch_beating.csv",
             "data/site_details.csv","data/temperatures.csv")
 TMIN=-40.0
@@ -37,14 +42,20 @@ def source_data():
     raw=r.get("body")
     if r.get("http_status")!=200 or not raw:
         raise RuntimeError("Original EIDC data unavailable; do not fit")
-    if hashlib.sha256(raw).hexdigest()!=ORIGINAL_ZIP_SHA256:
-        raise ValueError("Original EIDC ZIP sha256 changed; reject all")
+    archive_sha256=hashlib.sha256(raw).hexdigest()
+    # EIDC creates ZIP archive wrappers dynamically; verify the source CSV
+    # *bytes*, not reproducibility of ZIP compression/packaging timestamps.
     out={}
     with zipfile.ZipFile(io.BytesIO(raw)) as archive:
         for f in FILE_NAMES:
+            file_bytes=archive.read(f)
+            file_digest=hashlib.sha256(file_bytes).hexdigest()
+            if file_digest != ORIGINAL_MEMBER_SHA256[f]:
+                raise ValueError("Original EIDC source CSV SHA256 drift: "+f)
             rows=csv.DictReader(io.StringIO(
-                archive.read(f).decode("utf-8-sig",errors="replace"),newline=""))
+                file_bytes.decode("utf-8-sig",errors="replace"),newline=""))
             out[f]=list(rows)
+    out["_download_zip_sha256"]=archive_sha256
     return out
 
 
@@ -237,7 +248,7 @@ def audit(rows,qa):
               and len(sites)>=FIT_MIN_SITES)
     result={
         "status":"PAYOFF_B_EIDC_HATCH_WINDOW_ORIGINAL_LOYO_LOSO",
-        "source_zip_sha256":ORIGINAL_ZIP_SHA256,
+        "verified_original_csv_sha256":ORIGINAL_MEMBER_SHA256,
         "source_grain":"independent site-year mean of admitted blue tit nests",
         "resource_measure":"count per standardized 30-hit branch beating, not biomass or intake",
         "admitted_for_fitness_prediction":admitted,
@@ -280,8 +291,12 @@ def audit(rows,qa):
 def main():
     p=argparse.ArgumentParser();p.add_argument("--output",type=Path,required=True)
     args=p.parse_args()
-    panel,qa=admitted_siteyears(source_data())
+    raw=source_data()
+    current_zip_digest=raw.pop("_download_zip_sha256")
+    panel,qa=admitted_siteyears(raw)
     result=audit(panel,qa)
+    result["download_zip_sha256"]=current_zip_digest
+    result["zip_wrapper_may_vary_but_original_csv_digests_must_match"]=True
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n")
     print(json.dumps(result,ensure_ascii=False,separators=(",",":")))
