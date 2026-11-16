@@ -72,13 +72,23 @@ def candidate_nests(rows):
     categories=Counter()
     species=Counter()
     for row in rows:
-        species[str(row.get("species","")).strip()]+=1
+        species_id=str(row.get("species","")).strip().lower()
+        species[species_id]+=1
         treat=str(row.get("clutch_swap_treatment","")).strip()
         categories[treat]+=1
+        yr=numeric(row.get("year"))
+        if species_id != "bluti":
+            flags["unverified_or_non_blue_tit"]+=1
+            continue
+        if yr is None:
+            flags["no_year"]+=1
+            continue
         if treat.lower() not in ("unmanipulated",""):
             flags["manipulated_or_odd"]+=1
             continue
-        yr=numeric(row.get("year"))
+        if 2017 <= int(yr) <= 2019 and treat == "":
+            flags["unknown_treatment_during_experiment"]+=1
+            continue
         hatch=numeric(row.get("hatching_first_recorded"))
         succ=numeric(row.get("suc"))
         clutch=numeric(row.get("cs"))
@@ -172,6 +182,8 @@ def audit():
         "clutch_swap_labels":treatments,
         "nest_exclusion_counts":excluded,
         "eligible_unmanipulated_nests_before_food":len(nests),
+        "validated_blue_tit_only":True,
+        "experiment_years_blank_treatment_excluded":[2017,2018,2019],
         "candidate_nest_years":observed_years,
         "food_source_issues":issues,
         "mass_source_categories":mass,
