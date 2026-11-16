@@ -38,3 +38,14 @@ def test_source_bytes_digest_fail_closed():
     assert validate_manifest_digest(content,f)["verified"] is True
     assert validate_manifest_digest(content+b"changed",f)["verified"] is False
     assert validate_manifest_digest(content,{})["verified"] is False
+
+
+def test_dryad_canonical_hal_self_link_without_explicit_id():
+    payload={"_embedded":{"stash:versions":[
+       {"versionNumber":2,"_links":{"self":{"href":"/api/v2/versions/55996"}}}
+    ]}}
+    assert version_ids_from_listing(payload)[0][0]==55996
+    files={"_embedded":{"stash:files":[
+       {"_links":{"self":{"href":"/api/v2/files/67890"}},"path":"video.xlsx","size":1000}
+    ]}}
+    assert file_rows_from_listing(files)[0]["id"]==67890
