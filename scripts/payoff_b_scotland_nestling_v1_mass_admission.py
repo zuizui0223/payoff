@@ -205,7 +205,7 @@ def main():
     out=common_support(load_original())
     a.output.parent.mkdir(parents=True,exist_ok=True)
     a.output.write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n")
-    print(json.dumps(out,ensure_ascii=False,separators=(",",":"))
+    print(json.dumps(out,ensure_ascii=False,separators=(",",":")))
 
 
 if __name__=="__main__":
