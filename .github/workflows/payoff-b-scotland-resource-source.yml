@@ -9,6 +9,7 @@ on:
       - "tests/test_payoff_b_scotland_resource_source_probe.py"
       - "scripts/payoff_b_scotland_source_archive_probe.py"
       - "scripts/payoff_b_scotland_eidc_original_csv_gate.py"
+      - "scripts/payoff_b_scotland_eidc_access_routes.py"
       - "src/payoff_b_resource_contact.py"
       - "tests/test_payoff_b_resource_contact.py"
       - ".github/workflows/payoff-b-scotland-resource-source.yml"
@@ -33,6 +34,8 @@ jobs:
         run: python -m scripts.payoff_b_scotland_source_archive_probe --output outputs/scotland/tritrophic_archives_schema.json
       - name: Check exact EIDC bird, nestling and prey CSVs against public RO-Crate
         run: python -m scripts.payoff_b_scotland_eidc_original_csv_gate --output outputs/scotland/tritrophic_eidc_original_csv_gate.json
+      - name: Identify original EIDC download route without credentials
+        run: python -m scripts.payoff_b_scotland_eidc_access_routes --output outputs/scotland/tritrophic_eidc_route_diagnostic.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
