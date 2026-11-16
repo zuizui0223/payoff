@@ -161,7 +161,7 @@ def balanced_weights(rows):
     return vals/vals.sum()
 
 
-def weighted_ridge(X,y,xt,weights):
+def weighted_ridge(X,y,xt,weights,n_unique_broods):
     X=np.asarray(X,float);y=np.asarray(y,float);xt=np.asarray(xt,float)
     w=np.asarray(weights,float)
     w=w/w.sum()
@@ -172,12 +172,12 @@ def weighted_ridge(X,y,xt,weights):
     b=np.column_stack([np.ones(len(xt)),(xt-m)/sd])
     # Weight scales to number of unique broods, not raw day count.
     alpha=float(1.0)
-    brood_effective=len(set(weights)) if False else 1
-    scale=1/w.max() if np.max(w)>0 else 1
+    if n_unique_broods<2:
+        raise ValueError("Training data have insufficient independent broods")
     ridge=np.eye(a.shape[1])*alpha
     ridge[0,0]=0
-    theta=np.linalg.solve((a.T*(w*len(w)))@a+ridge,
-                           (a.T*(w*len(w)))@y)
+    theta=np.linalg.solve((a.T*(w*n_unique_broods))@a+ridge,
+                           (a.T*(w*n_unique_broods))@y)
     return b@theta
 
 
@@ -190,7 +190,7 @@ def predict(rows_train, rows_test, name):
         cols=FEATURE_M1 if name=="M1_context_rate_conversion" else FEATURE_ORACLE
         x=np.asarray([[r[z] for z in cols] for r in rows_train],float)
         testx=np.asarray([[r[z] for z in cols] for r in rows_test],float)
-        q=weighted_ridge(x,y,testx,w)
+        q=weighted_ridge(x,y,testx,w,len({r['broodID'] for r in rows_train}))
     q=np.maximum(0,q)
     v=np.asarray([r["visits"] for r in rows_test],float)
     return q*v
