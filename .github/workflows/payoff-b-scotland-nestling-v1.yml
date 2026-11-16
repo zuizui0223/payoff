@@ -1,0 +1,36 @@
+name: PAYOFF-B Scotland nestling first-visit mass pre-fit source gate
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-scotland-nestling-growth-gate-20261116
+    paths:
+      - "scripts/payoff_b_scotland_nestling_v1_mass_admission.py"
+      - "tests/test_payoff_b_scotland_nestling_v1_mass_admission.py"
+      - "scripts/payoff_b_scotland_nestling_v1_mass_fit.py"
+      - "tests/test_payoff_b_scotland_nestling_v1_mass_fit.py"
+      - ".github/workflows/payoff-b-scotland-nestling-v1.yml"
+permissions:
+  contents: read
+jobs:
+  v1-mass-source-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pytest numpy openpyxl
+      - name: Synthetic-source gate tests
+        run: python -m pytest -q tests/test_payoff_b_scotland_nestling_v1_mass_admission.py tests/test_payoff_b_scotland_nestling_v1_mass_fit.py
+      - name: Original EIDC nestling v1 body mass source admissions (no effect fit)
+        run: python -m scripts.payoff_b_scotland_nestling_v1_mass_admission --output outputs/scotland/nestling_v1_mass_source_admission.json
+      - name: Fit prespecified original EIDC early-chick body-mass source models
+        run: python -m scripts.payoff_b_scotland_nestling_v1_mass_fit --output outputs/scotland/nestling_v1_mass_LOYO_LOSO.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-scotland-nestling-v1-mass-source-admission
+          path: outputs/scotland/nestling_v1_mass_*.json
+          if-no-files-found: warn
