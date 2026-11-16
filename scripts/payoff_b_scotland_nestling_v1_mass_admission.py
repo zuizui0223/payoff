@@ -12,6 +12,7 @@ import json
 import math
 import zipfile
 from collections import Counter, defaultdict
+from datetime import date
 from pathlib import Path
 from scripts.payoff_b_scotland_hatch_resource_admission import (
     numeric, iso_day, resources
@@ -22,7 +23,7 @@ from scripts.payoff_b_scotland_hatch_window_fitness_loyo import (
 from scripts.payoff_b_scotland_measured_mass_window import source_mass
 from scripts.payoff_b_scotland_resource_source_probe import open_url
 from src.payoff_b_resource_contact import (
-    ResourceContactNotAdmitted, demand_window_contact
+    ResourceContactNotAdmitted, daily_resource_rates, demand_window_contact
 )
 
 SHA={
@@ -129,7 +130,7 @@ def link_nestlings(source_nests,source_chicks):
                  "not_conditioned_on_eventual_fledging":True}
 
 
-def common_support(data):
+def common_support(data, *, return_panel=False):
     nests,sourceqa=admit_source_nests(data["data/bird_phenology.csv"])
     linked,linkqa=link_nestlings(nests,data["data/nestlings.csv"])
     counts,_,_,_=resources(data["data/branch_beating.csv"])
@@ -167,7 +168,7 @@ def common_support(data):
                               "mass_5days_lower_g":amounts[1]/1000,
                               "mass_5days_upper_g":amounts[2]/1000})
     eligible_years=sorted({y for s,y in admitted})
-    return {
+    summary = {
         "status":"PAYOFF_B_SCOTLAND_NESTLING_V1MASS_RESOURCE_SOURCE_PREFIT",
         "record_units":"nestling first-visit body mass g, prey source g/standardized beating",
         "source_sha256_verified":True,
@@ -196,6 +197,38 @@ def common_support(data):
         ),
         "no_fitness_or_biomass_conversion_effect_fitted":True,
     }
+    if not return_panel:
+        return summary
+    panel=[]
+    for (site,year),nests in sorted(admitted.items()):
+        n=len(nests)
+        if n==0:
+            continue
+        mean=lambda field:sum(z[field] for z in nests)/n
+        events,_=daily_resource_rates(counts[(site,year)])
+        peak=max(v for d,v in events)
+        peakdate=min(d for d,v in events if v==peak)
+        peak_doy=date.fromordinal(peakdate).timetuple().tm_yday
+        hatch=mean("hatch")
+        panel.append({
+            "site":site,"year":year,"n_nests":n,
+            "n_chicks":sum(z["n_chicks"] for z in nests),
+            "y_mean_v1mass_g":mean("mean_v1mass_g"),
+            "latitude":source_sites[site]["latitude"],
+            "elevation":source_sites[site]["elevation"],
+            "spring_temperature":source_temp[(site,year)]["spring_temperature"],
+            "hatch_doy":hatch,
+            "clutch_size":mean("clutch"),
+            "v1_first_visit_age_proxy":mean("mean_first_visit_offset_days"),
+            "log_season_peak":math.log1p(peak),
+            "signed_peak_minus_hatch_days":peak_doy-hatch,
+            "log_count_window5":math.log1p(mean("count_5days")),
+            "log_mass_lower_window5":math.log1p(mean("mass_5days_lower_g")),
+            "log_mass_upper_window5":math.log1p(mean("mass_5days_upper_g")),
+        })
+    if len(panel)!=summary["n_supported_siteyears"]:
+        raise ValueError("Source support panel site-year count drift")
+    return summary,panel
 
 
 def main():
