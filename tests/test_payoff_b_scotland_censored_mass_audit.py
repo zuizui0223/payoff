@@ -26,6 +26,7 @@ def test_censored_not_zero_and_physical_mg_conversion():
 
 def test_mass_source_fails_closed_when_sample_effort_unreliable():
     rows=[row(count="1",mass="0.1"),row(count="3",mass="0.3",flag="1"),
+          row(count="2",mass="0.1"),row(count="3",mass="0.1"),
           row(date="124",count="2",mass="0.2"),row(date="124",count="2",mass="0.2")]
     by,reasons,day=dated_mass(rows)
     assert day["mass_source_coverage_below_90pct"]==1
