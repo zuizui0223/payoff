@@ -285,7 +285,7 @@ def main():
     r=result(rows,qa)
     a.output.parent.mkdir(parents=True,exist_ok=True)
     a.output.write_text(json.dumps(r,ensure_ascii=False,indent=2)+"\n")
-    print(json.dumps(r,ensure_ascii=False,separators=(",",":"))
+    print(json.dumps(r,ensure_ascii=False,separators=(",",":")))
 
 
 if __name__=="__main__":
