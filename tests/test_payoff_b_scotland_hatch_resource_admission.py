@@ -2,7 +2,7 @@
 from scripts.payoff_b_scotland_hatch_resource_admission import candidate_nests, iso_day
 
 
-def example(*, year=2019, sp="bluti", treatment="", hatch="134",
+def example(*, year=2020, sp="bluti", treatment="", hatch="134",
             fledged="5", clutch="8", box="1"):
     return {"year":str(year), "site":"ABC","box":box,"species":sp,
             "clutch_swap_treatment":treatment,
