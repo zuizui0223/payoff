@@ -15,7 +15,7 @@ Can a directly observed source-weighted **caterpillar mass rate (g per standardi
 Original branch_beating.csv SHA256 38f5c34cf656bab33c5d5b3516648306549049deebfbe693e4b4cad09ac4004c. Original EIDC documentation says branch beating was standardized at 30 strikes, caterpillars counted if >1 mm diameter; samples were weighed from 2017, detection below 0.02g represented as `<0.02g`, and `mass.uncertain = 1` flags unreliable mass. Do NOT substitute the source's 2024/2026 Zenodo records as independent samples.
 
 - Numeric recorded `caterpillar.mass` in original grams is accepted if finite nonnegative and `mass.uncertain` not 1.
-- Exact `<0.02g` with positive caterpillar count is interval-censored; use **lower=0g, upper=0.02g** per sampled branch, with both reported, never silently set to 0.01.
+- Exact `<0.02` (source file) or `<0.02g` (unit-annotated form) with positive caterpillar count is interval-censored; use **lower=0g, upper=0.02g** per sampled branch, with both reported, never silently set to 0.01.
 - Blank mass and **zero source caterpillars** is accepted as a *structural zero* (explicit assumption), not a measured weight; count this separately and provide a sensitivity excluding those inferred zeros if sample permits.
 - Blank mass with positive counts and uncertain mass flags are **unmeasured** and excluded from observed mass sums; never silently turn blanks into 0.
 - For each site-year-date: all source branches with valid original caterpillar counts define denominator; require measured/censored/structural mass in at least **80% of those branch observations**. Calculate mass rate as total accepted mass g / number accepted standardized branch beatings. Restrict to dates satisfying coverage. Zero mass is meaningful; no invented g/m2 conversion or caterpillar nutritional calories.
@@ -44,3 +44,7 @@ A negative test means source-available count/mass temporal contact proxies did n
 ## Failure protocol
 
 Any source content hash drift, code-linked site-year ambiguity, unknown censor syntax, sample effort ambiguity, or missing high-coverage mass source must stop analysis instead of imputing results. Source provenance, exclusion table, and unchanged earlier negative baseline must be recorded regardless of the outcome.
+
+### Source-literal correction before new mass outcome fit (2026-11-16)
+
+The first dedicated mass workflow stopped at source-admission parsing (Actions run 43883245272) with literal `ValueError: Unknown source censor threshold <0.02`. The original EIDC CSV stores censored values as `<0.02` without a trailing `g`; source documentation identifies the same 0.02 g detection threshold. This is a source-format correction made **before any mass-specific fitness prediction was opened**, not a redefinition of the fixed [0,0.02] g interval. Accept the two exact strings `<0.02` and `<0.02g`; other censor codes remain rejected.
