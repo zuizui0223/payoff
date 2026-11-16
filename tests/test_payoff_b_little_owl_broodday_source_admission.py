@@ -1,4 +1,6 @@
 """Synthetic-source parsing tests (not published ecological findings)."""
+import pytest
+pytest.importorskip("openpyxl")
 from scripts.payoff_b_little_owl_broodday_source_admission import (
     parse_number, source_counts
 )
