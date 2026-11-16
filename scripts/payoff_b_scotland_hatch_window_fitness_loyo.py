@@ -121,14 +121,14 @@ def source_temperature(rows):
 
 
 def admitted_siteyears(data):
-    nests,filters,_,_=candidate_nests(data["data/bird_phenology.csv"])
+    candidate,filters,_,_=candidate_nests(data["data/bird_phenology.csv"])
     prey,_,mass_audit,_=resources(data["data/branch_beating.csv"])
     sites=original_site_details(data["data/site_details.csv"])
     temperature,temp_qc=source_temperature(data["data/temperatures.csv"])
     records=defaultdict(list)
     by_prey={}
     exclusions=Counter()
-    for n in nests:
+    for n in candidate:
         key=(n["site"],n["year"])
         if key not in prey:
             exclusions["no_source_prey"]+=1
@@ -172,7 +172,7 @@ def admitted_siteyears(data):
             "raw_peak_count_per_beating":p["season_peak"],
             "raw_mean_hatch_window_count_per_beating":exposure,
         })
-    qa={"source_n_bird_nests_after_species_treatment_hatch":len(nests),
+    qa={"source_n_bird_nests_after_species_treatment_hatch":len(candidate),
         "all_nests_hatch_proxy_admitted":sum(len(x) for x in records.values()),
         "after_climate_siteyear_rows":len(panel),
         "after_climate_sites":len({r["site"] for r in panel}),
