@@ -149,6 +149,14 @@ def probe():
         }
     elif isinstance(listing,list):
         result["version_response_shape"]={"array_length":len(listing)}
+    candidates=embedded_nodes(listing,"stash:versions") if isinstance(listing,dict) else []
+    result["version_node_evidence"]=[{
+        "keys":sorted(node),
+        "id":node.get("id"),
+        "versionNumber":node.get("versionNumber"),
+        "link_self":node.get("_links",{}).get("self"),
+        "link_files":node.get("_links",{}).get("stash:files")
+    } for node in candidates[:3]]
     ids=version_ids_from_listing(listing)
     result["published_version_ids"]=[{"id":i,"number":n} for i,n,o in ids]
     if not ids:
