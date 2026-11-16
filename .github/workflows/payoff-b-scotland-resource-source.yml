@@ -7,6 +7,7 @@ on:
     paths:
       - "scripts/payoff_b_scotland_resource_source_probe.py"
       - "tests/test_payoff_b_scotland_resource_source_probe.py"
+      - "scripts/payoff_b_scotland_source_archive_probe.py"
       - "src/payoff_b_resource_contact.py"
       - "tests/test_payoff_b_resource_contact.py"
       - ".github/workflows/payoff-b-scotland-resource-source.yml"
@@ -27,9 +28,11 @@ jobs:
         run: python -m pytest -q tests/test_payoff_b_scotland_resource_source_probe.py tests/test_payoff_b_resource_contact.py
       - name: Audit source manifests and bounded sample schemas
         run: python -m scripts.payoff_b_scotland_resource_source_probe --output outputs/scotland/tritrophic_source_preflight.json
+      - name: Audit original compressed CSV column contracts and open EIDC support documentation
+        run: python -m scripts.payoff_b_scotland_source_archive_probe --output outputs/scotland/tritrophic_archives_schema.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: payoff-b-scotland-tritrophic-source-preflight
-          path: outputs/scotland/tritrophic_source_preflight.json
+          path: outputs/scotland/tritrophic_*.json
           if-no-files-found: warn
