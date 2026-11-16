@@ -74,7 +74,7 @@ def version_ids_from_listing(payload):
         # not as an id property. Only match the exact documented API path.
         if value is None:
             href=obj.get("_links",{}).get("self",{}).get("href","")
-            found=re.fullmatch(r"(?:https://datadryad.org)?/api/v2/versions/(\\d+)",href)
+            found=re.fullmatch(r"(?:https://datadryad.org)?/api/v2/versions/(\d+)",href)
             if found:
                 value=int(found.group(1))
         if isinstance(value,int):
@@ -90,9 +90,9 @@ def file_rows_from_listing(payload):
     items=embedded_nodes(payload,"stash:files")
     return [{
         "id":f.get("id") if f.get("id") is not None else (
-             int(re.fullmatch(r"(?:https://datadryad.org)?/api/v2/files/(\\d+)",
+             int(re.fullmatch(r"(?:https://datadryad.org)?/api/v2/files/(\d+)",
                f.get("_links",{}).get("self",{}).get("href","")).group(1))
-             if re.fullmatch(r"(?:https://datadryad.org)?/api/v2/files/(\\d+)",
+             if re.fullmatch(r"(?:https://datadryad.org)?/api/v2/files/(\d+)",
                f.get("_links",{}).get("self",{}).get("href","")) else None),
         "path":f.get("path") or f.get("fileName") or f.get("filename"),
         "size":f.get("size"),
