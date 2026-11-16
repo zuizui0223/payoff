@@ -1,0 +1,33 @@
+name: PAYOFF-B Scotland observed mass phase specificity negative control
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-scotland-mass-phase-specificity-20261116
+    paths:
+      - "scripts/payoff_b_scotland_mass_phase_specificity.py"
+      - "tests/test_payoff_b_scotland_mass_phase_specificity.py"
+      - ".github/workflows/payoff-b-scotland-mass-phase-specificity.yml"
+permissions:
+  contents: read
+jobs:
+  phase-source-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install fixed test and numerical prerequisites
+        run: python -m pip install pytest numpy openpyxl
+      - name: Synthetic source-contract and CV tests
+        run: python -m pytest -q tests/test_payoff_b_scotland_mass_phase_specificity.py
+      - name: Original source timing specificity versus seasonal magnitude negative control
+        run: python -m scripts.payoff_b_scotland_mass_phase_specificity --output outputs/scotland/original_mass_phase_specificity.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-scotland-mass-phase-specificity-source
+          path: outputs/scotland/original_mass_phase_specificity.json
+          if-no-files-found: warn
