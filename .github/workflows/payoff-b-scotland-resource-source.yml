@@ -1,0 +1,33 @@
+name: PAYOFF-B Scotland tritrophic original source admission
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-scotland-resource-bridge-20261116
+    paths:
+      - "scripts/payoff_b_scotland_resource_source_probe.py"
+      - "tests/test_payoff_b_scotland_resource_source_probe.py"
+      - ".github/workflows/payoff-b-scotland-resource-source.yml"
+permissions:
+  contents: read
+jobs:
+  source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test runner
+        run: python -m pip install pytest
+      - name: Synthetic source contract tests
+        run: python -m pytest -q tests/test_payoff_b_scotland_resource_source_probe.py
+      - name: Audit source manifests and bounded sample schemas
+        run: python -m scripts.payoff_b_scotland_resource_source_probe --output outputs/scotland/tritrophic_source_preflight.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-scotland-tritrophic-source-preflight
+          path: outputs/scotland/tritrophic_source_preflight.json
+          if-no-files-found: warn
