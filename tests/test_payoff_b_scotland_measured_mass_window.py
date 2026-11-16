@@ -20,11 +20,12 @@ def row(c, mass, *, doy=130, site="AAA", year=2021, uncertain=""):
 def test_original_measurement_units_censor_and_structural_zero():
     qc=Counter()
     assert original_mass_bounds(row(2,"0.043"),qc)==pytest.approx((0.043,0.043))
+    assert original_mass_bounds(row(2,"<0.02"),qc)==(0,0.02)
     assert original_mass_bounds(row(2,"<0.02g"),qc)==(0,0.02)
     assert original_mass_bounds(row(0,""),qc)==(0,0)
     assert original_mass_bounds(row(2,""),qc) is None
     assert original_mass_bounds(row(2,"0.51",uncertain="1"),qc) is None
-    assert qc["censored_lt_0_02_g"]==1
+    assert qc["censored_lt_0_02_g"]==2
     assert qc["structural_zero_from_count_zero"]==1
     assert qc["positive_count_missing_mass"]==1
 
