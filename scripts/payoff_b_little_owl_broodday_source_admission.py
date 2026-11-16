@@ -86,6 +86,8 @@ def source_counts(data):
     nests=set()
     broods=set()
     keys=set()
+    first_by_key={}
+    duplicate_diagnostics=[]
     admitted=[]
     observed=Counter()
     for row in provision:
@@ -100,8 +102,16 @@ def source_counts(data):
         k=(brood,day)
         if k in keys:
             bad["duplicate_brood_day"]+=1
+            prior=first_by_key[k]
+            duplicate_diagnostics.append({
+                "broodID":brood,"day":day,"country":place,
+                "same_all_source_fields":prior==row,
+                "first":{h:prior.get(h) for h in ("age","prov_rate","BM","prop.day.monitored","prov_rate2","BM2")},
+                "second":{h:row.get(h) for h in ("age","prov_rate","BM","prop.day.monitored","prov_rate2","BM2")},
+            })
             continue
         keys.add(k)
+        first_by_key[k]=row
         if nid not in bynest:
             bad["no_exact_habitat_nest"]+=1
             continue
@@ -159,6 +169,7 @@ def source_counts(data):
         "reused_nests_across_broods":sum(len(v)>1 for v in unique_broods_by_nest.values()),
         "field_missing_count":dict(missing),
         "excluded_or_duplicated":dict(bad),
+        "duplicate_source_rows_for_review":duplicate_diagnostics,
         "source_rate_normalization_qc":dict(observed),
         "all_4_countries":len(country)>=4,
         "all_input_variables_are_real_source_values":True,
