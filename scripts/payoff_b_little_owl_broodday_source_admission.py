@@ -57,7 +57,10 @@ def download_original():
         source_hash=f.get("checksum") or ""
         if not source_hash.startswith("md5:") or hashlib.md5(file).hexdigest()!=source_hash[4:]:
             raise ValueError("Zenodo original MD5 not verified: "+name)
-        text=file.decode("utf-8-sig",errors="strict") if name=="Littleowl.dat.JAB.csv" else file.decode("cp1252")
+        try:
+            text=file.decode("utf-8-sig",errors="strict")
+        except UnicodeDecodeError:
+            text=file.decode("cp1252")
         result[name]=list(csv.DictReader(io.StringIO(text,newline="")))
     return result
 
@@ -135,7 +138,9 @@ def source_counts(data):
         nests.add(nid);broods.add(brood);year[yr]+=1;country[place]+=1
         admitted.append(row)
     bybrood=Counter(x["broodID"] for x in admitted)
-    site_brood_counts=Counter(x["nestID"] for x in admitted)
+    unique_broods_by_nest=defaultdict(set)
+    for x in admitted:
+        unique_broods_by_nest[x["nestID"]].add(x["broodID"])
     summary={
         "status":"PAYOFF_B_LITTLE_OWL_ORIGINAL_BROOD_DAY_SUPPORT_PREFIT",
         "original_zenodo_id":RID,
@@ -151,7 +156,7 @@ def source_counts(data):
         "days_per_brood_min":min(bybrood.values()) if bybrood else None,
         "days_per_brood_median":sorted(bybrood.values())[len(bybrood)//2] if bybrood else None,
         "days_per_brood_max":max(bybrood.values()) if bybrood else None,
-        "reused_nests_across_broods":sum(v>1 for v in site_brood_counts.values()),
+        "reused_nests_across_broods":sum(len(v)>1 for v in unique_broods_by_nest.values()),
         "field_missing_count":dict(missing),
         "excluded_or_duplicated":dict(bad),
         "source_rate_normalization_qc":dict(observed),
