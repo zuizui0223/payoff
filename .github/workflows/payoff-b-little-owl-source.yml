@@ -8,9 +8,11 @@ on:
       - "scripts/payoff_b_little_owl_source_gate.py"
       - "scripts/payoff_b_little_owl_broodday_source_admission.py"
       - "scripts/payoff_b_little_owl_mass_per_visit_cv.py"
+      - "scripts/payoff_b_little_owl_biomass_construction_audit.py"
       - "tests/test_payoff_b_little_owl_source_gate.py"
       - "tests/test_payoff_b_little_owl_broodday_source_admission.py"
       - "tests/test_payoff_b_little_owl_mass_per_visit_cv.py"
+      - "tests/test_payoff_b_little_owl_biomass_construction_audit.py"
       - ".github/workflows/payoff-b-little-owl-source.yml"
 permissions:
   contents: read
@@ -25,13 +27,15 @@ jobs:
           python-version: "3.12"
       - run: python -m pip install pytest openpyxl numpy
       - name: Verify source parser and digest tests
-        run: python -m pytest -q tests/test_payoff_b_little_owl_source_gate.py tests/test_payoff_b_little_owl_broodday_source_admission.py tests/test_payoff_b_little_owl_mass_per_visit_cv.py
+        run: python -m pytest -q tests/test_payoff_b_little_owl_source_gate.py tests/test_payoff_b_little_owl_broodday_source_admission.py tests/test_payoff_b_little_owl_mass_per_visit_cv.py tests/test_payoff_b_little_owl_biomass_construction_audit.py
       - name: Fetch and inspect published original record and bounded data schemas
         run: python -m scripts.payoff_b_little_owl_source_gate --output outputs/provisioning/little_owl_source_gate.json
       - name: Audit exact original brood-day, weather, habitat and visit/mass source units
         run: python -m scripts.payoff_b_little_owl_broodday_source_admission --output outputs/provisioning/little_owl_broodday_prefit.json
       - name: Test real source-estimated delivered grams per visit with brood-balanced grouped holdouts
         run: python -m scripts.payoff_b_little_owl_mass_per_visit_cv --output outputs/provisioning/little_owl_mass_per_visit_grouped_cv.json
+      - name: Audit original manuscript prey-weight formula for derived BM and BM2
+        run: python -m scripts.payoff_b_little_owl_biomass_construction_audit --output outputs/provisioning/little_owl_biomass_formula_audit.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
