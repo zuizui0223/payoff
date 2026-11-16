@@ -1,5 +1,7 @@
 """Synthetic-only Dryad HAL API, checksum and file-schema gate tests."""
 import hashlib
+import pytest
+pytest.importorskip("openpyxl")
 from scripts.payoff_b_dryad_food_supplement_provisioning_probe import (
     DOI_ARG, embedded_nodes, version_ids_from_listing,
     file_rows_from_listing, validate_manifest_digest
