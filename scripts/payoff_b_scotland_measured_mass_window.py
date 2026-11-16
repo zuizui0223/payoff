@@ -50,7 +50,7 @@ def original_mass_bounds(row, counters):
         counters["uncertain_original_mass_excluded"]+=1
         return None
     raw=str(row.get("caterpillar.mass") or "").strip()
-    if raw=="<0.02g":
+    if raw in ("<0.02", "<0.02g"):
         counters["censored_lt_0_02_g"]+=1
         return (0.0,0.02)
     mass=numeric(raw)
