@@ -1,0 +1,44 @@
+name: PAYOFF-B original Little Owl provisioning source schema
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-little-owl-provisioned-biomass-20261117
+    paths:
+      - "scripts/payoff_b_little_owl_source_gate.py"
+      - "scripts/payoff_b_little_owl_broodday_source_admission.py"
+      - "scripts/payoff_b_little_owl_mass_per_visit_cv.py"
+      - "scripts/payoff_b_little_owl_biomass_construction_audit.py"
+      - "tests/test_payoff_b_little_owl_source_gate.py"
+      - "tests/test_payoff_b_little_owl_broodday_source_admission.py"
+      - "tests/test_payoff_b_little_owl_mass_per_visit_cv.py"
+      - "tests/test_payoff_b_little_owl_biomass_construction_audit.py"
+      - ".github/workflows/payoff-b-little-owl-source.yml"
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pytest openpyxl numpy
+      - name: Verify source parser and digest tests
+        run: python -m pytest -q tests/test_payoff_b_little_owl_source_gate.py tests/test_payoff_b_little_owl_broodday_source_admission.py tests/test_payoff_b_little_owl_mass_per_visit_cv.py tests/test_payoff_b_little_owl_biomass_construction_audit.py
+      - name: Fetch and inspect published original record and bounded data schemas
+        run: python -m scripts.payoff_b_little_owl_source_gate --output outputs/provisioning/little_owl_source_gate.json
+      - name: Audit exact original brood-day, weather, habitat and visit/mass source units
+        run: python -m scripts.payoff_b_little_owl_broodday_source_admission --output outputs/provisioning/little_owl_broodday_prefit.json
+      - name: Test real source-estimated delivered grams per visit with brood-balanced grouped holdouts
+        run: python -m scripts.payoff_b_little_owl_mass_per_visit_cv --output outputs/provisioning/little_owl_mass_per_visit_grouped_cv.json
+      - name: Audit original manuscript prey-weight formula for derived BM and BM2
+        run: python -m scripts.payoff_b_little_owl_biomass_construction_audit --output outputs/provisioning/little_owl_biomass_formula_audit.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-little-owl-provisioning-original-schema
+          path: outputs/provisioning/little_owl_*.json
+          if-no-files-found: warn
