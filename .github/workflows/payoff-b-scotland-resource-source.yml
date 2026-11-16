@@ -11,6 +11,7 @@ on:
       - "scripts/payoff_b_scotland_eidc_original_csv_gate.py"
       - "scripts/payoff_b_scotland_eidc_access_routes.py"
       - "scripts/payoff_b_scotland_eidc_original_zip.py"
+      - "scripts/payoff_b_scotland_hatch_resource_admission.py"
       - "src/payoff_b_resource_contact.py"
       - "tests/test_payoff_b_resource_contact.py"
       - ".github/workflows/payoff-b-scotland-resource-source.yml"
@@ -39,6 +40,8 @@ jobs:
         run: python -m scripts.payoff_b_scotland_eidc_access_routes --output outputs/scotland/tritrophic_eidc_route_diagnostic.json
       - name: Download official EIDC OGL ZIP and audit exact bird-prey site-years
         run: python -m scripts.payoff_b_scotland_eidc_original_zip --output outputs/scotland/tritrophic_eidc_original_zip.json
+      - name: Count source-admitted unmanipulated nests and observed prey windows
+        run: python -m scripts.payoff_b_scotland_hatch_resource_admission --output outputs/scotland/tritrophic_hatch_prey_prefit.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
