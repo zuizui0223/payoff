@@ -227,9 +227,16 @@ def probe():
         checked.append(item)
     result["fetched_files"]=checked
     result["bytes_fetched"]=bytes_total
-    result["gate"]="SOURCE_SCHEMA_PARTIALLY_ADMITTED" if any(
-        x["status"]=="SOURCE_XLSX_VERIFIED_AND_SCHEMA_OPENED" for x in checked
-    ) else "HOLD_NO_CERTIFIED_TABULAR_SOURCE"
+    if any(x["status"]=="SOURCE_XLSX_VERIFIED_AND_SCHEMA_OPENED" for x in checked):
+        result["gate"]="SOURCE_SCHEMA_PARTIALLY_ADMITTED"
+    elif any(x.get("status_code")==401 for x in checked):
+        result["gate"]="HOLD_PUBLIC_DRYAD_METADATA_BUT_FILES_REQUIRE_ACCESS"
+        result["blocked_original_filenames"]=[
+            x["name"] for x in checked if x.get("status_code")==401
+        ]
+        result["user_credentials_not_requested_or_bypassed"]=True
+    else:
+        result["gate"]="HOLD_NO_CERTIFIED_TABULAR_SOURCE"
     return result
 
 
