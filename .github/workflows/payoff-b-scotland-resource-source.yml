@@ -1,0 +1,62 @@
+name: PAYOFF-B Scotland tritrophic original source admission
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-scotland-resource-bridge-20261116
+    paths:
+      - "scripts/payoff_b_scotland_resource_source_probe.py"
+      - "tests/test_payoff_b_scotland_resource_source_probe.py"
+      - "scripts/payoff_b_scotland_source_archive_probe.py"
+      - "scripts/payoff_b_scotland_eidc_original_csv_gate.py"
+      - "scripts/payoff_b_scotland_eidc_access_routes.py"
+      - "scripts/payoff_b_scotland_eidc_original_zip.py"
+      - "scripts/payoff_b_scotland_hatch_resource_admission.py"
+      - "scripts/payoff_b_scotland_nest_source_labels_audit.py"
+      - "scripts/payoff_b_scotland_hatch_window_fitness_loyo.py"
+      - "scripts/payoff_b_scotland_censored_mass_audit.py"
+      - "tests/test_payoff_b_scotland_censored_mass_audit.py"
+      - "tests/test_payoff_b_scotland_hatch_window_fitness_loyo.py"
+      - "tests/test_payoff_b_scotland_hatch_resource_admission.py"
+      - "src/payoff_b_resource_contact.py"
+      - "tests/test_payoff_b_resource_contact.py"
+      - ".github/workflows/payoff-b-scotland-resource-source.yml"
+permissions:
+  contents: read
+jobs:
+  source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test runner
+        run: python -m pip install pytest numpy openpyxl
+      - name: Synthetic source contract tests
+        run: python -m pytest -q tests/test_payoff_b_scotland_resource_source_probe.py tests/test_payoff_b_resource_contact.py tests/test_payoff_b_scotland_hatch_resource_admission.py tests/test_payoff_b_scotland_hatch_window_fitness_loyo.py tests/test_payoff_b_scotland_censored_mass_audit.py
+      - name: Audit source manifests and bounded sample schemas
+        run: python -m scripts.payoff_b_scotland_resource_source_probe --output outputs/scotland/tritrophic_source_preflight.json
+      - name: Audit original compressed CSV column contracts and open EIDC support documentation
+        run: python -m scripts.payoff_b_scotland_source_archive_probe --output outputs/scotland/tritrophic_archives_schema.json
+      - name: Check exact EIDC bird, nestling and prey CSVs against public RO-Crate
+        run: python -m scripts.payoff_b_scotland_eidc_original_csv_gate --output outputs/scotland/tritrophic_eidc_original_csv_gate.json
+      - name: Identify original EIDC download route without credentials
+        run: python -m scripts.payoff_b_scotland_eidc_access_routes --output outputs/scotland/tritrophic_eidc_route_diagnostic.json
+      - name: Download official EIDC OGL ZIP and audit exact bird-prey site-years
+        run: python -m scripts.payoff_b_scotland_eidc_original_zip --output outputs/scotland/tritrophic_eidc_original_zip.json
+      - name: Audit source species and experimental treatment labels before fitting
+        run: python -m scripts.payoff_b_scotland_nest_source_labels_audit --output outputs/scotland/tritrophic_nest_source_labels.json
+      - name: Count source-admitted unmanipulated nests and observed prey windows
+        run: python -m scripts.payoff_b_scotland_hatch_resource_admission --output outputs/scotland/tritrophic_hatch_prey_prefit.json
+      - name: Compare frozen peak versus hatch-window predictors under full-year/site holdouts
+        run: python -m scripts.payoff_b_scotland_hatch_window_fitness_loyo --output outputs/scotland/tritrophic_hatch_window_fitness_LOYO_LOSO.json
+      - name: Audit original censor-bounded caterpillar sample mass and count peak discrepancy
+        run: python -m scripts.payoff_b_scotland_censored_mass_audit --output outputs/scotland/tritrophic_censored_mass_count_peak_audit.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-scotland-tritrophic-source-preflight
+          path: outputs/scotland/tritrophic_*.json
+          if-no-files-found: warn
