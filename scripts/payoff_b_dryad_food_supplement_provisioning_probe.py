@@ -70,6 +70,13 @@ def version_ids_from_listing(payload):
         options=[]
     for obj in options:
         value=obj.get("id")
+        # Dryad published HAL version objects expose IDs in canonical self href,
+        # not as an id property. Only match the exact documented API path.
+        if value is None:
+            href=obj.get("_links",{}).get("self",{}).get("href","")
+            found=re.fullmatch(r"(?:https://datadryad.org)?/api/v2/versions/(\\d+)",href)
+            if found:
+                value=int(found.group(1))
         if isinstance(value,int):
             vals.append((value,obj.get("versionNumber"),obj))
         elif isinstance(value,str) and value.isdigit():
@@ -82,7 +89,11 @@ def file_rows_from_listing(payload):
         return []
     items=embedded_nodes(payload,"stash:files")
     return [{
-        "id":f.get("id"),
+        "id":f.get("id") if f.get("id") is not None else (
+             int(re.fullmatch(r"(?:https://datadryad.org)?/api/v2/files/(\\d+)",
+               f.get("_links",{}).get("self",{}).get("href","")).group(1))
+             if re.fullmatch(r"(?:https://datadryad.org)?/api/v2/files/(\\d+)",
+               f.get("_links",{}).get("self",{}).get("href","")) else None),
         "path":f.get("path") or f.get("fileName") or f.get("filename"),
         "size":f.get("size"),
         "digest":f.get("digest"),
