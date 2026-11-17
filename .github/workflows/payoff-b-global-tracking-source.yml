@@ -6,7 +6,9 @@ on:
       - analysis/payoff-b-global-tracking-information-20261117
     paths:
       - "scripts/payoff_b_brlik_global_tracking_source_gate.py"
+      - "scripts/payoff_b_goose_gps_fitness_dryad_gate.py"
       - "tests/test_payoff_b_brlik_global_tracking_source_gate.py"
+      - "tests/test_payoff_b_goose_gps_fitness_dryad_gate.py"
       - ".github/workflows/payoff-b-global-tracking-source.yml"
 permissions:
   contents: read
@@ -20,14 +22,16 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install pure-source test requirements
-        run: python -m pip install pytest
+        run: python -m pip install pytest openpyxl
       - name: Run synthetic checksum and schema admission tests
-        run: python -m pytest -q tests/test_payoff_b_brlik_global_tracking_source_gate.py
+        run: python -m pytest -q tests/test_payoff_b_brlik_global_tracking_source_gate.py tests/test_payoff_b_goose_gps_fitness_dryad_gate.py
       - name: Inspect Zenodo paper-concept and v3 original source files
         run: python -m scripts.payoff_b_brlik_global_tracking_source_gate --output outputs/global_tracking/brlik_source_gate.json
+      - name: Probe original barnacle goose GPS and breeding outcomes with documented Dryad ZIP API
+        run: python -m scripts.payoff_b_goose_gps_fitness_dryad_gate --output outputs/global_tracking/goose_gps_fitness_source_gate.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: payoff-b-global-tracking-original-source-gate
-          path: outputs/global_tracking/brlik_source_gate.json
+          path: outputs/global_tracking/*_source_gate.json
           if-no-files-found: warn
