@@ -31,7 +31,10 @@ def date_utc(raw):
     except ValueError:
         return None
     if value.tzinfo is None:
-        return None
+        # The archived Movebank timestamp field can be timezone-naive text.
+        # Preserve calendar dates without inventing a timezone conversion.
+        # Original README definitions must resolve UTC before hourly use.
+        return value
     return value.astimezone(__import__("datetime").timezone.utc)
 
 
@@ -49,6 +52,7 @@ def audit_gps_rows(rows, expected_flyway):
     sensor=Counter()
     years=Counter()
     valid_by_indyear=Counter()
+    spring_by_indyear=Counter()
     by_individual=Counter()
     known_ids=set()
     row_count=0
@@ -64,7 +68,9 @@ def audit_gps_rows(rows, expected_flyway):
             known_ids.add(ident)
             by_individual[ident]+=1
         if ts is None:
-            bad["invalid_or_missing_utc_timestamp"]+=1
+            bad["invalid_or_missing_timestamp"]+=1
+        elif ts.tzinfo is None:
+            bad["valid_timestamp_without_embedded_timezone"]+=1
         if longitude is None or latitude is None:
             bad["invalid_or_missing_lat_long"]+=1
         if ts is None or not ident or longitude is None or latitude is None:
@@ -81,8 +87,10 @@ def audit_gps_rows(rows, expected_flyway):
         month[ts.month]+=1
         sensor[(r.get("sensor-type") or "").strip()]+=1
         valid_by_indyear[(ident,ts.year)]+=1
-    spring_iy=[k for k in valid_by_indyear
-          if valid_by_indyear[k]>=MIN_SPRING_FIXES]
+        if ts.month in SPRING_MONTHS:
+            spring_by_indyear[(ident,ts.year)]+=1
+    spring_iy=[k for k in spring_by_indyear
+          if spring_by_indyear[k]>=MIN_SPRING_FIXES]
     byyr=defaultdict(int)
     for (ident,year),n in valid_by_indyear.items():
         byyr[year]+=1
@@ -96,10 +104,13 @@ def audit_gps_rows(rows, expected_flyway):
         "month_fix_counts":dict(sorted(month.items())),
         "sensor_type_counts":dict(sensor),
         "individual_year_series_total":len(valid_by_indyear),
-        "individual_year_series_with_at_least_10_valid_fixes":len(spring_iy),
+        "individual_year_series_with_any_March_to_July_fix":len(spring_by_indyear),
+        "individual_year_series_with_at_least_10_March_to_July_fixes":len(spring_iy),
         "individual_year_series_by_year":dict(sorted(byyr.items())),
         "individual_trace_fix_count_min":min(by_individual.values()) if by_individual else None,
         "individual_trace_fix_count_max":max(by_individual.values()) if by_individual else None,
+        "timestamps_naive_processed_as_source_calendar_no_timezone_conversion":True,
+        "source_timestamp_timezone_needs_Readme_UTC_confirmation":True,
         "cannot_infer_complete_migration_or_stopover_from_raw_fix_counts":True,
         "independent_30year_predictability_q_from_supplement":False,
         "individual_data_not_returned":True,
