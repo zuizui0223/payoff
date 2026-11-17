@@ -98,15 +98,18 @@ mapping <- vector("list",nrow(target))
 n <- 0L
 for (i in seq_len(nrow(target))) {
   t <- target[i,]
-  c <- cells[cells$species==t$species & cells$is_mig &
-             is.finite(cells$cell_lat2) & cells$cell_lat2<t$cell_lat2,
-             c("cell","cell_lat2","cell_lng")]
-  if (!nrow(c)) next
-  c$distance <- hav(c$cell_lat2,c$cell_lng,t$cell_lat2,t$cell_lng)
-  c <- c[order(c$distance,c$cell),]
+  candidates <- cells[cells$species==t$species & cells$is_mig &
+                      is.finite(cells$cell_lat2) & cells$cell_lat2<t$cell_lat2,
+                      c("cell","cell_lat2","cell_lng")]
+  if (!nrow(candidates)) next
+  candidates$distance <- hav(candidates$cell_lat2,candidates$cell_lng,
+                             t$cell_lat2,t$cell_lng)
+  candidates <- candidates[order(candidates$distance,candidates$cell),]
   n <- n+1L
-  mapping[[n]] <- data.frame(species=t$species,source_cell=c$cell[1],
-                     target_cell=t$cell, distance_km=c$distance[1])
+  mapping[[n]] <- data.frame(species=t$species,
+                     source_cell=candidates$cell[1],
+                     target_cell=t$cell,
+                     distance_km=candidates$distance[1])
 }
 if (n==0) stop("Original route mapping unexpectedly empty")
 mapping <- do.call(rbind,mapping[seq_len(n)])
