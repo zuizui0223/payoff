@@ -64,3 +64,20 @@ Generated source-derived aggregate CSV files:
 **Scientific claim ceiling:** The published authors have already reported predictive connectivity and its influence on goose migration; reconstructing those original correlations is NOT an independent finding. This only advances the original-source admission needed for PAYOFF-B's distinct frozen predictability × geometry-only urgency question. It does not identify the animal's mental information, actual cue value, evolutionary payoff, reproductive fitness, or a new game-theory effect.
 
 **Next permissible action:** Obtain actual year-specific GDD-jerk onset per generalized region **with independently grounded region membership** (original author data/algorithm, region centroids or polygons) to compute original V7 \`Y_{ij}\` and \`U_j\`, then check frozen admission thresholds without redefining q, annual sources or movement controls. Do not digitize Figure S1 by hand and call it exact regional climate data.
+
+
+## 5. POST-OPEN quantitative SMATR source consistency screen (not a source correction)
+
+A secondary QC was carried out *after* reviewing the uploaded numerical tables: for each pair, compare the reported SMATR **slope magnitude** with the ratio of the two region-level source S1 onset standard deviations, SD(target)/SD(source). The source table is stated to cover 30 years of onset anomalies. Standard major-axis slope magnitude is generally related to SD(y)/SD(x), but this identity may be altered if the two quantities were fitted over different complete-case years/under different data handling. We must not silently assert a typographical error.
+
+A postinspection descriptive tolerance of **0.025** from the S1 candidate SD ratio yielded:
+
+| Flyway | Printed SMATR values | Magnitude within 0.025 of candidate S1 SD ratio | Mean absolute difference |
+|---|---:|---:|---:|
+| Greenland | 7 | **1/7** | **0.1887** |
+| Svalbard | 5 | **0/5** | **0.1932** |
+| Barents Sea | 11 | **11/11** | **0.0052** |
+
+A representative discrepancy: Svalbard Southern Norway→Svalbard reports SMATR **0.41**, whereas the S1 candidate SD ratio would be **6.6/8.5=0.776**. The printed value **0.41 (0.28,0.59)** is also printed for Greenland Southern Iceland→Southern Greenland and Barents Sweden→White Sea. The Greenland and Svalbard SLOPES table sequences share many values/CIs with Barents pairs, even when their S1 SDs differ. This raises a **specific source editing/methodology question**. It does not prove an error without the underlying annual paired climate data, original code or author confirmation. The Barents ratios using NLDK and NSE further depend on two **unverified** name-to-S1 aliases.
+
+**Decision:** Preserve verbatim historical Pearson q correlations for the q-source candidate gate. **Hold the published SMATR s-based sensitivity** pending author/source clarification; do not reverse signs, replace s with a derived SD ratio, or use the possible inconsistency to reinterpret q. This is a post-open source QA warning, not a registered hypothesis test.
