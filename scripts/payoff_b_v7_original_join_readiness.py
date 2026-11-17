@@ -62,7 +62,7 @@ def gate(annual=None,stops=None,geometry=None):
       "source_S1_30year_mean_does_not_replace_year_S_jy":True,
       "source_averaged_goose_stopover_duration_prohibited_as_geometry_U":True,
       "q_from_1982_2011_is_retrospective_and_not_actual_bird_knowledge":True,
-      "source_gates_frozen_20161005":True
+      "source_gates_frozen_20261005":True
     }
     if annual_r["status"]!="SCHEMA_COLUMNS_PRESENT_NOT_YET_ADMITTED":
         out["stop_reason"]="MISSING_FOCAL_YEAR_REGION_SPECIFIC_GDD_ONSETS"
