@@ -149,6 +149,17 @@ skill <- function(num,den) {
 period_summary <- do.call(rbind,lapply(c("early","late"),function(per) {
   x <- d[d$period==per,]
   baseline <- sum(x$sse_baseline)
+  # POST-OUTCOME AUDIT ONLY: divide realized prediction improvement by
+  # whether the fixed, TRAIN-ONLY decision day truly preceded target onset.
+  # Target onset is NEVER consulted to decide which predictor to use.
+  gains_lag7 <- x$sse_baseline-x$sse_available_lag7
+  gains_lag0 <- x$sse_baseline-x$sse_available_lag0
+  valid_decision <- x$decision_actual_pre_target
+  active_lag7 <- x$available_lag7
+  active_lag0 <- x$available_lag0
+  if (any(abs(gains_lag7[!active_lag7])>1e-8) ||
+      any(abs(gains_lag0[!active_lag0])>1e-8))
+    stop("GATED_FALLBACK_NOT_IDENTICAL_TO_TRAIN_ONLY_BASELINE")
   result <- data.frame(
     period=per,n_source_year_predictions=nrow(x),
     original_baseline_rmse_days=sqrt(mean(x$sse_baseline)),
@@ -162,6 +173,18 @@ period_summary <- do.call(rbind,lapply(c("early","late"),function(per) {
     fraction_available_before_decision_lag0=mean(x$available_lag0),
     fraction_decisions_before_real_target=mean(x$decision_actual_pre_target),
     fraction_source_earlier_than_real_target=mean(x$source_actual_pre_target),
+    n_event_available_lag7_before_true_target=sum(active_lag7&valid_decision),
+    n_event_available_lag7_after_true_target=sum(active_lag7&!valid_decision),
+    n_event_available_lag0_before_true_target=sum(active_lag0&valid_decision),
+    n_event_available_lag0_after_true_target=sum(active_lag0&!valid_decision),
+    lag7_squared_error_gain_before_true_target=sum(gains_lag7[valid_decision]),
+    lag7_squared_error_gain_after_true_target=sum(gains_lag7[!valid_decision]),
+    lag0_squared_error_gain_before_true_target=sum(gains_lag0[valid_decision]),
+    lag0_squared_error_gain_after_true_target=sum(gains_lag0[!valid_decision]),
+    lag7_gain_early_decision_normalized_by_full_baseline=
+        sum(gains_lag7[valid_decision])/baseline,
+    lag7_gain_late_decision_normalized_by_full_baseline=
+        sum(gains_lag7[!valid_decision])/baseline,
     hypothetical_lead_days=LEAD_DAYS,
     hypothetical_observation_latency_primary_days=PRIMARY_REPORT_DELAY_DAYS
   )
@@ -253,4 +276,12 @@ cat("\nPAYOFF-B MODIS HYPOTHETICAL PRE-DECISION AVAILABLE CUE RESULT\n")
 print(result,row.names=FALSE,digits=7)
 cat("\nPERIOD SCORES\n")
 print(period_summary,row.names=FALSE,digits=7)
+cat("\nRETROSPECTIVE SOURCE GATE INVALID-TIMING DECOMPOSITION\n")
+print(period_summary[,c(
+  "period","n_event_available_lag7_before_true_target",
+  "n_event_available_lag7_after_true_target",
+  "lag7_gain_early_decision_normalized_by_full_baseline",
+  "lag7_gain_late_decision_normalized_by_full_baseline"
+)],row.names=FALSE,digits=7)
+cat("This diagnostic uses target truth AFTER scoring only; it is not an alternative real-time forecast policy.\n")
 cat("\nNo bird state, eBird, GPS, fitness, real-time MODIS signal or migration-route actionability was measured.\n")
