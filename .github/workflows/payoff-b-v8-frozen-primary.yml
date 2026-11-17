@@ -6,6 +6,7 @@ on:
       - analysis/payoff-b-v8-frozen-pair-change-20261117
     paths:
       - "analysis/movement_phenology/payoff_b_v8_frozen_unique_pair_primary_20261117.R"
+      - "analysis/movement_phenology/payoff_b_v8_frozen_sensitivities_20261117.R"
       - ".github/workflows/payoff-b-v8-frozen-primary.yml"
 permissions:
   contents: read
@@ -22,6 +23,8 @@ jobs:
         run: Rscript analysis/movement_phenology/payoff_b_v8_frozen_unique_pair_primary_20261117.R --synthetic-only
       - name: Run preregistered 2002-2017 unique spatial pair environmental test
         run: Rscript analysis/movement_phenology/payoff_b_v8_frozen_unique_pair_primary_20261117.R
+      - name: Run postprimary pre-listed sensitivities and separately label source-cell blocks
+        run: Rscript analysis/movement_phenology/payoff_b_v8_frozen_sensitivities_20261117.R
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -30,4 +33,8 @@ jobs:
             outputs/payoff_b_v8_primary_summary.csv
             outputs/payoff_b_v8_unique_spatial_pairs.csv
             outputs/payoff_b_v8_species_exposure.csv
+            outputs/payoff_b_v8_frozen_sensitivity_summary.csv
+            outputs/payoff_b_v8_distance_moderator.csv
+            outputs/payoff_b_v8_leave_one_species_out.csv
+            outputs/payoff_b_v8_postopen_source_cell_blocks.csv
           if-no-files-found: warn
