@@ -84,36 +84,50 @@ sens[[length(sens)+1L]] <- metric_record(
   pr$rraw_late[okraw]-pr$rraw_early[okraw],sum(okraw),
   "PRESPECIFIED_UNDE-TRENDED_NOT_PRIMARY"
 )
-# 5. Source-to-target distance moderator: cell coordinates need
-# a single original environmental centroid per unique cell.
-coordinates <- unique(raw[,c("cell","cell_lat2","cell_lng")])
-coordinates$cell <- as.numeric(as.character(coordinates$cell))
-coordinates$cell_lat2 <- as.numeric(coordinates$cell_lat2)
-coordinates$cell_lng <- as.numeric(coordinates$cell_lng)
-# Original data can repeat the same cell/coords across taxa/years, but
-# contradictory coordinates invalidate environmental distance inference.
-if (anyDuplicated(coordinates$cell)) {
-  stop("The same source cell has multiple coordinates; distance not admitted")
+# 5. Geographic-distance moderator (prelisted, but fail-closed).
+# Use original pre-outcome per-species mapping distance, never outcome data
+# or an arbitrary coordinate selected from conflicting yearly source rows.
+# Multiple species sharing one physical pair MUST agree on the distance for
+# that pair, otherwise this optional moderator is not estimable.
+dist_by_pair <- split(eligible$distance_km,eligible$pair_id)
+span_by_pair <- vapply(dist_by_pair,function(d) {
+  if (!all(is.finite(d)) || !length(d)) return(Inf)
+  diff(range(d))
+},numeric(1))
+max_distance_disagreement <- max(span_by_pair)
+n_pair_distance_conflicts <- sum(span_by_pair>1e-6)
+if (n_pair_distance_conflicts>0) {
+  distance_summary <- data.frame(
+    moderator="log1p_source_target_distance_km",
+    beta_delta_rho_per_log_distance=NA_real_,
+    nominal_ols_ci_low=NA_real_,
+    nominal_ols_ci_high=NA_real_,
+    pearson_cor=NA_real_,
+    median_distance_km=NA_real_,
+    n_original_mapping_distance_conflicts=n_pair_distance_conflicts,
+    max_within_pair_distance_km_range=max_distance_disagreement,
+    caution="NO_GO_CONFLICTING_DISTANCES_SAME_PHYSICAL_PAIR"
+  )
+} else {
+  pair_distance <- vapply(dist_by_pair,mean,numeric(1))
+  dist <- pair_distance[match(pairs$pair_id,names(pair_distance))]
+  if (anyNA(dist)||any(!is.finite(dist))||any(dist<=0))
+    stop("Invalid pre-outcome geographic distance for admitted pair")
+  fit <- lm(pairs$delta_rho ~ log1p(dist))
+  distance_beta <- unname(coef(fit)[2])
+  distance_ci <- unname(confint(fit)[2,])
+  distance_summary <- data.frame(
+    moderator="log1p_source_target_distance_km",
+    beta_delta_rho_per_log_distance=distance_beta,
+    nominal_ols_ci_low=distance_ci[1],
+    nominal_ols_ci_high=distance_ci[2],
+    pearson_cor=cor(log1p(dist),pairs$delta_rho),
+    median_distance_km=median(dist),
+    n_original_mapping_distance_conflicts=0L,
+    max_within_pair_distance_km_range=max_distance_disagreement,
+    caution="DESCRIPTIVE_ONLY_PAIR_LINKS_SHARE_ENVIRONMENTAL_CELLS"
+  )
 }
-src <- match(pairs$source_cell,coordinates$cell)
-tgt <- match(pairs$target_cell,coordinates$cell)
-if (anyNA(src)||anyNA(tgt)) stop("No independently sourced cell centroid")
-dist <- hav(coordinates$cell_lat2[src],coordinates$cell_lng[src],
-            coordinates$cell_lat2[tgt],coordinates$cell_lng[tgt])
-if (any(!is.finite(dist)) || any(dist<=0)) stop("Invalid positive source-target distance")
-fit <- lm(pairs$delta_rho ~ log1p(dist))
-distance_beta <- unname(coef(fit)[2])
-distance_ci <- unname(confint(fit)[2,])
-# Correlated links may make OLS uncertainty too narrow; descriptive only.
-distance_summary <- data.frame(
-  moderator="log1p_source_target_distance_km",
-  beta_delta_rho_per_log_distance=distance_beta,
-  nominal_ols_ci_low=distance_ci[1],
-  nominal_ols_ci_high=distance_ci[2],
-  pearson_cor=cor(log1p(dist),pairs$delta_rho),
-  median_distance_km=median(dist),
-  caution="DESCRIPTIVE_ONLY_SHARED_CELLS_MAY_CORRELATE"
-)
 # 6. Leave-one-species-out; a pair used by remaining species stays once.
 loo <- lapply(species,function(s) {
   remaining <- eligible[eligible$species!=s,]
