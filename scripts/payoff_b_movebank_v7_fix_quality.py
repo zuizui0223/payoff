@@ -148,8 +148,15 @@ def source():
         )["source_verified"]:
             info["gate"]="NO_GO_ORIGINAL_SHA256_OR_MD5_DRIFT"
             outcomes[fly]=info;continue
-        text=raw.decode("utf-8-sig",errors="strict")
-        rows=csv.DictReader(io.StringIO(text,newline=""))
+        try:
+            source_text=raw.decode("utf-8-sig",errors="strict")
+            source_charset="utf-8"
+        except UnicodeDecodeError:
+            # Older Movebank source text can contain CP1252 characters in
+            # metadata/person names; preserve numerical GPS columns exactly.
+            source_text=raw.decode("cp1252",errors="strict")
+            source_charset="cp1252"
+        rows=csv.DictReader(io.StringIO(source_text,newline=""))
         headers=rows.fieldnames or []
         for col in ("individual-local-identifier","timestamp",
                     "location-lat","location-long"):
@@ -157,6 +164,7 @@ def source():
                 raise ValueError("Missing source GPS field: "+col)
         info["source_sha256"]=digest
         info["source_original_bytes"]=size
+        info["source_encoding"]=source_charset
         info["qa"]=audit_gps_rows(rows,fly)
         info["gate"]="SOURCE_GPS_FIXES_QUALITY_AUDITED"
         outcomes[fly]=info
