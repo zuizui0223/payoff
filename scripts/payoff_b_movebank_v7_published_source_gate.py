@@ -21,11 +21,12 @@ MAX_JSON=1_200_000
 def controlled_link(url):
     if not isinstance(url,str) or not url:
         return None
-    if url.startswith("/"):
-        url=urljoin(ROOT+"/",url.lstrip("/") if url.startswith("/server/") else url)
-        # Absolute /server/api links need origin-only URL join.
-        if url.count("/server/server/"):
-            url=url.replace("/server/server/","/server/")
+    if url.startswith("/server/api/"):
+        url="https://datarepository.movebank.org"+url
+    elif url.startswith("/api/"):
+        url=ROOT+url
+    elif url.startswith("/"):
+        return None
     parsed=urlparse(url)
     if parsed.scheme!="https" or parsed.hostname not in ALLOWED_HOSTS:
         return None
