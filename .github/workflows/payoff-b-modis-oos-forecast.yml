@@ -1,0 +1,33 @@
+name: PAYOFF-B MODIS-only forward greenup forecast skill
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-modis-oos-forecast-skill-20261117
+    paths:
+      - "analysis/movement_phenology/payoff_b_modis_oos_forecast_skill_20261117.R"
+      - ".github/workflows/payoff-b-modis-oos-forecast.yml"
+permissions:
+  contents: read
+jobs:
+  satellite-forecast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Synthetic pure forecast CV and source-skill contracts
+        run: Rscript analysis/movement_phenology/payoff_b_modis_oos_forecast_skill_20261117.R --synthetic-only
+      - name: Read exact original satellite-only source and quantify held-out 2002-2017 forecast skill
+        run: Rscript analysis/movement_phenology/payoff_b_modis_oos_forecast_skill_20261117.R
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-modis-source-only-outyear-forecast
+          path: |
+            outputs/payoff_b_modis_oos_forecast_summary.csv
+            outputs/payoff_b_modis_oos_forecast_protocol_scores.csv
+            outputs/payoff_b_modis_oos_forecast_pair_scores.csv
+          if-no-files-found: warn
