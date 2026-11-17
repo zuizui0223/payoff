@@ -79,6 +79,24 @@ def audit_pairs(rows,regions):
     for z in regions:
         if int(z["mean_onset_julian_day"])<1 or int(z["mean_onset_julian_day"])>366 or float(z["onset_sd_days"])<=0:
             raise ValueError("Source Julian onset values impossible")
+    # POST-OPEN document integrity screen, NOT biological inference.
+    # For a standard magnitude SMA, s is related to SD(target)/SD(source).
+    # Different source year/pair inclusion could affect this diagnostic.
+    sd_by_code={x["code"]:float(x["onset_sd_days"]) for x in regions}
+    ratio_screen={}
+    for flyway in ROUTES:
+        sub=[x for x in rows if x["flyway"]==flyway]
+        abs_diff=[
+            abs(float(x["smatr_slope_source"]) -
+                sd_by_code[x["target_code"]]/sd_by_code[x["source_code"]])
+            for x in sub
+        ]
+        ratio_screen[flyway]={
+            "n_published_smatr":len(sub),
+            "n_within_0_025_of_candidate_S1_sd_ratio":sum(z<0.025 for z in abs_diff),
+            "mean_absolute_smatr_minus_S1_ratio":sum(abs_diff)/len(abs_diff),
+            "screen_tolerance_selected_post_inspection_not_inference":0.025,
+        }
     return {
       "status":"PUBLISHED_ORIGINAL_30YEAR_Q_AGGREGATES_ADMITTED",
       "uploaded_original_docx_sha256":SOURCE_SHA,
@@ -93,6 +111,8 @@ def audit_pairs(rows,regions):
                                max(float(x["q_30year_correlation"]) for x in rows)],
       "negative_correlation_with_positive_published_smatr_slope":len(reverse_slope),
       "negative_r_positive_smatr_pairs":reverse_slope,
+      "post_open_smatr_vs_S1_sd_ratio_screen":ratio_screen,
+      "smatr_alternative_s_sensitivity_status":"HOLD_AUTHOR_OR_ORIGINAL_PAIRYEAR_CALCULATION_CHECK",
       "original_annual_1982_2011_regional_onsets_as_tabular_rows":False,
       "Figure_S1_annual_traces_are_not_tabular_source":True,
       "original_region_geometry_or_polygons_attached":False,
