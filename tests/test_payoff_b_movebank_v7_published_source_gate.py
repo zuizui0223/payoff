@@ -14,13 +14,15 @@ def test_only_official_dspace_api_links():
 
 
 def test_search_only_accepts_exact_doi_evidence():
-    response={"_embedded":{"searchResult":{"_embedded":{"objects":[
-       {"_embedded":{"indexableObject":{
-           "uuid":"test-uuid","name":"Migration timing in barnacle geese",
-           "metadata":{"dc.identifier.doi":[{"value":DOIS["Greenland"]}]},
-           "_links":{"self":{"href":"/server/api/core/items/a"}}
-       }}}
-    ]}}}}}
+    item={
+       "uuid":"test-uuid",
+       "name":"Migration timing in barnacle geese",
+       "metadata":{"dc.identifier.doi":[{"value":DOIS["Greenland"]}]},
+       "_links":{"self":{"href":"/server/api/core/items/a"}}
+    }
+    response={"_embedded":{"searchResult":{"_embedded":{
+        "objects":[{"_embedded":{"indexableObject":item}}]
+    }}}}
     items=extract_items(response)
     assert len(items)==1
     assert doi_in_metadata(items[0],DOIS["Greenland"]) is not None
@@ -28,5 +30,6 @@ def test_search_only_accepts_exact_doi_evidence():
 
 
 def test_metadata_rights_are_structured():
-    item={"metadata":{"dc.rights.uri":[{"value":"https://creativecommons.org/licenses/by/4.0/"}]}}
+    item={"metadata":{"dc.rights.uri":[
+        {"value":"https://creativecommons.org/licenses/by/4.0/"}]}}
     assert len(metadata_values(item,"dc.rights.uri"))==1
