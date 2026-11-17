@@ -104,3 +104,15 @@ def test_all_s1_original_30year_means_match_original_source_table():
     }
     actual={x["region_S1_name"]:int(x["mean_onset_julian_day"]) for x in r}
     assert actual==expected
+
+
+def test_published_smatr_slope_sd_ratio_source_integrity_screen():
+    # A post-open QC comparison, NOT a biological test or automatic fix:
+    # 11 Barents SMATR magnitudes reproduce Table S1 SD ratios,
+    # but many Greenland/Svalbard magnitudes do not.
+    q,r=reference()
+    screen=audit_pairs(q,r)["post_open_smatr_vs_S1_sd_ratio_screen"]
+    assert screen["Greenland"]["n_within_0_025_of_candidate_S1_sd_ratio"]==1
+    assert screen["Svalbard"]["n_within_0_025_of_candidate_S1_sd_ratio"]==0
+    assert screen["Barents Sea"]["n_within_0_025_of_candidate_S1_sd_ratio"]==11
+    assert len(q)==23
