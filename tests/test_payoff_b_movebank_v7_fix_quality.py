@@ -6,6 +6,7 @@ from scripts.payoff_b_movebank_v7_fix_quality import (
 
 def test_timezone_aware_utc_and_invalid_dates():
     assert date_utc("2009-04-03T12:04:00Z").year==2009
+    assert date_utc("2009-04-03 12:04:00.000").tzinfo is None
     assert date_utc("invalid") is None
     assert parse_coord("91",90) is None
     assert parse_coord("11.5",180)==11.5
@@ -24,5 +25,6 @@ def test_one_bird_same_time_is_not_independent_fix():
     assert x["source_all_rows"]==3
     assert x["individual_ids_unique_n"]==2
     assert x["source_valid_unique_gps_fix_n"]==2
+    assert x["individual_year_series_with_at_least_10_March_to_July_fixes"]==0
     assert x["bad_source_counts"]["duplicate_same_individual_utc_timestamp"]==1
     assert x["independent_30year_predictability_q_from_supplement"] is False
