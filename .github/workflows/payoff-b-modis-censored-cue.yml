@@ -1,0 +1,33 @@
+name: PAYOFF-B MODIS censored event information at hypothetical decision
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-modis-censored-cue-20261117
+    paths:
+      - "analysis/movement_phenology/payoff_b_modis_censored_cue_20261117.R"
+      - ".github/workflows/payoff-b-modis-censored-cue.yml"
+permissions:
+  contents: read
+jobs:
+  censored-cue-original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Synthetic right-censor source-event and heldout-target nonleakage gates
+        run: Rscript analysis/movement_phenology/payoff_b_modis_censored_cue_20261117.R --synthetic-only
+      - name: Verify original no-eBird MODIS source and fit next-year observed-versus-unobserved cue
+        run: Rscript analysis/movement_phenology/payoff_b_modis_censored_cue_20261117.R
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-modis-hypothetical-censored-event-source
+          path: |
+            outputs/payoff_b_modis_censored_cue_folds.csv
+            outputs/payoff_b_modis_censored_cue_periods.csv
+            outputs/payoff_b_modis_censored_cue_bootstrap.csv
+          if-no-files-found: warn
