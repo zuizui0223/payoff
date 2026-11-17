@@ -1,0 +1,33 @@
+name: PAYOFF-B public Dryad original website file admission
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-global-tracking-information-20261117
+    paths:
+      - "scripts/payoff_b_dryad_official_public_stream_probe.py"
+      - "tests/test_payoff_b_dryad_official_public_stream_probe.py"
+      - ".github/workflows/payoff-b-dryad-public-stream.yml"
+permissions:
+  contents: read
+jobs:
+  public-website-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source parser dependencies
+        run: python -m pip install pytest openpyxl
+      - name: Test original digest checks and public download source contract
+        run: python -m pytest -q tests/test_payoff_b_dryad_official_public_stream_probe.py
+      - name: Check small official public nest tables, not the blocked private API
+        run: python -m scripts.payoff_b_dryad_official_public_stream_probe --output outputs/public_dryad/official_website_original_schema.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-dryad-public-website-source-gate
+          path: outputs/public_dryad/official_website_original_schema.json
+          if-no-files-found: warn

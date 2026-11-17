@@ -1,0 +1,32 @@
+name: PAYOFF-B V7 official 30-year GDD supplement source admission
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-global-tracking-information-20261117
+    paths:
+      - "scripts/payoff_b_v7_publisher_gdd_supplement_gate.py"
+      - "tests/test_payoff_b_v7_publisher_gdd_supplement_gate.py"
+      - ".github/workflows/payoff-b-v7-historical-gdd-supplement.yml"
+permissions:
+  contents: read
+jobs:
+  publisher-original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pytest
+      - name: Test source URL and supplementary DOCX detection contracts
+        run: python -m pytest -q tests/test_payoff_b_v7_publisher_gdd_supplement_gate.py
+      - name: Identify public original 30-year spring onset tables by publisher-linked URLs only
+        run: python -m scripts.payoff_b_v7_publisher_gdd_supplement_gate --output outputs/global_tracking/v7_30year_gdd_source_gate.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-v7-spring-onset-supplement-source-status
+          path: outputs/global_tracking/v7_30year_gdd_source_gate.json
+          if-no-files-found: warn
