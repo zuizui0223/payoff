@@ -6,6 +6,7 @@ on:
       - analysis/payoff-b-modis-only-spring-coherence-20261117
     paths:
       - "analysis/movement_phenology/payoff_b_modis_source_quality_20261117.R"
+      - "analysis/movement_phenology/payoff_b_modis_only_geographic_synchrony_20261117.R"
       - ".github/workflows/payoff-b-modis-only-source.yml"
 permissions:
   contents: read
@@ -20,9 +21,16 @@ jobs:
           r-version: "release"
       - name: Check source-year/latitude/longitude and pure satellite measurement origin
         run: Rscript analysis/movement_phenology/payoff_b_modis_source_quality_20261117.R
+      - name: Synthetic geographic and detrended-correlation controls
+        run: Rscript analysis/movement_phenology/payoff_b_modis_only_geographic_synchrony_20261117.R --synthetic-only
+      - name: Original satellite-only source-to-target environmental change
+        run: Rscript analysis/movement_phenology/payoff_b_modis_only_geographic_synchrony_20261117.R
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: payoff-b-modis-only-source-qa
-          path: outputs/payoff_b_modis_source_quality.csv
+          path: |
+            outputs/payoff_b_modis_source_quality.csv
+            outputs/payoff_b_modis_only_geographic_summary.csv
+            outputs/payoff_b_modis_only_geographic_pairs.csv
           if-no-files-found: warn
