@@ -1,0 +1,33 @@
+name: PAYOFF-B predecision satellite cue availability falsification
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-modis-observable-cue-gate-20261117
+    paths:
+      - "analysis/movement_phenology/payoff_b_modis_observable_cue_gate_20261117.R"
+      - ".github/workflows/payoff-b-modis-observable-cue.yml"
+permissions:
+  contents: read
+jobs:
+  original-modis-cue-timing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - name: Synthetic source event and future-target nonleakage tests
+        run: Rscript analysis/movement_phenology/payoff_b_modis_observable_cue_gate_20261117.R --synthetic-only
+      - name: Source-verified original MODIS timing and heldout forecast value gate
+        run: Rscript analysis/movement_phenology/payoff_b_modis_observable_cue_gate_20261117.R
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-modis-predecision-event-availability-source
+          path: |
+            outputs/payoff_b_modis_decision_time_gate_result.csv
+            outputs/payoff_b_modis_decision_time_period_scores.csv
+            outputs/payoff_b_modis_decision_time_year_scores.csv
+          if-no-files-found: warn
