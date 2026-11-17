@@ -30,7 +30,7 @@ Second original-source audit: https://github.com/zuizui0223/payoff/actions/runs/
 | Barents Sea | 21,102 | 35 | 34 |
 | **Total** | **52,443** | **68** | **67** |
 
-No duplicate source bird+timestamp events were found. The Greenwich and Barents files are UTF-8, whereas Svalbard requires source-preserving CP1252 decoding. All archived timestamps are text without an embedded timezone offset. The audit parsed their original calendar dates without converting them to a guessed UTC or local timezone; hourly interpretation still requires the Movebank timestamp source convention to be checked against the README.
+No duplicate source bird+timestamp events were found. The Greenland and Barents files are UTF-8, whereas Svalbard requires source-preserving CP1252 decoding. All archived timestamps are text without an embedded timezone offset. The audit parsed their original calendar dates without converting them to a guessed UTC or local timezone; hourly interpretation still requires the Movebank timestamp source convention to be checked against the README.
 
 The GPS source has true event IDs, bird IDs, timestamps and original geographic coordinates. It does **not itself** define the 16 original generalized stopover regions or historical environmental q, nor does it contain individual breeding fitness measurements. Individual geographic tracks were not republished in this source audit, respecting CC BY-NC source licensing.
 
