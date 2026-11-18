@@ -46,6 +46,19 @@ After removing unverified aliases, Barents retains n=4, mean q=0.7525.
 
 These figures show descriptive variation in source q within the fixed published route order. In particular, strong q differences are not simply a monotone function of **ordinal stage** in this set. However, there are only 11–13 source transitions, concentrated in 3 flyways: avoid independent-transition p-values, frequentist biological confidence intervals or mislabeling these regional pairs as 11–13 distinct sampled animals. The barrier difference is consistent with the **original paper's already-reported ecological-barrier result**, not a new effect.
 
+## Additional structural q × ordinal-stage predictor check
+
+To make the *design support* problem explicit, a **predictor-only** diagnostic regresses the constructed q×ordinal-rank column on an additive source-only set: intercept, 2 flyway indicator columns, q, ordinal rank, and the paper's incoming-barrier indicator. This fits **no goose outcome**. The product is full rank beyond these six columns, but the residual signal and transition-level degrees of freedom are limited.
+
+| Predictor-only quantity | 13 adjacent links | 11 alias-unresolved-free links |
+|---|---:|---:|
+| Full model predictor columns including interaction | 7 | 7 |
+| Remaining row-level df **if** transitions were independent | 6 | 4 |
+| Proportion of product-column variance not predicted by additive columns | 0.18906 | 0.17887 |
+| Auxiliary VIF of q×ordinal-rank column | **5.2894** | **5.5906** |
+
+This descriptive VIF is **dependent on the original 0–1 ordinal coding**, is **not** a measured q×geographic-U VIF, and is not evidence for an animal response. Interregional environmental q share climate sources and are not necessarily statistically independent. The diagnostic warns that even a *fully ranked* model can have weak transition-level identification after flyway and barrier adjustment. A large number of GPS fixes cannot manufacture independent regional q variation.
+
 ## Source reproduction opportunity and blocker
 
 The original **paper Methods** describes actual stopovers as radius 30 km for over 48 h, allowing at most one outlier; larger regions are composed of geographically separated stops used by **at least 3 birds**; regional climate positions use a circular mean, with **one Iceland glacier mean position shifted to an original goose stop**. Initial sites have incomplete tagging-based arrival time and were excluded from the original arrival-date analysis. The 40 complete migrations span 2006–2011 and are distinct from the 44 birds with DOI-source GPS records.
