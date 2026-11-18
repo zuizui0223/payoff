@@ -42,6 +42,57 @@ def rounded(v: float | None) -> float | None:
     return round(v, 9) if v is not None else None
 
 
+
+def ordinal_interaction_design(rows: list[dict]) -> dict:
+    """Structural auxiliary diagnostic; ordinal route rank is NOT geometry U.
+
+    Regress the constructed q*ordinal_rank vector on the source-only additive
+    columns (intercept, two flyway effects, q, rank, published barrier).
+    Only residual geometry of the *predictor matrix* is considered; no
+    migratory response, p-value, or biological effect is fitted.
+    """
+    n = len(rows)
+    dot = lambda a, b: sum(x * y for x, y in zip(a, b))
+    columns = [
+        [1.0] * n,
+        [float(r["flyway"] == "Svalbard") for r in rows],
+        [float(r["flyway"] == "Barents Sea") for r in rows],
+        [r["q"] for r in rows],
+        [r["ordinal_target_position"] for r in rows],
+        [float(r["is_published_ecological_barrier"]) for r in rows],
+    ]
+    basis = []
+    for col in columns:
+        residual = col.copy()
+        for unit in basis:
+            coeff = dot(residual, unit)
+            residual = [a - coeff * b for a, b in zip(residual, unit)]
+        norm = math.sqrt(dot(residual, residual))
+        if norm < 1e-10:
+            raise ValueError("Source-only additive predictor columns lack full rank")
+        basis.append([a / norm for a in residual])
+    product = [r["q"] * r["ordinal_target_position"] for r in rows]
+    residual = product.copy()
+    for unit in basis:
+        coeff = dot(residual, unit)
+        residual = [a - coeff * b for a, b in zip(residual, unit)]
+    residual_ss = dot(residual, residual)
+    total_ss = sum((x - mean(product)) ** 2 for x in product)
+    if total_ss <= 0 or residual_ss <= 1e-10:
+        raise ValueError("Ordinal q-by-stage product lacks independent variation")
+    return {
+        "n_source_transition_rows": n,
+        "n_additive_columns_including_intercept": len(basis),
+        "n_columns_including_ordinal_interaction": len(basis) + 1,
+        "remaining_transition_level_df_if_independent": n - len(basis) - 1,
+        "ordinal_product_residual_variance_fraction": rounded(residual_ss / total_ss),
+        "coding_dependent_auxiliary_vif": rounded(total_ss / residual_ss),
+        "registered_geographical_U_test_completed": False,
+        "p_value_or_bird_response_fitted": False,
+        "caution": "Ordinal product VIF is coding-dependent; q, stage and barrier are source-derived but linked and only 11-13 transitions exist.",
+    }
+
+
 def summarize(rows: list[dict]) -> dict:
     if not rows:
         raise ValueError("No consecutive transitions in source topology")
@@ -87,6 +138,7 @@ def summarize(rows: list[dict]) -> dict:
         "published_nonbarrier_mean_q": rounded(mean(no_barrier)),
         "barrier_minus_nonbarrier_mean_q": rounded(mean(at_barrier) - mean(no_barrier)),
         "by_flyway": by_flyway,
+        "source_only_q_by_ordinal_stage_design": ordinal_interaction_design(rows),
         "unit": "historical published regional transition, never GPS fix",
         "ordinal_stage_is_registered_geometry_urgency_U": False,
         "significance_test_or_biological_effect_fitted": False,
