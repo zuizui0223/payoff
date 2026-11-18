@@ -258,6 +258,45 @@
       "original_16_region_geometry_verified": false,
       "annual_region_year_GDD_onset_available": false,
       "registered_q_by_U_identified": false
+    },
+    {
+      "id": "F2",
+      "class": "SOURCE_GRAIN_AND_REPRODUCIBILITY_GATE",
+      "status": "ORIGINAL_REGION_YEAR_ANNUAL_INPUT_NOT_AVAILABLE",
+      "source": "https://doi.org/10.1111/1365-2656.12281",
+      "implemented_in": "https://github.com/zuizui0223/payoff/pull/400",
+      "original_source_years": [
+        1982,
+        2011
+      ],
+      "original_region_count": 16,
+      "required_candidate_annual_rows": 480,
+      "original_S1_marginal_moments": 16,
+      "original_signed_q_pairs": 23,
+      "numeric_replay_printing_tolerances": {
+        "mean_days": 0.5000001,
+        "sd_days": 0.0500001,
+        "r": 0.0050001
+      },
+      "synthetic_negative_control": {
+        "matched_S1": 16,
+        "matched_r": 0,
+        "original_biological_data_used": false
+      },
+      "independently_source_authenticated": false,
+      "original_region_GPS_crosswalk_identified": false,
+      "registered_bird_q_times_geographic_urgency_fitted": false,
+      "claim": "Source-identity and joint annual q reproduction are distinct gates; no original yearly spring matrix or author region mapping is confirmed. Even full aggregate replay cannot automatically admit a candidate source."
+    },
+    {
+      "id": "E8",
+      "class": "PUBLISHED_PRIOR_ART_MEASUREMENT_DISTINCTION",
+      "status": "ENVIRONMENTAL_PREDICTABILITY_AND_REALIZED_TIMING_NOT_EQUIVALENT",
+      "source": "https://doi.org/10.1111/1365-2656.12281",
+      "author_reported": "Ecological barriers lowered interregional climatic correlation but did not systematically reduce goose arrival timing precision",
+      "claim": "Historical cue predictability and realized timing precision must be measured separately; original 2015 authors had already reported this separation and it does not identify recourse or information-use strategy.",
+      "actual_site_or_region_timing_difference": "Original 2015 q was based on generalized regional GDD jerks, while published goose arrival precision used spring onset for individual stopover sites; frozen V7 uses region-year S_jy for a separately registered response.",
+      "novel_to_payoff": false
     }
   ],
   "next_primary_test": {
