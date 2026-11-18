@@ -1,0 +1,260 @@
+{
+  "as_of": "2026-11-18",
+  "scope": "PAYOFF-B math-to-natural-evidence crosswalk; no new natural-effect fit and no post-outcome manuscript retuning",
+  "provenance": {
+    "main": [
+      "docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md",
+      "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
+      "docs/PAYOFF_B_CROSS_SYSTEM_INFORMATION_RESULT_20260928.md",
+      "docs/PUBLICATION_STATUS.md",
+      "theory/ACTIONABILITY_BALANCE_THEOREM.md",
+      "docs/PAYOFF_B_WIGEON_PHASE_RETENTION_REVALIDATED_20260922.md",
+      "docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md"
+    ],
+    "draft_prs": [
+      396,
+      397,
+      398,
+      399,
+      400,
+      395
+    ],
+    "no_draft_merge": true
+  },
+  "statements": [
+    {
+      "id": "T1",
+      "class": "EXACT_CONDITIONAL",
+      "prediction": "When effective waiting cost D is fixed and the declared binary cue game applies, information-use threshold depends on D; higher D delays uptake.",
+      "anchor": "docs/PAYOFF_B_INFORMATION_DEADLINE_THEOREM_MAP_20260930.md",
+      "direct_natural_identification": false
+    },
+    {
+      "id": "T2",
+      "class": "EXACT_CONDITIONAL",
+      "prediction": "Improving information with declining actionability can have a unique interior time of maximal net value in the specified exponential reduced model.",
+      "anchor": "theory/ACTIONABILITY_BALANCE_THEOREM.md",
+      "direct_natural_identification": false
+    },
+    {
+      "id": "T3",
+      "class": "SYNTHETIC_MECHANISM",
+      "prediction": "Interaction-matched coordinated tracking can be beneficial while unilateral moves are selected against.",
+      "anchor": "docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md",
+      "design_numerator": 22,
+      "design_denominator": 24,
+      "direct_natural_identification": false
+    },
+    {
+      "id": "T4",
+      "class": "EXACT_CONDITIONAL",
+      "prediction": "Routewise signed phase update has retention lambda=phi(1-hK) under the frozen linear observation/control assumptions; observed lambda alone does not identify phi,h,K.",
+      "anchor": "docs/PUBLICATION_STATUS.md",
+      "direct_natural_identification": false
+    },
+    {
+      "id": "T5",
+      "class": "EXACT_CONDITIONAL",
+      "prediction": "A better informed equilibrium can be inaccessible via unilateral transitions even under perfect environmental information.",
+      "anchor": "theory/PERFECT_INFORMATION_COORDINATION_TRAP.md",
+      "direct_natural_identification": false
+    },
+    {
+      "id": "E1",
+      "class": "ORIGINAL_REANALYSIS_MAIN",
+      "status": "DIRECTIONAL_WITH_DEPENDENCE_UNCERTAINTY",
+      "estimate": -0.0462,
+      "interval_95": [
+        -0.087,
+        -0.0054
+      ],
+      "p": 0.0265,
+      "n_rows": 3311,
+      "n_species": 37,
+      "anchor": "docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md",
+      "claim": "Predictive connectivity is directionally associated with smaller bird arrival-green-up mismatch; multiway clustering is not universally decisive."
+    },
+    {
+      "id": "E2",
+      "class": "SOURCE_RECONSTRUCTION_MAIN",
+      "status": "ROBUST_ASSOCIATION_NOT_CAUSAL",
+      "estimate": 0.421,
+      "interval_95": [
+        0.121,
+        0.722
+      ],
+      "unit": "days_per_C_long_minus_short",
+      "n_effects": 944,
+      "n_species": 279,
+      "n_studies": 28,
+      "anchor": "docs/PAYOFF_B_CROSS_SYSTEM_INFORMATION_RESULT_20260928.md",
+      "claim": "Long-distance migrants show weaker temperature advancement; endogenous or photoperiodic timing is an alternative."
+    },
+    {
+      "id": "E3",
+      "class": "PUBLISHED_BENCHMARK_REPRODUCED_MAIN",
+      "status": "DESCRIPTIVE_GROUP_DIFFERENCES",
+      "n_species": 1763,
+      "mean_days_per_C": {
+        "plants": -5.152,
+        "bees": -2.024,
+        "flies": -3.879,
+        "butterflies_moths": -1.848,
+        "beetles": -1.706
+      },
+      "anchor": "docs/PAYOFF_B_CROSS_SYSTEM_INFORMATION_RESULT_20260928.md",
+      "claim": "Local groups can respond differently to the same seasonal forcing; no linked-pair taxon causal comparison."
+    },
+    {
+      "id": "E4",
+      "class": "PUBLISHED_INTERACTION_EVIDENCE_MAIN",
+      "status": "PAIRWISE_TRACKING_BELOW_UNITY",
+      "slopes": {
+        "blue_tit": 0.51,
+        "great_tit": 0.515,
+        "pied_flycatcher": 0.348
+      },
+      "anchor": "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
+      "claim": "Actual bird-caterpillar interacting pairs display incomplete temporal tracking in published data."
+    },
+    {
+      "id": "E5",
+      "class": "PUBLISHED_INTERACTION_EVIDENCE_MAIN",
+      "status": "PAIRWISE_DIVERGENCE",
+      "estimate": 0.94,
+      "unit": "days_per_decade",
+      "n_schemes": 10,
+      "anchor": "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
+      "claim": "Resident tit and migrant flycatcher laying-date interval widened; deadline differences not measured."
+    },
+    {
+      "id": "E6",
+      "class": "SOURCE_REANALYSIS_MAIN",
+      "status": "OBSERVED_PHASE_CONTRACTION",
+      "n_animal_years": 152,
+      "sd_start_days": 26.406,
+      "sd_end_days": 13.173,
+      "whole_route_lambda": 0.10734,
+      "anchor": "docs/PUBLICATION_STATUS.md",
+      "claim": "Mule-deer route phase variability contracts; neither internal sensing nor effective deadline is identified."
+    },
+    {
+      "id": "E7",
+      "class": "SOURCE_REANALYSIS_MAIN",
+      "status": "ESTIMATOR_SCALE_RETENTION_REPRODUCED",
+      "n_staging_transitions": 224,
+      "wigeon_lambda_POWER": 0.749768,
+      "wigeon_lambda_ERA5": 0.811312,
+      "actuator_ERA5_p": 0.3104,
+      "anchor": "docs/PAYOFF_B_WIGEON_PHASE_RETENTION_REVALIDATED_20260922.md",
+      "claim": "Both environmental reconstructions give phase retention below 1; stopover slope is not reconstruction-robust."
+    },
+    {
+      "id": "D1",
+      "class": "DRAFT_POSTOPEN_EXPLORATORY",
+      "status": "INCREASED_ENVIRONMENTAL_COHERENCE",
+      "n_target_cells": 106,
+      "n_spatial_pairs": 104,
+      "n_unique_source_cells": 88,
+      "years": "2002-2017",
+      "change_mean_detrended_r": 0.08057016,
+      "block_ci_95": [
+        0.02409762,
+        0.1391265
+      ],
+      "anchor": "https://github.com/zuizui0223/payoff/pull/396",
+      "claim": "Eastern North American forest satellite spring coherence increased in this sample; not evidence of loss of predictability or bird behavior."
+    },
+    {
+      "id": "D2",
+      "class": "DRAFT_POSTOPEN_EXPLORATORY",
+      "status": "ORACLE_FORECAST_SKILL",
+      "percent_baseline_SSE_saved_2002_09": 74.54,
+      "percent_baseline_SSE_saved_2010_17": 59.94,
+      "anchor": "https://github.com/zuizui0223/payoff/pull/397",
+      "claim": "Completed southern green-up can substantially help retrospectively specified out-year satellite forecast; cue need not be available before a migration decision."
+    },
+    {
+      "id": "D3",
+      "class": "DRAFT_POSTOPEN_EXPLORATORY",
+      "status": "DECISION_TIME_AVAILABILITY_CONTRAST_WITH_POSTTARGET_INFLATION",
+      "scenario": "hypothetical 7-day lead + 7-day observation latency",
+      "gated_total_saved_percent_early": 0.1606,
+      "gated_total_saved_percent_late": 22.0806,
+      "pretarget_saved_percentage_points_early": 0.0502,
+      "pretarget_saved_percentage_points_late": 0.0896,
+      "posttarget_saved_percentage_points_late": 21.9909,
+      "anchor": "https://github.com/zuizui0223/payoff/pull/398",
+      "claim": "Most apparent late-period gated improvement comes from hypothetical decisions after actual target onset, invalid as a predecision gain."
+    },
+    {
+      "id": "D4",
+      "class": "DRAFT_POSTOPEN_EXPLORATORY",
+      "status": "NO_RELIABLE_TEMPORAL_TREND_CENSORED_CUE",
+      "binary_skill_early": 0.07478549,
+      "binary_skill_late": -0.03535724,
+      "contrast_late_minus_early": -0.11014,
+      "block_ci_95": [
+        -0.25963,
+        0.02295
+      ],
+      "anchor": "https://github.com/zuizui0223/payoff/pull/399",
+      "claim": "A not-yet-occurred binary source-event cue has early positive skill under an assumed observation system but no reliable late-early change."
+    },
+    {
+      "id": "N1",
+      "class": "REGISTERED_NEGATIVE_MAIN",
+      "status": "NOT_SUPPORTED",
+      "wigeon_q_by_incoming_phase_beta": 0.0202,
+      "interval_95": [
+        -0.1058,
+        0.1461
+      ],
+      "p": 0.756,
+      "anchor": "docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md",
+      "claim": "Predictive connectivity interaction with incoming phase not supported."
+    },
+    {
+      "id": "N2",
+      "class": "REGISTERED_NEGATIVE_MAIN",
+      "status": "NO_REVERSE_GATE",
+      "anchor": "docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md",
+      "claim": "Hoge Veluwe E4/E5 natural cue-driver and cue-resource decline-to-recovery prerequisites failed; no natural hysteresis proof."
+    },
+    {
+      "id": "F1",
+      "class": "DRAFT_ORIGINAL_SOURCE_READINESS",
+      "status": "V7_NOT_ESTIMABLE",
+      "n_GPS_fixes": 52443,
+      "n_source_identified_birds": 44,
+      "n_published_q_pairs": 23,
+      "n_direct_adjacent_q": 13,
+      "n_adjacent_without_uncertain_alias": 11,
+      "anchor": "https://github.com/zuizui0223/payoff/pull/400",
+      "claim": "Independent historical q aggregates recovered; annual regional spring onset and original stopover geometry/crosswalk still absent, so no q-by-urgency biological fit."
+    }
+  ],
+  "next_primary_test": {
+    "contract": "docs/PAYOFF_B_V7_PREDICTABILITY_URGENCY_CONTRACT_20261005.md",
+    "focal_beta": "beta_qU on individual absolute arrival-onset error",
+    "required_independent_transitions": 10,
+    "required_route_positions": 3,
+    "required_individual_stopover_visits": 30,
+    "required_flyways": 2,
+    "maximum_abs_corr_q_U_exclusive": 0.9,
+    "current_status": "NOT_ESTIMABLE",
+    "required_before_any_fit": [
+      "source-verified region-year onset S_jy",
+      "original objective 16-region geographic crosswalk/polygons",
+      "animal-year visit reconciliation without response-derived gates",
+      "independent geometry-only urgency U"
+    ],
+    "forbid": [
+      "use source-mean onset in place of annual onset",
+      "infer urgency from observed stopover duration",
+      "substitute North American satellite cells for goose stopover regions",
+      "open target bird outcome to choose predictor",
+      "combine draft PRs into main without review"
+    ]
+  }
+}
