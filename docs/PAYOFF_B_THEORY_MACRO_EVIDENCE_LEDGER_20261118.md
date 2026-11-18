@@ -90,3 +90,14 @@ The existing [V7 contract](../docs/PAYOFF_B_V7_PREDICTABILITY_URGENCY_CONTRACT_2
 - **Cannot yet say:** climate change has generally destroyed teleconnections, the observed bird/plant gradients are caused by Bayesian information distances, natural pairwise $D_{eff}$ thresholds have been fitted, or ecological hysteresis has been observed.
 
 No manuscript retuning, reopening of previous outcomes, silent import of eBird, or unreviewed merge of PRs #395–400 is authorized by this ledger.
+
+
+## 2026-11-18 follow-up: V7 source-only q-topology audit (independent draft PR #400)
+
+A subsequent **outcome-blind source-only prefit** on the original Kölzsch 2015 published q values has now been added to [PR #400](https://github.com/zuizui0223/payoff/pull/400), with executable source-only code, regression tests and [source result ledger](https://github.com/zuizui0223/payoff/blob/analysis/payoff-b-v7-uploaded-suppinfo-source-20261117/docs/PAYOFF_B_V7_SOURCE_TOPOLOGY_PREFIT_20261118.md).
+
+- All 13 author-published adjacent q pairs: average signed q **0.545385**; q vs **ordinal** normalized route stage r=**−0.056225**; incoming ecological-barrier q mean **0.178** (5 links) versus **0.775** (8 links).
+- Excluding the two unresolved code-to-S1 label aliases yields 11 original adjacent q candidates: average q **0.515455**; ordinal-stage r=**+0.050275**; 5 barrier links q=**0.178** versus 6 non-barrier links q=**0.796667**.
+- Source-only coding-dependent q×ordinal-rank auxiliary VIF is **5.2894** (n=13) or **5.5906** (n=11), after flyway dummy, q, ordinal stage and barrier columns; the corresponding 7-column design leaves 6 or 4 transition-level residual df *if* those source transitions were independent.
+
+**Interpretation:** original historical environmental q is not a simple monotone function of published ordinal route order; however, barrier and route structure can be highly explanatory, leaving limited independent interaction variation. These quantities are **not** the registered geographic q×U diagnostic, not an animal effect, and not a new discovery over Kölzsch. The real V7 interaction **remains NOT_ESTIMABLE**, and the 1982–2011 annual onset and original 16-region GPS geometries/membership remain unverified. The new prefit result must not be merged as a substitute for a bird timing or fitness test.
