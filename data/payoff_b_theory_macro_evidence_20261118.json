@@ -232,6 +232,32 @@
       "n_adjacent_without_uncertain_alias": 11,
       "anchor": "https://github.com/zuizui0223/payoff/pull/400",
       "claim": "Independent historical q aggregates recovered; annual regional spring onset and original stopover geometry/crosswalk still absent, so no q-by-urgency biological fit."
+    },
+    {
+      "id": "D5",
+      "class": "DRAFT_ORIGINAL_SOURCE_ONLY_PREFIT",
+      "status": "ORDINAL_Q_TOPOLOGY_SCREEN_COMPLETE_V7_HOLD",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/400",
+      "original_published_pairwise_q": 23,
+      "consecutive_q": 13,
+      "consecutive_q_without_unresolved_label_alias": 11,
+      "three_flyways": true,
+      "signed_q_mean_all": 0.545384615,
+      "signed_q_mean_alias_clean": 0.515454545,
+      "q_by_ordinal_stage_r_all": -0.056224901,
+      "q_by_ordinal_stage_r_alias_clean": 0.050274904,
+      "barrier_incoming_q_mean_all": 0.178,
+      "nonbarrier_incoming_q_mean_all": 0.775,
+      "nonbarrier_incoming_q_mean_alias_clean": 0.796666667,
+      "q_times_ordinal_rank_auxiliary_vif_all": 5.289422133,
+      "q_times_ordinal_rank_auxiliary_vif_alias_clean": 5.590631251,
+      "n_additive_predictors": 6,
+      "ordinal_design_predictor_columns_including_interaction": 7,
+      "transition_level_df_if_independent_alias_clean": 4,
+      "claim": "Historical environmental predictability is heterogeneous over source ordinal routes and barriers; coding-dependent ordinal interaction has limited independent predictor variation; no registered geometric urgency, goose outcome or fitness coefficient was estimated.",
+      "original_16_region_geometry_verified": false,
+      "annual_region_year_GDD_onset_available": false,
+      "registered_q_by_U_identified": false
     }
   ],
   "next_primary_test": {
