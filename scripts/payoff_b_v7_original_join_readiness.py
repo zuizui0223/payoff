@@ -11,6 +11,8 @@ from scripts.payoff_b_v7_suppinfo_aggregate_gate import (
     ROOT,QP,REGIONS,readrows,audit_pairs
 )
 
+from scripts.payoff_b_v7_annual_source_replay import inspect_path
+
 REQUIRED_ANNUAL={"flyway","region_code","year","gdd_jerk_onset_julian",
                  "original_source_identifier"}
 REQUIRED_STOPS={"flyway","individual_id","year","source_region_code",
@@ -45,6 +47,29 @@ def gate(annual=None,stops=None,geometry=None):
     clean=[x for x in consecutive if x["source_alias_status"]=="exact"
            and x["target_alias_status"]=="exact"]
     annual_r=inspect_optional(annual,REQUIRED_ANNUAL)
+    # Schema alone is not source admission. Candidate annual values must replay
+    # original S1 summaries and all 23 original signed Pearson correlations.
+    # Even a numerical match is NOT an externally authenticated source.
+    annual_replay={"status":"NO_CANDIDATE_ANNUAL_SOURCE_TO_REPLAY"}
+    if annual_r["status"]=="SCHEMA_COLUMNS_PRESENT_NOT_YET_ADMITTED":
+        try:
+            checked=inspect_path(Path(annual))
+            annual_replay={
+                "status":checked["status"],
+                "n_S1_matching":checked["n_S1_matching"],
+                "n_q_matching":checked["n_q_matching"],
+                "n_original_region_year_rows":checked["original_row_grain"][
+                    "n_original_region_year_rows"],
+                "candidate_file_sha256":checked["candidate_annual_file_sha256"],
+                "external_source_authentication":False,
+                "V7_REGISTERED_PRIMARY_GATE":"HOLD_NOT_ESTIMABLE",
+            }
+        except (ValueError,OSError,UnicodeError) as exc:
+            annual_replay={
+                "status":"INVALID_CANDIDATE_ANNUAL_SOURCE_HOLD",
+                "detail":str(exc),
+                "V7_REGISTERED_PRIMARY_GATE":"HOLD_NOT_ESTIMABLE",
+            }
     stop_r=inspect_optional(stops,REQUIRED_STOPS)
     geom_r=inspect_optional(geometry,REQUIRED_GEOMETRY)
     out={
@@ -56,6 +81,7 @@ def gate(annual=None,stops=None,geometry=None):
       "consecutive_q_without_unresolved_alias":len(clean),
       "meets_at_least_10_independent_q_transition_minimum_if_GPS_regions_confirm":len(clean)>=10,
       "annual_GDD_jerk_region_year_data":annual_r,
+      "annual_GDD_jerk_aggregate_replay_without_source_admission":annual_replay,
       "original_GPS_stopover_visits":stop_r,
       "original_independent_region_geometry":geom_r,
       "focal_bird_phenology_coefficient_fitted":False,
