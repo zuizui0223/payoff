@@ -4,6 +4,7 @@ The synthetic fixture is exclusively a NEGATIVE CONTROL; it is not field
 evidence, not original source data, and never becomes a V7 timing response.
 """
 from copy import deepcopy
+import csv
 import math
 
 import pytest
@@ -103,4 +104,24 @@ def test_marginal_S1_failure_also_identified():
     result = inspect_candidate(rows)
     assert "IRE" in result["S1_mismatch_codes"]
     assert result["n_S1_matching"] == 15
+    assert result["V7_REGISTERED_PRIMARY_GATE"] == "HOLD_NOT_ESTIMABLE"
+
+
+def test_existing_v7_readiness_uses_numeric_replay_but_keeps_hold(tmp_path):
+    from scripts.payoff_b_v7_original_join_readiness import gate
+
+    path = tmp_path / "candidate_never_original.csv"
+    rows = synthetic_marginally_matching_annual()
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=sorted(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    result = gate(annual=path)
+    replay = result["annual_GDD_jerk_aggregate_replay_without_source_admission"]
+    assert replay["status"] == "CANDIDATE_ORIGINAL_AGGREGATES_CONFLICT_HOLD"
+    assert replay["n_S1_matching"] == 16
+    assert replay["n_q_matching"] == 0
+    assert replay["n_original_region_year_rows"] == 480
+    assert replay["external_source_authentication"] is False
+    assert result["stop_reason"] == "MISSING_GPS_STOPOVER_MEMBERSHIP_AND_ACTUAL_ARRIVAL_DOY"
     assert result["V7_REGISTERED_PRIMARY_GATE"] == "HOLD_NOT_ESTIMABLE"
