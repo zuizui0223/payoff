@@ -101,3 +101,21 @@ A subsequent **outcome-blind source-only prefit** on the original Kölzsch 2015 
 - Source-only coding-dependent q×ordinal-rank auxiliary VIF is **5.2894** (n=13) or **5.5906** (n=11), after flyway dummy, q, ordinal stage and barrier columns; the corresponding 7-column design leaves 6 or 4 transition-level residual df *if* those source transitions were independent.
 
 **Interpretation:** original historical environmental q is not a simple monotone function of published ordinal route order; however, barrier and route structure can be highly explanatory, leaving limited independent interaction variation. These quantities are **not** the registered geographic q×U diagnostic, not an animal effect, and not a new discovery over Kölzsch. The real V7 interaction **remains NOT_ESTIMABLE**, and the 1982–2011 annual onset and original 16-region GPS geometries/membership remain unverified. The new prefit result must not be merged as a substitute for a bird timing or fitness test.
+
+
+## 2026-11-18 continuation: annual GDD-jerk source authenticity guard
+
+The author-paper/KNAW public source recheck confirms a separate issue beyond incomplete GPS region geography: the original Kölzsch 2015 source used **1982–2011 daily temperature observations** to obtain historical regional GDD-jerk onset dates, but the supplied supplement publishes only 16 regional *means/SDs*, 23 signed q values and plotted annual traces. The three Movebank datasets are GPS source archives, not the missing 480 original regional year-onset values.
+
+The V7 source branch [PR #400](https://github.com/zuizui0223/payoff/pull/400) now contains a quantitative **candidate annual source replay gate** (no goose outcome access):
+
+- Given **16 regions × 30 years = 480** independently sourced candidate original yearly onset rows, validate key coverage, finite Julian days, region-to-flyway membership and source identifier presence.
+- Recompute the **16 original published mean/SD pairs** (fixed printed-precision tolerances ±0.5 d, ±0.05 d), then all **23 signed Pearson q coefficients** (±0.005).
+- A synthetic *negative control* deliberately matches **16/16** marginal means/SDs and fails **23/23** q correlations. This demonstrates why published marginal climate summaries alone cannot authenticate an annual source table.
+- Even a candidate table satisfying all printed statistics remains **NOT AUTHENTICATED**. This source-consistency gate cannot certify the original raw temperature stream, the shifted Icelandic climate representative coordinate, the 16-region GPS-to-climate spatial assignment or the published 40 complete spring-migration cohort. The registered q×geographic-U timing interaction stays **HOLD_NOT_ESTIMABLE**.
+
+The existing candidate readiness tool now invokes this numeric replay when an annual CSV is supplied and continues to fail closed. All three GitHub Actions workflows for the final source-gate commit **passed**: [test](https://github.com/zuizui0223/payoff/actions/runs/44305270069), [test-environments](https://github.com/zuizui0223/payoff/actions/runs/44305267350) and [V2 archive verification](https://github.com/zuizui0223/payoff/actions/runs/44305267330).
+
+The original study additionally reports that ecological barriers reduce the physical interregional environmental q signal but do not by themselves alter goose timing precision in the same straightforward way. This is a **published prior-art decoupling** consistent with treating potential information and realized timing separately; it does not identify downstream information-use strategy or compensation.
+
+**Direct source still required:** original machine-readable 1982–2011 16-region onset dates *with* original regional coordinates/assignment and original 40 migration inclusion key. A new gridded climate reanalysis without those author-grounded coordinates would be an independent *new environmental replication*, not a V7 original-source reproduction.
