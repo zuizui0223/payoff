@@ -29,6 +29,14 @@ Any missing year, duplicate `region_code,year`, wrong flyway, invalid year or on
 
 **Important:** Even if a candidate matches all aggregates, it remains only `CANDIDATE_AGGREGATE_REPLAY_CONSISTENT_NOT_AUTHENTICATED`, and `V7_REGISTERED_PRIMARY_GATE=HOLD_NOT_ESTIMABLE`. Matching a finite number of summary moments does not certify underlying daily temperature inputs, original source years, chosen NOAA station data, Icelandic shifted glacier region position, or an author's original analytic code. Source authentication and region geometry must be independent.
 
+## Source-grain distinction: regional predictors versus local timing response
+
+The original Kölzsch et al. 2015 Methods distinguishes **two climate grains**: (i) the generalized 16-region 1982–2011 GDD-jerk onset series used to compute historical interregional q, and (ii) year-specific GDD-jerk dates at **individual stopover sites** used to compare bird arrivals with locally experienced spring. These are not interchangeable. The frozen PAYOFF-B V7 response, by contrast, explicitly specifies **region-year** $S_{j,y}$, with geography-only route urgency $U_j$.
+
+Thus recovering 480 region-years would enable the **predeclared regional** timing-error calculation once original GPS-to-region membership is available, but it would **not** reproduce the 2015 paper's site-level mismatch without separate original individual site-year GDD data. V7 must never label the region-year outcome as a direct numeric replication of the author's original site-level effect. If independently sourced site-year onset values become available, a separately frozen, correctly labelled source-grain sensitivity may assess their difference **without altering the original V7 primary endpoint**.
+
+This matters ecologically because within-region climatic heterogeneity can alter individual arrival-error measurements even while region-level historical q is faithfully reconstructed. The published finding that ecological barriers correlate with lower historical q but did not systematically change observed arrival precision is **original prior art**, not a new PAYOFF natural test of feedback gain or information value.
+
 ## Regression test design (never natural data)
 
 `tests/test_payoff_b_v7_annual_source_replay.py` constructs a **synthetic negative-control** calendar. Each of its 16 regional series is generated to match its original S1 mean and sample SD *exactly* using a common standardized year vector, which forces all 23 pairwise correlations to +1, contradicting the original historical signed-q values.
