@@ -1,0 +1,92 @@
+# PAYOFF-B mathematics × macroecology evidence audit — 2026-11-18
+
+**Role:** source-controlled synthesis / next-test routing, **not** a new biological fit, submission revision, proof of causal information use, or approval to merge draft empirical branches.
+
+## Main claim and its limits
+
+> Seasonal tracking is constrained separately by (i) predictive information about future environmental states, (ii) the timing at which that information can be observed, (iii) downstream correction/recourse, and (iv) coordination with interacting partners.
+
+The mathematical layers are conditional results. Their natural anchors are *not* one causal chain estimated on one linked dataset. The strongest natural bridge is **differential phenological response among interacting partners**, not a measured natural information-use threshold or game equilibrium.
+
+**Important reversal of the original environmental-loss intuition:** the latest eBird-free eastern North American forest MODIS diagnostic shows an **increase**, not a decline, in geographical spring correlation in this sample (draft PR #396). PAYOFF-B must not call generic climate-driven loss of cue connectivity established. A related but different question remains alive: even a strongly predictive cue may become **observable too late for the focal action** (draft PRs #397–399). The satellite calculations do not observe animal decisions.
+
+## 1. Exact mathematical and synthetic results (not field effects)
+
+| Formal result | Exact scope | Natural evidence bridge / missing link |
+|---|---|---|
+| Anti-phase two-patch seasonal growth premium has a unique positive optimum in migration for any nonzero contrast; weak-contrast optimum $m\tau\to1.6061153$ | symmetric 2-patch, 2-season model only | no corresponding universal macro-estimate; keep Theoretical Ecology paper separate |
+| Time adjustment buffers route costs, but has a finite range; synthetic zigzag route growth penalty −0.04189 → −0.006996 (83% decrease) as allowed phenology increases | 2-D finite-horizon synthetic model, not measured ecological velocity | route and phenology can both be adjustable, but natural quantitative costs not fitted |
+| A coordinated shift can outperform a locally selected endpoint while either partner's unilateral move is disadvantageous; 22/24 positive-interaction design cells show barriers | synthetic 2-D coevolution, not 22/24 wild cases | Burgess/Samplonius show response asymmetry and changed relative timing, **not** local fitness barriers |
+| Frozen information-use threshold follows cue accuracy and the **effective** waiting cost $D_{eff}$, not raw departure delay | the declared fixed-cost binary cue decision game; dual-use cues require the distinct conditional theorem | no observed actor-level $D_{eff}$ or $q_{wait}$ |
+| Under exponential learning and loss of recourse, $t^*=\ln(1+\alpha/\beta)/\alpha$ maximizes usable information | declared $q(t),r(t)$ and zero extra waiting cost, not a universal timing optimum | experiment and sources motivate time-varying cue availability; no fitted natural $\alpha,\beta$ |
+| $e_{t+1}=\phi_t(e_t-u_t)+w_t$, with segment $\lambda=\phi(1-hK)$ only under specified linear feedback assumptions | active gain, passive carry-over, information and route geometry are not identified by one $\lambda$ | mule deer, barnacle goose, wigeon show estimator-scale retention; actuators differ |
+| Even at perfect environmental cue quality, high-payoff coordinated information use can be individually inaccessible | declared perfect-information coordination game | no observed wild information-acquisition hysteresis; registered E4/E5 recovery gates failed |
+
+Canonical sources: [information theorem map](../docs/PAYOFF_B_INFORMATION_DEADLINE_THEOREM_MAP_20260930.md), [actionability theorem](../theory/ACTIONABILITY_BALANCE_THEOREM.md), [synthetic 2-D receipt](../docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md), [perfect-information trap](../theory/PERFECT_INFORMATION_COORDINATION_TRAP.md), [publication status](../docs/PUBLICATION_STATUS.md).
+
+## 2. Natural affirmative evidence on main — ordered by ecological proximity to the prediction
+
+| Evidence / sample | Positive result | Licensed level |
+|---|---|---|
+| **E1** migratory birds, 3,311 rows / 37 species | pooled predictive-connectivity coefficient **−0.0462**, 95% CI [−0.0870,−0.0054], p=0.0265 | directional association only: species/route/cell-year cluster intervals include zero |
+| **E6** Usui source reconstruction, 944 temperature-response rows / 28 studies / 279 species | long-minus-short migrant response **+0.421 d/°C**, 95% CI [+0.121,+0.722], p=0.0077; all 28 leave-one-study-out fits positive | robust existing migration-distance gradient; endogenous/photoperiodic control also explains it |
+| **E6** Freimuth published local benchmark, 1,763 species | mean days/°C: plants −5.152, bees −2.024, flies −3.879, Lepidoptera −1.848, beetles −1.706 | response heterogeneity among local guilds, *not* linked pair causal contrast |
+| **E6b** Burgess et al. bird–caterpillar pairs | temporal tracking slopes **0.510**, **0.515**, **0.348** (blue tit, great tit, pied flycatcher); published 95% credible intervals exclude one | interacting consumer–resource timing responds asymmetrically |
+| **E6b** Samplonius et al. 10 European nest-box schemes | resident tit vs migrant flycatcher laying-date interval widened **0.94 d/decade** | interacting groups can diverge even under shared climate forcing |
+| **route response** mule deer, 152 animal-years / 72 individuals | incoming phase SD 26.406 d vs final SD 13.173 d; whole-route descriptive $\lambda\approx0.10734$ | published resynchronization with reanalysis; not latent belief or fitness identification |
+| **route response** barnacle goose (3 route rows) and wigeon (224 transitions) | barnacle goose signed $\lambda$ −0.1063, +0.1307, +0.4941; wigeon POWER 0.7498 and independent ERA5 0.8113 | a portable **estimator-scale response coordinate**, not one universal latent $\lambda$ or actuator |
+ 
+All published bridge findings are attributed as published prior art; their reproduction is not promoted to new discovery. See [main claim stack](../docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md), [pairwise bridge](../docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md), [E6 result](../docs/PAYOFF_B_CROSS_SYSTEM_INFORMATION_RESULT_20260928.md) and [wigeon revalidation](../docs/PAYOFF_B_WIGEON_PHASE_RETENTION_REVALIDATED_20260922.md).
+
+## 3. 2026-11-17 newer environmental-only diagnostics: **draft, post-open exploratory**
+
+These PRs are *not* present as validated new biological claims on main. Each must retain its prior result and negative gate on eventual review.
+
+| Pending PR | What actually passed | Why this does not prove adaptive information use |
+|---|---|---|
+| [#396](https://github.com/zuizui0223/payoff/pull/396) | 106 original forest satellite cells, 104 geographic pairs; mean detrended source–target $r$: **0.79859 → 0.87916** (2002–09 vs 2010–17), Δr=**+0.08057**, source-cell block CI [+0.02410,+0.13913] | environmental covariance **increased**, not decreased; ecological scale restricted to these forests |
+| [#397](https://github.com/zuizui0223/payoff/pull/397) | retrospective next-year forecast with completed contemporaneous southern green-up reduces target-only baseline squared error **74.54%** early and **59.94%** late | a future source-event completion time need not be observable *before* the required action; late−early gain change CI crosses zero |
+| [#398](https://github.com/zuizui0223/payoff/pull/398) | under hypothetical 7-day decision lead plus 7-day report delay, gated error saving **0.1606%** early and **22.0806%** late | post-scoring validity audit: **21.9909 percentage points of the 22.0806 late gain (~99.59%)** came from decisions retrospectively classified as **after the actual target onset**. Only **0.0896 pp** came from truly pretarget rows. The apparently large 22% figure is **not** a predecision bird result |
+| [#399](https://github.com/zuizui0223/payoff/pull/399) | hypothetical censored status (“source spring has not yet occurred”) has early skill +0.07479, 95% CI [+0.00220,+0.14694] | late skill −0.03536; late−early Δ −0.11014, CI [−0.25963,+0.02295] crosses zero; both statuses depend on an assumed monitoring system, not observed birds |
+
+The MODIS analyses share source years and environmental sample, and were developed after prior signs were seen. They cannot be counted as independent macro-replications. Earlier eBird-conditioned V8 +0.369 is **quarantined** from ecological claims; do not add it to these source-only estimates.
+
+The resulting **methodological conclusion** is narrower and stronger than “connectivity is being lost”: *cross-site correlation, out-of-year potential forecast skill, and usable information by the decision deadline are three different estimands.*
+
+## 4. Negative results, absence of proof and source gates to preserve
+
+- **E3** wigeon registered predictive-connectivity × incoming-phase: β=+0.0202, CI [−0.1058,+0.1461], p=0.756 — **NOT SUPPORTED**.
+- Wigeon stopover association appears in the preregistered POWER reconstruction, but ERA5 replication p=0.3104 — not a robust universal actuator.
+- **E4/E5** Hoge Veluwe cue-driver/cue-resource “decline then recovery” gate failed; downstream historical network hysteresis was **NOT RUN**.
+- The original Scottish caterpillar/blue-tit follow-up [#389–392](https://github.com/zuizui0223/payoff/pull/392) does not provide an unambiguous heldout test that hatch-window food mass uniquely predicts reproduction beyond seasonal food controls. Do not treat an exploratory mass association as confirmed timing/fitness mediation.
+- **V7 [#395](https://github.com/zuizui0223/payoff/pull/395) / [#400](https://github.com/zuizui0223/payoff/pull/400)** recovered 52,443 original goose GPS fixes from 44 source-identified birds and **23 published historical interregional q coefficients**; 13 correspond to adjacent transitions and 11 avoid unresolved region alias mappings. This is a **data-source achievement, not a fitted q×urgency effect**. The original annual region-year spring onset and authoritative GPS-region polygons/crosswalk remain absent. Source Table S1 region means must never be substituted for annual $S_{j,y}$.
+
+## 5. Next analysis, chosen without outcome-dependent retuning
+
+**Primary biological test remains the frozen V7 q × route-urgency interaction.** It is more decisive for the PAYOFF-B thesis than adding more positive environmental correlations.
+
+The existing [V7 contract](../docs/PAYOFF_B_V7_PREDICTABILITY_URGENCY_CONTRACT_20261005.md) defines:
+
+- response $Y_{ij}=|A_{ij}-S_{j,y}|$ using source-faithful arrival and region-year spring onset;
+- independent *historical environmental* $q_j$ for the preceding route transition;
+- geometry-only $U_j=1-d_{j,breed}/d_{winter,breed}$, **not** stopover duration/speed;
+- focal interaction $\beta_{qU}$, with both β>0 (urgency weakens cue benefit) and β<0 (final-step information importance) predeclared interpretations.
+
+**Admission before fitting:** at least 10 distinct independent-q transitions, at least 3 route positions, at least 30 genuine individual stopover visits, at least 2 flyways, and $|corr(q,U)|<0.90$ across transitions. Currently only the *aggregate q-candidate count* is demonstrated; the other gates are **NOT YET EVALUABLE**. Do not lower thresholds or infer visits from GPS fixes.
+
+**Source-first executable sequence** (no goose outcome opened):
+
+1. Recover a source-verifiable **1982–2011 region×year spring-onset matrix** or original equivalent annual series, not a plotted curve approximation or regional means.
+2. Recover authoritative 16-region stopover boundaries and original study region-name crosswalk, resolving NLDK and NSE without guesses.
+3. Reconstruct animal-year stops and geometry-only urgency *independently of timing-error outcome*, run the frozen admission criteria.
+4. **Only if the gate passes:** execute the original preregistered q×U model, full frozen sensitivities and held-out uncertainty. Otherwise report **NOT_ESTIMABLE**, not “the ecological mechanism failed.”
+
+**Secondary macro replication**, separate from V7: on a genuinely independent environmental cohort/new years if source files are obtained, preregister a geography-only source→target green-up pairing and compare (i) historical signed correlation, (ii) rolled-forward oracle forecast skill, (iii) **actually observable before a predeclared decision** binary/full cue. Report all three irrespective of signs, and reserve claims about migratory behavior for source-verified animal decision dates. This second lane must not reuse already-open MODIS years as an independent validation.
+
+## Claim ceilings and handoff
+
+- **Can say now:** multiple natural systems show heterogeneous seasonal responses and incomplete phase tracking; model theory gives concrete conditional pathways by which information, opportunity and interaction coupling could cause mismatch.
+- **Can say as a draft environmental diagnostic:** geographical spring coherence strengthened here, but much apparent satellite forecast gain was not available before the target in the defined hypothetical timing scenario.
+- **Cannot yet say:** climate change has generally destroyed teleconnections, the observed bird/plant gradients are caused by Bayesian information distances, natural pairwise $D_{eff}$ thresholds have been fitted, or ecological hysteresis has been observed.
+
+No manuscript retuning, reopening of previous outcomes, silent import of eBird, or unreviewed merge of PRs #395–400 is authorized by this ledger.
