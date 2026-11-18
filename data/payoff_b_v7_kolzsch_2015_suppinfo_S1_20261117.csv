@@ -1,0 +1,17 @@
+code,region_S1_name,source_alias_status,mean_onset_julian_day,onset_sd_days,mean_goose_stopover_days,source_docx_sha256,source_page
+IRE,Ireland,exact,66,9.2,,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+SIC,Southern Iceland,exact,95,11.2,8.8,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+NIC,Northern Iceland,exact,129,10.5,12,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+SGR,Southern Greenland,exact,168,4.6,3.4,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+NGR,Northern Greenland,exact,172,5.4,,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+SCO,Scotland,exact,84,11.1,,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+SNO,Southern Norway,exact,118,8.5,9.8,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+NNO,Northern Norway,exact,134,8,8.1,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+SVA,Svalbard,exact,166,6.6,,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+NLDK,Central Europe,unverified_code_to_S1_region,90,13.4,,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+SWE,Sweden,exact,117,12,5.8,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+BALT,Baltic States,exact,123,10.1,12.4,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+WS,White Sea,exact,138,4.9,5.7,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+KAN,Kanin Peninsula,exact,154,7.2,8.9,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+PEKO,Pechora/Kolguyev,exact,159,7.2,2.3,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2
+NSE,Novaya Zemlya,unverified_code_to_S1_region,170,6.3,,925e1e5921a4f005b55c5ffb60fa2958bcb29be8c56f4252cd00f66effe91e19,2

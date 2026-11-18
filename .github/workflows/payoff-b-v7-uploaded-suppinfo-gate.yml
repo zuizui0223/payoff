@@ -1,0 +1,41 @@
+name: PAYOFF-B V7 original uploaded DOCX aggregate input admission
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-v7-uploaded-suppinfo-source-20261117
+    paths:
+      - "scripts/payoff_b_v7_suppinfo_aggregate_gate.py"
+      - "scripts/payoff_b_v7_original_join_readiness.py"
+      - "tests/test_payoff_b_v7_suppinfo_aggregate_gate.py"
+      - "tests/test_payoff_b_v7_original_join_readiness.py"
+      - "data/payoff_b_v7_kolzsch_2015_suppinfo_q_20261117.csv"
+      - "data/payoff_b_v7_kolzsch_2015_suppinfo_S1_20261117.csv"
+      - ".github/workflows/payoff-b-v7-uploaded-suppinfo-gate.yml"
+permissions:
+  contents: read
+jobs:
+  source-aggregates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source-contract tests
+        run: python -m pip install pytest
+      - name: Test published source correlation schema, aliases and fail-closed missing annual onsets
+        run: python -m pytest -q tests/test_payoff_b_v7_suppinfo_aggregate_gate.py tests/test_payoff_b_v7_original_join_readiness.py
+      - name: Audit derived 30-year q aggregate tables against original source checksum receipt
+        run: python -m scripts.payoff_b_v7_suppinfo_aggregate_gate --output outputs/v7/uploaded_suppinfo_q_source_gate.json
+      - name: Fail-close original region-year and GPS geometry admissions for V7 without new outcome fits
+        run: python -m scripts.payoff_b_v7_original_join_readiness --output outputs/v7/registered_primary_readiness.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-v7-original-suppinfo-source-gate
+          path: |
+            outputs/v7/uploaded_suppinfo_q_source_gate.json
+            outputs/v7/registered_primary_readiness.json
+          if-no-files-found: warn
