@@ -59,3 +59,20 @@ def test_uncertain_labels_not_promoted_to_geometry():
     assert x["source_region_year_specific_S_jy_available"] is False
     assert x["q_by_U_and_bird_response_fitted"] is False
     assert x["without_two_unresolved_source_label_aliases"]["by_flyway"]["Barents Sea"]["n_transitions"] == 4
+
+
+def test_source_only_ordinal_interaction_structural_df_not_bird_effect():
+    x = audit()
+    all_design = x["all_adjacent_published_q"]["source_only_q_by_ordinal_stage_design"]
+    clean_design = x["without_two_unresolved_source_label_aliases"]["source_only_q_by_ordinal_stage_design"]
+    assert all_design["n_source_transition_rows"] == 13
+    assert clean_design["n_source_transition_rows"] == 11
+    assert all_design["n_columns_including_ordinal_interaction"] == 7
+    assert clean_design["n_columns_including_ordinal_interaction"] == 7
+    assert all_design["remaining_transition_level_df_if_independent"] == 6
+    assert clean_design["remaining_transition_level_df_if_independent"] == 4
+    assert all_design["coding_dependent_auxiliary_vif"] == pytest.approx(5.289422133, abs=1e-8)
+    assert clean_design["coding_dependent_auxiliary_vif"] == pytest.approx(5.590631251, abs=1e-8)
+    assert clean_design["ordinal_product_residual_variance_fraction"] == pytest.approx(.178870678, abs=1e-8)
+    assert clean_design["registered_geographical_U_test_completed"] is False
+    assert clean_design["p_value_or_bird_response_fitted"] is False
