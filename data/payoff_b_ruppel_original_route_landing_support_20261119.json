@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-19",
+  "status": "ROUTE_LANDING_MODIFIER_NOT_ESTIMABLE_UNDER_FROZEN_SUPPORT",
+  "analysis_class": "SOURCE_ONLY_DESCRIPTIVE_IDENTIFICATION_GATE_NOT_NEW_BIOLOGICAL_EFFECT",
+  "original_article": "Rüppel et al 2023 Royal Society Open Science DOI 10.1098/rsos.221420",
+  "original_dataset": "Figshare 10.6084/m9.figshare.c.6403996",
+  "original_source_ZIP_SHA256_independently_verified": "0ef08e19104aaceff5ef2700c324a094c49cbe2cd24ca198e3853b656d7744c6",
+  "aggregate_counts": {
+    "n_at_risk_departure_rows": 1783,
+    "n_individuals": 178,
+    "n_first_flights": 178,
+    "n_total_landings": 24,
+    "route_landing_2_by_2": {
+      "coasting": {
+        "landing": 21,
+        "nonlanding": 133,
+        "total": 154
+      },
+      "sea-crossing": {
+        "landing": 3,
+        "nonlanding": 21,
+        "total": 24
+      }
+    },
+    "by_year": [
+      {
+        "year": 2019,
+        "flights": 48,
+        "landing": 8,
+        "sea_crossings": 3
+      },
+      {
+        "year": 2020,
+        "flights": 68,
+        "landing": 11,
+        "sea_crossings": 9
+      },
+      {
+        "year": 2021,
+        "flights": 62,
+        "landing": 5,
+        "sea_crossings": 12
+      }
+    ],
+    "by_taxon": [
+      {
+        "taxon": "Garden Warbler",
+        "flights": 66,
+        "landing": 5,
+        "sea_crossings": 15
+      },
+      {
+        "taxon": "Gr. Whitethroat",
+        "flights": 68,
+        "landing": 12,
+        "sea_crossings": 9
+      },
+      {
+        "taxon": "Sedge Warbler",
+        "flights": 44,
+        "landing": 7,
+        "sea_crossings": 0
+      }
+    ]
+  },
+  "original_marginal_sums_not_independent_groups": true,
+  "n_route_landing_cell_min_prespecified": 5,
+  "mathematical_necessary_sea_land_overlap_range": [
+    5,
+    19
+  ],
+  "observed_sea_crossing_and_landing": 3,
+  "source_individual_route_times_and_weather_join_verified": true,
+  "source_route_detection_probability_known": false,
+  "no_p_values_or_new_effects_fitted": true,
+  "original_weather_decision_effects_published_prior_art": true,
+  "issued_GFS_2019_2021_original_bytes_retrieved": false,
+  "animal_perceived_forecast_q_measured": false,
+  "causal_actionability_r_measured": false,
+  "natural_information_deadline_qwait_D_eff_identified": false,
+  "sufficient_species_generalization": false,
+  "original_RData_approach": {
+    "join_key": "motusTagID",
+    "participant_unique_bird_ids": 178,
+    "initial_non_departure_at_risk": 1605,
+    "initial_departure_events": 178,
+    "original_flight_cat_source_codes": [
+      "coasting",
+      "sea-crossing"
+    ],
+    "zip_source_file_id": 38968813,
+    "source_file_size_bytes": 100303
+  },
+  "provenance": {
+    "audited_source_workflow_run": 44546509558,
+    "verified_source_artifact_id": 14540384944,
+    "aggregate_artifact_zip_sha256": "0eb07b73b93d3487f350aca93ff26c4ac7c7556022f23b41b769e741d4970633",
+    "dedicated_route_cross_tab_synthetic_tests_passed": 5,
+    "no_animal_ID_or_GPS_row_export": true,
+    "current_Payoff_B_main_unchanged": true
+  },
+  "scientific_decision": "Stop route × later landing as an admissible independent natural information×recourse test on this specific 178-bird cohort; need new dataset with both route and landing support plus truly issue-time available environmental information and reliable downstream fitness."
+}
