@@ -30,10 +30,14 @@ def test_genuine_prior_issue_and_future_valid_time_are_distinct():
 
 def test_future_issued_forecast_fails_decision_access_not_reclassified():
     r=sample()
-    r["forecast_issue_utc"]="2020-09-16T18:30:00Z"
+    # GFS initializations occur at fixed UTC hours. To check the 1-hour
+    # buffer, change the bird's decision time instead of inventing a GFS run
+    # initialized at 18:30 UTC.
+    r["decision_utc"]="2020-09-16T18:30:00Z"
+    r["forecast_issue_utc"]="2020-09-16T18:00:00Z"
     x=check_issued(r)
     assert x["issued_at_least_1h_predecision"] is False
-    r["forecast_issue_utc"]="2020-09-16T18:00:00Z"
+    r["forecast_issue_utc"]="2020-09-16T12:00:00Z"
     assert check_issued(r)["issued_at_least_1h_predecision"] is True
 
 
