@@ -96,15 +96,20 @@ def test_future_issue_time_record(record:dict, primary_horizon_hours:int=6)->dic
         raise ValueError("Invalid source GRIB digest")
     if issued.hour not in DATE_HOURS or issued.minute!=0 or issued.second!=0:
         raise ValueError("Unexpected operational source initialization time")
+    before=issued<=decision-timedelta(hours=1)
+    future=valid>decision
+    forward=valid>issued
+    aligned=abs(
+        (valid-decision).total_seconds()/3600-primary_horizon_hours
+    )<=1.5
     return {
-        "issued_at_least_1h_predecision":issued<=decision-timedelta(hours=1),
-        "valid_after_decision":valid>decision,
-        "positive_model_forecast_lead":valid>issued,
+        "issued_at_least_1h_predecision":before,
+        "valid_after_decision":future,
+        "positive_model_forecast_lead":forward,
         "issue_time_UTC_registered":True,
+        "eligible_future_cue_by_issue_time_UTC_only":before and future and forward and aligned,
         "original_forecast_GRIB_digest_source_claimed_not_external_verified":True,
-        "decision_to_target_near_primary_plus6h":abs(
-            (valid-decision).total_seconds()/3600-primary_horizon_hours
-        )<=1.5,
+        "decision_to_target_near_primary_plus6h":aligned,
         "raw_animal_ID_date_weather_rows_emitted":False,
         "animal_subjective_access_verified":False,
         "biological_effect_fitted":False,
