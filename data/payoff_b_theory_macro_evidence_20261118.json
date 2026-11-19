@@ -396,7 +396,59 @@
       "source_studies_unverified": 12,
       "remaining_680_certified_ebird_free": false,
       "newly_fitted_biological_effects": false,
-      "claim": "Source-only methods audit found independent primary observation systems for 15 studies contributing 657 of 680 remaining E6 effect rows; 12 studies/23 effects still unreviewed and auxiliary source streams not exhaustively screened. Does not license fully eBird-free declaration."
+      "claim": "Source-only methods audit found independent primary observation systems for 15 studies contributing 657 of 680 remaining E6 effect rows; 12 studies/23 effects still unreviewed and auxiliary source streams not exhaustively screened. Does not license fully eBird-free declaration.",
+      "superseded_by_updated_source_origins": "F6",
+      "historical_source_audit_wave": "Prior 15-study/657-effect partial audit, now enlarged to 26/676; not independently additive"
+    },
+    {
+      "id": "F6",
+      "class": "UPDATED_POST_OPEN_PROVENANCE_TIERS_AND_NESTED_SOURCE_ONLY_SENSITIVITY",
+      "status": "ONE_ORIGINAL_SOURCE_UNVERIFIED_AND_EFFECT_DIRECTION_STABLE_ACROSS_TIERS",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/404",
+      "source_article": "Usui et al. 2017, DOI 10.1111/1365-2656.12612",
+      "original_archive_sha256": "443cab62531d9b633aa6ee67da010fa66b6c230ef87e919d697269e77a7373f0",
+      "inherited_main_E6_effects_including_known_eBird": 944,
+      "forced_eBird_study_removed_effects": 264,
+      "remaining_after_exclusion": 680,
+      "source_described_effects": 676,
+      "source_described_studies": 26,
+      "more_explicit_monitoring_effects": 670,
+      "more_explicit_monitoring_studies": 24,
+      "Lithuanian_Zalakevicius_2002_original_source_unverified_effects": 4,
+      "weak_raw_log_custodian_studies": [
+        "Rubolini et al. 2007",
+        "Ahola et al. 2004"
+      ],
+      "nested_long_minus_short_days_per_C": {
+        "source_mixed_original_944": 0.42147637990921316,
+        "known_eBird_excluded_680": 0.6083890673642456,
+        "described_local_source_676": 0.6018495000866944,
+        "explicit_monitoring_670": 0.6238827646228353
+      },
+      "CIs_95": {
+        "source_mixed_original_944": [
+          0.12132570573851353,
+          0.7216270540799128
+        ],
+        "known_eBird_excluded_680": [
+          0.36181694969441286,
+          0.8549611850340784
+        ],
+        "described_local_source_676": [
+          0.3543723123439271,
+          0.8493266878294616
+        ],
+        "explicit_monitoring_670": [
+          0.3714018579751023,
+          0.8763636712705684
+        ]
+      },
+      "source_audit_not_full_eBird_independence_certification": true,
+      "original_gradient_prior_art": true,
+      "post_open_nesting_not_independent_replication": true,
+      "causal_information_distance_or_animal_cue_use_identified": false,
+      "new_biological_interaction_fitted": false,
+      "claim": "Original Usui gradient is directionally stable under post-open source-origin restrictions, but full eBird-free certification and causal information availability remain unidentified; V7 goose q×U still NOT_ESTIMABLE."
     }
   ],
   "next_primary_test": {
