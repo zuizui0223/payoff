@@ -769,7 +769,7 @@
       "original_start_end_weather_data_complete": 178,
       "terminal_departure_same_UTC_day_as_flight": 175,
       "terminal_departure_within_UTC_plusminus1": 178,
-      "source_route_categories_need_author_code_mapping": true,
+      "source_route_categories_need_author_code_mapping": false,
       "direct_individual_event_and_flight_source_authenticated": true,
       "weather_at_decision_is_animal_future_cue_belief": false,
       "individual_future_environment_forecast_reliability_q_identified": false,
@@ -778,7 +778,13 @@
       "published_departure_routing_landing_weather_effects_prior_art": true,
       "newly_fitted_biological_effect": false,
       "natural_theory_information_deadline_q_wait_estimated": false,
-      "science_claim": "Original RData joins 178 individual at-risk sequences, 178 first flights and 24 landing events, with individual event time and flight start/end weather; published Rüppel 2023 already demonstrates weather associations across decisions. This verifies source-grain feasibility, not a new biological effect or natural cue-belief/deadline mechanism."
+      "science_claim": "Original RData joins 178 individual at-risk sequences, 178 first flights and 24 landing events, with individual event time and flight start/end weather; published Rüppel 2023 already demonstrates weather associations across decisions. This verifies source-grain feasibility, not a new biological effect or natural cue-belief/deadline mechanism.",
+      "source_author_route_category_mapping": {
+        "coasting": 154,
+        "sea-crossing": 24
+      },
+      "source_route_recovered_from_original_RData": true,
+      "source_join_regression_source_studies": 1
     }
   ],
   "next_primary_test": {
