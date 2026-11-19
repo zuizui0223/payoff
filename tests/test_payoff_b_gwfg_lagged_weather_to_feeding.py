@@ -109,9 +109,15 @@ def test_source_2024_public_original_full_result_when_supplied():
     assert target["focal_ci95"][0]<=target["focal_early_freezing_beta_per_10pp"]<=target["focal_ci95"][1]
     stress=r["stage3_early_freezing_association"]["leave_one_year_out_coefficient_stress"]
     assert len(stress)==5
-    for x in stress:
-        assert x["n_remaining_bird_years"]>=70
-        assert len(x["CI95"])==2
+    assert sum(x["status"]=="ESTIMATED_UNMODIFIED_FROZEN_CONTROLS" for x in stress)==4
+    held2018=next(x for x in stress if x["original_heldout_year"]==2018)
+    assert held2018["status"]=="NOT_ESTIMABLE_FROZEN_COVARIATE_HAS_ZERO_VARIATION"
+    assert held2018["nonvarying_predeclared_columns"]==["storm4"]
+    assert held2018["coefficient_not_reported"] is True
+    for result in stress:
+        assert result["n_remaining_bird_years"]>=70
+        if result["status"]=="ESTIMATED_UNMODIFIED_FROZEN_CONTROLS":
+            assert len(result["CI95"])==2
     assert r["stage4_feeding_heldout_prediction"][
         "baseline_weather_earlier_feeding_no_freeze_vs_added_early_freeze"
     ]["leave_one_entire_year_out"]["n_holdout_folds"]==5
