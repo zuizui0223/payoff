@@ -4,7 +4,7 @@ Date: **2026-11-19**. Status: **POST-OPEN NESTED SOURCE-PROVENANCE SENSITIVITY**
 
 ## Motivation and original data identity
 
-The previously promoted Usui et al. (2017) E6 result had 944 source temperature effects from 28 studies, including **264 known original eBird-dependent effects from Hurlbert & Liang (2012)**. The frozen E6 study×species two-way cluster-robust inverse-variance WLS is reproducible from GitHub Actions original artifact **10953792024** (archive SHA256 `443cab62531d9b633aa6ee67d7baa128043c0c454b4e57885118dff5820f2656dd`). Raw Usui source SHA256 `68816f6cbfccbb9b47b45be0df49f077db914c8e43e567d0ed2cac9bbafde56c`.
+The previously promoted Usui et al. (2017) E6 result had 944 source temperature effects from 28 studies, including **264 known original eBird-dependent effects from Hurlbert & Liang (2012)**. The frozen E6 study×species two-way cluster-robust inverse-variance WLS is reproducible from GitHub Actions original artifact **10953792024** (archive SHA256 `443cab62531d9b633aa6ee67da010fa66b6c230ef87e919d697269e77a7373f0`). Raw Usui source SHA256 `68816f6cbfccbb9b47b45be0df49f077db914c8e43e567d0ed2cac9bbafde56c`.
 
 Study source verification is based on **original paper methods, published institutional collection descriptions and a source-identifier matching ledger**, not on sign/magnitude of the original temperature-response coefficients. This audit is *after* the original E6 effect was opened, hence must not be treated as a new prospective validation.
 
