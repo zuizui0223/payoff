@@ -297,6 +297,32 @@
       "claim": "Historical cue predictability and realized timing precision must be measured separately; original 2015 authors had already reported this separation and it does not identify recourse or information-use strategy.",
       "actual_site_or_region_timing_difference": "Original 2015 q was based on generalized regional GDD jerks, while published goose arrival precision used spring onset for individual stopover sites; frozen V7 uses region-year S_jy for a separately registered response.",
       "novel_to_payoff": false
+    },
+    {
+      "id": "D6",
+      "class": "POST_PUBLICATION_PUBLISHED_AGGREGATE_NEGATIVE_TRANSFER",
+      "status": "ORDINAL_Q_BY_STAGE_IN_SAMPLE_GAIN_WITH_HELDOUT_DEGRADATION",
+      "source": "https://doi.org/10.1111/1365-2656.12281",
+      "branch_pr": "https://github.com/zuizui0223/payoff/pull/402",
+      "analysis_scope": "Original published Fig3 region-pooled site timing RMSD joined to original historical regional q on same destination; not V7 individual region-year timing",
+      "n_published_destination_regions": 13,
+      "n_original_flyways": 3,
+      "n_alias_clean_destinations": 11,
+      "n_independent_flyway_holdouts": 3,
+      "raw_pearson_q_rmsd_all": -0.14017741,
+      "raw_pearson_q_rmsd_alias_clean": -0.265036659,
+      "raw_spearman_q_rmsd_all": 0.074277924,
+      "original_published_rmsd_q_association_prior_art_p": 0.03,
+      "full_sample_ordinal_product_in_sample_SSE_gain_all_percent": 25.8339804,
+      "alias_clean_ordinal_product_in_sample_SSE_gain_percent": 16.876934,
+      "full_sample_heldout_MSE_additive_days2": 138.451829895,
+      "full_sample_heldout_MSE_product_days2": 183.293902423,
+      "alias_clean_heldout_MSE_additive_days2": 119.59060581,
+      "alias_clean_heldout_MSE_product_days2": 182.56944087,
+      "original_geographic_urgency_U_fitted": false,
+      "original_individual_bird_outcome_fitted": false,
+      "independent_natural_replication": false,
+      "claim": "Adding q×ordinal route stage overfits published regional RMSD: within-sample SSE improves but 3-flyway leave-one-flyway-out error worsens. No robust stage interaction, biological information-use or V7 effect is established. Older authors already reported an adjusted regional q–RMSD association."
     }
   ],
   "next_primary_test": {
