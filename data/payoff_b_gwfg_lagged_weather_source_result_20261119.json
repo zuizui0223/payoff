@@ -1,0 +1,116 @@
+{
+  "as_of": "2026-11-19",
+  "id": "payoff_b_gwfg_lagged_weather_source_result_20261119",
+  "status": "POST_PUBLICATION_EXPLORATORY_TEMPORAL_SOURCE_REANALYSIS",
+  "source_original": "Schindler et al 2024 Proc R Soc B doi:10.1098/rspb.2023.2016",
+  "original_repository": "https://github.com/aschindler23/Schindler_etal_2024_ProcB",
+  "original_public_csv_blob_sha1": "ca3736a281dfd2465921efc940dd985499c71a4f",
+  "original_public_csv_sha256": "5d31ef41867d7f591f5a3fc5f2936df6e01dd91951c006e35b607a1e542e8972",
+  "original_csv_rows": 642,
+  "original_bird_years": 107,
+  "birds": 49,
+  "repeated_birds_two_plus": 30,
+  "calendar_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "breeding": {
+    "success": 28,
+    "failed": 72,
+    "deferred": 7
+  },
+  "primary_stage3_freezing_to_stage4_feeding": {
+    "unit": "source individual bird year",
+    "model": "stage4 feeding fraction ~ stage3 feeding fraction + stage3 freezing per 10 pp + stage3 precip/storm/DOY + stage4 precip/storm + year FE",
+    "n": 107,
+    "bird_clusters": 49,
+    "design_rank": 12,
+    "estimated_beta_per_10pp": -0.0013725255396581735,
+    "bird_cluster_standard_error": 0.006129678581517875,
+    "ci95": [
+      -0.013697070348722811,
+      0.010952019269406464
+    ],
+    "p": 0.8237739635307635,
+    "df": 48,
+    "incremental_partial_SSE_reduction": 0.00044887152132395725,
+    "interpretation": "FROZEN_CONDITIONAL_LINEAR_ASSOCIATION_NOT_SUPPORTED",
+    "year_exclusion": {
+      "year_2018": "NOT_ESTIMABLE_storm4_zero_variation",
+      "year_2019": -0.001119527407970649,
+      "year_2020": -0.004133597680686819,
+      "year_2021": 0.00021159857015729325,
+      "year_2022": -0.0010151866522831888,
+      "all_estimable_CI_include_zero": true
+    }
+  },
+  "feeding_prediction": {
+    "ridge_alpha": 1,
+    "leave_one_bird_out": {
+      "n_folds": 49,
+      "baseline_MSE": 0.004734243677455496,
+      "plus_earlier_freeze_MSE": 0.004399626468961512
+    },
+    "leave_one_year_out": {
+      "n_folds": 5,
+      "baseline_MSE": 0.012608861987928585,
+      "plus_earlier_freeze_MSE": 0.010500353704119267,
+      "years_with_improvement": [
+        2019,
+        2020,
+        2021
+      ],
+      "years_with_worse_error": [
+        2018,
+        2022
+      ]
+    },
+    "cross_system_transfer_validated": false
+  },
+  "breeding_prediction": {
+    "logistic_C": 1,
+    "baseline": "stage3 weather/feeding + stage4 weather/day/year",
+    "augmented": "baseline + stage4 feeding + stage4 log ODBA",
+    "leave_one_bird_out": {
+      "n_folds": 49,
+      "baseline_logloss": 0.6502394729900656,
+      "with_late_behavior_logloss": 0.6520459377310379,
+      "baseline_brier": 0.22118352900839244,
+      "augmented_brier": 0.2212766708746217
+    },
+    "leave_one_year_out": {
+      "n_folds": 5,
+      "baseline_logloss": 0.6541368539364134,
+      "with_late_behavior_logloss": 0.6420964478351439,
+      "baseline_brier": 0.22915733269703542,
+      "augmented_brier": 0.22108052665200184,
+      "year_2020_logloss_baseline": 0.6263550667574576,
+      "year_2020_logloss_augmented": 0.7311064480441466
+    },
+    "cross_split_support": "INCONSISTENT_LOBO_DEGRADES_LOYO_IMPROVES"
+  },
+  "provenance": {
+    "github_actions_run": 44529079285,
+    "github_actions_artifact_id": 14532508038,
+    "uploaded_aggregate_zip_sha256": "21b1010b0fb8932cf95b8979b006c9132cd9cd0a4e2a9287a9dd63fa21de3c75",
+    "result_json_sha256": "d19031a08343558fd26b5b6db33846222af9aca0033a40dd7c7964726396fcf6",
+    "source_original_2024_prior_art": true,
+    "no_raw_bird_ID_or_location_export": true,
+    "test_source_original_csv_verified": true
+  },
+  "claims": {
+    "directly_measured_info_credibility_q": false,
+    "downstream_bird_control_budget_r": false,
+    "animal_waiting_fitness_D_eff": false,
+    "natural_information_urgency_interaction_fitted": false,
+    "natural_causal_compensation_identified": false,
+    "independent_new_system_beyond_published_original": false,
+    "physical_climate_cue_access_observed": false,
+    "original_V7_q_times_U": "NOT_ESTIMABLE",
+    "no_eBird_data_used": true,
+    "publication_manuscript_main_untouched": true
+  }
+}
