@@ -241,12 +241,9 @@ def main() -> None:
                 "support": value["support"],
                 "status": value["status"],
                 "heldout_gains": value.get("holdout_gains"),
-            } for key, value in results.items()
-        } if False else {key: {
-            "support": value["support"],
-            "status": value["status"],
-            "heldout_gains": value.get("holdout_gains"),
-        } for key, value in result["two_non_nested_supported_temporal_nulls"].items()},
+            }
+            for key, value in result["two_non_nested_supported_temporal_nulls"].items()
+        },
         "causal_information_use_mechanism": False,
     }, ensure_ascii=False))
 
