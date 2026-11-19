@@ -9,6 +9,8 @@ on:
       - '.github/workflows/payoff-b-e6-known-ebird-exclusion.yml'
       - 'scripts/payoff_b_e6_known_ebird_exclusion.py'
       - 'tests/test_payoff_b_e6_known_ebird_exclusion.py'
+      - 'scripts/payoff_b_e6_source_origin_inventory.py'
+      - 'tests/test_payoff_b_e6_source_origin_inventory.py'
       - 'docs/PAYOFF_B_E6_KNOWN_EBIRD_SOURCE_SENSITIVITY_20261119.md'
 
 permissions:
@@ -47,6 +49,11 @@ jobs:
           set -euo pipefail
           PAYOFF_E6_ARCHIVED_ARTIFACT_ZIP=outputs/e6_known_ebird_correction/original_E6_artifact.zip \
             python -m pytest -q tests/test_payoff_b_e6_known_ebird_exclusion.py
+          PAYOFF_E6_ARCHIVED_ARTIFACT_ZIP=outputs/e6_known_ebird_correction/original_E6_artifact.zip \
+            python -m pytest -q tests/test_payoff_b_e6_source_origin_inventory.py
+          python -m scripts.payoff_b_e6_source_origin_inventory \
+            --artifact-zip outputs/e6_known_ebird_correction/original_E6_artifact.zip \
+            --output outputs/e6_known_ebird_correction/source_origin_inventory.json
           python -m scripts.payoff_b_e6_known_ebird_exclusion \
             --artifact-zip outputs/e6_known_ebird_correction/original_E6_artifact.zip \
             --output outputs/e6_known_ebird_correction/source_policy_receipt.json
@@ -54,5 +61,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: payoff-b-e6-known-ebird-exclusion-20261119
-          path: outputs/e6_known_ebird_correction/source_policy_receipt.json
+          path: |
+            outputs/e6_known_ebird_correction/source_policy_receipt.json
+            outputs/e6_known_ebird_correction/source_origin_inventory.json
           if-no-files-found: error
