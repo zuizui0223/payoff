@@ -9,6 +9,9 @@ on:
       - '.github/workflows/payoff-b-ruppel-sequential-source.yml'
       - 'scripts/payoff_b_ruppel_figshare_source_gate.py'
       - 'tests/test_payoff_b_ruppel_figshare_source_gate.py'
+      - 'scripts/payoff_b_ruppel_rdata_source_gate.py'
+      - 'tests/test_payoff_b_ruppel_rdata_source_gate.py'
+      - 'docs/PAYOFF_B_RUPPEL_RDATA_SOURCE_ESCALATION_20261119.md'
       - 'docs/PAYOFF_B_RUPPEL_SEQUENTIAL_SOURCE_CONTRACT_20261119.md'
   pull_request:
     branches:
@@ -27,17 +30,38 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install bounded original-data reader dependencies
-        run: python -m pip install --disable-pip-version-check requests pytest
+        run: python -m pip install --disable-pip-version-check requests pytest pandas pyreadr
       - name: Validate schema / ownership / HTTP hold without model fitting
-        run: python -m pytest -q tests/test_payoff_b_ruppel_figshare_source_gate.py
+        run: python -m pytest -q tests/test_payoff_b_ruppel_figshare_source_gate.py tests/test_payoff_b_ruppel_rdata_source_gate.py
       - name: Inspect only provider original Figshare public source metadata and bounded small tables
         run: |
           python -m scripts.payoff_b_ruppel_figshare_source_gate \
             --output outputs/payoff_b_ruppel_figshare_source_receipt.json
+      - name: Obtain exact original public Figshare 2023 analysis-data ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/ruppel_original
+          curl -fLsS --retry 3 --retry-all-errors --max-time 90 \
+            'https://figshare.com/ndownloader/files/38968813' \
+            -o outputs/ruppel_original/rsos221420_si_002.zip
+          test "$(stat -c%s outputs/ruppel_original/rsos221420_si_002.zip)" = "100303"
+          printf '%s  %s\n' \
+            '0ef08e19104aaceff5ef2700c324a094c49cbe2cd24ca198e3853b656d7744c6' \
+            'outputs/ruppel_original/rsos221420_si_002.zip' | sha256sum -c -
+      - name: Read original RData objects and R code references, output aggregate schema only
+        run: |
+          PAYOFF_RUPPEL_2023_ORIGINAL_ZIP=outputs/ruppel_original/rsos221420_si_002.zip \
+            python -m pytest -q tests/test_payoff_b_ruppel_rdata_source_gate.py
+          python -m scripts.payoff_b_ruppel_rdata_source_gate \
+            --original-zip outputs/ruppel_original/rsos221420_si_002.zip \
+            --output outputs/payoff_b_ruppel_RData_source_receipt.json
       - name: Save public metadata and aggregate-only source feasibility, no bird rows
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: payoff-b-ruppel-figshare-source-only-20261119
-          path: outputs/payoff_b_ruppel_figshare_source_receipt.json
+          path: |
+            outputs/payoff_b_ruppel_figshare_source_receipt.json
+            outputs/payoff_b_ruppel_RData_source_receipt.json
           if-no-files-found: warn
