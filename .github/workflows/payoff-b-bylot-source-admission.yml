@@ -1,0 +1,38 @@
+name: PAYOFF-B Bylot independent source calendar gate
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/payoff-b-bylot-source-admission.yml'
+      - 'scripts/payoff_b_bylot_independent_outyear_source_gate.py'
+      - 'tests/test_payoff_b_bylot_independent_outyear_source_gate.py'
+      - 'data/payoff_b_bylot_independent_outyear_source_contract_20261119.json'
+
+permissions:
+  contents: read
+
+jobs:
+  original-source-metadata-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install minimal source-check dependencies only
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Source calendar and access gate checks (no original ZIP downloads)
+        run: python -m pytest -q tests/test_payoff_b_bylot_independent_outyear_source_gate.py
+      - name: Emit source-only deterministic receipt
+        run: |
+          python -m scripts.payoff_b_bylot_independent_outyear_source_gate \
+            --output outputs/payoff_b_bylot_source_admission_20261119.json
+      - name: Upload metadata audit only
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-bylot-source-calendar-20261119
+          path: outputs/payoff_b_bylot_source_admission_20261119.json
+          if-no-files-found: error

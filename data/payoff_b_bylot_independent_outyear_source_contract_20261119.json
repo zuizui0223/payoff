@@ -1,0 +1,126 @@
+{
+  "contract_id": "payoff_b_bylot_independent_outyear_source_gate_20261119_v1",
+  "created_on": "2026-11-19",
+  "scope": "prospective source access and identification feasibility only; no goose cue or fitness outcome opened",
+  "scientific_question": "Can breeding-site early-season climate improve out-year prediction of annual goose nesting phenology or nest-level success, distinct from individual migratory cue use?",
+  "source_roles": [
+    {
+      "key": "D41_nest_summary",
+      "provider": "Centre d'etudes nordiques Nordicana D41",
+      "doi": "10.5885/45570CE-2D00DCA728074FA7",
+      "dataset_title": "Monitoring of Greater Snow Goose reproduction on Bylot Island, Nunavut, Canada",
+      "version": "1.2",
+      "updated": "2026-07-14",
+      "source_page": "https://nordicana.cen.ulaval.ca/en/publication?doi=10.5885%2F45570CE-2D00DCA728074FA7",
+      "published_filename": "GSGO_nesting_summary_data_1989-2025_GAUTHIER ET AL.zip",
+      "nominal_calendar_span": [
+        1989,
+        2025
+      ],
+      "documented_missing_years": [
+        2020,
+        2021,
+        2024
+      ],
+      "contains_source_declared": "Laying date, clutch size, hatching date, nesting success",
+      "download_terms": "explicit acceptance required; not accepted by assistant",
+      "original_bytes_sha256": null,
+      "source_columns_verified": false,
+      "individual_gps_id_link_verified": false
+    },
+    {
+      "key": "D41_nest_visits",
+      "provider": "Centre d'etudes nordiques Nordicana D41",
+      "doi": "10.5885/45570CE-2D00DCA728074FA7",
+      "version": "1.2",
+      "source_page": "https://nordicana.cen.ulaval.ca/en/publication?doi=10.5885%2F45570CE-2D00DCA728074FA7",
+      "published_filename": "GSGO_nest_visit_data_1989-2025_GAUTHIER_ET_AL.zip",
+      "source_page_observation_window": "1989-06 through 2019-08",
+      "nominal_calendar_span": [
+        1989,
+        2019
+      ],
+      "download_terms": "explicit acceptance required; not accepted by assistant",
+      "original_bytes_sha256": null,
+      "individual_gps_id_link_verified": false
+    },
+    {
+      "key": "D2_BYLCAMP_daily_climate",
+      "provider": "Centre d'etudes nordiques Nordicana D2",
+      "doi": "10.5885/45039SL-EE76C1BDAADC4890",
+      "version": "1.13.0",
+      "source_page": "https://nordicana.cen.ulaval.ca/en/publication?doi=45039SL-EE76C1BDAADC4890",
+      "station": "Bylot Lac du camp (BYLCAMP)",
+      "field": "average air temperature",
+      "published_filename": "ds_000634180.zip",
+      "documented_observation_window": "1993-08 through 2023-07",
+      "nominal_full_calendar_spring_year_span": [
+        1994,
+        2023
+      ],
+      "download_terms": "explicit acceptance required; not accepted by assistant",
+      "original_bytes_sha256": null,
+      "source_columns_verified": false,
+      "exact_climate_vs_nest_site_alignment_verified": false
+    },
+    {
+      "key": "greater_snow_goose_movebank",
+      "provider": "Movebank, original study summary",
+      "study_id": 1442516400,
+      "study_name": "Greater snow goose migration",
+      "source_page": "https://www.movebank.mpg.de/cms/movebank-content/audubon-mbi-collection",
+      "documented_calendar_span": [
+        2019,
+        2023
+      ],
+      "summary_unique_birds": 75,
+      "raw_point_count_from_collection": 5156264,
+      "source_data_license": "owner permissions and CC BY-NC context; original tracking bytes not redistributed",
+      "original_bytes_sha256": null,
+      "original_gps_available_for_analysis": false,
+      "gps_to_D41_nest_id_crosswalk_verified": false
+    }
+  ],
+  "source_admission": {
+    "annual_nest_summary_original_bytes_obtained": false,
+    "daily_climate_original_bytes_obtained": false,
+    "nest_visit_original_bytes_obtained": false,
+    "gps_original_bytes_permission_confirmed": false,
+    "nest_outcome_codebook_and_sampling_strata_verified": false,
+    "climate_daily_time_zone_and_units_verified": false,
+    "interactor_individual_crosswalk_verified": false
+  },
+  "eligibility_contract": {
+    "fixed_pre_egg_temperature_window": "May 1–15",
+    "window_declared_before_outcome_access": true,
+    "calendar_only_primary_nominal_baseline_years": [
+      1994,
+      2015
+    ],
+    "calendar_only_primary_nominal_future_years": [
+      2016,
+      2023
+    ],
+    "minimum_independent_post_2015_holdout_years": 10,
+    "minimum_daily_temperature_coverage_days_of_15": 12,
+    "frozen_outcome": "calendar-year median first egg laying day from source-defined nest summary, no survivor fitness substitution",
+    "primary_comparison": "out-of-year calendar-only prior-trend vs calendar + pre-defined May1-15 temperature model, annual year is unit",
+    "forbidden": [
+      "infer bird observed temperature at station",
+      "pool nests as independent climate years",
+      "use 2020 2021 2024 without source observations",
+      "call nest success one-year young survival",
+      "assign source GPS birds to nests without original identifier crosswalk",
+      "treat retrospective May temperature as necessarily pre-arrival",
+      "download sources by bypassing owner terms or Movebank permissions",
+      "open climate/outcome fit before source+support gate passes"
+    ]
+  },
+  "provenance": {
+    "existing_payoff_2020_lay_fitness_anchor": "docs/PAYOFF_B_GREATER_SNOW_GOOSE_FITNESS_LOSS_ANCHOR_20260929.md",
+    "existing_prior_art_reproduction": "Resendiz-Infante and Gauthier 2020 Scientific Reports 10:22067, DOI 10.1038/s41598-020-78565-y",
+    "published_remote_predictability_anchor": "Resendiz-Infante and Gauthier 2024 Frontiers in Bird Science DOI 10.3389/fbirs.2024.1307628",
+    "same_individual_GPS_to_nest_fitness_identified": false,
+    "source_nonindependence_from_existing_2020_paper": "pre-2016 period is already used in previous reproductive-fitness analysis; never classify as new independent field replication"
+  }
+}
