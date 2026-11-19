@@ -1,0 +1,67 @@
+{
+  "as_of": "2026-11-19",
+  "source": "Dryad DOI 10.5061/dryad.31zcrjf22",
+  "primary_article": "Hanzelka et al. 2026 DOI 10.1002/jav.03665",
+  "original_source_metadata_API": "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.31zcrjf22",
+  "original_version_id": 466868,
+  "original_publication_date": "2026-10-01",
+  "provider_license": "CC0-1.0",
+  "files": [
+    {
+      "filename": "Curlew_COE_habitat.zip",
+      "file_id": 4989265,
+      "size_bytes": 590985065,
+      "provider_sha256": "e3556851ef646eabad21dc0d482da58028b0327a8aaf459fdb02c3896bd48372",
+      "original_bytes_independently_verified": false,
+      "public_file_download_HTTP_20261119": 401
+    },
+    {
+      "filename": "README.md",
+      "file_id": 4989366,
+      "size_bytes": 14323,
+      "provider_sha256": "feb2e058090abd6863ef91570cd3afe4136d7ec9bb41f040612764648b5b892b",
+      "original_bytes_independently_verified": false,
+      "public_file_download_HTTP_20261119": 401
+    }
+  ],
+  "original_readme_from_public_web_page_verified": true,
+  "source_reported_scope": {
+    "birds": 124,
+    "periods": 233,
+    "years": [
+      2016,
+      2025
+    ]
+  },
+  "source_rows_in_dt_hab_Curlew_verified": false,
+  "original_Bird_ID_ID_seas_repeat_and_success_changes_verified": false,
+  "source_access_status": "PUBLISHED_METADATA_VERIFIED_BINARY_FILE_GET_HTTP_401",
+  "original_zip_provider_SHA256_identity_asserted_not_recalculated": true,
+  "original_derived_CSV_missing": true,
+  "original_repeat_bird_support_gate": "NOT_ESTIMABLE_UNTIL_AUTHORIZED_CSV_OR_ZIP_OBTAINED",
+  "conceptual_information_deadline_mechanism": "NOT_ESTIMABLE_FROM_PUBLISHED_COLUMNS",
+  "outcome_paper_already_includes_Prebr_and_sex_habitat_as_predictors": true,
+  "raw_sensitive_coordinates_redacted": true,
+  "source_Actions_runs": [
+    {
+      "run_id": 44507580040,
+      "observation": "first source runner metadata versions parser mismatch"
+    },
+    {
+      "run_id": 44507910563,
+      "observation": "official file entries use HAL links; first diagnostic 200 metadata"
+    },
+    {
+      "run_id": 44508380017,
+      "observation": "official file GET README and ZIP Range 401, metadata identified"
+    },
+    {
+      "run_id": 44508754214,
+      "observation": "source SHA256 digestType explicitly sha-256"
+    }
+  ],
+  "access_policy": "No credential bypass, alternate private mirrors, or user terms acceptance performed",
+  "next_input_for_further_analysis": "User-authorized original Dryad Curlew_COE_habitat.zip or extracted data/dt_hab_Curlew.csv",
+  "offline_source_gate": "scripts/payoff_b_curlew_local_source_admission.py",
+  "main_manuscript_changed": false
+}
