@@ -114,3 +114,10 @@ utils::write.csv(data.frame(metric=metrics,value=values,stringsAsFactors=FALSE),
                  outpath,row.names=FALSE)
 cat(sprintf("ORIGINAL_RUPPEL_SOURCE_JOIN_AUDIT n_event=%d n_flights=%d n_sharedID=%d landings=%d\n",
             nrow(ev),nrow(fl),length(id_overlap),sum(landing==1,na.rm=TRUE)))
+# Original flightCat is author-coded: report ONLY original category labels
+# and their aggregate frequencies; never infer labels from English substrings.
+route <- table(as.character(fl$flightCat),useNA="ifany")
+safe <- gsub("[^A-Za-z0-9_ .+-]","",names(route))
+cat("ORIGINAL_ROUTE_CATEGORY_METADATA ",paste(
+  sprintf("%s:%d",safe,as.integer(route)),collapse=";"),"\n",sep="")
+
