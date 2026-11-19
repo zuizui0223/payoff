@@ -97,24 +97,20 @@ def _pearson(a: list[float], b: list[float]) -> float | None:
     return sum((x-ma)*(y-mb) for x,y in zip(a,b)) / math.sqrt(ss_a*ss_b)
 
 
-def _rank(v: list[float]) -> list[float]:
-    out = [0.] * len(v)
-    for _, inds in _group_sorted_ties(v):
-        rank = sum(i+1 for i in inds)/len(inds)
-        for i in inds:
-            out[i] = rank
-    return out
-
-
-def _group_sorted_ties(values: list[float]):
+def _rank(values: list[float]) -> list[float]:
+    """Average ranks with tie handling; rank is sorted POSITION, not row ID."""
     order = sorted(range(len(values)), key=lambda i: values[i])
-    p = 0
-    while p < len(order):
-        stop = p+1
-        while stop < len(order) and values[order[stop]] == values[order[p]]:
+    ranks = [0.] * len(values)
+    start = 0
+    while start < len(order):
+        stop = start + 1
+        while stop < len(order) and values[order[stop]] == values[order[start]]:
             stop += 1
-        yield values[order[p]], order[p:stop]
-        p = stop
+        average_rank = ((start + 1) + stop)/2.0
+        for original_row in order[start:stop]:
+            ranks[original_row] = average_rank
+        start = stop
+    return ranks
 
 
 def _ols_columns(rows: list[dict], product: bool) -> list[list[float]]:
