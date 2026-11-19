@@ -1,0 +1,117 @@
+{
+  "as_of": "2026-11-19",
+  "result_id": "PAYOFF_B_GWFG_CALENDAR_MATCHED_WEATHER_NULLS_20261119",
+  "classification": "POST_OPEN_ORIGINAL_SOURCE_WEATHER_MATCHED_PERMUTATION_DIAGNOSTIC",
+  "original_public_source": "Schindler et al. 2024 Proc R Soc B DOI 10.1098/rspb.2023.2016; original aschindler23 GitHub spring_data.csv",
+  "original_source_git_blob_sha1": "ca3736a281dfd2465921efc940dd985499c71a4f",
+  "original_source_sha256": "5d31ef41867d7f591f5a3fc5f2936df6e01dd91951c006e35b607a1e542e8972",
+  "n_bird_years": 107,
+  "n_individuals": 49,
+  "n_years": 5,
+  "original_frozen_linear_model": {
+    "beta_per_10pp_freeze": -0.0013725255396581735,
+    "ci95": [
+      -0.013697070348722811,
+      0.010952019269406464
+    ],
+    "p": 0.8237739635307635,
+    "claim": "NOT_SUPPORTED_AS_INDEPENDENT_CONDITIONAL_LINEAR_ASSOCIATION"
+  },
+  "observed_frozen_ridge_gains": {
+    "bird_holdout_MSE": 0.00033461720849398396,
+    "year_holdout_MSE": 0.0021085082838093235,
+    "ridge_alpha": 1
+  },
+  "prior_unconditional_same_year_null": {
+    "n_permutations": 99,
+    "shuffles_ge_observed_bird": 1,
+    "shuffles_ge_observed_year": 1,
+    "post_open_tail_fraction_both": 0.02,
+    "null_preserves_individual_start_day": false,
+    "source": "docs/PAYOFF_B_GWFG_WITHIN_YEAR_FREEZE_PERMUTATION_RESULT_20261119.md"
+  },
+  "exact_same_year_and_start_day": {
+    "n_original_bird_years_eligible_to_reassign": 48,
+    "n_nonconstant_blocks": 14,
+    "n_years_with_eligible_blocks": 5,
+    "n_permutations": 99,
+    "seed": 20261119,
+    "bird_holdout": {
+      "n_shuffles_ge_observed": 47,
+      "corrected_upper_tail": 0.48,
+      "null_gain_median": 0.00032835267462041993,
+      "null_gain_q05_q95": [
+        0.00018858443942059737,
+        0.0004973511280310839
+      ]
+    },
+    "year_holdout": {
+      "n_shuffles_ge_observed": 57,
+      "corrected_upper_tail": 0.58,
+      "null_gain_median": 0.0022160214607722262,
+      "null_gain_q05_q95": [
+        0.000711116471246478,
+        0.003409445432837555
+      ]
+    },
+    "stage3_duration_exactly_matched": false
+  },
+  "same_year_and_7day_start_and_3day_duration_band": {
+    "n_original_bird_years_eligible_to_reassign": 52,
+    "n_nonconstant_blocks": 11,
+    "n_years_with_eligible_blocks": 5,
+    "n_permutations": 99,
+    "seed": 20261120,
+    "bird_holdout": {
+      "n_shuffles_ge_observed": 34,
+      "corrected_upper_tail": 0.35,
+      "null_gain_median": 0.0003070985024703479,
+      "null_gain_q05_q95": [
+        0.00017945964388800563,
+        0.00041249637855308036
+      ]
+    },
+    "year_holdout": {
+      "n_shuffles_ge_observed": 46,
+      "corrected_upper_tail": 0.47,
+      "null_gain_median": 0.0018909066888011146,
+      "null_gain_q05_q95": [
+        0.0006448048803870123,
+        0.003088934618909234
+      ]
+    },
+    "within_week_date_and_duration_differences_remain": true
+  },
+  "same_year_exact_start_and_duration": {
+    "n_original_bird_years_eligible_to_reassign": 17,
+    "n_nonconstant_blocks": 7,
+    "n_years_with_eligible_blocks": 4,
+    "frozen_min_eligible_rows": 40,
+    "frozen_min_blocks": 8,
+    "frozen_min_years": 3,
+    "status": "NOT_ESTIMABLE_PRESPECIFIED_SOURCE_SUPPORT_FAIL",
+    "permutations_executed": 0
+  },
+  "interpretation": {
+    "earlier_same_year_null_0_02_robust_to_calendar_alignment": false,
+    "true_individual_specific_cue_use_proven": false,
+    "calendar_duration_exact_match_admitted": false,
+    "new_independent_natural_replication": false,
+    "original_weather_data_randomized_by_observer": false,
+    "permutation_tail_is_causal_p_value": false,
+    "source_causal_compensation_identified": false,
+    "previous_breeding_transfer_mixed": true,
+    "theoretical_q_wait_D_eff_or_r_t_identified": false,
+    "frozen_V7_q_by_U_status": "NOT_ESTIMABLE",
+    "new_outcome_model_retuning_performed": false,
+    "recommended_stop": "Do not continue same-source post-hoc permutation search for a positive cue result; obtain independent timestamped decision or correction-opportunity sources."
+  },
+  "provenance": {
+    "github_actions_run": 44537189557,
+    "github_derived_artifact_id": 14537265791,
+    "artifact_zip_sha256": "b59bb249f87fe549f3897d3e1594c4548c928bdbdce54253034bd48b60bb570a",
+    "calendar_matched_freeze_json_sha256": "2962e8353364278a387561604406489f72baae97d11a33948933fea2acf63348",
+    "public_bird_IDS_or_GPS_exported": false,
+    "source_direct_tests_passed": 15
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "as_of": "2026-11-19",
+  "status": "POST_OPEN_EXPLORATORY_NONEXCHANGEABLE_PERMUTATION_DIAGNOSTIC",
+  "original_source": "Schindler et al 2024 Proc R Soc B doi:10.1098/rspb.2023.2016",
+  "original_public_git_blob_sha1": "ca3736a281dfd2465921efc940dd985499c71a4f",
+  "original_csv_sha256": "5d31ef41867d7f591f5a3fc5f2936df6e01dd91951c006e35b607a1e542e8972",
+  "original_bird_years": 107,
+  "original_birds": 49,
+  "original_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "original_frozen_stage3_linear_beta": -0.0013725255396581735,
+  "original_frozen_linear_ci95": [
+    -0.013697070348722811,
+    0.010952019269406464
+  ],
+  "original_frozen_linear_p": 0.8237739635307635,
+  "fixed_permutation_seed": 20261119,
+  "n_within_year_permutations": 99,
+  "only_stage3_freezing_values_shuffled_within_each_calendar_year": true,
+  "all_other_original_covariates_and_outcomes_held_fixed": true,
+  "fixed_ridge_alpha": 1,
+  "results": {
+    "leave_one_original_bird_out": {
+      "folds": 49,
+      "baseline_MSE": 0.004734243677455496,
+      "augmented_MSE": 0.004399626468961512,
+      "original_gain": 0.00033461720849398396,
+      "null_gain_median": -0.000061005739937827416,
+      "null_5_95": [
+        -0.00014525563283534988,
+        0.00021656272629728266
+      ],
+      "null_shuffles_at_least_as_large_as_original": 1,
+      "exploratory_plus_one_corrected_tail_fraction": 0.02
+    },
+    "leave_one_original_year_out": {
+      "folds": 5,
+      "baseline_MSE": 0.012608861987928585,
+      "augmented_MSE": 0.010500353704119262,
+      "original_gain": 0.0021085082838093235,
+      "null_gain_median": -0.00006671321097058598,
+      "null_5_95": [
+        -0.0010170347293522732,
+        0.0012222339582655182
+      ],
+      "null_shuffles_at_least_as_large_as_original": 1,
+      "exploratory_plus_one_corrected_tail_fraction": 0.02
+    }
+  },
+  "source_ordinal_timing_confounds_not_preserved_by_shuffle": true,
+  "permutation_tail_is_causal_p_value": false,
+  "original_study_weather_feeding_fitness_association_prior_art": true,
+  "independent_new_biological_replication": false,
+  "natural_information_quality_q_identified": false,
+  "actual_predecision_animal_cue_observed": false,
+  "compensation_behavior_causally_identified": false,
+  "downstream_breeding_success_gain_stably_transferred": false,
+  "exact_payoff_waiting_deadline_identified": false,
+  "frozen_V7_original_geographic_q_by_U": "NOT_ESTIMABLE",
+  "action_run": 44530687896,
+  "original_github_artifact_id": 14533148638,
+  "aggregate_artifact_zip_sha256": "1ac4f690f4c3edaae5da963aa8b3e0b0117f52b1952bcaa531ac4d974fca52cc",
+  "aggregate_perm_json_sha256": "e69bd4857a11dfd97ee664f1f6bfc8c36af4a81fcfccf352b80918b109c42bfa",
+  "no_original_animal_ID_export": true,
+  "main_manuscripts_unchanged": true
+}
