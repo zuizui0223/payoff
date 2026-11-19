@@ -620,7 +620,7 @@
     {
       "id": "D7",
       "class": "INDEPENDENT_SOURCE_LINEAGE_POST_PUBLICATION_LAGGED_BEHAVIOR_AND_HELDOUT_PREDICTION",
-      "status": "SOURCE_VERIFIED_EARLY_FREEZING_LAGGED_LINEAR_ASSOCIATION_NOT_SUPPORTED",
+      "status": "SOURCE_VERIFIED_CONDITIONAL_LINEAR_NULL_AND_CALENDAR_MATCHED_PERMUTATION_DOWNGRADE",
       "anchor": "https://github.com/zuizui0223/payoff/pull/409",
       "original_paper": "Schindler et al 2024 Proc R Soc B doi:10.1098/rspb.2023.2016",
       "original_git_blob_sha1": "ca3736a281dfd2465921efc940dd985499c71a4f",
@@ -679,7 +679,7 @@
       "original_V7_goose_q_by_U_fitted": false,
       "animal_ids_or_source_gps_exported": false,
       "no_eBird_occurrence_input": true,
-      "claim": "2024 Greenland goose source can test ordered lagged weather/behavior at bird-year grain, but registered freeze3->feed4 conditional slope is near zero; added early freeze has modest heterogeneous bird/year heldout forecast value. Later behavior does not transfer stably to breeding across bird and year holds. No causal feedback or information deadline identified.",
+      "claim": "The original 2024 weather-to-feeding conditional β is near zero; retrospective early-freeze forecast gains do not stand out from same-date or week-duration matched source shuffles (post-open upper tails 0.35-0.58), reversing the stronger interpretation of an earlier within-year-only 0.02 diagnostic. Fully date-and-duration matched evidence is not estimable (17 original swappable bird-years). Breeding predictions still mixed. No causal bird cue, compensation or information-deadline effect.",
       "year_preserving_postopen_permutation": {
         "design": "Original stage3 freezing fractions reassigned only among bird-years in same original year, 99 shuffles, seed 20261119; original food/weather/date/outcomes unchanged",
         "anchor": "https://github.com/zuizui0223/payoff/pull/409",
@@ -696,7 +696,53 @@
         "truly_randomized_bird_environmental_information": false,
         "permutation_exchanges_source_date_alignment_too": true,
         "causal_p_value": false,
-        "interpretation": "Weather-to-bird-year original matching predicts later feeding better than almost all within-year shuffles, but temporal date/habitat confounding and post-open nonexchangeability remain. Does not override primary weak conditional OLS or prove cue use."
+        "interpretation": "Weather-to-bird-year original matching predicts later feeding better than almost all within-year shuffles, but temporal date/habitat confounding and post-open nonexchangeability remain. Does not override primary weak conditional OLS or prove cue use.",
+        "superseded_scientific_interpretation_by_calendar_matched_check": true,
+        "original_uncorrected_permutation_tail_is_not_robust_to_date_matching": true
+      },
+      "calendar_matched_source_only_permutation": {
+        "anchor": "https://github.com/zuizui0223/payoff/pull/409",
+        "original_publication_source": "Schindler et al 2024 original spring_data.csv, same 107 bird-years not new evidence",
+        "source_SHA1": "ca3736a281dfd2465921efc940dd985499c71a4f",
+        "post_open_design": true,
+        "n_null_shuffles_per_passing_design": 99,
+        "exact_year_and_start_day": {
+          "n_swappable": 48,
+          "n_nonconstant_blocks": 14,
+          "n_years": 5,
+          "observed_bird_CV_gain": 0.00033461720849398396,
+          "observed_year_CV_gain": 0.0021085082838093235,
+          "n_null_bird_ge_observed": 47,
+          "corrected_bird_tail": 0.48,
+          "n_null_year_ge_observed": 57,
+          "corrected_year_tail": 0.58
+        },
+        "year_and_week_and_3day_duration": {
+          "n_swappable": 52,
+          "n_nonconstant_blocks": 11,
+          "n_years": 5,
+          "n_null_bird_ge_observed": 34,
+          "corrected_bird_tail": 0.35,
+          "n_null_year_ge_observed": 46,
+          "corrected_year_tail": 0.47
+        },
+        "exact_start_and_exact_duration": {
+          "n_swappable": 17,
+          "n_nonconstant_blocks": 7,
+          "n_years": 4,
+          "minimum_swappable": 40,
+          "minimum_blocks": 8,
+          "status": "NOT_ESTIMABLE_SOURCE_SUPPORT_FAIL_NO_SHUFFLES"
+        },
+        "original_within_year_0_02_signal_robust_to_calendar_controls": false,
+        "all_107_original_bird_years_fully_exchangeable_under_date_matching": false,
+        "source_outcome_causal_information_q_estimated": false,
+        "source_derived_predictive_information_entirely_due_to_date_proven": false,
+        "policy": "Keep original 0.02 evidence as historical but its special individual cue interpretation downgraded; do not retune this original cohort to search for positive information-use effect.",
+        "github_actions_run": 44537189557,
+        "github_artifact_id": 14537265791,
+        "original_artifact_zip_SHA256": "b59bb249f87fe549f3897d3e1594c4548c928bdbdce54253034bd48b60bb570a",
+        "matched_permutation_json_SHA256": "2962e8353364278a387561604406489f72baae97d11a33948933fea2acf63348"
       }
     }
   ],
