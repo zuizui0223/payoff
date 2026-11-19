@@ -8,7 +8,7 @@ pytest.importorskip("requests")
 
 from scripts.payoff_b_ruppel_figshare_source_gate import (
     _provider_download_url, _delimited_schema, _tabular_candidates,
-    inspect_public_source, MAX_PUBLIC_BYTES,
+    inspect_public_source, MAX_PUBLIC_BYTES, _zip_public_member_manifest,
 )
 
 
@@ -99,3 +99,16 @@ def test_public_api_denial_is_not_a_biological_negative():
     assert result["source_status"]=="SOURCE_METADATA_ACCESS_BLOCKED"
     assert "403" in result["source_hold_reason"]
     assert result["natural_q_wait_D_eff_and_r_t_identified"] is False
+
+
+def test_original_zip_member_inventory_keeps_binary_R_data_distinct_from_no_data():
+    mem=io.BytesIO()
+    with zipfile.ZipFile(mem,"w") as z:
+        z.writestr("analysis.R",b"# source analysis code, not a bird table")
+        z.writestr("original_derived_data.rds",b"fake binary test fixture")
+        z.writestr("manuscript_SI.pdf",b"not opened or parsed")
+    got=_zip_public_member_manifest(mem.getvalue())
+    assert len(got)==3
+    assert {x["source_zip_member_suffix"] for x in got}=={".r",".rds",".pdf"}
+    assert all(x["original_data_bytes_or_row_values_exported"] is False for x in got)
+    assert _tabular_candidates(mem.getvalue(),"source.zip")==[]
