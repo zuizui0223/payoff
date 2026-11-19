@@ -23,6 +23,8 @@ def fake_metrics():
         "original_flight_landing_valid_0_or_1_count":178,
         "original_observed_landing_events":24,
         "original_observed_nonlanding_flights":154,
+        "original_route_onshore_label_count":154,
+        "original_route_offshore_label_count":24,
         "original_flightStart_available":178,
         "original_flightEnd_available":178,
         "original_flightStart_before_end_count":178,
