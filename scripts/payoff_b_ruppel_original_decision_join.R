@@ -51,8 +51,16 @@ weather_start_complete <- complete.cases(
 weather_end_complete <- complete.cases(
     fl[,c("u_end","v_end","c_end")])
 flight_class <- as.character(fl$flightCat)
-n_onshore <- sum(grepl("onshore",flight_class,ignore.case=TRUE),na.rm=TRUE)
-n_offshore <- sum(grepl("offshore",flight_class,ignore.case=TRUE),na.rm=TRUE)
+# Original public RData uses source-authored codes "coasting" and
+# "sea-crossing", not the paper's English onshore/offshore paraphrase.
+if (!all(flight_class %in% c("coasting","sea-crossing"))) {
+  stop("Original author flightCat source labels changed")
+}
+n_onshore <- sum(flight_class=="coasting")
+n_offshore <- sum(flight_class=="sea-crossing")
+if (n_onshore != 154L || n_offshore != 24L) {
+  stop("Published original route totals not faithfully reproduced")
+}
 # Compare event day to departure-start day without attempting to infer
 # which local vs UTC clock is biologically correct.
 individual_event_days <- split(ev$time_abs[
