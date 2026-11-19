@@ -28,6 +28,10 @@ SOURCES = (
  ("Jenkins, D. & Sparks",22,"Aboyne local field observer David Jenkins phenology notes","https://nora.nerc.ac.uk/id/eprint/3392/"),
  ("Ellwood, E.R.",22,"Thoreau, Brewster, Griscom and Corey historical arrival logs to 2007","https://doi.org/10.1525/cond.2010.100006"),
  ("Jones, G.M.",2,"Project FeederWatch, distinct from eBird","https://feederwatch.org/explore/scientific-articles/the-early-bird-gets-earlier-a-phenological-shift-in-migration-timing-of-the-american-robin-turdus-migratorius-in-the-state-of-wisconsin/"),
+ ("Askeyev, O.V.",26,"Kazan/Tatarstan 1988-2008 locally recorded first phenological events","https://doi.org/10.1111/j.1466-8238.2010.00566.x"),
+ ("Nakata, M.",19,"Niigata coastal-forest bird-banding observations from 1989-2008","https://doi.org/10.3838/jjo.60.63"),
+ ("Gunnarsson, T.G.",17,"Laugaras Iceland standardized daily first arrival field observation transect","https://doi.org/10.1080/00063657.2010.526999"),
+ ("Christen, W.",12,"Solothurn Switzerland own constant-effort first-arrival field observation series 1981-2006","https://www.ala-schweiz.ch/images/stories/pdf/ob/2007_104/OrnitholBeob_2007_104_53_Christen.pdf"),
 )
 
 def inventory(d: pd.DataFrame) -> dict:
@@ -62,7 +66,7 @@ def inventory(d: pd.DataFrame) -> dict:
     if (len(candidate),candidate.Study.nunique(),
         len(unknown),unknown.Study.nunique())!=(680,27,97,16):
         raise ValueError("Original 680-row source provenance partition changed")
-    if sum(i["source_effect_rows"] for i in evidence)!=583:
+    if sum(i["source_effect_rows"] for i in evidence)!=657:
         raise ValueError("Published source-origin coverage drift")
     return {
       "as_of":"2026-11-19",
@@ -73,7 +77,7 @@ def inventory(d: pd.DataFrame) -> dict:
       "remaining_after_forced_exclusion_studies":27,
       "studies_with_published_alternative_primary_observation_origin":11,
       "effects_with_published_alternative_primary_observation_origin":583,
-      "fraction_of_remaining_effects_with_origin_documented":583/680,
+      "fraction_of_remaining_effects_with_origin_documented":657/680,
       "studies_still_not_documented":16,
       "effects_still_not_documented":97,
       "source_specific_evidence":evidence,
