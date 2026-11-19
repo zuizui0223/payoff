@@ -679,7 +679,25 @@
       "original_V7_goose_q_by_U_fitted": false,
       "animal_ids_or_source_gps_exported": false,
       "no_eBird_occurrence_input": true,
-      "claim": "2024 Greenland goose source can test ordered lagged weather/behavior at bird-year grain, but registered freeze3->feed4 conditional slope is near zero; added early freeze has modest heterogeneous bird/year heldout forecast value. Later behavior does not transfer stably to breeding across bird and year holds. No causal feedback or information deadline identified."
+      "claim": "2024 Greenland goose source can test ordered lagged weather/behavior at bird-year grain, but registered freeze3->feed4 conditional slope is near zero; added early freeze has modest heterogeneous bird/year heldout forecast value. Later behavior does not transfer stably to breeding across bird and year holds. No causal feedback or information deadline identified.",
+      "year_preserving_postopen_permutation": {
+        "design": "Original stage3 freezing fractions reassigned only among bird-years in same original year, 99 shuffles, seed 20261119; original food/weather/date/outcomes unchanged",
+        "anchor": "https://github.com/zuizui0223/payoff/pull/409",
+        "source_GitHub_run": 44530687896,
+        "original_bird_heldout_freeze_gain_MSE": 0.00033461720849398396,
+        "null_bird_heldout_gain_median": -0.000061005739937827416,
+        "null_bird_heldout_95pct_bound": 0.00021656272629728266,
+        "original_year_heldout_freeze_gain_MSE": 0.0021085082838093235,
+        "null_year_heldout_gain_median": -0.00006671321097058598,
+        "null_year_heldout_95pct_bound": 0.0012222339582655182,
+        "n_permutations_with_gain_at_least_original_bird": 1,
+        "n_permutations_with_gain_at_least_original_year": 1,
+        "corrected_postopen_tail_fraction_both": 0.02,
+        "truly_randomized_bird_environmental_information": false,
+        "permutation_exchanges_source_date_alignment_too": true,
+        "causal_p_value": false,
+        "interpretation": "Weather-to-bird-year original matching predicts later feeding better than almost all within-year shuffles, but temporal date/habitat confounding and post-open nonexchangeability remain. Does not override primary weak conditional OLS or prove cue use."
+      }
     }
   ],
   "next_primary_test": {
