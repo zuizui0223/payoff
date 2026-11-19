@@ -149,6 +149,27 @@ def _delimited_schema(raw:bytes,name:str)->dict:
     }
 
 
+def _zip_public_member_manifest(raw:bytes)->list[dict]:
+    """Provider-source ZIP member filenames/sizes only; do NOT parse PDFs."""
+    try:
+        with zipfile.ZipFile(io.BytesIO(raw)) as z:
+            original = z.infolist()
+            if len(original)>100:
+                raise ValueError("Original ZIP has over 100 components")
+            return [
+                {
+                    "source_zip_member_filename":x.filename,
+                    "source_zip_member_size_bytes":x.file_size,
+                    "source_zip_member_suffix":Path(x.filename).suffix.lower(),
+                    "is_directory":x.is_dir(),
+                    "original_data_bytes_or_row_values_exported":False,
+                }
+                for x in original
+            ]
+    except zipfile.BadZipFile as error:
+        raise ValueError("Original Figshare ZIP has invalid central directory") from error
+
+
 def _tabular_candidates(raw:bytes,name:str)->list[dict]:
     if name.lower().endswith(".zip"):
         try:
@@ -249,6 +270,8 @@ def inspect_public_source(client:requests.Session)->dict:
                     row["downloaded_original_bytes_sha256"]=hashlib.sha256(content).hexdigest()
                     row["downloaded_original_bytes_size"]=len(content)
                     row["source_download_status"]="PUBLIC_ORIGINAL_BYTES_READ"
+                    if name.lower().endswith(".zip"):
+                        row["original_zip_member_metadata_only"]=_zip_public_member_manifest(content)
                     parsed=_tabular_candidates(content,name)
                     for item in parsed:
                         item["source_original_article_id"]=article_id
@@ -261,7 +284,19 @@ def inspect_public_source(client:requests.Session)->dict:
             receipt["article_metadata"].append(entry)
         receipt["n_original_tabular_tables"]=len(receipt["aggregate_tabular_source_schemas"])
         if receipt["n_original_tabular_tables"] == 0:
-            receipt["source_status"]="PUBLISHED_SUPPLEMENT_WITHOUT_ORIGINAL_TABULAR_EVENTS"
+            has_archived_other_formats=any(
+                member["source_zip_member_suffix"] in (
+                    ".rds",".rda",".rdata",".r",".xls",".xlsx",".mat",".h5",".sav"
+                )
+                for paper in receipt["article_metadata"]
+                for file in paper["source_original_files"]
+                for member in file.get("original_zip_member_metadata_only",[])
+            )
+            receipt["source_status"]=(
+                "ORIGINAL_ZIP_NON_TABULAR_FORMATS_REQUIRE_SOURCE_SCHEMA_REVIEW"
+                if has_archived_other_formats
+                else "PUBLISHED_SUPPLEMENT_WITHOUT_ORIGINAL_TABULAR_EVENTS"
+            )
         else:
             receipt["source_status"]="ORIGINAL_TABULAR_SCHEMA_FOUND_ID_JOIN_UNVERIFIED"
     except (SourceHold,requests.RequestException,ValueError,KeyError,
