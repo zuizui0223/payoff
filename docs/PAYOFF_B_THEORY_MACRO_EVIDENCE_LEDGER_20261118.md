@@ -184,3 +184,17 @@ Under original inverse-SE² source weights, study fixed intercepts, and Study×S
 Source code and tests: `scripts/payoff_b_e6_within_study_distance.py` and `tests/test_payoff_b_e6_within_study_distance.py` in draft #405, with full numeric receipts at `docs/PAYOFF_B_E6_WITHIN_STUDY_RESULT_20261119.md`; the dedicated original SHA256-pinned GitHub Actions [run 44484580314](https://github.com/zuizui0223/payoff/actions/runs/44484580314) completed **SUCCESS**, artifact **14509328403** independently opened and checked.
 
 **Scientific limit unchanged:** within-study fixed effects remove arbitrary *study-level intercept* differences, but migration distance can remain associated with species physiology/photoperiod, phenological endpoints, and spatial climate measurement within a study. No direct precommitment cue accessibility, Bayesian information value, downstream correction capacity, interaction partner timing, fitness or natural hysteresis is inferred. The original data/source-tier panel is **not fully eBird-free certified**. Source-year geospatial [V7 goose q×U](https://github.com/zuizui0223/payoff/pull/400) remains `NOT_ESTIMABLE` and the canonical manuscript is frozen.
+
+
+## 2026-11-19: new independent Bylot breeding/climate data-source feasibility — outcome held
+
+[Draft PR #406](https://github.com/zuizui0223/payoff/pull/406) verifies original official 2026 **Nordicana D41** nesting-summary source metadata, **Nordicana D2** Bylot Lac du camp 1993–2023 daily mean air temperature metadata, and original Movebank study 1442516400 (2019–2023 greater snow goose GPS *study summary only*). It also checks PAYOFF's **existing** Reséndiz-Infante & Gauthier 2020 two-sided breeding-fitness source anchor, which already used **1991–2015** Bylot data; those years are *not* new independently untested fitness evidence.
+
+Without viewing any new biological outcome, the fixed source calendar crosswalk gives:
+- 1994–2015: 22 nominal nest-summary × BYLCAMP May 1–15 climate years, mostly already overlapping the 2020 published reproductive-timing work;
+- **2016, 2017, 2018, 2019, 2022, 2023**: at most **6** genuinely post-2015 climate × nesting-summary calendar years, below a frozen **≥10 year** credible out-of-year transfer gate;
+- 2019 only: nominal GPS calendar overlap with Nordicana **individual nest visit data**; 2019/2022/2023: nominal GPS overlap with Nest **summaries**, which have no verified individual bird-ID crosswalk.
+
+Original Nordicana ZIP downloads require separate acceptance of source terms and have **not** been obtained by this work; no undocumented timestamps, source raw climate, nest IDs, behavior or demographic fitness are reconstructed. GPS owner permissions are also not established. The code and tests in PR #406 therefore correctly report **OUTYEAR_GATE_FAIL (maximum 6 years)** and **GPS_TO_NEST_INDIVIDUAL_JOIN_NOT_IDENTIFIED**. This is a new **source/estimability finding**, not a negative biological coefficient. A fresh post-2015 phenology–weather model is **not** fitted and the original 2015–2020 biology is not presented as new independent evidence.
+
+**Recommendation:** retain E6's source-verified *prior published* distance gradient and exact theory unchanged; do not reopen V7 q×U. A direct test of information/actionability/fitness needs a source-provenance-cleared individual trajectory and independent future-state / reproductive observation with genuine identifiers, or a distinctly designed intervention. Adding more same-source temperature slopes or six nominal years is not sufficient.
