@@ -134,7 +134,9 @@ def _fetch_json(client, url):
 def _records(obj):
     """Public Dryad HAL envelopes can use varying embedded collection labels."""
     if isinstance(obj,dict):
-        if "id" in obj and any(k in obj for k in ("path","filename","name")):
+        if ("id" in obj or "_links" in obj) and any(
+            k in obj for k in ("path","filename","name")
+        ):
             yield obj
         for v in obj.values():
             yield from _records(v)
@@ -151,6 +153,17 @@ def _file_id(item):
     v=item.get("id")
     if isinstance(v,(int,str)) and str(v).isdigit():
         return int(v)
+    # Official Dryad v2 files HAL records in this published dataset omit
+    # scalar "id" and expose the file identifier only in _links.self.href.
+    # Parse that provider path; never synthesize an ID from filename/order.
+    links=item.get("_links",{})
+    if isinstance(links,dict):
+        for row in links.values():
+            if isinstance(row,dict):
+                href=str(row.get("href",""))
+                match=re.search(r"/(?:files|versions)/(\d+)(?:[/?#]|$)",href)
+                if match:
+                    return int(match.group(1))
     return None
 
 
