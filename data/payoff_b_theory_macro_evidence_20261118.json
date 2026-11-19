@@ -487,6 +487,44 @@
       "causal_information_access_identified": false,
       "prospective_new_data_replication": false,
       "result_interpretation": "After original study fixed intercepts the published Usui migration-distance temperature response gradient remains positive in 13 studies with within-study class variation. Still no actual predeparture cue, information deadline, downstream recourse or interactor fitness measured."
+    },
+    {
+      "id": "F8",
+      "class": "NEW_INDEPENDENT_SOURCE_FEASIBILITY_NOT_BIOLOGICAL_FIT",
+      "status": "BYLOT_2026_NESTING_X_CLIMATE_POST2015_MAX_6_YEARS_OUTYEAR_GATE_FAIL",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/406",
+      "source_1": "Nordicana D41 v1.2 DOI 10.5885/45570CE-2D00DCA728074FA7; 1989-2025 nest summaries; missing 2020/21/24; original nest visits end 2019",
+      "source_2": "Nordicana D2 v1.13.0 DOI 10.5885/45039SL-EE76C1BDAADC4890; BYLCAMP mean air temperature Aug1993-Jul2023",
+      "source_3": "Movebank study 1442516400 greater snow goose migration; 2019-2023 public study summary only, no original GPS permission or nest join verified",
+      "historical_climate_vs_breeding_years": 22,
+      "historical_years": [
+        1994,
+        2015
+      ],
+      "nominal_post2015_possible_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2022,
+        2023
+      ],
+      "nominal_post2015_year_ceiling": 6,
+      "frozen_min_independent_outyear_years": 10,
+      "individual_nest_visits_x_GPS_year_overlap": [
+        2019
+      ],
+      "nest_summary_x_GPS_nominal_overlap": [
+        2019,
+        2022,
+        2023
+      ],
+      "original_nest_and_climate_bytes_obtained": false,
+      "source_terms_accepted_by_assistant": false,
+      "individual_cue_fitness_join_identified": false,
+      "new_biological_effect_fitted": false,
+      "prior_fitness_1991_2015_reported_in_2020": true,
+      "claim": "Independent Nest D41 and climate D2 metadata yield max six post-2015 joint years, below frozen >=10-year out-of-period feasibility gate; single-year nest-visit/GPS overlap does not license an animal-level join. Existing Bylot fitness curve is already published prior art."
     }
   ],
   "next_primary_test": {
