@@ -1,6 +1,7 @@
 """Synthetic source-design tests only; no original Usui slope is modelled."""
-import pandas as pd
 import pytest
+pd = pytest.importorskip("pandas", reason="Optional numerical dependency; dedicated E6 workflow tests with pandas")
+pytest.importorskip("numpy")
 
 from scripts.payoff_b_e6_temperature_location_support import (
     design_support, exact_e6_selection
