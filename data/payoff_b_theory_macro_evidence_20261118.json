@@ -542,6 +542,48 @@
       "exact_antiphase_migration_theorem_unaffected": true,
       "new_empirical_reanalysis_completed": false,
       "claim": "Nov 2026 JAE work preempts simple more-stopovers → spring green-up tracking novelty; July 2026 movement ecology work preempts individual variability tracking headline. PAYOFF novelty must be framed as still prospective information availability × actionability × interaction matching, not these generic published effects."
+    },
+    {
+      "id": "C1",
+      "class": "INDEPENDENT_SOURCE_CANDIDATE_BIRD_GPS_NEST_SUCCESS_NOT_INFORMATION",
+      "status": "PUBLISHED_LINKED_INDIVIDUAL_MOVEMENT_FITNESS_PROXY_AVAILABLE_SCHEMA_VISIBLE_CUE_MISSING",
+      "source": "Hanzelka et al. 2026, DOI 10.1002/jav.03665",
+      "dataset_DOI": "10.5061/dryad.31zcrjf22",
+      "archive_published": "2026-10-01",
+      "original_source_site": "https://datadryad.org/dataset/doi%3A10.5061/dryad.31zcrjf22",
+      "original_species": "Numenius arquata Eurasian Curlew",
+      "source_n_GPS_individuals": 124,
+      "source_n_habitat_periods": 233,
+      "source_years": [
+        2016,
+        2025
+      ],
+      "source_derived_table": "dt_hab_Curlew.csv inside Curlew_COE_habitat.zip (590.99MB)",
+      "documented_columns": [
+        "Bird_ID",
+        "ID_seas",
+        "Nest_succ",
+        "Prebr",
+        "Dist",
+        "Sex",
+        "Non_gr",
+        "Br_gr",
+        "st_grass",
+        "st_wetland",
+        "non_mudflats"
+      ],
+      "documented_outcome_definition": "Nest_succ indicates incubated nest success binary; not long-term offspring survival",
+      "source_gps_breeding_coordinates": "X_br and Y_br redacted for sensitivity",
+      "individual_level_movement_to_nest_fitness_link_declared_in_source_README": true,
+      "original_zip_bytes_downloaded_in_current_analysis": false,
+      "source_SHA256_verified": false,
+      "original_article_habitat_use_nest_success_association_already_published": true,
+      "precommitment_environmental_cue_observation_or_timestamp_recorded_in_derived_table": false,
+      "daily_individual_climate_source_mapping_verified": false,
+      "observational_breeding_preparation_period_Prebr_is_direct_actionability": false,
+      "direct_payoff_information_deadline_identified": false,
+      "source_access_rule": "Original 590.99MB Dryad ZIP and source rights/schema must be verified before row-level fitting; do not guess sensitive GPS coordinates or treat Prebr as causal D_eff.",
+      "claim": "A new public 2026 Eurasian Curlew data package contains an original individual ID linked to movement-derived habitat and binary nest success, closer to a movement-to-fitness outcome. However the author-published habitat effect is prior art, coordinates are redacted, and an independent predecision cue and actionability remain missing. Screening candidate only."
     }
   ],
   "next_primary_test": {
