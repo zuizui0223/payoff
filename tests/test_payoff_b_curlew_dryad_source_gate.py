@@ -97,7 +97,7 @@ class FakeMetadataClient:
             headers={"Content-Type":"application/json"}
             def __init__(self,url):
                 if url.endswith("/versions/82/files"):
-                    self.content=b'{"_embedded":{"stash:files":[{"id":34,"path":"Curlew_COE_habitat.zip","size":590990000},{"id":35,"path":"README.md","size":14320}]}}'
+                    self.content=b'{"_embedded":{"stash:files":[{"_links":{"self":{"href":"https://datadryad.org/api/v2/files/34"}},"path":"Curlew_COE_habitat.zip","size":590990000},{"_links":{"self":{"href":"https://datadryad.org/api/v2/files/35"}},"path":"README.md","size":14320}]}}'
                 elif url.endswith("/versions"):
                     self.content=b'{"_embedded":{"stash:versions":[{"id":82,"versionNumber":1}]}}'
                 else:
