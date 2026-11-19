@@ -1,0 +1,43 @@
+name: PAYOFF-B Ruppel 2023 original Figshare source admission
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-ruppel-sequential-decisions-source-20261119
+    paths:
+      - '.github/workflows/payoff-b-ruppel-sequential-source.yml'
+      - 'scripts/payoff_b_ruppel_figshare_source_gate.py'
+      - 'tests/test_payoff_b_ruppel_figshare_source_gate.py'
+      - 'docs/PAYOFF_B_RUPPEL_SEQUENTIAL_SOURCE_CONTRACT_20261119.md'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  original-figshare-public-source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install bounded original-data reader dependencies
+        run: python -m pip install --disable-pip-version-check requests pytest
+      - name: Validate schema / ownership / HTTP hold without model fitting
+        run: python -m pytest -q tests/test_payoff_b_ruppel_figshare_source_gate.py
+      - name: Inspect only provider original Figshare public source metadata and bounded small tables
+        run: |
+          python -m scripts.payoff_b_ruppel_figshare_source_gate \
+            --output outputs/payoff_b_ruppel_figshare_source_receipt.json
+      - name: Save public metadata and aggregate-only source feasibility, no bird rows
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-ruppel-figshare-source-only-20261119
+          path: outputs/payoff_b_ruppel_figshare_source_receipt.json
+          if-no-files-found: warn
