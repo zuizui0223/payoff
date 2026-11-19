@@ -2,6 +2,13 @@ name: PAYOFF-B E6 original temperature-location support only
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/payoff-b-e6-temp-location-support.yml'
+      - 'scripts/payoff_b_e6_temperature_location_support.py'
+      - 'tests/test_payoff_b_e6_temperature_location_support.py'
   push:
     branches:
       - analysis/payoff-b-e6-temp-location-support-20261119
