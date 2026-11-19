@@ -1,0 +1,55 @@
+{
+  "as_of": "2026-11-19",
+  "status": "KNOWN_EBIRD_STUDY_EXCLUDED_FULL_REMAINING_SOURCE_AUDIT_PENDING",
+  "analysis_class": "post_open_forced_source_provenance_sensitivity_not_independent_effect_discovery",
+  "source": "Usui et al. 2017 doi:10.1111/1365-2656.12612; Zenodo 4970634",
+  "original_source_sha256": "68816f6cbfccbb9b47b45be0df49f077db914c8e43e567d0ed2cac9bbafde56c",
+  "source_workflow_run": 36383988920,
+  "source_artifact_id": 10953792024,
+  "archived_artifact_zip_sha256": "443cab62531d9b633aa6ee67da010fa66b6c230ef87e919d697269e77a7373f0",
+  "derived_944_row_CSV_sha256": "817a2d2d18931944103283c93e4d9bf80568906a21a92369ee168e4f8f203085",
+  "original_E6_before_source_policy_correction": {
+    "n_effects": 944,
+    "n_studies": 28,
+    "n_species": 279,
+    "long_minus_short_days_per_C": 0.42147637990921316,
+    "SE": 0.1462843406216508,
+    "CI95": [
+      0.12132570573851353,
+      0.7216270540799128
+    ],
+    "p": 0.007671852672533249,
+    "df": 27
+  },
+  "verified_eBird_study": {
+    "study": "Hurlbert & Liang 2012",
+    "article_DOI": "10.1371/journal.pone.0031662",
+    "original_article_uses_eBird_checklists": true,
+    "n_effects_excluded": 264,
+    "short": 74,
+    "long": 190,
+    "study_species": 18,
+    "exclusion_reason": "published source explicitly uses eBird; source policy independent of result sign"
+  },
+  "after_excluding_one_known_eBird_study": {
+    "n_effects": 680,
+    "n_studies": 27,
+    "n_species": 279,
+    "long_minus_short_days_per_C": 0.6083890673642456,
+    "SE": 0.11995552728869091,
+    "CI95": [
+      0.36181694969441286,
+      0.8549611850340784
+    ],
+    "p": 0.00002780855298266601,
+    "df": 26
+  },
+  "audit_boundary": {
+    "other_27_studies_completely_screened_for_eBird": false,
+    "verified_eBird_free_panel": false,
+    "published_original_effect_prior_art": true,
+    "no_direct_information_distance_causal_identification": true,
+    "no_v7_q_by_U_effect_identified": true,
+    "original_E6_coefficient_reproduced_with_numerical_tolerance_1e_minus_8": true
+  }
+}
