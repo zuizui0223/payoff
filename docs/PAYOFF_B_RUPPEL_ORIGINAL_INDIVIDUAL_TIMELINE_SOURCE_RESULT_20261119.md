@@ -28,7 +28,7 @@ This is **good source support for constructing individual, time-ordered original
 
 The original flight object includes fields `flightStart`, `flightEnd`, `flightCat` and `landing`, start/end observed wind/cloud, and original departure event table includes daily `time_abs`, `status`, `u/v`, `c` and related weather fields. The native source schema and derived count ledger are delivered from GitHub Actions, with no redistribution of raw movement data.
 
-**Caution on route labels:** the simplistic substring search for literal English `onshore` or `offshore` in raw `flightCat` returned zero; this does *not* imply no source route choices. The original author used compact route codes. Preserve the paper's **154 coastal/onshore vs 24 offshore** prior-art counts separately until the original `Rcode.Rmd` recoding is examined; do not guess route codes or recode outcomes. The subsequent source-only script adds only the original code frequency *aggregates*, not raw individual labels.
+**Route labels resolved from original source, without inspecting animal outcomes:** the original public RData `flightCat` uses **`coasting` (154 first flights) and `sea-crossing` (24 first flights)**, not literal `onshore`/`offshore`. The initial English substring filter returned zero despite genuine route records. A follow-up published-aggregate category audit recovered the exact original codes, and the native source checker now **requires 154/24** for a faithful original route summary. These categories match the original paper's reported coastal and offshore counts; no source route identity or timing endpoint was changed.
 
 ## What is and is not newly established for PAYOFF
 
