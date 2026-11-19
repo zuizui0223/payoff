@@ -1,0 +1,60 @@
+{
+  "as_of": "2026-11-19",
+  "project": "PAYOFF-B",
+  "original_bird_source": "Rüppel et al 2023 RSOS 10:221420 doi 10.1098/rsos.221420, Figshare 10.6084/m9.figshare.c.6403996",
+  "bird_source_aggregate": {
+    "bird_count": 178,
+    "bird_day_risk_rows": 1783,
+    "first_flights": 178,
+    "landings": 24,
+    "original_event_flight_ID_match": 178,
+    "all_bird_dates_time_order_source_verified": false
+  },
+  "external_forecast_archive": {
+    "provider": "NSF NCAR GDEX (NOAA/NCEP operational forecast origin)",
+    "dataset_id": "d084001",
+    "DOI": "10.5065/D65D8PWK",
+    "provider_page": "https://gdex.ucar.edu/datasets/d084001/",
+    "custom_subset_page": "https://gdex.ucar.edu/datasets/d084001/dataaccess/",
+    "published_historical_years_covered": [
+      2019,
+      2020,
+      2021
+    ],
+    "model": "operational GFS historical 0.25-degree forecast (GRIB2)",
+    "nominal_initializations_UTC_hours": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "possible_lead_hours": "3-hourly to 240 h, 12-hourly thereafter; check operational source and requested parameter",
+    "source_custom_subset_requires_login": true,
+    "user_login_or_terms_accepted": false,
+    "subset_request_performed": false,
+    "original_operational_GRIB2_bytes_fetched": false,
+    "original_file_sha256_checked": false,
+    "exact_requested_u10_v10_cloud_cover_fields_confirmed_in_original_GRIB2": false,
+    "actual_source_issue_timestamp_verified": false,
+    "original_forecast_model_version_change_audited": false
+  },
+  "chronology_gate": {
+    "original_decision_time_requires_verified_bird_record": true,
+    "forecast_issue_strictly_at_least_one_hour_before_bird_decision": true,
+    "weather_target_valid_time_after_bird_decision": true,
+    "forecast_lead_positive": true,
+    "target_hours_after_decision_primary": 6,
+    "target_alignment_tolerance_hours": 1.5,
+    "sensitivities_target_hours_after_decision": [
+      3,
+      12
+    ],
+    "reanalysis_nowcast_can_replace_operational_forecast": false,
+    "forecast_accessibility_to_animal_measured": false,
+    "bird_future_forecast_cue_quality_q_fitted": false
+  },
+  "status": "PROVIDER_METADATA_2019_2021_AVAILABLE_SUBSET_LOGIN_REQUIRED_FORECAST_BYTES_NOT_ADMITTED",
+  "fit_status": "NO_NEW_ANIMAL_CUE_OR_LANDING_EFFECT_FITTED",
+  "scientific_limit": "Forecast issued by a model is potentially available externally, not evidence each bird accessed it or that predictive quality changed its strategy.",
+  "source_rights": "No login, data terms acceptance or large original GRIB download performed; no eBird/TinyFish used."
+}
