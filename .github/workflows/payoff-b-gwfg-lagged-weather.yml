@@ -9,6 +9,9 @@ on:
       - '.github/workflows/payoff-b-gwfg-lagged-weather.yml'
       - 'scripts/payoff_b_gwfg_lagged_weather_to_feeding.py'
       - 'tests/test_payoff_b_gwfg_lagged_weather_to_feeding.py'
+      - 'scripts/payoff_b_gwfg_within_year_freeze_permutation.py'
+      - 'tests/test_payoff_b_gwfg_within_year_freeze_permutation.py'
+      - 'docs/PAYOFF_B_GWFG_WITHIN_YEAR_FREEZE_PERMUTATION_FREEZE_20261119.md'
       - 'docs/PAYOFF_B_GWFG_STAGE3_TO_STAGE4_FREEZE_20261119.md'
   push:
     branches:
@@ -17,6 +20,9 @@ on:
       - '.github/workflows/payoff-b-gwfg-lagged-weather.yml'
       - 'scripts/payoff_b_gwfg_lagged_weather_to_feeding.py'
       - 'tests/test_payoff_b_gwfg_lagged_weather_to_feeding.py'
+      - 'scripts/payoff_b_gwfg_within_year_freeze_permutation.py'
+      - 'tests/test_payoff_b_gwfg_within_year_freeze_permutation.py'
+      - 'docs/PAYOFF_B_GWFG_WITHIN_YEAR_FREEZE_PERMUTATION_FREEZE_20261119.md'
       - 'docs/PAYOFF_B_GWFG_STAGE3_TO_STAGE4_FREEZE_20261119.md'
 
 permissions:
@@ -49,15 +55,22 @@ jobs:
           sha256sum "$PAYOFF_GWFG_2024_ORIGINAL_SPRING_CSV"
       - name: Original source grain tests and temporal-order safeguards
         run: |
-          python -m pytest -q tests/test_payoff_b_gwfg_lagged_weather_to_feeding.py
+          python -m pytest -q tests/test_payoff_b_gwfg_lagged_weather_to_feeding.py tests/test_payoff_b_gwfg_within_year_freeze_permutation.py
       - name: Fit frozen post-publication stage-lag and independent holdout diagnostics
         run: |
           python -m scripts.payoff_b_gwfg_lagged_weather_to_feeding \
             --source "$PAYOFF_GWFG_2024_ORIGINAL_SPRING_CSV" \
             --output outputs/gwfg_stage_weather/result.json
+      - name: Post-open within-year weather assignment negative-control
+        run: |
+          python -m scripts.payoff_b_gwfg_within_year_freeze_permutation \
+            --source "$PAYOFF_GWFG_2024_ORIGINAL_SPRING_CSV" \
+            --output outputs/gwfg_stage_weather/within_year_permutation.json
       - name: Upload ONLY derived aggregate receipts, not raw bird/year source
         uses: actions/upload-artifact@v4
         with:
           name: payoff-b-gwfg-lagged-stage3-freeze-20261119
-          path: outputs/gwfg_stage_weather/result.json
+          path: |
+            outputs/gwfg_stage_weather/result.json
+            outputs/gwfg_stage_weather/within_year_permutation.json
           if-no-files-found: error
