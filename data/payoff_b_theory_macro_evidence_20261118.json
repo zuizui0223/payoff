@@ -748,7 +748,7 @@
     {
       "id": "C2",
       "class": "INDEPENDENT_PUBLISHED_SOURCE_MEASUREMENT_FOR_SEQUENTIAL_MIGRATORY_DECISIONS_PRIOR_ART",
-      "status": "ORIGINAL_RDATA_SHA_AND_178_BIRD_AT_RISK_TO_FLIGHT_LANDING_JOIN_VERIFIED_NO_NEW_FIT",
+      "status": "ORIGINAL_RDATA_LINK_VERIFIED_BUT_ROUTE_LANDING_MODIFIER_FAILS_FROZEN_SUPPORT",
       "source_original": "Rüppel et al. 2023 Royal Society Open Science DOI 10.1098/rsos.221420",
       "source_figshare": "10.6084/m9.figshare.c.6403996",
       "anchor": "https://github.com/zuizui0223/payoff/pull/410",
@@ -804,7 +804,57 @@
         "biological_information_cost_or_fitness_fitted": false,
         "source_gate": "docs/PAYOFF_B_RUPPEL_GFS_ISSUE_TIME_SOURCE_GATE_20261119.md",
         "status": "PROVIDER_METADATA_SUPPORTED_AUTHENTICATED_SUBSET_NOT_RETRIEVED"
-      }
+      },
+      "original_route_landing_cross_tab": {
+        "coasting": {
+          "landing": 21,
+          "nonlanding": 133,
+          "n": 154
+        },
+        "sea-crossing": {
+          "landing": 3,
+          "nonlanding": 21,
+          "n": 24
+        },
+        "observed_sea_crossing_and_landing": 3,
+        "predeclared_min_each_route_landing_and_nonlanding": 5,
+        "predeclared_required_sea_landing_overlap_range": [
+          5,
+          19
+        ],
+        "source_gating_status": "ROUTE_LANDING_MODIFIER_NOT_ESTIMABLE_UNDER_FROZEN_SUPPORT",
+        "original_years": [
+          {
+            "year": 2019,
+            "flights": 48,
+            "landings": 8,
+            "sea": 3
+          },
+          {
+            "year": 2020,
+            "flights": 68,
+            "landings": 11,
+            "sea": 9
+          },
+          {
+            "year": 2021,
+            "flights": 62,
+            "landings": 5,
+            "sea": 12
+          }
+        ],
+        "original_taxon_sea_flights": {
+          "Garden Warbler": 15,
+          "Gr. Whitethroat": 9,
+          "Sedge Warbler": 0
+        }
+      },
+      "original_flight_end_weather_is_an_issue_time_forecast": false,
+      "GFS_issued_archive_metadata_verified_but_original_forecast_bytes_unavailable": true,
+      "source_new_fitness_or_route_recourse_coefficient_fitted": false,
+      "source_cross_tab_Github_run": 44546509558,
+      "source_cross_tab_artifact_SHA256": "0eb07b73b93d3487f350aca93ff26c4ac7c7556022f23b41b769e741d4970633",
+      "claim": "Original 178 songbirds have verified linked 1,783 at-risk departure days and 178 first flights, but the source 2×2 route×landing cross-tab has only 3 sea-crossing landings among 24 sea flights, below the frozen minimum 5. One of three songbird taxa has no sea crossings. An independent route×landing recourse interaction is NOT_ESTIMABLE in this published dataset, even before adding issue-time GFS forecasts. No information-deadline causal effect, receiver-detection correction or fitness outcome is identified."
     }
   ],
   "next_primary_test": {
