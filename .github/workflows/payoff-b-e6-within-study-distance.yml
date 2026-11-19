@@ -1,0 +1,61 @@
+name: PAYOFF-B E6 within-study source-provenance robustness
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-e6-within-study-contrast-20261119
+    paths:
+      - '.github/workflows/payoff-b-e6-within-study-distance.yml'
+      - 'docs/PAYOFF_B_E6_WITHIN_STUDY_FIXED_EFFECT_FREEZE_20261119.md'
+      - 'scripts/payoff_b_e6_within_study_distance.py'
+      - 'tests/test_payoff_b_e6_within_study_distance.py'
+  pull_request:
+    branches:
+      - analysis/payoff-b-e6-ebird-provenance-sensitivity-20261119
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  original-published-source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAYOFF_E6_ARCHIVED_ARTIFACT_ZIP: outputs/e6_within_study/original_E6_artifact.zip
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact numerical audit dependencies
+        run: python -m pip install --disable-pip-version-check numpy pandas scipy requests pytest
+      - name: Reacquire original frozen 2026-09-28 E6 result artifact (no raw eBird)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/e6_within_study
+          curl -fLsS --retry 4 --retry-all-errors \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/10953792024/zip" \
+            -o "$PAYOFF_E6_ARCHIVED_ARTIFACT_ZIP"
+          printf '%s  %s\n' \
+            '443cab62531d9b633aa6ee67da010fa66b6c230ef87e919d697269e77a7373f0' \
+            "$PAYOFF_E6_ARCHIVED_ARTIFACT_ZIP" | sha256sum -c -
+      - name: Frozen source provenance / study rank / clustered fixed-effects tests
+        run: |
+          python -m pytest -q tests/test_payoff_b_e6_within_study_distance.py
+      - name: Execute frozen post-open within-study study-FE robustness
+        run: |
+          python -m scripts.payoff_b_e6_within_study_distance \
+            --artifact-zip "$PAYOFF_E6_ARCHIVED_ARTIFACT_ZIP" \
+            --output outputs/e6_within_study/result.json
+      - name: Upload only derived fixed-effect and per-study contrast receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-e6-study-fe-source-robustness-20261119
+          path: outputs/e6_within_study/result.json
+          if-no-files-found: error
