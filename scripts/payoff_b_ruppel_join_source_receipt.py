@@ -82,6 +82,13 @@ def summarize(path:Path)->dict:
         d["original_flight_landing_missing_or_invalid_count"]
     ):
         raise ValueError("Landing status counts inconsistent")
+    if (d["original_route_onshore_label_count"]+
+        d["original_route_offshore_label_count"]+
+        d["original_route_label_missing_count"] != d["original_flight_rows"]):
+        raise ValueError("Author's coasting/sea-crossing route source totals inconsistent")
+    if (d["original_route_onshore_label_count"],
+        d["original_route_offshore_label_count"]) != (154, 24):
+        raise ValueError("Original published route category counts drifted")
     if d["original_event_ID_count"] != (
         d["original_ID_intersection_count"]+
         d["original_event_only_ID_count"]
