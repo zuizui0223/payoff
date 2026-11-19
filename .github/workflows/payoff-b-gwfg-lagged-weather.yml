@@ -1,0 +1,63 @@
+name: PAYOFF-B Greenland goose lagged weather-to-behavior audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/payoff-b-gwfg-lagged-weather.yml'
+      - 'scripts/payoff_b_gwfg_lagged_weather_to_feeding.py'
+      - 'tests/test_payoff_b_gwfg_lagged_weather_to_feeding.py'
+      - 'docs/PAYOFF_B_GWFG_STAGE3_TO_STAGE4_FREEZE_20261119.md'
+  push:
+    branches:
+      - analysis/payoff-b-greenland-goose-lagged-weather-20261119
+    paths:
+      - '.github/workflows/payoff-b-gwfg-lagged-weather.yml'
+      - 'scripts/payoff_b_gwfg_lagged_weather_to_feeding.py'
+      - 'tests/test_payoff_b_gwfg_lagged_weather_to_feeding.py'
+      - 'docs/PAYOFF_B_GWFG_STAGE3_TO_STAGE4_FREEZE_20261119.md'
+
+permissions:
+  contents: read
+
+jobs:
+  source-hashed-staged-behavior:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PAYOFF_GWFG_2024_ORIGINAL_SPRING_CSV: outputs/gwfg_stage_weather/original_spring_2024.csv
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install original-source numerical dependencies
+        run: |
+          python -m pip install --disable-pip-version-check numpy pandas scipy statsmodels scikit-learn requests pytest
+      - name: Retrieve ORIGINAL publicly shared 2024 source rows and validate Git blob hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/gwfg_stage_weather
+          curl -fLsS --retry 4 --retry-all-errors \
+            'https://raw.githubusercontent.com/aschindler23/Schindler_etal_2024_ProcB/main/spring_data.csv' \
+            -o "$PAYOFF_GWFG_2024_ORIGINAL_SPRING_CSV"
+          echo 'Expected original source git blob: ca3736a281dfd2465921efc940dd985499c71a4f'
+          test "$(git hash-object "$PAYOFF_GWFG_2024_ORIGINAL_SPRING_CSV")" = 'ca3736a281dfd2465921efc940dd985499c71a4f'
+          sha256sum "$PAYOFF_GWFG_2024_ORIGINAL_SPRING_CSV"
+      - name: Original source grain tests and temporal-order safeguards
+        run: |
+          python -m pytest -q tests/test_payoff_b_gwfg_lagged_weather_to_feeding.py
+      - name: Fit frozen post-publication stage-lag and independent holdout diagnostics
+        run: |
+          python -m scripts.payoff_b_gwfg_lagged_weather_to_feeding \
+            --source "$PAYOFF_GWFG_2024_ORIGINAL_SPRING_CSV" \
+            --output outputs/gwfg_stage_weather/result.json
+      - name: Upload ONLY derived aggregate receipts, not raw bird/year source
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-gwfg-lagged-stage3-freeze-20261119
+          path: outputs/gwfg_stage_weather/result.json
+          if-no-files-found: error
