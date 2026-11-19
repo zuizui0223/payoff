@@ -1,0 +1,58 @@
+name: PAYOFF-B E6 known eBird-source exclusion sensitivity
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/payoff-b-e6-known-ebird-exclusion.yml'
+      - 'scripts/payoff_b_e6_known_ebird_exclusion.py'
+      - 'tests/test_payoff_b_e6_known_ebird_exclusion.py'
+      - 'docs/PAYOFF_B_E6_KNOWN_EBIRD_SOURCE_SENSITIVITY_20261119.md'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  source-provenance-sensitivity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install source re-fit dependencies
+        run: python -m pip install --disable-pip-version-check numpy pandas scipy requests pytest
+      - name: Re-download EXACT frozen E6 analysis artifact (not raw eBird)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/e6_known_ebird_correction
+          curl -fLsS --retry 4 --retry-all-errors \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/10953792024/zip" \
+            -o outputs/e6_known_ebird_correction/original_E6_artifact.zip
+          printf '%s  %s\n' \
+            '443cab62531d9b633aa6ee67da010fa66b6c230ef87e919d697269e77a7373f0' \
+            'outputs/e6_known_ebird_correction/original_E6_artifact.zip' | sha256sum -c -
+      - name: Check prior-published model and forced noncompliant-source exclusion
+        shell: bash
+        run: |
+          set -euo pipefail
+          PAYOFF_E6_ARCHIVED_ARTIFACT_ZIP=outputs/e6_known_ebird_correction/original_E6_artifact.zip \
+            python -m pytest -q tests/test_payoff_b_e6_known_ebird_exclusion.py
+          python -m scripts.payoff_b_e6_known_ebird_exclusion \
+            --artifact-zip outputs/e6_known_ebird_correction/original_E6_artifact.zip \
+            --output outputs/e6_known_ebird_correction/source_policy_receipt.json
+      - name: Publish ONLY derived source-policy numerical receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-e6-known-ebird-exclusion-20261119
+          path: outputs/e6_known_ebird_correction/source_policy_receipt.json
+          if-no-files-found: error
