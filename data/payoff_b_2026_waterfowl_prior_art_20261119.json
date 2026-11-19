@@ -1,0 +1,70 @@
+{
+  "audit_date": "2026-11-19",
+  "audit_status": "PRIMARY_PUBLISHED_SOURCE_PRIOR_ART_NOT_NEW_PAYOFF_EMPIRICAL_EFFECT",
+  "canonical_papers": [
+    {
+      "source_id": "Liu2026_JAE_stopovers",
+      "citation": "Liu C, van Bodegom PM, Xu F, Gong P, Lei G, Lei J, Si Y. 2026. More stopovers facilitate migratory waterfowl tracking shifting vegetation green-up. Journal of Animal Ecology.",
+      "doi": "10.1111/1365-2656.70395",
+      "first_published": "2026-11-05",
+      "first_published_source": "https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2656.70395?af=R",
+      "pmid": 42989429,
+      "n_spring_migration_paths": 220,
+      "n_species": 5,
+      "source_tracking_year_range": [
+        2015,
+        2023
+      ],
+      "source_temporal_data": "GPS high-resolution bird tracks plus MODIS remotely sensed spring green-up",
+      "published_result": "More stopovers associated with stronger phenological sensitivity / closer alignment with breeding-area green-up",
+      "raw_gps_source_status": "Movebank tracking data shared on request; raw rights not automatically granted",
+      "source_code_and_derived_dataset": "https://doi.org/10.5061/dryad.pk0p2nh4p",
+      "raw_gps_and_derived_data_reopened_in_payoff": false
+    },
+    {
+      "source_id": "Liu2026_MovementEcology_individual_variance",
+      "citation": "Liu C, van Bodegom PM, Xu F, Naimi B, Lei G, Lei J, Si Y. 2026. Phenological tracking of migratory waterfowl to spring green-up derived from individual movement. Movement Ecology 14:75.",
+      "doi": "10.1186/s40462-026-00685-3",
+      "first_published": "2026-07-27",
+      "primary_html": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13700227/",
+      "n_tracks": 323,
+      "n_tracked_individuals": 172,
+      "n_species": 4,
+      "source_tracking_year_range": [
+        2015,
+        2022
+      ],
+      "n_repeated_between_year_individuals_approx_percent": 39,
+      "published_result": "Species differences in migration/green-up tracking; moderate individual variation linked with more coherent tracking while excess variation can reduce synchrony",
+      "raw_gps_source_status": "Movebank study 52997422 and 731644623, available on request",
+      "raw_gps_and_derived_data_reopened_in_payoff": false
+    }
+  ],
+  "overlap": {
+    "research_lineage": "Same lead author and overlapping research consortium, overlapping tracked taxa and time windows",
+    "independent_replication_study_count": "UNVERIFIED",
+    "individual_track_overlap_identified": false,
+    "treat_as_two_independent_study_replications": false
+  },
+  "prior_art_boundaries": {
+    "greater_number_of_stopovers_improves_phenological_sensitivity": "PUBLISHED_PRIOR_ART_NOT_PAYOFF_NOVEL",
+    "interindividual_variation_affects_population_tracking": "PUBLISHED_PRIOR_ART_NOT_PAYOFF_NOVEL",
+    "remote_climate_and_arrival_mismatch_correlation": "OLDER_PRIOR_ART",
+    "effective_cue_observable_before_specific_commitment": "NOT_ESTABLISHED_BY_INSPECTED_SOURCE_DATA",
+    "causal_downstream_recourse_budget_r_t": "NOT_MEASURED_IN_INSPECTED_FIT",
+    "linked_information_credibility_q_plus_urgency_U_effect": "NOT_IDENTIFIED_BY_INSPECTED_FIT",
+    "actual_partner_network_asynchronous_cue_uptake": "NOT_IDENTIFIED_BY_INSPECTED_FIT",
+    "natural_perfect_information_coordination_hysteresis": "NOT_IDENTIFIED_BY_INSPECTED_FIT",
+    "dispersal_optimum_two_patch_two_season_exact_theorem": "SEPARATE_PAYOFF_THEORY_UNCHANGED"
+  },
+  "scope_decision": {
+    "no_new_ecological_effect_rerun": true,
+    "v7_goose_focal_qU_unopened": true,
+    "no_eBird_occurrence_file_used": true,
+    "no_tinyfish_used": true,
+    "no_raw_movebank_access_claimed": true,
+    "submission_rule": "Do not claim stopover number -> tracking or individual variation -> tracking as newly shown by PAYOFF; keep only information timing/actionability/interaction hypotheses as prospective, and explicitly disclose both source studies as recent prior art",
+    "manuscripts_unchanged": true,
+    "branch_must_remain_draft_until_prior_art_review": true
+  }
+}
