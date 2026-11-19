@@ -616,6 +616,70 @@
       "original_bird_climate_decision_time_cue_measured": false,
       "direct_payoff_information_deadline_identified": false,
       "claim": "Original Curlew 2026 published source metadata and provider SHA256 are verified; actual ZIP/README download is HTTP401, so no individual repeated-year source grain or movement-to-fitness biological coefficient is established. Safe offline source admission is implemented for a user-authorized ZIP/CSV."
+    },
+    {
+      "id": "D7",
+      "class": "INDEPENDENT_SOURCE_LINEAGE_POST_PUBLICATION_LAGGED_BEHAVIOR_AND_HELDOUT_PREDICTION",
+      "status": "SOURCE_VERIFIED_EARLY_FREEZING_LAGGED_LINEAR_ASSOCIATION_NOT_SUPPORTED",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/409",
+      "original_paper": "Schindler et al 2024 Proc R Soc B doi:10.1098/rspb.2023.2016",
+      "original_git_blob_sha1": "ca3736a281dfd2465921efc940dd985499c71a4f",
+      "original_public_csv_sha256": "5d31ef41867d7f591f5a3fc5f2936df6e01dd91951c006e35b607a1e542e8972",
+      "original_source_stage_rows": 642,
+      "individual_bird_years": 107,
+      "individual_birds": 49,
+      "repeated_birds_2plus": 30,
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "original_breeding_successes": 28,
+      "original_failures": 72,
+      "original_deferrals": 7,
+      "primary_lagged_beta_fraction_per_10pp_early_freezing": -0.0013725255396581735,
+      "primary_bird_cluster_ci95": [
+        -0.013697070348722811,
+        0.010952019269406464
+      ],
+      "primary_p": 0.8237739635307635,
+      "primary_partial_SSE_reduction_fraction": 0.00044887152132395725,
+      "original_year_2018_omission": "NOT_ESTIMABLE_stage4_storm_fraction_zero_variation",
+      "feeding_ridge_heldout": {
+        "leave_one_bird_out_MSE_baseline": 0.004734243677455496,
+        "leave_one_bird_out_MSE_added_early_freeze": 0.004399626468961512,
+        "leave_one_year_out_MSE_baseline": 0.012608861987928585,
+        "leave_one_year_out_MSE_added_early_freeze": 0.010500353704119267,
+        "outyear_improvement_years": [
+          2019,
+          2020,
+          2021
+        ],
+        "outyear_worse_years": [
+          2018,
+          2022
+        ]
+      },
+      "breeding_success_logistic_heldout": {
+        "leave_one_bird_out_logloss_base": 0.6502394729900656,
+        "leave_one_bird_out_logloss_added_late_behavior": 0.6520459377310379,
+        "leave_one_year_out_logloss_base": 0.6541368539364134,
+        "leave_one_year_out_logloss_added_late_behavior": 0.6420964478351439,
+        "year2020_worse_with_late_behavior": true
+      },
+      "github_actions_source_hashed_run": 44529079285,
+      "github_actions_aggregate_artifact": 14532508038,
+      "original_2024_movement_energetic_breeding_association_prior_art": true,
+      "causal_predecision_info_q_observed": false,
+      "downstream_actionability_r_t_identified": false,
+      "bird_cue_acquisition_observed": false,
+      "information_deadline_qwait_fitted": false,
+      "original_V7_goose_q_by_U_fitted": false,
+      "animal_ids_or_source_gps_exported": false,
+      "no_eBird_occurrence_input": true,
+      "claim": "2024 Greenland goose source can test ordered lagged weather/behavior at bird-year grain, but registered freeze3->feed4 conditional slope is near zero; added early freeze has modest heterogeneous bird/year heldout forecast value. Later behavior does not transfer stably to breeding across bird and year holds. No causal feedback or information deadline identified."
     }
   ],
   "next_primary_test": {
