@@ -23,6 +23,24 @@ BARRIER_CODES = {"SIC", "SGR", "SNO", "SVA", "WS"}
 FLYWAYS = list(ROUTES)
 ACTUAL_2015_DOI = "10.1111/1365-2656.12281"
 
+# Exact published Fig3 panels and printed RMSD values (day units), explicitly
+# locked against accidental reassignment of original outcome labels.
+ORIGINAL_FIG3_PRINTED = {
+    ("Greenland","SIC"):("d",21.21),
+    ("Greenland","NIC"):("c",11.31),
+    ("Greenland","SGR"):("b",25.60),
+    ("Greenland","NGR"):("a",24.93),
+    ("Svalbard","SNO"):("g",16.76),
+    ("Svalbard","NNO"):("f",24.36),
+    ("Svalbard","SVA"):("e",18.16),
+    ("Barents Sea","SWE"):("n",27.04),
+    ("Barents Sea","BALT"):("m",26.96),
+    ("Barents Sea","WS"):("l",5.87),
+    ("Barents Sea","KAN"):("k",15.96),
+    ("Barents Sea","PEKO"):("i",7.94),
+    ("Barents Sea","NSE"):("h",10.52),
+}
+
 
 def _rounded(value: float | None) -> float | None:
     return round(value, 9) if value is not None else None
@@ -95,7 +113,7 @@ def _group_sorted_ties(values: list[float]):
         stop = p+1
         while stop < len(order) and values[order[stop]] == values[order[p]]:
             stop += 1
-        yield values[order[p]], list(range(p, stop)) if False else order[p:stop]
+        yield values[order[p]], order[p:stop]
         p = stop
 
 
@@ -136,11 +154,19 @@ def _fig3_rows(rows: list[dict] | None = None,
             or not math.isfinite(rmsd) or rmsd <= 0 or rmsd >= 366):
             raise ValueError("Published figure source identity or RMSD invalid")
         expected_name = {
-            "BALT":"Baltic States", "KAN":"Kanin Peninsula",
+            "BALT":"Baltics", "KAN":"Kanin Penn.",
             "NSE":"Novaya Zemlya"
         }.get(c, next(x["region_S1_name"] for x in s1 if x["code"]==c))
         if r["figure3_printed_region"] != expected_name:
             raise ValueError("Fig3 region name differs from Table S1 candidate")
+        # A row with a valid source region but altered published Fig3
+        # outcome must never pass through as an equally sourced aggregate.
+        if (f,c) not in ORIGINAL_FIG3_PRINTED:
+            raise ValueError("Original published Fig3 region not registered")
+        p_original, rmsd_original = ORIGINAL_FIG3_PRINTED[(f,c)]
+        if (r["figure3_panel"] != p_original
+                or abs(rmsd-rmsd_original) > 1e-9):
+            raise ValueError("Printed original Fig3 RMSD or panel value drift")
         orig = q_adj[(f,c)]
         step = ROUTES[f].index(c)
         if step < 1:
