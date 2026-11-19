@@ -88,7 +88,20 @@
       "n_species": 279,
       "n_studies": 28,
       "anchor": "docs/PAYOFF_B_CROSS_SYSTEM_INFORMATION_RESULT_20260928.md",
-      "claim": "Long-distance migrants show weaker temperature advancement; endogenous or photoperiodic timing is an alternative."
+      "claim": "Long-distance migrants show weaker temperature advancement; endogenous or photoperiodic timing is an alternative.",
+      "source_policy_discovery_20261119": "E6 944 original effects include 264 source-published Hurlbert & Liang 2012 effects explicitly based on eBird; original E6 is NOT an eBird-free panel",
+      "known_ebird_excluded_sensitivity": {
+        "n_rows": 680,
+        "n_original_studies": 27,
+        "beta_long_minus_short_days_per_C": 0.6083890673642456,
+        "CI95": [
+          0.36181694969441286,
+          0.8549611850340784
+        ],
+        "p": 0.00002780855298266601,
+        "full_source_audit_pending": true,
+        "not_new_independent_discovery": true
+      }
     },
     {
       "id": "E3",
@@ -323,6 +336,49 @@
       "original_individual_bird_outcome_fitted": false,
       "independent_natural_replication": false,
       "claim": "Adding q×ordinal route stage overfits published regional RMSD: within-sample SSE improves but 3-flyway leave-one-flyway-out error worsens. No robust stage interaction, biological information-use or V7 effect is established. Older authors already reported an adjusted regional q–RMSD association."
+    },
+    {
+      "id": "F3",
+      "class": "POST_OPEN_SOURCE_PROVENANCE_MANDATORY_CORRECTION",
+      "status": "KNOWN_EBIRD_STUDY_EXCLUDED_FULL_REMAINING_AUDIT_PENDING",
+      "original_source": "Usui et al 2017 doi:10.1111/1365-2656.12612",
+      "verified_ebird_study": "Hurlbert & Liang 2012 doi:10.1371/journal.pone.0031662",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/404",
+      "eBird_derived_effects_excluded": 264,
+      "source_studies_removed": 1,
+      "original_effects": 944,
+      "corrected_effects": 680,
+      "original_beta": 0.4214763799092083,
+      "corrected_beta": 0.6083890673642456,
+      "corrected_CI95": [
+        0.36181694969441286,
+        0.8549611850340784
+      ],
+      "original_studies": 28,
+      "corrected_studies": 27,
+      "other_studies_certified_no_eBird": false,
+      "claim": "Known eBird-derived effects included in prior E6; forced verified-source exclusion does not reverse original gradient. Still not certified fully eBird-free or causal."
+    },
+    {
+      "id": "F4",
+      "class": "SOURCE_ONLY_IDENTIFIABILITY_FAIL",
+      "status": "NO_TEMPERATURE_LOCATION_MIGRATION_DISTANCE_MODIFIER_FIT",
+      "source": "Usui 2017 E6 944 previously selected rows; source-only study crossing and 680-row known-eBird-study exclusion",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/403",
+      "original_source_location_levels": [
+        "breeding",
+        "passage",
+        "passage or breeding",
+        "wintering"
+      ],
+      "source_ambiguous_location_label": "passage or breeding",
+      "source_ambiguous_rows_before": 550,
+      "source_ambiguous_rows_after_known_eBird_exclusion": 286,
+      "best_within_study_two_location_x_two_distance_crossed_studies": 2,
+      "required_min_crossed_studies": 5,
+      "other_location_pair_count_with_crossed_studies": 0,
+      "registered_new_biological_interaction_opened": false,
+      "claim": "Only 2 original studies contain both distance classes at breeding and passage temperatures, versus predeclared minimum 5; no defensible independently supported location×distance interaction can be estimated."
     }
   ],
   "next_primary_test": {
