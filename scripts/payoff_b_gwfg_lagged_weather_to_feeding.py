@@ -160,14 +160,11 @@ def study_design(df:pd.DataFrame, include_freeze:bool=True)->pd.DataFrame:
         base[c]=df[c].astype(float)
     if include_freeze:
         base["freeze3_10pp"]=df["freeze3_10pp"].astype(float)
-    for year in (2,3,4,5):
-        # Fixed years already in original source; omitted years remain columns
-        # during leave-one-original-year-out stress checks.
-        base[f"year_{year}"]=df.year_index.eq(year).astype(float)
-    # When an original year is left out, its all-zero column is dropped
-    # *without outcome selection* to avoid a structurally singular matrix.
-    keep=[c for c in base if c=="intercept" or base[c].nunique()>1]
-    return base[keep]
+    # Rebuild year dummies using the earliest *observed training year* as
+    # baseline, so omitting 2018 does not make intercept = sum(year dummies).
+    for year in sorted(df.year_index.unique())[1:]:
+        base[f"year_{int(year)}"]=df.year_index.eq(year).astype(float)
+    return base
 
 
 def regress(df:pd.DataFrame, include_freeze:bool=True)->dict:
