@@ -784,7 +784,27 @@
         "sea-crossing": 24
       },
       "source_route_recovered_from_original_RData": true,
-      "source_join_regression_source_studies": 1
+      "source_join_regression_source_studies": 1,
+      "independently_archived_operational_forecast_2019_2021_source_gate": {
+        "archive": "NCAR GDEX d084001 NCEP GFS 0.25° historical operational forecast GRIB2, DOI 10.5065/D65D8PWK",
+        "original_archive_page": "https://gdex.ucar.edu/datasets/d084001/",
+        "original_data_access_page": "https://gdex.ucar.edu/datasets/d084001/dataaccess/",
+        "historical_years_metadata_available": [
+          2019,
+          2020,
+          2021
+        ],
+        "actual_GFS_issued_forecast_subset_requires_login": true,
+        "user_GDEX_login_or_terms_accepted": false,
+        "source_original_forecast_GRIB2_bytes_retrieved": false,
+        "original_specific_u10_v10_cloud_parameter_grain_verified": false,
+        "original_issued_forecast_before_bird_choice_measured": false,
+        "source_marginal_issue_time_chronology_rule": "issue_UTC <= bird_decision_UTC - 1h; valid_UTC > bird_decision_UTC; fixed target +6h ±1.5h",
+        "source_reanalysis_used_as_forecast": false,
+        "biological_information_cost_or_fitness_fitted": false,
+        "source_gate": "docs/PAYOFF_B_RUPPEL_GFS_ISSUE_TIME_SOURCE_GATE_20261119.md",
+        "status": "PROVIDER_METADATA_SUPPORTED_AUTHENTICATED_SUBSET_NOT_RETRIEVED"
+      }
     }
   ],
   "next_primary_test": {
