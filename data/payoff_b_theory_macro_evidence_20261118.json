@@ -449,6 +449,44 @@
       "causal_information_distance_or_animal_cue_use_identified": false,
       "new_biological_interaction_fitted": false,
       "claim": "Original Usui gradient is directionally stable under post-open source-origin restrictions, but full eBird-free certification and causal information availability remain unidentified; V7 goose q×U still NOT_ESTIMABLE."
+    },
+    {
+      "id": "F7",
+      "class": "POST_OPEN_WITHIN_STUDY_SOURCE_ROBUSTNESS_OF_ALREADY_PUBLISHED_MIGRATION_DISTANCE_EFFECT",
+      "status": "13_STUDY_FIXED_EFFECT_GRADIENT_POSITIVE_WITH_SOURCE_PROVENANCE_LIMITS",
+      "source_original": "Usui et al. 2017 JAE, 10.1111/1365-2656.12612",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/405",
+      "artifact_actions_run": 44484580314,
+      "artifact_id": 14509328403,
+      "source": "Original E6 source-verified 944 metadata; exclude known eBird 264 and original-source-unidentified Lithuania 4 before selecting same-study contrasts",
+      "original_source_described_panel": 676,
+      "original_studies_in_source_described_panel": 26,
+      "studies_with_short_and_long": 13,
+      "effect_rows_in_crossed_studies": 444,
+      "original_species_in_crossed_studies": 269,
+      "beta_long_minus_short_days_per_C": 0.5252532818331166,
+      "two_way_cluster_study_species_se": 0.13813488906607674,
+      "CI95": [
+        0.22428321331129158,
+        0.8262233503549417
+      ],
+      "p_exploratory": 0.0025184879693268625,
+      "effective_study_df": 12,
+      "weightcap_99_beta": 0.5254375013693978,
+      "unweighted_beta": 0.6086066573240709,
+      "leave_one_study_out": {
+        "repeats": 13,
+        "all_positive": true,
+        "min_beta": 0.47279272297930586,
+        "max_beta": 0.6230059463836829
+      },
+      "n_original_studies_with_positive_descriptive_contrast": 11,
+      "n_original_studies_with_negative_descriptive_contrast": 2,
+      "original_published_distance_gradient_not_new_discovery": true,
+      "source_fully_verified_eBird_free": false,
+      "causal_information_access_identified": false,
+      "prospective_new_data_replication": false,
+      "result_interpretation": "After original study fixed intercepts the published Usui migration-distance temperature response gradient remains positive in 13 studies with within-study class variation. Still no actual predeparture cue, information deadline, downstream recourse or interactor fitness measured."
     }
   ],
   "next_primary_test": {
