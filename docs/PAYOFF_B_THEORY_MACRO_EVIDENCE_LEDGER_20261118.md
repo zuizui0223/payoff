@@ -130,3 +130,22 @@ The source-only diagnostic was frozen as **post-publication exploratory** before
 **Independent transfer is negative:** a fixed-penalty, train-standardized ridge model that leaves out an **entire flyway** at a time gives 3-fold held-out MSE **138.45→183.29 days²** for 13 rows, and **119.59→182.57 days²** for 11 rows, when adding the ordinal q×stage product. The three original flyways show nonidentical simple q–RMSD signs. This is **a failed transportability stress test**, not evidence for a universal stage interaction, a proof against the original q predictor, or a new biological null at population scale.
 
 **Claim ceiling remains unchanged:** published Fig. 3 site-level RMSD vs regional q is a mixed-grain prior-art-only ecological crosswalk; ordinal rank is not geographical urgency U; original annual GDD series and 16 GPS-region assignments are not verified. Preserve **V7 biological q×U = NOT_ESTIMABLE**, no invented uncertainty, animal cue use, causal fitness or hysteresis.
+
+## 2026-11-19: E6 source-policy correction and causal mechanism gate
+
+**Material correction to the original E6 interpretation:** the 944 Usui et al. temperature-effect rows used for the promoted E6 migration-distance benchmark included **264 effect rows from Hurlbert & Liang (2012)**, whose *original published Methods* explicitly used **eBird checklists** (PLoS ONE DOI [10.1371/journal.pone.0031662](https://doi.org/10.1371/journal.pone.0031662)). This is not inferred from the study title; the primary paper documents the original eBird input. The original E6 source cannot be labeled eBird-free.
+
+The original E6 GitHub Actions artifact (ID 10953792024) was downloaded again and exactly SHA256-verified (`443cab62531d9b633aa6ee67da010fa66b6c230ef87e919d697269e77a7373f0`). Its frozen 944-row derived CSV SHA256 is `817a2d2d18931944103283c93e4d9bf80568906a21a92369ee168e4f8f203085`. Re-running the **same** inverse-variance WLS with Study×Species robust covariance reproduced original adjusted long-minus-short **+0.421476 d/°C** (95%CI [+0.121326,+0.721627]; p=0.007672). Excluding the **entire eBird-derived Hurlbert study**, independent of effect sign, produces **+0.608389 d/°C** (95%CI [+0.361817,+0.854961]; p=0.00002781) in **680 effect rows from 27 studies**. This +0.608389 is the original source's **already reported leave-one-study-out endpoint**, **not** a new independent PAYOFF discovery. See [PR #404](https://github.com/zuizui0223/payoff/pull/404). **The other 27 source studies are not all verified eBird-free**; do not promote 680 rows as a compliant fully source-audited dataset until the original studies are screened.
+
+A separate **source-only** analysis of original study temperature-measurement-location labels and short/long distance classes gives the following corrected counts after that one mandatory provenance exclusion:
+
+| Original temperature-location label | Effect rows | Studies | Studies including both short/long migrants at this location |
+|---|---:|---:|---:|
+| breeding | 155 | 9 | 4 |
+| passage | 146 | 6 | 3 |
+| passage or breeding | 286 | 15 | 8 |
+| wintering | 93 | 1 | 1 |
+
+**Only two** source studies contain the complete short/long × breeding/passage 2×2 crossed design; all other five location-class pairings have **zero** fully crossed source studies. The **predeclared minimum five** independent crossed studies is not met. Therefore the new temperature-location × migration-distance effect is **NOT IDENTIFIABLE / DO NOT FIT** (design result, *not* p-value for biological null). In particular, source `Temperature_location` is where researchers measured temperature, **not a direct observation of information actually available to an animal before commitment**. See [PR #403](https://github.com/zuizui0223/payoff/pull/403).
+
+**Conclusion for the PAYOFF-B paper claim:** the migratory-distance phenological gradient remains a published association under one forced source-provenance exclusion, but the *information-distance causal mechanism* has not been identified; do not use E6 as direct proof of differential Bayesian cue use, and do not revive the V7 q×U effect without independent annual source geography and timing. The original E6 paper/source uses external bird data, and this no-eBird provenance correction must be kept visibly separate from the core frozen manuscript rather than retroactively described as its original protocol.
