@@ -1,0 +1,14 @@
+flyway,destination_region_code,figure3_printed_region,figure3_panel,published_figure3_rmsd_days,original_paper_doi,source_text
+Greenland,SIC,Southern Iceland,d,21.21,10.1111/1365-2656.12281,Fig3 printed panel label
+Greenland,NIC,Northern Iceland,c,11.31,10.1111/1365-2656.12281,Fig3 printed panel label
+Greenland,SGR,Southern Greenland,b,25.60,10.1111/1365-2656.12281,Fig3 printed panel label
+Greenland,NGR,Northern Greenland,a,24.93,10.1111/1365-2656.12281,Fig3 printed panel label
+Svalbard,SNO,Southern Norway,g,16.76,10.1111/1365-2656.12281,Fig3 printed panel label
+Svalbard,NNO,Northern Norway,f,24.36,10.1111/1365-2656.12281,Fig3 printed panel label
+Svalbard,SVA,Svalbard,e,18.16,10.1111/1365-2656.12281,Fig3 printed panel label
+Barents Sea,SWE,Sweden,n,27.04,10.1111/1365-2656.12281,Fig3 printed panel label
+Barents Sea,BALT,Baltic States,m,26.96,10.1111/1365-2656.12281,Fig3 printed panel label
+Barents Sea,WS,White Sea,l,5.87,10.1111/1365-2656.12281,Fig3 printed panel label
+Barents Sea,KAN,Kanin Peninsula,k,15.96,10.1111/1365-2656.12281,Fig3 printed panel label
+Barents Sea,PEKO,Pechora/Kolguyev,i,7.94,10.1111/1365-2656.12281,Fig3 printed panel label
+Barents Sea,NSE,Novaya Zemlya,h,10.52,10.1111/1365-2656.12281,Fig3 printed panel label
