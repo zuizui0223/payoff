@@ -1,0 +1,121 @@
+{
+  "as_of": "2026-11-19",
+  "analysis": "source_only_design_after_forced_known_ebird_study_removal",
+  "source": "Usui et al. 2017 meta-analysis, doi:10.1111/1365-2656.12612; source CSV CC0 Zenodo 4970634",
+  "source_original_sha256": "68816f6cbfccbb9b47b45be0df49f077db914c8e43e567d0ed2cac9bbafde56c",
+  "source_first_original_actions_run": 44478528312,
+  "source_first_original_actions_artifact": 14506954865,
+  "original_e6_panel": {
+    "rows": 944,
+    "studies": 28,
+    "species": 279,
+    "temperature_location_levels": {
+      "breeding": 155,
+      "passage": 146,
+      "passage or breeding": 550,
+      "wintering": 93
+    }
+  },
+  "force_excluded_original_source": {
+    "study": "Hurlbert & Liang 2012",
+    "doi": "10.1371/journal.pone.0031662",
+    "reason": "verified original article uses eBird checklists",
+    "n_effects": 264,
+    "n_original_species": 18
+  },
+  "admissible_source_policy_panel_not_full_audit": {
+    "rows": 680,
+    "studies": 27,
+    "species": 279,
+    "levels": [
+      {
+        "source_label": "breeding",
+        "rows": 155,
+        "studies": 9,
+        "short_rows": 99,
+        "long_rows": 56,
+        "studies_with_short_and_long": 4
+      },
+      {
+        "source_label": "passage",
+        "rows": 146,
+        "studies": 6,
+        "short_rows": 62,
+        "long_rows": 84,
+        "studies_with_short_and_long": 3
+      },
+      {
+        "source_label": "passage or breeding",
+        "rows": 286,
+        "studies": 15,
+        "short_rows": 75,
+        "long_rows": 211,
+        "studies_with_short_and_long": 8
+      },
+      {
+        "source_label": "wintering",
+        "rows": 93,
+        "studies": 1,
+        "short_rows": 42,
+        "long_rows": 51,
+        "studies_with_short_and_long": 1
+      }
+    ],
+    "fully_crossed_study_counts_for_each_pair": [
+      {
+        "pair": [
+          "breeding",
+          "passage"
+        ],
+        "fully_crossed_studies": 2
+      },
+      {
+        "pair": [
+          "breeding",
+          "passage or breeding"
+        ],
+        "fully_crossed_studies": 0
+      },
+      {
+        "pair": [
+          "breeding",
+          "wintering"
+        ],
+        "fully_crossed_studies": 0
+      },
+      {
+        "pair": [
+          "passage",
+          "passage or breeding"
+        ],
+        "fully_crossed_studies": 0
+      },
+      {
+        "pair": [
+          "passage",
+          "wintering"
+        ],
+        "fully_crossed_studies": 0
+      },
+      {
+        "pair": [
+          "passage or breeding",
+          "wintering"
+        ],
+        "fully_crossed_studies": 0
+      }
+    ]
+  },
+  "frozen_gate": {
+    "min_independent_studies_crossed_2x2": 5,
+    "observed_best_case": 2,
+    "status": "FAIL_DO_NOT_FIT_TEMPERATURE_LOCATION_BY_MIGRATION_DISTANCE_INTERACTION"
+  },
+  "source_provenance": {
+    "other_studies_completely_screened_for_ebird": false,
+    "source_label_ambiguous": "passage or breeding",
+    "temperature_location_is_actual_bird_cue_use": false
+  },
+  "no_biological_outcome_or_interaction_fitted": true,
+  "v7_2015_goose_q_urgency_effect": "NOT_ESTIMABLE"
+}

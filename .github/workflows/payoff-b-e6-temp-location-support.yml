@@ -1,0 +1,61 @@
+name: PAYOFF-B E6 original temperature-location support only
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/payoff-b-e6-temp-location-support.yml'
+      - 'scripts/payoff_b_e6_temperature_location_support.py'
+      - 'tests/test_payoff_b_e6_temperature_location_support.py'
+  push:
+    branches:
+      - analysis/payoff-b-e6-temp-location-support-20261119
+    paths:
+      - '.github/workflows/payoff-b-e6-temp-location-support.yml'
+      - 'docs/PAYOFF_B_E6_TEMP_LOCATION_SUPPORT_FREEZE_20261119.md'
+      - 'scripts/payoff_b_e6_temperature_location_support.py'
+      - 'tests/test_payoff_b_e6_temperature_location_support.py'
+
+permissions:
+  contents: read
+
+jobs:
+  original-source-design:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install only source-audit dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pandas numpy pytest
+      - name: Regression tests on synthetic design fixture
+        run: |
+          python -m pytest -q tests/test_payoff_b_e6_temperature_location_support.py
+      - name: Acquire official CC0 original and verify exact SHA256
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/e6_temp_location
+          curl -fL --retry 4 --retry-all-errors \
+            'https://zenodo.org/records/4970634/files/Usui_et_al_2016_metadata_dryad.csv?download=1' \
+            -o outputs/e6_temp_location/Usui_et_al_2016_metadata_dryad.csv
+          printf '%s  %s\n' \
+            '68816f6cbfccbb9b47b45be0df49f077db914c8e43e567d0ed2cac9bbafde56c' \
+            'outputs/e6_temp_location/Usui_et_al_2016_metadata_dryad.csv' | sha256sum -c -
+      - name: Source-only E6 study-crossing audit (NO EFFECT FIT)
+        run: |
+          python -m scripts.payoff_b_e6_temperature_location_support \
+            --input outputs/e6_temp_location/Usui_et_al_2016_metadata_dryad.csv \
+            --output outputs/e6_temp_location/support.json
+      - name: Upload design counts only (not raw dataset)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-e6-temp-location-design-20261119
+          path: outputs/e6_temp_location/support.json
+          if-no-files-found: warn
