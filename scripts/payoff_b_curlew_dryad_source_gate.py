@@ -217,7 +217,28 @@ def discover(client):
         "provider_md5_reported_not_verified":v.get("digest") or v.get("md5"),
     } for k,v in unique.items()]
     if not any(x["filename"]==ARCHIVE_NAME for x in files):
-        raise AccessHold("DRYAD_ARCHIVE_NOT_FOUND_IN_ORIGINAL_VERSION")
+        # Explicit original metadata-shape diagnosis before changing a
+        # version selector or guessing an alternate data archive.
+        embedded=details.get("_embedded",{}) if isinstance(details,dict) else {}
+        collections={
+            str(k): {
+                "type":type(v).__name__,
+                "first_entry_keys":sorted(list(v[0].keys()))[:20]
+                    if isinstance(v,list) and v and isinstance(v[0],dict) else [],
+                "first_entry_file_name":str(
+                    v[0].get("path") or v[0].get("filename") or v[0].get("name") or ""
+                )[:120] if isinstance(v,list) and v and isinstance(v[0],dict) else ""
+            } for k,v in embedded.items()
+        } if isinstance(embedded,dict) else {}
+        reason=json.dumps({
+            "reason":"DRYAD_ARCHIVE_NOT_FOUND_IN_ORIGINAL_VERSION",
+            "version_id":id_version,
+            "top_level_response_keys":sorted(details.keys()) if isinstance(details,dict) else [],
+            "embedded_collection_shape":collections,
+            "parsed_file_count":len(files),
+            "parsed_public_filenames":[f["filename"] for f in files[:6]],
+        },ensure_ascii=False,separators=(",",":"))
+        raise AccessHold(reason)
     return {
         "dataset_title":dataset.get("title"),
         "dataset_identifier":dataset.get("identifier"),
@@ -414,7 +435,7 @@ def audit():
     except (AccessHold,ValueError,KeyError,zipfile.BadZipFile,
             requests.RequestException,TimeoutError) as e:
         out["source_access_status"]="SOURCE_ACCESS_OR_STRUCTURE_HOLD"
-        out["source_hold_reason"]=str(e)[:220]
+        out["source_hold_reason"]=str(e)[:1700]
     out["number_of_public_HTTP_requests"]=client.n_requests
     return out
 
