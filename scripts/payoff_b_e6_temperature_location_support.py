@@ -149,7 +149,31 @@ def audit(path: Path) -> dict:
         raw=pd.read_csv(path,encoding="utf-8")
     except UnicodeDecodeError:
         raw=pd.read_csv(path,encoding="cp1252")
-    out=design_support(exact_e6_selection(raw))
+    original_e6 = exact_e6_selection(raw)
+    original_support = design_support(original_e6)
+    # Source-provenance correction made after original support was inspected.
+    # Hurlbert & Liang (2012), PLoS ONE doi:10.1371/journal.pone.0031662,
+    # explicitly used eBird checklists. No effect sign inspected or fitted.
+    mask = original_e6["Study"].astype(str).str.contains(
+        "Hurlbert, A.H. & Liang, Z. (2012)", regex=False, na=False
+    )
+    if (mask.sum() != 264 or original_e6.loc[mask, "Study"].nunique() != 1):
+        raise ValueError("Known eBird source has changed: source policy fail-closed")
+    admissible = original_e6.loc[~mask].copy()
+    if (len(admissible) != 680 or admissible["Study"].nunique() != 27
+            or admissible["Species"].nunique() != 279):
+        raise ValueError("Known eBird study exclusion original unit count drift")
+    out=design_support(admissible)
+    out["status"]="POST_OPEN_SOURCE_CORRECTION_NO_LOCATION_EFFECT_FIT"
+    out["excluded_known_eBird_study_effect_rows"]=264
+    out["remaining_studies_not_individually_certified_eBird_free"]=27
+    out["full_944_effect_source_support_provenance_only"]=original_support
+    out["source_policy_qualification"]="EXCLUDED_ONE_VERIFIED_EBIRD_STUDY; OTHER_27_NOT_AUDITED"
+    out["source_only_identification_gate"]=(
+        "FAIL_FEWER_THAN_5_WITHIN_STUDY_CROSSED_TEMPERATURE_LOCATIONS"
+        if out["n_level_pairs_meeting_5_fully_crossed_studies"] == 0
+        else "POTENTIAL_CROSSED_DESIGN_REQUIRES_EXTERNAL_SOURCE_AND_CODING_REVIEW"
+    )
     out["source_verified_sha256"]=digest
     out["raw_source_total_rows"]=len(raw)
     return out
