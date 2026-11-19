@@ -119,3 +119,14 @@ The existing candidate readiness tool now invokes this numeric replay when an an
 The original study additionally reports that ecological barriers reduce the physical interregional environmental q signal but do not by themselves alter goose timing precision in the same straightforward way. This is a **published prior-art decoupling** consistent with treating potential information and realized timing separately; it does not identify downstream information-use strategy or compensation.
 
 **Direct source still required:** original machine-readable 1982–2011 16-region onset dates *with* original regional coordinates/assignment and original 40 migration inclusion key. A new gridded climate reanalysis without those author-grounded coordinates would be an independent *new environmental replication*, not a V7 original-source reproduction.
+
+
+## 2026-11-19: published Kölzsch Fig. 3 biological aggregate — failed cross-flyway transfer
+
+A new *stacked draft* [PR #402](https://github.com/zuizui0223/payoff/pull/402) uses the 13 **printed original Fig. 3 region-level goose arrival RMSD values** (publication 2015; `RMSD` aggregate of individual stopover-site mismatches), matched to the 13 consecutive source-published historical regional q values in draft #400. This yields a real **published ecological aggregate**, but **not** the registered V7 individual `|A_ij-S_j,y|` outcome. It is also **not independent of the original authors' q–RMSD finding** (Table 1b original adjusted P=0.03).
+
+The source-only diagnostic was frozen as **post-publication exploratory** before the new fit. With 13 paired region aggregates (11 if two source-code aliases are withheld), simple q–RMSD Pearson r is **−0.140/−0.265**, whereas pooled Spearman is **+0.074/−0.091**. A seven-column descriptive OLS model adding q×**ordinal route rank** decreases in-sample SSE **25.8%/16.9%**; the nominal remaining df are only **6/4** even before accounting for dependence.
+
+**Independent transfer is negative:** a fixed-penalty, train-standardized ridge model that leaves out an **entire flyway** at a time gives 3-fold held-out MSE **138.45→183.29 days²** for 13 rows, and **119.59→182.57 days²** for 11 rows, when adding the ordinal q×stage product. The three original flyways show nonidentical simple q–RMSD signs. This is **a failed transportability stress test**, not evidence for a universal stage interaction, a proof against the original q predictor, or a new biological null at population scale.
+
+**Claim ceiling remains unchanged:** published Fig. 3 site-level RMSD vs regional q is a mixed-grain prior-art-only ecological crosswalk; ordinal rank is not geographical urgency U; original annual GDD series and 16 GPS-region assignments are not verified. Preserve **V7 biological q×U = NOT_ESTIMABLE**, no invented uncertainty, animal cue use, causal fitness or hysteresis.
