@@ -291,9 +291,33 @@ def run(df:pd.DataFrame, source_info:dict)->dict:
     omitted=[]
     for year in sorted(df.year_index.unique()):
         subset=df[df.year_index!=year].copy()
-        fit=regress(subset,True)
+        try:
+            fit=regress(subset,True)
+        except ValueError as error:
+            # Source-only support failure, independent of the response.
+            # When 2018 is omitted, storm4 is identically zero in the
+            # original remaining 2019-2022 records. A term with no variation
+            # is not estimable; do NOT silently drop the covariate or invent
+            # a heldout-year coefficient.
+            missing_variation=[
+                k for k in (
+                    "feed3","freeze3_10pp","precip3","storm3",
+                    "first_day3","precip4","storm4"
+                ) if subset[k].nunique()<2
+            ]
+            if "rank deficient" not in str(error) or not missing_variation:
+                raise
+            omitted.append({
+                "original_heldout_year":2017+int(year),
+                "status":"NOT_ESTIMABLE_FROZEN_COVARIATE_HAS_ZERO_VARIATION",
+                "nonvarying_predeclared_columns":missing_variation,
+                "n_remaining_bird_years":len(subset),
+                "coefficient_not_reported":True,
+            })
+            continue
         omitted.append({
             "original_heldout_year":2017+int(year),
+            "status":"ESTIMATED_UNMODIFIED_FROZEN_CONTROLS",
             "estimate":fit["focal_early_freezing_beta_per_10pp"],
             "CI95":fit["focal_ci95"],
             "n_remaining_bird_years":fit["n_bird_years"],
