@@ -25,6 +25,7 @@ def test_genuine_prior_issue_and_future_valid_time_are_distinct():
     assert result["valid_after_decision"]
     assert result["positive_model_forecast_lead"]
     assert result["decision_to_target_near_primary_plus6h"]
+    assert result["eligible_future_cue_by_issue_time_UTC_only"] is True
     assert result["animal_subjective_access_verified"] is False
 
 
@@ -37,8 +38,9 @@ def test_future_issued_forecast_fails_decision_access_not_reclassified():
     r["forecast_issue_utc"]="2020-09-16T18:00:00Z"
     x=check_issued(r)
     assert x["issued_at_least_1h_predecision"] is False
+    assert x["eligible_future_cue_by_issue_time_UTC_only"] is False
     r["forecast_issue_utc"]="2020-09-16T12:00:00Z"
-    assert check_issued(r)["issued_at_least_1h_predecision"] is True
+    assert check_issued(r)["eligible_future_cue_by_issue_time_UTC_only"] is True
 
 
 def test_nowcast_or_weather_after_decision_cannot_fake_future_cue():
@@ -50,6 +52,7 @@ def test_nowcast_or_weather_after_decision_cannot_fake_future_cue():
     r["forecast_valid_utc"]="2020-09-16T18:00:00Z"
     assert not check_issued(r)["valid_after_decision"]
     assert not check_issued(r)["decision_to_target_near_primary_plus6h"]
+    assert check_issued(r)["eligible_future_cue_by_issue_time_UTC_only"] is False
 
 
 def test_naive_local_datetime_or_other_year_or_source_is_not_admitted():
