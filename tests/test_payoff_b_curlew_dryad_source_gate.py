@@ -2,6 +2,7 @@
 import io
 
 import pytest
+pytest.importorskip("requests", reason="Original Dryad HTTP audit has optional dependency; dedicated workflow installs it")
 
 from scripts.payoff_b_curlew_dryad_source_gate import (
     AccessHold, RangeFile, _parse_year, discover, summarize_original_csv,
