@@ -32,6 +32,18 @@ SOURCES = (
  ("Nakata, M.",19,"Niigata coastal-forest bird-banding observations from 1989-2008","https://doi.org/10.3838/jjo.60.63"),
  ("Gunnarsson, T.G.",17,"Laugaras Iceland standardized daily first arrival field observation transect","https://doi.org/10.1080/00063657.2010.526999"),
  ("Christen, W.",12,"Solothurn Switzerland own constant-effort first-arrival field observation series 1981-2006","https://www.ala-schweiz.ch/images/stories/pdf/ob/2007_104/OrnitholBeob_2007_104_53_Christen.pdf"),
+ # 2026-11-19 continuation: source-article descriptions, with source-grain limits.
+ ("Rubolini, D.",4,"1982-2006 first arrivals and egg dates at one northern Italy study site; underlying original field-log custodian not yet verified","https://doi.org/10.1007/s00484-007-0094-7"),
+ ("Donnelly, A.",2,"BirdWatch Ireland East Coast Bird Reports 1980-2003 first/last sighting dates","https://pmc.ncbi.nlm.nih.gov/articles/PMC4304860/"),
+ ("Ahola, M.",2,"Southwest Finland Pied Flycatcher regional arrival and breeding chronology, 1970-2002; original field-data custodian not yet verified","https://doi.org/10.1111/j.1365-2486.2004.00823.x"),
+ ("Ptaszyk, J.",2,"Poznan 1983-2002 White Stork detailed local monitoring scheme","https://doi.org/10.1046/j.1439-0361.2003.03011.x"),
+ ("Ananin, A.A.",2,"Barguzinsky reserve fixed transects and 1938-1983 Annals of Nature historical series","https://www.zin.ru/Rybachy/sokolov-pdf/2009b.pdf"),
+ ("Kralj, J. & Dolenec, Z. (2008)",2,"Central Croatia 1901-1917 and 1991-2005 first spring sightings and captures","https://doi.org/10.2478/s11535-008-0024-7"),
+ ("Ledneva, A.",1,"Middleborough naturalist farm diary, 1970-2002 first sightings","https://doi.org/10.1676/04-016"),
+ ("Sokolov, L.V. & Gordienko",1,"Ilmen reserve specialists' 1971-2005 first arrival records and reserve nature annals","https://doi.org/10.1134/S1067413608010098"),
+ ("Dolenec, Z. & Dolenec, P.",1,"1983-2007 local Wood Pigeon first arrival site record in NW Croatia","https://doi.org/10.3906/zoo-0901-13"),
+ ("Dolenec, Z. (2013)",1,"1982-2010 local Chiffchaff first arrivals in Croatian single-site study","https://www.croris.hr/crosbi/publikacija/prilog-casopis/188745"),
+ ("Dolenec, Z., Kralj, J.",1,"1987-2012 Black Redstart local arrival monitoring at Mokrice Croatia","https://psa.pastic.gov.pk/SearchArticleView.aspx?S_id=5886&articledetailId=9582"),
 )
 
 def inventory(d: pd.DataFrame) -> dict:
@@ -61,12 +73,17 @@ def inventory(d: pd.DataFrame) -> dict:
             "published_primary_observation_origin":origin,
             "independent_original_source_documentation":url,
             "classification":"ALTERNATIVE_PRIMARY_SOURCE_IDENTIFIED_NOT_FULLY_AUDITED",
+            "record_evidence_level":(
+                "PUBLISHED_SITE_LEVEL_CONTEXT_BUT_RAW_OBSERVATION_CUSTODIAN_NOT_VERIFIED"
+                if marker in {"Rubolini, D.","Ahola, M."}
+                else "PUBLISHED_ORIGINAL_SITE_OR_OBSERVATIONAL_PROGRAMME_IDENTIFIED"
+            ),
         })
     unknown=candidate.loc[~candidate.Study.isin(used)]
     if (len(candidate),candidate.Study.nunique(),
-        len(unknown),unknown.Study.nunique())!=(680,27,23,12):
+        len(unknown),unknown.Study.nunique())!=(680,27,4,1):
         raise ValueError("Original 680-row source provenance partition changed")
-    if sum(i["source_effect_rows"] for i in evidence)!=657:
+    if sum(i["source_effect_rows"] for i in evidence)!=676:
         raise ValueError("Published source-origin coverage drift")
     return {
       "as_of":"2026-11-19",
