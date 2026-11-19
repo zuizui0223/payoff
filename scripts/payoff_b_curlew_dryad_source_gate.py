@@ -227,7 +227,8 @@ def discover(client):
         "file_id":k,
         "filename":_name(v),
         "provider_size_bytes":v.get("size") or v.get("sizeBytes"),
-        "provider_md5_reported_not_verified":v.get("digest") or v.get("md5"),
+        "provider_digest_reported_not_verified":v.get("digest") or v.get("md5"),
+        "provider_digest_type_as_reported":v.get("digestType"),
     } for k,v in unique.items()]
     if not any(x["filename"]==ARCHIVE_NAME for x in files):
         # Explicit original metadata-shape diagnosis before changing a
