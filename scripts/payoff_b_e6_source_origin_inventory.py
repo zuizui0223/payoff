@@ -64,7 +64,7 @@ def inventory(d: pd.DataFrame) -> dict:
         })
     unknown=candidate.loc[~candidate.Study.isin(used)]
     if (len(candidate),candidate.Study.nunique(),
-        len(unknown),unknown.Study.nunique())!=(680,27,97,16):
+        len(unknown),unknown.Study.nunique())!=(680,27,23,12):
         raise ValueError("Original 680-row source provenance partition changed")
     if sum(i["source_effect_rows"] for i in evidence)!=657:
         raise ValueError("Published source-origin coverage drift")
