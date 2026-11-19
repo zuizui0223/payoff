@@ -158,25 +158,50 @@ def discover(client):
     dataset=_fetch_json(client,DATASET_API)
     versions=_fetch_json(client,DATASET_API+"/versions")
     ids=[]
-    for item in _records(versions):
-        if _file_id(item) is not None and (
-            "versionNumber" in item or "version" in item or "versionStatus" in item
-        ):
-            ids.append((item.get("versionNumber",0),_file_id(item)))
-    # Versions API may provide version objects without path/name, so find
-    # version ID by a dedicated safe recursive walk, not file-shaped _records.
+    found_shapes=[]
+    # Current Dryad HAL version entries can identify the version by an ID,
+    # versionId or self-link href; do not guess the newest version if no
+    # original version identifier can be verified.
     def scan_versions(v):
         if isinstance(v,dict):
-            if "id" in v and any(k in v for k in ("versionNumber","versionStatus","version")):
-                if _file_id(v) is not None:
-                    ids.append((v.get("versionNumber") or 0,_file_id(v)))
-            for x in v.values(): scan_versions(x)
+            has_version = any(k in v for k in (
+                "versionNumber","versionStatus","version","versionId",
+                "version_id","version_number"
+            ))
+            if has_version:
+                vid=_file_id(v)
+                if vid is None:
+                    raw=v.get("versionId") or v.get("version_id")
+                    if raw is not None and str(raw).isdigit():
+                        vid=int(raw)
+                if vid is None:
+                    # HAL self links are canonical provider identifiers.
+                    links=v.get("_links",{})
+                    if isinstance(links,dict):
+                        paths=[
+                            z.get("href","") for z in links.values()
+                            if isinstance(z,dict) and "href" in z
+                        ]
+                        for href in paths:
+                            m=re.search(r"/versions/(\d+)(?:\?|$)",str(href))
+                            if m:
+                                vid=int(m.group(1))
+                                break
+                found_shapes.append(",".join(sorted(k for k in v.keys()
+                     if k.lower() in {"id","versionnumber","versionstatus","version","versionid","version_id"})))
+                if vid is not None:
+                    ids.append((v.get("versionNumber",v.get("version_number",0)),vid))
+            for val in v.values(): scan_versions(val)
         elif isinstance(v,list):
-            for x in v: scan_versions(x)
+            for val in v: scan_versions(val)
     scan_versions(versions)
     if not ids:
-        raise AccessHold("DRYAD_PUBLIC_VERSION_NOT_RESOLVED")
-    # Published versions are numbered; sort by version number, then integer ID.
+        toplist=",".join(sorted(versions.keys())) if isinstance(versions,dict) else type(versions).__name__
+        raise AccessHold(
+            "DRYAD_PUBLIC_VERSION_NOT_RESOLVED:"
+            f"top={toplist};version_shapes={';'.join(found_shapes[:3])}"
+        )
+    # Use the latest original published version's validated integer ID.
     id_version=max(ids,key=lambda t:(int(t[0]) if str(t[0]).isdigit() else 0,t[1]))[1]
     details=_fetch_json(client,f"{BASE}/versions/{id_version}/files")
     items=list(_records(details))
