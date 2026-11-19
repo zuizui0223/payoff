@@ -1,7 +1,8 @@
 """Study-level source policy, never select by sign of the ecological effect."""
 from pathlib import Path
-import pandas as pd
 import pytest
+pd = pytest.importorskip("pandas", reason="Optional numerical dependency; dedicated E6 workflow tests with pandas")
+pytest.importorskip("numpy")
 
 from scripts.payoff_b_e6_known_ebird_exclusion import (
     SOURCE_STUDY_MARKER, read_verified_artifact, provenance_sensitivity
