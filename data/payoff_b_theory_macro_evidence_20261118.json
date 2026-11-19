@@ -379,6 +379,24 @@
       "other_location_pair_count_with_crossed_studies": 0,
       "registered_new_biological_interaction_opened": false,
       "claim": "Only 2 original studies contain both distance classes at breeding and passage temperatures, versus predeclared minimum 5; no defensible independently supported location×distance interaction can be estimated."
+    },
+    {
+      "id": "F5",
+      "class": "PARTIAL_SOURCE_PROVENANCE_ORIGINAL_PRIMARY_OBSERVATION_AUDIT",
+      "status": "657_OF_680_EFFECTS_WITH_ALTERNATIVE_ORIGINAL_OBSERVATION_SOURCE_IDENTIFIED_NOT_FULLY_CERTIFIED",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/404",
+      "original_E6_effects": 944,
+      "confirmed_eBird_derived_excluded_effects": 264,
+      "remaining_after_known_eBird_exclusion": 680,
+      "remaining_source_studies": 27,
+      "original_studies_with_independently_documented_primary_observation_source": 15,
+      "source_effects_with_alternative_primary_observation_source_identified": 657,
+      "fraction_remaining_effects_with_primary_origin_documented": 0.9661764705882353,
+      "effect_rows_with_observation_source_unverified": 23,
+      "source_studies_unverified": 12,
+      "remaining_680_certified_ebird_free": false,
+      "newly_fitted_biological_effects": false,
+      "claim": "Source-only methods audit found independent primary observation systems for 15 studies contributing 657 of 680 remaining E6 effect rows; 12 studies/23 effects still unreviewed and auxiliary source streams not exhaustively screened. Does not license fully eBird-free declaration."
     }
   ],
   "next_primary_test": {
