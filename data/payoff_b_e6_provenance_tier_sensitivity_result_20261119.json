@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-19",
+  "status": "POST_OPEN_NESTED_SOURCE_ORIGIN_SENSITIVITY_NOT_INDEPENDENT_ECOLOGICAL_CONFIRMATION",
+  "source_original": "Usui et al. 2017, Journal of Animal Ecology, 10.1111/1365-2656.12612",
+  "source_historical_E6_artifact_id": 10953792024,
+  "source_historical_E6_artifact_sha256": "443cab62531d9b633aa6ee67da010fa66b6c230ef87e919d697269e77a7373f0",
+  "source_944_row_derived_CSV_sha256": "817a2d2d18931944103283c93e4d9bf80568906a21a92369ee168e4f8f203085",
+  "source_usui_original_sha256": "68816f6cbfccbb9b47b45be0df49f077db914c8e43e567d0ed2cac9bbafde56c",
+  "model": "same frozen WLS inverse SE², arrival metric + temperature location + arrival location + data source + continent, Study x Species two-way clustered t CI; migration-distance long minus short",
+  "cohorts": {
+    "original_pre_source_audit_provenance_only": {
+      "effects": 944,
+      "studies": 28,
+      "species": 279,
+      "estimate": 0.42147637990921316,
+      "se": 0.1462843406216508,
+      "CI95": [
+        0.12132570573851353,
+        0.7216270540799128
+      ],
+      "p": 0.007671852672533249,
+      "df": 27,
+      "known_ebird_dependent": true
+    },
+    "known_ebird_study_removed": {
+      "effects": 680,
+      "studies": 27,
+      "species": 279,
+      "estimate": 0.6083890673642456,
+      "se": 0.11995552728869091,
+      "CI95": [
+        0.36181694969441286,
+        0.8549611850340784
+      ],
+      "p": 0.00002780855298266601,
+      "df": 26,
+      "fully_ebird_free_verified": false
+    },
+    "reported_original_local_source_description": {
+      "effects": 676,
+      "studies": 26,
+      "species": 279,
+      "estimate": 0.6018495000866944,
+      "se": 0.12016147374950908,
+      "CI95": [
+        0.3543723123439271,
+        0.8493266878294616
+      ],
+      "p": 0.00003644412671931109,
+      "df": 25,
+      "fully_ebird_free_verified": false
+    },
+    "more_explicit_original_observation_programme": {
+      "effects": 670,
+      "studies": 24,
+      "species": 279,
+      "estimate": 0.6238827646228353,
+      "se": 0.12205060198269732,
+      "CI95": [
+        0.3714018579751023,
+        0.8763636712705684
+      ],
+      "p": 0.00003537619018570792,
+      "df": 23,
+      "fully_ebird_free_verified": false
+    }
+  },
+  "source_provenance": {
+    "excluded_study": "Hurlbert & Liang 2012; original eBird checklists",
+    "excluded_effects": 264,
+    "remaining_source_not_traceable_to_one_precise_primary_dataset": "Zalakevicius 2002 Lithuania; 4 effects",
+    "additionally_excluded_for_weak_raw_log_custodian": [
+      "Rubolini et al. 2007; 4 effects",
+      "Ahola et al. 2004; 2 effects"
+    ],
+    "all_other_source_auxiliary_streams_comprehensively_audited": false,
+    "source_selection_independent_of_significance": true
+  },
+  "claims": {
+    "same_source_directional_robustness": true,
+    "new_external_replication": false,
+    "information_distance_causality_identified": false,
+    "actual_bird_information_exposure_observed": false,
+    "known_eBird_source_excluded_from_680_676_670": true,
+    "fully_eBird_free_certification": false,
+    "V7_q_by_geometry_urgency_fit": "NOT_ESTIMABLE"
+  }
+}
