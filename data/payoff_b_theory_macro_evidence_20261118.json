@@ -525,6 +525,23 @@
       "new_biological_effect_fitted": false,
       "prior_fitness_1991_2015_reported_in_2020": true,
       "claim": "Independent Nest D41 and climate D2 metadata yield max six post-2015 joint years, below frozen >=10-year out-of-period feasibility gate; single-year nest-visit/GPS overlap does not license an animal-level join. Existing Bylot fitness curve is already published prior art."
+    },
+    {
+      "id": "P1",
+      "class": "PUBLISHED_2026_RECENT_PRIOR_ART_NOVELTY_COLLISION",
+      "status": "STOPOVER_COUNT_TRACKING_AND_INDIVIDUAL_VARIANCE_TRACKING_OCCUPIED_BY_PRIMARY_PUBLISHED_STUDIES",
+      "source_1": "Liu et al. 2026 J Anim Ecol DOI 10.1111/1365-2656.70395 published 2026-11-05, n=220 spring paths 5 species 2015-2023, more stopover sites correlated with better breeding-area spring-greenup sensitivity",
+      "source_2": "Liu et al. 2026 Mov Ecol DOI 10.1186/s40462-026-00685-3 published 2026-07-27, n=323 spring tracks 172 individuals 4 species 2015-2022, individual variance relates to phenological tracking",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/407",
+      "shared_individuals_between_studies_verified": false,
+      "treat_two_publications_as_independent_replications": false,
+      "stopover_effect_novel_to_payoff": false,
+      "individual_variation_effect_novel_to_payoff": false,
+      "animal_predecision_information_exposure_observed_in_inspected_models": false,
+      "natural_q_x_urgency_and_interaction_coordination_identified": false,
+      "exact_antiphase_migration_theorem_unaffected": true,
+      "new_empirical_reanalysis_completed": false,
+      "claim": "Nov 2026 JAE work preempts simple more-stopovers → spring green-up tracking novelty; July 2026 movement ecology work preempts individual variability tracking headline. PAYOFF novelty must be framed as still prospective information availability × actionability × interaction matching, not these generic published effects."
     }
   ],
   "next_primary_test": {
