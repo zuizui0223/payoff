@@ -17,6 +17,10 @@ on:
       - 'scripts/payoff_b_ruppel_original_decision_join.R'
       - 'scripts/payoff_b_ruppel_join_source_receipt.py'
       - 'tests/test_payoff_b_ruppel_join_source_receipt.py'
+      - 'scripts/payoff_b_ruppel_GFS_issued_forecast_gate.py'
+      - 'tests/test_payoff_b_ruppel_GFS_issued_forecast_gate.py'
+      - 'data/payoff_b_ruppel_GFS_2019_2021_forecast_source_gate_20261119.json'
+      - 'docs/PAYOFF_B_RUPPEL_GFS_ISSUE_TIME_SOURCE_GATE_20261119.md'
       - 'docs/PAYOFF_B_RUPPEL_NATIVE_JOIN_PREFIT_20261119.md'
       - 'docs/PAYOFF_B_RUPPEL_RDATA_SOURCE_ESCALATION_20261119.md'
       - 'docs/PAYOFF_B_RUPPEL_SEQUENTIAL_SOURCE_CONTRACT_20261119.md'
@@ -91,6 +95,11 @@ jobs:
           python -m scripts.payoff_b_ruppel_join_source_receipt \
             --original-aggregate-csv outputs/ruppel_original/decision_join_metrics.csv \
             --output outputs/payoff_b_ruppel_individual_decision_join.json
+      - name: Check archived GFS 2019–21 predeparture forecast issue-time gate (NO forecast bytes accessed)
+        run: |
+          python -m pytest -q tests/test_payoff_b_ruppel_GFS_issued_forecast_gate.py
+          python -m scripts.payoff_b_ruppel_GFS_issued_forecast_gate \
+            --output outputs/payoff_b_ruppel_GFS_issue_time_source_gate.json
       - name: Save public metadata and aggregate-only source feasibility, no bird rows
         if: always()
         uses: actions/upload-artifact@v4
@@ -101,4 +110,5 @@ jobs:
             outputs/payoff_b_ruppel_RData_source_receipt.json
             outputs/payoff_b_ruppel_native_source_grain.json
             outputs/payoff_b_ruppel_individual_decision_join.json
+            outputs/payoff_b_ruppel_GFS_issue_time_source_gate.json
           if-no-files-found: warn
