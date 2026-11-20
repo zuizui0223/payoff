@@ -1,0 +1,58 @@
+name: PAYOFF-B prospective joint cue-recourse design simulator
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-joint-cue-actionability-design-20261120
+    paths:
+      - '.github/workflows/payoff-b-joint-cue-recourse-design.yml'
+      - 'data/payoff_b_joint_cue_recourse_experiment_contract_20261120.json'
+      - 'docs/PAYOFF_B_JOINT_CUE_RECOURSE_PROSPECTIVE_ASSAY_20261120.md'
+      - 'scripts/payoff_b_joint_cue_recourse_design_sim.py'
+      - 'tests/test_payoff_b_joint_cue_recourse_design_sim.py'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  exact-theory-and-synthetic-design:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install minimal test tooling; simulation uses Python stdlib
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Unit tests: q0, q×r interaction, independent colony counts and no false biological claim
+        run: python -m pytest -q tests/test_payoff_b_joint_cue_recourse_design_sim.py
+      - name: Execute all fixed synthetic sample-size scenarios
+        run: |
+          python -m scripts.payoff_b_joint_cue_recourse_design_sim \
+            --output outputs/payoff_b_joint_cue_recourse_synthetic_design_20261120.json
+      - name: Guard the output against being misclassified as ecological data
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('outputs/payoff_b_joint_cue_recourse_synthetic_design_20261120.json')
+          x=json.loads(p.read_text())
+          assert x['simulation_status']=='SYNTHETIC_DESIGN_CALIBRATION_ONLY_NO_NATURAL_DATA'
+          assert x['does_not_create_an_independent_positive_ecological_record'] is True
+          assert x['frozen_main_Payoff_B_papers_unchanged'] is True
+          assert len(x['synthetic_simulation'])==15
+          assert all(v['simulations']==300 for v in x['synthetic_simulation'])
+          assert all(v['synthetic_trials_per_colony']==48 for v in x['synthetic_simulation'])
+          print('SYNTHETIC_ONLY_RESULT_GATE_PASS: no animal observations or biology claimed')
+          PY
+      - name: Save aggregate synthetic power assumptions and results only
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-joint-cue-recourse-synthetic-design-20261120
+          path: outputs/payoff_b_joint_cue_recourse_synthetic_design_20261120.json
+          if-no-files-found: error
