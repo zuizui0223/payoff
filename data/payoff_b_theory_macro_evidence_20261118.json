@@ -1,0 +1,961 @@
+{
+  "as_of": "2026-11-18",
+  "scope": "PAYOFF-B math-to-natural-evidence crosswalk; no new natural-effect fit and no post-outcome manuscript retuning",
+  "provenance": {
+    "main": [
+      "docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md",
+      "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
+      "docs/PAYOFF_B_CROSS_SYSTEM_INFORMATION_RESULT_20260928.md",
+      "docs/PUBLICATION_STATUS.md",
+      "theory/ACTIONABILITY_BALANCE_THEOREM.md",
+      "docs/PAYOFF_B_WIGEON_PHASE_RETENTION_REVALIDATED_20260922.md",
+      "docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md"
+    ],
+    "draft_prs": [
+      396,
+      397,
+      398,
+      399,
+      400,
+      395
+    ],
+    "no_draft_merge": true
+  },
+  "statements": [
+    {
+      "id": "T1",
+      "class": "EXACT_CONDITIONAL",
+      "prediction": "When effective waiting cost D is fixed and the declared binary cue game applies, information-use threshold depends on D; higher D delays uptake.",
+      "anchor": "docs/PAYOFF_B_INFORMATION_DEADLINE_THEOREM_MAP_20260930.md",
+      "direct_natural_identification": false
+    },
+    {
+      "id": "T2",
+      "class": "EXACT_CONDITIONAL",
+      "prediction": "Improving information with declining actionability can have a unique interior time of maximal net value in the specified exponential reduced model.",
+      "anchor": "theory/ACTIONABILITY_BALANCE_THEOREM.md",
+      "direct_natural_identification": false
+    },
+    {
+      "id": "T3",
+      "class": "SYNTHETIC_MECHANISM",
+      "prediction": "Interaction-matched coordinated tracking can be beneficial while unilateral moves are selected against.",
+      "anchor": "docs/PAYOFF_B_2D_CONNECTIVITY_RESULTS_20260920.md",
+      "design_numerator": 22,
+      "design_denominator": 24,
+      "direct_natural_identification": false
+    },
+    {
+      "id": "T4",
+      "class": "EXACT_CONDITIONAL",
+      "prediction": "Routewise signed phase update has retention lambda=phi(1-hK) under the frozen linear observation/control assumptions; observed lambda alone does not identify phi,h,K.",
+      "anchor": "docs/PUBLICATION_STATUS.md",
+      "direct_natural_identification": false
+    },
+    {
+      "id": "T5",
+      "class": "EXACT_CONDITIONAL",
+      "prediction": "A better informed equilibrium can be inaccessible via unilateral transitions even under perfect environmental information.",
+      "anchor": "theory/PERFECT_INFORMATION_COORDINATION_TRAP.md",
+      "direct_natural_identification": false
+    },
+    {
+      "id": "E1",
+      "class": "ORIGINAL_REANALYSIS_MAIN",
+      "status": "DIRECTIONAL_WITH_DEPENDENCE_UNCERTAINTY",
+      "estimate": -0.0462,
+      "interval_95": [
+        -0.087,
+        -0.0054
+      ],
+      "p": 0.0265,
+      "n_rows": 3311,
+      "n_species": 37,
+      "anchor": "docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md",
+      "claim": "Predictive connectivity is directionally associated with smaller bird arrival-green-up mismatch; multiway clustering is not universally decisive."
+    },
+    {
+      "id": "E2",
+      "class": "SOURCE_RECONSTRUCTION_MAIN",
+      "status": "ROBUST_ASSOCIATION_NOT_CAUSAL",
+      "estimate": 0.421,
+      "interval_95": [
+        0.121,
+        0.722
+      ],
+      "unit": "days_per_C_long_minus_short",
+      "n_effects": 944,
+      "n_species": 279,
+      "n_studies": 28,
+      "anchor": "docs/PAYOFF_B_CROSS_SYSTEM_INFORMATION_RESULT_20260928.md",
+      "claim": "Long-distance migrants show weaker temperature advancement; endogenous or photoperiodic timing is an alternative.",
+      "source_policy_discovery_20261119": "E6 944 original effects include 264 source-published Hurlbert & Liang 2012 effects explicitly based on eBird; original E6 is NOT an eBird-free panel",
+      "known_ebird_excluded_sensitivity": {
+        "n_rows": 680,
+        "n_original_studies": 27,
+        "beta_long_minus_short_days_per_C": 0.6083890673642456,
+        "CI95": [
+          0.36181694969441286,
+          0.8549611850340784
+        ],
+        "p": 0.00002780855298266601,
+        "full_source_audit_pending": true,
+        "not_new_independent_discovery": true
+      }
+    },
+    {
+      "id": "E3",
+      "class": "PUBLISHED_BENCHMARK_REPRODUCED_MAIN",
+      "status": "DESCRIPTIVE_GROUP_DIFFERENCES",
+      "n_species": 1763,
+      "mean_days_per_C": {
+        "plants": -5.152,
+        "bees": -2.024,
+        "flies": -3.879,
+        "butterflies_moths": -1.848,
+        "beetles": -1.706
+      },
+      "anchor": "docs/PAYOFF_B_CROSS_SYSTEM_INFORMATION_RESULT_20260928.md",
+      "claim": "Local groups can respond differently to the same seasonal forcing; no linked-pair taxon causal comparison."
+    },
+    {
+      "id": "E4",
+      "class": "PUBLISHED_INTERACTION_EVIDENCE_MAIN",
+      "status": "PAIRWISE_TRACKING_BELOW_UNITY",
+      "slopes": {
+        "blue_tit": 0.51,
+        "great_tit": 0.515,
+        "pied_flycatcher": 0.348
+      },
+      "anchor": "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
+      "claim": "Actual bird-caterpillar interacting pairs display incomplete temporal tracking in published data."
+    },
+    {
+      "id": "E5",
+      "class": "PUBLISHED_INTERACTION_EVIDENCE_MAIN",
+      "status": "PAIRWISE_DIVERGENCE",
+      "estimate": 0.94,
+      "unit": "days_per_decade",
+      "n_schemes": 10,
+      "anchor": "docs/PAYOFF_B_PAIRWISE_TRACKING_BRIDGE_20260929.md",
+      "claim": "Resident tit and migrant flycatcher laying-date interval widened; deadline differences not measured."
+    },
+    {
+      "id": "E6",
+      "class": "SOURCE_REANALYSIS_MAIN",
+      "status": "OBSERVED_PHASE_CONTRACTION",
+      "n_animal_years": 152,
+      "sd_start_days": 26.406,
+      "sd_end_days": 13.173,
+      "whole_route_lambda": 0.10734,
+      "anchor": "docs/PUBLICATION_STATUS.md",
+      "claim": "Mule-deer route phase variability contracts; neither internal sensing nor effective deadline is identified."
+    },
+    {
+      "id": "E7",
+      "class": "SOURCE_REANALYSIS_MAIN",
+      "status": "ESTIMATOR_SCALE_RETENTION_REPRODUCED",
+      "n_staging_transitions": 224,
+      "wigeon_lambda_POWER": 0.749768,
+      "wigeon_lambda_ERA5": 0.811312,
+      "actuator_ERA5_p": 0.3104,
+      "anchor": "docs/PAYOFF_B_WIGEON_PHASE_RETENTION_REVALIDATED_20260922.md",
+      "claim": "Both environmental reconstructions give phase retention below 1; stopover slope is not reconstruction-robust."
+    },
+    {
+      "id": "D1",
+      "class": "DRAFT_POSTOPEN_EXPLORATORY",
+      "status": "INCREASED_ENVIRONMENTAL_COHERENCE",
+      "n_target_cells": 106,
+      "n_spatial_pairs": 104,
+      "n_unique_source_cells": 88,
+      "years": "2002-2017",
+      "change_mean_detrended_r": 0.08057016,
+      "block_ci_95": [
+        0.02409762,
+        0.1391265
+      ],
+      "anchor": "https://github.com/zuizui0223/payoff/pull/396",
+      "claim": "Eastern North American forest satellite spring coherence increased in this sample; not evidence of loss of predictability or bird behavior."
+    },
+    {
+      "id": "D2",
+      "class": "DRAFT_POSTOPEN_EXPLORATORY",
+      "status": "ORACLE_FORECAST_SKILL",
+      "percent_baseline_SSE_saved_2002_09": 74.54,
+      "percent_baseline_SSE_saved_2010_17": 59.94,
+      "anchor": "https://github.com/zuizui0223/payoff/pull/397",
+      "claim": "Completed southern green-up can substantially help retrospectively specified out-year satellite forecast; cue need not be available before a migration decision."
+    },
+    {
+      "id": "D3",
+      "class": "DRAFT_POSTOPEN_EXPLORATORY",
+      "status": "DECISION_TIME_AVAILABILITY_CONTRAST_WITH_POSTTARGET_INFLATION",
+      "scenario": "hypothetical 7-day lead + 7-day observation latency",
+      "gated_total_saved_percent_early": 0.1606,
+      "gated_total_saved_percent_late": 22.0806,
+      "pretarget_saved_percentage_points_early": 0.0502,
+      "pretarget_saved_percentage_points_late": 0.0896,
+      "posttarget_saved_percentage_points_late": 21.9909,
+      "anchor": "https://github.com/zuizui0223/payoff/pull/398",
+      "claim": "Most apparent late-period gated improvement comes from hypothetical decisions after actual target onset, invalid as a predecision gain."
+    },
+    {
+      "id": "D4",
+      "class": "DRAFT_POSTOPEN_EXPLORATORY",
+      "status": "NO_RELIABLE_TEMPORAL_TREND_CENSORED_CUE",
+      "binary_skill_early": 0.07478549,
+      "binary_skill_late": -0.03535724,
+      "contrast_late_minus_early": -0.11014,
+      "block_ci_95": [
+        -0.25963,
+        0.02295
+      ],
+      "anchor": "https://github.com/zuizui0223/payoff/pull/399",
+      "claim": "A not-yet-occurred binary source-event cue has early positive skill under an assumed observation system but no reliable late-early change."
+    },
+    {
+      "id": "N1",
+      "class": "REGISTERED_NEGATIVE_MAIN",
+      "status": "NOT_SUPPORTED",
+      "wigeon_q_by_incoming_phase_beta": 0.0202,
+      "interval_95": [
+        -0.1058,
+        0.1461
+      ],
+      "p": 0.756,
+      "anchor": "docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md",
+      "claim": "Predictive connectivity interaction with incoming phase not supported."
+    },
+    {
+      "id": "N2",
+      "class": "REGISTERED_NEGATIVE_MAIN",
+      "status": "NO_REVERSE_GATE",
+      "anchor": "docs/PAYOFF_B_CANONICAL_CLAIM_STACK_20260927.md",
+      "claim": "Hoge Veluwe E4/E5 natural cue-driver and cue-resource decline-to-recovery prerequisites failed; no natural hysteresis proof."
+    },
+    {
+      "id": "F1",
+      "class": "DRAFT_ORIGINAL_SOURCE_READINESS",
+      "status": "V7_NOT_ESTIMABLE",
+      "n_GPS_fixes": 52443,
+      "n_source_identified_birds": 44,
+      "n_published_q_pairs": 23,
+      "n_direct_adjacent_q": 13,
+      "n_adjacent_without_uncertain_alias": 11,
+      "anchor": "https://github.com/zuizui0223/payoff/pull/400",
+      "claim": "Independent historical q aggregates recovered; annual regional spring onset and original stopover geometry/crosswalk still absent, so no q-by-urgency biological fit."
+    },
+    {
+      "id": "D5",
+      "class": "DRAFT_ORIGINAL_SOURCE_ONLY_PREFIT",
+      "status": "ORDINAL_Q_TOPOLOGY_SCREEN_COMPLETE_V7_HOLD",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/400",
+      "original_published_pairwise_q": 23,
+      "consecutive_q": 13,
+      "consecutive_q_without_unresolved_label_alias": 11,
+      "three_flyways": true,
+      "signed_q_mean_all": 0.545384615,
+      "signed_q_mean_alias_clean": 0.515454545,
+      "q_by_ordinal_stage_r_all": -0.056224901,
+      "q_by_ordinal_stage_r_alias_clean": 0.050274904,
+      "barrier_incoming_q_mean_all": 0.178,
+      "nonbarrier_incoming_q_mean_all": 0.775,
+      "nonbarrier_incoming_q_mean_alias_clean": 0.796666667,
+      "q_times_ordinal_rank_auxiliary_vif_all": 5.289422133,
+      "q_times_ordinal_rank_auxiliary_vif_alias_clean": 5.590631251,
+      "n_additive_predictors": 6,
+      "ordinal_design_predictor_columns_including_interaction": 7,
+      "transition_level_df_if_independent_alias_clean": 4,
+      "claim": "Historical environmental predictability is heterogeneous over source ordinal routes and barriers; coding-dependent ordinal interaction has limited independent predictor variation; no registered geometric urgency, goose outcome or fitness coefficient was estimated.",
+      "original_16_region_geometry_verified": false,
+      "annual_region_year_GDD_onset_available": false,
+      "registered_q_by_U_identified": false
+    },
+    {
+      "id": "F2",
+      "class": "SOURCE_GRAIN_AND_REPRODUCIBILITY_GATE",
+      "status": "ORIGINAL_REGION_YEAR_ANNUAL_INPUT_NOT_AVAILABLE",
+      "source": "https://doi.org/10.1111/1365-2656.12281",
+      "implemented_in": "https://github.com/zuizui0223/payoff/pull/400",
+      "original_source_years": [
+        1982,
+        2011
+      ],
+      "original_region_count": 16,
+      "required_candidate_annual_rows": 480,
+      "original_S1_marginal_moments": 16,
+      "original_signed_q_pairs": 23,
+      "numeric_replay_printing_tolerances": {
+        "mean_days": 0.5000001,
+        "sd_days": 0.0500001,
+        "r": 0.0050001
+      },
+      "synthetic_negative_control": {
+        "matched_S1": 16,
+        "matched_r": 0,
+        "original_biological_data_used": false
+      },
+      "independently_source_authenticated": false,
+      "original_region_GPS_crosswalk_identified": false,
+      "registered_bird_q_times_geographic_urgency_fitted": false,
+      "claim": "Source-identity and joint annual q reproduction are distinct gates; no original yearly spring matrix or author region mapping is confirmed. Even full aggregate replay cannot automatically admit a candidate source."
+    },
+    {
+      "id": "E8",
+      "class": "PUBLISHED_PRIOR_ART_MEASUREMENT_DISTINCTION",
+      "status": "ENVIRONMENTAL_PREDICTABILITY_AND_REALIZED_TIMING_NOT_EQUIVALENT",
+      "source": "https://doi.org/10.1111/1365-2656.12281",
+      "author_reported": "Ecological barriers lowered interregional climatic correlation but did not systematically reduce goose arrival timing precision",
+      "claim": "Historical cue predictability and realized timing precision must be measured separately; original 2015 authors had already reported this separation and it does not identify recourse or information-use strategy.",
+      "actual_site_or_region_timing_difference": "Original 2015 q was based on generalized regional GDD jerks, while published goose arrival precision used spring onset for individual stopover sites; frozen V7 uses region-year S_jy for a separately registered response.",
+      "novel_to_payoff": false
+    },
+    {
+      "id": "D6",
+      "class": "POST_PUBLICATION_PUBLISHED_AGGREGATE_NEGATIVE_TRANSFER",
+      "status": "ORDINAL_Q_BY_STAGE_IN_SAMPLE_GAIN_WITH_HELDOUT_DEGRADATION",
+      "source": "https://doi.org/10.1111/1365-2656.12281",
+      "branch_pr": "https://github.com/zuizui0223/payoff/pull/402",
+      "analysis_scope": "Original published Fig3 region-pooled site timing RMSD joined to original historical regional q on same destination; not V7 individual region-year timing",
+      "n_published_destination_regions": 13,
+      "n_original_flyways": 3,
+      "n_alias_clean_destinations": 11,
+      "n_independent_flyway_holdouts": 3,
+      "raw_pearson_q_rmsd_all": -0.14017741,
+      "raw_pearson_q_rmsd_alias_clean": -0.265036659,
+      "raw_spearman_q_rmsd_all": 0.074277924,
+      "original_published_rmsd_q_association_prior_art_p": 0.03,
+      "full_sample_ordinal_product_in_sample_SSE_gain_all_percent": 25.8339804,
+      "alias_clean_ordinal_product_in_sample_SSE_gain_percent": 16.876934,
+      "full_sample_heldout_MSE_additive_days2": 138.451829895,
+      "full_sample_heldout_MSE_product_days2": 183.293902423,
+      "alias_clean_heldout_MSE_additive_days2": 119.59060581,
+      "alias_clean_heldout_MSE_product_days2": 182.56944087,
+      "original_geographic_urgency_U_fitted": false,
+      "original_individual_bird_outcome_fitted": false,
+      "independent_natural_replication": false,
+      "claim": "Adding q×ordinal route stage overfits published regional RMSD: within-sample SSE improves but 3-flyway leave-one-flyway-out error worsens. No robust stage interaction, biological information-use or V7 effect is established. Older authors already reported an adjusted regional q–RMSD association."
+    },
+    {
+      "id": "F3",
+      "class": "POST_OPEN_SOURCE_PROVENANCE_MANDATORY_CORRECTION",
+      "status": "KNOWN_EBIRD_STUDY_EXCLUDED_FULL_REMAINING_AUDIT_PENDING",
+      "original_source": "Usui et al 2017 doi:10.1111/1365-2656.12612",
+      "verified_ebird_study": "Hurlbert & Liang 2012 doi:10.1371/journal.pone.0031662",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/404",
+      "eBird_derived_effects_excluded": 264,
+      "source_studies_removed": 1,
+      "original_effects": 944,
+      "corrected_effects": 680,
+      "original_beta": 0.4214763799092083,
+      "corrected_beta": 0.6083890673642456,
+      "corrected_CI95": [
+        0.36181694969441286,
+        0.8549611850340784
+      ],
+      "original_studies": 28,
+      "corrected_studies": 27,
+      "other_studies_certified_no_eBird": false,
+      "claim": "Known eBird-derived effects included in prior E6; forced verified-source exclusion does not reverse original gradient. Still not certified fully eBird-free or causal."
+    },
+    {
+      "id": "F4",
+      "class": "SOURCE_ONLY_IDENTIFIABILITY_FAIL",
+      "status": "NO_TEMPERATURE_LOCATION_MIGRATION_DISTANCE_MODIFIER_FIT",
+      "source": "Usui 2017 E6 944 previously selected rows; source-only study crossing and 680-row known-eBird-study exclusion",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/403",
+      "original_source_location_levels": [
+        "breeding",
+        "passage",
+        "passage or breeding",
+        "wintering"
+      ],
+      "source_ambiguous_location_label": "passage or breeding",
+      "source_ambiguous_rows_before": 550,
+      "source_ambiguous_rows_after_known_eBird_exclusion": 286,
+      "best_within_study_two_location_x_two_distance_crossed_studies": 2,
+      "required_min_crossed_studies": 5,
+      "other_location_pair_count_with_crossed_studies": 0,
+      "registered_new_biological_interaction_opened": false,
+      "claim": "Only 2 original studies contain both distance classes at breeding and passage temperatures, versus predeclared minimum 5; no defensible independently supported location×distance interaction can be estimated."
+    },
+    {
+      "id": "F5",
+      "class": "PARTIAL_SOURCE_PROVENANCE_ORIGINAL_PRIMARY_OBSERVATION_AUDIT",
+      "status": "657_OF_680_EFFECTS_WITH_ALTERNATIVE_ORIGINAL_OBSERVATION_SOURCE_IDENTIFIED_NOT_FULLY_CERTIFIED",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/404",
+      "original_E6_effects": 944,
+      "confirmed_eBird_derived_excluded_effects": 264,
+      "remaining_after_known_eBird_exclusion": 680,
+      "remaining_source_studies": 27,
+      "original_studies_with_independently_documented_primary_observation_source": 15,
+      "source_effects_with_alternative_primary_observation_source_identified": 657,
+      "fraction_remaining_effects_with_primary_origin_documented": 0.9661764705882353,
+      "effect_rows_with_observation_source_unverified": 23,
+      "source_studies_unverified": 12,
+      "remaining_680_certified_ebird_free": false,
+      "newly_fitted_biological_effects": false,
+      "claim": "Source-only methods audit found independent primary observation systems for 15 studies contributing 657 of 680 remaining E6 effect rows; 12 studies/23 effects still unreviewed and auxiliary source streams not exhaustively screened. Does not license fully eBird-free declaration.",
+      "superseded_by_updated_source_origins": "F6",
+      "historical_source_audit_wave": "Prior 15-study/657-effect partial audit, now enlarged to 26/676; not independently additive"
+    },
+    {
+      "id": "F6",
+      "class": "UPDATED_POST_OPEN_PROVENANCE_TIERS_AND_NESTED_SOURCE_ONLY_SENSITIVITY",
+      "status": "ONE_ORIGINAL_SOURCE_UNVERIFIED_AND_EFFECT_DIRECTION_STABLE_ACROSS_TIERS",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/404",
+      "source_article": "Usui et al. 2017, DOI 10.1111/1365-2656.12612",
+      "original_archive_sha256": "443cab62531d9b633aa6ee67da010fa66b6c230ef87e919d697269e77a7373f0",
+      "inherited_main_E6_effects_including_known_eBird": 944,
+      "forced_eBird_study_removed_effects": 264,
+      "remaining_after_exclusion": 680,
+      "source_described_effects": 676,
+      "source_described_studies": 26,
+      "more_explicit_monitoring_effects": 670,
+      "more_explicit_monitoring_studies": 24,
+      "Lithuanian_Zalakevicius_2002_original_source_unverified_effects": 4,
+      "weak_raw_log_custodian_studies": [
+        "Rubolini et al. 2007",
+        "Ahola et al. 2004"
+      ],
+      "nested_long_minus_short_days_per_C": {
+        "source_mixed_original_944": 0.42147637990921316,
+        "known_eBird_excluded_680": 0.6083890673642456,
+        "described_local_source_676": 0.6018495000866944,
+        "explicit_monitoring_670": 0.6238827646228353
+      },
+      "CIs_95": {
+        "source_mixed_original_944": [
+          0.12132570573851353,
+          0.7216270540799128
+        ],
+        "known_eBird_excluded_680": [
+          0.36181694969441286,
+          0.8549611850340784
+        ],
+        "described_local_source_676": [
+          0.3543723123439271,
+          0.8493266878294616
+        ],
+        "explicit_monitoring_670": [
+          0.3714018579751023,
+          0.8763636712705684
+        ]
+      },
+      "source_audit_not_full_eBird_independence_certification": true,
+      "original_gradient_prior_art": true,
+      "post_open_nesting_not_independent_replication": true,
+      "causal_information_distance_or_animal_cue_use_identified": false,
+      "new_biological_interaction_fitted": false,
+      "claim": "Original Usui gradient is directionally stable under post-open source-origin restrictions, but full eBird-free certification and causal information availability remain unidentified; V7 goose q×U still NOT_ESTIMABLE."
+    },
+    {
+      "id": "F7",
+      "class": "POST_OPEN_WITHIN_STUDY_SOURCE_ROBUSTNESS_OF_ALREADY_PUBLISHED_MIGRATION_DISTANCE_EFFECT",
+      "status": "13_STUDY_FIXED_EFFECT_GRADIENT_POSITIVE_WITH_SOURCE_PROVENANCE_LIMITS",
+      "source_original": "Usui et al. 2017 JAE, 10.1111/1365-2656.12612",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/405",
+      "artifact_actions_run": 44484580314,
+      "artifact_id": 14509328403,
+      "source": "Original E6 source-verified 944 metadata; exclude known eBird 264 and original-source-unidentified Lithuania 4 before selecting same-study contrasts",
+      "original_source_described_panel": 676,
+      "original_studies_in_source_described_panel": 26,
+      "studies_with_short_and_long": 13,
+      "effect_rows_in_crossed_studies": 444,
+      "original_species_in_crossed_studies": 269,
+      "beta_long_minus_short_days_per_C": 0.5252532818331166,
+      "two_way_cluster_study_species_se": 0.13813488906607674,
+      "CI95": [
+        0.22428321331129158,
+        0.8262233503549417
+      ],
+      "p_exploratory": 0.0025184879693268625,
+      "effective_study_df": 12,
+      "weightcap_99_beta": 0.5254375013693978,
+      "unweighted_beta": 0.6086066573240709,
+      "leave_one_study_out": {
+        "repeats": 13,
+        "all_positive": true,
+        "min_beta": 0.47279272297930586,
+        "max_beta": 0.6230059463836829
+      },
+      "n_original_studies_with_positive_descriptive_contrast": 11,
+      "n_original_studies_with_negative_descriptive_contrast": 2,
+      "original_published_distance_gradient_not_new_discovery": true,
+      "source_fully_verified_eBird_free": false,
+      "causal_information_access_identified": false,
+      "prospective_new_data_replication": false,
+      "result_interpretation": "After original study fixed intercepts the published Usui migration-distance temperature response gradient remains positive in 13 studies with within-study class variation. Still no actual predeparture cue, information deadline, downstream recourse or interactor fitness measured."
+    },
+    {
+      "id": "F8",
+      "class": "NEW_INDEPENDENT_SOURCE_FEASIBILITY_NOT_BIOLOGICAL_FIT",
+      "status": "BYLOT_2026_NESTING_X_CLIMATE_POST2015_MAX_6_YEARS_OUTYEAR_GATE_FAIL",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/406",
+      "source_1": "Nordicana D41 v1.2 DOI 10.5885/45570CE-2D00DCA728074FA7; 1989-2025 nest summaries; missing 2020/21/24; original nest visits end 2019",
+      "source_2": "Nordicana D2 v1.13.0 DOI 10.5885/45039SL-EE76C1BDAADC4890; BYLCAMP mean air temperature Aug1993-Jul2023",
+      "source_3": "Movebank study 1442516400 greater snow goose migration; 2019-2023 public study summary only, no original GPS permission or nest join verified",
+      "historical_climate_vs_breeding_years": 22,
+      "historical_years": [
+        1994,
+        2015
+      ],
+      "nominal_post2015_possible_years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2022,
+        2023
+      ],
+      "nominal_post2015_year_ceiling": 6,
+      "frozen_min_independent_outyear_years": 10,
+      "individual_nest_visits_x_GPS_year_overlap": [
+        2019
+      ],
+      "nest_summary_x_GPS_nominal_overlap": [
+        2019,
+        2022,
+        2023
+      ],
+      "original_nest_and_climate_bytes_obtained": false,
+      "source_terms_accepted_by_assistant": false,
+      "individual_cue_fitness_join_identified": false,
+      "new_biological_effect_fitted": false,
+      "prior_fitness_1991_2015_reported_in_2020": true,
+      "claim": "Independent Nest D41 and climate D2 metadata yield max six post-2015 joint years, below frozen >=10-year out-of-period feasibility gate; single-year nest-visit/GPS overlap does not license an animal-level join. Existing Bylot fitness curve is already published prior art."
+    },
+    {
+      "id": "P1",
+      "class": "PUBLISHED_2026_RECENT_PRIOR_ART_NOVELTY_COLLISION",
+      "status": "STOPOVER_COUNT_TRACKING_AND_INDIVIDUAL_VARIANCE_TRACKING_OCCUPIED_BY_PRIMARY_PUBLISHED_STUDIES",
+      "source_1": "Liu et al. 2026 J Anim Ecol DOI 10.1111/1365-2656.70395 published 2026-11-05, n=220 spring paths 5 species 2015-2023, more stopover sites correlated with better breeding-area spring-greenup sensitivity",
+      "source_2": "Liu et al. 2026 Mov Ecol DOI 10.1186/s40462-026-00685-3 published 2026-07-27, n=323 spring tracks 172 individuals 4 species 2015-2022, individual variance relates to phenological tracking",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/407",
+      "shared_individuals_between_studies_verified": false,
+      "treat_two_publications_as_independent_replications": false,
+      "stopover_effect_novel_to_payoff": false,
+      "individual_variation_effect_novel_to_payoff": false,
+      "animal_predecision_information_exposure_observed_in_inspected_models": false,
+      "natural_q_x_urgency_and_interaction_coordination_identified": false,
+      "exact_antiphase_migration_theorem_unaffected": true,
+      "new_empirical_reanalysis_completed": false,
+      "claim": "Nov 2026 JAE work preempts simple more-stopovers → spring green-up tracking novelty; July 2026 movement ecology work preempts individual variability tracking headline. PAYOFF novelty must be framed as still prospective information availability × actionability × interaction matching, not these generic published effects."
+    },
+    {
+      "id": "C1",
+      "class": "INDEPENDENT_SOURCE_CANDIDATE_BIRD_GPS_NEST_SUCCESS_NOT_INFORMATION",
+      "status": "PUBLISHED_LINKED_INDIVIDUAL_MOVEMENT_FITNESS_PROXY_AVAILABLE_SCHEMA_VISIBLE_CUE_MISSING",
+      "source": "Hanzelka et al. 2026, DOI 10.1002/jav.03665",
+      "dataset_DOI": "10.5061/dryad.31zcrjf22",
+      "archive_published": "2026-10-01",
+      "original_source_site": "https://datadryad.org/dataset/doi%3A10.5061/dryad.31zcrjf22",
+      "original_species": "Numenius arquata Eurasian Curlew",
+      "source_n_GPS_individuals": 124,
+      "source_n_habitat_periods": 233,
+      "source_years": [
+        2016,
+        2025
+      ],
+      "source_derived_table": "dt_hab_Curlew.csv inside Curlew_COE_habitat.zip (590.99MB)",
+      "documented_columns": [
+        "Bird_ID",
+        "ID_seas",
+        "Nest_succ",
+        "Prebr",
+        "Dist",
+        "Sex",
+        "Non_gr",
+        "Br_gr",
+        "st_grass",
+        "st_wetland",
+        "non_mudflats"
+      ],
+      "documented_outcome_definition": "Nest_succ indicates incubated nest success binary; not long-term offspring survival",
+      "source_gps_breeding_coordinates": "X_br and Y_br redacted for sensitivity",
+      "individual_level_movement_to_nest_fitness_link_declared_in_source_README": true,
+      "original_zip_bytes_downloaded_in_current_analysis": false,
+      "source_SHA256_verified": false,
+      "original_article_habitat_use_nest_success_association_already_published": true,
+      "precommitment_environmental_cue_observation_or_timestamp_recorded_in_derived_table": false,
+      "daily_individual_climate_source_mapping_verified": false,
+      "observational_breeding_preparation_period_Prebr_is_direct_actionability": false,
+      "direct_payoff_information_deadline_identified": false,
+      "source_access_rule": "Original 590.99MB Dryad ZIP and source rights/schema must be verified before row-level fitting; do not guess sensitive GPS coordinates or treat Prebr as causal D_eff.",
+      "claim": "A new public 2026 Eurasian Curlew data package contains an original individual ID linked to movement-derived habitat and binary nest success, closer to a movement-to-fitness outcome. However the author-published habitat effect is prior art, coordinates are redacted, and an independent predecision cue and actionability remain missing. Screening candidate only.",
+      "original_source_publication_version_id": 466868,
+      "original_archive_file_id": 4989265,
+      "original_archive_exact_provider_size_bytes": 590985065,
+      "original_archive_provider_sha256_not_independently_recalculated": "e3556851ef646eabad21dc0d482da58028b0327a8aaf459fdb02c3896bd48372",
+      "original_public_anonymous_file_GET_HTTP": 401,
+      "source_access_updated_20261119": "DRYAD_METADATA_VERIFIED_ORIGINAL_ARCHIVE_AND_README_DOWNLOAD_HTTP401",
+      "source_grain_audit_eligibility": "NOT_ESTIMABLE_NO_ORIGINAL_CSV_BYTES",
+      "offline_source_utility": "scripts/payoff_b_curlew_local_source_admission.py",
+      "external_authorized_input_needed": "Original SHA256-verified full Dryad ZIP or extracted dt_hab_Curlew.csv (weaker provenance)"
+    },
+    {
+      "id": "F9",
+      "class": "CURLEW_ORIGINAL_SOURCE_ACCESS_AND_GRAIN_GATE",
+      "status": "PUBLIC_ORIGINAL_METADATA_VERIFIED_DOWNLOAD_HTTP_401_NOT_FITTED",
+      "source": "Dryad DOI 10.5061/dryad.31zcrjf22; Hanzelka et al. 2026 DOI 10.1002/jav.03665",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/408",
+      "original_provider_version_id": 466868,
+      "original_2026_zip_file_id": 4989265,
+      "original_zip_size_bytes": 590985065,
+      "original_zip_provider_sha256_not_own_recomputed": "e3556851ef646eabad21dc0d482da58028b0327a8aaf459fdb02c3896bd48372",
+      "original_readme_file_id": 4989366,
+      "original_readme_provider_sha256_not_own_recomputed": "feb2e058090abd6863ef91570cd3afe4136d7ec9bb41f040612764648b5b892b",
+      "official_anonymous_zip_Range_HTTP_status": 401,
+      "official_anonymous_readme_HTTP_status": 401,
+      "CI_dedicated_run": 44509246382,
+      "CI_synthetic_source_admission_tests_passed": 10,
+      "original_individual_season_rows_or_repeated_birds_verified": false,
+      "original_nest_success_new_result_fitted": false,
+      "source_author_124_birds_233_periods_only_metadata": true,
+      "original_bird_climate_decision_time_cue_measured": false,
+      "direct_payoff_information_deadline_identified": false,
+      "claim": "Original Curlew 2026 published source metadata and provider SHA256 are verified; actual ZIP/README download is HTTP401, so no individual repeated-year source grain or movement-to-fitness biological coefficient is established. Safe offline source admission is implemented for a user-authorized ZIP/CSV."
+    },
+    {
+      "id": "D7",
+      "class": "INDEPENDENT_SOURCE_LINEAGE_POST_PUBLICATION_LAGGED_BEHAVIOR_AND_HELDOUT_PREDICTION",
+      "status": "SOURCE_VERIFIED_CONDITIONAL_LINEAR_NULL_AND_CALENDAR_MATCHED_PERMUTATION_DOWNGRADE",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/409",
+      "original_paper": "Schindler et al 2024 Proc R Soc B doi:10.1098/rspb.2023.2016",
+      "original_git_blob_sha1": "ca3736a281dfd2465921efc940dd985499c71a4f",
+      "original_public_csv_sha256": "5d31ef41867d7f591f5a3fc5f2936df6e01dd91951c006e35b607a1e542e8972",
+      "original_source_stage_rows": 642,
+      "individual_bird_years": 107,
+      "individual_birds": 49,
+      "repeated_birds_2plus": 30,
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "original_breeding_successes": 28,
+      "original_failures": 72,
+      "original_deferrals": 7,
+      "primary_lagged_beta_fraction_per_10pp_early_freezing": -0.0013725255396581735,
+      "primary_bird_cluster_ci95": [
+        -0.013697070348722811,
+        0.010952019269406464
+      ],
+      "primary_p": 0.8237739635307635,
+      "primary_partial_SSE_reduction_fraction": 0.00044887152132395725,
+      "original_year_2018_omission": "NOT_ESTIMABLE_stage4_storm_fraction_zero_variation",
+      "feeding_ridge_heldout": {
+        "leave_one_bird_out_MSE_baseline": 0.004734243677455496,
+        "leave_one_bird_out_MSE_added_early_freeze": 0.004399626468961512,
+        "leave_one_year_out_MSE_baseline": 0.012608861987928585,
+        "leave_one_year_out_MSE_added_early_freeze": 0.010500353704119267,
+        "outyear_improvement_years": [
+          2019,
+          2020,
+          2021
+        ],
+        "outyear_worse_years": [
+          2018,
+          2022
+        ]
+      },
+      "breeding_success_logistic_heldout": {
+        "leave_one_bird_out_logloss_base": 0.6502394729900656,
+        "leave_one_bird_out_logloss_added_late_behavior": 0.6520459377310379,
+        "leave_one_year_out_logloss_base": 0.6541368539364134,
+        "leave_one_year_out_logloss_added_late_behavior": 0.6420964478351439,
+        "year2020_worse_with_late_behavior": true
+      },
+      "github_actions_source_hashed_run": 44529079285,
+      "github_actions_aggregate_artifact": 14532508038,
+      "original_2024_movement_energetic_breeding_association_prior_art": true,
+      "causal_predecision_info_q_observed": false,
+      "downstream_actionability_r_t_identified": false,
+      "bird_cue_acquisition_observed": false,
+      "information_deadline_qwait_fitted": false,
+      "original_V7_goose_q_by_U_fitted": false,
+      "animal_ids_or_source_gps_exported": false,
+      "no_eBird_occurrence_input": true,
+      "claim": "The original 2024 weather-to-feeding conditional β is near zero; retrospective early-freeze forecast gains do not stand out from same-date or week-duration matched source shuffles (post-open upper tails 0.35-0.58), reversing the stronger interpretation of an earlier within-year-only 0.02 diagnostic. Fully date-and-duration matched evidence is not estimable (17 original swappable bird-years). Breeding predictions still mixed. No causal bird cue, compensation or information-deadline effect.",
+      "year_preserving_postopen_permutation": {
+        "design": "Original stage3 freezing fractions reassigned only among bird-years in same original year, 99 shuffles, seed 20261119; original food/weather/date/outcomes unchanged",
+        "anchor": "https://github.com/zuizui0223/payoff/pull/409",
+        "source_GitHub_run": 44530687896,
+        "original_bird_heldout_freeze_gain_MSE": 0.00033461720849398396,
+        "null_bird_heldout_gain_median": -0.000061005739937827416,
+        "null_bird_heldout_95pct_bound": 0.00021656272629728266,
+        "original_year_heldout_freeze_gain_MSE": 0.0021085082838093235,
+        "null_year_heldout_gain_median": -0.00006671321097058598,
+        "null_year_heldout_95pct_bound": 0.0012222339582655182,
+        "n_permutations_with_gain_at_least_original_bird": 1,
+        "n_permutations_with_gain_at_least_original_year": 1,
+        "corrected_postopen_tail_fraction_both": 0.02,
+        "truly_randomized_bird_environmental_information": false,
+        "permutation_exchanges_source_date_alignment_too": true,
+        "causal_p_value": false,
+        "interpretation": "Weather-to-bird-year original matching predicts later feeding better than almost all within-year shuffles, but temporal date/habitat confounding and post-open nonexchangeability remain. Does not override primary weak conditional OLS or prove cue use.",
+        "superseded_scientific_interpretation_by_calendar_matched_check": true,
+        "original_uncorrected_permutation_tail_is_not_robust_to_date_matching": true
+      },
+      "calendar_matched_source_only_permutation": {
+        "anchor": "https://github.com/zuizui0223/payoff/pull/409",
+        "original_publication_source": "Schindler et al 2024 original spring_data.csv, same 107 bird-years not new evidence",
+        "source_SHA1": "ca3736a281dfd2465921efc940dd985499c71a4f",
+        "post_open_design": true,
+        "n_null_shuffles_per_passing_design": 99,
+        "exact_year_and_start_day": {
+          "n_swappable": 48,
+          "n_nonconstant_blocks": 14,
+          "n_years": 5,
+          "observed_bird_CV_gain": 0.00033461720849398396,
+          "observed_year_CV_gain": 0.0021085082838093235,
+          "n_null_bird_ge_observed": 47,
+          "corrected_bird_tail": 0.48,
+          "n_null_year_ge_observed": 57,
+          "corrected_year_tail": 0.58
+        },
+        "year_and_week_and_3day_duration": {
+          "n_swappable": 52,
+          "n_nonconstant_blocks": 11,
+          "n_years": 5,
+          "n_null_bird_ge_observed": 34,
+          "corrected_bird_tail": 0.35,
+          "n_null_year_ge_observed": 46,
+          "corrected_year_tail": 0.47
+        },
+        "exact_start_and_exact_duration": {
+          "n_swappable": 17,
+          "n_nonconstant_blocks": 7,
+          "n_years": 4,
+          "minimum_swappable": 40,
+          "minimum_blocks": 8,
+          "status": "NOT_ESTIMABLE_SOURCE_SUPPORT_FAIL_NO_SHUFFLES"
+        },
+        "original_within_year_0_02_signal_robust_to_calendar_controls": false,
+        "all_107_original_bird_years_fully_exchangeable_under_date_matching": false,
+        "source_outcome_causal_information_q_estimated": false,
+        "source_derived_predictive_information_entirely_due_to_date_proven": false,
+        "policy": "Keep original 0.02 evidence as historical but its special individual cue interpretation downgraded; do not retune this original cohort to search for positive information-use effect.",
+        "github_actions_run": 44537189557,
+        "github_artifact_id": 14537265791,
+        "original_artifact_zip_SHA256": "b59bb249f87fe549f3897d3e1594c4548c928bdbdce54253034bd48b60bb570a",
+        "matched_permutation_json_SHA256": "2962e8353364278a387561604406489f72baae97d11a33948933fea2acf63348"
+      }
+    },
+    {
+      "id": "C2",
+      "class": "INDEPENDENT_PUBLISHED_SOURCE_MEASUREMENT_FOR_SEQUENTIAL_MIGRATORY_DECISIONS_PRIOR_ART",
+      "status": "ORIGINAL_RDATA_LINK_VERIFIED_BUT_ROUTE_LANDING_MODIFIER_FAILS_FROZEN_SUPPORT",
+      "source_original": "Rüppel et al. 2023 Royal Society Open Science DOI 10.1098/rsos.221420",
+      "source_figshare": "10.6084/m9.figshare.c.6403996",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/410",
+      "figshare_original_zip_file_id": 38968813,
+      "original_zip_sha256_recalculated": "0ef08e19104aaceff5ef2700c324a094c49cbe2cd24ca198e3853b656d7744c6",
+      "original_data_event_rows": 1783,
+      "original_data_event_columns": 33,
+      "original_flight_rows": 178,
+      "original_flight_columns": 70,
+      "original_individual_ids_in_both": 178,
+      "original_id_set_overlap": 178,
+      "n_unmatched_ids": 0,
+      "n_duplicate_first_flight_ids": 0,
+      "n_daily_departure_events": 178,
+      "n_at_risk_nondeparture_rows": 1605,
+      "original_landing_events": 24,
+      "original_flight_nonlandings": 154,
+      "original_start_end_weather_data_complete": 178,
+      "terminal_departure_same_UTC_day_as_flight": 175,
+      "terminal_departure_within_UTC_plusminus1": 178,
+      "source_route_categories_need_author_code_mapping": false,
+      "direct_individual_event_and_flight_source_authenticated": true,
+      "weather_at_decision_is_animal_future_cue_belief": false,
+      "individual_future_environment_forecast_reliability_q_identified": false,
+      "postflight_reproductive_fitness_measured": false,
+      "causal_actionability_r_or_waiting_cost_D_identified": false,
+      "published_departure_routing_landing_weather_effects_prior_art": true,
+      "newly_fitted_biological_effect": false,
+      "natural_theory_information_deadline_q_wait_estimated": false,
+      "science_claim": "Original RData joins 178 individual at-risk sequences, 178 first flights and 24 landing events, with individual event time and flight start/end weather; published Rüppel 2023 already demonstrates weather associations across decisions. This verifies source-grain feasibility, not a new biological effect or natural cue-belief/deadline mechanism.",
+      "source_author_route_category_mapping": {
+        "coasting": 154,
+        "sea-crossing": 24
+      },
+      "source_route_recovered_from_original_RData": true,
+      "source_join_regression_source_studies": 1,
+      "independently_archived_operational_forecast_2019_2021_source_gate": {
+        "archive": "NCAR GDEX d084001 NCEP GFS 0.25° historical operational forecast GRIB2, DOI 10.5065/D65D8PWK",
+        "original_archive_page": "https://gdex.ucar.edu/datasets/d084001/",
+        "original_data_access_page": "https://gdex.ucar.edu/datasets/d084001/dataaccess/",
+        "historical_years_metadata_available": [
+          2019,
+          2020,
+          2021
+        ],
+        "actual_GFS_issued_forecast_subset_requires_login": true,
+        "user_GDEX_login_or_terms_accepted": false,
+        "source_original_forecast_GRIB2_bytes_retrieved": false,
+        "original_specific_u10_v10_cloud_parameter_grain_verified": false,
+        "original_issued_forecast_before_bird_choice_measured": false,
+        "source_marginal_issue_time_chronology_rule": "issue_UTC <= bird_decision_UTC - 1h; valid_UTC > bird_decision_UTC; fixed target +6h ±1.5h",
+        "source_reanalysis_used_as_forecast": false,
+        "biological_information_cost_or_fitness_fitted": false,
+        "source_gate": "docs/PAYOFF_B_RUPPEL_GFS_ISSUE_TIME_SOURCE_GATE_20261119.md",
+        "status": "PROVIDER_METADATA_SUPPORTED_AUTHENTICATED_SUBSET_NOT_RETRIEVED"
+      },
+      "original_route_landing_cross_tab": {
+        "coasting": {
+          "landing": 21,
+          "nonlanding": 133,
+          "n": 154
+        },
+        "sea-crossing": {
+          "landing": 3,
+          "nonlanding": 21,
+          "n": 24
+        },
+        "observed_sea_crossing_and_landing": 3,
+        "predeclared_min_each_route_landing_and_nonlanding": 5,
+        "predeclared_required_sea_landing_overlap_range": [
+          5,
+          19
+        ],
+        "source_gating_status": "ROUTE_LANDING_MODIFIER_NOT_ESTIMABLE_UNDER_FROZEN_SUPPORT",
+        "original_years": [
+          {
+            "year": 2019,
+            "flights": 48,
+            "landings": 8,
+            "sea": 3
+          },
+          {
+            "year": 2020,
+            "flights": 68,
+            "landings": 11,
+            "sea": 9
+          },
+          {
+            "year": 2021,
+            "flights": 62,
+            "landings": 5,
+            "sea": 12
+          }
+        ],
+        "original_taxon_sea_flights": {
+          "Garden Warbler": 15,
+          "Gr. Whitethroat": 9,
+          "Sedge Warbler": 0
+        }
+      },
+      "original_flight_end_weather_is_an_issue_time_forecast": false,
+      "GFS_issued_archive_metadata_verified_but_original_forecast_bytes_unavailable": true,
+      "source_new_fitness_or_route_recourse_coefficient_fitted": false,
+      "source_cross_tab_Github_run": 44546509558,
+      "source_cross_tab_artifact_SHA256": "0eb07b73b93d3487f350aca93ff26c4ac7c7556022f23b41b769e741d4970633",
+      "claim": "Original 178 songbirds have verified linked 1,783 at-risk departure days and 178 first flights, but the source 2×2 route×landing cross-tab has only 3 sea-crossing landings among 24 sea flights, below the frozen minimum 5. One of three songbird taxa has no sea crossings. An independent route×landing recourse interaction is NOT_ESTIMABLE in this published dataset, even before adding issue-time GFS forecasts. No information-deadline causal effect, receiver-detection correction or fitness outcome is identified."
+    },
+    {
+      "id": "C3",
+      "class": "INDEPENDENT_PUBLISHED_CAUSAL_RESOURCE_MANIPULATION_PRIOR_ART_WITH_SOURCE_UNIT_BARRIER",
+      "status": "RED_KNOT_6_12_24H_FOOD_ACCESS_RANDOMIZED_AVIARY_MAPPING_UNVERIFIED_NO_NEW_FIT",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/411",
+      "original_article": "Lameris et al 2025 Functional Ecology DOI 10.1111/1365-2435.70183",
+      "source_figshare_DOI": "10.6084/m9.figshare.28660718",
+      "source_data_license": "CC BY 4.0",
+      "source_version": 2,
+      "original_combined_source_rows": 102,
+      "original_unique_bird_year_keys": 102,
+      "original_biometry_repeated_rows": 2336,
+      "treatments_h_per_day": [
+        6,
+        12,
+        24
+      ],
+      "original_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "source_rows_by_year": {
+        "2021": 14,
+        "2022": 43,
+        "2023": 45
+      },
+      "observed_release_dates_by_year": {
+        "2021": 0,
+        "2022": 27,
+        "2023": 33
+      },
+      "observed_departure_dates_by_year": {
+        "2021": 0,
+        "2022": 20,
+        "2023": 25
+      },
+      "source_departed_flags_nonmissing": 53,
+      "source_julian_departure_nonmissing": 44,
+      "source_csv_SHA256": "755833eb13e241def834f12ea2c8d775ec643def807b23a4b3695ee7805e834f",
+      "original_treatment_unit": "aviary within source year",
+      "source_aviary_assignment_field_found": false,
+      "original_aviary_bird_crosswalk_verified": false,
+      "original_paper_treatment_to_departure_effect_is_prior_art": true,
+      "source_gate": "AVIARY_LEVEL_TREATMENT_EFFECT_REANALYSIS_NOT_ESTIMABLE",
+      "pilot_2021_without_postrelease_departure_data": true,
+      "source_missing_departure_is_proven_fitness_or_non_departure": false,
+      "new_biological_effect_fitted": false,
+      "independently_manipulates_animal_information_quality_q": false,
+      "jointly_manipulates_q_and_r": false,
+      "natural_q_wait_D_eff_r_t_identified": false,
+      "source_original_GitHub_run": 44660943443,
+      "original_source_artifact_id": 14595686528,
+      "claim": "Published 6/12/24h experimental food access manipulates physiological resource flexibility; earlier departure already reported by authors. Exact Figshare v2 dataset has 102 bird-year rows, 60 release dates and 45 departure dates, but lacks authenticated per-bird aviary membership. No new aviary-clustered fit or PAYOFF information×actionability mechanism is demonstrated."
+    },
+    {
+      "id": "P2",
+      "class": "PUBLISHED_2025_URGENCY_BY_WIND_SELECTIVITY_PRIOR_ART_NOVELTY_COLLISION",
+      "status": "FIVE_SONG_BIRDS_TIME_CONSTRAINT_STRATEGY_AND_DEPARTURE_WEATHER_SELECTIVITY_ALREADY_STUDIED",
+      "original_article": "Klinner et al 2025 Movement Ecology 13:64 DOI 10.1186/s40462-025-00575-0",
+      "original_article_pub_date": "2025-09-22",
+      "original_full_text": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12455787/",
+      "original_source_supplement_DOI": "10.57782/WXZE6H",
+      "original_species_count": 5,
+      "n_presaharan_species": 2,
+      "n_transsaharan_species": 3,
+      "original_at_risk_nights_before_meteorology_exclusion": 883,
+      "original_crosswind_flow_assistance_records_excluded": 7,
+      "source_paper_observed": "Pre-Saharan migrants had longer stopovers and stronger tailwind selectivity, whereas trans-Saharan migrants were less selective and more time-constrained by inferred migration strategy; lower cloud increased departures across species",
+      "original_result_is_PAYOFF_novel": false,
+      "migration_strategy_proxy_equals_randomized_time_urgency": false,
+      "source_original_supplementary_animal_rows_authenticated_in_payoff": false,
+      "causal_predecision_future_forecast_q_measured": false,
+      "joint_q_x_independently_manipulated_recourse_r_identified": false,
+      "new_empirical_coefficient_fitted": false,
+      "previous_lameris_2025_capacity_manipulation_is_independent_individual_system": true,
+      "claim": "Urgency-associated suppression of favorable departure-weather selectivity is prior published ecology, not new PAYOFF-B natural evidence. Five songbird species split 2 pre- vs 3 trans-Saharan; urgency inferred by migration strategy, not randomized deadline or future forecast. The distinctive remaining PAYOFF mechanism is source-measured predecision information observability jointly with actionability and downstream timing/partner payoff."
+    }
+  ],
+  "next_primary_test": {
+    "contract": "docs/PAYOFF_B_V7_PREDICTABILITY_URGENCY_CONTRACT_20261005.md",
+    "focal_beta": "beta_qU on individual absolute arrival-onset error",
+    "required_independent_transitions": 10,
+    "required_route_positions": 3,
+    "required_individual_stopover_visits": 30,
+    "required_flyways": 2,
+    "maximum_abs_corr_q_U_exclusive": 0.9,
+    "current_status": "NOT_ESTIMABLE",
+    "required_before_any_fit": [
+      "source-verified region-year onset S_jy",
+      "original objective 16-region geographic crosswalk/polygons",
+      "animal-year visit reconciliation without response-derived gates",
+      "independent geometry-only urgency U"
+    ],
+    "forbid": [
+      "use source-mean onset in place of annual onset",
+      "infer urgency from observed stopover duration",
+      "substitute North American satellite cells for goose stopover regions",
+      "open target bird outcome to choose predictor",
+      "combine draft PRs into main without review"
+    ]
+  }
+}
