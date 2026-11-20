@@ -1,0 +1,229 @@
+{
+  "as_of": "2026-11-20",
+  "analysis_status": "SYNTHETIC_DESIGN_CALIBRATION_ONLY_NO_NATURAL_DATA",
+  "original_contract": "data/payoff_b_joint_cue_recourse_experiment_contract_20261120.json",
+  "script": "scripts/payoff_b_joint_cue_recourse_design_sim.py",
+  "original_theory": "theory/ACTIONABILITY_BALANCE_THEOREM.md",
+  "source_complementarity_theory_not_new": true,
+  "original_randomization_unit": "hypothetical independent colony",
+  "data_generation_seed": 20261120,
+  "original_source_GitHub_Actions_run": 44681774335,
+  "artifact_id": 14605250518,
+  "verified_aggregate_artifact_zip_sha256": "9e5838cba4f18ce5ce3ff32159216a6e3e6ca99c1b16c2840d82649d3671c0b5",
+  "verified_synthetic_result_json_sha256": "10f58c30b20881e81e0b0f180b97f2d3afa006612955d3d6627b0bcbe4d65398",
+  "exact_numerical_witness": {
+    "pi": 0.4,
+    "CF": 2,
+    "CM": 1,
+    "q0": 0.75,
+    "assigned_q": [
+      0.65,
+      0.95
+    ],
+    "assigned_r": [
+      0.2,
+      0.85
+    ],
+    "delay_D": 0.08,
+    "high_q_high_r_net_value": 0.192,
+    "all_other_arms_nonpositive_net_value": true
+  },
+  "assumptions": {
+    "trials_per_colony": 48,
+    "randomized_cells": 4,
+    "synthetic_colony_measurement_heterogeneity_SD": 0.08,
+    "synthetic_colony_compliance_heterogeneity_SD": 0.1,
+    "stochastic_gate_corrective_success_probabilities": [
+      0.2,
+      0.85
+    ],
+    "behavior_policy_compliance_scenarios": [
+      0,
+      0.5,
+      0.75
+    ],
+    "statistical_method": "contrast of randomized independent colony means; 1.95996 approximate-normal CI for simulation planning, not a definitive real experiment test"
+  },
+  "simulation_rows_rounded_from_original_verified_source": [
+    {
+      "hypothetical_behavioral_policy_compliance": 0,
+      "n_independent_colonies_per_arm": 8,
+      "n_total_colonies": 32,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0,
+      "synthetic_mean_ITT_interaction_rounded": 0.0018,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.03,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.047
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0,
+      "n_independent_colonies_per_arm": 12,
+      "n_total_colonies": 48,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0,
+      "synthetic_mean_ITT_interaction_rounded": -0.0025,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.03666666666666667,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.07333333333333333
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0,
+      "n_independent_colonies_per_arm": 16,
+      "n_total_colonies": 64,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0,
+      "synthetic_mean_ITT_interaction_rounded": 0.0015,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.043333333333333335,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.07333333333333333
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0,
+      "n_independent_colonies_per_arm": 24,
+      "n_total_colonies": 96,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0,
+      "synthetic_mean_ITT_interaction_rounded": -0.0032,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.023333333333333334,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.04666666666666667
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0,
+      "n_independent_colonies_per_arm": 32,
+      "n_total_colonies": 128,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0,
+      "synthetic_mean_ITT_interaction_rounded": 0.0001,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.023333333333333334,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.03666666666666667
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.5,
+      "n_independent_colonies_per_arm": 8,
+      "n_total_colonies": 32,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.096,
+      "synthetic_mean_ITT_interaction_rounded": 0.0983,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.26666666666666666,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.26666666666666666
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.5,
+      "n_independent_colonies_per_arm": 12,
+      "n_total_colonies": 48,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.096,
+      "synthetic_mean_ITT_interaction_rounded": 0.0967,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.33666666666666667,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.33666666666666667
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.5,
+      "n_independent_colonies_per_arm": 16,
+      "n_total_colonies": 64,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.096,
+      "synthetic_mean_ITT_interaction_rounded": 0.091,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.38,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.38
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.5,
+      "n_independent_colonies_per_arm": 24,
+      "n_total_colonies": 96,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.096,
+      "synthetic_mean_ITT_interaction_rounded": 0.0955,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.59,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.59
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.5,
+      "n_independent_colonies_per_arm": 32,
+      "n_total_colonies": 128,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.096,
+      "synthetic_mean_ITT_interaction_rounded": 0.0962,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.7,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.7
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.75,
+      "n_independent_colonies_per_arm": 8,
+      "n_total_colonies": 32,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.14400000000000002,
+      "synthetic_mean_ITT_interaction_rounded": 0.1459,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.48333333333333334,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.48333333333333334
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.75,
+      "n_independent_colonies_per_arm": 12,
+      "n_total_colonies": 48,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.14400000000000002,
+      "synthetic_mean_ITT_interaction_rounded": 0.1365,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.59,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.59
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.75,
+      "n_independent_colonies_per_arm": 16,
+      "n_total_colonies": 64,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.14400000000000002,
+      "synthetic_mean_ITT_interaction_rounded": 0.1461,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.7633333333333333,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.7633333333333333
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.75,
+      "n_independent_colonies_per_arm": 24,
+      "n_total_colonies": 96,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.14400000000000002,
+      "synthetic_mean_ITT_interaction_rounded": 0.1449,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.89,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.89
+    },
+    {
+      "hypothetical_behavioral_policy_compliance": 0.75,
+      "n_independent_colonies_per_arm": 32,
+      "n_total_colonies": 128,
+      "trials_per_colony": 48,
+      "monte_carlo_repetitions": 300,
+      "theoretical_model_interaction_given_compliance": 0.14400000000000002,
+      "synthetic_mean_ITT_interaction_rounded": 0.1461,
+      "synthetic_positive_95pct_normal_CI_frequency": 0.98,
+      "synthetic_two_sided_normal_approximate_rejection_frequency": 0.98
+    }
+  ],
+  "null_behavioral_uptake_logic_repaired_before_result_freeze": true,
+  "first_unrepaired_null_had_truncated_normal_artifact_and_is_superseded": true,
+  "null_two_sided_rejection_sometimes_above_nominal_0_05": true,
+  "max_candidate_n_per_arm": 32,
+  "at_compliance_0_75_first_candidate_n_with_approx_80pct_synthetic_detection": 24,
+  "at_compliance_0_50_no_candidate_up_to_32_at_approx_80pct_detection": true,
+  "actual_colony_trials_performed": 0,
+  "actual_bee_bird_or_flower_outcomes_observed": false,
+  "independent_biological_cue_reliability_q_measured": false,
+  "independent_biological_recourse_r_measured": false,
+  "actual_partner_fitness_or_migration_measured": false,
+  "natural_information_deadline_and_hysteresis_identified": false,
+  "no_new_empirical_evidence_ledger_entry": true,
+  "source_eBird_or_TinyFish_used": false,
+  "no_main_frozen_manuscript_changes": true
+}
