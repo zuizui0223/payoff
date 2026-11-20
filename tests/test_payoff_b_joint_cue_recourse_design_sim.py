@@ -11,7 +11,7 @@ import pytest
 
 from scripts.payoff_b_joint_cue_recourse_design_sim import (
     ARMS, load_contract, model_geometry,
-    simulate_colony_mean_loss, estimate_interaction, simulate,
+    simulated_colony_mean_loss, estimate_interaction, simulate,
 )
 
 
