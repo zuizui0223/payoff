@@ -6,7 +6,8 @@ import pytest
 pytest.importorskip("requests")
 
 from scripts.payoff_b_red_knot_aviary_release_source_gate import (
-    FILES, analyze_original_table, codebook_aviary_mentions, normalize_hour
+    FILES, analyze_original_table, codebook_aviary_mentions, normalize_hour,
+    is_source_present
 )
 
 COLUMNS=(
@@ -82,3 +83,18 @@ def test_original_published_hashes_are_exact_and_unique():
     assert normalize_hour("24h")== "24"
     assert normalize_hour("6 hours")=="6"
     assert normalize_hour("unknown") is None
+
+
+def test_literal_NA_is_not_an_observed_departure_or_censored_flag():
+    assert is_source_present("NA") is False
+    assert is_source_present("NaN") is False
+    assert is_source_present(" n/a ") is False
+    assert is_source_present("0") is True
+    assert is_source_present("1") is True
+    raw=artificial_102_rows().decode()
+    raw=raw.replace("REDACTED_LOCAL_DATE","NA").replace(
+        "REDACTED_DEPARTURE","NA")
+    x=analyze_original_table(raw.encode())
+    assert x["source_n_original_release_date_nonmissing"]==0
+    assert x["source_n_original_departure_date_nonmissing"]==0
+    assert x["missing_departure_assumed_a_nondeparture"] is False
