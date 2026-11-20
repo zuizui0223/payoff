@@ -121,3 +121,29 @@ def test_invalid_synthetic_parameters_fail_closed():
             rng,q=.9,r=1.2,compliance=.8,trials=5,pi=.4,
             cf=2,cm=1,delay=.08,baseline_cluster_noise=0.0
         )
+
+
+def test_true_zero_compliance_sharp_null_never_acts_on_any_cue():
+    import random
+    seed=235
+    common=dict(compliance=0.0,trials=1500,pi=.4,cf=2,cm=1,
+                delay=.08,baseline_cluster_noise=0.0)
+    ref=simulated_colony_mean_loss(random.Random(seed),q=.65,r=.20,**common)
+    for q,r in ((.65,.85),(.95,.20),(.95,.85)):
+        observed=simulated_colony_mean_loss(
+            random.Random(seed),q=q,r=r,**common
+        )
+        # Exactly the same latent states and no waiting, despite different
+        # randomized predictive cue and physical re-routing gate.
+        assert observed == ref
+
+
+def test_synthetic_null_power_result_is_not_passing_due_to_truncated_gaussian():
+    cfg=load_contract()
+    result=simulate(cfg,colony_numbers=[16],repetitions=160)
+    d={x["synthetic_compliance"]:x for x in result["synthetic_simulation"]}
+    assert abs(d[0]["synthetic_mean_estimated_interaction"]) < 0.045
+    assert d[0]["theoretical_interaction_given_compliance"] == 0
+    assert d[0]["synthetic_two_sided_rejection_frequency"] < 0.13
+    assert d[0]["synthetic_directional_positive_CI_frequency"] < 0.09
+    assert d[.75]["synthetic_mean_estimated_interaction"] > .08
