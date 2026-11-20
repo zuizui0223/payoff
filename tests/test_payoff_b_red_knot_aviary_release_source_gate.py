@@ -19,7 +19,7 @@ def artificial_102_rows():
     rows=[]
     for i in range(102):
         year=str(2021+i%3)
-        tr=str((6,12,24)[i%3])
+        tr=str((6,12,24)[(i//3)%3])
         rel="" if year=="2021" else "REDACTED_LOCAL_DATE"
         dep="" if year=="2021" or i%4==0 else "REDACTED_DEPARTURE"
         rows.append({
@@ -70,8 +70,7 @@ def test_source_declared_aviary_only_even_if_code_mentions_it():
         b"Birds in two aviaries per treatment, 2022 and 2023.",
         b"coxph(Surv(time, status) ~ treatment + cluster(aviary))"
     )
-    assert c["original_readme_summary"]["n_aviary_mentions"]==0 or (
-        c["original_readme_summary"]["n_aviary_mentions"]>=1)
+    assert c["original_readme_summary"]["n_aviary_mentions"] >= 1
     assert c["original_analysis_R_summary"]["n_explicit_aviary_by_year_model_tokens"]>=1
     assert c["aviary_membership_for_each_individual_proven_by_text_search"] is False
 
