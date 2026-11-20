@@ -134,7 +134,8 @@ def simulated_colony_mean_loss(
     for _ in range(trials):
         early_state = rng.random() < pi
         cue_early = early_state if rng.random() < q else not early_state
-        waits = permitted_optimal_wait and (rng.random() < compliance)
+        waits = (permitted_optimal_wait and compliance > 0.0
+                 and (rng.random() < compliance))
         # An independent physical-gate lottery decides whether a
         # state-informed corrective switch remains possible.
         switches_to_early = waits and cue_early and (rng.random() < r)
@@ -212,12 +213,16 @@ def simulate(cfg: dict, *,
                     treatment = geometry["intervention_arms"][label]
                     arm = []
                     for _colony in range(n):
-                        c = _clamp(
+                        # Null scenario is a genuine NO-CUE-USE world.
+                        # A truncated Gaussian centered at zero would give
+                        # half the colonies positive compliance and corrupt
+                        # the null calibration in an outcome-independent way.
+                        c = (0.0 if compliance == 0.0 else _clamp(
                             rng.gauss(
                                 compliance,
                                 power["assumed_between_colony_compliance_SD"]
                             ), 0.0, 1.0
-                        )
+                        ))
                         shift = rng.gauss(
                             0.0, power["assumed_between_colony_measurement_SD_loss"]
                         )
