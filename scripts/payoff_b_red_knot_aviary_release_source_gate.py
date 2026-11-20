@@ -50,6 +50,16 @@ def fetch_verified(session:requests.Session,filename:str)->bytes:
     return bytes(raw)
 
 
+def is_source_present(value)->bool:
+    # Published CSV uses literal NA/NaN tokens. They are MISSING, not
+    # observed outcomes, and must never be counted as nondepartures.
+    if value is None:
+        return False
+    return str(value).strip().lower() not in {
+        "", "na", "nan", "n/a", "null", "none", "<na>"
+    }
+
+
 def normalize_hour(value:str)->str | None:
     if value is None:return None
     s=str(value).strip().lower().replace(" ","")
@@ -95,10 +105,10 @@ def analyze_original_table(raw:bytes)->dict:
             continue
         record={
             "n_original_source_rows":len(subset),
-            "source_release_date_present":sum(bool(str(r["release_date"]).strip()) for r in subset),
-            "source_departed_indicator_present":sum(bool(str(r["departed"]).strip()) for r in subset),
-            "source_departure_date_present":sum(bool(str(r["departure"]).strip()) for r in subset),
-            "source_departure_julian_present":sum(bool(str(r["departure_jul"]).strip()) for r in subset),
+            "source_release_date_present":sum(is_source_present(r["release_date"]) for r in subset),
+            "source_departed_indicator_present":sum(is_source_present(r["departed"]) for r in subset),
+            "source_departure_date_present":sum(is_source_present(r["departure"]) for r in subset),
+            "source_departure_julian_present":sum(is_source_present(r["departure_jul"]) for r in subset),
             "per_treatment":{}
         }
         for tr in sorted(treatments):
@@ -108,9 +118,9 @@ def analyze_original_table(raw:bytes)->dict:
             a=[r for r in subset if str(r["treatment"]).strip()==tr]
             record["per_treatment"][key]={
                 "n_original_rows":len(a),
-                "release_date_nonmissing":sum(bool(str(r["release_date"]).strip()) for r in a),
-                "departed_flag_nonmissing":sum(bool(str(r["departed"]).strip()) for r in a),
-                "departure_date_nonmissing":sum(bool(str(r["departure"]).strip()) for r in a),
+                "release_date_nonmissing":sum(is_source_present(r["release_date"]) for r in a),
+                "departed_flag_nonmissing":sum(is_source_present(r["departed"]) for r in a),
+                "departure_date_nonmissing":sum(is_source_present(r["departure"]) for r in a),
             }
         by_year[yr]=record
     out={
@@ -124,10 +134,10 @@ def analyze_original_table(raw:bytes)->dict:
         "source_aviary_or_cage_membership_columns":aviary_columns,
         "actual_author_specific_aviary_id_per_individual_verified":False,
         "source_year_treatment_release_and_departure_aggregate":by_year,
-        "source_n_original_release_date_nonmissing":sum(bool(str(r["release_date"]).strip()) for r in rows),
-        "source_n_original_departed_flag_nonmissing":sum(bool(str(r["departed"]).strip()) for r in rows),
-        "source_n_original_departure_date_nonmissing":sum(bool(str(r["departure"]).strip()) for r in rows),
-        "source_n_original_departure_julian_nonmissing":sum(bool(str(r["departure_jul"]).strip()) for r in rows),
+        "source_n_original_release_date_nonmissing":sum(is_source_present(r["release_date"]) for r in rows),
+        "source_n_original_departed_flag_nonmissing":sum(is_source_present(r["departed"]) for r in rows),
+        "source_n_original_departure_date_nonmissing":sum(is_source_present(r["departure"]) for r in rows),
+        "source_n_original_departure_julian_nonmissing":sum(is_source_present(r["departure_jul"]) for r in rows),
         "original_bird_identifiers_or_dates_exported":False,
         "missing_departure_assumed_a_nondeparture":False,
     }
