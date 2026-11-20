@@ -1,0 +1,105 @@
+{
+  "contract_id": "payoff_b_prospective_2x2_cue_recourse_colony_assay_v1_20261120",
+  "date": "2026-11-20",
+  "status": "PROSPECTIVE_METHODS_AND_SYNTHETIC_DESIGN_ONLY_NO_ORGANISM_TRIALS",
+  "theoretical_source": "theory/ACTIONABILITY_BALANCE_THEOREM.md",
+  "original_prior_contract": "data/payoff_b_actionability_peak_empirical_contract_20261002.json",
+  "system": "Proposed contained bumblebee/flower-patch foraging and receptivity matching assay; not migration or natural climate phenology",
+  "unit_of_randomization": "independent colony, not forager, visit, patch, pollen grain, or trial",
+  "design": {
+    "randomized_factors": {
+      "cue_reliability_q": [
+        0.65,
+        0.95
+      ],
+      "corrective_switch_opportunity_r": [
+        0.2,
+        0.85
+      ]
+    },
+    "equal_hidden_state_prior_pi_early": 0.4,
+    "asymmetric_false_early_loss_CF": 2,
+    "asymmetric_missed_early_loss_CM": 1,
+    "assigned_waiting_cost_D": 0.08,
+    "identical_signal_medium_and_schedule_except_q": true,
+    "independent_gate_open_schedule_and_explicit_timestamps": true,
+    "q_and_r_assigned_between_colonies_not_crossed_within_colony": true,
+    "physical_patch_opportunity_is_a_mechanism_analogue_not_migration": true
+  },
+  "exact_model": {
+    "A": 1.2,
+    "L": 0.4,
+    "S": 1.6,
+    "B": 1.2,
+    "q0": 0.75,
+    "V_q_low": 0,
+    "V_q_high": 0.32,
+    "net_values": {
+      "lowq_lowr": -0.08,
+      "lowq_highr": -0.08,
+      "highq_lowr": -0.016,
+      "highq_highr": 0.192
+    },
+    "optimal_informed_waiting_arm": "highq_highr_only",
+    "predicted_perfect_policy_interaction_on_mean_net_loss": 0.192,
+    "observed_behavior_not_assumed_to_follow_optimal_policy": true
+  },
+  "causal_estimand": {
+    "outcome": "per-colony mean externally calibrated net reward-equivalent loss per trial; lower loss is better",
+    "ITT_interaction": "tau = (mu_lowq_highr - mu_highq_highr) - (mu_lowq_lowr - mu_highq_lowr)",
+    "expected_direction": "positive only if higher q produces larger net loss reduction where recourse remains",
+    "primary_use_assigned_factors_not_realized_behavior": true,
+    "report_all_four_arms_and_main_effects_even_when_null": true
+  },
+  "admission": {
+    "cue_realized_reliability_tolerance": 0.04,
+    "min_heldout_cue_validation_probes_per_q_arm": 200,
+    "oracle_gate_open_probability_tolerance": 0.05,
+    "independently_calibrated_reward_scale_required": true,
+    "independent_patch_state_hidden_until_decision": true,
+    "cue_delivered_before_opportunity_closes": true,
+    "no_systematic_sensory_quality_diff_between_q_arms": true,
+    "min_independent_colonies_per_arm": 8,
+    "min_outcome_trials_per_colony": 20,
+    "real_calibration_cannot_use_focal_main_trial_payoffs": true
+  },
+  "scientific_falsifiers": [
+    "When q/r and payoff calibrate and adequate independent colonies sampled, nonpositive or unresolved q×r ITT effect does not support complementarity",
+    "Cue response remains as strong in post-commitment sham trials despite closed action opportunities",
+    "Switch frequency changes but objective matching/payoff does not",
+    "Cue or gate calibration fails: mechanism NOT ESTIMABLE, not biological null",
+    "Colony holdout or independent batch generalization fails: do not claim broad ecological effect"
+  ],
+  "synthetic_power_plan": {
+    "seed": 20261120,
+    "candidate_independent_colonies_per_arm": [
+      8,
+      12,
+      16,
+      24,
+      32
+    ],
+    "trials_per_colony": 48,
+    "synthetic_behavioral_compliance_scenarios": [
+      0,
+      0.5,
+      0.75
+    ],
+    "assumed_between_colony_measurement_SD_loss": 0.08,
+    "assumed_between_colony_compliance_SD": 0.1,
+    "synthetic_monte_carlo_repetitions": 300,
+    "synthetic_normal_approximate_cluster_mean_CI": true,
+    "report_false_positive_rate_and_directional_positive_CI_fraction": true,
+    "power_assumption_conditional_not_observed_biology": true,
+    "default_dry_run_only": true
+  },
+  "boundaries": {
+    "no_real_bee_or_bird_outcome_acquired": true,
+    "no_new_natural_macro_empirical_replication": true,
+    "no_direct_natural_information_deadline_identified": true,
+    "no_actual_migration_or_fitness_timescale_inferred": true,
+    "no_eBird_or_TinyFish": true,
+    "no_change_to_frozen_V2_V7_or_main_manuscripts": true,
+    "existing_developmental_clock_gates_not_identified_by_task": true
+  }
+}
