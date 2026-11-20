@@ -89,7 +89,6 @@ def analyze_original_table(raw:bytes)->dict:
     by_year={}
     for yr in sorted(years):
         subset=[r for r in rows if str(r["year"]).strip()==yr]
-        by_year[yr] if False else None
         # Do not output original unknown year codes; only recognized calendar
         # year labels are safe grouped metadata with defensible semantics.
         if year_status!="SOURCE_2021_2023_LABELS_VERIFIED":
