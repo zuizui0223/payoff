@@ -1,0 +1,43 @@
+name: PAYOFF-B original red-knot food-access intervention source audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - analysis/payoff-b-red-knot-experimental-actionability-20261120
+    paths:
+      - '.github/workflows/payoff-b-red-knot-resource-source.yml'
+      - 'scripts/payoff_b_red_knot_figshare_source_gate.py'
+      - 'tests/test_payoff_b_red_knot_figshare_source_gate.py'
+      - 'docs/PAYOFF_B_RED_KNOT_RANDOMIZED_RESOURCE_SOURCE_FREEZE_20261120.md'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  original-figshare-source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install minimal original public source dependencies
+        run: python -m pip install --disable-pip-version-check pytest requests
+      - name: Check schema, source permissions and metadata-only use
+        run: python -m pytest -q tests/test_payoff_b_red_knot_figshare_source_gate.py
+      - name: Original article 28660718 public data/code source admission (no outcome fit)
+        run: |
+          python -m scripts.payoff_b_red_knot_figshare_source_gate \
+            --output outputs/payoff_b_red_knot_original_source_receipt.json
+      - name: Upload original file identity and aggregate source-grain receipt only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-red-knot-original-source-only-20261120
+          path: outputs/payoff_b_red_knot_original_source_receipt.json
+          if-no-files-found: warn
