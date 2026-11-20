@@ -855,6 +855,61 @@
       "source_cross_tab_Github_run": 44546509558,
       "source_cross_tab_artifact_SHA256": "0eb07b73b93d3487f350aca93ff26c4ac7c7556022f23b41b769e741d4970633",
       "claim": "Original 178 songbirds have verified linked 1,783 at-risk departure days and 178 first flights, but the source 2×2 route×landing cross-tab has only 3 sea-crossing landings among 24 sea flights, below the frozen minimum 5. One of three songbird taxa has no sea crossings. An independent route×landing recourse interaction is NOT_ESTIMABLE in this published dataset, even before adding issue-time GFS forecasts. No information-deadline causal effect, receiver-detection correction or fitness outcome is identified."
+    },
+    {
+      "id": "C3",
+      "class": "INDEPENDENT_PUBLISHED_CAUSAL_RESOURCE_MANIPULATION_PRIOR_ART_WITH_SOURCE_UNIT_BARRIER",
+      "status": "RED_KNOT_6_12_24H_FOOD_ACCESS_RANDOMIZED_AVIARY_MAPPING_UNVERIFIED_NO_NEW_FIT",
+      "anchor": "https://github.com/zuizui0223/payoff/pull/411",
+      "original_article": "Lameris et al 2025 Functional Ecology DOI 10.1111/1365-2435.70183",
+      "source_figshare_DOI": "10.6084/m9.figshare.28660718",
+      "source_data_license": "CC BY 4.0",
+      "source_version": 2,
+      "original_combined_source_rows": 102,
+      "original_unique_bird_year_keys": 102,
+      "original_biometry_repeated_rows": 2336,
+      "treatments_h_per_day": [
+        6,
+        12,
+        24
+      ],
+      "original_years": [
+        2021,
+        2022,
+        2023
+      ],
+      "source_rows_by_year": {
+        "2021": 14,
+        "2022": 43,
+        "2023": 45
+      },
+      "observed_release_dates_by_year": {
+        "2021": 0,
+        "2022": 27,
+        "2023": 33
+      },
+      "observed_departure_dates_by_year": {
+        "2021": 0,
+        "2022": 20,
+        "2023": 25
+      },
+      "source_departed_flags_nonmissing": 53,
+      "source_julian_departure_nonmissing": 44,
+      "source_csv_SHA256": "755833eb13e241def834f12ea2c8d775ec643def807b23a4b3695ee7805e834f",
+      "original_treatment_unit": "aviary within source year",
+      "source_aviary_assignment_field_found": false,
+      "original_aviary_bird_crosswalk_verified": false,
+      "original_paper_treatment_to_departure_effect_is_prior_art": true,
+      "source_gate": "AVIARY_LEVEL_TREATMENT_EFFECT_REANALYSIS_NOT_ESTIMABLE",
+      "pilot_2021_without_postrelease_departure_data": true,
+      "source_missing_departure_is_proven_fitness_or_non_departure": false,
+      "new_biological_effect_fitted": false,
+      "independently_manipulates_animal_information_quality_q": false,
+      "jointly_manipulates_q_and_r": false,
+      "natural_q_wait_D_eff_r_t_identified": false,
+      "source_original_GitHub_run": 44660943443,
+      "original_source_artifact_id": 14595686528,
+      "claim": "Published 6/12/24h experimental food access manipulates physiological resource flexibility; earlier departure already reported by authors. Exact Figshare v2 dataset has 102 bird-year rows, 60 release dates and 45 departure dates, but lacks authenticated per-bird aviary membership. No new aviary-clustered fit or PAYOFF information×actionability mechanism is demonstrated."
     }
   ],
   "next_primary_test": {
