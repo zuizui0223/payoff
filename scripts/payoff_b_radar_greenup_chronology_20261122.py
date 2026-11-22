@@ -47,14 +47,18 @@ def date_gap(passage: float, greenup: float) -> float:
 
 
 def chronological_categories(gap: float) -> dict:
-    # Values are not probabilities that individual birds observed a cue.
+    # Absolute numerical tolerance protects 7.000000000 - 1e-14 day artifacts
+    # from subtracting fractional source DOYs. The 1e-9-day tolerance is
+    # effectively zero (~86 microseconds), not a biological latency change.
+    # Values are NOT probabilities that individual birds observed a cue.
+    eps = 1e-9
     return {
-        "greenup_strictly_before_q50":gap>0,
-        "q50_strictly_before_greenup":gap<0,
-        "same_day_or_equal_timing":gap==0,
-        "optimistic_same_day_or_prior":gap>=0,
-        "at_least_one_day_prior":gap>=1,
-        "at_least_seven_days_prior":gap>=7,
+        "greenup_strictly_before_q50": gap > eps,
+        "q50_strictly_before_greenup": gap < -eps,
+        "same_day_or_equal_timing": abs(gap) <= eps,
+        "optimistic_same_day_or_prior": gap >= -eps,
+        "at_least_one_day_prior": gap >= 1 - eps,
+        "at_least_seven_days_prior": gap >= 7 - eps,
     }
 
 
