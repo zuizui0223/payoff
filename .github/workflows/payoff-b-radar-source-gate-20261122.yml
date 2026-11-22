@@ -1,0 +1,161 @@
+name: PAYOFF-B radar source admission and frozen heldout-year test
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-radar-calendar-greenup-source-20261122
+  workflow_dispatch:
+
+jobs:
+  original-source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install minimal test-only dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Verify original-source integrity guardrails
+        run: pytest -q tests/test_payoff_b_radar_source_gate_20261122.py
+      - name: Retrieve and validate bounded official Figshare source inventory
+        run: |
+          python scripts/payoff_b_radar_source_gate_20261122.py \
+            --output outputs/payoff_b_radar_source_inventory_20261122.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x = json.loads(Path("outputs/payoff_b_radar_source_inventory_20261122.json").read_text())
+          assert x["new_biological_coefficient_fitted"] is False
+          assert "raw_observations" not in x
+          assert x["status"] in {"SOURCE_ONLY_NO_EFFECT_FIT", "SOURCE_NOT_ADMITTED"}
+          print("source_status", x["status"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-radar-source-only-20261122
+          path: outputs/payoff_b_radar_source_inventory_20261122.json
+
+  original-native-r-grain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+          use-public-rspm: true
+      - name: Reacquire both original source files with pinned SHA256
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          from scripts.payoff_b_radar_source_gate_20261122 import bounded_download
+          sources = [
+            (47109763, "bd739df140be52c38a0000294a457c7f5cd9396b1b7e7b77db30b513e820ffdf", "data_1995_2018.Rda"),
+            (47109769, "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900", "data_2003_2018.Rda")
+          ]
+          root = Path("outputs/private_original_rdata")
+          root.mkdir(parents=True, exist_ok=True)
+          for fid, expected, name in sources:
+            raw = bounded_download(f"https://ndownloader.figshare.com/files/{fid}")
+            if sha256(raw).hexdigest() != expected:
+              raise SystemExit(f"Source SHA mismatch for {name}")
+            (root/name).write_bytes(raw)
+            print("verified original source:", name, "bytes", len(raw))
+          PY
+      - name: Read ONLY source RData structure and aggregate year/site cardinalities
+        run: |
+          Rscript scripts/payoff_b_radar_Rdata_grain_20261122.R \
+            outputs/private_original_rdata/data_1995_2018.Rda \
+            outputs/private_original_rdata/data_2003_2018.Rda \
+            outputs/payoff_b_radar_original_rdata_grain_20261122.csv
+      - name: Render schema-only JSON receipt without original table rows
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+          infile = Path("outputs/payoff_b_radar_original_rdata_grain_20261122.csv")
+          with infile.open() as f:
+            records = list(csv.DictReader(f))
+          receipt = {
+            "status": "ORIGINAL_SOURCE_GRAIN_ONLY",
+            "doi": "10.6084/m9.figshare.26050390.v2",
+            "species_level": False, "radar_migrant_assemblage": True,
+            "original_source_file_count": 2,
+            "schema_tables": records,
+            "ecological_effect_fitted": False,
+            "original_records_exported": False,
+            "next_step": "predeclare exact site-year greenup/climate key joins and test independent predictive support before any coefficient",
+          }
+          out = Path("outputs/payoff_b_radar_original_grain_receipt_20261122.json")
+          out.write_text(json.dumps(receipt, indent=2) + "\n")
+          print("PAYOFF_RADAR_RDATA_SCHEMA_RECEIPT=" + json.dumps(receipt, separators=(",", ":")))
+          PY
+      - name: Extract fixed original site-year variables to private runner file
+        run: |
+          Rscript scripts/payoff_b_radar_greenup_extract_private.R \
+            outputs/private_original_rdata/data_2003_2018.Rda \
+            outputs/private_original_rdata/private_radar_model.csv
+      - name: Run only outcome-coefficient-blind sample, completeness and predictor gate
+        run: |
+          python -m pip install --disable-pip-version-check numpy
+          python scripts/payoff_b_radar_greenup_heldout.py \
+            --input outputs/private_original_rdata/private_radar_model.csv \
+            --support-only \
+            --output outputs/payoff_b_radar_greenup_prefit_support_20261122.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          x=json.loads(Path("outputs/payoff_b_radar_greenup_prefit_support_20261122.json").read_text())
+          assert x["new_bird_coefficient_fitted"] is False
+          assert x["no_ebird"] is True
+          print("PREFIT_SOURCE_SUPPORT_STATUS", x["design"]["status"])
+          PY
+      - name: Verify immutable source support receipt against fresh source before fitting
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          old=json.loads(Path("data/payoff_b_radar_greenup_source_prefit_20261122.json").read_text())
+          new=json.loads(Path("outputs/payoff_b_radar_greenup_prefit_support_20261122.json").read_text())
+          assert old["status"] == new["status"] == "PREFIT_SUPPORT_ONLY"
+          assert old["design"] == new["design"]
+          assert old["contract_sha256"] == new["contract_sha256"]
+          assert new["design"]["status"] == "PASS"
+          assert new["new_bird_coefficient_fitted"] is False
+          print("SOURCE_GATES_MATCH_PREVIOUSLY_FROZEN_PASS")
+          PY
+      - name: Fit exactly one frozen heldout-year radar environmental comparison
+        run: |
+          python scripts/payoff_b_radar_greenup_heldout.py \
+            --input outputs/private_original_rdata/private_radar_model.csv \
+            --fit \
+            --output outputs/payoff_b_radar_greenup_heldout_result_20261122.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          z=json.loads(Path("outputs/payoff_b_radar_greenup_heldout_result_20261122.json").read_text())
+          assert z["no_ebird"] is True
+          assert z["new_animal_info_mechanism_identified"] is False
+          assert z["prefit"]["status"] == "PASS"
+          assert z["ecological_effect"]["n_heldout_years"] == 16
+          print("RADAR_HELDOUT_RESULT_STATUS", z["status"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-radar-rdata-schema-only-20261122
+          path: |
+            outputs/payoff_b_radar_original_rdata_grain_20261122.csv
+            outputs/payoff_b_radar_original_grain_receipt_20261122.json
+            outputs/payoff_b_radar_greenup_prefit_support_20261122.json
+            outputs/payoff_b_radar_greenup_heldout_result_20261122.json
