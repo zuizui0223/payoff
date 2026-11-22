@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python 3.12, NumPy, existing source parser, pytest; statsmodels only for an independent verification if available.
 
-**Spec:** data/payoff_b_ortega_within_animal_contract_20261122.json
+**Spec:** data/payoff_b_ortega_within_animal_contract_v2_20261122.json; original v1 and its support failure are retained.
 
 ## Global Constraints
 
@@ -59,3 +59,4 @@
 - The initially considered arrival-phase/speed predictive comparison was rejected because the predictor encodes the arrival date.
 - No search for a favorable endpoint follows an unsupported primary result.
 - The source is already published and known; fixing this comparison before its new coefficient does not make it independent confirmatory evidence.
+- After source-only support inspection, v2 corrects the unnecessary one-component rule. See docs/PAYOFF_B_ORTEGA_WITHIN_ANIMAL_DESIGN_20261122.md. Rows, model, variables and bootstrap remain unchanged.
