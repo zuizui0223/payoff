@@ -17,10 +17,12 @@ import json
 from pathlib import Path
 import random
 import statistics
-
-from payoff_b_radar_greenup_heldout import source_rows, complete_rows
+import sys
 
 HERE = Path(__file__).resolve().parent
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
+from payoff_b_radar_greenup_heldout import source_rows, complete_rows
 DEFAULT_CONTRACT = HERE.parent / "data/payoff_b_radar_greenup_chronology_contract_20261122.json"
 
 
