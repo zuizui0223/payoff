@@ -69,10 +69,19 @@ for (i in seq_len(2L)) {
     stop("Original RData is missing or exceeded size cap")
   }
   env <- new.env(parent=baseenv())
-  objs <- load(file, envir=env)
-  for (objname in objs) {
-    inspect(get(objname, envir=env, inherits=FALSE),
-            basename(file), objname)
+  objs <- tryCatch(suppressWarnings(load(file, envir=env)),
+                   error=function(e) NULL)
+  if (is.null(objs)) {
+    # Some original author files have the .Rda extension but were written
+    # with saveRDS() (XDR header X) rather than save() (RDX3 header).
+    # The SHA-pinned source is trusted; only schema/cardinalities leave CI.
+    val <- readRDS(file)
+    inspect(val, basename(file), "readRDS_root")
+  } else {
+    for (objname in objs) {
+      inspect(get(objname, envir=env, inherits=FALSE),
+              basename(file), objname)
+    }
   }
 }
 if (!length(out)) {
