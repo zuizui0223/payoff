@@ -1,0 +1,421 @@
+{
+  "status": "NEGATIVE_WITHIN_ANIMAL_ASSOCIATION_SUPPORTED",
+  "support": {
+    "status": "PASS",
+    "checks": {
+      "repeated_animals": true,
+      "years": true,
+      "residual_df": true,
+      "residual_phase_variation": true,
+      "component_policy": true
+    },
+    "primary_panel": {
+      "n": 100,
+      "animals": 38,
+      "years": [
+        2011,
+        2012,
+        2014,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "year_counts": {
+        "2011": 4,
+        "2012": 4,
+        "2014": 3,
+        "2016": 6,
+        "2017": 21,
+        "2018": 28,
+        "2019": 19,
+        "2020": 15
+      },
+      "animal_observation_count_distribution": {
+        "2": 22,
+        "3": 9,
+        "4": 6,
+        "5": 1
+      },
+      "genuine_zero_stopovers": 11,
+      "nuisance_rank": 44,
+      "full_model_rank": 45,
+      "residual_df": 55,
+      "residual_exposure_rms_days": 13.596743995430655,
+      "connected_components": 2
+    },
+    "complete_case_rows": 127,
+    "singleton_rows_excluded_from_primary": 27,
+    "new_coefficient_computed": false
+  },
+  "primary": {
+    "beta": -0.6891132477435854,
+    "n": 100,
+    "nuisance_rank": 44,
+    "residual_df": 55,
+    "residual_exposure_rms_days": 13.596743995430653,
+    "residual_sum_squares": 3878.4267476879063,
+    "ci95_animal_bootstrap": [
+      -0.8150509332706694,
+      -0.5725814920346786
+    ],
+    "effect_per_10_phase_days": -6.891132477435854,
+    "ci95_per_10_phase_days": [
+      -8.150509332706694,
+      -5.725814920346785
+    ]
+  },
+  "same_panel_reference_slopes": {
+    "pooled": -0.48695238256811857,
+    "year_fixed_effects": -0.6170768934925986
+  },
+  "bootstrap": {
+    "unit": "animal",
+    "replicates_requested": 10000,
+    "replicates_completed": 10000,
+    "valid_fraction": 1.0,
+    "seed": 20261122,
+    "scope": "conditional on the observed years, not a population-of-years interval"
+  },
+  "year_omission_sensitivity": [
+    {
+      "omitted_year": 2011,
+      "design": {
+        "n": 92,
+        "animals": 34,
+        "years": [
+          2014,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020
+        ],
+        "year_counts": {
+          "2014": 3,
+          "2016": 6,
+          "2017": 21,
+          "2018": 28,
+          "2019": 19,
+          "2020": 15
+        },
+        "animal_observation_count_distribution": {
+          "2": 18,
+          "3": 9,
+          "4": 6,
+          "5": 1
+        },
+        "genuine_zero_stopovers": 10,
+        "nuisance_rank": 39,
+        "full_model_rank": 40,
+        "residual_df": 52,
+        "residual_exposure_rms_days": 14.030388050467105,
+        "connected_components": 1
+      },
+      "status": "ESTIMABLE",
+      "beta": -0.6912482349501199
+    },
+    {
+      "omitted_year": 2012,
+      "design": {
+        "n": 92,
+        "animals": 34,
+        "years": [
+          2014,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020
+        ],
+        "year_counts": {
+          "2014": 3,
+          "2016": 6,
+          "2017": 21,
+          "2018": 28,
+          "2019": 19,
+          "2020": 15
+        },
+        "animal_observation_count_distribution": {
+          "2": 18,
+          "3": 9,
+          "4": 6,
+          "5": 1
+        },
+        "genuine_zero_stopovers": 10,
+        "nuisance_rank": 39,
+        "full_model_rank": 40,
+        "residual_df": 52,
+        "residual_exposure_rms_days": 14.030388050467105,
+        "connected_components": 1
+      },
+      "status": "ESTIMABLE",
+      "beta": -0.6912482349501199
+    },
+    {
+      "omitted_year": 2014,
+      "design": {
+        "n": 95,
+        "animals": 36,
+        "years": [
+          2011,
+          2012,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020
+        ],
+        "year_counts": {
+          "2011": 4,
+          "2012": 4,
+          "2016": 4,
+          "2017": 21,
+          "2018": 28,
+          "2019": 19,
+          "2020": 15
+        },
+        "animal_observation_count_distribution": {
+          "2": 20,
+          "3": 10,
+          "4": 5,
+          "5": 1
+        },
+        "genuine_zero_stopovers": 10,
+        "nuisance_rank": 41,
+        "full_model_rank": 42,
+        "residual_df": 53,
+        "residual_exposure_rms_days": 13.793770848001499,
+        "connected_components": 2
+      },
+      "status": "ESTIMABLE",
+      "beta": -0.7100440275028967
+    },
+    {
+      "omitted_year": 2016,
+      "design": {
+        "n": 91,
+        "animals": 35,
+        "years": [
+          2011,
+          2012,
+          2014,
+          2017,
+          2018,
+          2019,
+          2020
+        ],
+        "year_counts": {
+          "2011": 4,
+          "2012": 4,
+          "2014": 1,
+          "2017": 21,
+          "2018": 27,
+          "2019": 19,
+          "2020": 15
+        },
+        "animal_observation_count_distribution": {
+          "2": 21,
+          "3": 7,
+          "4": 7
+        },
+        "genuine_zero_stopovers": 8,
+        "nuisance_rank": 40,
+        "full_model_rank": 41,
+        "residual_df": 50,
+        "residual_exposure_rms_days": 13.645896604487517,
+        "connected_components": 2
+      },
+      "status": "ESTIMABLE",
+      "beta": -0.7068361556727514
+    },
+    {
+      "omitted_year": 2017,
+      "design": {
+        "n": 70,
+        "animals": 29,
+        "years": [
+          2011,
+          2012,
+          2014,
+          2016,
+          2018,
+          2019,
+          2020
+        ],
+        "year_counts": {
+          "2011": 4,
+          "2012": 4,
+          "2014": 3,
+          "2016": 6,
+          "2018": 19,
+          "2019": 19,
+          "2020": 15
+        },
+        "animal_observation_count_distribution": {
+          "2": 19,
+          "3": 8,
+          "4": 2
+        },
+        "genuine_zero_stopovers": 8,
+        "nuisance_rank": 34,
+        "full_model_rank": 35,
+        "residual_df": 35,
+        "residual_exposure_rms_days": 12.321664855079483,
+        "connected_components": 2
+      },
+      "status": "ESTIMABLE",
+      "beta": -0.8022030442447323
+    },
+    {
+      "omitted_year": 2018,
+      "design": {
+        "n": 59,
+        "animals": 25,
+        "years": [
+          2011,
+          2012,
+          2014,
+          2016,
+          2017,
+          2019,
+          2020
+        ],
+        "year_counts": {
+          "2011": 4,
+          "2012": 4,
+          "2014": 3,
+          "2016": 5,
+          "2017": 12,
+          "2019": 16,
+          "2020": 15
+        },
+        "animal_observation_count_distribution": {
+          "2": 17,
+          "3": 7,
+          "4": 1
+        },
+        "genuine_zero_stopovers": 5,
+        "nuisance_rank": 30,
+        "full_model_rank": 31,
+        "residual_df": 28,
+        "residual_exposure_rms_days": 14.213607884340199,
+        "connected_components": 2
+      },
+      "status": "ESTIMABLE",
+      "beta": -0.6039142796459653
+    },
+    {
+      "omitted_year": 2019,
+      "design": {
+        "n": 75,
+        "animals": 32,
+        "years": [
+          2011,
+          2012,
+          2014,
+          2016,
+          2017,
+          2018,
+          2020
+        ],
+        "year_counts": {
+          "2011": 4,
+          "2012": 4,
+          "2014": 3,
+          "2016": 6,
+          "2017": 21,
+          "2018": 25,
+          "2020": 12
+        },
+        "animal_observation_count_distribution": {
+          "2": 22,
+          "3": 9,
+          "4": 1
+        },
+        "genuine_zero_stopovers": 9,
+        "nuisance_rank": 37,
+        "full_model_rank": 38,
+        "residual_df": 37,
+        "residual_exposure_rms_days": 11.004474947394792,
+        "connected_components": 2
+      },
+      "status": "ESTIMABLE",
+      "beta": -0.5145947829157239
+    },
+    {
+      "omitted_year": 2020,
+      "design": {
+        "n": 82,
+        "animals": 35,
+        "years": [
+          2011,
+          2012,
+          2014,
+          2016,
+          2017,
+          2018,
+          2019
+        ],
+        "year_counts": {
+          "2011": 4,
+          "2012": 4,
+          "2014": 3,
+          "2016": 6,
+          "2017": 21,
+          "2018": 28,
+          "2019": 16
+        },
+        "animal_observation_count_distribution": {
+          "2": 24,
+          "3": 10,
+          "4": 1
+        },
+        "genuine_zero_stopovers": 11,
+        "nuisance_rank": 40,
+        "full_model_rank": 41,
+        "residual_df": 41,
+        "residual_exposure_rms_days": 13.701103451687104,
+        "connected_components": 2
+      },
+      "status": "ESTIMABLE",
+      "beta": -0.6953478704813664
+    }
+  ],
+  "date": "2026-11-22",
+  "source": {
+    "doi": "10.1038/s41467-023-37750-z",
+    "sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+    "bytes": 629058,
+    "phase_rows": 152,
+    "animals": 72,
+    "stopover_complete_rows": 127,
+    "stopover_complete_animals": 65,
+    "genuine_zero_stopovers": 15,
+    "missing_stopover_rows": 25,
+    "start_phase_by_published_timing_class": {
+      "early": -29.85824361468085,
+      "mid": -1.5931346517241378,
+      "late": 19.856711881914894
+    },
+    "positive_phase_means_later": true
+  },
+  "contract_sha256": "5b6b453233a4b35b14e8f6471330f3cdd81725a32708423cee705f8a8b999047",
+  "contract_file": "payoff_b_ortega_within_animal_contract_v2_20261122.json",
+  "design_version": 2,
+  "design_amendment": {
+    "reason": "One connected component is not necessary to identify a common fixed-effect slope. Two components leave a nuisance rank of 38+8-2=44 and nonzero residual exposure.",
+    "timing": "After source structure/counts, before calculating or viewing the new slope or interval",
+    "original_contract_sha256": "a9214559ce0a289d80e91bb23cb146e7cd7a6a0ed351a28464ee13fec876a8f4",
+    "original_support_status": "SUPPORT_NOT_MET",
+    "original_support_commit": "72a5ad4",
+    "rows_variables_model_bootstrap_unchanged": true,
+    "new_requirement": "Fixed-effect residual exposure must identify an additional slope; component-specific intercept normalizations are allowed.",
+    "new_classification": "Exploratory design amendment before coefficient access; not an original-plan confirmatory pass"
+  },
+  "analysis_class": "POST_PUBLICATION_EXPLORATORY_DESIGN_FIXED_BEFORE_NEW_COEFFICIENT",
+  "prior_art": "Ortega 2023 already reports compensation and animal/year random-intercept models; this tests robustness to unrestricted fixed animal intercepts, not the first individual-adjusted analysis",
+  "claim_limit": "conditional within-animal time-allocation association, not causal information use, learning, remaining actionability, fitness, or independent biological replication",
+  "frozen_manuscripts_changed": false
+}

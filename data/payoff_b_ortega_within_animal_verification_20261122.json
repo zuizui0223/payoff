@@ -1,0 +1,18 @@
+{
+  "source_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+  "analysis_script_sha256": "949b76b88ad4ecbc9225ed061e8d3a5f86424ff2e6648dec0f868caace0e7def",
+  "contract_sha256": "5b6b453233a4b35b14e8f6471330f3cdd81725a32708423cee705f8a8b999047",
+  "method": "Independent full categorical dummy design; select nuisance basis by pivoted QR and solve full-rank least squares",
+  "n": 100,
+  "nuisance_rank": 44,
+  "full_model_rank": 45,
+  "beta": -0.689113247743533,
+  "absolute_difference_from_fwl": 5.240252676230739e-14,
+  "focal_tests_passed": 9,
+  "baseline_suite": {
+    "passed": 3151,
+    "skipped": 1,
+    "warning": "external anyio plugin deprecation"
+  },
+  "bootstrap_valid": 10000
+}
