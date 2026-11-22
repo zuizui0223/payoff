@@ -1,0 +1,175 @@
+{
+  "status": "NO_ROBUST_PREDICTIVE_GAIN",
+  "prefit": {
+    "status": "PASS",
+    "checks": {
+      "rows": true,
+      "stations": true,
+      "years": true,
+      "all_heldout_year_support": true,
+      "missing": true,
+      "residual_df": true,
+      "greenup_independent": true,
+      "vif": true,
+      "full_rank": true
+    },
+    "n_original": 833,
+    "n_complete": 828,
+    "n_missing": 5,
+    "n_sites": 53,
+    "n_years": 16,
+    "year_min": 2003,
+    "year_max": 2018,
+    "min_year_station_n": 41,
+    "max_year_station_n": 53,
+    "nuisance_rank": 55,
+    "joint_df_residual": 772,
+    "greenup_after_station_yeartrend_rms_days": 14.323712308916269,
+    "greenup_after_temp_calendar_rms_days": 13.971892548198623,
+    "greenup_partial_vif": 1.050995133949556,
+    "new_bird_coefficient_opened": false
+  },
+  "claim_limit": "Group radar ecology, not measured individual cue uptake, resource intake, or fitness.",
+  "new_animal_info_mechanism_identified": false,
+  "ecological_effect": {
+    "primary_heldout_equal_year_mean_mse_gain": -0.019459777088385505,
+    "ci95_bootstrap_years": [
+      -0.09529421742652948,
+      0.04959842594437149
+    ],
+    "n_heldout_years": 16,
+    "n_years_positive": 9,
+    "mean_baseline_mse": 7.16454423106115,
+    "mean_plus_greenup_mse": 7.184004008149536,
+    "full_sample_descriptive_greenup_beta_day_per_greenup_day": -0.009464629842840688,
+    "folds": [
+      {
+        "heldout_year": 2003,
+        "n": 41,
+        "mse_calendar_temperature": 6.917527465439345,
+        "mse_plus_greenup": 7.039325551035545,
+        "mse_gain": -0.12179808559620042
+      },
+      {
+        "heldout_year": 2004,
+        "n": 47,
+        "mse_calendar_temperature": 4.519400616019814,
+        "mse_plus_greenup": 4.565903420372773,
+        "mse_gain": -0.046502804352958726
+      },
+      {
+        "heldout_year": 2005,
+        "n": 52,
+        "mse_calendar_temperature": 7.304876464165089,
+        "mse_plus_greenup": 7.4573850887694695,
+        "mse_gain": -0.15250862460438075
+      },
+      {
+        "heldout_year": 2006,
+        "n": 53,
+        "mse_calendar_temperature": 10.2868532085207,
+        "mse_plus_greenup": 10.146823330656945,
+        "mse_gain": 0.1400298778637552
+      },
+      {
+        "heldout_year": 2007,
+        "n": 53,
+        "mse_calendar_temperature": 3.8443309957166245,
+        "mse_plus_greenup": 4.165466817553805,
+        "mse_gain": -0.3211358218371809
+      },
+      {
+        "heldout_year": 2008,
+        "n": 53,
+        "mse_calendar_temperature": 6.848345308244799,
+        "mse_plus_greenup": 6.966158245239601,
+        "mse_gain": -0.11781293699480244
+      },
+      {
+        "heldout_year": 2009,
+        "n": 53,
+        "mse_calendar_temperature": 5.436510404587411,
+        "mse_plus_greenup": 5.289760252170102,
+        "mse_gain": 0.14675015241730893
+      },
+      {
+        "heldout_year": 2010,
+        "n": 53,
+        "mse_calendar_temperature": 9.35267601739549,
+        "mse_plus_greenup": 9.23364083521633,
+        "mse_gain": 0.11903518217916087
+      },
+      {
+        "heldout_year": 2011,
+        "n": 53,
+        "mse_calendar_temperature": 7.188453224865462,
+        "mse_plus_greenup": 7.143463729559657,
+        "mse_gain": 0.04498949530580543
+      },
+      {
+        "heldout_year": 2012,
+        "n": 53,
+        "mse_calendar_temperature": 5.731371231386978,
+        "mse_plus_greenup": 5.722763623010404,
+        "mse_gain": 0.008607608376574483
+      },
+      {
+        "heldout_year": 2013,
+        "n": 53,
+        "mse_calendar_temperature": 7.206938299742686,
+        "mse_plus_greenup": 7.498770619544189,
+        "mse_gain": -0.2918323198015029
+      },
+      {
+        "heldout_year": 2014,
+        "n": 53,
+        "mse_calendar_temperature": 7.88067244538376,
+        "mse_plus_greenup": 7.728149257653634,
+        "mse_gain": 0.15252318773012608
+      },
+      {
+        "heldout_year": 2015,
+        "n": 52,
+        "mse_calendar_temperature": 8.164681065874442,
+        "mse_plus_greenup": 8.084820912105664,
+        "mse_gain": 0.07986015376877731
+      },
+      {
+        "heldout_year": 2016,
+        "n": 53,
+        "mse_calendar_temperature": 8.14338474365416,
+        "mse_plus_greenup": 8.081810152213409,
+        "mse_gain": 0.06157459144075084
+      },
+      {
+        "heldout_year": 2017,
+        "n": 53,
+        "mse_calendar_temperature": 8.826738389562632,
+        "mse_plus_greenup": 8.942497046542535,
+        "mse_gain": -0.11575865697990295
+      },
+      {
+        "heldout_year": 2018,
+        "n": 53,
+        "mse_calendar_temperature": 6.979947816419015,
+        "mse_plus_greenup": 6.877325248748513,
+        "mse_gain": 0.10262256767050193
+      }
+    ]
+  },
+  "date": "2026-11-22",
+  "contract_sha256": "f114c6a5b6ddb89f8e9e03f8bd7b01d661e657d6374971a09a5bbdb33e2a6204",
+  "source_sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+  "provenance": "Original Adams 2025 Figshare RDS read privately in CI; no original station/year rows published.",
+  "no_ebird": true,
+  "publication_claim": "POST_PUBLICATION_EXPLORATORY",
+  "execution": {
+    "run_id": 45013077604,
+    "job_id": 137179435598,
+    "derived_only_artifact_id": 14750741199,
+    "derived_only_zip_SHA256": "c9a4439fc20aebe6ff20579b3021885c59e588dabc2ce9f2089936e0f33ea038",
+    "original_data_not_committed": true,
+    "independent_source_from_deer": true,
+    "actual_new_biological_causal_effect_established": false
+  }
+}
