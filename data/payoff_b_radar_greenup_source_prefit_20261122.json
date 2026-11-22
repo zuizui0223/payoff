@@ -1,0 +1,48 @@
+{
+  "status": "PREFIT_SUPPORT_ONLY",
+  "design": {
+    "status": "PASS",
+    "checks": {
+      "rows": true,
+      "stations": true,
+      "years": true,
+      "all_heldout_year_support": true,
+      "missing": true,
+      "residual_df": true,
+      "greenup_independent": true,
+      "vif": true,
+      "full_rank": true
+    },
+    "n_original": 833,
+    "n_complete": 828,
+    "n_missing": 5,
+    "n_sites": 53,
+    "n_years": 16,
+    "year_min": 2003,
+    "year_max": 2018,
+    "min_year_station_n": 41,
+    "max_year_station_n": 53,
+    "nuisance_rank": 55,
+    "joint_df_residual": 772,
+    "greenup_after_station_yeartrend_rms_days": 14.323712308916269,
+    "greenup_after_temp_calendar_rms_days": 13.971892548198623,
+    "greenup_partial_vif": 1.050995133949556,
+    "new_bird_coefficient_opened": false
+  },
+  "outcome_opened": false,
+  "new_bird_coefficient_fitted": false,
+  "date": "2026-11-22",
+  "contract_sha256": "f114c6a5b6ddb89f8e9e03f8bd7b01d661e657d6374971a09a5bbdb33e2a6204",
+  "source_sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+  "provenance": "Original Adams 2025 Figshare RDS read privately in CI; no original station/year rows published.",
+  "no_ebird": true,
+  "publication_claim": "POST_PUBLICATION_EXPLORATORY",
+  "original_result_execution": {
+    "actions_run": 45012931084,
+    "job_id": 137178998503,
+    "artifact_id": 14750931195,
+    "source_dataset": "Adams 2025 radar assemblage Figshare",
+    "raw_observations_committed": false,
+    "new_biological_effect_estimated": false
+  }
+}
