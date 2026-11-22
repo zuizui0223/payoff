@@ -52,7 +52,7 @@
 - [x] Step 4: Run support-only against the SHA-verified original workbook. Expected: 152/72 source, 127/65 complete, 15 genuine zeros; publish all support counts before fitting. If the declared support fails, preserve that outcome and do not fit.
 - [x] Step 5: Run the fixed 10,000-replicate analysis once, independently verify the coefficient using a full categorical-design least-squares fit, and check every year omission. Expected: reproducible values; no required biological sign.
 - [x] Step 6: Write the result with prior-art and identifiability limits, then run the full repository tests. Expected: no new failures; report existing environment-dependent failures separately.
-- [ ] Step 7: Commit the code, tests and aggregate result; obtain a fresh review and fix material issues. Push the isolated branch and open a draft PR without merging.
+- [x] Step 7: Commit the code, tests and aggregate result; obtain a fresh review and fix material issues. Push the isolated branch and open a draft PR without merging.
 
 ## Decisions made before fitting
 
@@ -60,3 +60,10 @@
 - No search for a favorable endpoint follows an unsupported primary result.
 - The source is already published and known; fixing this comparison before its new coefficient does not make it independent confirmatory evidence.
 - After source-only support inspection, v2 corrects the unnecessary one-component rule. See docs/PAYOFF_B_ORTEGA_WITHIN_ANIMAL_DESIGN_20261122.md. Rows, model, variables and bootstrap remain unchanged.
+
+## Completed publication
+
+Draft PR: https://github.com/zuizui0223/payoff/pull/413 .
+The connected GitHub API replayed the five original local commits in order with identical tree SHAs.
+The source, code and analysis outputs are unchanged; commit mapping is recorded in
+`data/payoff_b_ortega_within_animal_verification_20261122.json`.
