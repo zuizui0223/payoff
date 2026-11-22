@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-22",
+  "status": "POST_PUBLICATION_POST_OPEN_SOURCE_CHRONOLOGY_AUDIT_NO_NEW_ECOLOGICAL_EFFECT",
+  "parent_pr": 415,
+  "source": "Adams et al. 2025 Ecology, Figshare original station-year RDS 10.6084/m9.figshare.26050390.v2",
+  "source_sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+  "parent_source_grain": "833 site-years, 53 radar stations, 2003-2018; previously verified 828 complete model cases",
+  "scientific_question": "In the original radar station-year records, how often had MODIS mean greenup already happened by the date of median spring bird passage, before any 0- or 7-day sensing/processing lag?",
+  "prefit_biological_target": "Temporal ordering of retrospective median greenup DOY and radar spring 50%-passage DOY; NOT behavior, belief, payoff, causal cue availability, or real-time operational forecast",
+  "sample_rule": "Exact same 828 complete-case site-years as prior PR #415: require nonmissing spring_q50, spring_mean_temp, and mean_greenup; do not choose missingness based on timing outcome",
+  "expected_rows": 828,
+  "expected_sites": 53,
+  "expected_years": 16,
+  "variables": {
+    "bird_median": "spring_q50",
+    "plant_greenup": "mean_greenup",
+    "temperature_for_identical_sample": "spring_mean_temp",
+    "site": "site",
+    "year": "year"
+  },
+  "contrast": "delta_days = spring_q50 - mean_greenup; positive means mean greenup preceded median passage",
+  "three_class_ordering": {
+    "greenup_before_median": "delta_days > 0",
+    "exact_calendar_tie": "delta_days == 0 (day precision; do not claim greenup known at the same time)",
+    "median_passage_before_greenup": "delta_days < 0"
+  },
+  "fixed_lag_sensitivity": {
+    "zero_day_optimistic": "delta_days >= 0 (even a same-calendar-day match is only an optimistic ordering upper bound)",
+    "one_day_prior": "delta_days >= 1 (greenup had to precede median passage by a full day)",
+    "seven_days_prior": "delta_days >= 7 (sensitivity for combined detection/processing/response latency; not a measured satellite delivery lag)"
+  },
+  "aggregate_outputs": [
+    "pooled n and fraction for three temporal-ordering classes",
+    "pooled fractions 0, 1 and 7 days prior",
+    "median and interquartile delta_days",
+    "16 annual aggregate counts, never site names or original rows",
+    "equal-year mean fractions and 95% year-resampling bootstrap intervals",
+    "number of years with >50% median passage preceding greenup"
+  ],
+  "uncertainty": {
+    "unit": "original calendar year",
+    "bootstrap_replicates": 10000,
+    "seed": 20261122,
+    "quantiles": [
+      0.025,
+      0.975
+    ],
+    "interpretation": "conditional exploratory across observed years; 16 folds are not independent studies"
+  },
+  "decision": "Descriptive temporal-support audit; report both directions including negative results, no p-value test or threshold tuning, never promote to cue use or causal phenological tracking",
+  "fail_closed": [
+    "original SHA256 mismatches or source not accessible",
+    "site-year duplicate or any unexpected source grain",
+    "complete-case panel not exactly 828/53/16",
+    "nonfinite or invalid DOY (>366 or <1), or year out of 2003-2018",
+    "unintended use of eBird or cross-source join"
+  ],
+  "causal_limits": [
+    "Retrospective MODIS mean greenup DOY is not what any bird necessarily perceived",
+    "Weather radar 50% passage timing is an assemblage statistic, not an individual decision time",
+    "Greenup can be sensed gradually, earlier than the final estimated timing marker; event ordering is a strict proxy, not a necessary condition for any cue",
+    "Satellite algorithm and data product latency are not observed, so 0-day is optimistic and 7-day is illustrative, not an actual issue-time forecast",
+    "No biomass, insect resource, fitness, adaptation, animal beliefs, or partner coordination is measured",
+    "Adams 2025 already published climate-greenup-passage results; this is retrospective reanalysis and not new biological replication",
+    "Previous no-robust-greenup-prediction result remains unchanged; do not reopen the model"
+  ],
+  "no_ebird": true,
+  "no_original_rows_or_station_identifiers_uploaded": true,
+  "no_main_or_frozen_manuscript_changes": true,
+  "parent_source_grain_numeric": {
+    "expected_original_rows": 833,
+    "source_count_verified_in_parent": 415,
+    "pre_gap_knowledge": true
+  }
+}

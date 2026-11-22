@@ -1,0 +1,46 @@
+{
+  "status": "SOURCE_FIELD_RANGE_DIAGNOSIS_NO_CHRONOLOGY",
+  "original_rows": 833,
+  "complete_rows": 828,
+  "distinct_site_count": 53,
+  "distinct_year_count": 16,
+  "source_fields": {
+    "spring_q50": {
+      "n_numeric": 828,
+      "min_value": 106,
+      "max_value": 137,
+      "n_less_than_1": 0,
+      "n_greater_than_366": 0,
+      "invalid_min": null,
+      "invalid_max": null,
+      "invalid_count_by_year": []
+    },
+    "mean_greenup": {
+      "n_numeric": 828,
+      "min_value": -27,
+      "max_value": 178,
+      "n_less_than_1": 1,
+      "n_greater_than_366": 0,
+      "invalid_min": -27,
+      "invalid_max": -27,
+      "invalid_count_by_year": [
+        {
+          "year": 2012,
+          "n_invalid": 1
+        }
+      ]
+    }
+  },
+  "no_effect_or_gap_calculated": true,
+  "no_original_station_row_export": true,
+  "date_range_gate": "REQUIRES_SOURCE_SEMANTICS",
+  "execution": {
+    "repository": "zuizui0223/payoff",
+    "branch": "analysis/payoff-b-radar-greenup-chronology-20261122",
+    "workflow_run": 45031442231,
+    "source_job": 137235703989,
+    "source_sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+    "biological_chronology_calculated": false,
+    "original_source_rows_committed": false
+  }
+}

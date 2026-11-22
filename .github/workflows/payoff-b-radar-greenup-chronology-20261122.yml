@@ -1,0 +1,101 @@
+name: PAYOFF-B radar greenup chronology bounded source audit
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-radar-greenup-chronology-20261122
+  workflow_dispatch:
+
+jobs:
+  source-chronology:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+          use-public-rspm: true
+      - name: Install regression-test and finite-matrix dependencies
+        run: python -m pip install --disable-pip-version-check pytest numpy
+      - name: Test source-only chronology classifications and sampling
+        run: pytest -q -rs tests/test_payoff_b_radar_greenup_chronology_20261122.py
+      - name: Reacquire Figshare source using original pinned bytes (NO original upload)
+        run: |
+          python - <<'PY'
+          from hashlib import sha256
+          from pathlib import Path
+          from scripts.payoff_b_radar_source_gate_20261122 import bounded_download
+          original_id=47109769
+          expected="1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900"
+          raw=bounded_download(f"https://ndownloader.figshare.com/files/{original_id}")
+          if sha256(raw).hexdigest()!=expected:
+              raise SystemExit("Original source checksum mismatch")
+          location=Path("outputs/private_original_rdata")
+          location.mkdir(parents=True,exist_ok=True)
+          (location/"data_2003_2018.Rda").write_bytes(raw)
+          print("Verified Figshare source SHA256 and original byte length",len(raw))
+          PY
+      - name: Extract only registered fields to private working directory
+        run: |
+          Rscript scripts/payoff_b_radar_greenup_extract_private.R \
+            outputs/private_original_rdata/data_2003_2018.Rda \
+            outputs/private_original_rdata/private_radar_model.csv
+      - name: Diagnose source DOY validity before any chronology classifications
+        run: |
+          pytest -q -rs tests/test_payoff_b_radar_source_doy_range_diagnosis_20261122.py
+          python scripts/payoff_b_radar_source_doy_range_diagnosis_20261122.py \
+            --input outputs/private_original_rdata/private_radar_model.csv \
+            --output outputs/payoff_b_radar_doy_range_diagnosis_20261122.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-radar-source-doy-range-diagnosis-20261122
+          path: outputs/payoff_b_radar_doy_range_diagnosis_20261122.json
+      - name: Enforce the original source range blocker without altering strict contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          prior=json.loads(Path("data/payoff_b_radar_source_doy_range_diagnosis_20261122.json").read_text())
+          fresh=json.loads(Path("outputs/payoff_b_radar_doy_range_diagnosis_20261122.json").read_text())
+          assert prior["status"]==fresh["status"]=="SOURCE_FIELD_RANGE_DIAGNOSIS_NO_CHRONOLOGY"
+          assert prior["date_range_gate"]==fresh["date_range_gate"]=="REQUIRES_SOURCE_SEMANTICS"
+          assert prior["source_fields"]==fresh["source_fields"]
+          assert prior["complete_rows"]==fresh["complete_rows"]==828
+          assert fresh["source_fields"]["mean_greenup"]["n_less_than_1"]==1
+          assert fresh["source_fields"]["mean_greenup"]["invalid_min"]==-27
+          assert fresh["source_fields"]["mean_greenup"]["invalid_count_by_year"]==[{"year":2012,"n_invalid":1}]
+          print("STRICT_CHRONOLOGY_REMAINS_HOLD_UNRESOLVED_SOURCE_SEMANTICS")
+          PY
+      - name: Test exact one-unknown bounds, not an ecological effect
+        run: pytest -q -rs tests/test_payoff_b_radar_greenup_chronology_bounds_20261122.py
+      - name: Compute exact chronology fraction ranges over original N=828
+        run: |
+          python scripts/payoff_b_radar_greenup_chronology_bounds_20261122.py \
+            --input outputs/private_original_rdata/private_radar_model.csv \
+            --contract data/payoff_b_radar_greenup_chronology_bounds_contract_20261122.json \
+            --output outputs/payoff_b_radar_greenup_chronology_bounds_20261122.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          z=json.loads(Path("outputs/payoff_b_radar_greenup_chronology_bounds_20261122.json").read_text())
+          assert z["status"]=="BOUNDED_SOURCE_CHRONOLOGY_POST_FAILURE_NOT_NEW_EFFECT"
+          assert z["original_strict_chronology_status"]=="HOLD_REQUIRES_SOURCE_SEMANTICS"
+          assert (z["original_complete_station_years"],z["valid_classifiable_station_years"],z["unresolved_original_station_years"]) == (828,827,1)
+          assert (z["n_sites"],z["n_years"])==(53,16)
+          assert z["no_ebird"] is True
+          assert z["previous_heldout_greenup_effect_refitted"] is False
+          assert z["animal_cue_availability_or_behavior_identified"] is False
+          assert len(z["yearly_aggregate_only"])==16
+          assert not any("site" in item for item in z["yearly_aggregate_only"])
+          print("SOURCE_CHRONOLOGY_BOUNDS_COMPLETE_STRICT_GATE_STILL_HOLD")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-radar-chronology-bounds-derived-20261122
+          path: outputs/payoff_b_radar_greenup_chronology_bounds_20261122.json
