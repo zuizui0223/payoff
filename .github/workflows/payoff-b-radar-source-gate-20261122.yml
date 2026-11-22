@@ -38,3 +38,72 @@ jobs:
         with:
           name: payoff-b-radar-source-only-20261122
           path: outputs/payoff_b_radar_source_inventory_20261122.json
+
+  original-native-r-grain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+          use-public-rspm: true
+      - name: Reacquire both original source files with pinned SHA256
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          from scripts.payoff_b_radar_source_gate_20261122 import bounded_download
+          sources = [
+            (47109763, "bd739df140be52c38a0000294a457c7f5cd9396b1b7e7b77db30b513e820ffdf", "data_1995_2018.Rda"),
+            (47109769, "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900", "data_2003_2018.Rda")
+          ]
+          root = Path("outputs/private_original_rdata")
+          root.mkdir(parents=True, exist_ok=True)
+          for fid, expected, name in sources:
+            raw = bounded_download(f"https://ndownloader.figshare.com/files/{fid}")
+            if sha256(raw).hexdigest() != expected:
+              raise SystemExit(f"Source SHA mismatch for {name}")
+            (root/name).write_bytes(raw)
+            print("verified original source:", name, "bytes", len(raw))
+          PY
+      - name: Read ONLY source RData structure and aggregate year/site cardinalities
+        run: |
+          Rscript scripts/payoff_b_radar_Rdata_grain_20261122.R \
+            outputs/private_original_rdata/data_1995_2018.Rda \
+            outputs/private_original_rdata/data_2003_2018.Rda \
+            outputs/payoff_b_radar_original_rdata_grain_20261122.csv
+      - name: Render schema-only JSON receipt without original table rows
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+          infile = Path("outputs/payoff_b_radar_original_rdata_grain_20261122.csv")
+          with infile.open() as f:
+            records = list(csv.DictReader(f))
+          receipt = {
+            "status": "ORIGINAL_SOURCE_GRAIN_ONLY",
+            "doi": "10.6084/m9.figshare.26050390.v2",
+            "species_level": False, "radar_migrant_assemblage": True,
+            "original_source_file_count": 2,
+            "schema_tables": records,
+            "ecological_effect_fitted": False,
+            "original_records_exported": False,
+            "next_step": "predeclare exact site-year greenup/climate key joins and test independent predictive support before any coefficient",
+          }
+          out = Path("outputs/payoff_b_radar_original_grain_receipt_20261122.json")
+          out.write_text(json.dumps(receipt, indent=2) + "\n")
+          print("PAYOFF_RADAR_RDATA_SCHEMA_RECEIPT=" + json.dumps(receipt, separators=(",", ":")))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-radar-rdata-schema-only-20261122
+          path: |
+            outputs/payoff_b_radar_original_rdata_grain_20261122.csv
+            outputs/payoff_b_radar_original_grain_receipt_20261122.json
