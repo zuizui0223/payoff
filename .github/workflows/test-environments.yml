@@ -61,3 +61,23 @@ jobs:
           fi
       - name: Run full pytest suite with empirical dependencies enabled
         run: pytest -q
+
+  deer-calendar-support:
+    if: github.head_ref == 'analysis/payoff-b-deer-calendar-vs-phase-20261122' || github.ref_name == 'analysis/payoff-b-deer-calendar-vs-phase-20261122'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install only NumPy for outcome-blind design screening
+        run: python -m pip install --disable-pip-version-check numpy
+      - name: Authenticate original data and check collinearity BEFORE the coefficient
+        run: |
+          python scripts/payoff_b_deer_calendar_discrimination.py \
+            --support-only \
+            --output outputs/payoff_b_deer_calendar_support_20261122.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-deer-calendar-support-only
+          path: outputs/payoff_b_deer_calendar_support_20261122.json

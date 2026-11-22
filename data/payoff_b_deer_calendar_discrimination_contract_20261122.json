@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-22",
+  "status": "POST_PUBLICATION_EXPLORATORY_FROZEN_BEFORE_NEW_CALENDAR_CONDITIONAL_COEFFICIENT",
+  "parent_analysis": "PR #413; DOI 10.1038/s41467-023-37750-z",
+  "scientific_question": "Does the published start-phase/stopover relation persist within deer conditional on calendar departure day, individual and year effects?",
+  "provenance": {
+    "source_doi": "10.1038/s41467-023-37750-z",
+    "source_sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+    "parent_branch": "analysis/payoff-b-ortega-within-animal-20261122",
+    "original_phase_sheet": "Fig1a,b;Fig3;SFig2;STables1,6",
+    "original_columns": [
+      "id_yr",
+      "year",
+      "DOY_Start",
+      "DFP_Start"
+    ],
+    "outcome_column": "stopover.day",
+    "allow_animal_ids_in_public_results": false
+  },
+  "sampling": "Exactly same complete-case repeated-animal observations admitted in PR #413: n=100, 38 deer, eight observation years, true zero durations preserved, 25 original missing rows never zero-imputed.",
+  "predictor": "DFP_Start; positive = calendar departure later relative to origin green-up peak; constructed retrospectively and NOT known animal cue",
+  "calendar_covariate": "DOY_Start; actual departure day of year",
+  "endpoint": "whole-route observed stopover.day; no DFP_End, travel speed, total travel time, reproduction",
+  "primary_model": "stopover_it = individual FE + year FE + beta_calendar * DOY_Start_it + beta_phase * DFP_Start_it + error_it",
+  "target_estimand": "Conditional within-individual linear beta_phase (stopover days per DFP day), not causal cue-use",
+  "null_model": "stopover_it = individual FE + year FE + beta_calendar * DOY_Start_it + error_it",
+  "expected_phase_sign": "negative; failure to retain a negative confidence interval is not a confirmation of phenological cue use or its absence",
+  "support_gates_before_primary_coefficient": {
+    "min_rows": 80,
+    "min_repeated_individuals": 30,
+    "min_years": 5,
+    "min_residual_df": 20,
+    "min_raw_calendar_after_FE_rms_days": 1,
+    "min_DFP_after_FE_and_calendar_rms_days": 1,
+    "max_DFP_calendar_partial_VIF": 10,
+    "require_full_rank_for_calendar_and_phase": true,
+    "fail_closed": true
+  },
+  "estimation": "FWL residualize animal and year fixed effects, then separately residualize DFP on actual DOY; no categorical timing bins or post-hoc alternative equations.",
+  "uncertainty": {
+    "unit": "animal",
+    "method": "whole-animal histories cluster bootstrap with resampled animal labels",
+    "replicates": 4000,
+    "seed": 20261122,
+    "confidence_interval": [
+      0.025,
+      0.975
+    ],
+    "minimum_valid_fraction": 0.95,
+    "years": "conditional on observed years"
+  },
+  "supplementary": "Residual SSE difference vs calendar-only on same n; show partial VIF and all source support counts. No out-of-sample performance claimed.",
+  "constraints": [
+    "Do not select other covariates or change support gates after coefficients",
+    "Do not use eBird",
+    "No original animal identifiers or source rows committed",
+    "No independent ecological replication claimed",
+    "No causal information/reward/fitness inference",
+    "Keep frozen main/V7/manuscripts unchanged"
+  ],
+  "follow_up_if_support_fails": "Report NOT_ESTIMABLE; record collinearity/design stats only, no phase-effect fit, no threshold lowering."
+}

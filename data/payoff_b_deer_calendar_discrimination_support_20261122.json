@@ -1,0 +1,56 @@
+{
+  "status": "SOURCE_ONLY_SUPPORT",
+  "design": {
+    "status": "NOT_ESTIMABLE",
+    "checks": {
+      "rows": true,
+      "individuals": true,
+      "years": true,
+      "residual_df": true,
+      "independent_calendar": true,
+      "independent_phase": true,
+      "collinearity": false
+    },
+    "n": 100,
+    "animals": 38,
+    "years": 8,
+    "components": 2,
+    "nuisance_rank": 44,
+    "residual_df": 54,
+    "calendar_after_FE_rms_days": 12.824669943610534,
+    "phase_after_FE_and_calendar_rms_days": 3.343567871825171,
+    "phase_calendar_partial_VIF": 16.53672690045072,
+    "phase_after_FE_rms_days": 13.596743995430653
+  },
+  "primary": null,
+  "date": "2026-11-22",
+  "source_metadata": {
+    "source_doi": "10.1038/s41467-023-37750-z",
+    "sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+    "source_animal_years": 152,
+    "original_stopover_complete": 127,
+    "repeated_panel_rows": 100,
+    "repeated_individuals": 38,
+    "years": [
+      2011,
+      2012,
+      2014,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "genuine_zero_stopovers": 11
+  },
+  "contract_sha256": "6499180af2b6c5827357eadae1fb97cd9f6f037e32ce82afa90b6265bf9462c6",
+  "claim_ceiling": "Exploratory within-animal association; not observed cue use or causation.",
+  "execution": {
+    "github_actions_run": 45009341410,
+    "job_id": 137167953606,
+    "artifact_id": 14749436161,
+    "artifact_sha256": "d2494232293db34f45df1bf980267f6c951c67ca4d833f3912ab3bbbd35a380a",
+    "branch": "analysis/payoff-b-deer-calendar-vs-phase-20261122",
+    "fit_performed": false
+  }
+}
