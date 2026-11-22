@@ -14,5 +14,22 @@
     "skipped": 1,
     "warning": "external anyio plugin deprecation"
   },
-  "bootstrap_valid": 10000
+  "bootstrap_valid": 10000,
+  "final_suite": {
+    "passed": 3164,
+    "skipped": 0,
+    "warnings": 1,
+    "seconds": 45.64,
+    "warning": "external anyio pytest plugin deprecation"
+  },
+  "independent_review": {
+    "source_reader": "openpyxl, independent of analysis XML parser",
+    "primary_beta": -0.68911324774356,
+    "all_eight_omission_coefficients_and_sample_sizes_match": true,
+    "genuine_zeros_and_missingness_match": true,
+    "critical_findings": 0,
+    "important_findings": 0,
+    "bootstrap_draws_regenerated_by_reviewer": false,
+    "minor_deferred": "When exposure is perfectly explained by fixed effects, support diagnostic overstates full rank by one; variation gate rejects such inputs and empirical estimates are unaffected."
+  }
 }

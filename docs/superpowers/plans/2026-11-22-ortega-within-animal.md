@@ -46,12 +46,12 @@
 - analyze(rows, contract) returns aggregate inference and all year-omission outcomes.
 - CLI accepts --source, --contract, --support-only and --output.
 
-- [ ] Step 1: Add behavioral tests for zero/missing handling, duplicate joins, an unbalanced hand-constructed fixed-effect slope of -0.5, no residual identifying variation, and whole-history bootstrap relabeling.
-- [ ] Step 2: Run the tests and observe missing implementation failures. Expected: the new interfaces do not yet exist.
-- [ ] Step 3: Implement the reader, exact estimator, support check and bootstrap; run the focused tests. Expected: all new tests pass.
-- [ ] Step 4: Run support-only against the SHA-verified original workbook. Expected: 152/72 source, 127/65 complete, 15 genuine zeros; publish all support counts before fitting. If the declared support fails, preserve that outcome and do not fit.
-- [ ] Step 5: Run the fixed 10,000-replicate analysis once, independently verify the coefficient using a full categorical-design least-squares fit, and check every year omission. Expected: reproducible values; no required biological sign.
-- [ ] Step 6: Write the result with prior-art and identifiability limits, then run the full repository tests. Expected: no new failures; report existing environment-dependent failures separately.
+- [x] Step 1: Add behavioral tests for zero/missing handling, duplicate joins, an unbalanced hand-constructed fixed-effect slope of -0.5, no residual identifying variation, and whole-history bootstrap relabeling.
+- [x] Step 2: Run the tests and observe missing implementation failures. Expected: the new interfaces do not yet exist.
+- [x] Step 3: Implement the reader, exact estimator, support check and bootstrap; run the focused tests. Expected: all new tests pass.
+- [x] Step 4: Run support-only against the SHA-verified original workbook. Expected: 152/72 source, 127/65 complete, 15 genuine zeros; publish all support counts before fitting. If the declared support fails, preserve that outcome and do not fit.
+- [x] Step 5: Run the fixed 10,000-replicate analysis once, independently verify the coefficient using a full categorical-design least-squares fit, and check every year omission. Expected: reproducible values; no required biological sign.
+- [x] Step 6: Write the result with prior-art and identifiability limits, then run the full repository tests. Expected: no new failures; report existing environment-dependent failures separately.
 - [ ] Step 7: Commit the code, tests and aggregate result; obtain a fresh review and fix material issues. Push the isolated branch and open a draft PR without merging.
 
 ## Decisions made before fitting

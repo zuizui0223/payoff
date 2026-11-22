@@ -143,3 +143,13 @@ basis reproduced the primary coefficient to numerical precision.
 Machine-readable result:
 [result JSON](../data/payoff_b_ortega_within_animal_result_20261122.json).
 Original raw rows, animal IDs and source workbook are not committed.
+
+最終確認：全体テストは3,164件通過、skipは0件。外部のanyio/pytestプラグインに
+非推奨警告が1件ある。独立レビューではopenpyxlで原資料を読み直し、主係数と
+8通りすべての年除外係数・標本数、真の0日と欠測の区分を再現した。
+ブートストラップは実装と実行記録を確認しており、レビュアーによる独立の1万回再実行はしていない。
+
+Later：固定効果で説明変数の変動が完全に消える仮想入力では、補助診断が
+full model rankを1多く、残差自由度を1少なく表示する。変動の必要条件で不成立として
+止まるため推定は行われず、今回の実データの係数・区間・判定には影響しない。
+この表示上の軽微な事項を記録し、今回の主解析への追加変更は行っていない。
