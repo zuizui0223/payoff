@@ -66,5 +66,10 @@
   ],
   "no_ebird": true,
   "no_original_rows_or_station_identifiers_uploaded": true,
-  "no_main_or_frozen_manuscript_changes": true
+  "no_main_or_frozen_manuscript_changes": true,
+  "parent_source_grain_numeric": {
+    "expected_original_rows": 833,
+    "source_count_verified_in_parent": 415,
+    "pre_gap_knowledge": true
+  }
 }
