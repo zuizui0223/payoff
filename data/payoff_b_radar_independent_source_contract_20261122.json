@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-22",
+  "status": "SOURCE_ONLY_PREFIT_NO_BIOLOGICAL_OUTCOME_OPENED",
+  "prior_prs": [
+    413,
+    414
+  ],
+  "why": "Mule-deer same-animal phenological phase is strongly entangled with departure DOY; an independent radar and local land-surface-phenology panel may separate ecological date responses at station-year resolution.",
+  "original_article": {
+    "doi": "10.1002/ecy.70110",
+    "title": "Shifts in avian migration phenologies do not compensate for changes to conditions en route in spring and fall",
+    "authors": "Adams et al.",
+    "publication_year": 2025
+  },
+  "original_dataset": {
+    "doi": "10.6084/m9.figshare.26050390.v2",
+    "figshare_article_id": 26050390,
+    "api": "https://api.figshare.com/v2/articles/26050390",
+    "provider": "Figshare",
+    "allowlisted_download": "https://ndownloader.figshare.com/files/{numeric_file_id}"
+  },
+  "source_origin": "NOAA weather surveillance radar bird-passage measures, MODIS vegetation metrics, NARR temperature/humidity, NOT eBird; individual bird tracks do NOT exist in these source summaries",
+  "registered_focal_questions": [
+    "Does independent radar passage phenology contain additional association with vegetation greenup after adjusting for concurrent climate and site/calendar structure?",
+    "Do held-out YEAR predictions benefit from green-up beyond predeclared date/climate baseline?"
+  ],
+  "prior_art": "The 2025 Adams article already reports stronger temperature responses than greenup, incomplete climate compensation and weather-radar passage trends. Replicating those headline results is not PAYOFF novelty.",
+  "source_gate_before_any_new_effect": {
+    "source_approved_provider_and_checksum_required": true,
+    "minimum_independent_radar_stations": 20,
+    "minimum_bird_migration_years": 10,
+    "require_original_site_year_keys": true,
+    "require_radar_spring_passage_10_50_90_quantile_dates": true,
+    "require_local_greenup_timing_not_posttarget_oracle_claim": true,
+    "require_local_temperature_covariate": true,
+    "require_explicit_station_and_year_covariates": true,
+    "forbid_ebird_and_derived_species_occurrence_tables": true,
+    "only_run_prefit_support_until_schema_verified": true,
+    "max_single_original_source_bytes_for_preflight": 12000000,
+    "max_original_source_files_to_download": 12,
+    "forbid_unverified_cross_file_join": true
+  },
+  "tentative_identification": "station-year group passage calendar date and station-year vegetation greenup share temporal structures. Their station/year/environment residual covariation must be assessed BEFORE any new coefficient. Radar assemblage passage is not a bird's decision-time cue or fitness.",
+  "pending_model": "If original row-grain and positive identifying residual variation pass, predeclare blocked held-out-year predictive comparison with explicit full covariates before fitting any candidate effect. Do not fit source author's published coefficient opportunistically.",
+  "upstream_constraint": "Never use eBird, TinyFish, posttarget cue values as predecision information, original unverified raw bird IDs, or optimize thresholds after observing outcome.",
+  "output": "Aggregate-only source inventory including file MD5 if present, file sizes, classifiable columns, and explicit decision on suitability for a further new preregistered model."
+}
