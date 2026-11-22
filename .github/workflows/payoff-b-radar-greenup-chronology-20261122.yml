@@ -1,4 +1,4 @@
-name: PAYOFF-B radar spring-greenup chronology source-only
+name: PAYOFF-B radar greenup chronology bounded source audit
 
 on:
   push:
@@ -56,30 +56,46 @@ jobs:
         with:
           name: payoff-b-radar-source-doy-range-diagnosis-20261122
           path: outputs/payoff_b_radar_doy_range_diagnosis_20261122.json
-      - name: Compute original-site-year source chronology, not animal cue use
+      - name: Enforce the original source range blocker without altering strict contract
         run: |
-          python scripts/payoff_b_radar_greenup_chronology_20261122.py \
-            --input outputs/private_original_rdata/private_radar_model.csv \
-            --contract data/payoff_b_radar_greenup_chronology_contract_20261122.json \
-            --output outputs/payoff_b_radar_greenup_chronology_20261122.json
           python - <<'PY'
           import json
           from pathlib import Path
-          source=Path("outputs/payoff_b_radar_greenup_chronology_20261122.json")
-          z=json.loads(source.read_text())
-          assert z["status"]=="SOURCE_CHRONOLOGY_COMPLETED_NOT_ANIMAL_INFORMATION"
-          assert z["n_original_station_years"]==833
-          assert z["n_complete_station_years"]==828
-          assert z["n_stations"]==53
-          assert z["n_years"]==16
-          assert z["individual_bird_information_or_causal_cue_use_estimated"] is False
-          assert z["original_location_rows_exported"] is False
+          prior=json.loads(Path("data/payoff_b_radar_source_doy_range_diagnosis_20261122.json").read_text())
+          fresh=json.loads(Path("outputs/payoff_b_radar_doy_range_diagnosis_20261122.json").read_text())
+          assert prior["status"]==fresh["status"]=="SOURCE_FIELD_RANGE_DIAGNOSIS_NO_CHRONOLOGY"
+          assert prior["date_range_gate"]==fresh["date_range_gate"]=="REQUIRES_SOURCE_SEMANTICS"
+          assert prior["source_fields"]==fresh["source_fields"]
+          assert prior["complete_rows"]==fresh["complete_rows"]==828
+          assert fresh["source_fields"]["mean_greenup"]["n_less_than_1"]==1
+          assert fresh["source_fields"]["mean_greenup"]["invalid_min"]==-27
+          assert fresh["source_fields"]["mean_greenup"]["invalid_count_by_year"]==[{"year":2012,"n_invalid":1}]
+          print("STRICT_CHRONOLOGY_REMAINS_HOLD_UNRESOLVED_SOURCE_SEMANTICS")
+          PY
+      - name: Test exact one-unknown bounds, not an ecological effect
+        run: pytest -q -rs tests/test_payoff_b_radar_greenup_chronology_bounds_20261122.py
+      - name: Compute exact chronology fraction ranges over original N=828
+        run: |
+          python scripts/payoff_b_radar_greenup_chronology_bounds_20261122.py \
+            --input outputs/private_original_rdata/private_radar_model.csv \
+            --contract data/payoff_b_radar_greenup_chronology_bounds_contract_20261122.json \
+            --output outputs/payoff_b_radar_greenup_chronology_bounds_20261122.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          z=json.loads(Path("outputs/payoff_b_radar_greenup_chronology_bounds_20261122.json").read_text())
+          assert z["status"]=="BOUNDED_SOURCE_CHRONOLOGY_POST_FAILURE_NOT_NEW_EFFECT"
+          assert z["original_strict_chronology_status"]=="HOLD_REQUIRES_SOURCE_SEMANTICS"
+          assert (z["original_complete_station_years"],z["valid_classifiable_station_years"],z["unresolved_original_station_years"]) == (828,827,1)
+          assert (z["n_sites"],z["n_years"])==(53,16)
           assert z["no_ebird"] is True
-          assert len(z["annual_aggregate_only"])==16
-          assert not any("site" in x for x in z["annual_aggregate_only"])
-          print("SOURCE_CHRONOLOGY_SCHEMA_AND_PROVENANCE_PASS")
+          assert z["previous_heldout_greenup_effect_refitted"] is False
+          assert z["animal_cue_availability_or_behavior_identified"] is False
+          assert len(z["yearly_aggregate_only"])==16
+          assert not any("site" in item for item in z["yearly_aggregate_only"])
+          print("SOURCE_CHRONOLOGY_BOUNDS_COMPLETE_STRICT_GATE_STILL_HOLD")
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: payoff-b-radar-greenup-chronology-derived-20261122
-          path: outputs/payoff_b_radar_greenup_chronology_20261122.json
+          name: payoff-b-radar-chronology-bounds-derived-20261122
+          path: outputs/payoff_b_radar_greenup_chronology_bounds_20261122.json
