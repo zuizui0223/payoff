@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-22",
+  "status": "POST_PUBLICATION_EXPLORATORY_OUTCOME_BLIND_MODEL_CONTRACT",
+  "question": "Does contemporaneous local vegetation green-up improve held-out-year radar spring-passage date reconstruction beyond site-specific calendar baseline, linear year trend and average spring temperature?",
+  "source": {
+    "article": "Adams et al. 2025 Ecology 106:e70110 DOI 10.1002/ecy.70110",
+    "original_figshare_doi": "10.6084/m9.figshare.26050390.v2",
+    "radar_origins": "NOAA weather surveillance radar (bird assemblage), not eBird",
+    "plant_origin": "MODIS vegetation land-surface phenology",
+    "meteorological_origin": "NARR",
+    "author_2015_2025_prior_art": "The original paper already found interannual temperature dominates greenup as a passage predictor; not a new discovery.",
+    "file_id": 47109769,
+    "file_name": "data_2003_2018.Rda",
+    "source_sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+    "serialization": "readRDS not load despite .Rda extension",
+    "authenticated_source_schema": {
+      "n_rows": 833,
+      "n_sites": 53,
+      "n_years": 16,
+      "year_min": 2003,
+      "year_max": 2018
+    },
+    "direct_columns": [
+      "site",
+      "year",
+      "spring_q50",
+      "spring_mean_temp",
+      "mean_greenup"
+    ]
+  },
+  "units": {
+    "inference": "unique radar station x year; independent year is time-transfer unit, not 833 independent species/animals",
+    "y": "spring_q50 = DOY when 50% of season passage observed at station",
+    "x_t": "spring_mean_temp = author-derived spring interval average temperature, measured retrospectively not necessarily before departure",
+    "x_g": "mean_greenup = author-derived mean MODIS greenup DOY for site-year; can be known only after greenup occurs",
+    "calendar": "linear year trend plus each radar's own baseline, fit only on training years"
+  },
+  "model": {
+    "baseline": "spring_q50 ~ station fixed intercepts + centered numeric year + spring_mean_temp",
+    "augmented": "spring_q50 ~ station fixed intercepts + centered numeric year + spring_mean_temp + mean_greenup",
+    "training": "whole-year leave-one-year-out, 16 folds if support passes, shared complete cases",
+    "inference": "mean of per-year heldout MSE difference baseline minus augmented, equal year weight",
+    "secondary": "fraction of years with positive gain; descriptive full-data partial greenup coefficient with no claim of causal cue",
+    "no_tuning": true,
+    "only_one_quantile": "spring_q50 only; do not search q10/q90 when q50 is null"
+  },
+  "support_before_any_new_effect": {
+    "min_complete_pairs": 500,
+    "min_stations": 35,
+    "min_years": 12,
+    "min_site_years_per_heldout_year": 20,
+    "max_missing_focal_fraction": 0.25,
+    "min_residual_df": 30,
+    "min_greenup_after_station_year_trend_temp_rms_days": 2,
+    "max_greenup_partial_vif": 10,
+    "require_unique_site_year": true,
+    "require_no_ebird": true,
+    "fail_closed": true
+  },
+  "uncertainty": {
+    "method": "paired year-level nonparametric bootstrap of 16 precomputed year-specific heldout MSE differences; fixed seed",
+    "replicates": 10000,
+    "seed": 20261122,
+    "ci_quantiles": [
+      0.025,
+      0.975
+    ],
+    "positive_decision": "CI lower bound > 0, and at least 10 of the 16 individual year folds show positive gain; otherwise NO_ROBUST_GAIN",
+    "no_after_open_threshold_tuning": true
+  },
+  "ecological_limits": [
+    "Retroactive full-season climate and greenup predictors are not actual cues available to birds at decision time",
+    "This is assemblage radar, not individual migration decisions, fitness, recourse or partner synchrony",
+    "Positive association does not prove green-wave tracking, information learning or ecological fitness",
+    "No claims of new independent original data collection or of novel greenup-temperature relationship (already published)",
+    "Do not equate NDVI greenup with biomass or actual prey without independent validation",
+    "Do not combine this input with any eBird data, including eBird-derived products"
+  ],
+  "release_state": "Only original-source hashes, aggregate support, computed model summary and code are saved. Raw station names and data rows are NOT committed. Keep draft separate from main/frozen manuscripts.",
+  "source_grain_verified_before_contract": true,
+  "source_grain_workflow_run": 45012593707
+}
