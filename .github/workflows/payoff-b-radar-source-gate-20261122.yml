@@ -101,9 +101,30 @@ jobs:
           out.write_text(json.dumps(receipt, indent=2) + "\n")
           print("PAYOFF_RADAR_RDATA_SCHEMA_RECEIPT=" + json.dumps(receipt, separators=(",", ":")))
           PY
+      - name: Extract fixed original site-year variables to private runner file
+        run: |
+          Rscript scripts/payoff_b_radar_greenup_extract_private.R \
+            outputs/private_original_rdata/data_2003_2018.Rda \
+            outputs/private_original_rdata/private_radar_model.csv
+      - name: Run only outcome-coefficient-blind sample, completeness and predictor gate
+        run: |
+          python -m pip install --disable-pip-version-check numpy
+          python scripts/payoff_b_radar_greenup_heldout.py \
+            --input outputs/private_original_rdata/private_radar_model.csv \
+            --support-only \
+            --output outputs/payoff_b_radar_greenup_prefit_support_20261122.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          x=json.loads(Path("outputs/payoff_b_radar_greenup_prefit_support_20261122.json").read_text())
+          assert x["new_bird_coefficient_fitted"] is False
+          assert x["no_ebird"] is True
+          print("PREFIT_SOURCE_SUPPORT_STATUS", x["design"]["status"])
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: payoff-b-radar-rdata-schema-only-20261122
           path: |
             outputs/payoff_b_radar_original_rdata_grain_20261122.csv
             outputs/payoff_b_radar_original_grain_receipt_20261122.json
+            outputs/payoff_b_radar_greenup_prefit_support_20261122.json
