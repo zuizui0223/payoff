@@ -1,0 +1,678 @@
+{
+  "status": "BOUNDED_SOURCE_CHRONOLOGY_POST_FAILURE_NOT_NEW_EFFECT",
+  "original_strict_chronology_status": "HOLD_REQUIRES_SOURCE_SEMANTICS",
+  "source_rows": 833,
+  "original_complete_station_years": 828,
+  "valid_classifiable_station_years": 827,
+  "unresolved_original_station_years": 1,
+  "unresolved_source_year": 2012,
+  "unresolved_source_mean_greenup_value": -27,
+  "n_sites": 53,
+  "n_years": 16,
+  "coverage_bounded_uncertainty_fraction": 0.0012077294685990338,
+  "gap_direction": "spring radar median DOY minus MODIS greenup DOY; positive = greenup before bird assemblage median",
+  "pooled_exact_identification_bounds": {
+    "greenup_strictly_before_q50": {
+      "valid_count": 739,
+      "lower": 0.892512077294686,
+      "upper": 0.893719806763285
+    },
+    "q50_strictly_before_greenup": {
+      "valid_count": 81,
+      "lower": 0.09782608695652174,
+      "upper": 0.09903381642512077
+    },
+    "same_day_or_equal_timing": {
+      "valid_count": 7,
+      "lower": 0.008454106280193236,
+      "upper": 0.00966183574879227
+    },
+    "optimistic_same_day_or_prior": {
+      "valid_count": 746,
+      "lower": 0.9009661835748792,
+      "upper": 0.9021739130434783
+    },
+    "at_least_one_day_prior": {
+      "valid_count": 739,
+      "lower": 0.892512077294686,
+      "upper": 0.893719806763285
+    },
+    "at_least_seven_days_prior": {
+      "valid_count": 688,
+      "lower": 0.8309178743961353,
+      "upper": 0.8321256038647343
+    }
+  },
+  "n_years_majority_q50_prior_greenup_certain": 0,
+  "n_years_majority_q50_prior_greenup_possible": 0,
+  "yearly_aggregate_only": [
+    {
+      "year": 2003,
+      "original_complete_station_years": 41,
+      "valid_station_years": 41,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 37,
+          "lower": 0.9024390243902439,
+          "upper": 0.9024390243902439
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 4,
+          "lower": 0.0975609756097561,
+          "upper": 0.0975609756097561
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 37,
+          "lower": 0.9024390243902439,
+          "upper": 0.9024390243902439
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 37,
+          "lower": 0.9024390243902439,
+          "upper": 0.9024390243902439
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 36,
+          "lower": 0.8780487804878049,
+          "upper": 0.8780487804878049
+        }
+      }
+    },
+    {
+      "year": 2004,
+      "original_complete_station_years": 47,
+      "valid_station_years": 47,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 44,
+          "lower": 0.9361702127659575,
+          "upper": 0.9361702127659575
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 2,
+          "lower": 0.0425531914893617,
+          "upper": 0.0425531914893617
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 1,
+          "lower": 0.02127659574468085,
+          "upper": 0.02127659574468085
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 45,
+          "lower": 0.9574468085106383,
+          "upper": 0.9574468085106383
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 44,
+          "lower": 0.9361702127659575,
+          "upper": 0.9361702127659575
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 42,
+          "lower": 0.8936170212765957,
+          "upper": 0.8936170212765957
+        }
+      }
+    },
+    {
+      "year": 2005,
+      "original_complete_station_years": 52,
+      "valid_station_years": 52,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 49,
+          "lower": 0.9423076923076923,
+          "upper": 0.9423076923076923
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 1,
+          "lower": 0.019230769230769232,
+          "upper": 0.019230769230769232
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 2,
+          "lower": 0.038461538461538464,
+          "upper": 0.038461538461538464
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 51,
+          "lower": 0.9807692307692307,
+          "upper": 0.9807692307692307
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 49,
+          "lower": 0.9423076923076923,
+          "upper": 0.9423076923076923
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 48,
+          "lower": 0.9230769230769231,
+          "upper": 0.9230769230769231
+        }
+      }
+    },
+    {
+      "year": 2006,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 47,
+          "lower": 0.8867924528301887,
+          "upper": 0.8867924528301887
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 6,
+          "lower": 0.11320754716981132,
+          "upper": 0.11320754716981132
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 47,
+          "lower": 0.8867924528301887,
+          "upper": 0.8867924528301887
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 47,
+          "lower": 0.8867924528301887,
+          "upper": 0.8867924528301887
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 44,
+          "lower": 0.8301886792452831,
+          "upper": 0.8301886792452831
+        }
+      }
+    },
+    {
+      "year": 2007,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 52,
+          "lower": 0.9811320754716981,
+          "upper": 0.9811320754716981
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 1,
+          "lower": 0.018867924528301886,
+          "upper": 0.018867924528301886
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 52,
+          "lower": 0.9811320754716981,
+          "upper": 0.9811320754716981
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 52,
+          "lower": 0.9811320754716981,
+          "upper": 0.9811320754716981
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 50,
+          "lower": 0.9433962264150944,
+          "upper": 0.9433962264150944
+        }
+      }
+    },
+    {
+      "year": 2008,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 42,
+          "lower": 0.7924528301886793,
+          "upper": 0.7924528301886793
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 10,
+          "lower": 0.18867924528301888,
+          "upper": 0.18867924528301888
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 1,
+          "lower": 0.018867924528301886,
+          "upper": 0.018867924528301886
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 43,
+          "lower": 0.8113207547169812,
+          "upper": 0.8113207547169812
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 42,
+          "lower": 0.7924528301886793,
+          "upper": 0.7924528301886793
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 39,
+          "lower": 0.7358490566037735,
+          "upper": 0.7358490566037735
+        }
+      }
+    },
+    {
+      "year": 2009,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 45,
+          "lower": 0.8490566037735849,
+          "upper": 0.8490566037735849
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 8,
+          "lower": 0.1509433962264151,
+          "upper": 0.1509433962264151
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 45,
+          "lower": 0.8490566037735849,
+          "upper": 0.8490566037735849
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 45,
+          "lower": 0.8490566037735849,
+          "upper": 0.8490566037735849
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 41,
+          "lower": 0.7735849056603774,
+          "upper": 0.7735849056603774
+        }
+      }
+    },
+    {
+      "year": 2010,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 52,
+          "lower": 0.9811320754716981,
+          "upper": 0.9811320754716981
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 1,
+          "lower": 0.018867924528301886,
+          "upper": 0.018867924528301886
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 53,
+          "lower": 1,
+          "upper": 1
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 52,
+          "lower": 0.9811320754716981,
+          "upper": 0.9811320754716981
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 50,
+          "lower": 0.9433962264150944,
+          "upper": 0.9433962264150944
+        }
+      }
+    },
+    {
+      "year": 2011,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 48,
+          "lower": 0.9056603773584906,
+          "upper": 0.9056603773584906
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 5,
+          "lower": 0.09433962264150944,
+          "upper": 0.09433962264150944
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 48,
+          "lower": 0.9056603773584906,
+          "upper": 0.9056603773584906
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 48,
+          "lower": 0.9056603773584906,
+          "upper": 0.9056603773584906
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 45,
+          "lower": 0.8490566037735849,
+          "upper": 0.8490566037735849
+        }
+      }
+    },
+    {
+      "year": 2012,
+      "original_complete_station_years": 53,
+      "valid_station_years": 52,
+      "unknown_station_years": 1,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 49,
+          "lower": 0.9245283018867925,
+          "upper": 0.9433962264150944
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 3,
+          "lower": 0.05660377358490566,
+          "upper": 0.07547169811320754
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0.018867924528301886
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 49,
+          "lower": 0.9245283018867925,
+          "upper": 0.9433962264150944
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 49,
+          "lower": 0.9245283018867925,
+          "upper": 0.9433962264150944
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 49,
+          "lower": 0.9245283018867925,
+          "upper": 0.9433962264150944
+        }
+      }
+    },
+    {
+      "year": 2013,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 41,
+          "lower": 0.7735849056603774,
+          "upper": 0.7735849056603774
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 11,
+          "lower": 0.20754716981132076,
+          "upper": 0.20754716981132076
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 1,
+          "lower": 0.018867924528301886,
+          "upper": 0.018867924528301886
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 42,
+          "lower": 0.7924528301886793,
+          "upper": 0.7924528301886793
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 41,
+          "lower": 0.7735849056603774,
+          "upper": 0.7735849056603774
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 36,
+          "lower": 0.6792452830188679,
+          "upper": 0.6792452830188679
+        }
+      }
+    },
+    {
+      "year": 2014,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 44,
+          "lower": 0.8301886792452831,
+          "upper": 0.8301886792452831
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 9,
+          "lower": 0.16981132075471697,
+          "upper": 0.16981132075471697
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 44,
+          "lower": 0.8301886792452831,
+          "upper": 0.8301886792452831
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 44,
+          "lower": 0.8301886792452831,
+          "upper": 0.8301886792452831
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 36,
+          "lower": 0.6792452830188679,
+          "upper": 0.6792452830188679
+        }
+      }
+    },
+    {
+      "year": 2015,
+      "original_complete_station_years": 52,
+      "valid_station_years": 52,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 50,
+          "lower": 0.9615384615384616,
+          "upper": 0.9615384615384616
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 2,
+          "lower": 0.038461538461538464,
+          "upper": 0.038461538461538464
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 50,
+          "lower": 0.9615384615384616,
+          "upper": 0.9615384615384616
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 50,
+          "lower": 0.9615384615384616,
+          "upper": 0.9615384615384616
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 44,
+          "lower": 0.8461538461538461,
+          "upper": 0.8461538461538461
+        }
+      }
+    },
+    {
+      "year": 2016,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 51,
+          "lower": 0.9622641509433962,
+          "upper": 0.9622641509433962
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 2,
+          "lower": 0.03773584905660377,
+          "upper": 0.03773584905660377
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 51,
+          "lower": 0.9622641509433962,
+          "upper": 0.9622641509433962
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 51,
+          "lower": 0.9622641509433962,
+          "upper": 0.9622641509433962
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 48,
+          "lower": 0.9056603773584906,
+          "upper": 0.9056603773584906
+        }
+      }
+    },
+    {
+      "year": 2017,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 49,
+          "lower": 0.9245283018867925,
+          "upper": 0.9245283018867925
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 3,
+          "lower": 0.05660377358490566,
+          "upper": 0.05660377358490566
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 1,
+          "lower": 0.018867924528301886,
+          "upper": 0.018867924528301886
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 50,
+          "lower": 0.9433962264150944,
+          "upper": 0.9433962264150944
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 49,
+          "lower": 0.9245283018867925,
+          "upper": 0.9245283018867925
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 46,
+          "lower": 0.8679245283018868,
+          "upper": 0.8679245283018868
+        }
+      }
+    },
+    {
+      "year": 2018,
+      "original_complete_station_years": 53,
+      "valid_station_years": 53,
+      "unknown_station_years": 0,
+      "bounds": {
+        "greenup_strictly_before_q50": {
+          "valid_count": 39,
+          "lower": 0.7358490566037735,
+          "upper": 0.7358490566037735
+        },
+        "q50_strictly_before_greenup": {
+          "valid_count": 14,
+          "lower": 0.2641509433962264,
+          "upper": 0.2641509433962264
+        },
+        "same_day_or_equal_timing": {
+          "valid_count": 0,
+          "lower": 0,
+          "upper": 0
+        },
+        "optimistic_same_day_or_prior": {
+          "valid_count": 39,
+          "lower": 0.7358490566037735,
+          "upper": 0.7358490566037735
+        },
+        "at_least_one_day_prior": {
+          "valid_count": 39,
+          "lower": 0.7358490566037735,
+          "upper": 0.7358490566037735
+        },
+        "at_least_seven_days_prior": {
+          "valid_count": 34,
+          "lower": 0.6415094339622641,
+          "upper": 0.6415094339622641
+        }
+      }
+    }
+  ],
+  "is_post_failure_exploratory_sensitivity": true,
+  "sampling_confidence_interval_estimated": false,
+  "animal_cue_availability_or_behavior_identified": false,
+  "previous_heldout_greenup_effect_refitted": false,
+  "original_source_rows_exported": false,
+  "no_ebird": true,
+  "claim_limit": "This bounds event chronology for a radar assemblage and MODIS retrospective marker; it is not actual knowledge or a causal decision-date forecast.",
+  "contract_sha256": "4cf717c53a75a5e9e32a8df3043b5a5fb9f7eb4cb8417726b8b06d57044205a2",
+  "original_source_sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+  "source_doi": "10.6084/m9.figshare.26050390.v2",
+  "actions": {
+    "original_source_run_id": 45031842392,
+    "source_job_id": 137236921365,
+    "source_sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+    "bounds_artifact_id": 14758181502,
+    "bounds_zip_sha256": "09853f57f83d786ae329a1754a451d097cb8121f48f15c85ba99aab603b693a0",
+    "source_diagnosis_artifact_id": 14758525611,
+    "source_diagnosis_zip_sha256": "d850dfba00b9d4f245f29b545023642dc1933f9568273f0b43e1c3f71efede8e",
+    "original_source_rows_committed": false
+  }
+}
