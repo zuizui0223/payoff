@@ -46,6 +46,16 @@ jobs:
           Rscript scripts/payoff_b_radar_greenup_extract_private.R \
             outputs/private_original_rdata/data_2003_2018.Rda \
             outputs/private_original_rdata/private_radar_model.csv
+      - name: Diagnose source DOY validity before any chronology classifications
+        run: |
+          pytest -q -rs tests/test_payoff_b_radar_source_doy_range_diagnosis_20261122.py
+          python scripts/payoff_b_radar_source_doy_range_diagnosis_20261122.py \
+            --input outputs/private_original_rdata/private_radar_model.csv \
+            --output outputs/payoff_b_radar_doy_range_diagnosis_20261122.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-radar-source-doy-range-diagnosis-20261122
+          path: outputs/payoff_b_radar_doy_range_diagnosis_20261122.json
       - name: Compute original-site-year source chronology, not animal cue use
         run: |
           python scripts/payoff_b_radar_greenup_chronology_20261122.py \
