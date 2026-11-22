@@ -1,4 +1,4 @@
-name: PAYOFF-B original radar and greenup source admission (no effects)
+name: PAYOFF-B radar source admission and frozen heldout-year test
 
 on:
   push:
