@@ -1,0 +1,62 @@
+{
+  "new_coefficient_computed": false,
+  "components": [
+    {
+      "n": 92,
+      "animals": 34,
+      "years": [
+        2014,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "year_counts": {
+        "2014": 3,
+        "2016": 6,
+        "2017": 21,
+        "2018": 28,
+        "2019": 19,
+        "2020": 15
+      },
+      "animal_observation_count_distribution": {
+        "2": 18,
+        "3": 9,
+        "4": 6,
+        "5": 1
+      },
+      "genuine_zero_stopovers": 10,
+      "nuisance_rank": 39,
+      "full_model_rank": 40,
+      "residual_df": 52,
+      "residual_exposure_rms_days": 14.030388050467105,
+      "connected_components": 1,
+      "residual_exposure_ss": 18110.36457389549,
+      "share_of_total_residual_exposure_ss": 0.9796193430958888
+    },
+    {
+      "n": 8,
+      "animals": 4,
+      "years": [
+        2011,
+        2012
+      ],
+      "year_counts": {
+        "2011": 4,
+        "2012": 4
+      },
+      "animal_observation_count_distribution": {
+        "2": 4
+      },
+      "genuine_zero_stopovers": 1,
+      "nuisance_rank": 5,
+      "full_model_rank": 6,
+      "residual_df": 2,
+      "residual_exposure_rms_days": 6.86276323568422,
+      "connected_components": 1,
+      "residual_exposure_ss": 376.78015383247157,
+      "share_of_total_residual_exposure_ss": 0.020380656904111186
+    }
+  ]
+}

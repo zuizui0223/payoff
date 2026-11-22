@@ -49,5 +49,15 @@ jobs:
             echo "lambda estimator tests must execute, not skip, in the empirical environment" >&2
             exit 1
           fi
+      - name: Run Ortega within-animal empirical tests (no skips allowed)
+        shell: bash
+        run: |
+          set -euo pipefail
+          result="$(pytest -q -rs tests/test_ortega_within_animal.py)"
+          printf '%s\n' "$result"
+          if grep -Eq '[0-9]+ skipped' <<<"$result"; then
+            echo "Within-animal tests must execute under empirical extras" >&2
+            exit 1
+          fi
       - name: Run full pytest suite with empirical dependencies enabled
         run: pytest -q

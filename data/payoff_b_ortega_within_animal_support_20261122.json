@@ -1,0 +1,72 @@
+{
+  "status": "SUPPORT_NOT_MET",
+  "checks": {
+    "repeated_animals": true,
+    "years": true,
+    "residual_df": true,
+    "residual_phase_variation": true,
+    "connected_panel": false
+  },
+  "primary_panel": {
+    "n": 100,
+    "animals": 38,
+    "years": [
+      2011,
+      2012,
+      2014,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "year_counts": {
+      "2011": 4,
+      "2012": 4,
+      "2014": 3,
+      "2016": 6,
+      "2017": 21,
+      "2018": 28,
+      "2019": 19,
+      "2020": 15
+    },
+    "animal_observation_count_distribution": {
+      "2": 22,
+      "3": 9,
+      "4": 6,
+      "5": 1
+    },
+    "genuine_zero_stopovers": 11,
+    "nuisance_rank": 44,
+    "full_model_rank": 45,
+    "residual_df": 55,
+    "residual_exposure_rms_days": 13.596743995430655,
+    "connected_components": 2
+  },
+  "complete_case_rows": 127,
+  "singleton_rows_excluded_from_primary": 27,
+  "new_coefficient_computed": false,
+  "date": "2026-11-22",
+  "source": {
+    "doi": "10.1038/s41467-023-37750-z",
+    "sha256": "2645420b74c8e2228eb555d14c755bba207c49ea72ecb2eff4c950892f743364",
+    "bytes": 629058,
+    "phase_rows": 152,
+    "animals": 72,
+    "stopover_complete_rows": 127,
+    "stopover_complete_animals": 65,
+    "genuine_zero_stopovers": 15,
+    "missing_stopover_rows": 25,
+    "start_phase_by_published_timing_class": {
+      "early": -29.85824361468085,
+      "mid": -1.5931346517241378,
+      "late": 19.856711881914894
+    },
+    "positive_phase_means_later": true
+  },
+  "contract_sha256": "a9214559ce0a289d80e91bb23cb146e7cd7a6a0ed351a28464ee13fec876a8f4",
+  "analysis_class": "POST_PUBLICATION_EXPLORATORY_DESIGN_FIXED_BEFORE_NEW_COEFFICIENT",
+  "prior_art": "Ortega 2023 already reports compensation and animal/year random-intercept models; this tests robustness to unrestricted fixed animal intercepts, not the first individual-adjusted analysis",
+  "claim_limit": "conditional within-animal time-allocation association, not causal information use, learning, remaining actionability, fitness, or independent biological replication",
+  "frozen_manuscripts_changed": false
+}
