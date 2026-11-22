@@ -121,6 +121,36 @@ jobs:
           assert x["no_ebird"] is True
           print("PREFIT_SOURCE_SUPPORT_STATUS", x["design"]["status"])
           PY
+      - name: Verify immutable source support receipt against fresh source before fitting
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          old=json.loads(Path("data/payoff_b_radar_greenup_source_prefit_20261122.json").read_text())
+          new=json.loads(Path("outputs/payoff_b_radar_greenup_prefit_support_20261122.json").read_text())
+          assert old["status"] == new["status"] == "PREFIT_SUPPORT_ONLY"
+          assert old["design"] == new["design"]
+          assert old["contract_sha256"] == new["contract_sha256"]
+          assert new["design"]["status"] == "PASS"
+          assert new["new_bird_coefficient_fitted"] is False
+          print("SOURCE_GATES_MATCH_PREVIOUSLY_FROZEN_PASS")
+          PY
+      - name: Fit exactly one frozen heldout-year radar environmental comparison
+        run: |
+          python scripts/payoff_b_radar_greenup_heldout.py \
+            --input outputs/private_original_rdata/private_radar_model.csv \
+            --fit \
+            --output outputs/payoff_b_radar_greenup_heldout_result_20261122.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          z=json.loads(Path("outputs/payoff_b_radar_greenup_heldout_result_20261122.json").read_text())
+          assert z["no_ebird"] is True
+          assert z["new_animal_info_mechanism_identified"] is False
+          assert z["prefit"]["status"] == "PASS"
+          assert z["ecological_effect"]["n_heldout_years"] == 16
+          print("RADAR_HELDOUT_RESULT_STATUS", z["status"])
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: payoff-b-radar-rdata-schema-only-20261122
@@ -128,3 +158,4 @@ jobs:
             outputs/payoff_b_radar_original_rdata_grain_20261122.csv
             outputs/payoff_b_radar_original_grain_receipt_20261122.json
             outputs/payoff_b_radar_greenup_prefit_support_20261122.json
+            outputs/payoff_b_radar_greenup_heldout_result_20261122.json
