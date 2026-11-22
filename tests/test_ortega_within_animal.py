@@ -5,6 +5,10 @@ import random
 
 import pytest
 
+# The default lightweight CI intentionally has no NumPy; the empirical-extras
+# CI must run these tests with NumPy installed (no silent skip there).
+pytest.importorskip("numpy", reason="Ortega fixed-effect empirical tests require NumPy")
+
 
 def api():
     return importlib.import_module("scripts.payoff_b_ortega_within_animal")
