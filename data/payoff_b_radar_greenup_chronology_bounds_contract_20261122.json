@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-22",
+  "status": "POST_OPEN_POST_FAILURE_BOUNDED_SOURCE_CHRONOLOGY_DIAGNOSTIC",
+  "analysis_boundary": "Strict chronology contract 20261122 remains HOLD because one original 2012 mean_greenup=-27 fails DOY 1..366. Do not amend or reinterpret the strict gate.",
+  "parent_source_dataset": "Adams et al. 2025 Ecology Figshare 10.6084/m9.figshare.26050390.v2, original file 47109769",
+  "original_source_sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+  "source_diagnosis": "data/payoff_b_radar_source_doy_range_diagnosis_20261122.json",
+  "known_counts": {
+    "source_rows": 833,
+    "complete_case_station_years": 828,
+    "invalid_greenup_DOY_count": 1,
+    "invalid_greenup_year": 2012,
+    "invalid_greenup_value": -27,
+    "valid_comparable_station_years": 827,
+    "stations": 53,
+    "years": 16
+  },
+  "scientific_question": "Without interpreting a single out-of-calendar original mean_greenup field, what are the logical lower/upper bounds on station-years where the greenup event precedes radar median spring migration passage?",
+  "variables": {
+    "q50": "spring_q50",
+    "greenup": "mean_greenup",
+    "complete_case_gate": "spring_q50, spring_mean_temp, mean_greenup all finite",
+    "station": "site",
+    "year": "year"
+  },
+  "source_gate": {
+    "require_original_complete_count": 828,
+    "require_original_rows": 833,
+    "require_invalid_count_exactly": 1,
+    "require_invalid_source_year": 2012,
+    "require_sites": 53,
+    "require_years": 16,
+    "valid_calendar_DOY_inclusive": [
+      1,
+      366
+    ],
+    "reject_duplicates": true,
+    "no_zero_imputation": true
+  },
+  "date_gap": "d = q50 DOY - greenup DOY on 827 valid source records",
+  "categories": {
+    "prior_strict": "d > 0 (epsilon=1e-9 numerical)",
+    "same_calendar_day": "abs(d)<=1e-9",
+    "passage_before_greenup": "d < 0 (epsilon=1e-9)",
+    "prior_or_same_optimistic": "d>=0 with 1e-9 tolerance",
+    "one_day_prior": "d>=1 day with 1e-9 tolerance",
+    "seven_days_prior": "d>=7 days with 1e-9 tolerance"
+  },
+  "logical_bounds": "For any category with k classified valid records, total fraction over original N=828 is within [k/828, (k+1)/828]. The 2012 unknown observation contributes either 0 or 1 to its category, never silently treated as missing, present, or moved.",
+  "annual_output": "16 annual aggregate records with original n, valid n, unknown n, category k and [k/n,(k+unknown)/n] only. Never original station IDs, source DOYs or original per-site observations.",
+  "summary_output": "Pooled k, lower/upper fractions on 828; how many original years have majority q50 earlier than greenup under either bound; no p-values, no causal effect and no post hoc subsets.",
+  "uncertainty": "These are exact finite-sample identification bounds conditional on the 827 valid source rows, not sampling confidence intervals; no statistical bootstrap unless separately declared.",
+  "scope_limit": [
+    "Satellite MODIS mean greenup marker is a retrospective composite, not a confirmed cue at decision time",
+    "Bird radar q50 is an assemblage median, not an individual bird decision",
+    "One anomalous source value is unclassified rather than corrected, reinterpreted or excluded without accounting for its possible contribution",
+    "Ecological predictive null from parent PR415 remains unchanged",
+    "No inference on fitness, insect biomass, actual information receipt, actionability or cross-species coordination",
+    "Same source as PR415; not a new independent ecological replication",
+    "No eBird or TinyFish"
+  ],
+  "no_ebird": true,
+  "no_raw_source_rows_committed": true,
+  "existing_frozen_main_v7_manuscripts_untouched": true
+}
