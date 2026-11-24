@@ -99,3 +99,40 @@ def test_contract_has_explicit_anti_lookahead_and_original_v7_not_changed():
     assert c["cannot_overwrite_prior_contract_or_frozen_submission"] is True
     assert c["candidate_measure"]["minimum_prior_paired_years"]==20
     assert c["time_rule"]["original_published_environment_years"]==[1982,2011]
+
+
+def test_original_supplementary_anomalies_are_accepted_without_inventing_doy():
+    source="flyway,transition,year,source_onset_anomaly_days,target_onset_anomaly_days\n"
+    source+="greenland,R2-R3,1982,-8.5,7.0\n"
+    rows=h.parse_env_rows(source,representation="anomaly")
+    assert rows==[{"flyway":"greenland","transition":"R2-R3","year":1982,
+                   "source":-8.5,"target":7.0}]
+    with pytest.raises(ValueError,match="five-field"):
+        h.parse_env_rows(source,representation="doy")
+    with pytest.raises(ValueError,match="Unregistered"):
+        h.parse_env_rows(source,representation="gps")
+
+
+def test_predictive_r_and_outyear_error_invariant_to_source_site_mean_shifts():
+    doy=fake_series()
+    anomaly=[]
+    for row in doy:
+        shifted=dict(row)
+        shifted["source"]-=102.0
+        shifted["target"]-=118.0
+        anomaly.append(shifted)
+    a=h.evaluate(doy,contract())["environmental_forecast_scores_only"]
+    b=h.evaluate(anomaly,contract())["environmental_forecast_scores_only"]
+    assert len(a)==len(b)==6
+    for x,y in zip(a,b):
+        assert x["year"]==y["year"]
+        assert abs(x["signed_historical_source_target_r"]-y["signed_historical_source_target_r"])<1e-12
+        assert abs(x["source_to_target_forecast_squared_error_days2"]-y["source_to_target_forecast_squared_error_days2"])<1e-10
+        assert abs(x["past_destination_climatology_squared_error_days2"]-y["past_destination_climatology_squared_error_days2"])<1e-10
+
+
+def test_original_published_2012_and_2013_years_are_not_silently_added():
+    bad="flyway,transition,year,source_onset_anomaly_days,target_onset_anomaly_days\n"
+    bad+="svalbard,R1-R2,2012,-1,2\n"
+    with pytest.raises(ValueError,match="historical"):
+        h.parse_env_rows(bad,representation="anomaly")
