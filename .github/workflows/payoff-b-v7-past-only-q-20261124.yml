@@ -27,7 +27,7 @@ jobs:
         run: python -m pip install --disable-pip-version-check pytest
       - name: Verify no future-year data leakage or synthetic bird inference
         run: pytest -q -rs tests/test_payoff_b_v7_past_only_environment_q_20261124.py
-      - name: Run true original-source admission: no environmental source => no empirical q
+      - name: Run original-source admission without historical environment table
         run: |
           python scripts/payoff_b_v7_past_only_environment_q_20261124.py \
             --output outputs/payoff_b_v7_past_only_q_source_status_20261124.json
