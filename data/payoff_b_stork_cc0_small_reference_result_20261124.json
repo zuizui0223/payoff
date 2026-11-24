@@ -1,0 +1,223 @@
+{
+  "date": "2026-11-24",
+  "status": "CC0_REFERENCE_SOURCE_GATE_COMPLETE",
+  "original_small_file_scope_only": true,
+  "source_items": [
+    {
+      "cohort": "control",
+      "status": "SMALL_REFERENCE_DOCUMENTS_VERIFIED",
+      "files": [
+        {
+          "status": "PUBLIC_CC0_SOURCE_METADATA_COMPANION_VERIFIED",
+          "extension": ".csv",
+          "size_bytes": 11118,
+          "sha256": "3511591f8bcb58bb9e587603b867a64fb25a0f5ceb82ed8e778699dd5c745f68",
+          "md5_matches_public_DSpace_metadata": true,
+          "content_metadata_only": {
+            "column_names": [
+              "tag-id",
+              "animal-id",
+              "animal-taxon",
+              "deploy-on-date",
+              "deploy-off-date",
+              "animal-comments",
+              "animal-death-comments",
+              "animal-latest-date-born",
+              "animal-life-stage",
+              "animal-nickname",
+              "animal-ring-id",
+              "animal-sex",
+              "attachment-type",
+              "deploy-off-person",
+              "deploy-on-person",
+              "deployment-comments",
+              "deployment-id",
+              "manipulation-comments",
+              "manipulation-type",
+              "tag-comments",
+              "tag-manufacturer-name",
+              "tag-mass",
+              "tag-model",
+              "tag-readout-method",
+              "tag-serial-no"
+            ],
+            "n_data_rows": 19,
+            "unique_tag_or_individual_count": 19,
+            "tag_identity_field_in_schema": true
+          },
+          "raw_source_file_or_rows_committed": false
+        },
+        {
+          "status": "PUBLIC_CC0_SOURCE_METADATA_COMPANION_VERIFIED",
+          "extension": ".txt",
+          "size_bytes": 25310,
+          "sha256": "9eff7d00068ae34f82634010bc92df4ea67c47a2e7824e86203859937c77d3e2",
+          "md5_matches_public_DSpace_metadata": true,
+          "content_metadata_only": {
+            "word_present": {
+              "gps": true,
+              "accelerometer": true,
+              "timestamp": true,
+              "utc": true,
+              "frequency_or_interval": true,
+              "license": true,
+              "individual": true
+            },
+            "readme_n_characters": 25310
+          },
+          "raw_source_file_or_rows_committed": false
+        }
+      ]
+    },
+    {
+      "cohort": "delayed",
+      "status": "SMALL_REFERENCE_DOCUMENTS_VERIFIED",
+      "files": [
+        {
+          "status": "PUBLIC_CC0_SOURCE_METADATA_COMPANION_VERIFIED",
+          "extension": ".csv",
+          "size_bytes": 20220,
+          "sha256": "811da2fb5a2cc1d3b5067304ee041bfb83ace9a0f5735b649dd758c544adbc7e",
+          "md5_matches_public_DSpace_metadata": true,
+          "content_metadata_only": {
+            "column_names": [
+              "tag-id",
+              "animal-id",
+              "animal-taxon",
+              "deploy-on-date",
+              "deploy-off-date",
+              "animal-comments",
+              "animal-death-comments",
+              "animal-life-stage",
+              "animal-nickname",
+              "animal-ring-id",
+              "animal-sex",
+              "attachment-type",
+              "capture-latitude",
+              "capture-longitude",
+              "deploy-off-person",
+              "deploy-on-person",
+              "deployment-id",
+              "manipulation-comments",
+              "manipulation-type",
+              "tag-comments",
+              "tag-manufacturer-name",
+              "tag-model",
+              "tag-production-date",
+              "tag-readout-method",
+              "tag-serial-no"
+            ],
+            "n_data_rows": 40,
+            "unique_tag_or_individual_count": 40,
+            "tag_identity_field_in_schema": true
+          },
+          "raw_source_file_or_rows_committed": false
+        },
+        {
+          "status": "PUBLIC_CC0_SOURCE_METADATA_COMPANION_VERIFIED",
+          "extension": ".txt",
+          "size_bytes": 25651,
+          "sha256": "4bc3e3434a372113cf6c09e669491a36caea9bd569b9bbdb44e5aa6aec75964c",
+          "md5_matches_public_DSpace_metadata": true,
+          "content_metadata_only": {
+            "word_present": {
+              "gps": true,
+              "accelerometer": true,
+              "timestamp": true,
+              "utc": true,
+              "frequency_or_interval": true,
+              "license": true,
+              "individual": true
+            },
+            "readme_n_characters": 25651
+          },
+          "raw_source_file_or_rows_committed": false
+        }
+      ]
+    },
+    {
+      "cohort": "naturally_timed",
+      "status": "SMALL_REFERENCE_DOCUMENTS_VERIFIED",
+      "files": [
+        {
+          "status": "PUBLIC_CC0_SOURCE_METADATA_COMPANION_VERIFIED",
+          "extension": ".csv",
+          "size_bytes": 50598,
+          "sha256": "c02ea4d2eae1663a8c066ebfbde847b8a0eebc009292b0363540b61036be4996",
+          "md5_matches_public_DSpace_metadata": true,
+          "content_metadata_only": {
+            "column_names": [
+              "tag-id",
+              "animal-id",
+              "animal-taxon",
+              "deploy-on-date",
+              "deploy-off-date",
+              "animal-comments",
+              "animal-death-comments",
+              "animal-latest-date-born",
+              "animal-life-stage",
+              "animal-mass",
+              "animal-mortality-type",
+              "animal-nickname",
+              "animal-ring-id",
+              "animal-sex",
+              "animal-siblings",
+              "attachment-type",
+              "deploy-off-person",
+              "deploy-on-person",
+              "deployment-id",
+              "manipulation-type",
+              "tag-comments",
+              "tag-manufacturer-name",
+              "tag-mass",
+              "tag-model",
+              "tag-production-date",
+              "tag-readout-method",
+              "tag-serial-no"
+            ],
+            "n_data_rows": 153,
+            "unique_tag_or_individual_count": 137,
+            "tag_identity_field_in_schema": true
+          },
+          "raw_source_file_or_rows_committed": false
+        },
+        {
+          "status": "PUBLIC_CC0_SOURCE_METADATA_COMPANION_VERIFIED",
+          "extension": ".txt",
+          "size_bytes": 26647,
+          "sha256": "2fd6fe6e12c90687c53c3bd439904ef17286cfda78ec9605851515f7c82a62b3",
+          "md5_matches_public_DSpace_metadata": true,
+          "content_metadata_only": {
+            "word_present": {
+              "gps": true,
+              "accelerometer": true,
+              "timestamp": true,
+              "utc": true,
+              "frequency_or_interval": true,
+              "license": true,
+              "individual": true
+            },
+            "readme_n_characters": 26647
+          },
+          "raw_source_file_or_rows_committed": false
+        }
+      ]
+    }
+  ],
+  "GPS_or_ACC_ZIPs_downloaded": false,
+  "source_rows_or_tag_ids_exported": false,
+  "tracking_events_downloaded": false,
+  "new_survival_or_migration_effect_estimated": false,
+  "conspecific_social_cue_accuracy_q_estimated": false,
+  "licence_terms_autoaccepted": false,
+  "no_ebird": true,
+  "all_three_cohorts_readme_csv_verified": true,
+  "claim_limit": "The READMEs and study reference tables only support source identity/schema/time-context readiness, not individual route co-presence, recorded information transmission, cue reliability, compensation ability or causal inference.",
+  "source_receipt": {
+    "git_actions_run_id": 45362673236,
+    "job_id": 138336379305,
+    "aggregate_only_artifact_id": 14905920692,
+    "aggregate_only_zip_sha256": "18193de9de48da1510d762133cca58f3c3659efbcb54d487c93f240ee8d460d7",
+    "original_GPS_episodes_exported": false
+  }
+}
