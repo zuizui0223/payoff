@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-24",
+  "status": "POST_OUTCOME_EXPLORATORY_MIGRATION_WINDOW_PRECLASSIFICATION_CONTRACT",
+  "preceding_prs": [
+    415,
+    416
+  ],
+  "question": "Across the original 53 radar stations and spring migration years, does site-level MODIS mean greenup tend to fall before 10%-passage, within the 10%–90% passage window, or after 90%-passage?",
+  "purpose": "Quantify how crude availability-at-the-median masks the timing of the migrating assemblage, not any new payoff/learning mechanism",
+  "source": {
+    "paper": "Adams et al. 2025 Ecology DOI 10.1002/ecy.70110",
+    "dataset": "10.6084/m9.figshare.26050390.v2",
+    "file_id": 47109769,
+    "file_name": "data_2003_2018.Rda",
+    "actual_format": "readRDS",
+    "sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+    "data_origin": "weather radar migrant assemblage + MODIS land-surface phenology; no eBird"
+  },
+  "registered_columns": [
+    "site",
+    "year",
+    "spring_q10",
+    "spring_q50",
+    "spring_q90",
+    "mean_greenup",
+    "spring_mean_temp"
+  ],
+  "primary_population": "Exact 828 original complete site-years from PR #415 defined by nonmissing spring_q50,spring_mean_temp,mean_greenup; retain all, do not shrink denominator to only valid q10/q90.",
+  "expected_source_rows": 833,
+  "expected_base_complete_rows": 828,
+  "expected_sites": 53,
+  "expected_years": 16,
+  "source_years": [
+    2003,
+    2018
+  ],
+  "source_structure_gates": {
+    "require_unique_site_year": true,
+    "require_numeric_10_50_90_where_present": true,
+    "require_q10_leq_q50_leq_q90_for_every_classifiable_row": true,
+    "require_calendar_doY_1_to_366_for_classification": true,
+    "preserve_source_anomaly": {
+      "year": 2012,
+      "mean_greenup": -27,
+      "n": 1,
+      "do_not_correct": true
+    },
+    "max_total_unclassifiable_fraction": 0.05,
+    "validate_original_q50_counts": {
+      "strict_greenup_before_q50": 739,
+      "q50_before_greenup": 81,
+      "tie": 7,
+      "unclassifiable": 1
+    },
+    "fail_closed_if_gates_not_met": true
+  },
+  "primary_exclusive_classes": [
+    "GREENUP_BEFORE_Q10: mean_greenup < spring_q10 (strict; the earliest 10% radar-passage quantile occurs later)",
+    "GREENUP_Q10_TO_BEFORE_Q50: spring_q10 <= mean_greenup < spring_q50",
+    "GREENUP_Q50_TO_Q90: spring_q50 <= mean_greenup <= spring_q90",
+    "GREENUP_AFTER_Q90: mean_greenup > spring_q90"
+  ],
+  "tie_rule": "At q10 tie allocate to second class, q50 tie to third, q90 tie to third. Numeric tolerance eps=1e-9 d; exact-source precision, no data binning.",
+  "missing_policy": "Rows outside 1..366 DOY, with absent q10/q90, or with unresolved calendar value enter UNCLASSIFIABLE; report exact k/N to (k+unknown)/N logical identification bounds. Do not drop from N=828, impute, or reinterpret -27.",
+  "secondary_descriptive": [
+    "greenup >=7 days before q10 and >=7 days before q50; 7d is hypothetical, not measured satellite distribution lag",
+    "fraction q10 observed before mean greenup (strict)",
+    "16 original year aggregate rows, not per-station original records",
+    "check original q50 comparison reproduces PR #416"
+  ],
+  "output": "Only total counts, logical lower/upper fractions over 828, year aggregate labels, schema/check status, source hashes; never station IDs/lat/lon/site-year original rows",
+  "statistical_inference": "No p-value, CI, bootstrap, causal effect, conditional response coefficient, or prediction model. Identification bounds are logical finite-sample uncertainty of unknown source field(s) not statistical CIs.",
+  "uncertainty_policy": "If classifiable <95%, any nonmonotonic observed q10/q50/q90 or original q50 checkpoint differs, output source support failure and no migration-window result.",
+  "declared_analysis_order": "Source column/row identity checks -> complete-case support -> q10/q50/q90 monotonic gate -> q50 historical checkpoint -> exclusive class calculation -> aggregate bounds/report",
+  "limitations": [
+    "The 10th and 90th percentiles are assemblage radar passage dates, not tracked individuals or the true start and end of the entire season",
+    "MODIS mean greenup day is a retrospectively fitted marker and may differ from actual food availability or onset of perceivable environmental information",
+    "Even greenup before radar q10 does not prove birds at origin knew it before departure or used it as a cue",
+    "Overlapping migration window and greenup does not establish fitness, stopover recourse, partner synchrony or strategic interaction",
+    "All observations are from the same public Adams dataset as PRs #415/#416; exploratory after prior outcomes, not external replication",
+    "Retrospective climate and greenup measures cannot be described as timestamped forecasts available to birds"
+  ],
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "no_original_rows_committed": true,
+  "no_frozen_main_or_manuscript_edits": true
+}

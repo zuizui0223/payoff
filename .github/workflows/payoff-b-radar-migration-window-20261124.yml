@@ -1,0 +1,117 @@
+name: PAYOFF-B radar spring passage window versus greenup (exploratory)
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-radar-migration-window-20261124
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-window:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+          use-public-rspm: true
+      - name: Install only test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Check synthetic boundaries and source gates
+        run: pytest -q -rs tests/test_payoff_b_radar_migration_window_20261124.py
+      - name: Acquire original public author RDS and validate SHA-256 (no original export)
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          from scripts.payoff_b_radar_source_gate_20261122 import bounded_download
+          file_id=47109769
+          expected="1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900"
+          raw=bounded_download(f"https://ndownloader.figshare.com/files/{file_id}")
+          assert sha256(raw).hexdigest()==expected
+          out=Path("outputs/private_original_rdata")
+          out.mkdir(parents=True,exist_ok=True)
+          (out/"data_2003_2018.Rda").write_bytes(raw)
+          print("VERIFIED_FIGSHARE_SOURCE_BYTES",len(raw))
+          PY
+      - name: Extract original q10-q50-q90 to runner-private file
+        run: |
+          Rscript scripts/payoff_b_radar_window_extract_private_20261124.R \
+            outputs/private_original_rdata/data_2003_2018.Rda \
+            outputs/private_original_rdata/private_radar_window.csv
+      - name: Evaluate exclusively frozen descriptive migration-window chronology
+        run: |
+          python scripts/payoff_b_radar_migration_window_20261124.py \
+            --input outputs/private_original_rdata/private_radar_window.csv \
+            --contract data/payoff_b_radar_migration_window_contract_20261124.json \
+            --output outputs/payoff_b_radar_migration_window_result_20261124.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          d=json.loads(Path("outputs/payoff_b_radar_migration_window_result_20261124.json").read_text())
+          assert d["source_counts"]["original_rows"]==833
+          assert d["source_counts"]["original_base_complete"]==828
+          assert d["source_counts"]["n_sites"]==53
+          assert d["source_counts"]["n_years"]==16
+          assert d["no_individual_bird_information_use_estimated"] is True
+          assert d["ecological_effects_refitted"] is False
+          assert d["original_station_rows_exported"] is False
+          assert d["no_ebird"] is True
+          assert d["status"] in {"WINDOW_CHRONOLOGY_COMPLETED_BOUNDING_NOT_CUE_USE","SOURCE_SUPPORT_FAILED"}
+          if d["status"]=="WINDOW_CHRONOLOGY_COMPLETED_BOUNDING_NOT_CUE_USE":
+              assert len(d["annual_aggregate"])==16
+              assert not any("site" in x for x in d["annual_aggregate"])
+          print("RADAR_WINDOW_SOURCE_STATUS",d["status"])
+          PY
+      - name: Independently reproduce aggregate-only q10–q90 counts in base R
+        run: |
+          Rscript scripts/payoff_b_radar_window_independent_R_check_20261124.R \
+            outputs/private_original_rdata/data_2003_2018.Rda \
+            outputs/payoff_b_radar_window_independent_R_aggregate_20261124.csv
+          python - <<'PY'
+          from pathlib import Path
+          import csv,json
+          py=json.loads(Path("outputs/payoff_b_radar_migration_window_result_20261124.json").read_text())
+          assert py["status"]=="WINDOW_CHRONOLOGY_COMPLETED_BOUNDING_NOT_CUE_USE"
+          with Path("outputs/payoff_b_radar_window_independent_R_aggregate_20261124.csv").open() as f:
+              data=list(csv.DictReader(f))
+          assert len(data)==1
+          r=data[0]
+          for original_key,new_key in [
+            ("original_rows","original_rows"),
+            ("parent_complete","original_base_complete"),
+            ("classified","classifiable"),
+            ("unknown","unclassifiable"),
+            ("source_sites","n_sites"),
+            ("source_years","n_years"),
+          ]:
+              assert int(r[original_key])==py["source_counts"][new_key],(original_key,new_key)
+          for rkey,pkey in [
+            ("before_q10","greenup_before_q10"),
+            ("q10_to_q50","greenup_q10_to_before_q50"),
+            ("q50_to_q90","greenup_q50_to_q90"),
+            ("after_q90","greenup_after_q90"),
+          ]:
+              assert int(r[rkey])==py["classifiable_exclusive_counts"][pkey],(rkey,pkey)
+          for rkey,pkey in [
+            ("at_least_7d_before_q10","greenup_at_least_7d_before_q10"),
+            ("at_least_7d_before_q50","greenup_at_least_7d_before_q50"),
+            ("greenup_before_q50","greenup_strictly_before_q50"),
+          ]:
+              assert int(r[rkey])==py["pooled_logical_bounds"][pkey]["classifiable_positive_count"],(rkey,pkey)
+          print("R_AND_PYTHON_INDEPENDENT_ORIGINAL_SOURCE_WINDOW_COUNTS_MATCH")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-radar-passage-window-aggregate-20261124
+          path: |
+            outputs/payoff_b_radar_migration_window_result_20261124.json
+            outputs/payoff_b_radar_window_independent_R_aggregate_20261124.csv
+          if-no-files-found: error

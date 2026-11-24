@@ -1,0 +1,1415 @@
+{
+  "status": "WINDOW_CHRONOLOGY_COMPLETED_BOUNDING_NOT_CUE_USE",
+  "source_counts": {
+    "original_rows": 833,
+    "original_base_complete": 828,
+    "n_sites": 53,
+    "n_years": 16,
+    "classifiable": 827,
+    "unclassifiable": 1,
+    "unclassifiable_reasons": {
+      "missing_q10_or_q90": 0,
+      "out_of_range_original_calendar_field": 1
+    },
+    "nonmonotonic_q10_q50_q90": 0
+  },
+  "source_checks": {
+    "fixed_parent_source_rows": true,
+    "fixed_parent_complete_cases": true,
+    "parent_q50_checkpoint": true,
+    "quantiles_ordered": true,
+    "unknown_fraction_within_cap": true,
+    "all_rows_partition": true
+  },
+  "parent_q50_checkpoint": {
+    "strict_greenup_before_q50": 739,
+    "q50_before_greenup": 81,
+    "tie": 7,
+    "unclassifiable": 1
+  },
+  "original_q50_negative_unknown_retained": true,
+  "no_individual_bird_information_use_estimated": true,
+  "ecological_effects_refitted": false,
+  "original_station_rows_exported": false,
+  "class_definitions": [
+    "GREENUP_BEFORE_Q10: mean_greenup < spring_q10 (strict; the earliest 10% radar-passage quantile occurs later)",
+    "GREENUP_Q10_TO_BEFORE_Q50: spring_q10 <= mean_greenup < spring_q50",
+    "GREENUP_Q50_TO_Q90: spring_q50 <= mean_greenup <= spring_q90",
+    "GREENUP_AFTER_Q90: mean_greenup > spring_q90"
+  ],
+  "no_ebird": true,
+  "pooled_logical_bounds": {
+    "greenup_before_q10": {
+      "classifiable_positive_count": 455,
+      "possible_count_range": [
+        455,
+        456
+      ],
+      "fraction_lower": 0.5495169082125604,
+      "fraction_upper": 0.5507246376811594
+    },
+    "greenup_q10_to_before_q50": {
+      "classifiable_positive_count": 284,
+      "possible_count_range": [
+        284,
+        285
+      ],
+      "fraction_lower": 0.34299516908212563,
+      "fraction_upper": 0.3442028985507246
+    },
+    "greenup_q50_to_q90": {
+      "classifiable_positive_count": 65,
+      "possible_count_range": [
+        65,
+        66
+      ],
+      "fraction_lower": 0.0785024154589372,
+      "fraction_upper": 0.07971014492753623
+    },
+    "greenup_after_q90": {
+      "classifiable_positive_count": 23,
+      "possible_count_range": [
+        23,
+        24
+      ],
+      "fraction_lower": 0.027777777777777776,
+      "fraction_upper": 0.028985507246376812
+    },
+    "greenup_at_least_7d_before_q10": {
+      "classifiable_positive_count": 394,
+      "possible_count_range": [
+        394,
+        395
+      ],
+      "fraction_lower": 0.4758454106280193,
+      "fraction_upper": 0.47705314009661837
+    },
+    "greenup_at_least_7d_before_q50": {
+      "classifiable_positive_count": 688,
+      "possible_count_range": [
+        688,
+        689
+      ],
+      "fraction_lower": 0.8309178743961353,
+      "fraction_upper": 0.8321256038647343
+    },
+    "q10_strictly_before_greenup": {
+      "classifiable_positive_count": 355,
+      "possible_count_range": [
+        355,
+        356
+      ],
+      "fraction_lower": 0.428743961352657,
+      "fraction_upper": 0.42995169082125606
+    },
+    "greenup_strictly_before_q50": {
+      "classifiable_positive_count": 739,
+      "possible_count_range": [
+        739,
+        740
+      ],
+      "fraction_lower": 0.892512077294686,
+      "fraction_upper": 0.893719806763285
+    }
+  },
+  "annual_aggregate": [
+    {
+      "year": 2003,
+      "original_complete_station_years": 41,
+      "classifiable": 41,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 26,
+          "possible_count_range": [
+            26,
+            26
+          ],
+          "fraction_lower": 0.6341463414634146,
+          "fraction_upper": 0.6341463414634146
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 11,
+          "possible_count_range": [
+            11,
+            11
+          ],
+          "fraction_lower": 0.2682926829268293,
+          "fraction_upper": 0.2682926829268293
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 3,
+          "possible_count_range": [
+            3,
+            3
+          ],
+          "fraction_lower": 0.07317073170731707,
+          "fraction_upper": 0.07317073170731707
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 1,
+          "possible_count_range": [
+            1,
+            1
+          ],
+          "fraction_lower": 0.024390243902439025,
+          "fraction_upper": 0.024390243902439025
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 24,
+          "possible_count_range": [
+            24,
+            24
+          ],
+          "fraction_lower": 0.5853658536585366,
+          "fraction_upper": 0.5853658536585366
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 36,
+          "possible_count_range": [
+            36,
+            36
+          ],
+          "fraction_lower": 0.8780487804878049,
+          "fraction_upper": 0.8780487804878049
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 15,
+          "possible_count_range": [
+            15,
+            15
+          ],
+          "fraction_lower": 0.36585365853658536,
+          "fraction_upper": 0.36585365853658536
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 37,
+          "possible_count_range": [
+            37,
+            37
+          ],
+          "fraction_lower": 0.9024390243902439,
+          "fraction_upper": 0.9024390243902439
+        }
+      }
+    },
+    {
+      "year": 2004,
+      "original_complete_station_years": 47,
+      "classifiable": 47,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 27,
+          "possible_count_range": [
+            27,
+            27
+          ],
+          "fraction_lower": 0.574468085106383,
+          "fraction_upper": 0.574468085106383
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 17,
+          "possible_count_range": [
+            17,
+            17
+          ],
+          "fraction_lower": 0.3617021276595745,
+          "fraction_upper": 0.3617021276595745
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 3,
+          "possible_count_range": [
+            3,
+            3
+          ],
+          "fraction_lower": 0.06382978723404255,
+          "fraction_upper": 0.06382978723404255
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 0,
+          "possible_count_range": [
+            0,
+            0
+          ],
+          "fraction_lower": 0,
+          "fraction_upper": 0
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 26,
+          "possible_count_range": [
+            26,
+            26
+          ],
+          "fraction_lower": 0.5531914893617021,
+          "fraction_upper": 0.5531914893617021
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 42,
+          "possible_count_range": [
+            42,
+            42
+          ],
+          "fraction_lower": 0.8936170212765957,
+          "fraction_upper": 0.8936170212765957
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 19,
+          "possible_count_range": [
+            19,
+            19
+          ],
+          "fraction_lower": 0.40425531914893614,
+          "fraction_upper": 0.40425531914893614
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 44,
+          "possible_count_range": [
+            44,
+            44
+          ],
+          "fraction_lower": 0.9361702127659575,
+          "fraction_upper": 0.9361702127659575
+        }
+      }
+    },
+    {
+      "year": 2005,
+      "original_complete_station_years": 52,
+      "classifiable": 52,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 33,
+          "possible_count_range": [
+            33,
+            33
+          ],
+          "fraction_lower": 0.6346153846153846,
+          "fraction_upper": 0.6346153846153846
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 16,
+          "possible_count_range": [
+            16,
+            16
+          ],
+          "fraction_lower": 0.3076923076923077,
+          "fraction_upper": 0.3076923076923077
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 3,
+          "possible_count_range": [
+            3,
+            3
+          ],
+          "fraction_lower": 0.057692307692307696,
+          "fraction_upper": 0.057692307692307696
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 0,
+          "possible_count_range": [
+            0,
+            0
+          ],
+          "fraction_lower": 0,
+          "fraction_upper": 0
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 28,
+          "possible_count_range": [
+            28,
+            28
+          ],
+          "fraction_lower": 0.5384615384615384,
+          "fraction_upper": 0.5384615384615384
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 48,
+          "possible_count_range": [
+            48,
+            48
+          ],
+          "fraction_lower": 0.9230769230769231,
+          "fraction_upper": 0.9230769230769231
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 19,
+          "possible_count_range": [
+            19,
+            19
+          ],
+          "fraction_lower": 0.36538461538461536,
+          "fraction_upper": 0.36538461538461536
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 49,
+          "possible_count_range": [
+            49,
+            49
+          ],
+          "fraction_lower": 0.9423076923076923,
+          "fraction_upper": 0.9423076923076923
+        }
+      }
+    },
+    {
+      "year": 2006,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 24,
+          "possible_count_range": [
+            24,
+            24
+          ],
+          "fraction_lower": 0.4528301886792453,
+          "fraction_upper": 0.4528301886792453
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 23,
+          "possible_count_range": [
+            23,
+            23
+          ],
+          "fraction_lower": 0.4339622641509434,
+          "fraction_upper": 0.4339622641509434
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 2,
+          "possible_count_range": [
+            2,
+            2
+          ],
+          "fraction_lower": 0.03773584905660377,
+          "fraction_upper": 0.03773584905660377
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 4,
+          "possible_count_range": [
+            4,
+            4
+          ],
+          "fraction_lower": 0.07547169811320754,
+          "fraction_upper": 0.07547169811320754
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 23,
+          "possible_count_range": [
+            23,
+            23
+          ],
+          "fraction_lower": 0.4339622641509434,
+          "fraction_upper": 0.4339622641509434
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 44,
+          "possible_count_range": [
+            44,
+            44
+          ],
+          "fraction_lower": 0.8301886792452831,
+          "fraction_upper": 0.8301886792452831
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 25,
+          "possible_count_range": [
+            25,
+            25
+          ],
+          "fraction_lower": 0.4716981132075472,
+          "fraction_upper": 0.4716981132075472
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 47,
+          "possible_count_range": [
+            47,
+            47
+          ],
+          "fraction_lower": 0.8867924528301887,
+          "fraction_upper": 0.8867924528301887
+        }
+      }
+    },
+    {
+      "year": 2007,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 37,
+          "possible_count_range": [
+            37,
+            37
+          ],
+          "fraction_lower": 0.6981132075471698,
+          "fraction_upper": 0.6981132075471698
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 15,
+          "possible_count_range": [
+            15,
+            15
+          ],
+          "fraction_lower": 0.2830188679245283,
+          "fraction_upper": 0.2830188679245283
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 1,
+          "possible_count_range": [
+            1,
+            1
+          ],
+          "fraction_lower": 0.018867924528301886,
+          "fraction_upper": 0.018867924528301886
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 0,
+          "possible_count_range": [
+            0,
+            0
+          ],
+          "fraction_lower": 0,
+          "fraction_upper": 0
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 33,
+          "possible_count_range": [
+            33,
+            33
+          ],
+          "fraction_lower": 0.6226415094339622,
+          "fraction_upper": 0.6226415094339622
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 50,
+          "possible_count_range": [
+            50,
+            50
+          ],
+          "fraction_lower": 0.9433962264150944,
+          "fraction_upper": 0.9433962264150944
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 15,
+          "possible_count_range": [
+            15,
+            15
+          ],
+          "fraction_lower": 0.2830188679245283,
+          "fraction_upper": 0.2830188679245283
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 52,
+          "possible_count_range": [
+            52,
+            52
+          ],
+          "fraction_lower": 0.9811320754716981,
+          "fraction_upper": 0.9811320754716981
+        }
+      }
+    },
+    {
+      "year": 2008,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 25,
+          "possible_count_range": [
+            25,
+            25
+          ],
+          "fraction_lower": 0.4716981132075472,
+          "fraction_upper": 0.4716981132075472
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 17,
+          "possible_count_range": [
+            17,
+            17
+          ],
+          "fraction_lower": 0.32075471698113206,
+          "fraction_upper": 0.32075471698113206
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 9,
+          "possible_count_range": [
+            9,
+            9
+          ],
+          "fraction_lower": 0.16981132075471697,
+          "fraction_upper": 0.16981132075471697
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 2,
+          "possible_count_range": [
+            2,
+            2
+          ],
+          "fraction_lower": 0.03773584905660377,
+          "fraction_upper": 0.03773584905660377
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 21,
+          "possible_count_range": [
+            21,
+            21
+          ],
+          "fraction_lower": 0.39622641509433965,
+          "fraction_upper": 0.39622641509433965
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 39,
+          "possible_count_range": [
+            39,
+            39
+          ],
+          "fraction_lower": 0.7358490566037735,
+          "fraction_upper": 0.7358490566037735
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 28,
+          "possible_count_range": [
+            28,
+            28
+          ],
+          "fraction_lower": 0.5283018867924528,
+          "fraction_upper": 0.5283018867924528
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 42,
+          "possible_count_range": [
+            42,
+            42
+          ],
+          "fraction_lower": 0.7924528301886793,
+          "fraction_upper": 0.7924528301886793
+        }
+      }
+    },
+    {
+      "year": 2009,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 27,
+          "possible_count_range": [
+            27,
+            27
+          ],
+          "fraction_lower": 0.5094339622641509,
+          "fraction_upper": 0.5094339622641509
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 18,
+          "possible_count_range": [
+            18,
+            18
+          ],
+          "fraction_lower": 0.33962264150943394,
+          "fraction_upper": 0.33962264150943394
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 4,
+          "possible_count_range": [
+            4,
+            4
+          ],
+          "fraction_lower": 0.07547169811320754,
+          "fraction_upper": 0.07547169811320754
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 4,
+          "possible_count_range": [
+            4,
+            4
+          ],
+          "fraction_lower": 0.07547169811320754,
+          "fraction_upper": 0.07547169811320754
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 19,
+          "possible_count_range": [
+            19,
+            19
+          ],
+          "fraction_lower": 0.3584905660377358,
+          "fraction_upper": 0.3584905660377358
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 41,
+          "possible_count_range": [
+            41,
+            41
+          ],
+          "fraction_lower": 0.7735849056603774,
+          "fraction_upper": 0.7735849056603774
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 25,
+          "possible_count_range": [
+            25,
+            25
+          ],
+          "fraction_lower": 0.4716981132075472,
+          "fraction_upper": 0.4716981132075472
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 45,
+          "possible_count_range": [
+            45,
+            45
+          ],
+          "fraction_lower": 0.8490566037735849,
+          "fraction_upper": 0.8490566037735849
+        }
+      }
+    },
+    {
+      "year": 2010,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 32,
+          "possible_count_range": [
+            32,
+            32
+          ],
+          "fraction_lower": 0.6037735849056604,
+          "fraction_upper": 0.6037735849056604
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 20,
+          "possible_count_range": [
+            20,
+            20
+          ],
+          "fraction_lower": 0.37735849056603776,
+          "fraction_upper": 0.37735849056603776
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 1,
+          "possible_count_range": [
+            1,
+            1
+          ],
+          "fraction_lower": 0.018867924528301886,
+          "fraction_upper": 0.018867924528301886
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 0,
+          "possible_count_range": [
+            0,
+            0
+          ],
+          "fraction_lower": 0,
+          "fraction_upper": 0
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 28,
+          "possible_count_range": [
+            28,
+            28
+          ],
+          "fraction_lower": 0.5283018867924528,
+          "fraction_upper": 0.5283018867924528
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 50,
+          "possible_count_range": [
+            50,
+            50
+          ],
+          "fraction_lower": 0.9433962264150944,
+          "fraction_upper": 0.9433962264150944
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 20,
+          "possible_count_range": [
+            20,
+            20
+          ],
+          "fraction_lower": 0.37735849056603776,
+          "fraction_upper": 0.37735849056603776
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 52,
+          "possible_count_range": [
+            52,
+            52
+          ],
+          "fraction_lower": 0.9811320754716981,
+          "fraction_upper": 0.9811320754716981
+        }
+      }
+    },
+    {
+      "year": 2011,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 30,
+          "possible_count_range": [
+            30,
+            30
+          ],
+          "fraction_lower": 0.5660377358490566,
+          "fraction_upper": 0.5660377358490566
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 18,
+          "possible_count_range": [
+            18,
+            18
+          ],
+          "fraction_lower": 0.33962264150943394,
+          "fraction_upper": 0.33962264150943394
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 5,
+          "possible_count_range": [
+            5,
+            5
+          ],
+          "fraction_lower": 0.09433962264150944,
+          "fraction_upper": 0.09433962264150944
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 0,
+          "possible_count_range": [
+            0,
+            0
+          ],
+          "fraction_lower": 0,
+          "fraction_upper": 0
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 27,
+          "possible_count_range": [
+            27,
+            27
+          ],
+          "fraction_lower": 0.5094339622641509,
+          "fraction_upper": 0.5094339622641509
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 45,
+          "possible_count_range": [
+            45,
+            45
+          ],
+          "fraction_lower": 0.8490566037735849,
+          "fraction_upper": 0.8490566037735849
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 20,
+          "possible_count_range": [
+            20,
+            20
+          ],
+          "fraction_lower": 0.37735849056603776,
+          "fraction_upper": 0.37735849056603776
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 48,
+          "possible_count_range": [
+            48,
+            48
+          ],
+          "fraction_lower": 0.9056603773584906,
+          "fraction_upper": 0.9056603773584906
+        }
+      }
+    },
+    {
+      "year": 2012,
+      "original_complete_station_years": 53,
+      "classifiable": 52,
+      "unknown": 1,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 36,
+          "possible_count_range": [
+            36,
+            37
+          ],
+          "fraction_lower": 0.6792452830188679,
+          "fraction_upper": 0.6981132075471698
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 13,
+          "possible_count_range": [
+            13,
+            14
+          ],
+          "fraction_lower": 0.24528301886792453,
+          "fraction_upper": 0.2641509433962264
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 3,
+          "possible_count_range": [
+            3,
+            4
+          ],
+          "fraction_lower": 0.05660377358490566,
+          "fraction_upper": 0.07547169811320754
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 0,
+          "possible_count_range": [
+            0,
+            1
+          ],
+          "fraction_lower": 0,
+          "fraction_upper": 0.018867924528301886
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 34,
+          "possible_count_range": [
+            34,
+            35
+          ],
+          "fraction_lower": 0.6415094339622641,
+          "fraction_upper": 0.660377358490566
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 49,
+          "possible_count_range": [
+            49,
+            50
+          ],
+          "fraction_lower": 0.9245283018867925,
+          "fraction_upper": 0.9433962264150944
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 16,
+          "possible_count_range": [
+            16,
+            17
+          ],
+          "fraction_lower": 0.3018867924528302,
+          "fraction_upper": 0.32075471698113206
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 49,
+          "possible_count_range": [
+            49,
+            50
+          ],
+          "fraction_lower": 0.9245283018867925,
+          "fraction_upper": 0.9433962264150944
+        }
+      }
+    },
+    {
+      "year": 2013,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 22,
+          "possible_count_range": [
+            22,
+            22
+          ],
+          "fraction_lower": 0.41509433962264153,
+          "fraction_upper": 0.41509433962264153
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 19,
+          "possible_count_range": [
+            19,
+            19
+          ],
+          "fraction_lower": 0.3584905660377358,
+          "fraction_upper": 0.3584905660377358
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 7,
+          "possible_count_range": [
+            7,
+            7
+          ],
+          "fraction_lower": 0.1320754716981132,
+          "fraction_upper": 0.1320754716981132
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 5,
+          "possible_count_range": [
+            5,
+            5
+          ],
+          "fraction_lower": 0.09433962264150944,
+          "fraction_upper": 0.09433962264150944
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 18,
+          "possible_count_range": [
+            18,
+            18
+          ],
+          "fraction_lower": 0.33962264150943394,
+          "fraction_upper": 0.33962264150943394
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 36,
+          "possible_count_range": [
+            36,
+            36
+          ],
+          "fraction_lower": 0.6792452830188679,
+          "fraction_upper": 0.6792452830188679
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 31,
+          "possible_count_range": [
+            31,
+            31
+          ],
+          "fraction_lower": 0.5849056603773585,
+          "fraction_upper": 0.5849056603773585
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 41,
+          "possible_count_range": [
+            41,
+            41
+          ],
+          "fraction_lower": 0.7735849056603774,
+          "fraction_upper": 0.7735849056603774
+        }
+      }
+    },
+    {
+      "year": 2014,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 23,
+          "possible_count_range": [
+            23,
+            23
+          ],
+          "fraction_lower": 0.4339622641509434,
+          "fraction_upper": 0.4339622641509434
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 21,
+          "possible_count_range": [
+            21,
+            21
+          ],
+          "fraction_lower": 0.39622641509433965,
+          "fraction_upper": 0.39622641509433965
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 6,
+          "possible_count_range": [
+            6,
+            6
+          ],
+          "fraction_lower": 0.11320754716981132,
+          "fraction_upper": 0.11320754716981132
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 3,
+          "possible_count_range": [
+            3,
+            3
+          ],
+          "fraction_lower": 0.05660377358490566,
+          "fraction_upper": 0.05660377358490566
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 16,
+          "possible_count_range": [
+            16,
+            16
+          ],
+          "fraction_lower": 0.3018867924528302,
+          "fraction_upper": 0.3018867924528302
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 36,
+          "possible_count_range": [
+            36,
+            36
+          ],
+          "fraction_lower": 0.6792452830188679,
+          "fraction_upper": 0.6792452830188679
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 28,
+          "possible_count_range": [
+            28,
+            28
+          ],
+          "fraction_lower": 0.5283018867924528,
+          "fraction_upper": 0.5283018867924528
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 44,
+          "possible_count_range": [
+            44,
+            44
+          ],
+          "fraction_lower": 0.8301886792452831,
+          "fraction_upper": 0.8301886792452831
+        }
+      }
+    },
+    {
+      "year": 2015,
+      "original_complete_station_years": 52,
+      "classifiable": 52,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 31,
+          "possible_count_range": [
+            31,
+            31
+          ],
+          "fraction_lower": 0.5961538461538461,
+          "fraction_upper": 0.5961538461538461
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 19,
+          "possible_count_range": [
+            19,
+            19
+          ],
+          "fraction_lower": 0.36538461538461536,
+          "fraction_upper": 0.36538461538461536
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 2,
+          "possible_count_range": [
+            2,
+            2
+          ],
+          "fraction_lower": 0.038461538461538464,
+          "fraction_upper": 0.038461538461538464
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 0,
+          "possible_count_range": [
+            0,
+            0
+          ],
+          "fraction_lower": 0,
+          "fraction_upper": 0
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 23,
+          "possible_count_range": [
+            23,
+            23
+          ],
+          "fraction_lower": 0.4423076923076923,
+          "fraction_upper": 0.4423076923076923
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 44,
+          "possible_count_range": [
+            44,
+            44
+          ],
+          "fraction_lower": 0.8461538461538461,
+          "fraction_upper": 0.8461538461538461
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 21,
+          "possible_count_range": [
+            21,
+            21
+          ],
+          "fraction_lower": 0.40384615384615385,
+          "fraction_upper": 0.40384615384615385
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 50,
+          "possible_count_range": [
+            50,
+            50
+          ],
+          "fraction_lower": 0.9615384615384616,
+          "fraction_upper": 0.9615384615384616
+        }
+      }
+    },
+    {
+      "year": 2016,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 33,
+          "possible_count_range": [
+            33,
+            33
+          ],
+          "fraction_lower": 0.6226415094339622,
+          "fraction_upper": 0.6226415094339622
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 18,
+          "possible_count_range": [
+            18,
+            18
+          ],
+          "fraction_lower": 0.33962264150943394,
+          "fraction_upper": 0.33962264150943394
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 2,
+          "possible_count_range": [
+            2,
+            2
+          ],
+          "fraction_lower": 0.03773584905660377,
+          "fraction_upper": 0.03773584905660377
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 0,
+          "possible_count_range": [
+            0,
+            0
+          ],
+          "fraction_lower": 0,
+          "fraction_upper": 0
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 31,
+          "possible_count_range": [
+            31,
+            31
+          ],
+          "fraction_lower": 0.5849056603773585,
+          "fraction_upper": 0.5849056603773585
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 48,
+          "possible_count_range": [
+            48,
+            48
+          ],
+          "fraction_lower": 0.9056603773584906,
+          "fraction_upper": 0.9056603773584906
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 18,
+          "possible_count_range": [
+            18,
+            18
+          ],
+          "fraction_lower": 0.33962264150943394,
+          "fraction_upper": 0.33962264150943394
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 51,
+          "possible_count_range": [
+            51,
+            51
+          ],
+          "fraction_lower": 0.9622641509433962,
+          "fraction_upper": 0.9622641509433962
+        }
+      }
+    },
+    {
+      "year": 2017,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 30,
+          "possible_count_range": [
+            30,
+            30
+          ],
+          "fraction_lower": 0.5660377358490566,
+          "fraction_upper": 0.5660377358490566
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 19,
+          "possible_count_range": [
+            19,
+            19
+          ],
+          "fraction_lower": 0.3584905660377358,
+          "fraction_upper": 0.3584905660377358
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 3,
+          "possible_count_range": [
+            3,
+            3
+          ],
+          "fraction_lower": 0.05660377358490566,
+          "fraction_upper": 0.05660377358490566
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 1,
+          "possible_count_range": [
+            1,
+            1
+          ],
+          "fraction_lower": 0.018867924528301886,
+          "fraction_upper": 0.018867924528301886
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 27,
+          "possible_count_range": [
+            27,
+            27
+          ],
+          "fraction_lower": 0.5094339622641509,
+          "fraction_upper": 0.5094339622641509
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 46,
+          "possible_count_range": [
+            46,
+            46
+          ],
+          "fraction_lower": 0.8679245283018868,
+          "fraction_upper": 0.8679245283018868
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 23,
+          "possible_count_range": [
+            23,
+            23
+          ],
+          "fraction_lower": 0.4339622641509434,
+          "fraction_upper": 0.4339622641509434
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 49,
+          "possible_count_range": [
+            49,
+            49
+          ],
+          "fraction_lower": 0.9245283018867925,
+          "fraction_upper": 0.9245283018867925
+        }
+      }
+    },
+    {
+      "year": 2018,
+      "original_complete_station_years": 53,
+      "classifiable": 53,
+      "unknown": 0,
+      "logical_bounds": {
+        "greenup_before_q10": {
+          "classifiable_positive_count": 19,
+          "possible_count_range": [
+            19,
+            19
+          ],
+          "fraction_lower": 0.3584905660377358,
+          "fraction_upper": 0.3584905660377358
+        },
+        "greenup_q10_to_before_q50": {
+          "classifiable_positive_count": 20,
+          "possible_count_range": [
+            20,
+            20
+          ],
+          "fraction_lower": 0.37735849056603776,
+          "fraction_upper": 0.37735849056603776
+        },
+        "greenup_q50_to_q90": {
+          "classifiable_positive_count": 11,
+          "possible_count_range": [
+            11,
+            11
+          ],
+          "fraction_lower": 0.20754716981132076,
+          "fraction_upper": 0.20754716981132076
+        },
+        "greenup_after_q90": {
+          "classifiable_positive_count": 3,
+          "possible_count_range": [
+            3,
+            3
+          ],
+          "fraction_lower": 0.05660377358490566,
+          "fraction_upper": 0.05660377358490566
+        },
+        "greenup_at_least_7d_before_q10": {
+          "classifiable_positive_count": 16,
+          "possible_count_range": [
+            16,
+            16
+          ],
+          "fraction_lower": 0.3018867924528302,
+          "fraction_upper": 0.3018867924528302
+        },
+        "greenup_at_least_7d_before_q50": {
+          "classifiable_positive_count": 34,
+          "possible_count_range": [
+            34,
+            34
+          ],
+          "fraction_lower": 0.6415094339622641,
+          "fraction_upper": 0.6415094339622641
+        },
+        "q10_strictly_before_greenup": {
+          "classifiable_positive_count": 32,
+          "possible_count_range": [
+            32,
+            32
+          ],
+          "fraction_lower": 0.6037735849056604,
+          "fraction_upper": 0.6037735849056604
+        },
+        "greenup_strictly_before_q50": {
+          "classifiable_positive_count": 39,
+          "possible_count_range": [
+            39,
+            39
+          ],
+          "fraction_lower": 0.7358490566037735,
+          "fraction_upper": 0.7358490566037735
+        }
+      }
+    }
+  ],
+  "classifiable_exclusive_counts": {
+    "greenup_before_q10": 455,
+    "greenup_q10_to_before_q50": 284,
+    "greenup_q50_to_q90": 65,
+    "greenup_after_q90": 23
+  },
+  "evidence_limit": "Logical event ordering of radar migratory assemblage q10/q50/q90 and a retrospective MODIS greenup marker; not any bird's available forecast, cue, decision, reward or information threshold.",
+  "date": "2026-11-24",
+  "analysis_class": "POST_OUTCOME_EXPLORATORY_MIGRATION_WINDOW_PRECLASSIFICATION_CONTRACT",
+  "source_sha256": "1751ca4cd523d632368ba7fbb27987c2d6c1cc4c1a9c75b8c67255476d799900",
+  "contract_sha256": "2f5b7b10696d6b309884d0cd366a724eb77f0c5109f756beeabc297c7dee8bbd",
+  "execution": {
+    "source_workflow_run_id": 45328214126,
+    "source_job_id": 138222817377,
+    "source_artifact_id": 14889524755,
+    "source_aggregate_only_artifact_sha256": "8c5b1bb6fc69577c51a2cd711f38547671f47f256c2d4e7384f219532ddd352c",
+    "original_station_rows_committed": false
+  }
+}
