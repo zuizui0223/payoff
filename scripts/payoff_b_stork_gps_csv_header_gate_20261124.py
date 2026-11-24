@@ -141,7 +141,11 @@ def inspect_one_zip(selection,cohort,contract):
                 Path(info.filename).suffix.lower()!=s["extension"] for info in entries
             ):
                 raise ValueError("Original source central directory changed after prior audit")
-            members=[safe_member_header(zipped,inf,contract) for inf in entries]
+            members=[{
+                **safe_member_header(zipped,inf,contract),
+                "original_uncompressed_member_size_bytes":inf.file_size,
+                "original_compressed_member_size_bytes":inf.compress_size,
+            } for inf in entries]
         return {
             "status":"SOURCE_FIRST_LINE_SCHEMA_ATTEMPT_COMPLETED",
             "cohort":cohort,
