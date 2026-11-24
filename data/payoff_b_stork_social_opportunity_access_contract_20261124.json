@@ -50,5 +50,44 @@
   "no_tinyfish": true,
   "no_stork_event_rows_downloaded": true,
   "original_2023_results_untouched": true,
-  "current_main_frozen_submissions_untouched": true
+  "current_main_frozen_submissions_untouched": true,
+  "verified_public_item_ids": {
+    "control": {
+      "uuid": "79710d0e-d1d6-45fd-90f9-1c6d9be0c46e",
+      "handle": "10255/move.1627"
+    },
+    "delayed": {
+      "uuid": "e0181e26-4f70-45cf-a3f7-6c61ce368af0",
+      "handle": "10255/move.1632"
+    },
+    "naturally_timed": {
+      "uuid": "3949d945-4730-4c24-96e8-4e6bb0234e1c",
+      "handle": "10255/move.1633"
+    }
+  },
+  "public_dspace_bundle_metadata_gate": {
+    "registration_stage": "AFTER_VERIFYING_PUBLIC_TITLE_SEARCH_BEFORE_READING_BUNDLE_AND_BITSTREAM_METADATA",
+    "allowed_get_endpoints": [
+      "/server/api/core/items/{known_uuid}",
+      "/server/api/core/items/{known_uuid}/bundles",
+      "/server/api/core/bundles/{bundle_uuid_recovered_from_verified_item}/bitstreams"
+    ],
+    "forbidden": [
+      "/content",
+      "any bitstream file bytes",
+      "GPS event rows",
+      "automatic licence terms acceptance",
+      "downloaded archives",
+      "external redirect hosts",
+      "non-verified item UUID"
+    ],
+    "max_json_bytes_per_response": 262144,
+    "max_bundle_calls_per_cohort": 8,
+    "required": {
+      "all_three_original_item_handles_match": true,
+      "file_metadata_scope_only": true,
+      "no_personal_location_rows": true
+    },
+    "interpretation": "Files named GPS/CSV or with public size do not prove data access, schema, time alignment, social information or cue reliability."
+  }
 }
