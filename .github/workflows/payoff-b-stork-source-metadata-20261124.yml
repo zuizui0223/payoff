@@ -193,3 +193,41 @@ jobs:
           name: payoff-b-stork-dspace-source-api-metadata-20261124
           path: outputs/payoff_b_stork_dspace_public_metadata_20261124.json
           if-no-files-found: error
+
+  stork-public-file-metadata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install minimal tests
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Verify DSpace item bundle and bitstream metadata-only scope
+        run: pytest -q -rs tests/test_payoff_b_stork_dspace_file_metadata_20261124.py
+      - name: Read only public DSpace item, bundle and file-size metadata
+        run: |
+          python scripts/payoff_b_stork_dspace_file_metadata_20261124.py \
+            --output outputs/payoff_b_stork_dspace_file_metadata_20261124.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          z=json.loads(Path("outputs/payoff_b_stork_dspace_file_metadata_20261124.json").read_text())
+          assert z["n_items_expected"]==3
+          assert z["original_GPS_event_rows_downloaded"] is False
+          assert z["bitstream_content_requested"] is False
+          assert z["user_credentials_sent"] is False
+          assert z["terms_autoaccepted"] is False
+          assert z["social_predictive_accuracy_or_Bayesian_payoff_estimated"] is False
+          assert z["no_ebird"] is True
+          assert len(z["original_stork_archives"])==3
+          print("DSpace_PUBLIC_STORK_FILE_METADATA_PASS",z["n_verified_item_handles"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-public-file-metadata-20261124
+          path: outputs/payoff_b_stork_dspace_file_metadata_20261124.json
+          if-no-files-found: error
