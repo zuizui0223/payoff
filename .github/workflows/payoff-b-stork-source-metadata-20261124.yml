@@ -231,3 +231,42 @@ jobs:
           name: payoff-b-stork-public-file-metadata-20261124
           path: outputs/payoff_b_stork_dspace_file_metadata_20261124.json
           if-no-files-found: error
+
+  stork-cc0-small-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Minimal testing dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Enforce 80KiB README/CSV whitelist, MD5, and no-raw-ID output
+        run: pytest -q -rs tests/test_payoff_b_stork_cc0_small_reference_gate_20261124.py
+      - name: Fetch only 3x2 tiny CC0 reference files using verified DSpace metadata
+        run: |
+          python scripts/payoff_b_stork_cc0_small_reference_gate_20261124.py \
+            --output outputs/payoff_b_stork_cc0_small_reference_receipt_20261124.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          r=json.loads(Path("outputs/payoff_b_stork_cc0_small_reference_receipt_20261124.json").read_text())
+          assert r["original_small_file_scope_only"] is True
+          assert r["GPS_or_ACC_ZIPs_downloaded"] is False
+          assert r["source_rows_or_tag_ids_exported"] is False
+          assert r["tracking_events_downloaded"] is False
+          assert r["new_survival_or_migration_effect_estimated"] is False
+          assert r["conspecific_social_cue_accuracy_q_estimated"] is False
+          assert r["licence_terms_autoaccepted"] is False
+          assert r["no_ebird"] is True
+          assert len(r["source_items"])==3
+          print("ORIGINAL_STORK_SMALL_CC0_REFERENCE_STATUS",r["all_three_cohorts_readme_csv_verified"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-small-reference-source-only-20261124
+          path: outputs/payoff_b_stork_cc0_small_reference_receipt_20261124.json
+          if-no-files-found: error
