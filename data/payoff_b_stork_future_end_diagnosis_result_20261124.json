@@ -1,0 +1,223 @@
+{
+  "status": "POSTOPEN_FUTURE_END_QUARANTINE_COMPLETED_SOURCE_ONLY",
+  "original_date_source_status": "TIME_OVERLAP_COUNTS_QUARANTINED_PENDING_FUTURE_END_SEMANTICS",
+  "reference_day": "2026-11-24",
+  "source_quality_by_cohort": {
+    "control": {
+      "n_original_reference_rows": 19,
+      "n_end_dates_after_reference_day": 0,
+      "n_end_dates_missing_or_unparseable": 10,
+      "n_ends_calendar_plausible_after_quarantine": 9
+    },
+    "delayed": {
+      "n_original_reference_rows": 40,
+      "n_end_dates_after_reference_day": 1,
+      "n_end_dates_missing_or_unparseable": 20,
+      "n_ends_calendar_plausible_after_quarantine": 19
+    },
+    "naturally_timed": {
+      "n_original_reference_rows": 153,
+      "n_end_dates_after_reference_day": 0,
+      "n_end_dates_missing_or_unparseable": 98,
+      "n_ends_calendar_plausible_after_quarantine": 55
+    }
+  },
+  "source_support_after_quarantine": {
+    "status": "TIME_METADATA_BOUNDED_SUPPORT_ONLY",
+    "source_cohorts": {
+      "control": {
+        "original_csv_rows": 19,
+        "source_expected_rows": 19,
+        "distinct_tag_ids": 19,
+        "n_on_dates_parseable": 19,
+        "n_off_dates_parseable": 9,
+        "n_bounded_valid_on_off_intervals": 9,
+        "n_missing_or_unparseable_on": 0,
+        "n_missing_or_unparseable_off": 10,
+        "n_off_before_on": 0,
+        "min_start_year": 2019,
+        "max_start_year": 2020,
+        "start_year_counts": [
+          {
+            "year": 2019,
+            "n": 9
+          },
+          {
+            "year": 2020,
+            "n": 10
+          }
+        ],
+        "end_year_counts": [
+          {
+            "year": 2019,
+            "n": 4
+          },
+          {
+            "year": 2020,
+            "n": 3
+          },
+          {
+            "year": 2021,
+            "n": 2
+          }
+        ],
+        "complete_bounded_source_not_bird_co_travel": true
+      },
+      "delayed": {
+        "original_csv_rows": 40,
+        "source_expected_rows": 40,
+        "distinct_tag_ids": 40,
+        "n_on_dates_parseable": 40,
+        "n_off_dates_parseable": 19,
+        "n_bounded_valid_on_off_intervals": 19,
+        "n_missing_or_unparseable_on": 0,
+        "n_missing_or_unparseable_off": 21,
+        "n_off_before_on": 0,
+        "min_start_year": 2019,
+        "max_start_year": 2020,
+        "start_year_counts": [
+          {
+            "year": 2019,
+            "n": 20
+          },
+          {
+            "year": 2020,
+            "n": 20
+          }
+        ],
+        "end_year_counts": [
+          {
+            "year": 2019,
+            "n": 1
+          },
+          {
+            "year": 2020,
+            "n": 10
+          },
+          {
+            "year": 2021,
+            "n": 7
+          },
+          {
+            "year": 2022,
+            "n": 1
+          }
+        ],
+        "complete_bounded_source_not_bird_co_travel": true
+      },
+      "naturally_timed": {
+        "original_csv_rows": 153,
+        "source_expected_rows": 153,
+        "distinct_tag_ids": 137,
+        "n_on_dates_parseable": 153,
+        "n_off_dates_parseable": 55,
+        "n_bounded_valid_on_off_intervals": 55,
+        "n_missing_or_unparseable_on": 0,
+        "n_missing_or_unparseable_off": 98,
+        "n_off_before_on": 0,
+        "min_start_year": 2020,
+        "max_start_year": 2023,
+        "start_year_counts": [
+          {
+            "year": 2020,
+            "n": 40
+          },
+          {
+            "year": 2021,
+            "n": 37
+          },
+          {
+            "year": 2022,
+            "n": 36
+          },
+          {
+            "year": 2023,
+            "n": 40
+          }
+        ],
+        "end_year_counts": [
+          {
+            "year": 2020,
+            "n": 17
+          },
+          {
+            "year": 2021,
+            "n": 15
+          },
+          {
+            "year": 2022,
+            "n": 17
+          },
+          {
+            "year": 2023,
+            "n": 6
+          }
+        ],
+        "complete_bounded_source_not_bird_co_travel": true
+      }
+    },
+    "within_cohort_known_bounded_tag_deployment_pair_counts": [
+      {
+        "cohort": "control",
+        "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 20
+      },
+      {
+        "cohort": "delayed",
+        "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 145
+      },
+      {
+        "cohort": "naturally_timed",
+        "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 464
+      }
+    ],
+    "cross_cohort_known_bounded_tag_deployment_pair_counts": [
+      {
+        "cohort_a": "control",
+        "cohort_b": "delayed",
+        "n_reused_tag_strings": 1,
+        "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 107
+      },
+      {
+        "cohort_a": "control",
+        "cohort_b": "naturally_timed",
+        "n_reused_tag_strings": 2,
+        "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 108
+      },
+      {
+        "cohort_a": "delayed",
+        "cohort_b": "naturally_timed",
+        "n_reused_tag_strings": 9,
+        "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 351
+      }
+    ],
+    "n_groups_with_ge5_bounded_intervals": 3,
+    "group_count": 3,
+    "no_animal_contact_or_encounter_measured": true,
+    "no_actual_bird_colocation_or_social_information_identified": true,
+    "no_environmental_predictive_reliability_estimated": true,
+    "GPS_ZIPs_downloaded": false,
+    "raw_tag_ids_or_source_rows_exported": false,
+    "original_fitness_or_treatment_effect_refitted": false,
+    "no_ebird": true,
+    "interpretation": "Tag deployment date overlap is source coverage potential only; deployment dates are not actual individual location or behavior timestamps and missing off dates are not imputed."
+  },
+  "total_original_source_rows": 212,
+  "future_end_is_not_observed": true,
+  "even_earlier_end_may_be_scheduled_not_observed": true,
+  "actual_spatiotemporal_co_presence_identified": false,
+  "same_bird_cross_cohort_tag_join_identified": false,
+  "GPS_event_data_opened": false,
+  "biological_q_times_recourse_or_fitness_fitted": false,
+  "raw_original_tag_ids_or_dates_committed": false,
+  "no_ebird": true,
+  "original_contract_sha256": "f89512842633fa541348cbcaa870be36f1efac5db9853649a8bc5933e8f7ad54",
+  "new_postopen_diagnostic_contract_sha256": "97538dc834d6f226596bd3f984ad1836afcb0ca0a4d990756677a7968bc792e1",
+  "source_doi": "10.1098/rspb.2023.1268",
+  "actions": {
+    "workflow_run_id": 45365611394,
+    "job_id": 138346426357,
+    "derived_only_artifact_id": 14906422174,
+    "derived_only_zip_sha256": "d998bd185be919b8ec76f61574d2259c7c845de6fc4e71324fca54d980b0e956",
+    "source_rows_committed": false
+  }
+}
