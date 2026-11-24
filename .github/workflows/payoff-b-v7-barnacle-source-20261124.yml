@@ -1,0 +1,51 @@
+name: PAYOFF-B V7 original barnacle goose DOI & DSpace source-only admission
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-v7-barnacle-original-access-20261124
+    paths:
+      - ".github/workflows/payoff-b-v7-barnacle-source-20261124.yml"
+      - "scripts/payoff_b_v7_barnacle_archived_source_audit_20261124.py"
+      - "tests/test_payoff_b_v7_barnacle_archived_source_audit_20261124.py"
+      - "data/payoff_b_v7_barnacle_archive_metadata_contract_20261124.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-barnacle-public-metadata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install synthetic test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Validate DOI provenance, DSpace metadata access-only and no raw GPS request
+        run: pytest -q -rs tests/test_payoff_b_v7_barnacle_archived_source_audit_20261124.py
+      - name: Inspect only 3 original barnacle goose DOI citations and DSpace public source manifests
+        run: |
+          python scripts/payoff_b_v7_barnacle_archived_source_audit_20261124.py \
+            --output outputs/payoff_b_v7_barnacle_original_public_metadata_receipt_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path("outputs/payoff_b_v7_barnacle_original_public_metadata_receipt_20261124.json").read_text())
+          assert len(a["source_archives"])==3
+          assert a["individual_tracking_rows_read"] is False
+          assert a["original_GPS_archive_downloaded"] is False
+          assert a["focal_v7_environmental_q_U_effect_estimated"] is False
+          assert a["Aikens_frozen_outcomes_opened"] is False
+          assert a["no_ebird"] is True
+          assert all(r.get("original_source_file_bytes_downloaded",False) is False for r in a["source_archives"])
+          print("V7_ORIGINAL_BARNACLE_METADATA_ONLY",a["n_original_archives_with_file_manifest"],"of 3")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v7-barnacle-original-metadata-aggregate-only-20261124
+          path: outputs/payoff_b_v7_barnacle_original_public_metadata_receipt_20261124.json
+          if-no-files-found: error

@@ -1,0 +1,204 @@
+{
+  "date": "2026-11-24",
+  "status": "V7_BARNACLE_ORIGINAL_PUBLIC_ARCHIVE_METADATA_SCREEN_COMPLETED",
+  "original_reference": "Kölzsch et al 2015 J Anim Ecol DOI 10.1111/1365-2656.12281",
+  "doi_recognized": 3,
+  "dspace_discovery_status": "PUBLIC_METADATA_JSON_VERIFIED",
+  "n_discovered_barnacle_related_public_items": 3,
+  "source_archives": [
+    {
+      "flyway": "greenland",
+      "doi": "10.5441/001/1.5d3f0664",
+      "status": "ORIGINAL_PUBLIC_ARCHIVE_BUNDLE_FILE_METADATA_VERIFIED",
+      "citation": {
+        "doi": "10.5441/001/1.5d3f0664",
+        "title": "Data from: Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore [Greenland data]",
+        "year": 2014,
+        "publisher": "Movebank Data Repository",
+        "landing": "https://www.datarepository.movebank.org/handle/10255/move.380",
+        "rights": [
+          {
+            "rights": "Creative Commons Zero v1.0 Universal",
+            "rightsIdentifier": "cc0-1.0",
+            "rightsUri": "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
+          }
+        ],
+        "CC0_metadata_confirmed": true,
+        "metadata_only": true
+      },
+      "dspace_original_title": "Data from: Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore [Greenland data]",
+      "dspace_original_handle": "10255/move.380",
+      "dspace_item_uuid_verified": true,
+      "source_public_file_count": 3,
+      "file_extensions_and_sizes": [
+        {
+          "file_extension": ".csv",
+          "name_contains_GPS": false,
+          "name_contains_ACC": false,
+          "name_contains_readme": false,
+          "size_bytes": 1976465,
+          "original_MD5_metadata_present": true,
+          "bitstream_content_downloaded": false,
+          "full_filename_or_uuid_exported": false
+        },
+        {
+          "file_extension": ".txt",
+          "name_contains_GPS": false,
+          "name_contains_ACC": false,
+          "name_contains_readme": true,
+          "size_bytes": 11452,
+          "original_MD5_metadata_present": true,
+          "bitstream_content_downloaded": false,
+          "full_filename_or_uuid_exported": false
+        },
+        {
+          "file_extension": ".csv",
+          "name_contains_GPS": false,
+          "name_contains_ACC": false,
+          "name_contains_readme": false,
+          "size_bytes": 3129,
+          "original_MD5_metadata_present": true,
+          "bitstream_content_downloaded": false,
+          "full_filename_or_uuid_exported": false
+        }
+      ],
+      "original_source_file_bytes_downloaded": false
+    },
+    {
+      "flyway": "svalbard",
+      "doi": "10.5441/001/1.5k6b1364",
+      "status": "ORIGINAL_PUBLIC_ARCHIVE_BUNDLE_FILE_METADATA_VERIFIED",
+      "citation": {
+        "doi": "10.5441/001/1.5k6b1364",
+        "title": "Data from: Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore [Svalbard data]",
+        "year": 2014,
+        "publisher": "Movebank Data Repository",
+        "landing": "https://www.datarepository.movebank.org/handle/10255/move.377",
+        "rights": [
+          {
+            "rights": "Creative Commons Attribution Non Commercial 4.0 International",
+            "rightsIdentifier": "cc-by-nc-4.0",
+            "rightsUri": "https://creativecommons.org/licenses/by-nc/4.0/legalcode"
+          }
+        ],
+        "CC0_metadata_confirmed": false,
+        "metadata_only": true
+      },
+      "dspace_original_title": "Data from: Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore [Svalbard data]",
+      "dspace_original_handle": "10255/move.377",
+      "dspace_item_uuid_verified": true,
+      "source_public_file_count": 3,
+      "file_extensions_and_sizes": [
+        {
+          "file_extension": ".csv",
+          "name_contains_GPS": false,
+          "name_contains_ACC": false,
+          "name_contains_readme": false,
+          "size_bytes": 9229,
+          "original_MD5_metadata_present": true,
+          "bitstream_content_downloaded": false,
+          "full_filename_or_uuid_exported": false
+        },
+        {
+          "file_extension": ".txt",
+          "name_contains_GPS": false,
+          "name_contains_ACC": false,
+          "name_contains_readme": true,
+          "size_bytes": 11931,
+          "original_MD5_metadata_present": true,
+          "bitstream_content_downloaded": false,
+          "full_filename_or_uuid_exported": false
+        },
+        {
+          "file_extension": ".csv",
+          "name_contains_GPS": false,
+          "name_contains_ACC": false,
+          "name_contains_readme": false,
+          "size_bytes": 7274402,
+          "original_MD5_metadata_present": true,
+          "bitstream_content_downloaded": false,
+          "full_filename_or_uuid_exported": false
+        }
+      ],
+      "original_source_file_bytes_downloaded": false
+    },
+    {
+      "flyway": "barents",
+      "doi": "10.5441/001/1.ps244r11",
+      "status": "ORIGINAL_PUBLIC_ARCHIVE_BUNDLE_FILE_METADATA_VERIFIED",
+      "citation": {
+        "doi": "10.5441/001/1.ps244r11",
+        "title": "Data from: Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore [Barents Sea data]",
+        "year": 2014,
+        "publisher": "Movebank Data Repository",
+        "landing": "https://www.datarepository.movebank.org/handle/10255/move.383",
+        "rights": [
+          {
+            "rights": "CC0 1.0 Universal",
+            "rightsIdentifier": "",
+            "rightsUri": ""
+          },
+          {
+            "rights": "Creative Commons Zero v1.0 Universal",
+            "rightsIdentifier": "cc0-1.0",
+            "rightsUri": "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
+          }
+        ],
+        "CC0_metadata_confirmed": true,
+        "metadata_only": true
+      },
+      "dspace_original_title": "Data from: Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore [Barents Sea data]",
+      "dspace_original_handle": "10255/move.383",
+      "dspace_item_uuid_verified": true,
+      "source_public_file_count": 3,
+      "file_extensions_and_sizes": [
+        {
+          "file_extension": ".csv",
+          "name_contains_GPS": false,
+          "name_contains_ACC": false,
+          "name_contains_readme": false,
+          "size_bytes": 5516,
+          "original_MD5_metadata_present": true,
+          "bitstream_content_downloaded": false,
+          "full_filename_or_uuid_exported": false
+        },
+        {
+          "file_extension": ".txt",
+          "name_contains_GPS": false,
+          "name_contains_ACC": false,
+          "name_contains_readme": true,
+          "size_bytes": 13755,
+          "original_MD5_metadata_present": true,
+          "bitstream_content_downloaded": false,
+          "full_filename_or_uuid_exported": false
+        },
+        {
+          "file_extension": ".csv",
+          "name_contains_GPS": false,
+          "name_contains_ACC": false,
+          "name_contains_readme": false,
+          "size_bytes": 6665068,
+          "original_MD5_metadata_present": true,
+          "bitstream_content_downloaded": false,
+          "full_filename_or_uuid_exported": false
+        }
+      ],
+      "original_source_file_bytes_downloaded": false
+    }
+  ],
+  "n_original_archives_with_file_manifest": 3,
+  "all_three_manifest_verified": true,
+  "individual_tracking_rows_read": false,
+  "original_GPS_archive_downloaded": false,
+  "focal_v7_environmental_q_U_effect_estimated": false,
+  "Aikens_frozen_outcomes_opened": false,
+  "no_ebird": true,
+  "prior_art_boundary": "Source availability is not the V7 q×U biological interaction. The original publication already studies phenology predictability and migration timing and V7 itself is preoutcome.",
+  "source_receipt": {
+    "run": 45387623954,
+    "job": 138422598741,
+    "aggregate_artifact_id": 14916583189,
+    "aggregate_zip_sha256": "1a9b3dbad300fcde32b1a6e5f32336767606523c14945925440a6c5f03d13c02",
+    "source_GPS_event_bytes_read": false
+  }
+}

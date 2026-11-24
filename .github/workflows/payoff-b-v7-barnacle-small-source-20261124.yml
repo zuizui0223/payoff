@@ -1,0 +1,51 @@
+name: PAYOFF-B V7 original barnacle tiny reference MD5 source gate
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-v7-barnacle-original-access-20261124
+    paths:
+      - ".github/workflows/payoff-b-v7-barnacle-small-source-20261124.yml"
+      - "scripts/payoff_b_v7_barnacle_small_reference_gate_20261124.py"
+      - "tests/test_payoff_b_v7_barnacle_small_reference_gate_20261124.py"
+      - "data/payoff_b_v7_barnacle_small_source_contract_20261124.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-six-small-barnacle-source-files:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install synthetic test runner
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Test original six-file size MD5 license and no animal-row leakage
+        run: pytest -q -rs tests/test_payoff_b_v7_barnacle_small_reference_gate_20261124.py
+      - name: Fetch only 3 x 2 original tiny CC0/BY-NC barnacle reference files
+        run: |
+          python scripts/payoff_b_v7_barnacle_small_reference_gate_20261124.py \
+            --output outputs/payoff_b_v7_barnacle_six_small_file_source_receipt_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          z=json.loads(Path("outputs/payoff_b_v7_barnacle_six_small_file_source_receipt_20261124.json").read_text())
+          assert z["n_source_cohorts"]==3
+          assert z["original_tracking_event_or_ZIP_bytes_read"] is False
+          assert z["raw_tag_strings_or_animal_locations_exported"] is False
+          assert z["focal_V7_q_U_test_opened"] is False
+          assert z["source_is_supplemental_phenology_tables"] is False
+          assert z["no_ebird"] is True
+          assert all(x.get("large_GPS_event_CSV_bytes_downloaded",False) is False for x in z["sources"])
+          print("ORIGINAL_SIX_BARNACLE_TINY_FILE_MD5_SOURCE_GATE",z["n_cohorts_with_two_md5_verified_reference_files"],"of 3")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v7-original-barnacle-small-source-only-20261124
+          path: outputs/payoff_b_v7_barnacle_six_small_file_source_receipt_20261124.json
+          if-no-files-found: error

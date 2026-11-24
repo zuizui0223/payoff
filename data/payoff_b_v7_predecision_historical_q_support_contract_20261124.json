@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-24",
+  "status": "V7_PREDECISION_INFORMATION_AVAILABILITY_ADDENDUM_PRE_FOCAL_OUTCOME",
+  "original_v7_contract_remains_unchanged": "docs/PAYOFF_B_V7_PREDICTABILITY_URGENCY_CONTRACT_20261005.md",
+  "purpose": "Separately distinguish a historical environmental correlation reconstructed with future years from a prediction model that a bird could in principle have learned using only prior seasons. This is a new source-only support diagnostic; never retroactively rewrite existing V7 primary q_j.",
+  "source": "Original Kölzsch et al. 2015 JAE 30-year GDD-jerk spring onset time series 1982–2011 (not the separately reconstructed 1982–2013 ERA5 series), 16 stopover regions.",
+  "time_rule": {
+    "focal_migration_years": [
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011
+    ],
+    "environmental_training_rows": "strict year < focal year, all years >= 1982, unique transition-year pair, source/destination same current year",
+    "no_current_focal_year_training": true,
+    "no_future_year_training": true,
+    "source_environment_at_focal_year_is_potentially_available_only_if": "source spring onset measured BEFORE focal bird's source departure; no such departure time is opened in the present source-only gate",
+    "do_not_use_bird_timing_as_predictor": true,
+    "q_signed_not_absolute": true,
+    "reference_source_full_window": "Retrospective 1982–2013 correlation retains its source literature interpretation only, not decision-time information.",
+    "original_published_environment_years": [
+      1982,
+      2011
+    ],
+    "separate_replication_note": "PAYOFF-B ERA5 reconstruction 1982–2013 is not the Kölzsch original published 1982–2011 environment sample and requires a separately frozen sensitivity lane"
+  },
+  "candidate_measure": {
+    "primary": "Pearson correlation of earlier-site and later-site spring-onset DOY over all source years strictly prior to focal year, computed per independently fixed region transition",
+    "secondary": "fit destination environmental spring-onset DOY ~ intercept + same-year earlier-site spring-onset DOY on only previous years; output forward-year one-step environmental forecast error vs past destination-climatology mean. This does NOT imply focal animal observed source onset before departing.",
+    "minimum_prior_paired_years": 20,
+    "target_and_source_doy_range": [
+      1,
+      366
+    ],
+    "no_year_detrending_in_primary": "Original V7 q uses raw correlation, so a detrended q is not quietly substituted",
+    "cross_year_proxy_not_animal_q": "Predictive connectivity / forward forecast support is a system property, not measured cognition, animal cue-use or payoff",
+    "all_admitted_migration_years_2006_2011_prespecified": true,
+    "historical_original_year_max": 2011
+  },
+  "prereg_validation": [
+    "When adding a later original phenology source file, require each transition/year at most one row and original DOI/checksum",
+    "Verify environment record years 1982–2013 and target–source transition identities independently",
+    "No animal data or goose timing outcomes in source forecast CSV",
+    "A forward-year prediction cannot depend on a later year's environmental target and cannot train on focal year",
+    "Every forecast receives n historical pairs, signed Pearson r, fitted predicted destination onset and separately observed target onset for environmental-only score",
+    "Score against historical mean climatology and report only dependence-aware transition/year summaries; do not label source years as independent bird decisions",
+    "If source phenology time series are not publicly obtainable/identifiable, return SOURCE_PREDICTIVE_Q_NOT_ESTIMABLE and do not invent values."
+  ],
+  "threshold_gate": {
+    "independent_historical_transitions_min": 10,
+    "independent_flyways_min": 2,
+    "historical_pairs_min_each": 20,
+    "distinct_focal_years_min": 3,
+    "historical_forecast_score_must_be_present_for_any_new_behavioral_q_claim": true,
+    "old_V7_eligibility_remains_unchanged": true
+  },
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "individual_GPS_or_focal_bird_timing_opened": false,
+  "cannot_overwrite_prior_contract_or_frozen_submission": true,
+  "original_published_support": {
+    "years": [
+      1982,
+      2011
+    ],
+    "supplementary": "Kölzsch et al 2015 S2–S7 supply annual GDD-jerk spring-onset anomalies for source-target stopover-region pairs, while S1 supplies region reference mean and SD.",
+    "permitted_source_formats": [
+      "doy",
+      "anomaly"
+    ],
+    "strict_column_schema": {
+      "doy": [
+        "flyway",
+        "transition",
+        "year",
+        "source_spring_onset_doy",
+        "target_spring_onset_doy"
+      ],
+      "anomaly": [
+        "flyway",
+        "transition",
+        "year",
+        "source_onset_anomaly_days",
+        "target_onset_anomaly_days"
+      ]
+    },
+    "representational_invariance": "Pearson correlation and ordinary-least-squares destination forecast squared errors relative to a past destination-mean benchmark are invariant when constant site-specific full-window means are subtracted from source/target onset dates. However the original fully normalized anomalies cannot by themselves reconstruct individual arrival minus absolute spring DOY.",
+    "require_unaltered_source_annual_pair_units": true,
+    "do_not_mix_source_units": true,
+    "do_not_claim_focal_bird_exposure_from_anomaly": true
+  }
+}
