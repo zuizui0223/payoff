@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-24",
+  "status": "POSTOPEN_COARSE_CONDITIONED_THREE_SOURCE_FIX_PROXIMITY_DIAGNOSTIC",
+  "n_original_source_ZIPs_validated": 3,
+  "candidate_coarse_hour_cell_sources": {
+    "0p1_degree": 11,
+    "0p2_degree": 16
+  },
+  "all_candidate_keys_previously_observed_in_year": 2020,
+  "fixed_exploratory_time_distance_gates": [
+    {
+      "id": "strict",
+      "original_coarse_candidate_source_keys": 11,
+      "n_keys_with_at_least_one_three_cohort_fix_triplet": 1,
+      "n_candidate_keys_without_qualifying_three_cohort_fix_triplet": 10,
+      "maximum_three_fix_span_seconds": 300,
+      "maximum_each_pair_distance_metres": 1000,
+      "same_coarse_cell_width_degrees": 0.1,
+      "n_original_source_archive_MD5_and_CRC_reverified": 3,
+      "individual_animal_identity_verified": false,
+      "GPS_records_or_source_coordinates_exported": false
+    },
+    {
+      "id": "sensitivity",
+      "original_coarse_candidate_source_keys": 16,
+      "n_keys_with_at_least_one_three_cohort_fix_triplet": 2,
+      "n_candidate_keys_without_qualifying_three_cohort_fix_triplet": 14,
+      "maximum_three_fix_span_seconds": 900,
+      "maximum_each_pair_distance_metres": 5000,
+      "same_coarse_cell_width_degrees": 0.2,
+      "n_original_source_archive_MD5_and_CRC_reverified": 3,
+      "individual_animal_identity_verified": false,
+      "GPS_records_or_source_coordinates_exported": false
+    }
+  ],
+  "reanalysed_original_event_records_across_three_cohorts": 27023367,
+  "all_original_GPS_files_removed_after_ephemeral_processing": true,
+  "source_bird_tags_event_times_grid_keys_or_coordinates_exported": false,
+  "no_fitness_or_migration_outcome_model_fitted": true,
+  "no_actual_social_encounter_or_information_use_identified": true,
+  "q_r_or_q_times_r_estimated": false,
+  "not_all_original_stork_GPS_ZIPs_inspected": true,
+  "no_ebird": true,
+  "claim_limit": "Post-open conditional source diagnostic only. Triplets within a 1-hour/degree-cell prefilter are not all encounters, independent birds, sensory contact, predictive cue reliability or evidence for information×recourse.",
+  "postopen_diagnostic_contract_sha256": "e0fe47eaa17cff6863da4a5f12777f25f9fc2a44f699de697c0b672a3ae726c8",
+  "preexisting_coarse_result_sha256": "5a8b210792ebb0538866b994268053422727502cdbad12fa79613ba479ea388e",
+  "original_paper_doi": "10.1098/rspb.2023.1268",
+  "source_execution": {
+    "actions_run": 45377967656,
+    "source_job": 138389176773,
+    "derived_only_artifact_id": 14911574172,
+    "derived_only_zip_sha256": "a0edc2b5b61fdf572723d61f8c9b68ce111640dd2888726bbe5bab85b775b262",
+    "full_raw_data_committed": false
+  }
+}
