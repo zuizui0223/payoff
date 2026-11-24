@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-24",
+  "stage": "POST_OPEN_AFTER_PR422_COARSE_SOURCE_RESULT_BEFORE_ANY_FINE_TIME_DISTANCE_COMPARISONS",
+  "question": "Among previously identified exact common UTC-hour×coarse-grid keys across three original CC0 stork GPS cohorts, do source event fixes contain one fix per cohort within a strict time window and metric spatial radius?",
+  "baseline": {
+    "source": "Bontekoe et al 2023, Proc B DOI 10.1098/rspb.2023.1268",
+    "parent_pr": 422,
+    "original_source_ZIPs": "exact same SHA/MD5-authenticated smallest original public CC0 GPS ZIP per cohort as PR421 and PR422 (control 289189615, delayed 297340370, naturally timed 311814202 bytes)",
+    "original_main_rows": [
+      8621096,
+      9136163,
+      9266108
+    ],
+    "original_valid_rows": [
+      8618285,
+      9134547,
+      9264443
+    ],
+    "fixed_candidate_gate": "Only exact triple-overlap coarse cell-hour keys already found in PR422; 11 at 0.1° and 16 at 0.2°, all 2020.",
+    "original_coarse_receipt": "data/payoff_b_stork_original_gps_coarse_hour_cell_result_20261124.json",
+    "original_coarse_contract": "data/payoff_b_stork_original_gps_hour_cell_contract_20261124.json"
+  },
+  "estimands": [
+    {
+      "id": "strict",
+      "coarse_cell_width_degrees": 0.1,
+      "utc_coarse_hour": true,
+      "max_three_fix_time_span_seconds": 300,
+      "max_three_pairwise_haversine_metres": 1000
+    },
+    {
+      "id": "sensitivity",
+      "coarse_cell_width_degrees": 0.2,
+      "utc_coarse_hour": true,
+      "max_three_fix_time_span_seconds": 900,
+      "max_three_pairwise_haversine_metres": 5000
+    }
+  ],
+  "measurement_unit": "One original source hour×coarse cell key that supports at least one triplet of GPS event fixes, one fix from each of the three cohorts, with max UTC time span and max of three great-circle pairwise distances below thresholds. This is NOT a confirmed flock, physical contact, or actual exposure; source cohort labels do not ensure distinct animals.",
+  "time_definition": "Use original Movebank GPS timestamp parsed as UTC (naive timestamp treated as UTC as in parent frozen source). Full UTC timestamp precision retained internally; no time-of-day in output.",
+  "distance_definition": "Haversine sphere Earth radius=6371008.8m; exact fix pair distances calculated internally, no coordinates or actual matched events exported.",
+  "method": "Source run first verifies original full ZIP MD5, main-member CRC/EOF and all PR421+PR422 raw/valid/day/hour-grid counts, computes original triple coarse keys. Only after those checks, reread each original ZIP main member from a temporary private local file to retrieve EVENT FIXES FOR THOSE FROZEN CANDIDATE COARSE KEYS ONLY. Never search neighboring coarse cells, compare different UTC hours, or reinterpret zero candidates as zero natural encounters. A second pass is deliberately conditioned on the previous coarse positive source support and is exploratory.",
+  "candidate_expected_counts": {
+    "0p1_degree": 11,
+    "0p2_degree": 16
+  },
+  "candidate_expected_year": 2020,
+  "source_output": "Totals: 11/16 original candidate coarse keys; candidate keys containing at least one 3-source strict fix triplet, per fixed threshold; number of candidates without required three cohort fixes; source event cap checks. No keys, coordinates, raw times, tags, source rows, animal IDs, pairwise distances, or match-level records.",
+  "privacy": {
+    "max_stored_candidate_event_fixes_per_cohort": 50000,
+    "max_fixes_per_candidate_key_per_cohort": 10000,
+    "no_source_event_rows_export": true,
+    "no_gps_files_committed": true,
+    "no_original_identifier_string_in_result": true,
+    "no_match_hour_cell_dates_export": true,
+    "no_event_ids_or_exact_times_in_result": true,
+    "no_raw_coords_or_grid_ids_in_result": true
+  },
+  "fail_closed": [
+    "source raw row/valid row/day counts drift",
+    "PR422 triple key count or year differs",
+    "original full ZIP source MD5 invalid",
+    "source main member CRC invalid",
+    "event-count cap exceeded",
+    "unexpected row schema or malformed required field"
+  ],
+  "negative_claim_boundary": "No positive or negative claim about social interactions in the broader study. Equal coarse bins and even <1km/<5min fixes are not necessarily visually exposed birds. Cross-cohort tag reuse and missing deployment IDs prevent assuming 3 separate animals. This is not an independent q or r measurement, not a payoff model, and is POSTOPEN source-conditional diagnostic.",
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "no_biological_causal_model": true
+}

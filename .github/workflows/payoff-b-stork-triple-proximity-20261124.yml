@@ -1,0 +1,60 @@
+name: PAYOFF-B stork original CC0 triple candidate proximity gate (post-open)
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-stork-triple-proximity-gate-20261124
+    paths:
+      - ".github/workflows/payoff-b-stork-triple-proximity-20261124.yml"
+      - "scripts/payoff_b_stork_triple_coarse_candidate_proximity_20261124.py"
+      - "tests/test_payoff_b_stork_triple_coarse_candidate_proximity_20261124.py"
+      - "data/payoff_b_stork_triple_proximity_contract_20261124.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-gps-coarse-conditioned-fix-proximity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install synthetic-only test runner
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Validate 3-fix time span, metric radius, postopen gate and no privacy leakage
+        run: pytest -q -rs tests/test_payoff_b_stork_triple_coarse_candidate_proximity_20261124.py
+      - name: Independently authenticate 3 CC0 GPS sources and evaluate only frozen coarse triple source candidates
+        run: |
+          python scripts/payoff_b_stork_triple_coarse_candidate_proximity_20261124.py \
+            --contract data/payoff_b_stork_triple_proximity_contract_20261124.json \
+            --output outputs/payoff_b_stork_triple_candidate_proximity_source_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path("outputs/payoff_b_stork_triple_candidate_proximity_source_20261124.json").read_text())
+          assert x["status"]=="POSTOPEN_COARSE_CONDITIONED_THREE_SOURCE_FIX_PROXIMITY_DIAGNOSTIC"
+          assert x["candidate_coarse_hour_cell_sources"]=={"0p1_degree":11,"0p2_degree":16}
+          assert x["all_candidate_keys_previously_observed_in_year"]==2020
+          assert x["n_original_source_ZIPs_validated"]==3
+          assert x["reanalysed_original_event_records_across_three_cohorts"]==27023367
+          assert x["all_original_GPS_files_removed_after_ephemeral_processing"] is True
+          assert x["source_bird_tags_event_times_grid_keys_or_coordinates_exported"] is False
+          assert x["no_actual_social_encounter_or_information_use_identified"] is True
+          assert x["q_r_or_q_times_r_estimated"] is False
+          assert x["not_all_original_stork_GPS_ZIPs_inspected"] is True
+          assert x["no_ebird"] is True
+          for v in x["fixed_exploratory_time_distance_gates"]:
+            assert v["n_original_source_archive_MD5_and_CRC_reverified"]==3
+            assert v["GPS_records_or_source_coordinates_exported"] is False
+            assert 0<=v["n_keys_with_at_least_one_three_cohort_fix_triplet"]<=v["original_coarse_candidate_source_keys"]
+          print("GPS_FINE_SOURCE_PROXIMITY_COUNTS_VERIFIED",[(v["id"],v["n_keys_with_at_least_one_three_cohort_fix_triplet"]) for v in x["fixed_exploratory_time_distance_gates"]])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-three-source-fix-proximity-aggregate-only-20261124
+          path: outputs/payoff_b_stork_triple_candidate_proximity_source_20261124.json
+          if-no-files-found: error
