@@ -34,7 +34,7 @@ def parse_env_rows(csv_text):
         group=str(item["flyway"] or "").strip().lower()
         transition=str(item["transition"] or "").strip()
         year=int(item["year"])
-        if not group or not transition or year<1982 or year>2013:
+        if not group or not transition or year<1982 or year>2011:
             raise ValueError("Unexpected historical climate cohort/time field")
         key=(group,transition,year)
         if key in observed:
@@ -143,7 +143,7 @@ def main():
     if args.source_csv is None:
         result={
           "status":"V7_HISTORICAL_Q_SOURCE_NOT_MATERIALIZED",
-          "original_historical_source":"Kölzsch 2015 original 1982-2013 stopover region spring onset series",
+          "original_historical_source":"Kölzsch 2015 original 1982–2011 stopover region spring onset series",
           "reason":"No authenticated region-transition/year environmental source table was supplied. No q value or new biology is invented.",
           "no_bird_GPS_or_migration_outcome_opened":True,
           "no_original_V7_contract_changed":True,
