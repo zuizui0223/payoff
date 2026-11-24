@@ -59,5 +59,36 @@
   "no_ebird": true,
   "no_tinyfish": true,
   "individual_GPS_or_focal_bird_timing_opened": false,
-  "cannot_overwrite_prior_contract_or_frozen_submission": true
+  "cannot_overwrite_prior_contract_or_frozen_submission": true,
+  "original_published_support": {
+    "years": [
+      1982,
+      2011
+    ],
+    "supplementary": "Kölzsch et al 2015 S2–S7 supply annual GDD-jerk spring-onset anomalies for source-target stopover-region pairs, while S1 supplies region reference mean and SD.",
+    "permitted_source_formats": [
+      "doy",
+      "anomaly"
+    ],
+    "strict_column_schema": {
+      "doy": [
+        "flyway",
+        "transition",
+        "year",
+        "source_spring_onset_doy",
+        "target_spring_onset_doy"
+      ],
+      "anomaly": [
+        "flyway",
+        "transition",
+        "year",
+        "source_onset_anomaly_days",
+        "target_onset_anomaly_days"
+      ]
+    },
+    "representational_invariance": "Pearson correlation and ordinary-least-squares destination forecast squared errors relative to a past destination-mean benchmark are invariant when constant site-specific full-window means are subtracted from source/target onset dates. However the original fully normalized anomalies cannot by themselves reconstruct individual arrival minus absolute spring DOY.",
+    "require_unaltered_source_annual_pair_units": true,
+    "do_not_mix_source_units": true,
+    "do_not_claim_focal_bird_exposure_from_anomaly": true
+  }
 }
