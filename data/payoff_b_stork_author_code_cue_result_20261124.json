@@ -1,0 +1,171 @@
+{
+  "status": "AUTHOR_CODE_DIRECT_SOCIAL_CUE_EXPOSURE_NOT_FOUND",
+  "date": "2026-11-24",
+  "original_author_repo": "IrisDB/Delayed_migration_white_stork",
+  "original_article_doi": "10.1098/rspb.2023.1268",
+  "exact_file_count": 6,
+  "n_original_code_cells": 560,
+  "files": {
+    "1_PrepareData_Python.ipynb": {
+      "git_blob_sha1": "164ce5602add5c4292214d1ca541b38b234bc87e",
+      "notebook_code_cell_count": 231,
+      "explicit_social_cue_terms_in_code_cells": {
+        "flock": 0,
+        "social_information": 0,
+        "conspecific": 0,
+        "neighbor_proximity": 0,
+        "social_group_size": 0
+      },
+      "already_published_behavioral_variables": {
+        "cohort": 69,
+        "wind": 5,
+        "movement_speed": 10,
+        "survival_or_death": 14,
+        "stopover": 0,
+        "temperature": 94,
+        "date_time": 53
+      },
+      "original_source_code_executed": false,
+      "original_data_files_opened": false
+    },
+    "2_Analyses_R.ipynb": {
+      "git_blob_sha1": "ccd38350b918b4e21de0a4b8c2935771ee006779",
+      "notebook_code_cell_count": 204,
+      "explicit_social_cue_terms_in_code_cells": {
+        "flock": 0,
+        "social_information": 0,
+        "conspecific": 0,
+        "neighbor_proximity": 0,
+        "social_group_size": 0
+      },
+      "already_published_behavioral_variables": {
+        "cohort": 99,
+        "wind": 6,
+        "movement_speed": 8,
+        "survival_or_death": 1,
+        "stopover": 3,
+        "temperature": 4,
+        "date_time": 17
+      },
+      "original_source_code_executed": false,
+      "original_data_files_opened": false
+    },
+    "3a_Figures_Python.ipynb": {
+      "git_blob_sha1": "5ed2d98c6ed18e8befc4b11deb822b363a15e8b2",
+      "notebook_code_cell_count": 25,
+      "explicit_social_cue_terms_in_code_cells": {
+        "flock": 0,
+        "social_information": 0,
+        "conspecific": 0,
+        "neighbor_proximity": 0,
+        "social_group_size": 0
+      },
+      "already_published_behavioral_variables": {
+        "cohort": 7,
+        "wind": 4,
+        "movement_speed": 4,
+        "survival_or_death": 0,
+        "stopover": 0,
+        "temperature": 5,
+        "date_time": 5
+      },
+      "original_source_code_executed": false,
+      "original_data_files_opened": false
+    },
+    "3b_Figures_R.ipynb": {
+      "git_blob_sha1": "79b723bfe7f18630b878444c70f30650ed351541",
+      "notebook_code_cell_count": 38,
+      "explicit_social_cue_terms_in_code_cells": {
+        "flock": 0,
+        "social_information": 0,
+        "conspecific": 0,
+        "neighbor_proximity": 0,
+        "social_group_size": 0
+      },
+      "already_published_behavioral_variables": {
+        "cohort": 10,
+        "wind": 0,
+        "movement_speed": 2,
+        "survival_or_death": 2,
+        "stopover": 0,
+        "temperature": 1,
+        "date_time": 1
+      },
+      "original_source_code_executed": false,
+      "original_data_files_opened": false
+    },
+    "4a_SupplementaryMaterial_R.ipynb": {
+      "git_blob_sha1": "35341d4c575da4b48d0c02a6c4bb9d8e853a580f",
+      "notebook_code_cell_count": 49,
+      "explicit_social_cue_terms_in_code_cells": {
+        "flock": 0,
+        "social_information": 0,
+        "conspecific": 0,
+        "neighbor_proximity": 0,
+        "social_group_size": 0
+      },
+      "already_published_behavioral_variables": {
+        "cohort": 22,
+        "wind": 0,
+        "movement_speed": 0,
+        "survival_or_death": 0,
+        "stopover": 0,
+        "temperature": 5,
+        "date_time": 17
+      },
+      "original_source_code_executed": false,
+      "original_data_files_opened": false
+    },
+    "4b_SupplementaryMaterial_Python.ipynb": {
+      "git_blob_sha1": "c7cdb90ccc46a6166b8f0bd9cc1c30d4a34c3610",
+      "notebook_code_cell_count": 13,
+      "explicit_social_cue_terms_in_code_cells": {
+        "flock": 0,
+        "social_information": 0,
+        "conspecific": 0,
+        "neighbor_proximity": 0,
+        "social_group_size": 0
+      },
+      "already_published_behavioral_variables": {
+        "cohort": 0,
+        "wind": 6,
+        "movement_speed": 0,
+        "survival_or_death": 0,
+        "stopover": 0,
+        "temperature": 2,
+        "date_time": 1
+      },
+      "original_source_code_executed": false,
+      "original_data_files_opened": false
+    }
+  },
+  "explicit_social_cue_term_code_cell_counts": {
+    "flock": 0,
+    "social_information": 0,
+    "conspecific": 0,
+    "neighbor_proximity": 0,
+    "social_group_size": 0
+  },
+  "already_published_variable_code_cell_counts": {
+    "cohort": 207,
+    "wind": 21,
+    "movement_speed": 24,
+    "survival_or_death": 17,
+    "stopover": 3,
+    "temperature": 111,
+    "date_time": 94
+  },
+  "source_code_measured_actual_flock_size_or_information_exposure": false,
+  "does_not_rule_out_unpublished_social_data_or_unmeasured_actual_exposure": true,
+  "evidence_boundary": "Absence of a coded variable in these six original notebooks does not prove birds lacked social information, only that direct quantified cue exposure is not evidenced by these source analyses.",
+  "source_code_executed": false,
+  "tracking_or_individual_data_accessed": false,
+  "no_ebird": true,
+  "experimental_fitness_result_reestimated": false,
+  "receipt": {
+    "actions_run": 45331140693,
+    "source_job": 138232380351,
+    "artifact_id": 14892311152,
+    "aggregate_zip_digest_sha256": "600d9dcbfc2545baf002b802ad5bd87e80810ed5e77d9310b1ba48519cdc9560"
+  }
+}
