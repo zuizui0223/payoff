@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-24",
+  "analysis_class": "INDEPENDENT_SOURCE_DISCOVERY_BEFORE_NEW_EMPIRICAL_MODEL",
+  "purpose": "Screen original published experimental white-stork data and code access, distinct from repeated Adams radar retrospective summaries, before selecting a new PAYOFF-B cue/recourse test",
+  "earlier_sources": {
+    "white_stork": "Bontekoe et al. (2023), The price of being late: short- and long-term consequences of a delayed migration timing, Proceedings B DOI 10.1098/rspb.2023.1268",
+    "payoff_v4_prior_art": "docs/PAYOFF_B_V4_DIRECT_FITNESS_RESCUE_SCREEN_20261003.md already identifies causal delay, increased speed, changed wintering and survival as published results; neither novel correction discovery nor natural D_eff",
+    "greater_snow_goose": "Registered in PAYOFF-B as Movebank study 1442516400; authenticated metadata gate was CREDENTIALS_NOT_CONFIGURED (2026-10-01); don't download without owner permission"
+  },
+  "source_dois": {
+    "zenodo_code": "10.5281/zenodo.8108611",
+    "data_1": "10.5441/001/1.271",
+    "data_2": "10.5441/001/1.276",
+    "data_3": "10.5441/001/1.277"
+  },
+  "source_endpoints": {
+    "zenodo_api": "https://zenodo.org/api/records/8108611",
+    "datacite_api_prefix": "https://api.datacite.org/dois/",
+    "movebank_archival_portal": "https://datarepository.movebank.org/"
+  },
+  "source_governance": {
+    "check_only_public_metadata": true,
+    "do_not_download_tracking_data": true,
+    "do_not_download_personal_information": true,
+    "do_not_accept_movebank_license_terms": true,
+    "do_not_request_movebank_event_or_deployment_records": true,
+    "do_not_use_ebird": true,
+    "do_not_use_tinyfish": true
+  },
+  "admission_tests": {
+    "zenodo_metadata_reachable": true,
+    "bontekoe_code_files_manifest_available": true,
+    "three_movebank_archival_dois_resolve_to_2023_white_stork_cohorts": true,
+    "must_have_group_assignment": "naturally timed / handling control / delayed release",
+    "must_have_predecision_cue_measure": "raw staged information received or independent source-time context, not weather/hindsight at destination",
+    "must_have_action_measure": "decision-specific stopover, departure, route or route switching",
+    "must_have_outcome_measure": "same-cohort/individual wintering strategy or survival",
+    "existing_published_results_cannot_be_new": "survival difference, shorter stopovers, faster speeds, closer wintering"
+  },
+  "no_result_fitting": true,
+  "evaluation_rule": "Classify each metadata gate as VERIFIED, NOT_VERIFIED, or BLOCKED. Metadata being visible never proves authorized tracking-data access. Do not call original result a new causal information-value test unless the source materially provides an independent predecision cue and decision-linked consequences.",
+  "output": "Authenticated public DOI metadata and Zenodo original code manifest only, with access barriers; no original GPS rows or code archive contents committed",
+  "frozen_main_and_pr417_untouched": true
+}
