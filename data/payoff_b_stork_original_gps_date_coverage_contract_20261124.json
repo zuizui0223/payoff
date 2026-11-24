@@ -40,7 +40,8 @@
     "no_user_credentials": true,
     "no_automatic_license_acceptance": true,
     "no_ebird": true,
-    "no_tinyfish": true
+    "no_tinyfish": true,
+    "source_archive_no_more_than_one_per_cohort": true
   },
   "required_columns": [
     "event-id",
@@ -52,7 +53,7 @@
     "tag-local-identifier",
     "individual-local-identifier"
   ],
-  "time_rule": "Parse timestamp as ISO8601 with timezone, accept explicit Z and ±offset; if no offset, treat naive string as UTC only because original Movebank event timestamp specification is UTC, and declare it. Reject nonparseable; do not infer from other columns.",
+  "time_rule": "Parse timestamp as ISO8601 with timezone, accept explicit Z and ±offset; if no offset, treat naive string as UTC only because original Movebank event timestamp specification is UTC, and declare it. Reject nonparseable; do not infer from other columns. Dates after 2026-11-24 are counted as future-source anomalies, not classified as observed events.",
   "spatial_quality": "A valid georeferenced event requires parseable UTC date, numeric finite latitude between -90 and 90 and longitude between -180 and 180, and nonempty tag-local-identifier. This is source data-support validity only, not GPS movement accuracy or biological location fidelity.",
   "sampling": "Read EVERY CSV event row in exactly the selected main ZIP member (largest .csv of the expected 1 or 2 member ZIP). Do not cherry-pick days, tags or outcomes. The other 176-byte member in control and delayed is NOT treated as GPS events.",
   "output_only_aggregate": [
@@ -78,5 +79,6 @@
     "No ecological q, r or q×r model, no survival or movement effect fitting, and no results from Bontekoe 2023 relabeled novel",
     "Any absent dates in the one selected ZIP do not mean no cohort tracking; other GPS ZIPs not scanned",
     "GPS timestamp date-only UTC cannot establish exact simultaneous proximity or same geographical opportunity"
-  ]
+  ],
+  "reference_day": "2026-11-24"
 }
