@@ -1,0 +1,4402 @@
+{
+  "cohort": "delayed",
+  "n_original_main_member_GPS_CSV_rows": 9136163,
+  "n_valid_georeferenced_event_rows": 9134547,
+  "n_unusable_timestamp_rows": 0,
+  "n_unusable_tag_rows": 0,
+  "n_unusable_coordinate_rows": 1616,
+  "n_valid_coordinate_rows_without_animal_id": 0,
+  "n_distinct_UTC_dates_with_valid_events": 865,
+  "n_UTC_dates_with_at_least_two_distinct_tag_strings": 813,
+  "yearly_aggregate": [
+    {
+      "year": 2019,
+      "n_valid_georeferenced_events": 1637543,
+      "n_distinct_observed_tag_strings": 5,
+      "n_distinct_observed_animal_strings": 5,
+      "n_UTC_dates_with_georeferenced_events": 184,
+      "n_UTC_dates_with_at_least_two_tag_strings": 184,
+      "observed_visible_source_counts": {
+        "visible_true": 1637543
+      }
+    },
+    {
+      "year": 2020,
+      "n_valid_georeferenced_events": 5836073,
+      "n_distinct_observed_tag_strings": 11,
+      "n_distinct_observed_animal_strings": 11,
+      "n_UTC_dates_with_georeferenced_events": 366,
+      "n_UTC_dates_with_at_least_two_tag_strings": 366,
+      "observed_visible_source_counts": {
+        "visible_true": 5836073
+      }
+    },
+    {
+      "year": 2021,
+      "n_valid_georeferenced_events": 1660931,
+      "n_distinct_observed_tag_strings": 4,
+      "n_distinct_observed_animal_strings": 4,
+      "n_UTC_dates_with_georeferenced_events": 315,
+      "n_UTC_dates_with_at_least_two_tag_strings": 263,
+      "observed_visible_source_counts": {
+        "visible_true": 1660931
+      }
+    }
+  ],
+  "daily_aggregate_only": [
+    {
+      "UTC_date": "2019-07-01",
+      "n_valid_georeferenced_event_rows": 19,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-02",
+      "n_valid_georeferenced_event_rows": 34,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-03",
+      "n_valid_georeferenced_event_rows": 21,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-04",
+      "n_valid_georeferenced_event_rows": 29,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-05",
+      "n_valid_georeferenced_event_rows": 27,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-06",
+      "n_valid_georeferenced_event_rows": 19,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-07",
+      "n_valid_georeferenced_event_rows": 22,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-08",
+      "n_valid_georeferenced_event_rows": 28,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-09",
+      "n_valid_georeferenced_event_rows": 31,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-10",
+      "n_valid_georeferenced_event_rows": 16,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-11",
+      "n_valid_georeferenced_event_rows": 21,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-12",
+      "n_valid_georeferenced_event_rows": 22,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-13",
+      "n_valid_georeferenced_event_rows": 17,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-14",
+      "n_valid_georeferenced_event_rows": 19,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-15",
+      "n_valid_georeferenced_event_rows": 22,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-16",
+      "n_valid_georeferenced_event_rows": 24,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-17",
+      "n_valid_georeferenced_event_rows": 29,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-18",
+      "n_valid_georeferenced_event_rows": 16,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-19",
+      "n_valid_georeferenced_event_rows": 20,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-20",
+      "n_valid_georeferenced_event_rows": 18,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-21",
+      "n_valid_georeferenced_event_rows": 19,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-22",
+      "n_valid_georeferenced_event_rows": 26,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-23",
+      "n_valid_georeferenced_event_rows": 20,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-24",
+      "n_valid_georeferenced_event_rows": 17,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-25",
+      "n_valid_georeferenced_event_rows": 20,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-26",
+      "n_valid_georeferenced_event_rows": 25,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-27",
+      "n_valid_georeferenced_event_rows": 17,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-28",
+      "n_valid_georeferenced_event_rows": 15,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-29",
+      "n_valid_georeferenced_event_rows": 15,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-30",
+      "n_valid_georeferenced_event_rows": 16,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-07-31",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-01",
+      "n_valid_georeferenced_event_rows": 17,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-02",
+      "n_valid_georeferenced_event_rows": 14,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-03",
+      "n_valid_georeferenced_event_rows": 15,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-04",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-05",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-06",
+      "n_valid_georeferenced_event_rows": 14,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-07",
+      "n_valid_georeferenced_event_rows": 8,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-08",
+      "n_valid_georeferenced_event_rows": 12,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-09",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-10",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-11",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-12",
+      "n_valid_georeferenced_event_rows": 15,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-13",
+      "n_valid_georeferenced_event_rows": 10,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-14",
+      "n_valid_georeferenced_event_rows": 17,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-15",
+      "n_valid_georeferenced_event_rows": 17,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-16",
+      "n_valid_georeferenced_event_rows": 15,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-17",
+      "n_valid_georeferenced_event_rows": 12,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-18",
+      "n_valid_georeferenced_event_rows": 17,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-19",
+      "n_valid_georeferenced_event_rows": 12,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-20",
+      "n_valid_georeferenced_event_rows": 11,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-21",
+      "n_valid_georeferenced_event_rows": 15,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-22",
+      "n_valid_georeferenced_event_rows": 10,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-23",
+      "n_valid_georeferenced_event_rows": 12,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-24",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-25",
+      "n_valid_georeferenced_event_rows": 15,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-26",
+      "n_valid_georeferenced_event_rows": 14,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-27",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-28",
+      "n_valid_georeferenced_event_rows": 9,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2019-08-29",
+      "n_valid_georeferenced_event_rows": 12,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-30",
+      "n_valid_georeferenced_event_rows": 11,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-08-31",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-01",
+      "n_valid_georeferenced_event_rows": 14,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-02",
+      "n_valid_georeferenced_event_rows": 11,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-03",
+      "n_valid_georeferenced_event_rows": 12,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-04",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2019-09-05",
+      "n_valid_georeferenced_event_rows": 12,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-06",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-07",
+      "n_valid_georeferenced_event_rows": 10,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-08",
+      "n_valid_georeferenced_event_rows": 9,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-09",
+      "n_valid_georeferenced_event_rows": 8,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-10",
+      "n_valid_georeferenced_event_rows": 12,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-11",
+      "n_valid_georeferenced_event_rows": 13,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-12",
+      "n_valid_georeferenced_event_rows": 16,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-13",
+      "n_valid_georeferenced_event_rows": 12238,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-14",
+      "n_valid_georeferenced_event_rows": 11200,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-15",
+      "n_valid_georeferenced_event_rows": 11191,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-16",
+      "n_valid_georeferenced_event_rows": 18391,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-17",
+      "n_valid_georeferenced_event_rows": 55788,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-18",
+      "n_valid_georeferenced_event_rows": 93985,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-19",
+      "n_valid_georeferenced_event_rows": 61317,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-20",
+      "n_valid_georeferenced_event_rows": 57552,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-21",
+      "n_valid_georeferenced_event_rows": 12992,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-22",
+      "n_valid_georeferenced_event_rows": 23941,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-23",
+      "n_valid_georeferenced_event_rows": 74207,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-24",
+      "n_valid_georeferenced_event_rows": 59243,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-25",
+      "n_valid_georeferenced_event_rows": 44738,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-26",
+      "n_valid_georeferenced_event_rows": 28578,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-27",
+      "n_valid_georeferenced_event_rows": 20176,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-28",
+      "n_valid_georeferenced_event_rows": 14781,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-29",
+      "n_valid_georeferenced_event_rows": 32161,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-09-30",
+      "n_valid_georeferenced_event_rows": 23173,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-01",
+      "n_valid_georeferenced_event_rows": 21382,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-02",
+      "n_valid_georeferenced_event_rows": 17189,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-03",
+      "n_valid_georeferenced_event_rows": 19588,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-04",
+      "n_valid_georeferenced_event_rows": 9397,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-05",
+      "n_valid_georeferenced_event_rows": 12394,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-06",
+      "n_valid_georeferenced_event_rows": 21374,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-07",
+      "n_valid_georeferenced_event_rows": 15992,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-08",
+      "n_valid_georeferenced_event_rows": 8802,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-09",
+      "n_valid_georeferenced_event_rows": 18981,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-10",
+      "n_valid_georeferenced_event_rows": 13584,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-11",
+      "n_valid_georeferenced_event_rows": 9400,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-12",
+      "n_valid_georeferenced_event_rows": 24975,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-13",
+      "n_valid_georeferenced_event_rows": 18991,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-14",
+      "n_valid_georeferenced_event_rows": 13591,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-15",
+      "n_valid_georeferenced_event_rows": 15403,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-16",
+      "n_valid_georeferenced_event_rows": 12983,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-17",
+      "n_valid_georeferenced_event_rows": 16001,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-18",
+      "n_valid_georeferenced_event_rows": 6398,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-19",
+      "n_valid_georeferenced_event_rows": 15391,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-20",
+      "n_valid_georeferenced_event_rows": 17790,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-21",
+      "n_valid_georeferenced_event_rows": 7013,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-22",
+      "n_valid_georeferenced_event_rows": 9998,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-23",
+      "n_valid_georeferenced_event_rows": 11193,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-24",
+      "n_valid_georeferenced_event_rows": 14788,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-25",
+      "n_valid_georeferenced_event_rows": 15984,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-26",
+      "n_valid_georeferenced_event_rows": 12390,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-27",
+      "n_valid_georeferenced_event_rows": 7614,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-28",
+      "n_valid_georeferenced_event_rows": 6408,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-29",
+      "n_valid_georeferenced_event_rows": 5811,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-30",
+      "n_valid_georeferenced_event_rows": 5209,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-10-31",
+      "n_valid_georeferenced_event_rows": 11793,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-01",
+      "n_valid_georeferenced_event_rows": 6411,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-02",
+      "n_valid_georeferenced_event_rows": 14787,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-03",
+      "n_valid_georeferenced_event_rows": 11206,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-04",
+      "n_valid_georeferenced_event_rows": 13593,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-05",
+      "n_valid_georeferenced_event_rows": 10592,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-06",
+      "n_valid_georeferenced_event_rows": 10603,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-07",
+      "n_valid_georeferenced_event_rows": 9999,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-08",
+      "n_valid_georeferenced_event_rows": 9998,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-09",
+      "n_valid_georeferenced_event_rows": 13005,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-10",
+      "n_valid_georeferenced_event_rows": 17785,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-11",
+      "n_valid_georeferenced_event_rows": 12392,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-12",
+      "n_valid_georeferenced_event_rows": 13594,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-13",
+      "n_valid_georeferenced_event_rows": 7012,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-14",
+      "n_valid_georeferenced_event_rows": 10597,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-15",
+      "n_valid_georeferenced_event_rows": 12395,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-16",
+      "n_valid_georeferenced_event_rows": 11198,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-17",
+      "n_valid_georeferenced_event_rows": 18988,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-18",
+      "n_valid_georeferenced_event_rows": 12991,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-19",
+      "n_valid_georeferenced_event_rows": 9406,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-20",
+      "n_valid_georeferenced_event_rows": 8210,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-21",
+      "n_valid_georeferenced_event_rows": 6402,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-22",
+      "n_valid_georeferenced_event_rows": 8804,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-23",
+      "n_valid_georeferenced_event_rows": 14186,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-24",
+      "n_valid_georeferenced_event_rows": 13595,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-25",
+      "n_valid_georeferenced_event_rows": 8209,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-26",
+      "n_valid_georeferenced_event_rows": 4022,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-27",
+      "n_valid_georeferenced_event_rows": 5820,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-28",
+      "n_valid_georeferenced_event_rows": 11213,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-29",
+      "n_valid_georeferenced_event_rows": 6401,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-11-30",
+      "n_valid_georeferenced_event_rows": 8208,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-01",
+      "n_valid_georeferenced_event_rows": 9407,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-02",
+      "n_valid_georeferenced_event_rows": 12992,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-03",
+      "n_valid_georeferenced_event_rows": 8811,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-04",
+      "n_valid_georeferenced_event_rows": 9402,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-05",
+      "n_valid_georeferenced_event_rows": 5816,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-06",
+      "n_valid_georeferenced_event_rows": 11196,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-07",
+      "n_valid_georeferenced_event_rows": 4602,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-08",
+      "n_valid_georeferenced_event_rows": 4610,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-09",
+      "n_valid_georeferenced_event_rows": 9996,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-10",
+      "n_valid_georeferenced_event_rows": 8798,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-11",
+      "n_valid_georeferenced_event_rows": 6993,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-12",
+      "n_valid_georeferenced_event_rows": 5797,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-13",
+      "n_valid_georeferenced_event_rows": 8198,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-14",
+      "n_valid_georeferenced_event_rows": 8200,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-15",
+      "n_valid_georeferenced_event_rows": 8200,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-16",
+      "n_valid_georeferenced_event_rows": 10593,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-17",
+      "n_valid_georeferenced_event_rows": 8201,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-18",
+      "n_valid_georeferenced_event_rows": 10594,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-19",
+      "n_valid_georeferenced_event_rows": 8200,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-20",
+      "n_valid_georeferenced_event_rows": 7001,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-21",
+      "n_valid_georeferenced_event_rows": 4597,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-22",
+      "n_valid_georeferenced_event_rows": 9399,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-23",
+      "n_valid_georeferenced_event_rows": 10594,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-24",
+      "n_valid_georeferenced_event_rows": 7599,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-25",
+      "n_valid_georeferenced_event_rows": 5814,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-26",
+      "n_valid_georeferenced_event_rows": 6397,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-27",
+      "n_valid_georeferenced_event_rows": 6417,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-28",
+      "n_valid_georeferenced_event_rows": 9395,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-29",
+      "n_valid_georeferenced_event_rows": 4979,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-30",
+      "n_valid_georeferenced_event_rows": 3259,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2019-12-31",
+      "n_valid_georeferenced_event_rows": 5197,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-01",
+      "n_valid_georeferenced_event_rows": 4595,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-02",
+      "n_valid_georeferenced_event_rows": 1602,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-03",
+      "n_valid_georeferenced_event_rows": 1001,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-04",
+      "n_valid_georeferenced_event_rows": 1604,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-05",
+      "n_valid_georeferenced_event_rows": 8191,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-06",
+      "n_valid_georeferenced_event_rows": 4000,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-07",
+      "n_valid_georeferenced_event_rows": 2800,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-08",
+      "n_valid_georeferenced_event_rows": 5197,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-09",
+      "n_valid_georeferenced_event_rows": 2806,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-10",
+      "n_valid_georeferenced_event_rows": 7002,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-11",
+      "n_valid_georeferenced_event_rows": 8794,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-12",
+      "n_valid_georeferenced_event_rows": 7011,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-13",
+      "n_valid_georeferenced_event_rows": 4599,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-14",
+      "n_valid_georeferenced_event_rows": 6401,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-15",
+      "n_valid_georeferenced_event_rows": 8192,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-16",
+      "n_valid_georeferenced_event_rows": 8803,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-17",
+      "n_valid_georeferenced_event_rows": 5204,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-18",
+      "n_valid_georeferenced_event_rows": 7599,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-19",
+      "n_valid_georeferenced_event_rows": 5799,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-20",
+      "n_valid_georeferenced_event_rows": 7592,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-21",
+      "n_valid_georeferenced_event_rows": 9392,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-22",
+      "n_valid_georeferenced_event_rows": 5200,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-23",
+      "n_valid_georeferenced_event_rows": 5209,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-24",
+      "n_valid_georeferenced_event_rows": 8211,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-25",
+      "n_valid_georeferenced_event_rows": 6389,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-26",
+      "n_valid_georeferenced_event_rows": 8199,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-27",
+      "n_valid_georeferenced_event_rows": 5812,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-28",
+      "n_valid_georeferenced_event_rows": 6987,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-29",
+      "n_valid_georeferenced_event_rows": 24956,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-30",
+      "n_valid_georeferenced_event_rows": 8796,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-01-31",
+      "n_valid_georeferenced_event_rows": 17183,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-01",
+      "n_valid_georeferenced_event_rows": 8196,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-02",
+      "n_valid_georeferenced_event_rows": 14781,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-03",
+      "n_valid_georeferenced_event_rows": 16109,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-04",
+      "n_valid_georeferenced_event_rows": 9997,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-05",
+      "n_valid_georeferenced_event_rows": 8200,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-06",
+      "n_valid_georeferenced_event_rows": 8199,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-07",
+      "n_valid_georeferenced_event_rows": 13585,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-08",
+      "n_valid_georeferenced_event_rows": 15380,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-09",
+      "n_valid_georeferenced_event_rows": 14183,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-10",
+      "n_valid_georeferenced_event_rows": 15398,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-11",
+      "n_valid_georeferenced_event_rows": 14782,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-12",
+      "n_valid_georeferenced_event_rows": 13592,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-13",
+      "n_valid_georeferenced_event_rows": 12349,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-14",
+      "n_valid_georeferenced_event_rows": 12384,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-15",
+      "n_valid_georeferenced_event_rows": 11796,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-16",
+      "n_valid_georeferenced_event_rows": 7000,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-17",
+      "n_valid_georeferenced_event_rows": 9397,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-18",
+      "n_valid_georeferenced_event_rows": 14188,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-19",
+      "n_valid_georeferenced_event_rows": 18386,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-20",
+      "n_valid_georeferenced_event_rows": 12394,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-21",
+      "n_valid_georeferenced_event_rows": 11793,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-22",
+      "n_valid_georeferenced_event_rows": 15390,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-23",
+      "n_valid_georeferenced_event_rows": 17186,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-24",
+      "n_valid_georeferenced_event_rows": 14189,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-25",
+      "n_valid_georeferenced_event_rows": 11796,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-26",
+      "n_valid_georeferenced_event_rows": 12992,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-27",
+      "n_valid_georeferenced_event_rows": 10606,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-28",
+      "n_valid_georeferenced_event_rows": 23171,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-02-29",
+      "n_valid_georeferenced_event_rows": 14911,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-01",
+      "n_valid_georeferenced_event_rows": 24376,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-02",
+      "n_valid_georeferenced_event_rows": 7014,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-03",
+      "n_valid_georeferenced_event_rows": 14787,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-04",
+      "n_valid_georeferenced_event_rows": 15991,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-05",
+      "n_valid_georeferenced_event_rows": 10009,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-06",
+      "n_valid_georeferenced_event_rows": 17191,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-07",
+      "n_valid_georeferenced_event_rows": 20777,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-08",
+      "n_valid_georeferenced_event_rows": 17186,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-09",
+      "n_valid_georeferenced_event_rows": 17169,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-10",
+      "n_valid_georeferenced_event_rows": 11793,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-11",
+      "n_valid_georeferenced_event_rows": 16591,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-12",
+      "n_valid_georeferenced_event_rows": 17777,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-13",
+      "n_valid_georeferenced_event_rows": 15985,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-14",
+      "n_valid_georeferenced_event_rows": 15988,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-15",
+      "n_valid_georeferenced_event_rows": 34076,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-16",
+      "n_valid_georeferenced_event_rows": 18386,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-17",
+      "n_valid_georeferenced_event_rows": 14197,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-18",
+      "n_valid_georeferenced_event_rows": 34073,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-19",
+      "n_valid_georeferenced_event_rows": 29140,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-20",
+      "n_valid_georeferenced_event_rows": 23299,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-21",
+      "n_valid_georeferenced_event_rows": 38461,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-22",
+      "n_valid_georeferenced_event_rows": 37537,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-23",
+      "n_valid_georeferenced_event_rows": 27372,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-24",
+      "n_valid_georeferenced_event_rows": 33950,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-25",
+      "n_valid_georeferenced_event_rows": 24970,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-26",
+      "n_valid_georeferenced_event_rows": 16590,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-27",
+      "n_valid_georeferenced_event_rows": 31569,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-28",
+      "n_valid_georeferenced_event_rows": 33357,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-29",
+      "n_valid_georeferenced_event_rows": 30964,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-30",
+      "n_valid_georeferenced_event_rows": 14789,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-03-31",
+      "n_valid_georeferenced_event_rows": 20170,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-01",
+      "n_valid_georeferenced_event_rows": 23182,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-02",
+      "n_valid_georeferenced_event_rows": 11793,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-03",
+      "n_valid_georeferenced_event_rows": 42944,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-04",
+      "n_valid_georeferenced_event_rows": 54702,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-05",
+      "n_valid_georeferenced_event_rows": 46532,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-06",
+      "n_valid_georeferenced_event_rows": 35747,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-07",
+      "n_valid_georeferenced_event_rows": 30560,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-08",
+      "n_valid_georeferenced_event_rows": 35748,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-09",
+      "n_valid_georeferenced_event_rows": 24953,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-10",
+      "n_valid_georeferenced_event_rows": 29298,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-11",
+      "n_valid_georeferenced_event_rows": 17779,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-12",
+      "n_valid_georeferenced_event_rows": 35308,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-13",
+      "n_valid_georeferenced_event_rows": 35155,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-14",
+      "n_valid_georeferenced_event_rows": 38749,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-15",
+      "n_valid_georeferenced_event_rows": 20935,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-16",
+      "n_valid_georeferenced_event_rows": 23771,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-17",
+      "n_valid_georeferenced_event_rows": 20780,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-18",
+      "n_valid_georeferenced_event_rows": 25567,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-19",
+      "n_valid_georeferenced_event_rows": 24966,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-20",
+      "n_valid_georeferenced_event_rows": 14191,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-21",
+      "n_valid_georeferenced_event_rows": 12412,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-22",
+      "n_valid_georeferenced_event_rows": 26168,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-23",
+      "n_valid_georeferenced_event_rows": 27774,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-24",
+      "n_valid_georeferenced_event_rows": 32755,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-25",
+      "n_valid_georeferenced_event_rows": 11195,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-26",
+      "n_valid_georeferenced_event_rows": 21981,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-27",
+      "n_valid_georeferenced_event_rows": 16584,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-28",
+      "n_valid_georeferenced_event_rows": 5815,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-29",
+      "n_valid_georeferenced_event_rows": 7610,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-04-30",
+      "n_valid_georeferenced_event_rows": 12388,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-01",
+      "n_valid_georeferenced_event_rows": 9400,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-02",
+      "n_valid_georeferenced_event_rows": 28563,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-03",
+      "n_valid_georeferenced_event_rows": 41736,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-04",
+      "n_valid_georeferenced_event_rows": 33355,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-05",
+      "n_valid_georeferenced_event_rows": 21808,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-06",
+      "n_valid_georeferenced_event_rows": 12206,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-07",
+      "n_valid_georeferenced_event_rows": 11798,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-08",
+      "n_valid_georeferenced_event_rows": 10590,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-09",
+      "n_valid_georeferenced_event_rows": 9991,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-10",
+      "n_valid_georeferenced_event_rows": 14191,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-11",
+      "n_valid_georeferenced_event_rows": 8201,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-12",
+      "n_valid_georeferenced_event_rows": 9519,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-13",
+      "n_valid_georeferenced_event_rows": 7007,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-14",
+      "n_valid_georeferenced_event_rows": 9394,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-15",
+      "n_valid_georeferenced_event_rows": 8800,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-16",
+      "n_valid_georeferenced_event_rows": 24528,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-17",
+      "n_valid_georeferenced_event_rows": 35156,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-18",
+      "n_valid_georeferenced_event_rows": 20191,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-19",
+      "n_valid_georeferenced_event_rows": 21390,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-20",
+      "n_valid_georeferenced_event_rows": 20158,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-21",
+      "n_valid_georeferenced_event_rows": 12988,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-22",
+      "n_valid_georeferenced_event_rows": 9406,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-23",
+      "n_valid_georeferenced_event_rows": 11803,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-24",
+      "n_valid_georeferenced_event_rows": 14197,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-25",
+      "n_valid_georeferenced_event_rows": 15209,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-26",
+      "n_valid_georeferenced_event_rows": 16598,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-27",
+      "n_valid_georeferenced_event_rows": 20181,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-28",
+      "n_valid_georeferenced_event_rows": 19578,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-29",
+      "n_valid_georeferenced_event_rows": 19574,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-30",
+      "n_valid_georeferenced_event_rows": 17791,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-05-31",
+      "n_valid_georeferenced_event_rows": 14197,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-06-01",
+      "n_valid_georeferenced_event_rows": 24365,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-06-02",
+      "n_valid_georeferenced_event_rows": 19583,
+      "n_distinct_observed_tag_strings": 6
+    },
+    {
+      "UTC_date": "2020-06-03",
+      "n_valid_georeferenced_event_rows": 24381,
+      "n_distinct_observed_tag_strings": 6
+    },
+    {
+      "UTC_date": "2020-06-04",
+      "n_valid_georeferenced_event_rows": 12395,
+      "n_distinct_observed_tag_strings": 6
+    },
+    {
+      "UTC_date": "2020-06-05",
+      "n_valid_georeferenced_event_rows": 11808,
+      "n_distinct_observed_tag_strings": 6
+    },
+    {
+      "UTC_date": "2020-06-06",
+      "n_valid_georeferenced_event_rows": 21384,
+      "n_distinct_observed_tag_strings": 6
+    },
+    {
+      "UTC_date": "2020-06-07",
+      "n_valid_georeferenced_event_rows": 9399,
+      "n_distinct_observed_tag_strings": 6
+    },
+    {
+      "UTC_date": "2020-06-08",
+      "n_valid_georeferenced_event_rows": 28100,
+      "n_distinct_observed_tag_strings": 8
+    },
+    {
+      "UTC_date": "2020-06-09",
+      "n_valid_georeferenced_event_rows": 16729,
+      "n_distinct_observed_tag_strings": 8
+    },
+    {
+      "UTC_date": "2020-06-10",
+      "n_valid_georeferenced_event_rows": 20195,
+      "n_distinct_observed_tag_strings": 8
+    },
+    {
+      "UTC_date": "2020-06-11",
+      "n_valid_georeferenced_event_rows": 19599,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-06-12",
+      "n_valid_georeferenced_event_rows": 20784,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-06-13",
+      "n_valid_georeferenced_event_rows": 22592,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-06-14",
+      "n_valid_georeferenced_event_rows": 12427,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-06-15",
+      "n_valid_georeferenced_event_rows": 15412,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-06-16",
+      "n_valid_georeferenced_event_rows": 10026,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-06-17",
+      "n_valid_georeferenced_event_rows": 8831,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-06-18",
+      "n_valid_georeferenced_event_rows": 36977,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-06-19",
+      "n_valid_georeferenced_event_rows": 10027,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-06-20",
+      "n_valid_georeferenced_event_rows": 17228,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-21",
+      "n_valid_georeferenced_event_rows": 25606,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-22",
+      "n_valid_georeferenced_event_rows": 22014,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-23",
+      "n_valid_georeferenced_event_rows": 22620,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-24",
+      "n_valid_georeferenced_event_rows": 28006,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-25",
+      "n_valid_georeferenced_event_rows": 23792,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-26",
+      "n_valid_georeferenced_event_rows": 10642,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-27",
+      "n_valid_georeferenced_event_rows": 20822,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-28",
+      "n_valid_georeferenced_event_rows": 16637,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-29",
+      "n_valid_georeferenced_event_rows": 14837,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-06-30",
+      "n_valid_georeferenced_event_rows": 20223,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-07-01",
+      "n_valid_georeferenced_event_rows": 23214,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-07-02",
+      "n_valid_georeferenced_event_rows": 10660,
+      "n_distinct_observed_tag_strings": 11
+    },
+    {
+      "UTC_date": "2020-07-03",
+      "n_valid_georeferenced_event_rows": 9362,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-04",
+      "n_valid_georeferenced_event_rows": 13547,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-05",
+      "n_valid_georeferenced_event_rows": 10567,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-06",
+      "n_valid_georeferenced_event_rows": 9364,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-07",
+      "n_valid_georeferenced_event_rows": 21341,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-08",
+      "n_valid_georeferenced_event_rows": 17149,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-09",
+      "n_valid_georeferenced_event_rows": 11759,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-10",
+      "n_valid_georeferenced_event_rows": 10562,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-11",
+      "n_valid_georeferenced_event_rows": 12345,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-12",
+      "n_valid_georeferenced_event_rows": 19134,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-13",
+      "n_valid_georeferenced_event_rows": 8157,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-14",
+      "n_valid_georeferenced_event_rows": 12635,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-15",
+      "n_valid_georeferenced_event_rows": 6955,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-16",
+      "n_valid_georeferenced_event_rows": 10667,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-17",
+      "n_valid_georeferenced_event_rows": 11144,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-18",
+      "n_valid_georeferenced_event_rows": 10540,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-19",
+      "n_valid_georeferenced_event_rows": 14738,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-20",
+      "n_valid_georeferenced_event_rows": 15932,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-21",
+      "n_valid_georeferenced_event_rows": 7393,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-22",
+      "n_valid_georeferenced_event_rows": 11288,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-23",
+      "n_valid_georeferenced_event_rows": 17124,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-24",
+      "n_valid_georeferenced_event_rows": 9309,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-25",
+      "n_valid_georeferenced_event_rows": 35340,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-26",
+      "n_valid_georeferenced_event_rows": 15936,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-27",
+      "n_valid_georeferenced_event_rows": 17131,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-28",
+      "n_valid_georeferenced_event_rows": 7553,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-29",
+      "n_valid_georeferenced_event_rows": 11732,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-30",
+      "n_valid_georeferenced_event_rows": 20124,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-07-31",
+      "n_valid_georeferenced_event_rows": 9335,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-01",
+      "n_valid_georeferenced_event_rows": 15335,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-02",
+      "n_valid_georeferenced_event_rows": 8742,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-03",
+      "n_valid_georeferenced_event_rows": 6343,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-04",
+      "n_valid_georeferenced_event_rows": 7548,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-05",
+      "n_valid_georeferenced_event_rows": 27912,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-06",
+      "n_valid_georeferenced_event_rows": 15943,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-07",
+      "n_valid_georeferenced_event_rows": 8140,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-08",
+      "n_valid_georeferenced_event_rows": 11137,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-09",
+      "n_valid_georeferenced_event_rows": 8145,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-10",
+      "n_valid_georeferenced_event_rows": 33422,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-11",
+      "n_valid_georeferenced_event_rows": 17865,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-12",
+      "n_valid_georeferenced_event_rows": 23058,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-13",
+      "n_valid_georeferenced_event_rows": 14743,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-14",
+      "n_valid_georeferenced_event_rows": 9946,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-15",
+      "n_valid_georeferenced_event_rows": 27666,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-16",
+      "n_valid_georeferenced_event_rows": 35699,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-17",
+      "n_valid_georeferenced_event_rows": 32334,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-18",
+      "n_valid_georeferenced_event_rows": 15928,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-19",
+      "n_valid_georeferenced_event_rows": 17125,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-20",
+      "n_valid_georeferenced_event_rows": 24300,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-21",
+      "n_valid_georeferenced_event_rows": 9335,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-22",
+      "n_valid_georeferenced_event_rows": 6354,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-23",
+      "n_valid_georeferenced_event_rows": 13726,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-24",
+      "n_valid_georeferenced_event_rows": 17126,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-25",
+      "n_valid_georeferenced_event_rows": 20452,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-26",
+      "n_valid_georeferenced_event_rows": 9548,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-27",
+      "n_valid_georeferenced_event_rows": 24450,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-28",
+      "n_valid_georeferenced_event_rows": 12335,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-29",
+      "n_valid_georeferenced_event_rows": 5757,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-30",
+      "n_valid_georeferenced_event_rows": 24914,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-08-31",
+      "n_valid_georeferenced_event_rows": 45279,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-09-01",
+      "n_valid_georeferenced_event_rows": 36301,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-09-02",
+      "n_valid_georeferenced_event_rows": 54260,
+      "n_distinct_observed_tag_strings": 10
+    },
+    {
+      "UTC_date": "2020-09-03",
+      "n_valid_georeferenced_event_rows": 20037,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-04",
+      "n_valid_georeferenced_event_rows": 9852,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-05",
+      "n_valid_georeferenced_event_rows": 25409,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-06",
+      "n_valid_georeferenced_event_rows": 34412,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-07",
+      "n_valid_georeferenced_event_rows": 9259,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-08",
+      "n_valid_georeferenced_event_rows": 21844,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-09",
+      "n_valid_georeferenced_event_rows": 12848,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-10",
+      "n_valid_georeferenced_event_rows": 12854,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-11",
+      "n_valid_georeferenced_event_rows": 9856,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-12",
+      "n_valid_georeferenced_event_rows": 30225,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-13",
+      "n_valid_georeferenced_event_rows": 17642,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-14",
+      "n_valid_georeferenced_event_rows": 14796,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-15",
+      "n_valid_georeferenced_event_rows": 17393,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-16",
+      "n_valid_georeferenced_event_rows": 44443,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-17",
+      "n_valid_georeferenced_event_rows": 36347,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-18",
+      "n_valid_georeferenced_event_rows": 19322,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-19",
+      "n_valid_georeferenced_event_rows": 19311,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-20",
+      "n_valid_georeferenced_event_rows": 69071,
+      "n_distinct_observed_tag_strings": 9
+    },
+    {
+      "UTC_date": "2020-09-21",
+      "n_valid_georeferenced_event_rows": 62980,
+      "n_distinct_observed_tag_strings": 7
+    },
+    {
+      "UTC_date": "2020-09-22",
+      "n_valid_georeferenced_event_rows": 44519,
+      "n_distinct_observed_tag_strings": 7
+    },
+    {
+      "UTC_date": "2020-09-23",
+      "n_valid_georeferenced_event_rows": 35292,
+      "n_distinct_observed_tag_strings": 7
+    },
+    {
+      "UTC_date": "2020-09-24",
+      "n_valid_georeferenced_event_rows": 41459,
+      "n_distinct_observed_tag_strings": 7
+    },
+    {
+      "UTC_date": "2020-09-25",
+      "n_valid_georeferenced_event_rows": 25499,
+      "n_distinct_observed_tag_strings": 7
+    },
+    {
+      "UTC_date": "2020-09-26",
+      "n_valid_georeferenced_event_rows": 28507,
+      "n_distinct_observed_tag_strings": 6
+    },
+    {
+      "UTC_date": "2020-09-27",
+      "n_valid_georeferenced_event_rows": 48978,
+      "n_distinct_observed_tag_strings": 6
+    },
+    {
+      "UTC_date": "2020-09-28",
+      "n_valid_georeferenced_event_rows": 48390,
+      "n_distinct_observed_tag_strings": 6
+    },
+    {
+      "UTC_date": "2020-09-29",
+      "n_valid_georeferenced_event_rows": 25574,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-09-30",
+      "n_valid_georeferenced_event_rows": 49765,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-01",
+      "n_valid_georeferenced_event_rows": 47857,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-02",
+      "n_valid_georeferenced_event_rows": 11809,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-03",
+      "n_valid_georeferenced_event_rows": 24371,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-04",
+      "n_valid_georeferenced_event_rows": 24975,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-05",
+      "n_valid_georeferenced_event_rows": 7719,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-06",
+      "n_valid_georeferenced_event_rows": 14202,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-07",
+      "n_valid_georeferenced_event_rows": 8209,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-08",
+      "n_valid_georeferenced_event_rows": 15017,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-09",
+      "n_valid_georeferenced_event_rows": 11200,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-10",
+      "n_valid_georeferenced_event_rows": 8806,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-11",
+      "n_valid_georeferenced_event_rows": 11795,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-12",
+      "n_valid_georeferenced_event_rows": 7621,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-13",
+      "n_valid_georeferenced_event_rows": 19580,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-14",
+      "n_valid_georeferenced_event_rows": 21377,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-15",
+      "n_valid_georeferenced_event_rows": 8212,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-16",
+      "n_valid_georeferenced_event_rows": 13003,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-17",
+      "n_valid_georeferenced_event_rows": 5209,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-18",
+      "n_valid_georeferenced_event_rows": 20185,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-19",
+      "n_valid_georeferenced_event_rows": 12997,
+      "n_distinct_observed_tag_strings": 5
+    },
+    {
+      "UTC_date": "2020-10-20",
+      "n_valid_georeferenced_event_rows": 12290,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-21",
+      "n_valid_georeferenced_event_rows": 11116,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-22",
+      "n_valid_georeferenced_event_rows": 5733,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-23",
+      "n_valid_georeferenced_event_rows": 8722,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-24",
+      "n_valid_georeferenced_event_rows": 18302,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-25",
+      "n_valid_georeferenced_event_rows": 15298,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-26",
+      "n_valid_georeferenced_event_rows": 6321,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-27",
+      "n_valid_georeferenced_event_rows": 12315,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-28",
+      "n_valid_georeferenced_event_rows": 5727,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-29",
+      "n_valid_georeferenced_event_rows": 7525,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-30",
+      "n_valid_georeferenced_event_rows": 8124,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-10-31",
+      "n_valid_georeferenced_event_rows": 11730,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-01",
+      "n_valid_georeferenced_event_rows": 3947,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-02",
+      "n_valid_georeferenced_event_rows": 9921,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-03",
+      "n_valid_georeferenced_event_rows": 7524,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-04",
+      "n_valid_georeferenced_event_rows": 5134,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-05",
+      "n_valid_georeferenced_event_rows": 8726,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-06",
+      "n_valid_georeferenced_event_rows": 9926,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-07",
+      "n_valid_georeferenced_event_rows": 7520,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-08",
+      "n_valid_georeferenced_event_rows": 8129,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-09",
+      "n_valid_georeferenced_event_rows": 10524,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-10",
+      "n_valid_georeferenced_event_rows": 6324,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-11",
+      "n_valid_georeferenced_event_rows": 6917,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-12",
+      "n_valid_georeferenced_event_rows": 13504,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-13",
+      "n_valid_georeferenced_event_rows": 6323,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-14",
+      "n_valid_georeferenced_event_rows": 5722,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-15",
+      "n_valid_georeferenced_event_rows": 6321,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-16",
+      "n_valid_georeferenced_event_rows": 8722,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-17",
+      "n_valid_georeferenced_event_rows": 14114,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-18",
+      "n_valid_georeferenced_event_rows": 8121,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-19",
+      "n_valid_georeferenced_event_rows": 6327,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-20",
+      "n_valid_georeferenced_event_rows": 6327,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-21",
+      "n_valid_georeferenced_event_rows": 8722,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-22",
+      "n_valid_georeferenced_event_rows": 11113,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-23",
+      "n_valid_georeferenced_event_rows": 5127,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-24",
+      "n_valid_georeferenced_event_rows": 16511,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-25",
+      "n_valid_georeferenced_event_rows": 9316,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-26",
+      "n_valid_georeferenced_event_rows": 6325,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-27",
+      "n_valid_georeferenced_event_rows": 6329,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-28",
+      "n_valid_georeferenced_event_rows": 3327,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-29",
+      "n_valid_georeferenced_event_rows": 6916,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-11-30",
+      "n_valid_georeferenced_event_rows": 3918,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-01",
+      "n_valid_georeferenced_event_rows": 3919,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-02",
+      "n_valid_georeferenced_event_rows": 6313,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-03",
+      "n_valid_georeferenced_event_rows": 5120,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-04",
+      "n_valid_georeferenced_event_rows": 5117,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-05",
+      "n_valid_georeferenced_event_rows": 5113,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-06",
+      "n_valid_georeferenced_event_rows": 3918,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-07",
+      "n_valid_georeferenced_event_rows": 5711,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-08",
+      "n_valid_georeferenced_event_rows": 6910,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-09",
+      "n_valid_georeferenced_event_rows": 3318,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-10",
+      "n_valid_georeferenced_event_rows": 6306,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-11",
+      "n_valid_georeferenced_event_rows": 3315,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-12",
+      "n_valid_georeferenced_event_rows": 2725,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-13",
+      "n_valid_georeferenced_event_rows": 3322,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-14",
+      "n_valid_georeferenced_event_rows": 5727,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-15",
+      "n_valid_georeferenced_event_rows": 2725,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-16",
+      "n_valid_georeferenced_event_rows": 5120,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-17",
+      "n_valid_georeferenced_event_rows": 3919,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-18",
+      "n_valid_georeferenced_event_rows": 6320,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-19",
+      "n_valid_georeferenced_event_rows": 3920,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-20",
+      "n_valid_georeferenced_event_rows": 3325,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-21",
+      "n_valid_georeferenced_event_rows": 1522,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-22",
+      "n_valid_georeferenced_event_rows": 5122,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-23",
+      "n_valid_georeferenced_event_rows": 1517,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-24",
+      "n_valid_georeferenced_event_rows": 1523,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-25",
+      "n_valid_georeferenced_event_rows": 2723,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-26",
+      "n_valid_georeferenced_event_rows": 6914,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-27",
+      "n_valid_georeferenced_event_rows": 3321,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-28",
+      "n_valid_georeferenced_event_rows": 2725,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-29",
+      "n_valid_georeferenced_event_rows": 6312,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-30",
+      "n_valid_georeferenced_event_rows": 2724,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2020-12-31",
+      "n_valid_georeferenced_event_rows": 8117,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-01",
+      "n_valid_georeferenced_event_rows": 3319,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-02",
+      "n_valid_georeferenced_event_rows": 2717,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-03",
+      "n_valid_georeferenced_event_rows": 2124,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-04",
+      "n_valid_georeferenced_event_rows": 2718,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-05",
+      "n_valid_georeferenced_event_rows": 2120,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-06",
+      "n_valid_georeferenced_event_rows": 3315,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-07",
+      "n_valid_georeferenced_event_rows": 6924,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-08",
+      "n_valid_georeferenced_event_rows": 4520,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-09",
+      "n_valid_georeferenced_event_rows": 5717,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-10",
+      "n_valid_georeferenced_event_rows": 14101,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-11",
+      "n_valid_georeferenced_event_rows": 18299,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-12",
+      "n_valid_georeferenced_event_rows": 5119,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-13",
+      "n_valid_georeferenced_event_rows": 10512,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-14",
+      "n_valid_georeferenced_event_rows": 3923,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-15",
+      "n_valid_georeferenced_event_rows": 3323,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-16",
+      "n_valid_georeferenced_event_rows": 6313,
+      "n_distinct_observed_tag_strings": 4
+    },
+    {
+      "UTC_date": "2021-01-17",
+      "n_valid_georeferenced_event_rows": 2043,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-18",
+      "n_valid_georeferenced_event_rows": 1443,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-19",
+      "n_valid_georeferenced_event_rows": 6236,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-20",
+      "n_valid_georeferenced_event_rows": 3239,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-21",
+      "n_valid_georeferenced_event_rows": 2643,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-22",
+      "n_valid_georeferenced_event_rows": 851,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-23",
+      "n_valid_georeferenced_event_rows": 3838,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-24",
+      "n_valid_georeferenced_event_rows": 6241,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-25",
+      "n_valid_georeferenced_event_rows": 3240,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-26",
+      "n_valid_georeferenced_event_rows": 1444,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-27",
+      "n_valid_georeferenced_event_rows": 7433,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-28",
+      "n_valid_georeferenced_event_rows": 8630,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-29",
+      "n_valid_georeferenced_event_rows": 6824,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-30",
+      "n_valid_georeferenced_event_rows": 3838,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-01-31",
+      "n_valid_georeferenced_event_rows": 3842,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-01",
+      "n_valid_georeferenced_event_rows": 3839,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-02",
+      "n_valid_georeferenced_event_rows": 3840,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-03",
+      "n_valid_georeferenced_event_rows": 3844,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-04",
+      "n_valid_georeferenced_event_rows": 5038,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-05",
+      "n_valid_georeferenced_event_rows": 6839,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-06",
+      "n_valid_georeferenced_event_rows": 3839,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-07",
+      "n_valid_georeferenced_event_rows": 4439,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-08",
+      "n_valid_georeferenced_event_rows": 4441,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-09",
+      "n_valid_georeferenced_event_rows": 4438,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-10",
+      "n_valid_georeferenced_event_rows": 4438,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-11",
+      "n_valid_georeferenced_event_rows": 6837,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-12",
+      "n_valid_georeferenced_event_rows": 8032,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-13",
+      "n_valid_georeferenced_event_rows": 5634,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-14",
+      "n_valid_georeferenced_event_rows": 3839,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-15",
+      "n_valid_georeferenced_event_rows": 3238,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-16",
+      "n_valid_georeferenced_event_rows": 3238,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-17",
+      "n_valid_georeferenced_event_rows": 3835,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-18",
+      "n_valid_georeferenced_event_rows": 5646,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-19",
+      "n_valid_georeferenced_event_rows": 2640,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-20",
+      "n_valid_georeferenced_event_rows": 5036,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-21",
+      "n_valid_georeferenced_event_rows": 4428,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-22",
+      "n_valid_georeferenced_event_rows": 7428,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-23",
+      "n_valid_georeferenced_event_rows": 9235,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-24",
+      "n_valid_georeferenced_event_rows": 6834,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-25",
+      "n_valid_georeferenced_event_rows": 5036,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-26",
+      "n_valid_georeferenced_event_rows": 17160,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-27",
+      "n_valid_georeferenced_event_rows": 3839,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-02-28",
+      "n_valid_georeferenced_event_rows": 21208,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-01",
+      "n_valid_georeferenced_event_rows": 17614,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-02",
+      "n_valid_georeferenced_event_rows": 14022,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-03",
+      "n_valid_georeferenced_event_rows": 8035,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-04",
+      "n_valid_georeferenced_event_rows": 12228,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-05",
+      "n_valid_georeferenced_event_rows": 2042,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-06",
+      "n_valid_georeferenced_event_rows": 23011,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-07",
+      "n_valid_georeferenced_event_rows": 8636,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-08",
+      "n_valid_georeferenced_event_rows": 12829,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-09",
+      "n_valid_georeferenced_event_rows": 17614,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-10",
+      "n_valid_georeferenced_event_rows": 15223,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-11",
+      "n_valid_georeferenced_event_rows": 27800,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-12",
+      "n_valid_georeferenced_event_rows": 14589,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-13",
+      "n_valid_georeferenced_event_rows": 11628,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-14",
+      "n_valid_georeferenced_event_rows": 11629,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-15",
+      "n_valid_georeferenced_event_rows": 10427,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-16",
+      "n_valid_georeferenced_event_rows": 8637,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-17",
+      "n_valid_georeferenced_event_rows": 8629,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-18",
+      "n_valid_georeferenced_event_rows": 3844,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-19",
+      "n_valid_georeferenced_event_rows": 11624,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-20",
+      "n_valid_georeferenced_event_rows": 8632,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-21",
+      "n_valid_georeferenced_event_rows": 5636,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-22",
+      "n_valid_georeferenced_event_rows": 9229,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-23",
+      "n_valid_georeferenced_event_rows": 17135,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-24",
+      "n_valid_georeferenced_event_rows": 12228,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-25",
+      "n_valid_georeferenced_event_rows": 6238,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-26",
+      "n_valid_georeferenced_event_rows": 6836,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-27",
+      "n_valid_georeferenced_event_rows": 10427,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-28",
+      "n_valid_georeferenced_event_rows": 16422,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-29",
+      "n_valid_georeferenced_event_rows": 12230,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-30",
+      "n_valid_georeferenced_event_rows": 14623,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-03-31",
+      "n_valid_georeferenced_event_rows": 15224,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-01",
+      "n_valid_georeferenced_event_rows": 7431,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-02",
+      "n_valid_georeferenced_event_rows": 11625,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-03",
+      "n_valid_georeferenced_event_rows": 13420,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-04",
+      "n_valid_georeferenced_event_rows": 20605,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-05",
+      "n_valid_georeferenced_event_rows": 19417,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-06",
+      "n_valid_georeferenced_event_rows": 8030,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-07",
+      "n_valid_georeferenced_event_rows": 5040,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-08",
+      "n_valid_georeferenced_event_rows": 6244,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-09",
+      "n_valid_georeferenced_event_rows": 8034,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-10",
+      "n_valid_georeferenced_event_rows": 11028,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-11",
+      "n_valid_georeferenced_event_rows": 9236,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-12",
+      "n_valid_georeferenced_event_rows": 3840,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-13",
+      "n_valid_georeferenced_event_rows": 14626,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-14",
+      "n_valid_georeferenced_event_rows": 11625,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-15",
+      "n_valid_georeferenced_event_rows": 12225,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-16",
+      "n_valid_georeferenced_event_rows": 10422,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-17",
+      "n_valid_georeferenced_event_rows": 3843,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-18",
+      "n_valid_georeferenced_event_rows": 5640,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-19",
+      "n_valid_georeferenced_event_rows": 11630,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-20",
+      "n_valid_georeferenced_event_rows": 13420,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-21",
+      "n_valid_georeferenced_event_rows": 8032,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-22",
+      "n_valid_georeferenced_event_rows": 21214,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-23",
+      "n_valid_georeferenced_event_rows": 30194,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-24",
+      "n_valid_georeferenced_event_rows": 24197,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-25",
+      "n_valid_georeferenced_event_rows": 25402,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-26",
+      "n_valid_georeferenced_event_rows": 25999,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-27",
+      "n_valid_georeferenced_event_rows": 38292,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-28",
+      "n_valid_georeferenced_event_rows": 6237,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-29",
+      "n_valid_georeferenced_event_rows": 14619,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-04-30",
+      "n_valid_georeferenced_event_rows": 10431,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-01",
+      "n_valid_georeferenced_event_rows": 3845,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-02",
+      "n_valid_georeferenced_event_rows": 8634,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-03",
+      "n_valid_georeferenced_event_rows": 8633,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-04",
+      "n_valid_georeferenced_event_rows": 4574,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-05",
+      "n_valid_georeferenced_event_rows": 2385,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-06",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-07",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-08",
+      "n_valid_georeferenced_event_rows": 673,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-09",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-10",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-11",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-12",
+      "n_valid_georeferenced_event_rows": 673,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-13",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-14",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-15",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-16",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-17",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-18",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-19",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-20",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-21",
+      "n_valid_georeferenced_event_rows": 676,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-22",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-23",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-24",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-25",
+      "n_valid_georeferenced_event_rows": 666,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-26",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-27",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-28",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-29",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-30",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-05-31",
+      "n_valid_georeferenced_event_rows": 668,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-01",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-02",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-03",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-04",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-05",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-06",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-07",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-08",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-09",
+      "n_valid_georeferenced_event_rows": 669,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-10",
+      "n_valid_georeferenced_event_rows": 669,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-11",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-12",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-13",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-14",
+      "n_valid_georeferenced_event_rows": 676,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-15",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-16",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-17",
+      "n_valid_georeferenced_event_rows": 669,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-18",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-19",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-20",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-21",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-22",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-23",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-24",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-25",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-26",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-27",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-28",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-29",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-06-30",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-01",
+      "n_valid_georeferenced_event_rows": 646,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-02",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-03",
+      "n_valid_georeferenced_event_rows": 647,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-04",
+      "n_valid_georeferenced_event_rows": 644,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-05",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-06",
+      "n_valid_georeferenced_event_rows": 675,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-07",
+      "n_valid_georeferenced_event_rows": 652,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-08",
+      "n_valid_georeferenced_event_rows": 674,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-09",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-10",
+      "n_valid_georeferenced_event_rows": 669,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-11",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-12",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-13",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-14",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-15",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-16",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-17",
+      "n_valid_georeferenced_event_rows": 677,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-18",
+      "n_valid_georeferenced_event_rows": 674,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-19",
+      "n_valid_georeferenced_event_rows": 669,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-20",
+      "n_valid_georeferenced_event_rows": 678,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-21",
+      "n_valid_georeferenced_event_rows": 681,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-22",
+      "n_valid_georeferenced_event_rows": 674,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-23",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-24",
+      "n_valid_georeferenced_event_rows": 671,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-25",
+      "n_valid_georeferenced_event_rows": 676,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-26",
+      "n_valid_georeferenced_event_rows": 668,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-27",
+      "n_valid_georeferenced_event_rows": 670,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-28",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-29",
+      "n_valid_georeferenced_event_rows": 677,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-30",
+      "n_valid_georeferenced_event_rows": 6470,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-07-31",
+      "n_valid_georeferenced_event_rows": 8044,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-01",
+      "n_valid_georeferenced_event_rows": 4442,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-02",
+      "n_valid_georeferenced_event_rows": 6840,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-03",
+      "n_valid_georeferenced_event_rows": 5645,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-04",
+      "n_valid_georeferenced_event_rows": 3244,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-05",
+      "n_valid_georeferenced_event_rows": 14635,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-06",
+      "n_valid_georeferenced_event_rows": 12824,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-07",
+      "n_valid_georeferenced_event_rows": 3422,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-08",
+      "n_valid_georeferenced_event_rows": 9840,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-09",
+      "n_valid_georeferenced_event_rows": 17621,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-10",
+      "n_valid_georeferenced_event_rows": 5643,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-11",
+      "n_valid_georeferenced_event_rows": 23135,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-12",
+      "n_valid_georeferenced_event_rows": 4582,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-13",
+      "n_valid_georeferenced_event_rows": 5635,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-14",
+      "n_valid_georeferenced_event_rows": 18222,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-15",
+      "n_valid_georeferenced_event_rows": 9230,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-16",
+      "n_valid_georeferenced_event_rows": 6246,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-17",
+      "n_valid_georeferenced_event_rows": 8038,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-18",
+      "n_valid_georeferenced_event_rows": 9841,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-19",
+      "n_valid_georeferenced_event_rows": 8641,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-20",
+      "n_valid_georeferenced_event_rows": 17021,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-21",
+      "n_valid_georeferenced_event_rows": 13433,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-22",
+      "n_valid_georeferenced_event_rows": 7433,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-23",
+      "n_valid_georeferenced_event_rows": 29592,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-24",
+      "n_valid_georeferenced_event_rows": 19399,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-25",
+      "n_valid_georeferenced_event_rows": 16395,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-26",
+      "n_valid_georeferenced_event_rows": 12802,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-27",
+      "n_valid_georeferenced_event_rows": 10412,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-28",
+      "n_valid_georeferenced_event_rows": 7724,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-29",
+      "n_valid_georeferenced_event_rows": 9814,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-30",
+      "n_valid_georeferenced_event_rows": 12430,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-08-31",
+      "n_valid_georeferenced_event_rows": 11929,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-01",
+      "n_valid_georeferenced_event_rows": 9787,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-02",
+      "n_valid_georeferenced_event_rows": 9569,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-03",
+      "n_valid_georeferenced_event_rows": 2482,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-04",
+      "n_valid_georeferenced_event_rows": 1650,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-05",
+      "n_valid_georeferenced_event_rows": 1130,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-06",
+      "n_valid_georeferenced_event_rows": 1130,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-07",
+      "n_valid_georeferenced_event_rows": 5610,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-08",
+      "n_valid_georeferenced_event_rows": 1193,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-09",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-10",
+      "n_valid_georeferenced_event_rows": 677,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-11",
+      "n_valid_georeferenced_event_rows": 672,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-12",
+      "n_valid_georeferenced_event_rows": 677,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-13",
+      "n_valid_georeferenced_event_rows": 5235,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-14",
+      "n_valid_georeferenced_event_rows": 4106,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-15",
+      "n_valid_georeferenced_event_rows": 5114,
+      "n_distinct_observed_tag_strings": 3
+    },
+    {
+      "UTC_date": "2021-09-16",
+      "n_valid_georeferenced_event_rows": 8975,
+      "n_distinct_observed_tag_strings": 2
+    },
+    {
+      "UTC_date": "2021-09-17",
+      "n_valid_georeferenced_event_rows": 9581,
+      "n_distinct_observed_tag_strings": 2
+    },
+    {
+      "UTC_date": "2021-09-18",
+      "n_valid_georeferenced_event_rows": 9576,
+      "n_distinct_observed_tag_strings": 2
+    },
+    {
+      "UTC_date": "2021-09-19",
+      "n_valid_georeferenced_event_rows": 9275,
+      "n_distinct_observed_tag_strings": 2
+    },
+    {
+      "UTC_date": "2021-09-20",
+      "n_valid_georeferenced_event_rows": 4552,
+      "n_distinct_observed_tag_strings": 2
+    },
+    {
+      "UTC_date": "2021-09-21",
+      "n_valid_georeferenced_event_rows": 223,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-09-22",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-09-23",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-09-24",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-09-25",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-09-26",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-09-27",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-09-28",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-09-29",
+      "n_valid_georeferenced_event_rows": 219,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-09-30",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-01",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-02",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-03",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-04",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-05",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-06",
+      "n_valid_georeferenced_event_rows": 223,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-07",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-08",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-09",
+      "n_valid_georeferenced_event_rows": 219,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-10",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-11",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-12",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-13",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-14",
+      "n_valid_georeferenced_event_rows": 219,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-15",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-16",
+      "n_valid_georeferenced_event_rows": 216,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-17",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-18",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-19",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-20",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-21",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-22",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-23",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-24",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-25",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-26",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-27",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-28",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-29",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-30",
+      "n_valid_georeferenced_event_rows": 219,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-10-31",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-01",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-02",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-03",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-04",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-05",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-06",
+      "n_valid_georeferenced_event_rows": 229,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-07",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-08",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-09",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-10",
+      "n_valid_georeferenced_event_rows": 224,
+      "n_distinct_observed_tag_strings": 1
+    },
+    {
+      "UTC_date": "2021-11-11",
+      "n_valid_georeferenced_event_rows": 218,
+      "n_distinct_observed_tag_strings": 1
+    }
+  ],
+  "raw_identifiers_geolocation_or_event_timestamps_exported": false,
+  "no_actual_same_place_same_time_evidence_claimed": true,
+  "not_full_study_coverage": true,
+  "full_original_zip_md5_source_verified": true,
+  "original_archive_byte_count": 297340370,
+  "md5_is_source_original": true,
+  "status": "ORIGINAL_CC0_GPS_SINGLE_ARCHIVE_UTC_DATE_SUPPORT_VERIFIED",
+  "original_main_zip_member_CRC_read_through_EOF": true,
+  "original_selected_zip_size_bytes": 297340370,
+  "source_paper_doi": "10.1098/rspb.2023.1268",
+  "source_archive_doi": "10.5441/001/1.276",
+  "original_member_uncompressed_bytes": 2115632725,
+  "source_GPS_raw_file_committed": false,
+  "source_event_values_exported": false,
+  "same_time_geo_colocation_assessed": false,
+  "no_ebird": true,
+  "date": "2026-11-24",
+  "source_contract_sha256": "34e72d17f4486be33c75f0db8ae4711e578b43ab01ba34b6a495e0fe7f69a58f",
+  "header_source_receipt_sha256": "78a8ba6e266cf4d8dd11698ab9a465b966b9d50848bd397caeaf48c2bc645fe8",
+  "source_gps_time_interpretation": "Movebank raw UTC timestamp (naive source time interpreted as UTC by declaration)",
+  "no_biological_payoff_or_learning_effect_calculated": true,
+  "source_receipt": {
+    "original_source_action_run": 45371757583,
+    "original_source_job_id": 138367490739,
+    "original_data_checksum": "Full original public ZIP MD5 verified in ephemeral Actions runner against original DSpace metadata; raw MD5 not published",
+    "aggregate_only_artifact_id": 14907819913,
+    "aggregate_only_zip_sha256": "6e621907723b2589834e4a7900b6e1baa8a492352b300da24dd852df0365cff4",
+    "raw_GPS_events_or_source_files_committed": false
+  }
+}
