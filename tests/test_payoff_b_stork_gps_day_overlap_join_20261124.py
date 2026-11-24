@@ -118,5 +118,5 @@ def test_missing_a_cohort_is_not_a_negative_observation():
 def test_source_not_full_archive_collection_remains_explicit():
     data=fixture()
     data["control"]["not_full_study_coverage"]=False
-    with pytest.raises(ValueError,match="source gate mismatch"):
+    with pytest.raises(ValueError,match="Source cohort gate mismatch"):
         j.derived_overlap(data,c())
