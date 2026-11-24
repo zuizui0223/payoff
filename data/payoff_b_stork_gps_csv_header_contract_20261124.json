@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-24",
+  "state": "POST_DIRECTORY_PRE_SCHEMA_SOURCE_ONLY_SAFETY_CONTRACT",
+  "prior_result": "data/payoff_b_stork_gps_zip_directory_result_20261124.json",
+  "source": "Bontekoe et al. 2023 original CC0 GPS ZIPs, 3 cohorts, source DOI 10.1098/rspb.2023.1268",
+  "observed_original_directory": {
+    "control": {
+      "members": 2,
+      "extension": ".csv",
+      "gps_zip_bytes": 289189615
+    },
+    "delayed": {
+      "members": 2,
+      "extension": ".csv",
+      "gps_zip_bytes": 297340370
+    },
+    "naturally_timed": {
+      "members": 1,
+      "extension": ".csv",
+      "gps_zip_bytes": 311814202
+    }
+  },
+  "selection": "Smallest original public GPS-labeled ZIP within each frozen cohort, as previously selected; inspect up to all 2/2/1 .csv member headers, not a subset chosen based on data content.",
+  "transport": {
+    "require_http206_and_exact_content_range": true,
+    "max_original_request_bytes": 65557,
+    "max_total_compressed_zip_bytes_read_per_cohort": 200000,
+    "max_http_range_calls_per_cohort": 14,
+    "never_follow_redirects": true,
+    "disallow_binary_zip_full_response_http200": true,
+    "forbid_non_original_bitstream_uuid": true,
+    "forbid_any_location_row_export": true
+  },
+  "metadata_scope": {
+    "zipfile_seekable_range_reader": true,
+    "allowed_read": "ZIP central/local headers and at most 4096 uncompressed bytes ending at the first CSV header newline of each member",
+    "max_csv_header_bytes": 4096,
+    "max_column_count": 120,
+    "min_required_fields_at_least_one_of": [
+      "timestamp",
+      "tag-local-identifier",
+      "individual-local-identifier",
+      "location-lat",
+      "location-long"
+    ],
+    "forbid_original_member_names_and_event_values_in_receipt": true,
+    "no_full_MD5_claim_for_ZIP": true,
+    "no_GPS_lifetime_or_fitness_claim": true
+  },
+  "output": "Each cohort's number of CSV members, each member's column names (schema only, not any row values), whether timestamp/tag/lat/lon fields appear, actual bounded compressed bytes and range call count; no member filename, tag values, coordinates or row data.",
+  "scientific_guardrails": "Existence of timestamp and GPS columns is structural, not proof of synchronous individual observations, locality or direct cue reception q. Do not merge the three studies by tag names, since source metadata verify 1/2/9 tag string collisions but no cross-study animal or deployment IDs.",
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "no_biological_effect_fit": true,
+  "no_original_GPS_row_export": true
+}
