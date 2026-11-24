@@ -12,7 +12,7 @@ def fake_series(group="greenland",transition="R2-R3"):
     return [{"flyway":group,"transition":transition,"year":y,
              "source":float(100+(y-1982)%9),
              "target":float(109+2*((y-1982)%9))}
-            for y in range(1982,2014)]
+            for y in range(1982,2012)]
 
 
 def contract():
@@ -22,7 +22,7 @@ def contract():
              "distinct_focal_years_min":3}}
 
 
-def test_future_2012_target_cannot_change_2006_past_only_q_or_forecast():
+def test_future_2011_target_cannot_change_2006_past_only_q_or_forecast():
     rows=fake_series()
     a=h.evaluate(rows,contract())
     perturbed=deepcopy(rows)
@@ -98,3 +98,4 @@ def test_contract_has_explicit_anti_lookahead_and_original_v7_not_changed():
     assert c["no_ebird"] is True
     assert c["cannot_overwrite_prior_contract_or_frozen_submission"] is True
     assert c["candidate_measure"]["minimum_prior_paired_years"]==20
+    assert c["time_rule"]["original_published_environment_years"]==[1982,2011]
