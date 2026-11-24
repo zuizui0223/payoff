@@ -1,0 +1,82 @@
+{
+  "id": "payoff_b_stork_original_gps_date_coverage_v1_20261124",
+  "date": "2026-11-24",
+  "phase": "PRE_GPS_EVENT_VALUES_OPENED; ONE_SELECTED_ZIP_PER_COHORT_SOURCE_GATE_NOT_BIOLOGICAL_HYPOTHESIS",
+  "parent_pr": 420,
+  "objective": "Verify actual valid timestamp/lat/lon event-day coverage and per-day distinct tag presence from exactly one source-size-pinned original CC0 GPS ZIP per experimental cohort. Determine whether source groups can overlap in actual observation dates, not whether birds were co-located.",
+  "source": "Bontekoe et al (2023) Proceedings B DOI 10.1098/rspb.2023.1268; original archived CC0 Movebank Data Repository GPS files.",
+  "source_origins": {
+    "control": {
+      "doi": "10.5441/001/1.271",
+      "original_item_uuid": "79710d0e-d1d6-45fd-90f9-1c6d9be0c46e",
+      "original_handle": "10255/move.1627",
+      "size_bytes": 289189615,
+      "main_member_uncompressed_bytes": 2271728532
+    },
+    "delayed": {
+      "doi": "10.5441/001/1.276",
+      "original_item_uuid": "e0181e26-4f70-45cf-a3f7-6c61ce368af0",
+      "original_handle": "10255/move.1632",
+      "size_bytes": 297340370,
+      "main_member_uncompressed_bytes": 2115632725
+    },
+    "naturally_timed": {
+      "doi": "10.5441/001/1.277",
+      "original_item_uuid": "3949d945-4730-4c24-96e8-4e6bb0234e1c",
+      "original_handle": "10255/move.1633",
+      "size_bytes": 311814202,
+      "main_member_uncompressed_bytes": 2268167309
+    }
+  },
+  "zip_selection": "For each cohort, source's ORIGINAL bundle .zip containing gps/location with smallest original size. Same three frozen 4KiB/65KiB/CSV-header verified members in PR420. Do not change archive based on data outcomes.",
+  "data_scope": "Download the full single selected CC0 GPS ZIP per cohort to a private ephemeral GitHub Actions runner; verify declared DSpace original full ZIP MD5, byte count and built-in zip member CRC. Never upload/commit/archive the original content. Other 5 GPS ZIPs and all accelerometer ZIPs remain uninspected; findings are NOT full-study coverage.",
+  "source_fidelity": {
+    "original_item_handle_check": true,
+    "original_bitstream_size_equals_frozen": true,
+    "original_MD5_checksum_required": true,
+    "original_member_uncompressed_byte_size_equals_frozen": true,
+    "original_required_26_field_names_exact": true,
+    "no_untrusted_redirects": true,
+    "no_user_credentials": true,
+    "no_automatic_license_acceptance": true,
+    "no_ebird": true,
+    "no_tinyfish": true
+  },
+  "required_columns": [
+    "event-id",
+    "visible",
+    "timestamp",
+    "location-long",
+    "location-lat",
+    "sensor-type",
+    "tag-local-identifier",
+    "individual-local-identifier"
+  ],
+  "time_rule": "Parse timestamp as ISO8601 with timezone, accept explicit Z and ±offset; if no offset, treat naive string as UTC only because original Movebank event timestamp specification is UTC, and declare it. Reject nonparseable; do not infer from other columns.",
+  "spatial_quality": "A valid georeferenced event requires parseable UTC date, numeric finite latitude between -90 and 90 and longitude between -180 and 180, and nonempty tag-local-identifier. This is source data-support validity only, not GPS movement accuracy or biological location fidelity.",
+  "sampling": "Read EVERY CSV event row in exactly the selected main ZIP member (largest .csv of the expected 1 or 2 member ZIP). Do not cherry-pick days, tags or outcomes. The other 176-byte member in control and delayed is NOT treated as GPS events.",
+  "output_only_aggregate": [
+    "complete original selected ZIP MD5 compared with source metadata, ZIP CRC verified",
+    "raw main-member CSV row count and counts missing timestamp/tag/lat/lon, coordinate-range invalid, invalid timestamp; do not report original values",
+    "yearly GPS valid events, distinct observed tag count, distinct observed animal-id count and distinct observation-date count",
+    "annual distinct dates with >=2 distinct observed tags",
+    "one daily aggregate array: date, n valid coordinate events, n observed distinct tags only (no tag names, GPS positions, raw timestamps, individual trajectories or within-day hours)",
+    "source full coverage classification. Original source excludes the other 5 GPS ZIPs, so no whole-population claims."
+  ],
+  "date_join_future": "A later derived-only analysis may join cohort daily aggregates by exact UTC date to measure 2/3-group same-date coverage; this is NOT individual same-time geospatial co-occurrence. Save original source output separately per group.",
+  "primary_support_gate": {
+    "all_selected_original_MD5_verified": true,
+    "main_csv_26_column_source_schema_verified": true,
+    "full_original_main_CSV_decoded_without_error": true,
+    "original_main_zip_crc_verified": true,
+    "require_at_least_one_valid_georeferenced_tagged_record": true
+  },
+  "safety_and_claim_limits": [
+    "Original animal GPS rows remain ephemeral and never committed/uploaded as artifact",
+    "Annual or daily aggregated tag-counts have no information about exact spatial co-presence or cue reception",
+    "No reuse of a tag string as cross-cohort same-individual join; source shows tag reuse and missing deployment IDs",
+    "No ecological q, r or q×r model, no survival or movement effect fitting, and no results from Bontekoe 2023 relabeled novel",
+    "Any absent dates in the one selected ZIP do not mean no cohort tracking; other GPS ZIPs not scanned",
+    "GPS timestamp date-only UTC cannot establish exact simultaneous proximity or same geographical opportunity"
+  ]
+}
