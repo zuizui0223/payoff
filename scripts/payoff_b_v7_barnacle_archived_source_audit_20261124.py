@@ -84,8 +84,14 @@ def citation_record(doc,doi,expected):
         raise ValueError("DOI identity mismatch")
     titles=attrs.get("titles") or []
     title=str((titles[0] or {}).get("title") or "") if titles else ""
-    if "barnacle" not in normalize(title) or "migration" not in normalize(title):
-        raise ValueError("Original citation not identifiable as barnacle goose migration")
+    expected_flyway=next(
+        (x for x in ("greenland","svalbard","barents") if x in normalize(expected)),
+        None
+    )
+    if (expected_flyway is None or "barnacle" not in normalize(title)
+        or "migration" not in normalize(title)
+        or expected_flyway not in normalize(title)):
+        raise ValueError("Original DOI title did not uniquely identify registered barnacle flyway")
     rights=[{"rights":str(x.get("rights") or "")[:150],
              "rightsIdentifier":str(x.get("rightsIdentifier") or "")[:80],
              "rightsUri":str(x.get("rightsUri") or "")[:250]} for x in (attrs.get("rightsList") or [])[:5]]
@@ -124,7 +130,13 @@ def find_item_for_doi(citation,discovered):
     # substitute a superficially similar article or unrelated population.
     lp=urlparse(citation["landing"]).path.rstrip("/")
     matches=[x for x in discovered if x["handle"] and lp.endswith("/"+x["handle"])]
-    if len(matches)==1:
+    if len(matches)==1 and all(
+        word in normalize(matches[0]["title"])
+        for word in ("barnacle","migration")
+    ) and any(
+        fly in normalize(matches[0]["title"]) and fly in normalize(citation["title"])
+        for fly in ("greenland","svalbard","barents")
+    ):
         return matches[0]
     # Some registered DOI landing pages do not preserve the DSpace handle.
     # An unambiguous flyway in the exact registered title is a backup;
