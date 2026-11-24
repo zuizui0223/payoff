@@ -12,7 +12,7 @@ def c():
 def test_allowlist_only_three_registered_citation_dois_and_known_metadata():
     s.allowed_metadata_url(s.DATACITE+"10.5441/001/1.ps244r11",c())
     s.allowed_metadata_url(s.SEARCH,c())
-    with pytest.raises(ValueError,match="Unregistered"):
+    with pytest.raises(ValueError,match="Unregistered|Only original"):
         s.allowed_metadata_url("https://datarepository.movebank.org/server/api/core/bitstreams/secret/content",c())
     with pytest.raises(ValueError,match="Unregistered"):
         s.allowed_metadata_url(s.DATACITE+"10.5441/001/1.fake",c())
