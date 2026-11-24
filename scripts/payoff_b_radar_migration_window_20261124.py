@@ -171,11 +171,16 @@ def summarize(original,contract):
         z=year_stats[row["year"]]
         z["n_original"]+=1
         q10,q50,q90,g=(row["spring_q10"],row["spring_q50"],row["spring_q90"],row["mean_greenup"])
-        if q10 is not None and q90 is not None and q50 is not None and (
-            q10>q50+DOY_EPS or q50>q90+DOY_EPS
-        ):
-            nonmonotonic+=1
-        d=classification(row) if not nonmonotonic else None
+        row_nonmonotonic = (
+            q10 is not None and q90 is not None and q50 is not None
+            and (q10 > q50 + DOY_EPS or q50 > q90 + DOY_EPS)
+        )
+        if row_nonmonotonic:
+            nonmonotonic += 1
+        # Fail closed for *any* nonmonotonic source row at the aggregate
+        # support gate, but do not falsely mark subsequent valid rows as
+        # unknown. Diagnostic counts must be order-independent.
+        d=classification(row) if not row_nonmonotonic else None
         if d is None:
             z["unknown"]+=1
             unknown_reasons["missing_q10_or_q90"]+=int(q10 is None or q90 is None)
