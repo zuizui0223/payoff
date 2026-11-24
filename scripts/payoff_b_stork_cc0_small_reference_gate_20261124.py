@@ -7,11 +7,15 @@ indicators (headers, counts, booleans). No raw animal identifiers or rows
 leave the CI runner; no experimental outcomes or social effects are fitted.
 """
 from __future__ import annotations
-import argparse,csv,hashlib,io,json,re
+import argparse,csv,hashlib,io,json,re,sys
 from pathlib import Path
 from urllib.parse import urlparse
 from urllib.request import build_opener,Request,HTTPRedirectHandler
 from urllib.error import HTTPError,URLError
+
+HERE=Path(__file__).resolve().parent
+if str(HERE) not in sys.path:
+    sys.path.insert(0,str(HERE))
 
 from payoff_b_stork_dspace_file_metadata_20261124 import (
   get_metadata, bundle_entries, bitstream_entries,UUID_RE,ROOT
