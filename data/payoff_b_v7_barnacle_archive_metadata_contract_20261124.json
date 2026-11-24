@@ -1,0 +1,75 @@
+{
+  "contract_id": "payoff_b_v7_original_barnacle_cc0_archive_access_preoutcome_v1_20261124",
+  "frozen_at": "2026-11-24",
+  "research_target": "V7 independent historical environmental predictability q × geometry-only route-stage urgency U, never claim geometry U is theoretical recourse r",
+  "existing_preoutcome_contract": "docs/PAYOFF_B_V7_PREDICTABILITY_URGENCY_CONTRACT_20261005.md",
+  "existing_novelty_boundary": "docs/PAYOFF_B_V7_NOVELTY_AUDIT_20261005.md",
+  "subject_source": "Kölzsch et al 2015 J Anim Ecol DOI 10.1111/1365-2656.12281: published 40 complete spring migrations over 2006–2011, 16 generalized stopover regions, 30-year spring phenology predictability",
+  "archive_DOIs": [
+    {
+      "flyway": "greenland",
+      "doi": "10.5441/001/1.5d3f0664",
+      "expected_label": "Migration timing in barnacle geese (Greenland)"
+    },
+    {
+      "flyway": "svalbard",
+      "doi": "10.5441/001/1.5k6b1364",
+      "expected_label": "Migration timing in barnacle geese (Svalbard)"
+    },
+    {
+      "flyway": "barents",
+      "doi": "10.5441/001/1.ps244r11",
+      "expected_label": "Migration timing in barnacle geese (Barents Sea)"
+    }
+  ],
+  "metadata_transport": {
+    "datacite_url_pattern": "https://api.datacite.org/dois/{original_doi}",
+    "dspace_search": "https://datarepository.movebank.org/server/api/discover/search/objects?query=Migration%20timing%20in%20barnacle%20geese&dsoType=item&size=30",
+    "dspace_API_root": "https://datarepository.movebank.org/server/api",
+    "require_https": true,
+    "allow_datacite_exact_registered_dois_only": true,
+    "allow_only_public_metadata": true,
+    "deny_any_bitstream_content_fetch": true,
+    "deny_any_GPS_or_tracking_event_row_read": true,
+    "deny_license_autoaccept": true,
+    "no_login_or_secret_credentials": true,
+    "max_response_bytes": 300000,
+    "selected_original_DSpace_items_only": true,
+    "no_ebird": true,
+    "no_tinyfish": true
+  },
+  "admission": {
+    "exact_three_original_DataCite_DOIs_identified": true,
+    "reject_DOI_record_mismatch": true,
+    "require_title_barnacle_and_migration": true,
+    "verify_DSpace_item_title_and_usable_original_handle": true,
+    "verify_source_license_terms_at_public_DOI_metadata": true,
+    "inventory_DSpace_original_bundle_member_type_size_and_metadata_checksum_if_public": true,
+    "no_event_schema_claim_from_filename": true,
+    "no_q_U_fitting": true
+  },
+  "frozen_novelty_check": {
+    "existing_known": "Kölzsch et al 2015 establishes phenological predictability and better migration timing; Bauer et al 2020 final-stopover information; Theurich et al 2026 wind departure urgency.",
+    "candidate_novel": "Independently estimated historical predictive connectivity interacts with independently defined route geometry U to predict timing error; original V7 requires >=10 distinct transitions with independent q, >=3 route positions, >=30 visits, >=2 flyways, |corr(q,U)|<0.90.",
+    "cannot_promote": "First identification of cue use, urgency response or social learning, causal natural fitness value, or theoretical actionability r",
+    "if_no_archive_or_independent_q_data": "V7_FOCAL_MODEL_NOT_ESTIMABLE",
+    "if_prior_art_identical_interaction": "V7_CLOSE_PRIOR_ART",
+    "no_outcome_or_sign_peeking_in_source_gate": true
+  },
+  "protection": {
+    "preserve_v7_frozen_contract_unchanged": true,
+    "preserve_Aikens_unopened_results": true,
+    "no_GPS_data_or_individual_identifiers_saved": true,
+    "main_untouched": true,
+    "proposal_draft_only": true
+  },
+  "comparison_excluded_stork": {
+    "source_pr": 423,
+    "original_three_cohort_strict_source_candidates": 1,
+    "original_three_cohort_sensitivity_source_candidates": 2,
+    "original_measured_predecision_q": false,
+    "original_measured_independent_recourse_r": false,
+    "why_not_primary": "Triple coarse conditioned proximity is not direct social cue quality, prior 2024 white stork social learning is saturated, and k=1/2 source opportunity keys cannot estimate behavioral q×r.",
+    "do_not_interpret": "No actual stork social contact anywhere; no biological absence proved; other GPS archives and adjacent bin pairs were not searched"
+  }
+}
