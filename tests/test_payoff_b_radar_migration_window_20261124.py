@@ -90,6 +90,17 @@ def test_nonmonotonic_quantile_gate_fails_closed():
     assert z["pooled_logical_bounds"] is None
 
 
+def test_bad_row_does_not_contaminate_later_normal_rows():
+    x=fixture()
+    x[1]["spring_q90"]=105
+    z=m.summarize(x,contract())
+    assert z["status"]=="SOURCE_SUPPORT_FAILED"
+    assert z["source_counts"]["nonmonotonic_q10_q50_q90"]==1
+    assert z["source_counts"]["unclassifiable"]==2
+    assert z["source_counts"]["classifiable"]==4
+    assert z["pooled_logical_bounds"] is None
+
+
 def test_parent_q50_checkpoint_prevents_reinterpreting_negative_day():
     x=fixture()
     x[0]["mean_greenup"]=-26
