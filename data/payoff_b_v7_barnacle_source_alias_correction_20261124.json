@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-24",
+  "status": "POST_PUBLIC_DOI_METADATA_OPEN_SOURCE_ALIAS_DIAGNOSIS_BEFORE_ANY_GOOSE_TRACKING_EVENT_OR_V7_Q_RESULT",
+  "first_receipt": "data/payoff_b_v7_barnacle_archive_first_source_receipt_20261124.json",
+  "fault": "All three DataCite registered DOIs returned metadata, but the first matcher required the short paper-text dataset label 'Migration timing in barnacle geese' while publication/Movebank source title may be 'Data from: Forecasting spring from afar?... [flyway data]' and DSpace query for the former returned no discovered source items.",
+  "correction": "Allow two bibliographic ORIGINAL title families only: 'Migration timing in barnacle geese' and 'Forecasting spring from afar', each with exactly one of Greenland/Svalbard/Barents matches to the pre-registered DOI, and source item handle/UUID matched to DataCite landing URL.",
+  "extra_source_lookup": "Public DSpace exact source discovery query 'Forecasting spring from afar', in addition to previous migration timing query; never search unregistered unrelated data or download GPS content",
+  "original_paper_environment_years": "1982–2011 from Kölzsch et al 2015 J Anim Ecol original published 30-year phenology; the pre-existing PAYOFF-B ERA5 reconstruction 1982–2013 is a different reproduction, not original authors' environmental time window.",
+  "no_change_in_focal_outcomes": true,
+  "no_GPS_events": true,
+  "no_V7_primary_contract_changes": true,
+  "no_ebird": true,
+  "no_tinyfish": true
+}
