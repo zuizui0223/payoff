@@ -1,0 +1,66 @@
+name: PAYOFF-B original CC0 stork GPS date coverage (source-only)
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-stork-gps-date-coverage-20261124
+    paths:
+      - ".github/workflows/payoff-b-stork-original-gps-date-coverage-20261124.yml"
+      - "scripts/payoff_b_stork_original_gps_date_coverage_20261124.py"
+      - "tests/test_payoff_b_stork_original_gps_date_coverage_20261124.py"
+      - "data/payoff_b_stork_original_gps_date_coverage_contract_20261124.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-gps-date-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        cohort: [control, delayed, naturally_timed]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install minimal synthetic-test dependencies
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Audit source-file hash, UTC date, no GPS leak, and frozen sample rules
+        run: pytest -q -rs tests/test_payoff_b_stork_original_gps_date_coverage_20261124.py
+      - name: Stream one frozen original public CC0 ZIP and publish aggregate-only GPS UTC day counts
+        run: |
+          python scripts/payoff_b_stork_original_gps_date_coverage_20261124.py \
+            --cohort ${{ matrix.cohort }} \
+            --contract data/payoff_b_stork_original_gps_date_coverage_contract_20261124.json \
+            --header-receipt data/payoff_b_stork_gps_csv_header_result_20261124.json \
+            --output outputs/payoff_b_stork_original_gps_date_${{ matrix.cohort }}_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          cohort="${{ matrix.cohort }}"
+          p=Path(f"outputs/payoff_b_stork_original_gps_date_{cohort}_20261124.json")
+          x=json.loads(p.read_text())
+          assert x["cohort"]==cohort
+          assert x["status"]=="ORIGINAL_CC0_GPS_SINGLE_ARCHIVE_UTC_DATE_SUPPORT_VERIFIED"
+          assert x["full_original_zip_md5_source_verified"] is True
+          assert x["original_main_zip_member_CRC_read_through_EOF"] is True
+          assert x["n_valid_georeferenced_event_rows"]>0
+          assert x["source_GPS_raw_file_committed"] is False
+          assert x["source_event_values_exported"] is False
+          assert x["same_time_geo_colocation_assessed"] is False
+          assert x["no_biological_payoff_or_learning_effect_calculated"] is True
+          assert x["no_ebird"] is True
+          assert x["not_full_study_coverage"] is True
+          assert len(x["daily_aggregate_only"])==x["n_distinct_UTC_dates_with_valid_events"]
+          print("GPS_DATE_COHORT_SOURCE_GATE_PASS",cohort,x["n_valid_georeferenced_event_rows"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-original-gps-date-${{ matrix.cohort }}-aggregate-only-20261124
+          path: outputs/payoff_b_stork_original_gps_date_${{ matrix.cohort }}_20261124.json
+          if-no-files-found: error
