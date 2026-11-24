@@ -1,0 +1,253 @@
+{
+  "date": "2026-11-24",
+  "status": "METADATA_BUNDLE_INVENTORY_COMPLETED",
+  "original_stork_archives": [
+    {
+      "cohort": "control",
+      "status": "ITEM_HANDLE_VERIFIED",
+      "n_published_bundles_metadata": 1,
+      "n_bundles_inspected": 1,
+      "bundles": [
+        {
+          "bundle_type": "ORIGINAL",
+          "status": "BITSTREAM_METADATA_OK",
+          "n_public_metadata_files": 4,
+          "files": [
+            {
+              "extension": ".zip",
+              "size_bytes": 65001733,
+              "name_has_GPS": false,
+              "name_has_ACC": true,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".zip",
+              "size_bytes": 289189615,
+              "name_has_GPS": true,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".csv",
+              "size_bytes": 11118,
+              "name_has_GPS": false,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".txt",
+              "size_bytes": 25310,
+              "name_has_GPS": false,
+              "name_has_ACC": false,
+              "name_has_README": true,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            }
+          ],
+          "possible_more_than_first_page": false
+        }
+      ],
+      "bitstream_bytes_read": false
+    },
+    {
+      "cohort": "delayed",
+      "status": "ITEM_HANDLE_VERIFIED",
+      "n_published_bundles_metadata": 1,
+      "n_bundles_inspected": 1,
+      "bundles": [
+        {
+          "bundle_type": "ORIGINAL",
+          "status": "BITSTREAM_METADATA_OK",
+          "n_public_metadata_files": 7,
+          "files": [
+            {
+              "extension": ".zip",
+              "size_bytes": 446573224,
+              "name_has_GPS": false,
+              "name_has_ACC": true,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".zip",
+              "size_bytes": 499274006,
+              "name_has_GPS": false,
+              "name_has_ACC": true,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".zip",
+              "size_bytes": 297340370,
+              "name_has_GPS": true,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".zip",
+              "size_bytes": 340226821,
+              "name_has_GPS": true,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".zip",
+              "size_bytes": 360446697,
+              "name_has_GPS": true,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".csv",
+              "size_bytes": 20220,
+              "name_has_GPS": false,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".txt",
+              "size_bytes": 25651,
+              "name_has_GPS": false,
+              "name_has_ACC": false,
+              "name_has_README": true,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            }
+          ],
+          "possible_more_than_first_page": false
+        }
+      ],
+      "bitstream_bytes_read": false
+    },
+    {
+      "cohort": "naturally_timed",
+      "status": "ITEM_HANDLE_VERIFIED",
+      "n_published_bundles_metadata": 1,
+      "n_bundles_inspected": 1,
+      "bundles": [
+        {
+          "bundle_type": "ORIGINAL",
+          "status": "BITSTREAM_METADATA_OK",
+          "n_public_metadata_files": 7,
+          "files": [
+            {
+              "extension": ".zip",
+              "size_bytes": 181047737,
+              "name_has_GPS": false,
+              "name_has_ACC": true,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".zip",
+              "size_bytes": 311814202,
+              "name_has_GPS": true,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".zip",
+              "size_bytes": 384738609,
+              "name_has_GPS": true,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".zip",
+              "size_bytes": 349442102,
+              "name_has_GPS": true,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".zip",
+              "size_bytes": 367344016,
+              "name_has_GPS": true,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".csv",
+              "size_bytes": 50598,
+              "name_has_GPS": false,
+              "name_has_ACC": false,
+              "name_has_README": false,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            },
+            {
+              "extension": ".txt",
+              "size_bytes": 26647,
+              "name_has_GPS": false,
+              "name_has_ACC": false,
+              "name_has_README": true,
+              "has_MD5_checksum": true,
+              "bitstream_content_requested": false,
+              "raw_file_or_identifier_returned": false
+            }
+          ],
+          "possible_more_than_first_page": false
+        }
+      ],
+      "bitstream_bytes_read": false
+    }
+  ],
+  "n_items_expected": 3,
+  "original_GPS_event_rows_downloaded": false,
+  "bitstream_content_requested": false,
+  "user_credentials_sent": false,
+  "terms_autoaccepted": false,
+  "social_predictive_accuracy_or_Bayesian_payoff_estimated": false,
+  "no_ebird": true,
+  "n_verified_item_handles": 3,
+  "conclusion": "This documents public file METADATA only, not file download accessibility, code-ready variable schema, valid cross-study identity joins, predecision social information, q or fitness.",
+  "source_receipt": {
+    "git_actions_run_id": 45362673236,
+    "job_id": 138336378757,
+    "aggregate_only_artifact_id": 14904468645,
+    "aggregate_only_zip_sha256": "974df796648d737560a870f8960c0d2d82e21925a276d87a3496f561eaef74d3",
+    "original_GPS_episodes_exported": false
+  }
+}
