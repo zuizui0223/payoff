@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-24",
+  "class": "SOURCE_ONLY_PREDECISION_TIME_SUPPORT_NOT_BIOLOGICAL_OUTCOME",
+  "parent_pr": 418,
+  "scientific_question": "Do the three original CC0 white-stork cohorts contain sufficient non-overlapping or overlapping real time coverage for a future independently measured conspecific-opportunity test? This is tag deployment metadata, not bird co-presence.",
+  "source": "Bontekoe et al. 2023 Proc B, 10.1098/rspb.2023.1268",
+  "source_licence": "Original Movebank Data Repository archived DataCite records report CC0; these are only three already verified reference CSV bitstreams.",
+  "original_archives": {
+    "control": {
+      "doi": "10.5441/001/1.271",
+      "item_uuid": "79710d0e-d1d6-45fd-90f9-1c6d9be0c46e",
+      "handle": "10255/move.1627",
+      "rows": 19,
+      "sha256": "3511591f8bcb58bb9e587603b867a64fb25a0f5ceb82ed8e778699dd5c745f68"
+    },
+    "delayed": {
+      "doi": "10.5441/001/1.276",
+      "item_uuid": "e0181e26-4f70-45cf-a3f7-6c61ce368af0",
+      "handle": "10255/move.1632",
+      "rows": 40,
+      "sha256": "811da2fb5a2cc1d3b5067304ee041bfb83ace9a0f5735b649dd758c544adbc7e"
+    },
+    "naturally_timed": {
+      "doi": "10.5441/001/1.277",
+      "item_uuid": "3949d945-4730-4c24-96e8-4e6bb0234e1c",
+      "handle": "10255/move.1633",
+      "rows": 153,
+      "sha256": "c02ea4d2eae1663a8c066ebfbde847b8a0eebc009292b0363540b61036be4996"
+    }
+  },
+  "fields": [
+    "tag-id",
+    "animal-id",
+    "deploy-on-date",
+    "deploy-off-date",
+    "manipulation-type"
+  ],
+  "source_admission": {
+    "max_bytes_per_csv": 80000,
+    "only_original_bundle_file_extension": ".csv",
+    "validate_source_sha256": true,
+    "verify_dspace_public_md5": true,
+    "no_other_file_type": true,
+    "reject_duplicate_identical_cohort_tag_deployment_on_date_as_independent_deployments": true,
+    "no_source_rows_or_identifiers_in_results": true,
+    "no_ebird": true
+  },
+  "timestamp_contract": {
+    "allowed": "ISO 8601 YYYY-MM-DD, YYYY-MM-DD HH:MM[:SS[.ffffff]], T separator, optional Z/UTC offset; do not infer format from downstream outcomes",
+    "failed_or_blank": "missing/unparseable; do not substitute last GPS observation, death date or today",
+    "require_end_greater_than_start": true,
+    "treatment_of_open_end": "unknown right-censoring; never pretend an end date without source or count unknown as co-present",
+    "not_animal_behavior": "A tag deployment interval does not establish a bird remained at the locality, was still alive, met a conspecific, or received information."
+  },
+  "readiness_tests": [
+    "n original table rows and unique tag-id per cohort",
+    "number of complete on/off pairs and of missing/unparseable timestamps per cohort",
+    "min/max year of verified deployment-on and -off",
+    "aggregate simultaneous complete-deployment intervals within each cohort, and across cohorts, only where both start/end dates exist",
+    "any cohort with <5 complete bounded intervals is NOT_ESTIMABLE for duration overlap; no retained impression from overlapping starts alone",
+    "count of cross-cohort same tag IDs privately without exporting IDs, as a duplicate-source warning only not same-bird identity",
+    "no GPS events or environmental q are opened"
+  ],
+  "analysis_rule": "If no adequate complete off intervals, STOP with TIME_WINDOW_ENDS_UNOBSERVED and report source support only. Do not post-hoc set arbitrary end dates. Even positive tag deployments are not proof of biological co-travel or conspecific cue exposure.",
+  "prior_art": "Brønnvik et al. 2024 Current Biology DOI 10.1016/j.cub.2024.03.052 already documents age-declining conspecific density preference; Bontekoe et al. 2023 documents treatment effects; neither is a new PAYOFF result.",
+  "no_gps_zip_download": true,
+  "no_event_rows_downloaded": true,
+  "no_fitness_model": true,
+  "no_social_q_estimation": true
+}
