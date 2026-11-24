@@ -1,0 +1,89 @@
+name: PAYOFF-B CC0 stork GPS ZIP central directory source metadata only
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-stork-gps-zip-directory-20261124
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-gps-zip-directory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install synthetic source tests
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Ensure ZIP structural parser cannot expose filenames or source rows
+        run: pytest -q -rs tests/test_payoff_b_stork_gps_zip_directory_20261124.py
+      - name: Read ONLY original ZIP tail central directory via 65557-byte HTTP Range
+        run: |
+          python scripts/payoff_b_stork_gps_zip_directory_20261124.py \
+            --output outputs/payoff_b_stork_original_zip_directory_receipt_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          z=json.loads(Path("outputs/payoff_b_stork_original_zip_directory_receipt_20261124.json").read_text())
+          assert z["n_original_archives"]==3
+          assert z["original_GPS_or_ACC_ZIP_payload_downloaded"] is False
+          assert z["original_GPS_rows_or_coordinates_read"] is False
+          assert z["ZIP_member_data_decompressed"] is False
+          assert z["individual_identifiers_exported"] is False
+          assert z["social_information_q_or_actionability_r_estimated"] is False
+          assert z["no_ebird"] is True
+          assert all(item.get("tail",{}).get("bytes_read",0)<=65557 for item in z["source_archives"])
+          print("ORIGINAL_ZIP_CENTRAL_DIRECTORIES_VERIFIED",z["n_verified_central_directories"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-gps-zip-central-source-only-20261124
+          path: outputs/payoff_b_stork_original_zip_directory_receipt_20261124.json
+          if-no-files-found: error
+
+  gps-first-line-schema-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pure synthetic schema tests
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Verify bounded seekable ZIP reader and no original GPS values exported
+        run: pytest -q -rs tests/test_payoff_b_stork_gps_csv_header_gate_20261124.py
+      - name: Read only first CSV header lines from exact 3 original CC0 GPS ZIPs
+        run: |
+          python scripts/payoff_b_stork_gps_csv_header_gate_20261124.py \
+            --output outputs/payoff_b_stork_csv_header_schema_only_20261124.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          z=json.loads(Path("outputs/payoff_b_stork_csv_header_schema_only_20261124.json").read_text())
+          assert z["n_original_cohorts"]==3
+          assert z["original_ZIP_files_fully_downloaded"] is False
+          assert z["GPS_event_values_exported"] is False
+          assert z["original_file_or_member_identifiers_exported"] is False
+          assert z["social_information_q_or_recourse_r_estimated"] is False
+          assert z["same_bird_cross_cohort_identity_inferred"] is False
+          assert z["no_ebird"] is True
+          for receipt in z["cohort_schemas"]:
+            assert receipt.get("bounded_compressed_bytes_read",0)<=200000
+            assert receipt.get("bounded_range_calls",0)<=14
+            assert all(member.get("original_member_name_returned",False) is False for member in receipt.get("member_schemas_no_filename",[]))
+            assert all(member.get("source_event_rows_returned",False) is False for member in receipt.get("member_schemas_no_filename",[]))
+          print("ORIGINAL_GPS_COHORT_HEADER_SCHEMA_SUCCESSES",z["n_cohorts_with_all_member_headers_verified"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-gps-first-csv-headers-aggregate-20261124
+          path: outputs/payoff_b_stork_csv_header_schema_only_20261124.json
+          if-no-files-found: error

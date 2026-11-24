@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-24",
+  "state": "GPS_ARCHIVE_PARTIAL_BYTE_TRANSPORT_PREFIT_ONLY",
+  "source": "Bontekoe et al. (2023), public CC0 Movebank archived GPS ZIP files; 10.1098/rspb.2023.1268",
+  "parent_pr": 419,
+  "original_dspace_items": {
+    "control": {
+      "id": "79710d0e-d1d6-45fd-90f9-1c6d9be0c46e",
+      "handle": "10255/move.1627",
+      "expected_smallest_gps_zip_bytes": 289189615
+    },
+    "delayed": {
+      "id": "e0181e26-4f70-45cf-a3f7-6c61ce368af0",
+      "handle": "10255/move.1632",
+      "expected_smallest_gps_zip_bytes": 297340370
+    },
+    "naturally_timed": {
+      "id": "3949d945-4730-4c24-96e8-4e6bb0234e1c",
+      "handle": "10255/move.1633",
+      "expected_smallest_gps_zip_bytes": 311814202
+    }
+  },
+  "selection": "Select the smallest filename containing GPS/location among .zip ORIGINAL DSpace bitstreams in each of 3 fixed public items, before reading any archive byte",
+  "permission": "All three original archived cohort DOI metadata report CC0. Exactly the 3 public original content endpoints recovered by verified metadata are allowed; no authentication, no automatic acceptance.",
+  "http_probe": {
+    "request": "HEAD exact discovered GPS ZIP bitstream content URL, then GET Range: bytes=0-4095 only",
+    "max_body_bytes_per_file": 4096,
+    "require_http_206_with_exact_content_range": true,
+    "require_ZIP_local_file_header_magic": "PK 03 04",
+    "forbid_following_http_redirects": true,
+    "forbid_full_response_on_200": true,
+    "forbid_file_extraction_or_decompression": true,
+    "forbid_original_GPS_event_rows": true,
+    "forbid_recording_filename_tag_or_coordinates": true,
+    "no_more_than_one_bitstream_per_study": true
+  },
+  "output": [
+    "Original study verified and selected GPS ZIP size, public MD5 metadata present but no full checksum verification",
+    "HEAD status, Accept-Ranges yes/no, Content-Length metadata",
+    "partial GET HTTP status, Content-Range alignment and 4KiB ZIP magic only",
+    "whether a later bounded ZIP member/schema inventory is feasible"
+  ],
+  "scientific_claim_limit": "A 4KiB ZIP header is not evidence of exact timestamp, bird identity, observation density, actual social exposure, information predictive q or actionability r. No original GPS file was downloaded in full.",
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "no_GPS_archive_full_download": true,
+  "no_outcomes_opened": true
+}

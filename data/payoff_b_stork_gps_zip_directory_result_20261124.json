@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-24",
+  "status": "ZIP_CENTRAL_DIRECTORY_SOURCE_GATE_COMPLETED",
+  "source_archives": [
+    {
+      "cohort": "control",
+      "source_zip_size": 289189615,
+      "public_original_source_md5_metadata_present": true,
+      "tail": {
+        "status": "CENTRAL_DIRECTORY_METADATA_VERIFIED",
+        "n_original_archive_members": 2,
+        "extension_counts": {
+          ".csv": 2
+        },
+        "compression_method_counts": {
+          "8": 2
+        },
+        "total_member_compressed_size_bytes": 289188995,
+        "total_member_uncompressed_size_bytes": 2271728708,
+        "raw_member_names_exported": false,
+        "member_payloads_decompressed": false,
+        "archive_full_checksum_verified": false,
+        "http_status": 206,
+        "bytes_read": 65557,
+        "source_member_payload_accessed": false
+      },
+      "whole_GPS_archive_downloaded": false,
+      "original_member_names_or_GPS_rows_exported": false
+    },
+    {
+      "cohort": "delayed",
+      "source_zip_size": 297340370,
+      "public_original_source_md5_metadata_present": true,
+      "tail": {
+        "status": "CENTRAL_DIRECTORY_METADATA_VERIFIED",
+        "n_original_archive_members": 2,
+        "extension_counts": {
+          ".csv": 2
+        },
+        "compression_method_counts": {
+          "8": 2
+        },
+        "total_member_compressed_size_bytes": 297339802,
+        "total_member_uncompressed_size_bytes": 2115632901,
+        "raw_member_names_exported": false,
+        "member_payloads_decompressed": false,
+        "archive_full_checksum_verified": false,
+        "http_status": 206,
+        "bytes_read": 65557,
+        "source_member_payload_accessed": false
+      },
+      "whole_GPS_archive_downloaded": false,
+      "original_member_names_or_GPS_rows_exported": false
+    },
+    {
+      "cohort": "naturally_timed",
+      "source_zip_size": 311814202,
+      "public_original_source_md5_metadata_present": true,
+      "tail": {
+        "status": "CENTRAL_DIRECTORY_METADATA_VERIFIED",
+        "n_original_archive_members": 1,
+        "extension_counts": {
+          ".csv": 1
+        },
+        "compression_method_counts": {
+          "8": 1
+        },
+        "total_member_compressed_size_bytes": 311813912,
+        "total_member_uncompressed_size_bytes": 2268167309,
+        "raw_member_names_exported": false,
+        "member_payloads_decompressed": false,
+        "archive_full_checksum_verified": false,
+        "http_status": 206,
+        "bytes_read": 65557,
+        "source_member_payload_accessed": false
+      },
+      "whole_GPS_archive_downloaded": false,
+      "original_member_names_or_GPS_rows_exported": false
+    }
+  ],
+  "n_original_archives": 3,
+  "n_verified_central_directories": 3,
+  "n_zip_tail_range_calls_max": 3,
+  "original_GPS_or_ACC_ZIP_payload_downloaded": false,
+  "original_GPS_rows_or_coordinates_read": false,
+  "ZIP_member_data_decompressed": false,
+  "individual_identifiers_exported": false,
+  "social_information_q_or_actionability_r_estimated": false,
+  "no_ebird": true,
+  "claim_boundary": "Original archive directory structure only. No GPS schema, timestamp coverage, animal behavior, social cue, Bayesian q or fitness inferred.",
+  "actions": {
+    "workflow_run_id": 45367468782,
+    "source_job": 138352822675,
+    "aggregate_artifact_id": 14908360148,
+    "aggregate_zip_sha256": "3de99b4dd7220946669a2cb2297e48da7feef9c6a70c85a18a50f6b4bb375ef9",
+    "original_source_members_downloaded": false
+  }
+}
