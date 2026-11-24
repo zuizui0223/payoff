@@ -63,3 +63,25 @@ def test_never_emits_original_bitstream_member_name_uuid_or_content():
     assert r[0]["bitstream_content_downloaded"] is False
     assert "PRIVATE_TAG_GOOSE" not in str(r)
     assert "PRIVATEHASH" not in str(r)
+
+
+def test_2014_published_archive_title_alias_is_not_wrongly_rejected():
+    doi="10.5441/001/1.ps244r11"
+    original="Data from: Forecasting spring from afar? Timing of migration and predictability of phenology along different migration routes of an avian herbivore [Barents Sea data]"
+    citation={"data":{"attributes":{
+        "doi":doi,"titles":[{"title":original}],
+        "publisher":"Movebank","publicationYear":2014,
+        "url":"https://datarepository.movebank.org/handle/10255/move.777",
+        "rightsList":[{"rights":"CC BY 4.0"}]
+    }}}
+    x=s.citation_record(citation,doi,"Migration timing in barnacle geese (Barents Sea)")
+    assert x["doi"]==doi
+    assert x["CC0_metadata_confirmed"] is False  # no invented CC0
+    uuid="a0a0a0a0-bbbb-cccc-dddd-eeeeeeeeeeee"
+    discovered=[{"uuid":uuid,"title":original,"handle":"10255/move.777"}]
+    z=s.find_item_for_doi(x,discovered)
+    assert z["uuid"]==uuid
+    s.allowed_metadata_url(s.SEARCH_ALIAS,c())
+    # Different flyway with same DOI cannot sneak past source title matching.
+    with pytest.raises(ValueError,match="flyway"):
+        s.citation_record(citation,doi,"Migration timing in barnacle geese (Greenland)")
