@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-24",
+  "status": "NEW_CC0_METADATA_COMPANION_SOURCE_SCOPE_FROZEN_AFTER_DSPACE_BUNDLE_INVENTORY_BEFORE_FILE_BODY_OPEN",
+  "source": "Bontekoe et al. 2023 Proc B, DOI 10.1098/rspb.2023.1268; original 3 CC0 Movebank Data Repository archived items",
+  "item_uuid": {
+    "control": "79710d0e-d1d6-45fd-90f9-1c6d9be0c46e",
+    "delayed": "e0181e26-4f70-45cf-a3f7-6c61ce368af0",
+    "naturally_timed": "3949d945-4730-4c24-96e8-4e6bb0234e1c"
+  },
+  "item_handle": {
+    "control": "10255/move.1627",
+    "delayed": "10255/move.1632",
+    "naturally_timed": "10255/move.1633"
+  },
+  "source_license_note": "DataCite record for all 3 original archived studies explicitly reports CC0 1.0. Owner permission is not required for public CC0 datasets under Movebank General Terms; citation and reasonable outreach encouraged. No license terms will be programmatically accepted.",
+  "file_access": {
+    "allow_exactly": ".txt and .csv bitstreams exposed as public metadata within original bundle of each pinned item",
+    "disallow": ".zip, .gpx, .kmz, .xlsx, .pdf, any tracking, GPS or accelerometer event rows or large datasets",
+    "max_file_bytes": 80000,
+    "expected_file_count_per_cohort": 2,
+    "content_url_source": "Only DSpace bitstream metadata's declared content link with same hostname and exact UUID path",
+    "content_redirect_rule": "Block redirection to unknown host; do not bypass authorization/accept terms",
+    "verify": "Compare downloaded raw bytes with original public metadata MD5 before parsing; never impute/fix source",
+    "fail_closed_on_sha_or_size_mismatch": true,
+    "no_automatic_acceptance": true
+  },
+  "aggregate_only_output": {
+    "csv": "header field names, count of data rows, number of unique individuals ONLY if an explicit stable individual/tag identifier field exists; never IDs or source observations",
+    "readme": "plain boolean for timestamp, GPS, ACC, UTC, sampling interval, licensing, temporal overlap keywords; do not publish source prose",
+    "files": "file size, extension, MD5_verified Boolean; no filenames, GPS coordinates or rows",
+    "do_not_claim": "reference CSV records provide actual social contacts or predictive cue reliability; they are source-reference documentation only"
+  },
+  "scientific_gate": "Do not open or fit any social-information × recourse effect until event-level time support, cross-study consistent individual IDs and independent predecision environmental reliability are verified; 2024 Bronnvik prior art already established age-specific conspecific density route preference",
+  "prior": "PR #418 original six-code-notebook and metadata gate; standalone read-only DSpace source probe parent",
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "no_gps_events_downloaded": true,
+  "no_outcome_estimation": true
+}
