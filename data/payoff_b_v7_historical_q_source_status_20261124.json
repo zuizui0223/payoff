@@ -1,0 +1,17 @@
+{
+  "status": "V7_HISTORICAL_Q_SOURCE_NOT_MATERIALIZED",
+  "original_historical_source": "Kölzsch 2015 original 1982-2013 stopover region spring onset series",
+  "reason": "No authenticated region-transition/year environmental source table was supplied. No q value or new biology is invented.",
+  "no_bird_GPS_or_migration_outcome_opened": true,
+  "no_original_V7_contract_changed": true,
+  "no_ebird": true,
+  "date": "2026-11-24",
+  "source_gate_contract_sha256": "49e8b97803a47220943ce6696584a00fe7b60f10557dc928455f77e26287276a",
+  "execution": {
+    "run": 45386820338,
+    "job": 138419780151,
+    "artifact": 14916133218,
+    "artifact_zip_sha256": "74ffda3ed346e3c5f6a9fd7434c20e5e988f064a062f8b6540b10908b0c8b1c4",
+    "original_external_source_rows_opened": false
+  }
+}
