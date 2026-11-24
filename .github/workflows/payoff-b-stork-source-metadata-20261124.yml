@@ -120,3 +120,41 @@ jobs:
           name: payoff-b-stork-head-only-archive-access-20261124
           path: outputs/payoff_b_stork_archival_landing_receipt_20261124.json
           if-no-files-found: error
+
+  stork-archive-html-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install minimal tests
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Guard against event/body download in HTML discovery
+        run: pytest -q -rs tests/test_payoff_b_stork_archival_landing_html_probe_20261124.py
+      - name: Inspect at most 8KiB of original three HTML landing pages only
+        run: |
+          python scripts/payoff_b_stork_archival_landing_html_probe_20261124.py \
+            --output outputs/payoff_b_stork_html_page_manifest_20261124.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          x=json.loads(Path("outputs/payoff_b_stork_html_page_manifest_20261124.json").read_text())
+          assert len(x["archive_pages"])==3
+          assert x["limit_bytes_per_original_landing"]==8192
+          assert x["original_GPS_files_downloaded"] is False
+          assert x["tracking_events_queried"] is False
+          assert x["link_destinations_followed"] is False
+          assert x["original_user_terms_accepted"] is False
+          assert x["social_predictive_reliability_or_payoff_estimated"] is False
+          assert x["no_ebird"] is True
+          print("MOVE_BANK_HTML_META_SOURCE_STATUS",x["status"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-first8k-html-source-20261124
+          path: outputs/payoff_b_stork_html_page_manifest_20261124.json
+          if-no-files-found: error
