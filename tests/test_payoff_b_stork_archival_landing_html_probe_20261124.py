@@ -10,6 +10,8 @@ def test_classify_landing_anchor_extensions_without_emitting_links():
           b'<a href="/terms">license</a></html>')
     r=s.summarize_html(html,"text/html; charset=utf-8")
     assert r["linked_file_extension_counts"]=={".csv":1,".zip":1}
+    assert r["static_script_filenames"]==[]
+    assert r["custom_markup_tags"]==[]
     assert r["contains_literal_bitstream_href"] is True
     assert r["contains_literal_file_download_href"] is True
     assert r["html_has_word_license"] is True
