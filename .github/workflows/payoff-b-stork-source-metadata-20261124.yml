@@ -158,3 +158,38 @@ jobs:
           name: payoff-b-stork-first8k-html-source-20261124
           path: outputs/payoff_b_stork_html_page_manifest_20261124.json
           if-no-files-found: error
+
+  stork-public-dspace-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install minimal testing
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Verify DSpace public endpoint allowlist and no content download
+        run: pytest -q -rs tests/test_payoff_b_stork_dspace_public_metadata_gate_20261124.py
+      - name: Query only DSpace public API root and title search (no event files)
+        run: |
+          python scripts/payoff_b_stork_dspace_public_metadata_gate_20261124.py \
+            --output outputs/payoff_b_stork_dspace_public_metadata_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path("outputs/payoff_b_stork_dspace_public_metadata_20261124.json").read_text())
+          assert x["tracking_or_event_files_downloaded"] is False
+          assert x["original_bitstreams_requested"] is False
+          assert x["user_credentials_sent"] is False
+          assert x["license_terms_accepted"] is False
+          assert x["no_ebird"] is True
+          print("ORIGINAL_PUBLIC_DSPACE_METADATA_STATUS",x["root"]["status"],x["search"]["status"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-dspace-source-api-metadata-20261124
+          path: outputs/payoff_b_stork_dspace_public_metadata_20261124.json
+          if-no-files-found: error
