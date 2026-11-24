@@ -19,6 +19,7 @@ from urllib.request import Request,build_opener,HTTPRedirectHandler
 ROOT="https://datarepository.movebank.org/server/api"
 DATACITE="https://api.datacite.org/dois/"
 SEARCH=(ROOT+"/discover/search/objects?query=Migration%20timing%20in%20barnacle%20geese&dsoType=item&size=30")
+SEARCH_ALIAS=(ROOT+"/discover/search/objects?query=Forecasting%20spring%20from%20afar&dsoType=item&size=30")
 UUID_RE=re.compile(r"^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$")
 
 class NoRedirect(HTTPRedirectHandler):
@@ -38,7 +39,7 @@ def allowed_metadata_url(url,contract,items=None,bundles=None):
         raise ValueError("Unregistered DataCite DOI")
     if p.hostname!="datarepository.movebank.org":
         raise ValueError("Unregistered source host")
-    if url in (SEARCH,ROOT):
+    if url in (SEARCH,SEARCH_ALIAS,ROOT):
         return
     a=re.fullmatch(r"/server/api/core/items/([a-f0-9-]+)(/bundles)?",p.path)
     b=re.fullmatch(r"/server/api/core/bundles/([a-f0-9-]+)/bitstreams",p.path)
@@ -88,9 +89,10 @@ def citation_record(doc,doi,expected):
         (x for x in ("greenland","svalbard","barents") if x in normalize(expected)),
         None
     )
-    if (expected_flyway is None or "barnacle" not in normalize(title)
-        or "migration" not in normalize(title)
-        or expected_flyway not in normalize(title)):
+    title_label=normalize(title)
+    valid_title=("migration timing in barnacle geese" in title_label
+                 or "forecasting spring from afar" in title_label)
+    if expected_flyway is None or not valid_title or expected_flyway not in title_label:
         raise ValueError("Original DOI title did not uniquely identify registered barnacle flyway")
     rights=[{"rights":str(x.get("rights") or "")[:150],
              "rightsIdentifier":str(x.get("rightsIdentifier") or "")[:80],
@@ -112,7 +114,9 @@ def dspace_discovery(doc):
     for x in items:
         y=((x.get("_embedded") or {}).get("indexableObject") or {})
         title=str(y.get("name") or "")[:260]
-        if "barnacle" not in normalize(title) or "migration" not in normalize(title):
+        label=normalize(title)
+        if ("migration timing in barnacle geese" not in label
+            and "forecasting spring from afar" not in label):
             continue
         uuid=str(y.get("uuid") or y.get("id") or "")
         if not UUID_RE.fullmatch(uuid):
@@ -130,20 +134,21 @@ def find_item_for_doi(citation,discovered):
     # substitute a superficially similar article or unrelated population.
     lp=urlparse(citation["landing"]).path.rstrip("/")
     matches=[x for x in discovered if x["handle"] and lp.endswith("/"+x["handle"])]
-    if len(matches)==1 and all(
-        word in normalize(matches[0]["title"])
-        for word in ("barnacle","migration")
-    ) and any(
+    if len(matches)==1 and any(
         fly in normalize(matches[0]["title"]) and fly in normalize(citation["title"])
         for fly in ("greenland","svalbard","barents")
+    ) and (
+        "migration timing in barnacle geese" in normalize(matches[0]["title"])
+        or "forecasting spring from afar" in normalize(matches[0]["title"])
     ):
         return matches[0]
     # Some registered DOI landing pages do not preserve the DSpace handle.
     # An unambiguous flyway in the exact registered title is a backup;
     # this is not used if multiple records match.
     title=normalize(citation["title"])
-    hints=[x for x in discovered if all(word in normalize(x["title"])
-           for word in ("barnacle","migration"))
+    hints=[x for x in discovered
+           if ("migration timing in barnacle geese" in normalize(x["title"])
+               or "forecasting spring from afar" in normalize(x["title"]))
            and any(w in normalize(x["title"]) and w in title
                    for w in ("greenland","svalbard","barents"))]
     if len(hints)==1:
@@ -189,8 +194,12 @@ def audit(contract):
                 recs.append({"flyway":entry["flyway"],"doi":doi,
                              "status":"DOI_TITLE_OR_IDENTITY_MISMATCH",
                              "error_class":type(e).__name__})
-    search=get_public_json(SEARCH,contract)
-    discovered=dspace_discovery(search["data"]) if search["data"] else []
+    searches=[get_public_json(u,contract) for u in (SEARCH,SEARCH_ALIAS)]
+    original_discovered=[
+        item for search in searches if search["data"]
+        for item in dspace_discovery(search["data"])
+    ]
+    discovered=list({item["uuid"]:item for item in original_discovered}.values())
     for record in recs:
         if record["status"]!="ORIGINAL_DATACITE_CITATION_VERIFIED":
             continue
@@ -237,7 +246,9 @@ def audit(contract):
       "status":"V7_BARNACLE_ORIGINAL_PUBLIC_ARCHIVE_METADATA_SCREEN_COMPLETED",
       "original_reference":"Kölzsch et al 2015 J Anim Ecol DOI 10.1111/1365-2656.12281",
       "doi_recognized":sum(r["status"]!="DATACITE_SOURCE_NOT_VERIFIED" for r in recs),
-      "dspace_discovery_status":search["status"],
+      "dspace_discovery_status":"PUBLIC_METADATA_JSON_VERIFIED" if all(
+        s["status"]=="PUBLIC_METADATA_JSON_VERIFIED" for s in searches)
+        else "ONE_OR_MORE_PUBLIC_SOURCE_SEARCHES_FAILED",
       "n_discovered_barnacle_related_public_items":len(discovered),
       "source_archives":recs,
       "n_original_archives_with_file_manifest":full,
