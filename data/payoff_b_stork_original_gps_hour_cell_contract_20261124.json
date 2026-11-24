@@ -1,0 +1,56 @@
+{
+  "id": "payoff_b_stork_original_gps_coarse_hour_cell_support_v1_20261124",
+  "date": "2026-11-24",
+  "stage": "PRE_NEW_ORIGINAL_GPS_HOUR_AND_LOCATION_VALUES_OPENED",
+  "question": "Within the three previously authenticated original CC0 single-ZIP stork GPS cohorts, is there support for independently observed tags in the same UTC hour and the same predeclared coarse geographical grid cell? Source opportunity only; never social cue reception.",
+  "source": "Bontekoe et al (2023) original archived GPS data, DOI 10.1098/rspb.2023.1268, three separate source CC0 archives",
+  "parent_pr": 421,
+  "original_subset": "Exactly same smallest one GPS ZIP per cohort as in PR421, NOT all original GPS ZIPs or complete study population",
+  "source_gate": {
+    "prior_date_census_results": [
+      "data/payoff_b_stork_original_gps_date_control_result_20261124.json",
+      "data/payoff_b_stork_original_gps_date_delayed_result_20261124.json",
+      "data/payoff_b_stork_original_gps_date_naturally_timed_result_20261124.json"
+    ],
+    "original_CC0_public_MD5_whole_zip_required": true,
+    "original_ZIP_member_CRC_required": true,
+    "original_same_main_26_column_schema_required": true,
+    "verify_original_row_count_date_count_and_valid_georeferenced_rows_against_PR421": true,
+    "no_untrusted_redirect_or_credentials": true,
+    "no_ebird": true,
+    "no_tinyfish": true
+  },
+  "granularity": {
+    "UTC_hour": "same UTC calendar date and clock hour (floor to hour). Neither exact simultaneous GPS fixes nor individual contact timing.",
+    "spatial_primary": "same 0.1 degree latitude x 0.1 degree longitude rectangle, anchored at -90,-180; floor bins",
+    "spatial_sensitivity": "same 0.2 degree latitude x 0.2 degree longitude rectangle with same origin",
+    "boundary": "Matching discrete grid cells misses close points in adjacent cells. Cell dimensions in kilometers vary by latitude; this is NOT a 10-km or 20-km distance test.",
+    "no_grid_optimization_or_recenter_after_open": true,
+    "no_bird_position_or_grid_id_export": true
+  },
+  "unit_and_response": {
+    "co_observation_unit": "unique UTC-hour × quantized lat-lon cell, regardless of how many GPS event rows are in the same bin",
+    "per_cohort": "number of hour-cells with valid georeferenced records; number of hour-cells with at least 2 distinct tag-local-identifiers; years with coverage",
+    "between_cohorts": "number of UTC hours in common and number of same UTC-hour × same coarse grid-cell keys in common for all three cohort pairs and all three cohorts",
+    "same_tag_caveat": "Cross-study tag IDs can be reused; do NOT infer these are independent birds or same animals; source-origin grouping, not individual join.",
+    "no_sampled_rows": "All original main GPS CSV event rows in the exact three selected public archives, no sample outcome-cherry-picking"
+  },
+  "qualifying_event": "Same criterion as PR421: parseable UTC timestamp <=2026-11-24, nonempty tag string, finite lat [-90,90] and lon [-180,180]. 'visible' not used to exclude events, and its counts remain auditable in PR421.",
+  "output": [
+    "per cohort source row/valid row and timestamp UTC-day counts against previous authenticated receipts",
+    "per cohort n distinct UTC hours with GPS, n distinct 0.1/0.2 degree hour-cells and n of these hour-cells with at least two tags",
+    "per cohort pair and triple n UTC hours in common and n hour-cell keys in common at BOTH predeclared grid resolutions",
+    "yearly aggregate counts for each spatial/temporal gate; NO individual GPS rows, source coordinates, cell keys or tag strings",
+    "all 3 original full-ZIP MD5 and main-member CRC checks, with only aggregate receipt stored"
+  ],
+  "blocker": "Original GPS source field mismatch, MD5 mismatch, or daily support mismatch closes this lane with no cell overlap claim. A positive count is only coarse data-support opportunity, not bird social information.",
+  "biological_claim_not_licensed": [
+    "same UTC hour and grid-cell does not prove exact same time or interacting flock",
+    "tag string does not safely join across source studies",
+    "coarse cell geometry and observation errors prevent direct contact distance claims",
+    "no independently measured predecision cue predictive q, downstream actionability r or payoff/fitness effect",
+    "earlier Bronnvik 2024 already reports experience-linked conspecific density route selection"
+  ],
+  "outputs_are_counts_only": true,
+  "original_GPS_files_ephemeral_not_committed": true
+}

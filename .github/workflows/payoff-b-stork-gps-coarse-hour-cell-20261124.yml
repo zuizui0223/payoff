@@ -1,0 +1,61 @@
+name: PAYOFF-B CC0 original stork GPS source-only UTC hour coarse cell
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-stork-coarse-time-space-support-20261124
+    paths:
+      - ".github/workflows/payoff-b-stork-gps-coarse-hour-cell-20261124.yml"
+      - "scripts/payoff_b_stork_gps_coarse_hour_cell_20261124.py"
+      - "tests/test_payoff_b_stork_gps_coarse_hour_cell_20261124.py"
+      - "data/payoff_b_stork_original_gps_hour_cell_contract_20261124.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-cohort-hour-cell-support:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pure synthetic regression tests
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Verify fixed coarse spatial bin source logic, UTC time and no raw position output
+        run: pytest -q -rs tests/test_payoff_b_stork_gps_coarse_hour_cell_20261124.py
+      - name: Reacquire and MD5-authenticate exact original three CC0 GPS ZIPs and calculate only source opportunity counts
+        run: |
+          python scripts/payoff_b_stork_gps_coarse_hour_cell_20261124.py \
+            --contract data/payoff_b_stork_original_gps_hour_cell_contract_20261124.json \
+            --source-contract data/payoff_b_stork_original_gps_date_coverage_contract_20261124.json \
+            --header-receipt data/payoff_b_stork_gps_csv_header_result_20261124.json \
+            --output outputs/payoff_b_stork_gps_coarse_hour_cell_source_20261124.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          z=json.loads(Path("outputs/payoff_b_stork_gps_coarse_hour_cell_source_20261124.json").read_text())
+          assert z["status"]=="SOURCE_ORIGINAL_GPS_COARSE_HOUR_CELL_SUPPORT_COMPUTED_NOT_SOCIAL_CUE"
+          assert z["n_original_source_ZIPs_reverified_MD5_and_CRC"]==3
+          assert len(z["pairwise_aggregate"])==3
+          assert z["not_complete_original_study_GPS_population"] is True
+          assert z["original_GPS_ZIPs_or_event_rows_exported"] is False
+          assert z["tag_or_animal_identifiers_or_cell_keys_exported"] is False
+          assert z["focal_same_bird_cross_cohort_join_performed"] is False
+          assert z["actual_bird_social_interaction_or_cue_receipt_identified"] is False
+          assert z["predictive_reliability_q_or_remaining_recourse_r_estimated"] is False
+          assert z["biological_fitness_or_behavior_model_fitted"] is False
+          assert z["no_ebird"] is True
+          expected_valid={"control":8618285,"delayed":9134547,"naturally_timed":9264443}
+          for name,n in expected_valid.items():
+              assert z["three_cohort_source"][name]["n_original_valid_GPS_rows_checked"]==n
+          print("ORIGINAL_3COHORT_FIXED_HOUR_CELL_SUPPORT_GATE_PASS")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-gps-UTC-hour-grid-source-aggregate-only-20261124
+          path: outputs/payoff_b_stork_gps_coarse_hour_cell_source_20261124.json
+          if-no-files-found: error
