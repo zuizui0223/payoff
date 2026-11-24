@@ -50,3 +50,27 @@ Brønnvik et al. (2024, Current Biology, DOI 10.1016/j.cub.2024.03.052) は、�
 - [2030年未来日の事後契約](../data/payoff_b_stork_future_end_date_diagnosis_contract_20261124.json)、[結果JSON](../data/payoff_b_stork_future_end_diagnosis_result_20261124.json)。
 - [GitHub Actions run 45365611394](https://github.com/zuizui0223/payoff/actions/runs/45365611394) の両方のソース専用ジョブが成功。事後診断アーティファクト14906422174、ZIP SHA256 d998bd185be919b8ec76f61574d2259c7c845de6fc4e71324fca54d980b0e956。
 - 個体名・タグ文字列・個別の元CSV行・GPS座標をリポジトリには保存していない。eBirdも使用していない。mainと凍結済み原稿は未変更。
+
+## 追加検証：3種類の識別子を分離
+
+Movebankの[公式データモデル](https://www.movebank.org/cms/movebank-content/mb-data-model)によれば、タグIDは機器、動物IDは研究内の動物、装着イベントIDはタグをどの動物にどの期間装着したかに対応する。タグ機器は別の動物へ再装着可能であり、これらは交換可能な個体キーではない。
+
+3群の同じ原本参照CSVに含まれる識別子を、元文字列をGitHubに保存せず、**各識別子の独立数・空欄数・群間の文字列重複数のみ**再集計した。
+
+| 元の実験群 | 異なるタグID | 異なる動物ID | 異なる装着イベントID | 装着イベントID空欄 |
+|---|---:|---:|---:|---:|
+| 対照 | 19 | 19 | 19 | 0 |
+| 遅延 | 40 | 40 | 40 | 0 |
+| 自然出発 | **137** | **153** | **133** | **20** |
+
+自然出発群でタグIDが重複する余剰レコードは16行、16のタグ文字列が複数行に現れる。10のタグ文字列には複数の装着イベント文字列が対応した。これは1タグ=1個体=1行という単純な対応が成り立たない直接的な資料上の証拠である。
+
+**群をまたぐ同一文字列の出現**は、タグIDでは対照×遅延1、対照×自然出発2、遅延×自然出発9だった。一方、動物IDと装着イベントIDについては**3群のいずれの組み合わせでも同一文字列0**であった。
+
+この0は「生物学的に重複個体がいない」証明ではない。公開資料は群ごとに独立した研究・付帯参照表であり、共通の本人確認対応表なしでは同一ID文字列も生物学的個体同一性を保証しない。**たまたま同じタグ番号を使って原データを結合することも、異なる動物IDを別個体と確定することも避ける。**
+
+公式[Movebank属性辞典](https://www.movebank.org/cms/movebank-content/movebank-attribute-dictionary)では、装着終了は所有者が定義する時刻で、時にはインポート処理で設定され、死亡時刻とは別であることが明記されている。このため2030年の未来の終了日についても「実際の移動観測終了」という解釈はできない。
+
+識別子の原資料検査は、[事前に別保存した契約](../data/payoff_b_stork_id_join_semantics_contract_20261124.json)と[実測結果JSON](../data/payoff_b_stork_id_join_semantics_result_20261124.json)に記録した。GitHub Actionsの元ソース専用実行 [45366353705](https://github.com/zuizui0223/payoff/actions/runs/45366353705) で元参照CSVの公開MD5・凍結SHAを照合し、前回のタグ重複件数（1・2・9）を完全再現。識別子の元文字列、元行、GPSを公開していない。
+
+**追加判定：SOURCE_IDENTITY_GRAIN_VERIFIED、CROSS_COHORT_BIRD_JOIN_NOT_AUTHORIZED、PREDECISION_CUE_Q_NOT_IDENTIFIED。** 主論文の情報×修正余地の実証には昇格しない。
