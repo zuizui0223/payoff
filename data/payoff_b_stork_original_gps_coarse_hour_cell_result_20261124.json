@@ -1,0 +1,294 @@
+{
+  "date": "2026-11-24",
+  "status": "SOURCE_ORIGINAL_GPS_COARSE_HOUR_CELL_SUPPORT_COMPUTED_NOT_SOCIAL_CUE",
+  "n_original_source_ZIPs_reverified_MD5_and_CRC": 3,
+  "three_cohort_source": {
+    "control": {
+      "cohort": "control",
+      "n_original_GPS_rows_checked": 8621096,
+      "n_original_valid_GPS_rows_checked": 8618285,
+      "n_UTC_days_with_valid_GPS": 825,
+      "n_UTC_hours_with_valid_GPS": 15685,
+      "n_UTC_hour_0p1_degree_cells": 65690,
+      "n_UTC_hour_0p2_degree_cells": 60916,
+      "n_UTC_hour_0p1_cells_with_at_least_two_tag_strings": 2507,
+      "n_UTC_hour_0p2_cells_with_at_least_two_tag_strings": 2556,
+      "yearly_0p1_degree_cell_count": [
+        {
+          "year": 2019,
+          "n_bins": 14350
+        },
+        {
+          "year": 2020,
+          "n_bins": 28233
+        },
+        {
+          "year": 2021,
+          "n_bins": 23107
+        }
+      ],
+      "yearly_0p2_degree_cell_count": [
+        {
+          "year": 2019,
+          "n_bins": 12749
+        },
+        {
+          "year": 2020,
+          "n_bins": 26560
+        },
+        {
+          "year": 2021,
+          "n_bins": 21607
+        }
+      ],
+      "no_original_tag_or_coordinate_exported": true
+    },
+    "delayed": {
+      "cohort": "delayed",
+      "n_original_GPS_rows_checked": 9136163,
+      "n_original_valid_GPS_rows_checked": 9134547,
+      "n_UTC_days_with_valid_GPS": 865,
+      "n_UTC_hours_with_valid_GPS": 15407,
+      "n_UTC_hour_0p1_degree_cells": 58800,
+      "n_UTC_hour_0p2_degree_cells": 54094,
+      "n_UTC_hour_0p1_cells_with_at_least_two_tag_strings": 6877,
+      "n_UTC_hour_0p2_cells_with_at_least_two_tag_strings": 7282,
+      "yearly_0p1_degree_cell_count": [
+        {
+          "year": 2019,
+          "n_bins": 9024
+        },
+        {
+          "year": 2020,
+          "n_bins": 31605
+        },
+        {
+          "year": 2021,
+          "n_bins": 18171
+        }
+      ],
+      "yearly_0p2_degree_cell_count": [
+        {
+          "year": 2019,
+          "n_bins": 8556
+        },
+        {
+          "year": 2020,
+          "n_bins": 28970
+        },
+        {
+          "year": 2021,
+          "n_bins": 16568
+        }
+      ],
+      "no_original_tag_or_coordinate_exported": true
+    },
+    "naturally_timed": {
+      "cohort": "naturally_timed",
+      "n_original_GPS_rows_checked": 9266108,
+      "n_original_valid_GPS_rows_checked": 9264443,
+      "n_UTC_days_with_valid_GPS": 573,
+      "n_UTC_hours_with_valid_GPS": 10864,
+      "n_UTC_hour_0p1_degree_cells": 44212,
+      "n_UTC_hour_0p2_degree_cells": 38435,
+      "n_UTC_hour_0p1_cells_with_at_least_two_tag_strings": 3215,
+      "n_UTC_hour_0p2_cells_with_at_least_two_tag_strings": 4073,
+      "yearly_0p1_degree_cell_count": [
+        {
+          "year": 2020,
+          "n_bins": 28851
+        },
+        {
+          "year": 2021,
+          "n_bins": 15327
+        },
+        {
+          "year": 2022,
+          "n_bins": 34
+        }
+      ],
+      "yearly_0p2_degree_cell_count": [
+        {
+          "year": 2020,
+          "n_bins": 24703
+        },
+        {
+          "year": 2021,
+          "n_bins": 13710
+        },
+        {
+          "year": 2022,
+          "n_bins": 22
+        }
+      ],
+      "no_original_tag_or_coordinate_exported": true
+    }
+  },
+  "pairwise_aggregate": [
+    {
+      "cohort_a": "control",
+      "cohort_b": "delayed",
+      "n_common_UTC_hours": 15079,
+      "common_hour_counts_by_year": [
+        {
+          "year": 2019,
+          "n_bins": 2194
+        },
+        {
+          "year": 2020,
+          "n_bins": 6957
+        },
+        {
+          "year": 2021,
+          "n_bins": 5928
+        }
+      ],
+      "n_same_UTC_hour_and_0p1_degree_cell_keys": 172,
+      "yearly_0p1_cell_hour_common_keys": [
+        {
+          "year": 2020,
+          "n_bins": 135
+        },
+        {
+          "year": 2021,
+          "n_bins": 37
+        }
+      ],
+      "n_same_UTC_hour_and_0p2_degree_cell_keys": 302,
+      "yearly_0p2_cell_hour_common_keys": [
+        {
+          "year": 2020,
+          "n_bins": 253
+        },
+        {
+          "year": 2021,
+          "n_bins": 49
+        }
+      ]
+    },
+    {
+      "cohort_a": "control",
+      "cohort_b": "naturally_timed",
+      "n_common_UTC_hours": 9845,
+      "common_hour_counts_by_year": [
+        {
+          "year": 2020,
+          "n_bins": 3919
+        },
+        {
+          "year": 2021,
+          "n_bins": 5926
+        }
+      ],
+      "n_same_UTC_hour_and_0p1_degree_cell_keys": 1267,
+      "yearly_0p1_cell_hour_common_keys": [
+        {
+          "year": 2020,
+          "n_bins": 1165
+        },
+        {
+          "year": 2021,
+          "n_bins": 102
+        }
+      ],
+      "n_same_UTC_hour_and_0p2_degree_cell_keys": 1236,
+      "yearly_0p2_cell_hour_common_keys": [
+        {
+          "year": 2020,
+          "n_bins": 1123
+        },
+        {
+          "year": 2021,
+          "n_bins": 113
+        }
+      ]
+    },
+    {
+      "cohort_a": "delayed",
+      "cohort_b": "naturally_timed",
+      "n_common_UTC_hours": 9903,
+      "common_hour_counts_by_year": [
+        {
+          "year": 2020,
+          "n_bins": 3920
+        },
+        {
+          "year": 2021,
+          "n_bins": 5983
+        }
+      ],
+      "n_same_UTC_hour_and_0p1_degree_cell_keys": 1974,
+      "yearly_0p1_cell_hour_common_keys": [
+        {
+          "year": 2020,
+          "n_bins": 1890
+        },
+        {
+          "year": 2021,
+          "n_bins": 84
+        }
+      ],
+      "n_same_UTC_hour_and_0p2_degree_cell_keys": 2754,
+      "yearly_0p2_cell_hour_common_keys": [
+        {
+          "year": 2020,
+          "n_bins": 2495
+        },
+        {
+          "year": 2021,
+          "n_bins": 259
+        }
+      ]
+    }
+  ],
+  "three_cohort_aggregate": {
+    "n_common_UTC_hours": 9845,
+    "common_hour_counts_by_year": [
+      {
+        "year": 2020,
+        "n_bins": 3919
+      },
+      {
+        "year": 2021,
+        "n_bins": 5926
+      }
+    ],
+    "n_same_UTC_hour_and_0p1_degree_cell_keys": 11,
+    "yearly_0p1_cell_hour_common_keys": [
+      {
+        "year": 2020,
+        "n_bins": 11
+      }
+    ],
+    "n_same_UTC_hour_and_0p2_degree_cell_keys": 16,
+    "yearly_0p2_cell_hour_common_keys": [
+      {
+        "year": 2020,
+        "n_bins": 16
+      }
+    ]
+  },
+  "spatial_primary": "Same 0.1 degree lat/lon bin anchored at -90,-180, NOT fixed-distance or direct visibility",
+  "spatial_sensitivity": "Same 0.2 degree lat/lon bin, no source retuning",
+  "hour_definition": "Same UTC clock hour, not exactly simultaneous GPS event",
+  "file_selection": "One previously frozen smallest public GPS ZIP per 2023 cohort",
+  "not_complete_original_study_GPS_population": true,
+  "original_GPS_ZIPs_or_event_rows_exported": false,
+  "tag_or_animal_identifiers_or_cell_keys_exported": false,
+  "focal_same_bird_cross_cohort_join_performed": false,
+  "actual_bird_social_interaction_or_cue_receipt_identified": false,
+  "predictive_reliability_q_or_remaining_recourse_r_estimated": false,
+  "biological_fitness_or_behavior_model_fitted": false,
+  "no_ebird": true,
+  "claim_limit": "UTC-hour×degree-grid occupancy of tagged source instruments only. Even matching hour and grid bin is not direct flock contact, individual information, cue reliability, or payoff.",
+  "source_contract_sha256": "34e72d17f4486be33c75f0db8ae4711e578b43ab01ba34b6a495e0fe7f69a58f",
+  "new_frozen_contract_sha256": "7a66ad5b6a6d2aeb11c9cc9677256111e183ae2deb3258992cd7710a68cd1e7b",
+  "original_paper_doi": "10.1098/rspb.2023.1268",
+  "source_execution": {
+    "original_source_actions_run": 45373552176,
+    "original_source_job": 138373664949,
+    "source_aggregate_only_artifact_id": 14910902094,
+    "source_aggregate_only_zip_sha256": "2be07a212ddc0846171c0ebabeadf1c88b5ef5c0d105be08453eb5cd00ed8d04",
+    "original_GPS_files_or_member_values_committed": false
+  }
+}
