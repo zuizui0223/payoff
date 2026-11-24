@@ -1,0 +1,63 @@
+name: PAYOFF-B derived-only exact UTC cohort observation-day overlap
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-stork-gps-date-coverage-20261124
+    paths:
+      - ".github/workflows/payoff-b-stork-gps-day-overlap-20261124.yml"
+      - "scripts/payoff_b_stork_gps_day_overlap_join_20261124.py"
+      - "tests/test_payoff_b_stork_gps_day_overlap_join_20261124.py"
+      - "data/payoff_b_stork_gps_day_overlap_contract_20261124.json"
+      - "data/payoff_b_stork_original_gps_date_*_result_20261124.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-aggregate-only-day-overlap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install synthetic test runner
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Verify date overlaps cannot be mistaken for true co-location
+        run: pytest -q -rs tests/test_payoff_b_stork_gps_day_overlap_join_20261124.py
+      - name: Reconstruct only when three MD5-verified original cohort aggregate files exist
+        run: |
+          if test -f data/payoff_b_stork_original_gps_date_control_result_20261124.json \
+             && test -f data/payoff_b_stork_original_gps_date_delayed_result_20261124.json \
+             && test -f data/payoff_b_stork_original_gps_date_naturally_timed_result_20261124.json
+          then
+            python scripts/payoff_b_stork_gps_day_overlap_join_20261124.py \
+              --control data/payoff_b_stork_original_gps_date_control_result_20261124.json \
+              --delayed data/payoff_b_stork_original_gps_date_delayed_result_20261124.json \
+              --naturally-timed data/payoff_b_stork_original_gps_date_naturally_timed_result_20261124.json \
+              --contract data/payoff_b_stork_gps_day_overlap_contract_20261124.json \
+              --output outputs/payoff_b_stork_derived_gps_day_overlap_20261124.json
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path("outputs/payoff_b_stork_derived_gps_day_overlap_20261124.json").read_text())
+          assert x["status"]=="DERIVED_COHORT_UTC_DAY_SOURCE_OVERLAP_NOT_COLOCATION"
+          assert x["n_source_cohorts"]==3
+          assert x["UTC_day_only_no_hour_or_spatial_colocation"] is True
+          assert x["social_contact_information_q_or_recourse_r_estimated"] is False
+          assert x["animal_id_or_original_event_location_exported"] is False
+          assert x["outcome_or_fitness_model_fitted"] is False
+          assert x["no_ebird"] is True
+          print("DERIVED_ONLY_COHORT_DAY_OVERLAP_VALIDATED")
+          PY
+          else
+            echo "SOURCE_ORIGINAL_GPS_AGGREGATES_INCOMPLETE_NO_EMPIRICAL_OVERLAP_PRODUCED"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-derived-cohort-date-overlap-aggregate-only-20261124
+          path: outputs/payoff_b_stork_derived_gps_day_overlap_20261124.json
+          if-no-files-found: ignore

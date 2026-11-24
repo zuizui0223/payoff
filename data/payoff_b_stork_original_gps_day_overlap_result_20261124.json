@@ -1,0 +1,146 @@
+{
+  "status": "DERIVED_COHORT_UTC_DAY_SOURCE_OVERLAP_NOT_COLOCATION",
+  "n_source_cohorts": 3,
+  "source_cohort_yearly_counts": {
+    "control": {
+      "2019": {
+        "n_valid_events": 2606431,
+        "n_observed_UTC_days": 147,
+        "n_days_2plus_tags": 147
+      },
+      "2020": {
+        "n_valid_events": 4701505,
+        "n_observed_UTC_days": 366,
+        "n_days_2plus_tags": 366
+      },
+      "2021": {
+        "n_valid_events": 1310349,
+        "n_observed_UTC_days": 312,
+        "n_days_2plus_tags": 292
+      }
+    },
+    "delayed": {
+      "2019": {
+        "n_valid_events": 1637543,
+        "n_observed_UTC_days": 184,
+        "n_days_2plus_tags": 184
+      },
+      "2020": {
+        "n_valid_events": 5836073,
+        "n_observed_UTC_days": 366,
+        "n_days_2plus_tags": 366
+      },
+      "2021": {
+        "n_valid_events": 1660931,
+        "n_observed_UTC_days": 315,
+        "n_days_2plus_tags": 263
+      }
+    },
+    "naturally_timed": {
+      "2020": {
+        "n_valid_events": 7088156,
+        "n_observed_UTC_days": 207,
+        "n_days_2plus_tags": 207
+      },
+      "2021": {
+        "n_valid_events": 2176064,
+        "n_observed_UTC_days": 365,
+        "n_days_2plus_tags": 287
+      },
+      "2022": {
+        "n_valid_events": 223,
+        "n_observed_UTC_days": 1,
+        "n_days_2plus_tags": 0
+      }
+    }
+  },
+  "pairwise_same_day_observation_support": [
+    {
+      "cohort_a": "control",
+      "cohort_b": "delayed",
+      "n_exact_UTC_days_with_observations_in_both_selected_archives": 825,
+      "yearly_common_day_counts": [
+        {
+          "year": 2019,
+          "n_days": 147
+        },
+        {
+          "year": 2020,
+          "n_days": 366
+        },
+        {
+          "year": 2021,
+          "n_days": 312
+        }
+      ]
+    },
+    {
+      "cohort_a": "control",
+      "cohort_b": "naturally_timed",
+      "n_exact_UTC_days_with_observations_in_both_selected_archives": 519,
+      "yearly_common_day_counts": [
+        {
+          "year": 2020,
+          "n_days": 207
+        },
+        {
+          "year": 2021,
+          "n_days": 312
+        }
+      ]
+    },
+    {
+      "cohort_a": "delayed",
+      "cohort_b": "naturally_timed",
+      "n_exact_UTC_days_with_observations_in_both_selected_archives": 522,
+      "yearly_common_day_counts": [
+        {
+          "year": 2020,
+          "n_days": 207
+        },
+        {
+          "year": 2021,
+          "n_days": 315
+        }
+      ]
+    }
+  ],
+  "n_UTC_days_in_all_three_selected_ZIPs": 519,
+  "triple_same_day_year_counts": [
+    {
+      "year": 2020,
+      "n_days": 207
+    },
+    {
+      "year": 2021,
+      "n_days": 312
+    }
+  ],
+  "n_UTC_days_with_any_selected_ZIP_data": 916,
+  "within_group_same_day_two_tag_support": {
+    "control": 805,
+    "delayed": 813,
+    "naturally_timed": 494
+  },
+  "original_scope": "one frozen smallest original GPS ZIP per cohort, not all published tracking data",
+  "UTC_day_only_no_hour_or_spatial_colocation": true,
+  "social_contact_information_q_or_recourse_r_estimated": false,
+  "animal_id_or_original_event_location_exported": false,
+  "outcome_or_fitness_model_fitted": false,
+  "no_ebird": true,
+  "claim_limit": "Common GPS observation dates are temporal data overlap only; distinct tagged birds need not be co-located, see each other or obtain useful predictive information.",
+  "contract_sha256": "3aecd2c21e606a78183d336d1252f1a71c1081faf31b695d66aac02e473cd29c",
+  "source_receipt_sha256": {
+    "control": "26882b2177472035c18e2b87b1d4d063d3cc0092aeaa5015db34f6ff477da65a",
+    "delayed": "725b87cbcd372da1e99c1c48b29cc20f69d7591f218c2c34b5bfe0c8d0e11d67",
+    "naturally_timed": "5cf8fa6f5811b33942a6b3f72f2d0f71f8fdb5b2b86297c5cf21f4c1037c8836"
+  },
+  "actions": {
+    "source_day_census_run": 45371757583,
+    "derived_join_run": 45372492855,
+    "derived_source_job": 138370032340,
+    "derived_aggregate_only_artifact_id": 14909966336,
+    "derived_aggregate_zip_sha256": "31c07d834a6cb5acb8e12522afdda8ba3dfb843f6881925dc4ab5cffe9225947",
+    "raw_gps_rows_uploaded": false
+  }
+}

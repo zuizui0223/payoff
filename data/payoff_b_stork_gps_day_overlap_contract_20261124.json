@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-24",
+  "status": "PRE_OUTCOME_DERIVED_ONLY_COHORT_DAY_INTERSECTION_AUDIT",
+  "source": "Bontekoe et al (2023) original three separately SHA/MD5-verified public CC0 GPS ZIPs",
+  "data_input": "Only 3 cohort aggregate JSONs from the selected SINGLE archive per cohort, never raw event rows or tag IDs",
+  "expected_cohorts": [
+    "control",
+    "delayed",
+    "naturally_timed"
+  ],
+  "verified_source_required": {
+    "status": "ORIGINAL_CC0_GPS_SINGLE_ARCHIVE_UTC_DATE_SUPPORT_VERIFIED",
+    "full_original_zip_md5_source_verified": true,
+    "original_main_zip_member_CRC_read_through_EOF": true,
+    "n_valid_georeferenced_event_rows_min": 1,
+    "source_GPS_raw_file_committed": false,
+    "source_event_values_exported": false,
+    "not_full_study_coverage": true,
+    "no_ebird": true
+  },
+  "analysis": {
+    "primary": "Count exact UTC dates present with at least one valid GPS event in all three selected cohort archives",
+    "pairwise": "Count UTC dates present in each of the 3 cohort pairs; no date repeated within cohort",
+    "within_cohort": "Preserve counts of days with >=2 distinct tag strings (not actual synchronized positions)",
+    "stratification": "Calendar year of valid original GPS date",
+    "inclusion": "ALL validated dates in each of the three selected single archived GPS files; no cherry-picking year, location, individual or event by observed outcome",
+    "denominator": "Number of exact UTC calendar dates in union of three verified source event sets, NOT animal-years, not migration seasons or all original cohorts",
+    "check_source_duplicates": true,
+    "require_cohort_UTC_date_format": true,
+    "match_per_date_totals_to_yearly_source_counts": true
+  },
+  "output": "Three cohort-year support tables, 3 pairwise date-intersections by calendar year, triple-date intersection, total union dates and number of days with >=2 observed tag strings per cohort. Never raw GPS event row, tag ID, animal ID, original location or exact time of day.",
+  "potential_conclusion": "At most same UTC-day *temporal coverage* of tagged birds in selected source ZIPs. Does not show same hour, same place, flocking, social information or predictor reliability q. A zero intersection does not prove absence across unscanned other source ZIPs.",
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "no_biological_model": true
+}
