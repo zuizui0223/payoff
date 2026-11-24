@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-24",
+  "status": "POST_OPEN_SOURCE_SEMANTICS_DIAGNOSTIC_NOT_CONFIRMATORY",
+  "reason": "The first source-only deployment-date audit exposed one public delayed-cohort deploy-off-date year 2030, which is future relative to 2026-11-24 and cannot be a historical observed tag-off event.",
+  "preserved_original_receipt": "data/payoff_b_stork_deployment_time_v1_source_receipt_20261124.json",
+  "original_contract": "data/payoff_b_stork_deployment_time_contract_20261124.json",
+  "unchanged_source_doi": "10.1098/rspb.2023.1268",
+  "classification": {
+    "reference_day": "2026-11-24",
+    "date_off_after_reference": "UNVERIFIED_FUTURE_END; not an observed deployment termination, not an ending boundary in any overlap count",
+    "missing_end": "RIGHT_UNBOUNDED; cannot be imputed to reference date, death, next event, or publication date",
+    "end_not_after_reference": "CALENDAR_PLAUSIBLE_ONLY; no confirmation that end is observed vs scheduled",
+    "all_original_rows_retained": true,
+    "archive_cohort_total_rows": 212,
+    "archive_reference_SAHDigests_same_as_frozen_contract": true
+  },
+  "output": [
+    "each cohort n fully bounded calendar-plausible deployment intervals",
+    "missing/unparseable/future end counts, timestamp start-year support",
+    "number of distinct tag pair interval overlaps computed only from plausible bounded metadata (coverage possibility, NOT direct social exposure)",
+    "cross-cohort reused tag string counts only, no original IDs",
+    "difference from archived first-pass source overlap pair counts, as a source quality correction",
+    "explicit gate that q, actual co-travel, animal information and GPS events remain NOT_IDENTIFIED"
+  ],
+  "no_posthoc_adjustments_to_biological_models": true,
+  "no_gps_files_downloaded": true,
+  "no_original_identifiers_or_rows_exported": true,
+  "no_ebird": true,
+  "no_tinyfish": true
+}

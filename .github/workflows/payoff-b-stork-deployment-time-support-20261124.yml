@@ -1,0 +1,124 @@
+name: PAYOFF-B stork original CC0 deployment-time source support (no GPS)
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-stork-deployment-time-support-20261124
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-deployment-time-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install synthetic test runner
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Test temporal censoring, overlap and source-contract privacy
+        run: pytest -q -rs tests/test_payoff_b_stork_deployment_time_gate_20261124.py
+      - name: Read only 3 checksum-frozen public CC0 reference CSVs
+        run: |
+          python scripts/payoff_b_stork_deployment_time_gate_20261124.py \
+            --contract data/payoff_b_stork_deployment_time_contract_20261124.json \
+            --output outputs/payoff_b_stork_deployment_time_receipt_20261124.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          z=json.loads(Path("outputs/payoff_b_stork_deployment_time_receipt_20261124.json").read_text())
+          assert z["group_count"]==3
+          assert sum(v["original_csv_rows"] for v in z["source_cohorts"].values())==212
+          assert z["status"] in {"TIME_METADATA_BOUNDED_SUPPORT_ONLY","TIME_WINDOW_ENDS_UNOBSERVED"}
+          assert z["no_actual_bird_colocation_or_social_information_identified"] is True
+          assert z["no_environmental_predictive_reliability_estimated"] is True
+          assert z["raw_tag_ids_or_source_rows_exported"] is False
+          assert z["GPS_ZIPs_downloaded"] is False
+          assert z["original_fitness_or_treatment_effect_refitted"] is False
+          assert z["no_ebird"] is True
+          print("ORIGINAL_STORK_DEPLOYMENT_SUPPORT_STATUS",z["status"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-deployment-time-derived-only-20261124
+          path: outputs/payoff_b_stork_deployment_time_receipt_20261124.json
+          if-no-files-found: error
+
+  postopen-future-end-source-quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source test runner
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Verify quarantine of 2030 future source-date and unchanged original receipt
+        run: pytest -q -rs tests/test_payoff_b_stork_future_end_diagnosis_20261124.py
+      - name: Reacquire three verified reference CSVs and quarantine non-observable future off date
+        run: |
+          python scripts/payoff_b_stork_future_end_diagnosis_20261124.py \
+            --output outputs/payoff_b_stork_postopen_future_end_diagnosis_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          z=json.loads(Path("outputs/payoff_b_stork_postopen_future_end_diagnosis_20261124.json").read_text())
+          assert z["status"] == "POSTOPEN_FUTURE_END_QUARANTINE_COMPLETED_SOURCE_ONLY"
+          assert z["reference_day"] == "2026-11-24"
+          assert sum(x["n_end_dates_after_reference_day"] for x in z["source_quality_by_cohort"].values())==1
+          assert z["total_original_source_rows"]==212
+          assert z["GPS_event_data_opened"] is False
+          assert z["biological_q_times_recourse_or_fitness_fitted"] is False
+          assert z["raw_original_tag_ids_or_dates_committed"] is False
+          print("FUTURE_END_QUARANTINED_NO_BIOLOGICAL_EFFECT_OPENED")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-postopen-source-date-diagnosis-20261124
+          path: outputs/payoff_b_stork_postopen_future_end_diagnosis_20261124.json
+          if-no-files-found: error
+
+  study-relative-id-source-quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source test runner
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Test original Movebank tag animal deployment grain and no-ID leak
+        run: pytest -q -rs tests/test_payoff_b_stork_id_join_semantics_20261124.py
+      - name: Authenticate three reference CSVs then audit study-relative key reuse
+        run: |
+          python scripts/payoff_b_stork_id_join_semantics_20261124.py \
+            --output outputs/payoff_b_stork_id_grain_receipt_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("outputs/payoff_b_stork_id_grain_receipt_20261124.json").read_text())
+          assert r["status"]=="SOURCE_IDS_MATCH_PREVIOUS_TAG_GATE_NO_CROSS_COHORT_IDENTITY"
+          assert r["n_original_reference_rows"]==212
+          assert r["n_studies"]==3
+          assert r["identity_join_authorized"] is False
+          assert r["gps_events_requested"] is False
+          assert r["original_tag_animal_deployment_ids_exported"] is False
+          assert r["predeparture_information_q_or_recourse_r_estimated"] is False
+          assert r["no_ebird"] is True
+          print("MOVE_BANK_THREE_IDENTIFIER_GRAIN_AUDIT_COMPLETE")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-study-relative-id-audit-20261124
+          path: outputs/payoff_b_stork_id_grain_receipt_20261124.json
+          if-no-files-found: error

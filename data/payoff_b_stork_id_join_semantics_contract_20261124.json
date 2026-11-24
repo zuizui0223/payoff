@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-24",
+  "status": "POSTOPEN_SOURCE_IDENTITY_JOIN_DIAGNOSTIC_ONLY",
+  "source": "Bontekoe et al 2023 Proc B public CC0 Movebank archived reference CSV 3 cohorts",
+  "frozen_input_contract": "data/payoff_b_stork_deployment_time_contract_20261124.json",
+  "semantic_authority": [
+    "https://www.movebank.org/cms/movebank-content/mb-data-model",
+    "https://www.movebank.org/cms/movebank-content/movebank-attribute-dictionary"
+  ],
+  "source_semantics": "Movebank tag-id identifies a tag and may be redeployed; deployment-id identifies a tag-animal deployment; animal-id is study-relative. Do not collapse any to verified same-bird join across original studies.",
+  "registered_fields": [
+    "tag-id",
+    "animal-id",
+    "deployment-id",
+    "deploy-on-date",
+    "deploy-off-date"
+  ],
+  "unit": "one reference CSV deployment row; do not assume each row one animal",
+  "verification": [
+    "n rows equal original 19/40/153",
+    "missing counts and distinct counts for all 3 ID fields",
+    "within-source repeated tag, animal and deployment ID counts",
+    "across cohort pair repeated tag, animal and deployment strings only, not raw values",
+    "same tag reused with distinct deployment ID within a cohort, counts only",
+    "guard source integrity using MD5 and SHA256 already pinned",
+    "no identifiers, source data rows or GPS content exported"
+  ],
+  "negative_claim_boundary": "Same ID strings across cohorts do not prove identity without source-owner mapping; no information use q nor actionability r assessed",
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "no_GPS_data_downloaded": true,
+  "no_new_biological_effect": true
+}

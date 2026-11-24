@@ -1,0 +1,209 @@
+{
+  "status": "TIME_METADATA_BOUNDED_SUPPORT_ONLY",
+  "source_cohorts": {
+    "control": {
+      "original_csv_rows": 19,
+      "source_expected_rows": 19,
+      "distinct_tag_ids": 19,
+      "n_on_dates_parseable": 19,
+      "n_off_dates_parseable": 9,
+      "n_bounded_valid_on_off_intervals": 9,
+      "n_missing_or_unparseable_on": 0,
+      "n_missing_or_unparseable_off": 10,
+      "n_off_before_on": 0,
+      "min_start_year": 2019,
+      "max_start_year": 2020,
+      "start_year_counts": [
+        {
+          "year": 2019,
+          "n": 9
+        },
+        {
+          "year": 2020,
+          "n": 10
+        }
+      ],
+      "end_year_counts": [
+        {
+          "year": 2019,
+          "n": 4
+        },
+        {
+          "year": 2020,
+          "n": 3
+        },
+        {
+          "year": 2021,
+          "n": 2
+        }
+      ],
+      "complete_bounded_source_not_bird_co_travel": true
+    },
+    "delayed": {
+      "original_csv_rows": 40,
+      "source_expected_rows": 40,
+      "distinct_tag_ids": 40,
+      "n_on_dates_parseable": 40,
+      "n_off_dates_parseable": 20,
+      "n_bounded_valid_on_off_intervals": 20,
+      "n_missing_or_unparseable_on": 0,
+      "n_missing_or_unparseable_off": 20,
+      "n_off_before_on": 0,
+      "min_start_year": 2019,
+      "max_start_year": 2020,
+      "start_year_counts": [
+        {
+          "year": 2019,
+          "n": 20
+        },
+        {
+          "year": 2020,
+          "n": 20
+        }
+      ],
+      "end_year_counts": [
+        {
+          "year": 2019,
+          "n": 1
+        },
+        {
+          "year": 2020,
+          "n": 10
+        },
+        {
+          "year": 2021,
+          "n": 7
+        },
+        {
+          "year": 2022,
+          "n": 1
+        },
+        {
+          "year": 2030,
+          "n": 1
+        }
+      ],
+      "complete_bounded_source_not_bird_co_travel": true
+    },
+    "naturally_timed": {
+      "original_csv_rows": 153,
+      "source_expected_rows": 153,
+      "distinct_tag_ids": 137,
+      "n_on_dates_parseable": 153,
+      "n_off_dates_parseable": 55,
+      "n_bounded_valid_on_off_intervals": 55,
+      "n_missing_or_unparseable_on": 0,
+      "n_missing_or_unparseable_off": 98,
+      "n_off_before_on": 0,
+      "min_start_year": 2020,
+      "max_start_year": 2023,
+      "start_year_counts": [
+        {
+          "year": 2020,
+          "n": 40
+        },
+        {
+          "year": 2021,
+          "n": 37
+        },
+        {
+          "year": 2022,
+          "n": 36
+        },
+        {
+          "year": 2023,
+          "n": 40
+        }
+      ],
+      "end_year_counts": [
+        {
+          "year": 2020,
+          "n": 17
+        },
+        {
+          "year": 2021,
+          "n": 15
+        },
+        {
+          "year": 2022,
+          "n": 17
+        },
+        {
+          "year": 2023,
+          "n": 6
+        }
+      ],
+      "complete_bounded_source_not_bird_co_travel": true
+    }
+  },
+  "within_cohort_known_bounded_tag_deployment_pair_counts": [
+    {
+      "cohort": "control",
+      "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 20
+    },
+    {
+      "cohort": "delayed",
+      "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 164
+    },
+    {
+      "cohort": "naturally_timed",
+      "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 464
+    }
+  ],
+  "cross_cohort_known_bounded_tag_deployment_pair_counts": [
+    {
+      "cohort_a": "control",
+      "cohort_b": "delayed",
+      "n_reused_tag_strings": 1,
+      "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 116
+    },
+    {
+      "cohort_a": "control",
+      "cohort_b": "naturally_timed",
+      "n_reused_tag_strings": 2,
+      "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 108
+    },
+    {
+      "cohort_a": "delayed",
+      "cohort_b": "naturally_timed",
+      "n_reused_tag_strings": 9,
+      "n_distinct_tag_pairs_with_known_bounded_deployment_overlap": 401
+    }
+  ],
+  "n_groups_with_ge5_bounded_intervals": 3,
+  "group_count": 3,
+  "no_animal_contact_or_encounter_measured": true,
+  "no_actual_bird_colocation_or_social_information_identified": true,
+  "no_environmental_predictive_reliability_estimated": true,
+  "GPS_ZIPs_downloaded": false,
+  "raw_tag_ids_or_source_rows_exported": false,
+  "original_fitness_or_treatment_effect_refitted": false,
+  "no_ebird": true,
+  "interpretation": "Tag deployment date overlap is source coverage potential only; deployment dates are not actual individual location or behavior timestamps and missing off dates are not imputed.",
+  "source_file_checksums": {
+    "control": {
+      "sha256": "3511591f8bcb58bb9e587603b867a64fb25a0f5ceb82ed8e778699dd5c745f68",
+      "md5_source_verified": true
+    },
+    "delayed": {
+      "sha256": "811da2fb5a2cc1d3b5067304ee041bfb83ace9a0f5735b649dd758c544adbc7e",
+      "md5_source_verified": true
+    },
+    "naturally_timed": {
+      "sha256": "c02ea4d2eae1663a8c066ebfbde847b8a0eebc009292b0363540b61036be4996",
+      "md5_source_verified": true
+    }
+  },
+  "contract_sha256": "f89512842633fa541348cbcaa870be36f1efac5db9853649a8bc5933e8f7ad54",
+  "source_doi": "10.1098/rspb.2023.1268",
+  "analysis_date": "2026-11-24",
+  "data_class": "SOURCE_ONLY_PREDECISION_TIME_SUPPORT_NOT_BIOLOGICAL_OUTCOME",
+  "audit_annotation": {
+    "stage": "POSTOPEN_CAUTION_NOT_A_MODEL_RESULT",
+    "unverified_future_off_year_count": 1,
+    "support_status_override": "TIME_OVERLAP_COUNTS_QUARANTINED_PENDING_FUTURE_END_SEMANTICS",
+    "cause": "One original delayed deploy-off-date lies in 2030, beyond 2026-11-24. Its status as an observed off date is impossible. The initial pair-overlap counts are source-only and may be inflated.",
+    "prospective_contract_unchanged": true,
+    "exact_original_tag_deployment_rows_not_committed": true
+  }
+}
