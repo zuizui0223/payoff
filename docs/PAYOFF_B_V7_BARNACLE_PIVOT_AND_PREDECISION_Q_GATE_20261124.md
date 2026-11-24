@@ -64,7 +64,7 @@ V7は「初めて鳥類が環境を読む」という主張ではない。Kölzs
 - 元V7の登録と凍結原稿を修正しない。新しい過去年限定の指標は**事前に別条件を凍結した補助分析案**で、後から主結果を差し替えない。
 - eBird/TinyFishを使わない。鳥の生存・繁殖に関する新しい効果を示したとは主張しない。
 
-**現在の判定：STORK_DIRECT_QR=NOT_IDENTIFIED; BARNACLE_V7_SOURCE_METADATA=IN_VERIFICATION; INDEPENDENT_PAST_ONLY_Q=NOT_YET_MATERIALIZED; V7_FOCAL_INTERACTION=UNOPENED。**
+**現在の判定：STORK_DIRECT_QR=NOT_IDENTIFIED; BARNACLE_V7_SOURCE_METADATA=VERIFIED_ALL_THREE; INDEPENDENT_PAST_ONLY_Q=NOT_YET_MATERIALIZED; V7_FOCAL_INTERACTION=UNOPENED。**
 
 
 ### 2026-11-24 原資料の題名・年代の訂正履歴
@@ -80,3 +80,26 @@ V7は「初めて鳥類が環境を読む」という主張ではない。Kölzs
 数学的に、すべての年の春開始日から地域固有の一定平均を差し引いても、`corr(source,target)` は変わらない。また過去年だけで学習した線形のsource→target予測と、その年の目的地環境との差、および過去年平均を基準にした予測誤差は、一定の加減に対して不変である。**この不変性は合成テストで検証対象とした。** ただし、環境の年次偏差だけでは個体の絶対到着日と絶対春開始日の差 `|arrivalDOY - onsetDOY|` を算出できないため、原著の個体反応Yは引き続き未開封・未推定とする。
 
 原本に掲載された1982〜2011年の年次系列全体を今なお再配布可能な機械可読の行へ変換できるかは未検証であり、どの年の値も現在の台帳では作成・補完していない。
+
+
+## 6. 原本アーカイブを実際に検証した結果（2026-11-24）
+
+3つの公開Movebank Data Repository DOIの公式題名は、原論文と同じ「Forecasting spring from afar? ...」から始まり、それぞれグリーンランド、スバールバル、バレンツ海を識別するものだった。最初の短い題名による不一致（前述）は、明示的な[資料名別名の補正](../data/payoff_b_v7_barnacle_source_alias_correction_20261124.json)で解消した。DOI、原本資料のハンドル、DSpaceの項目UUID、原資料のORIGINALバンドルを照合し、**3資料全てのファイルメタデータを確認した**。
+
+| フライウェイ | 正式な元資料ハンドル | 原本イベントCSV規模 | 参照CSV | README | 公式ライセンス |
+|---|---|---:|---:|---:|---|
+| グリーンランド | 10255/move.380 | 1,976,465 bytes | 3,129 bytes | 11,452 bytes | **CC0 1.0** |
+| スバールバル | 10255/move.377 | 7,274,402 bytes | 9,229 bytes | 11,931 bytes | **CC BY-NC 4.0** |
+| バレンツ海 | 10255/move.383 | 6,665,068 bytes | 5,516 bytes | 13,755 bytes | **CC0 1.0** |
+
+3資料ともORIGINALにCSV 2本・README 1本の計9ファイルが登録され、原本の公開MD5メタデータとファイルサイズが得られた。**スバールバルだけは非商用・出典表示の要件があるため、3資料をまとめてCC0と書くことは誤り**である。
+
+- [原本DOI・配布項目・ライセンス・ファイル種別の検証済み集計](../data/payoff_b_v7_barnacle_original_archive_metadata_result_20261124.json)。
+- [GitHub Actions 45387623954](https://github.com/zuizui0223/payoff/actions/runs/45387623954) の原資料メタデータ専用ジョブは**SUCCESS**。集計のみのアーティファクト14916583189、ZIP SHA256 `1a9b3dbad300fcde32b1a6e5f32336767606523c14945925440a6c5f03d13c02`。
+- 元の鳥GPS・観測イベント行、ライセンス確認前のファイル本文、V7の鳥の結果変数は一切読んでいない。
+
+別の[過去年限定の環境qゲート](../data/payoff_b_v7_historical_q_source_status_20261124.json)は、合成データの時系列漏洩検査に成功したが、**原著の年次植物季節系列がデータとして未取得**のため正しく`V7_HISTORICAL_Q_SOURCE_NOT_MATERIALIZED`と判定した。従って**V7のq値やq×U効果はまだ出していない**。
+
+次の原資料工程として、公開アーカイブ中の小さな参照CSV／READMEだけを原本MD5で照合し、別に環境季節の表S2〜S7の入手可能性を確認する。検証条件は[小規模参照ファイル専用契約](../data/payoff_b_v7_barnacle_small_source_contract_20261124.json)に保存した。大きなGPS本体を資料名だけで環境qへ流用してはならない。
+
+**論文上の最小の新規性は、元研究のqや渡り段階の単独関連ではなく、独立測定した予測性×経路段階の相互作用の検定に限定する。** Kölzsch原著の混合モデルでは、phenology correlation coefficient `r` ではなく、比例性指数 `s` の単独関連が支持された。元のV7の符号付き相関qを事後的に`s`や絶対相関へ置き換えず、元の登録どおり感度解析で区別する。
