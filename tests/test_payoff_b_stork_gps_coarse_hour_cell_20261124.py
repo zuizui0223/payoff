@@ -48,8 +48,8 @@ def test_stream_reads_all_synthetic_events_and_retains_only_internal_keys():
     scan=s.source_scan_main_csv(csv_stream(sample_rows()),COLS,date(2026,11,24))
     assert scan["n_raw_rows"]==7
     assert scan["n_valid_georeferenced_rows"]==5
-    assert scan["n_bad_timestamp"]==1
-    assert scan["n_bad_position"]==1
+    assert scan["n_unusable_time"]==1
+    assert scan["n_unusable_coordinate"]==1
     assert len(scan["day_ordinals"])==1
     assert len(scan["hour_ordinals"])==2
     assert len(scan["cell_hour_keys"][10])==3
@@ -90,7 +90,7 @@ def test_source_original_full_scan_counts_must_match_previous_CRC_gate():
           "not_full_study_coverage":True}
     s.verify_against_first_pass(scan,prev)
     prev["n_valid_georeferenced_event_rows"]=6
-    with pytest.raises(ValueError,match="source"):
+    with pytest.raises(ValueError,match="Original GPS support"):
         s.verify_against_first_pass(scan,prev)
 
 
@@ -102,8 +102,8 @@ def test_bad_coordinates_and_missing_timestamp_not_promoted():
     ])
     z=s.source_scan_main_csv(stream,COLS,date(2026,11,24))
     assert z["n_raw_rows"]==3
-    assert z["n_bad_timestamp"]==1
-    assert z["n_bad_position"]==1
+    assert z["n_unusable_time"]==1
+    assert z["n_unusable_coordinate"]==1
     assert z["n_valid_georeferenced_rows"]==1
     assert len(z["cell_hour_keys"][10])==1
 
