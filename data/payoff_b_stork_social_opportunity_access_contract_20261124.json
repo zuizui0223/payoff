@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-24",
+  "status": "SOURCE_ACCESS_AND_INDEPENDENT_SOCIAL_OPPORTUNITY_ADMISSION_NO_EVENTS_OPENED",
+  "prior": {
+    "parent_pr": 418,
+    "2023_DOI": "10.1098/rspb.2023.1268",
+    "2024_confounding_prior_art_DOI": "10.1016/j.cub.2024.03.052",
+    "2024_PNAS_exploration_DOI": "10.1073/pnas.2306389121"
+  },
+  "2023_archives": [
+    {
+      "cohort": "control",
+      "doi": "10.5441/001/1.271",
+      "landing": "https://datarepository.movebank.org/handle/10255/move.1627",
+      "cc0_metadata_verified": true
+    },
+    {
+      "cohort": "delayed",
+      "doi": "10.5441/001/1.276",
+      "landing": "https://datarepository.movebank.org/handle/10255/move.1632",
+      "cc0_metadata_verified": true
+    },
+    {
+      "cohort": "naturally_timed",
+      "doi": "10.5441/001/1.277",
+      "landing": "https://datarepository.movebank.org/handle/10255/move.1633",
+      "cc0_metadata_verified": true
+    }
+  ],
+  "source_access_method": {
+    "allowed": "Anonymous HTTPS HEAD of exact archive DOI and declared repository landing URLs. At most 8KiB of HTML metadata GET, only if needed after failed HEAD, and only for original known landing URL.",
+    "forbidden": "No Movebank tracking event API, GPS CSV, dataset payload ZIP, hidden coordinate endpoints, credential use, automatic terms acceptance, license bypass, or unverified URL scraping",
+    "do_not_assume": "A CC0 DataCite DOI means public license metadata, not proof the current file server allows direct anonymous event download"
+  },
+  "registered_science_gate": {
+    "target": "Predeparture conspecific opportunity x remaining downstream route/time adjustment, as a hypothesis not an executed test",
+    "past_work": "Brønnvik et al. 2024, Current Biology 34:2030–2037.e3, 158 tracked birds (up to 9 years), estimated social hotspots from 400 storks, showed age decline in conspecific-density route selection.",
+    "not_novel": "Social preference for conspecific routes, preference declining with experience, delayed cohort's altered migration distance/flight/survival and learning-refinement in storks",
+    "required_to_open_any_new_result": [
+      "Authorized original timestamped tracking events from all three source cohorts; each source study's terms/CC0 verified at file boundary",
+      "A separate, timestamped social opportunity surface constructed from birds not used as the focal choice response, excluding future observations and self-inclusion",
+      "Focal decision time/location and available route alternatives with recourse independently defined from movement outcome",
+      "Independent predecision cue predictive reliability q for subsequent resource/environment state; tagged-neighbor density is only exposure opportunity, not q",
+      "Specific causal or out-of-year estimand absent from Bontekoe 2023, Brønnvik 2024, Aikens 2024 prior results",
+      "Same-focal-bird event and outcome join with correct cohorts/years; no cross-study bird identity inferred from matching names or regions"
+    ],
+    "decision_rule": "Current metadata or old archive landing access cannot validate animal-level q x recourse; classify only source transport, not ecological effect"
+  },
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "no_stork_event_rows_downloaded": true,
+  "original_2023_results_untouched": true,
+  "current_main_frozen_submissions_untouched": true
+}
