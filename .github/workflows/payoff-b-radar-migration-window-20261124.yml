@@ -70,8 +70,48 @@ jobs:
               assert not any("site" in x for x in d["annual_aggregate"])
           print("RADAR_WINDOW_SOURCE_STATUS",d["status"])
           PY
+      - name: Independently reproduce aggregate-only q10–q90 counts in base R
+        run: |
+          Rscript scripts/payoff_b_radar_window_independent_R_check_20261124.R \
+            outputs/private_original_rdata/data_2003_2018.Rda \
+            outputs/payoff_b_radar_window_independent_R_aggregate_20261124.csv
+          python - <<'PY'
+          from pathlib import Path
+          import csv,json
+          py=json.loads(Path("outputs/payoff_b_radar_migration_window_result_20261124.json").read_text())
+          assert py["status"]=="WINDOW_CHRONOLOGY_COMPLETED_BOUNDING_NOT_CUE_USE"
+          with Path("outputs/payoff_b_radar_window_independent_R_aggregate_20261124.csv").open() as f:
+              data=list(csv.DictReader(f))
+          assert len(data)==1
+          r=data[0]
+          for original_key,new_key in [
+            ("original_rows","original_rows"),
+            ("parent_complete","original_base_complete"),
+            ("classified","classifiable"),
+            ("unknown","unclassifiable"),
+            ("source_sites","n_sites"),
+            ("source_years","n_years"),
+          ]:
+              assert int(r[original_key])==py["source_counts"][new_key],(original_key,new_key)
+          for rkey,pkey in [
+            ("before_q10","greenup_before_q10"),
+            ("q10_to_q50","greenup_q10_to_before_q50"),
+            ("q50_to_q90","greenup_q50_to_q90"),
+            ("after_q90","greenup_after_q90"),
+          ]:
+              assert int(r[rkey])==py["classifiable_exclusive_counts"][pkey],(rkey,pkey)
+          for rkey,pkey in [
+            ("at_least_7d_before_q10","greenup_at_least_7d_before_q10"),
+            ("at_least_7d_before_q50","greenup_at_least_7d_before_q50"),
+            ("greenup_before_q50","greenup_strictly_before_q50"),
+          ]:
+              assert int(r[rkey])==py["pooled_logical_bounds"][pkey]["classifiable_positive_count"],(rkey,pkey)
+          print("R_AND_PYTHON_INDEPENDENT_ORIGINAL_SOURCE_WINDOW_COUNTS_MATCH")
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: payoff-b-radar-passage-window-aggregate-20261124
-          path: outputs/payoff_b_radar_migration_window_result_20261124.json
+          path: |
+            outputs/payoff_b_radar_migration_window_result_20261124.json
+            outputs/payoff_b_radar_window_independent_R_aggregate_20261124.csv
           if-no-files-found: error
