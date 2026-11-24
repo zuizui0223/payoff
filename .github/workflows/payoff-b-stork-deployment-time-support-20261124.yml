@@ -47,3 +47,40 @@ jobs:
           name: payoff-b-stork-deployment-time-derived-only-20261124
           path: outputs/payoff_b_stork_deployment_time_receipt_20261124.json
           if-no-files-found: error
+
+  postopen-future-end-source-quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source test runner
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Verify quarantine of 2030 future source-date and unchanged original receipt
+        run: pytest -q -rs tests/test_payoff_b_stork_future_end_diagnosis_20261124.py
+      - name: Reacquire three verified reference CSVs and quarantine non-observable future off date
+        run: |
+          python scripts/payoff_b_stork_future_end_diagnosis_20261124.py \
+            --output outputs/payoff_b_stork_postopen_future_end_diagnosis_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          z=json.loads(Path("outputs/payoff_b_stork_postopen_future_end_diagnosis_20261124.json").read_text())
+          assert z["status"] == "POSTOPEN_FUTURE_END_QUARANTINE_COMPLETED_SOURCE_ONLY"
+          assert z["reference_day"] == "2026-11-24"
+          assert sum(x["n_end_dates_after_reference_day"] for x in z["source_quality_by_cohort"].values())==1
+          assert z["total_original_source_rows"]==212
+          assert z["GPS_event_data_opened"] is False
+          assert z["biological_q_times_recourse_or_fitness_fitted"] is False
+          assert z["raw_original_tag_ids_or_dates_committed"] is False
+          print("FUTURE_END_QUARANTINED_NO_BIOLOGICAL_EFFECT_OPENED")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-postopen-source-date-diagnosis-20261124
+          path: outputs/payoff_b_stork_postopen_future_end_diagnosis_20261124.json
+          if-no-files-found: error
