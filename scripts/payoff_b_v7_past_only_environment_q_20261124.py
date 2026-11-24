@@ -15,18 +15,28 @@ from pathlib import Path
 from statistics import mean
 from hashlib import sha256
 
-SCHEMA=("flyway","transition","year","source_spring_onset_doy","target_spring_onset_doy")
+SCHEMA_DOY=("flyway","transition","year","source_spring_onset_doy","target_spring_onset_doy")
+SCHEMA_ANOMALY=("flyway","transition","year","source_onset_anomaly_days","target_onset_anomaly_days")
+SCHEMA=SCHEMA_DOY
 CONTRACT=Path(__file__).resolve().parents[1]/"data/payoff_b_v7_predecision_historical_q_support_contract_20261124.json"
 
-def _date_num(x):
+def _onset_num(x,representation):
     try:v=float(x)
     except (TypeError,ValueError):return None
-    if not math.isfinite(v) or not 1<=v<=366:return None
-    return v
+    if not math.isfinite(v):return None
+    # Original supporting Tables S2–S7 report onset *anomalies*. A constant
+    # full-series mean subtraction is harmless to past-only correlation and
+    # forecast-minus-observed differences, but NOT a source DOY.
+    if representation=="anomaly":
+        return v if -100<=v<=100 else None
+    return v if 1<=v<=366 else None
 
-def parse_env_rows(csv_text):
+def parse_env_rows(csv_text,representation="doy"):
+    if representation not in ("doy","anomaly"):
+        raise ValueError("Unregistered original spring-source representation")
+    fields=SCHEMA_DOY if representation=="doy" else SCHEMA_ANOMALY
     lines=csv.DictReader(csv_text.splitlines())
-    if tuple(lines.fieldnames or ())!=SCHEMA:
+    if tuple(lines.fieldnames or ())!=fields:
         raise ValueError("Only exact historical environment-only five-field source allowed")
     rows=[]
     observed=set()
@@ -41,8 +51,8 @@ def parse_env_rows(csv_text):
             raise ValueError("Duplicate original transition-year phenology source")
         observed.add(key)
         rows.append({"flyway":group,"transition":transition,"year":year,
-                     "source":_date_num(item["source_spring_onset_doy"]),
-                     "target":_date_num(item["target_spring_onset_doy"])})
+                     "source":_onset_num(item[fields[3]],representation),
+                     "target":_onset_num(item[fields[4]],representation)})
     return rows
 
 def historical_forecast(rows,focal_year,min_prior=20):
@@ -135,6 +145,7 @@ def evaluate(data,contract):
 def main():
     p=argparse.ArgumentParser()
     p.add_argument("--source-csv",type=Path)
+    p.add_argument("--source-format",choices=["doy","anomaly"])
     p.add_argument("--contract",type=Path,default=CONTRACT)
     p.add_argument("--output",type=Path,required=True)
     args=p.parse_args()
@@ -150,8 +161,11 @@ def main():
           "no_ebird":True
         }
     else:
-        parsed=parse_env_rows(args.source_csv.read_text())
+        if args.source_format is None:
+            raise ValueError("Explicit original environment representation required (doy or anomaly)")
+        parsed=parse_env_rows(args.source_csv.read_text(),representation=args.source_format)
         result=evaluate(parsed,c)
+        result["source_representation"]=args.source_format
         result["source_file_sha256"]=sha256(args.source_csv.read_bytes()).hexdigest()
         result["historical_environment_source_authentication"] = "EXTERNAL_SOURCE_PROVENANCE_MUST_BE_VERIFIED_SEPARATELY"
     result["date"]=c["date"]
