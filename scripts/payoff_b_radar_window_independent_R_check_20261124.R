@@ -48,7 +48,7 @@ row <- data.frame(
   source_sites=length(unique(p$site)),
   source_years=length(unique(p$year))
 )
-if(sum(as.numeric(row[1,c("before_q10","q10_to_q50","q50_to_q90","after_q90")]))!=row$classified)
+if (sum(c(row$before_q10, row$q10_to_q50, row$q50_to_q90, row$after_q90)) != row$classified)
     stop("exclusive classification partition failed")
 dir.create(dirname(out),recursive=TRUE,showWarnings=FALSE)
 utils::write.csv(row,out,row.names=FALSE)
