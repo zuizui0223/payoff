@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-24",
+  "status": "PRE_ORIGINAL_SMALL_REFERENCE_BYTES_OPENED_SOURCE_ACCESS",
+  "source": "Kölzsch et al. 2015 three Movebank archived GPS records (original 2014 DOI deposits); not the manuscript supporting information",
+  "prior_verified_DSpace_manifest": "data/payoff_b_v7_barnacle_original_archive_metadata_result_20261124.json",
+  "source_flyways": {
+    "greenland": {
+      "doi": "10.5441/001/1.5d3f0664",
+      "license": "CC0 1.0",
+      "expected_small_original_csv": 3129,
+      "expected_readme_txt": 11452,
+      "unopened_large_event_csv": 1976465
+    },
+    "svalbard": {
+      "doi": "10.5441/001/1.5k6b1364",
+      "license": "CC BY-NC 4.0",
+      "expected_small_original_csv": 9229,
+      "expected_readme_txt": 11931,
+      "unopened_large_event_csv": 7274402
+    },
+    "barents": {
+      "doi": "10.5441/001/1.ps244r11",
+      "license": "CC0 1.0",
+      "expected_small_original_csv": 5516,
+      "expected_readme_txt": 13755,
+      "unopened_large_event_csv": 6665068
+    }
+  },
+  "method": "Use exact registered DataCite DOI->DSpace source title and original handle mapping, require original public MD5 metadata and size, fetch only exactly one <=20000 byte .csv and one <=20000 byte .txt for each of three cohorts. No selected tracking/event large CSVs are fetched.",
+  "fail_closed": [
+    "Item title flyway, DOI or handle drift",
+    "Source original bundle or small reference file not unique",
+    "Readme size or metadata CSV size differs from frozen original file manifest",
+    "HTTP 200 not original registered same-host source",
+    "Original file byte count or DSpace MD5 mismatch",
+    "Source content exceeds 20000-byte per-file bound",
+    "A candidate filename or file metadata reveals the selected CSV is an event/track/GPS member; never let file-size-only choose it"
+  ],
+  "output_only": [
+    "cohort ID, metadata file extension, exact size, verified original MD5 Boolean and SHA256 digest of source bytes",
+    "reference CSV header field names, source row count, number of distinct tag-id/animal-id if explicitly present, never identifier strings",
+    "README presence Boolean for GPS, timestamp, historical climate, GDD, UTC, spring onset, license",
+    "Does the small reference CSV itself carry 1982–2011 source-target spring onset anomalies? Only exact schema recognition, no materialization/imputation."
+  ],
+  "legal": "Original Svalbard data are CC BY-NC 4.0; do not treat all 3 as CC0; source processing is academic noncommercial, retain citations.",
+  "original_pub_environment_years": [
+    1982,
+    2011
+  ],
+  "original_supplement_not_inside_tracking_archive_unless_verified": true,
+  "no_original_GPS_event_rows_downloaded": true,
+  "no_focal_V7_goose_behavior_fitted": true,
+  "no_ebird": true,
+  "no_tinyfish": true
+}
