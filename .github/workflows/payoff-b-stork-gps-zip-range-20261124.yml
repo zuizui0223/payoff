@@ -1,0 +1,50 @@
+name: PAYOFF-B CC0 stork GPS ZIP partial transport gate (no events)
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-stork-gps-zip-range-gate-20261124
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bounded-zip-header:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install minimal test runner
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Test HTTP 206 Range, 4KiB cap and no ZIP event extraction
+        run: pytest -q -rs tests/test_payoff_b_stork_gps_zip_range_gate_20261124.py
+      - name: Check original three public GPS ZIPs via HEAD and first 4KiB range only
+        run: |
+          python scripts/payoff_b_stork_gps_zip_range_gate_20261124.py \
+            --output outputs/payoff_b_stork_gps_range_source_receipt_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          z=json.loads(Path("outputs/payoff_b_stork_gps_range_source_receipt_20261124.json").read_text())
+          assert z["n_source_studies"]==3
+          assert z["full_GPS_or_ACC_ZIPs_downloaded"] is False
+          assert z["original_GPS_locations_or_event_rows_parsed"] is False
+          assert z["zip_members_extracted"] is False
+          assert z["original_bird_ids_or_coordinates_exported"] is False
+          assert z["environmental_cue_q_or_recourse_r_estimated"] is False
+          assert z["no_ebird"] is True
+          assert all(
+              x.get("range_first4KiB",{}).get("bytes_read",0)<=4096
+              for x in z["cohort_receipts"]
+          )
+          print("PUBLIC_ZIP_RANGE_HEADER_COUNT",z["n_verified_4KiB_ZIP_headers"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-gps-zip-range-meta-only-20261124
+          path: outputs/payoff_b_stork_gps_range_source_receipt_20261124.json
+          if-no-files-found: error
