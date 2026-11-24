@@ -3,7 +3,7 @@
   "status": "V7_PREDECISION_INFORMATION_AVAILABILITY_ADDENDUM_PRE_FOCAL_OUTCOME",
   "original_v7_contract_remains_unchanged": "docs/PAYOFF_B_V7_PREDICTABILITY_URGENCY_CONTRACT_20261005.md",
   "purpose": "Separately distinguish a historical environmental correlation reconstructed with future years from a prediction model that a bird could in principle have learned using only prior seasons. This is a new source-only support diagnostic; never retroactively rewrite existing V7 primary q_j.",
-  "source": "Original 1982–2013 GDD-jerk spring onset time series for 16 generalized stopover regions in Kölzsch et al 2015. Original paper DOI 10.1111/1365-2656.12281; original geese spring migrations 2006–2011.",
+  "source": "Original Kölzsch et al. 2015 JAE 30-year GDD-jerk spring onset time series 1982–2011 (not the separately reconstructed 1982–2013 ERA5 series), 16 stopover regions.",
   "time_rule": {
     "focal_migration_years": [
       2006,
@@ -19,7 +19,12 @@
     "source_environment_at_focal_year_is_potentially_available_only_if": "source spring onset measured BEFORE focal bird's source departure; no such departure time is opened in the present source-only gate",
     "do_not_use_bird_timing_as_predictor": true,
     "q_signed_not_absolute": true,
-    "reference_source_full_window": "Retrospective 1982–2013 correlation retains its source literature interpretation only, not decision-time information."
+    "reference_source_full_window": "Retrospective 1982–2013 correlation retains its source literature interpretation only, not decision-time information.",
+    "original_published_environment_years": [
+      1982,
+      2011
+    ],
+    "separate_replication_note": "PAYOFF-B ERA5 reconstruction 1982–2013 is not the Kölzsch original published 1982–2011 environment sample and requires a separately frozen sensitivity lane"
   },
   "candidate_measure": {
     "primary": "Pearson correlation of earlier-site and later-site spring-onset DOY over all source years strictly prior to focal year, computed per independently fixed region transition",
@@ -31,7 +36,8 @@
     ],
     "no_year_detrending_in_primary": "Original V7 q uses raw correlation, so a detrended q is not quietly substituted",
     "cross_year_proxy_not_animal_q": "Predictive connectivity / forward forecast support is a system property, not measured cognition, animal cue-use or payoff",
-    "all_admitted_migration_years_2006_2011_prespecified": true
+    "all_admitted_migration_years_2006_2011_prespecified": true,
+    "historical_original_year_max": 2011
   },
   "prereg_validation": [
     "When adding a later original phenology source file, require each transition/year at most one row and original DOI/checksum",
