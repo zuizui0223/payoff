@@ -68,6 +68,13 @@ def source_date_set(receipt,source_gate):
 def derived_overlap(cohort_receipts,contract):
     if set(cohort_receipts)!=set(contract["expected_cohorts"]):
         raise ValueError("Three exact original cohorts required")
+    source_contract_sha_set={cohort_receipts[k].get("source_contract_sha256")
+                             for k in contract["expected_cohorts"]}
+    header_sha_set={cohort_receipts[k].get("header_source_receipt_sha256")
+                    for k in contract["expected_cohorts"]}
+    if (len(source_contract_sha_set)!=1 or None in source_contract_sha_set or
+        len(header_sha_set)!=1 or None in header_sha_set):
+        raise ValueError("Original cohort source contract or header provenance mismatched")
     sets={}
     years={}
     for key in contract["expected_cohorts"]:
