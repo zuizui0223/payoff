@@ -1,0 +1,105 @@
+{
+  "date": "2026-11-24",
+  "status": "METADATA_SOURCE_GATE_PASS",
+  "original_paper": "10.1098/rspb.2023.1268",
+  "metadata_source": "Zenodo public record 8108611 and DataCite public DOI records",
+  "original_tracking_or_code_files_downloaded": false,
+  "movebank_events_requested": false,
+  "license_terms_accepted": false,
+  "ebird_used": false,
+  "new_ecological_effect_fitted": false,
+  "original_published_results_reestimated": false,
+  "zenodo_code": {
+    "status": "VERIFIED",
+    "metadata": {
+      "record_id": 8108611,
+      "doi": "10.5281/zenodo.8108611",
+      "title": "IrisDB/Delayed_migration_white_stork: Code for The price of being late: short- and long-term consequences of a delayed migration timing",
+      "created": "2023-07-03T11:31:02.247256+00:00",
+      "license_id": "other-open",
+      "file_count": 1,
+      "files": [
+        {
+          "name": "IrisDB/Delayed_migration_white_stork-Code.zip",
+          "size_bytes": 62455,
+          "checksum": "md5:0eb11ef4af224c38f33c65cfcd4d7e5e"
+        }
+      ],
+      "metadata_only": true,
+      "source_archive_files_downloaded": false
+    }
+  },
+  "movebank_archives": [
+    {
+      "status": "VERIFIED",
+      "doi": "10.5441/001/1.271",
+      "metadata": {
+        "doi": "10.5441/001/1.271",
+        "title": "Data from: The price of being late: short- and long-term consequences of a delayed migration timing [control birds]",
+        "publication_year": 2023,
+        "publisher": "Movebank Data Repository",
+        "rights": [
+          "CC0 1.0 Universal",
+          "Creative Commons Zero v1.0 Universal"
+        ],
+        "resource_type": "Dataset",
+        "landing_page": "https://datarepository.movebank.org/handle/10255/move.1627",
+        "related_doi": [
+          "10.1098/rspb.2023.126"
+        ],
+        "doi_metadata_only": true,
+        "tracking_event_rows_requested": false
+      }
+    },
+    {
+      "status": "VERIFIED",
+      "doi": "10.5441/001/1.276",
+      "metadata": {
+        "doi": "10.5441/001/1.276",
+        "title": "Data from: The price of being late: short- and long-term consequences of a delayed migration timing [delayed birds]",
+        "publication_year": 2023,
+        "publisher": "Movebank Data Repository",
+        "rights": [
+          "CC0 1.0 Universal",
+          "Creative Commons Zero v1.0 Universal"
+        ],
+        "resource_type": "Dataset",
+        "landing_page": "https://datarepository.movebank.org/handle/10255/move.1632",
+        "related_doi": [
+          "10.1098/rspb.2023.1268"
+        ],
+        "doi_metadata_only": true,
+        "tracking_event_rows_requested": false
+      }
+    },
+    {
+      "status": "VERIFIED",
+      "doi": "10.5441/001/1.277",
+      "metadata": {
+        "doi": "10.5441/001/1.277",
+        "title": "Data from: The price of being late: short- and long-term consequences of a delayed migration timing [naturally-timed birds]",
+        "publication_year": 2023,
+        "publisher": "Movebank Data Repository",
+        "rights": [
+          "CC0 1.0 Universal",
+          "Creative Commons Zero v1.0 Universal"
+        ],
+        "resource_type": "Dataset",
+        "landing_page": "https://datarepository.movebank.org/handle/10255/move.1633",
+        "related_doi": [
+          "10.1098/rspb.2023.1268"
+        ],
+        "doi_metadata_only": true,
+        "tracking_event_rows_requested": false
+      }
+    }
+  ],
+  "verified_doi_archives": 3,
+  "possible_future_work": "Check permitted original tracking data fields separately; code/archive metadata alone cannot establish actual cue measurement, biological novelty, nor event-download permission.",
+  "receipt": {
+    "actions_run": 45331140693,
+    "source_job": 138232380043,
+    "artifact_id": 14892066597,
+    "aggregate_zip_digest_sha256": "41a26e2a2061c5a0f73e179b1262abfe8101ea76f49e79dcb381a4b55c55c503"
+  }
+}
