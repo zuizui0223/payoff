@@ -1,0 +1,147 @@
+{
+  "status": "SOURCE_IDS_MATCH_PREVIOUS_TAG_GATE_NO_CROSS_COHORT_IDENTITY",
+  "n_original_reference_rows": 212,
+  "n_studies": 3,
+  "study_relative_id_profiles": {
+    "control": {
+      "original_reference_rows": 19,
+      "source_id_fields": {
+        "tag-id": {
+          "nonblank_rows": 19,
+          "missing_rows": 0,
+          "distinct_nonblank_values": 19,
+          "repeated_identifier_extra_rows": 0,
+          "identifier_strings_used_multiple_times": 0
+        },
+        "animal-id": {
+          "nonblank_rows": 19,
+          "missing_rows": 0,
+          "distinct_nonblank_values": 19,
+          "repeated_identifier_extra_rows": 0,
+          "identifier_strings_used_multiple_times": 0
+        },
+        "deployment-id": {
+          "nonblank_rows": 19,
+          "missing_rows": 0,
+          "distinct_nonblank_values": 19,
+          "repeated_identifier_extra_rows": 0,
+          "identifier_strings_used_multiple_times": 0
+        }
+      },
+      "n_tag_strings_linked_to_multiple_distinct_deployment_strings": 0,
+      "n_deployment_strings_linked_to_multiple_animal_strings": 0,
+      "identity_strings_exported": false
+    },
+    "delayed": {
+      "original_reference_rows": 40,
+      "source_id_fields": {
+        "tag-id": {
+          "nonblank_rows": 40,
+          "missing_rows": 0,
+          "distinct_nonblank_values": 40,
+          "repeated_identifier_extra_rows": 0,
+          "identifier_strings_used_multiple_times": 0
+        },
+        "animal-id": {
+          "nonblank_rows": 40,
+          "missing_rows": 0,
+          "distinct_nonblank_values": 40,
+          "repeated_identifier_extra_rows": 0,
+          "identifier_strings_used_multiple_times": 0
+        },
+        "deployment-id": {
+          "nonblank_rows": 40,
+          "missing_rows": 0,
+          "distinct_nonblank_values": 40,
+          "repeated_identifier_extra_rows": 0,
+          "identifier_strings_used_multiple_times": 0
+        }
+      },
+      "n_tag_strings_linked_to_multiple_distinct_deployment_strings": 0,
+      "n_deployment_strings_linked_to_multiple_animal_strings": 0,
+      "identity_strings_exported": false
+    },
+    "naturally_timed": {
+      "original_reference_rows": 153,
+      "source_id_fields": {
+        "tag-id": {
+          "nonblank_rows": 153,
+          "missing_rows": 0,
+          "distinct_nonblank_values": 137,
+          "repeated_identifier_extra_rows": 16,
+          "identifier_strings_used_multiple_times": 16
+        },
+        "animal-id": {
+          "nonblank_rows": 153,
+          "missing_rows": 0,
+          "distinct_nonblank_values": 153,
+          "repeated_identifier_extra_rows": 0,
+          "identifier_strings_used_multiple_times": 0
+        },
+        "deployment-id": {
+          "nonblank_rows": 133,
+          "missing_rows": 20,
+          "distinct_nonblank_values": 133,
+          "repeated_identifier_extra_rows": 0,
+          "identifier_strings_used_multiple_times": 0
+        }
+      },
+      "n_tag_strings_linked_to_multiple_distinct_deployment_strings": 10,
+      "n_deployment_strings_linked_to_multiple_animal_strings": 0,
+      "identity_strings_exported": false
+    }
+  },
+  "between_cohort_id_string_collisions": [
+    {
+      "cohort_a": "control",
+      "cohort_b": "delayed",
+      "overlapping_identifier_strings": {
+        "tag-id": 1,
+        "animal-id": 0,
+        "deployment-id": 0
+      },
+      "same_animal_identity_inferred": false
+    },
+    {
+      "cohort_a": "control",
+      "cohort_b": "naturally_timed",
+      "overlapping_identifier_strings": {
+        "tag-id": 2,
+        "animal-id": 0,
+        "deployment-id": 0
+      },
+      "same_animal_identity_inferred": false
+    },
+    {
+      "cohort_a": "delayed",
+      "cohort_b": "naturally_timed",
+      "overlapping_identifier_strings": {
+        "tag-id": 9,
+        "animal-id": 0,
+        "deployment-id": 0
+      },
+      "same_animal_identity_inferred": false
+    }
+  ],
+  "original_cross_cohort_tag_overlap_checkpoint_pass": true,
+  "identity_join_authorized": false,
+  "source_tag_can_be_redeployed": true,
+  "same_tag_implies_same_bird": false,
+  "gps_events_requested": false,
+  "original_tag_animal_deployment_ids_exported": false,
+  "source_animal_records_exported": false,
+  "predeparture_information_q_or_recourse_r_estimated": false,
+  "no_ebird": true,
+  "claim_limit": "Only repeated string counts in study-relative original metadata, not actual bird identity, co-travel, or information receipt.",
+  "date": "2026-11-24",
+  "source_contract_sha256": "f89512842633fa541348cbcaa870be36f1efac5db9853649a8bc5933e8f7ad54",
+  "identity_gate_contract_sha256": "410ed1f23c986b20b81a58c0cc84bebcff3b918fffb2161879f6304b2b2dd60c",
+  "original_paper_doi": "10.1098/rspb.2023.1268",
+  "actions": {
+    "actions_run": 45366353705,
+    "job_id": 138348967890,
+    "aggregate_only_artifact_id": 14905938856,
+    "aggregate_only_zip_sha256": "7b7503dd28cbe62e78e6f4e1d414bd5d4e573f3c8ca96538d6c2498f6ba7e365",
+    "raw_tags_exported": false
+  }
+}
