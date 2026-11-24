@@ -1,0 +1,211 @@
+{
+  "date": "2026-11-24",
+  "status": "BARNACLE_ORIGINAL_TINY_REFERENCE_SOURCE_GATE_COMPLETED",
+  "n_source_cohorts": 3,
+  "sources": [
+    {
+      "flyway": "greenland",
+      "source_original_archive_doi": "10.5441/001/1.5d3f0664",
+      "source_license": "CC0 1.0",
+      "status": "TWO_ORIGINAL_SMALL_SOURCES_VERIFIED",
+      "reference_csv": {
+        "status": "ORIGINAL_TINY_SOURCE_MD5_VERIFIED",
+        "extension": ".csv",
+        "size_bytes": 3129,
+        "source_sha256": "71a0df256082e54f73789d30c428dd7ca4e02ba0c9fd695c3a5318ad6cae10c2",
+        "matches_original_DSpace_MD5": true,
+        "summary_only": {
+          "column_names": [
+            "tag-id",
+            "animal-id",
+            "animal-taxon",
+            "deploy-on-date",
+            "animal-comments",
+            "animal-life-stage",
+            "animal-mass",
+            "animal-ring-id",
+            "animal-sex",
+            "attachment-type",
+            "deployment-comments",
+            "deployment-end-type",
+            "deployment-id",
+            "manipulation-type",
+            "study-site",
+            "tag-comments",
+            "tag-manufacturer-name",
+            "tag-mass",
+            "tag-readout-method"
+          ],
+          "n_data_rows": 7,
+          "n_distinct_tag_strings": 7,
+          "n_distinct_animal_strings": 7,
+          "original_1982_2011_environment_anomaly_pair_fields_present": false
+        },
+        "raw_source_rows_or_identifiers_exported": false
+      },
+      "readme_txt": {
+        "status": "ORIGINAL_TINY_SOURCE_MD5_VERIFIED",
+        "extension": ".txt",
+        "size_bytes": 11452,
+        "source_sha256": "4c36c0670c543fdd5a778433a11f3eb1d07534356c2e2a29d23d4f6b90f6bb5e",
+        "matches_original_DSpace_MD5": true,
+        "summary_only": {
+          "keywords_present": {
+            "GPS": true,
+            "timestamp": true,
+            "UTC": true,
+            "GDD": false,
+            "historical_spring": false,
+            "license": true
+          },
+          "characters_read": 11447
+        },
+        "raw_source_rows_or_identifiers_exported": false
+      },
+      "large_GPS_event_CSV_bytes_downloaded": false
+    },
+    {
+      "flyway": "svalbard",
+      "source_original_archive_doi": "10.5441/001/1.5k6b1364",
+      "source_license": "CC BY-NC 4.0",
+      "status": "TWO_ORIGINAL_SMALL_SOURCES_VERIFIED",
+      "reference_csv": {
+        "status": "ORIGINAL_TINY_SOURCE_MD5_VERIFIED",
+        "extension": ".csv",
+        "size_bytes": 9229,
+        "source_sha256": "5f98794d2fcd1193b8ca9185a5ea0c5f1bf489b81989a6d16024591adb46a6ff",
+        "matches_original_DSpace_MD5": true,
+        "summary_only": {
+          "column_names": [
+            "tag-id",
+            "animal-id",
+            "animal-taxon",
+            "deploy-on-date",
+            "deploy-off-date",
+            "animal-comments",
+            "animal-life-stage",
+            "animal-mass",
+            "animal-ring-id",
+            "animal-sex",
+            "attachment-type",
+            "deployment-comments",
+            "deployment-end-type",
+            "deployment-id",
+            "manipulation-type",
+            "study-site",
+            "tag-comments",
+            "tag-manufacturer-name",
+            "tag-mass",
+            "tag-readout-method"
+          ],
+          "n_data_rows": 22,
+          "n_distinct_tag_strings": 22,
+          "n_distinct_animal_strings": 22,
+          "original_1982_2011_environment_anomaly_pair_fields_present": false
+        },
+        "raw_source_rows_or_identifiers_exported": false
+      },
+      "readme_txt": {
+        "status": "ORIGINAL_TINY_SOURCE_MD5_VERIFIED",
+        "extension": ".txt",
+        "size_bytes": 11931,
+        "source_sha256": "723e1adf96427bc735322c03644fc214ba4e1ab72c9eb225a0a1144cfbd7e7b0",
+        "matches_original_DSpace_MD5": true,
+        "summary_only": {
+          "keywords_present": {
+            "GPS": true,
+            "timestamp": true,
+            "UTC": true,
+            "GDD": false,
+            "historical_spring": false,
+            "license": true
+          },
+          "characters_read": 11926
+        },
+        "raw_source_rows_or_identifiers_exported": false
+      },
+      "large_GPS_event_CSV_bytes_downloaded": false
+    },
+    {
+      "flyway": "barents",
+      "source_original_archive_doi": "10.5441/001/1.ps244r11",
+      "source_license": "CC0 1.0",
+      "status": "TWO_ORIGINAL_SMALL_SOURCES_VERIFIED",
+      "reference_csv": {
+        "status": "ORIGINAL_TINY_SOURCE_MD5_VERIFIED",
+        "extension": ".csv",
+        "size_bytes": 5516,
+        "source_sha256": "688fc3543acccc8a8841f4a2127b89ec70647cfceea7e915443ca7f9216f4e8a",
+        "matches_original_DSpace_MD5": true,
+        "summary_only": {
+          "column_names": [
+            "tag-id",
+            "animal-id",
+            "animal-taxon",
+            "deploy-on-date",
+            "deploy-off-date",
+            "animal-comments",
+            "animal-death-comments",
+            "animal-life-stage",
+            "animal-mass",
+            "animal-ring-id",
+            "animal-sex",
+            "attachment-type",
+            "deploy-on-latitude",
+            "deploy-on-longitude",
+            "deploy-on-person",
+            "deployment-end-type",
+            "deployment-id",
+            "duty-cycle",
+            "location-accuracy-comments",
+            "manipulation-type",
+            "study-site",
+            "tag-manufacturer-name",
+            "tag-mass",
+            "tag-processing-type",
+            "tag-readout-method"
+          ],
+          "n_data_rows": 15,
+          "n_distinct_tag_strings": 14,
+          "n_distinct_animal_strings": 15,
+          "original_1982_2011_environment_anomaly_pair_fields_present": false
+        },
+        "raw_source_rows_or_identifiers_exported": false
+      },
+      "readme_txt": {
+        "status": "ORIGINAL_TINY_SOURCE_MD5_VERIFIED",
+        "extension": ".txt",
+        "size_bytes": 13755,
+        "source_sha256": "471c9924e22105c4e34b38499ef8d9a912fc85fe22d37956ce9cd0226e6aca37",
+        "matches_original_DSpace_MD5": true,
+        "summary_only": {
+          "keywords_present": {
+            "GPS": true,
+            "timestamp": true,
+            "UTC": true,
+            "GDD": false,
+            "historical_spring": false,
+            "license": true
+          },
+          "characters_read": 13748
+        },
+        "raw_source_rows_or_identifiers_exported": false
+      },
+      "large_GPS_event_CSV_bytes_downloaded": false
+    }
+  ],
+  "n_cohorts_with_two_md5_verified_reference_files": 3,
+  "original_tracking_event_or_ZIP_bytes_read": false,
+  "raw_tag_strings_or_animal_locations_exported": false,
+  "focal_V7_q_U_test_opened": false,
+  "source_is_supplemental_phenology_tables": false,
+  "no_ebird": true,
+  "claim_limit": "Original public reference table structural read only. Author supplementary Tables S2–S7 are separate from the Movebank original GPS dataset; q and bird response still unestimated.",
+  "source_execution": {
+    "run": 45388719596,
+    "job": 138426407915,
+    "derived_only_artifact_id": 14916688742,
+    "derived_only_artifact_sha256": "faf02c1e4f1175675fca7347297690eacc771d5d427b585849b00590ef5c709c",
+    "individual_GPS_data_not_saved": true
+  }
+}
