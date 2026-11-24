@@ -1,0 +1,45 @@
+name: PAYOFF-B experimental stork original DOI metadata admission
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-stork-experiment-source-screen-20261124
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-metadata-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install lightweight test requirements
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Validate exactly pinned archives and no-event safeguards
+        run: pytest -q -rs tests/test_payoff_b_stork_experiment_source_metadata_audit_20261124.py
+      - name: Read only original archive metadata (no GPS or animal events)
+        run: |
+          python scripts/payoff_b_stork_experiment_source_metadata_audit_20261124.py \
+            --output outputs/payoff_b_stork_experiment_source_audit_20261124.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path("outputs/payoff_b_stork_experiment_source_audit_20261124.json").read_text())
+          assert x["original_tracking_or_code_files_downloaded"] is False
+          assert x["movebank_events_requested"] is False
+          assert x["license_terms_accepted"] is False
+          assert x["ebird_used"] is False
+          assert x["new_ecological_effect_fitted"] is False
+          assert len(x["movebank_archives"])==3
+          print("STORK_METADATA_SOURCE_STATUS",x["status"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-source-metadata-only-20261124
+          path: outputs/payoff_b_stork_experiment_source_audit_20261124.json
+          if-no-files-found: error
