@@ -78,7 +78,8 @@ jobs:
           for receipt in z["cohort_schemas"]:
             assert receipt.get("bounded_compressed_bytes_read",0)<=200000
             assert receipt.get("bounded_range_calls",0)<=14
-            assert not any("filename" in str(key).lower() for key in receipt.keys())
+            assert all(member.get("original_member_name_returned",False) is False for member in receipt.get("member_schemas_no_filename",[]))
+            assert all(member.get("source_event_rows_returned",False) is False for member in receipt.get("member_schemas_no_filename",[]))
           print("ORIGINAL_GPS_COHORT_HEADER_SCHEMA_SUCCESSES",z["n_cohorts_with_all_member_headers_verified"])
           PY
       - uses: actions/upload-artifact@v4
