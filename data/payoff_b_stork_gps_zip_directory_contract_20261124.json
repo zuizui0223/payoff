@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-24",
+  "state": "ZIP_CENTRAL_DIRECTORY_METADATA_ONLY_AFTER_VERIFIED_4K_PARTIAL_ACCESS",
+  "parent_prs": [
+    418,
+    419
+  ],
+  "prior_range_receipt": "GitHub Actions run 45366891597: 3 original public CC0 GPS ZIPs returned HTTP 206 for exact first 4096 bytes, ZIP magic PK0304 verified",
+  "source": "Bontekoe et al 2023, Proc B 10.1098/rspb.2023.1268, original CC0 Movebank Data Repository archived GPS ZIPs",
+  "source_items": {
+    "control": {
+      "id": "79710d0e-d1d6-45fd-90f9-1c6d9be0c46e",
+      "handle": "10255/move.1627",
+      "zip_size": 289189615
+    },
+    "delayed": {
+      "id": "e0181e26-4f70-45cf-a3f7-6c61ce368af0",
+      "handle": "10255/move.1632",
+      "zip_size": 297340370
+    },
+    "naturally_timed": {
+      "id": "3949d945-4730-4c24-96e8-4e6bb0234e1c",
+      "handle": "10255/move.1633",
+      "zip_size": 311814202
+    }
+  },
+  "selection": "One smallest original GPS-labeled ZIP per original cohort, only after verifying item handle, ORIGINAL bundle, public size and MD5 metadata. No outcome-dependent choice.",
+  "http": {
+    "method": "GET Range last 65557 bytes of the selected ZIP, 206 required",
+    "max_bytes_per_cohort": 65557,
+    "max_range_calls_per_cohort": 1,
+    "follow_redirects": false,
+    "no_request_when_unverified_public_metadata": true,
+    "no_zip_member_payload_reads": true,
+    "no_original_event_decompression": true,
+    "no_full_archive_or_MD5_claim": true
+  },
+  "parser": {
+    "signature": "PK0506 end-of-central-directory and PK0102 central entries",
+    "unsupported": "ZIP64, missing EOCD, central directory outside capped tail, inconsistent member counts, source names are private and never emitted",
+    "output": "Only member count, extension and compression-method counts, compressed/uncompressed aggregate sizes, and directory validation status. No file paths, tag IDs or timestamps.",
+    "max_members": 10000,
+    "no_claim_about_temporal_event_fields": true
+  },
+  "inferred_next_step": "Only after directory verified could a separate source-defined first-line CSV header inspection be proposed; directory filenames are not schema evidence.",
+  "no_ebird": true,
+  "no_tinyfish": true,
+  "no_GPS_rows_read": true,
+  "no_social_info_q_or_recourse_r": true
+}
