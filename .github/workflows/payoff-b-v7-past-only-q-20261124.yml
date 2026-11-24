@@ -1,0 +1,49 @@
+name: PAYOFF-B V7 past-only independent environmental q guard (no goose outcome)
+
+on:
+  push:
+    branches:
+      - analysis/payoff-b-v7-barnacle-original-access-20261124
+    paths:
+      - ".github/workflows/payoff-b-v7-past-only-q-20261124.yml"
+      - "scripts/payoff_b_v7_past_only_environment_q_20261124.py"
+      - "tests/test_payoff_b_v7_past_only_environment_q_20261124.py"
+      - "data/payoff_b_v7_predecision_historical_q_support_contract_20261124.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-historical-q-source-availability-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install synthetic-only test runner
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Verify no future-year data leakage or synthetic bird inference
+        run: pytest -q -rs tests/test_payoff_b_v7_past_only_environment_q_20261124.py
+      - name: Run true original-source admission: no environmental source => no empirical q
+        run: |
+          python scripts/payoff_b_v7_past_only_environment_q_20261124.py \
+            --output outputs/payoff_b_v7_past_only_q_source_status_20261124.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          x=json.loads(Path("outputs/payoff_b_v7_past_only_q_source_status_20261124.json").read_text())
+          assert x["status"]=="V7_HISTORICAL_Q_SOURCE_NOT_MATERIALIZED"
+          assert x["no_bird_GPS_or_migration_outcome_opened"] is True
+          assert x["no_original_V7_contract_changed"] is True
+          assert x["no_ebird"] is True
+          assert "environmental_forecast_scores_only" not in x
+          print("V7_HISTORICAL_ENVIRONMENT_Q_NOT_YET_IDENTIFIED_NO_FABRICATED_RESULT")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-v7-historical-q-source-status-only-20261124
+          path: outputs/payoff_b_v7_past_only_q_source_status_20261124.json
+          if-no-files-found: error
