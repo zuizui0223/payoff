@@ -80,3 +80,43 @@ jobs:
           name: payoff-b-stork-author-code-cue-source-only-20261124
           path: outputs/payoff_b_stork_author_code_cue_audit_20261124.json
           if-no-files-found: error
+
+  stork-archive-head-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Assert pinned URL and no-redirect/no-body policy
+        run: pytest -q -rs tests/test_payoff_b_stork_archive_head_probe_20261124.py
+      - name: HEAD only original three public archive landing and DOI URLs
+        run: |
+          python scripts/payoff_b_stork_archive_head_probe_20261124.py \
+            --output outputs/payoff_b_stork_archival_landing_receipt_20261124.json
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          x=json.loads(Path("outputs/payoff_b_stork_archival_landing_receipt_20261124.json").read_text())
+          assert len(x["archive_status"])==3
+          assert x["events_or_tracking_files_downloaded"] is False
+          assert x["original_license_terms_accepted"] is False
+          assert x["file_level_direct_download_available"] is None
+          assert x["social_cue_reliability_or_remain_recourse_estimated"] is False
+          assert x["no_ebird"] is True
+          for row in x["archive_status"]:
+            for key in ("doi_status","landing_status"):
+              assert row[key]["no_response_body_read"] is True
+              assert row[key]["tracking_or_event_bytes_downloaded"] is False
+          print("ORIGINAL_PUBLIC_ARCHIVE_HEAD_SCOPE_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: payoff-b-stork-head-only-archive-access-20261124
+          path: outputs/payoff_b_stork_archival_landing_receipt_20261124.json
+          if-no-files-found: error
