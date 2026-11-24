@@ -21,10 +21,19 @@ class LinkTypes(HTMLParser):
     def __init__(self):
         super().__init__()
         self.hrefs=[]
+        self.script_files=[]
+        self.custom_element_names=[]
     def handle_starttag(self,tag,attrs):
+        props=dict(attrs)
+        if tag.lower()=="script":
+            src=props.get("src","")
+            if isinstance(src,str) and src:
+                self.script_files.append(urlparse(src).path.split("/")[-1][:100])
+        if "-" in tag:
+            self.custom_element_names.append(tag.lower()[:80])
         if tag.lower()!="a":
             return
-        href=dict(attrs).get("href","")
+        href=props.get("href","")
         if isinstance(href,str):
             self.hrefs.append(href)
 
@@ -43,6 +52,8 @@ def summarize_html(html:bytes,content_type:str):
     s=html.decode("utf-8","replace").lower()
     return {
        "parsed_anchor_count":len(parsed.hrefs),
+       "static_script_filenames":parsed.script_files[:12],
+       "custom_markup_tags":sorted(set(parsed.custom_element_names))[:12],
        "linked_file_extension_counts":{e:references.count(e) for e in sorted(set(references))},
        "contains_literal_bitstream_href":any("/bitstream/" in t.lower() for t in parsed.hrefs),
        "contains_literal_file_download_href":any("download" in t.lower() for t in parsed.hrefs),
