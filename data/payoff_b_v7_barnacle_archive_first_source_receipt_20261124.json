@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-24",
+  "status": "V7_BARNACLE_ORIGINAL_PUBLIC_ARCHIVE_METADATA_SCREEN_COMPLETED",
+  "original_reference": "Kölzsch et al 2015 J Anim Ecol DOI 10.1111/1365-2656.12281",
+  "doi_recognized": 3,
+  "dspace_discovery_status": "PUBLIC_METADATA_JSON_VERIFIED",
+  "n_discovered_barnacle_related_public_items": 0,
+  "source_archives": [
+    {
+      "flyway": "greenland",
+      "doi": "10.5441/001/1.5d3f0664",
+      "status": "DOI_TITLE_OR_IDENTITY_MISMATCH",
+      "error_class": "ValueError"
+    },
+    {
+      "flyway": "svalbard",
+      "doi": "10.5441/001/1.5k6b1364",
+      "status": "DOI_TITLE_OR_IDENTITY_MISMATCH",
+      "error_class": "ValueError"
+    },
+    {
+      "flyway": "barents",
+      "doi": "10.5441/001/1.ps244r11",
+      "status": "DOI_TITLE_OR_IDENTITY_MISMATCH",
+      "error_class": "ValueError"
+    }
+  ],
+  "n_original_archives_with_file_manifest": 0,
+  "all_three_manifest_verified": false,
+  "individual_tracking_rows_read": false,
+  "original_GPS_archive_downloaded": false,
+  "focal_v7_environmental_q_U_effect_estimated": false,
+  "Aikens_frozen_outcomes_opened": false,
+  "no_ebird": true,
+  "prior_art_boundary": "Source availability is not the V7 q×U biological interaction. The original publication already studies phenology predictability and migration timing and V7 itself is preoutcome.",
+  "receipt": {
+    "run": 45386937612,
+    "job": 138420187991,
+    "artifact": 14916767445,
+    "artifact_zip_sha256": "44a842e4b4e30cde2ebdf8f507f1f05bc7fd91570b4c021ad6294c1300d6ff86",
+    "source_tracking_rows_opened": false
+  }
+}
