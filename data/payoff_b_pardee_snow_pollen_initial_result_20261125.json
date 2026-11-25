@@ -1,0 +1,135 @@
+{
+  "status": "SECONDARY_SNOW_X_POLLEN_NOT_PRIMARY",
+  "source_doi": "10.5061/dryad.kd1r166",
+  "species": {
+    "Claytonia": {
+      "audit": {
+        "rows": 231,
+        "exclusions": {
+          "missing_pollen": 1,
+          "complete_plant_rows": 230,
+          "zero_seeds": 35,
+          "unpaired_observed_plots": 4
+        },
+        "source_plots_by_snow_frost": {
+          "(0, 0)": 10,
+          "(0, 1)": 10,
+          "(1, 0)": 10,
+          "(1, 1)": 9
+        },
+        "paired_plots_by_snow_frost": {
+          "(0, 0)": 8,
+          "(0, 1)": 9,
+          "(1, 0)": 9,
+          "(1, 1)": 9
+        }
+      },
+      "status": "SECONDARY_ESTIMATE",
+      "effects": {
+        "natural_NP": {
+          "estimate": 11.00474537037037,
+          "valid_draws": 10000,
+          "interval_95": [
+            8.264655671296298,
+            13.821310763888889
+          ],
+          "bootstrap_variance": 1.998323236932606
+        },
+        "natural_AP": {
+          "estimate": 13.23263888888889,
+          "valid_draws": 10000,
+          "interval_95": [
+            10.539930555555557,
+            15.871527777777777
+          ],
+          "bootstrap_variance": 1.83539572972235
+        },
+        "removal_NP": {
+          "estimate": 7.75462962962963,
+          "valid_draws": 10000,
+          "interval_95": [
+            5.523148148148149,
+            9.99074074074074
+          ],
+          "bootstrap_variance": 1.3059233809987223
+        },
+        "removal_AP": {
+          "estimate": 8.722222222222221,
+          "valid_draws": 10000,
+          "interval_95": [
+            6.476851851851851,
+            11.35208333333333
+          ],
+          "bootstrap_variance": 1.5752962709403229
+        },
+        "logRR_NP": {
+          "estimate": -0.3500365405047009,
+          "valid_draws": 10000,
+          "interval_95": [
+            -0.7562542601526273,
+            0.027359436541851596
+          ],
+          "bootstrap_variance": 0.039879325208772624
+        },
+        "logRR_AP": {
+          "estimate": -0.41681237328577103,
+          "valid_draws": 10000,
+          "interval_95": [
+            -0.777165868801807,
+            -0.07628908519050777
+          ],
+          "bootstrap_variance": 0.03167245716862799
+        },
+        "theta_snow": {
+          "estimate": -0.06677583278107013,
+          "valid_draws": 10000,
+          "interval_95": [
+            -0.533125767685902,
+            0.41304831689481747
+          ],
+          "bootstrap_variance": 0.057664514759034724
+        },
+        "additive_interaction": {
+          "estimate": -1.260300925925927,
+          "valid_draws": 10000,
+          "interval_95": [
+            -5.381446759259258,
+            2.9926359953703674
+          ],
+          "bootstrap_variance": 4.514543213202957
+        }
+      },
+      "admitted_primary": false,
+      "low_pollen_snow_detrimental": true
+    },
+    "Delphinium": {
+      "status": "HOLD",
+      "error": "ValueError"
+    },
+    "Potentilla": {
+      "status": "HOLD",
+      "error": "DUPLICATE_PLOT_PLANT"
+    }
+  },
+  "dictionary": {
+    "confirmed": true,
+    "source_sheet": "Sheet1",
+    "mapping": {
+      "AP": "added pollen",
+      "NP": "no added pollen"
+    },
+    "plant_number_protocol": "1–4 NP; 5–8 AP; eight plants targeted per plot",
+    "endpoint": "total seeds per plant"
+  },
+  "provenance": {
+    "run": 45531037548,
+    "job": 138926105600,
+    "artifact_id": 14984837029,
+    "artifact_zip_sha256": "9b8a624af11a6a5905b78b70d59cd4b0c403dada0567518dbb510ad2b67c4c39",
+    "source_gate_run": 45530878210,
+    "source_gate_artifact": 14985565330,
+    "source_gate_zip_sha256": "aeee99d6ae74ccdcebd33d38f82b49699c57b4d2ae31dd95a2cdf06f4ec04375",
+    "extraction": "Aggregate executed job log parsed directly; uploaded ZIP digest recorded, ZIP not separately downloaded. No raw biological records."
+  },
+  "interpretation": "Claytonia paired-plot complete-case snow removal x pollen addition not supported; 2 remaining species held before fitting. Not a pure seasonal mismatch or endogenous recourse contrast. No primary theta or cross-species pooled result."
+}
