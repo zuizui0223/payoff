@@ -1,0 +1,174 @@
+{
+  "status": "IMMUNE_SOURCE_DESIGN_ONLY",
+  "source_sha256": "e7d47607bc2501d73ca94d430104bec6adde1eeb89feb8c1344f0de211938488",
+  "source_rows": 426,
+  "info": [
+    [
+      "This dataset corresponds to the article:"
+    ],
+    [
+      "Compensating for delayed hatching reduces offspring immune response and increases life-history costs"
+    ],
+    [
+      "By Andrea P. Murillo-Rincón, Anssi Laurila and Germán Orizaola"
+    ],
+    [
+      "Published at:"
+    ],
+    [
+      "Oikos"
+    ],
+    [
+      "OIK-04014.R1"
+    ],
+    [
+      "LINK  http://onlinelibrary.wiley.com/doi/10.1111/oik.04014/full"
+    ]
+  ],
+  "dictionary": {
+    "Larvae": "Larvae ID",
+    "Family": "Family ID, unique combination of Male x Female",
+    "Male": "Male ID",
+    "Female": "Female ID",
+    "Phenology": "Normal: no delay in hatching phenology, or 12-day delay in hatching",
+    "PhenN": "1: Normal; 2: 12-day delayed",
+    "Immunity": "Immunity treatment experienced by the larvae. PHA-injected, APBS-injected or control-not injected. See article for detailed description.",
+    "ImmN": "1:PHA-injected; 2: APBS-injected; 3: Control-not injected",
+    "ImmResp": "Difference (in mm) in tail width before and after the injection measured, only for PHA- and APBS-injected tadpoles, two mm from the base of the tail ",
+    "RespPerc": "Percentage of tail width change before and after the injection, only for PHA- and APBS-inejected tadpoles",
+    "Mass": "Mass at metamorphosis, in grams",
+    "LarvalPeriod": "Duration in days of the larval period, from the start of the larval part of the experiemnt to metamorphosis"
+  },
+  "families": 21,
+  "unique_larvae_global": 426,
+  "unique_larvae_within_family": 426,
+  "families_with_parent_conflict": 0,
+  "distinct_parent_pairs_using_first_family_row": 21,
+  "parent_counts": {
+    "Male": 9,
+    "Female": 7
+  },
+  "reused_same_sex_parent_counts": {
+    "Male": 6,
+    "Female": 7
+  },
+  "parent_connected_family_component_sizes": [
+    9,
+    9,
+    3
+  ],
+  "phenotype_and_immune_code_checks": {
+    "Phenology": [
+      {
+        "label": "12-day delayed",
+        "code": "2",
+        "n": 208
+      },
+      {
+        "label": "Normal",
+        "code": "1",
+        "n": 218
+      }
+    ],
+    "Immunity": [
+      {
+        "label": "APBS-injected",
+        "code": "2",
+        "n": 37
+      },
+      {
+        "label": "Control (not-injected)",
+        "code": "3",
+        "n": 203
+      },
+      {
+        "label": "PHA-injected",
+        "code": "1",
+        "n": 186
+      }
+    ]
+  },
+  "cells": {
+    "12-day delayed|APBS-injected": {
+      "rows": 19,
+      "LarvalPeriod_positive": 19,
+      "Mass_positive": 19,
+      "ImmResp_positive": 7,
+      "RespPerc_positive": 7,
+      "complete_duration_mass": 19,
+      "ImmResp_nonpositive": 12,
+      "RespPerc_nonpositive": 12
+    },
+    "12-day delayed|Control (not-injected)": {
+      "rows": 102,
+      "LarvalPeriod_positive": 102,
+      "Mass_positive": 102,
+      "ImmResp_missing": 102,
+      "RespPerc_missing": 102,
+      "complete_duration_mass": 102
+    },
+    "12-day delayed|PHA-injected": {
+      "rows": 87,
+      "LarvalPeriod_positive": 83,
+      "Mass_positive": 83,
+      "ImmResp_nonpositive": 32,
+      "RespPerc_nonpositive": 32,
+      "complete_duration_mass": 83,
+      "ImmResp_positive": 55,
+      "RespPerc_positive": 55,
+      "LarvalPeriod_missing": 4,
+      "Mass_missing": 4
+    },
+    "Normal|APBS-injected": {
+      "rows": 18,
+      "LarvalPeriod_positive": 18,
+      "Mass_positive": 18,
+      "ImmResp_positive": 13,
+      "RespPerc_positive": 13,
+      "complete_duration_mass": 18,
+      "ImmResp_nonpositive": 5,
+      "RespPerc_nonpositive": 5
+    },
+    "Normal|Control (not-injected)": {
+      "rows": 101,
+      "LarvalPeriod_positive": 101,
+      "Mass_positive": 97,
+      "ImmResp_missing": 101,
+      "RespPerc_missing": 101,
+      "complete_duration_mass": 97,
+      "Mass_missing": 4
+    },
+    "Normal|PHA-injected": {
+      "rows": 99,
+      "LarvalPeriod_positive": 97,
+      "Mass_positive": 96,
+      "ImmResp_positive": 90,
+      "RespPerc_positive": 90,
+      "complete_duration_mass": 96,
+      "LarvalPeriod_missing": 2,
+      "Mass_missing": 3,
+      "ImmResp_nonpositive": 9,
+      "RespPerc_nonpositive": 9
+    }
+  },
+  "families_all_6_cells": 17,
+  "families_all_6_complete_duration_mass": 17,
+  "per_cell_family_support": {
+    "12-day delayed|APBS-injected": 19,
+    "12-day delayed|Control (not-injected)": 21,
+    "12-day delayed|PHA-injected": 21,
+    "Normal|APBS-injected": 18,
+    "Normal|Control (not-injected)": 21,
+    "Normal|PHA-injected": 21
+  },
+  "primary_theta_added": 0,
+  "note": "No biological outcome values or models exported; signed immune responses not treated as invalid merely for nonpositive values; parent grouping is diagnostic, not proof of independence.",
+  "provenance": {
+    "run": 45544075590,
+    "job": 138969327629,
+    "artifact_id": 14990616578,
+    "artifact_zip_sha256": "51d2ff4e2486e9263c601a81d18936d02165ff03d6d4c2e7b24a1c414366eced",
+    "extraction": "Exact aggregate source-only job log, source MD5 and SHA256 checked. ZIP digest recorded from upload step, ZIP not separately downloaded."
+  },
+  "disposition": "Only three parental connected components; no bootstrap treating 21 families as independent. Full assignment/rearing methods and cohort overlap unresolved. Descriptive within-family contrasts and leave-one-component-out sensitivity only, not causal or inferential."
+}
