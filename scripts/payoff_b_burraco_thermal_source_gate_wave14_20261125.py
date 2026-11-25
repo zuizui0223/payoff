@@ -14,6 +14,8 @@ def inspect(b,name):
         try:
             for s in w.worksheets:
                 r=[r for r in s.iter_rows(values_only=True) if any(v is not None for v in r)]
+                if not r:
+                    out.append({"sheet":s.title,"rows":0,"status":"EMPTY_SHEET"});continue
                 info=s.title.lower()
                 if any(k in info for k in ("info","variable","readme","metadata","key","legend","description")):
                     out.append({"sheet":s.title,"rows":len(r),"dictionary":[[str(x)[:500] if x is not None else None for x in v] for v in r[:60]]})
@@ -49,7 +51,9 @@ def run():
                 q["status"]="HOLD_METADATA";continue
             b=fetch(s,f"https://api.figshare.com/v2/file/download/{fid}",cap=CAP)
             if len(b)!=n or hashlib.md5(b).hexdigest()!=md5:raise Hold("SOURCE_MD5_MISMATCH")
-            q.update(status="PROVIDER_MD5_VERIFIED",sha256=hashlib.sha256(b).hexdigest(),schema=inspect(b,name))
+            q.update(status="PROVIDER_MD5_VERIFIED",sha256=hashlib.sha256(b).hexdigest())
+            print("VERIFIED_SOURCE "+json.dumps(q,ensure_ascii=True),flush=True)
+            q["schema"]=inspect(b,name)
     return o
 if __name__=="__main__":
     try:d=run()
