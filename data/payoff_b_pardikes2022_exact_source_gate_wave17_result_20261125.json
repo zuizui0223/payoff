@@ -1,0 +1,378 @@
+{
+  "status": "EXACT_TARGET_SOURCE_GATE_NO_FIT",
+  "article_doi": "10.1111/gcb.16195",
+  "dryad_doi": "10.5061/dryad.02v6wwq5k",
+  "zenodo": {
+    "6425791": {
+      "status": "EXACT_LINKED_RECORD",
+      "record_id": 6425791,
+      "files": [
+        {
+          "name": "PublicationPsitRateFactorMay112021.R",
+          "bytes": 37930,
+          "checksum": "md5:24c8d1b8e2799109187bea6d23b54517",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "ade8cdea742f2c0b6e52e9c59ff0bfc29489397cb39821a33b79608566de12a8",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        },
+        {
+          "name": "PublicationVarianceDevTime.R",
+          "bytes": 31017,
+          "checksum": "md5:3997a8f615ed50af23ca0e24c9f2c44b",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "5af926c8f33a1e168a3b39cfb04f35bb2ea4fad1cca8706883996f8157dd12c0",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        },
+        {
+          "name": "PublicationObsSimMAY112021.R",
+          "bytes": 49992,
+          "checksum": "md5:8412e1b7c08c4c57e0c9109e4a7ac080",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "d7867ad117978fa49a3cc2954598865f050b248691b0ae291a2af589faaef716",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        },
+        {
+          "name": "CompetitionNSBControlOct31-2021.R",
+          "bytes": 15413,
+          "checksum": "md5:54e86e7ac0c9739632f7be50cbf210fd",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "58715dbc5ee288c106400bb136a7722afaa6d9bee67a5561a9935072a7d25d86",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        },
+        {
+          "name": "PublicationDynamicAnalMay112021.R",
+          "bytes": 20677,
+          "checksum": "md5:dc215ebb979f070d999e6d942ec237cb",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "38448c408c2e961f0076021f59af800fedfa2165663cf1d5edda2cd2d1447bb0",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        },
+        {
+          "name": "PublicationPropSurv3FactorMay112021.R",
+          "bytes": 55292,
+          "checksum": "md5:77814ae7a0ce93dec9dc893201c60301",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "e180244a0a2bad795664c383c73ff0b51153477e5e729712b12e1a6677931eac",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        },
+        {
+          "name": "PublicationDevtimeMay112021.R",
+          "bytes": 20839,
+          "checksum": "md5:3283dad6caa915e8bdcfa2e3a002518e",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "332bb751601ae6dfd33b41105c1c949b82d35818d36af7193cccd414366d29da",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        },
+        {
+          "name": "parameter.estimatesMay19.R",
+          "bytes": 19784,
+          "checksum": "md5:ae0640bed6489e20d085e9c7cbad7643",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "fb7dcc8da98a32d4972c642bf3dfdea1d2df7e6847832560fee406dc73de85a4",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        },
+        {
+          "name": "PublicationPropHostSurvContMay112021.R",
+          "bytes": 10727,
+          "checksum": "md5:caf708f87d87acce9501b7d9a758cbe7",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "b5cae170e77d8c1b0fc2ff05871b22ad60560026d421e92dc683591fd6122dfa",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        },
+        {
+          "name": "matlab_codes.zip",
+          "bytes": 16896,
+          "checksum": "md5:a38c373b2a8ae764fc14bd7a49088698",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "c8b0469c08cb80db83a26f6987a7b376ec7bd3682045a733ff8c3c84e3adc125",
+          "schema": {
+            "status": "ZIP_MANIFEST_AND_TABLE_SCHEMA_ONLY",
+            "members": [
+              {
+                "path": "matlab_codes/adultphase.m",
+                "bytes": 2224
+              },
+              {
+                "path": "matlab_codes/grid_simulation.m",
+                "bytes": 3779
+              },
+              {
+                "path": "matlab_codes/larvaphase.m",
+                "bytes": 3255
+              },
+              {
+                "path": "matlab_codes/mtit.m",
+                "bytes": 3949
+              },
+              {
+                "path": "matlab_codes/param.table.csv",
+                "bytes": 21029,
+                "sha256": "c5073c1e9229c7cefcdba17718a6f4ac81f78551f6e2a39270a685045ffda688",
+                "schema": {
+                  "status": "TABLE_SCHEMA_ONLY",
+                  "rows": 120,
+                  "header": [
+                    "Temp",
+                    "Species",
+                    "Treatment",
+                    "WaspSpecies",
+                    "w",
+                    "ep",
+                    "vp",
+                    "em",
+                    "vm",
+                    "ea",
+                    "va",
+                    "R",
+                    "H0",
+                    "Time",
+                    "count",
+                    "meanWasp",
+                    "sdWasp",
+                    "seWasp",
+                    "meanWaspF",
+                    "meanWaspM",
+                    "meanWasp0",
+                    "samplesize",
+                    "contmeanfly",
+                    "contsefly",
+                    "contmeanpropsurv",
+                    "d"
+                  ],
+                  "design_column_support": {
+                    "Temp": {
+                      "nonmissing": 120,
+                      "distinct": 2,
+                      "levels": {
+                        "24": 60,
+                        "28": 60
+                      }
+                    },
+                    "Species": {
+                      "nonmissing": 120,
+                      "distinct": 3,
+                      "levels": {
+                        "Birchii": 40,
+                        "Sulfurigaster": 40,
+                        "Sulfurigaster-Birchii": 40
+                      }
+                    },
+                    "Treatment": {
+                      "nonmissing": 120,
+                      "distinct": 2,
+                      "levels": {
+                        "C": 60,
+                        "NC": 60
+                      }
+                    },
+                    "WaspSpecies": {
+                      "nonmissing": 120,
+                      "distinct": 2,
+                      "levels": {
+                        "Asobara": 60,
+                        "Ganaspis": 60
+                      }
+                    },
+                    "Time": {
+                      "nonmissing": 120,
+                      "distinct": 1
+                    }
+                  }
+                }
+              },
+              {
+                "path": "matlab_codes/parsave.m",
+                "bytes": 282
+              },
+              {
+                "path": "matlab_codes/plot_output.m",
+                "bytes": 676
+              },
+              {
+                "path": "matlab_codes/popdyn.m",
+                "bytes": 744
+              },
+              {
+                "path": "matlab_codes/readme.txt",
+                "bytes": 2262,
+                "sha256": "7557433eec450588309f4d049ce83a88a566f633b37eb751541f1533810ba083",
+                "schema": {
+                  "status": "NON_TABULAR_TEXT",
+                  "bytes": 2262
+                }
+              },
+              {
+                "path": "matlab_codes/tablehistog.m",
+                "bytes": 4120
+              },
+              {
+                "path": "matlab_codes/tablereps.m",
+                "bytes": 2513
+              },
+              {
+                "path": "matlab_codes/task.m",
+                "bytes": 1513
+              }
+            ]
+          }
+        },
+        {
+          "name": "simulation.survhostinf.June17.R",
+          "bytes": 189419,
+          "checksum": "md5:0b04e52be69c751dc98d4adde0ad5f12",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "db97e73c5b92c68439f0736d03fcfb6a7f5230dee81620d2cfe9aedc59392aba",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        }
+      ],
+      "title": "Effects of phenological mismatch under warming are modified by community context",
+      "doi": "10.5281/zenodo.6425791",
+      "license": {
+        "id": "mit-license"
+      },
+      "access_right": "open",
+      "related_identifiers": [
+        {
+          "identifier": "10.5061/dryad.02v6wwq5k",
+          "relation": "isSourceOf",
+          "scheme": "doi"
+        }
+      ]
+    },
+    "6425793": {
+      "status": "EXACT_LINKED_RECORD",
+      "record_id": 6425793,
+      "files": [
+        {
+          "name": "GCBSupplement_Pardikes_FINAL.pdf",
+          "bytes": 4656632,
+          "checksum": "md5:5fa5fb179c6039f47c1a7aeca4b6f6b3",
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "d0748ebc9ed8817691f06e1c66d03df479f9b020e7e9ee4c9247182663324778",
+          "schema": {
+            "status": "FILE_IDENTIFIED_NOT_PARSED"
+          }
+        }
+      ],
+      "title": "Effects of phenological mismatch under warming are modified by community context",
+      "doi": "10.5281/zenodo.6425793",
+      "license": {
+        "id": "cc-by-4.0"
+      },
+      "access_right": "open",
+      "related_identifiers": [
+        {
+          "identifier": "10.5061/dryad.02v6wwq5k",
+          "relation": "isDerivedFrom",
+          "scheme": "doi"
+        }
+      ]
+    }
+  },
+  "dryad_manifest": {
+    "status": "METADATA_RETRIEVED",
+    "doi": "10.5061/dryad.02v6wwq5k",
+    "title": "Effects of phenological mismatch under warming are modified by community context",
+    "version": 175194,
+    "license": "https://spdx.org/licenses/CC0-1.0.html",
+    "files": {
+      "all.dat.nsbNov24.csv": {
+        "file_id": 1466907,
+        "name": "all.dat.nsbNov24.csv",
+        "bytes": 314569,
+        "digest": "81e85cbe6d32d16b2cb17a2dcffc64a34b3e8c6e526b4a629a1d46ca642f1288",
+        "digest_type": "sha-256"
+      },
+      "all.dat.sbNov24.csv": {
+        "file_id": 1466906,
+        "name": "all.dat.sbNov24.csv",
+        "bytes": 255167,
+        "digest": "7c4347a512ee249d9a4ec3fa5f731f4526b8a57ce0127aa4461c7ea1b110a076",
+        "digest_type": "sha-256"
+      },
+      "mean.sim.obs2Jun292020.csv": {
+        "file_id": 1466920,
+        "name": "mean.sim.obs2Jun292020.csv",
+        "bytes": 18598,
+        "digest": "d92c988f23f614d30835e0d09bf8d8aacd98724d9dc529e312174bf553a72a3b",
+        "digest_type": "sha-256"
+      },
+      "param.table.June17.csv": {
+        "file_id": 1466905,
+        "name": "param.table.June17.csv",
+        "bytes": 23315,
+        "digest": "f24d958658e5f3889e7d674dbf213df5749190206858ab42df3ed2b4f8eaccd7",
+        "digest_type": "sha-256"
+      },
+      "README-all.dat.nsbNov24.csv": {
+        "file_id": 1466925,
+        "name": "README-all.dat.nsbNov24.csv",
+        "bytes": 4644,
+        "digest": "230af6578f439461c463ad6006421c68173b97229a3ef666fb4b68806d9c2099",
+        "digest_type": "sha-256"
+      },
+      "README-all.dat.sbNov24.csv": {
+        "file_id": 1466924,
+        "name": "README-all.dat.sbNov24.csv",
+        "bytes": 4648,
+        "digest": "a8f13ffa1170f9dc948534b65ba6fdd2721cf927723fd4eef1d620dca50a70dd",
+        "digest_type": "sha-256"
+      },
+      "README-mean.sim.obs2Jun292020.xlsx": {
+        "file_id": 1466921,
+        "name": "README-mean.sim.obs2Jun292020.xlsx",
+        "bytes": 9292,
+        "digest": "ada579763df6c2abb5ffde84d8d4bfe0abacfa37e03a1c540665708ee13368ae",
+        "digest_type": "sha-256"
+      },
+      "README-param.table.June17.xlsx": {
+        "file_id": 1466923,
+        "name": "README-param.table.June17.xlsx",
+        "bytes": 10014,
+        "digest": "7357a69225be6730758d6a3e6acbc7269d63e5cdc12d0ae51ed7fb610f1ca591",
+        "digest_type": "sha-256"
+      },
+      "README-TABHISTOG.xlsx": {
+        "file_id": 1466922,
+        "name": "README-TABHISTOG.xlsx",
+        "bytes": 10050,
+        "digest": "f77eeb613a43529e6dce6f28de31ab830450481f8990c11c12c96e9cb84982c2",
+        "digest_type": "sha-256"
+      },
+      "TABHISTOG.csv": {
+        "file_id": 1466926,
+        "name": "TABHISTOG.csv",
+        "bytes": 1343818,
+        "digest": "e618c82be2f2c8150a81bc843529bc86b83ed2c1495988da864ac901f6005cf9",
+        "digest_type": "sha-256"
+      }
+    }
+  },
+  "provenance": {
+    "run": 45573201025,
+    "job": 139064651235,
+    "artifact_id": 15002473371,
+    "artifact_zip_sha256": "94368877952fffd81ba952f6722336857d4c44de68df1a3005e55d0b15a9b1b4",
+    "extraction": "Exact aggregate executed job JSON. All Zenodo file bytes verified with MD5 and computed SHA256; Dryad file metadata only, not acquired raw CSV bytes; ZIP digest from upload log, ZIP not separately downloaded."
+  }
+}
