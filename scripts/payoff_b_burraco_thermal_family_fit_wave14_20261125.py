@@ -41,7 +41,7 @@ def read(b):
     finally:w.close()
     if len(rows)!=787:raise Hold("SOURCE_ROW_COUNT")
     mappings=defaultdict(lambda:defaultdict(set))
-    keys=Counter();vials=defaultdict(list);families=set();rows2=[];marked=set()
+    keys=Counter();vials=defaultdict(list);families=set();rows2=[];marked=set();zero_duration=0
     for r in rows:
         if any(missing(r[k]) for k in HEAD[:14]):raise Hold("MISSING_DESIGN_OR_SURVIVAL")
         try:f=str(r["Family"]);d=PH[r["Phenology"]];t=ROOM[r["Temp"]];q=FOOD[r["Food"]]
@@ -54,7 +54,12 @@ def read(b):
         vials[str(r["Vial"])].append(k)
         sflag=float(r["Survival"])
         if sflag not in (0,1):raise Hold("SURVIVAL_CODE")
-        days,mass=finite_pos(r["Days"]),finite_pos(r["Mass"])
+        if r["Days"] in (0,"0"):
+            if str(r["Vial"])!="6-E-L-A-1" or k!=("6",12,"cold","full",1) or sflag!=1:
+                raise Hold("UNEXPECTED_ZERO_DURATION")
+            zero_duration+=1;days=None
+        else:days=finite_pos(r["Days"])
+        mass=finite_pos(r["Mass"])
         if sflag==0 and (days is not None or mass is not None):raise Hold("DEAD_WITH_METAMORPHOSIS_ENDPOINT")
         rows2.append((str(r["Vial"]),k,int(sflag),days,mass))
     if len(families)!=11:raise Hold("FAMILY_COUNT")
@@ -71,11 +76,12 @@ def read(b):
             "code_maps":{col:{k:sorted(v) for k,v in m.items()} for col,m in mappings.items()},
             "unlabelled_marker_count":len(marked),"marker_keys_overlap_duplicate_vial_rows":sum(k in marked for vv in duplicates.values() for k in map(tuple,vv)),
             "survival_counts":dict(Counter(a[2] for a in rows2)),
+            "zero_duration_excluded_from_paired_endpoints":zero_duration,
             "nonmissing_duration":sum(a[3] is not None for a in rows2),"nonmissing_mass":sum(a[4] is not None for a in rows2)}
     print("DESIGN "+json.dumps(design,ensure_ascii=True),flush=True)
     if duplicate_keys or set(keys)-planned or len(absent)!=5 or len(duplicates)!=1 or any(len(v)!=2 or len({tuple(x) for x in v})!=2 for v in duplicates.values()):
         return None,design
-    if design["survival_counts"]!={1:697,0:90} or design["nonmissing_duration"]!=697 or design["nonmissing_mass"]!=694:
+    if design["survival_counts"]!={1:697,0:90} or zero_duration!=1 or design["nonmissing_duration"]!=696 or design["nonmissing_mass"]!=694:
         raise Hold("SOURCE_SUPPORT_CHANGED")
     return (rows2,families,set(duplicates),marked),design
 
