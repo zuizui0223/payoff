@@ -1,0 +1,173 @@
+{
+  "status": "STRUCTURE_DIAGNOSTIC_ONLY",
+  "source_sha256": "10d4be0c29be5b767ceddd44c014ed1f704f95c3a1b87eddfae1d96dd091de53",
+  "n_rows": 787,
+  "additional_columns": [
+    {
+      "column_1based": 18,
+      "header": null,
+      "nonempty": 4,
+      "value_types": {
+        "str": 4
+      },
+      "text_labels": {
+        "*": 4
+      },
+      "numeric_count": 0
+    }
+  ],
+  "families": 11,
+  "unique_slot_keys": 787,
+  "duplicate_slot_keys": [],
+  "missing_planned_slots": 5,
+  "unexpected_keys": 0,
+  "duplicate_vial_labels": {
+    "8-D-H-R-5": [
+      [
+        "8",
+        6,
+        "warm",
+        "limited",
+        5
+      ],
+      [
+        "8",
+        6,
+        "warm",
+        "limited",
+        6
+      ]
+    ]
+  },
+  "endpoint_type_counts": {
+    "Days|survival=1": {
+      "positive": 696,
+      "zero": 1
+    },
+    "Mass|survival=1": {
+      "positive": 694,
+      "missing": 3
+    },
+    "Days|survival=0": {
+      "missing": 90
+    },
+    "Mass|survival=0": {
+      "missing": 90
+    }
+  },
+  "endpoint_anomalies": [
+    {
+      "endpoint": "Days",
+      "type": "zero",
+      "survival_flag": 1,
+      "marker": null,
+      "vial": "6-E-L-A-1",
+      "family": "6",
+      "slot": "1"
+    }
+  ],
+  "unresolved_design_rows": {},
+  "code_crosswalk": {
+    "FamN": {
+      "1": [
+        "1"
+      ],
+      "2": [
+        "2"
+      ],
+      "3": [
+        "3"
+      ],
+      "4": [
+        "4"
+      ],
+      "6": [
+        "6"
+      ],
+      "7": [
+        "7"
+      ],
+      "8": [
+        "8"
+      ],
+      "9": [
+        "9"
+      ],
+      "10": [
+        "10"
+      ],
+      "11": [
+        "11"
+      ],
+      "12": [
+        "12"
+      ]
+    },
+    "PCode": {
+      "N": [
+        "0"
+      ],
+      "D": [
+        "6"
+      ],
+      "E": [
+        "12"
+      ]
+    },
+    "PhenN": {
+      "1": [
+        "0"
+      ],
+      "2": [
+        "6"
+      ],
+      "3": [
+        "12"
+      ]
+    },
+    "TCode": {
+      "H": [
+        "warm"
+      ],
+      "L": [
+        "cold"
+      ]
+    },
+    "TempN": {
+      "1": [
+        "warm"
+      ],
+      "2": [
+        "cold"
+      ]
+    },
+    "FCode": {
+      "A": [
+        "full"
+      ],
+      "R": [
+        "limited"
+      ]
+    },
+    "FoodN": {
+      "1": [
+        "full"
+      ],
+      "2": [
+        "limited"
+      ]
+    }
+  },
+  "provenance": {
+    "run": 45549755106,
+    "job": 138987834070,
+    "artifact_id": 14992143788,
+    "artifact_zip_sha256": "84e720bdcbbcdd6a308c94d1eeee71097649951c4cd43664f1e34ac4ecbb98ae",
+    "previous_fit_hold": {
+      "run": 45549684155,
+      "reason": "INVALID_ENDPOINT"
+    },
+    "extraction": "Exact aggregate diagnostic from completed job; no fitted outcome; ZIP not independently downloaded."
+  },
+  "amendment": "The single zero Days record (6-E-L-A-1, family 6, slot 1) is incompatible with the positive duration estimand. Keep explicit Survival=1 for observed survival; exclude from paired duration/mass analysis only. Do not repair Days or infer death. Require exactly one known anomaly, 696 positive duration records, 694 positive mass records, 697 recorded survivors and 90 recorded deaths; all previous design, marker sensitivity and support gates unchanged. No new biological coefficients inspected before this amendment."
+}
