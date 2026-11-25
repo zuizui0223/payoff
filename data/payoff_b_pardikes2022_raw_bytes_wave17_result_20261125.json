@@ -1,0 +1,386 @@
+{
+  "status": "SOURCE_BYTES_GATE_NO_FIT",
+  "article_doi": "10.1111/gcb.16195",
+  "dryad_doi": "10.5061/dryad.02v6wwq5k",
+  "files": {
+    "all.dat.nsbNov24.csv": {
+      "file_id": 1466907,
+      "expected_bytes": 314569,
+      "expected_digest": "81e85cbe6d32d16b2cb17a2dcffc64a34b3e8c6e526b4a629a1d46ca642f1288",
+      "status": "HOLD",
+      "error": "HTTP_401"
+    },
+    "all.dat.sbNov24.csv": {
+      "file_id": 1466906,
+      "expected_bytes": 255167,
+      "expected_digest": "7c4347a512ee249d9a4ec3fa5f731f4526b8a57ce0127aa4461c7ea1b110a076",
+      "status": "HOLD",
+      "error": "HTTP_401"
+    },
+    "README-all.dat.nsbNov24.csv": {
+      "file_id": 1466925,
+      "expected_bytes": 4644,
+      "expected_digest": "230af6578f439461c463ad6006421c68173b97229a3ef666fb4b68806d9c2099",
+      "status": "HOLD",
+      "error": "HTTP_401"
+    },
+    "README-all.dat.sbNov24.csv": {
+      "file_id": 1466924,
+      "expected_bytes": 4648,
+      "expected_digest": "a8f13ffa1170f9dc948534b65ba6fdd2721cf927723fd4eef1d620dca50a70dd",
+      "status": "HOLD",
+      "error": "HTTP_401"
+    }
+  },
+  "author_code": {
+    "PublicationPsitRateFactorMay112021.R": {
+      "status": "PINNED_CODE_VERIFIED",
+      "sha256": "ade8cdea742f2c0b6e52e9c59ff0bfc29489397cb39821a33b79608566de12a8",
+      "structural_lines": [
+        {
+          "line": 23,
+          "code": "all.dat.sb <- read.csv(\"~/Google Drive/Host-Parasitoid Experiments (2017)/Phenological Asynchrony Experiment/Publication/Data/all.dat.sbNov24.csv\")"
+        },
+        {
+          "line": 24,
+          "code": "all.dat.sb$Block <- as.factor(all.dat.sb$Block)"
+        },
+        {
+          "line": 25,
+          "code": "all.dat.sb$Temp <- as.factor(all.dat.sb$Temp)"
+        },
+        {
+          "line": 26,
+          "code": "all.dat.sb$Mismatch <- as.factor(all.dat.sb$Mismatch)"
+        },
+        {
+          "line": 27,
+          "code": "all.dat.sb$w <- as.factor(all.dat.sb$w)"
+        },
+        {
+          "line": 33,
+          "code": "#all.dat.nsb <- read.csv(\"~/Google Drive/Host-Parasitoid Experiments (2017)/Phenological Asynchrony Experiment/all.dat.sb.manuscriptAug102020.csv\")"
+        },
+        {
+          "line": 63,
+          "code": "  group_by(Temp, Treatment, Mismatch, Species, WaspSpecies) %>% "
+        },
+        {
+          "line": 64,
+          "code": "  dplyr::summarise("
+        },
+        {
+          "line": 94,
+          "code": "  group_by(WaspSpecies, Temp) %>% "
+        },
+        {
+          "line": 95,
+          "code": "  dplyr::summarise("
+        },
+        {
+          "line": 110,
+          "code": "psit.tot <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch + Species + WaspSpecies + (1|Block), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot)"
+        },
+        {
+          "line": 114,
+          "code": "psit.tot2 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch + Species + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot2)"
+        },
+        {
+          "line": 116,
+          "code": "psit.tot3 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*Species + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot3)"
+        },
+        {
+          "line": 118,
+          "code": "psit.tot4 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*Species + Mismatch*WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot4)"
+        },
+        {
+          "line": 120,
+          "code": "psit.tot6 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*WaspSpecies + Species + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot6)"
+        },
+        {
+          "line": 122,
+          "code": "psit.tot8 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*WaspSpecies + Mismatch*Species + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot8)"
+        },
+        {
+          "line": 124,
+          "code": "psit.tot9 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*WaspSpecies*Species + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot9)"
+        },
+        {
+          "line": 131,
+          "code": "#psit.tot8 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*WaspSpecies + Mismatch*Species + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8)))"
+        },
+        {
+          "line": 380,
+          "code": "psit.tot.comb <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch + Combination + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot.comb); summary(psit.tot.comb)"
+        },
+        {
+          "line": 382,
+          "code": "psit.tot.comb2 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*Combination + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot.comb2); summary(psit.tot.comb2)"
+        },
+        {
+          "line": 384,
+          "code": "psit.tot.comb3 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*WaspSpecies + Combination + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot.comb3); summary(psit.tot.comb3)"
+        },
+        {
+          "line": 386,
+          "code": "psit.tot.combfull <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*Combination*WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot.combfull); summary(psit.tot.combfull)"
+        },
+        {
+          "line": 393,
+          "code": "#psit.tot.comb3 <- glmer(psitrate4  ~ 1 + Temp*Treatment*Mismatch*WaspSpecies + Combination + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(psit.tot.comb3); summary(psit.tot.comb3)"
+        },
+        {
+          "line": 472,
+          "code": "  group_by(Temp, Treatment, Mismatch, Species, WaspSpecies) %>% "
+        },
+        {
+          "line": 473,
+          "code": "  dplyr::summarise("
+        },
+        {
+          "line": 509,
+          "code": "emmPsitTTMMemm$Treatment<-factor(emmPsitTTMMemm$Treatment, levels=c(\"Low\", \"High\"))"
+        },
+        {
+          "line": 514,
+          "code": "psit.pairedW$Treatment<-factor(psit.pairedW$Treatment, levels=c(\"Low\", \"High\"))"
+        }
+      ],
+      "matched_lines": 27
+    },
+    "PublicationPropSurv3FactorMay112021.R": {
+      "status": "PINNED_CODE_VERIFIED",
+      "sha256": "e180244a0a2bad795664c383c73ff0b51153477e5e729712b12e1a6677931eac",
+      "structural_lines": [
+        {
+          "line": 24,
+          "code": "all.dat.sb <- read.csv(\"~/Google Drive/Host-Parasitoid Experiments (2017)/Phenological Asynchrony Experiment/Publication/Data/all.dat.sbNov24.csv\")"
+        },
+        {
+          "line": 25,
+          "code": "all.dat.sb$Block <- as.factor(all.dat.sb$Block)"
+        },
+        {
+          "line": 26,
+          "code": "all.dat.sb$Temp <- as.factor(all.dat.sb$Temp)"
+        },
+        {
+          "line": 27,
+          "code": "all.dat.sb$Mismatch <- as.factor(all.dat.sb$Mismatch)"
+        },
+        {
+          "line": 28,
+          "code": "all.dat.sb$w <- as.factor(all.dat.sb$w)"
+        },
+        {
+          "line": 33,
+          "code": "all.dat.nsb <- read.csv(\"~/Google Drive/Host-Parasitoid Experiments (2017)/Phenological Asynchrony Experiment/Publication/Data/all.dat.nsbNov24.csv\")"
+        },
+        {
+          "line": 34,
+          "code": "all.dat.nsb$Block <- as.factor(all.dat.nsb$Block)"
+        },
+        {
+          "line": 35,
+          "code": "all.dat.nsb$Temp <- as.factor(all.dat.nsb$Temp)"
+        },
+        {
+          "line": 36,
+          "code": "all.dat.nsb$Mismatch <- as.factor(all.dat.nsb$Mismatch)"
+        },
+        {
+          "line": 37,
+          "code": "all.dat.nsb$w <- as.factor(all.dat.nsb$w)"
+        },
+        {
+          "line": 69,
+          "code": "surv.tot <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch + Species + WaspSpecies + (1|Block), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot)"
+        },
+        {
+          "line": 72,
+          "code": "surv.tot2 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch + Species + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot2)"
+        },
+        {
+          "line": 74,
+          "code": "surv.tot3 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*Species + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot3); summary(surv.tot3)"
+        },
+        {
+          "line": 76,
+          "code": "surv.tot4 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*WaspSpecies + Species + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot4)"
+        },
+        {
+          "line": 78,
+          "code": "surv.tot5 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch + Species*WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot5)"
+        },
+        {
+          "line": 80,
+          "code": "surv.tot6 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*Species*WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot6)"
+        },
+        {
+          "line": 89,
+          "code": "#surv.tot3 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*Species + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8)))"
+        },
+        {
+          "line": 329,
+          "code": "surv.tot.comb <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch + Combination + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot.comb); summary(surv.tot.comb)"
+        },
+        {
+          "line": 331,
+          "code": "surv.tot.comb2 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*Combination + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot.comb2); summary(surv.tot.comb2)"
+        },
+        {
+          "line": 333,
+          "code": "surv.tot.comb3 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*WaspSpecies + Combination + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot.comb3); summary(surv.tot.comb3)"
+        },
+        {
+          "line": 335,
+          "code": "surv.tot.comb4 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch + Mismatch*Combination + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot.comb4); summary(surv.tot.comb4)"
+        },
+        {
+          "line": 337,
+          "code": "surv.tot.comb.final <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch + Mismatch*Combination*Temp + Mismatch*Combination*Treatment + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot.comb.final); summary(surv.tot.comb.final)"
+        },
+        {
+          "line": 339,
+          "code": "surv.tot.combfull <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*Combination*WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot.combfull); summary(surv.tot.combfull)"
+        },
+        {
+          "line": 428,
+          "code": "  group_by(Temp, Treatment, Mismatch, Species, WaspSpecies) %>% "
+        },
+        {
+          "line": 429,
+          "code": "  dplyr::summarise("
+        },
+        {
+          "line": 486,
+          "code": "emmSurvTTMMemm$Treatment<-factor(emmSurvTTMMemm$Treatment, levels=c(\"Low\", \"High\"))"
+        },
+        {
+          "line": 491,
+          "code": "psit.pairedW$Treatment<-factor(psit.pairedW$Treatment, levels=c(\"Low\", \"High\"))"
+        },
+        {
+          "line": 792,
+          "code": "surv.tot.nsb <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch + Species + WaspSpecies + (1|Block), weights=contmeanfly, data=surv.anal.nsb, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot)"
+        },
+        {
+          "line": 795,
+          "code": "surv.tot.nsb2 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch + Species + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal.nsb, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot2)"
+        },
+        {
+          "line": 797,
+          "code": "surv.tot.nsb3 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*Species + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal.nsb, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot3); summary(surv.tot3)"
+        },
+        {
+          "line": 799,
+          "code": "surv.tot.nsb4 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*WaspSpecies + Species + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal.nsb, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot4)"
+        },
+        {
+          "line": 801,
+          "code": "surv.tot.nsb5 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch + Species*WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal.nsb, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot5)"
+        },
+        {
+          "line": 803,
+          "code": "surv.tot.nsb6 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*Species*WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal.nsb, family=binomial(link = \"logit\"), nAGQ=0, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot6)"
+        },
+        {
+          "line": 811,
+          "code": "#surv.tot.nsb3 <- glmer(propsurv3  ~ 1 + Temp*Treatment*Mismatch*Species + WaspSpecies + (1|Block) + (1|vialID), weights=contmeanfly, data=surv.anal.nsb, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8))); plot(surv.tot3); summary(surv.tot3)"
+        }
+      ],
+      "matched_lines": 34
+    },
+    "CompetitionNSBControlOct31-2021.R": {
+      "status": "PINNED_CODE_VERIFIED",
+      "sha256": "58715dbc5ee288c106400bb136a7722afaa6d9bee67a5561a9935072a7d25d86",
+      "structural_lines": [
+        {
+          "line": 26,
+          "code": "all.dat.nsb <- read.csv(\"~/Google Drive/Host-Parasitoid Experiments (2017)/Phenological Asynchrony Experiment/Publication/Data/all.dat.nsbNov24.csv\")"
+        },
+        {
+          "line": 27,
+          "code": "all.dat.nsb$Block <- as.factor(all.dat.nsb$Block)"
+        },
+        {
+          "line": 28,
+          "code": "all.dat.nsb$Temp <- as.factor(all.dat.nsb$Temp)"
+        },
+        {
+          "line": 29,
+          "code": "all.dat.nsb$Mismatch <- as.factor(all.dat.nsb$Mismatch)"
+        },
+        {
+          "line": 30,
+          "code": "all.dat.nsb$w <- as.factor(all.dat.nsb$w)"
+        },
+        {
+          "line": 31,
+          "code": "all.dat.nsb$Treatment <- as.factor(all.dat.nsb$Treatment)"
+        },
+        {
+          "line": 32,
+          "code": "all.dat.nsb$Combination <- as.factor(all.dat.nsb$Combination)"
+        },
+        {
+          "line": 33,
+          "code": "all.dat.nsb$Species <- as.factor(all.dat.nsb$Species)"
+        },
+        {
+          "line": 34,
+          "code": "all.dat.nsb$vialID <- as.factor(all.dat.nsb$vialID)"
+        },
+        {
+          "line": 35,
+          "code": "all.dat.nsb$WaspSpecies <- as.factor(all.dat.nsb$WaspSpecies)"
+        },
+        {
+          "line": 36,
+          "code": "all.dat.nsb$control <- as.factor(all.dat.nsb$control)"
+        },
+        {
+          "line": 42,
+          "code": "all.dat.nsb$Mismatch <- factor(ifelse(is.na(all.dat.nsb$Mismatch), \"NoWasp\", paste(all.dat.nsb$Mismatch)), levels = c(levels(all.dat.nsb$Mismatch), \"NoWasp\"))"
+        },
+        {
+          "line": 61,
+          "code": "  group_by(w, Temp, Treatment, Species) %>% "
+        },
+        {
+          "line": 62,
+          "code": "  dplyr::summarise("
+        },
+        {
+          "line": 77,
+          "code": "  group_by(w, Temp, Treatment, Species, Combination) %>% "
+        },
+        {
+          "line": 78,
+          "code": "  dplyr::summarise("
+        },
+        {
+          "line": 111,
+          "code": "propsurvContnsb <- glmer(propsurv  ~ 1 + Species*Temp*Treatment*Combination + (1|Block), weights=init.abund, data=all.dat.nsb.cont, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8)))"
+        },
+        {
+          "line": 114,
+          "code": "propsurvContnsb2 <- glmer(propsurv  ~ 1 + Species*Temp*Treatment*Combination + (1|Block) + (1|vialID), weights=init.abund, data=all.dat.nsb.cont, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8)))"
+        },
+        {
+          "line": 122,
+          "code": "#propsurvContnsb2 <- glmer(propsurv  ~ 1 + Species*Temp*Treatment*Combination + (1|Block) + (1|vialID), weights=init.abund, data=all.dat.nsb.cont, family=binomial(link = \"logit\"), nAGQ=1, control = glmerControl(optimizer = \"bobyqa\", optCtrl=list(maxfun=2e8)))"
+        }
+      ],
+      "matched_lines": 19
+    }
+  },
+  "disposition": "EXACT_DRYAD_SOURCE_LOCATED_DOWNLOAD_AUTHORIZATION_HOLD",
+  "provenance": {
+    "run": 45573367385,
+    "job": 139065184236,
+    "artifact_id": 15002653085,
+    "artifact_zip_sha256": "831ca3b1646e4026982b91d0f0496c8bf469a05a0ed97a25cecdf709cc25fbdc",
+    "extraction": "Exact completed job log; public R source bytes verified. Dryad download requests returned HTTP 401; raw bytes not obtained, no retries/bypass. Artifact ZIP digest from log, ZIP not independently downloaded."
+  }
+}
