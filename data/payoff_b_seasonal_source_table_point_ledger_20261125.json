@@ -1,0 +1,258 @@
+{
+  "status": "DESCRIPTIVE_SOURCE_TABLE_AND_PRIOR_SECONDARY_LEDGER_NO_META_POOL",
+  "date": "2026-11-25",
+  "stanton_table3": [
+    {
+      "name": "white",
+      "early": {
+        "natural": 0.73,
+        "supplemented": 0.62,
+        "flower_n": [
+          80,
+          42
+        ]
+      },
+      "late": {
+        "natural": 0.24,
+        "supplemented": 0.21,
+        "flower_n": [
+          38,
+          24
+        ]
+      },
+      "delta_supplemented_log": -1.0826119473216687,
+      "delta_natural_log": -1.1124056108004456,
+      "delta_lnRR": 0.029793663478776877,
+      "supplemented_change_pp": -41,
+      "natural_change_pp": -49
+    },
+    {
+      "name": "yellow",
+      "early": {
+        "natural": 0.6,
+        "supplemented": 0.58,
+        "flower_n": [
+          35,
+          24
+        ]
+      },
+      "late": {
+        "natural": 0.44,
+        "supplemented": 0.41,
+        "flower_n": [
+          50,
+          29
+        ]
+      },
+      "delta_supplemented_log": -0.3468709438421116,
+      "delta_natural_log": -0.31015492830383945,
+      "delta_lnRR": -0.03671601553827208,
+      "supplemented_change_pp": -17,
+      "natural_change_pp": -15.999999999999998
+    },
+    {
+      "name": "pink",
+      "early": {
+        "natural": 0.8,
+        "supplemented": 0.72,
+        "flower_n": [
+          64,
+          32
+        ]
+      },
+      "late": {
+        "natural": 0.49,
+        "supplemented": 0.7,
+        "flower_n": [
+          45,
+          23
+        ]
+      },
+      "delta_supplemented_log": -0.028170876966696335,
+      "delta_natural_log": -0.49020633656325513,
+      "delta_lnRR": 0.4620354595965588,
+      "supplemented_change_pp": -2.0000000000000018,
+      "natural_change_pp": -31.000000000000007
+    },
+    {
+      "name": "bronze",
+      "early": {
+        "natural": 0.75,
+        "supplemented": 0.81,
+        "flower_n": [
+          48,
+          26
+        ]
+      },
+      "late": {
+        "natural": 0.4,
+        "supplemented": 0.44,
+        "flower_n": [
+          45,
+          103
+        ]
+      },
+      "delta_supplemented_log": -0.6102595207541777,
+      "delta_natural_log": -0.6286086594223742,
+      "delta_lnRR": 0.018349138668196346,
+      "supplemented_change_pp": -37.00000000000001,
+      "natural_change_pp": -35
+    }
+  ],
+  "stanton_reported_tests": {
+    "time": {
+      "chi2": 44.79,
+      "df": 1,
+      "p": 0.0001
+    },
+    "treatment": {
+      "chi2": 0.01,
+      "df": 1,
+      "p": 0.9271
+    },
+    "time_by_treatment": {
+      "chi2": 0.92,
+      "df": 1,
+      "p": 0.3387
+    },
+    "color_by_time_by_treatment": {
+      "chi2": 2.37,
+      "df": 3,
+      "p": 0.4992
+    }
+  },
+  "study_groups": [
+    {
+      "study": "Totland & Schulte-Herbruggen 2003",
+      "doi": "10.1657/1523-0430(2003)035[0242:BSIFVA]2.0.CO;2",
+      "endpoint": "seed-to-ovule ratio",
+      "source": "data/payoff_b_glopl_cerastium_amended_result_20261125.json",
+      "records": [
+        {
+          "name": "cerastium_alpinum",
+          "early_supp": 0.54,
+          "late_supp": 0.35,
+          "delta_lnRR": -0.21049243376065102
+        },
+        {
+          "name": "cerastium_cerastoides",
+          "early_supp": 0.62,
+          "late_supp": 0.35,
+          "delta_lnRR": 0.25238911941067144
+        }
+      ]
+    },
+    {
+      "study": "Kalisz & Vogler 2003",
+      "doi": "10.1890/02-0519",
+      "endpoint": "fruit set",
+      "source": "data/payoff_b_glopl_collinsia_wave8_result_20261125.json",
+      "records": [
+        {
+          "name": "BT-1999",
+          "early_supp": 0.752,
+          "late_supp": 0.05,
+          "delta_lnRR": -0.4107290072277054,
+          "quarantine": false
+        },
+        {
+          "name": "BT-2000",
+          "early_supp": 0.846,
+          "late_supp": 0.754,
+          "delta_lnRR": 0.11291253032814914,
+          "quarantine": false
+        },
+        {
+          "name": "EF-1999",
+          "early_supp": 0.699,
+          "late_supp": 0.065,
+          "delta_lnRR": 0.0022229288289905003,
+          "quarantine": false
+        },
+        {
+          "name": "EF-2000",
+          "early_supp": 0.943,
+          "late_supp": 0.484,
+          "delta_lnRR": -0.057215804295931476,
+          "quarantine": false
+        },
+        {
+          "name": "TMC-1999",
+          "early_supp": 0.261,
+          "late_supp": 0.021,
+          "delta_lnRR": -0.011560822401076143,
+          "quarantine": false
+        },
+        {
+          "name": "TMC-2000",
+          "early_supp": 0.883,
+          "late_supp": 0.092,
+          "delta_lnRR": null,
+          "quarantine": true
+        }
+      ]
+    },
+    {
+      "study": "Stanton 1987",
+      "doi": "10.2307/2444020",
+      "endpoint": "fruit set",
+      "source": "Original Table 3, searchable reproduction https://www.researchgate.net/publication/250269626_Reproductive_Biology_of_Petal_Color_Variants_in_Wild_Populations_of_Raphanus_sativus_II_Factors_Limiting_Seed_Production; GloPL crosscheck pending",
+      "records": [
+        {
+          "name": "white",
+          "early_supp": 0.62,
+          "late_supp": 0.21,
+          "delta_lnRR": 0.029793663478776877
+        },
+        {
+          "name": "yellow",
+          "early_supp": 0.58,
+          "late_supp": 0.41,
+          "delta_lnRR": -0.03671601553827208
+        },
+        {
+          "name": "pink",
+          "early_supp": 0.72,
+          "late_supp": 0.7,
+          "delta_lnRR": 0.4620354595965588
+        },
+        {
+          "name": "bronze",
+          "early_supp": 0.81,
+          "late_supp": 0.44,
+          "delta_lnRR": 0.018349138668196346
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "study": "Totland & Schulte-Herbruggen 2003",
+      "endpoint": "seed-to-ovule ratio",
+      "n": 2,
+      "supp_declines": 2,
+      "delta_valid": 2,
+      "positive": 1,
+      "negative": 1
+    },
+    {
+      "study": "Kalisz & Vogler 2003",
+      "endpoint": "fruit set",
+      "n": 6,
+      "supp_declines": 6,
+      "delta_valid": 5,
+      "positive": 2,
+      "negative": 3
+    },
+    {
+      "study": "Stanton 1987",
+      "endpoint": "fruit set",
+      "n": 4,
+      "supp_declines": 4,
+      "delta_valid": 4,
+      "positive": 3,
+      "negative": 1
+    }
+  ],
+  "limits": "Source-based point contrasts, not independent effects across rows. Different endpoint strata, repeated plants/flowers and unknown sampling covariance. All three previously inspected studies were selected by source availability and do not establish a population prevalence. Gross & Werner 1983 abstract already reports an opposite pattern for S. canadensis, so a universal later decline is not proposed. No GloPL crosscheck claimed for Stanton until workflow completes. Primary theta unchanged zero."
+}
