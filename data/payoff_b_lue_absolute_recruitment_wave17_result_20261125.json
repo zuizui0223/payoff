@@ -1,0 +1,2790 @@
+{
+  "status": "SECONDARY_ABSOLUTE_RECRUITMENT_OPTION_CAPACITY_COMPLETE",
+  "source": {
+    "file": "IndividualData.csv",
+    "repo": "leorjorge/LueDietBreadth",
+    "tag": "v1.2.1",
+    "git_blob": "a3eec02773b391fec7af8b4713a0fdca2f52743a",
+    "sha256": "f5149cc6e624551fd0b9a1ad2ab20e66f14089cc2114d47130ff7203745410f8",
+    "bytes": 1585319,
+    "rows": 49950,
+    "vials": 999,
+    "cells": 105,
+    "metadata_blob": "1663436ba6ed02fb8713d34ea343280e2bb43bfb",
+    "model_script_blob": "6ac6d826584455725009cef660d3679ea09779ae",
+    "license": "CC BY 4.0",
+    "dataset_doi": "10.5281/zenodo.17951000",
+    "article_doi": "10.1111/ele.70322"
+  },
+  "audit": {
+    "strict_vials": 997,
+    "strict_rows": 49850,
+    "flagged_vials": [
+      {
+        "vial": "85",
+        "cell": "PSA|A|20",
+        "rep": "2",
+        "missing_slots": [
+          6
+        ],
+        "duplicate_slots": [
+          [
+            7,
+            2
+          ]
+        ],
+        "blank_outcomes": 0
+      },
+      {
+        "vial": "179",
+        "cell": "SUL|A|28",
+        "rep": "10",
+        "missing_slots": [],
+        "duplicate_slots": [],
+        "blank_outcomes": 19
+      }
+    ],
+    "all_cells_retained": true,
+    "min_strict_vials": 7,
+    "total_parasitoid_emergence_strict": 7575,
+    "total_host_emergence_strict": 17651
+  },
+  "cells": {
+    "BIP|A|20": {
+      "host": "BIP",
+      "parasitoid": "A",
+      "temperature": 20,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 242,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 208,
+      "H_per_initial_egg": 0.5377777777777778,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.5377777777777778,
+        0.5377777777777778
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.7355555555555555,
+      "host_control_minus_exposed_emergence": 0.19777777777777772,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "BIP|A|24": {
+      "host": "BIP",
+      "parasitoid": "A",
+      "temperature": 24,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 296,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 154,
+      "H_per_initial_egg": 0.6577777777777778,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.6577777777777777,
+        0.6577777777777777
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.82,
+      "host_control_minus_exposed_emergence": 0.16222222222222216,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "BIP|A|28": {
+      "host": "BIP",
+      "parasitoid": "A",
+      "temperature": 28,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 324,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 126,
+      "H_per_initial_egg": 0.72,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.72,
+        0.72
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.8155555555555556,
+      "host_control_minus_exposed_emergence": 0.09555555555555562,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "BIP|G|20": {
+      "host": "BIP",
+      "parasitoid": "G",
+      "temperature": 20,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 303,
+      "strict_parasitoid_adults": 24,
+      "strict_dead": 123,
+      "H_per_initial_egg": 0.6733333333333333,
+      "P_per_initial_egg": 0.05333333333333334,
+      "all_vial_H_bounds": [
+        0.6733333333333333,
+        0.6733333333333333
+      ],
+      "all_vial_P_bounds": [
+        0.05333333333333333,
+        0.05333333333333333
+      ],
+      "host_control_emergence": 0.7355555555555555,
+      "host_control_minus_exposed_emergence": 0.06222222222222218,
+      "author_normalized_parasitism_mean": 0.07159432159432161,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "BIP|G|24": {
+      "host": "BIP",
+      "parasitoid": "G",
+      "temperature": 24,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 312,
+      "strict_parasitoid_adults": 24,
+      "strict_dead": 114,
+      "H_per_initial_egg": 0.6933333333333334,
+      "P_per_initial_egg": 0.05333333333333334,
+      "all_vial_H_bounds": [
+        0.6933333333333332,
+        0.6933333333333332
+      ],
+      "all_vial_P_bounds": [
+        0.05333333333333333,
+        0.05333333333333333
+      ],
+      "host_control_emergence": 0.82,
+      "host_control_minus_exposed_emergence": 0.1266666666666666,
+      "author_normalized_parasitism_mean": 0.06458091366627954,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "BIP|G|28": {
+      "host": "BIP",
+      "parasitoid": "G",
+      "temperature": 28,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 286,
+      "strict_parasitoid_adults": 6,
+      "strict_dead": 158,
+      "H_per_initial_egg": 0.6355555555555555,
+      "P_per_initial_egg": 0.013333333333333334,
+      "all_vial_H_bounds": [
+        0.6355555555555555,
+        0.6355555555555555
+      ],
+      "all_vial_P_bounds": [
+        0.013333333333333332,
+        0.013333333333333332
+      ],
+      "host_control_emergence": 0.8155555555555556,
+      "host_control_minus_exposed_emergence": 0.18000000000000005,
+      "author_normalized_parasitism_mean": 0.016260162601626015,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "BIP|L|20": {
+      "host": "BIP",
+      "parasitoid": "L",
+      "temperature": 20,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 282,
+      "strict_parasitoid_adults": 5,
+      "strict_dead": 163,
+      "H_per_initial_egg": 0.6266666666666667,
+      "P_per_initial_egg": 0.011111111111111112,
+      "all_vial_H_bounds": [
+        0.6266666666666666,
+        0.6266666666666666
+      ],
+      "all_vial_P_bounds": [
+        0.011111111111111112,
+        0.011111111111111112
+      ],
+      "host_control_emergence": 0.7355555555555555,
+      "host_control_minus_exposed_emergence": 0.10888888888888881,
+      "author_normalized_parasitism_mean": 0.015015015015015017,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "BIP|L|24": {
+      "host": "BIP",
+      "parasitoid": "L",
+      "temperature": 24,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 346,
+      "strict_parasitoid_adults": 2,
+      "strict_dead": 102,
+      "H_per_initial_egg": 0.7688888888888888,
+      "P_per_initial_egg": 0.0044444444444444444,
+      "all_vial_H_bounds": [
+        0.7688888888888888,
+        0.7688888888888888
+      ],
+      "all_vial_P_bounds": [
+        0.0044444444444444444,
+        0.0044444444444444444
+      ],
+      "host_control_emergence": 0.82,
+      "host_control_minus_exposed_emergence": 0.05111111111111111,
+      "author_normalized_parasitism_mean": 0.004977600796416128,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "BIP|L|28": {
+      "host": "BIP",
+      "parasitoid": "L",
+      "temperature": 28,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 298,
+      "strict_parasitoid_adults": 1,
+      "strict_dead": 151,
+      "H_per_initial_egg": 0.6622222222222223,
+      "P_per_initial_egg": 0.0022222222222222222,
+      "all_vial_H_bounds": [
+        0.6622222222222223,
+        0.6622222222222223
+      ],
+      "all_vial_P_bounds": [
+        0.0022222222222222222,
+        0.0022222222222222222
+      ],
+      "host_control_emergence": 0.8155555555555556,
+      "host_control_minus_exposed_emergence": 0.15333333333333332,
+      "author_normalized_parasitism_mean": 0.0027100271002710027,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "BIP|C|20": {
+      "host": "BIP",
+      "parasitoid": "C",
+      "temperature": 20,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 331,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 119,
+      "H_per_initial_egg": 0.7355555555555555,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.7355555555555555,
+        0.7355555555555555
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "BIP|C|24": {
+      "host": "BIP",
+      "parasitoid": "C",
+      "temperature": 24,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 369,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 81,
+      "H_per_initial_egg": 0.82,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.82,
+        0.82
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "BIP|C|28": {
+      "host": "BIP",
+      "parasitoid": "C",
+      "temperature": 28,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 367,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 83,
+      "H_per_initial_egg": 0.8155555555555556,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.8155555555555556,
+        0.8155555555555556
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "BIP|D|20": {
+      "host": "BIP",
+      "parasitoid": "D",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 95,
+      "strict_parasitoid_adults": 182,
+      "strict_dead": 223,
+      "H_per_initial_egg": 0.19,
+      "P_per_initial_egg": 0.364,
+      "all_vial_H_bounds": [
+        0.19,
+        0.19
+      ],
+      "all_vial_P_bounds": [
+        0.364,
+        0.364
+      ],
+      "host_control_emergence": 0.7355555555555555,
+      "host_control_minus_exposed_emergence": 0.5455555555555556,
+      "author_normalized_parasitism_mean": 0.49189189189189203,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIP|D|24": {
+      "host": "BIP",
+      "parasitoid": "D",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 42,
+      "strict_parasitoid_adults": 243,
+      "strict_dead": 215,
+      "H_per_initial_egg": 0.084,
+      "P_per_initial_egg": 0.486,
+      "all_vial_H_bounds": [
+        0.084,
+        0.084
+      ],
+      "all_vial_P_bounds": [
+        0.486,
+        0.486
+      ],
+      "host_control_emergence": 0.82,
+      "host_control_minus_exposed_emergence": 0.736,
+      "author_normalized_parasitism_mean": 0.5926829268292682,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIP|D|28": {
+      "host": "BIP",
+      "parasitoid": "D",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 46,
+      "strict_parasitoid_adults": 175,
+      "strict_dead": 279,
+      "H_per_initial_egg": 0.092,
+      "P_per_initial_egg": 0.35,
+      "all_vial_H_bounds": [
+        0.092,
+        0.092
+      ],
+      "all_vial_P_bounds": [
+        0.35,
+        0.35
+      ],
+      "host_control_emergence": 0.8155555555555556,
+      "host_control_minus_exposed_emergence": 0.7235555555555556,
+      "author_normalized_parasitism_mean": 0.42682926829268286,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|A|20": {
+      "host": "BIR",
+      "parasitoid": "A",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 25,
+      "strict_parasitoid_adults": 84,
+      "strict_dead": 391,
+      "H_per_initial_egg": 0.05,
+      "P_per_initial_egg": 0.168,
+      "all_vial_H_bounds": [
+        0.05,
+        0.05
+      ],
+      "all_vial_P_bounds": [
+        0.168,
+        0.168
+      ],
+      "host_control_emergence": 0.665,
+      "host_control_minus_exposed_emergence": 0.615,
+      "author_normalized_parasitism_mean": 0.2545454545454545,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|A|24": {
+      "host": "BIR",
+      "parasitoid": "A",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 81,
+      "strict_parasitoid_adults": 186,
+      "strict_dead": 233,
+      "H_per_initial_egg": 0.162,
+      "P_per_initial_egg": 0.372,
+      "all_vial_H_bounds": [
+        0.162,
+        0.162
+      ],
+      "all_vial_P_bounds": [
+        0.37200000000000005,
+        0.37200000000000005
+      ],
+      "host_control_emergence": 0.7483333333333333,
+      "host_control_minus_exposed_emergence": 0.5863333333333333,
+      "author_normalized_parasitism_mean": 0.5027027027027027,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|A|28": {
+      "host": "BIR",
+      "parasitoid": "A",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 90,
+      "strict_parasitoid_adults": 11,
+      "strict_dead": 399,
+      "H_per_initial_egg": 0.18,
+      "P_per_initial_egg": 0.022,
+      "all_vial_H_bounds": [
+        0.18,
+        0.18
+      ],
+      "all_vial_P_bounds": [
+        0.022000000000000002,
+        0.022000000000000002
+      ],
+      "host_control_emergence": 0.35,
+      "host_control_minus_exposed_emergence": 0.16999999999999998,
+      "author_normalized_parasitism_mean": 0.05277777777777778,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|G|20": {
+      "host": "BIR",
+      "parasitoid": "G",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 11,
+      "strict_parasitoid_adults": 232,
+      "strict_dead": 257,
+      "H_per_initial_egg": 0.022,
+      "P_per_initial_egg": 0.464,
+      "all_vial_H_bounds": [
+        0.022000000000000002,
+        0.022000000000000002
+      ],
+      "all_vial_P_bounds": [
+        0.46399999999999997,
+        0.46399999999999997
+      ],
+      "host_control_emergence": 0.665,
+      "host_control_minus_exposed_emergence": 0.643,
+      "author_normalized_parasitism_mean": 0.7030303030303031,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|G|24": {
+      "host": "BIR",
+      "parasitoid": "G",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 101,
+      "strict_parasitoid_adults": 221,
+      "strict_dead": 178,
+      "H_per_initial_egg": 0.202,
+      "P_per_initial_egg": 0.442,
+      "all_vial_H_bounds": [
+        0.20199999999999999,
+        0.20199999999999999
+      ],
+      "all_vial_P_bounds": [
+        0.442,
+        0.442
+      ],
+      "host_control_emergence": 0.7483333333333333,
+      "host_control_minus_exposed_emergence": 0.5463333333333333,
+      "author_normalized_parasitism_mean": 0.5972972972972972,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|G|28": {
+      "host": "BIR",
+      "parasitoid": "G",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 38,
+      "strict_parasitoid_adults": 10,
+      "strict_dead": 452,
+      "H_per_initial_egg": 0.076,
+      "P_per_initial_egg": 0.02,
+      "all_vial_H_bounds": [
+        0.076,
+        0.076
+      ],
+      "all_vial_P_bounds": [
+        0.02,
+        0.02
+      ],
+      "host_control_emergence": 0.35,
+      "host_control_minus_exposed_emergence": 0.27399999999999997,
+      "author_normalized_parasitism_mean": 0.05555555555555556,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|L|20": {
+      "host": "BIR",
+      "parasitoid": "L",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 73,
+      "strict_parasitoid_adults": 166,
+      "strict_dead": 261,
+      "H_per_initial_egg": 0.146,
+      "P_per_initial_egg": 0.332,
+      "all_vial_H_bounds": [
+        0.146,
+        0.146
+      ],
+      "all_vial_P_bounds": [
+        0.332,
+        0.332
+      ],
+      "host_control_emergence": 0.665,
+      "host_control_minus_exposed_emergence": 0.519,
+      "author_normalized_parasitism_mean": 0.5030303030303029,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|L|24": {
+      "host": "BIR",
+      "parasitoid": "L",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 194,
+      "strict_parasitoid_adults": 101,
+      "strict_dead": 205,
+      "H_per_initial_egg": 0.388,
+      "P_per_initial_egg": 0.202,
+      "all_vial_H_bounds": [
+        0.38799999999999996,
+        0.38799999999999996
+      ],
+      "all_vial_P_bounds": [
+        0.20199999999999999,
+        0.20199999999999999
+      ],
+      "host_control_emergence": 0.7483333333333333,
+      "host_control_minus_exposed_emergence": 0.3603333333333333,
+      "author_normalized_parasitism_mean": 0.27297297297297296,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|L|28": {
+      "host": "BIR",
+      "parasitoid": "L",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 107,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 393,
+      "H_per_initial_egg": 0.214,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.214,
+        0.214
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.35,
+      "host_control_minus_exposed_emergence": 0.13599999999999998,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|C|20": {
+      "host": "BIR",
+      "parasitoid": "C",
+      "temperature": 20,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 399,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 201,
+      "H_per_initial_egg": 0.665,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.665,
+        0.665
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "BIR|C|24": {
+      "host": "BIR",
+      "parasitoid": "C",
+      "temperature": 24,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 449,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 151,
+      "H_per_initial_egg": 0.7483333333333333,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.7483333333333333,
+        0.7483333333333333
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "BIR|C|28": {
+      "host": "BIR",
+      "parasitoid": "C",
+      "temperature": 28,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 210,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 390,
+      "H_per_initial_egg": 0.35,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.35,
+        0.35
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "BIR|D|20": {
+      "host": "BIR",
+      "parasitoid": "D",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 93,
+      "strict_parasitoid_adults": 229,
+      "strict_dead": 178,
+      "H_per_initial_egg": 0.186,
+      "P_per_initial_egg": 0.458,
+      "all_vial_H_bounds": [
+        0.18600000000000003,
+        0.18600000000000003
+      ],
+      "all_vial_P_bounds": [
+        0.45799999999999996,
+        0.45799999999999996
+      ],
+      "host_control_emergence": 0.665,
+      "host_control_minus_exposed_emergence": 0.47900000000000004,
+      "author_normalized_parasitism_mean": 0.6939393939393941,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|D|24": {
+      "host": "BIR",
+      "parasitoid": "D",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 60,
+      "strict_parasitoid_adults": 250,
+      "strict_dead": 190,
+      "H_per_initial_egg": 0.12,
+      "P_per_initial_egg": 0.5,
+      "all_vial_H_bounds": [
+        0.12,
+        0.12
+      ],
+      "all_vial_P_bounds": [
+        0.5,
+        0.5
+      ],
+      "host_control_emergence": 0.7483333333333333,
+      "host_control_minus_exposed_emergence": 0.6283333333333333,
+      "author_normalized_parasitism_mean": 0.6756756756756757,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "BIR|D|28": {
+      "host": "BIR",
+      "parasitoid": "D",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 15,
+      "strict_parasitoid_adults": 151,
+      "strict_dead": 334,
+      "H_per_initial_egg": 0.03,
+      "P_per_initial_egg": 0.302,
+      "all_vial_H_bounds": [
+        0.03,
+        0.03
+      ],
+      "all_vial_P_bounds": [
+        0.302,
+        0.302
+      ],
+      "host_control_emergence": 0.35,
+      "host_control_minus_exposed_emergence": 0.31999999999999995,
+      "author_normalized_parasitism_mean": 0.7888888888888888,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PAL|A|20": {
+      "host": "PAL",
+      "parasitoid": "A",
+      "temperature": 20,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 53,
+      "strict_parasitoid_adults": 125,
+      "strict_dead": 222,
+      "H_per_initial_egg": 0.1325,
+      "P_per_initial_egg": 0.3125,
+      "all_vial_H_bounds": [
+        0.1325,
+        0.1325
+      ],
+      "all_vial_P_bounds": [
+        0.3125,
+        0.3125
+      ],
+      "host_control_emergence": 0.708,
+      "host_control_minus_exposed_emergence": 0.5754999999999999,
+      "author_normalized_parasitism_mean": 0.44642857142857134,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PAL|A|24": {
+      "host": "PAL",
+      "parasitoid": "A",
+      "temperature": 24,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 69,
+      "strict_parasitoid_adults": 176,
+      "strict_dead": 155,
+      "H_per_initial_egg": 0.1725,
+      "P_per_initial_egg": 0.44,
+      "all_vial_H_bounds": [
+        0.1725,
+        0.1725
+      ],
+      "all_vial_P_bounds": [
+        0.44,
+        0.44
+      ],
+      "host_control_emergence": 0.79,
+      "host_control_minus_exposed_emergence": 0.6175,
+      "author_normalized_parasitism_mean": 0.55,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PAL|A|28": {
+      "host": "PAL",
+      "parasitoid": "A",
+      "temperature": 28,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 29,
+      "strict_parasitoid_adults": 17,
+      "strict_dead": 354,
+      "H_per_initial_egg": 0.0725,
+      "P_per_initial_egg": 0.0425,
+      "all_vial_H_bounds": [
+        0.0725,
+        0.0725
+      ],
+      "all_vial_P_bounds": [
+        0.0425,
+        0.0425
+      ],
+      "host_control_emergence": 0.272,
+      "host_control_minus_exposed_emergence": 0.1995,
+      "author_normalized_parasitism_mean": 0.1517857142857143,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PAL|G|20": {
+      "host": "PAL",
+      "parasitoid": "G",
+      "temperature": 20,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 101,
+      "strict_parasitoid_adults": 85,
+      "strict_dead": 214,
+      "H_per_initial_egg": 0.2525,
+      "P_per_initial_egg": 0.2125,
+      "all_vial_H_bounds": [
+        0.2525,
+        0.2525
+      ],
+      "all_vial_P_bounds": [
+        0.2125,
+        0.2125
+      ],
+      "host_control_emergence": 0.708,
+      "host_control_minus_exposed_emergence": 0.45549999999999996,
+      "author_normalized_parasitism_mean": 0.3035714285714286,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PAL|G|24": {
+      "host": "PAL",
+      "parasitoid": "G",
+      "temperature": 24,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 77,
+      "strict_parasitoid_adults": 123,
+      "strict_dead": 200,
+      "H_per_initial_egg": 0.1925,
+      "P_per_initial_egg": 0.3075,
+      "all_vial_H_bounds": [
+        0.1925,
+        0.1925
+      ],
+      "all_vial_P_bounds": [
+        0.3075,
+        0.3075
+      ],
+      "host_control_emergence": 0.79,
+      "host_control_minus_exposed_emergence": 0.5975,
+      "author_normalized_parasitism_mean": 0.384375,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PAL|G|28": {
+      "host": "PAL",
+      "parasitoid": "G",
+      "temperature": 28,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 32,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 368,
+      "H_per_initial_egg": 0.08,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.08,
+        0.08
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.272,
+      "host_control_minus_exposed_emergence": 0.192,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PAL|L|20": {
+      "host": "PAL",
+      "parasitoid": "L",
+      "temperature": 20,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 19,
+      "strict_parasitoid_adults": 246,
+      "strict_dead": 135,
+      "H_per_initial_egg": 0.0475,
+      "P_per_initial_egg": 0.615,
+      "all_vial_H_bounds": [
+        0.0475,
+        0.0475
+      ],
+      "all_vial_P_bounds": [
+        0.615,
+        0.615
+      ],
+      "host_control_emergence": 0.708,
+      "host_control_minus_exposed_emergence": 0.6605,
+      "author_normalized_parasitism_mean": 0.8392857142857142,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PAL|L|24": {
+      "host": "PAL",
+      "parasitoid": "L",
+      "temperature": 24,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 73,
+      "strict_parasitoid_adults": 202,
+      "strict_dead": 125,
+      "H_per_initial_egg": 0.1825,
+      "P_per_initial_egg": 0.505,
+      "all_vial_H_bounds": [
+        0.1825,
+        0.1825
+      ],
+      "all_vial_P_bounds": [
+        0.505,
+        0.505
+      ],
+      "host_control_emergence": 0.79,
+      "host_control_minus_exposed_emergence": 0.6075,
+      "author_normalized_parasitism_mean": 0.63125,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PAL|L|28": {
+      "host": "PAL",
+      "parasitoid": "L",
+      "temperature": 28,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 33,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 367,
+      "H_per_initial_egg": 0.0825,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.0825,
+        0.0825
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.272,
+      "host_control_minus_exposed_emergence": 0.1895,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PAL|C|20": {
+      "host": "PAL",
+      "parasitoid": "C",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 354,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 146,
+      "H_per_initial_egg": 0.708,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.708,
+        0.708
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "PAL|C|24": {
+      "host": "PAL",
+      "parasitoid": "C",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 395,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 105,
+      "H_per_initial_egg": 0.79,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.79,
+        0.79
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "PAL|C|28": {
+      "host": "PAL",
+      "parasitoid": "C",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 136,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 364,
+      "H_per_initial_egg": 0.272,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.272,
+        0.272
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "PAL|D|20": {
+      "host": "PAL",
+      "parasitoid": "D",
+      "temperature": 20,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 182,
+      "strict_parasitoid_adults": 173,
+      "strict_dead": 245,
+      "H_per_initial_egg": 0.30333333333333334,
+      "P_per_initial_egg": 0.28833333333333333,
+      "all_vial_H_bounds": [
+        0.30333333333333334,
+        0.30333333333333334
+      ],
+      "all_vial_P_bounds": [
+        0.28833333333333333,
+        0.28833333333333333
+      ],
+      "host_control_emergence": 0.708,
+      "host_control_minus_exposed_emergence": 0.4046666666666666,
+      "author_normalized_parasitism_mean": 0.41190476190476194,
+      "author_normalized_parasitism_valid_vials": 12,
+      "zero_denominator_vials": 0
+    },
+    "PAL|D|24": {
+      "host": "PAL",
+      "parasitoid": "D",
+      "temperature": 24,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 96,
+      "strict_parasitoid_adults": 296,
+      "strict_dead": 208,
+      "H_per_initial_egg": 0.16,
+      "P_per_initial_egg": 0.49333333333333335,
+      "all_vial_H_bounds": [
+        0.16,
+        0.16
+      ],
+      "all_vial_P_bounds": [
+        0.49333333333333335,
+        0.49333333333333335
+      ],
+      "host_control_emergence": 0.79,
+      "host_control_minus_exposed_emergence": 0.63,
+      "author_normalized_parasitism_mean": 0.6166666666666666,
+      "author_normalized_parasitism_valid_vials": 12,
+      "zero_denominator_vials": 0
+    },
+    "PAL|D|28": {
+      "host": "PAL",
+      "parasitoid": "D",
+      "temperature": 28,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 6,
+      "strict_parasitoid_adults": 86,
+      "strict_dead": 508,
+      "H_per_initial_egg": 0.01,
+      "P_per_initial_egg": 0.14333333333333334,
+      "all_vial_H_bounds": [
+        0.01,
+        0.01
+      ],
+      "all_vial_P_bounds": [
+        0.14333333333333334,
+        0.14333333333333334
+      ],
+      "host_control_emergence": 0.272,
+      "host_control_minus_exposed_emergence": 0.262,
+      "author_normalized_parasitism_mean": 0.4285714285714286,
+      "author_normalized_parasitism_valid_vials": 12,
+      "zero_denominator_vials": 0
+    },
+    "PSA|A|20": {
+      "host": "PSA",
+      "parasitoid": "A",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 9,
+      "strict_host_adults": 280,
+      "strict_parasitoid_adults": 38,
+      "strict_dead": 132,
+      "H_per_initial_egg": 0.6222222222222222,
+      "P_per_initial_egg": 0.08444444444444445,
+      "all_vial_H_bounds": [
+        0.57,
+        0.5720000000000001
+      ],
+      "all_vial_P_bounds": [
+        0.076,
+        0.078
+      ],
+      "host_control_emergence": 0.6733333333333333,
+      "host_control_minus_exposed_emergence": 0.05111111111111111,
+      "author_normalized_parasitism_mean": 0.12418300653594772,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "PSA|A|24": {
+      "host": "PSA",
+      "parasitoid": "A",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 351,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 149,
+      "H_per_initial_egg": 0.702,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.7020000000000001,
+        0.7020000000000001
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.6516666666666666,
+      "host_control_minus_exposed_emergence": -0.05033333333333334,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PSA|A|28": {
+      "host": "PSA",
+      "parasitoid": "A",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 317,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 183,
+      "H_per_initial_egg": 0.634,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.634,
+        0.634
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.6833333333333333,
+      "host_control_minus_exposed_emergence": 0.04933333333333334,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PSA|G|20": {
+      "host": "PSA",
+      "parasitoid": "G",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 219,
+      "strict_parasitoid_adults": 66,
+      "strict_dead": 215,
+      "H_per_initial_egg": 0.438,
+      "P_per_initial_egg": 0.132,
+      "all_vial_H_bounds": [
+        0.43799999999999994,
+        0.43799999999999994
+      ],
+      "all_vial_P_bounds": [
+        0.132,
+        0.132
+      ],
+      "host_control_emergence": 0.6733333333333333,
+      "host_control_minus_exposed_emergence": 0.23533333333333334,
+      "author_normalized_parasitism_mean": 0.1929499442053244,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PSA|G|24": {
+      "host": "PSA",
+      "parasitoid": "G",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 323,
+      "strict_parasitoid_adults": 35,
+      "strict_dead": 142,
+      "H_per_initial_egg": 0.646,
+      "P_per_initial_egg": 0.07,
+      "all_vial_H_bounds": [
+        0.6459999999999999,
+        0.6459999999999999
+      ],
+      "all_vial_P_bounds": [
+        0.07,
+        0.07
+      ],
+      "host_control_emergence": 0.6516666666666666,
+      "host_control_minus_exposed_emergence": 0.005666666666666598,
+      "author_normalized_parasitism_mean": 0.09785149491031844,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PSA|G|28": {
+      "host": "PSA",
+      "parasitoid": "G",
+      "temperature": 28,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 272,
+      "strict_parasitoid_adults": 3,
+      "strict_dead": 175,
+      "H_per_initial_egg": 0.6044444444444445,
+      "P_per_initial_egg": 0.006666666666666667,
+      "all_vial_H_bounds": [
+        0.6044444444444445,
+        0.6044444444444445
+      ],
+      "all_vial_P_bounds": [
+        0.006666666666666666,
+        0.006666666666666666
+      ],
+      "host_control_emergence": 0.6833333333333333,
+      "host_control_minus_exposed_emergence": 0.0788888888888889,
+      "author_normalized_parasitism_mean": 0.00980392156862745,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "PSA|L|20": {
+      "host": "PSA",
+      "parasitoid": "L",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 298,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 202,
+      "H_per_initial_egg": 0.596,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.596,
+        0.596
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.6733333333333333,
+      "host_control_minus_exposed_emergence": 0.07733333333333337,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PSA|L|24": {
+      "host": "PSA",
+      "parasitoid": "L",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 332,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 168,
+      "H_per_initial_egg": 0.664,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.664,
+        0.664
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.6516666666666666,
+      "host_control_minus_exposed_emergence": -0.012333333333333418,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PSA|L|28": {
+      "host": "PSA",
+      "parasitoid": "L",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 352,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 148,
+      "H_per_initial_egg": 0.704,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.7040000000000001,
+        0.7040000000000001
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.6833333333333333,
+      "host_control_minus_exposed_emergence": -0.02066666666666661,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PSA|C|20": {
+      "host": "PSA",
+      "parasitoid": "C",
+      "temperature": 20,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 404,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 196,
+      "H_per_initial_egg": 0.6733333333333333,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.6733333333333333,
+        0.6733333333333333
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "PSA|C|24": {
+      "host": "PSA",
+      "parasitoid": "C",
+      "temperature": 24,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 391,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 209,
+      "H_per_initial_egg": 0.6516666666666666,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.6516666666666667,
+        0.6516666666666667
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "PSA|C|28": {
+      "host": "PSA",
+      "parasitoid": "C",
+      "temperature": 28,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 410,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 190,
+      "H_per_initial_egg": 0.6833333333333333,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.6833333333333332,
+        0.6833333333333332
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "PSA|D|20": {
+      "host": "PSA",
+      "parasitoid": "D",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 51,
+      "strict_parasitoid_adults": 201,
+      "strict_dead": 248,
+      "H_per_initial_egg": 0.102,
+      "P_per_initial_egg": 0.402,
+      "all_vial_H_bounds": [
+        0.102,
+        0.102
+      ],
+      "all_vial_P_bounds": [
+        0.402,
+        0.402
+      ],
+      "host_control_emergence": 0.6733333333333333,
+      "host_control_minus_exposed_emergence": 0.5713333333333334,
+      "author_normalized_parasitism_mean": 0.5911764705882354,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PSA|D|24": {
+      "host": "PSA",
+      "parasitoid": "D",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 15,
+      "strict_parasitoid_adults": 265,
+      "strict_dead": 220,
+      "H_per_initial_egg": 0.03,
+      "P_per_initial_egg": 0.53,
+      "all_vial_H_bounds": [
+        0.03,
+        0.03
+      ],
+      "all_vial_P_bounds": [
+        0.53,
+        0.53
+      ],
+      "host_control_emergence": 0.6516666666666666,
+      "host_control_minus_exposed_emergence": 0.6216666666666666,
+      "author_normalized_parasitism_mean": 0.8030303030303031,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PSA|D|28": {
+      "host": "PSA",
+      "parasitoid": "D",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 34,
+      "strict_parasitoid_adults": 104,
+      "strict_dead": 362,
+      "H_per_initial_egg": 0.068,
+      "P_per_initial_egg": 0.208,
+      "all_vial_H_bounds": [
+        0.068,
+        0.068
+      ],
+      "all_vial_P_bounds": [
+        0.20800000000000002,
+        0.20800000000000002
+      ],
+      "host_control_emergence": 0.6833333333333333,
+      "host_control_minus_exposed_emergence": 0.6153333333333333,
+      "author_normalized_parasitism_mean": 0.30588235294117644,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PST|A|20": {
+      "host": "PST",
+      "parasitoid": "A",
+      "temperature": 20,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 198,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 152,
+      "H_per_initial_egg": 0.5657142857142857,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.5657142857142857,
+        0.5657142857142857
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.4714285714285714,
+      "host_control_minus_exposed_emergence": -0.0942857142857143,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 7,
+      "zero_denominator_vials": 0
+    },
+    "PST|A|24": {
+      "host": "PST",
+      "parasitoid": "A",
+      "temperature": 24,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 177,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 173,
+      "H_per_initial_egg": 0.5057142857142857,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.5057142857142857,
+        0.5057142857142857
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.43714285714285717,
+      "host_control_minus_exposed_emergence": -0.0685714285714285,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 7,
+      "zero_denominator_vials": 0
+    },
+    "PST|G|20": {
+      "host": "PST",
+      "parasitoid": "G",
+      "temperature": 20,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 90,
+      "strict_parasitoid_adults": 58,
+      "strict_dead": 202,
+      "H_per_initial_egg": 0.2571428571428571,
+      "P_per_initial_egg": 0.1657142857142857,
+      "all_vial_H_bounds": [
+        0.2571428571428572,
+        0.2571428571428572
+      ],
+      "all_vial_P_bounds": [
+        0.16571428571428573,
+        0.16571428571428573
+      ],
+      "host_control_emergence": 0.4714285714285714,
+      "host_control_minus_exposed_emergence": 0.2142857142857143,
+      "author_normalized_parasitism_mean": 0.3404761904761905,
+      "author_normalized_parasitism_valid_vials": 7,
+      "zero_denominator_vials": 0
+    },
+    "PST|G|24": {
+      "host": "PST",
+      "parasitoid": "G",
+      "temperature": 24,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 31,
+      "strict_parasitoid_adults": 119,
+      "strict_dead": 200,
+      "H_per_initial_egg": 0.08857142857142856,
+      "P_per_initial_egg": 0.34,
+      "all_vial_H_bounds": [
+        0.08857142857142858,
+        0.08857142857142858
+      ],
+      "all_vial_P_bounds": [
+        0.34,
+        0.34
+      ],
+      "host_control_emergence": 0.43714285714285717,
+      "host_control_minus_exposed_emergence": 0.3485714285714286,
+      "author_normalized_parasitism_mean": 0.7467532467532468,
+      "author_normalized_parasitism_valid_vials": 7,
+      "zero_denominator_vials": 0
+    },
+    "PST|L|20": {
+      "host": "PST",
+      "parasitoid": "L",
+      "temperature": 20,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 213,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 137,
+      "H_per_initial_egg": 0.6085714285714285,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.6085714285714285,
+        0.6085714285714285
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.4714285714285714,
+      "host_control_minus_exposed_emergence": -0.13714285714285712,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 7,
+      "zero_denominator_vials": 0
+    },
+    "PST|L|24": {
+      "host": "PST",
+      "parasitoid": "L",
+      "temperature": 24,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 184,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 166,
+      "H_per_initial_egg": 0.5257142857142857,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.5257142857142857,
+        0.5257142857142857
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.43714285714285717,
+      "host_control_minus_exposed_emergence": -0.08857142857142852,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 7,
+      "zero_denominator_vials": 0
+    },
+    "PST|C|20": {
+      "host": "PST",
+      "parasitoid": "C",
+      "temperature": 20,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 165,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 185,
+      "H_per_initial_egg": 0.4714285714285714,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.4714285714285715,
+        0.4714285714285715
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "PST|C|24": {
+      "host": "PST",
+      "parasitoid": "C",
+      "temperature": 24,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 153,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 197,
+      "H_per_initial_egg": 0.43714285714285717,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.43714285714285717,
+        0.43714285714285717
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "PST|D|20": {
+      "host": "PST",
+      "parasitoid": "D",
+      "temperature": 20,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 50,
+      "strict_parasitoid_adults": 176,
+      "strict_dead": 174,
+      "H_per_initial_egg": 0.125,
+      "P_per_initial_egg": 0.44,
+      "all_vial_H_bounds": [
+        0.125,
+        0.125
+      ],
+      "all_vial_P_bounds": [
+        0.44,
+        0.44
+      ],
+      "host_control_emergence": 0.4714285714285714,
+      "host_control_minus_exposed_emergence": 0.3464285714285714,
+      "author_normalized_parasitism_mean": 0.8645833333333334,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "PST|D|24": {
+      "host": "PST",
+      "parasitoid": "D",
+      "temperature": 24,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 15,
+      "strict_parasitoid_adults": 203,
+      "strict_dead": 182,
+      "H_per_initial_egg": 0.0375,
+      "P_per_initial_egg": 0.5075,
+      "all_vial_H_bounds": [
+        0.0375,
+        0.0375
+      ],
+      "all_vial_P_bounds": [
+        0.5075,
+        0.5075
+      ],
+      "host_control_emergence": 0.43714285714285717,
+      "host_control_minus_exposed_emergence": 0.3996428571428572,
+      "author_normalized_parasitism_mean": 0.9886363636363636,
+      "author_normalized_parasitism_valid_vials": 8,
+      "zero_denominator_vials": 0
+    },
+    "RUB|A|20": {
+      "host": "RUB",
+      "parasitoid": "A",
+      "temperature": 20,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 7,
+      "strict_parasitoid_adults": 55,
+      "strict_dead": 288,
+      "H_per_initial_egg": 0.02,
+      "P_per_initial_egg": 0.15714285714285714,
+      "all_vial_H_bounds": [
+        0.02,
+        0.02
+      ],
+      "all_vial_P_bounds": [
+        0.15714285714285714,
+        0.15714285714285714
+      ],
+      "host_control_emergence": 0.5533333333333333,
+      "host_control_minus_exposed_emergence": 0.5333333333333333,
+      "author_normalized_parasitism_mean": 0.28061224489795916,
+      "author_normalized_parasitism_valid_vials": 7,
+      "zero_denominator_vials": 0
+    },
+    "RUB|A|24": {
+      "host": "RUB",
+      "parasitoid": "A",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 8,
+      "strict_parasitoid_adults": 167,
+      "strict_dead": 325,
+      "H_per_initial_egg": 0.016,
+      "P_per_initial_egg": 0.334,
+      "all_vial_H_bounds": [
+        0.016,
+        0.016
+      ],
+      "all_vial_P_bounds": [
+        0.33399999999999996,
+        0.33399999999999996
+      ],
+      "host_control_emergence": 0.475,
+      "host_control_minus_exposed_emergence": 0.45899999999999996,
+      "author_normalized_parasitism_mean": 0.675,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "RUB|A|28": {
+      "host": "RUB",
+      "parasitoid": "A",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 32,
+      "strict_parasitoid_adults": 39,
+      "strict_dead": 429,
+      "H_per_initial_egg": 0.064,
+      "P_per_initial_egg": 0.078,
+      "all_vial_H_bounds": [
+        0.064,
+        0.064
+      ],
+      "all_vial_P_bounds": [
+        0.078,
+        0.078
+      ],
+      "host_control_emergence": 0.3233333333333333,
+      "host_control_minus_exposed_emergence": 0.2593333333333333,
+      "author_normalized_parasitism_mean": 0.24375,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "RUB|G|20": {
+      "host": "RUB",
+      "parasitoid": "G",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 117,
+      "strict_parasitoid_adults": 85,
+      "strict_dead": 298,
+      "H_per_initial_egg": 0.234,
+      "P_per_initial_egg": 0.17,
+      "all_vial_H_bounds": [
+        0.23399999999999999,
+        0.23399999999999999
+      ],
+      "all_vial_P_bounds": [
+        0.17,
+        0.17
+      ],
+      "host_control_emergence": 0.5533333333333333,
+      "host_control_minus_exposed_emergence": 0.31933333333333336,
+      "author_normalized_parasitism_mean": 0.30357142857142855,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "RUB|G|24": {
+      "host": "RUB",
+      "parasitoid": "G",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 74,
+      "strict_parasitoid_adults": 103,
+      "strict_dead": 323,
+      "H_per_initial_egg": 0.148,
+      "P_per_initial_egg": 0.206,
+      "all_vial_H_bounds": [
+        0.14800000000000002,
+        0.14800000000000002
+      ],
+      "all_vial_P_bounds": [
+        0.20600000000000002,
+        0.20600000000000002
+      ],
+      "host_control_emergence": 0.475,
+      "host_control_minus_exposed_emergence": 0.32699999999999996,
+      "author_normalized_parasitism_mean": 0.4201666666666667,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "RUB|G|28": {
+      "host": "RUB",
+      "parasitoid": "G",
+      "temperature": 28,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 18,
+      "strict_parasitoid_adults": 1,
+      "strict_dead": 331,
+      "H_per_initial_egg": 0.05142857142857143,
+      "P_per_initial_egg": 0.002857142857142857,
+      "all_vial_H_bounds": [
+        0.051428571428571435,
+        0.051428571428571435
+      ],
+      "all_vial_P_bounds": [
+        0.002857142857142857,
+        0.002857142857142857
+      ],
+      "host_control_emergence": 0.3233333333333333,
+      "host_control_minus_exposed_emergence": 0.27190476190476187,
+      "author_normalized_parasitism_mean": 0.008928571428571428,
+      "author_normalized_parasitism_valid_vials": 7,
+      "zero_denominator_vials": 0
+    },
+    "RUB|L|20": {
+      "host": "RUB",
+      "parasitoid": "L",
+      "temperature": 20,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 3,
+      "strict_parasitoid_adults": 85,
+      "strict_dead": 362,
+      "H_per_initial_egg": 0.006666666666666667,
+      "P_per_initial_egg": 0.18888888888888888,
+      "all_vial_H_bounds": [
+        0.006666666666666666,
+        0.006666666666666666
+      ],
+      "all_vial_P_bounds": [
+        0.18888888888888888,
+        0.18888888888888888
+      ],
+      "host_control_emergence": 0.5533333333333333,
+      "host_control_minus_exposed_emergence": 0.5466666666666666,
+      "author_normalized_parasitism_mean": 0.33730158730158727,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "RUB|L|24": {
+      "host": "RUB",
+      "parasitoid": "L",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 11,
+      "strict_parasitoid_adults": 182,
+      "strict_dead": 307,
+      "H_per_initial_egg": 0.022,
+      "P_per_initial_egg": 0.364,
+      "all_vial_H_bounds": [
+        0.022000000000000002,
+        0.022000000000000002
+      ],
+      "all_vial_P_bounds": [
+        0.364,
+        0.364
+      ],
+      "host_control_emergence": 0.475,
+      "host_control_minus_exposed_emergence": 0.45299999999999996,
+      "author_normalized_parasitism_mean": 0.7166666666666666,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "RUB|L|28": {
+      "host": "RUB",
+      "parasitoid": "L",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 57,
+      "strict_parasitoid_adults": 3,
+      "strict_dead": 440,
+      "H_per_initial_egg": 0.114,
+      "P_per_initial_egg": 0.006,
+      "all_vial_H_bounds": [
+        0.114,
+        0.114
+      ],
+      "all_vial_P_bounds": [
+        0.006,
+        0.006
+      ],
+      "host_control_emergence": 0.3233333333333333,
+      "host_control_minus_exposed_emergence": 0.20933333333333332,
+      "author_normalized_parasitism_mean": 0.01875,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "RUB|C|20": {
+      "host": "RUB",
+      "parasitoid": "C",
+      "temperature": 20,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 332,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 268,
+      "H_per_initial_egg": 0.5533333333333333,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.5533333333333333,
+        0.5533333333333333
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "RUB|C|24": {
+      "host": "RUB",
+      "parasitoid": "C",
+      "temperature": 24,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 285,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 315,
+      "H_per_initial_egg": 0.475,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.475,
+        0.475
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "RUB|C|28": {
+      "host": "RUB",
+      "parasitoid": "C",
+      "temperature": 28,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 194,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 406,
+      "H_per_initial_egg": 0.3233333333333333,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.32333333333333336,
+        0.32333333333333336
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "RUB|D|20": {
+      "host": "RUB",
+      "parasitoid": "D",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 120,
+      "strict_parasitoid_adults": 71,
+      "strict_dead": 309,
+      "H_per_initial_egg": 0.24,
+      "P_per_initial_egg": 0.142,
+      "all_vial_H_bounds": [
+        0.24,
+        0.24
+      ],
+      "all_vial_P_bounds": [
+        0.142,
+        0.142
+      ],
+      "host_control_emergence": 0.5533333333333333,
+      "host_control_minus_exposed_emergence": 0.31333333333333335,
+      "author_normalized_parasitism_mean": 0.25357142857142856,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "RUB|D|24": {
+      "host": "RUB",
+      "parasitoid": "D",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 110,
+      "strict_parasitoid_adults": 64,
+      "strict_dead": 326,
+      "H_per_initial_egg": 0.22,
+      "P_per_initial_egg": 0.128,
+      "all_vial_H_bounds": [
+        0.22,
+        0.22
+      ],
+      "all_vial_P_bounds": [
+        0.128,
+        0.128
+      ],
+      "host_control_emergence": 0.475,
+      "host_control_minus_exposed_emergence": 0.255,
+      "author_normalized_parasitism_mean": 0.2666666666666667,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "RUB|D|28": {
+      "host": "RUB",
+      "parasitoid": "D",
+      "temperature": 28,
+      "vials_all": 9,
+      "vials_strict": 9,
+      "strict_host_adults": 42,
+      "strict_parasitoid_adults": 27,
+      "strict_dead": 381,
+      "H_per_initial_egg": 0.09333333333333334,
+      "P_per_initial_egg": 0.06,
+      "all_vial_H_bounds": [
+        0.09333333333333334,
+        0.09333333333333334
+      ],
+      "all_vial_P_bounds": [
+        0.06,
+        0.06
+      ],
+      "host_control_emergence": 0.3233333333333333,
+      "host_control_minus_exposed_emergence": 0.22999999999999998,
+      "author_normalized_parasitism_mean": 0.1875,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "SUL|A|20": {
+      "host": "SUL",
+      "parasitoid": "A",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 82,
+      "strict_parasitoid_adults": 137,
+      "strict_dead": 281,
+      "H_per_initial_egg": 0.164,
+      "P_per_initial_egg": 0.274,
+      "all_vial_H_bounds": [
+        0.16399999999999998,
+        0.16399999999999998
+      ],
+      "all_vial_P_bounds": [
+        0.27399999999999997,
+        0.27399999999999997
+      ],
+      "host_control_emergence": 0.8666666666666667,
+      "host_control_minus_exposed_emergence": 0.7026666666666667,
+      "author_normalized_parasitism_mean": 0.31860465116279063,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|A|24": {
+      "host": "SUL",
+      "parasitoid": "A",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 57,
+      "strict_parasitoid_adults": 260,
+      "strict_dead": 183,
+      "H_per_initial_egg": 0.114,
+      "P_per_initial_egg": 0.52,
+      "all_vial_H_bounds": [
+        0.114,
+        0.114
+      ],
+      "all_vial_P_bounds": [
+        0.52,
+        0.52
+      ],
+      "host_control_emergence": 0.8366666666666667,
+      "host_control_minus_exposed_emergence": 0.7226666666666667,
+      "author_normalized_parasitism_mean": 0.619047619047619,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|A|28": {
+      "host": "SUL",
+      "parasitoid": "A",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 9,
+      "strict_host_adults": 215,
+      "strict_parasitoid_adults": 73,
+      "strict_dead": 162,
+      "H_per_initial_egg": 0.4777777777777778,
+      "P_per_initial_egg": 0.1622222222222222,
+      "all_vial_H_bounds": [
+        0.49200000000000005,
+        0.53
+      ],
+      "all_vial_P_bounds": [
+        0.146,
+        0.184
+      ],
+      "host_control_emergence": 0.78,
+      "host_control_minus_exposed_emergence": 0.3022222222222222,
+      "author_normalized_parasitism_mean": 0.20672642623862136,
+      "author_normalized_parasitism_valid_vials": 9,
+      "zero_denominator_vials": 0
+    },
+    "SUL|G|20": {
+      "host": "SUL",
+      "parasitoid": "G",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 38,
+      "strict_parasitoid_adults": 266,
+      "strict_dead": 196,
+      "H_per_initial_egg": 0.076,
+      "P_per_initial_egg": 0.532,
+      "all_vial_H_bounds": [
+        0.076,
+        0.076
+      ],
+      "all_vial_P_bounds": [
+        0.532,
+        0.532
+      ],
+      "host_control_emergence": 0.8666666666666667,
+      "host_control_minus_exposed_emergence": 0.7906666666666667,
+      "author_normalized_parasitism_mean": 0.6186046511627906,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|G|24": {
+      "host": "SUL",
+      "parasitoid": "G",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 65,
+      "strict_parasitoid_adults": 274,
+      "strict_dead": 161,
+      "H_per_initial_egg": 0.13,
+      "P_per_initial_egg": 0.548,
+      "all_vial_H_bounds": [
+        0.13,
+        0.13
+      ],
+      "all_vial_P_bounds": [
+        0.5479999999999999,
+        0.5479999999999999
+      ],
+      "host_control_emergence": 0.8366666666666667,
+      "host_control_minus_exposed_emergence": 0.7066666666666667,
+      "author_normalized_parasitism_mean": 0.6523809523809524,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|G|28": {
+      "host": "SUL",
+      "parasitoid": "G",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 174,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 326,
+      "H_per_initial_egg": 0.348,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.348,
+        0.348
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0.78,
+      "host_control_minus_exposed_emergence": 0.43200000000000005,
+      "author_normalized_parasitism_mean": 0,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|L|20": {
+      "host": "SUL",
+      "parasitoid": "L",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 266,
+      "strict_parasitoid_adults": 11,
+      "strict_dead": 223,
+      "H_per_initial_egg": 0.532,
+      "P_per_initial_egg": 0.022,
+      "all_vial_H_bounds": [
+        0.532,
+        0.532
+      ],
+      "all_vial_P_bounds": [
+        0.022000000000000002,
+        0.022000000000000002
+      ],
+      "host_control_emergence": 0.8666666666666667,
+      "host_control_minus_exposed_emergence": 0.33466666666666667,
+      "author_normalized_parasitism_mean": 0.024974721941354906,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|L|24": {
+      "host": "SUL",
+      "parasitoid": "L",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 388,
+      "strict_parasitoid_adults": 22,
+      "strict_dead": 90,
+      "H_per_initial_egg": 0.776,
+      "P_per_initial_egg": 0.044,
+      "all_vial_H_bounds": [
+        0.7759999999999999,
+        0.7759999999999999
+      ],
+      "all_vial_P_bounds": [
+        0.044000000000000004,
+        0.044000000000000004
+      ],
+      "host_control_emergence": 0.8366666666666667,
+      "host_control_minus_exposed_emergence": 0.06066666666666665,
+      "author_normalized_parasitism_mean": 0.05147186147186147,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|L|28": {
+      "host": "SUL",
+      "parasitoid": "L",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 333,
+      "strict_parasitoid_adults": 2,
+      "strict_dead": 165,
+      "H_per_initial_egg": 0.666,
+      "P_per_initial_egg": 0.004,
+      "all_vial_H_bounds": [
+        0.6659999999999999,
+        0.6659999999999999
+      ],
+      "all_vial_P_bounds": [
+        0.004,
+        0.004
+      ],
+      "host_control_emergence": 0.78,
+      "host_control_minus_exposed_emergence": 0.11399999999999999,
+      "author_normalized_parasitism_mean": 0.005128205128205128,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|C|20": {
+      "host": "SUL",
+      "parasitoid": "C",
+      "temperature": 20,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 520,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 80,
+      "H_per_initial_egg": 0.8666666666666667,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.8666666666666667,
+        0.8666666666666667
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "SUL|C|24": {
+      "host": "SUL",
+      "parasitoid": "C",
+      "temperature": 24,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 502,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 98,
+      "H_per_initial_egg": 0.8366666666666667,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.8366666666666667,
+        0.8366666666666667
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "SUL|C|28": {
+      "host": "SUL",
+      "parasitoid": "C",
+      "temperature": 28,
+      "vials_all": 12,
+      "vials_strict": 12,
+      "strict_host_adults": 468,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 132,
+      "H_per_initial_egg": 0.78,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0.78,
+        0.78
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "SUL|D|20": {
+      "host": "SUL",
+      "parasitoid": "D",
+      "temperature": 20,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 152,
+      "strict_parasitoid_adults": 205,
+      "strict_dead": 143,
+      "H_per_initial_egg": 0.304,
+      "P_per_initial_egg": 0.41,
+      "all_vial_H_bounds": [
+        0.304,
+        0.304
+      ],
+      "all_vial_P_bounds": [
+        0.41,
+        0.41
+      ],
+      "host_control_emergence": 0.8666666666666667,
+      "host_control_minus_exposed_emergence": 0.5626666666666666,
+      "author_normalized_parasitism_mean": 0.4767441860465117,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|D|24": {
+      "host": "SUL",
+      "parasitoid": "D",
+      "temperature": 24,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 85,
+      "strict_parasitoid_adults": 214,
+      "strict_dead": 201,
+      "H_per_initial_egg": 0.17,
+      "P_per_initial_egg": 0.428,
+      "all_vial_H_bounds": [
+        0.17,
+        0.17
+      ],
+      "all_vial_P_bounds": [
+        0.428,
+        0.428
+      ],
+      "host_control_emergence": 0.8366666666666667,
+      "host_control_minus_exposed_emergence": 0.6666666666666666,
+      "author_normalized_parasitism_mean": 0.5095238095238095,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "SUL|D|28": {
+      "host": "SUL",
+      "parasitoid": "D",
+      "temperature": 28,
+      "vials_all": 10,
+      "vials_strict": 10,
+      "strict_host_adults": 31,
+      "strict_parasitoid_adults": 129,
+      "strict_dead": 340,
+      "H_per_initial_egg": 0.062,
+      "P_per_initial_egg": 0.258,
+      "all_vial_H_bounds": [
+        0.062,
+        0.062
+      ],
+      "all_vial_P_bounds": [
+        0.258,
+        0.258
+      ],
+      "host_control_emergence": 0.78,
+      "host_control_minus_exposed_emergence": 0.718,
+      "author_normalized_parasitism_mean": 0.3307692307692308,
+      "author_normalized_parasitism_valid_vials": 10,
+      "zero_denominator_vials": 0
+    },
+    "PST|A|28": {
+      "host": "PST",
+      "parasitoid": "A",
+      "temperature": 28,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 0,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 350,
+      "H_per_initial_egg": 0,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0,
+        0
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0,
+      "host_control_minus_exposed_emergence": 0,
+      "author_normalized_parasitism_mean": null,
+      "author_normalized_parasitism_valid_vials": 0,
+      "zero_denominator_vials": 7
+    },
+    "PST|G|28": {
+      "host": "PST",
+      "parasitoid": "G",
+      "temperature": 28,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 0,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 350,
+      "H_per_initial_egg": 0,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0,
+        0
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0,
+      "host_control_minus_exposed_emergence": 0,
+      "author_normalized_parasitism_mean": null,
+      "author_normalized_parasitism_valid_vials": 0,
+      "zero_denominator_vials": 7
+    },
+    "PST|L|28": {
+      "host": "PST",
+      "parasitoid": "L",
+      "temperature": 28,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 0,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 350,
+      "H_per_initial_egg": 0,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0,
+        0
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0,
+      "host_control_minus_exposed_emergence": 0,
+      "author_normalized_parasitism_mean": null,
+      "author_normalized_parasitism_valid_vials": 0,
+      "zero_denominator_vials": 7
+    },
+    "PST|C|28": {
+      "host": "PST",
+      "parasitoid": "C",
+      "temperature": 28,
+      "vials_all": 7,
+      "vials_strict": 7,
+      "strict_host_adults": 0,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 350,
+      "H_per_initial_egg": 0,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0,
+        0
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ]
+    },
+    "PST|D|28": {
+      "host": "PST",
+      "parasitoid": "D",
+      "temperature": 28,
+      "vials_all": 8,
+      "vials_strict": 8,
+      "strict_host_adults": 0,
+      "strict_parasitoid_adults": 0,
+      "strict_dead": 400,
+      "H_per_initial_egg": 0,
+      "P_per_initial_egg": 0,
+      "all_vial_H_bounds": [
+        0,
+        0
+      ],
+      "all_vial_P_bounds": [
+        0,
+        0
+      ],
+      "host_control_emergence": 0,
+      "host_control_minus_exposed_emergence": 0,
+      "author_normalized_parasitism_mean": null,
+      "author_normalized_parasitism_valid_vials": 0,
+      "zero_denominator_vials": 8
+    }
+  },
+  "parasitoids": {
+    "A": {
+      "ambient_best_host": "SUL",
+      "temperature": {
+        "20": {
+          "best_host": "PAL",
+          "best_tested_host_recruitment_per_initial_egg": 0.3125,
+          "ambient_best_host_recruitment_per_initial_egg": 0.274,
+          "mean_of_7_hosts": 0.1422981859410431,
+          "observed_best_vs_ambient_best_difference": -0.20750000000000002,
+          "best_retention": 0.6009615384615384,
+          "hypothetical_reassignment_gain": 0.03849999999999998,
+          "fraction_of_fixed_loss_recovered": 0.15650406504065031,
+          "all_vial_best_envelope_bounds": [
+            0.3125,
+            0.3125
+          ]
+        },
+        "24": {
+          "best_host": "SUL",
+          "best_tested_host_recruitment_per_initial_egg": 0.52,
+          "ambient_best_host_recruitment_per_initial_egg": 0.52,
+          "mean_of_7_hosts": 0.23800000000000002,
+          "observed_best_vs_ambient_best_difference": 0,
+          "best_retention": 1,
+          "hypothetical_reassignment_gain": 0,
+          "fraction_of_fixed_loss_recovered": null,
+          "all_vial_best_envelope_bounds": [
+            0.52,
+            0.52
+          ]
+        },
+        "28": {
+          "best_host": "SUL",
+          "best_tested_host_recruitment_per_initial_egg": 0.1622222222222222,
+          "ambient_best_host_recruitment_per_initial_egg": 0.1622222222222222,
+          "mean_of_7_hosts": 0.04353174603174603,
+          "observed_best_vs_ambient_best_difference": -0.3577777777777778,
+          "best_retention": 0.3119658119658119,
+          "hypothetical_reassignment_gain": 0,
+          "fraction_of_fixed_loss_recovered": 0,
+          "all_vial_best_envelope_bounds": [
+            0.146,
+            0.184
+          ]
+        }
+      },
+      "all_vial_warm_minus_ambient_envelope_bounds": [
+        -0.374,
+        -0.336
+      ],
+      "observed_links_declining_warm": 4
+    },
+    "G": {
+      "ambient_best_host": "SUL",
+      "temperature": {
+        "20": {
+          "best_host": "SUL",
+          "best_tested_host_recruitment_per_initial_egg": 0.532,
+          "ambient_best_host_recruitment_per_initial_egg": 0.532,
+          "mean_of_7_hosts": 0.24707823129251702,
+          "observed_best_vs_ambient_best_difference": -0.016000000000000014,
+          "best_retention": 0.9708029197080291,
+          "hypothetical_reassignment_gain": 0,
+          "fraction_of_fixed_loss_recovered": 0,
+          "all_vial_best_envelope_bounds": [
+            0.532,
+            0.532
+          ]
+        },
+        "24": {
+          "best_host": "SUL",
+          "best_tested_host_recruitment_per_initial_egg": 0.548,
+          "ambient_best_host_recruitment_per_initial_egg": 0.548,
+          "mean_of_7_hosts": 0.2809761904761905,
+          "observed_best_vs_ambient_best_difference": 0,
+          "best_retention": 1,
+          "hypothetical_reassignment_gain": 0,
+          "fraction_of_fixed_loss_recovered": null,
+          "all_vial_best_envelope_bounds": [
+            0.5479999999999999,
+            0.5479999999999999
+          ]
+        },
+        "28": {
+          "best_host": "BIR",
+          "best_tested_host_recruitment_per_initial_egg": 0.02,
+          "ambient_best_host_recruitment_per_initial_egg": 0,
+          "mean_of_7_hosts": 0.006122448979591836,
+          "observed_best_vs_ambient_best_difference": -0.528,
+          "best_retention": 0.0364963503649635,
+          "hypothetical_reassignment_gain": 0.02,
+          "fraction_of_fixed_loss_recovered": 0.0364963503649635,
+          "all_vial_best_envelope_bounds": [
+            0.02,
+            0.02
+          ]
+        }
+      },
+      "all_vial_warm_minus_ambient_envelope_bounds": [
+        -0.5279999999999999,
+        -0.5279999999999999
+      ],
+      "observed_links_declining_warm": 7
+    },
+    "L": {
+      "ambient_best_host": "PAL",
+      "temperature": {
+        "20": {
+          "best_host": "PAL",
+          "best_tested_host_recruitment_per_initial_egg": 0.615,
+          "ambient_best_host_recruitment_per_initial_egg": 0.615,
+          "mean_of_7_hosts": 0.167,
+          "observed_best_vs_ambient_best_difference": 0.10999999999999999,
+          "best_retention": 1.2178217821782178,
+          "hypothetical_reassignment_gain": 0,
+          "fraction_of_fixed_loss_recovered": null,
+          "all_vial_best_envelope_bounds": [
+            0.615,
+            0.615
+          ]
+        },
+        "24": {
+          "best_host": "PAL",
+          "best_tested_host_recruitment_per_initial_egg": 0.505,
+          "ambient_best_host_recruitment_per_initial_egg": 0.505,
+          "mean_of_7_hosts": 0.15992063492063494,
+          "observed_best_vs_ambient_best_difference": 0,
+          "best_retention": 1,
+          "hypothetical_reassignment_gain": 0,
+          "fraction_of_fixed_loss_recovered": null,
+          "all_vial_best_envelope_bounds": [
+            0.505,
+            0.505
+          ]
+        },
+        "28": {
+          "best_host": "RUB",
+          "best_tested_host_recruitment_per_initial_egg": 0.006,
+          "ambient_best_host_recruitment_per_initial_egg": 0,
+          "mean_of_7_hosts": 0.001746031746031746,
+          "observed_best_vs_ambient_best_difference": -0.499,
+          "best_retention": 0.011881188118811881,
+          "hypothetical_reassignment_gain": 0.006,
+          "fraction_of_fixed_loss_recovered": 0.011881188118811881,
+          "all_vial_best_envelope_bounds": [
+            0.006,
+            0.006
+          ]
+        }
+      },
+      "all_vial_warm_minus_ambient_envelope_bounds": [
+        -0.499,
+        -0.499
+      ],
+      "observed_links_declining_warm": 5
+    },
+    "D": {
+      "ambient_best_host": "PSA",
+      "temperature": {
+        "20": {
+          "best_host": "BIR",
+          "best_tested_host_recruitment_per_initial_egg": 0.458,
+          "ambient_best_host_recruitment_per_initial_egg": 0.402,
+          "mean_of_7_hosts": 0.3577619047619048,
+          "observed_best_vs_ambient_best_difference": -0.07200000000000001,
+          "best_retention": 0.8641509433962264,
+          "hypothetical_reassignment_gain": 0.055999999999999994,
+          "fraction_of_fixed_loss_recovered": 0.43749999999999994,
+          "all_vial_best_envelope_bounds": [
+            0.45799999999999996,
+            0.45799999999999996
+          ]
+        },
+        "24": {
+          "best_host": "PSA",
+          "best_tested_host_recruitment_per_initial_egg": 0.53,
+          "ambient_best_host_recruitment_per_initial_egg": 0.53,
+          "mean_of_7_hosts": 0.43897619047619046,
+          "observed_best_vs_ambient_best_difference": 0,
+          "best_retention": 1,
+          "hypothetical_reassignment_gain": 0,
+          "fraction_of_fixed_loss_recovered": null,
+          "all_vial_best_envelope_bounds": [
+            0.53,
+            0.53
+          ]
+        },
+        "28": {
+          "best_host": "BIP",
+          "best_tested_host_recruitment_per_initial_egg": 0.35,
+          "ambient_best_host_recruitment_per_initial_egg": 0.208,
+          "mean_of_7_hosts": 0.18876190476190474,
+          "observed_best_vs_ambient_best_difference": -0.18000000000000005,
+          "best_retention": 0.660377358490566,
+          "hypothetical_reassignment_gain": 0.142,
+          "fraction_of_fixed_loss_recovered": 0.44099378881987567,
+          "all_vial_best_envelope_bounds": [
+            0.35,
+            0.35
+          ]
+        }
+      },
+      "all_vial_warm_minus_ambient_envelope_bounds": [
+        -0.18000000000000005,
+        -0.18000000000000005
+      ],
+      "observed_links_declining_warm": 7
+    }
+  },
+  "scope": "Absolute emergences per 50 initial host eggs, reported as per-egg mean. Best observed host envelope is in-sample hypothetical reallocation, not causal field switching or biological upper bound. All-vial bounds handle source anomalies only, not sampling uncertainty. No true phenological delay manipulation, no primary theta, no cross-species independence or inferential CI.",
+  "primary_theta_added": 0,
+  "meta_pooled": false,
+  "provenance": {
+    "extraction": "Authenticated original Git blob text, independent ASCII SHA1 and SHA256 implementations checked on standard abc vectors, exact 49,950-row design checked, actual deterministic aggregation executed via JavaScript. No raw records redistributed. No CI run or independent raw-file download claimed."
+  }
+}
