@@ -1,0 +1,55 @@
+{
+  "status": "DIAGNOSTIC_ONLY_NO_MODEL",
+  "source_doi": "10.5061/dryad.kd1r166",
+  "species": {
+    "Claytonia": {
+      "rows": 231,
+      "unique_plot_plant_keys": 231,
+      "duplicate_key_groups": 0,
+      "duplicate_rows_above_unique_key": 0,
+      "identical_duplicate_groups": 0,
+      "differing_fields_in_duplicate_groups": {},
+      "invalid_seed_token_categories": {},
+      "noncanonical_plant_number_rows": 9,
+      "pollen_assignment_mismatch_rows": 0
+    },
+    "Delphinium": {
+      "rows": 229,
+      "unique_plot_plant_keys": 229,
+      "duplicate_key_groups": 0,
+      "duplicate_rows_above_unique_key": 0,
+      "identical_duplicate_groups": 0,
+      "differing_fields_in_duplicate_groups": {},
+      "invalid_seed_token_categories": {
+        "nonnumeric_token:N/A": 1
+      },
+      "noncanonical_plant_number_rows": 0,
+      "pollen_assignment_mismatch_rows": 0
+    },
+    "Potentilla": {
+      "rows": 260,
+      "unique_plot_plant_keys": 259,
+      "duplicate_key_groups": 1,
+      "duplicate_rows_above_unique_key": 1,
+      "identical_duplicate_groups": 0,
+      "differing_fields_in_duplicate_groups": {
+        "Flower_abort": 1,
+        "Successful_fruits": 1,
+        "Total_fruits": 1,
+        "Total_seeds": 1,
+        "Prop_fruit_set": 1,
+        "Mean_Seeds": 1
+      },
+      "invalid_seed_token_categories": {},
+      "noncanonical_plant_number_rows": 0,
+      "pollen_assignment_mismatch_rows": 0
+    }
+  },
+  "provenance": {
+    "run": 45531164650,
+    "job": 138926538572,
+    "artifact_id": 14985595936,
+    "artifact_zip_sha256": "b75ef8d1e6cde674005adcf2ef0de4b9b44fc4e335ef843bef0e874d7c32f5c5",
+    "extraction": "Exact aggregate JSON in completed Actions job log; artifact digest from upload log; ZIP not independently downloaded."
+  }
+}
