@@ -1,0 +1,28 @@
+# Wave 11 — Campbell primary-table crosscheck and remaining provisional studies
+
+2026-11-25. Draft PR #426. No frozen primary estimand, manuscript, or prior result is replaced. This is a source-based, post-inspection reanalysis of published summaries, not an independent new experiment.
+
+## Campbell (1985): source-corrected cohort
+
+DOI 10.2307/1940403; author-uploaded searchable full text: https://www.researchgate.net/publication/259992202_Pollinator_Sharing_and_Seed_Set_of_Stellaria_pubera_Competition_for_Pollination . Methods and Table 6 (pp. 549–550) give early/late seeds per flower for naturally timed plants. In 1981 there were 16 matched plant pairs (randomized treatment within pair); in 1982 there were 23 plants with treatment/control inflorescences on each plant. The periods are split by date within year (April 11 and April 15 respectively). N=39 paired units, not 39 independent flowers per cell. This is a pooled 1981–1982 experiment. GloPL rows 48/49 label year 1981; analysis crosswalk records both actual years. All four compiled means and Ns match Table 6 and its df=38. Raw compiled data unchanged.
+
+| Period | Control | Supplemental pollen | Paired difference | Published SE of difference |
+|---|---:|---:|---:|---:|
+| Early | 3.16 | 3.77 | +0.61 | 0.294 |
+| Late | 1.54 | 1.56 | +0.02 | 0.249 |
+
+Late-minus-early log response ratio change = -0.1635995690 (previous provisional calculation reproduced). Late-minus-early additive paired difference = -0.59 seeds/flower. Given unknown correlation rho between estimated paired differences, SE = sqrt(0.294²+0.249²−2 rho 0.294×0.249), range [.045,.543]. Approximate normal interval assuming rho=0: [-1.345139,.165139]; maximum-variance sensitivity rho=-1: [-1.65428,.47428]. These are sensitivity intervals, not recovered original CI. The published profile analysis specifically supports greater early supplementation benefit (p<.05); our unknown-covariance sensitivity does not overturn that original test. No valid logRR variance is derived from the two paired-difference SEs alone. Separate published date comparison MANOVA p<.01. Supplemental output declines 58.62% later, while control declines 51.27%. Do not infer a physiological ceiling or a specific environmental cause from this alone. Article discusses competition for pollinators early and canopy development later; these are already published ecological explanations.
+
+## Independent manipulation within the same paper
+
+Table 4 and Results (p.548): greenhouse-induced early flowering and competitor-flower removal crossed in 1982. Floral overlap with Claytonia increases from 32% to 85% in induced plots. The source reports the timing-by-removal interaction on overall seed output is not significant (.40<p<.50). Its 5,928 flowers are subsamples, not independent plots. The source text retrieved does not yield arm means and uncertainty; no numerical interaction coefficient added. This negative result must accompany the positive natural-period profile analysis. External removal of a competitor is not endogenous recourse; greenhouse treatment changes more than timing. No promotion to primary theta.
+
+## Remaining nine pairs, four papers
+
+Gross & Werner 1983: the abstract's 57% early S. graminifolia seed-set deficit is consistent with compiled 1−.2171/.5039=56.916%. This checks one early relative contrast, not both periods or the sampling variance. Both Solidago pairs stay provisional; source also reports a different pattern for S. canadensis and no detected pollen limitation in S. juncea. Copland & Whelan 1989: abstract confirms late fruit set was not increased by additional pollen, and peak 1985 was exceptional. Two Banksia pairs stay provisional, no exact tables/units. Jacquemart 1997: publisher abstract confirms within-ramet blooming sequence and position comparisons in three species during 1988–1990; no exact per-period source cells or variance definitions accessible. Three Vaccinium pairs stay provisional within-plant stratum. Emms 1996: abstract confirms leaf-clipping and early-flower-removal experiments support photosynthate allocation as a mechanism of later seed loss; nutrient addition little effect. Two Zigadenus pairs remain provisional without original numerical tables. These mechanisms are prior art; not new discoveries from PAYOFF. Sources and access limitations recorded in JSON. No unauthorized downloads.
+
+## Updated disposition and next gate
+
+28 existing pairs = 12 point/conditional (including newly table-verified Campbell) + 9 provisional + 3 quarantined + 4 design HOLD. One further source-confirmed secondary pair, one originally published repeated-measures test, and one negative factorial anchor; no new eligible primary theta, no independent inverse-variance effect or pooled meta-analysis. Do not continue repeated searches of the same blocked primary tables without new access. The next decision is to obtain four original PDFs through legitimate institutional access or user-provided files; in parallel, source the direct factorial timing × corrective-mechanism literature, with current external-supplementation secondary lane kept separate. Existing source-derived seasonal patterns are not evidence of a novel universal decline. 
+
+Receipt: [wave 11 source audit JSON](../data/payoff_b_glopl_wave11_campbell_source_audit_20261125.json); exact calculation and source URLs, parent blob SHA and all covariance sensitivities. Calculations executed from inspected source numbers and refetched repository summaries; no CI run, raw source-data reanalysis or download verification of the underlying PDF claimed. No merge.
