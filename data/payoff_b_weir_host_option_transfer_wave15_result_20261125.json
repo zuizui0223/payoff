@@ -1,0 +1,882 @@
+{
+  "status": "SECONDARY_HOST_OPTION_TRANSFER_COMPLETE",
+  "source_sha256": "76992552871f727ccbe0d5718c1bc1a7a93aaddd57cb0a8f2cef669e74ee6598",
+  "primary_theta_added": 0,
+  "meta_pooled": false,
+  "audit": {
+    "n_source_rows_per_sheet": 3600,
+    "culture_count": 180,
+    "cultures_per_pop_host": 5,
+    "larvae_per_culture": 20,
+    "same_culture_survival_totals": true,
+    "source_dictionary": {
+      "ind": "unique individual",
+      "host": "host-plant species",
+      "pop": "source population",
+      "culu": "unique rearing culture",
+      "survp": "survival to pupation",
+      "masspg": "pupal mass (g)",
+      "masspm": "pupal mass (mg)",
+      "sex": "sex",
+      "julian": "julian day of start",
+      "pup": "pupation julian day",
+      "duration": "duration of larval development, egg to pupa (days)"
+    },
+    "no_individual_cross_sheet_join": true,
+    "original_survival_total": 648
+  },
+  "result": {
+    "populations": {
+      "B": {
+        "host_survival": {
+          "Acer": 0.24,
+          "Alnus": 0.02,
+          "Betula": 0.14,
+          "Crataegus": 0.07,
+          "Malus": 0.22999999999999998,
+          "Prunus": 0.12,
+          "Quercus": 0.05,
+          "Salba": 0.39,
+          "Scapraea": 0.11000000000000001
+        },
+        "host_counts_survived": {
+          "Acer": 24,
+          "Alnus": 2,
+          "Betula": 14,
+          "Crataegus": 7,
+          "Malus": 23,
+          "Prunus": 12,
+          "Quercus": 5,
+          "Salba": 39,
+          "Scapraea": 11
+        },
+        "alternative_gt_oak": 7,
+        "alternative_eq_oak": 0,
+        "alternative_lt_oak": 1,
+        "training_ranked_alternatives": [
+          "Salba",
+          "Betula",
+          "Malus",
+          "Scapraea",
+          "Prunus",
+          "Acer",
+          "Alnus",
+          "Crataegus"
+        ]
+      },
+      "D": {
+        "host_survival": {
+          "Acer": 0.06000000000000001,
+          "Alnus": 0.02,
+          "Betula": 0.3,
+          "Crataegus": 0.030000000000000006,
+          "Malus": 0.2,
+          "Prunus": 0.02,
+          "Quercus": 0.12,
+          "Salba": 0.5700000000000001,
+          "Scapraea": 0.21999999999999997
+        },
+        "host_counts_survived": {
+          "Acer": 6,
+          "Alnus": 2,
+          "Betula": 30,
+          "Crataegus": 3,
+          "Malus": 20,
+          "Prunus": 2,
+          "Quercus": 12,
+          "Salba": 57,
+          "Scapraea": 22
+        },
+        "alternative_gt_oak": 4,
+        "alternative_eq_oak": 0,
+        "alternative_lt_oak": 4,
+        "training_ranked_alternatives": [
+          "Salba",
+          "Betula",
+          "Malus",
+          "Scapraea",
+          "Prunus",
+          "Acer",
+          "Crataegus",
+          "Alnus"
+        ]
+      },
+      "E": {
+        "host_survival": {
+          "Acer": 0.09,
+          "Alnus": 0.06,
+          "Betula": 0.29,
+          "Crataegus": 0.02,
+          "Malus": 0.42000000000000004,
+          "Prunus": 0.27999999999999997,
+          "Quercus": 0.12999999999999998,
+          "Salba": 0.4600000000000001,
+          "Scapraea": 0.34
+        },
+        "host_counts_survived": {
+          "Acer": 9,
+          "Alnus": 6,
+          "Betula": 29,
+          "Crataegus": 2,
+          "Malus": 42,
+          "Prunus": 28,
+          "Quercus": 13,
+          "Salba": 46,
+          "Scapraea": 34
+        },
+        "alternative_gt_oak": 5,
+        "alternative_eq_oak": 0,
+        "alternative_lt_oak": 3,
+        "training_ranked_alternatives": [
+          "Salba",
+          "Betula",
+          "Malus",
+          "Acer",
+          "Scapraea",
+          "Prunus",
+          "Crataegus",
+          "Alnus"
+        ]
+      },
+      "S": {
+        "host_survival": {
+          "Acer": 0.11000000000000001,
+          "Alnus": 0,
+          "Betula": 0.45,
+          "Crataegus": 0,
+          "Malus": 0.09,
+          "Prunus": 0.05,
+          "Quercus": 0.29000000000000004,
+          "Salba": 0.45,
+          "Scapraea": 0.04
+        },
+        "host_counts_survived": {
+          "Acer": 11,
+          "Alnus": 0,
+          "Betula": 45,
+          "Crataegus": 0,
+          "Malus": 9,
+          "Prunus": 5,
+          "Quercus": 29,
+          "Salba": 45,
+          "Scapraea": 4
+        },
+        "alternative_gt_oak": 2,
+        "alternative_eq_oak": 0,
+        "alternative_lt_oak": 6,
+        "training_ranked_alternatives": [
+          "Salba",
+          "Malus",
+          "Betula",
+          "Scapraea",
+          "Prunus",
+          "Acer",
+          "Crataegus",
+          "Alnus"
+        ]
+      }
+    },
+    "equal_population_fixed_host_contrasts": {
+      "Acer": {
+        "survival": {
+          "estimate": 0.125,
+          "interval95_conditional_cultures": [
+            0.10749999999999998,
+            0.145
+          ]
+        },
+        "difference_vs_oak": {
+          "estimate": -0.0225,
+          "interval95_conditional_cultures": [
+            -0.047500000000000014,
+            0.002500000000000009
+          ]
+        }
+      },
+      "Alnus": {
+        "survival": {
+          "estimate": 0.025,
+          "interval95_conditional_cultures": [
+            0.017499999999999998,
+            0.035
+          ]
+        },
+        "difference_vs_oak": {
+          "estimate": -0.1225,
+          "interval95_conditional_cultures": [
+            -0.14250000000000002,
+            -0.10250000000000001
+          ]
+        }
+      },
+      "Betula": {
+        "survival": {
+          "estimate": 0.295,
+          "interval95_conditional_cultures": [
+            0.28250000000000003,
+            0.30500000000000005
+          ]
+        },
+        "difference_vs_oak": {
+          "estimate": 0.14750000000000002,
+          "interval95_conditional_cultures": [
+            0.125,
+            0.16749999999999998
+          ]
+        }
+      },
+      "Crataegus": {
+        "survival": {
+          "estimate": 0.030000000000000002,
+          "interval95_conditional_cultures": [
+            0.017499999999999998,
+            0.045
+          ]
+        },
+        "difference_vs_oak": {
+          "estimate": -0.1175,
+          "interval95_conditional_cultures": [
+            -0.14,
+            -0.095
+          ]
+        }
+      },
+      "Malus": {
+        "survival": {
+          "estimate": 0.23500000000000001,
+          "interval95_conditional_cultures": [
+            0.2175,
+            0.2525
+          ]
+        },
+        "difference_vs_oak": {
+          "estimate": 0.0875,
+          "interval95_conditional_cultures": [
+            0.062499999999999986,
+            0.11249999999999999
+          ]
+        }
+      },
+      "Prunus": {
+        "survival": {
+          "estimate": 0.11749999999999998,
+          "interval95_conditional_cultures": [
+            0.1025,
+            0.135
+          ]
+        },
+        "difference_vs_oak": {
+          "estimate": -0.030000000000000013,
+          "interval95_conditional_cultures": [
+            -0.05499999999999999,
+            -0.005000000000000011
+          ]
+        }
+      },
+      "Quercus": {
+        "survival": {
+          "estimate": 0.1475,
+          "interval95_conditional_cultures": [
+            0.13,
+            0.165
+          ]
+        },
+        "difference_vs_oak": {
+          "estimate": 0,
+          "interval95_conditional_cultures": [
+            0,
+            0
+          ]
+        }
+      },
+      "Salba": {
+        "survival": {
+          "estimate": 0.4675,
+          "interval95_conditional_cultures": [
+            0.4475,
+            0.4875
+          ]
+        },
+        "difference_vs_oak": {
+          "estimate": 0.32,
+          "interval95_conditional_cultures": [
+            0.29250000000000004,
+            0.3475
+          ]
+        }
+      },
+      "Scapraea": {
+        "survival": {
+          "estimate": 0.1775,
+          "interval95_conditional_cultures": [
+            0.16000000000000003,
+            0.19499999999999998
+          ]
+        },
+        "difference_vs_oak": {
+          "estimate": 0.029999999999999985,
+          "interval95_conditional_cultures": [
+            0.0050000000000000044,
+            0.05499999999999998
+          ]
+        }
+      }
+    },
+    "option_policy": {
+      "1": {
+        "n_equally_weighted_subsets": 8,
+        "per_population": {
+          "B": {
+            "blind": {
+              "survival": 0.165,
+              "difference_vs_oak": 0.115
+            },
+            "train_ranked": {
+              "survival": 0.165,
+              "difference_vs_oak": 0.115
+            },
+            "oracle": {
+              "survival": 0.165,
+              "difference_vs_oak": 0.115
+            },
+            "fraction_train_ranked_gt_oak": 0.875
+          },
+          "D": {
+            "blind": {
+              "survival": 0.17750000000000002,
+              "difference_vs_oak": 0.05750000000000002
+            },
+            "train_ranked": {
+              "survival": 0.1775,
+              "difference_vs_oak": 0.057499999999999996
+            },
+            "oracle": {
+              "survival": 0.17750000000000002,
+              "difference_vs_oak": 0.05750000000000002
+            },
+            "fraction_train_ranked_gt_oak": 0.5
+          },
+          "E": {
+            "blind": {
+              "survival": 0.24500000000000002,
+              "difference_vs_oak": 0.11500000000000005
+            },
+            "train_ranked": {
+              "survival": 0.245,
+              "difference_vs_oak": 0.11500000000000002
+            },
+            "oracle": {
+              "survival": 0.24500000000000002,
+              "difference_vs_oak": 0.11500000000000005
+            },
+            "fraction_train_ranked_gt_oak": 0.625
+          },
+          "S": {
+            "blind": {
+              "survival": 0.14875000000000002,
+              "difference_vs_oak": -0.14125000000000001
+            },
+            "train_ranked": {
+              "survival": 0.14875,
+              "difference_vs_oak": -0.14125000000000004
+            },
+            "oracle": {
+              "survival": 0.14875000000000002,
+              "difference_vs_oak": -0.14125000000000001
+            },
+            "fraction_train_ranked_gt_oak": 0.25
+          }
+        },
+        "across_population": {
+          "blind": {
+            "survival": {
+              "estimate": 0.18406250000000002,
+              "interval95_conditional_cultures": [
+                0.1784375,
+                0.1896875
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.03656250000000002,
+              "interval95_conditional_cultures": [
+                0.01750000000000001,
+                0.05406250000000001
+              ]
+            }
+          },
+          "train_ranked": {
+            "survival": {
+              "estimate": 0.18406250000000002,
+              "interval95_conditional_cultures": [
+                0.1784375,
+                0.1896875
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.036562499999999984,
+              "interval95_conditional_cultures": [
+                0.0175,
+                0.05406250000000001
+              ]
+            }
+          },
+          "oracle": {
+            "survival": {
+              "estimate": 0.18406250000000002,
+              "interval95_conditional_cultures": [
+                0.1784375,
+                0.1896875
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.03656250000000002,
+              "interval95_conditional_cultures": [
+                0.01750000000000001,
+                0.05406250000000001
+              ]
+            }
+          },
+          "fraction_train_ranked_gt_oak": {
+            "estimate": 0.5625,
+            "interval95_conditional_cultures": [
+              0.5,
+              0.59375
+            ]
+          },
+          "ranked_minus_blind": {
+            "estimate": -2.0816681711721685e-17,
+            "interval95_conditional_cultures": [
+              -2.0816681711721685e-17,
+              1.3877787807814457e-17
+            ]
+          }
+        }
+      },
+      "2": {
+        "n_equally_weighted_subsets": 28,
+        "per_population": {
+          "B": {
+            "blind": {
+              "survival": 0.165,
+              "difference_vs_oak": 0.115
+            },
+            "train_ranked": {
+              "survival": 0.21500000000000002,
+              "difference_vs_oak": 0.16500000000000004
+            },
+            "oracle": {
+              "survival": 0.23321428571428565,
+              "difference_vs_oak": 0.18321428571428566
+            },
+            "fraction_train_ranked_gt_oak": 0.9642857142857143
+          },
+          "D": {
+            "blind": {
+              "survival": 0.17750000000000002,
+              "difference_vs_oak": 0.05750000000000002
+            },
+            "train_ranked": {
+              "survival": 0.2814285714285715,
+              "difference_vs_oak": 0.16142857142857148
+            },
+            "oracle": {
+              "survival": 0.2839285714285714,
+              "difference_vs_oak": 0.16392857142857142
+            },
+            "fraction_train_ranked_gt_oak": 0.7857142857142857
+          },
+          "E": {
+            "blind": {
+              "survival": 0.24500000000000002,
+              "difference_vs_oak": 0.11500000000000005
+            },
+            "train_ranked": {
+              "survival": 0.3221428571428572,
+              "difference_vs_oak": 0.1921428571428572
+            },
+            "oracle": {
+              "survival": 0.34571428571428575,
+              "difference_vs_oak": 0.21571428571428578
+            },
+            "fraction_train_ranked_gt_oak": 0.8214285714285714
+          },
+          "S": {
+            "blind": {
+              "survival": 0.14875,
+              "difference_vs_oak": -0.14125000000000004
+            },
+            "train_ranked": {
+              "survival": 0.23107142857142857,
+              "difference_vs_oak": -0.05892857142857147
+            },
+            "oracle": {
+              "survival": 0.2496428571428572,
+              "difference_vs_oak": -0.04035714285714284
+            },
+            "fraction_train_ranked_gt_oak": 0.42857142857142855
+          }
+        },
+        "across_population": {
+          "blind": {
+            "survival": {
+              "estimate": 0.18406250000000002,
+              "interval95_conditional_cultures": [
+                0.1784375,
+                0.1896875
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.03656250000000001,
+              "interval95_conditional_cultures": [
+                0.0175,
+                0.05406250000000002
+              ]
+            }
+          },
+          "train_ranked": {
+            "survival": {
+              "estimate": 0.26241071428571433,
+              "interval95_conditional_cultures": [
+                0.2541964285714286,
+                0.27035714285714285
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.11491071428571431,
+              "interval95_conditional_cultures": [
+                0.0949107142857143,
+                0.13339285714285715
+              ]
+            }
+          },
+          "oracle": {
+            "survival": {
+              "estimate": 0.278125,
+              "interval95_conditional_cultures": [
+                0.27142857142857146,
+                0.28598214285714285
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.130625,
+              "interval95_conditional_cultures": [
+                0.11160491071428569,
+                0.1494642857142857
+              ]
+            }
+          },
+          "fraction_train_ranked_gt_oak": {
+            "estimate": 0.7499999999999999,
+            "interval95_conditional_cultures": [
+              0.7053571428571428,
+              0.7767857142857143
+            ]
+          },
+          "ranked_minus_blind": {
+            "estimate": 0.0783482142857143,
+            "interval95_conditional_cultures": [
+              0.07312499999999997,
+              0.08325892857142858
+            ]
+          }
+        }
+      },
+      "4": {
+        "n_equally_weighted_subsets": 70,
+        "per_population": {
+          "B": {
+            "blind": {
+              "survival": 0.165,
+              "difference_vs_oak": 0.115
+            },
+            "train_ranked": {
+              "survival": 0.27585714285714297,
+              "difference_vs_oak": 0.22585714285714298
+            },
+            "oracle": {
+              "survival": 0.3061428571428574,
+              "difference_vs_oak": 0.2561428571428574
+            },
+            "fraction_train_ranked_gt_oak": 1
+          },
+          "D": {
+            "blind": {
+              "survival": 0.17750000000000005,
+              "difference_vs_oak": 0.05750000000000005
+            },
+            "train_ranked": {
+              "survival": 0.4121428571428572,
+              "difference_vs_oak": 0.2921428571428572
+            },
+            "oracle": {
+              "survival": 0.41442857142857153,
+              "difference_vs_oak": 0.29442857142857154
+            },
+            "fraction_train_ranked_gt_oak": 0.9857142857142858
+          },
+          "E": {
+            "blind": {
+              "survival": 0.24499999999999994,
+              "difference_vs_oak": 0.11499999999999996
+            },
+            "train_ranked": {
+              "survival": 0.3828571428571429,
+              "difference_vs_oak": 0.2528571428571429
+            },
+            "oracle": {
+              "survival": 0.41914285714285765,
+              "difference_vs_oak": 0.2891428571428577
+            },
+            "fraction_train_ranked_gt_oak": 0.9428571428571428
+          },
+          "S": {
+            "blind": {
+              "survival": 0.14874999999999997,
+              "difference_vs_oak": -0.14125000000000007
+            },
+            "train_ranked": {
+              "survival": 0.31799999999999995,
+              "difference_vs_oak": 0.027999999999999914
+            },
+            "oracle": {
+              "survival": 0.3751428571428568,
+              "difference_vs_oak": 0.08514285714285674
+            },
+            "fraction_train_ranked_gt_oak": 0.6428571428571429
+          }
+        },
+        "across_population": {
+          "blind": {
+            "survival": {
+              "estimate": 0.18406249999999996,
+              "interval95_conditional_cultures": [
+                0.1784375,
+                0.1896875
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.03656249999999998,
+              "interval95_conditional_cultures": [
+                0.017500000000000016,
+                0.05406250000000003
+              ]
+            }
+          },
+          "train_ranked": {
+            "survival": {
+              "estimate": 0.3472142857142858,
+              "interval95_conditional_cultures": [
+                0.3346785714285715,
+                0.35874999999999996
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.19971428571428576,
+              "interval95_conditional_cultures": [
+                0.17771428571428574,
+                0.2199285714285714
+              ]
+            }
+          },
+          "oracle": {
+            "survival": {
+              "estimate": 0.37871428571428584,
+              "interval95_conditional_cultures": [
+                0.3688214285714287,
+                0.39067946428571426
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.23121428571428584,
+              "interval95_conditional_cultures": [
+                0.21100000000000002,
+                0.25217857142857125
+              ]
+            }
+          },
+          "fraction_train_ranked_gt_oak": {
+            "estimate": 0.8928571428571429,
+            "interval95_conditional_cultures": [
+              0.8642857142857142,
+              0.9035714285714286
+            ]
+          },
+          "ranked_minus_blind": {
+            "estimate": 0.16315178571428576,
+            "interval95_conditional_cultures": [
+              0.15238348214285724,
+              0.1724732142857142
+            ]
+          }
+        }
+      },
+      "8": {
+        "n_equally_weighted_subsets": 1,
+        "per_population": {
+          "B": {
+            "blind": {
+              "survival": 0.165,
+              "difference_vs_oak": 0.115
+            },
+            "train_ranked": {
+              "survival": 0.39,
+              "difference_vs_oak": 0.34
+            },
+            "oracle": {
+              "survival": 0.39,
+              "difference_vs_oak": 0.34
+            },
+            "fraction_train_ranked_gt_oak": 1
+          },
+          "D": {
+            "blind": {
+              "survival": 0.17750000000000002,
+              "difference_vs_oak": 0.05750000000000002
+            },
+            "train_ranked": {
+              "survival": 0.5700000000000001,
+              "difference_vs_oak": 0.45000000000000007
+            },
+            "oracle": {
+              "survival": 0.5700000000000001,
+              "difference_vs_oak": 0.45000000000000007
+            },
+            "fraction_train_ranked_gt_oak": 1
+          },
+          "E": {
+            "blind": {
+              "survival": 0.24500000000000002,
+              "difference_vs_oak": 0.11500000000000005
+            },
+            "train_ranked": {
+              "survival": 0.4600000000000001,
+              "difference_vs_oak": 0.33000000000000007
+            },
+            "oracle": {
+              "survival": 0.4600000000000001,
+              "difference_vs_oak": 0.33000000000000007
+            },
+            "fraction_train_ranked_gt_oak": 1
+          },
+          "S": {
+            "blind": {
+              "survival": 0.14875000000000002,
+              "difference_vs_oak": -0.14125000000000001
+            },
+            "train_ranked": {
+              "survival": 0.45,
+              "difference_vs_oak": 0.15999999999999998
+            },
+            "oracle": {
+              "survival": 0.45,
+              "difference_vs_oak": 0.15999999999999998
+            },
+            "fraction_train_ranked_gt_oak": 1
+          }
+        },
+        "across_population": {
+          "blind": {
+            "survival": {
+              "estimate": 0.18406250000000002,
+              "interval95_conditional_cultures": [
+                0.1784375,
+                0.1896875
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.03656250000000002,
+              "interval95_conditional_cultures": [
+                0.01750000000000001,
+                0.05406250000000001
+              ]
+            }
+          },
+          "train_ranked": {
+            "survival": {
+              "estimate": 0.4675,
+              "interval95_conditional_cultures": [
+                0.4475,
+                0.4875
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.32,
+              "interval95_conditional_cultures": [
+                0.29250000000000004,
+                0.3475
+              ]
+            }
+          },
+          "oracle": {
+            "survival": {
+              "estimate": 0.4675,
+              "interval95_conditional_cultures": [
+                0.45249999999999996,
+                0.49
+              ]
+            },
+            "difference_vs_oak": {
+              "estimate": 0.32,
+              "interval95_conditional_cultures": [
+                0.2975,
+                0.34750000000000003
+              ]
+            }
+          },
+          "fraction_train_ranked_gt_oak": {
+            "estimate": 1,
+            "interval95_conditional_cultures": [
+              1,
+              1
+            ]
+          },
+          "ranked_minus_blind": {
+            "estimate": 0.2834375,
+            "interval95_conditional_cultures": [
+              0.26531250000000006,
+              0.301875
+            ]
+          }
+        }
+      }
+    },
+    "oak_survival": {
+      "estimate": 0.1475,
+      "interval95_conditional_cultures": [
+        0.13,
+        0.165
+      ]
+    },
+    "bootstrap_draws": 10000,
+    "uncertainty": "Conditional resampling of five observed cultures within each population-host cell. Mixed-brood dependence not identified; four populations fixed. Selection is recomputed in every draw. No prospective/generalizable coverage guarantee."
+  },
+  "provenance": {
+    "run": 45567146848,
+    "job": 139044617068,
+    "artifact_id": 15000054546,
+    "artifact_zip_sha256": "c15baffbf92dfc78d51ba2896ab081fb3576e39056300a8476e64b2485447eea",
+    "extraction": "Exact aggregate job log; source MD5 and pinned SHA256 checked by script; all 16 held-population × option-size point results independently recomputed from returned integer cell counts by exhaustive subset enumeration. Artifact ZIP digest recorded in log; ZIP not independently downloaded."
+  },
+  "validation": {
+    "independent_point_recomputation": {
+      "B|1": true,
+      "B|2": true,
+      "B|4": true,
+      "B|8": true,
+      "D|1": true,
+      "D|2": true,
+      "D|4": true,
+      "D|8": true,
+      "E|1": true,
+      "E|2": true,
+      "E|4": true,
+      "E|8": true,
+      "S|1": true,
+      "S|2": true,
+      "S|4": true,
+      "S|8": true
+    },
+    "source_survivors_total_recomputed": 648,
+    "bootstrap_uncertainty_not_independently_reproduced": true
+  }
+}

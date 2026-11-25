@@ -1,0 +1,49 @@
+# PAYOFF-B cross-interaction buffering meta-analysis: wave 2 source and endpoint audit
+
+25 November 2026 — continuation of draft PR #426. Original 18-source registry and 16-endpoint pilot are preserved. [Wave 2 structured source receipt](../data/payoff_b_interaction_buffering_source_screen_wave2_20261125.json) adds 7 distinct paper lineages (25 source records across both waves), with one existing tree-swallow record clarified. This is a targeted screen, not systematic-review completion or a fitted meta-analysis.
+
+## 1. Source-frame audit: retain the exact study universe
+
+Kharouba & Wolkovich (2023), Ecology Letters, https://doi.org/10.1111/ele.14185, explicitly excluded experimental tests. Their 20 papers span 26 antagonistic terrestrial-consumer interactions and 687 site-years. Four interactions showed the predicted quadratic fit, seven linear support, and 13 no relationship; the remaining two are not classified in this receipt. These published counts do not indicate the prevalence of compensation: absent relationship may reflect measurement, power, resource/fitness definitions or actual buffering. No null-support label is used to infer presence of a buffer.
+
+Exact source: https://doi.org/10.17605/OSF.IO/AEYT2 and publisher Appendix S1, linked at https://temporalecology.org/publications/ . Web access to OSF, OSF API and lab-hosted DOCX failed; direct Python HTTPS attempts returned DNS resolution errors. The author PDF's Figure 2 screenshot also failed. The study-by-interaction crosswalk, raw site-year data and source-table membership remain unavailable. No assumed IDs or retrospective roster were created.
+
+## 2. Strongest source-backed experiment: compensation can redistribute loss
+
+Schenk, Krauss & Holzschuh (2018), JAE, https://doi.org/10.1111/1365-2656.12694, randomized cages to 0, 3 or 6 days without flowers after bee emergence. Three bee species were studied in different survey periods (8, 10, 5 cages per treatment). Tables 1 and 2 were actually inspected, including all 45 pairwise t tests (5 outcomes x 3 contrasts x 3 species) and 6 interaction F tests. These are dependent test statistics from one paper, NOT 51 independent effect sizes. No conversion of mixed-model t into Hedges g, no missing variances invented.
+
+| 3-day treatment vs simultaneous flowering | O. cornuta | O. bicornis | O. brevicornis |
+|---|---|---|---|
+| Survival | t=-1.68, p=.115 | -3.59, .002 | -4.07, .004 |
+| Activity | -0.29, .779 | -4.20, <.001 | -4.27, .003 |
+| Brood cells | +0.65, .523 | -0.99, .332 | -3.26, .012 |
+| Nests | +1.10, .289 | -2.53, .021 | -2.43, .042 |
+| Female offspring | -2.89, .011 | -0.49, .633 | -1.85, .101 |
+
+This source already explicitly identifies partial compensation and secondary fitness costs. In cornuta, late activity increases after a short mismatch relative to synchronized bees; female offspring decline despite no detected brood-cell decrease. In bicornis, brood cells show no detected decrease but nests and survival decline. Parasitoid risk from concentration is an interpretation, not directly measured parasite cost. At 6 days, survival and brood cells decline in all three species. Distinct significance decisions are NOT evidence that endpoint effects differ statistically. Do not infer equivalence from p>.05, and do not compare species-level t statistics as if they were ecological effect sizes.
+
+Table 2: 0/3-day mismatch × measured temperature survival interaction for bicornis F(1,7)=9.88, p=.016 (other two p=.642 and .109); treatment × early/late activity interaction for cornuta F(2,36)=6.85, p=.003, bicornis F(2,46)=5.95, p=.005, brevicornis p=.064. Temperature is not randomized recourse; later activity is post-treatment. No causal timing-by-buffer theta is licensed.
+
+The original Dryad archive https://doi.org/10.5061/dryad.rm317 lists exactly two workbooks (37.16 KB total). Source bytes not retrieved. Priority: paired survey-round/cage contrast from complete arm means and cluster covariance, preserving zero brood/female counts, shared 0-day controls and species/round dependence. This estimates perturbation responses, not independently randomized buffer effects.
+
+## 3. Different biological scales and real counterexamples
+
+English, Nocera & Green (2018), https://doi.org/10.1002/ece3.4077, Table 5: in 2011/12/13, fledglings per nest 1.10/0.61/0.60; per pair 1.56/1.22/1.33. Multiple nesting attempts .33/.67/.33 (distinct n=6/9/6). Compared with 2011, per-nest means decrease 44.5% and 45.5%; per-pair means decrease 21.8% and 14.7%. These are new arithmetic summaries of published values, not matched-pair effects; denominators differ, only three years, 2013 moth data unavailable, and the source's per-nest year difference was p=.31. The pattern motivates annual-vs-attempt compensation but does not show a causal recovery effect.
+
+Gallagher & Campbell (2021), https://doi.org/10.3389/fevo.2021.641693, flowering week x water randomized factorial: pollinator composition interaction chi-square(6)=12.64, but seed set 1.87 and seed mass 1.37 (both non-significant in the paper). Changes in floral visitors do not establish a reproductive interaction. Water influences other physiology, so this is not a pure timing-recourse factorial.
+
+Lake Diver & Savage (2024), https://doi.org/10.1002/ajb2.16417, separate frost and delay experiments: control 13.9 versus hard freeze 1.0 fruits/plant; visitation per remaining viable flower did not detect a change (p=.93). The 92.8% mean fruit decline is descriptive; conditional visit rate differs from total service, and frost is not direct partner timing. Already-delayed 2- vs 3-week flowering cohorts show 26.8% vs 11.3% swollen ovaries (n=66/63); source p=.03 exceeds its declared .01 threshold. This is not a randomized normal-vs-delay contrast or final seed production. Keep as boundary against interpreting encounter counts as fitness.
+
+Harriman et al. (2017), https://doi.org/10.1002/ece3.2815: exact six arm sample sizes 34/42/35 (non-delay) and 32/45/35 (delay), 223 nests total, measured incubation means 13.23 and 18.50 days. Crossed brood-size manipulation is a promising experiment but alters demand, and arm outcome estimates and covariance were not retrieved. The 5.27-day shift checks treatment magnitude, not buffering.
+
+## 4. More promising natural source: independently dated resource portfolio
+
+Vazquez et al. (2023), https://doi.org/10.1098/rspb.2022.1847, original Dryad https://doi.org/10.5061/dryad.37pvmcvmp (repository version listed 23 Jan 2026). README actually inspected: two sites, nine flowering seasons, five wood-nesting bee species, trap nest IDs join brood cells to emerged insects. Pollen use was measured in first three study years (2006–08 files); plants.csv records site/date/species/abundance, trampas.csv has nest completion date and brood cell count, emerg.csv has emergence date and species. The published analysis already reports a weaker mismatch penalty for the most generalized species. This is prior art, not a new result, and only five species: no inference that taxonomic specialization causally determines buffering.
+
+**Pre-new-outcome candidate diagnostic, not an amended primary meta estimand:** if exact source bytes and provenance pass, reconstruct historical diet weights using only pollen samples from the first three seasons, retain subsequent seasons as the evaluation frame. Compare a dominant-resource timing/abundance baseline with a historical diet-weighted resource-window exposure, using only observed within-window flower sampling, fixed units and no extrapolation. Use nest construction end date as recorded, not emergence or inferred demand peak. Explicitly require author-grounded pollen species codes and season alignment, observation-effort corrections across changed sampling design, unique nest-ID joins and zero/missing emergence semantics. Compare full leave-year-out prediction of later emerged offspring (with source verified censoring) beyond same-date effort/season controls, retaining all species and signs; nesting construction length differs among species, and years without nests are not observed mismatch zeros. This would measure incremental predictive relevance of portfolio availability, NOT realized prey switching, causal compensation or independent five-study replication. Freeze model, exact window and eligibility only after source schema/metadata support and before opening any new coefficients; stop if original data unavailable. The published portfolio/specialization result itself cannot be marketed as new.
+
+Wang et al. (2024), https://doi.org/10.1016/j.scitotenv.2024.170458, 26 plant species in one alpine grassland, already tests mismatch-direction asymmetry moderated by flowering duration. Rafferty & Ives (2012), https://doi.org/10.1890/11-0967.1, explicitly separates composition of floral visitors and per-visit seed effectiveness under flowering shifts. These sharpen the novelty boundary: neither duration buffering, alternative visitors, nor asymmetric mismatch alone is a new PAYOFF contribution. An independent cross-system estimate of timing perturbation × a separately identified corrective opportunity remains the candidate.
+
+## 5. Decision and source priority
+
+Primary factorial theta eligible: **0**, unchanged. Keep current gate (10 independent compatible clusters) and all negative evidence. Source-level study discovery, arm support and test-statistic extraction are completed for the specified records; original XLSX/CSV and source roster acquisition remain blocked. Next needed input is the small Schenk original Dryad dataset (two workbooks) or the author OSF/Appendix file. The Vazquez archive (2.12 MB) is the highest-value natural portfolio source after the small factorial-experiment files. No new CI, raw dataset fit, pooling, or manuscript update was carried out. Prior V5/V7 and frozen papers unchanged.

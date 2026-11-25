@@ -1,0 +1,27 @@
+{
+  "status": "HOLD",
+  "source_sha256": "19535539c5585ecd2ed2de6131058267920007b52625468081c8f1a267c5c08a",
+  "primary_theta_added": 0,
+  "error": "UNEXPECTED_TANK_COMPOSITION",
+  "dictionary": {
+    "Container": "Code for each individual container. The first two letters describe the type of the phenology treatment experienced by tadpoles. NN: al tadpoles from non-delayed hatching phenology; DD: all tadpoles experienced 6-day delay in hatching; EE: all tadpoles experienced 12-day delay in hatching; ND: half of the tadpoles did not experience hatching delay, the other half experienced 6-day delay in hatching; NE: half of the tadpoles did not experience hatching delay, the other half experienced 12-day delay in hatching. The next letter represents the food treatment: H for ad libitum food during larval development, L: restricted food during larval development. The last number represents the number of the container, within each treatment combination.",
+    "ContainerID": "Correlative number identification for each individual container",
+    "Block": "1 to 4, representing the four experimental blocks, designed to account for small differences in temperature within the experimental room.",
+    "LarvaeN": "1 to 12, representing each individual larvae within each experimental container.",
+    "Mix": "1: all tadpoles from same hatching phenology treatment (NN, DD or EE); 2: half of the tadpoles from non-delayed htaching treatment, and the other half from one of the two hatching delay treatments (ND or NE)",
+    "Food": "High: ad libitum food during larval development; Low: restricted food during larval development (see article for details)",
+    "FoodN": "1: ad libitum; 2: restricted",
+    "Phenology": "Normal: no delay in hatching phenology; Delayed (6-day delay in hatching); Extra delayed (12-day delay in hatching) Normal",
+    "PhenN": "1:N; 2:D; 3:E",
+    "LarvalPeriod": "Duration in days of the larval period, from the start of the larval part of the experiemnt to metamorphosis",
+    "Mass": "Mass at metamorphosis, in grams",
+    "Growth": "Mass at metamorphosis, in mg/duration of the larval period"
+  },
+  "provenance": {
+    "run": 45542995064,
+    "job": 138965759139,
+    "artifact_id": 14990440923,
+    "artifact_zip_sha256": "2dd6467a6dc775198ec932429fc76e0983b0ab13c7ebf11c3276f539fdab860e",
+    "extraction": "Exact aggregate job log; no fitted result; ZIP digest from upload step, ZIP not independently downloaded."
+  }
+}

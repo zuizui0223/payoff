@@ -1,0 +1,163 @@
+{
+  "date": "2026-11-25",
+  "status": "SOURCE_SCREEN_AND_IMPLEMENTATION_NO_NEW_PRIMARY_EFFECT",
+  "parent": "wave2 25 source records",
+  "new_sources": [
+    {
+      "study_id": "OuwehandBurgerBoth2017",
+      "paper": "https://doi.org/10.1111/1365-2435.12940",
+      "archive": "https://doi.org/10.5061/dryad.d0cp4",
+      "source_description": "https://research.rug.nl/en/datasets/data-from-shifts-in-hatch-dates-do-not-provide-pied-flycatchers-w/",
+      "design": "hatch delay 6-7 days crossed with food supplementation; nests paired on laying date; 401 total manipulated nests; half of each group supplemented 30 g mealworms/day from day 3 until fledging",
+      "endpoint_records": [
+        {
+          "endpoint": "day-12 chick mass",
+          "term": "food x delay",
+          "F": 0.11,
+          "p": 0.74
+        },
+        {
+          "endpoint": "day-12 chick mass",
+          "term": "food main effect",
+          "F": 0.76,
+          "p": 0.39,
+          "mean_difference_g": 0.013
+        },
+        {
+          "endpoint": "local recruitment",
+          "term": "delay main effect",
+          "chi2": 1.43,
+          "df": 1,
+          "p": 0.23,
+          "control_percent": 8,
+          "delay_percent": 6.6
+        },
+        {
+          "endpoint": "local recruitment",
+          "term": "food main effect",
+          "chi2": 0.13,
+          "df": 1,
+          "p": 0.72
+        }
+      ],
+      "eligible_theta": false,
+      "limits": "No signed factorial coefficient or four arm means and covariance; mass is a performance proxy, not reproductive fitness. Resource peak varies by year; date perturbation not automatically mismatch. Hatch failures/abandonment after egg storage; keep 2009 and 2010–11 handling separate. Archive metadata confirms three datasets but food flag, nest IDs and zero outcomes not verified in actual files. Burger thesis same experiment, not independent."
+    },
+    {
+      "study_id": "HaIvey2017",
+      "paper": "https://doi.org/10.3732/ajb.1600293",
+      "design": "early/late flowering Clarkia unguiculata x four neighbor treatments x pollen supplementation",
+      "endpoint_records": [
+        {
+          "endpoint": "seeds per capsule",
+          "term": "neighborhood x flowering time x pollen supplementation",
+          "status": "reported significant",
+          "coefficient": null,
+          "variance": null
+        }
+      ],
+      "eligible_theta": false,
+      "limits": "Seasonal shift not a verified partner-relative mismatch without normal date/partner phenology; nonrandom post-treatment loss especially early flowering plants, whole-plant pollen limitation versus seeds/capsule, treatment-level covariance unresolved. Raw source not accessed."
+    },
+    {
+      "study_id": "MoellingDuckworth2024",
+      "paper": "https://doi.org/10.1098/rspb.2024.0959",
+      "archive": "https://figshare.com/s/3b3bad2ed1462fc99ef1",
+      "design": "western bluebird, 34 date-matched pairs randomized to supplemental mealworms during cold snaps or control (18 and 16 initial); five nests excluded for other failure causes; breeding date and cold snap exposure not randomized",
+      "endpoint_records": [
+        {
+          "endpoint": "annual fledglings",
+          "term": "breeding-date slope supplemental",
+          "estimate": -0.63,
+          "se": 0.19,
+          "p": 0.01
+        },
+        {
+          "endpoint": "annual fledglings",
+          "term": "breeding-date slope control",
+          "estimate": 0.13,
+          "se": 0.3,
+          "p": 0.663
+        },
+        {
+          "endpoint": "annual fledglings",
+          "term": "linear date x food",
+          "F": 3.95,
+          "p": 0.055
+        },
+        {
+          "endpoint": "annual fledglings",
+          "term": "reported overall model comparison",
+          "chi2": 7.2,
+          "p": 0.007
+        },
+        {
+          "endpoint": "cold-snap offspring deaths",
+          "food": 0,
+          "control": 7
+        },
+        {
+          "endpoint": "total season fledglings",
+          "food": 100,
+          "control": 74
+        },
+        {
+          "endpoint": "first-attempt fledglings",
+          "food": 78,
+          "control": 65
+        }
+      ],
+      "descriptive_slope_difference": -0.76,
+      "eligible_theta": false,
+      "limits": "Distinct continuous timing/selection moderator lane, not 2x2 independently randomized partner mismatch. Do not infer interaction variance from printed slopes or pooled offspring count ratios; exclusion counts by group unknown. Linear interaction p=.055 must not be replaced by broader model comparison p=.007. Figshare link inaccessible in this session."
+    }
+  ],
+  "existing_source_update": {
+    "study_id": "KudoCooper2019",
+    "paper": "https://doi.org/10.1098/rspb.2019.0573",
+    "snow_removal": {
+      "paired_plot_locations": 3,
+      "years": [
+        2014,
+        2015,
+        2016
+      ],
+      "snowmelt_advance_range_days": [
+        12,
+        28
+      ],
+      "flowering_advance_mean_days": 5.1,
+      "flowering_advance_range_days": [
+        3,
+        8
+      ],
+      "flowering_period_range_days": [
+        15,
+        24
+      ],
+      "flowering_onset_duration_r2": 0.72,
+      "natural_seed_set_percent_range": [
+        65,
+        74
+      ],
+      "hand_pollinated_seed_set_percent_range": [
+        83,
+        88
+      ],
+      "removal_seed_set_p": 0.013
+    },
+    "eligible_theta": false,
+    "limits": "Hand pollination was outside both control/removal plots, not crossed. Same plot pairs reused across years, three true experimental locations. Flowering-duration association not a manipulated recourse effect. Source values are reported text, not new fits."
+  },
+  "primary_eligible_count": 0,
+  "local_network": "Dryad API DNS resolution failure",
+  "source_gate_workflow": "https://github.com/zuizui0223/payoff/actions/runs/45528449801",
+  "source_gate_status_when_written": "queued; no result inspected",
+  "implementation": {
+    "path": "analysis/interaction_buffering/buffering_log_contrast.py",
+    "tests": 10,
+    "local_test_status": "10 passed; test file on GitHub adds numpy optional-import guard, no test logic changed",
+    "source_blob_sha_local": "6ce5d71a08a53ecfd8691d28b4c5e73b992fdf18",
+    "note": "Mathematical verification on synthetic fixtures only; no raw source or biological effects"
+  }
+}

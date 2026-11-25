@@ -1,0 +1,670 @@
+{
+  "status": "EXPLORATORY_SECONDARY_AMENDMENT",
+  "source_doi": "10.5061/dryad.kd1r166",
+  "primary_theta_eligible": false,
+  "species": {
+    "Claytonia": {
+      "unchanged": {
+        "normalization": {
+          "original_rows": 231,
+          "cleaned_rows": 231,
+          "excluded_source_rows": 0,
+          "literal_NA_normalized_to_missing": 0,
+          "duplicate_key_groups": 0,
+          "noncanonical_plant_rows": 9
+        },
+        "audit": {
+          "rows": 231,
+          "exclusions": {
+            "missing_pollen": 1,
+            "complete_plant_rows": 230,
+            "zero_seeds": 35,
+            "unpaired_observed_plots": 4
+          },
+          "source_plots_by_snow_frost": {
+            "(0, 0)": 10,
+            "(0, 1)": 10,
+            "(1, 0)": 10,
+            "(1, 1)": 9
+          },
+          "paired_plots_by_snow_frost": {
+            "(0, 0)": 8,
+            "(0, 1)": 9,
+            "(1, 0)": 9,
+            "(1, 1)": 9
+          }
+        },
+        "status": "SECONDARY_ESTIMATE",
+        "effects": {
+          "natural_NP": {
+            "estimate": 11.00474537037037,
+            "valid_draws": 10000,
+            "interval_95": [
+              8.264655671296298,
+              13.821310763888889
+            ],
+            "bootstrap_variance": 1.998323236932606
+          },
+          "natural_AP": {
+            "estimate": 13.23263888888889,
+            "valid_draws": 10000,
+            "interval_95": [
+              10.539930555555557,
+              15.871527777777777
+            ],
+            "bootstrap_variance": 1.83539572972235
+          },
+          "removal_NP": {
+            "estimate": 7.75462962962963,
+            "valid_draws": 10000,
+            "interval_95": [
+              5.523148148148149,
+              9.99074074074074
+            ],
+            "bootstrap_variance": 1.3059233809987223
+          },
+          "removal_AP": {
+            "estimate": 8.722222222222221,
+            "valid_draws": 10000,
+            "interval_95": [
+              6.476851851851851,
+              11.35208333333333
+            ],
+            "bootstrap_variance": 1.5752962709403229
+          },
+          "logRR_NP": {
+            "estimate": -0.3500365405047009,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.7562542601526273,
+              0.027359436541851596
+            ],
+            "bootstrap_variance": 0.039879325208772624
+          },
+          "logRR_AP": {
+            "estimate": -0.41681237328577103,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.777165868801807,
+              -0.07628908519050777
+            ],
+            "bootstrap_variance": 0.03167245716862799
+          },
+          "theta_snow": {
+            "estimate": -0.06677583278107013,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.533125767685902,
+              0.41304831689481747
+            ],
+            "bootstrap_variance": 0.057664514759034724
+          },
+          "additive_interaction": {
+            "estimate": -1.260300925925927,
+            "valid_draws": 10000,
+            "interval_95": [
+              -5.381446759259258,
+              2.9926359953703674
+            ],
+            "bootstrap_variance": 4.514543213202957
+          }
+        },
+        "admitted_primary": false,
+        "low_pollen_snow_detrimental": true
+      },
+      "canonical_only": {
+        "normalization": {
+          "original_rows": 231,
+          "cleaned_rows": 222,
+          "excluded_source_rows": 9,
+          "literal_NA_normalized_to_missing": 0,
+          "duplicate_key_groups": 0,
+          "noncanonical_plant_rows": 9
+        },
+        "audit": {
+          "rows": 222,
+          "exclusions": {
+            "complete_plant_rows": 222,
+            "zero_seeds": 31,
+            "unpaired_observed_plots": 4
+          },
+          "source_plots_by_snow_frost": {
+            "(0, 0)": 10,
+            "(0, 1)": 10,
+            "(1, 0)": 9,
+            "(1, 1)": 9
+          },
+          "paired_plots_by_snow_frost": {
+            "(0, 0)": 8,
+            "(0, 1)": 9,
+            "(1, 0)": 8,
+            "(1, 1)": 9
+          }
+        },
+        "status": "SECONDARY_ESTIMATE",
+        "effects": {
+          "natural_NP": {
+            "estimate": 11.347800925925927,
+            "valid_draws": 10000,
+            "interval_95": [
+              8.380758101851853,
+              14.415538194444444
+            ],
+            "bootstrap_variance": 2.3298752345610287
+          },
+          "natural_AP": {
+            "estimate": 13.430555555555557,
+            "valid_draws": 10000,
+            "interval_95": [
+              10.559027777777779,
+              16.23611111111111
+            ],
+            "bootstrap_variance": 2.073845056986409
+          },
+          "removal_NP": {
+            "estimate": 8.175925925925927,
+            "valid_draws": 10000,
+            "interval_95": [
+              5.859953703703704,
+              10.497135416666666
+            ],
+            "bootstrap_variance": 1.3930148185699056
+          },
+          "removal_AP": {
+            "estimate": 8.761574074074074,
+            "valid_draws": 10000,
+            "interval_95": [
+              6.378457754629629,
+              11.550998263888888
+            ],
+            "bootstrap_variance": 1.7542513745560695
+          },
+          "logRR_NP": {
+            "estimate": -0.3278300006557755,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.738615603255267,
+              0.05476496969052275
+            ],
+            "bootstrap_variance": 0.04072525803345051
+          },
+          "logRR_AP": {
+            "estimate": -0.42715679880980034,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.7983106743255355,
+              -0.06927631596981701
+            ],
+            "bootstrap_variance": 0.03517206162138815
+          },
+          "theta_snow": {
+            "estimate": -0.09932679815402484,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.5691134937771987,
+              0.40344701180330944
+            ],
+            "bootstrap_variance": 0.06175265176039034
+          },
+          "additive_interaction": {
+            "estimate": -1.4971064814814827,
+            "valid_draws": 10000,
+            "interval_95": [
+              -5.732118055555557,
+              3.0492187499999988
+            ],
+            "bootstrap_variance": 5.045926971930943
+          }
+        },
+        "admitted_primary": false,
+        "low_pollen_snow_detrimental": true
+      }
+    },
+    "Delphinium": {
+      "literal_NA": {
+        "normalization": {
+          "original_rows": 229,
+          "cleaned_rows": 229,
+          "excluded_source_rows": 0,
+          "literal_NA_normalized_to_missing": 1,
+          "duplicate_key_groups": 0,
+          "noncanonical_plant_rows": 0
+        },
+        "audit": {
+          "rows": 229,
+          "exclusions": {
+            "complete_plant_rows": 228,
+            "zero_seeds": 82,
+            "missing_seeds": 1
+          },
+          "source_plots_by_snow_frost": {
+            "(0, 0)": 9,
+            "(0, 1)": 10,
+            "(1, 0)": 9,
+            "(1, 1)": 6
+          },
+          "paired_plots_by_snow_frost": {
+            "(0, 0)": 9,
+            "(0, 1)": 10,
+            "(1, 0)": 9,
+            "(1, 1)": 6
+          }
+        },
+        "status": "SECONDARY_ESTIMATE",
+        "effects": {
+          "natural_NP": {
+            "estimate": 53.395833333333336,
+            "valid_draws": 10000,
+            "interval_95": [
+              39.3025,
+              69.52315972222222
+            ],
+            "bootstrap_variance": 58.748266871109166
+          },
+          "natural_AP": {
+            "estimate": 55.508333333333326,
+            "valid_draws": 10000,
+            "interval_95": [
+              34.06913194444444,
+              76.90496527777776
+            ],
+            "bootstrap_variance": 120.34048128908029
+          },
+          "removal_NP": {
+            "estimate": 65.34722222222223,
+            "valid_draws": 10000,
+            "interval_95": [
+              44.58564814814815,
+              86.87991898148148
+            ],
+            "bootstrap_variance": 115.10900317230966
+          },
+          "removal_AP": {
+            "estimate": 44.09027777777778,
+            "valid_draws": 10000,
+            "interval_95": [
+              26.965104166666666,
+              61.555902777777774
+            ],
+            "bootstrap_variance": 76.20889910641527
+          },
+          "logRR_NP": {
+            "estimate": 0.20198221754724463,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.24849525588329022,
+              0.6193991711817064
+            ],
+            "bootstrap_variance": 0.04924951203418801
+          },
+          "logRR_AP": {
+            "estimate": -0.23029386003668392,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.8150883430375644,
+              0.3485411638643633
+            ],
+            "bootstrap_variance": 0.08629692207427937
+          },
+          "theta_snow": {
+            "estimate": -0.43227607758392855,
+            "valid_draws": 10000,
+            "interval_95": [
+              -1.0731632219604446,
+              0.21917572512666572
+            ],
+            "bootstrap_variance": 0.1072028957403862
+          },
+          "additive_interaction": {
+            "estimate": -23.36944444444444,
+            "valid_draws": 10000,
+            "interval_95": [
+              -56.24324074074074,
+              10.147407407407401
+            ],
+            "bootstrap_variance": 287.9881555729985
+          }
+        },
+        "admitted_primary": false,
+        "low_pollen_snow_detrimental": false
+      }
+    },
+    "Potentilla": {
+      "drop_conflict": {
+        "normalization": {
+          "original_rows": 260,
+          "cleaned_rows": 258,
+          "excluded_source_rows": 2,
+          "literal_NA_normalized_to_missing": 0,
+          "duplicate_key_groups": 1,
+          "noncanonical_plant_rows": 0
+        },
+        "audit": {
+          "rows": 258,
+          "exclusions": {
+            "complete_plant_rows": 252,
+            "zero_seeds": 2,
+            "missing_seeds": 6,
+            "unpaired_observed_plots": 3
+          },
+          "source_plots_by_snow_frost": {
+            "(0, 0)": 10,
+            "(0, 1)": 9,
+            "(1, 0)": 10,
+            "(1, 1)": 10
+          },
+          "paired_plots_by_snow_frost": {
+            "(0, 0)": 9,
+            "(0, 1)": 8,
+            "(1, 0)": 10,
+            "(1, 1)": 9
+          }
+        },
+        "status": "SECONDARY_ESTIMATE",
+        "effects": {
+          "natural_NP": {
+            "estimate": 61.85243055555556,
+            "valid_draws": 10000,
+            "interval_95": [
+              43.40581597222222,
+              84.56788194444444
+            ],
+            "bootstrap_variance": 112.86469066297516
+          },
+          "natural_AP": {
+            "estimate": 60.18055555555556,
+            "valid_draws": 10000,
+            "interval_95": [
+              42.38572048611111,
+              78.64765625000001
+            ],
+            "bootstrap_variance": 87.78626207251895
+          },
+          "removal_NP": {
+            "estimate": 54.47361111111111,
+            "valid_draws": 10000,
+            "interval_95": [
+              44.669328703703705,
+              65.0667824074074
+            ],
+            "bootstrap_variance": 27.045532476121906
+          },
+          "removal_AP": {
+            "estimate": 53.536111111111104,
+            "valid_draws": 10000,
+            "interval_95": [
+              40.57295138888889,
+              68.00791666666666
+            ],
+            "bootstrap_variance": 48.43742599824883
+          },
+          "logRR_NP": {
+            "estimate": -0.12703501103963027,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.5004629919777062,
+              0.27116498329348854
+            ],
+            "bootstrap_variance": 0.038826690601976376
+          },
+          "logRR_AP": {
+            "estimate": -0.11699290247495835,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.5034907069718357,
+              0.30850685312009735
+            ],
+            "bootstrap_variance": 0.04225408370898234
+          },
+          "theta_snow": {
+            "estimate": 0.010042108564671928,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.46848074001042006,
+              0.47832169089872917
+            ],
+            "bootstrap_variance": 0.05861713279619931
+          },
+          "additive_interaction": {
+            "estimate": 0.7343749999999929,
+            "valid_draws": 10000,
+            "interval_95": [
+              -27.80572337962963,
+              30.08666666666667
+            ],
+            "bootstrap_variance": 213.07315346326848
+          }
+        },
+        "admitted_primary": false,
+        "low_pollen_snow_detrimental": true
+      },
+      "retain_first": {
+        "normalization": {
+          "original_rows": 260,
+          "cleaned_rows": 259,
+          "excluded_source_rows": 1,
+          "literal_NA_normalized_to_missing": 0,
+          "duplicate_key_groups": 1,
+          "noncanonical_plant_rows": 0
+        },
+        "audit": {
+          "rows": 259,
+          "exclusions": {
+            "complete_plant_rows": 253,
+            "zero_seeds": 2,
+            "missing_seeds": 6,
+            "unpaired_observed_plots": 3
+          },
+          "source_plots_by_snow_frost": {
+            "(0, 0)": 10,
+            "(0, 1)": 9,
+            "(1, 0)": 10,
+            "(1, 1)": 10
+          },
+          "paired_plots_by_snow_frost": {
+            "(0, 0)": 9,
+            "(0, 1)": 8,
+            "(1, 0)": 10,
+            "(1, 1)": 9
+          }
+        },
+        "status": "SECONDARY_ESTIMATE",
+        "effects": {
+          "natural_NP": {
+            "estimate": 61.85243055555556,
+            "valid_draws": 10000,
+            "interval_95": [
+              43.40581597222222,
+              84.56788194444444
+            ],
+            "bootstrap_variance": 112.86469066297516
+          },
+          "natural_AP": {
+            "estimate": 60.47222222222223,
+            "valid_draws": 10000,
+            "interval_95": [
+              42.612630208333336,
+              79.13732638888888
+            ],
+            "bootstrap_variance": 89.20342751596
+          },
+          "removal_NP": {
+            "estimate": 54.47361111111111,
+            "valid_draws": 10000,
+            "interval_95": [
+              44.669328703703705,
+              65.0667824074074
+            ],
+            "bootstrap_variance": 27.045532476121906
+          },
+          "removal_AP": {
+            "estimate": 53.536111111111104,
+            "valid_draws": 10000,
+            "interval_95": [
+              40.57295138888889,
+              68.00791666666666
+            ],
+            "bootstrap_variance": 48.43742599824883
+          },
+          "logRR_NP": {
+            "estimate": -0.12703501103963027,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.5004629919777062,
+              0.27116498329348854
+            ],
+            "bootstrap_variance": 0.038826690601976376
+          },
+          "logRR_AP": {
+            "estimate": -0.12182772252954187,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.5092927274212946,
+              0.3046952769437517
+            ],
+            "bootstrap_variance": 0.04241472648065555
+          },
+          "theta_snow": {
+            "estimate": 0.005207288510088406,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.47344940135855695,
+              0.4750649549417435
+            ],
+            "bootstrap_variance": 0.05883919794907429
+          },
+          "additive_interaction": {
+            "estimate": 0.4427083333333215,
+            "valid_draws": 10000,
+            "interval_95": [
+              -28.179620949074078,
+              29.909120370370363
+            ],
+            "bootstrap_variance": 214.72927208696746
+          }
+        },
+        "admitted_primary": false,
+        "low_pollen_snow_detrimental": true
+      },
+      "retain_last": {
+        "normalization": {
+          "original_rows": 260,
+          "cleaned_rows": 259,
+          "excluded_source_rows": 1,
+          "literal_NA_normalized_to_missing": 0,
+          "duplicate_key_groups": 1,
+          "noncanonical_plant_rows": 0
+        },
+        "audit": {
+          "rows": 259,
+          "exclusions": {
+            "complete_plant_rows": 253,
+            "zero_seeds": 2,
+            "missing_seeds": 6,
+            "unpaired_observed_plots": 3
+          },
+          "source_plots_by_snow_frost": {
+            "(0, 0)": 10,
+            "(0, 1)": 9,
+            "(1, 0)": 10,
+            "(1, 1)": 10
+          },
+          "paired_plots_by_snow_frost": {
+            "(0, 0)": 9,
+            "(0, 1)": 8,
+            "(1, 0)": 10,
+            "(1, 1)": 9
+          }
+        },
+        "status": "SECONDARY_ESTIMATE",
+        "effects": {
+          "natural_NP": {
+            "estimate": 61.85243055555556,
+            "valid_draws": 10000,
+            "interval_95": [
+              43.40581597222222,
+              84.56788194444444
+            ],
+            "bootstrap_variance": 112.86469066297516
+          },
+          "natural_AP": {
+            "estimate": 59.22222222222223,
+            "valid_draws": 10000,
+            "interval_95": [
+              41.82018229166667,
+              77.44726562499999
+            ],
+            "bootstrap_variance": 84.18279343184847
+          },
+          "removal_NP": {
+            "estimate": 54.47361111111111,
+            "valid_draws": 10000,
+            "interval_95": [
+              44.669328703703705,
+              65.0667824074074
+            ],
+            "bootstrap_variance": 27.045532476121906
+          },
+          "removal_AP": {
+            "estimate": 53.536111111111104,
+            "valid_draws": 10000,
+            "interval_95": [
+              40.57295138888889,
+              68.00791666666666
+            ],
+            "bootstrap_variance": 48.43742599824883
+          },
+          "logRR_NP": {
+            "estimate": -0.12703501103963027,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.5004629919777062,
+              0.27116498329348854
+            ],
+            "bootstrap_variance": 0.038826690601976376
+          },
+          "logRR_AP": {
+            "estimate": -0.1009404465807295,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.4861176257671138,
+              0.3196846124619255
+            ],
+            "bootstrap_variance": 0.04200282630144137
+          },
+          "theta_snow": {
+            "estimate": 0.02609456445890078,
+            "valid_draws": 10000,
+            "interval_95": [
+              -0.4532705241387875,
+              0.4921081280297525
+            ],
+            "bootstrap_variance": 0.05815754308730221
+          },
+          "additive_interaction": {
+            "estimate": 1.6927083333333215,
+            "valid_draws": 10000,
+            "interval_95": [
+              -26.558790509259254,
+              30.694129050925937
+            ],
+            "bootstrap_variance": 208.6845529446076
+          }
+        },
+        "admitted_primary": false,
+        "low_pollen_snow_detrimental": true
+      }
+    }
+  },
+  "dictionary_confirmed": true,
+  "provenance": {
+    "run": 45535654566,
+    "job": 138941482021,
+    "artifact_id": 14986192837,
+    "artifact_zip_sha256": "8ba29b42910c74676e6c2ef6b3b2e1e1308344e6e478ca943627010f7c972657",
+    "extraction": "Exact aggregate JSON in Actions job log, provider file MD5/SHA256 verified again by code. ZIP digest from upload log; artifact not independently downloaded.",
+    "previous_claytonia_all_effects_exactly_reproduced": true,
+    "normalization_synthetic_checks_passed": true
+  },
+  "claim_ceiling": "Three species and three main secondary contrasts from one shared study, no cross-species independent pooling. Snow removal also changes abiotic exposure; added pollen is external service, not endogenous recourse. No primary theta."
+}

@@ -1,0 +1,155 @@
+{
+  "status": "EXACT_TARGET_DATASET_LOCATED_BYTES_NOT_YET_ACQUIRED",
+  "target_article_doi": "10.1111/gcb.16195",
+  "target_title": "Effects of phenological mismatch under warming are modified by community context",
+  "queries": {
+    "datacite_related_doi": {
+      "url": "https://api.datacite.org/dois?query=relatedIdentifiers.relatedIdentifier%3A%2210.1111%2Fgcb.16195%22&page%5Bsize%5D=10",
+      "status": "METADATA_RETRIEVED",
+      "reported_total": 1,
+      "returned_records": 1,
+      "records": [
+        {
+          "doi": "10.5061/dryad.02v6wwq5k",
+          "titles": [
+            "Effects of phenological mismatch under warming are modified by community context"
+          ],
+          "related_dois": [
+            "10.5281/zenodo.6425791",
+            "10.5281/zenodo.6425793",
+            "10.22541/au.162454818.82806593/v1",
+            "10.1111/gcb.16195"
+          ],
+          "creators": [
+            "Pardikes, Nicholas"
+          ],
+          "exact_title": true,
+          "exact_related_doi": true
+        }
+      ]
+    },
+    "datacite_title": {
+      "url": "https://api.datacite.org/dois?query=titles.title%3A%22Effects+of+phenological+mismatch+under+warming+are+modified+by+community+context%22&page%5Bsize%5D=10",
+      "status": "METADATA_RETRIEVED",
+      "reported_total": 5,
+      "returned_records": 5,
+      "records": [
+        {
+          "doi": "10.5061/dryad.02v6wwq5k",
+          "titles": [
+            "Effects of phenological mismatch under warming are modified by community context"
+          ],
+          "related_dois": [
+            "10.5281/zenodo.6425791",
+            "10.5281/zenodo.6425793",
+            "10.22541/au.162454818.82806593/v1",
+            "10.1111/gcb.16195"
+          ],
+          "creators": [
+            "Pardikes, Nicholas"
+          ],
+          "exact_title": true,
+          "exact_related_doi": true
+        },
+        {
+          "doi": "10.5281/zenodo.6425790",
+          "titles": [
+            "Effects of phenological mismatch under warming are modified by community context"
+          ],
+          "related_dois": [
+            "10.5061/dryad.02v6wwq5k",
+            "10.5281/zenodo.6425791",
+            "https://zenodo.org/communities/dryad"
+          ],
+          "creators": [
+            "Pardikes, Nicholas"
+          ],
+          "exact_title": true,
+          "exact_related_doi": false
+        },
+        {
+          "doi": "10.5281/zenodo.6425791",
+          "titles": [
+            "Effects of phenological mismatch under warming are modified by community context"
+          ],
+          "related_dois": [
+            "10.5061/dryad.02v6wwq5k",
+            "10.5281/zenodo.6425790",
+            "https://zenodo.org/communities/dryad"
+          ],
+          "creators": [
+            "Pardikes, Nicholas"
+          ],
+          "exact_title": true,
+          "exact_related_doi": false
+        },
+        {
+          "doi": "10.5281/zenodo.6425792",
+          "titles": [
+            "Effects of phenological mismatch under warming are modified by community context"
+          ],
+          "related_dois": [
+            "10.5061/dryad.02v6wwq5k",
+            "10.5281/zenodo.6425793",
+            "https://zenodo.org/communities/dryad"
+          ],
+          "creators": [
+            "Pardikes, Nicholas"
+          ],
+          "exact_title": true,
+          "exact_related_doi": false
+        },
+        {
+          "doi": "10.5281/zenodo.6425793",
+          "titles": [
+            "Effects of phenological mismatch under warming are modified by community context"
+          ],
+          "related_dois": [
+            "10.5061/dryad.02v6wwq5k",
+            "10.5281/zenodo.6425792",
+            "https://zenodo.org/communities/dryad"
+          ],
+          "creators": [
+            "Pardikes, Nicholas"
+          ],
+          "exact_title": true,
+          "exact_related_doi": false
+        }
+      ]
+    },
+    "dryad_title": {
+      "url": "https://datadryad.org/api/v2/search?q=Effects+of+phenological+mismatch+under+warming+are+modified+by+community+context&per_page=10",
+      "status": "METADATA_RETRIEVED",
+      "reported_total": 1,
+      "returned_records": 1,
+      "records": [
+        {
+          "doi": "doi:10.5061/dryad.02v6wwq5k",
+          "title": "Effects of phenological mismatch under warming are modified by community context",
+          "authors": [
+            {
+              "firstName": "Nicholas",
+              "lastName": "Pardikes",
+              "orcid": "0000-0002-9175-4494"
+            }
+          ],
+          "related": [
+            "https://doi.org/10.5281/zenodo.6425791",
+            "https://doi.org/10.5281/zenodo.6425793",
+            "https://doi.org/10.22541/au.162454818.82806593/v1",
+            "https://doi.org/10.1111/gcb.16195"
+          ],
+          "exact_title": true,
+          "exact_related_doi": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "run": 45572982468,
+    "job": 139063916880,
+    "artifact_id": 15003147363,
+    "artifact_zip_sha256": "457cec5cf2fe8d94bd53ee32618713be225bdd7c8c06b7d169e6f1a0852928da",
+    "extraction": "Exact public metadata query result from completed job; author email omitted; uploaded ZIP digest from job log, ZIP not independently downloaded."
+  }
+}

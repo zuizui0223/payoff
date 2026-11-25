@@ -1,0 +1,31 @@
+{
+  "status": "SOURCE_FRAME_ONLY_NO_NEW_EFFECT",
+  "gezon": {
+    "doi": "10.1111/gcb.13209",
+    "supplements": {
+      "S10": {
+        "url": "https://onlinelibrary.wiley.com/doi/suppl/10.1111/gcb.13209/supinfo/gcb13209-sup-0010-AppendixS10.docx",
+        "status": "HOLD",
+        "error": "HTTP_403"
+      },
+      "S13": {
+        "url": "https://onlinelibrary.wiley.com/doi/suppl/10.1111/gcb.13209/supinfo/gcb13209-sup-0013-AppendixS13.docx",
+        "status": "HOLD",
+        "error": "HTTP_403"
+      }
+    }
+  },
+  "glopl": {
+    "url": "https://raw.githubusercontent.com/idiv-biodiversity/pollen-limitation-data-descriptor/master/Data/GloPL_with_id.csv",
+    "status": "HOLD",
+    "error": "UnicodeDecodeError"
+  },
+  "provenance": {
+    "run": 45537696024,
+    "job": 138948253271,
+    "artifact_id": 14987159017,
+    "artifact_zip_sha256": "c3891296fc84f86be6e7193685f912f8d6a7c69830107b951130902708e2e9d2",
+    "extraction": "Exact aggregate log JSON, ZIP not separately downloaded"
+  },
+  "diagnostic": "Git blob verification precedes decoding in original script; UnicodeDecodeError establishes non-UTF8 text, not source hash mismatch. Author Compute_ES.R blob e69a39c6e8e8be15e93da202431fdd15e073e0e8 reads CSV as character via fread without specifying encoding. Use reversible ISO-8859-1 byte mapping for fixed ASCII-only lexical screen, not a claim of author charset; escape non-ASCII author bytes in identity output. No retry of Wiley HTTP 403 supplements."
+}

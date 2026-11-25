@@ -1,0 +1,30 @@
+# PAYOFF-B wave 5: temporal service limitation and crossed snowmelt–pollen experiment
+
+2026-11-25. Adds two paper lineages to the 29-source cumulative registry (31 identified study/synthesis lineages, NOT 31 independent eligible meta-analytic effects). Primary endogenous-recourse by partner-mismatch theta remains 0. New results belong to secondary strata. No frozen manuscripts altered.
+
+## 1. Natural seasonal contrast with experimental service supply
+
+Carneiro & Machado (2025), Annals of Botany, https://doi.org/10.1093/aob/mcaf126. Original methods and Table 2 inspected at https://pmc.ncbi.nlm.nih.gov/articles/PMC12464942/. One population in Brazil, two natural flowering cohorts 3–4 weeks apart in 2020, 90 plants initially assigned per cohort (45 supplemented and 45 natural pollination). Assignment randomization is not explicit, tag attrition present, period selection not randomized. Published flower visit proxy 7.5% vs 93.6%; pollen limitation index .74 vs .03. Published binomial GLM interaction -1.26 (SE .31) in original period coding; oriented to the supplement effect in lower versus higher observed overlap +1.26, variance .0961, normal interval [.6524,1.8676]. Under the usual binomial logit link, exp(+1.26)=3.525, approximate interval [1.920,6.473] is a ratio of treatment odds ratios, NOT an ordinary risk ratio. Original code/raw data unavailable (on request); link interpretation and within-plant dispersion not independently audited. Rounded pollen limitation indices imply descriptive log-mean ratio-of-ratios log(.97/.26)=1.316614, no sampling variance; do not substitute the logit SE. This is one previously published result, not a new effect or an independent causal test of natural phenological shift. The same paper reports temporally variable selection on flower size; it does not establish general selection reversal caused by endogenous recourse.
+
+## 2. Actual original-data seasonal perturbation by pollen supplementation
+
+Pardee et al. (2019), J Ecology, https://doi.org/10.1111/1365-2745.13152; original public archive https://zenodo.org/records/4970401 / 10.5061/dryad.kd1r166. Five original files (four seed-set CSVs, one data dictionary) verified against provider MD5 in source run 45530878210. Source row counts Claytonia 231, Delphinium 229, Potentilla 260, Mertensia 243; Mertensia lacks supplementation. Randomized snow removal/frost at plot level and pollen treatment within plot in 2016. The author dictionary confirms NP=no supplemental pollen, AP=supplemented, and Total_seeds=sum of seeds per plant. Prespecified secondary complete-case plot-level contrast and 10,000 whole-plot stratified bootstrap in PAYOFF_B_PARDEE_SNOW_POLLEN_CONTRAST_FREEZE_20261125.md.
+
+Run https://github.com/zuizui0223/payoff/actions/runs/45531037548 completed. Exact output: ../data/payoff_b_pardee_snow_pollen_initial_result_20261125.json. Claytonia has 230 eligible plant rows before paired-plot restriction (35 zero-seed rows, one missing pollen assignment). Of 39 observed plots, 35 have both pollen arms, strata Natural-NoFrost/Frost and Removal-NoFrost/Frost 8/9/9/9. Rates are mean seeds per plant, equal-weight plot averages and then equal weighting of frost strata.
+
+| Snow treatment | Natural pollination | Supplemental pollen |
+|---|---:|---:|
+| Natural melt | 11.004745 | 13.232639 |
+| Removal | 7.754630 | 8.722222 |
+
+Natural-pollination snow-removal log response -0.350037 [-0.756254,+0.027359]; added-pollen response -0.416812 [-0.777166,-0.076289]. Difference theta_snow = -0.066776 [-0.533126,+0.413048], bootstrap sampling variance 0.0576645, all 10,000 finite. Additive interaction -1.2603 seeds/plant [-5.3814,+2.9926]. Neither scale supports attenuation of snow-removal losses by pollen supply. Do not claim equivalence or significant amplification from nonsignificance. Complete-case target excludes attrition/unpaired plots and is not full intention-to-treat. Snow manipulation changes abiotic exposure, not pure partner timing; supplied pollen is external service relief, not endogenous recourse. Authors' original finding already reports no pollen supplementation effect across tested species. This is a secondary original-data reanalysis, not independent replication.
+
+Delphinium: initial fit HOLD on unparseable value (ValueError); Potentilla: initial fit HOLD on duplicate plot/plant key. Both held before coefficient estimation. The source-grain diagnostic was added separately; no silent recoding or deduplication. Mertensia excluded as planned. Shared plot design across species forbids treating them as independent studies. No meta-analytic pooling or new primary theta.
+
+## 3. Material correction to Vázquez prospective plan
+
+The original public Dryad README https://datadryad.org/dataset/doi%3A10.5061/dryad.37pvmcvmp documents changes in flower sampling area/effort and lab-rearing selection: all nests taken to lab in first three study years, later only unidentified nests. Missing emergence is not zero reproduction. Hold the earlier late-year emergence-outcome prediction. A distinct prospective alternative would use author-authenticated direct brood cell counts for three species and historical pollen weights, after verifying sampling effort, IDs and season alignment. Two species have brood cell counts estimated from cavity length in the original work. Do not fit all five as directly measured or claim causal diet switching. All six provider digests exist, original files remain unavailable.
+
+## 4. Decision
+
+31 source lineages screened to date, 1 new published secondary interaction with source SE and 1 actual secondary snow-removal × pollen effect. Primary eligible factorial contrasts still 0. Preserve both results, all holds and the original theory draft. Independent source-cohort expansion should prioritize directly crossed perturbation/recourse designs; Gezon et al. (2016), https://doi.org/10.1111/gcb.13209, is an additional lead, not counted as admitted or as an independent effect. The authors' results already separate frost and pollination limitations. No blanket novelty claim about pollen limitation or compensation. 

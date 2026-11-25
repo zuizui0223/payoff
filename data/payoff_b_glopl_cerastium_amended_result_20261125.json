@@ -1,0 +1,119 @@
+{
+  "status": "SECONDARY_CERASTIUM_ONLY",
+  "source_sha256": "8c764ce03da86db0cb280e8f8f92cc0e62e2df6d85a2226e3246dc1afeb3f65f",
+  "species": {
+    "cerastium_alpinum": {
+      "status": "SECONDARY_CONDITIONAL_VARIANCE_SENSITIVITY",
+      "early_lnRR": 0.30010459245033816,
+      "late_lnRR": 0.08961215868968714,
+      "delta_late_minus_early": -0.21049243376065102,
+      "ratio_of_response_ratios": 0.8101851851851851,
+      "early_arms": {
+        "Natural": {
+          "mean": 0.4,
+          "n": 12,
+          "sd": 0.242487
+        },
+        "Sup": {
+          "mean": 0.54,
+          "n": 12,
+          "sd": 0.242487
+        }
+      },
+      "late_arms": {
+        "Natural": {
+          "mean": 0.32,
+          "n": 12,
+          "sd": 0.242487
+        },
+        "Sup": {
+          "mean": 0.35,
+          "n": 12,
+          "sd": 0.242487
+        }
+      },
+      "covariance_known": false,
+      "admitted_primary": false,
+      "early_variance_conditional": 0.04742879665052083,
+      "late_variance_conditional": 0.08785148057841798,
+      "variance_if_zero_between_period_covariance": 0.13528027722893882,
+      "maximum_variance_given_marginal_variances": 0.26438008370131066,
+      "normal95_if_zero_between_period_covariance": [
+        -0.9313895921700119,
+        0.51040472464871
+      ],
+      "normal95_maximum_variance_sensitivity": [
+        -1.2182833493512586,
+        0.7972984818299564
+      ],
+      "source_row_ids": [
+        "1073",
+        "1074"
+      ],
+      "excluded_low_altitude_row": "1072",
+      "period": "high elevation 2000, early versus late",
+      "independence_limit": "separate plants within period per paper; repeated plants across periods not ruled out; conditional SD/N variance"
+    },
+    "cerastium_cerastoides": {
+      "status": "SECONDARY_CONDITIONAL_VARIANCE_SENSITIVITY",
+      "early_lnRR": 0.08408311721054144,
+      "late_lnRR": 0.3364722366212129,
+      "delta_late_minus_early": 0.25238911941067144,
+      "ratio_of_response_ratios": 1.2870967741935482,
+      "early_arms": {
+        "Natural": {
+          "mean": 0.57,
+          "n": 12,
+          "sd": 0.242487
+        },
+        "Sup": {
+          "mean": 0.62,
+          "n": 12,
+          "sd": 0.173205
+        }
+      },
+      "late_arms": {
+        "Natural": {
+          "mean": 0.25,
+          "n": 12,
+          "sd": 0.173205
+        },
+        "Sup": {
+          "mean": 0.35,
+          "n": 12,
+          "sd": 0.173205
+        }
+      },
+      "covariance_known": false,
+      "admitted_primary": false,
+      "early_variance_conditional": 0.021585185469355776,
+      "late_variance_conditional": 0.060408106934693874,
+      "variance_if_zero_between_period_covariance": 0.08199329240404965,
+      "maximum_variance_given_marginal_variances": 0.15421296263420356,
+      "normal95_if_zero_between_period_covariance": [
+        -0.30884651033800825,
+        0.8136247491593511
+      ],
+      "normal95_maximum_variance_sensitivity": [
+        -0.5173020636332533,
+        1.0220803024545961
+      ],
+      "source_row_ids": [
+        "1076",
+        "1077"
+      ],
+      "excluded_low_altitude_row": "1075",
+      "period": "high elevation 2000, early versus late",
+      "independence_limit": "separate plants within period per paper; repeated plants across periods not ruled out; conditional SD/N variance"
+    }
+  },
+  "primary_theta_added": 0,
+  "provenance": {
+    "run": 45539515597,
+    "job": 138954294354,
+    "artifact_id": 14988711746,
+    "artifact_zip_sha256": "0fa126b721aa366d867f456ca870ab54a6ebaa15d02d341cdd49cd2c45d3b53f",
+    "extraction": "Exact aggregate JSON from completed calculation job; artifact ZIP digest from upload log; ZIP not independently downloaded."
+  },
+  "claim_ceiling": "Both species originate in the same Totland and Schulte-Herbruggen 2003 publication. Natural flowering period comparison with experimental pollen supplementation, not a manipulation of mismatch or endogenous recourse. GloPL summary means and SD/N, not raw plant data. Opposite point estimate signs, both uncertainty sensitivities include zero. No cross-species pooled result or significant difference between species."
+}

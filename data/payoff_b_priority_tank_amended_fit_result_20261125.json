@@ -1,0 +1,1249 @@
+{
+  "status": "SECONDARY_AMENDMENT_COMPLETE",
+  "source_sha256": "19535539c5585ecd2ed2de6131058267920007b52625468081c8f1a267c5c08a",
+  "primary_theta_added": 0,
+  "modes": {
+    "strict64": {
+      "status": "SECONDARY_CONTAINER_CONTRASTS_COMPLETE",
+      "audit": {
+        "source_rows": 828,
+        "source_tanks": 69,
+        "mode": "strict64",
+        "design_classes": {
+          "strict": 64,
+          "numeric_text_missing": 1,
+          "observed_5_7": 4
+        },
+        "design_admitted_tanks": 64,
+        "usable_tanks_total": 64,
+        "design_tanks_per_cell": {
+          "High|D": 7,
+          "High|E": 7,
+          "High|N": 7,
+          "High|ND": 5,
+          "High|NE": 7,
+          "Low|D": 7,
+          "Low|E": 7,
+          "Low|N": 7,
+          "Low|ND": 5,
+          "Low|NE": 5
+        },
+        "usable_tanks_per_cell": {
+          "High|D": 7,
+          "High|E": 7,
+          "High|N": 7,
+          "High|ND": 5,
+          "High|NE": 7,
+          "Low|D": 7,
+          "Low|E": 7,
+          "Low|N": 7,
+          "Low|ND": 5,
+          "Low|NE": 5
+        },
+        "excluded_tanks": {
+          "numeric_text_missing": 1,
+          "observed_5_7": 4
+        },
+        "endpoint_completeness": {
+          "complete_rows_in_usable_tanks": 662,
+          "missing_duration": 102,
+          "missing_mass": 106,
+          "incomplete_either": 106
+        },
+        "complete_rows_by_cell_and_cohort": {
+          "High|D": {
+            "D": 79
+          },
+          "High|E": {
+            "E": 82
+          },
+          "High|N": {
+            "N": 83
+          },
+          "High|ND": {
+            "N": 30,
+            "D": 29
+          },
+          "High|NE": {
+            "N": 42,
+            "E": 40
+          },
+          "Low|D": {
+            "D": 47
+          },
+          "Low|E": {
+            "E": 74
+          },
+          "Low|N": {
+            "N": 65
+          },
+          "Low|ND": {
+            "N": 23,
+            "D": 19
+          },
+          "Low|NE": {
+            "N": 26,
+            "E": 23
+          }
+        },
+        "duration_definition": "Duration in days of the larval period, from the start of the larval part of the experiemnt to metamorphosis",
+        "mass_definition": "Mass at metamorphosis, in grams"
+      },
+      "contrasts": {
+        "High_D": {
+          "single_duration_difference": -1.9253246753246813,
+          "mixed_duration_difference": 3.413333333333334,
+          "duration_interaction_days": 5.338658008658015,
+          "single_mass_lnRR": 0.018929494662327642,
+          "mixed_mass_lnRR": 0.07546764217172404,
+          "mass_log_interaction": 0.0565381475093964,
+          "means": {
+            "single_N": [
+              47.290043290043286,
+              0.4819835497835498
+            ],
+            "single_delayed": [
+              45.364718614718605,
+              0.4911941558441559
+            ],
+            "mixed_N": [
+              43.4,
+              0.49323666666666666
+            ],
+            "mixed_delayed": [
+              46.81333333333333,
+              0.5319006666666667
+            ]
+          },
+          "nominal_cold_delay_days": 6,
+          "usable_tanks": {
+            "N": 7,
+            "D": 7,
+            "ND": 5
+          },
+          "duration_interval95": [
+            2.0505606060606056,
+            8.647224025974038
+          ],
+          "mass_log_interval95": [
+            -0.07919251222274601,
+            0.19170065242015807
+          ],
+          "block_common_support": [
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 3.712878787878791,
+          "equal_block_mass_interaction": 0.06749324858317961,
+          "leave_one_common_block_out_duration": {
+            "2": 4.244318181818187,
+            "3": 1.8875000000000028,
+            "4": 5.006818181818183
+          }
+        },
+        "High_E": {
+          "single_duration_difference": -10.689393939393945,
+          "mixed_duration_difference": 2.2952380952380835,
+          "duration_interaction_days": 12.984632034632028,
+          "single_mass_lnRR": -0.029090018712098233,
+          "mixed_mass_lnRR": 0.19612605954959683,
+          "mass_log_interaction": 0.22521607826169507,
+          "means": {
+            "single_N": [
+              47.290043290043286,
+              0.4819835497835498
+            ],
+            "single_delayed": [
+              36.60064935064934,
+              0.4681646103896104
+            ],
+            "mixed_N": [
+              42.88095238095239,
+              0.4842476190476191
+            ],
+            "mixed_delayed": [
+              45.17619047619047,
+              0.5891745238095238
+            ]
+          },
+          "nominal_cold_delay_days": 12,
+          "usable_tanks": {
+            "N": 7,
+            "E": 7,
+            "NE": 7
+          },
+          "duration_interval95": [
+            10.075438311688321,
+            15.820367965367955
+          ],
+          "mass_log_interval95": [
+            0.09824752563696389,
+            0.35935837357073164
+          ],
+          "block_common_support": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 12.88491161616162,
+          "equal_block_mass_interaction": 0.2402078184235626,
+          "leave_one_common_block_out_duration": {
+            "1": 11.397474747474751,
+            "2": 13.361700336700343,
+            "3": 13.617003367003369,
+            "4": 13.16346801346802
+          }
+        },
+        "Low_D": {
+          "single_duration_difference": -4.852066584209446,
+          "mixed_duration_difference": 11.506666666666668,
+          "duration_interaction_days": 16.358733250876114,
+          "single_mass_lnRR": 0.03292805406642183,
+          "mixed_mass_lnRR": -0.08231095989587692,
+          "mass_log_interaction": -0.11523901396229874,
+          "means": {
+            "single_N": [
+              61.06261080189652,
+              0.3142961992372707
+            ],
+            "single_delayed": [
+              56.21054421768707,
+              0.3248176360544218
+            ],
+            "mixed_N": [
+              54.65666666666666,
+              0.33737700000000004
+            ],
+            "mixed_delayed": [
+              66.16333333333333,
+              0.31071933333333335
+            ]
+          },
+          "nominal_cold_delay_days": 6,
+          "usable_tanks": {
+            "N": 7,
+            "D": 7,
+            "ND": 5
+          },
+          "duration_interval95": [
+            11.046131364667074,
+            20.96310348381776
+          ],
+          "mass_log_interval95": [
+            -0.2679624873871027,
+            0.04125917450646185
+          ],
+          "block_common_support": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 15.664258658008656,
+          "equal_block_mass_interaction": -0.14718698442176784,
+          "leave_one_common_block_out_duration": {
+            "1": 14.782683982683979,
+            "2": 13.997186147186147,
+            "3": 14.785678210678208,
+            "4": 19.091486291486287
+          }
+        },
+        "Low_E": {
+          "single_duration_difference": -10.246016285302005,
+          "mixed_duration_difference": 10.216666666666654,
+          "duration_interaction_days": 20.46268295196866,
+          "single_mass_lnRR": -0.1227974277693236,
+          "mixed_mass_lnRR": -0.026999600126963483,
+          "mass_log_interaction": 0.09579782764236013,
+          "means": {
+            "single_N": [
+              61.06261080189652,
+              0.3142961992372707
+            ],
+            "single_delayed": [
+              50.81659451659451,
+              0.27797701298701305
+            ],
+            "mixed_N": [
+              50.47333333333334,
+              0.30124466666666666
+            ],
+            "mixed_delayed": [
+              60.69,
+              0.29322
+            ]
+          },
+          "nominal_cold_delay_days": 12,
+          "usable_tanks": {
+            "N": 7,
+            "E": 7,
+            "NE": 5
+          },
+          "duration_interval95": [
+            17.209860260770967,
+            23.752655715316425
+          ],
+          "mass_log_interval95": [
+            -0.07835622389359387,
+            0.2873305519405479
+          ],
+          "block_common_support": [
+            "2",
+            "4"
+          ],
+          "equal_block_duration_interaction": 18.39814213564213,
+          "equal_block_mass_interaction": 0.04901680204058709,
+          "leave_one_common_block_out_duration": {
+            "2": 18.8810606060606,
+            "4": 17.915223665223657
+          }
+        }
+      },
+      "bootstrap": {
+        "labels": [
+          "High_D_duration",
+          "High_E_duration",
+          "Low_D_duration",
+          "Low_E_duration",
+          "High_D_mass",
+          "High_E_mass",
+          "Low_D_mass",
+          "Low_E_mass"
+        ],
+        "covariance": [
+          [
+            2.7794194665733394,
+            0.9681450891647163,
+            0.005825513555464806,
+            0.021464103877343862,
+            0.08609656470279692,
+            0.029290903533061362,
+            0.001254936978628269,
+            -0.00047340995592373984
+          ],
+          [
+            0.9681450891647163,
+            2.1754012373867098,
+            0.02437582239615407,
+            0.025498470292947856,
+            0.029025477694825955,
+            0.06679726282737498,
+            0.0015590547342009195,
+            -0.0006890805171112142
+          ],
+          [
+            0.005825513555464806,
+            0.02437582239615407,
+            6.523581703474908,
+            0.7386914887910873,
+            -0.00042612928946790085,
+            0.00023580350954663373,
+            -0.09103731152940714,
+            -0.007950777676063277
+          ],
+          [
+            0.021464103877343862,
+            0.025498470292947856,
+            0.7386914887910873,
+            2.7915716714495873,
+            0.0002040669687410804,
+            0.0004828821235406762,
+            -0.006689791629740886,
+            -0.012215713836209187
+          ],
+          [
+            0.08609656470279692,
+            0.029025477694825955,
+            -0.00042612928946790085,
+            0.0002040669687410804,
+            0.004817627313735938,
+            0.0013668501749982348,
+            0.00006841105197802474,
+            -0.00004847007254053638
+          ],
+          [
+            0.029290903533061362,
+            0.06679726282737498,
+            0.00023580350954663373,
+            0.0004828821235406762,
+            0.0013668501749982348,
+            0.0044075394581804895,
+            0.00002948618763093039,
+            -0.00010609249518729045
+          ],
+          [
+            0.001254936978628269,
+            0.0015590547342009195,
+            -0.09103731152940714,
+            -0.006689791629740886,
+            0.00006841105197802474,
+            0.00002948618763093039,
+            0.006187510125747912,
+            0.000527420795197771
+          ],
+          [
+            -0.00047340995592373984,
+            -0.0006890805171112142,
+            -0.007950777676063277,
+            -0.012215713836209187,
+            -0.00004847007254053638,
+            -0.00010609249518729045,
+            0.000527420795197771,
+            0.009046172341260135
+          ]
+        ],
+        "draws": 10000,
+        "scope": "Conditional on observed tanks, food/composition stratified bootstrap; blocks not independently resampled."
+      }
+    },
+    "numeric65": {
+      "status": "SECONDARY_CONTAINER_CONTRASTS_COMPLETE",
+      "audit": {
+        "source_rows": 828,
+        "source_tanks": 69,
+        "mode": "numeric65",
+        "design_classes": {
+          "strict": 64,
+          "numeric_text_missing": 1,
+          "observed_5_7": 4
+        },
+        "design_admitted_tanks": 65,
+        "usable_tanks_total": 65,
+        "design_tanks_per_cell": {
+          "High|D": 7,
+          "High|E": 7,
+          "High|N": 7,
+          "High|ND": 6,
+          "High|NE": 7,
+          "Low|D": 7,
+          "Low|E": 7,
+          "Low|N": 7,
+          "Low|ND": 5,
+          "Low|NE": 5
+        },
+        "usable_tanks_per_cell": {
+          "High|D": 7,
+          "High|E": 7,
+          "High|N": 7,
+          "High|ND": 6,
+          "High|NE": 7,
+          "Low|D": 7,
+          "Low|E": 7,
+          "Low|N": 7,
+          "Low|ND": 5,
+          "Low|NE": 5
+        },
+        "excluded_tanks": {
+          "observed_5_7": 4
+        },
+        "endpoint_completeness": {
+          "complete_rows_in_usable_tanks": 673,
+          "missing_duration": 103,
+          "missing_mass": 107,
+          "incomplete_either": 107
+        },
+        "complete_rows_by_cell_and_cohort": {
+          "High|D": {
+            "D": 79
+          },
+          "High|E": {
+            "E": 82
+          },
+          "High|N": {
+            "N": 83
+          },
+          "High|ND": {
+            "N": 35,
+            "D": 35
+          },
+          "High|NE": {
+            "N": 42,
+            "E": 40
+          },
+          "Low|D": {
+            "D": 47
+          },
+          "Low|E": {
+            "E": 74
+          },
+          "Low|N": {
+            "N": 65
+          },
+          "Low|ND": {
+            "N": 23,
+            "D": 19
+          },
+          "Low|NE": {
+            "N": 26,
+            "E": 23
+          }
+        },
+        "duration_definition": "Duration in days of the larval period, from the start of the larval part of the experiemnt to metamorphosis",
+        "mass_definition": "Mass at metamorphosis, in grams"
+      },
+      "contrasts": {
+        "High_D": {
+          "single_duration_difference": -1.9253246753246813,
+          "mixed_duration_difference": 3.427777777777777,
+          "duration_interaction_days": 5.3531024531024585,
+          "single_mass_lnRR": 0.018929494662327642,
+          "mixed_mass_lnRR": 0.10200226804385311,
+          "mass_log_interaction": 0.08307277338152547,
+          "means": {
+            "single_N": [
+              47.290043290043286,
+              0.4819835497835498
+            ],
+            "single_delayed": [
+              45.364718614718605,
+              0.4911941558441559
+            ],
+            "mixed_N": [
+              43.333333333333336,
+              0.4822272222222222
+            ],
+            "mixed_delayed": [
+              46.76111111111111,
+              0.5340116666666667
+            ]
+          },
+          "nominal_cold_delay_days": 6,
+          "usable_tanks": {
+            "N": 7,
+            "D": 7,
+            "ND": 6
+          },
+          "duration_interval95": [
+            2.2039556277056294,
+            8.559834054834061
+          ],
+          "mass_log_interval95": [
+            -0.056730141243124206,
+            0.22296998328988016
+          ],
+          "block_common_support": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 4.21426767676768,
+          "equal_block_mass_interaction": 0.1016439703570123,
+          "leave_one_common_block_out_duration": {
+            "1": 3.712878787878791,
+            "2": 4.73569023569024,
+            "3": 3.164478114478117,
+            "4": 5.244023569023571
+          }
+        },
+        "High_E": {
+          "single_duration_difference": -10.689393939393945,
+          "mixed_duration_difference": 2.2952380952380835,
+          "duration_interaction_days": 12.984632034632028,
+          "single_mass_lnRR": -0.029090018712098233,
+          "mixed_mass_lnRR": 0.19612605954959683,
+          "mass_log_interaction": 0.22521607826169507,
+          "means": {
+            "single_N": [
+              47.290043290043286,
+              0.4819835497835498
+            ],
+            "single_delayed": [
+              36.60064935064934,
+              0.4681646103896104
+            ],
+            "mixed_N": [
+              42.88095238095239,
+              0.4842476190476191
+            ],
+            "mixed_delayed": [
+              45.17619047619047,
+              0.5891745238095238
+            ]
+          },
+          "nominal_cold_delay_days": 12,
+          "usable_tanks": {
+            "N": 7,
+            "E": 7,
+            "NE": 7
+          },
+          "duration_interval95": [
+            10.096320346320347,
+            15.836628787878793
+          ],
+          "mass_log_interval95": [
+            0.10058038511619977,
+            0.3595183262841461
+          ],
+          "block_common_support": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 12.88491161616162,
+          "equal_block_mass_interaction": 0.2402078184235626,
+          "leave_one_common_block_out_duration": {
+            "1": 11.397474747474751,
+            "2": 13.361700336700343,
+            "3": 13.617003367003369,
+            "4": 13.16346801346802
+          }
+        },
+        "Low_D": {
+          "single_duration_difference": -4.852066584209446,
+          "mixed_duration_difference": 11.506666666666668,
+          "duration_interaction_days": 16.358733250876114,
+          "single_mass_lnRR": 0.03292805406642183,
+          "mixed_mass_lnRR": -0.08231095989587692,
+          "mass_log_interaction": -0.11523901396229874,
+          "means": {
+            "single_N": [
+              61.06261080189652,
+              0.3142961992372707
+            ],
+            "single_delayed": [
+              56.21054421768707,
+              0.3248176360544218
+            ],
+            "mixed_N": [
+              54.65666666666666,
+              0.33737700000000004
+            ],
+            "mixed_delayed": [
+              66.16333333333333,
+              0.31071933333333335
+            ]
+          },
+          "nominal_cold_delay_days": 6,
+          "usable_tanks": {
+            "N": 7,
+            "D": 7,
+            "ND": 5
+          },
+          "duration_interval95": [
+            11.017157673675547,
+            20.940062229437245
+          ],
+          "mass_log_interval95": [
+            -0.2694016501247074,
+            0.04259754886985111
+          ],
+          "block_common_support": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 15.664258658008656,
+          "equal_block_mass_interaction": -0.14718698442176784,
+          "leave_one_common_block_out_duration": {
+            "1": 14.782683982683979,
+            "2": 13.997186147186147,
+            "3": 14.785678210678208,
+            "4": 19.091486291486287
+          }
+        },
+        "Low_E": {
+          "single_duration_difference": -10.246016285302005,
+          "mixed_duration_difference": 10.216666666666654,
+          "duration_interaction_days": 20.46268295196866,
+          "single_mass_lnRR": -0.1227974277693236,
+          "mixed_mass_lnRR": -0.026999600126963483,
+          "mass_log_interaction": 0.09579782764236013,
+          "means": {
+            "single_N": [
+              61.06261080189652,
+              0.3142961992372707
+            ],
+            "single_delayed": [
+              50.81659451659451,
+              0.27797701298701305
+            ],
+            "mixed_N": [
+              50.47333333333334,
+              0.30124466666666666
+            ],
+            "mixed_delayed": [
+              60.69,
+              0.29322
+            ]
+          },
+          "nominal_cold_delay_days": 12,
+          "usable_tanks": {
+            "N": 7,
+            "E": 7,
+            "NE": 5
+          },
+          "duration_interval95": [
+            17.18389020305091,
+            23.688840574108426
+          ],
+          "mass_log_interval95": [
+            -0.07916663881464735,
+            0.2893241218774471
+          ],
+          "block_common_support": [
+            "2",
+            "4"
+          ],
+          "equal_block_duration_interaction": 18.39814213564213,
+          "equal_block_mass_interaction": 0.04901680204058709,
+          "leave_one_common_block_out_duration": {
+            "2": 18.8810606060606,
+            "4": 17.915223665223657
+          }
+        }
+      },
+      "bootstrap": {
+        "labels": [
+          "High_D_duration",
+          "High_E_duration",
+          "Low_D_duration",
+          "Low_E_duration",
+          "High_D_mass",
+          "High_E_mass",
+          "Low_D_mass",
+          "Low_E_mass"
+        ],
+        "covariance": [
+          [
+            2.5974606505560667,
+            0.9761739967319334,
+            -0.009523457968583093,
+            0.013556468186030273,
+            0.08192727696772298,
+            0.029593929356485478,
+            -0.001286180202761618,
+            -0.0001895319236283362
+          ],
+          [
+            0.9761739967319334,
+            2.15232468932671,
+            -0.02669827280793926,
+            0.02002589852689735,
+            0.029562931441118996,
+            0.06610573052627458,
+            -0.00021624232098901676,
+            0.0013839632857175245
+          ],
+          [
+            -0.009523457968583093,
+            -0.02669827280793926,
+            6.460225990056166,
+            0.7363144079559283,
+            0.001485722695548315,
+            0.002610357141305992,
+            -0.08961116647853597,
+            -0.00565272047288915
+          ],
+          [
+            0.013556468186030273,
+            0.02002589852689735,
+            0.7363144079559283,
+            2.814684603856765,
+            0.002465618495484484,
+            0.0018120927094134067,
+            -0.006676162623164232,
+            -0.01127789902915816
+          ],
+          [
+            0.08192727696772298,
+            0.029562931441118996,
+            0.001485722695548315,
+            0.002465618495484484,
+            0.00508964835742658,
+            0.0013898376927910703,
+            -0.00008723927572400658,
+            -0.000013044157119055902
+          ],
+          [
+            0.029593929356485478,
+            0.06610573052627458,
+            0.002610357141305992,
+            0.0018120927094134067,
+            0.0013898376927910703,
+            0.004364878105707319,
+            -0.0001479092910019051,
+            0.00005566373633024688
+          ],
+          [
+            -0.001286180202761618,
+            -0.00021624232098901676,
+            -0.08961116647853597,
+            -0.006676162623164232,
+            -0.00008723927572400658,
+            -0.0001479092910019051,
+            0.006266961593283863,
+            0.0003918629154381154
+          ],
+          [
+            -0.0001895319236283362,
+            0.0013839632857175245,
+            -0.00565272047288915,
+            -0.01127789902915816,
+            -0.000013044157119055902,
+            0.00005566373633024688,
+            0.0003918629154381154,
+            0.009230853332691278
+          ]
+        ],
+        "draws": 10000,
+        "scope": "Conditional on observed tanks, food/composition stratified bootstrap; blocks not independently resampled."
+      }
+    },
+    "observed69": {
+      "status": "SECONDARY_CONTAINER_CONTRASTS_COMPLETE",
+      "audit": {
+        "source_rows": 828,
+        "source_tanks": 69,
+        "mode": "observed69",
+        "design_classes": {
+          "strict": 64,
+          "numeric_text_missing": 1,
+          "observed_5_7": 4
+        },
+        "design_admitted_tanks": 69,
+        "usable_tanks_total": 69,
+        "design_tanks_per_cell": {
+          "High|D": 7,
+          "High|E": 7,
+          "High|N": 7,
+          "High|ND": 7,
+          "High|NE": 7,
+          "Low|D": 7,
+          "Low|E": 7,
+          "Low|N": 7,
+          "Low|ND": 6,
+          "Low|NE": 7
+        },
+        "usable_tanks_per_cell": {
+          "High|D": 7,
+          "High|E": 7,
+          "High|N": 7,
+          "High|ND": 7,
+          "High|NE": 7,
+          "Low|D": 7,
+          "Low|E": 7,
+          "Low|N": 7,
+          "Low|ND": 6,
+          "Low|NE": 7
+        },
+        "excluded_tanks": {},
+        "endpoint_completeness": {
+          "complete_rows_in_usable_tanks": 715,
+          "missing_duration": 109,
+          "missing_mass": 113,
+          "incomplete_either": 113
+        },
+        "complete_rows_by_cell_and_cohort": {
+          "High|D": {
+            "D": 79
+          },
+          "High|E": {
+            "E": 82
+          },
+          "High|N": {
+            "N": 83
+          },
+          "High|ND": {
+            "N": 40,
+            "D": 41
+          },
+          "High|NE": {
+            "N": 42,
+            "E": 40
+          },
+          "Low|D": {
+            "D": 47
+          },
+          "Low|E": {
+            "E": 74
+          },
+          "Low|N": {
+            "N": 65
+          },
+          "Low|ND": {
+            "N": 28,
+            "D": 26
+          },
+          "Low|NE": {
+            "N": 34,
+            "E": 34
+          }
+        },
+        "duration_definition": "Duration in days of the larval period, from the start of the larval part of the experiemnt to metamorphosis",
+        "mass_definition": "Mass at metamorphosis, in grams"
+      },
+      "contrasts": {
+        "High_D": {
+          "single_duration_difference": -1.9253246753246813,
+          "mixed_duration_difference": 3.5428571428571374,
+          "duration_interaction_days": 5.468181818181819,
+          "single_mass_lnRR": 0.018929494662327642,
+          "mixed_mass_lnRR": 0.10920239153399708,
+          "mass_log_interaction": 0.09027289687166944,
+          "means": {
+            "single_N": [
+              47.290043290043286,
+              0.4819835497835498
+            ],
+            "single_delayed": [
+              45.364718614718605,
+              0.4911941558441559
+            ],
+            "mixed_N": [
+              43.371428571428574,
+              0.4820833333333333
+            ],
+            "mixed_delayed": [
+              46.91428571428571,
+              0.53771
+            ]
+          },
+          "nominal_cold_delay_days": 6,
+          "usable_tanks": {
+            "N": 7,
+            "D": 7,
+            "ND": 7
+          },
+          "duration_interval95": [
+            2.380892857142849,
+            8.607159090909088
+          ],
+          "mass_log_interval95": [
+            -0.04509724073701532,
+            0.2266895905268787
+          ],
+          "block_common_support": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 4.26426767676768,
+          "equal_block_mass_interaction": 0.10730817156801452,
+          "leave_one_common_block_out_duration": {
+            "1": 3.7795454545454583,
+            "2": 4.73569023569024,
+            "3": 3.231144781144785,
+            "4": 5.310690235690238
+          }
+        },
+        "High_E": {
+          "single_duration_difference": -10.689393939393945,
+          "mixed_duration_difference": 2.2952380952380835,
+          "duration_interaction_days": 12.984632034632028,
+          "single_mass_lnRR": -0.029090018712098233,
+          "mixed_mass_lnRR": 0.19612605954959683,
+          "mass_log_interaction": 0.22521607826169507,
+          "means": {
+            "single_N": [
+              47.290043290043286,
+              0.4819835497835498
+            ],
+            "single_delayed": [
+              36.60064935064934,
+              0.4681646103896104
+            ],
+            "mixed_N": [
+              42.88095238095239,
+              0.4842476190476191
+            ],
+            "mixed_delayed": [
+              45.17619047619047,
+              0.5891745238095238
+            ]
+          },
+          "nominal_cold_delay_days": 12,
+          "usable_tanks": {
+            "N": 7,
+            "E": 7,
+            "NE": 7
+          },
+          "duration_interval95": [
+            10.10656385281386,
+            15.833468614718615
+          ],
+          "mass_log_interval95": [
+            0.09894450776612149,
+            0.35906829517371547
+          ],
+          "block_common_support": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 12.88491161616162,
+          "equal_block_mass_interaction": 0.2402078184235626,
+          "leave_one_common_block_out_duration": {
+            "1": 11.397474747474751,
+            "2": 13.361700336700343,
+            "3": 13.617003367003369,
+            "4": 13.16346801346802
+          }
+        },
+        "Low_D": {
+          "single_duration_difference": -4.852066584209446,
+          "mixed_duration_difference": 11.588888888888889,
+          "duration_interaction_days": 16.440955473098334,
+          "single_mass_lnRR": 0.03292805406642183,
+          "mixed_mass_lnRR": -0.04269078615919863,
+          "mass_log_interaction": -0.07561884022562046,
+          "means": {
+            "single_N": [
+              61.06261080189652,
+              0.3142961992372707
+            ],
+            "single_delayed": [
+              56.21054421768707,
+              0.3248176360544218
+            ],
+            "mixed_N": [
+              54.04722222222222,
+              0.32694416666666665
+            ],
+            "mixed_delayed": [
+              65.6361111111111,
+              0.3132803968253968
+            ]
+          },
+          "nominal_cold_delay_days": 6,
+          "usable_tanks": {
+            "N": 7,
+            "D": 7,
+            "ND": 6
+          },
+          "duration_interval95": [
+            11.822734230055662,
+            20.590555555555557
+          ],
+          "mass_log_interval95": [
+            -0.226128395966077,
+            0.08406459675623877
+          ],
+          "block_common_support": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 16.83092532467532,
+          "equal_block_mass_interaction": -0.13032567203906933,
+          "leave_one_common_block_out_duration": {
+            "1": 16.338239538239534,
+            "2": 15.5527417027417,
+            "3": 16.341233766233763,
+            "4": 19.091486291486287
+          }
+        },
+        "Low_E": {
+          "single_duration_difference": -10.246016285302005,
+          "mixed_duration_difference": 8.10170068027211,
+          "duration_interaction_days": 18.347716965574115,
+          "single_mass_lnRR": -0.1227974277693236,
+          "mixed_mass_lnRR": -0.04044800511554012,
+          "mass_log_interaction": 0.08234942265378348,
+          "means": {
+            "single_N": [
+              61.06261080189652,
+              0.3142961992372707
+            ],
+            "single_delayed": [
+              50.81659451659451,
+              0.27797701298701305
+            ],
+            "mixed_N": [
+              51.73809523809524,
+              0.3043461904761905
+            ],
+            "mixed_delayed": [
+              59.83979591836735,
+              0.29228163265306123
+            ]
+          },
+          "nominal_cold_delay_days": 12,
+          "usable_tanks": {
+            "N": 7,
+            "E": 7,
+            "NE": 7
+          },
+          "duration_interval95": [
+            14.040202406720281,
+            22.454646078128224
+          ],
+          "mass_log_interval95": [
+            -0.05808344284411427,
+            0.23067415195048988
+          ],
+          "block_common_support": [
+            "2",
+            "3",
+            "4"
+          ],
+          "equal_block_duration_interaction": 16.805796055796055,
+          "equal_block_mass_interaction": 0.03845336489121256,
+          "leave_one_common_block_out_duration": {
+            "2": 16.251082251082252,
+            "3": 18.39814213564213,
+            "4": 15.76816378066378
+          }
+        }
+      },
+      "bootstrap": {
+        "labels": [
+          "High_D_duration",
+          "High_E_duration",
+          "Low_D_duration",
+          "Low_E_duration",
+          "High_D_mass",
+          "High_E_mass",
+          "Low_D_mass",
+          "Low_E_mass"
+        ],
+        "covariance": [
+          [
+            2.495169117819643,
+            0.979711458263335,
+            0.07366529618764237,
+            0.017383111891407087,
+            0.0790633607621816,
+            0.030113659024506672,
+            -0.001892394179036641,
+            -0.0006166718112258357
+          ],
+          [
+            0.979711458263335,
+            2.1501562626607074,
+            0.052978489481004344,
+            0.016068465820270397,
+            0.02919747506637727,
+            0.0664889404314276,
+            0.00021133185788459034,
+            0.0010822923749507567
+          ],
+          [
+            0.07366529618764237,
+            0.052978489481004344,
+            5.118564446928113,
+            0.7198497684228999,
+            0.0021536908655829723,
+            0.0017266479949705846,
+            -0.0722319989762702,
+            -0.006634935619668731
+          ],
+          [
+            0.017383111891407087,
+            0.016068465820270397,
+            0.7198497684228999,
+            4.552016794397012,
+            0.000354447975130607,
+            0.0005168662215570181,
+            -0.006954476724204922,
+            0.01675048453898143
+          ],
+          [
+            0.0790633607621816,
+            0.02919747506637727,
+            0.0021536908655829723,
+            0.000354447975130607,
+            0.004723763162037556,
+            0.0014096244160026058,
+            -0.00008844753321279861,
+            0.000014457980763698923
+          ],
+          [
+            0.030113659024506672,
+            0.0664889404314276,
+            0.0017266479949705846,
+            0.0005168662215570181,
+            0.0014096244160026058,
+            0.004420696775793091,
+            -0.000008153227090864652,
+            0.000054963597893051036
+          ],
+          [
+            -0.001892394179036641,
+            0.00021133185788459034,
+            -0.0722319989762702,
+            -0.006954476724204922,
+            -0.00008844753321279861,
+            -0.000008153227090864652,
+            0.00634578046436853,
+            0.000534572819823066
+          ],
+          [
+            -0.0006166718112258357,
+            0.0010822923749507567,
+            -0.006634935619668731,
+            0.01675048453898143,
+            0.000014457980763698923,
+            0.000054963597893051036,
+            0.000534572819823066,
+            0.005760148381459212
+          ]
+        ],
+        "draws": 10000,
+        "scope": "Conditional on observed tanks, food/composition stratified bootstrap; blocks not independently resampled."
+      }
+    }
+  },
+  "postfit_descriptive": {
+    "decomposition": {
+      "High_D": {
+        "delayed_mixed_minus_single_days": 1.4486147186147278,
+        "normal_mixed_minus_single_days": -3.8900432900432875,
+        "duration_interaction_days": 5.338658008658015,
+        "mass_ratio_of_ratios": 1.0581669804651266,
+        "mass_ratio_interval": [
+          0.9238620525871285,
+          1.2113078606109404
+        ]
+      },
+      "High_E": {
+        "delayed_mixed_minus_single_days": 8.575541125541129,
+        "normal_mixed_minus_single_days": -4.409090909090899,
+        "duration_interaction_days": 12.984632034632028,
+        "mass_ratio_of_ratios": 1.2525933451449243,
+        "mass_ratio_interval": [
+          1.103235830465908,
+          1.4324100475027526
+        ]
+      },
+      "Low_D": {
+        "delayed_mixed_minus_single_days": 9.952789115646254,
+        "normal_mixed_minus_single_days": -6.405944135229859,
+        "duration_interaction_days": 16.358733250876114,
+        "mass_ratio_of_ratios": 0.8911531204117262,
+        "mass_ratio_interval": [
+          0.764936475330553,
+          1.0421221620451089
+        ]
+      },
+      "Low_E": {
+        "delayed_mixed_minus_single_days": 9.873405483405485,
+        "normal_mixed_minus_single_days": -10.589277468563175,
+        "duration_interaction_days": 20.46268295196866,
+        "mass_ratio_of_ratios": 1.100536543433329,
+        "mass_ratio_interval": [
+          0.9246349907940065,
+          1.3328647216864842
+        ]
+      }
+    },
+    "all_duration_intervals_positive_across_3_modes": true,
+    "all_equal_block_and_leave_one_block_points_positive": true,
+    "interpretation": "Relative duration interaction combines increased duration of delayed cohort and reduced duration of normal cohort. It is not the direct delay-induced cost or calendar mismatch. Mass contrasts heterogeneous; positive high-food 12-day mass ratio interaction is not fitness compensation. Complete-case endpoint selection and design-subset restriction are not ITT; mortality cannot be inferred from unobserved mass/duration. All contrasts one experiment, joint covariance retained. No primary eligible theta."
+  },
+  "provenance": {
+    "run": 45543842879,
+    "job": 138968560966,
+    "artifact_id": 14991015294,
+    "artifact_zip_sha256": "e4e3e86a71eac349a8e711422aad4eb2dc975417aab47a9ae528e382701ef904",
+    "extraction": "Exact aggregate JSON parsed from completed CI log; independently checked duration identity and source counts, not independent rerun. Provider MD5 and pinned SHA256 checked before data parsing. ZIP digest recorded from upload step; ZIP not separately downloaded.",
+    "synthetic_checks_passed": true
+  }
+}

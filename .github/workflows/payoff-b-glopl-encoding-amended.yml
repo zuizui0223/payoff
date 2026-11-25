@@ -1,0 +1,27 @@
+name: PAYOFF-B GloPL encoding-amended source frame
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/payoff-b-glopl-encoding-amended.yml'
+      - 'scripts/payoff_b_glopl_encoding_amended_screen_20261125.py'
+permissions:
+  contents: read
+jobs:
+  source:
+    if: github.head_ref == 'analysis/payoff-b-interaction-buffering-meta-20261125'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests openpyxl
+      - run: python scripts/payoff_b_glopl_encoding_amended_screen_20261125.py outputs/payoff_b_glopl_amended_source.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-glopl-amended-source
+          path: outputs/payoff_b_glopl_amended_source.json
+          if-no-files-found: warn

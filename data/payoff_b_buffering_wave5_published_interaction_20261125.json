@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-25",
+  "status": "PUBLISHED_EFFECT_AND_PREOUTCOME_FACTORIAL_SOURCE_PLAN",
+  "carneiro_machado_2025": {
+    "doi": "10.1093/aob/mcaf126",
+    "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12464942/",
+    "table": 2,
+    "study_site_year": "Brazil, one population, 2020",
+    "species": "Stigmaphyllon paralias",
+    "design": "Two naturally occurring peak/late flowering cohorts separated by 3–4 weeks; 90 initially assigned plants per cohort; 45 natural and 45 supplemented plants per cohort; tag attrition; flowering phase not randomized. Source states assigned treatments but randomization not explicit.",
+    "visit_proxy": {
+      "peak": 0.075,
+      "late": 0.936,
+      "n_peak_flowers": 134,
+      "n_late_flowers": 140
+    },
+    "pollen_limitation_indices": {
+      "peak": 0.74,
+      "late": 0.03
+    },
+    "published_interaction": {
+      "term": "Flowering time x treatment",
+      "estimate": -1.26,
+      "se": 0.31,
+      "chi2": 17.21,
+      "p": "<.001",
+      "scale": "binomial GLM coefficient, default logit interpretation; no original model code",
+      "oriented_contrast": "pollen-supplementation effect in low-overlap peak period minus high-overlap late period",
+      "oriented_log_odds_ratio_of_ratios": 1.26,
+      "variance": 0.0961,
+      "normal_95": [
+        0.6524,
+        1.8676
+      ],
+      "odds_ratio_of_odds_ratios": 3.5254214873653824,
+      "or_ratio_ci": [
+        1.9201436481771723,
+        6.472743159281983
+      ]
+    },
+    "descriptive_log_mean_ratio_interaction": 1.3166144404819007,
+    "descriptive_log_mean_ratio_limit": "Calculated from rounded reported pollen limitation indices, no variance; raw means and covariance unavailable. Not pooled, not transformed from log odds.",
+    "selection": {
+      "flower_size_by_flowering_time": {
+        "estimate": -2.14,
+        "se": 0.7,
+        "p": 0.002
+      },
+      "note": "source scale, not a pollen supplementation interaction"
+    },
+    "eligibility": "SECONDARY_OBSERVED_OVERLAP_X_SUPPLEMENTATION; published SE only, original unit/overdispersion and covariance cannot be audited; do not pool with primary logRR theta",
+    "raw_data": "available on request per paper; no request sent"
+  },
+  "pardee_2019": {
+    "doi": "10.1111/1365-2745.13152",
+    "archive": "https://zenodo.org/records/4970401",
+    "data_doi": "10.5061/dryad.kd1r166",
+    "design": "random snow removal × frost protection at plot level, 10 plots per combination, 2016 within plot pollen addition/open pollination in 3 species, 4 plants per treatment targeted; Mertensia no pollen addition",
+    "prior_art": "paper reports no pollen-supplementation effect for any species; early Claytonia snow removal reduced seed production 46.04%, visitation declined; late species responses differed",
+    "admission": "SOURCE CHECK RUNNING; snow removal changes abiotic exposure, pollinator phenology not manipulated, external pollen not endogenous recourse; secondary seasonal perturbation × experimental service-relief lane only",
+    "primary_theta_eligible": false
+  },
+  "vazquez_schema_correction": {
+    "source": "https://datadryad.org/dataset/doi%3A10.5061/dryad.37pvmcvmp",
+    "issue": "All nests were reared only for the first three study years; later years only unidentified nests brought to lab, so missing adult emergence does not equal zero offspring. Flower abundance sampling area changes (160, 500, 840 m² nominal design); exact counts/effort must be verified. Two species' brood cells estimated from cavity length.",
+    "decision": "HOLD former future emergence-outcome plan. Before any fit, restrict a prospective alternative to directly recorded brood cells of the three countable species, with sampling effort, nesting date and species identity checks. If source cannot distinguish complete count from imputed counts, hold; do not infer absence or combine selection-biased emergence.",
+    "raw_data_acquired": false
+  },
+  "primary_count": 0
+}

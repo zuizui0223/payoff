@@ -1,0 +1,312 @@
+{
+  "status": "SECONDARY_DESCRIPTIVE_FAMILY_CONTRASTS_COMPLETE",
+  "source_sha256": "e7d47607bc2501d73ca94d430104bec6adde1eeb89feb8c1344f0de211938488",
+  "primary_theta_added": 0,
+  "support": {
+    "N|PHA": {
+      "complete_duration_mass_rows": 78,
+      "immune_response_rows": 81
+    },
+    "D|PHA": {
+      "complete_duration_mass_rows": 69,
+      "immune_response_rows": 73
+    },
+    "N|APBS": {
+      "complete_duration_mass_rows": 17,
+      "immune_response_rows": 17
+    },
+    "D|APBS": {
+      "complete_duration_mass_rows": 17,
+      "immune_response_rows": 17
+    },
+    "N|Control": {
+      "complete_duration_mass_rows": 79,
+      "immune_response_rows": 0
+    },
+    "D|Control": {
+      "complete_duration_mass_rows": 83,
+      "immune_response_rows": 0
+    }
+  },
+  "result": {
+    "n_families": 17,
+    "cell_means": {
+      "N|PHA": {
+        "duration": 37.28529411764706,
+        "mass": 0.5106754901960784
+      },
+      "N|APBS": {
+        "duration": 37.529411764705884,
+        "mass": 0.5338823529411765
+      },
+      "N|Control": {
+        "duration": 36.008823529411764,
+        "mass": 0.5012715686274509
+      },
+      "D|PHA": {
+        "duration": 37.287254901960786,
+        "mass": 0.4264294117647059
+      },
+      "D|APBS": {
+        "duration": 32.11764705882353,
+        "mass": 0.4374705882352941
+      },
+      "D|Control": {
+        "duration": 33.76764705882353,
+        "mass": 0.46185294117647063
+      }
+    },
+    "duration_delayed_minus_normal_days": {
+      "PHA": 0.001960784313723707,
+      "APBS": -5.411764705882355,
+      "Control": -2.241176470588236
+    },
+    "duration_interaction_days": {
+      "PHA_minus_APBS": 5.413725490196079,
+      "APBS_minus_Control": -3.170588235294119,
+      "PHA_minus_Control": 2.24313725490196
+    },
+    "mass_delayed_vs_normal_lnRR": {
+      "PHA": -0.18028749252805815,
+      "APBS": -0.19916602519643212,
+      "Control": -0.08190147610693639
+    },
+    "mass_log_interaction": {
+      "PHA_minus_APBS": 0.01887853266837397,
+      "APBS_minus_Control": -0.11726454908949573,
+      "PHA_minus_Control": -0.09838601642112176
+    },
+    "immune_response_cell_means_percent": {
+      "N|PHA": 6.996675476650666,
+      "N|APBS": 0.8950224540025431,
+      "D|PHA": 1.76323887721867,
+      "D|APBS": -1.2756045232246203
+    },
+    "immune_response_delayed_minus_normal_pp": {
+      "PHA": -5.233436599431997,
+      "APBS": -2.1706269772271636
+    },
+    "immune_response_interaction_pp": -3.062809622204833
+  },
+  "components": [
+    {
+      "component": 1,
+      "all_source_families": 9,
+      "complete_families": 9
+    },
+    {
+      "component": 2,
+      "all_source_families": 9,
+      "complete_families": 7
+    },
+    {
+      "component": 3,
+      "all_source_families": 3,
+      "complete_families": 1
+    }
+  ],
+  "leave_one_parent_component_out": {
+    "1": {
+      "n_families": 8,
+      "cell_means": {
+        "N|PHA": {
+          "duration": 36.84375,
+          "mass": 0.50690625
+        },
+        "N|APBS": {
+          "duration": 38.25,
+          "mass": 0.492875
+        },
+        "N|Control": {
+          "duration": 35.425,
+          "mass": 0.48385625
+        },
+        "D|PHA": {
+          "duration": 37.239583333333336,
+          "mass": 0.42931874999999997
+        },
+        "D|APBS": {
+          "duration": 31.25,
+          "mass": 0.46125
+        },
+        "D|Control": {
+          "duration": 33.51875,
+          "mass": 0.46571250000000003
+        }
+      },
+      "duration_delayed_minus_normal_days": {
+        "PHA": 0.3958333333333357,
+        "APBS": -7,
+        "Control": -1.90625
+      },
+      "duration_interaction_days": {
+        "PHA_minus_APBS": 7.395833333333336,
+        "APBS_minus_Control": -5.09375,
+        "PHA_minus_Control": 2.3020833333333357
+      },
+      "mass_delayed_vs_normal_lnRR": {
+        "PHA": -0.16612642522240803,
+        "APBS": -0.06631539684305429,
+        "Control": -0.0382193675276773
+      },
+      "mass_log_interaction": {
+        "PHA_minus_APBS": -0.09981102837935374,
+        "APBS_minus_Control": -0.02809602931537699,
+        "PHA_minus_Control": -0.12790705769473074
+      },
+      "immune_response_cell_means_percent": {
+        "N|PHA": 4.454530666166764,
+        "N|APBS": -0.1392915845299747,
+        "D|PHA": 1.2360679576065212,
+        "D|APBS": -3.2626547160821353
+      },
+      "immune_response_delayed_minus_normal_pp": {
+        "PHA": -3.218462708560242,
+        "APBS": -3.1233631315521606
+      },
+      "immune_response_interaction_pp": -0.09509957700808158
+    },
+    "2": {
+      "n_families": 10,
+      "cell_means": {
+        "N|PHA": {
+          "duration": 37.83,
+          "mass": 0.5149233333333333
+        },
+        "N|APBS": {
+          "duration": 36.8,
+          "mass": 0.5559000000000001
+        },
+        "N|Control": {
+          "duration": 36.455,
+          "mass": 0.5112566666666667
+        },
+        "D|PHA": {
+          "duration": 37.730000000000004,
+          "mass": 0.4292083333333333
+        },
+        "D|APBS": {
+          "duration": 32.9,
+          "mass": 0.42300000000000004
+        },
+        "D|Control": {
+          "duration": 33.99,
+          "mass": 0.45568
+        }
+      },
+      "duration_delayed_minus_normal_days": {
+        "PHA": -0.09999999999999432,
+        "APBS": -3.8999999999999986,
+        "Control": -2.4649999999999963
+      },
+      "duration_interaction_days": {
+        "PHA_minus_APBS": 3.8000000000000043,
+        "APBS_minus_Control": -1.4350000000000023,
+        "PHA_minus_Control": 2.365000000000002
+      },
+      "mass_delayed_vs_normal_lnRR": {
+        "PHA": -0.1820755957322341,
+        "APBS": -0.2732162429131458,
+        "Control": -0.11508093842323652
+      },
+      "mass_log_interaction": {
+        "PHA_minus_APBS": 0.09114064718091167,
+        "APBS_minus_Control": -0.15813530448990926,
+        "PHA_minus_Control": -0.06699465730899759
+      },
+      "immune_response_cell_means_percent": {
+        "N|PHA": 9.289761934314221,
+        "N|APBS": 1.8286800069486773,
+        "D|PHA": 1.8305617446852742,
+        "D|APBS": 0.37224957418988114
+      },
+      "immune_response_delayed_minus_normal_pp": {
+        "PHA": -7.459200189628946,
+        "APBS": -1.456430432758796
+      },
+      "immune_response_interaction_pp": -6.00276975687015
+    },
+    "3": {
+      "n_families": 16,
+      "cell_means": {
+        "N|PHA": {
+          "duration": 37.165625,
+          "mass": 0.5099052083333333
+        },
+        "N|APBS": {
+          "duration": 37.625,
+          "mass": 0.540625
+        },
+        "N|Control": {
+          "duration": 36.021875,
+          "mass": 0.5037385416666667
+        },
+        "D|PHA": {
+          "duration": 37.034375,
+          "mass": 0.42324791666666667
+        },
+        "D|APBS": {
+          "duration": 32.0625,
+          "mass": 0.434625
+        },
+        "D|Control": {
+          "duration": 33.753125,
+          "mass": 0.46378125000000003
+        }
+      },
+      "duration_delayed_minus_normal_days": {
+        "PHA": -0.13125000000000142,
+        "APBS": -5.5625,
+        "Control": -2.2687500000000043
+      },
+      "duration_interaction_days": {
+        "PHA_minus_APBS": 5.431249999999999,
+        "APBS_minus_Control": -3.2937499999999957,
+        "PHA_minus_Control": 2.137500000000003
+      },
+      "mass_delayed_vs_normal_lnRR": {
+        "PHA": -0.18626674365772614,
+        "APBS": -0.21824228735811832,
+        "Control": -0.08264436983497196
+      },
+      "mass_log_interaction": {
+        "PHA_minus_APBS": 0.031975543700392184,
+        "APBS_minus_Control": -0.13559791752314637,
+        "PHA_minus_Control": -0.10362237382275417
+      },
+      "immune_response_cell_means_percent": {
+        "N|PHA": 6.834568845852897,
+        "N|APBS": 0.8286435026774681,
+        "D|PHA": 1.9847475448581167,
+        "D|APBS": -1.311988237679926
+      },
+      "immune_response_delayed_minus_normal_pp": {
+        "PHA": -4.849821300994781,
+        "APBS": -2.140631740357394
+      },
+      "immune_response_interaction_pp": -2.7091895606373866
+    }
+  },
+  "uncertainty_status": "HOLD_INFERENTIAL_VARIANCE_THREE_PARENT_COMPONENTS_AND_UNVERIFIED_ASSIGNMENT",
+  "endpoint_note": "Immune response uses all observed injected responses within same complete families, not same individual endpoint-complete subset. No causal mediation.",
+  "postfit_summary": {
+    "complete_duration_mass_rows": 343,
+    "immune_response_rows": 188,
+    "pha_vs_apbs_duration_leave_one_component_out_range": [
+      3.8000000000000043,
+      7.395833333333336
+    ],
+    "immune_interaction_leave_one_component_out_range": [
+      -6.00276975687015,
+      -0.09509957700808158
+    ],
+    "interpretation": "Immune challenge vs sham weakens delayed-cohort developmental acceleration in point estimates, consistent with previously published mixed-model result. Handling/sham comparison distinct. Neither the descriptive immune-response interaction nor heterogeneous mass response establishes a causal cost of realized correction. Three connected parental components preclude naive independent-family precision; no inferred variance. Cohort overlap with JAE unresolved."
+  },
+  "provenance": {
+    "run": 45544222895,
+    "job": 138969813827,
+    "artifact_id": 14990786608,
+    "artifact_zip_sha256": "2c69a7235ccd724c20f0707a253788fa687afd488b0922c14916388f9674eeff",
+    "extraction": "Exact aggregate JSON from completed calculation step, verified original source hashes and design; recomputed arithmetic from returned means. ZIP digest from upload log, not independently downloaded."
+  }
+}

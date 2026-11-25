@@ -1,0 +1,226 @@
+{
+  "status": "EXPLORATORY_SOURCE_TABLE_EXTRACTION_NOT_META_ANALYSIS",
+  "date": "2026-11-25",
+  "note": "These are published summaries or previously executed repo estimates, not newly fitted independent effects. All share their respective source cohort. Missing uncertainties remain null. Approximate normal intervals for printed SEs are arithmetic diagnostics only, not multiplicity-corrected or causal. No primary factorial buffer interaction admitted.",
+  "records": [
+    {
+      "study": "Samplonius2016",
+      "endpoint": "caterpillar provisioning",
+      "predictor": "standardized Match^2",
+      "value": -0.345,
+      "se": 0.103,
+      "unit": "prey per chick per hour per source-scaled predictor",
+      "source": "Table 1",
+      "class": "published adjusted association; selected model",
+      "url": "https://doi.org/10.1111/1365-2656.12554",
+      "normal_interval_approx": [
+        -0.54688,
+        -0.14312
+      ]
+    },
+    {
+      "study": "Samplonius2016",
+      "endpoint": "flying insect provisioning",
+      "predictor": "standardized Match^2",
+      "value": 0.142,
+      "se": 0.054,
+      "unit": "prey per chick per hour per source-scaled predictor",
+      "source": "Table 1",
+      "class": "published adjusted association; selected model",
+      "url": "https://doi.org/10.1111/1365-2656.12554",
+      "normal_interval_approx": [
+        0.03616,
+        0.24784
+      ]
+    },
+    {
+      "study": "Samplonius2016",
+      "endpoint": "spider provisioning",
+      "predictor": "standardized Match^2",
+      "value": 0.104,
+      "se": 0.045,
+      "unit": "prey per chick per hour per source-scaled predictor",
+      "source": "Table 1; habitat interaction present",
+      "class": "published adjusted association; selected model",
+      "url": "https://doi.org/10.1111/1365-2656.12554",
+      "normal_interval_approx": [
+        0.0158,
+        0.1922
+      ]
+    },
+    {
+      "study": "Samplonius2016",
+      "endpoint": "nestling day 7 mass",
+      "predictor": "standardized Match^2",
+      "value": -0.354,
+      "se": 0.104,
+      "unit": "g per source-scaled predictor",
+      "source": "Table 2",
+      "class": "published adjusted association; selected model",
+      "url": "https://doi.org/10.1111/1365-2656.12554",
+      "normal_interval_approx": [
+        -0.55784,
+        -0.15016
+      ]
+    },
+    {
+      "study": "Samplonius2016",
+      "endpoint": "nestling day 12 tarsus",
+      "predictor": "standardized Match^2",
+      "value": -0.091,
+      "se": 0.034,
+      "unit": "mm per source-scaled predictor",
+      "source": "Table 2",
+      "class": "published adjusted association; selected model",
+      "url": "https://doi.org/10.1111/1365-2656.12554",
+      "normal_interval_approx": [
+        -0.15764,
+        -0.02436
+      ]
+    },
+    {
+      "study": "Samplonius2016",
+      "endpoint": "nestling day 12 eighth primary feather",
+      "predictor": "standardized Match^2",
+      "value": -0.852,
+      "se": 0.294,
+      "unit": "mm per source-scaled predictor",
+      "source": "Table 2",
+      "class": "published adjusted association; selected model",
+      "url": "https://doi.org/10.1111/1365-2656.12554",
+      "normal_interval_approx": [
+        -1.42824,
+        -0.27576
+      ]
+    },
+    {
+      "study": "Samplonius2016",
+      "endpoint": "nestling day 12 mass",
+      "predictor": "standardized older nestling flying insect feeding rate",
+      "value": -0.433,
+      "se": 0.121,
+      "unit": "g per source-scaled predictor",
+      "source": "Table 2",
+      "class": "published adjusted association; selected model; reverse causation possible",
+      "url": "https://doi.org/10.1111/1365-2656.12554",
+      "normal_interval_approx": [
+        -0.67016,
+        -0.19584
+      ]
+    },
+    {
+      "study": "Samplonius2016",
+      "endpoint": "nestling day 12 tarsus",
+      "predictor": "standardized younger nestling spider feeding rate",
+      "value": 0.095,
+      "se": 0.043,
+      "unit": "mm per source-scaled predictor",
+      "source": "Table 2",
+      "class": "published adjusted association; selected model",
+      "url": "https://doi.org/10.1111/1365-2656.12554",
+      "normal_interval_approx": [
+        0.01072,
+        0.17928
+      ]
+    },
+    {
+      "study": "Nanke2026",
+      "endpoint": "flower longevity",
+      "predictor": "warming vs ambient",
+      "value": -8,
+      "se": null,
+      "unit": "percent relative change (rounded abstract)",
+      "source": "Dryad author abstract",
+      "class": "published experimental summary; not delay or recourse effect",
+      "url": "https://doi.org/10.5061/dryad.wm37pvn3g"
+    },
+    {
+      "study": "Nanke2026",
+      "endpoint": "seed production",
+      "predictor": "delayed pollination",
+      "value": -22,
+      "se": null,
+      "unit": "percent relative change (rounded abstract)",
+      "source": "Dryad author abstract",
+      "class": "published experimental summary; independent longevity intervention absent",
+      "url": "https://doi.org/10.5061/dryad.wm37pvn3g"
+    },
+    {
+      "study": "Dossman2023",
+      "endpoint": "migration rate",
+      "predictor": "10-day relative departure delay",
+      "value": 43,
+      "se": null,
+      "unit": "percent increase as reported",
+      "source": "article abstract",
+      "class": "published observational association",
+      "url": "https://doi.org/10.1002/ecy.3938"
+    },
+    {
+      "study": "Dossman2023",
+      "endpoint": "apparent annual survival",
+      "predictor": "10-day relative departure delay",
+      "value": -6.3,
+      "se": null,
+      "unit": "percent decline as reported; absolute vs relative not resolved",
+      "source": "article abstract and discussion",
+      "class": "published observational association; not a causal cost of speed",
+      "url": "https://doi.org/10.1002/ecy.3938"
+    },
+    {
+      "study": "Ortega2023",
+      "endpoint": "stopover duration",
+      "predictor": "signed departure phase",
+      "value": -0.689113,
+      "se": null,
+      "ci95": [
+        -0.815051,
+        -0.572581
+      ],
+      "unit": "days/day",
+      "source": "PAYOFF PR #413; bootstrap",
+      "class": "post-open original-data individual/year FE reanalysis; not independent from paper",
+      "url": "https://github.com/zuizui0223/payoff/pull/413"
+    },
+    {
+      "study": "Bontekoe2023",
+      "endpoint": "migration propensity",
+      "predictor": "experimental delay",
+      "value": 0.46875,
+      "se": null,
+      "unit": "observed fraction in delayed cohort",
+      "source": "article Results (a), 15/32",
+      "class": "published experimental group count; not shared-destination compensation",
+      "url": "https://doi.org/10.1098/rspb.2023.1268"
+    },
+    {
+      "study": "Bontekoe2023",
+      "endpoint": "migration propensity",
+      "predictor": "control/naturally timed",
+      "value": 1,
+      "se": null,
+      "unit": "observed fraction in both comparison cohorts",
+      "source": "article Results (a), all migrated",
+      "class": "published experimental group observation; do not merge comparison cohorts for inference",
+      "url": "https://doi.org/10.1098/rspb.2023.1268"
+    },
+    {
+      "study": "Samplonius2016",
+      "endpoint": "total provisioning rate",
+      "predictor": "season/match",
+      "value": null,
+      "se": null,
+      "unit": "prey per chick per hour",
+      "source": "Table 1; match term absent from selected model",
+      "class": "not estimable from printed coefficient; absent term is not a zero effect",
+      "url": "https://doi.org/10.1111/1365-2656.12554"
+    }
+  ],
+  "derived_descriptive": {
+    "nanke_rounded_seed_ratio": 0.78,
+    "nanke_rounded_seed_lnRR": -0.2484613592984996,
+    "bontekoe_delayed_migration_fraction": 0.46875,
+    "bontekoe_descriptive_difference_vs_all_migrating_comparison": -0.53125,
+    "notes": "Nanke lnRR from rounded reported percent, no sampling variance and no factorial interaction. Bontekoe difference is descriptive, no pooled comparison or causal mortality conclusion."
+  }
+}

@@ -1,0 +1,27 @@
+name: PAYOFF-B Burraco thermal source gate
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/payoff-b-burraco-thermal-source.yml'
+      - 'scripts/payoff_b_burraco_thermal_source_gate_wave14_20261125.py'
+permissions:
+  contents: read
+jobs:
+  source:
+    if: github.head_ref == 'analysis/payoff-b-interaction-buffering-meta-20261125'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests openpyxl
+      - run: python scripts/payoff_b_burraco_thermal_source_gate_wave14_20261125.py outputs/payoff_b_burraco_thermal_source.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-burraco-thermal-source
+          path: outputs/payoff_b_burraco_thermal_source.json
+          if-no-files-found: warn

@@ -1,0 +1,2765 @@
+{
+  "status": "SECONDARY_THERMAL_ANALYSIS_COMPLETE",
+  "source_sha256": "10d4be0c29be5b767ceddd44c014ed1f704f95c3a1b87eddfae1d96dd091de53",
+  "primary_theta_added": 0,
+  "modes": {
+    "strict": {
+      "status": "SECONDARY_CONDITIONAL_CONTRASTS_COMPLETE",
+      "audit": {
+        "mode": "strict",
+        "observed_rows": 785,
+        "family_count_duration_mass": 11,
+        "family_count_survival": 11,
+        "duration_mass_complete_rows_in_included_families": 693,
+        "per_cell_support": {
+          "0|warm|full": {
+            "observed_rows": 66,
+            "survived": 65,
+            "complete_survivor_endpoints": 65,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "0|warm|limited": {
+            "observed_rows": 66,
+            "survived": 55,
+            "complete_survivor_endpoints": 55,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "0|cold|full": {
+            "observed_rows": 66,
+            "survived": 64,
+            "complete_survivor_endpoints": 64,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "0|cold|limited": {
+            "observed_rows": 66,
+            "survived": 59,
+            "complete_survivor_endpoints": 59,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|warm|full": {
+            "observed_rows": 66,
+            "survived": 62,
+            "complete_survivor_endpoints": 62,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|warm|limited": {
+            "observed_rows": 64,
+            "survived": 56,
+            "complete_survivor_endpoints": 56,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|cold|full": {
+            "observed_rows": 66,
+            "survived": 65,
+            "complete_survivor_endpoints": 65,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|cold|limited": {
+            "observed_rows": 66,
+            "survived": 55,
+            "complete_survivor_endpoints": 55,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|warm|full": {
+            "observed_rows": 66,
+            "survived": 58,
+            "complete_survivor_endpoints": 58,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|warm|limited": {
+            "observed_rows": 66,
+            "survived": 52,
+            "complete_survivor_endpoints": 51,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|cold|full": {
+            "observed_rows": 66,
+            "survived": 60,
+            "complete_survivor_endpoints": 58,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|cold|limited": {
+            "observed_rows": 61,
+            "survived": 45,
+            "complete_survivor_endpoints": 45,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          }
+        },
+        "missing_planned_slots_by_mode": 7,
+        "family_ids_overlap": 11,
+        "survival_intended_slot_bounds": {
+          "0|warm|full": [
+            0.9848484848484848,
+            0.9848484848484848
+          ],
+          "0|warm|limited": [
+            0.8333333333333335,
+            0.8333333333333335
+          ],
+          "0|cold|full": [
+            0.9696969696969698,
+            0.9696969696969698
+          ],
+          "0|cold|limited": [
+            0.893939393939394,
+            0.893939393939394
+          ],
+          "6|warm|full": [
+            0.9393939393939394,
+            0.9393939393939394
+          ],
+          "6|warm|limited": [
+            0.8484848484848485,
+            0.8787878787878789
+          ],
+          "6|cold|full": [
+            0.9848484848484849,
+            0.9848484848484849
+          ],
+          "6|cold|limited": [
+            0.8333333333333333,
+            0.8333333333333333
+          ],
+          "12|warm|full": [
+            0.8787878787878788,
+            0.8787878787878788
+          ],
+          "12|warm|limited": [
+            0.7878787878787878,
+            0.7878787878787878
+          ],
+          "12|cold|full": [
+            0.9090909090909091,
+            0.9090909090909091
+          ],
+          "12|cold|limited": [
+            0.6818181818181818,
+            0.7575757575757577
+          ]
+        }
+      },
+      "duration": {
+        "family_n": 11,
+        "cell_means": {
+          "0|warm|full": 45.71212121212121,
+          "0|warm|limited": 75.93939393939394,
+          "0|cold|full": 65.27575757575758,
+          "0|cold|limited": 90.98787878787878,
+          "6|warm|full": 40.557575757575755,
+          "6|warm|limited": 66.62424242424241,
+          "6|cold|full": 60.103030303030295,
+          "6|cold|limited": 91.32424242424244,
+          "12|warm|full": 37.196969696969695,
+          "12|warm|limited": 74.88787878787878,
+          "12|cold|full": 57.84848484848485,
+          "12|cold|limited": 112.01060606060605
+        },
+        "effects": {
+          "delay|6|warm|full": {
+            "estimate": -5.154545454545456,
+            "interval95": [
+              -6.0060606060606005,
+              -4.166666666666664
+            ],
+            "variance_conditional": 0.22363654023584245
+          },
+          "nominal_recovery|6|warm|full": {
+            "estimate": 0.8590909090909093,
+            "interval95": [
+              0.6944444444444441,
+              1.0010101010101
+            ],
+            "variance_conditional": 0.0062121261176622915
+          },
+          "delay|6|warm|limited": {
+            "estimate": -9.315151515151527,
+            "interval95": [
+              -11.80337121212122,
+              -6.5892803030302955
+            ],
+            "variance_conditional": 1.8084505573771144
+          },
+          "nominal_recovery|6|warm|limited": {
+            "estimate": 1.5525252525252544,
+            "interval95": [
+              1.0982133838383823,
+              1.9672285353535361
+            ],
+            "variance_conditional": 0.05023473770491985
+          },
+          "delay|6|cold|full": {
+            "estimate": -5.172727272727286,
+            "interval95": [
+              -7.178863636363624,
+              -3.030303030303024
+            ],
+            "variance_conditional": 1.1340364606377098
+          },
+          "nominal_recovery|6|cold|full": {
+            "estimate": 0.8621212121212144,
+            "interval95": [
+              0.505050505050504,
+              1.1964772727272703
+            ],
+            "variance_conditional": 0.03150101279549194
+          },
+          "delay|6|cold|limited": {
+            "estimate": 0.3363636363636573,
+            "interval95": [
+              -2.924318181818193,
+              4.236439393939377
+            ],
+            "variance_conditional": 3.3613030077060904
+          },
+          "nominal_recovery|6|cold|limited": {
+            "estimate": -0.05606060606060955,
+            "interval95": [
+              -0.7060732323232297,
+              0.48738636363636534
+            ],
+            "variance_conditional": 0.09336952799183587
+          },
+          "food_interaction|6|warm": {
+            "estimate": -4.160606060606071,
+            "interval95": [
+              -6.63640151515154,
+              -1.343901515151516
+            ],
+            "variance_conditional": 1.8605792659379645,
+            "leave_one_family_range": [
+              -5.251666666666672,
+              -3.5933333333333337
+            ]
+          },
+          "food_interaction|6|cold": {
+            "estimate": 5.5090909090909435,
+            "interval95": [
+              2.257575757575758,
+              9.036363636363625
+            ],
+            "variance_conditional": 2.983316983249378,
+            "leave_one_family_range": [
+              4.293333333333344,
+              6.326666666666689
+            ]
+          },
+          "room_interaction|6|full": {
+            "estimate": -0.018181818181830067,
+            "interval95": [
+              -2.296969696969704,
+              2.1031060606060654
+            ],
+            "variance_conditional": 1.2438866475105759,
+            "leave_one_family_range": [
+              -0.45333333333334025,
+              0.7333333333333059
+            ]
+          },
+          "room_interaction|6|limited": {
+            "estimate": 9.651515151515184,
+            "interval95": [
+              5.1029924242424025,
+              13.942424242424238
+            ],
+            "variance_conditional": 5.177834547391169,
+            "leave_one_family_range": [
+              8.316666666666677,
+              11.38833333333335
+            ]
+          },
+          "three_way|6": {
+            "estimate": 9.669696969697014,
+            "interval95": [
+              5.130303030303067,
+              13.793939393939384
+            ],
+            "variance_conditional": 4.8465778414480365,
+            "leave_one_family_range": [
+              8.570000000000022,
+              11.08833333333336
+            ]
+          },
+          "delay|12|warm|full": {
+            "estimate": -8.515151515151516,
+            "interval95": [
+              -9.769696969696973,
+              -7.324166666666658
+            ],
+            "variance_conditional": 0.3948693277055902
+          },
+          "nominal_recovery|12|warm|full": {
+            "estimate": 0.7095959595959597,
+            "interval95": [
+              0.6103472222222214,
+              0.8141414141414144
+            ],
+            "variance_conditional": 0.0027421481090665984
+          },
+          "delay|12|warm|limited": {
+            "estimate": -1.0515151515151615,
+            "interval95": [
+              -4.528825757575774,
+              2.448560606060609
+            ],
+            "variance_conditional": 3.154637026145596
+          },
+          "nominal_recovery|12|warm|limited": {
+            "estimate": 0.08762626262626345,
+            "interval95": [
+              -0.20404671717171746,
+              0.3774021464646478
+            ],
+            "variance_conditional": 0.021907201570455528
+          },
+          "delay|12|cold|full": {
+            "estimate": -7.4272727272727295,
+            "interval95": [
+              -9.037954545454554,
+              -5.857575757575759
+            ],
+            "variance_conditional": 0.6660819425962564
+          },
+          "nominal_recovery|12|cold|full": {
+            "estimate": 0.6189393939393941,
+            "interval95": [
+              0.48813131313131325,
+              0.7531628787878794
+            ],
+            "variance_conditional": 0.004625569045807337
+          },
+          "delay|12|cold|limited": {
+            "estimate": 21.022727272727266,
+            "interval95": [
+              15.886174242424218,
+              26.32439393939394
+            ],
+            "variance_conditional": 7.0474908237931215
+          },
+          "nominal_recovery|12|cold|limited": {
+            "estimate": -1.7518939393939388,
+            "interval95": [
+              -2.1936994949494952,
+              -1.3238478535353517
+            ],
+            "variance_conditional": 0.04894090849856334
+          },
+          "food_interaction|12|warm": {
+            "estimate": 7.463636363636354,
+            "interval95": [
+              4.19083333333333,
+              10.731818181818191
+            ],
+            "variance_conditional": 2.775767501727593,
+            "leave_one_family_range": [
+              6.351666666666645,
+              8.289999999999992
+            ]
+          },
+          "food_interaction|12|cold": {
+            "estimate": 28.449999999999996,
+            "interval95": [
+              23.666628787878807,
+              33.497045454545486
+            ],
+            "variance_conditional": 6.200753730175376,
+            "leave_one_family_range": [
+              26.864999999999988,
+              29.71999999999999
+            ]
+          },
+          "room_interaction|12|full": {
+            "estimate": 1.0878787878787861,
+            "interval95": [
+              -0.6757575757575658,
+              2.690909090909102
+            ],
+            "variance_conditional": 0.745725301414417,
+            "leave_one_family_range": [
+              0.6966666666666512,
+              1.664999999999985
+            ]
+          },
+          "room_interaction|12|limited": {
+            "estimate": 22.074242424242428,
+            "interval95": [
+              15.802954545454554,
+              28.172765151515136
+            ],
+            "variance_conditional": 9.976643776851887,
+            "leave_one_family_range": [
+              20.708333333333357,
+              24.146666666666675
+            ]
+          },
+          "three_way|12": {
+            "estimate": 20.98636363636364,
+            "interval95": [
+              14.992386363636372,
+              26.507651515151508
+            ],
+            "variance_conditional": 8.503465714363884,
+            "leave_one_family_range": [
+              19.53166666666666,
+              23.29666666666668
+            ]
+          }
+        },
+        "bootstrap_draws": 10000,
+        "uncertainty": "whole-family bootstrap, conditional on two observed rooms; not replicated temperature inference"
+      },
+      "mass": {
+        "family_n": 11,
+        "cell_means": {
+          "0|warm|full": 0.4998590909090909,
+          "0|warm|limited": 0.2610166666666667,
+          "0|cold|full": 0.6351454545454546,
+          "0|cold|limited": 0.32936393939393943,
+          "6|warm|full": 0.46272409090909083,
+          "6|warm|limited": 0.2377193939393939,
+          "6|cold|full": 0.6916175757575758,
+          "6|cold|limited": 0.3182862121212121,
+          "12|warm|full": 0.5218863636363636,
+          "12|warm|limited": 0.2383024242424242,
+          "12|cold|full": 0.6356575757575759,
+          "12|cold|limited": 0.3085628787878788
+        },
+        "effects": {
+          "delay|6|warm|full": {
+            "estimate": -0.0771952800275089,
+            "interval95": [
+              -0.15700774216492266,
+              -0.0036303516106908013
+            ],
+            "variance_conditional": 0.0015017758158581945
+          },
+          "delay|6|warm|limited": {
+            "estimate": -0.09349330122163763,
+            "interval95": [
+              -0.14130246993495624,
+              -0.0483355046860029
+            ],
+            "variance_conditional": 0.00056529795903017
+          },
+          "delay|6|cold|full": {
+            "estimate": 0.08517913173129353,
+            "interval95": [
+              0.04559139523734216,
+              0.12820331707174856
+            ],
+            "variance_conditional": 0.0004548192403738067
+          },
+          "delay|6|cold|limited": {
+            "estimate": -0.034212322038369145,
+            "interval95": [
+              -0.10320676484443071,
+              0.032367684716544956
+            ],
+            "variance_conditional": 0.0011996473958593163
+          },
+          "food_interaction|6|warm": {
+            "estimate": -0.016298021194128723,
+            "interval95": [
+              -0.06721493544762998,
+              0.046843870264769424
+            ],
+            "variance_conditional": 0.0008562501787373682,
+            "leave_one_family_range": [
+              -0.038873316341597144,
+              -0.0076862215276144175
+            ]
+          },
+          "food_interaction|6|cold": {
+            "estimate": -0.11939145376966268,
+            "interval95": [
+              -0.20138533692111335,
+              -0.03658114986072116
+            ],
+            "variance_conditional": 0.0017948618242418933,
+            "leave_one_family_range": [
+              -0.14323467844656332,
+              -0.09882623608676872
+            ]
+          },
+          "room_interaction|6|full": {
+            "estimate": 0.16237441175880243,
+            "interval95": [
+              0.06346484789634639,
+              0.2743537605577345
+            ],
+            "variance_conditional": 0.0028675897534153243,
+            "leave_one_family_range": [
+              0.12349710090671981,
+              0.18927055020684214
+            ]
+          },
+          "room_interaction|6|limited": {
+            "estimate": 0.05928097918326848,
+            "interval95": [
+              -0.014011325357892547,
+              0.13716271530832833
+            ],
+            "variance_conditional": 0.0014861064893194815,
+            "leave_one_family_range": [
+              0.03317220194364289,
+              0.07662295144315875
+            ]
+          },
+          "three_way|6": {
+            "estimate": -0.10309343257553395,
+            "interval95": [
+              -0.22011157837678264,
+              0.010788265861599712
+            ],
+            "variance_conditional": 0.0035011663158528573,
+            "leave_one_family_range": [
+              -0.13432077000754172,
+              -0.06474803155303503
+            ]
+          },
+          "delay|12|warm|full": {
+            "estimate": 0.04312362947844169,
+            "interval95": [
+              -0.031857129600819455,
+              0.12452382287558376
+            ],
+            "variance_conditional": 0.0016047721150293226
+          },
+          "delay|12|warm|limited": {
+            "estimate": -0.0910437051220401,
+            "interval95": [
+              -0.14544189922603992,
+              -0.03760649289600473
+            ],
+            "variance_conditional": 0.0007784794004329719
+          },
+          "delay|12|cold|full": {
+            "estimate": 0.0008059805141039597,
+            "interval95": [
+              -0.04835940328806602,
+              0.05138787648846718
+            ],
+            "variance_conditional": 0.0006624156388436351
+          },
+          "delay|12|cold|limited": {
+            "estimate": -0.06523769453696648,
+            "interval95": [
+              -0.11434104851003192,
+              -0.020243102370517345
+            ],
+            "variance_conditional": 0.0005878504094406948
+          },
+          "food_interaction|12|warm": {
+            "estimate": -0.1341673346004818,
+            "interval95": [
+              -0.21320818550394213,
+              -0.05117034785610244
+            ],
+            "variance_conditional": 0.0017510608827408945,
+            "leave_one_family_range": [
+              -0.15768078518555934,
+              -0.11300914364392942
+            ]
+          },
+          "food_interaction|12|cold": {
+            "estimate": -0.06604367505107045,
+            "interval95": [
+              -0.1284286989622992,
+              -0.008268782334343583
+            ],
+            "variance_conditional": 0.0009385133935445558,
+            "leave_one_family_range": [
+              -0.08382347868255643,
+              -0.04297687846953996
+            ]
+          },
+          "room_interaction|12|full": {
+            "estimate": -0.042317648964337734,
+            "interval95": [
+              -0.14926556919195136,
+              0.06428573771562925
+            ],
+            "variance_conditional": 0.00298922562442471,
+            "leave_one_family_range": [
+              -0.0692075617865413,
+              -0.008601391043314399
+            ]
+          },
+          "room_interaction|12|limited": {
+            "estimate": 0.02580601058507362,
+            "interval95": [
+              -0.03766341002593992,
+              0.0885259004999212
+            ],
+            "variance_conditional": 0.0010324421519071283,
+            "leave_one_family_range": [
+              0.0032621027433228367,
+              0.04238813099005921
+            ]
+          },
+          "three_way|12": {
+            "estimate": 0.06812365954941135,
+            "interval95": [
+              -0.04098298201719533,
+              0.15810906331565533
+            ],
+            "variance_conditional": 0.0025510363516439358,
+            "leave_one_family_range": [
+              0.04725115099720874,
+              0.10834003312904739
+            ]
+          }
+        },
+        "bootstrap_draws": 10000,
+        "uncertainty": "whole-family bootstrap, conditional on two observed rooms; not replicated temperature inference"
+      },
+      "survival": {
+        "family_n": 11,
+        "cell_means": {
+          "0|warm|full": 0.9848484848484848,
+          "0|warm|limited": 0.8333333333333335,
+          "0|cold|full": 0.9696969696969698,
+          "0|cold|limited": 0.893939393939394,
+          "6|warm|full": 0.9393939393939394,
+          "6|warm|limited": 0.8712121212121212,
+          "6|cold|full": 0.9848484848484849,
+          "6|cold|limited": 0.8333333333333333,
+          "12|warm|full": 0.8787878787878788,
+          "12|warm|limited": 0.7878787878787878,
+          "12|cold|full": 0.9090909090909091,
+          "12|cold|limited": 0.7515151515151515
+        },
+        "effects": {
+          "delay|6|warm|full": {
+            "estimate": -0.0454545454545453,
+            "interval95": [
+              -0.12121212121212122,
+              0.030303030303030054
+            ],
+            "variance_conditional": 0.0014233540066587002
+          },
+          "delay|6|warm|limited": {
+            "estimate": 0.037878787878787734,
+            "interval95": [
+              -0.030303030303030165,
+              0.11363636363636376
+            ],
+            "variance_conditional": 0.0013196047422694528
+          },
+          "delay|6|cold|full": {
+            "estimate": 0.015151515151515027,
+            "interval95": [
+              -0.030303030303030387,
+              0.06060606060606066
+            ],
+            "variance_conditional": 0.000678928719318211
+          },
+          "delay|6|cold|limited": {
+            "estimate": -0.060606060606060774,
+            "interval95": [
+              -0.21212121212121215,
+              0.06060606060606055
+            ],
+            "variance_conditional": 0.004725756668871666
+          },
+          "food_interaction|6|warm": {
+            "estimate": 0.08333333333333304,
+            "interval95": [
+              0.037878787878787845,
+              0.1287878787878789
+            ],
+            "variance_conditional": 0.0005666960124616692,
+            "leave_one_family_range": [
+              0.07499999999999962,
+              0.09166666666666645
+            ]
+          },
+          "food_interaction|6|cold": {
+            "estimate": -0.0757575757575758,
+            "interval95": [
+              -0.1818181818181822,
+              0.015530303030297931
+            ],
+            "variance_conditional": 0.0028977516094125535,
+            "leave_one_family_range": [
+              -0.09999999999999976,
+              -0.033333333333333215
+            ]
+          },
+          "room_interaction|6|full": {
+            "estimate": 0.06060606060606033,
+            "interval95": [
+              -2.220446049250313e-16,
+              0.12121212121212122
+            ],
+            "variance_conditional": 0.0010572509868066685,
+            "leave_one_family_range": [
+              0.0499999999999996,
+              0.08333333333333304
+            ]
+          },
+          "room_interaction|6|limited": {
+            "estimate": -0.09848484848484851,
+            "interval95": [
+              -0.19696969696969724,
+              -0.007575757575757791
+            ],
+            "variance_conditional": 0.002365944169600617,
+            "leave_one_family_range": [
+              -0.125,
+              -0.05833333333333324
+            ]
+          },
+          "three_way|6": {
+            "estimate": -0.15909090909090884,
+            "interval95": [
+              -0.28787878787878785,
+              -0.06060606060606044
+            ],
+            "variance_conditional": 0.003456574531994068,
+            "leave_one_family_range": [
+              -0.17499999999999982,
+              -0.10833333333333284
+            ]
+          },
+          "delay|12|warm|full": {
+            "estimate": -0.10606060606060597,
+            "interval95": [
+              -0.21212121212121215,
+              -1.1102230246251565e-16
+            ],
+            "variance_conditional": 0.0029264519082762273
+          },
+          "delay|12|warm|limited": {
+            "estimate": -0.045454545454545636,
+            "interval95": [
+              -0.16666666666666652,
+              0.060606060606060774
+            ],
+            "variance_conditional": 0.0033114316390316736
+          },
+          "delay|12|cold|full": {
+            "estimate": -0.060606060606060774,
+            "interval95": [
+              -0.1515151515151516,
+              0.015151515151515249
+            ],
+            "variance_conditional": 0.002000228284995624
+          },
+          "delay|12|cold|limited": {
+            "estimate": -0.14242424242424256,
+            "interval95": [
+              -0.26969696969696966,
+              -0.02121212121212135
+            ],
+            "variance_conditional": 0.0039253588571896685
+          },
+          "food_interaction|12|warm": {
+            "estimate": 0.06060606060606033,
+            "interval95": [
+              -0.030303030303030276,
+              0.15151515151515138
+            ],
+            "variance_conditional": 0.0019677855549558626,
+            "leave_one_family_range": [
+              0.033333333333333215,
+              0.08333333333333304
+            ]
+          },
+          "food_interaction|12|cold": {
+            "estimate": -0.08181818181818179,
+            "interval95": [
+              -0.18181818181818188,
+              0.030303030303030387
+            ],
+            "variance_conditional": 0.002890101019652012,
+            "leave_one_family_range": [
+              -0.1233333333333333,
+              -0.05666666666666664
+            ]
+          },
+          "room_interaction|12|full": {
+            "estimate": 0.04545454545454519,
+            "interval95": [
+              -0.06060606060606055,
+              0.1515151515151515
+            ],
+            "variance_conditional": 0.0028377530498688054,
+            "leave_one_family_range": [
+              0.016666666666666385,
+              0.06666666666666665
+            ]
+          },
+          "room_interaction|12|limited": {
+            "estimate": -0.09696969696969693,
+            "interval95": [
+              -0.27575757575757587,
+              0.09090909090909072
+            ],
+            "variance_conditional": 0.00858703875153356,
+            "leave_one_family_range": [
+              -0.15666666666666662,
+              -0.04999999999999971
+            ]
+          },
+          "three_way|12": {
+            "estimate": -0.14242424242424212,
+            "interval95": [
+              -0.2636363636363632,
+              -0.02121212121212135
+            ],
+            "variance_conditional": 0.003832627490389079,
+            "leave_one_family_range": [
+              -0.17333333333333312,
+              -0.10666666666666647
+            ]
+          }
+        },
+        "bootstrap_draws": 10000,
+        "uncertainty": "whole-family bootstrap, conditional on two observed rooms; not replicated temperature inference"
+      }
+    },
+    "observed": {
+      "status": "SECONDARY_CONDITIONAL_CONTRASTS_COMPLETE",
+      "audit": {
+        "mode": "observed",
+        "observed_rows": 787,
+        "family_count_duration_mass": 11,
+        "family_count_survival": 11,
+        "duration_mass_complete_rows_in_included_families": 694,
+        "per_cell_support": {
+          "0|warm|full": {
+            "observed_rows": 66,
+            "survived": 65,
+            "complete_survivor_endpoints": 65,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "0|warm|limited": {
+            "observed_rows": 66,
+            "survived": 55,
+            "complete_survivor_endpoints": 55,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "0|cold|full": {
+            "observed_rows": 66,
+            "survived": 64,
+            "complete_survivor_endpoints": 64,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "0|cold|limited": {
+            "observed_rows": 66,
+            "survived": 59,
+            "complete_survivor_endpoints": 59,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|warm|full": {
+            "observed_rows": 66,
+            "survived": 62,
+            "complete_survivor_endpoints": 62,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|warm|limited": {
+            "observed_rows": 66,
+            "survived": 57,
+            "complete_survivor_endpoints": 57,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|cold|full": {
+            "observed_rows": 66,
+            "survived": 65,
+            "complete_survivor_endpoints": 65,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|cold|limited": {
+            "observed_rows": 66,
+            "survived": 55,
+            "complete_survivor_endpoints": 55,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|warm|full": {
+            "observed_rows": 66,
+            "survived": 58,
+            "complete_survivor_endpoints": 58,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|warm|limited": {
+            "observed_rows": 66,
+            "survived": 52,
+            "complete_survivor_endpoints": 51,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|cold|full": {
+            "observed_rows": 66,
+            "survived": 60,
+            "complete_survivor_endpoints": 58,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|cold|limited": {
+            "observed_rows": 61,
+            "survived": 45,
+            "complete_survivor_endpoints": 45,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          }
+        },
+        "missing_planned_slots_by_mode": 5,
+        "family_ids_overlap": 11,
+        "survival_intended_slot_bounds": {
+          "0|warm|full": [
+            0.9848484848484848,
+            0.9848484848484848
+          ],
+          "0|warm|limited": [
+            0.8333333333333335,
+            0.8333333333333335
+          ],
+          "0|cold|full": [
+            0.9696969696969698,
+            0.9696969696969698
+          ],
+          "0|cold|limited": [
+            0.893939393939394,
+            0.893939393939394
+          ],
+          "6|warm|full": [
+            0.9393939393939394,
+            0.9393939393939394
+          ],
+          "6|warm|limited": [
+            0.8636363636363636,
+            0.8636363636363636
+          ],
+          "6|cold|full": [
+            0.9848484848484849,
+            0.9848484848484849
+          ],
+          "6|cold|limited": [
+            0.8333333333333333,
+            0.8333333333333333
+          ],
+          "12|warm|full": [
+            0.8787878787878788,
+            0.8787878787878788
+          ],
+          "12|warm|limited": [
+            0.7878787878787878,
+            0.7878787878787878
+          ],
+          "12|cold|full": [
+            0.9090909090909091,
+            0.9090909090909091
+          ],
+          "12|cold|limited": [
+            0.6818181818181818,
+            0.7575757575757577
+          ]
+        }
+      },
+      "duration": {
+        "family_n": 11,
+        "cell_means": {
+          "0|warm|full": 45.71212121212121,
+          "0|warm|limited": 75.93939393939394,
+          "0|cold|full": 65.27575757575758,
+          "0|cold|limited": 90.98787878787878,
+          "6|warm|full": 40.557575757575755,
+          "6|warm|limited": 66.49545454545454,
+          "6|cold|full": 60.103030303030295,
+          "6|cold|limited": 91.32424242424244,
+          "12|warm|full": 37.196969696969695,
+          "12|warm|limited": 74.88787878787878,
+          "12|cold|full": 57.84848484848485,
+          "12|cold|limited": 112.01060606060605
+        },
+        "effects": {
+          "delay|6|warm|full": {
+            "estimate": -5.154545454545456,
+            "interval95": [
+              -6.0060606060606005,
+              -4.166666666666664
+            ],
+            "variance_conditional": 0.22363654023584245
+          },
+          "nominal_recovery|6|warm|full": {
+            "estimate": 0.8590909090909093,
+            "interval95": [
+              0.6944444444444441,
+              1.0010101010101
+            ],
+            "variance_conditional": 0.0062121261176622915
+          },
+          "delay|6|warm|limited": {
+            "estimate": -9.443939393939402,
+            "interval95": [
+              -11.821287878787885,
+              -6.962045454545448
+            ],
+            "variance_conditional": 1.5852312267398503
+          },
+          "nominal_recovery|6|warm|limited": {
+            "estimate": 1.5739898989899004,
+            "interval95": [
+              1.1603409090909078,
+              1.9702146464646473
+            ],
+            "variance_conditional": 0.04403420074277361
+          },
+          "delay|6|cold|full": {
+            "estimate": -5.172727272727286,
+            "interval95": [
+              -7.178863636363624,
+              -3.030303030303024
+            ],
+            "variance_conditional": 1.1340364606377098
+          },
+          "nominal_recovery|6|cold|full": {
+            "estimate": 0.8621212121212144,
+            "interval95": [
+              0.505050505050504,
+              1.1964772727272703
+            ],
+            "variance_conditional": 0.03150101279549194
+          },
+          "delay|6|cold|limited": {
+            "estimate": 0.3363636363636573,
+            "interval95": [
+              -2.924318181818193,
+              4.236439393939377
+            ],
+            "variance_conditional": 3.3613030077060904
+          },
+          "nominal_recovery|6|cold|limited": {
+            "estimate": -0.05606060606060955,
+            "interval95": [
+              -0.7060732323232297,
+              0.48738636363636534
+            ],
+            "variance_conditional": 0.09336952799183587
+          },
+          "food_interaction|6|warm": {
+            "estimate": -4.289393939393946,
+            "interval95": [
+              -6.6546212121212065,
+              -1.7014772727272884
+            ],
+            "variance_conditional": 1.6196811349431617,
+            "leave_one_family_range": [
+              -5.251666666666672,
+              -3.7349999999999994
+            ]
+          },
+          "food_interaction|6|cold": {
+            "estimate": 5.5090909090909435,
+            "interval95": [
+              2.257575757575758,
+              9.036363636363625
+            ],
+            "variance_conditional": 2.983316983249378,
+            "leave_one_family_range": [
+              4.293333333333344,
+              6.326666666666689
+            ]
+          },
+          "room_interaction|6|full": {
+            "estimate": -0.018181818181830067,
+            "interval95": [
+              -2.296969696969704,
+              2.1031060606060654
+            ],
+            "variance_conditional": 1.2438866475105759,
+            "leave_one_family_range": [
+              -0.45333333333334025,
+              0.7333333333333059
+            ]
+          },
+          "room_interaction|6|limited": {
+            "estimate": 9.78030303030306,
+            "interval95": [
+              5.413636363636385,
+              13.948522727272717
+            ],
+            "variance_conditional": 4.799394467604609,
+            "leave_one_family_range": [
+              8.458333333333343,
+              11.38833333333335
+            ]
+          },
+          "three_way|6": {
+            "estimate": 9.79848484848489,
+            "interval95": [
+              5.4378409090908955,
+              13.807613636363646
+            ],
+            "variance_conditional": 4.538095128472998,
+            "leave_one_family_range": [
+              8.711666666666687,
+              11.08833333333336
+            ]
+          },
+          "delay|12|warm|full": {
+            "estimate": -8.515151515151516,
+            "interval95": [
+              -9.769696969696973,
+              -7.324166666666658
+            ],
+            "variance_conditional": 0.3948693277055902
+          },
+          "nominal_recovery|12|warm|full": {
+            "estimate": 0.7095959595959597,
+            "interval95": [
+              0.6103472222222214,
+              0.8141414141414144
+            ],
+            "variance_conditional": 0.0027421481090665984
+          },
+          "delay|12|warm|limited": {
+            "estimate": -1.0515151515151615,
+            "interval95": [
+              -4.528825757575774,
+              2.448560606060609
+            ],
+            "variance_conditional": 3.154637026145596
+          },
+          "nominal_recovery|12|warm|limited": {
+            "estimate": 0.08762626262626345,
+            "interval95": [
+              -0.20404671717171746,
+              0.3774021464646478
+            ],
+            "variance_conditional": 0.021907201570455528
+          },
+          "delay|12|cold|full": {
+            "estimate": -7.4272727272727295,
+            "interval95": [
+              -9.037954545454554,
+              -5.857575757575759
+            ],
+            "variance_conditional": 0.6660819425962564
+          },
+          "nominal_recovery|12|cold|full": {
+            "estimate": 0.6189393939393941,
+            "interval95": [
+              0.48813131313131325,
+              0.7531628787878794
+            ],
+            "variance_conditional": 0.004625569045807337
+          },
+          "delay|12|cold|limited": {
+            "estimate": 21.022727272727266,
+            "interval95": [
+              15.886174242424218,
+              26.32439393939394
+            ],
+            "variance_conditional": 7.0474908237931215
+          },
+          "nominal_recovery|12|cold|limited": {
+            "estimate": -1.7518939393939388,
+            "interval95": [
+              -2.1936994949494952,
+              -1.3238478535353517
+            ],
+            "variance_conditional": 0.04894090849856334
+          },
+          "food_interaction|12|warm": {
+            "estimate": 7.463636363636354,
+            "interval95": [
+              4.19083333333333,
+              10.731818181818191
+            ],
+            "variance_conditional": 2.775767501727593,
+            "leave_one_family_range": [
+              6.351666666666645,
+              8.289999999999992
+            ]
+          },
+          "food_interaction|12|cold": {
+            "estimate": 28.449999999999996,
+            "interval95": [
+              23.666628787878807,
+              33.497045454545486
+            ],
+            "variance_conditional": 6.200753730175376,
+            "leave_one_family_range": [
+              26.864999999999988,
+              29.71999999999999
+            ]
+          },
+          "room_interaction|12|full": {
+            "estimate": 1.0878787878787861,
+            "interval95": [
+              -0.6757575757575658,
+              2.690909090909102
+            ],
+            "variance_conditional": 0.745725301414417,
+            "leave_one_family_range": [
+              0.6966666666666512,
+              1.664999999999985
+            ]
+          },
+          "room_interaction|12|limited": {
+            "estimate": 22.074242424242428,
+            "interval95": [
+              15.802954545454554,
+              28.172765151515136
+            ],
+            "variance_conditional": 9.976643776851887,
+            "leave_one_family_range": [
+              20.708333333333357,
+              24.146666666666675
+            ]
+          },
+          "three_way|12": {
+            "estimate": 20.98636363636364,
+            "interval95": [
+              14.992386363636372,
+              26.507651515151508
+            ],
+            "variance_conditional": 8.503465714363884,
+            "leave_one_family_range": [
+              19.53166666666666,
+              23.29666666666668
+            ]
+          }
+        },
+        "bootstrap_draws": 10000,
+        "uncertainty": "whole-family bootstrap, conditional on two observed rooms; not replicated temperature inference"
+      },
+      "mass": {
+        "family_n": 11,
+        "cell_means": {
+          "0|warm|full": 0.4998590909090909,
+          "0|warm|limited": 0.2610166666666667,
+          "0|cold|full": 0.6351454545454546,
+          "0|cold|limited": 0.32936393939393943,
+          "6|warm|full": 0.46272409090909083,
+          "6|warm|limited": 0.2381807575757576,
+          "6|cold|full": 0.6916175757575758,
+          "6|cold|limited": 0.3182862121212121,
+          "12|warm|full": 0.5218863636363636,
+          "12|warm|limited": 0.2383024242424242,
+          "12|cold|full": 0.6356575757575759,
+          "12|cold|limited": 0.3085628787878788
+        },
+        "effects": {
+          "delay|6|warm|full": {
+            "estimate": -0.0771952800275089,
+            "interval95": [
+              -0.15700774216492266,
+              -0.0036303516106908013
+            ],
+            "variance_conditional": 0.0015017758158581945
+          },
+          "delay|6|warm|limited": {
+            "estimate": -0.0915543912236841,
+            "interval95": [
+              -0.13957661539503718,
+              -0.04641767582097417
+            ],
+            "variance_conditional": 0.0005607919102814815
+          },
+          "delay|6|cold|full": {
+            "estimate": 0.08517913173129353,
+            "interval95": [
+              0.04559139523734216,
+              0.12820331707174856
+            ],
+            "variance_conditional": 0.0004548192403738067
+          },
+          "delay|6|cold|limited": {
+            "estimate": -0.034212322038369145,
+            "interval95": [
+              -0.10320676484443071,
+              0.032367684716544956
+            ],
+            "variance_conditional": 0.0011996473958593163
+          },
+          "food_interaction|6|warm": {
+            "estimate": -0.014359111196175195,
+            "interval95": [
+              -0.06606104227689859,
+              0.04885845516226597
+            ],
+            "variance_conditional": 0.0008703753768278336,
+            "leave_one_family_range": [
+              -0.0367372536488466,
+              -0.005551096449801576
+            ]
+          },
+          "food_interaction|6|cold": {
+            "estimate": -0.11939145376966268,
+            "interval95": [
+              -0.20138533692111335,
+              -0.03658114986072116
+            ],
+            "variance_conditional": 0.0017948618242418933,
+            "leave_one_family_range": [
+              -0.14323467844656332,
+              -0.09882623608676872
+            ]
+          },
+          "room_interaction|6|full": {
+            "estimate": 0.16237441175880243,
+            "interval95": [
+              0.06346484789634639,
+              0.2743537605577345
+            ],
+            "variance_conditional": 0.0028675897534153243,
+            "leave_one_family_range": [
+              0.12349710090671981,
+              0.18927055020684214
+            ]
+          },
+          "room_interaction|6|limited": {
+            "estimate": 0.05734206918531495,
+            "interval95": [
+              -0.015028534169967881,
+              0.13473303951623777
+            ],
+            "variance_conditional": 0.0014613721571665862,
+            "leave_one_family_range": [
+              0.031053796598766135,
+              0.07448327138196473
+            ]
+          },
+          "three_way|6": {
+            "estimate": -0.10503234257348748,
+            "interval95": [
+              -0.22201080590189942,
+              0.008736714250868513
+            ],
+            "variance_conditional": 0.003493003803748532,
+            "leave_one_family_range": [
+              -0.13648107077820862,
+              -0.06688409424578558
+            ]
+          },
+          "delay|12|warm|full": {
+            "estimate": 0.04312362947844169,
+            "interval95": [
+              -0.031857129600819455,
+              0.12452382287558376
+            ],
+            "variance_conditional": 0.0016047721150293226
+          },
+          "delay|12|warm|limited": {
+            "estimate": -0.0910437051220401,
+            "interval95": [
+              -0.14544189922603992,
+              -0.03760649289600473
+            ],
+            "variance_conditional": 0.0007784794004329719
+          },
+          "delay|12|cold|full": {
+            "estimate": 0.0008059805141039597,
+            "interval95": [
+              -0.04835940328806602,
+              0.05138787648846718
+            ],
+            "variance_conditional": 0.0006624156388436351
+          },
+          "delay|12|cold|limited": {
+            "estimate": -0.06523769453696648,
+            "interval95": [
+              -0.11434104851003192,
+              -0.020243102370517345
+            ],
+            "variance_conditional": 0.0005878504094406948
+          },
+          "food_interaction|12|warm": {
+            "estimate": -0.1341673346004818,
+            "interval95": [
+              -0.21320818550394213,
+              -0.05117034785610244
+            ],
+            "variance_conditional": 0.0017510608827408945,
+            "leave_one_family_range": [
+              -0.15768078518555934,
+              -0.11300914364392942
+            ]
+          },
+          "food_interaction|12|cold": {
+            "estimate": -0.06604367505107045,
+            "interval95": [
+              -0.1284286989622992,
+              -0.008268782334343583
+            ],
+            "variance_conditional": 0.0009385133935445558,
+            "leave_one_family_range": [
+              -0.08382347868255643,
+              -0.04297687846953996
+            ]
+          },
+          "room_interaction|12|full": {
+            "estimate": -0.042317648964337734,
+            "interval95": [
+              -0.14926556919195136,
+              0.06428573771562925
+            ],
+            "variance_conditional": 0.00298922562442471,
+            "leave_one_family_range": [
+              -0.0692075617865413,
+              -0.008601391043314399
+            ]
+          },
+          "room_interaction|12|limited": {
+            "estimate": 0.02580601058507362,
+            "interval95": [
+              -0.03766341002593992,
+              0.0885259004999212
+            ],
+            "variance_conditional": 0.0010324421519071283,
+            "leave_one_family_range": [
+              0.0032621027433228367,
+              0.04238813099005921
+            ]
+          },
+          "three_way|12": {
+            "estimate": 0.06812365954941135,
+            "interval95": [
+              -0.04098298201719533,
+              0.15810906331565533
+            ],
+            "variance_conditional": 0.0025510363516439358,
+            "leave_one_family_range": [
+              0.04725115099720874,
+              0.10834003312904739
+            ]
+          }
+        },
+        "bootstrap_draws": 10000,
+        "uncertainty": "whole-family bootstrap, conditional on two observed rooms; not replicated temperature inference"
+      },
+      "survival": {
+        "family_n": 11,
+        "cell_means": {
+          "0|warm|full": 0.9848484848484848,
+          "0|warm|limited": 0.8333333333333335,
+          "0|cold|full": 0.9696969696969698,
+          "0|cold|limited": 0.893939393939394,
+          "6|warm|full": 0.9393939393939394,
+          "6|warm|limited": 0.8636363636363636,
+          "6|cold|full": 0.9848484848484849,
+          "6|cold|limited": 0.8333333333333333,
+          "12|warm|full": 0.8787878787878788,
+          "12|warm|limited": 0.7878787878787878,
+          "12|cold|full": 0.9090909090909091,
+          "12|cold|limited": 0.7515151515151515
+        },
+        "effects": {
+          "delay|6|warm|full": {
+            "estimate": -0.0454545454545453,
+            "interval95": [
+              -0.12121212121212122,
+              0.030303030303030054
+            ],
+            "variance_conditional": 0.0014233540066587002
+          },
+          "delay|6|warm|limited": {
+            "estimate": 0.030303030303030165,
+            "interval95": [
+              -0.030303030303030387,
+              0.10606060606060619
+            ],
+            "variance_conditional": 0.0013154414408382991
+          },
+          "delay|6|cold|full": {
+            "estimate": 0.015151515151515027,
+            "interval95": [
+              -0.030303030303030387,
+              0.06060606060606066
+            ],
+            "variance_conditional": 0.000678928719318211
+          },
+          "delay|6|cold|limited": {
+            "estimate": -0.060606060606060774,
+            "interval95": [
+              -0.21212121212121215,
+              0.06060606060606055
+            ],
+            "variance_conditional": 0.004725756668871666
+          },
+          "food_interaction|6|warm": {
+            "estimate": 0.07575757575757547,
+            "interval95": [
+              0.030303030303030165,
+              0.12121212121212133
+            ],
+            "variance_conditional": 0.0006203804012173492,
+            "leave_one_family_range": [
+              0.06666666666666643,
+              0.08333333333333326
+            ]
+          },
+          "food_interaction|6|cold": {
+            "estimate": -0.0757575757575758,
+            "interval95": [
+              -0.1818181818181822,
+              0.015530303030297931
+            ],
+            "variance_conditional": 0.0028977516094125535,
+            "leave_one_family_range": [
+              -0.09999999999999976,
+              -0.033333333333333215
+            ]
+          },
+          "room_interaction|6|full": {
+            "estimate": 0.06060606060606033,
+            "interval95": [
+              -2.220446049250313e-16,
+              0.12121212121212122
+            ],
+            "variance_conditional": 0.0010572509868066685,
+            "leave_one_family_range": [
+              0.0499999999999996,
+              0.08333333333333304
+            ]
+          },
+          "room_interaction|6|limited": {
+            "estimate": -0.09090909090909094,
+            "interval95": [
+              -0.19696969696969702,
+              0
+            ],
+            "variance_conditional": 0.002449468050569981,
+            "leave_one_family_range": [
+              -0.11666666666666681,
+              -0.050000000000000044
+            ]
+          },
+          "three_way|6": {
+            "estimate": -0.15151515151515127,
+            "interval95": [
+              -0.27272727272727304,
+              -0.060227272727277445
+            ],
+            "variance_conditional": 0.003390349604290095,
+            "leave_one_family_range": [
+              -0.1666666666666664,
+              -0.09999999999999964
+            ]
+          },
+          "delay|12|warm|full": {
+            "estimate": -0.10606060606060597,
+            "interval95": [
+              -0.21212121212121215,
+              -1.1102230246251565e-16
+            ],
+            "variance_conditional": 0.0029264519082762273
+          },
+          "delay|12|warm|limited": {
+            "estimate": -0.045454545454545636,
+            "interval95": [
+              -0.16666666666666652,
+              0.060606060606060774
+            ],
+            "variance_conditional": 0.0033114316390316736
+          },
+          "delay|12|cold|full": {
+            "estimate": -0.060606060606060774,
+            "interval95": [
+              -0.1515151515151516,
+              0.015151515151515249
+            ],
+            "variance_conditional": 0.002000228284995624
+          },
+          "delay|12|cold|limited": {
+            "estimate": -0.14242424242424256,
+            "interval95": [
+              -0.26969696969696966,
+              -0.02121212121212135
+            ],
+            "variance_conditional": 0.0039253588571896685
+          },
+          "food_interaction|12|warm": {
+            "estimate": 0.06060606060606033,
+            "interval95": [
+              -0.030303030303030276,
+              0.15151515151515138
+            ],
+            "variance_conditional": 0.0019677855549558626,
+            "leave_one_family_range": [
+              0.033333333333333215,
+              0.08333333333333304
+            ]
+          },
+          "food_interaction|12|cold": {
+            "estimate": -0.08181818181818179,
+            "interval95": [
+              -0.18181818181818188,
+              0.030303030303030387
+            ],
+            "variance_conditional": 0.002890101019652012,
+            "leave_one_family_range": [
+              -0.1233333333333333,
+              -0.05666666666666664
+            ]
+          },
+          "room_interaction|12|full": {
+            "estimate": 0.04545454545454519,
+            "interval95": [
+              -0.06060606060606055,
+              0.1515151515151515
+            ],
+            "variance_conditional": 0.0028377530498688054,
+            "leave_one_family_range": [
+              0.016666666666666385,
+              0.06666666666666665
+            ]
+          },
+          "room_interaction|12|limited": {
+            "estimate": -0.09696969696969693,
+            "interval95": [
+              -0.27575757575757587,
+              0.09090909090909072
+            ],
+            "variance_conditional": 0.00858703875153356,
+            "leave_one_family_range": [
+              -0.15666666666666662,
+              -0.04999999999999971
+            ]
+          },
+          "three_way|12": {
+            "estimate": -0.14242424242424212,
+            "interval95": [
+              -0.2636363636363632,
+              -0.02121212121212135
+            ],
+            "variance_conditional": 0.003832627490389079,
+            "leave_one_family_range": [
+              -0.17333333333333312,
+              -0.10666666666666647
+            ]
+          }
+        },
+        "bootstrap_draws": 10000,
+        "uncertainty": "whole-family bootstrap, conditional on two observed rooms; not replicated temperature inference"
+      }
+    },
+    "strict_unmarked": {
+      "status": "SECONDARY_CONDITIONAL_CONTRASTS_COMPLETE",
+      "audit": {
+        "mode": "strict_unmarked",
+        "observed_rows": 781,
+        "family_count_duration_mass": 11,
+        "family_count_survival": 11,
+        "duration_mass_complete_rows_in_included_families": 689,
+        "per_cell_support": {
+          "0|warm|full": {
+            "observed_rows": 66,
+            "survived": 65,
+            "complete_survivor_endpoints": 65,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "0|warm|limited": {
+            "observed_rows": 64,
+            "survived": 53,
+            "complete_survivor_endpoints": 53,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "0|cold|full": {
+            "observed_rows": 64,
+            "survived": 62,
+            "complete_survivor_endpoints": 62,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "0|cold|limited": {
+            "observed_rows": 66,
+            "survived": 59,
+            "complete_survivor_endpoints": 59,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|warm|full": {
+            "observed_rows": 66,
+            "survived": 62,
+            "complete_survivor_endpoints": 62,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|warm|limited": {
+            "observed_rows": 64,
+            "survived": 56,
+            "complete_survivor_endpoints": 56,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|cold|full": {
+            "observed_rows": 66,
+            "survived": 65,
+            "complete_survivor_endpoints": 65,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "6|cold|limited": {
+            "observed_rows": 66,
+            "survived": 55,
+            "complete_survivor_endpoints": 55,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|warm|full": {
+            "observed_rows": 66,
+            "survived": 58,
+            "complete_survivor_endpoints": 58,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|warm|limited": {
+            "observed_rows": 66,
+            "survived": 52,
+            "complete_survivor_endpoints": 51,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|cold|full": {
+            "observed_rows": 66,
+            "survived": 60,
+            "complete_survivor_endpoints": 58,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          },
+          "12|cold|limited": {
+            "observed_rows": 61,
+            "survived": 45,
+            "complete_survivor_endpoints": 45,
+            "families_observed": 11,
+            "families_complete_endpoints": 11
+          }
+        },
+        "missing_planned_slots_by_mode": 11,
+        "family_ids_overlap": 11,
+        "survival_intended_slot_bounds": {
+          "0|warm|full": [
+            0.9848484848484848,
+            0.9848484848484848
+          ],
+          "0|warm|limited": [
+            0.8030303030303031,
+            0.8333333333333335
+          ],
+          "0|cold|full": [
+            0.9393939393939394,
+            0.9696969696969698
+          ],
+          "0|cold|limited": [
+            0.893939393939394,
+            0.893939393939394
+          ],
+          "6|warm|full": [
+            0.9393939393939394,
+            0.9393939393939394
+          ],
+          "6|warm|limited": [
+            0.8484848484848485,
+            0.8787878787878789
+          ],
+          "6|cold|full": [
+            0.9848484848484849,
+            0.9848484848484849
+          ],
+          "6|cold|limited": [
+            0.8333333333333333,
+            0.8333333333333333
+          ],
+          "12|warm|full": [
+            0.8787878787878788,
+            0.8787878787878788
+          ],
+          "12|warm|limited": [
+            0.7878787878787878,
+            0.7878787878787878
+          ],
+          "12|cold|full": [
+            0.9090909090909091,
+            0.9090909090909091
+          ],
+          "12|cold|limited": [
+            0.6818181818181818,
+            0.7575757575757577
+          ]
+        }
+      },
+      "duration": {
+        "family_n": 11,
+        "cell_means": {
+          "0|warm|full": 45.71212121212121,
+          "0|warm|limited": 75.36515151515152,
+          "0|cold|full": 64.72424242424243,
+          "0|cold|limited": 90.98787878787878,
+          "6|warm|full": 40.557575757575755,
+          "6|warm|limited": 66.62424242424241,
+          "6|cold|full": 60.103030303030295,
+          "6|cold|limited": 91.32424242424244,
+          "12|warm|full": 37.196969696969695,
+          "12|warm|limited": 74.88787878787878,
+          "12|cold|full": 57.84848484848485,
+          "12|cold|limited": 112.01060606060605
+        },
+        "effects": {
+          "delay|6|warm|full": {
+            "estimate": -5.154545454545456,
+            "interval95": [
+              -6.0060606060606005,
+              -4.166666666666664
+            ],
+            "variance_conditional": 0.22363654023584245
+          },
+          "nominal_recovery|6|warm|full": {
+            "estimate": 0.8590909090909093,
+            "interval95": [
+              0.6944444444444441,
+              1.0010101010101
+            ],
+            "variance_conditional": 0.0062121261176622915
+          },
+          "delay|6|warm|limited": {
+            "estimate": -8.740909090909113,
+            "interval95": [
+              -11.574431818181836,
+              -5.467992424242442
+            ],
+            "variance_conditional": 2.4785830163614184
+          },
+          "nominal_recovery|6|warm|limited": {
+            "estimate": 1.4568181818181856,
+            "interval95": [
+              0.9113320707070732,
+              1.9290719696969723
+            ],
+            "variance_conditional": 0.06884952823226163
+          },
+          "delay|6|cold|full": {
+            "estimate": -4.621212121212139,
+            "interval95": [
+              -6.393939393939405,
+              -2.757575757575765
+            ],
+            "variance_conditional": 0.8720831903553083
+          },
+          "nominal_recovery|6|cold|full": {
+            "estimate": 0.7702020202020231,
+            "interval95": [
+              0.4595959595959608,
+              1.0656565656565675
+            ],
+            "variance_conditional": 0.02422453306542523
+          },
+          "delay|6|cold|limited": {
+            "estimate": 0.3363636363636573,
+            "interval95": [
+              -2.924318181818193,
+              4.236439393939377
+            ],
+            "variance_conditional": 3.3613030077060904
+          },
+          "nominal_recovery|6|cold|limited": {
+            "estimate": -0.05606060606060955,
+            "interval95": [
+              -0.7060732323232297,
+              0.48738636363636534
+            ],
+            "variance_conditional": 0.09336952799183587
+          },
+          "food_interaction|6|warm": {
+            "estimate": -3.5863636363636573,
+            "interval95": [
+              -6.460643939393947,
+              -0.22117424242423384
+            ],
+            "variance_conditional": 2.604645697675283,
+            "leave_one_family_range": [
+              -4.96166666666668,
+              -2.961666666666673
+            ]
+          },
+          "food_interaction|6|cold": {
+            "estimate": 4.957575757575796,
+            "interval95": [
+              1.5636363636363975,
+              8.654621212121214
+            ],
+            "variance_conditional": 3.3206481411886815,
+            "leave_one_family_range": [
+              3.6866666666666745,
+              5.72000000000002
+            ]
+          },
+          "room_interaction|6|full": {
+            "estimate": 0.5333333333333172,
+            "interval95": [
+              -1.3787878787878827,
+              2.3060606060606124
+            ],
+            "variance_conditional": 0.8981924796842419,
+            "leave_one_family_range": [
+              0.15333333333332888,
+              1.1033333333333104
+            ]
+          },
+          "room_interaction|6|limited": {
+            "estimate": 9.07727272727277,
+            "interval95": [
+              4.02121212121213,
+              13.63636363636364
+            ],
+            "variance_conditional": 6.065517565140439,
+            "leave_one_family_range": [
+              7.6850000000000165,
+              11.098333333333358
+            ]
+          },
+          "three_way|6": {
+            "estimate": 8.543939393939453,
+            "interval95": [
+              3.2256060606060957,
+              13.12882575757576
+            ],
+            "variance_conditional": 6.5018782238646295,
+            "leave_one_family_range": [
+              7.331666666666692,
+              10.561666666666703
+            ]
+          },
+          "delay|12|warm|full": {
+            "estimate": -8.515151515151516,
+            "interval95": [
+              -9.769696969696973,
+              -7.324166666666658
+            ],
+            "variance_conditional": 0.3948693277055902
+          },
+          "nominal_recovery|12|warm|full": {
+            "estimate": 0.7095959595959597,
+            "interval95": [
+              0.6103472222222214,
+              0.8141414141414144
+            ],
+            "variance_conditional": 0.0027421481090665984
+          },
+          "delay|12|warm|limited": {
+            "estimate": -0.47727272727274794,
+            "interval95": [
+              -4.274242424242445,
+              3.530340909090909
+            ],
+            "variance_conditional": 3.9419283295357825
+          },
+          "nominal_recovery|12|warm|limited": {
+            "estimate": 0.03977272727272899,
+            "interval95": [
+              -0.2941950757575758,
+              0.3561868686868704
+            ],
+            "variance_conditional": 0.027374502288442928
+          },
+          "delay|12|cold|full": {
+            "estimate": -6.875757575757582,
+            "interval95": [
+              -8.716780303030312,
+              -4.928674242424245
+            ],
+            "variance_conditional": 0.9283394113295398
+          },
+          "nominal_recovery|12|cold|full": {
+            "estimate": 0.5729797979797985,
+            "interval95": [
+              0.4107228535353536,
+              0.7263983585858591
+            ],
+            "variance_conditional": 0.006446801467566248
+          },
+          "delay|12|cold|limited": {
+            "estimate": 21.022727272727266,
+            "interval95": [
+              15.886174242424218,
+              26.32439393939394
+            ],
+            "variance_conditional": 7.0474908237931215
+          },
+          "nominal_recovery|12|cold|limited": {
+            "estimate": -1.7518939393939388,
+            "interval95": [
+              -2.1936994949494952,
+              -1.3238478535353517
+            ],
+            "variance_conditional": 0.04894090849856334
+          },
+          "food_interaction|12|warm": {
+            "estimate": 8.037878787878768,
+            "interval95": [
+              4.398409090909063,
+              11.918409090909083
+            ],
+            "variance_conditional": 3.6583747017153367,
+            "leave_one_family_range": [
+              6.641666666666637,
+              8.921666666666653
+            ]
+          },
+          "food_interaction|12|cold": {
+            "estimate": 27.89848484848485,
+            "interval95": [
+              22.512007575757572,
+              33.38492424242424
+            ],
+            "variance_conditional": 7.517547221010414,
+            "leave_one_family_range": [
+              26.25833333333332,
+              29.41166666666666
+            ]
+          },
+          "room_interaction|12|full": {
+            "estimate": 1.6393939393939334,
+            "interval95": [
+              -0.07890151515150741,
+              3.400151515151518
+            ],
+            "variance_conditional": 0.7946003503204095,
+            "leave_one_family_range": [
+              1.086666666666659,
+              2.103333333333339
+            ]
+          },
+          "room_interaction|12|limited": {
+            "estimate": 21.500000000000014,
+            "interval95": [
+              14.809053030303048,
+              28.009128787878822
+            ],
+            "variance_conditional": 11.315834858829662,
+            "leave_one_family_range": [
+              20.076666666666696,
+              23.856666666666683
+            ]
+          },
+          "three_way|12": {
+            "estimate": 19.86060606060608,
+            "interval95": [
+              12.558749999999982,
+              26.19700757575759
+            ],
+            "variance_conditional": 11.958594453535714,
+            "leave_one_family_range": [
+              18.293333333333315,
+              22.770000000000024
+            ]
+          }
+        },
+        "bootstrap_draws": 10000,
+        "uncertainty": "whole-family bootstrap, conditional on two observed rooms; not replicated temperature inference"
+      },
+      "mass": {
+        "family_n": 11,
+        "cell_means": {
+          "0|warm|full": 0.4998590909090909,
+          "0|warm|limited": 0.2596848484848485,
+          "0|cold|full": 0.6384422727272727,
+          "0|cold|limited": 0.32936393939393943,
+          "6|warm|full": 0.46272409090909083,
+          "6|warm|limited": 0.2377193939393939,
+          "6|cold|full": 0.6916175757575758,
+          "6|cold|limited": 0.3182862121212121,
+          "12|warm|full": 0.5218863636363636,
+          "12|warm|limited": 0.2383024242424242,
+          "12|cold|full": 0.6356575757575759,
+          "12|cold|limited": 0.3085628787878788
+        },
+        "effects": {
+          "delay|6|warm|full": {
+            "estimate": -0.0771952800275089,
+            "interval95": [
+              -0.15700774216492266,
+              -0.0036303516106908013
+            ],
+            "variance_conditional": 0.0015017758158581945
+          },
+          "delay|6|warm|limited": {
+            "estimate": -0.0883778135676229,
+            "interval95": [
+              -0.1411892260946261,
+              -0.03794340459894239
+            ],
+            "variance_conditional": 0.0007117775264686013
+          },
+          "delay|6|cold|full": {
+            "estimate": 0.08000190604810359,
+            "interval95": [
+              0.03968929855420243,
+              0.12455495548959157
+            ],
+            "variance_conditional": 0.00048174034862487585
+          },
+          "delay|6|cold|limited": {
+            "estimate": -0.034212322038369145,
+            "interval95": [
+              -0.10320676484443071,
+              0.032367684716544956
+            ],
+            "variance_conditional": 0.0011996473958593163
+          },
+          "food_interaction|6|warm": {
+            "estimate": -0.011182533540114004,
+            "interval95": [
+              -0.06297435792924197,
+              0.050173635215198485
+            ],
+            "variance_conditional": 0.0008557660516704856,
+            "leave_one_family_range": [
+              -0.03329102744008808,
+              -0.0020770448067628927
+            ]
+          },
+          "food_interaction|6|cold": {
+            "estimate": -0.11421422808647273,
+            "interval95": [
+              -0.19692123151191623,
+              -0.030675766308731672
+            ],
+            "variance_conditional": 0.0018252044630740602,
+            "leave_one_family_range": [
+              -0.13745359755817615,
+              -0.09316547472975889
+            ]
+          },
+          "room_interaction|6|full": {
+            "estimate": 0.1571971860756125,
+            "interval95": [
+              0.059463471103327926,
+              0.26867108521800503
+            ],
+            "variance_conditional": 0.002830099158778741,
+            "leave_one_family_range": [
+              0.11785193644607209,
+              0.183489469318455
+            ]
+          },
+          "room_interaction|6|limited": {
+            "estimate": 0.05416549152925376,
+            "interval95": [
+              -0.023853037781226473,
+              0.13624024499001383
+            ],
+            "variance_conditional": 0.0016899607866804015,
+            "leave_one_family_range": [
+              0.02755476613692704,
+              0.07099785861816607
+            ]
+          },
+          "three_way|6": {
+            "estimate": -0.10303169454635873,
+            "interval95": [
+              -0.22102552446891474,
+              0.010631754124770595
+            ],
+            "variance_conditional": 0.003506802078028808,
+            "leave_one_family_range": [
+              -0.13419682113611275,
+              -0.0646601358808089
+            ]
+          },
+          "delay|12|warm|full": {
+            "estimate": 0.04312362947844169,
+            "interval95": [
+              -0.031857129600819455,
+              0.12452382287558376
+            ],
+            "variance_conditional": 0.0016047721150293226
+          },
+          "delay|12|warm|limited": {
+            "estimate": -0.08592821746802547,
+            "interval95": [
+              -0.15061706990398874,
+              -0.023542427274986344
+            ],
+            "variance_conditional": 0.0010751794758505412
+          },
+          "delay|12|cold|full": {
+            "estimate": -0.00437124516908587,
+            "interval95": [
+              -0.05342155786664047,
+              0.047715822747692795
+            ],
+            "variance_conditional": 0.0006868463783893579
+          },
+          "delay|12|cold|limited": {
+            "estimate": -0.06523769453696648,
+            "interval95": [
+              -0.11434104851003192,
+              -0.020243102370517345
+            ],
+            "variance_conditional": 0.0005878504094406948
+          },
+          "food_interaction|12|warm": {
+            "estimate": -0.12905184694646715,
+            "interval95": [
+              -0.21772785213521223,
+              -0.033776079585445304
+            ],
+            "variance_conditional": 0.0022588391298870155,
+            "leave_one_family_range": [
+              -0.1572911379532829,
+              -0.10735201162697125
+            ]
+          },
+          "food_interaction|12|cold": {
+            "estimate": -0.06086644936788062,
+            "interval95": [
+              -0.12343153000072958,
+              -0.003567828491867709
+            ],
+            "variance_conditional": 0.0009388130052391852,
+            "leave_one_family_range": [
+              -0.07806159479387192,
+              -0.03730669389580482
+            ]
+          },
+          "room_interaction|12|full": {
+            "estimate": -0.047494874647527566,
+            "interval95": [
+              -0.15379472904542046,
+              0.05851800002582321
+            ],
+            "variance_conditional": 0.0029888298925163388,
+            "leave_one_family_range": [
+              -0.07485272624718897,
+              -0.014382471931701581
+            ]
+          },
+          "room_interaction|12|limited": {
+            "estimate": 0.020690522931058983,
+            "interval95": [
+              -0.04605746399056309,
+              0.09046021865976382
+            ],
+            "variance_conditional": 0.0012056379894823611,
+            "leave_one_family_range": [
+              -0.0024032111974680165,
+              0.03677895426920756
+            ]
+          },
+          "three_way|12": {
+            "estimate": 0.06818539757858653,
+            "interval95": [
+              -0.04662362409613496,
+              0.16775793998912028
+            ],
+            "variance_conditional": 0.0030241389671720976,
+            "leave_one_family_range": [
+              0.047375099868637756,
+              0.10842792880127355
+            ]
+          }
+        },
+        "bootstrap_draws": 10000,
+        "uncertainty": "whole-family bootstrap, conditional on two observed rooms; not replicated temperature inference"
+      },
+      "survival": {
+        "family_n": 11,
+        "cell_means": {
+          "0|warm|full": 0.9848484848484848,
+          "0|warm|limited": 0.8242424242424243,
+          "0|cold|full": 0.9666666666666668,
+          "0|cold|limited": 0.893939393939394,
+          "6|warm|full": 0.9393939393939394,
+          "6|warm|limited": 0.8712121212121212,
+          "6|cold|full": 0.9848484848484849,
+          "6|cold|limited": 0.8333333333333333,
+          "12|warm|full": 0.8787878787878788,
+          "12|warm|limited": 0.7878787878787878,
+          "12|cold|full": 0.9090909090909091,
+          "12|cold|limited": 0.7515151515151515
+        },
+        "effects": {
+          "delay|6|warm|full": {
+            "estimate": -0.0454545454545453,
+            "interval95": [
+              -0.12121212121212122,
+              0.030303030303030054
+            ],
+            "variance_conditional": 0.0014233540066587002
+          },
+          "delay|6|warm|limited": {
+            "estimate": 0.046969696969696884,
+            "interval95": [
+              -0.024242424242423958,
+              0.12272727272727268
+            ],
+            "variance_conditional": 0.0013815143293714137
+          },
+          "delay|6|cold|full": {
+            "estimate": 0.018181818181818077,
+            "interval95": [
+              -0.030303030303030387,
+              0.07272727272727275
+            ],
+            "variance_conditional": 0.0007702524301098603
+          },
+          "delay|6|cold|limited": {
+            "estimate": -0.060606060606060774,
+            "interval95": [
+              -0.21212121212121215,
+              0.06060606060606055
+            ],
+            "variance_conditional": 0.004725756668871666
+          },
+          "food_interaction|6|warm": {
+            "estimate": 0.09242424242424219,
+            "interval95": [
+              0.043939393939394056,
+              0.14090909090909087
+            ],
+            "variance_conditional": 0.0006478975140627016,
+            "leave_one_family_range": [
+              0.08166666666666667,
+              0.10166666666666657
+            ]
+          },
+          "food_interaction|6|cold": {
+            "estimate": -0.07878787878787885,
+            "interval95": [
+              -0.19090909090909114,
+              0.015303030303028414
+            ],
+            "variance_conditional": 0.002954000447243995,
+            "leave_one_family_range": [
+              -0.10333333333333306,
+              -0.036666666666666514
+            ]
+          },
+          "room_interaction|6|full": {
+            "estimate": 0.06363636363636338,
+            "interval95": [
+              -1.1102230246251565e-16,
+              0.1272727272727271
+            ],
+            "variance_conditional": 0.001125435621523584,
+            "leave_one_family_range": [
+              0.04999999999999982,
+              0.08666666666666634
+            ]
+          },
+          "room_interaction|6|limited": {
+            "estimate": -0.10757575757575766,
+            "interval95": [
+              -0.2090909090909091,
+              -0.022727272727272478
+            ],
+            "variance_conditional": 0.002236315454111988,
+            "leave_one_family_range": [
+              -0.13166666666666682,
+              -0.06833333333333313
+            ]
+          },
+          "three_way|6": {
+            "estimate": -0.17121212121212104,
+            "interval95": [
+              -0.29545454545454575,
+              -0.0651515151515153
+            ],
+            "variance_conditional": 0.0035918965811870497,
+            "leave_one_family_range": [
+              -0.18833333333333302,
+              -0.12166666666666603
+            ]
+          },
+          "delay|12|warm|full": {
+            "estimate": -0.10606060606060597,
+            "interval95": [
+              -0.21212121212121215,
+              -1.1102230246251565e-16
+            ],
+            "variance_conditional": 0.0029264519082762273
+          },
+          "delay|12|warm|limited": {
+            "estimate": -0.03636363636363649,
+            "interval95": [
+              -0.14848484848484844,
+              0.06969696969696959
+            ],
+            "variance_conditional": 0.0030522119685797784
+          },
+          "delay|12|cold|full": {
+            "estimate": -0.057575757575757724,
+            "interval95": [
+              -0.14848484848484855,
+              0.0181818181818183
+            ],
+            "variance_conditional": 0.0019525719223896674
+          },
+          "delay|12|cold|limited": {
+            "estimate": -0.14242424242424256,
+            "interval95": [
+              -0.26969696969696966,
+              -0.02121212121212135
+            ],
+            "variance_conditional": 0.0039253588571896685
+          },
+          "food_interaction|12|warm": {
+            "estimate": 0.06969696969696948,
+            "interval95": [
+              -0.024242424242424288,
+              0.16060606060606064
+            ],
+            "variance_conditional": 0.0021789918481287984,
+            "leave_one_family_range": [
+              0.04333333333333311,
+              0.09333333333333316
+            ]
+          },
+          "food_interaction|12|cold": {
+            "estimate": -0.08484848484848484,
+            "interval95": [
+              -0.18181818181818188,
+              0.021212121212121238
+            ],
+            "variance_conditional": 0.00266886454219343,
+            "leave_one_family_range": [
+              -0.1233333333333333,
+              -0.05999999999999994
+            ]
+          },
+          "room_interaction|12|full": {
+            "estimate": 0.04848484848484824,
+            "interval95": [
+              -0.06060606060606044,
+              0.1575757575757577
+            ],
+            "variance_conditional": 0.0030080706471932775,
+            "leave_one_family_range": [
+              0.016666666666666496,
+              0.06999999999999995
+            ]
+          },
+          "room_interaction|12|limited": {
+            "estimate": -0.10606060606060608,
+            "interval95": [
+              -0.2787878787878788,
+              0.06969696969696948
+            ],
+            "variance_conditional": 0.007900372369652027,
+            "leave_one_family_range": [
+              -0.15999999999999992,
+              -0.05999999999999961
+            ]
+          },
+          "three_way|12": {
+            "estimate": -0.15454545454545432,
+            "interval95": [
+              -0.2696969696969693,
+              -0.042424242424242364
+            ],
+            "variance_conditional": 0.003405770872679555,
+            "leave_one_family_range": [
+              -0.18666666666666631,
+              -0.11999999999999966
+            ]
+          }
+        },
+        "bootstrap_draws": 10000,
+        "uncertainty": "whole-family bootstrap, conditional on two observed rooms; not replicated temperature inference"
+      }
+    }
+  },
+  "design": {
+    "source_rows": 787,
+    "families": 11,
+    "unique_vials": 786,
+    "unique_planned_keys": 787,
+    "planned_slots": 792,
+    "absent_slots": 5,
+    "absent_by_cell": {
+      "12|cold|limited": 5
+    },
+    "duplicate_planned_keys": [],
+    "duplicate_vial_design_keys": {
+      "8-D-H-R-5": [
+        [
+          "8",
+          6,
+          "warm",
+          "limited",
+          5
+        ],
+        [
+          "8",
+          6,
+          "warm",
+          "limited",
+          6
+        ]
+      ]
+    },
+    "code_maps": {
+      "FamN": {
+        "1": [
+          "1"
+        ],
+        "2": [
+          "2"
+        ],
+        "3": [
+          "3"
+        ],
+        "4": [
+          "4"
+        ],
+        "6": [
+          "6"
+        ],
+        "7": [
+          "7"
+        ],
+        "8": [
+          "8"
+        ],
+        "9": [
+          "9"
+        ],
+        "10": [
+          "10"
+        ],
+        "11": [
+          "11"
+        ],
+        "12": [
+          "12"
+        ]
+      },
+      "PCode": {
+        "N": [
+          "0"
+        ],
+        "D": [
+          "6"
+        ],
+        "E": [
+          "12"
+        ]
+      },
+      "PhenN": {
+        "1": [
+          "0"
+        ],
+        "2": [
+          "6"
+        ],
+        "3": [
+          "12"
+        ]
+      },
+      "TCode": {
+        "H": [
+          "warm"
+        ],
+        "L": [
+          "cold"
+        ]
+      },
+      "TempN": {
+        "1": [
+          "warm"
+        ],
+        "2": [
+          "cold"
+        ]
+      },
+      "FCode": {
+        "A": [
+          "full"
+        ],
+        "R": [
+          "limited"
+        ]
+      },
+      "FoodN": {
+        "1": [
+          "full"
+        ],
+        "2": [
+          "limited"
+        ]
+      }
+    },
+    "unlabelled_marker_count": 4,
+    "marker_keys_overlap_duplicate_vial_rows": 0,
+    "survival_counts": {
+      "0": 90,
+      "1": 697
+    },
+    "zero_duration_excluded_from_paired_endpoints": 1,
+    "nonmissing_duration": 696,
+    "nonmissing_mass": 694
+  },
+  "postfit": {
+    "independent_arithmetic_checks": [
+      {
+        "mode": "strict",
+        "endpoint": "duration",
+        "contrast_identity": true
+      },
+      {
+        "mode": "strict",
+        "endpoint": "mass",
+        "contrast_identity": true
+      },
+      {
+        "mode": "strict",
+        "endpoint": "survival",
+        "contrast_identity": true
+      },
+      {
+        "mode": "observed",
+        "endpoint": "duration",
+        "contrast_identity": true
+      },
+      {
+        "mode": "observed",
+        "endpoint": "mass",
+        "contrast_identity": true
+      },
+      {
+        "mode": "observed",
+        "endpoint": "survival",
+        "contrast_identity": true
+      },
+      {
+        "mode": "strict_unmarked",
+        "endpoint": "duration",
+        "contrast_identity": true
+      },
+      {
+        "mode": "strict_unmarked",
+        "endpoint": "mass",
+        "contrast_identity": true
+      },
+      {
+        "mode": "strict_unmarked",
+        "endpoint": "survival",
+        "contrast_identity": true
+      }
+    ],
+    "strict_cold_limited_delay12_survival_difference_bounds": [
+      -0.21212121212121227,
+      -0.13636363636363635
+    ],
+    "three_way_duration_all_modes": {
+      "strict": [
+        {
+          "delay": 6,
+          "estimate": 9.669696969697014,
+          "interval95": [
+            5.130303030303067,
+            13.793939393939384
+          ],
+          "variance_conditional": 4.8465778414480365,
+          "leave_one_family_range": [
+            8.570000000000022,
+            11.08833333333336
+          ]
+        },
+        {
+          "delay": 12,
+          "estimate": 20.98636363636364,
+          "interval95": [
+            14.992386363636372,
+            26.507651515151508
+          ],
+          "variance_conditional": 8.503465714363884,
+          "leave_one_family_range": [
+            19.53166666666666,
+            23.29666666666668
+          ]
+        }
+      ],
+      "observed": [
+        {
+          "delay": 6,
+          "estimate": 9.79848484848489,
+          "interval95": [
+            5.4378409090908955,
+            13.807613636363646
+          ],
+          "variance_conditional": 4.538095128472998,
+          "leave_one_family_range": [
+            8.711666666666687,
+            11.08833333333336
+          ]
+        },
+        {
+          "delay": 12,
+          "estimate": 20.98636363636364,
+          "interval95": [
+            14.992386363636372,
+            26.507651515151508
+          ],
+          "variance_conditional": 8.503465714363884,
+          "leave_one_family_range": [
+            19.53166666666666,
+            23.29666666666668
+          ]
+        }
+      ],
+      "strict_unmarked": [
+        {
+          "delay": 6,
+          "estimate": 8.543939393939453,
+          "interval95": [
+            3.2256060606060957,
+            13.12882575757576
+          ],
+          "variance_conditional": 6.5018782238646295,
+          "leave_one_family_range": [
+            7.331666666666692,
+            10.561666666666703
+          ]
+        },
+        {
+          "delay": 12,
+          "estimate": 19.86060606060608,
+          "interval95": [
+            12.558749999999982,
+            26.19700757575759
+          ],
+          "variance_conditional": 11.958594453535714,
+          "leave_one_family_range": [
+            18.293333333333315,
+            22.770000000000024
+          ]
+        }
+      ]
+    },
+    "interpretation": "Room/temperature confounded. Family resampling conditional on observed rooms, no independent temperature replication. Duration/mass conditional on survival and paired measurement. Survival uses observed flags; five absent source records are all in 12-day cold limited cell, source-planned-slot bounds do not impute their outcomes. Nominal delay correction does not identify actual calendar phase."
+  },
+  "provenance": {
+    "run": 45549838769,
+    "job": 138988110077,
+    "artifact_id": 14993515090,
+    "artifact_zip_sha256": "6d36a5fb5a5740678cd1739212350ab022191f54b4eb80a973ab76ab69128e94",
+    "extraction": "Exact aggregate JSON from completed calculation; ZIP checksum from upload log; ZIP not independently downloaded. Source MD5 and SHA256 reverified; all mode/endpoint delay contrasts independently recomputed from returned cell means."
+  }
+}

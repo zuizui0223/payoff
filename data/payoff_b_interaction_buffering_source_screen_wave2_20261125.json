@@ -1,0 +1,868 @@
+{
+  "date": "2026-11-25",
+  "status": "SECONDARY_PUBLISHED_EVIDENCE_ONLY_NO_ELIGIBLE_PRIMARY_THETA",
+  "parent": "PR #426 original 18-source registry unchanged",
+  "source_frame": {
+    "doi": "10.1111/ele.14185",
+    "archive": "10.17605/OSF.IO/AEYT2",
+    "studies": 20,
+    "interactions": 26,
+    "site_years": 687,
+    "quadratic_support": 4,
+    "linear_support": 7,
+    "no_relationship": 13,
+    "other_not_classified_here": 2,
+    "experimental_studies_excluded": true,
+    "source_roster_retrieved": false,
+    "blocker": "OSF and lab-hosted Appendix S1 DOCX inaccessible via web; direct container requests DNS failures; PDF figure screenshot failed. No IDs reconstructed from guesses."
+  },
+  "new_sources": [
+    {
+      "study": "Schenk2018",
+      "doi": "10.1111/1365-2656.12694",
+      "archive": "10.5061/dryad.rm317",
+      "source": "https://onlinelibrary.wiley.com/doi/10.1111/1365-2656.12694/abstract",
+      "design": "randomized cage-level timing perturbation (0/3/6 days); species tested sequentially; measured temperature and early/late activity are not randomized buffer",
+      "cages_per_treatment": [
+        8,
+        10,
+        5
+      ],
+      "status": "published test-statistic extraction; raw workbooks not retrieved",
+      "archive_files": [
+        "Activity Index (early vs. late activity).xlsx",
+        "Survival rate, Activity Index, brood cells, nests, female offspring, Temp.xlsx"
+      ],
+      "eligible_theta": false
+    },
+    {
+      "study": "English2018",
+      "doi": "10.1002/ece3.4077",
+      "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6010731/",
+      "design": "observational seasonal prey and moonlight; annual per-nest and per-pair reproduction; differing denominators",
+      "status": "Table 5 extracted; raw data not retrieved",
+      "eligible_theta": false
+    },
+    {
+      "study": "GallagherCampbell2021",
+      "doi": "10.3389/fevo.2021.641693",
+      "source": "https://www.frontiersin.org/journals/ecology-and-evolution/articles/10.3389/fevo.2021.641693/full",
+      "design": "factorial flowering week x water treatment; water not independently manipulated temporal compensation",
+      "status": "Table 1 and results extracted",
+      "eligible_theta": false
+    },
+    {
+      "study": "LakeDiverSavage2024",
+      "doi": "10.1002/ajb2.16417",
+      "archive": "10.13020/bx1n-xf61",
+      "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11584043/",
+      "design": "frost experiment and delayed flowering cohort study in different years; hand versus open pollination; all delayed cohort plants initially held in cold storage",
+      "status": "published aggregate extraction; no raw file",
+      "eligible_theta": false
+    },
+    {
+      "study": "Vazquez2023",
+      "doi": "10.1098/rspb.2022.1847",
+      "archive": "10.5061/dryad.37pvmcvmp",
+      "source": "https://datadryad.org/dataset/doi:10.5061/dryad.37pvmcvmp",
+      "design": "9 years, 5 bee species; pollen diet and phenology, nesting and offspring emergence; observational",
+      "status": "original archive published 2026-01-23; README and file inventory only; underlying observations unopened",
+      "archive_files": [
+        "plants.csv",
+        "trampas.csv",
+        "emerg.csv",
+        "specialization_vs_r.csv",
+        "polen_megach_2006.csv",
+        "polen_megach_2007.csv",
+        "polen_megach_2008.csv"
+      ],
+      "eligible_theta": false
+    },
+    {
+      "study": "Wang2024",
+      "doi": "10.1016/j.scitotenv.2024.170458",
+      "source": "https://www.sciencedirect.com/science/article/pii/S0048969724005953",
+      "design": "26 plant species in a Chinese alpine grassland; signed mismatch and flowering duration with fecundity",
+      "status": "prior art for direction-by-duration hypothesis; no raw effects",
+      "eligible_theta": false
+    },
+    {
+      "study": "RaffertyIves2012",
+      "doi": "10.1890/11-0967.1",
+      "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3761069/",
+      "design": "flowering onset manipulation, pollinator identity and single-visit seed output in two perennial species",
+      "status": "candidate; article abstract inspected",
+      "eligible_theta": false
+    }
+  ],
+  "schenk_table1": [
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "female survival rate",
+      "contrast": "0 vs 3 days",
+      "t": -1.68,
+      "df": 15,
+      "p_printed": ".115",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "female survival rate",
+      "contrast": "0 vs 3 days",
+      "t": -3.59,
+      "df": 19,
+      "p_printed": ".002",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "female survival rate",
+      "contrast": "0 vs 3 days",
+      "t": -4.07,
+      "df": 8,
+      "p_printed": ".004",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "female survival rate",
+      "contrast": "0 vs 6 days",
+      "t": -9.1,
+      "df": 15,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "female survival rate",
+      "contrast": "0 vs 6 days",
+      "t": -6.65,
+      "df": 19,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "female survival rate",
+      "contrast": "0 vs 6 days",
+      "t": -5.31,
+      "df": 8,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "female survival rate",
+      "contrast": "3 vs 6 days",
+      "t": -7.42,
+      "df": 15,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "female survival rate",
+      "contrast": "3 vs 6 days",
+      "t": -3.06,
+      "df": 19,
+      "p_printed": ".007",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "female survival rate",
+      "contrast": "3 vs 6 days",
+      "t": -1.24,
+      "df": 8,
+      "p_printed": ".250",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "female activity index",
+      "contrast": "0 vs 3 days",
+      "t": -0.29,
+      "df": 15,
+      "p_printed": ".779",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "female activity index",
+      "contrast": "0 vs 3 days",
+      "t": -4.2,
+      "df": 19,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "female activity index",
+      "contrast": "0 vs 3 days",
+      "t": -4.27,
+      "df": 8,
+      "p_printed": ".003",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "female activity index",
+      "contrast": "0 vs 6 days",
+      "t": -7.22,
+      "df": 15,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "female activity index",
+      "contrast": "0 vs 6 days",
+      "t": -7.82,
+      "df": 19,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "female activity index",
+      "contrast": "0 vs 6 days",
+      "t": -5.42,
+      "df": 8,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "female activity index",
+      "contrast": "3 vs 6 days",
+      "t": -6.94,
+      "df": 15,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "female activity index",
+      "contrast": "3 vs 6 days",
+      "t": -3.62,
+      "df": 19,
+      "p_printed": ".002",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "female activity index",
+      "contrast": "3 vs 6 days",
+      "t": -1.15,
+      "df": 8,
+      "p_printed": ".283",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "brood cells per cage",
+      "contrast": "0 vs 3 days",
+      "t": 0.65,
+      "df": 15,
+      "p_printed": ".523",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "brood cells per cage",
+      "contrast": "0 vs 3 days",
+      "t": -0.99,
+      "df": 19,
+      "p_printed": ".332",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "brood cells per cage",
+      "contrast": "0 vs 3 days",
+      "t": -3.26,
+      "df": 8,
+      "p_printed": ".012",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "brood cells per cage",
+      "contrast": "0 vs 6 days",
+      "t": -4.07,
+      "df": 15,
+      "p_printed": ".001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "brood cells per cage",
+      "contrast": "0 vs 6 days",
+      "t": -4.46,
+      "df": 19,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "brood cells per cage",
+      "contrast": "0 vs 6 days",
+      "t": -4.66,
+      "df": 8,
+      "p_printed": ".002",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "brood cells per cage",
+      "contrast": "3 vs 6 days",
+      "t": -4.72,
+      "df": 15,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "brood cells per cage",
+      "contrast": "3 vs 6 days",
+      "t": -3.47,
+      "df": 19,
+      "p_printed": ".003",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "brood cells per cage",
+      "contrast": "3 vs 6 days",
+      "t": -1.4,
+      "df": 8,
+      "p_printed": ".198",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "nests per cage",
+      "contrast": "0 vs 3 days",
+      "t": 1.1,
+      "df": 15,
+      "p_printed": ".289",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "nests per cage",
+      "contrast": "0 vs 3 days",
+      "t": -2.53,
+      "df": 19,
+      "p_printed": ".021",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "nests per cage",
+      "contrast": "0 vs 3 days",
+      "t": -2.43,
+      "df": 8,
+      "p_printed": ".042",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "nests per cage",
+      "contrast": "0 vs 6 days",
+      "t": -4.24,
+      "df": 15,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "nests per cage",
+      "contrast": "0 vs 6 days",
+      "t": -6.13,
+      "df": 19,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "nests per cage",
+      "contrast": "0 vs 6 days",
+      "t": -3.93,
+      "df": 8,
+      "p_printed": ".004",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "nests per cage",
+      "contrast": "3 vs 6 days",
+      "t": -5.34,
+      "df": 15,
+      "p_printed": "<.001",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "nests per cage",
+      "contrast": "3 vs 6 days",
+      "t": -3.6,
+      "df": 19,
+      "p_printed": ".002",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "nests per cage",
+      "contrast": "3 vs 6 days",
+      "t": -1.51,
+      "df": 8,
+      "p_printed": ".171",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "female offspring per cage",
+      "contrast": "0 vs 3 days",
+      "t": -2.89,
+      "df": 15,
+      "p_printed": ".011",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "female offspring per cage",
+      "contrast": "0 vs 3 days",
+      "t": -0.49,
+      "df": 19,
+      "p_printed": ".633",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "female offspring per cage",
+      "contrast": "0 vs 3 days",
+      "t": -1.85,
+      "df": 8,
+      "p_printed": ".101",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "female offspring per cage",
+      "contrast": "0 vs 6 days",
+      "t": -3.02,
+      "df": 15,
+      "p_printed": ".009",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "female offspring per cage",
+      "contrast": "0 vs 6 days",
+      "t": -2.43,
+      "df": 19,
+      "p_printed": ".025",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "female offspring per cage",
+      "contrast": "0 vs 6 days",
+      "t": -1.94,
+      "df": 8,
+      "p_printed": ".088",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia cornuta",
+      "endpoint": "female offspring per cage",
+      "contrast": "3 vs 6 days",
+      "t": -0.12,
+      "df": 15,
+      "p_printed": ".910",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia bicornis",
+      "endpoint": "female offspring per cage",
+      "contrast": "3 vs 6 days",
+      "t": 1.95,
+      "df": 19,
+      "p_printed": ".102",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "1",
+      "species": "Osmia brevicornis",
+      "endpoint": "female offspring per cage",
+      "contrast": "3 vs 6 days",
+      "t": -0.09,
+      "df": 8,
+      "p_printed": ".932",
+      "eligible_theta": false
+    }
+  ],
+  "schenk_table2": [
+    {
+      "study": "Schenk2018",
+      "table": "2",
+      "species": "Osmia cornuta",
+      "endpoint": "female survival rate",
+      "term": "treatment x measured temperature",
+      "contrast": "0 vs 3 days",
+      "ndf": 1,
+      "ddf": 5,
+      "F": 0.24,
+      "p_printed": ".642",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "2",
+      "species": "Osmia bicornis",
+      "endpoint": "female survival rate",
+      "term": "treatment x measured temperature",
+      "contrast": "0 vs 3 days",
+      "ndf": 1,
+      "ddf": 7,
+      "F": 9.88,
+      "p_printed": ".016",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "2",
+      "species": "Osmia brevicornis",
+      "endpoint": "female survival rate",
+      "term": "treatment x measured temperature",
+      "contrast": "0 vs 3 days",
+      "ndf": 1,
+      "ddf": 2,
+      "F": 7.71,
+      "p_printed": ".109",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "2",
+      "species": "Osmia cornuta",
+      "endpoint": "female activity index",
+      "term": "treatment x early/late activity period",
+      "contrast": "0/3/6 days",
+      "ndf": 2,
+      "ddf": 36,
+      "F": 6.85,
+      "p_printed": ".003",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "2",
+      "species": "Osmia bicornis",
+      "endpoint": "female activity index",
+      "term": "treatment x early/late activity period",
+      "contrast": "0/3/6 days",
+      "ndf": 2,
+      "ddf": 46,
+      "F": 5.95,
+      "p_printed": ".005",
+      "eligible_theta": false
+    },
+    {
+      "study": "Schenk2018",
+      "table": "2",
+      "species": "Osmia brevicornis",
+      "endpoint": "female activity index",
+      "term": "treatment x early/late activity period",
+      "contrast": "0/3/6 days",
+      "ndf": 2,
+      "ddf": 20,
+      "F": 4.24,
+      "p_printed": ".064",
+      "eligible_theta": false
+    }
+  ],
+  "nightjar_table5": [
+    {
+      "year": 2011,
+      "nest": {
+        "mean": 1.1,
+        "sd": 0.88,
+        "n": 10
+      },
+      "pair": {
+        "mean": 1.56,
+        "sd": 0.88,
+        "n": 9
+      },
+      "multiple_attempts": {
+        "fraction": 0.33,
+        "n": 6
+      },
+      "second_after_success": {
+        "fraction": 0.2,
+        "n": 5
+      },
+      "moth_actual": {
+        "mean": 21.53,
+        "sd": 1.18
+      },
+      "moth_all": {
+        "mean": 18.35,
+        "sd": 3.81
+      }
+    },
+    {
+      "year": 2012,
+      "nest": {
+        "mean": 0.61,
+        "sd": 0.78,
+        "n": 18
+      },
+      "pair": {
+        "mean": 1.22,
+        "sd": 0.97,
+        "n": 9
+      },
+      "multiple_attempts": {
+        "fraction": 0.67,
+        "n": 9
+      },
+      "second_after_success": {
+        "fraction": 0.57,
+        "n": 7
+      },
+      "moth_actual": {
+        "mean": 12.54,
+        "sd": 4.32
+      },
+      "moth_all": {
+        "mean": 12.11,
+        "sd": 4.61
+      }
+    },
+    {
+      "year": 2013,
+      "nest": {
+        "mean": 0.6,
+        "sd": 0.97,
+        "n": 10
+      },
+      "pair": {
+        "mean": 1.33,
+        "sd": 1.03,
+        "n": 6
+      },
+      "multiple_attempts": {
+        "fraction": 0.33,
+        "n": 6
+      },
+      "second_after_success": {
+        "fraction": 0.5,
+        "n": 2
+      },
+      "moth_actual": null,
+      "moth_all": null
+    }
+  ],
+  "nightjar_descriptive_relative_changes": [
+    {
+      "year": 2012,
+      "reference": 2011,
+      "nest_relative_change": -0.44545454545454555,
+      "pair_relative_change": -0.21794871794871795
+    },
+    {
+      "year": 2013,
+      "reference": 2011,
+      "nest_relative_change": -0.4545454545454546,
+      "pair_relative_change": -0.14743589743589747
+    }
+  ],
+  "nightjar_limits": "Different sets and denominators; not a paired causal contrast. Only 3 years, 2013 moth data missing; per-nest annual difference reported p=.31, no equivalence or pooled interaction.",
+  "gallagher_table1": [
+    {
+      "endpoint": "pollinator type (percent Bombus)",
+      "chi_square": 12.64,
+      "df": 6,
+      "p_printed": "<.05"
+    },
+    {
+      "endpoint": "seed set",
+      "chi_square": 1.87,
+      "df": 6,
+      "p_printed": ">=.05 (not starred)"
+    },
+    {
+      "endpoint": "seed mass",
+      "chi_square": 1.37,
+      "df": 6,
+      "p_printed": ">=.05 (not starred)"
+    },
+    {
+      "endpoint": "floral abundance per plant",
+      "chi_square": 119.48,
+      "df": 6,
+      "p_printed": "<.001"
+    }
+  ],
+  "lake_diver_published": {
+    "source": "Results; separate 2021 freeze experiment and 2020 delay cohorts",
+    "freeze": {
+      "control": {
+        "fruits_total": 832,
+        "fruits_per_plant_mean": 13.9,
+        "sd": 13.6
+      },
+      "light": {
+        "fruits_total": 759,
+        "fruits_per_plant_mean": 12.7,
+        "sd": 15.2
+      },
+      "hard": {
+        "fruits_total": 60,
+        "fruits_per_plant_mean": 1,
+        "sd": 2.3
+      },
+      "visitation_per_viable_flower": {
+        "z": -0.09,
+        "p": 0.93
+      },
+      "hard_vs_control_mean_ratio": 0.07194244604316546,
+      "limit": "Viable-flower visitation is a conditional per-flower endpoint, not whole-plant service. Frost is not a direct partner timing perturbation."
+    },
+    "delayed_cohorts": {
+      "week2": {
+        "n_plants": 66,
+        "ovary_swelling_mean_percent": 26.8,
+        "sd": 23.6
+      },
+      "week3": {
+        "n_plants": 63,
+        "ovary_swelling_mean_percent": 11.3,
+        "sd": 13.6
+      },
+      "ratio_3_to_2": 0.4216417910447761,
+      "z": -2.17,
+      "p": 0.03,
+      "author_alpha": 0.01,
+      "limit": "Non-randomized cohort contrast within already delayed plants; ovary swelling is not final seed yield. Author does not declare p=.03 significant at alpha=.01."
+    }
+  },
+  "harriman_existing_source_design": {
+    "doi": "10.1002/ece3.2815",
+    "incubation": {
+      "control": {
+        "mean": 13.23,
+        "sd": 0.7,
+        "n": 111
+      },
+      "delay": {
+        "mean": 18.5,
+        "sd": 0.88,
+        "n": 112
+      }
+    },
+    "arm_n": {
+      "control_enlarged": 34,
+      "control_unmodified": 42,
+      "control_reduced": 35,
+      "delay_enlarged": 32,
+      "delay_unmodified": 45,
+      "delay_reduced": 35
+    },
+    "eligible_theta": false,
+    "limit": "Arm denominators confirmed (223 nests); no comparable arm outcome/covariance obtained. Brood manipulation changes demand; not pure recourse."
+  },
+  "admitted_primary_theta": 0
+}

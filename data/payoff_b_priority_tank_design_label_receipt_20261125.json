@@ -1,0 +1,1792 @@
+{
+  "status": "SOURCE_DESIGN_LABEL_RECEIPT_ONLY",
+  "source_sha256": "19535539c5585ecd2ed2de6131058267920007b52625468081c8f1a267c5c08a",
+  "rows": 828,
+  "tanks": 69,
+  "records": [
+    {
+      "container_code": "NN-H-1",
+      "block": "1",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-H-2",
+      "block": "2",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-H-3",
+      "block": "3",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-H-4",
+      "block": "4",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-H-5",
+      "block": "1",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-H-6",
+      "block": "2",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-H-7",
+      "block": "4",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-H-1",
+      "block": "1",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-H-2",
+      "block": "2",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-H-3",
+      "block": "3",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-H-4",
+      "block": "1",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-H-5",
+      "block": "1",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-H-6",
+      "block": "3",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-H-7",
+      "block": "4",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-H-1",
+      "block": "1",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-H-2",
+      "block": "3",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-H-3",
+      "block": "3",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-H-4",
+      "block": "1",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-H-5",
+      "block": "1",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-H-6",
+      "block": "2",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-H-7",
+      "block": "4",
+      "mix": "1",
+      "food": "High",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-H-1",
+      "block": "1",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 5,
+        "?": 1,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 5
+        },
+        {
+          "string": "None",
+          "numeric": "1",
+          "n": 1
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-H-2",
+      "block": "2",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-H-3",
+      "block": "3",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-H-4",
+      "block": "4",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-H-5",
+      "block": "2",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 5,
+        "D": 7
+      },
+      "phenology_numeric": {
+        "1": 5,
+        "2": 7
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 5
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 7
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-H-6",
+      "block": "3",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-H-7",
+      "block": "3",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-H-1",
+      "block": "1",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-H-2",
+      "block": "2",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-H-3",
+      "block": "4",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-H-4",
+      "block": "4",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-H-5",
+      "block": "2",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-H-6",
+      "block": "3",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-H-7",
+      "block": "3",
+      "mix": "2",
+      "food": "High",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-L-1",
+      "block": "1",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-L-2",
+      "block": "2",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-L-3",
+      "block": "3",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-L-4",
+      "block": "4",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-L-5",
+      "block": "1",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-L-6",
+      "block": "2",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NN-L-7",
+      "block": "4",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 12
+      },
+      "phenology_numeric": {
+        "1": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-L-1",
+      "block": "1",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-L-2",
+      "block": "2",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-L-3",
+      "block": "3",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-L-4",
+      "block": "1",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-L-5",
+      "block": "1",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-L-6",
+      "block": "3",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "DD-L-7",
+      "block": "4",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "D": 12
+      },
+      "phenology_numeric": {
+        "2": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-L-1",
+      "block": "1",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-L-2",
+      "block": "3",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-L-3",
+      "block": "3",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-L-4",
+      "block": "1",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-L-5",
+      "block": "2",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-L-6",
+      "block": "2",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "EE-L-7",
+      "block": "4",
+      "mix": "1",
+      "food": "Low",
+      "phenology_labels": {
+        "E": 12
+      },
+      "phenology_numeric": {
+        "3": 12
+      },
+      "joint_label_codes": [
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 12
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-L-1",
+      "block": "1",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-L-2",
+      "block": "2",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-L-3",
+      "block": "4",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 5,
+        "D": 7
+      },
+      "phenology_numeric": {
+        "1": 5,
+        "2": 7
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 5
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 7
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-L-5",
+      "block": "2",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-L-6",
+      "block": "3",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "ND-L-7",
+      "block": "4",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "D": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "2": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Delayed (6days)",
+          "numeric": "2",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-L-1",
+      "block": "2",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-L-2",
+      "block": "2",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-L-3",
+      "block": "4",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-L-4",
+      "block": "4",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-L-5",
+      "block": "2",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 6,
+        "E": 6
+      },
+      "phenology_numeric": {
+        "1": 6,
+        "3": 6
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 6
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 6
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-L-6",
+      "block": "3",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 5,
+        "E": 7
+      },
+      "phenology_numeric": {
+        "1": 5,
+        "3": 7
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 5
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 7
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    },
+    {
+      "container_code": "NE-L-7",
+      "block": "3",
+      "mix": "2",
+      "food": "Low",
+      "phenology_labels": {
+        "N": 5,
+        "E": 7
+      },
+      "phenology_numeric": {
+        "1": 5,
+        "3": 7
+      },
+      "joint_label_codes": [
+        {
+          "string": "Normal",
+          "numeric": "1",
+          "n": 5
+        },
+        {
+          "string": "Extra delayed (12 days)",
+          "numeric": "3",
+          "n": 7
+        }
+      ],
+      "unique_larvae_slots": 12,
+      "constant_assignments": true
+    }
+  ],
+  "source_composition_compatible": 64,
+  "post_diagnosis": {
+    "counts": {
+      "NN-H": {
+        "total": 7,
+        "strict_compatible": 7,
+        "issues": 0
+      },
+      "DD-H": {
+        "total": 7,
+        "strict_compatible": 7,
+        "issues": 0
+      },
+      "EE-H": {
+        "total": 7,
+        "strict_compatible": 7,
+        "issues": 0
+      },
+      "ND-H": {
+        "total": 7,
+        "strict_compatible": 5,
+        "issues": 2
+      },
+      "NE-H": {
+        "total": 7,
+        "strict_compatible": 7,
+        "issues": 0
+      },
+      "NN-L": {
+        "total": 7,
+        "strict_compatible": 7,
+        "issues": 0
+      },
+      "DD-L": {
+        "total": 7,
+        "strict_compatible": 7,
+        "issues": 0
+      },
+      "EE-L": {
+        "total": 7,
+        "strict_compatible": 7,
+        "issues": 0
+      },
+      "ND-L": {
+        "total": 6,
+        "strict_compatible": 5,
+        "issues": 1
+      },
+      "NE-L": {
+        "total": 7,
+        "strict_compatible": 5,
+        "issues": 2
+      }
+    },
+    "issues": [
+      {
+        "container": "ND-H-1",
+        "block": "1",
+        "observed_text": {
+          "N": 5,
+          "?": 1,
+          "D": 6
+        },
+        "observed_numeric": {
+          "N": 6,
+          "D": 6
+        },
+        "assignment_ok": true
+      },
+      {
+        "container": "ND-H-5",
+        "block": "2",
+        "observed_text": {
+          "N": 5,
+          "D": 7
+        },
+        "observed_numeric": {
+          "N": 5,
+          "D": 7
+        },
+        "assignment_ok": true
+      },
+      {
+        "container": "ND-L-3",
+        "block": "4",
+        "observed_text": {
+          "N": 5,
+          "D": 7
+        },
+        "observed_numeric": {
+          "N": 5,
+          "D": 7
+        },
+        "assignment_ok": true
+      },
+      {
+        "container": "NE-L-6",
+        "block": "3",
+        "observed_text": {
+          "N": 5,
+          "E": 7
+        },
+        "observed_numeric": {
+          "N": 5,
+          "E": 7
+        },
+        "assignment_ok": true
+      },
+      {
+        "container": "NE-L-7",
+        "block": "3",
+        "observed_text": {
+          "N": 5,
+          "E": 7
+        },
+        "observed_numeric": {
+          "N": 5,
+          "E": 7
+        },
+        "assignment_ok": true
+      }
+    ],
+    "compatible": 64,
+    "all_groups_ge4": true,
+    "issue_classes": {
+      "missing_string_but_documented_numeric_code": 1,
+      "both_codes_agree_5_to_7": 4
+    },
+    "first_parser_hold": "UNEXPECTED_TANK_COMPOSITION",
+    "second_parser_hold": "UNRESOLVED_TANK_CODE (actual hyphen-separated source codes)",
+    "analysis_status": "HOLD_ORIGINAL_FIT; no outcome opened by this diagnosis",
+    "next_policy": "Before new fit, document amendment: main strict 64-tank subset, verify the recorded numeric PhenN code for the one missing text label in sensitivity, report separate all observed 5:7 tanks sensitivity without relabeling. Require >=4 usable tanks per cell after endpoint checks. Exclusions based on design only; report possible selection and no new primary theta."
+  },
+  "provenance": {
+    "run": 45543214729,
+    "job": 138966483310,
+    "artifact_id": 14989848597,
+    "artifact_zip_sha256": "0d010d6bce6688422183fd5fe6d9353bee21976cb387dfe924b98dcddf0f66d4",
+    "extraction": "Exact design-only job log plus deterministic source assignment audit; uploaded ZIP digest from log, ZIP not independently downloaded."
+  }
+}

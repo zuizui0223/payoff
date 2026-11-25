@@ -1,0 +1,27 @@
+name: PAYOFF-B Pardee source-grain diagnostic
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/payoff-b-pardee-source-diagnostic.yml'
+      - 'scripts/payoff_b_pardee_source_diagnostic_20261125.py'
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    if: github.head_ref == 'analysis/payoff-b-interaction-buffering-meta-20261125'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests numpy openpyxl
+      - run: python scripts/payoff_b_pardee_source_diagnostic_20261125.py outputs/payoff_b_pardee_source_diagnostic.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-pardee-source-diagnostic
+          path: outputs/payoff_b_pardee_source_diagnostic.json
+          if-no-files-found: warn
