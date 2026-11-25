@@ -1,0 +1,325 @@
+{
+  "status": "NO_PRIMARY_THETA",
+  "oak": {
+    "doi": "10.5061/dryad.sn02v6x2b",
+    "audit": {
+      "n_rows": 960,
+      "labels": [
+        "Control",
+        "Pollen-addition"
+      ],
+      "years": [
+        "2018",
+        "2019"
+      ],
+      "exclusions_by_arm": {
+        "0": {
+          "rows": 480,
+          "incomplete": 61,
+          "complete_positive_flower_shoots": 417,
+          "zero_flowers": 2
+        },
+        "1": {
+          "rows": 480,
+          "complete_positive_flower_shoots": 398,
+          "incomplete": 81,
+          "zero_flowers": 1
+        }
+      },
+      "observed_tree_years": 151,
+      "paired_tree_years": 137,
+      "paired_trees": 75,
+      "paired_year_counts": {
+        "2018": 67,
+        "2019": 70
+      },
+      "complete_shoots_final_gt_june": 0
+    },
+    "status": "EXPLORATORY_SECONDARY_STAGE_CONTRAST_COMPLETE",
+    "estimates": {
+      "control_june": {
+        "estimate": 0.4551599341943063,
+        "interval_95": [
+          0.4012420241711465,
+          0.5087508641966347
+        ]
+      },
+      "control_final": {
+        "estimate": 0.301209159492115,
+        "interval_95": [
+          0.2535835668080488,
+          0.349440715703147
+        ]
+      },
+      "supplement_june": {
+        "estimate": 0.4758153434701027,
+        "interval_95": [
+          0.41992216882549227,
+          0.5323401728988659
+        ]
+      },
+      "supplement_final": {
+        "estimate": 0.3284506157041486,
+        "interval_95": [
+          0.27833716434298517,
+          0.3793951445329323
+        ]
+      },
+      "rd_june_pp": {
+        "estimate": 2.06554092757964,
+        "interval_95": [
+          -5.062324142212484,
+          9.10911659011573
+        ]
+      },
+      "rd_final_pp": {
+        "estimate": 2.7241456212033555,
+        "interval_95": [
+          -3.7598866362726238,
+          9.22021433573383
+        ]
+      },
+      "rd_final_minus_june_pp": {
+        "estimate": 0.6586046936237153,
+        "interval_95": [
+          -2.3931507843229722,
+          3.620014451396554
+        ]
+      },
+      "logrr_june": {
+        "estimate": 0.04438098416752542,
+        "interval_95": [
+          -0.11076715582605413,
+          0.19613457831991052
+        ]
+      },
+      "logrr_final": {
+        "estimate": 0.08658158844794832,
+        "interval_95": [
+          -0.12034621794989941,
+          0.29410000281977783
+        ]
+      },
+      "logrr_final_minus_june": {
+        "estimate": 0.042200604280422896,
+        "interval_95": [
+          -0.052740121456775424,
+          0.13671344953946282
+        ]
+      }
+    },
+    "year_strata": {
+      "2018": {
+        "control_june": 0.4586335988662591,
+        "control_final": 0.28750114508455155,
+        "supplement_june": 0.4247200353543638,
+        "supplement_final": 0.2862665112665113,
+        "rd_june_pp": -3.391356351189528,
+        "rd_final_pp": -0.12346338180402316,
+        "rd_final_minus_june_pp": 3.267892969385505,
+        "logrr_june": -0.07682142021410703,
+        "logrr_final": -0.0043036086469241674,
+        "logrr_final_minus_june": 0.07251781156718286
+      },
+      "2019": {
+        "control_june": 0.4518351408654368,
+        "control_final": 0.3143296875679257,
+        "supplement_june": 0.5247208526665961,
+        "supplement_final": 0.3688268299516016,
+        "rd_june_pp": 7.288571180115927,
+        "rd_final_pp": 5.4497142383675925,
+        "rd_final_minus_june_pp": -1.8388569417483343,
+        "logrr_june": 0.14954903127514474,
+        "logrr_final": 0.15988484287004423,
+        "logrr_final_minus_june": 0.010335811594899491
+      }
+    },
+    "bootstrap_draws": 10000,
+    "bootstrap_unit": "whole_tree",
+    "primary_theta_eligible": false,
+    "causal_mismatch_claim": false
+  },
+  "vazquez": {
+    "doi": "10.5061/dryad.37pvmcvmp",
+    "status": "METADATA_ONLY_NO_RAW_DOWNLOAD",
+    "pages": 2,
+    "files": {
+      "emerg_trampas_phenology_bootstrap.r": {
+        "file_id": 4565819,
+        "size": 6386,
+        "digest": "a44c21f7138c0c5f37cd4fb2b948673206c8624e7e500bd56e0479d21eb596d8",
+        "digest_type": "sha-256"
+      },
+      "emerg_trampas_phenology.r": {
+        "file_id": 4565818,
+        "size": 6915,
+        "digest": "6fae716f165b04714a3bc42f1e82b311f6b03260eabf27f5762c65f102ef35e9",
+        "digest_type": "sha-256"
+      },
+      "emerg.csv": {
+        "file_id": 4565810,
+        "size": 98277,
+        "digest": "02782d8fc1576e2812fd13905db9ac946bae120aa4ab712610e8b4d698f3bbec",
+        "digest_type": "sha-256"
+      },
+      "insectos_catalogo_resumido.csv": {
+        "file_id": 4565812,
+        "size": 182,
+        "digest": "06147b204c7a7fead73dbd123b828a94cac4c1a04a42d0c74d1137ce00be1058",
+        "digest_type": "sha-256"
+      },
+      "list2matr.R": {
+        "file_id": 4565820,
+        "size": 712,
+        "digest": "7bd9cc592b095f1b8c3b4e4f9374f546dd9d2406962c06ce4563cc9ad1d73300",
+        "digest_type": "sha-256"
+      },
+      "lm.largo.ocup-no.celd.tri.lat.r": {
+        "file_id": 4565821,
+        "size": 947,
+        "digest": "9092f55e561bd0618d9431a53933eecdaa53b267861df161483954603f5441c6",
+        "digest_type": "sha-256"
+      },
+      "lm.largo.ocup-no.celd.xyl.ata.r": {
+        "file_id": 4565822,
+        "size": 895,
+        "digest": "ee598af5295e881b387924af10c9e9914a27dd772e71944c0572d86a15778653",
+        "digest_type": "sha-256"
+      },
+      "mismatch_phenol_indiv_nests.r": {
+        "file_id": 4565823,
+        "size": 10527,
+        "digest": "fea5aa4008911e97f9f9d8506cf71af5b781869e8468ba53ffa22d2d1cb59e1c",
+        "digest_type": "sha-256"
+      },
+      "mismatch_phenol_lambda_bootstrap.r": {
+        "file_id": 4565825,
+        "size": 9219,
+        "digest": "77acfb9c7c7fd131160b79449f28dd5568363e73fa5c2fffe3d1620614a8692e",
+        "digest_type": "sha-256"
+      },
+      "mismatch_phenol_lambda.r": {
+        "file_id": 4565824,
+        "size": 5054,
+        "digest": "aea2569e8cef3a150413eb5dc372f62d4b613f9ebb223dd45200011af1258d87",
+        "digest_type": "sha-256"
+      },
+      "mismatch_phenol_mean_cells.r": {
+        "file_id": 4565826,
+        "size": 9972,
+        "digest": "b8d1fcf6389c43cc5f8c029ec4b8ea9de481418579ff518fbe25ca15930dd8ea",
+        "digest_type": "sha-256"
+      },
+      "plant_data.r": {
+        "file_id": 4565827,
+        "size": 1435,
+        "digest": "1c043491a21ee5bcaaf8f65a0a7c33e5c446808093dc6b81d909dff33a226ed3",
+        "digest_type": "sha-256"
+      },
+      "plantas_catalogo.csv": {
+        "file_id": 4565813,
+        "size": 22399,
+        "digest": "5cb991c0f2d83a660a939838ab29b23912a89371c353f79565bf2c6a15cb0735",
+        "digest_type": "sha-256"
+      },
+      "plants.csv": {
+        "file_id": 4565814,
+        "size": 153288,
+        "digest": "ec840aa2e9a1e3b84647b58ca820080396b0070f3ad951f73d1ae5bd9e019a7f",
+        "digest_type": "sha-256"
+      },
+      "polen_megach_2006.csv": {
+        "file_id": 4565815,
+        "size": 218558,
+        "digest": "3786417a2ea07a5797e7e1421e43c24d1b59c79a120cca509caf2d6d40f2d94e",
+        "digest_type": "sha-256"
+      },
+      "polen_megach_2007.csv": {
+        "file_id": 4565816,
+        "size": 491023,
+        "digest": "9c366dc35d630e31f91ab6ffdf10390ab5ab88a839596b69a5c8d94f4b84cd0f",
+        "digest_type": "sha-256"
+      },
+      "polen_megach_2008.csv": {
+        "file_id": 4565817,
+        "size": 975307,
+        "digest": "860982e39084a10c77ae8a8ab10eb2da70423a618bbbfb6401b7d6478c3f7607",
+        "digest_type": "sha-256"
+      },
+      "prop.pollen.ant.vig.r": {
+        "file_id": 4565829,
+        "size": 6499,
+        "digest": "3a70c167d0bcbcfe4cdd643f311f9aa0ff4acb9446b0f6c3cd2542a60c0f8d6d",
+        "digest_type": "sha-256"
+      },
+      "prop.pollen.meg.a.r": {
+        "file_id": 4565828,
+        "size": 6950,
+        "digest": "5e7152c32afd4a8e587dacef3c550d57bff0fe41297cdd61926c12357e1f8484",
+        "digest_type": "sha-256"
+      },
+      "prop.pollen.meg.cte.r": {
+        "file_id": 4565832,
+        "size": 6506,
+        "digest": "acb8f0a825f54bb91e6af446148f1da3c74fd4cf01b7d6306500cd96769a287b",
+        "digest_type": "sha-256"
+      },
+      "prop.pollen.tri.lat.r": {
+        "file_id": 4565831,
+        "size": 6507,
+        "digest": "4bfc4e3d3c9829a8c3c5167d70da943a92faaa502a53b4fc08d49c5a2e17c52c",
+        "digest_type": "sha-256"
+      },
+      "prop.pollen.xyl.ata.r": {
+        "file_id": 4565830,
+        "size": 6508,
+        "digest": "4fdafb1a4c64fda7b712bc7e89ddf0c53cbd58a52374c3df03be6032114c84f6",
+        "digest_type": "sha-256"
+      },
+      "README.md": {
+        "file_id": 4565844,
+        "size": 9061,
+        "digest": "d91b3d2768863c5a8a7ed1e8fe4156b90318f92e9915034b3764f66ca296bb01",
+        "digest_type": "sha-256"
+      },
+      "specialization_vs_r.csv": {
+        "file_id": 4565809,
+        "size": 1358,
+        "digest": "1cc49d596f5f8f11fac2219285594102da679a39b538a7cca63674dd815d08f9",
+        "digest_type": "sha-256"
+      },
+      "trampas.csv": {
+        "file_id": 4565811,
+        "size": 70242,
+        "digest": "ed2d158fc1930924c06ff72883d296e4a8690984bd8d7daf8a386880441f9c59",
+        "digest_type": "sha-256"
+      }
+    },
+    "required_complete": true,
+    "missing": []
+  },
+  "provenance": {
+    "source_url": "https://zenodo.org/records/5306693/files/pollen_addition_results.csv?download=1",
+    "provider_md5": "9bb924a2d0739e78e6823f1df6878e6a",
+    "source_sha256": "3075bfa3f41a0f702d23bab9ce444318160ce37fea91cf7eea602dc098e5bd21",
+    "source_bytes": 31612,
+    "run": "https://github.com/zuizui0223/payoff/actions/runs/45530248666",
+    "job": 138923474484,
+    "artifact_id": 14983749525,
+    "artifact_zip_sha256": "f6d11b08ea22994515408834b3a3b00c0ffd5741f69d33977472ba70e9fd2db1",
+    "extraction": "Exact aggregate JSON from executed job log; artifact manifest digest from upload log; ZIP itself not independently downloaded. No raw rows."
+  },
+  "prior_source_gate": {
+    "run": 45528449801,
+    "artifact_id": 14982569004,
+    "artifact_zip_sha256": "ea4e5eb26b45090b19d1880a415cb40124ee9b025484b60fe25ecd1ca96958d3",
+    "synthetic_tests_passed": 5,
+    "source_status": {
+      "Schenk": "two HTTP_401",
+      "Nanke": "HTTP_401",
+      "KudoCooper": "HTTP_401",
+      "Vazquez": "incomplete first-page manifest (later diagnosed)"
+    }
+  },
+  "novelty_boundary": "Oak within-tree supplementary pollen contrast across reproductive stages, not original synchrony-by-treatment interaction or a direct test of endogenous recourse. Source CSV lacks synchrony. No independent primary theta added."
+}
