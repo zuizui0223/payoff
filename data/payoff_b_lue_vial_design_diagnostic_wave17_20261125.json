@@ -1,0 +1,36 @@
+{
+  "status": "SOURCE_DESIGN_DIAGNOSTIC_ONLY",
+  "source": "leorjorge/LueDietBreadth@v1.2.1:IndividualData.csv",
+  "git_blob": "a3eec02773b391fec7af8b4713a0fdca2f52743a",
+  "source_bytes": 1585319,
+  "source_rows": 49950,
+  "unique_row_ids": 49950,
+  "vials": 999,
+  "cells": 105,
+  "vials_per_cell_min": 7,
+  "vials_per_cell_max": 12,
+  "issues": [
+    {
+      "vial": 85,
+      "host": "PSA",
+      "parasitoid": "A",
+      "temperature": 20,
+      "replicate": 2,
+      "rows": 50,
+      "unique_slots": 49,
+      "missing_slot": 6,
+      "repeated_slot": 7
+    },
+    {
+      "vial": 179,
+      "host": "SUL",
+      "parasitoid": "A",
+      "temperature": 28,
+      "replicate": 10,
+      "rows": 50,
+      "unique_slots": 50,
+      "blank_outcomes": 19
+    }
+  ],
+  "note": "Exact source blob requested from GitHub REST; file response ASCII length matches published tree. Source-level hash validation still required. No cell mean or effect fitted by this diagnostic. Blank outcomes not coded as death."
+}
