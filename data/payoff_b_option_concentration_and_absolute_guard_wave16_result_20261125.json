@@ -1,0 +1,408 @@
+{
+  "status": "POST_OUTCOME_DESCRIPTIVE_OPTION_CONCENTRATION_AND_FOUR_ARM_DIAGNOSTIC",
+  "primary_theta_added": 0,
+  "meta_pooled": false,
+  "host_ablation": {
+    "profiles": [
+      {
+        "population": "B",
+        "oak": 0.05,
+        "training_top": "Salba",
+        "training_second": "Betula",
+        "all8_ranked": 0.39,
+        "top_removed_ranked": 0.14,
+        "top_removed_oracle": 0.24,
+        "top_two_removed_ranked": 0.23,
+        "top_two_removed_oracle": 0.24,
+        "top_removed_gain_vs_oak": 0.09000000000000001,
+        "fixed_option_size": {
+          "1": {
+            "n_subsets": 8,
+            "n_top_present": 1,
+            "n_top_absent": 7,
+            "top_present_survival": 0.39,
+            "top_absent_survival": 0.13285714285714287,
+            "top_presence_difference": 0.2571428571428571,
+            "expected_survival": 0.165,
+            "fraction_exceeding_oak_if_top_absent": 0.8571428571428571
+          },
+          "2": {
+            "n_subsets": 28,
+            "n_top_present": 7,
+            "n_top_absent": 21,
+            "top_present_survival": 0.39000000000000007,
+            "top_absent_survival": 0.15666666666666668,
+            "top_presence_difference": 0.2333333333333334,
+            "expected_survival": 0.21500000000000005,
+            "fraction_exceeding_oak_if_top_absent": 0.9523809523809523
+          },
+          "4": {
+            "n_subsets": 70,
+            "n_top_present": 35,
+            "n_top_absent": 35,
+            "top_present_survival": 0.3900000000000002,
+            "top_absent_survival": 0.16171428571428578,
+            "top_presence_difference": 0.2282857142857144,
+            "expected_survival": 0.2758571428571431,
+            "fraction_exceeding_oak_if_top_absent": 1
+          }
+        }
+      },
+      {
+        "population": "D",
+        "oak": 0.12,
+        "training_top": "Salba",
+        "training_second": "Betula",
+        "all8_ranked": 0.57,
+        "top_removed_ranked": 0.3,
+        "top_removed_oracle": 0.3,
+        "top_two_removed_ranked": 0.2,
+        "top_two_removed_oracle": 0.22,
+        "top_removed_gain_vs_oak": 0.18,
+        "fixed_option_size": {
+          "1": {
+            "n_subsets": 8,
+            "n_top_present": 1,
+            "n_top_absent": 7,
+            "top_present_survival": 0.57,
+            "top_absent_survival": 0.12142857142857144,
+            "top_presence_difference": 0.4485714285714285,
+            "expected_survival": 0.17750000000000002,
+            "fraction_exceeding_oak_if_top_absent": 0.42857142857142855
+          },
+          "2": {
+            "n_subsets": 28,
+            "n_top_present": 7,
+            "n_top_absent": 21,
+            "top_present_survival": 0.57,
+            "top_absent_survival": 0.18523809523809526,
+            "top_presence_difference": 0.3847619047619047,
+            "expected_survival": 0.2814285714285714,
+            "fraction_exceeding_oak_if_top_absent": 0.7142857142857143
+          },
+          "4": {
+            "n_subsets": 70,
+            "n_top_present": 35,
+            "n_top_absent": 35,
+            "top_present_survival": 0.5700000000000002,
+            "top_absent_survival": 0.2542857142857143,
+            "top_presence_difference": 0.3157142857142859,
+            "expected_survival": 0.41214285714285726,
+            "fraction_exceeding_oak_if_top_absent": 0.9714285714285714
+          }
+        }
+      },
+      {
+        "population": "E",
+        "oak": 0.13,
+        "training_top": "Salba",
+        "training_second": "Betula",
+        "all8_ranked": 0.46,
+        "top_removed_ranked": 0.29,
+        "top_removed_oracle": 0.42,
+        "top_two_removed_ranked": 0.42,
+        "top_two_removed_oracle": 0.42,
+        "top_removed_gain_vs_oak": 0.15999999999999998,
+        "fixed_option_size": {
+          "1": {
+            "n_subsets": 8,
+            "n_top_present": 1,
+            "n_top_absent": 7,
+            "top_present_survival": 0.46,
+            "top_absent_survival": 0.21428571428571427,
+            "top_presence_difference": 0.24571428571428575,
+            "expected_survival": 0.245,
+            "fraction_exceeding_oak_if_top_absent": 0.5714285714285714
+          },
+          "2": {
+            "n_subsets": 28,
+            "n_top_present": 7,
+            "n_top_absent": 21,
+            "top_present_survival": 0.46,
+            "top_absent_survival": 0.2761904761904762,
+            "top_presence_difference": 0.1838095238095238,
+            "expected_survival": 0.3221428571428572,
+            "fraction_exceeding_oak_if_top_absent": 0.7619047619047619
+          },
+          "4": {
+            "n_subsets": 70,
+            "n_top_present": 35,
+            "n_top_absent": 35,
+            "top_present_survival": 0.46000000000000046,
+            "top_absent_survival": 0.3057142857142856,
+            "top_presence_difference": 0.15428571428571486,
+            "expected_survival": 0.3828571428571431,
+            "fraction_exceeding_oak_if_top_absent": 0.8857142857142857
+          }
+        }
+      },
+      {
+        "population": "S",
+        "oak": 0.29,
+        "training_top": "Salba",
+        "training_second": "Malus",
+        "all8_ranked": 0.45,
+        "top_removed_ranked": 0.09,
+        "top_removed_oracle": 0.45,
+        "top_two_removed_ranked": 0.45,
+        "top_two_removed_oracle": 0.45,
+        "top_removed_gain_vs_oak": -0.19999999999999998,
+        "fixed_option_size": {
+          "1": {
+            "n_subsets": 8,
+            "n_top_present": 1,
+            "n_top_absent": 7,
+            "top_present_survival": 0.45,
+            "top_absent_survival": 0.10571428571428573,
+            "top_presence_difference": 0.3442857142857143,
+            "expected_survival": 0.14875000000000002,
+            "fraction_exceeding_oak_if_top_absent": 0.14285714285714285
+          },
+          "2": {
+            "n_subsets": 28,
+            "n_top_present": 7,
+            "n_top_absent": 21,
+            "top_present_survival": 0.45000000000000007,
+            "top_absent_survival": 0.1580952380952381,
+            "top_presence_difference": 0.291904761904762,
+            "expected_survival": 0.2310714285714286,
+            "fraction_exceeding_oak_if_top_absent": 0.23809523809523808
+          },
+          "4": {
+            "n_subsets": 70,
+            "n_top_present": 35,
+            "n_top_absent": 35,
+            "top_present_survival": 0.4499999999999997,
+            "top_absent_survival": 0.18599999999999997,
+            "top_presence_difference": 0.2639999999999997,
+            "expected_survival": 0.31799999999999967,
+            "fraction_exceeding_oak_if_top_absent": 0.2857142857142857
+          }
+        }
+      }
+    ],
+    "aggregate": {
+      "oak": 0.1475,
+      "all8_ranked": 0.46749999999999997,
+      "top_removed_ranked": 0.205,
+      "top_removed_oracle": 0.3525,
+      "top_two_removed_ranked": 0.325,
+      "top_two_removed_oracle": 0.33249999999999996,
+      "all8_gain_vs_oak": 0.31999999999999995,
+      "top_removed_gain_vs_oak": 0.057499999999999996,
+      "fraction_of_gain_lost_when_top_unavailable": 0.8203125
+    },
+    "same_option_count": {
+      "1": {
+        "n_subsets_per_population": 8,
+        "top_present_survival": 0.46749999999999997,
+        "top_absent_survival": 0.1435714285714286,
+        "top_presence_difference": 0.32392857142857145,
+        "fraction_exceeding_oak_if_top_absent": 0.49999999999999994
+      },
+      "2": {
+        "n_subsets_per_population": 28,
+        "top_present_survival": 0.4675,
+        "top_absent_survival": 0.19404761904761905,
+        "top_presence_difference": 0.273452380952381,
+        "fraction_exceeding_oak_if_top_absent": 0.6666666666666666
+      },
+      "4": {
+        "n_subsets_per_population": 70,
+        "top_present_survival": 0.46750000000000014,
+        "top_absent_survival": 0.2269285714285714,
+        "top_presence_difference": 0.24057142857142869,
+        "fraction_exceeding_oak_if_top_absent": 0.7857142857142857
+      }
+    },
+    "scope": "Post-outcome deterministic enumeration of the four already observed population × host survival matrices. Top host identified only in each training fold; all four folds rank Salix alba first. No bootstrap or new independence claim. Forced choice from remaining non-oak options; no timing treatment, behavior, cost or field availability."
+  },
+  "diagnostic": {
+    "definitions": "W_db with D=reference/perturbed, B=reference/candidate buffer. beta=log(W01/W00); r0=log(W10/W00); r1=log(W11/W01); theta=r1-r0; eta=log(W11/W10)=beta+theta; rho=W11/W00. Positive theta alone does not imply absolute benefit eta>0. A baseline penalty beta<0 requires theta>−beta for absolute gain; an absolute reference target must be specified independently to diagnose functional collapse. Do not change frozen theta eligibility.",
+    "synthetic_counterexample": {
+      "means": {
+        "W00": 0.8,
+        "W01": 0.1,
+        "W10": 0.4,
+        "W11": 0.08
+      },
+      "r0": -0.6931471805599453,
+      "r1": -0.22314355131420985,
+      "theta": 0.47000362924573547,
+      "beta": -2.0794415416798357,
+      "eta": -1.6094379124341005,
+      "recovery_relative_to_reference": 0.09999999999999999,
+      "absolute_disturbed_gain_fraction": -0.8,
+      "reference_perturbation_detrimental": true,
+      "relative_attenuation_point": true,
+      "absolute_disturbed_improvement_point": false,
+      "point_category": "RELATIVE_ATTENUATION_WITHOUT_ABSOLUTE_GAIN_POINT"
+    },
+    "secondary_snow_pollen": {
+      "Claytonia": {
+        "main": "unchanged",
+        "modes": {
+          "unchanged": {
+            "means": {
+              "W00": 11.00474537037037,
+              "W01": 13.23263888888889,
+              "W10": 7.75462962962963,
+              "W11": 8.722222222222221
+            },
+            "r0": -0.3500365405047009,
+            "r1": -0.41681237328577103,
+            "theta": -0.06677583278107013,
+            "beta": 0.1843598436582115,
+            "eta": 0.11758401087714154,
+            "recovery_relative_to_reference": 0.7925873728715516,
+            "absolute_disturbed_gain_fraction": 0.12477611940298505,
+            "reference_perturbation_detrimental": true,
+            "relative_attenuation_point": false,
+            "absolute_disturbed_improvement_point": true,
+            "point_category": "ABSOLUTE_GAIN_WITHOUT_RELATIVE_ATTENUATION_POINT",
+            "prior_theta_interval": [
+              -0.533125767685902,
+              0.41304831689481747
+            ]
+          },
+          "canonical_only": {
+            "means": {
+              "W00": 11.347800925925927,
+              "W01": 13.430555555555557,
+              "W10": 8.175925925925927,
+              "W11": 8.761574074074074
+            },
+            "r0": -0.3278300006557755,
+            "r1": -0.42715679880980034,
+            "theta": -0.09932679815402484,
+            "beta": 0.1685084023017231,
+            "eta": 0.06918160414769829,
+            "recovery_relative_to_reference": 0.7720944464276607,
+            "absolute_disturbed_gain_fraction": 0.07163080407700995,
+            "reference_perturbation_detrimental": true,
+            "relative_attenuation_point": false,
+            "absolute_disturbed_improvement_point": true,
+            "point_category": "ABSOLUTE_GAIN_WITHOUT_RELATIVE_ATTENUATION_POINT",
+            "prior_theta_interval": [
+              -0.5691134937771987,
+              0.40344701180330944
+            ]
+          }
+        }
+      },
+      "Delphinium": {
+        "main": "literal_NA",
+        "modes": {
+          "literal_NA": {
+            "means": {
+              "W00": 53.395833333333336,
+              "W01": 55.508333333333326,
+              "W10": 65.34722222222223,
+              "W11": 44.09027777777778
+            },
+            "r0": 0.20198221754724463,
+            "r1": -0.23029386003668395,
+            "theta": -0.4322760775839286,
+            "beta": 0.03880044417495318,
+            "eta": -0.39347563340897546,
+            "recovery_relative_to_reference": 0.8257250617765639,
+            "absolute_disturbed_gain_fraction": -0.3252922422954304,
+            "reference_perturbation_detrimental": false,
+            "relative_attenuation_point": false,
+            "absolute_disturbed_improvement_point": false,
+            "point_category": "NO_BASELINE_LOSS_POINT",
+            "prior_theta_interval": [
+              -1.0731632219604446,
+              0.21917572512666572
+            ]
+          }
+        }
+      },
+      "Potentilla": {
+        "main": "drop_conflict",
+        "modes": {
+          "drop_conflict": {
+            "means": {
+              "W00": 61.85243055555556,
+              "W01": 60.18055555555556,
+              "W10": 54.47361111111111,
+              "W11": 53.536111111111104
+            },
+            "r0": -0.12703501103963027,
+            "r1": -0.11699290247495835,
+            "theta": 0.010042108564671928,
+            "beta": -0.02740209292627297,
+            "eta": -0.017359984361601074,
+            "recovery_relative_to_reference": 0.8655457939203411,
+            "absolute_disturbed_gain_fraction": -0.017210168022233074,
+            "reference_perturbation_detrimental": true,
+            "relative_attenuation_point": true,
+            "absolute_disturbed_improvement_point": false,
+            "point_category": "RELATIVE_ATTENUATION_WITHOUT_ABSOLUTE_GAIN_POINT",
+            "prior_theta_interval": [
+              -0.46848074001042006,
+              0.47832169089872917
+            ]
+          },
+          "retain_first": {
+            "means": {
+              "W00": 61.85243055555556,
+              "W01": 60.47222222222223,
+              "W10": 54.47361111111111,
+              "W11": 53.536111111111104
+            },
+            "r0": -0.12703501103963027,
+            "r1": -0.12182772252954187,
+            "theta": 0.005207288510088406,
+            "beta": -0.022567272871689616,
+            "eta": -0.017359984361601074,
+            "recovery_relative_to_reference": 0.8655457939203411,
+            "absolute_disturbed_gain_fraction": -0.017210168022233074,
+            "reference_perturbation_detrimental": true,
+            "relative_attenuation_point": true,
+            "absolute_disturbed_improvement_point": false,
+            "point_category": "RELATIVE_ATTENUATION_WITHOUT_ABSOLUTE_GAIN_POINT",
+            "prior_theta_interval": [
+              -0.47344940135855695,
+              0.4750649549417435
+            ]
+          },
+          "retain_last": {
+            "means": {
+              "W00": 61.85243055555556,
+              "W01": 59.22222222222223,
+              "W10": 54.47361111111111,
+              "W11": 53.536111111111104
+            },
+            "r0": -0.12703501103963027,
+            "r1": -0.1009404465807295,
+            "theta": 0.02609456445890078,
+            "beta": -0.043454548820501857,
+            "eta": -0.017359984361601074,
+            "recovery_relative_to_reference": 0.8655457939203411,
+            "absolute_disturbed_gain_fraction": -0.017210168022233074,
+            "reference_perturbation_detrimental": true,
+            "relative_attenuation_point": true,
+            "absolute_disturbed_improvement_point": false,
+            "point_category": "RELATIVE_ATTENUATION_WITHOUT_ABSOLUTE_GAIN_POINT",
+            "prior_theta_interval": [
+              -0.4532705241387875,
+              0.4921081280297525
+            ]
+          }
+        }
+      }
+    },
+    "limits": "Point-level arithmetic on all previous Pardee species and source-quality sensitivity variants; one shared experimental study, snow removal also modifies abiotic exposure, external pollen not endogenous recourse. All original theta intervals include zero. No newly estimated uncertainty for beta, eta or rho because joint draws unavailable; do not classify statistical biological effects from signs."
+  },
+  "sources": [
+    {
+      "path": "data/payoff_b_weir_host_option_transfer_wave15_result_20261125.json",
+      "git_blob_sha": "7c76a4c741ad60a00e3240f27fabe2629c98333f"
+    },
+    {
+      "path": "data/payoff_b_pardee_source_amended_fit_result_20261125.json",
+      "git_blob_sha": "65282202770978ac68e100a687ec80534e6e3bdb"
+    }
+  ]
+}
