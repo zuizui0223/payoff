@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Source-only admission: Burraco et al. Oikos 2021, 3x2x2 experiment."""
-import json,sys,hashlib,io,csv
+import json,sys,hashlib,io,csv,re
 from pathlib import Path
 from collections import Counter
 import requests,openpyxl
@@ -20,16 +20,29 @@ def inspect(b,name):
                 if any(k in info for k in ("info","variable","readme","metadata","key","legend","description")):
                     out.append({"sheet":s.title,"rows":len(r),"dictionary":[[str(x)[:500] if x is not None else None for x in v] for v in r[:60]]})
                     continue
-                h=[str(x) if x is not None else None for x in r[0]]
+                # Choose header from structural design/endpoint names, not outcomes.
+                pats=(r"family|sibship|clutch",r"phenol|hatch|delay",r"temp",r"food|feed",r"surv|alive",r"larval|develop|duration|days",r"mass|weight")
+                previews=[]
+                scores=[]
+                for i,row in enumerate(r[:20]):
+                    strings=[str(v).strip() if isinstance(v,str) else None for v in row]
+                    joined=" ".join(v for v in strings if v)
+                    score=sum(bool(re.search(p,joined,re.I)) for p in pats)
+                    scores.append(score)
+                    previews.append({"nonempty_row":i+1,"text_cells":strings,"score":score})
+                hi=max(range(len(scores)),key=lambda j:scores[j])
+                if scores[hi]<4:
+                    out.append({"sheet":s.title,"status":"HEADER_UNRESOLVED","text_preamble":previews});continue
+                h=[str(x).strip() if x is not None else None for x in r[hi]]
                 d={}
                 for i,x in enumerate(h):
                     if x is None:continue
-                    c=Counter(str(v[i]) for v in r[1:] if i<len(v) and v[i] is not None)
+                    c=Counter(str(v[i]) for v in r[hi+1:] if i<len(v) and v[i] is not None)
                     d[x]={"nonmissing":sum(c.values()),"distinct":len(c)}
                     # Known source design terms only; no durations/masses or outcome values.
-                    if x.lower() in {"family","phenology","phenn","food","foodn","temperature","temp","tempn","survival","surv","survn","treatment","block","delay","phen","hatching","hatch","feeding"} and len(c)<=15:
+                    if re.search(r"family|sibship|clutch|phenol|hatch|delay|temp|food|feed|surv|alive|treat|block",x,re.I) and not re.search(r"length|mass|weight|duration|days|period|time|date|rate|growth",x,re.I) and len(c)<=30:
                         d[x]["levels"]=dict(c)
-                out.append({"sheet":s.title,"rows":len(r)-1,"headers":h,"column_support":d})
+                out.append({"sheet":s.title,"rows":len(r)-hi-1,"header_nonempty_row":hi+1,"headers":h,"column_support":d,"preamble_text":[v for v in previews if v["nonempty_row"]<=hi+1]})
         finally:w.close()
         return {"sheets":out}
     if name.lower().endswith(".csv"):
