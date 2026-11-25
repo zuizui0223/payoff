@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Diagnose source columns and assigned-slot identities, without fitting."""
-import hashlib,io,json,sys,itertools
+import hashlib,io,json,sys,itertools,math
 from collections import Counter,defaultdict
 from pathlib import Path
 import openpyxl,requests
@@ -30,11 +30,27 @@ def audit(b):
         for col,sem in (("FamN",f),("PCode",d),("PhenN",d),("TCode",t),("TempN",t),("FCode",q),("FoodN",q)):
             codes[col][str(x[col])].add(str(sem))
         keys[k]+=1;vials[str(x["Vial"])].append(k);families.add(f)
+    endpoint_types=defaultdict(Counter)
+    anomalies=[]
+    for a,x in zip(r[3:],rr):
+        marker=a[17] if len(a)>17 else None
+        for k in ("Days","Mass"):
+            v=x[k]
+            if core.missing(v):kind="missing"
+            else:
+                try:
+                    z=float(v)
+                    kind="nonfinite" if not math.isfinite(z) else "negative" if z<0 else "zero" if z==0 else "positive"
+                except (ValueError,TypeError):kind="nonnumeric"
+            endpoint_types[k+"|survival="+str(x["Survival"])][kind]+=1
+            if kind in ("zero","negative","nonfinite","nonnumeric") or (str(x["Survival"])=="0" and kind!="missing"):
+                anomalies.append({"endpoint":k,"type":kind,"survival_flag":x["Survival"],"marker":marker,"vial":str(x["Vial"]),"family":str(x["Family"]),"slot":str(x["LarvaeN"])})
     expected={(f,*c,i) for f in families for c in core.CELLS for i in range(1,7)}
     dup={k:[list(a) for a in v] for k,v in vials.items() if len(v)>1}
     return {"status":"STRUCTURE_DIAGNOSTIC_ONLY","source_sha256":core.SHA,"n_rows":len(rr),"additional_columns":extra,
             "families":len(families),"unique_slot_keys":len(keys),"duplicate_slot_keys":[[list(k),n] for k,n in keys.items() if n>1],
             "missing_planned_slots":len(expected-set(keys)),"unexpected_keys":len(set(keys)-expected),"duplicate_vial_labels":dup,
+            "endpoint_type_counts":{k:dict(v) for k,v in endpoint_types.items()},"endpoint_anomalies":anomalies,
             "unresolved_design_rows":dict(exceptions),"code_crosswalk":{k:{a:sorted(b) for a,b in v.items()} for k,v in codes.items()}}
 if __name__=="__main__":
     with requests.Session() as s:b=fetch(s,"https://api.figshare.com/v2/file/download/25051406",cap=100000)
