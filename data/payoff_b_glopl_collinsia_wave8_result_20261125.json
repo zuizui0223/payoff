@@ -1,0 +1,1029 @@
+{
+  "status": "COLLINSIA_SECONDARY_POINT_ESTIMATES_ONLY",
+  "source_sha256": "8c764ce03da86db0cb280e8f8f92cc0e62e2df6d85a2226e3246dc1afeb3f65f",
+  "collinsia_glopl": {
+    "BT-1999": {
+      "periods": {
+        "early": {
+          "id": "988",
+          "arms": {
+            "Natural": {
+              "mean": 0.768,
+              "n": 168,
+              "sd": 0.0326
+            },
+            "Sup": {
+              "mean": 0.752,
+              "n": 157,
+              "sd": 0.0345
+            }
+          },
+          "lnRR": -0.02105340919783238,
+          "risk_difference": -0.016000000000000014
+        },
+        "mid": {
+          "id": "989",
+          "arms": {
+            "Natural": {
+              "mean": 0.364,
+              "n": 162,
+              "sd": 0.0378
+            },
+            "Sup": {
+              "mean": 0.283,
+              "n": 152,
+              "sd": 0.0365
+            }
+          },
+          "lnRR": -0.25170696999350317,
+          "risk_difference": -0.08100000000000002
+        },
+        "late": {
+          "id": "990",
+          "arms": {
+            "Natural": {
+              "mean": 0.077,
+              "n": 169,
+              "sd": 0.0205
+            },
+            "Sup": {
+              "mean": 0.05,
+              "n": 159,
+              "sd": 0.0173
+            }
+          },
+          "lnRR": -0.4317824164255378,
+          "risk_difference": -0.026999999999999996
+        }
+      },
+      "delta_late_minus_early_lnRR": -0.4107290072277054,
+      "late_minus_early_supplemented_fruit_set": -0.702,
+      "late_minus_early_natural_fruit_set": -0.6910000000000001,
+      "delta_supplement_risk_difference": -0.010999999999999982,
+      "variance_status": "HOLD_REPEATED_PLANT_AND_SD_N_GRAIN",
+      "admitted_primary": false
+    },
+    "BT-2000": {
+      "periods": {
+        "early": {
+          "id": "991",
+          "arms": {
+            "Natural": {
+              "mean": 0.819,
+              "n": 193,
+              "sd": 0.0277
+            },
+            "Sup": {
+              "mean": 0.846,
+              "n": 182,
+              "sd": 0.0268
+            }
+          },
+          "lnRR": 0.032435275753153955,
+          "risk_difference": 0.027000000000000024
+        },
+        "mid": {
+          "id": "992",
+          "arms": {
+            "Natural": {
+              "mean": 0.825,
+              "n": 189,
+              "sd": 0.0276
+            },
+            "Sup": {
+              "mean": 0.949,
+              "n": 178,
+              "sd": 0.0165
+            }
+          },
+          "lnRR": 0.14002541227524695,
+          "risk_difference": 0.124
+        },
+        "late": {
+          "id": "993",
+          "arms": {
+            "Natural": {
+              "mean": 0.652,
+              "n": 187,
+              "sd": 0.0348
+            },
+            "Sup": {
+              "mean": 0.754,
+              "n": 175,
+              "sd": 0.0326
+            }
+          },
+          "lnRR": 0.1453478060813031,
+          "risk_difference": 0.10199999999999998
+        }
+      },
+      "delta_late_minus_early_lnRR": 0.11291253032814914,
+      "late_minus_early_supplemented_fruit_set": -0.09199999999999997,
+      "late_minus_early_natural_fruit_set": -0.16699999999999993,
+      "delta_supplement_risk_difference": 0.07499999999999996,
+      "variance_status": "HOLD_REPEATED_PLANT_AND_SD_N_GRAIN",
+      "admitted_primary": false
+    },
+    "EF-1999": {
+      "periods": {
+        "early": {
+          "id": "994",
+          "arms": {
+            "Natural": {
+              "mean": 0.679,
+              "n": 159,
+              "sd": 0.037
+            },
+            "Sup": {
+              "mean": 0.699,
+              "n": 153,
+              "sd": 0.0371
+            }
+          },
+          "lnRR": 0.02902961467511403,
+          "risk_difference": 0.019999999999999907
+        },
+        "mid": {
+          "id": "995",
+          "arms": {
+            "Natural": {
+              "mean": 0.168,
+              "n": 143,
+              "sd": 0.0313
+            },
+            "Sup": {
+              "mean": 0.164,
+              "n": 159,
+              "sd": 0.0294
+            }
+          },
+          "lnRR": -0.02409755157906053,
+          "risk_difference": -0.0040000000000000036
+        },
+        "late": {
+          "id": "996",
+          "arms": {
+            "Natural": {
+              "mean": 0.063,
+              "n": 192,
+              "sd": 0.0175
+            },
+            "Sup": {
+              "mean": 0.065,
+              "n": 153,
+              "sd": 0.0199
+            }
+          },
+          "lnRR": 0.03125254350410453,
+          "risk_difference": 0.0020000000000000018
+        }
+      },
+      "delta_late_minus_early_lnRR": 0.0022229288289905003,
+      "late_minus_early_supplemented_fruit_set": -0.6339999999999999,
+      "late_minus_early_natural_fruit_set": -0.6160000000000001,
+      "delta_supplement_risk_difference": -0.017999999999999905,
+      "variance_status": "HOLD_REPEATED_PLANT_AND_SD_N_GRAIN",
+      "admitted_primary": false
+    },
+    "EF-2000": {
+      "periods": {
+        "early": {
+          "id": "997",
+          "arms": {
+            "Natural": {
+              "mean": 0.92,
+              "n": 187,
+              "sd": 0.0198
+            },
+            "Sup": {
+              "mean": 0.943,
+              "n": 158,
+              "sd": 0.0184
+            }
+          },
+          "lnRR": 0.024692612590371414,
+          "risk_difference": 0.02299999999999991
+        },
+        "mid": {
+          "id": "998",
+          "arms": {
+            "Natural": {
+              "mean": 0.79,
+              "n": 181,
+              "sd": 0.0303
+            },
+            "Sup": {
+              "mean": 0.917,
+              "n": 169,
+              "sd": 0.0212
+            }
+          },
+          "lnRR": 0.14907452679539765,
+          "risk_difference": 0.127
+        },
+        "late": {
+          "id": "999",
+          "arms": {
+            "Natural": {
+              "mean": 0.5,
+              "n": 162,
+              "sd": 0.0393
+            },
+            "Sup": {
+              "mean": 0.484,
+              "n": 155,
+              "sd": 0.0401
+            }
+          },
+          "lnRR": -0.03252319170556006,
+          "risk_difference": -0.016000000000000014
+        }
+      },
+      "delta_late_minus_early_lnRR": -0.057215804295931476,
+      "late_minus_early_supplemented_fruit_set": -0.45899999999999996,
+      "late_minus_early_natural_fruit_set": -0.42000000000000004,
+      "delta_supplement_risk_difference": -0.038999999999999924,
+      "variance_status": "HOLD_REPEATED_PLANT_AND_SD_N_GRAIN",
+      "admitted_primary": false
+    },
+    "TMC-1999": {
+      "periods": {
+        "early": {
+          "id": "1000",
+          "arms": {
+            "Natural": {
+              "mean": 0.344,
+              "n": 160,
+              "sd": 0.0376
+            },
+            "Sup": {
+              "mean": 0.261,
+              "n": 165,
+              "sd": 0.0342
+            }
+          },
+          "lnRR": -0.27612125005070476,
+          "risk_difference": -0.08299999999999996
+        },
+        "mid": {
+          "id": "1001",
+          "arms": {
+            "Natural": {
+              "mean": 0.059,
+              "n": 153,
+              "sd": 0.019
+            },
+            "Sup": {
+              "mean": 0.06,
+              "n": 149,
+              "sd": 0.0195
+            }
+          },
+          "lnRR": 0.01680711831638119,
+          "risk_difference": 0.0010000000000000009
+        },
+        "late": {
+          "id": "1002",
+          "arms": {
+            "Natural": {
+              "mean": 0.028,
+              "n": 144,
+              "sd": 0.0137
+            },
+            "Sup": {
+              "mean": 0.021,
+              "n": 141,
+              "sd": 0.0121
+            }
+          },
+          "lnRR": -0.2876820724517809,
+          "risk_difference": -0.006999999999999999
+        }
+      },
+      "delta_late_minus_early_lnRR": -0.011560822401076143,
+      "late_minus_early_supplemented_fruit_set": -0.24000000000000002,
+      "late_minus_early_natural_fruit_set": -0.31599999999999995,
+      "delta_supplement_risk_difference": 0.07599999999999996,
+      "variance_status": "HOLD_REPEATED_PLANT_AND_SD_N_GRAIN",
+      "admitted_primary": false
+    },
+    "TMC-2000": {
+      "periods": {
+        "early": {
+          "id": "1003",
+          "arms": {
+            "Natural": {
+              "mean": 0.5,
+              "n": 340,
+              "sd": 0.0271
+            },
+            "Sup": {
+              "mean": 0.883,
+              "n": 128,
+              "sd": 0.0284
+            }
+          },
+          "lnRR": 0.5687171021817683,
+          "risk_difference": 0.383
+        },
+        "mid": {
+          "id": "1004",
+          "arms": {
+            "Natural": {
+              "mean": 0.904,
+              "n": 281,
+              "sd": 0.0176
+            },
+            "Sup": {
+              "mean": 0.771,
+              "n": 35,
+              "sd": 0.071
+            }
+          },
+          "lnRR": -0.15914098682884706,
+          "risk_difference": -0.133
+        },
+        "late": {
+          "id": "1005",
+          "arms": {
+            "Natural": {
+              "mean": 0.156,
+              "n": 186,
+              "sd": 0.0266
+            },
+            "Sup": {
+              "mean": 0.092,
+              "n": 142,
+              "sd": 0.0243
+            }
+          },
+          "lnRR": -0.5280674302004967,
+          "risk_difference": -0.064
+        }
+      },
+      "delta_late_minus_early_lnRR": -1.096784532382265,
+      "late_minus_early_supplemented_fruit_set": -0.791,
+      "late_minus_early_natural_fruit_set": -0.344,
+      "delta_supplement_risk_difference": -0.447,
+      "variance_status": "HOLD_REPEATED_PLANT_AND_SD_N_GRAIN",
+      "admitted_primary": false
+    }
+  },
+  "collinsia_table2_decomposition": {
+    "BT-1999": {
+      "early": {
+        "p1": 0.7515923566878981,
+        "p2": 0.75,
+        "p3": 0.7678571428571429,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.24840764331210186,
+        "residual_supplement_difference": -0.01626478616924476,
+        "intact_minus_emasculated": 0.017857142857142905,
+        "total_failure_emasculated": 0.25
+      },
+      "late": {
+        "p1": 0.050314465408805034,
+        "p2": 0.027210884353741496,
+        "p3": 0.07692307692307693,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.949685534591195,
+        "residual_supplement_difference": -0.026608611514271893,
+        "intact_minus_emasculated": 0.04971219256933543,
+        "total_failure_emasculated": 0.9727891156462585
+      },
+      "late_minus_early_p1": -0.7012778912790931,
+      "late_minus_early_remaining_failure_after_supplement": 0.7012778912790931,
+      "late_minus_early_residual_supplement_difference": -0.010343825345027133,
+      "late_minus_early_intact_minus_emasculated": 0.031855049712192524
+    },
+    "BT-2000": {
+      "early": {
+        "p1": 0.8461538461538461,
+        "p2": 0.7272727272727273,
+        "p3": 0.8186528497409327,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.15384615384615385,
+        "residual_supplement_difference": 0.02750099641291348,
+        "intact_minus_emasculated": 0.09138012246820537,
+        "total_failure_emasculated": 0.2727272727272727
+      },
+      "late": {
+        "p1": 0.7542857142857143,
+        "p2": 0.6708860759493671,
+        "p3": 0.6524064171122995,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.24571428571428566,
+        "residual_supplement_difference": 0.10187929717341482,
+        "intact_minus_emasculated": -0.018479658837067592,
+        "total_failure_emasculated": 0.3291139240506329
+      },
+      "late_minus_early_p1": -0.09186813186813181,
+      "late_minus_early_remaining_failure_after_supplement": 0.09186813186813181,
+      "late_minus_early_residual_supplement_difference": 0.07437830076050134,
+      "late_minus_early_intact_minus_emasculated": -0.10985978130527296
+    },
+    "EF-1999": {
+      "early": {
+        "p1": 0.6993464052287581,
+        "p2": 0.7591240875912408,
+        "p3": 0.6792452830188679,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.30065359477124187,
+        "residual_supplement_difference": 0.020101122209890243,
+        "intact_minus_emasculated": -0.07987880457237295,
+        "total_failure_emasculated": 0.24087591240875916
+      },
+      "late": {
+        "p1": 0.06535947712418301,
+        "p2": 0.06802721088435375,
+        "p3": 0.0625,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.934640522875817,
+        "residual_supplement_difference": 0.0028594771241830103,
+        "intact_minus_emasculated": -0.005527210884353748,
+        "total_failure_emasculated": 0.9319727891156463
+      },
+      "late_minus_early_p1": -0.6339869281045751,
+      "late_minus_early_remaining_failure_after_supplement": 0.6339869281045751,
+      "late_minus_early_residual_supplement_difference": -0.017241645085707233,
+      "late_minus_early_intact_minus_emasculated": 0.0743515936880192
+    },
+    "EF-2000": {
+      "early": {
+        "p1": 0.9430379746835443,
+        "p2": 0.8372093023255814,
+        "p3": 0.9197860962566845,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.05696202531645567,
+        "residual_supplement_difference": 0.02325187842685983,
+        "intact_minus_emasculated": 0.08257679393110307,
+        "total_failure_emasculated": 0.16279069767441856
+      },
+      "late": {
+        "p1": 0.4838709677419355,
+        "p2": 0.47115384615384615,
+        "p3": 0.5,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.5161290322580645,
+        "residual_supplement_difference": -0.016129032258064502,
+        "intact_minus_emasculated": 0.028846153846153855,
+        "total_failure_emasculated": 0.5288461538461539
+      },
+      "late_minus_early_p1": -0.45916700694160884,
+      "late_minus_early_remaining_failure_after_supplement": 0.45916700694160884,
+      "late_minus_early_residual_supplement_difference": -0.03938091068492433,
+      "late_minus_early_intact_minus_emasculated": -0.05373064008494921
+    },
+    "TMC-1999": {
+      "early": {
+        "p1": 0.2606060606060606,
+        "p2": 0.26506024096385544,
+        "p3": 0.34375,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.7393939393939394,
+        "residual_supplement_difference": -0.08314393939393938,
+        "intact_minus_emasculated": 0.07868975903614456,
+        "total_failure_emasculated": 0.7349397590361446
+      },
+      "late": {
+        "p1": 0.02127659574468085,
+        "p2": 0,
+        "p3": 0.027777777777777776,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.9787234042553191,
+        "residual_supplement_difference": -0.006501182033096926,
+        "intact_minus_emasculated": 0.027777777777777776,
+        "total_failure_emasculated": 1
+      },
+      "late_minus_early_p1": -0.23932946486137976,
+      "late_minus_early_remaining_failure_after_supplement": 0.23932946486137974,
+      "late_minus_early_residual_supplement_difference": 0.07664275736084246,
+      "late_minus_early_intact_minus_emasculated": -0.05091198125836678
+    },
+    "TMC-2000": {
+      "early": {
+        "p1": 0.8828125,
+        "p2": 0.9096045197740112,
+        "p3": null,
+        "source_count_percent_conflict": [
+          "O3"
+        ],
+        "remaining_failure_after_supplement": 0.1171875
+      },
+      "late": {
+        "p1": 0.09154929577464789,
+        "p2": 0.12804878048780488,
+        "p3": 0.15591397849462366,
+        "source_count_percent_conflict": [],
+        "remaining_failure_after_supplement": 0.9084507042253521,
+        "residual_supplement_difference": -0.06436468271997577,
+        "intact_minus_emasculated": 0.027865198006818775,
+        "total_failure_emasculated": 0.8719512195121951
+      },
+      "late_minus_early_p1": -0.7912632042253521,
+      "late_minus_early_remaining_failure_after_supplement": 0.7912632042253521,
+      "late_minus_early_residual_supplement_difference": null,
+      "late_minus_early_intact_minus_emasculated": null
+    }
+  },
+  "figshare": {
+    "3297944": {
+      "status": "PUBLIC_COLLECTION_METADATA_ONLY",
+      "items": [
+        {
+          "id": 3522995,
+          "title": "Appendix A. A table presenting characteristics of the pollination environment for Collinsia verna at three populations in Pennsylvania, USA, 1997 and 1999.",
+          "doi": "10.6084/m9.figshare.3522995.v1",
+          "url_public_html": "https://wiley.figshare.com/articles/dataset/Appendix_A_A_table_presenting_characteristics_of_the_pollination_environment_for_Collinsia_verna_at_three_populations_in_Pennsylvania_USA_1997_and_1999_/3522995",
+          "published_date": "2016-08-05T00:20:22Z"
+        },
+        {
+          "id": 3522992,
+          "title": "Appendix B. A table presenting observed visitors to Collinsia verna flowers in southwestern Pennsylvania, USA.",
+          "doi": "10.6084/m9.figshare.3522992.v1",
+          "url_public_html": "https://wiley.figshare.com/articles/dataset/Appendix_B_A_table_presenting_observed_visitors_to_Collinsia_verna_flowers_in_southwestern_Pennsylvania_USA_/3522992",
+          "published_date": "2016-08-05T00:20:16Z"
+        }
+      ]
+    },
+    "3304797": {
+      "status": "PUBLIC_COLLECTION_METADATA_ONLY",
+      "items": [
+        {
+          "id": 3553704,
+          "title": "Appendix A. Figures showing the hypothesized causal pathway through which pollinator density contributes to transitions in clover life history and mean flower visits to Trifolium dasyphyllum and T. parryi under each level of Bombus balteatus density.",
+          "doi": "10.6084/m9.figshare.3553704.v1",
+          "url_public_html": "https://wiley.figshare.com/articles/dataset/Appendix_A_Figures_showing_the_hypothesized_causal_pathway_through_which_pollinator_density_contributes_to_transitions_in_clover_life_history_and_mean_flower_visits_to_Trifolium_dasyphyllum_and_T_parryi_under_each_level_of_Bombus_balteatus_density_/3553704",
+          "published_date": "2016-08-09T12:48:34Z"
+        },
+        {
+          "id": 3553701,
+          "title": "Appendix B. Model development and parameterization of projection matrices for Trifolium dasyphyllum and T. parryi.",
+          "doi": "10.6084/m9.figshare.3553701.v1",
+          "url_public_html": "https://wiley.figshare.com/articles/dataset/Appendix_B_Model_development_and_parameterization_of_projection_matrices_for_Trifolium_dasyphyllum_and_T_parryi_/3553701",
+          "published_date": "2016-08-09T12:48:28Z"
+        },
+        {
+          "id": 3553698,
+          "title": "Appendix C. Seven ANOVA and ANCOVA tables for statistical analyses discussed in Results.",
+          "doi": "10.6084/m9.figshare.3553698.v1",
+          "url_public_html": "https://wiley.figshare.com/articles/dataset/Appendix_C_Seven_ANOVA_and_ANCOVA_tables_for_statistical_analyses_discussed_in_Results_/3553698",
+          "published_date": "2016-08-09T12:48:21Z"
+        }
+      ]
+    }
+  },
+  "trifolium": {
+    "status": "HOLD_EXACT_SOURCE_UNIT_AND_ARM_MAPPING",
+    "source_ids": [
+      "2192",
+      "2193",
+      "2194",
+      "2195"
+    ]
+  },
+  "primary_theta_added": 0,
+  "quality_disposition": {
+    "quarantine_group": "TMC-2000",
+    "quarantine_source_cell": {
+      "row_id": "1003",
+      "arm": "Natural",
+      "compiled_mean": 0.5,
+      "compiled_n": 340,
+      "article_searchable_table_count": "170 successes, 170 failures",
+      "article_printed_percent": 92
+    },
+    "reason": "Compiled mean and N agree with inconsistent searchable count, not article printed percentage. Underlying typeset table not independently verified. Hold O3-dependent group contrasts, no guessed correction. O1 values and all other pairs retained.",
+    "included_supplement_only_groups": 6,
+    "included_natural_vs_supplement_groups": 5,
+    "variance_diagnostic": {
+      "n_cells": 36,
+      "within_0_0002_of_binomial_se": 36,
+      "within_0_0005": 36,
+      "max_abs_difference": 0.000049128091483652964,
+      "ratio_range": [
+        0.9965283654110318,
+        1.0022779904860557
+      ],
+      "cells": [
+        {
+          "group": "BT-1999",
+          "phase": "early",
+          "arm": "Natural",
+          "source_row": "988",
+          "reported_SD": 0.0326,
+          "binomial_SE_from_rounded_mean_and_n": 0.03256641565434287,
+          "abs_difference": 0.00003358434565712415,
+          "ratio_reported_to_binomial_SE": 1.0010312570475544
+        },
+        {
+          "group": "BT-1999",
+          "phase": "early",
+          "arm": "Sup",
+          "source_row": "988",
+          "reported_SD": 0.0345,
+          "binomial_SE_from_rounded_mean_and_n": 0.03446552787155548,
+          "abs_difference": 0.00003447212844451958,
+          "ratio_reported_to_binomial_SE": 1.001000191512313
+        },
+        {
+          "group": "BT-1999",
+          "phase": "mid",
+          "arm": "Natural",
+          "source_row": "989",
+          "reported_SD": 0.0378,
+          "binomial_SE_from_rounded_mean_and_n": 0.03780260622016737,
+          "abs_difference": 0.0000026062201673726637,
+          "ratio_reported_to_binomial_SE": 0.9999310571299715
+        },
+        {
+          "group": "BT-1999",
+          "phase": "mid",
+          "arm": "Sup",
+          "source_row": "989",
+          "reported_SD": 0.0365,
+          "binomial_SE_from_rounded_mean_and_n": 0.03653684153664195,
+          "abs_difference": 0.00003684153664194889,
+          "ratio_reported_to_binomial_SE": 0.9989916606063225
+        },
+        {
+          "group": "BT-1999",
+          "phase": "late",
+          "arm": "Natural",
+          "source_row": "990",
+          "reported_SD": 0.0205,
+          "binomial_SE_from_rounded_mean_and_n": 0.020507034440368544,
+          "abs_difference": 0.000007034440368543227,
+          "ratio_reported_to_binomial_SE": 0.9996569742744131
+        },
+        {
+          "group": "BT-1999",
+          "phase": "late",
+          "arm": "Sup",
+          "source_row": "990",
+          "reported_SD": 0.0173,
+          "binomial_SE_from_rounded_mean_and_n": 0.01728415859580037,
+          "abs_difference": 0.000015841404199627707,
+          "ratio_reported_to_binomial_SE": 1.0009165273572227
+        },
+        {
+          "group": "BT-2000",
+          "phase": "early",
+          "arm": "Natural",
+          "source_row": "991",
+          "reported_SD": 0.0277,
+          "binomial_SE_from_rounded_mean_and_n": 0.027714215128833326,
+          "abs_difference": 0.0000142151288333274,
+          "ratio_reported_to_binomial_SE": 0.9994870816738902
+        },
+        {
+          "group": "BT-2000",
+          "phase": "early",
+          "arm": "Sup",
+          "source_row": "991",
+          "reported_SD": 0.0268,
+          "binomial_SE_from_rounded_mean_and_n": 0.02675530141572234,
+          "abs_difference": 0.00004469858427766024,
+          "ratio_reported_to_binomial_SE": 1.0016706440186613
+        },
+        {
+          "group": "BT-2000",
+          "phase": "mid",
+          "arm": "Natural",
+          "source_row": "992",
+          "reported_SD": 0.0276,
+          "binomial_SE_from_rounded_mean_and_n": 0.027638539919628335,
+          "abs_difference": 0.00003853991962833592,
+          "ratio_reported_to_binomial_SE": 0.998605573241553
+        },
+        {
+          "group": "BT-2000",
+          "phase": "mid",
+          "arm": "Sup",
+          "source_row": "992",
+          "reported_SD": 0.0165,
+          "binomial_SE_from_rounded_mean_and_n": 0.016489526808917916,
+          "abs_difference": 0.00001047319108208461,
+          "ratio_reported_to_binomial_SE": 1.0006351420027664
+        },
+        {
+          "group": "BT-2000",
+          "phase": "late",
+          "arm": "Natural",
+          "source_row": "993",
+          "reported_SD": 0.0348,
+          "binomial_SE_from_rounded_mean_and_n": 0.03483313930128732,
+          "abs_difference": 0.00003313930128732295,
+          "ratio_reported_to_binomial_SE": 0.9990486271994985
+        },
+        {
+          "group": "BT-2000",
+          "phase": "late",
+          "arm": "Sup",
+          "source_row": "993",
+          "reported_SD": 0.0326,
+          "binomial_SE_from_rounded_mean_and_n": 0.03255623705879676,
+          "abs_difference": 0.00004376294120323615,
+          "ratio_reported_to_binomial_SE": 1.001344226027234
+        },
+        {
+          "group": "EF-1999",
+          "phase": "early",
+          "arm": "Natural",
+          "source_row": "994",
+          "reported_SD": 0.037,
+          "binomial_SE_from_rounded_mean_and_n": 0.037024469216380626,
+          "abs_difference": 0.00002446921638062788,
+          "ratio_reported_to_binomial_SE": 0.999339106896101
+        },
+        {
+          "group": "EF-1999",
+          "phase": "early",
+          "arm": "Sup",
+          "source_row": "994",
+          "reported_SD": 0.0371,
+          "binomial_SE_from_rounded_mean_and_n": 0.037083107511980413,
+          "abs_difference": 0.000016892488019587537,
+          "ratio_reported_to_binomial_SE": 1.000455530540803
+        },
+        {
+          "group": "EF-1999",
+          "phase": "mid",
+          "arm": "Natural",
+          "source_row": "995",
+          "reported_SD": 0.0313,
+          "binomial_SE_from_rounded_mean_and_n": 0.03126426946938862,
+          "abs_difference": 0.00003573053061137893,
+          "ratio_reported_to_binomial_SE": 1.0011428551256047
+        },
+        {
+          "group": "EF-1999",
+          "phase": "mid",
+          "arm": "Sup",
+          "source_row": "995",
+          "reported_SD": 0.0294,
+          "binomial_SE_from_rounded_mean_and_n": 0.029364763036266794,
+          "abs_difference": 0.00003523696373320534,
+          "ratio_reported_to_binomial_SE": 1.0011999743941296
+        },
+        {
+          "group": "EF-1999",
+          "phase": "late",
+          "arm": "Natural",
+          "source_row": "996",
+          "reported_SD": 0.0175,
+          "binomial_SE_from_rounded_mean_and_n": 0.01753434130499347,
+          "abs_difference": 0.000034341304993468214,
+          "ratio_reported_to_binomial_SE": 0.9980414830305779
+        },
+        {
+          "group": "EF-1999",
+          "phase": "late",
+          "arm": "Sup",
+          "source_row": "996",
+          "reported_SD": 0.0199,
+          "binomial_SE_from_rounded_mean_and_n": 0.019930434571835666,
+          "abs_difference": 0.000030434571835664948,
+          "ratio_reported_to_binomial_SE": 0.9984729599484663
+        },
+        {
+          "group": "EF-2000",
+          "phase": "early",
+          "arm": "Natural",
+          "source_row": "997",
+          "reported_SD": 0.0198,
+          "binomial_SE_from_rounded_mean_and_n": 0.01983892355196054,
+          "abs_difference": 0.00003892355196053951,
+          "ratio_reported_to_binomial_SE": 0.9980380209713197
+        },
+        {
+          "group": "EF-2000",
+          "phase": "early",
+          "arm": "Sup",
+          "source_row": "997",
+          "reported_SD": 0.0184,
+          "binomial_SE_from_rounded_mean_and_n": 0.018444408435394338,
+          "abs_difference": 0.00004440843539433789,
+          "ratio_reported_to_binomial_SE": 0.9975923090431504
+        },
+        {
+          "group": "EF-2000",
+          "phase": "mid",
+          "arm": "Natural",
+          "source_row": "998",
+          "reported_SD": 0.0303,
+          "binomial_SE_from_rounded_mean_and_n": 0.030274982834600568,
+          "abs_difference": 0.00002501716539943244,
+          "ratio_reported_to_binomial_SE": 1.0008263312827
+        },
+        {
+          "group": "EF-2000",
+          "phase": "mid",
+          "arm": "Sup",
+          "source_row": "998",
+          "reported_SD": 0.0212,
+          "binomial_SE_from_rounded_mean_and_n": 0.021221709326667396,
+          "abs_difference": 0.000021709326667396223,
+          "ratio_reported_to_binomial_SE": 0.9989770227113555
+        },
+        {
+          "group": "EF-2000",
+          "phase": "late",
+          "arm": "Natural",
+          "source_row": "999",
+          "reported_SD": 0.0393,
+          "binomial_SE_from_rounded_mean_and_n": 0.039283710065919304,
+          "abs_difference": 0.0000162899340806974,
+          "ratio_reported_to_binomial_SE": 1.0004146740227275
+        },
+        {
+          "group": "EF-2000",
+          "phase": "late",
+          "arm": "Sup",
+          "source_row": "999",
+          "reported_SD": 0.0401,
+          "binomial_SE_from_rounded_mean_and_n": 0.04014039876362996,
+          "abs_difference": 0.000040398763629961865,
+          "ratio_reported_to_binomial_SE": 0.9989935634703618
+        },
+        {
+          "group": "TMC-1999",
+          "phase": "early",
+          "arm": "Natural",
+          "source_row": "1000",
+          "reported_SD": 0.0376,
+          "binomial_SE_from_rounded_mean_and_n": 0.0375552925697564,
+          "abs_difference": 0.00004470743024360263,
+          "ratio_reported_to_binomial_SE": 1.0011904428692857
+        },
+        {
+          "group": "TMC-1999",
+          "phase": "early",
+          "arm": "Sup",
+          "source_row": "1000",
+          "reported_SD": 0.0342,
+          "binomial_SE_from_rounded_mean_and_n": 0.0341901102128033,
+          "abs_difference": 0.000009889787196702693,
+          "ratio_reported_to_binomial_SE": 1.0002892587106373
+        },
+        {
+          "group": "TMC-1999",
+          "phase": "mid",
+          "arm": "Natural",
+          "source_row": "1001",
+          "reported_SD": 0.019,
+          "binomial_SE_from_rounded_mean_and_n": 0.019049128091483652,
+          "abs_difference": 0.000049128091483652964,
+          "ratio_reported_to_binomial_SE": 0.9974209795194975
+        },
+        {
+          "group": "TMC-1999",
+          "phase": "mid",
+          "arm": "Sup",
+          "source_row": "1001",
+          "reported_SD": 0.0195,
+          "binomial_SE_from_rounded_mean_and_n": 0.019455680145728287,
+          "abs_difference": 0.000044319854271713394,
+          "ratio_reported_to_binomial_SE": 1.0022779904860557
+        },
+        {
+          "group": "TMC-1999",
+          "phase": "late",
+          "arm": "Natural",
+          "source_row": "1002",
+          "reported_SD": 0.0137,
+          "binomial_SE_from_rounded_mean_and_n": 0.01374772708486752,
+          "abs_difference": 0.00004772708486752014,
+          "ratio_reported_to_binomial_SE": 0.9965283654110318
+        },
+        {
+          "group": "TMC-1999",
+          "phase": "late",
+          "arm": "Sup",
+          "source_row": "1002",
+          "reported_SD": 0.0121,
+          "binomial_SE_from_rounded_mean_and_n": 0.012075119487537086,
+          "abs_difference": 0.000024880512462913812,
+          "ratio_reported_to_binomial_SE": 1.0020604775371866
+        },
+        {
+          "group": "TMC-2000",
+          "phase": "early",
+          "arm": "Natural",
+          "source_row": "1003",
+          "reported_SD": 0.0271,
+          "binomial_SE_from_rounded_mean_and_n": 0.02711630722733202,
+          "abs_difference": 0.00001630722733202139,
+          "ratio_reported_to_binomial_SE": 0.999398619170549
+        },
+        {
+          "group": "TMC-2000",
+          "phase": "early",
+          "arm": "Sup",
+          "source_row": "1003",
+          "reported_SD": 0.0284,
+          "binomial_SE_from_rounded_mean_and_n": 0.02840980794549657,
+          "abs_difference": 0.000009807945496567022,
+          "ratio_reported_to_binomial_SE": 0.9996547690320405
+        },
+        {
+          "group": "TMC-2000",
+          "phase": "mid",
+          "arm": "Natural",
+          "source_row": "1004",
+          "reported_SD": 0.0176,
+          "binomial_SE_from_rounded_mean_and_n": 0.017573840150952934,
+          "abs_difference": 0.000026159849047066586,
+          "ratio_reported_to_binomial_SE": 1.0014885675994754
+        },
+        {
+          "group": "TMC-2000",
+          "phase": "mid",
+          "arm": "Sup",
+          "source_row": "1004",
+          "reported_SD": 0.071,
+          "binomial_SE_from_rounded_mean_and_n": 0.07102494531601454,
+          "abs_difference": 0.000024945316014546304,
+          "ratio_reported_to_binomial_SE": 0.9996487809191045
+        },
+        {
+          "group": "TMC-2000",
+          "phase": "late",
+          "arm": "Natural",
+          "source_row": "1005",
+          "reported_SD": 0.0266,
+          "binomial_SE_from_rounded_mean_and_n": 0.026605844616210468,
+          "abs_difference": 0.000005844616210469444,
+          "ratio_reported_to_binomial_SE": 0.9997803258534064
+        },
+        {
+          "group": "TMC-2000",
+          "phase": "late",
+          "arm": "Sup",
+          "source_row": "1005",
+          "reported_SD": 0.0243,
+          "binomial_SE_from_rounded_mean_and_n": 0.024254518963295172,
+          "abs_difference": 0.00004548103670482667,
+          "ratio_reported_to_binomial_SE": 1.0018751572345612
+        }
+      ],
+      "interpretation": "Numerical fingerprint of SE-like columns, not definitive reconstruction of the compilers' error model. Do not divide by sqrt(n) again or infer independent flowers. Unknown repeat-unit covariance."
+    }
+  },
+  "summary": {
+    "all_six_supplemented_fruit_set_declines": true,
+    "decline_range_pp": [
+      -79.10000000000001,
+      -9.199999999999998
+    ],
+    "admissible_five_pairs": [
+      {
+        "key": "BT-1999",
+        "early_supp": 0.752,
+        "late_supp": 0.05,
+        "delta_lnRR": -0.4107290072277054,
+        "delta_self": 0.031855049712192524
+      },
+      {
+        "key": "BT-2000",
+        "early_supp": 0.846,
+        "late_supp": 0.754,
+        "delta_lnRR": 0.11291253032814914,
+        "delta_self": -0.10985978130527296
+      },
+      {
+        "key": "EF-1999",
+        "early_supp": 0.699,
+        "late_supp": 0.065,
+        "delta_lnRR": 0.0022229288289905003,
+        "delta_self": 0.0743515936880192
+      },
+      {
+        "key": "EF-2000",
+        "early_supp": 0.943,
+        "late_supp": 0.484,
+        "delta_lnRR": -0.057215804295931476,
+        "delta_self": -0.05373064008494921
+      },
+      {
+        "key": "TMC-1999",
+        "early_supp": 0.261,
+        "late_supp": 0.021,
+        "delta_lnRR": -0.011560822401076143,
+        "delta_self": -0.05091198125836678
+      }
+    ],
+    "delta_lnRR_positive": 2,
+    "delta_lnRR_negative": 3,
+    "self_proxy_increased": 2,
+    "self_proxy_decreased": 3,
+    "not_inferential": true
+  },
+  "provenance": {
+    "run": 45540032947,
+    "job": 138956035394,
+    "artifact_id": 14987928568,
+    "artifact_zip_sha256": "93d56b01f439a4b0f27cbab9f7c400c55d0e050a57ec27fef56f0e019af90e36",
+    "extraction": "Exact aggregate JSON parsed from executed job; post-output QC and derived summaries appended; ZIP digest from upload log, not independently downloaded."
+  }
+}
