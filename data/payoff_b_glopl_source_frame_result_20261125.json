@@ -1,0 +1,861 @@
+{
+  "status": "SOURCE_FRAME_ONLY_NO_NEW_EFFECT",
+  "glopl": {
+    "url": "https://raw.githubusercontent.com/idiv-biodiversity/pollen-limitation-data-descriptor/master/Data/GloPL_with_id.csv",
+    "status": "AUTHENTICATED_AUTHOR_SOURCE_FRAME_ONLY",
+    "rows": 2969,
+    "columns": [
+      "unique_number",
+      "unique_study_number",
+      "Species_Author",
+      "Author",
+      "Year",
+      "DOI",
+      "Species_accepted_names",
+      "Family",
+      "Latitude",
+      "Longitude",
+      "Included_Bennett_et_al_meta_analysis",
+      "Level_of_Supplementation",
+      "Natural_N_FS",
+      "Natural_X_FS",
+      "Natural_SD_FS",
+      "Sup_N_FS",
+      "Sup_X_FS",
+      "Sup_SD_FS",
+      "Bagout_N_FS",
+      "Bagout_X_FS",
+      "Bagout_SD_FS",
+      "Natural_N_SO",
+      "Natural_X_SO",
+      "Natural_SD_SO",
+      "Sup_N_SO",
+      "Sup_X_SO",
+      "Sup_SD_SO",
+      "Bagout_N_SO",
+      "Bagout_X_SO",
+      "Bagout_SD_SO",
+      "Natural_N_SPFR",
+      "Natural_X_SPFR",
+      "Natural_SD_SPFR",
+      "Sup_N_SPFR",
+      "Sup_X_SPFR",
+      "Sup_SD_SPFR",
+      "Bagout_N_SPFR",
+      "Bagout_X_SPFR",
+      "Bagout_SD_SPFR",
+      "Natural_N_SPFL",
+      "Natural_X_SPFL",
+      "Natural_SD_SPFL",
+      "Sup_N_SPFL",
+      "Sup_X_SPFL",
+      "Sup_SD_SPFL",
+      "Bagout_N_SPFL",
+      "Bagout_X_SPFL",
+      "Bagout_SD_SPFL",
+      "Natural_N_SPP",
+      "Natural_X_SPP",
+      "Natural_SD_SPP",
+      "Sup_N_SPP",
+      "Sup_X_SPP",
+      "Sup_SD_SPP",
+      "Bagout_N_SPP",
+      "Bagout_X_SPP",
+      "Bagout_SD_SPP",
+      "Emasculated_treatment",
+      "Additional_Treatment_Information",
+      "population",
+      "year_of_study",
+      "on_phylogeny"
+    ],
+    "sha256": "8c764ce03da86db0cb280e8f8f92cc0e62e2df6d85a2226e3246dc1afeb3f65f",
+    "git_blob_sha": "d22fe333b19489c473e076dd173ed7a67b1afbf0",
+    "bytes": 1091571,
+    "encoding_diagnostic": {
+      "first_bad_byte_offset": 154669,
+      "first_bad_byte_hex": "e3",
+      "nonascii_bytes": 134,
+      "c1_bytes": 2
+    },
+    "encoding": "reversible Latin-1 byte view; author charset not inferred",
+    "delimiter": ",",
+    "context_columns": [
+      "unique_study_number",
+      "Author",
+      "Year",
+      "DOI",
+      "Emasculated_treatment",
+      "Additional_Treatment_Information",
+      "year_of_study"
+    ],
+    "identity_columns": [
+      "Species_Author",
+      "Author",
+      "Year",
+      "DOI",
+      "year_of_study"
+    ],
+    "taxon_columns": [
+      "Species_Author",
+      "Species_accepted_names"
+    ],
+    "context_nonmissing": {
+      "unique_study_number": 2969,
+      "Author": 2969,
+      "Year": 2969,
+      "DOI": 2673,
+      "Emasculated_treatment": 2531,
+      "Additional_Treatment_Information": 1895,
+      "year_of_study": 2316
+    },
+    "field_hit_counts": {
+      "Additional_Treatment_Information": 73,
+      "Author": 11
+    },
+    "matching_rows": 84,
+    "candidate_identity_groups": 32,
+    "gezon_identity_matching_rows": 0,
+    "claytonia_taxon_matching_rows": 0,
+    "candidate_identities": [
+      {
+        "identity": {
+          "Species_Author": "Banksia_ericifolia",
+          "Author": "Copland_and_Whelan",
+          "Year": "1989",
+          "DOI": "10.2307/2260766",
+          "year_of_study": "1985"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Banksia_ericifolia",
+          "Author": "Copland_and_Whelan",
+          "Year": "1989",
+          "DOI": "10.2307/2260766",
+          "year_of_study": "1986"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Banksia_paludosa",
+          "Author": "Copland_and_Whelan",
+          "Year": "1989",
+          "DOI": "10.2307/2260766",
+          "year_of_study": "1985"
+        },
+        "rows": 1,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Begonia_tonduzii",
+          "Author": "Le_Corff_et_al",
+          "Year": "1998",
+          "DOI": "10.1890/0012-9658(1998)079%5B1610:FDPDAF%5D2.0.CO;2",
+          "year_of_study": "NA"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Begonia_urophylla",
+          "Author": "Le_Corff_et_al",
+          "Year": "1998",
+          "DOI": "10.1890/0012-9658(1998)079%5B1610:FDPDAF%5D2.0.CO;2",
+          "year_of_study": "NA"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Cerastium_alpinum",
+          "Author": "Totland_and_Schulte",
+          "Year": "2003",
+          "DOI": "10.1657/1523-0430(2003)035%5B0242:BSIFVA%5D2.0.CO;2",
+          "year_of_study": "NA"
+        },
+        "rows": 3,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Cerastium_cerastoides",
+          "Author": "Totland_and_Schulte",
+          "Year": "2003",
+          "DOI": "10.1657/1523-0430(2003)035%5B0242:BSIFVA%5D2.0.CO;2",
+          "year_of_study": "NA"
+        },
+        "rows": 3,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Collinsia_verna",
+          "Author": "Kalisz_and_Vogler",
+          "Year": "2003",
+          "DOI": "10.1890/02-0519",
+          "year_of_study": "1999"
+        },
+        "rows": 6,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Collinsia_verna",
+          "Author": "Kalisz_and_Vogler",
+          "Year": "2003",
+          "DOI": "10.1890/02-0519",
+          "year_of_study": "2000"
+        },
+        "rows": 6,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Echinacea_laevigata",
+          "Author": "Stucky_et_al",
+          "Year": "2012",
+          "DOI": "10.1674/0003-0031-168.1.93",
+          "year_of_study": "2004"
+        },
+        "rows": 1,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "snow_hill_road_2004"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Melampyrum_pratense",
+          "Author": "Kwak_and_Jennersten",
+          "Year": "1991",
+          "DOI": "10.1007/BF00317395",
+          "year_of_study": "NA"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Parnassia_palustris",
+          "Author": "Sandvik_and_Eide",
+          "Year": "2009",
+          "DOI": "10.1007/s11258-009-9594-3",
+          "year_of_study": "2003"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "warming"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Podophyllum_peltatum",
+          "Author": "Whisler_and_Snow",
+          "Year": "1992",
+          "DOI": "10.2307/2445055",
+          "year_of_study": "1989"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Author"
+        ],
+        "matched_terms": [
+          "snow"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Podophyllum_peltatum",
+          "Author": "Whisler_and_Snow",
+          "Year": "1992",
+          "DOI": "10.2307/2445055",
+          "year_of_study": "1990"
+        },
+        "rows": 6,
+        "matched_fields": [
+          "Author"
+        ],
+        "matched_terms": [
+          "snow"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Ranunculus_acris",
+          "Author": "Totland_and_Eide",
+          "Year": "1999",
+          "DOI": "10.1080/11956860.1999.11682518",
+          "year_of_study": "NA"
+        },
+        "rows": 4,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Raphanus_sativus",
+          "Author": "Stanton",
+          "Year": "1987",
+          "DOI": "10.2307/2444020",
+          "year_of_study": "1984"
+        },
+        "rows": 8,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Ruellia_subsessilis",
+          "Author": "Miranda_Vieira",
+          "Year": "2014",
+          "DOI": "10.1016/j.flora.2014.09.007",
+          "year_of_study": "2009-2010"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "season"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Silene_alba",
+          "Author": "Alexander",
+          "Year": "1987",
+          "DOI": "10.2307/2260205",
+          "year_of_study": "1985"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Solidago_canadensis",
+          "Author": "Gross_and_Werner",
+          "Year": "1983",
+          "DOI": "10.2307/1942589",
+          "year_of_study": "1979"
+        },
+        "rows": 1,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Solidago_graminifolia",
+          "Author": "Gross_and_Werner",
+          "Year": "1983",
+          "DOI": "10.2307/1942589",
+          "year_of_study": "1979"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Solidago_juncea",
+          "Author": "Gross_and_Werner",
+          "Year": "1983",
+          "DOI": "10.2307/1942589",
+          "year_of_study": "1979"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Stellaria_pubera",
+          "Author": "Campbell",
+          "Year": "1985",
+          "DOI": "10.2307/1940403",
+          "year_of_study": "1981"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Symphyotrichum_sericeum",
+          "Author": "Robson",
+          "Year": "2010",
+          "DOI": "10.1139/B10-003",
+          "year_of_study": "2009"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Tipularia_discolor",
+          "Author": "Snow_and_Whigham",
+          "Year": "1989",
+          "DOI": "10.2307/1938188",
+          "year_of_study": "1986"
+        },
+        "rows": 1,
+        "matched_fields": [
+          "Author"
+        ],
+        "matched_terms": [
+          "snow_and_whigham"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Tipularia_discolor",
+          "Author": "Snow_and_Whigham",
+          "Year": "1989",
+          "DOI": "10.2307/1938188",
+          "year_of_study": "1987"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Author"
+        ],
+        "matched_terms": [
+          "snow_and_whigham"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Trifolium_dasyphyllum",
+          "Author": "Geib_and_Galen",
+          "Year": "2012",
+          "DOI": "10.1890/11-1271.1",
+          "year_of_study": "2007"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "season"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Trifolium_parryi",
+          "Author": "Geib_and_Galen",
+          "Year": "2012",
+          "DOI": "10.1890/11-1271.1",
+          "year_of_study": "2007"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "season"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Vaccinium_myrtillus",
+          "Author": "Jacquemart",
+          "Year": "1997",
+          "DOI": "10.1007/BF00984387",
+          "year_of_study": "NA"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Vaccinium_uliginosum",
+          "Author": "Jacquemart",
+          "Year": "1997",
+          "DOI": "10.1007/BF00984387",
+          "year_of_study": "NA"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Vaccinium_vitis-idaea",
+          "Author": "Jacquemart",
+          "Year": "1997",
+          "DOI": "10.1007/BF00984387",
+          "year_of_study": "NA"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Viscaria_vulgaris",
+          "Author": "Kwak_and_Jennersten",
+          "Year": "1991",
+          "DOI": "10.1007/BF00317395",
+          "year_of_study": "NA"
+        },
+        "rows": 2,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      },
+      {
+        "identity": {
+          "Species_Author": "Zigadenus_paniculatus",
+          "Author": "Emms",
+          "Year": "1996",
+          "DOI": "10.2307/2446165",
+          "year_of_study": "NA"
+        },
+        "rows": 4,
+        "matched_fields": [
+          "Additional_Treatment_Information"
+        ],
+        "matched_terms": [
+          "early",
+          "late"
+        ]
+      }
+    ],
+    "note": "ASCII lexical leads only; source preceding final curation; no numeric biological effect fitted."
+  },
+  "context_only_publications": [
+    {
+      "doi": "10.2307/2260766",
+      "author": "Copland_and_Whelan",
+      "year": "1989",
+      "rows": 5,
+      "groups": 3,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.1890/0012-9658(1998)079%5B1610:FDPDAF%5D2.0.CO;2",
+      "author": "Le_Corff_et_al",
+      "year": "1998",
+      "rows": 4,
+      "groups": 2,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.1657/1523-0430(2003)035%5B0242:BSIFVA%5D2.0.CO;2",
+      "author": "Totland_and_Schulte",
+      "year": "2003",
+      "rows": 6,
+      "groups": 2,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.1890/02-0519",
+      "author": "Kalisz_and_Vogler",
+      "year": "2003",
+      "rows": 12,
+      "groups": 2,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.1674/0003-0031-168.1.93",
+      "author": "Stucky_et_al",
+      "year": "2012",
+      "rows": 1,
+      "groups": 1,
+      "terms": [
+        "snow_hill_road_2004"
+      ]
+    },
+    {
+      "doi": "10.1007/BF00317395",
+      "author": "Kwak_and_Jennersten",
+      "year": "1991",
+      "rows": 4,
+      "groups": 2,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.1007/s11258-009-9594-3",
+      "author": "Sandvik_and_Eide",
+      "year": "2009",
+      "rows": 2,
+      "groups": 1,
+      "terms": [
+        "warming"
+      ]
+    },
+    {
+      "doi": "10.1080/11956860.1999.11682518",
+      "author": "Totland_and_Eide",
+      "year": "1999",
+      "rows": 4,
+      "groups": 1,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.2307/2444020",
+      "author": "Stanton",
+      "year": "1987",
+      "rows": 8,
+      "groups": 1,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.1016/j.flora.2014.09.007",
+      "author": "Miranda_Vieira",
+      "year": "2014",
+      "rows": 2,
+      "groups": 1,
+      "terms": [
+        "season"
+      ]
+    },
+    {
+      "doi": "10.2307/2260205",
+      "author": "Alexander",
+      "year": "1987",
+      "rows": 2,
+      "groups": 1,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.2307/1942589",
+      "author": "Gross_and_Werner",
+      "year": "1983",
+      "rows": 5,
+      "groups": 3,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.2307/1940403",
+      "author": "Campbell",
+      "year": "1985",
+      "rows": 2,
+      "groups": 1,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.1139/B10-003",
+      "author": "Robson",
+      "year": "2010",
+      "rows": 2,
+      "groups": 1,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.1890/11-1271.1",
+      "author": "Geib_and_Galen",
+      "year": "2012",
+      "rows": 4,
+      "groups": 2,
+      "terms": [
+        "season"
+      ]
+    },
+    {
+      "doi": "10.1007/BF00984387",
+      "author": "Jacquemart",
+      "year": "1997",
+      "rows": 6,
+      "groups": 3,
+      "terms": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "doi": "10.2307/2446165",
+      "author": "Emms",
+      "year": "1996",
+      "rows": 4,
+      "groups": 1,
+      "terms": [
+        "early",
+        "late"
+      ]
+    }
+  ],
+  "screen_summary": {
+    "matching_context_rows": 73,
+    "context_identity_groups": 28,
+    "context_publications": 17,
+    "author_only_false_matches": 11,
+    "known_location_label_only": {
+      "doi": "10.1674/0003-0031-168.1.93",
+      "rows": 1
+    },
+    "remaining_candidate_publications_after_known_location_false_match": 16,
+    "primary_theta_added": 0,
+    "not_systematic_complete": true
+  },
+  "provenance": {
+    "run": 45537826778,
+    "job": 138948685117,
+    "artifact_id": 14988310650,
+    "artifact_zip_sha256": "22631d0a2dbacb7d0bdf7eba308958793267a86b0afd6992a6bf7658e847983d",
+    "extraction": "Exact aggregate Actions log JSON; ZIP digest from upload log, ZIP not separately downloaded"
+  }
+}
