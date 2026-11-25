@@ -1,0 +1,1116 @@
+{
+  "status": "SOURCE_APPENDICES_ONLY_NO_MODEL",
+  "doi": "10.1890/11-1271.1",
+  "files": {
+    "A": {
+      "article_id": 3553704,
+      "file_id": 5622411,
+      "name": "appendix-A.htm",
+      "expected_md5": "e3fc793b003b6572402308bbe71dde80",
+      "expected_bytes": 73789,
+      "status": "CC0_ORIGINAL_BYTES_VERIFIED",
+      "source_url": "https://api.figshare.com/v2/file/download/5622411",
+      "sha256": "92bc29636f7961fc1392a24a8aa6e617982f1782c3337d72381d6c9b80ce6543",
+      "html_table_count": 0,
+      "image_elements": 2,
+      "exact_compiled_tokens": {
+        "0.311": 0,
+        "0.686": 0,
+        "0.989": 0,
+        "0.653": 0,
+        "0.259489884": 0,
+        "0.349874263": 0,
+        "0.521003839": 0
+      },
+      "tables": []
+    },
+    "B": {
+      "article_id": 3553701,
+      "file_id": 5622408,
+      "name": "appendix-B.htm",
+      "expected_md5": "9ec547207aa02ac99b27a710d90a2d66",
+      "expected_bytes": 60950,
+      "status": "CC0_ORIGINAL_BYTES_VERIFIED",
+      "source_url": "https://api.figshare.com/v2/file/download/5622408",
+      "sha256": "725b2148b5940bcb93ef10c09cdb7e0dc5279b7a792fc4d02f982fb9d46b1a5e",
+      "html_table_count": 4,
+      "image_elements": 1,
+      "exact_compiled_tokens": {
+        "0.311": 0,
+        "0.686": 0,
+        "0.989": 0,
+        "0.653": 0,
+        "0.259489884": 0,
+        "0.349874263": 0,
+        "0.521003839": 0
+      },
+      "tables": [
+        {
+          "ordinal": 1,
+          "caption": null,
+          "preceding_context": [
+            "Table B1. Projection matrices for alpine clovers. f ( P ) indicates vital rates that vary as a function of pollinator density. SB = dormant seeds in the seed bank, SL = seedling, JV = juvenile, AF = flowering adult, AV = vegetative adult."
+          ],
+          "row_count": 14,
+          "headers": [
+            [
+              "Stage i year t + 1",
+              "Stage j year t"
+            ],
+            [
+              "SB",
+              "SL",
+              "JV",
+              "AF",
+              "AV"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "SB",
+              "0",
+              "0",
+              "0",
+              "f ( P )",
+              "0"
+            ],
+            [
+              "SL",
+              "f ( P )",
+              "0",
+              "0",
+              "f ( P )",
+              "0"
+            ],
+            [
+              "JV",
+              "0",
+              "0.40",
+              "0.68",
+              "0",
+              "0"
+            ],
+            [
+              "AF",
+              "0",
+              "0",
+              "0.09",
+              "0.14",
+              "0.39"
+            ],
+            [
+              "AV",
+              "0",
+              "0",
+              "0",
+              "0.64",
+              "0.39"
+            ],
+            [
+              "SB",
+              "0",
+              "0",
+              "0",
+              "f ( P )",
+              "0"
+            ],
+            [
+              "SL",
+              "f ( P )",
+              "0",
+              "0",
+              "f ( P )",
+              "0"
+            ],
+            [
+              "JV",
+              "0",
+              "0.40",
+              "0.64",
+              "0",
+              "0"
+            ],
+            [
+              "AF",
+              "0",
+              "0",
+              "0.06",
+              "0.61",
+              "0.43"
+            ],
+            [
+              "AV",
+              "0",
+              "0",
+              "0",
+              "0.24",
+              "0.43"
+            ]
+          ]
+        },
+        {
+          "ordinal": 2,
+          "caption": null,
+          "preceding_context": [
+            "Table B2 . Life history stages for Trifolium dasyphyllum and T. parryi ."
+          ],
+          "row_count": 6,
+          "headers": [
+            [
+              "Stage",
+              "Definition and description"
+            ],
+            [
+              "Seed",
+              "Ungerminated at the end of the first growing season"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "Juvenile",
+              "Has true adult leaves, age 2–6 years, not flowering"
+            ],
+            [
+              "Adult (flowering)",
+              "≥ 7 years, with at least 1 inflorescence"
+            ],
+            [
+              "Adult (vegetative)",
+              "≥ 7 years, without inflorescences"
+            ]
+          ]
+        },
+        {
+          "ordinal": 3,
+          "caption": null,
+          "preceding_context": [
+            "Table B3 . Vital rates for T. dasyphyllum and T. parryi . S ij : contribution through survival from class j to i , F ij : contribution through fecundity from class j to i , AV and AF: vegetative and flowering adults, respectively."
+          ],
+          "row_count": 23,
+          "headers": [
+            [
+              "Life history parameter",
+              "Estimated value",
+              "Source"
+            ],
+            [
+              "(A) T. dasyphyllum"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "S 2,1",
+              "Seed bank to seedling",
+              "F (pollinator density)",
+              "This study"
+            ],
+            [
+              "S 3,2",
+              "Seedling to juvenile",
+              "0.40",
+              "This study"
+            ],
+            [
+              "S 3,3",
+              "Juvenile to juvenile",
+              "0.64",
+              "T. Forbis unpublished data"
+            ],
+            [
+              "S 4,3",
+              "Juvenile to AF",
+              "0.06",
+              "R. adoneus , Stanton and Galen 1997"
+            ],
+            [
+              "S 5,4",
+              "AF to AV",
+              "0.24",
+              "Supplemental survey 2008"
+            ],
+            [
+              "S 4,4",
+              "AF to AF",
+              "0.61",
+              "Supplemental survey 2008"
+            ],
+            [
+              "S 5,5",
+              "AV to AV",
+              "0.43",
+              "Supplemental survey 2008"
+            ],
+            [
+              "S 4,5",
+              "AV to AF",
+              "0.43",
+              "Supplemental survey 2008"
+            ],
+            [
+              "F 1,4",
+              "Fecundity (AF to seed bank)",
+              "F (pollinator density)",
+              "This study"
+            ],
+            [
+              "F 2,4",
+              "Fecundity (AF to seedling)",
+              "F (pollinator density)",
+              "This study"
+            ],
+            [
+              "S 2,1",
+              "Seed bank to seedling",
+              "F (pollinator density)",
+              "This study"
+            ],
+            [
+              "S 3,2",
+              "Seedling to juvenile",
+              "0.40",
+              "This study"
+            ],
+            [
+              "S 3,3",
+              "Juvenile to juvenile",
+              "0.68",
+              "R. adoneus , Stanton and Galen 1997"
+            ],
+            [
+              "S 4,3",
+              "Juvenile to AF",
+              "0.09",
+              "R. adoneus , Stanton and Galen 1997"
+            ],
+            [
+              "S 5,4",
+              "AF to AV",
+              "0.64",
+              "Supplemental survey 2008"
+            ],
+            [
+              "S 4,4",
+              "AF to AF",
+              "0.14",
+              "Supplemental survey 2008"
+            ],
+            [
+              "S 5,5",
+              "AV to AV",
+              "0.39",
+              "Supplemental survey 2008"
+            ],
+            [
+              "S 4,5",
+              "AV to AF",
+              "0.39",
+              "Supplemental survey 2008"
+            ],
+            [
+              "F 1,4",
+              "Fecundity (AF to seed bank)",
+              "F (pollinator density)",
+              "This study"
+            ],
+            [
+              "F 2,4",
+              "Fecundity (AF to seedling)",
+              "F (pollinator density)",
+              "This study"
+            ]
+          ]
+        },
+        {
+          "ordinal": 4,
+          "caption": null,
+          "preceding_context": [
+            "Table B4 . Parameters contributing to Trifolium dasyphyllum and T. parryi vital rates that vary with pollinator density ( F 1,4 , F 2,4 , and S 2,1 ). Values reported are means, except where noted. Means with standard deviations in parenthe"
+          ],
+          "row_count": 11,
+          "headers": [
+            [
+              "No. added bees",
+              "Seeds per inflorescence *",
+              "Probability germination yr 1",
+              "Probability enter seed bank yr 1",
+              "Probability germination from seed bank"
+            ],
+            [
+              "T. daysphyllum"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "0",
+              "3.13 (0.77)",
+              "0.05 (0.02)",
+              "0.95 (0.02)",
+              "0.05 (0.02)"
+            ],
+            [
+              "1",
+              "2.11 (0.74)",
+              "0.01 (0.03)",
+              "0.99 (0.03)",
+              "0.12 (0.09)"
+            ],
+            [
+              "2",
+              "2.54 (0.75)",
+              "0.05 (0.02)",
+              "0.95 (0.02)",
+              "0.09 (0.03)"
+            ],
+            [
+              "3",
+              "2.02 (0.78)",
+              "0.03 (0.03)",
+              "0.98 (0.03)",
+              "0.02 (0.03)"
+            ],
+            [
+              "0",
+              "2.07 (1.13)",
+              "0.02 (0.03)",
+              "0.98 (0.03)",
+              "0.04 (0.03)"
+            ],
+            [
+              "1",
+              "1.81 (0.99)",
+              "0.08 (0.06)",
+              "0.92 (0.06)",
+              "0.05 (0.08)"
+            ],
+            [
+              "2",
+              "2.27 (0.99)",
+              "0.13 (0.04)",
+              "0.88 (0.04)",
+              "0.02 (0.03)"
+            ],
+            [
+              "3",
+              "1.56 (1.02)",
+              "0.14 (0.09)",
+              "0.86 (0.09)",
+              "0.03 (0.07)"
+            ]
+          ]
+        }
+      ]
+    },
+    "C": {
+      "article_id": 3553698,
+      "file_id": 5622405,
+      "name": "appendix-C.htm",
+      "expected_md5": "66433a1664e6e072b5abeef7ab0c9838",
+      "expected_bytes": 30534,
+      "status": "CC0_ORIGINAL_BYTES_VERIFIED",
+      "source_url": "https://api.figshare.com/v2/file/download/5622405",
+      "sha256": "a21da0f1f7cba1a5b25b69dd496d346306a2b959fe274d49cc586cae087db668",
+      "html_table_count": 7,
+      "image_elements": 0,
+      "exact_compiled_tokens": {
+        "0.311": 0,
+        "0.686": 0,
+        "0.989": 0,
+        "0.653": 0,
+        "0.259489884": 0,
+        "0.349874263": 0,
+        "0.521003839": 0
+      },
+      "tables": [
+        {
+          "ordinal": 1,
+          "caption": null,
+          "preceding_context": [
+            "Table C1 . ANCOVA testing the relationship between B. balteatus density and visitation rates for (A) early-flowering plants of Trifolium dasyphyllum and T. parryi and (B) for early and late-flowering T. parryi . Bees = bee density treatment"
+          ],
+          "row_count": 16,
+          "headers": [
+            [
+              "",
+              "Source",
+              "Num df",
+              "Den df",
+              "F",
+              "Pr > F"
+            ],
+            [
+              "(A) Type III tests of fixed effects: Interspecific differences"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "Whole model",
+              "bees",
+              "1",
+              "18",
+              "20.15",
+              "0.0003"
+            ],
+            [
+              "bees 2",
+              "1",
+              "18",
+              "7.66",
+              "0.0127"
+            ],
+            [
+              "species",
+              "1",
+              "18",
+              "0.01",
+              "0.9361"
+            ],
+            [
+              "bees × species",
+              "1",
+              "18",
+              "3.05",
+              "0.0977"
+            ],
+            [
+              "bees 2 × species",
+              "1",
+              "18",
+              "1.98",
+              "0.1768"
+            ],
+            [
+              "T. dasyphyllum",
+              "bees",
+              "1",
+              "10",
+              "13.24",
+              "0.0045"
+            ],
+            [
+              "T. parryi",
+              "bees",
+              "1",
+              "9",
+              "18.69",
+              "0.0019"
+            ],
+            [
+              "bees 2",
+              "1",
+              "9",
+              "8.37",
+              "0.0178"
+            ],
+            [
+              "Whole model",
+              "bees",
+              "1",
+              "10",
+              "8.55",
+              "0.0152"
+            ],
+            [
+              "bees 2",
+              "1",
+              "10",
+              "3.06",
+              "0.1109"
+            ],
+            [
+              "time",
+              "1",
+              "10",
+              "0.14",
+              "0.7152"
+            ],
+            [
+              "bees × time",
+              "1",
+              "10",
+              "0.65",
+              "0.4377"
+            ],
+            [
+              "bees 2 × time",
+              "1",
+              "10",
+              "0.56",
+              "0.4712"
+            ]
+          ]
+        },
+        {
+          "ordinal": 2,
+          "caption": null,
+          "preceding_context": [
+            "Table C2. ANCOVA testing the relationship between B. balteatus visits and pollination in (A) early-flowering plants of each Trifolium species and (B) for early and late-flowering T. parryi . Time = time of season (early or late: before or a"
+          ],
+          "row_count": 13,
+          "headers": [
+            [
+              "",
+              "Source",
+              "Num df",
+              "Den df",
+              "F",
+              "Pr > F"
+            ],
+            [
+              "(A) Type III tests of fixed effects: Interspecific differences"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "Whole model",
+              "visits",
+              "1",
+              "69.8",
+              "12.66",
+              "0.0007"
+            ],
+            [
+              "species",
+              "1",
+              "103.0",
+              "4.76",
+              "0.0315"
+            ],
+            [
+              "visits × species",
+              "1",
+              "106.0",
+              "4.89",
+              "0.0291"
+            ],
+            [
+              "T. dasyphyllum",
+              "visits",
+              "1",
+              "42.0",
+              "0.50",
+              "0.4832"
+            ],
+            [
+              "T. parryi",
+              "visits",
+              "1",
+              "23.3",
+              "31.83",
+              "<.0001"
+            ],
+            [
+              "Whole model",
+              "visits",
+              "1",
+              "21.3",
+              "0.01",
+              "0.9144"
+            ],
+            [
+              "time",
+              "1",
+              "15.7",
+              "55.74",
+              "<.0001"
+            ],
+            [
+              "visits × time",
+              "1",
+              "21.3",
+              "15.52",
+              "0.0007"
+            ],
+            [
+              "T. parryi early",
+              "visits",
+              "1",
+              "23.3",
+              "31.83",
+              "<.0001"
+            ],
+            [
+              "T. parryi late",
+              "visits",
+              "1",
+              "5.3",
+              "0.82",
+              "0.4030"
+            ]
+          ]
+        },
+        {
+          "ordinal": 3,
+          "caption": null,
+          "preceding_context": [
+            "Table C3 . ANCOVA testing the relationship between pollination and seed set for (A) early-flowering plants of T. dasyphyllum and T. parryi and (B) for early and late-flowering T. parryi . Pollination = number of stylar pollen tubes, HP seed"
+          ],
+          "row_count": 17,
+          "headers": [
+            [
+              "",
+              "Source",
+              "Num df",
+              "Den df",
+              "F",
+              "Pr > F"
+            ],
+            [
+              "(A) Type III tests of fixed effects: Interspecies differences"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "Whole model",
+              "pollination",
+              "1",
+              "100.0",
+              "12.89",
+              "0.0005"
+            ],
+            [
+              "species",
+              "1",
+              "89.0",
+              "3.81",
+              "0.0541"
+            ],
+            [
+              "pollination × species",
+              "1",
+              "101.0",
+              "0.51",
+              "0.4748"
+            ],
+            [
+              "HP seed set",
+              "1",
+              "24.4",
+              "9.55",
+              "0.0049"
+            ],
+            [
+              "HP seed set × species",
+              "1",
+              "59.8",
+              "0.64",
+              "0.4273"
+            ],
+            [
+              "Whole model",
+              "pollination",
+              "1",
+              "65.3",
+              "1.93",
+              "0.1698"
+            ],
+            [
+              "time",
+              "1",
+              "22.5",
+              "0.16",
+              "0.6931"
+            ],
+            [
+              "pollination × time",
+              "1",
+              "65.3",
+              "4.62",
+              "0.0354"
+            ],
+            [
+              "HP seed set",
+              "1",
+              "14.6",
+              "18.74",
+              "0.0006"
+            ],
+            [
+              "HP seed set × time",
+              "1",
+              "14.6",
+              "3.03",
+              "0.1029"
+            ],
+            [
+              "T. parryi early",
+              "pollination",
+              "1",
+              "44.4",
+              "11.20",
+              "0.0017"
+            ],
+            [
+              "HP seed set",
+              "1",
+              "12.7",
+              "4.14",
+              "0.0634"
+            ],
+            [
+              "T. parryi late",
+              "pollination",
+              "1",
+              "6.86",
+              "0.12",
+              "0.7346"
+            ],
+            [
+              "HP seed set",
+              "1",
+              "2.45",
+              "18.5",
+              "0.0345"
+            ]
+          ]
+        },
+        {
+          "ordinal": 4,
+          "caption": null,
+          "preceding_context": [
+            "Table C4 . ANOVA testing how seed set responded to pollination treatments (HP, - B. balteatus , natural pollination) in T. dasyphyllum and T. parryi . HP = saturated with pollen by hand, - B. balteatus = B. balteatus queens and workers excl"
+          ],
+          "row_count": 9,
+          "headers": [
+            [
+              "Source",
+              "df",
+              "Type III SS",
+              "F",
+              "Pr > F"
+            ],
+            [
+              "pollination treatment",
+              "2",
+              "1.053",
+              "4.50",
+              "0.0137"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "time",
+              "1",
+              "1.976",
+              "16.88",
+              "<.0001"
+            ],
+            [
+              "species",
+              "1",
+              "0.031",
+              "0.26",
+              "0.6083"
+            ],
+            [
+              "pollination treatment × time",
+              "2",
+              "1.221",
+              "5.21",
+              "0.0072"
+            ],
+            [
+              "pollination treatment × species",
+              "2",
+              "0.093",
+              "0.40",
+              "0.6733"
+            ],
+            [
+              "time × species",
+              "1",
+              "1.022",
+              "8.73",
+              "0.0040"
+            ],
+            [
+              "pollination treatment × time × species",
+              "2",
+              "0.073",
+              "0.31",
+              "0.7334"
+            ],
+            [
+              "error",
+              "91",
+              "10.652",
+              "",
+              ""
+            ]
+          ]
+        },
+        {
+          "ordinal": 5,
+          "caption": null,
+          "preceding_context": [
+            "Table C5 . ANOVA testing the effects of bumble bee addition on cumulative seed germination two years after planting. Bees = bee density treatment (0, 1, 2, 3 bees added)."
+          ],
+          "row_count": 9,
+          "headers": [
+            [
+              "",
+              "Source",
+              "df",
+              "Type III SS",
+              "F",
+              "Pr > F"
+            ],
+            [
+              "(A) Whole model",
+              "block",
+              "4",
+              "0.201",
+              "3.28",
+              "0.0280"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "species",
+              "1",
+              "0.006",
+              "0.38",
+              "0.5433"
+            ],
+            [
+              "bees",
+              "3",
+              "0.081",
+              "1.77",
+              "0.1804"
+            ],
+            [
+              "species × bees",
+              "3",
+              "0.092",
+              "2.00",
+              "0.1412"
+            ],
+            [
+              "block × species",
+              "4",
+              "0.112",
+              "1.83",
+              "0.1564"
+            ],
+            [
+              "error",
+              "24",
+              "0.368",
+              "",
+              ""
+            ],
+            [
+              "(B) Planned contrasts",
+              "T. parryi 0 vs. 1,2,3",
+              "1",
+              "0.951",
+              "62.01",
+              "<.0001"
+            ],
+            [
+              "T. dasyphyllum 3 vs. 0,1,2",
+              "1",
+              "0.811",
+              "52.89",
+              "<.0001"
+            ]
+          ]
+        },
+        {
+          "ordinal": 6,
+          "caption": null,
+          "preceding_context": [
+            "Table C6 . Repeated-measures ANOVA testing for the effects of bumble bee addition on cumulative germination in 2008 and 2009. Bees = bee density treatment (0, 1, 2, 3 bees added)."
+          ],
+          "row_count": 12,
+          "headers": [
+            [
+              "Source",
+              "df",
+              "Type III SS",
+              "F",
+              "Pr > F"
+            ],
+            [
+              "Tests of hypotheses for between subjects effects"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "species",
+              "1",
+              "0.092",
+              "2.91",
+              "0.0979"
+            ],
+            [
+              "bees",
+              "2",
+              "0.194",
+              "2.05",
+              "0.1270"
+            ],
+            [
+              "species × bees",
+              "2",
+              "0.267",
+              "2.81",
+              "0.0549"
+            ],
+            [
+              "error",
+              "32",
+              "1.011",
+              "",
+              ""
+            ],
+            [
+              "time",
+              "1",
+              "0.231",
+              "43.34",
+              "<.0001"
+            ],
+            [
+              "time × species",
+              "1",
+              "0.039",
+              "7.28",
+              "0.0110"
+            ],
+            [
+              "time × bees",
+              "2",
+              "0.031",
+              "1.92",
+              "0.1464"
+            ],
+            [
+              "time × species × bees",
+              "2",
+              "0.039",
+              "2.46",
+              "0.0807"
+            ],
+            [
+              "error(time)",
+              "32",
+              "0.171",
+              "",
+              ""
+            ]
+          ]
+        },
+        {
+          "ordinal": 7,
+          "caption": null,
+          "preceding_context": [
+            "Table C7 . ANOVA testing the effects of bumble bee addition on seedling survival in T. parryi and T. dasyphyllum . Bees = bee density treatment (0, 1, 2, 3 bees added)."
+          ],
+          "row_count": 7,
+          "headers": [
+            [
+              "Source",
+              "df",
+              "Type III SS",
+              "F",
+              "Pr > F"
+            ],
+            [
+              "block",
+              "4",
+              "3.129",
+              "1.70",
+              "0.1838"
+            ]
+          ],
+          "selected_rows": [
+            [
+              "species",
+              "1",
+              "0.942",
+              "2.05",
+              "0.1656"
+            ],
+            [
+              "bees",
+              "3",
+              "0.372",
+              "0.20",
+              "0.9344"
+            ],
+            [
+              "species × bees",
+              "3",
+              "1.231",
+              "0.54",
+              "0.7471"
+            ],
+            [
+              "block × species",
+              "4",
+              "0.502",
+              "0.22",
+              "0.9509"
+            ],
+            [
+              "error",
+              "23",
+              "10.570",
+              "",
+              ""
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "trifolium_quarantine_unchanged": true,
+  "interpretation": {
+    "original_source_statistics": {
+      "C2_visits_by_time": [
+        "visits × time",
+        "1",
+        "21.3",
+        "15.52",
+        "0.0007"
+      ],
+      "C3_pollination_by_time": [
+        "pollination × time",
+        "1",
+        "65.3",
+        "4.62",
+        "0.0354"
+      ],
+      "C4_treatment_by_time": [
+        "pollination treatment × time",
+        "2",
+        "1.221",
+        "5.21",
+        "0.0072"
+      ],
+      "C4_treatment_by_time_by_species": [
+        "pollination treatment × time × species",
+        "2",
+        "0.073",
+        "0.31",
+        "0.7334"
+      ],
+      "C4_time_by_species": [
+        "time × species",
+        "1",
+        "1.022",
+        "8.73",
+        "0.0040"
+      ]
+    },
+    "disposition": "Original C4 three-arm omnibus interaction (HP, B. balteatus exclusion, natural) supports variation by season; not the signed two-arm log-mean interaction. The three-way is not supported; no equivalence. C2/C3 are conditional associations in the original study, not independent effects. Appendices B/C contain stage projection inputs and ANOVA, not authenticated four early/late hand/open species-specific means. A image figures not used to reconstruct missing means. Exact duplicated GloPL cells remain quarantined. No variance, primary theta or pooled estimate added."
+  },
+  "provenance": {
+    "run": 45540589683,
+    "job": 138957839673,
+    "artifact_id": 14989410486,
+    "artifact_zip_sha256": "2479169a3c9be4806cb88da286a48a28a6396f40afcc40ba072c0defe3631e15",
+    "extraction": "Actual verified CC0 source checks and table extraction from executed log; ZIP digest from upload step, not independently downloaded."
+  }
+}
