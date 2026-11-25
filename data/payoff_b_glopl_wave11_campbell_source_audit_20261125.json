@@ -1,0 +1,241 @@
+{
+  "date": "2026-11-25",
+  "status": "SECONDARY_SOURCE_CROSSCHECK_AND_PAIRED_SE_SENSITIVITY_NO_POOLED_META",
+  "parent_blob_sha": "98aa8572171be63ee0dcde3ba441d5a3c3f865a6",
+  "source": {
+    "doi": "10.2307/1940403",
+    "article": "https://www.researchgate.net/publication/259992202_Pollinator_Sharing_and_Seed_Set_of_Stellaria_pubera_Competition_for_Pollination",
+    "pages": "549–551 (Methods, Table 6, Results, Discussion); p.548 Table 4 and text",
+    "field_years": [
+      1981,
+      1982
+    ],
+    "units": [
+      {
+        "year": 1981,
+        "n": 16,
+        "unit": "pairs of plants, treatment randomized within pair, earliest inflorescence per plant"
+      },
+      {
+        "year": 1982,
+        "n": 23,
+        "unit": "two inflorescences on same plant, one supplemental and one control"
+      }
+    ],
+    "phase_breakpoints": {
+      "1981": "04-11",
+      "1982": "04-15"
+    },
+    "table6": {
+      "early": {
+        "natural": 3.16,
+        "supplemented": 3.77,
+        "paired_difference_se": 0.294,
+        "df": 38,
+        "t": 2.074,
+        "printed_p": ".023 (one-tailed)"
+      },
+      "late": {
+        "natural": 1.54,
+        "supplemented": 1.56,
+        "paired_difference_se": 0.249,
+        "df": 38,
+        "t": 0.068,
+        "printed_p": ".946"
+      }
+    },
+    "reported_repeated_profile_interaction": "p < .05; greater supplementation benefit in early flowers",
+    "reported_date_MANOVA": "p < .01; later seed output lower",
+    "endpoint": "mean seeds per flower, per-inflorescence averages",
+    "not_an_independent_new_experiment": true
+  },
+  "glopl_crosscheck": [
+    {
+      "period": "early",
+      "arm": "Natural",
+      "mean": 3.16,
+      "original_mean": 3.16,
+      "compiled_n": 39,
+      "match": true
+    },
+    {
+      "period": "early",
+      "arm": "Sup",
+      "mean": 3.77,
+      "original_mean": 3.77,
+      "compiled_n": 39,
+      "match": true
+    },
+    {
+      "period": "late",
+      "arm": "Natural",
+      "mean": 1.54,
+      "original_mean": 1.54,
+      "compiled_n": 39,
+      "match": true
+    },
+    {
+      "period": "late",
+      "arm": "Sup",
+      "mean": 1.56,
+      "original_mean": 1.56,
+      "compiled_n": 39,
+      "match": true
+    }
+  ],
+  "source_correction": {
+    "compiled_year": "1981",
+    "analysis_years": [
+      1981,
+      1982
+    ],
+    "n_matched_pairs": 39,
+    "source_rows": [
+      "48",
+      "49"
+    ],
+    "action": "Separate crosswalk; previous source CSV and prior result unchanged."
+  },
+  "effects": {
+    "early_paired_difference": 0.6099999999999999,
+    "late_paired_difference": 0.020000000000000018,
+    "additive_late_minus_early": -0.5899999999999999,
+    "late_minus_early_lnRR": -0.1635995690251906,
+    "early_relative_supplement_benefit": 0.19303797468354422,
+    "late_relative_supplement_benefit": 0.012987012987013102,
+    "supplemented_seasonal_relative_change": -0.5862068965517242,
+    "covariance_known": false,
+    "additive_se_range": [
+      0.044999999999999984,
+      0.5429999999999999
+    ],
+    "additive_se_zero_correlation": 0.3852752262993301,
+    "correlation_sensitivity": [
+      {
+        "rho": -1,
+        "variance": 0.29484899999999997,
+        "se": 0.5429999999999999,
+        "normal95": [
+          -1.6542799999999998,
+          0.47428000000000003
+        ]
+      },
+      {
+        "rho": -0.5,
+        "variance": 0.22164299999999998,
+        "se": 0.47078976199573414,
+        "normal95": [
+          -1.5127479335116387,
+          0.332747933511639
+        ]
+      },
+      {
+        "rho": 0,
+        "variance": 0.14843699999999999,
+        "se": 0.38527522629933003,
+        "normal95": [
+          -1.3451394435466866,
+          0.16513944354668697
+        ]
+      },
+      {
+        "rho": 0.5,
+        "variance": 0.07523099999999999,
+        "se": 0.2742827008763039,
+        "normal95": [
+          -1.1275940937175555,
+          -0.05240590628244424
+        ]
+      },
+      {
+        "rho": 1,
+        "variance": 0.002024999999999999,
+        "se": 0.04499999999999999,
+        "normal95": [
+          -0.6781999999999998,
+          -0.5017999999999999
+        ]
+      }
+    ],
+    "variance_note": "SEs are original paired differences, not individual SDs. Sensitivity uses unknown correlation of two estimated paired differences and approximate normal interval; not an estimate of covariance or reconstructed published profile test. No logRR sampling variance recoverable from difference SEs alone."
+  },
+  "separate_factorial_anchor": {
+    "year": 1982,
+    "source": "same article Table 4 and Results, p.548",
+    "design": "greenhouse-induced early flowering x removal of Claytonia virginica flowers; plots as units; 5928 flowers across plots, not independent replicates",
+    "overlap_control": 0.32,
+    "overlap_early_induced": 0.85,
+    "reported_interaction_p_interval": [
+      0.4,
+      0.5
+    ],
+    "interpretation": "No detected interaction on overall seeds/flower. Do not infer equivalence. Greenhouse manipulation also alters conditions; competitor removal is external intervention, not independently measured endogenous recourse.",
+    "arm_means_se_available": false,
+    "primary_theta_eligible": false
+  },
+  "remaining_source_checks": [
+    {
+      "doi": "10.2307/1942589",
+      "ids": [
+        "19/21",
+        "25/27"
+      ],
+      "status": "PROVISIONAL_PARTIAL_NUMERIC_CHECK_ONLY",
+      "source": "https://esajournals.onlinelibrary.wiley.com/doi/10.2307/1942589",
+      "result": "Abstract reports 57% early deficit relative to supplemented S. graminifolia; compiled early relative deficit 56.916%. Abstract also reports no seed-set difference later, and no overall pollen limitation in S. juncea; no four-arm table or SD definitions recovered.",
+      "remaining": "Full tables and clone/ramet sampling covariance; two pairs remain provisional."
+    },
+    {
+      "doi": "10.2307/2260766",
+      "ids": [
+        "158/160",
+        "161/163"
+      ],
+      "status": "PROVISIONAL_ABSTRACT_ONLY",
+      "source": "https://eurekamag.com/research/001/940/001940874.php",
+      "result": "Abstract reports pollen addition failed to raise late-season fruit set in each year; positive effect in peak 1985, not general late depletion. Interannual flowering intensity matters.",
+      "remaining": "JSTOR landing page no readable text; numerical tables and repeated plant design not recovered."
+    },
+    {
+      "doi": "10.1007/BF00984387",
+      "ids": [
+        "478/475",
+        "479/480",
+        "483/484"
+      ],
+      "status": "PROVISIONAL_ABSTRACT_ONLY_WITHIN_RAMET",
+      "source": "https://link.springer.com/article/10.1007/BF00984387",
+      "result": "Original abstract distinguishes blooming order within ramets, spatial position and year. V. myrtillus supplemented seed number declines and natural fruit set increases with season; other species lack detected timing effect. Not all endpoints share the same pattern.",
+      "remaining": "Publisher subscription preview; author repository/ResearchGate abstract only via current text access. Exact year and cell SD/SE semantics not verified."
+    },
+    {
+      "doi": "10.1002/j.1537-2197.1996.tb12711.x",
+      "compiled_doi": "10.2307/2446165",
+      "ids": [
+        "414/416",
+        "415/417"
+      ],
+      "status": "PROVISIONAL_ABSTRACT_ONLY_WITHIN_PLANT",
+      "source": "https://bsapubs.onlinelibrary.wiley.com/doi/abs/10.1002/j.1537-2197.1996.tb12711.x",
+      "result": "Original abstract reports leaf clipping reduced seed production particularly late, and removal of early flowers increased later seed output; nutrient supplementation little effect. Direct within-plant resource allocation mechanism already published; no same-grain numeric table/covariance.",
+      "remaining": "Original four cell means, SD/SE, sampling units and dependence."
+    }
+  ],
+  "partial_abstract_numeric_check": {
+    "id": "19",
+    "source_reported_early_deficit": 0.57,
+    "compiled_early_deficit": 0.5691605477277237,
+    "difference": -0.0008394522722762199,
+    "full_pair_eligible": false
+  },
+  "updated_disposition": {
+    "total": 28,
+    "point_or_conditional": 12,
+    "provisional": 9,
+    "quarantine": 3,
+    "design_hold": 4,
+    "primary_theta_added": 0,
+    "meta_pooled": false
+  },
+  "limits": "Post-source review, not preregistration. Original article's tests already published; no new raw data or independent cohort. Prior 28-pair records unchanged; new source crosswalk overrides Campbell candidate status for interpretation. Four other publications not upgraded. No raw source redistribution."
+}
