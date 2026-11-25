@@ -1,0 +1,28 @@
+name: PAYOFF-B Collinsia wave 8 descriptive source contrasts
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/payoff-b-glopl-collinsia-wave8.yml'
+      - 'scripts/payoff_b_glopl_collinsia_wave8_20261125.py'
+      - 'docs/PAYOFF_B_GLOPL_COLLINSIA_TRIFOLIUM_WAVE8_FREEZE_20261125.md'
+permissions:
+  contents: read
+jobs:
+  source:
+    if: github.head_ref == 'analysis/payoff-b-interaction-buffering-meta-20261125'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests
+      - run: python scripts/payoff_b_glopl_collinsia_wave8_20261125.py outputs/payoff_b_glopl_collinsia_wave8.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-glopl-collinsia-wave8
+          path: outputs/payoff_b_glopl_collinsia_wave8.json
+          if-no-files-found: warn
