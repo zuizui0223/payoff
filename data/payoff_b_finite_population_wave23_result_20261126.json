@@ -1,0 +1,336 @@
+{
+  "status": "SYNTHETIC_ONLY",
+  "model": "synchronous fixed-size Wright-Fisher with exponential relative fitness and symmetric offspring mutation",
+  "numpy_version": "2.3.5",
+  "reps_per_cell_per_seed": 1024,
+  "horizon_generations": 4000,
+  "initial_frequency_each": 0.01,
+  "base_seeds": [
+    20261126,
+    20361126
+  ],
+  "s1": 0.03,
+  "s2": -0.27,
+  "J": 0.29,
+  "A_threshold": 0.9310344827586208,
+  "script_git_blob": "c4df8e610c3bff27f20e48ed51c1848ad28e1779",
+  "script_sha256": "5c02795d0355d28c98eb676c267d367f58f3a9dbfc569008559735e5c41ae64a",
+  "deterministic_discrete": [
+    {
+      "mu": 0,
+      "B_min": 1.1092384092559406e-19,
+      "first_joint95": 2605,
+      "final": [
+        1,
+        0.9999999999999601
+      ]
+    },
+    {
+      "mu": 0.000001,
+      "B_min": 0.000004406212709964651,
+      "first_joint95": 874,
+      "final": [
+        0.9999963482466026,
+        0.9999494981859515
+      ]
+    },
+    {
+      "mu": 0.00001,
+      "B_min": 0.000043702976667705744,
+      "first_joint95": 759,
+      "final": [
+        0.9999634705687448,
+        0.999494968622692
+      ]
+    },
+    {
+      "mu": 0.0001,
+      "B_min": 0.00043550183949371974,
+      "first_joint95": 643,
+      "final": [
+        0.999633510545548,
+        0.9949483906751534
+      ]
+    }
+  ],
+  "local_run_receipts": {
+    "initial_output_sha256": "00894617f0a4a0a80bfd24692751637307d244634e68b9cf96cdad0292c0c54b",
+    "repeat_output_sha256": "cbc08d58f4e9210dba3beccc509d45e1456ecd8410e75b034731c9ff7db0e4d2",
+    "note": "Initial run predates adding optional --seed/--reps CLI and base_seed metadata; same default computational path, output JSON hash differs with new metadata. Only compact aggregate receipt committed; reproduce full output using script."
+  },
+  "fields": [
+    "A_cross_count",
+    "B_zero_before_A_cross_count_conditional_denominator_A_cross_count",
+    "joint95_ever_count",
+    "joint95_end_count",
+    "median_first_joint95_generation_conditional_hit",
+    "mean_joint95_occupancy_rounded6",
+    "mean_terminal_joint_payoff_rounded6"
+  ],
+  "cells": [
+    {
+      "N_each": 100,
+      "mu": 0,
+      "main": [
+        67,
+        67,
+        0,
+        0,
+        null,
+        0,
+        1.985605
+      ],
+      "repeat": [
+        64,
+        64,
+        0,
+        0,
+        null,
+        0,
+        1.98625
+      ]
+    },
+    {
+      "N_each": 100,
+      "mu": 0.000001,
+      "main": [
+        83,
+        83,
+        1,
+        1,
+        2988,
+        0.000247,
+        1.982042
+      ],
+      "repeat": [
+        80,
+        80,
+        0,
+        0,
+        null,
+        0,
+        1.9826
+      ]
+    },
+    {
+      "N_each": 100,
+      "mu": 0.00001,
+      "main": [
+        267,
+        267,
+        16,
+        16,
+        2905,
+        0.004082,
+        1.943206
+      ],
+      "repeat": [
+        267,
+        267,
+        20,
+        20,
+        2850,
+        0.006454,
+        1.943359
+      ]
+    },
+    {
+      "N_each": 100,
+      "mu": 0.0001,
+      "main": [
+        925,
+        925,
+        545,
+        514,
+        2220,
+        0.220997,
+        1.833182
+      ],
+      "repeat": [
+        904,
+        904,
+        534,
+        515,
+        2280.5,
+        0.212209,
+        1.837113
+      ]
+    },
+    {
+      "N_each": 1000,
+      "mu": 0,
+      "main": [
+        437,
+        437,
+        0,
+        0,
+        null,
+        0,
+        1.906113
+      ],
+      "repeat": [
+        480,
+        480,
+        0,
+        0,
+        null,
+        0,
+        1.896875
+      ]
+    },
+    {
+      "N_each": 1000,
+      "mu": 0.000001,
+      "main": [
+        562,
+        562,
+        65,
+        65,
+        2882,
+        0.019289,
+        1.883164
+      ],
+      "repeat": [
+        619,
+        619,
+        70,
+        70,
+        2564.5,
+        0.028123,
+        1.870339
+      ]
+    },
+    {
+      "N_each": 1000,
+      "mu": 0.00001,
+      "main": [
+        968,
+        968,
+        625,
+        620,
+        2188,
+        0.269999,
+        1.828836
+      ],
+      "repeat": [
+        960,
+        960,
+        616,
+        615,
+        2066.5,
+        0.276179,
+        1.830524
+      ]
+    },
+    {
+      "N_each": 1000,
+      "mu": 0.0001,
+      "main": [
+        1024,
+        1024,
+        1024,
+        1011,
+        845,
+        0.753802,
+        1.839593
+      ],
+      "repeat": [
+        1024,
+        1024,
+        1024,
+        1004,
+        857,
+        0.758849,
+        1.839531
+      ]
+    },
+    {
+      "N_each": 10000,
+      "mu": 0,
+      "main": [
+        1024,
+        1024,
+        0,
+        0,
+        null,
+        0,
+        1.78
+      ],
+      "repeat": [
+        1022,
+        1022,
+        0,
+        0,
+        null,
+        0,
+        1.78043
+      ]
+    },
+    {
+      "N_each": 10000,
+      "mu": 0.000001,
+      "main": [
+        1024,
+        1024,
+        734,
+        734,
+        1806.5,
+        0.365513,
+        1.823775
+      ],
+      "repeat": [
+        1023,
+        1023,
+        746,
+        746,
+        1856,
+        0.364474,
+        1.824668
+      ]
+    },
+    {
+      "N_each": 10000,
+      "mu": 0.00001,
+      "main": [
+        1024,
+        1024,
+        1024,
+        1024,
+        884.5,
+        0.760682,
+        1.839956
+      ],
+      "repeat": [
+        1024,
+        1024,
+        1024,
+        1024,
+        887,
+        0.761177,
+        1.839956
+      ]
+    },
+    {
+      "N_each": 10000,
+      "mu": 0.0001,
+      "main": [
+        1024,
+        1005,
+        1024,
+        1024,
+        651,
+        0.835681,
+        1.839558
+      ],
+      "repeat": [
+        1024,
+        1009,
+        1024,
+        1024,
+        658,
+        0.83408,
+        1.839557
+      ]
+    }
+  ]
+}
