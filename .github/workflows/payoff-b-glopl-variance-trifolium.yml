@@ -1,0 +1,28 @@
+name: PAYOFF-B GloPL variance and Trifolium audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/payoff-b-glopl-variance-trifolium.yml'
+      - 'scripts/payoff_b_glopl_variance_trifolium_wave9_20261125.py'
+      - 'docs/PAYOFF_B_GLOPL_VARIANCE_AUDIT_TRIFOLIUM_FREEZE_20261125.md'
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: github.head_ref == 'analysis/payoff-b-interaction-buffering-meta-20261125'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests openpyxl beautifulsoup4
+      - run: python scripts/payoff_b_glopl_variance_trifolium_wave9_20261125.py outputs/payoff_b_glopl_variance_trifolium_wave9.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-glopl-variance-trifolium-wave9
+          path: outputs/payoff_b_glopl_variance_trifolium_wave9.json
+          if-no-files-found: warn
