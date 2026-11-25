@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install --disable-pip-version-check requests
+      - run: python -m pip install --disable-pip-version-check requests openpyxl
       - run: python scripts/payoff_b_glopl_collinsia_wave8_20261125.py outputs/payoff_b_glopl_collinsia_wave8.json
       - uses: actions/upload-artifact@v4
         if: always()
