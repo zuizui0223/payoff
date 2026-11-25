@@ -1,0 +1,272 @@
+{
+  "status": "SOURCE_ONLY_NO_FIT",
+  "article_id": 13089020,
+  "article_doi": "10.1111/oik.07919",
+  "files": [
+    {
+      "name": "Burraco_etal_Oikos2021.xlsx",
+      "file_id": 25051406,
+      "bytes": 87598,
+      "provider_md5": "d492e35ec5d8ebb038449cbd83efe595",
+      "status": "PROVIDER_MD5_VERIFIED",
+      "sha256": "10d4be0c29be5b767ceddd44c014ed1f704f95c3a1b87eddfae1d96dd091de53",
+      "schema": {
+        "sheets": [
+          {
+            "sheet": "Sheet1",
+            "rows": 787,
+            "header_nonempty_row": 3,
+            "headers": [
+              "Vial",
+              "Family",
+              "FamN",
+              "Phenology",
+              "PCode",
+              "PhenN",
+              "Temp",
+              "TCode",
+              "TempN",
+              "Food",
+              "FCode",
+              "FoodN",
+              "LarvaeN",
+              "Survival",
+              "Days",
+              "Mass",
+              "Growth rate",
+              null
+            ],
+            "column_support": {
+              "Vial": {
+                "nonmissing": 787,
+                "distinct": 786
+              },
+              "Family": {
+                "nonmissing": 787,
+                "distinct": 11,
+                "levels": {
+                  "1": 72,
+                  "2": 72,
+                  "3": 72,
+                  "4": 72,
+                  "6": 72,
+                  "7": 71,
+                  "8": 68,
+                  "9": 72,
+                  "10": 72,
+                  "11": 72,
+                  "12": 72
+                }
+              },
+              "FamN": {
+                "nonmissing": 787,
+                "distinct": 11
+              },
+              "Phenology": {
+                "nonmissing": 787,
+                "distinct": 3,
+                "levels": {
+                  "Normal": 264,
+                  "Delayed 6 days": 264,
+                  "Delayed 12 days": 259
+                }
+              },
+              "PCode": {
+                "nonmissing": 787,
+                "distinct": 3
+              },
+              "PhenN": {
+                "nonmissing": 787,
+                "distinct": 3
+              },
+              "Temp": {
+                "nonmissing": 787,
+                "distinct": 3,
+                "levels": {
+                  "Warm 19 C": 396,
+                  "Cold 15 C": 264,
+                  "Cold15 C": 127
+                }
+              },
+              "TCode": {
+                "nonmissing": 787,
+                "distinct": 2
+              },
+              "TempN": {
+                "nonmissing": 787,
+                "distinct": 2,
+                "levels": {
+                  "1": 396,
+                  "2": 391
+                }
+              },
+              "Food": {
+                "nonmissing": 787,
+                "distinct": 2,
+                "levels": {
+                  "Ad Libitum": 396,
+                  "Restricted": 391
+                }
+              },
+              "FCode": {
+                "nonmissing": 787,
+                "distinct": 2
+              },
+              "FoodN": {
+                "nonmissing": 787,
+                "distinct": 2,
+                "levels": {
+                  "1": 396,
+                  "2": 391
+                }
+              },
+              "LarvaeN": {
+                "nonmissing": 787,
+                "distinct": 6
+              },
+              "Survival": {
+                "nonmissing": 787,
+                "distinct": 2,
+                "levels": {
+                  "0": 90,
+                  "1": 697
+                }
+              },
+              "Days": {
+                "nonmissing": 697,
+                "distinct": 98
+              },
+              "Mass": {
+                "nonmissing": 694,
+                "distinct": 658
+              },
+              "Growth rate": {
+                "nonmissing": 694,
+                "distinct": 691
+              }
+            },
+            "preamble_text": [
+              {
+                "nonempty_row": 1,
+                "text_cells": [
+                  "Data from manuscript \"Limits to compensatory responses to altered phenology in amphibian larvae\" OIKOS 2021",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ],
+                "score": 1
+              },
+              {
+                "nonempty_row": 2,
+                "text_cells": [
+                  "Pablo Burraco, Anssi Laurila, Germán Orizaola",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                ],
+                "score": 0
+              },
+              {
+                "nonempty_row": 3,
+                "text_cells": [
+                  "Vial",
+                  "Family",
+                  "FamN",
+                  "Phenology",
+                  "PCode",
+                  "PhenN",
+                  "Temp",
+                  "TCode",
+                  "TempN",
+                  "Food",
+                  "FCode",
+                  "FoodN",
+                  "LarvaeN",
+                  "Survival",
+                  "Days",
+                  "Mass",
+                  "Growth rate",
+                  null
+                ],
+                "score": 7
+              }
+            ]
+          },
+          {
+            "sheet": "Sheet2",
+            "rows": 0,
+            "status": "EMPTY_SHEET"
+          },
+          {
+            "sheet": "Sheet3",
+            "rows": 0,
+            "status": "EMPTY_SHEET"
+          }
+        ]
+      }
+    }
+  ],
+  "title": "Burraco_etal_Oikos2021",
+  "dataset_doi": "10.6084/m9.figshare.13089020.v1",
+  "license": {
+    "value": 1,
+    "name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "version": 1,
+  "provenance": {
+    "run": 45549306937,
+    "job": 138986377668,
+    "artifact_id": 14993320229,
+    "artifact_zip_sha256": "34191d91905a48a2b55cdadcbe96dfaff56a0a74b1615406deb457efbf16e74f",
+    "prior_parser_runs": [
+      {
+        "run": 45549154170,
+        "result": "IndexError on empty sheet"
+      },
+      {
+        "run": 45549217842,
+        "result": "MD5 verified; title row not actual header"
+      }
+    ],
+    "extraction": "Exact aggregate job log; original MD5 and SHA256 checked; ZIP digest from upload log, ZIP not independently downloaded."
+  },
+  "source_article": {
+    "doi": "10.1111/oik.07919",
+    "year": 2021,
+    "collection_year": 2011,
+    "planned_n": 792,
+    "planned_families": 11,
+    "rooms": "one room at 19 C, one at 15 C; temperature confounded with room",
+    "methods": "https://www.diva-portal.org/smash/get/diva2%3A1540507/FULLTEXT01.pdf",
+    "note": "PDF text inspected; screenshot attempts failed. Author-reported outcomes already known. New reanalysis not a blinded test."
+  }
+}
