@@ -1,0 +1,307 @@
+{
+  "status": "SOURCE_SCHEMA_ONLY_NO_NEW_EFFECT",
+  "sources": {
+    "MurilloRincon2017_priority": {
+      "article_id": 3984482,
+      "files": [
+        {
+          "name": "GOrizaola_JAE-2016-00305.xlsx",
+          "bytes": 81042,
+          "provider_md5": "dafa108fd1189267ef9fcda5e3353f5f",
+          "id": 6328354,
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "19535539c5585ecd2ed2de6131058267920007b52625468081c8f1a267c5c08a",
+          "schema": {
+            "sheets": [
+              {
+                "sheet": "Info",
+                "rows": 9,
+                "columns": 1,
+                "header_row_index_1based": 0,
+                "headers": [],
+                "design_levels_or_counts": {}
+              },
+              {
+                "sheet": "Variables",
+                "rows": 14,
+                "columns": 3,
+                "header_row_index_1based": 3,
+                "headers": [
+                  "Container",
+                  "Code for each individual container. The first two letters describe the type of the phenology treatme",
+                  null
+                ],
+                "design_levels_or_counts": {
+                  "Container": {
+                    "levels": {
+                      "ContainerID": 1,
+                      "Block": 1,
+                      "LarvaeN": 1,
+                      "Mix": 1,
+                      "Food": 1,
+                      "FoodN": 1,
+                      "Phenology": 1,
+                      "PhenN": 1,
+                      "LarvalPeriod": 1,
+                      "Mass": 1,
+                      "Growth": 1
+                    }
+                  }
+                }
+              },
+              {
+                "sheet": "Data",
+                "rows": 841,
+                "columns": 12,
+                "header_row_index_1based": 1,
+                "headers": [
+                  "Container",
+                  "ContainerID",
+                  "Block",
+                  "LarvaeN",
+                  "Mix",
+                  "Food",
+                  "FoodN",
+                  "Phenology",
+                  "PhenN",
+                  "LarvalPeriod",
+                  "Mass",
+                  "Growth"
+                ],
+                "design_levels_or_counts": {
+                  "Container": {
+                    "distinct": 69,
+                    "nonmissing": 828
+                  },
+                  "ContainerID": {
+                    "distinct": 69,
+                    "nonmissing": 828
+                  },
+                  "Block": {
+                    "levels": {
+                      "1": 216,
+                      "2": 216,
+                      "3": 216,
+                      "4": 180
+                    }
+                  },
+                  "Food": {
+                    "levels": {
+                      "High": 420,
+                      "Low": 408
+                    }
+                  },
+                  "FoodN": {
+                    "levels": {
+                      "1": 420,
+                      "2": 408
+                    }
+                  },
+                  "Phenology": {
+                    "levels": {
+                      "Normal": 325,
+                      "Delayed (6days)": 248,
+                      "Extra delayed (12 days)": 254
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "status": "SOURCE_METADATA_RETRIEVED",
+      "title": "GOrizaola_JAE-2016-00305.xlsx",
+      "doi": "10.6084/m9.figshare.3984482.v1",
+      "license": {
+        "value": 1,
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "version": 1
+    },
+    "MurilloRincon2017_immune": {
+      "article_id": 4239314,
+      "files": [
+        {
+          "name": "Murillo-Rincon_etal_OIKOS_2017_DATA.xlsx",
+          "bytes": 48122,
+          "provider_md5": "bbf6ad22d4ca9add79723a7a85f8bb3c",
+          "id": 6912350,
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "e7d47607bc2501d73ca94d430104bec6adde1eeb89feb8c1344f0de211938488",
+          "schema": {
+            "sheets": [
+              {
+                "sheet": "Info",
+                "rows": 11,
+                "columns": 1,
+                "header_row_index_1based": 0,
+                "headers": [],
+                "design_levels_or_counts": {}
+              },
+              {
+                "sheet": "Variables",
+                "rows": 14,
+                "columns": 2,
+                "header_row_index_1based": 3,
+                "headers": [
+                  "Larvae",
+                  "Larvae ID"
+                ],
+                "design_levels_or_counts": {}
+              },
+              {
+                "sheet": "Data",
+                "rows": 427,
+                "columns": 12,
+                "header_row_index_1based": 1,
+                "headers": [
+                  "Larvae",
+                  "Family",
+                  "Male",
+                  "Female",
+                  "Phenology",
+                  "PhenN",
+                  "Immunity",
+                  "ImmN",
+                  "ImmResp",
+                  "RespPerc",
+                  "Mass",
+                  "LarvalPeriod"
+                ],
+                "design_levels_or_counts": {
+                  "Family": {
+                    "distinct": 21,
+                    "nonmissing": 426
+                  },
+                  "Phenology": {
+                    "levels": {
+                      "Normal": 218,
+                      "12-day delayed": 208
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "status": "SOURCE_METADATA_RETRIEVED",
+      "title": "OIKOS Compensating for delayed hatching reduces offspring immune response and increases life-history costs",
+      "doi": "10.6084/m9.figshare.4239314.v1",
+      "license": {
+        "value": 1,
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "version": 1
+    },
+    "Weir2024_hosts": {
+      "article_id": 27679935,
+      "files": [
+        {
+          "name": "442_2024_5629_MOESM5_ESM.xlsx",
+          "bytes": 282857,
+          "provider_md5": "cc97938880788705d34d69baf351954b",
+          "id": 50395776,
+          "status": "PROVIDER_MD5_VERIFIED",
+          "sha256": "76992552871f727ccbe0d5718c1bc1a7a93aaddd57cb0a8f2cef669e74ee6598",
+          "schema": {
+            "sheets": [
+              {
+                "sheet": "pupal_mass",
+                "rows": 3601,
+                "columns": 8,
+                "header_row_index_1based": 1,
+                "headers": [
+                  "ind",
+                  "pop",
+                  "host",
+                  "culu",
+                  "survp",
+                  "masspg",
+                  "masspm",
+                  "sex"
+                ],
+                "design_levels_or_counts": {
+                  "host": {
+                    "levels": {
+                      "Acer": 400,
+                      "Alnus": 400,
+                      "Betula": 400,
+                      "Crataegus": 400,
+                      "Malus": 400,
+                      "Prunus": 400,
+                      "Quercus": 400,
+                      "Salba": 400,
+                      "Scapraea": 400
+                    }
+                  }
+                }
+              },
+              {
+                "sheet": "development_time",
+                "rows": 3601,
+                "columns": 8,
+                "header_row_index_1based": 1,
+                "headers": [
+                  "ind",
+                  "host",
+                  "pop",
+                  "julian",
+                  "survp",
+                  "culu",
+                  "pup",
+                  "duration"
+                ],
+                "design_levels_or_counts": {
+                  "host": {
+                    "levels": {
+                      "Acer": 400,
+                      "Alnus": 400,
+                      "Betula": 400,
+                      "Crataegus": 400,
+                      "Malus": 400,
+                      "Prunus": 400,
+                      "Quercus": 400,
+                      "Salba": 400,
+                      "Scapraea": 400
+                    }
+                  }
+                }
+              },
+              {
+                "sheet": "key",
+                "rows": 11,
+                "columns": 2,
+                "header_row_index_1based": 1,
+                "headers": [
+                  "ind",
+                  "unique individual"
+                ],
+                "design_levels_or_counts": {}
+              }
+            ]
+          }
+        }
+      ],
+      "status": "SOURCE_METADATA_RETRIEVED",
+      "title": "Data for Weir (2024. <i>Oecologia</i>)",
+      "doi": "10.6084/m9.figshare.27679935.v1",
+      "license": {
+        "value": 1,
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "version": 1
+    }
+  },
+  "provenance": {
+    "run": 45542819025,
+    "job": 138965171350,
+    "artifact_id": 14989383958,
+    "artifact_zip_sha256": "56da5b2c8e5abb2408b6d73abe3c5ec4b5c2d6693a5a1e91cebeb8ad9d23d011",
+    "extraction": "Exact aggregate source-schema JSON from completed job log; ZIP digest from upload log, not separately downloaded. All three original data files authenticated against Figshare MD5 and actual SHA256. No biological outcomes fitted."
+  }
+}
