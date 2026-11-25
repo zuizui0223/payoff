@@ -1,0 +1,27 @@
+name: PAYOFF-B buffering public oak source gate
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/payoff-b-buffering-public-oak-source.yml'
+      - 'scripts/payoff_b_buffering_oak_zenodo_source_gate_20261125.py'
+permissions:
+  contents: read
+jobs:
+  public-oak-source:
+    if: github.head_ref == 'analysis/payoff-b-interaction-buffering-meta-20261125'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests openpyxl
+      - run: python scripts/payoff_b_buffering_oak_zenodo_source_gate_20261125.py outputs/payoff_b_buffering_oak_source_receipt.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: payoff-b-buffering-oak-source-receipt
+          path: outputs/payoff_b_buffering_oak_source_receipt.json
+          if-no-files-found: warn
