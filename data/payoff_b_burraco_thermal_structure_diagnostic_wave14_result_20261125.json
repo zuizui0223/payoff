@@ -1,0 +1,145 @@
+{
+  "status": "STRUCTURE_DIAGNOSTIC_ONLY",
+  "source_sha256": "10d4be0c29be5b767ceddd44c014ed1f704f95c3a1b87eddfae1d96dd091de53",
+  "n_rows": 787,
+  "additional_columns": [
+    {
+      "column_1based": 18,
+      "header": null,
+      "nonempty": 4,
+      "value_types": {
+        "str": 4
+      },
+      "text_labels": {
+        "*": 4
+      },
+      "numeric_count": 0
+    }
+  ],
+  "families": 11,
+  "unique_slot_keys": 787,
+  "duplicate_slot_keys": [],
+  "missing_planned_slots": 5,
+  "unexpected_keys": 0,
+  "duplicate_vial_labels": {
+    "8-D-H-R-5": [
+      [
+        "8",
+        6,
+        "warm",
+        "limited",
+        5
+      ],
+      [
+        "8",
+        6,
+        "warm",
+        "limited",
+        6
+      ]
+    ]
+  },
+  "unresolved_design_rows": {},
+  "code_crosswalk": {
+    "FamN": {
+      "1": [
+        "1"
+      ],
+      "2": [
+        "2"
+      ],
+      "3": [
+        "3"
+      ],
+      "4": [
+        "4"
+      ],
+      "6": [
+        "6"
+      ],
+      "7": [
+        "7"
+      ],
+      "8": [
+        "8"
+      ],
+      "9": [
+        "9"
+      ],
+      "10": [
+        "10"
+      ],
+      "11": [
+        "11"
+      ],
+      "12": [
+        "12"
+      ]
+    },
+    "PCode": {
+      "N": [
+        "0"
+      ],
+      "D": [
+        "6"
+      ],
+      "E": [
+        "12"
+      ]
+    },
+    "PhenN": {
+      "1": [
+        "0"
+      ],
+      "2": [
+        "6"
+      ],
+      "3": [
+        "12"
+      ]
+    },
+    "TCode": {
+      "H": [
+        "warm"
+      ],
+      "L": [
+        "cold"
+      ]
+    },
+    "TempN": {
+      "1": [
+        "warm"
+      ],
+      "2": [
+        "cold"
+      ]
+    },
+    "FCode": {
+      "A": [
+        "full"
+      ],
+      "R": [
+        "limited"
+      ]
+    },
+    "FoodN": {
+      "1": [
+        "full"
+      ],
+      "2": [
+        "limited"
+      ]
+    }
+  },
+  "provenance": {
+    "run": 45549589870,
+    "job": 138987297704,
+    "artifact_id": 14991934620,
+    "artifact_zip_sha256": "1501bf6428b92859cb126d8daa1e3daa44bbb6c740fc3c13c6b9b34fb90a80f6",
+    "first_fit_hold": {
+      "run": 45549499242,
+      "reason": "EXTRA_SOURCE_COLUMNS"
+    },
+    "extraction": "Exact aggregate CI diagnostic, no biological coefficient fitted; ZIP digest from upload log, not independently downloaded."
+  }
+}
