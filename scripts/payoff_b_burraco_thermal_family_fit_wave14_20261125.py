@@ -34,12 +34,14 @@ def read(b):
         s=w["Sheet1"]
         r=[list(x) for x in s.iter_rows(values_only=True) if any(v is not None for v in x)]
         if r[2][:len(HEAD)]!=HEAD or any(v is not None for v in r[2][len(HEAD):]):raise Hold("HEADER")
-        if any(any(v is not None for v in a[len(HEAD):]) for a in r[3:]):raise Hold("EXTRA_SOURCE_COLUMNS")
-        rows=[dict(zip(HEAD,a)) for a in r[3:]]
+        marks=[a[17] if len(a)>17 else None for a in r[3:]]
+        if sum(v=="*" for v in marks)!=4 or any(v not in (None,"*") for v in marks) or any(any(v is not None for v in a[18:]) for a in r[3:]):
+            raise Hold("AUXILIARY_MARKER_STRUCTURE_CHANGED")
+        rows=[dict(zip(HEAD,a[:17]),_source_marker=m) for a,m in zip(r[3:],marks)]
     finally:w.close()
     if len(rows)!=787:raise Hold("SOURCE_ROW_COUNT")
     mappings=defaultdict(lambda:defaultdict(set))
-    keys=Counter();vials=defaultdict(list);families=set();rows2=[]
+    keys=Counter();vials=defaultdict(list);families=set();rows2=[];marked=set()
     for r in rows:
         if any(missing(r[k]) for k in HEAD[:14]):raise Hold("MISSING_DESIGN_OR_SURVIVAL")
         try:f=str(r["Family"]);d=PH[r["Phenology"]];t=ROOM[r["Temp"]];q=FOOD[r["Food"]]
@@ -47,6 +49,7 @@ def read(b):
         k=(f,d,t,q,slot(r["LarvaeN"]))
         for col,sem in (("FamN",f),("PCode",d),("PhenN",d),("TCode",t),("TempN",t),("FCode",q),("FoodN",q)):
             mappings[col][str(r[col])].add(str(sem))
+        if r["_source_marker"]=="*":marked.add(k)
         keys[k]+=1;families.add(f)
         vials[str(r["Vial"])].append(k)
         sflag=float(r["Survival"])
@@ -66,6 +69,7 @@ def read(b):
             "absent_by_cell":{"|".join(map(str,k)):n for k,n in sorted(Counter(k[1:4] for k in absent).items())},
             "duplicate_planned_keys":duplicate_keys,"duplicate_vial_design_keys":duplicates,
             "code_maps":{col:{k:sorted(v) for k,v in m.items()} for col,m in mappings.items()},
+            "unlabelled_marker_count":len(marked),"marker_keys_overlap_duplicate_vial_rows":sum(k in marked for vv in duplicates.values() for k in map(tuple,vv)),
             "survival_counts":dict(Counter(a[2] for a in rows2)),
             "nonmissing_duration":sum(a[3] is not None for a in rows2),"nonmissing_mass":sum(a[4] is not None for a in rows2)}
     print("DESIGN "+json.dumps(design,ensure_ascii=True),flush=True)
@@ -73,13 +77,14 @@ def read(b):
         return None,design
     if design["survival_counts"]!={1:697,0:90} or design["nonmissing_duration"]!=697 or design["nonmissing_mass"]!=694:
         raise Hold("SOURCE_SUPPORT_CHANGED")
-    return (rows2,families,set(duplicates)),design
+    return (rows2,families,set(duplicates),marked),design
 
 def label(c):return "|".join(map(str,c))
 def prepare(source,mode):
-    rr,fs,dup=source;groups=defaultdict(list)
+    rr,fs,dup,marked=source;groups=defaultdict(list)
     for vial,key,s,day,mass in rr:
-        if mode=="strict" and vial in dup:continue
+        if mode in ("strict","strict_unmarked") and vial in dup:continue
+        if mode=="strict_unmarked" and key in marked:continue
         groups[(key[0],key[1:4])].append((s,day,mass))
     dm={};sv={};bounds={};n_dm=0
     support={label(c):Counter() for c in CELLS}
@@ -160,7 +165,7 @@ def main():
         with requests.Session() as s:b=fetch(s,"https://api.figshare.com/v2/file/download/25051406",cap=100000)
         source,design=read(b);out["design"]=design
         if source is None:raise Hold("COMPOSITE_KEY_AMBIGUITY_OR_PLANNED_SUPPORT")
-        for mode in ("strict","observed"):
+        for mode in ("strict","observed","strict_unmarked"):
             z=out["modes"][mode]={"status":"HOLD"}
             try:
                 arr,aud=prepare(source,mode);z["audit"]=aud
