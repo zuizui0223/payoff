@@ -1,0 +1,2131 @@
+{
+  "status": "SOURCE_INVENTORY_AND_CONFIRMED_SECONDARY_ONLY",
+  "source_sha256": "8c764ce03da86db0cb280e8f8f92cc0e62e2df6d85a2226e3246dc1afeb3f65f",
+  "source_rows": 2969,
+  "candidate_publications": 16,
+  "all_candidate_publication_rows": 95,
+  "cerastium": {
+    "cerastium_alpinum": {
+      "status": "HOLD",
+      "source_rows": 3,
+      "error": "SOURCE_PERIOD_STRUCTURE_NOT_UNIQUE"
+    },
+    "cerastium_cerastoides": {
+      "status": "HOLD",
+      "source_rows": 3,
+      "error": "SOURCE_PERIOD_STRUCTURE_NOT_UNIQUE"
+    }
+  },
+  "primary_theta_added": 0,
+  "inventory_review": {
+    "10.1007/bf00317395": {
+      "n_rows": 6,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "217",
+          "study": "61",
+          "species": "Viscaria_vulgaris",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "early-June_8",
+          "available": [],
+          "sd_n": []
+        },
+        {
+          "id": "218",
+          "study": "61",
+          "species": "Viscaria_vulgaris",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "middle-June_13",
+          "available": [],
+          "sd_n": []
+        },
+        {
+          "id": "219",
+          "study": "61",
+          "species": "Viscaria_vulgaris",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "late-June_19",
+          "available": [],
+          "sd_n": []
+        },
+        {
+          "id": "220",
+          "study": "61",
+          "species": "Melampyrum_pratense",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "yes",
+          "note": "early-June_8",
+          "available": [],
+          "sd_n": []
+        },
+        {
+          "id": "221",
+          "study": "61",
+          "species": "Melampyrum_pratense",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "yes",
+          "note": "middle-June_13",
+          "available": [],
+          "sd_n": []
+        },
+        {
+          "id": "222",
+          "study": "61",
+          "species": "Melampyrum_pratense",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "yes",
+          "note": "late-June_19",
+          "available": [],
+          "sd_n": []
+        }
+      ]
+    },
+    "10.1007/bf00984387": {
+      "n_rows": 12,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "475",
+          "study": "134",
+          "species": "Vaccinium_myrtillus",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "late",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "476",
+          "study": "134",
+          "species": "Vaccinium_myrtillus",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "bottom",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "477",
+          "study": "134",
+          "species": "Vaccinium_myrtillus",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "top",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "478",
+          "study": "134",
+          "species": "Vaccinium_myrtillus",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "early",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "479",
+          "study": "134",
+          "species": "Vaccinium_uliginosum",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "early",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "480",
+          "study": "134",
+          "species": "Vaccinium_uliginosum",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "late",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "481",
+          "study": "134",
+          "species": "Vaccinium_uliginosum",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "bottom",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "482",
+          "study": "134",
+          "species": "Vaccinium_uliginosum",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "top",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "483",
+          "study": "134",
+          "species": "Vaccinium_vitis-idaea",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "early",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "484",
+          "study": "134",
+          "species": "Vaccinium_vitis-idaea",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "late",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "485",
+          "study": "134",
+          "species": "Vaccinium_vitis-idaea",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "bottom",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "486",
+          "study": "134",
+          "species": "Vaccinium_vitis-idaea",
+          "year": "NA",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "top",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        }
+      ]
+    },
+    "10.1007/s11258-009-9594-3": {
+      "n_rows": 2,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "3547",
+          "study": "3084",
+          "species": "Parnassia_palustris",
+          "year": "2003",
+          "pop": "1",
+          "supp": "whole_plant",
+          "emasculated": "no",
+          "note": "2003.nowarming",
+          "available": [
+            "SPFR"
+          ],
+          "sd_n": [
+            "SPFR"
+          ]
+        },
+        {
+          "id": "3548",
+          "study": "3084",
+          "species": "Parnassia_palustris",
+          "year": "2003",
+          "pop": "1",
+          "supp": "whole_plant",
+          "emasculated": "no",
+          "note": "2003.warming",
+          "available": [
+            "SPFR"
+          ],
+          "sd_n": [
+            "SPFR"
+          ]
+        }
+      ]
+    },
+    "10.1016/j.flora.2014.09.007": {
+      "n_rows": 2,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "2440",
+          "study": "2083",
+          "species": "Ruellia_subsessilis",
+          "year": "2009-2010",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "Dry_season",
+          "available": [],
+          "sd_n": []
+        },
+        {
+          "id": "2441",
+          "study": "2083",
+          "species": "Ruellia_subsessilis",
+          "year": "2009-2010",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "Rainy_season",
+          "available": [],
+          "sd_n": []
+        }
+      ]
+    },
+    "10.1080/11956860.1999.11682518": {
+      "n_rows": 4,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "706",
+          "study": "197",
+          "species": "Ranunculus_acris",
+          "year": "NA",
+          "pop": "1",
+          "supp": "whole_plant",
+          "emasculated": "no",
+          "note": "No_OTC-early",
+          "available": [
+            "SPP"
+          ],
+          "sd_n": [
+            "SPP"
+          ]
+        },
+        {
+          "id": "707",
+          "study": "197",
+          "species": "Ranunculus_acris",
+          "year": "NA",
+          "pop": "1",
+          "supp": "whole_plant",
+          "emasculated": "no",
+          "note": "No_OTC-late",
+          "available": [
+            "SPP"
+          ],
+          "sd_n": [
+            "SPP"
+          ]
+        },
+        {
+          "id": "708",
+          "study": "197",
+          "species": "Ranunculus_acris",
+          "year": "NA",
+          "pop": "1",
+          "supp": "whole_plant",
+          "emasculated": "no",
+          "note": "OTC-early",
+          "available": [
+            "SPP"
+          ],
+          "sd_n": [
+            "SPP"
+          ]
+        },
+        {
+          "id": "709",
+          "study": "197",
+          "species": "Ranunculus_acris",
+          "year": "NA",
+          "pop": "1",
+          "supp": "whole_plant",
+          "emasculated": "no",
+          "note": "OTC-late",
+          "available": [
+            "SPP"
+          ],
+          "sd_n": [
+            "SPP"
+          ]
+        }
+      ]
+    },
+    "10.1139/b10-003": {
+      "n_rows": 2,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "1879",
+          "study": "1044",
+          "species": "Symphyotrichum_sericeum",
+          "year": "2009",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "Early",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "1880",
+          "study": "1044",
+          "species": "Symphyotrichum_sericeum",
+          "year": "2009",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "Late",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        }
+      ]
+    },
+    "10.1657/1523-0430(2003)035[0242:bsifva]2.0.co;2": {
+      "n_rows": 6,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "1072",
+          "study": "296",
+          "species": "Cerastium_alpinum",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "low-early",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "1073",
+          "study": "296",
+          "species": "Cerastium_alpinum",
+          "year": "NA",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "high-early",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "1074",
+          "study": "296",
+          "species": "Cerastium_alpinum",
+          "year": "NA",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "high-late",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "1075",
+          "study": "296",
+          "species": "Cerastium_cerastoides",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "low-early",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "1076",
+          "study": "296",
+          "species": "Cerastium_cerastoides",
+          "year": "NA",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "high-early",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "1077",
+          "study": "296",
+          "species": "Cerastium_cerastoides",
+          "year": "NA",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "high-late",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        }
+      ]
+    },
+    "10.1890/0012-9658(1998)079[1610:fdpdaf]2.0.co;2": {
+      "n_rows": 4,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "569",
+          "study": "156",
+          "species": "Begonia_tonduzii",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "early-male_biased",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "570",
+          "study": "156",
+          "species": "Begonia_tonduzii",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "late-female_biased",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "571",
+          "study": "156",
+          "species": "Begonia_urophylla",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "early-male_biased",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "572",
+          "study": "156",
+          "species": "Begonia_urophylla",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "late-female_biased",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        }
+      ]
+    },
+    "10.1890/02-0519": {
+      "n_rows": 18,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "988",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "1999",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "BT-1999-early",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "989",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "1999",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "BT-1999-mid",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "990",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "1999",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "BT-1999-late",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "991",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "2000",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "BT-2000-early",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "992",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "2000",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "BT-2000-mid",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "993",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "2000",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "BT-2000-late",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "994",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "1999",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "EF-1999-early",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "995",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "1999",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "EF-1999-mid",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "996",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "1999",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "EF-1999-late",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "997",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "2000",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "EF-2000-early",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "998",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "2000",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "EF-2000-mid",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "999",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "2000",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "EF-2000-late",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "1000",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "1999",
+          "pop": "3",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "TMC-1999-early",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "1001",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "1999",
+          "pop": "3",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "TMC-1999-mid",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "1002",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "1999",
+          "pop": "3",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "TMC-1999-late",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "1003",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "2000",
+          "pop": "3",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "TMC-2000-early",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "1004",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "2000",
+          "pop": "3",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "TMC-2000-mid",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "1005",
+          "study": "287",
+          "species": "Collinsia_verna",
+          "year": "2000",
+          "pop": "3",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "TMC-2000-late",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        }
+      ]
+    },
+    "10.1890/11-1271.1": {
+      "n_rows": 4,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "2192",
+          "study": "1139",
+          "species": "Trifolium_dasyphyllum",
+          "year": "2007",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "Early_season",
+          "available": [
+            "SPFL"
+          ],
+          "sd_n": [
+            "SPFL"
+          ]
+        },
+        {
+          "id": "2193",
+          "study": "1139",
+          "species": "Trifolium_dasyphyllum",
+          "year": "2007",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "Late_season",
+          "available": [
+            "SPFL"
+          ],
+          "sd_n": [
+            "SPFL"
+          ]
+        },
+        {
+          "id": "2194",
+          "study": "1139",
+          "species": "Trifolium_parryi",
+          "year": "2007",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "Early_season",
+          "available": [
+            "SPFL"
+          ],
+          "sd_n": [
+            "SPFL"
+          ]
+        },
+        {
+          "id": "2195",
+          "study": "1139",
+          "species": "Trifolium_parryi",
+          "year": "2007",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "Late_season",
+          "available": [
+            "SPFL"
+          ],
+          "sd_n": [
+            "SPFL"
+          ]
+        }
+      ]
+    },
+    "10.2307/1940403": {
+      "n_rows": 2,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "48",
+          "study": "8",
+          "species": "Stellaria_pubera",
+          "year": "1981",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "early",
+          "available": [
+            "FS",
+            "SPFL"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "49",
+          "study": "8",
+          "species": "Stellaria_pubera",
+          "year": "1981",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "late",
+          "available": [
+            "SPFL"
+          ],
+          "sd_n": []
+        }
+      ]
+    },
+    "10.2307/1942589": {
+      "n_rows": 8,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "11",
+          "study": "3",
+          "species": "Solidago_canadensis",
+          "year": "1979",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "ealy-sp",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "13",
+          "study": "3",
+          "species": "Solidago_canadensis",
+          "year": "1979",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "inter-sp",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "15",
+          "study": "3",
+          "species": "Solidago_canadensis",
+          "year": "1979",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "late-sp",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "19",
+          "study": "3",
+          "species": "Solidago_graminifolia",
+          "year": "1979",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "early-sp",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "21",
+          "study": "3",
+          "species": "Solidago_graminifolia",
+          "year": "1979",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "late-sp",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "25",
+          "study": "3",
+          "species": "Solidago_juncea",
+          "year": "1979",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "early",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "26",
+          "study": "3",
+          "species": "Solidago_juncea",
+          "year": "1979",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "intermediate",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        },
+        {
+          "id": "27",
+          "study": "3",
+          "species": "Solidago_juncea",
+          "year": "1979",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "late",
+          "available": [
+            "SO"
+          ],
+          "sd_n": [
+            "SO"
+          ]
+        }
+      ]
+    },
+    "10.2307/2260205": {
+      "n_rows": 2,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "90",
+          "study": "17",
+          "species": "Silene_alba",
+          "year": "1985",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "early",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        },
+        {
+          "id": "91",
+          "study": "17",
+          "species": "Silene_alba",
+          "year": "1985",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "late",
+          "available": [
+            "FS",
+            "SPFR"
+          ],
+          "sd_n": [
+            "FS",
+            "SPFR"
+          ]
+        }
+      ]
+    },
+    "10.2307/2260766": {
+      "n_rows": 10,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "157",
+          "study": "40",
+          "species": "Banksia_ericifolia",
+          "year": "1984",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "peak",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "158",
+          "study": "40",
+          "species": "Banksia_ericifolia",
+          "year": "1985",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "early",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "159",
+          "study": "40",
+          "species": "Banksia_ericifolia",
+          "year": "1985",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "peak",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "160",
+          "study": "40",
+          "species": "Banksia_ericifolia",
+          "year": "1985",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "late",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "161",
+          "study": "40",
+          "species": "Banksia_ericifolia",
+          "year": "1986",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "early",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "162",
+          "study": "40",
+          "species": "Banksia_ericifolia",
+          "year": "1986",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "peak",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "163",
+          "study": "40",
+          "species": "Banksia_ericifolia",
+          "year": "1986",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "late",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "164",
+          "study": "40",
+          "species": "Banksia_paludosa",
+          "year": "1985",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "early",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "165",
+          "study": "40",
+          "species": "Banksia_paludosa",
+          "year": "1985",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "peak",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "166",
+          "study": "40",
+          "species": "Banksia_spinulosa",
+          "year": "1985",
+          "pop": "1",
+          "supp": "inflorescense",
+          "emasculated": "no",
+          "note": "peak",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        }
+      ]
+    },
+    "10.2307/2444020": {
+      "n_rows": 9,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "119",
+          "study": "26",
+          "species": "Raphanus_sativus",
+          "year": "1983",
+          "pop": "1",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "1983-Arboretum",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "120",
+          "study": "26",
+          "species": "Raphanus_sativus",
+          "year": "1984",
+          "pop": "2",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "1984-Stuckey's-early-white",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "121",
+          "study": "26",
+          "species": "Raphanus_sativus",
+          "year": "1984",
+          "pop": "2",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "1984-Stuckey's-late-white",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "122",
+          "study": "26",
+          "species": "Raphanus_sativus",
+          "year": "1984",
+          "pop": "2",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "1984-Stuckey's-early-yellow",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "123",
+          "study": "26",
+          "species": "Raphanus_sativus",
+          "year": "1984",
+          "pop": "2",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "1984-Stuckey's-late-yellow",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "124",
+          "study": "26",
+          "species": "Raphanus_sativus",
+          "year": "1984",
+          "pop": "2",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "1984-Stuckey's-early-pink",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "125",
+          "study": "26",
+          "species": "Raphanus_sativus",
+          "year": "1984",
+          "pop": "2",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "1984-Stuckey's-late-pink",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "126",
+          "study": "26",
+          "species": "Raphanus_sativus",
+          "year": "1984",
+          "pop": "2",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "1984-Stuckey's-early-bronze",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        },
+        {
+          "id": "127",
+          "study": "26",
+          "species": "Raphanus_sativus",
+          "year": "1984",
+          "pop": "2",
+          "supp": "partialplant",
+          "emasculated": "no",
+          "note": "1984-Stuckey's-late-bronze",
+          "available": [
+            "FS"
+          ],
+          "sd_n": [
+            "FS"
+          ]
+        }
+      ]
+    },
+    "10.2307/2446165": {
+      "n_rows": 4,
+      "n_source_study_ids": 1,
+      "records": [
+        {
+          "id": "414",
+          "study": "118",
+          "species": "Zigadenus_paniculatus",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "kemmerer-early",
+          "available": [
+            "SPFR"
+          ],
+          "sd_n": [
+            "SPFR"
+          ]
+        },
+        {
+          "id": "415",
+          "study": "118",
+          "species": "Zigadenus_paniculatus",
+          "year": "NA",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "green_canyon-early",
+          "available": [
+            "SPFR"
+          ],
+          "sd_n": [
+            "SPFR"
+          ]
+        },
+        {
+          "id": "416",
+          "study": "118",
+          "species": "Zigadenus_paniculatus",
+          "year": "NA",
+          "pop": "1",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "kemmerer-late",
+          "available": [
+            "SPFR"
+          ],
+          "sd_n": [
+            "SPFR"
+          ]
+        },
+        {
+          "id": "417",
+          "study": "118",
+          "species": "Zigadenus_paniculatus",
+          "year": "NA",
+          "pop": "2",
+          "supp": "flower",
+          "emasculated": "no",
+          "note": "green_canyon-late",
+          "available": [
+            "SPFR"
+          ],
+          "sd_n": [
+            "SPFR"
+          ]
+        }
+      ]
+    }
+  },
+  "exact_label_pair_screen": {
+    "pair_count": 28,
+    "source_papers": 12,
+    "positive_mean_pairs": 28,
+    "sd_n_pairs": 27,
+    "pairs": [
+      {
+        "doi": "10.1007/bf00984387",
+        "species": "Vaccinium_myrtillus",
+        "population": "1",
+        "year": "NA",
+        "early_row": "478",
+        "late_row": "475",
+        "early_note": "early",
+        "late_note": "late",
+        "common_positive_mean_endpoints": [
+          "FS",
+          "SPFR"
+        ],
+        "common_sd_n_endpoints": [
+          "FS",
+          "SPFR"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1007/bf00984387",
+        "species": "Vaccinium_uliginosum",
+        "population": "1",
+        "year": "NA",
+        "early_row": "479",
+        "late_row": "480",
+        "early_note": "early",
+        "late_note": "late",
+        "common_positive_mean_endpoints": [
+          "FS",
+          "SPFR"
+        ],
+        "common_sd_n_endpoints": [
+          "FS",
+          "SPFR"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1007/bf00984387",
+        "species": "Vaccinium_vitis-idaea",
+        "population": "1",
+        "year": "NA",
+        "early_row": "483",
+        "late_row": "484",
+        "early_note": "early",
+        "late_note": "late",
+        "common_positive_mean_endpoints": [
+          "FS",
+          "SPFR"
+        ],
+        "common_sd_n_endpoints": [
+          "FS",
+          "SPFR"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1080/11956860.1999.11682518",
+        "species": "Ranunculus_acris",
+        "population": "1",
+        "year": "NA",
+        "early_row": "706",
+        "late_row": "707",
+        "early_note": "No_OTC-early",
+        "late_note": "No_OTC-late",
+        "common_positive_mean_endpoints": [
+          "SPP"
+        ],
+        "common_sd_n_endpoints": [
+          "SPP"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1080/11956860.1999.11682518",
+        "species": "Ranunculus_acris",
+        "population": "1",
+        "year": "NA",
+        "early_row": "708",
+        "late_row": "709",
+        "early_note": "OTC-early",
+        "late_note": "OTC-late",
+        "common_positive_mean_endpoints": [
+          "SPP"
+        ],
+        "common_sd_n_endpoints": [
+          "SPP"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1139/b10-003",
+        "species": "Symphyotrichum_sericeum",
+        "population": "1",
+        "year": "2009",
+        "early_row": "1879",
+        "late_row": "1880",
+        "early_note": "Early",
+        "late_note": "Late",
+        "common_positive_mean_endpoints": [
+          "SO"
+        ],
+        "common_sd_n_endpoints": [
+          "SO"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1657/1523-0430(2003)035[0242:bsifva]2.0.co;2",
+        "species": "Cerastium_alpinum",
+        "population": "2",
+        "year": "NA",
+        "early_row": "1073",
+        "late_row": "1074",
+        "early_note": "high-early",
+        "late_note": "high-late",
+        "common_positive_mean_endpoints": [
+          "SO"
+        ],
+        "common_sd_n_endpoints": [
+          "SO"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1657/1523-0430(2003)035[0242:bsifva]2.0.co;2",
+        "species": "Cerastium_cerastoides",
+        "population": "2",
+        "year": "NA",
+        "early_row": "1076",
+        "late_row": "1077",
+        "early_note": "high-early",
+        "late_note": "high-late",
+        "common_positive_mean_endpoints": [
+          "SO"
+        ],
+        "common_sd_n_endpoints": [
+          "SO"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1890/02-0519",
+        "species": "Collinsia_verna",
+        "population": "1",
+        "year": "1999",
+        "early_row": "988",
+        "late_row": "990",
+        "early_note": "BT-1999-early",
+        "late_note": "BT-1999-late",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1890/02-0519",
+        "species": "Collinsia_verna",
+        "population": "1",
+        "year": "2000",
+        "early_row": "991",
+        "late_row": "993",
+        "early_note": "BT-2000-early",
+        "late_note": "BT-2000-late",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1890/02-0519",
+        "species": "Collinsia_verna",
+        "population": "2",
+        "year": "1999",
+        "early_row": "994",
+        "late_row": "996",
+        "early_note": "EF-1999-early",
+        "late_note": "EF-1999-late",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1890/02-0519",
+        "species": "Collinsia_verna",
+        "population": "2",
+        "year": "2000",
+        "early_row": "997",
+        "late_row": "999",
+        "early_note": "EF-2000-early",
+        "late_note": "EF-2000-late",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1890/02-0519",
+        "species": "Collinsia_verna",
+        "population": "3",
+        "year": "1999",
+        "early_row": "1000",
+        "late_row": "1002",
+        "early_note": "TMC-1999-early",
+        "late_note": "TMC-1999-late",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1890/02-0519",
+        "species": "Collinsia_verna",
+        "population": "3",
+        "year": "2000",
+        "early_row": "1003",
+        "late_row": "1005",
+        "early_note": "TMC-2000-early",
+        "late_note": "TMC-2000-late",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1890/11-1271.1",
+        "species": "Trifolium_dasyphyllum",
+        "population": "1",
+        "year": "2007",
+        "early_row": "2192",
+        "late_row": "2193",
+        "early_note": "Early_season",
+        "late_note": "Late_season",
+        "common_positive_mean_endpoints": [
+          "SPFL"
+        ],
+        "common_sd_n_endpoints": [
+          "SPFL"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.1890/11-1271.1",
+        "species": "Trifolium_parryi",
+        "population": "1",
+        "year": "2007",
+        "early_row": "2194",
+        "late_row": "2195",
+        "early_note": "Early_season",
+        "late_note": "Late_season",
+        "common_positive_mean_endpoints": [
+          "SPFL"
+        ],
+        "common_sd_n_endpoints": [
+          "SPFL"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/1940403",
+        "species": "Stellaria_pubera",
+        "population": "1",
+        "year": "1981",
+        "early_row": "48",
+        "late_row": "49",
+        "early_note": "early",
+        "late_note": "late",
+        "common_positive_mean_endpoints": [
+          "SPFL"
+        ],
+        "common_sd_n_endpoints": [],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/1942589",
+        "species": "Solidago_graminifolia",
+        "population": "1",
+        "year": "1979",
+        "early_row": "19",
+        "late_row": "21",
+        "early_note": "early-sp",
+        "late_note": "late-sp",
+        "common_positive_mean_endpoints": [
+          "SO"
+        ],
+        "common_sd_n_endpoints": [
+          "SO"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/1942589",
+        "species": "Solidago_juncea",
+        "population": "1",
+        "year": "1979",
+        "early_row": "25",
+        "late_row": "27",
+        "early_note": "early",
+        "late_note": "late",
+        "common_positive_mean_endpoints": [
+          "SO"
+        ],
+        "common_sd_n_endpoints": [
+          "SO"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/2260205",
+        "species": "Silene_alba",
+        "population": "1",
+        "year": "1985",
+        "early_row": "90",
+        "late_row": "91",
+        "early_note": "early",
+        "late_note": "late",
+        "common_positive_mean_endpoints": [
+          "FS",
+          "SPFR"
+        ],
+        "common_sd_n_endpoints": [
+          "FS",
+          "SPFR"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/2260766",
+        "species": "Banksia_ericifolia",
+        "population": "1",
+        "year": "1985",
+        "early_row": "158",
+        "late_row": "160",
+        "early_note": "early",
+        "late_note": "late",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/2260766",
+        "species": "Banksia_ericifolia",
+        "population": "1",
+        "year": "1986",
+        "early_row": "161",
+        "late_row": "163",
+        "early_note": "early",
+        "late_note": "late",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/2444020",
+        "species": "Raphanus_sativus",
+        "population": "2",
+        "year": "1984",
+        "early_row": "120",
+        "late_row": "121",
+        "early_note": "1984-Stuckey's-early-white",
+        "late_note": "1984-Stuckey's-late-white",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/2444020",
+        "species": "Raphanus_sativus",
+        "population": "2",
+        "year": "1984",
+        "early_row": "122",
+        "late_row": "123",
+        "early_note": "1984-Stuckey's-early-yellow",
+        "late_note": "1984-Stuckey's-late-yellow",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/2444020",
+        "species": "Raphanus_sativus",
+        "population": "2",
+        "year": "1984",
+        "early_row": "124",
+        "late_row": "125",
+        "early_note": "1984-Stuckey's-early-pink",
+        "late_note": "1984-Stuckey's-late-pink",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/2444020",
+        "species": "Raphanus_sativus",
+        "population": "2",
+        "year": "1984",
+        "early_row": "126",
+        "late_row": "127",
+        "early_note": "1984-Stuckey's-early-bronze",
+        "late_note": "1984-Stuckey's-late-bronze",
+        "common_positive_mean_endpoints": [
+          "FS"
+        ],
+        "common_sd_n_endpoints": [
+          "FS"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/2446165",
+        "species": "Zigadenus_paniculatus",
+        "population": "1",
+        "year": "NA",
+        "early_row": "414",
+        "late_row": "416",
+        "early_note": "kemmerer-early",
+        "late_note": "kemmerer-late",
+        "common_positive_mean_endpoints": [
+          "SPFR"
+        ],
+        "common_sd_n_endpoints": [
+          "SPFR"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      },
+      {
+        "doi": "10.2307/2446165",
+        "species": "Zigadenus_paniculatus",
+        "population": "2",
+        "year": "NA",
+        "early_row": "415",
+        "late_row": "417",
+        "early_note": "green_canyon-early",
+        "late_note": "green_canyon-late",
+        "common_positive_mean_endpoints": [
+          "SPFR"
+        ],
+        "common_sd_n_endpoints": [
+          "SPFR"
+        ],
+        "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED"
+      }
+    ],
+    "limit": "Exact same-context label matches only; early/late could refer to flowering age, season, pollination treatment, or other variable. No design admission or covariance assurance."
+  },
+  "provenance": {
+    "run": 45539384546,
+    "job": 138953857986,
+    "artifact_id": 14988142561,
+    "artifact_zip_sha256": "afaaf7f5f0a0e6960ec155b13867dd1a334f555bf31238d41ddae729a3f5a82d",
+    "extraction": "Exact compact JSON from completed calculation step; artifact digest from upload log; ZIP not separately downloaded."
+  }
+}
