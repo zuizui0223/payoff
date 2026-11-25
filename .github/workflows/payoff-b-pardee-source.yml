@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/payoff-b-pardee-source.yml'
       - 'scripts/payoff_b_pardee_snowmelt_source_gate_20261125.py'
+      - 'scripts/payoff_b_pardee_snow_pollen_contrast_20261125.py'
+      - 'docs/PAYOFF_B_PARDEE_SNOW_POLLEN_CONTRAST_FREEZE_20261125.md'
 permissions:
   contents: read
 jobs:
@@ -17,11 +19,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install --disable-pip-version-check requests openpyxl
+      - run: python -m pip install --disable-pip-version-check requests openpyxl numpy
       - run: python scripts/payoff_b_pardee_snowmelt_source_gate_20261125.py outputs/payoff_b_pardee_source.json
+      - run: python scripts/payoff_b_pardee_snow_pollen_contrast_20261125.py outputs/payoff_b_pardee_contrast.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: payoff-b-pardee-source
-          path: outputs/payoff_b_pardee_source.json
+          path: |
+            outputs/payoff_b_pardee_source.json
+            outputs/payoff_b_pardee_contrast.json
           if-no-files-found: warn
