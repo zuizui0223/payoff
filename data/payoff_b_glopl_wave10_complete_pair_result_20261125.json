@@ -1,0 +1,1344 @@
+{
+  "status": "COMPLETE_CANDIDATE_DISPOSITION_SECONDARY_ONLY",
+  "source_sha256": "8c764ce03da86db0cb280e8f8f92cc0e62e2df6d85a2226e3246dc1afeb3f65f",
+  "source_rows": 2969,
+  "candidate_pairs": 28,
+  "records": [
+    {
+      "doi": "10.1007/bf00984387",
+      "species": "Vaccinium_myrtillus",
+      "population": "1",
+      "year": "NA",
+      "early_row": "478",
+      "late_row": "475",
+      "early_note": "early",
+      "late_note": "late",
+      "common_positive_mean_endpoints": [
+        "FS",
+        "SPFR"
+      ],
+      "common_sd_n_endpoints": [
+        "FS",
+        "SPFR"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "FS",
+      "stratum": "within_plant_sequence",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.166,
+          "n": 4,
+          "sd": 0.236
+        },
+        "Sup": {
+          "mean": 0.257,
+          "n": 4,
+          "sd": 0.328
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.925,
+          "n": 5,
+          "sd": 0.2974
+        },
+        "Sup": {
+          "mean": 0.6,
+          "n": 4,
+          "sd": 0.53
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": 0.43708829653867654,
+        "late_lnRR": -0.43286408229627893,
+        "late_minus_early_lnRR": -0.8699523788349555,
+        "supplemented_performance_log_change": 0.8478535703209265,
+        "natural_performance_log_change": 1.717805949155882,
+        "supplemented_relative_change": 1.3346303501945522,
+        "natural_relative_change": 4.572289156626506,
+        "supplemented_point_decline": false
+      }
+    },
+    {
+      "doi": "10.1007/bf00984387",
+      "species": "Vaccinium_uliginosum",
+      "population": "1",
+      "year": "NA",
+      "early_row": "479",
+      "late_row": "480",
+      "early_note": "early",
+      "late_note": "late",
+      "common_positive_mean_endpoints": [
+        "FS",
+        "SPFR"
+      ],
+      "common_sd_n_endpoints": [
+        "FS",
+        "SPFR"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "FS",
+      "stratum": "within_plant_sequence",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.676,
+          "n": 4,
+          "sd": 0.21
+        },
+        "Sup": {
+          "mean": 0.918,
+          "n": 4,
+          "sd": 0.204
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.88,
+          "n": 4,
+          "sd": 0.354
+        },
+        "Sup": {
+          "mean": 0.663,
+          "n": 4,
+          "sd": 0.576
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": 0.3060043145775263,
+        "late_lnRR": -0.28314691728638963,
+        "late_minus_early_lnRR": -0.5891512318639159,
+        "supplemented_performance_log_change": -0.325422400434628,
+        "natural_performance_log_change": 0.26372883142928805,
+        "supplemented_relative_change": -0.2777777777777778,
+        "natural_relative_change": 0.30177514792899407,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.1007/bf00984387",
+      "species": "Vaccinium_vitis-idaea",
+      "population": "1",
+      "year": "NA",
+      "early_row": "483",
+      "late_row": "484",
+      "early_note": "early",
+      "late_note": "late",
+      "common_positive_mean_endpoints": [
+        "FS",
+        "SPFR"
+      ],
+      "common_sd_n_endpoints": [
+        "FS",
+        "SPFR"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "FS",
+      "stratum": "within_plant_sequence",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.712,
+          "n": 5,
+          "sd": 0.398
+        },
+        "Sup": {
+          "mean": 0.959,
+          "n": 4,
+          "sd": 0.126
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.583,
+          "n": 5,
+          "sd": 0.5322
+        },
+        "Sup": {
+          "mean": 0.656,
+          "n": 4,
+          "sd": 0.304
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": 0.29781316347146247,
+        "late_lnRR": 0.11797360259359672,
+        "late_minus_early_lnRR": -0.17983956087786573,
+        "supplemented_performance_log_change": -0.3797302859393491,
+        "natural_performance_log_change": -0.19989072506148342,
+        "supplemented_relative_change": -0.31595411887382685,
+        "natural_relative_change": -0.1811797752808989,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.1080/11956860.1999.11682518",
+      "species": "Ranunculus_acris",
+      "population": "1",
+      "year": "NA",
+      "early_row": "706",
+      "late_row": "707",
+      "early_note": "No_OTC-early",
+      "late_note": "No_OTC-late",
+      "common_positive_mean_endpoints": [
+        "SPP"
+      ],
+      "common_sd_n_endpoints": [
+        "SPP"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "HOLD_OTC_DESIGN"
+    },
+    {
+      "doi": "10.1080/11956860.1999.11682518",
+      "species": "Ranunculus_acris",
+      "population": "1",
+      "year": "NA",
+      "early_row": "708",
+      "late_row": "709",
+      "early_note": "OTC-early",
+      "late_note": "OTC-late",
+      "common_positive_mean_endpoints": [
+        "SPP"
+      ],
+      "common_sd_n_endpoints": [
+        "SPP"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "HOLD_OTC_DESIGN"
+    },
+    {
+      "doi": "10.1139/b10-003",
+      "species": "Symphyotrichum_sericeum",
+      "population": "1",
+      "year": "2009",
+      "early_row": "1879",
+      "late_row": "1880",
+      "early_note": "Early",
+      "late_note": "Late",
+      "common_positive_mean_endpoints": [
+        "SO"
+      ],
+      "common_sd_n_endpoints": [
+        "SO"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "HOLD_EARLY_VS_PEAK"
+    },
+    {
+      "doi": "10.1657/1523-0430(2003)035[0242:bsifva]2.0.co;2",
+      "species": "Cerastium_alpinum",
+      "population": "2",
+      "year": "NA",
+      "early_row": "1073",
+      "late_row": "1074",
+      "early_note": "high-early",
+      "late_note": "high-late",
+      "common_positive_mean_endpoints": [
+        "SO"
+      ],
+      "common_sd_n_endpoints": [
+        "SO"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "PRIOR_CONDITIONAL"
+    },
+    {
+      "doi": "10.1657/1523-0430(2003)035[0242:bsifva]2.0.co;2",
+      "species": "Cerastium_cerastoides",
+      "population": "2",
+      "year": "NA",
+      "early_row": "1076",
+      "late_row": "1077",
+      "early_note": "high-early",
+      "late_note": "high-late",
+      "common_positive_mean_endpoints": [
+        "SO"
+      ],
+      "common_sd_n_endpoints": [
+        "SO"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "PRIOR_CONDITIONAL"
+    },
+    {
+      "doi": "10.1890/02-0519",
+      "species": "Collinsia_verna",
+      "population": "1",
+      "year": "1999",
+      "early_row": "988",
+      "late_row": "990",
+      "early_note": "BT-1999-early",
+      "late_note": "BT-1999-late",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "PRIOR_POINT_ONLY"
+    },
+    {
+      "doi": "10.1890/02-0519",
+      "species": "Collinsia_verna",
+      "population": "1",
+      "year": "2000",
+      "early_row": "991",
+      "late_row": "993",
+      "early_note": "BT-2000-early",
+      "late_note": "BT-2000-late",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "PRIOR_POINT_ONLY"
+    },
+    {
+      "doi": "10.1890/02-0519",
+      "species": "Collinsia_verna",
+      "population": "2",
+      "year": "1999",
+      "early_row": "994",
+      "late_row": "996",
+      "early_note": "EF-1999-early",
+      "late_note": "EF-1999-late",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "PRIOR_POINT_ONLY"
+    },
+    {
+      "doi": "10.1890/02-0519",
+      "species": "Collinsia_verna",
+      "population": "2",
+      "year": "2000",
+      "early_row": "997",
+      "late_row": "999",
+      "early_note": "EF-2000-early",
+      "late_note": "EF-2000-late",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "PRIOR_POINT_ONLY"
+    },
+    {
+      "doi": "10.1890/02-0519",
+      "species": "Collinsia_verna",
+      "population": "3",
+      "year": "1999",
+      "early_row": "1000",
+      "late_row": "1002",
+      "early_note": "TMC-1999-early",
+      "late_note": "TMC-1999-late",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "PRIOR_POINT_ONLY"
+    },
+    {
+      "doi": "10.1890/02-0519",
+      "species": "Collinsia_verna",
+      "population": "3",
+      "year": "2000",
+      "early_row": "1003",
+      "late_row": "1005",
+      "early_note": "TMC-2000-early",
+      "late_note": "TMC-2000-late",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "QUARANTINE_CONFLICTING_O3"
+    },
+    {
+      "doi": "10.1890/11-1271.1",
+      "species": "Trifolium_dasyphyllum",
+      "population": "1",
+      "year": "2007",
+      "early_row": "2192",
+      "late_row": "2193",
+      "early_note": "Early_season",
+      "late_note": "Late_season",
+      "common_positive_mean_endpoints": [
+        "SPFL"
+      ],
+      "common_sd_n_endpoints": [
+        "SPFL"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "QUARANTINE_DUPLICATE_SPECIES"
+    },
+    {
+      "doi": "10.1890/11-1271.1",
+      "species": "Trifolium_parryi",
+      "population": "1",
+      "year": "2007",
+      "early_row": "2194",
+      "late_row": "2195",
+      "early_note": "Early_season",
+      "late_note": "Late_season",
+      "common_positive_mean_endpoints": [
+        "SPFL"
+      ],
+      "common_sd_n_endpoints": [
+        "SPFL"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "QUARANTINE_DUPLICATE_SPECIES"
+    },
+    {
+      "doi": "10.2307/1940403",
+      "species": "Stellaria_pubera",
+      "population": "1",
+      "year": "1981",
+      "early_row": "48",
+      "late_row": "49",
+      "early_note": "early",
+      "late_note": "late",
+      "common_positive_mean_endpoints": [
+        "SPFL"
+      ],
+      "common_sd_n_endpoints": [],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "SPFL",
+      "stratum": "season_context_unverified",
+      "compiled_early": {
+        "Natural": {
+          "mean": 3.16,
+          "n": 39,
+          "sd": null
+        },
+        "Sup": {
+          "mean": 3.77,
+          "n": 39,
+          "sd": null
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 1.54,
+          "n": 39,
+          "sd": null
+        },
+        "Sup": {
+          "mean": 1.56,
+          "n": 39,
+          "sd": null
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": 0.1765029738610986,
+        "late_lnRR": 0.012903404835908001,
+        "late_minus_early_lnRR": -0.1635995690251906,
+        "supplemented_performance_log_change": -0.8823891801984737,
+        "natural_performance_log_change": -0.718789611173283,
+        "supplemented_relative_change": -0.5862068965517241,
+        "natural_relative_change": -0.5126582278481013,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.2307/1942589",
+      "species": "Solidago_graminifolia",
+      "population": "1",
+      "year": "1979",
+      "early_row": "19",
+      "late_row": "21",
+      "early_note": "early-sp",
+      "late_note": "late-sp",
+      "common_positive_mean_endpoints": [
+        "SO"
+      ],
+      "common_sd_n_endpoints": [
+        "SO"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "SO",
+      "stratum": "population_season",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.2171,
+          "n": 10,
+          "sd": 0.115681
+        },
+        "Sup": {
+          "mean": 0.5039,
+          "n": 8,
+          "sd": 0.267546
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.3956,
+          "n": 27,
+          "sd": 0.184914
+        },
+        "Sup": {
+          "mean": 0.2706,
+          "n": 4,
+          "sd": 0.140459
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": 0.8420197588023063,
+        "late_lnRR": -0.37976188401186944,
+        "late_minus_early_lnRR": -1.2217816428141757,
+        "supplemented_performance_log_change": -0.6217361199498648,
+        "natural_performance_log_change": 0.600045522864311,
+        "supplemented_relative_change": -0.46298868823179207,
+        "natural_relative_change": 0.8222017503454632,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.2307/1942589",
+      "species": "Solidago_juncea",
+      "population": "1",
+      "year": "1979",
+      "early_row": "25",
+      "late_row": "27",
+      "early_note": "early",
+      "late_note": "late",
+      "common_positive_mean_endpoints": [
+        "SO"
+      ],
+      "common_sd_n_endpoints": [
+        "SO"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "SO",
+      "stratum": "population_season",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.1932,
+          "n": 55,
+          "sd": 0.161378
+        },
+        "Sup": {
+          "mean": 0.0858,
+          "n": 11,
+          "sd": 0.144172
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.0577,
+          "n": 49,
+          "sd": 0.08375
+        },
+        "Sup": {
+          "mean": 0.1568,
+          "n": 7,
+          "sd": 0.178453
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": -0.811706915284501,
+        "late_lnRR": 0.9997139344022535,
+        "late_minus_early_lnRR": 1.8114208496867545,
+        "supplemented_performance_log_change": 0.6029521014223908,
+        "natural_performance_log_change": -1.2084687482643637,
+        "supplemented_relative_change": 0.8275058275058272,
+        "natural_relative_change": -0.7013457556935818,
+        "supplemented_point_decline": false
+      }
+    },
+    {
+      "doi": "10.2307/2260205",
+      "species": "Silene_alba",
+      "population": "1",
+      "year": "1985",
+      "early_row": "90",
+      "late_row": "91",
+      "early_note": "early",
+      "late_note": "late",
+      "common_positive_mean_endpoints": [
+        "FS",
+        "SPFR"
+      ],
+      "common_sd_n_endpoints": [
+        "FS",
+        "SPFR"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "disposition": "HOLD_DISEASE_AND_TREATMENT_CONTEXT"
+    },
+    {
+      "doi": "10.2307/2260766",
+      "species": "Banksia_ericifolia",
+      "population": "1",
+      "year": "1985",
+      "early_row": "158",
+      "late_row": "160",
+      "early_note": "early",
+      "late_note": "late",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "FS",
+      "stratum": "population_season",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.509,
+          "n": 53,
+          "sd": 0.0687
+        },
+        "Sup": {
+          "mean": 0.52,
+          "n": 25,
+          "sd": 0.0999
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.121,
+          "n": 58,
+          "sd": 0.0428
+        },
+        "Sup": {
+          "mean": 0.037,
+          "n": 27,
+          "sd": 0.0363
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": 0.021380795024950255,
+        "late_lnRR": -1.1848726329525168,
+        "late_minus_early_lnRR": -1.206253427977467,
+        "supplemented_performance_log_change": -2.6429108989312486,
+        "natural_performance_log_change": -1.4366574709537818,
+        "supplemented_relative_change": -0.9288461538461539,
+        "natural_relative_change": -0.762278978388998,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.2307/2260766",
+      "species": "Banksia_ericifolia",
+      "population": "1",
+      "year": "1986",
+      "early_row": "161",
+      "late_row": "163",
+      "early_note": "early",
+      "late_note": "late",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "FS",
+      "stratum": "population_season",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.321,
+          "n": 28,
+          "sd": 0.0882
+        },
+        "Sup": {
+          "mean": 0.185,
+          "n": 27,
+          "sd": 0.0747
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.414,
+          "n": 29,
+          "sd": 0.0915
+        },
+        "Sup": {
+          "mean": 0.207,
+          "n": 29,
+          "sd": 0.0752
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": -0.5510852980516912,
+        "late_lnRR": -0.6931471805599453,
+        "late_minus_early_lnRR": -0.14206188250825413,
+        "supplemented_performance_log_change": 0.11236296818704417,
+        "natural_performance_log_change": 0.25442485069529847,
+        "supplemented_relative_change": 0.11891891891891881,
+        "natural_relative_change": 0.2897196261682242,
+        "supplemented_point_decline": false
+      }
+    },
+    {
+      "doi": "10.2307/2444020",
+      "species": "Raphanus_sativus",
+      "population": "2",
+      "year": "1984",
+      "early_row": "120",
+      "late_row": "121",
+      "early_note": "1984-Stuckey's-early-white",
+      "late_note": "1984-Stuckey's-late-white",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_SHARED_PLANT_AND_REPEAT_FLOWER_UNITS",
+      "endpoint": "FS",
+      "stratum": "population_season",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.73,
+          "n": 80,
+          "sd": 0.0496
+        },
+        "Sup": {
+          "mean": 0.62,
+          "n": 42,
+          "sd": 0.0749
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.24,
+          "n": 38,
+          "sd": 0.0693
+        },
+        "Sup": {
+          "mean": 0.21,
+          "n": 24,
+          "sd": 0.0831
+        }
+      },
+      "morph": "white",
+      "source_table3_rounded_means": [
+        0.73,
+        0.62,
+        0.24,
+        0.21
+      ],
+      "source_table3_flower_n": [
+        80,
+        42,
+        38,
+        24
+      ],
+      "source_crosscheck_cells": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_table3_contrast": {
+        "early_lnRR": -0.1633250561032995,
+        "late_lnRR": -0.13353139262452263,
+        "late_minus_early_lnRR": 0.029793663478776877,
+        "supplemented_performance_log_change": -1.0826119473216687,
+        "natural_performance_log_change": -1.1124056108004456,
+        "supplemented_relative_change": -0.6612903225806452,
+        "natural_relative_change": -0.6712328767123288,
+        "supplemented_point_decline": true
+      },
+      "disposition": "TABLE_CROSSCHECKED_SECONDARY_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": -0.1633250561032995,
+        "late_lnRR": -0.13353139262452263,
+        "late_minus_early_lnRR": 0.029793663478776877,
+        "supplemented_performance_log_change": -1.0826119473216687,
+        "natural_performance_log_change": -1.1124056108004456,
+        "supplemented_relative_change": -0.6612903225806452,
+        "natural_relative_change": -0.6712328767123288,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.2307/2444020",
+      "species": "Raphanus_sativus",
+      "population": "2",
+      "year": "1984",
+      "early_row": "122",
+      "late_row": "123",
+      "early_note": "1984-Stuckey's-early-yellow",
+      "late_note": "1984-Stuckey's-late-yellow",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_SHARED_PLANT_AND_REPEAT_FLOWER_UNITS",
+      "endpoint": "FS",
+      "stratum": "population_season",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.6,
+          "n": 35,
+          "sd": 0.0828
+        },
+        "Sup": {
+          "mean": 0.58,
+          "n": 24,
+          "sd": 0.1007
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.44,
+          "n": 50,
+          "sd": 0.0702
+        },
+        "Sup": {
+          "mean": 0.41,
+          "n": 29,
+          "sd": 0.0913
+        }
+      },
+      "morph": "yellow",
+      "source_table3_rounded_means": [
+        0.6,
+        0.58,
+        0.44,
+        0.41
+      ],
+      "source_table3_flower_n": [
+        35,
+        24,
+        50,
+        29
+      ],
+      "source_crosscheck_cells": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_table3_contrast": {
+        "early_lnRR": -0.03390155167568134,
+        "late_lnRR": -0.07061756721395342,
+        "late_minus_early_lnRR": -0.03671601553827208,
+        "supplemented_performance_log_change": -0.3468709438421116,
+        "natural_performance_log_change": -0.31015492830383945,
+        "supplemented_relative_change": -0.2931034482758621,
+        "natural_relative_change": -0.2666666666666666,
+        "supplemented_point_decline": true
+      },
+      "disposition": "TABLE_CROSSCHECKED_SECONDARY_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": -0.03390155167568134,
+        "late_lnRR": -0.07061756721395342,
+        "late_minus_early_lnRR": -0.03671601553827208,
+        "supplemented_performance_log_change": -0.3468709438421116,
+        "natural_performance_log_change": -0.31015492830383945,
+        "supplemented_relative_change": -0.2931034482758621,
+        "natural_relative_change": -0.2666666666666666,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.2307/2444020",
+      "species": "Raphanus_sativus",
+      "population": "2",
+      "year": "1984",
+      "early_row": "124",
+      "late_row": "125",
+      "early_note": "1984-Stuckey's-early-pink",
+      "late_note": "1984-Stuckey's-late-pink",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_SHARED_PLANT_AND_REPEAT_FLOWER_UNITS",
+      "endpoint": "FS",
+      "stratum": "population_season",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.8,
+          "n": 64,
+          "sd": 0.05
+        },
+        "Sup": {
+          "mean": 0.72,
+          "n": 32,
+          "sd": 0.0794
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.49,
+          "n": 45,
+          "sd": 0.0745
+        },
+        "Sup": {
+          "mean": 0.7,
+          "n": 23,
+          "sd": 0.0956
+        }
+      },
+      "morph": "pink",
+      "source_table3_rounded_means": [
+        0.8,
+        0.72,
+        0.49,
+        0.7
+      ],
+      "source_table3_flower_n": [
+        64,
+        32,
+        45,
+        23
+      ],
+      "source_crosscheck_cells": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_table3_contrast": {
+        "early_lnRR": -0.1053605156578264,
+        "late_lnRR": 0.3566749439387324,
+        "late_minus_early_lnRR": 0.4620354595965588,
+        "supplemented_performance_log_change": -0.028170876966696335,
+        "natural_performance_log_change": -0.49020633656325513,
+        "supplemented_relative_change": -0.02777777777777779,
+        "natural_relative_change": -0.38750000000000007,
+        "supplemented_point_decline": true
+      },
+      "disposition": "TABLE_CROSSCHECKED_SECONDARY_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": -0.1053605156578264,
+        "late_lnRR": 0.3566749439387324,
+        "late_minus_early_lnRR": 0.4620354595965588,
+        "supplemented_performance_log_change": -0.028170876966696335,
+        "natural_performance_log_change": -0.49020633656325513,
+        "supplemented_relative_change": -0.02777777777777779,
+        "natural_relative_change": -0.38750000000000007,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.2307/2444020",
+      "species": "Raphanus_sativus",
+      "population": "2",
+      "year": "1984",
+      "early_row": "126",
+      "late_row": "127",
+      "early_note": "1984-Stuckey's-early-bronze",
+      "late_note": "1984-Stuckey's-late-bronze",
+      "common_positive_mean_endpoints": [
+        "FS"
+      ],
+      "common_sd_n_endpoints": [
+        "FS"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_SHARED_PLANT_AND_REPEAT_FLOWER_UNITS",
+      "endpoint": "FS",
+      "stratum": "population_season",
+      "compiled_early": {
+        "Natural": {
+          "mean": 0.75,
+          "n": 48,
+          "sd": 0.0625
+        },
+        "Sup": {
+          "mean": 0.81,
+          "n": 26,
+          "sd": 0.0769
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 0.4,
+          "n": 45,
+          "sd": 0.073
+        },
+        "Sup": {
+          "mean": 0.44,
+          "n": 103,
+          "sd": 0.0489
+        }
+      },
+      "morph": "bronze",
+      "source_table3_rounded_means": [
+        0.75,
+        0.81,
+        0.4,
+        0.44
+      ],
+      "source_table3_flower_n": [
+        48,
+        26,
+        45,
+        103
+      ],
+      "source_crosscheck_cells": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_table3_contrast": {
+        "early_lnRR": 0.0769610411361284,
+        "late_lnRR": 0.09531017980432474,
+        "late_minus_early_lnRR": 0.018349138668196346,
+        "supplemented_performance_log_change": -0.6102595207541777,
+        "natural_performance_log_change": -0.6286086594223742,
+        "supplemented_relative_change": -0.45679012345679015,
+        "natural_relative_change": -0.4666666666666667,
+        "supplemented_point_decline": true
+      },
+      "disposition": "TABLE_CROSSCHECKED_SECONDARY_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": 0.0769610411361284,
+        "late_lnRR": 0.09531017980432474,
+        "late_minus_early_lnRR": 0.018349138668196346,
+        "supplemented_performance_log_change": -0.6102595207541777,
+        "natural_performance_log_change": -0.6286086594223742,
+        "supplemented_relative_change": -0.45679012345679015,
+        "natural_relative_change": -0.4666666666666667,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.2307/2446165",
+      "species": "Zigadenus_paniculatus",
+      "population": "1",
+      "year": "NA",
+      "early_row": "414",
+      "late_row": "416",
+      "early_note": "kemmerer-early",
+      "late_note": "kemmerer-late",
+      "common_positive_mean_endpoints": [
+        "SPFR"
+      ],
+      "common_sd_n_endpoints": [
+        "SPFR"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "SPFR",
+      "stratum": "within_plant_sequence",
+      "compiled_early": {
+        "Natural": {
+          "mean": 9,
+          "n": 11,
+          "sd": 2.8191
+        },
+        "Sup": {
+          "mean": 13.7,
+          "n": 8,
+          "sd": 2.4042
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 6.1,
+          "n": 11,
+          "sd": 1.6915
+        },
+        "Sup": {
+          "mean": 8.1,
+          "n": 8,
+          "sd": 1.9233
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": 0.4201712554978598,
+        "late_lnRR": 0.28357529049912744,
+        "late_minus_early_lnRR": -0.13659596499873233,
+        "supplemented_performance_log_change": -0.5255317711556861,
+        "natural_performance_log_change": -0.38893580615695394,
+        "supplemented_relative_change": -0.4087591240875912,
+        "natural_relative_change": -0.3222222222222223,
+        "supplemented_point_decline": true
+      }
+    },
+    {
+      "doi": "10.2307/2446165",
+      "species": "Zigadenus_paniculatus",
+      "population": "2",
+      "year": "NA",
+      "early_row": "415",
+      "late_row": "417",
+      "early_note": "green_canyon-early",
+      "late_note": "green_canyon-late",
+      "common_positive_mean_endpoints": [
+        "SPFR"
+      ],
+      "common_sd_n_endpoints": [
+        "SPFR"
+      ],
+      "status": "SOURCE_LABEL_MATCH_ONLY_NOT_DESIGN_ADMITTED",
+      "primary_theta_eligible": false,
+      "variance_status": "HOLD_NOT_VERIFIED",
+      "endpoint": "SPFR",
+      "stratum": "within_plant_sequence",
+      "compiled_early": {
+        "Natural": {
+          "mean": 12.6,
+          "n": 25,
+          "sd": 2.6
+        },
+        "Sup": {
+          "mean": 12.9,
+          "n": 9,
+          "sd": 1.8
+        }
+      },
+      "compiled_late": {
+        "Natural": {
+          "mean": 8.4,
+          "n": 25,
+          "sd": 2.15
+        },
+        "Sup": {
+          "mean": 8.1,
+          "n": 9,
+          "sd": 1.29
+        }
+      },
+      "disposition": "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY",
+      "compiled_contrast": {
+        "early_lnRR": 0.02353049741019425,
+        "late_lnRR": -0.03636764417087495,
+        "late_minus_early_lnRR": -0.0598981415810692,
+        "supplemented_performance_log_change": -0.4653632496892333,
+        "natural_performance_log_change": -0.4054651081081643,
+        "supplemented_relative_change": -0.37209302325581395,
+        "natural_relative_change": -0.33333333333333326,
+        "supplemented_point_decline": true
+      }
+    }
+  ],
+  "summary": {
+    "disposition_counts": {
+      "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY": 10,
+      "HOLD_OTC_DESIGN": 2,
+      "HOLD_EARLY_VS_PEAK": 1,
+      "PRIOR_CONDITIONAL": 2,
+      "PRIOR_POINT_ONLY": 5,
+      "QUARANTINE_CONFLICTING_O3": 1,
+      "QUARANTINE_DUPLICATE_SPECIES": 2,
+      "HOLD_DISEASE_AND_TREATMENT_CONTEXT": 1,
+      "TABLE_CROSSCHECKED_SECONDARY_POINT_ONLY": 4
+    },
+    "source_table_crosschecked_new_pairs": 4,
+    "provisional_new_pairs": 10,
+    "paper_level_descriptive": {
+      "10.1007/bf00984387": {
+        "pairs": 3,
+        "status": [
+          "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY"
+        ],
+        "stratum": [
+          "within_plant_sequence"
+        ],
+        "supplemented_declines": 2,
+        "delta_positive": 0,
+        "delta_negative": 3,
+        "delta_range": [
+          -0.8699523788349555,
+          -0.17983956087786573
+        ]
+      },
+      "10.2307/1940403": {
+        "pairs": 1,
+        "status": [
+          "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY"
+        ],
+        "stratum": [
+          "season_context_unverified"
+        ],
+        "supplemented_declines": 1,
+        "delta_positive": 0,
+        "delta_negative": 1,
+        "delta_range": [
+          -0.1635995690251906,
+          -0.1635995690251906
+        ]
+      },
+      "10.2307/1942589": {
+        "pairs": 2,
+        "status": [
+          "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY"
+        ],
+        "stratum": [
+          "population_season"
+        ],
+        "supplemented_declines": 1,
+        "delta_positive": 1,
+        "delta_negative": 1,
+        "delta_range": [
+          -1.2217816428141757,
+          1.8114208496867545
+        ]
+      },
+      "10.2307/2260766": {
+        "pairs": 2,
+        "status": [
+          "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY"
+        ],
+        "stratum": [
+          "population_season"
+        ],
+        "supplemented_declines": 1,
+        "delta_positive": 0,
+        "delta_negative": 2,
+        "delta_range": [
+          -1.206253427977467,
+          -0.14206188250825413
+        ]
+      },
+      "10.2307/2444020": {
+        "pairs": 4,
+        "status": [
+          "TABLE_CROSSCHECKED_SECONDARY_POINT_ONLY"
+        ],
+        "stratum": [
+          "population_season"
+        ],
+        "supplemented_declines": 4,
+        "delta_positive": 3,
+        "delta_negative": 1,
+        "delta_range": [
+          -0.03671601553827208,
+          0.4620354595965588
+        ]
+      },
+      "10.2307/2446165": {
+        "pairs": 2,
+        "status": [
+          "ABSTRACT_CONSISTENT_COMPILED_PROVISIONAL_POINT_ONLY"
+        ],
+        "stratum": [
+          "within_plant_sequence"
+        ],
+        "supplemented_declines": 2,
+        "delta_positive": 0,
+        "delta_negative": 2,
+        "delta_range": [
+          -0.13659596499873233,
+          -0.0598981415810692
+        ]
+      }
+    }
+  },
+  "stanton_published_tests": {
+    "table": 3,
+    "time_chi2": 44.79,
+    "time_df": 1,
+    "time_p": 0.0001,
+    "treatment_chi2": 0.01,
+    "treatment_df": 1,
+    "treatment_p": 0.9271,
+    "time_treatment_chi2": 0.92,
+    "time_treatment_df": 1,
+    "time_treatment_p": 0.3387,
+    "color_time_treatment_chi2": 2.37,
+    "color_time_treatment_df": 3,
+    "color_time_treatment_p": 0.4992,
+    "note": "As printed original contingency analysis; repeated plants and branch allocation preclude naive independent-flower reanalysis."
+  },
+  "primary_theta_added": 0,
+  "meta_pooled": false,
+  "provenance": {
+    "run": 45541417118,
+    "job": 138960589977,
+    "artifact_id": 14989686256,
+    "artifact_zip_sha256": "6adab4517812767f09606dbe4d222b7f88a6d03a49eb68766c1ea49dab37181f",
+    "extraction": "Exact aggregate JSON parsed from completed job log; upload ZIP digest recorded, ZIP not independently downloaded.",
+    "synthetic_arithmetic_checks_passed": true
+  },
+  "interpretation": {
+    "total_candidate_pairs": 28,
+    "prior_point_or_conditional": 7,
+    "new_table_crosschecked": 4,
+    "provisional": 10,
+    "quarantine": 3,
+    "design_hold": 4,
+    "supplemented_declines_among_new_provisional": 7,
+    "supplemented_increases_among_new_provisional": 3,
+    "limit": "No source-validated variance or pooled estimate. Three provisional increases retained; not a universal decline. Original source study results are prior art; GloPL source mean summaries do not identify physiology or actual partner mismatch."
+  }
+}
