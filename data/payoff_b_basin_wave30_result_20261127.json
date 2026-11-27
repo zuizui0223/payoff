@@ -1,0 +1,1039 @@
+{
+  "status": "SYNTHETIC_ONLY",
+  "registered_design_commit": "7951fe13a9191375000144d8a4a35417ab79c12e",
+  "script_git_blob": "5373d45c8bf487ef02119880570a455404eff9c0",
+  "script_sha256": "04e64b0acc60f9295cfd3e5e17df55b77634e026cce521356c6083d1bfd40c49",
+  "full_result_sha256": "a1dbe29db65dc06f22d2343278cba48ffecfecb86ca23168f46bf9a59a706b31",
+  "numpy": "2.3.5",
+  "horizon": 4000,
+  "classification_labels": [
+    "00-00",
+    "00-11",
+    "11-00",
+    "11-11",
+    "unresolved"
+  ],
+  "trajectories": 13488,
+  "unresolved": 44,
+  "nonconverged": 418,
+  "corner_nonconverged": 374,
+  "max_corner_eigen_error": 1.2248842606865651e-8,
+  "cells": [
+    {
+      "qB": 0.8,
+      "RA": 0.005,
+      "RB": 0.005,
+      "coupled": false,
+      "stable_corners": [
+        "10"
+      ],
+      "coupling_counts": [
+        20,
+        1,
+        400,
+        20,
+        0
+      ],
+      "repulsion_counts": [
+        11,
+        0,
+        110,
+        0,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        1,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 0
+      }
+    },
+    {
+      "qB": 0.8,
+      "RA": 0.005,
+      "RB": 0.005,
+      "coupled": true,
+      "stable_corners": [
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        20,
+        1,
+        386,
+        25,
+        9
+      ],
+      "repulsion_counts": [
+        11,
+        0,
+        110,
+        0,
+        0
+      ],
+      "nonconverged": [
+        15,
+        0
+      ],
+      "corner_nonconverged": [
+        6,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.95,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 0
+      }
+    },
+    {
+      "qB": 0.8,
+      "RA": 0.005,
+      "RB": 0.02,
+      "coupled": false,
+      "stable_corners": [
+        "10"
+      ],
+      "coupling_counts": [
+        20,
+        1,
+        400,
+        20,
+        0
+      ],
+      "repulsion_counts": [
+        11,
+        0,
+        110,
+        0,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        1,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 0
+      }
+    },
+    {
+      "qB": 0.8,
+      "RA": 0.005,
+      "RB": 0.02,
+      "coupled": true,
+      "stable_corners": [
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        20,
+        1,
+        291,
+        129,
+        0
+      ],
+      "repulsion_counts": [
+        11,
+        0,
+        110,
+        0,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.7,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 0
+      }
+    },
+    {
+      "qB": 0.8,
+      "RA": 0.02,
+      "RB": 0.02,
+      "coupled": false,
+      "stable_corners": [
+        "00",
+        "10"
+      ],
+      "coupling_counts": [
+        40,
+        2,
+        380,
+        19,
+        0
+      ],
+      "repulsion_counts": [
+        88,
+        0,
+        33,
+        0,
+        0
+      ],
+      "nonconverged": [
+        21,
+        22
+      ],
+      "corner_nonconverged": [
+        21,
+        22
+      ],
+      "min_diagonal_joint": [
+        1,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 66
+      }
+    },
+    {
+      "qB": 0.8,
+      "RA": 0.02,
+      "RB": 0.02,
+      "coupled": true,
+      "stable_corners": [
+        "00",
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        28,
+        1,
+        285,
+        127,
+        0
+      ],
+      "repulsion_counts": [
+        83,
+        0,
+        38,
+        0,
+        0
+      ],
+      "nonconverged": [
+        8,
+        17
+      ],
+      "corner_nonconverged": [
+        8,
+        17
+      ],
+      "min_diagonal_joint": [
+        0.7,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 64
+      }
+    },
+    {
+      "qB": 0.8,
+      "RA": 0.04,
+      "RB": 0.04,
+      "coupled": false,
+      "stable_corners": [
+        "00",
+        "01",
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        85,
+        20,
+        272,
+        64,
+        0
+      ],
+      "repulsion_counts": [
+        99,
+        0,
+        22,
+        0,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.85,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 44
+      }
+    },
+    {
+      "qB": 0.8,
+      "RA": 0.04,
+      "RB": 0.04,
+      "coupled": true,
+      "stable_corners": [
+        "00",
+        "01",
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        78,
+        8,
+        211,
+        144,
+        0
+      ],
+      "repulsion_counts": [
+        99,
+        0,
+        22,
+        0,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.65,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 44
+      }
+    },
+    {
+      "qB": 0.85,
+      "RA": 0.005,
+      "RB": 0.005,
+      "coupled": false,
+      "stable_corners": [
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        18,
+        2,
+        360,
+        40,
+        21
+      ],
+      "repulsion_counts": [
+        11,
+        0,
+        110,
+        0,
+        0
+      ],
+      "nonconverged": [
+        42,
+        0
+      ],
+      "corner_nonconverged": [
+        21,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.95,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 0
+      }
+    },
+    {
+      "qB": 0.85,
+      "RA": 0.005,
+      "RB": 0.005,
+      "coupled": true,
+      "stable_corners": [
+        "11"
+      ],
+      "coupling_counts": [
+        18,
+        2,
+        20,
+        400,
+        1
+      ],
+      "repulsion_counts": [
+        11,
+        0,
+        10,
+        100,
+        0
+      ],
+      "nonconverged": [
+        2,
+        0
+      ],
+      "corner_nonconverged": [
+        1,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.05,
+        0.05
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 100,
+        "repulsion_joint": 100,
+        "different_endpoint": 0
+      }
+    },
+    {
+      "qB": 0.85,
+      "RA": 0.005,
+      "RB": 0.02,
+      "coupled": false,
+      "stable_corners": [
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        13,
+        8,
+        260,
+        160,
+        0
+      ],
+      "repulsion_counts": [
+        11,
+        0,
+        110,
+        0,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.65,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 0
+      }
+    },
+    {
+      "qB": 0.85,
+      "RA": 0.005,
+      "RB": 0.02,
+      "coupled": true,
+      "stable_corners": [
+        "11"
+      ],
+      "coupling_counts": [
+        13,
+        8,
+        21,
+        397,
+        2
+      ],
+      "repulsion_counts": [
+        11,
+        0,
+        88,
+        16,
+        6
+      ],
+      "nonconverged": [
+        3,
+        52
+      ],
+      "corner_nonconverged": [
+        1,
+        46
+      ],
+      "min_diagonal_joint": [
+        0.1,
+        0.45
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 97,
+        "repulsion_joint": 16,
+        "different_endpoint": 83
+      }
+    },
+    {
+      "qB": 0.85,
+      "RA": 0.02,
+      "RB": 0.02,
+      "coupled": false,
+      "stable_corners": [
+        "00",
+        "01",
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        26,
+        16,
+        247,
+        152,
+        0
+      ],
+      "repulsion_counts": [
+        88,
+        0,
+        33,
+        0,
+        0
+      ],
+      "nonconverged": [
+        21,
+        22
+      ],
+      "corner_nonconverged": [
+        21,
+        22
+      ],
+      "min_diagonal_joint": [
+        0.65,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 66
+      }
+    },
+    {
+      "qB": 0.85,
+      "RA": 0.02,
+      "RB": 0.02,
+      "coupled": true,
+      "stable_corners": [
+        "00",
+        "11"
+      ],
+      "coupling_counts": [
+        17,
+        8,
+        27,
+        386,
+        3
+      ],
+      "repulsion_counts": [
+        81,
+        0,
+        22,
+        16,
+        2
+      ],
+      "nonconverged": [
+        13,
+        34
+      ],
+      "corner_nonconverged": [
+        10,
+        32
+      ],
+      "min_diagonal_joint": [
+        0.15,
+        0.45
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 86,
+        "repulsion_joint": 16,
+        "different_endpoint": 87
+      }
+    },
+    {
+      "qB": 0.85,
+      "RA": 0.04,
+      "RB": 0.04,
+      "coupled": false,
+      "stable_corners": [
+        "00",
+        "01",
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        60,
+        45,
+        192,
+        144,
+        0
+      ],
+      "repulsion_counts": [
+        99,
+        0,
+        22,
+        0,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.6,
+        null
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 0,
+        "repulsion_joint": 0,
+        "different_endpoint": 44
+      }
+    },
+    {
+      "qB": 0.85,
+      "RA": 0.04,
+      "RB": 0.04,
+      "coupled": true,
+      "stable_corners": [
+        "00",
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        52,
+        9,
+        96,
+        284,
+        0
+      ],
+      "repulsion_counts": [
+        98,
+        0,
+        19,
+        4,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.35,
+        0.5
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 26,
+        "repulsion_joint": 4,
+        "different_endpoint": 55
+      }
+    },
+    {
+      "qB": 0.9,
+      "RA": 0.005,
+      "RB": 0.005,
+      "coupled": false,
+      "stable_corners": [
+        "11"
+      ],
+      "coupling_counts": [
+        1,
+        20,
+        20,
+        400,
+        0
+      ],
+      "repulsion_counts": [
+        1,
+        10,
+        10,
+        100,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.05,
+        0.05
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 100,
+        "repulsion_joint": 100,
+        "different_endpoint": 0
+      }
+    },
+    {
+      "qB": 0.9,
+      "RA": 0.005,
+      "RB": 0.005,
+      "coupled": true,
+      "stable_corners": [
+        "11"
+      ],
+      "coupling_counts": [
+        1,
+        20,
+        20,
+        400,
+        0
+      ],
+      "repulsion_counts": [
+        1,
+        10,
+        10,
+        100,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.05,
+        0.05
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 100,
+        "repulsion_joint": 100,
+        "different_endpoint": 0
+      }
+    },
+    {
+      "qB": 0.9,
+      "RA": 0.005,
+      "RB": 0.02,
+      "coupled": false,
+      "stable_corners": [
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        2,
+        19,
+        40,
+        380,
+        0
+      ],
+      "repulsion_counts": [
+        8,
+        3,
+        80,
+        30,
+        0
+      ],
+      "nonconverged": [
+        21,
+        22
+      ],
+      "corner_nonconverged": [
+        21,
+        22
+      ],
+      "min_diagonal_joint": [
+        0.1,
+        0.4
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 90,
+        "repulsion_joint": 30,
+        "different_endpoint": 66
+      }
+    },
+    {
+      "qB": 0.9,
+      "RA": 0.005,
+      "RB": 0.02,
+      "coupled": true,
+      "stable_corners": [
+        "11"
+      ],
+      "coupling_counts": [
+        2,
+        19,
+        20,
+        400,
+        0
+      ],
+      "repulsion_counts": [
+        8,
+        3,
+        10,
+        100,
+        0
+      ],
+      "nonconverged": [
+        1,
+        2
+      ],
+      "corner_nonconverged": [
+        1,
+        2
+      ],
+      "min_diagonal_joint": [
+        0.05,
+        0.05
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 100,
+        "repulsion_joint": 100,
+        "different_endpoint": 6
+      }
+    },
+    {
+      "qB": 0.9,
+      "RA": 0.02,
+      "RB": 0.02,
+      "coupled": false,
+      "stable_corners": [
+        "00",
+        "01",
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        4,
+        38,
+        38,
+        361,
+        0
+      ],
+      "repulsion_counts": [
+        64,
+        24,
+        24,
+        9,
+        0
+      ],
+      "nonconverged": [
+        41,
+        40
+      ],
+      "corner_nonconverged": [
+        41,
+        40
+      ],
+      "min_diagonal_joint": [
+        0.1,
+        0.4
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 81,
+        "repulsion_joint": 9,
+        "different_endpoint": 96
+      }
+    },
+    {
+      "qB": 0.9,
+      "RA": 0.02,
+      "RB": 0.02,
+      "coupled": true,
+      "stable_corners": [
+        "00",
+        "11"
+      ],
+      "coupling_counts": [
+        3,
+        19,
+        19,
+        400,
+        0
+      ],
+      "repulsion_counts": [
+        53,
+        3,
+        3,
+        62,
+        0
+      ],
+      "nonconverged": [
+        2,
+        17
+      ],
+      "corner_nonconverged": [
+        2,
+        17
+      ],
+      "min_diagonal_joint": [
+        0.05,
+        0.35
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 100,
+        "repulsion_joint": 62,
+        "different_endpoint": 50
+      }
+    },
+    {
+      "qB": 0.9,
+      "RA": 0.04,
+      "RB": 0.04,
+      "coupled": false,
+      "stable_corners": [
+        "00",
+        "01",
+        "10",
+        "11"
+      ],
+      "coupling_counts": [
+        25,
+        80,
+        80,
+        256,
+        0
+      ],
+      "repulsion_counts": [
+        81,
+        18,
+        18,
+        4,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.25,
+        0.45
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 36,
+        "repulsion_joint": 4,
+        "different_endpoint": 72
+      }
+    },
+    {
+      "qB": 0.9,
+      "RA": 0.04,
+      "RB": 0.04,
+      "coupled": true,
+      "stable_corners": [
+        "00",
+        "11"
+      ],
+      "coupling_counts": [
+        24,
+        16,
+        16,
+        385,
+        0
+      ],
+      "repulsion_counts": [
+        81,
+        2,
+        2,
+        36,
+        0
+      ],
+      "nonconverged": [
+        0,
+        0
+      ],
+      "corner_nonconverged": [
+        0,
+        0
+      ],
+      "min_diagonal_joint": [
+        0.2,
+        0.45
+      ],
+      "matched": {
+        "n": 121,
+        "coupling_joint": 85,
+        "repulsion_joint": 36,
+        "different_endpoint": 57
+      }
+    }
+  ],
+  "notes": "Counts at finite horizon, not exact basin membership. Nonconverged = one-step residual >1e-9. Stable corner labels 00/01/10/11 encode ancestral/adapted states of the two species, not haplotypes. Full output regenerated by registered script. Compact receipt includes all parameter settings."
+}
